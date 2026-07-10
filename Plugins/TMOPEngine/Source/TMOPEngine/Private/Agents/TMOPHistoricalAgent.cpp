@@ -3,13 +3,15 @@
 #include "Actions/TMOPActionExecutorComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Routes/TMOPRouteFollowerComponent.h"
 
 ATMOPHistoricalAgent::ATMOPHistoricalAgent()
 {
     PrimaryActorTick.bCanEverTick = false;
 
     EntityIdentity =
-        CreateDefaultSubobject<UTMOPWorldEntityComponent>(TEXT("EntityIdentity"));
+        CreateDefaultSubobject<UTMOPWorldEntityComponent>(
+            TEXT("EntityIdentity"));
 
     if (EntityIdentity != nullptr)
     {
@@ -17,7 +19,12 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     }
 
     ActionExecutor =
-        CreateDefaultSubobject<UTMOPActionExecutorComponent>(TEXT("ActionExecutor"));
+        CreateDefaultSubobject<UTMOPActionExecutorComponent>(
+            TEXT("ActionExecutor"));
+
+    RouteFollower =
+        CreateDefaultSubobject<UTMOPRouteFollowerComponent>(
+            TEXT("RouteFollower"));
 }
 
 void ATMOPHistoricalAgent::BeginPlay()
@@ -61,7 +68,8 @@ bool ATMOPHistoricalAgent::SetActivityState(
 
 void ATMOPHistoricalAgent::ApplyMovementSpeedForActivity()
 {
-    if (UCharacterMovementComponent* Movement = GetCharacterMovement())
+    if (UCharacterMovementComponent* Movement =
+        GetCharacterMovement())
     {
         Movement->MaxWalkSpeed = GetDesiredMovementSpeed();
         Movement->SetMovementMode(

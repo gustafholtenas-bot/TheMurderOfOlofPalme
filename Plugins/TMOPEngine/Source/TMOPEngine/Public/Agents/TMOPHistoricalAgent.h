@@ -6,6 +6,7 @@
 #include "TMOPHistoricalAgent.generated.h"
 
 class UTMOPActionExecutorComponent;
+class UTMOPRouteFollowerComponent;
 class UTMOPWorldEntityComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
@@ -37,6 +38,9 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent")
     TObjectPtr<UTMOPActionExecutorComponent> ActionExecutor;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent")
+    TObjectPtr<UTMOPRouteFollowerComponent> RouteFollower;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FText DisplayName;
