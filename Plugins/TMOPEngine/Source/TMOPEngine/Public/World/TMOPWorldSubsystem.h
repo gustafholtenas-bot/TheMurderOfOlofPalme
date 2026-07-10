@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "Time/TMOPTime.h"
 #include "World/TMOPWorldTypes.h"
 #include "TMOPWorldSubsystem.generated.h"
 
@@ -28,13 +29,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
     int32,
     LoopNumber);
 
-/**
- * Central runtime registry and causal world-state database.
- *
- * The World subsystem deliberately does not own actors. Registered objects are
- * stored as weak references, so normal Unreal destruction and level unloading
- * remain authoritative.
- */
 UCLASS(BlueprintType)
 class TMOPENGINE_API UTMOPWorldSubsystem final : public UGameInstanceSubsystem
 {

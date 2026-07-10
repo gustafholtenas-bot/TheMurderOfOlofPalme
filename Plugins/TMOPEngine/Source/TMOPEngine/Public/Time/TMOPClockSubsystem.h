@@ -75,7 +75,7 @@ private:
     bool TickClock(float DeltaSeconds);
     void AdvanceOneSecond();
 
-    FDelegateHandle TickerHandle;
+    FTSTicker::FDelegateHandle TickerHandle;
 
     int32 CurrentTimeSeconds = 0;
     int32 LoopStartSeconds = 0;

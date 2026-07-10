@@ -20,13 +20,8 @@ struct TMOPENGINE_API FTMOPTime
     FTMOPTime() = default;
     FTMOPTime(int32 InHour, int32 InMinute, int32 InSecond);
 
-    UFUNCTION(BlueprintPure, Category = "TMOP|Time")
     int32 ToSecondsFromMidnight() const;
-
-    UFUNCTION(BlueprintPure, Category = "TMOP|Time")
     static FTMOPTime FromSecondsFromMidnight(int32 InSeconds);
-
-    UFUNCTION(BlueprintPure, Category = "TMOP|Time")
     FString ToDisplayString() const;
 
     bool operator==(const FTMOPTime& Other) const;

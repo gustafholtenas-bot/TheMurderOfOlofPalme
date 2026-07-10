@@ -14,10 +14,6 @@ enum class ETMOPWorldValueType : uint8
     String
 };
 
-/**
- * A small serializable value used by the causal world-state database.
- * Only the field matching ValueType is considered active.
- */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPWorldStateValue
 {
@@ -41,22 +37,12 @@ struct TMOPENGINE_API FTMOPWorldStateValue
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|World")
     FString StringValue;
 
-    UFUNCTION(BlueprintPure, Category = "TMOP|World")
     static FTMOPWorldStateValue MakeBoolean(bool Value);
-
-    UFUNCTION(BlueprintPure, Category = "TMOP|World")
     static FTMOPWorldStateValue MakeInteger(int32 Value);
-
-    UFUNCTION(BlueprintPure, Category = "TMOP|World")
     static FTMOPWorldStateValue MakeFloat(float Value);
-
-    UFUNCTION(BlueprintPure, Category = "TMOP|World")
     static FTMOPWorldStateValue MakeName(FName Value);
-
-    UFUNCTION(BlueprintPure, Category = "TMOP|World")
     static FTMOPWorldStateValue MakeString(const FString& Value);
 
-    UFUNCTION(BlueprintPure, Category = "TMOP|World")
     FString ToDebugString() const;
 
     bool operator==(const FTMOPWorldStateValue& Other) const;
