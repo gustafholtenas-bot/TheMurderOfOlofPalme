@@ -102,6 +102,9 @@ public:
     UFUNCTION(BlueprintPure, Category = "TMOP|Agent|Venue")
     bool HasInitialSeatAssignment() const;
 
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Venue")
+    bool ApplyInitialSeatAssignment();
+
     UFUNCTION(BlueprintPure, Category = "TMOP|Agent|Route")
     int32 GetHistoricalAnchorCount() const
     {

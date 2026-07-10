@@ -1,13 +1,19 @@
 #include "Agents/TMOPHistoricalAgent.h"
 
+#include "AI/TMOPHistoricalAIController.h"
 #include "Actions/TMOPActionExecutorComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Routes/TMOPRouteFollowerComponent.h"
+#include "Venues/TMOPCinemaSeatComponent.h"
+#include "Venues/TMOPCinemaSeatSubsystem.h"
 
 ATMOPHistoricalAgent::ATMOPHistoricalAgent()
 {
     PrimaryActorTick.bCanEverTick = false;
+
+    AIControllerClass = ATMOPHistoricalAIController::StaticClass();
+    AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
     EntityIdentity =
         CreateDefaultSubobject<UTMOPWorldEntityComponent>(
@@ -31,6 +37,61 @@ void ATMOPHistoricalAgent::BeginPlay()
 {
     Super::BeginPlay();
     ApplyMovementSpeedForActivity();
+    ApplyInitialSeatAssignment();
+}
+
+bool ATMOPHistoricalAgent::ApplyInitialSeatAssignment()
+{
+    if (!InitialSeatAssignment.bStartsSeated ||
+        InitialSeatAssignment.SeatId.IsNone())
+    {
+        return false;
+    }
+
+    UGameInstance* GameInstance =
+        GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
+
+    if (GameInstance == nullptr)
+    {
+        return false;
+    }
+
+    UTMOPCinemaSeatSubsystem* Seats =
+        GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>();
+
+    if (Seats == nullptr)
+    {
+        return false;
+    }
+
+    Seats->DiscoverSeatsInWorld();
+
+    UTMOPCinemaSeatComponent* Seat =
+        Seats->FindSeat(InitialSeatAssignment.SeatId);
+
+    if (!IsValid(Seat))
+    {
+        UE_LOG(
+            LogTemp,
+            Warning,
+            TEXT("TMOP agent '%s' could not find initial seat '%s'."),
+            *GetName(),
+            *InitialSeatAssignment.SeatId.ToString());
+        return false;
+    }
+
+    if (!Seat->SeatAgent(this))
+    {
+        UE_LOG(
+            LogTemp,
+            Warning,
+            TEXT("TMOP agent '%s' could not occupy seat '%s'."),
+            *GetName(),
+            *InitialSeatAssignment.SeatId.ToString());
+        return false;
+    }
+
+    return true;
 }
 
 bool ATMOPHistoricalAgent::SetLifeState(

@@ -1,11 +1,43 @@
 #include "Venues/TMOPCinemaSeatComponent.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Engine/GameInstance.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Venues/TMOPCinemaSeatSubsystem.h"
 
 UTMOPCinemaSeatComponent::UTMOPCinemaSeatComponent()
 {
     PrimaryComponentTick.bCanEverTick = false;
+}
+
+void UTMOPCinemaSeatComponent::BeginPlay()
+{
+    Super::BeginPlay();
+
+    if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
+    {
+        if (UTMOPCinemaSeatSubsystem* Seats =
+            GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>())
+        {
+            Seats->RegisterSeat(this);
+        }
+    }
+}
+
+void UTMOPCinemaSeatComponent::EndPlay(
+    const EEndPlayReason::Type EndPlayReason)
+{
+    if (UGameInstance* GameInstance =
+        GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr)
+    {
+        if (UTMOPCinemaSeatSubsystem* Seats =
+            GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>())
+        {
+            Seats->UnregisterSeat(SeatId);
+        }
+    }
+
+    Super::EndPlay(EndPlayReason);
 }
 
 FTransform UTMOPCinemaSeatComponent::GetSeatWorldTransform() const
@@ -30,7 +62,10 @@ FTransform UTMOPCinemaSeatComponent::GetApproachWorldTransform() const
         GetForwardVector() * ApproachDistance +
         GetUpVector() * ApproachVerticalOffset;
 
-    return FTransform(GetComponentRotation(), Location, FVector::OneVector);
+    return FTransform(
+        GetComponentRotation(),
+        Location,
+        FVector::OneVector);
 }
 
 bool UTMOPCinemaSeatComponent::IsOccupied() const
@@ -38,12 +73,14 @@ bool UTMOPCinemaSeatComponent::IsOccupied() const
     return IsValid(OccupyingAgent);
 }
 
-ATMOPHistoricalAgent* UTMOPCinemaSeatComponent::GetOccupyingAgent() const
+ATMOPHistoricalAgent*
+UTMOPCinemaSeatComponent::GetOccupyingAgent() const
 {
     return OccupyingAgent;
 }
 
-bool UTMOPCinemaSeatComponent::ReserveSeat(ATMOPHistoricalAgent* Agent)
+bool UTMOPCinemaSeatComponent::ReserveSeat(
+    ATMOPHistoricalAgent* Agent)
 {
     if (!IsValid(Agent))
     {
@@ -59,7 +96,8 @@ bool UTMOPCinemaSeatComponent::ReserveSeat(ATMOPHistoricalAgent* Agent)
     return true;
 }
 
-bool UTMOPCinemaSeatComponent::ReleaseSeat(ATMOPHistoricalAgent* Agent)
+bool UTMOPCinemaSeatComponent::ReleaseSeat(
+    ATMOPHistoricalAgent* Agent)
 {
     if (!IsValid(Agent) || OccupyingAgent != Agent)
     {
@@ -70,14 +108,16 @@ bool UTMOPCinemaSeatComponent::ReleaseSeat(ATMOPHistoricalAgent* Agent)
     return true;
 }
 
-bool UTMOPCinemaSeatComponent::SeatAgent(ATMOPHistoricalAgent* Agent)
+bool UTMOPCinemaSeatComponent::SeatAgent(
+    ATMOPHistoricalAgent* Agent)
 {
     if (!ReserveSeat(Agent))
     {
         return false;
     }
 
-    if (UCharacterMovementComponent* Movement = Agent->GetCharacterMovement())
+    if (UCharacterMovementComponent* Movement =
+        Agent->GetCharacterMovement())
     {
         Movement->StopMovementImmediately();
         Movement->DisableMovement();
@@ -94,7 +134,9 @@ bool UTMOPCinemaSeatComponent::SeatAgent(ATMOPHistoricalAgent* Agent)
 
     if (bAttachAgentWhileSeated)
     {
-        Agent->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
+        Agent->AttachToComponent(
+            this,
+            FAttachmentTransformRules::KeepWorldTransform);
     }
 
     Agent->SetActivityState(ETMOPAgentActivityState::Seated);
@@ -102,16 +144,19 @@ bool UTMOPCinemaSeatComponent::SeatAgent(ATMOPHistoricalAgent* Agent)
     return true;
 }
 
-bool UTMOPCinemaSeatComponent::StandAgent(ATMOPHistoricalAgent* Agent)
+bool UTMOPCinemaSeatComponent::StandAgent(
+    ATMOPHistoricalAgent* Agent)
 {
     if (!IsValid(Agent) || OccupyingAgent != Agent)
     {
         return false;
     }
 
-    Agent->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+    Agent->DetachFromActor(
+        FDetachmentTransformRules::KeepWorldTransform);
 
-    const FTransform ApproachTransform = GetApproachWorldTransform();
+    const FTransform ApproachTransform =
+        GetApproachWorldTransform();
 
     Agent->SetActorLocationAndRotation(
         ApproachTransform.GetLocation(),

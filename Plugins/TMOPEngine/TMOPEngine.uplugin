@@ -1,7 +1,7 @@
 {
   "FileVersion": 3,
-  "Version": 23,
-  "VersionName": "0.0.23",
+  "Version": 24,
+  "VersionName": "0.0.24",
   "FriendlyName": "TMOP Engine",
   "Description": "Historical causal simulation systems for The Murder of Olof Palme.",
   "Category": "TMOP",
@@ -10,5 +10,11 @@
   "IsBetaVersion": true,
   "Installed": false,
   "EnabledByDefault": true,
-  "Modules": [{"Name":"TMOPEngine","Type":"Runtime","LoadingPhase":"Default"}]
+  "Modules": [
+    {
+      "Name": "TMOPEngine",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ]
 }
