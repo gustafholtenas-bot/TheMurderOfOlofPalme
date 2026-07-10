@@ -50,6 +50,9 @@ public:
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
     bool IsClockRunning() const { return bClockRunning; }
 
+    UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
+    float GetTimeScale() const { return TimeScale; }
+
     UFUNCTION(BlueprintCallable, Category = "TMOP|Clock")
     void StartClock();
 

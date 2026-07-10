@@ -1,9 +1,9 @@
 {
   "FileVersion": 3,
-  "Version": 1,
-  "VersionName": "0.0.1",
+  "Version": 2,
+  "VersionName": "0.0.2",
   "FriendlyName": "TMOP Engine",
-  "Description": "Core historical causal simulation systems for The Murder of Olof Palme.",
+  "Description": "Historical causal simulation systems for The Murder of Olof Palme.",
   "Category": "TMOP",
   "CreatedBy": "TMOP Project",
   "CanContainContent": true,
