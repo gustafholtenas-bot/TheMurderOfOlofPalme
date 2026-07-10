@@ -11,7 +11,9 @@ public class TMOPEngine : ModuleRules
             {
                 "Core",
                 "CoreUObject",
-                "Engine"
+                "Engine",
+                "AIModule",
+                "NavigationSystem"
             }
         );
     }

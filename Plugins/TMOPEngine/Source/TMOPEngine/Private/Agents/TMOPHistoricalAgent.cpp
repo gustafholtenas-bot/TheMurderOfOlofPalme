@@ -1,5 +1,6 @@
 #include "Agents/TMOPHistoricalAgent.h"
 
+#include "Actions/TMOPActionExecutorComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -14,6 +15,9 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     {
         EntityIdentity->EntityType = TEXT("Agent");
     }
+
+    ActionExecutor =
+        CreateDefaultSubobject<UTMOPActionExecutorComponent>(TEXT("ActionExecutor"));
 }
 
 void ATMOPHistoricalAgent::BeginPlay()
@@ -74,24 +78,19 @@ float ATMOPHistoricalAgent::GetDesiredMovementSpeed() const
     case ETMOPAgentActivityState::Walking:
         BaseSpeed = MovementProfile.NormalWalkSpeed;
         break;
-
     case ETMOPAgentActivityState::FastWalking:
         BaseSpeed = MovementProfile.FastWalkSpeed;
         break;
-
     case ETMOPAgentActivityState::Jogging:
         BaseSpeed = MovementProfile.JogSpeed;
         break;
-
     case ETMOPAgentActivityState::Running:
     case ETMOPAgentActivityState::Fleeing:
         BaseSpeed = MovementProfile.RunSpeed;
         break;
-
     case ETMOPAgentActivityState::Sprinting:
         BaseSpeed = MovementProfile.SprintSpeed;
         break;
-
     default:
         BaseSpeed = 0.0f;
         break;
@@ -118,7 +117,6 @@ bool ATMOPHistoricalAgent::CanMove() const
     case ETMOPAgentActivityState::Sprinting:
     case ETMOPAgentActivityState::Fleeing:
         return true;
-
     default:
         return false;
     }

@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "TMOPHistoricalAgent.generated.h"
 
+class UTMOPActionExecutorComponent;
 class UTMOPWorldEntityComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
@@ -21,13 +22,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     ETMOPAgentActivityState,
     NewActivity);
 
-/**
- * Base character for every simulated historical person.
- *
- * This class stores identity and runtime state. Historical schedules and route
- * execution are intentionally separate systems so the underlying source data
- * can be edited without changing C++.
- */
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPHistoricalAgent : public ACharacter
 {
@@ -40,6 +34,9 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent")
     TObjectPtr<UTMOPWorldEntityComponent> EntityIdentity;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent")
+    TObjectPtr<UTMOPActionExecutorComponent> ActionExecutor;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FText DisplayName;
