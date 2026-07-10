@@ -13,7 +13,8 @@ public class TMOPEngine : ModuleRules
                 "CoreUObject",
                 "Engine",
                 "AIModule",
-                "NavigationSystem"
+                "NavigationSystem",
+                "GameplayTasks"
             }
         );
     }
