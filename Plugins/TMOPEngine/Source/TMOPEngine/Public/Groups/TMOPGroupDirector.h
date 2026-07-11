@@ -60,6 +60,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
     bool StopGroup(FName GroupId);
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
+    void ResetAllGroups();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
+    int32 RecreateInitialGroups();
+
     UFUNCTION(BlueprintPure, Category="TMOP|Groups")
     bool DoesGroupExist(FName GroupId) const;
 

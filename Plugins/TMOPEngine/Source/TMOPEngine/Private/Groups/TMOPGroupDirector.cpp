@@ -175,6 +175,21 @@ bool ATMOPGroupDirector::StopGroup(const FName GroupId)
     return true;
 }
 
+void ATMOPGroupDirector::ResetAllGroups()
+{
+    while (!RuntimeGroups.IsEmpty())
+        DissolveGroup(RuntimeGroups.Last().Definition.GroupId);
+}
+
+int32 ATMOPGroupDirector::RecreateInitialGroups()
+{
+    ResetAllGroups();
+    int32 Created = 0;
+    for (const FTMOPGroupDefinition& Definition : InitialGroups)
+        Created += CreateGroup(Definition) ? 1 : 0;
+    return Created;
+}
+
 void ATMOPGroupDirector::UpdateConversation(FRuntimeGroup& Group, const float DeltaSeconds)
 {
     if (Group.bConversationHasNoAutomaticEnd) return;
