@@ -20,7 +20,7 @@ public:
     bool RegisterSeat(UTMOPCinemaSeatComponent* Seat);
 
     UFUNCTION(BlueprintCallable, Category = "TMOP|Seats")
-    bool UnregisterSeat(FName SeatId);
+    bool UnregisterSeat(UTMOPCinemaSeatComponent* Seat);
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Seats")
     UTMOPCinemaSeatComponent* FindSeat(FName SeatId) const;
@@ -28,11 +28,14 @@ public:
     UFUNCTION(BlueprintCallable, Category = "TMOP|Seats")
     int32 DiscoverSeatsInWorld();
 
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Seats")
+    int32 RemoveInvalidSeats();
+
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Seats")
+    bool ValidateSeatRegistry(TArray<FString>& OutErrors) const;
+
     UFUNCTION(BlueprintPure, Category = "TMOP|Seats")
-    int32 GetSeatCount() const
-    {
-        return Seats.Num();
-    }
+    int32 GetSeatCount() const;
 
 private:
     TMap<FName, TWeakObjectPtr<UTMOPCinemaSeatComponent>> Seats;

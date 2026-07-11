@@ -4,8 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 
-void UTMOPCinemaSeatSubsystem::Initialize(
-    FSubsystemCollectionBase& Collection)
+void UTMOPCinemaSeatSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
     Seats.Reset();
@@ -17,48 +16,58 @@ void UTMOPCinemaSeatSubsystem::Deinitialize()
     Super::Deinitialize();
 }
 
-bool UTMOPCinemaSeatSubsystem::RegisterSeat(
-    UTMOPCinemaSeatComponent* Seat)
+bool UTMOPCinemaSeatSubsystem::RegisterSeat(UTMOPCinemaSeatComponent* Seat)
 {
     if (!IsValid(Seat) || Seat->SeatId.IsNone())
     {
+        UE_LOG(LogTemp, Warning, TEXT("TMOP rejected a cinema seat without a SeatId."));
         return false;
     }
 
-    if (const TWeakObjectPtr<UTMOPCinemaSeatComponent>* Existing =
-        Seats.Find(Seat->SeatId))
+    if (TWeakObjectPtr<UTMOPCinemaSeatComponent>* Existing = Seats.Find(Seat->SeatId))
     {
-        if (Existing->IsValid() && Existing->Get() != Seat)
+        if (Existing->IsValid())
         {
-            UE_LOG(
-                LogTemp,
-                Warning,
-                TEXT("TMOP rejected duplicate cinema seat ID '%s'."),
-                *Seat->SeatId.ToString());
+            if (Existing->Get() == Seat)
+            {
+                return true;
+            }
+
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP duplicate cinema SeatId '%s': '%s' conflicts with '%s'."),
+                *Seat->SeatId.ToString(), *Seat->GetPathName(),
+                *Existing->Get()->GetPathName());
             return false;
         }
+
+        Seats.Remove(Seat->SeatId);
     }
 
     Seats.Add(Seat->SeatId, Seat);
     return true;
 }
 
-bool UTMOPCinemaSeatSubsystem::UnregisterSeat(
-    const FName SeatId)
+bool UTMOPCinemaSeatSubsystem::UnregisterSeat(UTMOPCinemaSeatComponent* Seat)
 {
-    return Seats.Remove(SeatId) > 0;
-}
-
-UTMOPCinemaSeatComponent* UTMOPCinemaSeatSubsystem::FindSeat(
-    const FName SeatId) const
-{
-    if (const TWeakObjectPtr<UTMOPCinemaSeatComponent>* Found =
-        Seats.Find(SeatId))
+    if (Seat == nullptr || Seat->SeatId.IsNone())
     {
-        return Found->Get();
+        return false;
     }
 
-    return nullptr;
+    TWeakObjectPtr<UTMOPCinemaSeatComponent>* Existing = Seats.Find(Seat->SeatId);
+    if (Existing == nullptr || Existing->Get() != Seat)
+    {
+        return false;
+    }
+
+    Seats.Remove(Seat->SeatId);
+    return true;
+}
+
+UTMOPCinemaSeatComponent* UTMOPCinemaSeatSubsystem::FindSeat(const FName SeatId) const
+{
+    const TWeakObjectPtr<UTMOPCinemaSeatComponent>* Found = Seats.Find(SeatId);
+    return Found != nullptr ? Found->Get() : nullptr;
 }
 
 int32 UTMOPCinemaSeatSubsystem::DiscoverSeatsInWorld()
@@ -69,18 +78,67 @@ int32 UTMOPCinemaSeatSubsystem::DiscoverSeatsInWorld()
         return 0;
     }
 
-    int32 RegisteredCount = 0;
-
+    RemoveInvalidSeats();
     for (TActorIterator<AActor> It(World); It; ++It)
     {
         TArray<UTMOPCinemaSeatComponent*> ActorSeats;
         It->GetComponents<UTMOPCinemaSeatComponent>(ActorSeats);
-
         for (UTMOPCinemaSeatComponent* Seat : ActorSeats)
         {
-            RegisteredCount += RegisterSeat(Seat) ? 1 : 0;
+            RegisterSeat(Seat);
         }
     }
 
-    return RegisteredCount;
+    return GetSeatCount();
+}
+
+int32 UTMOPCinemaSeatSubsystem::RemoveInvalidSeats()
+{
+    int32 Removed = 0;
+    for (auto It = Seats.CreateIterator(); It; ++It)
+    {
+        if (!It.Value().IsValid())
+        {
+            It.RemoveCurrent();
+            ++Removed;
+        }
+    }
+    return Removed;
+}
+
+bool UTMOPCinemaSeatSubsystem::ValidateSeatRegistry(TArray<FString>& OutErrors) const
+{
+    OutErrors.Reset();
+    for (const TPair<FName, TWeakObjectPtr<UTMOPCinemaSeatComponent>>& Pair : Seats)
+    {
+        const UTMOPCinemaSeatComponent* Seat = Pair.Value.Get();
+        if (!IsValid(Seat))
+        {
+            OutErrors.Add(FString::Printf(TEXT("Seat '%s' has an invalid component."), *Pair.Key.ToString()));
+            continue;
+        }
+        if (Seat->VenueId.IsNone())
+        {
+            OutErrors.Add(FString::Printf(TEXT("Seat '%s' has no VenueId."), *Pair.Key.ToString()));
+        }
+        if (Seat->AuditoriumId.IsNone())
+        {
+            OutErrors.Add(FString::Printf(TEXT("Seat '%s' has no AuditoriumId."), *Pair.Key.ToString()));
+        }
+        if (Seat->RowNumber < 0 || Seat->SeatNumber < 0)
+        {
+            OutErrors.Add(FString::Printf(TEXT("Seat '%s' needs valid row and seat numbers."), *Pair.Key.ToString()));
+        }
+    }
+    return OutErrors.IsEmpty();
+}
+
+int32 UTMOPCinemaSeatSubsystem::GetSeatCount() const
+{
+    int32 Count = 0;
+    for (const TPair<FName, TWeakObjectPtr<UTMOPCinemaSeatComponent>>& Pair : Seats)
+    {
+        Count += Pair.Value.IsValid() ? 1 : 0;
+    }
+    return Count;
 }

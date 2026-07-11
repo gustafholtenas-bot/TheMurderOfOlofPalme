@@ -13,41 +13,31 @@ UTMOPCinemaSeatComponent::UTMOPCinemaSeatComponent()
 void UTMOPCinemaSeatComponent::BeginPlay()
 {
     Super::BeginPlay();
-
-    if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
+    if (UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr)
     {
-        if (UTMOPCinemaSeatSubsystem* Seats =
-            GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>())
+        if (UTMOPCinemaSeatSubsystem* Seats = GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>())
         {
             Seats->RegisterSeat(this);
         }
     }
 }
 
-void UTMOPCinemaSeatComponent::EndPlay(
-    const EEndPlayReason::Type EndPlayReason)
+void UTMOPCinemaSeatComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    if (UGameInstance* GameInstance =
-        GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr)
+    if (UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr)
     {
-        if (UTMOPCinemaSeatSubsystem* Seats =
-            GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>())
+        if (UTMOPCinemaSeatSubsystem* Seats = GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>())
         {
-            Seats->UnregisterSeat(SeatId);
+            Seats->UnregisterSeat(this);
         }
     }
-
+    OccupyingAgent = nullptr;
     Super::EndPlay(EndPlayReason);
 }
 
 FTransform UTMOPCinemaSeatComponent::GetSeatWorldTransform() const
 {
-    const FTransform LocalCorrection(
-        SeatedRotationOffset,
-        SeatedLocalOffset,
-        FVector::OneVector);
-
-    return LocalCorrection * GetComponentTransform();
+    return FTransform(SeatedRotationOffset, SeatedLocalOffset, FVector::OneVector) * GetComponentTransform();
 }
 
 FTransform UTMOPCinemaSeatComponent::GetApproachWorldTransform() const
@@ -56,118 +46,55 @@ FTransform UTMOPCinemaSeatComponent::GetApproachWorldTransform() const
     {
         return ManualApproachTransform * GetComponentTransform();
     }
-
-    const FVector Location =
-        GetComponentLocation() +
-        GetForwardVector() * ApproachDistance +
-        GetUpVector() * ApproachVerticalOffset;
-
-    return FTransform(
-        GetComponentRotation(),
-        Location,
-        FVector::OneVector);
+    const FVector Location = GetComponentLocation() + GetForwardVector() * ApproachDistance + GetUpVector() * ApproachVerticalOffset;
+    return FTransform(GetComponentRotation(), Location, FVector::OneVector);
 }
 
-bool UTMOPCinemaSeatComponent::IsOccupied() const
+bool UTMOPCinemaSeatComponent::IsOccupied() const { return IsValid(OccupyingAgent); }
+ATMOPHistoricalAgent* UTMOPCinemaSeatComponent::GetOccupyingAgent() const { return IsOccupied() ? OccupyingAgent : nullptr; }
+
+bool UTMOPCinemaSeatComponent::ReserveSeat(ATMOPHistoricalAgent* Agent)
 {
-    return IsValid(OccupyingAgent);
-}
-
-ATMOPHistoricalAgent*
-UTMOPCinemaSeatComponent::GetOccupyingAgent() const
-{
-    return OccupyingAgent;
-}
-
-bool UTMOPCinemaSeatComponent::ReserveSeat(
-    ATMOPHistoricalAgent* Agent)
-{
-    if (!IsValid(Agent))
-    {
-        return false;
-    }
-
-    if (IsOccupied() && OccupyingAgent != Agent)
-    {
-        return false;
-    }
-
+    if (!IsValid(Agent) || (IsOccupied() && OccupyingAgent != Agent)) return false;
     OccupyingAgent = Agent;
     return true;
 }
 
-bool UTMOPCinemaSeatComponent::ReleaseSeat(
-    ATMOPHistoricalAgent* Agent)
+bool UTMOPCinemaSeatComponent::ReleaseSeat(ATMOPHistoricalAgent* Agent)
 {
-    if (!IsValid(Agent) || OccupyingAgent != Agent)
-    {
-        return false;
-    }
-
+    if (!IsValid(Agent) || OccupyingAgent != Agent) return false;
     OccupyingAgent = nullptr;
     return true;
 }
 
-bool UTMOPCinemaSeatComponent::SeatAgent(
-    ATMOPHistoricalAgent* Agent)
+bool UTMOPCinemaSeatComponent::SeatAgent(ATMOPHistoricalAgent* Agent)
 {
-    if (!ReserveSeat(Agent))
-    {
-        return false;
-    }
-
-    if (UCharacterMovementComponent* Movement =
-        Agent->GetCharacterMovement())
+    if (!ReserveSeat(Agent)) return false;
+    Agent->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+    if (UCharacterMovementComponent* Movement = Agent->GetCharacterMovement())
     {
         Movement->StopMovementImmediately();
         Movement->DisableMovement();
     }
-
-    const FTransform SeatTransform = GetSeatWorldTransform();
-
-    Agent->SetActorLocationAndRotation(
-        SeatTransform.GetLocation(),
-        SeatTransform.Rotator(),
-        false,
-        nullptr,
-        ETeleportType::TeleportPhysics);
-
+    const FTransform Target = GetSeatWorldTransform();
+    Agent->SetActorLocationAndRotation(Target.GetLocation(), Target.Rotator(), false, nullptr, ETeleportType::TeleportPhysics);
     if (bAttachAgentWhileSeated)
     {
-        Agent->AttachToComponent(
-            this,
-            FAttachmentTransformRules::KeepWorldTransform);
+        Agent->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
     }
-
     Agent->SetActivityState(ETMOPAgentActivityState::Seated);
     OnAgentSeated.Broadcast(SeatId, Agent);
     return true;
 }
 
-bool UTMOPCinemaSeatComponent::StandAgent(
-    ATMOPHistoricalAgent* Agent)
+bool UTMOPCinemaSeatComponent::StandAgent(ATMOPHistoricalAgent* Agent)
 {
-    if (!IsValid(Agent) || OccupyingAgent != Agent)
-    {
-        return false;
-    }
-
-    Agent->DetachFromActor(
-        FDetachmentTransformRules::KeepWorldTransform);
-
-    const FTransform ApproachTransform =
-        GetApproachWorldTransform();
-
-    Agent->SetActorLocationAndRotation(
-        ApproachTransform.GetLocation(),
-        ApproachTransform.Rotator(),
-        false,
-        nullptr,
-        ETeleportType::TeleportPhysics);
-
+    if (!IsValid(Agent) || OccupyingAgent != Agent) return false;
+    Agent->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+    const FTransform Target = GetApproachWorldTransform();
+    Agent->SetActorLocationAndRotation(Target.GetLocation(), Target.Rotator(), false, nullptr, ETeleportType::TeleportPhysics);
+    OccupyingAgent = nullptr;
     Agent->SetActivityState(ETMOPAgentActivityState::Standing);
-
-    ReleaseSeat(Agent);
     OnAgentStoodUp.Broadcast(SeatId, Agent);
     return true;
 }
