@@ -63,6 +63,9 @@ public:
 
 private:
     UPROPERTY(Transient)
+    TObjectPtr<class ACharacter> CharacterOwner;
+
+    UPROPERTY(Transient)
     TObjectPtr<class ATMOPHistoricalAgent> HistoricalAgent;
 
     UPROPERTY(Transient)

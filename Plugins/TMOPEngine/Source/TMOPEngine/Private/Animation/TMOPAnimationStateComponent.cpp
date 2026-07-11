@@ -11,7 +11,7 @@ void UTMOPAnimationStateComponent::TickComponent(const float DeltaTime,
     const ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-    if (bDerivePostureAndMovementFromAgent) UpdateFromAgent();
+    if (bDerivePostureAndMovementFromAgent) UpdateFromOwner();
     if (ActiveReaction != ETMOPAnimReaction::None && ReactionTimeRemaining >= 0.0f)
     {
         ReactionTimeRemaining -= DeltaTime;
@@ -19,10 +19,14 @@ void UTMOPAnimationStateComponent::TickComponent(const float DeltaTime,
     }
 }
 
-void UTMOPAnimationStateComponent::UpdateFromAgent()
+void UTMOPAnimationStateComponent::UpdateFromOwner()
 {
     const ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
-    if (!IsValid(Agent)) return;
+    if (!IsValid(Agent))
+    {
+        bIsDeadOnGround = false;
+        return;
+    }
     bIsDeadOnGround = Agent->LifeState == ETMOPAgentLifeState::Dead;
     if (bIsDeadOnGround) { Posture = ETMOPAnimPosture::Grounded; return; }
     switch (Agent->ActivityState)
@@ -77,4 +81,9 @@ void UTMOPAnimationStateComponent::ClearReaction()
 {
     ActiveReaction = ETMOPAnimReaction::None;
     ReactionTimeRemaining = 0.0f;
+}
+
+void UTMOPAnimationStateComponent::SetAutomaticStateDerivation(const bool bEnabled)
+{
+    bDerivePostureAndMovementFromAgent = bEnabled;
 }

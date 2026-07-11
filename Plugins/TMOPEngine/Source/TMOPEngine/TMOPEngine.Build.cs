@@ -5,17 +5,10 @@ public class TMOPEngine : ModuleRules
     public TMOPEngine(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-
-        PublicDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-                "CoreUObject",
-                "Engine",
-                "AIModule",
-                "NavigationSystem",
-                "GameplayTasks"
-            }
-        );
+        PublicDependencyModuleNames.AddRange(new string[]
+        {
+            "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
+            "AIModule", "NavigationSystem", "GameplayTasks"
+        });
     }
 }

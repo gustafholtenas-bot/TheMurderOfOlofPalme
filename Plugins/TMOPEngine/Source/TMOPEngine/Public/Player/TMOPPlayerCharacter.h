@@ -1,0 +1,92 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Character.h"
+#include "InputActionValue.h"
+#include "TMOPPlayerCharacter.generated.h"
+
+class UCameraComponent;
+class UInputAction;
+class UInputMappingContext;
+class USpringArmComponent;
+class UTMOPAnimationStateComponent;
+class UTMOPPlayerActionComponent;
+
+UCLASS(Blueprintable)
+class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
+{
+    GENERATED_BODY()
+
+public:
+    ATMOPPlayerCharacter();
+    virtual void BeginPlay() override;
+    virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<USpringArmComponent> CameraBoom;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<UCameraComponent> FollowCamera;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<UTMOPAnimationStateComponent> AnimationState;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<UTMOPPlayerActionComponent> PlayerActions;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputMappingContext> DefaultMappingContext;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> MoveAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> LookAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> JumpAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> SprintAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> InteractAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> PrimaryAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> SecondaryAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> CancelAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> SquatAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
+    float WalkSpeed = 300.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
+    float SprintSpeed = 600.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
+    float InteractionDistance = 300.0f;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|Interaction")
+    AActor* FindInteractionTarget() const;
+
+private:
+    void InputMove(const FInputActionValue& Value);
+    void InputLook(const FInputActionValue& Value);
+    void InputJumpStarted();
+    void InputJumpEnded();
+    void InputSprintStarted();
+    void InputSprintEnded();
+    void InputInteract();
+    void InputPrimaryAction();
+    void InputSecondaryActionStarted();
+    void InputSecondaryActionEnded();
+    void InputCancel();
+    void InputToggleSquat();
+};

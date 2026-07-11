@@ -62,7 +62,10 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Animation")
     void ClearReaction();
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Animation")
+    void SetAutomaticStateDerivation(bool bEnabled);
+
 private:
-    void UpdateFromAgent();
+    void UpdateFromOwner();
     float ReactionTimeRemaining = 0.0f;
 };
