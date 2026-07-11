@@ -3,6 +3,7 @@
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 #include "Time/TMOPClockSubsystem.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Transit/TMOPBusRouteData.h"

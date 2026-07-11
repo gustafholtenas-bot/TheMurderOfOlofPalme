@@ -2,11 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Vehicles/TMOPVehicleAppearanceData.h"
+#include "Vehicles/TMOPVehicleModelData.h"
 #include "TMOPTrafficSpawner.generated.h"
 
 class ATMOPVehicleBase;
-class UTMOPVehicleAppearanceData;
-class UTMOPVehicleModelData;
 
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPTrafficSpawnEntry

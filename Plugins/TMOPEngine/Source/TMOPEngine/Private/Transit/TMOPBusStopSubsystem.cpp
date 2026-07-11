@@ -1,6 +1,7 @@
 #include "Transit/TMOPBusStopSubsystem.h"
 
 #include "EngineUtils.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Transit/TMOPBusStopComponent.h"
 

@@ -2,6 +2,7 @@
 
 #include "EngineUtils.h"
 #include "Traffic/TMOPTrafficIntersectionComponent.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 
 ATMOPTrafficNetworkDirector::ATMOPTrafficNetworkDirector()

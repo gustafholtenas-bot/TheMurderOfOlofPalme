@@ -1,6 +1,7 @@
 #include "Traffic/TMOPTrafficSignalDirector.h"
 
 #include "EngineUtils.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficSignalController.h"
 #include "Traffic/TMOPTrafficStopLineComponent.h"
