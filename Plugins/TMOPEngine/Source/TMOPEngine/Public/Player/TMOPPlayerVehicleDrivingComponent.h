@@ -101,7 +101,7 @@ public:
     void SetHandbrakeInput(bool bPressed);
 
     UFUNCTION(BlueprintPure, Category="TMOP|Player Driving")
-    bool IsDriving() const { return IsValid(DrivenVehicle); }
+    bool IsDriving() const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|Player Driving")
     float GetCurrentSpeedKmh() const;

@@ -1,9 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
 #include "GameFramework/Actor.h"
-#include "Vehicles/TMOPVehicleAppearanceData.h"
-#include "Vehicles/TMOPVehicleModelData.h"
 #include "TMOPTrafficSpawner.generated.h"
 
 class ATMOPVehicleBase;
@@ -21,11 +20,11 @@ struct TMOPENGINE_API FTMOPTrafficSpawnEntry
 
     /** Optional catalog model. VehicleClass must inherit TMOPConfiguredVehicle. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Spawn|Catalog")
-    TObjectPtr<UTMOPVehicleModelData> VehicleModel;
+    TObjectPtr<UPrimaryDataAsset> VehicleModel;
 
     /** Optional civilian, taxi, police or ambulance appearance. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Spawn|Catalog")
-    TObjectPtr<UTMOPVehicleAppearanceData> AppearancePreset;
+    TObjectPtr<UPrimaryDataAsset> AppearancePreset;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Spawn")
     FName InitialLaneId = NAME_None;

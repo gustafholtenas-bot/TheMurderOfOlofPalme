@@ -4,6 +4,7 @@
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Player/TMOPPlayerActionComponent.h"
@@ -38,7 +39,8 @@ void ATMOPPlayerCharacter::BeginPlay()
         if (ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer())
             if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
                 LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
-                if (IsValid(DefaultMappingContext)) Subsystem->AddMappingContext(DefaultMappingContext, 0);
+                if (IsValid(DefaultMappingContext.Get()))
+                    Subsystem->AddMappingContext(DefaultMappingContext.Get(), 0);
 }
 
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

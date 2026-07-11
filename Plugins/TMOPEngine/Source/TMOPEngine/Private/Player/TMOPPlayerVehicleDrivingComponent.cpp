@@ -121,3 +121,8 @@ float UTMOPPlayerVehicleDrivingComponent::GetCurrentSpeedKmh() const
 {
     return CurrentSpeedCmPerSecond * (3600.0f / 100000.0f);
 }
+
+bool UTMOPPlayerVehicleDrivingComponent::IsDriving() const
+{
+    return IsValid(DrivenVehicle.Get());
+}

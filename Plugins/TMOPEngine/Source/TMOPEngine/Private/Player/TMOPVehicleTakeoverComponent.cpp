@@ -167,7 +167,13 @@ bool UTMOPVehicleTakeoverComponent::ExitCurrentVehicle()
 
 bool UTMOPVehicleTakeoverComponent::IsDriver() const
 {
-    return IsValid(CurrentSeat) && CurrentSeat->SeatRole == ETMOPVehicleSeatRole::Driver;
+    return IsValid(CurrentSeat.Get()) &&
+        CurrentSeat->SeatRole == ETMOPVehicleSeatRole::Driver;
+}
+
+bool UTMOPVehicleTakeoverComponent::IsInsideVehicle() const
+{
+    return IsValid(CurrentVehicle.Get()) && IsValid(CurrentSeat.Get());
 }
 
 ETMOPVehicleTakeoverResult UTMOPVehicleTakeoverComponent::ResolveAndBroadcast(

@@ -62,7 +62,7 @@ public:
     bool ExitCurrentVehicle();
 
     UFUNCTION(BlueprintPure, Category="TMOP|Vehicle Takeover")
-    bool IsInsideVehicle() const { return IsValid(CurrentVehicle) && IsValid(CurrentSeat); }
+    bool IsInsideVehicle() const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|Vehicle Takeover")
     bool IsDriver() const;

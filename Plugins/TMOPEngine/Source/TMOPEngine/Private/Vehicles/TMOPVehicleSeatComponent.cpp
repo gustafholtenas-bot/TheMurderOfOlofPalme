@@ -10,7 +10,10 @@ UTMOPVehicleSeatComponent::UTMOPVehicleSeatComponent()
     PrimaryComponentTick.bCanEverTick = false;
 }
 
-bool UTMOPVehicleSeatComponent::IsOccupied() const { return IsValid(CharacterOccupant); }
+bool UTMOPVehicleSeatComponent::IsOccupied() const
+{
+    return IsValid(CharacterOccupant.Get());
+}
 ATMOPHistoricalAgent* UTMOPVehicleSeatComponent::GetOccupant() const
 {
     return Cast<ATMOPHistoricalAgent>(CharacterOccupant);
