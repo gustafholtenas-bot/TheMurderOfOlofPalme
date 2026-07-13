@@ -7,6 +7,8 @@
 #include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Inventory/TMOPInventoryComponent.h"
+#include "Inventory/TMOPInventoryInputComponent.h"
 #include "Player/TMOPPlayerActionComponent.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
@@ -29,6 +31,8 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     AnimationState = CreateDefaultSubobject<UTMOPAnimationStateComponent>(TEXT("AnimationState"));
     AnimationState->bDerivePostureAndMovementFromAgent = false;
     PlayerActions = CreateDefaultSubobject<UTMOPPlayerActionComponent>(TEXT("PlayerActions"));
+    Inventory = CreateDefaultSubobject<UTMOPInventoryComponent>(TEXT("Inventory"));
+    InventoryInput = CreateDefaultSubobject<UTMOPInventoryInputComponent>(TEXT("InventoryInput"));
 }
 
 void ATMOPPlayerCharacter::BeginPlay()
@@ -69,6 +73,21 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     }
     if (CancelAction) Input->BindAction(CancelAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputCancel);
     if (SquatAction) Input->BindAction(SquatAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputToggleSquat);
+    if (QuickInventoryAction)
+    {
+        Input->BindAction(QuickInventoryAction, ETriggerEvent::Started, this,
+            &ATMOPPlayerCharacter::InputQuickInventoryStarted);
+        Input->BindAction(QuickInventoryAction, ETriggerEvent::Completed, this,
+            &ATMOPPlayerCharacter::InputQuickInventoryCompleted);
+        Input->BindAction(QuickInventoryAction, ETriggerEvent::Canceled, this,
+            &ATMOPPlayerCharacter::InputQuickInventoryCompleted);
+    }
+    if (InventoryNavigateAction)
+        Input->BindAction(InventoryNavigateAction, ETriggerEvent::Triggered, this,
+            &ATMOPPlayerCharacter::InputInventoryNavigate);
+    if (InventoryCycleAction)
+        Input->BindAction(InventoryCycleAction, ETriggerEvent::Triggered, this,
+            &ATMOPPlayerCharacter::InputInventoryCycle);
 }
 
 void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
@@ -110,16 +129,22 @@ void ATMOPPlayerCharacter::InputInteract()
 
 void ATMOPPlayerCharacter::InputPrimaryAction()
 {
+    if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Primary,
+        ETMOPItemInputPhase::Started)) return;
     PlayerActions->StartAction(ETMOPPlayerAction::Punch, FindInteractionTarget(), 0.7f, true);
 }
 
 void ATMOPPlayerCharacter::InputSecondaryActionStarted()
 {
+    if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Secondary,
+        ETMOPItemInputPhase::Started)) return;
     PlayerActions->StartAction(ETMOPPlayerAction::AimGun, FindInteractionTarget(), -1.0f, false);
 }
 
 void ATMOPPlayerCharacter::InputSecondaryActionEnded()
 {
+    if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Secondary,
+        ETMOPItemInputPhase::Completed)) return;
     if (PlayerActions->CurrentAction == ETMOPPlayerAction::AimGun) PlayerActions->CompleteCurrentAction();
 }
 
@@ -130,6 +155,27 @@ void ATMOPPlayerCharacter::InputToggleSquat()
     if (AnimationState->Posture == ETMOPAnimPosture::Squatting)
         AnimationState->SetPostureOverride(ETMOPAnimPosture::Standing);
     else AnimationState->SetPostureOverride(ETMOPAnimPosture::Squatting);
+}
+
+void ATMOPPlayerCharacter::InputQuickInventoryStarted()
+{
+    InventoryInput->OpenRadialMenu();
+}
+
+void ATMOPPlayerCharacter::InputQuickInventoryCompleted()
+{
+    InventoryInput->ConfirmRadialSelection();
+}
+
+void ATMOPPlayerCharacter::InputInventoryNavigate(const FInputActionValue& Value)
+{
+    InventoryInput->UpdateRadialSelection(Value.Get<FVector2D>());
+}
+
+void ATMOPPlayerCharacter::InputInventoryCycle(const FInputActionValue& Value)
+{
+    const float Direction = Value.Get<float>();
+    if (!FMath::IsNearlyZero(Direction)) InventoryInput->CycleInventory(Direction > 0.0f ? 1 : -1);
 }
 
 AActor* ATMOPPlayerCharacter::FindInteractionTarget() const

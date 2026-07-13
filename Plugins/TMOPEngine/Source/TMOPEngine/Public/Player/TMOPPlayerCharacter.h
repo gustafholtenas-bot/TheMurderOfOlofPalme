@@ -3,6 +3,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "Inventory/TMOPInventoryComponent.h"
+#include "Inventory/TMOPInventoryInputComponent.h"
 #include "TMOPPlayerCharacter.generated.h"
 
 class UCameraComponent;
@@ -34,6 +36,12 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<UTMOPPlayerActionComponent> PlayerActions;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<UTMOPInventoryComponent> Inventory;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<UTMOPInventoryInputComponent> InventoryInput;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
@@ -64,6 +72,15 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> SquatAction;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
+    TObjectPtr<UInputAction> QuickInventoryAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
+    TObjectPtr<UInputAction> InventoryNavigateAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
+    TObjectPtr<UInputAction> InventoryCycleAction;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     float WalkSpeed = 300.0f;
 
@@ -89,4 +106,8 @@ private:
     void InputSecondaryActionEnded();
     void InputCancel();
     void InputToggleSquat();
+    void InputQuickInventoryStarted();
+    void InputQuickInventoryCompleted();
+    void InputInventoryNavigate(const FInputActionValue& Value);
+    void InputInventoryCycle(const FInputActionValue& Value);
 };
