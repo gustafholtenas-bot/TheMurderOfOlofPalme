@@ -30,6 +30,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Orientation")
     float VisualYawCorrectionDegrees = 0.0f;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Collision",
+        meta=(ClampMin="10.0"))
+    float CollisionHalfHeightCm = 60.0f;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle")
     TObjectPtr<USceneComponent> VisualRoot;
 

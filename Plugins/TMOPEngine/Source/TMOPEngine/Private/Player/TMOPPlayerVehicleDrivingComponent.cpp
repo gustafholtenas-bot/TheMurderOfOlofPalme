@@ -2,6 +2,7 @@
 
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Components/BoxComponent.h"
 
 UTMOPPlayerVehicleDrivingComponent::UTMOPPlayerVehicleDrivingComponent()
 {
@@ -30,6 +31,7 @@ bool UTMOPPlayerVehicleDrivingComponent::BeginDriving(ATMOPVehicleBase* Vehicle)
 
     ThrottleInput = SteeringInput = BrakeInput = 0.0f;
     bHandbrakeInput = false;
+    bHasGroundContact = false;
     SetComponentTickEnabled(true);
     OnPlayerDrivingStateChanged.Broadcast(DrivenVehicle, true);
     return true;
@@ -49,6 +51,7 @@ void UTMOPPlayerVehicleDrivingComponent::EndDriving()
     CurrentSpeedCmPerSecond = 0.0f;
     ThrottleInput = SteeringInput = BrakeInput = 0.0f;
     bHandbrakeInput = false;
+    bHasGroundContact = false;
     SetComponentTickEnabled(false);
     if (IsValid(PreviousVehicle)) OnPlayerDrivingStateChanged.Broadcast(PreviousVehicle, false);
 }
@@ -101,22 +104,39 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
     FVector DesiredLocation = DrivenVehicle->GetActorLocation() + DeltaLocation;
     if (bFollowGround && GetWorld() != nullptr)
     {
-        FHitResult GroundHit;
+        TArray<FHitResult> GroundHits;
         FCollisionQueryParams GroundParams(SCENE_QUERY_STAT(TMOPVehicleGround), false,
             DrivenVehicle.Get());
         const FVector TraceStart = DesiredLocation + FVector(0.0f, 0.0f, GroundTraceUpCm);
         const FVector TraceEnd = DesiredLocation - FVector(0.0f, 0.0f, GroundTraceDownCm);
-        if (GetWorld()->LineTraceSingleByChannel(GroundHit, TraceStart, TraceEnd,
-            ECC_Visibility, GroundParams))
+        GetWorld()->LineTraceMultiByChannel(GroundHits, TraceStart, TraceEnd,
+            ECC_Visibility, GroundParams);
+        const FHitResult* AcceptedGround = nullptr;
+        for (const FHitResult& Candidate : GroundHits)
         {
-            DesiredLocation.Z = GroundHit.ImpactPoint.Z + GroundClearanceCm;
+            if (Candidate.ImpactNormal.Z < MinimumGroundNormalZ) continue;
+            if (bHasGroundContact && Candidate.ImpactPoint.Z >
+                LastGroundHeightCm + MaximumGroundRisePerFrameCm) continue;
+            AcceptedGround = &Candidate;
+            break;
+        }
+        if (AcceptedGround != nullptr)
+        {
+            float RootHalfHeight = 0.0f;
+            if (const UBoxComponent* RootBox = Cast<UBoxComponent>(
+                DrivenVehicle->GetRootComponent()))
+                RootHalfHeight = RootBox->GetScaledBoxExtent().Z;
+            DesiredLocation.Z = AcceptedGround->ImpactPoint.Z + RootHalfHeight +
+                GroundClearanceCm;
+            LastGroundHeightCm = AcceptedGround->ImpactPoint.Z;
+            bHasGroundContact = true;
             if (bAlignToGroundNormal)
             {
                 FVector GroundForward = FVector::VectorPlaneProject(
-                    Rotation.Vector(), GroundHit.ImpactNormal).GetSafeNormal();
+                    Rotation.Vector(), AcceptedGround->ImpactNormal).GetSafeNormal();
                 if (!GroundForward.IsNearlyZero())
                     Rotation = FRotationMatrix::MakeFromXZ(
-                        GroundForward, GroundHit.ImpactNormal).Rotator();
+                        GroundForward, AcceptedGround->ImpactNormal).Rotator();
             }
         }
     }

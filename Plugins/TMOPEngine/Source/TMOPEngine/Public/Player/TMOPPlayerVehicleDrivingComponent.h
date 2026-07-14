@@ -88,6 +88,15 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground")
     bool bAlignToGroundNormal = true;
 
+    /** Reject sudden surfaces above the previously accepted road height. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.0"))
+    float MaximumGroundRisePerFrameCm = 45.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.0", ClampMax="1.0"))
+    float MinimumGroundNormalZ = 0.55f;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player Driving|Runtime")
     TObjectPtr<ATMOPVehicleBase> DrivenVehicle;
 
@@ -134,5 +143,7 @@ private:
     float SteeringInput = 0.0f;
     float BrakeInput = 0.0f;
     bool bHandbrakeInput = false;
+    bool bHasGroundContact = false;
+    float LastGroundHeightCm = 0.0f;
     TWeakObjectPtr<UTMOPTrafficVehicleMovementComponent> SuspendedTrafficMovement;
 };

@@ -2,6 +2,7 @@
 
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
@@ -17,6 +18,7 @@ ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
     BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
     BodyMesh->SetupAttachment(VisualRoot);
     BodyMesh->SetSimulatePhysics(false);
+    BodyMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     WheelFrontLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelFrontLeft"));
     WheelFrontRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelFrontRight"));
     WheelRearLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelRearLeft"));
@@ -117,6 +119,12 @@ void ATMOPConfiguredVehicle::OnConstruction(const FTransform& Transform)
 bool ATMOPConfiguredVehicle::ApplyConfiguration()
 {
     if (!IsValid(VehicleModel)) return false;
+    const FVector CollisionExtent(
+        FMath::Max(10.0f, VehicleModel->VehicleLengthCm * 0.5f),
+        FMath::Max(10.0f, VehicleModel->VehicleWidthCm * 0.5f),
+        FMath::Max(10.0f, CollisionHalfHeightCm));
+    VehicleCollision->SetBoxExtent(CollisionExtent);
+    VehicleRoot->SetRelativeLocation(FVector(0.0f, 0.0f, -CollisionExtent.Z));
     VisualRoot->SetRelativeRotation(FRotator(0.0f, VisualYawCorrectionDegrees, 0.0f));
     BodyMesh->SetStaticMesh(VehicleModel->BodyMesh);
     BodyMesh->SetRelativeTransform(VehicleModel->BodyLocalTransform);
