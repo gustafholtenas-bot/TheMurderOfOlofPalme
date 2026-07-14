@@ -2,7 +2,6 @@
 
 #include "Components/StaticMeshComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
-#include "Vehicles/TMOPVehicleAppearanceData.h"
 #include "Vehicles/TMOPVehicleModelData.h"
 
 ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
@@ -14,11 +13,8 @@ ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
     WheelFrontRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelFrontRight"));
     WheelRearLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelRearLeft"));
     WheelRearRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelRearRight"));
-    RoofAccessory1 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RoofAccessory1"));
-    RoofAccessory2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RoofAccessory2"));
-    RoofAccessory3 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RoofAccessory3"));
     UStaticMeshComponent* Parts[] = { WheelFrontLeft, WheelFrontRight, WheelRearLeft,
-        WheelRearRight, RoofAccessory1, RoofAccessory2, RoofAccessory3 };
+        WheelRearRight };
     for (UStaticMeshComponent* Part : Parts)
     {
         Part->SetupAttachment(VehicleRoot);
@@ -41,18 +37,6 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     ApplyWheel(WheelFrontRight, VehicleModel->Wheels.FrontRight);
     ApplyWheel(WheelRearLeft, VehicleModel->Wheels.RearLeft);
     ApplyWheel(WheelRearRight, VehicleModel->Wheels.RearRight);
-    ApplyAccessory(RoofAccessory1, 0);
-    ApplyAccessory(RoofAccessory2, 1);
-    ApplyAccessory(RoofAccessory3, 2);
-    if (IsValid(AppearancePreset))
-    {
-        if (IsValid(AppearancePreset->BodyMaterial))
-            BodyMesh->SetMaterial(VehicleModel->BodyMaterialSlotIndex, AppearancePreset->BodyMaterial);
-        if (IsValid(AppearancePreset->GlassMaterial))
-            BodyMesh->SetMaterial(VehicleModel->GlassMaterialSlotIndex, AppearancePreset->GlassMaterial);
-        if (IsValid(AppearancePreset->LiveryMaterial))
-            BodyMesh->SetMaterial(VehicleModel->LiveryMaterialSlotIndex, AppearancePreset->LiveryMaterial);
-    }
     if (UTMOPTrafficVehicleMovementComponent* Movement =
         FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
         Movement->VehicleLengthCm = VehicleModel->VehicleLengthCm;
@@ -65,22 +49,6 @@ void ATMOPConfiguredVehicle::ApplyWheel(UStaticMeshComponent* Component,
     Component->SetStaticMesh(VehicleModel->WheelMesh);
     Component->SetRelativeTransform(LocalTransform);
     Component->SetVisibility(IsValid(VehicleModel->WheelMesh));
-}
-
-void ATMOPConfiguredVehicle::ApplyAccessory(UStaticMeshComponent* Component,
-    const int32 AccessoryIndex)
-{
-    if (!IsValid(AppearancePreset) || !AppearancePreset->RoofAccessories.IsValidIndex(AccessoryIndex))
-    {
-        Component->SetStaticMesh(nullptr);
-        Component->SetVisibility(false);
-        return;
-    }
-    const FTMOPRoofAccessoryVisual& Accessory = AppearancePreset->RoofAccessories[AccessoryIndex];
-    Component->SetStaticMesh(Accessory.Mesh);
-    Component->SetRelativeTransform(Accessory.LocalTransform * VehicleModel->RoofMountTransform);
-    if (IsValid(Accessory.Material)) Component->SetMaterial(0, Accessory.Material);
-    Component->SetVisibility(IsValid(Accessory.Mesh));
 }
 
 void ATMOPConfiguredVehicle::Tick(const float DeltaSeconds)

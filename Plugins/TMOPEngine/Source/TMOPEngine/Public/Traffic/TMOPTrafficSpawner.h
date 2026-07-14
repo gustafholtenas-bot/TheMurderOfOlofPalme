@@ -6,6 +6,7 @@
 #include "TMOPTrafficSpawner.generated.h"
 
 class ATMOPVehicleBase;
+class UTMOPVehicleModelData;
 
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPTrafficSpawnEntry
@@ -20,11 +21,7 @@ struct TMOPENGINE_API FTMOPTrafficSpawnEntry
 
     /** Optional catalog model. VehicleClass must inherit TMOPConfiguredVehicle. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Spawn|Catalog")
-    TObjectPtr<UPrimaryDataAsset> VehicleModel;
-
-    /** Optional civilian, taxi, police or ambulance appearance. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Spawn|Catalog")
-    TObjectPtr<UPrimaryDataAsset> AppearancePreset;
+    TObjectPtr<UTMOPVehicleModelData> VehicleModel;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Spawn")
     FName InitialLaneId = NAME_None;

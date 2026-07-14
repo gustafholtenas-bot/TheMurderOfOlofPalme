@@ -6,7 +6,6 @@
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "Vehicles/TMOPConfiguredVehicle.h"
-#include "Vehicles/TMOPVehicleAppearanceData.h"
 #include "Vehicles/TMOPVehicleModelData.h"
 
 ATMOPTrafficSpawner::ATMOPTrafficSpawner()
@@ -32,14 +31,12 @@ int32 ATMOPTrafficSpawner::SpawnTraffic()
     int32 Spawned = 0;
     for (const FTMOPTrafficSpawnEntry& Entry : SpawnEntries)
     {
-        UTMOPVehicleModelData* VehicleModel = Cast<UTMOPVehicleModelData>(Entry.VehicleModel);
-        UTMOPVehicleAppearanceData* AppearancePreset =
-            Cast<UTMOPVehicleAppearanceData>(Entry.AppearancePreset);
+        UTMOPVehicleModelData* VehicleModel = Entry.VehicleModel.Get();
         ATMOPVehicleBase* Vehicle = GetWorld()->SpawnActor<ATMOPVehicleBase>(
             Entry.VehicleClass, FTransform::Identity);
         if (!IsValid(Vehicle)) continue;
         Vehicle->VehicleId = Entry.VehicleId;
-        if (IsValid(Entry.VehicleModel) || IsValid(Entry.AppearancePreset))
+        if (IsValid(Entry.VehicleModel))
         {
             ATMOPConfiguredVehicle* Configured = Cast<ATMOPConfiguredVehicle>(Vehicle);
             if (!IsValid(Configured) || !IsValid(VehicleModel))
@@ -51,7 +48,6 @@ int32 ATMOPTrafficSpawner::SpawnTraffic()
                 continue;
             }
             Configured->VehicleModel = VehicleModel;
-            Configured->AppearancePreset = AppearancePreset;
             if (!Configured->ApplyConfiguration())
             {
                 Vehicle->Destroy();
@@ -96,14 +92,7 @@ bool ATMOPTrafficSpawner::ValidateSpawnEntries(TArray<FString>& OutErrors) const
             OutErrors.Add(FString::Printf(TEXT("Entry %d has missing or duplicate VehicleId."), Index));
         VehicleIds.Add(Entry.VehicleId);
         if (Entry.VehicleClass == nullptr) OutErrors.Add(FString::Printf(TEXT("Entry %d has no VehicleClass."), Index));
-        if (IsValid(Entry.VehicleModel) && !IsValid(Cast<UTMOPVehicleModelData>(Entry.VehicleModel)))
-            OutErrors.Add(FString::Printf(TEXT("Entry %d VehicleModel is not TMOPVehicleModelData."), Index));
-        if (IsValid(Entry.AppearancePreset) &&
-            !IsValid(Cast<UTMOPVehicleAppearanceData>(Entry.AppearancePreset)))
-            OutErrors.Add(FString::Printf(TEXT("Entry %d AppearancePreset is not TMOPVehicleAppearanceData."), Index));
-        if (IsValid(Entry.AppearancePreset) && !IsValid(Entry.VehicleModel))
-            OutErrors.Add(FString::Printf(TEXT("Entry %d has AppearancePreset but no VehicleModel."), Index));
-        if ((IsValid(Entry.VehicleModel) || IsValid(Entry.AppearancePreset)) &&
+        if (IsValid(Entry.VehicleModel) &&
             Entry.VehicleClass != nullptr &&
             !Entry.VehicleClass.Get()->IsChildOf(ATMOPConfiguredVehicle::StaticClass()))
             OutErrors.Add(FString::Printf(
