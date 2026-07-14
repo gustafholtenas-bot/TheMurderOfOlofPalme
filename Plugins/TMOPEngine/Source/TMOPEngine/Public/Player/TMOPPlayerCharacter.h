@@ -105,6 +105,12 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> InteractAction;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
+    bool bUseDirectInteractKeyFallback = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
+    FKey InteractFallbackKey = EKeys::E;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> PrimaryAction;
 
@@ -136,10 +142,10 @@ public:
     FKey DropItemFallbackKey = EKeys::G;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
-    bool bUseDirectPauseKeyFallback = true;
+    bool bUseDirectPauseKeyFallback = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
-    FKey PauseMenuFallbackKey = EKeys::Escape;
+    FKey PauseMenuFallbackKey = EKeys::Enter;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> QuickInventoryAction;
@@ -219,6 +225,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|Interaction")
     AActor* FindInteractionTarget() const;
 
+    UFUNCTION(BlueprintPure, Category="TMOP|Player|Interaction")
+    FText GetInteractKeyDisplayText() const;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
     void SetPauseMenuOpen(bool bOpen);
 
@@ -259,4 +268,5 @@ private:
     bool bPauseFallbackHeld = false;
     bool bClockWasRunningBeforePause = false;
     bool bDropFallbackHeld = false;
+    bool bInteractFallbackHeld = false;
 };

@@ -7,6 +7,7 @@
 
 class USphereComponent;
 class UStaticMeshComponent;
+class UTextRenderComponent;
 class UTMOPInventoryComponent;
 class UTMOPItemDefinition;
 
@@ -19,6 +20,7 @@ class TMOPENGINE_API ATMOPWorldItem : public AActor, public ITMOPInteractable
 public:
     ATMOPWorldItem();
     virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
     virtual void OnConstruction(const FTransform& Transform) override;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|World Item")
@@ -26,6 +28,18 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|World Item")
     TObjectPtr<UStaticMeshComponent> ItemMesh;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|World Item|Prompt")
+    TObjectPtr<UTextRenderComponent> WorldPrompt;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World Item|Prompt")
+    float PromptMinimumDistanceCm = 100.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World Item|Prompt")
+    float PromptMaximumDistanceCm = 300.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World Item|Prompt")
+    float PromptHeightCm = 75.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|World Item")
     TObjectPtr<UTMOPItemDefinition> ItemDefinition;
@@ -48,4 +62,5 @@ public:
 
 private:
     void RefreshVisual();
+    void UpdateWorldPrompt();
 };

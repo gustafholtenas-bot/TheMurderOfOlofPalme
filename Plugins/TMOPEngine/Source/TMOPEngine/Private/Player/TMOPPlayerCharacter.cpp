@@ -134,7 +134,9 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
         Input->BindAction(SprintAction, ETriggerEvent::Completed, this, &ATMOPPlayerCharacter::InputSprintEnded);
         Input->BindAction(SprintAction, ETriggerEvent::Canceled, this, &ATMOPPlayerCharacter::InputSprintEnded);
     }
-    if (InteractAction) Input->BindAction(InteractAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputInteract);
+    if (InteractAction && !bUseDirectInteractKeyFallback)
+        Input->BindAction(InteractAction, ETriggerEvent::Started, this,
+            &ATMOPPlayerCharacter::InputInteract);
     if (PrimaryAction) Input->BindAction(PrimaryAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputPrimaryAction);
     if (SecondaryAction)
     {
@@ -418,6 +420,17 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             if (bKeyHeld) DropEquippedItem();
         }
     }
+    if (bUseDirectInteractKeyFallback)
+    {
+        const APlayerController* PC = Cast<APlayerController>(Controller);
+        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(InteractFallbackKey);
+        if (bKeyHeld != bInteractFallbackHeld)
+        {
+            bInteractFallbackHeld = bKeyHeld;
+            if (bKeyHeld && !bPauseMenuOpen && !InventoryInput->bRadialMenuOpen)
+                InputInteract();
+        }
+    }
     if (InventoryInput->bRadialMenuOpen) UpdateQuickInventoryPointer();
     UpdateInteractionPrompt();
     if (!IsValid(CameraBoom.Get())) return;
@@ -523,4 +536,11 @@ AActor* ATMOPPlayerCharacter::FindInteractionTarget() const
     FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInteraction), false, this);
     return GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params)
         ? Hit.GetActor() : nullptr;
+}
+
+FText ATMOPPlayerCharacter::GetInteractKeyDisplayText() const
+{
+    return InteractFallbackKey.IsValid()
+        ? InteractFallbackKey.GetDisplayName(false)
+        : FText::FromString(TEXT("E"));
 }

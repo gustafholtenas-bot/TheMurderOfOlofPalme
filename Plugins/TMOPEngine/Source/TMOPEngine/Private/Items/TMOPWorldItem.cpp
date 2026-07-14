@@ -2,12 +2,15 @@
 
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/TextRenderComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "Inventory/TMOPInventoryComponent.h"
 #include "Inventory/TMOPItemDefinition.h"
+#include "Player/TMOPPlayerCharacter.h"
 
 ATMOPWorldItem::ATMOPWorldItem()
 {
-    PrimaryActorTick.bCanEverTick = false;
+    PrimaryActorTick.bCanEverTick = true;
     InteractionCollision = CreateDefaultSubobject<USphereComponent>(TEXT("InteractionCollision"));
     SetRootComponent(InteractionCollision);
     InteractionCollision->SetSphereRadius(35.0f);
@@ -18,6 +21,15 @@ ATMOPWorldItem::ATMOPWorldItem()
     ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
     ItemMesh->SetupAttachment(InteractionCollision);
     ItemMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+    WorldPrompt = CreateDefaultSubobject<UTextRenderComponent>(TEXT("WorldPrompt"));
+    WorldPrompt->SetupAttachment(InteractionCollision);
+    WorldPrompt->SetHorizontalAlignment(EHTA_Center);
+    WorldPrompt->SetVerticalAlignment(EVRTA_TextCenter);
+    WorldPrompt->SetWorldSize(24.0f);
+    WorldPrompt->SetTextRenderColor(FColor(255, 220, 120));
+    WorldPrompt->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    WorldPrompt->SetVisibility(false);
 }
 
 void ATMOPWorldItem::BeginPlay()
@@ -25,6 +37,13 @@ void ATMOPWorldItem::BeginPlay()
     Super::BeginPlay();
     Quantity = FMath::Max(1, Quantity);
     RefreshVisual();
+    UpdateWorldPrompt();
+}
+
+void ATMOPWorldItem::Tick(const float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    UpdateWorldPrompt();
 }
 
 void ATMOPWorldItem::OnConstruction(const FTransform& Transform)
@@ -48,6 +67,32 @@ void ATMOPWorldItem::RefreshVisual()
         ItemMesh->SetStaticMesh(ItemDefinition->RightHandMesh.Get());
         ItemMesh->SetRelativeTransform(ItemDefinition->RightHandTransform);
     }
+}
+
+void ATMOPWorldItem::UpdateWorldPrompt()
+{
+    if (!IsValid(WorldPrompt.Get()) || GetWorld() == nullptr) return;
+    APlayerController* PC = GetWorld()->GetFirstPlayerController();
+    ATMOPPlayerCharacter* Player = IsValid(PC)
+        ? Cast<ATMOPPlayerCharacter>(PC->GetPawn()) : nullptr;
+    if (!IsValid(Player))
+    {
+        WorldPrompt->SetVisibility(false);
+        return;
+    }
+
+    const float Distance = FVector::Dist(Player->GetActorLocation(), GetActorLocation());
+    const bool bShow = Distance >= PromptMinimumDistanceCm
+        && Distance <= PromptMaximumDistanceCm && IsValid(ItemDefinition.Get());
+    WorldPrompt->SetVisibility(bShow);
+    if (!bShow) return;
+
+    WorldPrompt->SetRelativeLocation(FVector(0.0f, 0.0f, PromptHeightCm));
+    WorldPrompt->SetText(FText::Format(
+        NSLOCTEXT("TMOP", "WorldPickupPrompt", "[{0}] Plocka upp {1}"),
+        Player->GetInteractKeyDisplayText(), ItemDefinition->DisplayName));
+    const FVector ToPlayer = Player->GetPawnViewLocation() - WorldPrompt->GetComponentLocation();
+    WorldPrompt->SetWorldRotation(ToPlayer.Rotation());
 }
 
 bool ATMOPWorldItem::TryPickup(UTMOPInventoryComponent* TargetInventory)
