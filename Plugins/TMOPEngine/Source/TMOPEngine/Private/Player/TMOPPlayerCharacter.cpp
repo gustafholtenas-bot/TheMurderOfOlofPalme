@@ -208,8 +208,10 @@ void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
     const FVector2D Axis = Value.Get<FVector2D>();
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
     {
-        VehicleSession->VehicleThrottle(Axis.Y);
-        VehicleSession->VehicleSteering(Axis.X);
+        const float VehicleThrottle = bSwapVehicleMoveAxes ? Axis.X : Axis.Y;
+        const float VehicleSteering = bSwapVehicleMoveAxes ? Axis.Y : Axis.X;
+        VehicleSession->VehicleThrottle(VehicleThrottle);
+        VehicleSession->VehicleSteering(VehicleSteering);
         return;
     }
     const FRotator Rotation(0.0f, Controller != nullptr ? Controller->GetControlRotation().Yaw : 0.0f, 0.0f);

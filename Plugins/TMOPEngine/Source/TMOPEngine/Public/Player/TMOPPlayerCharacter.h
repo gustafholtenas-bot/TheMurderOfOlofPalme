@@ -150,6 +150,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Vehicle")
     TObjectPtr<UInputAction> VehicleHandbrakeAction;
 
+    /** Current IMC_TMOPPlayer sends W/S on X and A/D on Y. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Vehicle")
+    bool bSwapVehicleMoveAxes = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> DropItemAction;
 

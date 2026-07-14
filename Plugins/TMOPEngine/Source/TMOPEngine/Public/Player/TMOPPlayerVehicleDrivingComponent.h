@@ -46,6 +46,11 @@ public:
         meta=(ClampMin="1.0"))
     float HandbrakeDecelerationCmPerSecondSquared = 1500.0f;
 
+    /** Above this speed, opposite throttle brakes before reverse engages. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Response",
+        meta=(ClampMin="0.0"))
+    float DirectionChangeSpeedThresholdCmPerSecond = 25.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Steering",
         meta=(ClampMin="0.0"))
     float MaximumSteeringDegrees = 32.0f;

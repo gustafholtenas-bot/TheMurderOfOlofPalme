@@ -61,16 +61,27 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
 
     const float MaxForward = MaximumForwardSpeedKmh * (100000.0f / 3600.0f);
     const float MaxReverse = MaximumReverseSpeedKmh * (100000.0f / 3600.0f);
-    const float DesiredSpeed = ThrottleInput >= 0.0f
-        ? ThrottleInput * MaxForward : ThrottleInput * MaxReverse;
-    const bool bAccelerating = !FMath::IsNearlyZero(ThrottleInput);
+    float EffectiveThrottle = ThrottleInput;
+    float EffectiveBrake = BrakeInput;
+    const bool bOpposingForward = CurrentSpeedCmPerSecond >
+        DirectionChangeSpeedThresholdCmPerSecond && ThrottleInput < 0.0f;
+    const bool bOpposingReverse = CurrentSpeedCmPerSecond <
+        -DirectionChangeSpeedThresholdCmPerSecond && ThrottleInput > 0.0f;
+    if (bOpposingForward || bOpposingReverse)
+    {
+        EffectiveBrake = FMath::Max(EffectiveBrake, FMath::Abs(ThrottleInput));
+        EffectiveThrottle = 0.0f;
+    }
+    const float DesiredSpeed = EffectiveThrottle >= 0.0f
+        ? EffectiveThrottle * MaxForward : EffectiveThrottle * MaxReverse;
+    const bool bAccelerating = !FMath::IsNearlyZero(EffectiveThrottle);
     const float Deceleration = bHandbrakeInput ? HandbrakeDecelerationCmPerSecondSquared
-        : (BrakeInput > KINDA_SMALL_NUMBER ? BrakeDecelerationCmPerSecondSquared * BrakeInput
+        : (EffectiveBrake > KINDA_SMALL_NUMBER ? BrakeDecelerationCmPerSecondSquared * EffectiveBrake
             : CoastingDecelerationCmPerSecondSquared);
     const float Rate = bAccelerating ? EngineAccelerationCmPerSecondSquared : Deceleration;
     CurrentSpeedCmPerSecond = FMath::FInterpConstantTo(CurrentSpeedCmPerSecond,
         bAccelerating ? DesiredSpeed : 0.0f, DeltaTime, Rate);
-    if (BrakeInput > KINDA_SMALL_NUMBER || bHandbrakeInput)
+    if (EffectiveBrake > KINDA_SMALL_NUMBER || bHandbrakeInput)
         CurrentSpeedCmPerSecond = FMath::FInterpConstantTo(CurrentSpeedCmPerSecond,
             0.0f, DeltaTime, Deceleration);
 
