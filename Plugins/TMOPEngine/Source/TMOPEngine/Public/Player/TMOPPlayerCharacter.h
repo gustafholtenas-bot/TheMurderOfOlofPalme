@@ -16,6 +16,7 @@ class UInputMappingContext;
 class USpringArmComponent;
 class UTMOPAnimationStateComponent;
 class UTMOPPlayerActionComponent;
+class UTMOPQuickInventoryWidget;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
@@ -51,6 +52,16 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<UTMOPPlayerRadioComponent> Radio;
+
+    /** Optional visual class. Empty uses the built-in C++ placeholder menu. */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI")
+    TSubclassOf<UTMOPQuickInventoryWidget> QuickInventoryWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI")
+    bool bCreateQuickInventoryWidget = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI")
+    TObjectPtr<UTMOPQuickInventoryWidget> QuickInventoryWidget;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
@@ -103,6 +114,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     float SprintSpeed = 600.0f;
 
+    /** Speed used while both sprint and extra-sprint modifier keys are held. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
+    float ExtraSprintSpeed = 850.0f;
+
     /** UE 5.8 fallback if an Enhanced Input Started event is consumed elsewhere. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     bool bUseDirectSprintKeyFallback = true;
@@ -110,8 +125,21 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     FKey SprintFallbackKey = EKeys::LeftShift;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
+    FKey ExtraSprintModifierKey = EKeys::LeftControl;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Movement")
     bool bIsSprinting = false;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Movement")
+    bool bIsExtraSprinting = false;
+
+    /** Direct UE 5.8 fallback for IA_QuickInventory, equivalent to sprint fallback. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
+    bool bUseDirectQuickInventoryKeyFallback = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
+    FKey QuickInventoryFallbackKey = EKeys::Tab;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     float CrouchSpeed = 170.0f;
@@ -156,7 +184,8 @@ private:
     void InputQuickInventoryCompleted();
     void InputInventoryNavigate(const FInputActionValue& Value);
     void InputInventoryCycle(const FInputActionValue& Value);
-    void SetSprinting(bool bEnabled);
+    void SetSprinting(bool bEnabled, bool bExtraSprint = false);
 
     bool bRightShoulderCamera = true;
+    bool bQuickInventoryFallbackHeld = false;
 };

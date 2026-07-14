@@ -13,6 +13,8 @@
 #include "Items/TMOPPlayerItemUseComponent.h"
 #include "Player/TMOPPlayerActionComponent.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
+#include "UI/TMOPQuickInventoryWidget.h"
+#include "Blueprint/UserWidget.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
@@ -56,6 +58,22 @@ void ATMOPPlayerCharacter::BeginPlay()
                 LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
                 if (IsValid(DefaultMappingContext.Get()))
                     Subsystem->AddMappingContext(DefaultMappingContext.Get(), 0);
+
+    if (bCreateQuickInventoryWidget)
+    {
+        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        {
+            TSubclassOf<UTMOPQuickInventoryWidget> WidgetClass = QuickInventoryWidgetClass;
+            if (!WidgetClass) WidgetClass = UTMOPQuickInventoryWidget::StaticClass();
+            QuickInventoryWidget = CreateWidget<UTMOPQuickInventoryWidget>(
+                PlayerController, WidgetClass);
+            if (IsValid(QuickInventoryWidget.Get()))
+            {
+                QuickInventoryWidget->InitializeInventoryInput(InventoryInput);
+                QuickInventoryWidget->AddToViewport(50);
+            }
+        }
+    }
 }
 
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -127,20 +145,23 @@ void ATMOPPlayerCharacter::InputJumpEnded() { StopJumping(); }
 
 void ATMOPPlayerCharacter::InputSprintStarted()
 {
-    SetSprinting(true);
+    SetSprinting(true, false);
 }
 
 void ATMOPPlayerCharacter::InputSprintEnded()
 {
-    SetSprinting(false);
+    SetSprinting(false, false);
 }
 
-void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled)
+void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled, const bool bExtraSprint)
 {
     const bool bAllowed = bEnabled && !PlayerActions->bMovementBlocked && !bIsCrouched;
-    if (bIsSprinting == bAllowed) return;
+    const bool bExtraAllowed = bAllowed && bExtraSprint;
+    if (bIsSprinting == bAllowed && bIsExtraSprinting == bExtraAllowed) return;
     bIsSprinting = bAllowed;
-    GetCharacterMovement()->MaxWalkSpeed = bIsSprinting ? SprintSpeed : WalkSpeed;
+    bIsExtraSprinting = bExtraAllowed;
+    GetCharacterMovement()->MaxWalkSpeed = bIsExtraSprinting ? ExtraSprintSpeed
+        : (bIsSprinting ? SprintSpeed : WalkSpeed);
     AnimationState->SetLocomotionStyle(bIsSprinting
         ? ETMOPAnimLocomotionStyle::FastRun : ETMOPAnimLocomotionStyle::Normal);
 }
@@ -205,8 +226,21 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     if (bUseDirectSprintKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
-        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
-        SetSprinting(bKeyHeld);
+        const bool bSprintHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
+        const bool bExtraHeld = bSprintHeld && IsValid(PC)
+            && PC->IsInputKeyDown(ExtraSprintModifierKey);
+        SetSprinting(bSprintHeld, bExtraHeld);
+    }
+    if (bUseDirectQuickInventoryKeyFallback)
+    {
+        const APlayerController* PC = Cast<APlayerController>(Controller);
+        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(QuickInventoryFallbackKey);
+        if (bKeyHeld != bQuickInventoryFallbackHeld)
+        {
+            bQuickInventoryFallbackHeld = bKeyHeld;
+            if (bKeyHeld) InputQuickInventoryStarted();
+            else InputQuickInventoryCompleted();
+        }
     }
     if (!IsValid(CameraBoom.Get())) return;
     const float TargetY = (bRightShoulderCamera ? 1.0f : -1.0f) * ShoulderOffsetCm;
