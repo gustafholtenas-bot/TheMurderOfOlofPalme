@@ -13,12 +13,15 @@
 #include "Items/TMOPPlayerItemUseComponent.h"
 #include "Player/TMOPPlayerActionComponent.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
+#include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPQuickInventoryWidget.h"
+#include "UI/TMOPPauseMenuWidget.h"
 #include "Blueprint/UserWidget.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
     PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bTickEvenWhenPaused = true;
     bUseControllerRotationPitch = false;
     bUseControllerRotationYaw = false;
     bUseControllerRotationRoll = false;
@@ -74,6 +77,22 @@ void ATMOPPlayerCharacter::BeginPlay()
             }
         }
     }
+
+    if (bCreatePauseMenuWidget)
+    {
+        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        {
+            TSubclassOf<UTMOPPauseMenuWidget> WidgetClass = PauseMenuWidgetClass;
+            if (!WidgetClass) WidgetClass = UTMOPPauseMenuWidget::StaticClass();
+            PauseMenuWidget = CreateWidget<UTMOPPauseMenuWidget>(PlayerController, WidgetClass);
+            if (IsValid(PauseMenuWidget.Get()))
+            {
+                PauseMenuWidget->InitializePauseMenu(PlayerController, this);
+                PauseMenuWidget->AddToViewport(100);
+                PauseMenuWidget->SetMenuVisible(false);
+            }
+        }
+    }
 }
 
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -107,6 +126,10 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     if (ShoulderSwapAction)
         Input->BindAction(ShoulderSwapAction, ETriggerEvent::Started, this,
             &ATMOPPlayerCharacter::InputShoulderSwap);
+    // Avoid a double toggle when the same key is also handled by the direct fallback.
+    if (PauseMenuAction && !bUseDirectPauseKeyFallback)
+        Input->BindAction(PauseMenuAction, ETriggerEvent::Started, this,
+            &ATMOPPlayerCharacter::InputTogglePauseMenu);
     if (QuickInventoryAction)
     {
         Input->BindAction(QuickInventoryAction, ETriggerEvent::Started, this,
@@ -220,6 +243,53 @@ void ATMOPPlayerCharacter::InputShoulderSwap()
     bRightShoulderCamera = !bRightShoulderCamera;
 }
 
+void ATMOPPlayerCharacter::InputTogglePauseMenu()
+{
+    TogglePauseMenu();
+}
+
+void ATMOPPlayerCharacter::TogglePauseMenu()
+{
+    SetPauseMenuOpen(!bPauseMenuOpen);
+}
+
+void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
+{
+    if (bPauseMenuOpen == bOpen || !IsValid(PauseMenuWidget.Get())) return;
+
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (bOpen)
+    {
+        bClockWasRunningBeforePause = IsValid(Clock) && Clock->IsClockRunning();
+        if (IsValid(Clock)) Clock->PauseClock();
+    }
+
+    bPauseMenuOpen = bOpen;
+    if (bOpen && IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
+    PauseMenuWidget->SetMenuVisible(bOpen);
+
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (!IsValid(PC)) return;
+    PC->SetPause(bOpen);
+    PC->bShowMouseCursor = bOpen;
+    if (bOpen)
+    {
+        FInputModeGameAndUI Mode;
+        Mode.SetWidgetToFocus(PauseMenuWidget->TakeWidget());
+        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+        PC->SetInputMode(Mode);
+    }
+    else
+    {
+        PC->SetInputMode(FInputModeGameOnly());
+        PC->SetIgnoreMoveInput(false);
+        PC->SetIgnoreLookInput(false);
+        if (IsValid(Clock) && bClockWasRunningBeforePause) Clock->StartClock();
+        bClockWasRunningBeforePause = false;
+    }
+}
+
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
@@ -240,6 +310,16 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             bQuickInventoryFallbackHeld = bKeyHeld;
             if (bKeyHeld) InputQuickInventoryStarted();
             else InputQuickInventoryCompleted();
+        }
+    }
+    if (bUseDirectPauseKeyFallback)
+    {
+        const APlayerController* PC = Cast<APlayerController>(Controller);
+        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(PauseMenuFallbackKey);
+        if (bKeyHeld != bPauseFallbackHeld)
+        {
+            bPauseFallbackHeld = bKeyHeld;
+            if (bKeyHeld) TogglePauseMenu();
         }
     }
     if (!IsValid(CameraBoom.Get())) return;

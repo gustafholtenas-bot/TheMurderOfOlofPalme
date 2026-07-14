@@ -17,6 +17,7 @@ class USpringArmComponent;
 class UTMOPAnimationStateComponent;
 class UTMOPPlayerActionComponent;
 class UTMOPQuickInventoryWidget;
+class UTMOPPauseMenuWidget;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
@@ -63,6 +64,18 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI")
     TObjectPtr<UTMOPQuickInventoryWidget> QuickInventoryWidget;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Pause")
+    TSubclassOf<UTMOPPauseMenuWidget> PauseMenuWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Pause")
+    bool bCreatePauseMenuWidget = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Pause")
+    TObjectPtr<UTMOPPauseMenuWidget> PauseMenuWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Pause")
+    bool bPauseMenuOpen = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
@@ -98,6 +111,15 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> ShoulderSwapAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> PauseMenuAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
+    bool bUseDirectPauseKeyFallback = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
+    FKey PauseMenuFallbackKey = EKeys::Escape;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> QuickInventoryAction;
@@ -165,6 +187,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|Interaction")
     AActor* FindInteractionTarget() const;
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
+    void SetPauseMenuOpen(bool bOpen);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
+    void TogglePauseMenu();
+
 private:
     void InputMove(const FInputActionValue& Value);
     void InputLook(const FInputActionValue& Value);
@@ -180,6 +208,7 @@ private:
     void InputToggleSquat();
     void InputKick();
     void InputShoulderSwap();
+    void InputTogglePauseMenu();
     void InputQuickInventoryStarted();
     void InputQuickInventoryCompleted();
     void InputInventoryNavigate(const FInputActionValue& Value);
@@ -188,4 +217,6 @@ private:
 
     bool bRightShoulderCamera = true;
     bool bQuickInventoryFallbackHeld = false;
+    bool bPauseFallbackHeld = false;
+    bool bClockWasRunningBeforePause = false;
 };
