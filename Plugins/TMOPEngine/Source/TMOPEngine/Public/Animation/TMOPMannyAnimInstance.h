@@ -31,6 +31,25 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement")
     bool bIsAccelerating = false;
 
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement")
+    float VerticalVelocity = 0.0f;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement")
+    float AirTimeSeconds = 0.0f;
+
+    /** True for one animation update immediately after leaving falling state. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement")
+    bool bJustLanded = false;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement")
+    bool bIsCrouching = false;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Actions")
+    bool bIsPunching = false;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Actions")
+    bool bIsKicking = false;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Legacy")
     bool bIsSeated = false;
 
@@ -70,4 +89,6 @@ private:
 
     UPROPERTY(Transient)
     TObjectPtr<class UTMOPAnimationStateComponent> AnimationState;
+
+    bool bWasInAir = false;
 };

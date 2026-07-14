@@ -22,12 +22,15 @@ void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
     {
         Speed = 0.0f; Direction = 0.0f; bIsMoving = false; bIsInAir = false;
         bIsAccelerating = false; bIsSeated = false; bIsStandingStill = true;
+        VerticalVelocity = 0.0f; AirTimeSeconds = 0.0f; bJustLanded = false;
+        bIsCrouching = false; bIsPunching = false; bIsKicking = false;
         return;
     }
     if (!IsValid(AnimationState))
         AnimationState = CharacterOwner->FindComponentByClass<UTMOPAnimationStateComponent>();
 
     const FVector Velocity = CharacterOwner->GetVelocity();
+    VerticalVelocity = Velocity.Z;
     Speed = Velocity.Size2D();
     const FVector LocalVelocity = CharacterOwner->GetActorTransform().InverseTransformVectorNoScale(Velocity);
     Direction = Speed > KINDA_SMALL_NUMBER
@@ -38,7 +41,11 @@ void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
     {
         bIsInAir = Movement->IsFalling();
         bIsAccelerating = Movement->GetCurrentAcceleration().SizeSquared2D() > 1.0f;
+        bIsCrouching = Movement->IsCrouching();
     }
+    bJustLanded = bWasInAir && !bIsInAir;
+    AirTimeSeconds = bIsInAir ? AirTimeSeconds + FMath::Max(0.0f, DeltaSeconds) : 0.0f;
+    bWasInAir = bIsInAir;
     if (IsValid(AnimationState))
     {
         Posture = AnimationState->Posture;
@@ -47,6 +54,8 @@ void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
         ActiveReaction = AnimationState->ActiveReaction;
         WeaponPose = AnimationState->WeaponPose;
         bIsDeadOnGround = AnimationState->bIsDeadOnGround;
+        bIsPunching = ActiveReaction == ETMOPAnimReaction::Punch;
+        bIsKicking = ActiveReaction == ETMOPAnimReaction::Kick;
     }
     else
     {

@@ -22,6 +22,7 @@ class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
 public:
     ATMOPPlayerCharacter();
     virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
@@ -72,6 +73,12 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> SquatAction;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> KickAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
+    TObjectPtr<UInputAction> ShoulderSwapAction;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> QuickInventoryAction;
 
@@ -86,6 +93,24 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     float SprintSpeed = 600.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
+    float CrouchSpeed = 170.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera")
+    float LookYawSensitivity = 0.75f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera")
+    float LookPitchSensitivity = 0.65f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera")
+    bool bInvertLookY = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera")
+    float ShoulderOffsetCm = 65.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera")
+    float ShoulderSwapSpeed = 8.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
     float InteractionDistance = 300.0f;
@@ -106,8 +131,12 @@ private:
     void InputSecondaryActionEnded();
     void InputCancel();
     void InputToggleSquat();
+    void InputKick();
+    void InputShoulderSwap();
     void InputQuickInventoryStarted();
     void InputQuickInventoryCompleted();
     void InputInventoryNavigate(const FInputActionValue& Value);
     void InputInventoryCycle(const FInputActionValue& Value);
+
+    bool bRightShoulderCamera = true;
 };

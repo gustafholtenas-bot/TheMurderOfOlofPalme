@@ -13,18 +13,23 @@
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
-    PrimaryActorTick.bCanEverTick = false;
+    PrimaryActorTick.bCanEverTick = true;
     bUseControllerRotationPitch = false;
     bUseControllerRotationYaw = false;
     bUseControllerRotationRoll = false;
     GetCharacterMovement()->bOrientRotationToMovement = true;
     GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
     GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+    GetCharacterMovement()->MaxWalkSpeedCrouched = CrouchSpeed;
+    GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
     CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
     CameraBoom->SetupAttachment(RootComponent);
     CameraBoom->TargetArmLength = 400.0f;
     CameraBoom->bUsePawnControlRotation = true;
+    CameraBoom->bEnableCameraLag = true;
+    CameraBoom->CameraLagSpeed = 12.0f;
+    CameraBoom->SocketOffset.Y = ShoulderOffsetCm;
     FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
     FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
     FollowCamera->bUsePawnControlRotation = false;
@@ -39,6 +44,7 @@ void ATMOPPlayerCharacter::BeginPlay()
 {
     Super::BeginPlay();
     GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+    GetCharacterMovement()->MaxWalkSpeedCrouched = CrouchSpeed;
     if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
         if (ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer())
             if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
@@ -63,6 +69,7 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     {
         Input->BindAction(SprintAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputSprintStarted);
         Input->BindAction(SprintAction, ETriggerEvent::Completed, this, &ATMOPPlayerCharacter::InputSprintEnded);
+        Input->BindAction(SprintAction, ETriggerEvent::Canceled, this, &ATMOPPlayerCharacter::InputSprintEnded);
     }
     if (InteractAction) Input->BindAction(InteractAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputInteract);
     if (PrimaryAction) Input->BindAction(PrimaryAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputPrimaryAction);
@@ -73,6 +80,10 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     }
     if (CancelAction) Input->BindAction(CancelAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputCancel);
     if (SquatAction) Input->BindAction(SquatAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputToggleSquat);
+    if (KickAction) Input->BindAction(KickAction, ETriggerEvent::Started, this, &ATMOPPlayerCharacter::InputKick);
+    if (ShoulderSwapAction)
+        Input->BindAction(ShoulderSwapAction, ETriggerEvent::Started, this,
+            &ATMOPPlayerCharacter::InputShoulderSwap);
     if (QuickInventoryAction)
     {
         Input->BindAction(QuickInventoryAction, ETriggerEvent::Started, this,
@@ -102,8 +113,8 @@ void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
 void ATMOPPlayerCharacter::InputLook(const FInputActionValue& Value)
 {
     const FVector2D Axis = Value.Get<FVector2D>();
-    AddControllerYawInput(Axis.X);
-    AddControllerPitchInput(Axis.Y);
+    AddControllerYawInput(Axis.X * LookYawSensitivity);
+    AddControllerPitchInput(Axis.Y * LookPitchSensitivity * (bInvertLookY ? -1.0f : 1.0f));
 }
 
 void ATMOPPlayerCharacter::InputJumpStarted() { Jump(); }
@@ -111,7 +122,7 @@ void ATMOPPlayerCharacter::InputJumpEnded() { StopJumping(); }
 
 void ATMOPPlayerCharacter::InputSprintStarted()
 {
-    if (PlayerActions->bMovementBlocked) return;
+    if (PlayerActions->bMovementBlocked || bIsCrouched) return;
     GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
     AnimationState->SetLocomotionStyle(ETMOPAnimLocomotionStyle::FastRun);
 }
@@ -152,9 +163,38 @@ void ATMOPPlayerCharacter::InputCancel() { PlayerActions->CancelCurrentAction();
 
 void ATMOPPlayerCharacter::InputToggleSquat()
 {
-    if (AnimationState->Posture == ETMOPAnimPosture::Squatting)
+    if (bIsCrouched)
+    {
+        UnCrouch();
         AnimationState->SetPostureOverride(ETMOPAnimPosture::Standing);
-    else AnimationState->SetPostureOverride(ETMOPAnimPosture::Squatting);
+    }
+    else
+    {
+        InputSprintEnded();
+        Crouch();
+        AnimationState->SetPostureOverride(ETMOPAnimPosture::Squatting);
+    }
+}
+
+void ATMOPPlayerCharacter::InputKick()
+{
+    if (!Inventory->HasEquippedItem())
+        PlayerActions->StartAction(ETMOPPlayerAction::Kick, FindInteractionTarget(), 0.8f, true);
+}
+
+void ATMOPPlayerCharacter::InputShoulderSwap()
+{
+    bRightShoulderCamera = !bRightShoulderCamera;
+}
+
+void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    if (!IsValid(CameraBoom.Get())) return;
+    const float TargetY = (bRightShoulderCamera ? 1.0f : -1.0f) * ShoulderOffsetCm;
+    FVector Offset = CameraBoom->SocketOffset;
+    Offset.Y = FMath::FInterpTo(Offset.Y, TargetY, DeltaSeconds, ShoulderSwapSpeed);
+    CameraBoom->SocketOffset = Offset;
 }
 
 void ATMOPPlayerCharacter::InputQuickInventoryStarted()
