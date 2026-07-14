@@ -20,6 +20,9 @@ class UTMOPQuickInventoryWidget;
 class UTMOPPauseMenuWidget;
 class ATMOPWorldItem;
 class UTMOPInteractionPromptWidget;
+class UTMOPVehicleTakeoverComponent;
+class UTMOPPlayerVehicleDrivingComponent;
+class UTMOPPlayerVehicleSessionComponent;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
@@ -55,6 +58,15 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<UTMOPPlayerRadioComponent> Radio;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Vehicle")
+    TObjectPtr<UTMOPVehicleTakeoverComponent> VehicleTakeover;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Vehicle")
+    TObjectPtr<UTMOPPlayerVehicleDrivingComponent> VehicleDriving;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Vehicle")
+    TObjectPtr<UTMOPPlayerVehicleSessionComponent> VehicleSession;
 
     /** Optional visual class. Empty uses the built-in C++ placeholder menu. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI")
@@ -131,6 +143,12 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> PauseMenuAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Vehicle")
+    TObjectPtr<UInputAction> VehicleBrakeAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Vehicle")
+    TObjectPtr<UInputAction> VehicleHandbrakeAction;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> DropItemAction;
@@ -239,6 +257,7 @@ public:
 
 private:
     void InputMove(const FInputActionValue& Value);
+    void InputMoveCompleted();
     void InputLook(const FInputActionValue& Value);
     void InputJumpStarted();
     void InputJumpEnded();
@@ -253,6 +272,10 @@ private:
     void InputKick();
     void InputShoulderSwap();
     void InputTogglePauseMenu();
+    void InputVehicleBrakeStarted();
+    void InputVehicleBrakeEnded();
+    void InputVehicleHandbrakeStarted();
+    void InputVehicleHandbrakeEnded();
     void InputDropEquippedItem();
     void InputQuickInventoryStarted();
     void InputQuickInventoryCompleted();

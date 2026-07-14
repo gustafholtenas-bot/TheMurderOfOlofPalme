@@ -14,6 +14,9 @@
 #include "Items/TMOPInteractable.h"
 #include "Items/TMOPWorldItem.h"
 #include "Player/TMOPPlayerActionComponent.h"
+#include "Player/TMOPVehicleTakeoverComponent.h"
+#include "Player/TMOPPlayerVehicleDrivingComponent.h"
+#include "Player/TMOPPlayerVehicleSessionComponent.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPQuickInventoryWidget.h"
@@ -51,6 +54,9 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     InventoryInput = CreateDefaultSubobject<UTMOPInventoryInputComponent>(TEXT("InventoryInput"));
     ItemUse = CreateDefaultSubobject<UTMOPPlayerItemUseComponent>(TEXT("ItemUse"));
     Radio = CreateDefaultSubobject<UTMOPPlayerRadioComponent>(TEXT("Radio"));
+    VehicleTakeover = CreateDefaultSubobject<UTMOPVehicleTakeoverComponent>(TEXT("VehicleTakeover"));
+    VehicleDriving = CreateDefaultSubobject<UTMOPPlayerVehicleDrivingComponent>(TEXT("VehicleDriving"));
+    VehicleSession = CreateDefaultSubobject<UTMOPPlayerVehicleSessionComponent>(TEXT("VehicleSession"));
     WorldItemClass = ATMOPWorldItem::StaticClass();
 }
 
@@ -121,7 +127,12 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     Super::SetupPlayerInputComponent(PlayerInputComponent);
     UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(PlayerInputComponent);
     if (Input == nullptr) return;
-    if (MoveAction) Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATMOPPlayerCharacter::InputMove);
+    if (MoveAction)
+    {
+        Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATMOPPlayerCharacter::InputMove);
+        Input->BindAction(MoveAction, ETriggerEvent::Completed, this, &ATMOPPlayerCharacter::InputMoveCompleted);
+        Input->BindAction(MoveAction, ETriggerEvent::Canceled, this, &ATMOPPlayerCharacter::InputMoveCompleted);
+    }
     if (LookAction) Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &ATMOPPlayerCharacter::InputLook);
     if (JumpAction)
     {
@@ -153,6 +164,24 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     if (PauseMenuAction && !bUseDirectPauseKeyFallback)
         Input->BindAction(PauseMenuAction, ETriggerEvent::Started, this,
             &ATMOPPlayerCharacter::InputTogglePauseMenu);
+    if (VehicleBrakeAction)
+    {
+        Input->BindAction(VehicleBrakeAction, ETriggerEvent::Started, this,
+            &ATMOPPlayerCharacter::InputVehicleBrakeStarted);
+        Input->BindAction(VehicleBrakeAction, ETriggerEvent::Completed, this,
+            &ATMOPPlayerCharacter::InputVehicleBrakeEnded);
+        Input->BindAction(VehicleBrakeAction, ETriggerEvent::Canceled, this,
+            &ATMOPPlayerCharacter::InputVehicleBrakeEnded);
+    }
+    if (VehicleHandbrakeAction)
+    {
+        Input->BindAction(VehicleHandbrakeAction, ETriggerEvent::Started, this,
+            &ATMOPPlayerCharacter::InputVehicleHandbrakeStarted);
+        Input->BindAction(VehicleHandbrakeAction, ETriggerEvent::Completed, this,
+            &ATMOPPlayerCharacter::InputVehicleHandbrakeEnded);
+        Input->BindAction(VehicleHandbrakeAction, ETriggerEvent::Canceled, this,
+            &ATMOPPlayerCharacter::InputVehicleHandbrakeEnded);
+    }
     if (DropItemAction && !bUseDirectDropKeyFallback)
         Input->BindAction(DropItemAction, ETriggerEvent::Started, this,
             &ATMOPPlayerCharacter::InputDropEquippedItem);
@@ -177,9 +206,24 @@ void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
 {
     if (PlayerActions->bMovementBlocked || InventoryInput->bRadialMenuOpen) return;
     const FVector2D Axis = Value.Get<FVector2D>();
+    if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
+    {
+        VehicleSession->VehicleThrottle(Axis.Y);
+        VehicleSession->VehicleSteering(Axis.X);
+        return;
+    }
     const FRotator Rotation(0.0f, Controller != nullptr ? Controller->GetControlRotation().Yaw : 0.0f, 0.0f);
     AddMovementInput(FRotationMatrix(Rotation).GetUnitAxis(EAxis::X), Axis.Y);
     AddMovementInput(FRotationMatrix(Rotation).GetUnitAxis(EAxis::Y), Axis.X);
+}
+
+void ATMOPPlayerCharacter::InputMoveCompleted()
+{
+    if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
+    {
+        VehicleSession->VehicleThrottle(0.0f);
+        VehicleSession->VehicleSteering(0.0f);
+    }
 }
 
 void ATMOPPlayerCharacter::InputLook(const FInputActionValue& Value)
@@ -219,11 +263,22 @@ void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled, const bool bExtraSp
 void ATMOPPlayerCharacter::InputInteract()
 {
     if (InventoryInput->bRadialMenuOpen) return;
+    if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
+    {
+        VehicleSession->ExitVehicle();
+        return;
+    }
     AActor* Target = FindInteractionTarget();
     if (IsValid(Target) && Target->GetClass()->ImplementsInterface(UTMOPInteractable::StaticClass()))
     {
         ITMOPInteractable::Execute_Interact(Target, this);
         return;
+    }
+    if (IsValid(VehicleSession.Get()))
+    {
+        const ETMOPVehicleTakeoverResult Result = VehicleSession->EnterNearestVehicle(true);
+        if (Result == ETMOPVehicleTakeoverResult::SuccessEmptySeat ||
+            Result == ETMOPVehicleTakeoverResult::SuccessDriverRemoved) return;
     }
     PlayerActions->StartAction(ETMOPPlayerAction::Interact, Target, 0.35f, false);
 }
@@ -330,6 +385,26 @@ void ATMOPPlayerCharacter::InputShoulderSwap()
 void ATMOPPlayerCharacter::InputTogglePauseMenu()
 {
     TogglePauseMenu();
+}
+
+void ATMOPPlayerCharacter::InputVehicleBrakeStarted()
+{
+    if (IsValid(VehicleSession.Get())) VehicleSession->VehicleBrake(1.0f);
+}
+
+void ATMOPPlayerCharacter::InputVehicleBrakeEnded()
+{
+    if (IsValid(VehicleSession.Get())) VehicleSession->VehicleBrake(0.0f);
+}
+
+void ATMOPPlayerCharacter::InputVehicleHandbrakeStarted()
+{
+    if (IsValid(VehicleSession.Get())) VehicleSession->VehicleHandbrake(true);
+}
+
+void ATMOPPlayerCharacter::InputVehicleHandbrakeEnded()
+{
+    if (IsValid(VehicleSession.Get())) VehicleSession->VehicleHandbrake(false);
 }
 
 void ATMOPPlayerCharacter::TogglePauseMenu()

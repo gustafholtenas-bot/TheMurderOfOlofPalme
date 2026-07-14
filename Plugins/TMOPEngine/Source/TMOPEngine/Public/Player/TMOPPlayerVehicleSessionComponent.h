@@ -28,7 +28,7 @@ public:
     float ExitCameraBlendSeconds = 0.25f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle Session|Camera")
-    bool bUseVehicleAsCameraTarget = true;
+    bool bUseVehicleAsCameraTarget = false;
 
     UPROPERTY(BlueprintAssignable, Category="TMOP|Vehicle Session|Events")
     FTMOPVehicleSessionSignature OnVehicleSessionStarted;
