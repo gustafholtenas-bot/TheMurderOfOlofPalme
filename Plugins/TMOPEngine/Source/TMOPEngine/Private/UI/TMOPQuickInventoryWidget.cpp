@@ -1,19 +1,36 @@
 #include "UI/TMOPQuickInventoryWidget.h"
 
-#include "Blueprint/WidgetTree.h"
-#include "Components/Border.h"
-#include "Components/CanvasPanel.h"
-#include "Components/CanvasPanelSlot.h"
-#include "Components/TextBlock.h"
-#include "Components/VerticalBox.h"
-#include "Components/VerticalBoxSlot.h"
 #include "Inventory/TMOPItemDefinition.h"
+#include "Widgets/Images/SImage.h"
+#include "Widgets/Layout/SBorder.h"
+#include "Widgets/Layout/SBox.h"
+#include "Widgets/SOverlay.h"
+#include "Widgets/Layout/SUniformGridPanel.h"
+#include "Widgets/SBoxPanel.h"
+#include "Widgets/Text/STextBlock.h"
 
-void UTMOPQuickInventoryWidget::NativeOnInitialized()
+TSharedRef<SWidget> UTMOPQuickInventoryWidget::RebuildWidget()
 {
-    Super::NativeOnInitialized();
-    BuildVisualTree();
-    SetVisibility(ESlateVisibility::Collapsed);
+    return SNew(SOverlay)
+        + SOverlay::Slot()
+        [ SNew(SBorder).BorderBackgroundColor(FLinearColor(0.0f, 0.0f, 0.0f, 0.55f)) ]
+        + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center)
+        [
+            SNew(SBox).WidthOverride(760.0f).HeightOverride(760.0f)
+            [
+                SNew(SOverlay)
+                + SOverlay::Slot()
+                [ SAssignNew(RadialGrid, SUniformGridPanel).SlotPadding(FMargin(12.0f)) ]
+                + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center)
+                [
+                    SNew(SBorder).Padding(FMargin(28.0f, 18.0f))
+                    .BorderBackgroundColor(FLinearColor(0.02f, 0.025f, 0.04f, 0.96f))
+                    [ SAssignNew(CenterLabel, STextBlock)
+                        .Text(NSLOCTEXT("TMOP", "InventoryCenter", "INVENTORY"))
+                        .Justification(ETextJustify::Center) ]
+                ]
+            ]
+        ];
 }
 
 void UTMOPQuickInventoryWidget::InitializeInventoryInput(
@@ -49,27 +66,6 @@ void UTMOPQuickInventoryWidget::NativeDestruct()
     Super::NativeDestruct();
 }
 
-void UTMOPQuickInventoryWidget::BuildVisualTree()
-{
-    if (WidgetTree == nullptr || WidgetTree->RootWidget != nullptr) return;
-    UCanvasPanel* Root = WidgetTree->ConstructWidget<UCanvasPanel>(
-        UCanvasPanel::StaticClass(), TEXT("QuickInventoryRoot"));
-    WidgetTree->RootWidget = Root;
-
-    MenuPanel = WidgetTree->ConstructWidget<UBorder>(UBorder::StaticClass(),
-        TEXT("QuickInventoryPanel"));
-    MenuPanel->SetBrushColor(FLinearColor(0.015f, 0.02f, 0.03f, 0.88f));
-    MenuPanel->SetPadding(FMargin(38.0f, 26.0f));
-    UCanvasPanelSlot* PanelSlot = Root->AddChildToCanvas(MenuPanel);
-    PanelSlot->SetAnchors(FAnchors(0.5f, 0.5f));
-    PanelSlot->SetAlignment(FVector2D(0.5f, 0.5f));
-    PanelSlot->SetAutoSize(true);
-
-    EntryBox = WidgetTree->ConstructWidget<UVerticalBox>(UVerticalBox::StaticClass(),
-        TEXT("QuickInventoryEntries"));
-    MenuPanel->SetContent(EntryBox);
-}
-
 void UTMOPQuickInventoryWidget::HandleMenuStateChanged(const bool bOpen,
     const int32 SelectedIndex, UTMOPItemDefinition* SelectedItem)
 {
@@ -87,35 +83,66 @@ void UTMOPQuickInventoryWidget::HandleSelectionChanged(const int32 SelectedIndex
     RebuildEntries();
 }
 
+FText UTMOPQuickInventoryWidget::GetEntryName(const int32 Index) const
+{
+    if (!IsValid(InventoryInput.Get())) return FText::GetEmpty();
+    if (InventoryInput->RadialItems.IsValidIndex(Index))
+    {
+        const UTMOPItemDefinition* Item = InventoryInput->RadialItems[Index].Get();
+        return IsValid(Item) ? Item->DisplayName : FText::FromString(TEXT("?"));
+    }
+    return EmptyHandText;
+}
+
 void UTMOPQuickInventoryWidget::RebuildEntries()
 {
-    if (!IsValid(EntryBox.Get()) || !IsValid(InventoryInput.Get())) return;
-    EntryBox->ClearChildren();
+    if (!RadialGrid.IsValid() || !IsValid(InventoryInput.Get())) return;
+    RadialGrid->ClearChildren();
+    IconBrushes.Reset();
 
-    UTextBlock* Title = WidgetTree->ConstructWidget<UTextBlock>(
-        UTextBlock::StaticClass());
-    Title->SetText(NSLOCTEXT("TMOP", "QuickInventoryTitle", "INVENTORY"));
-    Title->SetColorAndOpacity(FSlateColor(SelectedColor));
-    Title->SetJustification(ETextJustify::Center);
-    EntryBox->AddChildToVerticalBox(Title)->SetPadding(FMargin(8.0f, 4.0f, 8.0f, 18.0f));
-
+    static const FIntPoint Positions[8] = {
+        {1,0}, {2,0}, {2,1}, {2,2}, {1,2}, {0,2}, {0,1}, {0,0}
+    };
     const int32 ItemCount = InventoryInput->RadialItems.Num();
-    const int32 EntryCount = ItemCount + (InventoryInput->bIncludeEmptyHand ? 1 : 0);
+    const int32 EntryCount = FMath::Min(8,
+        ItemCount + (InventoryInput->bIncludeEmptyHand ? 1 : 0));
+
     for (int32 Index = 0; Index < EntryCount; ++Index)
     {
-        const bool bEmptyHand = Index == ItemCount;
         const bool bSelected = Index == InventoryInput->SelectedRadialIndex;
-        const UTMOPItemDefinition* Item = InventoryInput->RadialItems.IsValidIndex(Index)
+        const bool bItem = InventoryInput->RadialItems.IsValidIndex(Index);
+        const UTMOPItemDefinition* Item = bItem
             ? InventoryInput->RadialItems[Index].Get() : nullptr;
-        const FText Name = bEmptyHand ? EmptyHandText
-            : (IsValid(Item) ? Item->DisplayName : FText::FromString(TEXT("?")));
-        const FString Prefix = bSelected ? TEXT(">  ") : TEXT("   ");
+        TSharedPtr<FSlateBrush> Brush = MakeShared<FSlateBrush>();
+        Brush->ImageSize = FVector2D(72.0f, 72.0f);
+        if (IsValid(Item) && IsValid(Item->Icon)) Brush->SetResourceObject(Item->Icon);
+        IconBrushes.Add(Brush);
 
-        UTextBlock* Entry = WidgetTree->ConstructWidget<UTextBlock>(
-            UTextBlock::StaticClass());
-        Entry->SetText(FText::FromString(Prefix + Name.ToString()));
-        Entry->SetColorAndOpacity(FSlateColor(bSelected ? SelectedColor : NormalColor));
-        Entry->SetJustification(ETextJustify::Center);
-        EntryBox->AddChildToVerticalBox(Entry)->SetPadding(FMargin(10.0f, 6.0f));
+        RadialGrid->AddSlot(Positions[Index].X, Positions[Index].Y)
+        [
+            SNew(SBorder).Padding(10.0f)
+            .BorderBackgroundColor(bSelected
+                ? FLinearColor(0.22f, 0.13f, 0.02f, 0.96f)
+                : FLinearColor(0.025f, 0.03f, 0.045f, 0.9f))
+            [
+                SNew(SVerticalBox)
+                + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+                [ SNew(SBox).WidthOverride(72.0f).HeightOverride(72.0f)
+                    [ SNew(SImage).Image(Brush.Get()) ] ]
+                + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(3.0f)
+                [ SNew(STextBlock).Text(GetEntryName(Index))
+                    .ColorAndOpacity(bSelected ? SelectedColor : NormalColor)
+                    .Justification(ETextJustify::Center) ]
+            ]
+        ];
+    }
+
+    if (CenterLabel.IsValid())
+    {
+        const int32 Selected = InventoryInput->SelectedRadialIndex;
+        CenterLabel->SetText(Selected == INDEX_NONE
+            ? NSLOCTEXT("TMOP", "InventoryChoose", "Välj föremål")
+            : GetEntryName(Selected));
+        CenterLabel->SetColorAndOpacity(FSlateColor(SelectedColor));
     }
 }

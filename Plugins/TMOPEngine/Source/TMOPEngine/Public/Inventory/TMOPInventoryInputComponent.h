@@ -78,6 +78,12 @@ public:
     void UpdateRadialSelection(FVector2D Direction);
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Inventory Input|Radial")
+    void SelectRadialIndex(int32 NewIndex);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Inventory Input|Radial")
+    void StepRadialSelection(int32 Direction);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Inventory Input|Radial")
     bool ConfirmRadialSelection();
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Inventory Input|Radial")

@@ -18,6 +18,8 @@ class UTMOPAnimationStateComponent;
 class UTMOPPlayerActionComponent;
 class UTMOPQuickInventoryWidget;
 class UTMOPPauseMenuWidget;
+class ATMOPWorldItem;
+class UTMOPInteractionPromptWidget;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
@@ -76,6 +78,15 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Pause")
     bool bPauseMenuOpen = false;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Interaction")
+    TSubclassOf<UTMOPInteractionPromptWidget> InteractionPromptWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Interaction")
+    bool bCreateInteractionPromptWidget = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Interaction")
+    TObjectPtr<UTMOPInteractionPromptWidget> InteractionPromptWidget;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
@@ -114,6 +125,15 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> PauseMenuAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
+    TObjectPtr<UInputAction> DropItemAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
+    bool bUseDirectDropKeyFallback = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
+    FKey DropItemFallbackKey = EKeys::G;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
     bool bUseDirectPauseKeyFallback = true;
@@ -163,6 +183,12 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
     FKey QuickInventoryFallbackKey = EKeys::Tab;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
+    FKey QuickInventoryPreviousKey = EKeys::Q;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
+    FKey QuickInventoryNextKey = EKeys::E;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     float CrouchSpeed = 170.0f;
 
@@ -184,6 +210,12 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
     float InteractionDistance = 300.0f;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Inventory|Drop")
+    TSubclassOf<ATMOPWorldItem> WorldItemClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Inventory|Drop")
+    float DropForwardDistance = 110.0f;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|Interaction")
     AActor* FindInteractionTarget() const;
 
@@ -192,6 +224,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
     void TogglePauseMenu();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|Inventory")
+    bool DropEquippedItem();
 
 private:
     void InputMove(const FInputActionValue& Value);
@@ -209,14 +244,19 @@ private:
     void InputKick();
     void InputShoulderSwap();
     void InputTogglePauseMenu();
+    void InputDropEquippedItem();
     void InputQuickInventoryStarted();
     void InputQuickInventoryCompleted();
     void InputInventoryNavigate(const FInputActionValue& Value);
     void InputInventoryCycle(const FInputActionValue& Value);
+    void FinishQuickInventory(bool bConfirm);
+    void UpdateQuickInventoryPointer();
+    void UpdateInteractionPrompt();
     void SetSprinting(bool bEnabled, bool bExtraSprint = false);
 
     bool bRightShoulderCamera = true;
     bool bQuickInventoryFallbackHeld = false;
     bool bPauseFallbackHeld = false;
     bool bClockWasRunningBeforePause = false;
+    bool bDropFallbackHeld = false;
 };

@@ -123,6 +123,12 @@ int32 UTMOPInventoryComponent::GetQuantity(UTMOPItemDefinition* Item) const
     return Index != INDEX_NONE ? Items[Index].Quantity : 0;
 }
 
+int32 UTMOPInventoryComponent::GetRemainingCapacity(UTMOPItemDefinition* Item) const
+{
+    if (!IsValid(Item)) return 0;
+    return FMath::Max(0, FMath::Max(1, Item->MaximumStack) - GetQuantity(Item));
+}
+
 UTMOPItemDefinition* UTMOPInventoryComponent::FindItemById(const FName ItemId) const
 {
     for (const FTMOPInventoryEntry& Entry : Items)

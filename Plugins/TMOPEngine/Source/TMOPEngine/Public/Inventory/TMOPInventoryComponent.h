@@ -83,6 +83,9 @@ public:
     int32 GetQuantity(UTMOPItemDefinition* Item) const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|Inventory")
+    int32 GetRemainingCapacity(UTMOPItemDefinition* Item) const;
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Inventory")
     UTMOPItemDefinition* FindItemById(FName ItemId) const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|Inventory")

@@ -11,11 +11,14 @@
 #include "Inventory/TMOPInventoryComponent.h"
 #include "Inventory/TMOPInventoryInputComponent.h"
 #include "Items/TMOPPlayerItemUseComponent.h"
+#include "Items/TMOPInteractable.h"
+#include "Items/TMOPWorldItem.h"
 #include "Player/TMOPPlayerActionComponent.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPQuickInventoryWidget.h"
 #include "UI/TMOPPauseMenuWidget.h"
+#include "UI/TMOPInteractionPromptWidget.h"
 #include "Blueprint/UserWidget.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
@@ -48,6 +51,7 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     InventoryInput = CreateDefaultSubobject<UTMOPInventoryInputComponent>(TEXT("InventoryInput"));
     ItemUse = CreateDefaultSubobject<UTMOPPlayerItemUseComponent>(TEXT("ItemUse"));
     Radio = CreateDefaultSubobject<UTMOPPlayerRadioComponent>(TEXT("Radio"));
+    WorldItemClass = ATMOPWorldItem::StaticClass();
 }
 
 void ATMOPPlayerCharacter::BeginPlay()
@@ -74,6 +78,7 @@ void ATMOPPlayerCharacter::BeginPlay()
             {
                 QuickInventoryWidget->InitializeInventoryInput(InventoryInput);
                 QuickInventoryWidget->AddToViewport(50);
+                QuickInventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
             }
         }
     }
@@ -90,6 +95,22 @@ void ATMOPPlayerCharacter::BeginPlay()
                 PauseMenuWidget->InitializePauseMenu(PlayerController, this);
                 PauseMenuWidget->AddToViewport(100);
                 PauseMenuWidget->SetMenuVisible(false);
+            }
+        }
+    }
+
+    if (bCreateInteractionPromptWidget)
+    {
+        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        {
+            TSubclassOf<UTMOPInteractionPromptWidget> WidgetClass = InteractionPromptWidgetClass;
+            if (!WidgetClass) WidgetClass = UTMOPInteractionPromptWidget::StaticClass();
+            InteractionPromptWidget = CreateWidget<UTMOPInteractionPromptWidget>(
+                PlayerController, WidgetClass);
+            if (IsValid(InteractionPromptWidget.Get()))
+            {
+                InteractionPromptWidget->AddToViewport(40);
+                InteractionPromptWidget->SetPromptText(FText::GetEmpty());
             }
         }
     }
@@ -130,6 +151,9 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     if (PauseMenuAction && !bUseDirectPauseKeyFallback)
         Input->BindAction(PauseMenuAction, ETriggerEvent::Started, this,
             &ATMOPPlayerCharacter::InputTogglePauseMenu);
+    if (DropItemAction && !bUseDirectDropKeyFallback)
+        Input->BindAction(DropItemAction, ETriggerEvent::Started, this,
+            &ATMOPPlayerCharacter::InputDropEquippedItem);
     if (QuickInventoryAction)
     {
         Input->BindAction(QuickInventoryAction, ETriggerEvent::Started, this,
@@ -149,7 +173,7 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
 {
-    if (PlayerActions->bMovementBlocked) return;
+    if (PlayerActions->bMovementBlocked || InventoryInput->bRadialMenuOpen) return;
     const FVector2D Axis = Value.Get<FVector2D>();
     const FRotator Rotation(0.0f, Controller != nullptr ? Controller->GetControlRotation().Yaw : 0.0f, 0.0f);
     AddMovementInput(FRotationMatrix(Rotation).GetUnitAxis(EAxis::X), Axis.Y);
@@ -158,6 +182,7 @@ void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
 
 void ATMOPPlayerCharacter::InputLook(const FInputActionValue& Value)
 {
+    if (InventoryInput->bRadialMenuOpen) return;
     const FVector2D Axis = Value.Get<FVector2D>();
     AddControllerYawInput(Axis.X * LookYawSensitivity);
     AddControllerPitchInput(Axis.Y * LookPitchSensitivity * (bInvertLookY ? -1.0f : 1.0f));
@@ -191,11 +216,56 @@ void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled, const bool bExtraSp
 
 void ATMOPPlayerCharacter::InputInteract()
 {
-    PlayerActions->StartAction(ETMOPPlayerAction::Interact, FindInteractionTarget(), 0.35f, false);
+    if (InventoryInput->bRadialMenuOpen) return;
+    AActor* Target = FindInteractionTarget();
+    if (IsValid(Target) && Target->GetClass()->ImplementsInterface(UTMOPInteractable::StaticClass()))
+    {
+        ITMOPInteractable::Execute_Interact(Target, this);
+        return;
+    }
+    PlayerActions->StartAction(ETMOPPlayerAction::Interact, Target, 0.35f, false);
+}
+
+void ATMOPPlayerCharacter::InputDropEquippedItem()
+{
+    DropEquippedItem();
+}
+
+bool ATMOPPlayerCharacter::DropEquippedItem()
+{
+    if (bPauseMenuOpen || InventoryInput->bRadialMenuOpen || !IsValid(Inventory.Get()))
+        return false;
+    UTMOPItemDefinition* Item = Inventory->EquippedItem.Get();
+    if (!IsValid(Item) || !Item->bCanDrop || !WorldItemClass || GetWorld() == nullptr)
+        return false;
+
+    FVector DropLocation = GetActorLocation() + GetActorForwardVector() * DropForwardDistance;
+    FHitResult GroundHit;
+    FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPDropGround), false, this);
+    const FVector TraceStart = DropLocation + FVector(0.0f, 0.0f, 80.0f);
+    const FVector TraceEnd = DropLocation - FVector(0.0f, 0.0f, 260.0f);
+    if (GetWorld()->LineTraceSingleByChannel(GroundHit, TraceStart, TraceEnd,
+        ECC_Visibility, Params))
+        DropLocation = GroundHit.ImpactPoint + FVector(0.0f, 0.0f, 25.0f);
+
+    const FTransform SpawnTransform(GetActorRotation(), DropLocation);
+    ATMOPWorldItem* Dropped = GetWorld()->SpawnActorDeferred<ATMOPWorldItem>(
+        WorldItemClass, SpawnTransform, this, this,
+        ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+    if (!IsValid(Dropped)) return false;
+    Dropped->ConfigureWorldItem(Item, 1);
+    Dropped->FinishSpawning(SpawnTransform);
+    if (!Inventory->RemoveItem(Item, 1))
+    {
+        Dropped->Destroy();
+        return false;
+    }
+    return true;
 }
 
 void ATMOPPlayerCharacter::InputPrimaryAction()
 {
+    if (InventoryInput->bRadialMenuOpen) return;
     if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Primary,
         ETMOPItemInputPhase::Started)) return;
     PlayerActions->StartAction(ETMOPPlayerAction::Punch, FindInteractionTarget(), 0.7f, true);
@@ -203,6 +273,7 @@ void ATMOPPlayerCharacter::InputPrimaryAction()
 
 void ATMOPPlayerCharacter::InputSecondaryActionStarted()
 {
+    if (InventoryInput->bRadialMenuOpen) return;
     if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Secondary,
         ETMOPItemInputPhase::Started)) return;
     PlayerActions->StartAction(ETMOPPlayerAction::AimGun, FindInteractionTarget(), -1.0f, false);
@@ -215,10 +286,19 @@ void ATMOPPlayerCharacter::InputSecondaryActionEnded()
     if (PlayerActions->CurrentAction == ETMOPPlayerAction::AimGun) PlayerActions->CompleteCurrentAction();
 }
 
-void ATMOPPlayerCharacter::InputCancel() { PlayerActions->CancelCurrentAction(); }
+void ATMOPPlayerCharacter::InputCancel()
+{
+    if (InventoryInput->bRadialMenuOpen)
+    {
+        FinishQuickInventory(false);
+        return;
+    }
+    PlayerActions->CancelCurrentAction();
+}
 
 void ATMOPPlayerCharacter::InputToggleSquat()
 {
+    if (InventoryInput->bRadialMenuOpen) return;
     if (bIsCrouched)
     {
         UnCrouch();
@@ -234,12 +314,14 @@ void ATMOPPlayerCharacter::InputToggleSquat()
 
 void ATMOPPlayerCharacter::InputKick()
 {
+    if (InventoryInput->bRadialMenuOpen) return;
     if (!Inventory->HasEquippedItem())
         PlayerActions->StartAction(ETMOPPlayerAction::Kick, FindInteractionTarget(), 0.8f, true);
 }
 
 void ATMOPPlayerCharacter::InputShoulderSwap()
 {
+    if (InventoryInput->bRadialMenuOpen) return;
     bRightShoulderCamera = !bRightShoulderCamera;
 }
 
@@ -319,9 +401,25 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
         if (bKeyHeld != bPauseFallbackHeld)
         {
             bPauseFallbackHeld = bKeyHeld;
-            if (bKeyHeld) TogglePauseMenu();
+            if (bKeyHeld)
+            {
+                if (InventoryInput->bRadialMenuOpen) FinishQuickInventory(false);
+                else TogglePauseMenu();
+            }
         }
     }
+    if (bUseDirectDropKeyFallback)
+    {
+        const APlayerController* PC = Cast<APlayerController>(Controller);
+        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(DropItemFallbackKey);
+        if (bKeyHeld != bDropFallbackHeld)
+        {
+            bDropFallbackHeld = bKeyHeld;
+            if (bKeyHeld) DropEquippedItem();
+        }
+    }
+    if (InventoryInput->bRadialMenuOpen) UpdateQuickInventoryPointer();
+    UpdateInteractionPrompt();
     if (!IsValid(CameraBoom.Get())) return;
     const float TargetY = (bRightShoulderCamera ? 1.0f : -1.0f) * ShoulderOffsetCm;
     FVector Offset = CameraBoom->SocketOffset;
@@ -329,14 +427,80 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     CameraBoom->SocketOffset = Offset;
 }
 
+void ATMOPPlayerCharacter::UpdateInteractionPrompt()
+{
+    if (!IsValid(InteractionPromptWidget.Get())) return;
+    FText Prompt;
+    if (!bPauseMenuOpen && !InventoryInput->bRadialMenuOpen)
+    {
+        AActor* Target = FindInteractionTarget();
+        if (IsValid(Target) && Target->GetClass()->ImplementsInterface(
+            UTMOPInteractable::StaticClass()))
+            Prompt = ITMOPInteractable::Execute_GetInteractionText(Target);
+    }
+    InteractionPromptWidget->SetPromptText(Prompt);
+}
+
 void ATMOPPlayerCharacter::InputQuickInventoryStarted()
 {
-    InventoryInput->OpenRadialMenu();
+    if (bPauseMenuOpen || !InventoryInput->OpenRadialMenu()) return;
+    SetSprinting(false, false);
+    GetCharacterMovement()->StopMovementImmediately();
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        int32 SizeX = 0, SizeY = 0;
+        PC->GetViewportSize(SizeX, SizeY);
+        PC->SetMouseLocation(SizeX / 2, SizeY / 2);
+        PC->bShowMouseCursor = true;
+        FInputModeGameAndUI Mode;
+        if (IsValid(QuickInventoryWidget.Get()))
+            Mode.SetWidgetToFocus(QuickInventoryWidget->TakeWidget());
+        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
+        PC->SetInputMode(Mode);
+    }
 }
 
 void ATMOPPlayerCharacter::InputQuickInventoryCompleted()
 {
-    InventoryInput->ConfirmRadialSelection();
+    FinishQuickInventory(true);
+}
+
+void ATMOPPlayerCharacter::FinishQuickInventory(const bool bConfirm)
+{
+    if (!InventoryInput->bRadialMenuOpen) return;
+    if (bConfirm) InventoryInput->ConfirmRadialSelection();
+    else InventoryInput->CancelRadialMenu();
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        if (!bPauseMenuOpen)
+        {
+            PC->bShowMouseCursor = false;
+            PC->SetInputMode(FInputModeGameOnly());
+        }
+    }
+}
+
+void ATMOPPlayerCharacter::UpdateQuickInventoryPointer()
+{
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (!IsValid(PC)) return;
+
+    int32 SizeX = 0, SizeY = 0;
+    float MouseX = 0.0f, MouseY = 0.0f;
+    PC->GetViewportSize(SizeX, SizeY);
+    if (PC->GetMousePosition(MouseX, MouseY) && SizeX > 0 && SizeY > 0)
+    {
+        const FVector2D Direction(MouseX - SizeX * 0.5f, SizeY * 0.5f - MouseY);
+        const float Normalizer = FMath::Max(1.0f, FMath::Min(SizeX, SizeY) * 0.22f);
+        InventoryInput->UpdateRadialSelection(Direction / Normalizer);
+    }
+
+    if (PC->WasInputKeyJustPressed(QuickInventoryPreviousKey)
+        || PC->WasInputKeyJustPressed(EKeys::MouseScrollDown))
+        InventoryInput->StepRadialSelection(-1);
+    if (PC->WasInputKeyJustPressed(QuickInventoryNextKey)
+        || PC->WasInputKeyJustPressed(EKeys::MouseScrollUp))
+        InventoryInput->StepRadialSelection(1);
 }
 
 void ATMOPPlayerCharacter::InputInventoryNavigate(const FInputActionValue& Value)

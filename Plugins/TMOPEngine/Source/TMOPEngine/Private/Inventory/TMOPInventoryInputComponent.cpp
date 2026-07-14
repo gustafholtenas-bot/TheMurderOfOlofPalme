@@ -23,13 +23,16 @@ void UTMOPInventoryInputComponent::RefreshRadialItems()
 {
     RadialItems.Reset();
     if (!IsValid(Inventory.Get())) return;
+    const int32 ItemLimit = FMath::Max(0,
+        MaximumRadialItems - (bIncludeEmptyHand ? 1 : 0));
+    if (ItemLimit == 0) return;
     for (const FTMOPInventoryEntry& Entry : Inventory->Items)
     {
         UTMOPItemDefinition* Item = Entry.Item.Get();
         if (IsValid(Item) && (Item->bCanEquip || Item->bOpensMenuInsteadOfEquipping))
         {
             RadialItems.Add(Item);
-            if (RadialItems.Num() >= MaximumRadialItems) break;
+            if (RadialItems.Num() >= ItemLimit) break;
         }
     }
 }
@@ -56,9 +59,25 @@ void UTMOPInventoryInputComponent::UpdateRadialSelection(const FVector2D Directi
     const float SegmentDegrees = 360.0f / static_cast<float>(SegmentCount);
     const int32 NewIndex = FMath::FloorToInt((Degrees + SegmentDegrees * 0.5f) /
         SegmentDegrees) % SegmentCount;
-    if (NewIndex == SelectedRadialIndex) return;
-    SelectedRadialIndex = NewIndex;
+    SelectRadialIndex(NewIndex);
+}
+
+void UTMOPInventoryInputComponent::SelectRadialIndex(const int32 NewIndex)
+{
+    if (!bRadialMenuOpen) return;
+    const int32 Count = RadialItems.Num() + (bIncludeEmptyHand ? 1 : 0);
+    if (Count <= 0) return;
+    const int32 Wrapped = ((NewIndex % Count) + Count) % Count;
+    if (Wrapped == SelectedRadialIndex) return;
+    SelectedRadialIndex = Wrapped;
     OnRadialSelectionChanged.Broadcast(SelectedRadialIndex, GetSelectedItem());
+}
+
+void UTMOPInventoryInputComponent::StepRadialSelection(const int32 Direction)
+{
+    if (!bRadialMenuOpen || Direction == 0) return;
+    const int32 Start = SelectedRadialIndex == INDEX_NONE ? 0 : SelectedRadialIndex;
+    SelectRadialIndex(Start + (Direction > 0 ? 1 : -1));
 }
 
 UTMOPItemDefinition* UTMOPInventoryInputComponent::GetSelectedItem() const
