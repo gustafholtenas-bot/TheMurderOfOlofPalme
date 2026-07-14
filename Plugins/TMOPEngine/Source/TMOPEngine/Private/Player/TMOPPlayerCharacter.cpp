@@ -6,10 +6,13 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Inventory/TMOPInventoryComponent.h"
 #include "Inventory/TMOPInventoryInputComponent.h"
+#include "Items/TMOPPlayerItemUseComponent.h"
 #include "Player/TMOPPlayerActionComponent.h"
+#include "Radio/TMOPPlayerRadioComponent.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
@@ -38,6 +41,8 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     PlayerActions = CreateDefaultSubobject<UTMOPPlayerActionComponent>(TEXT("PlayerActions"));
     Inventory = CreateDefaultSubobject<UTMOPInventoryComponent>(TEXT("Inventory"));
     InventoryInput = CreateDefaultSubobject<UTMOPInventoryInputComponent>(TEXT("InventoryInput"));
+    ItemUse = CreateDefaultSubobject<UTMOPPlayerItemUseComponent>(TEXT("ItemUse"));
+    Radio = CreateDefaultSubobject<UTMOPPlayerRadioComponent>(TEXT("Radio"));
 }
 
 void ATMOPPlayerCharacter::BeginPlay()
@@ -122,15 +127,22 @@ void ATMOPPlayerCharacter::InputJumpEnded() { StopJumping(); }
 
 void ATMOPPlayerCharacter::InputSprintStarted()
 {
-    if (PlayerActions->bMovementBlocked || bIsCrouched) return;
-    GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
-    AnimationState->SetLocomotionStyle(ETMOPAnimLocomotionStyle::FastRun);
+    SetSprinting(true);
 }
 
 void ATMOPPlayerCharacter::InputSprintEnded()
 {
-    GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
-    AnimationState->SetLocomotionStyle(ETMOPAnimLocomotionStyle::Normal);
+    SetSprinting(false);
+}
+
+void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled)
+{
+    const bool bAllowed = bEnabled && !PlayerActions->bMovementBlocked && !bIsCrouched;
+    if (bIsSprinting == bAllowed) return;
+    bIsSprinting = bAllowed;
+    GetCharacterMovement()->MaxWalkSpeed = bIsSprinting ? SprintSpeed : WalkSpeed;
+    AnimationState->SetLocomotionStyle(bIsSprinting
+        ? ETMOPAnimLocomotionStyle::FastRun : ETMOPAnimLocomotionStyle::Normal);
 }
 
 void ATMOPPlayerCharacter::InputInteract()
@@ -190,6 +202,12 @@ void ATMOPPlayerCharacter::InputShoulderSwap()
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if (bUseDirectSprintKeyFallback)
+    {
+        const APlayerController* PC = Cast<APlayerController>(Controller);
+        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
+        SetSprinting(bKeyHeld);
+    }
     if (!IsValid(CameraBoom.Get())) return;
     const float TargetY = (bRightShoulderCamera ? 1.0f : -1.0f) * ShoulderOffsetCm;
     FVector Offset = CameraBoom->SocketOffset;

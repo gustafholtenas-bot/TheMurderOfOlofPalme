@@ -3,8 +3,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "InputCoreTypes.h"
 #include "Inventory/TMOPInventoryComponent.h"
 #include "Inventory/TMOPInventoryInputComponent.h"
+#include "Items/TMOPPlayerItemUseComponent.h"
+#include "Radio/TMOPPlayerRadioComponent.h"
 #include "TMOPPlayerCharacter.generated.h"
 
 class UCameraComponent;
@@ -42,6 +45,12 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<UTMOPInventoryInputComponent> InventoryInput;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<UTMOPPlayerItemUseComponent> ItemUse;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
+    TObjectPtr<UTMOPPlayerRadioComponent> Radio;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
@@ -94,6 +103,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     float SprintSpeed = 600.0f;
 
+    /** UE 5.8 fallback if an Enhanced Input Started event is consumed elsewhere. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
+    bool bUseDirectSprintKeyFallback = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
+    FKey SprintFallbackKey = EKeys::LeftShift;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Movement")
+    bool bIsSprinting = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Movement")
     float CrouchSpeed = 170.0f;
 
@@ -137,6 +156,7 @@ private:
     void InputQuickInventoryCompleted();
     void InputInventoryNavigate(const FInputActionValue& Value);
     void InputInventoryCycle(const FInputActionValue& Value);
+    void SetSprinting(bool bEnabled);
 
     bool bRightShoulderCamera = true;
 };
