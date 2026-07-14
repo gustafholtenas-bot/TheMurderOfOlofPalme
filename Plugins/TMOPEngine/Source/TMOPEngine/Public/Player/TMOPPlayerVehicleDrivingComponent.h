@@ -65,6 +65,24 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Collision")
     bool bSweepMovement = true;
 
+    /** Kinematic road contact. Do not enable Simulate Physics on the body mesh. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground")
+    bool bFollowGround = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.0"))
+    float GroundTraceUpCm = 180.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.0"))
+    float GroundTraceDownCm = 350.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground")
+    float GroundClearanceCm = 8.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground")
+    bool bAlignToGroundNormal = true;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player Driving|Runtime")
     TObjectPtr<ATMOPVehicleBase> DrivenVehicle;
 

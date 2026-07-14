@@ -87,8 +87,30 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
     FRotator Rotation = DrivenVehicle->GetActorRotation();
     Rotation.Yaw += FMath::RadiansToDegrees(YawDeltaRadians);
     const FVector DeltaLocation = Rotation.Vector() * CurrentSpeedCmPerSecond * DeltaTime;
+    FVector DesiredLocation = DrivenVehicle->GetActorLocation() + DeltaLocation;
+    if (bFollowGround && GetWorld() != nullptr)
+    {
+        FHitResult GroundHit;
+        FCollisionQueryParams GroundParams(SCENE_QUERY_STAT(TMOPVehicleGround), false,
+            DrivenVehicle.Get());
+        const FVector TraceStart = DesiredLocation + FVector(0.0f, 0.0f, GroundTraceUpCm);
+        const FVector TraceEnd = DesiredLocation - FVector(0.0f, 0.0f, GroundTraceDownCm);
+        if (GetWorld()->LineTraceSingleByChannel(GroundHit, TraceStart, TraceEnd,
+            ECC_Visibility, GroundParams))
+        {
+            DesiredLocation.Z = GroundHit.ImpactPoint.Z + GroundClearanceCm;
+            if (bAlignToGroundNormal)
+            {
+                FVector GroundForward = FVector::VectorPlaneProject(
+                    Rotation.Vector(), GroundHit.ImpactNormal).GetSafeNormal();
+                if (!GroundForward.IsNearlyZero())
+                    Rotation = FRotationMatrix::MakeFromXZ(
+                        GroundForward, GroundHit.ImpactNormal).Rotator();
+            }
+        }
+    }
     FHitResult Hit;
-    DrivenVehicle->SetActorLocationAndRotation(DrivenVehicle->GetActorLocation() + DeltaLocation,
+    DrivenVehicle->SetActorLocationAndRotation(DesiredLocation,
         Rotation, bSweepMovement, bSweepMovement ? &Hit : nullptr, ETeleportType::None);
     if (bSweepMovement && Hit.bBlockingHit) CurrentSpeedCmPerSecond = 0.0f;
 
