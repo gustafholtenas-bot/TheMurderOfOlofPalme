@@ -20,7 +20,8 @@ public class TheMurderOfOlofPalme : ModuleRules
 			"UMG",
 			"Slate",
    			"Json",
-    			"JsonUtilities"
+    			"JsonUtilities",
+			"TMOPEngine"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });

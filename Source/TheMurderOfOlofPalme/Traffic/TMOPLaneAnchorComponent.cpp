@@ -1,6 +1,6 @@
 #include "TMOPLaneAnchorComponent.h"
 #include "TMOPLaneSplineActor.h"
-#include "Components/SplineComponent.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 #include "EngineUtils.h"
 
 UTMOPLaneAnchorComponent::UTMOPLaneAnchorComponent()

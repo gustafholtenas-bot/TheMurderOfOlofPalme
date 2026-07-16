@@ -1,10 +1,10 @@
 #include "TMOPLaneSplineActor.h"
-#include "Components/SplineComponent.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 
 ATMOPLaneSplineActor::ATMOPLaneSplineActor()
 {
     PrimaryActorTick.bCanEverTick = false;
-    LaneSpline = CreateDefaultSubobject<USplineComponent>(TEXT("LaneSpline"));
+    LaneSpline = CreateDefaultSubobject<UTMOPTrafficLaneComponent>(TEXT("LaneSpline"));
     RootComponent = LaneSpline;
     LaneSpline->SetClosedLoop(false);
     LaneSpline->SetDrawDebug(true);

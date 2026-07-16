@@ -4,7 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "TMOPLaneSplineActor.generated.h"
 
-class USplineComponent;
+class UTMOPTrafficLaneComponent;
 
 UCLASS(BlueprintType)
 class THEMURDEROFOLOFPALME_API ATMOPLaneSplineActor : public AActor
@@ -15,7 +15,7 @@ public:
     ATMOPLaneSplineActor();
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Lane")
-    TObjectPtr<USplineComponent> LaneSpline;
+    TObjectPtr<UTMOPTrafficLaneComponent> LaneSpline;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Lane") FName LaneID;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Lane") FName RoadID;

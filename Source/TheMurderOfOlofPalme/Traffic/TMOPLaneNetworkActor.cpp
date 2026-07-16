@@ -1,5 +1,7 @@
 #include "TMOPLaneNetworkActor.h"
 #include "TMOPLaneSplineActor.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
+#include "Traffic/TMOPTrafficTypes.h"
 
 #include "Components/SceneComponent.h"
 #include "Components/SplineComponent.h"
@@ -226,6 +228,15 @@ void ATMOPLaneNetworkActor::BuildLaneNetworkInEditor()
             if (Obj->TryGetStringField(TEXT("fromLaneId"), Temp)) Lane->FromLaneID = FName(*Temp);
             if (Obj->TryGetStringField(TEXT("toLaneId"), Temp)) Lane->ToLaneID = FName(*Temp);
             Obj->TryGetStringField(TEXT("turnType"), Lane->TurnType);
+            Lane->LaneSpline->LaneId = Lane->LaneID;
+            Lane->LaneSpline->RoadId = Lane->RoadID.IsNone()
+                ? (bCrossing ? FName(TEXT("CROSSING")) : Lane->LaneID) : Lane->RoadID;
+            Lane->LaneSpline->DirectionId = Lane->Direction.IsEmpty()
+                ? (bCrossing ? FName(TEXT("CROSSING")) : FName(TEXT("UNKNOWN")))
+                : FName(*Lane->Direction);
+            Lane->LaneSpline->LaneIndexFromRight = FMath::Max(1, Lane->LaneIndexFromRight);
+            Lane->LaneSpline->LaneCountSameDirection = Lane->LaneSpline->LaneIndexFromRight;
+            Lane->LaneSpline->LaneType = ETMOPTrafficLaneType::BusAllowed;
             Lane->SetLanePoints(Points);
             Lane->SetActorLabel(ID, true);
             Lane->SetFolderPath(bCrossing ? TEXT("TMOP Traffic Network/Crossings") : TEXT("TMOP Traffic Network/Road Lanes"));
@@ -235,6 +246,49 @@ void ATMOPLaneNetworkActor::BuildLaneNetworkInEditor()
     const TArray<TSharedPtr<FJsonValue>>* Items = nullptr;
     if (Root->TryGetArrayField(TEXT("lanes"), Items)) SpawnItems(*Items, false);
     if (Root->TryGetArrayField(TEXT("crossings"), Items)) SpawnItems(*Items, true);
+
+    // Wire the exact graph expected by TMOPTrafficVehicleMovementComponent:
+    // source road lane -> crossing spline -> destination road lane.
+    TMap<FName, ATMOPLaneSplineActor*> ByID;
+    TMap<FString, int32> LaneCounts;
+    for (TActorIterator<ATMOPLaneSplineActor> It(GetWorld()); It; ++It)
+    {
+        ATMOPLaneSplineActor* Lane = *It;
+        if (!Lane || Lane->GetAttachParentActor() != this || !Lane->LaneSpline) continue;
+        ByID.Add(Lane->LaneID, Lane);
+        Lane->LaneSpline->NextLanes.Reset();
+        if (!Lane->bIsCrossing)
+        {
+            const FString Group = Lane->RoadID.ToString() + TEXT("|") + Lane->Direction;
+            LaneCounts.FindOrAdd(Group) = FMath::Max(LaneCounts.FindRef(Group), Lane->LaneIndexFromRight);
+        }
+    }
+    for (const TPair<FName, ATMOPLaneSplineActor*>& Pair : ByID)
+    {
+        ATMOPLaneSplineActor* Crossing = Pair.Value;
+        if (!Crossing || !Crossing->bIsCrossing) continue;
+        ATMOPLaneSplineActor** FromPtr = ByID.Find(Crossing->FromLaneID);
+        ATMOPLaneSplineActor** ToPtr = ByID.Find(Crossing->ToLaneID);
+        if (!FromPtr || !ToPtr) continue;
+        ETMOPTrafficTurnType Turn = ETMOPTrafficTurnType::Straight;
+        if (Crossing->TurnType.Equals(TEXT("Left"), ESearchCase::IgnoreCase)) Turn = ETMOPTrafficTurnType::Left;
+        else if (Crossing->TurnType.Equals(TEXT("Right"), ESearchCase::IgnoreCase)) Turn = ETMOPTrafficTurnType::Right;
+        else if (Crossing->TurnType.Equals(TEXT("UTurn"), ESearchCase::IgnoreCase)) Turn = ETMOPTrafficTurnType::UTurn;
+        FTMOPLaneConnection IntoCrossing;
+        IntoCrossing.TargetLaneId = Crossing->LaneID; IntoCrossing.TurnType = Turn; IntoCrossing.bAllowed = true;
+        (*FromPtr)->LaneSpline->NextLanes.Add(IntoCrossing);
+        FTMOPLaneConnection OutOfCrossing;
+        OutOfCrossing.TargetLaneId = (*ToPtr)->LaneID; OutOfCrossing.TurnType = ETMOPTrafficTurnType::Straight;
+        OutOfCrossing.bAllowed = true;
+        Crossing->LaneSpline->NextLanes.Add(OutOfCrossing);
+    }
+    for (const TPair<FName, ATMOPLaneSplineActor*>& Pair : ByID)
+    {
+        ATMOPLaneSplineActor* Lane = Pair.Value;
+        if (!Lane || Lane->bIsCrossing || !Lane->LaneSpline) continue;
+        const FString Group = Lane->RoadID.ToString() + TEXT("|") + Lane->Direction;
+        Lane->LaneSpline->LaneCountSameDirection = FMath::Max(1, LaneCounts.FindRef(Group));
+    }
     MarkPackageDirty();
     UE_LOG(LogTemp, Display, TEXT("TMOP: Built %d persistent editor lane actors"), Created);
 #endif
