@@ -36,11 +36,28 @@ bool UTMOPTrafficVehicleMovementComponent::InitializeOnLane(const FName LaneId,
     UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     UTMOPTrafficNetworkSubsystem* Network = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
-    UTMOPTrafficLaneComponent* Lane = Network != nullptr ? Network->FindLane(LaneId) : nullptr;
+    if (Network == nullptr)
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP traffic vehicle '%s': no TrafficNetworkSubsystem."),
+            GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"));
+        CurrentLaneId = LaneId;
+        TrafficState = ETMOPTrafficVehicleState::InvalidLane;
+        return false;
+    }
+    UTMOPTrafficLaneComponent* Lane = Network->FindLane(LaneId);
+    if (!IsValid(Lane))
+    {
+        const int32 Discovered = Network->DiscoverLanesInWorld();
+        Lane = Network->FindLane(LaneId);
+        UE_LOG(LogTemp, Display, TEXT("TMOP lane retry: discovered %d lanes while looking for '%s'."),
+            Discovered, *LaneId.ToString());
+    }
     if (!IsValid(Lane))
     {
         CurrentLaneId = LaneId;
         TrafficState = ETMOPTrafficVehicleState::InvalidLane;
+        UE_LOG(LogTemp, Error, TEXT("TMOP traffic vehicle '%s': lane '%s' was not found."),
+            GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"), *LaneId.ToString());
         return false;
     }
     CurrentLaneId = LaneId;
@@ -49,6 +66,8 @@ bool UTMOPTrafficVehicleMovementComponent::InitializeOnLane(const FName LaneId,
     StopConstraints.Reset();
     TrafficState = ETMOPTrafficVehicleState::Stopped;
     ApplyVehicleTransform(Lane);
+    UE_LOG(LogTemp, Display, TEXT("TMOP traffic vehicle '%s' initialized on lane '%s' at %.1f cm."),
+        GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"), *LaneId.ToString(), DistanceAlongLane);
     return true;
 }
 

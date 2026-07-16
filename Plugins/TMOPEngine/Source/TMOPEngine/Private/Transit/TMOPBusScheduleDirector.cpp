@@ -101,30 +101,90 @@ void ATMOPBusScheduleDirector::EvaluateSchedule(const FTMOPTime CurrentTime)
 
 bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
 {
-    if (!ScheduledRuns.IsValidIndex(Runtime.SourceIndex) || GetWorld() == nullptr) return false;
+    if (!ScheduledRuns.IsValidIndex(Runtime.SourceIndex) || GetWorld() == nullptr)
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': invalid scheduled-run index or World."),
+            *Runtime.RunId.ToString());
+        return false;
+    }
     const FTMOPBusScheduledRun& Run = ScheduledRuns[Runtime.SourceIndex];
-    if (Run.BusClass == nullptr || !IsValid(Run.RouteData)) return false;
+    if (Run.BusClass == nullptr || !IsValid(Run.RouteData))
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': BusClass or RouteData is missing."),
+            *Runtime.RunId.ToString());
+        return false;
+    }
+    const FName StartLaneId = !Run.InitialLaneId.IsNone()
+        ? Run.InitialLaneId
+        : (!Run.RouteData->OrderedLaneIds.IsEmpty() ? Run.RouteData->OrderedLaneIds[0] : NAME_None);
+    if (StartLaneId.IsNone())
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': no InitialLaneId and route has no lanes."),
+            *Runtime.RunId.ToString());
+        return false;
+    }
+    UGameInstance* GameInstance = GetGameInstance();
+    UTMOPTrafficNetworkSubsystem* Network = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
+    if (Network == nullptr)
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': no TrafficNetworkSubsystem."),
+            *Runtime.RunId.ToString());
+        return false;
+    }
+    const int32 LaneCount = Network->DiscoverLanesInWorld();
+    if (!IsValid(Network->FindLane(StartLaneId)))
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP bus '%s': InitialLaneId '%s' not found after discovering %d lanes."),
+            *Runtime.RunId.ToString(), *StartLaneId.ToString(), LaneCount);
+        return false;
+    }
+    UE_LOG(LogTemp, Display, TEXT("TMOP bus '%s': spawning class '%s' on '%s'."),
+        *Runtime.RunId.ToString(), *GetNameSafe(Run.BusClass.Get()), *StartLaneId.ToString());
     ATMOPVehicleBase* Bus = GetWorld()->SpawnActorDeferred<ATMOPVehicleBase>(
         Run.BusClass, FTransform::Identity, this, nullptr,
         ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
-    if (!IsValid(Bus)) return false;
+    if (!IsValid(Bus))
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': SpawnActorDeferred failed."),
+            *Runtime.RunId.ToString());
+        return false;
+    }
     Bus->VehicleId = Run.RunId;
+
+    // Blueprint SCS components do not reliably exist until deferred spawning
+    // has been finished. The old code searched for them before this call.
+    UGameplayStatics::FinishSpawningActor(Bus, FTransform::Identity);
+    if (!IsValid(Bus))
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': FinishSpawningActor failed."),
+            *Runtime.RunId.ToString());
+        return false;
+    }
     UTMOPTrafficVehicleMovementComponent* Movement =
         Bus->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
     UTMOPBusServiceComponent* Service = Bus->FindComponentByClass<UTMOPBusServiceComponent>();
     if (!IsValid(Movement) || !IsValid(Service))
     {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP bus '%s': spawned class '%s' lacks Movement=%s or BusService=%s."),
+            *Runtime.RunId.ToString(), *GetNameSafe(Run.BusClass.Get()),
+            IsValid(Movement) ? TEXT("yes") : TEXT("NO"),
+            IsValid(Service) ? TEXT("yes") : TEXT("NO"));
         Bus->Destroy();
         return false;
     }
-    Movement->InitialLaneId = Run.InitialLaneId;
+    Movement->InitialLaneId = StartLaneId;
     Movement->PlannedLaneIds = Run.RouteData->OrderedLaneIds;
     Service->RouteData = Run.RouteData;
     Service->ServiceRunId = Run.RunId;
     Service->DwellRandomSeed = ScheduleSeed + CurrentLoopNumber * 1013 + Runtime.SourceIndex * 89;
-    UGameplayStatics::FinishSpawningActor(Bus, FTransform::Identity);
-    if (!Movement->InitializeOnLane(Run.InitialLaneId, Run.InitialDistanceAlongLane))
+    Service->InitializeService();
+    if (!Movement->InitializeOnLane(StartLaneId, Run.InitialDistanceAlongLane))
     {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': InitializeOnLane('%s') failed."),
+            *Runtime.RunId.ToString(), *StartLaneId.ToString());
         Bus->Destroy();
         return false;
     }
@@ -132,6 +192,8 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     Runtime.SpawnedBus = Bus;
     Runtime.State = ETMOPBusRunState::Active;
     OnBusRunSpawned.Broadcast(Runtime.RunId, Bus);
+    UE_LOG(LogTemp, Display, TEXT("TMOP bus '%s': spawn succeeded."),
+        *Runtime.RunId.ToString());
     return true;
 }
 
