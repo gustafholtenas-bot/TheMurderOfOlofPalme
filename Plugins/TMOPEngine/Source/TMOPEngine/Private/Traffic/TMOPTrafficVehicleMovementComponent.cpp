@@ -93,7 +93,23 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
         : ServiceBrakeCmPerSecondSquared) * DeltaTime;
     CurrentSpeedCmPerSecond += FMath::Clamp(DeltaSpeed, -MaxChange, MaxChange);
     CurrentSpeedCmPerSecond = FMath::Max(0.0f, CurrentSpeedCmPerSecond);
+    // Remember the active constraint before advancing. At normal frame rates a
+    // vehicle can otherwise move from just before a stop to just after it in a
+    // single tick. Once the constraint is behind the vehicle it is no longer
+    // considered active, so the vehicle would accelerate away without ever
+    // reaching the bus service's arrival tolerance.
+    const float ActiveStopDistance = GetNearestActiveStopDistance();
+    const float PreviousDistanceAlongLane = DistanceAlongLane;
     DistanceAlongLane += CurrentSpeedCmPerSecond * DeltaTime;
+
+    if (ActiveStopDistance >= 0.0f &&
+        PreviousDistanceAlongLane <= ActiveStopDistance &&
+        DistanceAlongLane >= ActiveStopDistance)
+    {
+        DistanceAlongLane = ActiveStopDistance;
+        CurrentSpeedCmPerSecond = 0.0f;
+        TrafficState = ETMOPTrafficVehicleState::Stopped;
+    }
 
     while (DistanceAlongLane >= Lane->GetSplineLength())
     {

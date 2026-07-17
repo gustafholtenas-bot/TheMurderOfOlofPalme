@@ -24,6 +24,9 @@ bool UTMOPBusServiceComponent::InitializeService()
         RouteData->OrderedLaneIds.IsEmpty())
     {
         ServiceState = ETMOPBusServiceState::InvalidRoute;
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP bus service '%s': invalid route data or missing movement component."),
+            GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"));
         return false;
     }
     DwellRandom.Initialize(DwellRandomSeed + GetTypeHash(ServiceRunId));
@@ -31,6 +34,10 @@ bool UTMOPBusServiceComponent::InitializeService()
     Movement->PlannedLaneIds = RouteData->OrderedLaneIds;
     ServiceState = RouteData->OrderedStopIds.IsEmpty()
         ? ETMOPBusServiceState::RouteComplete : ETMOPBusServiceState::DrivingToStop;
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP bus service '%s': route '%s' initialized with %d stop(s)."),
+        GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"),
+        *RouteData->RouteId.ToString(), RouteData->OrderedStopIds.Num());
     return true;
 }
 
@@ -62,6 +69,9 @@ void UTMOPBusServiceComponent::UpdateApproachToStop()
     if (!IsValid(Stop) || !IsValid(Movement))
     {
         ServiceState = ETMOPBusServiceState::InvalidRoute;
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP bus service '%s': stop index %d could not be resolved."),
+            GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"), CurrentStopIndex);
         return;
     }
     const FName ConstraintId = GetStopConstraintId(Stop);
@@ -85,6 +95,11 @@ void UTMOPBusServiceComponent::BeginDwell(UTMOPBusStopComponent* Stop)
         FMath::Max(0.0f, Stop->MinimumDwellSeconds),
         FMath::Max(Stop->MinimumDwellSeconds, Stop->MaximumDwellSeconds));
     ServiceState = ETMOPBusServiceState::Dwelling;
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP bus service '%s': arrived at stop '%s' on '%s' at %.1f cm; dwelling %.1f s."),
+        GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"),
+        *Stop->StopId.ToString(), *Stop->LaneId.ToString(),
+        Movement->DistanceAlongLane, RemainingDwellSeconds);
     OnArrivedAtStop.Broadcast(Stop->StopId, CurrentStopIndex);
 }
 
@@ -92,6 +107,10 @@ void UTMOPBusServiceComponent::FinishDwell(UTMOPBusStopComponent* Stop)
 {
     CloseDoors();
     Movement->ClearNamedStopConstraint(GetStopConstraintId(Stop));
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP bus service '%s': departing stop '%s'."),
+        GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"),
+        *Stop->StopId.ToString());
     OnDepartedStop.Broadcast(Stop->StopId, CurrentStopIndex);
     ++CurrentStopIndex;
     if (!RouteData->OrderedStopIds.IsValidIndex(CurrentStopIndex))
