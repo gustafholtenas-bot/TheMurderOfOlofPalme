@@ -1,6 +1,7 @@
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 
 #include "Engine/GameInstance.h"
+#include "Engine/World.h"
 #include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficVehicleSubsystem.h"
@@ -154,6 +155,18 @@ float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLan
             TrafficState = ETMOPTrafficVehicleState::FollowingVehicle;
         }
     }
+    const float PhysicalObstacleDistance = GetPhysicalObstacleDistance();
+    if (PhysicalObstacleDistance >= 0.0f)
+    {
+        const float AvailableBrakingDistance = FMath::Max(0.0f,
+            PhysicalObstacleDistance - MinimumGapCm);
+        const float SafeSpeed = FMath::Sqrt(2.0f *
+            FMath::Max(1.0f, ServiceBrakeCmPerSecondSquared) * AvailableBrakingDistance);
+        Target = FMath::Min(Target, SafeSpeed);
+        if (SafeSpeed < CurrentSpeedCmPerSecond)
+            TrafficState = ETMOPTrafficVehicleState::BrakingForConstraint;
+        if (PhysicalObstacleDistance <= MinimumGapCm) Target = 0.0f;
+    }
     const float NearestStopDistance = GetNearestActiveStopDistance();
     if (NearestStopDistance >= 0.0f)
     {
@@ -222,7 +235,8 @@ void UTMOPTrafficVehicleMovementComponent::ApplyVehicleTransform(UTMOPTrafficLan
 {
     if (!IsValid(Lane) || GetOwner() == nullptr) return;
     const FTransform LaneTransform = Lane->GetLaneTransformAtDistance(DistanceAlongLane);
-    const FTransform Offset(VehicleRotationOffset, VehicleLocalOffset, FVector::OneVector);
+    const FVector RuntimeOffset = VehicleLocalOffset + FVector(0.0f, AdditionalLateralOffsetCm, 0.0f);
+    const FTransform Offset(VehicleRotationOffset, RuntimeOffset, FVector::OneVector);
     GetOwner()->SetActorTransform(Offset * LaneTransform, false, nullptr, ETeleportType::TeleportPhysics);
 }
 
@@ -306,7 +320,8 @@ void UTMOPTrafficVehicleMovementComponent::UpdateLaneChange(const float DeltaTim
     const FTransform TargetTransform = TargetLane->GetLaneTransformAtDistance(TargetLaneDistance);
     FTransform Blended;
     Blended.Blend(SourceTransform, TargetTransform, SmoothAlpha);
-    const FTransform Offset(VehicleRotationOffset, VehicleLocalOffset, FVector::OneVector);
+    const FVector RuntimeOffset = VehicleLocalOffset + FVector(0.0f, AdditionalLateralOffsetCm, 0.0f);
+    const FTransform Offset(VehicleRotationOffset, RuntimeOffset, FVector::OneVector);
     if (GetOwner() != nullptr)
         GetOwner()->SetActorTransform(Offset * Blended, false, nullptr, ETeleportType::TeleportPhysics);
     TrafficState = ETMOPTrafficVehicleState::ChangingLane;
@@ -331,6 +346,12 @@ void UTMOPTrafficVehicleMovementComponent::StopDriving()
     bDrivingEnabled = false;
     CurrentSpeedCmPerSecond = 0.0f;
     TrafficState = ETMOPTrafficVehicleState::Stopped;
+}
+
+void UTMOPTrafficVehicleMovementComponent::SetAdditionalLateralOffset(const float OffsetCm)
+{
+    AdditionalLateralOffsetCm = OffsetCm;
+    if (UTMOPTrafficLaneComponent* Lane = GetCurrentLane()) ApplyVehicleTransform(Lane);
 }
 
 void UTMOPTrafficVehicleMovementComponent::SetExternalStopDistance(
@@ -375,6 +396,50 @@ float UTMOPTrafficVehicleMovementComponent::GetNearestActiveStopDistance() const
 float UTMOPTrafficVehicleMovementComponent::GetCurrentSpeedKmh() const
 {
     return CurrentSpeedCmPerSecond * (3600.0f / 100000.0f);
+}
+
+float UTMOPTrafficVehicleMovementComponent::GetPhysicalObstacleDistance() const
+{
+    UWorld* World = GetWorld();
+    const AActor* OwnerActor = GetOwner();
+    if (!bDetectPhysicalObstacles || World == nullptr || OwnerActor == nullptr) return -1.0f;
+
+    const FVector Forward = OwnerActor->GetActorForwardVector();
+    const FVector Up = OwnerActor->GetActorUpVector();
+    const FVector Start = OwnerActor->GetActorLocation() +
+        Forward * (VehicleLengthCm * 0.5f + 10.0f) + Up * ObstacleSensorHalfHeightCm;
+    const float BrakingDistance = FMath::Square(CurrentSpeedCmPerSecond) /
+        (2.0f * FMath::Max(1.0f, ServiceBrakeCmPerSecondSquared));
+    const float LookAhead = FMath::Clamp(MinimumGapCm +
+        CurrentSpeedCmPerSecond * DesiredTimeHeadwaySeconds + BrakingDistance,
+        MinimumObstacleLookAheadCm, MaximumObstacleLookAheadCm);
+    const FVector End = Start + Forward * LookAhead;
+
+    FCollisionObjectQueryParams ObjectTypes;
+    ObjectTypes.AddObjectTypesToQuery(ECC_Pawn);
+    ObjectTypes.AddObjectTypesToQuery(ECC_Vehicle);
+    ObjectTypes.AddObjectTypesToQuery(ECC_WorldDynamic);
+    ObjectTypes.AddObjectTypesToQuery(ECC_PhysicsBody);
+    FCollisionQueryParams QueryParams(SCENE_QUERY_STAT(TMOPVehicleObstacleSensor), false,
+        OwnerActor);
+    TArray<AActor*> AttachedActors;
+    OwnerActor->GetAttachedActors(AttachedActors);
+    QueryParams.AddIgnoredActors(AttachedActors);
+
+    TArray<FHitResult> Hits;
+    const FCollisionShape Shape = FCollisionShape::MakeBox(
+        FVector(10.0f, ObstacleSensorHalfWidthCm, ObstacleSensorHalfHeightCm));
+    if (!World->SweepMultiByObjectType(Hits, Start, End, OwnerActor->GetActorQuat(),
+        ObjectTypes, Shape, QueryParams)) return -1.0f;
+
+    float Nearest = TNumericLimits<float>::Max();
+    for (const FHitResult& Hit : Hits)
+    {
+        if (!IsValid(Hit.GetActor()) || Hit.GetActor() == OwnerActor) continue;
+        const float ForwardDistance = FVector::DotProduct(Hit.ImpactPoint - Start, Forward);
+        if (ForwardDistance >= 0.0f) Nearest = FMath::Min(Nearest, ForwardDistance);
+    }
+    return Nearest < TNumericLimits<float>::Max() ? Nearest : -1.0f;
 }
 
 UTMOPTrafficLaneComponent* UTMOPTrafficVehicleMovementComponent::GetCurrentLane() const

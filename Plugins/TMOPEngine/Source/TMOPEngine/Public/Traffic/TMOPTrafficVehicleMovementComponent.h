@@ -76,11 +76,34 @@ public:
         meta=(ClampMin="50.0"))
     float VehicleLengthCm = 450.0f;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection")
+    bool bDetectPhysicalObstacles = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection",
+        meta=(ClampMin="100.0"))
+    float MinimumObstacleLookAheadCm = 600.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection",
+        meta=(ClampMin="200.0"))
+    float MaximumObstacleLookAheadCm = 3500.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection",
+        meta=(ClampMin="10.0"))
+    float ObstacleSensorHalfWidthCm = 90.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection",
+        meta=(ClampMin="10.0"))
+    float ObstacleSensorHalfHeightCm = 100.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Placement")
     FVector VehicleLocalOffset = FVector::ZeroVector;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Placement")
     FRotator VehicleRotationOffset = FRotator::ZeroRotator;
+
+    /** Runtime local-right offset used for bus-bay pull-in and similar manoeuvres. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Traffic|Placement")
+    float AdditionalLateralOffsetCm = 0.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic")
     bool bStartDrivingAutomatically = true;
@@ -119,6 +142,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic")
     void StopDriving();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|Placement")
+    void SetAdditionalLateralOffset(float OffsetCm);
 
     /** Used by future signals/stops. Negative clears the constraint. */
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic")
@@ -159,6 +185,7 @@ private:
     void EvaluateAutomaticLaneChange(UTMOPTrafficLaneComponent* Lane);
     bool IsTargetLaneSafe(UTMOPTrafficLaneComponent* TargetLane, float TargetDistance) const;
     void UpdateLaneChange(float DeltaTime, UTMOPTrafficLaneComponent* SourceLane);
+    float GetPhysicalObstacleDistance() const;
 
     int32 PlannedLaneIndex = INDEX_NONE;
     TMap<FName, float> StopConstraints;

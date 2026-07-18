@@ -29,6 +29,16 @@ bool UTMOPBusStopComponent::ServesRoute(const FName RouteId) const
     return !RouteId.IsNone() && ServedRouteIds.Contains(RouteId);
 }
 
+FVector UTMOPBusStopComponent::GetBoardingWorldLocation() const
+{
+    return GetComponentTransform().TransformPosition(BoardingLocalOffset);
+}
+
+FVector UTMOPBusStopComponent::GetAlightingWorldLocation() const
+{
+    return GetComponentTransform().TransformPosition(AlightingLocalOffset);
+}
+
 bool UTMOPBusStopComponent::ValidateStop(TArray<FString>& OutErrors) const
 {
     OutErrors.Reset();

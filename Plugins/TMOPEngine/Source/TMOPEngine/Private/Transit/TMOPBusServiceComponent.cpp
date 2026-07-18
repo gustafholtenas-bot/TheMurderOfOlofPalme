@@ -2,6 +2,7 @@
 
 #include "Components/StaticMeshComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
+#include "Transit/TMOPBusPassengerComponent.h"
 #include "Transit/TMOPBusRouteData.h"
 #include "Transit/TMOPBusStopComponent.h"
 #include "Transit/TMOPBusStopSubsystem.h"
@@ -22,6 +23,8 @@ bool UTMOPBusServiceComponent::InitializeService()
 {
     Movement = GetOwner() != nullptr
         ? GetOwner()->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>() : nullptr;
+    PassengerSystem = GetOwner() != nullptr
+        ? GetOwner()->FindComponentByClass<UTMOPBusPassengerComponent>() : nullptr;
     if (!IsValid(RouteData) || !IsValid(Movement) || RouteData->RouteId.IsNone() ||
         RouteData->OrderedLaneIds.IsEmpty())
     {
@@ -48,6 +51,7 @@ void UTMOPBusServiceComponent::TickComponent(const float DeltaTime,
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     UpdateDoorAnimation(DeltaTime);
+    UpdateStopPullIn(DeltaTime);
 
     if (bDeparturePending)
     {
@@ -66,7 +70,22 @@ void UTMOPBusServiceComponent::TickComponent(const float DeltaTime,
     {
         RemainingDwellSeconds -= DeltaTime;
         if (RemainingDwellSeconds <= 0.0f)
-            if (UTMOPBusStopComponent* Stop = GetCurrentTargetStop()) FinishDwell(Stop);
+        {
+            const bool bDoorwayBlocked = bWaitForClearDoorway && IsValid(PassengerSystem) &&
+                !PassengerSystem->IsDoorwayClear();
+            if (bDoorwayBlocked && DoorwayHoldSeconds < MaximumDoorwayHoldSeconds)
+            {
+                DoorwayHoldSeconds += DeltaTime;
+            }
+            else if (UTMOPBusStopComponent* Stop = GetCurrentTargetStop())
+            {
+                if (bDoorwayBlocked)
+                    UE_LOG(LogTemp, Warning,
+                        TEXT("TMOP bus service '%s': maximum doorway hold reached; departing with obstruction warning."),
+                        GetOwner() != nullptr ? *GetOwner()->GetName() : TEXT("None"));
+                FinishDwell(Stop);
+            }
+        }
     }
 }
 
@@ -170,6 +189,7 @@ void UTMOPBusServiceComponent::BeginDwell(UTMOPBusStopComponent* Stop)
 {
     Movement->StopDriving();
     OpenDoors();
+    DoorwayHoldSeconds = 0.0f;
     RemainingDwellSeconds = DwellRandom.FRandRange(
         FMath::Max(0.0f, Stop->MinimumDwellSeconds),
         FMath::Max(Stop->MinimumDwellSeconds, Stop->MaximumDwellSeconds));
@@ -245,6 +265,36 @@ void UTMOPBusServiceComponent::UpdateDoorAnimation(const float DeltaTime)
         if (IsValid(DoorComponents[Index]))
             DoorComponents[Index]->SetRelativeLocation(
                 DoorClosedLocations[Index] + DoorOpenOffset * DoorAnimationAlpha);
+}
+
+void UTMOPBusServiceComponent::UpdateStopPullIn(const float DeltaTime)
+{
+    if (!IsValid(Movement)) return;
+    float TargetOffset = 0.0f;
+    if (bPullIntoStops)
+    {
+        if (ServiceState == ETMOPBusServiceState::Dwelling || bDeparturePending)
+        {
+            TargetOffset = StopPullInOffsetCm;
+        }
+        else if (ServiceState == ETMOPBusServiceState::DrivingToStop)
+        {
+            if (UTMOPBusStopComponent* Stop = GetCurrentTargetStop();
+                IsValid(Stop) && Movement->CurrentLaneId == Stop->LaneId)
+            {
+                const float StopDistance = FMath::Max(0.0f,
+                    Stop->DistanceAlongLane - Stop->StopBufferCm);
+                const float Remaining = FMath::Max(0.0f,
+                    StopDistance - Movement->DistanceAlongLane);
+                const float Alpha = 1.0f - FMath::Clamp(Remaining /
+                    FMath::Max(100.0f, StopPullInApproachDistanceCm), 0.0f, 1.0f);
+                TargetOffset = StopPullInOffsetCm * Alpha;
+            }
+        }
+    }
+    CurrentStopPullInOffsetCm = FMath::FInterpConstantTo(CurrentStopPullInOffsetCm,
+        TargetOffset, DeltaTime, FMath::Max(1.0f, StopPullInInterpolationSpeedCmPerSecond));
+    Movement->SetAdditionalLateralOffset(CurrentStopPullInOffsetCm);
 }
 
 void UTMOPBusServiceComponent::OpenDoors() { bDoorsOpen = true; }

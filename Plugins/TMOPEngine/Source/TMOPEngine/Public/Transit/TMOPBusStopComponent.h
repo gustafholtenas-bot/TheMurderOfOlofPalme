@@ -43,6 +43,23 @@ public:
         meta=(ClampMin="0.0"))
     float StopBufferCm = 80.0f;
 
+    /** Historical agents must be within this radius to board this bus. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Stop|Passengers",
+        meta=(ClampMin="25.0"))
+    float PassengerWaitingRadiusCm = 350.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Stop|Passengers")
+    FVector BoardingLocalOffset = FVector(0.0f, 100.0f, 0.0f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Stop|Passengers")
+    FVector AlightingLocalOffset = FVector(100.0f, 140.0f, 0.0f);
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Bus Stop|Passengers")
+    FVector GetBoardingWorldLocation() const;
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Bus Stop|Passengers")
+    FVector GetAlightingWorldLocation() const;
+
     UFUNCTION(BlueprintPure, Category="TMOP|Bus Stop")
     bool ServesRoute(FName RouteId) const;
 

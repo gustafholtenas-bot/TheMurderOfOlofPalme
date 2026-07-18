@@ -6,6 +6,7 @@
 
 class UTMOPBusRouteData;
 class UTMOPBusStopComponent;
+class UTMOPBusPassengerComponent;
 class UTMOPTrafficVehicleMovementComponent;
 class USceneComponent;
 
@@ -68,6 +69,30 @@ public:
         meta=(ClampMin="0.05"))
     float DoorAnimationSeconds = 0.7f;
 
+    /** Hold open while a character overlaps the optional DoorwayVolume. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Service|Doors")
+    bool bWaitForClearDoorway = true;
+
+    /** Safety limit so a blocked doorway cannot freeze the historical simulation forever. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Service|Doors",
+        meta=(ClampMin="0.0"))
+    float MaximumDoorwayHoldSeconds = 20.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Service|Stop Pull-In")
+    bool bPullIntoStops = true;
+
+    /** Signed local-right offset at the stop. Reverse the sign if the bus moves left. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Service|Stop Pull-In")
+    float StopPullInOffsetCm = 140.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Service|Stop Pull-In",
+        meta=(ClampMin="100.0"))
+    float StopPullInApproachDistanceCm = 1200.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Service|Stop Pull-In",
+        meta=(ClampMin="1.0"))
+    float StopPullInInterpolationSpeedCmPerSecond = 100.0f;
+
     UPROPERTY(BlueprintAssignable, Category="TMOP|Bus Service|Events")
     FTMOPBusStopEventSignature OnArrivedAtStop;
 
@@ -90,6 +115,7 @@ private:
     void UpdateApproachToStop();
     void DiscoverDoorComponents();
     void UpdateDoorAnimation(float DeltaTime);
+    void UpdateStopPullIn(float DeltaTime);
     void BeginDwell(UTMOPBusStopComponent* Stop);
     void FinishDwell(UTMOPBusStopComponent* Stop);
     FName GetStopConstraintId(const UTMOPBusStopComponent* Stop) const;
@@ -98,13 +124,18 @@ private:
     TObjectPtr<UTMOPTrafficVehicleMovementComponent> Movement;
 
     UPROPERTY(Transient)
+    TObjectPtr<UTMOPBusPassengerComponent> PassengerSystem;
+
+    UPROPERTY(Transient)
     TArray<TObjectPtr<USceneComponent>> DoorComponents;
 
     TArray<FVector> DoorClosedLocations;
 
     float RemainingDwellSeconds = 0.0f;
     float DoorAnimationAlpha = 0.0f;
+    float CurrentStopPullInOffsetCm = 0.0f;
     float RemainingDepartureDelaySeconds = 0.0f;
+    float DoorwayHoldSeconds = 0.0f;
     bool bDeparturePending = false;
     bool bWaitingForStopRegistration = false;
     FName LastDiagnosedStopId = NAME_None;

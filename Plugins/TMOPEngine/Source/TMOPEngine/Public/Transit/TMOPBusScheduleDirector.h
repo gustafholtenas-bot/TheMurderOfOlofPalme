@@ -7,6 +7,7 @@
 #include "TMOPBusScheduleDirector.generated.h"
 
 class ATMOPVehicleBase;
+class UTMOPBusPassengerManifest;
 class UTMOPBusRouteData;
 
 UENUM(BlueprintType)
@@ -28,6 +29,10 @@ struct TMOPENGINE_API FTMOPBusScheduledRun
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     TObjectPtr<UTMOPBusRouteData> RouteData;
+
+    /** Optional explicit historical passenger/driver manifest. Never generated randomly. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Passengers")
+    TObjectPtr<UTMOPBusPassengerManifest> PassengerManifest;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     TSubclassOf<ATMOPVehicleBase> BusClass;

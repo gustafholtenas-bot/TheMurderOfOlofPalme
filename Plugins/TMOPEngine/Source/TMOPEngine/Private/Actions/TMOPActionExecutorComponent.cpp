@@ -9,6 +9,8 @@
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/Controller.h"
 #include "Schedules/TMOPScheduleSubsystem.h"
+#include "Venues/TMOPCinemaSeatComponent.h"
+#include "Venues/TMOPCinemaSeatSubsystem.h"
 
 UTMOPActionExecutorComponent::UTMOPActionExecutorComponent()
 {
@@ -171,11 +173,33 @@ bool UTMOPActionExecutorComponent::ExecuteImmediateAction(
         break;
 
     case ETMOPScheduleActionType::StandUp:
-        Agent->SetActivityState(ETMOPAgentActivityState::Standing);
+        if (UGameInstance* GameInstance = GetWorld() != nullptr
+            ? GetWorld()->GetGameInstance() : nullptr)
+        {
+            UTMOPCinemaSeatSubsystem* Seats =
+                GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>();
+            const FName SeatId = !Entry.TargetEntityId.IsNone()
+                ? Entry.TargetEntityId : Agent->InitialSeatAssignment.SeatId;
+            UTMOPCinemaSeatComponent* Seat = Seats != nullptr ? Seats->FindSeat(SeatId) : nullptr;
+            if (!IsValid(Seat) || Seat->GetOccupyingAgent() != Agent || !Seat->StandAgent(Agent))
+                Agent->SetActivityState(ETMOPAgentActivityState::Standing);
+        }
+        else Agent->SetActivityState(ETMOPAgentActivityState::Standing);
         break;
 
     case ETMOPScheduleActionType::SitAtSeat:
-        Agent->SetActivityState(ETMOPAgentActivityState::Seated);
+        if (UGameInstance* GameInstance = GetWorld() != nullptr
+            ? GetWorld()->GetGameInstance() : nullptr)
+        {
+            UTMOPCinemaSeatSubsystem* Seats =
+                GameInstance->GetSubsystem<UTMOPCinemaSeatSubsystem>();
+            const FName SeatId = !Entry.TargetEntityId.IsNone()
+                ? Entry.TargetEntityId : Agent->InitialSeatAssignment.SeatId;
+            UTMOPCinemaSeatComponent* Seat = Seats != nullptr ? Seats->FindSeat(SeatId) : nullptr;
+            if (!IsValid(Seat) || !Seat->SeatAgent(Agent))
+                Agent->SetActivityState(ETMOPAgentActivityState::Seated);
+        }
+        else Agent->SetActivityState(ETMOPAgentActivityState::Seated);
         break;
 
     case ETMOPScheduleActionType::WaitAtAnchor:
@@ -187,11 +211,8 @@ bool UTMOPActionExecutorComponent::ExecuteImmediateAction(
         break;
 
     case ETMOPScheduleActionType::EnterVehicle:
-        Agent->SetActivityState(ETMOPAgentActivityState::RidingVehicle);
-        break;
-
     case ETMOPScheduleActionType::ExitVehicle:
-        Agent->SetActivityState(ETMOPAgentActivityState::Standing);
+        // Boarding/alighting is resolved deterministically by the assigned bus manifest.
         break;
 
     case ETMOPScheduleActionType::None:

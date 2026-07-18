@@ -6,6 +6,8 @@
 #include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
+#include "Transit/TMOPBusPassengerComponent.h"
+#include "Transit/TMOPBusPassengerManifest.h"
 #include "Transit/TMOPBusRouteData.h"
 #include "Transit/TMOPBusServiceComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
@@ -181,6 +183,25 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     Service->ServiceRunId = Run.RunId;
     Service->DwellRandomSeed = ScheduleSeed + CurrentLoopNumber * 1013 + Runtime.SourceIndex * 89;
     Service->InitializeService();
+    if (UTMOPBusPassengerComponent* Passengers =
+        Bus->FindComponentByClass<UTMOPBusPassengerComponent>())
+    {
+        if (!Passengers->InitializePassengerManifest(Run.PassengerManifest, Run.RunId))
+        {
+            UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': passenger manifest validation failed."),
+                *Runtime.RunId.ToString());
+            Bus->Destroy();
+            return false;
+        }
+    }
+    else if (IsValid(Run.PassengerManifest))
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP bus '%s': a PassengerManifest is assigned but BusClass lacks TMOPBusPassengerComponent."),
+            *Runtime.RunId.ToString());
+        Bus->Destroy();
+        return false;
+    }
     if (!Movement->InitializeOnLane(StartLaneId, Run.InitialDistanceAlongLane))
     {
         UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': InitializeOnLane('%s') failed."),
