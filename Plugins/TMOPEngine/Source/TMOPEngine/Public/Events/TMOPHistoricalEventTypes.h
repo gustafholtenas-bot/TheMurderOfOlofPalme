@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "Agents/TMOPAgentTypes.h"
 #include "Time/TMOPTime.h"
 #include "TMOPHistoricalEventTypes.generated.h"
@@ -29,8 +30,9 @@ enum class ETMOPEventRuntimeState : uint8
     Cancelled
 };
 
+/** A central historical event definition; also usable directly as a DataTable row. */
 USTRUCT(BlueprintType)
-struct TMOPENGINE_API FTMOPHistoricalEventDefinition
+struct TMOPENGINE_API FTMOPHistoricalEventDefinition : public FTableRowBase
 {
     GENERATED_BODY()
 
