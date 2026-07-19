@@ -3,6 +3,8 @@
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
 #include "Agents/TMOPAgentTypes.h"
+#include "Events/TMOPHistoricalEventTypes.h"
+#include "Groups/TMOPGroupTypes.h"
 #include "TMOPPersonProfileTypes.generated.h"
 
 class ATMOPHistoricalAgent;
@@ -52,6 +54,29 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time")
     FTMOPTime Time = FTMOPTime(23, 0, 0);
+
+    /** Absolute uses Time. Relative uses SharedEventId plus EventOffsetSeconds. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time")
+    ETMOPEventTimingMode TimingMode = ETMOPEventTimingMode::Absolute;
+
+    /** Central event used by Relative timing, for example a shared rendezvous. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative", EditConditionHides))
+    FName SharedEventId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative", EditConditionHides))
+    int32 EventOffsetSeconds = 0;
+
+    /** For MoveToAnchor, calculate departure backwards so arrival matches the resolved time. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::MoveToAnchor", EditConditionHides))
+    bool bTimeIsArrival = false;
+
+    /** Zero uses the person's movement profile. Units are centimetres per second. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(ClampMin="0.0", EditCondition="bTimeIsArrival", EditConditionHides))
+    float TravelSpeedOverrideCmPerSecond = 0.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
     ETMOPPersonLocationType LocationType = ETMOPPersonLocationType::Unknown;
@@ -304,6 +329,24 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
     FTMOPMovementProfile MovementProfile;
+
+    /** Existing generic group system membership. Leave GroupId empty for an individual. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    FName SocialGroupId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    FName GroupLeaderEntityId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    ETMOPGroupFormation GroupFormation = ETMOPGroupFormation::SideBySide;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group",
+        meta=(ClampMin="30.0"))
+    float GroupFormationSpacingCm = 110.0f;
+
+    /** Followers only need their initial placement; the leader's moves drive the group. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    bool bFollowGroupLeaderSchedule = true;
 
     /** Slot 0 is the initial marker. It may occur later than 23:00. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")

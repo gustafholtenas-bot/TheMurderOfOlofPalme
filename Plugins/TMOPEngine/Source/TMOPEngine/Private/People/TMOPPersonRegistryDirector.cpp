@@ -7,7 +7,10 @@
 #include "Engine/DataTable.h"
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
+#include "Events/TMOPHistoricalEventSubsystem.h"
+#include "Groups/TMOPGroupDirector.h"
 #include "Kismet/GameplayStatics.h"
+#include "NavigationSystem.h"
 #include "People/TMOPPersonProfileComponent.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
 #include "Schedules/TMOPScheduleTypes.h"
@@ -108,9 +111,8 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
         FPersonRuntime Runtime;
         Runtime.RowName = RowName;
         Runtime.Profile = *Row;
-        Runtime.Profile.Timeline.Sort([](const FTMOPPersonTimelineEntry& A,
-            const FTMOPPersonTimelineEntry& B)
-            { return A.Time.ToSecondsFromMidnight() < B.Time.ToSecondsFromMidnight(); });
+        // Timeline array order is authoritative. Shared/arrival times cannot be
+        // correctly sorted by their fallback absolute Time value.
         UTMOPPersonRegistrySubsystem* Registry =
             GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>();
         if (Registry != nullptr)
@@ -124,6 +126,7 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
         ? Clock->GetCurrentTime().ToSecondsFromMidnight()
         : SimulationEpoch.ToSecondsFromMidnight();
     EvaluatePeople(CurrentSecond, bCatchUpToCurrentClockOnBeginPlay);
+    if (bCreateGroupsFromPeopleTable) RebuildGroupsFromPeople();
     LastEvaluatedSecond = CurrentSecond;
     UE_LOG(LogTemp, Display, TEXT("TMOP People: initialized %d timeline profile(s), %d active agent(s)."),
         RuntimePeople.Num(), RefreshAllActiveProfiles());
@@ -140,7 +143,9 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
         {
             const FTMOPPersonTimelineEntry& Entry =
                 Runtime.Profile.Timeline[Runtime.NextTimelineIndex];
-            if (Entry.Time.ToSecondsFromMidnight() > CurrentSecond) break;
+            int32 ResolvedSecond = INDEX_NONE;
+            if (!ResolveEntrySecond(Runtime, Entry, ResolvedSecond) ||
+                ResolvedSecond > CurrentSecond) break;
 
             if (!Runtime.Agent.IsValid())
             {
@@ -156,15 +161,27 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                     break;
                 if (!SpawnPerson(Runtime, Entry)) break;
                 ++Runtime.NextTimelineIndex;
+                Runtime.CachedResolvedSecond = INDEX_NONE;
+                continue;
+            }
+
+            const bool bFollower = !Runtime.Profile.SocialGroupId.IsNone() &&
+                Runtime.Profile.bFollowGroupLeaderSchedule &&
+                Runtime.Profile.EntityId != Runtime.Profile.GroupLeaderEntityId;
+            if (bFollower && Runtime.NextTimelineIndex > 0)
+            {
+                ++Runtime.NextTimelineIndex;
+                Runtime.CachedResolvedSecond = INDEX_NONE;
                 continue;
             }
 
             ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
             const bool bEntryCatchUp = bCatchUp ||
-                Entry.Time.ToSecondsFromMidnight() < CurrentSecond;
+                ResolvedSecond < CurrentSecond;
             if (!bEntryCatchUp && IsAgentBusy(Agent)) break;
             if (!ApplyTimelineEntry(Runtime, Entry, bEntryCatchUp)) break;
             ++Runtime.NextTimelineIndex;
+            Runtime.CachedResolvedSecond = INDEX_NONE;
         }
     }
 }
@@ -194,6 +211,7 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
             ? Anchors->FindAnchor(InitialEntry.TargetAnchorId) : nullptr;
         if (!IsValid(Anchor)) return false;
         SpawnTransform = Anchor->GetActorTransform();
+        SpawnTransform.SetLocation(Anchor->GetPlacementLocation(Runtime.Profile.EntityId));
     }
     else if (InitialEntry.LocationType == ETMOPPersonLocationType::VenueSeat)
     {
@@ -233,6 +251,7 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
     Agent->DisplayName = Runtime.Profile.FullName;
     Agent->SourceReference = Runtime.Profile.GeneralSourceReference;
     Agent->MovementProfile = Runtime.Profile.MovementProfile;
+    Agent->SocialGroupId = Runtime.Profile.SocialGroupId;
     Agent->ActivityState = InitialEntry.ActivityState;
     Agent->LifeState = InitialEntry.LifeState;
     UGameplayStatics::FinishSpawningActor(Agent, SpawnTransform);
@@ -277,6 +296,19 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     case ETMOPPersonTimelineAction::MoveToAnchor:
         if (bCatchUp && Entry.bTeleportDuringCatchUp)
             return ApplyPlacement(Agent, Entry, true);
+        if (!Runtime.Profile.SocialGroupId.IsNone() &&
+            Runtime.Profile.EntityId == Runtime.Profile.GroupLeaderEntityId)
+        {
+            UTMOPAnchorSubsystem* Anchors = GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+            ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
+                ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
+            ATMOPGroupDirector* Groups = FindGroupDirector();
+            if (IsValid(Anchor) && IsValid(Groups) &&
+                Groups->DoesGroupExist(Runtime.Profile.SocialGroupId))
+                return Groups->MoveGroupToLocation(Runtime.Profile.SocialGroupId,
+                    Anchor->GetPlacementLocation(Runtime.Profile.SocialGroupId),
+                    FMath::Max(80.0f, Anchor->MinimumSpacingCm));
+        }
         if (!IsValid(Agent->ActionExecutor)) return false;
         {
             FTMOPScheduleEntry Action;
@@ -349,7 +381,9 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
             ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
         if (!IsValid(Anchor)) return false;
         Agent->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-        Agent->SetActorLocationAndRotation(Anchor->GetActorLocation(), Anchor->GetActorRotation(),
+        const FName StableKey = Agent->EntityIdentity != nullptr
+            ? Agent->EntityIdentity->EntityId : NAME_None;
+        Agent->SetActorLocationAndRotation(Anchor->GetPlacementLocation(StableKey), Anchor->GetActorRotation(),
             false, nullptr, ETeleportType::TeleportPhysics);
         Agent->SetActivityState(Entry.ActivityState);
         return true;
@@ -394,6 +428,99 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
         return Entry.Action == ETMOPPersonTimelineAction::Wait ||
             Entry.Action == ETMOPPersonTimelineAction::ChangeActivity;
     }
+}
+
+bool ATMOPPersonRegistryDirector::ResolveEntrySecond(FPersonRuntime& Runtime,
+    const FTMOPPersonTimelineEntry& Entry, int32& OutSecond) const
+{
+    if (Runtime.CachedResolvedSecond != INDEX_NONE)
+    {
+        OutSecond = Runtime.CachedResolvedSecond;
+        return true;
+    }
+
+    int32 BaseSecond = Entry.Time.ToSecondsFromMidnight();
+    if (Entry.TimingMode == ETMOPEventTimingMode::Relative)
+    {
+        UTMOPHistoricalEventSubsystem* Events = GetGameInstance() != nullptr
+            ? GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>() : nullptr;
+        FTMOPHistoricalEventRuntime EventRuntime;
+        if (Events == nullptr || Entry.SharedEventId.IsNone() ||
+            !Events->TryGetEventRuntime(Entry.SharedEventId, EventRuntime) ||
+            !EventRuntime.bHasResolvedTime) return false;
+        BaseSecond = EventRuntime.ResolvedTime.ToSecondsFromMidnight() + Entry.EventOffsetSeconds;
+    }
+
+    if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor && Entry.bTimeIsArrival)
+        BaseSecond -= EstimateTravelSeconds(Runtime, Entry);
+    Runtime.CachedResolvedSecond = FMath::Max(0, BaseSecond);
+    OutSecond = Runtime.CachedResolvedSecond;
+    return true;
+}
+
+int32 ATMOPPersonRegistryDirector::EstimateTravelSeconds(const FPersonRuntime& Runtime,
+    const FTMOPPersonTimelineEntry& Entry) const
+{
+    if (GetWorld() == nullptr || GetGameInstance() == nullptr) return 0;
+    const UTMOPAnchorSubsystem* Anchors = GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+    ATMOPHistoricalAnchor* Target = Anchors != nullptr
+        ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
+    if (!IsValid(Target)) return 0;
+
+    FVector Start = Runtime.Agent.IsValid() ? Runtime.Agent->GetActorLocation() : FVector::ZeroVector;
+    if (!Runtime.Agent.IsValid())
+        for (int32 Index = Runtime.NextTimelineIndex - 1; Index >= 0; --Index)
+        {
+            const FTMOPPersonTimelineEntry& Previous = Runtime.Profile.Timeline[Index];
+            if (Previous.LocationType == ETMOPPersonLocationType::WorldTransform)
+            { Start = Previous.WorldTransform.GetLocation(); break; }
+            if (Previous.LocationType == ETMOPPersonLocationType::Anchor)
+                if (ATMOPHistoricalAnchor* PreviousAnchor = Anchors->FindAnchor(Previous.TargetAnchorId))
+                { Start = PreviousAnchor->GetPlacementLocation(Runtime.Profile.EntityId); break; }
+        }
+
+    double PathLength = FVector::Dist2D(Start, Target->GetActorLocation());
+    UNavigationSystemV1::GetPathLength(GetWorld(), Start,
+        Target->GetPlacementLocation(Runtime.Profile.SocialGroupId.IsNone()
+            ? Runtime.Profile.EntityId : Runtime.Profile.SocialGroupId),
+        PathLength, nullptr, nullptr);
+    const float Speed = Entry.TravelSpeedOverrideCmPerSecond > 0.0f
+        ? Entry.TravelSpeedOverrideCmPerSecond
+        : Runtime.Profile.MovementProfile.NormalWalkSpeed *
+            Runtime.Profile.MovementProfile.PersonalSpeedMultiplier;
+    return Speed > KINDA_SMALL_NUMBER ? FMath::CeilToInt(PathLength / Speed) : 0;
+}
+
+ATMOPGroupDirector* ATMOPPersonRegistryDirector::FindGroupDirector() const
+{
+    if (GetWorld() == nullptr) return nullptr;
+    for (TActorIterator<ATMOPGroupDirector> It(GetWorld()); It; ++It) return *It;
+    return nullptr;
+}
+
+void ATMOPPersonRegistryDirector::RebuildGroupsFromPeople()
+{
+    ATMOPGroupDirector* Groups = FindGroupDirector();
+    if (!IsValid(Groups))
+    {
+        UE_LOG(LogTemp, Warning, TEXT("TMOP People: group memberships exist but no TMOPGroupDirector is in the level."));
+        return;
+    }
+    TMap<FName, FTMOPGroupDefinition> Definitions;
+    for (const TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
+    {
+        const FTMOPPersonProfileRow& Profile = Pair.Value.Profile;
+        if (Profile.SocialGroupId.IsNone()) continue;
+        FTMOPGroupDefinition& Definition = Definitions.FindOrAdd(Profile.SocialGroupId);
+        Definition.GroupId = Profile.SocialGroupId;
+        Definition.MemberEntityIds.AddUnique(Profile.EntityId);
+        Definition.LeaderEntityId = Profile.GroupLeaderEntityId;
+        Definition.Formation = Profile.GroupFormation;
+        Definition.FormationSpacing = Profile.GroupFormationSpacingCm;
+    }
+    for (const TPair<FName, FTMOPGroupDefinition>& Pair : Definitions)
+        if (!Groups->DoesGroupExist(Pair.Key)) Groups->CreateGroup(Pair.Value);
+    Groups->RefreshWaitingGroups();
 }
 
 bool ATMOPPersonRegistryDirector::IsAgentBusy(const ATMOPHistoricalAgent* Agent) const
@@ -454,15 +581,26 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
             if (Entry.EntryId.IsNone() || EntryIds.Contains(Entry.EntryId))
                 OutErrors.Add(Prefix + FString::Printf(TEXT(" has missing/duplicate EntryId at Timeline[%d]."), Index));
             EntryIds.Add(Entry.EntryId);
+            if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
+                Entry.SharedEventId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] uses Relative timing but has no SharedEventId."), Index));
+            if (Entry.bTimeIsArrival &&
+                Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor)
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] marks arrival time but is not MoveToAnchor."), Index));
             const int32 Second = Entry.Time.ToSecondsFromMidnight();
-            if (PreviousSecond > Second)
-                OutErrors.Add(Prefix + TEXT(" Timeline is not chronological (runtime will sort a copy)."));
-            PreviousSecond = Second;
+            if (Entry.TimingMode == ETMOPEventTimingMode::Absolute &&
+                PreviousSecond > Second)
+                OutErrors.Add(Prefix + TEXT(" absolute Timeline entries are not chronological; array order is authoritative."));
+            if (Entry.TimingMode == ETMOPEventTimingMode::Absolute) PreviousSecond = Second;
         }
         if (!Row->Timeline.IsEmpty() &&
             Row->Timeline[0].Action != ETMOPPersonTimelineAction::InitialPlacement &&
             Row->Timeline[0].Action != ETMOPPersonTimelineAction::Spawn)
             OutErrors.Add(Prefix + TEXT(" Timeline[0] must be InitialPlacement or Spawn."));
+        if (!Row->SocialGroupId.IsNone() && Row->GroupLeaderEntityId.IsNone())
+            OutErrors.Add(Prefix + TEXT(" belongs to a group but has no GroupLeaderEntityId."));
     }
     return OutErrors.IsEmpty();
 }

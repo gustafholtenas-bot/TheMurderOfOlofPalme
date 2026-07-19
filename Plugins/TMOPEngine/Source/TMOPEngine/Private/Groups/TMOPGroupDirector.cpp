@@ -22,9 +22,48 @@ void ATMOPGroupDirector::Tick(const float DeltaSeconds)
     Super::Tick(DeltaSeconds);
     for (FRuntimeGroup& Group : RuntimeGroups)
     {
+        if (Group.State == ETMOPGroupState::WaitingForMembers) RefreshMembers(Group);
         if (Group.State == ETMOPGroupState::Conversing) UpdateConversation(Group, DeltaSeconds);
         else if (Group.State == ETMOPGroupState::Moving) UpdateMovement(Group);
     }
+}
+
+void ATMOPGroupDirector::RefreshMembers(FRuntimeGroup& Group)
+{
+    for (const FName EntityId : Group.Definition.MemberEntityIds)
+    {
+        bool bAlreadyPresent = false;
+        for (const TWeakObjectPtr<ATMOPHistoricalAgent>& Existing : Group.Members)
+            if (const ATMOPHistoricalAgent* Agent = Existing.Get())
+                if (Agent->EntityIdentity != nullptr &&
+                    Agent->EntityIdentity->EntityId == EntityId)
+                { bAlreadyPresent = true; break; }
+        if (bAlreadyPresent) continue;
+
+        if (ATMOPHistoricalAgent* Agent = FindAgent(EntityId))
+        {
+            Agent->SocialGroupId = Group.Definition.GroupId;
+            Agent->KnownCompanionIds = Group.Definition.MemberEntityIds;
+            Agent->KnownCompanionIds.Remove(EntityId);
+            Group.Members.Add(Agent);
+        }
+    }
+    Group.Members.RemoveAll([](const TWeakObjectPtr<ATMOPHistoricalAgent>& Agent)
+        { return !Agent.IsValid(); });
+    if (Group.Members.Num() == Group.Definition.MemberEntityIds.Num() &&
+        Group.State == ETMOPGroupState::WaitingForMembers)
+        SetState(Group, ETMOPGroupState::Idle);
+}
+
+int32 ATMOPGroupDirector::RefreshWaitingGroups()
+{
+    int32 Ready = 0;
+    for (FRuntimeGroup& Group : RuntimeGroups)
+    {
+        RefreshMembers(Group);
+        Ready += Group.Members.Num() == Group.Definition.MemberEntityIds.Num() ? 1 : 0;
+    }
+    return Ready;
 }
 
 bool ATMOPGroupDirector::CreateGroup(const FTMOPGroupDefinition& Definition)

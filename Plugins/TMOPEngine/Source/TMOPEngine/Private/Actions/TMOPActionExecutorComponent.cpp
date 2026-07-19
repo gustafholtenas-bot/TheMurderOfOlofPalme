@@ -256,7 +256,11 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
         return false;
     }
 
-    CurrentTargetLocation = TargetAnchor->GetActorLocation();
+    const FName StableKey = Agent->EntityIdentity != nullptr
+        ? (!Agent->SocialGroupId.IsNone() ? Agent->SocialGroupId
+                                         : Agent->EntityIdentity->EntityId)
+        : NAME_None;
+    CurrentTargetLocation = TargetAnchor->GetPlacementLocation(StableKey);
     Agent->SetActivityState(Entry.ActivityState);
 
     if (!Agent->CanMove())

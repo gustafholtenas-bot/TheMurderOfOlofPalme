@@ -56,6 +56,22 @@ public:
     ETMOPRouteSurfacePreference SurfacePreference =
         ETMOPRouteSurfacePreference::SidewalkPreferred;
 
+    /** Zero keeps point behaviour. Positive values spread arrivals deterministically in a circle. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Anchor|Area",
+        meta=(ClampMin="0.0"))
+    float PlacementRadiusCm = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Anchor|Area",
+        meta=(ClampMin="0.0"))
+    float MinimumSpacingCm = 80.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Anchor|Area")
+    bool bProjectPlacementToNavMesh = true;
+
+    /** Stable point for an entity/group. The same key always gets the same location. */
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Anchor|Area")
+    FVector GetPlacementLocation(FName StableKey);
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Anchor|Debug")
     TObjectPtr<UBillboardComponent> Billboard;
 
@@ -70,4 +86,8 @@ public:
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Anchor")
     FRotator GetAnchorRotation() const;
+
+private:
+    UPROPERTY(Transient)
+    TMap<FName, FVector> ReservedPlacementLocations;
 };

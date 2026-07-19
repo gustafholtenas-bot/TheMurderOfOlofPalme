@@ -66,6 +66,10 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
     int32 RecreateInitialGroups();
 
+    /** Adds agents that spawned after a group was created. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
+    int32 RefreshWaitingGroups();
+
     UFUNCTION(BlueprintPure, Category="TMOP|Groups")
     bool DoesGroupExist(FName GroupId) const;
 
@@ -101,6 +105,7 @@ private:
     void SetState(FRuntimeGroup& Group, ETMOPGroupState NewState);
     void UpdateConversation(FRuntimeGroup& Group, float DeltaSeconds);
     void UpdateMovement(FRuntimeGroup& Group);
+    void RefreshMembers(FRuntimeGroup& Group);
     FVector GetFormationOffset(const FRuntimeGroup& Group, int32 MemberIndex) const;
     FTMOPGroupSnapshot MakeSnapshot(const FRuntimeGroup& Group) const;
 
