@@ -99,6 +99,7 @@ bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
 
     CurrentEntry = Entry;
     bHasCurrentEntry = true;
+    bRestoredFromBake = false;
     ExecutionState = ETMOPActionExecutionState::Executing;
 
     OnActionExecutionChanged.Broadcast(
@@ -137,9 +138,46 @@ void UTMOPActionExecutorComponent::CancelCurrentAction()
         ETMOPActionExecutionState::Failed);
 
     bHasCurrentEntry = false;
+    bRestoredFromBake = false;
     CurrentEntry = FTMOPScheduleEntry();
     ExecutionState = ETMOPActionExecutionState::Idle;
     SetComponentTickEnabled(false);
+}
+
+bool UTMOPActionExecutorComponent::TryGetActiveMoveTarget(
+    FVector& OutTargetLocation) const
+{
+    if (ExecutionState != ETMOPActionExecutionState::WaitingForArrival)
+    {
+        OutTargetLocation = FVector::ZeroVector;
+        return false;
+    }
+    OutTargetLocation = CurrentTargetLocation;
+    return true;
+}
+
+bool UTMOPActionExecutorComponent::RestoreBakedMoveToLocation(
+    const FVector TargetLocation,
+    const ETMOPAgentActivityState RestoredActivity)
+{
+    ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
+    AController* Controller = IsValid(Agent) ? Agent->GetController() : nullptr;
+    if (!IsValid(Agent) || !IsValid(Controller)) return false;
+
+    CancelCurrentAction();
+    CurrentEntry = FTMOPScheduleEntry();
+    CurrentEntry.ActionType = ETMOPScheduleActionType::MoveToAnchor;
+    CurrentTargetLocation = TargetLocation;
+    bHasCurrentEntry = true;
+    bRestoredFromBake = true;
+    ExecutionState = ETMOPActionExecutionState::WaitingForArrival;
+    Agent->SetActivityState(
+        RestoredActivity == ETMOPAgentActivityState::Idle
+            ? ETMOPAgentActivityState::Walking
+            : RestoredActivity);
+    UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
+    SetComponentTickEnabled(true);
+    return true;
 }
 
 void UTMOPActionExecutorComponent::HandleScheduleEntryReady(
@@ -300,7 +338,7 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
     UGameInstance* GameInstance =
         World != nullptr ? World->GetGameInstance() : nullptr;
 
-    if (bSuccessful && GameInstance != nullptr)
+    if (bSuccessful && !bRestoredFromBake && GameInstance != nullptr)
     {
         if (UTMOPScheduleSubsystem* Schedules =
             GameInstance->GetSubsystem<UTMOPScheduleSubsystem>())
@@ -317,6 +355,7 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
         FinalState);
 
     bHasCurrentEntry = false;
+    bRestoredFromBake = false;
     CurrentEntry = FTMOPScheduleEntry();
     ExecutionState = ETMOPActionExecutionState::Idle;
     SetComponentTickEnabled(false);

@@ -12,7 +12,7 @@ struct TMOPENGINE_API FTMOPTime
     int32 Hour = 23;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Time")
-    int32 Minute = 13;
+    int32 Minute = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Time")
     int32 Second = 0;

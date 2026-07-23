@@ -226,6 +226,10 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
     FName EntityId = NAME_None;
 
+    /** Stable sorting category, normally derived from the person's Blender collection. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
+    FName CategoryId = NAME_None;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
     FText FullName;
 
@@ -329,6 +333,10 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
     FTMOPMovementProfile MovementProfile;
+
+    /** Vehicles that are source-backed as belonging to, carrying, or otherwise involving this person. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Vehicle")
+    TArray<FName> AssociatedVehicleIds;
 
     /** Existing generic group system membership. Leave GroupId empty for an individual. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")

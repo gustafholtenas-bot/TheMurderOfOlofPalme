@@ -1,0 +1,2217 @@
+[
+  {
+    "Name": "VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L",
+    "VehicleId": "VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L",
+    "DisplayName": " BMW ljus Metallic. kan ha varit den här stora BMW:n 3,2 L",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 35856.55212402344,
+            "Y": -16935.812377929688,
+            "Z": -383.1608772277832
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 6 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object ' BMW ljus Metallic. kan ha varit den här stora BMW:n 3,2 L'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_COPY",
+    "VehicleId": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_COPY",
+    "DisplayName": "Anders Delboms taxi bil Järfälla taxi copy",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "Taxi",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "ANDERS_DELBOM"
+    ],
+    "PrimaryPersonEntityId": "ANDERS_DELBOM",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_COPY_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 299.0152359008789,
+            "Y": 1835.5379104614258,
+            "Z": -28.42038869857788
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 8 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anders Delboms taxi bil Järfälla taxi copy'. Associated people are name-backed, not automatically confirmed drivers. Possible duplicate of 'Anders Delboms taxi bil Järfälla taxi Mitsubishi Galant'; merge after review."
+  },
+  {
+    "Name": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT",
+    "VehicleId": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT",
+    "DisplayName": "Anders Delboms taxi bil Järfälla taxi Mitsubishi Galant",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "Taxi",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "ANDERS_DELBOM"
+    ],
+    "PrimaryPersonEntityId": "ANDERS_DELBOM",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1940.7791137695312,
+            "Y": 953.4383773803711,
+            "Z": 60.57320237159729
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 10 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anders Delboms taxi bil Järfälla taxi Mitsubishi Galant'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANNETTE_KOHUTS_BIL",
+    "VehicleId": "VEHICLE_ANNETTE_KOHUTS_BIL",
+    "DisplayName": "Annette Kohuts bil",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "ANNETTE_KOHUT"
+    ],
+    "PrimaryPersonEntityId": "ANNETTE_KOHUT",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANNETTE_KOHUTS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 9706.169128417969,
+            "Y": 2161.2749099731445,
+            "Z": 872.2557067871094
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 3 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Annette Kohuts bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT",
+    "DisplayName": "Anonymtvittne EAC13558 Bil P bot",
+    "CategoryId": "BIRGER_JARLSGATAN",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_EAC13558"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_EAC13558",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 39540.814208984375,
+            "Y": -13504.461669921875,
+            "Z": -128.1421661376953
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne EAC13558 Bil P bot'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_2",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_2",
+    "DisplayName": "Anonymtvittne EAC13558 Bil P bot.001",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_EAC13558"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_EAC13558",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_2_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 39540.814208984375,
+            "Y": -13504.461669921875,
+            "Z": -128.1421661376953
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne EAC13558 Bil P bot.001'. Associated people are name-backed, not automatically confirmed drivers. Possible duplicate of 'Anonymtvittne EAC13558 Bil P bot'; merge after review."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_EAE119_00_BIL",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_EAE119_00_BIL",
+    "DisplayName": "Anonymtvittne EAE119-00 Bil ",
+    "CategoryId": "ESCAPE_ROUTE_JOHANNES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_EAE119_00"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_EAE119_00",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_EAE119_00_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 16055.160522460938,
+            "Y": -34860.09521484375,
+            "Z": 1918.1671142578125
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne EAE119-00 Bil '. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_L1100_BIL",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_L1100_BIL",
+    "DisplayName": "Anonymtvittne L1100 bil",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_1100"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_1100",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_L1100_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -26711.14501953125,
+            "Y": -42294.47021484375,
+            "Z": 258.3885669708252
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 3 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne L1100 bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_L837S_BIL",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_L837S_BIL",
+    "DisplayName": "Anonymtvittne L837s bil",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_L837"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_L837",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_L837S_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -27555.328369140625,
+            "Y": -27080.615234375,
+            "Z": 206.30311965942383
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 2 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne L837s bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_BENGT_PALME_MERCEDES_GUL",
+    "VehicleId": "VEHICLE_BENGT_PALME_MERCEDES_GUL",
+    "DisplayName": "Bengt Palme Mercedes gul",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BENGT_PALME_MERCEDES_GUL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1766.4419174194336,
+            "Y": 139.8991346359253,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Bengt Palme Mercedes gul'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_BENGT_PALMS_GULDFARGADE_MERCEDES",
+    "VehicleId": "VEHICLE_BENGT_PALMS_GULDFARGADE_MERCEDES",
+    "DisplayName": "Bengt Palms guldfärgade Mercedes",
+    "CategoryId": "BENGT_PALM_CAR",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "BENGT_PALM"
+    ],
+    "PrimaryPersonEntityId": "BENGT_PALM",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BENGT_PALMS_GULDFARGADE_MERCEDES_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1447.6881980895996,
+            "Y": -724.1070747375488,
+            "Z": -10.069108009338379
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Bengt Palms guldfärgade Mercedes'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_BIRGIT_DAHLSTROMS_BIL",
+    "VehicleId": "VEHICLE_BIRGIT_DAHLSTROMS_BIL",
+    "DisplayName": "Birgit Dahlströms bil",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "BIRGIT_DAHLSTROM_TRAFIKOVERVAKARE"
+    ],
+    "PrimaryPersonEntityId": "BIRGIT_DAHLSTROM_TRAFIKOVERVAKARE",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BIRGIT_DAHLSTROMS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 47077.880859375,
+            "Y": -2603.3992767333984,
+            "Z": 1110.8390808105469
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 11 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Birgit Dahlströms bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_BJORN_ROSENGRENS_BIL",
+    "VehicleId": "VEHICLE_BJORN_ROSENGRENS_BIL",
+    "DisplayName": "Björn Rosengrens bil",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "BJORN_ROSENGREN",
+      "BJORN_ROSENGRENS_FRU"
+    ],
+    "PrimaryPersonEntityId": "BJORN_ROSENGREN",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BJORN_ROSENGRENS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 9865.745544433594,
+            "Y": 19846.798706054688,
+            "Z": -41.12396240234375
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Björn Rosengrens bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE",
+    "VehicleId": "VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE",
+    "DisplayName": "Danica Najic bil inbrott mercedes vinröd kanske",
+    "CategoryId": "ADOLF_FREDRIK_CHURCH",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "DANICA_NAJIC"
+    ],
+    "PrimaryPersonEntityId": "DANICA_NAJIC",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -9275.52261352539,
+            "Y": -10513.240814208984,
+            "Z": 4.557585716247559
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Danica Najic bil inbrott mercedes vinröd kanske'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ENWALL_BILD",
+    "VehicleId": "VEHICLE_ENWALL_BILD",
+    "DisplayName": "Enwall bild",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "JENNIE_ENWALL",
+      "LEIF_ENWALL"
+    ],
+    "PrimaryPersonEntityId": "JENNIE_ENWALL",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ENWALL_BILD_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 9643.775939941406,
+            "Y": 19293.035888671875,
+            "Z": 218.63224506378174
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 7 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Enwall bild'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_FINARE_PARETS_BIL",
+    "VehicleId": "VEHICLE_FINARE_PARETS_BIL",
+    "DisplayName": "finare parets bil",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "KVINNA_FINARE_PAR_L1634",
+      "MAN_FINARE_PAR"
+    ],
+    "PrimaryPersonEntityId": "KVINNA_FINARE_PAR_L1634",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_FINARE_PARETS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -19756.727600097656,
+            "Y": -44441.455078125,
+            "Z": -196.89788818359375
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 2 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'finare parets bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA",
+    "VehicleId": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA",
+    "DisplayName": "Hans Hongelins  taxi bil Volvo 740, mellanblå",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "Taxi",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "HANS_HONGELINS"
+    ],
+    "PrimaryPersonEntityId": "HANS_HONGELINS",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 58711.70654296875,
+            "Y": 8164.446258544922,
+            "Z": -259.09223556518555
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 7 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Hans Hongelins  taxi bil Volvo 740, mellanblå'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_HANS_JOHANSSON_TAXI",
+    "VehicleId": "VEHICLE_HANS_JOHANSSON_TAXI",
+    "DisplayName": "Hans Johansson taxi",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "Taxi",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "HANS_JOHANSSON"
+    ],
+    "PrimaryPersonEntityId": "HANS_JOHANSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_HANS_JOHANSSON_TAXI_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1447.6881980895996,
+            "Y": -724.1070747375488,
+            "Z": -10.069108009338379
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 5 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Hans Johansson taxi'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+    "VehicleId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+    "DisplayName": "Inge Morelius mörk gul Opel Rekord -73:a.",
+    "CategoryId": "INGE_MORELIUS_COMPANY",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "INGE_MORELIUS_G"
+    ],
+    "PrimaryPersonEntityId": "INGE_MORELIUS_G",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 59697.088623046875,
+            "Y": 2949.1188049316406,
+            "Z": 243.3192014694214
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 13 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Inge Morelius mörk gul Opel Rekord -73:a.'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA",
+    "VehicleId": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA",
+    "DisplayName": "Jan-Åke Svensson s bil BMW GRÅ",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "JAN_AKE_SVENSSON"
+    ],
+    "PrimaryPersonEntityId": "JAN_AKE_SVENSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1584.7515106201172,
+            "Y": -249.4375228881836,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 5 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Jan-Åke Svensson s bil BMW GRÅ'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_JAN_AKE_SVENSSONS_BIL",
+    "VehicleId": "VEHICLE_JAN_AKE_SVENSSONS_BIL",
+    "DisplayName": "Jan-Åke Svenssons bil ",
+    "CategoryId": "JAN_AKE_SVENSSON_CAR",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "JAN_AKE_SVENSSON"
+    ],
+    "PrimaryPersonEntityId": "JAN_AKE_SVENSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_JAN_AKE_SVENSSONS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1447.6881980895996,
+            "Y": -724.1070747375488,
+            "Z": -10.069108009338379
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Jan-Åke Svenssons bil '. Associated people are name-backed, not automatically confirmed drivers. Possible duplicate of 'Jan-Åke Svensson s bil BMW GRÅ'; merge after review."
+  },
+  {
+    "Name": "VEHICLE_KJELL_AKE_JANSSONS_BIL",
+    "VehicleId": "VEHICLE_KJELL_AKE_JANSSONS_BIL",
+    "DisplayName": "Kjell åke Janssons Bil",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "KJELL_AKE_JANSSON_38_AR"
+    ],
+    "PrimaryPersonEntityId": "KJELL_AKE_JANSSON_38_AR",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_KJELL_AKE_JANSSONS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 10414.305877685547,
+            "Y": 20146.841430664062,
+            "Z": -484.56358909606934
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Kjell åke Janssons Bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL",
+    "VehicleId": "VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL",
+    "DisplayName": "Lars Eric Eriksson  pappas bil",
+    "CategoryId": "GRAND_2",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "PAPPA_TILL_LARS_ERIC_ERIKSSON"
+    ],
+    "PrimaryPersonEntityId": "PAPPA_TILL_LARS_ERIC_ERIKSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0.0,
+            "Y": -0.0,
+            "Z": 0.0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 2 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Lars Eric Eriksson  pappas bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT",
+    "VehicleId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT",
+    "DisplayName": "Lars Eric Eriksson silvergrå Volvo GLT",
+    "CategoryId": "AROUND_GRAND",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "LARS_ERIC_ERIKSSON"
+    ],
+    "PrimaryPersonEntityId": "LARS_ERIC_ERIKSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -30037.063598632812,
+            "Y": -38380.072021484375,
+            "Z": 466.20731353759766
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Lars Eric Eriksson silvergrå Volvo GLT'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LARS_KNUBBS_BIL",
+    "VehicleId": "VEHICLE_LARS_KNUBBS_BIL",
+    "DisplayName": "Lars Knubbs Bil",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "LARS_KNUBB"
+    ],
+    "PrimaryPersonEntityId": "LARS_KNUBB",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LARS_KNUBBS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -27797.5830078125,
+            "Y": -27195.358276367188,
+            "Z": 209.25698280334473
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 2 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Lars Knubbs Bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+    "VehicleId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+    "DisplayName": "Leif Ljungqvist Chevrolet Suburban",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "LEIF_LJUNGQVIST"
+    ],
+    "PrimaryPersonEntityId": "LEIF_LJUNGQVIST",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1883.2427978515625,
+            "Y": 438.39054107666016,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Leif Ljungqvist Chevrolet Suburban'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD",
+    "VehicleId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD",
+    "DisplayName": "Marco Neesers Kompis bil mörkröd",
+    "CategoryId": "COMPANY_2",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "MARCO_NEESERS_KOMPIS",
+      "MARCO_NEESERS_KOMPIS_2"
+    ],
+    "PrimaryPersonEntityId": "MARCO_NEESERS_KOMPIS",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -20045.114135742188,
+            "Y": -44286.58752441406,
+            "Z": -27.45208740234375
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Marco Neesers Kompis bil mörkröd'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_2",
+    "VehicleId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_2",
+    "DisplayName": "Marco Neesers Kompis bil mörkröd.001",
+    "CategoryId": "COMPANY_2",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "MARCO_NEESERS_KOMPIS",
+      "MARCO_NEESERS_KOMPIS_2"
+    ],
+    "PrimaryPersonEntityId": "MARCO_NEESERS_KOMPIS",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_2_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -20045.114135742188,
+            "Y": -44286.58752441406,
+            "Z": -27.45208740234375
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 2 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Marco Neesers Kompis bil mörkröd.001'. Associated people are name-backed, not automatically confirmed drivers. Possible duplicate of 'Marco Neesers Kompis bil mörkröd'; merge after review."
+  },
+  {
+    "Name": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+    "VehicleId": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+    "DisplayName": "Mercedes Limosine Jan Nilsson",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "JAN_NILSSON"
+    ],
+    "PrimaryPersonEntityId": "JAN_NILSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -848.9228248596191,
+            "Y": 530.0363540649414,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 2 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mercedes Limosine Jan Nilsson'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MERCEDES_TAXI_BEIGE",
+    "VehicleId": "VEHICLE_MERCEDES_TAXI_BEIGE",
+    "DisplayName": "Mercedes-taxi  beige",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "Taxi",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MERCEDES_TAXI_BEIGE_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 35053.875732421875,
+            "Y": -17277.752685546875,
+            "Z": -318.76392364501953
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 1 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mercedes-taxi  beige'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL",
+    "VehicleId": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL",
+    "DisplayName": "Mikael Lindblad taxi bil",
+    "CategoryId": "MURDER_SCENE",
+    "VehicleCategory": "Taxi",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "MIKAEL_LINDBLAD"
+    ],
+    "PrimaryPersonEntityId": "MIKAEL_LINDBLAD",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -23923.643493652344,
+            "Y": -18561.50360107422,
+            "Z": 330.20176887512207
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 5 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mikael Lindblad taxi bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS",
+    "VehicleId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS",
+    "DisplayName": "Mikeal Åströms bil orange ford Tanus",
+    "CategoryId": "AROUND_GRAND",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "MIKEAL_ASTROM"
+    ],
+    "PrimaryPersonEntityId": "MIKEAL_ASTROM",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -15274.430847167969,
+            "Y": 7643.040466308594,
+            "Z": 1475.0293731689453
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 10 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mikeal Åströms bil orange ford Tanus'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA",
+    "VehicleId": "VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA",
+    "DisplayName": "PB SAAB 900I Y63AM35 1983 BLÅ",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 37651.23291015625,
+            "Y": -17775.619506835938,
+            "Z": -486.16085052490234
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'PB SAAB 900I Y63AM35 1983 BLÅ'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN",
+    "VehicleId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN",
+    "DisplayName": "Sigges bil Saab 900 brun",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "SIGGE_CEDERGREN"
+    ],
+    "PrimaryPersonEntityId": "SIGGE_CEDERGREN",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -9084.1064453125,
+            "Y": -39355.55725097656,
+            "Z": 872.2557067871094
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 17 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Sigges bil Saab 900 brun'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_THEODOROS_ATHANASIOU_BIL",
+    "VehicleId": "VEHICLE_THEODOROS_ATHANASIOU_BIL",
+    "DisplayName": "Theodoros Athanasiou Bil",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "THEODOROS_ATHANASIOU"
+    ],
+    "PrimaryPersonEntityId": "THEODOROS_ATHANASIOU",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_THEODOROS_ATHANASIOU_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -1637.4963760375977,
+            "Y": 237.91604042053223,
+            "Z": -47.734904289245605
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 2 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Theodoros Athanasiou Bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_VIT_VOLVO",
+    "VehicleId": "VEHICLE_VIT_VOLVO",
+    "DisplayName": "Vit Volvo",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_VIT_VOLVO_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 8050.7354736328125,
+            "Y": -2963.3670806884766,
+            "Z": 872.2557067871094
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 5 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Vit Volvo'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_VAKTARE_BIL",
+    "VehicleId": "VEHICLE_VAKTARE_BIL",
+    "DisplayName": "Väktare bil",
+    "CategoryId": "MURDER_SCENE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "VAKTARE"
+    ],
+    "PrimaryPersonEntityId": "VAKTARE",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_VAKTARE_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -5496.9451904296875,
+            "Y": -27982.907104492188,
+            "Z": -219.1204071044922
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 4 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Väktare bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_X_BIL",
+    "VehicleId": "VEHICLE_X_BIL",
+    "DisplayName": "x bil.003",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_X_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1766.4419174194336,
+            "Y": 139.8991346359253,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'x bil.003'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_X_BIL_2",
+    "VehicleId": "VEHICLE_X_BIL_2",
+    "DisplayName": "x bil.004",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_X_BIL_2_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1766.4419174194336,
+            "Y": 139.8991346359253,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'x bil.004'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_X_BIL_3",
+    "VehicleId": "VEHICLE_X_BIL_3",
+    "DisplayName": "x bil.005",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_X_BIL_3_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1766.4419174194336,
+            "Y": 139.8991346359253,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 0 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'x bil.005'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+    "VehicleId": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+    "DisplayName": "Åke Larssons bil  Ford Escort, gråmetallic",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "AKE_LARSSON"
+    ],
+    "PrimaryPersonEntityId": "AKE_LARSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": -19954.53338623047,
+            "Y": 10292.09976196289,
+            "Z": -10.069108009338379
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 8 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Åke Larssons bil  Ford Escort, gråmetallic'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_2",
+    "VehicleId": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_2",
+    "DisplayName": "Åke Larssons bil  Ford Escort, gråmetallic.001",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "None",
+    "VehicleClass": "None",
+    "AssociatedPersonEntityIds": [
+      "AKE_LARSSON"
+    ],
+    "PrimaryPersonEntityId": "AKE_LARSSON",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": false,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_2_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 1214.6860122680664,
+            "Y": 877.3763656616211,
+            "Z": -10.069108009338379
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Draft Blender placement. Object has 5 keyed movement frame(s); occupants and lane route must be verified before enabling spawn."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Åke Larssons bil  Ford Escort, gråmetallic.001'. Associated people are name-backed, not automatically confirmed drivers. Possible duplicate of 'Åke Larssons bil  Ford Escort, gråmetallic'; merge after review."
+  }
+]

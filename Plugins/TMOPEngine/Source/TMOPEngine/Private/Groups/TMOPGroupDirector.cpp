@@ -321,6 +321,8 @@ FTMOPGroupSnapshot ATMOPGroupDirector::MakeSnapshot(const FRuntimeGroup& Group) 
     Result.Formation = Group.Definition.Formation;
     Result.RemainingConversationSeconds = Group.RemainingConversationSeconds;
     Result.bConversationHasNoAutomaticEnd = Group.bConversationHasNoAutomaticEnd;
+    Result.TargetLocation = Group.TargetLocation;
+    Result.AcceptanceRadius = Group.AcceptanceRadius;
     return Result;
 }
 

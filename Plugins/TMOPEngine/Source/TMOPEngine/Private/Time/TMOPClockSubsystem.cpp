@@ -1,10 +1,18 @@
 #include "Time/TMOPClockSubsystem.h"
+#include "Time/TMOPSimulationSettings.h"
 
 UTMOPClockSubsystem::UTMOPClockSubsystem()
 {
-    LoopStartSeconds = FTMOPTime(23, 0, 0).ToSecondsFromMidnight();
-    LoopEndSeconds = FTMOPTime(23, 45, 0).ToSecondsFromMidnight();
+    const UTMOPSimulationSettings* Settings = GetDefault<UTMOPSimulationSettings>();
+    LoopStartSeconds = Settings->ScenarioStartTime.ToSecondsFromMidnight();
+    LoopEndSeconds = Settings->ScenarioEndTime.ToSecondsFromMidnight();
+    if (LoopEndSeconds <= LoopStartSeconds)
+    {
+        LoopStartSeconds = FTMOPTime(23, 0, 0).ToSecondsFromMidnight();
+        LoopEndSeconds = FTMOPTime(23, 45, 0).ToSecondsFromMidnight();
+    }
     CurrentTimeSeconds = LoopStartSeconds;
+    TimeScale = FMath::Clamp(Settings->DefaultTimeScale, 0.0f, 100.0f);
 }
 
 void UTMOPClockSubsystem::Initialize(FSubsystemCollectionBase& Collection)

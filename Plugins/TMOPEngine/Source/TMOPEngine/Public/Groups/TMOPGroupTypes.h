@@ -69,4 +69,10 @@ struct TMOPENGINE_API FTMOPGroupSnapshot
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Groups")
     bool bConversationHasNoAutomaticEnd = false;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Groups")
+    FVector TargetLocation = FVector::ZeroVector;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Groups")
+    float AcceptanceRadius = 100.0f;
 };

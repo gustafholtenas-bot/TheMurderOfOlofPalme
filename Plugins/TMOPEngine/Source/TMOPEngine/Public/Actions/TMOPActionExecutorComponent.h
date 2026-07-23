@@ -83,6 +83,16 @@ public:
     UFUNCTION(BlueprintCallable, Category = "TMOP|Actions")
     void CancelCurrentAction();
 
+    /** Returns the currently active individual navigation target for bake recording. */
+    UFUNCTION(BlueprintPure, Category = "TMOP|Actions|Bake")
+    bool TryGetActiveMoveTarget(FVector& OutTargetLocation) const;
+
+    /** Resumes an in-progress individual walk restored from a baked frame. */
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Actions|Bake")
+    bool RestoreBakedMoveToLocation(
+        FVector TargetLocation,
+        ETMOPAgentActivityState RestoredActivity);
+
 private:
     UFUNCTION()
     void HandleScheduleEntryReady(
@@ -106,4 +116,5 @@ private:
         ETMOPActionExecutionState::Idle;
 
     bool bHasCurrentEntry = false;
+    bool bRestoredFromBake = false;
 };
