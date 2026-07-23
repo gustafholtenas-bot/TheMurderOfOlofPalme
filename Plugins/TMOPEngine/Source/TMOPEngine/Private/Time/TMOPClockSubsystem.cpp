@@ -2,8 +2,8 @@
 
 UTMOPClockSubsystem::UTMOPClockSubsystem()
 {
-    LoopStartSeconds = FTMOPTime(23, 13, 0).ToSecondsFromMidnight();
-    LoopEndSeconds = FTMOPTime(23, 23, 0).ToSecondsFromMidnight();
+    LoopStartSeconds = FTMOPTime(23, 0, 0).ToSecondsFromMidnight();
+    LoopEndSeconds = FTMOPTime(23, 45, 0).ToSecondsFromMidnight();
     CurrentTimeSeconds = LoopStartSeconds;
 }
 
