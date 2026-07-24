@@ -40,7 +40,8 @@ enum class ETMOPAnchorCategory : uint8
     VehicleSpawn,
     PlayerSpawn,
     ItemSpawn,
-    RouteNode
+    RouteNode,
+    MapExit
 };
 
 UENUM(BlueprintType)
