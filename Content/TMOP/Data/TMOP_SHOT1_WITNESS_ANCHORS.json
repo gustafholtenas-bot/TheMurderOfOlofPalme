@@ -1,0 +1,1176 @@
+{
+  "format": "TMOP_SHOT1_WITNESS_ANCHORS_V1",
+  "source_export": "TMOP_PeopleTimelineExport(1).json",
+  "source_blend": "C:\\Users\\User\\Projects\\Journalism projects\\Iran Contra\\Sverige\\Palme\\Hela utredningen\\3dmodellen\\Personer\\allpeople_SHOT1_WITNESS_ANCHORS.blend",
+  "scene": "Scene",
+  "event_id": "EVENT_FIRST_SHOT",
+  "event_time": "1986-02-28 23:21:30",
+  "fps": 30.0,
+  "evaluated_frame": 38700,
+  "coordinate_conversion": "UnrealCm=(BlenderX*100,-BlenderY*100,BlenderZ*100)",
+  "anchor_count": 36,
+  "anchors": [
+    {
+      "anchor_id": "ANCHOR_SHOT1_ALF_LUNDIN",
+      "display_name": "Alf Lundin - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Alf Lundin",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -28.644922256469727,
+        "y": 39.755088806152344,
+        "z": -1.0326342582702637
+      },
+      "unreal_location_cm": {
+        "x": -2864.4922256469727,
+        "y": -3975.5088806152344,
+        "z": -103.26342582702637
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": -6.464193531930386e-06,
+        "z": 53.67547872465209
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6309433579444885,
+        -0.6309433579444885,
+        -0.3192342221736908,
+        0.31923413276672363
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_ANDERS_BJORKMAN",
+      "display_name": "Anders Björkman - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Anders Björkman",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 11.637077331542969,
+        "y": 16.268836975097656,
+        "z": 0.18431195616722107
+      },
+      "unreal_location_cm": {
+        "x": 1163.7077331542969,
+        "y": -1626.8836975097656,
+        "z": 18.431195616722107
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": -4.659242897307064e-08,
+        "z": 26.99999904379616
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6875693202018738,
+        -0.6875693798065186,
+        -0.1650708019733429,
+        0.1650707870721817
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_ANNIKA_BLOMQVIST_MED_EGON",
+      "display_name": "Annika Blomqvist (med egon) - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Annika Blomqvist (med egon)",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -1.9626579284667969,
+        "y": -11.474578857421875,
+        "z": 0.8579757213592529
+      },
+      "unreal_location_cm": {
+        "x": -196.2657928466797,
+        "y": 1147.4578857421875,
+        "z": 85.7975721359253
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": 3.363932487733603e-07,
+        "z": 173.67611044135995
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.039002832025289536,
+        -0.03900283947587013,
+        -0.7060303092002869,
+        0.7060302495956421
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_ASA_GUSTAVSSON",
+      "display_name": "Åsa Gustavsson - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Åsa Gustavsson",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -192.2618408203125,
+        "y": 444.10089111328125,
+        "z": 1.399999976158142
+      },
+      "unreal_location_cm": {
+        "x": -19226.18408203125,
+        "y": -44410.089111328125,
+        "z": 139.9999976158142
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": 2.1931517350475426e-07,
+        "z": -48.47458336982169
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6447774767875671,
+        -0.6447775363922119,
+        0.2902790904045105,
+        -0.2902790606021881
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_BENGT_PALME_MERCEDES_GUL",
+      "display_name": "Bengt Palme Mercedes gul - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Bengt Palme Mercedes gul",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 17.664419174194336,
+        "y": -1.398991346359253,
+        "z": -0.4811687469482422
+      },
+      "unreal_location_cm": {
+        "x": 1766.4419174194336,
+        "y": 139.8991346359253,
+        "z": -48.11687469482422
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": -0.0,
+        "z": -152.4519123125706
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.23809348046779633,
+        -0.0,
+        -0.0,
+        -0.9712422490119934
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_BENGT_PALMS_GULDFARGADE_MERCEDES",
+      "display_name": "Bengt Palms guldfärgade Mercedes - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Bengt Palms guldfärgade Mercedes",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 14.476881980895996,
+        "y": 7.241070747375488,
+        "z": -0.10069108009338379
+      },
+      "unreal_location_cm": {
+        "x": 1447.6881980895996,
+        "y": -724.1070747375488,
+        "z": -10.069108009338379
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": -0.0,
+        "z": 4.641495177843539
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.9991797804832458,
+        0.0,
+        0.0,
+        0.04049360379576683
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_BERIT_SVEN_OCH_BERIT",
+      "display_name": "Berit (sven och berit) - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Berit (sven och berit)",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -23.54500389099121,
+        "y": -21.114917755126953,
+        "z": -1.0326342582702637
+      },
+      "unreal_location_cm": {
+        "x": -2354.500389099121,
+        "y": 2111.4917755126953,
+        "z": -103.26342582702637
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": -0.0,
+        "z": 120.25287060275643
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.3522011935710907,
+        -0.3522011935710907,
+        -0.6131511330604553,
+        0.6131511330604553
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_CHRISTINA_VALLIN",
+      "display_name": "Christina Vallin - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Christina Vallin",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -22.65201187133789,
+        "y": 29.133644104003906,
+        "z": 0.5148423314094543
+      },
+      "unreal_location_cm": {
+        "x": -2265.201187133789,
+        "y": -2913.3644104003906,
+        "z": 51.484233140945435
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": -6.464193531930386e-06,
+        "z": 53.67547872465209
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6309433579444885,
+        -0.6309433579444885,
+        -0.3192342221736908,
+        0.31923413276672363
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_CLAES_NYBERG_BOFORS_ANSTALLD",
+      "display_name": "Claes Nyberg Bofors anställd - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Claes Nyberg Bofors anställd",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -192.2618408203125,
+        "y": 444.10089111328125,
+        "z": 1.399999976158142
+      },
+      "unreal_location_cm": {
+        "x": -19226.18408203125,
+        "y": -44410.089111328125,
+        "z": 139.9999976158142
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": 2.1931517350475426e-07,
+        "z": -48.47458336982169
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6447774767875671,
+        -0.6447775363922119,
+        0.2902790904045105,
+        -0.2902790606021881
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_EGON_ENOCKSSON",
+      "display_name": "Egon Enocksson - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Egon Enocksson",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -3.022918701171875,
+        "y": -12.005142211914062,
+        "z": 0.8579757213592529
+      },
+      "unreal_location_cm": {
+        "x": -302.2918701171875,
+        "y": 1200.5142211914062,
+        "z": 85.7975721359253
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": 1.942717276650663e-07,
+        "z": -175.38935411163092
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.028443099930882454,
+        -0.028443099930882454,
+        0.7065345048904419,
+        -0.7065344452857971
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_FINSKA_FLICKAN_1_ANKI",
+      "display_name": "Finska flickan 1 Anki - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Finska flickan 1 Anki",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 582.3584594726562,
+        "y": -25.212303161621094,
+        "z": -3.492424726486206
+      },
+      "unreal_location_cm": {
+        "x": 58235.845947265625,
+        "y": 2521.2303161621094,
+        "z": -349.2424726486206
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -89.99998884409983,
+        "y": 3.8685010257328397e-07,
+        "z": -156.3809239911071
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.1447158008813858,
+        -0.14471577107906342,
+        0.6921396255493164,
+        -0.692139744758606
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_FINSKA_FLICKAN_2_ANN_CHRISTINE",
+      "display_name": "Finska flickan 2 Ann-Christine - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Finska flickan 2 Ann-Christine",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 582.3584594726562,
+        "y": -25.212303161621094,
+        "z": -3.492424726486206
+      },
+      "unreal_location_cm": {
+        "x": 58235.845947265625,
+        "y": 2521.2303161621094,
+        "z": -349.2424726486206
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -89.99998884409983,
+        "y": 3.8685010257328397e-07,
+        "z": -156.3809239911071
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.1447158008813858,
+        -0.14471577107906342,
+        0.6921396255493164,
+        -0.692139744758606
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_GUNNILA_DAHLEN_KANNER_SUSANNE_KARLSSON",
+      "display_name": "Gunnila Dahlen (känner Susanne Karlsson) - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Gunnila Dahlen (känner Susanne Karlsson)",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -186.62808227539062,
+        "y": 437.30780029296875,
+        "z": -0.19257020950317383
+      },
+      "unreal_location_cm": {
+        "x": -18662.808227539062,
+        "y": -43730.780029296875,
+        "z": -19.257020950317383
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": 1.4913867203536963e-06,
+        "z": 35.973452056487424
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6725490689277649,
+        -0.6725491285324097,
+        -0.21835215389728546,
+        0.21835215389728546
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_GUNNILA_DAHLEN_VAN_1",
+      "display_name": "Gunnila Dahlen Vän 1 - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Gunnila Dahlen Vän 1",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -186.62808227539062,
+        "y": 437.30780029296875,
+        "z": -0.19257020950317383
+      },
+      "unreal_location_cm": {
+        "x": -18662.808227539062,
+        "y": -43730.780029296875,
+        "z": -19.257020950317383
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": 1.4913867203536963e-06,
+        "z": 35.973452056487424
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6725490689277649,
+        -0.6725491285324097,
+        -0.21835215389728546,
+        0.21835215389728546
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_GUNNILA_DAHLEN_VAN_2",
+      "display_name": "Gunnila Dahlen Vän 2 - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Gunnila Dahlen Vän 2",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -186.62808227539062,
+        "y": 437.30780029296875,
+        "z": -0.19257020950317383
+      },
+      "unreal_location_cm": {
+        "x": -18662.808227539062,
+        "y": -43730.780029296875,
+        "z": -19.257020950317383
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": 1.4913867203536963e-06,
+        "z": 35.973452056487424
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6725490689277649,
+        -0.6725491285324097,
+        -0.21835215389728546,
+        0.21835215389728546
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_GUNNILA_DAHLEN_VAN_3",
+      "display_name": "Gunnila Dahlen Vän 3 - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Gunnila Dahlen Vän 3",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -186.62808227539062,
+        "y": 437.30780029296875,
+        "z": -0.19257020950317383
+      },
+      "unreal_location_cm": {
+        "x": -18662.808227539062,
+        "y": -43730.780029296875,
+        "z": -19.257020950317383
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": 8.664116744228077e-06,
+        "z": 123.97343856820245
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.3321111798286438,
+        -0.33211126923561096,
+        -0.6242612600326538,
+        0.6242613196372986
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_HELENA_LAHDE",
+      "display_name": "Helena Lähde - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Helena Lähde",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 38.48474884033203,
+        "y": -87.19657135009766,
+        "z": 2.0984444618225098
+      },
+      "unreal_location_cm": {
+        "x": 3848.474884033203,
+        "y": 8719.657135009766,
+        "z": 209.84444618225098
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.07251179270702,
+        "y": -0.5139133582703971,
+        "z": -149.2283635526481
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.1844276785850525,
+        -0.1907801628112793,
+        0.681348443031311,
+        -0.6821683645248413
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+      "display_name": "Inge Morelius mörk gul Opel Rekord -73:a. - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Inge Morelius mörk gul Opel Rekord -73:a.",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 38.48474884033203,
+        "y": -87.19657135009766,
+        "z": 2.0984444618225098
+      },
+      "unreal_location_cm": {
+        "x": 3848.474884033203,
+        "y": 8719.657135009766,
+        "z": 209.84444618225098
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -55.35455095850549
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.885577917098999,
+        0.0,
+        0.0,
+        -0.4644908308982849
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_KERSTIN_NORDSTROM",
+      "display_name": "kerstin Nordström - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "kerstin Nordström",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -64.19596862792969,
+        "y": 106.27447509765625,
+        "z": 13.846617698669434
+      },
+      "unreal_location_cm": {
+        "x": -6419.596862792969,
+        "y": -10627.447509765625,
+        "z": 1384.6617698669434
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": 1.995352784962952e-09,
+        "z": 151.9734439008329
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.17122361063957214,
+        -0.17122362554073334,
+        -0.6860630512237549,
+        0.6860629916191101
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_KICKI_J",
+      "display_name": "Kicki J - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Kicki J",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -7.793055534362793,
+        "y": -12.120275497436523,
+        "z": -3.500037670135498
+      },
+      "unreal_location_cm": {
+        "x": -779.3055534362793,
+        "y": 1212.0275497436523,
+        "z": -350.0037670135498
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -89.99998884409983,
+        "y": 9.88945815680846e-06,
+        "z": 100.5094984671609
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.4521065950393677,
+        -0.45210665464401245,
+        -0.5436907410621643,
+        0.5436908602714539
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_KVINNA_SOM_TAR_UTLANDSKT_SPRAK_175_CM",
+      "display_name": "Kvinna som tar utländskt språk 175 cm - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Kvinna som tar utländskt språk 175 cm",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -1000.0,
+        "y": -1000.0,
+        "z": 0.41467174887657166
+      },
+      "unreal_location_cm": {
+        "x": -100000.0,
+        "y": 100000.0,
+        "z": 41.467174887657166
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": -4.659242897307064e-08,
+        "z": 26.99999904379616
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6875693202018738,
+        -0.6875693798065186,
+        -0.1650708019733429,
+        0.1650707870721817
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_LARS_JEPPSSON",
+      "display_name": "Lars Jeppsson - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Lars Jeppsson",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 20.650039672851562,
+        "y": 15.462600708007812,
+        "z": 0.5049724578857422
+      },
+      "unreal_location_cm": {
+        "x": 2065.0039672851562,
+        "y": -1546.2600708007812,
+        "z": 50.49724578857422
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": 3.4593349301814102e-06,
+        "z": -88.5057551895653
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.5064771771430969,
+        -0.5064771771430969,
+        0.49343782663345337,
+        -0.4934377670288086
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+      "display_name": "Leif Ljungqvist Chevrolet Suburban - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Leif Ljungqvist Chevrolet Suburban",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 18.832427978515625,
+        "y": -4.383905410766602,
+        "z": -0.4811687469482422
+      },
+      "unreal_location_cm": {
+        "x": 1883.2427978515625,
+        "y": 438.39054107666016,
+        "z": -48.11687469482422
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": -0.0,
+        "z": 26.668948312462103
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.9730402827262878,
+        0.0,
+        0.0,
+        0.23063525557518005
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_MAUNO_LUUKAS_JERKER",
+      "display_name": "Mauno Luukas \"Jerker\" - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Mauno Luukas \"Jerker\"",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -8.896540641784668,
+        "y": -9.641111373901367,
+        "z": -3.527266263961792
+      },
+      "unreal_location_cm": {
+        "x": -889.6540641784668,
+        "y": 964.1111373901367,
+        "z": -352.7266263961792
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -89.99998884409983,
+        "y": 9.88945815680846e-06,
+        "z": 100.5094984671609
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.4521065950393677,
+        -0.45210665464401245,
+        -0.5436907410621643,
+        0.5436908602714539
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_MERCEDES_LIMOSINE_JAN_NILSSON",
+      "display_name": "Mercedes Limosine Jan Nilsson - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Mercedes Limosine Jan Nilsson",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -8.489228248596191,
+        "y": -5.300363540649414,
+        "z": -0.4811687469482422
+      },
+      "unreal_location_cm": {
+        "x": -848.9228248596191,
+        "y": 530.0363540649414,
+        "z": -48.11687469482422
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": -0.0,
+        "z": 118.7657471751479
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.5092986822128296,
+        0.0,
+        0.0,
+        0.860589861869812
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_NICOLA_FAUZZI",
+      "display_name": "Nicola Fauzzi - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Nicola Fauzzi",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -188.24771118164062,
+        "y": 439.99688720703125,
+        "z": -1.5545421838760376
+      },
+      "unreal_location_cm": {
+        "x": -18824.771118164062,
+        "y": -43999.688720703125,
+        "z": -155.45421838760376
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -89.999995674289,
+        "y": -1.4120605314877521e-06,
+        "z": -145.99997901879317
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.20673812925815582,
+        -0.20673812925815582,
+        0.6762095093727112,
+        -0.676209568977356
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_NIKLAS_FROLING",
+      "display_name": "Niklas Fröling - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Niklas Fröling",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -192.81468200683594,
+        "y": 444.7642822265625,
+        "z": 1.399999976158142
+      },
+      "unreal_location_cm": {
+        "x": -19281.468200683594,
+        "y": -44476.42822265625,
+        "z": 139.9999976158142
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": 2.1931517350475426e-07,
+        "z": -48.47458336982169
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6447774767875671,
+        -0.6447775363922119,
+        0.2902790904045105,
+        -0.2902790606021881
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_PER_VALLIN",
+      "display_name": "Per Vallin - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Per Vallin",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -21.528945922851562,
+        "y": 29.90430450439453,
+        "z": 0.5112073421478271
+      },
+      "unreal_location_cm": {
+        "x": -2152.8945922851562,
+        "y": -2990.430450439453,
+        "z": 51.120734214782715
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": -6.464193531930386e-06,
+        "z": 53.67547872465209
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6309433579444885,
+        -0.6309433579444885,
+        -0.3192342221736908,
+        0.31923413276672363
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_SIRPA_LINDGREN",
+      "display_name": "Sirpa Lindgren - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Sirpa Lindgren",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 6.280957221984863,
+        "y": -32.97689437866211,
+        "z": 0.8023451566696167
+      },
+      "unreal_location_cm": {
+        "x": 628.0957221984863,
+        "y": 3297.689437866211,
+        "z": 80.23451566696167
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": -6.464193531930386e-06,
+        "z": 53.67547872465209
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6309433579444885,
+        -0.6309433579444885,
+        -0.3192342221736908,
+        0.31923413276672363
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_STIG_ENGSTROM",
+      "display_name": "Stig Engström - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Stig Engström",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 128.38352966308594,
+        "y": 74.82147979736328,
+        "z": 14.92637825012207
+      },
+      "unreal_location_cm": {
+        "x": 12838.352966308594,
+        "y": -7482.147979736328,
+        "z": 1492.637825012207
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -89.99998201391065,
+        "y": -7.579596654724425e-07,
+        "z": 20.61906727398829
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6956908702850342,
+        -0.6956905722618103,
+        -0.12654797732830048,
+        0.12654802203178406
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_SUSSANE_KARLSSON",
+      "display_name": "Sussane Karlsson - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Sussane Karlsson",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -2.8368592262268066,
+        "y": -11.161285400390625,
+        "z": -0.023867368698120117
+      },
+      "unreal_location_cm": {
+        "x": -283.68592262268066,
+        "y": 1116.1285400390625,
+        "z": -2.3867368698120117
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": 1.4913867203536963e-06,
+        "z": 35.973452056487424
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6725490689277649,
+        -0.6725491285324097,
+        -0.21835215389728546,
+        0.21835215389728546
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_SUSSANE_LARSSON",
+      "display_name": "Sussane Larsson - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Sussane Larsson",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 38.48474884033203,
+        "y": -87.19657135009766,
+        "z": 2.0984444618225098
+      },
+      "unreal_location_cm": {
+        "x": 3848.474884033203,
+        "y": 8719.657135009766,
+        "z": 209.84444618225098
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.07251179270702,
+        "y": -0.5139133582703971,
+        "z": -149.2283635526481
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.1844276785850525,
+        -0.1907801628112793,
+        0.681348443031311,
+        -0.6821683645248413
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_SVEN_ERIK_ROLFART_FODD_59",
+      "display_name": "Sven-Erik Rolfart född 59 - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Sven-Erik Rolfart född 59",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 38.48474884033203,
+        "y": -87.19657135009766,
+        "z": 2.0984444618225098
+      },
+      "unreal_location_cm": {
+        "x": 3848.474884033203,
+        "y": 8719.657135009766,
+        "z": 209.84444618225098
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.07252545308536,
+        "y": -0.513915385982807,
+        "z": 33.74640740590224
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6771513223648071,
+        -0.6761668920516968,
+        -0.20840156078338623,
+        0.20207244157791138
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_SVEN_SVEN_OCH_BERIT",
+      "display_name": "Sven (sven och berit) - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Sven (sven och berit)",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -23.079734802246094,
+        "y": -21.96329116821289,
+        "z": -1.0176279544830322
+      },
+      "unreal_location_cm": {
+        "x": -2307.9734802246094,
+        "y": 2196.329116821289,
+        "z": -101.76279544830322
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000250447816,
+        "y": -0.0,
+        "z": 120.25287060275643
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.3522011935710907,
+        -0.3522011935710907,
+        -0.6131511330604553,
+        0.6131511330604553
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_ULRIKA_RYTTERSTAL_MED_SUSSANE_KARLSSON",
+      "display_name": "Ulrika Rytterstål (med Sussane Karlsson) - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Ulrika Rytterstål (med Sussane Karlsson)",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": -3.929196834564209,
+        "y": -11.518960952758789,
+        "z": 0.20155227184295654
+      },
+      "unreal_location_cm": {
+        "x": -392.9196834564209,
+        "y": 1151.896095275879,
+        "z": 20.155227184295654
+      },
+      "blender_rotation_euler_degrees": {
+        "x": -90.00000933466734,
+        "y": 1.4913867203536963e-06,
+        "z": 35.973452056487424
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.6725490689277649,
+        -0.6725491285324097,
+        -0.21835215389728546,
+        0.21835215389728546
+      ]
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_VIT_VOLVO",
+      "display_name": "Vit Volvo - first shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "EVENT_FIRST_SHOT",
+      "source_time": "1986-02-28 23:21:30",
+      "source_object": "Vit Volvo",
+      "notes": "Position evaluated from the animated Blender object.",
+      "blender_location_m": {
+        "x": 80.50735473632812,
+        "y": 29.633670806884766,
+        "z": 8.722557067871094
+      },
+      "unreal_location_cm": {
+        "x": 8050.7354736328125,
+        "y": -2963.3670806884766,
+        "z": 872.2557067871094
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": -0.0,
+        "z": 31.630636782180314
+      },
+      "blender_rotation_quaternion_wxyz": [
+        0.9621451497077942,
+        0.0,
+        0.0,
+        0.272537499666214
+      ]
+    }
+  ],
+  "validation": {
+    "duplicate_anchor_ids": [],
+    "nonfinite_positions": []
+  },
+  "review_warnings": [
+    {
+      "anchor_id": "ANCHOR_SHOT1_ANNIKA_BLOMQVIST_MED_EGON",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_BENGT_PALME_MERCEDES_GUL",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_BENGT_PALMS_GULDFARGADE_MERCEDES",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_BERIT_SVEN_OCH_BERIT",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_MERCEDES_LIMOSINE_JAN_NILSSON",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_SVEN_SVEN_OCH_BERIT",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_ULRIKA_RYTTERSTAL_MED_SUSSANE_KARLSSON",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    },
+    {
+      "anchor_id": "ANCHOR_SHOT1_VIT_VOLVO",
+      "reason": "May represent a vehicle or combined/group object; verify before linking to one person."
+    }
+  ]
+}
