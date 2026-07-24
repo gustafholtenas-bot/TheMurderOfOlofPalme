@@ -5,6 +5,8 @@
 #include "Entities/TMOPWorldEntity.h"
 #include "TMOPHistoricalPlace.generated.h"
 
+class UTMOPAnchorAutoRegistrationComponent;
+
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPHistoricalPlace : public ATMOPWorldEntity
 {
@@ -28,4 +30,8 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Place")
     FString Notes;
+
+    /** Registers this actor with TMOPAnchorSubsystem during BeginPlay. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Place")
+    TObjectPtr<UTMOPAnchorAutoRegistrationComponent> AnchorAutoRegistration;
 };

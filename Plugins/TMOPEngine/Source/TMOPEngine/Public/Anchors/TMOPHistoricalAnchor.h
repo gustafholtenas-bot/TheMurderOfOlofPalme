@@ -7,6 +7,7 @@
 
 class UBillboardComponent;
 class UTextRenderComponent;
+class UTMOPAnchorAutoRegistrationComponent;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPHistoricalAnchor : public ATMOPWorldEntity
@@ -77,6 +78,10 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Anchor|Debug")
     TObjectPtr<UTextRenderComponent> DebugLabel;
+
+    /** Registers this actor with TMOPAnchorSubsystem during BeginPlay. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Anchor")
+    TObjectPtr<UTMOPAnchorAutoRegistrationComponent> AnchorAutoRegistration;
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Anchor")
     FName GetAnchorId() const;

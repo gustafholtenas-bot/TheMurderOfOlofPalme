@@ -1,5 +1,6 @@
 #include "Anchors/TMOPHistoricalAnchor.h"
 
+#include "Anchors/TMOPAnchorAutoRegistrationComponent.h"
 #include "Components/BillboardComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
@@ -13,6 +14,10 @@ ATMOPHistoricalAnchor::ATMOPHistoricalAnchor()
     {
         EntityIdentity->EntityType = TEXT("Anchor");
     }
+
+    AnchorAutoRegistration =
+        CreateDefaultSubobject<UTMOPAnchorAutoRegistrationComponent>(
+            TEXT("AnchorAutoRegistration"));
 
     Billboard = CreateDefaultSubobject<UBillboardComponent>(TEXT("Billboard"));
     Billboard->SetupAttachment(GetRootComponent());

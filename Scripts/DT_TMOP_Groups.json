@@ -1,0 +1,401 @@
+[
+  {
+    "Name": "GROUP_ADOLF_FREDRIK_YOUTHS",
+    "GroupId": "GROUP_ADOLF_FREDRIK_YOUTHS",
+    "DisplayName": "Tre ungdomar vid Adolf Fredrik",
+    "MemberEntityIds": [
+      "TRE_UNGDOMAR_KVINNA_20_25AR",
+      "TRE_UNGDOMAR_MAN_1_BERUSAD",
+      "TRE_UNGDOMAR_MAN_2"
+    ],
+    "LeaderEntityId": "TRE_UNGDOMAR_KVINNA_20_25AR",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_ANNE_KARIN",
+    "GroupId": "GROUP_ANNE_KARIN",
+    "DisplayName": "Anne Hage och Karin Johansson",
+    "MemberEntityIds": [
+      "ANNE_HAGE",
+      "KARIN_JOHANSSON"
+    ],
+    "LeaderEntityId": "ANNE_HAGE",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_ANNIKA_EGON",
+    "GroupId": "GROUP_ANNIKA_EGON",
+    "DisplayName": "Annika Blomqvist och Egon Enocksson",
+    "MemberEntityIds": [
+      "ANNIKA_BLOMQVIST",
+      "EGON_ENOCKSSON"
+    ],
+    "LeaderEntityId": "ANNIKA_BLOMQVIST",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_BINO_MARGARETA",
+    "GroupId": "GROUP_BINO_MARGARETA",
+    "DisplayName": "Bino Catasus och Margareta Wahlberg",
+    "MemberEntityIds": [
+      "BINO_CATASUS",
+      "MARGARETA_WAHLBERG_25_AR"
+    ],
+    "LeaderEntityId": "BINO_CATASUS",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_BJORN_ROSENGREN",
+    "GroupId": "GROUP_BJORN_ROSENGREN",
+    "DisplayName": "Björn Rosengren och hans fru",
+    "MemberEntityIds": [
+      "BJORN_ROSENGREN",
+      "BJORN_ROSENGRENS_FRU"
+    ],
+    "LeaderEntityId": "BJORN_ROSENGREN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_CECILIA_ELISABETH",
+    "GroupId": "GROUP_CECILIA_ELISABETH",
+    "DisplayName": "Cecilia Anderstedt och Elisabeth Johansson",
+    "MemberEntityIds": [
+      "CECILIA_ANDERSTEDT",
+      "ELISABETH_JOHANSSON"
+    ],
+    "LeaderEntityId": "CECILIA_ANDERSTEDT",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_ENWALL",
+    "GroupId": "GROUP_ENWALL",
+    "DisplayName": "Jennie och Leif Enwall",
+    "MemberEntityIds": [
+      "JENNIE_ENWALL",
+      "LEIF_ENWALL"
+    ],
+    "LeaderEntityId": "JENNIE_ENWALL",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_FINE_COUPLE_L1634",
+    "GroupId": "GROUP_FINE_COUPLE_L1634",
+    "DisplayName": "Det finare paret L1634",
+    "MemberEntityIds": [
+      "KVINNA_FINARE_PAR_L1634",
+      "MAN_FINARE_PAR"
+    ],
+    "LeaderEntityId": "KVINNA_FINARE_PAR_L1634",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_FINNISH_GRAND_STAFF",
+    "GroupId": "GROUP_FINNISH_GRAND_STAFF",
+    "DisplayName": "Det finska paret vid Grand",
+    "MemberEntityIds": [
+      "FINSKA_KVINNAN",
+      "FINSKA_KVINNANS_MAKE"
+    ],
+    "LeaderEntityId": "FINSKA_KVINNAN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_GRAND_TOILET_MEN",
+    "GroupId": "GROUP_GRAND_TOILET_MEN",
+    "DisplayName": "De två männen från Grandtoaletten",
+    "MemberEntityIds": [
+      "OKAND_MAN_FRAN_TOALETT_1",
+      "OKAND_MAN_FRAN_TOALETT_2"
+    ],
+    "LeaderEntityId": "OKAND_MAN_FRAN_TOALETT_1",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_GUNILLA_DAHLEN_FRIENDS",
+    "GroupId": "GROUP_GUNILLA_DAHLEN_FRIENDS",
+    "DisplayName": "Gunilla Dahlen och hennes vänner",
+    "MemberEntityIds": [
+      "GUNILLA_DAHLEN",
+      "GUNNILA_DAHLEN_VAN_1",
+      "GUNNILA_DAHLEN_VAN_2",
+      "GUNNILA_DAHLEN_VAN_3"
+    ],
+    "LeaderEntityId": "GUNILLA_DAHLEN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_HAKAN_JONSSON",
+    "GroupId": "GROUP_HAKAN_JONSSON",
+    "DisplayName": "Håkan Jonsson och hans flickvän",
+    "MemberEntityIds": [
+      "HAKAN_JONSSON",
+      "HAKAN_JONSSONS_FLICKVAN"
+    ],
+    "LeaderEntityId": "HAKAN_JONSSON",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_HOLMGREN_SCHODIN_LILEDAHL",
+    "GroupId": "GROUP_HOLMGREN_SCHODIN_LILEDAHL",
+    "DisplayName": "Holmgren, Schödin och Liledahl",
+    "MemberEntityIds": [
+      "ANN_CHARLOTT_HOLMGREN",
+      "CHARLOTTE_LILEDAHL",
+      "LENA_SCHODIN"
+    ],
+    "LeaderEntityId": "ANN_CHARLOTT_HOLMGREN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_INGE_MORELIUS_WITNESSES",
+    "GroupId": "GROUP_INGE_MORELIUS_WITNESSES",
+    "DisplayName": "Vittnesgruppen vid Inge Morelius",
+    "MemberEntityIds": [
+      "HELENA_LAHDE",
+      "SUSANNE_LARSSON",
+      "SVEN_ERIK_ROLFART_FODD_59"
+    ],
+    "LeaderEntityId": "HELENA_LAHDE",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_K_JOHANSON",
+    "GroupId": "GROUP_K_JOHANSON",
+    "DisplayName": "K. Johanson och kamrat",
+    "MemberEntityIds": [
+      "K_JOHANSON",
+      "KAMRAT_TILL_K_JOHANSSON"
+    ],
+    "LeaderEntityId": "K_JOHANSON",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_LIDGARD",
+    "GroupId": "GROUP_LIDGARD",
+    "DisplayName": "Curt Lidgard och hans hustru",
+    "MemberEntityIds": [
+      "CURT_LIDGARD_AMBASSADOR_I_WIEN",
+      "HUSTRU_TILL_CURT_LIDGARD"
+    ],
+    "LeaderEntityId": "CURT_LIDGARD_AMBASSADOR_I_WIEN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_ROBERT_GUSTAFSSON",
+    "GroupId": "GROUP_ROBERT_GUSTAFSSON",
+    "DisplayName": "Robert Gustafsson och hans vänner",
+    "MemberEntityIds": [
+      "BJORN_SJOKVIST_ROBERT_GUSTAFSSON_VAN_2",
+      "LOTTA_JUNGWARD_ROBERT_GUSTAFSSONS_VAN_1",
+      "PIA_ENGSTROM_ROBERT_GUSTAFSSON_VAN_3",
+      "ROBERT_GUSTAFSSON"
+    ],
+    "LeaderEntityId": "ROBERT_GUSTAFSSON",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_ROLDER",
+    "GroupId": "GROUP_ROLDER",
+    "DisplayName": "Anna-Maria Röldér och Göran",
+    "MemberEntityIds": [
+      "ANNA_MARIA_ROLDER",
+      "ANNA_MARIA_ROLDERS_POJKVAN_GORAN"
+    ],
+    "LeaderEntityId": "ANNA_MARIA_ROLDER",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_SCHAEFFER",
+    "GroupId": "GROUP_SCHAEFFER",
+    "DisplayName": "Familjen Schaeffer",
+    "MemberEntityIds": [
+      "ANNA_SCHAEFFER_16_AR",
+      "BIRGITTA_SCHAEFFER",
+      "OKAND_DOTTER_SCHAEFFER_14_AR"
+    ],
+    "LeaderEntityId": "BIRGITTA_SCHAEFFER",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_SUSANNE_TORNEMAN",
+    "GroupId": "GROUP_SUSANNE_TORNEMAN",
+    "DisplayName": "Susanne Törneman och hennes kamrat",
+    "MemberEntityIds": [
+      "SUSANNE_TORNEMAN",
+      "SUSANNE_TORNEMANS_KAMRAT"
+    ],
+    "LeaderEntityId": "SUSANNE_TORNEMAN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_SUSANNE_ULRIKA",
+    "GroupId": "GROUP_SUSANNE_ULRIKA",
+    "DisplayName": "Susanne Karlsson och Ulrika Rytterstål",
+    "MemberEntityIds": [
+      "SUSANNE_KARLSSON",
+      "ULRIKA_RYTTERSTAL"
+    ],
+    "LeaderEntityId": "SUSANNE_KARLSSON",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": true,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_SVEN_BERIT",
+    "GroupId": "GROUP_SVEN_BERIT",
+    "DisplayName": "Sven och Berit",
+    "MemberEntityIds": [
+      "BERIT",
+      "SVEN"
+    ],
+    "LeaderEntityId": "SVEN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  },
+  {
+    "Name": "GROUP_VALLIN",
+    "GroupId": "GROUP_VALLIN",
+    "DisplayName": "Christina och Per Vallin",
+    "MemberEntityIds": [
+      "CHRISTINA_VALLIN",
+      "PER_VALLIN"
+    ],
+    "LeaderEntityId": "CHRISTINA_VALLIN",
+    "Formation": "SideBySide",
+    "FormationSpacingCm": 110.0,
+    "bUseLeaderTimeline": true,
+    "bCreateAtScenarioStart": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "DT_TMOP_People_Staging.json",
+    "Notes": "Migrated from the legacy group fields on the member rows. Review sources and enable at scenario start when the members' timelines are ready."
+  }
+]

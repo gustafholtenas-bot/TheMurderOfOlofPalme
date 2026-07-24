@@ -9,6 +9,7 @@ class ATMOPHistoricalAgent;
 class ATMOPVehicleBase;
 class ATMOPGroupDirector;
 class UDataTable;
+struct FTMOPGroupProfileRow;
 
 /** Configures the central person DataTable when the level starts. */
 UCLASS(Blueprintable)
@@ -25,6 +26,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People")
     TObjectPtr<UDataTable> PersonProfileTable;
 
+    /** Authoritative editable group list. Row struct: FTMOPGroupProfileRow. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Groups")
+    TObjectPtr<UDataTable> GroupDefinitionTable;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     TSubclassOf<ATMOPHistoricalAgent> DefaultAgentClass;
 
@@ -34,7 +39,11 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     bool bCatchUpToCurrentClockOnBeginPlay = true;
 
-    /** Build the existing generic TMOP groups from DT_TMOP_People. */
+    /** Prefer DT_TMOP_Groups when a valid GroupDefinitionTable is assigned. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Groups")
+    bool bCreateGroupsFromGroupTable = true;
+
+    /** Legacy fallback used only when no valid group table is assigned. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Groups")
     bool bCreateGroupsFromPeopleTable = true;
 
@@ -49,6 +58,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|People|Simulation")
     bool ValidatePeopleTable(TArray<FString>& OutErrors) const;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|People|Groups")
+    bool ValidateGroupTable(TArray<FString>& OutErrors) const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|People|Simulation")
     ATMOPHistoricalAgent* FindSpawnedPerson(FName EntityId) const;
@@ -77,6 +89,12 @@ private:
     int32 EstimateTravelSeconds(const FPersonRuntime& Runtime,
         const FTMOPPersonTimelineEntry& Entry) const;
     ATMOPGroupDirector* FindGroupDirector() const;
+    bool HasValidGroupTable() const;
+    const FTMOPGroupProfileRow* FindGroupRow(FName GroupId) const;
+    bool IsGroupLeader(const FTMOPPersonProfileRow& Profile) const;
+    bool ShouldFollowGroupLeader(const FTMOPPersonProfileRow& Profile) const;
+    void ApplyGroupTableMemberships();
+    void RebuildGroupsFromGroupTable();
     void RebuildGroupsFromPeople();
     ATMOPVehicleBase* FindVehicle(FName VehicleId) const;
 

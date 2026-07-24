@@ -9,6 +9,7 @@
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Groups/TMOPGroupDirector.h"
+#include "Groups/TMOPGroupProfileTypes.h"
 #include "Kismet/GameplayStatics.h"
 #include "NavigationSystem.h"
 #include "People/TMOPPersonProfileComponent.h"
@@ -96,6 +97,19 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
     if (!IsValid(PersonProfileTable) ||
         PersonProfileTable->GetRowStruct() != FTMOPPersonProfileRow::StaticStruct()) return 0;
 
+    // Existing level actors may begin play before or after this director.
+    // Discovering here makes person spawning independent of BeginPlay order,
+    // while each anchor's auto-registration component handles later streaming.
+    if (UGameInstance* GameInstance = GetGameInstance())
+        if (UTMOPAnchorSubsystem* Anchors =
+            GameInstance->GetSubsystem<UTMOPAnchorSubsystem>())
+        {
+            const int32 Discovered = Anchors->DiscoverAnchorsInWorld();
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP People: discovered %d loaded anchor/place actor(s) before spawn."),
+                Discovered);
+        }
+
     TArray<FString> Errors;
     ValidatePeopleTable(Errors);
     for (const FString& Error : Errors)
@@ -120,13 +134,28 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
         RuntimePeople.Add(Row->EntityId, MoveTemp(Runtime));
     }
 
+    if (HasValidGroupTable()) ApplyGroupTableMemberships();
+
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     const int32 CurrentSecond = Clock != nullptr
         ? Clock->GetCurrentTime().ToSecondsFromMidnight()
         : SimulationEpoch.ToSecondsFromMidnight();
-    EvaluatePeople(CurrentSecond, bCatchUpToCurrentClockOnBeginPlay);
-    if (bCreateGroupsFromPeopleTable) RebuildGroupsFromPeople();
+
+    // Spawn every person whose initial placement exists at the scenario epoch
+    // before groups are built. This guarantees that a seek directly to a later
+    // time cannot execute the leader's first move before the group exists.
+    const int32 EpochSecond = SimulationEpoch.ToSecondsFromMidnight();
+    const int32 InitialEvaluationSecond =
+        FMath::Min(CurrentSecond, EpochSecond);
+    EvaluatePeople(InitialEvaluationSecond, true);
+    if (bCreateGroupsFromGroupTable && HasValidGroupTable())
+        RebuildGroupsFromGroupTable();
+    else if (bCreateGroupsFromPeopleTable)
+        RebuildGroupsFromPeople();
+
+    if (CurrentSecond > InitialEvaluationSecond)
+        EvaluatePeople(CurrentSecond, bCatchUpToCurrentClockOnBeginPlay);
     LastEvaluatedSecond = CurrentSecond;
     UE_LOG(LogTemp, Display, TEXT("TMOP People: initialized %d timeline profile(s), %d active agent(s)."),
         RuntimePeople.Num(), RefreshAllActiveProfiles());
@@ -165,9 +194,7 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                 continue;
             }
 
-            const bool bFollower = !Runtime.Profile.SocialGroupId.IsNone() &&
-                Runtime.Profile.bFollowGroupLeaderSchedule &&
-                Runtime.Profile.EntityId != Runtime.Profile.GroupLeaderEntityId;
+            const bool bFollower = ShouldFollowGroupLeader(Runtime.Profile);
             if (bFollower && Runtime.NextTimelineIndex > 0)
             {
                 ++Runtime.NextTimelineIndex;
@@ -297,12 +324,13 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
         if (bCatchUp && Entry.bTeleportDuringCatchUp)
             return ApplyPlacement(Agent, Entry, true);
         if (!Runtime.Profile.SocialGroupId.IsNone() &&
-            Runtime.Profile.EntityId == Runtime.Profile.GroupLeaderEntityId)
+            IsGroupLeader(Runtime.Profile))
         {
             UTMOPAnchorSubsystem* Anchors = GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
             ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
                 ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
             ATMOPGroupDirector* Groups = FindGroupDirector();
+            if (IsValid(Groups)) Groups->RefreshWaitingGroups();
             if (IsValid(Anchor) && IsValid(Groups) &&
                 Groups->DoesGroupExist(Runtime.Profile.SocialGroupId))
                 return Groups->MoveGroupToLocation(Runtime.Profile.SocialGroupId,
@@ -498,6 +526,105 @@ ATMOPGroupDirector* ATMOPPersonRegistryDirector::FindGroupDirector() const
     return nullptr;
 }
 
+bool ATMOPPersonRegistryDirector::HasValidGroupTable() const
+{
+    return IsValid(GroupDefinitionTable) &&
+        GroupDefinitionTable->GetRowStruct() ==
+            FTMOPGroupProfileRow::StaticStruct();
+}
+
+const FTMOPGroupProfileRow* ATMOPPersonRegistryDirector::FindGroupRow(
+    const FName GroupId) const
+{
+    if (!HasValidGroupTable() || GroupId.IsNone()) return nullptr;
+    return GroupDefinitionTable->FindRow<FTMOPGroupProfileRow>(
+        GroupId, TEXT("TMOPGroupLookup"), false);
+}
+
+bool ATMOPPersonRegistryDirector::IsGroupLeader(
+    const FTMOPPersonProfileRow& Profile) const
+{
+    if (Profile.SocialGroupId.IsNone()) return false;
+    if (const FTMOPGroupProfileRow* Group =
+        FindGroupRow(Profile.SocialGroupId))
+        return Group->LeaderEntityId == Profile.EntityId;
+    return Profile.GroupLeaderEntityId == Profile.EntityId;
+}
+
+bool ATMOPPersonRegistryDirector::ShouldFollowGroupLeader(
+    const FTMOPPersonProfileRow& Profile) const
+{
+    if (Profile.SocialGroupId.IsNone()) return false;
+    if (const FTMOPGroupProfileRow* Group =
+        FindGroupRow(Profile.SocialGroupId))
+        return Group->bUseLeaderTimeline &&
+            Group->LeaderEntityId != Profile.EntityId;
+    return Profile.bFollowGroupLeaderSchedule &&
+        Profile.GroupLeaderEntityId != Profile.EntityId;
+}
+
+void ATMOPPersonRegistryDirector::ApplyGroupTableMemberships()
+{
+    if (!HasValidGroupTable()) return;
+    for (const FName RowName : GroupDefinitionTable->GetRowNames())
+    {
+        const FTMOPGroupProfileRow* Group =
+            GroupDefinitionTable->FindRow<FTMOPGroupProfileRow>(
+                RowName, TEXT("TMOPApplyGroupMemberships"), false);
+        if (Group == nullptr || !Group->bCreateAtScenarioStart) continue;
+        for (const FName MemberId : Group->MemberEntityIds)
+        {
+            FPersonRuntime* Runtime = RuntimePeople.Find(MemberId);
+            if (Runtime == nullptr) continue;
+            Runtime->Profile.SocialGroupId = Group->GroupId;
+            Runtime->Profile.GroupLeaderEntityId = Group->LeaderEntityId;
+            Runtime->Profile.GroupFormation = Group->Formation;
+            Runtime->Profile.GroupFormationSpacingCm =
+                Group->FormationSpacingCm;
+            Runtime->Profile.bFollowGroupLeaderSchedule =
+                Group->bUseLeaderTimeline &&
+                MemberId != Group->LeaderEntityId;
+        }
+    }
+}
+
+void ATMOPPersonRegistryDirector::RebuildGroupsFromGroupTable()
+{
+    ATMOPGroupDirector* Groups = FindGroupDirector();
+    if (!IsValid(Groups))
+    {
+        UE_LOG(LogTemp, Warning, TEXT(
+            "TMOP People: DT_TMOP_Groups is assigned but no "
+            "TMOPGroupDirector is in the level."));
+        return;
+    }
+
+    TArray<FString> Errors;
+    if (!ValidateGroupTable(Errors))
+    {
+        for (const FString& Error : Errors)
+            UE_LOG(LogTemp, Error, TEXT("TMOP Groups: %s"), *Error);
+        return;
+    }
+
+    for (const FName RowName : GroupDefinitionTable->GetRowNames())
+    {
+        const FTMOPGroupProfileRow* Row =
+            GroupDefinitionTable->FindRow<FTMOPGroupProfileRow>(
+                RowName, TEXT("TMOPCreateGroups"), false);
+        if (Row == nullptr || !Row->bCreateAtScenarioStart ||
+            Groups->DoesGroupExist(Row->GroupId)) continue;
+        FTMOPGroupDefinition Definition;
+        Definition.GroupId = Row->GroupId;
+        Definition.MemberEntityIds = Row->MemberEntityIds;
+        Definition.LeaderEntityId = Row->LeaderEntityId;
+        Definition.Formation = Row->Formation;
+        Definition.FormationSpacing = Row->FormationSpacingCm;
+        Groups->CreateGroup(Definition);
+    }
+    Groups->RefreshWaitingGroups();
+}
+
 void ATMOPPersonRegistryDirector::RebuildGroupsFromPeople()
 {
     ATMOPGroupDirector* Groups = FindGroupDirector();
@@ -599,8 +726,79 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
             Row->Timeline[0].Action != ETMOPPersonTimelineAction::InitialPlacement &&
             Row->Timeline[0].Action != ETMOPPersonTimelineAction::Spawn)
             OutErrors.Add(Prefix + TEXT(" Timeline[0] must be InitialPlacement or Spawn."));
-        if (!Row->SocialGroupId.IsNone() && Row->GroupLeaderEntityId.IsNone())
+        if (!HasValidGroupTable() && !Row->SocialGroupId.IsNone() &&
+            Row->GroupLeaderEntityId.IsNone())
             OutErrors.Add(Prefix + TEXT(" belongs to a group but has no GroupLeaderEntityId."));
+    }
+    return OutErrors.IsEmpty();
+}
+
+bool ATMOPPersonRegistryDirector::ValidateGroupTable(
+    TArray<FString>& OutErrors) const
+{
+    OutErrors.Reset();
+    if (!HasValidGroupTable())
+    {
+        OutErrors.Add(TEXT(
+            "Group Definition Table is missing or has the wrong row structure."));
+        return false;
+    }
+
+    TSet<FName> GroupIds;
+    TMap<FName, FName> InitialMemberships;
+    TSet<FName> KnownPersonIds;
+    if (IsValid(PersonProfileTable) &&
+        PersonProfileTable->GetRowStruct() ==
+            FTMOPPersonProfileRow::StaticStruct())
+    {
+        for (const FName PersonRowName : PersonProfileTable->GetRowNames())
+            if (const FTMOPPersonProfileRow* Person =
+                PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
+                    PersonRowName, TEXT("ValidateGroupPeople"), false))
+                KnownPersonIds.Add(Person->EntityId);
+    }
+    for (const FName RowName : GroupDefinitionTable->GetRowNames())
+    {
+        const FTMOPGroupProfileRow* Row =
+            GroupDefinitionTable->FindRow<FTMOPGroupProfileRow>(
+                RowName, TEXT("ValidateGroups"), false);
+        if (Row == nullptr) continue;
+        const FString Prefix = FString::Printf(
+            TEXT("Row '%s'"), *RowName.ToString());
+        if (Row->GroupId.IsNone())
+            OutErrors.Add(Prefix + TEXT(" has no GroupId."));
+        if (RowName != Row->GroupId)
+            OutErrors.Add(Prefix + TEXT(" Row Name must equal GroupId."));
+        if (GroupIds.Contains(Row->GroupId))
+            OutErrors.Add(Prefix + TEXT(" duplicates GroupId."));
+        GroupIds.Add(Row->GroupId);
+        if (Row->MemberEntityIds.IsEmpty())
+            OutErrors.Add(Prefix + TEXT(" has no members."));
+        if (Row->LeaderEntityId.IsNone())
+            OutErrors.Add(Prefix + TEXT(" has no LeaderEntityId."));
+        if (!Row->MemberEntityIds.Contains(Row->LeaderEntityId))
+            OutErrors.Add(Prefix + TEXT(
+                " LeaderEntityId is not included in MemberEntityIds."));
+
+        TSet<FName> MembersInRow;
+        for (const FName MemberId : Row->MemberEntityIds)
+        {
+            if (MemberId.IsNone() || MembersInRow.Contains(MemberId))
+                OutErrors.Add(Prefix + TEXT(
+                    " has an empty or duplicate MemberEntityId."));
+            MembersInRow.Add(MemberId);
+            if (!KnownPersonIds.Contains(MemberId))
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" references missing person '%s'."),
+                    *MemberId.ToString()));
+            if (!Row->bCreateAtScenarioStart) continue;
+            if (const FName* Existing = InitialMemberships.Find(MemberId))
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" person '%s' is already in initial group '%s'."),
+                    *MemberId.ToString(), *Existing->ToString()));
+            else
+                InitialMemberships.Add(MemberId, Row->GroupId);
+        }
     }
     return OutErrors.IsEmpty();
 }
