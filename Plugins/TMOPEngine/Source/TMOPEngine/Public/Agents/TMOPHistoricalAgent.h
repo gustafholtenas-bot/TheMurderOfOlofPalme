@@ -8,6 +8,7 @@
 class UTMOPActionExecutorComponent;
 class UTMOPRouteFollowerComponent;
 class UTMOPWorldEntityComponent;
+class UTextRenderComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FTMOPAgentStateChangedSignature,
@@ -32,6 +33,7 @@ public:
     ATMOPHistoricalAgent();
 
     virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent")
     TObjectPtr<UTMOPWorldEntityComponent> EntityIdentity;
@@ -44,6 +46,24 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FText DisplayName;
+
+    /** World-space name shown above the person. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Debug")
+    TObjectPtr<UTextRenderComponent> NameLabel;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    bool bShowNameLabel = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug",
+        meta = (ClampMin = "0.0", Units = "cm"))
+    float NameLabelHeightCm = 125.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug",
+        meta = (ClampMin = "1.0"))
+    float NameLabelWorldSize = 24.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FColor NameLabelColor = FColor::White;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FString SourceReference;
@@ -92,6 +112,13 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Movement")
     void ApplyMovementSpeedForActivity();
+
+    /** Refresh after DisplayName or EntityId changes. */
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Debug")
+    void RefreshNameLabel();
+
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Debug")
+    void SetNameLabelVisible(bool bVisible);
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Agent|Movement")
     float GetDesiredMovementSpeed() const;

@@ -2,15 +2,20 @@
 
 #include "AI/TMOPHistoricalAIController.h"
 #include "Actions/TMOPActionExecutorComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/TextRenderComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Camera/PlayerCameraManager.h"
+#include "GameFramework/PlayerController.h"
 #include "Routes/TMOPRouteFollowerComponent.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Venues/TMOPCinemaSeatSubsystem.h"
 
 ATMOPHistoricalAgent::ATMOPHistoricalAgent()
 {
-    PrimaryActorTick.bCanEverTick = false;
+    PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.TickInterval = 0.05f;
 
     AIControllerClass = ATMOPHistoricalAIController::StaticClass();
     AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
@@ -31,13 +36,82 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     RouteFollower =
         CreateDefaultSubobject<UTMOPRouteFollowerComponent>(
             TEXT("RouteFollower"));
+
+    NameLabel =
+        CreateDefaultSubobject<UTextRenderComponent>(
+            TEXT("NameLabel"));
+    NameLabel->SetupAttachment(GetCapsuleComponent());
+    NameLabel->SetHorizontalAlignment(EHorizTextAligment::EHTA_Center);
+    NameLabel->SetVerticalAlignment(EVerticalTextAligment::EVRTA_TextCenter);
+    NameLabel->SetWorldSize(NameLabelWorldSize);
+    NameLabel->SetTextRenderColor(NameLabelColor);
+    NameLabel->SetCastShadow(false);
+    NameLabel->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    NameLabel->SetGenerateOverlapEvents(false);
+    NameLabel->SetHiddenInGame(false);
 }
 
 void ATMOPHistoricalAgent::BeginPlay()
 {
     Super::BeginPlay();
+    RefreshNameLabel();
     ApplyMovementSpeedForActivity();
     ApplyInitialSeatAssignment();
+}
+
+void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+
+    if (!bShowNameLabel || !IsValid(NameLabel) || GetWorld() == nullptr)
+    {
+        return;
+    }
+
+    const APlayerCameraManager* CameraManager =
+        GetWorld()->GetFirstPlayerController() != nullptr
+            ? GetWorld()->GetFirstPlayerController()->PlayerCameraManager
+            : nullptr;
+
+    if (IsValid(CameraManager))
+    {
+        const FVector ToCamera =
+            CameraManager->GetCameraLocation() -
+            NameLabel->GetComponentLocation();
+
+        if (!ToCamera.IsNearlyZero())
+        {
+            NameLabel->SetWorldRotation(ToCamera.Rotation());
+        }
+    }
+}
+
+void ATMOPHistoricalAgent::RefreshNameLabel()
+{
+    if (!IsValid(NameLabel))
+    {
+        return;
+    }
+
+    FText LabelText = DisplayName;
+    if (LabelText.IsEmpty() && IsValid(EntityIdentity) &&
+        !EntityIdentity->EntityId.IsNone())
+    {
+        LabelText = FText::FromName(EntityIdentity->EntityId);
+    }
+
+    NameLabel->SetText(LabelText);
+    NameLabel->SetRelativeLocation(FVector(0.0f, 0.0f, NameLabelHeightCm));
+    NameLabel->SetWorldSize(NameLabelWorldSize);
+    NameLabel->SetTextRenderColor(NameLabelColor);
+    NameLabel->SetVisibility(bShowNameLabel, true);
+    SetActorTickEnabled(bShowNameLabel);
+}
+
+void ATMOPHistoricalAgent::SetNameLabelVisible(const bool bVisible)
+{
+    bShowNameLabel = bVisible;
+    RefreshNameLabel();
 }
 
 bool ATMOPHistoricalAgent::ApplyInitialSeatAssignment()

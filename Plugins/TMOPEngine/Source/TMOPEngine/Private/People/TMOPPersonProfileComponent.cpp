@@ -51,6 +51,9 @@ bool UTMOPPersonProfileComponent::LoadProfile()
         Registry->GetPersonProfile(ResolvedEntityId, Profile);
     if (bHasLoadedProfile)
         if (ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner()))
+        {
             Agent->DisplayName = Profile.FullName;
+            Agent->RefreshNameLabel();
+        }
     return bHasLoadedProfile;
 }
