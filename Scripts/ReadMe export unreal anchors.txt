@@ -1,0 +1,1 @@
+exec(open(r"C:\Users\User\Documents\Unreal Projects\TheMurderOfOlofPalme\Scripts\tmop_export_anchors_and_seats_unreal.py", encoding="utf-8").read())

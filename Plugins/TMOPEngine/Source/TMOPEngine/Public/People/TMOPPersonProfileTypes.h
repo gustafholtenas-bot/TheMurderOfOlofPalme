@@ -61,21 +61,21 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     /** Central event used by Relative timing, for example a shared rendezvous. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
-        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative", EditConditionHides))
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative"))
     FName SharedEventId = NAME_None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
-        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative", EditConditionHides))
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative"))
     int32 EventOffsetSeconds = 0;
 
     /** For MoveToAnchor, calculate departure backwards so arrival matches the resolved time. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
-        meta=(EditCondition="Action==ETMOPPersonTimelineAction::MoveToAnchor", EditConditionHides))
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::MoveToAnchor"))
     bool bTimeIsArrival = false;
 
     /** Zero uses the person's movement profile. Units are centimetres per second. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
-        meta=(ClampMin="0.0", EditCondition="bTimeIsArrival", EditConditionHides))
+        meta=(ClampMin="0.0", EditCondition="bTimeIsArrival"))
     float TravelSpeedOverrideCmPerSecond = 0.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
