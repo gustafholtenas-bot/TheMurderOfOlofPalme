@@ -97,8 +97,10 @@ private:
     ATMOPGroupDirector* FindGroupDirector() const;
     bool HasValidGroupTable() const;
     const FTMOPGroupProfileRow* FindGroupRow(FName GroupId) const;
-    bool IsGroupLeader(const FTMOPPersonProfileRow& Profile) const;
-    bool ShouldFollowGroupLeader(const FTMOPPersonProfileRow& Profile) const;
+    bool IsGroupLeader(const FTMOPPersonProfileRow& Profile,
+        const ATMOPHistoricalAgent* Agent) const;
+    bool ShouldFollowGroupLeader(const FTMOPPersonProfileRow& Profile,
+        const ATMOPHistoricalAgent* Agent) const;
     void ApplyGroupTableMemberships();
     void RebuildGroupsFromGroupTable();
     void RebuildGroupsFromPeople();

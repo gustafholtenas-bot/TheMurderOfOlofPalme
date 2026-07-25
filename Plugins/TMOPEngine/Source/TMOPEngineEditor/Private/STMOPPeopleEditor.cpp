@@ -1095,6 +1095,22 @@ bool STMOPPeopleEditor::EntryHasError(
          Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&
         Entry.TargetEntityId.IsNone())
         return Fail(TEXT("Vehicle action requires Target Entity ID"));
+    if ((Entry.Action == ETMOPPersonTimelineAction::JoinGroup ||
+         Entry.Action == ETMOPPersonTimelineAction::SplitGroup ||
+         Entry.Action == ETMOPPersonTimelineAction::DissolveGroup ||
+         Entry.Action == ETMOPPersonTimelineAction::SetGroupLeader) &&
+        Entry.TargetGroupId.IsNone())
+        return Fail(TEXT("Group action requires Target Group ID"));
+    if (Entry.Action == ETMOPPersonTimelineAction::CreateGroup &&
+        (Entry.GroupDefinition.GroupId.IsNone() ||
+         Entry.GroupDefinition.MemberEntityIds.IsEmpty()))
+        return Fail(TEXT("Create Group requires a complete Group Definition"));
+    if (Entry.Action == ETMOPPersonTimelineAction::SplitGroup &&
+        Entry.SplitGroupDefinitions.Num() < 2)
+        return Fail(TEXT("Split Group requires at least two child groups"));
+    if (Entry.Action == ETMOPPersonTimelineAction::SetGroupLeader &&
+        Entry.NewGroupLeaderEntityId.IsNone())
+        return Fail(TEXT("Set Group Leader requires a new leader Entity ID"));
     if (Index > 0 &&
         Entry.TimingMode == ETMOPEventTimingMode::Absolute)
     {

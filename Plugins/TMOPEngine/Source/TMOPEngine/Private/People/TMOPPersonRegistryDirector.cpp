@@ -198,8 +198,14 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                 continue;
             }
 
-            const bool bFollower = ShouldFollowGroupLeader(Runtime.Profile);
-            if (bFollower && Runtime.NextTimelineIndex > 0)
+            ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
+            const bool bEntryCatchUp = bCatchUp ||
+                ResolvedSecond < CurrentSecond;
+            const bool bFollower =
+                ShouldFollowGroupLeader(Runtime.Profile, Agent);
+            if (bFollower && Runtime.NextTimelineIndex > 0 &&
+                Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
+                !bEntryCatchUp)
             {
                 Runtime.LastResolvedTimelineSecond = ResolvedSecond;
                 ++Runtime.NextTimelineIndex;
@@ -207,9 +213,6 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                 continue;
             }
 
-            ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
-            const bool bEntryCatchUp = bCatchUp ||
-                ResolvedSecond < CurrentSecond;
             if (!bEntryCatchUp && IsAgentBusy(Agent)) break;
             if (!ApplyTimelineEntry(Runtime, Entry, bEntryCatchUp)) break;
             Runtime.LastResolvedTimelineSecond = ResolvedSecond;
@@ -329,8 +332,8 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     case ETMOPPersonTimelineAction::MoveToAnchor:
         if (bCatchUp && Entry.bTeleportDuringCatchUp)
             return ApplyPlacement(Agent, Entry, true);
-        if (!Runtime.Profile.SocialGroupId.IsNone() &&
-            IsGroupLeader(Runtime.Profile))
+        if (!Agent->SocialGroupId.IsNone() &&
+            IsGroupLeader(Runtime.Profile, Agent))
         {
             UTMOPAnchorSubsystem* Anchors = GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
             ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
@@ -338,18 +341,18 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
             ATMOPGroupDirector* Groups = FindGroupDirector();
             if (IsValid(Groups)) Groups->RefreshWaitingGroups();
             if (IsValid(Anchor) && IsValid(Groups) &&
-                Groups->DoesGroupExist(Runtime.Profile.SocialGroupId))
+                Groups->DoesGroupExist(Agent->SocialGroupId))
             {
                 TArray<FVector> RouteLocations;
                 for (const FName PassAnchorId : Entry.PassAnchorIds)
                     if (ATMOPHistoricalAnchor* PassAnchor =
                         Anchors->FindAnchor(PassAnchorId))
                         RouteLocations.Add(PassAnchor->GetPlacementLocation(
-                            Runtime.Profile.SocialGroupId));
+                            Agent->SocialGroupId));
                 RouteLocations.Add(Anchor->GetPlacementLocation(
-                    Runtime.Profile.SocialGroupId));
+                    Agent->SocialGroupId));
                 return Groups->MoveGroupThroughLocations(
-                    Runtime.Profile.SocialGroupId,
+                    Agent->SocialGroupId,
                     RouteLocations,
                     FMath::Max(80.0f, Anchor->MinimumSpacingCm));
             }
@@ -382,6 +385,51 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
         return ApplyPlacement(Agent, Entry, bCatchUp);
     case ETMOPPersonTimelineAction::BeginDriving:
         return ApplyPlacement(Agent, Entry, bCatchUp);
+    case ETMOPPersonTimelineAction::CreateGroup:
+    {
+        ATMOPGroupDirector* Groups = FindGroupDirector();
+        return IsValid(Groups) &&
+            Groups->CreateGroup(Entry.GroupDefinition);
+    }
+    case ETMOPPersonTimelineAction::JoinGroup:
+    {
+        ATMOPGroupDirector* Groups = FindGroupDirector();
+        const FName EntityId = Agent->EntityIdentity != nullptr
+            ? Agent->EntityIdentity->EntityId : NAME_None;
+        return IsValid(Groups) &&
+            Groups->AddMember(Entry.TargetGroupId, EntityId);
+    }
+    case ETMOPPersonTimelineAction::LeaveGroup:
+    {
+        ATMOPGroupDirector* Groups = FindGroupDirector();
+        const FName EntityId = Agent->EntityIdentity != nullptr
+            ? Agent->EntityIdentity->EntityId : NAME_None;
+        const FName GroupId = Entry.TargetGroupId.IsNone()
+            ? Agent->SocialGroupId : Entry.TargetGroupId;
+        return IsValid(Groups) &&
+            Groups->RemoveMember(GroupId, EntityId);
+    }
+    case ETMOPPersonTimelineAction::SplitGroup:
+    {
+        ATMOPGroupDirector* Groups = FindGroupDirector();
+        return IsValid(Groups) &&
+            Groups->SplitGroup(
+                Entry.TargetGroupId, Entry.SplitGroupDefinitions);
+    }
+    case ETMOPPersonTimelineAction::DissolveGroup:
+    {
+        ATMOPGroupDirector* Groups = FindGroupDirector();
+        return IsValid(Groups) &&
+            Groups->DissolveGroup(Entry.TargetGroupId);
+    }
+    case ETMOPPersonTimelineAction::SetGroupLeader:
+    {
+        ATMOPGroupDirector* Groups = FindGroupDirector();
+        return IsValid(Groups) &&
+            Groups->SetGroupLeader(
+                Entry.TargetGroupId,
+                Entry.NewGroupLeaderEntityId);
+    }
     case ETMOPPersonTimelineAction::Interact:
     case ETMOPPersonTimelineAction::Custom:
         Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
@@ -603,25 +651,47 @@ const FTMOPGroupProfileRow* ATMOPPersonRegistryDirector::FindGroupRow(
 }
 
 bool ATMOPPersonRegistryDirector::IsGroupLeader(
-    const FTMOPPersonProfileRow& Profile) const
+    const FTMOPPersonProfileRow& Profile,
+    const ATMOPHistoricalAgent* Agent) const
 {
-    if (Profile.SocialGroupId.IsNone()) return false;
-    if (const FTMOPGroupProfileRow* Group =
-        FindGroupRow(Profile.SocialGroupId))
+    const FName GroupId = IsValid(Agent)
+        ? Agent->SocialGroupId : Profile.SocialGroupId;
+    if (GroupId.IsNone()) return false;
+    if (const ATMOPGroupDirector* Groups = FindGroupDirector())
+    {
+        bool bFound = false;
+        const FTMOPGroupSnapshot Snapshot =
+            Groups->GetGroupSnapshot(GroupId, bFound);
+        if (bFound)
+            return Snapshot.LeaderEntityId ==
+                Profile.EntityId;
+    }
+    if (const FTMOPGroupProfileRow* Group = FindGroupRow(GroupId))
         return Group->LeaderEntityId == Profile.EntityId;
     return Profile.GroupLeaderEntityId == Profile.EntityId;
 }
 
 bool ATMOPPersonRegistryDirector::ShouldFollowGroupLeader(
-    const FTMOPPersonProfileRow& Profile) const
+    const FTMOPPersonProfileRow& Profile,
+    const ATMOPHistoricalAgent* Agent) const
 {
-    if (Profile.SocialGroupId.IsNone()) return false;
-    if (const FTMOPGroupProfileRow* Group =
-        FindGroupRow(Profile.SocialGroupId))
+    const FName GroupId = IsValid(Agent)
+        ? Agent->SocialGroupId : Profile.SocialGroupId;
+    if (GroupId.IsNone()) return false;
+    FName LeaderEntityId = Profile.GroupLeaderEntityId;
+    if (const ATMOPGroupDirector* Groups = FindGroupDirector())
+    {
+        bool bFound = false;
+        const FTMOPGroupSnapshot Snapshot =
+            Groups->GetGroupSnapshot(GroupId, bFound);
+        if (bFound)
+            LeaderEntityId = Snapshot.LeaderEntityId;
+    }
+    if (const FTMOPGroupProfileRow* Group = FindGroupRow(GroupId))
         return Group->bUseLeaderTimeline &&
-            Group->LeaderEntityId != Profile.EntityId;
+            LeaderEntityId != Profile.EntityId;
     return Profile.bFollowGroupLeaderSchedule &&
-        Profile.GroupLeaderEntityId != Profile.EntityId;
+        LeaderEntityId != Profile.EntityId;
 }
 
 void ATMOPPersonRegistryDirector::ApplyGroupTableMemberships()
@@ -807,6 +877,26 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 Entry.TargetEntityId.IsNone())
                 OutErrors.Add(Prefix + FString::Printf(
                     TEXT(" Timeline[%d] requires a target Vehicle ID."), Index));
+            if ((Entry.Action == ETMOPPersonTimelineAction::JoinGroup ||
+                 Entry.Action == ETMOPPersonTimelineAction::SplitGroup ||
+                 Entry.Action == ETMOPPersonTimelineAction::DissolveGroup ||
+                 Entry.Action == ETMOPPersonTimelineAction::SetGroupLeader) &&
+                Entry.TargetGroupId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] requires a target Group ID."), Index));
+            if (Entry.Action == ETMOPPersonTimelineAction::CreateGroup &&
+                (Entry.GroupDefinition.GroupId.IsNone() ||
+                 Entry.GroupDefinition.MemberEntityIds.IsEmpty()))
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] requires a complete Group Definition."), Index));
+            if (Entry.Action == ETMOPPersonTimelineAction::SplitGroup &&
+                Entry.SplitGroupDefinitions.Num() < 2)
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] Split Group requires at least two child groups."), Index));
+            if (Entry.Action == ETMOPPersonTimelineAction::SetGroupLeader &&
+                Entry.NewGroupLeaderEntityId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] requires a new Group Leader Entity ID."), Index));
             const int32 Second = Entry.Time.ToSecondsFromMidnight();
             if (Entry.TimingMode == ETMOPEventTimingMode::Absolute &&
                 PreviousSecond > Second)

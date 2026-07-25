@@ -37,6 +37,15 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
     bool DissolveGroup(FName GroupId);
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
+    bool AddMember(FName GroupId, FName EntityId);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
+    bool RemoveMember(FName GroupId, FName EntityId);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
+    bool SetGroupLeader(FName GroupId, FName NewLeaderEntityId);
+
     /** Creates NewGroup and dissolves every source group after all members are collected. */
     UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
     bool MergeGroups(FName NewGroupId, const TArray<FName>& SourceGroupIds,
@@ -114,6 +123,7 @@ private:
     void UpdateConversation(FRuntimeGroup& Group, float DeltaSeconds);
     void UpdateMovement(FRuntimeGroup& Group);
     void RefreshMembers(FRuntimeGroup& Group);
+    void RefreshCompanionLists(FRuntimeGroup& Group);
     FVector GetFormationOffset(const FRuntimeGroup& Group, int32 MemberIndex) const;
     FTMOPGroupSnapshot MakeSnapshot(const FRuntimeGroup& Group) const;
 

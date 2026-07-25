@@ -55,6 +55,19 @@ void ATMOPGroupDirector::RefreshMembers(FRuntimeGroup& Group)
         SetState(Group, ETMOPGroupState::Idle);
 }
 
+void ATMOPGroupDirector::RefreshCompanionLists(FRuntimeGroup& Group)
+{
+    for (TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group.Members)
+        if (ATMOPHistoricalAgent* Agent = Member.Get())
+        {
+            Agent->SocialGroupId = Group.Definition.GroupId;
+            Agent->KnownCompanionIds = Group.Definition.MemberEntityIds;
+            if (Agent->EntityIdentity != nullptr)
+                Agent->KnownCompanionIds.Remove(
+                    Agent->EntityIdentity->EntityId);
+        }
+}
+
 int32 ATMOPGroupDirector::RefreshWaitingGroups()
 {
     int32 Ready = 0;
@@ -112,6 +125,77 @@ bool ATMOPGroupDirector::DissolveGroup(const FName GroupId)
         return true;
     }
     return false;
+}
+
+bool ATMOPGroupDirector::AddMember(const FName GroupId,
+    const FName EntityId)
+{
+    FRuntimeGroup* Group = FindGroup(GroupId);
+    if (Group == nullptr || EntityId.IsNone() ||
+        Group->Definition.MemberEntityIds.Contains(EntityId))
+        return false;
+    ATMOPHistoricalAgent* Agent = FindAgent(EntityId);
+    if (!IsValid(Agent) ||
+        (!Agent->SocialGroupId.IsNone() &&
+         Agent->SocialGroupId != GroupId))
+        return false;
+    Group->Definition.MemberEntityIds.Add(EntityId);
+    Group->Members.AddUnique(Agent);
+    RefreshCompanionLists(*Group);
+    if (Group->Members.Num() == Group->Definition.MemberEntityIds.Num() &&
+        Group->State == ETMOPGroupState::WaitingForMembers)
+        SetState(*Group, ETMOPGroupState::Idle);
+    else
+        OnGroupStateChanged.Broadcast(GroupId, Group->State);
+    return true;
+}
+
+bool ATMOPGroupDirector::RemoveMember(const FName GroupId,
+    const FName EntityId)
+{
+    FRuntimeGroup* Group = FindGroup(GroupId);
+    if (Group == nullptr ||
+        !Group->Definition.MemberEntityIds.Contains(EntityId))
+        return false;
+
+    if (ATMOPHistoricalAgent* Agent = FindAgent(EntityId))
+    {
+        if (AAIController* Controller =
+            Cast<AAIController>(Agent->GetController()))
+            Controller->StopMovement();
+        Agent->SocialGroupId = NAME_None;
+        Agent->KnownCompanionIds.Reset();
+    }
+    Group->Definition.MemberEntityIds.Remove(EntityId);
+    Group->Members.RemoveAll(
+        [EntityId](const TWeakObjectPtr<ATMOPHistoricalAgent>& Member)
+        {
+            const ATMOPHistoricalAgent* Agent = Member.Get();
+            return !IsValid(Agent) ||
+                (Agent->EntityIdentity != nullptr &&
+                 Agent->EntityIdentity->EntityId == EntityId);
+        });
+
+    if (Group->Definition.MemberEntityIds.IsEmpty())
+        return DissolveGroup(GroupId);
+    if (Group->Definition.LeaderEntityId == EntityId)
+        Group->Definition.LeaderEntityId =
+            Group->Definition.MemberEntityIds[0];
+    RefreshCompanionLists(*Group);
+    OnGroupStateChanged.Broadcast(GroupId, Group->State);
+    return true;
+}
+
+bool ATMOPGroupDirector::SetGroupLeader(const FName GroupId,
+    const FName NewLeaderEntityId)
+{
+    FRuntimeGroup* Group = FindGroup(GroupId);
+    if (Group == nullptr ||
+        !Group->Definition.MemberEntityIds.Contains(NewLeaderEntityId))
+        return false;
+    Group->Definition.LeaderEntityId = NewLeaderEntityId;
+    OnGroupStateChanged.Broadcast(GroupId, Group->State);
+    return true;
 }
 
 bool ATMOPGroupDirector::MergeGroups(const FName NewGroupId,

@@ -40,7 +40,19 @@ enum class ETMOPPersonTimelineAction : uint8
     Interact,
     Custom,
     /** Start the target vehicle on its ordered traffic-lane route. */
-    BeginDriving
+    BeginDriving,
+    /** Create GroupDefinition at this point in the person's timeline. */
+    CreateGroup,
+    /** Add this person to TargetGroupId. */
+    JoinGroup,
+    /** Remove this person from TargetGroupId (or their current runtime group). */
+    LeaveGroup,
+    /** Replace TargetGroupId with SplitGroupDefinitions. */
+    SplitGroup,
+    /** Dissolve TargetGroupId. */
+    DissolveGroup,
+    /** Change TargetGroupId's runtime leader to NewGroupLeaderEntityId. */
+    SetGroupLeader
 };
 
 /** One chronological, source-backed state or action for a person. */
@@ -137,6 +149,27 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
         meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
             ClampMin="0.0", DisplayName="Start Distance Along First Lane (cm)"))
     float VehicleStartDistanceAlongFirstLaneCm = 0.0f;
+
+    /** Runtime group affected by Join/Leave/Split/Dissolve/Set Group Leader. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Group",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::JoinGroup || Action==ETMOPPersonTimelineAction::LeaveGroup || Action==ETMOPPersonTimelineAction::SplitGroup || Action==ETMOPPersonTimelineAction::DissolveGroup || Action==ETMOPPersonTimelineAction::SetGroupLeader",
+            DisplayName="Target Group ID"))
+    FName TargetGroupId = NAME_None;
+
+    /** Complete runtime group definition used by Create Group. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Group",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::CreateGroup"))
+    FTMOPGroupDefinition GroupDefinition;
+
+    /** Child groups used by Split Group. Every source member must occur exactly once. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Group",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::SplitGroup"))
+    TArray<FTMOPGroupDefinition> SplitGroupDefinitions;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Group",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::SetGroupLeader",
+            DisplayName="New Leader Entity ID"))
+    FName NewGroupLeaderEntityId = NAME_None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
     FTransform WorldTransform = FTransform::Identity;
