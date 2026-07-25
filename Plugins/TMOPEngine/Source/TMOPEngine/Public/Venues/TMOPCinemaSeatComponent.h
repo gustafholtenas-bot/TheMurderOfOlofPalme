@@ -57,12 +57,43 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment")
     FRotator SeatedRotationOffset = FRotator::ZeroRotator;
 
+    /**
+     * Raises the character origin from the cushion to the capsule centre.
+     * Set this to 0 only when the component itself is already placed at the
+     * character origin rather than on the seat cushion.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment",
+        meta = (ClampMin = "0.0", Units = "cm"))
+    float SeatedCharacterOriginHeight = 88.0f;
+
+    /**
+     * Cinema-seat components normally point into the backrest. Characters
+     * must therefore face in the opposite direction while seated.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment")
+    bool bReverseSeatedFacing = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment")
     bool bUseManualApproachTransform = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment",
         meta = (EditCondition = "bUseManualApproachTransform"))
     FTransform ManualApproachTransform = FTransform::Identity;
+
+    /**
+     * Treat the approach transform as the character's foot position and add
+     * the capsule half height when standing the agent up.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment")
+    bool bApproachIsFootLocation = true;
+
+    /** Snap the stand-up foot point to the nearest reachable navigation surface. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment")
+    bool bProjectApproachToNavMesh = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Alignment",
+        meta = (EditCondition = "bProjectApproachToNavMesh", Units = "cm"))
+    FVector ApproachNavProjectionExtent = FVector(150.0f, 150.0f, 300.0f);
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Seat|Behavior")
     bool bAttachAgentWhileSeated = true;

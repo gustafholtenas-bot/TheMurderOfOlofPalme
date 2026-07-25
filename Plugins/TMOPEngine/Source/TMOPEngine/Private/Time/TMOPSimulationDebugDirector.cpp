@@ -318,7 +318,35 @@ void ATMOPSimulationDebugDirector::HandleDigit(const int32 Digit)
         (PC->IsInputKeyDown(EKeys::LeftShift) || PC->IsInputKeyDown(EKeys::RightShift));
     if (bShift)
     {
-        if (Digit >= 1 && Digit <= 5) JumpToSimulationTime(FTMOPTime(23, 7 + Digit, 0));
+        UTMOPClockSubsystem* Clock = GetClock();
+        if (Clock == nullptr) return;
+
+        if (Digit == 3)
+        {
+            Clock->SetTimeScale(1.0f);
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP debug time scale: 1x."));
+            return;
+        }
+        if (Digit == 4)
+        {
+            Clock->SetTimeScale(
+                FMath::Max(1.0f, Clock->GetTimeScale() * 2.0f));
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP debug time scale: %.0fx."),
+                Clock->GetTimeScale());
+            return;
+        }
+
+        int32 DeltaSeconds = 0;
+        if (Digit == 1) DeltaSeconds = -30;
+        else if (Digit == 2) DeltaSeconds = 30;
+        else return;
+
+        const int32 TargetSeconds =
+            Clock->GetCurrentTime().ToSecondsFromMidnight() + DeltaSeconds;
+        JumpToSimulationTime(
+            FTMOPTime::FromSecondsFromMidnight(TargetSeconds));
         return;
     }
     JumpToSimulationTime(FTMOPTime(23, (Digit - 1) * 5, 0));

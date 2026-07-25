@@ -23,6 +23,13 @@ enum class ETMOPHistoricalVehicleAction : uint8
     Custom
 };
 
+UENUM(BlueprintType)
+enum class ETMOPHistoricalVehiclePlacementMode : uint8
+{
+    WorldTransform,
+    Anchor
+};
+
 /** One source-backed state or action in a historical vehicle's schedule. */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
@@ -40,6 +47,30 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     FTransform WorldTransform = FTransform::Identity;
+
+    /** Select how an Initial Placement or Spawn entry positions the vehicle. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Placement",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn"))
+    ETMOPHistoricalVehiclePlacementMode PlacementMode =
+        ETMOPHistoricalVehiclePlacementMode::WorldTransform;
+
+    /** Anchor used when Placement Mode is Anchor, for example LarsKnubbBil. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Placement",
+        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn) && PlacementMode==ETMOPHistoricalVehiclePlacementMode::Anchor",
+            DisplayName="Placement Anchor ID"))
+    FName PlacementAnchorId = NAME_None;
+
+    /**
+     * Optional local adjustment relative to the anchor. Use this when the
+     * vehicle mesh origin or forward direction differs from the anchor.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Placement",
+        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn) && PlacementMode==ETMOPHistoricalVehiclePlacementMode::Anchor",
+            DisplayName="Anchor Local Offset"))
+    FTransform AnchorLocalOffset = FTransform::Identity;
 
     /** Lane route used after this entry, when one has been reconstructed. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")

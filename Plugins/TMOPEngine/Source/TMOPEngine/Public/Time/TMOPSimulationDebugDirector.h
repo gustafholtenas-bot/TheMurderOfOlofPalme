@@ -13,7 +13,8 @@ class UTMOPClockSubsystem;
  * Place one instance in the test level.
  *
  * Number keys seek through 23:00-23:40 in five-minute steps.
- * Shift+1 through Shift+5 seek to 23:41-23:45.
+ * Shift+1 moves 30 seconds backwards; Shift+2 moves 30 seconds forwards.
+ * Shift+3 restores 1x speed; every Shift+4 press doubles clock speed.
  * B starts/stops a standard-speed person bake.
  */
 UCLASS(Blueprintable)

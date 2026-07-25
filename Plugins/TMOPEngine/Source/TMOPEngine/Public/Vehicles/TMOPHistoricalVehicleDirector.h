@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Vehicles/TMOPHistoricalVehicleTypes.h"
+#include "Traffic/TMOPTrafficTypes.h"
 #include "TMOPHistoricalVehicleDirector.generated.h"
 
 class ATMOPVehicleBase;
@@ -65,6 +66,9 @@ public:
         FName VehicleId,
         FName DriverEntityId,
         const TArray<FName>& OrderedLaneIds,
+        ETMOPVehicleRouteMode RouteMode =
+            ETMOPVehicleRouteMode::ManualLaneRoute,
+        FName DestinationAnchorId = NAME_None,
         float StartDistanceAlongFirstLaneCm = 0.0f);
 
 private:

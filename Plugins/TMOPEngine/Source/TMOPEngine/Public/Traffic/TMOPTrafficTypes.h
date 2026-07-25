@@ -21,6 +21,17 @@ enum class ETMOPTrafficTurnType : uint8
     UTurn
 };
 
+UENUM(BlueprintType)
+enum class ETMOPVehicleRouteMode : uint8
+{
+    /** Use Ordered Lane IDs exactly as entered. */
+    ManualLaneRoute,
+    /** Find a connected lane route from the vehicle to Destination Anchor ID. */
+    AutomaticToAnchor,
+    /** Follow Ordered Lane IDs first, then calculate the rest to the anchor. */
+    ManualThenAutomatic
+};
+
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPLaneConnection
 {

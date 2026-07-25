@@ -5,7 +5,10 @@
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Anchors/TMOPAnchorSubsystem.h"
+#include "Anchors/TMOPHistoricalAnchor.h"
 #include "Entities/TMOPWorldEntityComponent.h"
+#include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Vehicles/TMOPConfiguredVehicle.h"
 #include "Vehicles/TMOPVehicleBase.h"
@@ -236,6 +239,35 @@ FTransform ATMOPHistoricalVehicleDirector::GetInitialTransform(
         if (Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
             Entry.Action == ETMOPHistoricalVehicleAction::Spawn)
         {
+            if (Entry.PlacementMode ==
+                ETMOPHistoricalVehiclePlacementMode::Anchor)
+            {
+                UTMOPAnchorSubsystem* Anchors =
+                    GetGameInstance() != nullptr
+                    ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>()
+                    : nullptr;
+                if (Anchors != nullptr)
+                {
+                    // Vehicle and anchor BeginPlay order is not guaranteed.
+                    Anchors->DiscoverAnchorsInWorld();
+                }
+                ATMOPHistoricalAnchor* Anchor =
+                    Anchors != nullptr
+                    ? Anchors->FindAnchor(Entry.PlacementAnchorId)
+                    : nullptr;
+                if (IsValid(Anchor))
+                {
+                    return Entry.AnchorLocalOffset *
+                        FTransform(
+                            Anchor->GetAnchorRotation(),
+                            Anchor->GetAnchorLocation(),
+                            FVector::OneVector);
+                }
+                UE_LOG(LogTemp, Error,
+                    TEXT("TMOP Historical Vehicles: placement anchor '%s' for vehicle '%s' was not found; using World Transform fallback."),
+                    *Entry.PlacementAnchorId.ToString(),
+                    *Profile.VehicleId.ToString());
+            }
             return Entry.WorldTransform;
         }
     }
@@ -329,6 +361,20 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
         {
             OutErrors.Add(Prefix + TEXT(" has no Timeline entries."));
         }
+        for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Row->Timeline)
+        {
+            const bool bPlacementEntry =
+                Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Spawn;
+            if (bPlacementEntry &&
+                Entry.PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::Anchor &&
+                Entry.PlacementAnchorId.IsNone())
+            {
+                OutErrors.Add(Prefix +
+                    TEXT(" has anchor placement without a Placement Anchor ID."));
+            }
+        }
     }
     return OutErrors.IsEmpty();
 }
@@ -363,6 +409,8 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     const FName VehicleId,
     const FName DriverEntityId,
     const TArray<FName>& OrderedLaneIds,
+    const ETMOPVehicleRouteMode RouteMode,
+    const FName DestinationAnchorId,
     const float StartDistanceAlongFirstLaneCm)
 {
     if (RuntimeVehicles.IsEmpty())
@@ -402,11 +450,98 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     }
 
     TArray<FName> Route = OrderedLaneIds;
-    if (Route.IsEmpty())
+    if (RouteMode == ETMOPVehicleRouteMode::ManualLaneRoute &&
+        Route.IsEmpty())
         if (const FTMOPHistoricalVehicleTimelineEntry* DrivingEntry =
             FindDrivingEntry(Runtime->Profile, DriverEntityId))
             Route = DrivingEntry->OrderedLaneIds;
     Route.RemoveAll([](const FName LaneId) { return LaneId.IsNone(); });
+
+    float ResolvedStartDistance = StartDistanceAlongFirstLaneCm;
+    if (RouteMode != ETMOPVehicleRouteMode::ManualLaneRoute)
+    {
+        if (DestinationAnchorId.IsNone() || GetGameInstance() == nullptr)
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP driving: automatic route for '%s' needs a Destination Anchor ID."),
+                *VehicleId.ToString());
+            return false;
+        }
+        UTMOPAnchorSubsystem* Anchors =
+            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+        ATMOPHistoricalAnchor* Destination =
+            Anchors != nullptr ? Anchors->FindAnchor(DestinationAnchorId) : nullptr;
+        UTMOPTrafficNetworkSubsystem* Network =
+            GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>();
+        if (!IsValid(Destination) || Network == nullptr)
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP driving: destination anchor '%s' or traffic network is unavailable."),
+                *DestinationAnchorId.ToString());
+            return false;
+        }
+        Network->DiscoverLanesInWorld();
+
+        FName DestinationLaneId;
+        float DestinationDistance = 0.0f;
+        if (!Network->FindNearestLane(
+            Destination->GetAnchorLocation(),
+            DestinationLaneId,
+            DestinationDistance))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP driving: no lane was found near anchor '%s'."),
+                *DestinationAnchorId.ToString());
+            return false;
+        }
+
+        FName RouteStartLaneId;
+        if (RouteMode == ETMOPVehicleRouteMode::ManualThenAutomatic &&
+            !Route.IsEmpty())
+        {
+            RouteStartLaneId = Route.Last();
+        }
+        else
+        {
+            float NearestStartDistance = 0.0f;
+            if (!Network->FindNearestLane(
+                Vehicle->GetActorLocation(),
+                RouteStartLaneId,
+                NearestStartDistance))
+            {
+                UE_LOG(LogTemp, Error,
+                    TEXT("TMOP driving: no start lane was found near '%s'."),
+                    *VehicleId.ToString());
+                return false;
+            }
+            Route.Reset();
+            if (StartDistanceAlongFirstLaneCm <= 0.0f)
+            {
+                ResolvedStartDistance = NearestStartDistance;
+            }
+        }
+
+        TArray<FName> AutomaticTail;
+        if (!Network->FindLaneRoute(
+            RouteStartLaneId, DestinationLaneId, AutomaticTail))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP driving: no connected lane route from '%s' to '%s' (anchor '%s')."),
+                *RouteStartLaneId.ToString(), *DestinationLaneId.ToString(),
+                *DestinationAnchorId.ToString());
+            return false;
+        }
+        if (!Route.IsEmpty() && !AutomaticTail.IsEmpty() &&
+            Route.Last() == AutomaticTail[0])
+        {
+            AutomaticTail.RemoveAt(0);
+        }
+        Route.Append(AutomaticTail);
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP driving: calculated %d lane(s) to anchor '%s'."),
+            Route.Num(), *DestinationAnchorId.ToString());
+    }
+
     if (Route.IsEmpty())
     {
         UE_LOG(LogTemp, Error,
@@ -431,7 +566,7 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     Movement->PlannedLaneIds = Route;
     Movement->InitialLaneId = Route[0];
     if (!Movement->InitializeOnLane(
-        Route[0], StartDistanceAlongFirstLaneCm))
+        Route[0], ResolvedStartDistance))
         return false;
     Movement->StartDriving();
     UE_LOG(LogTemp, Display,

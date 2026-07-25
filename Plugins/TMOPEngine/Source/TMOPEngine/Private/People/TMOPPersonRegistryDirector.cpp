@@ -426,6 +426,8 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
                 Entry.TargetEntityId,
                 DriverEntityId,
                 Entry.OrderedLaneIds,
+                Entry.VehicleRouteMode,
+                Entry.DrivingDestinationAnchorId,
                 Entry.VehicleStartDistanceAlongFirstLaneCm);
         UE_LOG(LogTemp, Error,
             TEXT("TMOP person '%s': no Historical Vehicle Director for BeginDriving."),

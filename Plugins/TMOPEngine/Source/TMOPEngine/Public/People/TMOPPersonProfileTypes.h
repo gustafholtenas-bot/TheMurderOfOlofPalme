@@ -5,6 +5,7 @@
 #include "Agents/TMOPAgentTypes.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "Groups/TMOPGroupTypes.h"
+#include "Traffic/TMOPTrafficTypes.h"
 #include "TMOPPersonProfileTypes.generated.h"
 
 class ATMOPHistoricalAgent;
@@ -114,6 +115,17 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
         meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
             DisplayName="Ordered Lane IDs"))
     TArray<FName> OrderedLaneIds;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving"))
+    ETMOPVehicleRouteMode VehicleRouteMode =
+        ETMOPVehicleRouteMode::ManualLaneRoute;
+
+    /** Destination used by Automatic To Anchor and Manual Then Automatic. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving && VehicleRouteMode!=ETMOPVehicleRouteMode::ManualLaneRoute",
+            DisplayName="Destination Anchor ID"))
+    FName DrivingDestinationAnchorId = NAME_None;
 
     /** Distance from the beginning of the first lane at which driving starts. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",

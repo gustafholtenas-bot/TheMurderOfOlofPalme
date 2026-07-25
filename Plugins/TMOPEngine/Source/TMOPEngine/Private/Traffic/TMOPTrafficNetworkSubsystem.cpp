@@ -93,3 +93,142 @@ bool UTMOPTrafficNetworkSubsystem::ValidateNetwork(TArray<FString>& OutErrors) c
     }
     return OutErrors.IsEmpty();
 }
+
+bool UTMOPTrafficNetworkSubsystem::FindNearestLane(
+    const FVector WorldLocation,
+    FName& OutLaneId,
+    float& OutDistanceAlongLaneCm) const
+{
+    OutLaneId = NAME_None;
+    OutDistanceAlongLaneCm = 0.0f;
+    double BestDistanceSquared = TNumericLimits<double>::Max();
+
+    for (const TPair<FName, TWeakObjectPtr<UTMOPTrafficLaneComponent>>& Pair : Lanes)
+    {
+        UTMOPTrafficLaneComponent* Lane = Pair.Value.Get();
+        if (!IsValid(Lane))
+        {
+            continue;
+        }
+        const float InputKey =
+            Lane->FindInputKeyClosestToWorldLocation(WorldLocation);
+        const FVector Closest =
+            Lane->GetLocationAtSplineInputKey(InputKey, ESplineCoordinateSpace::World);
+        const double DistanceSquared =
+            FVector::DistSquared(WorldLocation, Closest);
+        if (DistanceSquared < BestDistanceSquared ||
+            (FMath::IsNearlyEqual(DistanceSquared, BestDistanceSquared) &&
+                (OutLaneId.IsNone() || Pair.Key.LexicalLess(OutLaneId))))
+        {
+            BestDistanceSquared = DistanceSquared;
+            OutLaneId = Pair.Key;
+            OutDistanceAlongLaneCm =
+                Lane->GetDistanceAlongSplineAtSplineInputKey(InputKey);
+        }
+    }
+    return !OutLaneId.IsNone();
+}
+
+bool UTMOPTrafficNetworkSubsystem::FindLaneRoute(
+    const FName StartLaneId,
+    const FName DestinationLaneId,
+    TArray<FName>& OutOrderedLaneIds) const
+{
+    OutOrderedLaneIds.Reset();
+    if (!IsValid(FindLane(StartLaneId)) ||
+        !IsValid(FindLane(DestinationLaneId)))
+    {
+        return false;
+    }
+
+    TMap<FName, double> Distances;
+    TMap<FName, FName> Previous;
+    TSet<FName> Unvisited;
+    for (const FName LaneId : GetAllLaneIds())
+    {
+        Distances.Add(LaneId, TNumericLimits<double>::Max());
+        Unvisited.Add(LaneId);
+    }
+    Distances.FindOrAdd(StartLaneId) = 0.0;
+
+    while (!Unvisited.IsEmpty())
+    {
+        FName Current = NAME_None;
+        double CurrentDistance = TNumericLimits<double>::Max();
+        for (const FName Candidate : Unvisited)
+        {
+            const double CandidateDistance =
+                Distances.FindRef(Candidate);
+            if (CandidateDistance < CurrentDistance ||
+                (FMath::IsNearlyEqual(CandidateDistance, CurrentDistance) &&
+                    (Current.IsNone() || Candidate.LexicalLess(Current))))
+            {
+                Current = Candidate;
+                CurrentDistance = CandidateDistance;
+            }
+        }
+        if (Current.IsNone() ||
+            CurrentDistance == TNumericLimits<double>::Max())
+        {
+            break;
+        }
+        Unvisited.Remove(Current);
+        if (Current == DestinationLaneId)
+        {
+            break;
+        }
+
+        const UTMOPTrafficLaneComponent* Lane = FindLane(Current);
+        if (!IsValid(Lane))
+        {
+            continue;
+        }
+        TArray<FTMOPLaneConnection> Connections = Lane->NextLanes;
+        Connections.Sort([](const FTMOPLaneConnection& A,
+            const FTMOPLaneConnection& B)
+        {
+            return A.TargetLaneId.LexicalLess(B.TargetLaneId);
+        });
+        for (const FTMOPLaneConnection& Connection : Connections)
+        {
+            if (!Connection.bAllowed ||
+                !Unvisited.Contains(Connection.TargetLaneId))
+            {
+                continue;
+            }
+            const UTMOPTrafficLaneComponent* NextLane =
+                FindLane(Connection.TargetLaneId);
+            if (!IsValid(NextLane))
+            {
+                continue;
+            }
+            const double CandidateDistance =
+                CurrentDistance + FMath::Max(1.0f, NextLane->GetSplineLength());
+            double& KnownDistance =
+                Distances.FindOrAdd(Connection.TargetLaneId);
+            if (CandidateDistance < KnownDistance)
+            {
+                KnownDistance = CandidateDistance;
+                Previous.Add(Connection.TargetLaneId, Current);
+            }
+        }
+    }
+
+    if (StartLaneId != DestinationLaneId &&
+        !Previous.Contains(DestinationLaneId))
+    {
+        return false;
+    }
+    for (FName LaneId = DestinationLaneId; !LaneId.IsNone();)
+    {
+        OutOrderedLaneIds.Insert(LaneId, 0);
+        if (LaneId == StartLaneId)
+        {
+            return true;
+        }
+        const FName* Parent = Previous.Find(LaneId);
+        LaneId = Parent != nullptr ? *Parent : NAME_None;
+    }
+    OutOrderedLaneIds.Reset();
+    return false;
+}

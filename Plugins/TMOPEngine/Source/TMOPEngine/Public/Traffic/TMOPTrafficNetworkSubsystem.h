@@ -33,6 +33,20 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic")
     bool ValidateNetwork(TArray<FString>& OutErrors) const;
 
+    /** Finds the closest registered lane spline and its distance coordinate. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|Routing")
+    bool FindNearestLane(
+        FVector WorldLocation,
+        FName& OutLaneId,
+        float& OutDistanceAlongLaneCm) const;
+
+    /** Deterministic shortest route through allowed directed lane connections. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|Routing")
+    bool FindLaneRoute(
+        FName StartLaneId,
+        FName DestinationLaneId,
+        TArray<FName>& OutOrderedLaneIds) const;
+
 private:
     TMap<FName, TWeakObjectPtr<UTMOPTrafficLaneComponent>> Lanes;
 };
