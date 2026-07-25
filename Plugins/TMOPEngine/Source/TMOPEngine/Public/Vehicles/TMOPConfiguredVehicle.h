@@ -11,6 +11,7 @@ class UCameraComponent;
 class UTMOPVehicleModelData;
 class UTMOPVehicleSeatComponent;
 class UTMOPVehicleDoorComponent;
+class UTMOPTrafficVehicleMovementComponent;
 
 /** Select one vehicle model; all visual parts are assembled automatically. */
 UCLASS(Blueprintable)
@@ -57,6 +58,10 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Camera")
     TObjectPtr<UCameraComponent> VehicleCamera;
+
+    /** Disabled while parked; BeginDriving in a person's timeline starts it. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Traffic")
+    TObjectPtr<UTMOPTrafficVehicleMovementComponent> TrafficMovement;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Seats")
     TObjectPtr<UTMOPVehicleSeatComponent> SeatDriver;

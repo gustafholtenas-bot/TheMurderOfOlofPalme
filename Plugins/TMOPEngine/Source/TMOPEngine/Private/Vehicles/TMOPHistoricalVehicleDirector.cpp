@@ -4,6 +4,9 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
+#include "Agents/TMOPHistoricalAgent.h"
+#include "Entities/TMOPWorldEntityComponent.h"
+#include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Vehicles/TMOPConfiguredVehicle.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "World/TMOPWorldSubsystem.h"
@@ -17,6 +20,7 @@ ATMOPHistoricalVehicleDirector::ATMOPHistoricalVehicleDirector()
 {
     PrimaryActorTick.bCanEverTick = false;
     DefaultVehicleClass = ATMOPConfiguredVehicle::StaticClass();
+    bRespectRowSpawnFlags = false;
 }
 
 void ATMOPHistoricalVehicleDirector::BeginPlay()
@@ -43,14 +47,13 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
     RuntimeVehicles.Reset();
 
     TArray<FString> Errors;
-    if (!ValidateHistoricalVehicleTable(Errors))
-    {
-        for (const FString& Error : Errors)
-        {
-            UE_LOG(LogTemp, Error, TEXT("TMOP Historical Vehicles: %s"), *Error);
-        }
+    ValidateHistoricalVehicleTable(Errors);
+    for (const FString& Error : Errors)
+        UE_LOG(LogTemp, Error, TEXT("TMOP Historical Vehicles: %s"), *Error);
+    if (!IsValid(HistoricalVehicleTable) ||
+        HistoricalVehicleTable->GetRowStruct() !=
+            FTMOPHistoricalVehicleRow::StaticStruct())
         return 0;
-    }
 
     const TMap<FName, uint8*>& Rows = HistoricalVehicleTable->GetRowMap();
     RuntimeVehicles.Reserve(Rows.Num());
@@ -60,6 +63,20 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
             reinterpret_cast<const FTMOPHistoricalVehicleRow*>(Pair.Value);
         if (Row == nullptr)
         {
+            continue;
+        }
+        if (Row->VehicleId.IsNone() ||
+            !Row->Timeline.ContainsByPredicate(
+                [](const FTMOPHistoricalVehicleTimelineEntry& Entry)
+                {
+                    return Entry.Action ==
+                            ETMOPHistoricalVehicleAction::InitialPlacement ||
+                        Entry.Action == ETMOPHistoricalVehicleAction::Spawn;
+                }))
+        {
+            UE_LOG(LogTemp, Warning,
+                TEXT("TMOP Historical Vehicles: skipped invalid row '%s'."),
+                *Pair.Key.ToString());
             continue;
         }
 
@@ -79,7 +96,10 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
 
 int32 ATMOPHistoricalVehicleDirector::SpawnEnabledVehicles()
 {
-    return SpawnVehicles(false);
+    // DT_TMOP_HistoricalVehicles is the authoritative scenario inventory.
+    // Every valid row is present at scenario start; bSpawnInSimulation remains
+    // metadata for older tables but no longer suppresses historical cars.
+    return SpawnVehicles(true);
 }
 
 void ATMOPHistoricalVehicleDirector::SpawnAllVehiclesForStaging()
@@ -318,4 +338,104 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::FindHistoricalVehicle(
 {
     const FHistoricalVehicleRuntime* Runtime = RuntimeVehicles.Find(VehicleId);
     return Runtime != nullptr ? Runtime->Vehicle.Get() : nullptr;
+}
+
+const FTMOPHistoricalVehicleTimelineEntry*
+ATMOPHistoricalVehicleDirector::FindDrivingEntry(
+    const FTMOPHistoricalVehicleRow& Profile,
+    const FName DriverEntityId) const
+{
+    for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Profile.Timeline)
+    {
+        const bool bDrivingAction =
+            Entry.Action == ETMOPHistoricalVehicleAction::BeginDriving ||
+            Entry.Action == ETMOPHistoricalVehicleAction::EnterTrafficRoute;
+        const bool bDriverMatches = Entry.DriverEntityId.IsNone() ||
+            Entry.DriverEntityId == DriverEntityId;
+        if (bDrivingAction && bDriverMatches &&
+            !Entry.OrderedLaneIds.IsEmpty())
+            return &Entry;
+    }
+    return nullptr;
+}
+
+bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
+    const FName VehicleId,
+    const FName DriverEntityId,
+    const TArray<FName>& OrderedLaneIds,
+    const float StartDistanceAlongFirstLaneCm)
+{
+    if (RuntimeVehicles.IsEmpty())
+        InitializeHistoricalVehicles();
+
+    FHistoricalVehicleRuntime* Runtime = RuntimeVehicles.Find(VehicleId);
+    ATMOPVehicleBase* Vehicle =
+        Runtime != nullptr ? Runtime->Vehicle.Get() : nullptr;
+    if (Runtime == nullptr || !IsValid(Vehicle))
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP driving: vehicle '%s' is not spawned."),
+            *VehicleId.ToString());
+        return false;
+    }
+
+    ATMOPHistoricalAgent* Driver = Vehicle->GetDriverAgent();
+    const FName OccupantId =
+        IsValid(Driver) && IsValid(Driver->EntityIdentity)
+        ? Driver->EntityIdentity->EntityId : NAME_None;
+    if (DriverEntityId.IsNone() || OccupantId != DriverEntityId)
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP driving: '%s' is not in driver seat of '%s'."),
+            *DriverEntityId.ToString(), *VehicleId.ToString());
+        return false;
+    }
+    if (!Runtime->Profile.KnownDriverEntityId.IsNone() &&
+        Runtime->Profile.KnownDriverEntityId != DriverEntityId)
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP driving: '%s' does not match known driver '%s' for '%s'."),
+            *DriverEntityId.ToString(),
+            *Runtime->Profile.KnownDriverEntityId.ToString(),
+            *VehicleId.ToString());
+        return false;
+    }
+
+    TArray<FName> Route = OrderedLaneIds;
+    if (Route.IsEmpty())
+        if (const FTMOPHistoricalVehicleTimelineEntry* DrivingEntry =
+            FindDrivingEntry(Runtime->Profile, DriverEntityId))
+            Route = DrivingEntry->OrderedLaneIds;
+    Route.RemoveAll([](const FName LaneId) { return LaneId.IsNone(); });
+    if (Route.IsEmpty())
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP driving: vehicle '%s' has no ordered lane route."),
+            *VehicleId.ToString());
+        return false;
+    }
+
+    UTMOPTrafficVehicleMovementComponent* Movement =
+        Vehicle->FindComponentByClass<
+            UTMOPTrafficVehicleMovementComponent>();
+    if (!IsValid(Movement))
+    {
+        Movement = NewObject<UTMOPTrafficVehicleMovementComponent>(
+            Vehicle, TEXT("HistoricalTrafficMovement"));
+        Vehicle->AddInstanceComponent(Movement);
+        Movement->bStartDrivingAutomatically = false;
+        Movement->RegisterComponent();
+    }
+
+    Movement->StopDriving();
+    Movement->PlannedLaneIds = Route;
+    Movement->InitialLaneId = Route[0];
+    if (!Movement->InitializeOnLane(
+        Route[0], StartDistanceAlongFirstLaneCm))
+        return false;
+    Movement->StartDriving();
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP driving: '%s' started '%s' on %d ordered lane(s)."),
+        *DriverEntityId.ToString(), *VehicleId.ToString(), Route.Num());
+    return true;
 }

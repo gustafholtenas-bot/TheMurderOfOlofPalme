@@ -17,7 +17,8 @@ public class TMOPEngineEditor : ModuleRules
             "Slate",
             "SlateCore",
             "ToolMenus",
-            "LevelEditor"
+            "LevelEditor",
+            "InputCore"
         });
     }
 }

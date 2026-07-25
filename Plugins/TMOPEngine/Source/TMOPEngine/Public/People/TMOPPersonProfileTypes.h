@@ -37,7 +37,9 @@ enum class ETMOPPersonTimelineAction : uint8
     ChangeActivity,
     ChangeLifeState,
     Interact,
-    Custom
+    Custom,
+    /** Start the target vehicle on its ordered traffic-lane route. */
+    BeginDriving
 };
 
 /** One chronological, source-backed state or action for a person. */
@@ -103,6 +105,21 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     /** Optional stop constraint for boarding or alighting a bus. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
     FName TargetStopId = NAME_None;
+
+    /**
+     * Optional driving route for BeginDriving. When empty, the route is read
+     * from the target vehicle's BeginDriving/EnterTrafficRoute timeline entry.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
+            DisplayName="Ordered Lane IDs"))
+    TArray<FName> OrderedLaneIds;
+
+    /** Distance from the beginning of the first lane at which driving starts. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
+            ClampMin="0.0", DisplayName="Start Distance Along First Lane (cm)"))
+    float VehicleStartDistanceAlongFirstLaneCm = 0.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
     FTransform WorldTransform = FTransform::Identity;

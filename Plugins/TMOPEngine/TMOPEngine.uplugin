@@ -1,7 +1,7 @@
 {
   "FileVersion": 3,
-  "Version": 58,
-  "VersionName": "0.0.58",
+  "Version": 60,
+  "VersionName": "0.0.60",
   "FriendlyName": "TMOP Engine",
   "Description": "The Murder of Olof Palme simulation systems",
   "Category": "TMOP",
@@ -9,5 +9,8 @@
   "CanContainContent": true,
   "IsBetaVersion": true,
   "Installed": false,
-  "Modules": [{ "Name": "TMOPEngine", "Type": "Runtime", "LoadingPhase": "Default" }]
+  "Modules": [
+    { "Name": "TMOPEngine", "Type": "Runtime", "LoadingPhase": "Default" },
+    { "Name": "TMOPEngineEditor", "Type": "Editor", "LoadingPhase": "Default" }
+  ]
 }

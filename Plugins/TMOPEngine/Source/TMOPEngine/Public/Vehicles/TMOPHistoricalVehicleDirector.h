@@ -32,10 +32,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning")
     bool bSpawnVehiclesAutomatically = true;
 
-    /**
-     * Normal gameplay respects bSpawnInSimulation on every row. Disable this
-     * temporarily to inspect all staging vehicles exported from Blender.
-     */
+    /** Legacy compatibility flag. Valid historical rows now spawn at start. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning")
     bool bRespectRowSpawnFlags = true;
 
@@ -59,6 +56,17 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Historical Vehicles")
     ATMOPVehicleBase* FindHistoricalVehicle(FName VehicleId) const;
 
+    /**
+     * Starts a parked historical vehicle on a deterministic lane route.
+     * The requesting person must occupy its driver seat.
+     */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Historical Vehicles|Driving")
+    bool BeginDrivingVehicle(
+        FName VehicleId,
+        FName DriverEntityId,
+        const TArray<FName>& OrderedLaneIds,
+        float StartDistanceAlongFirstLaneCm = 0.0f);
+
 private:
     struct FHistoricalVehicleRuntime
     {
@@ -75,6 +83,9 @@ private:
     void RegisterVehicle(ATMOPVehicleBase* Vehicle) const;
     void UnregisterVehicle(ATMOPVehicleBase* Vehicle) const;
     int32 SpawnVehicles(bool bIgnoreRowFlags);
+    const FTMOPHistoricalVehicleTimelineEntry* FindDrivingEntry(
+        const FTMOPHistoricalVehicleRow& Profile,
+        FName DriverEntityId) const;
 
     TMap<FName, FHistoricalVehicleRuntime> RuntimeVehicles;
 };

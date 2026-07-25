@@ -5,7 +5,7 @@
 #include "IStructureDetailsView.h"
 #include "PropertyEditorModule.h"
 #include "Styling/AppStyle.h"
-#include "StructOnScope.h"
+#include "UObject/StructOnScope.h"
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Input/SSearchBox.h"
 #include "Widgets/SBoxPanel.h"
@@ -719,6 +719,11 @@ bool STMOPPeopleEditor::EntryHasError(
     if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
         Entry.TargetAnchorId.IsNone())
         return Fail(TEXT("Move To Anchor requires Target Anchor ID"));
+    if ((Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
+         Entry.Action == ETMOPPersonTimelineAction::ExitVehicle ||
+         Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&
+        Entry.TargetEntityId.IsNone())
+        return Fail(TEXT("Vehicle action requires Target Entity ID"));
     if (Index > 0 &&
         Entry.TimingMode == ETMOPEventTimingMode::Absolute)
     {

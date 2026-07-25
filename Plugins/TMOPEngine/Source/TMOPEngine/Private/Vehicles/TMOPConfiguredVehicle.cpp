@@ -41,6 +41,11 @@ ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
     VehicleCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("VehicleCamera"));
     VehicleCamera->SetupAttachment(VehicleCameraBoom, USpringArmComponent::SocketName);
 
+    TrafficMovement =
+        CreateDefaultSubobject<UTMOPTrafficVehicleMovementComponent>(
+            TEXT("TrafficMovement"));
+    TrafficMovement->bStartDrivingAutomatically = false;
+
     SeatDriver = CreateDefaultSubobject<UTMOPVehicleSeatComponent>(TEXT("SeatDriver"));
     SeatFrontPassenger = CreateDefaultSubobject<UTMOPVehicleSeatComponent>(TEXT("SeatFrontPassenger"));
     SeatRearLeft = CreateDefaultSubobject<UTMOPVehicleSeatComponent>(TEXT("SeatRearLeft"));

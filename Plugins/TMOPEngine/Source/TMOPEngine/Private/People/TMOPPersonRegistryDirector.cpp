@@ -19,6 +19,7 @@
 #include "Transit/TMOPBusServiceComponent.h"
 #include "Transit/TMOPBusStopComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Vehicles/TMOPHistoricalVehicleDirector.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Venues/TMOPCinemaSeatSubsystem.h"
@@ -374,6 +375,8 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     case ETMOPPersonTimelineAction::EnterVehicle:
     case ETMOPPersonTimelineAction::ExitVehicle:
         return ApplyPlacement(Agent, Entry, bCatchUp);
+    case ETMOPPersonTimelineAction::BeginDriving:
+        return ApplyPlacement(Agent, Entry, bCatchUp);
     case ETMOPPersonTimelineAction::Interact:
     case ETMOPPersonTimelineAction::Custom:
         Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
@@ -410,6 +413,24 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
                 Stop->StopId != Entry.TargetStopId) return false;
         }
         return IsValid(Vehicle) && Vehicle->ExitVehicle(Agent);
+    }
+
+    if (Entry.Action == ETMOPPersonTimelineAction::BeginDriving)
+    {
+        const FName DriverEntityId =
+            IsValid(Agent->EntityIdentity)
+            ? Agent->EntityIdentity->EntityId : NAME_None;
+        for (TActorIterator<ATMOPHistoricalVehicleDirector> It(GetWorld());
+            It; ++It)
+            return It->BeginDrivingVehicle(
+                Entry.TargetEntityId,
+                DriverEntityId,
+                Entry.OrderedLaneIds,
+                Entry.VehicleStartDistanceAlongFirstLaneCm);
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP person '%s': no Historical Vehicle Director for BeginDriving."),
+            *DriverEntityId.ToString());
+        return false;
     }
 
     switch (Entry.LocationType)
@@ -757,6 +778,12 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor)
                 OutErrors.Add(Prefix + FString::Printf(
                     TEXT(" Timeline[%d] marks arrival time but is not MoveToAnchor."), Index));
+            if ((Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
+                 Entry.Action == ETMOPPersonTimelineAction::ExitVehicle ||
+                 Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&
+                Entry.TargetEntityId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] requires a target Vehicle ID."), Index));
             const int32 Second = Entry.Time.ToSecondsFromMidnight();
             if (Entry.TimingMode == ETMOPEventTimingMode::Absolute &&
                 PreviousSecond > Second)

@@ -10,7 +10,7 @@ class SEditableTextBox;
 class SSearchBox;
 class STextBlock;
 class UDataTable;
-struct FStructOnScope;
+class FStructOnScope;
 
 class STMOPPeopleEditor final : public SCompoundWidget
 {
