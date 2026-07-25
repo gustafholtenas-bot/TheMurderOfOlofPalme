@@ -65,6 +65,10 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|People|Simulation")
     ATMOPHistoricalAgent* FindSpawnedPerson(FName EntityId) const;
 
+    /** Returns the configured talk response for the selected side of the shot. */
+    UFUNCTION(BlueprintPure, Category="TMOP|People|Dialog")
+    FText GetPersonDialog(FName EntityId, bool bAfterShot) const;
+
 private:
     struct FPersonRuntime
     {

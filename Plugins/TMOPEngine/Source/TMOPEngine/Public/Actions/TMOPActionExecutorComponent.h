@@ -102,6 +102,7 @@ private:
 
     bool ExecuteImmediateAction(const FTMOPScheduleEntry& Entry);
     bool BeginMoveToAnchor(const FTMOPScheduleEntry& Entry);
+    bool MoveToCurrentRouteAnchor();
     void CompleteCurrentAction(bool bSuccessful);
     FName GetOwnerEntityId() const;
     ATMOPHistoricalAgent* GetHistoricalAgent() const;
@@ -111,6 +112,11 @@ private:
 
     UPROPERTY(Transient)
     FVector CurrentTargetLocation = FVector::ZeroVector;
+
+    UPROPERTY(Transient)
+    TArray<FName> CurrentRouteAnchorIds;
+
+    int32 CurrentRouteAnchorIndex = INDEX_NONE;
 
     ETMOPActionExecutionState ExecutionState =
         ETMOPActionExecutionState::Idle;

@@ -85,6 +85,15 @@ void UTMOPActionExecutorComponent::TickComponent(
 
     if (DistanceSquared <= FMath::Square(ArrivalRadius))
     {
+        if (CurrentRouteAnchorIds.IsValidIndex(CurrentRouteAnchorIndex + 1))
+        {
+            ++CurrentRouteAnchorIndex;
+            if (!MoveToCurrentRouteAnchor())
+            {
+                CompleteCurrentAction(false);
+            }
+            return;
+        }
         CompleteCurrentAction(true);
     }
 }
@@ -139,6 +148,8 @@ void UTMOPActionExecutorComponent::CancelCurrentAction()
 
     bHasCurrentEntry = false;
     bRestoredFromBake = false;
+    CurrentRouteAnchorIds.Reset();
+    CurrentRouteAnchorIndex = INDEX_NONE;
     CurrentEntry = FTMOPScheduleEntry();
     ExecutionState = ETMOPActionExecutionState::Idle;
     SetComponentTickEnabled(false);
@@ -168,6 +179,8 @@ bool UTMOPActionExecutorComponent::RestoreBakedMoveToLocation(
     CurrentEntry = FTMOPScheduleEntry();
     CurrentEntry.ActionType = ETMOPScheduleActionType::MoveToAnchor;
     CurrentTargetLocation = TargetLocation;
+    CurrentRouteAnchorIds.Reset();
+    CurrentRouteAnchorIndex = INDEX_NONE;
     bHasCurrentEntry = true;
     bRestoredFromBake = true;
     ExecutionState = ETMOPActionExecutionState::WaitingForArrival;
@@ -267,38 +280,17 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
     const FTMOPScheduleEntry& Entry)
 {
     ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
-    UWorld* World = GetWorld();
-    UGameInstance* GameInstance =
-        World != nullptr ? World->GetGameInstance() : nullptr;
-
-    if (!IsValid(Agent) || GameInstance == nullptr ||
-        Entry.TargetAnchorId.IsNone())
+    if (!IsValid(Agent) || Entry.TargetAnchorId.IsNone())
     {
         CompleteCurrentAction(false);
         return false;
     }
 
-    UTMOPAnchorSubsystem* Anchors =
-        GameInstance->GetSubsystem<UTMOPAnchorSubsystem>();
-
-    ATMOPHistoricalAnchor* TargetAnchor =
-        Anchors != nullptr
-            ? Anchors->FindAnchor(Entry.TargetAnchorId)
-            : nullptr;
-
-    AController* Controller = Agent->GetController();
-
-    if (!IsValid(TargetAnchor) || !IsValid(Controller))
-    {
-        CompleteCurrentAction(false);
-        return false;
-    }
-
-    const FName StableKey = Agent->EntityIdentity != nullptr
-        ? (!Agent->SocialGroupId.IsNone() ? Agent->SocialGroupId
-                                         : Agent->EntityIdentity->EntityId)
-        : NAME_None;
-    CurrentTargetLocation = TargetAnchor->GetPlacementLocation(StableKey);
+    CurrentRouteAnchorIds.Reset();
+    for (const FName AnchorId : Entry.PassAnchorIds)
+        if (!AnchorId.IsNone()) CurrentRouteAnchorIds.Add(AnchorId);
+    CurrentRouteAnchorIds.Add(Entry.TargetAnchorId);
+    CurrentRouteAnchorIndex = 0;
     Agent->SetActivityState(Entry.ActivityState);
 
     if (!Agent->CanMove())
@@ -306,9 +298,11 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
         Agent->SetActivityState(ETMOPAgentActivityState::Walking);
     }
 
-    UAIBlueprintHelperLibrary::SimpleMoveToLocation(
-        Controller,
-        CurrentTargetLocation);
+    if (!MoveToCurrentRouteAnchor())
+    {
+        CompleteCurrentAction(false);
+        return false;
+    }
 
     ExecutionState = ETMOPActionExecutionState::WaitingForArrival;
     SetComponentTickEnabled(true);
@@ -318,6 +312,33 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
         Entry.ActionType,
         ExecutionState);
 
+    return true;
+}
+
+bool UTMOPActionExecutorComponent::MoveToCurrentRouteAnchor()
+{
+    ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
+    UWorld* World = GetWorld();
+    UGameInstance* GameInstance =
+        World != nullptr ? World->GetGameInstance() : nullptr;
+    if (!IsValid(Agent) || GameInstance == nullptr ||
+        !CurrentRouteAnchorIds.IsValidIndex(CurrentRouteAnchorIndex))
+        return false;
+
+    UTMOPAnchorSubsystem* Anchors =
+        GameInstance->GetSubsystem<UTMOPAnchorSubsystem>();
+    ATMOPHistoricalAnchor* TargetAnchor = Anchors != nullptr
+        ? Anchors->FindAnchor(CurrentRouteAnchorIds[CurrentRouteAnchorIndex])
+        : nullptr;
+    AController* Controller = Agent->GetController();
+    if (!IsValid(TargetAnchor) || !IsValid(Controller)) return false;
+
+    const FName StableKey = Agent->EntityIdentity != nullptr
+        ? (!Agent->SocialGroupId.IsNone() ? Agent->SocialGroupId
+                                         : Agent->EntityIdentity->EntityId)
+        : NAME_None;
+    CurrentTargetLocation = TargetAnchor->GetPlacementLocation(StableKey);
+    UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
     return true;
 }
 
@@ -356,6 +377,8 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
 
     bHasCurrentEntry = false;
     bRestoredFromBake = false;
+    CurrentRouteAnchorIds.Reset();
+    CurrentRouteAnchorIndex = INDEX_NONE;
     CurrentEntry = FTMOPScheduleEntry();
     ExecutionState = ETMOPActionExecutionState::Idle;
     SetComponentTickEnabled(false);

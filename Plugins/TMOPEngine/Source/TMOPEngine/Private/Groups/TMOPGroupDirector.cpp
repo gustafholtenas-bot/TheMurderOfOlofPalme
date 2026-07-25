@@ -193,7 +193,24 @@ bool ATMOPGroupDirector::MoveGroupToLocation(const FName GroupId,
     FRuntimeGroup* Group = FindGroup(GroupId);
     ATMOPHistoricalAgent* Leader = Group != nullptr ? FindLeader(*Group) : nullptr;
     if (Group == nullptr || !IsValid(Leader)) return false;
+    Group->RouteLocations.Reset();
+    Group->RouteLocationIndex = INDEX_NONE;
     Group->TargetLocation = TargetLocation;
+    Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
+    SetState(*Group, ETMOPGroupState::Moving);
+    UpdateMovement(*Group);
+    return true;
+}
+
+bool ATMOPGroupDirector::MoveGroupThroughLocations(const FName GroupId,
+    const TArray<FVector>& RouteLocations, const float AcceptanceRadius)
+{
+    FRuntimeGroup* Group = FindGroup(GroupId);
+    ATMOPHistoricalAgent* Leader = Group != nullptr ? FindLeader(*Group) : nullptr;
+    if (Group == nullptr || !IsValid(Leader) || RouteLocations.IsEmpty()) return false;
+    Group->RouteLocations = RouteLocations;
+    Group->RouteLocationIndex = 0;
+    Group->TargetLocation = Group->RouteLocations[0];
     Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
     SetState(*Group, ETMOPGroupState::Moving);
     UpdateMovement(*Group);
@@ -210,6 +227,8 @@ bool ATMOPGroupDirector::StopGroup(const FName GroupId)
             if (AAIController* Controller = Cast<AAIController>(Agent->GetController())) Controller->StopMovement();
             Agent->SetActivityState(ETMOPAgentActivityState::Standing);
         }
+    Group->RouteLocations.Reset();
+    Group->RouteLocationIndex = INDEX_NONE;
     if (Group->State == ETMOPGroupState::Moving) SetState(*Group, ETMOPGroupState::Idle);
     return true;
 }
@@ -242,6 +261,13 @@ void ATMOPGroupDirector::UpdateMovement(FRuntimeGroup& Group)
     if (!IsValid(Leader)) { SetState(Group, ETMOPGroupState::WaitingForMembers); return; }
     if (FVector::DistSquared2D(Leader->GetActorLocation(), Group.TargetLocation) <= FMath::Square(Group.AcceptanceRadius))
     {
+        if (Group.RouteLocations.IsValidIndex(Group.RouteLocationIndex + 1))
+        {
+            ++Group.RouteLocationIndex;
+            Group.TargetLocation = Group.RouteLocations[Group.RouteLocationIndex];
+            UpdateMovement(Group);
+            return;
+        }
         StopGroup(Group.Definition.GroupId);
         SetState(Group, ETMOPGroupState::Arrived);
         return;

@@ -57,6 +57,12 @@ public:
     bool MoveGroupToLocation(FName GroupId, FVector TargetLocation,
         float AcceptanceRadius = 100.0f);
 
+    /** Moves the group through every supplied location in order. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
+    bool MoveGroupThroughLocations(FName GroupId,
+        const TArray<FVector>& RouteLocations,
+        float AcceptanceRadius = 100.0f);
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
     bool StopGroup(FName GroupId);
 
@@ -93,6 +99,8 @@ private:
         TArray<TWeakObjectPtr<ATMOPHistoricalAgent>> Members;
         ETMOPGroupState State = ETMOPGroupState::Idle;
         FVector TargetLocation = FVector::ZeroVector;
+        TArray<FVector> RouteLocations;
+        int32 RouteLocationIndex = INDEX_NONE;
         float AcceptanceRadius = 100.0f;
         float RemainingConversationSeconds = 0.0f;
         bool bConversationHasNoAutomaticEnd = false;

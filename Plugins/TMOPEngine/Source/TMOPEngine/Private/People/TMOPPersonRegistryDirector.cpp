@@ -333,9 +333,20 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
             if (IsValid(Groups)) Groups->RefreshWaitingGroups();
             if (IsValid(Anchor) && IsValid(Groups) &&
                 Groups->DoesGroupExist(Runtime.Profile.SocialGroupId))
-                return Groups->MoveGroupToLocation(Runtime.Profile.SocialGroupId,
-                    Anchor->GetPlacementLocation(Runtime.Profile.SocialGroupId),
+            {
+                TArray<FVector> RouteLocations;
+                for (const FName PassAnchorId : Entry.PassAnchorIds)
+                    if (ATMOPHistoricalAnchor* PassAnchor =
+                        Anchors->FindAnchor(PassAnchorId))
+                        RouteLocations.Add(PassAnchor->GetPlacementLocation(
+                            Runtime.Profile.SocialGroupId));
+                RouteLocations.Add(Anchor->GetPlacementLocation(
+                    Runtime.Profile.SocialGroupId));
+                return Groups->MoveGroupThroughLocations(
+                    Runtime.Profile.SocialGroupId,
+                    RouteLocations,
                     FMath::Max(80.0f, Anchor->MinimumSpacingCm));
+            }
         }
         if (!IsValid(Agent->ActionExecutor)) return false;
         {
@@ -343,6 +354,7 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
             Action.EntryId = Entry.EntryId;
             Action.ActionType = ETMOPScheduleActionType::MoveToAnchor;
             Action.TargetAnchorId = Entry.TargetAnchorId;
+            Action.PassAnchorIds = Entry.PassAnchorIds;
             Action.ActivityState = Entry.ActivityState == ETMOPAgentActivityState::Idle
                 ? ETMOPAgentActivityState::Walking : Entry.ActivityState;
             Action.Confidence = Entry.Confidence;
@@ -491,9 +503,7 @@ int32 ATMOPPersonRegistryDirector::EstimateTravelSeconds(const FPersonRuntime& R
 {
     if (GetWorld() == nullptr || GetGameInstance() == nullptr) return 0;
     const UTMOPAnchorSubsystem* Anchors = GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
-    ATMOPHistoricalAnchor* Target = Anchors != nullptr
-        ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
-    if (!IsValid(Target)) return 0;
+    if (Anchors == nullptr) return 0;
 
     FVector Start = Runtime.Agent.IsValid() ? Runtime.Agent->GetActorLocation() : FVector::ZeroVector;
     if (!Runtime.Agent.IsValid())
@@ -507,16 +517,28 @@ int32 ATMOPPersonRegistryDirector::EstimateTravelSeconds(const FPersonRuntime& R
                 { Start = PreviousAnchor->GetPlacementLocation(Runtime.Profile.EntityId); break; }
         }
 
-    double PathLength = FVector::Dist2D(Start, Target->GetActorLocation());
-    UNavigationSystemV1::GetPathLength(GetWorld(), Start,
-        Target->GetPlacementLocation(Runtime.Profile.SocialGroupId.IsNone()
-            ? Runtime.Profile.EntityId : Runtime.Profile.SocialGroupId),
-        PathLength, nullptr, nullptr);
+    TArray<FName> RouteAnchorIds = Entry.PassAnchorIds;
+    RouteAnchorIds.Add(Entry.TargetAnchorId);
+    const FName StableKey = Runtime.Profile.SocialGroupId.IsNone()
+        ? Runtime.Profile.EntityId : Runtime.Profile.SocialGroupId;
+    double TotalPathLength = 0.0;
+    for (const FName AnchorId : RouteAnchorIds)
+    {
+        ATMOPHistoricalAnchor* Target = Anchors->FindAnchor(AnchorId);
+        if (!IsValid(Target)) return 0;
+        const FVector TargetLocation = Target->GetPlacementLocation(StableKey);
+        double SegmentLength = FVector::Dist2D(Start, TargetLocation);
+        UNavigationSystemV1::GetPathLength(GetWorld(), Start, TargetLocation,
+            SegmentLength, nullptr, nullptr);
+        TotalPathLength += SegmentLength;
+        Start = TargetLocation;
+    }
     const float Speed = Entry.TravelSpeedOverrideCmPerSecond > 0.0f
         ? Entry.TravelSpeedOverrideCmPerSecond
         : Runtime.Profile.MovementProfile.NormalWalkSpeed *
             Runtime.Profile.MovementProfile.PersonalSpeedMultiplier;
-    return Speed > KINDA_SMALL_NUMBER ? FMath::CeilToInt(PathLength / Speed) : 0;
+    return Speed > KINDA_SMALL_NUMBER
+        ? FMath::CeilToInt(TotalPathLength / Speed) : 0;
 }
 
 ATMOPGroupDirector* ATMOPPersonRegistryDirector::FindGroupDirector() const
@@ -675,6 +697,25 @@ ATMOPHistoricalAgent* ATMOPPersonRegistryDirector::FindSpawnedPerson(const FName
 {
     const FPersonRuntime* Runtime = RuntimePeople.Find(EntityId);
     return Runtime != nullptr ? Runtime->Agent.Get() : nullptr;
+}
+
+FText ATMOPPersonRegistryDirector::GetPersonDialog(
+    const FName EntityId, const bool bAfterShot) const
+{
+    if (const FPersonRuntime* Runtime = RuntimePeople.Find(EntityId))
+        return bAfterShot
+            ? Runtime->Profile.Dialog.AfterShot
+            : Runtime->Profile.Dialog.BeforeShot;
+    if (IsValid(PersonProfileTable))
+        for (const FName RowName : PersonProfileTable->GetRowNames())
+            if (const FTMOPPersonProfileRow* Row =
+                PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
+                    RowName, TEXT("TMOPPersonDialog"), false))
+                if (Row->EntityId == EntityId)
+                    return bAfterShot
+                        ? Row->Dialog.AfterShot
+                        : Row->Dialog.BeforeShot;
+    return FText::GetEmpty();
 }
 
 bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors) const

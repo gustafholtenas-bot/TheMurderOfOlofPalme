@@ -46,7 +46,8 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 {
     GENERATED_BODY()
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline",
+        meta=(DisplayName="Entry ID"))
     FName EntryId = NAME_None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")
@@ -84,6 +85,14 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
     FName TargetAnchorId = NAME_None;
 
+    /**
+     * Optional anchors that must be visited in order before TargetAnchorId.
+     * These are route waypoints, not separate timeline events.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location",
+        meta=(DisplayName="Pass Anchors On The Way"))
+    TArray<FName> PassAnchorIds;
+
     /** Vehicle ID, bus Run ID, venue ID, or another target entity. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
     FName TargetEntityId = NAME_None;
@@ -116,6 +125,21 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Source")
     FString Notes;
+};
+
+/** Dialogue used by the normal talk interaction on either side of the shot. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPPersonDialog
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Dialog",
+        meta=(MultiLine="true", DisplayName="Before Shot"))
+    FText BeforeShot;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Dialog",
+        meta=(MultiLine="true", DisplayName="After Shot"))
+    FText AfterShot;
 };
 
 UENUM(BlueprintType)
@@ -258,9 +282,56 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|History")
     int32 AgeAtEvent = 0;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Appearance",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|History",
         meta=(ClampMin="0.0"))
     float HeightCentimeters = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Source")
+    FString GeneralSourceReference;
+
+    /** The investigation lead/file reference where this person occurs. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Investigation",
+        meta=(DisplayName="Uppslag"))
+    FString Uppslag;
+
+    /** Empty uses the director's Default Agent Class. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
+    TSubclassOf<ATMOPHistoricalAgent> AgentClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
+    bool bSpawnInSimulation = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
+    FTMOPMovementProfile MovementProfile;
+
+    /** Vehicles that are source-backed as belonging to, carrying, or otherwise involving this person. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Vehicle")
+    TArray<FName> AssociatedVehicleIds;
+
+    /** Existing generic group system membership. Leave GroupId empty for an individual. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    FName SocialGroupId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    FName GroupLeaderEntityId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    ETMOPGroupFormation GroupFormation = ETMOPGroupFormation::SideBySide;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group",
+        meta=(ClampMin="30.0"))
+    float GroupFormationSpacingCm = 110.0f;
+
+    /** Followers only need their initial placement; the leader's moves drive the group. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
+    bool bFollowGroupLeaderSchedule = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Dialog")
+    FTMOPPersonDialog Dialog;
+
+    /** Slot 0 is the initial marker. It may occur later than 23:00. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")
+    TArray<FTMOPPersonTimelineEntry> Timeline;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Appearance")
     ETMOPBodyBuild BodyBuildCategory = ETMOPBodyBuild::Unknown;
@@ -313,53 +384,9 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Accessories")
     FTMOPAppearanceSlot Glasses;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Description")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Other")
     FTMOPAppearanceSlot OtherCharacteristics;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Source")
-    FString GeneralSourceReference;
-
-    /** The investigation lead/file reference where this person occurs. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Investigation",
-        meta=(DisplayName="Uppslag"))
-    FString Uppslag;
-
-    /** Empty uses the director's Default Agent Class. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
-    TSubclassOf<ATMOPHistoricalAgent> AgentClass;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
-    bool bSpawnInSimulation = true;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
-    FTMOPMovementProfile MovementProfile;
-
-    /** Vehicles that are source-backed as belonging to, carrying, or otherwise involving this person. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Vehicle")
-    TArray<FName> AssociatedVehicleIds;
-
-    /** Existing generic group system membership. Leave GroupId empty for an individual. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
-    FName SocialGroupId = NAME_None;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
-    FName GroupLeaderEntityId = NAME_None;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
-    ETMOPGroupFormation GroupFormation = ETMOPGroupFormation::SideBySide;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group",
-        meta=(ClampMin="30.0"))
-    float GroupFormationSpacingCm = 110.0f;
-
-    /** Followers only need their initial placement; the leader's moves drive the group. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")
-    bool bFollowGroupLeaderSchedule = true;
-
-    /** Slot 0 is the initial marker. It may occur later than 23:00. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
-    TArray<FTMOPPersonTimelineEntry> Timeline;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Source")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Notes")
     FString Notes;
 };

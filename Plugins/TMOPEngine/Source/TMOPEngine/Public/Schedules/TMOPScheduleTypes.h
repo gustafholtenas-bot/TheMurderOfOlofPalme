@@ -83,6 +83,10 @@ struct TMOPENGINE_API FTMOPScheduleEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Schedule|Action")
     FName TargetAnchorId = NAME_None;
 
+    /** Ordered route waypoints visited before TargetAnchorId. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Schedule|Action")
+    TArray<FName> PassAnchorIds;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Schedule|Action")
     FName TargetEntityId = NAME_None;
 
