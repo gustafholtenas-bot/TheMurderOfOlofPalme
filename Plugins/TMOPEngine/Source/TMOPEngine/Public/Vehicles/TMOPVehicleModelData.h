@@ -50,6 +50,13 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Materials")
     int32 LiveryMaterialSlotIndex = 2;
 
+    /**
+     * Vector parameter used by the body material for per-vehicle paint.
+     * The default TMOP vehicle material parameter is VehicleColor.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Materials")
+    FName BodyColorParameterName = TEXT("VehicleColor");
+
     /** Base transform to which appearance roof accessory transforms are relative. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Accessories")
     FTransform RoofMountTransform = FTransform::Identity;

@@ -27,6 +27,15 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle")
     TObjectPtr<UTMOPVehicleModelData> VehicleModel;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Configured Vehicle|Appearance")
+    bool bOverrideBodyColor = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Configured Vehicle|Appearance",
+        meta=(EditCondition="bOverrideBodyColor"))
+    FLinearColor BodyColor = FLinearColor::White;
+
     /** Converts side-facing imported meshes to Unreal's X-forward convention. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Orientation")
     float VisualYawCorrectionDegrees = 0.0f;
@@ -34,6 +43,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Collision",
         meta=(ClampMin="10.0"))
     float CollisionHalfHeightCm = 60.0f;
+
+    /**
+     * If the selected model has no explicit vertical Body Local Transform,
+     * lift its bounds so the bottom rests on the road-level Visual Root.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Configured Vehicle|Placement")
+    bool bAutoAlignBodyMeshToGround = true;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle")
     TObjectPtr<USceneComponent> VisualRoot;
@@ -94,6 +111,7 @@ public:
     bool ApplyConfiguration();
 
 private:
+    void ApplyBodyColor();
     void ApplyWheel(UStaticMeshComponent* Component, const FTransform& LocalTransform);
     void UpdateWheelAnimation(float DeltaSeconds);
     float AccumulatedWheelRollDegrees = 0.0f;

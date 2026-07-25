@@ -2,6 +2,7 @@
 
 #include "Engine/GameInstance.h"
 #include "Engine/World.h"
+#include "Agents/TMOPHistoricalAgent.h"
 #include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficVehicleSubsystem.h"
@@ -121,6 +122,12 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
             CurrentSpeedCmPerSecond = 0.0f;
             TrafficState = ETMOPTrafficVehicleState::RouteComplete;
             bDrivingEnabled = false;
+            ApplyVehicleTransform(Lane);
+            if (bDespawnAtRouteEnd)
+            {
+                DespawnAtCompletedRoute();
+                return;
+            }
             break;
         }
         Lane = GetCurrentLane();
@@ -131,6 +138,33 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
         if (IsChangingLane()) UpdateLaneChange(DeltaTime, Lane);
         else ApplyVehicleTransform(Lane);
     }
+}
+
+void UTMOPTrafficVehicleMovementComponent::DespawnAtCompletedRoute()
+{
+    AActor* OwnerActor = GetOwner();
+    if (!IsValid(OwnerActor))
+    {
+        return;
+    }
+
+    TArray<AActor*> AttachedActors;
+    OwnerActor->GetAttachedActors(AttachedActors, true, true);
+    for (AActor* Attached : AttachedActors)
+    {
+        // Historical occupants leave the simulation with the vehicle. Never
+        // destroy a player character merely because they drove to a route end.
+        if (ATMOPHistoricalAgent* HistoricalAgent =
+            Cast<ATMOPHistoricalAgent>(Attached))
+        {
+            HistoricalAgent->Destroy();
+        }
+    }
+
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP traffic vehicle '%s' reached its route exit and despawned."),
+        *OwnerActor->GetName());
+    OwnerActor->Destroy();
 }
 
 float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLaneComponent* Lane)

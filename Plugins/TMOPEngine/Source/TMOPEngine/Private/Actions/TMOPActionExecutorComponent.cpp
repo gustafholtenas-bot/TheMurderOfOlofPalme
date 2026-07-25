@@ -6,6 +6,7 @@
 #include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "Engine/GameInstance.h"
 #include "Engine/World.h"
+#include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/Controller.h"
 #include "Schedules/TMOPScheduleSubsystem.h"
@@ -358,6 +359,31 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
     UWorld* World = GetWorld();
     UGameInstance* GameInstance =
         World != nullptr ? World->GetGameInstance() : nullptr;
+    bool bDespawnAtExit = false;
+    if (bSuccessful &&
+        CurrentEntry.ActionType == ETMOPScheduleActionType::MoveToAnchor &&
+        !CurrentEntry.TargetAnchorId.IsNone())
+    {
+        const FString TargetId = CurrentEntry.TargetAnchorId.ToString();
+        bDespawnAtExit =
+            TargetId.StartsWith(TEXT("Exit"), ESearchCase::IgnoreCase);
+        if (!bDespawnAtExit && GameInstance != nullptr)
+        {
+            UTMOPAnchorSubsystem* Anchors =
+                GameInstance->GetSubsystem<UTMOPAnchorSubsystem>();
+            const ATMOPHistoricalAnchor* Target =
+                Anchors != nullptr
+                ? Anchors->FindAnchor(CurrentEntry.TargetAnchorId)
+                : nullptr;
+            bDespawnAtExit =
+                IsValid(Target) &&
+                Target->AnchorCategory == ETMOPAnchorCategory::MapExit;
+        }
+    }
+
+    ATMOPHistoricalAgent* CompletedAgent = GetHistoricalAgent();
+    const FName CompletedGroupId =
+        IsValid(CompletedAgent) ? CompletedAgent->SocialGroupId : NAME_None;
 
     if (bSuccessful && !bRestoredFromBake && GameInstance != nullptr)
     {
@@ -382,6 +408,27 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
     CurrentEntry = FTMOPScheduleEntry();
     ExecutionState = ETMOPActionExecutionState::Idle;
     SetComponentTickEnabled(false);
+
+    if (bDespawnAtExit && World != nullptr)
+    {
+        int32 DespawnedCount = 0;
+        for (TActorIterator<ATMOPHistoricalAgent> It(World); It; ++It)
+        {
+            ATMOPHistoricalAgent* Candidate = *It;
+            const bool bSameAgent = Candidate == CompletedAgent;
+            const bool bSameGroup =
+                !CompletedGroupId.IsNone() &&
+                Candidate->SocialGroupId == CompletedGroupId;
+            if (bSameAgent || bSameGroup)
+            {
+                Candidate->Destroy();
+                ++DespawnedCount;
+            }
+        }
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP people: %d agent(s) reached map exit '%s' and despawned."),
+            DespawnedCount, *CurrentTargetLocation.ToString());
+    }
 }
 
 FName UTMOPActionExecutorComponent::GetOwnerEntityId() const

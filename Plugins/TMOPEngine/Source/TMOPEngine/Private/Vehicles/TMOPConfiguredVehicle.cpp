@@ -3,6 +3,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/BoxComponent.h"
+#include "Engine/StaticMesh.h"
+#include "Materials/MaterialInstanceDynamic.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
@@ -132,15 +134,66 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     VehicleRoot->SetRelativeLocation(FVector(0.0f, 0.0f, -CollisionExtent.Z));
     VisualRoot->SetRelativeRotation(FRotator(0.0f, VisualYawCorrectionDegrees, 0.0f));
     BodyMesh->SetStaticMesh(VehicleModel->BodyMesh);
-    BodyMesh->SetRelativeTransform(VehicleModel->BodyLocalTransform);
+    FTransform BodyTransform = VehicleModel->BodyLocalTransform;
+    if (bAutoAlignBodyMeshToGround && IsValid(VehicleModel->BodyMesh) &&
+        FMath::IsNearlyZero(BodyTransform.GetTranslation().Z))
+    {
+        const FBoxSphereBounds LocalBounds = VehicleModel->BodyMesh->GetBounds();
+        FVector Translation = BodyTransform.GetTranslation();
+        Translation.Z -= LocalBounds.Origin.Z - LocalBounds.BoxExtent.Z;
+        BodyTransform.SetTranslation(Translation);
+    }
+    BodyMesh->SetRelativeTransform(BodyTransform);
+    ApplyBodyColor();
     ApplyWheel(WheelFrontLeft, VehicleModel->Wheels.FrontLeft);
     ApplyWheel(WheelFrontRight, VehicleModel->Wheels.FrontRight);
     ApplyWheel(WheelRearLeft, VehicleModel->Wheels.RearLeft);
     ApplyWheel(WheelRearRight, VehicleModel->Wheels.RearRight);
     if (UTMOPTrafficVehicleMovementComponent* Movement =
         FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+    {
         Movement->VehicleLengthCm = VehicleModel->VehicleLengthCm;
+        FVector RoadOffset = Movement->VehicleLocalOffset;
+        RoadOffset.Z = CollisionExtent.Z;
+        Movement->VehicleLocalOffset = RoadOffset;
+    }
     return true;
+}
+
+void ATMOPConfiguredVehicle::ApplyBodyColor()
+{
+    if (!IsValid(VehicleModel) || !IsValid(BodyMesh) ||
+        !IsValid(VehicleModel->BodyMesh))
+        return;
+    const int32 SlotIndex = VehicleModel->BodyMaterialSlotIndex;
+    if (SlotIndex < 0 ||
+        SlotIndex >= VehicleModel->BodyMesh->GetStaticMaterials().Num())
+    {
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP vehicle model '%s' has invalid body material slot %d."),
+            *VehicleModel->ModelId.ToString(), SlotIndex);
+        return;
+    }
+
+    // Restore the model material first so toggling the override off also works
+    // in the editor construction preview.
+    BodyMesh->SetMaterial(
+        SlotIndex, VehicleModel->BodyMesh->GetMaterial(SlotIndex));
+    if (!bOverrideBodyColor)
+        return;
+    if (VehicleModel->BodyColorParameterName.IsNone())
+    {
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP vehicle model '%s' has no Body Color Parameter Name."),
+            *VehicleModel->ModelId.ToString());
+        return;
+    }
+    if (UMaterialInstanceDynamic* Paint =
+        BodyMesh->CreateDynamicMaterialInstance(SlotIndex))
+    {
+        Paint->SetVectorParameterValue(
+            VehicleModel->BodyColorParameterName, BodyColor);
+    }
 }
 
 void ATMOPConfiguredVehicle::ApplyWheel(UStaticMeshComponent* Component,

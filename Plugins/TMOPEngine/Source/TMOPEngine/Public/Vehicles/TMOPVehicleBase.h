@@ -7,6 +7,7 @@
 class ATMOPHistoricalAgent;
 class UBoxComponent;
 class USceneComponent;
+class UTextRenderComponent;
 class UTMOPVehicleSeatComponent;
 
 UCLASS(Blueprintable)
@@ -16,6 +17,8 @@ class TMOPENGINE_API ATMOPVehicleBase : public APawn
 
 public:
     ATMOPVehicleBase();
+    virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
 
     /** Root collision used by swept player driving. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Collision")
@@ -27,6 +30,27 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle")
     FName VehicleId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Identity")
+    FText DisplayName;
+
+    /** World-space name shown above the vehicle. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Debug")
+    TObjectPtr<UTextRenderComponent> NameLabel;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
+    bool bShowNameLabel = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug",
+        meta=(ClampMin="0.0", Units="cm"))
+    float NameLabelHeightCm = 130.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug",
+        meta=(ClampMin="1.0"))
+    float NameLabelWorldSize = 24.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
+    FColor NameLabelColor = FColor::White;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle")
     bool bAllowPlayerPossession = true;
@@ -48,4 +72,11 @@ public:
 
     UFUNCTION(BlueprintPure, Category="TMOP|Vehicle")
     ATMOPHistoricalAgent* GetDriverAgent() const;
+
+    /** Refresh after DisplayName or VehicleId changes. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Vehicle|Debug")
+    void RefreshNameLabel();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Vehicle|Debug")
+    void SetNameLabelVisible(bool bVisible);
 };

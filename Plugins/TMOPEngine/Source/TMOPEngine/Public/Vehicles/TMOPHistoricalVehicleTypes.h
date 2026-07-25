@@ -114,6 +114,19 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Model")
     TObjectPtr<UTMOPVehicleModelData> ModelData;
 
+    /** Apply Body Color to the model's configurable paint material. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Appearance",
+        meta=(DisplayName="Override Body Color"))
+    bool bOverrideBodyColor = false;
+
+    /** Per-vehicle paint colour. Requires Override Body Color. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Appearance",
+        meta=(EditCondition="bOverrideBodyColor",
+            DisplayName="Body Color"))
+    FLinearColor BodyColor = FLinearColor::White;
+
     /** Empty uses the future historical vehicle director's default vehicle class. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Simulation")
     TSubclassOf<AActor> VehicleClass;

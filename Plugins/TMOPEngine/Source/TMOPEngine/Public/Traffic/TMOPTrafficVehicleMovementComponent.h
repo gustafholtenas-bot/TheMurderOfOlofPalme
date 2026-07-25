@@ -98,6 +98,13 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Placement")
     FVector VehicleLocalOffset = FVector::ZeroVector;
 
+    /**
+     * Destroy the vehicle when it reaches the end of its planned lane route.
+     * Historical occupants attached to the vehicle are destroyed with it.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Route")
+    bool bDespawnAtRouteEnd = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Placement")
     FRotator VehicleRotationOffset = FRotator::ZeroRotator;
 
@@ -186,6 +193,7 @@ private:
     bool IsTargetLaneSafe(UTMOPTrafficLaneComponent* TargetLane, float TargetDistance) const;
     void UpdateLaneChange(float DeltaTime, UTMOPTrafficLaneComponent* SourceLane);
     float GetPhysicalObstacleDistance() const;
+    void DespawnAtCompletedRoute();
 
     int32 PlannedLaneIndex = INDEX_NONE;
     TMap<FName, float> StopConstraints;

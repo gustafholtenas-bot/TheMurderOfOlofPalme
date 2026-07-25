@@ -3,11 +3,15 @@
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Components/BoxComponent.h"
 #include "Components/SceneComponent.h"
+#include "Components/TextRenderComponent.h"
+#include "Camera/PlayerCameraManager.h"
+#include "GameFramework/PlayerController.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 
 ATMOPVehicleBase::ATMOPVehicleBase()
 {
-    PrimaryActorTick.bCanEverTick = false;
+    PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.TickInterval = 0.05f;
     VehicleCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("VehicleCollision"));
     SetRootComponent(VehicleCollision);
     VehicleCollision->SetBoxExtent(FVector(225.0f, 90.0f, 60.0f));
@@ -18,6 +22,67 @@ ATMOPVehicleBase::ATMOPVehicleBase()
     VehicleRoot = CreateDefaultSubobject<USceneComponent>(TEXT("VehicleRoot"));
     VehicleRoot->SetupAttachment(VehicleCollision);
     VehicleRoot->SetRelativeLocation(FVector(0.0f, 0.0f, -60.0f));
+
+    NameLabel =
+        CreateDefaultSubobject<UTextRenderComponent>(TEXT("NameLabel"));
+    NameLabel->SetupAttachment(VehicleCollision);
+    NameLabel->SetHorizontalAlignment(
+        EHorizTextAligment::EHTA_Center);
+    NameLabel->SetVerticalAlignment(
+        EVerticalTextAligment::EVRTA_TextCenter);
+    NameLabel->SetWorldSize(NameLabelWorldSize);
+    NameLabel->SetTextRenderColor(NameLabelColor);
+    NameLabel->SetCastShadow(false);
+    NameLabel->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    NameLabel->SetGenerateOverlapEvents(false);
+    NameLabel->SetHiddenInGame(false);
+}
+
+void ATMOPVehicleBase::BeginPlay()
+{
+    Super::BeginPlay();
+    RefreshNameLabel();
+}
+
+void ATMOPVehicleBase::Tick(const float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    if (!bShowNameLabel || !IsValid(NameLabel) ||
+        GetWorld() == nullptr)
+        return;
+    const APlayerController* PlayerController =
+        GetWorld()->GetFirstPlayerController();
+    const APlayerCameraManager* CameraManager =
+        IsValid(PlayerController)
+        ? PlayerController->PlayerCameraManager : nullptr;
+    if (!IsValid(CameraManager))
+        return;
+    const FVector ToCamera =
+        CameraManager->GetCameraLocation() -
+        NameLabel->GetComponentLocation();
+    if (!ToCamera.IsNearlyZero())
+        NameLabel->SetWorldRotation(ToCamera.Rotation());
+}
+
+void ATMOPVehicleBase::RefreshNameLabel()
+{
+    if (!IsValid(NameLabel))
+        return;
+    const FText LabelText = DisplayName.IsEmpty()
+        ? FText::FromName(VehicleId) : DisplayName;
+    NameLabel->SetText(LabelText);
+    NameLabel->SetRelativeLocation(
+        FVector(0.0f, 0.0f, NameLabelHeightCm));
+    NameLabel->SetWorldSize(NameLabelWorldSize);
+    NameLabel->SetTextRenderColor(NameLabelColor);
+    NameLabel->SetVisibility(bShowNameLabel, true);
+    SetActorTickEnabled(bShowNameLabel);
+}
+
+void ATMOPVehicleBase::SetNameLabelVisible(const bool bVisible)
+{
+    bShowNameLabel = bVisible;
+    RefreshNameLabel();
 }
 
 TArray<UTMOPVehicleSeatComponent*> ATMOPVehicleBase::GetVehicleSeats() const

@@ -174,6 +174,17 @@ void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
 
         Runtime->Vehicle = Vehicle;
         Runtime->bSpawnedByDirector = false;
+        Vehicle->DisplayName = Runtime->Profile.DisplayName;
+        Vehicle->RefreshNameLabel();
+        if (ATMOPConfiguredVehicle* Configured =
+            Cast<ATMOPConfiguredVehicle>(Vehicle))
+        {
+            Configured->VehicleModel = Runtime->Profile.ModelData;
+            Configured->bOverrideBodyColor =
+                Runtime->Profile.bOverrideBodyColor;
+            Configured->BodyColor = Runtime->Profile.BodyColor;
+            Configured->ApplyConfiguration();
+        }
         RegisterVehicle(Vehicle);
     }
 }
@@ -219,9 +230,13 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
     }
 
     Vehicle->VehicleId = Runtime.Profile.VehicleId;
+    Vehicle->DisplayName = Runtime.Profile.DisplayName;
     if (ATMOPConfiguredVehicle* Configured = Cast<ATMOPConfiguredVehicle>(Vehicle))
     {
         Configured->VehicleModel = Runtime.Profile.ModelData;
+        Configured->bOverrideBodyColor =
+            Runtime.Profile.bOverrideBodyColor;
+        Configured->BodyColor = Runtime.Profile.BodyColor;
     }
     UGameplayStatics::FinishSpawningActor(Vehicle, InitialTransform);
 
@@ -360,6 +375,11 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
         if (Row->Timeline.IsEmpty())
         {
             OutErrors.Add(Prefix + TEXT(" has no Timeline entries."));
+        }
+        if (Row->bOverrideBodyColor && !IsValid(Row->ModelData))
+        {
+            OutErrors.Add(Prefix +
+                TEXT(" overrides Body Color but has no Model Data."));
         }
         for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Row->Timeline)
         {
