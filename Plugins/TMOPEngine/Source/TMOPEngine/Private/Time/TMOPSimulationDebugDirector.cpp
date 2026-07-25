@@ -318,7 +318,7 @@ void ATMOPSimulationDebugDirector::HandleDigit(const int32 Digit)
         (PC->IsInputKeyDown(EKeys::LeftShift) || PC->IsInputKeyDown(EKeys::RightShift));
     if (bShift)
     {
-        if (Digit >= 1 && Digit <= 5) JumpToSimulationTime(FTMOPTime(23, 40 + Digit, 0));
+        if (Digit >= 1 && Digit <= 5) JumpToSimulationTime(FTMOPTime(23, 7 + Digit, 0));
         return;
     }
     JumpToSimulationTime(FTMOPTime(23, (Digit - 1) * 5, 0));
