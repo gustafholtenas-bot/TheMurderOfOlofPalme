@@ -15,6 +15,8 @@ public:
 private:
     void RegisterMenus();
     void OpenPeopleEditor();
+    void GenerateExitChildrenFromSelection();
+    void GenerateIntersectionCornersFromSelection();
     TSharedRef<SDockTab> SpawnPeopleEditorTab(const FSpawnTabArgs& Args);
 
     static const FName PeopleEditorTabName;

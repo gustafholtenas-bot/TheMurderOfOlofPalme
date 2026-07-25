@@ -59,7 +59,11 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time")
     FTMOPTime Time = FTMOPTime(23, 0, 0);
 
-    /** Absolute uses Time. Relative uses SharedEventId plus EventOffsetSeconds. */
+    /**
+     * Absolute uses Time. Relative to Shared Event uses SharedEventId.
+     * Relative to Previous Entry uses the resolved time of the array item
+     * immediately above this one. Both relative modes add EventOffsetSeconds.
+     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time")
     ETMOPEventTimingMode TimingMode = ETMOPEventTimingMode::Absolute;
 
@@ -69,7 +73,8 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     FName SharedEventId = NAME_None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
-        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative"))
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative || TimingMode==ETMOPEventTimingMode::RelativeToPreviousEntry",
+            DisplayName="Offset Seconds"))
     int32 EventOffsetSeconds = 0;
 
     /** For MoveToAnchor, calculate departure backwards so arrival matches the resolved time. */

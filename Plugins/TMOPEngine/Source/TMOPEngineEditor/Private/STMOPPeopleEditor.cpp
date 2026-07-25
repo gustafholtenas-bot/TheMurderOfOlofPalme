@@ -1,13 +1,20 @@
 #include "STMOPPeopleEditor.h"
 
+#include "Anchors/TMOPHistoricalAnchor.h"
+#include "Editor.h"
 #include "Engine/DataTable.h"
+#include "EngineUtils.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "IStructureDetailsView.h"
 #include "PropertyEditorModule.h"
 #include "Styling/AppStyle.h"
 #include "UObject/StructOnScope.h"
+#include "Vehicles/TMOPHistoricalVehicleTypes.h"
+#include "Vehicles/TMOPVehicleSeatComponent.h"
+#include "Venues/TMOPCinemaSeatComponent.h"
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Input/SSearchBox.h"
+#include "Widgets/Input/SSearchableComboBox.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"
@@ -205,7 +212,116 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                 SNew(SBorder)
                 .Padding(6.0f)
                 [
-                    EntryDetailsView->GetWidget().ToSharedRef()
+                    SNew(SVerticalBox)
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 7.0f)
+                    [
+                        SNew(SBorder)
+                        .Padding(7.0f)
+                        .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                        [
+                            SNew(SVerticalBox)
+                            + SVerticalBox::Slot().AutoHeight()
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("ReferenceSearchTitle",
+                                    "Search timeline references"))
+                                .Font(FAppStyle::GetFontStyle(
+                                    "HeadingExtraSmall"))
+                            ]
+                            + SVerticalBox::Slot().AutoHeight().Padding(0, 5, 0, 2)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("AnchorReference", "Target Anchor"))
+                            ]
+                            + SVerticalBox::Slot().AutoHeight()
+                            [
+                                SAssignNew(AnchorReferenceCombo, SSearchableComboBox)
+                                .OptionsSource(&AnchorReferenceItems)
+                                .OnGenerateWidget(this,
+                                    &STMOPPeopleEditor::GenerateReferenceOption)
+                                .OnSelectionChanged(this,
+                                    &STMOPPeopleEditor::HandleReferenceSelected,
+                                    EReferenceField::TargetAnchor)
+                                [
+                                    SNew(STextBlock)
+                                    .Text(this,
+                                        &STMOPPeopleEditor::GetReferenceFieldText,
+                                        EReferenceField::TargetAnchor)
+                                ]
+                            ]
+                            + SVerticalBox::Slot().AutoHeight().Padding(0, 5, 0, 2)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("EntityReference",
+                                    "Target Person / Vehicle"))
+                            ]
+                            + SVerticalBox::Slot().AutoHeight()
+                            [
+                                SAssignNew(EntityReferenceCombo, SSearchableComboBox)
+                                .OptionsSource(&EntityReferenceItems)
+                                .OnGenerateWidget(this,
+                                    &STMOPPeopleEditor::GenerateReferenceOption)
+                                .OnSelectionChanged(this,
+                                    &STMOPPeopleEditor::HandleReferenceSelected,
+                                    EReferenceField::TargetEntity)
+                                [
+                                    SNew(STextBlock)
+                                    .Text(this,
+                                        &STMOPPeopleEditor::GetReferenceFieldText,
+                                        EReferenceField::TargetEntity)
+                                ]
+                            ]
+                            + SVerticalBox::Slot().AutoHeight().Padding(0, 5, 0, 2)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("SeatReference", "Target Seat"))
+                            ]
+                            + SVerticalBox::Slot().AutoHeight()
+                            [
+                                SAssignNew(SeatReferenceCombo, SSearchableComboBox)
+                                .OptionsSource(&SeatReferenceItems)
+                                .OnGenerateWidget(this,
+                                    &STMOPPeopleEditor::GenerateReferenceOption)
+                                .OnSelectionChanged(this,
+                                    &STMOPPeopleEditor::HandleReferenceSelected,
+                                    EReferenceField::TargetSeat)
+                                [
+                                    SNew(STextBlock)
+                                    .Text(this,
+                                        &STMOPPeopleEditor::GetReferenceFieldText,
+                                        EReferenceField::TargetSeat)
+                                ]
+                            ]
+                            + SVerticalBox::Slot().AutoHeight().Padding(0, 5, 0, 2)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("EventReference", "Shared Event"))
+                            ]
+                            + SVerticalBox::Slot().AutoHeight()
+                            [
+                                SAssignNew(EventReferenceCombo, SSearchableComboBox)
+                                .OptionsSource(&EventReferenceItems)
+                                .OnGenerateWidget(this,
+                                    &STMOPPeopleEditor::GenerateReferenceOption)
+                                .OnSelectionChanged(this,
+                                    &STMOPPeopleEditor::HandleReferenceSelected,
+                                    EReferenceField::SharedEvent)
+                                [
+                                    SNew(STextBlock)
+                                    .Text(this,
+                                        &STMOPPeopleEditor::GetReferenceFieldText,
+                                        EReferenceField::SharedEvent)
+                                ]
+                            ]
+                        ]
+                    ]
+                    + SVerticalBox::Slot()
+                    .FillHeight(1.0f)
+                    [
+                        EntryDetailsView->GetWidget().ToSharedRef()
+                    ]
                 ]
             ]
         ]
@@ -229,6 +345,8 @@ void STMOPPeopleEditor::LoadDefaultTable()
         nullptr, DefaultPeopleTablePath);
     EventTable = LoadObject<UDataTable>(
         nullptr, DefaultEventTablePath);
+    VehicleTable = LoadObject<UDataTable>(
+        nullptr, DefaultVehicleTablePath);
     if (!PeopleTable.IsValid() ||
         PeopleTable->GetRowStruct() !=
             FTMOPPersonProfileRow::StaticStruct())
@@ -242,6 +360,7 @@ void STMOPPeopleEditor::LoadDefaultTable()
         return;
     }
     RefreshPeople();
+    RefreshReferenceOptions();
     SetStatus(
         LOCTEXT("TableLoaded", "DT_TMOP_People loaded."),
         FLinearColor(0.55f, 0.8f, 0.55f));
@@ -318,6 +437,7 @@ void STMOPPeopleEditor::SelectTimelineEntry(const int32 Index)
         EntryStructData->GetStructMemory()) =
             WorkingRow.Timeline[Index];
     EntryDetailsView->SetStructureData(EntryStructData);
+    RefreshReferenceOptions();
 }
 
 void STMOPPeopleEditor::CommitEntryEdits()
@@ -435,6 +555,241 @@ void STMOPPeopleEditor::HandlePersonSearchChanged(
 {
     PersonSearch = SearchText.ToString();
     RefreshPeople();
+}
+
+void STMOPPeopleEditor::RefreshReferenceOptions()
+{
+    AnchorReferenceItems.Reset();
+    EntityReferenceItems.Reset();
+    SeatReferenceItems.Reset();
+    EventReferenceItems.Reset();
+    ReferenceIdsByLabel.Reset();
+
+    auto AddOption = [this](
+        TArray<FReferenceItem>& Items,
+        const FName Id,
+        const FString& Details)
+    {
+        if (Id.IsNone()) return;
+        FString Label = Id.ToString();
+        if (!Details.IsEmpty())
+        {
+            Label += TEXT("  |  ") + Details;
+        }
+        ReferenceIdsByLabel.Add(Label, Id);
+        Items.Add(MakeShared<FString>(MoveTemp(Label)));
+    };
+
+    UWorld* EditorWorld = GEditor != nullptr
+        ? GEditor->GetEditorWorldContext().World() : nullptr;
+    if (EditorWorld != nullptr)
+    {
+        for (TActorIterator<ATMOPHistoricalAnchor> It(EditorWorld); It; ++It)
+        {
+            const ATMOPHistoricalAnchor* Anchor = *It;
+            FString Details = Anchor->DisplayName.ToString();
+            if (const UEnum* Enum = StaticEnum<ETMOPAnchorCategory>())
+            {
+                const FString Category = Enum->GetDisplayNameTextByValue(
+                    static_cast<int64>(Anchor->AnchorCategory)).ToString();
+                Details = Details.IsEmpty()
+                    ? Category : Details + TEXT("  •  ") + Category;
+            }
+            AddOption(
+                AnchorReferenceItems, Anchor->GetAnchorId(), Details);
+        }
+
+        for (TActorIterator<AActor> It(EditorWorld); It; ++It)
+        {
+            TArray<UTMOPCinemaSeatComponent*> CinemaSeats;
+            It->GetComponents<UTMOPCinemaSeatComponent>(CinemaSeats);
+            for (const UTMOPCinemaSeatComponent* Seat : CinemaSeats)
+            {
+                AddOption(SeatReferenceItems, Seat->SeatId,
+                    FString::Printf(TEXT("Cinema  •  %s"),
+                        *It->GetActorLabel()));
+            }
+
+            TArray<UTMOPVehicleSeatComponent*> VehicleSeats;
+            It->GetComponents<UTMOPVehicleSeatComponent>(VehicleSeats);
+            for (const UTMOPVehicleSeatComponent* Seat : VehicleSeats)
+            {
+                FString Role = TEXT("Vehicle");
+                if (const UEnum* Enum =
+                    StaticEnum<ETMOPVehicleSeatRole>())
+                {
+                    Role = Enum->GetDisplayNameTextByValue(
+                        static_cast<int64>(Seat->SeatRole)).ToString();
+                }
+                AddOption(SeatReferenceItems, Seat->SeatId,
+                    FString::Printf(TEXT("%s  •  %s"),
+                        *Role, *It->GetActorLabel()));
+            }
+        }
+    }
+
+    if (const UDataTable* Table = PeopleTable.Get())
+    {
+        for (const FName RowName : Table->GetRowNames())
+        {
+            if (const FTMOPPersonProfileRow* Row =
+                Table->FindRow<FTMOPPersonProfileRow>(
+                    RowName, TEXT("TMOPReferencePeople"), false))
+            {
+                AddOption(EntityReferenceItems, Row->EntityId,
+                    Row->FullName.ToString() + TEXT("  •  Person"));
+            }
+        }
+    }
+
+    if (const UDataTable* Table = VehicleTable.Get())
+    {
+        if (Table->GetRowStruct() ==
+            FTMOPHistoricalVehicleRow::StaticStruct())
+        {
+            for (const FName RowName : Table->GetRowNames())
+            {
+                if (const FTMOPHistoricalVehicleRow* Row =
+                    Table->FindRow<FTMOPHistoricalVehicleRow>(
+                        RowName, TEXT("TMOPReferenceVehicles"), false))
+                {
+                    AddOption(EntityReferenceItems, Row->VehicleId,
+                        Row->DisplayName.ToString() +
+                        TEXT("  •  Vehicle"));
+                }
+            }
+        }
+    }
+
+    if (const UDataTable* Table = EventTable.Get())
+    {
+        if (Table->GetRowStruct() ==
+            FTMOPHistoricalEventDefinition::StaticStruct())
+        {
+            for (const FName RowName : Table->GetRowNames())
+            {
+                if (const FTMOPHistoricalEventDefinition* Row =
+                    Table->FindRow<FTMOPHistoricalEventDefinition>(
+                        RowName, TEXT("TMOPReferenceEvents"), false))
+                {
+                    AddOption(EventReferenceItems, Row->EventId,
+                        Row->DisplayName.ToString());
+                }
+            }
+        }
+    }
+
+    auto SortItems = [](TArray<FReferenceItem>& Items)
+    {
+        Items.Sort([](
+            const FReferenceItem& A,
+            const FReferenceItem& B)
+        {
+            return A.IsValid() && B.IsValid()
+                ? *A < *B : A.IsValid();
+        });
+    };
+    SortItems(AnchorReferenceItems);
+    SortItems(EntityReferenceItems);
+    SortItems(SeatReferenceItems);
+    SortItems(EventReferenceItems);
+
+    if (AnchorReferenceCombo.IsValid())
+        AnchorReferenceCombo->RefreshOptions();
+    if (EntityReferenceCombo.IsValid())
+        EntityReferenceCombo->RefreshOptions();
+    if (SeatReferenceCombo.IsValid())
+        SeatReferenceCombo->RefreshOptions();
+    if (EventReferenceCombo.IsValid())
+        EventReferenceCombo->RefreshOptions();
+}
+
+TSharedRef<SWidget> STMOPPeopleEditor::GenerateReferenceOption(
+    const FReferenceItem Item) const
+{
+    return SNew(STextBlock)
+        .Text(Item.IsValid()
+            ? FText::FromString(*Item)
+            : FText::GetEmpty())
+        .ToolTipText(Item.IsValid()
+            ? FText::FromString(*Item)
+            : FText::GetEmpty());
+}
+
+FName STMOPPeopleEditor::GetReferenceId(
+    const FReferenceItem Item) const
+{
+    if (!Item.IsValid()) return NAME_None;
+    if (const FName* Id = ReferenceIdsByLabel.Find(*Item))
+        return *Id;
+    return NAME_None;
+}
+
+void STMOPPeopleEditor::HandleReferenceSelected(
+    const FReferenceItem Item,
+    const ESelectInfo::Type SelectInfo,
+    const EReferenceField Field)
+{
+    if (!EntryStructData.IsValid()) return;
+    const FName Id = GetReferenceId(Item);
+    if (Id.IsNone()) return;
+
+    FTMOPPersonTimelineEntry* Entry =
+        reinterpret_cast<FTMOPPersonTimelineEntry*>(
+            EntryStructData->GetStructMemory());
+    switch (Field)
+    {
+    case EReferenceField::TargetAnchor:
+        Entry->TargetAnchorId = Id;
+        break;
+    case EReferenceField::TargetEntity:
+        Entry->TargetEntityId = Id;
+        break;
+    case EReferenceField::TargetSeat:
+        Entry->TargetSeatId = Id;
+        break;
+    case EReferenceField::SharedEvent:
+        Entry->SharedEventId = Id;
+        break;
+    }
+    if (EntryDetailsView.IsValid())
+    {
+        EntryDetailsView->SetStructureData(EntryStructData);
+    }
+    SetStatus(
+        FText::Format(
+            LOCTEXT("ReferenceSelected", "Selected {0}."),
+            FText::FromName(Id)),
+        FLinearColor(0.55f, 0.8f, 0.55f));
+}
+
+FText STMOPPeopleEditor::GetReferenceFieldText(
+    const EReferenceField Field) const
+{
+    if (!EntryStructData.IsValid())
+        return LOCTEXT("NoTimelineEntry", "Select a timeline entry");
+    const FTMOPPersonTimelineEntry* Entry =
+        reinterpret_cast<const FTMOPPersonTimelineEntry*>(
+            EntryStructData->GetStructMemory());
+    FName Id = NAME_None;
+    switch (Field)
+    {
+    case EReferenceField::TargetAnchor:
+        Id = Entry->TargetAnchorId;
+        break;
+    case EReferenceField::TargetEntity:
+        Id = Entry->TargetEntityId;
+        break;
+    case EReferenceField::TargetSeat:
+        Id = Entry->TargetSeatId;
+        break;
+    case EReferenceField::SharedEvent:
+        Id = Entry->SharedEventId;
+        break;
+    }
+    return Id.IsNone()
+        ? LOCTEXT("SearchReference", "Type to search...")
+        : FText::FromName(Id);
 }
 
 FReply STMOPPeopleEditor::AddTimelineEntry()
@@ -657,6 +1012,18 @@ FText STMOPPeopleEditor::GetTimelineTimingText(
         if (Entry.bTimeIsArrival) Result += TEXT("  ARRIVAL");
         return FText::FromString(Result);
     }
+    if (Entry.TimingMode ==
+        ETMOPEventTimingMode::RelativeToPreviousEntry)
+    {
+        FString Result = TEXT("Previous");
+        if (Entry.EventOffsetSeconds != 0)
+            Result += FString::Printf(
+                TEXT(" %s%d s"),
+                Entry.EventOffsetSeconds > 0 ? TEXT("+") : TEXT(""),
+                Entry.EventOffsetSeconds);
+        if (Entry.bTimeIsArrival) Result += TEXT("  ARRIVAL");
+        return FText::FromString(Result);
+    }
     FString Result = Entry.Time.ToDisplayString();
     if (Entry.bTimeIsArrival) Result += TEXT("  ARRIVAL");
     return FText::FromString(Result);
@@ -691,6 +1058,10 @@ bool STMOPPeopleEditor::EntryHasError(
     if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
         Entry.SharedEventId.IsNone())
         return Fail(TEXT("Relative timing requires Shared Event ID"));
+    if (Entry.TimingMode ==
+            ETMOPEventTimingMode::RelativeToPreviousEntry &&
+        Index == 0)
+        return Fail(TEXT("First entry cannot be relative to previous entry"));
     if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
         !Entry.SharedEventId.IsNone() && EventTable.IsValid())
     {

@@ -9,9 +9,11 @@
 UENUM(BlueprintType)
 enum class ETMOPEventTimingMode : uint8
 {
-    Absolute,
+    Absolute UMETA(DisplayName="Absolute"),
     Window,
-    Relative
+    Relative UMETA(DisplayName="Relative to Shared Event"),
+    /** Supported by ordered timelines such as a person's Timeline array. */
+    RelativeToPreviousEntry UMETA(DisplayName="Relative to Previous Entry")
 };
 
 UENUM(BlueprintType)

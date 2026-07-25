@@ -79,6 +79,8 @@ private:
         bool bSpawnedByDirector = false;
         bool bCompleted = false;
         int32 CachedResolvedSecond = INDEX_NONE;
+        /** Resolved execution time of the preceding consumed array entry. */
+        int32 LastResolvedTimelineSecond = INDEX_NONE;
     };
 
     void EvaluatePeople(int32 CurrentSecond, bool bCatchUp);

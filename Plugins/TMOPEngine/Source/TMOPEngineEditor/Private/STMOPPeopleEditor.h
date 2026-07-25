@@ -8,6 +8,7 @@
 class IStructureDetailsView;
 class SEditableTextBox;
 class SSearchBox;
+class SSearchableComboBox;
 class STextBlock;
 class UDataTable;
 class FStructOnScope;
@@ -23,11 +24,22 @@ public:
 private:
     using FPersonItem = TSharedPtr<FName>;
     using FTimelineItem = TSharedPtr<int32>;
+    using FReferenceItem = TSharedPtr<FString>;
+
+    enum class EReferenceField : uint8
+    {
+        TargetAnchor,
+        TargetEntity,
+        TargetSeat,
+        SharedEvent
+    };
 
     static constexpr const TCHAR* DefaultPeopleTablePath =
         TEXT("/Game/TMOP/Agents/People/DT_TMOP_People.DT_TMOP_People");
     static constexpr const TCHAR* DefaultEventTablePath =
         TEXT("/Game/TMOP/Agents/People/DT_TMOP_HistoricalEvents.DT_TMOP_HistoricalEvents");
+    static constexpr const TCHAR* DefaultVehicleTablePath =
+        TEXT("/Game/TMOP/Vehicles/DT_TMOP_HistoricalVehicles.DT_TMOP_HistoricalVehicles");
 
     void LoadDefaultTable();
     void RefreshPeople();
@@ -48,6 +60,14 @@ private:
     void HandleTimelineSelectionChanged(
         FTimelineItem Item, ESelectInfo::Type SelectInfo);
     void HandlePersonSearchChanged(const FText& SearchText);
+    void RefreshReferenceOptions();
+    TSharedRef<SWidget> GenerateReferenceOption(FReferenceItem Item) const;
+    void HandleReferenceSelected(
+        FReferenceItem Item,
+        ESelectInfo::Type SelectInfo,
+        EReferenceField Field);
+    FText GetReferenceFieldText(EReferenceField Field) const;
+    FName GetReferenceId(FReferenceItem Item) const;
 
     FReply AddTimelineEntry();
     FReply DuplicateTimelineEntry();
@@ -67,6 +87,7 @@ private:
 
     TWeakObjectPtr<UDataTable> PeopleTable;
     TWeakObjectPtr<UDataTable> EventTable;
+    TWeakObjectPtr<UDataTable> VehicleTable;
     FName SelectedRowName = NAME_None;
     FTMOPPersonProfileRow WorkingRow;
     int32 SelectedTimelineIndex = INDEX_NONE;
@@ -79,4 +100,14 @@ private:
     TSharedPtr<IStructureDetailsView> EntryDetailsView;
     TSharedPtr<FStructOnScope> EntryStructData;
     TSharedPtr<STextBlock> StatusText;
+
+    TArray<FReferenceItem> AnchorReferenceItems;
+    TArray<FReferenceItem> EntityReferenceItems;
+    TArray<FReferenceItem> SeatReferenceItems;
+    TArray<FReferenceItem> EventReferenceItems;
+    TMap<FString, FName> ReferenceIdsByLabel;
+    TSharedPtr<SSearchableComboBox> AnchorReferenceCombo;
+    TSharedPtr<SSearchableComboBox> EntityReferenceCombo;
+    TSharedPtr<SSearchableComboBox> SeatReferenceCombo;
+    TSharedPtr<SSearchableComboBox> EventReferenceCombo;
 };

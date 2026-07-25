@@ -184,12 +184,15 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                      Entry.LocationType == ETMOPPersonLocationType::NotPresent))
                 {
                     // Preserve the historical unknown: no physical person exists yet.
+                    Runtime.LastResolvedTimelineSecond = ResolvedSecond;
                     ++Runtime.NextTimelineIndex;
+                    Runtime.CachedResolvedSecond = INDEX_NONE;
                     continue;
                 }
                 if (Runtime.NextTimelineIndex != 0 && Entry.Action != ETMOPPersonTimelineAction::Spawn)
                     break;
                 if (!SpawnPerson(Runtime, Entry)) break;
+                Runtime.LastResolvedTimelineSecond = ResolvedSecond;
                 ++Runtime.NextTimelineIndex;
                 Runtime.CachedResolvedSecond = INDEX_NONE;
                 continue;
@@ -198,6 +201,7 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
             const bool bFollower = ShouldFollowGroupLeader(Runtime.Profile);
             if (bFollower && Runtime.NextTimelineIndex > 0)
             {
+                Runtime.LastResolvedTimelineSecond = ResolvedSecond;
                 ++Runtime.NextTimelineIndex;
                 Runtime.CachedResolvedSecond = INDEX_NONE;
                 continue;
@@ -208,6 +212,7 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                 ResolvedSecond < CurrentSecond;
             if (!bEntryCatchUp && IsAgentBusy(Agent)) break;
             if (!ApplyTimelineEntry(Runtime, Entry, bEntryCatchUp)) break;
+            Runtime.LastResolvedTimelineSecond = ResolvedSecond;
             ++Runtime.NextTimelineIndex;
             Runtime.CachedResolvedSecond = INDEX_NONE;
         }
@@ -513,6 +518,17 @@ bool ATMOPPersonRegistryDirector::ResolveEntrySecond(FPersonRuntime& Runtime,
             !EventRuntime.bHasResolvedTime) return false;
         BaseSecond = EventRuntime.ResolvedTime.ToSecondsFromMidnight() + Entry.EventOffsetSeconds;
     }
+    else if (Entry.TimingMode ==
+        ETMOPEventTimingMode::RelativeToPreviousEntry)
+    {
+        if (Runtime.NextTimelineIndex <= 0 ||
+            Runtime.LastResolvedTimelineSecond == INDEX_NONE)
+        {
+            return false;
+        }
+        BaseSecond =
+            Runtime.LastResolvedTimelineSecond + Entry.EventOffsetSeconds;
+    }
 
     if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor && Entry.bTimeIsArrival)
         BaseSecond -= EstimateTravelSeconds(Runtime, Entry);
@@ -776,6 +792,11 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 Entry.SharedEventId.IsNone())
                 OutErrors.Add(Prefix + FString::Printf(
                     TEXT(" Timeline[%d] uses Relative timing but has no SharedEventId."), Index));
+            if (Entry.TimingMode ==
+                    ETMOPEventTimingMode::RelativeToPreviousEntry &&
+                Index == 0)
+                OutErrors.Add(Prefix + TEXT(
+                    " Timeline[0] cannot be Relative to Previous Entry."));
             if (Entry.bTimeIsArrival &&
                 Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor)
                 OutErrors.Add(Prefix + FString::Printf(
