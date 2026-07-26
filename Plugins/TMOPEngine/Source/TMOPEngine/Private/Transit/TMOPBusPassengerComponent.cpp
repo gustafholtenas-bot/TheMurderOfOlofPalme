@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "People/TMOPPersonProfileComponent.h"
+#include "People/TMOPPersonRegistrySubsystem.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Transit/TMOPBusPassengerManifest.h"
 #include "Transit/TMOPBusServiceComponent.h"
@@ -296,6 +298,96 @@ bool UTMOPBusPassengerComponent::InitializePassengerManifest(
     UE_LOG(LogTemp, Display, TEXT("TMOP bus '%s': manifest '%s' initialized with %d documented passenger(s)."),
         *ServiceRunId.ToString(), *PassengerManifest->GetName(), JourneyStates.Num());
     return true;
+}
+
+bool UTMOPBusPassengerComponent::AssignScheduledDriver(
+    const FName DriverEntityId, const FName RunId)
+{
+    ServiceRunId = RunId;
+    if (DriverEntityId.IsNone()) return true;
+
+    ATMOPHistoricalAgent* Driver = ResolveHistoricalAgent(DriverEntityId);
+    if (!IsValid(Driver))
+    {
+        Driver = Cast<ATMOPHistoricalAgent>(SpawnedDriver);
+        if (!IsValid(Driver))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP bus '%s': DriverClass must derive from TMOPHistoricalAgent "
+                     "to use scheduled driver '%s'."),
+                *RunId.ToString(), *DriverEntityId.ToString());
+            return false;
+        }
+
+        if (!IsValid(Driver->EntityIdentity) ||
+            !Driver->EntityIdentity->SetEntityIdentity(DriverEntityId, TEXT("Person")))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP bus '%s': failed to assign EntityId '%s' to driver."),
+                *RunId.ToString(), *DriverEntityId.ToString());
+            return false;
+        }
+
+        UTMOPPersonProfileComponent* Profile =
+            Driver->FindComponentByClass<UTMOPPersonProfileComponent>();
+        if (!IsValid(Profile))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP bus '%s': scheduled DriverClass lacks TMOPPersonProfileComponent."),
+                *RunId.ToString());
+            return false;
+        }
+        Profile->EntityIdOverride = DriverEntityId;
+        if (!Profile->LoadProfile())
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP bus '%s': driver '%s' is missing from DT_TMOP_People."),
+                *RunId.ToString(), *DriverEntityId.ToString());
+            return false;
+        }
+
+        UGameInstance* GameInstance = GetWorld() != nullptr
+            ? GetWorld()->GetGameInstance() : nullptr;
+        UTMOPPersonRegistrySubsystem* Registry = GameInstance != nullptr
+            ? GameInstance->GetSubsystem<UTMOPPersonRegistrySubsystem>() : nullptr;
+        if (Registry == nullptr ||
+            !Registry->RegisterActiveAgent(DriverEntityId, Driver))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP bus '%s': driver '%s' could not be registered."),
+                *RunId.ToString(), *DriverEntityId.ToString());
+            return false;
+        }
+    }
+
+    TArray<UTMOPVehicleSeatComponent*> Seats;
+    GetOwner()->GetComponents<UTMOPVehicleSeatComponent>(Seats);
+    for (UTMOPVehicleSeatComponent* Seat : Seats)
+        if (IsValid(Seat) && Seat->SeatRole == ETMOPVehicleSeatRole::Driver)
+        {
+            if (Seat->GetOccupantCharacter() == Driver)
+            {
+                ManifestDriver = Driver;
+                return true;
+            }
+            if (Seat->IsOccupied() && IsValid(SpawnedDriver))
+            {
+                Seat->ExitCharacterSeat(SpawnedDriver);
+                if (SpawnedDriver != Driver) SpawnedDriver->Destroy();
+                SpawnedDriver = Driver;
+            }
+            if (!Seat->EnterCharacterSeat(Driver)) return false;
+            ManifestDriver = Driver;
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP bus '%s': scheduled driver '%s' seated."),
+                *RunId.ToString(), *DriverEntityId.ToString());
+            return true;
+        }
+
+    UE_LOG(LogTemp, Error,
+        TEXT("TMOP bus '%s': no driver seat exists for scheduled driver '%s'."),
+        *RunId.ToString(), *DriverEntityId.ToString());
+    return false;
 }
 
 ATMOPHistoricalAgent* UTMOPBusPassengerComponent::ResolveHistoricalAgent(

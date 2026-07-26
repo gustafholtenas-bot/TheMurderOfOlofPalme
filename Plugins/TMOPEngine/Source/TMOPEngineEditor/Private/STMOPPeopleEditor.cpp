@@ -3,6 +3,7 @@
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Editor.h"
 #include "Engine/DataTable.h"
+#include "Engine/Texture2D.h"
 #include "EngineUtils.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "IStructureDetailsView.h"
@@ -12,13 +13,16 @@
 #include "Vehicles/TMOPHistoricalVehicleTypes.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
+#include "Widgets/Images/SImage.h"
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Input/SSearchBox.h"
 #include "Widgets/Input/SSearchableComboBox.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"
+#include "Widgets/Layout/SScaleBox.h"
 #include "Widgets/Layout/SSplitter.h"
+#include "Widgets/SOverlay.h"
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/Views/SListView.h"
 #include "Widgets/Views/STableRow.h"
@@ -55,6 +59,10 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
         FModuleManager::LoadModuleChecked<FPropertyEditorModule>(
             TEXT("PropertyEditor"));
     EntryDetailsView = PropertyEditor.CreateStructureDetailView(
+        DetailsArgs, StructureArgs, nullptr);
+    CharacteristicsDetailsView = PropertyEditor.CreateStructureDetailView(
+        DetailsArgs, StructureArgs, nullptr);
+    GeneralDetailsView = PropertyEditor.CreateStructureDetailView(
         DetailsArgs, StructureArgs, nullptr);
 
     ChildSlot
@@ -110,7 +118,7 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
             .PhysicalSplitterHandleSize(5.0f)
 
             + SSplitter::Slot()
-            .Value(0.22f)
+            .Value(0.13f)
             [
                 SNew(SBorder)
                 .Padding(6.0f)
@@ -143,7 +151,7 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
             ]
 
             + SSplitter::Slot()
-            .Value(0.40f)
+            .Value(0.20f)
             [
                 SNew(SBorder)
                 .Padding(6.0f)
@@ -207,7 +215,7 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
             ]
 
             + SSplitter::Slot()
-            .Value(0.38f)
+            .Value(0.25f)
             [
                 SNew(SBorder)
                 .Padding(6.0f)
@@ -324,6 +332,108 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                     ]
                 ]
             ]
+
+            + SSplitter::Slot()
+            .Value(0.24f)
+            [
+                SNew(SBorder)
+                .Padding(6.0f)
+                [
+                    SNew(SVerticalBox)
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 6.0f)
+                    [
+                        SNew(STextBlock)
+                        .Text(LOCTEXT("CharacteristicsTitle", "CHARACTERISTICS"))
+                        .Font(FAppStyle::GetFontStyle("HeadingExtraSmall"))
+                        .Justification(ETextJustify::Center)
+                    ]
+                    + SVerticalBox::Slot()
+                    .FillHeight(1.0f)
+                    [
+                        CharacteristicsDetailsView->GetWidget().ToSharedRef()
+                    ]
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(4.0f, 8.0f, 4.0f, 4.0f)
+                    [
+                        SNew(SVerticalBox)
+                        + SVerticalBox::Slot()
+                        .AutoHeight()
+                        .Padding(0.0f, 0.0f, 0.0f, 4.0f)
+                        [
+                            SNew(STextBlock)
+                            .Text(LOCTEXT("ImageReferenceTitle", "IMAGE REFERENCE"))
+                            .Justification(ETextJustify::Center)
+                            .ColorAndOpacity(FSlateColor::UseSubduedForeground())
+                        ]
+                        + SVerticalBox::Slot()
+                        .AutoHeight()
+                        .HAlign(HAlign_Center)
+                        [
+                            SNew(SBox)
+                            .WidthOverride(220.0f)
+                            .HeightOverride(260.0f)
+                            [
+                                SNew(SBorder)
+                                .Padding(3.0f)
+                                .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                                [
+                                    SNew(SOverlay)
+                                    + SOverlay::Slot()
+                                    [
+                                        SNew(SScaleBox)
+                                        .Stretch(EStretch::ScaleToFit)
+                                        [
+                                            SNew(SImage)
+                                            .Image(this,
+                                                &STMOPPeopleEditor::GetReferenceImageBrush)
+                                        ]
+                                    ]
+                                    + SOverlay::Slot()
+                                    .HAlign(HAlign_Center)
+                                    .VAlign(VAlign_Center)
+                                    [
+                                        SNew(STextBlock)
+                                        .Text(LOCTEXT("NoReferenceImage",
+                                            "No reference image selected"))
+                                        .Visibility(this,
+                                            &STMOPPeopleEditor::
+                                                GetReferenceImagePlaceholderVisibility)
+                                        .ColorAndOpacity(
+                                            FSlateColor::UseSubduedForeground())
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+
+            + SSplitter::Slot()
+            .Value(0.18f)
+            [
+                SNew(SBorder)
+                .Padding(6.0f)
+                [
+                    SNew(SVerticalBox)
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 6.0f)
+                    [
+                        SNew(STextBlock)
+                        .Text(LOCTEXT("DataTitle", "DATA"))
+                        .Font(FAppStyle::GetFontStyle("HeadingExtraSmall"))
+                        .Justification(ETextJustify::Center)
+                    ]
+                    + SVerticalBox::Slot()
+                    .FillHeight(1.0f)
+                    [
+                        GeneralDetailsView->GetWidget().ToSharedRef()
+                    ]
+                ]
+            ]
         ]
 
         + SVerticalBox::Slot()
@@ -417,6 +527,7 @@ void STMOPPeopleEditor::SelectPerson(const FName RowName)
 
     SelectedRowName = RowName;
     WorkingRow = *Row;
+    RefreshPersonDetailViews();
     SelectedTimelineIndex = INDEX_NONE;
     EntryStructData.Reset();
     EntryDetailsView->SetStructureData(nullptr);
@@ -448,6 +559,173 @@ void STMOPPeopleEditor::CommitEntryEdits()
     WorkingRow.Timeline[SelectedTimelineIndex] =
         *reinterpret_cast<FTMOPPersonTimelineEntry*>(
             EntryStructData->GetStructMemory());
+}
+
+void STMOPPeopleEditor::RefreshPersonDetailViews()
+{
+    CharacteristicsStructData = MakeShared<FStructOnScope>(
+        FTMOPPersonCharacteristicsEditorData::StaticStruct());
+    FTMOPPersonCharacteristicsEditorData* Characteristics =
+        reinterpret_cast<FTMOPPersonCharacteristicsEditorData*>(
+            CharacteristicsStructData->GetStructMemory());
+    Characteristics->AgeAtEvent = WorkingRow.AgeAtEvent;
+    Characteristics->HeightCentimeters = WorkingRow.HeightCentimeters;
+    Characteristics->ReferenceImage = WorkingRow.ReferenceImage;
+    Characteristics->HairColorCategory = WorkingRow.HairColorCategory;
+    Characteristics->HeadwearCategory = WorkingRow.HeadwearCategory;
+    Characteristics->FacialHairCategory = WorkingRow.FacialHairCategory;
+    Characteristics->Hair = WorkingRow.Hair;
+    Characteristics->BeardOrMustache = WorkingRow.BeardOrMustache;
+    Characteristics->FaceShape = WorkingRow.FaceShape;
+    Characteristics->Nose = WorkingRow.Nose;
+    Characteristics->Scarf = WorkingRow.Scarf;
+    Characteristics->Glasses = WorkingRow.Glasses;
+    Characteristics->Headwear = WorkingRow.Headwear;
+    Characteristics->BodyBuildCategory = WorkingRow.BodyBuildCategory;
+    Characteristics->OuterwearCategory = WorkingRow.OuterwearCategory;
+    Characteristics->BodyBuild = WorkingRow.BodyBuild;
+    Characteristics->JacketOrCoat = WorkingRow.JacketOrCoat;
+    Characteristics->ShirtOrSweater = WorkingRow.ShirtOrSweater;
+    Characteristics->Trousers = WorkingRow.Trousers;
+    Characteristics->Shoes = WorkingRow.Shoes;
+    Characteristics->OtherCharacteristics =
+        WorkingRow.OtherCharacteristics;
+    CharacteristicsDetailsView->SetStructureData(
+        CharacteristicsStructData);
+
+    GeneralStructData = MakeShared<FStructOnScope>(
+        FTMOPPersonGeneralEditorData::StaticStruct());
+    FTMOPPersonGeneralEditorData* General =
+        reinterpret_cast<FTMOPPersonGeneralEditorData*>(
+            GeneralStructData->GetStructMemory());
+    General->EntityId = WorkingRow.EntityId;
+    General->CategoryId = WorkingRow.CategoryId;
+    General->FullName = WorkingRow.FullName;
+    General->FirstName = WorkingRow.FirstName;
+    General->LastName = WorkingRow.LastName;
+    General->Gender = WorkingRow.Gender;
+    General->Nationality = WorkingRow.Nationality;
+    General->Occupation = WorkingRow.Occupation;
+    General->HistoricalAddress = WorkingRow.HistoricalAddress;
+    General->BirthYear = WorkingRow.BirthYear;
+    General->GeneralSourceReference = WorkingRow.GeneralSourceReference;
+    General->Uppslag = WorkingRow.Uppslag;
+    General->AgentClass = WorkingRow.AgentClass;
+    General->bSpawnInSimulation = WorkingRow.bSpawnInSimulation;
+    General->MovementProfile = WorkingRow.MovementProfile;
+    General->AssociatedVehicleIds = WorkingRow.AssociatedVehicleIds;
+    General->SocialGroupId = WorkingRow.SocialGroupId;
+    General->GroupLeaderEntityId = WorkingRow.GroupLeaderEntityId;
+    General->GroupFormation = WorkingRow.GroupFormation;
+    General->GroupFormationSpacingCm =
+        WorkingRow.GroupFormationSpacingCm;
+    General->bFollowGroupLeaderSchedule =
+        WorkingRow.bFollowGroupLeaderSchedule;
+    General->Dialog = WorkingRow.Dialog;
+    General->Notes = WorkingRow.Notes;
+    GeneralDetailsView->SetStructureData(GeneralStructData);
+}
+
+void STMOPPeopleEditor::CommitPersonDetailEdits()
+{
+    if (CharacteristicsStructData.IsValid())
+    {
+        const FTMOPPersonCharacteristicsEditorData* Characteristics =
+            reinterpret_cast<const FTMOPPersonCharacteristicsEditorData*>(
+                CharacteristicsStructData->GetStructMemory());
+        WorkingRow.AgeAtEvent = Characteristics->AgeAtEvent;
+        WorkingRow.HeightCentimeters = Characteristics->HeightCentimeters;
+        WorkingRow.ReferenceImage = Characteristics->ReferenceImage;
+        WorkingRow.HairColorCategory = Characteristics->HairColorCategory;
+        WorkingRow.HeadwearCategory = Characteristics->HeadwearCategory;
+        WorkingRow.FacialHairCategory =
+            Characteristics->FacialHairCategory;
+        WorkingRow.Hair = Characteristics->Hair;
+        WorkingRow.BeardOrMustache = Characteristics->BeardOrMustache;
+        WorkingRow.FaceShape = Characteristics->FaceShape;
+        WorkingRow.Nose = Characteristics->Nose;
+        WorkingRow.Scarf = Characteristics->Scarf;
+        WorkingRow.Glasses = Characteristics->Glasses;
+        WorkingRow.Headwear = Characteristics->Headwear;
+        WorkingRow.BodyBuildCategory =
+            Characteristics->BodyBuildCategory;
+        WorkingRow.OuterwearCategory =
+            Characteristics->OuterwearCategory;
+        WorkingRow.BodyBuild = Characteristics->BodyBuild;
+        WorkingRow.JacketOrCoat = Characteristics->JacketOrCoat;
+        WorkingRow.ShirtOrSweater = Characteristics->ShirtOrSweater;
+        WorkingRow.Trousers = Characteristics->Trousers;
+        WorkingRow.Shoes = Characteristics->Shoes;
+        WorkingRow.OtherCharacteristics =
+            Characteristics->OtherCharacteristics;
+    }
+
+    if (GeneralStructData.IsValid())
+    {
+        const FTMOPPersonGeneralEditorData* General =
+            reinterpret_cast<const FTMOPPersonGeneralEditorData*>(
+                GeneralStructData->GetStructMemory());
+        WorkingRow.EntityId = General->EntityId;
+        WorkingRow.CategoryId = General->CategoryId;
+        WorkingRow.FullName = General->FullName;
+        WorkingRow.FirstName = General->FirstName;
+        WorkingRow.LastName = General->LastName;
+        WorkingRow.Gender = General->Gender;
+        WorkingRow.Nationality = General->Nationality;
+        WorkingRow.Occupation = General->Occupation;
+        WorkingRow.HistoricalAddress = General->HistoricalAddress;
+        WorkingRow.BirthYear = General->BirthYear;
+        WorkingRow.GeneralSourceReference =
+            General->GeneralSourceReference;
+        WorkingRow.Uppslag = General->Uppslag;
+        WorkingRow.AgentClass = General->AgentClass;
+        WorkingRow.bSpawnInSimulation = General->bSpawnInSimulation;
+        WorkingRow.MovementProfile = General->MovementProfile;
+        WorkingRow.AssociatedVehicleIds =
+            General->AssociatedVehicleIds;
+        WorkingRow.SocialGroupId = General->SocialGroupId;
+        WorkingRow.GroupLeaderEntityId =
+            General->GroupLeaderEntityId;
+        WorkingRow.GroupFormation = General->GroupFormation;
+        WorkingRow.GroupFormationSpacingCm =
+            General->GroupFormationSpacingCm;
+        WorkingRow.bFollowGroupLeaderSchedule =
+            General->bFollowGroupLeaderSchedule;
+        WorkingRow.Dialog = General->Dialog;
+        WorkingRow.Notes = General->Notes;
+    }
+}
+
+const FSlateBrush* STMOPPeopleEditor::GetReferenceImageBrush() const
+{
+    if (!CharacteristicsStructData.IsValid())
+        return FAppStyle::GetBrush("Brushes.Recessed");
+
+    const FTMOPPersonCharacteristicsEditorData* Characteristics =
+        reinterpret_cast<const FTMOPPersonCharacteristicsEditorData*>(
+            CharacteristicsStructData->GetStructMemory());
+    UTexture2D* Texture = Characteristics->ReferenceImage.LoadSynchronous();
+    if (!IsValid(Texture))
+        return FAppStyle::GetBrush("Brushes.Recessed");
+
+    ReferenceImageBrush.SetResourceObject(Texture);
+    ReferenceImageBrush.DrawAs = ESlateBrushDrawType::Image;
+    ReferenceImageBrush.SetImageSize(
+        FVector2D(Texture->GetSizeX(), Texture->GetSizeY()));
+    return &ReferenceImageBrush;
+}
+
+EVisibility
+STMOPPeopleEditor::GetReferenceImagePlaceholderVisibility() const
+{
+    if (!CharacteristicsStructData.IsValid())
+        return EVisibility::Visible;
+    const FTMOPPersonCharacteristicsEditorData* Characteristics =
+        reinterpret_cast<const FTMOPPersonCharacteristicsEditorData*>(
+            CharacteristicsStructData->GetStructMemory());
+    return IsValid(Characteristics->ReferenceImage.LoadSynchronous())
+        ? EVisibility::Collapsed
+        : EVisibility::Visible;
 }
 
 TSharedRef<ITableRow> STMOPPeopleEditor::GeneratePersonRow(
@@ -890,6 +1168,7 @@ FReply STMOPPeopleEditor::MoveTimelineEntryDown()
 FReply STMOPPeopleEditor::SavePerson()
 {
     CommitEntryEdits();
+    CommitPersonDetailEdits();
     UDataTable* Table = PeopleTable.Get();
     if (!IsValid(Table) || SelectedRowName.IsNone())
         return FReply::Handled();

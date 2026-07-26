@@ -37,6 +37,10 @@ struct TMOPENGINE_API FTMOPBusScheduledRun
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     TSubclassOf<ATMOPVehicleBase> BusClass;
 
+    /** Person EntityId from DT_TMOP_People. Spawned and seated when the run starts. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Driver")
+    FName DriverEntityId = NAME_None;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     FName InitialLaneId = NAME_None;
 
@@ -49,6 +53,11 @@ struct TMOPENGINE_API FTMOPBusScheduledRun
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Time")
     FTMOPTime ExactStartTime = FTMOPTime(23, 0, 0);
+
+    /** Multiplies the speed limit stored on each lane. 0.55 means 27.5 km/h on a 50 road. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Driving",
+        meta=(ClampMin="0.1", ClampMax="1.0"))
+    float SpeedLimitMultiplier = 0.55f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Time",
         meta=(EditCondition="!bUseExactStartTime"))

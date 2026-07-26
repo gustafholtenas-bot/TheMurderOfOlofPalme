@@ -10,8 +10,10 @@
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
+#include "Time/TMOPClockSubsystem.h"
 #include "Vehicles/TMOPConfiguredVehicle.h"
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Vehicles/TMOPVehicleModelData.h"
 #include "World/TMOPWorldSubsystem.h"
 
 namespace
@@ -21,9 +23,8 @@ namespace
 
 ATMOPHistoricalVehicleDirector::ATMOPHistoricalVehicleDirector()
 {
-    PrimaryActorTick.bCanEverTick = false;
+    PrimaryActorTick.bCanEverTick = true;
     DefaultVehicleClass = ATMOPConfiguredVehicle::StaticClass();
-    bRespectRowSpawnFlags = false;
 }
 
 void ATMOPHistoricalVehicleDirector::BeginPlay()
@@ -45,8 +46,42 @@ void ATMOPHistoricalVehicleDirector::EndPlay(const EEndPlayReason::Type EndPlayR
     Super::EndPlay(EndPlayReason);
 }
 
+void ATMOPHistoricalVehicleDirector::Tick(const float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (Clock == nullptr)
+    {
+        return;
+    }
+
+    const int32 CurrentSecond =
+        Clock->GetCurrentTime().ToSecondsFromMidnight();
+    if (LastEvaluatedSecond != INDEX_NONE &&
+        CurrentSecond < LastEvaluatedSecond)
+    {
+        InitializeHistoricalVehicles();
+        return;
+    }
+    if (CurrentSecond != LastEvaluatedSecond)
+    {
+        SpawnDueVehicles(CurrentSecond);
+        LastEvaluatedSecond = CurrentSecond;
+    }
+}
+
 int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
 {
+    for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
+    {
+        FHistoricalVehicleRuntime& Runtime = Pair.Value;
+        if (Runtime.bSpawnedByDirector && Runtime.Vehicle.IsValid())
+        {
+            UnregisterVehicle(Runtime.Vehicle.Get());
+            Runtime.Vehicle->Destroy();
+        }
+    }
     RuntimeVehicles.Reset();
 
     TArray<FString> Errors;
@@ -86,6 +121,7 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
         FHistoricalVehicleRuntime Runtime;
         Runtime.RowName = Pair.Key;
         Runtime.Profile = *Row;
+        Runtime.InitialSpawnSecond = GetInitialSpawnSecond(*Row);
         RuntimeVehicles.Add(Row->VehicleId, MoveTemp(Runtime));
     }
 
@@ -94,15 +130,26 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
         DiscoverPlacedVehicles();
     }
 
-    return bSpawnVehiclesAutomatically ? SpawnEnabledVehicles() : RuntimeVehicles.Num();
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    const int32 CurrentSecond = Clock != nullptr
+        ? Clock->GetCurrentTime().ToSecondsFromMidnight()
+        : FTMOPTime(23, 0, 0).ToSecondsFromMidnight();
+    ApplyDeferredPlacedVehicleState(CurrentSecond);
+    LastEvaluatedSecond = CurrentSecond;
+    return bSpawnVehiclesAutomatically
+        ? SpawnDueVehicles(CurrentSecond)
+        : RuntimeVehicles.Num();
 }
 
 int32 ATMOPHistoricalVehicleDirector::SpawnEnabledVehicles()
 {
-    // DT_TMOP_HistoricalVehicles is the authoritative scenario inventory.
-    // Every valid row is present at scenario start; bSpawnInSimulation remains
-    // metadata for older tables but no longer suppresses historical cars.
-    return SpawnVehicles(true);
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    const int32 CurrentSecond = Clock != nullptr
+        ? Clock->GetCurrentTime().ToSecondsFromMidnight()
+        : FTMOPTime(23, 0, 0).ToSecondsFromMidnight();
+    return SpawnDueVehicles(CurrentSecond);
 }
 
 void ATMOPHistoricalVehicleDirector::SpawnAllVehiclesForStaging()
@@ -141,6 +188,85 @@ int32 ATMOPHistoricalVehicleDirector::SpawnVehicles(const bool bIgnoreRowFlags)
         }
     }
     return AvailableCount;
+}
+
+int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
+    const int32 CurrentSecond)
+{
+    int32 AvailableCount = 0;
+    for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
+    {
+        FHistoricalVehicleRuntime& Runtime = Pair.Value;
+        if (!ShouldSpawn(Runtime.Profile, false) ||
+            Runtime.InitialSpawnSecond == INDEX_NONE ||
+            Runtime.InitialSpawnSecond > CurrentSecond)
+        {
+            continue;
+        }
+
+        if (Runtime.bDeferredPlacedVehicle && Runtime.Vehicle.IsValid())
+        {
+            ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+            Vehicle->SetActorHiddenInGame(false);
+            Vehicle->SetActorEnableCollision(true);
+            Vehicle->SetActorTickEnabled(true);
+            Runtime.bDeferredPlacedVehicle = false;
+            RegisterVehicle(Vehicle);
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP Historical Vehicles: activated placed vehicle '%s' at scheduled spawn time."),
+                *Runtime.Profile.VehicleId.ToString());
+        }
+        else if (!Runtime.Vehicle.IsValid())
+        {
+            SpawnVehicle(Runtime);
+        }
+        if (Runtime.Vehicle.IsValid())
+        {
+            ++AvailableCount;
+        }
+    }
+    return AvailableCount;
+}
+
+int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
+    const FTMOPHistoricalVehicleRow& Profile) const
+{
+    for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Profile.Timeline)
+    {
+        if (Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
+            Entry.Action == ETMOPHistoricalVehicleAction::Spawn)
+        {
+            return Entry.Time.ToSecondsFromMidnight();
+        }
+    }
+    return INDEX_NONE;
+}
+
+void ATMOPHistoricalVehicleDirector::ApplyDeferredPlacedVehicleState(
+    const int32 CurrentSecond)
+{
+    for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
+    {
+        FHistoricalVehicleRuntime& Runtime = Pair.Value;
+        ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+        if (!IsValid(Vehicle) || Runtime.bSpawnedByDirector)
+        {
+            continue;
+        }
+
+        const bool bShouldBeActive =
+            ShouldSpawn(Runtime.Profile, false) &&
+            Runtime.InitialSpawnSecond != INDEX_NONE &&
+            Runtime.InitialSpawnSecond <= CurrentSecond;
+        if (!bShouldBeActive)
+        {
+            Vehicle->SetActorHiddenInGame(true);
+            Vehicle->SetActorEnableCollision(false);
+            Vehicle->SetActorTickEnabled(false);
+            Runtime.bDeferredPlacedVehicle = true;
+            UnregisterVehicle(Vehicle);
+        }
+    }
 }
 
 void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
@@ -376,7 +502,7 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
         {
             OutErrors.Add(Prefix + TEXT(" has no Timeline entries."));
         }
-        if (Row->bOverrideBodyColor && !IsValid(Row->ModelData))
+        if (Row->bOverrideBodyColor && !IsValid(Row->ModelData.Get()))
         {
             OutErrors.Add(Prefix +
                 TEXT(" overrides Body Color but has no Model Data."));
@@ -429,6 +555,7 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     const FName VehicleId,
     const FName DriverEntityId,
     const TArray<FName>& OrderedLaneIds,
+    const TArray<FName>& PassAnchorIds,
     const ETMOPVehicleRouteMode RouteMode,
     const FName DestinationAnchorId,
     const float StartDistanceAlongFirstLaneCm)
@@ -502,19 +629,6 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
         }
         Network->DiscoverLanesInWorld();
 
-        FName DestinationLaneId;
-        float DestinationDistance = 0.0f;
-        if (!Network->FindNearestLane(
-            Destination->GetAnchorLocation(),
-            DestinationLaneId,
-            DestinationDistance))
-        {
-            UE_LOG(LogTemp, Error,
-                TEXT("TMOP driving: no lane was found near anchor '%s'."),
-                *DestinationAnchorId.ToString());
-            return false;
-        }
-
         FName RouteStartLaneId;
         if (RouteMode == ETMOPVehicleRouteMode::ManualThenAutomatic &&
             !Route.IsEmpty())
@@ -541,25 +655,62 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
             }
         }
 
-        TArray<FName> AutomaticTail;
-        if (!Network->FindLaneRoute(
-            RouteStartLaneId, DestinationLaneId, AutomaticTail))
+        TArray<FName> RouteAnchorIds = PassAnchorIds;
+        RouteAnchorIds.RemoveAll(
+            [](const FName AnchorId) { return AnchorId.IsNone(); });
+        RouteAnchorIds.Add(DestinationAnchorId);
+
+        FName SegmentStartLaneId = RouteStartLaneId;
+        for (const FName RouteAnchorId : RouteAnchorIds)
         {
-            UE_LOG(LogTemp, Error,
-                TEXT("TMOP driving: no connected lane route from '%s' to '%s' (anchor '%s')."),
-                *RouteStartLaneId.ToString(), *DestinationLaneId.ToString(),
-                *DestinationAnchorId.ToString());
-            return false;
+            ATMOPHistoricalAnchor* RouteAnchor =
+                Anchors->FindAnchor(RouteAnchorId);
+            if (!IsValid(RouteAnchor))
+            {
+                UE_LOG(LogTemp, Error,
+                    TEXT("TMOP driving: pass/destination anchor '%s' is unavailable."),
+                    *RouteAnchorId.ToString());
+                return false;
+            }
+
+            FName SegmentDestinationLaneId;
+            float SegmentDestinationDistance = 0.0f;
+            if (!Network->FindNearestLane(
+                RouteAnchor->GetAnchorLocation(),
+                SegmentDestinationLaneId,
+                SegmentDestinationDistance))
+            {
+                UE_LOG(LogTemp, Error,
+                    TEXT("TMOP driving: no lane was found near pass/destination anchor '%s'."),
+                    *RouteAnchorId.ToString());
+                return false;
+            }
+
+            TArray<FName> AutomaticSegment;
+            if (!Network->FindLaneRoute(
+                SegmentStartLaneId,
+                SegmentDestinationLaneId,
+                AutomaticSegment))
+            {
+                UE_LOG(LogTemp, Error,
+                    TEXT("TMOP driving: no connected lane route from '%s' to '%s' through anchor '%s'."),
+                    *SegmentStartLaneId.ToString(),
+                    *SegmentDestinationLaneId.ToString(),
+                    *RouteAnchorId.ToString());
+                return false;
+            }
+            if (!Route.IsEmpty() && !AutomaticSegment.IsEmpty() &&
+                Route.Last() == AutomaticSegment[0])
+            {
+                AutomaticSegment.RemoveAt(0);
+            }
+            Route.Append(AutomaticSegment);
+            SegmentStartLaneId = SegmentDestinationLaneId;
         }
-        if (!Route.IsEmpty() && !AutomaticTail.IsEmpty() &&
-            Route.Last() == AutomaticTail[0])
-        {
-            AutomaticTail.RemoveAt(0);
-        }
-        Route.Append(AutomaticTail);
         UE_LOG(LogTemp, Display,
-            TEXT("TMOP driving: calculated %d lane(s) to anchor '%s'."),
-            Route.Num(), *DestinationAnchorId.ToString());
+            TEXT("TMOP driving: calculated %d lane(s) through %d pass anchor(s) to '%s'."),
+            Route.Num(), PassAnchorIds.Num(),
+            *DestinationAnchorId.ToString());
     }
 
     if (Route.IsEmpty())

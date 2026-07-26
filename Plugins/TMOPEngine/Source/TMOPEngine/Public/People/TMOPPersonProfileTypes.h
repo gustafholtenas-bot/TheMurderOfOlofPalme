@@ -9,6 +9,7 @@
 #include "TMOPPersonProfileTypes.generated.h"
 
 class ATMOPHistoricalAgent;
+class UTexture2D;
 
 UENUM(BlueprintType)
 enum class ETMOPPersonLocationType : uint8
@@ -110,7 +111,9 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
      * These are route waypoints, not separate timeline events.
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location",
-        meta=(DisplayName="Pass Anchors On The Way"))
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::MoveToAnchor || Action==ETMOPPersonTimelineAction::BeginDriving",
+            DisplayName="Pass Anchors On The Way",
+            ToolTip="Ordered pedestrian or vehicle waypoints visited before the final target/destination anchor. Automatic vehicle routing calculates lanes between them."))
     TArray<FName> PassAnchorIds;
 
     /** Vehicle ID, bus Run ID, venue ID, or another target entity. */
@@ -352,6 +355,11 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|History",
         meta=(ClampMin="0.0"))
     float HeightCentimeters = 0.0f;
+
+    /** Optional source photograph shown in the TMOP People Editor. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Reference",
+        meta=(DisplayName="Reference Image"))
+    TSoftObjectPtr<UTexture2D> ReferenceImage;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Source")
     FString GeneralSourceReference;

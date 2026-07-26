@@ -22,6 +22,7 @@ public:
     ATMOPHistoricalVehicleDirector();
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+    virtual void Tick(float DeltaSeconds) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles")
     TObjectPtr<UDataTable> HistoricalVehicleTable;
@@ -33,7 +34,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning")
     bool bSpawnVehiclesAutomatically = true;
 
-    /** Legacy compatibility flag. Valid historical rows now spawn at start. */
+    /** Only rows enabled for simulation are considered for scheduled spawning. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning")
     bool bRespectRowSpawnFlags = true;
 
@@ -66,6 +67,7 @@ public:
         FName VehicleId,
         FName DriverEntityId,
         const TArray<FName>& OrderedLaneIds,
+        const TArray<FName>& PassAnchorIds,
         ETMOPVehicleRouteMode RouteMode =
             ETMOPVehicleRouteMode::ManualLaneRoute,
         FName DestinationAnchorId = NAME_None,
@@ -78,9 +80,15 @@ private:
         FTMOPHistoricalVehicleRow Profile;
         TWeakObjectPtr<ATMOPVehicleBase> Vehicle;
         bool bSpawnedByDirector = false;
+        bool bDeferredPlacedVehicle = false;
+        int32 InitialSpawnSecond = INDEX_NONE;
     };
 
     void DiscoverPlacedVehicles();
+    int32 SpawnDueVehicles(int32 CurrentSecond);
+    int32 GetInitialSpawnSecond(
+        const FTMOPHistoricalVehicleRow& Profile) const;
+    void ApplyDeferredPlacedVehicleState(int32 CurrentSecond);
     ATMOPVehicleBase* SpawnVehicle(FHistoricalVehicleRuntime& Runtime);
     FTransform GetInitialTransform(const FTMOPHistoricalVehicleRow& Profile) const;
     bool ShouldSpawn(const FTMOPHistoricalVehicleRow& Profile, bool bIgnoreRowFlag) const;
@@ -92,4 +100,5 @@ private:
         FName DriverEntityId) const;
 
     TMap<FName, FHistoricalVehicleRuntime> RuntimeVehicles;
+    int32 LastEvaluatedSecond = INDEX_NONE;
 };

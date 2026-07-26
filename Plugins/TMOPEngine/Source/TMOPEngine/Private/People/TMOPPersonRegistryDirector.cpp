@@ -479,6 +479,7 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
                 Entry.TargetEntityId,
                 DriverEntityId,
                 Entry.OrderedLaneIds,
+                Entry.PassAnchorIds,
                 Entry.VehicleRouteMode,
                 Entry.DrivingDestinationAnchorId,
                 Entry.VehicleStartDistanceAlongFirstLaneCm);

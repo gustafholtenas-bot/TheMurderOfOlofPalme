@@ -179,6 +179,7 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     }
     Movement->InitialLaneId = StartLaneId;
     Movement->PlannedLaneIds = Run.RouteData->OrderedLaneIds;
+    Movement->SpeedLimitMultiplier = Run.SpeedLimitMultiplier;
     Service->RouteData = Run.RouteData;
     Service->ServiceRunId = Run.RunId;
     Service->DwellRandomSeed = ScheduleSeed + CurrentLoopNumber * 1013 + Runtime.SourceIndex * 89;
@@ -186,6 +187,14 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     if (UTMOPBusPassengerComponent* Passengers =
         Bus->FindComponentByClass<UTMOPBusPassengerComponent>())
     {
+        if (!Passengers->AssignScheduledDriver(Run.DriverEntityId, Run.RunId))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP bus '%s': scheduled driver '%s' could not be assigned."),
+                *Runtime.RunId.ToString(), *Run.DriverEntityId.ToString());
+            Bus->Destroy();
+            return false;
+        }
         if (!Passengers->InitializePassengerManifest(Run.PassengerManifest, Run.RunId))
         {
             UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': passenger manifest validation failed."),

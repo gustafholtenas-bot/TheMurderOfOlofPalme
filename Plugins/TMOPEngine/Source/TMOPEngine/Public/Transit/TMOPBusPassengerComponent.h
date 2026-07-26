@@ -99,6 +99,13 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Bus Passengers|Manifest")
     bool InitializePassengerManifest(UTMOPBusPassengerManifest* Manifest, FName RunId);
 
+    /**
+     * Gives the automatically spawned historical driver its DT_TMOP_People identity
+     * and places it in the driver seat. Safe to call once immediately after bus spawn.
+     */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Bus Passengers|Driver")
+    bool AssignScheduledDriver(FName DriverEntityId, FName RunId);
+
     UFUNCTION(BlueprintPure, Category="TMOP|Bus Passengers|Manifest")
     TArray<ETMOPBusPassengerJourneyState> GetJourneyStates() const { return JourneyStates; }
 

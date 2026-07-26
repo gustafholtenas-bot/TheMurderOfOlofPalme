@@ -2,6 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "People/TMOPPersonProfileTypes.h"
+#include "TMOPPeopleEditorViewModels.h"
+#include "Styling/SlateBrush.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/Views/SListView.h"
 
@@ -47,6 +49,8 @@ private:
     void SelectPerson(FName RowName);
     void SelectTimelineEntry(int32 Index);
     void CommitEntryEdits();
+    void RefreshPersonDetailViews();
+    void CommitPersonDetailEdits();
     void SetStatus(const FText& Message, const FLinearColor& Color);
 
     TSharedRef<ITableRow> GeneratePersonRow(
@@ -68,6 +72,8 @@ private:
         EReferenceField Field);
     FText GetReferenceFieldText(EReferenceField Field) const;
     FName GetReferenceId(FReferenceItem Item) const;
+    const FSlateBrush* GetReferenceImageBrush() const;
+    EVisibility GetReferenceImagePlaceholderVisibility() const;
 
     FReply AddTimelineEntry();
     FReply DuplicateTimelineEntry();
@@ -99,6 +105,11 @@ private:
     TSharedPtr<SListView<FTimelineItem>> TimelineListView;
     TSharedPtr<IStructureDetailsView> EntryDetailsView;
     TSharedPtr<FStructOnScope> EntryStructData;
+    TSharedPtr<IStructureDetailsView> CharacteristicsDetailsView;
+    TSharedPtr<IStructureDetailsView> GeneralDetailsView;
+    TSharedPtr<FStructOnScope> CharacteristicsStructData;
+    TSharedPtr<FStructOnScope> GeneralStructData;
+    mutable FSlateBrush ReferenceImageBrush;
     TSharedPtr<STextBlock> StatusText;
 
     TArray<FReferenceItem> AnchorReferenceItems;
