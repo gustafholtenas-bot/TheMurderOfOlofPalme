@@ -54,6 +54,9 @@ void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
         ActiveReaction = AnimationState->ActiveReaction;
         WeaponPose = AnimationState->WeaponPose;
         bIsDeadOnGround = AnimationState->bIsDeadOnGround;
+        SocialLookYaw = AnimationState->SocialLookYaw;
+        SocialLookPitch = AnimationState->SocialLookPitch;
+        SocialLookAlpha = AnimationState->SocialLookAlpha;
         bIsPunching = ActiveReaction == ETMOPAnimReaction::Punch;
         bIsKicking = ActiveReaction == ETMOPAnimReaction::Kick;
     }

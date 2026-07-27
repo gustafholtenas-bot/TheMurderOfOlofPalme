@@ -1,9 +1,12 @@
 #include "Player/TMOPPlayerCharacter.h"
 
+#include "Agents/TMOPHistoricalAgent.h"
 #include "Animation/TMOPAnimationStateComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Entities/TMOPWorldEntityComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "EngineUtils.h"
 #include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
@@ -17,11 +20,13 @@
 #include "Player/TMOPVehicleTakeoverComponent.h"
 #include "Player/TMOPPlayerVehicleDrivingComponent.h"
 #include "Player/TMOPPlayerVehicleSessionComponent.h"
+#include "People/TMOPPersonRegistryDirector.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPQuickInventoryWidget.h"
 #include "UI/TMOPPauseMenuWidget.h"
 #include "UI/TMOPInteractionPromptWidget.h"
+#include "UI/TMOPDialogWidget.h"
 #include "Blueprint/UserWidget.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
@@ -117,6 +122,23 @@ void ATMOPPlayerCharacter::BeginPlay()
             {
                 InteractionPromptWidget->AddToViewport(40);
                 InteractionPromptWidget->SetPromptText(FText::GetEmpty());
+            }
+        }
+    }
+
+    if (bCreateDialogWidget)
+    {
+        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        {
+            TSubclassOf<UTMOPDialogWidget> WidgetClass = DialogWidgetClass;
+            if (!WidgetClass) WidgetClass = UTMOPDialogWidget::StaticClass();
+            DialogWidget = CreateWidget<UTMOPDialogWidget>(
+                PlayerController, WidgetClass);
+            if (IsValid(DialogWidget.Get()))
+            {
+                DialogWidget->InitializeDialog(this);
+                DialogWidget->AddToViewport(80);
+                DialogWidget->HideDialog();
             }
         }
     }
@@ -264,6 +286,11 @@ void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled, const bool bExtraSp
 
 void ATMOPPlayerCharacter::InputInteract()
 {
+    if (bDialogOpen)
+    {
+        ClosePersonDialog();
+        return;
+    }
     if (InventoryInput->bRadialMenuOpen) return;
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
     {
@@ -271,6 +298,12 @@ void ATMOPPlayerCharacter::InputInteract()
         return;
     }
     AActor* Target = FindInteractionTarget();
+    if (ATMOPHistoricalAgent* HistoricalAgent =
+        Cast<ATMOPHistoricalAgent>(Target))
+    {
+        OpenPersonDialog(HistoricalAgent);
+        return;
+    }
     if (IsValid(Target) && Target->GetClass()->ImplementsInterface(UTMOPInteractable::StaticClass()))
     {
         ITMOPInteractable::Execute_Interact(Target, this);
@@ -347,6 +380,11 @@ void ATMOPPlayerCharacter::InputSecondaryActionEnded()
 
 void ATMOPPlayerCharacter::InputCancel()
 {
+    if (bDialogOpen)
+    {
+        ClosePersonDialog();
+        return;
+    }
     if (InventoryInput->bRadialMenuOpen)
     {
         FinishQuickInventory(false);
@@ -417,6 +455,7 @@ void ATMOPPlayerCharacter::TogglePauseMenu()
 void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 {
     if (bPauseMenuOpen == bOpen || !IsValid(PauseMenuWidget.Get())) return;
+    if (bOpen && bDialogOpen) ClosePersonDialog();
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
@@ -454,6 +493,14 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if (bDialogOpen)
+    {
+        const ATMOPHistoricalAgent* Agent = ActiveDialogAgent.Get();
+        if (!IsValid(Agent) ||
+            FVector::DistSquared(GetActorLocation(), Agent->GetActorLocation()) >
+                FMath::Square(DialogMaximumDistanceCm))
+            ClosePersonDialog();
+    }
     if (bUseDirectSprintKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
@@ -521,14 +568,99 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
 {
     if (!IsValid(InteractionPromptWidget.Get())) return;
     FText Prompt;
-    if (!bPauseMenuOpen && !InventoryInput->bRadialMenuOpen)
+    if (!bPauseMenuOpen && !bDialogOpen && !InventoryInput->bRadialMenuOpen)
     {
         AActor* Target = FindInteractionTarget();
-        if (IsValid(Target) && Target->GetClass()->ImplementsInterface(
+        if (const ATMOPHistoricalAgent* Agent =
+            Cast<ATMOPHistoricalAgent>(Target))
+        {
+            const FText Name = !Agent->DisplayName.IsEmpty()
+                ? Agent->DisplayName
+                : FText::FromString(TEXT("personen"));
+            Prompt = FText::Format(
+                NSLOCTEXT("TMOP", "TalkToPerson", "Prata med {0}"), Name);
+        }
+        else if (IsValid(Target) && Target->GetClass()->ImplementsInterface(
             UTMOPInteractable::StaticClass()))
             Prompt = ITMOPInteractable::Execute_GetInteractionText(Target);
     }
     InteractionPromptWidget->SetPromptText(Prompt);
+}
+
+bool ATMOPPlayerCharacter::OpenPersonDialog(
+    ATMOPHistoricalAgent* HistoricalAgent)
+{
+    if (!IsValid(HistoricalAgent) || !IsValid(DialogWidget.Get()) ||
+        GetWorld() == nullptr || bPauseMenuOpen)
+        return false;
+
+    const FName EntityId = IsValid(HistoricalAgent->EntityIdentity.Get())
+        ? HistoricalAgent->EntityIdentity->GetEntityId()
+        : NAME_None;
+    ATMOPPersonRegistryDirector* Registry = nullptr;
+    for (TActorIterator<ATMOPPersonRegistryDirector> It(GetWorld()); It; ++It)
+    {
+        Registry = *It;
+        break;
+    }
+
+    bool bAfterShot = false;
+    if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+        bAfterShot = Clock->GetCurrentTime().ToSecondsFromMidnight() >=
+            DialogShotThreshold.ToSecondsFromMidnight();
+
+    FText Dialog = IsValid(Registry)
+        ? Registry->GetPersonDialog(EntityId, bAfterShot)
+        : FText::GetEmpty();
+    if (Dialog.IsEmpty())
+        Dialog = NSLOCTEXT(
+            "TMOP", "EmptyPersonDialog", "Jag har inget att säga just nu.");
+
+    FText Speaker = HistoricalAgent->DisplayName;
+    if (Speaker.IsEmpty() && !EntityId.IsNone())
+        Speaker = FText::FromName(EntityId);
+    if (Speaker.IsEmpty())
+        Speaker = NSLOCTEXT("TMOP", "UnknownDialogSpeaker", "Okänd person");
+
+    ActiveDialogAgent = HistoricalAgent;
+    bDialogOpen = true;
+    HistoricalAgent->BeginDialogueFocus(this);
+    DialogWidget->ShowDialog(Speaker, Dialog);
+    if (IsValid(InteractionPromptWidget.Get()))
+        InteractionPromptWidget->SetPromptText(FText::GetEmpty());
+
+    GetCharacterMovement()->StopMovementImmediately();
+    SetSprinting(false, false);
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->bShowMouseCursor = true;
+        PC->SetIgnoreMoveInput(true);
+        PC->SetIgnoreLookInput(true);
+        FInputModeGameAndUI Mode;
+        Mode.SetWidgetToFocus(DialogWidget->TakeWidget());
+        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+        PC->SetInputMode(Mode);
+    }
+    return true;
+}
+
+void ATMOPPlayerCharacter::ClosePersonDialog()
+{
+    if (!bDialogOpen) return;
+    if (ATMOPHistoricalAgent* Agent = ActiveDialogAgent.Get())
+        Agent->EndDialogueFocus();
+    ActiveDialogAgent.Reset();
+    bDialogOpen = false;
+    if (IsValid(DialogWidget.Get())) DialogWidget->HideDialog();
+
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->bShowMouseCursor = false;
+        PC->SetIgnoreMoveInput(false);
+        PC->SetIgnoreLookInput(false);
+        PC->SetInputMode(FInputModeGameOnly());
+    }
 }
 
 void ATMOPPlayerCharacter::InputQuickInventoryStarted()

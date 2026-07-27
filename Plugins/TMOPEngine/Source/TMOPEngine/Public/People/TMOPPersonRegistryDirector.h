@@ -76,6 +76,8 @@ private:
         FTMOPPersonProfileRow Profile;
         TWeakObjectPtr<ATMOPHistoricalAgent> Agent;
         int32 NextTimelineIndex = 0;
+        int32 NextAutomaticSpeechIndex = 0;
+        int32 LastResolvedAutomaticSpeechSecond = INDEX_NONE;
         bool bSpawnedByDirector = false;
         bool bCompleted = false;
         int32 CachedResolvedSecond = INDEX_NONE;
@@ -84,6 +86,11 @@ private:
     };
 
     void EvaluatePeople(int32 CurrentSecond, bool bCatchUp);
+    void EvaluateAutomaticSpeech(int32 CurrentSecond, int32 PreviousSecond);
+    bool ResolveAutomaticSpeechSecond(
+        const FPersonRuntime& Runtime,
+        const FTMOPTimedSpeechLine& Line,
+        int32& OutSecond) const;
     bool SpawnPerson(FPersonRuntime& Runtime, const FTMOPPersonTimelineEntry& InitialEntry);
     bool ApplyTimelineEntry(FPersonRuntime& Runtime,
         const FTMOPPersonTimelineEntry& Entry, bool bCatchUp);

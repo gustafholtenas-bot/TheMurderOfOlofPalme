@@ -10,6 +10,7 @@
 
 class ATMOPHistoricalAgent;
 class UTexture2D;
+class USoundBase;
 
 UENUM(BlueprintType)
 enum class ETMOPPersonLocationType : uint8
@@ -213,6 +214,68 @@ struct TMOPENGINE_API FTMOPPersonDialog
 };
 
 UENUM(BlueprintType)
+enum class ETMOPSpeechTimingMode : uint8
+{
+    Absolute UMETA(DisplayName="Absolute"),
+    RelativeToSharedEvent UMETA(DisplayName="Relative to Shared Event"),
+    RelativeToPreviousLine UMETA(DisplayName="Relative to Previous Line")
+};
+
+/** A source-backed line spoken automatically at a resolved simulation time. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPTimedSpeechLine
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
+        meta=(DisplayName="Line ID"))
+    FName LineId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech")
+    FTMOPTime Time = FTMOPTime(23, 0, 0);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech")
+    ETMOPSpeechTimingMode TimingMode = ETMOPSpeechTimingMode::Absolute;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
+        meta=(EditCondition="TimingMode==ETMOPSpeechTimingMode::RelativeToSharedEvent",
+            DisplayName="Shared Event ID"))
+    FName SharedEventId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
+        meta=(EditCondition="TimingMode!=ETMOPSpeechTimingMode::Absolute",
+            DisplayName="Offset Seconds"))
+    int32 OffsetSeconds = 0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
+        meta=(MultiLine="true", DisplayName="Spoken Text"))
+    FText Text;
+
+    /** Optional imported Sound Wave (MP3/WAV) played with this line. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
+        meta=(DisplayName="Voice Over"))
+    TSoftObjectPtr<USoundBase> VoiceOver;
+
+    /**
+     * Zero calculates a readable duration. Voice-over length is always
+     * respected, even when this override is shorter.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
+        meta=(ClampMin="0.0", Units="s", DisplayName="Display Duration Override"))
+    float DisplayDurationOverrideSeconds = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech")
+    ETMOPHistoricalConfidence Confidence =
+        ETMOPHistoricalConfidence::Documented;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech")
+    FString SourceReference;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech")
+    FString Notes;
+};
+
+UENUM(BlueprintType)
 enum class ETMOPPersonGender : uint8
 {
     Unknown,
@@ -403,6 +466,11 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Dialog")
     FTMOPPersonDialog Dialog;
+
+    /** Timed lines shown above this person's head and optionally voiced. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
+        meta=(TitleProperty="LineId"))
+    TArray<FTMOPTimedSpeechLine> AutomaticSpeech;
 
     /** Slot 0 is the initial marker. It may occur later than 23:00. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")

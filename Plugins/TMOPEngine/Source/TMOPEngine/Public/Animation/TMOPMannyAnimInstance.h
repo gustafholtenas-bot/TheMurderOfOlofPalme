@@ -80,6 +80,16 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|State Machine")
     bool bIsGrounded = false;
 
+    /** Feed these into spine/neck Transform (Modify) Bone nodes. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Social")
+    float SocialLookYaw = 0.0f;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Social")
+    float SocialLookPitch = 0.0f;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Social")
+    float SocialLookAlpha = 0.0f;
+
 private:
     UPROPERTY(Transient)
     TObjectPtr<class ACharacter> CharacterOwner;

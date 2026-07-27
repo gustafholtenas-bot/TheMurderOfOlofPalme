@@ -15,6 +15,7 @@
 #include "People/TMOPPersonProfileComponent.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
 #include "Schedules/TMOPScheduleTypes.h"
+#include "Sound/SoundBase.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Transit/TMOPBusServiceComponent.h"
 #include "Transit/TMOPBusStopComponent.h"
@@ -69,7 +70,9 @@ void ATMOPPersonRegistryDirector::Tick(const float DeltaSeconds)
     }
     if (CurrentSecond != LastEvaluatedSecond)
     {
+        const int32 PreviousSecond = LastEvaluatedSecond;
         EvaluatePeople(CurrentSecond, false);
+        EvaluateAutomaticSpeech(CurrentSecond, PreviousSecond);
         LastEvaluatedSecond = CurrentSecond;
     }
 }
@@ -157,10 +160,86 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
 
     if (CurrentSecond > InitialEvaluationSecond)
         EvaluatePeople(CurrentSecond, bCatchUpToCurrentClockOnBeginPlay);
+    EvaluateAutomaticSpeech(CurrentSecond, CurrentSecond - 1);
     LastEvaluatedSecond = CurrentSecond;
     UE_LOG(LogTemp, Display, TEXT("TMOP People: initialized %d timeline profile(s), %d active agent(s)."),
         RuntimePeople.Num(), RefreshAllActiveProfiles());
     return RuntimePeople.Num();
+}
+
+void ATMOPPersonRegistryDirector::EvaluateAutomaticSpeech(
+    const int32 CurrentSecond, const int32 PreviousSecond)
+{
+    for (TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
+    {
+        FPersonRuntime& Runtime = Pair.Value;
+        const FTMOPTimedSpeechLine* LatestDueLine = nullptr;
+        while (Runtime.Profile.AutomaticSpeech.IsValidIndex(
+            Runtime.NextAutomaticSpeechIndex))
+        {
+            const FTMOPTimedSpeechLine& Line =
+                Runtime.Profile.AutomaticSpeech[
+                    Runtime.NextAutomaticSpeechIndex];
+            int32 LineSecond = INDEX_NONE;
+            if (!ResolveAutomaticSpeechSecond(
+                Runtime, Line, LineSecond))
+                break;
+            if (LineSecond > CurrentSecond) break;
+            if (LineSecond > PreviousSecond && !Line.Text.IsEmpty())
+                LatestDueLine = &Line;
+            Runtime.LastResolvedAutomaticSpeechSecond = LineSecond;
+            ++Runtime.NextAutomaticSpeechIndex;
+        }
+
+        ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
+        if (LatestDueLine == nullptr || !IsValid(Agent)) continue;
+        USoundBase* VoiceOver = LatestDueLine->VoiceOver.IsNull()
+            ? nullptr : LatestDueLine->VoiceOver.LoadSynchronous();
+        Agent->ShowAutomaticSpeech(
+            LatestDueLine->Text, VoiceOver,
+            LatestDueLine->DisplayDurationOverrideSeconds);
+    }
+}
+
+bool ATMOPPersonRegistryDirector::ResolveAutomaticSpeechSecond(
+    const FPersonRuntime& Runtime,
+    const FTMOPTimedSpeechLine& Line,
+    int32& OutSecond) const
+{
+    OutSecond = INDEX_NONE;
+    switch (Line.TimingMode)
+    {
+        case ETMOPSpeechTimingMode::Absolute:
+            OutSecond = Line.Time.ToSecondsFromMidnight();
+            return true;
+
+        case ETMOPSpeechTimingMode::RelativeToPreviousLine:
+            if (Runtime.LastResolvedAutomaticSpeechSecond == INDEX_NONE)
+                return false;
+            OutSecond = Runtime.LastResolvedAutomaticSpeechSecond +
+                Line.OffsetSeconds;
+            return true;
+
+        case ETMOPSpeechTimingMode::RelativeToSharedEvent:
+        {
+            if (Line.SharedEventId.IsNone() || GetGameInstance() == nullptr)
+                return false;
+            const UTMOPHistoricalEventSubsystem* Events =
+                GetGameInstance()->GetSubsystem<
+                    UTMOPHistoricalEventSubsystem>();
+            FTMOPHistoricalEventRuntime EventRuntime;
+            if (!IsValid(Events) ||
+                !Events->TryGetEventRuntime(
+                    Line.SharedEventId, EventRuntime) ||
+                !EventRuntime.bHasResolvedTime)
+                return false;
+            OutSecond =
+                EventRuntime.ResolvedTime.ToSecondsFromMidnight() +
+                Line.OffsetSeconds;
+            return true;
+        }
+    }
+    return false;
 }
 
 void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
@@ -908,6 +987,30 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
             Row->Timeline[0].Action != ETMOPPersonTimelineAction::InitialPlacement &&
             Row->Timeline[0].Action != ETMOPPersonTimelineAction::Spawn)
             OutErrors.Add(Prefix + TEXT(" Timeline[0] must be InitialPlacement or Spawn."));
+        TSet<FName> SpeechLineIds;
+        for (int32 Index = 0; Index < Row->AutomaticSpeech.Num(); ++Index)
+        {
+            const FTMOPTimedSpeechLine& Line = Row->AutomaticSpeech[Index];
+            if (Line.LineId.IsNone() || SpeechLineIds.Contains(Line.LineId))
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" has missing/duplicate LineId at AutomaticSpeech[%d]."),
+                    Index));
+            SpeechLineIds.Add(Line.LineId);
+            if (Line.Text.IsEmpty())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" AutomaticSpeech[%d] has no Spoken Text."), Index));
+            if (Line.TimingMode ==
+                    ETMOPSpeechTimingMode::RelativeToSharedEvent &&
+                Line.SharedEventId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" AutomaticSpeech[%d] is relative but has no Shared Event ID."),
+                    Index));
+            if (Line.TimingMode ==
+                    ETMOPSpeechTimingMode::RelativeToPreviousLine &&
+                Index == 0)
+                OutErrors.Add(Prefix + TEXT(
+                    " AutomaticSpeech[0] cannot be Relative to Previous Line."));
+        }
         if (!HasValidGroupTable() && !Row->SocialGroupId.IsNone() &&
             Row->GroupLeaderEntityId.IsNone())
             OutErrors.Add(Prefix + TEXT(" belongs to a group but has no GroupLeaderEntityId."));

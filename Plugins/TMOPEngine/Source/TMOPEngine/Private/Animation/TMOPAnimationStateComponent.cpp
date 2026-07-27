@@ -28,6 +28,9 @@ void UTMOPAnimationStateComponent::UpdateFromOwner()
         return;
     }
     bIsDeadOnGround = Agent->LifeState == ETMOPAgentLifeState::Dead;
+    SocialLookYaw = Agent->SocialLookYaw;
+    SocialLookPitch = Agent->SocialLookPitch;
+    SocialLookAlpha = Agent->SocialLookAlpha;
     if (bIsDeadOnGround) { Posture = ETMOPAnimPosture::Grounded; return; }
     switch (Agent->ActivityState)
     {

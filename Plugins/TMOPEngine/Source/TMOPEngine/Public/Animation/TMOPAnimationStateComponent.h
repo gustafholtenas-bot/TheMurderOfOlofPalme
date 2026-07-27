@@ -41,6 +41,16 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation")
     bool bIsDeadOnGround = false;
 
+    /** Procedural social-look values for the Animation Blueprint. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Social")
+    float SocialLookYaw = 0.0f;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Social")
+    float SocialLookPitch = 0.0f;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Social")
+    float SocialLookAlpha = 0.0f;
+
     UPROPERTY(BlueprintAssignable, Category="TMOP|Animation|Events")
     FTMOPAnimReactionSignature OnReactionTriggered;
 

@@ -8,6 +8,7 @@
 #include "Inventory/TMOPInventoryInputComponent.h"
 #include "Items/TMOPPlayerItemUseComponent.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
+#include "Time/TMOPTime.h"
 #include "TMOPPlayerCharacter.generated.h"
 
 class UCameraComponent;
@@ -20,6 +21,8 @@ class UTMOPQuickInventoryWidget;
 class UTMOPPauseMenuWidget;
 class ATMOPWorldItem;
 class UTMOPInteractionPromptWidget;
+class UTMOPDialogWidget;
+class ATMOPHistoricalAgent;
 class UTMOPVehicleTakeoverComponent;
 class UTMOPPlayerVehicleDrivingComponent;
 class UTMOPPlayerVehicleSessionComponent;
@@ -98,6 +101,27 @@ public:
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Interaction")
     TObjectPtr<UTMOPInteractionPromptWidget> InteractionPromptWidget;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Dialog")
+    TSubclassOf<UTMOPDialogWidget> DialogWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Dialog")
+    bool bCreateDialogWidget = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Dialog")
+    TObjectPtr<UTMOPDialogWidget> DialogWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Dialog")
+    bool bDialogOpen = false;
+
+    /** BeforeShot is used before this time; AfterShot is used at and after it. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Dialog")
+    FTMOPTime DialogShotThreshold = FTMOPTime(23, 21, 30);
+
+    /** Dialogue closes automatically if either participant moves too far away. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Dialog",
+        meta=(ClampMin="100.0", Units="cm"))
+    float DialogMaximumDistanceCm = 450.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
@@ -256,6 +280,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
     void TogglePauseMenu();
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Dialog")
+    bool OpenPersonDialog(ATMOPHistoricalAgent* HistoricalAgent);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Dialog")
+    void ClosePersonDialog();
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|Inventory")
     bool DropEquippedItem();
 
@@ -296,4 +326,5 @@ private:
     bool bClockWasRunningBeforePause = false;
     bool bDropFallbackHeld = false;
     bool bInteractFallbackHeld = false;
+    TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
 };

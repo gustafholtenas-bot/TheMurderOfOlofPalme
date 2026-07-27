@@ -622,6 +622,7 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
     General->bFollowGroupLeaderSchedule =
         WorkingRow.bFollowGroupLeaderSchedule;
     General->Dialog = WorkingRow.Dialog;
+    General->AutomaticSpeech = WorkingRow.AutomaticSpeech;
     General->Notes = WorkingRow.Notes;
     GeneralDetailsView->SetStructureData(GeneralStructData);
 }
@@ -692,6 +693,7 @@ void STMOPPeopleEditor::CommitPersonDetailEdits()
         WorkingRow.bFollowGroupLeaderSchedule =
             General->bFollowGroupLeaderSchedule;
         WorkingRow.Dialog = General->Dialog;
+        WorkingRow.AutomaticSpeech = General->AutomaticSpeech;
         WorkingRow.Notes = General->Notes;
     }
 }

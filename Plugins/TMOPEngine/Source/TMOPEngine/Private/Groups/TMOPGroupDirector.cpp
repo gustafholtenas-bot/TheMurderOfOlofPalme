@@ -2,6 +2,7 @@
 
 #include "AIController.h"
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Animation/TMOPAnimationStateComponent.h"
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 
@@ -25,6 +26,7 @@ void ATMOPGroupDirector::Tick(const float DeltaSeconds)
         if (Group.State == ETMOPGroupState::WaitingForMembers) RefreshMembers(Group);
         if (Group.State == ETMOPGroupState::Conversing) UpdateConversation(Group, DeltaSeconds);
         else if (Group.State == ETMOPGroupState::Moving) UpdateMovement(Group);
+        if (bEnableSocialPresentation) UpdateSocialPresentation(Group, DeltaSeconds);
     }
 }
 
@@ -271,6 +273,21 @@ bool ATMOPGroupDirector::EndConversation(const FName GroupId)
     return true;
 }
 
+bool ATMOPGroupDirector::FocusAgentOnActor(const FName AgentEntityId,
+    AActor* Target, const float DurationSeconds, const bool bTalking)
+{
+    ATMOPHistoricalAgent* Agent = FindAgent(AgentEntityId);
+    if (!IsValid(Agent) || !IsValid(Target)) return false;
+    Agent->SetSocialFocus(Target, DurationSeconds, bTalking);
+    if (!Agent->IsDialogueFocused() && Agent->GetVelocity().Size2D() < 10.0f)
+    {
+        const FVector Delta = Target->GetActorLocation() - Agent->GetActorLocation();
+        if (!Delta.IsNearlyZero())
+            Agent->SetActorRotation(FRotator(0.0f, Delta.Rotation().Yaw, 0.0f));
+    }
+    return true;
+}
+
 bool ATMOPGroupDirector::MoveGroupToLocation(const FName GroupId,
     const FVector TargetLocation, const float AcceptanceRadius)
 {
@@ -337,6 +354,179 @@ void ATMOPGroupDirector::UpdateConversation(FRuntimeGroup& Group, const float De
     if (Group.bConversationHasNoAutomaticEnd) return;
     Group.RemainingConversationSeconds -= DeltaSeconds;
     if (Group.RemainingConversationSeconds <= 0.0f) EndConversation(Group.Definition.GroupId);
+}
+
+void ATMOPGroupDirector::UpdateSocialPresentation(
+    FRuntimeGroup& Group, const float DeltaSeconds)
+{
+    Group.Members.RemoveAll([](const TWeakObjectPtr<ATMOPHistoricalAgent>& Member)
+        { return !Member.IsValid(); });
+    if (Group.Members.Num() < 2 ||
+        !IsGroupCloseEnoughForSocialPresentation(Group)) return;
+
+    Group.SocialElapsedSeconds += DeltaSeconds;
+    if (Group.NextSpeakerChangeSeconds <= Group.SocialElapsedSeconds)
+        UpdateSocialSpeaker(Group);
+
+    const bool bWaiting = IsGroupWaiting(Group);
+    const FVector Center = GetGroupCenter(Group);
+    if (bWaiting && bArrangeWaitingGroupsInCircle)
+        ArrangeWaitingCircle(Group, Center);
+    else
+        Group.bWaitingCircleInitialized = false;
+
+    for (int32 Index = 0; Index < Group.Members.Num(); ++Index)
+    {
+        ATMOPHistoricalAgent* Agent = Group.Members[Index].Get();
+        if (!IsValid(Agent)) continue;
+        if (Agent->IsDialogueFocused()) continue;
+        ATMOPHistoricalAgent* Partner =
+            Group.Members[(Index + 1 + FMath::Max(0, Group.ActiveSpeakerIndex))
+                % Group.Members.Num()].Get();
+        if (!IsValid(Partner) || Partner == Agent)
+            Partner = Group.Members[(Index + 1) % Group.Members.Num()].Get();
+        if (IsValid(Partner))
+            Agent->SetSocialFocus(Partner,
+                FMath::Max(0.5f, Group.NextSpeakerChangeSeconds -
+                    Group.SocialElapsedSeconds + 0.25f),
+                Index == Group.ActiveSpeakerIndex);
+
+        if (bWaiting)
+        {
+            FVector TowardCenter = Center - Agent->GetActorLocation();
+            TowardCenter.Z = 0.0f;
+            if (!TowardCenter.IsNearlyZero())
+            {
+                const FRotator Desired(0.0f, TowardCenter.Rotation().Yaw, 0.0f);
+                Agent->SetActorRotation(FMath::RInterpTo(
+                    Agent->GetActorRotation(), Desired, DeltaSeconds,
+                    SocialFacingInterpolationSpeed));
+            }
+        }
+    }
+}
+
+void ATMOPGroupDirector::UpdateSocialSpeaker(FRuntimeGroup& Group)
+{
+    if (Group.Members.IsEmpty()) return;
+    const int32 PreviousSpeaker = Group.ActiveSpeakerIndex;
+    const uint32 StableHash =
+        GetTypeHash(Group.Definition.GroupId) +
+        static_cast<uint32>(Group.SocialElapsedSeconds * 10.0f) * 2654435761u;
+    FRandomStream Random(static_cast<int32>(StableHash));
+    Group.ActiveSpeakerIndex = Random.RandRange(0, Group.Members.Num() - 1);
+    if (Group.Members.Num() > 1 &&
+        Group.ActiveSpeakerIndex == PreviousSpeaker)
+        Group.ActiveSpeakerIndex =
+            (Group.ActiveSpeakerIndex + 1) % Group.Members.Num();
+    const float Duration = Random.FRandRange(
+        FMath::Max(1.0f, MinimumSpeakerSeconds),
+        FMath::Max(MinimumSpeakerSeconds, MaximumSpeakerSeconds));
+    Group.NextSpeakerChangeSeconds = Group.SocialElapsedSeconds + Duration;
+
+    for (int32 Index = 0; Index < Group.Members.Num(); ++Index)
+        if (ATMOPHistoricalAgent* Agent = Group.Members[Index].Get())
+        {
+            if (Agent->IsDialogueFocused()) continue;
+            if (UTMOPAnimationStateComponent* Animation =
+                Agent->FindComponentByClass<UTMOPAnimationStateComponent>())
+            {
+                if (Index == Group.ActiveSpeakerIndex)
+                {
+                    if (Animation->Overlay == ETMOPAnimOverlay::None ||
+                        Animation->Overlay == ETMOPAnimOverlay::Talking)
+                        Animation->SetOverlay(ETMOPAnimOverlay::Talking);
+                }
+                else if (Animation->Overlay == ETMOPAnimOverlay::Talking)
+                    Animation->SetOverlay(ETMOPAnimOverlay::None);
+            }
+        }
+}
+
+bool ATMOPGroupDirector::IsGroupCloseEnoughForSocialPresentation(
+    const FRuntimeGroup& Group) const
+{
+    const FVector Center = GetGroupCenter(Group);
+    const float MaximumSquared = FMath::Square(MaximumSocialGroupDistanceCm);
+    for (const TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group.Members)
+        if (const ATMOPHistoricalAgent* Agent = Member.Get())
+            if (FVector::DistSquared2D(Agent->GetActorLocation(), Center) >
+                MaximumSquared) return false;
+    return true;
+}
+
+bool ATMOPGroupDirector::IsGroupWaiting(const FRuntimeGroup& Group) const
+{
+    if (Group.State == ETMOPGroupState::Moving ||
+        Group.State == ETMOPGroupState::WaitingForMembers ||
+        Group.State == ETMOPGroupState::Dissolved) return false;
+    if (Group.bWaitingCircleInitialized) return true;
+    for (const TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group.Members)
+    {
+        const ATMOPHistoricalAgent* Agent = Member.Get();
+        if (!IsValid(Agent) || Agent->GetVelocity().Size2D() > 20.0f)
+            return false;
+        if (Agent->ActivityState != ETMOPAgentActivityState::Standing &&
+            Agent->ActivityState != ETMOPAgentActivityState::Interacting &&
+            Agent->ActivityState != ETMOPAgentActivityState::Idle)
+            return false;
+    }
+    return true;
+}
+
+FVector ATMOPGroupDirector::GetGroupCenter(const FRuntimeGroup& Group) const
+{
+    FVector Center = FVector::ZeroVector;
+    int32 Count = 0;
+    for (const TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group.Members)
+        if (const ATMOPHistoricalAgent* Agent = Member.Get())
+        {
+            Center += Agent->GetActorLocation();
+            ++Count;
+        }
+    return Count > 0 ? Center / static_cast<float>(Count) : FVector::ZeroVector;
+}
+
+void ATMOPGroupDirector::ArrangeWaitingCircle(
+    FRuntimeGroup& Group, const FVector& Center)
+{
+    const int32 MemberCount = Group.Members.Num();
+    if (MemberCount < 2) return;
+    const float Radius = FMath::Max(
+        MinimumConversationCircleRadiusCm,
+        Group.Definition.FormationSpacing * MemberCount / (2.0f * PI));
+    bool bAllPlaced = true;
+    for (int32 Index = 0; Index < MemberCount; ++Index)
+    {
+        ATMOPHistoricalAgent* Agent = Group.Members[Index].Get();
+        AAIController* Controller =
+            IsValid(Agent) ? Cast<AAIController>(Agent->GetController()) : nullptr;
+        if (!IsValid(Agent) || Controller == nullptr) continue;
+        if (Agent->IsDialogueFocused())
+        {
+            Controller->StopMovement();
+            continue;
+        }
+        const float Angle = 2.0f * PI * Index / MemberCount;
+        const FVector Desired = Center +
+            FVector(FMath::Cos(Angle), FMath::Sin(Angle), 0.0f) * Radius;
+        if (FVector::DistSquared2D(Agent->GetActorLocation(), Desired) >
+            FMath::Square(35.0f))
+        {
+            bAllPlaced = false;
+            Agent->SetActivityState(ETMOPAgentActivityState::Walking);
+            Controller->MoveToLocation(Desired, 28.0f, true, true, false, true);
+        }
+        else if (Agent->ActivityState == ETMOPAgentActivityState::Walking)
+        {
+            Controller->StopMovement();
+            Agent->SetActivityState(
+                Group.State == ETMOPGroupState::Conversing
+                ? ETMOPAgentActivityState::Interacting
+                : ETMOPAgentActivityState::Standing);
+        }
+    }
+    Group.bWaitingCircleInitialized = !bAllPlaced;
 }
 
 void ATMOPGroupDirector::UpdateMovement(FRuntimeGroup& Group)

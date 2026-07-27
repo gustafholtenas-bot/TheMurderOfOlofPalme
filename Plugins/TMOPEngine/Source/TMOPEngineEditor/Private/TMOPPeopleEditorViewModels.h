@@ -152,6 +152,10 @@ struct FTMOPPersonGeneralEditorData
     UPROPERTY(EditAnywhere, Category="Dialog")
     FTMOPPersonDialog Dialog;
 
+    UPROPERTY(EditAnywhere, Category="Automatic Speech",
+        meta=(TitleProperty="LineId"))
+    TArray<FTMOPTimedSpeechLine> AutomaticSpeech;
+
     UPROPERTY(EditAnywhere, Category="Notes", meta=(MultiLine="true"))
     FString Notes;
 };
