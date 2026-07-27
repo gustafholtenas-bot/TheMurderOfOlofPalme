@@ -1,0 +1,413 @@
+{
+  "format": "TMOP_FINDINGS_V1",
+  "source": "Fynd.kmz",
+  "included_rule": "Point placemarks within 5 km of murder site; informational marker excluded",
+  "coordinate_calibration": {
+    "murder_site": {
+      "latitude": 59.336667,
+      "longitude": 18.062778,
+      "unreal_cm": {
+        "x": 1344.566,
+        "y": -1362.055
+      }
+    },
+    "grand_entrance": {
+      "latitude": 59.3391472222,
+      "longitude": 18.0598666667,
+      "unreal_cm": {
+        "x": -14825.888,
+        "y": -29439.123
+      }
+    },
+    "method": "2D similarity transform; ground Z resolved by trace in Unreal"
+  },
+  "findings": [
+    {
+      "id": "FYND_BLA_TACKJACKA_ANORALP",
+      "name": "Blå täckjacka ANORALP",
+      "lat": 59.33793459364766,
+      "lon": 18.05933814137354,
+      "time": "22:30:00",
+      "basis": "KMZ observation window; item location/finding date 1986-03-03",
+      "scale": [
+        0.55,
+        0.18,
+        0.7
+      ],
+      "color": [
+        0.08,
+        0.22,
+        0.65,
+        1
+      ],
+      "approx": true,
+      "source": "F-9768; Adolf Fredriks kyrkogård",
+      "unreal": {
+        "x": -1483.87,
+        "y": -25455.968,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_STALBAGADE_GLASOGON_OMRADE",
+      "name": "Stålbågade glasögon – områdesmarkör",
+      "lat": 59.3336389,
+      "lon": 18.0911694,
+      "time": "23:00:00",
+      "basis": "placement time unknown; present from scenario start",
+      "scale": [
+        0.16,
+        0.05,
+        0.05
+      ],
+      "color": [
+        0.55,
+        0.55,
+        0.58,
+        1
+      ],
+      "approx": true,
+      "source": "F-1203-A; KMZ coordinate marked as street/area",
+      "unreal": {
+        "x": -48086.055,
+        "y": 156913.666,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_LJUSBRUNA_LANGBYXOR",
+      "name": "Ljusbruna långbyxor",
+      "lat": 59.33697347913137,
+      "lon": 18.06416301684418,
+      "time": "23:00:00",
+      "basis": "placement time unknown; present from scenario start",
+      "scale": [
+        0.55,
+        0.18,
+        0.05
+      ],
+      "color": [
+        0.48,
+        0.31,
+        0.16,
+        1
+      ],
+      "approx": true,
+      "source": "Fyndlista 7; Tunnelgatan below stairs",
+      "unreal": {
+        "x": -5512.61,
+        "y": 3878.508,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_BLA_TYGMOSSA",
+      "name": "Blå tygmössa med skärm",
+      "lat": 59.33570779115107,
+      "lon": 18.06374588946856,
+      "time": "23:00:00",
+      "basis": "placement time unknown; present from scenario start",
+      "scale": [
+        0.18,
+        0.18,
+        0.12
+      ],
+      "color": [
+        0.06,
+        0.16,
+        0.55,
+        1
+      ],
+      "approx": true,
+      "source": "Fyndlista 7; Sveavägen–Kungsgatan",
+      "unreal": {
+        "x": 8038.38,
+        "y": 8707.831,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_ROD_DAMHOGERSKO",
+      "name": "Röd damhögersko",
+      "lat": 59.33714104341509,
+      "lon": 18.06542727532596,
+      "time": "23:00:00",
+      "basis": "placement time unknown; present from scenario start",
+      "scale": [
+        0.28,
+        0.1,
+        0.1
+      ],
+      "color": [
+        0.65,
+        0.03,
+        0.04,
+        1
+      ],
+      "approx": true,
+      "source": "Fyndlista 7; outside Brunkeberg tunnel",
+      "unreal": {
+        "x": -10673.677,
+        "y": 9274.776,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_TELEFONBLOCKSLAPP",
+      "name": "Handskriven telefonblockslapp",
+      "lat": 59.33613178581658,
+      "lon": 18.06321081353612,
+      "time": "23:00:00",
+      "basis": "placement time unknown; present from scenario start",
+      "scale": [
+        0.16,
+        0.11,
+        0.01
+      ],
+      "color": [
+        0.9,
+        0.84,
+        0.62,
+        1
+      ],
+      "approx": true,
+      "source": "Fyndlista 7; east pavement north of murder site",
+      "unreal": {
+        "x": 5378.224,
+        "y": 3721.287,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_AVBRUTEN_GREN",
+      "name": "Avbruten gren",
+      "lat": 59.33572637869168,
+      "lon": 18.06311996107604,
+      "time": "23:00:00",
+      "basis": "placement time unknown; present from scenario start",
+      "scale": [
+        0.5,
+        0.035,
+        0.035
+      ],
+      "color": [
+        0.25,
+        0.12,
+        0.04,
+        1
+      ],
+      "approx": true,
+      "source": "Fyndlista 7; pavement by metro entrance",
+      "unreal": {
+        "x": 9599.625,
+        "y": 5481.564,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_HALSDUK_MORDPLATS",
+      "name": "Halsduk vid mordplatsen",
+      "lat": 59.33656873120595,
+      "lon": 18.06284571690043,
+      "time": "23:00:00",
+      "basis": "reported found/observed 09:00 next day; present from scenario start",
+      "scale": [
+        0.55,
+        0.12,
+        0.025
+      ],
+      "color": [
+        0.25,
+        0.28,
+        0.32,
+        1
+      ],
+      "approx": true,
+      "source": "KMZ masked witness marker; source description conflicts with marker name",
+      "unreal": {
+        "x": 2117.897,
+        "y": -487.383,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_KLADER_HANDELSHOGSKOLAN",
+      "name": "Kläder i blå sandlåda vid Handelshögskolan",
+      "lat": 59.34164830619163,
+      "lon": 18.05599609543595,
+      "time": "23:00:00",
+      "basis": "found daytime 1986-03-01; placement time unknown",
+      "scale": [
+        0.6,
+        0.35,
+        0.18
+      ],
+      "color": [
+        0.18,
+        0.24,
+        0.38,
+        1
+      ],
+      "approx": true,
+      "source": "Ewa Felicetti account; approximate location",
+      "unreal": {
+        "x": -28529.932,
+        "y": -62417.338,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_STALBAGADE_GLASOGON_SNICKARBACKEN5",
+      "name": "Stålbågade glasögon vid Snickarbacken 5",
+      "lat": 59.33799266144904,
+      "lon": 18.06803557668696,
+      "time": "23:00:00",
+      "basis": "found 1986-02-27, exact time unknown; present from scenario start",
+      "scale": [
+        0.16,
+        0.05,
+        0.05
+      ],
+      "color": [
+        0.55,
+        0.55,
+        0.58,
+        1
+      ],
+      "approx": true,
+      "source": "F-1203-A / E779; submitted 1986-03-06 14:50",
+      "unreal": {
+        "x": -26273.572,
+        "y": 17644.899,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_HANDSKE_KYRKAN",
+      "name": "Grå/grön handske vid kyrkan",
+      "lat": 59.33847118805556,
+      "lon": 18.06433237558363,
+      "time": "23:21:00",
+      "basis": "KMZ/description states approximately 23:21",
+      "scale": [
+        0.24,
+        0.12,
+        0.035
+      ],
+      "color": [
+        0.3,
+        0.38,
+        0.25,
+        1
+      ],
+      "approx": true,
+      "source": "EAF-9717; masked witness",
+      "unreal": {
+        "x": -20644.71,
+        "y": -3454.788,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_HANDSKE_MORDPLATS",
+      "name": "Grå/grön handske intill blodet",
+      "lat": 59.33661253989722,
+      "lon": 18.06282365849203,
+      "time": "23:21:00",
+      "basis": "KMZ/description states approximately 23:21",
+      "scale": [
+        0.24,
+        0.12,
+        0.035
+      ],
+      "color": [
+        0.3,
+        0.38,
+        0.25,
+        1
+      ],
+      "approx": true,
+      "source": "EAF-9717; masked witness",
+      "unreal": {
+        "x": 1750.501,
+        "y": -836.729,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_KULA_1",
+      "name": "Kula – hittad 1986-03-01 06:30",
+      "lat": 59.33609207193925,
+      "lon": 18.0633405948143,
+      "time": "PALME_SHOT_1+0",
+      "basis": "spawn tied to shooting event; discovery time retained in label",
+      "scale": [
+        0.022,
+        0.022,
+        0.022
+      ],
+      "color": [
+        0.72,
+        0.55,
+        0.18,
+        1
+      ],
+      "approx": true,
+      "source": "Fyndlista 7; exact position should follow original sketch",
+      "unreal": {
+        "x": 5405.533,
+        "y": 4586.046,
+        "z": 0
+      }
+    },
+    {
+      "id": "FYND_KULA_2",
+      "name": "Kula – hittad 1986-03-02 12:20",
+      "lat": 59.33603941787158,
+      "lon": 18.06331478409732,
+      "time": "PALME_SHOT_1+1",
+      "basis": "spawn tied to shooting event +1 second; discovery time retained in label",
+      "scale": [
+        0.022,
+        0.022,
+        0.022
+      ],
+      "color": [
+        0.72,
+        0.55,
+        0.18,
+        1
+      ],
+      "approx": true,
+      "source": "Fyndlista 7; exact position should follow original sketch",
+      "unreal": {
+        "x": 5992.826,
+        "y": 4744.726,
+        "z": 0
+      }
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Tomkartong till Smith & Wesson samt walkie-talkie-fodral",
+      "reason": "Huddinge, 12.05 km from murder site"
+    },
+    {
+      "name": "Boende på numera borttagen adress",
+      "reason": "information marker in Huddinge, not a finding"
+    },
+    {
+      "name": "Röd Toyota parkerad nära huset/sjön",
+      "reason": "Långtjärnen, 149.52 km away"
+    },
+    {
+      "name": "Möjlig vapendumpning – hål i isen",
+      "reason": "Långtjärnen, 149.61 km away"
+    },
+    {
+      "name": "Skospår upphörde nära isen",
+      "reason": "Långtjärnen, 149.59 km away"
+    }
+  ]
+}
+

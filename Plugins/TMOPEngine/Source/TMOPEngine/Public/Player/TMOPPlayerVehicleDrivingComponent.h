@@ -88,10 +88,28 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground")
     bool bAlignToGroundNormal = true;
 
-    /** Reject sudden surfaces above the previously accepted road height. */
+    /** Maximum height treated as a driveable low kerb/step. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
         meta=(ClampMin="0.0"))
-    float MaximumGroundRisePerFrameCm = 45.0f;
+    float MaximumStepUpHeightCm = 32.0f;
+
+    /** Maximum vertical adjustment speed while climbing a slope or low kerb. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="1.0"))
+    float StepUpSpeedCmPerSecond = 180.0f;
+
+    /** Probe placement relative to the vehicle collision box. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.1", ClampMax="1.5"))
+    float ProbeExtentScale = 0.85f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.0"))
+    float MinimumProbeLongitudinalOffsetCm = 120.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.0"))
+    float MinimumProbeLateralOffsetCm = 65.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
         meta=(ClampMin="0.0", ClampMax="1.0"))
@@ -147,3 +165,4 @@ private:
     float LastGroundHeightCm = 0.0f;
     TWeakObjectPtr<UTMOPTrafficVehicleMovementComponent> SuspendedTrafficMovement;
 };
+

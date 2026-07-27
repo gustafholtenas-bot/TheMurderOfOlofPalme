@@ -314,8 +314,8 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
         return;
     }
 
-    AAIController* Controller = Cast<AAIController>(GetController());
-    if (!IsValid(Controller))
+    AAIController* AIController = Cast<AAIController>(GetController());
+    if (!IsValid(AIController))
     {
         ResetAutomaticUnstuck(true);
         return;
@@ -334,7 +334,7 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
         if (SideStepReturnSeconds <= 0.0f)
         {
             bReturningFromSideStep = false;
-            ReissueMove(Controller, SavedMoveDestination);
+            ReissueMove(AIController, SavedMoveDestination);
         }
     }
 
@@ -351,7 +351,7 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
         return;
     }
 
-    const FVector ImmediateDestination = Controller->GetImmediateMoveDestination();
+    const FVector ImmediateDestination = AIController->GetImmediateMoveDestination();
     if (!ImmediateDestination.IsNearlyZero())
         SavedMoveDestination = ImmediateDestination;
     if (SavedMoveDestination.IsNearlyZero()) return;
@@ -360,12 +360,12 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
     if (!bRepathAttempted && StationarySeconds >= RepathAfterSeconds)
     {
         bRepathAttempted = true;
-        ReissueMove(Controller, SavedMoveDestination);
+        ReissueMove(AIController, SavedMoveDestination);
     }
     if (!bSideStepAttempted && StationarySeconds >= SideStepAfterSeconds)
     {
         bSideStepAttempted = true;
-        TrySideStep(Controller, SavedMoveDestination);
+        TrySideStep(AIController, SavedMoveDestination);
     }
     if (!bSqueezeActive && StationarySeconds >= SqueezeAfterSeconds)
     {
@@ -377,7 +377,7 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
     {
         bFailsafeAttempted = true;
         if (TryFailsafeAdvance(SavedMoveDestination))
-            ReissueMove(Controller, SavedMoveDestination);
+            ReissueMove(AIController, SavedMoveDestination);
     }
 }
 
@@ -397,18 +397,18 @@ void ATMOPHistoricalAgent::ResetAutomaticUnstuck(const bool bRestoreCapsule)
 }
 
 void ATMOPHistoricalAgent::ReissueMove(
-    AAIController* Controller, const FVector& Destination)
+    AAIController* AIController, const FVector& Destination)
 {
-    if (!IsValid(Controller) || Destination.IsNearlyZero()) return;
-    Controller->MoveToLocation(Destination, 40.0f, true, true, false, true);
+    if (!IsValid(AIController) || Destination.IsNearlyZero()) return;
+    AIController->MoveToLocation(Destination, 40.0f, true, true, false, true);
 }
 
 bool ATMOPHistoricalAgent::TrySideStep(
-    AAIController* Controller, const FVector& Destination)
+    AAIController* AIController, const FVector& Destination)
 {
     UNavigationSystemV1* Navigation =
         UNavigationSystemV1::GetCurrent(GetWorld());
-    if (!IsValid(Controller) || Navigation == nullptr) return false;
+    if (!IsValid(AIController) || Navigation == nullptr) return false;
 
     FVector Forward = Destination - GetActorLocation();
     Forward.Z = 0.0f;
@@ -423,7 +423,7 @@ bool ATMOPHistoricalAgent::TrySideStep(
     if (!Navigation->ProjectPointToNavigation(
         Candidate, Projected, FVector(70.0f, 70.0f, 130.0f))) return false;
 
-    Controller->MoveToLocation(Projected.Location, 30.0f, true, true, false, true);
+    AIController->MoveToLocation(Projected.Location, 30.0f, true, true, false, true);
     bReturningFromSideStep = true;
     SideStepReturnSeconds = 1.15f;
     return true;
@@ -645,3 +645,5 @@ void ATMOPHistoricalAgent::HandleActivityStateChanged(
     const ETMOPAgentActivityState NewActivity)
 {
 }
+
+

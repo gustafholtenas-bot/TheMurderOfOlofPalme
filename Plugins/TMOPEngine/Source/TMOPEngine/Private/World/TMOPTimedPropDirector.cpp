@@ -7,6 +7,7 @@
 #include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Inventory/TMOPItemDefinition.h"
 #include "Items/TMOPWorldItem.h"
+#include "World/TMOPFindingActor.h"
 #include "Time/TMOPClockSubsystem.h"
 
 ATMOPTimedPropDirector::ATMOPTimedPropDirector()
@@ -164,12 +165,28 @@ bool ATMOPTimedPropDirector::ApplyEntry(
         Spawned = GetWorld()->SpawnActor<AActor>(
             Entry.ActorClass, SpawnTransform);
     }
+    else if (Entry.PropKind == ETMOPTimedPropKind::Finding)
+    {
+        ATMOPFindingActor* Finding =
+            GetWorld()->SpawnActorDeferred<ATMOPFindingActor>(
+                ATMOPFindingActor::StaticClass(), SpawnTransform, this, nullptr,
+                ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
+        if (!IsValid(Finding)) return false;
+        Finding->ConfigureFinding(
+            Entry.FindingDisplayName, Entry.EvidenceId,
+            Entry.SourceReference, Entry.SourceTimeLabel,
+            Entry.SourceLatitude, Entry.SourceLongitude,
+            Entry.bLocationApproximate, Entry.StaticMesh.LoadSynchronous(),
+            Entry.FindingScale, Entry.FindingColor);
+        Finding->FinishSpawning(SpawnTransform);
+        Spawned = Finding;
+    }
     else if (Entry.PropKind == ETMOPTimedPropKind::PickupItem)
     {
         if (!IsValid(Entry.ItemDefinition)) return false;
-        const TSubclassOf<ATMOPWorldItem> Class =
-            Entry.WorldItemClass
-            ? Entry.WorldItemClass : ATMOPWorldItem::StaticClass();
+        TSubclassOf<ATMOPWorldItem> Class = Entry.WorldItemClass;
+        if (!Class)
+            Class = ATMOPWorldItem::StaticClass();
         ATMOPWorldItem* Item =
             GetWorld()->SpawnActorDeferred<ATMOPWorldItem>(
                 Class, SpawnTransform, this, nullptr,
@@ -202,6 +219,21 @@ bool ATMOPTimedPropDirector::ResolveSpawnTransform(
         Base = Anchor->GetActorTransform();
     }
     OutTransform = Entry.LocalOffset * Base;
+    if (Entry.bSnapToGround && GetWorld() != nullptr)
+    {
+        FVector Location = OutTransform.GetLocation();
+        FHitResult GroundHit;
+        FCollisionQueryParams Params(
+            SCENE_QUERY_STAT(TMOPTimedPropGround), false, this);
+        const FVector Start = Location + FVector(0.0f, 0.0f, 10000.0f);
+        const FVector End = Location - FVector(0.0f, 0.0f, 10000.0f);
+        if (GetWorld()->LineTraceSingleByChannel(
+            GroundHit, Start, End, ECC_Visibility, Params))
+        {
+            Location.Z = GroundHit.ImpactPoint.Z + Entry.GroundOffsetCm;
+            OutTransform.SetLocation(Location);
+        }
+    }
     return true;
 }
 
@@ -220,3 +252,5 @@ void ATMOPTimedPropDirector::DestroyAllSpawnedInstances()
             Actor->Destroy();
     SpawnedInstances.Reset();
 }
+
+

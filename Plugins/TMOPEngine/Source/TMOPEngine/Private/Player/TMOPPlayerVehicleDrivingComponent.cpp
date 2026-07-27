@@ -104,46 +104,124 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
     FVector DesiredLocation = DrivenVehicle->GetActorLocation() + DeltaLocation;
     if (bFollowGround && GetWorld() != nullptr)
     {
-        TArray<FHitResult> GroundHits;
-        FCollisionQueryParams GroundParams(SCENE_QUERY_STAT(TMOPVehicleGround), false,
-            DrivenVehicle.Get());
-        const FVector TraceStart = DesiredLocation + FVector(0.0f, 0.0f, GroundTraceUpCm);
-        const FVector TraceEnd = DesiredLocation - FVector(0.0f, 0.0f, GroundTraceDownCm);
-        GetWorld()->LineTraceMultiByChannel(GroundHits, TraceStart, TraceEnd,
-            ECC_Visibility, GroundParams);
-        const FHitResult* AcceptedGround = nullptr;
-        for (const FHitResult& Candidate : GroundHits)
+        float RootHalfLength = MinimumProbeLongitudinalOffsetCm;
+        float RootHalfWidth = MinimumProbeLateralOffsetCm;
+        float RootHalfHeight = 0.0f;
+        if (const UBoxComponent* RootBox = Cast<UBoxComponent>(
+            DrivenVehicle->GetRootComponent()))
         {
-            if (Candidate.ImpactNormal.Z < MinimumGroundNormalZ) continue;
-            if (bHasGroundContact && Candidate.ImpactPoint.Z >
-                LastGroundHeightCm + MaximumGroundRisePerFrameCm) continue;
-            AcceptedGround = &Candidate;
-            break;
+            const FVector Extent = RootBox->GetScaledBoxExtent();
+            RootHalfLength = FMath::Max(RootHalfLength, Extent.X * ProbeExtentScale);
+            RootHalfWidth = FMath::Max(RootHalfWidth, Extent.Y * ProbeExtentScale);
+            RootHalfHeight = Extent.Z;
         }
-        if (AcceptedGround != nullptr)
+
+        const FVector Forward = Rotation.Vector().GetSafeNormal2D();
+        const FVector Right = FRotationMatrix(Rotation).GetUnitAxis(EAxis::Y).GetSafeNormal2D();
+        const TArray<FVector> ProbeOffsets = {
+            FVector::ZeroVector,
+            Forward * RootHalfLength,
+            -Forward * RootHalfLength,
+            Right * RootHalfWidth,
+            -Right * RootHalfWidth
+        };
+
+        TArray<FHitResult> AcceptedHits;
+        FCollisionQueryParams GroundParams(
+            SCENE_QUERY_STAT(TMOPVehicleGround), false, DrivenVehicle.Get());
+        GroundParams.AddIgnoredActor(DrivenVehicle.Get());
+
+        for (const FVector& Offset : ProbeOffsets)
         {
-            float RootHalfHeight = 0.0f;
-            if (const UBoxComponent* RootBox = Cast<UBoxComponent>(
-                DrivenVehicle->GetRootComponent()))
-                RootHalfHeight = RootBox->GetScaledBoxExtent().Z;
-            DesiredLocation.Z = AcceptedGround->ImpactPoint.Z + RootHalfHeight +
-                GroundClearanceCm;
-            LastGroundHeightCm = AcceptedGround->ImpactPoint.Z;
-            bHasGroundContact = true;
-            if (bAlignToGroundNormal)
+            TArray<FHitResult> ProbeHits;
+            const FVector ProbePosition = DesiredLocation + Offset;
+            const FVector TraceStart =
+                ProbePosition + FVector(0.0f, 0.0f, GroundTraceUpCm);
+            const FVector TraceEnd =
+                ProbePosition - FVector(0.0f, 0.0f, GroundTraceDownCm);
+            GetWorld()->LineTraceMultiByChannel(
+                ProbeHits, TraceStart, TraceEnd, ECC_Visibility, GroundParams);
+
+            for (const FHitResult& Candidate : ProbeHits)
             {
-                FVector GroundForward = FVector::VectorPlaneProject(
-                    Rotation.Vector(), AcceptedGround->ImpactNormal).GetSafeNormal();
+                if (Candidate.ImpactNormal.Z < MinimumGroundNormalZ) continue;
+                if (bHasGroundContact &&
+                    Candidate.ImpactPoint.Z >
+                        LastGroundHeightCm + MaximumStepUpHeightCm)
+                    continue;
+                AcceptedHits.Add(Candidate);
+                break;
+            }
+        }
+
+        if (!AcceptedHits.IsEmpty())
+        {
+            float TargetGroundHeight = 0.0f;
+            FVector AverageNormal = FVector::ZeroVector;
+            for (const FHitResult& GroundHit : AcceptedHits)
+            {
+                TargetGroundHeight += GroundHit.ImpactPoint.Z;
+                AverageNormal += GroundHit.ImpactNormal;
+            }
+            TargetGroundHeight /= static_cast<float>(AcceptedHits.Num());
+            AverageNormal = AverageNormal.GetSafeNormal();
+
+            if (bHasGroundContact)
+            {
+                const float MaxRiseThisFrame =
+                    StepUpSpeedCmPerSecond * DeltaTime;
+                TargetGroundHeight = FMath::Min(
+                    TargetGroundHeight,
+                    LastGroundHeightCm + MaxRiseThisFrame);
+            }
+
+            DesiredLocation.Z =
+                TargetGroundHeight + RootHalfHeight + GroundClearanceCm;
+            LastGroundHeightCm = TargetGroundHeight;
+            bHasGroundContact = true;
+
+            if (bAlignToGroundNormal && !AverageNormal.IsNearlyZero())
+            {
+                const FVector GroundForward = FVector::VectorPlaneProject(
+                    Forward, AverageNormal).GetSafeNormal();
                 if (!GroundForward.IsNearlyZero())
                     Rotation = FRotationMatrix::MakeFromXZ(
-                        GroundForward, AcceptedGround->ImpactNormal).Rotator();
+                        GroundForward, AverageNormal).Rotator();
             }
         }
     }
+
     FHitResult Hit;
-    DrivenVehicle->SetActorLocationAndRotation(DesiredLocation,
-        Rotation, bSweepMovement, bSweepMovement ? &Hit : nullptr, ETeleportType::None);
-    if (bSweepMovement && Hit.bBlockingHit) CurrentSpeedCmPerSecond = 0.0f;
+    const bool bMoved = DrivenVehicle->SetActorLocationAndRotation(
+        DesiredLocation, Rotation, bSweepMovement,
+        bSweepMovement ? &Hit : nullptr, ETeleportType::None);
+    if (bSweepMovement && (!bMoved || Hit.bBlockingHit))
+    {
+        // A low kerb may touch the body before every ground probe has reached
+        // its top. Try a bounded vertical step, then keep normal sweeping.
+        const float ObstacleHeight =
+            Hit.ImpactPoint.Z - DrivenVehicle->GetActorLocation().Z;
+        if (ObstacleHeight <= MaximumStepUpHeightCm)
+        {
+            const FVector StepLocation = DesiredLocation +
+                FVector(0.0f, 0.0f, MaximumStepUpHeightCm);
+            FHitResult StepHit;
+            if (DrivenVehicle->SetActorLocationAndRotation(
+                StepLocation, Rotation, true, &StepHit, ETeleportType::None) &&
+                !StepHit.bBlockingHit)
+            {
+                LastGroundHeightCm += MaximumStepUpHeightCm;
+            }
+            else
+            {
+                CurrentSpeedCmPerSecond = 0.0f;
+            }
+        }
+        else
+        {
+            CurrentSpeedCmPerSecond = 0.0f;
+        }
+    }
 
     const float WheelRollDegrees = FMath::RadiansToDegrees(
         CurrentSpeedCmPerSecond * DeltaTime / FMath::Max(1.0f, VisualWheelRadiusCm));
@@ -179,3 +257,4 @@ bool UTMOPPlayerVehicleDrivingComponent::IsDriving() const
 {
     return IsValid(DrivenVehicle.Get());
 }
+

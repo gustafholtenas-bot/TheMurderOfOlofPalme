@@ -70,78 +70,98 @@ void ATMOPPlayerCharacter::BeginPlay()
     Super::BeginPlay();
     GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
     GetCharacterMovement()->MaxWalkSpeedCrouched = CrouchSpeed;
-    if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+    InitializePlayerInterface();
+}
+
+void ATMOPPlayerCharacter::PossessedBy(AController* NewController)
+{
+    Super::PossessedBy(NewController);
+    InitializePlayerInterface();
+}
+
+void ATMOPPlayerCharacter::OnRep_Controller()
+{
+    Super::OnRep_Controller();
+    InitializePlayerInterface();
+}
+
+void ATMOPPlayerCharacter::InitializePlayerInterface()
+{
+    APlayerController* PlayerController = Cast<APlayerController>(Controller);
+    if (!IsValid(PlayerController)) return;
+
+    if (!bInputMappingContextAdded)
+    {
         if (ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer())
             if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
                 LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
                 if (IsValid(DefaultMappingContext.Get()))
+                {
                     Subsystem->AddMappingContext(DefaultMappingContext.Get(), 0);
+                    bInputMappingContextAdded = true;
+                }
+    }
 
-    if (bCreateQuickInventoryWidget)
+    if (bCreateQuickInventoryWidget && !IsValid(QuickInventoryWidget.Get()))
     {
-        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        TSubclassOf<UTMOPQuickInventoryWidget> WidgetClass = QuickInventoryWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPQuickInventoryWidget::StaticClass();
+        QuickInventoryWidget = CreateWidget<UTMOPQuickInventoryWidget>(
+            PlayerController, WidgetClass);
+        if (IsValid(QuickInventoryWidget.Get()))
         {
-            TSubclassOf<UTMOPQuickInventoryWidget> WidgetClass = QuickInventoryWidgetClass;
-            if (!WidgetClass) WidgetClass = UTMOPQuickInventoryWidget::StaticClass();
-            QuickInventoryWidget = CreateWidget<UTMOPQuickInventoryWidget>(
-                PlayerController, WidgetClass);
-            if (IsValid(QuickInventoryWidget.Get()))
-            {
-                QuickInventoryWidget->InitializeInventoryInput(InventoryInput);
-                QuickInventoryWidget->AddToViewport(50);
-                QuickInventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
-            }
+            QuickInventoryWidget->InitializeInventoryInput(InventoryInput);
+            QuickInventoryWidget->AddToViewport(50);
+            QuickInventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
         }
     }
 
-    if (bCreatePauseMenuWidget)
+    if (bCreatePauseMenuWidget && !IsValid(PauseMenuWidget.Get()))
     {
-        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        TSubclassOf<UTMOPPauseMenuWidget> WidgetClass = PauseMenuWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPPauseMenuWidget::StaticClass();
+        PauseMenuWidget = CreateWidget<UTMOPPauseMenuWidget>(
+            PlayerController, WidgetClass);
+        if (IsValid(PauseMenuWidget.Get()))
         {
-            TSubclassOf<UTMOPPauseMenuWidget> WidgetClass = PauseMenuWidgetClass;
-            if (!WidgetClass) WidgetClass = UTMOPPauseMenuWidget::StaticClass();
-            PauseMenuWidget = CreateWidget<UTMOPPauseMenuWidget>(PlayerController, WidgetClass);
-            if (IsValid(PauseMenuWidget.Get()))
-            {
-                PauseMenuWidget->InitializePauseMenu(PlayerController, this);
-                PauseMenuWidget->AddToViewport(100);
-                PauseMenuWidget->SetMenuVisible(false);
-            }
+            PauseMenuWidget->InitializePauseMenu(PlayerController, this);
+            PauseMenuWidget->AddToViewport(100);
+            PauseMenuWidget->SetMenuVisible(false);
         }
     }
 
-    if (bCreateInteractionPromptWidget)
+    if (bCreateInteractionPromptWidget && !IsValid(InteractionPromptWidget.Get()))
     {
-        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        TSubclassOf<UTMOPInteractionPromptWidget> WidgetClass =
+            InteractionPromptWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPInteractionPromptWidget::StaticClass();
+        InteractionPromptWidget = CreateWidget<UTMOPInteractionPromptWidget>(
+            PlayerController, WidgetClass);
+        if (IsValid(InteractionPromptWidget.Get()))
         {
-            TSubclassOf<UTMOPInteractionPromptWidget> WidgetClass = InteractionPromptWidgetClass;
-            if (!WidgetClass) WidgetClass = UTMOPInteractionPromptWidget::StaticClass();
-            InteractionPromptWidget = CreateWidget<UTMOPInteractionPromptWidget>(
-                PlayerController, WidgetClass);
-            if (IsValid(InteractionPromptWidget.Get()))
-            {
-                InteractionPromptWidget->AddToViewport(40);
-                InteractionPromptWidget->SetPromptText(FText::GetEmpty());
-            }
+            InteractionPromptWidget->AddToViewport(40);
+            InteractionPromptWidget->SetPromptText(FText::GetEmpty());
         }
     }
 
-    if (bCreateDialogWidget)
+    if (bCreateDialogWidget && !IsValid(DialogWidget.Get()))
     {
-        if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+        TSubclassOf<UTMOPDialogWidget> WidgetClass = DialogWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPDialogWidget::StaticClass();
+        DialogWidget = CreateWidget<UTMOPDialogWidget>(
+            PlayerController, WidgetClass);
+        if (IsValid(DialogWidget.Get()))
         {
-            TSubclassOf<UTMOPDialogWidget> WidgetClass = DialogWidgetClass;
-            if (!WidgetClass) WidgetClass = UTMOPDialogWidget::StaticClass();
-            DialogWidget = CreateWidget<UTMOPDialogWidget>(
-                PlayerController, WidgetClass);
-            if (IsValid(DialogWidget.Get()))
-            {
-                DialogWidget->InitializeDialog(this);
-                DialogWidget->AddToViewport(80);
-                DialogWidget->HideDialog();
-            }
+            DialogWidget->InitializeDialog(this);
+            DialogWidget->AddToViewport(80);
+            DialogWidget->HideDialog();
         }
     }
+
+    bPlayerInterfaceInitialized =
+        bInputMappingContextAdded &&
+        (!bCreateQuickInventoryWidget || IsValid(QuickInventoryWidget.Get())) &&
+        (!bCreatePauseMenuWidget || IsValid(PauseMenuWidget.Get()));
 }
 
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -493,6 +513,7 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if (!bPlayerInterfaceInitialized) InitializePlayerInterface();
     if (bDialogOpen)
     {
         const ATMOPHistoricalAgent* Agent = ActiveDialogAgent.Get();
@@ -512,7 +533,9 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     if (bUseDirectQuickInventoryKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
-        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(QuickInventoryFallbackKey);
+        const bool bKeyHeld = IsValid(PC) &&
+            (PC->IsInputKeyDown(QuickInventoryFallbackKey) ||
+             PC->IsInputKeyDown(QuickInventoryGamepadFallbackKey));
         if (bKeyHeld != bQuickInventoryFallbackHeld)
         {
             bQuickInventoryFallbackHeld = bKeyHeld;
@@ -523,7 +546,9 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     if (bUseDirectPauseKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
-        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(PauseMenuFallbackKey);
+        const bool bKeyHeld = IsValid(PC) &&
+            (PC->IsInputKeyDown(PauseMenuFallbackKey) ||
+             PC->IsInputKeyDown(PauseMenuGamepadFallbackKey));
         if (bKeyHeld != bPauseFallbackHeld)
         {
             bPauseFallbackHeld = bKeyHeld;
@@ -753,3 +778,4 @@ FText ATMOPPlayerCharacter::GetInteractKeyDisplayText() const
         ? InteractFallbackKey.GetDisplayName(false)
         : FText::FromString(TEXT("E"));
 }
+

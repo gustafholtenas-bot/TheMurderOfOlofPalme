@@ -9,6 +9,7 @@
 class UStaticMesh;
 class UTMOPItemDefinition;
 class ATMOPWorldItem;
+class ATMOPFindingActor;
 
 UENUM(BlueprintType)
 enum class ETMOPTimedPropAction : uint8
@@ -22,7 +23,8 @@ enum class ETMOPTimedPropKind : uint8
 {
     StaticMesh UMETA(DisplayName="Static Mesh (Not Pickup)"),
     ActorClass UMETA(DisplayName="Actor Class"),
-    PickupItem UMETA(DisplayName="Pickup Item")
+    PickupItem UMETA(DisplayName="Pickup Item"),
+    Finding UMETA(DisplayName="Historical Finding")
 };
 
 UENUM(BlueprintType)
@@ -68,8 +70,40 @@ struct TMOPENGINE_API FTMOPTimedPropEntry
     ETMOPTimedPropKind PropKind = ETMOPTimedPropKind::StaticMesh;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Spawn",
-        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::StaticMesh"))
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && (PropKind==ETMOPTimedPropKind::StaticMesh || PropKind==ETMOPTimedPropKind::Finding)"))
     TSoftObjectPtr<UStaticMesh> StaticMesh;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    FText FindingDisplayName;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    FString EvidenceId;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    FString SourceTimeLabel;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    double SourceLatitude = 0.0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    double SourceLongitude = 0.0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    bool bLocationApproximate = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    FVector FindingScale = FVector(0.25f, 0.25f, 0.12f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
+    FLinearColor FindingColor = FLinearColor(0.8f, 0.65f, 0.15f, 1.0f);
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Spawn",
         meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::ActorClass"))
@@ -101,6 +135,14 @@ struct TMOPENGINE_API FTMOPTimedPropEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Placement",
         meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn"))
     FTransform LocalOffset = FTransform::Identity;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Placement",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn"))
+    bool bSnapToGround = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Placement",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && bSnapToGround"))
+    float GroundOffsetCm = 3.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Static Mesh",
         meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::StaticMesh"))
@@ -153,3 +195,4 @@ private:
     int32 LastEvaluatedSecond = INDEX_NONE;
     TMap<FName, TWeakObjectPtr<AActor>> SpawnedInstances;
 };
+

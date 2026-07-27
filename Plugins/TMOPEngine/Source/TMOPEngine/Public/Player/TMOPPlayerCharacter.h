@@ -35,6 +35,8 @@ class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
 public:
     ATMOPPlayerCharacter();
     virtual void BeginPlay() override;
+    virtual void PossessedBy(AController* NewController) override;
+    virtual void OnRep_Controller() override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -193,6 +195,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
     FKey PauseMenuFallbackKey = EKeys::Enter;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Pause")
+    FKey PauseMenuGamepadFallbackKey = EKeys::Gamepad_Special_Right;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> QuickInventoryAction;
 
@@ -234,6 +239,9 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
     FKey QuickInventoryFallbackKey = EKeys::Tab;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
+    FKey QuickInventoryGamepadFallbackKey = EKeys::Gamepad_LeftShoulder;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Inventory")
     FKey QuickInventoryPreviousKey = EKeys::Q;
@@ -290,6 +298,7 @@ public:
     bool DropEquippedItem();
 
 private:
+    void InitializePlayerInterface();
     void InputMove(const FInputActionValue& Value);
     void InputMoveCompleted();
     void InputLook(const FInputActionValue& Value);
@@ -321,6 +330,8 @@ private:
     void SetSprinting(bool bEnabled, bool bExtraSprint = false);
 
     bool bRightShoulderCamera = true;
+    bool bInputMappingContextAdded = false;
+    bool bPlayerInterfaceInitialized = false;
     bool bQuickInventoryFallbackHeld = false;
     bool bPauseFallbackHeld = false;
     bool bClockWasRunningBeforePause = false;
@@ -328,3 +339,4 @@ private:
     bool bInteractFallbackHeld = false;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
 };
+
