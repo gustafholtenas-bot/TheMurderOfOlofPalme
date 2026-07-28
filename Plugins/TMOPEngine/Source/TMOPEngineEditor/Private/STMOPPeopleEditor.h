@@ -5,6 +5,7 @@
 #include "TMOPPeopleEditorViewModels.h"
 #include "Styling/SlateBrush.h"
 #include "Widgets/SCompoundWidget.h"
+#include "Widgets/Input/SCheckBox.h"
 #include "Widgets/Views/SListView.h"
 
 class IStructureDetailsView;
@@ -27,6 +28,13 @@ private:
     using FPersonItem = TSharedPtr<FName>;
     using FTimelineItem = TSharedPtr<int32>;
     using FReferenceItem = TSharedPtr<FString>;
+
+    enum class EPeopleCategoryFilter : uint8
+    {
+        All,
+        Police,
+        Suspect
+    };
 
     enum class EReferenceField : uint8
     {
@@ -64,6 +72,11 @@ private:
     void HandleTimelineSelectionChanged(
         FTimelineItem Item, ESelectInfo::Type SelectInfo);
     void HandlePersonSearchChanged(const FText& SearchText);
+    ECheckBoxState GetPeopleFilterCheckState(
+        EPeopleCategoryFilter Filter) const;
+    void HandlePeopleFilterChanged(
+        ECheckBoxState NewState,
+        EPeopleCategoryFilter Filter);
     void RefreshReferenceOptions();
     TSharedRef<SWidget> GenerateReferenceOption(FReferenceItem Item) const;
     void HandleReferenceSelected(
@@ -98,6 +111,8 @@ private:
     FTMOPPersonProfileRow WorkingRow;
     int32 SelectedTimelineIndex = INDEX_NONE;
     FString PersonSearch;
+    EPeopleCategoryFilter PeopleCategoryFilter =
+        EPeopleCategoryFilter::All;
 
     TArray<FPersonItem> PersonItems;
     TArray<FTimelineItem> TimelineItems;
@@ -122,3 +137,4 @@ private:
     TSharedPtr<SSearchableComboBox> SeatReferenceCombo;
     TSharedPtr<SSearchableComboBox> EventReferenceCombo;
 };
+

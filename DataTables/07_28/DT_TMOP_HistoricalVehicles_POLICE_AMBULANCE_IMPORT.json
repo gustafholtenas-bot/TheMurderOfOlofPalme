@@ -1,0 +1,5668 @@
+[
+  {
+    "Name": "VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L",
+    "VehicleId": "VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L_DisplayName\", \" BMW ljus Metallic. kan ha varit den här stora BMW:n 3,2 L\")",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "MORKHARIGA_UTLANNING",
+      "MORKHARIGA_UTLANNING_2"
+    ],
+    "PrimaryPersonEntityId": "None",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [
+          "MORKHARIGA_UTLANNING",
+          "MORKHARIGA_UTLANNING_2"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_BMW_LJUS_METALLIC_KAN_HA_VARIT_DEN_HAR_STORA_BMW_N_3_2_L_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object ' BMW ljus Metallic. kan ha varit den här stora BMW:n 3,2 L'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT",
+    "VehicleId": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT_DisplayName\", \"Anders Delboms taxi bil Järfälla taxi Mitsubishi Galant\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "Taxi",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "ANDERS_DELBOM",
+      "ANN_CHARLOTT_HOLMGREN",
+      "CHARLOTTE_LILEDAHL",
+      "LENA_SCHODIN"
+    ],
+    "PrimaryPersonEntityId": "ANDERS_DELBOM",
+    "KnownDriverEntityId": "ANDERS_DELBOM",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "entersveavagenn_car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [
+          "ANN_CHARLOTT_HOLMGREN",
+          "CHARLOTTE_LILEDAHL",
+          "LENA_SCHODIN"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 18,
+          "Second": 58
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.22495105862617493,
+            "W": 0.9743700623512268
+          },
+          "Translation": {
+            "X": -20578.070068359375,
+            "Y": 44016.00341796875,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "SVEAVAGENS_001_R2",
+          "X_SVEAVAGENS_001_R2_TO_SVEAVAGENS_002_R2_STRAIGHT",
+          "SVEAVAGENS_002_R2",
+          "X_SVEAVAGENS_002_R2_TO_SVEAVAGENS_003_R2_STRAIGHT",
+          "SVEAVAGENS_003_R2",
+          "X_SVEAVAGENS_003_R2_TO_SVEAVAGENS_004_R2_STRAIGHT",
+          "SVEAVAGENS_004_R2"
+        ],
+        "DriverEntityId": "ANDERS_DELBOM",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Anders Delboms taxi bil Järfälla taxi Mitsubishi Galant'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anders Delboms taxi bil Järfälla taxi Mitsubishi Galant'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANNETTE_KOHUTS_BIL",
+    "VehicleId": "VEHICLE_ANNETTE_KOHUTS_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_ANNETTE_KOHUTS_BIL_DisplayName\", \"Annette Kohuts bil\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.10803,
+      "G": 0.158562,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "ANNETTE_KOHUT"
+    ],
+    "PrimaryPersonEntityId": "ANNETTE_KOHUT",
+    "KnownDriverEntityId": "ANNETTE_KOHUT",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANNETTE_KOHUTS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_ANNETTE_KOHUTS_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "ANNETTE_KOHUT",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_ANNETTE_KOHUTS_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_ANNETTE_KOHUTS_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 22,
+          "Second": 32
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.2725375294685364,
+            "W": 0.9621451497077942
+          },
+          "Translation": {
+            "X": 8317.044830322266,
+            "Y": 1790.1695251464844,
+            "Z": 872.2557067871094
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "LUNTMAKARGATANN_001_R1"
+        ],
+        "DriverEntityId": "ANNETTE_KOHUT",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Annette Kohuts bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Annette Kohuts bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_DisplayName\", \"Anonymtvittne EAC13558 Bil P bot\")",
+    "CategoryId": "BIRGER_JARLSGATAN",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_EAC13558",
+      "VITTNE_EAC13558_2"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_EAC13558",
+    "KnownDriverEntityId": "VITTNE_EAC13558",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "VITTNE_EAC13558",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_ANONYMTVITTNE_EAC13558_BIL_P_BOT_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne EAC13558 Bil P bot'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_EAE119_00_BIL",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_EAE119_00_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_ANONYMTVITTNE_EAE119_00_BIL_DisplayName\", \"Anonymtvittne EAE119-00 Bil \")",
+    "CategoryId": "ESCAPE_ROUTE_JOHANNES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_EAE119_00"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_EAE119_00",
+    "KnownDriverEntityId": "VITTNE_EAE119_00",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_EAE119_00_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_ANONYMTVITTNE_EAE119_00_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "VITTNE_EAE119_00",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_ANONYMTVITTNE_EAE119_00_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne EAE119-00 Bil '. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_L1100_BIL",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_L1100_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_ANONYMTVITTNE_L1100_BIL_DisplayName\", \"Anonymtvittne L1100 bil\")",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_1100"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_1100",
+    "KnownDriverEntityId": "VITTNE_1100",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_L1100_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_ANONYMTVITTNE_L1100_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "VITTNE_1100",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_ANONYMTVITTNE_L1100_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_L1100_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 12,
+          "Second": 33
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.2203681766986847,
+            "W": 0.9754167199134827
+          },
+          "Translation": {
+            "X": -18479.873657226562,
+            "Y": 31561.614990234375,
+            "Z": 208.57961177825928
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "TEGNERGATANE_003_R1",
+          "X_TEGNERGATANE_003_R1_TO_SVEAVAGENS_002_R1_RIGHT",
+          "SVEAVAGENS_002_R1",
+          "X_SVEAVAGENS_002_R1_TO_KAMMAKAREGATANW_003_R1_RIGHT",
+          "KAMMAKAREGATANW_003_R1",
+          "X_KAMMAKAREGATANW_003_R1_TO_KAMMAKAREGATANW_004_R1_STRAIGHT",
+          "KAMMAKAREGATANW_004_R1",
+          "X_KAMMAKAREGATANW_004_R1_TO_HOLLANDAREGATANN_004_R1_RIGHT",
+          "HOLLANDAREGATANN_004_R1",
+          "X_HOLLANDAREGATANN_004_R1_TO_HOLLANDAREGATANN_005_R1_STRAIGHT",
+          "HOLLANDAREGATANN_005_R1"
+        ],
+        "DriverEntityId": "VITTNE_1100",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Anonymtvittne L1100 bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne L1100 bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ANONYMTVITTNE_L837S_BIL",
+    "VehicleId": "VEHICLE_ANONYMTVITTNE_L837S_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_ANONYMTVITTNE_L837S_BIL_DisplayName\", \"Anonymtvittne L837s bil\")",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "VITTNE_L837"
+    ],
+    "PrimaryPersonEntityId": "VITTNE_L837",
+    "KnownDriverEntityId": "VITTNE_L837",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_L837S_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_ANONYMTVITTNE_L837S_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "VITTNE_L837",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_ANONYMTVITTNE_L837S_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_ANONYMTVITTNE_L837S_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 12,
+          "Second": 3
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.2203681766986847,
+            "W": 0.9754167199134827
+          },
+          "Translation": {
+            "X": -19520.240783691406,
+            "Y": 31077.2705078125,
+            "Z": 206.30311965942383
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "TEGNERGATANW_005_R1",
+          "X_TEGNERGATANW_005_R1_TO_TEGNERGATANW_006_R1_STRAIGHT",
+          "TEGNERGATANW_006_R1"
+        ],
+        "DriverEntityId": "VITTNE_L837",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Anonymtvittne L837s bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Anonymtvittne L837s bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_BENGT_PALM_MERCEDES_GUL",
+    "VehicleId": "VEHICLE_BENGT_PALM_MERCEDES_GUL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_BENGT_PALME_MERCEDES_GUL_DisplayName\", \"Bengt Palme Mercedes gul\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 1,
+      "G": 0.585528,
+      "B": 0.101407,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "BENGT_PALM"
+    ],
+    "PrimaryPersonEntityId": "BENGT_PALM",
+    "KnownDriverEntityId": "BENGT_PALM",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BENGT_PALM_MERCEDES_GUL_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "entersveavagenS_car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "BENGT_PALM",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_BENGT_PALME_MERCEDES_GUL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Bengt Palme Mercedes gul'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_BIRGIT_DAHLSTROMS_BIL",
+    "VehicleId": "VEHICLE_BIRGIT_DAHLSTROMS_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_BIRGIT_DAHLSTROMS_BIL_DisplayName\", \"Birgit Dahlströms bil\")",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "BIRGIT_DAHLSTROM_TRAFIKOVERVAKARE",
+      "BO_GUNNAR_KARLSSON_TRAFIKOVERVAKARE_2"
+    ],
+    "PrimaryPersonEntityId": "BIRGIT_DAHLSTROM_TRAFIKOVERVAKARE",
+    "KnownDriverEntityId": "BIRGIT_DAHLSTROM_TRAFIKOVERVAKARE",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BIRGIT_DAHLSTROMS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_BIRGIT_DAHLSTROMS_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "BIRGIT_DAHLSTROM_TRAFIKOVERVAKARE",
+        "PassengerEntityIds": [
+          "BO_GUNNAR_KARLSSON_TRAFIKOVERVAKARE_2"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_BIRGIT_DAHLSTROMS_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_BIRGIT_DAHLSTROMS_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -0.9832630753517151,
+            "W": 0.18219144642353058
+          },
+          "Translation": {
+            "X": 37275.90026855469,
+            "Y": 9190.935516357422,
+            "Z": -128.1421661376953
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "X_DAVIDBAGARESGW_001_R1_TO_SMALAGRANDN_R1_RIGHT",
+          "SMALAGRANDN_R1",
+          "X_SMALAGRANDN_R1_TO_SNICKARBACKENE_R1_RIGHT",
+          "SNICKARBACKENE_R1",
+          "X_SNICKARBACKENE_R1_TO_BIRGERJARLSGATAS_004_R1_RIGHT",
+          "BIRGERJARLSGATAS_004_R1",
+          "X_BIRGERJARLSGATAS_004_R1_TO_BIRGERJARLSGATAS_005_R1_STRAIGHT",
+          "BIRGERJARLSGATAS_005_R1",
+          "X_BIRGERJARLSGATAS_005_R1_TO_BIRGERJARLSGATAS_006_R1_STRAIGHT",
+          "BIRGERJARLSGATAS_006_R1"
+        ],
+        "DriverEntityId": "BIRGIT_DAHLSTROM_TRAFIKOVERVAKARE",
+        "PassengerEntityIds": [
+          "BO_GUNNAR_KARLSSON_TRAFIKOVERVAKARE_2"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Birgit Dahlströms bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Birgit Dahlströms bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_BJORN_ROSENGRENS_BIL",
+    "VehicleId": "VEHICLE_BJORN_ROSENGRENS_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_BJORN_ROSENGRENS_BIL_DisplayName\", \"Björn Rosengrens bil\")",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "BJORN_ROSENGREN",
+      "BJORN_ROSENGRENS_FRU"
+    ],
+    "PrimaryPersonEntityId": "BJORN_ROSENGREN",
+    "KnownDriverEntityId": "BJORN_ROSENGREN",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_BJORN_ROSENGRENS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_BJORN_ROSENGRENS_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "BJORN_ROSENGREN",
+        "PassengerEntityIds": [
+          "BJORN_ROSENGRENS_FRU"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_BJORN_ROSENGRENS_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_BJORN_ROSENGRENS_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 9,
+          "Second": 47
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.23146991431713104,
+            "W": 0.9728420972824097
+          },
+          "Translation": {
+            "X": -19252.41241455078,
+            "Y": 31230.303955078125,
+            "Z": -41.12396240234375
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "TEGNERGATANE_003_R1",
+          "X_TEGNERGATANE_003_R1_TO_SVEAVAGENS_002_R1_RIGHT",
+          "SVEAVAGENS_002_R1",
+          "X_SVEAVAGENS_002_R1_TO_SVEAVAGENS_003_R1_STRAIGHT",
+          "SVEAVAGENS_003_R1",
+          "X_SVEAVAGENS_003_R1_TO_SVEAVAGENS_004_R1_STRAIGHT",
+          "SVEAVAGENS_004_R1",
+          "X_SVEAVAGENS_004_R1_TO_SVEAVAGENS_005_R1_STRAIGHT",
+          "SVEAVAGENS_005_R1",
+          "X_SVEAVAGENS_005_R1_TO_SVEAVAGENS_006_R1_STRAIGHT",
+          "SVEAVAGENS_006_R1",
+          "X_SVEAVAGENS_006_R1_TO_SVEAVAGENS_007_R1_STRAIGHT"
+        ],
+        "DriverEntityId": "BJORN_ROSENGREN",
+        "PassengerEntityIds": [
+          "BJORN_ROSENGRENS_FRU"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Björn Rosengrens bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Björn Rosengrens bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE",
+    "VehicleId": "VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE_DisplayName\", \"Danica Najic bil inbrott mercedes vinröd kanske\")",
+    "CategoryId": "ADOLF_FREDRIK_CHURCH",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.359375,
+      "G": 0.003652,
+      "B": 0.014234,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "DANICA_NAJIC"
+    ],
+    "PrimaryPersonEntityId": "DANICA_NAJIC",
+    "KnownDriverEntityId": "DANICA_NAJIC",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "DANICA_NAJIC",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_DANICA_NAJIC_BIL_INBROTT_MERCEDES_VINROD_KANSKE_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Danica Najic bil inbrott mercedes vinröd kanske'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_ENWALL_BILD",
+    "VehicleId": "VEHICLE_ENWALL_BILD",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_ENWALL_BILD_DisplayName\", \"Enwall bild\")",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "JENNIE_ENWALL",
+      "LEIF_ENWALL"
+    ],
+    "PrimaryPersonEntityId": "JENNIE_ENWALL",
+    "KnownDriverEntityId": "LEIF_ENWALL",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_ENWALL_BILD_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_ENWALL_BILD_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LEIF_ENWALL",
+        "PassengerEntityIds": [
+          "JENNIE_ENWALL"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_ENWALL_BILD_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_ENWALL_BILD_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 15,
+          "Second": 20
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.19578741490840912,
+            "W": 0.9806463718414307
+          },
+          "Translation": {
+            "X": -21909.909057617188,
+            "Y": 12162.891387939453,
+            "Z": 218.63224506378174
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "WALLINGATANE_001_R1",
+          "X_WALLINGATANE_001_R1_TO_HOLLANDAREGATANN_003_R1_LEFT",
+          "HOLLANDAREGATANN_003_R1",
+          "X_HOLLANDAREGATANN_003_R1_TO_HOLLANDAREGATANN_004_R1_STRAIGHT",
+          "HOLLANDAREGATANN_004_R1",
+          "X_HOLLANDAREGATANN_004_R1_TO_TEGNERGATANE_002_R1_RIGHT",
+          "TEGNERGATANE_002_R1",
+          "X_TEGNERGATANE_002_R1_TO_TEGNERGATANE_003_R1_STRAIGHT",
+          "TEGNERGATANE_003_R1",
+          "X_TEGNERGATANE_003_R1_TO_SVEAVAGENS_002_R1_RIGHT",
+          "SVEAVAGENS_002_R1",
+          "X_SVEAVAGENS_002_R1_TO_SVEAVAGENS_003_R1_STRAIGHT",
+          "SVEAVAGENS_003_R1",
+          "X_SVEAVAGENS_003_R1_TO_SVEAVAGENS_004_R1_STRAIGHT",
+          "SVEAVAGENS_004_R1",
+          "X_SVEAVAGENS_004_R1_TO_SVEAVAGENS_005_R1_STRAIGHT",
+          "SVEAVAGENS_005_R1",
+          "X_SVEAVAGENS_005_R1_TO_SVEAVAGENS_006_R1_STRAIGHT",
+          "SVEAVAGENS_006_R1",
+          "X_SVEAVAGENS_006_R1_TO_SVEAVAGENS_007_R1_STRAIGHT"
+        ],
+        "DriverEntityId": "LEIF_ENWALL",
+        "PassengerEntityIds": [
+          "JENNIE_ENWALL"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Enwall bild'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Enwall bild'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_FINARE_PARETS_BIL",
+    "VehicleId": "VEHICLE_FINARE_PARETS_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_FINARE_PARETS_BIL_DisplayName\", \"finare parets bil\")",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "KVINNA_FINARE_PAR_L1634",
+      "MAN_FINARE_PAR"
+    ],
+    "PrimaryPersonEntityId": "KVINNA_FINARE_PAR_L1634",
+    "KnownDriverEntityId": "MAN_FINARE_PAR",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_FINARE_PARETS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_FINARE_PARETS_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "MAN_FINARE_PAR",
+        "PassengerEntityIds": [
+          "KVINNA_FINARE_PAR_L1634"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_FINARE_PARETS_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_FINARE_PARETS_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 10,
+          "Second": 1
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.21649236977100372,
+            "W": 0.9762843251228333
+          },
+          "Translation": {
+            "X": -13850.357055664062,
+            "Y": 32198.220825195312,
+            "Z": -196.89788818359375
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "X_SVEAVAGENN_006_R2_TO_TEGNERGATANW_005_R1_LEFT",
+          "TEGNERGATANW_005_R1",
+          "X_TEGNERGATANW_005_R1_TO_SALTMASTAREGATANN_002_R1_RIGHT",
+          "SALTMASTAREGATANN_002_R1"
+        ],
+        "DriverEntityId": "MAN_FINARE_PAR",
+        "PassengerEntityIds": [
+          "KVINNA_FINARE_PAR_L1634"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'finare parets bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'finare parets bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA",
+    "VehicleId": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA_DisplayName\", \"Hans Hongelins  taxi bil Volvo 740, mellanblå\")",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "Taxi",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.218577,
+      "G": 0.324475,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "HANS_HONGELINS"
+    ],
+    "PrimaryPersonEntityId": "HANS_HONGELINS",
+    "KnownDriverEntityId": "HANS_HONGELINS",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterBirgerJarlsN_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "HANS_HONGELINS",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Hans Hongelins  taxi bil Volvo 740, mellanblå'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_HANS_JOHANSSON_TAXI",
+    "VehicleId": "VEHICLE_HANS_JOHANSSON_TAXI",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_HANS_JOHANSSON_TAXI_DisplayName\", \"Hans Johansson taxi\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "Taxi",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "ANDERS_ERSSON",
+      "GORAN_ISRAELSSON",
+      "HANS_JOHANSSON",
+      "LENA_BASEN",
+      "STEFAN_GLANTZ"
+    ],
+    "PrimaryPersonEntityId": "HANS_JOHANSSON",
+    "KnownDriverEntityId": "HANS_JOHANSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_HANS_JOHANSSON_TAXI_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "entersveavagenN_car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "HANS_JOHANSSON",
+        "PassengerEntityIds": [
+          "ANDERS_ERSSON",
+          "GORAN_ISRAELSSON",
+          "LENA_BASEN",
+          "STEFAN_GLANTZ"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_HANS_JOHANSSON_TAXI_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Hans Johansson taxi'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+    "VehicleId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_DisplayName\", \"Inge Morelius mörk gul Opel Rekord -73:a.\")",
+    "CategoryId": "INGE_MORELIUS_COMPANY",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 1,
+      "G": 0.585528,
+      "B": 0.101407,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "INGE_MORELIUS_G"
+    ],
+    "PrimaryPersonEntityId": "INGE_MORELIUS_G",
+    "KnownDriverEntityId": "INGE_MORELIUS_G",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterKungsgatanE_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -152.216
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "INGE_MORELIUS_G",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Incoming vehicle waits at 'EnterKungsgatanE_Car' outside the playable area, then enters at its BeginDriving time. Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 16,
+          "Second": 40
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -0.5233029723167419,
+            "W": 0.8521466851234436
+          },
+          "Translation": {
+            "X": -7462.9119873046875,
+            "Y": -17630.299377441406,
+            "Z": 303.58123779296875
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "KUNGSGATANE_001_R2",
+          "X_KUNGSGATANE_001_R2_TO_KUNGSGATANE_002_R2_STRAIGHT",
+          "KUNGSGATANE_002_R2",
+          "X_KUNGSGATANE_002_R2_TO_KUNGSGATANE_003_R2_STRAIGHT",
+          "KUNGSGATANE_003_R2",
+          "X_KUNGSGATANE_003_R2_TO_KUNGSGATANE_004_R2_STRAIGHT",
+          "KUNGSGATANE_004_R2",
+          "X_KUNGSGATANE_004_R2_TO_KUNGSGATANE_005_R2_STRAIGHT"
+        ],
+        "DriverEntityId": "INGE_MORELIUS_G",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Inge Morelius mörk gul Opel Rekord -73:a.'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Inge Morelius mörk gul Opel Rekord -73:a.'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA",
+    "VehicleId": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA_DisplayName\", \"Jan-Åke Svensson s bil BMW GRÅ\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.428819,
+      "G": 0.428819,
+      "B": 0.428819,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "JAN_AKE_SVENSSON"
+    ],
+    "PrimaryPersonEntityId": "JAN_AKE_SVENSSON",
+    "KnownDriverEntityId": "JAN_AKE_SVENSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "enterkungsgatanE_car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "JAN_AKE_SVENSSON",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Jan-Åke Svensson s bil BMW GRÅ'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_KJELL_AKE_JANSSONS_BIL",
+    "VehicleId": "VEHICLE_KJELL_AKE_JANSSONS_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_KJELL_AKE_JANSSONS_BIL_DisplayName\", \"Kjell åke Janssons Bil\")",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "GUN_TREDITE_43_AR",
+      "KJELL_AKE_JANSSON_38_AR",
+      "SELIN"
+    ],
+    "PrimaryPersonEntityId": "KJELL_AKE_JANSSON_38_AR",
+    "KnownDriverEntityId": "KJELL_AKE_JANSSON_38_AR",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_KJELL_AKE_JANSSONS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_KJELL_AKE_JANSSONS_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "KJELL_AKE_JANSSON_38_AR",
+        "PassengerEntityIds": [
+          "GUN_TREDITE_43_AR",
+          "SELIN"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_KJELL_AKE_JANSSONS_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_KJELL_AKE_JANSSONS_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 14,
+          "Second": 26
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.2649913430213928,
+            "W": 0.9642508029937744
+          },
+          "Translation": {
+            "X": -3593.1968688964844,
+            "Y": 27496.417236328125,
+            "Z": -41.12396240234375
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "LUNTMAKARGATANS_004_R1",
+          "X_LUNTMAKARGATANS_004_R1_TO_ADOLFFREDRIKSKYRKOGW_001_R1_RIGHT",
+          "ADOLFFREDRIKSKYRKOGW_001_R1",
+          "X_ADOLFFREDRIKSKYRKOGW_001_R1_TO_SVEAVAGENS_004_R2_LEFT",
+          "SVEAVAGENS_004_R2",
+          "X_SVEAVAGENS_004_R2_TO_SVEAVAGENS_005_R2_STRAIGHT",
+          "SVEAVAGENS_005_R2",
+          "X_SVEAVAGENS_005_R2_TO_SVEAVAGENS_006_R2_STRAIGHT",
+          "SVEAVAGENS_006_R2",
+          "X_SVEAVAGENS_006_R2_TO_SVEAVAGENS_007_R2_STRAIGHT"
+        ],
+        "DriverEntityId": "KJELL_AKE_JANSSON_38_AR",
+        "PassengerEntityIds": [
+          "GUN_TREDITE_43_AR",
+          "SELIN"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Kjell åke Janssons Bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Kjell åke Janssons Bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL",
+    "VehicleId": "VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL_DisplayName\", \"Lars Eric Eriksson  pappas bil\")",
+    "CategoryId": "GRAND_2",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "MAMMA_TILL_LARS_ERIC_ERIKSSON",
+      "PAPPA_TILL_LARS_ERIC_ERIKSSON"
+    ],
+    "PrimaryPersonEntityId": "PAPPA_TILL_LARS_ERIC_ERIKSSON",
+    "KnownDriverEntityId": "PAPPA_TILL_LARS_ERIC_ERIKSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "PAPPA_TILL_LARS_ERIC_ERIKSSON",
+        "PassengerEntityIds": [
+          "MAMMA_TILL_LARS_ERIC_ERIKSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_LARS_ERIC_ERIKSSON_PAPPAS_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Lars Eric Eriksson  pappas bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT",
+    "VehicleId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT_DisplayName\", \"Lars Eric Eriksson silvergrå Volvo GLT\")",
+    "CategoryId": "AROUND_GRAND",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.151042,
+      "G": 0.151042,
+      "B": 0.151042,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "LARS_ERIC_ERIKSSON"
+    ],
+    "PrimaryPersonEntityId": "LARS_ERIC_ERIKSSON",
+    "KnownDriverEntityId": "LARS_ERIC_ERIKSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LARS_ERIC_ERIKSSON",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 36,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": -1.1238235856581014e-05,
+            "Y": -0.0012072749668732285,
+            "Z": 0.2594034671783447,
+            "W": 0.9657682776451111
+          },
+          "Translation": {
+            "X": -13951.034545898438,
+            "Y": 28615.51513671875,
+            "Z": -159.88961458206177
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "SVEAVAGENS_002_R1",
+          "X_SVEAVAGENS_002_R1_TO_KAMMAKAREGATANW_003_R1_RIGHT",
+          "KAMMAKAREGATANW_003_R1",
+          "X_KAMMAKAREGATANW_003_R1_TO_KAMMAKAREGATANW_004_R1_STRAIGHT",
+          "KAMMAKAREGATANW_004_R1",
+          "X_KAMMAKAREGATANW_004_R1_TO_HOLLANDAREGATANN_004_R1_RIGHT",
+          "HOLLANDAREGATANN_004_R1",
+          "X_HOLLANDAREGATANN_004_R1_TO_HOLLANDAREGATANN_005_R1_STRAIGHT"
+        ],
+        "DriverEntityId": "LARS_ERIC_ERIKSSON",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Lars Eric Eriksson silvergrå Volvo GLT'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Lars Eric Eriksson silvergrå Volvo GLT'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LARS_KNUBBS_BIL",
+    "VehicleId": "VEHICLE_LARS_KNUBBS_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_LARS_KNUBBS_BIL_DisplayName\", \"Lars Knubbs Bil\")",
+    "CategoryId": "GRAND_1",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "LARS_KNUBB"
+    ],
+    "PrimaryPersonEntityId": "LARS_KNUBB",
+    "KnownDriverEntityId": "LARS_KNUBB",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LARS_KNUBBS_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "LarsKnubbBil",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -13.36
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LARS_KNUBB",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'LarsKnubbBil'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Lars Knubbs Bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+    "VehicleId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_DisplayName\", \"Leif Ljungqvist Chevrolet Suburban\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "JAN_ANDERSSON",
+      "LEIF_LJUNGQVIST"
+    ],
+    "PrimaryPersonEntityId": "LEIF_LJUNGQVIST",
+    "KnownDriverEntityId": "LEIF_LJUNGQVIST",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LEIF_LJUNGQVIST",
+        "PassengerEntityIds": [
+          "JAN_ANDERSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 15,
+          "Second": 28
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -0.9712422490119934,
+            "W": 0.2380935549736023
+          },
+          "Translation": {
+            "X": -20599.996948242188,
+            "Y": 43134.100341796875,
+            "Z": -48.11687469482422
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "SVEAVAGENS_001_R1",
+          "X_SVEAVAGENS_001_R1_TO_SVEAVAGENS_002_R1_STRAIGHT",
+          "SVEAVAGENS_002_R1",
+          "X_SVEAVAGENS_002_R1_TO_SVEAVAGENS_003_R1_STRAIGHT",
+          "SVEAVAGENS_003_R1",
+          "X_SVEAVAGENS_003_R1_TO_SVEAVAGENS_004_R1_STRAIGHT",
+          "SVEAVAGENS_004_R1"
+        ],
+        "DriverEntityId": "LEIF_LJUNGQVIST",
+        "PassengerEntityIds": [
+          "JAN_ANDERSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Leif Ljungqvist Chevrolet Suburban'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Leif Ljungqvist Chevrolet Suburban'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD",
+    "VehicleId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_DisplayName\", \"Marco Neesers Kompis bil mörkröd\")",
+    "CategoryId": "COMPANY_2",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.428819,
+      "G": 0.02039,
+      "B": 0.058808,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "MARCO_NEESERS_KOMPIS",
+      "MARCO_NEESERS_KOMPIS_2",
+      "LEIF_FREDIN_ANDERS_BJORKMANS_VAN_HITTAR_EN_VALDTAGEN_FLICKA",
+      "MARCO_NEESER_BOFORS_ANSTALLD",
+      "ROLF_OBERG"
+    ],
+    "PrimaryPersonEntityId": "MARCO_NEESERS_KOMPIS",
+    "KnownDriverEntityId": "MARCO_NEESERS_KOMPIS_2",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterSveavagenN_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -59.232
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [
+          "LEIF_FREDIN_ANDERS_BJORKMANS_VAN_HITTAR_EN_VALDTAGEN_FLICKA",
+          "MARCO_NEESER_BOFORS_ANSTALLD",
+          "ROLF_OBERG"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Incoming vehicle waits at 'EnterSveavagenN_Car' outside the playable area, then enters at its BeginDriving time. Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 17,
+          "Second": 28
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.1908089816570282,
+            "W": 0.9816271662712097
+          },
+          "Translation": {
+            "X": 5008.606338500977,
+            "Y": -7461.174011230469,
+            "Z": 265.1862144470215
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "SVEAVAGENN_002_R1",
+          "X_SVEAVAGENN_002_R1_TO_SVEAVAGENN_003_R1_STRAIGHT",
+          "SVEAVAGENN_003_R1",
+          "X_SVEAVAGENN_003_R1_TO_SVEAVAGENN_004_R1_STRAIGHT",
+          "SVEAVAGENN_004_R1",
+          "X_SVEAVAGENN_004_R1_TO_SVEAVAGENN_005_R1_STRAIGHT",
+          "SVEAVAGENN_005_R1",
+          "X_SVEAVAGENN_005_R1_TO_SVEAVAGENN_006_R1_STRAIGHT",
+          "SVEAVAGENN_006_R1",
+          "X_SVEAVAGENN_006_R1_TO_SVEAVAGENN_007_R1_STRAIGHT"
+        ],
+        "DriverEntityId": "MARCO_NEESERS_KOMPIS_2",
+        "PassengerEntityIds": [
+          "MARCO_NEESERS_KOMPIS"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Marco Neesers Kompis bil mörkröd'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Marco Neesers Kompis bil mörkröd'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+    "VehicleId": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON_DisplayName\", \"Mercedes Limosine Jan Nilsson\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "JAN_NILSSON"
+    ],
+    "PrimaryPersonEntityId": "JAN_NILSSON",
+    "KnownDriverEntityId": "JAN_NILSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterTunnelgatanW_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "JAN_NILSSON",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mercedes Limosine Jan Nilsson'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MERCEDES_TAXI_BEIGE",
+    "VehicleId": "VEHICLE_MERCEDES_TAXI_BEIGE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_MERCEDES_TAXI_BEIGE_DisplayName\", \"Mercedes-taxi  beige\")",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "Taxi",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.758681,
+      "G": 0.515157,
+      "B": 0.340472,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "FORARE_2",
+      "TAXI_KUND",
+      "TAXI_KUND_002"
+    ],
+    "PrimaryPersonEntityId": "FORARE_2",
+    "KnownDriverEntityId": "FORARE_2",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MERCEDES_TAXI_BEIGE_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_MERCEDES_TAXI_BEIGE_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "FORARE_2",
+        "PassengerEntityIds": [
+          "TAXI_KUND",
+          "TAXI_KUND_002"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_MERCEDES_TAXI_BEIGE_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mercedes-taxi  beige'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL",
+    "VehicleId": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL_DisplayName\", \"Mikael Lindblad taxi bil\")",
+    "CategoryId": "MURDER_SCENE",
+    "VehicleCategory": "Taxi",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "MIKAEL_LINDBLAD"
+    ],
+    "PrimaryPersonEntityId": "MIKAEL_LINDBLAD",
+    "KnownDriverEntityId": "MIKAEL_LINDBLAD",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterKammakargatanW_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -76.717
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "MIKAEL_LINDBLAD",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Incoming vehicle waits at 'EnterKammakargatanW_Car' outside the playable area, then enters at its BeginDriving time. Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 40,
+          "Second": 51
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": -0.0006612892611883581,
+            "Y": 0.0009436151594854891,
+            "Z": 0.7557409405708313,
+            "W": 0.6548697352409363
+          },
+          "Translation": {
+            "X": 10843.54476928711,
+            "Y": -18709.890747070312,
+            "Z": 38.99927735328674
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "SVEAVAGENN_001_R1",
+          "X_SVEAVAGENN_001_R1_TO_SVEAVAGENN_002_R1_STRAIGHT",
+          "SVEAVAGENN_002_R1",
+          "X_SVEAVAGENN_002_R1_TO_SVEAVAGENN_003_R1_STRAIGHT",
+          "SVEAVAGENN_003_R1",
+          "X_SVEAVAGENN_003_R1_TO_SVEAVAGENN_004_R1_STRAIGHT",
+          "SVEAVAGENN_004_R1",
+          "X_SVEAVAGENN_004_R1_TO_SVEAVAGENN_005_R1_STRAIGHT",
+          "SVEAVAGENN_005_R1",
+          "X_SVEAVAGENN_005_R1_TO_SVEAVAGENN_006_R1_STRAIGHT",
+          "SVEAVAGENN_006_R1",
+          "X_SVEAVAGENN_006_R1_TO_TEGNERGATANE_004_R1_RIGHT",
+          "TEGNERGATANE_004_R1",
+          "X_TEGNERGATANE_004_R1_TO_LUNTMAKARGATANS_002_R1_RIGHT",
+          "LUNTMAKARGATANS_002_R1",
+          "X_LUNTMAKARGATANS_002_R1_TO_LUNTMAKARGATANS_003_R1_STRAIGHT",
+          "LUNTMAKARGATANS_003_R1",
+          "X_LUNTMAKARGATANS_003_R1_TO_KAMMAKAREGATANW_002_R1_RIGHT",
+          "KAMMAKAREGATANW_002_R1",
+          "X_KAMMAKAREGATANW_002_R1_TO_KAMMAKAREGATANW_003_R1_STRAIGHT",
+          "KAMMAKAREGATANW_003_R1",
+          "X_KAMMAKAREGATANW_003_R1_TO_KAMMAKAREGATANW_004_R1_STRAIGHT",
+          "KAMMAKAREGATANW_004_R1"
+        ],
+        "DriverEntityId": "MIKAEL_LINDBLAD",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Mikael Lindblad taxi bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mikael Lindblad taxi bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS",
+    "VehicleId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS_DisplayName\", \"Mikeal Åströms bil orange ford Tanus\")",
+    "CategoryId": "AROUND_GRAND",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 1,
+      "G": 0.187292,
+      "B": 0,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "LENA_LARSSON",
+      "MIKEAL_ASTROM"
+    ],
+    "PrimaryPersonEntityId": "MIKEAL_ASTROM",
+    "KnownDriverEntityId": "MIKEAL_ASTROM",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "MIKEAL_ASTROM",
+        "PassengerEntityIds": [
+          "LENA_LARSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 7,
+          "Second": 2
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.16670480370521545,
+            "W": 0.9860068559646606
+          },
+          "Translation": {
+            "X": -1939.2518997192383,
+            "Y": 44803.533935546875,
+            "Z": 174.0759015083313
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "DOBELSGATANS_001_R1",
+          "X_DOBELSGATANS_001_R1_TO_DOBELSGATANS_002_R1_STRAIGHT",
+          "DOBELSGATANS_002_R1",
+          "X_DOBELSGATANS_002_R1_TO_KAMMAKAREGATANW_001_R1_STRAIGHT",
+          "KAMMAKAREGATANW_001_R1",
+          "X_KAMMAKAREGATANW_001_R1_TO_KAMMAKAREGATANW_002_R1_STRAIGHT",
+          "KAMMAKAREGATANW_002_R1",
+          "X_KAMMAKAREGATANW_002_R1_TO_KAMMAKAREGATANW_003_R1_STRAIGHT",
+          "KAMMAKAREGATANW_003_R1",
+          "X_KAMMAKAREGATANW_003_R1_TO_KAMMAKAREGATANW_004_R1_STRAIGHT",
+          "KAMMAKAREGATANW_004_R1",
+          "X_KAMMAKAREGATANW_004_R1_TO_HOLLANDAREGATANN_004_R1_RIGHT",
+          "HOLLANDAREGATANN_004_R1",
+          "X_HOLLANDAREGATANN_004_R1_TO_TEGNERGATANE_002_R1_RIGHT",
+          "TEGNERGATANE_002_R1",
+          "X_TEGNERGATANE_002_R1_TO_TEGNERGATANE_003_R1_STRAIGHT",
+          "TEGNERGATANE_003_R1",
+          "X_TEGNERGATANE_003_R1_TO_SVEAVAGENS_002_R1_RIGHT",
+          "SVEAVAGENS_002_R1",
+          "X_SVEAVAGENS_002_R1_TO_SVEAVAGENS_003_R1_STRAIGHT",
+          "SVEAVAGENS_003_R1",
+          "X_SVEAVAGENS_003_R1_TO_SVEAVAGENS_004_R1_STRAIGHT",
+          "SVEAVAGENS_004_R1",
+          "X_SVEAVAGENS_004_R1_TO_TUNNELGATANW_001_R1_RIGHT",
+          "TUNNELGATANW_001_R1",
+          "X_TUNNELGATANW_001_R1_TO_TUNNELGATANW_002_R1_STRAIGHT"
+        ],
+        "DriverEntityId": "MIKEAL_ASTROM",
+        "PassengerEntityIds": [
+          "LENA_LARSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Mikeal Åströms bil orange ford Tanus'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Mikeal Åströms bil orange ford Tanus'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA",
+    "VehicleId": "VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA_DisplayName\", \"PB SAAB 900I Y63AM35 1983 BLÅ\")",
+    "CategoryId": "ALEXANDRA_STOCKHOLM_PLAZA",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.218577,
+      "G": 0.324475,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "FORARE"
+    ],
+    "PrimaryPersonEntityId": "FORARE",
+    "KnownDriverEntityId": "FORARE",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "FORARE",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_PB_SAAB_900I_Y63AM35_1983_BLA_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'PB SAAB 900I Y63AM35 1983 BLÅ'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN",
+    "VehicleId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_SIGGES_BIL_SAAB_900_BRUN_DisplayName\", \"Sigges bil Saab 900 brun\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.265625,
+      "G": 0.102052,
+      "B": 0.048661,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "REINHOLD_LARSSON",
+      "SIGGE_CEDERGREN"
+    ],
+    "PrimaryPersonEntityId": "SIGGE_CEDERGREN",
+    "KnownDriverEntityId": "SIGGE_CEDERGREN",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "SIGGE_CEDERGREN",
+        "PassengerEntityIds": [
+          "REINHOLD_LARSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_SIGGES_BIL_SAAB_900_BRUN_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 21,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": -0.9853053092956543,
+            "W": 0.17080263793468475
+          },
+          "Translation": {
+            "X": 15458.262634277344,
+            "Y": -604.118537902832,
+            "Z": 1525.4035949707031
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "APELBERGSGATANE_005_R1",
+          "X_APELBERGSGATANE_005_R1_TO_APELBERGSGATANE_006_R1_STRAIGHT",
+          "APELBERGSGATANE_006_R1",
+          "X_APELBERGSGATANE_006_R1_TO_NORRLANDSGATANS_001_R1_RIGHT",
+          "NORRLANDSGATANS_001_R1",
+          "X_NORRLANDSGATANS_001_R1_TO_KUNGSGATANW_003_R1_RIGHT",
+          "KUNGSGATANW_003_R1",
+          "X_KUNGSGATANW_003_R1_TO_SVEAVAGENN_002_R1_RIGHT",
+          "SVEAVAGENN_002_R1",
+          "X_SVEAVAGENN_002_R1_TO_SVEAVAGENN_003_R1_STRAIGHT",
+          "SVEAVAGENN_003_R1",
+          "X_SVEAVAGENN_003_R1_TO_SVEAVAGENN_004_R1_STRAIGHT",
+          "SVEAVAGENN_004_R1",
+          "X_SVEAVAGENN_004_R1_TO_SVEAVAGENN_005_R1_STRAIGHT",
+          "SVEAVAGENN_005_R1",
+          "X_SVEAVAGENN_005_R1_TO_SVEAVAGENN_006_R1_STRAIGHT",
+          "SVEAVAGENN_006_R1",
+          "X_SVEAVAGENN_006_R1_TO_TEGNERGATANE_004_R1_RIGHT",
+          "TEGNERGATANE_004_R1"
+        ],
+        "DriverEntityId": "SIGGE_CEDERGREN",
+        "PassengerEntityIds": [
+          "REINHOLD_LARSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Sigges bil Saab 900 brun'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Sigges bil Saab 900 brun'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_THEODOROS_ATHANASIOU_BIL",
+    "VehicleId": "VEHICLE_THEODOROS_ATHANASIOU_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_THEODOROS_ATHANASIOU_BIL_DisplayName\", \"Theodoros Athanasiou Bil\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "THEODOROS_ATHANASIOU"
+    ],
+    "PrimaryPersonEntityId": "THEODOROS_ATHANASIOU",
+    "KnownDriverEntityId": "THEODOROS_ATHANASIOU",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_THEODOROS_ATHANASIOU_BIL_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "entersveavagenS_car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "THEODOROS_ATHANASIOU",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_THEODOROS_ATHANASIOU_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Theodoros Athanasiou Bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_VIT_VOLVO",
+    "VehicleId": "VEHICLE_VIT_VOLVO",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_VIT_VOLVO_DisplayName\", \"Vit Volvo\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "ANNETTE_KOHUT_2"
+    ],
+    "PrimaryPersonEntityId": "ANNETTE_KOHUT_2",
+    "KnownDriverEntityId": "ANNETTE_KOHUT_2",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_VIT_VOLVO_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_VIT_VOLVO_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "ANNETTE_KOHUT_2",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_VIT_VOLVO_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_VIT_VOLVO_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 21,
+          "Second": 25
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.2725375294685364,
+            "W": 0.9621451497077942
+          },
+          "Translation": {
+            "X": 8050.7354736328125,
+            "Y": 2963.3670806884766,
+            "Z": 872.2557067871094
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "LUNTMAKARGATANN_001_R1"
+        ],
+        "DriverEntityId": "ANNETTE_KOHUT_2",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Vit Volvo'."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Vit Volvo'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_VAKTARE_BIL",
+    "VehicleId": "VEHICLE_VAKTARE_BIL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_VAKTARE_BIL_DisplayName\", \"Väktare bil\")",
+    "CategoryId": "MURDER_SCENE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "VAKTARE"
+    ],
+    "PrimaryPersonEntityId": "VAKTARE",
+    "KnownDriverEntityId": "VAKTARE",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_VAKTARE_BIL_INITIAL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "VEHICLE_VAKTARE_BIL_START",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "VAKTARE",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_VAKTARE_BIL_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_VAKTARE_BIL_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 20,
+          "Second": 24
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.16670480370521545,
+            "W": 0.9860068559646606
+          },
+          "Translation": {
+            "X": -5944.53125,
+            "Y": 32786.99645996094,
+            "Z": -219.1204071044922
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "LUNTMAKARGATANN_003_R1"
+        ],
+        "DriverEntityId": "VAKTARE",
+        "PassengerEntityIds": [],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Väktare bil'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Väktare bil'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+    "VehicleId": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalVehicles [F26B2D7BC347BDFA5B39EE2098F3C814]\", \"VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_DisplayName\", \"Åke Larssons bil  Ford Escort, gråmetallic\")",
+    "CategoryId": "MAIN_WITNESSES",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": true,
+    "BodyColor": {
+      "R": 0.428819,
+      "G": 0.428819,
+      "B": 0.428819,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "CECILIA_ANDERSTEDT",
+      "ELISABETH_JOHANSSON",
+      "AKE_LARSSON",
+      "ANNE_HAGE",
+      "KARIN_JOHANSSON"
+    ],
+    "PrimaryPersonEntityId": "AKE_LARSSON",
+    "KnownDriverEntityId": "AKE_LARSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_INITIAL",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "entersveavagenS_car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "AKE_LARSSON",
+        "PassengerEntityIds": [
+          "CECILIA_ANDERSTEDT",
+          "ELISABETH_JOHANSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Parked initial placement uses anchor 'VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_START'. XY comes from the verified staging export; Z is aligned to the nearest traffic lane plus the 60 cm collision half-height."
+      },
+      {
+        "EntryId": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_BLENDER_ROUTE_01",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 13,
+          "Second": 24
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.21428941190242767,
+            "W": 0.9767702221870422
+          },
+          "Translation": {
+            "X": 48531.109619140625,
+            "Y": -11430.176544189453,
+            "Z": -28.42038869857788
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "NORRLANDSGATANN_001_R1",
+          "X_NORRLANDSGATANN_001_R1_TO_KUNGSGATANW_003_R2_LEFT",
+          "KUNGSGATANW_003_R2",
+          "X_KUNGSGATANW_003_R2_TO_KUNGSGATANW_004_R2_STRAIGHT",
+          "KUNGSGATANW_004_R2",
+          "X_KUNGSGATANW_004_R2_TO_KUNGSGATANW_005_R2_STRAIGHT",
+          "KUNGSGATANW_005_R2"
+        ],
+        "DriverEntityId": "AKE_LARSSON",
+        "PassengerEntityIds": [
+          "CECILIA_ANDERSTEDT",
+          "ELISABETH_JOHANSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "allpeople.blend",
+        "Notes": "Connected lane route reconstructed from 'Åke Larssons bil  Ford Escort, gråmetallic'."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "allpeople.blend",
+    "Notes": "Imported from Blender object 'Åke Larssons bil  Ford Escort, gråmetallic'. Associated people are name-backed, not automatically confirmed drivers."
+  },
+  {
+    "Name": "VEHICLE_POLICE_CIVIL2733",
+    "VehicleId": "VEHICLE_POLICE_CIVIL2733",
+    "DisplayName": "Civil polisbil 2733",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "PONTUS_WIKNER",
+      "ERIK_SUNDIN"
+    ],
+    "PrimaryPersonEntityId": "PONTUS_WIKNER",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": true,
+    "Timeline": [],
+    "Confidence": "Reconstructed",
+    "SourceReference": "Polisen Säpo Militär.kmz",
+    "Notes": "Polisfordonsgrundrad. KnownDriverEntityId lämnas tom tills föraren är källbelagd. Modell, klass och tidslinje fylls senare."
+  },
+  {
+    "Name": "VEHICLE_POLICE_HOLMER_DAHLGREN",
+    "VehicleId": "VEHICLE_POLICE_HOLMER_DAHLGREN",
+    "DisplayName": "Holmér/Dahlgrens civila tjänstebil",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "HANS_HOLMER",
+      "ROLF_DAHLGREN"
+    ],
+    "PrimaryPersonEntityId": "ROLF_DAHLGREN",
+    "KnownDriverEntityId": "ROLF_DAHLGREN",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "HOLMER_DAHLGREN_SPAWN_SOUTH",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 28,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterSveavagenS_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "ROLF_DAHLGREN",
+        "PassengerEntityIds": [
+          "HANS_HOLMER"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "Användarens kompletterande uppgift",
+        "Notes": "Spawnas vid södra utfarten strax innan den nordgående passagen."
+      },
+      {
+        "EntryId": "HOLMER_DAHLGREN_SVEAVAGEN_NORTHBOUND",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 28,
+          "Second": 1
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "WorldTransform",
+        "PlacementAnchorId": "None",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "SVEAVAGENN_001_R1",
+          "X_SVEAVAGENN_001_R1_TO_SVEAVAGENN_002_R1_STRAIGHT",
+          "SVEAVAGENN_002_R1",
+          "X_SVEAVAGENN_002_R1_TO_SVEAVAGENN_003_R1_STRAIGHT",
+          "SVEAVAGENN_003_R1",
+          "X_SVEAVAGENN_003_R1_TO_SVEAVAGENN_004_R1_STRAIGHT",
+          "SVEAVAGENN_004_R1",
+          "X_SVEAVAGENN_004_R1_TO_SVEAVAGENN_005_R1_STRAIGHT",
+          "SVEAVAGENN_005_R1",
+          "X_SVEAVAGENN_005_R1_TO_SVEAVAGENN_006_R1_STRAIGHT",
+          "SVEAVAGENN_006_R1",
+          "X_SVEAVAGENN_006_R1_TO_SVEAVAGENN_007_R1_STRAIGHT",
+          "SVEAVAGENN_007_R1"
+        ],
+        "DriverEntityId": "ROLF_DAHLGREN",
+        "PassengerEntityIds": [
+          "HANS_HOLMER"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "Användarens kompletterande uppgift",
+        "Notes": "Startar vid södra Sveavägensinfarten cirka 23:28:00 och kör norrut i R1. Avsikten är en långsam passage förbi mordplatsen cirka 23:28:30 utan stopp. Anpassa fordonets körhastighet till ungefär 20–25 km/h i Blueprint/fordonsdata."
+      },
+      {
+        "EntryId": "HOLMER_DAHLGREN_EXIT_NORTH",
+        "Action": "Despawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 30,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "ExitSveavagenN_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "ROLF_DAHLGREN",
+        "PassengerEntityIds": [
+          "HANS_HOLMER"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "Användarens kompletterande uppgift",
+        "Notes": "Tas bort när bilen har nått ExitSveavagenN_Car utanför den spelbara delen. Klockslaget 23:30:00 är ett tekniskt rekonstruktionsvärde."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "Användarens kompletterande uppgift",
+    "Notes": "Rolf Dahlgren kör Hans Holmér långsamt förbi mordplatsen cirka 23:28:30 utan stopp, söderifrån och norrut på Sveavägen. Rutten använder SVEAVAGENN_001_R1 till SVEAVAGENN_007_R1. Tidpunkten är preliminär och bilmodell/Blueprint måste fortfarande anges."
+  },
+  {
+    "Name": "VEHICLE_POLICE_LIVVAKTER_SUND_ANDERSSON",
+    "VehicleId": "VEHICLE_POLICE_LIVVAKTER_SUND_ANDERSSON",
+    "DisplayName": "Livvaktsbil – Sund/Andersson",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "GORAN_SUND",
+      "DAN_ANDERSSON"
+    ],
+    "PrimaryPersonEntityId": "GORAN_SUND",
+    "KnownDriverEntityId": "GORAN_SUND",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "LIFEGUARD_CAR_INITIAL_SOUTH_BIRGER_JARL",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 40,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "KungsXBirgerJarl_SE",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "GORAN_SUND",
+        "PassengerEntityIds": [
+          "DAN_ANDERSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14214-00; A14214-02; D21659-14 (sammanställning)",
+        "Notes": "Fordonet skapas när det når spelområdet söderifrån på Birger Jarlsgatan."
+      },
+      {
+        "EntryId": "LIFEGUARD_CAR_TO_CRIME_SCENE",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 40,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "KungsXBirgerJarl_SE",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "BIRGERJARLSGATAN_001_R2",
+          "X_BIRGERJARLSGATAN_001_R2_TO_KUNGSGATANW_002_R2_LEFT",
+          "KUNGSGATANW_002_R2",
+          "KUNGSGATANW_002_R1",
+          "X_KUNGSGATANW_002_R1_TO_KUNGSGATANW_003_R1_STRAIGHT",
+          "KUNGSGATANW_003_R1",
+          "X_KUNGSGATANW_003_R1_TO_SVEAVAGENN_002_R1_RIGHT",
+          "SVEAVAGENN_002_R1",
+          "X_SVEAVAGENN_002_R1_TO_SVEAVAGENN_003_R1_STRAIGHT",
+          "SVEAVAGENN_003_R1",
+          "X_SVEAVAGENN_003_R1_TO_SVEAVAGENN_004_R1_STRAIGHT",
+          "SVEAVAGENN_004_R1"
+        ],
+        "DriverEntityId": "GORAN_SUND",
+        "PassengerEntityIds": [
+          "DAN_ANDERSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14214-00; A14214-02; D21659-14 (sammanställning)",
+        "Notes": "Rutt in från söder på Birger Jarlsgatan, västerut på Kungsgatan och norrut på Sveavägen. Byte från vänster till höger körfält sker på Kungsgatan före Sveavägen."
+      },
+      {
+        "EntryId": "LIFEGUARD_CAR_STOPS_CRIME_SCENE",
+        "Action": "StopDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 42,
+          "Second": 30
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "PoliceLifeguards_CrimeScene_Stop",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "GORAN_SUND",
+        "PassengerEntityIds": [
+          "DAN_ANDERSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14214-00; A14214-02; D21659-14 (sammanställning)",
+        "Notes": "Stannar vid mordplatsen. Exakt ankomst styrs av POLICE_LIFEGUARDS_ARRIVE_CRIME_SCENE."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "A14214-00; A14214-02; D21659-14 (sammanställning)",
+    "Notes": "Sund och Andersson kom tillsammans från skyddsuppdrag vid USA:s ambassad och anlände cirka 23:40–23:45. Sund är tills vidare vald som teknisk förare; källan fastställer inte vem som körde."
+  },
+  {
+    "Name": "VEHICLE_POLICE_PIKET1230",
+    "VehicleId": "VEHICLE_POLICE_PIKET1230",
+    "DisplayName": "Pikét 1230",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "CHRISTER_PERSSON",
+      "KENT_BACKLUND",
+      "ULF_HELLMAN",
+      "LENA_LOHR",
+      "PER_BORG"
+    ],
+    "PrimaryPersonEntityId": "CHRISTER_PERSSON",
+    "KnownDriverEntityId": "PER_BORG",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_POLICE_PIKET1230_ENTER_PLAY_AREA",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 24,
+          "Second": 30
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterTunnelgatanW_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "PER_BORG",
+        "PassengerEntityIds": [
+          "CHRISTER_PERSSON",
+          "KENT_BACKLUND",
+          "ULF_HELLMAN",
+          "LENA_LOHR"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14207-00; A6797-00-B",
+        "Notes": "Pikét 1230 kommer in på spelplanen via Tunnelgatan."
+      },
+      {
+        "EntryId": "VEHICLE_POLICE_PIKET1230_DRIVE_TO_CRIME_SCENE",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 24,
+          "Second": 30
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterTunnelgatanW_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "TUNNELGATANE_001_R1",
+          "X_TUNNELGATANE_001_R1_TO_TUNNELGATANE_002_R1_STRAIGHT",
+          "TUNNELGATANE_002_R1",
+          "X_TUNNELGATANE_002_R1_TO_TUNNELGATANE_003_R1_STRAIGHT",
+          "TUNNELGATANE_003_R1",
+          "X_TUNNELGATANE_003_R1_TO_SVEAVAGENN_004_R2_LEFT",
+          "SVEAVAGENN_004_R2"
+        ],
+        "DriverEntityId": "PER_BORG",
+        "PassengerEntityIds": [
+          "CHRISTER_PERSSON",
+          "KENT_BACKLUND",
+          "ULF_HELLMAN",
+          "LENA_LOHR"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14207-00; A6797-00-B",
+        "Notes": "Kör österut på Tunnelgatan och svänger norrut på Sveavägen."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "A14207-00; A6797-00-B",
+    "Notes": "Per Borg används tills vidare som teknisk förare och stannar för radiopassning. Den historiska föraridentiteten är ännu inte källbelagd."
+  },
+  {
+    "Name": "VEHICLE_POLICE_PIKET3230",
+    "VehicleId": "VEHICLE_POLICE_PIKET3230",
+    "DisplayName": "Pikét 3230",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "Van",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "KJELL_OSTLING",
+      "CLAES_DJURFELDT",
+      "JAN_HERMANSSON",
+      "PETER_WIKSTROM",
+      "KLAS_GEDDA",
+      "LEIF_SVENSSON"
+    ],
+    "PrimaryPersonEntityId": "KJELL_OSTLING",
+    "KnownDriverEntityId": "LEIF_SVENSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "PIKET3230_INITIAL_2300",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterRegeringsgatanS_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LEIF_SVENSSON",
+        "PassengerEntityIds": [
+          "KJELL_OSTLING",
+          "CLAES_DJURFELDT",
+          "JAN_HERMANSSON",
+          "PETER_WIKSTROM",
+          "KLAS_GEDDA"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Kartan börjar i innerstaden. Piket 3230 placeras vid södra infarten som rekonstruerad fortsättning på färden från Södermalm."
+      },
+      {
+        "EntryId": "PIKET3230_TO_REGERINGSGATAN_103",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 5,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterRegeringsgatanS_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "REGERINGSGATANN_001_R1",
+          "X_REGERINGSGATANN_001_R1_TO_REGERINGSGATANN_002_R1_STRAIGHT",
+          "REGERINGSGATANN_002_R1",
+          "X_REGERINGSGATANN_002_R1_TO_REGERINGSGATANN_003_R1_STRAIGHT",
+          "REGERINGSGATANN_003_R1"
+        ],
+        "DriverEntityId": "LEIF_SVENSSON",
+        "PassengerEntityIds": [
+          "KJELL_OSTLING",
+          "CLAES_DJURFELDT",
+          "JAN_HERMANSSON",
+          "PETER_WIKSTROM",
+          "KLAS_GEDDA"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Kör norrut till Regeringsgatan 103 för att Claes ska flytta sin bil."
+      },
+      {
+        "EntryId": "PIKET3230_WAIT_REGERINGSGATAN_103",
+        "Action": "StopDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 16,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "Regeringsgatan_103",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LEIF_SVENSSON",
+        "PassengerEntityIds": [
+          "KJELL_OSTLING",
+          "JAN_HERMANSSON",
+          "PETER_WIKSTROM",
+          "KLAS_GEDDA"
+        ],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Claes lämnar bussen. Övriga stannar kvar."
+      },
+      {
+        "EntryId": "PIKET3230_FOLLOWS_CLAES_TO_JOHANNESGATAN",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 17,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "Regeringsgatan_103",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LEIF_SVENSSON",
+        "PassengerEntityIds": [
+          "KJELL_OSTLING",
+          "JAN_HERMANSSON",
+          "PETER_WIKSTROM",
+          "KLAS_GEDDA"
+        ],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "3230 följer Claes privata VW via Birger Jarlsgatan, Rådmansgatan, Döbelnsgatan och Kammakargatan till Johannesgatan. Denna del inväntar en sammanhängande lane-export för exakt lane-array."
+      },
+      {
+        "EntryId": "PIKET3230_WAIT_DAVID_BAGARES_JOHANNES",
+        "Action": "StopDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 20,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "DavidBXJohannes",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LEIF_SVENSSON",
+        "PassengerEntityIds": [
+          "KJELL_OSTLING",
+          "CLAES_DJURFELDT",
+          "JAN_HERMANSSON",
+          "PETER_WIKSTROM",
+          "KLAS_GEDDA"
+        ],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Bussen dubbelparkeras medan Claes parkerar och kliver tillbaka in."
+      },
+      {
+        "EntryId": "PIKET3230_TOWARD_BRUNKEBERGSTORG",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 20,
+          "Second": 35
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "DavidBXJohannes",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "JOHANNESGATANS_R1",
+          "X_JOHANNESGATANS_R1_TO_DAVIDBAGARESGW_003_R1_RIGHT",
+          "DAVIDBAGARESGW_003_R1",
+          "X_DAVIDBAGARESGW_003_R1_TO_MALMSKILLNADSVAGS_002_R1_LEFT",
+          "MALMSKILLNADSVAGS_002_R1",
+          "X_MALMSKILLNADSVAGS_002_R1_TO_MALMSKILLNADSVAGS_003_R1_STRAIGHT",
+          "MALMSKILLNADSVAGS_003_R1"
+        ],
+        "DriverEntityId": "LEIF_SVENSSON",
+        "PassengerEntityIds": [
+          "KJELL_OSTLING",
+          "CLAES_DJURFELDT",
+          "JAN_HERMANSSON",
+          "PETER_WIKSTROM",
+          "KLAS_GEDDA"
+        ],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Långsam körning mot nattfika. Skottlarmet når bilen vid Brunkebergstorg/Sergelrondellen."
+      },
+      {
+        "EntryId": "PIKET3230_CRIME_SCENE_ARRIVAL",
+        "Action": "StopDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 24,
+          "Second": 10
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "Police3230_CrimeScene_Stop",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "LEIF_SVENSSON",
+        "PassengerEntityIds": [
+          "KJELL_OSTLING",
+          "CLAES_DJURFELDT",
+          "JAN_HERMANSSON",
+          "PETER_WIKSTROM",
+          "KLAS_GEDDA"
+        ],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Ankomsten styrs tidsmässigt av POLICE_PIKET_3230_ARRIVES_CRIME_SCENE. Stop-ankaret behöver finnas i Unreal."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "Pol-1986-03-11_A14205-02-A_Claes_Djurfeldt_3230",
+    "Notes": "Ny Ford Econoline. Kjell Östling var befäl och Leif Svensson förare. Övriga i bussen var Claes Djurfeldt, Peter Wikström, Jan Hermansson och Klas Gedda."
+  },
+  {
+    "Name": "VEHICLE_POLICE_RB1170",
+    "VehicleId": "VEHICLE_POLICE_RB1170",
+    "DisplayName": "RB 1170",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "ANDERS_PETTERSSON",
+      "MATS_ERIKSSON"
+    ],
+    "PrimaryPersonEntityId": "ANDERS_PETTERSSON",
+    "KnownDriverEntityId": "MATS_ERIKSSON",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_POLICE_RB1170_ENTER_PLAY_AREA",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 26,
+          "Second": 55
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterMalmskillnadsgatanS_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "MATS_ERIKSSON",
+        "PassengerEntityIds": [
+          "ANDERS_PETTERSSON"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14211-00; A14211-00-A; A14211-00-B; A1969-00; A6797-00-B",
+        "Notes": "RB 1170 spawnas när bilen når spelgränsen. Färden från Grand Hôtel, Hamngatan och Oxtorgsgatan utelämnas eftersom den ligger utanför spelplanen."
+      }
+    ],
+    "Confidence": "Reconstructed",
+    "SourceReference": "A14211-00; A14211-00-A; A14211-00-B; A1969-00; A6797-00-B",
+    "Notes": "Mats Eriksson används tills vidare som teknisk förare. Historiskt är föraren ännu inte säkert källbelagd. Bilen spawnas 23:26:55 vid EnterMalmskillnadsgatanS_Car. Exakt lane-route därifrån till Snickarbacken kopplas från det uppladdade lane-underlaget."
+  },
+  {
+    "Name": "VEHICLE_POLICE_RB1210",
+    "VehicleId": "VEHICLE_POLICE_RB1210",
+    "DisplayName": "RB 1210",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "HANS_REHNSTAM",
+      "LARS_CHRISTIANSSON"
+    ],
+    "PrimaryPersonEntityId": "HANS_REHNSTAM",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": true,
+    "Timeline": [],
+    "Confidence": "Reconstructed",
+    "SourceReference": "Polisen Säpo Militär.kmz",
+    "Notes": "Polisfordonsgrundrad. KnownDriverEntityId lämnas tom tills föraren är källbelagd. Modell, klass och tidslinje fylls senare."
+  },
+  {
+    "Name": "VEHICLE_POLICE_RB1227",
+    "VehicleId": "VEHICLE_POLICE_RB1227",
+    "DisplayName": "RB 1227",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "PER_HALL",
+      "GORAN_STIGSON"
+    ],
+    "PrimaryPersonEntityId": "PER_HALL",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": true,
+    "Timeline": [],
+    "Confidence": "Reconstructed",
+    "SourceReference": "Tjänstgöringslista samt Pol-1993-06-08_DC15186_Förhör_med_Göran_Stigson",
+    "Notes": "Per Hall och Göran Stigson åkte tillsammans i civil Volvo eller Saab. Förhöret anger inte vem som körde eller bilens exakta nummer."
+  },
+  {
+    "Name": "VEHICLE_POLICE_RB1520",
+    "VehicleId": "VEHICLE_POLICE_RB1520",
+    "DisplayName": "RB 1520",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "CHRISTIAN_DALSGAARD"
+    ],
+    "PrimaryPersonEntityId": "CHRISTIAN_DALSGAARD",
+    "KnownDriverEntityId": "None",
+    "bSpawnInSimulation": true,
+    "Timeline": [],
+    "Confidence": "Reconstructed",
+    "SourceReference": "Polisen Säpo Militär.kmz",
+    "Notes": "Polisfordonsgrundrad. KnownDriverEntityId lämnas tom tills föraren är källbelagd. Modell, klass och tidslinje fylls senare."
+  },
+  {
+    "Name": "VEHICLE_POLICE_RB2520",
+    "VehicleId": "VEHICLE_POLICE_RB2520",
+    "DisplayName": "RB 2520",
+    "CategoryId": "POLICE",
+    "VehicleCategory": "PassengerCar",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "GOSTA_SODERSTROM",
+      "INGVAR_WIDEN"
+    ],
+    "PrimaryPersonEntityId": "GOSTA_SODERSTROM",
+    "KnownDriverEntityId": "INGVAR_WIDEN",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "VEHICLE_POLICE_RB2520_ENTER_PLAY_AREA",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 23,
+          "Second": 10
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterKungsgatanE_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "INGVAR_WIDEN",
+        "PassengerEntityIds": [
+          "GOSTA_SODERSTROM"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14203-00; A14203-00-A; A14203-01; A14203-01-A",
+        "Notes": "RB 2520 kommer in i spelområdet österifrån på Kungsgatan."
+      },
+      {
+        "EntryId": "VEHICLE_POLICE_RB2520_DRIVE_TO_CRIME_SCENE",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 23,
+          "Second": 10
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterKungsgatanE_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [
+          "KUNGSGATANW_001_R1",
+          "X_KUNGSGATANW_001_R1_TO_KUNGSGATANW_002_R1_STRAIGHT",
+          "KUNGSGATANW_002_R1",
+          "X_KUNGSGATANW_002_R1_TO_KUNGSGATANW_003_R1_STRAIGHT",
+          "KUNGSGATANW_003_R1",
+          "X_KUNGSGATANW_003_R1_TO_SVEAVAGENN_002_R1_RIGHT",
+          "SVEAVAGENN_002_R1",
+          "X_SVEAVAGENN_002_R1_TO_SVEAVAGENN_003_R1_STRAIGHT",
+          "SVEAVAGENN_003_R1"
+        ],
+        "DriverEntityId": "INGVAR_WIDEN",
+        "PassengerEntityIds": [
+          "GOSTA_SODERSTROM"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "A14203-00; A14203-00-A; A14203-01; A14203-01-A",
+        "Notes": "Kör västerut på Kungsgatan, svänger norrut på Sveavägen och stannar cirka 10–15 meter från folksamlingen vid Police2520_CrimeScene_Stop."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "A14203-00; A14203-00-A; A14203-01; A14203-01-A",
+    "Notes": "SAAB 900 historiskt; Volvo240 används som nuvarande standardmodell. Kör från östra Kungsgatan via Sveavägen till Police2520_CrimeScene_Stop. Stop-anchorn måste finnas i nästa Unreal-export."
+  },
+  {
+    "Name": "AMBULANCE_A951",
+    "VehicleId": "AMBULANCE_A951",
+    "DisplayName": "Ambulans A951 – Sollentuna",
+    "CategoryId": "AMBULANCE",
+    "VehicleCategory": "Ambulance",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "PETER_ANDERSSON_AMB",
+      "CHRISTER_ERIKSSON_AMB",
+      "KENNETH_LAVRELL",
+      "OLOF_PALME",
+      "LISBET_PALME"
+    ],
+    "PrimaryPersonEntityId": "PETER_ANDERSSON_AMB",
+    "KnownDriverEntityId": "PETER_ANDERSSON_AMB",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "AMBULANCE_A951_SPAWN",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 24,
+          "Second": 30
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterKungsgatanE_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "PETER_ANDERSSON_AMB",
+        "PassengerEntityIds": [
+          "CHRISTER_ERIKSSON_AMB"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "Ambulanspersonalens förhör",
+        "Notes": "Spawnas vid kartinfarten före sitt befintliga ankomst-event."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "Ambulanspersonalens förhör",
+    "Notes": "Tar Olof och Lisbeth Palme till Sabbatsbergs sjukhus."
+  },
+  {
+    "Name": "AMBULANCE_912",
+    "VehicleId": "AMBULANCE_912",
+    "DisplayName": "Ambulans 912 – Stockholm",
+    "CategoryId": "AMBULANCE",
+    "VehicleCategory": "Ambulance",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "MARIA_DEGERMAN",
+      "KENNETH_LAVRELL",
+      "EVA_LANTZ"
+    ],
+    "PrimaryPersonEntityId": "MARIA_DEGERMAN",
+    "KnownDriverEntityId": "MARIA_DEGERMAN",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "AMBULANCE_912_SPAWN",
+        "Action": "Spawn",
+        "Time": {
+          "Hour": 23,
+          "Minute": 25,
+          "Second": 30
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "EnterTunnelgatanW_Car",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "MARIA_DEGERMAN",
+        "PassengerEntityIds": [
+          "KENNETH_LAVRELL",
+          "EVA_LANTZ"
+        ],
+        "Confidence": "Reconstructed",
+        "SourceReference": "Ambulanspersonalens förhör",
+        "Notes": "Spawnas vid kartinfarten före sitt befintliga ankomst-event."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "Ambulanspersonalens förhör",
+    "Notes": "Kommer från Sabbatsberg men transporterar ingen patient tillbaka."
+  },
+  {
+    "Name": "VEHICLE_CLAES_DJURFELDT_VW1500",
+    "VehicleId": "VEHICLE_CLAES_DJURFELDT_VW1500",
+    "DisplayName": "Claes Djurfeldts privata VW 1500",
+    "CategoryId": "CIVILIAN",
+    "VehicleCategory": "Car",
+    "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
+    "bOverrideBodyColor": false,
+    "BodyColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "VehicleClass": "/Script/CoreUObject.Class'/Script/TMOPEngine.TMOPConfiguredVehicle'",
+    "AssociatedPersonEntityIds": [
+      "CLAES_DJURFELDT"
+    ],
+    "PrimaryPersonEntityId": "CLAES_DJURFELDT",
+    "KnownDriverEntityId": "CLAES_DJURFELDT",
+    "bSpawnInSimulation": true,
+    "Timeline": [
+      {
+        "EntryId": "CLAES_VW1500_INITIAL_REGERINGSGATAN_103",
+        "Action": "InitialPlacement",
+        "Time": {
+          "Hour": 23,
+          "Minute": 0,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "Regeringsgatan_103",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "None",
+        "PassengerEntityIds": [],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Felparkerad utanför Regeringsgatan 103."
+      },
+      {
+        "EntryId": "CLAES_VW1500_MOVED_TO_JOHANNESGATAN",
+        "Action": "BeginDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 17,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "Regeringsgatan_103",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "CLAES_DJURFELDT",
+        "PassengerEntityIds": [],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Källbelagd gatuföljd: Birger Jarlsgatan–Rådmansgatan–Döbelnsgatan–Kammakargatan–Johannesgatan. Exakt lane-array inväntar sammanhängande anslutningar i lane-exporten."
+      },
+      {
+        "EntryId": "CLAES_VW1500_PARKED_DAVID_BAGARES",
+        "Action": "StopDriving",
+        "Time": {
+          "Hour": 23,
+          "Minute": 20,
+          "Second": 0
+        },
+        "WorldTransform": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "PlacementMode": "Anchor",
+        "PlacementAnchorId": "DavidBXJohannes",
+        "AnchorLocalOffset": {
+          "Rotation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "W": 1
+          },
+          "Translation": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Scale3D": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        "OrderedLaneIds": [],
+        "DriverEntityId": "CLAES_DJURFELDT",
+        "PassengerEntityIds": [],
+        "Confidence": "Documented",
+        "SourceReference": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+        "Notes": "Claes backar cirka 15 meter österut på David Bagares gata och parkerar."
+      }
+    ],
+    "Confidence": "Documented",
+    "SourceReference": "A14205-02-A",
+    "Notes": "Privat VW 1500 som Claes Djurfeldt flyttade strax före mordet."
+  }
+]

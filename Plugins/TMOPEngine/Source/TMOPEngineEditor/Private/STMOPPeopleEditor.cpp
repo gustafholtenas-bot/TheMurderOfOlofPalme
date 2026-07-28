@@ -15,6 +15,7 @@
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Widgets/Images/SImage.h"
 #include "Widgets/Input/SButton.h"
+#include "Widgets/Input/SCheckBox.h"
 #include "Widgets/Input/SSearchBox.h"
 #include "Widgets/Input/SSearchableComboBox.h"
 #include "Widgets/SBoxPanel.h"
@@ -134,6 +135,59 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                         .OnTextChanged(
                             this,
                             &STMOPPeopleEditor::HandlePersonSearchChanged)
+                    ]
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 6.0f)
+                    [
+                        SNew(SHorizontalBox)
+                        + SHorizontalBox::Slot()
+                        .AutoWidth()
+                        .Padding(0.0f, 0.0f, 8.0f, 0.0f)
+                        [
+                            SNew(SCheckBox)
+                            .IsChecked(this,
+                                &STMOPPeopleEditor::GetPeopleFilterCheckState,
+                                EPeopleCategoryFilter::All)
+                            .OnCheckStateChanged(this,
+                                &STMOPPeopleEditor::HandlePeopleFilterChanged,
+                                EPeopleCategoryFilter::All)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("FilterAll", "All"))
+                            ]
+                        ]
+                        + SHorizontalBox::Slot()
+                        .AutoWidth()
+                        .Padding(0.0f, 0.0f, 8.0f, 0.0f)
+                        [
+                            SNew(SCheckBox)
+                            .IsChecked(this,
+                                &STMOPPeopleEditor::GetPeopleFilterCheckState,
+                                EPeopleCategoryFilter::Police)
+                            .OnCheckStateChanged(this,
+                                &STMOPPeopleEditor::HandlePeopleFilterChanged,
+                                EPeopleCategoryFilter::Police)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("FilterPolice", "Police"))
+                            ]
+                        ]
+                        + SHorizontalBox::Slot()
+                        .AutoWidth()
+                        [
+                            SNew(SCheckBox)
+                            .IsChecked(this,
+                                &STMOPPeopleEditor::GetPeopleFilterCheckState,
+                                EPeopleCategoryFilter::Suspect)
+                            .OnCheckStateChanged(this,
+                                &STMOPPeopleEditor::HandlePeopleFilterChanged,
+                                EPeopleCategoryFilter::Suspect)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("FilterSuspect", "Suspect"))
+                            ]
+                        ]
                     ]
                     + SVerticalBox::Slot()
                     .FillHeight(1.0f)
@@ -496,6 +550,24 @@ void STMOPPeopleEditor::RefreshPeople()
         if (!PersonSearch.IsEmpty() &&
             !Haystack.Contains(PersonSearch, ESearchCase::IgnoreCase))
             continue;
+
+        const FString Category = Row->CategoryId.ToString().TrimStartAndEnd();
+        const bool bPoliceCategory =
+            Category.Equals(TEXT("Police"), ESearchCase::IgnoreCase) ||
+            Category.Equals(TEXT("Polis"), ESearchCase::IgnoreCase) ||
+            Category.EndsWith(TEXT("_Police"), ESearchCase::IgnoreCase) ||
+            Category.EndsWith(TEXT("_Polis"), ESearchCase::IgnoreCase);
+        const bool bSuspectCategory =
+            Category.Equals(TEXT("Suspect"), ESearchCase::IgnoreCase) ||
+            Category.EndsWith(TEXT("_Suspect"), ESearchCase::IgnoreCase);
+
+        if (PeopleCategoryFilter == EPeopleCategoryFilter::Police &&
+            !bPoliceCategory)
+            continue;
+        if (PeopleCategoryFilter == EPeopleCategoryFilter::Suspect &&
+            !bSuspectCategory)
+            continue;
+
         PersonItems.Add(MakeShared<FName>(RowName));
     }
     PersonItems.Sort([](const FPersonItem& A, const FPersonItem& B)
@@ -834,6 +906,24 @@ void STMOPPeopleEditor::HandlePersonSearchChanged(
     const FText& SearchText)
 {
     PersonSearch = SearchText.ToString();
+    RefreshPeople();
+}
+
+ECheckBoxState STMOPPeopleEditor::GetPeopleFilterCheckState(
+    const EPeopleCategoryFilter Filter) const
+{
+    return PeopleCategoryFilter == Filter
+        ? ECheckBoxState::Checked
+        : ECheckBoxState::Unchecked;
+}
+
+void STMOPPeopleEditor::HandlePeopleFilterChanged(
+    const ECheckBoxState NewState,
+    const EPeopleCategoryFilter Filter)
+{
+    // One filter is always active. Clicking another checkbox selects it.
+    if (NewState != ECheckBoxState::Checked) return;
+    PeopleCategoryFilter = Filter;
     RefreshPeople();
 }
 
@@ -1440,3 +1530,4 @@ void STMOPPeopleEditor::SetStatus(
 }
 
 #undef LOCTEXT_NAMESPACE
+
