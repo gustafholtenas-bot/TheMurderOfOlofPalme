@@ -1,0 +1,1668 @@
+[
+  {
+    "Name": "GRAND_3_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_3_PROGRAM_END_WITH_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"C64CB5F24BE69F2F558455A8C02CE337\", \"Reklamen efter Gå och see slutar\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_3_FILM_END_NO_CREDITS",
+    "MinimumDelaySeconds": 2,
+    "PreferredDelaySeconds": 2,
+    "MaximumDelaySeconds": 2,
+    "SourceId": "",
+    "Notes": "no credits"
+  },
+  {
+    "Name": "GRAND_3_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_3_FILM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"5D5F4E684DEADF039E5BF4969FD66403\", \"Gå och see slutar\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 25
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 4,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 5,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_1_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_1_FILM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"9A11D06E4156AF12F9A11CA18E98FF3F\", \"Bröderna mozart slutar \")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 4,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 6,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 9,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_1_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_1_PROGRAM_END_WITH_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"96C929C24BEEE33730DC6C85A447B7B0\", \"reklamen efter Bröderna mozart slutar \")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_1_FILM_END_NO_CREDITS",
+    "MinimumDelaySeconds": 130,
+    "PreferredDelaySeconds": 135,
+    "MaximumDelaySeconds": 150,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "PALME_ANNAE_AT_GRAND",
+    "EventId": "PALME_ANNAE_AT_GRAND",
+    "DisplayName": "",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_1_PROGRAM_END_WITH_CREDITS",
+    "MinimumDelaySeconds": 30,
+    "PreferredDelaySeconds": 50,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "PALME_MEETING_SANDINS",
+    "EventId": "PALME_MEETING_SANDINS",
+    "DisplayName": "",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "PALME_ANNAE_AT_GRAND",
+    "MinimumDelaySeconds": 60,
+    "PreferredDelaySeconds": 70,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "PALME_MEETING_SANDINS_END",
+    "EventId": "PALME_MEETING_SANDINS_END",
+    "DisplayName": "",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "PALME_MEETING_SANDINS",
+    "MinimumDelaySeconds": 60,
+    "PreferredDelaySeconds": 120,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "PALME_AT_KIOSK",
+    "EventId": "PALME_AT_KIOSK",
+    "DisplayName": "",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "PALME_MEETING_SANDINS_END",
+    "MinimumDelaySeconds": 60,
+    "PreferredDelaySeconds": 100,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "SUSANNE_GUNILLA_KIOSK_MEETING_START",
+    "EventId": "SUSANNE_GUNILLA_KIOSK_MEETING_START",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"D7D9D8CA496B52939D9B119342B0A475\", \"Susanne och Gunilla möts vid korvkiosken\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 14,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 15,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "E1096",
+    "Notes": "Rekonstruerad gemensam mötestid vid korvkiosken"
+  },
+  {
+    "Name": "SUSANNE_GUNILLA_KIOSK_MEETING_END",
+    "EventId": "SUSANNE_GUNILLA_KIOSK_MEETING_END",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"E4D0819F4585D1225E7796B5ABBC537F\", \"Sällskapen lämnar korvkiosken\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 20
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 40
+    },
+    "TriggerEventId": "SUSANNE_GUNILLA_KIOSK_MEETING_START",
+    "MinimumDelaySeconds": 240,
+    "PreferredDelaySeconds": 270,
+    "MaximumDelaySeconds": 300,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "Palme_shot_1",
+    "EventId": "Palme_shot_1",
+    "DisplayName": "",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "Palme_shot_2",
+    "EventId": "Palme_shot_2",
+    "DisplayName": "",
+    "TimingMode": "RelativeToPreviousEntry",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 20
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "TriggerEventId": "Palme_shot_1",
+    "MinimumDelaySeconds": 1,
+    "PreferredDelaySeconds": 1,
+    "MaximumDelaySeconds": 2,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "POLICE_SODERSTROM_ARRIVES_CRIME_SCENE",
+    "EventId": "POLICE_SODERSTROM_ARRIVES_CRIME_SCENE",
+    "DisplayName": "RB 2520 anländer först till mordplatsen",
+    "TimingMode": "Window",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 10
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 40
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14203-00; A14203-00-A; A14203-01; A14203-01-A",
+    "Notes": "Simuleringsfönstret 23:24:00–23:24:40 behålls. Söderström angav senare 23:30 och Windén mindes 23:28/23:30 på sin digitalklocka; klockuppgifterna är omstridda och skiljer sig från övrig relativ händelseordning."
+  },
+  {
+    "Name": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "EventId": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"D4D25C2E420AC515652667900333416F\", \"RB 1230\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 15
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "POLICE_PIKET_3230_ARRIVES_CRIME_SCENE",
+    "EventId": "POLICE_PIKET_3230_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"714BA83B4BF48F975BB2D7BA64DE3D42\", \"RB 3220\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 2,
+    "PreferredDelaySeconds": 5,
+    "MaximumDelaySeconds": 15,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "AMBULANCE_951_ARRIVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_951_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"00602F8249100AC65CFB22A91BA66AC5\", \"Ambulans 951 Först på plats\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 15
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 15
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": "Sollentunaambulansen som råkade passera och vinkades in"
+  },
+  {
+    "Name": "AMBULANCE_912_ARRIVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_912_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"BE40AC604F8043B57F72D587B093EDE3\", \"Ambulans 912 andra på plats\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "AMBULANCE_951_LEAVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_951_LEAVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"61A11E2F4B458F03F37A5999CB296B9B\", \"Ambulans 951\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 30
+    },
+    "TriggerEventId": "AMBULANCE_912_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 90,
+    "PreferredDelaySeconds": 90,
+    "MaximumDelaySeconds": 90,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "AMBULANCE_912_LEAVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_912_LEAVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"79B806C6440607DC29B6CEB3D132020B\", \"Ambulans 912\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 15
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 15
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 31,
+      "Second": 30
+    },
+    "TriggerEventId": "AMBULANCE_951_LEAVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 30,
+    "PreferredDelaySeconds": 45,
+    "MaximumDelaySeconds": 60,
+    "SourceId": "",
+    "Notes": "\"Maria Degerman ingen passagerare när hon någon minut efter Sollentuna-ambulansen återvände till Sabbatsbergs-akuten.\""
+  },
+  {
+    "Name": "LARS_MEET_YVONNE_AHMED",
+    "EventId": "LARS_MEET_YVONNE_AHMED",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"176F4A8B4F31E0CD99A6C8B0385A5F22\", \"LARS_MEET_YVONNE_AHMED\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 50
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 45
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 50
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "LARS_MEETS_POLICE_FIRST_PASS",
+    "EventId": "LARS_MEETS_POLICE_FIRST_PASS",
+    "DisplayName": "Lars Jeppsson – poliserna passerar första gången",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 20
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 50
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "Användarens kompletterande uppgift",
+    "Notes": "Första kontakten uppe på åsen/David Bagares gata: poliserna passerar Lars utan att ta med honom."
+  },
+  {
+    "Name": "LARS_MEETS_POLICE_RETURN_TO_CRIME_SCENE",
+    "EventId": "LARS_MEETS_POLICE_RETURN_TO_CRIME_SCENE",
+    "DisplayName": "Jan Hermansson tar Lars Jeppsson till mordplatsen",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14205-00; A14205-05",
+    "Notes": "Jan Hermansson tar med Lars Jeppsson tillbaka ned till mordplatsen för förhör."
+  },
+  {
+    "Name": "GRAND_4_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_4_PROGRAM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"1FCE8B5142ED0FD1C41700ACC12001A9\", \"Ran slutar\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 41,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_4_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_4_PROGRAM_END_WITH_ADS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"AFBD210047CB967154252A92BF6AF788\", \"Reklamen efter Ran slutar\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_4_FILM_END_NO_ADS",
+    "MinimumDelaySeconds": 130,
+    "PreferredDelaySeconds": 130,
+    "MaximumDelaySeconds": 130,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_2_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_2_FILM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"06E8B75C4B7FE638A6E7318C12F7C1D0\", \"Amadeus slutar\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 41,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 43,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_2_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_2_PROGRAM_END_WITH_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"D8EA92A24974A8C7C1BFC4A166B4C777\", \"reklamen efter Amadeus slutar\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_2_FILM_END_NO_CREDITS",
+    "MinimumDelaySeconds": 120,
+    "PreferredDelaySeconds": 180,
+    "MaximumDelaySeconds": 200,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "POLICE_RB1170_ARRIVES_SNICKARBACKEN",
+    "EventId": "POLICE_RB1170_ARRIVES_SNICKARBACKEN",
+    "DisplayName": "RB 1170 anländer till Birger Jarlsgatan/Snickarbacken",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 45
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 15
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14211-00; A14211-00-A; A14211-00-B; A1969-00; A6797-00-B",
+    "Notes": "Anders Pettersson och Mats Eriksson anländer i RB 1170, kör fram i korsningen och backar därefter in en bit på Snickarbacken med bilens front vänd mot Stureplan."
+  },
+  {
+    "Name": "POLICE_RB1170_MEETS_GEDDA_WIKSTROM_SNICKARBACKEN",
+    "EventId": "POLICE_RB1170_MEETS_GEDDA_WIKSTROM_SNICKARBACKEN",
+    "DisplayName": "RB 1170 möter Klas Gedda och Peter Wikström vid Snickarbacken",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 32,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14211-00; A14211-00-A; A14211-00-B; A1969-00; A6797-00-B",
+    "Notes": "Omkring fem minuter efter RB 1170:s ankomst springer Klas Gedda ut ur Snickarbacken, sannolikt följd av Peter Wikström."
+  },
+  {
+    "Name": "POLICE_RB1170_CHECKS_INTOXICATED_MAN_SNICKARBACKEN",
+    "EventId": "POLICE_RB1170_CHECKS_INTOXICATED_MAN_SNICKARBACKEN",
+    "DisplayName": "Anders Pettersson kontrollerar berusad man vid Snickarbacken",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14211-00; A14211-00-A; A14211-00-B; A1969-00; A6797-00-B",
+    "Notes": "Anders Pettersson kontrollerar en kraftigt berusad finsk man i blå täckjacka. Mannen tas till RB 1170 för kontroll och släpps när signalementet ändras. Personen är ännu inte identifierad i People-tabellen."
+  },
+  {
+    "Name": "POLICE_1230_FIRST_CORDON_STARTS",
+    "EventId": "POLICE_1230_FIRST_CORDON_STARTS",
+    "DisplayName": "Christer Persson beordrar första avspärrningen",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "TriggerEventId": "AMBULANCE_951_LEAVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 180,
+    "PreferredDelaySeconds": 210,
+    "MaximumDelaySeconds": 240,
+    "SourceId": "A14207-00; A6797-00-B",
+    "Notes": "Christer uppgav att avspärrningsarbetet började högst tre till fyra minuter efter att offret förts bort i ambulansen."
+  },
+  {
+    "Name": "POLICE_1230_FIRST_CORDON_COMPLETE",
+    "EventId": "POLICE_1230_FIRST_CORDON_COMPLETE",
+    "DisplayName": "Första avspärrningen är färdig",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 0
+    },
+    "TriggerEventId": "POLICE_1230_FIRST_CORDON_STARTS",
+    "MinimumDelaySeconds": 180,
+    "PreferredDelaySeconds": 240,
+    "MaximumDelaySeconds": 300,
+    "SourceId": "A14207-00; A6797-00-B",
+    "Notes": "Den första avspärrningen tog sammanlagt högst fem minuter att upprätta och godtogs av Gösta Söderström."
+  },
+  {
+    "Name": "POLICE_1230_CORDON_EXTENDED_TO_LUNTMAKARGATAN",
+    "EventId": "POLICE_1230_CORDON_EXTENDED_TO_LUNTMAKARGATAN",
+    "DisplayName": "Avspärrningen förlängs till Tunnelgatan/Luntmakargatan",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "TriggerEventId": "POLICE_1230_FIRST_CORDON_COMPLETE",
+    "MinimumDelaySeconds": 240,
+    "PreferredDelaySeconds": 300,
+    "MaximumDelaySeconds": 360,
+    "SourceId": "A14207-00; A6797-00-B",
+    "Notes": "Den östra delen av avspärrningen flyttades efter omkring fem minuter till Tunnelgatan vid Luntmakargatan."
+  },
+  {
+    "Name": "POLICE_LENA_LOHR_ALERTED_BY_LEIF_LJUNGQVIST",
+    "EventId": "POLICE_LENA_LOHR_ALERTED_BY_LEIF_LJUNGQVIST",
+    "DisplayName": "Leif Ljungqvist pekar ut Anders Björkman för Lena Löhr",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 20
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 20
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 20
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 20
+    },
+    "TriggerEventId": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 10,
+    "PreferredDelaySeconds": 20,
+    "MaximumDelaySeconds": 30,
+    "SourceId": "A14207-01",
+    "Notes": "Löhr uppgav att högst 30 sekunder gick från hennes ankomst tills Ljungqvist uppmärksammade henne på Björkman."
+  },
+  {
+    "Name": "POLICE_LENA_LOHR_INTERVIEWS_ANDERS_BJORKMAN",
+    "EventId": "POLICE_LENA_LOHR_INTERVIEWS_ANDERS_BJORKMAN",
+    "DisplayName": "Lena Löhr stoppar och frågar Anders Björkman",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "TriggerEventId": "POLICE_LENA_LOHR_ALERTED_BY_LEIF_LJUNGQVIST",
+    "MinimumDelaySeconds": 5,
+    "PreferredDelaySeconds": 10,
+    "MaximumDelaySeconds": 20,
+    "SourceId": "A14207-01",
+    "Notes": "Löhr sprang efter Björkman söder om Tunnelgatan och tog hans första uppgifter om skotten och gärningsmannen."
+  },
+  {
+    "Name": "POLICE_KENT_BACKLUND_ASSISTS_STEFAN_GLANTZ",
+    "EventId": "POLICE_KENT_BACKLUND_ASSISTS_STEFAN_GLANTZ",
+    "DisplayName": "Kent Bäcklund hjälper Stefan Glantz efter återupplivningsförsöket",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "TriggerEventId": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 20,
+    "PreferredDelaySeconds": 45,
+    "MaximumDelaySeconds": 90,
+    "SourceId": "A22427-00",
+    "Notes": "Bäcklund tog hand om mannen som gjort mun-mot-mun och hjälpte honom att tvätta bort blod. Personen kopplas till Stefan Glantz i simuleringen."
+  },
+  {
+    "Name": "POLICE_RB2520_ALERTED_ON_KUNGSGATAN",
+    "EventId": "POLICE_RB2520_ALERTED_ON_KUNGSGATAN",
+    "DisplayName": "Okänd man stoppar RB 2520 vid King Creole",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 10
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 55
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14203-00-A; A14203-01; A14203-01-A",
+    "Notes": "En upprörd man vinkar in bilen på Kungsgatan och berättar att någon skjutits vid Sveavägen/Tunnelgatan."
+  },
+  {
+    "Name": "POLICE_SODERSTROM_ORDERS_3230_PURSUIT",
+    "EventId": "POLICE_SODERSTROM_ORDERS_3230_PURSUIT",
+    "DisplayName": "Gösta Söderström beordrar piket 3230 att ta upp förföljandet",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "TriggerEventId": "POLICE_SODERSTROM_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 8,
+    "PreferredDelaySeconds": 10,
+    "MaximumDelaySeconds": 20,
+    "SourceId": "A14203-00; A14203-00-A",
+    "Notes": "Söderström uppgav att 3230 anlände omkring tio sekunder efter RB 2520 och omedelbart beordrades mot Tunnelgatan."
+  },
+  {
+    "Name": "POLICE_SODERSTROM_LISBETH_IDENTIFIES_OLOF",
+    "EventId": "POLICE_SODERSTROM_LISBETH_IDENTIFIES_OLOF",
+    "DisplayName": "Lisbeth Palme identifierar sig och Olof för Gösta Söderström",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "TriggerEventId": "POLICE_SODERSTROM_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 25,
+    "PreferredDelaySeconds": 45,
+    "MaximumDelaySeconds": 75,
+    "SourceId": "A14203-00; A14203-00-A; A14203-01-A",
+    "Notes": "Söderström frågar vem den skjutne är och Lisbeth uppger att det är Olof Palme."
+  },
+  {
+    "Name": "POLICE_WIDEN_GETS_TAXI_WITNESS_DESCRIPTION",
+    "EventId": "POLICE_WIDEN_GETS_TAXI_WITNESS_DESCRIPTION",
+    "DisplayName": "Ingvar Windén tar signalement från en taxichaufför",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "TriggerEventId": "POLICE_SODERSTROM_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 35,
+    "PreferredDelaySeconds": 60,
+    "MaximumDelaySeconds": 100,
+    "SourceId": "A14203-01-A",
+    "Notes": "Windén tar legitimation och gärningsmannasignalement från en ännu inte säkert identifierad taxichaufför."
+  },
+  {
+    "Name": "POLICE_WIDEN_RELAYS_DESCRIPTION_TO_SODERSTROM",
+    "EventId": "POLICE_WIDEN_RELAYS_DESCRIPTION_TO_SODERSTROM",
+    "DisplayName": "Ingvar Windén lämnar signalementet till Gösta Söderström",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "TriggerEventId": "POLICE_WIDEN_GETS_TAXI_WITNESS_DESCRIPTION",
+    "MinimumDelaySeconds": 10,
+    "PreferredDelaySeconds": 20,
+    "MaximumDelaySeconds": 35,
+    "SourceId": "A14203-01-A",
+    "Notes": "Windén springer tillbaka till RB 2520 och lämnar signalementet till Söderström vid radion."
+  },
+  {
+    "Name": "POLICE_SODERSTROM_REPORTS_PALME_IDENTITY",
+    "EventId": "POLICE_SODERSTROM_REPORTS_PALME_IDENTITY",
+    "DisplayName": "Gösta Söderström rapporterar att den skjutne är Olof Palme",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "TriggerEventId": "AMBULANCE_951_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 20,
+    "MaximumDelaySeconds": 45,
+    "SourceId": "A14203-00",
+    "Notes": "Efter identifieringen och ambulansens ankomst meddelar Söderström identiteten via radio och begär kriminalpersonal."
+  },
+  {
+    "Name": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
+    "EventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
+    "DisplayName": "Piket 3230 kommer in från Södermalm före mordet",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 5,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 5,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 10,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+    "Notes": "Exakt kartgränspassage är rekonstruerad. Förhöret belägger att gruppen var i tjänst och senare körde till Regeringsgatan."
+  },
+  {
+    "Name": "POLICE_3230_STOPS_REGERINGSGATAN_103",
+    "EventId": "POLICE_3230_STOPS_REGERINGSGATAN_103",
+    "DisplayName": "Piket 3230 stannar vid Claes Djurfeldts bil",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 16,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 14,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 16,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 18,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+    "Notes": "Claes privata VW 1500 stod felparkerad utanför Regeringsgatan 103."
+  },
+  {
+    "Name": "POLICE_CLAES_MOVES_PRIVATE_CAR",
+    "EventId": "POLICE_CLAES_MOVES_PRIVATE_CAR",
+    "DisplayName": "Claes Djurfeldt flyttar sin privata bil",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 17,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 15,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 17,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+    "Notes": "Claes kör Regeringsgatan/Birger Jarlsgatan–Rådmansgatan–Döbelnsgatan–Kammakargatan–Johannesgatan; 3230 följer."
+  },
+  {
+    "Name": "POLICE_CLAES_REJOINS_PIKET_3230",
+    "EventId": "POLICE_CLAES_REJOINS_PIKET_3230",
+    "DisplayName": "Claes parkerar och kliver tillbaka in i 3230",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 15
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 15
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+    "Notes": "Claes backar cirka 15 meter på David Bagares gata, parkerar och återgår till piketbussen."
+  },
+  {
+    "Name": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
+    "EventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
+    "DisplayName": "Piket 3230 lämnar Johannesgatan mot nattfika",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14205-02; A14205-02-A; A14205-05; A14205-06",
+    "Notes": "Bussen kör Johannesgatan–David Bagares gata–Malmskillnadsgatan mot Brunkebergstorg/Sergelrondellen."
+  },
+  {
+    "Name": "POLICE_LIFEGUARDS_LEAVE_US_EMBASSY",
+    "EventId": "POLICE_LIFEGUARDS_LEAVE_US_EMBASSY",
+    "DisplayName": "Sund och Andersson lämnar skyddsuppdraget vid USA:s ambassad",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 41,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14214-00; A14214-02; D21659-14 (sammanställning)",
+    "Notes": "Avgångstiden är rekonstruerad från det dokumenterade ankomstfönstret 23:40–23:45."
+  },
+  {
+    "Name": "POLICE_LIFEGUARDS_ENTER_GAME_AREA",
+    "EventId": "POLICE_LIFEGUARDS_ENTER_GAME_AREA",
+    "DisplayName": "Livvaktsbilen kommer in söderifrån på Birger Jarlsgatan",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 43,
+      "Second": 0
+    },
+    "TriggerEventId": "POLICE_LIFEGUARDS_LEAVE_US_EMBASSY",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14214-00; A14214-02; D21659-14 (sammanställning)",
+    "Notes": "Infarten är en spelrekonstruktion utifrån färd från USA:s ambassad."
+  },
+  {
+    "Name": "POLICE_LIFEGUARDS_ARRIVE_CRIME_SCENE",
+    "EventId": "POLICE_LIFEGUARDS_ARRIVE_CRIME_SCENE",
+    "DisplayName": "Göran Sund och Dan Andersson anländer till mordplatsen",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 45,
+      "Second": 0
+    },
+    "TriggerEventId": "POLICE_LIFEGUARDS_ENTER_GAME_AREA",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14214-00; A14214-02; D21659-14 (sammanställning)",
+    "Notes": "Ankomstfönstret och att de kom tillsammans är dokumenterat. De stannade cirka 20 minuter."
+  }
+]
