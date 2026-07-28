@@ -71227,7 +71227,7 @@
         "bTimeIsArrival": true,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
-        "TargetAnchorId": "ANCHOR_TEST_END",
+        "TargetAnchorId": "Dekorimahornet",
         "PassAnchorIds": [],
         "TargetEntityId": "None",
         "TargetSeatId": "None",
@@ -117106,7 +117106,7 @@
     "Timeline": [
       {
         "EntryId": "PIKET3230_CLAES_DJURFELDT_INITIAL_2300",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 0,
@@ -117115,7 +117115,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "EnterRegeringsgatanS_Car",
@@ -117155,7 +117155,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -117213,7 +117213,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -117231,7 +117231,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_CLAES_MOVES_PRIVATE_CAR",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "Regeringsgatan_103",
@@ -117271,7 +117271,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -117289,7 +117289,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_CLAES_REJOINS_PIKET_3230",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "DavidBXJohannes",
@@ -117329,7 +117329,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -117347,7 +117347,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "DavidBXJohannes",
@@ -117387,7 +117387,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -117595,7 +117595,7 @@
     "Timeline": [
       {
         "EntryId": "DAN_ANDERSSON_ENTERS_GAME_AREA",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 40,
@@ -117644,7 +117644,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -117702,7 +117702,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -118195,7 +118195,7 @@
     "Timeline": [
       {
         "EntryId": "GORAN_SUND_ENTERS_GAME_AREA",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 40,
@@ -118244,7 +118244,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -118302,7 +118302,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -120009,7 +120009,7 @@
     "Timeline": [
       {
         "EntryId": "PIKET3230_JAN_HERMANSSON_INITIAL_2300",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 0,
@@ -120018,7 +120018,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "EnterRegeringsgatanS_Car",
@@ -120058,7 +120058,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -120116,7 +120116,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -120134,7 +120134,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "DavidBXJohannes",
@@ -120174,7 +120174,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -120253,7 +120253,7 @@
         "bTimeIsArrival": true,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
-        "TargetAnchorId": "ANCHOR_TEST_END",
+        "TargetAnchorId": "Dekorimahornet",
         "PassAnchorIds": [],
         "TargetEntityId": "None",
         "TargetSeatId": "None",
@@ -120755,7 +120755,7 @@
     "Timeline": [
       {
         "EntryId": "PIKET3230_KJELL_OSTLING_INITIAL_2300",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 0,
@@ -120764,7 +120764,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "EnterRegeringsgatanS_Car",
@@ -120804,7 +120804,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -120862,7 +120862,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -120880,7 +120880,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "DavidBXJohannes",
@@ -120920,7 +120920,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -121128,7 +121128,7 @@
     "Timeline": [
       {
         "EntryId": "PIKET3230_KLAS_GEDDA_INITIAL_2300",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 0,
@@ -121137,7 +121137,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "EnterRegeringsgatanS_Car",
@@ -121177,7 +121177,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -121235,7 +121235,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -121253,7 +121253,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "DavidBXJohannes",
@@ -121293,7 +121293,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -121641,7 +121641,7 @@
     "Timeline": [
       {
         "EntryId": "PIKET3230_LEIF_SVENSSON_INITIAL_2300",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 0,
@@ -121650,7 +121650,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "EnterRegeringsgatanS_Car",
@@ -121690,7 +121690,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -121748,7 +121748,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -121766,7 +121766,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "DavidBXJohannes",
@@ -121806,7 +121806,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -123331,7 +123331,7 @@
     "Timeline": [
       {
         "EntryId": "PIKET3230_PETER_WIKSTROM_INITIAL_2300",
-        "Action": "EnterVehicle",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 0,
@@ -123340,7 +123340,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "EnterRegeringsgatanS_Car",
@@ -123380,7 +123380,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Reconstructed",
@@ -123438,7 +123438,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",
@@ -123456,7 +123456,7 @@
         "TimingMode": "Relative",
         "SharedEventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
         "EventOffsetSeconds": 0,
-        "bTimeIsArrival": true,
+        "bTimeIsArrival": false,
         "TravelSpeedOverrideCmPerSecond": 0,
         "LocationType": "Anchor",
         "TargetAnchorId": "DavidBXJohannes",
@@ -123496,7 +123496,7 @@
             "Z": 1
           }
         },
-        "ActivityState": "Sitting",
+        "ActivityState": "RidingVehicle",
         "LifeState": "Alive",
         "bTeleportDuringCatchUp": true,
         "Confidence": "Documented",

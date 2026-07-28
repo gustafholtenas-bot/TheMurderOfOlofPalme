@@ -4327,7 +4327,7 @@
       },
       {
         "EntryId": "LIFEGUARD_CAR_STOPS_CRIME_SCENE",
-        "Action": "StopDriving",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 42,
@@ -4693,7 +4693,7 @@
       },
       {
         "EntryId": "PIKET3230_WAIT_REGERINGSGATAN_103",
-        "Action": "StopDriving",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 16,
@@ -4809,7 +4809,7 @@
       },
       {
         "EntryId": "PIKET3230_WAIT_DAVID_BAGARES_JOHANNES",
-        "Action": "StopDriving",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 20,
@@ -4935,7 +4935,7 @@
       },
       {
         "EntryId": "PIKET3230_CRIME_SCENE_ARRIVAL",
-        "Action": "StopDriving",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 24,
@@ -5484,7 +5484,7 @@
     "VehicleId": "VEHICLE_CLAES_DJURFELDT_VW1500",
     "DisplayName": "Claes Djurfeldts privata VW 1500",
     "CategoryId": "CIVILIAN",
-    "VehicleCategory": "Car",
+    "VehicleCategory": "PassengerCar",
     "ModelData": "/Script/TMOPEngine.TMOPVehicleModelData'/Game/TMOP/Vehicles/Cars/Volvo240.Volvo240'",
     "bOverrideBodyColor": false,
     "BodyColor": {
@@ -5609,7 +5609,7 @@
       },
       {
         "EntryId": "CLAES_VW1500_PARKED_DAVID_BAGARES",
-        "Action": "StopDriving",
+        "Action": "InitialPlacement",
         "Time": {
           "Hour": 23,
           "Minute": 20,
