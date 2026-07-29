@@ -1,0 +1,212 @@
+[
+  {
+    "Name": "OBS_CIVIL2733_PASSAT_VEHICLE_AFK_LUNTMAKAR",
+    "ObservationId": "OBS_CIVIL2733_PASSAT_VEHICLE_AFK_LUNTMAKAR",
+    "DisplayName": "Civil 2733 ser den parkerade Passaten",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "PONTUS_WIKNER",
+      "ERIK_SUNDIN"
+    ],
+    "ObservedEntityId": "VEHICLE_SUSPECT_PASSAT_AFK_LUNTMAKAR",
+    "ObservedEntityType": "Vehicle",
+    "ObservationAnchorId": "AFKXLuntmakar_SW",
+    "TimingMode": "RelativeToSharedEvent",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "ReferenceSharedEventId": "Palme_shot_1",
+    "ReferenceOffsetSeconds": 300,
+    "ObservationDurationSeconds": 10,
+    "ObservationRadiusCm": 3000.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Documented",
+    "SourceReference": "Civilpatrull 2733; Pontus Wikner och Erik Sundin",
+    "ObservedDescription": "Passat observerad vid Adolf Fredriks kyrka/Luntmakargatan.",
+    "Notes": "Fordonet har en egen oberoende HistoricalVehicle-timeline."
+  },
+  {
+    "Name": "OBS_CIVIL2733_PASSAT_DRIVER_AFK_LUNTMAKAR",
+    "ObservationId": "OBS_CIVIL2733_PASSAT_DRIVER_AFK_LUNTMAKAR",
+    "DisplayName": "Civil 2733 ser Passatens förare",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "PONTUS_WIKNER",
+      "ERIK_SUNDIN"
+    ],
+    "ObservedEntityId": "SUSPECT_PASSAT_DRIVER_AFK_LUNTMAKAR",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "AFKXLuntmakar_SW",
+    "TimingMode": "RelativeToSharedEvent",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "ReferenceSharedEventId": "Palme_shot_1",
+    "ReferenceOffsetSeconds": 300,
+    "ObservationDurationSeconds": 10,
+    "ObservationRadiusCm": 3000.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Documented",
+    "SourceReference": "Civilpatrull 2733; Pontus Wikner och Erik Sundin",
+    "ObservedDescription": "Förare i den observerade Passaten vid Adolf Fredriks kyrka/Luntmakargatan.",
+    "Notes": "Första runtime-test. Tiden är kopplad till befintliga timeline-offseten +300 s."
+  },
+  {
+    "Name": "OBS_CIVIL2733_PASSAT_PASSENGER_AFK_LUNTMAKAR",
+    "ObservationId": "OBS_CIVIL2733_PASSAT_PASSENGER_AFK_LUNTMAKAR",
+    "DisplayName": "Civil 2733 ser mannen vid passagerarsidan",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "PONTUS_WIKNER",
+      "ERIK_SUNDIN"
+    ],
+    "ObservedEntityId": "SUSPECT_PASSAT_PASSENGER_AFK_LUNTMAKAR",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "AFKXLuntmakar_SW",
+    "TimingMode": "RelativeToSharedEvent",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "ReferenceSharedEventId": "Palme_shot_1",
+    "ReferenceOffsetSeconds": 300,
+    "ObservationDurationSeconds": 10,
+    "ObservationRadiusCm": 3000.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Documented",
+    "SourceReference": "Civilpatrull 2733; Pontus Wikner och Erik Sundin",
+    "ObservedDescription": "Man observerad vid Passatens passagerarsida.",
+    "Notes": "Första runtime-test. Observationen flyttar inte mannen eller patrullen."
+  },
+  {
+    "Name": "OBS_CIVIL2733_PASSAT_THIRD_MAN_AFK_LUNTMAKAR",
+    "ObservationId": "OBS_CIVIL2733_PASSAT_THIRD_MAN_AFK_LUNTMAKAR",
+    "DisplayName": "Civil 2733 ser den tredje mannen vid Passaten",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "PONTUS_WIKNER",
+      "ERIK_SUNDIN"
+    ],
+    "ObservedEntityId": "SUSPECT_PASSAT_THIRD_MAN_AFK_LUNTMAKAR",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "AFKXLuntmakar_SW",
+    "TimingMode": "RelativeToSharedEvent",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "ReferenceSharedEventId": "Palme_shot_1",
+    "ReferenceOffsetSeconds": 300,
+    "ObservationDurationSeconds": 10,
+    "ObservationRadiusCm": 3000.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Documented",
+    "SourceReference": "Civilpatrull 2733; Pontus Wikner och Erik Sundin",
+    "ObservedDescription": "Tredje man observerad i anslutning till Passaten.",
+    "Notes": "Första runtime-test."
+  },
+  {
+    "Name": "OBS_CIVIL2733_RED_JACKET_MAN_KARELIA",
+    "ObservationId": "OBS_CIVIL2733_RED_JACKET_MAN_KARELIA",
+    "DisplayName": "Civil 2733 kontrollerar mannen i röd jacka",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "PONTUS_WIKNER",
+      "ERIK_SUNDIN"
+    ],
+    "ObservedEntityId": "SUSPECT_RED_JACKET_KARELIA",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "HotelKarelia",
+    "TimingMode": "RelativeToSharedEvent",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "ReferenceSharedEventId": "Palme_shot_1",
+    "ReferenceOffsetSeconds": 690,
+    "ObservationDurationSeconds": 60,
+    "ObservationRadiusCm": 2500.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Documented",
+    "SourceReference": "Civilpatrull 2733; Pontus Wikner och Erik Sundin",
+    "ObservedDescription": "Man i röd jacka som kontrollerades vid Karelia.",
+    "Notes": "Använder befintliga timeline-offseten +690 s."
+  },
+  {
+    "Name": "OBS_MAUNO_KICKI_WT_MAN_AFK_13",
+    "ObservationId": "OBS_MAUNO_KICKI_WT_MAN_AFK_13",
+    "DisplayName": "Mauno och Kicki passerar mannen med walkie-talkie",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "MAUNO_LUUKAS_JERKER",
+      "KICKI_J"
+    ],
+    "ObservedEntityId": "THOMAS_PILTZ_MED_WALKIE_TALKIE",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "Adolffredrikskyrkog_13",
+    "TimingMode": "Absolute",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 17,
+      "Second": 0
+    },
+    "ReferenceSharedEventId": "None",
+    "ReferenceOffsetSeconds": 0,
+    "ObservationDurationSeconds": 60,
+    "ObservationRadiusCm": 2500.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Reconstructed",
+    "SourceReference": "EBD9631-00-D",
+    "ObservedDescription": "Man, cirka 184-190 cm, stor/kraftig och atletisk, bylsig klädsel, pilotglasögon och stor rödaktig walkie-talkie.",
+    "Notes": "Tiden är rekonstruerad. Mauno pekade långt senare ut mannen som polisman D/Thomas Piltz; identifikationen är inte fastställd."
+  },
+  {
+    "Name": "OBS_MAUNO_KICKI_RUNNING_MAN_AFK_5_7",
+    "ObservationId": "OBS_MAUNO_KICKI_RUNNING_MAN_AFK_5_7",
+    "DisplayName": "Mauno och Kicki möter mannen som rusar ur porten",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "MAUNO_LUUKAS_JERKER",
+      "KICKI_J"
+    ],
+    "ObservedEntityId": "OBSERVED_RUNNING_MAN_ADOLF_FREDRIKS_KYRKOGATA_5_7",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "Adolffredrikskyrkog_5",
+    "TimingMode": "RelativeToSharedEvent",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 50
+    },
+    "ReferenceSharedEventId": "Palme_shot_1",
+    "ReferenceOffsetSeconds": -40,
+    "ObservationDurationSeconds": 25,
+    "ObservationRadiusCm": 1200.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": false,
+    "Confidence": "Reconstructed",
+    "SourceReference": "EBD9631-00-D",
+    "ObservedDescription": "Okänd man rusar nedför trappan, nästan kolliderar med paret och flyr ut ur porten. Inget signalement uppfattas.",
+    "Notes": "Mörk port; fri sikt krävs därför inte. Mannen är en separat observationsperson och inte sammanlänkad med WT-mannen."
+  }
+]

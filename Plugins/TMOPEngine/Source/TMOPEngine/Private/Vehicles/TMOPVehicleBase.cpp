@@ -75,8 +75,15 @@ void ATMOPVehicleBase::RefreshNameLabel()
         FVector(0.0f, 0.0f, NameLabelHeightCm));
     NameLabel->SetWorldSize(NameLabelWorldSize);
     NameLabel->SetTextRenderColor(NameLabelColor);
-    NameLabel->SetVisibility(bShowNameLabel, true);
-    SetActorTickEnabled(bShowNameLabel);
+    const bool bDisplayLabel = ShouldDisplayNameLabel();
+    NameLabel->SetVisibility(bDisplayLabel, true);
+    SetActorTickEnabled(bDisplayLabel);
+}
+
+bool ATMOPVehicleBase::ShouldDisplayNameLabel() const
+{
+    return bShowNameLabel &&
+        VehicleCategoryId.ToString().ToUpper() != TEXT("OBSERVED_UNKNOWN");
 }
 
 void ATMOPVehicleBase::SetNameLabelVisible(const bool bVisible)

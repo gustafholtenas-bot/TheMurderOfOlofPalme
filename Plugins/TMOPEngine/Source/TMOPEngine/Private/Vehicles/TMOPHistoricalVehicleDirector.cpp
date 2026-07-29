@@ -301,6 +301,7 @@ void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
         Runtime->Vehicle = Vehicle;
         Runtime->bSpawnedByDirector = false;
         Vehicle->DisplayName = Runtime->Profile.DisplayName;
+        Vehicle->VehicleCategoryId = Runtime->Profile.CategoryId;
         Vehicle->RefreshNameLabel();
         if (ATMOPConfiguredVehicle* Configured =
             Cast<ATMOPConfiguredVehicle>(Vehicle))
@@ -357,6 +358,7 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
 
     Vehicle->VehicleId = Runtime.Profile.VehicleId;
     Vehicle->DisplayName = Runtime.Profile.DisplayName;
+    Vehicle->VehicleCategoryId = Runtime.Profile.CategoryId;
     if (ATMOPConfiguredVehicle* Configured = Cast<ATMOPConfiguredVehicle>(Vehicle))
     {
         Configured->VehicleModel = Runtime.Profile.ModelData;

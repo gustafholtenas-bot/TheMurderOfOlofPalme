@@ -51,6 +51,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FText DisplayName;
 
+    /** Category loaded from DT_TMOP_People and used by the name-label style. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Identity")
+    FName PersonCategoryId = NAME_None;
+
     /** World-space name shown above the person. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Debug")
     TObjectPtr<UTextRenderComponent> NameLabel;
@@ -60,14 +64,24 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug",
         meta = (ClampMin = "0.0", Units = "cm"))
-    float NameLabelHeightCm = 125.0f;
+    float NameLabelHeightCm = 105.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug",
         meta = (ClampMin = "1.0"))
-    float NameLabelWorldSize = 24.0f;
+    float NameLabelWorldSize = 16.0f;
 
+    /** Fallback color for categories without a dedicated color. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
     FColor NameLabelColor = FColor::White;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FColor PalmeFamilyNameLabelColor = FColor(255, 64, 64);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FColor SuspectNameLabelColor = FColor(64, 255, 96);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FColor PoliceNameLabelColor = FColor(64, 128, 255);
 
     /** Name-free speech bubble for timed historical quotes. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Speech")
@@ -145,6 +159,10 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Debug")
     void SetNameLabelVisible(bool bVisible);
+
+    /** Updates the category used for automatic name-label coloring. */
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Debug")
+    void SetPersonCategoryId(FName InCategoryId);
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Agent|Movement")
     float GetDesiredMovementSpeed() const;
@@ -266,6 +284,9 @@ protected:
         ETMOPAgentActivityState NewActivity);
 
 private:
+    FColor ResolveNameLabelColor() const;
+    bool ShouldDisplayNameLabel() const;
+
     void UpdateSocialFocus(float DeltaSeconds);
     void UpdateAutomaticSpeech(float DeltaSeconds);
     void UpdateAutomaticUnstuck(float DeltaSeconds);

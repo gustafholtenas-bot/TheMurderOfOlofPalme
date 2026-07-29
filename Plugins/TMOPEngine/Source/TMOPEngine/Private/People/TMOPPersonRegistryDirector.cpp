@@ -364,6 +364,7 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
     Agent->EntityIdentity->EntityId = Runtime.Profile.EntityId;
     Agent->EntityIdentity->EntityType = TEXT("Agent");
     Agent->DisplayName = Runtime.Profile.FullName;
+    Agent->PersonCategoryId = Runtime.Profile.CategoryId;
     Agent->SourceReference = Runtime.Profile.GeneralSourceReference;
     Agent->MovementProfile = Runtime.Profile.MovementProfile;
     Agent->SocialGroupId = Runtime.Profile.SocialGroupId;

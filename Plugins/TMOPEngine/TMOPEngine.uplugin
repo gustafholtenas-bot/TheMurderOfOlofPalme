@@ -1,7 +1,7 @@
 {
   "FileVersion": 3,
-  "Version": 94,
-  "VersionName": "0.0.94",
+  "Version": 96,
+  "VersionName": "0.0.96",
   "FriendlyName": "TMOP Engine",
   "Description": "The Murder of Olof Palme simulation systems",
   "Category": "TMOP",
@@ -14,4 +14,3 @@
     { "Name": "TMOPEngineEditor", "Type": "Editor", "LoadingPhase": "Default" }
   ]
 }
-

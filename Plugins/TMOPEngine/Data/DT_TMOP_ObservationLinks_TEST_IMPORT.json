@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "LINK_PASSAT_PASSENGER_AND_THIRD_MAN_SAME_SCENE",
+    "LinkId": "LINK_PASSAT_PASSENGER_AND_THIRD_MAN_SAME_SCENE",
+    "FromObservationId": "OBS_CIVIL2733_PASSAT_PASSENGER_AFK_LUNTMAKAR",
+    "ToObservationId": "OBS_CIVIL2733_PASSAT_THIRD_MAN_AFK_LUNTMAKAR",
+    "Relationship": "RelatedSameScene",
+    "ConfidenceScore": 1.0,
+    "SupportingFactors": [
+      "SAME_OBSERVERS",
+      "SAME_TIME_WINDOW",
+      "SAME_VEHICLE_SCENE"
+    ],
+    "ContradictingFactors": [],
+    "RouteAnchorIds": [],
+    "CalculatedDistanceCm": 0.0,
+    "RequiredAverageSpeedCmPerSecond": 0.0,
+    "AlternativeRoutes": [],
+    "bPlayerCreatedHypothesis": false,
+    "bVisibleOnlyInInvestigationMode": true,
+    "Notes": "Kopplar endast ihop observationerna som samma scen; påstår inte att männen är samma person."
+  }
+]

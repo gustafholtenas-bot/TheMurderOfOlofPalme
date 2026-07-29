@@ -465,14 +465,61 @@ void ATMOPHistoricalAgent::RefreshNameLabel()
     NameLabel->SetText(LabelText);
     NameLabel->SetRelativeLocation(FVector(0.0f, 0.0f, NameLabelHeightCm));
     NameLabel->SetWorldSize(NameLabelWorldSize);
-    NameLabel->SetTextRenderColor(NameLabelColor);
-    NameLabel->SetVisibility(bShowNameLabel, true);
-    SetActorTickEnabled(bShowNameLabel);
+    NameLabel->SetTextRenderColor(ResolveNameLabelColor());
+    const bool bDisplayLabel = ShouldDisplayNameLabel();
+    NameLabel->SetVisibility(bDisplayLabel, true);
+    SetActorTickEnabled(bDisplayLabel);
+}
+
+bool ATMOPHistoricalAgent::ShouldDisplayNameLabel() const
+{
+    if (!bShowNameLabel)
+    {
+        return false;
+    }
+
+    // Anonymous observations must not reveal their relevance in ordinary play.
+    // They can be highlighted separately by a future investigation-mode UI.
+    return PersonCategoryId.ToString().ToUpper() !=
+        TEXT("OBSERVED_UNKNOWN");
+}
+
+FColor ATMOPHistoricalAgent::ResolveNameLabelColor() const
+{
+    FString EntityId;
+    if (IsValid(EntityIdentity) && !EntityIdentity->EntityId.IsNone())
+    {
+        EntityId = EntityIdentity->EntityId.ToString().ToUpper();
+    }
+
+    // PALME_COMPANY also contains non-family companions. EntityId keeps those
+    // people white while automatically covering additional Palme relatives.
+    if (EntityId.EndsWith(TEXT("_PALME")))
+    {
+        return PalmeFamilyNameLabelColor;
+    }
+
+    const FString Category = PersonCategoryId.ToString().ToUpper();
+    if (Category == TEXT("POLICE") || Category == TEXT("POLIS"))
+    {
+        return PoliceNameLabelColor;
+    }
+    if (Category == TEXT("SUSPECT"))
+    {
+        return SuspectNameLabelColor;
+    }
+    return NameLabelColor;
 }
 
 void ATMOPHistoricalAgent::SetNameLabelVisible(const bool bVisible)
 {
     bShowNameLabel = bVisible;
+    RefreshNameLabel();
+}
+
+void ATMOPHistoricalAgent::SetPersonCategoryId(const FName InCategoryId)
+{
+    PersonCategoryId = InCategoryId;
     RefreshNameLabel();
 }
 
@@ -645,5 +692,3 @@ void ATMOPHistoricalAgent::HandleActivityStateChanged(
     const ETMOPAgentActivityState NewActivity)
 {
 }
-
-

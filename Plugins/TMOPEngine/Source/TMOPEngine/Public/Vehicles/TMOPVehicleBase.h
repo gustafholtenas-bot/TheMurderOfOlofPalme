@@ -34,6 +34,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Identity")
     FText DisplayName;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Identity")
+    FName VehicleCategoryId = NAME_None;
+
     /** World-space name shown above the vehicle. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Debug")
     TObjectPtr<UTextRenderComponent> NameLabel;
@@ -79,4 +82,7 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Vehicle|Debug")
     void SetNameLabelVisible(bool bVisible);
+
+private:
+    bool ShouldDisplayNameLabel() const;
 };

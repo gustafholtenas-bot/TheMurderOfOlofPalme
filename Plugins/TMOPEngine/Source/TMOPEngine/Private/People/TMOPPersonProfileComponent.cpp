@@ -53,6 +53,7 @@ bool UTMOPPersonProfileComponent::LoadProfile()
         if (ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner()))
         {
             Agent->DisplayName = Profile.FullName;
+            Agent->PersonCategoryId = Profile.CategoryId;
             Agent->RefreshNameLabel();
         }
     return bHasLoadedProfile;
