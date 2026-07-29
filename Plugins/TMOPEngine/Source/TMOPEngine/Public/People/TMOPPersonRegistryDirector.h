@@ -56,6 +56,13 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|People|Simulation")
     int32 InitializePersonSimulation();
 
+    /**
+     * Advances timeline indices/spawn state for a World Bake seek without
+     * applying catch-up teleports. The baked frame supplies final transforms.
+     */
+    UFUNCTION(BlueprintCallable, Category="TMOP|People|World Bake")
+    int32 InitializePersonSimulationForWorldBake();
+
     UFUNCTION(BlueprintCallable, Category="TMOP|People|Simulation")
     bool ValidatePeopleTable(TArray<FString>& OutErrors) const;
 
@@ -112,6 +119,8 @@ private:
     void RebuildGroupsFromGroupTable();
     void RebuildGroupsFromPeople();
     ATMOPVehicleBase* FindVehicle(FName VehicleId) const;
+
+    bool bRestoringWorldBake = false;
 
     TMap<FName, FPersonRuntime> RuntimePeople;
     int32 LastEvaluatedSecond = INDEX_NONE;

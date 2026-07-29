@@ -154,16 +154,47 @@ bool ATMOPAerialVehicleDirector::SpawnFlight(
     const int32 ResolvedSecond,
     const int32 CurrentSecond)
 {
-    if (GetWorld() == nullptr || !Entry.AircraftClass)
+    if (GetWorld() == nullptr)
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP Aerial '%s': no valid world."),
+            *Entry.EntryId.ToString());
         return false;
+    }
+    if (!Entry.AircraftClass)
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP Aerial '%s': Aircraft Class is not assigned."),
+            *Entry.EntryId.ToString());
+        return false;
+    }
 
     AActor* SplineOwner = Entry.SplineActor.Get();
     if (!IsValid(SplineOwner))
         SplineOwner = Entry.SplineActor.LoadSynchronous();
+    if (!IsValid(SplineOwner))
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP Aerial '%s': Spline Actor is not assigned or could not be loaded."),
+            *Entry.EntryId.ToString());
+        return false;
+    }
     USplineComponent* Spline = IsValid(SplineOwner)
         ? SplineOwner->FindComponentByClass<USplineComponent>() : nullptr;
-    if (!IsValid(Spline) || Spline->GetSplineLength() <= KINDA_SMALL_NUMBER)
+    if (!IsValid(Spline))
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP Aerial '%s': actor '%s' has no Spline Component."),
+            *Entry.EntryId.ToString(), *GetNameSafe(SplineOwner));
         return false;
+    }
+    if (Spline->GetSplineLength() <= KINDA_SMALL_NUMBER)
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP Aerial '%s': spline on '%s' has zero length."),
+            *Entry.EntryId.ToString(), *GetNameSafe(SplineOwner));
+        return false;
+    }
 
     DespawnFlight(Entry.InstanceId);
 
@@ -188,7 +219,13 @@ bool ATMOPAerialVehicleDirector::SpawnFlight(
 
     AActor* Aircraft = GetWorld()->SpawnActor<AActor>(
         Entry.AircraftClass, FTransform::Identity);
-    if (!IsValid(Aircraft)) return false;
+    if (!IsValid(Aircraft))
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP Aerial '%s': failed to spawn Aircraft Class '%s'."),
+            *Entry.EntryId.ToString(), *GetNameSafe(Entry.AircraftClass.Get()));
+        return false;
+    }
     Flight.Aircraft = Aircraft;
 
     ActiveFlights.Add(Entry.InstanceId, Flight);

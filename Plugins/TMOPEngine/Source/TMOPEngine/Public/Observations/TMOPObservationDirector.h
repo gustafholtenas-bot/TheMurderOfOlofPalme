@@ -70,6 +70,10 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Observations")
     TArray<FTMOPObservationRuntime> GetAllObservationRuntime() const;
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Observations|World Bake")
+    int32 ApplyBakedObservationRuntime(
+        const TArray<FTMOPObservationRuntime>& BakedRuntime);
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Observations")
     bool ValidateObservationData(TArray<FString>& OutErrors) const;
 

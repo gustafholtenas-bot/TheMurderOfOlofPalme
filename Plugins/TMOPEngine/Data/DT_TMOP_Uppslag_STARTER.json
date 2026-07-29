@@ -1,0 +1,113 @@
+[
+  {
+    "Name": "L849-00",
+    "UppslagId": "L849-00",
+    "Title": "Vittne L849 och sällskapet på Grand",
+    "bRetrieved": true,
+    "bAddedToProject": false,
+    "bPartiallyAdded": true,
+    "bNeedsReview": false,
+    "bRelevantToGame": true,
+    "SourceUrl": "https://wpu.nu/wiki/Uppslag:L849-00",
+    "DocumentDate": "",
+    "PersonEntityIds": [
+      "VITTNE_L849",
+      "ASTA_L849",
+      "UL_L849",
+      "MARC_DE_DARDEL"
+    ],
+    "VehicleEntityIds": [],
+    "GroupIds": [
+      "GROUP_L849_GRAND"
+    ],
+    "SharedEventIds": [
+      "PALME_ANNAE_AT_GRAND",
+      "MARC_DE_DARDEL"
+    ],
+    "ObservationIds": [],
+    "AnchorIds": [
+      "GrandFoajeSoffa",
+      "GrandFoajeKassa"
+    ],
+    "ImplementedSummary": "Personer, grupp och Grand-händelser är registrerade.",
+    "RemainingWork": "Kontrollera deluppslagen L849-00-B, L849-01, L849-01-A, L849-02, L849-02-A och L849-02-B innan uppslaget markeras helt inlagt.",
+    "Notes": ""
+  },
+  {
+    "Name": "L1702-01",
+    "UppslagId": "L1702-01",
+    "Title": "Telefonförhör med Nina Blom om biobesök",
+    "bRetrieved": true,
+    "bAddedToProject": true,
+    "bPartiallyAdded": false,
+    "bNeedsReview": false,
+    "bRelevantToGame": true,
+    "SourceUrl": "https://wpu.nu/wiki/Uppslag:L1702-01",
+    "DocumentDate": "1986-04-16",
+    "PersonEntityIds": [
+      "NINA_BLOM",
+      "MARC_DE_DARDEL"
+    ],
+    "VehicleEntityIds": [],
+    "GroupIds": [
+      "GROUP_NINA_BLOM_MARC_DE_DARDEL"
+    ],
+    "SharedEventIds": [],
+    "ObservationIds": [],
+    "AnchorIds": [
+      "SEAT_GRAND_1_105",
+      "SEAT_GRAND_1_106"
+    ],
+    "ImplementedSummary": "Nina Blom och Marc de Dardel är sammanförda som biosällskap med platser och tidslinjer.",
+    "RemainingWork": "",
+    "Notes": ""
+  },
+  {
+    "Name": "EBD9631-00-D",
+    "UppslagId": "EBD9631-00-D",
+    "Title": "Mauno Luukas Jerker och observationerna",
+    "bRetrieved": true,
+    "bAddedToProject": true,
+    "bPartiallyAdded": false,
+    "bNeedsReview": true,
+    "bRelevantToGame": true,
+    "SourceUrl": "https://wpu.nu/wiki/Uppslag:EBD9631-00-D",
+    "DocumentDate": "",
+    "PersonEntityIds": [
+      "MAUNO_LUUKAS_JERKER",
+      "KICKI_J",
+      "THOMAS_PILTZ_MED_WALKIE_TALKIE"
+    ],
+    "VehicleEntityIds": [],
+    "GroupIds": [
+      "GROUP_MAUNO_LUUKAS_KICKI_J"
+    ],
+    "SharedEventIds": [],
+    "ObservationIds": [],
+    "AnchorIds": [],
+    "ImplementedSummary": "Maunos grupp, rörelser och observerade okända personer är registrerade.",
+    "RemainingWork": "",
+    "Notes": "Behöver granskas eftersom Thomas Piltz är en senare utpekad identifikation och ska förbli ObservedUnknown i den orörda simuleringen."
+  },
+  {
+    "Name": "EAC13407-00-A",
+    "UppslagId": "EAC13407-00-A",
+    "Title": "Grand-observation",
+    "bRetrieved": true,
+    "bAddedToProject": true,
+    "bPartiallyAdded": false,
+    "bNeedsReview": false,
+    "bRelevantToGame": true,
+    "SourceUrl": "https://wpu.nu/wiki/Uppslag:EAC13407-00-A",
+    "DocumentDate": "",
+    "PersonEntityIds": [],
+    "VehicleEntityIds": [],
+    "GroupIds": [],
+    "SharedEventIds": [],
+    "ObservationIds": [],
+    "AnchorIds": [],
+    "ImplementedSummary": "Uppslagets observation har lagts in i observationssystemet.",
+    "RemainingWork": "",
+    "Notes": "Fyll i länkade Observation-ID när den slutliga raden har verifierats i DT_TMOP_Observations."
+  }
+]

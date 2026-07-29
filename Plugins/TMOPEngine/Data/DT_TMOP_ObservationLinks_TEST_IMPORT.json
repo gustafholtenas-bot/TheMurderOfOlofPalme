@@ -19,5 +19,35 @@
     "bPlayerCreatedHypothesis": false,
     "bVisibleOnlyInInvestigationMode": true,
     "Notes": "Kopplar endast ihop observationerna som samma scen; påstår inte att männen är samma person."
+  },
+  {
+    "Name": "LINK_L866_STIRRANDE_MAN_TO_MARTEN_GRANDMAN",
+    "LinkId": "LINK_L866_STIRRANDE_MAN_TO_MARTEN_GRANDMAN",
+    "FromObservationId": "OBS_ANNELI_KORHONEN_STIRRANDE_MAN_GRAND",
+    "ToObservationId": "OBS_MARTEN_PALME_GRANDMAN_SANDINS",
+    "Relationship": "ProbableSamePerson",
+    "ConfidenceScore": 0.7,
+    "SupportingFactors": [
+      "SameArea",
+      "TenMinuteInterval",
+      "SimilarAge",
+      "BlueLongJacket",
+      "Cap",
+      "PossibleGlasses"
+    ],
+    "ContradictingFactors": [
+      "HeightEstimateDiffers",
+      "BodyBuildDescriptionDiffers"
+    ],
+    "RouteAnchorIds": [
+      "grand_outside",
+      "Sadins"
+    ],
+    "CalculatedDistanceCm": 0.0,
+    "RequiredAverageSpeedCmPerSecond": 0.0,
+    "AlternativeRoutes": [],
+    "bPlayerCreatedHypothesis": false,
+    "bVisibleOnlyInInvestigationMode": true,
+    "Notes": "Källorna L866 och T2-00 dokumenterar två observationer. Länken uttrycker endast hypotesen att de kan avse samma man."
   }
 ]

@@ -92,7 +92,9 @@ bool ATMOPGroupDirector::CreateGroup(const FTMOPGroupDefinition& Definition)
         ATMOPHistoricalAgent* Agent = FindAgent(EntityId);
         if (!IsValid(Agent))
         {
-            UE_LOG(LogTemp, Warning, TEXT("TMOP group '%s' is waiting for agent '%s'."),
+            // This is expected for agents whose spawn time is later than the
+            // group's creation. RefreshMembers attaches them after spawning.
+            UE_LOG(LogTemp, Display, TEXT("TMOP group '%s' is waiting for later-spawning agent '%s'."),
                 *Definition.GroupId.ToString(), *EntityId.ToString());
             continue;
         }

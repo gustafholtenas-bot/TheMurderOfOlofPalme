@@ -167,6 +167,12 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
     return RuntimePeople.Num();
 }
 
+int32 ATMOPPersonRegistryDirector::InitializePersonSimulationForWorldBake()
+{
+    TGuardValue<bool> Guard(bRestoringWorldBake, true);
+    return InitializePersonSimulation();
+}
+
 void ATMOPPersonRegistryDirector::EvaluateAutomaticSpeech(
     const int32 CurrentSecond, const int32 PreviousSecond)
 {
@@ -410,6 +416,8 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
         Runtime.bSpawnedByDirector = false;
         return true;
     case ETMOPPersonTimelineAction::MoveToAnchor:
+        if (bCatchUp && bRestoringWorldBake)
+            return true;
         if (bCatchUp && Entry.bTeleportDuringCatchUp)
             return ApplyPlacement(Agent, Entry, true);
         if (!Agent->SocialGroupId.IsNone() &&
@@ -462,17 +470,23 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     case ETMOPPersonTimelineAction::StandUp:
     case ETMOPPersonTimelineAction::EnterVehicle:
     case ETMOPPersonTimelineAction::ExitVehicle:
+        if (bCatchUp && bRestoringWorldBake)
+            return true;
         return ApplyPlacement(Agent, Entry, bCatchUp);
     case ETMOPPersonTimelineAction::BeginDriving:
+        if (bCatchUp && bRestoringWorldBake)
+            return true;
         return ApplyPlacement(Agent, Entry, bCatchUp);
     case ETMOPPersonTimelineAction::CreateGroup:
     {
+        if (bCatchUp && bRestoringWorldBake) return true;
         ATMOPGroupDirector* Groups = FindGroupDirector();
         return IsValid(Groups) &&
             Groups->CreateGroup(Entry.GroupDefinition);
     }
     case ETMOPPersonTimelineAction::JoinGroup:
     {
+        if (bCatchUp && bRestoringWorldBake) return true;
         ATMOPGroupDirector* Groups = FindGroupDirector();
         const FName EntityId = Agent->EntityIdentity != nullptr
             ? Agent->EntityIdentity->EntityId : NAME_None;
@@ -481,6 +495,7 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     }
     case ETMOPPersonTimelineAction::LeaveGroup:
     {
+        if (bCatchUp && bRestoringWorldBake) return true;
         ATMOPGroupDirector* Groups = FindGroupDirector();
         const FName EntityId = Agent->EntityIdentity != nullptr
             ? Agent->EntityIdentity->EntityId : NAME_None;
@@ -491,6 +506,7 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     }
     case ETMOPPersonTimelineAction::SplitGroup:
     {
+        if (bCatchUp && bRestoringWorldBake) return true;
         ATMOPGroupDirector* Groups = FindGroupDirector();
         return IsValid(Groups) &&
             Groups->SplitGroup(
@@ -498,12 +514,14 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     }
     case ETMOPPersonTimelineAction::DissolveGroup:
     {
+        if (bCatchUp && bRestoringWorldBake) return true;
         ATMOPGroupDirector* Groups = FindGroupDirector();
         return IsValid(Groups) &&
             Groups->DissolveGroup(Entry.TargetGroupId);
     }
     case ETMOPPersonTimelineAction::SetGroupLeader:
     {
+        if (bCatchUp && bRestoringWorldBake) return true;
         ATMOPGroupDirector* Groups = FindGroupDirector();
         return IsValid(Groups) &&
             Groups->SetGroupLeader(

@@ -208,5 +208,92 @@
     "SourceReference": "EBD9631-00-D",
     "ObservedDescription": "Okänd man rusar nedför trappan, nästan kolliderar med paret och flyr ut ur porten. Inget signalement uppfattas.",
     "Notes": "Mörk port; fri sikt krävs därför inte. Mannen är en separat observationsperson och inte sammanlänkad med WT-mannen."
+  },
+  {
+    "Name": "OBS_ANNELI_KORHONEN_STIRRANDE_MAN_GRAND",
+    "ObservationId": "OBS_ANNELI_KORHONEN_STIRRANDE_MAN_GRAND",
+    "DisplayName": "Anneli Korhonen ser den stirrande mannen",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "ANNELI_KORHONEN"
+    ],
+    "ObservedEntityId": "STIRRANDE_MAN",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "grand_outside",
+    "TimingMode": "Absolute",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 5,
+      "Second": 33
+    },
+    "ReferenceSharedEventId": "None",
+    "ReferenceOffsetSeconds": 0,
+    "ObservationDurationSeconds": 30,
+    "ObservationRadiusCm": 1800.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Reconstructed",
+    "SourceReference": "L866-00",
+    "ObservedDescription": "Man cirka 35-45 år, 170-175 cm, troligen glasögon och skärmmössa, trekvartslång blå jacka; stirrar in i Grands tomma foajé.",
+    "Notes": "Samma samtidiga L866-observation som Margareta Storhöks rad."
+  },
+  {
+    "Name": "OBS_MARGARETA_STORHOG_STIRRANDE_MAN_GRAND",
+    "ObservationId": "OBS_MARGARETA_STORHOG_STIRRANDE_MAN_GRAND",
+    "DisplayName": "Margareta Storhök ser den stirrande mannen",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "MARGARETA_STORHOG"
+    ],
+    "ObservedEntityId": "STIRRANDE_MAN",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "grand_outside",
+    "TimingMode": "Absolute",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 5,
+      "Second": 33
+    },
+    "ReferenceSharedEventId": "None",
+    "ReferenceOffsetSeconds": 0,
+    "ObservationDurationSeconds": 30,
+    "ObservationRadiusCm": 1800.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Reconstructed",
+    "SourceReference": "L866-01",
+    "ObservedDescription": "Man cirka 35-45 år, 170-175 cm, troligen glasögon och skärmmössa, trekvartslång blå jacka; stirrar in i Grands tomma foajé.",
+    "Notes": "Samma samtidiga L866-observation som Anneli Korhonens rad."
+  },
+  {
+    "Name": "OBS_MARTEN_PALME_GRANDMAN_SANDINS",
+    "ObservationId": "OBS_MARTEN_PALME_GRANDMAN_SANDINS",
+    "DisplayName": "Mårten Palme ser Grandmannen vid Sandins",
+    "bEnabled": true,
+    "ObserverEntityIds": [
+      "MARTEN_PALME"
+    ],
+    "ObservedEntityId": "OBSERVED_GRANDMAN_MARTEN_SANDINS",
+    "ObservedEntityType": "Person",
+    "ObservationAnchorId": "Sadins",
+    "TimingMode": "Absolute",
+    "CanonicalTime": {
+      "Hour": 23,
+      "Minute": 15,
+      "Second": 35
+    },
+    "ReferenceSharedEventId": "None",
+    "ReferenceOffsetSeconds": 0,
+    "ObservationDurationSeconds": 30,
+    "ObservationRadiusCm": 1800.0,
+    "bRequireObserverNearAnchor": true,
+    "bRequireObservedEntityNearAnchor": true,
+    "bRequiresLineOfSight": true,
+    "Confidence": "Reconstructed",
+    "SourceReference": "T2-00",
+    "ObservedDescription": "Man omkring 40 år, kraftig, möjligen stålbågade glasögon, keps och lång blå täckjacka; framåtlutad och bufflig.",
+    "Notes": "Möjlig men inte fastställd identitet med L866-mannen."
   }
 ]

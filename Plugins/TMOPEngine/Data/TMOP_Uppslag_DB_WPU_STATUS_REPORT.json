@@ -1,0 +1,424 @@
+{
+  "Sources": [
+    "https://wpu.nu/wiki/Avsnitt:DB"
+  ],
+  "MainCaseCount": 26,
+  "SubcaseCount": 74,
+  "AvailableCount": 2,
+  "NotReleasedCount": 72,
+  "UnknownCount": 0,
+  "Parents": [
+    {
+      "ParentUppslagId": "DB4325",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "DB4325-00",
+        "DB4325-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13824",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13824-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13825",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13825-00",
+        "DB13825-01",
+        "DB13825-02",
+        "DB13825-03",
+        "DB13825-04",
+        "DB13825-05",
+        "DB13825-06",
+        "DB13825-07",
+        "DB13825-08",
+        "DB13825-09"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13826",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13826-00",
+        "DB13826-01",
+        "DB13826-02",
+        "DB13826-03",
+        "DB13826-04",
+        "DB13826-05",
+        "DB13826-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13827",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13827-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13828",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13828-00",
+        "DB13828-00-A",
+        "DB13828-00-B",
+        "DB13828-00-C",
+        "DB13828-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13829",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13829-00",
+        "DB13829-00-A",
+        "DB13829-00-B",
+        "DB13829-00-C",
+        "DB13829-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13830",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13830-00",
+        "DB13830-00-A",
+        "DB13830-00-B",
+        "DB13830-00-C",
+        "DB13830-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13831",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13831-00",
+        "DB13831-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13832",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13832-00",
+        "DB13832-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13833",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13833-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13834",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13834-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13835",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13835-00",
+        "DB13835-01",
+        "DB13835-02",
+        "DB13835-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13836",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13836-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13837",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13837-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13838",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13838-00",
+        "DB13838-00-A",
+        "DB13838-01",
+        "DB13838-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13839",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13839-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13840",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13840-00",
+        "DB13840-01",
+        "DB13840-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13842",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13842-00",
+        "DB13842-01",
+        "DB13842-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13843",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13843-00",
+        "DB13843-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13844",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13844-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13845",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13845-00",
+        "DB13845-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13887",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13887-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13889",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13889-00",
+        "DB13889-01",
+        "DB13889-02",
+        "DB13889-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13890",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13890-00",
+        "DB13890-00-A",
+        "DB13890-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "DB13891",
+      "SeriesId": "DB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "DB13891-00",
+        "DB13891-00-A"
+      ],
+      "UnknownIds": []
+    }
+  ]
+}

@@ -51,8 +51,10 @@ bool UTMOPWorldSubsystem::RegisterWorldObject(
         if (Existing->Object.IsValid() && Existing->Object.Get() != Object)
         {
             UE_LOG(LogTemp, Warning,
-                TEXT("TMOP world rejected duplicate object ID '%s'."),
-                *ObjectId.ToString());
+                TEXT("TMOP world rejected duplicate object ID '%s': existing '%s', rejected '%s'."),
+                *ObjectId.ToString(),
+                *GetPathNameSafe(Existing->Object.Get()),
+                *GetPathNameSafe(Object));
             return false;
         }
     }

@@ -155,6 +155,22 @@ void ATMOPObservationDirector::ResetObservationRuntime()
     }
 }
 
+int32 ATMOPObservationDirector::ApplyBakedObservationRuntime(
+    const TArray<FTMOPObservationRuntime>& BakedRuntime)
+{
+    int32 Applied = 0;
+    for (const FTMOPObservationRuntime& Baked : BakedRuntime)
+    {
+        if (FTMOPObservationRuntime* Runtime =
+            RuntimeObservations.Find(Baked.ObservationId))
+        {
+            *Runtime = Baked;
+            ++Applied;
+        }
+    }
+    return Applied;
+}
+
 bool ATMOPObservationDirector::ResolveCanonicalTime(
     const FName ObservationId)
 {

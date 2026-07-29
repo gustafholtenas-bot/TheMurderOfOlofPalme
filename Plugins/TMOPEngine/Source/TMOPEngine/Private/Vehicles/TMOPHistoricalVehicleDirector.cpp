@@ -103,6 +103,16 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
         {
             continue;
         }
+        // Rows with spawning disabled may intentionally be archive-only
+        // records. They do not need a timeline and must not be reported as
+        // invalid runtime vehicles.
+        if (!Row->bSpawnInSimulation && Row->Timeline.IsEmpty())
+        {
+            UE_LOG(LogTemp, Verbose,
+                TEXT("TMOP Historical Vehicles: archive-only row '%s' has no timeline and will not be registered for simulation."),
+                *Pair.Key.ToString());
+            continue;
+        }
         if (Row->VehicleId.IsNone() ||
             !Row->Timeline.ContainsByPredicate(
                 [](const FTMOPHistoricalVehicleTimelineEntry& Entry)
@@ -500,9 +510,10 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
             }
             VehicleIds.Add(Row->VehicleId);
         }
-        if (Row->Timeline.IsEmpty())
+        if (Row->bSpawnInSimulation && Row->Timeline.IsEmpty())
         {
-            OutErrors.Add(Prefix + TEXT(" has no Timeline entries."));
+            OutErrors.Add(Prefix +
+                TEXT(" is enabled for simulation but has no Timeline entries."));
         }
         if (Row->bOverrideBodyColor && !IsValid(Row->ModelData.Get()))
         {

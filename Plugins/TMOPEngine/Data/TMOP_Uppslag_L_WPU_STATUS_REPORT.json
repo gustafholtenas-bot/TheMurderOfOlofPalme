@@ -1,0 +1,3487 @@
+{
+  "Source": "https://wpu.nu/wiki/Avsnitt:L",
+  "MainCaseCount": 233,
+  "SubcaseCount": 835,
+  "AvailableCount": 337,
+  "NotReleasedCount": 498,
+  "UnknownCount": 0,
+  "Parents": [
+    {
+      "ParentUppslagId": "L14",
+      "SubcaseCount": 16,
+      "AvailableCount": 10,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L14-00",
+        "L14-00-A",
+        "L14-00-B",
+        "L14-00-C",
+        "L14-00-D",
+        "L14-00-E",
+        "L14-00-F",
+        "L14-00-I",
+        "L14-00-J",
+        "L14-00-K"
+      ],
+      "NotReleasedIds": [
+        "L14-00-H",
+        "L14-05",
+        "L14-05-B",
+        "L14-07",
+        "L14-08",
+        "L14-09"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L71",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L71-00",
+        "L71-00-A",
+        "L71-00-B",
+        "L71-00-C",
+        "L71-00-D",
+        "L71-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L166",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L166-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L261",
+      "SubcaseCount": 20,
+      "AvailableCount": 17,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L261-00",
+        "L261-00-A",
+        "L261-00-B",
+        "L261-00-C",
+        "L261-00-D",
+        "L261-00-E",
+        "L261-00-F",
+        "L261-00-G",
+        "L261-00-H",
+        "L261-01",
+        "L261-01-A",
+        "L261-01-B",
+        "L261-01-D",
+        "L261-02",
+        "L261-02-A",
+        "L261-03",
+        "L261-03-A"
+      ],
+      "NotReleasedIds": [
+        "L261-01-C",
+        "L261-02-B",
+        "L261-03-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L490",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L490-00"
+      ],
+      "NotReleasedIds": [
+        "L490-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L493",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L493-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L496",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L496-00-A",
+        "L496-00-B"
+      ],
+      "NotReleasedIds": [
+        "L496-00",
+        "L496-00-F"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L601",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L601-00",
+        "L601-01",
+        "L601-01-A",
+        "L601-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L746",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L746-00"
+      ],
+      "NotReleasedIds": [
+        "L746-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L820",
+      "SubcaseCount": 5,
+      "AvailableCount": 1,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L820-03"
+      ],
+      "NotReleasedIds": [
+        "L820-00",
+        "L820-01-B",
+        "L820-02-A",
+        "L820-05-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L825",
+      "SubcaseCount": 7,
+      "AvailableCount": 3,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L825-00",
+        "L825-00-A",
+        "L825-01-A"
+      ],
+      "NotReleasedIds": [
+        "L825-02-B",
+        "L825-02-C",
+        "L825-02-D",
+        "L825-02-E"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L826",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L826-00",
+        "L826-00-B",
+        "L826-01",
+        "L826-01-A",
+        "L826-01-B",
+        "L826-02",
+        "L826-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L827",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L827-00",
+        "L827-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L828",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L828-00",
+        "L828-00-C",
+        "L828-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L829",
+      "SubcaseCount": 11,
+      "AvailableCount": 2,
+      "NotReleasedCount": 9,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L829-00-A",
+        "L829-03"
+      ],
+      "NotReleasedIds": [
+        "L829-00",
+        "L829-00-B",
+        "L829-00-C",
+        "L829-01",
+        "L829-01-A",
+        "L829-01-B",
+        "L829-01-C",
+        "L829-01-D",
+        "L829-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L830",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L830-00",
+        "L830-03",
+        "L830-03-A",
+        "L830-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L831",
+      "SubcaseCount": 13,
+      "AvailableCount": 0,
+      "NotReleasedCount": 13,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L831-00",
+        "L831-00-A",
+        "L831-00-B",
+        "L831-00-C",
+        "L831-00-D",
+        "L831-00-E",
+        "L831-00-F",
+        "L831-00-G",
+        "L831-01",
+        "L831-02",
+        "L831-03",
+        "L831-03-A",
+        "L831-03-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L835",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L835-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L837",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L837-00",
+        "L837-00-A"
+      ],
+      "NotReleasedIds": [
+        "L837-00-B",
+        "L837-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L838",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L838-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L839",
+      "SubcaseCount": 3,
+      "AvailableCount": 1,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L839-00-A"
+      ],
+      "NotReleasedIds": [
+        "L839-00",
+        "L839-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L841",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L841-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L842",
+      "SubcaseCount": 7,
+      "AvailableCount": 6,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L842-00",
+        "L842-00-A",
+        "L842-00-B",
+        "L842-00-C",
+        "L842-01",
+        "L842-01-A"
+      ],
+      "NotReleasedIds": [
+        "L842-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L843",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L843-00",
+        "L843-00-A",
+        "L843-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L844",
+      "SubcaseCount": 6,
+      "AvailableCount": 3,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L844-00",
+        "L844-00-A",
+        "L844-00-D"
+      ],
+      "NotReleasedIds": [
+        "L844-00-G",
+        "L844-00-H",
+        "L844-03-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L845",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L845-00"
+      ],
+      "NotReleasedIds": [
+        "L845-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L846",
+      "SubcaseCount": 20,
+      "AvailableCount": 14,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L846-03",
+        "L846-03-A",
+        "L846-03-B",
+        "L846-04",
+        "L846-05",
+        "L846-05-A",
+        "L846-05-B",
+        "L846-05-C",
+        "L846-06",
+        "L846-06-C",
+        "L846-06-D",
+        "L846-07",
+        "L846-07-A",
+        "L846-08"
+      ],
+      "NotReleasedIds": [
+        "L846-00",
+        "L846-00-A",
+        "L846-00-B",
+        "L846-00-C",
+        "L846-01",
+        "L846-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L848",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L848-00",
+        "L848-00-A"
+      ],
+      "NotReleasedIds": [
+        "L848-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L849",
+      "SubcaseCount": 7,
+      "AvailableCount": 7,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L849-00",
+        "L849-00-B",
+        "L849-01",
+        "L849-01-A",
+        "L849-02",
+        "L849-02-A",
+        "L849-02-B"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L851",
+      "SubcaseCount": 6,
+      "AvailableCount": 4,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L851-00",
+        "L851-00-A",
+        "L851-00-B",
+        "L851-00-C"
+      ],
+      "NotReleasedIds": [
+        "L851-01-B",
+        "L851-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L852",
+      "SubcaseCount": 10,
+      "AvailableCount": 10,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L852-00",
+        "L852-00-A",
+        "L852-00-B",
+        "L852-00-C",
+        "L852-00-D",
+        "L852-00-E",
+        "L852-00-F",
+        "L852-01",
+        "L852-02-A",
+        "L852-03"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L853",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L853-00",
+        "L853-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L854",
+      "SubcaseCount": 8,
+      "AvailableCount": 8,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L854-00",
+        "L854-00-A",
+        "L854-00-B",
+        "L854-01",
+        "L854-01-A",
+        "L854-01-B",
+        "L854-01-C",
+        "L854-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L855",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L855-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L856",
+      "SubcaseCount": 7,
+      "AvailableCount": 4,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L856-00",
+        "L856-00-A",
+        "L856-00-B",
+        "L856-02"
+      ],
+      "NotReleasedIds": [
+        "L856-01",
+        "L856-01-A",
+        "L856-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L857",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L857-00",
+        "L857-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L858",
+      "SubcaseCount": 3,
+      "AvailableCount": 1,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L858-01"
+      ],
+      "NotReleasedIds": [
+        "L858-00",
+        "L858-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L859",
+      "SubcaseCount": 9,
+      "AvailableCount": 6,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L859-00",
+        "L859-00-A",
+        "L859-00-B",
+        "L859-00-C",
+        "L859-00-D",
+        "L859-00-E"
+      ],
+      "NotReleasedIds": [
+        "L859-00-F",
+        "L859-00-G",
+        "L859-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L860",
+      "SubcaseCount": 22,
+      "AvailableCount": 10,
+      "NotReleasedCount": 12,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L860-00",
+        "L860-00-A",
+        "L860-00-B",
+        "L860-00-C",
+        "L860-00-D",
+        "L860-00-E",
+        "L860-00-F",
+        "L860-00-G",
+        "L860-07",
+        "L860-07-A"
+      ],
+      "NotReleasedIds": [
+        "L860-00-H",
+        "L860-00-I",
+        "L860-01",
+        "L860-02",
+        "L860-02-A",
+        "L860-02-B",
+        "L860-02-C",
+        "L860-03",
+        "L860-04",
+        "L860-05",
+        "L860-06",
+        "L860-07-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L861",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L861-00",
+        "L861-00-A",
+        "L861-01-B",
+        "L861-02-B",
+        "L861-03-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L862",
+      "SubcaseCount": 8,
+      "AvailableCount": 0,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L862-00",
+        "L862-00-D",
+        "L862-00-E",
+        "L862-03-B",
+        "L862-03-C",
+        "L862-03-D",
+        "L862-06",
+        "L862-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L863",
+      "SubcaseCount": 4,
+      "AvailableCount": 1,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L863-00"
+      ],
+      "NotReleasedIds": [
+        "L863-00-A",
+        "L863-00-B",
+        "L863-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L864",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L864-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L865",
+      "SubcaseCount": 8,
+      "AvailableCount": 6,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L865-00",
+        "L865-00-A",
+        "L865-00-B",
+        "L865-01",
+        "L865-01-A",
+        "L865-01-B"
+      ],
+      "NotReleasedIds": [
+        "L865-00-C",
+        "L865-01-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L866",
+      "SubcaseCount": 21,
+      "AvailableCount": 9,
+      "NotReleasedCount": 12,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L866-00",
+        "L866-00-A",
+        "L866-00-B",
+        "L866-00-E",
+        "L866-01",
+        "L866-01-A",
+        "L866-01-B",
+        "L866-01-C",
+        "L866-01-D"
+      ],
+      "NotReleasedIds": [
+        "L866-00-C",
+        "L866-00-D",
+        "L866-00-F",
+        "L866-00-G",
+        "L866-00-H",
+        "L866-01-E",
+        "L866-01-F",
+        "L866-01-G",
+        "L866-01-H",
+        "L866-02-A",
+        "L866-03-A",
+        "L866-03-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L900",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L900-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L901",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L901-00",
+        "L901-00-A",
+        "L901-00-B"
+      ],
+      "NotReleasedIds": [
+        "L901-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L904",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L904-00",
+        "L904-00-A"
+      ],
+      "NotReleasedIds": [
+        "L904-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L938",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L938-00",
+        "L938-00-A",
+        "L938-01"
+      ],
+      "NotReleasedIds": [
+        "L938-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L939",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L939-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L940",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L940-00"
+      ],
+      "NotReleasedIds": [
+        "L940-00-E"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L941",
+      "SubcaseCount": 7,
+      "AvailableCount": 7,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L941-00",
+        "L941-00-A",
+        "L941-00-C",
+        "L941-00-D",
+        "L941-00-E",
+        "L941-01",
+        "L941-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L942",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L942-00",
+        "L942-00-A",
+        "L942-00-B"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L943",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L943-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L944",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L944-00"
+      ],
+      "NotReleasedIds": [
+        "L944-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L945",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L945-00",
+        "L945-00-D",
+        "L945-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L946",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L946-00",
+        "L946-01"
+      ],
+      "NotReleasedIds": [
+        "L946-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1052",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1052-00",
+        "L1052-01",
+        "L1052-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1061",
+      "SubcaseCount": 5,
+      "AvailableCount": 4,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1061-00",
+        "L1061-00-A",
+        "L1061-00-B",
+        "L1061-01"
+      ],
+      "NotReleasedIds": [
+        "L1061-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1103",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1103-00-A",
+        "L1103-00-B"
+      ],
+      "NotReleasedIds": [
+        "L1103-00",
+        "L1103-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1104",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1104-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1106",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1106-03"
+      ],
+      "NotReleasedIds": [
+        "L1106-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1107",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1107-00",
+        "L1107-00-A",
+        "L1107-01",
+        "L1107-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1108",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1108-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1109",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1109-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1110",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1110-00",
+        "L1110-00-A",
+        "L1110-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1111",
+      "SubcaseCount": 8,
+      "AvailableCount": 6,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1111-00",
+        "L1111-00-A",
+        "L1111-00-B",
+        "L1111-00-C",
+        "L1111-00-D",
+        "L1111-01"
+      ],
+      "NotReleasedIds": [
+        "L1111-01-A",
+        "L1111-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1113",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1113-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1114",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1114-00",
+        "L1114-01",
+        "L1114-01-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1115",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1115-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1116",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1116-00",
+        "L1116-01-A",
+        "L1116-01-B"
+      ],
+      "NotReleasedIds": [
+        "L1116-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1117",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1117-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1118",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1118-00",
+        "L1118-01-A",
+        "L1118-02-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1119",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1119-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1163",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1163-00",
+        "L1163-00-C",
+        "L1163-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1171",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1171-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1172",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1172-00",
+        "L1172-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1188",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1188-00",
+        "L1188-00-C",
+        "L1188-01-B",
+        "L1188-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1571",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1571-00",
+        "L1571-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1572",
+      "SubcaseCount": 17,
+      "AvailableCount": 14,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1572-00",
+        "L1572-00-A",
+        "L1572-00-B",
+        "L1572-00-C",
+        "L1572-00-D",
+        "L1572-00-F",
+        "L1572-00-G",
+        "L1572-00-H",
+        "L1572-01",
+        "L1572-01-B",
+        "L1572-02",
+        "L1572-02-A",
+        "L1572-03",
+        "L1572-04"
+      ],
+      "NotReleasedIds": [
+        "L1572-00-E",
+        "L1572-00-I",
+        "L1572-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1576",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1576-00",
+        "L1576-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1622",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1622-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1627",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1627-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1629",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1629-00",
+        "L1629-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1630",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1630-00",
+        "L1630-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1632",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1632-00",
+        "L1632-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1634",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1634-01",
+        "L1634-02"
+      ],
+      "NotReleasedIds": [
+        "L1634-00",
+        "L1634-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1635",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1635-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1636",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1636-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1637",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1637-00",
+        "L1637-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1638",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1638-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1639",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1639-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1640",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1640-00",
+        "L1640-01-C",
+        "L1640-01-D",
+        "L1640-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1642",
+      "SubcaseCount": 3,
+      "AvailableCount": 1,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1642-00-A"
+      ],
+      "NotReleasedIds": [
+        "L1642-00",
+        "L1642-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1643",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1643-00",
+        "L1643-00-D",
+        "L1643-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1644",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1644-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1645",
+      "SubcaseCount": 9,
+      "AvailableCount": 0,
+      "NotReleasedCount": 9,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1645-00",
+        "L1645-00-A",
+        "L1645-00-B",
+        "L1645-00-C",
+        "L1645-01",
+        "L1645-01-A",
+        "L1645-01-B",
+        "L1645-01-C",
+        "L1645-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1647",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1647-00",
+        "L1647-01"
+      ],
+      "NotReleasedIds": [
+        "L1647-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1702",
+      "SubcaseCount": 3,
+      "AvailableCount": 1,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1702-01"
+      ],
+      "NotReleasedIds": [
+        "L1702-00",
+        "L1702-02-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1801",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1801-00",
+        "L1801-00-A"
+      ],
+      "NotReleasedIds": [
+        "L1801-00-B",
+        "L1801-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1802",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1802-00",
+        "L1802-00-A"
+      ],
+      "NotReleasedIds": [
+        "L1802-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1804",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1804-00",
+        "L1804-01",
+        "L1804-01-A"
+      ],
+      "NotReleasedIds": [
+        "L1804-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1805",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1805-00",
+        "L1805-00-A",
+        "L1805-00-B"
+      ],
+      "NotReleasedIds": [
+        "L1805-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1819",
+      "SubcaseCount": 5,
+      "AvailableCount": 3,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1819-00",
+        "L1819-00-A",
+        "L1819-01"
+      ],
+      "NotReleasedIds": [
+        "L1819-01-A",
+        "L1819-01-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1821",
+      "SubcaseCount": 12,
+      "AvailableCount": 9,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1821-00",
+        "L1821-00-A",
+        "L1821-00-B",
+        "L1821-00-C",
+        "L1821-00-D",
+        "L1821-01",
+        "L1821-01-A",
+        "L1821-02",
+        "L1821-02-B"
+      ],
+      "NotReleasedIds": [
+        "L1821-01-B",
+        "L1821-02-A",
+        "L1821-02-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1832",
+      "SubcaseCount": 4,
+      "AvailableCount": 1,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1832-00-B"
+      ],
+      "NotReleasedIds": [
+        "L1832-00",
+        "L1832-00-C",
+        "L1832-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1833",
+      "SubcaseCount": 10,
+      "AvailableCount": 3,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1833-00",
+        "L1833-00-A",
+        "L1833-00-B"
+      ],
+      "NotReleasedIds": [
+        "L1833-00-D",
+        "L1833-00-E",
+        "L1833-01-B",
+        "L1833-01-C",
+        "L1833-02-A",
+        "L1833-03",
+        "L1833-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1834",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1834-00",
+        "L1834-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1835",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1835-00",
+        "L1835-00-C",
+        "L1835-01",
+        "L1835-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1836",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1836-00",
+        "L1836-00-C",
+        "L1836-00-E",
+        "L1836-01",
+        "L1836-01-A",
+        "L1836-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1842",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1842-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1919",
+      "SubcaseCount": 8,
+      "AvailableCount": 0,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1919-00",
+        "L1919-00-A",
+        "L1919-01",
+        "L1919-01-A",
+        "L1919-01-B",
+        "L1919-02-A",
+        "L1919-02-B",
+        "L1919-02-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1920",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1920-00",
+        "L1920-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1921",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1921-00",
+        "L1921-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1922",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1922-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1972",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1972-00",
+        "L1972-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1979",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L1979-00",
+        "L1979-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L1996",
+      "SubcaseCount": 5,
+      "AvailableCount": 3,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L1996-00-C",
+        "L1996-00-D",
+        "L1996-01"
+      ],
+      "NotReleasedIds": [
+        "L1996-00",
+        "L1996-00-E"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2034",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L2034-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2486",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L2486-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2487",
+      "SubcaseCount": 5,
+      "AvailableCount": 4,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L2487-00",
+        "L2487-01",
+        "L2487-02",
+        "L2487-02-A"
+      ],
+      "NotReleasedIds": [
+        "L2487-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2488",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L2488-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2489",
+      "SubcaseCount": 5,
+      "AvailableCount": 4,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L2489-00",
+        "L2489-00-A",
+        "L2489-00-B",
+        "L2489-01"
+      ],
+      "NotReleasedIds": [
+        "L2489-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2490",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L2490-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2491",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L2491-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2492",
+      "SubcaseCount": 5,
+      "AvailableCount": 4,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L2492-00",
+        "L2492-00-A",
+        "L2492-01",
+        "L2492-02"
+      ],
+      "NotReleasedIds": [
+        "L2492-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2493",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L2493-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2614",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L2614-00",
+        "L2614-01"
+      ],
+      "NotReleasedIds": [
+        "L2614-01-A",
+        "L2614-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L2807",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L2807-00",
+        "L2807-00-B",
+        "L2807-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L3699",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L3699-00",
+        "L3699-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L4331",
+      "SubcaseCount": 5,
+      "AvailableCount": 1,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L4331-00"
+      ],
+      "NotReleasedIds": [
+        "L4331-00-C",
+        "L4331-01",
+        "L4331-01-A",
+        "L4331-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L4598",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L4598-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L4599",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L4599-00",
+        "L4599-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L4600",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L4600-00",
+        "L4600-00-E",
+        "L4600-02"
+      ],
+      "NotReleasedIds": [
+        "L4600-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L4604",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L4604-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L5172",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L5172-00",
+        "L5172-03",
+        "L5172-04",
+        "L5172-05",
+        "L5172-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L5182",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L5182-00",
+        "L5182-00-A",
+        "L5182-01",
+        "L5182-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L5184",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L5184-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L5821",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L5821-00",
+        "L5821-03-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L5951",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L5951-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6018",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6018-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6028",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6028-00",
+        "L6028-00-A",
+        "L6028-01"
+      ],
+      "NotReleasedIds": [
+        "L6028-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6048",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6048-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6052",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6052-00",
+        "L6052-00-A",
+        "L6052-01-A"
+      ],
+      "NotReleasedIds": [
+        "L6052-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6054",
+      "SubcaseCount": 6,
+      "AvailableCount": 4,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6054-00",
+        "L6054-00-A",
+        "L6054-00-B",
+        "L6054-01"
+      ],
+      "NotReleasedIds": [
+        "L6054-00-C",
+        "L6054-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6056",
+      "SubcaseCount": 11,
+      "AvailableCount": 11,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6056-00",
+        "L6056-00-A",
+        "L6056-00-B",
+        "L6056-00-C",
+        "L6056-00-D",
+        "L6056-00-E",
+        "L6056-01",
+        "L6056-02",
+        "L6056-03",
+        "L6056-04",
+        "L6056-04-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6113",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6113-00",
+        "L6113-00-A",
+        "L6113-00-B"
+      ],
+      "NotReleasedIds": [
+        "L6113-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6114",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6114-00",
+        "L6114-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6115",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6115-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6233",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6233-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6624",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6624-00",
+        "L6624-00-A",
+        "L6624-00-B",
+        "L6624-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6674",
+      "SubcaseCount": 11,
+      "AvailableCount": 0,
+      "NotReleasedCount": 11,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6674-00",
+        "L6674-00-A",
+        "L6674-00-B",
+        "L6674-00-C",
+        "L6674-00-D",
+        "L6674-00-E",
+        "L6674-00-F",
+        "L6674-01",
+        "L6674-01-A",
+        "L6674-02",
+        "L6674-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6782",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6782-00",
+        "L6782-01-A"
+      ],
+      "NotReleasedIds": [
+        "L6782-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6812",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6812-00",
+        "L6812-00-A"
+      ],
+      "NotReleasedIds": [
+        "L6812-00-B",
+        "L6812-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6814",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6814-00",
+        "L6814-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6825",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6825-00",
+        "L6825-00-A",
+        "L6825-00-B",
+        "L6825-00-C",
+        "L6825-01",
+        "L6825-01-A",
+        "L6825-01-B",
+        "L6825-02",
+        "L6825-02-A",
+        "L6825-02-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6828",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6828-00",
+        "L6828-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6830",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L6830-00"
+      ],
+      "NotReleasedIds": [
+        "L6830-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6874",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6874-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6912",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6912-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L6961",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L6961-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7019",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7019-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7267",
+      "SubcaseCount": 6,
+      "AvailableCount": 1,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L7267-00"
+      ],
+      "NotReleasedIds": [
+        "L7267-00-A",
+        "L7267-02",
+        "L7267-03",
+        "L7267-04",
+        "L7267-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7278",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7278-00",
+        "L7278-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7815",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L7815-01",
+        "L7815-01-A"
+      ],
+      "NotReleasedIds": [
+        "L7815-00",
+        "L7815-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7848",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7848-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7849",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7849-00",
+        "L7849-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7850",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7850-00",
+        "L7850-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7851",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7851-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7852",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7852-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7853",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7853-00",
+        "L7853-00-B",
+        "L7853-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7855",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7855-00",
+        "L7855-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7857",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7857-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7881",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7881-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L7897",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L7897-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L9259",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L9259-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L9597",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L9597-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L9793",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L9793-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L10015",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L10015-00",
+        "L10015-00-A",
+        "L10015-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L10098",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L10098-00",
+        "L10098-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L10302",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L10302-00",
+        "L10302-00-A",
+        "L10302-01",
+        "L10302-02",
+        "L10302-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L10793",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L10793-00",
+        "L10793-01"
+      ],
+      "NotReleasedIds": [
+        "L10793-02",
+        "L10793-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L11033",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L11033-00",
+        "L11033-00-A",
+        "L11033-00-B",
+        "L11033-01",
+        "L11033-02",
+        "L11033-03",
+        "L11033-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L11674",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L11674-00",
+        "L11674-01",
+        "L11674-02",
+        "L11674-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L13965",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L13965-00",
+        "L13965-00-A",
+        "L13965-15"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14396",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L14396-00",
+        "L14396-01",
+        "L14396-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14486",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L14486-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14505",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L14505-01"
+      ],
+      "NotReleasedIds": [
+        "L14505-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14592",
+      "SubcaseCount": 8,
+      "AvailableCount": 8,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L14592-00",
+        "L14592-00-A",
+        "L14592-00-B",
+        "L14592-00-C",
+        "L14592-00-D",
+        "L14592-01",
+        "L14592-01-A",
+        "L14592-01-B"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14593",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L14593-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14594",
+      "SubcaseCount": 12,
+      "AvailableCount": 1,
+      "NotReleasedCount": 11,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L14594-00-D"
+      ],
+      "NotReleasedIds": [
+        "L14594-00",
+        "L14594-00-A",
+        "L14594-00-B",
+        "L14594-00-C",
+        "L14594-00-E",
+        "L14594-00-F",
+        "L14594-00-G",
+        "L14594-00-H",
+        "L14594-00-I",
+        "L14594-00-L",
+        "L14594-00-M"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14595",
+      "SubcaseCount": 7,
+      "AvailableCount": 1,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L14595-00-F"
+      ],
+      "NotReleasedIds": [
+        "L14595-00",
+        "L14595-00-A",
+        "L14595-00-B",
+        "L14595-00-C",
+        "L14595-00-D",
+        "L14595-00-E"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14596",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L14596-00",
+        "L14596-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14597",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L14597-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14598",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L14598-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L14726",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L14726-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L15456",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L15456-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L15546",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L15546-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L17866",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L17866-00",
+        "L17866-00-A",
+        "L17866-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L18210",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L18210-00",
+        "L18210-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L18241",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L18241-00",
+        "L18241-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L19047",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L19047-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L20620",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L20620-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L20870",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L20870-00",
+        "L20870-01",
+        "L20870-02",
+        "L20870-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L21991",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L21991-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L22411",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "L22411-00",
+        "L22411-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "L22489",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "L22489-00-B"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA6783",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA6783-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA13963",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "LA13963-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14675",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14675-00-A"
+      ],
+      "NotReleasedIds": [
+        "LA14675-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14676",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14676-00",
+        "LA14676-00-A"
+      ],
+      "NotReleasedIds": [
+        "LA14676-00-B",
+        "LA14676-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14677",
+      "SubcaseCount": 4,
+      "AvailableCount": 3,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14677-00",
+        "LA14677-01-A",
+        "LA14677-01-H"
+      ],
+      "NotReleasedIds": [
+        "LA14677-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14678",
+      "SubcaseCount": 4,
+      "AvailableCount": 4,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14678-00",
+        "LA14678-00-A",
+        "LA14678-00-B",
+        "LA14678-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14679",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14679-00",
+        "LA14679-00-B"
+      ],
+      "NotReleasedIds": [
+        "LA14679-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14680",
+      "SubcaseCount": 4,
+      "AvailableCount": 2,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14680-00",
+        "LA14680-00-A"
+      ],
+      "NotReleasedIds": [
+        "LA14680-00-B",
+        "LA14680-81"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14681",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14681-00",
+        "LA14681-00-B"
+      ],
+      "NotReleasedIds": [
+        "LA14681-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14682",
+      "SubcaseCount": 3,
+      "AvailableCount": 2,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14682-00",
+        "LA14682-00-B"
+      ],
+      "NotReleasedIds": [
+        "LA14682-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14683",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14683-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14684",
+      "SubcaseCount": 3,
+      "AvailableCount": 1,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14684-00"
+      ],
+      "NotReleasedIds": [
+        "LA14684-01",
+        "LA14684-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14685",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14685-00"
+      ],
+      "NotReleasedIds": [
+        "LA14685-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14686",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14686-00-A"
+      ],
+      "NotReleasedIds": [
+        "LA14686-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14687",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14687-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14691",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14691-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14692",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "LA14692-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14693",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14693-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14694",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14694-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14713",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "LA14713-00",
+        "LA14713-01",
+        "LA14713-01-A",
+        "LA14713-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14714",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "LA14714-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14728",
+      "SubcaseCount": 9,
+      "AvailableCount": 8,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14728-00",
+        "LA14728-01",
+        "LA14728-02-A",
+        "LA14728-03",
+        "LA14728-05",
+        "LA14728-06",
+        "LA14728-07",
+        "LA14728-08"
+      ],
+      "NotReleasedIds": [
+        "LA14728-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA14752",
+      "SubcaseCount": 8,
+      "AvailableCount": 6,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "LA14752-00",
+        "LA14752-01",
+        "LA14752-02",
+        "LA14752-03",
+        "LA14752-05",
+        "LA14752-06"
+      ],
+      "NotReleasedIds": [
+        "LA14752-03-A",
+        "LA14752-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA15086",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "LA15086-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA19060",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "LA19060-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "LA19359",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "LA19359-00"
+      ],
+      "UnknownIds": []
+    }
+  ]
+}

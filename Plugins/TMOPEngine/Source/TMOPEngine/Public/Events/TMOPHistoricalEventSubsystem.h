@@ -68,6 +68,15 @@ public:
     UFUNCTION(BlueprintPure, Category = "TMOP|Events")
     TArray<FName> GetRegisteredEventIds() const;
 
+    /**
+     * Replaces resolved runtime times/states after a deterministic world seek.
+     * Definitions remain unchanged. Unknown event IDs are ignored.
+     */
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Events|World Bake")
+    int32 ApplyBakedEventRuntime(
+        const TArray<FTMOPHistoricalEventRuntime>& BakedRuntime,
+        FTMOPTime TargetTime);
+
 private:
     UFUNCTION()
     void HandleSecondChanged(FTMOPTime NewTime);

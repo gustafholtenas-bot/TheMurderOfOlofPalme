@@ -85,3 +85,19 @@ People- och observationsfilerna innehåller därefter:
 
 Anchorn `Adolffredrikskyrkog_13` måste finnas i nivån med exakt detta ID.
 Portobservationen använder den befintliga `Adolffredrikskyrkog_5`.
+
+## Den stirrande mannen vid Grand
+
+Observationsimporten innehåller tre separata källrader:
+
+- Anneli Korhonen ser L866-mannen utanför Grand.
+- Margareta Storhök ser samma man vid samma tillfälle.
+- Mårten Palme ser en man vid Sandins cirka tio minuter senare.
+
+Anneli och Margareta refererar samma observationsfigur. Mårtens Grandman är en
+separat `OBSERVED_UNKNOWN`-figur. Observationstabellen länkar inte ihop deras
+identiteter; en `ProbableSamePerson`-hypotes ligger i
+`DT_TMOP_ObservationLinks`.
+
+Mårtens People-timeline har samtidigt korrigerats till ordningen
+`grand_outside` → `kulturcirkeln` → `Sadins` → norrut.

@@ -1,0 +1,2013 @@
+{
+  "Sources": [
+    "https://wpu.nu/wiki/Avsnitt:ED",
+    "https://wpu.nu/wiki/Avsnitt:EA",
+    "https://wpu.nu/wiki/Avsnitt:EH",
+    "https://wpu.nu/wiki/Avsnitt:EG"
+  ],
+  "MainCaseCount": 103,
+  "SubcaseCount": 643,
+  "AvailableCount": 293,
+  "NotReleasedCount": 350,
+  "UnknownCount": 0,
+  "Parents": [
+    {
+      "ParentUppslagId": "E13",
+      "SeriesId": "E",
+      "Title": "Mordplatsvittnen: Anders Björkman, Nicola Fauzzi; Marco Neeser; Niklas Fröling; Klas Nyberg; Åsa Gustavsson",
+      "SubcaseCount": 25,
+      "AvailableCount": 25,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E13-00",
+        "E13-00-A",
+        "E13-00-B",
+        "E13-00-C",
+        "E13-00-D",
+        "E13-00-E",
+        "E13-00-F",
+        "E13-00-G",
+        "E13-00-H",
+        "E13-00-I",
+        "E13-00-J",
+        "E13-01",
+        "E13-01-A",
+        "E13-01-B",
+        "E13-01-C",
+        "E13-01-D",
+        "E13-01-E",
+        "E13-03",
+        "E13-05",
+        "E13-06",
+        "E13-06-A",
+        "E13-07",
+        "E13-07-A",
+        "E13-08",
+        "E13-08-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E15",
+      "SeriesId": "E",
+      "Title": "Vittnen utefter flyktvägen: Lars Jeppsson, Yvonne Nieminen och Ahmed Zahir",
+      "SubcaseCount": 27,
+      "AvailableCount": 20,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E15-00",
+        "E15-00-A",
+        "E15-00-B",
+        "E15-00-C",
+        "E15-00-F",
+        "E15-00-I",
+        "E15-00-K",
+        "E15-00-L",
+        "E15-01",
+        "E15-01-A",
+        "E15-01-B",
+        "E15-01-C",
+        "E15-01-E",
+        "E15-01-F",
+        "E15-01-G",
+        "E15-01-H",
+        "E15-02",
+        "E15-02-A",
+        "E15-02-B",
+        "E15-02-D"
+      ],
+      "NotReleasedIds": [
+        "E15-00-H",
+        "E15-00-J",
+        "E15-04-A",
+        "E15-06",
+        "E15-06-A",
+        "E15-06-B",
+        "E15-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E17",
+      "SeriesId": "E",
+      "Title": "Mordplatsvittnen: Anders Delsborn, Charlotte Liljedal, Lena Schödin, Ann-Charlott Holmgren och Ann-Louise Paulsson",
+      "SubcaseCount": 13,
+      "AvailableCount": 8,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E17-00",
+        "E17-00-A",
+        "E17-04",
+        "E17-05",
+        "E17-05-A",
+        "E17-06",
+        "E17-06-A",
+        "E17-11"
+      ],
+      "NotReleasedIds": [
+        "E17-02",
+        "E17-04-C",
+        "E17-05-D",
+        "E17-06-D",
+        "E17-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E19",
+      "SeriesId": "E",
+      "Title": "Mordplatsvittne: Anna Hage",
+      "SubcaseCount": 11,
+      "AvailableCount": 9,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E19-00",
+        "E19-00-A",
+        "E19-00-B",
+        "E19-00-C",
+        "E19-00-D",
+        "E19-00-E",
+        "E19-00-I",
+        "E19-00-J",
+        "E19-00-K"
+      ],
+      "NotReleasedIds": [
+        "E19-00-H",
+        "E19-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E20",
+      "SeriesId": "E",
+      "Title": "Mordplatsvittnen: Karin Johansson, Elisabeth Johansson, Åke Larsson och Cecilia Anderstedt",
+      "SubcaseCount": 9,
+      "AvailableCount": 8,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E20-00",
+        "E20-00-A",
+        "E20-00-B",
+        "E20-01",
+        "E20-02",
+        "E20-03",
+        "E20-03-A",
+        "E20-03-B"
+      ],
+      "NotReleasedIds": [
+        "E20-03-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E21",
+      "SeriesId": "E",
+      "Title": "Jan Nilsson",
+      "SubcaseCount": 6,
+      "AvailableCount": 4,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E21-00",
+        "E21-00-A",
+        "E21-00-B",
+        "E21-00-C"
+      ],
+      "NotReleasedIds": [
+        "E21-00-E",
+        "E21-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E22",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E22-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E23",
+      "SeriesId": "E",
+      "Title": "Ljubisa Najics iakttagelse av makarna Palme omringade av tre män vid gatuköket",
+      "SubcaseCount": 21,
+      "AvailableCount": 9,
+      "NotReleasedCount": 12,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E23-00",
+        "E23-00-A",
+        "E23-00-B",
+        "E23-00-C",
+        "E23-00-D",
+        "E23-00-E",
+        "E23-00-F",
+        "E23-05",
+        "E23-08"
+      ],
+      "NotReleasedIds": [
+        "E23-00-I",
+        "E23-00-J",
+        "E23-02-A",
+        "E23-02-B",
+        "E23-03",
+        "E23-04",
+        "E23-06",
+        "E23-07",
+        "E23-09",
+        "E23-10",
+        "E23-11",
+        "E23-12"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E59",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 0,
+      "AvailableCount": 0,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E63",
+      "SeriesId": "E",
+      "Title": "Stig Engström och personkretsen kring honom",
+      "SubcaseCount": 125,
+      "AvailableCount": 97,
+      "NotReleasedCount": 28,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E63-00",
+        "E63-00-A",
+        "E63-00-B",
+        "E63-00-C",
+        "E63-00-D",
+        "E63-01",
+        "E63-02",
+        "E63-03",
+        "E63-03-A",
+        "E63-04",
+        "E63-04-A",
+        "E63-04-B",
+        "E63-04-C",
+        "E63-04-D",
+        "E63-05",
+        "E63-05-A",
+        "E63-05-B",
+        "E63-05-C",
+        "E63-05-D",
+        "E63-05-E",
+        "E63-05-F",
+        "E63-06",
+        "E63-07",
+        "E63-07-A",
+        "E63-07-B",
+        "E63-07-C",
+        "E63-07-D",
+        "E63-07-E",
+        "E63-07-F",
+        "E63-07-G",
+        "E63-07-H",
+        "E63-08",
+        "E63-08-A",
+        "E63-08-B",
+        "E63-09",
+        "E63-09-A",
+        "E63-10",
+        "E63-11",
+        "E63-12",
+        "E63-13",
+        "E63-14",
+        "E63-14-A",
+        "E63-14-B",
+        "E63-15",
+        "E63-15-A",
+        "E63-15-B",
+        "E63-15-D",
+        "E63-15-E",
+        "E63-15-F",
+        "E63-15-G",
+        "E63-16",
+        "E63-17",
+        "E63-18",
+        "E63-19",
+        "E63-20",
+        "E63-21",
+        "E63-22",
+        "E63-24",
+        "E63-25",
+        "E63-26",
+        "E63-27",
+        "E63-28",
+        "E63-29",
+        "E63-29-A",
+        "E63-30",
+        "E63-31",
+        "E63-32",
+        "E63-33",
+        "E63-34",
+        "E63-35",
+        "E63-36",
+        "E63-37",
+        "E63-38",
+        "E63-39",
+        "E63-40",
+        "E63-42",
+        "E63-43",
+        "E63-44",
+        "E63-45",
+        "E63-46",
+        "E63-47",
+        "E63-48",
+        "E63-49",
+        "E63-50",
+        "E63-51",
+        "E63-51-A",
+        "E63-52",
+        "E63-53",
+        "E63-54",
+        "E63-54-A",
+        "E63-55",
+        "E63-56",
+        "E63-57-B",
+        "E63-58",
+        "E63-58-A",
+        "E63-59",
+        "E63-60"
+      ],
+      "NotReleasedIds": [
+        "E63-06-A",
+        "E63-06-B",
+        "E63-06-C",
+        "E63-07-I",
+        "E63-07-J",
+        "E63-13-A",
+        "E63-15-C",
+        "E63-16-A",
+        "E63-19-A",
+        "E63-20-A",
+        "E63-20-B",
+        "E63-20-C",
+        "E63-20-D",
+        "E63-20-E",
+        "E63-21-A",
+        "E63-22-A",
+        "E63-23",
+        "E63-25-A",
+        "E63-30-A",
+        "E63-41",
+        "E63-44-A",
+        "E63-45-A",
+        "E63-46-A",
+        "E63-47-A",
+        "E63-48-A",
+        "E63-51-B",
+        "E63-57",
+        "E63-57-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E107",
+      "SeriesId": "E",
+      "Title": "Mordplatsvittnen: Inge Morelius, Helena Lähde, Susanne Larsson och Sven-Erik Rolfart",
+      "SubcaseCount": 19,
+      "AvailableCount": 11,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E107-00",
+        "E107-00-A",
+        "E107-00-B",
+        "E107-01",
+        "E107-01-A",
+        "E107-01-B",
+        "E107-02",
+        "E107-02-A",
+        "E107-02-D",
+        "E107-03",
+        "E107-03-A"
+      ],
+      "NotReleasedIds": [
+        "E107-00-F",
+        "E107-00-H",
+        "E107-02-B",
+        "E107-02-C",
+        "E107-03-B",
+        "E107-04",
+        "E107-05",
+        "E107-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E167",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 8,
+      "AvailableCount": 5,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E167-00",
+        "E167-00-A",
+        "E167-00-B",
+        "E167-00-C",
+        "E167-01"
+      ],
+      "NotReleasedIds": [
+        "E167-01-A",
+        "E167-02",
+        "E167-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E233",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 0,
+      "AvailableCount": 0,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E250",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E250-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E251",
+      "SeriesId": "E",
+      "Title": "Mordplatsvittne: Jan-Åke Svensson",
+      "SubcaseCount": 5,
+      "AvailableCount": 4,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E251-00",
+        "E251-00-A",
+        "E251-00-B",
+        "E251-00-D"
+      ],
+      "NotReleasedIds": [
+        "E251-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E491",
+      "SeriesId": "E",
+      "Title": "Bengt Palms iakttagelser på mordplatsen",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E491-00",
+        "E491-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E492",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E492-00",
+        "E492-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E621",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E621-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E637",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 13,
+      "AvailableCount": 0,
+      "NotReleasedCount": 13,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E637-00",
+        "E637-01",
+        "E637-02",
+        "E637-02-A",
+        "E637-02-B",
+        "E637-02-C",
+        "E637-02-D",
+        "E637-03",
+        "E637-04",
+        "E637-05",
+        "E637-06",
+        "E637-07",
+        "E637-30-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E638",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 5,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E638-00",
+        "E638-00-A",
+        "E638-00-B",
+        "E638-01",
+        "E638-01-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E1096",
+      "SeriesId": "E",
+      "Title": "Ungdomsgäng på Sveavägen före mordet; Margareta Ryttestål, Ulrika Ryttestål och Susanne Karlsson",
+      "SubcaseCount": 24,
+      "AvailableCount": 16,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E1096-00",
+        "E1096-01",
+        "E1096-02",
+        "E1096-02-B",
+        "E1096-03",
+        "E1096-03-A",
+        "E1096-03-B",
+        "E1096-03-C",
+        "E1096-04",
+        "E1096-05",
+        "E1096-06",
+        "E1096-07",
+        "E1096-09",
+        "E1096-10",
+        "E1096-13",
+        "E1096-14"
+      ],
+      "NotReleasedIds": [
+        "E1096-01-A",
+        "E1096-02-C",
+        "E1096-08",
+        "E1096-11",
+        "E1096-12",
+        "E1096-15",
+        "E1096-16",
+        "E1096-17"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E1146",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 4,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E1146-00",
+        "E1146-01",
+        "E1146-01-A",
+        "E1146-02-A"
+      ],
+      "NotReleasedIds": [
+        "E1146-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E1169",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E1169-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E1593",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E1593-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E1930",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E1930-00",
+        "E1930-00-A",
+        "E1930-01",
+        "E1930-02",
+        "E1930-03",
+        "E1930-04",
+        "E1930-05",
+        "E1930-06",
+        "E1930-07",
+        "E1930-08"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E1974",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E1974-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E2090",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E2090-00",
+        "E2090-01",
+        "E2090-01-A",
+        "E2090-02",
+        "E2090-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E2501",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 0,
+      "AvailableCount": 0,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E2661",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E2661-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E2666",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 4,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E2666-00",
+        "E2666-00-A",
+        "E2666-00-B",
+        "E2666-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E2748",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E2748-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E2803",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E2803-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E4426",
+      "SeriesId": "E",
+      "Title": "Alf Lundin",
+      "SubcaseCount": 17,
+      "AvailableCount": 10,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E4426-00",
+        "E4426-00-A",
+        "E4426-00-B",
+        "E4426-00-C",
+        "E4426-00-D",
+        "E4426-00-E",
+        "E4426-00-F",
+        "E4426-00-G",
+        "E4426-00-H",
+        "E4426-00-K"
+      ],
+      "NotReleasedIds": [
+        "E4426-00-I",
+        "E4426-01",
+        "E4426-02",
+        "E4426-03",
+        "E4426-04",
+        "E4426-05",
+        "E4426-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E4461",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E4461-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E4526",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E4526-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E4783",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E4783-00",
+        "E4783-00-A",
+        "E4783-01",
+        "E4783-01-A",
+        "E4783-02",
+        "E4783-03",
+        "E4783-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E4799",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E4799-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E5174",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E5174-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E5203",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E5203-00",
+        "E5203-00-A",
+        "E5203-00-B",
+        "E5203-02-A",
+        "E5203-02-B",
+        "E5203-03-A",
+        "E5203-03-B",
+        "E5203-04",
+        "E5203-05",
+        "E5203-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E5751",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E5751-00",
+        "E5751-00-A",
+        "E5751-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E6820",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E6820-00",
+        "E6820-00-A",
+        "E6820-01-B",
+        "E6820-02",
+        "E6820-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E6948",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E6948-00",
+        "E6948-04-A",
+        "E6948-06",
+        "E6948-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E9328",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E9328-00",
+        "E9328-00-A",
+        "E9328-00-B",
+        "E9328-01",
+        "E9328-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E9559",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E9559-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E9645",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E9645-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E9908",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E9908-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E9978",
+      "SeriesId": "E",
+      "Title": "Leif Ljungqvists och Jan Anderssons iakttagelser från Chevrolet Suburban",
+      "SubcaseCount": 36,
+      "AvailableCount": 16,
+      "NotReleasedCount": 20,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E9978-00",
+        "E9978-00-A",
+        "E9978-00-B",
+        "E9978-00-C",
+        "E9978-00-D",
+        "E9978-00-K",
+        "E9978-00-Q",
+        "E9978-01",
+        "E9978-01-A",
+        "E9978-01-B",
+        "E9978-01-C",
+        "E9978-01-D",
+        "E9978-01-E",
+        "E9978-01-G",
+        "E9978-01-H",
+        "E9978-02"
+      ],
+      "NotReleasedIds": [
+        "E9978-00-E",
+        "E9978-00-F",
+        "E9978-00-L",
+        "E9978-00-M",
+        "E9978-00-N",
+        "E9978-00-O",
+        "E9978-00-P",
+        "E9978-01-I",
+        "E9978-01-J",
+        "E9978-02-A",
+        "E9978-03",
+        "E9978-04",
+        "E9978-05",
+        "E9978-06",
+        "E9978-06-A",
+        "E9978-07",
+        "E9978-08",
+        "E9978-09",
+        "E9978-10",
+        "E9978-11"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E9979",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 18,
+      "AvailableCount": 17,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E9979-00",
+        "E9979-00-A",
+        "E9979-00-B",
+        "E9979-00-C",
+        "E9979-00-D",
+        "E9979-00-E",
+        "E9979-00-G",
+        "E9979-00-J",
+        "E9979-01",
+        "E9979-02",
+        "E9979-03",
+        "E9979-03-A",
+        "E9979-04",
+        "E9979-04-A",
+        "E9979-04-B",
+        "E9979-07",
+        "E9979-07-A"
+      ],
+      "NotReleasedIds": [
+        "E9979-00-K"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E10748",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E10748-00",
+        "E10748-00-A",
+        "E10748-00-B",
+        "E10748-00-C",
+        "E10748-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E11150",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E11150-00",
+        "E11150-00-A",
+        "E11150-01",
+        "E11150-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E11626",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 11,
+      "AvailableCount": 0,
+      "NotReleasedCount": 11,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E11626-00",
+        "E11626-00-A",
+        "E11626-00-B",
+        "E11626-00-C",
+        "E11626-00-D",
+        "E11626-01",
+        "E11626-02",
+        "E11626-03",
+        "E11626-04",
+        "E11626-05",
+        "E11626-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E11934",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E11934-00",
+        "E11934-00-A",
+        "E11934-01",
+        "E11934-02",
+        "E11934-03",
+        "E11934-04",
+        "E11934-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E13462",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E13462-00",
+        "E13462-00-A",
+        "E13462-01",
+        "E13462-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E13668",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E13668-00",
+        "E13668-00-A",
+        "E13668-00-B",
+        "E13668-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E14818",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 1,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E14818-00"
+      ],
+      "NotReleasedIds": [
+        "E14818-01",
+        "E14818-01-A",
+        "E14818-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E15238",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E15238-00",
+        "E15238-00-A",
+        "E15238-00-B",
+        "E15238-01",
+        "E15238-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E15323",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E15323-00",
+        "E15323-01",
+        "E15323-01-A",
+        "E15323-02",
+        "E15323-03",
+        "E15323-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E15496",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E15496-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E17711",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 1,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E17711-00-B"
+      ],
+      "NotReleasedIds": [
+        "E17711-00",
+        "E17711-00-A",
+        "E17711-00-C",
+        "E17711-00-D",
+        "E17711-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E17801",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 15,
+      "AvailableCount": 1,
+      "NotReleasedCount": 14,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E17801-05-A"
+      ],
+      "NotReleasedIds": [
+        "E17801-00",
+        "E17801-00-A",
+        "E17801-01",
+        "E17801-02",
+        "E17801-02-A",
+        "E17801-03",
+        "E17801-03-A",
+        "E17801-04",
+        "E17801-04-A",
+        "E17801-05",
+        "E17801-05-B",
+        "E17801-05-C",
+        "E17801-06",
+        "E17801-06-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E17840",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E17840-00",
+        "E17840-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E18186",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E18186-00",
+        "E18186-00-A",
+        "E18186-00-B",
+        "E18186-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E20810",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E20810-00",
+        "E20810-00-A",
+        "E20810-00-B",
+        "E20810-00-C",
+        "E20810-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E20998",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E20998-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E21601",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E21601-00",
+        "E21601-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E22075",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E22075-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E22195",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E22195-00",
+        "E22195-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E22236",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E22236-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E22316",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "E22316-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "E26698",
+      "SeriesId": "E",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "E26698-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB89",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB89-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB375",
+      "SeriesId": "EB",
+      "Title": "Nytt nummer EBC375",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EB375-00",
+        "EB375-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB471",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB471-00",
+        "EB471-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB619",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB619-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB879",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB879-00",
+        "EB879-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB1579",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB1579-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB1588",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB1588-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB2616",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB2616-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB4528",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB4528-00",
+        "EB4528-00-A",
+        "EB4528-01",
+        "EB4528-02",
+        "EB4528-03",
+        "EB4528-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB6059",
+      "SeriesId": "EB",
+      "Title": "Nytt nummer EBC6059",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB6059-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB6991",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB6991-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB7911",
+      "SeriesId": "EB",
+      "Title": "Nytt nummer EBC7911",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB7911-00",
+        "EB7911-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB9985",
+      "SeriesId": "EB",
+      "Title": "Om bil parkerad på Wallingatan 1986-03-11.",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EB9985-00",
+        "EB9985-01",
+        "EB9985-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB10006",
+      "SeriesId": "EB",
+      "Title": "Nytt nummer EBC10006",
+      "SubcaseCount": 18,
+      "AvailableCount": 0,
+      "NotReleasedCount": 18,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB10006-00",
+        "EB10006-00-A",
+        "EB10006-00-B",
+        "EB10006-00-C",
+        "EB10006-01",
+        "EB10006-01-A",
+        "EB10006-01-B",
+        "EB10006-01-C",
+        "EB10006-01-D",
+        "EB10006-01-E",
+        "EB10006-01-F",
+        "EB10006-02",
+        "EB10006-02-A",
+        "EB10006-02-B",
+        "EB10006-03",
+        "EB10006-03-A",
+        "EB10006-03-B",
+        "EB10006-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB13404",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB13404-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB14568",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB14568-00",
+        "EB14568-00-A",
+        "EB14568-01",
+        "EB14568-02",
+        "EB14568-03",
+        "EB14568-04",
+        "EB14568-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB15245",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB15245-00",
+        "EB15245-00-A",
+        "EB15245-00-B",
+        "EB15245-00-C",
+        "EB15245-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EB18314",
+      "SeriesId": "EB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EB18314-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE655",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE655-00",
+        "EE655-00-A",
+        "EE655-01",
+        "EE655-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE7323",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE7323-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE8128",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE8128-00",
+        "EE8128-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE10022",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE10022-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE11099",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE11099-00",
+        "EE11099-00-A",
+        "EE11099-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE11805",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE11805-00",
+        "EE11805-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE15335",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE15335-00",
+        "EE15335-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EE18292",
+      "SeriesId": "EE",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EE18292-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EF700",
+      "SeriesId": "EF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EF700-00",
+        "EF700-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EF4467",
+      "SeriesId": "EF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EF4467-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EF6702",
+      "SeriesId": "EF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EF6702-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EF7131",
+      "SeriesId": "EF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EF7131-00",
+        "EF7131-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EF7941",
+      "SeriesId": "EF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EF7941-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EF9977",
+      "SeriesId": "EF",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 3,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EF9977-00",
+        "EF9977-00-A",
+        "EF9977-00-B"
+      ],
+      "NotReleasedIds": [
+        "EF9977-01-B",
+        "EF9977-01-C",
+        "EF9977-03",
+        "EF9977-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EF11670",
+      "SeriesId": "EF",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EF11670-00",
+        "EF11670-00-A",
+        "EF11670-00-B",
+        "EF11670-00-C",
+        "EF11670-01"
+      ],
+      "UnknownIds": []
+    }
+  ]
+}

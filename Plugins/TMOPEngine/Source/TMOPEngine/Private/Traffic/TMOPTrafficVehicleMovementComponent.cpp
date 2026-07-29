@@ -382,6 +382,27 @@ void UTMOPTrafficVehicleMovementComponent::StopDriving()
     TrafficState = ETMOPTrafficVehicleState::Stopped;
 }
 
+bool UTMOPTrafficVehicleMovementComponent::RestoreBakedTrafficState(
+    const FName LaneId,
+    const float DistanceCm,
+    const float SpeedCmPerSecond,
+    const TArray<FName>& RouteLaneIds,
+    const bool bShouldDrive)
+{
+    PlannedLaneIds = RouteLaneIds;
+    InitialLaneId = LaneId;
+    if (!InitializeOnLane(LaneId, DistanceCm))
+    {
+        return false;
+    }
+    CurrentSpeedCmPerSecond = FMath::Max(0.0f, SpeedCmPerSecond);
+    bDrivingEnabled = bShouldDrive;
+    TrafficState = bShouldDrive
+        ? ETMOPTrafficVehicleState::Driving
+        : ETMOPTrafficVehicleState::Stopped;
+    return true;
+}
+
 void UTMOPTrafficVehicleMovementComponent::SetAdditionalLateralOffset(const float OffsetCm)
 {
     AdditionalLateralOffsetCm = OffsetCm;

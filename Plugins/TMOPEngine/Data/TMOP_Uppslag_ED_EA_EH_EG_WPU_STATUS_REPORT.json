@@ -1,0 +1,6684 @@
+{
+  "Sources": [
+    "https://wpu.nu/wiki/Avsnitt:ED",
+    "https://wpu.nu/wiki/Avsnitt:EA",
+    "https://wpu.nu/wiki/Avsnitt:EH",
+    "https://wpu.nu/wiki/Avsnitt:EG"
+  ],
+  "MainCaseCount": 408,
+  "SubcaseCount": 1336,
+  "AvailableCount": 202,
+  "NotReleasedCount": 1134,
+  "UnknownCount": 0,
+  "Parents": [
+    {
+      "ParentUppslagId": "EA56",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA56-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA57",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA57-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA86",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA86-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA88",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA88-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA163",
+      "SeriesId": "EA",
+      "Title": "2 MÄN I GUL APELBERGSGATAN",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA163-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA252",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA252-00",
+        "EA252-00-E",
+        "EA252-02-A",
+        "EA252-03",
+        "EA252-04",
+        "EA252-05",
+        "EA252-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA278",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA278-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA464",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA464-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA494",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA494-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA515",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA515-00",
+        "EA515-00-A",
+        "EA515-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA523",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA523-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA620",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA620-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA627",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA627-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA635",
+      "SeriesId": "EA",
+      "Title": "(MAGNUMSNACK 1986-02-27), SLAGN, REMISS O-BR",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA635-00",
+        "EA635-00-A",
+        "EA635-00-B",
+        "EA635-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA651",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA651-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA735",
+      "SeriesId": "EA",
+      "Title": "SKALLGÅNG SL-KOR",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA735-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA873",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA873-00",
+        "EA873-00-E",
+        "EA873-01-D",
+        "EA873-01-E",
+        "EA873-02-A",
+        "EA873-02-B",
+        "EA873-03",
+        "EA873-04",
+        "EA873-05",
+        "EA873-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA1082",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA1082-00",
+        "EA1082-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA1095",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA1095-00",
+        "EA1095-01",
+        "EA1095-02",
+        "EA1095-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA1553",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA1553-00",
+        "EA1553-00-A",
+        "EA1553-00-B",
+        "EA1553-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA1559",
+      "SeriesId": "EA",
+      "Title": "(WALKIE-TALKIE)",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA1559-00",
+        "EA1559-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA1808",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA1808-00",
+        "EA1808-01",
+        "EA1808-02",
+        "EA1808-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2502",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2502-00",
+        "EA2502-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2504",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2504-00",
+        "EA2504-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2509",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2509-00",
+        "EA2509-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2512",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 12,
+      "AvailableCount": 0,
+      "NotReleasedCount": 12,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2512-00",
+        "EA2512-00-B",
+        "EA2512-00-C",
+        "EA2512-01",
+        "EA2512-01-A",
+        "EA2512-02",
+        "EA2512-02-A",
+        "EA2512-03",
+        "EA2512-03-A",
+        "EA2512-04",
+        "EA2512-04-A",
+        "EA2512-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2515",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2515-00",
+        "EA2515-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2519",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2519-00",
+        "EA2519-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2523",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2523-00",
+        "EA2523-02",
+        "EA2523-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2524",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2524-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2669",
+      "SeriesId": "EA",
+      "Title": "VÄSKA I TRÄ",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2669-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2787",
+      "SeriesId": "EA",
+      "Title": "SIGN PULLAN",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2787-00",
+        "EA2787-00-A",
+        "EA2787-00-B",
+        "EA2787-00-C",
+        "EA2787-00-D",
+        "EA2787-00-E",
+        "EA2787-00-F",
+        "EA2787-00-G",
+        "EA2787-00-H",
+        "EA2787-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2804",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2804-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2882",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2882-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA2948",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA2948-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA4050",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA4050-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA4526",
+      "SeriesId": "EA",
+      "Title": "1986-02-28 20:30-20:40 Iakttagelse av två män med WT på Tunnelgatan",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA4526-00",
+        "EA4526-00-A",
+        "EA4526-00-B",
+        "EA4526-01",
+        "EA4526-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA6294",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA6294-00",
+        "EA6294-00-B",
+        "EA6294-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA6924",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA6924-00",
+        "EA6924-01",
+        "EA6924-01-A",
+        "EA6924-02",
+        "EA6924-02-A",
+        "EA6924-02-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA6951",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA6951-00",
+        "EA6951-00-B",
+        "EA6951-01",
+        "EA6951-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA6969",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA6969-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA7000",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 1,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EA7000-00"
+      ],
+      "NotReleasedIds": [
+        "EA7000-01",
+        "EA7000-01-A",
+        "EA7000-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA7007",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA7007-00",
+        "EA7007-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA7008",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA7008-00",
+        "EA7008-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA7442",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA7442-00",
+        "EA7442-00-A",
+        "EA7442-00-B",
+        "EA7442-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9618",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9618-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9705",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9705-00",
+        "EA9705-00-A",
+        "EA9705-00-B",
+        "EA9705-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9875",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9875-00",
+        "EA9875-60"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9982",
+      "SeriesId": "EA",
+      "Title": "Skandia AB: Per Häggström, Roland Bergström. Securitas: Henry Olofsson,",
+      "SubcaseCount": 13,
+      "AvailableCount": 10,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EA9982-00-B",
+        "EA9982-00-C",
+        "EA9982-00-D",
+        "EA9982-01",
+        "EA9982-01-A",
+        "EA9982-02",
+        "EA9982-02-A",
+        "EA9982-03",
+        "EA9982-04",
+        "EA9982-04-A"
+      ],
+      "NotReleasedIds": [
+        "EA9982-00",
+        "EA9982-00-E",
+        "EA9982-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9987",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9987-00",
+        "EA9987-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9988",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9988-00",
+        "EA9988-00-A",
+        "EA9988-00-B",
+        "EA9988-01",
+        "EA9988-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9989",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9989-00",
+        "EA9989-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9990",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9990-00",
+        "EA9990-01",
+        "EA9990-02",
+        "EA9990-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA9991",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA9991-00",
+        "EA9991-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10007",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10007-00",
+        "EA10007-00-A",
+        "EA10007-01",
+        "EA10007-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10008",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10008-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10009",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10009-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10016",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 12,
+      "AvailableCount": 0,
+      "NotReleasedCount": 12,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10016-00",
+        "EA10016-00-B",
+        "EA10016-00-C",
+        "EA10016-00-D",
+        "EA10016-00-E",
+        "EA10016-00-F",
+        "EA10016-00-G",
+        "EA10016-01",
+        "EA10016-02",
+        "EA10016-02-A",
+        "EA10016-02-B",
+        "EA10016-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10017",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10017-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10036",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10036-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10042",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10042-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10050",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10050-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10052",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10052-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10054",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA10054-00",
+        "EA10054-01",
+        "EA10054-02",
+        "EA10054-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA10623",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EA10623-00-A",
+        "EA10623-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11009",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11009-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11612",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11612-00",
+        "EA11612-01",
+        "EA11612-01-A",
+        "EA11612-02",
+        "EA11612-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11847",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11847-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11848",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11848-00",
+        "EA11848-01",
+        "EA11848-02",
+        "EA11848-03",
+        "EA11848-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11849",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11849-00",
+        "EA11849-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11850",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11850-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11853",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11853-00",
+        "EA11853-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11854",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11854-00",
+        "EA11854-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11855",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11855-00",
+        "EA11855-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11856",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11856-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11857",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11857-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11858",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11858-00",
+        "EA11858-00-A",
+        "EA11858-00-B",
+        "EA11858-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11859",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11859-00",
+        "EA11859-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA11860",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA11860-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13017",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13017-00",
+        "EA13017-01",
+        "EA13017-02",
+        "EA13017-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13407",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13407-00",
+        "EA13407-00-A",
+        "EA13407-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13522",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13522-00",
+        "EA13522-01",
+        "EA13522-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13523",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13523-00",
+        "EA13523-01",
+        "EA13523-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13552",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13552-00",
+        "EA13552-01",
+        "EA13552-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13553",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13553-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13557",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13557-00",
+        "EA13557-00-A",
+        "EA13557-00-B",
+        "EA13557-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13558",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13558-00",
+        "EA13558-00-A",
+        "EA13558-01",
+        "EA13558-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13582",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13582-00",
+        "EA13582-00-A",
+        "EA13582-00-B",
+        "EA13582-01",
+        "EA13582-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13584",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13584-00",
+        "EA13584-00-A",
+        "EA13584-01",
+        "EA13584-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13585",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13585-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA13586",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA13586-00",
+        "EA13586-01",
+        "EA13586-01-A",
+        "EA13586-02",
+        "EA13586-03",
+        "EA13586-03-A",
+        "EA13586-04",
+        "EA13586-05",
+        "EA13586-06",
+        "EA13586-06-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA14527",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA14527-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA14982",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 8,
+      "AvailableCount": 0,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA14982-00",
+        "EA14982-01",
+        "EA14982-02",
+        "EA14982-03",
+        "EA14982-04",
+        "EA14982-04-A",
+        "EA14982-05",
+        "EA14982-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA15072",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA15072-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA15076",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA15076-00",
+        "EA15076-01",
+        "EA15076-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA16938",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA16938-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA17168",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA17168-00",
+        "EA17168-01",
+        "EA17168-02",
+        "EA17168-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EA18229",
+      "SeriesId": "EA",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EA18229-00",
+        "EA18229-01",
+        "EA18229-03",
+        "EA18229-04",
+        "EA18229-04-A",
+        "EA18229-05",
+        "EA18229-05-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB624",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB624-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB1595",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB1595-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB1597",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAB1597-00",
+        "EAB1597-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB2660",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB2660-00",
+        "EAB2660-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB4592",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB4592-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB5389",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB5389-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB6844",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB6844-00",
+        "EAB6844-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB6988",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB6988-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB10003",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB10003-00",
+        "EAB10003-01",
+        "EAB10003-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB10004",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB10004-00",
+        "EAB10004-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB10055",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB10055-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAB18344",
+      "SeriesId": "EAB",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAB18344-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC158",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC158-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC487",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC487-00",
+        "EAC487-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC511",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC511-00"
+      ],
+      "NotReleasedIds": [
+        "EAC511-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC512",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 1,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC512-00"
+      ],
+      "NotReleasedIds": [
+        "EAC512-00-D",
+        "EAC512-00-E",
+        "EAC512-02",
+        "EAC512-03",
+        "EAC512-04",
+        "EAC512-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC1226",
+      "SeriesId": "EAC",
+      "Title": "(REMISS)",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC1226-00",
+        "EAC1226-01",
+        "EAC1226-01-A",
+        "EAC1226-02",
+        "EAC1226-03",
+        "EAC1226-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC1580",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC1580-00-B"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC2497",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 8,
+      "AvailableCount": 6,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC2497-00",
+        "EAC2497-00-A",
+        "EAC2497-00-B",
+        "EAC2497-00-C",
+        "EAC2497-00-D",
+        "EAC2497-00-F"
+      ],
+      "NotReleasedIds": [
+        "EAC2497-01",
+        "EAC2497-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC2669",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC2669-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC4051",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC4051-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC4526",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC4526-00",
+        "EAC4526-00-A",
+        "EAC4526-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC6026",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC6026-00",
+        "EAC6026-00-A",
+        "EAC6026-00-B",
+        "EAC6026-00-C",
+        "EAC6026-01",
+        "EAC6026-01-A",
+        "EAC6026-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC6118",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC6118-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC6951",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC6951-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC7002",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC7002-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC9988",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC9988-01-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC9990",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC9990-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC10172",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC10172-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC10623",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC10623-00",
+        "EAC10623-00-A",
+        "EAC10623-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC11861",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC11861-00",
+        "EAC11861-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC13407",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAC13407-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC13558",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC13558-00",
+        "EAC13558-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC15073",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC15073-00",
+        "EAC15073-00-A",
+        "EAC15073-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC20378",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC20378-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAC21331",
+      "SeriesId": "EAC",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAC21331-00",
+        "EAC21331-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD67",
+      "SeriesId": "EAD",
+      "Title": "Mordkvällen vid 23:15-23:30-tiden. Misstänkt person på ölkaféet ”Tre Backar”, Tegnérgatan 12-14. När poliser kom in på kaféet blev mannen nervös och lämnade ölkaféet.",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD67-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD83",
+      "SeriesId": "EAD",
+      "Title": "Man och kvinna besöker restaurang Bohemia mordkvällen",
+      "SubcaseCount": 4,
+      "AvailableCount": 4,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD83-00",
+        "EAD83-00-A",
+        "EAD83-01",
+        "EAD83-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD100",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD100-01"
+      ],
+      "NotReleasedIds": [
+        "EAD100-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD256",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD256-00",
+        "EAD256-00-A",
+        "EAD256-01",
+        "EAD256-01-A",
+        "EAD256-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD388",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD388-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD513",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD513-00",
+        "EAD513-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD616",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD616-00",
+        "EAD616-01-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD618",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD618-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD622",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 7,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD622-00",
+        "EAD622-00-A",
+        "EAD622-00-B",
+        "EAD622-00-C",
+        "EAD622-00-D",
+        "EAD622-00-E",
+        "EAD622-00-F"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD632",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD632-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD644",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD644-00",
+        "EAD644-02",
+        "EAD644-02-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD727",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 12,
+      "AvailableCount": 5,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD727-00",
+        "EAD727-00-A",
+        "EAD727-00-C",
+        "EAD727-00-D",
+        "EAD727-05"
+      ],
+      "NotReleasedIds": [
+        "EAD727-00-B",
+        "EAD727-01",
+        "EAD727-01-A",
+        "EAD727-06",
+        "EAD727-07",
+        "EAD727-07-A",
+        "EAD727-08"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD871",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD871-01"
+      ],
+      "NotReleasedIds": [
+        "EAD871-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD1000",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 0,
+      "AvailableCount": 0,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD1094",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 11,
+      "AvailableCount": 11,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD1094-00",
+        "EAD1094-00-A",
+        "EAD1094-00-B",
+        "EAD1094-00-C",
+        "EAD1094-00-D",
+        "EAD1094-01",
+        "EAD1094-01-A",
+        "EAD1094-01-B",
+        "EAD1094-02",
+        "EAD1094-04",
+        "EAD1094-05"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD1102",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD1102-00",
+        "EAD1102-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD1173",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 4,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD1173-00",
+        "EAD1173-00-A",
+        "EAD1173-01",
+        "EAD1173-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD1591",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD1591-00",
+        "EAD1591-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD1817",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 9,
+      "AvailableCount": 1,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD1817-06"
+      ],
+      "NotReleasedIds": [
+        "EAD1817-00",
+        "EAD1817-00-B",
+        "EAD1817-01",
+        "EAD1817-02",
+        "EAD1817-03",
+        "EAD1817-04",
+        "EAD1817-05",
+        "EAD1817-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD1827",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD1827-00",
+        "EAD1827-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD2236",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 1,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD2236-00"
+      ],
+      "NotReleasedIds": [
+        "EAD2236-01",
+        "EAD2236-01-A",
+        "EAD2236-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD2347",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD2347-00",
+        "EAD2347-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD2501",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD2501-00",
+        "EAD2501-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD2525",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD2525-00",
+        "EAD2525-00-A",
+        "EAD2525-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD2778",
+      "SeriesId": "EAD",
+      "Title": "Iakttagelse mordkvällen, någon minut före mordet, av en man i ljusbrun eller beige skinnjacka, med Steve McQueen utseende, vid västra tb-nedgången, Sveavägen & Tunnelgatan, mittemot den blivande mordplatsen. Mannen lyssnar i walkie-talkie och spanar ut mot Sveavägen.",
+      "SubcaseCount": 22,
+      "AvailableCount": 18,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD2778-00",
+        "EAD2778-00-A",
+        "EAD2778-00-B",
+        "EAD2778-00-C",
+        "EAD2778-00-D",
+        "EAD2778-00-E",
+        "EAD2778-01",
+        "EAD2778-01-A",
+        "EAD2778-01-B",
+        "EAD2778-02",
+        "EAD2778-02-A",
+        "EAD2778-03",
+        "EAD2778-04",
+        "EAD2778-05",
+        "EAD2778-05-A",
+        "EAD2778-06",
+        "EAD2778-07",
+        "EAD2778-12"
+      ],
+      "NotReleasedIds": [
+        "EAD2778-08",
+        "EAD2778-09",
+        "EAD2778-10",
+        "EAD2778-11"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD2805",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD2805-00",
+        "EAD2805-01",
+        "EAD2805-01-A",
+        "EAD2805-01-B",
+        "EAD2805-02",
+        "EAD2805-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD3785",
+      "SeriesId": "EAD",
+      "Title": "1986-02-28 23:00-23:30 Man (UL) köper cigaretter på rest. Bohemia, ser efteråt ung man springa uppför Brunkebergstrappan och nerför David Bagares gata.",
+      "SubcaseCount": 5,
+      "AvailableCount": 2,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD3785-00",
+        "EAD3785-00-A"
+      ],
+      "NotReleasedIds": [
+        "EAD3785-01",
+        "EAD3785-02",
+        "EAD3785-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD4772",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD4772-00",
+        "EAD4772-00-A",
+        "EAD4772-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD6058",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD6058-00",
+        "EAD6058-00-A",
+        "EAD6058-00-B",
+        "EAD6058-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD6826",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD6826-00",
+        "EAD6826-00-A",
+        "EAD6826-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD6990",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD6990-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD7003",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD7003-00"
+      ],
+      "NotReleasedIds": [
+        "EAD7003-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD7004",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD7004-00",
+        "EAD7004-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD7005",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD7005-00"
+      ],
+      "NotReleasedIds": [
+        "EAD7005-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD7006",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 9,
+      "AvailableCount": 9,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD7006-00",
+        "EAD7006-00-A",
+        "EAD7006-00-B",
+        "EAD7006-00-C",
+        "EAD7006-00-D",
+        "EAD7006-01",
+        "EAD7006-02",
+        "EAD7006-03",
+        "EAD7006-03-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD7012",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD7012-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD7798",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD7798-00",
+        "EAD7798-00-A",
+        "EAD7798-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD7810",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD7810-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9555",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 40,
+      "AvailableCount": 1,
+      "NotReleasedCount": 39,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD9555-09"
+      ],
+      "NotReleasedIds": [
+        "EAD9555-00",
+        "EAD9555-01",
+        "EAD9555-02",
+        "EAD9555-02-A",
+        "EAD9555-03",
+        "EAD9555-03-A",
+        "EAD9555-04",
+        "EAD9555-05",
+        "EAD9555-05-A",
+        "EAD9555-05-B",
+        "EAD9555-05-C",
+        "EAD9555-06",
+        "EAD9555-06-A",
+        "EAD9555-06-B",
+        "EAD9555-06-C",
+        "EAD9555-06-D",
+        "EAD9555-06-E",
+        "EAD9555-06-F",
+        "EAD9555-07",
+        "EAD9555-07-A",
+        "EAD9555-08",
+        "EAD9555-08-A",
+        "EAD9555-09-A",
+        "EAD9555-09-B",
+        "EAD9555-10",
+        "EAD9555-10-A",
+        "EAD9555-11",
+        "EAD9555-11-A",
+        "EAD9555-12",
+        "EAD9555-12-A",
+        "EAD9555-13",
+        "EAD9555-14",
+        "EAD9555-16",
+        "EAD9555-17",
+        "EAD9555-17-A",
+        "EAD9555-18",
+        "EAD9555-19",
+        "EAD9555-20",
+        "EAD9555-21"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9975",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 1,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD9975-00"
+      ],
+      "NotReleasedIds": [
+        "EAD9975-00-A",
+        "EAD9975-01",
+        "EAD9975-01-A",
+        "EAD9975-02",
+        "EAD9975-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9976",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 2,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD9976-00",
+        "EAD9976-01"
+      ],
+      "NotReleasedIds": [
+        "EAD9976-01-A",
+        "EAD9976-02",
+        "EAD9976-03",
+        "EAD9976-04",
+        "EAD9976-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9986",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD9986-00",
+        "EAD9986-00-A",
+        "EAD9986-00-B",
+        "EAD9986-00-C",
+        "EAD9986-00-D",
+        "EAD9986-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9996",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD9996-00",
+        "EAD9996-01",
+        "EAD9996-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9997",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD9997-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9998",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD9998-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD9999",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD9999-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD10000",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD10000-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD10001",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD10001-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD10012",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD10012-00",
+        "EAD10012-00-A",
+        "EAD10012-01",
+        "EAD10012-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD10245",
+      "SeriesId": "EAD",
+      "Title": "Ove Persson KSN om narkotikaspaning på Södermalm och hemfärd via mordplatsen på mordkvällen.",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD10245-00",
+        "EAD10245-00-A",
+        "EAD10245-00-B"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD10326",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD10326-00",
+        "EAD10326-01",
+        "EAD10326-01-A",
+        "EAD10326-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD11851",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD11851-00",
+        "EAD11851-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD11852",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD11852-00",
+        "EAD11852-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD12208",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD12208-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD13459",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD13459-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD13783",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD13783-00",
+        "EAD13783-00-A",
+        "EAD13783-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD15074",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD15074-00",
+        "EAD15074-00-A",
+        "EAD15074-00-B",
+        "EAD15074-00-C",
+        "EAD15074-01",
+        "EAD15074-02",
+        "EAD15074-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD16565",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD16565-00",
+        "EAD16565-01",
+        "EAD16565-01-A",
+        "EAD16565-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD16611",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD16611-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD17640",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD17640-00",
+        "EAD17640-01",
+        "EAD17640-01-A",
+        "EAD17640-02",
+        "EAD17640-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD18398",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD18398-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD19042",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD19042-00",
+        "EAD19042-00-A",
+        "EAD19042-01",
+        "EAD19042-02",
+        "EAD19042-03",
+        "EAD19042-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD19127",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAD19127-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAD19268",
+      "SeriesId": "EAD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAD19268-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF48",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF48-00",
+        "EAF48-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF121",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF121-00",
+        "EAF121-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF127",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF127-00",
+        "EAF127-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF355",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF355-00",
+        "EAF355-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF403",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF403-00",
+        "EAF403-00-A",
+        "EAF403-00-B",
+        "EAF403-01",
+        "EAF403-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF516",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAF516-00"
+      ],
+      "NotReleasedIds": [
+        "EAF516-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF636",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF636-00",
+        "EAF636-04-A",
+        "EAF636-06",
+        "EAF636-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF868",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAF868-01-E"
+      ],
+      "NotReleasedIds": [
+        "EAF868-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF1084",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF1084-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF1087",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF1087-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF1090",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF1090-00",
+        "EAF1090-00-B",
+        "EAF1090-00-C",
+        "EAF1090-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF1809",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF1809-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF1811",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF1811-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF1818",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF1818-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF1997",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF1997-00",
+        "EAF1997-01",
+        "EAF1997-02",
+        "EAF1997-03",
+        "EAF1997-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF2348",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF2348-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF2484",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF2484-00",
+        "EAF2484-00-A",
+        "EAF2484-01",
+        "EAF2484-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF2510",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF2510-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF2511",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF2511-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF2514",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF2514-00",
+        "EAF2514-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF2520",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF2520-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF2658",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF2658-00",
+        "EAF2658-08"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF3025",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 1,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAF3025-00-A"
+      ],
+      "NotReleasedIds": [
+        "EAF3025-00",
+        "EAF3025-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF4047",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF4047-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF4418",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF4418-00",
+        "EAF4418-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF4593",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF4593-00",
+        "EAF4593-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF4595",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF4595-00",
+        "EAF4595-00-A",
+        "EAF4595-00-B",
+        "EAF4595-01",
+        "EAF4595-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF5410",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF5410-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF6020",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF6020-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF6911",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF6911-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF6994",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF6994-00",
+        "EAF6994-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF6995",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 4,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EAF6995-00",
+        "EAF6995-00-A",
+        "EAF6995-00-C",
+        "EAF6995-00-D"
+      ],
+      "NotReleasedIds": [
+        "EAF6995-00-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF7130",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF7130-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF9672",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF9672-00",
+        "EAF9672-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF9717",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF9717-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF10246",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF10246-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF10776",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF10776-00",
+        "EAF10776-00-A",
+        "EAF10776-00-B",
+        "EAF10776-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF10837",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF10837-00",
+        "EAF10837-00-A",
+        "EAF10837-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF13551",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF13551-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF17853",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF17853-00",
+        "EAF17853-00-A",
+        "EAF17853-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EAF18562",
+      "SeriesId": "EAF",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EAF18562-00",
+        "EAF18562-00-A",
+        "EAF18562-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "ED1586",
+      "SeriesId": "ED",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "ED1586-00",
+        "ED1586-00-A",
+        "ED1586-01",
+        "ED1586-01-A",
+        "ED1586-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "ED1924",
+      "SeriesId": "ED",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "ED1924-00",
+        "ED1924-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "ED13460",
+      "SeriesId": "ED",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "ED13460-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDB1578",
+      "SeriesId": "EDB",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDB1578-00",
+        "EDB1578-01",
+        "EDB1578-02",
+        "EDB1578-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDC9965",
+      "SeriesId": "EDC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDC9965-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDC10668",
+      "SeriesId": "EDC",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDC10668-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDC19497",
+      "SeriesId": "EDC",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDC19497-00",
+        "EDC19497-00-A",
+        "EDC19497-01",
+        "EDC19497-02",
+        "EDC19497-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDD1838",
+      "SeriesId": "EDD",
+      "Title": "",
+      "SubcaseCount": 9,
+      "AvailableCount": 1,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EDD1838-04"
+      ],
+      "NotReleasedIds": [
+        "EDD1838-00",
+        "EDD1838-01",
+        "EDD1838-01-A",
+        "EDD1838-01-B",
+        "EDD1838-02",
+        "EDD1838-03",
+        "EDD1838-05",
+        "EDD1838-05-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDD7001",
+      "SeriesId": "EDD",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDD7001-00",
+        "EDD7001-00-A",
+        "EDD7001-00-B",
+        "EDD7001-01",
+        "EDD7001-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDD7726",
+      "SeriesId": "EDD",
+      "Title": "",
+      "SubcaseCount": 8,
+      "AvailableCount": 0,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDD7726-00",
+        "EDD7726-01",
+        "EDD7726-02",
+        "EDD7726-02-A",
+        "EDD7726-02-B",
+        "EDD7726-02-C",
+        "EDD7726-03",
+        "EDD7726-03-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDD9470",
+      "SeriesId": "EDD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDD9470-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDD14718",
+      "SeriesId": "EDD",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDD14718-00",
+        "EDD14718-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDD19435",
+      "SeriesId": "EDD",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDD19435-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE59",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 6,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EDE59-00",
+        "EDE59-00-A",
+        "EDE59-00-B",
+        "EDE59-00-C",
+        "EDE59-01",
+        "EDE59-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE91",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE91-00",
+        "EDE91-00-B",
+        "EDE91-00-C",
+        "EDE91-00-D",
+        "EDE91-00-E",
+        "EDE91-00-F",
+        "EDE91-02",
+        "EDE91-02-A",
+        "EDE91-03",
+        "EDE91-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE142",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE142-00",
+        "EDE142-00-A",
+        "EDE142-01",
+        "EDE142-02",
+        "EDE142-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE301",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE301-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE510",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE510-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE877",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EDE877-00",
+        "EDE877-00-B",
+        "EDE877-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE1097",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE1097-00",
+        "EDE1097-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE1333",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE1333-00",
+        "EDE1333-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE2263",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE2263-00",
+        "EDE2263-04",
+        "EDE2263-05",
+        "EDE2263-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE2677",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 1,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EDE2677-00"
+      ],
+      "NotReleasedIds": [
+        "EDE2677-00-A",
+        "EDE2677-00-B",
+        "EDE2677-01",
+        "EDE2677-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE2776",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 10,
+      "AvailableCount": 0,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE2776-00",
+        "EDE2776-00-A",
+        "EDE2776-00-B",
+        "EDE2776-00-C",
+        "EDE2776-01",
+        "EDE2776-01-A",
+        "EDE2776-01-B",
+        "EDE2776-02",
+        "EDE2776-02-A",
+        "EDE2776-02-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE6992",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE6992-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE7738",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE7738-00",
+        "EDE7738-00-A",
+        "EDE7738-01",
+        "EDE7738-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE7741",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE7741-00",
+        "EDE7741-00-A",
+        "EDE7741-00-B",
+        "EDE7741-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE9645",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 8,
+      "AvailableCount": 4,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EDE9645-00",
+        "EDE9645-00-B",
+        "EDE9645-01",
+        "EDE9645-02"
+      ],
+      "NotReleasedIds": [
+        "EDE9645-00-A",
+        "EDE9645-03",
+        "EDE9645-04",
+        "EDE9645-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE9980",
+      "SeriesId": "EDE",
+      "Title": "Förhör med Anette Kohut, Securitas-väktare i Skandias reception, Sveavägen 44, mordkvällen mellan 16:45-23:30.",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EDE9980-00",
+        "EDE9980-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EDE17810",
+      "SeriesId": "EDE",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EDE17810-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EG10019",
+      "SeriesId": "EG",
+      "Title": "ANGÅENDE BANKOMATERNA (FAKTA)",
+      "SubcaseCount": 9,
+      "AvailableCount": 7,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EG10019-00",
+        "EG10019-00-A",
+        "EG10019-00-B",
+        "EG10019-02",
+        "EG10019-03",
+        "EG10019-04",
+        "EG10019-05"
+      ],
+      "NotReleasedIds": [
+        "EG10019-01",
+        "EG10019-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EG16472",
+      "SeriesId": "EG",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EG16472-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EG17634",
+      "SeriesId": "EG",
+      "Title": "ANGÅENDE G-MANNENS VÄNTETID",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EG17634-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH72",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH72-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH94",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH94-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH101",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH101-00",
+        "EH101-00-G"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH109",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH109-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH148",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH148-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH179",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH179-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH189",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH189-00",
+        "EH189-00-A",
+        "EH189-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH248",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 20,
+      "AvailableCount": 0,
+      "NotReleasedCount": 20,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH248-00",
+        "EH248-00-A",
+        "EH248-01",
+        "EH248-02",
+        "EH248-03",
+        "EH248-04",
+        "EH248-05",
+        "EH248-06",
+        "EH248-07",
+        "EH248-08",
+        "EH248-09",
+        "EH248-10",
+        "EH248-11",
+        "EH248-12",
+        "EH248-13",
+        "EH248-14",
+        "EH248-15",
+        "EH248-16",
+        "EH248-17",
+        "EH248-18"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH264",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH264-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH293",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH293-00",
+        "EH293-00-A",
+        "EH293-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH377",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 26,
+      "AvailableCount": 0,
+      "NotReleasedCount": 26,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH377-00",
+        "EH377-01",
+        "EH377-02",
+        "EH377-03",
+        "EH377-03-A",
+        "EH377-03-B",
+        "EH377-03-C",
+        "EH377-03-D",
+        "EH377-03-E",
+        "EH377-04",
+        "EH377-04-A",
+        "EH377-05",
+        "EH377-06",
+        "EH377-07",
+        "EH377-08",
+        "EH377-09",
+        "EH377-09-A",
+        "EH377-09-B",
+        "EH377-10",
+        "EH377-11",
+        "EH377-11-A",
+        "EH377-11-B",
+        "EH377-11-C",
+        "EH377-12",
+        "EH377-13",
+        "EH377-14"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH495",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH495-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH497",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH497-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH505",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH505-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH640",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH640-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH641",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH641-00",
+        "EH641-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH738",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH738-00",
+        "EH738-01",
+        "EH738-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH874",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH874-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH947",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH947-00",
+        "EH947-00-A",
+        "EH947-00-B",
+        "EH947-00-C",
+        "EH947-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH1083",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 12,
+      "AvailableCount": 4,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH1083-01",
+        "EH1083-01-A",
+        "EH1083-01-B",
+        "EH1083-01-C"
+      ],
+      "NotReleasedIds": [
+        "EH1083-00",
+        "EH1083-00-A",
+        "EH1083-02",
+        "EH1083-03",
+        "EH1083-03-A",
+        "EH1083-04",
+        "EH1083-05",
+        "EH1083-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH1085",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH1085-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH1098",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH1098-00",
+        "EH1098-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH1180",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 1,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH1180-00"
+      ],
+      "NotReleasedIds": [
+        "EH1180-01",
+        "EH1180-02",
+        "EH1180-03",
+        "EH1180-04",
+        "EH1180-05"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH1593",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH1593-00",
+        "EH1593-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH1830",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH1830-00",
+        "EH1830-00-A",
+        "EH1830-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH2325",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH2325-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH2342",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH2342-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH2655",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH2655-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH3020",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH3020-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH3169",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH3169-00",
+        "EH3169-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH3208",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH3208-00",
+        "EH3208-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH3871",
+      "SeriesId": "EH",
+      "Title": "1986 jan/feb Ynglingar med WT i närheten av mordplatsen",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH3871-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH3885",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH3885-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH3930",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 2,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH3930-00",
+        "EH3930-00-A"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH3939",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH3939-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4229",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4229-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4240",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 16,
+      "AvailableCount": 0,
+      "NotReleasedCount": 16,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4240-00",
+        "EH4240-01",
+        "EH4240-02",
+        "EH4240-03",
+        "EH4240-04",
+        "EH4240-05",
+        "EH4240-06",
+        "EH4240-07",
+        "EH4240-08",
+        "EH4240-09",
+        "EH4240-10",
+        "EH4240-11",
+        "EH4240-12",
+        "EH4240-13",
+        "EH4240-13-A",
+        "EH4240-14"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4342",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4342-00",
+        "EH4342-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4405",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4405-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4430",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4430-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4588",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4588-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4986",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 9,
+      "AvailableCount": 0,
+      "NotReleasedCount": 9,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4986-00",
+        "EH4986-01",
+        "EH4986-02",
+        "EH4986-03",
+        "EH4986-04",
+        "EH4986-05",
+        "EH4986-06",
+        "EH4986-07",
+        "EH4986-08"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH4995",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH4995-00",
+        "EH4995-04-A",
+        "EH4995-05",
+        "EH4995-06",
+        "EH4995-06-A",
+        "EH4995-08"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5097",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5097-00",
+        "EH5097-05",
+        "EH5097-06",
+        "EH5097-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5123",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 8,
+      "AvailableCount": 0,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5123-00",
+        "EH5123-01",
+        "EH5123-01-A",
+        "EH5123-02",
+        "EH5123-03",
+        "EH5123-04",
+        "EH5123-05",
+        "EH5123-06"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5150",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5150-00",
+        "EH5150-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5169",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 1,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH5169-00"
+      ],
+      "NotReleasedIds": [
+        "EH5169-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5288",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5288-00",
+        "EH5288-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5411",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5411-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5413",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH5413-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5599",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5599-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5600",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5600-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5610",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5610-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5618",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5618-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5860",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5860-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5892",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5892-00",
+        "EH5892-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH5935",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH5935-00",
+        "EH5935-00-A",
+        "EH5935-00-B",
+        "EH5935-00-C",
+        "EH5935-00-D",
+        "EH5935-00-E",
+        "EH5935-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH6002",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH6002-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH6242",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH6242-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH6676",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH6676-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH6696",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH6696-00",
+        "EH6696-00-A",
+        "EH6696-00-B",
+        "EH6696-00-C",
+        "EH6696-00-D"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH6714",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH6714-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH6809",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH6809-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH6970",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH6970-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH7254",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH7254-00",
+        "EH7254-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH7809",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH7809-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH7998",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH7998-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH9689",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH9689-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH9741",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH9741-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH9981",
+      "SeriesId": "EH",
+      "Title": "Om Stig Engström i Mariehamn på Åland.",
+      "SubcaseCount": 8,
+      "AvailableCount": 8,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH9981-00",
+        "EH9981-00-A",
+        "EH9981-00-B",
+        "EH9981-00-C",
+        "EH9981-00-D",
+        "EH9981-00-E",
+        "EH9981-01",
+        "EH9981-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH9984",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH9984-00",
+        "EH9984-00-A",
+        "EH9984-00-B",
+        "EH9984-06",
+        "EH9984-06-C",
+        "EH9984-07-B",
+        "EH9984-07-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH9994",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH9994-00",
+        "EH9994-06",
+        "EH9994-07-A",
+        "EH9994-10"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH9995",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH9995-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH10011",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH10011-00",
+        "EH10011-01",
+        "EH10011-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH10059",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH10059-00",
+        "EH10059-01",
+        "EH10059-01-A",
+        "EH10059-01-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH10154",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH10154-00",
+        "EH10154-01",
+        "EH10154-01-A",
+        "EH10154-01-B",
+        "EH10154-02",
+        "EH10154-03",
+        "EH10154-04"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH10166",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH10166-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH10704",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH10704-00",
+        "EH10704-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH10836",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH10836-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH10997",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH10997-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH11262",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH11262-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH11676",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH11676-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH11923",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH11923-00",
+        "EH11923-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH12277",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH12277-00",
+        "EH12277-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13408",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13408-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13409",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13409-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13410",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13410-00",
+        "EH13410-00-A",
+        "EH13410-01",
+        "EH13410-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13411",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13411-00",
+        "EH13411-00-A",
+        "EH13411-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13482",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 8,
+      "AvailableCount": 0,
+      "NotReleasedCount": 8,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13482-00",
+        "EH13482-00-A",
+        "EH13482-00-B",
+        "EH13482-00-C",
+        "EH13482-01",
+        "EH13482-01-A",
+        "EH13482-02",
+        "EH13482-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13492",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13492-00",
+        "EH13492-01",
+        "EH13492-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13534",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13534-00",
+        "EH13534-01",
+        "EH13534-02",
+        "EH13534-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13535",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13535-00",
+        "EH13535-00-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13593",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13593-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13679",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 4,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH13679-00",
+        "EH13679-00-A",
+        "EH13679-00-B",
+        "EH13679-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13757",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13757-00",
+        "EH13757-00-A",
+        "EH13757-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH13939",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH13939-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14412",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH14412-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14435",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH14435-00",
+        "EH14435-01",
+        "EH14435-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14559",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH14559-00",
+        "EH14559-01",
+        "EH14559-01-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14719",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH14719-00",
+        "EH14719-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14720",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH14720-00",
+        "EH14720-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14839",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 90,
+      "AvailableCount": 13,
+      "NotReleasedCount": 77,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH14839-01",
+        "EH14839-01-B",
+        "EH14839-01-C",
+        "EH14839-01-D",
+        "EH14839-01-F",
+        "EH14839-01-I",
+        "EH14839-03-A",
+        "EH14839-03-B",
+        "EH14839-03-I",
+        "EH14839-17-A",
+        "EH14839-17-B",
+        "EH14839-17-C",
+        "EH14839-39"
+      ],
+      "NotReleasedIds": [
+        "EH14839-00",
+        "EH14839-00-A",
+        "EH14839-00-B",
+        "EH14839-00-C",
+        "EH14839-00-D",
+        "EH14839-00-E",
+        "EH14839-01-A",
+        "EH14839-01-E",
+        "EH14839-01-G",
+        "EH14839-01-H",
+        "EH14839-02",
+        "EH14839-03",
+        "EH14839-03-D",
+        "EH14839-03-G",
+        "EH14839-03-H",
+        "EH14839-04",
+        "EH14839-05",
+        "EH14839-06",
+        "EH14839-07",
+        "EH14839-08",
+        "EH14839-09",
+        "EH14839-10",
+        "EH14839-10-A",
+        "EH14839-11",
+        "EH14839-12",
+        "EH14839-13",
+        "EH14839-13-A",
+        "EH14839-13-B",
+        "EH14839-13-C",
+        "EH14839-13-D",
+        "EH14839-14",
+        "EH14839-14-A",
+        "EH14839-15",
+        "EH14839-15-A",
+        "EH14839-16",
+        "EH14839-17",
+        "EH14839-17-D",
+        "EH14839-17-E",
+        "EH14839-17-F",
+        "EH14839-17-G",
+        "EH14839-18",
+        "EH14839-19",
+        "EH14839-19-A",
+        "EH14839-20",
+        "EH14839-20-A",
+        "EH14839-21",
+        "EH14839-22",
+        "EH14839-23",
+        "EH14839-24",
+        "EH14839-24-A",
+        "EH14839-25",
+        "EH14839-25-A",
+        "EH14839-26",
+        "EH14839-27",
+        "EH14839-27-A",
+        "EH14839-28",
+        "EH14839-28-A",
+        "EH14839-29",
+        "EH14839-29-A",
+        "EH14839-30",
+        "EH14839-31",
+        "EH14839-32",
+        "EH14839-32-A",
+        "EH14839-33",
+        "EH14839-34",
+        "EH14839-35",
+        "EH14839-35-A",
+        "EH14839-36",
+        "EH14839-36-A",
+        "EH14839-37",
+        "EH14839-38",
+        "EH14839-38-A",
+        "EH14839-40",
+        "EH14839-40-A",
+        "EH14839-41",
+        "EH14839-42",
+        "EH14839-43"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14847",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH14847-00",
+        "EH14847-00-A",
+        "EH14847-00-B",
+        "EH14847-02",
+        "EH14847-02-A"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH14879",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 17,
+      "AvailableCount": 7,
+      "NotReleasedCount": 10,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH14879-00",
+        "EH14879-00-C",
+        "EH14879-01",
+        "EH14879-02-A",
+        "EH14879-02-C",
+        "EH14879-03",
+        "EH14879-03-B"
+      ],
+      "NotReleasedIds": [
+        "EH14879-0",
+        "EH14879-00-A",
+        "EH14879-00-B",
+        "EH14879-00-D",
+        "EH14879-01-A",
+        "EH14879-02",
+        "EH14879-04",
+        "EH14879-05",
+        "EH14879-06",
+        "EH14879-07"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH15105",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 6,
+      "AvailableCount": 0,
+      "NotReleasedCount": 6,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH15105-00",
+        "EH15105-01",
+        "EH15105-02",
+        "EH15105-03",
+        "EH15105-03-A",
+        "EH15105-03-B"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH15225",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH15225-03"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH15255",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH15255-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH15383",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH15383-00",
+        "EH15383-00-B",
+        "EH15383-01",
+        "EH15383-02",
+        "EH15383-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH15461",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH15461-00",
+        "EH15461-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH15565",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH15565-00",
+        "EH15565-00-A",
+        "EH15565-01",
+        "EH15565-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH16014",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 9,
+      "AvailableCount": 0,
+      "NotReleasedCount": 9,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH16014-00",
+        "EH16014-01",
+        "EH16014-02",
+        "EH16014-03",
+        "EH16014-04",
+        "EH16014-05",
+        "EH16014-05-A",
+        "EH16014-07",
+        "EH16014-08"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH16025",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH16025-00",
+        "EH16025-01",
+        "EH16025-02"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH16271",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH16271-00",
+        "EH16271-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH16413",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH16413-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH16414",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH16414-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH16621",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH16621-00",
+        "EH16621-01",
+        "EH16621-02",
+        "EH16621-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH17065",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 1,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH17065-00"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH17186",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH17186-00-A",
+        "EH17186-01",
+        "EH17186-02",
+        "EH17186-93"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH17624",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH17624-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18122",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18122-00",
+        "EH18122-01",
+        "EH18122-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18221",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 2,
+      "AvailableCount": 0,
+      "NotReleasedCount": 2,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18221-00",
+        "EH18221-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18242",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18242-00",
+        "EH18242-00-A",
+        "EH18242-00-B",
+        "EH18242-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18341",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 5,
+      "AvailableCount": 0,
+      "NotReleasedCount": 5,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18341-00",
+        "EH18341-00-A",
+        "EH18341-01",
+        "EH18341-02",
+        "EH18341-03"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18497",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18497-00",
+        "EH18497-00-A",
+        "EH18497-01",
+        "EH18497-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18500",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 7,
+      "AvailableCount": 0,
+      "NotReleasedCount": 7,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18500-00",
+        "EH18500-00-A",
+        "EH18500-00-B",
+        "EH18500-00-C",
+        "EH18500-00-D",
+        "EH18500-01",
+        "EH18500-02"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18545",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18545-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18620",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH18620-00",
+        "EH18620-00-A",
+        "EH18620-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH18630",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH18630-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH19291",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 4,
+      "AvailableCount": 0,
+      "NotReleasedCount": 4,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH19291-00",
+        "EH19291-00-A",
+        "EH19291-00-B",
+        "EH19291-00-C"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH19561",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH19561-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH20313",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 3,
+      "AvailableCount": 0,
+      "NotReleasedCount": 3,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH20313-00",
+        "EH20313-00-A",
+        "EH20313-01"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH20457",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH20457-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH20493",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH20493-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH20796",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH20796-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH20838",
+      "SeriesId": "EH",
+      "Title": "",
+      "SubcaseCount": 1,
+      "AvailableCount": 0,
+      "NotReleasedCount": 1,
+      "UnknownCount": 0,
+      "AvailableIds": [],
+      "NotReleasedIds": [
+        "EH20838-00"
+      ],
+      "UnknownIds": []
+    },
+    {
+      "ParentUppslagId": "EH20988",
+      "SeriesId": "EH",
+      "Title": "Mordkvällen 1986-02-28 runt 20:30.",
+      "SubcaseCount": 3,
+      "AvailableCount": 3,
+      "NotReleasedCount": 0,
+      "UnknownCount": 0,
+      "AvailableIds": [
+        "EH20988-00",
+        "EH20988-00-A",
+        "EH20988-01"
+      ],
+      "NotReleasedIds": [],
+      "UnknownIds": []
+    }
+  ]
+}

@@ -175,6 +175,18 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Traffic")
     float GetCurrentSpeedKmh() const;
 
+    UFUNCTION(BlueprintPure, Category="TMOP|Traffic|World Bake")
+    bool IsDrivingEnabled() const { return bDrivingEnabled; }
+
+    /** Restores lane progress and motion after a deterministic world seek. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|World Bake")
+    bool RestoreBakedTrafficState(
+        FName LaneId,
+        float DistanceCm,
+        float SpeedCmPerSecond,
+        const TArray<FName>& RouteLaneIds,
+        bool bShouldDrive);
+
     UFUNCTION(BlueprintPure, Category="TMOP|Traffic")
     UTMOPTrafficLaneComponent* GetCurrentLane() const;
 

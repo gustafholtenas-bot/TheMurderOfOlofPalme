@@ -34,10 +34,10 @@ public:
     bool bEnableDebugTimeKeys = true;
 
     /** Five seconds keeps a 45 minute bake reasonably small even with many people. */
-    UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category="Person Bake",
+    UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category="World Bake",
         meta=(ClampMin="1", ClampMax="60"))
     int32 PersonBakeIntervalSeconds = 5;
 
-    UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category="Person Bake")
-    FString DefaultPersonBakeName = TEXT("TMOP_People_2300_2345");
+    UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category="World Bake")
+    FString DefaultPersonBakeName = TEXT("TMOP_World_2300_2345");
 };

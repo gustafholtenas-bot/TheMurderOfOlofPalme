@@ -172,6 +172,42 @@ TArray<FName> UTMOPHistoricalEventSubsystem::GetRegisteredEventIds() const
     return EventIds;
 }
 
+int32 UTMOPHistoricalEventSubsystem::ApplyBakedEventRuntime(
+    const TArray<FTMOPHistoricalEventRuntime>& BakedRuntime,
+    const FTMOPTime TargetTime)
+{
+    int32 Applied = 0;
+    const int32 TargetSecond = TargetTime.ToSecondsFromMidnight();
+    for (const FTMOPHistoricalEventRuntime& Baked : BakedRuntime)
+    {
+        if (Baked.EventId.IsNone() || !Definitions.Contains(Baked.EventId))
+        {
+            continue;
+        }
+        if (FTMOPHistoricalEventRuntime* Runtime =
+            RuntimeEvents.Find(Baked.EventId))
+        {
+            *Runtime = Baked;
+            if (Runtime->State != ETMOPEventRuntimeState::Cancelled)
+            {
+                Runtime->State = Runtime->bHasResolvedTime &&
+                    Runtime->ResolvedTime.ToSecondsFromMidnight() <=
+                        TargetSecond
+                    ? ETMOPEventRuntimeState::Triggered
+                    : ETMOPEventRuntimeState::Pending;
+                Runtime->TriggeredLoopNumber =
+                    Runtime->State == ETMOPEventRuntimeState::Triggered
+                    ? CurrentLoopNumber : 0;
+            }
+            ++Applied;
+        }
+    }
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP World Bake: applied %d baked Shared Event runtime state(s)."),
+        Applied);
+    return Applied;
+}
+
 void UTMOPHistoricalEventSubsystem::HandleSecondChanged(
     const FTMOPTime NewTime)
 {

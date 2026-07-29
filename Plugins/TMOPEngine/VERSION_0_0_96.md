@@ -23,4 +23,9 @@
   as leader and a corrected shared route through the crime-scene visit.
 - Added separate sourced observations for the WT man at Adolf Fredriks
   kyrkogata 13 and the unknown man running from the entrance at 5-7.
+- Added separate Anneli Korhonen, Margareta Storhök and Mårten Palme
+  observations of two anonymous Grand figures, plus a non-canonical
+  `ProbableSamePerson` link.
+- Corrected Mårten Palme's post-film route to visit Kulturcirkeln before
+  returning north past Sandins.
 - Includes the 0.0.95 overhead-name size, position and category colors.

@@ -39,8 +39,10 @@ bool UTMOPAnchorSubsystem::RegisterAnchor(ATMOPHistoricalAnchor* Anchor)
             UE_LOG(
                 LogTemp,
                 Warning,
-                TEXT("TMOP rejected duplicate anchor ID '%s'."),
-                *AnchorId.ToString());
+                TEXT("TMOP rejected duplicate anchor ID '%s': existing '%s', rejected '%s'."),
+                *AnchorId.ToString(),
+                *GetPathNameSafe(Existing->Get()),
+                *GetPathNameSafe(Anchor));
             return false;
         }
     }
