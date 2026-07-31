@@ -8,12 +8,12 @@ class UStaticMeshComponent;
 class USceneComponent;
 class USpringArmComponent;
 class UCameraComponent;
+class UMaterialInstanceDynamic;
 class UTMOPVehicleModelData;
 class UTMOPVehicleSeatComponent;
 class UTMOPVehicleDoorComponent;
 class UTMOPTrafficVehicleMovementComponent;
 
-/** Select one vehicle model; all visual parts are assembled automatically. */
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPConfiguredVehicle : public ATMOPVehicleBase
 {
@@ -27,16 +27,41 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle")
     TObjectPtr<UTMOPVehicleModelData> VehicleModel;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Configured Vehicle|Appearance")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Appearance")
     bool bOverrideBodyColor = false;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Configured Vehicle|Appearance",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Appearance",
         meta=(EditCondition="bOverrideBodyColor"))
     FLinearColor BodyColor = FLinearColor::White;
 
-    /** Converts side-facing imported meshes to Unreal's X-forward convention. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Appearance")
+    bool bOverrideWindowTint = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Appearance",
+        meta=(EditCondition="bOverrideWindowTint"))
+    FLinearColor WindowTint = FLinearColor::White;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Lights")
+    bool bHeadlightsOn = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Lights")
+    bool bOrangeLightsOn = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Lights")
+    bool bRedLightsOn = true;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Configured Vehicle|Lights")
+    void SetExteriorLightsEnabled(bool bEnabled);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Configured Vehicle|Lights")
+    void SetHeadlightsEnabled(bool bEnabled);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Configured Vehicle|Lights")
+    void SetOrangeLightsEnabled(bool bEnabled);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Configured Vehicle|Lights")
+    void SetRedLightsEnabled(bool bEnabled);
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Orientation")
     float VisualYawCorrectionDegrees = 0.0f;
 
@@ -44,12 +69,7 @@ public:
         meta=(ClampMin="10.0"))
     float CollisionHalfHeightCm = 60.0f;
 
-    /**
-     * If the selected model has no explicit vertical Body Local Transform,
-     * lift its bounds so the bottom rests on the road-level Visual Root.
-     */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Configured Vehicle|Placement")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Placement")
     bool bAutoAlignBodyMeshToGround = true;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle")
@@ -76,34 +96,26 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Camera")
     TObjectPtr<UCameraComponent> VehicleCamera;
 
-    /** Disabled while parked; BeginDriving in a person's timeline starts it. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Traffic")
     TObjectPtr<UTMOPTrafficVehicleMovementComponent> TrafficMovement;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Seats")
     TObjectPtr<UTMOPVehicleSeatComponent> SeatDriver;
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Seats")
     TObjectPtr<UTMOPVehicleSeatComponent> SeatFrontPassenger;
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Seats")
     TObjectPtr<UTMOPVehicleSeatComponent> SeatRearLeft;
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Seats")
     TObjectPtr<UTMOPVehicleSeatComponent> SeatRearCenter;
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Seats")
     TObjectPtr<UTMOPVehicleSeatComponent> SeatRearRight;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Doors")
     TObjectPtr<UTMOPVehicleDoorComponent> DoorFrontLeft;
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Doors")
     TObjectPtr<UTMOPVehicleDoorComponent> DoorFrontRight;
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Doors")
     TObjectPtr<UTMOPVehicleDoorComponent> DoorRearLeft;
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Doors")
     TObjectPtr<UTMOPVehicleDoorComponent> DoorRearRight;
 
@@ -111,7 +123,10 @@ public:
     bool ApplyConfiguration();
 
 private:
-    void ApplyBodyColor();
+    int32 FindMaterialSlot(FName SlotName) const;
+    UMaterialInstanceDynamic* CreateMaterialInstanceForSlot(FName SlotName);
+    void ApplyAppearanceMaterials();
+    void ApplyLightMaterial(FName SlotName, bool bEnabled);
     void ApplyWheel(UStaticMeshComponent* Component, const FTransform& LocalTransform);
     void UpdateWheelAnimation(float DeltaSeconds);
     float AccumulatedWheelRollDegrees = 0.0f;

@@ -144,7 +144,7 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
         BodyTransform.SetTranslation(Translation);
     }
     BodyMesh->SetRelativeTransform(BodyTransform);
-    ApplyBodyColor();
+    ApplyAppearanceMaterials();
     ApplyWheel(WheelFrontLeft, VehicleModel->Wheels.FrontLeft);
     ApplyWheel(WheelFrontRight, VehicleModel->Wheels.FrontRight);
     ApplyWheel(WheelRearLeft, VehicleModel->Wheels.RearLeft);
@@ -160,40 +160,115 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     return true;
 }
 
-void ATMOPConfiguredVehicle::ApplyBodyColor()
+int32 ATMOPConfiguredVehicle::FindMaterialSlot(const FName SlotName) const
+{
+    return IsValid(BodyMesh) ? BodyMesh->GetMaterialIndex(SlotName) : INDEX_NONE;
+}
+
+UMaterialInstanceDynamic* ATMOPConfiguredVehicle::CreateMaterialInstanceForSlot(
+    const FName SlotName)
+{
+    if (!IsValid(VehicleModel) || !IsValid(VehicleModel->BodyMesh) ||
+        !IsValid(BodyMesh))
+    {
+        return nullptr;
+    }
+
+    const int32 SlotIndex = FindMaterialSlot(SlotName);
+    if (SlotIndex == INDEX_NONE)
+    {
+        UE_LOG(LogTemp, Verbose,
+            TEXT("TMOP vehicle model '%s' has no material slot named '%s'."),
+            *VehicleModel->ModelId.ToString(), *SlotName.ToString());
+        return nullptr;
+    }
+
+    BodyMesh->SetMaterial(
+        SlotIndex, VehicleModel->BodyMesh->GetMaterial(SlotIndex));
+
+    return BodyMesh->CreateDynamicMaterialInstance(SlotIndex);
+}
+
+void ATMOPConfiguredVehicle::ApplyAppearanceMaterials()
 {
     if (!IsValid(VehicleModel) || !IsValid(BodyMesh) ||
         !IsValid(VehicleModel->BodyMesh))
-        return;
-    const int32 SlotIndex = VehicleModel->BodyMaterialSlotIndex;
-    if (SlotIndex < 0 ||
-        SlotIndex >= VehicleModel->BodyMesh->GetStaticMaterials().Num())
     {
-        UE_LOG(LogTemp, Warning,
-            TEXT("TMOP vehicle model '%s' has invalid body material slot %d."),
-            *VehicleModel->ModelId.ToString(), SlotIndex);
         return;
     }
 
-    // Restore the model material first so toggling the override off also works
-    // in the editor construction preview.
-    BodyMesh->SetMaterial(
-        SlotIndex, VehicleModel->BodyMesh->GetMaterial(SlotIndex));
-    if (!bOverrideBodyColor)
-        return;
-    if (VehicleModel->BodyColorParameterName.IsNone())
+    if (UMaterialInstanceDynamic* Material =
+        CreateMaterialInstanceForSlot(TEXT("body")))
+    {
+        if (bOverrideBodyColor &&
+            !VehicleModel->BodyColorParameterName.IsNone())
+        {
+            Material->SetVectorParameterValue(
+                VehicleModel->BodyColorParameterName, BodyColor);
+        }
+    }
+    else
     {
         UE_LOG(LogTemp, Warning,
-            TEXT("TMOP vehicle model '%s' has no Body Color Parameter Name."),
+            TEXT("TMOP vehicle model '%s' has no required material slot named 'body'."),
             *VehicleModel->ModelId.ToString());
-        return;
     }
-    if (UMaterialInstanceDynamic* Paint =
-        BodyMesh->CreateDynamicMaterialInstance(SlotIndex))
+
+    if (UMaterialInstanceDynamic* Material =
+        CreateMaterialInstanceForSlot(TEXT("window")))
     {
-        Paint->SetVectorParameterValue(
-            VehicleModel->BodyColorParameterName, BodyColor);
+        if (bOverrideWindowTint &&
+            !VehicleModel->WindowTintParameterName.IsNone())
+        {
+            Material->SetVectorParameterValue(
+                VehicleModel->WindowTintParameterName, WindowTint);
+        }
     }
+
+    ApplyLightMaterial(TEXT("headlight"), bHeadlightsOn);
+    ApplyLightMaterial(TEXT("orangelight"), bOrangeLightsOn);
+    ApplyLightMaterial(TEXT("redlight"), bRedLightsOn);
+}
+
+void ATMOPConfiguredVehicle::ApplyLightMaterial(
+    const FName SlotName, const bool bEnabled)
+{
+    if (UMaterialInstanceDynamic* Material =
+        CreateMaterialInstanceForSlot(SlotName))
+    {
+        if (!VehicleModel->LightEnabledParameterName.IsNone())
+        {
+            Material->SetScalarParameterValue(
+                VehicleModel->LightEnabledParameterName,
+                bEnabled ? 1.0f : 0.0f);
+        }
+    }
+}
+
+void ATMOPConfiguredVehicle::SetExteriorLightsEnabled(const bool bEnabled)
+{
+    bHeadlightsOn = bEnabled;
+    bOrangeLightsOn = bEnabled;
+    bRedLightsOn = bEnabled;
+    ApplyAppearanceMaterials();
+}
+
+void ATMOPConfiguredVehicle::SetHeadlightsEnabled(const bool bEnabled)
+{
+    bHeadlightsOn = bEnabled;
+    ApplyAppearanceMaterials();
+}
+
+void ATMOPConfiguredVehicle::SetOrangeLightsEnabled(const bool bEnabled)
+{
+    bOrangeLightsOn = bEnabled;
+    ApplyAppearanceMaterials();
+}
+
+void ATMOPConfiguredVehicle::SetRedLightsEnabled(const bool bEnabled)
+{
+    bRedLightsOn = bEnabled;
+    ApplyAppearanceMaterials();
 }
 
 void ATMOPConfiguredVehicle::ApplyWheel(UStaticMeshComponent* Component,
