@@ -1,0 +1,34 @@
+ANCHORS FÖR KUMULATIVA L835–L841
+
+SKAPA ELLER KONTROLLERA
+1. SEAT_GRAND_1_223
+2. SEAT_GRAND_1_224
+3. SEAT_GRAND_1_225
+4. SEAT_GRAND_1_226
+5. SEAT_GRAND_1_227
+6. SEAT_GRAND_1_228
+7. SEAT_GRAND_1_229
+8. SEAT_GRAND_1_230
+9. SEAT_GRAND_2_18
+10. SEAT_GRAND_2_19
+11. VEHICLE_ANONYMTVITTNE_L837S_BIL_START
+12. SEAT_GRAND_1_R3
+
+PLACERING
+- SEAT_GRAND_1_223–230: åtta separata stolar i salong 1. Exakta historiska
+  stolar är maskerade, så placera dem tillsammans i ett rimligt område utan
+  att överlappa andra besökare.
+- SEAT_GRAND_2_18 och SEAT_GRAND_2_19: intill varandra i salong 2.
+- VEHICLE_ANONYMTVITTNE_L837S_BIL_START: på Tegnérgatan mitt emot Grand,
+  orienterad i laglig färdriktning och ansluten till körbar lane/navyta.
+- SEAT_GRAND_1_R3: Pers rekonstruerade salong-1-stol. Behåll befintlig punkt
+  om den redan finns; skapa ingen dubblett.
+
+BEFINTLIGA ANCHORS SOM MÅSTE KONTROLLERAS
+- GrandFoaje
+- OutsideGrand
+- MetroRadmansgatan1
+- ExitSveavagenN_Sidewalk2
+
+Alla Entity IDs måste stavas exakt och varje anchor bör ha tillräcklig radius
+så att agenter inte spawnar inuti varandra.

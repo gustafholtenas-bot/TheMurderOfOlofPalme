@@ -125,34 +125,49 @@ void ATMOPConfiguredVehicle::OnConstruction(const FTransform& Transform)
 
 bool ATMOPConfiguredVehicle::ApplyConfiguration()
 {
-    if (!IsValid(VehicleModel)) return false;
+    UTMOPVehicleModelData* Model = VehicleModel.Get();
+    if (!IsValid(Model))
+        return false;
+
+    // Construction scripts can run while an actor or Blueprint instance is
+    // being reinstanced. Never dereference native subobjects until all parts
+    // required by the configuration are valid.
+    if (!IsValid(VehicleCollision) || !IsValid(VehicleRoot) ||
+        !IsValid(VisualRoot) || !IsValid(BodyMesh))
+    {
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP configured vehicle '%s' skipped configuration because a required component is invalid."),
+            *GetPathName());
+        return false;
+    }
+
     const FVector CollisionExtent(
-        FMath::Max(10.0f, VehicleModel->VehicleLengthCm * 0.5f),
-        FMath::Max(10.0f, VehicleModel->VehicleWidthCm * 0.5f),
+        FMath::Max(10.0f, Model->VehicleLengthCm * 0.5f),
+        FMath::Max(10.0f, Model->VehicleWidthCm * 0.5f),
         FMath::Max(10.0f, CollisionHalfHeightCm));
     VehicleCollision->SetBoxExtent(CollisionExtent);
     VehicleRoot->SetRelativeLocation(FVector(0.0f, 0.0f, -CollisionExtent.Z));
     VisualRoot->SetRelativeRotation(FRotator(0.0f, VisualYawCorrectionDegrees, 0.0f));
-    BodyMesh->SetStaticMesh(VehicleModel->BodyMesh);
-    FTransform BodyTransform = VehicleModel->BodyLocalTransform;
-    if (bAutoAlignBodyMeshToGround && IsValid(VehicleModel->BodyMesh) &&
+    BodyMesh->SetStaticMesh(Model->BodyMesh);
+    FTransform BodyTransform = Model->BodyLocalTransform;
+    if (bAutoAlignBodyMeshToGround && IsValid(Model->BodyMesh) &&
         FMath::IsNearlyZero(BodyTransform.GetTranslation().Z))
     {
-        const FBoxSphereBounds LocalBounds = VehicleModel->BodyMesh->GetBounds();
+        const FBoxSphereBounds LocalBounds = Model->BodyMesh->GetBounds();
         FVector Translation = BodyTransform.GetTranslation();
         Translation.Z -= LocalBounds.Origin.Z - LocalBounds.BoxExtent.Z;
         BodyTransform.SetTranslation(Translation);
     }
     BodyMesh->SetRelativeTransform(BodyTransform);
-    ApplyAppearanceMaterials();
-    ApplyWheel(WheelFrontLeft, VehicleModel->Wheels.FrontLeft);
-    ApplyWheel(WheelFrontRight, VehicleModel->Wheels.FrontRight);
-    ApplyWheel(WheelRearLeft, VehicleModel->Wheels.RearLeft);
-    ApplyWheel(WheelRearRight, VehicleModel->Wheels.RearRight);
+    ApplyBodyColor();
+    ApplyWheel(WheelFrontLeft, Model->WheelMesh, Model->Wheels.FrontLeft);
+    ApplyWheel(WheelFrontRight, Model->WheelMesh, Model->Wheels.FrontRight);
+    ApplyWheel(WheelRearLeft, Model->WheelMesh, Model->Wheels.RearLeft);
+    ApplyWheel(WheelRearRight, Model->WheelMesh, Model->Wheels.RearRight);
     if (UTMOPTrafficVehicleMovementComponent* Movement =
         FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
     {
-        Movement->VehicleLengthCm = VehicleModel->VehicleLengthCm;
+        Movement->VehicleLengthCm = Model->VehicleLengthCm;
         FVector RoadOffset = Movement->VehicleLocalOffset;
         RoadOffset.Z = CollisionExtent.Z;
         Movement->VehicleLocalOffset = RoadOffset;
@@ -160,123 +175,57 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     return true;
 }
 
-int32 ATMOPConfiguredVehicle::FindMaterialSlot(const FName SlotName) const
-{
-    return IsValid(BodyMesh) ? BodyMesh->GetMaterialIndex(SlotName) : INDEX_NONE;
-}
-
-UMaterialInstanceDynamic* ATMOPConfiguredVehicle::CreateMaterialInstanceForSlot(
-    const FName SlotName)
-{
-    if (!IsValid(VehicleModel) || !IsValid(VehicleModel->BodyMesh) ||
-        !IsValid(BodyMesh))
-    {
-        return nullptr;
-    }
-
-    const int32 SlotIndex = FindMaterialSlot(SlotName);
-    if (SlotIndex == INDEX_NONE)
-    {
-        UE_LOG(LogTemp, Verbose,
-            TEXT("TMOP vehicle model '%s' has no material slot named '%s'."),
-            *VehicleModel->ModelId.ToString(), *SlotName.ToString());
-        return nullptr;
-    }
-
-    BodyMesh->SetMaterial(
-        SlotIndex, VehicleModel->BodyMesh->GetMaterial(SlotIndex));
-
-    return BodyMesh->CreateDynamicMaterialInstance(SlotIndex);
-}
-
-void ATMOPConfiguredVehicle::ApplyAppearanceMaterials()
+void ATMOPConfiguredVehicle::ApplyBodyColor()
 {
     if (!IsValid(VehicleModel) || !IsValid(BodyMesh) ||
         !IsValid(VehicleModel->BodyMesh))
+        return;
+    const int32 SlotIndex = VehicleModel->BodyMaterialSlotIndex;
+    if (SlotIndex < 0 ||
+        SlotIndex >= VehicleModel->BodyMesh->GetStaticMaterials().Num())
     {
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP vehicle model '%s' has invalid body material slot %d."),
+            *VehicleModel->ModelId.ToString(), SlotIndex);
         return;
     }
 
-    if (UMaterialInstanceDynamic* Material =
-        CreateMaterialInstanceForSlot(TEXT("body")))
-    {
-        if (bOverrideBodyColor &&
-            !VehicleModel->BodyColorParameterName.IsNone())
-        {
-            Material->SetVectorParameterValue(
-                VehicleModel->BodyColorParameterName, BodyColor);
-        }
-    }
-    else
+    // Restore the model material first so toggling the override off also works
+    // in the editor construction preview.
+    BodyMesh->SetMaterial(
+        SlotIndex, VehicleModel->BodyMesh->GetMaterial(SlotIndex));
+    if (!bOverrideBodyColor)
+        return;
+    if (VehicleModel->BodyColorParameterName.IsNone())
     {
         UE_LOG(LogTemp, Warning,
-            TEXT("TMOP vehicle model '%s' has no required material slot named 'body'."),
+            TEXT("TMOP vehicle model '%s' has no Body Color Parameter Name."),
             *VehicleModel->ModelId.ToString());
+        return;
     }
-
-    if (UMaterialInstanceDynamic* Material =
-        CreateMaterialInstanceForSlot(TEXT("window")))
+    if (UMaterialInstanceDynamic* Paint =
+        BodyMesh->CreateDynamicMaterialInstance(SlotIndex))
     {
-        if (bOverrideWindowTint &&
-            !VehicleModel->WindowTintParameterName.IsNone())
-        {
-            Material->SetVectorParameterValue(
-                VehicleModel->WindowTintParameterName, WindowTint);
-        }
+        Paint->SetVectorParameterValue(
+            VehicleModel->BodyColorParameterName, BodyColor);
     }
-
-    ApplyLightMaterial(TEXT("headlight"), bHeadlightsOn);
-    ApplyLightMaterial(TEXT("orangelight"), bOrangeLightsOn);
-    ApplyLightMaterial(TEXT("redlight"), bRedLightsOn);
-}
-
-void ATMOPConfiguredVehicle::ApplyLightMaterial(
-    const FName SlotName, const bool bEnabled)
-{
-    if (UMaterialInstanceDynamic* Material =
-        CreateMaterialInstanceForSlot(SlotName))
-    {
-        if (!VehicleModel->LightEnabledParameterName.IsNone())
-        {
-            Material->SetScalarParameterValue(
-                VehicleModel->LightEnabledParameterName,
-                bEnabled ? 1.0f : 0.0f);
-        }
-    }
-}
-
-void ATMOPConfiguredVehicle::SetExteriorLightsEnabled(const bool bEnabled)
-{
-    bHeadlightsOn = bEnabled;
-    bOrangeLightsOn = bEnabled;
-    bRedLightsOn = bEnabled;
-    ApplyAppearanceMaterials();
-}
-
-void ATMOPConfiguredVehicle::SetHeadlightsEnabled(const bool bEnabled)
-{
-    bHeadlightsOn = bEnabled;
-    ApplyAppearanceMaterials();
-}
-
-void ATMOPConfiguredVehicle::SetOrangeLightsEnabled(const bool bEnabled)
-{
-    bOrangeLightsOn = bEnabled;
-    ApplyAppearanceMaterials();
-}
-
-void ATMOPConfiguredVehicle::SetRedLightsEnabled(const bool bEnabled)
-{
-    bRedLightsOn = bEnabled;
-    ApplyAppearanceMaterials();
 }
 
 void ATMOPConfiguredVehicle::ApplyWheel(UStaticMeshComponent* Component,
+    UStaticMesh* WheelMesh,
     const FTransform& LocalTransform)
 {
-    Component->SetStaticMesh(VehicleModel->WheelMesh);
+    if (!IsValid(Component))
+    {
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP configured vehicle '%s' skipped an invalid wheel component."),
+            *GetPathName());
+        return;
+    }
+
+    Component->SetStaticMesh(IsValid(WheelMesh) ? WheelMesh : nullptr);
     Component->SetRelativeTransform(LocalTransform);
-    Component->SetVisibility(IsValid(VehicleModel->WheelMesh));
+    Component->SetVisibility(IsValid(WheelMesh));
 }
 
 void ATMOPConfiguredVehicle::Tick(const float DeltaSeconds)
@@ -287,21 +236,24 @@ void ATMOPConfiguredVehicle::Tick(const float DeltaSeconds)
 
 void ATMOPConfiguredVehicle::UpdateWheelAnimation(const float DeltaSeconds)
 {
-    if (!IsValid(VehicleModel) || VehicleModel->Wheels.WheelRadiusCm <= 0.0f) return;
+    const UTMOPVehicleModelData* Model = VehicleModel.Get();
+    if (!IsValid(Model) || Model->Wheels.WheelRadiusCm <= 0.0f) return;
     const UTMOPTrafficVehicleMovementComponent* Movement =
         FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
     if (!IsValid(Movement)) return;
     const float Radians = Movement->CurrentSpeedCmPerSecond * DeltaSeconds /
-        VehicleModel->Wheels.WheelRadiusCm;
+        Model->Wheels.WheelRadiusCm;
     AccumulatedWheelRollDegrees = FMath::Fmod(
         AccumulatedWheelRollDegrees + FMath::RadiansToDegrees(Radians), 360.0f);
-    const FQuat Roll(VehicleModel->Wheels.RotationAxis.GetSafeNormal(),
+    const FQuat Roll(Model->Wheels.RotationAxis.GetSafeNormal(),
         FMath::DegreesToRadians(AccumulatedWheelRollDegrees));
     UStaticMeshComponent* Wheels[] = { WheelFrontLeft, WheelFrontRight, WheelRearLeft, WheelRearRight };
-    const FTransform Bases[] = { VehicleModel->Wheels.FrontLeft, VehicleModel->Wheels.FrontRight,
-        VehicleModel->Wheels.RearLeft, VehicleModel->Wheels.RearRight };
+    const FTransform Bases[] = { Model->Wheels.FrontLeft, Model->Wheels.FrontRight,
+        Model->Wheels.RearLeft, Model->Wheels.RearRight };
     for (int32 Index = 0; Index < 4; ++Index)
     {
+        if (!IsValid(Wheels[Index]))
+            continue;
         FTransform Animated = Bases[Index];
         Animated.SetRotation(Roll * Bases[Index].GetRotation());
         Wheels[Index]->SetRelativeTransform(Animated);

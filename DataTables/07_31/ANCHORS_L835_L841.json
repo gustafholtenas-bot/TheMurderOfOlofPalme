@@ -1,0 +1,22 @@
+{
+  "create_or_verify": [
+    "SEAT_GRAND_1_223",
+    "SEAT_GRAND_1_224",
+    "SEAT_GRAND_1_225",
+    "SEAT_GRAND_1_226",
+    "SEAT_GRAND_1_227",
+    "SEAT_GRAND_1_228",
+    "SEAT_GRAND_1_229",
+    "SEAT_GRAND_1_230",
+    "SEAT_GRAND_2_18",
+    "SEAT_GRAND_2_19",
+    "VEHICLE_ANONYMTVITTNE_L837S_BIL_START",
+    "SEAT_GRAND_1_R3"
+  ],
+  "existing_but_verify": [
+    "GrandFoaje",
+    "OutsideGrand",
+    "MetroRadmansgatan1",
+    "ExitSveavagenN_Sidewalk2"
+  ]
+}
