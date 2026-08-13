@@ -1,0 +1,1 @@
+EAD13783-01 infört kumulativt. Makens förhör bekräftar färdväg, förare, sätesplats, vänster körfält och avstängd radio. Hans minnesluckor om personer, fordon, smäll och hustruns kommentar bevaras som separat källvariation och raderar inte hennes uppgifter.

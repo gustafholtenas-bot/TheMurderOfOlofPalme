@@ -1,0 +1,1 @@
+EDE59-02 källgranskat kumulativt. Handlingen är en ensidig arkivpromemoria som endast anger att negativen från fotorekonstruktionen den 20 september 1988 redovisades i EDE59 och förvarades i originalpärmen. Inga nya mordnattsuppgifter eller entiteter tillkommer. Därmed är hela det publicerade EDE59-paketet genomgånget.

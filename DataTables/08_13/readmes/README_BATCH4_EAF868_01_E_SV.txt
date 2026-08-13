@@ -1,0 +1,1 @@
+EAF868-01-E infört kumulativt som arkivdata: fantombildsman, två väntande män, röd Audi och grupp. Händelsen sker 00:15–00:20 och alla entiteter har bSpawnInSimulation=false; ingen spekulativ fordons- eller personkoppling har gjorts.

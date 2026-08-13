@@ -1,0 +1,1 @@
+EB375-00 (senare EBC375-00) källgranskat kumulativt. Cirka 22.50 stod två män vid Tunnelgatan/Olofsgatan. En mindre van/skåpbil kom på Olofsgatan, svängde vänster in på Tunnelgatan, stannade kort och fortsatte. Vittne, män, grupp, van, event och observationer är strukturerade men inaktiva eftersom händelsen ligger före 23.00.

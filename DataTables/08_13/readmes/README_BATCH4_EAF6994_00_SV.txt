@@ -1,0 +1,1 @@
+EAF6994-00 källgranskat kumulativt. Ett maskerat fordon har lagts in som parkerat invid mordplatsen under hela 23.00–23.45. Nytt ankare behövs: PARK_EAF6994_MURDER_SITE. Fordonets modell, färg och registrering är maskerade; Volvo 240 är endast proxy. Ägaren och avfärden cirka 00.15 ligger utanför simulationsfönstret.

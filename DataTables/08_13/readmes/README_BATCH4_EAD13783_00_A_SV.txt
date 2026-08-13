@@ -1,0 +1,1 @@
+EAD13783-00-A infört kumulativt. Samma vittnen och observerade trio har förfinats utan identitetssammanslagning. En oidentifierad taxi och minst två okända personer på Apelbergsgatan har lagts till. Källans cirka 23:25 bevaras som osäker uppgift medan skottkopplingens preferred time förblir 23:21:30.

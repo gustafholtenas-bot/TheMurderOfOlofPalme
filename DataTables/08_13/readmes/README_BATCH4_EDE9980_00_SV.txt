@@ -1,0 +1,1 @@
+EDE9980-00 källgranskat kumulativt. Annette Kohuts pass i Skandias reception 16:45-23:30, garage vid Luntmakargatan 29 och färd norrut är införda. Den äldre felaktiga bilavgången 23:22:32 har korrigerats till efter 23:30. En snabb, möjligen röd Volvo med flera personer har skapats som separat observerat fordon; färg, fabrikat, exakt minut och antal är osäkra.

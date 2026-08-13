@@ -1,0 +1,1 @@
+Rutten för Anders Björkmans fyrmannagrupp och eftersläntrarna har kompletterats med passageankaret E9977_REGERINGSGATAN_KUNGSGATAN_STAIRS. Alla sju går därmed från RestaurangStClara via trappan ned till Kungsgatan innan de fortsätter mot Sveavägen. Anders avvikande mellanmål Regeringsgatan_66 har korrigerats till Kungsgatan_18. Befintliga ankomsttider är oförändrade.

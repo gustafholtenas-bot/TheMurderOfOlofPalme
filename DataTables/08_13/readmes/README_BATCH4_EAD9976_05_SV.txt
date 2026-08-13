@@ -1,0 +1,1 @@
+EAD9976-05 infört kumulativt. Två befintliga maskerade La Carterie-besökare återanvänds sannolikt för promenaden Tegnérgatan–Tunnelgatan. Tiden är ett brett rekonstruktionsfönster; negativa iakttagelser har inte gjorts till positiva observationsposter. EAD9976-02 till -04 är verifierat saknade på WPU.

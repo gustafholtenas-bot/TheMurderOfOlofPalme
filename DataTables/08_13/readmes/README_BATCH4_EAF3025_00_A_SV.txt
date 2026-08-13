@@ -1,0 +1,1 @@
+EAF3025-00-A infört kumulativt som avaktiverad arkivdata: Ibrahim Djalo, Volvo 140, okänd man, bred tidsintervallshändelse, signalement, flyktväg och ordagranna repliker. Ingen säker aktivitet före 23:45 och ingen gärningsmannakoppling.

@@ -1,0 +1,1 @@
+EAF516-00 källgranskat kumulativt. Tredjehandsuppgiften om en man som stiger in i taxi omkring midnatt har dokumenterats endast i uppslagsregistret. Händelsen ligger efter 23:45 och saknar plats, säker identitet och primärkälla; därför skapas inga aktiva simuleringsentiteter.

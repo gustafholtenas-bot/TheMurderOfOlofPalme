@@ -1,0 +1,1 @@
+EAF6995-00-D källgranskat kumulativt. Sällskapet är nu bekräftat som man och flickvän; bilen tillhörde henne och mannen körde efter besöket. En ospawnad, oidentifierad polismålad polisbil, troligen Volvo, har lagts in som observation vid mordplatsen utan koppling till känd patrull.

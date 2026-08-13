@@ -1,0 +1,1 @@
+EAD10245-00 infört kumulativt: Ove Persson, maskerad kollega och mörk VW Passat. Cityrutten 23:05–cirka 23:21 modelleras med osäkra passagetider. Ingen synlig eller använd WT. Mellanliggande opublicerade EAD-avsnitt har markerats och hoppats över.

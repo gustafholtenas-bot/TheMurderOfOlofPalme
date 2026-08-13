@@ -1,0 +1,1 @@
+Alla publicerade EF9977-delar är granskade: EF9977-00, -00-A och -00-B. Mordtimmen korsstöds för Björkmans sällskap och den lilla mörkröda bilen. Händelsen med en maskerad utsatt kvinna inträffade cirka 01.00, ligger utanför simulationen och är endast källkritiskt arkiverad. Citatet om ”Pelle” är inte kopplat till någon person eller gärningsman.

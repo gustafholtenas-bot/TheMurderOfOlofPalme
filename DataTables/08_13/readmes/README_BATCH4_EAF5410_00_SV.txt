@@ -1,0 +1,1 @@
+EAF5410-00 källgranskat kumulativt. Maskerad boende kom hem vid midnatt och såg en polisbil mot enkelriktningen samt två personer i fönster. Uppgifterna ligger efter 23:45 och saknar exakt plats/identitet; inga entiteter skapades. Felaktig registerstatus för flera faktiskt publicerade EAF-original har korrigerats.

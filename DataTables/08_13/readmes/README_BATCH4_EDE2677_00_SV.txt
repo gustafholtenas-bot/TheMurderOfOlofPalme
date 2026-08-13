@@ -1,0 +1,1 @@
+EDE2677-00 källgranskat kumulativt. Ett maskerat kvinnligt vittne och en maskerad följeslagare lämnade cirka 23.30-23.40 en restaurang på Sveavägen, omkring 200 meter från mordplatsen. En okänd svensktalande man, 30-35 år och cirka 180-190 cm, kom in fullständigt desperat, stressad och andfådd. Mannen är separat från gärningsmannen och andra observationer.

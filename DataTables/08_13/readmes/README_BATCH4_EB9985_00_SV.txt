@@ -1,0 +1,1 @@
+EB9985-00 källgranskat kumulativt. Den 11 mars 1986 kl. 09.00 stod en vit Volvo med maskerad registrering på Wallinggatan. Handlingen kompletterar ett förhör den 1 mars kl. 01.30 men återger inte den ursprungliga mordnattsobservationen tillräckligt. Ingen person, bil eller observation har därför skapats innan EB9985-01 granskas.

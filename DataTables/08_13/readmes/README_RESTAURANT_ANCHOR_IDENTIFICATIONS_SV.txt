@@ -1,0 +1,1 @@
+Restaurangankare källkritiskt preciserade: EDE2677 använder MonteCarlo_inside (mycket sannolik), EAC11855 använder RestaurangKarelia_inside (sannolik), EAC11857 använder RestaurangAlexandra_inside (sannolik). EAC11859 förblir neutralt med Alexandra och Karelia som kandidater. Bohemia och EAD7006-bilens Luntmakargatan-parkering är oförändrade.

@@ -1,0 +1,1 @@
+EAF6020-00 källgranskat kumulativt. Observationen sker 03:15–03:20 vid Kungsgatan–Norrlandsgatan och ligger långt utanför mordtimmen. Källan registreras utan entiteter eller rekonstruerad dialog; inga identitetskopplingar har gjorts.

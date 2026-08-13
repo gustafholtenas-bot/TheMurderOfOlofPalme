@@ -1,0 +1,1 @@
+EAF6995-00-A källgranskat kumulativt. Uppgiftslämnaren har uppdaterats till man. Bilregisterkontrollen bekräftas, men registrering, ägare/innehavare, modell och färg är maskerade. Inga nya entiteter eller tidslinjer skapades; EAF6995-personerna och bilen förblir ospawnade.

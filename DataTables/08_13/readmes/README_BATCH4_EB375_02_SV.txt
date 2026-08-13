@@ -1,0 +1,1 @@
+EB375-02 (EBC375-02) källgranskat kumulativt. PM:et bedömer sannolikt att de maskerade personerna hörde till ett sällskap som lämnade Tunnelgatan 12 för en maskerad destination på S:t Eriksgatan. Hänvisningen EAD10326 saknar publicerat original; hypotesen noteras därför utan identitetsmerge, alias eller nya entiteter.

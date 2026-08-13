@@ -1,0 +1,1 @@
+EAF6995-00-C källgranskat kumulativt. De två befintliga personerna, gruppen och bilen är aktiverade. Gemensam rutt: restaurang -> Tunnelgatan/Luntmakargatan (stoppas av sannolikt två kvinnliga poliser) -> Luntmakargatan söderut -> Apelbergsgatan -> Sveavägen -> bilen. Avgången är ett osäkert fönster 23.30-23.45. Två nya restaurangankare krävs.

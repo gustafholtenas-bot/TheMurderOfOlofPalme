@@ -1,0 +1,1 @@
+EAF6995-00 källgranskat kumulativt. Två maskerade restaurangbesökare, deras sällskap och bilen utanför Beckersbutiken på Sveavägen har lagts in strukturerat men ospawnat. Grundhandlingen anger endast att de lämnade restaurangen vid 24-tiden och då fann området avspärrat. Publicerade suffix -A, -C och -D behandlas separat härnäst; -B saknas.

@@ -1,0 +1,1 @@
+EAF6911-00 källgranskat kumulativt. Vittnet såg en cirka 60-årig man i grå lång rock vid mordplatsen någon ospecificerad dag mellan mordet och begravningen. Eftersom både dag och klockslag saknas registreras källuppgiften utan person- eller observationsentiteter och utan identitetskopplingar. Agneta Lundin är uppgiftsmottagare, inte vittnet.

@@ -1,0 +1,1 @@
+EDE877-01 källgranskat kumulativt. Uppslaget gäller ett maskerat samtal om Palmemordet på en arbetsplats den 28 april 1986, inte en mordnattsobservation. Tre maskerade personer har registrerats utan spawn eller tidslinje i scenariot. Ingen koppling har skapats till EDE877-00:s bilar.

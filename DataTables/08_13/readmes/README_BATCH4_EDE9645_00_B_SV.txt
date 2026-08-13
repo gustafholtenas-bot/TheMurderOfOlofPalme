@@ -1,0 +1,1 @@
+EDE9645-00-B källgranskat kumulativt. Det 23-sidiga videokonfrontationsförhöret med Claes Brewitz är infört utan att de tolv konfrontationspersonerna skapats. Nummer 7 påminde mest och nummer 8 i viss mån, men inget säkert utpekande gjordes. Den okända springande mannen förblir separat, oidentifierad och ospawnad; den tidsosäkra observationen förblir avstängd.

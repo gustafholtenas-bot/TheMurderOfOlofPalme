@@ -1,0 +1,1 @@
+EAD19127-00 infört kumulativt: Olof Anderssons sällskap från Bohemia, mötet med två festklädda personer vid Johannes brandstation och fortsatt gång till kyrkans sakristia. Tider efter cirka 23:10 är rekonstruerade intervall och maskerad identitet har inte hävts via filnamnet.

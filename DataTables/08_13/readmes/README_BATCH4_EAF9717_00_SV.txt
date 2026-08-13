@@ -1,0 +1,1 @@
+EAF9717-00 källgranskat kumulativt. Två maskerade besökare såg en handske, och den ene även en halsduk, innanför avspärrningen på morgonen efter mordet. Handsken beskrevs som musgrå med grön dragning, herrstorlek och tjockt foder. Uppgifterna ligger cirka 09.00-10.00 och dokumenteras därför utan aktiva entiteter i mordtimmen.

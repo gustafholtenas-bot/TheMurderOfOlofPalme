@@ -1,0 +1,1 @@
+EAF13551-00 källgranskat kumulativt. En maskerad kvinna har lagts in ospawnad och hennes parkeringsanmärkta bil aktiverad på Brunnsgatan under hela 23.00-23.45. Nytt ankare krävs: PARK_EAF13551_BRUNNSGATAN_UNKNOWN. Bilen motsvarar en av EAE46:s sex generiska Brunnsgatan-bilar men kan ännu inte mappas till rätt platshållare.

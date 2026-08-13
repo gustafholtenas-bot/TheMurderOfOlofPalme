@@ -1,0 +1,1 @@
+EAD9976-01 infört kumulativt. Lennart återanvänder den tidigare La Carterie-skyltfönsterposten med sannolik, inte säker, identitetskoppling. Två maskerade anställda spawnas i lokalen. Två maskerade besökare omkring 22:00 bevaras ospawnade. En okänd större nordgående personbil modelleras som osäker simulationsproxy.
