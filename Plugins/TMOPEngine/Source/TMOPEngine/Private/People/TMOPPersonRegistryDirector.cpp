@@ -262,9 +262,37 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
             if (!ResolveEntrySecond(Runtime, Entry, ResolvedSecond) ||
                 ResolvedSecond > CurrentSecond) break;
 
+            // Documentation contributes to chronology/relative timing but never
+            // creates or changes a physical runtime person.
+            if (Entry.Usage == ETMOPPersonTimelineUsage::DocumentationOnly)
+            {
+                Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+                ++Runtime.NextTimelineIndex;
+                Runtime.CachedResolvedSecond = INDEX_NONE;
+                continue;
+            }
+
+            // A planned anchor is a valid research reference before it exists.
+            // Once an actor with the same ID is added, runtime-enabled entries
+            // begin working without a data migration.
+            if (Entry.AnchorReferenceMode == ETMOPAnchorReferenceMode::PlannedFuture &&
+                !Entry.TargetAnchorId.IsNone())
+            {
+                UTMOPAnchorSubsystem* Anchors = GetGameInstance() != nullptr
+                    ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
+                if (Anchors == nullptr || !IsValid(Anchors->FindAnchor(Entry.TargetAnchorId)))
+                {
+                    Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+                    ++Runtime.NextTimelineIndex;
+                    Runtime.CachedResolvedSecond = INDEX_NONE;
+                    continue;
+                }
+            }
+
             if (!Runtime.Agent.IsValid())
             {
-                if (Runtime.NextTimelineIndex == 0 &&
+                if ((Entry.Action == ETMOPPersonTimelineAction::InitialPlacement ||
+                     Entry.Action == ETMOPPersonTimelineAction::Spawn) &&
                     (Entry.LocationType == ETMOPPersonLocationType::Unknown ||
                      Entry.LocationType == ETMOPPersonLocationType::NotPresent))
                 {
@@ -274,7 +302,8 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                     Runtime.CachedResolvedSecond = INDEX_NONE;
                     continue;
                 }
-                if (Runtime.NextTimelineIndex != 0 && Entry.Action != ETMOPPersonTimelineAction::Spawn)
+                if (Entry.Action != ETMOPPersonTimelineAction::InitialPlacement &&
+                    Entry.Action != ETMOPPersonTimelineAction::Spawn)
                     break;
                 if (!SpawnPerson(Runtime, Entry)) break;
                 Runtime.LastResolvedTimelineSecond = ResolvedSecond;
@@ -1002,10 +1031,21 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 OutErrors.Add(Prefix + TEXT(" absolute Timeline entries are not chronological; array order is authoritative."));
             if (Entry.TimingMode == ETMOPEventTimingMode::Absolute) PreviousSecond = Second;
         }
-        if (!Row->Timeline.IsEmpty() &&
-            Row->Timeline[0].Action != ETMOPPersonTimelineAction::InitialPlacement &&
-            Row->Timeline[0].Action != ETMOPPersonTimelineAction::Spawn)
-            OutErrors.Add(Prefix + TEXT(" Timeline[0] must be InitialPlacement or Spawn."));
+        int32 FirstSimulationIndex = INDEX_NONE;
+        for (int32 Index = 0; Index < Row->Timeline.Num(); ++Index)
+            if (Row->Timeline[Index].Usage != ETMOPPersonTimelineUsage::DocumentationOnly)
+            {
+                FirstSimulationIndex = Index;
+                break;
+            }
+        if (Row->bSpawnInSimulation && FirstSimulationIndex == INDEX_NONE)
+            OutErrors.Add(Prefix + TEXT(" is enabled for simulation but has only documentation entries."));
+        if (FirstSimulationIndex != INDEX_NONE &&
+            Row->Timeline[FirstSimulationIndex].Action != ETMOPPersonTimelineAction::InitialPlacement &&
+            Row->Timeline[FirstSimulationIndex].Action != ETMOPPersonTimelineAction::Spawn)
+            OutErrors.Add(Prefix + FString::Printf(
+                TEXT(" Timeline[%d] is the first simulation entry and must be InitialPlacement or Spawn."),
+                FirstSimulationIndex));
         TSet<FName> SpeechLineIds;
         for (int32 Index = 0; Index < Row->AutomaticSpeech.Num(); ++Index)
         {

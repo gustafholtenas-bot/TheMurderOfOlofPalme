@@ -143,9 +143,8 @@ void FTMOPPersonTimelineEntryCustomization::DeleteTimelineEntry()
 
 bool FTMOPPersonTimelineEntryCustomization::CanDeleteTimelineEntry() const
 {
-    // Timeline[0] is the required InitialPlacement/Spawn marker.
     return StructHandle.IsValid() &&
-        StructHandle->GetIndexInArray() > 0;
+        StructHandle->GetIndexInArray() != INDEX_NONE;
 }
 
 #undef LOCTEXT_NAMESPACE

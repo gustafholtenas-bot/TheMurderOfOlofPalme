@@ -57,6 +57,26 @@ enum class ETMOPPersonTimelineAction : uint8
     SetGroupLeader
 };
 
+/** Controls whether a historical timeline entry affects the running simulation. */
+UENUM(BlueprintType)
+enum class ETMOPPersonTimelineUsage : uint8
+{
+    /** Existing/default behaviour: execute this entry in the simulation. */
+    Simulation UMETA(DisplayName="Simulation"),
+    /** Store this entry for chronology, alibi and research only. */
+    DocumentationOnly UMETA(DisplayName="Documentation Only"),
+    /** Keep the documentation marker and execute it when its world references exist. */
+    DocumentationAndSimulation UMETA(DisplayName="Documentation + Simulation")
+};
+
+/** Describes whether an anchor is already required in the map or may be added later. */
+UENUM(BlueprintType)
+enum class ETMOPAnchorReferenceMode : uint8
+{
+    RequiredInWorld UMETA(DisplayName="Required In World"),
+    PlannedFuture UMETA(DisplayName="Planned / Future Anchor")
+};
+
 /** One chronological, source-backed state or action for a person. */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPPersonTimelineEntry
@@ -69,6 +89,10 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")
     ETMOPPersonTimelineAction Action = ETMOPPersonTimelineAction::InitialPlacement;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline",
+        meta=(ToolTip="Documentation Only entries never spawn or move a runtime person. Existing imported entries default to Simulation."))
+    ETMOPPersonTimelineUsage Usage = ETMOPPersonTimelineUsage::Simulation;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time")
     FTMOPTime Time = FTMOPTime(23, 0, 0);
@@ -106,6 +130,25 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
     FName TargetAnchorId = NAME_None;
+
+    /**
+     * Planned Future permits this ID before an anchor actor exists. A runtime-enabled
+     * entry is ignored while it is missing and becomes executable when an Unreal
+     * anchor with the same ID is later added to the world.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location")
+    ETMOPAnchorReferenceMode AnchorReferenceMode =
+        ETMOPAnchorReferenceMode::RequiredInWorld;
+
+    /** Human-readable off-map/future location, for example "Polishuset". */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location",
+        meta=(EditCondition="AnchorReferenceMode==ETMOPAnchorReferenceMode::PlannedFuture"))
+    FText PlannedAnchorDisplayName;
+
+    /** Placement/address guidance retained until the actual Unreal anchor is built. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Location",
+        meta=(EditCondition="AnchorReferenceMode==ETMOPAnchorReferenceMode::PlannedFuture", MultiLine="true"))
+    FString PlannedAnchorNotes;
 
     /**
      * Optional anchors that must be visited in order before TargetAnchorId.

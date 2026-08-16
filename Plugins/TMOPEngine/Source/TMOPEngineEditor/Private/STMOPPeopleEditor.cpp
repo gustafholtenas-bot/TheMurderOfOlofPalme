@@ -1203,15 +1203,8 @@ FReply STMOPPeopleEditor::DuplicateTimelineEntry()
 FReply STMOPPeopleEditor::DeleteTimelineEntry()
 {
     CommitEntryEdits();
-    if (SelectedTimelineIndex <= 0 ||
-        !WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
-    {
-        SetStatus(
-            LOCTEXT("CannotDeleteInitial",
-                "Timeline[0] is the required initial placement and cannot be deleted."),
-            FLinearColor(1.0f, 0.65f, 0.1f));
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
         return FReply::Handled();
-    }
     WorkingRow.Timeline.RemoveAt(SelectedTimelineIndex);
     const int32 NextIndex = FMath::Min(
         SelectedTimelineIndex,
@@ -1352,7 +1345,12 @@ FText STMOPPeopleEditor::GetTimelineSummary(const int32 Index) const
         return FText::GetEmpty();
     const FTMOPPersonTimelineEntry& Entry =
         WorkingRow.Timeline[Index];
-    FString Summary = ActionLabel(Entry.Action);
+    FString Summary = Entry.Usage == ETMOPPersonTimelineUsage::DocumentationOnly
+        ? TEXT("[DOC] ") : Entry.Usage == ETMOPPersonTimelineUsage::DocumentationAndSimulation
+        ? TEXT("[DOC+SIM] ") : TEXT("[SIM] ");
+    if (Entry.AnchorReferenceMode == ETMOPAnchorReferenceMode::PlannedFuture)
+        Summary += TEXT("[PLANNED] ");
+    Summary += ActionLabel(Entry.Action);
     if (!Entry.TargetAnchorId.IsNone())
         Summary += TEXT("  →  ") + Entry.TargetAnchorId.ToString();
     else if (!Entry.TargetSeatId.IsNone())
@@ -1403,9 +1401,14 @@ FText STMOPPeopleEditor::GetTimelineTimingText(
 FSlateColor STMOPPeopleEditor::GetTimelineColor(
     const int32 Index) const
 {
-    return EntryHasError(Index)
-        ? FSlateColor(FLinearColor(1.0f, 0.25f, 0.2f))
-        : FSlateColor(FLinearColor(0.35f, 0.75f, 1.0f));
+    if (EntryHasError(Index))
+        return FSlateColor(FLinearColor(1.0f, 0.25f, 0.2f));
+    const FTMOPPersonTimelineEntry& Entry = WorkingRow.Timeline[Index];
+    if (Entry.Usage == ETMOPPersonTimelineUsage::DocumentationOnly)
+        return FSlateColor(FLinearColor(0.65f, 0.65f, 0.65f));
+    if (Entry.AnchorReferenceMode == ETMOPAnchorReferenceMode::PlannedFuture)
+        return FSlateColor(FLinearColor(0.75f, 0.45f, 1.0f));
+    return FSlateColor(FLinearColor(0.35f, 0.75f, 1.0f));
 }
 
 bool STMOPPeopleEditor::EntryHasError(
@@ -1422,10 +1425,21 @@ bool STMOPPeopleEditor::EntryHasError(
     };
     if (Entry.EntryId.IsNone())
         return Fail(TEXT("Missing Entry ID"));
-    if (Index == 0 &&
-        Entry.Action != ETMOPPersonTimelineAction::InitialPlacement &&
-        Entry.Action != ETMOPPersonTimelineAction::Spawn)
-        return Fail(TEXT("First entry must be Initial Placement or Spawn"));
+    if (Entry.Usage != ETMOPPersonTimelineUsage::DocumentationOnly)
+    {
+        bool bEarlierSimulationEntry = false;
+        for (int32 Previous = 0; Previous < Index; ++Previous)
+            if (WorkingRow.Timeline[Previous].Usage !=
+                ETMOPPersonTimelineUsage::DocumentationOnly)
+            {
+                bEarlierSimulationEntry = true;
+                break;
+            }
+        if (!bEarlierSimulationEntry &&
+            Entry.Action != ETMOPPersonTimelineAction::InitialPlacement &&
+            Entry.Action != ETMOPPersonTimelineAction::Spawn)
+            return Fail(TEXT("First simulation entry must be Initial Placement or Spawn"));
+    }
     if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
         Entry.SharedEventId.IsNone())
         return Fail(TEXT("Relative timing requires Shared Event ID"));
@@ -1504,6 +1518,16 @@ TArray<FString> STMOPPeopleEditor::ValidateWorkingRow() const
         Errors.Add(TEXT("Entity ID is missing."));
     if (WorkingRow.Timeline.IsEmpty())
         Errors.Add(TEXT("Timeline is empty."));
+    if (WorkingRow.bSpawnInSimulation)
+    {
+        const bool bHasSimulationEntry = WorkingRow.Timeline.ContainsByPredicate(
+            [](const FTMOPPersonTimelineEntry& Entry)
+            {
+                return Entry.Usage != ETMOPPersonTimelineUsage::DocumentationOnly;
+            });
+        if (!bHasSimulationEntry)
+            Errors.Add(TEXT("Simulation is enabled but the timeline contains only documentation entries."));
+    }
     TSet<FName> EntryIds;
     for (int32 Index = 0; Index < WorkingRow.Timeline.Num(); ++Index)
     {
@@ -1530,4 +1554,3 @@ void STMOPPeopleEditor::SetStatus(
 }
 
 #undef LOCTEXT_NAMESPACE
-
