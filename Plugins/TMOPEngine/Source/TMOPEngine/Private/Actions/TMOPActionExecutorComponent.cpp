@@ -12,6 +12,7 @@
 #include "Schedules/TMOPScheduleSubsystem.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Venues/TMOPCinemaSeatSubsystem.h"
+#include "World/TMOPVerticalTransport.h"
 
 UTMOPActionExecutorComponent::UTMOPActionExecutorComponent()
 {
@@ -68,6 +69,19 @@ void UTMOPActionExecutorComponent::TickComponent(
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+    if (ExecutionState == ETMOPActionExecutionState::WaitingForVerticalTransport)
+    {
+        if (!IsValid(ActiveVerticalTransport) ||
+            !ActiveVerticalTransport->IsTransporting(GetOwner()))
+        {
+            ActiveVerticalTransport = nullptr;
+            ++CurrentRouteAnchorIndex;
+            if (!MoveToCurrentRouteAnchor()) CompleteCurrentAction(false);
+            else ExecutionState = ETMOPActionExecutionState::WaitingForArrival;
+        }
+        return;
+    }
+
     if (ExecutionState != ETMOPActionExecutionState::WaitingForArrival)
     {
         return;
@@ -88,6 +102,20 @@ void UTMOPActionExecutorComponent::TickComponent(
     {
         if (CurrentRouteAnchorIds.IsValidIndex(CurrentRouteAnchorIndex + 1))
         {
+            const FName From = CurrentRouteAnchorIds[CurrentRouteAnchorIndex];
+            const FName To = CurrentRouteAnchorIds[CurrentRouteAnchorIndex + 1];
+            if (ATMOPVerticalTransport* Transport =
+                ATMOPVerticalTransport::FindTransport(this, From, To))
+            {
+                if (Transport->RequestTransport(GetOwner(), From, To))
+                {
+                    if (AController* Controller = GetHistoricalAgent()->GetController())
+                        Controller->StopMovement();
+                    ActiveVerticalTransport = Transport;
+                    ExecutionState = ETMOPActionExecutionState::WaitingForVerticalTransport;
+                    return;
+                }
+            }
             ++CurrentRouteAnchorIndex;
             if (!MoveToCurrentRouteAnchor())
             {
@@ -152,6 +180,7 @@ void UTMOPActionExecutorComponent::CancelCurrentAction()
     CurrentRouteAnchorIds.Reset();
     CurrentRouteAnchorIndex = INDEX_NONE;
     CurrentEntry = FTMOPScheduleEntry();
+    ActiveVerticalTransport = nullptr;
     ExecutionState = ETMOPActionExecutionState::Idle;
     SetComponentTickEnabled(false);
 }
@@ -178,6 +207,7 @@ bool UTMOPActionExecutorComponent::RestoreBakedMoveToLocation(
 
     CancelCurrentAction();
     CurrentEntry = FTMOPScheduleEntry();
+    ActiveVerticalTransport = nullptr;
     CurrentEntry.ActionType = ETMOPScheduleActionType::MoveToAnchor;
     CurrentTargetLocation = TargetLocation;
     CurrentRouteAnchorIds.Reset();
@@ -406,6 +436,7 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
     CurrentRouteAnchorIds.Reset();
     CurrentRouteAnchorIndex = INDEX_NONE;
     CurrentEntry = FTMOPScheduleEntry();
+    ActiveVerticalTransport = nullptr;
     ExecutionState = ETMOPActionExecutionState::Idle;
     SetComponentTickEnabled(false);
 

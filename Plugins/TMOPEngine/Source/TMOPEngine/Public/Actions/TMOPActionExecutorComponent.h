@@ -6,6 +6,7 @@
 #include "TMOPActionExecutorComponent.generated.h"
 
 class ATMOPHistoricalAgent;
+class ATMOPVerticalTransport;
 
 UENUM(BlueprintType)
 enum class ETMOPActionExecutionState : uint8
@@ -13,6 +14,7 @@ enum class ETMOPActionExecutionState : uint8
     Idle,
     Executing,
     WaitingForArrival,
+    WaitingForVerticalTransport,
     Completed,
     Failed
 };
@@ -74,7 +76,8 @@ public:
     bool IsExecutingAction() const
     {
         return ExecutionState == ETMOPActionExecutionState::Executing ||
-            ExecutionState == ETMOPActionExecutionState::WaitingForArrival;
+            ExecutionState == ETMOPActionExecutionState::WaitingForArrival ||
+            ExecutionState == ETMOPActionExecutionState::WaitingForVerticalTransport;
     }
 
     UFUNCTION(BlueprintCallable, Category = "TMOP|Actions")
@@ -123,4 +126,7 @@ private:
 
     bool bHasCurrentEntry = false;
     bool bRestoredFromBake = false;
+
+    UPROPERTY(Transient)
+    TObjectPtr<ATMOPVerticalTransport> ActiveVerticalTransport;
 };

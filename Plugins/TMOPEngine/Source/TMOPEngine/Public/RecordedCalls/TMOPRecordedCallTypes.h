@@ -115,6 +115,15 @@ struct TMOPENGINE_API FTMOPRecordedCallRow : public FTableRowBase
         meta=(EditCondition="bHistoricalStartTimeKnown", EditConditionHides))
     FTMOPTime HistoricalStartTime;
 
+    /** True when HistoricalEndTime is documented or deliberately reconstructed. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Recorded Call|Historical Time")
+    bool bHistoricalEndTimeKnown = false;
+
+    /** End time is exclusive. The audio duration is used when this is unknown. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Recorded Call|Historical Time",
+        meta=(EditCondition="bHistoricalEndTimeKnown", EditConditionHides))
+    FTMOPTime HistoricalEndTime;
+
     /** Optional uncertainty window when the exact historical start is unknown. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Recorded Call|Historical Time")
     FTMOPTime EarliestHistoricalStartTime;
