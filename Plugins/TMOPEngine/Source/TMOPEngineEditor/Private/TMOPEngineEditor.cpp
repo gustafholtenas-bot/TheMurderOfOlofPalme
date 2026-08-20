@@ -3,9 +3,11 @@
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Editor.h"
 #include "Engine/Selection.h"
+#include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Framework/Docking/TabManager.h"
+#include "Math/RotationMatrix.h"
 #include "ScopedTransaction.h"
 #include "STMOPPeopleEditor.h"
 #include "ToolMenus.h"
@@ -75,6 +77,16 @@ void FTMOPEngineEditorModule::RegisterMenus()
         FUIAction(FExecuteAction::CreateRaw(
             this,
             &FTMOPEngineEditorModule::GenerateIntersectionCornersFromSelection)));
+    Section.AddMenuEntry(
+        TEXT("SnapTMOPVehicleAnchorsToGround"),
+        LOCTEXT("SnapVehicleAnchorsToGround",
+            "Snap Selected Vehicle Anchors To Ground"),
+        LOCTEXT("SnapVehicleAnchorsToGroundTooltip",
+            "Project selected historical anchors onto the surface below and align pitch/roll to its slope. Keeps heading and adds the configured vehicle collision half-height."),
+        FSlateIcon(),
+        FUIAction(FExecuteAction::CreateRaw(
+            this,
+            &FTMOPEngineEditorModule::SnapSelectedVehicleAnchorsToGround)));
 }
 
 void FTMOPEngineEditorModule::OpenPeopleEditor()
@@ -324,6 +336,115 @@ void FTMOPEngineEditorModule::GenerateIntersectionCornersFromSelection()
     UE_LOG(LogTemp, Display,
         TEXT("TMOP intersection generator: created %d corner anchor(s) from %d selected parent(s)."),
         CreatedActors.Num(), Parents.Num());
+}
+
+void FTMOPEngineEditorModule::SnapSelectedVehicleAnchorsToGround()
+{
+    if (GEditor == nullptr || GEditor->GetSelectedActors() == nullptr)
+    {
+        return;
+    }
+
+    TArray<ATMOPHistoricalAnchor*> SelectedAnchors;
+    for (FSelectionIterator It(*GEditor->GetSelectedActors()); It; ++It)
+    {
+        if (ATMOPHistoricalAnchor* Anchor =
+            Cast<ATMOPHistoricalAnchor>(*It))
+        {
+            SelectedAnchors.Add(Anchor);
+        }
+    }
+    if (SelectedAnchors.IsEmpty())
+    {
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP vehicle ground snap: select one or more Historical Anchors first."));
+        return;
+    }
+
+    // ATMOPConfiguredVehicle uses a 60 cm collision half-height and keeps its
+    // visual/seat origin at road level. The actor/anchor origin therefore
+    // belongs 60 cm along the surface normal above the road.
+    constexpr float TraceDistanceCm = 100000.0f;
+    constexpr float VehicleCollisionHalfHeightCm = 60.0f;
+    const FScopedTransaction Transaction(
+        LOCTEXT("SnapVehicleAnchorsToGroundTransaction",
+            "Snap TMOP Vehicle Anchors To Ground"));
+
+    int32 SnappedCount = 0;
+    int32 MissedCount = 0;
+    for (ATMOPHistoricalAnchor* Anchor : SelectedAnchors)
+    {
+        UWorld* World = IsValid(Anchor) ? Anchor->GetWorld() : nullptr;
+        if (World == nullptr)
+        {
+            ++MissedCount;
+            continue;
+        }
+
+        const FVector CurrentLocation = Anchor->GetActorLocation();
+        const FVector TraceStart =
+            CurrentLocation + FVector::UpVector * TraceDistanceCm;
+        const FVector TraceEnd =
+            CurrentLocation - FVector::UpVector * TraceDistanceCm;
+        FCollisionQueryParams QueryParams(
+            SCENE_QUERY_STAT(TMOPVehicleAnchorGroundSnap), true, Anchor);
+        QueryParams.bReturnPhysicalMaterial = false;
+
+        FHitResult Hit;
+        if (!World->LineTraceSingleByChannel(
+                Hit, TraceStart, TraceEnd, ECC_Visibility, QueryParams) ||
+            !Hit.bBlockingHit)
+        {
+            UE_LOG(LogTemp, Warning,
+                TEXT("TMOP vehicle ground snap: no surface below anchor '%s'."),
+                *Anchor->GetAnchorId().ToString());
+            ++MissedCount;
+            continue;
+        }
+
+        const FVector SurfaceNormal = Hit.ImpactNormal.GetSafeNormal();
+        if (SurfaceNormal.IsNearlyZero())
+        {
+            ++MissedCount;
+            continue;
+        }
+
+        // Preserve the intended heading while projecting it into the ground
+        // plane. MakeFromXZ then derives stable pitch and roll from the slope.
+        FVector Forward = Anchor->GetActorForwardVector();
+        Forward = FVector::VectorPlaneProject(Forward, SurfaceNormal);
+        if (!Forward.Normalize())
+        {
+            const float YawRadians =
+                FMath::DegreesToRadians(Anchor->GetActorRotation().Yaw);
+            Forward = FVector::VectorPlaneProject(
+                FVector(FMath::Cos(YawRadians), FMath::Sin(YawRadians), 0.0f),
+                SurfaceNormal).GetSafeNormal();
+        }
+        if (Forward.IsNearlyZero())
+        {
+            ++MissedCount;
+            continue;
+        }
+
+        const FVector SnappedLocation =
+            Hit.ImpactPoint + SurfaceNormal * VehicleCollisionHalfHeightCm;
+        const FRotator SnappedRotation =
+            FRotationMatrix::MakeFromXZ(Forward, SurfaceNormal).Rotator();
+
+        Anchor->Modify();
+        Anchor->SetActorLocationAndRotation(
+            SnappedLocation, SnappedRotation, false, nullptr,
+            ETeleportType::TeleportPhysics);
+        Anchor->PostEditMove(true);
+        Anchor->MarkPackageDirty();
+        ++SnappedCount;
+    }
+
+    GEditor->RedrawLevelEditingViewports(true);
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP vehicle ground snap: snapped %d anchor(s); %d had no usable surface."),
+        SnappedCount, MissedCount);
 }
 
 TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnPeopleEditorTab(

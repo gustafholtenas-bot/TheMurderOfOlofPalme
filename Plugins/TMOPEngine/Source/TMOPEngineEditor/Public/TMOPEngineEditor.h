@@ -17,6 +17,7 @@ private:
     void OpenPeopleEditor();
     void GenerateExitChildrenFromSelection();
     void GenerateIntersectionCornersFromSelection();
+    void SnapSelectedVehicleAnchorsToGround();
     TSharedRef<SDockTab> SpawnPeopleEditorTab(const FSpawnTabArgs& Args);
 
     static const FName PeopleEditorTabName;

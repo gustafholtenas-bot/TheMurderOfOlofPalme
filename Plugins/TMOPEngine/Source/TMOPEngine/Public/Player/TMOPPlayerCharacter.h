@@ -22,6 +22,9 @@ class UTMOPPauseMenuWidget;
 class ATMOPWorldItem;
 class UTMOPInteractionPromptWidget;
 class UTMOPDialogWidget;
+class UTMOPNewspaperReaderWidget;
+class UTMOPNewspaperItemDefinition;
+class UTMOPItemDefinition;
 class ATMOPHistoricalAgent;
 class UTMOPVehicleTakeoverComponent;
 class UTMOPPlayerVehicleDrivingComponent;
@@ -115,6 +118,18 @@ public:
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Dialog")
     bool bDialogOpen = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Newspaper")
+    TSubclassOf<UTMOPNewspaperReaderWidget> NewspaperReaderWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Newspaper")
+    bool bCreateNewspaperReaderWidget = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Newspaper")
+    TObjectPtr<UTMOPNewspaperReaderWidget> NewspaperReaderWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Newspaper")
+    bool bNewspaperOpen = false;
 
     /** BeforeShot is used before this time; AfterShot is used at and after it. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Dialog")
@@ -294,6 +309,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Dialog")
     void ClosePersonDialog();
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Newspaper")
+    bool OpenNewspaper(UTMOPNewspaperItemDefinition* Newspaper);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Newspaper")
+    void CloseNewspaper();
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|Inventory")
     bool DropEquippedItem();
 
@@ -329,14 +350,18 @@ private:
     void UpdateInteractionPrompt();
     void SetSprinting(bool bEnabled, bool bExtraSprint = false);
 
+    UFUNCTION()
+    void HandleItemMenuRequested(UTMOPItemDefinition* Item);
+
     bool bRightShoulderCamera = true;
     bool bInputMappingContextAdded = false;
     bool bPlayerInterfaceInitialized = false;
     bool bQuickInventoryFallbackHeld = false;
     bool bPauseFallbackHeld = false;
     bool bClockWasRunningBeforePause = false;
+    bool bClockWasRunningBeforeNewspaper = false;
+    bool bNewspaperPausedSimulation = false;
     bool bDropFallbackHeld = false;
     bool bInteractFallbackHeld = false;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
 };
-

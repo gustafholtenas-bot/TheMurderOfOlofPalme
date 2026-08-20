@@ -18,6 +18,7 @@ enum class ETMOPItemType : uint8
     Pistol,
     BaseballBat,
     Cigarette,
+    Newspaper,
     Other
 };
 

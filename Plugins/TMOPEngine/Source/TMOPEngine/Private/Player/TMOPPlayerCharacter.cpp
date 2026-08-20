@@ -16,6 +16,7 @@
 #include "Items/TMOPPlayerItemUseComponent.h"
 #include "Items/TMOPInteractable.h"
 #include "Items/TMOPWorldItem.h"
+#include "Newspapers/TMOPNewspaperItemDefinition.h"
 #include "Player/TMOPPlayerActionComponent.h"
 #include "Player/TMOPVehicleTakeoverComponent.h"
 #include "Player/TMOPPlayerVehicleDrivingComponent.h"
@@ -27,6 +28,7 @@
 #include "UI/TMOPPauseMenuWidget.h"
 #include "UI/TMOPInteractionPromptWidget.h"
 #include "UI/TMOPDialogWidget.h"
+#include "UI/TMOPNewspaperReaderWidget.h"
 #include "Blueprint/UserWidget.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
@@ -89,6 +91,10 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
 {
     APlayerController* PlayerController = Cast<APlayerController>(Controller);
     if (!IsValid(PlayerController)) return;
+
+    if (IsValid(Inventory.Get()))
+        Inventory->OnItemMenuRequested.AddUniqueDynamic(
+            this, &ATMOPPlayerCharacter::HandleItemMenuRequested);
 
     if (!bInputMappingContextAdded)
     {
@@ -158,10 +164,31 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         }
     }
 
+    if (bCreateNewspaperReaderWidget &&
+        !IsValid(NewspaperReaderWidget.Get()))
+    {
+        TSubclassOf<UTMOPNewspaperReaderWidget> WidgetClass =
+            NewspaperReaderWidgetClass;
+        if (!WidgetClass)
+            WidgetClass = UTMOPNewspaperReaderWidget::StaticClass();
+        NewspaperReaderWidget =
+            CreateWidget<UTMOPNewspaperReaderWidget>(
+                PlayerController, WidgetClass);
+        if (IsValid(NewspaperReaderWidget.Get()))
+        {
+            NewspaperReaderWidget->InitializeReader(this);
+            NewspaperReaderWidget->AddToViewport(90);
+            NewspaperReaderWidget->SetVisibility(
+                ESlateVisibility::Collapsed);
+        }
+    }
+
     bPlayerInterfaceInitialized =
         bInputMappingContextAdded &&
         (!bCreateQuickInventoryWidget || IsValid(QuickInventoryWidget.Get())) &&
-        (!bCreatePauseMenuWidget || IsValid(PauseMenuWidget.Get()));
+        (!bCreatePauseMenuWidget || IsValid(PauseMenuWidget.Get())) &&
+        (!bCreateNewspaperReaderWidget ||
+            IsValid(NewspaperReaderWidget.Get()));
 }
 
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -306,6 +333,11 @@ void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled, const bool bExtraSp
 
 void ATMOPPlayerCharacter::InputInteract()
 {
+    if (bNewspaperOpen)
+    {
+        CloseNewspaper();
+        return;
+    }
     if (bDialogOpen)
     {
         ClosePersonDialog();
@@ -377,6 +409,7 @@ bool ATMOPPlayerCharacter::DropEquippedItem()
 
 void ATMOPPlayerCharacter::InputPrimaryAction()
 {
+    if (bNewspaperOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Primary,
         ETMOPItemInputPhase::Started)) return;
@@ -385,6 +418,7 @@ void ATMOPPlayerCharacter::InputPrimaryAction()
 
 void ATMOPPlayerCharacter::InputSecondaryActionStarted()
 {
+    if (bNewspaperOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Secondary,
         ETMOPItemInputPhase::Started)) return;
@@ -400,6 +434,11 @@ void ATMOPPlayerCharacter::InputSecondaryActionEnded()
 
 void ATMOPPlayerCharacter::InputCancel()
 {
+    if (bNewspaperOpen)
+    {
+        CloseNewspaper();
+        return;
+    }
     if (bDialogOpen)
     {
         ClosePersonDialog();
@@ -475,6 +514,7 @@ void ATMOPPlayerCharacter::TogglePauseMenu()
 void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 {
     if (bPauseMenuOpen == bOpen || !IsValid(PauseMenuWidget.Get())) return;
+    if (bOpen && bNewspaperOpen) CloseNewspaper();
     if (bOpen && bDialogOpen) ClosePersonDialog();
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
@@ -510,6 +550,78 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
     }
 }
 
+void ATMOPPlayerCharacter::HandleItemMenuRequested(
+    UTMOPItemDefinition* Item)
+{
+    if (UTMOPNewspaperItemDefinition* Newspaper =
+        Cast<UTMOPNewspaperItemDefinition>(Item))
+    {
+        OpenNewspaper(Newspaper);
+    }
+}
+
+bool ATMOPPlayerCharacter::OpenNewspaper(
+    UTMOPNewspaperItemDefinition* Newspaper)
+{
+    if (!IsValid(Newspaper) || Newspaper->Pages.IsEmpty() ||
+        bPauseMenuOpen || !IsValid(NewspaperReaderWidget.Get()))
+        return false;
+    if (bDialogOpen) ClosePersonDialog();
+    if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
+    if (!NewspaperReaderWidget->OpenNewspaper(Newspaper)) return false;
+
+    bNewspaperOpen = true;
+    bNewspaperPausedSimulation = Newspaper->bPauseSimulationWhileReading;
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (bNewspaperPausedSimulation)
+    {
+        bClockWasRunningBeforeNewspaper =
+            IsValid(Clock) && Clock->IsClockRunning();
+        if (IsValid(Clock)) Clock->PauseClock();
+    }
+
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (IsValid(PC))
+    {
+        if (bNewspaperPausedSimulation) PC->SetPause(true);
+        PC->bShowMouseCursor = true;
+        FInputModeGameAndUI Mode;
+        Mode.SetWidgetToFocus(NewspaperReaderWidget->TakeWidget());
+        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+        PC->SetInputMode(Mode);
+        PC->SetIgnoreMoveInput(true);
+        PC->SetIgnoreLookInput(true);
+    }
+    return true;
+}
+
+void ATMOPPlayerCharacter::CloseNewspaper()
+{
+    if (!bNewspaperOpen) return;
+    if (IsValid(NewspaperReaderWidget.Get()))
+    {
+        NewspaperReaderWidget->DismissReader();
+    }
+
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (IsValid(PC))
+    {
+        if (bNewspaperPausedSimulation) PC->SetPause(false);
+        PC->bShowMouseCursor = false;
+        PC->SetInputMode(FInputModeGameOnly());
+        PC->SetIgnoreMoveInput(false);
+        PC->SetIgnoreLookInput(false);
+    }
+    if (IsValid(Clock) && bClockWasRunningBeforeNewspaper)
+        Clock->StartClock();
+    bClockWasRunningBeforeNewspaper = false;
+    bNewspaperPausedSimulation = false;
+    bNewspaperOpen = false;
+}
+
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
@@ -522,7 +634,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
                 FMath::Square(DialogMaximumDistanceCm))
             ClosePersonDialog();
     }
-    if (bUseDirectSprintKeyFallback)
+    if (!bNewspaperOpen && bUseDirectSprintKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bSprintHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
@@ -530,7 +642,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             && PC->IsInputKeyDown(ExtraSprintModifierKey);
         SetSprinting(bSprintHeld, bExtraHeld);
     }
-    if (bUseDirectQuickInventoryKeyFallback)
+    if (!bNewspaperOpen && bUseDirectQuickInventoryKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -543,7 +655,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             else InputQuickInventoryCompleted();
         }
     }
-    if (bUseDirectPauseKeyFallback)
+    if (!bNewspaperOpen && bUseDirectPauseKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -559,7 +671,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             }
         }
     }
-    if (bUseDirectDropKeyFallback)
+    if (!bNewspaperOpen && bUseDirectDropKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(DropItemFallbackKey);
@@ -569,7 +681,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             if (bKeyHeld) DropEquippedItem();
         }
     }
-    if (bUseDirectInteractKeyFallback)
+    if (!bNewspaperOpen && bUseDirectInteractKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(InteractFallbackKey);
@@ -778,4 +890,3 @@ FText ATMOPPlayerCharacter::GetInteractKeyDisplayText() const
         ? InteractFallbackKey.GetDisplayName(false)
         : FText::FromString(TEXT("E"));
 }
-
