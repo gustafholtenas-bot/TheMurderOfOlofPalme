@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "TMOPCore",
+	"Description": "TMOP",
+	"Category": "Other",
+	"CreatedBy": "gustaf holtenas",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "TMOPCore",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
