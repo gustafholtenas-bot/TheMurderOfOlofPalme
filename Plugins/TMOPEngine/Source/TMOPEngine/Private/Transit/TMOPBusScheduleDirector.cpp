@@ -1,7 +1,11 @@
 #include "Transit/TMOPBusScheduleDirector.h"
 
 #include "Engine/World.h"
+#include "Engine/DataTable.h"
+#include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
+#include "People/TMOPPersonProfileTypes.h"
+#include "People/TMOPPersonRegistryDirector.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
@@ -20,6 +24,15 @@ ATMOPBusScheduleDirector::ATMOPBusScheduleDirector()
 void ATMOPBusScheduleDirector::BeginPlay()
 {
     Super::BeginPlay();
+
+    // Buses must exist before the people director evaluates BusSeat or
+    // EnterVehicle entries for the same simulation second.
+    if (ATMOPPersonRegistryDirector* People = FindPeopleDirector())
+    {
+        People->AddTickPrerequisiteActor(this);
+        if (!IsValid(PersonProfileTable))
+            PersonProfileTable = People->PersonProfileTable;
+    }
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (Clock != nullptr)
@@ -60,8 +73,13 @@ bool ATMOPBusScheduleDirector::ResolveSchedule(const int32 LoopNumber)
     for (int32 Index = 0; Index < ScheduledRuns.Num(); ++Index)
     {
         const FTMOPBusScheduledRun& Run = ScheduledRuns[Index];
-        int32 Seconds = Run.ExactStartTime.ToSecondsFromMidnight();
-        if (!Run.bUseExactStartTime)
+        const FTMOPBusRunPeopleRow* RunPeople = FindRunPeopleRow(Run.RunId);
+        if (RunPeople != nullptr && !RunPeople->bEnabledInSimulation) continue;
+        int32 Seconds = RunPeople != nullptr && RunPeople->bOverrideExactStartTime
+            ? RunPeople->ExactStartTime.ToSecondsFromMidnight()
+            : Run.ExactStartTime.ToSecondsFromMidnight();
+        if (!(RunPeople != nullptr && RunPeople->bOverrideExactStartTime) &&
+            !Run.bUseExactStartTime)
         {
             const int32 Earliest = Run.EarliestStartTime.ToSecondsFromMidnight();
             const int32 Latest = Run.LatestStartTime.ToSecondsFromMidnight();
@@ -187,15 +205,21 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     if (UTMOPBusPassengerComponent* Passengers =
         Bus->FindComponentByClass<UTMOPBusPassengerComponent>())
     {
-        if (!Passengers->AssignScheduledDriver(Run.DriverEntityId, Run.RunId))
+        const FName ResolvedDriverEntityId = ResolveDriverEntityId(Run);
+        if (!Passengers->AssignScheduledDriver(ResolvedDriverEntityId, Run.RunId))
         {
             UE_LOG(LogTemp, Error,
                 TEXT("TMOP bus '%s': scheduled driver '%s' could not be assigned."),
-                *Runtime.RunId.ToString(), *Run.DriverEntityId.ToString());
+                *Runtime.RunId.ToString(), *ResolvedDriverEntityId.ToString());
             Bus->Destroy();
             return false;
         }
-        if (!Passengers->InitializePassengerManifest(Run.PassengerManifest, Run.RunId))
+        // Clear a manifest inherited from the bus Blueprint as well as the
+        // per-run asset; otherwise BeginPlay may have initialized duplicate
+        // passengers before this director applies the people-timeline mode.
+        UTMOPBusPassengerManifest* ManifestToUse =
+            bUsePeopleTimelinesForPassengers ? nullptr : Run.PassengerManifest.Get();
+        if (!Passengers->InitializePassengerManifest(ManifestToUse, Run.RunId))
         {
             UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': passenger manifest validation failed."),
                 *Runtime.RunId.ToString());
@@ -203,7 +227,7 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
             return false;
         }
     }
-    else if (IsValid(Run.PassengerManifest))
+    else if (!bUsePeopleTimelinesForPassengers && IsValid(Run.PassengerManifest))
     {
         UE_LOG(LogTemp, Error,
             TEXT("TMOP bus '%s': a PassengerManifest is assigned but BusClass lacks TMOPBusPassengerComponent."),
@@ -224,6 +248,10 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     OnBusRunSpawned.Broadcast(Runtime.RunId, Bus);
     UE_LOG(LogTemp, Display, TEXT("TMOP bus '%s': spawn succeeded."),
         *Runtime.RunId.ToString());
+    if (bUsePeopleTimelinesForPassengers)
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP bus '%s': %d enabled passenger profile(s) target this run in DT_TMOP_People."),
+            *Runtime.RunId.ToString(), GetTimelinePassengerCount(Runtime.RunId));
     return true;
 }
 
@@ -294,20 +322,99 @@ int32 ATMOPBusScheduleDirector::GetActiveBusCount() const
     return Count;
 }
 
+ATMOPPersonRegistryDirector* ATMOPBusScheduleDirector::FindPeopleDirector() const
+{
+    UWorld* World = GetWorld();
+    if (World == nullptr) return nullptr;
+    for (TActorIterator<ATMOPPersonRegistryDirector> It(World); It; ++It)
+        return *It;
+    return nullptr;
+}
+
+const FTMOPBusRunPeopleRow* ATMOPBusScheduleDirector::FindRunPeopleRow(
+    const FName RunId) const
+{
+    if (RunId.IsNone() || !IsValid(BusRunConfigurationTable) ||
+        BusRunConfigurationTable->GetRowStruct() != FTMOPBusRunPeopleRow::StaticStruct())
+        return nullptr;
+    return BusRunConfigurationTable->FindRow<FTMOPBusRunPeopleRow>(
+        RunId, TEXT("TMOPBusRunPeopleLookup"), false);
+}
+
+FName ATMOPBusScheduleDirector::ResolveDriverEntityId(
+    const FTMOPBusScheduledRun& Run) const
+{
+    const FTMOPBusRunPeopleRow* Row = FindRunPeopleRow(Run.RunId);
+    return Row != nullptr && !Row->DriverEntityId.IsNone()
+        ? Row->DriverEntityId : Run.DriverEntityId;
+}
+
+int32 ATMOPBusScheduleDirector::GetTimelinePassengerCount(const FName RunId) const
+{
+    if (RunId.IsNone() || !IsValid(PersonProfileTable) ||
+        PersonProfileTable->GetRowStruct() != FTMOPPersonProfileRow::StaticStruct())
+        return 0;
+
+    int32 Count = 0;
+    for (const FName RowName : PersonProfileTable->GetRowNames())
+    {
+        const FTMOPPersonProfileRow* Person =
+            PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("TMOPBusTimelinePassengerCount"), false);
+        if (Person == nullptr || !Person->bSpawnInSimulation) continue;
+        for (const FTMOPPersonTimelineEntry& Entry : Person->Timeline)
+            if (Entry.Usage != ETMOPPersonTimelineUsage::DocumentationOnly &&
+                Entry.TargetEntityId == RunId &&
+                (Entry.LocationType == ETMOPPersonLocationType::BusSeat ||
+                 Entry.LocationType == ETMOPPersonLocationType::StandingInVehicle ||
+                 Entry.Action == ETMOPPersonTimelineAction::EnterVehicle))
+            {
+                ++Count;
+                break;
+            }
+    }
+    return Count;
+}
+
 bool ATMOPBusScheduleDirector::ValidateSchedule(TArray<FString>& OutErrors) const
 {
     OutErrors.Reset();
     UTMOPTrafficNetworkSubsystem* Network = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
     TSet<FName> RunIds;
+
+    TSet<FName> KnownPeople;
+    if (bUsePeopleTimelinesForPassengers)
+    {
+        if (!IsValid(PersonProfileTable) ||
+            PersonProfileTable->GetRowStruct() != FTMOPPersonProfileRow::StaticStruct())
+            OutErrors.Add(TEXT("People timelines are enabled but PersonProfileTable is missing or has the wrong row structure."));
+        else
+            for (const FName PersonRowName : PersonProfileTable->GetRowNames())
+                if (const FTMOPPersonProfileRow* Person =
+                    PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
+                        PersonRowName, TEXT("TMOPBusValidatePeople"), false))
+                    KnownPeople.Add(Person->EntityId);
+    }
+    if (IsValid(BusRunConfigurationTable) &&
+        BusRunConfigurationTable->GetRowStruct() != FTMOPBusRunPeopleRow::StaticStruct())
+        OutErrors.Add(TEXT("BusRunConfigurationTable has the wrong row structure."));
     for (int32 Index = 0; Index < ScheduledRuns.Num(); ++Index)
     {
         const FTMOPBusScheduledRun& Run = ScheduledRuns[Index];
         if (Run.RunId.IsNone() || RunIds.Contains(Run.RunId))
             OutErrors.Add(FString::Printf(TEXT("Run %d has missing or duplicate RunId."), Index));
         RunIds.Add(Run.RunId);
+        const FTMOPBusRunPeopleRow* RunPeople = FindRunPeopleRow(Run.RunId);
+        if (RunPeople != nullptr && !RunPeople->bEnabledInSimulation) continue;
         if (!IsValid(Run.RouteData)) OutErrors.Add(FString::Printf(TEXT("Run %d has no RouteData."), Index));
         if (Run.BusClass == nullptr) OutErrors.Add(FString::Printf(TEXT("Run %d has no BusClass."), Index));
+        const FName DriverEntityId = ResolveDriverEntityId(Run);
+        if (bUsePeopleTimelinesForPassengers && !DriverEntityId.IsNone() &&
+            !KnownPeople.Contains(DriverEntityId))
+            OutErrors.Add(FString::Printf(
+                TEXT("Run '%s' references missing driver '%s' in DT_TMOP_People."),
+                *Run.RunId.ToString(), *DriverEntityId.ToString()));
         if (Network == nullptr || !IsValid(Network->FindLane(Run.InitialLaneId)))
             OutErrors.Add(FString::Printf(TEXT("Run %d has invalid InitialLaneId."), Index));
         if (!Run.bUseExactStartTime &&

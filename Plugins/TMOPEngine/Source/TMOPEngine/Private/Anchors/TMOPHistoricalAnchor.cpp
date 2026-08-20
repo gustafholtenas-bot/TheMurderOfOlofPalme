@@ -35,6 +35,15 @@ void ATMOPHistoricalAnchor::OnConstruction(const FTransform& Transform)
 {
     Super::OnConstruction(Transform);
 
+    // Anchor display names are identifiers by design. Keeping this automatic
+    // removes duplicated manual editor work and prevents stale labels after an
+    // EntityId rename.
+    const FName AnchorId = GetAnchorId();
+    if (!AnchorId.IsNone())
+    {
+        DisplayName = FText::FromName(AnchorId);
+    }
+
     if (DebugLabel != nullptr)
     {
         const FString LabelText = !DisplayName.IsEmpty()

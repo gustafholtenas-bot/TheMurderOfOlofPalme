@@ -1,12 +1,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "GameFramework/Actor.h"
 #include "Agents/TMOPAgentTypes.h"
 #include "Time/TMOPTime.h"
 #include "TMOPBusScheduleDirector.generated.h"
 
 class ATMOPVehicleBase;
+class ATMOPPersonRegistryDirector;
+class UDataTable;
 class UTMOPBusPassengerManifest;
 class UTMOPBusRouteData;
 
@@ -17,6 +20,38 @@ enum class ETMOPBusRunState : uint8
     Active,
     Completed,
     Failed
+};
+
+/** DataTable overlay for source-backed driver and activation data per RunId. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPBusRunPeopleRow : public FTableRowBase
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run")
+    FName RunId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run")
+    bool bEnabledInSimulation = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run")
+    FName DriverEntityId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run|Time")
+    bool bOverrideExactStartTime = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run|Time",
+        meta=(EditCondition="bOverrideExactStartTime"))
+    FTMOPTime ExactStartTime = FTMOPTime(23, 0, 0);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run|Source")
+    ETMOPHistoricalConfidence Confidence = ETMOPHistoricalConfidence::Documented;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run|Source")
+    FString SourceReference;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Run|Source")
+    FString Notes;
 };
 
 USTRUCT(BlueprintType)
@@ -121,6 +156,26 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     TArray<FTMOPBusScheduledRun> ScheduledRuns;
 
+    /**
+     * Authoritative person table for historical drivers and passengers.
+     * When empty, the director reuses the table assigned to the world's
+     * TMOPPersonRegistryDirector.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|People")
+    TObjectPtr<UDataTable> PersonProfileTable;
+
+    /** Optional DT_TMOP_BusRuns overlay. Row Name and RunId must match. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|People")
+    TObjectPtr<UDataTable> BusRunConfigurationTable;
+
+    /**
+     * Passenger movement is read from DT_TMOP_People timeline entries whose
+     * TargetEntityId equals the bus RunId. Legacy PassengerManifest assets are
+     * ignored while this is enabled, preventing duplicate passengers.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|People")
+    bool bUsePeopleTimelinesForPassengers = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     int32 ScheduleSeed = 19860228;
 
@@ -155,6 +210,10 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Bus Schedule")
     int32 GetActiveBusCount() const;
 
+    /** Number of enabled people with at least one runtime timeline entry for RunId. */
+    UFUNCTION(BlueprintPure, Category="TMOP|Bus Schedule|People")
+    int32 GetTimelinePassengerCount(FName RunId) const;
+
 private:
     UFUNCTION()
     void HandleSecondChanged(FTMOPTime NewTime);
@@ -165,6 +224,9 @@ private:
     bool SpawnRun(FTMOPBusRunRuntime& Runtime);
     void CompleteRun(FTMOPBusRunRuntime& Runtime);
     void MonitorActiveRuns(FTMOPTime CurrentTime);
+    ATMOPPersonRegistryDirector* FindPeopleDirector() const;
+    const FTMOPBusRunPeopleRow* FindRunPeopleRow(FName RunId) const;
+    FName ResolveDriverEntityId(const FTMOPBusScheduledRun& Run) const;
 
     UPROPERTY(Transient)
     TArray<FTMOPBusRunRuntime> RuntimeRuns;
