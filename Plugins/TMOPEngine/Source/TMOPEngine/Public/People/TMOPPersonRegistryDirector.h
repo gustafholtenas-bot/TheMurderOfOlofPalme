@@ -73,6 +73,11 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|People|Appearance")
     bool ValidateAppearanceAssetTable(TArray<FString>& OutErrors) const;
 
+    /** Details-panel wrapper for validating the configured appearance catalog. */
+    UFUNCTION(CallInEditor, Category="TMOP|People|Appearance",
+        meta=(DisplayName="Validate Appearance Asset Table"))
+    void ValidateAppearanceAssetTableInEditor();
+
     UFUNCTION(BlueprintCallable, Category="TMOP|People|Groups")
     bool ValidateGroupTable(TArray<FString>& OutErrors) const;
 

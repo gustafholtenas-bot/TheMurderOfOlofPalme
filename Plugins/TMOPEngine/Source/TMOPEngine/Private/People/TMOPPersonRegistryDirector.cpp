@@ -1119,6 +1119,25 @@ bool ATMOPPersonRegistryDirector::ValidateAppearanceAssetTable(
     return OutErrors.IsEmpty();
 }
 
+void ATMOPPersonRegistryDirector::ValidateAppearanceAssetTableInEditor()
+{
+    TArray<FString> Errors;
+    if (ValidateAppearanceAssetTable(Errors))
+    {
+        const int32 RowCount = IsValid(AppearanceAssetTable)
+            ? AppearanceAssetTable->GetRowNames().Num() : 0;
+        UE_LOG(LogTemp, Display, TEXT(
+            "TMOP Appearance Asset Table validation passed: %d rows."), RowCount);
+        return;
+    }
+
+    UE_LOG(LogTemp, Error, TEXT(
+        "TMOP Appearance Asset Table validation failed with %d error(s):"),
+        Errors.Num());
+    for (const FString& Error : Errors)
+        UE_LOG(LogTemp, Error, TEXT("  - %s"), *Error);
+}
+
 bool ATMOPPersonRegistryDirector::ValidateGroupTable(
     TArray<FString>& OutErrors) const
 {

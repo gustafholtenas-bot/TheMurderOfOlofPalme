@@ -1,0 +1,35 @@
+Category,SwedishOrEnglishText,CatalogTag,Notes
+Color,mörkblå|mörk blå|marinblå|navy,DarkBlue,Adds Dark too
+Color,svart|black,Black,Adds Dark too
+Color,mörkgrå|mörk grå,DarkGrey,Adds Dark too
+Color,grå|grey|gray,Grey,
+Color,mörkbrun|mörk brun,DarkBrown,Adds Dark too
+Color,brun|brown,Brown,
+Color,beige,Beige,
+Color,oliv,Olive,
+Color,röd|red,Red,
+Color,vit|white,White,
+Color,blå|blue,Blue,
+Outerwear,täckjacka|jacka|jacket,Jacket,
+Outerwear,skinnjacka|läderjacka,LeatherJacket,Also detects Leather
+Outerwear,rock|kappa|coat,Coat,
+Outerwear,parkas|parka,Parka,
+Outerwear,seglarjacka,SailingJacket,
+UpperBody,tröja|pullover,Sweater,
+UpperBody,skjorta,Shirt,
+Trousers,byxor|byxa,Trousers,
+Trousers,jeans,Jeans,
+Trousers,kostymbyxor,DressTrousers,
+Footwear,sko|skor,Shoes,
+Footwear,stövel|stövlar|känga|kängor,Boots,
+Gloves,handske|handskar|vante|vantar,Gloves,Read from OtherCharacteristics too
+Headwear,stickad mössa|yllemössa,KnitCap,
+Headwear,pälsmössa,FurHat,
+Headwear,keps,Cap,
+Headwear,hatt,Hat,
+Headwear,mössa,Cap,Generic fallback
+Headwear,huva,Hood,
+Shape,lång|long,Long,
+Shape,kort|short,Short,
+Material,ylle|ull,Wool,
+Material,skinn|läder,Leather,
