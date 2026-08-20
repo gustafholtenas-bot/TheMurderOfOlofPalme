@@ -7,6 +7,7 @@
 #include "EngineUtils.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "IStructureDetailsView.h"
+#include "People/TMOPAppearanceResolver.h"
 #include "PropertyEditorModule.h"
 #include "Styling/AppStyle.h"
 #include "UObject/StructOnScope.h"
@@ -101,6 +102,26 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                 SNew(SButton)
                 .Text(LOCTEXT("Reload", "Reload"))
                 .OnClicked(this, &STMOPPeopleEditor::ReloadPerson)
+            ]
+            + SHorizontalBox::Slot()
+            .AutoWidth()
+            .Padding(4.0f, 0.0f)
+            [
+                SNew(SButton)
+                .Text(LOCTEXT("ResolveAppearance", "Generate Appearance"))
+                .ToolTipText(LOCTEXT("ResolveAppearanceTip",
+                    "Resolve the selected person's body, face and clothing from the evidence fields."))
+                .OnClicked(this, &STMOPPeopleEditor::ResolveCurrentAppearance)
+            ]
+            + SHorizontalBox::Slot()
+            .AutoWidth()
+            .Padding(4.0f, 0.0f)
+            [
+                SNew(SButton)
+                .Text(LOCTEXT("ValidateAllAppearances", "Validate All Appearances"))
+                .ToolTipText(LOCTEXT("ValidateAllAppearancesTip",
+                    "Resolve every person and report known descriptions that lack a matching asset."))
+                .OnClicked(this, &STMOPPeopleEditor::ValidateAllAppearances)
             ]
             + SHorizontalBox::Slot()
             .AutoWidth()
@@ -511,6 +532,8 @@ void STMOPPeopleEditor::LoadDefaultTable()
         nullptr, DefaultEventTablePath);
     VehicleTable = LoadObject<UDataTable>(
         nullptr, DefaultVehicleTablePath);
+    AppearanceTable = LoadObject<UDataTable>(
+        nullptr, DefaultAppearanceTablePath);
     if (!PeopleTable.IsValid() ||
         PeopleTable->GetRowStruct() !=
             FTMOPPersonProfileRow::StaticStruct())
@@ -642,6 +665,7 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
             CharacteristicsStructData->GetStructMemory());
     Characteristics->AgeAtEvent = WorkingRow.AgeAtEvent;
     Characteristics->HeightCentimeters = WorkingRow.HeightCentimeters;
+    Characteristics->AppearanceProfile = WorkingRow.AppearanceProfile;
     Characteristics->ReferenceImage = WorkingRow.ReferenceImage;
     Characteristics->HairColorCategory = WorkingRow.HairColorCategory;
     Characteristics->HeadwearCategory = WorkingRow.HeadwearCategory;
@@ -708,6 +732,7 @@ void STMOPPeopleEditor::CommitPersonDetailEdits()
                 CharacteristicsStructData->GetStructMemory());
         WorkingRow.AgeAtEvent = Characteristics->AgeAtEvent;
         WorkingRow.HeightCentimeters = Characteristics->HeightCentimeters;
+        WorkingRow.AppearanceProfile = Characteristics->AppearanceProfile;
         WorkingRow.ReferenceImage = Characteristics->ReferenceImage;
         WorkingRow.HairColorCategory = Characteristics->HairColorCategory;
         WorkingRow.HeadwearCategory = Characteristics->HeadwearCategory;
@@ -1319,6 +1344,100 @@ FReply STMOPPeopleEditor::ReloadPerson()
     return FReply::Handled();
 }
 
+FReply STMOPPeopleEditor::ResolveCurrentAppearance()
+{
+    if (SelectedRowName.IsNone())
+    {
+        SetStatus(LOCTEXT("NoAppearancePersonSelected",
+            "Select a person before generating an appearance."),
+            FLinearColor::Red);
+        return FReply::Handled();
+    }
+    CommitEntryEdits();
+    CommitPersonDetailEdits();
+    if (!AppearanceTable.IsValid())
+        AppearanceTable = LoadObject<UDataTable>(
+            nullptr, DefaultAppearanceTablePath);
+    UDataTable* Catalog = AppearanceTable.Get();
+    if (!IsValid(Catalog) || Catalog->GetRowStruct() !=
+        FTMOPAppearanceAssetRow::StaticStruct())
+    {
+        SetStatus(LOCTEXT("MissingAppearanceCatalog",
+            "Appearance catalog is missing. Run Setup/05_DataTableBuilder first."),
+            FLinearColor::Red);
+        return FReply::Handled();
+    }
+
+    FTMOPResolvedAppearance Resolved;
+    UTMOPAppearanceResolver::ResolveAppearance(WorkingRow, Catalog, Resolved);
+    int32 UnknownParts = 0;
+    const TArray<FString> Warnings =
+        ValidateAppearanceRow(WorkingRow, Catalog, &UnknownParts);
+    const FString WarningSuffix = Warnings.IsEmpty()
+        ? FString() : FString::Printf(TEXT(" | WARNING: %s"), *Warnings[0]);
+    const FString Summary = FString::Printf(
+        TEXT("Appearance: body %s | face %s | coat %s | upper %s | trousers %s | shoes %s | %d unknown part(s)%s"),
+        *Resolved.Body.CatalogId.ToString(), *Resolved.Face.CatalogId.ToString(),
+        *Resolved.Outerwear.CatalogId.ToString(),
+        *Resolved.UpperBody.CatalogId.ToString(),
+        *Resolved.Trousers.CatalogId.ToString(),
+        *Resolved.Footwear.CatalogId.ToString(), UnknownParts,
+        *WarningSuffix);
+    SetStatus(FText::FromString(Summary), Warnings.IsEmpty()
+        ? FLinearColor(0.4f, 1.0f, 0.4f)
+        : FLinearColor(1.0f, 0.65f, 0.15f));
+    return FReply::Handled();
+}
+
+FReply STMOPPeopleEditor::ValidateAllAppearances()
+{
+    if (!AppearanceTable.IsValid())
+        AppearanceTable = LoadObject<UDataTable>(
+            nullptr, DefaultAppearanceTablePath);
+    UDataTable* Table = PeopleTable.Get();
+    UDataTable* Catalog = AppearanceTable.Get();
+    if (!IsValid(Table) || !IsValid(Catalog) ||
+        Catalog->GetRowStruct() != FTMOPAppearanceAssetRow::StaticStruct())
+    {
+        SetStatus(LOCTEXT("CannotValidateAppearances",
+            "Cannot validate appearances: people table or appearance catalog is missing."),
+            FLinearColor::Red);
+        return FReply::Handled();
+    }
+
+    int32 AffectedPeople = 0;
+    int32 WarningCount = 0;
+    int32 UnknownPartCount = 0;
+    for (const FName RowName : Table->GetRowNames())
+    {
+        const FTMOPPersonProfileRow* Row =
+            Table->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("TMOP appearance batch validation"), false);
+        if (Row == nullptr) continue;
+        int32 PersonUnknownParts = 0;
+        const TArray<FString> Warnings =
+            ValidateAppearanceRow(*Row, Catalog, &PersonUnknownParts);
+        UnknownPartCount += PersonUnknownParts;
+        if (!Warnings.IsEmpty())
+        {
+            ++AffectedPeople;
+            WarningCount += Warnings.Num();
+            for (const FString& Warning : Warnings)
+                UE_LOG(LogTemp, Warning, TEXT("TMOP Appearance [%s]: %s"),
+                    *RowName.ToString(), *Warning);
+        }
+    }
+
+    const FString Summary = FString::Printf(
+        TEXT("Appearance validation: %d people, %d warning(s) affecting %d people, %d source-unknown parts. Details are in Output Log."),
+        Table->GetRowNames().Num(), WarningCount, AffectedPeople,
+        UnknownPartCount);
+    SetStatus(FText::FromString(Summary), WarningCount == 0
+        ? FLinearColor(0.4f, 1.0f, 0.4f)
+        : FLinearColor(1.0f, 0.65f, 0.15f));
+    return FReply::Handled();
+}
+
 FText STMOPPeopleEditor::GetSelectedPersonTitle() const
 {
     if (SelectedRowName.IsNone())
@@ -1543,6 +1662,65 @@ TArray<FString> STMOPPeopleEditor::ValidateWorkingRow() const
         EntryIds.Add(EntryId);
     }
     return Errors;
+}
+
+TArray<FString> STMOPPeopleEditor::ValidateAppearanceRow(
+    const FTMOPPersonProfileRow& Row, UDataTable* Catalog,
+    int32* OutUnknownPartCount) const
+{
+    TArray<FString> Warnings;
+    if (OutUnknownPartCount != nullptr) *OutUnknownPartCount = 0;
+    if (!IsValid(Catalog) || Catalog->GetRowStruct() !=
+        FTMOPAppearanceAssetRow::StaticStruct())
+    {
+        Warnings.Add(TEXT("Appearance catalog is missing or uses the wrong Row Struct."));
+        return Warnings;
+    }
+
+    if (Row.AppearanceProfile.GenerationMode ==
+            ETMOPAppearanceGenerationMode::MetaHuman &&
+        Row.AgentClass == nullptr)
+    {
+        Warnings.Add(TEXT("MetaHuman mode requires a bespoke Agent Class so the correct head, body and groom components are spawned."));
+    }
+
+    FTMOPResolvedAppearance Resolved;
+    UTMOPAppearanceResolver::ResolveAppearance(Row, Catalog, Resolved);
+    struct FNamedPart
+    {
+        const TCHAR* Label;
+        const FTMOPResolvedAppearancePart* Part;
+    };
+    const FNamedPart Parts[] = {
+        { TEXT("Body"), &Resolved.Body }, { TEXT("Face"), &Resolved.Face },
+        { TEXT("Hair"), &Resolved.Hair },
+        { TEXT("Facial hair"), &Resolved.FacialHair },
+        { TEXT("Outerwear"), &Resolved.Outerwear },
+        { TEXT("Upper body"), &Resolved.UpperBody },
+        { TEXT("Trousers"), &Resolved.Trousers },
+        { TEXT("Footwear"), &Resolved.Footwear },
+        { TEXT("Gloves"), &Resolved.Gloves },
+        { TEXT("Headwear"), &Resolved.Headwear },
+        { TEXT("Scarf"), &Resolved.Scarf },
+        { TEXT("Glasses"), &Resolved.Glasses } };
+    for (const FNamedPart& Named : Parts)
+    {
+        const FTMOPResolvedAppearancePart& Part = *Named.Part;
+        if (Part.bIntentionallyEmpty) continue;
+        if (Part.bSourceWasUnknown && Part.PartType != ETMOPAppearancePartType::Body &&
+            OutUnknownPartCount != nullptr)
+            ++(*OutUnknownPartCount);
+        if (Part.bUsesObscuredFallback && !Part.bSourceWasUnknown)
+            Warnings.Add(FString::Printf(
+                TEXT("%s has source evidence but no catalog asset matched it."),
+                Named.Label));
+        if (!Part.bUsesObscuredFallback &&
+            Part.PartType != ETMOPAppearancePartType::Body &&
+            Part.CatalogId.IsNone() && Part.Mesh.IsNull())
+            Warnings.Add(FString::Printf(
+                TEXT("%s resolved without an asset or fallback."), Named.Label));
+    }
+    return Warnings;
 }
 
 void STMOPPeopleEditor::SetStatus(

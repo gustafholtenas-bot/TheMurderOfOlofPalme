@@ -18,6 +18,10 @@ struct FTMOPPersonCharacteristicsEditorData
         meta=(ClampMin="0.0", DisplayName="Height Centimeters"))
     float HeightCentimeters = 0.0f;
 
+    UPROPERTY(EditAnywhere, Category="Visual Appearance",
+        meta=(DisplayName="Runtime Appearance Profile"))
+    FTMOPAppearanceProfile AppearanceProfile;
+
     UPROPERTY(EditAnywhere, Category="Image Reference",
         meta=(DisplayName="Reference Image"))
     TSoftObjectPtr<UTexture2D> ReferenceImage;

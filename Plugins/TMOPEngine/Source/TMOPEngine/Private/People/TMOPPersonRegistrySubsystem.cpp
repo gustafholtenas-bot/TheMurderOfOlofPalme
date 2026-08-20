@@ -2,11 +2,13 @@
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Engine/DataTable.h"
+#include "People/TMOPAppearanceAssetTypes.h"
 
 void UTMOPPersonRegistrySubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
     ProfileTable = nullptr;
+    AppearanceAssetTable = nullptr;
     ActiveAgents.Reset();
 }
 
@@ -14,7 +16,22 @@ void UTMOPPersonRegistrySubsystem::Deinitialize()
 {
     ActiveAgents.Reset();
     ProfileTable = nullptr;
+    AppearanceAssetTable = nullptr;
     Super::Deinitialize();
+}
+
+bool UTMOPPersonRegistrySubsystem::ConfigureAppearanceAssetTable(
+    UDataTable* NewAssetTable)
+{
+    if (NewAssetTable == nullptr)
+    {
+        AppearanceAssetTable = nullptr;
+        return true;
+    }
+    if (!IsValid(NewAssetTable) ||
+        NewAssetTable->GetRowStruct() != FTMOPAppearanceAssetRow::StaticStruct()) return false;
+    AppearanceAssetTable = NewAssetTable;
+    return true;
 }
 
 bool UTMOPPersonRegistrySubsystem::ConfigureProfileTable(UDataTable* NewProfileTable)

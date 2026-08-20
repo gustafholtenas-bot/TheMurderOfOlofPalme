@@ -50,6 +50,8 @@ private:
         TEXT("/Game/TMOP/Agents/People/DT_TMOP_HistoricalEvents.DT_TMOP_HistoricalEvents");
     static constexpr const TCHAR* DefaultVehicleTablePath =
         TEXT("/Game/TMOP/Vehicles/DT_TMOP_HistoricalVehicles.DT_TMOP_HistoricalVehicles");
+    static constexpr const TCHAR* DefaultAppearanceTablePath =
+        TEXT("/Game/TMOP/Characters/Appearance/Data/DT_TMOP_AppearanceAssets.DT_TMOP_AppearanceAssets");
 
     void LoadDefaultTable();
     void RefreshPeople();
@@ -95,6 +97,8 @@ private:
     FReply MoveTimelineEntryDown();
     FReply SavePerson();
     FReply ReloadPerson();
+    FReply ResolveCurrentAppearance();
+    FReply ValidateAllAppearances();
 
     FText GetSelectedPersonTitle() const;
     FText GetSelectedPersonSubtitle() const;
@@ -103,10 +107,14 @@ private:
     FSlateColor GetTimelineColor(int32 Index) const;
     bool EntryHasError(int32 Index, FString* OutMessage = nullptr) const;
     TArray<FString> ValidateWorkingRow() const;
+    TArray<FString> ValidateAppearanceRow(
+        const FTMOPPersonProfileRow& Row, UDataTable* Catalog,
+        int32* OutUnknownPartCount = nullptr) const;
 
     TWeakObjectPtr<UDataTable> PeopleTable;
     TWeakObjectPtr<UDataTable> EventTable;
     TWeakObjectPtr<UDataTable> VehicleTable;
+    TWeakObjectPtr<UDataTable> AppearanceTable;
     FName SelectedRowName = NAME_None;
     FTMOPPersonProfileRow WorkingRow;
     int32 SelectedTimelineIndex = INDEX_NONE;
@@ -137,4 +145,3 @@ private:
     TSharedPtr<SSearchableComboBox> SeatReferenceCombo;
     TSharedPtr<SSearchableComboBox> EventReferenceCombo;
 };
-

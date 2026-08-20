@@ -38,6 +38,26 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Person")
     float GetHeightCentimeters() const { return Profile.HeightCentimeters; }
 
+    UFUNCTION(BlueprintPure, Category="TMOP|Person|Appearance")
+    float GetResolvedHeightCentimeters() const
+    {
+        return Profile.GetResolvedHeightCentimeters();
+    }
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Person|Appearance")
+    ETMOPBodyBuild GetResolvedBodyBuild() const
+    {
+        return Profile.GetResolvedBodyBuild();
+    }
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Person|Appearance")
+    int32 GetResolvedAppearanceSeed() const
+    {
+        return Profile.AppearanceProfile.AppearanceSeed > 0
+            ? Profile.AppearanceProfile.AppearanceSeed
+            : static_cast<int32>(GetTypeHash(ResolvedEntityId) & 0x7fffffff);
+    }
+
 private:
     FName ResolveEntityId() const;
 };

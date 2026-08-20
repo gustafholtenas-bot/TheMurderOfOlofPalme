@@ -13,6 +13,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "NavigationSystem.h"
 #include "People/TMOPPersonProfileComponent.h"
+#include "People/TMOPAppearanceAssetTypes.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
 #include "Schedules/TMOPScheduleTypes.h"
 #include "Sound/SoundBase.h"
@@ -42,6 +43,9 @@ void ATMOPPersonRegistryDirector::BeginPlay()
         SetActorTickEnabled(false);
         return;
     }
+    if (!Registry->ConfigureAppearanceAssetTable(AppearanceAssetTable))
+        UE_LOG(LogTemp, Error, TEXT(
+            "TMOP AppearanceAssetTable has the wrong row struct; modular assets are disabled."));
 
     RefreshAllActiveProfiles();
     if (bSpawnPeopleAutomatically) InitializePersonSimulation();
@@ -1073,6 +1077,44 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
         if (!HasValidGroupTable() && !Row->SocialGroupId.IsNone() &&
             Row->GroupLeaderEntityId.IsNone())
             OutErrors.Add(Prefix + TEXT(" belongs to a group but has no GroupLeaderEntityId."));
+    }
+    return OutErrors.IsEmpty();
+}
+
+bool ATMOPPersonRegistryDirector::ValidateAppearanceAssetTable(
+    TArray<FString>& OutErrors) const
+{
+    OutErrors.Reset();
+    if (!IsValid(AppearanceAssetTable) ||
+        AppearanceAssetTable->GetRowStruct() !=
+            FTMOPAppearanceAssetRow::StaticStruct())
+    {
+        OutErrors.Add(TEXT(
+            "Appearance Asset Table is missing or has the wrong row structure."));
+        return false;
+    }
+    TSet<FName> CatalogIds;
+    for (const FName RowName : AppearanceAssetTable->GetRowNames())
+    {
+        const FTMOPAppearanceAssetRow* Row =
+            AppearanceAssetTable->FindRow<FTMOPAppearanceAssetRow>(
+                RowName, TEXT("ValidateAppearanceAssets"), false);
+        if (Row == nullptr) continue;
+        const FString Prefix = FString::Printf(
+            TEXT("Appearance row '%s'"), *RowName.ToString());
+        if (Row->CatalogId.IsNone())
+            OutErrors.Add(Prefix + TEXT(" has no CatalogId."));
+        if (Row->CatalogId != RowName)
+            OutErrors.Add(Prefix + TEXT(" Row Name must equal CatalogId."));
+        if (CatalogIds.Contains(Row->CatalogId))
+            OutErrors.Add(Prefix + TEXT(" duplicates CatalogId."));
+        CatalogIds.Add(Row->CatalogId);
+        if (Row->Mesh.IsNull())
+            OutErrors.Add(Prefix + TEXT(" has no Skeletal Mesh."));
+        if (Row->EarliestYear > 1986 || Row->LatestYear < 1986)
+            OutErrors.Add(Prefix + TEXT(" is not valid for 1986."));
+        if (Row->MaximumAge > 0 && Row->MaximumAge < Row->MinimumAge)
+            OutErrors.Add(Prefix + TEXT(" has MaximumAge below MinimumAge."));
     }
     return OutErrors.IsEmpty();
 }

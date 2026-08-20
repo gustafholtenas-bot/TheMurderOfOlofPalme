@@ -26,6 +26,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People")
     TObjectPtr<UDataTable> PersonProfileTable;
 
+    /** Optional modular body/clothing catalog. Row struct: FTMOPAppearanceAssetRow. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Appearance")
+    TObjectPtr<UDataTable> AppearanceAssetTable;
+
     /** Authoritative editable group list. Row struct: FTMOPGroupProfileRow. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Groups")
     TObjectPtr<UDataTable> GroupDefinitionTable;
@@ -65,6 +69,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|People|Simulation")
     bool ValidatePeopleTable(TArray<FString>& OutErrors) const;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|People|Appearance")
+    bool ValidateAppearanceAssetTable(TArray<FString>& OutErrors) const;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|People|Groups")
     bool ValidateGroupTable(TArray<FString>& OutErrors) const;

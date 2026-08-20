@@ -13,6 +13,9 @@ class UWidgetComponent;
 class UAudioComponent;
 class USoundBase;
 class AAIController;
+class UTMOPCharacterAppearanceComponent;
+class UTMOPPersonProfileComponent;
+class USkeletalMeshComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FTMOPAgentStateChangedSignature,
@@ -47,6 +50,39 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent")
     TObjectPtr<UTMOPRouteFollowerComponent> RouteFollower;
+
+    /** ACharacter's inherited mesh, exposed as the modular body's leader pose. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> BodyMesh;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> FaceMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> HairMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> FacialHairMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> OuterwearMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> UpperBodyMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> TrousersMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> FootwearMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> GlovesMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> HeadwearMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> ScarfMesh;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<USkeletalMeshComponent> GlassesMesh;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<UTMOPPersonProfileComponent> PersonProfile;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<UTMOPCharacterAppearanceComponent> CharacterAppearance;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FText DisplayName;
@@ -125,6 +161,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement")
     FTMOPMovementProfile MovementProfile;
+
+    /** Derived from resolved height without modifying the historical movement profile. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    float AppearanceMovementSpeedMultiplier = 1.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Venue")
     FTMOPVenueSeatAssignment InitialSeatAssignment;

@@ -3,6 +3,7 @@
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
+#include "People/TMOPCharacterAppearanceComponent.h"
 
 UTMOPPersonProfileComponent::UTMOPPersonProfileComponent()
 {
@@ -55,6 +56,9 @@ bool UTMOPPersonProfileComponent::LoadProfile()
             Agent->DisplayName = Profile.FullName;
             Agent->PersonCategoryId = Profile.CategoryId;
             Agent->RefreshNameLabel();
+            if (UTMOPCharacterAppearanceComponent* Appearance =
+                Agent->FindComponentByClass<UTMOPCharacterAppearanceComponent>())
+                Appearance->ApplyAppearance();
         }
     return bHasLoadedProfile;
 }

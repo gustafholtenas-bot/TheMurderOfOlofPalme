@@ -3,14 +3,16 @@
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
 #include "Agents/TMOPAgentTypes.h"
+#include "Agents/TMOPHistoricalAgent.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "Groups/TMOPGroupTypes.h"
 #include "Traffic/TMOPTrafficTypes.h"
 #include "TMOPPersonProfileTypes.generated.h"
 
-class ATMOPHistoricalAgent;
 class UTexture2D;
 class USoundBase;
+class USkeletalMesh;
+class UMaterialInterface;
 
 UENUM(BlueprintType)
 enum class ETMOPPersonLocationType : uint8
@@ -417,6 +419,170 @@ struct TMOPENGINE_API FTMOPAppearanceSlot
     FString SourceReference;
 };
 
+/** How the runtime appearance system should build this person. */
+UENUM(BlueprintType)
+enum class ETMOPAppearanceGenerationMode : uint8
+{
+    /** Derive all known parts from the source-backed description and vary only unknown parts. */
+    AutomaticFromEvidence UMETA(DisplayName="Automatic From Evidence"),
+    /** Prefer the explicit visual choices in AppearanceProfile. */
+    Manual UMETA(DisplayName="Manual Overrides"),
+    /** A bespoke MetaHuman supplies the head/body; modular clothing may still be used. */
+    MetaHuman UMETA(DisplayName="MetaHuman")
+};
+
+/** Rendering treatment used when a visual fact is not known from the sources. */
+UENUM(BlueprintType)
+enum class ETMOPUnknownAppearanceStyle : uint8
+{
+    /** Soft, low-detail and visibly indistinct without hiding the person. */
+    Obscured UMETA(DisplayName="Obscured / Blurred"),
+    /** Neutral placeholder asset, intended mainly for development. */
+    Neutral UMETA(DisplayName="Neutral Placeholder"),
+    /** Do not render this modular part. */
+    Hidden UMETA(DisplayName="Hidden")
+};
+
+/** One runtime mesh/material choice. Empty fields mean automatic selection. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPAppearancePartChoice
+{
+    GENERATED_BODY()
+
+    /** Stable catalog ID, e.g. COAT_WOOL_1986_03 or UNKNOWN_TROUSERS_OBSCURED. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    FName CatalogId = NAME_None;
+
+    /** Optional direct asset override for bespoke people. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    TSoftObjectPtr<USkeletalMesh> MeshOverride;
+
+    /** Optional direct material override. Unknown parts normally use the shared obscured material. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    TSoftObjectPtr<UMaterialInterface> MaterialOverride;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    FLinearColor PrimaryColor = FLinearColor::White;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    FLinearColor SecondaryColor = FLinearColor::White;
+};
+
+/**
+ * Runtime visualisation settings. Source evidence remains in the existing
+ * description fields; this profile only controls how that evidence is rendered.
+ */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPAppearanceProfile
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    ETMOPAppearanceGenerationMode GenerationMode =
+        ETMOPAppearanceGenerationMode::AutomaticFromEvidence;
+
+    /** Zero derives a stable seed from EntityId, giving the same person on every run. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance",
+        meta=(ClampMin="0"))
+    int32 AppearanceSeed = 0;
+
+    /** Zero uses the source-backed height, then the Swedish 1986 fallback. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="0.0", ClampMax="205.0", Units="cm"))
+    float HeightOverrideCentimeters = 0.0f;
+
+    /** Unknown uses BodyBuildCategory and finally Average. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body")
+    ETMOPBodyBuild BodyBuildOverride = ETMOPBodyBuild::Unknown;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="-1.0", ClampMax="1.0"))
+    float BodyWeightMorph = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="-1.0", ClampMax="1.0"))
+    float MuscularityMorph = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="0.75", ClampMax="1.25"))
+    float HeadScale = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="0.75", ClampMax="1.25"))
+    float ShoulderScale = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="0.75", ClampMax="1.25"))
+    float TorsoLengthScale = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="0.75", ClampMax="1.25"))
+    float ArmLengthScale = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Body",
+        meta=(ClampMin="0.75", ClampMax="1.25"))
+    float LegLengthScale = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Color")
+    FName SkinToneId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Color")
+    FName EyeColorId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Face;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Hair;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice FacialHair;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Outerwear;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice UpperBody;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Trousers;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Footwear;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Gloves;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Headwear;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Scarf;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Glasses;
+
+    /** Applied independently to every unknown face or clothing part. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Unknown")
+    ETMOPUnknownAppearanceStyle UnknownPartStyle =
+        ETMOPUnknownAppearanceStyle::Obscured;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Unknown")
+    FName UnknownFaceCatalogId = TEXT("UNKNOWN_FACE_OBSCURED");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Unknown")
+    FName UnknownOuterwearCatalogId = TEXT("UNKNOWN_OUTERWEAR_OBSCURED");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Unknown")
+    FName UnknownUpperBodyCatalogId = TEXT("UNKNOWN_UPPER_BODY_OBSCURED");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Unknown")
+    FName UnknownTrousersCatalogId = TEXT("UNKNOWN_TROUSERS_OBSCURED");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Unknown")
+    FName UnknownFootwearCatalogId = TEXT("UNKNOWN_FOOTWEAR_OBSCURED");
+};
+
 /** One row in DT_TMOP_People. Row Name should equal EntityId. */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
@@ -461,6 +627,31 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|History",
         meta=(ClampMin="0.0"))
     float HeightCentimeters = 0.0f;
+
+    /** Rendering profile; historical/source-backed descriptions remain below. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    FTMOPAppearanceProfile AppearanceProfile;
+
+    /** Resolved simulation height, including explicit override and 1986 fallback. */
+    float GetResolvedHeightCentimeters() const
+    {
+        if (AppearanceProfile.HeightOverrideCentimeters > 0.0f)
+            return FMath::Clamp(AppearanceProfile.HeightOverrideCentimeters, 120.0f, 205.0f);
+        if (HeightCentimeters > 0.0f)
+            return FMath::Clamp(HeightCentimeters, 120.0f, 205.0f);
+        // Practical adult-population defaults for the Stockholm 1986 scenario.
+        if (Gender == ETMOPPersonGender::Male) return 178.0f;
+        if (Gender == ETMOPPersonGender::Female) return 165.0f;
+        return 171.5f;
+    }
+
+    ETMOPBodyBuild GetResolvedBodyBuild() const
+    {
+        if (AppearanceProfile.BodyBuildOverride != ETMOPBodyBuild::Unknown)
+            return AppearanceProfile.BodyBuildOverride;
+        return BodyBuildCategory != ETMOPBodyBuild::Unknown
+            ? BodyBuildCategory : ETMOPBodyBuild::Average;
+    }
 
     /** Optional source photograph shown in the TMOP People Editor. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Reference",

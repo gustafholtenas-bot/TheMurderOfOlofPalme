@@ -15,6 +15,8 @@
 #include "Camera/PlayerCameraManager.h"
 #include "GameFramework/PlayerController.h"
 #include "Routes/TMOPRouteFollowerComponent.h"
+#include "People/TMOPCharacterAppearanceComponent.h"
+#include "People/TMOPPersonProfileComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 #include "UI/TMOPSpeechBubbleWidget.h"
@@ -45,6 +47,35 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     RouteFollower =
         CreateDefaultSubobject<UTMOPRouteFollowerComponent>(
             TEXT("RouteFollower"));
+
+    PersonProfile = CreateDefaultSubobject<UTMOPPersonProfileComponent>(
+        TEXT("PersonProfile"));
+    CharacterAppearance =
+        CreateDefaultSubobject<UTMOPCharacterAppearanceComponent>(
+            TEXT("CharacterAppearance"));
+
+    BodyMesh = GetMesh();
+    auto CreateModularPart = [this](const FName Name)
+    {
+        USkeletalMeshComponent* Part =
+            CreateDefaultSubobject<USkeletalMeshComponent>(Name);
+        Part->SetupAttachment(GetMesh());
+        Part->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        Part->SetGenerateOverlapEvents(false);
+        Part->SetVisibility(false, true);
+        return Part;
+    };
+    FaceMesh = CreateModularPart(TEXT("FaceMesh"));
+    HairMesh = CreateModularPart(TEXT("HairMesh"));
+    FacialHairMesh = CreateModularPart(TEXT("FacialHairMesh"));
+    OuterwearMesh = CreateModularPart(TEXT("OuterwearMesh"));
+    UpperBodyMesh = CreateModularPart(TEXT("UpperBodyMesh"));
+    TrousersMesh = CreateModularPart(TEXT("TrousersMesh"));
+    FootwearMesh = CreateModularPart(TEXT("FootwearMesh"));
+    GlovesMesh = CreateModularPart(TEXT("GlovesMesh"));
+    HeadwearMesh = CreateModularPart(TEXT("HeadwearMesh"));
+    ScarfMesh = CreateModularPart(TEXT("ScarfMesh"));
+    GlassesMesh = CreateModularPart(TEXT("GlassesMesh"));
 
     NameLabel =
         CreateDefaultSubobject<UTextRenderComponent>(
@@ -77,6 +108,11 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
 void ATMOPHistoricalAgent::BeginPlay()
 {
     Super::BeginPlay();
+    const TArray<USkeletalMeshComponent*> ModularParts = {
+        FaceMesh.Get(), HairMesh.Get(), OuterwearMesh.Get(), UpperBodyMesh.Get(),
+        TrousersMesh.Get(), FootwearMesh.Get(), GlovesMesh.Get(), HeadwearMesh.Get() };
+    for (USkeletalMeshComponent* Part : ModularParts)
+        if (IsValid(Part) && IsValid(BodyMesh)) Part->SetLeaderPoseComponent(BodyMesh);
     RefreshNameLabel();
     ApplyMovementSpeedForActivity();
     ApplyInitialSeatAssignment();
@@ -650,7 +686,8 @@ float ATMOPHistoricalAgent::GetDesiredMovementSpeed() const
 
     return FMath::Max(
         0.0f,
-        BaseSpeed * MovementProfile.PersonalSpeedMultiplier);
+        BaseSpeed * MovementProfile.PersonalSpeedMultiplier *
+            AppearanceMovementSpeedMultiplier);
 }
 
 bool ATMOPHistoricalAgent::CanMove() const

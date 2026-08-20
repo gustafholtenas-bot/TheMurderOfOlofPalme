@@ -23,6 +23,12 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|People")
     UDataTable* GetProfileTable() const { return ProfileTable; }
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|People|Appearance")
+    bool ConfigureAppearanceAssetTable(UDataTable* NewAssetTable);
+
+    UFUNCTION(BlueprintPure, Category="TMOP|People|Appearance")
+    UDataTable* GetAppearanceAssetTable() const { return AppearanceAssetTable; }
+
     UFUNCTION(BlueprintPure, Category="TMOP|People")
     bool GetPersonProfile(FName EntityId, FTMOPPersonProfileRow& OutProfile) const;
 
@@ -47,6 +53,9 @@ public:
 private:
     UPROPERTY(Transient)
     TObjectPtr<UDataTable> ProfileTable;
+
+    UPROPERTY(Transient)
+    TObjectPtr<UDataTable> AppearanceAssetTable;
 
     TMap<FName, TWeakObjectPtr<ATMOPHistoricalAgent>> ActiveAgents;
 };
