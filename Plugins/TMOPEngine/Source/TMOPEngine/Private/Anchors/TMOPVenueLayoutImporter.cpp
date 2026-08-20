@@ -14,7 +14,7 @@ namespace
 {
     const FName ImportedVenueLayoutTag(TEXT("TMOP_IMPORTED_VENUE_LAYOUT_ANCHOR"));
 
-    bool ReadNumber(const TSharedPtr<FJsonObject>& Object, const TCHAR* Field, double& Out)
+    bool ReadVenueLayoutNumber(const TSharedPtr<FJsonObject>& Object, const TCHAR* Field, double& Out)
     {
         return Object.IsValid() && Object->TryGetNumberField(Field, Out);
     }
@@ -108,9 +108,9 @@ void ATMOPVenueLayoutImporter::ImportOrUpdateVenueLayoutAnchors()
         }
 
         double X = 0.0, Y = 0.0, Z = 0.0, RelativeYaw = 0.0;
-        if (!ReadNumber(*OffsetObject, TEXT("x"), X) ||
-            !ReadNumber(*OffsetObject, TEXT("y"), Y) ||
-            !ReadNumber(*OffsetObject, TEXT("z"), Z))
+        if (!ReadVenueLayoutNumber(*OffsetObject, TEXT("x"), X) ||
+            !ReadVenueLayoutNumber(*OffsetObject, TEXT("y"), Y) ||
+            !ReadVenueLayoutNumber(*OffsetObject, TEXT("z"), Z))
         {
             ++LastErrorCount;
             continue;
