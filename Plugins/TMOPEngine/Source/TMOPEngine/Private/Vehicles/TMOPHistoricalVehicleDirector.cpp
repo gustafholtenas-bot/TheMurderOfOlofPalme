@@ -2,6 +2,7 @@
 
 #include "Engine/DataTable.h"
 #include "Engine/World.h"
+#include "Engine/OverlapResult.h"
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 #include "Agents/TMOPHistoricalAgent.h"
@@ -228,6 +229,13 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
         }
         else if (!Runtime.Vehicle.IsValid())
         {
+            if (!IsInitialSpawnLocationClear(Runtime.Profile))
+            {
+                UE_LOG(LogTemp, Warning,
+                    TEXT("TMOP VehicleSpawnBlocked: '%s' waits because its entry point is occupied."),
+                    *Runtime.Profile.VehicleId.ToString());
+                continue;
+            }
             SpawnVehicle(Runtime);
         }
         if (Runtime.Vehicle.IsValid())
@@ -246,10 +254,70 @@ int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
         if (Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
             Entry.Action == ETMOPHistoricalVehicleAction::Spawn)
         {
-            return Entry.Time.ToSecondsFromMidnight();
+            int32 SpawnSecond = Entry.Time.ToSecondsFromMidnight();
+            const FString AnchorId = Entry.PlacementAnchorId.ToString();
+            const bool bBoundaryEntry =
+                Entry.PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::Anchor &&
+                AnchorId.StartsWith(TEXT("Enter"),
+                    ESearchCase::IgnoreCase);
+            if (bBoundaryEntry)
+            {
+                for (const FTMOPHistoricalVehicleTimelineEntry& Later :
+                    Profile.Timeline)
+                {
+                    if (Later.Action ==
+                            ETMOPHistoricalVehicleAction::BeginDriving ||
+                        Later.Action ==
+                            ETMOPHistoricalVehicleAction::EnterTrafficRoute)
+                    {
+                        SpawnSecond = FMath::Max(
+                            0,
+                            Later.Time.ToSecondsFromMidnight() -
+                                EntrySpawnLeadSeconds);
+                        break;
+                    }
+                }
+            }
+            return SpawnSecond;
         }
     }
     return INDEX_NONE;
+}
+
+bool ATMOPHistoricalVehicleDirector::IsInitialSpawnLocationClear(
+    const FTMOPHistoricalVehicleRow& Profile) const
+{
+    UWorld* World = GetWorld();
+    if (World == nullptr) return false;
+    const FTMOPHistoricalVehicleTimelineEntry* Placement =
+        Profile.Timeline.FindByPredicate(
+            [](const FTMOPHistoricalVehicleTimelineEntry& Entry)
+            {
+                return Entry.Action ==
+                        ETMOPHistoricalVehicleAction::InitialPlacement ||
+                    Entry.Action ==
+                        ETMOPHistoricalVehicleAction::Spawn;
+            });
+    if (Placement == nullptr ||
+        Placement->PlacementMode !=
+            ETMOPHistoricalVehiclePlacementMode::Anchor ||
+        !Placement->PlacementAnchorId.ToString().StartsWith(
+            TEXT("Enter"), ESearchCase::IgnoreCase))
+        return true;
+    const FTransform Transform = GetInitialTransform(Profile);
+    TArray<FOverlapResult> Overlaps;
+    FCollisionObjectQueryParams Objects;
+    Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
+    Objects.AddObjectTypesToQuery(ECC_PhysicsBody);
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(TMOPVehicleEntrySpawn), false, this);
+    World->OverlapMultiByObjectType(
+        Overlaps, Transform.GetLocation(), FQuat::Identity, Objects,
+        FCollisionShape::MakeSphere(EntrySpawnClearanceRadiusCm), Query);
+    for (const FOverlapResult& Overlap : Overlaps)
+        if (IsValid(Cast<ATMOPVehicleBase>(Overlap.GetActor())))
+            return false;
+    return true;
 }
 
 void ATMOPHistoricalVehicleDirector::ApplyDeferredPlacedVehicleState(
@@ -335,12 +403,26 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
         return nullptr;
     }
 
+    // A valid ModelData row must never fall back to a Blueprint's proxy mesh.
+    // If no explicit class resolves, use the native configured vehicle.
     TSubclassOf<ATMOPVehicleBase> SpawnClass = DefaultVehicleClass;
+    if (IsValid(Runtime.Profile.ModelData))
+    {
+        SpawnClass = ATMOPConfiguredVehicle::StaticClass();
+    }
     if (UClass* RowClass = Runtime.Profile.VehicleClass.Get())
     {
         if (RowClass->IsChildOf(ATMOPVehicleBase::StaticClass()))
         {
-            SpawnClass = RowClass;
+            // Configured Blueprint subclasses can contain a permanently visible
+            // proxy mesh. ModelData is authoritative, so use the clean native
+            // configured actor for that case. Bespoke non-configured classes
+            // (bus, ambulance, etc.) remain supported.
+            SpawnClass =
+                IsValid(Runtime.Profile.ModelData) &&
+                RowClass->IsChildOf(ATMOPConfiguredVehicle::StaticClass())
+                ? ATMOPConfiguredVehicle::StaticClass()
+                : RowClass;
         }
         else
         {
@@ -388,7 +470,38 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
         Configured->bOverrideBodyColor =
             Runtime.Profile.bOverrideBodyColor;
         Configured->BodyColor = Runtime.Profile.BodyColor;
-        Configured->ApplyConfiguration();
+        const bool bApplied = Configured->ApplyConfiguration();
+        const bool bCorrectMesh =
+            bApplied &&
+            IsValid(Runtime.Profile.ModelData) &&
+            IsValid(Runtime.Profile.ModelData->BodyMesh) &&
+            IsValid(Configured->BodyMesh) &&
+            Configured->BodyMesh->GetStaticMesh() ==
+                Runtime.Profile.ModelData->BodyMesh;
+
+        if (!bCorrectMesh)
+        {
+            if (IsValid(Configured->BodyMesh))
+                Configured->BodyMesh->SetStaticMesh(nullptr);
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP Historical Vehicles: '%s' refused proxy mesh. ModelData='%s', expected BodyMesh='%s'."),
+                *Runtime.Profile.VehicleId.ToString(),
+                IsValid(Runtime.Profile.ModelData)
+                    ? *Runtime.Profile.ModelData->GetPathName()
+                    : TEXT("None"),
+                IsValid(Runtime.Profile.ModelData) &&
+                    IsValid(Runtime.Profile.ModelData->BodyMesh)
+                    ? *Runtime.Profile.ModelData->BodyMesh->GetPathName()
+                    : TEXT("None"));
+        }
+        else
+        {
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP Historical Vehicles: '%s' uses ModelData '%s' and mesh '%s'."),
+                *Runtime.Profile.VehicleId.ToString(),
+                *Runtime.Profile.ModelData->GetPathName(),
+                *Configured->BodyMesh->GetStaticMesh()->GetPathName());
+        }
     }
 
     Runtime.Vehicle = Vehicle;
@@ -771,4 +884,3 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
         *DriverEntityId.ToString(), *VehicleId.ToString(), Route.Num());
     return true;
 }
-

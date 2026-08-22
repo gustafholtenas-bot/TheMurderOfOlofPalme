@@ -17,6 +17,7 @@ UENUM(BlueprintType)
 enum class ETMOPBusRunState : uint8
 {
     Pending,
+    Staged,
     Active,
     Completed,
     Failed
@@ -183,6 +184,14 @@ public:
         meta=(ClampMin="1"))
     int32 MaximumSimultaneousBuses = 4;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Spawning",
+        meta=(ClampMin="0", Units="s"))
+    int32 SpawnLeadSeconds = 10;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Spawning",
+        meta=(ClampMin="50.0", Units="cm"))
+    float SpawnClearanceRadiusCm = 500.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     bool bResetWhenTimeMovesBackwards = true;
 
@@ -222,6 +231,7 @@ private:
     void HandleLoopRestarted(int32 NewLoopNumber, FTMOPTime RestartTime);
 
     bool SpawnRun(FTMOPBusRunRuntime& Runtime);
+    bool ActivateStagedRun(FTMOPBusRunRuntime& Runtime);
     void CompleteRun(FTMOPBusRunRuntime& Runtime);
     void MonitorActiveRuns(FTMOPTime CurrentTime);
     ATMOPPersonRegistryDirector* FindPeopleDirector() const;

@@ -1,6 +1,7 @@
 #include "Transit/TMOPBusScheduleDirector.h"
 
 #include "Engine/World.h"
+#include "Engine/OverlapResult.h"
 #include "Engine/DataTable.h"
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
@@ -110,10 +111,17 @@ void ATMOPBusScheduleDirector::EvaluateSchedule(const FTMOPTime CurrentTime)
     }
     for (FTMOPBusRunRuntime& Runtime : RuntimeRuns)
     {
-        if (Runtime.State != ETMOPBusRunState::Pending ||
-            Runtime.ResolvedStartTime.ToSecondsFromMidnight() > Now) continue;
-        if (GetActiveBusCount() >= MaximumSimultaneousBuses) break;
-        if (!SpawnRun(Runtime)) Runtime.State = ETMOPBusRunState::Failed;
+        const int32 StartSecond =
+            Runtime.ResolvedStartTime.ToSecondsFromMidnight();
+        if (Runtime.State == ETMOPBusRunState::Pending &&
+            StartSecond - SpawnLeadSeconds <= Now)
+        {
+            if (GetActiveBusCount() >= MaximumSimultaneousBuses) break;
+            SpawnRun(Runtime);
+        }
+        if (Runtime.State == ETMOPBusRunState::Staged &&
+            StartSecond <= Now)
+            ActivateStagedRun(Runtime);
     }
     MonitorActiveRuns(CurrentTime);
     LastEvaluatedSeconds = Now;
@@ -242,16 +250,58 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
         Bus->Destroy();
         return false;
     }
-    Movement->StartDriving();
     Runtime.SpawnedBus = Bus;
-    Runtime.State = ETMOPBusRunState::Active;
+    TArray<FOverlapResult> Overlaps;
+    FCollisionObjectQueryParams Objects;
+    Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
+    Objects.AddObjectTypesToQuery(ECC_PhysicsBody);
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(TMOPBusEntrySpawn), false, Bus);
+    GetWorld()->OverlapMultiByObjectType(
+        Overlaps, Bus->GetActorLocation(), FQuat::Identity, Objects,
+        FCollisionShape::MakeSphere(SpawnClearanceRadiusCm), Query);
+    for (const FOverlapResult& Overlap : Overlaps)
+        if (ATMOPVehicleBase* Other =
+            Cast<ATMOPVehicleBase>(Overlap.GetActor()))
+            if (Other != Bus)
+            {
+                UE_LOG(LogTemp, Warning,
+                    TEXT("TMOP VehicleSpawnBlocked: bus '%s' waits because its entry point is occupied by '%s'."),
+                    *Runtime.RunId.ToString(), *Other->VehicleId.ToString());
+                Bus->Destroy();
+                Runtime.SpawnedBus = nullptr;
+                return false;
+            }
+
+    Movement->StopDriving();
+    Runtime.State = ETMOPBusRunState::Staged;
     OnBusRunSpawned.Broadcast(Runtime.RunId, Bus);
-    UE_LOG(LogTemp, Display, TEXT("TMOP bus '%s': spawn succeeded."),
-        *Runtime.RunId.ToString());
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP bus '%s': staged %d seconds before departure."),
+        *Runtime.RunId.ToString(), SpawnLeadSeconds);
     if (bUsePeopleTimelinesForPassengers)
         UE_LOG(LogTemp, Display,
             TEXT("TMOP bus '%s': %d enabled passenger profile(s) target this run in DT_TMOP_People."),
             *Runtime.RunId.ToString(), GetTimelinePassengerCount(Runtime.RunId));
+    return true;
+}
+
+bool ATMOPBusScheduleDirector::ActivateStagedRun(
+    FTMOPBusRunRuntime& Runtime)
+{
+    ATMOPVehicleBase* Bus = Runtime.SpawnedBus;
+    UTMOPTrafficVehicleMovementComponent* Movement = IsValid(Bus)
+        ? Bus->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>()
+        : nullptr;
+    if (!IsValid(Bus) || !IsValid(Movement))
+    {
+        Runtime.State = ETMOPBusRunState::Failed;
+        return false;
+    }
+    Movement->StartDriving();
+    Runtime.State = ETMOPBusRunState::Active;
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP bus '%s': departed at scheduled time."),
+        *Runtime.RunId.ToString());
     return true;
 }
 
@@ -318,7 +368,10 @@ int32 ATMOPBusScheduleDirector::GetActiveBusCount() const
 {
     int32 Count = 0;
     for (const FTMOPBusRunRuntime& Runtime : RuntimeRuns)
-        if (Runtime.State == ETMOPBusRunState::Active && IsValid(Runtime.SpawnedBus)) ++Count;
+        if ((Runtime.State == ETMOPBusRunState::Staged ||
+             Runtime.State == ETMOPBusRunState::Active) &&
+            IsValid(Runtime.SpawnedBus))
+            ++Count;
     return Count;
 }
 

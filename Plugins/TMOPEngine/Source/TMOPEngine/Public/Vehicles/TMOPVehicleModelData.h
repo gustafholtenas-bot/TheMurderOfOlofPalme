@@ -44,6 +44,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Materials")
     int32 BodyMaterialSlotIndex = 0;
 
+    /** Preferred material slot name. "Body" is resolved before the numeric fallback. */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Materials")
+    FName BodyMaterialSlotName = TEXT("Body");
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Materials")
     int32 GlassMaterialSlotIndex = 1;
 
@@ -67,3 +71,4 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Dimensions")
     float VehicleWidthCm = 180.0f;
 };
+

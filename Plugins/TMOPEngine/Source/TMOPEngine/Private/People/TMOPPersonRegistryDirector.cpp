@@ -18,6 +18,7 @@
 #include "Schedules/TMOPScheduleTypes.h"
 #include "Sound/SoundBase.h"
 #include "Time/TMOPClockSubsystem.h"
+#include "Testing/TMOPTimelineValidationDirector.h"
 #include "Transit/TMOPBusServiceComponent.h"
 #include "Transit/TMOPBusStopComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
@@ -46,6 +47,18 @@ void ATMOPPersonRegistryDirector::BeginPlay()
     if (!Registry->ConfigureAppearanceAssetTable(AppearanceAssetTable))
         UE_LOG(LogTemp, Error, TEXT(
             "TMOP AppearanceAssetTable has the wrong row struct; modular assets are disabled."));
+
+    if (bEnableAutomaticTimelineValidation)
+    {
+        bool bValidatorExists = false;
+        for (TActorIterator<ATMOPTimelineValidationDirector> It(GetWorld()); It; ++It)
+        {
+            bValidatorExists = true;
+            break;
+        }
+        if (!bValidatorExists)
+            GetWorld()->SpawnActor<ATMOPTimelineValidationDirector>();
+    }
 
     RefreshAllActiveProfiles();
     if (bSpawnPeopleAutomatically) InitializePersonSimulation();
@@ -1207,3 +1220,4 @@ bool ATMOPPersonRegistryDirector::ValidateGroupTable(
     }
     return OutErrors.IsEmpty();
 }
+

@@ -8,6 +8,7 @@
 class ATMOPHistoricalAgent;
 class ATMOPVehicleBase;
 class ATMOPGroupDirector;
+class ATMOPTimelineValidationDirector;
 class UDataTable;
 struct FTMOPGroupProfileRow;
 
@@ -42,6 +43,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     bool bCatchUpToCurrentClockOnBeginPlay = true;
+
+    /** Automatically validates every spawned person's real timeline execution. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Validation")
+    bool bEnableAutomaticTimelineValidation = true;
 
     /** Prefer DT_TMOP_Groups when a valid GroupDefinitionTable is assigned. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Groups")
@@ -137,3 +142,4 @@ private:
     TMap<FName, FPersonRuntime> RuntimePeople;
     int32 LastEvaluatedSecond = INDEX_NONE;
 };
+

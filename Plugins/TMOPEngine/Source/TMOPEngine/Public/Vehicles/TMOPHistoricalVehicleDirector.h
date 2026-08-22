@@ -42,6 +42,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning")
     bool bReusePlacedVehicles = true;
 
+    /** Boundary vehicles appear only this many seconds before first driving. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning",
+        meta=(ClampMin="0", Units="s"))
+    int32 EntrySpawnLeadSeconds = 10;
+
+    /** Do not spawn a vehicle on top of another vehicle at an entry anchor. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning",
+        meta=(ClampMin="50.0", Units="cm"))
+    float EntrySpawnClearanceRadiusCm = 300.0f;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Historical Vehicles")
     int32 InitializeHistoricalVehicles();
 
@@ -91,6 +101,8 @@ private:
     void ApplyDeferredPlacedVehicleState(int32 CurrentSecond);
     ATMOPVehicleBase* SpawnVehicle(FHistoricalVehicleRuntime& Runtime);
     FTransform GetInitialTransform(const FTMOPHistoricalVehicleRow& Profile) const;
+    bool IsInitialSpawnLocationClear(
+        const FTMOPHistoricalVehicleRow& Profile) const;
     bool ShouldSpawn(const FTMOPHistoricalVehicleRow& Profile, bool bIgnoreRowFlag) const;
     void RegisterVehicle(ATMOPVehicleBase* Vehicle) const;
     void UnregisterVehicle(ATMOPVehicleBase* Vehicle) const;

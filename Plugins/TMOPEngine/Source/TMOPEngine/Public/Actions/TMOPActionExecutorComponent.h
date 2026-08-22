@@ -6,6 +6,7 @@
 #include "TMOPActionExecutorComponent.generated.h"
 
 class ATMOPHistoricalAgent;
+class UTMOPActionExecutorComponent;
 class ATMOPVerticalTransport;
 
 UENUM(BlueprintType)
@@ -27,6 +28,13 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(
     ActionType,
     ETMOPActionExecutionState,
     State);
+
+DECLARE_MULTICAST_DELEGATE_FourParams(
+    FTMOPActionValidationNativeSignature,
+    UTMOPActionExecutorComponent*,
+    const FTMOPScheduleEntry&,
+    FTMOPTime,
+    ETMOPActionExecutionState);
 
 /**
  * Converts ready schedule entries into concrete agent behavior.
@@ -65,6 +73,9 @@ public:
 
     UPROPERTY(BlueprintAssignable, Category = "TMOP|Actions")
     FTMOPActionExecutionSignature OnActionExecutionChanged;
+
+    /** Native telemetry consumed by the timeline validation director. */
+    FTMOPActionValidationNativeSignature OnActionValidationEvent;
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Actions")
     ETMOPActionExecutionState GetExecutionState() const
@@ -107,6 +118,7 @@ private:
     bool BeginMoveToAnchor(const FTMOPScheduleEntry& Entry);
     bool MoveToCurrentRouteAnchor();
     void CompleteCurrentAction(bool bSuccessful);
+    void BroadcastExecutionState(ETMOPActionExecutionState State);
     FName GetOwnerEntityId() const;
     ATMOPHistoricalAgent* GetHistoricalAgent() const;
 
@@ -125,8 +137,10 @@ private:
         ETMOPActionExecutionState::Idle;
 
     bool bHasCurrentEntry = false;
+    FTMOPTime CurrentScheduledTime;
     bool bRestoredFromBake = false;
 
     UPROPERTY(Transient)
     TObjectPtr<ATMOPVerticalTransport> ActiveVerticalTransport;
 };
+

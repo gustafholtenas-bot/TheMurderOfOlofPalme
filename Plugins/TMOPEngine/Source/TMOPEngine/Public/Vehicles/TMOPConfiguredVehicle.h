@@ -112,9 +112,13 @@ public:
     bool ApplyConfiguration();
 
 private:
-    void ApplyBodyColor();
+    bool ApplyBodyColor();
+    int32 ResolveBodyMaterialSlotIndex() const;
+    FName ResolveBodyColorParameterName(
+        class UMaterialInterface* Material) const;
     void ApplyWheel(UStaticMeshComponent* Component, UStaticMesh* WheelMesh,
         const FTransform& LocalTransform);
     void UpdateWheelAnimation(float DeltaSeconds);
     float AccumulatedWheelRollDegrees = 0.0f;
 };
+

@@ -5,6 +5,8 @@
 #include "Components/BoxComponent.h"
 #include "Engine/StaticMesh.h"
 #include "Materials/MaterialInstanceDynamic.h"
+#include "Materials/MaterialInterface.h"
+#include "MaterialTypes.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
@@ -175,40 +177,113 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     return true;
 }
 
-void ATMOPConfiguredVehicle::ApplyBodyColor()
+bool ATMOPConfiguredVehicle::ApplyBodyColor()
 {
     if (!IsValid(VehicleModel) || !IsValid(BodyMesh) ||
         !IsValid(VehicleModel->BodyMesh))
-        return;
-    const int32 SlotIndex = VehicleModel->BodyMaterialSlotIndex;
-    if (SlotIndex < 0 ||
-        SlotIndex >= VehicleModel->BodyMesh->GetStaticMaterials().Num())
+        return false;
+
+    const int32 SlotIndex = ResolveBodyMaterialSlotIndex();
+    if (SlotIndex == INDEX_NONE)
     {
-        UE_LOG(LogTemp, Warning,
-            TEXT("TMOP vehicle model '%s' has invalid body material slot %d."),
-            *VehicleModel->ModelId.ToString(), SlotIndex);
-        return;
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP vehicle '%s': model '%s' has no material slot named '%s' and fallback index %d is invalid."),
+            *VehicleId.ToString(), *VehicleModel->ModelId.ToString(),
+            *VehicleModel->BodyMaterialSlotName.ToString(),
+            VehicleModel->BodyMaterialSlotIndex);
+        return false;
     }
 
-    // Restore the model material first so toggling the override off also works
-    // in the editor construction preview.
-    BodyMesh->SetMaterial(
-        SlotIndex, VehicleModel->BodyMesh->GetMaterial(SlotIndex));
+    UMaterialInterface* BaseMaterial =
+        VehicleModel->BodyMesh->GetMaterial(SlotIndex);
+    BodyMesh->SetMaterial(SlotIndex, BaseMaterial);
     if (!bOverrideBodyColor)
-        return;
-    if (VehicleModel->BodyColorParameterName.IsNone())
+        return true;
+    if (!IsValid(BaseMaterial))
     {
-        UE_LOG(LogTemp, Warning,
-            TEXT("TMOP vehicle model '%s' has no Body Color Parameter Name."),
-            *VehicleModel->ModelId.ToString());
-        return;
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP vehicle '%s': Body slot %d has no material."),
+            *VehicleId.ToString(), SlotIndex);
+        return false;
     }
-    if (UMaterialInstanceDynamic* Paint =
-        BodyMesh->CreateDynamicMaterialInstance(SlotIndex))
+
+    const FName ParameterName =
+        ResolveBodyColorParameterName(BaseMaterial);
+    if (ParameterName.IsNone())
     {
-        Paint->SetVectorParameterValue(
-            VehicleModel->BodyColorParameterName, BodyColor);
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP vehicle '%s': material '%s' in Body slot has no vector colour parameter. Add a Vector Parameter named VehicleColor to whitecar2 and connect it to Base Color."),
+            *VehicleId.ToString(), *BaseMaterial->GetPathName());
+        return false;
     }
+
+    UMaterialInstanceDynamic* Paint =
+        BodyMesh->CreateDynamicMaterialInstance(SlotIndex, BaseMaterial);
+    if (!IsValid(Paint))
+        return false;
+
+    Paint->SetVectorParameterValue(ParameterName, BodyColor);
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP vehicle '%s': applied colour %s to slot '%s' (%d), parameter '%s'."),
+        *VehicleId.ToString(), *BodyColor.ToString(),
+        *VehicleModel->BodyMaterialSlotName.ToString(), SlotIndex,
+        *ParameterName.ToString());
+    return true;
+}
+
+int32 ATMOPConfiguredVehicle::ResolveBodyMaterialSlotIndex() const
+{
+    if (!IsValid(VehicleModel) || !IsValid(VehicleModel->BodyMesh))
+        return INDEX_NONE;
+
+    const TArray<FStaticMaterial>& Materials =
+        VehicleModel->BodyMesh->GetStaticMaterials();
+    if (!VehicleModel->BodyMaterialSlotName.IsNone())
+    {
+        for (int32 Index = 0; Index < Materials.Num(); ++Index)
+            if (Materials[Index].MaterialSlotName.IsEqual(
+                VehicleModel->BodyMaterialSlotName,
+                ENameCase::IgnoreCase))
+                return Index;
+    }
+
+    return Materials.IsValidIndex(VehicleModel->BodyMaterialSlotIndex)
+        ? VehicleModel->BodyMaterialSlotIndex : INDEX_NONE;
+}
+
+FName ATMOPConfiguredVehicle::ResolveBodyColorParameterName(
+    UMaterialInterface* Material) const
+{
+    if (!IsValid(Material))
+        return NAME_None;
+
+    TArray<FMaterialParameterInfo> ParameterInfos;
+    TArray<FGuid> ParameterIds;
+    Material->GetAllVectorParameterInfo(ParameterInfos, ParameterIds);
+
+    const auto HasParameter = [&ParameterInfos](const FName Candidate)
+    {
+        return ParameterInfos.ContainsByPredicate(
+            [Candidate](const FMaterialParameterInfo& Info)
+            {
+                return Info.Name.IsEqual(Candidate, ENameCase::IgnoreCase);
+            });
+    };
+
+    if (!VehicleModel->BodyColorParameterName.IsNone() &&
+        HasParameter(VehicleModel->BodyColorParameterName))
+        return VehicleModel->BodyColorParameterName;
+
+    static const FName Aliases[] = {
+        TEXT("VehicleColor"), TEXT("BodyColor"), TEXT("CarColor"),
+        TEXT("BaseColor Tint"), TEXT("BaseColorTint"),
+        TEXT("BaseColor"), TEXT("Color"), TEXT("Tint")
+    };
+    for (const FName Alias : Aliases)
+        if (HasParameter(Alias))
+            return Alias;
+
+    return NAME_None;
 }
 
 void ATMOPConfiguredVehicle::ApplyWheel(UStaticMeshComponent* Component,

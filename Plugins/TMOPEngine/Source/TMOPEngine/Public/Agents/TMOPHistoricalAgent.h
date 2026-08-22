@@ -291,6 +291,15 @@ public:
         meta = (ClampMin = "2.0", Units = "s"))
     float FailsafeAfterSeconds = 10.0f;
 
+    /** Try a small controlled jump before repathing when a low threshold blocks walking. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
+        meta = (ClampMin = "0.5", Units = "s"))
+    float ThresholdStepAfterSeconds = 1.5f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
+        meta = (ClampMin = "10.0", ClampMax = "60.0", Units = "cm"))
+    float MaximumThresholdHeightCm = 45.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
         meta = (ClampMin = "40.0", Units = "cm"))
     float SideStepDistanceCm = 85.0f;
@@ -334,6 +343,7 @@ private:
     void ReissueMove(AAIController* Controller, const FVector& Destination);
     bool TrySideStep(AAIController* Controller, const FVector& Destination);
     bool TryFailsafeAdvance(const FVector& Destination);
+    bool TryThresholdStep(const FVector& Destination);
 
     FVector LastUnstuckLocation = FVector::ZeroVector;
     FVector SavedMoveDestination = FVector::ZeroVector;
@@ -345,6 +355,7 @@ private:
     bool bSideStepAttempted = false;
     bool bSqueezeActive = false;
     bool bFailsafeAttempted = false;
+    bool bThresholdStepAttempted = false;
     bool bReturningFromSideStep = false;
 
     TWeakObjectPtr<AActor> SocialFocusTarget;

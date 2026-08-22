@@ -140,10 +140,7 @@ bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
     bRestoredFromBake = false;
     ExecutionState = ETMOPActionExecutionState::Executing;
 
-    OnActionExecutionChanged.Broadcast(
-        Entry.EntryId,
-        Entry.ActionType,
-        ExecutionState);
+    BroadcastExecutionState(ExecutionState);
 
     if (Entry.ActionType == ETMOPScheduleActionType::MoveToAnchor)
     {
@@ -170,10 +167,7 @@ void UTMOPActionExecutorComponent::CancelCurrentAction()
         }
     }
 
-    OnActionExecutionChanged.Broadcast(
-        CurrentEntry.EntryId,
-        CurrentEntry.ActionType,
-        ETMOPActionExecutionState::Failed);
+    BroadcastExecutionState(ETMOPActionExecutionState::Failed);
 
     bHasCurrentEntry = false;
     bRestoredFromBake = false;
@@ -235,6 +229,7 @@ void UTMOPActionExecutorComponent::HandleScheduleEntryReady(
         return;
     }
 
+    CurrentScheduledTime = TriggerTime;
     ExecuteScheduleEntry(Entry);
 }
 
@@ -338,10 +333,7 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
     ExecutionState = ETMOPActionExecutionState::WaitingForArrival;
     SetComponentTickEnabled(true);
 
-    OnActionExecutionChanged.Broadcast(
-        Entry.EntryId,
-        Entry.ActionType,
-        ExecutionState);
+    BroadcastExecutionState(ExecutionState);
 
     return true;
 }
@@ -426,10 +418,7 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
         }
     }
 
-    OnActionExecutionChanged.Broadcast(
-        CurrentEntry.EntryId,
-        CurrentEntry.ActionType,
-        FinalState);
+    BroadcastExecutionState(FinalState);
 
     bHasCurrentEntry = false;
     bRestoredFromBake = false;
@@ -462,6 +451,20 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
     }
 }
 
+void UTMOPActionExecutorComponent::BroadcastExecutionState(
+    const ETMOPActionExecutionState State)
+{
+    OnActionExecutionChanged.Broadcast(
+        CurrentEntry.EntryId,
+        CurrentEntry.ActionType,
+        State);
+    OnActionValidationEvent.Broadcast(
+        this,
+        CurrentEntry,
+        CurrentScheduledTime,
+        State);
+}
+
 FName UTMOPActionExecutorComponent::GetOwnerEntityId() const
 {
     const ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
@@ -477,3 +480,4 @@ UTMOPActionExecutorComponent::GetHistoricalAgent() const
 {
     return Cast<ATMOPHistoricalAgent>(GetOwner());
 }
+

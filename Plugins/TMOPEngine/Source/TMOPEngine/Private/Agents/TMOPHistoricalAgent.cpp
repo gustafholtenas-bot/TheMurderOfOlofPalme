@@ -103,6 +103,8 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     SpeechBubble->SetVisibility(false);
 
     GetCapsuleComponent()->InitCapsuleSize(PedestrianCapsuleRadiusCm, 90.0f);
+    GetCharacterMovement()->MaxStepHeight = MaximumThresholdHeightCm;
+    GetCharacterMovement()->JumpZVelocity = 260.0f;
 }
 
 void ATMOPHistoricalAgent::BeginPlay()
@@ -393,6 +395,12 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
     if (SavedMoveDestination.IsNearlyZero()) return;
 
     StationarySeconds += DeltaSeconds;
+    if (!bThresholdStepAttempted &&
+        StationarySeconds >= ThresholdStepAfterSeconds)
+    {
+        bThresholdStepAttempted = true;
+        TryThresholdStep(SavedMoveDestination);
+    }
     if (!bRepathAttempted && StationarySeconds >= RepathAfterSeconds)
     {
         bRepathAttempted = true;
@@ -424,6 +432,7 @@ void ATMOPHistoricalAgent::ResetAutomaticUnstuck(const bool bRestoreCapsule)
     bRepathAttempted = false;
     bSideStepAttempted = false;
     bFailsafeAttempted = false;
+    bThresholdStepAttempted = false;
     bReturningFromSideStep = false;
     if (bRestoreCapsule && bSqueezeActive && OriginalCapsuleRadiusCm > 0.0f)
     {
@@ -482,6 +491,47 @@ bool ATMOPHistoricalAgent::TryFailsafeAdvance(const FVector& Destination)
 
     FHitResult Hit;
     return SetActorLocation(Projected.Location, true, &Hit, ETeleportType::TeleportPhysics);
+}
+
+bool ATMOPHistoricalAgent::TryThresholdStep(const FVector& Destination)
+{
+    UCharacterMovementComponent* Movement = GetCharacterMovement();
+    if (!IsValid(Movement) || !Movement->IsMovingOnGround() ||
+        Destination.IsNearlyZero())
+        return false;
+
+    FVector Direction = Destination - GetActorLocation();
+    Direction.Z = 0.0f;
+    if (!Direction.Normalize()) return false;
+
+    const float HalfHeight =
+        GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+    const FVector Feet = GetActorLocation() - FVector(0.0f, 0.0f, HalfHeight);
+    const FVector LowStart = Feet + FVector(0.0f, 0.0f, 12.0f);
+    const FVector LowEnd = LowStart + Direction * 75.0f;
+    const FVector HighStart =
+        Feet + FVector(0.0f, 0.0f, MaximumThresholdHeightCm + 8.0f);
+    const FVector HighEnd = HighStart + Direction * 75.0f;
+
+    FCollisionObjectQueryParams StaticOnly;
+    StaticOnly.AddObjectTypesToQuery(ECC_WorldStatic);
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(TMOPThresholdStep), false, this);
+    FHitResult LowHit;
+    FHitResult HighHit;
+    const bool bLowBlocked = GetWorld()->LineTraceSingleByObjectType(
+        LowHit, LowStart, LowEnd, StaticOnly, Query);
+    const bool bHighBlocked = GetWorld()->LineTraceSingleByObjectType(
+        HighHit, HighStart, HighEnd, StaticOnly, Query);
+    if (!bLowBlocked || bHighBlocked) return false;
+
+    LaunchCharacter(
+        Direction * 90.0f + FVector(0.0f, 0.0f, Movement->JumpZVelocity),
+        false, true);
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP threshold step: '%s' jumped a low obstacle at %s."),
+        IsValid(EntityIdentity) ? *EntityIdentity->EntityId.ToString() : *GetName(),
+        *LowHit.ImpactPoint.ToString());
+    return true;
 }
 
 void ATMOPHistoricalAgent::RefreshNameLabel()
