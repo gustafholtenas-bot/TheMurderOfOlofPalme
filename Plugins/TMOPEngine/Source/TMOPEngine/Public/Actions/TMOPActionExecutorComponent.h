@@ -91,12 +91,6 @@ public:
             ExecutionState == ETMOPActionExecutionState::WaitingForVerticalTransport;
     }
 
-    UFUNCTION(BlueprintPure, Category = "TMOP|Actions|Validation")
-    FName GetCurrentEntryId() const
-    {
-        return bHasCurrentEntry ? CurrentEntry.EntryId : NAME_None;
-    }
-
     UFUNCTION(BlueprintCallable, Category = "TMOP|Actions")
     bool ExecuteScheduleEntry(const FTMOPScheduleEntry& Entry);
 
@@ -123,6 +117,10 @@ private:
     bool ExecuteImmediateAction(const FTMOPScheduleEntry& Entry);
     bool BeginMoveToAnchor(const FTMOPScheduleEntry& Entry);
     bool MoveToCurrentRouteAnchor();
+    void QueueScheduleEntry(
+        const FTMOPScheduleEntry& Entry,
+        const FTMOPTime& TriggerTime);
+    void ExecuteNextQueuedEntry();
     void CompleteCurrentAction(bool bSuccessful);
     void BroadcastExecutionState(ETMOPActionExecutionState State);
     FName GetOwnerEntityId() const;
@@ -145,6 +143,14 @@ private:
     bool bHasCurrentEntry = false;
     FTMOPTime CurrentScheduledTime;
     bool bRestoredFromBake = false;
+
+    /** Entries whose scheduled time passed while an earlier action was active. */
+    UPROPERTY(Transient)
+    TArray<FTMOPScheduleEntry> QueuedEntries;
+
+    /** Original trigger times, kept parallel with QueuedEntries for validation. */
+    UPROPERTY(Transient)
+    TArray<FTMOPTime> QueuedTriggerTimes;
 
     UPROPERTY(Transient)
     TObjectPtr<ATMOPVerticalTransport> ActiveVerticalTransport;

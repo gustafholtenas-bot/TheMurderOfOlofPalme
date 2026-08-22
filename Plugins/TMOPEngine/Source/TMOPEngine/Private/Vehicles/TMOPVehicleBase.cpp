@@ -1,6 +1,7 @@
 #include "Vehicles/TMOPVehicleBase.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Audio/TMOPVehicleAudioComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/TextRenderComponent.h"
@@ -123,7 +124,12 @@ bool ATMOPVehicleBase::EnterVehicle(ATMOPHistoricalAgent* Agent, const FName Pre
     {
         if (!IsValid(Seat) || Seat->IsOccupied()) continue;
         if (!PreferredSeatId.IsNone() && Seat->SeatId != PreferredSeatId) continue;
-        return Seat->EnterSeat(Agent);
+        const bool bEntered = Seat->EnterSeat(Agent);
+        if (bEntered)
+            if (UTMOPVehicleAudioComponent* Audio =
+                FindComponentByClass<UTMOPVehicleAudioComponent>())
+                Audio->PlayDoorCycle();
+        return bEntered;
     }
     return false;
 }
@@ -137,7 +143,15 @@ bool ATMOPVehicleBase::EnterDriverSeat(ATMOPHistoricalAgent* Agent)
 bool ATMOPVehicleBase::ExitVehicle(ATMOPHistoricalAgent* Agent)
 {
     for (UTMOPVehicleSeatComponent* Seat : GetVehicleSeats())
-        if (IsValid(Seat) && Seat->GetOccupant() == Agent) return Seat->ExitSeat(Agent);
+        if (IsValid(Seat) && Seat->GetOccupant() == Agent)
+        {
+            const bool bExited = Seat->ExitSeat(Agent);
+            if (bExited)
+                if (UTMOPVehicleAudioComponent* Audio =
+                    FindComponentByClass<UTMOPVehicleAudioComponent>())
+                    Audio->PlayDoorCycle();
+            return bExited;
+        }
     return false;
 }
 
@@ -146,4 +160,3 @@ ATMOPHistoricalAgent* ATMOPVehicleBase::GetDriverAgent() const
     UTMOPVehicleSeatComponent* DriverSeat = GetDriverSeat();
     return IsValid(DriverSeat) ? DriverSeat->GetOccupant() : nullptr;
 }
-

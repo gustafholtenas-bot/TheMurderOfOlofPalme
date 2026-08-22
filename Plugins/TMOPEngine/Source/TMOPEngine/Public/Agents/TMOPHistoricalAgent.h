@@ -308,6 +308,30 @@ public:
         meta = (ClampMin = "20.0", Units = "cm"))
     float FailsafeAdvanceCm = 100.0f;
 
+    /**
+     * If another historical pedestrian has blocked this moving agent for this
+     * long, temporarily ignore only the nearby historical agents while moving.
+     * World geometry, vehicles and the floor continue to collide normally.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
+        meta = (ClampMin = "2.0", Units = "s"))
+    float CrowdPassThroughAfterSeconds = 14.0f;
+
+    /** Maximum time for one person-only pass-through window. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
+        meta = (ClampMin = "0.2", ClampMax = "5.0", Units = "s"))
+    float CrowdPassThroughDurationSeconds = 2.5f;
+
+    /** Nearby historical pedestrians inside this radius may be ignored. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
+        meta = (ClampMin = "50.0", ClampMax = "250.0", Units = "cm"))
+    float CrowdPassThroughRadiusCm = 115.0f;
+
+    /** Restore person collision once the agent has advanced this far. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
+        meta = (ClampMin = "50.0", ClampMax = "400.0", Units = "cm"))
+    float CrowdPassThroughAdvanceCm = 160.0f;
+
     UFUNCTION(BlueprintPure, Category = "TMOP|Agent|State")
     bool CanMove() const;
 
@@ -344,6 +368,9 @@ private:
     bool TrySideStep(AAIController* Controller, const FVector& Destination);
     bool TryFailsafeAdvance(const FVector& Destination);
     bool TryThresholdStep(const FVector& Destination);
+    bool BeginCrowdPassThrough(const FVector& Destination);
+    void UpdateCrowdPassThrough(float DeltaSeconds);
+    void EndCrowdPassThrough();
 
     FVector LastUnstuckLocation = FVector::ZeroVector;
     FVector SavedMoveDestination = FVector::ZeroVector;
@@ -357,6 +384,11 @@ private:
     bool bFailsafeAttempted = false;
     bool bThresholdStepAttempted = false;
     bool bReturningFromSideStep = false;
+    bool bCrowdPassThroughAttempted = false;
+    bool bCrowdPassThroughActive = false;
+    float CrowdPassThroughSecondsRemaining = 0.0f;
+    FVector CrowdPassThroughStartLocation = FVector::ZeroVector;
+    TArray<TWeakObjectPtr<AActor>> CrowdPassThroughIgnoredAgents;
 
     TWeakObjectPtr<AActor> SocialFocusTarget;
     float SocialFocusSecondsRemaining = 0.0f;

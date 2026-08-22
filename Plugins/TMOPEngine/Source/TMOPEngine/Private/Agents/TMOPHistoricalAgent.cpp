@@ -8,6 +8,8 @@
 #include "Components/TextRenderComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/AudioComponent.h"
+#include "Engine/OverlapResult.h"
+#include "Engine/World.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Animation/TMOPAnimationStateComponent.h"
@@ -343,11 +345,13 @@ void ATMOPHistoricalAgent::UpdateSocialFocus(const float DeltaSeconds)
 
 void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
 {
+    UpdateCrowdPassThrough(DeltaSeconds);
+
     if (!bEnableAutomaticUnstuck || DeltaSeconds <= 0.0f ||
-        ActivityState != ETMOPAgentActivityState::Walking ||
         !CanMove() || GetCharacterMovement() == nullptr ||
         GetCharacterMovement()->MovementMode != MOVE_Walking)
     {
+        EndCrowdPassThrough();
         ResetAutomaticUnstuck(true);
         return;
     }
@@ -355,6 +359,7 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
     AAIController* AIController = Cast<AAIController>(GetController());
     if (!IsValid(AIController))
     {
+        EndCrowdPassThrough();
         ResetAutomaticUnstuck(true);
         return;
     }
@@ -423,6 +428,13 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
         if (TryFailsafeAdvance(SavedMoveDestination))
             ReissueMove(AIController, SavedMoveDestination);
     }
+    if (!bCrowdPassThroughActive && !bCrowdPassThroughAttempted &&
+        StationarySeconds >= CrowdPassThroughAfterSeconds)
+    {
+        bCrowdPassThroughAttempted = true;
+        if (BeginCrowdPassThrough(SavedMoveDestination))
+            ReissueMove(AIController, SavedMoveDestination);
+    }
 }
 
 void ATMOPHistoricalAgent::ResetAutomaticUnstuck(const bool bRestoreCapsule)
@@ -434,11 +446,91 @@ void ATMOPHistoricalAgent::ResetAutomaticUnstuck(const bool bRestoreCapsule)
     bFailsafeAttempted = false;
     bThresholdStepAttempted = false;
     bReturningFromSideStep = false;
+    if (!bCrowdPassThroughActive)
+        bCrowdPassThroughAttempted = false;
     if (bRestoreCapsule && bSqueezeActive && OriginalCapsuleRadiusCm > 0.0f)
     {
         GetCapsuleComponent()->SetCapsuleRadius(OriginalCapsuleRadiusCm, true);
         bSqueezeActive = false;
     }
+}
+
+bool ATMOPHistoricalAgent::BeginCrowdPassThrough(
+    const FVector& Destination)
+{
+    if (GetWorld() == nullptr || !IsValid(GetCapsuleComponent())) return false;
+
+    FVector Forward = Destination - GetActorLocation();
+    Forward.Z = 0.0f;
+    if (!Forward.Normalize()) Forward = GetActorForwardVector().GetSafeNormal2D();
+
+    const FVector SearchCenter =
+        GetActorLocation() + Forward * (CrowdPassThroughRadiusCm * 0.3f);
+    FCollisionObjectQueryParams PawnObjects;
+    PawnObjects.AddObjectTypesToQuery(ECC_Pawn);
+    FCollisionQueryParams Query(
+        SCENE_QUERY_STAT(TMOPCrowdPassThrough), false, this);
+    TArray<FOverlapResult> Overlaps;
+    GetWorld()->OverlapMultiByObjectType(
+        Overlaps, SearchCenter, FQuat::Identity, PawnObjects,
+        FCollisionShape::MakeSphere(CrowdPassThroughRadiusCm), Query);
+
+    CrowdPassThroughIgnoredAgents.Reset();
+    for (const FOverlapResult& Overlap : Overlaps)
+    {
+        ATMOPHistoricalAgent* Other =
+            Cast<ATMOPHistoricalAgent>(Overlap.GetActor());
+        if (!IsValid(Other) || Other == this) continue;
+
+        FVector ToOther = Other->GetActorLocation() - GetActorLocation();
+        const float HeightDifference = FMath::Abs(ToOther.Z);
+        ToOther.Z = 0.0f;
+        if (HeightDifference > 130.0f ||
+            (!ToOther.IsNearlyZero() &&
+             FVector::DotProduct(Forward, ToOther.GetSafeNormal()) < -0.15f))
+            continue;
+
+        GetCapsuleComponent()->IgnoreActorWhenMoving(Other, true);
+        CrowdPassThroughIgnoredAgents.Add(Other);
+    }
+
+    if (CrowdPassThroughIgnoredAgents.IsEmpty()) return false;
+
+    bCrowdPassThroughActive = true;
+    CrowdPassThroughSecondsRemaining = CrowdPassThroughDurationSeconds;
+    CrowdPassThroughStartLocation = GetActorLocation();
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP crowd pass-through: '%s' temporarily ignores %d nearby pedestrians."),
+        IsValid(EntityIdentity) ? *EntityIdentity->EntityId.ToString() : *GetName(),
+        CrowdPassThroughIgnoredAgents.Num());
+    return true;
+}
+
+void ATMOPHistoricalAgent::UpdateCrowdPassThrough(const float DeltaSeconds)
+{
+    if (!bCrowdPassThroughActive) return;
+
+    CrowdPassThroughSecondsRemaining -= FMath::Max(0.0f, DeltaSeconds);
+    const float AdvancedDistance = FVector::Dist2D(
+        GetActorLocation(), CrowdPassThroughStartLocation);
+    if (CrowdPassThroughSecondsRemaining <= 0.0f ||
+        AdvancedDistance >= CrowdPassThroughAdvanceCm)
+        EndCrowdPassThrough();
+}
+
+void ATMOPHistoricalAgent::EndCrowdPassThrough()
+{
+    if (!bCrowdPassThroughActive && CrowdPassThroughIgnoredAgents.IsEmpty())
+        return;
+
+    if (IsValid(GetCapsuleComponent()))
+        for (const TWeakObjectPtr<AActor>& Ignored : CrowdPassThroughIgnoredAgents)
+            if (AActor* Actor = Ignored.Get())
+                GetCapsuleComponent()->IgnoreActorWhenMoving(Actor, false);
+
+    CrowdPassThroughIgnoredAgents.Reset();
+    CrowdPassThroughSecondsRemaining = 0.0f;
+    bCrowdPassThroughActive = false;
 }
 
 void ATMOPHistoricalAgent::ReissueMove(
@@ -777,4 +869,3 @@ void ATMOPHistoricalAgent::HandleActivityStateChanged(
     const ETMOPAgentActivityState NewActivity)
 {
 }
-

@@ -58,9 +58,8 @@ void UTMOPActionExecutorComponent::EndPlay(
         }
     }
 
-    // Ending PIE is not a historical action failure. Stop native telemetry
-    // before cancellation so validation reports contain no teardown errors.
-    OnActionValidationEvent.Clear();
+    QueuedEntries.Reset();
+    QueuedTriggerTimes.Reset();
     CancelCurrentAction();
     Super::EndPlay(EndPlayReason);
 }
@@ -139,8 +138,6 @@ bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
     }
 
     CurrentEntry = Entry;
-    if (Entry.AbsoluteTime.ToSecondsFromMidnight() > 0)
-        CurrentScheduledTime = Entry.AbsoluteTime;
     bHasCurrentEntry = true;
     bRestoredFromBake = false;
     ExecutionState = ETMOPActionExecutionState::Executing;
@@ -234,8 +231,62 @@ void UTMOPActionExecutorComponent::HandleScheduleEntryReady(
         return;
     }
 
+    if (IsExecutingAction())
+    {
+        QueueScheduleEntry(Entry, TriggerTime);
+        return;
+    }
+
     CurrentScheduledTime = TriggerTime;
     ExecuteScheduleEntry(Entry);
+}
+
+void UTMOPActionExecutorComponent::QueueScheduleEntry(
+    const FTMOPScheduleEntry& Entry,
+    const FTMOPTime& TriggerTime)
+{
+    // The schedule subsystem can emit the same entry again while it remains
+    // unexecuted. Never add duplicate work to an agent's queue.
+    if (CurrentEntry.EntryId == Entry.EntryId)
+    {
+        return;
+    }
+    for (const FTMOPScheduleEntry& QueuedEntry : QueuedEntries)
+    {
+        if (QueuedEntry.EntryId == Entry.EntryId)
+        {
+            return;
+        }
+    }
+
+    QueuedEntries.Add(Entry);
+    QueuedTriggerTimes.Add(TriggerTime);
+    UE_LOG(LogTemp, Verbose,
+        TEXT("TMOP actions: queued '%s' for '%s' behind '%s'."),
+        *Entry.EntryId.ToString(),
+        *GetOwnerEntityId().ToString(),
+        *CurrentEntry.EntryId.ToString());
+}
+
+void UTMOPActionExecutorComponent::ExecuteNextQueuedEntry()
+{
+    if (IsExecutingAction() || QueuedEntries.IsEmpty())
+    {
+        return;
+    }
+
+    const FTMOPScheduleEntry NextEntry = QueuedEntries[0];
+    const FTMOPTime NextTriggerTime = QueuedTriggerTimes.IsValidIndex(0)
+        ? QueuedTriggerTimes[0]
+        : FTMOPTime();
+    QueuedEntries.RemoveAt(0);
+    if (!QueuedTriggerTimes.IsEmpty())
+    {
+        QueuedTriggerTimes.RemoveAt(0);
+    }
+
+    CurrentScheduledTime = NextTriggerTime;
+    ExecuteScheduleEntry(NextEntry);
 }
 
 bool UTMOPActionExecutorComponent::ExecuteImmediateAction(
@@ -361,12 +412,10 @@ bool UTMOPActionExecutorComponent::MoveToCurrentRouteAnchor()
     AController* Controller = Agent->GetController();
     if (!IsValid(TargetAnchor) || !IsValid(Controller)) return false;
 
-    // Group membership must not collapse all members onto one placement point.
-    // The group director handles formation spacing; individual movement uses a
-    // unique deterministic entity key inside the anchor radius.
     const FName StableKey = Agent->EntityIdentity != nullptr
-        ? Agent->EntityIdentity->EntityId
-        : Agent->GetFName();
+        ? (!Agent->SocialGroupId.IsNone() ? Agent->SocialGroupId
+                                         : Agent->EntityIdentity->EntityId)
+        : NAME_None;
     CurrentTargetLocation = TargetAnchor->GetPlacementLocation(StableKey);
     UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
     return true;
@@ -455,7 +504,15 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
         UE_LOG(LogTemp, Display,
             TEXT("TMOP people: %d agent(s) reached map exit '%s' and despawned."),
             DespawnedCount, *CurrentTargetLocation.ToString());
+        QueuedEntries.Reset();
+        QueuedTriggerTimes.Reset();
+        return;
     }
+
+    // A later timeline entry must never interrupt an unfinished movement.
+    // Start it only after the current action has completed (or failed), while
+    // retaining its original trigger time so validation reports lateness.
+    ExecuteNextQueuedEntry();
 }
 
 void UTMOPActionExecutorComponent::BroadcastExecutionState(
