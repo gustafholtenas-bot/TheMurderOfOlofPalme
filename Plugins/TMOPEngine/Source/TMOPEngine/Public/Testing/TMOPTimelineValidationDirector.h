@@ -102,6 +102,9 @@ private:
         float StationarySeconds = 0.0f;
         bool bStuckReportedForCurrentMove = false;
         FName ActiveEntryId = NAME_None;
+        FName ActiveTargetAnchorId = NAME_None;
+        int32 ActivePlannedSecond = INDEX_NONE;
+        bool bRegistryManagedMove = false;
     };
 
     void DiscoverAgents();
@@ -116,8 +119,15 @@ private:
         FTMOPTime ScheduledTime,
         ETMOPActionExecutionState State);
 
+    void HandlePersonTimelineApplied(
+        FName EntityId,
+        const struct FTMOPPersonTimelineEntry& Entry,
+        int32 ResolvedSecond,
+        bool bSuccessful,
+        bool bCatchUp);
+
     TMap<FName, FTrackedAgent> TrackedAgents;
+    TWeakObjectPtr<class ATMOPPersonRegistryDirector> PeopleDirector;
     float SampleAccumulator = 0.0f;
     bool bValidationActive = false;
 };
-

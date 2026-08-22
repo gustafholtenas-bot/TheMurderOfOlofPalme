@@ -52,6 +52,15 @@ public:
         meta=(ClampMin="50.0", Units="cm"))
     float EntrySpawnClearanceRadiusCm = 300.0f;
 
+    /** Number of deterministic queue positions searched behind an occupied entry. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning",
+        meta=(ClampMin="1", ClampMax="8"))
+    int32 EntrySpawnQueueSlots = 4;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning",
+        meta=(ClampMin="100.0", Units="cm"))
+    float EntrySpawnQueueSpacingCm = 450.0f;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Historical Vehicles")
     int32 InitializeHistoricalVehicles();
 
@@ -91,18 +100,22 @@ private:
         TWeakObjectPtr<ATMOPVehicleBase> Vehicle;
         bool bSpawnedByDirector = false;
         bool bDeferredPlacedVehicle = false;
+        bool bTimelineDespawned = false;
         int32 InitialSpawnSecond = INDEX_NONE;
     };
 
     void DiscoverPlacedVehicles();
     int32 SpawnDueVehicles(int32 CurrentSecond);
+    void DespawnDueVehicles(int32 CurrentSecond);
     int32 GetInitialSpawnSecond(
         const FTMOPHistoricalVehicleRow& Profile) const;
     void ApplyDeferredPlacedVehicleState(int32 CurrentSecond);
-    ATMOPVehicleBase* SpawnVehicle(FHistoricalVehicleRuntime& Runtime);
+    ATMOPVehicleBase* SpawnVehicle(FHistoricalVehicleRuntime& Runtime,
+        const FTransform* SpawnTransformOverride = nullptr);
     FTransform GetInitialTransform(const FTMOPHistoricalVehicleRow& Profile) const;
-    bool IsInitialSpawnLocationClear(
-        const FTMOPHistoricalVehicleRow& Profile) const;
+    bool FindClearInitialSpawnTransform(
+        const FTMOPHistoricalVehicleRow& Profile,
+        FTransform& OutTransform) const;
     bool ShouldSpawn(const FTMOPHistoricalVehicleRow& Profile, bool bIgnoreRowFlag) const;
     void RegisterVehicle(ATMOPVehicleBase* Vehicle) const;
     void UnregisterVehicle(ATMOPVehicleBase* Vehicle) const;

@@ -58,6 +58,9 @@ void UTMOPActionExecutorComponent::EndPlay(
         }
     }
 
+    // Ending PIE is not a historical action failure. Stop native telemetry
+    // before cancellation so validation reports contain no teardown errors.
+    OnActionValidationEvent.Clear();
     CancelCurrentAction();
     Super::EndPlay(EndPlayReason);
 }
@@ -136,6 +139,8 @@ bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
     }
 
     CurrentEntry = Entry;
+    if (Entry.AbsoluteTime.ToSecondsFromMidnight() > 0)
+        CurrentScheduledTime = Entry.AbsoluteTime;
     bHasCurrentEntry = true;
     bRestoredFromBake = false;
     ExecutionState = ETMOPActionExecutionState::Executing;
@@ -356,10 +361,12 @@ bool UTMOPActionExecutorComponent::MoveToCurrentRouteAnchor()
     AController* Controller = Agent->GetController();
     if (!IsValid(TargetAnchor) || !IsValid(Controller)) return false;
 
+    // Group membership must not collapse all members onto one placement point.
+    // The group director handles formation spacing; individual movement uses a
+    // unique deterministic entity key inside the anchor radius.
     const FName StableKey = Agent->EntityIdentity != nullptr
-        ? (!Agent->SocialGroupId.IsNone() ? Agent->SocialGroupId
-                                         : Agent->EntityIdentity->EntityId)
-        : NAME_None;
+        ? Agent->EntityIdentity->EntityId
+        : Agent->GetFName();
     CurrentTargetLocation = TargetAnchor->GetPlacementLocation(StableKey);
     UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
     return true;
@@ -480,4 +487,3 @@ UTMOPActionExecutorComponent::GetHistoricalAgent() const
 {
     return Cast<ATMOPHistoricalAgent>(GetOwner());
 }
-

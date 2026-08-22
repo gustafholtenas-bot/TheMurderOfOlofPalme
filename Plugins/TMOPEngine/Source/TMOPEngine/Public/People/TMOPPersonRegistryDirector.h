@@ -12,6 +12,14 @@ class ATMOPTimelineValidationDirector;
 class UDataTable;
 struct FTMOPGroupProfileRow;
 
+DECLARE_MULTICAST_DELEGATE_FiveParams(
+    FTMOPPersonTimelineAppliedNativeSignature,
+    FName,
+    const FTMOPPersonTimelineEntry&,
+    int32,
+    bool,
+    bool);
+
 /** Configures the central person DataTable when the level starts. */
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPersonRegistryDirector : public AActor
@@ -59,6 +67,22 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     FTMOPTime SimulationEpoch = FTMOPTime(23, 0, 0);
 
+    /** Recovers historical NPCs and the player if they fall below the map. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World|Fall Safety")
+    bool bEnableWorldFallSafety = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World|Fall Safety",
+        meta=(Units="cm"))
+    float FallRecoveryTriggerZ = -3000.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World|Fall Safety",
+        meta=(ClampMin="0.0", Units="cm"))
+    float FallRecoveryHeightOffsetCm = 100.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World|Fall Safety",
+        meta=(ClampMin="0.05", Units="s"))
+    float FallSafetySampleIntervalSeconds = 0.25f;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|People")
     int32 RefreshAllActiveProfiles();
 
@@ -92,6 +116,9 @@ public:
     /** Returns the configured talk response for the selected side of the shot. */
     UFUNCTION(BlueprintPure, Category="TMOP|People|Dialog")
     FText GetPersonDialog(FName EntityId, bool bAfterShot) const;
+
+    /** Telemetry for all consumed entries, including group and vehicle actions. */
+    FTMOPPersonTimelineAppliedNativeSignature OnTimelineEntryApplied;
 
 private:
     struct FPersonRuntime
@@ -136,10 +163,12 @@ private:
     void RebuildGroupsFromGroupTable();
     void RebuildGroupsFromPeople();
     ATMOPVehicleBase* FindVehicle(FName VehicleId) const;
+    void UpdateWorldFallSafety(float DeltaSeconds);
 
     bool bRestoringWorldBake = false;
 
     TMap<FName, FPersonRuntime> RuntimePeople;
+    TMap<TWeakObjectPtr<class APawn>, FTransform> LastSafePawnTransforms;
+    float FallSafetyAccumulator = 0.0f;
     int32 LastEvaluatedSecond = INDEX_NONE;
 };
-

@@ -6,6 +6,10 @@
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Engine/DataTable.h"
 #include "EngineUtils.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/Controller.h"
+#include "GameFramework/Pawn.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Groups/TMOPGroupDirector.h"
@@ -76,6 +80,7 @@ void ATMOPPersonRegistryDirector::EndPlay(const EEndPlayReason::Type EndPlayReas
 void ATMOPPersonRegistryDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    UpdateWorldFallSafety(DeltaSeconds);
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (Clock == nullptr) return;
@@ -91,6 +96,63 @@ void ATMOPPersonRegistryDirector::Tick(const float DeltaSeconds)
         EvaluatePeople(CurrentSecond, false);
         EvaluateAutomaticSpeech(CurrentSecond, PreviousSecond);
         LastEvaluatedSecond = CurrentSecond;
+    }
+}
+
+void ATMOPPersonRegistryDirector::UpdateWorldFallSafety(
+    const float DeltaSeconds)
+{
+    if (!bEnableWorldFallSafety || GetWorld() == nullptr) return;
+    FallSafetyAccumulator += DeltaSeconds;
+    if (FallSafetyAccumulator < FallSafetySampleIntervalSeconds) return;
+    FallSafetyAccumulator = 0.0f;
+
+    for (TActorIterator<APawn> It(GetWorld()); It; ++It)
+    {
+        APawn* Pawn = *It;
+        if (!IsValid(Pawn)) continue;
+
+        const FVector Location = Pawn->GetActorLocation();
+        const TWeakObjectPtr<APawn> PawnKey(Pawn);
+        FTransform* LastSafe = LastSafePawnTransforms.Find(PawnKey);
+        if (Location.Z < FallRecoveryTriggerZ)
+        {
+            FTransform Recovery = LastSafe != nullptr
+                ? *LastSafe : Pawn->GetActorTransform();
+            FVector RecoveryLocation = Recovery.GetLocation();
+            if (LastSafe == nullptr)
+                RecoveryLocation.Z = FallRecoveryTriggerZ + 1000.0f;
+            else
+                RecoveryLocation.Z += FallRecoveryHeightOffsetCm;
+            Recovery.SetLocation(RecoveryLocation);
+
+            if (ACharacter* Character = Cast<ACharacter>(Pawn))
+                if (UCharacterMovementComponent* Movement =
+                    Character->GetCharacterMovement())
+                    Movement->StopMovementImmediately();
+            if (AController* Controller = Pawn->GetController())
+                Controller->StopMovement();
+            Pawn->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+            Pawn->SetActorTransform(
+                Recovery, false, nullptr, ETeleportType::TeleportPhysics);
+            LastSafePawnTransforms.Add(PawnKey, Recovery);
+            UE_LOG(LogTemp, Warning,
+                TEXT("TMOP fall safety recovered pawn '%s' from Z %.1f to %s."),
+                *Pawn->GetName(), Location.Z,
+                *RecoveryLocation.ToString());
+            continue;
+        }
+
+        bool bGrounded = true;
+        if (const ACharacter* Character = Cast<ACharacter>(Pawn))
+            if (const UCharacterMovementComponent* Movement =
+                Character->GetCharacterMovement())
+                bGrounded = Movement->IsMovingOnGround();
+        if (bGrounded)
+            LastSafePawnTransforms.Add(PawnKey, Pawn->GetActorTransform());
+        else if (LastSafe == nullptr &&
+            Location.Z > FallRecoveryTriggerZ + 500.0f)
+            LastSafePawnTransforms.Add(PawnKey, Pawn->GetActorTransform());
     }
 }
 
@@ -338,6 +400,14 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                 Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
                 !bEntryCatchUp)
             {
+                // The group director moves this agent through the leader, but
+                // validation still needs the follower's resolved timeline time.
+                OnTimelineEntryApplied.Broadcast(
+                    Runtime.Profile.EntityId,
+                    Entry,
+                    ResolvedSecond,
+                    true,
+                    false);
                 Runtime.LastResolvedTimelineSecond = ResolvedSecond;
                 ++Runtime.NextTimelineIndex;
                 Runtime.CachedResolvedSecond = INDEX_NONE;
@@ -345,7 +415,15 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
             }
 
             if (!bEntryCatchUp && IsAgentBusy(Agent)) break;
-            if (!ApplyTimelineEntry(Runtime, Entry, bEntryCatchUp)) break;
+            const bool bApplied =
+                ApplyTimelineEntry(Runtime, Entry, bEntryCatchUp);
+            OnTimelineEntryApplied.Broadcast(
+                Runtime.Profile.EntityId,
+                Entry,
+                ResolvedSecond,
+                bApplied,
+                bEntryCatchUp);
+            if (!bApplied) break;
             Runtime.LastResolvedTimelineSecond = ResolvedSecond;
             ++Runtime.NextTimelineIndex;
             Runtime.CachedResolvedSecond = INDEX_NONE;
@@ -495,6 +573,10 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
         {
             FTMOPScheduleEntry Action;
             Action.EntryId = Entry.EntryId;
+            Action.AbsoluteTime = FTMOPTime::FromSecondsFromMidnight(
+                Runtime.CachedResolvedSecond != INDEX_NONE
+                    ? Runtime.CachedResolvedSecond
+                    : Entry.Time.ToSecondsFromMidnight());
             Action.ActionType = ETMOPScheduleActionType::MoveToAnchor;
             Action.TargetAnchorId = Entry.TargetAnchorId;
             Action.PassAnchorIds = Entry.PassAnchorIds;
@@ -1220,4 +1302,3 @@ bool ATMOPPersonRegistryDirector::ValidateGroupTable(
     }
     return OutErrors.IsEmpty();
 }
-

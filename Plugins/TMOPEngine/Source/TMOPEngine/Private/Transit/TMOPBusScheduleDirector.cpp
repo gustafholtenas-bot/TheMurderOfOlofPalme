@@ -179,6 +179,10 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
             *Runtime.RunId.ToString());
         return false;
     }
+    // Keep the staged bus non-colliding until its lane position has been
+    // checked. This prevents even a single physics frame of overlap from
+    // pushing an existing bus, police vehicle or passenger crowd aside.
+    Bus->SetActorEnableCollision(false);
     Bus->VehicleId = Run.RunId;
 
     // Blueprint SCS components do not reliably exist until deferred spawning
@@ -272,6 +276,7 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
                 return false;
             }
 
+    Bus->SetActorEnableCollision(true);
     Movement->StopDriving();
     Runtime.State = ETMOPBusRunState::Staged;
     OnBusRunSpawned.Broadcast(Runtime.RunId, Bus);

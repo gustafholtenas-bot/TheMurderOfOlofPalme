@@ -6,12 +6,15 @@
 #include "Dom/JsonObject.h"
 #include "Engine/GameInstance.h"
 #include "EngineUtils.h"
+#include "AIController.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "HAL/FileManager.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
+#include "People/TMOPPersonRegistryDirector.h"
+#include "People/TMOPPersonProfileTypes.h"
 #include "Time/TMOPClockSubsystem.h"
 
 namespace
@@ -43,13 +46,25 @@ ATMOPTimelineValidationDirector::ATMOPTimelineValidationDirector()
 void ATMOPTimelineValidationDirector::BeginPlay()
 {
     Super::BeginPlay();
+    for (TActorIterator<ATMOPPersonRegistryDirector> It(GetWorld()); It; ++It)
+    {
+        PeopleDirector = *It;
+        PeopleDirector->OnTimelineEntryApplied.AddUObject(
+            this,
+            &ATMOPTimelineValidationDirector::HandlePersonTimelineApplied);
+        break;
+    }
     if (bStartAutomatically) StartValidation();
 }
 
 void ATMOPTimelineValidationDirector::EndPlay(
     const EEndPlayReason::Type EndPlayReason)
 {
-    if (bExportOnEndPlay && bValidationActive) ExportReports();
+    const bool bWasActive = bValidationActive;
+    bValidationActive = false;
+    if (bExportOnEndPlay && bWasActive) ExportReports();
+    if (PeopleDirector.IsValid())
+        PeopleDirector->OnTimelineEntryApplied.RemoveAll(this);
     for (TPair<FName, FTrackedAgent>& Pair : TrackedAgents)
         if (Pair.Value.Executor.IsValid())
             Pair.Value.Executor->OnActionValidationEvent.RemoveAll(this);
@@ -101,6 +116,8 @@ void ATMOPTimelineValidationDirector::DiscoverAgents()
         Tracked.Agent = Agent;
         Tracked.Executor = Agent->ActionExecutor;
         Tracked.LastLocation = Agent->GetActorLocation();
+        Tracked.ActiveEntryId =
+            Agent->ActionExecutor->GetCurrentEntryId();
         Agent->ActionExecutor->OnActionValidationEvent.AddUObject(
             this, &ATMOPTimelineValidationDirector::HandleActionValidation);
         TrackedAgents.Add(EntityId, MoveTemp(Tracked));
@@ -125,7 +142,17 @@ void ATMOPTimelineValidationDirector::SampleAgents(const float DeltaSeconds)
         if (!IsValid(Agent) || !IsValid(Executor)) continue;
 
         FVector Target;
-        const bool bMoving = Executor->TryGetActiveMoveTarget(Target);
+        bool bMoving = Executor->TryGetActiveMoveTarget(Target);
+        if (!bMoving && Tracked.bRegistryManagedMove &&
+            Agent->ActivityState == ETMOPAgentActivityState::Walking)
+        {
+            if (const AAIController* Controller =
+                Cast<AAIController>(Agent->GetController()))
+            {
+                Target = Controller->GetImmediateMoveDestination();
+                bMoving = !Target.IsNearlyZero();
+            }
+        }
         if (!bMoving)
         {
             Tracked.StationarySeconds = 0.0f;
@@ -192,6 +219,9 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
         if (Tracked != nullptr)
         {
             Tracked->ActiveEntryId = Entry.EntryId;
+            Tracked->ActiveTargetAnchorId = Entry.TargetAnchorId;
+            Tracked->ActivePlannedSecond = Record.PlannedSecond;
+            Tracked->bRegistryManagedMove = false;
             Tracked->StationarySeconds = 0.0f;
             Tracked->bStuckReportedForCurrentMove = false;
         }
@@ -248,8 +278,71 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
     if (Tracked != nullptr)
     {
         Tracked->ActiveEntryId = NAME_None;
+        Tracked->ActiveTargetAnchorId = NAME_None;
+        Tracked->ActivePlannedSecond = INDEX_NONE;
+        Tracked->bRegistryManagedMove = false;
         Tracked->StationarySeconds = 0.0f;
     }
+}
+
+void ATMOPTimelineValidationDirector::HandlePersonTimelineApplied(
+    const FName EntityId,
+    const FTMOPPersonTimelineEntry& Entry,
+    const int32 ResolvedSecond,
+    const bool bSuccessful,
+    const bool bCatchUp)
+{
+    if (!bValidationActive || bCatchUp) return;
+
+    FTrackedAgent* Tracked = TrackedAgents.Find(EntityId);
+    if (Tracked == nullptr)
+    {
+        DiscoverAgents();
+        Tracked = TrackedAgents.Find(EntityId);
+    }
+
+    if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
+        Tracked != nullptr && Tracked->Executor.IsValid() &&
+        Tracked->Executor->GetCurrentEntryId() == Entry.EntryId)
+        return;
+
+    FTMOPTimelineValidationRecord Record;
+    Record.EntityId = EntityId;
+    Record.EntryId = Entry.EntryId;
+    Record.TargetAnchorId = Entry.TargetAnchorId;
+    Record.PlannedSecond = ResolvedSecond;
+    Record.ActualSecond = GetSimulationSecond();
+    Record.TimeDeviationSeconds =
+        Record.ActualSecond - Record.PlannedSecond;
+    if (Tracked != nullptr && Tracked->Agent.IsValid())
+        Record.ActualLocation = Tracked->Agent->GetActorLocation();
+
+    if (!bSuccessful)
+    {
+        Record.Event = TEXT("Failed");
+        Record.Severity = ETMOPTimelineValidationSeverity::Error;
+        Record.Message = TEXT("People timeline entry could not be applied.");
+    }
+    else if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor)
+    {
+        Record.Event = TEXT("Started");
+        Record.Message = TEXT("Group-managed movement started.");
+        if (Tracked != nullptr)
+        {
+            Tracked->ActiveEntryId = Entry.EntryId;
+            Tracked->ActiveTargetAnchorId = Entry.TargetAnchorId;
+            Tracked->ActivePlannedSecond = ResolvedSecond;
+            Tracked->bRegistryManagedMove = true;
+            Tracked->StationarySeconds = 0.0f;
+            Tracked->bStuckReportedForCurrentMove = false;
+        }
+    }
+    else
+    {
+        Record.Event = TEXT("Applied");
+        Record.Message = TEXT("People timeline entry applied successfully.");
+    }
+    AddRecord(Record);
 }
 
 void ATMOPTimelineValidationDirector::AddRecord(

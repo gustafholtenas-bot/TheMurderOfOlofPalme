@@ -68,7 +68,42 @@ void ATMOPHistoricalVehicleDirector::Tick(const float DeltaSeconds)
     if (CurrentSecond != LastEvaluatedSecond)
     {
         SpawnDueVehicles(CurrentSecond);
+        DespawnDueVehicles(CurrentSecond);
         LastEvaluatedSecond = CurrentSecond;
+    }
+}
+
+void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
+    const int32 CurrentSecond)
+{
+    for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
+    {
+        FHistoricalVehicleRuntime& Runtime = Pair.Value;
+        ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+        if (!IsValid(Vehicle)) continue;
+
+        const FTMOPHistoricalVehicleTimelineEntry* DespawnEntry =
+            Runtime.Profile.Timeline.FindByPredicate(
+                [CurrentSecond](const FTMOPHistoricalVehicleTimelineEntry& Entry)
+                {
+                    return Entry.Action ==
+                            ETMOPHistoricalVehicleAction::Despawn &&
+                        Entry.Time.ToSecondsFromMidnight() <= CurrentSecond;
+                });
+        if (DespawnEntry == nullptr) continue;
+
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP Historical Vehicles: despawned '%s' at %02d:%02d:%02d."),
+            *Runtime.Profile.VehicleId.ToString(),
+            DespawnEntry->Time.Hour,
+            DespawnEntry->Time.Minute,
+            DespawnEntry->Time.Second);
+        UnregisterVehicle(Vehicle);
+        Vehicle->Destroy();
+        Runtime.Vehicle.Reset();
+        Runtime.bSpawnedByDirector = false;
+        Runtime.bDeferredPlacedVehicle = false;
+        Runtime.bTimelineDespawned = true;
     }
 }
 
@@ -209,6 +244,7 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
     {
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
         if (!ShouldSpawn(Runtime.Profile, false) ||
+            Runtime.bTimelineDespawned ||
             Runtime.InitialSpawnSecond == INDEX_NONE ||
             Runtime.InitialSpawnSecond > CurrentSecond)
         {
@@ -229,14 +265,16 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
         }
         else if (!Runtime.Vehicle.IsValid())
         {
-            if (!IsInitialSpawnLocationClear(Runtime.Profile))
+            FTransform ClearSpawnTransform;
+            if (!FindClearInitialSpawnTransform(
+                Runtime.Profile, ClearSpawnTransform))
             {
                 UE_LOG(LogTemp, Warning,
                     TEXT("TMOP VehicleSpawnBlocked: '%s' waits because its entry point is occupied."),
                     *Runtime.Profile.VehicleId.ToString());
                 continue;
             }
-            SpawnVehicle(Runtime);
+            SpawnVehicle(Runtime, &ClearSpawnTransform);
         }
         if (Runtime.Vehicle.IsValid())
         {
@@ -285,8 +323,9 @@ int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
     return INDEX_NONE;
 }
 
-bool ATMOPHistoricalVehicleDirector::IsInitialSpawnLocationClear(
-    const FTMOPHistoricalVehicleRow& Profile) const
+bool ATMOPHistoricalVehicleDirector::FindClearInitialSpawnTransform(
+    const FTMOPHistoricalVehicleRow& Profile,
+    FTransform& OutTransform) const
 {
     UWorld* World = GetWorld();
     if (World == nullptr) return false;
@@ -304,20 +343,41 @@ bool ATMOPHistoricalVehicleDirector::IsInitialSpawnLocationClear(
             ETMOPHistoricalVehiclePlacementMode::Anchor ||
         !Placement->PlacementAnchorId.ToString().StartsWith(
             TEXT("Enter"), ESearchCase::IgnoreCase))
+    {
+        OutTransform = GetInitialTransform(Profile);
         return true;
-    const FTransform Transform = GetInitialTransform(Profile);
-    TArray<FOverlapResult> Overlaps;
+    }
+
+    const FTransform Base = GetInitialTransform(Profile);
+    const FVector Backward = -Base.GetRotation().GetForwardVector();
     FCollisionObjectQueryParams Objects;
     Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
     Objects.AddObjectTypesToQuery(ECC_PhysicsBody);
-    FCollisionQueryParams Query(SCENE_QUERY_STAT(TMOPVehicleEntrySpawn), false, this);
-    World->OverlapMultiByObjectType(
-        Overlaps, Transform.GetLocation(), FQuat::Identity, Objects,
-        FCollisionShape::MakeSphere(EntrySpawnClearanceRadiusCm), Query);
-    for (const FOverlapResult& Overlap : Overlaps)
-        if (IsValid(Cast<ATMOPVehicleBase>(Overlap.GetActor())))
-            return false;
-    return true;
+    FCollisionQueryParams Query(
+        SCENE_QUERY_STAT(TMOPVehicleEntrySpawn), false, this);
+
+    const int32 SlotCount = FMath::Max(1, EntrySpawnQueueSlots);
+    for (int32 Slot = 0; Slot < SlotCount; ++Slot)
+    {
+        FTransform Candidate = Base;
+        Candidate.AddToTranslation(
+            Backward * EntrySpawnQueueSpacingCm * Slot);
+        TArray<FOverlapResult> Overlaps;
+        World->OverlapMultiByObjectType(
+            Overlaps, Candidate.GetLocation(), FQuat::Identity, Objects,
+            FCollisionShape::MakeSphere(EntrySpawnClearanceRadiusCm), Query);
+        const bool bVehicleOccupied = Overlaps.ContainsByPredicate(
+            [](const FOverlapResult& Overlap)
+            {
+                return IsValid(Cast<ATMOPVehicleBase>(Overlap.GetActor()));
+            });
+        if (!bVehicleOccupied)
+        {
+            OutTransform = Candidate;
+            return true;
+        }
+    }
+    return false;
 }
 
 void ATMOPHistoricalVehicleDirector::ApplyDeferredPlacedVehicleState(
@@ -395,7 +455,8 @@ void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
 }
 
 ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
-    FHistoricalVehicleRuntime& Runtime)
+    FHistoricalVehicleRuntime& Runtime,
+    const FTransform* SpawnTransformOverride)
 {
     UWorld* World = GetWorld();
     if (World == nullptr)
@@ -439,7 +500,8 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
         return nullptr;
     }
 
-    const FTransform InitialTransform = GetInitialTransform(Runtime.Profile);
+    const FTransform InitialTransform = SpawnTransformOverride != nullptr
+        ? *SpawnTransformOverride : GetInitialTransform(Runtime.Profile);
     ATMOPVehicleBase* Vehicle = World->SpawnActorDeferred<ATMOPVehicleBase>(
         SpawnClass, InitialTransform, this, nullptr,
         ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
