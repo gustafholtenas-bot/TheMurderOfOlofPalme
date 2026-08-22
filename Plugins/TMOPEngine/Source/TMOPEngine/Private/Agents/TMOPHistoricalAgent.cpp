@@ -509,15 +509,7 @@ void ATMOPHistoricalAgent::RefreshNameLabel()
 
 bool ATMOPHistoricalAgent::ShouldDisplayNameLabel() const
 {
-    if (!bShowNameLabel)
-    {
-        return false;
-    }
-
-    // Anonymous observations must not reveal their relevance in ordinary play.
-    // They can be highlighted separately by a future investigation-mode UI.
-    return PersonCategoryId.ToString().ToUpper() !=
-        TEXT("OBSERVED_UNKNOWN");
+    return bShowNameLabel;
 }
 
 FColor ATMOPHistoricalAgent::ResolveNameLabelColor() const
@@ -536,6 +528,12 @@ FColor ATMOPHistoricalAgent::ResolveNameLabelColor() const
     }
 
     const FString Category = PersonCategoryId.ToString().ToUpper();
+
+    if (Category.StartsWith(TEXT("OBSERVED_")) ||
+        EntityId.StartsWith(TEXT("OBSERVED_")))
+    {
+        return SuspectNameLabelColor;
+    }
     if (Category == TEXT("POLICE") || Category == TEXT("POLIS"))
     {
         return PoliceNameLabelColor;
@@ -729,3 +727,4 @@ void ATMOPHistoricalAgent::HandleActivityStateChanged(
     const ETMOPAgentActivityState NewActivity)
 {
 }
+

@@ -31,7 +31,7 @@ ATMOPVehicleBase::ATMOPVehicleBase()
     NameLabel->SetVerticalAlignment(
         EVerticalTextAligment::EVRTA_TextCenter);
     NameLabel->SetWorldSize(NameLabelWorldSize);
-    NameLabel->SetTextRenderColor(NameLabelColor);
+    NameLabel->SetTextRenderColor(ResolveNameLabelColor());
     NameLabel->SetCastShadow(false);
     NameLabel->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     NameLabel->SetGenerateOverlapEvents(false);
@@ -82,8 +82,19 @@ void ATMOPVehicleBase::RefreshNameLabel()
 
 bool ATMOPVehicleBase::ShouldDisplayNameLabel() const
 {
-    return bShowNameLabel &&
-        VehicleCategoryId.ToString().ToUpper() != TEXT("OBSERVED_UNKNOWN");
+    return bShowNameLabel;
+}
+
+FColor ATMOPVehicleBase::ResolveNameLabelColor() const
+{
+    const FString Category = VehicleCategoryId.ToString().ToUpper();
+    const FString Id = VehicleId.ToString().ToUpper();
+    if (Category.StartsWith(TEXT("OBSERVED_")) ||
+        Id.StartsWith(TEXT("OBSERVED_")))
+    {
+        return ObservedNameLabelColor;
+    }
+    return NameLabelColor;
 }
 
 void ATMOPVehicleBase::SetNameLabelVisible(const bool bVisible)
@@ -135,3 +146,4 @@ ATMOPHistoricalAgent* ATMOPVehicleBase::GetDriverAgent() const
     UTMOPVehicleSeatComponent* DriverSeat = GetDriverSeat();
     return IsValid(DriverSeat) ? DriverSeat->GetOccupant() : nullptr;
 }
+

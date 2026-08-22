@@ -55,6 +55,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
     FColor NameLabelColor = FColor::White;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
+    FColor ObservedNameLabelColor = FColor(64, 255, 96);
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle")
     bool bAllowPlayerPossession = true;
 
@@ -84,5 +87,7 @@ public:
     void SetNameLabelVisible(bool bVisible);
 
 private:
+    FColor ResolveNameLabelColor() const;
     bool ShouldDisplayNameLabel() const;
 };
+

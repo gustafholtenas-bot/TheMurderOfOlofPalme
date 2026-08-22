@@ -378,6 +378,19 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
     }
     UGameplayStatics::FinishSpawningActor(Vehicle, InitialTransform);
 
+    // Blueprint construction may restore the spawned class defaults (commonly
+    // the white Volvo 240 proxy). Re-apply the row after construction so the
+    // DataTable remains authoritative for both model and body colour.
+    if (ATMOPConfiguredVehicle* Configured =
+        Cast<ATMOPConfiguredVehicle>(Vehicle))
+    {
+        Configured->VehicleModel = Runtime.Profile.ModelData;
+        Configured->bOverrideBodyColor =
+            Runtime.Profile.bOverrideBodyColor;
+        Configured->BodyColor = Runtime.Profile.BodyColor;
+        Configured->ApplyConfiguration();
+    }
+
     Runtime.Vehicle = Vehicle;
     Runtime.bSpawnedByDirector = true;
     RegisterVehicle(Vehicle);
@@ -758,3 +771,4 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
         *DriverEntityId.ToString(), *VehicleId.ToString(), Route.Num());
     return true;
 }
+
