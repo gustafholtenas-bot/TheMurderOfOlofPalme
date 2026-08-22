@@ -91,6 +91,12 @@ public:
             ExecutionState == ETMOPActionExecutionState::WaitingForVerticalTransport;
     }
 
+    UFUNCTION(BlueprintPure, Category = "TMOP|Actions|Validation")
+    FName GetCurrentEntryId() const
+    {
+        return bHasCurrentEntry ? CurrentEntry.EntryId : NAME_None;
+    }
+
     UFUNCTION(BlueprintCallable, Category = "TMOP|Actions")
     bool ExecuteScheduleEntry(const FTMOPScheduleEntry& Entry);
 
@@ -143,4 +149,3 @@ private:
     UPROPERTY(Transient)
     TObjectPtr<ATMOPVerticalTransport> ActiveVerticalTransport;
 };
-

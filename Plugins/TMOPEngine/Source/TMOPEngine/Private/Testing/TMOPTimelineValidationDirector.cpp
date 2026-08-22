@@ -116,8 +116,11 @@ void ATMOPTimelineValidationDirector::DiscoverAgents()
         Tracked.Agent = Agent;
         Tracked.Executor = Agent->ActionExecutor;
         Tracked.LastLocation = Agent->GetActorLocation();
-        Tracked.ActiveEntryId =
-            Agent->ActionExecutor->GetCurrentEntryId();
+        // Do not query executor-private/current-entry state here. Older project
+        // copies of the action executor do not expose GetCurrentEntryId(). The
+        // validation callback below is the authoritative source and fills this
+        // field as soon as an action starts.
+        Tracked.ActiveEntryId = NAME_None;
         Agent->ActionExecutor->OnActionValidationEvent.AddUObject(
             this, &ATMOPTimelineValidationDirector::HandleActionValidation);
         TrackedAgents.Add(EntityId, MoveTemp(Tracked));
@@ -302,8 +305,8 @@ void ATMOPTimelineValidationDirector::HandlePersonTimelineApplied(
     }
 
     if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
-        Tracked != nullptr && Tracked->Executor.IsValid() &&
-        Tracked->Executor->GetCurrentEntryId() == Entry.EntryId)
+        Tracked != nullptr &&
+        Tracked->ActiveEntryId == Entry.EntryId)
         return;
 
     FTMOPTimelineValidationRecord Record;
