@@ -9,6 +9,10 @@
 #include "Engine/GameInstance.h"
 #include "EngineUtils.h"
 #include "AIController.h"
+#include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Navigation/PathFollowingComponent.h"
+#include "NavigationSystem.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Groups/TMOPGroupDirector.h"
 #include "Groups/TMOPGroupTypes.h"
@@ -66,6 +70,21 @@ FString ActorDiagnosticName(const AActor* Actor)
     return Actor->GetName();
 }
 
+FString MovementModeText(const EMovementMode Mode)
+{
+    switch (Mode)
+    {
+    case MOVE_None: return TEXT("None");
+    case MOVE_Walking: return TEXT("Walking");
+    case MOVE_NavWalking: return TEXT("NavWalking");
+    case MOVE_Falling: return TEXT("Falling");
+    case MOVE_Swimming: return TEXT("Swimming");
+    case MOVE_Flying: return TEXT("Flying");
+    case MOVE_Custom: return TEXT("Custom");
+    default: return TEXT("Unknown");
+    }
+}
+
 TSharedRef<FJsonObject> VectorJson(const FVector& Value)
 {
     TSharedRef<FJsonObject> Object = MakeShared<FJsonObject>();
@@ -80,6 +99,9 @@ ATMOPTimelineValidationDirector::ATMOPTimelineValidationDirector()
 {
     PrimaryActorTick.bCanEverTick = true;
     PrimaryActorTick.TickInterval = 0.0f;
+    // The shot snapshot must run after people/vehicle directors have applied
+    // entries scheduled for the exact same simulation second.
+    PrimaryActorTick.TickGroup = TG_PostUpdateWork;
 }
 
 void ATMOPTimelineValidationDirector::BeginPlay()
@@ -134,6 +156,8 @@ void ATMOPTimelineValidationDirector::StartValidation()
     TrackedVehicles.Reset();
     SampleAccumulator = 0.0f;
     NextSnapshotSecond = INDEX_NONE;
+    LastObservedSecond = INDEX_NONE;
+    MaximumObservedSecond = INDEX_NONE;
     bShotSnapshotCaptured = false;
     bValidationActive = true;
     DiscoverAgents();
@@ -142,6 +166,8 @@ void ATMOPTimelineValidationDirector::StartValidation()
     ValidationStartSecond = CurrentSecond;
     if (CurrentSecond != INDEX_NONE)
     {
+        LastObservedSecond = CurrentSecond;
+        MaximumObservedSecond = CurrentSecond;
         NextSnapshotSecond = CurrentSecond;
         CaptureSnapshots(CurrentSecond, TEXT("ValidationStart"), true);
         NextSnapshotSecond += FMath::Max(1, SnapshotIntervalSeconds);
@@ -159,6 +185,29 @@ void ATMOPTimelineValidationDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!bValidationActive) return;
+
+    const int32 CurrentSecond = GetSimulationSecond();
+    if (CurrentSecond != INDEX_NONE)
+    {
+        // PIE resets the game clock before destroying the world. Exporting
+        // after that reset used to create hundreds of false "despawned" and
+        // "interrupted" failures at 23:00. Freeze the report at the last
+        // actually observed simulation second instead.
+        if (LastObservedSecond != INDEX_NONE &&
+            CurrentSecond < LastObservedSecond)
+        {
+            bValidationActive = false;
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP validation detected clock rewind %d -> %d; exporting before PIE teardown."),
+                LastObservedSecond, CurrentSecond);
+            ExportReports();
+            return;
+        }
+        LastObservedSecond = CurrentSecond;
+        MaximumObservedSecond = MaximumObservedSecond == INDEX_NONE
+            ? CurrentSecond : FMath::Max(MaximumObservedSecond, CurrentSecond);
+    }
+
     SampleAccumulator += DeltaSeconds;
     if (SampleAccumulator < SampleIntervalSeconds) return;
     const float SampleDelta = SampleAccumulator;
@@ -168,7 +217,6 @@ void ATMOPTimelineValidationDirector::Tick(const float DeltaSeconds)
     SampleAgents(SampleDelta);
     SampleVehicles(SampleDelta);
 
-    const int32 CurrentSecond = GetSimulationSecond();
     const int32 ShotSecond = ShotSnapshotTime.ToSecondsFromMidnight();
     if (!bShotSnapshotCaptured && CurrentSecond != INDEX_NONE &&
         CurrentSecond >= ShotSecond)
@@ -368,6 +416,25 @@ bool ATMOPTimelineValidationDirector::FindExpectedShotAnchor(
         }
     if (Row == nullptr) return false;
 
+    UTMOPAnchorSubsystem* Anchors = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
+    if (Anchors == nullptr) return false;
+
+    // Prefer the naming convention exported by the level. This is deliberately
+    // strict: a later trip to Mordplatsen must not make a passenger appear to
+    // be expected there when the shots are fired.
+    const FName ExactAnchor(*FString::Printf(
+        TEXT("ANCHOR_SHOT1_%s"), *EntityId.ToString()));
+    if (IsValid(Anchors->FindAnchor(ExactAnchor)))
+    {
+        OutAnchorId = ExactAnchor;
+        return true;
+    }
+
+    for (const FName VehicleId : Row->AssociatedVehicleIds)
+        if (FindExpectedShotAnchorForVehicle(VehicleId, OutAnchorId))
+            return true;
+
     const int32 ShotSecond = ShotSnapshotTime.ToSecondsFromMidnight();
     int32 BestScore = TNumericLimits<int32>::Max();
     for (const FTMOPPersonTimelineEntry& Entry : Row->Timeline)
@@ -376,17 +443,73 @@ bool ATMOPTimelineValidationDirector::FindExpectedShotAnchor(
         const bool bExplicitShotAnchor = Anchor.StartsWith(TEXT("ANCHOR_SHOT1_"));
         const bool bMurderSite =
             Entry.TargetAnchorId == FName(TEXT("Mordplatsen"));
-        if (!bExplicitShotAnchor && !bMurderSite) continue;
-        int32 Score = FMath::Abs(
+        if (Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor ||
+            !Entry.bTimeIsArrival || (!bExplicitShotAnchor && !bMurderSite))
+            continue;
+        const int32 Score = FMath::Abs(
             Entry.Time.ToSecondsFromMidnight() - ShotSecond);
-        if (!bExplicitShotAnchor) Score += 30;
-        if (Score < BestScore)
+        if (Score <= ShotTimelineMatchWindowSeconds && Score < BestScore &&
+            IsValid(Anchors->FindAnchor(Entry.TargetAnchorId)))
         {
             BestScore = Score;
             OutAnchorId = Entry.TargetAnchorId;
         }
     }
     return !OutAnchorId.IsNone();
+}
+
+bool ATMOPTimelineValidationDirector::FindExpectedShotAnchorForVehicle(
+    const FName VehicleId,
+    FName& OutAnchorId) const
+{
+    OutAnchorId = NAME_None;
+    if (VehicleId.IsNone() || GetGameInstance() == nullptr) return false;
+    UTMOPAnchorSubsystem* Anchors =
+        GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+    if (Anchors == nullptr) return false;
+
+    FString Suffix = VehicleId.ToString();
+    Suffix.RemoveFromStart(TEXT("VEHICLE_"), ESearchCase::IgnoreCase);
+    const FName ExactAnchor(*FString::Printf(
+        TEXT("ANCHOR_SHOT1_%s"), *Suffix));
+    if (IsValid(Anchors->FindAnchor(ExactAnchor)))
+    {
+        OutAnchorId = ExactAnchor;
+        return true;
+    }
+    return false;
+}
+
+bool ATMOPTimelineValidationDirector::FindNearestShotAnchor(
+    const FVector& Location,
+    FName& OutAnchorId,
+    float& OutDistanceCm) const
+{
+    OutAnchorId = NAME_None;
+    OutDistanceCm = -1.0f;
+    if (GetGameInstance() == nullptr) return false;
+    UTMOPAnchorSubsystem* Anchors =
+        GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+    if (Anchors == nullptr) return false;
+
+    float BestDistance = TNumericLimits<float>::Max();
+    for (const ATMOPHistoricalAnchor* Anchor :
+        Anchors->GetAnchorsByCategory(ETMOPAnchorCategory::WitnessPosition))
+    {
+        if (!IsValid(Anchor) ||
+            !Anchor->GetAnchorId().ToString().StartsWith(TEXT("ANCHOR_SHOT1_")))
+            continue;
+        const float Distance = FVector::Dist2D(
+            Location, Anchor->GetAnchorLocation());
+        if (Distance < BestDistance)
+        {
+            BestDistance = Distance;
+            OutAnchorId = Anchor->GetAnchorId();
+        }
+    }
+    if (OutAnchorId.IsNone()) return false;
+    OutDistanceCm = BestDistance;
+    return true;
 }
 
 void ATMOPTimelineValidationDirector::CaptureAgentSnapshot(
@@ -412,6 +535,42 @@ void ATMOPTimelineValidationDirector::CaptureAgentSnapshot(
         Agent->GetAttachParentActor());
     Snapshot.GroupId = Agent->SocialGroupId;
     Snapshot.bCollisionEnabled = Agent->GetActorEnableCollision();
+    FindNearestShotAnchor(Snapshot.Location,
+        Snapshot.NearestShotAnchorId,
+        Snapshot.DistanceToNearestShotAnchorCm);
+
+    const AAIController* Controller =
+        Cast<AAIController>(Agent->GetController());
+    if (IsValid(Controller))
+    {
+        Snapshot.ControllerName = Controller->GetName();
+        Snapshot.PathFollowingStatus = EnumText(Controller->GetMoveStatus());
+        Snapshot.NavigationGoal = Controller->GetImmediateMoveDestination();
+        if (!Snapshot.NavigationGoal.IsNearlyZero())
+            Snapshot.DistanceToNavigationGoalCm = FVector::Dist2D(
+                Snapshot.Location, Snapshot.NavigationGoal);
+    }
+    if (const UCharacterMovementComponent* CharacterMovement =
+        Agent->GetCharacterMovement())
+        Snapshot.MovementMode = MovementModeText(
+            CharacterMovement->MovementMode.GetValue());
+    if (const UCapsuleComponent* Capsule = Agent->GetCapsuleComponent())
+        Snapshot.CollisionProfileName =
+            Capsule->GetCollisionProfileName().ToString();
+
+    if (const UNavigationSystemV1* Navigation =
+        FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld()))
+    {
+        FNavLocation Projected;
+        Snapshot.bProjectedToNavMesh = Navigation->ProjectPointToNavigation(
+            Snapshot.Location, Projected, FVector(100.0f, 100.0f, 300.0f));
+        if (Snapshot.bProjectedToNavMesh)
+        {
+            Snapshot.DistanceToNavMeshCm = FVector::Dist(
+                Snapshot.Location, Projected.Location);
+            Snapshot.bOnNavMesh = Snapshot.DistanceToNavMeshCm <= 50.0f;
+        }
+    }
 
     if (!Tracked.ActiveTargetAnchorId.IsNone() && GetGameInstance() != nullptr)
     {
@@ -437,7 +596,7 @@ void ATMOPTimelineValidationDirector::CaptureAgentSnapshot(
                 Snapshot.Location, ShotAnchor->GetAnchorLocation());
             Snapshot.bAtExpectedShotAnchor =
                 Snapshot.DistanceToExpectedShotAnchorCm <=
-                    ArrivalWarningDistanceCm;
+                    ShotAnchorToleranceCm;
         }
     }
 
@@ -542,6 +701,53 @@ void ATMOPTimelineValidationDirector::CaptureVehicleSnapshot(
     Snapshot.YawDegrees = Vehicle->GetActorRotation().Yaw;
     Snapshot.StationarySeconds = Tracked.StationarySeconds;
     Snapshot.bCollisionEnabled = Vehicle->GetActorEnableCollision();
+
+    if (FindExpectedShotAnchorForVehicle(
+        VehicleId, Snapshot.ExpectedShotAnchorId) &&
+        GetGameInstance() != nullptr)
+    {
+        UTMOPAnchorSubsystem* Anchors =
+            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+        const ATMOPHistoricalAnchor* ShotAnchor = Anchors != nullptr
+            ? Anchors->FindAnchor(Snapshot.ExpectedShotAnchorId) : nullptr;
+        if (IsValid(ShotAnchor))
+        {
+            Snapshot.DistanceToExpectedShotAnchorCm = FVector::Dist2D(
+                Snapshot.Location, ShotAnchor->GetAnchorLocation());
+            Snapshot.bAtExpectedShotAnchor =
+                Snapshot.DistanceToExpectedShotAnchorCm <=
+                    ShotAnchorToleranceCm;
+        }
+    }
+
+    if (VehicleDirector.IsValid() &&
+        IsValid(VehicleDirector->HistoricalVehicleTable))
+    {
+        const FTMOPHistoricalVehicleRow* Row =
+            VehicleDirector->HistoricalVehicleTable->FindRow<
+                FTMOPHistoricalVehicleRow>(VehicleId, TEXT("ValidationSnapshot"), false);
+        if (Row == nullptr)
+            for (const TPair<FName, uint8*>& Pair :
+                VehicleDirector->HistoricalVehicleTable->GetRowMap())
+            {
+                const FTMOPHistoricalVehicleRow* Candidate =
+                    reinterpret_cast<const FTMOPHistoricalVehicleRow*>(Pair.Value);
+                if (Candidate != nullptr && Candidate->VehicleId == VehicleId)
+                {
+                    Row = Candidate;
+                    break;
+                }
+            }
+        if (Row != nullptr)
+        {
+            Snapshot.ProfileTimelineEntryCount = Row->Timeline.Num();
+            Snapshot.ProfileStopEntryCount = 0;
+            for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Row->Timeline)
+                if (Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
+                    Entry.Action == ETMOPHistoricalVehicleAction::Park)
+                    ++Snapshot.ProfileStopEntryCount;
+        }
+    }
 
     const UTMOPTrafficVehicleMovementComponent* Movement =
         Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
@@ -723,7 +929,7 @@ void ATMOPTimelineValidationDirector::PopulateRecordRuntimeDiagnostics(
                 Agent->GetActorLocation(), ShotAnchor->GetAnchorLocation());
             Record.bAtExpectedShotAnchor =
                 Record.DistanceToExpectedShotAnchorCm <=
-                    ArrivalWarningDistanceCm;
+                    ShotAnchorToleranceCm;
         }
     }
 
@@ -1289,7 +1495,8 @@ bool ATMOPTimelineValidationDirector::ExportReports()
     const FString Base = FPaths::Combine(
         Directory, FString::Printf(TEXT("TimelineValidation_%s"), *Stamp));
 
-    const int32 ExportSecond = GetSimulationSecond();
+    const int32 ExportSecond = MaximumObservedSecond != INDEX_NONE
+        ? MaximumObservedSecond : GetSimulationSecond();
     auto AppendCsv = [](FString& Out, const TArray<FString>& Fields)
     {
         TArray<FString> Escaped;
@@ -1423,7 +1630,14 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         TEXT("ActiveEntryId"), TEXT("TargetAnchorId"), TEXT("DistanceToTargetCm"),
         TEXT("ExpectedShotAnchorId"), TEXT("DistanceToExpectedShotAnchorCm"),
         TEXT("AtExpectedShotAnchor"),
-        TEXT("StationarySeconds"), TEXT("VehicleId"), TEXT("SeatId"),
+        TEXT("NearestShotAnchorId"), TEXT("DistanceToNearestShotAnchorCm"),
+        TEXT("StationarySeconds"), TEXT("ControllerName"),
+        TEXT("PathFollowingStatus"), TEXT("MovementMode"),
+        TEXT("NavigationGoalX"), TEXT("NavigationGoalY"),
+        TEXT("NavigationGoalZ"), TEXT("DistanceToNavigationGoalCm"),
+        TEXT("ProjectedToNavMesh"), TEXT("OnNavMesh"),
+        TEXT("DistanceToNavMeshCm"), TEXT("CollisionProfileName"),
+        TEXT("VehicleId"), TEXT("SeatId"),
         TEXT("AttachedParentName"), TEXT("GroupId"), TEXT("GroupLeaderId"),
         TEXT("GroupState"), TEXT("GroupFormation"),
         TEXT("DistanceToGroupLeaderCm"), TEXT("CollisionEnabled")
@@ -1439,7 +1653,13 @@ bool ATMOPTimelineValidationDirector::ExportReports()
             S.TargetAnchorId.ToString(), N(S.DistanceToTargetCm),
             S.ExpectedShotAnchorId.ToString(),
             N(S.DistanceToExpectedShotAnchorCm), B(S.bAtExpectedShotAnchor),
-            N(S.StationarySeconds), S.VehicleId.ToString(), S.SeatId.ToString(),
+            S.NearestShotAnchorId.ToString(),
+            N(S.DistanceToNearestShotAnchorCm), N(S.StationarySeconds),
+            S.ControllerName, S.PathFollowingStatus, S.MovementMode,
+            N(S.NavigationGoal.X), N(S.NavigationGoal.Y), N(S.NavigationGoal.Z),
+            N(S.DistanceToNavigationGoalCm), B(S.bProjectedToNavMesh),
+            B(S.bOnNavMesh), N(S.DistanceToNavMeshCm),
+            S.CollisionProfileName, S.VehicleId.ToString(), S.SeatId.ToString(),
             S.AttachedParentName, S.GroupId.ToString(), S.GroupLeaderId.ToString(),
             S.GroupState, S.GroupFormation, N(S.DistanceToGroupLeaderCm),
             B(S.bCollisionEnabled)
@@ -1461,7 +1681,21 @@ bool ATMOPTimelineValidationDirector::ExportReports()
             S.DistanceToExpectedShotAnchorCm);
         O->SetBoolField(TEXT("atExpectedShotAnchor"),
             S.bAtExpectedShotAnchor);
+        O->SetStringField(TEXT("nearestShotAnchorId"),
+            S.NearestShotAnchorId.ToString());
+        O->SetNumberField(TEXT("distanceToNearestShotAnchorCm"),
+            S.DistanceToNearestShotAnchorCm);
         O->SetNumberField(TEXT("stationarySeconds"), S.StationarySeconds);
+        O->SetStringField(TEXT("controllerName"), S.ControllerName);
+        O->SetStringField(TEXT("pathFollowingStatus"), S.PathFollowingStatus);
+        O->SetStringField(TEXT("movementMode"), S.MovementMode);
+        O->SetObjectField(TEXT("navigationGoal"), VectorJson(S.NavigationGoal));
+        O->SetNumberField(TEXT("distanceToNavigationGoalCm"),
+            S.DistanceToNavigationGoalCm);
+        O->SetBoolField(TEXT("projectedToNavMesh"), S.bProjectedToNavMesh);
+        O->SetBoolField(TEXT("onNavMesh"), S.bOnNavMesh);
+        O->SetNumberField(TEXT("distanceToNavMeshCm"), S.DistanceToNavMeshCm);
+        O->SetStringField(TEXT("collisionProfileName"), S.CollisionProfileName);
         O->SetStringField(TEXT("vehicleId"), S.VehicleId.ToString());
         O->SetStringField(TEXT("seatId"), S.SeatId.ToString());
         O->SetStringField(TEXT("attachedParentName"), S.AttachedParentName);
@@ -1484,7 +1718,10 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         TEXT("CollisionEnabled"), TEXT("ObstacleDetectionEnabled"),
         TEXT("HasStopConstraint"), TEXT("RemainingStopConstraintCm"),
         TEXT("PlannedStopAnchorId"), TEXT("PlannedStopSecond"),
-        TEXT("DistanceToPlannedStopCm"), TEXT("BlockingActorName"),
+        TEXT("DistanceToPlannedStopCm"), TEXT("ExpectedShotAnchorId"),
+        TEXT("DistanceToExpectedShotAnchorCm"), TEXT("AtExpectedShotAnchor"),
+        TEXT("ProfileTimelineEntryCount"), TEXT("ProfileStopEntryCount"),
+        TEXT("BlockingActorName"),
         TEXT("BlockingActorClass"), TEXT("BlockingActorDistanceCm"),
         TEXT("OccupiedSeats"), TEXT("NearbyVehicleIds")
     });
@@ -1500,7 +1737,10 @@ bool ATMOPTimelineValidationDirector::ExportReports()
             B(S.bCollisionEnabled), B(S.bObstacleDetectionEnabled),
             B(S.bHasStopConstraint), N(S.RemainingStopConstraintCm),
             S.PlannedStopAnchorId.ToString(), I(S.PlannedStopSecond),
-            N(S.DistanceToPlannedStopCm), S.BlockingActorName,
+            N(S.DistanceToPlannedStopCm), S.ExpectedShotAnchorId.ToString(),
+            N(S.DistanceToExpectedShotAnchorCm), B(S.bAtExpectedShotAnchor),
+            I(S.ProfileTimelineEntryCount), I(S.ProfileStopEntryCount),
+            S.BlockingActorName,
             S.BlockingActorClass, N(S.BlockingActorDistanceCm),
             S.OccupiedSeats, S.NearbyVehicleIds
         });
@@ -1528,6 +1768,16 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         O->SetNumberField(TEXT("plannedStopSecond"), S.PlannedStopSecond);
         O->SetNumberField(TEXT("distanceToPlannedStopCm"),
             S.DistanceToPlannedStopCm);
+        O->SetStringField(TEXT("expectedShotAnchorId"),
+            S.ExpectedShotAnchorId.ToString());
+        O->SetNumberField(TEXT("distanceToExpectedShotAnchorCm"),
+            S.DistanceToExpectedShotAnchorCm);
+        O->SetBoolField(TEXT("atExpectedShotAnchor"),
+            S.bAtExpectedShotAnchor);
+        O->SetNumberField(TEXT("profileTimelineEntryCount"),
+            S.ProfileTimelineEntryCount);
+        O->SetNumberField(TEXT("profileStopEntryCount"),
+            S.ProfileStopEntryCount);
         O->SetStringField(TEXT("blockingActorName"), S.BlockingActorName);
         O->SetStringField(TEXT("blockingActorClass"), S.BlockingActorClass);
         O->SetNumberField(TEXT("blockingActorDistanceCm"),
@@ -1660,6 +1910,13 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         int32 RouteCompleteSamples = 0;
         float MaximumStationarySeconds = 0.0f;
         float MinimumDistanceToPlannedStopCm = TNumericLimits<float>::Max();
+        bool bHasShotLocation = false;
+        FVector ShotLocation = FVector::ZeroVector;
+        FName ExpectedShotAnchorId = NAME_None;
+        float DistanceToExpectedShotAnchorCm = -1.0f;
+        bool bAtExpectedShotAnchor = false;
+        int32 ProfileTimelineEntryCount = INDEX_NONE;
+        int32 ProfileStopEntryCount = INDEX_NONE;
         FString LastTrafficState;
         FName LastLaneId = NAME_None;
         FString LastBlockingActor;
@@ -1688,6 +1945,17 @@ bool ATMOPTimelineValidationDirector::ExportReports()
             S.MinimumDistanceToPlannedStopCm = FMath::Min(
                 S.MinimumDistanceToPlannedStopCm,
                 Snapshot.DistanceToPlannedStopCm);
+        if (Snapshot.Reason == TEXT("ShotMoment"))
+        {
+            S.bHasShotLocation = true;
+            S.ShotLocation = Snapshot.Location;
+            S.ExpectedShotAnchorId = Snapshot.ExpectedShotAnchorId;
+            S.DistanceToExpectedShotAnchorCm =
+                Snapshot.DistanceToExpectedShotAnchorCm;
+            S.bAtExpectedShotAnchor = Snapshot.bAtExpectedShotAnchor;
+        }
+        S.ProfileTimelineEntryCount = Snapshot.ProfileTimelineEntryCount;
+        S.ProfileStopEntryCount = Snapshot.ProfileStopEntryCount;
         S.LastTrafficState = Snapshot.TrafficState;
         S.LastLaneId = Snapshot.CurrentLaneId;
     }
@@ -1699,7 +1967,11 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         TEXT("CollisionDisabledSamples"), TEXT("NearbyVehicleSamples"),
         TEXT("RouteCompleteSamples"), TEXT("MaximumStationarySeconds"),
         TEXT("MinimumDistanceToPlannedStopCm"), TEXT("LastTrafficState"),
-        TEXT("LastLaneId"), TEXT("LastBlockingActor")
+        TEXT("LastLaneId"), TEXT("LastBlockingActor"),
+        TEXT("HasShotLocation"), TEXT("ShotX"), TEXT("ShotY"), TEXT("ShotZ"),
+        TEXT("ExpectedShotAnchorId"), TEXT("DistanceToExpectedShotAnchorCm"),
+        TEXT("AtExpectedShotAnchor"), TEXT("ProfileTimelineEntryCount"),
+        TEXT("ProfileStopEntryCount")
     });
     TArray<TSharedPtr<FJsonValue>> JsonVehicleSummaries;
     TArray<FName> VehicleSummaryIds;
@@ -1720,7 +1992,11 @@ bool ATMOPTimelineValidationDirector::ExportReports()
             I(S.CollisionDisabledSamples), I(S.NearbyVehicleSamples),
             I(S.RouteCompleteSamples), N(S.MaximumStationarySeconds),
             N(MinimumStopDistance), S.LastTrafficState,
-            S.LastLaneId.ToString(), S.LastBlockingActor
+            S.LastLaneId.ToString(), S.LastBlockingActor,
+            B(S.bHasShotLocation), N(S.ShotLocation.X), N(S.ShotLocation.Y),
+            N(S.ShotLocation.Z), S.ExpectedShotAnchorId.ToString(),
+            N(S.DistanceToExpectedShotAnchorCm), B(S.bAtExpectedShotAnchor),
+            I(S.ProfileTimelineEntryCount), I(S.ProfileStopEntryCount)
         });
         TSharedRef<FJsonObject> O = MakeShared<FJsonObject>();
         O->SetStringField(TEXT("vehicleId"), VehicleId.ToString());
@@ -1741,17 +2017,130 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         O->SetStringField(TEXT("lastTrafficState"), S.LastTrafficState);
         O->SetStringField(TEXT("lastLaneId"), S.LastLaneId.ToString());
         O->SetStringField(TEXT("lastBlockingActor"), S.LastBlockingActor);
+        O->SetBoolField(TEXT("hasShotLocation"), S.bHasShotLocation);
+        O->SetObjectField(TEXT("shotLocation"), VectorJson(S.ShotLocation));
+        O->SetStringField(TEXT("expectedShotAnchorId"),
+            S.ExpectedShotAnchorId.ToString());
+        O->SetNumberField(TEXT("distanceToExpectedShotAnchorCm"),
+            S.DistanceToExpectedShotAnchorCm);
+        O->SetBoolField(TEXT("atExpectedShotAnchor"),
+            S.bAtExpectedShotAnchor);
+        O->SetNumberField(TEXT("profileTimelineEntryCount"),
+            S.ProfileTimelineEntryCount);
+        O->SetNumberField(TEXT("profileStopEntryCount"),
+            S.ProfileStopEntryCount);
         JsonVehicleSummaries.Add(MakeShared<FJsonValueObject>(O));
     }
 
+    // Include the profiles actually loaded by this PIE world. This makes a
+    // stale Unreal DataTable import immediately visible in the next report.
+    TArray<TSharedPtr<FJsonValue>> JsonLoadedVehicleProfiles;
+    if (VehicleDirector.IsValid() &&
+        IsValid(VehicleDirector->HistoricalVehicleTable))
+    {
+        TArray<FName> RowNames;
+        VehicleDirector->HistoricalVehicleTable->GetRowMap().GetKeys(RowNames);
+        RowNames.Sort([](const FName& A, const FName& B)
+        {
+            return A.LexicalLess(B);
+        });
+        for (const FName RowName : RowNames)
+        {
+            uint8* const* Raw =
+                VehicleDirector->HistoricalVehicleTable->GetRowMap().Find(RowName);
+            const FTMOPHistoricalVehicleRow* Row = Raw != nullptr
+                ? reinterpret_cast<const FTMOPHistoricalVehicleRow*>(*Raw) : nullptr;
+            if (Row == nullptr) continue;
+            TSharedRef<FJsonObject> Profile = MakeShared<FJsonObject>();
+            Profile->SetStringField(TEXT("rowName"), RowName.ToString());
+            Profile->SetStringField(TEXT("vehicleId"), Row->VehicleId.ToString());
+            Profile->SetBoolField(TEXT("spawnInSimulation"), Row->bSpawnInSimulation);
+            TArray<TSharedPtr<FJsonValue>> Entries;
+            for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Row->Timeline)
+            {
+                TSharedRef<FJsonObject> E = MakeShared<FJsonObject>();
+                E->SetStringField(TEXT("entryId"), Entry.EntryId.ToString());
+                E->SetStringField(TEXT("action"), EnumText(Entry.Action));
+                E->SetNumberField(TEXT("second"),
+                    Entry.Time.ToSecondsFromMidnight());
+                E->SetStringField(TEXT("placementAnchorId"),
+                    Entry.PlacementAnchorId.ToString());
+                E->SetStringField(TEXT("driverEntityId"),
+                    Entry.DriverEntityId.ToString());
+                TArray<TSharedPtr<FJsonValue>> Lanes;
+                for (const FName LaneId : Entry.OrderedLaneIds)
+                    Lanes.Add(MakeShared<FJsonValueString>(LaneId.ToString()));
+                E->SetArrayField(TEXT("orderedLaneIds"), Lanes);
+                Entries.Add(MakeShared<FJsonValueObject>(E));
+            }
+            Profile->SetNumberField(TEXT("timelineEntryCount"),
+                Row->Timeline.Num());
+            Profile->SetArrayField(TEXT("timeline"), Entries);
+            JsonLoadedVehicleProfiles.Add(
+                MakeShared<FJsonValueObject>(Profile));
+        }
+    }
+
+    TArray<TSharedPtr<FJsonValue>> JsonTrackedPersonProfiles;
+    if (PeopleDirector.IsValid() && IsValid(PeopleDirector->PersonProfileTable))
+    {
+        TArray<FName> EntityIds;
+        TrackedAgents.GetKeys(EntityIds);
+        EntityIds.Sort([](const FName& A, const FName& B)
+        {
+            return A.LexicalLess(B);
+        });
+        for (const FName EntityId : EntityIds)
+        {
+            const FTMOPPersonProfileRow* Row =
+                PeopleDirector->PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
+                    EntityId, TEXT("ValidationExport"), false);
+            if (Row == nullptr) continue;
+            TSharedRef<FJsonObject> Profile = MakeShared<FJsonObject>();
+            Profile->SetStringField(TEXT("entityId"), Row->EntityId.ToString());
+            Profile->SetStringField(TEXT("categoryId"), Row->CategoryId.ToString());
+            Profile->SetStringField(TEXT("socialGroupId"),
+                Row->SocialGroupId.ToString());
+            Profile->SetStringField(TEXT("groupLeaderEntityId"),
+                Row->GroupLeaderEntityId.ToString());
+            TArray<TSharedPtr<FJsonValue>> Entries;
+            for (const FTMOPPersonTimelineEntry& Entry : Row->Timeline)
+            {
+                TSharedRef<FJsonObject> E = MakeShared<FJsonObject>();
+                E->SetStringField(TEXT("entryId"), Entry.EntryId.ToString());
+                E->SetStringField(TEXT("action"), EnumText(Entry.Action));
+                E->SetStringField(TEXT("timingMode"), EnumText(Entry.TimingMode));
+                E->SetNumberField(TEXT("historicalSecond"),
+                    Entry.Time.ToSecondsFromMidnight());
+                E->SetNumberField(TEXT("eventOffsetSeconds"),
+                    Entry.EventOffsetSeconds);
+                E->SetBoolField(TEXT("timeIsArrival"), Entry.bTimeIsArrival);
+                E->SetStringField(TEXT("targetAnchorId"),
+                    Entry.TargetAnchorId.ToString());
+                E->SetStringField(TEXT("targetEntityId"),
+                    Entry.TargetEntityId.ToString());
+                E->SetStringField(TEXT("targetSeatId"),
+                    Entry.TargetSeatId.ToString());
+                Entries.Add(MakeShared<FJsonValueObject>(E));
+            }
+            Profile->SetNumberField(TEXT("timelineEntryCount"),
+                Row->Timeline.Num());
+            Profile->SetArrayField(TEXT("timeline"), Entries);
+            JsonTrackedPersonProfiles.Add(
+                MakeShared<FJsonValueObject>(Profile));
+        }
+    }
+
     TSharedRef<FJsonObject> Root = MakeShared<FJsonObject>();
-    Root->SetNumberField(TEXT("schemaVersion"), 2);
+    Root->SetNumberField(TEXT("schemaVersion"), 3);
     Root->SetStringField(TEXT("generatedUtc"),
         FDateTime::UtcNow().ToIso8601());
     Root->SetStringField(TEXT("mapName"),
         GetWorld() != nullptr ? GetWorld()->GetMapName() : FString());
     Root->SetNumberField(TEXT("validationStartSecond"), ValidationStartSecond);
     Root->SetNumberField(TEXT("exportSecond"), ExportSecond);
+    Root->SetNumberField(TEXT("lastObservedSecond"), LastObservedSecond);
+    Root->SetNumberField(TEXT("maximumObservedSecond"), MaximumObservedSecond);
     Root->SetNumberField(TEXT("trackedAgents"), TrackedAgents.Num());
     Root->SetNumberField(TEXT("trackedVehicles"), TrackedVehicles.Num());
     Root->SetNumberField(TEXT("recordCount"), Records.Num());
@@ -1767,6 +2156,10 @@ bool ATMOPTimelineValidationDirector::ExportReports()
     Root->SetNumberField(TEXT("failureRepeatReportIntervalSeconds"),
         FailureRepeatReportIntervalSeconds);
     Root->SetNumberField(TEXT("nearbyVehicleRadiusCm"), NearbyVehicleRadiusCm);
+    Root->SetNumberField(TEXT("shotAnchorToleranceCm"),
+        ShotAnchorToleranceCm);
+    Root->SetNumberField(TEXT("shotTimelineMatchWindowSeconds"),
+        ShotTimelineMatchWindowSeconds);
     Root->SetBoolField(TEXT("captureAllAgentsPeriodically"),
         bCaptureAllAgentsPeriodically);
     Root->SetBoolField(TEXT("captureImportantAgentsPeriodically"),
@@ -1775,11 +2168,30 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         bCaptureAllVehiclesPeriodically);
     Root->SetNumberField(TEXT("shotSnapshotSecond"),
         ShotSnapshotTime.ToSecondsFromMidnight());
+    if (PeopleDirector.IsValid() && IsValid(PeopleDirector->PersonProfileTable))
+    {
+        Root->SetStringField(TEXT("loadedPeopleTablePath"),
+            PeopleDirector->PersonProfileTable->GetPathName());
+        Root->SetNumberField(TEXT("loadedPeopleTableRowCount"),
+            PeopleDirector->PersonProfileTable->GetRowMap().Num());
+    }
+    if (VehicleDirector.IsValid() &&
+        IsValid(VehicleDirector->HistoricalVehicleTable))
+    {
+        Root->SetStringField(TEXT("loadedVehicleTablePath"),
+            VehicleDirector->HistoricalVehicleTable->GetPathName());
+        Root->SetNumberField(TEXT("loadedVehicleTableRowCount"),
+            VehicleDirector->HistoricalVehicleTable->GetRowMap().Num());
+    }
     Root->SetArrayField(TEXT("records"), JsonRecords);
     Root->SetArrayField(TEXT("agentSnapshots"), JsonAgentSnapshots);
     Root->SetArrayField(TEXT("vehicleSnapshots"), JsonVehicleSnapshots);
     Root->SetArrayField(TEXT("entitySummaries"), JsonEntitySummaries);
     Root->SetArrayField(TEXT("vehicleSummaries"), JsonVehicleSummaries);
+    Root->SetArrayField(TEXT("loadedVehicleProfiles"),
+        JsonLoadedVehicleProfiles);
+    Root->SetArrayField(TEXT("trackedPersonProfiles"),
+        JsonTrackedPersonProfiles);
     FString Json;
     const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Json);
     FJsonSerializer::Serialize(Root, Writer);

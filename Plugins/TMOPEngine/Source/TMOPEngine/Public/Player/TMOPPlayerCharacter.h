@@ -29,6 +29,8 @@ class ATMOPHistoricalAgent;
 class UTMOPVehicleTakeoverComponent;
 class UTMOPPlayerVehicleDrivingComponent;
 class UTMOPPlayerVehicleSessionComponent;
+class UTMOPAgentAudioComponent;
+class UTMOPPlayerMovementAudioComponent;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
@@ -75,6 +77,12 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Vehicle")
     TObjectPtr<UTMOPPlayerVehicleSessionComponent> VehicleSession;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Audio")
+    TObjectPtr<UTMOPAgentAudioComponent> FootstepAudio;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Audio")
+    TObjectPtr<UTMOPPlayerMovementAudioComponent> MovementAudio;
 
     /** Optional visual class. Empty uses the built-in C++ placeholder menu. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI")

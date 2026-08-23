@@ -53,6 +53,11 @@ public:
         meta=(ClampMin="1.0", Units="s"))
     float MaximumSpeakerSeconds = 5.5f;
 
+    /** The leader may not complete a route point while a follower is left behind. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Groups|Movement",
+        meta=(ClampMin="30.0", Units="cm"))
+    float MemberArrivalToleranceCm = 180.0f;
+
     UPROPERTY(BlueprintAssignable, Category="TMOP|Groups|Events")
     FTMOPGroupChangedSignature OnGroupStateChanged;
 

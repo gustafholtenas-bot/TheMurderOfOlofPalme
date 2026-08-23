@@ -88,7 +88,18 @@ struct TMOPENGINE_API FTMOPAgentValidationSnapshot
     UPROPERTY(BlueprintReadOnly) FName ExpectedShotAnchorId = NAME_None;
     UPROPERTY(BlueprintReadOnly) float DistanceToExpectedShotAnchorCm = -1.0f;
     UPROPERTY(BlueprintReadOnly) bool bAtExpectedShotAnchor = false;
+    UPROPERTY(BlueprintReadOnly) FName NearestShotAnchorId = NAME_None;
+    UPROPERTY(BlueprintReadOnly) float DistanceToNearestShotAnchorCm = -1.0f;
     UPROPERTY(BlueprintReadOnly) float StationarySeconds = 0.0f;
+    UPROPERTY(BlueprintReadOnly) FString ControllerName;
+    UPROPERTY(BlueprintReadOnly) FString PathFollowingStatus;
+    UPROPERTY(BlueprintReadOnly) FString MovementMode;
+    UPROPERTY(BlueprintReadOnly) FVector NavigationGoal = FVector::ZeroVector;
+    UPROPERTY(BlueprintReadOnly) float DistanceToNavigationGoalCm = -1.0f;
+    UPROPERTY(BlueprintReadOnly) bool bProjectedToNavMesh = false;
+    UPROPERTY(BlueprintReadOnly) bool bOnNavMesh = false;
+    UPROPERTY(BlueprintReadOnly) float DistanceToNavMeshCm = -1.0f;
+    UPROPERTY(BlueprintReadOnly) FString CollisionProfileName;
     UPROPERTY(BlueprintReadOnly) FName VehicleId = NAME_None;
     UPROPERTY(BlueprintReadOnly) FName SeatId = NAME_None;
     UPROPERTY(BlueprintReadOnly) FString AttachedParentName;
@@ -124,6 +135,11 @@ struct TMOPENGINE_API FTMOPVehicleValidationSnapshot
     UPROPERTY(BlueprintReadOnly) FName PlannedStopAnchorId = NAME_None;
     UPROPERTY(BlueprintReadOnly) int32 PlannedStopSecond = INDEX_NONE;
     UPROPERTY(BlueprintReadOnly) float DistanceToPlannedStopCm = -1.0f;
+    UPROPERTY(BlueprintReadOnly) FName ExpectedShotAnchorId = NAME_None;
+    UPROPERTY(BlueprintReadOnly) float DistanceToExpectedShotAnchorCm = -1.0f;
+    UPROPERTY(BlueprintReadOnly) bool bAtExpectedShotAnchor = false;
+    UPROPERTY(BlueprintReadOnly) int32 ProfileTimelineEntryCount = INDEX_NONE;
+    UPROPERTY(BlueprintReadOnly) int32 ProfileStopEntryCount = INDEX_NONE;
     UPROPERTY(BlueprintReadOnly) FString BlockingActorName;
     UPROPERTY(BlueprintReadOnly) FString BlockingActorClass;
     UPROPERTY(BlueprintReadOnly) float BlockingActorDistanceCm = -1.0f;
@@ -208,6 +224,16 @@ public:
         meta=(ClampMin="100.0", Units="cm"))
     float NearbyVehicleRadiusCm = 600.0f;
 
+    /** A vehicle occupant may be offset from the anchor by one or two metres. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Validation|Advanced",
+        meta=(ClampMin="25.0", Units="cm"))
+    float ShotAnchorToleranceCm = 300.0f;
+
+    /** Only timeline arrivals this close to the shot may infer a Shot1 anchor. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Validation|Advanced",
+        meta=(ClampMin="0", Units="s"))
+    int32 ShotTimelineMatchWindowSeconds = 15;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Validation")
     TArray<FTMOPTimelineValidationRecord> Records;
 
@@ -285,6 +311,10 @@ private:
     bool FindNextVehicleStop(FName VehicleId, int32 CurrentSecond,
         FName& OutAnchorId, int32& OutStopSecond) const;
     bool FindExpectedShotAnchor(FName EntityId, FName& OutAnchorId) const;
+    bool FindExpectedShotAnchorForVehicle(
+        FName VehicleId, FName& OutAnchorId) const;
+    bool FindNearestShotAnchor(
+        const FVector& Location, FName& OutAnchorId, float& OutDistanceCm) const;
     void AddRecord(const FTMOPTimelineValidationRecord& Record);
     int32 GetSimulationSecond() const;
     FName GetEntityId(const UTMOPActionExecutorComponent* Executor) const;
@@ -309,6 +339,8 @@ private:
     TWeakObjectPtr<class ATMOPHistoricalVehicleDirector> VehicleDirector;
     float SampleAccumulator = 0.0f;
     int32 ValidationStartSecond = INDEX_NONE;
+    int32 LastObservedSecond = INDEX_NONE;
+    int32 MaximumObservedSecond = INDEX_NONE;
     int32 NextSnapshotSecond = INDEX_NONE;
     bool bShotSnapshotCaptured = false;
     bool bValidationActive = false;

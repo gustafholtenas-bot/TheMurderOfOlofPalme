@@ -44,7 +44,8 @@ public:
     bool FindVehicleProfile(FName ProfileId, FTMOPVehicleAudioProfileRow& OutProfile) const;
 
 private:
-    USoundBase* ResolveSound(const FTMOPSoundLibraryRow& Definition) const;
+    USoundBase* ResolveSound(FName AudioId,
+        const FTMOPSoundLibraryRow& Definition);
     void DiscoverRuntimeActors();
     void EvaluateSchedule(int32 CurrentSecond);
     void StopScheduledAudio();
@@ -52,4 +53,7 @@ private:
     float DiscoveryAccumulator = 0.0f;
     int32 LastEvaluatedSecond = INDEX_NONE;
     TMap<FName, TWeakObjectPtr<UAudioComponent>> ActiveScheduledAudio;
+    /** Prevents a row with multiple samples from selecting the same asset on
+     * two consecutive plays. */
+    TMap<FName, FString> LastResolvedSoundByAudioId;
 };

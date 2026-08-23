@@ -581,8 +581,70 @@ bool ATMOPHistoricalAgent::TryFailsafeAdvance(const FVector& Destination)
     if (!Navigation->ProjectPointToNavigation(
         Candidate, Projected, FVector(60.0f, 60.0f, 120.0f))) return false;
 
+    FVector CapsuleLocation = Projected.Location;
+    if (const UCapsuleComponent* Capsule = GetCapsuleComponent())
+        CapsuleLocation.Z += Capsule->GetScaledCapsuleHalfHeight() + 2.0f;
+
     FHitResult Hit;
-    return SetActorLocation(Projected.Location, true, &Hit, ETeleportType::TeleportPhysics);
+    return SetActorLocation(CapsuleLocation, true, &Hit,
+        ETeleportType::TeleportPhysics);
+}
+
+bool ATMOPHistoricalAgent::SnapCapsuleToGround(
+    const float HorizontalSearchCm, const float VerticalSearchCm,
+    const float GroundClearanceCm)
+{
+    const UCapsuleComponent* Capsule = GetCapsuleComponent();
+    UWorld* World = GetWorld();
+    if (!IsValid(Capsule) || World == nullptr) return false;
+
+    const float HorizontalExtent = FMath::Max(1.0f, HorizontalSearchCm);
+    const float VerticalExtent = FMath::Max(1.0f, VerticalSearchCm);
+    FVector SurfaceLocation = GetActorLocation();
+    bool bFoundSurface = false;
+
+    if (UNavigationSystemV1* Navigation =
+        UNavigationSystemV1::GetCurrent(World))
+    {
+        FNavLocation Projected;
+        if (Navigation->ProjectPointToNavigation(
+            GetActorLocation(), Projected,
+            FVector(HorizontalExtent, HorizontalExtent, VerticalExtent)))
+        {
+            SurfaceLocation = Projected.Location;
+            bFoundSurface = true;
+        }
+    }
+
+    // Some interiors intentionally have no NavMesh. A WorldStatic trace keeps
+    // their initial placement correct without treating people or vehicles as
+    // floor geometry.
+    if (!bFoundSurface)
+    {
+        FCollisionObjectQueryParams StaticOnly;
+        StaticOnly.AddObjectTypesToQuery(ECC_WorldStatic);
+        FCollisionQueryParams Query(
+            SCENE_QUERY_STAT(TMOPInitialGroundSnap), false, this);
+        FHitResult FloorHit;
+        const FVector Start =
+            GetActorLocation() + FVector(0.0f, 0.0f, VerticalExtent);
+        const FVector End =
+            GetActorLocation() - FVector(0.0f, 0.0f, VerticalExtent);
+        if (World->LineTraceSingleByObjectType(
+            FloorHit, Start, End, StaticOnly, Query))
+        {
+            SurfaceLocation = FloorHit.ImpactPoint;
+            bFoundSurface = true;
+        }
+    }
+
+    if (!bFoundSurface) return false;
+
+    FVector CorrectedLocation = SurfaceLocation;
+    CorrectedLocation.Z += Capsule->GetScaledCapsuleHalfHeight() +
+        FMath::Max(0.0f, GroundClearanceCm);
+    return SetActorLocation(CorrectedLocation, false, nullptr,
+        ETeleportType::TeleportPhysics);
 }
 
 bool ATMOPHistoricalAgent::TryThresholdStep(const FVector& Destination)

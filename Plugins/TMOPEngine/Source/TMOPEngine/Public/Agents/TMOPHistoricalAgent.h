@@ -193,6 +193,16 @@ public:
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Movement")
     void ApplyMovementSpeedForActivity();
 
+    /**
+     * Places the bottom of the character capsule on the nearest walkable
+     * surface. Safe to call repeatedly: already grounded agents stay at the
+     * same height. Intended for standing Anchor/WorldTransform placements,
+     * never for seated or vehicle-attached agents.
+     */
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Movement")
+    bool SnapCapsuleToGround(float HorizontalSearchCm = 120.0f,
+        float VerticalSearchCm = 500.0f, float GroundClearanceCm = 2.0f);
+
     /** Refresh after DisplayName or EntityId changes. */
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Debug")
     void RefreshNameLabel();

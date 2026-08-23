@@ -5,6 +5,7 @@
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/Pawn.h"
 #include "Kismet/GameplayStatics.h"
 
 UTMOPAgentAudioComponent::UTMOPAgentAudioComponent()
@@ -88,7 +89,12 @@ void UTMOPAgentAudioComponent::NotifyFootstep(const FName ExplicitAudioId)
         ? DefaultWalkFootstepId : ExplicitAudioId;
     for (TActorIterator<ATMOPAudioDirector> It(GetWorld()); It; ++It)
     {
-        It->PlayAtLocationById(AudioId, Owner->GetActorLocation(), 1.0f);
+        const APawn* Pawn = Cast<APawn>(Owner);
+        if (IsValid(Pawn) && Pawn->IsLocallyControlled())
+            It->Play2DById(AudioId, 1.0f);
+        else
+            It->PlayAtLocationById(
+                AudioId, Owner->GetActorLocation(), 1.0f);
         break;
     }
 }

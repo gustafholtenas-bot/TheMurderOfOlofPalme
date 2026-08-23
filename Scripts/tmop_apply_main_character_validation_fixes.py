@@ -16,8 +16,22 @@ from pathlib import Path
 
 SOURCE = (
     "TMOP_AnchorsAndSeats(5).json; TMOP_Lanes_Anchors(4).json; "
-    "TimelineValidation_20260823_183509"
+    "TimelineValidation_20260823_183509; TimelineValidation_20260823_201605"
 )
+
+PALME_ROUTE_ARRIVALS = {
+    "kulturcirkeln": (23, 16, 9),
+    "ABFhuset": (23, 16, 21),
+    "KammakarXSvea_NW": (23, 16, 27),
+    "ANCHOR_SHOT1_GUNNILA_DAHLEN_KANNER_SUSANNE_KARLSSON": (23, 16, 57),
+    "KORVKIOSK_AF_KYRKOGATA_outside": (23, 18, 13),
+    "AFKXSvea_NW": (23, 18, 38),
+    "AFKXSvea": (23, 18, 53),
+    "SariBoutique": (23, 19, 21),
+    "SkandiaIngang": (23, 20, 21),
+    "Dekorimaingang": (23, 21, 4),
+    "Mordplatsen": (23, 21, 19),
+}
 
 
 def read_table(path: Path):
@@ -243,9 +257,26 @@ def patch_people(rows) -> list[str]:
         palme = row_by_id(rows, "EntityId", entity_id)
         on_sveavagen_route = False
         for entry in palme["Timeline"]:
+            if entry.get("EntryId", "").endswith("SANDINS_CONVERSATION_END"):
+                entry["Time"] = time_value(23, 15, 58)
+                entry["TimingMode"] = "Absolute"
+                entry["SharedEventId"] = "None"
+                entry["EventOffsetSeconds"] = 0
+                entry["SourceReference"] = SOURCE
+                entry["Notes"] = (
+                    "Validation fix: the Sandins conversation ends at 23:15:58, "
+                    "leaving enough real walking time for a calm route to Mordplatsen."
+                )
             if entry.get("EntryId", "").endswith("BLENDER_06"):
                 on_sveavagen_route = True
             if on_sveavagen_route and entry.get("Action") == "MoveToAnchor":
+                arrival = PALME_ROUTE_ARRIVALS.get(entry.get("TargetAnchorId"))
+                if arrival is not None:
+                    entry["Time"] = time_value(*arrival)
+                    entry["TimingMode"] = "Absolute"
+                    entry["SharedEventId"] = "None"
+                    entry["EventOffsetSeconds"] = 0
+                    entry["bTimeIsArrival"] = True
                 entry["TravelSpeedOverrideCmPerSecond"] = 100
                 entry["bTeleportDuringCatchUp"] = False
                 entry["SourceReference"] = SOURCE
@@ -257,7 +288,41 @@ def patch_people(rows) -> list[str]:
                     entry["Notes"] = (entry.get("Notes", "") + " " + note).strip()
             if entry.get("TargetAnchorId") == "Mordplatsen" and on_sveavagen_route:
                 break
-    changes.append("OLOF_PALME/LISBET_PALME: calm 100 cm/s side-by-side route to Mordplatsen")
+        for entry in palme["Timeline"]:
+            if entry.get("EntryId", "").endswith("LOOKS_INTO_SARI"):
+                entry["Time"] = time_value(23, 19, 21)
+                entry["TimingMode"] = "Absolute"
+                entry["SharedEventId"] = "None"
+                entry["EventOffsetSeconds"] = 0
+                entry["SourceReference"] = SOURCE
+    changes.append(
+        "OLOF_PALME/LISBET_PALME: Sandins departure 23:15:58, "
+        "calm 100 cm/s side-by-side route, Sari look and Mordplatsen 23:21:19"
+    )
+
+    # The configured runtime vehicles expose standard seat IDs. The validation
+    # proved that the descriptive ambulance aliases were not present, leaving
+    # Olof and ambulance staff outside even though the vehicle existed.
+    ambulance_seats = {
+        "OLOF_PALME": {"PATIENT_STRETCHER": "REAR_CENTER"},
+        "CHRISTER_ERIKSSON_AMB": {"PATIENT_BENCH_1": "REAR_LEFT"},
+        "EVA_LANTZ": {"PATIENT_BENCH_1": "REAR_LEFT"},
+        "KENNETH_LAVRELL": {"PATIENT_BENCH_2": "REAR_RIGHT"},
+    }
+    for entity_id, aliases in ambulance_seats.items():
+        person = row_by_id(rows, "EntityId", entity_id)
+        for entry in person["Timeline"]:
+            if entry.get("TargetEntityId") in ("AMBULANCE_A951", "AMBULANCE_912"):
+                target_seat = entry.get("TargetSeatId")
+                if target_seat in aliases:
+                    entry["TargetSeatId"] = aliases[target_seat]
+                    entry["SourceReference"] = SOURCE
+                    entry["Notes"] = (
+                        entry.get("Notes", "") +
+                        " Validation fix: mapped the unavailable ambulance seat "
+                        f"alias {target_seat} to runtime seat {aliases[target_seat]}."
+                    ).strip()
+    changes.append("A951/A912: mapped unavailable patient seat aliases to runtime seats")
 
     inge = row_by_id(rows, "EntityId", "INGE_MORELIUS_G")
     inge_routes = {

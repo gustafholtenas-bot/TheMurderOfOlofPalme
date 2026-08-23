@@ -537,6 +537,47 @@ void ATMOPGroupDirector::UpdateMovement(FRuntimeGroup& Group)
     if (!IsValid(Leader)) { SetState(Group, ETMOPGroupState::WaitingForMembers); return; }
     if (FVector::DistSquared2D(Leader->GetActorLocation(), Group.TargetLocation) <= FMath::Square(Group.AcceptanceRadius))
     {
+        // Reaching the leader target is not the same as the group arriving.
+        // Previously this immediately stopped every member, which could strand
+        // Ingrid (or any other follower) far behind a fast leader.
+        bool bAllMembersInFormation = true;
+        if (AAIController* LeaderController =
+            Cast<AAIController>(Leader->GetController()))
+            LeaderController->StopMovement();
+        Leader->SetActivityState(ETMOPAgentActivityState::Standing);
+
+        const float MemberTolerance = FMath::Max(
+            30.0f, MemberArrivalToleranceCm);
+        for (int32 Index = 0; Index < Group.Members.Num(); ++Index)
+        {
+            ATMOPHistoricalAgent* Agent = Group.Members[Index].Get();
+            if (!IsValid(Agent) || Agent == Leader) continue;
+            const FVector FormationTarget =
+                Leader->GetActorTransform().TransformPosition(
+                    GetFormationOffset(Group, Index));
+            if (FVector::DistSquared2D(
+                Agent->GetActorLocation(), FormationTarget) <=
+                FMath::Square(MemberTolerance))
+            {
+                if (AAIController* Controller =
+                    Cast<AAIController>(Agent->GetController()))
+                    Controller->StopMovement();
+                Agent->SetActivityState(ETMOPAgentActivityState::Standing);
+                continue;
+            }
+
+            bAllMembersInFormation = false;
+            AAIController* Controller =
+                Cast<AAIController>(Agent->GetController());
+            if (Controller != nullptr)
+            {
+                Agent->SetActivityState(ETMOPAgentActivityState::Walking);
+                Controller->MoveToLocation(FormationTarget,
+                    MemberTolerance, true, true, false, true);
+            }
+        }
+        if (!bAllMembersInFormation) return;
+
         if (Group.RouteLocations.IsValidIndex(Group.RouteLocationIndex + 1))
         {
             ++Group.RouteLocationIndex;

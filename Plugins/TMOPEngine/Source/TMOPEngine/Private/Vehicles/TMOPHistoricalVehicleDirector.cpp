@@ -473,7 +473,14 @@ int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
                     ETMOPHistoricalVehiclePlacementMode::Anchor &&
                 AnchorId.StartsWith(TEXT("Enter"),
                     ESearchCase::IgnoreCase);
-            if (bBoundaryEntry)
+            // An occupied boundary vehicle must exist when its people timeline
+            // assigns the driver and passengers. Deferring it until shortly
+            // before BeginDriving makes every 23:00 EnterVehicle fail and the
+            // vehicle consequently has no driver when its route begins.
+            const bool bOccupiedAtInitialPlacement =
+                !Entry.DriverEntityId.IsNone() ||
+                !Entry.PassengerEntityIds.IsEmpty();
+            if (bBoundaryEntry && !bOccupiedAtInitialPlacement)
             {
                 for (const FTMOPHistoricalVehicleTimelineEntry& Later :
                     Profile.Timeline)

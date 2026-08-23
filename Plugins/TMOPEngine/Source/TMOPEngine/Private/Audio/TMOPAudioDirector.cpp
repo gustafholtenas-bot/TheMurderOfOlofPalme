@@ -80,6 +80,30 @@ void ATMOPAudioDirector::BeginPlay()
 {
     Super::BeginPlay();
     DiscoverRuntimeActors();
+    const TArray<FName> FootstepRows = {
+        TEXT("FOOTSTEP_ASPHALT_WALK"), TEXT("FOOTSTEP_ASPHALT_RUN"),
+        TEXT("FOOTSTEP_INTERIOR_HARD"), TEXT("FOOTSTEP_CARPET"),
+        TEXT("FOOTSTEP_STAIRS"), TEXT("FOOTSTEP_WET_GROUND")};
+    for (const FName AudioId : FootstepRows)
+    {
+        FTMOPSoundLibraryRow Definition;
+        if (!FindSoundDefinition(AudioId, Definition))
+        {
+            UE_LOG(LogTemp, Error,
+                TEXT("TMOP Audio: required footstep row '%s' is missing."),
+                *AudioId.ToString());
+            continue;
+        }
+        TSet<FSoftObjectPath> UniqueSamples;
+        if (!Definition.Sound.IsNull())
+            UniqueSamples.Add(Definition.Sound.ToSoftObjectPath());
+        for (const TSoftObjectPtr<USoundBase>& Variant : Definition.Variants)
+            if (!Variant.IsNull()) UniqueSamples.Add(Variant.ToSoftObjectPath());
+        if (UniqueSamples.Num() < 5)
+            UE_LOG(LogTemp, Warning,
+                TEXT("TMOP Audio: footstep row '%s' has %d/5 assigned samples."),
+                *AudioId.ToString(), UniqueSamples.Num());
+    }
 }
 
 void ATMOPAudioDirector::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -148,14 +172,25 @@ bool ATMOPAudioDirector::FindVehicleProfile(
 }
 
 USoundBase* ATMOPAudioDirector::ResolveSound(
-    const FTMOPSoundLibraryRow& Definition) const
+    const FName AudioId, const FTMOPSoundLibraryRow& Definition)
 {
     TArray<TSoftObjectPtr<USoundBase>> Choices;
     if (!Definition.Sound.IsNull()) Choices.Add(Definition.Sound);
     for (const TSoftObjectPtr<USoundBase>& Variant : Definition.Variants)
         if (!Variant.IsNull()) Choices.Add(Variant);
     if (Choices.IsEmpty()) return nullptr;
-    return Choices[FMath::RandRange(0, Choices.Num() - 1)].LoadSynchronous();
+    const FString* Previous = LastResolvedSoundByAudioId.Find(AudioId);
+    TArray<int32> EligibleIndices;
+    for (int32 Index = 0; Index < Choices.Num(); ++Index)
+        if (Choices.Num() == 1 || Previous == nullptr ||
+            Choices[Index].ToSoftObjectPath().ToString() != *Previous)
+            EligibleIndices.Add(Index);
+    if (EligibleIndices.IsEmpty()) EligibleIndices.Add(0);
+    const int32 ChoiceIndex = EligibleIndices[
+        FMath::RandRange(0, EligibleIndices.Num() - 1)];
+    LastResolvedSoundByAudioId.Add(
+        AudioId, Choices[ChoiceIndex].ToSoftObjectPath().ToString());
+    return Choices[ChoiceIndex].LoadSynchronous();
 }
 
 UAudioComponent* ATMOPAudioDirector::Play2DById(
@@ -163,7 +198,7 @@ UAudioComponent* ATMOPAudioDirector::Play2DById(
 {
     FTMOPSoundLibraryRow Definition;
     if (!FindSoundDefinition(AudioId, Definition)) return nullptr;
-    USoundBase* Sound = ResolveSound(Definition);
+    USoundBase* Sound = ResolveSound(AudioId, Definition);
     if (!IsValid(Sound)) return nullptr;
     UAudioComponent* Audio = UGameplayStatics::SpawnSound2D(
         this, Sound, Definition.Volume * VolumeMultiplier,
@@ -181,7 +216,7 @@ UAudioComponent* ATMOPAudioDirector::PlayAtLocationById(
         !HasListenerWithinDistance(this, Location,
             GetAudibleDistanceCm(Definition)))
         return nullptr;
-    USoundBase* Sound = ResolveSound(Definition);
+    USoundBase* Sound = ResolveSound(AudioId, Definition);
     if (!IsValid(Sound)) return nullptr;
     UAudioComponent* Audio = UGameplayStatics::SpawnSoundAtLocation(
         this, Sound, Location, FRotator::ZeroRotator,
@@ -202,7 +237,7 @@ UAudioComponent* ATMOPAudioDirector::PlayAttachedById(
         !HasListenerWithinDistance(this, AttachTo->GetComponentLocation(),
             GetAudibleDistanceCm(Definition)))
         return nullptr;
-    USoundBase* Sound = ResolveSound(Definition);
+    USoundBase* Sound = ResolveSound(AudioId, Definition);
     if (!IsValid(Sound)) return nullptr;
     UAudioComponent* Audio = UGameplayStatics::SpawnSoundAttached(
         Sound, AttachTo, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,

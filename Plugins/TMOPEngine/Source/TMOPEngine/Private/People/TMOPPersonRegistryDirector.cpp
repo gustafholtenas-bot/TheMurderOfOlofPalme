@@ -899,11 +899,13 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
             ? Agent->EntityIdentity->EntityId : NAME_None;
         Agent->SetActorLocationAndRotation(Anchor->GetPlacementLocation(StableKey), Anchor->GetActorRotation(),
             false, nullptr, ETeleportType::TeleportPhysics);
+        Agent->SnapCapsuleToGround();
         Agent->SetActivityState(Entry.ActivityState);
         return true;
     }
     case ETMOPPersonLocationType::WorldTransform:
         Agent->SetActorTransform(Entry.WorldTransform, false, nullptr, ETeleportType::TeleportPhysics);
+        Agent->SnapCapsuleToGround();
         Agent->SetActivityState(Entry.ActivityState);
         return true;
     case ETMOPPersonLocationType::VenueSeat:

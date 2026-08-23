@@ -28,6 +28,7 @@ public:
 
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+    virtual void Tick(float DeltaSeconds) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Observations|Tables")
     TObjectPtr<UDataTable> ObservationTable = nullptr;
@@ -42,6 +43,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Observations")
     TArray<FTMOPObservationLinkDefinition> ObservationLinks;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|Linked Tracks")
+    bool bEnableLinkedTrackSimulation = true;
+
     UPROPERTY(BlueprintAssignable, Category="TMOP|Observations")
     FTMOPObservationEvaluatedSignature OnObservationEvaluated;
 
@@ -50,6 +55,11 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Observations")
     int32 ResolveCanonicalTimes();
+
+    /** Sorts every link's observation array by resolved canonical time and
+     * builds one interpolation segment per consecutive pair. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Observations|Linked Tracks")
+    int32 RebuildObservationTracks();
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Observations")
     void ResetObservationRuntime();
@@ -70,6 +80,14 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Observations")
     TArray<FTMOPObservationRuntime> GetAllObservationRuntime() const;
 
+    UFUNCTION(BlueprintPure, Category="TMOP|Observations|Linked Tracks")
+    bool TryGetObservationTrackRuntime(
+        FName LinkId,
+        FTMOPObservationTrackRuntime& OutRuntime) const;
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Observations|Linked Tracks")
+    TArray<FTMOPObservationTrackRuntime> GetAllObservationTrackRuntime() const;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Observations|World Bake")
     int32 ApplyBakedObservationRuntime(
         const TArray<FTMOPObservationRuntime>& BakedRuntime);
@@ -89,6 +107,39 @@ private:
         const FTMOPObservationDefinition& Definition,
         FTMOPObservationRuntime& Runtime) const;
     AActor* FindEntityActor(FName EntityId) const;
+    TArray<FName> GetLinkObservationIds(
+        const FTMOPObservationLinkDefinition& Link) const;
+    void UpdateObservationTracks(int32 CurrentSecond);
+
+    struct FResolvedTrackPoint
+    {
+        FName ObservationId = NAME_None;
+        FName AnchorId = NAME_None;
+        int32 StartSecond = INDEX_NONE;
+        int32 EndSecond = INDEX_NONE;
+        FVector Location = FVector::ZeroVector;
+    };
+
+    struct FResolvedTrackSegment
+    {
+        FName FromObservationId = NAME_None;
+        FName ToObservationId = NAME_None;
+        int32 TravelStartSecond = INDEX_NONE;
+        int32 TravelEndSecond = INDEX_NONE;
+        TArray<FVector> PolylinePoints;
+        TArray<float> CumulativeDistancesCm;
+        float DistanceCm = 0.0f;
+        float RequiredSpeedCmPerSecond = 0.0f;
+    };
+
+    struct FResolvedTrack
+    {
+        TArray<FResolvedTrackPoint> Points;
+        TArray<FResolvedTrackSegment> Segments;
+        TWeakObjectPtr<AActor> ControlledActor;
+        bool bCollisionSuppressedByTrack = false;
+        bool bActorCollisionWasEnabled = false;
+    };
 
     UPROPERTY(Transient)
     TMap<FName, FTMOPObservationDefinition> LoadedObservations;
@@ -98,4 +149,9 @@ private:
 
     UPROPERTY(Transient)
     TMap<FName, FTMOPObservationRuntime> RuntimeObservations;
+
+    UPROPERTY(Transient)
+    TMap<FName, FTMOPObservationTrackRuntime> RuntimeTracks;
+
+    TMap<FName, FResolvedTrack> ResolvedTracks;
 };

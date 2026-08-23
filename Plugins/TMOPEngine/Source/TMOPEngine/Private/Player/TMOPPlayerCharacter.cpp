@@ -2,6 +2,8 @@
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Animation/TMOPAnimationStateComponent.h"
+#include "Audio/TMOPAgentAudioComponent.h"
+#include "Audio/TMOPPlayerMovementAudioComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "EnhancedInputComponent.h"
@@ -64,6 +66,8 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     VehicleTakeover = CreateDefaultSubobject<UTMOPVehicleTakeoverComponent>(TEXT("VehicleTakeover"));
     VehicleDriving = CreateDefaultSubobject<UTMOPPlayerVehicleDrivingComponent>(TEXT("VehicleDriving"));
     VehicleSession = CreateDefaultSubobject<UTMOPPlayerVehicleSessionComponent>(TEXT("VehicleSession"));
+    FootstepAudio = CreateDefaultSubobject<UTMOPAgentAudioComponent>(TEXT("FootstepAudio"));
+    MovementAudio = CreateDefaultSubobject<UTMOPPlayerMovementAudioComponent>(TEXT("MovementAudio"));
     WorldItemClass = ATMOPWorldItem::StaticClass();
 }
 
