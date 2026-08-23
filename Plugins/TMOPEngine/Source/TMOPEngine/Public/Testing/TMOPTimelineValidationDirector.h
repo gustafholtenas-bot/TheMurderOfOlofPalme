@@ -26,6 +26,10 @@ struct TMOPENGINE_API FTMOPTimelineValidationRecord
     UPROPERTY(BlueprintReadOnly) int32 ActualSecond = INDEX_NONE;
     UPROPERTY(BlueprintReadOnly) float TimeDeviationSeconds = 0.0f;
     UPROPERTY(BlueprintReadOnly) float DistanceToTargetCm = -1.0f;
+    UPROPERTY(BlueprintReadOnly) int32 ExpectedArrivalSecond = INDEX_NONE;
+    UPROPERTY(BlueprintReadOnly) float RemainingPathCm = -1.0f;
+    UPROPERTY(BlueprintReadOnly) float RequiredSpeedCmPerSecond = -1.0f;
+    UPROPERTY(BlueprintReadOnly) bool bPhysicallyPossible = true;
     UPROPERTY(BlueprintReadOnly) FVector ActualLocation = FVector::ZeroVector;
     UPROPERTY(BlueprintReadOnly) ETMOPTimelineValidationSeverity Severity =
         ETMOPTimelineValidationSeverity::Passed;
@@ -61,7 +65,7 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Validation",
         meta=(ClampMin="1.0", Units="s"))
-    float StuckAfterSeconds = 10.0f;
+    float StuckAfterSeconds = 16.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Validation",
         meta=(ClampMin="1.0", Units="cm"))

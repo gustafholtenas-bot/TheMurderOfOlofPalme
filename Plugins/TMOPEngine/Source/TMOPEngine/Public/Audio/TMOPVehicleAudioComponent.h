@@ -22,6 +22,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle") FName AudioProfileId = TEXT("VOLVO_240");
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle") bool bEngineEnabled = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle") bool bEmergencySirenEnabled = false;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle", meta=(ClampMin="100.0", Units="cm")) float LocalAudioMaximumDistanceCm = 500.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle", meta=(ClampMin="0.0")) float HardStartAccelerationThreshold = 500.0f;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void PlayHorn();

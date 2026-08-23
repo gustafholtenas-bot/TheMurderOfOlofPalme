@@ -1,6 +1,7 @@
 #include "People/TMOPPersonRegistryDirector.h"
 
 #include "Actions/TMOPActionExecutorComponent.h"
+#include "AIController.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
@@ -16,6 +17,7 @@
 #include "Groups/TMOPGroupProfileTypes.h"
 #include "Kismet/GameplayStatics.h"
 #include "NavigationSystem.h"
+#include "Navigation/PathFollowingComponent.h"
 #include "People/TMOPPersonProfileComponent.h"
 #include "People/TMOPAppearanceAssetTypes.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
@@ -23,6 +25,7 @@
 #include "Sound/SoundBase.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Testing/TMOPTimelineValidationDirector.h"
+#include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Transit/TMOPBusServiceComponent.h"
 #include "Transit/TMOPBusStopComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
@@ -392,8 +395,16 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
             }
 
             ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
-            const bool bEntryCatchUp = bCatchUp ||
-                ResolvedSecond < CurrentSecond;
+            // Being late during a live simulation is not the same thing as
+            // restoring/fast-forwarding world state.  Treating every overdue
+            // entry as catch-up allowed MoveToAnchor entries with
+            // bTeleportDuringCatchUp to snap agents to their destinations as
+            // soon as an earlier movement, crowd blockage, or nav delay made
+            // the timeline even one second late.  Only the director's explicit
+            // initial restore/seek pass may use catch-up placement.  During
+            // normal play the busy check below keeps the overdue entry pending;
+            // it is executed physically as soon as the previous action ends.
+            const bool bEntryCatchUp = bCatchUp;
             const bool bFollower =
                 ShouldFollowGroupLeader(Runtime.Profile, Agent);
             if (bFollower && Runtime.NextTimelineIndex > 0 &&
@@ -563,6 +574,59 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                             Agent->SocialGroupId));
                 RouteLocations.Add(Anchor->GetPlacementLocation(
                     Agent->SocialGroupId));
+
+                if (Entry.bTimeIsArrival && !RouteLocations.IsEmpty())
+                {
+                    FVector Start = Agent->GetActorLocation();
+                    double RemainingPathCm = 0.0;
+                    for (const FVector& End : RouteLocations)
+                    {
+                        double SegmentCm = FVector::Dist2D(Start, End);
+                        UNavigationSystemV1::GetPathLength(
+                            GetWorld(), Start, End, SegmentCm, nullptr, nullptr);
+                        RemainingPathCm += SegmentCm;
+                        Start = End;
+                    }
+                    const int32 DepartureSecond =
+                        Runtime.CachedResolvedSecond != INDEX_NONE
+                        ? Runtime.CachedResolvedSecond
+                        : Entry.Time.ToSecondsFromMidnight();
+                    const int32 ArrivalSecond = DepartureSecond +
+                        EstimateTravelSeconds(Runtime, Entry);
+                    const UTMOPClockSubsystem* Clock =
+                        GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
+                    const int32 RemainingSeconds = Clock != nullptr
+                        ? ArrivalSecond - Clock->GetCurrentTime().ToSecondsFromMidnight()
+                        : 0;
+                    const float Multiplier =
+                        Runtime.Profile.MovementProfile.PersonalSpeedMultiplier *
+                        Agent->AppearanceMovementSpeedMultiplier;
+                    const float MinimumSpeed =
+                        Runtime.Profile.MovementProfile.SlowWalkSpeed * Multiplier;
+                    const float MaximumSpeed =
+                        (Entry.ActivityState == ETMOPAgentActivityState::Running ||
+                         Entry.ActivityState == ETMOPAgentActivityState::Fleeing)
+                        ? Runtime.Profile.MovementProfile.RunSpeed * Multiplier
+                        : Entry.ActivityState == ETMOPAgentActivityState::Sprinting
+                        ? Runtime.Profile.MovementProfile.SprintSpeed * Multiplier
+                        : Runtime.Profile.MovementProfile.FastWalkSpeed * Multiplier;
+                    const float RequiredSpeed = RemainingSeconds > 0
+                        ? static_cast<float>(RemainingPathCm) / RemainingSeconds
+                        : MaximumSpeed;
+                    const float ChosenSpeed = FMath::Clamp(
+                        RequiredSpeed, MinimumSpeed, MaximumSpeed);
+                    for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
+                        if (It->SocialGroupId == Agent->SocialGroupId)
+                            if (UCharacterMovementComponent* Movement =
+                                It->GetCharacterMovement())
+                                Movement->MaxWalkSpeed = ChosenSpeed;
+                    if (RequiredSpeed > MaximumSpeed)
+                        UE_LOG(LogTemp, Error,
+                            TEXT("TMOP precision: group '%s' cannot reach '%s' by %d without exceeding realistic speed (required %.0f, max %.0f cm/s)."),
+                            *Agent->SocialGroupId.ToString(),
+                            *Entry.TargetAnchorId.ToString(), ArrivalSecond,
+                            RequiredSpeed, MaximumSpeed);
+                }
                 return Groups->MoveGroupThroughLocations(
                     Agent->SocialGroupId,
                     RouteLocations,
@@ -585,6 +649,56 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
             Action.Confidence = Entry.Confidence;
             Action.SourceId = Entry.SourceReference;
             Action.Notes = Entry.Notes;
+
+            if (Entry.bTimeIsArrival)
+            {
+                const float PersonalMultiplier =
+                    Runtime.Profile.MovementProfile.PersonalSpeedMultiplier *
+                    Agent->AppearanceMovementSpeedMultiplier;
+                float MinimumSpeed =
+                    Runtime.Profile.MovementProfile.SlowWalkSpeed;
+                float MaximumSpeed =
+                    Runtime.Profile.MovementProfile.FastWalkSpeed;
+                switch (Action.ActivityState)
+                {
+                case ETMOPAgentActivityState::FastWalking:
+                    MinimumSpeed = Runtime.Profile.MovementProfile.NormalWalkSpeed;
+                    MaximumSpeed = Runtime.Profile.MovementProfile.FastWalkSpeed;
+                    break;
+                case ETMOPAgentActivityState::Jogging:
+                    MinimumSpeed = Runtime.Profile.MovementProfile.FastWalkSpeed;
+                    MaximumSpeed = Runtime.Profile.MovementProfile.JogSpeed;
+                    break;
+                case ETMOPAgentActivityState::Running:
+                case ETMOPAgentActivityState::Fleeing:
+                    MinimumSpeed = Runtime.Profile.MovementProfile.JogSpeed;
+                    MaximumSpeed = Runtime.Profile.MovementProfile.RunSpeed;
+                    break;
+                case ETMOPAgentActivityState::Sprinting:
+                    MinimumSpeed = Runtime.Profile.MovementProfile.RunSpeed;
+                    MaximumSpeed = Runtime.Profile.MovementProfile.SprintSpeed;
+                    break;
+                default:
+                    break;
+                }
+                MinimumSpeed *= PersonalMultiplier;
+                MaximumSpeed *= PersonalMultiplier;
+                if (Entry.TravelSpeedOverrideCmPerSecond > 0.0f)
+                {
+                    MinimumSpeed = Entry.TravelSpeedOverrideCmPerSecond;
+                    MaximumSpeed = Entry.TravelSpeedOverrideCmPerSecond;
+                }
+                const int32 DepartureSecond =
+                    Runtime.CachedResolvedSecond != INDEX_NONE
+                    ? Runtime.CachedResolvedSecond
+                    : Entry.Time.ToSecondsFromMidnight();
+                const int32 ExpectedArrivalSecond = DepartureSecond +
+                    EstimateTravelSeconds(Runtime, Entry);
+                Agent->ActionExecutor->ConfigureNextTimedMove(
+                    ExpectedArrivalSecond,
+                    MinimumSpeed,
+                    MaximumSpeed);
+            }
             return Agent->ActionExecutor->ExecuteScheduleEntry(Action);
         }
     case ETMOPPersonTimelineAction::Wait:
@@ -691,6 +805,18 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
             if (!IsValid(Service) || !Service->bDoorsOpen || !IsValid(Stop) ||
                 Stop->StopId != Entry.TargetStopId) return false;
         }
+        // Timetable times are targets, not permission to abandon a delayed
+        // emergency vehicle halfway along its route. Keep occupants seated
+        // until the traffic component has actually completed the current
+        // planned route; EvaluatePeople will retry this entry every tick.
+        if (!bCatchUp && IsValid(Vehicle))
+            if (const UTMOPTrafficVehicleMovementComponent* Movement =
+                Vehicle->FindComponentByClass<
+                    UTMOPTrafficVehicleMovementComponent>())
+                if (!Movement->PlannedLaneIds.IsEmpty() &&
+                    Movement->TrafficState !=
+                        ETMOPTrafficVehicleState::RouteComplete)
+                    return false;
         return IsValid(Vehicle) && Vehicle->ExitVehicle(Agent);
     }
 
@@ -1010,8 +1136,16 @@ void ATMOPPersonRegistryDirector::RebuildGroupsFromPeople()
 
 bool ATMOPPersonRegistryDirector::IsAgentBusy(const ATMOPHistoricalAgent* Agent) const
 {
-    return IsValid(Agent) && IsValid(Agent->ActionExecutor) &&
-        Agent->ActionExecutor->IsExecutingAction();
+    if (!IsValid(Agent)) return false;
+    if (IsValid(Agent->ActionExecutor) &&
+        Agent->ActionExecutor->IsExecutingAction())
+        return true;
+    // GroupDirector navigation does not run through ActionExecutor. Without
+    // this check the next overdue timeline entry could replace a group move
+    // before the leader and followers reached their anchor.
+    const AAIController* AI = Cast<AAIController>(Agent->GetController());
+    return IsValid(AI) &&
+        AI->GetMoveStatus() != EPathFollowingStatus::Idle;
 }
 
 ATMOPVehicleBase* ATMOPPersonRegistryDirector::FindVehicle(const FName VehicleId) const
@@ -1079,12 +1213,61 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
             OutErrors.Add(Prefix + TEXT(" is enabled for simulation but Timeline is empty."));
         TSet<FName> EntryIds;
         int32 PreviousSecond = INDEX_NONE;
+        const UTMOPAnchorSubsystem* AnchorRegistry =
+            GetGameInstance() != nullptr
+            ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>()
+            : nullptr;
         for (int32 Index = 0; Index < Row->Timeline.Num(); ++Index)
         {
             const FTMOPPersonTimelineEntry& Entry = Row->Timeline[Index];
             if (Entry.EntryId.IsNone() || EntryIds.Contains(Entry.EntryId))
                 OutErrors.Add(Prefix + FString::Printf(TEXT(" has missing/duplicate EntryId at Timeline[%d]."), Index));
             EntryIds.Add(Entry.EntryId);
+
+            if (AnchorRegistry != nullptr)
+            {
+                if (!Entry.TargetAnchorId.IsNone() &&
+                    AnchorRegistry->FindAnchor(Entry.TargetAnchorId) == nullptr)
+                    OutErrors.Add(Prefix + FString::Printf(
+                        TEXT(" Timeline[%d] references missing TargetAnchorId '%s'."),
+                        Index, *Entry.TargetAnchorId.ToString()));
+                for (const FName PassAnchorId : Entry.PassAnchorIds)
+                    if (!PassAnchorId.IsNone() &&
+                        AnchorRegistry->FindAnchor(PassAnchorId) == nullptr)
+                        OutErrors.Add(Prefix + FString::Printf(
+                            TEXT(" Timeline[%d] references missing PassAnchorId '%s'."),
+                            Index, *PassAnchorId.ToString()));
+                if (!Entry.DrivingDestinationAnchorId.IsNone() &&
+                    AnchorRegistry->FindAnchor(
+                        Entry.DrivingDestinationAnchorId) == nullptr)
+                    OutErrors.Add(Prefix + FString::Printf(
+                        TEXT(" Timeline[%d] references missing DrivingDestinationAnchorId '%s'."),
+                        Index, *Entry.DrivingDestinationAnchorId.ToString()));
+            }
+
+            if (Index > 0)
+            {
+                const FTMOPPersonTimelineEntry& Previous =
+                    Row->Timeline[Index - 1];
+                const bool bSameAbsoluteTime =
+                    Entry.TimingMode == ETMOPEventTimingMode::Absolute &&
+                    Previous.TimingMode == ETMOPEventTimingMode::Absolute &&
+                    Entry.Time.ToSecondsFromMidnight() ==
+                        Previous.Time.ToSecondsFromMidnight();
+                const bool bSameSharedEventTime =
+                    Entry.TimingMode == ETMOPEventTimingMode::Relative &&
+                    Previous.TimingMode == ETMOPEventTimingMode::Relative &&
+                    Entry.SharedEventId == Previous.SharedEventId &&
+                    Entry.EventOffsetSeconds == Previous.EventOffsetSeconds;
+                const bool bTwoMovements =
+                    Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
+                    Previous.Action == ETMOPPersonTimelineAction::MoveToAnchor;
+                if ((bSameAbsoluteTime || bSameSharedEventTime) &&
+                    bTwoMovements && !Previous.bTimeIsArrival)
+                    OutErrors.Add(Prefix + FString::Printf(
+                        TEXT(" Timeline[%d] and Timeline[%d] start two movements at the same resolved time; the second destination needs a later time."),
+                        Index - 1, Index));
+            }
             if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
                 Entry.SharedEventId.IsNone())
                 OutErrors.Add(Prefix + FString::Printf(

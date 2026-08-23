@@ -6,11 +6,69 @@
 #include "Audio/TMOPAgentAudioComponent.h"
 #include "Audio/TMOPVehicleAudioComponent.h"
 #include "Audio/TMOPVenueAudioEmitter.h"
+#include "Camera/PlayerCameraManager.h"
 #include "Components/AudioComponent.h"
 #include "Engine/DataTable.h"
 #include "EngineUtils.h"
+#include "Kismet/GameplayStatics.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Vehicles/TMOPVehicleBase.h"
+
+namespace
+{
+constexpr float TMOPLocalSoundMaxDistanceCm = 500.0f;
+
+bool IsStrictlyLocalSound(const FTMOPSoundLibraryRow& Definition)
+{
+    return Definition.Category == ETMOPAudioCategory::Footstep ||
+        Definition.Category == ETMOPAudioCategory::Vehicle;
+}
+
+float GetAudibleDistanceCm(const FTMOPSoundLibraryRow& Definition)
+{
+    return IsStrictlyLocalSound(Definition)
+        ? TMOPLocalSoundMaxDistanceCm
+        : FMath::Max(1.0f,
+            Definition.InnerRadiusCm + Definition.FalloffDistanceCm);
+}
+
+bool HasListenerWithinDistance(
+    const UObject* WorldContext, const FVector& SoundLocation,
+    const float MaximumDistanceCm)
+{
+    if (!IsValid(WorldContext)) return false;
+    const APlayerCameraManager* Camera =
+        UGameplayStatics::GetPlayerCameraManager(WorldContext, 0);
+    // Dedicated/server-side simulations have no listener.  Do not allocate
+    // local transient sounds there.
+    if (!IsValid(Camera)) return false;
+    return FVector::DistSquared(
+        Camera->GetCameraLocation(), SoundLocation) <=
+        FMath::Square(MaximumDistanceCm);
+}
+
+void ApplyTMOPAttenuation(
+    UAudioComponent* Audio, const FTMOPSoundLibraryRow& Definition)
+{
+    if (!IsValid(Audio)) return;
+    Audio->bAllowSpatialization = Definition.bSpatial;
+    Audio->bOverrideAttenuation = Definition.bSpatial;
+    Audio->AttenuationOverrides.bAttenuate = Definition.bSpatial;
+    Audio->AttenuationOverrides.AttenuationShape = EAttenuationShape::Sphere;
+
+    float InnerRadius = Definition.InnerRadiusCm;
+    float FalloffDistance = Definition.FalloffDistanceCm;
+    if (IsStrictlyLocalSound(Definition))
+    {
+        // Full volume close to the source, then fade to silence at exactly 5 m.
+        InnerRadius = FMath::Min(100.0f, TMOPLocalSoundMaxDistanceCm);
+        FalloffDistance = TMOPLocalSoundMaxDistanceCm - InnerRadius;
+    }
+    Audio->AttenuationOverrides.AttenuationShapeExtents =
+        FVector(InnerRadius, 0.0f, 0.0f);
+    Audio->AttenuationOverrides.FalloffDistance = FalloffDistance;
+}
+}
 
 ATMOPAudioDirector::ATMOPAudioDirector()
 {
@@ -107,14 +165,10 @@ UAudioComponent* ATMOPAudioDirector::Play2DById(
     if (!FindSoundDefinition(AudioId, Definition)) return nullptr;
     USoundBase* Sound = ResolveSound(Definition);
     if (!IsValid(Sound)) return nullptr;
-    UAudioComponent* Audio = NewObject<UAudioComponent>(this);
-    Audio->bAutoDestroy = true;
-    Audio->bAllowSpatialization = false;
-    Audio->SetSound(Sound);
-    Audio->SetVolumeMultiplier(Definition.Volume * VolumeMultiplier);
-    Audio->SetPitchMultiplier(FMath::FRandRange(Definition.PitchMin, Definition.PitchMax));
-    Audio->RegisterComponentWithWorld(GetWorld());
-    Audio->Play();
+    UAudioComponent* Audio = UGameplayStatics::SpawnSound2D(
+        this, Sound, Definition.Volume * VolumeMultiplier,
+        FMath::FRandRange(Definition.PitchMin, Definition.PitchMax),
+        0.0f, nullptr, false, true);
     return Audio;
 }
 
@@ -123,22 +177,18 @@ UAudioComponent* ATMOPAudioDirector::PlayAtLocationById(
 {
     FTMOPSoundLibraryRow Definition;
     if (!FindSoundDefinition(AudioId, Definition)) return nullptr;
+    if (Definition.bSpatial &&
+        !HasListenerWithinDistance(this, Location,
+            GetAudibleDistanceCm(Definition)))
+        return nullptr;
     USoundBase* Sound = ResolveSound(Definition);
     if (!IsValid(Sound)) return nullptr;
-    UAudioComponent* Audio = NewObject<UAudioComponent>(this);
-    Audio->bAutoDestroy = true;
-    Audio->bAllowSpatialization = Definition.bSpatial;
-    Audio->bOverrideAttenuation = Definition.bSpatial;
-    Audio->AttenuationOverrides.bAttenuate = Definition.bSpatial;
-    Audio->AttenuationOverrides.AttenuationShape = EAttenuationShape::Sphere;
-    Audio->AttenuationOverrides.AttenuationShapeExtents = FVector(Definition.InnerRadiusCm, 0.0f, 0.0f);
-    Audio->AttenuationOverrides.FalloffDistance = Definition.FalloffDistanceCm;
-    Audio->SetSound(Sound);
-    Audio->SetVolumeMultiplier(Definition.Volume * VolumeMultiplier);
-    Audio->SetPitchMultiplier(FMath::FRandRange(Definition.PitchMin, Definition.PitchMax));
-    Audio->SetWorldLocation(Location);
-    Audio->RegisterComponentWithWorld(GetWorld());
-    Audio->Play();
+    UAudioComponent* Audio = UGameplayStatics::SpawnSoundAtLocation(
+        this, Sound, Location, FRotator::ZeroRotator,
+        Definition.Volume * VolumeMultiplier,
+        FMath::FRandRange(Definition.PitchMin, Definition.PitchMax),
+        0.0f, nullptr, nullptr, true);
+    ApplyTMOPAttenuation(Audio, Definition);
     return Audio;
 }
 
@@ -148,22 +198,19 @@ UAudioComponent* ATMOPAudioDirector::PlayAttachedById(
     if (!IsValid(AttachTo)) return nullptr;
     FTMOPSoundLibraryRow Definition;
     if (!FindSoundDefinition(AudioId, Definition)) return nullptr;
+    if (Definition.bSpatial &&
+        !HasListenerWithinDistance(this, AttachTo->GetComponentLocation(),
+            GetAudibleDistanceCm(Definition)))
+        return nullptr;
     USoundBase* Sound = ResolveSound(Definition);
     if (!IsValid(Sound)) return nullptr;
-    UAudioComponent* Audio = NewObject<UAudioComponent>(this);
-    Audio->bAutoDestroy = true;
-    Audio->bAllowSpatialization = Definition.bSpatial;
-    Audio->bOverrideAttenuation = Definition.bSpatial;
-    Audio->AttenuationOverrides.bAttenuate = Definition.bSpatial;
-    Audio->AttenuationOverrides.AttenuationShape = EAttenuationShape::Sphere;
-    Audio->AttenuationOverrides.AttenuationShapeExtents = FVector(Definition.InnerRadiusCm, 0.0f, 0.0f);
-    Audio->AttenuationOverrides.FalloffDistance = Definition.FalloffDistanceCm;
-    Audio->SetSound(Sound);
-    Audio->SetVolumeMultiplier(Definition.Volume * VolumeMultiplier);
-    Audio->SetPitchMultiplier(FMath::FRandRange(Definition.PitchMin, Definition.PitchMax));
-    Audio->RegisterComponentWithWorld(GetWorld());
-    Audio->AttachToComponent(AttachTo, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-    Audio->Play();
+    UAudioComponent* Audio = UGameplayStatics::SpawnSoundAttached(
+        Sound, AttachTo, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
+        EAttachLocation::SnapToTarget, true,
+        Definition.Volume * VolumeMultiplier,
+        FMath::FRandRange(Definition.PitchMin, Definition.PitchMax),
+        0.0f, nullptr, nullptr, true);
+    ApplyTMOPAttenuation(Audio, Definition);
     return Audio;
 }
 

@@ -1,6 +1,7 @@
 #include "Audio/TMOPAgentAudioComponent.h"
 
 #include "Audio/TMOPAudioDirector.h"
+#include "Camera/PlayerCameraManager.h"
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -29,6 +30,19 @@ void UTMOPAgentAudioComponent::TickComponent(
     const FVector Location = Owner->GetActorLocation();
     const float Distance = FVector::Dist2D(Location, PreviousLocation);
     PreviousLocation = Location;
+
+    // Do not accumulate, trace surfaces, or allocate audio for people whose
+    // footsteps cannot be heard.  Reset the cadence so returning into range
+    // never produces a burst of deferred footsteps.
+    const APlayerCameraManager* Camera =
+        UGameplayStatics::GetPlayerCameraManager(this, 0);
+    if (!IsValid(Camera) ||
+        FVector::DistSquared(Camera->GetCameraLocation(), Location) >
+            FMath::Square(MaximumAudibleDistanceCm))
+    {
+        TravelSinceFootstepCm = 0.0f;
+        return;
+    }
     const float Speed = DeltaTime > KINDA_SMALL_NUMBER ? Distance / DeltaTime : 0.0f;
     if (Speed < MinimumMovingSpeedCmPerSecond) return;
     if (const ACharacter* Character = Cast<ACharacter>(Owner))

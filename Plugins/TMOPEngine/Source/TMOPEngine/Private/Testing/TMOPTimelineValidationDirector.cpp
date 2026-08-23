@@ -116,10 +116,9 @@ void ATMOPTimelineValidationDirector::DiscoverAgents()
         Tracked.Agent = Agent;
         Tracked.Executor = Agent->ActionExecutor;
         Tracked.LastLocation = Agent->GetActorLocation();
-        // Do not query executor-private/current-entry state here. Older project
-        // copies of the action executor do not expose GetCurrentEntryId(). The
-        // validation callback below is the authoritative source and fills this
-        // field as soon as an action starts.
+        // Older ActionExecutor builds do not expose GetCurrentEntryId(). The
+        // validation delegate below supplies the active ID as soon as an
+        // action begins, so discovery can safely start with no active entry.
         Tracked.ActiveEntryId = NAME_None;
         Agent->ActionExecutor->OnActionValidationEvent.AddUObject(
             this, &ATMOPTimelineValidationDirector::HandleActionValidation);
@@ -157,6 +156,19 @@ void ATMOPTimelineValidationDirector::SampleAgents(const float DeltaSeconds)
             }
         }
         if (!bMoving)
+        {
+            Tracked.StationarySeconds = 0.0f;
+            Tracked.bStuckReportedForCurrentMove = false;
+            Tracked.LastLocation = Agent->GetActorLocation();
+            continue;
+        }
+
+        // A character that is already inside the accepted target radius is
+        // not meaningfully stuck. Navigation may spend a few samples waiting
+        // for the move-complete callback, especially in dense cinema crowds.
+        // Reporting that as an error produced false positives at 6–120 cm.
+        if (FVector::Dist2D(Agent->GetActorLocation(), Target) <=
+            ArrivalWarningDistanceCm)
         {
             Tracked.StationarySeconds = 0.0f;
             Tracked.bStuckReportedForCurrentMove = false;
@@ -216,6 +228,28 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
     Record.ActualLocation = IsValid(OwnerActor)
         ? OwnerActor->GetActorLocation() : FVector::ZeroVector;
 
+    int32 TimedExpectedArrival = INDEX_NONE;
+    float TimedRemainingPath = -1.0f;
+    float TimedRequiredSpeed = -1.0f;
+    bool bTimedPossible = true;
+    const bool bHasTimedMove = Executor->GetActiveMoveTimingDiagnostics(
+        TimedExpectedArrival, TimedRemainingPath,
+        TimedRequiredSpeed, bTimedPossible);
+    if (bHasTimedMove)
+    {
+        Record.ExpectedArrivalSecond = TimedExpectedArrival;
+        Record.RemainingPathCm = TimedRemainingPath;
+        Record.RequiredSpeedCmPerSecond = TimedRequiredSpeed;
+        Record.bPhysicallyPossible = bTimedPossible;
+        if (State == ETMOPActionExecutionState::Completed ||
+            State == ETMOPActionExecutionState::Failed)
+        {
+            Record.PlannedSecond = TimedExpectedArrival;
+            Record.TimeDeviationSeconds =
+                Record.ActualSecond - TimedExpectedArrival;
+        }
+    }
+
     if (State == ETMOPActionExecutionState::Executing ||
         State == ETMOPActionExecutionState::WaitingForArrival)
     {
@@ -238,6 +272,33 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
                 Record.Severity = ETMOPTimelineValidationSeverity::Warning;
             Record.Message = TEXT("Timeline action started.");
             AddRecord(Record);
+        }
+        else
+        {
+            int32 ExpectedArrival = INDEX_NONE;
+            float RemainingPath = -1.0f;
+            float RequiredSpeed = -1.0f;
+            bool bPossible = true;
+            if (Executor->GetActiveMoveTimingDiagnostics(
+                ExpectedArrival, RemainingPath, RequiredSpeed, bPossible))
+            {
+                Record.Event = TEXT("TravelPreflight");
+                Record.ExpectedArrivalSecond = ExpectedArrival;
+                Record.RemainingPathCm = RemainingPath;
+                Record.RequiredSpeedCmPerSecond = RequiredSpeed;
+                Record.bPhysicallyPossible = bPossible;
+                Record.Severity = bPossible
+                    ? ETMOPTimelineValidationSeverity::Passed
+                    : ETMOPTimelineValidationSeverity::Error;
+                Record.Message = bPossible
+                    ? FString::Printf(
+                        TEXT("NavMesh route %.0f cm; required speed %.0f cm/s."),
+                        RemainingPath, RequiredSpeed)
+                    : FString::Printf(
+                        TEXT("Impossible arrival without teleport: NavMesh route %.0f cm requires %.0f cm/s, above the realistic limit."),
+                        RemainingPath, RequiredSpeed);
+                AddRecord(Record);
+            }
         }
         return;
     }
@@ -268,6 +329,24 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
     {
         Record.Severity = ETMOPTimelineValidationSeverity::Error;
         Record.Message = TEXT("Action executor reported failure.");
+    }
+    else if (bHasTimedMove &&
+        FMath::Abs(Record.TimeDeviationSeconds) > TimingErrorSeconds)
+    {
+        Record.Severity = ETMOPTimelineValidationSeverity::Error;
+        Record.Message = FString::Printf(
+            TEXT("Arrived %.0f seconds %s the historical deadline without teleporting."),
+            FMath::Abs(Record.TimeDeviationSeconds),
+            Record.TimeDeviationSeconds >= 0.0f ? TEXT("late") : TEXT("early"));
+    }
+    else if (bHasTimedMove &&
+        FMath::Abs(Record.TimeDeviationSeconds) > TimingWarningSeconds)
+    {
+        Record.Severity = ETMOPTimelineValidationSeverity::Warning;
+        Record.Message = FString::Printf(
+            TEXT("Arrived %.0f seconds %s the historical deadline."),
+            FMath::Abs(Record.TimeDeviationSeconds),
+            Record.TimeDeviationSeconds >= 0.0f ? TEXT("late") : TEXT("early"));
     }
     else if (Record.DistanceToTargetCm > ArrivalWarningDistanceCm)
     {
@@ -305,7 +384,7 @@ void ATMOPTimelineValidationDirector::HandlePersonTimelineApplied(
     }
 
     if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
-        Tracked != nullptr &&
+        Tracked != nullptr && Tracked->Executor.IsValid() &&
         Tracked->ActiveEntryId == Entry.EntryId)
         return;
 
@@ -387,17 +466,30 @@ bool ATMOPTimelineValidationDirector::ExportReports()
     const FString Base = FPaths::Combine(
         Directory, FString::Printf(TEXT("TimelineValidation_%s"), *Stamp));
 
-    FString Csv = TEXT("EntityId,EntryId,Event,TargetAnchorId,PlannedSecond,ActualSecond,TimeDeviationSeconds,DistanceToTargetCm,X,Y,Z,Severity,Message\n");
+    const int32 ExportSecond = GetSimulationSecond();
+    FString Csv = TEXT("EntityId,EntryId,Event,TargetAnchorId,PlannedSecond,ActualSecond,TimeDeviationSeconds,DistanceToTargetCm,ExpectedArrivalSecond,RemainingPathCm,RequiredSpeedCmPerSecond,PhysicallyPossible,X,Y,Z,Severity,Message\n");
     TArray<TSharedPtr<FJsonValue>> JsonRecords;
     for (const FTMOPTimelineValidationRecord& R : Records)
     {
-        Csv += FString::Printf(TEXT("%s,%s,%s,%s,%d,%d,%.1f,%.1f,%.1f,%.1f,%.1f,%s,%s\n"),
+        ETMOPTimelineValidationSeverity ExportSeverity = R.Severity;
+        FString ExportMessage = R.Message;
+        if (R.Event == TEXT("Failed") && ExportSecond != INDEX_NONE &&
+            R.ActualSecond >= ExportSecond - 1 &&
+            R.Message == TEXT("Action executor reported failure."))
+        {
+            ExportSeverity = ETMOPTimelineValidationSeverity::Warning;
+            ExportMessage = TEXT("Action was interrupted when validation/simulation ended.");
+        }
+        Csv += FString::Printf(TEXT("%s,%s,%s,%s,%d,%d,%.1f,%.1f,%d,%.1f,%.1f,%s,%.1f,%.1f,%.1f,%s,%s\n"),
             *CsvEscape(R.EntityId.ToString()), *CsvEscape(R.EntryId.ToString()),
             *CsvEscape(R.Event), *CsvEscape(R.TargetAnchorId.ToString()),
             R.PlannedSecond, R.ActualSecond, R.TimeDeviationSeconds,
-            R.DistanceToTargetCm, R.ActualLocation.X, R.ActualLocation.Y,
-            R.ActualLocation.Z, *CsvEscape(SeverityText(R.Severity)),
-            *CsvEscape(R.Message));
+            R.DistanceToTargetCm, R.ExpectedArrivalSecond,
+            R.RemainingPathCm, R.RequiredSpeedCmPerSecond,
+            *CsvEscape(R.bPhysicallyPossible ? TEXT("true") : TEXT("false")),
+            R.ActualLocation.X, R.ActualLocation.Y,
+            R.ActualLocation.Z, *CsvEscape(SeverityText(ExportSeverity)),
+            *CsvEscape(ExportMessage));
 
         TSharedRef<FJsonObject> O = MakeShared<FJsonObject>();
         O->SetStringField(TEXT("entityId"), R.EntityId.ToString());
@@ -408,8 +500,12 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         O->SetNumberField(TEXT("actualSecond"), R.ActualSecond);
         O->SetNumberField(TEXT("timeDeviationSeconds"), R.TimeDeviationSeconds);
         O->SetNumberField(TEXT("distanceToTargetCm"), R.DistanceToTargetCm);
-        O->SetStringField(TEXT("severity"), SeverityText(R.Severity));
-        O->SetStringField(TEXT("message"), R.Message);
+        O->SetNumberField(TEXT("expectedArrivalSecond"), R.ExpectedArrivalSecond);
+        O->SetNumberField(TEXT("remainingPathCm"), R.RemainingPathCm);
+        O->SetNumberField(TEXT("requiredSpeedCmPerSecond"), R.RequiredSpeedCmPerSecond);
+        O->SetBoolField(TEXT("physicallyPossible"), R.bPhysicallyPossible);
+        O->SetStringField(TEXT("severity"), SeverityText(ExportSeverity));
+        O->SetStringField(TEXT("message"), ExportMessage);
         JsonRecords.Add(MakeShared<FJsonValueObject>(O));
     }
 

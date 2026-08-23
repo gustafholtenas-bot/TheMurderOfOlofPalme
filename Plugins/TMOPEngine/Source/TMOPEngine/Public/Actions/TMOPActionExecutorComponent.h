@@ -107,6 +107,23 @@ public:
         FVector TargetLocation,
         ETMOPAgentActivityState RestoredActivity);
 
+    /**
+     * Supplies the historical arrival deadline for the next MoveToAnchor.
+     * Speeds are centimetres/second and are clamped to a realistic range.
+     * No teleport is used when the deadline cannot be reached.
+     */
+    void ConfigureNextTimedMove(
+        int32 ExpectedArrivalSecond,
+        float MinimumSpeedCmPerSecond,
+        float MaximumSpeedCmPerSecond);
+
+    /** Current timing diagnostics consumed by timeline validation. */
+    bool GetActiveMoveTimingDiagnostics(
+        int32& OutExpectedArrivalSecond,
+        float& OutRemainingPathCm,
+        float& OutRequiredSpeedCmPerSecond,
+        bool& bOutPhysicallyPossible) const;
+
 private:
     UFUNCTION()
     void HandleScheduleEntryReady(
@@ -117,6 +134,9 @@ private:
     bool ExecuteImmediateAction(const FTMOPScheduleEntry& Entry);
     bool BeginMoveToAnchor(const FTMOPScheduleEntry& Entry);
     bool MoveToCurrentRouteAnchor();
+    void UpdateTimedMovementSpeed(bool bForceUpdate = false);
+    float CalculateRemainingPathLengthCm() const;
+    void RestoreMovementSpeed();
     void QueueScheduleEntry(
         const FTMOPScheduleEntry& Entry,
         const FTMOPTime& TriggerTime);
@@ -143,6 +163,17 @@ private:
     bool bHasCurrentEntry = false;
     FTMOPTime CurrentScheduledTime;
     bool bRestoredFromBake = false;
+
+    int32 PendingExpectedArrivalSecond = INDEX_NONE;
+    float PendingMinimumSpeedCmPerSecond = 0.0f;
+    float PendingMaximumSpeedCmPerSecond = 0.0f;
+    int32 ActiveExpectedArrivalSecond = INDEX_NONE;
+    float ActiveMinimumSpeedCmPerSecond = 0.0f;
+    float ActiveMaximumSpeedCmPerSecond = 0.0f;
+    float ActiveRemainingPathCm = 0.0f;
+    float ActiveRequiredSpeedCmPerSecond = 0.0f;
+    bool bActiveMovePhysicallyPossible = true;
+    float TimedSpeedUpdateAccumulator = 0.0f;
 
     /** Entries whose scheduled time passed while an earlier action was active. */
     UPROPERTY(Transient)

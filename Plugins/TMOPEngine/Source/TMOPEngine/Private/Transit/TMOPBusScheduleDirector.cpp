@@ -213,7 +213,6 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     Service->RouteData = Run.RouteData;
     Service->ServiceRunId = Run.RunId;
     Service->DwellRandomSeed = ScheduleSeed + CurrentLoopNumber * 1013 + Runtime.SourceIndex * 89;
-    Service->InitializeService();
     if (UTMOPBusPassengerComponent* Passengers =
         Bus->FindComponentByClass<UTMOPBusPassengerComponent>())
     {
@@ -254,6 +253,12 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
         Bus->Destroy();
         return false;
     }
+
+    // The service must inspect an already initialized movement component.
+    // Initializing it earlier can leave CurrentTargetStop/route progress based
+    // on the deferred actor's identity transform, causing the bus to stop at
+    // its first stop and never resume.
+    Service->InitializeService();
     Runtime.SpawnedBus = Bus;
     TArray<FOverlapResult> Overlaps;
     FCollisionObjectQueryParams Objects;
@@ -304,6 +309,11 @@ bool ATMOPBusScheduleDirector::ActivateStagedRun(
     }
     Movement->StartDriving();
     Runtime.State = ETMOPBusRunState::Active;
+    Runtime.LastProgressLocation = Bus->GetActorLocation();
+    Runtime.LastProgressWorldSeconds = GetWorld() != nullptr
+        ? GetWorld()->GetTimeSeconds() : 0.0f;
+    Runtime.LastRecoveryWorldSeconds = -1000.0f;
+    Runtime.RecoveryAttempts = 0;
     UE_LOG(LogTemp, Display,
         TEXT("TMOP bus '%s': departed at scheduled time."),
         *Runtime.RunId.ToString());
@@ -322,7 +332,7 @@ void ATMOPBusScheduleDirector::MonitorActiveRuns(const FTMOPTime CurrentTime)
             continue;
         }
         const FTMOPBusScheduledRun& Run = ScheduledRuns[Runtime.SourceIndex];
-        const UTMOPTrafficVehicleMovementComponent* Movement =
+        UTMOPTrafficVehicleMovementComponent* Movement =
             Runtime.SpawnedBus->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
         const bool bTrafficComplete = IsValid(Movement) &&
             Movement->TrafficState == ETMOPTrafficVehicleState::RouteComplete;
@@ -330,7 +340,42 @@ void ATMOPBusScheduleDirector::MonitorActiveRuns(const FTMOPTime CurrentTime)
             Now >= Run.ForcedDespawnTime.ToSecondsFromMidnight();
         if ((Run.bDespawnWhenTrafficRouteCompletes && bTrafficComplete) || bForcedTime)
             CompleteRun(Runtime);
+        else
+            RecoverStalledBus(Runtime);
     }
+}
+
+void ATMOPBusScheduleDirector::RecoverStalledBus(FTMOPBusRunRuntime& Runtime)
+{
+    if (!IsValid(Runtime.SpawnedBus) || GetWorld() == nullptr) return;
+    UTMOPTrafficVehicleMovementComponent* Movement =
+        Runtime.SpawnedBus->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
+    if (!IsValid(Movement) ||
+        Movement->TrafficState == ETMOPTrafficVehicleState::RouteComplete)
+        return;
+
+    const float WorldSeconds = GetWorld()->GetTimeSeconds();
+    const FVector Location = Runtime.SpawnedBus->GetActorLocation();
+    if (FVector::DistSquared2D(Location, Runtime.LastProgressLocation) >=
+        FMath::Square(ProgressDistanceThresholdCm))
+    {
+        Runtime.LastProgressLocation = Location;
+        Runtime.LastProgressWorldSeconds = WorldSeconds;
+        Runtime.RecoveryAttempts = 0;
+        return;
+    }
+
+    const float StationaryFor = WorldSeconds - Runtime.LastProgressWorldSeconds;
+    if (StationaryFor < MaximumStationarySeconds ||
+        WorldSeconds - Runtime.LastRecoveryWorldSeconds < RecoveryRetryIntervalSeconds)
+        return;
+
+    Runtime.LastRecoveryWorldSeconds = WorldSeconds;
+    ++Runtime.RecoveryAttempts;
+    Movement->StartDriving();
+    UE_LOG(LogTemp, Warning,
+        TEXT("TMOP BusWatchdog: bus '%s' made no route progress for %.1f s; StartDriving issued (attempt %d)."),
+        *Runtime.RunId.ToString(), StationaryFor, Runtime.RecoveryAttempts);
 }
 
 void ATMOPBusScheduleDirector::CompleteRun(FTMOPBusRunRuntime& Runtime)

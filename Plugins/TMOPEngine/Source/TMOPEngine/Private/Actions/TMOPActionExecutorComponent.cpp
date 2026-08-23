@@ -9,7 +9,10 @@
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/Controller.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "NavigationSystem.h"
 #include "Schedules/TMOPScheduleSubsystem.h"
+#include "Time/TMOPClockSubsystem.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Venues/TMOPCinemaSeatSubsystem.h"
 #include "World/TMOPVerticalTransport.h"
@@ -87,6 +90,13 @@ void UTMOPActionExecutorComponent::TickComponent(
     if (ExecutionState != ETMOPActionExecutionState::WaitingForArrival)
     {
         return;
+    }
+
+    TimedSpeedUpdateAccumulator += DeltaTime;
+    if (TimedSpeedUpdateAccumulator >= 0.5f)
+    {
+        TimedSpeedUpdateAccumulator = 0.0f;
+        UpdateTimedMovementSpeed();
     }
 
     const AActor* OwnerActor = GetOwner();
@@ -170,6 +180,7 @@ void UTMOPActionExecutorComponent::CancelCurrentAction()
     }
 
     BroadcastExecutionState(ETMOPActionExecutionState::Failed);
+    RestoreMovementSpeed();
 
     bHasCurrentEntry = false;
     bRestoredFromBake = false;
@@ -217,6 +228,33 @@ bool UTMOPActionExecutorComponent::RestoreBakedMoveToLocation(
             : RestoredActivity);
     UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
     SetComponentTickEnabled(true);
+    return true;
+}
+
+void UTMOPActionExecutorComponent::ConfigureNextTimedMove(
+    const int32 ExpectedArrivalSecond,
+    const float MinimumSpeedCmPerSecond,
+    const float MaximumSpeedCmPerSecond)
+{
+    PendingExpectedArrivalSecond = ExpectedArrivalSecond;
+    PendingMinimumSpeedCmPerSecond = FMath::Max(1.0f, MinimumSpeedCmPerSecond);
+    PendingMaximumSpeedCmPerSecond = FMath::Max(
+        PendingMinimumSpeedCmPerSecond, MaximumSpeedCmPerSecond);
+}
+
+bool UTMOPActionExecutorComponent::GetActiveMoveTimingDiagnostics(
+    int32& OutExpectedArrivalSecond,
+    float& OutRemainingPathCm,
+    float& OutRequiredSpeedCmPerSecond,
+    bool& bOutPhysicallyPossible) const
+{
+    if (ActiveExpectedArrivalSecond == INDEX_NONE ||
+        ExecutionState != ETMOPActionExecutionState::WaitingForArrival)
+        return false;
+    OutExpectedArrivalSecond = ActiveExpectedArrivalSecond;
+    OutRemainingPathCm = ActiveRemainingPathCm;
+    OutRequiredSpeedCmPerSecond = ActiveRequiredSpeedCmPerSecond;
+    bOutPhysicallyPossible = bActiveMovePhysicallyPossible;
     return true;
 }
 
@@ -373,6 +411,13 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
         if (!AnchorId.IsNone()) CurrentRouteAnchorIds.Add(AnchorId);
     CurrentRouteAnchorIds.Add(Entry.TargetAnchorId);
     CurrentRouteAnchorIndex = 0;
+    ActiveExpectedArrivalSecond = PendingExpectedArrivalSecond;
+    ActiveMinimumSpeedCmPerSecond = PendingMinimumSpeedCmPerSecond;
+    ActiveMaximumSpeedCmPerSecond = PendingMaximumSpeedCmPerSecond;
+    PendingExpectedArrivalSecond = INDEX_NONE;
+    PendingMinimumSpeedCmPerSecond = 0.0f;
+    PendingMaximumSpeedCmPerSecond = 0.0f;
+    TimedSpeedUpdateAccumulator = 0.0f;
     Agent->SetActivityState(Entry.ActivityState);
 
     if (!Agent->CanMove())
@@ -388,6 +433,7 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
 
     ExecutionState = ETMOPActionExecutionState::WaitingForArrival;
     SetComponentTickEnabled(true);
+    UpdateTimedMovementSpeed(true);
 
     BroadcastExecutionState(ExecutionState);
 
@@ -419,6 +465,76 @@ bool UTMOPActionExecutorComponent::MoveToCurrentRouteAnchor()
     CurrentTargetLocation = TargetAnchor->GetPlacementLocation(StableKey);
     UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
     return true;
+}
+
+float UTMOPActionExecutorComponent::CalculateRemainingPathLengthCm() const
+{
+    const ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
+    UWorld* World = GetWorld();
+    const UGameInstance* GameInstance =
+        World != nullptr ? World->GetGameInstance() : nullptr;
+    const UTMOPAnchorSubsystem* Anchors = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
+    if (!IsValid(Agent) || World == nullptr || Anchors == nullptr) return 0.0f;
+
+    FVector Start = Agent->GetActorLocation();
+    double Total = 0.0;
+    for (int32 Index = CurrentRouteAnchorIndex;
+        Index < CurrentRouteAnchorIds.Num(); ++Index)
+    {
+        const ATMOPHistoricalAnchor* Anchor =
+            Anchors->FindAnchor(CurrentRouteAnchorIds[Index]);
+        if (!IsValid(Anchor)) return 0.0f;
+        const FVector End = Index == CurrentRouteAnchorIndex
+            ? CurrentTargetLocation : Anchor->GetAnchorLocation();
+        double Segment = FVector::Dist2D(Start, End);
+        UNavigationSystemV1::GetPathLength(
+            World, Start, End, Segment, nullptr, nullptr);
+        Total += Segment;
+        Start = End;
+    }
+    return static_cast<float>(Total);
+}
+
+void UTMOPActionExecutorComponent::UpdateTimedMovementSpeed(
+    const bool bForceUpdate)
+{
+    ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
+    if (!IsValid(Agent) || ActiveExpectedArrivalSecond == INDEX_NONE) return;
+    UCharacterMovementComponent* Movement = Agent->GetCharacterMovement();
+    const UGameInstance* GameInstance = GetWorld() != nullptr
+        ? GetWorld()->GetGameInstance() : nullptr;
+    const UTMOPClockSubsystem* Clock = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (!IsValid(Movement) || Clock == nullptr) return;
+
+    ActiveRemainingPathCm = CalculateRemainingPathLengthCm();
+    const int32 RemainingSeconds = ActiveExpectedArrivalSecond -
+        Clock->GetCurrentTime().ToSecondsFromMidnight();
+    ActiveRequiredSpeedCmPerSecond = RemainingSeconds > 0
+        ? ActiveRemainingPathCm / static_cast<float>(RemainingSeconds)
+        : ActiveMaximumSpeedCmPerSecond;
+    bActiveMovePhysicallyPossible = RemainingSeconds > 0 &&
+        ActiveRequiredSpeedCmPerSecond <= ActiveMaximumSpeedCmPerSecond;
+    const float ChosenSpeed = FMath::Clamp(
+        ActiveRequiredSpeedCmPerSecond,
+        ActiveMinimumSpeedCmPerSecond,
+        ActiveMaximumSpeedCmPerSecond);
+    if (bForceUpdate ||
+        !FMath::IsNearlyEqual(Movement->MaxWalkSpeed, ChosenSpeed, 1.0f))
+        Movement->MaxWalkSpeed = ChosenSpeed;
+}
+
+void UTMOPActionExecutorComponent::RestoreMovementSpeed()
+{
+    if (ATMOPHistoricalAgent* Agent = GetHistoricalAgent())
+        Agent->ApplyMovementSpeedForActivity();
+    ActiveExpectedArrivalSecond = INDEX_NONE;
+    ActiveMinimumSpeedCmPerSecond = 0.0f;
+    ActiveMaximumSpeedCmPerSecond = 0.0f;
+    ActiveRemainingPathCm = 0.0f;
+    ActiveRequiredSpeedCmPerSecond = 0.0f;
+    bActiveMovePhysicallyPossible = true;
 }
 
 void UTMOPActionExecutorComponent::CompleteCurrentAction(
@@ -475,6 +591,7 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
     }
 
     BroadcastExecutionState(FinalState);
+    RestoreMovementSpeed();
 
     bHasCurrentEntry = false;
     bRestoredFromBake = false;

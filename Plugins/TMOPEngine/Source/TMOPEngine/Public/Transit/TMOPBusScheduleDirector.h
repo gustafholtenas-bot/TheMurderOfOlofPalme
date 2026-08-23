@@ -138,6 +138,10 @@ struct TMOPENGINE_API FTMOPBusRunRuntime
     TObjectPtr<ATMOPVehicleBase> SpawnedBus;
 
     int32 SourceIndex = INDEX_NONE;
+    FVector LastProgressLocation = FVector::ZeroVector;
+    float LastProgressWorldSeconds = 0.0f;
+    float LastRecoveryWorldSeconds = -1000.0f;
+    int32 RecoveryAttempts = 0;
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
@@ -192,6 +196,21 @@ public:
         meta=(ClampMin="50.0", Units="cm"))
     float SpawnClearanceRadiusCm = 500.0f;
 
+    /** A scheduled bus may dwell briefly, but must never remain stopped forever. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Recovery",
+        meta=(ClampMin="5.0", Units="s"))
+    float MaximumStationarySeconds = 20.0f;
+
+    /** Distance that counts as real route progress and resets the watchdog. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Recovery",
+        meta=(ClampMin="10.0", Units="cm"))
+    float ProgressDistanceThresholdCm = 75.0f;
+
+    /** Prevents the watchdog from repeatedly issuing StartDriving every frame. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Recovery",
+        meta=(ClampMin="1.0", Units="s"))
+    float RecoveryRetryIntervalSeconds = 8.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule")
     bool bResetWhenTimeMovesBackwards = true;
 
@@ -234,6 +253,7 @@ private:
     bool ActivateStagedRun(FTMOPBusRunRuntime& Runtime);
     void CompleteRun(FTMOPBusRunRuntime& Runtime);
     void MonitorActiveRuns(FTMOPTime CurrentTime);
+    void RecoverStalledBus(FTMOPBusRunRuntime& Runtime);
     ATMOPPersonRegistryDirector* FindPeopleDirector() const;
     const FTMOPBusRunPeopleRow* FindRunPeopleRow(FName RunId) const;
     FName ResolveDriverEntityId(const FTMOPBusScheduledRun& Run) const;

@@ -1,8 +1,10 @@
 #include "Audio/TMOPVehicleAudioComponent.h"
 
 #include "Audio/TMOPAudioDirector.h"
+#include "Camera/PlayerCameraManager.h"
 #include "Components/AudioComponent.h"
 #include "EngineUtils.h"
+#include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 
 UTMOPVehicleAudioComponent::UTMOPVehicleAudioComponent()
@@ -50,7 +52,24 @@ void UTMOPVehicleAudioComponent::TickComponent(
     PreviousSpeed = Speed;
     const bool bMoving = Speed > 15.0f;
 
-    if (bEngineEnabled && !EngineLoop.IsValid())
+    const APlayerCameraManager* Camera =
+        UGameplayStatics::GetPlayerCameraManager(this, 0);
+    const bool bListenerIsNear = IsValid(Camera) &&
+        FVector::DistSquared(Camera->GetCameraLocation(), CurrentLocation) <=
+        FMath::Square(LocalAudioMaximumDistanceCm);
+
+    // Engine loops are numerous and short-range.  Release them completely
+    // outside five metres; Tick will recreate them when the listener returns.
+    // Emergency sirens are deliberately handled separately below.
+    if (!bListenerIsNear)
+    {
+        if (UAudioComponent* Engine = EngineLoop.Get()) Engine->Stop();
+        if (UAudioComponent* Driving = DrivingLoop.Get()) Driving->Stop();
+        EngineLoop.Reset();
+        DrivingLoop.Reset();
+    }
+
+    if (bListenerIsNear && bEngineEnabled && !EngineLoop.IsValid())
         for (TActorIterator<ATMOPAudioDirector> It(GetWorld()); It; ++It)
         {
             EngineLoop = It->PlayAttachedById(

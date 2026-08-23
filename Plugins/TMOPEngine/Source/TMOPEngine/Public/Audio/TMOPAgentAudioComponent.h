@@ -25,6 +25,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Footsteps", meta=(ClampMin="40.0", Units="cm")) float WalkStepDistanceCm = 145.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Footsteps", meta=(ClampMin="40.0", Units="cm")) float RunStepDistanceCm = 110.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Footsteps", meta=(ClampMin="1.0", Units="cm/s")) float MinimumMovingSpeedCmPerSecond = 35.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Footsteps", meta=(ClampMin="100.0", Units="cm")) float MaximumAudibleDistanceCm = 500.0f;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Footsteps")
     void NotifyFootstep(FName ExplicitAudioId = NAME_None);
