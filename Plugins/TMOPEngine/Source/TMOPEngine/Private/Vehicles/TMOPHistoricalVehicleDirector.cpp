@@ -44,6 +44,8 @@ void ATMOPHistoricalVehicleDirector::EndPlay(const EEndPlayReason::Type EndPlayR
         }
     }
     RuntimeVehicles.Reset();
+    LastDrivingFailureCodes.Reset();
+    LastDrivingFailureDetails.Reset();
     Super::EndPlay(EndPlayReason);
 }
 
@@ -1020,6 +1022,30 @@ ATMOPHistoricalVehicleDirector::FindDrivingEntry(
     return nullptr;
 }
 
+bool ATMOPHistoricalVehicleDirector::GetLastDrivingFailure(
+    const FName VehicleId,
+    FString& OutFailureCode,
+    FString& OutFailureDetails) const
+{
+    const FString* Code = LastDrivingFailureCodes.Find(VehicleId);
+    const FString* Details = LastDrivingFailureDetails.Find(VehicleId);
+    OutFailureCode = Code != nullptr ? *Code : FString();
+    OutFailureDetails = Details != nullptr ? *Details : FString();
+    return Code != nullptr && !Code->IsEmpty();
+}
+
+bool ATMOPHistoricalVehicleDirector::ReportDrivingFailure(
+    const FName VehicleId,
+    const FString& FailureCode,
+    const FString& FailureDetails)
+{
+    LastDrivingFailureCodes.Add(VehicleId, FailureCode);
+    LastDrivingFailureDetails.Add(VehicleId, FailureDetails);
+    UE_LOG(LogTemp, Error, TEXT("TMOP driving [%s]: %s"),
+        *FailureCode, *FailureDetails);
+    return false;
+}
+
 bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     const FName VehicleId,
     const FName DriverEntityId,
@@ -1029,6 +1055,8 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     const FName DestinationAnchorId,
     const float StartDistanceAlongFirstLaneCm)
 {
+    LastDrivingFailureCodes.Remove(VehicleId);
+    LastDrivingFailureDetails.Remove(VehicleId);
     if (RuntimeVehicles.IsEmpty())
         InitializeHistoricalVehicles();
 
@@ -1037,10 +1065,9 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
         Runtime != nullptr ? Runtime->Vehicle.Get() : nullptr;
     if (Runtime == nullptr || !IsValid(Vehicle))
     {
-        UE_LOG(LogTemp, Error,
-            TEXT("TMOP driving: vehicle '%s' is not spawned."),
-            *VehicleId.ToString());
-        return false;
+        return ReportDrivingFailure(VehicleId, TEXT("VehicleNotSpawned"),
+            FString::Printf(TEXT("Vehicle '%s' is not spawned."),
+                *VehicleId.ToString()));
     }
 
     ATMOPHistoricalAgent* Driver = Vehicle->GetDriverAgent();
@@ -1049,20 +1076,19 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
         ? Driver->EntityIdentity->EntityId : NAME_None;
     if (DriverEntityId.IsNone() || OccupantId != DriverEntityId)
     {
-        UE_LOG(LogTemp, Error,
-            TEXT("TMOP driving: '%s' is not in driver seat of '%s'."),
-            *DriverEntityId.ToString(), *VehicleId.ToString());
-        return false;
+        return ReportDrivingFailure(VehicleId, TEXT("DriverSeatMismatch"),
+            FString::Printf(TEXT("'%s' is not in driver seat of '%s'; occupant is '%s'."),
+                *DriverEntityId.ToString(), *VehicleId.ToString(),
+                *OccupantId.ToString()));
     }
     if (!Runtime->Profile.KnownDriverEntityId.IsNone() &&
         Runtime->Profile.KnownDriverEntityId != DriverEntityId)
     {
-        UE_LOG(LogTemp, Error,
-            TEXT("TMOP driving: '%s' does not match known driver '%s' for '%s'."),
-            *DriverEntityId.ToString(),
-            *Runtime->Profile.KnownDriverEntityId.ToString(),
-            *VehicleId.ToString());
-        return false;
+        return ReportDrivingFailure(VehicleId, TEXT("KnownDriverMismatch"),
+            FString::Printf(TEXT("'%s' does not match known driver '%s' for '%s'."),
+                *DriverEntityId.ToString(),
+                *Runtime->Profile.KnownDriverEntityId.ToString(),
+                *VehicleId.ToString()));
     }
 
     TArray<FName> Route = OrderedLaneIds;
@@ -1078,10 +1104,10 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     {
         if (DestinationAnchorId.IsNone() || GetGameInstance() == nullptr)
         {
-            UE_LOG(LogTemp, Error,
-                TEXT("TMOP driving: automatic route for '%s' needs a Destination Anchor ID."),
-                *VehicleId.ToString());
-            return false;
+            return ReportDrivingFailure(VehicleId,
+                TEXT("AutomaticDestinationMissing"),
+                FString::Printf(TEXT("Automatic route for '%s' needs a destination anchor ID."),
+                    *VehicleId.ToString()));
         }
         UTMOPAnchorSubsystem* Anchors =
             GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
@@ -1091,10 +1117,13 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
             GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>();
         if (!IsValid(Destination) || Network == nullptr)
         {
-            UE_LOG(LogTemp, Error,
-                TEXT("TMOP driving: destination anchor '%s' or traffic network is unavailable."),
-                *DestinationAnchorId.ToString());
-            return false;
+            return ReportDrivingFailure(VehicleId,
+                !IsValid(Destination) ? TEXT("DestinationAnchorUnavailable")
+                    : TEXT("TrafficNetworkUnavailable"),
+                FString::Printf(TEXT("Destination anchor '%s' valid=%s; traffic network valid=%s."),
+                    *DestinationAnchorId.ToString(),
+                    IsValid(Destination) ? TEXT("true") : TEXT("false"),
+                    Network != nullptr ? TEXT("true") : TEXT("false")));
         }
         Network->DiscoverLanesInWorld();
 
@@ -1112,10 +1141,11 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                 RouteStartLaneId,
                 NearestStartDistance))
             {
-                UE_LOG(LogTemp, Error,
-                    TEXT("TMOP driving: no start lane was found near '%s'."),
-                    *VehicleId.ToString());
-                return false;
+                return ReportDrivingFailure(VehicleId,
+                    TEXT("StartLaneNotFound"),
+                    FString::Printf(TEXT("No start lane was found near '%s' at %s."),
+                        *VehicleId.ToString(),
+                        *Vehicle->GetActorLocation().ToCompactString()));
             }
             Route.Reset();
             if (StartDistanceAlongFirstLaneCm <= 0.0f)
@@ -1136,10 +1166,10 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                 Anchors->FindAnchor(RouteAnchorId);
             if (!IsValid(RouteAnchor))
             {
-                UE_LOG(LogTemp, Error,
-                    TEXT("TMOP driving: pass/destination anchor '%s' is unavailable."),
-                    *RouteAnchorId.ToString());
-                return false;
+                return ReportDrivingFailure(VehicleId,
+                    TEXT("RouteAnchorUnavailable"),
+                    FString::Printf(TEXT("Pass/destination anchor '%s' is unavailable."),
+                        *RouteAnchorId.ToString()));
             }
 
             FName SegmentDestinationLaneId;
@@ -1149,10 +1179,11 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                 SegmentDestinationLaneId,
                 SegmentDestinationDistance))
             {
-                UE_LOG(LogTemp, Error,
-                    TEXT("TMOP driving: no lane was found near pass/destination anchor '%s'."),
-                    *RouteAnchorId.ToString());
-                return false;
+                return ReportDrivingFailure(VehicleId,
+                    TEXT("DestinationLaneNotFound"),
+                    FString::Printf(TEXT("No lane was found near anchor '%s' at %s."),
+                        *RouteAnchorId.ToString(),
+                        *RouteAnchor->GetAnchorLocation().ToCompactString()));
             }
 
             TArray<FName> AutomaticSegment;
@@ -1161,12 +1192,12 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                 SegmentDestinationLaneId,
                 AutomaticSegment))
             {
-                UE_LOG(LogTemp, Error,
-                    TEXT("TMOP driving: no connected lane route from '%s' to '%s' through anchor '%s'."),
-                    *SegmentStartLaneId.ToString(),
-                    *SegmentDestinationLaneId.ToString(),
-                    *RouteAnchorId.ToString());
-                return false;
+                return ReportDrivingFailure(VehicleId,
+                    TEXT("LaneRouteDisconnected"),
+                    FString::Printf(TEXT("No connected lane route from '%s' to '%s' through anchor '%s'."),
+                        *SegmentStartLaneId.ToString(),
+                        *SegmentDestinationLaneId.ToString(),
+                        *RouteAnchorId.ToString()));
             }
             if (!Route.IsEmpty() && !AutomaticSegment.IsEmpty() &&
                 Route.Last() == AutomaticSegment[0])
@@ -1184,10 +1215,9 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
 
     if (Route.IsEmpty())
     {
-        UE_LOG(LogTemp, Error,
-            TEXT("TMOP driving: vehicle '%s' has no ordered lane route."),
-            *VehicleId.ToString());
-        return false;
+        return ReportDrivingFailure(VehicleId, TEXT("OrderedLaneRouteEmpty"),
+            FString::Printf(TEXT("Vehicle '%s' has no ordered lane route."),
+                *VehicleId.ToString()));
     }
 
     UTMOPTrafficVehicleMovementComponent* Movement =
@@ -1211,7 +1241,17 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     Movement->InitialLaneId = Route[0];
     if (!Movement->InitializeOnLane(
         Route[0], ResolvedStartDistance))
-        return false;
+    {
+        TArray<FString> RouteNames;
+        RouteNames.Reserve(Route.Num());
+        for (const FName LaneId : Route)
+            RouteNames.Add(LaneId.ToString());
+        return ReportDrivingFailure(VehicleId,
+            TEXT("InitializeOnLaneFailed"),
+            FString::Printf(TEXT("InitializeOnLane rejected lane '%s' at %.1f cm for route [%s]."),
+                *Route[0].ToString(), ResolvedStartDistance,
+                *FString::Join(RouteNames, TEXT(","))));
+    }
     Movement->StartDriving();
     if (Runtime->bBoundaryCollisionSuppressed)
     {

@@ -52,6 +52,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     bool bCatchUpToCurrentClockOnBeginPlay = true;
 
+    /**
+     * ObservedUnknown people are evidence markers rather than authoritative
+     * traffic participants.  Keeping their collision disabled prevents a
+     * speculative person from blocking historical cars or emergency vehicles.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
+    bool bDisableCollisionForObservedUnknownPeople = true;
+
     /** Automatically validates every spawned person's real timeline execution. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Validation")
     bool bEnableAutomaticTimelineValidation = true;

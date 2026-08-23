@@ -455,9 +455,22 @@ float UTMOPTrafficVehicleMovementComponent::GetCurrentSpeedKmh() const
 
 float UTMOPTrafficVehicleMovementComponent::GetPhysicalObstacleDistance() const
 {
+    float DistanceCm = -1.0f;
+    AActor* BlockingActor = nullptr;
+    GetPhysicalObstacleDiagnostics(DistanceCm, BlockingActor);
+    return DistanceCm;
+}
+
+bool UTMOPTrafficVehicleMovementComponent::GetPhysicalObstacleDiagnostics(
+    float& OutDistanceCm,
+    AActor*& OutBlockingActor) const
+{
+    OutDistanceCm = -1.0f;
+    OutBlockingActor = nullptr;
     UWorld* World = GetWorld();
     const AActor* OwnerActor = GetOwner();
-    if (!bDetectPhysicalObstacles || World == nullptr || OwnerActor == nullptr) return -1.0f;
+    if (!bDetectPhysicalObstacles || World == nullptr || OwnerActor == nullptr)
+        return false;
 
     const FVector Forward = OwnerActor->GetActorForwardVector();
     const FVector Up = OwnerActor->GetActorUpVector();
@@ -485,16 +498,22 @@ float UTMOPTrafficVehicleMovementComponent::GetPhysicalObstacleDistance() const
     const FCollisionShape Shape = FCollisionShape::MakeBox(
         FVector(10.0f, ObstacleSensorHalfWidthCm, ObstacleSensorHalfHeightCm));
     if (!World->SweepMultiByObjectType(Hits, Start, End, OwnerActor->GetActorQuat(),
-        ObjectTypes, Shape, QueryParams)) return -1.0f;
+        ObjectTypes, Shape, QueryParams)) return false;
 
     float Nearest = TNumericLimits<float>::Max();
     for (const FHitResult& Hit : Hits)
     {
         if (!IsValid(Hit.GetActor()) || Hit.GetActor() == OwnerActor) continue;
         const float ForwardDistance = FVector::DotProduct(Hit.ImpactPoint - Start, Forward);
-        if (ForwardDistance >= 0.0f) Nearest = FMath::Min(Nearest, ForwardDistance);
+        if (ForwardDistance >= 0.0f && ForwardDistance < Nearest)
+        {
+            Nearest = ForwardDistance;
+            OutBlockingActor = Hit.GetActor();
+        }
     }
-    return Nearest < TNumericLimits<float>::Max() ? Nearest : -1.0f;
+    if (Nearest >= TNumericLimits<float>::Max()) return false;
+    OutDistanceCm = Nearest;
+    return true;
 }
 
 UTMOPTrafficLaneComponent* UTMOPTrafficVehicleMovementComponent::GetCurrentLane() const

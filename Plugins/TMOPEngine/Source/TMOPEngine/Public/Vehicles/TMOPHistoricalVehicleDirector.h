@@ -103,6 +103,13 @@ public:
         FName DestinationAnchorId = NAME_None,
         float StartDistanceAlongFirstLaneCm = 0.0f);
 
+    /** Returns the most recent detailed reason BeginDrivingVehicle rejected
+     * this vehicle. The diagnostic is cleared when a new attempt succeeds. */
+    bool GetLastDrivingFailure(
+        FName VehicleId,
+        FString& OutFailureCode,
+        FString& OutFailureDetails) const;
+
 private:
     struct FHistoricalVehicleRuntime
     {
@@ -157,7 +164,13 @@ private:
     const FTMOPHistoricalVehicleTimelineEntry* FindDrivingEntry(
         const FTMOPHistoricalVehicleRow& Profile,
         FName DriverEntityId) const;
+    bool ReportDrivingFailure(
+        FName VehicleId,
+        const FString& FailureCode,
+        const FString& FailureDetails);
 
     TMap<FName, FHistoricalVehicleRuntime> RuntimeVehicles;
+    TMap<FName, FString> LastDrivingFailureCodes;
+    TMap<FName, FString> LastDrivingFailureDetails;
     int32 LastEvaluatedSecond = INDEX_NONE;
 };

@@ -5,6 +5,7 @@
 #include "TMOPTrafficVehicleMovementComponent.generated.h"
 
 class UTMOPTrafficLaneComponent;
+class AActor;
 
 UENUM(BlueprintType)
 enum class ETMOPTrafficVehicleState : uint8
@@ -189,6 +190,14 @@ public:
 
     UFUNCTION(BlueprintPure, Category="TMOP|Traffic")
     UTMOPTrafficLaneComponent* GetCurrentLane() const;
+
+    /**
+     * Non-mutating validation diagnostic for the physical obstacle sensor.
+     * Returns the nearest blocking actor and its forward distance.
+     */
+    bool GetPhysicalObstacleDiagnostics(
+        float& OutDistanceCm,
+        AActor*& OutBlockingActor) const;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|Lane Change")
     bool RequestLaneChange(FName TargetLaneId);

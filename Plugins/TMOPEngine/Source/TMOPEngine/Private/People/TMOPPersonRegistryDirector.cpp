@@ -5,6 +5,7 @@
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
+#include "Components/CapsuleComponent.h"
 #include "Engine/DataTable.h"
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
@@ -522,6 +523,19 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
         ProfileComponent->RegisterComponent();
     }
     if (IsValid(ProfileComponent)) ProfileComponent->LoadProfile();
+
+    if (bDisableCollisionForObservedUnknownPeople &&
+        Runtime.Profile.CategoryId == FName(TEXT("OBSERVED_UNKNOWN")))
+    {
+        // These actors visualize uncertain observations.  They must not be
+        // able to jam an otherwise deterministic historical traffic route.
+        Agent->SetActorEnableCollision(false);
+        if (UCapsuleComponent* Capsule = Agent->GetCapsuleComponent())
+        {
+            Capsule->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            Capsule->SetCanEverAffectNavigation(false);
+        }
+    }
     Runtime.Agent = Agent;
     Runtime.bSpawnedByDirector = true;
     if (!ApplyPlacement(Agent, InitialEntry, true))
@@ -614,22 +628,30 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                         : Entry.ActivityState == ETMOPAgentActivityState::Sprinting
                         ? Runtime.Profile.MovementProfile.SprintSpeed * Multiplier
                         : Runtime.Profile.MovementProfile.FastWalkSpeed * Multiplier;
+                    const float TimedMinimumSpeed =
+                        Entry.TravelSpeedOverrideCmPerSecond > 0.0f
+                        ? Entry.TravelSpeedOverrideCmPerSecond
+                        : MinimumSpeed;
+                    const float TimedMaximumSpeed =
+                        Entry.TravelSpeedOverrideCmPerSecond > 0.0f
+                        ? Entry.TravelSpeedOverrideCmPerSecond
+                        : MaximumSpeed;
                     const float RequiredSpeed = RemainingSeconds > 0
                         ? static_cast<float>(RemainingPathCm) / RemainingSeconds
-                        : MaximumSpeed;
+                        : TimedMaximumSpeed;
                     const float ChosenSpeed = FMath::Clamp(
-                        RequiredSpeed, MinimumSpeed, MaximumSpeed);
+                        RequiredSpeed, TimedMinimumSpeed, TimedMaximumSpeed);
                     for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
                         if (It->SocialGroupId == Agent->SocialGroupId)
                             if (UCharacterMovementComponent* Movement =
                                 It->GetCharacterMovement())
                                 Movement->MaxWalkSpeed = ChosenSpeed;
-                    if (RequiredSpeed > MaximumSpeed)
+                    if (RequiredSpeed > TimedMaximumSpeed)
                         UE_LOG(LogTemp, Error,
                             TEXT("TMOP precision: group '%s' cannot reach '%s' by %d without exceeding realistic speed (required %.0f, max %.0f cm/s)."),
                             *Agent->SocialGroupId.ToString(),
                             *Entry.TargetAnchorId.ToString(), ArrivalSecond,
-                            RequiredSpeed, MaximumSpeed);
+                            RequiredSpeed, TimedMaximumSpeed);
                 }
                 return Groups->MoveGroupThroughLocations(
                     Agent->SocialGroupId,
@@ -968,22 +990,35 @@ int32 ATMOPPersonRegistryDirector::EstimateTravelSeconds(const FPersonRuntime& R
     const UTMOPAnchorSubsystem* Anchors = GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
     if (Anchors == nullptr) return 0;
 
-    FVector Start = Runtime.Agent.IsValid() ? Runtime.Agent->GetActorLocation() : FVector::ZeroVector;
-    if (!Runtime.Agent.IsValid())
-        for (int32 Index = Runtime.NextTimelineIndex - 1; Index >= 0; --Index)
+    // Arrival-timed entries are scheduled before they execute.  Their travel
+    // time must therefore be measured from the preceding timeline location,
+    // not from the agent's current live position.  Using the live position for
+    // every future entry makes each later departure progressively earlier; as
+    // soon as the preceding move completes, all overdue moves then fire in a
+    // burst (the former Palme-route speed-up).
+    FVector Start = Runtime.Agent.IsValid()
+        ? Runtime.Agent->GetActorLocation() : FVector::ZeroVector;
+    const FName StableKey = Runtime.Profile.SocialGroupId.IsNone()
+        ? Runtime.Profile.EntityId : Runtime.Profile.SocialGroupId;
+    for (int32 Index = Runtime.NextTimelineIndex - 1; Index >= 0; --Index)
+    {
+        const FTMOPPersonTimelineEntry& Previous = Runtime.Profile.Timeline[Index];
+        if (Previous.LocationType == ETMOPPersonLocationType::WorldTransform)
         {
-            const FTMOPPersonTimelineEntry& Previous = Runtime.Profile.Timeline[Index];
-            if (Previous.LocationType == ETMOPPersonLocationType::WorldTransform)
-            { Start = Previous.WorldTransform.GetLocation(); break; }
-            if (Previous.LocationType == ETMOPPersonLocationType::Anchor)
-                if (ATMOPHistoricalAnchor* PreviousAnchor = Anchors->FindAnchor(Previous.TargetAnchorId))
-                { Start = PreviousAnchor->GetPlacementLocation(Runtime.Profile.EntityId); break; }
+            Start = Previous.WorldTransform.GetLocation();
+            break;
         }
+        if (Previous.LocationType == ETMOPPersonLocationType::Anchor)
+            if (ATMOPHistoricalAnchor* PreviousAnchor =
+                Anchors->FindAnchor(Previous.TargetAnchorId))
+            {
+                Start = PreviousAnchor->GetPlacementLocation(StableKey);
+                break;
+            }
+    }
 
     TArray<FName> RouteAnchorIds = Entry.PassAnchorIds;
     RouteAnchorIds.Add(Entry.TargetAnchorId);
-    const FName StableKey = Runtime.Profile.SocialGroupId.IsNone()
-        ? Runtime.Profile.EntityId : Runtime.Profile.SocialGroupId;
     double TotalPathLength = 0.0;
     for (const FName AnchorId : RouteAnchorIds)
     {
