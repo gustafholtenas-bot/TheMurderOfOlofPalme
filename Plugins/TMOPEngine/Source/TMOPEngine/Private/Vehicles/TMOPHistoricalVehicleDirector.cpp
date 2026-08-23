@@ -50,6 +50,7 @@ void ATMOPHistoricalVehicleDirector::EndPlay(const EEndPlayReason::Type EndPlayR
 void ATMOPHistoricalVehicleDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    UpdateBoundaryEntryCollision(DeltaSeconds);
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (Clock == nullptr)
@@ -68,8 +69,99 @@ void ATMOPHistoricalVehicleDirector::Tick(const float DeltaSeconds)
     if (CurrentSecond != LastEvaluatedSecond)
     {
         SpawnDueVehicles(CurrentSecond);
+        ApplyDueVehiclePlacements(CurrentSecond);
         DespawnDueVehicles(CurrentSecond);
         LastEvaluatedSecond = CurrentSecond;
+    }
+}
+
+void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
+    const int32 CurrentSecond)
+{
+    UTMOPAnchorSubsystem* Anchors = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
+    if (Anchors != nullptr) Anchors->DiscoverAnchorsInWorld();
+    for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
+    {
+        FHistoricalVehicleRuntime& Runtime = Pair.Value;
+        ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+        if (!IsValid(Vehicle)) continue;
+        for (int32 Index = 0; Index < Runtime.Profile.Timeline.Num(); ++Index)
+        {
+            const FTMOPHistoricalVehicleTimelineEntry& Entry =
+                Runtime.Profile.Timeline[Index];
+            // When initialization jumps directly into a later vehicle life,
+            // do not replay stops/placements belonging to an earlier life.
+            if (Runtime.LastAppliedLifecycleEntryIndex != INDEX_NONE &&
+                Index < Runtime.LastAppliedLifecycleEntryIndex)
+            {
+                Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+                continue;
+            }
+            if (Runtime.AppliedPlacementEntryIds.Contains(Entry.EntryId) ||
+                Entry.Time.ToSecondsFromMidnight() > CurrentSecond)
+                continue;
+            const bool bInitialEntry = Index == 0 &&
+                (Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
+                 Entry.Action == ETMOPHistoricalVehicleAction::Spawn);
+            if (bInitialEntry)
+            {
+                Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+                continue;
+            }
+            const bool bTimedPlacement =
+                Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Park;
+            if (!bTimedPlacement) continue;
+            if (UTMOPTrafficVehicleMovementComponent* Movement =
+                Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+            {
+                Movement->StopDriving();
+                Movement->PlannedLaneIds.Reset();
+                Movement->TrafficState =
+                    ETMOPTrafficVehicleState::RouteComplete;
+            }
+            FTransform Target = Entry.WorldTransform;
+            if (Entry.PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::Anchor)
+            {
+                ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
+                    ? Anchors->FindAnchor(Entry.PlacementAnchorId) : nullptr;
+                if (!IsValid(Anchor))
+                {
+                    UE_LOG(LogTemp, Error,
+                        TEXT("TMOP VehicleTimedPlacement: anchor '%s' for '%s' was not found."),
+                        *Entry.PlacementAnchorId.ToString(),
+                        *Runtime.Profile.VehicleId.ToString());
+                    continue;
+                }
+                Target = Entry.AnchorLocalOffset * FTransform(
+                    Anchor->GetAnchorRotation(), Anchor->GetAnchorLocation(),
+                    FVector::OneVector);
+            }
+            Vehicle->SetActorEnableCollision(false);
+            Vehicle->SetActorTransform(
+                Target, false, nullptr, ETeleportType::TeleportPhysics);
+            if (IsVehicleClearForCollisionRestore(Vehicle))
+            {
+                Vehicle->SetActorEnableCollision(true);
+                if (UTMOPTrafficVehicleMovementComponent* Movement =
+                    Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+                    Movement->bDetectPhysicalObstacles = true;
+                Runtime.bBoundaryCollisionSuppressed = false;
+            }
+            else
+            {
+                Runtime.bBoundaryCollisionSuppressed = true;
+                Runtime.bBoundaryVehicleHasStartedDriving = false;
+            }
+            Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP VehicleTimedPlacement: '%s' applied '%s' at %02d:%02d:%02d."),
+                *Runtime.Profile.VehicleId.ToString(), *Entry.EntryId.ToString(),
+                Entry.Time.Hour, Entry.Time.Minute, Entry.Time.Second);
+        }
     }
 }
 
@@ -79,31 +171,47 @@ void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
     for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
     {
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
-        ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
-        if (!IsValid(Vehicle)) continue;
+        int32 DueLifecycleIndex = INDEX_NONE;
+        for (int32 Index = 0; Index < Runtime.Profile.Timeline.Num(); ++Index)
+        {
+            const FTMOPHistoricalVehicleTimelineEntry& Entry =
+                Runtime.Profile.Timeline[Index];
+            const bool bLifecycleEntry =
+                Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Spawn ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Despawn;
+            if (bLifecycleEntry &&
+                Entry.Time.ToSecondsFromMidnight() <= CurrentSecond &&
+                (DueLifecycleIndex == INDEX_NONE ||
+                 Entry.Time.ToSecondsFromMidnight() >=
+                    Runtime.Profile.Timeline[DueLifecycleIndex].Time.ToSecondsFromMidnight()))
+                DueLifecycleIndex = Index;
+        }
+        if (DueLifecycleIndex == INDEX_NONE ||
+            DueLifecycleIndex == Runtime.LastAppliedLifecycleEntryIndex)
+            continue;
+        const FTMOPHistoricalVehicleTimelineEntry& DespawnEntry =
+            Runtime.Profile.Timeline[DueLifecycleIndex];
+        if (DespawnEntry.Action != ETMOPHistoricalVehicleAction::Despawn)
+            continue;
 
-        const FTMOPHistoricalVehicleTimelineEntry* DespawnEntry =
-            Runtime.Profile.Timeline.FindByPredicate(
-                [CurrentSecond](const FTMOPHistoricalVehicleTimelineEntry& Entry)
-                {
-                    return Entry.Action ==
-                            ETMOPHistoricalVehicleAction::Despawn &&
-                        Entry.Time.ToSecondsFromMidnight() <= CurrentSecond;
-                });
-        if (DespawnEntry == nullptr) continue;
+        ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+        Runtime.LastAppliedLifecycleEntryIndex = DueLifecycleIndex;
+        if (!IsValid(Vehicle)) continue;
 
         UE_LOG(LogTemp, Display,
             TEXT("TMOP Historical Vehicles: despawned '%s' at %02d:%02d:%02d."),
             *Runtime.Profile.VehicleId.ToString(),
-            DespawnEntry->Time.Hour,
-            DespawnEntry->Time.Minute,
-            DespawnEntry->Time.Second);
+            DespawnEntry.Time.Hour,
+            DespawnEntry.Time.Minute,
+            DespawnEntry.Time.Second);
         UnregisterVehicle(Vehicle);
         Vehicle->Destroy();
         Runtime.Vehicle.Reset();
         Runtime.bSpawnedByDirector = false;
         Runtime.bDeferredPlacedVehicle = false;
-        Runtime.bTimelineDespawned = true;
+        Runtime.bBoundaryCollisionSuppressed = false;
+        Runtime.bBoundaryVehicleHasStartedDriving = false;
     }
 }
 
@@ -230,6 +338,7 @@ int32 ATMOPHistoricalVehicleDirector::SpawnVehicles(const bool bIgnoreRowFlags)
         }
         if (SpawnVehicle(Runtime) != nullptr)
         {
+            SuppressBoundaryEntryCollision(Runtime);
             ++AvailableCount;
         }
     }
@@ -244,12 +353,35 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
     {
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
         if (!ShouldSpawn(Runtime.Profile, false) ||
-            Runtime.bTimelineDespawned ||
             Runtime.InitialSpawnSecond == INDEX_NONE ||
             Runtime.InitialSpawnSecond > CurrentSecond)
         {
             continue;
         }
+
+        int32 DueLifecycleIndex = INDEX_NONE;
+        for (int32 Index = 0; Index < Runtime.Profile.Timeline.Num(); ++Index)
+        {
+            const FTMOPHistoricalVehicleTimelineEntry& Entry =
+                Runtime.Profile.Timeline[Index];
+            const bool bLifecycleEntry =
+                Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Spawn ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Despawn;
+            if (bLifecycleEntry &&
+                Entry.Time.ToSecondsFromMidnight() <= CurrentSecond &&
+                (DueLifecycleIndex == INDEX_NONE ||
+                 Entry.Time.ToSecondsFromMidnight() >=
+                    Runtime.Profile.Timeline[DueLifecycleIndex].Time.ToSecondsFromMidnight()))
+                DueLifecycleIndex = Index;
+        }
+        if (DueLifecycleIndex == INDEX_NONE ||
+            Runtime.Profile.Timeline[DueLifecycleIndex].Action ==
+                ETMOPHistoricalVehicleAction::Despawn)
+            continue;
+
+        const bool bNewLifecycleSpawn =
+            DueLifecycleIndex != Runtime.LastAppliedLifecycleEntryIndex;
 
         if (Runtime.bDeferredPlacedVehicle && Runtime.Vehicle.IsValid())
         {
@@ -258,6 +390,7 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
             Vehicle->SetActorEnableCollision(true);
             Vehicle->SetActorTickEnabled(true);
             Runtime.bDeferredPlacedVehicle = false;
+            SuppressBoundaryEntryCollision(Runtime);
             RegisterVehicle(Vehicle);
             UE_LOG(LogTemp, Display,
                 TEXT("TMOP Historical Vehicles: activated placed vehicle '%s' at scheduled spawn time."),
@@ -266,15 +399,34 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
         else if (!Runtime.Vehicle.IsValid())
         {
             FTransform ClearSpawnTransform;
-            if (!FindClearInitialSpawnTransform(
-                Runtime.Profile, ClearSpawnTransform))
+            const FTMOPHistoricalVehicleTimelineEntry& SpawnEntry =
+                Runtime.Profile.Timeline[DueLifecycleIndex];
+            if (!ResolveTimelinePlacementTransform(
+                    SpawnEntry, ClearSpawnTransform))
+                ClearSpawnTransform = GetInitialTransform(Runtime.Profile);
+            const bool bBoundarySpawn = SpawnEntry.PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::Anchor &&
+                SpawnEntry.PlacementAnchorId.ToString().StartsWith(
+                    TEXT("Enter"), ESearchCase::IgnoreCase);
+            FTransform QueuedTransform;
+            if (bBoundarySpawn && FindClearBoundarySpawnTransform(
+                    ClearSpawnTransform, QueuedTransform))
+                ClearSpawnTransform = QueuedTransform;
+            else if (bBoundarySpawn)
             {
                 UE_LOG(LogTemp, Warning,
-                    TEXT("TMOP VehicleSpawnBlocked: '%s' waits because its entry point is occupied."),
+                    TEXT("TMOP VehicleEntryGhostSpawn: '%s' uses collision-free boundary staging because every queue slot is occupied."),
                     *Runtime.Profile.VehicleId.ToString());
-                continue;
             }
             SpawnVehicle(Runtime, &ClearSpawnTransform);
+            SuppressBoundaryEntryCollision(Runtime, bBoundarySpawn);
+        }
+        if (bNewLifecycleSpawn && Runtime.Vehicle.IsValid())
+        {
+            Runtime.LastAppliedLifecycleEntryIndex = DueLifecycleIndex;
+            UE_LOG(LogTemp, Display,
+                TEXT("TMOP Historical Vehicles: lifecycle spawn %d applied for '%s'."),
+                DueLifecycleIndex, *Runtime.Profile.VehicleId.ToString());
         }
         if (Runtime.Vehicle.IsValid())
         {
@@ -282,6 +434,26 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
         }
     }
     return AvailableCount;
+}
+
+bool ATMOPHistoricalVehicleDirector::ResolveTimelinePlacementTransform(
+    const FTMOPHistoricalVehicleTimelineEntry& Entry,
+    FTransform& OutTransform) const
+{
+    OutTransform = Entry.WorldTransform;
+    if (Entry.PlacementMode !=
+        ETMOPHistoricalVehiclePlacementMode::Anchor)
+        return true;
+    UTMOPAnchorSubsystem* Anchors = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
+    if (Anchors == nullptr) return false;
+    Anchors->DiscoverAnchorsInWorld();
+    ATMOPHistoricalAnchor* Anchor = Anchors->FindAnchor(Entry.PlacementAnchorId);
+    if (!IsValid(Anchor)) return false;
+    OutTransform = Entry.AnchorLocalOffset * FTransform(
+        Anchor->GetAnchorRotation(), Anchor->GetAnchorLocation(),
+        FVector::OneVector);
+    return true;
 }
 
 int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
@@ -349,6 +521,15 @@ bool ATMOPHistoricalVehicleDirector::FindClearInitialSpawnTransform(
     }
 
     const FTransform Base = GetInitialTransform(Profile);
+    return FindClearBoundarySpawnTransform(Base, OutTransform);
+}
+
+bool ATMOPHistoricalVehicleDirector::FindClearBoundarySpawnTransform(
+    const FTransform& Base,
+    FTransform& OutTransform) const
+{
+    UWorld* World = GetWorld();
+    if (World == nullptr) return false;
     const FVector Backward = -Base.GetRotation().GetForwardVector();
     FCollisionObjectQueryParams Objects;
     Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
@@ -378,6 +559,93 @@ bool ATMOPHistoricalVehicleDirector::FindClearInitialSpawnTransform(
         }
     }
     return false;
+}
+
+bool ATMOPHistoricalVehicleDirector::IsBoundaryEntryVehicle(
+    const FTMOPHistoricalVehicleRow& Profile) const
+{
+    const FTMOPHistoricalVehicleTimelineEntry* Placement =
+        Profile.Timeline.FindByPredicate(
+            [](const FTMOPHistoricalVehicleTimelineEntry& Entry)
+            {
+                return Entry.Action ==
+                        ETMOPHistoricalVehicleAction::InitialPlacement ||
+                    Entry.Action == ETMOPHistoricalVehicleAction::Spawn;
+            });
+    return Placement != nullptr &&
+        Placement->PlacementMode ==
+            ETMOPHistoricalVehiclePlacementMode::Anchor &&
+        Placement->PlacementAnchorId.ToString().StartsWith(
+            TEXT("Enter"), ESearchCase::IgnoreCase);
+}
+
+void ATMOPHistoricalVehicleDirector::SuppressBoundaryEntryCollision(
+    FHistoricalVehicleRuntime& Runtime,
+    const bool bForceBoundaryEntry)
+{
+    ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+    if (!IsValid(Vehicle) ||
+        (!bForceBoundaryEntry && !IsBoundaryEntryVehicle(Runtime.Profile)))
+        return;
+    Vehicle->SetActorEnableCollision(false);
+    if (UTMOPTrafficVehicleMovementComponent* Movement =
+        Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+        Movement->bDetectPhysicalObstacles = false;
+    Runtime.bBoundaryCollisionSuppressed = true;
+    Runtime.bBoundaryVehicleHasStartedDriving = false;
+    Runtime.BoundaryDrivingSeconds = 0.0f;
+    Runtime.BoundaryDrivingStartLocation = Vehicle->GetActorLocation();
+}
+
+bool ATMOPHistoricalVehicleDirector::IsVehicleClearForCollisionRestore(
+    const ATMOPVehicleBase* Vehicle) const
+{
+    if (!IsValid(Vehicle) || GetWorld() == nullptr) return false;
+    FCollisionObjectQueryParams Objects;
+    Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
+    Objects.AddObjectTypesToQuery(ECC_PhysicsBody);
+    FCollisionQueryParams Query(
+        SCENE_QUERY_STAT(TMOPVehicleEntryCollisionRestore), false, Vehicle);
+    TArray<FOverlapResult> Overlaps;
+    GetWorld()->OverlapMultiByObjectType(
+        Overlaps, Vehicle->GetActorLocation(), FQuat::Identity, Objects,
+        FCollisionShape::MakeSphere(EntrySpawnClearanceRadiusCm), Query);
+    return !Overlaps.ContainsByPredicate(
+        [Vehicle](const FOverlapResult& Overlap)
+        {
+            const ATMOPVehicleBase* Other =
+                Cast<ATMOPVehicleBase>(Overlap.GetActor());
+            return IsValid(Other) && Other != Vehicle;
+        });
+}
+
+void ATMOPHistoricalVehicleDirector::UpdateBoundaryEntryCollision(
+    const float DeltaSeconds)
+{
+    for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
+    {
+        FHistoricalVehicleRuntime& Runtime = Pair.Value;
+        ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+        if (!Runtime.bBoundaryCollisionSuppressed ||
+            !Runtime.bBoundaryVehicleHasStartedDriving || !IsValid(Vehicle))
+            continue;
+        Runtime.BoundaryDrivingSeconds += FMath::Max(0.0f, DeltaSeconds);
+        const float Distance = FVector::Dist2D(
+            Runtime.BoundaryDrivingStartLocation, Vehicle->GetActorLocation());
+        if (Runtime.BoundaryDrivingSeconds <
+                EntryCollisionReleaseDelaySeconds ||
+            Distance < EntryCollisionReleaseDistanceCm ||
+            !IsVehicleClearForCollisionRestore(Vehicle))
+            continue;
+        Vehicle->SetActorEnableCollision(true);
+        if (UTMOPTrafficVehicleMovementComponent* Movement =
+            Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+            Movement->bDetectPhysicalObstacles = true;
+        Runtime.bBoundaryCollisionSuppressed = false;
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP VehicleEntryReleased: '%s' restored collision %.0f cm beyond its staging point."),
+            *Runtime.Profile.VehicleId.ToString(), Distance);
+    }
 }
 
 void ATMOPHistoricalVehicleDirector::ApplyDeferredPlacedVehicleState(
@@ -935,12 +1203,24 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     }
 
     Movement->StopDriving();
+    // Historical vehicles are governed by their DataTable timeline. Reaching
+    // the final lane means stop and remain available; only an explicit
+    // HistoricalVehicle Despawn entry may destroy the car and its occupants.
+    Movement->bDespawnAtRouteEnd = false;
     Movement->PlannedLaneIds = Route;
     Movement->InitialLaneId = Route[0];
     if (!Movement->InitializeOnLane(
         Route[0], ResolvedStartDistance))
         return false;
     Movement->StartDriving();
+    if (Runtime->bBoundaryCollisionSuppressed)
+    {
+        Movement->bDetectPhysicalObstacles = false;
+        Vehicle->SetActorEnableCollision(false);
+        Runtime->bBoundaryVehicleHasStartedDriving = true;
+        Runtime->BoundaryDrivingSeconds = 0.0f;
+        Runtime->BoundaryDrivingStartLocation = Vehicle->GetActorLocation();
+    }
     UE_LOG(LogTemp, Display,
         TEXT("TMOP driving: '%s' started '%s' on %d ordered lane(s)."),
         *DriverEntityId.ToString(), *VehicleId.ToString(), Route.Num());

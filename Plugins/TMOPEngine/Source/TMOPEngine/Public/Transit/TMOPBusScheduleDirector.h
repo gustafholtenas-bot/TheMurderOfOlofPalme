@@ -142,6 +142,10 @@ struct TMOPENGINE_API FTMOPBusRunRuntime
     float LastProgressWorldSeconds = 0.0f;
     float LastRecoveryWorldSeconds = -1000.0f;
     int32 RecoveryAttempts = 0;
+    bool bEntryCollisionSuppressed = false;
+    bool bEntryVehicleHasStartedDriving = false;
+    float EntryDrivingSeconds = 0.0f;
+    FVector EntryDrivingStartLocation = FVector::ZeroVector;
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
@@ -195,6 +199,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Spawning",
         meta=(ClampMin="50.0", Units="cm"))
     float SpawnClearanceRadiusCm = 500.0f;
+
+    /** Collision is restored only after a ghost-staged bus has physically
+     * cleared the shared entry point. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Spawning",
+        meta=(ClampMin="100.0", Units="cm"))
+    float EntryCollisionReleaseDistanceCm = 900.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Spawning",
+        meta=(ClampMin="0.0", Units="s"))
+    float EntryCollisionReleaseDelaySeconds = 2.0f;
 
     /** A scheduled bus may dwell briefly, but must never remain stopped forever. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Schedule|Recovery",
@@ -254,6 +268,8 @@ private:
     void CompleteRun(FTMOPBusRunRuntime& Runtime);
     void MonitorActiveRuns(FTMOPTime CurrentTime);
     void RecoverStalledBus(FTMOPBusRunRuntime& Runtime);
+    void UpdateEntryCollision(float DeltaSeconds);
+    bool IsBusClearForCollisionRestore(const ATMOPVehicleBase* Bus) const;
     ATMOPPersonRegistryDirector* FindPeopleDirector() const;
     const FTMOPBusRunPeopleRow* FindRunPeopleRow(FName RunId) const;
     FName ResolveDriverEntityId(const FTMOPBusScheduledRun& Run) const;

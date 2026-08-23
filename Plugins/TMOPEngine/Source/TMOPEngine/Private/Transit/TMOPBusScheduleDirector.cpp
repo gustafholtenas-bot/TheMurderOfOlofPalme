@@ -63,6 +63,7 @@ void ATMOPBusScheduleDirector::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void ATMOPBusScheduleDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    UpdateEntryCollision(DeltaSeconds);
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (Clock != nullptr) MonitorActiveRuns(Clock->GetCurrentTime());
@@ -268,20 +269,33 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     GetWorld()->OverlapMultiByObjectType(
         Overlaps, Bus->GetActorLocation(), FQuat::Identity, Objects,
         FCollisionShape::MakeSphere(SpawnClearanceRadiusCm), Query);
+    const ATMOPVehicleBase* BlockingVehicle = nullptr;
     for (const FOverlapResult& Overlap : Overlaps)
-        if (ATMOPVehicleBase* Other =
+        if (const ATMOPVehicleBase* Other =
             Cast<ATMOPVehicleBase>(Overlap.GetActor()))
             if (Other != Bus)
             {
-                UE_LOG(LogTemp, Warning,
-                    TEXT("TMOP VehicleSpawnBlocked: bus '%s' waits because its entry point is occupied by '%s'."),
-                    *Runtime.RunId.ToString(), *Other->VehicleId.ToString());
-                Bus->Destroy();
-                Runtime.SpawnedBus = nullptr;
-                return false;
+                BlockingVehicle = Other;
+                break;
             }
 
-    Bus->SetActorEnableCollision(true);
+    Runtime.bEntryCollisionSuppressed = BlockingVehicle != nullptr;
+    Runtime.bEntryVehicleHasStartedDriving = false;
+    Runtime.EntryDrivingSeconds = 0.0f;
+    Runtime.EntryDrivingStartLocation = Bus->GetActorLocation();
+    if (BlockingVehicle != nullptr)
+    {
+        Movement->bDetectPhysicalObstacles = false;
+        Bus->SetActorEnableCollision(false);
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP BusEntryGhostSpawn: bus '%s' stages collision-free because '%s' occupies the shared entry point."),
+            *Runtime.RunId.ToString(), *BlockingVehicle->VehicleId.ToString());
+    }
+    else
+    {
+        Movement->bDetectPhysicalObstacles = true;
+        Bus->SetActorEnableCollision(true);
+    }
     Movement->StopDriving();
     Runtime.State = ETMOPBusRunState::Staged;
     OnBusRunSpawned.Broadcast(Runtime.RunId, Bus);
@@ -308,6 +322,14 @@ bool ATMOPBusScheduleDirector::ActivateStagedRun(
         return false;
     }
     Movement->StartDriving();
+    if (Runtime.bEntryCollisionSuppressed)
+    {
+        Movement->bDetectPhysicalObstacles = false;
+        Bus->SetActorEnableCollision(false);
+        Runtime.bEntryVehicleHasStartedDriving = true;
+        Runtime.EntryDrivingSeconds = 0.0f;
+        Runtime.EntryDrivingStartLocation = Bus->GetActorLocation();
+    }
     Runtime.State = ETMOPBusRunState::Active;
     Runtime.LastProgressLocation = Bus->GetActorLocation();
     Runtime.LastProgressWorldSeconds = GetWorld() != nullptr
@@ -318,6 +340,54 @@ bool ATMOPBusScheduleDirector::ActivateStagedRun(
         TEXT("TMOP bus '%s': departed at scheduled time."),
         *Runtime.RunId.ToString());
     return true;
+}
+
+bool ATMOPBusScheduleDirector::IsBusClearForCollisionRestore(
+    const ATMOPVehicleBase* Bus) const
+{
+    if (!IsValid(Bus) || GetWorld() == nullptr) return false;
+    FCollisionObjectQueryParams Objects;
+    Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
+    Objects.AddObjectTypesToQuery(ECC_PhysicsBody);
+    FCollisionQueryParams Query(
+        SCENE_QUERY_STAT(TMOPBusEntryCollisionRestore), false, Bus);
+    TArray<FOverlapResult> Overlaps;
+    GetWorld()->OverlapMultiByObjectType(
+        Overlaps, Bus->GetActorLocation(), FQuat::Identity, Objects,
+        FCollisionShape::MakeSphere(SpawnClearanceRadiusCm), Query);
+    return !Overlaps.ContainsByPredicate(
+        [Bus](const FOverlapResult& Overlap)
+        {
+            const ATMOPVehicleBase* Other =
+                Cast<ATMOPVehicleBase>(Overlap.GetActor());
+            return IsValid(Other) && Other != Bus;
+        });
+}
+
+void ATMOPBusScheduleDirector::UpdateEntryCollision(const float DeltaSeconds)
+{
+    for (FTMOPBusRunRuntime& Runtime : RuntimeRuns)
+    {
+        ATMOPVehicleBase* Bus = Runtime.SpawnedBus;
+        if (!Runtime.bEntryCollisionSuppressed ||
+            !Runtime.bEntryVehicleHasStartedDriving || !IsValid(Bus))
+            continue;
+        Runtime.EntryDrivingSeconds += FMath::Max(0.0f, DeltaSeconds);
+        const float Distance = FVector::Dist2D(
+            Runtime.EntryDrivingStartLocation, Bus->GetActorLocation());
+        if (Runtime.EntryDrivingSeconds < EntryCollisionReleaseDelaySeconds ||
+            Distance < EntryCollisionReleaseDistanceCm ||
+            !IsBusClearForCollisionRestore(Bus))
+            continue;
+        Bus->SetActorEnableCollision(true);
+        if (UTMOPTrafficVehicleMovementComponent* Movement =
+            Bus->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+            Movement->bDetectPhysicalObstacles = true;
+        Runtime.bEntryCollisionSuppressed = false;
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP BusEntryReleased: bus '%s' restored collision %.0f cm beyond its staging point."),
+            *Runtime.RunId.ToString(), Distance);
+    }
 }
 
 void ATMOPBusScheduleDirector::MonitorActiveRuns(const FTMOPTime CurrentTime)
@@ -485,6 +555,7 @@ bool ATMOPBusScheduleDirector::ValidateSchedule(TArray<FString>& OutErrors) cons
     UTMOPTrafficNetworkSubsystem* Network = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
     TSet<FName> RunIds;
+    TMap<FName, FString> RouteIdOwners;
 
     TSet<FName> KnownPeople;
     if (bUsePeopleTimelinesForPassengers)
@@ -511,6 +582,17 @@ bool ATMOPBusScheduleDirector::ValidateSchedule(TArray<FString>& OutErrors) cons
         const FTMOPBusRunPeopleRow* RunPeople = FindRunPeopleRow(Run.RunId);
         if (RunPeople != nullptr && !RunPeople->bEnabledInSimulation) continue;
         if (!IsValid(Run.RouteData)) OutErrors.Add(FString::Printf(TEXT("Run %d has no RouteData."), Index));
+        else if (const FString* ExistingOwner =
+            RouteIdOwners.Find(Run.RouteData->RouteId))
+        {
+            if (*ExistingOwner != Run.RouteData->GetPathName())
+                OutErrors.Add(FString::Printf(
+                    TEXT("RouteId '%s' is shared by '%s' and '%s'."),
+                    *Run.RouteData->RouteId.ToString(), **ExistingOwner,
+                    *Run.RouteData->GetPathName()));
+        }
+        else RouteIdOwners.Add(
+            Run.RouteData->RouteId, Run.RouteData->GetPathName());
         if (Run.BusClass == nullptr) OutErrors.Add(FString::Printf(TEXT("Run %d has no BusClass."), Index));
         const FName DriverEntityId = ResolveDriverEntityId(Run);
         if (bUsePeopleTimelinesForPassengers && !DriverEntityId.IsNone() &&
@@ -518,7 +600,13 @@ bool ATMOPBusScheduleDirector::ValidateSchedule(TArray<FString>& OutErrors) cons
             OutErrors.Add(FString::Printf(
                 TEXT("Run '%s' references missing driver '%s' in DT_TMOP_People."),
                 *Run.RunId.ToString(), *DriverEntityId.ToString()));
-        if (Network == nullptr || !IsValid(Network->FindLane(Run.InitialLaneId)))
+        const FName ResolvedInitialLaneId = !Run.InitialLaneId.IsNone()
+            ? Run.InitialLaneId
+            : (IsValid(Run.RouteData) &&
+               !Run.RouteData->OrderedLaneIds.IsEmpty()
+                ? Run.RouteData->OrderedLaneIds[0] : NAME_None);
+        if (Network == nullptr || ResolvedInitialLaneId.IsNone() ||
+            !IsValid(Network->FindLane(ResolvedInitialLaneId)))
             OutErrors.Add(FString::Printf(TEXT("Run %d has invalid InitialLaneId."), Index));
         if (!Run.bUseExactStartTime &&
             Run.LatestStartTime.ToSecondsFromMidnight() < Run.EarliestStartTime.ToSecondsFromMidnight())

@@ -61,6 +61,17 @@ public:
         meta=(ClampMin="100.0", Units="cm"))
     float EntrySpawnQueueSpacingCm = 450.0f;
 
+    /** Boundary-staged vehicles ignore vehicle collision until they have
+     * physically cleared the shared entry area. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning",
+        meta=(ClampMin="100.0", Units="cm"))
+    float EntryCollisionReleaseDistanceCm = 900.0f;
+
+    /** Minimum driving time before boundary collision may be restored. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning",
+        meta=(ClampMin="0.0", Units="s"))
+    float EntryCollisionReleaseDelaySeconds = 2.0f;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Historical Vehicles")
     int32 InitializeHistoricalVehicles();
 
@@ -100,13 +111,22 @@ private:
         TWeakObjectPtr<ATMOPVehicleBase> Vehicle;
         bool bSpawnedByDirector = false;
         bool bDeferredPlacedVehicle = false;
-        bool bTimelineDespawned = false;
+        /** Last Spawn/InitialPlacement/Despawn entry whose lifecycle state was
+         * applied. Keeping the entry index (instead of a permanent despawn
+         * flag) allows one vehicle row to leave and later return repeatedly. */
+        int32 LastAppliedLifecycleEntryIndex = INDEX_NONE;
+        bool bBoundaryCollisionSuppressed = false;
+        bool bBoundaryVehicleHasStartedDriving = false;
+        float BoundaryDrivingSeconds = 0.0f;
+        FVector BoundaryDrivingStartLocation = FVector::ZeroVector;
+        TSet<FName> AppliedPlacementEntryIds;
         int32 InitialSpawnSecond = INDEX_NONE;
     };
 
     void DiscoverPlacedVehicles();
     int32 SpawnDueVehicles(int32 CurrentSecond);
     void DespawnDueVehicles(int32 CurrentSecond);
+    void ApplyDueVehiclePlacements(int32 CurrentSecond);
     int32 GetInitialSpawnSecond(
         const FTMOPHistoricalVehicleRow& Profile) const;
     void ApplyDeferredPlacedVehicleState(int32 CurrentSecond);
@@ -116,6 +136,20 @@ private:
     bool FindClearInitialSpawnTransform(
         const FTMOPHistoricalVehicleRow& Profile,
         FTransform& OutTransform) const;
+    bool FindClearBoundarySpawnTransform(
+        const FTransform& BaseTransform,
+        FTransform& OutTransform) const;
+    bool ResolveTimelinePlacementTransform(
+        const FTMOPHistoricalVehicleTimelineEntry& Entry,
+        FTransform& OutTransform) const;
+    bool IsBoundaryEntryVehicle(
+        const FTMOPHistoricalVehicleRow& Profile) const;
+    void SuppressBoundaryEntryCollision(
+        FHistoricalVehicleRuntime& Runtime,
+        bool bForceBoundaryEntry = false);
+    void UpdateBoundaryEntryCollision(float DeltaSeconds);
+    bool IsVehicleClearForCollisionRestore(
+        const ATMOPVehicleBase* Vehicle) const;
     bool ShouldSpawn(const FTMOPHistoricalVehicleRow& Profile, bool bIgnoreRowFlag) const;
     void RegisterVehicle(ATMOPVehicleBase* Vehicle) const;
     void UnregisterVehicle(ATMOPVehicleBase* Vehicle) const;

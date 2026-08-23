@@ -315,7 +315,7 @@ public:
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
         meta = (ClampMin = "2.0", Units = "s"))
-    float CrowdPassThroughAfterSeconds = 14.0f;
+    float CrowdPassThroughAfterSeconds = 2.0f;
 
     /** Maximum time for one person-only pass-through window. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",

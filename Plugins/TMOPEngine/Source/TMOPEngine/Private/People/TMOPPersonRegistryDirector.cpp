@@ -553,6 +553,10 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     case ETMOPPersonTimelineAction::MoveToAnchor:
         if (bCatchUp && bRestoringWorldBake)
             return true;
+        // A previous stationary interaction may have locked the agent's gaze
+        // to a shop window or another world anchor.  Movement must release
+        // that focus before path following resumes.
+        Agent->EndDialogueFocus();
         if (bCatchUp && Entry.bTeleportDuringCatchUp)
             return ApplyPlacement(Agent, Entry, true);
         if (!Agent->SocialGroupId.IsNone() &&
@@ -743,8 +747,14 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
             ? Agent->EntityIdentity->EntityId : NAME_None;
         const FName GroupId = Entry.TargetGroupId.IsNone()
             ? Agent->SocialGroupId : Entry.TargetGroupId;
-        return IsValid(Groups) &&
-            Groups->RemoveMember(GroupId, EntityId);
+        if (!IsValid(Groups)) return false;
+        // Group-ending entries can legitimately share the same historical
+        // second.  If the leader already dissolved the group, a follower's
+        // LeaveGroup is complete rather than a permanent retry failure.
+        if (GroupId.IsNone() || !Groups->DoesGroupExist(GroupId))
+            return Agent->SocialGroupId.IsNone() ||
+                Agent->SocialGroupId == GroupId;
+        return Groups->RemoveMember(GroupId, EntityId);
     }
     case ETMOPPersonTimelineAction::SplitGroup:
     {
@@ -758,7 +768,9 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     {
         if (bCatchUp && bRestoringWorldBake) return true;
         ATMOPGroupDirector* Groups = FindGroupDirector();
-        return IsValid(Groups) &&
+        if (!IsValid(Groups)) return false;
+        return Entry.TargetGroupId.IsNone() ||
+            !Groups->DoesGroupExist(Entry.TargetGroupId) ||
             Groups->DissolveGroup(Entry.TargetGroupId);
     }
     case ETMOPPersonTimelineAction::SetGroupLeader:
@@ -771,6 +783,17 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                 Entry.NewGroupLeaderEntityId);
     }
     case ETMOPPersonTimelineAction::Interact:
+        if (!Entry.TargetAnchorId.IsNone() && GetGameInstance() != nullptr)
+        {
+            UTMOPAnchorSubsystem* Anchors =
+                GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+            ATMOPHistoricalAnchor* FocusAnchor = Anchors != nullptr
+                ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
+            if (IsValid(FocusAnchor))
+                Agent->BeginDialogueFocus(FocusAnchor);
+        }
+        Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
+        return true;
     case ETMOPPersonTimelineAction::Custom:
         Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
         return true;
