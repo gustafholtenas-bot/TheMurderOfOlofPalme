@@ -90,7 +90,7 @@ void UTMOPCameraPerspectiveComponent::TryBindInput()
     if (!IsValid(Controller) || !Controller->IsLocalController()) return;
 
     GetOwner()->EnableInput(Controller);
-    UInputComponent* Input = GetOwner()->GetInputComponent();
+    UInputComponent* Input = GetOwner()->FindComponentByClass<UInputComponent>();
     if (!IsValid(Input)) return;
     if (ToggleKey.IsValid())
         Input->BindKey(ToggleKey, IE_Pressed, this,
