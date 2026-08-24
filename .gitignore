@@ -73,3 +73,6 @@ Plugins/**/Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 /Content/CitySampleCrowd/
+
+# Megascans assets imported into this project
+/Content/Megascans/

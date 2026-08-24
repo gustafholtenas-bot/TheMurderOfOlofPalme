@@ -593,6 +593,18 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                 RouteLocations.Add(Anchor->GetPlacementLocation(
                     Agent->SocialGroupId));
 
+                if (!Entry.bTimeIsArrival &&
+                    Entry.TravelSpeedOverrideCmPerSecond > 0.0f)
+                {
+                    for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld());
+                        It; ++It)
+                        if (It->SocialGroupId == Agent->SocialGroupId)
+                            if (UCharacterMovementComponent* Movement =
+                                It->GetCharacterMovement())
+                                Movement->MaxWalkSpeed =
+                                    Entry.TravelSpeedOverrideCmPerSecond;
+                }
+
                 if (Entry.bTimeIsArrival && !RouteLocations.IsEmpty())
                 {
                     FVector Start = Agent->GetActorLocation();

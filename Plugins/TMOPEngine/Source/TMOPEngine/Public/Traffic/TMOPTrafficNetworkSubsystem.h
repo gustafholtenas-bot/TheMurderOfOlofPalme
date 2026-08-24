@@ -47,6 +47,16 @@ public:
         FName DestinationLaneId,
         TArray<FName>& OutOrderedLaneIds) const;
 
+    /** Chooses the nearest destination lane that is actually reachable. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|Routing")
+    bool FindNearestReachableLane(
+        FVector WorldLocation,
+        FName StartLaneId,
+        FName& OutLaneId,
+        float& OutDistanceAlongLaneCm,
+        TArray<FName>& OutOrderedLaneIds,
+        int32 MaximumCandidates = 32) const;
+
 private:
     TMap<FName, TWeakObjectPtr<UTMOPTrafficLaneComponent>> Lanes;
 };

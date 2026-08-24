@@ -316,6 +316,7 @@ private:
     bool FindNearestShotAnchor(
         const FVector& Location, FName& OutAnchorId, float& OutDistanceCm) const;
     void AddRecord(const FTMOPTimelineValidationRecord& Record);
+    void ValidateSharedEventReferences();
     int32 GetSimulationSecond() const;
     FName GetEntityId(const UTMOPActionExecutorComponent* Executor) const;
 
@@ -343,5 +344,6 @@ private:
     int32 MaximumObservedSecond = INDEX_NONE;
     int32 NextSnapshotSecond = INDEX_NONE;
     bool bShotSnapshotCaptured = false;
+    bool bSharedEventDefinitionsValidated = false;
     bool bValidationActive = false;
 };

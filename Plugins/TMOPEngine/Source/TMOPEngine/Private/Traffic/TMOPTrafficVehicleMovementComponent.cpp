@@ -25,6 +25,7 @@ void UTMOPTrafficVehicleMovementComponent::BeginPlay()
 
 void UTMOPTrafficVehicleMovementComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    EndObstacleBypass();
     UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     if (UTMOPTrafficVehicleSubsystem* Traffic = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPTrafficVehicleSubsystem>() : nullptr)
@@ -80,6 +81,8 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
     if (!bDrivingEnabled || DeltaTime <= 0.0f) return;
     UTMOPTrafficLaneComponent* Lane = GetCurrentLane();
     if (!IsValid(Lane)) { TrafficState = ETMOPTrafficVehicleState::InvalidLane; return; }
+
+    UpdateObstacleBypass(DeltaTime);
 
     LaneChangeCooldownSeconds = FMath::Max(0.0f, LaneChangeCooldownSeconds - DeltaTime);
     LaneChangeCheckAccumulator += DeltaTime;
@@ -140,6 +143,73 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
     }
 }
 
+void UTMOPTrafficVehicleMovementComponent::UpdateObstacleBypass(const float DeltaTime)
+{
+    AActor* OwnerActor = GetOwner();
+    if (!IsValid(OwnerActor)) return;
+
+    if (bObstacleBypassActive)
+    {
+        ObstacleBypassSecondsRemaining -= DeltaTime;
+        if (ObstacleBypassSecondsRemaining <= 0.0f)
+            EndObstacleBypass();
+        return;
+    }
+
+    float DistanceCm = -1.0f;
+    AActor* BlockingActor = nullptr;
+    const bool bBlocked = GetPhysicalObstacleDiagnostics(DistanceCm, BlockingActor) &&
+        IsValid(BlockingActor) && DistanceCm <= MinimumGapCm + 120.0f &&
+        CurrentSpeedCmPerSecond <= 5.0f;
+    if (!bBlocked)
+    {
+        PersistentBlockingActor.Reset();
+        PersistentBlockSeconds = 0.0f;
+        return;
+    }
+
+    if (PersistentBlockingActor.Get() != BlockingActor)
+    {
+        PersistentBlockingActor = BlockingActor;
+        PersistentBlockSeconds = 0.0f;
+    }
+    PersistentBlockSeconds += DeltaTime;
+    if (PersistentBlockSeconds >= ObstacleBypassAfterSeconds)
+        BeginObstacleBypass(BlockingActor);
+}
+
+void UTMOPTrafficVehicleMovementComponent::BeginObstacleBypass(AActor* BlockingActor)
+{
+    AActor* OwnerActor = GetOwner();
+    if (!IsValid(OwnerActor) || !IsValid(BlockingActor)) return;
+
+    ObstacleBypassBaseLateralOffsetCm = AdditionalLateralOffsetCm;
+    // Alternate side deterministically so a whole queue does not choose one trace.
+    const float Side = (GetTypeHash(OwnerActor->GetFName()) & 1u) == 0u ? 1.0f : -1.0f;
+    AdditionalLateralOffsetCm = ObstacleBypassBaseLateralOffsetCm +
+        Side * ObstacleBypassLateralOffsetCm;
+    bCollisionWasEnabledBeforeBypass = OwnerActor->GetActorEnableCollision();
+    OwnerActor->SetActorEnableCollision(false);
+    bObstacleBypassActive = true;
+    ObstacleBypassSecondsRemaining = ObstacleBypassDurationSeconds;
+    PersistentBlockSeconds = 0.0f;
+    PersistentBlockingActor.Reset();
+    UE_LOG(LogTemp, Warning,
+        TEXT("TMOP obstacle bypass: '%s' passes '%s' after %.1f stationary seconds."),
+        *OwnerActor->GetName(), *BlockingActor->GetName(), ObstacleBypassAfterSeconds);
+}
+
+void UTMOPTrafficVehicleMovementComponent::EndObstacleBypass()
+{
+    if (!bObstacleBypassActive) return;
+    AActor* OwnerActor = GetOwner();
+    AdditionalLateralOffsetCm = ObstacleBypassBaseLateralOffsetCm;
+    if (IsValid(OwnerActor))
+        OwnerActor->SetActorEnableCollision(bCollisionWasEnabledBeforeBypass);
+    bObstacleBypassActive = false;
+    ObstacleBypassSecondsRemaining = 0.0f;
+}
+
 void UTMOPTrafficVehicleMovementComponent::DespawnAtCompletedRoute()
 {
     AActor* OwnerActor = GetOwner();
@@ -175,7 +245,7 @@ float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLan
     UTMOPTrafficVehicleSubsystem* Traffic = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPTrafficVehicleSubsystem>() : nullptr;
     float CenterDistance = 0.0f;
-    UTMOPTrafficVehicleMovementComponent* Lead = Traffic != nullptr
+    UTMOPTrafficVehicleMovementComponent* Lead = !bObstacleBypassActive && Traffic != nullptr
         ? Traffic->FindLeadVehicle(this, CenterDistance) : nullptr;
     if (IsValid(Lead))
     {
@@ -189,7 +259,8 @@ float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLan
             TrafficState = ETMOPTrafficVehicleState::FollowingVehicle;
         }
     }
-    const float PhysicalObstacleDistance = GetPhysicalObstacleDistance();
+    const float PhysicalObstacleDistance = bObstacleBypassActive
+        ? -1.0f : GetPhysicalObstacleDistance();
     if (PhysicalObstacleDistance >= 0.0f)
     {
         const float AvailableBrakingDistance = FMath::Max(0.0f,
@@ -377,6 +448,7 @@ void UTMOPTrafficVehicleMovementComponent::StartDriving()
 
 void UTMOPTrafficVehicleMovementComponent::StopDriving()
 {
+    EndObstacleBypass();
     bDrivingEnabled = false;
     CurrentSpeedCmPerSecond = 0.0f;
     TrafficState = ETMOPTrafficVehicleState::Stopped;

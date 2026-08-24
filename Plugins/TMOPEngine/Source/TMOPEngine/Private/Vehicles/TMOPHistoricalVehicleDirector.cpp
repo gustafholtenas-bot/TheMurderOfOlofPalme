@@ -1179,31 +1179,20 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                         *RouteAnchorId.ToString()));
             }
 
+            TArray<FName> AutomaticSegment;
             FName SegmentDestinationLaneId;
             float SegmentDestinationDistance = 0.0f;
-            if (!Network->FindNearestLane(
+            if (!Network->FindNearestReachableLane(
                 RouteAnchor->GetAnchorLocation(),
-                SegmentDestinationLaneId,
-                SegmentDestinationDistance))
-            {
-                return ReportDrivingFailure(VehicleId,
-                    TEXT("DestinationLaneNotFound"),
-                    FString::Printf(TEXT("No lane was found near anchor '%s' at %s."),
-                        *RouteAnchorId.ToString(),
-                        *RouteAnchor->GetAnchorLocation().ToCompactString()));
-            }
-
-            TArray<FName> AutomaticSegment;
-            if (!Network->FindLaneRoute(
                 SegmentStartLaneId,
                 SegmentDestinationLaneId,
+                SegmentDestinationDistance,
                 AutomaticSegment))
             {
                 return ReportDrivingFailure(VehicleId,
                     TEXT("LaneRouteDisconnected"),
-                    FString::Printf(TEXT("No connected lane route from '%s' to '%s' through anchor '%s'."),
+                    FString::Printf(TEXT("No reachable lane candidate from '%s' through anchor '%s'."),
                         *SegmentStartLaneId.ToString(),
-                        *SegmentDestinationLaneId.ToString(),
                         *RouteAnchorId.ToString()));
             }
             if (!Route.IsEmpty() && !AutomaticSegment.IsEmpty() &&

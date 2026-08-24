@@ -232,3 +232,61 @@ bool UTMOPTrafficNetworkSubsystem::FindLaneRoute(
     OutOrderedLaneIds.Reset();
     return false;
 }
+
+bool UTMOPTrafficNetworkSubsystem::FindNearestReachableLane(
+    const FVector WorldLocation,
+    const FName StartLaneId,
+    FName& OutLaneId,
+    float& OutDistanceAlongLaneCm,
+    TArray<FName>& OutOrderedLaneIds,
+    const int32 MaximumCandidates) const
+{
+    struct FCandidate
+    {
+        FName LaneId = NAME_None;
+        float DistanceAlongCm = 0.0f;
+        double DistanceSquared = 0.0;
+    };
+
+    OutLaneId = NAME_None;
+    OutDistanceAlongLaneCm = 0.0f;
+    OutOrderedLaneIds.Reset();
+    if (!IsValid(FindLane(StartLaneId))) return false;
+
+    TArray<FCandidate> Candidates;
+    for (const FName LaneId : GetAllLaneIds())
+    {
+        UTMOPTrafficLaneComponent* Lane = FindLane(LaneId);
+        if (!IsValid(Lane)) continue;
+        const float InputKey =
+            Lane->FindInputKeyClosestToWorldLocation(WorldLocation);
+        const FVector Closest = Lane->GetLocationAtSplineInputKey(
+            InputKey, ESplineCoordinateSpace::World);
+        FCandidate& Candidate = Candidates.AddDefaulted_GetRef();
+        Candidate.LaneId = LaneId;
+        Candidate.DistanceAlongCm =
+            Lane->GetDistanceAlongSplineAtSplineInputKey(InputKey);
+        Candidate.DistanceSquared =
+            FVector::DistSquared(WorldLocation, Closest);
+    }
+    Candidates.Sort([](const FCandidate& A, const FCandidate& B)
+    {
+        return A.DistanceSquared < B.DistanceSquared ||
+            (FMath::IsNearlyEqual(A.DistanceSquared, B.DistanceSquared) &&
+                A.LaneId.LexicalLess(B.LaneId));
+    });
+
+    const int32 CandidateCount = FMath::Min(
+        Candidates.Num(), FMath::Max(1, MaximumCandidates));
+    for (int32 Index = 0; Index < CandidateCount; ++Index)
+    {
+        TArray<FName> Route;
+        if (!FindLaneRoute(StartLaneId, Candidates[Index].LaneId, Route))
+            continue;
+        OutLaneId = Candidates[Index].LaneId;
+        OutDistanceAlongLaneCm = Candidates[Index].DistanceAlongCm;
+        OutOrderedLaneIds = MoveTemp(Route);
+        return true;
+    }
+    return false;
+}

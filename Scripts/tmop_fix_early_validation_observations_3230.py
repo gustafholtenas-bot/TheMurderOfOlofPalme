@@ -155,6 +155,19 @@ def main() -> None:
         following["Notes"] = append_note(following.get("Notes", ""),
             "Relative offset adjusted so this point remains 23:13:42 after the PUB timing correction.")
 
+    # The exported Drottninggatan approach lies beyond the playable level.
+    # Spawn the companion at the western Kammakargatan boundary instead. The
+    # 23:05 row remains an arrival target, so runtime waits at the boundary and
+    # starts the roughly 59 m walk only when required.
+    companion = row_by_id(people, "EntityId", "VITTNE_EBC7911_COMPANION")
+    companion_start = next(e for e in companion["Timeline"]
+                           if e["EntryId"] == "EBC7911_COMPANION_INITIAL_2300")
+    companion_start["Time"] = {"Hour": 23, "Minute": 1, "Second": 0}
+    companion_start["TargetAnchorId"] = "ExitKammakargatanW_Sidewalk1"
+    companion_start["bTimeIsArrival"] = False
+    companion_start["Notes"] = append_note(companion_start.get("Notes", ""),
+        "Playable-area start corrected to ExitKammakargatanW_Sidewalk1 at 23:01; the previous Drottninggatan anchor was outside the level.")
+
     save_utf16(people_path, people)
     save_utf16(observations_path, observations)
     print("Updated", people_path)

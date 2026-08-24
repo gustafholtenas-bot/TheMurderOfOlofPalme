@@ -96,6 +96,19 @@ public:
         meta=(ClampMin="10.0"))
     float ObstacleSensorHalfHeightCm = 100.0f;
 
+    /** After this long behind the same stopped actor, perform a controlled bypass. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Bypass",
+        meta=(ClampMin="1.0"))
+    float ObstacleBypassAfterSeconds = 5.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Bypass",
+        meta=(ClampMin="50.0"))
+    float ObstacleBypassLateralOffsetCm = 260.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Bypass",
+        meta=(ClampMin="0.5"))
+    float ObstacleBypassDurationSeconds = 4.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Placement")
     FVector VehicleLocalOffset = FVector::ZeroVector;
 
@@ -215,6 +228,9 @@ private:
     void UpdateLaneChange(float DeltaTime, UTMOPTrafficLaneComponent* SourceLane);
     float GetPhysicalObstacleDistance() const;
     void DespawnAtCompletedRoute();
+    void UpdateObstacleBypass(float DeltaTime);
+    void BeginObstacleBypass(AActor* BlockingActor);
+    void EndObstacleBypass();
 
     int32 PlannedLaneIndex = INDEX_NONE;
     TMap<FName, float> StopConstraints;
@@ -224,4 +240,10 @@ private:
     float LaneChangeElapsedSeconds = 0.0f;
     float LaneChangeCheckAccumulator = 0.0f;
     float LaneChangeCooldownSeconds = 0.0f;
+    TWeakObjectPtr<AActor> PersistentBlockingActor;
+    float PersistentBlockSeconds = 0.0f;
+    float ObstacleBypassSecondsRemaining = 0.0f;
+    float ObstacleBypassBaseLateralOffsetCm = 0.0f;
+    bool bObstacleBypassActive = false;
+    bool bCollisionWasEnabledBeforeBypass = true;
 };

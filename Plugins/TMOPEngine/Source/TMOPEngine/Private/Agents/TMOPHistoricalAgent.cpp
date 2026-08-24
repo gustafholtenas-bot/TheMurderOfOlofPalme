@@ -397,6 +397,16 @@ void ATMOPHistoricalAgent::UpdateAutomaticUnstuck(const float DeltaSeconds)
     const FVector ImmediateDestination = AIController->GetImmediateMoveDestination();
     if (!ImmediateDestination.IsNearlyZero())
         SavedMoveDestination = ImmediateDestination;
+    else if (IsValid(ActionExecutor))
+    {
+        // MoveTo can be rejected immediately in a dense crowd, leaving the AI
+        // controller without a goal. Preserve the authoritative action target
+        // so repath and pass-through can recover the move.
+        FVector ActiveActionTarget = FVector::ZeroVector;
+        if (ActionExecutor->TryGetActiveMoveTarget(ActiveActionTarget) &&
+            !ActiveActionTarget.IsNearlyZero())
+            SavedMoveDestination = ActiveActionTarget;
+    }
     if (SavedMoveDestination.IsNearlyZero()) return;
 
     StationarySeconds += DeltaSeconds;
@@ -468,6 +478,7 @@ bool ATMOPHistoricalAgent::BeginCrowdPassThrough(
         GetActorLocation() + Forward * (CrowdPassThroughRadiusCm * 0.3f);
     FCollisionObjectQueryParams PawnObjects;
     PawnObjects.AddObjectTypesToQuery(ECC_Pawn);
+    PawnObjects.AddObjectTypesToQuery(ECC_Vehicle);
     FCollisionQueryParams Query(
         SCENE_QUERY_STAT(TMOPCrowdPassThrough), false, this);
     TArray<FOverlapResult> Overlaps;
@@ -478,9 +489,13 @@ bool ATMOPHistoricalAgent::BeginCrowdPassThrough(
     CrowdPassThroughIgnoredAgents.Reset();
     for (const FOverlapResult& Overlap : Overlaps)
     {
-        ATMOPHistoricalAgent* Other =
-            Cast<ATMOPHistoricalAgent>(Overlap.GetActor());
+        AActor* Other = Overlap.GetActor();
         if (!IsValid(Other) || Other == this) continue;
+        // Only ignore historical pedestrians and effectively stationary vehicles;
+        // world geometry and moving traffic keep normal collision.
+        const bool bHistoricalPedestrian = Cast<ATMOPHistoricalAgent>(Other) != nullptr;
+        const bool bStationaryVehicle = Other->GetVelocity().Size2D() < 10.0f;
+        if (!bHistoricalPedestrian && !bStationaryVehicle) continue;
 
         FVector ToOther = Other->GetActorLocation() - GetActorLocation();
         const float HeightDifference = FMath::Abs(ToOther.Z);
@@ -500,7 +515,7 @@ bool ATMOPHistoricalAgent::BeginCrowdPassThrough(
     CrowdPassThroughSecondsRemaining = CrowdPassThroughDurationSeconds;
     CrowdPassThroughStartLocation = GetActorLocation();
     UE_LOG(LogTemp, Display,
-        TEXT("TMOP crowd pass-through: '%s' temporarily ignores %d nearby pedestrians."),
+        TEXT("TMOP crowd pass-through: '%s' temporarily ignores %d nearby pedestrians/vehicles."),
         IsValid(EntityIdentity) ? *EntityIdentity->EntityId.ToString() : *GetName(),
         CrowdPassThroughIgnoredAgents.Num());
     return true;

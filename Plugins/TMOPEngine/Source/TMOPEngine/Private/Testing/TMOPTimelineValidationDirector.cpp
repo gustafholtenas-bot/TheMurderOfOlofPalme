@@ -14,6 +14,7 @@
 #include "Navigation/PathFollowingComponent.h"
 #include "NavigationSystem.h"
 #include "Entities/TMOPWorldEntityComponent.h"
+#include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Groups/TMOPGroupDirector.h"
 #include "Groups/TMOPGroupTypes.h"
 #include "HAL/FileManager.h"
@@ -159,6 +160,7 @@ void ATMOPTimelineValidationDirector::StartValidation()
     LastObservedSecond = INDEX_NONE;
     MaximumObservedSecond = INDEX_NONE;
     bShotSnapshotCaptured = false;
+    bSharedEventDefinitionsValidated = false;
     bValidationActive = true;
     DiscoverAgents();
     DiscoverVehicles();
@@ -185,6 +187,12 @@ void ATMOPTimelineValidationDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!bValidationActive) return;
+
+    if (!bSharedEventDefinitionsValidated)
+    {
+        ValidateSharedEventReferences();
+        bSharedEventDefinitionsValidated = true;
+    }
 
     const int32 CurrentSecond = GetSimulationSecond();
     if (CurrentSecond != INDEX_NONE)
@@ -566,8 +574,12 @@ void ATMOPTimelineValidationDirector::CaptureAgentSnapshot(
             Snapshot.Location, Projected, FVector(100.0f, 100.0f, 300.0f));
         if (Snapshot.bProjectedToNavMesh)
         {
-            Snapshot.DistanceToNavMeshCm = FVector::Dist(
-                Snapshot.Location, Projected.Location);
+            const float CapsuleHalfHeight = IsValid(Agent->GetCapsuleComponent())
+                ? Agent->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()
+                : 0.0f;
+            Snapshot.DistanceToNavMeshCm = FMath::Max(0.0f,
+                FVector::Dist(Snapshot.Location, Projected.Location) -
+                CapsuleHalfHeight);
             Snapshot.bOnNavMesh = Snapshot.DistanceToNavMeshCm <= 50.0f;
         }
     }
@@ -841,6 +853,33 @@ void ATMOPTimelineValidationDirector::SampleAgents(const float DeltaSeconds)
 
         FVector Target;
         bool bMoving = Executor->TryGetActiveMoveTarget(Target);
+        if (Tracked.bRegistryManagedMove && !Agent->SocialGroupId.IsNone() &&
+            GroupDirector.IsValid())
+        {
+            bool bFoundGroup = false;
+            const FTMOPGroupSnapshot Group = GroupDirector->GetGroupSnapshot(
+                Agent->SocialGroupId, bFoundGroup);
+            if (bFoundGroup && Group.State == ETMOPGroupState::Arrived)
+            {
+                Tracked.ActiveEntryId = NAME_None;
+                Tracked.ActiveTargetAnchorId = NAME_None;
+                Tracked.ActivePlannedSecond = INDEX_NONE;
+                Tracked.bRegistryManagedMove = false;
+                Tracked.StationarySeconds = 0.0f;
+                Tracked.bStuckReportedForCurrentMove = false;
+                Tracked.LastLocation = Agent->GetActorLocation();
+                continue;
+            }
+            if (bFoundGroup && Group.LeaderEntityId != Pair.Key)
+            {
+                // Followers can pause while the leader advances. Only the
+                // leader represents whole-group progress for stuck detection.
+                Tracked.StationarySeconds = 0.0f;
+                Tracked.bStuckReportedForCurrentMove = false;
+                Tracked.LastLocation = Agent->GetActorLocation();
+                continue;
+            }
+        }
         if (!bMoving && Tracked.bRegistryManagedMove &&
             Agent->ActivityState == ETMOPAgentActivityState::Walking)
         {
@@ -1454,6 +1493,50 @@ void ATMOPTimelineValidationDirector::HandlePersonTimelineApplied(
             Tracked->LastTimelineAnchorId = Entry.TargetAnchorId;
     }
     AddRecord(Record);
+}
+
+void ATMOPTimelineValidationDirector::ValidateSharedEventReferences()
+{
+    if (!PeopleDirector.IsValid() ||
+        !IsValid(PeopleDirector->PersonProfileTable) ||
+        GetGameInstance() == nullptr)
+        return;
+
+    const UTMOPHistoricalEventSubsystem* Events =
+        GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>();
+    if (Events == nullptr) return;
+
+    for (const TPair<FName, uint8*>& Pair :
+        PeopleDirector->PersonProfileTable->GetRowMap())
+    {
+        const FTMOPPersonProfileRow* Profile =
+            reinterpret_cast<const FTMOPPersonProfileRow*>(Pair.Value);
+        if (Profile == nullptr) continue;
+        for (const FTMOPPersonTimelineEntry& Entry : Profile->Timeline)
+        {
+            if (Entry.TimingMode != ETMOPEventTimingMode::Relative ||
+                Entry.SharedEventId.IsNone() ||
+                Events->HasEventDefinition(Entry.SharedEventId))
+                continue;
+
+            FTMOPTimelineValidationRecord Record;
+            Record.EntityId = Profile->EntityId;
+            Record.EntryId = Entry.EntryId;
+            Record.Event = TEXT("MissingSharedEventDefinition");
+            Record.Action = EnumText(Entry.Action);
+            Record.TimingMode = EnumText(Entry.TimingMode);
+            Record.HistoricalSecond = Entry.Time.ToSecondsFromMidnight();
+            Record.TargetAnchorId = Entry.TargetAnchorId;
+            Record.ActualSecond = GetSimulationSecond();
+            Record.FailureCode = TEXT("MissingSharedEventDefinition");
+            Record.FailureDetails = FString::Printf(
+                TEXT("Shared event '%s' is referenced but not registered."),
+                *Entry.SharedEventId.ToString());
+            Record.Severity = ETMOPTimelineValidationSeverity::Error;
+            Record.Message = Record.FailureDetails;
+            AddRecord(Record);
+        }
+    }
 }
 
 void ATMOPTimelineValidationDirector::AddRecord(

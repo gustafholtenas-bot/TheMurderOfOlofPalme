@@ -330,17 +330,17 @@ public:
     /** Maximum time for one person-only pass-through window. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
         meta = (ClampMin = "0.2", ClampMax = "5.0", Units = "s"))
-    float CrowdPassThroughDurationSeconds = 2.5f;
+    float CrowdPassThroughDurationSeconds = 3.5f;
 
     /** Nearby historical pedestrians inside this radius may be ignored. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
         meta = (ClampMin = "50.0", ClampMax = "250.0", Units = "cm"))
-    float CrowdPassThroughRadiusCm = 115.0f;
+    float CrowdPassThroughRadiusCm = 180.0f;
 
     /** Restore person collision once the agent has advanced this far. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement|Unstuck",
         meta = (ClampMin = "50.0", ClampMax = "400.0", Units = "cm"))
-    float CrowdPassThroughAdvanceCm = 160.0f;
+    float CrowdPassThroughAdvanceCm = 260.0f;
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Agent|State")
     bool CanMove() const;
