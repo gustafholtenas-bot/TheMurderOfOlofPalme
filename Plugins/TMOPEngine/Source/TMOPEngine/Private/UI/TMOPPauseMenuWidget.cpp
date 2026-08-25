@@ -37,17 +37,64 @@
 
 namespace
 {
+/** Natural ordering keeps EAD34 before EAD145 and preserves suffix ordering. */
+int32 CompareUppslagIdsNaturally(const FString& Left, const FString& Right)
+{
+    int32 LeftIndex = 0;
+    int32 RightIndex = 0;
+    while (LeftIndex < Left.Len() && RightIndex < Right.Len())
+    {
+        if (FChar::IsDigit(Left[LeftIndex]) && FChar::IsDigit(Right[RightIndex]))
+        {
+            const int32 LeftRunStart = LeftIndex;
+            const int32 RightRunStart = RightIndex;
+            while (LeftIndex < Left.Len() && FChar::IsDigit(Left[LeftIndex])) ++LeftIndex;
+            while (RightIndex < Right.Len() && FChar::IsDigit(Right[RightIndex])) ++RightIndex;
+
+            int32 LeftSignificant = LeftRunStart;
+            int32 RightSignificant = RightRunStart;
+            while (LeftSignificant + 1 < LeftIndex && Left[LeftSignificant] == TEXT('0'))
+                ++LeftSignificant;
+            while (RightSignificant + 1 < RightIndex && Right[RightSignificant] == TEXT('0'))
+                ++RightSignificant;
+
+            const int32 LeftDigits = LeftIndex - LeftSignificant;
+            const int32 RightDigits = RightIndex - RightSignificant;
+            if (LeftDigits != RightDigits) return LeftDigits < RightDigits ? -1 : 1;
+            for (int32 Offset = 0; Offset < LeftDigits; ++Offset)
+                if (Left[LeftSignificant + Offset] != Right[RightSignificant + Offset])
+                    return Left[LeftSignificant + Offset] < Right[RightSignificant + Offset] ? -1 : 1;
+            continue;
+        }
+
+        const TCHAR LeftCharacter = FChar::ToUpper(Left[LeftIndex]);
+        const TCHAR RightCharacter = FChar::ToUpper(Right[RightIndex]);
+        if (LeftCharacter != RightCharacter)
+            return LeftCharacter < RightCharacter ? -1 : 1;
+        ++LeftIndex;
+        ++RightIndex;
+    }
+    if (LeftIndex == Left.Len() && RightIndex == Right.Len()) return 0;
+    return LeftIndex == Left.Len() ? -1 : 1;
+}
+
+bool UppslagIdNaturalLess(const FName Left, const FName Right)
+{
+    return CompareUppslagIdsNaturally(Left.ToString(), Right.ToString()) < 0;
+}
+
 /** Draws one entire investigation-section coverage strip in a single widget. */
 class STMOPUppslagCoverageBar final : public SLeafWidget
 {
 public:
     SLATE_BEGIN_ARGS(STMOPUppslagCoverageBar) {}
-        SLATE_ARGUMENT(TArray<bool>, AvailableEntries)
+        /** 0 = not retrieved, 1 = retrieved/in project, 2 = police only. */
+        SLATE_ARGUMENT(TArray<uint8>, EntryStates)
     SLATE_END_ARGS()
 
     void Construct(const FArguments& Arguments)
     {
-        AvailableEntries = Arguments._AvailableEntries;
+        EntryStates = Arguments._EntryStates;
     }
 
     virtual FVector2D ComputeDesiredSize(float) const override
@@ -68,12 +115,12 @@ public:
             Geometry.ToPaintGeometry(), WhiteBrush, ESlateDrawEffect::None,
             FLinearColor(0.16f, 0.145f, 0.12f, 1.0f));
 
-        if (!AvailableEntries.IsEmpty() && BarWidth > 2.0f)
+        if (!EntryStates.IsEmpty() && BarWidth > 2.0f)
         {
-            const float Step = BarWidth / static_cast<float>(AvailableEntries.Num());
-            for (int32 Index = 0; Index < AvailableEntries.Num(); ++Index)
+            const float Step = BarWidth / static_cast<float>(EntryStates.Num());
+            for (int32 Index = 0; Index < EntryStates.Num(); ++Index)
             {
-                if (!AvailableEntries[Index]) continue;
+                if (EntryStates[Index] == 0) continue;
                 const float X = FMath::Clamp((Index + 0.5f) * Step,
                     1.0f, BarWidth - 1.0f);
                 TArray<FVector2f> Marker;
@@ -81,7 +128,9 @@ public:
                 Marker.Add(FVector2f(X, BarHeight - 1.0f));
                 FSlateDrawElement::MakeLines(DrawElements, LayerId + 1,
                     Geometry.ToPaintGeometry(), Marker, ESlateDrawEffect::None,
-                    FLinearColor(0.95f, 0.08f, 0.06f, 1.0f), true,
+                    EntryStates[Index] == 1
+                        ? FLinearColor(0.95f, 0.08f, 0.06f, 1.0f)
+                        : FLinearColor(0.38f, 0.55f, 0.68f, 1.0f), true,
                     FMath::Clamp(Step * 0.72f, 1.0f, 3.0f));
             }
         }
@@ -100,7 +149,7 @@ public:
     }
 
 private:
-    TArray<bool> AvailableEntries;
+    TArray<uint8> EntryStates;
 };
 
 FText SectionTitle(const ETMOPPauseHubSection Section)
@@ -274,16 +323,28 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     UppslagTable->GetAllRows(TEXT("Pause menu sources"), Rows);
     Rows.Sort([](const FTMOPUppslagRow& A, const FTMOPUppslagRow& B)
     {
-        return A.UppslagId.LexicalLess(B.UppslagId);
+        return UppslagIdNaturalLess(A.UppslagId, B.UppslagId);
     });
 
+    AddHeading(NSLOCTEXT("TMOP", "PoliceSourcesHeading", "1. POLISUPPSLAG"));
     AddBody(NSLOCTEXT("TMOP", "SourcesCoverageIntro",
-        "Varje rad motsvarar ett avsnitt i utredningen. En röd markering visar ett uppslag som finns i projektets källmaterial."));
+        "Varje rad motsvarar ett avsnitt i utredningen. Rött = uppslaget finns i projektets källmaterial. Gråblått = uppslaget är känt men har inte lämnats ut och finns fortfarande endast hos polisen."));
 
     TMap<FName, TArray<FTMOPUppslagRow*>> RowsBySeries;
+    TMap<FName, FString> SectionDescriptions;
     for (FTMOPUppslagRow* Row : Rows)
-        if (Row != nullptr && !Row->SeriesId.IsNone())
-            RowsBySeries.FindOrAdd(Row->SeriesId).Add(Row);
+        if (Row != nullptr && Row->SourceCategory == ETMOPSourceCategory::PoliceUppslag &&
+            !Row->SeriesId.IsNone())
+        {
+            if (Row->bIsSectionDefinition)
+            {
+                SectionDescriptions.FindOrAdd(Row->SeriesId) =
+                    Row->SectionDescription.IsEmpty()
+                    ? Row->Title.ToString() : Row->SectionDescription;
+                RowsBySeries.FindOrAdd(Row->SeriesId);
+            }
+            else RowsBySeries.FindOrAdd(Row->SeriesId).Add(Row);
+        }
 
     TArray<FName> SeriesIds;
     RowsBySeries.GetKeys(SeriesIds);
@@ -293,55 +354,69 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         TArray<FTMOPUppslagRow*>& SeriesRows = RowsBySeries.FindChecked(SeriesId);
         SeriesRows.Sort([](const FTMOPUppslagRow& A, const FTMOPUppslagRow& B)
         {
-            return A.UppslagId.LexicalLess(B.UppslagId);
+            return UppslagIdNaturalLess(A.UppslagId, B.UppslagId);
         });
 
-        TArray<bool> AvailableEntries;
-        AvailableEntries.Reserve(SeriesRows.Num());
+        TArray<uint8> EntryStates;
+        EntryStates.Reserve(SeriesRows.Num());
         int32 AvailableCount = 0;
         int32 AddedCount = 0;
+        int32 PoliceOnlyCount = 0;
         for (const FTMOPUppslagRow* Row : SeriesRows)
         {
             const bool bAvailable = Row != nullptr &&
                 (Row->bRetrieved || Row->bAddedToProject || Row->bPartiallyAdded);
-            AvailableEntries.Add(bAvailable);
+            const bool bPoliceOnly = Row != nullptr && !bAvailable &&
+                Row->Availability == ETMOPUppslagAvailability::NotReleased;
+            const uint8 EntryState = bAvailable ? uint8(1)
+                : bPoliceOnly ? uint8(2) : uint8(0);
+            EntryStates.Add(EntryState);
             AvailableCount += bAvailable ? 1 : 0;
             AddedCount += Row != nullptr && Row->bAddedToProject ? 1 : 0;
+            PoliceOnlyCount += bPoliceOnly ? 1 : 0;
         }
         const int32 TotalCount = SeriesRows.Num();
         const int32 AddedPercent = TotalCount > 0
             ? FMath::RoundToInt(100.0f * AddedCount / TotalCount) : 0;
         const FText Statistics = FText::FromString(FString::Printf(
-            TEXT("%d/%d uppslag\n%d procent inlagt"),
-            AvailableCount, TotalCount, AddedPercent));
+            TEXT("%d/%d uppslag\n%d endast hos polisen\n%d procent inlagt"),
+            AvailableCount, TotalCount, PoliceOnlyCount, AddedPercent));
 
         ContentBox->AddSlot().AutoHeight().Padding(2.0f, 12.0f)
-        [ SNew(SHorizontalBox)
-          + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
-          [ SNew(SBox).WidthOverride(105.0f)
-            [ SNew(STextBlock).Text(FText::FromName(SeriesId))
-              .Font(FCoreStyle::GetDefaultFontStyle("Bold", 28)) ] ]
-          + SHorizontalBox::Slot().FillWidth(1.0f).Padding(10.0f, 0.0f, 18.0f, 0.0f)
-            .VAlign(VAlign_Center)
-          [ SNew(STMOPUppslagCoverageBar).AvailableEntries(AvailableEntries) ]
-          + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
-          [ SNew(SBox).WidthOverride(180.0f)
-            [ SNew(STextBlock).Text(Statistics).AutoWrapText(false) ] ] ];
+        [ SNew(SVerticalBox)
+          + SVerticalBox::Slot().AutoHeight()
+          [ SNew(SHorizontalBox)
+            + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
+            [ SNew(SBox).WidthOverride(105.0f)
+              [ SNew(STextBlock).Text(FText::FromName(SeriesId))
+                .Font(FCoreStyle::GetDefaultFontStyle("Bold", 28)) ] ]
+            + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
+            [ SNew(STextBlock).Text(FText::FromString(
+                SectionDescriptions.FindRef(SeriesId))).AutoWrapText(true) ] ]
+          + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 7.0f, 0.0f, 0.0f)
+          [ SNew(SHorizontalBox)
+            + SHorizontalBox::Slot().FillWidth(1.0f).Padding(105.0f, 0.0f, 18.0f, 0.0f)
+              .VAlign(VAlign_Center)
+            [ SNew(STMOPUppslagCoverageBar).EntryStates(EntryStates) ]
+            + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
+            [ SNew(SBox).WidthOverride(180.0f)
+              [ SNew(STextBlock).Text(Statistics).AutoWrapText(false) ] ] ] ];
     }
 
-    AddHeading(NSLOCTEXT("TMOP", "SourcesDetails", "Uppslagsdetaljer"));
+    AddHeading(NSLOCTEXT("TMOP", "SourcesDetails", "Polisuppslag – detaljer"));
 
     int32 VisibleCount = 0;
     constexpr int32 MaximumVisibleRows = 300;
     for (const FTMOPUppslagRow* Row : Rows)
     {
-        if (Row == nullptr || !Row->bRelevantToGame) continue;
-        const FString Title = Row->Title.IsEmpty() ? TEXT("Utan titel") : Row->Title.ToString();
-        const FString State = Row->bAddedToProject ? TEXT("Inlagt")
+        if (Row == nullptr || Row->SourceCategory != ETMOPSourceCategory::PoliceUppslag ||
+            Row->bIsSectionDefinition || !Row->bRelevantToGame) continue;
+        const FString SourceDisplayTitle = Row->Title.IsEmpty() ? TEXT("Utan titel") : Row->Title.ToString();
+        const FString ProcessingStateText = Row->bAddedToProject ? TEXT("Inlagt")
             : Row->bPartiallyAdded ? TEXT("Delvis inlagt") : TEXT("Ej inlagt");
         AddHeading(FText::FromString(FString::Printf(TEXT("%s — %s"),
-            *Row->UppslagId.ToString(), *Title)));
-        FString Details = State;
+            *Row->UppslagId.ToString(), *SourceDisplayTitle)));
+        FString Details = ProcessingStateText;
         if (!Row->DocumentDate.IsEmpty()) Details += TEXT(" • ") + Row->DocumentDate;
         if (!Row->SourceUrl.IsEmpty()) Details += TEXT("\n") + Row->SourceUrl;
         AddBody(FText::FromString(Details));
@@ -351,6 +426,113 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         AddBody(NSLOCTEXT("TMOP", "NoRelevantSources", "Tabellen innehåller inga uppslag markerade som relevanta för spelet."));
     else if (VisibleCount >= MaximumVisibleRows)
         AddBody(NSLOCTEXT("TMOP", "SourcesLimited", "Listan visar de första 300 relevanta uppslagen för att hålla menyn snabb."));
+
+    const auto NameArrayText = [](const TArray<FName>& Values) -> FString
+    {
+        FString Result;
+        for (const FName Value : Values)
+        {
+            if (!Result.IsEmpty()) Result += TEXT(", ");
+            Result += Value.ToString();
+        }
+        return Result;
+    };
+    const auto ReliabilityText = [](const ETMOPSourceReliability Value) -> FString
+    {
+        switch (Value)
+        {
+        case ETMOPSourceReliability::PrimarySource: return TEXT("Primärkälla");
+        case ETMOPSourceReliability::SecondarySource: return TEXT("Sekundärkälla");
+        case ETMOPSourceReliability::Corroborated: return TEXT("Bekräftad av flera källor");
+        case ETMOPSourceReliability::Disputed: return TEXT("Motsagd / omtvistad");
+        default: return TEXT("Obekräftad");
+        }
+    };
+    const auto BuildSourceCategory = [this, &Rows, &NameArrayText, &ReliabilityText](
+        const ETMOPSourceCategory RequestedSourceCategory, const FText& Heading,
+        const FText& EmptyMessage)
+    {
+        AddHeading(Heading);
+        TArray<const FTMOPUppslagRow*> CategoryRows;
+        for (const FTMOPUppslagRow* SourceRow : Rows)
+            if (SourceRow != nullptr && !SourceRow->bIsSectionDefinition &&
+                SourceRow->SourceCategory == RequestedSourceCategory)
+                CategoryRows.Add(SourceRow);
+
+        if (CategoryRows.IsEmpty())
+        {
+            AddBody(EmptyMessage);
+            return;
+        }
+
+        TArray<uint8> EntryStates;
+        int32 FullyAddedCount = 0;
+        int32 PartiallyAddedCount = 0;
+        for (const FTMOPUppslagRow* SourceRow : CategoryRows)
+        {
+            const bool bSourceIsPresent = SourceRow->bRetrieved ||
+                SourceRow->bAddedToProject || SourceRow->bPartiallyAdded;
+            EntryStates.Add(bSourceIsPresent ? uint8(1) : uint8(0));
+            FullyAddedCount += SourceRow->bAddedToProject ? 1 : 0;
+            PartiallyAddedCount += SourceRow->bPartiallyAdded ? 1 : 0;
+        }
+        AddBody(FText::FromString(FString::Printf(
+            TEXT("%d källor • %d helt inlagda • %d delvis inlagda"),
+            CategoryRows.Num(), FullyAddedCount, PartiallyAddedCount)));
+        ContentBox->AddSlot().AutoHeight().Padding(2.0f, 3.0f, 2.0f, 12.0f)
+        [ SNew(STMOPUppslagCoverageBar).EntryStates(EntryStates) ];
+
+        for (const FTMOPUppslagRow* SourceRow : CategoryRows)
+        {
+            const FString SourceDisplayTitle = SourceRow->Title.IsEmpty()
+                ? SourceRow->UppslagId.ToString() : SourceRow->Title.ToString();
+            AddHeading(FText::FromString(SourceDisplayTitle));
+
+            FString Details = SourceRow->bAddedToProject ? TEXT("Inlagt i projektet")
+                : SourceRow->bPartiallyAdded ? TEXT("Delvis inlagt")
+                : SourceRow->bRetrieved ? TEXT("Genomgången") : TEXT("Inte genomgången");
+            Details += TEXT(" • ") + ReliabilityText(SourceRow->Reliability);
+            if (!SourceRow->AuthorOrCreator.IsEmpty())
+                Details += TEXT("\nFörfattare/uppgiftslämnare: ") + SourceRow->AuthorOrCreator;
+            if (!SourceRow->PublicationOrPlatform.IsEmpty())
+                Details += TEXT("\nPublikation/plattform: ") + SourceRow->PublicationOrPlatform;
+            if (!SourceRow->DocumentDate.IsEmpty())
+                Details += TEXT("\nDatum: ") + SourceRow->DocumentDate;
+            if (!SourceRow->ISBNOrArchiveId.IsEmpty())
+                Details += TEXT("\nISBN/arkiv-ID: ") + SourceRow->ISBNOrArchiveId;
+            if (!SourceRow->PageOrLocation.IsEmpty())
+                Details += TEXT("\nSida/plats: ") + SourceRow->PageOrLocation;
+            if (!SourceRow->CitationText.IsEmpty())
+                Details += TEXT("\nKällhänvisning: ") + SourceRow->CitationText;
+            if (!SourceRow->ImplementedSummary.IsEmpty())
+                Details += TEXT("\nInlagt innehåll: ") + SourceRow->ImplementedSummary;
+            if (!SourceRow->SourceUrl.IsEmpty())
+                Details += TEXT("\nLänk: ") + SourceRow->SourceUrl;
+
+            const FString People = NameArrayText(SourceRow->PersonEntityIds);
+            const FString Vehicles = NameArrayText(SourceRow->VehicleEntityIds);
+            const FString Events = NameArrayText(SourceRow->SharedEventIds);
+            const FString Observations = NameArrayText(SourceRow->ObservationIds);
+            const FString Anchors = NameArrayText(SourceRow->AnchorIds);
+            if (!People.IsEmpty()) Details += TEXT("\nPersoner: ") + People;
+            if (!Vehicles.IsEmpty()) Details += TEXT("\nFordon: ") + Vehicles;
+            if (!Events.IsEmpty()) Details += TEXT("\nHändelser: ") + Events;
+            if (!Observations.IsEmpty()) Details += TEXT("\nObservationer: ") + Observations;
+            if (!Anchors.IsEmpty()) Details += TEXT("\nPlatser: ") + Anchors;
+            AddBody(FText::FromString(Details));
+        }
+    };
+
+    BuildSourceCategory(ETMOPSourceCategory::Book,
+        NSLOCTEXT("TMOP", "BookSourcesHeading", "2. BÖCKER"),
+        NSLOCTEXT("TMOP", "NoBookSources", "Inga böcker har registrerats ännu."));
+    BuildSourceCategory(ETMOPSourceCategory::Article,
+        NSLOCTEXT("TMOP", "ArticleSourcesHeading", "3. ARTIKLAR"),
+        NSLOCTEXT("TMOP", "NoArticleSources", "Inga artiklar har registrerats ännu."));
+    BuildSourceCategory(ETMOPSourceCategory::Other,
+        NSLOCTEXT("TMOP", "OtherSourcesHeading", "4. ANDRA UPPGIFTER"),
+        NSLOCTEXT("TMOP", "NoOtherSources",
+            "Inga andra uppgifter från forum, sociala medier eller manuella tips har registrerats ännu."));
 }
 
 void UTMOPPauseMenuWidget::BuildPublicationsPage()

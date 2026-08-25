@@ -9,7 +9,31 @@ enum class ETMOPUppslagAvailability : uint8
 {
     Unknown UMETA(DisplayName="Okänt"),
     Available UMETA(DisplayName="Utlämnat / tillgängligt"),
-    NotReleased UMETA(DisplayName="Inte utlämnat / saknas")
+    NotReleased UMETA(DisplayName="Inte utlämnat / endast hos polisen"),
+    PartiallyAvailable UMETA(DisplayName="Delvis tillgängligt"),
+    Partial UMETA(DisplayName="Delvis dokument"),
+    MissingPage UMETA(DisplayName="Sida saknas"),
+    AvailableMasked UMETA(DisplayName="Tillgängligt men maskerat"),
+    UnavailableNoDocument UMETA(DisplayName="Inget dokument tillgängligt")
+};
+
+UENUM(BlueprintType)
+enum class ETMOPSourceCategory : uint8
+{
+    PoliceUppslag UMETA(DisplayName="1. Polisuppslag"),
+    Book UMETA(DisplayName="2. Böcker"),
+    Article UMETA(DisplayName="3. Artiklar"),
+    Other UMETA(DisplayName="4. Andra uppgifter")
+};
+
+UENUM(BlueprintType)
+enum class ETMOPSourceReliability : uint8
+{
+    Unverified UMETA(DisplayName="Obekräftad"),
+    PrimarySource UMETA(DisplayName="Primärkälla"),
+    SecondarySource UMETA(DisplayName="Sekundärkälla"),
+    Corroborated UMETA(DisplayName="Bekräftad av flera källor"),
+    Disputed UMETA(DisplayName="Motsagd / omtvistad")
 };
 
 /**
@@ -22,6 +46,11 @@ USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPUppslagRow : public FTableRowBase
 {
     GENERATED_BODY()
+
+    /** The four top-level groups shown in Källor/Uppslag. Old rows default to police records. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
+        meta=(DisplayName="Källkategori"))
+    ETMOPSourceCategory SourceCategory = ETMOPSourceCategory::PoliceUppslag;
 
     /** Canonical WPU reference without the "Uppslag:" prefix. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Identity",
@@ -36,6 +65,15 @@ struct TMOPENGINE_API FTMOPUppslagRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Identity",
         meta=(DisplayName="Serie"))
     FName SeriesId = NAME_None;
+
+    /** Metadata row for a WPU letter section; excluded from uppslag totals. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Section",
+        meta=(DisplayName="Avsnittsdefinition"))
+    bool bIsSectionDefinition = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Section",
+        meta=(MultiLine="true", DisplayName="Avsnittsbeskrivning"))
+    FString SectionDescription;
 
     /** Parent register entry, for example L261 for L261-00-A. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Identity",
@@ -83,6 +121,30 @@ struct TMOPENGINE_API FTMOPUppslagRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
         meta=(DisplayName="Dokumentdatum"))
     FString DocumentDate;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
+        meta=(DisplayName="Författare / uppgiftslämnare"))
+    FString AuthorOrCreator;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
+        meta=(DisplayName="Publikation / plattform"))
+    FString PublicationOrPlatform;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
+        meta=(DisplayName="ISBN / arkiv-ID"))
+    FString ISBNOrArchiveId;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
+        meta=(DisplayName="Sida / plats i källan"))
+    FString PageOrLocation;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
+        meta=(DisplayName="Källbedömning"))
+    ETMOPSourceReliability Reliability = ETMOPSourceReliability::Unverified;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
+        meta=(MultiLine="true", DisplayName="Källhänvisning / citatbeskrivning"))
+    FString CitationText;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Links",
         meta=(DisplayName="Person-ID"))
