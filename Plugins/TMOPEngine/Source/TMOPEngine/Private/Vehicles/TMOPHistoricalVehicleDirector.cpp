@@ -15,6 +15,7 @@
 #include "Vehicles/TMOPConfiguredVehicle.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "Vehicles/TMOPVehicleModelData.h"
+#include "Audio/TMOPVehicleAudioComponent.h"
 #include "World/TMOPWorldSubsystem.h"
 
 namespace
@@ -111,19 +112,39 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
                 continue;
             }
+            const bool bEmergencySirenAction =
+                Entry.Action ==
+                    ETMOPHistoricalVehicleAction::EmergencySirenOn ||
+                Entry.Action ==
+                    ETMOPHistoricalVehicleAction::EmergencySirenOff;
+            if (bEmergencySirenAction)
+            {
+                UTMOPVehicleAudioComponent* Audio =
+                    Vehicle->FindComponentByClass<
+                        UTMOPVehicleAudioComponent>();
+                if (!IsValid(Audio))
+                {
+                    // The audio director attaches this runtime component.
+                    // Leave the entry pending and retry next simulation second
+                    // if the vehicle has only just spawned.
+                    continue;
+                }
+                const bool bEnable = Entry.Action ==
+                    ETMOPHistoricalVehicleAction::EmergencySirenOn;
+                Audio->SetEmergencySirenEnabled(bEnable);
+                Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+                UE_LOG(LogTemp, Display,
+                    TEXT("TMOP VehicleSiren: '%s' set emergency siren %s at %02d:%02d:%02d."),
+                    *Runtime.Profile.VehicleId.ToString(),
+                    bEnable ? TEXT("ON") : TEXT("OFF"),
+                    Entry.Time.Hour, Entry.Time.Minute, Entry.Time.Second);
+                continue;
+            }
             const bool bTimedPlacement =
                 Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Park;
             if (!bTimedPlacement) continue;
-            if (UTMOPTrafficVehicleMovementComponent* Movement =
-                Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
-            {
-                Movement->StopDriving();
-                Movement->PlannedLaneIds.Reset();
-                Movement->TrafficState =
-                    ETMOPTrafficVehicleState::RouteComplete;
-            }
             FTransform Target = Entry.WorldTransform;
             if (Entry.PlacementMode ==
                     ETMOPHistoricalVehiclePlacementMode::Anchor)
@@ -141,6 +162,29 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 Target = Entry.AnchorLocalOffset * FTransform(
                     Anchor->GetAnchorRotation(), Anchor->GetAnchorLocation(),
                     FVector::OneVector);
+            }
+            if (UTMOPTrafficVehicleMovementComponent* Movement =
+                Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+            {
+                // A scheduled Stop/Park is a target time, not permission to
+                // snap a delayed car away from its lane. Let an already
+                // configured final approach finish naturally and update its
+                // exact parking transform from this timeline entry.
+                if ((Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
+                     Entry.Action == ETMOPHistoricalVehicleAction::Park) &&
+                    Movement->UpdateFinalApproachTarget(Target))
+                {
+                    Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+                    UE_LOG(LogTemp, Display,
+                        TEXT("TMOP VehicleTimedPlacement: '%s' deferred '%s' to its smooth final approach."),
+                        *Runtime.Profile.VehicleId.ToString(),
+                        *Entry.EntryId.ToString());
+                    continue;
+                }
+                Movement->StopDriving();
+                Movement->PlannedLaneIds.Reset();
+                Movement->TrafficState =
+                    ETMOPTrafficVehicleState::RouteComplete;
             }
             Vehicle->SetActorEnableCollision(false);
             Vehicle->SetActorTransform(
@@ -717,6 +761,9 @@ void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
         Runtime->bSpawnedByDirector = false;
         Vehicle->DisplayName = Runtime->Profile.DisplayName;
         Vehicle->VehicleCategoryId = Runtime->Profile.CategoryId;
+        Vehicle->RegistrationStatus = Runtime->Profile.RegistrationStatus;
+        Vehicle->RegistrationOrigin = Runtime->Profile.RegistrationOrigin;
+        Vehicle->RegistrationNumber = Runtime->Profile.RegistrationNumber;
         Vehicle->RefreshNameLabel();
         if (ATMOPConfiguredVehicle* Configured =
             Cast<ATMOPConfiguredVehicle>(Vehicle))
@@ -727,6 +774,9 @@ void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
             Configured->BodyColor = Runtime->Profile.BodyColor;
             Configured->ApplyConfiguration();
         }
+        if (UTMOPTrafficVehicleMovementComponent* Movement =
+            Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+            Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle;
         RegisterVehicle(Vehicle);
     }
 }
@@ -790,6 +840,9 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
     Vehicle->VehicleId = Runtime.Profile.VehicleId;
     Vehicle->DisplayName = Runtime.Profile.DisplayName;
     Vehicle->VehicleCategoryId = Runtime.Profile.CategoryId;
+    Vehicle->RegistrationStatus = Runtime.Profile.RegistrationStatus;
+    Vehicle->RegistrationOrigin = Runtime.Profile.RegistrationOrigin;
+    Vehicle->RegistrationNumber = Runtime.Profile.RegistrationNumber;
     if (ATMOPConfiguredVehicle* Configured = Cast<ATMOPConfiguredVehicle>(Vehicle))
     {
         Configured->VehicleModel = Runtime.Profile.ModelData;
@@ -798,6 +851,10 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
         Configured->BodyColor = Runtime.Profile.BodyColor;
     }
     UGameplayStatics::FinishSpawningActor(Vehicle, InitialTransform);
+
+    if (UTMOPTrafficVehicleMovementComponent* Movement =
+        Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+        Movement->bFleeingVehicle = Runtime.Profile.bFleeingVehicle;
 
     // Blueprint construction may restore the spawned class defaults (commonly
     // the white Volvo 240 proxy). Re-apply the row after construction so the
@@ -985,6 +1042,33 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
             OutErrors.Add(Prefix +
                 TEXT(" overrides Body Color but has no Model Data."));
         }
+        if (Row->RegistrationStatus ==
+                ETMOPVehicleRegistrationStatus::Known)
+        {
+            if (Row->RegistrationNumber.IsEmpty())
+                OutErrors.Add(Prefix +
+                    TEXT(" has Known registration status but no registration number."));
+            if (Row->RegistrationOrigin ==
+                    ETMOPVehicleRegistrationOrigin::Unknown)
+                OutErrors.Add(Prefix +
+                    TEXT(" has a known registration number but unknown registration origin."));
+            if (Row->RegistrationOrigin ==
+                ETMOPVehicleRegistrationOrigin::Swedish)
+            {
+                const FString& Number = Row->RegistrationNumber;
+                const bool bSwedishFormat = Number.Len() == 7 &&
+                    FChar::IsAlpha(Number[0]) &&
+                    FChar::IsAlpha(Number[1]) &&
+                    FChar::IsAlpha(Number[2]) &&
+                    Number[3] == TEXT('-') &&
+                    FChar::IsDigit(Number[4]) &&
+                    FChar::IsDigit(Number[5]) &&
+                    FChar::IsDigit(Number[6]);
+                if (!bSwedishFormat)
+                    OutErrors.Add(Prefix +
+                        TEXT(" has a Swedish registration that is not formatted ABC-123."));
+            }
+        }
         for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Row->Timeline)
         {
             const bool bPlacementEntry =
@@ -1107,6 +1191,9 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     Route.RemoveAll([](const FName LaneId) { return LaneId.IsNone(); });
 
     float ResolvedStartDistance = StartDistanceAlongFirstLaneCm;
+    FName FinalDestinationLaneId = NAME_None;
+    float FinalDestinationLaneDistance = 0.0f;
+    FTransform FinalDestinationTransform = FTransform::Identity;
     if (RouteMode != ETMOPVehicleRouteMode::ManualLaneRoute)
     {
         if (DestinationAnchorId.IsNone() || GetGameInstance() == nullptr)
@@ -1202,6 +1289,15 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
             }
             Route.Append(AutomaticSegment);
             SegmentStartLaneId = SegmentDestinationLaneId;
+            if (RouteAnchorId == DestinationAnchorId)
+            {
+                FinalDestinationLaneId = SegmentDestinationLaneId;
+                FinalDestinationLaneDistance = SegmentDestinationDistance;
+                FinalDestinationTransform = FTransform(
+                    RouteAnchor->GetAnchorRotation(),
+                    RouteAnchor->GetAnchorLocation(),
+                    FVector::OneVector);
+            }
         }
         UE_LOG(LogTemp, Display,
             TEXT("TMOP driving: calculated %d lane(s) through %d pass anchor(s) to '%s'."),
@@ -1229,6 +1325,7 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     }
 
     Movement->StopDriving();
+    Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle;
     // Historical vehicles are governed by their DataTable timeline. Reaching
     // the final lane means stop and remain available; only an explicit
     // HistoricalVehicle Despawn entry may destroy the car and its occupants.
@@ -1247,6 +1344,13 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
             FString::Printf(TEXT("InitializeOnLane rejected lane '%s' at %.1f cm for route [%s]."),
                 *Route[0].ToString(), ResolvedStartDistance,
                 *FString::Join(RouteNames, TEXT(","))));
+    }
+    if (!FinalDestinationLaneId.IsNone())
+    {
+        Movement->ConfigureFinalApproach(
+            FinalDestinationLaneId,
+            FinalDestinationLaneDistance,
+            FinalDestinationTransform);
     }
     Movement->StartDriving();
     if (Runtime->bBoundaryCollisionSuppressed)

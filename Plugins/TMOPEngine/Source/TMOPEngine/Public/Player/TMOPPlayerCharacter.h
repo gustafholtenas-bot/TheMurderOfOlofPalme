@@ -31,6 +31,8 @@ class UTMOPPlayerVehicleDrivingComponent;
 class UTMOPPlayerVehicleSessionComponent;
 class UTMOPAgentAudioComponent;
 class UTMOPPlayerMovementAudioComponent;
+class UTMOPMapComponent;
+class UTMOPMapWidget;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
@@ -83,6 +85,27 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Audio")
     TObjectPtr<UTMOPPlayerMovementAudioComponent> MovementAudio;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Map")
+    TObjectPtr<UTMOPMapComponent> MapComponent;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Map")
+    TSubclassOf<UTMOPMapWidget> WorldMapWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Map")
+    TSubclassOf<UTMOPMapWidget> MinimapWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Map")
+    bool bCreateMapWidgets = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Map")
+    TObjectPtr<UTMOPMapWidget> WorldMapWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Map")
+    TObjectPtr<UTMOPMapWidget> MinimapWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Map")
+    bool bWorldMapOpen = false;
 
     /** Optional visual class. Empty uses the built-in C++ placeholder menu. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI")
@@ -221,6 +244,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Pause")
     FKey PauseMenuGamepadFallbackKey = EKeys::Gamepad_Special_Right;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Map")
+    FKey WorldMapFallbackKey = EKeys::M;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> QuickInventoryAction;
 
@@ -311,6 +337,15 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
     void TogglePauseMenu();
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Map")
+    bool OpenWorldMap();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Map")
+    void CloseWorldMap();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Map")
+    void ToggleWorldMap();
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Dialog")
     bool OpenPersonDialog(ATMOPHistoricalAgent* HistoricalAgent);
 
@@ -366,6 +401,8 @@ private:
     bool bPlayerInterfaceInitialized = false;
     bool bQuickInventoryFallbackHeld = false;
     bool bPauseFallbackHeld = false;
+    bool bMapFallbackHeld = false;
+    bool bClockWasRunningBeforeMap = false;
     bool bClockWasRunningBeforePause = false;
     bool bClockWasRunningBeforeNewspaper = false;
     bool bNewspaperPausedSimulation = false;

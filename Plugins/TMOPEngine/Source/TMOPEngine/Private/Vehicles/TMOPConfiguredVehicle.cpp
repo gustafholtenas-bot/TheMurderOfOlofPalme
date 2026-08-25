@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
+#include "Audio/TMOPVehicleAudioComponent.h"
 #include "Vehicles/TMOPVehicleModelData.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Vehicles/TMOPVehicleDoorComponent.h"
@@ -162,6 +163,7 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     }
     BodyMesh->SetRelativeTransform(BodyTransform);
     ApplyBodyColor();
+    InitializeVehicleLightMaterials();
     ApplyWheel(WheelFrontLeft, Model->WheelMesh, Model->Wheels.FrontLeft);
     ApplyWheel(WheelFrontRight, Model->WheelMesh, Model->Wheels.FrontRight);
     ApplyWheel(WheelRearLeft, Model->WheelMesh, Model->Wheels.RearLeft);
@@ -307,6 +309,149 @@ void ATMOPConfiguredVehicle::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     UpdateWheelAnimation(DeltaSeconds);
+    UpdateVehicleLights();
+}
+
+namespace
+{
+    FString NormalizeVehicleMaterialSlotName(const FName SlotName)
+    {
+        FString Normalized = SlotName.ToString().ToLower();
+        Normalized.ReplaceInline(TEXT("_"), TEXT(""));
+        Normalized.ReplaceInline(TEXT("-"), TEXT(""));
+        Normalized.ReplaceInline(TEXT(" "), TEXT(""));
+        return Normalized;
+    }
+
+    bool IsHeadlightSlot(const FString& Name)
+    {
+        return Name.Contains(TEXT("headlight")) ||
+            Name.Contains(TEXT("frontlight"));
+    }
+
+    bool IsOrangeLightSlot(const FString& Name)
+    {
+        return Name.Contains(TEXT("orangeneon")) ||
+            Name.Contains(TEXT("orangelight"));
+    }
+
+    bool IsRedLightSlot(const FString& Name)
+    {
+        return Name.Contains(TEXT("redlight")) ||
+            Name.Contains(TEXT("redightneon"));
+    }
+
+    bool IsEmergencyBlueSlot(const FString& Name)
+    {
+        return Name == TEXT("blue") || Name.StartsWith(TEXT("blue0")) ||
+            Name.Contains(TEXT("bluesiren"));
+    }
+}
+
+void ATMOPConfiguredVehicle::InitializeVehicleLightMaterials()
+{
+    VehicleLightMaterials.Reset();
+    VehicleLightColors.Reset();
+    EmergencyBlueMaterialIndices.Reset();
+    bVehicleLightsInitialized = false;
+    if (!IsValid(BodyMesh)) return;
+
+    const TArray<FName> SlotNames = BodyMesh->GetMaterialSlotNames();
+    for (int32 Index = 0; Index < SlotNames.Num(); ++Index)
+    {
+        const FString Normalized = NormalizeVehicleMaterialSlotName(
+            SlotNames[Index]);
+        FLinearColor LightColor = FLinearColor::Black;
+        bool bRecognized = true;
+        bool bEmergencyBlue = false;
+        if (IsHeadlightSlot(Normalized))
+            LightColor = FLinearColor(18.0f, 16.0f, 12.0f, 1.0f);
+        else if (IsOrangeLightSlot(Normalized))
+            LightColor = FLinearColor(18.0f, 4.0f, 0.15f, 1.0f);
+        else if (IsRedLightSlot(Normalized))
+            LightColor = FLinearColor(18.0f, 0.08f, 0.04f, 1.0f);
+        else if (IsEmergencyBlueSlot(Normalized))
+        {
+            LightColor = FLinearColor(0.05f, 0.35f, 20.0f, 1.0f);
+            bEmergencyBlue = true;
+        }
+        else
+        {
+            bRecognized = false;
+        }
+        if (!bRecognized) continue;
+
+        UMaterialInstanceDynamic* Dynamic =
+            BodyMesh->CreateDynamicMaterialInstance(Index);
+        if (!IsValid(Dynamic)) continue;
+        VehicleLightMaterials.Add(Index, Dynamic);
+        VehicleLightColors.Add(Index, LightColor);
+        if (bEmergencyBlue)
+            EmergencyBlueMaterialIndices.Add(Index);
+    }
+
+    bVehicleLightsInitialized = true;
+    UpdateVehicleLights(true);
+}
+
+void ATMOPConfiguredVehicle::UpdateVehicleLights(const bool bForce)
+{
+    if (!bVehicleLightsInitialized) return;
+    const UTMOPTrafficVehicleMovementComponent* Movement =
+        FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
+    // Player takeover suspends the traffic component tick. That still counts
+    // as an actively driven vehicle even while it is stationary at a light.
+    const bool bDrivingLightsEnabled = IsValid(Movement) &&
+        (Movement->IsDrivingEnabled() || !Movement->IsComponentTickEnabled());
+
+    const UTMOPVehicleAudioComponent* Audio =
+        FindComponentByClass<UTMOPVehicleAudioComponent>();
+    const bool bSirenEnabled = IsValid(Audio) &&
+        Audio->bEmergencySirenEnabled;
+    const float WorldSeconds = GetWorld() != nullptr
+        ? GetWorld()->GetTimeSeconds() : 0.0f;
+    const bool bEmergencyBlueEnabled = bSirenEnabled &&
+        (FMath::FloorToInt(WorldSeconds * 8.0f) % 2 == 0);
+
+    if (bForce || bDrivingLightsEnabled != bLastDrivingLightsEnabled)
+    {
+        for (const TPair<int32, TWeakObjectPtr<UMaterialInstanceDynamic>>& Pair :
+            VehicleLightMaterials)
+            if (!EmergencyBlueMaterialIndices.Contains(Pair.Key))
+                ApplyLightMaterialState(Pair.Key, bDrivingLightsEnabled);
+        bLastDrivingLightsEnabled = bDrivingLightsEnabled;
+    }
+    if (bForce || bEmergencyBlueEnabled != bLastEmergencyBlueEnabled)
+    {
+        for (const int32 Index : EmergencyBlueMaterialIndices)
+            ApplyLightMaterialState(Index, bEmergencyBlueEnabled);
+        bLastEmergencyBlueEnabled = bEmergencyBlueEnabled;
+    }
+}
+
+void ATMOPConfiguredVehicle::ApplyLightMaterialState(
+    const int32 MaterialIndex, const bool bEnabled)
+{
+    UMaterialInstanceDynamic* Dynamic = VehicleLightMaterials.FindRef(
+        MaterialIndex).Get();
+    const FLinearColor* OnColor = VehicleLightColors.Find(MaterialIndex);
+    if (!IsValid(Dynamic) || OnColor == nullptr) return;
+
+    const FLinearColor Color = bEnabled ? *OnColor : FLinearColor::Black;
+    static const FName ColorParameters[] = {
+        TEXT("EmissiveColor"), TEXT("Emissive"), TEXT("EmissiveColour"),
+        TEXT("GlowColor"), TEXT("GlowColour")
+    };
+    for (const FName Parameter : ColorParameters)
+        Dynamic->SetVectorParameterValue(Parameter, Color);
+
+    const float Strength = bEnabled ? 1.0f : 0.0f;
+    static const FName StrengthParameters[] = {
+        TEXT("EmissiveStrength"), TEXT("EmissiveIntensity"),
+        TEXT("GlowStrength"), TEXT("GlowIntensity"), TEXT("Intensity")
+    };
+    for (const FName Parameter : StrengthParameters)
+        Dynamic->SetScalarParameterValue(Parameter, Strength);
 }
 
 void ATMOPConfiguredVehicle::UpdateWheelAnimation(const float DeltaSeconds)
@@ -316,12 +461,20 @@ void ATMOPConfiguredVehicle::UpdateWheelAnimation(const float DeltaSeconds)
     const UTMOPTrafficVehicleMovementComponent* Movement =
         FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
     if (!IsValid(Movement)) return;
+
+    DisplayedWheelSteeringDegrees = FMath::FInterpTo(
+        DisplayedWheelSteeringDegrees,
+        Movement->VisualSteeringAngleDegrees,
+        DeltaSeconds,
+        8.0f);
     const float Radians = Movement->CurrentSpeedCmPerSecond * DeltaSeconds /
         Model->Wheels.WheelRadiusCm;
     AccumulatedWheelRollDegrees = FMath::Fmod(
         AccumulatedWheelRollDegrees + FMath::RadiansToDegrees(Radians), 360.0f);
     const FQuat Roll(Model->Wheels.RotationAxis.GetSafeNormal(),
         FMath::DegreesToRadians(AccumulatedWheelRollDegrees));
+    const FQuat Steering(FVector::UpVector,
+        FMath::DegreesToRadians(DisplayedWheelSteeringDegrees));
     UStaticMeshComponent* Wheels[] = { WheelFrontLeft, WheelFrontRight, WheelRearLeft, WheelRearRight };
     const FTransform Bases[] = { Model->Wheels.FrontLeft, Model->Wheels.FrontRight,
         Model->Wheels.RearLeft, Model->Wheels.RearRight };
@@ -330,7 +483,10 @@ void ATMOPConfiguredVehicle::UpdateWheelAnimation(const float DeltaSeconds)
         if (!IsValid(Wheels[Index]))
             continue;
         FTransform Animated = Bases[Index];
-        Animated.SetRotation(Roll * Bases[Index].GetRotation());
+        const FQuat AnimatedRotation = Roll * Bases[Index].GetRotation();
+        Animated.SetRotation(Index < 2
+            ? Steering * AnimatedRotation
+            : AnimatedRotation);
         Wheels[Index]->SetRelativeTransform(Animated);
     }
 }

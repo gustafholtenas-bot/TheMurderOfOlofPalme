@@ -20,6 +20,21 @@ enum class ETMOPVehicleCategory : uint8
 };
 
 UENUM(BlueprintType)
+enum class ETMOPVehicleRegistrationStatus : uint8
+{
+    Unknown,
+    Known
+};
+
+UENUM(BlueprintType)
+enum class ETMOPVehicleRegistrationOrigin : uint8
+{
+    Unknown,
+    Swedish,
+    Foreign
+};
+
+UENUM(BlueprintType)
 enum class ETMOPVehicleGlassType : uint8
 {
     Standard,

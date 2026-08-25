@@ -1,11 +1,18 @@
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 
 #include "Engine/GameInstance.h"
+#include "Engine/DamageEvents.h"
 #include "Engine/World.h"
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Animation/TMOPAnimationStateComponent.h"
+#include "Animation/TMOPAnimationTypes.h"
+#include "Audio/TMOPVehicleAudioComponent.h"
 #include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficVehicleSubsystem.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/DamageType.h"
+#include "GameFramework/Pawn.h"
 
 UTMOPTrafficVehicleMovementComponent::UTMOPTrafficVehicleMovementComponent()
 {
@@ -36,6 +43,7 @@ void UTMOPTrafficVehicleMovementComponent::EndPlay(const EEndPlayReason::Type En
 bool UTMOPTrafficVehicleMovementComponent::InitializeOnLane(const FName LaneId,
     const float StartDistance)
 {
+    ClearFinalApproach();
     UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     UTMOPTrafficNetworkSubsystem* Network = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
@@ -79,8 +87,27 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if (!bDrivingEnabled || DeltaTime <= 0.0f) return;
+
+    if (bFinalApproachInProgress)
+    {
+        UpdateFinalApproach(DeltaTime);
+        return;
+    }
+
     UTMOPTrafficLaneComponent* Lane = GetCurrentLane();
     if (!IsValid(Lane)) { TrafficState = ETMOPTrafficVehicleState::InvalidLane; return; }
+
+    if (bFleeingVehicle)
+        UpdateFleeingVehicleImpacts(DeltaTime);
+
+    if (bHasFinalApproach && CurrentLaneId == FinalApproachLaneId &&
+        DistanceAlongLane >= FinalApproachLaneDistanceCm - 1.0f)
+    {
+        DistanceAlongLane = FinalApproachLaneDistanceCm;
+        BeginFinalApproach(Lane);
+        UpdateFinalApproach(DeltaTime);
+        return;
+    }
 
     UpdateObstacleBypass(DeltaTime);
 
@@ -106,6 +133,16 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
     const float ActiveStopDistance = GetNearestActiveStopDistance();
     const float PreviousDistanceAlongLane = DistanceAlongLane;
     DistanceAlongLane += CurrentSpeedCmPerSecond * DeltaTime;
+
+    if (bHasFinalApproach && CurrentLaneId == FinalApproachLaneId &&
+        PreviousDistanceAlongLane <= FinalApproachLaneDistanceCm &&
+        DistanceAlongLane >= FinalApproachLaneDistanceCm)
+    {
+        DistanceAlongLane = FinalApproachLaneDistanceCm;
+        BeginFinalApproach(Lane);
+        UpdateFinalApproach(DeltaTime);
+        return;
+    }
 
     if (ActiveStopDistance >= 0.0f &&
         PreviousDistanceAlongLane <= ActiveStopDistance &&
@@ -165,6 +202,7 @@ void UTMOPTrafficVehicleMovementComponent::UpdateObstacleBypass(const float Delt
     {
         PersistentBlockingActor.Reset();
         PersistentBlockSeconds = 0.0f;
+        bHornPlayedForCurrentBlock = false;
         return;
     }
 
@@ -172,10 +210,97 @@ void UTMOPTrafficVehicleMovementComponent::UpdateObstacleBypass(const float Delt
     {
         PersistentBlockingActor = BlockingActor;
         PersistentBlockSeconds = 0.0f;
+        bHornPlayedForCurrentBlock = false;
     }
     PersistentBlockSeconds += DeltaTime;
+    TryAutomaticHorn(BlockingActor);
     if (PersistentBlockSeconds >= ObstacleBypassAfterSeconds)
         BeginObstacleBypass(BlockingActor);
+}
+
+void UTMOPTrafficVehicleMovementComponent::TryAutomaticHorn(
+    AActor* BlockingActor)
+{
+    if (bFleeingVehicle || !bHonkAtBlockingPawns ||
+        bHornPlayedForCurrentBlock ||
+        PersistentBlockSeconds < HornAfterBlockedSeconds ||
+        !IsValid(Cast<APawn>(BlockingActor)) || GetWorld() == nullptr)
+        return;
+
+    const float Now = GetWorld()->GetTimeSeconds();
+    if (Now - LastHornWorldSeconds < HornCooldownSeconds) return;
+    if (UTMOPVehicleAudioComponent* Audio =
+        GetOwner() != nullptr
+        ? GetOwner()->FindComponentByClass<UTMOPVehicleAudioComponent>()
+        : nullptr)
+    {
+        Audio->PlayHorn();
+        LastHornWorldSeconds = Now;
+        bHornPlayedForCurrentBlock = true;
+    }
+}
+
+void UTMOPTrafficVehicleMovementComponent::UpdateFleeingVehicleImpacts(
+    const float DeltaTime)
+{
+    UWorld* World = GetWorld();
+    AActor* OwnerActor = GetOwner();
+    if (!IsValid(World) || !IsValid(OwnerActor) ||
+        CurrentSpeedCmPerSecond <= 5.0f)
+        return;
+
+    const FVector Forward = OwnerActor->GetActorForwardVector();
+    const FVector Up = OwnerActor->GetActorUpVector();
+    const FVector Start = OwnerActor->GetActorLocation() +
+        Forward * (VehicleLengthCm * 0.45f) +
+        Up * ObstacleSensorHalfHeightCm;
+    const FVector End = Start + Forward * FMath::Max(
+        100.0f, CurrentSpeedCmPerSecond * DeltaTime + 75.0f);
+    const FCollisionShape Shape = FCollisionShape::MakeBox(FVector(
+        35.0f,
+        FMath::Max(60.0f, ObstacleSensorHalfWidthCm),
+        FMath::Max(70.0f, ObstacleSensorHalfHeightCm)));
+    FCollisionObjectQueryParams ObjectTypes;
+    ObjectTypes.AddObjectTypesToQuery(ECC_Pawn);
+    FCollisionQueryParams Query(
+        SCENE_QUERY_STAT(TMOPFleeingVehicleImpact), false, OwnerActor);
+    TArray<AActor*> AttachedActors;
+    OwnerActor->GetAttachedActors(AttachedActors);
+    Query.AddIgnoredActors(AttachedActors);
+
+    TArray<FHitResult> Hits;
+    if (!World->SweepMultiByObjectType(
+        Hits, Start, End, OwnerActor->GetActorQuat(),
+        ObjectTypes, Shape, Query))
+        return;
+
+    const float Now = World->GetTimeSeconds();
+    for (const FHitResult& Hit : Hits)
+    {
+        ACharacter* Character = Cast<ACharacter>(Hit.GetActor());
+        if (!IsValid(Character) || Character->GetAttachParentActor() == OwnerActor)
+            continue;
+        if (LastFleeingImpactActor.Get() == Character &&
+            Now - LastFleeingImpactWorldSeconds < 1.0f)
+            continue;
+
+        LastFleeingImpactActor = Character;
+        LastFleeingImpactWorldSeconds = Now;
+        FDamageEvent DamageEvent(UDamageType::StaticClass());
+        Character->TakeDamage(FleeingImpactDamage, DamageEvent,
+            OwnerActor->GetInstigatorController(), OwnerActor);
+        Character->LaunchCharacter(
+            Forward * FleeingImpactLaunchStrength +
+                FVector::UpVector * FleeingImpactUpwardStrength,
+            true, true);
+        if (UTMOPAnimationStateComponent* Animation =
+            Character->FindComponentByClass<UTMOPAnimationStateComponent>())
+            Animation->TriggerReaction(
+                ETMOPAnimReaction::FallingFromHit, 1.25f);
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP fleeing vehicle: '%s' struck '%s' instead of stopping."),
+            *OwnerActor->GetName(), *Character->GetName());
+    }
 }
 
 void UTMOPTrafficVehicleMovementComponent::BeginObstacleBypass(AActor* BlockingActor)
@@ -286,6 +411,17 @@ float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLan
         }
         if (Remaining <= 5.0f) Target = 0.0f;
     }
+    if (bHasFinalApproach && !bFinalApproachInProgress &&
+        CurrentLaneId == FinalApproachLaneId)
+    {
+        const float Remaining = FMath::Max(0.0f,
+            FinalApproachLaneDistanceCm - DistanceAlongLane);
+        const float SafeSpeed = FMath::Sqrt(2.0f *
+            FMath::Max(1.0f, ServiceBrakeCmPerSecondSquared) * Remaining);
+        Target = FMath::Min(Target, SafeSpeed);
+        if (SafeSpeed < CurrentSpeedCmPerSecond)
+            TrafficState = ETMOPTrafficVehicleState::BrakingForConstraint;
+    }
     if (ChooseNextLaneId(Lane).IsNone())
     {
         const float Remaining = Lane->GetSplineLength() - DistanceAlongLane;
@@ -339,10 +475,44 @@ FName UTMOPTrafficVehicleMovementComponent::ChooseNextLaneId(
 void UTMOPTrafficVehicleMovementComponent::ApplyVehicleTransform(UTMOPTrafficLaneComponent* Lane)
 {
     if (!IsValid(Lane) || GetOwner() == nullptr) return;
+    UpdateVisualSteeringForLane(Lane);
     const FTransform LaneTransform = Lane->GetLaneTransformAtDistance(DistanceAlongLane);
     const FVector RuntimeOffset = VehicleLocalOffset + FVector(0.0f, AdditionalLateralOffsetCm, 0.0f);
     const FTransform Offset(VehicleRotationOffset, RuntimeOffset, FVector::OneVector);
     GetOwner()->SetActorTransform(Offset * LaneTransform, false, nullptr, ETeleportType::TeleportPhysics);
+}
+
+void UTMOPTrafficVehicleMovementComponent::UpdateVisualSteeringForLane(
+    UTMOPTrafficLaneComponent* Lane)
+{
+    if (!IsValid(Lane))
+    {
+        VisualSteeringAngleDegrees = 0.0f;
+        return;
+    }
+
+    const float Remaining = Lane->GetSplineLength() - DistanceAlongLane;
+    const float LookAheadCm = FMath::Min(300.0f, Remaining);
+    if (LookAheadCm < 10.0f)
+    {
+        VisualSteeringAngleDegrees = 0.0f;
+        return;
+    }
+
+    const float CurrentYaw = Lane->GetLaneTransformAtDistance(
+        DistanceAlongLane).Rotator().Yaw;
+    const float AheadYaw = Lane->GetLaneTransformAtDistance(
+        DistanceAlongLane + LookAheadCm).Rotator().Yaw;
+    const float YawDeltaRadians = FMath::DegreesToRadians(
+        FMath::FindDeltaAngleDegrees(CurrentYaw, AheadYaw));
+    const float ApproximateWheelbaseCm = FMath::Max(100.0f,
+        VehicleLengthCm * 0.6f);
+    const float SteeringDegrees = FMath::RadiansToDegrees(FMath::Atan(
+        ApproximateWheelbaseCm * YawDeltaRadians / LookAheadCm));
+    VisualSteeringAngleDegrees = FMath::Clamp(
+        SteeringDegrees,
+        -MaximumVisualSteeringDegrees,
+        MaximumVisualSteeringDegrees);
 }
 
 bool UTMOPTrafficVehicleMovementComponent::RequestLaneChange(const FName RequestedLaneId)
@@ -451,7 +621,118 @@ void UTMOPTrafficVehicleMovementComponent::StopDriving()
     EndObstacleBypass();
     bDrivingEnabled = false;
     CurrentSpeedCmPerSecond = 0.0f;
+    VisualSteeringAngleDegrees = 0.0f;
     TrafficState = ETMOPTrafficVehicleState::Stopped;
+}
+
+void UTMOPTrafficVehicleMovementComponent::ConfigureFinalApproach(
+    const FName FinalLaneId,
+    const float FinalLaneDistanceCm,
+    const FTransform& TargetTransform)
+{
+    UGameInstance* GameInstance = GetWorld() != nullptr
+        ? GetWorld()->GetGameInstance() : nullptr;
+    UTMOPTrafficNetworkSubsystem* Network = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
+    UTMOPTrafficLaneComponent* Lane = Network != nullptr
+        ? Network->FindLane(FinalLaneId) : nullptr;
+    if (FinalLaneId.IsNone() || !IsValid(Lane))
+    {
+        ClearFinalApproach();
+        return;
+    }
+
+    bHasFinalApproach = true;
+    bFinalApproachInProgress = false;
+    FinalApproachLaneId = FinalLaneId;
+    FinalApproachLaneDistanceCm = FMath::Clamp(
+        FinalLaneDistanceCm, 0.0f, Lane->GetSplineLength());
+    FinalApproachTargetTransform = TargetTransform;
+    FinalApproachElapsedSeconds = 0.0f;
+}
+
+bool UTMOPTrafficVehicleMovementComponent::UpdateFinalApproachTarget(
+    const FTransform& TargetTransform)
+{
+    if (!bHasFinalApproach) return false;
+    FinalApproachTargetTransform = TargetTransform;
+    return true;
+}
+
+void UTMOPTrafficVehicleMovementComponent::BeginFinalApproach(
+    UTMOPTrafficLaneComponent* Lane)
+{
+    if (!bHasFinalApproach || bFinalApproachInProgress ||
+        !IsValid(Lane) || GetOwner() == nullptr)
+        return;
+
+    ApplyVehicleTransform(Lane);
+    FinalApproachStartTransform = GetOwner()->GetActorTransform();
+    const FVector LocalTarget = FinalApproachStartTransform.InverseTransformPosition(
+        FinalApproachTargetTransform.GetLocation());
+    VisualSteeringAngleDegrees = FMath::Clamp(
+        FMath::RadiansToDegrees(FMath::Atan2(LocalTarget.Y, LocalTarget.X)),
+        -MaximumVisualSteeringDegrees,
+        MaximumVisualSteeringDegrees);
+    const float Distance = FVector::Distance(
+        FinalApproachStartTransform.GetLocation(),
+        FinalApproachTargetTransform.GetLocation());
+    FinalApproachDurationSeconds = FMath::Clamp(
+        Distance / FMath::Max(50.0f, FinalApproachSpeedCmPerSecond),
+        MinimumFinalApproachDurationSeconds,
+        MaximumFinalApproachDurationSeconds);
+    FinalApproachElapsedSeconds = 0.0f;
+    CurrentSpeedCmPerSecond = Distance /
+        FMath::Max(0.1f, FinalApproachDurationSeconds);
+    bFinalApproachInProgress = true;
+    TrafficState = ETMOPTrafficVehicleState::FinalApproach;
+}
+
+void UTMOPTrafficVehicleMovementComponent::UpdateFinalApproach(
+    const float DeltaTime)
+{
+    AActor* OwnerActor = GetOwner();
+    if (!bFinalApproachInProgress || !IsValid(OwnerActor)) return;
+
+    FinalApproachElapsedSeconds += DeltaTime;
+    const float LinearAlpha = FMath::Clamp(
+        FinalApproachElapsedSeconds /
+            FMath::Max(0.1f, FinalApproachDurationSeconds),
+        0.0f, 1.0f);
+    const float SmoothAlpha = FMath::SmoothStep(0.0f, 1.0f, LinearAlpha);
+    FTransform BlendedTransform;
+    BlendedTransform.Blend(
+        FinalApproachStartTransform,
+        FinalApproachTargetTransform,
+        SmoothAlpha);
+    OwnerActor->SetActorTransform(
+        BlendedTransform, false, nullptr, ETeleportType::TeleportPhysics);
+    TrafficState = ETMOPTrafficVehicleState::FinalApproach;
+
+    if (LinearAlpha >= 1.0f)
+    {
+        OwnerActor->SetActorTransform(
+            FinalApproachTargetTransform,
+            false,
+            nullptr,
+            ETeleportType::TeleportPhysics);
+        bFinalApproachInProgress = false;
+        bHasFinalApproach = false;
+        bDrivingEnabled = false;
+        CurrentSpeedCmPerSecond = 0.0f;
+        VisualSteeringAngleDegrees = 0.0f;
+        TrafficState = ETMOPTrafficVehicleState::RouteComplete;
+    }
+}
+
+void UTMOPTrafficVehicleMovementComponent::ClearFinalApproach()
+{
+    bHasFinalApproach = false;
+    bFinalApproachInProgress = false;
+    FinalApproachLaneId = NAME_None;
+    FinalApproachLaneDistanceCm = 0.0f;
+    FinalApproachElapsedSeconds = 0.0f;
+    FinalApproachDurationSeconds = 1.0f;
 }
 
 bool UTMOPTrafficVehicleMovementComponent::RestoreBakedTrafficState(
@@ -541,7 +822,8 @@ bool UTMOPTrafficVehicleMovementComponent::GetPhysicalObstacleDiagnostics(
     OutBlockingActor = nullptr;
     UWorld* World = GetWorld();
     const AActor* OwnerActor = GetOwner();
-    if (!bDetectPhysicalObstacles || World == nullptr || OwnerActor == nullptr)
+    if (bFleeingVehicle || !bDetectPhysicalObstacles ||
+        World == nullptr || OwnerActor == nullptr)
         return false;
 
     const FVector Forward = OwnerActor->GetActorForwardVector();

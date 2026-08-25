@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Vehicles/TMOPVehicleCatalogTypes.h"
 #include "TMOPVehicleBase.generated.h"
 
 class ATMOPHistoricalAgent;
@@ -36,6 +37,20 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Identity")
     FName VehicleCategoryId = NAME_None;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
+        Category="TMOP|Vehicle|Registration")
+    ETMOPVehicleRegistrationStatus RegistrationStatus =
+        ETMOPVehicleRegistrationStatus::Unknown;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
+        Category="TMOP|Vehicle|Registration")
+    ETMOPVehicleRegistrationOrigin RegistrationOrigin =
+        ETMOPVehicleRegistrationOrigin::Unknown;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
+        Category="TMOP|Vehicle|Registration")
+    FString RegistrationNumber;
 
     /** World-space name shown above the vehicle. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Debug")
@@ -90,4 +105,3 @@ private:
     FColor ResolveNameLabelColor() const;
     bool ShouldDisplayNameLabel() const;
 };
-

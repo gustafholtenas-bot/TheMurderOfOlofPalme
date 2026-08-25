@@ -20,7 +20,9 @@ enum class ETMOPHistoricalVehicleAction : uint8
     Park,
     EnterTrafficRoute,
     ExitTrafficRoute,
-    Custom
+    Custom,
+    EmergencySirenOn,
+    EmergencySirenOff
 };
 
 UENUM(BlueprintType)
@@ -109,6 +111,34 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Identity")
     ETMOPVehicleCategory VehicleCategory = ETMOPVehicleCategory::PassengerCar;
+
+    /**
+     * A fleeing vehicle never brakes or honks for pedestrians. It keeps its
+     * lane speed and applies a knockdown/damage impact when it hits a pawn.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Driving")
+    bool bFleeingVehicle = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Registration")
+    ETMOPVehicleRegistrationStatus RegistrationStatus =
+        ETMOPVehicleRegistrationStatus::Unknown;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Registration")
+    ETMOPVehicleRegistrationOrigin RegistrationOrigin =
+        ETMOPVehicleRegistrationOrigin::Unknown;
+
+    /** Swedish registrations use normalized ABC-123 formatting. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Registration",
+        meta=(EditCondition="RegistrationStatus==ETMOPVehicleRegistrationStatus::Known"))
+    FString RegistrationNumber;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Registration")
+    FString RegistrationNotes;
 
     /** Optional known model. Leave empty when the source only says "car". */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Model")

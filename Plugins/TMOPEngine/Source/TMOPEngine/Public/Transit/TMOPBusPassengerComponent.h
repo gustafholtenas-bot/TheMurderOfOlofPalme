@@ -75,6 +75,18 @@ public:
         meta=(ClampMin="25.0"))
     float PlayerSeatInteractionRadiusCm = 175.0f;
 
+    /** Expected passenger-seat count for the configured bus Blueprint. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Passengers|Seats",
+        meta=(ClampMin="1"))
+    int32 ExpectedPassengerSeatCount = 18;
+
+    /** Counts discovered after the bus seat layout has been validated at runtime. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Bus Passengers|Seats")
+    int32 RuntimePassengerSeatCount = 0;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Bus Passengers|Seats")
+    int32 RuntimeDriverSeatCount = 0;
+
     UFUNCTION(BlueprintPure, Category="TMOP|Bus Passengers")
     bool IsCharacterAboard(const ACharacter* Character) const;
 
@@ -117,6 +129,7 @@ public:
 
 private:
     void CreatePassengerVolume();
+    void ValidateAndRepairSeats();
     void DiscoverNewPassengers();
     void CarryRegisteredPassengers(const FTransform& PreviousBusTransform,
         const FTransform& CurrentBusTransform);

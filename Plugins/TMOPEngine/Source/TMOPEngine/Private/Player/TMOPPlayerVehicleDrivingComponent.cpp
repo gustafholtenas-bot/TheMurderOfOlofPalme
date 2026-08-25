@@ -90,6 +90,15 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
 
     VisualSteeringAngleDegrees = FMath::FInterpTo(VisualSteeringAngleDegrees,
         SteeringInput * MaximumSteeringDegrees, DeltaTime, SteeringResponse);
+    if (SuspendedTrafficMovement.IsValid())
+    {
+        // The configured vehicle reads its wheel visuals from the shared
+        // traffic component even while player driving has suspended its tick.
+        SuspendedTrafficMovement->CurrentSpeedCmPerSecond =
+            CurrentSpeedCmPerSecond;
+        SuspendedTrafficMovement->VisualSteeringAngleDegrees =
+            VisualSteeringAngleDegrees;
+    }
     const float SpeedAlpha = FMath::Clamp(FMath::Abs(CurrentSpeedCmPerSecond) /
         FMath::Max(1.0f, MaxForward), 0.0f, 1.0f);
     const float EffectiveSteering = FMath::DegreesToRadians(VisualSteeringAngleDegrees) *
@@ -257,4 +266,3 @@ bool UTMOPPlayerVehicleDrivingComponent::IsDriving() const
 {
     return IsValid(DrivenVehicle.Get());
 }
-

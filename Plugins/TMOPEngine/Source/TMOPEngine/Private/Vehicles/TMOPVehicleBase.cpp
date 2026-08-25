@@ -69,16 +69,30 @@ void ATMOPVehicleBase::RefreshNameLabel()
 {
     if (!IsValid(NameLabel))
         return;
-    const FText LabelText = DisplayName.IsEmpty()
-        ? FText::FromName(VehicleId) : DisplayName;
-    NameLabel->SetText(LabelText);
+    FString Label = DisplayName.IsEmpty()
+        ? VehicleId.ToString() : DisplayName.ToString();
+    if (RegistrationStatus == ETMOPVehicleRegistrationStatus::Known &&
+        !RegistrationNumber.IsEmpty())
+    {
+        FString CompactLabel = Label.ToUpper();
+        CompactLabel.ReplaceInline(TEXT(" "), TEXT(""));
+        CompactLabel.ReplaceInline(TEXT("-"), TEXT(""));
+        FString CompactRegistration = RegistrationNumber.ToUpper();
+        CompactRegistration.ReplaceInline(TEXT(" "), TEXT(""));
+        CompactRegistration.ReplaceInline(TEXT("-"), TEXT(""));
+        if (!CompactLabel.Contains(CompactRegistration))
+            Label += FString::Printf(TEXT(" — %s"), *RegistrationNumber);
+    }
+    NameLabel->SetText(FText::FromString(Label));
     NameLabel->SetRelativeLocation(
         FVector(0.0f, 0.0f, NameLabelHeightCm));
     NameLabel->SetWorldSize(NameLabelWorldSize);
     NameLabel->SetTextRenderColor(NameLabelColor);
     const bool bDisplayLabel = ShouldDisplayNameLabel();
     NameLabel->SetVisibility(bDisplayLabel, true);
-    SetActorTickEnabled(bDisplayLabel);
+    // Vehicle subclasses use Actor Tick for wheels and lights even when the
+    // optional debug label is hidden.
+    SetActorTickEnabled(true);
 }
 
 bool ATMOPVehicleBase::ShouldDisplayNameLabel() const

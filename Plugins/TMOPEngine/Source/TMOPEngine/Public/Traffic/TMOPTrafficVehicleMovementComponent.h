@@ -17,7 +17,8 @@ enum class ETMOPTrafficVehicleState : uint8
     BrakingForConstraint,
     Stopped,
     RouteComplete,
-    InvalidLane
+    InvalidLane,
+    FinalApproach
 };
 
 /** Deterministic lane-following movement shared by cars and buses. */
@@ -50,6 +51,14 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Traffic|Runtime")
     float CurrentSpeedCmPerSecond = 0.0f;
 
+    /** Visual front-wheel angle calculated from the current lane curvature. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Traffic|Runtime")
+    float VisualSteeringAngleDegrees = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Wheels",
+        meta=(ClampMin="1.0", ClampMax="60.0"))
+    float MaximumVisualSteeringDegrees = 35.0f;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Traffic|Runtime")
     ETMOPTrafficVehicleState TrafficState = ETMOPTrafficVehicleState::Uninitialized;
 
@@ -79,6 +88,33 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection")
     bool bDetectPhysicalObstacles = true;
+
+    /** Ignore pedestrian obstacles and run them down instead of stopping. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Fleeing")
+    bool bFleeingVehicle = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Horn")
+    bool bHonkAtBlockingPawns = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Horn",
+        meta=(ClampMin="0.1"))
+    float HornAfterBlockedSeconds = 1.75f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Horn",
+        meta=(ClampMin="0.1"))
+    float HornCooldownSeconds = 8.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Fleeing",
+        meta=(ClampMin="0.0"))
+    float FleeingImpactDamage = 50.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Fleeing",
+        meta=(ClampMin="0.0"))
+    float FleeingImpactLaunchStrength = 900.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Fleeing",
+        meta=(ClampMin="0.0"))
+    float FleeingImpactUpwardStrength = 350.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection",
         meta=(ClampMin="100.0"))
@@ -164,6 +200,38 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic")
     void StopDriving();
 
+    /**
+     * Finish the final lane at the point nearest a destination anchor, then
+     * blend the remaining short parking manoeuvre to the anchor transform.
+     */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|Route")
+    void ConfigureFinalApproach(
+        FName FinalLaneId,
+        float FinalLaneDistanceCm,
+        const FTransform& TargetTransform);
+
+    /**
+     * Updates a pending parking target without interrupting lane movement.
+     * Returns false when this vehicle has no active final approach.
+     */
+    bool UpdateFinalApproachTarget(const FTransform& TargetTransform);
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Traffic|Route")
+    bool HasFinalApproach() const { return bHasFinalApproach; }
+
+    /** Approximate speed of the short off-lane parking manoeuvre. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Route",
+        meta=(ClampMin="50.0"))
+    float FinalApproachSpeedCmPerSecond = 250.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Route",
+        meta=(ClampMin="0.1"))
+    float MinimumFinalApproachDurationSeconds = 0.6f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Route",
+        meta=(ClampMin="0.1"))
+    float MaximumFinalApproachDurationSeconds = 3.0f;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic|Placement")
     void SetAdditionalLateralOffset(float OffsetCm);
 
@@ -231,6 +299,12 @@ private:
     void UpdateObstacleBypass(float DeltaTime);
     void BeginObstacleBypass(AActor* BlockingActor);
     void EndObstacleBypass();
+    void BeginFinalApproach(UTMOPTrafficLaneComponent* Lane);
+    void UpdateFinalApproach(float DeltaTime);
+    void ClearFinalApproach();
+    void UpdateVisualSteeringForLane(UTMOPTrafficLaneComponent* Lane);
+    void UpdateFleeingVehicleImpacts(float DeltaTime);
+    void TryAutomaticHorn(AActor* BlockingActor);
 
     int32 PlannedLaneIndex = INDEX_NONE;
     TMap<FName, float> StopConstraints;
@@ -242,8 +316,20 @@ private:
     float LaneChangeCooldownSeconds = 0.0f;
     TWeakObjectPtr<AActor> PersistentBlockingActor;
     float PersistentBlockSeconds = 0.0f;
+    float LastHornWorldSeconds = -1000.0f;
+    bool bHornPlayedForCurrentBlock = false;
+    TWeakObjectPtr<AActor> LastFleeingImpactActor;
+    float LastFleeingImpactWorldSeconds = -1000.0f;
     float ObstacleBypassSecondsRemaining = 0.0f;
     float ObstacleBypassBaseLateralOffsetCm = 0.0f;
     bool bObstacleBypassActive = false;
     bool bCollisionWasEnabledBeforeBypass = true;
+    bool bHasFinalApproach = false;
+    bool bFinalApproachInProgress = false;
+    FName FinalApproachLaneId = NAME_None;
+    float FinalApproachLaneDistanceCm = 0.0f;
+    FTransform FinalApproachStartTransform = FTransform::Identity;
+    FTransform FinalApproachTargetTransform = FTransform::Identity;
+    float FinalApproachElapsedSeconds = 0.0f;
+    float FinalApproachDurationSeconds = 1.0f;
 };

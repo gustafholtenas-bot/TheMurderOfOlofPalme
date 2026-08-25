@@ -13,6 +13,7 @@ class UTMOPVehicleModelData;
 class UTMOPVehicleSeatComponent;
 class UTMOPVehicleDoorComponent;
 class UTMOPTrafficVehicleMovementComponent;
+class UMaterialInstanceDynamic;
 
 /** Select one vehicle model; all visual parts are assembled automatically. */
 UCLASS(Blueprintable)
@@ -119,6 +120,15 @@ private:
     void ApplyWheel(UStaticMeshComponent* Component, UStaticMesh* WheelMesh,
         const FTransform& LocalTransform);
     void UpdateWheelAnimation(float DeltaSeconds);
+    void InitializeVehicleLightMaterials();
+    void UpdateVehicleLights(bool bForce = false);
+    void ApplyLightMaterialState(int32 MaterialIndex, bool bEnabled);
     float AccumulatedWheelRollDegrees = 0.0f;
+    float DisplayedWheelSteeringDegrees = 0.0f;
+    TMap<int32, TWeakObjectPtr<UMaterialInstanceDynamic>> VehicleLightMaterials;
+    TMap<int32, FLinearColor> VehicleLightColors;
+    TSet<int32> EmergencyBlueMaterialIndices;
+    bool bLastDrivingLightsEnabled = false;
+    bool bLastEmergencyBlueEnabled = false;
+    bool bVehicleLightsInitialized = false;
 };
-

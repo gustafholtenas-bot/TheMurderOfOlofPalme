@@ -31,6 +31,8 @@
 #include "UI/TMOPInteractionPromptWidget.h"
 #include "UI/TMOPDialogWidget.h"
 #include "UI/TMOPNewspaperReaderWidget.h"
+#include "UI/TMOPMapComponent.h"
+#include "UI/TMOPMapWidget.h"
 #include "Blueprint/UserWidget.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
@@ -68,6 +70,7 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     VehicleSession = CreateDefaultSubobject<UTMOPPlayerVehicleSessionComponent>(TEXT("VehicleSession"));
     FootstepAudio = CreateDefaultSubobject<UTMOPAgentAudioComponent>(TEXT("FootstepAudio"));
     MovementAudio = CreateDefaultSubobject<UTMOPPlayerMovementAudioComponent>(TEXT("MovementAudio"));
+    MapComponent = CreateDefaultSubobject<UTMOPMapComponent>(TEXT("MapComponent"));
     WorldItemClass = ATMOPWorldItem::StaticClass();
 }
 
@@ -137,6 +140,31 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
             PauseMenuWidget->InitializePauseMenu(PlayerController, this);
             PauseMenuWidget->AddToViewport(100);
             PauseMenuWidget->SetMenuVisible(false);
+        }
+    }
+
+    if (bCreateMapWidgets && !IsValid(WorldMapWidget.Get()))
+    {
+        TSubclassOf<UTMOPMapWidget> WidgetClass = WorldMapWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPMapWidget::StaticClass();
+        WorldMapWidget = CreateWidget<UTMOPMapWidget>(PlayerController, WidgetClass);
+        if (IsValid(WorldMapWidget.Get()))
+        {
+            WorldMapWidget->InitializeMap(MapComponent, this, false);
+            WorldMapWidget->AddToViewport(95);
+            WorldMapWidget->SetMapVisible(false);
+        }
+    }
+    if (bCreateMapWidgets && !IsValid(MinimapWidget.Get()))
+    {
+        TSubclassOf<UTMOPMapWidget> WidgetClass = MinimapWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPMapWidget::StaticClass();
+        MinimapWidget = CreateWidget<UTMOPMapWidget>(PlayerController, WidgetClass);
+        if (IsValid(MinimapWidget.Get()))
+        {
+            MinimapWidget->InitializeMap(MapComponent, this, true);
+            MinimapWidget->AddToViewport(20);
+            MinimapWidget->SetMapVisible(IsValid(MapComponent) && MapComponent->bShowMinimap);
         }
     }
 
@@ -438,6 +466,11 @@ void ATMOPPlayerCharacter::InputSecondaryActionEnded()
 
 void ATMOPPlayerCharacter::InputCancel()
 {
+    if (bWorldMapOpen)
+    {
+        CloseWorldMap();
+        return;
+    }
     if (bNewspaperOpen)
     {
         CloseNewspaper();
@@ -518,6 +551,7 @@ void ATMOPPlayerCharacter::TogglePauseMenu()
 void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 {
     if (bPauseMenuOpen == bOpen || !IsValid(PauseMenuWidget.Get())) return;
+    if (bOpen && bWorldMapOpen) CloseWorldMap();
     if (bOpen && bNewspaperOpen) CloseNewspaper();
     if (bOpen && bDialogOpen) ClosePersonDialog();
 
@@ -557,11 +591,72 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 void ATMOPPlayerCharacter::HandleItemMenuRequested(
     UTMOPItemDefinition* Item)
 {
+    if (IsValid(Item) && Item->ItemType == ETMOPItemType::Map)
+    {
+        OpenWorldMap();
+        return;
+    }
     if (UTMOPNewspaperItemDefinition* Newspaper =
         Cast<UTMOPNewspaperItemDefinition>(Item))
     {
         OpenNewspaper(Newspaper);
     }
+}
+
+bool ATMOPPlayerCharacter::OpenWorldMap()
+{
+    if (bWorldMapOpen || bPauseMenuOpen || bNewspaperOpen ||
+        !IsValid(WorldMapWidget.Get())) return false;
+    if (bDialogOpen) ClosePersonDialog();
+    if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
+    if (IsValid(MinimapWidget.Get())) MinimapWidget->SetMapVisible(false);
+    WorldMapWidget->ResetViewToPlayer();
+    WorldMapWidget->SetMapVisible(true);
+    bWorldMapOpen = true;
+
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    bClockWasRunningBeforeMap = IsValid(Clock) && Clock->IsClockRunning();
+    if (IsValid(Clock)) Clock->PauseClock();
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->SetPause(true);
+        PC->bShowMouseCursor = true;
+        PC->SetIgnoreMoveInput(true);
+        PC->SetIgnoreLookInput(true);
+        FInputModeGameAndUI Mode;
+        Mode.SetWidgetToFocus(WorldMapWidget->TakeWidget());
+        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+        PC->SetInputMode(Mode);
+    }
+    return true;
+}
+
+void ATMOPPlayerCharacter::CloseWorldMap()
+{
+    if (!bWorldMapOpen) return;
+    bWorldMapOpen = false;
+    if (IsValid(WorldMapWidget.Get())) WorldMapWidget->SetMapVisible(false);
+    if (IsValid(MinimapWidget.Get())) MinimapWidget->SetMapVisible(
+        IsValid(MapComponent.Get()) && MapComponent->bShowMinimap);
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->SetPause(false);
+        PC->bShowMouseCursor = false;
+        PC->SetIgnoreMoveInput(false);
+        PC->SetIgnoreLookInput(false);
+        PC->SetInputMode(FInputModeGameOnly());
+    }
+    if (IsValid(Clock) && bClockWasRunningBeforeMap) Clock->StartClock();
+    bClockWasRunningBeforeMap = false;
+}
+
+void ATMOPPlayerCharacter::ToggleWorldMap()
+{
+    if (bWorldMapOpen) CloseWorldMap();
+    else OpenWorldMap();
 }
 
 bool ATMOPPlayerCharacter::OpenNewspaper(
@@ -638,7 +733,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
                 FMath::Square(DialogMaximumDistanceCm))
             ClosePersonDialog();
     }
-    if (!bNewspaperOpen && bUseDirectSprintKeyFallback)
+    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectSprintKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bSprintHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
@@ -646,7 +741,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             && PC->IsInputKeyDown(ExtraSprintModifierKey);
         SetSprinting(bSprintHeld, bExtraHeld);
     }
-    if (!bNewspaperOpen && bUseDirectQuickInventoryKeyFallback)
+    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectQuickInventoryKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -675,7 +770,17 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             }
         }
     }
-    if (!bNewspaperOpen && bUseDirectDropKeyFallback)
+    {
+        const APlayerController* PC = Cast<APlayerController>(Controller);
+        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(WorldMapFallbackKey);
+        if (bKeyHeld != bMapFallbackHeld)
+        {
+            bMapFallbackHeld = bKeyHeld;
+            if (bKeyHeld && !bPauseMenuOpen && !bNewspaperOpen)
+                ToggleWorldMap();
+        }
+    }
+    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectDropKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(DropItemFallbackKey);
@@ -685,7 +790,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             if (bKeyHeld) DropEquippedItem();
         }
     }
-    if (!bNewspaperOpen && bUseDirectInteractKeyFallback)
+    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectInteractKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(InteractFallbackKey);
@@ -709,7 +814,8 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
 {
     if (!IsValid(InteractionPromptWidget.Get())) return;
     FText Prompt;
-    if (!bPauseMenuOpen && !bDialogOpen && !InventoryInput->bRadialMenuOpen)
+    if (!bPauseMenuOpen && !bWorldMapOpen && !bDialogOpen &&
+        !InventoryInput->bRadialMenuOpen)
     {
         AActor* Target = FindInteractionTarget();
         if (const ATMOPHistoricalAgent* Agent =

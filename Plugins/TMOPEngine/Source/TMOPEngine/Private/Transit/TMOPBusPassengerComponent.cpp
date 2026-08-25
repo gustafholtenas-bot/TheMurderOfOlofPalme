@@ -15,6 +15,23 @@
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "World/TMOPWorldSubsystem.h"
 
+namespace
+{
+int32 GetBusSeatNumber(const UTMOPVehicleSeatComponent* Seat)
+{
+    if (!IsValid(Seat)) return INDEX_NONE;
+    const FString Name = Seat->GetName();
+    if (Name.Equals(TEXT("SeatFrontPassenger"), ESearchCase::IgnoreCase)) return 1;
+    if (Name.Equals(TEXT("SeatRearLeft"), ESearchCase::IgnoreCase)) return 2;
+    if (Name.Equals(TEXT("SeatRearCenter"), ESearchCase::IgnoreCase)) return 3;
+    if (Name.Equals(TEXT("SeatRearRight"), ESearchCase::IgnoreCase)) return 4;
+
+    int32 FirstDigit = Name.Len();
+    while (FirstDigit > 0 && FChar::IsDigit(Name[FirstDigit - 1])) --FirstDigit;
+    return FirstDigit < Name.Len() ? FCString::Atoi(*Name.Mid(FirstDigit)) : INDEX_NONE;
+}
+}
+
 UTMOPBusPassengerComponent::UTMOPBusPassengerComponent()
 {
     PrimaryComponentTick.bCanEverTick = true;
@@ -29,12 +46,111 @@ void UTMOPBusPassengerComponent::BeginPlay()
     if (UTMOPBusServiceComponent* BusService = GetOwner() != nullptr
         ? GetOwner()->FindComponentByClass<UTMOPBusServiceComponent>() : nullptr)
         AddTickPrerequisiteComponent(BusService);
+    ValidateAndRepairSeats();
     CreatePassengerVolume();
     PreviousOwnerTransform = GetOwner() != nullptr
         ? GetOwner()->GetActorTransform() : FTransform::Identity;
     bPreviousTransformInitialized = GetOwner() != nullptr;
     SpawnDriver();
     if (IsValid(PassengerManifest)) InitializePassengerManifest(PassengerManifest, ServiceRunId);
+}
+
+void UTMOPBusPassengerComponent::ValidateAndRepairSeats()
+{
+    RuntimePassengerSeatCount = 0;
+    RuntimeDriverSeatCount = 0;
+    if (GetOwner() == nullptr) return;
+
+    TArray<UTMOPVehicleSeatComponent*> Seats;
+    GetOwner()->GetComponents<UTMOPVehicleSeatComponent>(Seats);
+    Seats.RemoveAll([](const UTMOPVehicleSeatComponent* Seat) { return !IsValid(Seat); });
+    if (Seats.IsEmpty())
+    {
+        UE_LOG(LogTemp, Error, TEXT("TMOP bus '%s': no vehicle seat components exist."),
+            *GetOwner()->GetName());
+        return;
+    }
+
+    UTMOPVehicleSeatComponent* DriverSeat = nullptr;
+    for (UTMOPVehicleSeatComponent* Seat : Seats)
+        if (Seat->GetFName() == TEXT("SeatDriver"))
+        {
+            DriverSeat = Seat;
+            break;
+        }
+    if (!IsValid(DriverSeat))
+        for (UTMOPVehicleSeatComponent* Seat : Seats)
+            if (Seat->SeatRole == ETMOPVehicleSeatRole::Driver)
+            {
+                DriverSeat = Seat;
+                break;
+            }
+
+    int32 Repairs = 0;
+    if (!IsValid(DriverSeat))
+    {
+        DriverSeat = Seats[0];
+        ++Repairs;
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP bus '%s': no driver seat was marked; using '%s'."),
+            *GetOwner()->GetName(), *DriverSeat->GetName());
+    }
+    for (UTMOPVehicleSeatComponent* Seat : Seats)
+    {
+        const ETMOPVehicleSeatRole DesiredRole = Seat == DriverSeat
+            ? ETMOPVehicleSeatRole::Driver
+            : (Seat->SeatRole == ETMOPVehicleSeatRole::Driver
+                ? ETMOPVehicleSeatRole::OtherPassenger : Seat->SeatRole);
+        if (Seat->SeatRole != DesiredRole)
+        {
+            Seat->SeatRole = DesiredRole;
+            ++Repairs;
+        }
+    }
+    if (DriverSeat->SeatId != TEXT("DRIVER_01"))
+    {
+        DriverSeat->SeatId = TEXT("DRIVER_01");
+        ++Repairs;
+    }
+
+    TArray<UTMOPVehicleSeatComponent*> PassengerSeats;
+    for (UTMOPVehicleSeatComponent* Seat : Seats)
+        if (Seat != DriverSeat) PassengerSeats.Add(Seat);
+    PassengerSeats.Sort([](const UTMOPVehicleSeatComponent& Left,
+        const UTMOPVehicleSeatComponent& Right)
+    {
+        const int32 LeftNumber = GetBusSeatNumber(&Left);
+        const int32 RightNumber = GetBusSeatNumber(&Right);
+        if (LeftNumber != RightNumber)
+            return (LeftNumber == INDEX_NONE ? MAX_int32 : LeftNumber) <
+                (RightNumber == INDEX_NONE ? MAX_int32 : RightNumber);
+        return Left.GetName() < Right.GetName();
+    });
+
+    for (int32 Index = 0; Index < PassengerSeats.Num(); ++Index)
+    {
+        const FName DesiredId(*FString::Printf(TEXT("SEAT_%02d"), Index + 1));
+        if (PassengerSeats[Index]->SeatId != DesiredId)
+        {
+            PassengerSeats[Index]->SeatId = DesiredId;
+            ++Repairs;
+        }
+    }
+    RuntimeDriverSeatCount = 1;
+    RuntimePassengerSeatCount = PassengerSeats.Num();
+
+    if (RuntimePassengerSeatCount != ExpectedPassengerSeatCount)
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("TMOP bus '%s': expected %d passenger seats but found %d (plus one driver)."),
+            *GetOwner()->GetName(), ExpectedPassengerSeatCount, RuntimePassengerSeatCount);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP bus '%s': validated DRIVER_01 and SEAT_01-SEAT_%02d (%d repair(s))."),
+            *GetOwner()->GetName(), RuntimePassengerSeatCount, Repairs);
+    }
 }
 
 void UTMOPBusPassengerComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
