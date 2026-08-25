@@ -81,23 +81,60 @@ public:
             ++Layer;
         }
 
-        if (!Widget->IsMinimap())
-            for (const FTMOPMapMarker& Marker : Map->Markers)
+        for (const FTMOPMapMarker& Marker : Map->Markers)
+        {
+            if (!Marker.bDiscovered) continue;
+            const FVector2D P = MapOrigin + Map->WorldToMapUV(Marker.WorldLocation) * MapSize;
+            if (P.X < -80.0f || P.Y < -30.0f || P.X > ViewSize.X + 80.0f || P.Y > ViewSize.Y + 40.0f)
+                continue;
+            const float IconSize = Widget->IsMinimap() ? 10.0f : 22.0f;
+            const FGeometry IconGeometry = Geometry.MakeChild(FVector2D(IconSize),
+                FSlateLayoutTransform(P - FVector2D(IconSize * 0.5f)));
+            UTexture2D* IconTexture = IsValid(Marker.Icon)
+                ? Marker.Icon.Get() : Map->GetCategoryIcon(Marker.Category);
+            if (IsValid(IconTexture))
             {
-                if (!Marker.bDiscovered) continue;
-                const FVector2D P = MapOrigin + Map->WorldToMapUV(Marker.WorldLocation) * MapSize;
-                if (P.X < -12.0f || P.Y < -12.0f || P.X > ViewSize.X + 12.0f || P.Y > ViewSize.Y + 12.0f)
-                    continue;
-                const FGeometry Dot = Geometry.MakeChild(FVector2D(12.0f),
-                    FSlateLayoutTransform(P - FVector2D(6.0f)));
-                FSlateDrawElement::MakeBox(Out, Layer, Dot.ToPaintGeometry(), White,
-                    ESlateDrawEffect::None, Marker.Color);
+                FSlateBrush IconBrush;
+                IconBrush.DrawAs = ESlateBrushDrawType::Image;
+                IconBrush.SetResourceObject(IconTexture);
+                FSlateDrawElement::MakeBox(Out, Layer, IconGeometry.ToPaintGeometry(),
+                    &IconBrush, ESlateDrawEffect::None, FLinearColor::White);
             }
+            else
+            {
+                FSlateDrawElement::MakeBox(Out, Layer, IconGeometry.ToPaintGeometry(),
+                    White, ESlateDrawEffect::None, Marker.Color);
+                FText Symbol = FText::FromString(TEXT("•"));
+                switch (Marker.Category)
+                {
+                case ETMOPMapMarkerCategory::Restaurant: Symbol = FText::FromString(TEXT("R")); break;
+                case ETMOPMapMarkerCategory::Cinema: Symbol = FText::FromString(TEXT("B")); break;
+                case ETMOPMapMarkerCategory::Metro: Symbol = FText::FromString(TEXT("T")); break;
+                case ETMOPMapMarkerCategory::Club: Symbol = FText::FromString(TEXT("K")); break;
+                case ETMOPMapMarkerCategory::Pub: Symbol = FText::FromString(TEXT("P")); break;
+                default: break;
+                }
+                if (!Widget->IsMinimap())
+                    FSlateDrawElement::MakeText(Out, Layer + 1,
+                        IconGeometry.ToPaintGeometry(), Symbol,
+                        FCoreStyle::GetDefaultFontStyle("Bold", 10),
+                        ESlateDrawEffect::None, FLinearColor::Black);
+            }
+
+            if (!Widget->IsMinimap() && !Marker.DisplayName.IsEmpty())
+            {
+                const FGeometry LabelGeometry = Geometry.MakeChild(FVector2D(150.0f, 24.0f),
+                    FSlateLayoutTransform(P + FVector2D(-75.0f, IconSize * 0.6f + 2.0f)));
+                FSlateDrawElement::MakeText(Out, Layer + 1, LabelGeometry.ToPaintGeometry(),
+                    Marker.DisplayName, FCoreStyle::GetDefaultFontStyle("Bold", 12),
+                    ESlateDrawEffect::None, FLinearColor::White);
+            }
+        }
+        Layer += 2;
 
         const FVector2D PlayerP = MapOrigin +
             Map->WorldToMapUV(Map->GetTrackedWorldLocation()) * MapSize;
-        const float Angle = FMath::DegreesToRadians(Map->GetTrackedMapYawDegrees());
-        const FVector2D Forward(FMath::Cos(Angle), -FMath::Sin(Angle));
+        const FVector2D Forward = Map->GetTrackedMapDirection();
         const FVector2D Right(-Forward.Y, Forward.X);
         const TArray<FVector2D> Arrow = {
             PlayerP + Forward * 13.0f,

@@ -8,6 +8,27 @@
 #include "Camera/PlayerCameraManager.h"
 #include "GameFramework/PlayerController.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
+#include "Materials/MaterialInterface.h"
+#include "UObject/ConstructorHelpers.h"
+
+namespace
+{
+FString CompactVehicleSourceNumber(FString Source)
+{
+    Source.TrimStartAndEndInline();
+    int32 Cut = INDEX_NONE;
+    const TCHAR Separators[] = { TCHAR(','), TCHAR(';'), TCHAR('\n'), TCHAR('\r') };
+    for (const TCHAR Separator : Separators)
+    {
+        int32 Found = INDEX_NONE;
+        if (Source.FindChar(Separator, Found) && (Cut == INDEX_NONE || Found < Cut))
+            Cut = Found;
+    }
+    if (Cut != INDEX_NONE) Source.LeftInline(Cut);
+    Source.TrimStartAndEndInline();
+    return Source.Left(32);
+}
+}
 
 ATMOPVehicleBase::ATMOPVehicleBase()
 {
@@ -37,6 +58,13 @@ ATMOPVehicleBase::ATMOPVehicleBase()
     NameLabel->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     NameLabel->SetGenerateOverlapEvents(false);
     NameLabel->SetHiddenInGame(false);
+    static ConstructorHelpers::FObjectFinder<UMaterialInterface> UnlitTextMaterial(
+        TEXT("/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque"));
+    if (UnlitTextMaterial.Succeeded())
+    {
+        NameLabelUnlitMaterial = UnlitTextMaterial.Object;
+        NameLabel->SetTextMaterial(NameLabelUnlitMaterial);
+    }
 }
 
 void ATMOPVehicleBase::BeginPlay()
@@ -83,11 +111,31 @@ void ATMOPVehicleBase::RefreshNameLabel()
         if (!CompactLabel.Contains(CompactRegistration))
             Label += FString::Printf(TEXT(" — %s"), *RegistrationNumber);
     }
-    NameLabel->SetText(FText::FromString(Label));
+    const FString Category = VehicleCategoryId.ToString().ToUpper();
+    const FString Id = VehicleId.ToString().ToUpper();
+    ETMOPEntityEvidenceIcon ResolvedIcon = EvidenceIcon;
+    if (ResolvedIcon == ETMOPEntityEvidenceIcon::Automatic)
+        ResolvedIcon = Category.StartsWith(TEXT("OBSERVED_")) ||
+            Id.StartsWith(TEXT("OBSERVED_"))
+            ? ETMOPEntityEvidenceIcon::Observed
+            : ETMOPEntityEvidenceIcon::OtherDocumentation;
+    const FString* Symbol = &OtherDocumentationSymbol;
+    if (ResolvedIcon == ETMOPEntityEvidenceIcon::Observed)
+        Symbol = &ObservedSymbol;
+    else if (ResolvedIcon == ETMOPEntityEvidenceIcon::PoliceInterview)
+        Symbol = &PoliceInterviewSymbol;
+    FString FullLabel = *Symbol;
+    const FString CompactSource = CompactVehicleSourceNumber(SourceDocumentNumber);
+    FullLabel += TEXT("\n") + (CompactSource.IsEmpty()
+        ? MissingSourceText : CompactSource);
+    FullLabel += TEXT("\n") + Label;
+    NameLabel->SetText(FText::FromString(FullLabel));
     NameLabel->SetRelativeLocation(
         FVector(0.0f, 0.0f, NameLabelHeightCm));
     NameLabel->SetWorldSize(NameLabelWorldSize);
-    NameLabel->SetTextRenderColor(NameLabelColor);
+    NameLabel->SetTextRenderColor(ResolveNameLabelColor());
+    if (IsValid(NameLabelUnlitMaterial))
+        NameLabel->SetTextMaterial(NameLabelUnlitMaterial);
     const bool bDisplayLabel = ShouldDisplayNameLabel();
     NameLabel->SetVisibility(bDisplayLabel, true);
     // Vehicle subclasses use Actor Tick for wheels and lights even when the

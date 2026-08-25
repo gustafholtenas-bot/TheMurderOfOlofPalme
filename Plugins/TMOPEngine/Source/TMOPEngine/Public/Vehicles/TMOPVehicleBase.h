@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Vehicles/TMOPVehicleCatalogTypes.h"
+#include "UI/TMOPEntityLabelTypes.h"
 #include "TMOPVehicleBase.generated.h"
 
 class ATMOPHistoricalAgent;
@@ -10,6 +11,7 @@ class UBoxComponent;
 class USceneComponent;
 class UTextRenderComponent;
 class UTMOPVehicleSeatComponent;
+class UMaterialInterface;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPVehicleBase : public APawn
@@ -38,6 +40,12 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Identity")
     FName VehicleCategoryId = NAME_None;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Identity")
+    FString SourceDocumentNumber;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Identity")
+    ETMOPEntityEvidenceIcon EvidenceIcon = ETMOPEntityEvidenceIcon::Automatic;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
         Category="TMOP|Vehicle|Registration")
     ETMOPVehicleRegistrationStatus RegistrationStatus =
@@ -56,6 +64,10 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Debug")
     TObjectPtr<UTextRenderComponent> NameLabel;
 
+    /** Unlit engine material keeps the complete label readable at night. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="TMOP|Vehicle|Debug")
+    TObjectPtr<UMaterialInterface> NameLabelUnlitMaterial;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
     bool bShowNameLabel = true;
 
@@ -66,6 +78,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug",
         meta=(ClampMin="1.0"))
     float NameLabelWorldSize = 24.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
+    FString PoliceInterviewSymbol = TEXT("▤");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
+    FString OtherDocumentationSymbol = TEXT("▧");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
+    FString ObservedSymbol = TEXT("◉");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
+    FString MissingSourceText = TEXT("KÄLLA SAKNAS");
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Debug")
     FColor NameLabelColor = FColor::White;

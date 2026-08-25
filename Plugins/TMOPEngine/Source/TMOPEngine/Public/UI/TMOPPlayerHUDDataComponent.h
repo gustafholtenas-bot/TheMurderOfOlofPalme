@@ -27,6 +27,18 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|HUD")
     FText SimulationTimeText;
 
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|HUD|Murder Counter")
+    FText MurderCounterHeading;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|HUD|Murder Counter")
+    FText MurderCounterText;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|HUD|Murder Counter")
+    bool bMurderHasOccurred = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|HUD|Murder Counter")
+    FTMOPTime MurderTime = FTMOPTime(23, 21, 30);
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|HUD")
     FText EquippedItemName;
 

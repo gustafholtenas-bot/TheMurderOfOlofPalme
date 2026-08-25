@@ -7,6 +7,8 @@
 class UStaticMesh;
 class UStaticMeshComponent;
 class UTextRenderComponent;
+class USceneComponent;
+class UMaterialInterface;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPFindingActor : public AActor
@@ -15,12 +17,34 @@ class TMOPENGINE_API ATMOPFindingActor : public AActor
 
 public:
     ATMOPFindingActor();
+    virtual void Tick(float DeltaSeconds) override;
+
+    /** Unscaled root: labels must never inherit the tiny evidence-mesh scale. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Finding")
+    TObjectPtr<USceneComponent> FindingRoot;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Finding")
     TObjectPtr<UStaticMeshComponent> FindingMesh;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Finding")
     TObjectPtr<UTextRenderComponent> FindingLabel;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="TMOP|Finding|Label")
+    TObjectPtr<UMaterialInterface> FindingLabelUnlitMaterial;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Finding|Label",
+        meta=(ClampMin="1.0"))
+    float FindingLabelWorldSize = 16.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Finding|Label",
+        meta=(ClampMin="0.0", Units="cm"))
+    float FindingLabelHeightCm = 75.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Finding|Label")
+    FString DocumentSymbol = TEXT("▤");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Finding|Label")
+    FString MissingSourceText = TEXT("KÄLLA SAKNAS");
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Finding")
     FText DisplayName;
@@ -56,4 +80,3 @@ public:
         FVector InScale,
         FLinearColor InColor);
 };
-

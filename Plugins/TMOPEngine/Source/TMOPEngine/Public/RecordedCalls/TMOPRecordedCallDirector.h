@@ -79,6 +79,11 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Recorded Calls")
     TArray<FName> GetActiveRecordingIds() const;
 
+    /** Current names/transcript for the HUD. Returns false outside a speech segment. */
+    bool GetActiveSubtitle(FName RecordingId, FName& OutSegmentId,
+        FText& OutLeftSpeaker, FText& OutRightSpeaker,
+        FText& OutTranscript, bool& bOutRadioStyle) const;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Recorded Calls")
     bool ValidateRecordings(TArray<FString>& OutErrors) const;
 

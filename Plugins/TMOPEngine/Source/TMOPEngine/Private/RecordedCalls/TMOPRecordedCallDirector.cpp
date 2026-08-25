@@ -4,6 +4,7 @@
 #include "Engine/DataTable.h"
 #include "Sound/SoundWave.h"
 #include "Time/TMOPClockSubsystem.h"
+#include "People/TMOPPersonRegistrySubsystem.h"
 
 ATMOPRecordedCallDirector::ATMOPRecordedCallDirector()
 {
@@ -344,6 +345,71 @@ TArray<FName> ATMOPRecordedCallDirector::GetActiveRecordingIds() const
     TArray<FName> Result;
     ActiveComponentByRecording.GetKeys(Result);
     return Result;
+}
+
+bool ATMOPRecordedCallDirector::GetActiveSubtitle(const FName RecordingId,
+    FName& OutSegmentId, FText& OutLeftSpeaker, FText& OutRightSpeaker,
+    FText& OutTranscript, bool& bOutRadioStyle) const
+{
+    OutSegmentId = NAME_None;
+    OutLeftSpeaker = FText::GetEmpty();
+    OutRightSpeaker = FText::GetEmpty();
+    OutTranscript = FText::GetEmpty();
+    bOutRadioStyle = false;
+    if (!ActiveComponentByRecording.Contains(RecordingId) || Clock == nullptr)
+        return false;
+    const FTMOPRecordedCallRow* Row = LoadedRows.FindByPredicate(
+        [RecordingId](const FTMOPRecordedCallRow& Candidate)
+        { return Candidate.RecordingId == RecordingId; });
+    if (Row == nullptr) return false;
+    const float AudioSecond = CalculateAudioOffset(*Row,
+        Clock->GetCurrentTime().ToSecondsFromMidnight());
+    const FTMOPRecordedCallSpeechSegment* ActiveSegment = nullptr;
+    for (int32 Index = 0; Index < Row->SpeechSegments.Num(); ++Index)
+    {
+        const FTMOPRecordedCallSpeechSegment& Segment = Row->SpeechSegments[Index];
+        const float End = Segment.AudioEndOffsetSeconds > Segment.AudioStartOffsetSeconds
+            ? Segment.AudioEndOffsetSeconds
+            : (Row->SpeechSegments.IsValidIndex(Index + 1)
+                ? Row->SpeechSegments[Index + 1].AudioStartOffsetSeconds
+                : TNumericLimits<float>::Max());
+        if (AudioSecond >= Segment.AudioStartOffsetSeconds && AudioSecond < End)
+        {
+            ActiveSegment = &Segment;
+            break;
+        }
+    }
+    if (ActiveSegment == nullptr || ActiveSegment->Transcript.IsEmpty()) return false;
+
+    auto ResolveName = [this](const FName EntityId) -> FText
+    {
+        if (EntityId.IsNone()) return NSLOCTEXT("TMOP", "UnknownRadioVoice", "Okänd röst");
+        UTMOPPersonRegistrySubsystem* Registry = GetGameInstance() != nullptr
+            ? GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>() : nullptr;
+        FTMOPPersonProfileRow Profile;
+        if (Registry != nullptr && Registry->GetPersonProfile(EntityId, Profile) &&
+            !Profile.FullName.IsEmpty()) return Profile.FullName;
+        return FText::FromString(EntityId.ToString().Replace(TEXT("_"), TEXT(" ")));
+    };
+
+    OutSegmentId = ActiveSegment->SegmentId;
+    OutLeftSpeaker = ResolveName(ActiveSegment->SpeakerEntityId);
+    if (!ActiveSegment->ListenerEntityIds.IsEmpty())
+        OutRightSpeaker = ResolveName(ActiveSegment->ListenerEntityIds[0]);
+    else
+        for (const FName Participant : Row->ParticipantEntityIds)
+            if (Participant != ActiveSegment->SpeakerEntityId)
+            {
+                OutRightSpeaker = ResolveName(Participant);
+                break;
+            }
+    if (OutRightSpeaker.IsEmpty()) OutRightSpeaker = Row->DisplayName;
+    OutTranscript = FText::FromString(ActiveSegment->Transcript);
+    bOutRadioStyle = Row->CallType == ETMOPRecordedCallType::LAC ||
+        Row->CallType == ETMOPRecordedCallType::PoliceRadio ||
+        Row->CallType == ETMOPRecordedCallType::PoliceEmergencyCall ||
+        Row->CallType == ETMOPRecordedCallType::TaxiRadio;
+    return true;
 }
 
 bool ATMOPRecordedCallDirector::ValidateRecordings(

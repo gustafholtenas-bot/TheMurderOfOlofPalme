@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
+#include "UI/TMOPEntityLabelTypes.h"
 #include "Agents/TMOPAgentTypes.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Events/TMOPHistoricalEventTypes.h"
@@ -660,6 +661,12 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Source")
     FString GeneralSourceReference;
+
+    /** Controls the icon above the in-world name. Automatic uses observed
+     * categories first, then source wording, and otherwise assumes an own
+     * police interview when a source document exists. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Source")
+    ETMOPEntityEvidenceIcon EvidenceIcon = ETMOPEntityEvidenceIcon::Automatic;
 
     /** The investigation lead/file reference where this person occurs. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Investigation",

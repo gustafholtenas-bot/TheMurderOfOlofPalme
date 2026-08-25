@@ -55,6 +55,10 @@ bool UTMOPPersonProfileComponent::LoadProfile()
         {
             Agent->DisplayName = Profile.FullName;
             Agent->PersonCategoryId = Profile.CategoryId;
+            Agent->SourceReference = Profile.GeneralSourceReference;
+            Agent->SourceDocumentNumber = Profile.Uppslag.IsEmpty()
+                ? Profile.GeneralSourceReference : Profile.Uppslag;
+            Agent->EvidenceIcon = Profile.EvidenceIcon;
             Agent->RefreshNameLabel();
             if (UTMOPCharacterAppearanceComponent* Appearance =
                 Agent->FindComponentByClass<UTMOPCharacterAppearanceComponent>())

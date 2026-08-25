@@ -508,6 +508,9 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
     Agent->DisplayName = Runtime.Profile.FullName;
     Agent->PersonCategoryId = Runtime.Profile.CategoryId;
     Agent->SourceReference = Runtime.Profile.GeneralSourceReference;
+    Agent->SourceDocumentNumber = Runtime.Profile.Uppslag.IsEmpty()
+        ? Runtime.Profile.GeneralSourceReference : Runtime.Profile.Uppslag;
+    Agent->EvidenceIcon = Runtime.Profile.EvidenceIcon;
     Agent->MovementProfile = Runtime.Profile.MovementProfile;
     Agent->SocialGroupId = Runtime.Profile.SocialGroupId;
     Agent->ActivityState = InitialEntry.ActivityState;

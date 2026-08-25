@@ -10,6 +10,8 @@ UTMOPPlayerHUDDataComponent::UTMOPPlayerHUDDataComponent()
 {
     PrimaryComponentTick.bCanEverTick = false;
     SimulationTimeText = FText::FromString(TEXT("23:00:00"));
+    MurderCounterHeading = NSLOCTEXT("TMOP", "TimeUntilMurder", "Tid till mordet");
+    MurderCounterText = FText::FromString(TEXT("00:21:30"));
 }
 
 void UTMOPPlayerHUDDataComponent::BeginPlay()
@@ -84,6 +86,16 @@ void UTMOPPlayerHUDDataComponent::SetSimulationTime(const int32 Hour,
     SimulationTimeText = FText::FromString(FString::Printf(TEXT("%02d:%02d:%02d"),
         FMath::Clamp(Hour, 0, 23), FMath::Clamp(Minute, 0, 59),
         FMath::Clamp(Second, 0, 59)));
+    const int32 CurrentSeconds = FMath::Clamp(Hour, 0, 23) * 3600 +
+        FMath::Clamp(Minute, 0, 59) * 60 + FMath::Clamp(Second, 0, 59);
+    const int32 MurderSeconds = MurderTime.ToSecondsFromMidnight();
+    bMurderHasOccurred = CurrentSeconds >= MurderSeconds;
+    const int32 Difference = FMath::Abs(CurrentSeconds - MurderSeconds);
+    MurderCounterHeading = bMurderHasOccurred
+        ? NSLOCTEXT("TMOP", "TimeSinceMurder", "Tid sedan mordet")
+        : NSLOCTEXT("TMOP", "TimeUntilMurder", "Tid till mordet");
+    MurderCounterText = FText::FromString(FString::Printf(TEXT("%02d:%02d:%02d"),
+        Difference / 3600, (Difference / 60) % 60, Difference % 60));
     OnHUDDataChanged.Broadcast();
 }
 

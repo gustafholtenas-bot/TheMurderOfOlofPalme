@@ -4,6 +4,7 @@
 #include "Engine/DataTable.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "Vehicles/TMOPVehicleCatalogTypes.h"
+#include "UI/TMOPEntityLabelTypes.h"
 #include "TMOPHistoricalVehicleTypes.generated.h"
 
 class AActor;
@@ -183,6 +184,12 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Source")
     FString SourceReference;
+
+    /** Controls the icon above the vehicle label. Automatic marks observed
+     * vehicles with the eye symbol and other source-backed vehicles as
+     * documented. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Source")
+    ETMOPEntityEvidenceIcon EvidenceIcon = ETMOPEntityEvidenceIcon::Automatic;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Source")
     FString Notes;

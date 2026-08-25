@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Agents/TMOPAgentTypes.h"
+#include "UI/TMOPEntityLabelTypes.h"
 #include "GameFramework/Character.h"
 #include "TMOPHistoricalAgent.generated.h"
 
@@ -16,6 +17,7 @@ class AAIController;
 class UTMOPCharacterAppearanceComponent;
 class UTMOPPersonProfileComponent;
 class USkeletalMeshComponent;
+class UMaterialInterface;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FTMOPAgentStateChangedSignature,
@@ -91,9 +93,20 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Identity")
     FName PersonCategoryId = NAME_None;
 
+    /** Investigation number printed between the icon and name. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
+    FString SourceDocumentNumber;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
+    ETMOPEntityEvidenceIcon EvidenceIcon = ETMOPEntityEvidenceIcon::Automatic;
+
     /** World-space name shown above the person. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Debug")
     TObjectPtr<UTextRenderComponent> NameLabel;
+
+    /** Unlit engine material keeps the complete label readable at night. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TMOP|Agent|Debug")
+    TObjectPtr<UMaterialInterface> NameLabelUnlitMaterial;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
     bool bShowNameLabel = true;
@@ -105,6 +118,17 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug",
         meta = (ClampMin = "1.0"))
     float NameLabelWorldSize = 16.0f;
+
+    /** Font-safe pictograms used when no custom world-label widget is supplied. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FString PoliceInterviewSymbol = TEXT("▤");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FString OtherDocumentationSymbol = TEXT("▧");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FString ObservedSymbol = TEXT("◉");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
+    FString MissingSourceText = TEXT("KÄLLA SAKNAS");
 
     /** Fallback color for categories without a dedicated color. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")

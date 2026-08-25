@@ -8,6 +8,8 @@
 #include "Components/TextRenderComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/AudioComponent.h"
+#include "Materials/MaterialInterface.h"
+#include "UObject/ConstructorHelpers.h"
 #include "Engine/OverlapResult.h"
 #include "Engine/World.h"
 #include "Entities/TMOPWorldEntityComponent.h"
@@ -24,6 +26,25 @@
 #include "UI/TMOPSpeechBubbleWidget.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Venues/TMOPCinemaSeatSubsystem.h"
+
+namespace
+{
+FString CompactSourceNumber(FString Source)
+{
+    Source.TrimStartAndEndInline();
+    int32 Cut = INDEX_NONE;
+    const TCHAR Separators[] = { TCHAR(','), TCHAR(';'), TCHAR('\n'), TCHAR('\r') };
+    for (const TCHAR Separator : Separators)
+    {
+        int32 Found = INDEX_NONE;
+        if (Source.FindChar(Separator, Found) && (Cut == INDEX_NONE || Found < Cut))
+            Cut = Found;
+    }
+    if (Cut != INDEX_NONE) Source.LeftInline(Cut);
+    Source.TrimStartAndEndInline();
+    return Source.Left(32);
+}
+}
 
 ATMOPHistoricalAgent::ATMOPHistoricalAgent()
 {
@@ -91,6 +112,13 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     NameLabel->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     NameLabel->SetGenerateOverlapEvents(false);
     NameLabel->SetHiddenInGame(false);
+    static ConstructorHelpers::FObjectFinder<UMaterialInterface> UnlitTextMaterial(
+        TEXT("/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque"));
+    if (UnlitTextMaterial.Succeeded())
+    {
+        NameLabelUnlitMaterial = UnlitTextMaterial.Object;
+        NameLabel->SetTextMaterial(NameLabelUnlitMaterial);
+    }
 
     SpeechBubble = CreateDefaultSubobject<UWidgetComponent>(
         TEXT("SpeechBubble"));
@@ -717,10 +745,46 @@ void ATMOPHistoricalAgent::RefreshNameLabel()
         LabelText = FText::FromName(EntityIdentity->EntityId);
     }
 
-    NameLabel->SetText(LabelText);
+    const FString Category = PersonCategoryId.ToString().ToUpper();
+    FString EntityId;
+    if (IsValid(EntityIdentity) && !EntityIdentity->EntityId.IsNone())
+        EntityId = EntityIdentity->EntityId.ToString().ToUpper();
+    ETMOPEntityEvidenceIcon ResolvedIcon = EvidenceIcon;
+    if (ResolvedIcon == ETMOPEntityEvidenceIcon::Automatic)
+    {
+        if (Category.StartsWith(TEXT("OBSERVED_")) ||
+            EntityId.StartsWith(TEXT("OBSERVED_")))
+            ResolvedIcon = ETMOPEntityEvidenceIcon::Observed;
+        else
+        {
+            const FString SourceUpper = SourceReference.ToUpper();
+            const bool bOtherSource =
+                SourceUpper.Contains(TEXT("MEDIA")) ||
+                SourceUpper.Contains(TEXT("SOCIAL")) ||
+                SourceUpper.Contains(TEXT("TIDNING")) ||
+                SourceUpper.Contains(TEXT("TV ")) ||
+                SourceUpper.Contains(TEXT("PLACERAD AV"));
+            ResolvedIcon = bOtherSource || SourceReference.IsEmpty()
+                ? ETMOPEntityEvidenceIcon::OtherDocumentation
+                : ETMOPEntityEvidenceIcon::PoliceInterview;
+        }
+    }
+    const FString* Symbol = &PoliceInterviewSymbol;
+    if (ResolvedIcon == ETMOPEntityEvidenceIcon::Observed)
+        Symbol = &ObservedSymbol;
+    else if (ResolvedIcon == ETMOPEntityEvidenceIcon::OtherDocumentation)
+        Symbol = &OtherDocumentationSymbol;
+    FString FullLabel = *Symbol;
+    const FString CompactSource = CompactSourceNumber(SourceDocumentNumber);
+    FullLabel += TEXT("\n") + (CompactSource.IsEmpty()
+        ? MissingSourceText : CompactSource);
+    FullLabel += TEXT("\n") + LabelText.ToString();
+    NameLabel->SetText(FText::FromString(FullLabel));
     NameLabel->SetRelativeLocation(FVector(0.0f, 0.0f, NameLabelHeightCm));
     NameLabel->SetWorldSize(NameLabelWorldSize);
     NameLabel->SetTextRenderColor(ResolveNameLabelColor());
+    if (IsValid(NameLabelUnlitMaterial))
+        NameLabel->SetTextMaterial(NameLabelUnlitMaterial);
     const bool bDisplayLabel = ShouldDisplayNameLabel();
     NameLabel->SetVisibility(bDisplayLabel, true);
     SetActorTickEnabled(bDisplayLabel);

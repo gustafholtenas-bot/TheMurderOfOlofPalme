@@ -761,6 +761,8 @@ void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
         Runtime->bSpawnedByDirector = false;
         Vehicle->DisplayName = Runtime->Profile.DisplayName;
         Vehicle->VehicleCategoryId = Runtime->Profile.CategoryId;
+        Vehicle->SourceDocumentNumber = Runtime->Profile.SourceReference;
+        Vehicle->EvidenceIcon = Runtime->Profile.EvidenceIcon;
         Vehicle->RegistrationStatus = Runtime->Profile.RegistrationStatus;
         Vehicle->RegistrationOrigin = Runtime->Profile.RegistrationOrigin;
         Vehicle->RegistrationNumber = Runtime->Profile.RegistrationNumber;
@@ -840,6 +842,8 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
     Vehicle->VehicleId = Runtime.Profile.VehicleId;
     Vehicle->DisplayName = Runtime.Profile.DisplayName;
     Vehicle->VehicleCategoryId = Runtime.Profile.CategoryId;
+    Vehicle->SourceDocumentNumber = Runtime.Profile.SourceReference;
+    Vehicle->EvidenceIcon = Runtime.Profile.EvidenceIcon;
     Vehicle->RegistrationStatus = Runtime.Profile.RegistrationStatus;
     Vehicle->RegistrationOrigin = Runtime.Profile.RegistrationOrigin;
     Vehicle->RegistrationNumber = Runtime.Profile.RegistrationNumber;
