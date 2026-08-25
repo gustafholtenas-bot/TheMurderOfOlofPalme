@@ -5,6 +5,7 @@
 #include "Actions/TMOPActionExecutorComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/AudioComponent.h"
@@ -12,6 +13,8 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/OverlapResult.h"
 #include "Engine/World.h"
+#include "Engine/StaticMesh.h"
+#include "Engine/GameInstance.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Animation/TMOPAnimationStateComponent.h"
@@ -22,7 +25,9 @@
 #include "People/TMOPCharacterAppearanceComponent.h"
 #include "People/TMOPPersonProfileComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Items/TMOPItemMeshSubsystem.h"
 #include "Sound/SoundBase.h"
+#include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPSpeechBubbleWidget.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Venues/TMOPCinemaSeatSubsystem.h"
@@ -100,6 +105,22 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     ScarfMesh = CreateModularPart(TEXT("ScarfMesh"));
     GlassesMesh = CreateModularPart(TEXT("GlassesMesh"));
 
+    LeftHandHeldItem = CreateDefaultSubobject<UStaticMeshComponent>(
+        TEXT("LeftHandHeldItem"));
+    LeftHandHeldItem->SetupAttachment(BodyMesh);
+    LeftHandHeldItem->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    LeftHandHeldItem->SetGenerateOverlapEvents(false);
+    LeftHandHeldItem->SetCastShadow(true);
+    LeftHandHeldItem->SetVisibility(false, true);
+
+    RightHandHeldItem = CreateDefaultSubobject<UStaticMeshComponent>(
+        TEXT("RightHandHeldItem"));
+    RightHandHeldItem->SetupAttachment(BodyMesh);
+    RightHandHeldItem->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    RightHandHeldItem->SetGenerateOverlapEvents(false);
+    RightHandHeldItem->SetCastShadow(true);
+    RightHandHeldItem->SetVisibility(false, true);
+
     NameLabel =
         CreateDefaultSubobject<UTextRenderComponent>(
             TEXT("NameLabel"));
@@ -137,6 +158,155 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     GetCharacterMovement()->JumpZVelocity = 260.0f;
 }
 
+void ATMOPHistoricalAgent::ApplyHeldItems(
+    const FTMOPHeldItemDefinition& LeftItem,
+    const FTMOPHeldItemDefinition& RightItem,
+    const TArray<FTMOPHeldItemDefinition>& AdditionalItems)
+{
+    ActiveLeftHandItem = LeftItem;
+    ActiveRightHandItem = RightItem;
+    auto ApplyOne = [this](UStaticMeshComponent* Component,
+        const FTMOPHeldItemDefinition& Item, const FName DefaultSocket,
+        ETMOPHeldItemPose& OutPose)
+    {
+        if (!IsValid(Component) || !IsValid(BodyMesh)) return;
+        UStaticMesh* LoadedMesh = Item.Mesh.LoadSynchronous();
+        FTransform CatalogTransform = FTransform::Identity;
+        ETMOPHeldItemPose ResolvedPose = Item.GripPose;
+        if (!IsValid(LoadedMesh) && !Item.ItemId.IsNone())
+            if (UTMOPItemMeshSubsystem* Catalog = GetGameInstance() != nullptr
+                ? GetGameInstance()->GetSubsystem<UTMOPItemMeshSubsystem>() : nullptr)
+            {
+                FTMOPItemMeshRow Definition;
+                if (Catalog->FindItemMeshDefinition(Item.ItemId, Definition))
+                {
+                    LoadedMesh = Definition.Mesh.LoadSynchronous();
+                    CatalogTransform = Definition.DefaultAttachmentTransform;
+                    if (ResolvedPose == ETMOPHeldItemPose::None)
+                        ResolvedPose = Definition.DefaultGripPose;
+                }
+            }
+        OutPose = IsValid(LoadedMesh) && IsHeldItemVisibleNow(Item)
+            ? ResolvedPose : ETMOPHeldItemPose::None;
+        Component->SetStaticMesh(LoadedMesh);
+        const FName Socket = Item.SocketName.IsNone() ? DefaultSocket : Item.SocketName;
+        Component->AttachToComponent(BodyMesh,
+            FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
+        Component->SetRelativeTransform(CatalogTransform * Item.RelativeTransform);
+        Component->SetVisibility(IsValid(LoadedMesh) && IsHeldItemVisibleNow(Item), true);
+    };
+
+    ApplyOne(LeftHandHeldItem, LeftItem, FName(TEXT("hand_lSocket")), LeftHandGripPose);
+    ApplyOne(RightHandHeldItem, RightItem, FName(TEXT("hand_rSocket")), RightHandGripPose);
+    ResolvedLeftHandGripPose = LeftHandGripPose;
+    ResolvedRightHandGripPose = RightHandGripPose;
+
+    for (UStaticMeshComponent* Component : AdditionalCarriedItemComponents)
+        if (IsValid(Component)) Component->DestroyComponent();
+    AdditionalCarriedItemComponents.Reset();
+    for (int32 Index = 0; Index < AdditionalItems.Num(); ++Index)
+    {
+        const FTMOPHeldItemDefinition& Item = AdditionalItems[Index];
+        UStaticMesh* LoadedMesh = Item.Mesh.LoadSynchronous();
+        FTransform CatalogTransform = FTransform::Identity;
+        if (!IsValid(LoadedMesh) && !Item.ItemId.IsNone())
+            if (UTMOPItemMeshSubsystem* Catalog = GetGameInstance() != nullptr
+                ? GetGameInstance()->GetSubsystem<UTMOPItemMeshSubsystem>() : nullptr)
+            {
+                FTMOPItemMeshRow Definition;
+                if (Catalog->FindItemMeshDefinition(Item.ItemId, Definition))
+                {
+                    LoadedMesh = Definition.Mesh.LoadSynchronous();
+                    CatalogTransform = Definition.DefaultAttachmentTransform;
+                }
+            }
+        if (!IsValid(LoadedMesh) || !Item.bVisible) continue;
+        const FName ComponentName(*FString::Printf(TEXT("CarriedItem_%d_%s"),
+            Index, *Item.ItemId.ToString()));
+        UStaticMeshComponent* Component = NewObject<UStaticMeshComponent>(this,
+            UStaticMeshComponent::StaticClass(), ComponentName);
+        if (!IsValid(Component)) continue;
+        AddInstanceComponent(Component);
+        Component->SetupAttachment(BodyMesh);
+        Component->RegisterComponent();
+        Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        Component->SetGenerateOverlapEvents(false);
+        Component->SetStaticMesh(LoadedMesh);
+        const FName Socket = Item.SocketName.IsNone()
+            ? GetDefaultItemSocket(Item.AttachmentPoint) : Item.SocketName;
+        FName ResolvedSocket = Socket;
+        if (!BodyMesh->DoesSocketExist(ResolvedSocket))
+        {
+            switch (Item.AttachmentPoint)
+            {
+            case ETMOPItemAttachmentPoint::Chest:
+            case ETMOPItemAttachmentPoint::Back: ResolvedSocket = TEXT("spine_03"); break;
+            case ETMOPItemAttachmentPoint::LeftShoulder: ResolvedSocket = TEXT("clavicle_l"); break;
+            case ETMOPItemAttachmentPoint::RightShoulder: ResolvedSocket = TEXT("clavicle_r"); break;
+            case ETMOPItemAttachmentPoint::LeftHip: ResolvedSocket = TEXT("thigh_l"); break;
+            case ETMOPItemAttachmentPoint::RightHip: ResolvedSocket = TEXT("thigh_r"); break;
+            case ETMOPItemAttachmentPoint::LeftHand: ResolvedSocket = TEXT("hand_l"); break;
+            case ETMOPItemAttachmentPoint::RightHand: ResolvedSocket = TEXT("hand_r"); break;
+            default: ResolvedSocket = NAME_None; break;
+            }
+        }
+        Component->AttachToComponent(BodyMesh,
+            FAttachmentTransformRules::SnapToTargetNotIncludingScale, ResolvedSocket);
+        Component->SetRelativeTransform(CatalogTransform * Item.RelativeTransform);
+        AdditionalCarriedItemComponents.Add(Component);
+    }
+}
+
+bool ATMOPHistoricalAgent::IsHeldItemVisibleNow(
+    const FTMOPHeldItemDefinition& Item) const
+{
+    if (!Item.bVisible) return false;
+    if (!Item.bUseVisibilityWindow) return true;
+    UGameInstance* GameInstance = GetGameInstance();
+    UTMOPClockSubsystem* Clock = IsValid(GameInstance)
+        ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (!IsValid(Clock)) return false;
+    const int32 Now = Clock->GetCurrentTime().ToSecondsFromMidnight();
+    return Now >= Item.VisibleFrom.ToSecondsFromMidnight() &&
+        Now <= Item.VisibleUntil.ToSecondsFromMidnight();
+}
+
+void ATMOPHistoricalAgent::UpdateHeldItemVisibility()
+{
+    const bool bLeftVisible = IsValid(LeftHandHeldItem) &&
+        IsValid(LeftHandHeldItem->GetStaticMesh()) && IsHeldItemVisibleNow(ActiveLeftHandItem);
+    const bool bRightVisible = IsValid(RightHandHeldItem) &&
+        IsValid(RightHandHeldItem->GetStaticMesh()) && IsHeldItemVisibleNow(ActiveRightHandItem);
+    if (IsValid(LeftHandHeldItem)) LeftHandHeldItem->SetVisibility(bLeftVisible, true);
+    if (IsValid(RightHandHeldItem)) RightHandHeldItem->SetVisibility(bRightVisible, true);
+    LeftHandGripPose = bLeftVisible ? ResolvedLeftHandGripPose : ETMOPHeldItemPose::None;
+    RightHandGripPose = bRightVisible ? ResolvedRightHandGripPose : ETMOPHeldItemPose::None;
+}
+
+FName ATMOPHistoricalAgent::GetDefaultItemSocket(
+    const ETMOPItemAttachmentPoint AttachmentPoint) const
+{
+    switch (AttachmentPoint)
+    {
+    case ETMOPItemAttachmentPoint::LeftHand: return TEXT("hand_lSocket");
+    case ETMOPItemAttachmentPoint::RightHand: return TEXT("hand_rSocket");
+    case ETMOPItemAttachmentPoint::Chest: return TEXT("item_chest_socket");
+    case ETMOPItemAttachmentPoint::Back: return TEXT("item_back_socket");
+    case ETMOPItemAttachmentPoint::LeftShoulder: return TEXT("item_shoulder_l_socket");
+    case ETMOPItemAttachmentPoint::RightShoulder: return TEXT("item_shoulder_r_socket");
+    case ETMOPItemAttachmentPoint::LeftHip: return TEXT("item_hip_l_socket");
+    case ETMOPItemAttachmentPoint::RightHip: return TEXT("item_hip_r_socket");
+    default: return NAME_None;
+    }
+}
+
+void ATMOPHistoricalAgent::ClearHeldItems()
+{
+    FTMOPHeldItemDefinition Empty;
+    const TArray<FTMOPHeldItemDefinition> NoAdditionalItems;
+    ApplyHeldItems(Empty, Empty, NoAdditionalItems);
+}
+
 void ATMOPHistoricalAgent::BeginPlay()
 {
     Super::BeginPlay();
@@ -157,6 +327,7 @@ void ATMOPHistoricalAgent::BeginPlay()
 void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    UpdateHeldItemVisibility();
     UpdateAutomaticUnstuck(DeltaSeconds);
     UpdateSocialFocus(DeltaSeconds);
     UpdateAutomaticSpeech(DeltaSeconds);

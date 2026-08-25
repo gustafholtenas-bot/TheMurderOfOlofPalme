@@ -1,15 +1,13 @@
 #include "UI/TMOPNewspaperReaderWidget.h"
 
-#include "Engine/Texture2D.h"
 #include "InputCoreTypes.h"
 #include "Newspapers/TMOPNewspaperItemDefinition.h"
+#include "Newspapers/TMOPNewspaperReadingComponent.h"
 #include "Player/TMOPPlayerCharacter.h"
 #include "Styling/CoreStyle.h"
-#include "Widgets/Images/SImage.h"
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Layout/SBorder.h"
-#include "Widgets/Layout/SBox.h"
-#include "Widgets/Layout/SScrollBox.h"
+#include "Widgets/Layout/SSpacer.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Text/STextBlock.h"
 
@@ -45,8 +43,6 @@ void UTMOPNewspaperReaderWidget::CloseReader()
 void UTMOPNewspaperReaderWidget::DismissReader()
 {
     Newspaper = nullptr;
-    CurrentPageTexture = nullptr;
-    PageBrush.SetResourceObject(nullptr);
     SetVisibility(ESlateVisibility::Collapsed);
 }
 
@@ -66,25 +62,23 @@ bool UTMOPNewspaperReaderWidget::GoToPage(const int32 PageIndex)
 
 bool UTMOPNewspaperReaderWidget::NextPage()
 {
-    return GoToPage(CurrentPageIndex + 1);
+    return GoToPage(CurrentPageIndex + 2);
 }
 
 bool UTMOPNewspaperReaderWidget::PreviousPage()
 {
-    return GoToPage(CurrentPageIndex - 1);
+    return GoToPage(CurrentPageIndex - 2);
 }
 
 void UTMOPNewspaperReaderWidget::SetZoom(const float NewZoom)
 {
     Zoom = FMath::Clamp(NewZoom, 0.25f, 4.0f);
-    if (PageImage.IsValid())
-        PageImage->Invalidate(EInvalidateWidgetReason::Layout);
 }
 
 TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
 {
     return SNew(SBorder)
-        .BorderBackgroundColor(FLinearColor(0.008f, 0.009f, 0.012f, 0.985f))
+        .BorderBackgroundColor(FLinearColor::Transparent)
         .Padding(18.0f)
         [
             SNew(SVerticalBox)
@@ -109,33 +103,12 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                 [ SNew(SButton).Text(NSLOCTEXT("TMOP", "CloseNewspaper", "Stäng"))
                     .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleCloseClicked) ]
             ]
-            + SVerticalBox::Slot().FillHeight(1.0f).Padding(4.0f)
-            [
-                SNew(SBorder)
-                .BorderBackgroundColor(FLinearColor(0.035f, 0.035f, 0.035f, 1.0f))
-                .Padding(8.0f)
-                [
-                    SNew(SScrollBox)
-                    .Orientation(Orient_Horizontal)
-                    + SScrollBox::Slot()
-                    [
-                        SNew(SScrollBox)
-                        .Orientation(Orient_Vertical)
-                        + SScrollBox::Slot()
-                        [
-                            SNew(SBox)
-                            .WidthOverride_Lambda([this]() { return GetPageWidth(); })
-                            .HeightOverride_Lambda([this]() { return GetPageHeight(); })
-                            [ SAssignNew(PageImage, SImage).Image(&PageBrush) ]
-                        ]
-                    ]
-                ]
-            ]
+            + SVerticalBox::Slot().FillHeight(1.0f)[ SNew(SSpacer) ]
             + SVerticalBox::Slot().AutoHeight().Padding(8.0f, 12.0f, 8.0f, 2.0f)
             [
                 SNew(SHorizontalBox)
                 + SHorizontalBox::Slot().AutoWidth()
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "PreviousNewspaperPage", "Föregående sida"))
+                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "PreviousNewspaperPage", "Q  Föregående sida"))
                     .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandlePreviousClicked) ]
                 + SHorizontalBox::Slot().FillWidth(1.0f).HAlign(HAlign_Center).VAlign(VAlign_Center)
                 [
@@ -146,12 +119,25 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(PageLabelText, STextBlock)
                         .ColorAndOpacity(FLinearColor(0.7f, 0.7f, 0.7f)) ]
+                    + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 3.0f)
+                    [ SNew(STextBlock)
+                        .Text(NSLOCTEXT("TMOP", "NewspaperReaderControls",
+                            "Pilar/WASD: flytta  •  Mushjul/+/−: zoom  •  Q/E: vänd blad  •  Esc: stäng"))
+                        .ColorAndOpacity(FLinearColor(0.58f, 0.58f, 0.58f)) ]
                 ]
                 + SHorizontalBox::Slot().AutoWidth()
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "NextNewspaperPage", "Nästa sida"))
+                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "NextNewspaperPage", "Nästa sida  E"))
                     .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleNextClicked) ]
             ]
         ];
+}
+
+FReply UTMOPNewspaperReaderWidget::PanPage(
+    const float HorizontalDirection, const float VerticalDirection)
+{
+    if (IsValid(PlayerCharacter.Get()) && IsValid(PlayerCharacter->NewspaperReading))
+        PlayerCharacter->NewspaperReading->Pan(HorizontalDirection, VerticalDirection);
+    return FReply::Handled();
 }
 
 void UTMOPNewspaperReaderWidget::RefreshPage()
@@ -159,12 +145,8 @@ void UTMOPNewspaperReaderWidget::RefreshPage()
     if (!IsValid(Newspaper.Get()) ||
         !Newspaper->Pages.IsValidIndex(CurrentPageIndex)) return;
     const FTMOPNewspaperPage& Page = Newspaper->Pages[CurrentPageIndex];
-    CurrentPageTexture = Page.PageImage.LoadSynchronous();
-    PageBrush.SetResourceObject(CurrentPageTexture.Get());
-    PageBrush.DrawAs = ESlateBrushDrawType::Image;
-    if (IsValid(CurrentPageTexture.Get()))
-        PageBrush.ImageSize = FVector2D(
-            CurrentPageTexture->GetSizeX(), CurrentPageTexture->GetSizeY());
+    if (IsValid(PlayerCharacter.Get()) && IsValid(PlayerCharacter->NewspaperReading))
+        PlayerCharacter->NewspaperReading->ShowPage(CurrentPageIndex, true);
 
     if (TitleText.IsValid())
     {
@@ -175,8 +157,9 @@ void UTMOPNewspaperReaderWidget::RefreshPage()
     }
     if (PageNumberText.IsValid())
         PageNumberText->SetText(FText::Format(
-            NSLOCTEXT("TMOP", "NewspaperPageCounter", "Sida {0} av {1}"),
+            NSLOCTEXT("TMOP", "NewspaperPageCounter", "Uppslag {0}–{1} av {2} sidor"),
             FText::AsNumber(CurrentPageIndex + 1),
+            FText::AsNumber(FMath::Min(CurrentPageIndex + 2, Newspaper->Pages.Num())),
             FText::AsNumber(Newspaper->Pages.Num())));
     if (PageLabelText.IsValid())
     {
@@ -186,24 +169,6 @@ void UTMOPNewspaperReaderWidget::RefreshPage()
             : Page.PageLabel;
         PageLabelText->SetText(Label);
     }
-    if (PageImage.IsValid())
-        PageImage->Invalidate(EInvalidateWidgetReason::LayoutAndVolatility);
-}
-
-FOptionalSize UTMOPNewspaperReaderWidget::GetPageWidth() const
-{
-    if (!IsValid(CurrentPageTexture.Get())) return FOptionalSize(900.0f * Zoom);
-    const float FitScale = FMath::Min(1.0f,
-        1100.0f / FMath::Max(1, CurrentPageTexture->GetSizeX()));
-    return FOptionalSize(CurrentPageTexture->GetSizeX() * FitScale * Zoom);
-}
-
-FOptionalSize UTMOPNewspaperReaderWidget::GetPageHeight() const
-{
-    if (!IsValid(CurrentPageTexture.Get())) return FOptionalSize(1200.0f * Zoom);
-    const float FitScale = FMath::Min(1.0f,
-        1100.0f / FMath::Max(1, CurrentPageTexture->GetSizeX()));
-    return FOptionalSize(CurrentPageTexture->GetSizeY() * FitScale * Zoom);
 }
 
 FReply UTMOPNewspaperReaderWidget::HandlePreviousClicked()
@@ -211,9 +176,9 @@ FReply UTMOPNewspaperReaderWidget::HandlePreviousClicked()
 FReply UTMOPNewspaperReaderWidget::HandleNextClicked()
 { NextPage(); return FReply::Handled(); }
 FReply UTMOPNewspaperReaderWidget::HandleZoomOutClicked()
-{ SetZoom(Zoom - 0.25f); return FReply::Handled(); }
+{ SetZoom(Zoom - 0.25f); if (IsValid(PlayerCharacter.Get()) && IsValid(PlayerCharacter->NewspaperReading)) PlayerCharacter->NewspaperReading->Zoom(-1.0f); return FReply::Handled(); }
 FReply UTMOPNewspaperReaderWidget::HandleZoomInClicked()
-{ SetZoom(Zoom + 0.25f); return FReply::Handled(); }
+{ SetZoom(Zoom + 0.25f); if (IsValid(PlayerCharacter.Get()) && IsValid(PlayerCharacter->NewspaperReading)) PlayerCharacter->NewspaperReading->Zoom(1.0f); return FReply::Handled(); }
 FReply UTMOPNewspaperReaderWidget::HandleCloseClicked()
 { CloseReader(); return FReply::Handled(); }
 
@@ -222,9 +187,13 @@ FReply UTMOPNewspaperReaderWidget::NativeOnKeyDown(
 {
     const FKey Key = InKeyEvent.GetKey();
     if (Key == EKeys::Escape) return HandleCloseClicked();
-    if (Key == EKeys::Right || Key == EKeys::D || Key == EKeys::PageDown)
+    if (Key == EKeys::Right || Key == EKeys::D) return PanPage(1.0f, 0.0f);
+    if (Key == EKeys::Left || Key == EKeys::A) return PanPage(-1.0f, 0.0f);
+    if (Key == EKeys::Up || Key == EKeys::W) return PanPage(0.0f, -1.0f);
+    if (Key == EKeys::Down || Key == EKeys::S) return PanPage(0.0f, 1.0f);
+    if (Key == EKeys::E || Key == EKeys::PageDown || Key == EKeys::SpaceBar)
         return HandleNextClicked();
-    if (Key == EKeys::Left || Key == EKeys::A || Key == EKeys::PageUp)
+    if (Key == EKeys::Q || Key == EKeys::PageUp)
         return HandlePreviousClicked();
     if (Key == EKeys::Add || Key == EKeys::Equals)
         return HandleZoomInClicked();
@@ -236,6 +205,6 @@ FReply UTMOPNewspaperReaderWidget::NativeOnKeyDown(
 FReply UTMOPNewspaperReaderWidget::NativeOnMouseWheel(
     const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
-    SetZoom(Zoom + (InMouseEvent.GetWheelDelta() > 0.0f ? 0.25f : -0.25f));
-    return FReply::Handled();
+    return InMouseEvent.GetWheelDelta() > 0.0f
+        ? HandleZoomInClicked() : HandleZoomOutClicked();
 }

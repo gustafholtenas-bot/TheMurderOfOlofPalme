@@ -73,6 +73,11 @@ struct TMOPENGINE_API FTMOPTimedPropEntry
         meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && (PropKind==ETMOPTimedPropKind::StaticMesh || PropKind==ETMOPTimedPropKind::Finding)"))
     TSoftObjectPtr<UStaticMesh> StaticMesh;
 
+    /** Empty keeps StaticMesh behavior. Otherwise resolves from DT_TMOP_ItemMeshes. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Spawn",
+        meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && (PropKind==ETMOPTimedPropKind::StaticMesh || PropKind==ETMOPTimedPropKind::Finding)"))
+    FName ItemMeshId = NAME_None;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Timed Prop|Finding",
         meta=(EditCondition="Action==ETMOPTimedPropAction::Spawn && PropKind==ETMOPTimedPropKind::Finding"))
     FText FindingDisplayName;
@@ -195,4 +200,3 @@ private:
     int32 LastEvaluatedSecond = INDEX_NONE;
     TMap<FName, TWeakObjectPtr<AActor>> SpawnedInstances;
 };
-

@@ -1,5 +1,29 @@
 #include "World/TMOPStockholmFindingsDirector.h"
 
+namespace
+{
+FName FindingMeshCatalogId(const FName EvidenceId)
+{
+    if (EvidenceId == TEXT("FYND_BLA_TACKJACKA_ANORALP")) return TEXT("FINDING_BLUE_PADDED_JACKET");
+    if (EvidenceId == TEXT("FYND_STALBAGADE_GLASOGON_OMRADE") ||
+        EvidenceId == TEXT("FYND_STALBAGADE_GLASOGON_SNICKARBACKEN5"))
+        return TEXT("FINDING_STEEL_FRAME_GLASSES");
+    if (EvidenceId == TEXT("FYND_LJUSBRUNA_LANGBYXOR")) return TEXT("FINDING_LIGHT_BROWN_TROUSERS");
+    if (EvidenceId == TEXT("FYND_BLA_TYGMOSSA")) return TEXT("FINDING_BLUE_FABRIC_CAP");
+    if (EvidenceId == TEXT("FYND_ROD_DAMHOGERSKO")) return TEXT("FINDING_RED_WOMENS_RIGHT_SHOE");
+    if (EvidenceId == TEXT("FYND_TELEFONBLOCKSLAPP")) return TEXT("FINDING_HANDWRITTEN_PHONE_NOTE");
+    if (EvidenceId == TEXT("FYND_AVBRUTEN_GREN")) return TEXT("FINDING_BROKEN_BRANCH");
+    if (EvidenceId == TEXT("FYND_HALSDUK_MORDPLATS")) return TEXT("FINDING_SCARF");
+    if (EvidenceId == TEXT("FYND_KLADER_HANDELSHOGSKOLAN")) return TEXT("FINDING_CLOTHES_PILE");
+    if (EvidenceId == TEXT("FYND_HANDSKE_KYRKAN") ||
+        EvidenceId == TEXT("FYND_HANDSKE_MORDPLATS"))
+        return TEXT("FINDING_GREY_GREEN_GLOVE");
+    if (EvidenceId == TEXT("FYND_KULA_1") || EvidenceId == TEXT("FYND_KULA_2"))
+        return TEXT("FINDING_BULLET_357");
+    return EvidenceId;
+}
+}
+
 ATMOPStockholmFindingsDirector::ATMOPStockholmFindingsDirector()
 {
     ScheduledEntries.Reset();
@@ -24,6 +48,7 @@ ATMOPStockholmFindingsDirector::ATMOPStockholmFindingsDirector()
         Entry.InstanceId = Id;
         Entry.Action = ETMOPTimedPropAction::Spawn;
         Entry.PropKind = ETMOPTimedPropKind::Finding;
+        Entry.ItemMeshId = FindingMeshCatalogId(Id);
         Entry.Placement = ETMOPTimedPropPlacement::WorldTransform;
         Entry.WorldTransform = FTransform(
             FRotator::ZeroRotator, WorldLocation, FVector::OneVector);

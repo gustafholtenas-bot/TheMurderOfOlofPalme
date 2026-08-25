@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "People/TMOPHeldItemTypes.h"
 #include "Engine/DataTable.h"
 #include "UI/TMOPEntityLabelTypes.h"
 #include "Agents/TMOPAgentTypes.h"
@@ -686,6 +687,17 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     /** Vehicles that are source-backed as belonging to, carrying, or otherwise involving this person. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Vehicle")
     TArray<FName> AssociatedVehicleIds;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Held Items")
+    FTMOPHeldItemDefinition LeftHandItem;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Held Items")
+    FTMOPHeldItemDefinition RightHandItem;
+
+    /** Shoulder bags, backpacks, chest radios, hip props and other body attachments. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Held Items",
+        meta=(TitleProperty="ItemId"))
+    TArray<FTMOPHeldItemDefinition> AdditionalCarriedItems;
 
     /** Existing generic group system membership. Leave GroupId empty for an individual. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Group")

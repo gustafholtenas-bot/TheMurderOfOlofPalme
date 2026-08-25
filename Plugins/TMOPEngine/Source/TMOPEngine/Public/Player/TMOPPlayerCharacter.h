@@ -24,6 +24,7 @@ class UTMOPInteractionPromptWidget;
 class UTMOPDialogWidget;
 class UTMOPNewspaperReaderWidget;
 class UTMOPNewspaperItemDefinition;
+class UTMOPNewspaperReadingComponent;
 class UTMOPItemDefinition;
 class ATMOPHistoricalAgent;
 class UTMOPVehicleTakeoverComponent;
@@ -163,6 +164,16 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Newspaper")
     bool bNewspaperOpen = false;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Newspaper")
+    TObjectPtr<UTMOPNewspaperReadingComponent> NewspaperReading;
+
+    /** Stable IDs shown in Notebook/Evidence and persisted by the pause-menu save. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Evidence")
+    TArray<FName> DiscoveredEvidenceIds;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|Evidence")
+    bool DiscoverEvidence(FName EvidenceId);
+
     /** BeforeShot is used before this time; AfterShot is used at and after it. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Dialog")
     FTMOPTime DialogShotThreshold = FTMOPTime(23, 21, 30);
@@ -237,7 +248,7 @@ public:
     FKey DropItemFallbackKey = EKeys::G;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
-    bool bUseDirectPauseKeyFallback = false;
+    bool bUseDirectPauseKeyFallback = true;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
     FKey PauseMenuFallbackKey = EKeys::Enter;

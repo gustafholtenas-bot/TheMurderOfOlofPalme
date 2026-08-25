@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Agents/TMOPAgentTypes.h"
+#include "People/TMOPHeldItemTypes.h"
 #include "UI/TMOPEntityLabelTypes.h"
 #include "GameFramework/Character.h"
 #include "TMOPHistoricalAgent.generated.h"
@@ -18,6 +19,7 @@ class UTMOPCharacterAppearanceComponent;
 class UTMOPPersonProfileComponent;
 class USkeletalMeshComponent;
 class UMaterialInterface;
+class UStaticMeshComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FTMOPAgentStateChangedSignature,
@@ -85,6 +87,32 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
     TObjectPtr<UTMOPCharacterAppearanceComponent> CharacterAppearance;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Agent|Held Items")
+    TObjectPtr<UStaticMeshComponent> LeftHandHeldItem;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Agent|Held Items")
+    TObjectPtr<UStaticMeshComponent> RightHandHeldItem;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Agent|Held Items")
+    ETMOPHeldItemPose LeftHandGripPose = ETMOPHeldItemPose::None;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Agent|Held Items")
+    ETMOPHeldItemPose RightHandGripPose = ETMOPHeldItemPose::None;
+
+    UPROPERTY(Transient, BlueprintReadOnly, Category="TMOP|Agent|Held Items")
+    TArray<TObjectPtr<UStaticMeshComponent>> AdditionalCarriedItemComponents;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Agent|Held Items")
+    void ApplyHeldItems(const FTMOPHeldItemDefinition& LeftItem,
+        const FTMOPHeldItemDefinition& RightItem,
+        const TArray<FTMOPHeldItemDefinition>& AdditionalItems);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Agent|Held Items")
+    void ClearHeldItems();
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Agent|Held Items")
+    FName GetDefaultItemSocket(ETMOPItemAttachmentPoint AttachmentPoint) const;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FText DisplayName;
@@ -399,6 +427,12 @@ protected:
         ETMOPAgentActivityState NewActivity);
 
 private:
+    void UpdateHeldItemVisibility();
+    bool IsHeldItemVisibleNow(const FTMOPHeldItemDefinition& Item) const;
+    FTMOPHeldItemDefinition ActiveLeftHandItem;
+    FTMOPHeldItemDefinition ActiveRightHandItem;
+    ETMOPHeldItemPose ResolvedLeftHandGripPose = ETMOPHeldItemPose::None;
+    ETMOPHeldItemPose ResolvedRightHandGripPose = ETMOPHeldItemPose::None;
     FColor ResolveNameLabelColor() const;
     bool ShouldDisplayNameLabel() const;
 

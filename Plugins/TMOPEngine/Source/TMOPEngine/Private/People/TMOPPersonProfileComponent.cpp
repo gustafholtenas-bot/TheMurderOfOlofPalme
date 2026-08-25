@@ -59,6 +59,8 @@ bool UTMOPPersonProfileComponent::LoadProfile()
             Agent->SourceDocumentNumber = Profile.Uppslag.IsEmpty()
                 ? Profile.GeneralSourceReference : Profile.Uppslag;
             Agent->EvidenceIcon = Profile.EvidenceIcon;
+            Agent->ApplyHeldItems(Profile.LeftHandItem, Profile.RightHandItem,
+                Profile.AdditionalCarriedItems);
             Agent->RefreshNameLabel();
             if (UTMOPCharacterAppearanceComponent* Appearance =
                 Agent->FindComponentByClass<UTMOPCharacterAppearanceComponent>())

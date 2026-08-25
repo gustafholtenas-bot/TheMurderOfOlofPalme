@@ -64,4 +64,5 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Newspaper|Reading",
         meta=(ClampMin="0.25", ClampMax="4.0"))
     float InitialZoom = 1.0f;
+
 };

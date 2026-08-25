@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "Styling/SlateBrush.h"
 #include "TMOPNewspaperReaderWidget.generated.h"
 
 class ATMOPPlayerCharacter;
@@ -58,9 +57,8 @@ private:
     FReply HandleZoomOutClicked();
     FReply HandleZoomInClicked();
     FReply HandleCloseClicked();
+    FReply PanPage(float HorizontalDirection, float VerticalDirection);
     void RefreshPage();
-    FOptionalSize GetPageWidth() const;
-    FOptionalSize GetPageHeight() const;
 
     UPROPERTY(Transient)
     TObjectPtr<ATMOPPlayerCharacter> PlayerCharacter;
@@ -68,13 +66,8 @@ private:
     UPROPERTY(Transient)
     TObjectPtr<UTMOPNewspaperItemDefinition> Newspaper;
 
-    UPROPERTY(Transient)
-    TObjectPtr<UTexture2D> CurrentPageTexture;
-
     int32 CurrentPageIndex = 0;
     float Zoom = 1.0f;
-    FSlateBrush PageBrush;
-    TSharedPtr<class SImage> PageImage;
     TSharedPtr<class STextBlock> TitleText;
     TSharedPtr<class STextBlock> PageNumberText;
     TSharedPtr<class STextBlock> PageLabelText;

@@ -6,6 +6,7 @@
 #include "Engine/StaticMeshActor.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Inventory/TMOPItemDefinition.h"
+#include "Items/TMOPItemMeshSubsystem.h"
 #include "Items/TMOPWorldItem.h"
 #include "World/TMOPFindingActor.h"
 #include "Time/TMOPClockSubsystem.h"
@@ -167,6 +168,21 @@ bool ATMOPTimedPropDirector::ApplyEntry(
     }
     else if (Entry.PropKind == ETMOPTimedPropKind::Finding)
     {
+        UStaticMesh* ResolvedFindingMesh = Entry.StaticMesh.LoadSynchronous();
+        FVector ResolvedFindingScale = Entry.FindingScale;
+        const FName FindingCatalogId = !Entry.ItemMeshId.IsNone()
+            ? Entry.ItemMeshId : FName(*Entry.EvidenceId);
+        if (!IsValid(ResolvedFindingMesh) && !FindingCatalogId.IsNone())
+            if (UTMOPItemMeshSubsystem* Catalog = GetGameInstance() != nullptr
+                ? GetGameInstance()->GetSubsystem<UTMOPItemMeshSubsystem>() : nullptr)
+            {
+                FTMOPItemMeshRow Definition;
+                if (Catalog->FindItemMeshDefinition(FindingCatalogId, Definition))
+                {
+                    ResolvedFindingMesh = Definition.Mesh.LoadSynchronous();
+                    ResolvedFindingScale = Definition.DefaultFindingScale;
+                }
+            }
         ATMOPFindingActor* Finding =
             GetWorld()->SpawnActorDeferred<ATMOPFindingActor>(
                 ATMOPFindingActor::StaticClass(), SpawnTransform, this, nullptr,
@@ -176,8 +192,8 @@ bool ATMOPTimedPropDirector::ApplyEntry(
             Entry.FindingDisplayName, Entry.EvidenceId,
             Entry.SourceReference, Entry.SourceTimeLabel,
             Entry.SourceLatitude, Entry.SourceLongitude,
-            Entry.bLocationApproximate, Entry.StaticMesh.LoadSynchronous(),
-            Entry.FindingScale, Entry.FindingColor);
+            Entry.bLocationApproximate, ResolvedFindingMesh,
+            ResolvedFindingScale, Entry.FindingColor);
         Finding->FinishSpawning(SpawnTransform);
         Spawned = Finding;
     }
@@ -252,5 +268,3 @@ void ATMOPTimedPropDirector::DestroyAllSpawnedInstances()
             Actor->Destroy();
     SpawnedInstances.Reset();
 }
-
-

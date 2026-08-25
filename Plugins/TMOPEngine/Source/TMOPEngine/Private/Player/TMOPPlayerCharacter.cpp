@@ -20,6 +20,7 @@
 #include "Items/TMOPInteractable.h"
 #include "Items/TMOPWorldItem.h"
 #include "Newspapers/TMOPNewspaperItemDefinition.h"
+#include "Newspapers/TMOPNewspaperReadingComponent.h"
 #include "Player/TMOPPlayerActionComponent.h"
 #include "Player/TMOPVehicleTakeoverComponent.h"
 #include "Player/TMOPPlayerVehicleDrivingComponent.h"
@@ -72,6 +73,8 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     FootstepAudio = CreateDefaultSubobject<UTMOPAgentAudioComponent>(TEXT("FootstepAudio"));
     MovementAudio = CreateDefaultSubobject<UTMOPPlayerMovementAudioComponent>(TEXT("MovementAudio"));
     MapComponent = CreateDefaultSubobject<UTMOPMapComponent>(TEXT("MapComponent"));
+    NewspaperReading = CreateDefaultSubobject<UTMOPNewspaperReadingComponent>(
+        TEXT("NewspaperReading"));
     WorldItemClass = ATMOPWorldItem::StaticClass();
 }
 
@@ -467,6 +470,11 @@ void ATMOPPlayerCharacter::InputSecondaryActionEnded()
 
 void ATMOPPlayerCharacter::InputCancel()
 {
+    if (bPauseMenuOpen)
+    {
+        SetPauseMenuOpen(false);
+        return;
+    }
     if (bWorldMapOpen)
     {
         CloseWorldMap();
@@ -660,6 +668,14 @@ void ATMOPPlayerCharacter::ToggleWorldMap()
     else OpenWorldMap();
 }
 
+bool ATMOPPlayerCharacter::DiscoverEvidence(const FName EvidenceId)
+{
+    if (EvidenceId.IsNone() || DiscoveredEvidenceIds.Contains(EvidenceId))
+        return false;
+    DiscoveredEvidenceIds.Add(EvidenceId);
+    return true;
+}
+
 bool ATMOPPlayerCharacter::OpenNewspaper(
     UTMOPNewspaperItemDefinition* Newspaper)
 {
@@ -669,6 +685,11 @@ bool ATMOPPlayerCharacter::OpenNewspaper(
     if (bDialogOpen) ClosePersonDialog();
     if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
     if (!NewspaperReaderWidget->OpenNewspaper(Newspaper)) return false;
+    if (!IsValid(NewspaperReading) || !NewspaperReading->BeginReading(Newspaper, 0))
+    {
+        NewspaperReaderWidget->DismissReader();
+        return false;
+    }
 
     bNewspaperOpen = true;
     bNewspaperPausedSimulation = Newspaper->bPauseSimulationWhileReading;
@@ -699,6 +720,7 @@ bool ATMOPPlayerCharacter::OpenNewspaper(
 void ATMOPPlayerCharacter::CloseNewspaper()
 {
     if (!bNewspaperOpen) return;
+    if (IsValid(NewspaperReading)) NewspaperReading->EndReading();
     if (IsValid(NewspaperReaderWidget.Get()))
     {
         NewspaperReaderWidget->DismissReader();
