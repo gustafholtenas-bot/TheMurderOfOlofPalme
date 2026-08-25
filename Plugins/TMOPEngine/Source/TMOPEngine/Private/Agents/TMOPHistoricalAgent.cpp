@@ -292,7 +292,8 @@ void ATMOPHistoricalAgent::BeginDialogueFocus(AActor* Target)
 {
     if (!IsValid(Target) || Target == this) return;
 
-    if (!bDialogueFocusLocked)
+    const bool bSeated = IsSeatedForDialogue();
+    if (!bDialogueFocusLocked && !bSeated)
     {
         DialogueReturnRotation = GetActorRotation();
         bDialogueReturnRotationSaved = true;
@@ -302,7 +303,9 @@ void ATMOPHistoricalAgent::BeginDialogueFocus(AActor* Target)
     SetSocialFocus(Target, -1.0f, true);
     bDialogueFocusLocked = true;
 
-    if (GetVelocity().Size2D() <= 20.0f)
+    // Seated people retain the chair/vehicle transform. Their neck and upper
+    // spine use SocialLookYaw/Pitch instead of rotating the whole actor.
+    if (!bSeated && GetVelocity().Size2D() <= 20.0f)
     {
         const FVector Direction = Target->GetActorLocation() - GetActorLocation();
         if (!Direction.IsNearlyZero())
@@ -313,6 +316,18 @@ void ATMOPHistoricalAgent::BeginDialogueFocus(AActor* Target)
             SetActorRotation(Facing);
         }
     }
+}
+
+bool ATMOPHistoricalAgent::IsSeatedForDialogue() const
+{
+    if (ActivityState == ETMOPAgentActivityState::Seated ||
+        ActivityState == ETMOPAgentActivityState::RidingVehicle)
+        return true;
+    const UTMOPAnimationStateComponent* Animation =
+        FindComponentByClass<UTMOPAnimationStateComponent>();
+    return IsValid(Animation) &&
+        (Animation->Posture == ETMOPAnimPosture::Sitting ||
+         Animation->Posture == ETMOPAnimPosture::SittingInCar);
 }
 
 void ATMOPHistoricalAgent::EndDialogueFocus()
@@ -345,9 +360,11 @@ void ATMOPHistoricalAgent::UpdateSocialFocus(const float DeltaSeconds)
             Target->GetActorLocation() + FVector(0.0f, 0.0f, 60.0f);
         const FRotator LocalLook =
             (TargetLocation - EyeLocation).Rotation() - GetActorRotation();
+        const float MaximumYaw = IsSeatedForDialogue()
+            ? MaximumSeatedSocialLookYaw : MaximumSocialLookYaw;
         TargetYaw = FMath::Clamp(
             FMath::FindDeltaAngleDegrees(0.0f, LocalLook.Yaw),
-            -MaximumSocialLookYaw, MaximumSocialLookYaw);
+            -MaximumYaw, MaximumYaw);
         TargetPitch = FMath::Clamp(
             FMath::FindDeltaAngleDegrees(0.0f, LocalLook.Pitch),
             -MaximumSocialLookPitch, MaximumSocialLookPitch);
@@ -361,7 +378,8 @@ void ATMOPHistoricalAgent::UpdateSocialFocus(const float DeltaSeconds)
     SocialLookAlpha = FMath::FInterpTo(
         SocialLookAlpha, TargetAlpha, DeltaSeconds, SocialLookInterpolationSpeed);
 
-    if (bUseSubtleMeshTurnForSocialLook && IsValid(GetMesh()))
+    if (bUseSubtleMeshTurnForSocialLook && !IsSeatedForDialogue() &&
+        IsValid(GetMesh()))
     {
         const float MeshYaw = FMath::Clamp(
             SocialLookYaw, -MaximumSocialMeshTurnYaw, MaximumSocialMeshTurnYaw)

@@ -260,6 +260,9 @@ public:
     bool IsDialogueFocused() const { return bDialogueFocusLocked; }
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Agent|Social")
+    bool IsSeatedForDialogue() const;
+
+    UFUNCTION(BlueprintPure, Category = "TMOP|Agent|Social")
     AActor* GetSocialFocusTarget() const { return SocialFocusTarget.Get(); }
 
     /** Smoothed yaw consumed by ABP_TMOPAgent for neck/spine aim. */
@@ -276,6 +279,11 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Social",
         meta = (ClampMin = "0.0", ClampMax = "80.0", Units = "deg"))
     float MaximumSocialLookYaw = 55.0f;
+
+    /** Combined upper-spine/neck range while the actor remains fixed to a seat. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Social",
+        meta = (ClampMin = "0.0", ClampMax = "85.0", Units = "deg"))
+    float MaximumSeatedSocialLookYaw = 70.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Social",
         meta = (ClampMin = "0.0", ClampMax = "45.0", Units = "deg"))

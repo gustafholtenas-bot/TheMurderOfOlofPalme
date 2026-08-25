@@ -112,6 +112,10 @@ public:
                 case ETMOPMapMarkerCategory::Metro: Symbol = FText::FromString(TEXT("T")); break;
                 case ETMOPMapMarkerCategory::Club: Symbol = FText::FromString(TEXT("K")); break;
                 case ETMOPMapMarkerCategory::Pub: Symbol = FText::FromString(TEXT("P")); break;
+                case ETMOPMapMarkerCategory::Church: Symbol = FText::FromString(TEXT("†")); break;
+                case ETMOPMapMarkerCategory::ATM: Symbol = FText::FromString(TEXT("A")); break;
+                case ETMOPMapMarkerCategory::Hotel: Symbol = FText::FromString(TEXT("H")); break;
+                case ETMOPMapMarkerCategory::BusStop: Symbol = FText::FromString(TEXT("B")); break;
                 default: break;
                 }
                 if (!Widget->IsMinimap())
@@ -131,6 +135,85 @@ public:
             }
         }
         Layer += 2;
+
+        FVector OlofLocation;
+        if (Map->GetOlofPalmeMapLocation(OlofLocation))
+        {
+            const FVector2D OlofP = MapOrigin + Map->WorldToMapUV(OlofLocation) * MapSize;
+            const float OlofSize = Widget->IsMinimap() ? 14.0f : 26.0f;
+            const FGeometry OlofGeometry = Geometry.MakeChild(FVector2D(OlofSize),
+                FSlateLayoutTransform(OlofP - FVector2D(OlofSize * 0.5f)));
+            if (IsValid(Map->OlofPalmeIcon))
+            {
+                FSlateBrush OlofBrush;
+                OlofBrush.DrawAs = ESlateBrushDrawType::Image;
+                OlofBrush.SetResourceObject(Map->OlofPalmeIcon);
+                FSlateDrawElement::MakeBox(Out, Layer, OlofGeometry.ToPaintGeometry(),
+                    &OlofBrush, ESlateDrawEffect::None, FLinearColor::White);
+            }
+            else
+            {
+                FSlateDrawElement::MakeBox(Out, Layer, OlofGeometry.ToPaintGeometry(),
+                    White, ESlateDrawEffect::None, Map->OlofPalmeMarkerColor);
+                FSlateDrawElement::MakeText(Out, Layer + 1,
+                    OlofGeometry.ToPaintGeometry(), FText::FromString(TEXT("OP")),
+                    FCoreStyle::GetDefaultFontStyle("Bold", Widget->IsMinimap() ? 7 : 10),
+                    ESlateDrawEffect::None, FLinearColor::White);
+            }
+            if (!Widget->IsMinimap() && !Map->OlofPalmeMapLabel.IsEmpty())
+            {
+                const FGeometry OlofLabel = Geometry.MakeChild(FVector2D(170.0f, 24.0f),
+                    FSlateLayoutTransform(OlofP + FVector2D(-85.0f, OlofSize * 0.6f + 2.0f)));
+                FSlateDrawElement::MakeText(Out, Layer + 1, OlofLabel.ToPaintGeometry(),
+                    Map->OlofPalmeMapLabel, FCoreStyle::GetDefaultFontStyle("Bold", 12),
+                    ESlateDrawEffect::None, Map->OlofPalmeMarkerColor);
+            }
+            Layer += 2;
+        }
+
+        auto DrawTrackedAgents = [&](const TArray<FVector>& Locations,
+            UTexture2D* Icon, const FLinearColor& Color, const FText& Symbol)
+        {
+            const float Size = Widget->IsMinimap() ? 8.0f : 15.0f;
+            for (const FVector& Location : Locations)
+            {
+                const FVector2D Point = MapOrigin + Map->WorldToMapUV(Location) * MapSize;
+                if (Point.X < MapOrigin.X || Point.Y < MapOrigin.Y ||
+                    Point.X > MapOrigin.X + MapSize.X || Point.Y > MapOrigin.Y + MapSize.Y)
+                    continue;
+                const FGeometry MarkerGeometry = Geometry.MakeChild(FVector2D(Size),
+                    FSlateLayoutTransform(Point - FVector2D(Size * 0.5f)));
+                if (IsValid(Icon))
+                {
+                    FSlateBrush TrackingBrush;
+                    TrackingBrush.DrawAs = ESlateBrushDrawType::Image;
+                    TrackingBrush.SetResourceObject(Icon);
+                    FSlateDrawElement::MakeBox(Out, Layer,
+                        MarkerGeometry.ToPaintGeometry(), &TrackingBrush,
+                        ESlateDrawEffect::None, FLinearColor::White);
+                }
+                else
+                {
+                    FSlateDrawElement::MakeBox(Out, Layer,
+                        MarkerGeometry.ToPaintGeometry(), White,
+                        ESlateDrawEffect::None, Color);
+                    if (!Widget->IsMinimap())
+                        FSlateDrawElement::MakeText(Out, Layer + 1,
+                            MarkerGeometry.ToPaintGeometry(), Symbol,
+                            FCoreStyle::GetDefaultFontStyle("Bold", 8),
+                            ESlateDrawEffect::None, FLinearColor::Black);
+                }
+            }
+            Layer += 2;
+        };
+        TArray<FVector> ObservedLocations;
+        Map->GetObservedPersonMapLocations(ObservedLocations);
+        DrawTrackedAgents(ObservedLocations, Map->ObservedPersonIcon,
+            Map->ObservedPersonMarkerColor, FText::FromString(TEXT("O")));
+        TArray<FVector> PoliceLocations;
+        Map->GetPoliceMapLocations(PoliceLocations);
+        DrawTrackedAgents(PoliceLocations, Map->PoliceTrackingIcon,
+            Map->PoliceMarkerColor, FText::FromString(TEXT("P")));
 
         const FVector2D PlayerP = MapOrigin +
             Map->WorldToMapUV(Map->GetTrackedWorldLocation()) * MapSize;

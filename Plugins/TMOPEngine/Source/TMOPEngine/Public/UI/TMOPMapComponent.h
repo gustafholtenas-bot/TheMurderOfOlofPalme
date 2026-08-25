@@ -5,6 +5,7 @@
 #include "TMOPMapComponent.generated.h"
 
 class UTexture2D;
+class ATMOPHistoricalAgent;
 
 UENUM(BlueprintType)
 enum class ETMOPMapMarkerCategory : uint8
@@ -16,7 +17,11 @@ enum class ETMOPMapMarkerCategory : uint8
     Club,
     Pub,
     Evidence,
-    Custom
+    Custom,
+    Church,
+    ATM,
+    Hotel,
+    BusStop
 };
 
 USTRUCT(BlueprintType)
@@ -57,6 +62,8 @@ class TMOPENGINE_API UTMOPMapComponent : public UActorComponent
 public:
     UTMOPMapComponent();
     virtual void BeginPlay() override;
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+        FActorComponentTickFunction* ThisTickFunction) override;
 
     /** North-up, top-down Stockholm image covering WorldMinimum to WorldMaximum. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Projection")
@@ -108,6 +115,56 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Venues|Icons")
     TObjectPtr<UTexture2D> PubIcon;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Venues|Icons")
+    TObjectPtr<UTexture2D> ChurchIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Venues|Icons")
+    TObjectPtr<UTexture2D> ATMIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Venues|Icons")
+    TObjectPtr<UTexture2D> HotelIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Venues|Icons")
+    TObjectPtr<UTexture2D> BusStopIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    bool bTrackOlofPalme = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    FName OlofPalmeEntityId = TEXT("OLOF_PALME");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    FText OlofPalmeMapLabel = NSLOCTEXT("TMOP", "OlofPalmeLiveMapLabel", "Olof Palme – live");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    TObjectPtr<UTexture2D> OlofPalmeIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    FLinearColor OlofPalmeMarkerColor = FLinearColor(1.0f, 0.12f, 0.08f, 1.0f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    bool bTrackObservedPeople = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    TObjectPtr<UTexture2D> ObservedPersonIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    FLinearColor ObservedPersonMarkerColor = FLinearColor(0.15f, 1.0f, 0.3f, 1.0f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    bool bTrackPolice = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    TObjectPtr<UTexture2D> PoliceTrackingIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    FLinearColor PoliceMarkerColor = FLinearColor(0.15f, 0.45f, 1.0f, 1.0f);
+
+    /** Agent classification is refreshed at this interval, not every frame. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking",
+        meta=(ClampMin="1.0", ClampMax="30.0", Units="s"))
+    float LiveTrackingRefreshSeconds = 5.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Markers")
     TArray<FTMOPMapMarker> Markers;
 
@@ -130,9 +187,24 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Map|Venues")
     UTexture2D* GetCategoryIcon(ETMOPMapMarkerCategory Category) const;
 
+    /** Returns false while Olof has not spawned or after he has despawned. */
+    UFUNCTION(BlueprintPure, Category="TMOP|Map|Live Tracking")
+    bool GetOlofPalmeMapLocation(FVector& OutWorldLocation) const;
+
+    void GetObservedPersonMapLocations(TArray<FVector>& OutLocations) const;
+    void GetPoliceMapLocations(TArray<FVector>& OutLocations) const;
+
     UFUNCTION(BlueprintPure, Category="TMOP|Map")
     FVector GetTrackedWorldLocation() const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|Map")
     FVector2D GetTrackedMapDirection() const;
+
+private:
+    void RefreshLiveTrackingCache();
+    float LiveTrackingRefreshRemaining = 0.0f;
+    bool bCachedOlofPalmeLocationValid = false;
+    FVector CachedOlofPalmeLocation = FVector::ZeroVector;
+    TArray<FVector> CachedObservedPeopleLocations;
+    TArray<FVector> CachedPoliceLocations;
 };

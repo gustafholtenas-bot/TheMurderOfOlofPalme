@@ -41,7 +41,8 @@ enum class ETMOPAnchorCategory : uint8
     PlayerSpawn,
     ItemSpawn,
     RouteNode,
-    MapExit
+    MapExit,
+    Church
 };
 
 UENUM(BlueprintType)
@@ -63,7 +64,8 @@ enum class ETMOPPlaceCategory : uint8
     Park,
     Cemetery,
     District,
-    Other
+    Other,
+    Church
 };
 
 USTRUCT(BlueprintType)

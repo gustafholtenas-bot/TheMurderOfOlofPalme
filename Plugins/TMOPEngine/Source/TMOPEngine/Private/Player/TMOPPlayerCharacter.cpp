@@ -5,6 +5,7 @@
 #include "Audio/TMOPAgentAudioComponent.h"
 #include "Audio/TMOPPlayerMovementAudioComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Camera/CameraActor.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -724,6 +725,7 @@ void ATMOPPlayerCharacter::CloseNewspaper()
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if (bDialogOpen) UpdateDialogCloseUp(DeltaSeconds);
     if (!bPlayerInterfaceInitialized) InitializePlayerInterface();
     if (bDialogOpen)
     {
@@ -873,6 +875,7 @@ bool ATMOPPlayerCharacter::OpenPersonDialog(
     ActiveDialogAgent = HistoricalAgent;
     bDialogOpen = true;
     HistoricalAgent->BeginDialogueFocus(this);
+    BeginDialogCloseUp(HistoricalAgent);
     DialogWidget->ShowDialog(Speaker, Dialog);
     if (IsValid(InteractionPromptWidget.Get()))
         InteractionPromptWidget->SetPromptText(FText::GetEmpty());
@@ -899,6 +902,7 @@ void ATMOPPlayerCharacter::ClosePersonDialog()
         Agent->EndDialogueFocus();
     ActiveDialogAgent.Reset();
     bDialogOpen = false;
+    EndDialogCloseUp();
     if (IsValid(DialogWidget.Get())) DialogWidget->HideDialog();
 
     if (APlayerController* PC = Cast<APlayerController>(Controller))
@@ -908,6 +912,80 @@ void ATMOPPlayerCharacter::ClosePersonDialog()
         PC->SetIgnoreLookInput(false);
         PC->SetInputMode(FInputModeGameOnly());
     }
+}
+
+void ATMOPPlayerCharacter::BeginDialogCloseUp(
+    ATMOPHistoricalAgent* HistoricalAgent)
+{
+    if (!bEnableDialogCloseUp || !IsValid(HistoricalAgent) ||
+        GetWorld() == nullptr)
+        return;
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (!IsValid(PC)) return;
+
+    PreDialogViewTarget = PC->GetViewTarget();
+    DialogCameraActor = GetWorld()->SpawnActor<ACameraActor>(
+        ACameraActor::StaticClass(), FTransform::Identity);
+    if (!IsValid(DialogCameraActor)) return;
+    DialogCameraActor->GetCameraComponent()->SetFieldOfView(
+        DialogCameraFieldOfView);
+    UpdateDialogCloseUp(0.0f);
+    PC->SetViewTargetWithBlend(DialogCameraActor,
+        DialogCameraBlendSeconds, EViewTargetBlendFunction::VTBlend_Cubic);
+}
+
+void ATMOPPlayerCharacter::UpdateDialogCloseUp(const float DeltaSeconds)
+{
+    ATMOPHistoricalAgent* Agent = ActiveDialogAgent.Get();
+    if (!IsValid(DialogCameraActor) || !IsValid(Agent)) return;
+
+    const FVector Focus = Agent->GetActorLocation() +
+        FVector(0.0f, 0.0f, DialogFaceHeightCm);
+    FVector TowardPlayer = GetActorLocation() - Agent->GetActorLocation();
+    TowardPlayer.Z = 0.0f;
+    if (!TowardPlayer.Normalize())
+        TowardPlayer = -Agent->GetActorForwardVector().GetSafeNormal2D();
+    const FVector Side = FVector::CrossProduct(FVector::UpVector, TowardPlayer);
+    FVector DesiredLocation = Focus + TowardPlayer * DialogCameraDistanceCm +
+        Side * DialogCameraSideOffsetCm + FVector(0.0f, 0.0f, 8.0f);
+
+    FCollisionObjectQueryParams StaticOnly;
+    StaticOnly.AddObjectTypesToQuery(ECC_WorldStatic);
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(TMOPDialogCamera), false);
+    Query.AddIgnoredActor(this);
+    Query.AddIgnoredActor(Agent);
+    FHitResult Hit;
+    if (GetWorld()->LineTraceSingleByObjectType(Hit, Focus, DesiredLocation,
+        StaticOnly, Query))
+        DesiredLocation = Hit.Location + Hit.Normal * 12.0f;
+
+    const FRotator DesiredRotation = (Focus - DesiredLocation).Rotation();
+    if (DeltaSeconds <= 0.0f)
+    {
+        DialogCameraActor->SetActorLocationAndRotation(
+            DesiredLocation, DesiredRotation);
+        return;
+    }
+    DialogCameraActor->SetActorLocationAndRotation(
+        FMath::VInterpTo(DialogCameraActor->GetActorLocation(), DesiredLocation,
+            DeltaSeconds, DialogCameraTrackingSpeed),
+        FMath::RInterpTo(DialogCameraActor->GetActorRotation(), DesiredRotation,
+            DeltaSeconds, DialogCameraTrackingSpeed));
+}
+
+void ATMOPPlayerCharacter::EndDialogCloseUp()
+{
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (IsValid(PC) && IsValid(DialogCameraActor))
+    {
+        AActor* ReturnTarget = PreDialogViewTarget.IsValid()
+            ? PreDialogViewTarget.Get() : this;
+        PC->SetViewTargetWithBlend(ReturnTarget, DialogCameraBlendSeconds,
+            EViewTargetBlendFunction::VTBlend_Cubic);
+        DialogCameraActor->SetLifeSpan(DialogCameraBlendSeconds + 0.15f);
+    }
+    DialogCameraActor = nullptr;
+    PreDialogViewTarget.Reset();
 }
 
 void ATMOPPlayerCharacter::InputQuickInventoryStarted()

@@ -31,6 +31,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Anchor")
     FName ParentAnchorId = NAME_None;
 
+    /** Disable for technical anchors which should never represent a place on the map. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Anchor|Map")
+    bool bShowOnMap = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Anchor")
     int32 FloorLevel = 0;
 

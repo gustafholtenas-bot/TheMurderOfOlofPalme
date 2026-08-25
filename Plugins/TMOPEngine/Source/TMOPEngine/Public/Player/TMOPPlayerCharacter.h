@@ -32,6 +32,7 @@ class UTMOPPlayerVehicleSessionComponent;
 class UTMOPAgentAudioComponent;
 class UTMOPPlayerMovementAudioComponent;
 class UTMOPMapComponent;
+class ACameraActor;
 class UTMOPMapWidget;
 
 UCLASS(Blueprintable)
@@ -316,6 +317,33 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera")
     float ShoulderSwapSpeed = 8.0f;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Dialog")
+    bool bEnableDialogCloseUp = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Dialog",
+        meta=(ClampMin="0.0", Units="cm"))
+    float DialogCameraDistanceCm = 185.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Dialog",
+        meta=(Units="cm"))
+    float DialogCameraSideOffsetCm = 38.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Dialog",
+        meta=(ClampMin="80.0", ClampMax="220.0", Units="cm"))
+    float DialogFaceHeightCm = 160.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Dialog",
+        meta=(ClampMin="20.0", ClampMax="90.0"))
+    float DialogCameraFieldOfView = 42.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Dialog",
+        meta=(ClampMin="0.0", ClampMax="3.0", Units="s"))
+    float DialogCameraBlendSeconds = 0.45f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Dialog",
+        meta=(ClampMin="1.0"))
+    float DialogCameraTrackingSpeed = 8.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
     float InteractionDistance = 300.0f;
 
@@ -392,6 +420,9 @@ private:
     void UpdateQuickInventoryPointer();
     void UpdateInteractionPrompt();
     void SetSprinting(bool bEnabled, bool bExtraSprint = false);
+    void BeginDialogCloseUp(ATMOPHistoricalAgent* HistoricalAgent);
+    void UpdateDialogCloseUp(float DeltaSeconds);
+    void EndDialogCloseUp();
 
     UFUNCTION()
     void HandleItemMenuRequested(UTMOPItemDefinition* Item);
@@ -409,4 +440,7 @@ private:
     bool bDropFallbackHeld = false;
     bool bInteractFallbackHeld = false;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
+    UPROPERTY(Transient)
+    TObjectPtr<ACameraActor> DialogCameraActor;
+    TWeakObjectPtr<AActor> PreDialogViewTarget;
 };
