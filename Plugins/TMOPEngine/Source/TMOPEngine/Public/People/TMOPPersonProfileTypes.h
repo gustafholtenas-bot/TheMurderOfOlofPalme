@@ -189,9 +189,13 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     ETMOPVehicleRouteMode VehicleRouteMode =
         ETMOPVehicleRouteMode::ManualLaneRoute;
 
-    /** Destination used by Automatic To Anchor and Manual Then Automatic. */
+    /**
+     * Exact destination/parking transform. Automatic modes calculate the
+     * complete route to it. Manual Lane Route uses it for the smooth final
+     * approach from the last supplied lane.
+     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
-        meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving && VehicleRouteMode!=ETMOPVehicleRouteMode::ManualLaneRoute",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
             DisplayName="Destination Anchor ID"))
     FName DrivingDestinationAnchorId = NAME_None;
 
@@ -234,6 +238,16 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     /** Catch-up may place the person directly when play begins after this entry. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")
     bool bTeleportDuringCatchUp = true;
+
+    /**
+     * A precise historical deadline may replace an older movement which is
+     * still active when this entry becomes due. No teleport is performed: the
+     * previous navigation request is cancelled and this entry starts from the
+     * person's actual position. Leave disabled for ordinary schedules.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(DisplayName="Supersede Active Movement When Due"))
+    bool bSupersedeActiveMovementWhenDue = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Source")
     ETMOPHistoricalConfidence Confidence = ETMOPHistoricalConfidence::Documented;

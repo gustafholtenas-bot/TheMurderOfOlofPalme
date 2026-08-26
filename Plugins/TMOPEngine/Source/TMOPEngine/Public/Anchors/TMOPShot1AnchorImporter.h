@@ -6,7 +6,7 @@
 
 class ATMOPHistoricalAnchor;
 
-/** Imports the Page 31 relative witness/vehicle anchors as persistent actors. */
+/** Imports TMOP_SHOT1_WITNESS_ANCHORS.json as persistent level actors. */
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPShot1AnchorImporter : public AActor
 {
@@ -21,7 +21,7 @@ public:
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Shot1 Anchor Import")
     FString JsonFilePath =
-        TEXT("TMOP/Data/TMOP_PAGE31_WITNESS_TIMELINE_ANCHORS.json");
+        TEXT("TMOP/Data/TMOP_SHOT1_WITNESS_ANCHORS.json");
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Shot1 Anchor Import")
     TSubclassOf<ATMOPHistoricalAnchor> AnchorClass;

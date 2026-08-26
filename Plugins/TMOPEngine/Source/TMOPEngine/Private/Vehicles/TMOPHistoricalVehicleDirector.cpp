@@ -10,6 +10,7 @@
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Vehicles/TMOPConfiguredVehicle.h"
@@ -180,6 +181,29 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                         *Runtime.Profile.VehicleId.ToString(),
                         *Entry.EntryId.ToString());
                     continue;
+                }
+                if (Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
+                    Entry.Action == ETMOPHistoricalVehicleAction::Park)
+                {
+                    const float CorrectionDistanceCm = FVector::Dist2D(
+                        Vehicle->GetActorLocation(), Target.GetLocation());
+                    if (!bAllowDistantTimedParkingTeleport &&
+                        CorrectionDistanceCm > TimedParkingAlignmentToleranceCm)
+                    {
+                        // A timetable is not permission to hide an invalid or
+                        // blocked route. Stop where the vehicle really is and
+                        // let validation expose the missed parking anchor.
+                        // Keep the planned route incomplete so occupants do
+                        // not disembark at the wrong location.
+                        Movement->StopDriving();
+                        Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+                        UE_LOG(LogTemp, Error,
+                            TEXT("TMOP VehicleTimedPlacement: '%s' missed '%s' by %.0f cm; distant teleport suppressed."),
+                            *Runtime.Profile.VehicleId.ToString(),
+                            *Entry.PlacementAnchorId.ToString(),
+                            CorrectionDistanceCm);
+                        continue;
+                    }
                 }
                 Movement->StopDriving();
                 Movement->PlannedLaneIds.Reset();
@@ -1307,6 +1331,47 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
             TEXT("TMOP driving: calculated %d lane(s) through %d pass anchor(s) to '%s'."),
             Route.Num(), PassAnchorIds.Num(),
             *DestinationAnchorId.ToString());
+    }
+
+    // Manual lane routes also need their exact parking transform. Previously
+    // DestinationAnchorId was ignored in this mode, so emergency vehicles
+    // drove to the end of the last lane and a timed Stop later teleported them
+    // back. Use the closest point on the final supplied lane and the same
+    // smooth final approach as automatic routing.
+    if (RouteMode == ETMOPVehicleRouteMode::ManualLaneRoute &&
+        !DestinationAnchorId.IsNone() && !Route.IsEmpty() &&
+        GetGameInstance() != nullptr)
+    {
+        UTMOPAnchorSubsystem* Anchors =
+            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+        UTMOPTrafficNetworkSubsystem* Network =
+            GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>();
+        ATMOPHistoricalAnchor* Destination = Anchors != nullptr
+            ? Anchors->FindAnchor(DestinationAnchorId) : nullptr;
+        if (Network != nullptr) Network->DiscoverLanesInWorld();
+        UTMOPTrafficLaneComponent* FinalLane = Network != nullptr
+            ? Network->FindLane(Route.Last()) : nullptr;
+        if (!IsValid(Destination) || !IsValid(FinalLane))
+        {
+            return ReportDrivingFailure(VehicleId,
+                !IsValid(Destination)
+                    ? TEXT("ManualDestinationAnchorUnavailable")
+                    : TEXT("ManualFinalLaneUnavailable"),
+                FString::Printf(
+                    TEXT("Manual route for '%s' cannot resolve destination '%s' on final lane '%s'."),
+                    *VehicleId.ToString(), *DestinationAnchorId.ToString(),
+                    *Route.Last().ToString()));
+        }
+        FinalDestinationLaneId = Route.Last();
+        const float DestinationInputKey =
+            FinalLane->FindInputKeyClosestToWorldLocation(
+                Destination->GetAnchorLocation());
+        FinalDestinationLaneDistance =
+            FinalLane->GetDistanceAlongSplineAtSplineInputKey(
+                DestinationInputKey);
+        FinalDestinationTransform = FTransform(
+            Destination->GetAnchorRotation(),
+            Destination->GetAnchorLocation(), FVector::OneVector);
     }
 
     if (Route.IsEmpty())

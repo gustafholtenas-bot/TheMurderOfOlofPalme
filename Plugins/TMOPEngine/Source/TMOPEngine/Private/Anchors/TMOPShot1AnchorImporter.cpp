@@ -13,7 +13,7 @@
 
 namespace
 {
-    const FName ImportedShot1Tag(TEXT("TMOP_IMPORTED_PAGE31_ANCHOR"));
+    const FName ImportedShot1Tag(TEXT("TMOP_IMPORTED_SHOT1_ANCHOR"));
 
     bool ReadNumber(
         const TSharedPtr<FJsonObject>& Object,
@@ -240,7 +240,7 @@ void ATMOPShot1AnchorImporter::ImportOrUpdateShot1Anchors()
 
 #if WITH_EDITOR
         Anchor->SetActorLabel(AnchorIdString);
-        Anchor->SetFolderPath(TEXT("TMOP/Anchors/Page31Timeline"));
+        Anchor->SetFolderPath(TEXT("TMOP/Anchors/Shot1Witnesses"));
 #endif
         Anchor->RerunConstructionScripts();
         Anchor->MarkPackageDirty();

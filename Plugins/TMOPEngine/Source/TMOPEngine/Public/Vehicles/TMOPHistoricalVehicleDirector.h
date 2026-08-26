@@ -72,6 +72,20 @@ public:
         meta=(ClampMin="0.0", Units="s"))
     float EntryCollisionReleaseDelaySeconds = 2.0f;
 
+    /** A completed Stop/Park may align by at most this distance. Larger
+     * corrections are reported and left in place instead of visibly
+     * teleporting a vehicle across the street or back along its route. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicles|Parking",
+        meta=(ClampMin="0.0", Units="cm"))
+    float TimedParkingAlignmentToleranceCm = 125.0f;
+
+    /** Compatibility switch for old tables that intentionally used distant
+     * Stop/Park entries as teleports. Keep false for historical simulation. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicles|Parking")
+    bool bAllowDistantTimedParkingTeleport = false;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Historical Vehicles")
     int32 InitializeHistoricalVehicles();
 

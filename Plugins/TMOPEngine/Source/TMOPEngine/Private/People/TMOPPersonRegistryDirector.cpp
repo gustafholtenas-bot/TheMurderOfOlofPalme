@@ -426,7 +426,23 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                 continue;
             }
 
-            if (!bEntryCatchUp && IsAgentBusy(Agent)) break;
+            if (!bEntryCatchUp && IsAgentBusy(Agent))
+            {
+                if (!Entry.bSupersedeActiveMovementWhenDue)
+                    break;
+
+                // Precision timelines must not remain permanently hidden
+                // behind an earlier delayed navigation request. Cancel only
+                // movement; the new entry starts from the live actor position.
+                if (IsValid(Agent->ActionExecutor))
+                    Agent->ActionExecutor->CancelCurrentAction();
+                if (AController* Controller = Agent->GetController())
+                    Controller->StopMovement();
+                UE_LOG(LogTemp, Warning,
+                    TEXT("TMOP precision: '%s' superseded an active movement for due entry '%s'."),
+                    *Runtime.Profile.EntityId.ToString(),
+                    *Entry.EntryId.ToString());
+            }
             const bool bApplied =
                 ApplyTimelineEntry(Runtime, Entry, bEntryCatchUp);
             OnTimelineEntryApplied.Broadcast(
