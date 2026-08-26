@@ -22,6 +22,7 @@ class UTMOPPauseMenuWidget;
 class ATMOPWorldItem;
 class UTMOPInteractionPromptWidget;
 class UTMOPDialogWidget;
+class UTMOPAgentInfoChartWidget;
 class UTMOPNewspaperReaderWidget;
 class UTMOPNewspaperItemDefinition;
 class UTMOPNewspaperReadingComponent;
@@ -30,6 +31,7 @@ class ATMOPHistoricalAgent;
 class UTMOPVehicleTakeoverComponent;
 class UTMOPPlayerVehicleDrivingComponent;
 class UTMOPPlayerVehicleSessionComponent;
+class UTMOPCameraPerspectiveComponent;
 class UTMOPAgentAudioComponent;
 class UTMOPPlayerMovementAudioComponent;
 class UTMOPMapComponent;
@@ -81,6 +83,10 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Vehicle")
     TObjectPtr<UTMOPPlayerVehicleSessionComponent> VehicleSession;
+
+    /** V toggles the local player between third- and first-person cameras. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Camera")
+    TObjectPtr<UTMOPCameraPerspectiveComponent> CameraPerspective;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|Audio")
     TObjectPtr<UTMOPAgentAudioComponent> FootstepAudio;
@@ -155,6 +161,18 @@ public:
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Dialog")
     bool bDialogOpen = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Agent Info")
+    TSubclassOf<UTMOPAgentInfoChartWidget> AgentInfoChartWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Agent Info")
+    bool bCreateAgentInfoChartWidget = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Agent Info")
+    TObjectPtr<UTMOPAgentInfoChartWidget> AgentInfoChartWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Agent Info")
+    bool bAgentInfoChartOpen = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Newspaper")
     TSubclassOf<UTMOPNewspaperReaderWidget> NewspaperReaderWidgetClass;
@@ -376,6 +394,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target")
     bool bUseFrontHemisphereTargetFallback = true;
 
+    /** Vertical point inside a person's bounds used for the on-screen marker. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target",
+        meta=(ClampMin="-0.5", ClampMax="0.5"))
+    float PersonTargetMarkerHeightFraction = 0.20f;
+
+    /** Keeps the target marker and its text away from the viewport edges. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target",
+        meta=(ClampMin="0.0"))
+    float TargetMarkerScreenEdgePadding = 110.0f;
+
     /** Maximum off-centre angle for selecting a person or small item. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction",
         meta=(ClampMin="1.0", ClampMax="20.0", Units="deg"))
@@ -427,6 +455,12 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Dialog")
     void ClosePersonDialog();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Agent Info")
+    bool OpenAgentInfoChart(ATMOPHistoricalAgent* HistoricalAgent);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Agent Info")
+    void CloseAgentInfoChart();
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Newspaper")
     bool OpenNewspaper(UTMOPNewspaperItemDefinition* Newspaper);

@@ -688,6 +688,24 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
         meta=(DisplayName="Uppslag"))
     FString Uppslag;
 
+    /** Explicit status shown in the in-game agent information chart. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Agent Info")
+    bool bPoliceInterviewed = false;
+
+    /** Optional source-edited first-person account. Empty generates a summary from Timeline. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Agent Info",
+        meta=(MultiLine="true", DisplayName="Timeline Summary"))
+    FText AgentTimelineSummary;
+
+    /** Source-preserving summary of this person's observations or testimony. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Agent Info",
+        meta=(MultiLine="true"))
+    FText ObservationSummary;
+
+    /** Documents supporting the information displayed in the chart. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Agent Info")
+    FString AgentInfoSourceReference;
+
     /** Empty uses the director's Default Agent Class. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
     TSubclassOf<ATMOPHistoricalAgent> AgentClass;

@@ -158,6 +158,7 @@ private:
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> ReadingNewspaper;
     UPROPERTY(Transient) TObjectPtr<UCameraComponent> ReadingCamera;
     UPROPERTY(Transient) TObjectPtr<UCameraComponent> PreviousCamera;
+    UPROPERTY(Transient) TObjectPtr<USkeletalMeshComponent> HiddenPlayerMesh;
     UPROPERTY(Transient) TObjectPtr<UMaterialInstanceDynamic> FrontPageMID;
     UPROPERTY(Transient) TObjectPtr<UMaterialInstanceDynamic> LeftPageMID;
     UPROPERTY(Transient) TObjectPtr<UMaterialInstanceDynamic> RightPageMID;
@@ -166,4 +167,6 @@ private:
     FTransform CurrentNewspaperTransform;
     bool bUsingExistingPlayerMesh = false;
     bool bShowingFoldedMesh = false;
+    bool bPreviousPlayerMeshOwnerNoSee = false;
+    bool bPlayerMeshVisibilityOverridden = false;
 };

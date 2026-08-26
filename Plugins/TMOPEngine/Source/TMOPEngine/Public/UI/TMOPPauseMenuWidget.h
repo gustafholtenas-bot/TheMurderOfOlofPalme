@@ -52,6 +52,9 @@ protected:
 private:
     FReply HandleResumeClicked();
     FReply HandleSectionClicked(ETMOPPauseHubSection Section);
+    FReply HandleSourceMainSectionClicked(FName MainSectionId);
+    FReply HandleSourceSeriesClicked(FName SeriesId);
+    FReply HandleSourceBackClicked();
     FReply HandleEquipItem(UTMOPItemDefinition* Item);
     FReply HandleOpenPublication(UTMOPNewspaperItemDefinition* Newspaper);
     FReply HandleGraphicsQuality(int32 Quality);
@@ -83,5 +86,7 @@ private:
     TSharedPtr<STextBlock> StatusText;
     TSharedPtr<SEditableTextBox> TimeEntryBox;
     ETMOPPauseHubSection CurrentSection = ETMOPPauseHubSection::Inventory;
+    FName SelectedSourceMainSection = NAME_None;
+    FName SelectedSourceSeries = NAME_None;
     bool bWorldLabelsVisible = true;
 };

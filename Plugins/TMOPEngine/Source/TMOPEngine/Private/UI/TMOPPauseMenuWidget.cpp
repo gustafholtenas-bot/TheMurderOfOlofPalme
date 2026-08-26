@@ -330,7 +330,41 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
 }
 
 FReply UTMOPPauseMenuWidget::HandleSectionClicked(const ETMOPPauseHubSection Section)
-{ ShowSection(Section); return FReply::Handled(); }
+{
+    if (Section == ETMOPPauseHubSection::Sources)
+    {
+        SelectedSourceMainSection = NAME_None;
+        SelectedSourceSeries = NAME_None;
+    }
+    ShowSection(Section);
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleSourceMainSectionClicked(const FName MainSectionId)
+{
+    SelectedSourceMainSection = MainSectionId;
+    SelectedSourceSeries = NAME_None;
+    if (ContentBox.IsValid()) ContentBox->ClearChildren();
+    BuildSourcesPage();
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleSourceSeriesClicked(const FName SeriesId)
+{
+    SelectedSourceSeries = SeriesId;
+    if (ContentBox.IsValid()) ContentBox->ClearChildren();
+    BuildSourcesPage();
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleSourceBackClicked()
+{
+    if (!SelectedSourceSeries.IsNone()) SelectedSourceSeries = NAME_None;
+    else SelectedSourceMainSection = NAME_None;
+    if (ContentBox.IsValid()) ContentBox->ClearChildren();
+    BuildSourcesPage();
+    return FReply::Handled();
+}
 
 void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
 {
@@ -458,6 +492,284 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             else RowsBySeries.FindOrAdd(Row->SeriesId).Add(Row);
         }
 
+    const auto MainSectionForSeries = [](const FName SeriesId)
+    {
+        const FString Value = SeriesId.ToString().ToUpper();
+        FString Main;
+        for (const TCHAR Character : Value)
+        {
+            if (!FChar::IsAlpha(Character)) break;
+            Main.AppendChar(Character);
+            break;
+        }
+        return Main.IsEmpty() ? NAME_None : FName(*Main);
+    };
+    const auto CoverageForRows = [](const TArray<FTMOPUppslagRow*>& SourceRows)
+    {
+        FTMOPCoverageCounts Result;
+        for (const FTMOPUppslagRow* SourceRow : SourceRows)
+            if (SourceRow != nullptr) Result.Add(ClassifyUppslagCoverage(*SourceRow));
+        return Result;
+    };
+    const auto StatesForRows = [](const TArray<FTMOPUppslagRow*>& SourceRows)
+    {
+        TArray<uint8> Result;
+        Result.Reserve(SourceRows.Num());
+        for (const FTMOPUppslagRow* SourceRow : SourceRows)
+            if (SourceRow != nullptr)
+                Result.Add(static_cast<uint8>(ClassifyUppslagCoverage(*SourceRow)));
+        return Result;
+    };
+    const auto StatisticsForCoverage = [](const FTMOPCoverageCounts& Coverage)
+    {
+        FString Result = FString::Printf(
+            TEXT("%d uppslag inlagda\n%d tillgängliga online men ej inlagda\n")
+            TEXT("%d ej utlämnade från polisen\n")
+            TEXT("%d ej utlämnade men av stort intresse\n%d procent inlagt"),
+            Coverage.Added, Coverage.OnlineNotAdded, Coverage.PoliceOnly,
+            Coverage.PoliceHighPriority, Coverage.AddedPercent());
+        if (Coverage.Unknown > 0)
+            Result += FString::Printf(TEXT("\n%d ej klassificerade"), Coverage.Unknown);
+        return Result;
+    };
+    const auto ResolveSectionDescription = [&SectionDescriptions](const FName SeriesId)
+    {
+        FString Description = SectionDescriptions.FindRef(SeriesId);
+        if (!Description.TrimStartAndEnd().IsEmpty()) return Description;
+        FString ParentId = SeriesId.ToString();
+        while (ParentId.Len() > 1)
+        {
+            ParentId.LeftChopInline(1);
+            const FString ParentDescription = SectionDescriptions.FindRef(FName(*ParentId));
+            if (!ParentDescription.TrimStartAndEnd().IsEmpty()) return ParentDescription;
+        }
+        return FString::Printf(TEXT("Avsnitt %s – beskrivning saknas i registret."),
+            *SeriesId.ToString());
+    };
+
+    struct FSectionCardData
+    {
+        FName Id = NAME_None;
+        FText Label;
+        FString Description;
+        TArray<FTMOPUppslagRow*> Rows;
+        int32 Span = 4;
+        bool bMainSection = false;
+    };
+
+    const auto AssignSpans = [](TArray<FSectionCardData>& Cards)
+    {
+        int32 MaximumCount = 1;
+        for (const FSectionCardData& Card : Cards)
+            MaximumCount = FMath::Max(MaximumCount, Card.Rows.Num());
+        for (FSectionCardData& Card : Cards)
+        {
+            const float RelativeSize = static_cast<float>(Card.Rows.Num()) / MaximumCount;
+            Card.Span = RelativeSize <= 0.16f ? 3
+                : RelativeSize <= 0.38f ? 4
+                : RelativeSize <= 0.72f ? 6 : 12;
+        }
+    };
+    const auto MakeCard = [this, &CoverageForRows, &StatesForRows,
+        &StatisticsForCoverage](const FSectionCardData& Card) -> TSharedRef<SWidget>
+    {
+        const FTMOPCoverageCounts Coverage = CoverageForRows(Card.Rows);
+        const TArray<uint8> States = StatesForRows(Card.Rows);
+        const FText ButtonLabel = Card.Label;
+        TSharedRef<SVerticalBox> CardContent = SNew(SVerticalBox)
+            + SVerticalBox::Slot().AutoHeight()
+            [ SNew(STextBlock).Text(ButtonLabel)
+              .Font(FCoreStyle::GetDefaultFontStyle("Bold", Card.bMainSection ? 30 : 24)) ]
+            + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 3.0f, 0.0f, 8.0f)
+            [ SNew(STextBlock).Text(FText::FromString(Card.Description))
+              .AutoWrapText(true).ColorAndOpacity(FLinearColor(0.78f, 0.80f, 0.84f, 1.0f)) ]
+            + SVerticalBox::Slot().AutoHeight()
+            [ SNew(STMOPUppslagCoverageBar).EntryStates(States).DesiredWidth(420.0f) ]
+            + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f, 0.0f, 0.0f)
+            [ SNew(STextBlock).Text(FText::FromString(StatisticsForCoverage(Coverage)))
+              .AutoWrapText(true) ];
+        if (Card.bMainSection)
+            return SNew(SBox).MinDesiredWidth(230.0f).HeightOverride(220.0f)
+                [ SNew(SButton).ContentPadding(FMargin(14.0f))
+                  .OnClicked_UObject(this,
+                      &UTMOPPauseMenuWidget::HandleSourceMainSectionClicked, Card.Id)
+                  [ CardContent ] ];
+        return SNew(SBox).MinDesiredWidth(230.0f).HeightOverride(220.0f)
+            [ SNew(SButton).ContentPadding(FMargin(14.0f))
+              .OnClicked_UObject(this,
+                  &UTMOPPauseMenuWidget::HandleSourceSeriesClicked, Card.Id)
+              [ CardContent ] ];
+    };
+    const auto AddPackedCards = [this, &MakeCard](const TArray<FSectionCardData>& Cards)
+    {
+        TSharedPtr<SHorizontalBox> CurrentRow;
+        int32 UsedColumns = 0;
+        const auto BeginRow = [&CurrentRow, &UsedColumns]()
+        {
+            CurrentRow = SNew(SHorizontalBox);
+            UsedColumns = 0;
+        };
+        const auto FinishRow = [this, &CurrentRow, &UsedColumns]()
+        {
+            if (!CurrentRow.IsValid() || UsedColumns <= 0) return;
+            if (UsedColumns < 12)
+                CurrentRow->AddSlot().FillWidth(static_cast<float>(12 - UsedColumns))
+                    [ SNew(SSpacer) ];
+            ContentBox->AddSlot().AutoHeight().Padding(0.0f, 4.0f)[ CurrentRow.ToSharedRef() ];
+            CurrentRow.Reset();
+            UsedColumns = 0;
+        };
+        BeginRow();
+        for (const FSectionCardData& Card : Cards)
+        {
+            if (UsedColumns > 0 && UsedColumns + Card.Span > 12)
+            {
+                FinishRow();
+                BeginRow();
+            }
+            CurrentRow->AddSlot().FillWidth(static_cast<float>(Card.Span))
+                .Padding(4.0f)[ MakeCard(Card) ];
+            UsedColumns += Card.Span;
+        }
+        FinishRow();
+    };
+
+    TMap<FName, TArray<FTMOPUppslagRow*>> RowsByMainSection;
+    for (const TPair<FName, TArray<FTMOPUppslagRow*>>& Pair : RowsBySeries)
+    {
+        const FName MainId = MainSectionForSeries(Pair.Key);
+        if (!MainId.IsNone()) RowsByMainSection.FindOrAdd(MainId).Append(Pair.Value);
+    }
+
+    if (SelectedSourceMainSection.IsNone())
+    {
+        AddBody(NSLOCTEXT("TMOP", "SourcesMainSectionHint",
+            "Välj ett huvudavsnitt. Varje ruta summerar alla dess underavsnitt."));
+        TArray<FName> MainIds;
+        RowsByMainSection.GetKeys(MainIds);
+        MainIds.Sort(FNameLexicalLess());
+        TArray<FSectionCardData> Cards;
+        for (const FName MainId : MainIds)
+        {
+            FSectionCardData& Card = Cards.AddDefaulted_GetRef();
+            Card.Id = MainId;
+            Card.Label = FText::FromName(MainId);
+            Card.Description = ResolveSectionDescription(MainId);
+            Card.Rows = RowsByMainSection.FindChecked(MainId);
+            Card.bMainSection = true;
+        }
+        AssignSpans(Cards);
+        AddPackedCards(Cards);
+
+        const auto AddOtherSourceCategory = [this, &Rows](
+            const ETMOPSourceCategory Category, const FText& Heading)
+        {
+            TArray<const FTMOPUppslagRow*> CategoryRows;
+            for (const FTMOPUppslagRow* SourceRow : Rows)
+                if (SourceRow != nullptr && !SourceRow->bIsSectionDefinition &&
+                    SourceRow->SourceCategory == Category)
+                    CategoryRows.Add(SourceRow);
+            if (CategoryRows.IsEmpty()) return;
+            AddHeading(Heading);
+            for (const FTMOPUppslagRow* SourceRow : CategoryRows)
+            {
+                const FString DisplayTitle = SourceRow->Title.IsEmpty()
+                    ? SourceRow->UppslagId.ToString() : SourceRow->Title.ToString();
+                FString Details = SourceRow->bAddedToProject ? TEXT("Inlagt i projektet")
+                    : SourceRow->bPartiallyAdded ? TEXT("Delvis inlagt")
+                    : SourceRow->bRetrieved ? TEXT("Genomgången") : TEXT("Inte genomgången");
+                if (!SourceRow->SourceUrl.IsEmpty()) Details += TEXT("\n") + SourceRow->SourceUrl;
+                AddHeading(FText::FromString(DisplayTitle));
+                AddBody(FText::FromString(Details));
+            }
+        };
+        AddOtherSourceCategory(ETMOPSourceCategory::Book,
+            NSLOCTEXT("TMOP", "BookSourcesHierarchyHeading", "2. BÖCKER"));
+        AddOtherSourceCategory(ETMOPSourceCategory::Article,
+            NSLOCTEXT("TMOP", "ArticleSourcesHierarchyHeading", "3. ARTIKLAR"));
+        AddOtherSourceCategory(ETMOPSourceCategory::Other,
+            NSLOCTEXT("TMOP", "OtherSourcesHierarchyHeading", "4. ANDRA UPPGIFTER"));
+        return;
+    }
+
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 2.0f, 2.0f, 10.0f)
+    [ SNew(SButton).Text(SelectedSourceSeries.IsNone()
+        ? NSLOCTEXT("TMOP", "BackToMainSections", "← Alla huvudavsnitt")
+        : FText::Format(NSLOCTEXT("TMOP", "BackToMainSection", "← Tillbaka till {0}"),
+            FText::FromName(SelectedSourceMainSection)))
+      .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleSourceBackClicked) ];
+
+    if (SelectedSourceSeries.IsNone())
+    {
+        AddHeading(FText::Format(NSLOCTEXT("TMOP", "MainSectionHeading", "{0} – {1}"),
+            FText::FromName(SelectedSourceMainSection),
+            FText::FromString(ResolveSectionDescription(SelectedSourceMainSection))));
+        const TArray<FTMOPUppslagRow*>& MainRows =
+            RowsByMainSection.FindOrAdd(SelectedSourceMainSection);
+        const FTMOPCoverageCounts MainCoverage = CoverageForRows(MainRows);
+        ContentBox->AddSlot().AutoHeight().Padding(2.0f, 2.0f, 2.0f, 14.0f)
+        [ SNew(SVerticalBox)
+          + SVerticalBox::Slot().AutoHeight()
+          [ SNew(STMOPUppslagCoverageBar).EntryStates(StatesForRows(MainRows))
+            .DesiredWidth(760.0f) ]
+          + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 7.0f)
+          [ SNew(STextBlock).Text(FText::FromString(StatisticsForCoverage(MainCoverage))) ] ];
+
+        TArray<FName> ChildSeries;
+        for (const TPair<FName, TArray<FTMOPUppslagRow*>>& Pair : RowsBySeries)
+            if (MainSectionForSeries(Pair.Key) == SelectedSourceMainSection)
+                ChildSeries.Add(Pair.Key);
+        ChildSeries.Sort(FNameLexicalLess());
+        TArray<FSectionCardData> Cards;
+        for (const FName SeriesId : ChildSeries)
+        {
+            FSectionCardData& Card = Cards.AddDefaulted_GetRef();
+            Card.Id = SeriesId;
+            Card.Label = SeriesId == SelectedSourceMainSection
+                ? FText::Format(NSLOCTEXT("TMOP", "MainSectionOther", "{0} – ÖVRIGA"),
+                    FText::FromName(SeriesId))
+                : FText::FromName(SeriesId);
+            Card.Description = ResolveSectionDescription(SeriesId);
+            Card.Rows = RowsBySeries.FindChecked(SeriesId);
+        }
+        AssignSpans(Cards);
+        AddPackedCards(Cards);
+        return;
+    }
+
+    const TArray<FTMOPUppslagRow*>* SelectedRows = RowsBySeries.Find(SelectedSourceSeries);
+    if (SelectedRows == nullptr)
+    {
+        AddBody(NSLOCTEXT("TMOP", "MissingSelectedSeries", "Underavsnittet saknas i registret."));
+        return;
+    }
+    AddHeading(FText::Format(NSLOCTEXT("TMOP", "SelectedSeriesHeading", "AVSNITT {0}"),
+        FText::FromName(SelectedSourceSeries)));
+    AddBody(FText::FromString(ResolveSectionDescription(SelectedSourceSeries)));
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 4.0f, 2.0f, 12.0f)
+    [ SNew(STMOPUppslagCoverageBar).EntryStates(StatesForRows(*SelectedRows))
+      .DesiredWidth(760.0f) ];
+    TArray<FTMOPUppslagRow*> DetailRows = *SelectedRows;
+    DetailRows.Sort([](const FTMOPUppslagRow& A, const FTMOPUppslagRow& B)
+    {
+        return UppslagIdNaturalLess(A.UppslagId, B.UppslagId);
+    });
+    int32 VisibleDetailCount = 0;
+    for (const FTMOPUppslagRow* Row : DetailRows)
+    {
+        if (Row == nullptr) continue;
+        const FString Title = Row->Title.IsEmpty() ? TEXT("Utan titel") : Row->Title.ToString();
+        AddHeading(FText::FromString(FString::Printf(TEXT("%s — %s"),
+            *Row->UppslagId.ToString(), *Title)));
+        FString Details = Row->bAddedToProject ? TEXT("Inlagt")
+            : Row->bPartiallyAdded ? TEXT("Delvis inlagt") : TEXT("Ej inlagt");
+        if (!Row->DocumentDate.IsEmpty()) Details += TEXT(" • ") + Row->DocumentDate;
+        if (!Row->SourceUrl.IsEmpty()) Details += TEXT("\n") + Row->SourceUrl;
+        AddBody(FText::FromString(Details));
+        if (++VisibleDetailCount >= 300) break;
+    }
+    return;
+
     TArray<FName> SeriesIds;
     RowsBySeries.GetKeys(SeriesIds);
     SeriesIds.Sort(FNameLexicalLess());
@@ -490,7 +802,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
       [ SNew(STextBlock).Text(FText::FromString(TotalStatistics))
         .Font(FCoreStyle::GetDefaultFontStyle("Bold", 15)).AutoWrapText(true) ] ];
 
-    const auto ResolveSectionDescription = [&SectionDescriptions](const FName SeriesId)
+    const auto ResolveSectionDescriptionLegacy = [&SectionDescriptions](const FName SeriesId)
     {
         FString Description = SectionDescriptions.FindRef(SeriesId);
         if (!Description.TrimStartAndEnd().IsEmpty()) return Description;
@@ -555,7 +867,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
                 .Font(FCoreStyle::GetDefaultFontStyle("Bold", 28)) ] ]
             + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
             [ SNew(STextBlock).Text(FText::FromString(
-                ResolveSectionDescription(SeriesId))).AutoWrapText(true) ] ]
+                ResolveSectionDescriptionLegacy(SeriesId))).AutoWrapText(true) ] ]
           + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 7.0f, 0.0f, 0.0f)
           [ SNew(SHorizontalBox)
             + SHorizontalBox::Slot().AutoWidth().Padding(105.0f, 0.0f, 18.0f, 0.0f)

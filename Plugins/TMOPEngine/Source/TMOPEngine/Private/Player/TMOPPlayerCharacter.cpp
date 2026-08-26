@@ -27,19 +27,23 @@
 #include "Player/TMOPVehicleTakeoverComponent.h"
 #include "Player/TMOPPlayerVehicleDrivingComponent.h"
 #include "Player/TMOPPlayerVehicleSessionComponent.h"
+#include "Player/TMOPCameraPerspectiveComponent.h"
 #include "People/TMOPPersonRegistryDirector.h"
+#include "People/TMOPPersonProfileComponent.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPQuickInventoryWidget.h"
 #include "UI/TMOPPauseMenuWidget.h"
 #include "UI/TMOPInteractionPromptWidget.h"
 #include "UI/TMOPDialogWidget.h"
+#include "UI/TMOPAgentInfoChartWidget.h"
 #include "UI/TMOPNewspaperReaderWidget.h"
 #include "UI/TMOPMapComponent.h"
 #include "UI/TMOPMapWidget.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
@@ -74,6 +78,8 @@ ATMOPPlayerCharacter::ATMOPPlayerCharacter()
     VehicleTakeover = CreateDefaultSubobject<UTMOPVehicleTakeoverComponent>(TEXT("VehicleTakeover"));
     VehicleDriving = CreateDefaultSubobject<UTMOPPlayerVehicleDrivingComponent>(TEXT("VehicleDriving"));
     VehicleSession = CreateDefaultSubobject<UTMOPPlayerVehicleSessionComponent>(TEXT("VehicleSession"));
+    CameraPerspective = CreateDefaultSubobject<UTMOPCameraPerspectiveComponent>(
+        TEXT("CameraPerspective"));
     FootstepAudio = CreateDefaultSubobject<UTMOPAgentAudioComponent>(TEXT("FootstepAudio"));
     MovementAudio = CreateDefaultSubobject<UTMOPPlayerMovementAudioComponent>(TEXT("MovementAudio"));
     MapComponent = CreateDefaultSubobject<UTMOPMapComponent>(TEXT("MapComponent"));
@@ -207,6 +213,21 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         }
     }
 
+    if (bCreateAgentInfoChartWidget && !IsValid(AgentInfoChartWidget.Get()))
+    {
+        TSubclassOf<UTMOPAgentInfoChartWidget> WidgetClass =
+            AgentInfoChartWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPAgentInfoChartWidget::StaticClass();
+        AgentInfoChartWidget = CreateWidget<UTMOPAgentInfoChartWidget>(
+            PlayerController, WidgetClass);
+        if (IsValid(AgentInfoChartWidget.Get()))
+        {
+            AgentInfoChartWidget->InitializeAgentInfo(this);
+            AgentInfoChartWidget->AddToViewport(85);
+            AgentInfoChartWidget->HideAgentInfo();
+        }
+    }
+
     if (bCreateNewspaperReaderWidget &&
         !IsValid(NewspaperReaderWidget.Get()))
     {
@@ -230,6 +251,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         bInputMappingContextAdded &&
         (!bCreateQuickInventoryWidget || IsValid(QuickInventoryWidget.Get())) &&
         (!bCreatePauseMenuWidget || IsValid(PauseMenuWidget.Get())) &&
+        (!bCreateAgentInfoChartWidget || IsValid(AgentInfoChartWidget.Get())) &&
         (!bCreateNewspaperReaderWidget ||
             IsValid(NewspaperReaderWidget.Get()));
 }
@@ -396,6 +418,11 @@ void ATMOPPlayerCharacter::InputInteract()
         ClosePersonDialog();
         return;
     }
+    if (bAgentInfoChartOpen)
+    {
+        CloseAgentInfoChart();
+        return;
+    }
     if (InventoryInput->bRadialMenuOpen) return;
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
     {
@@ -404,10 +431,15 @@ void ATMOPPlayerCharacter::InputInteract()
     }
     AActor* Target = IsValid(CurrentInteractionTarget.Get())
         ? CurrentInteractionTarget.Get() : FindInteractionTarget();
+    if (ATMOPHistoricalAgent* LockedAgent =
+        Cast<ATMOPHistoricalAgent>(CurrentInformationTarget.Get()))
+        if (FVector::DistSquared(GetActorLocation(), LockedAgent->GetActorLocation()) <=
+            FMath::Square(InteractionDistance))
+            Target = LockedAgent;
     if (ATMOPHistoricalAgent* HistoricalAgent =
         Cast<ATMOPHistoricalAgent>(Target))
     {
-        OpenPersonDialog(HistoricalAgent);
+        OpenAgentInfoChart(HistoricalAgent);
         return;
     }
     if (IsValid(Target) && Target->GetClass()->ImplementsInterface(UTMOPInteractable::StaticClass()))
@@ -512,6 +544,11 @@ void ATMOPPlayerCharacter::InputCancel()
     if (bNewspaperOpen)
     {
         CloseNewspaper();
+        return;
+    }
+    if (bAgentInfoChartOpen)
+    {
+        CloseAgentInfoChart();
         return;
     }
     if (bDialogOpen)
@@ -920,6 +957,54 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
                 TEXT("Föremål  ·  %.1f m"), DistanceMetres));
         }
 
+        if (IsValid(InformationTarget))
+        {
+            FVector BoundsOrigin;
+            FVector BoundsExtent;
+            InformationTarget->GetActorBounds(
+                false, BoundsOrigin, BoundsExtent, true);
+            FVector MarkerWorldLocation = BoundsOrigin;
+            if (InformationTarget->IsA<ATMOPHistoricalAgent>())
+                MarkerWorldLocation.Z += BoundsExtent.Z *
+                    PersonTargetMarkerHeightFraction;
+
+            APlayerController* PlayerController =
+                Cast<APlayerController>(Controller);
+            FVector2D ScreenPosition;
+            int32 ViewportWidth = 0;
+            int32 ViewportHeight = 0;
+            if (IsValid(PlayerController) &&
+                PlayerController->ProjectWorldLocationToScreen(
+                    MarkerWorldLocation, ScreenPosition, true))
+            {
+                PlayerController->GetViewportSize(ViewportWidth, ViewportHeight);
+                const float ViewportScale = FMath::Max(0.01f,
+                    UWidgetLayoutLibrary::GetViewportScale(this));
+                const FVector2D ViewportSize(
+                    ViewportWidth / ViewportScale,
+                    ViewportHeight / ViewportScale);
+                FVector2D SlatePosition = ScreenPosition / ViewportScale;
+                const float Padding = TargetMarkerScreenEdgePadding /
+                    ViewportScale;
+                SlatePosition.X = FMath::Clamp(SlatePosition.X, Padding,
+                    FMath::Max(Padding, ViewportSize.X - Padding));
+                SlatePosition.Y = FMath::Clamp(SlatePosition.Y, Padding,
+                    FMath::Max(Padding, ViewportSize.Y - Padding));
+                InteractionPromptWidget->SetRenderTranslation(
+                    SlatePosition - ViewportSize * 0.5f);
+            }
+            else
+            {
+                InteractionPromptWidget->SetRenderTranslation(
+                    FVector2D::ZeroVector);
+            }
+        }
+        else
+        {
+            InteractionPromptWidget->SetRenderTranslation(
+                FVector2D::ZeroVector);
+        }
+
         AActor* Target = FindInteractionTarget();
         CurrentInteractionTarget = Target;
         if (const ATMOPHistoricalAgent* Agent =
@@ -929,7 +1014,7 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
                 ? Agent->DisplayName
                 : FText::FromString(TEXT("personen"));
             Prompt = FText::Format(
-                NSLOCTEXT("TMOP", "TalkToPerson", "Prata med {0}"), Name);
+                NSLOCTEXT("TMOP", "InspectPerson", "Visa personakt: {0}"), Name);
         }
         else if (Cast<ATMOPVehicleBase>(Target))
             Prompt = NSLOCTEXT("TMOP", "EnterTargetVehicle", "Hoppa in");
@@ -940,6 +1025,8 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
     if (!Prompt.IsEmpty())
         Prompt = FText::Format(NSLOCTEXT("TMOP", "InteractionWithKey", "[{0}] {1}"),
             GetInteractKeyDisplayText(), Prompt);
+    if (!IsValid(CurrentInformationTarget.Get()))
+        InteractionPromptWidget->SetRenderTranslation(FVector2D::ZeroVector);
     InteractionPromptWidget->SetTargetInformation(TargetTitle, TargetDetails);
     InteractionPromptWidget->SetPromptText(Prompt);
 }
@@ -1013,6 +1100,118 @@ void ATMOPPlayerCharacter::ClosePersonDialog()
     EndDialogCloseUp();
     if (IsValid(DialogWidget.Get())) DialogWidget->HideDialog();
 
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->bShowMouseCursor = false;
+        PC->SetIgnoreMoveInput(false);
+        PC->SetIgnoreLookInput(false);
+        PC->SetInputMode(FInputModeGameOnly());
+    }
+}
+
+bool ATMOPPlayerCharacter::OpenAgentInfoChart(
+    ATMOPHistoricalAgent* HistoricalAgent)
+{
+    if (!IsValid(HistoricalAgent) || !IsValid(AgentInfoChartWidget.Get()) ||
+        bPauseMenuOpen || bNewspaperOpen)
+        return false;
+
+    UTMOPPersonProfileComponent* ProfileComponent =
+        HistoricalAgent->PersonProfile.Get();
+    if (!IsValid(ProfileComponent))
+        ProfileComponent = HistoricalAgent->FindComponentByClass<
+            UTMOPPersonProfileComponent>();
+    if (!IsValid(ProfileComponent)) return false;
+    if (!ProfileComponent->bHasLoadedProfile && !ProfileComponent->LoadProfile())
+        return false;
+
+    const FTMOPPersonProfileRow& Profile = ProfileComponent->Profile;
+    FText TimelineSummary = Profile.AgentTimelineSummary;
+    if (TimelineSummary.IsEmpty())
+    {
+        TArray<FString> Lines;
+        for (const FTMOPPersonTimelineEntry& Entry : Profile.Timeline)
+        {
+            FString Place = !Entry.PlannedAnchorDisplayName.IsEmpty()
+                ? Entry.PlannedAnchorDisplayName.ToString()
+                : Entry.TargetAnchorId.ToString().Replace(TEXT("_"), TEXT(" "));
+            if ((Place.IsEmpty() || Place == TEXT("None")) &&
+                !Entry.TargetEntityId.IsNone())
+                Place = Entry.TargetEntityId.ToString().Replace(TEXT("_"), TEXT(" "));
+            if (Place == TEXT("None")) Place.Reset();
+            FString Description;
+            switch (Entry.Action)
+            {
+            case ETMOPPersonTimelineAction::InitialPlacement:
+            case ETMOPPersonTimelineAction::Spawn:
+                Description = Place.IsEmpty() ? TEXT("Jag kommer in i händelseförloppet.")
+                    : FString::Printf(TEXT("Jag befinner mig vid %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::MoveToAnchor:
+                Description = Place.IsEmpty() ? TEXT("Jag går vidare.")
+                    : FString::Printf(TEXT("Jag går mot %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::Wait:
+                Description = Place.IsEmpty() ? TEXT("Jag väntar en stund.")
+                    : FString::Printf(TEXT("Jag väntar vid %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::SitDown:
+                Description = TEXT("Jag sätter mig ned."); break;
+            case ETMOPPersonTimelineAction::StandUp:
+                Description = TEXT("Jag reser mig upp."); break;
+            case ETMOPPersonTimelineAction::EnterVehicle:
+                Description = Place.IsEmpty() ? TEXT("Jag stiger in i ett fordon.")
+                    : FString::Printf(TEXT("Jag stiger in i %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::ExitVehicle:
+                Description = TEXT("Jag stiger ur fordonet."); break;
+            case ETMOPPersonTimelineAction::BeginDriving:
+                Description = Place.IsEmpty() ? TEXT("Jag börjar köra.")
+                    : FString::Printf(TEXT("Jag kör mot %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::Despawn:
+                Description = TEXT("Jag lämnar det simulerade området."); break;
+            default:
+                Description = !Entry.Notes.IsEmpty() ? Entry.Notes
+                    : TEXT("Nästa dokumenterade händelse inträffar.");
+                break;
+            }
+            Lines.Add(FString::Printf(TEXT("%s - %s"),
+                *Entry.Time.ToDisplayString(), *Description));
+        }
+        TimelineSummary = Lines.IsEmpty() ? FText::GetEmpty()
+            : FText::FromString(FString::Join(Lines, TEXT("\n\n")));
+    }
+
+    const bool bPoliceInterviewed = Profile.bPoliceInterviewed ||
+        Profile.EvidenceIcon == ETMOPEntityEvidenceIcon::PoliceInterview;
+    AgentInfoChartWidget->ShowAgentInfo(
+        Profile, TimelineSummary, bPoliceInterviewed);
+    bAgentInfoChartOpen = true;
+    GetCharacterMovement()->StopMovementImmediately();
+    SetSprinting(false, false);
+    if (IsValid(InteractionPromptWidget.Get()))
+        InteractionPromptWidget->SetPromptText(FText::GetEmpty());
+
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->bShowMouseCursor = true;
+        PC->SetIgnoreMoveInput(true);
+        PC->SetIgnoreLookInput(true);
+        FInputModeGameAndUI Mode;
+        Mode.SetWidgetToFocus(AgentInfoChartWidget->TakeWidget());
+        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+        PC->SetInputMode(Mode);
+    }
+    return true;
+}
+
+void ATMOPPlayerCharacter::CloseAgentInfoChart()
+{
+    if (!bAgentInfoChartOpen) return;
+    bAgentInfoChartOpen = false;
+    if (IsValid(AgentInfoChartWidget.Get()))
+        AgentInfoChartWidget->HideAgentInfo();
     if (APlayerController* PC = Cast<APlayerController>(Controller))
     {
         PC->bShowMouseCursor = false;

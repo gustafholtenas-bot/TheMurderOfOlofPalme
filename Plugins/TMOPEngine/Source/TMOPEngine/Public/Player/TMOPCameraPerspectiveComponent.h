@@ -27,10 +27,10 @@ public:
     bool bBindToggleKeysAutomatically = true;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Camera|Input")
-    FKey ToggleKey;
+    FKey ToggleKey = EKeys::V;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Camera|Input")
-    FKey GamepadToggleKey;
+    FKey GamepadToggleKey = EKeys::Gamepad_RightThumbstick;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Camera|First Person")
     FVector FirstPersonCameraOffset = FVector(0.0f, 0.0f, 64.0f);

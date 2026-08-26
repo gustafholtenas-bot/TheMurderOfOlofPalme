@@ -89,6 +89,17 @@ bool UTMOPNewspaperReadingComponent::BeginReading(
         !IsValid(NewspaperMesh) || !IsValid(NewspaperMaterial)) return false;
 
     ActiveNewspaper = Newspaper;
+    // The dedicated reading camera sits inside the character. Hide the owner's
+    // regular body only from that owner's view while reading so the head and
+    // limbs cannot clip through the floating newspaper. Preserve the previous
+    // value because another first-person system may already use Owner No See.
+    if (!bUsingExistingPlayerMesh && IsValid(PlayerMesh))
+    {
+        HiddenPlayerMesh = PlayerMesh;
+        bPreviousPlayerMeshOwnerNoSee = PlayerMesh->bOwnerNoSee;
+        bPlayerMeshVisibilityOverridden = true;
+        PlayerMesh->SetOwnerNoSee(true);
+    }
     PreviousCamera->SetActive(false);
     ReadingCamera->SetRelativeLocation(FirstPersonCameraOffset);
     ReadingCamera->SetRelativeRotation(FirstPersonCameraRotation);
@@ -130,6 +141,11 @@ bool UTMOPNewspaperReadingComponent::BeginReading(
     ReadingNewspaper->SetVisibility(true, true);
     SetComponentTickEnabled(false);
     const bool bPageShown = ShowPage(PageIndex, false);
+    if (!bPageShown)
+    {
+        EndReading();
+        return false;
+    }
     if (bPageShown && bUsingExistingPlayerMesh && IsValid(NewspaperReadingMontage))
     {
         if (UAnimInstance* AnimInstance = PlayerMesh->GetAnimInstance())
@@ -138,7 +154,7 @@ bool UTMOPNewspaperReadingComponent::BeginReading(
                 NewspaperReadingMontagePlayRate);
         }
     }
-    return bPageShown;
+    return true;
 }
 
 void UTMOPNewspaperReadingComponent::TickComponent(const float DeltaTime,
@@ -276,6 +292,10 @@ void UTMOPNewspaperReadingComponent::EndReading()
         }
     }
     if (IsValid(ReadingArms)) ReadingArms->SetVisibility(false, true);
+    if (bPlayerMeshVisibilityOverridden && IsValid(HiddenPlayerMesh))
+        HiddenPlayerMesh->SetOwnerNoSee(bPreviousPlayerMeshOwnerNoSee);
+    HiddenPlayerMesh = nullptr;
+    bPlayerMeshVisibilityOverridden = false;
     if (IsValid(ReadingNewspaper))
     {
         ReadingNewspaper->SetVisibility(false, true);
