@@ -26,12 +26,37 @@ TSharedRef<SWidget> UTMOPInteractionPromptWidget::RebuildWidget()
             ]
             + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 8.0f)
             [
-                SNew(SBorder).Padding(FMargin(16.0f, 7.0f))
+                SAssignNew(TargetInformationPanel, SBorder)
+                .Padding(FMargin(16.0f, 7.0f))
+                .BorderBackgroundColor(FLinearColor(0.015f, 0.02f, 0.03f, 0.82f))
+                [ SNew(SVerticalBox)
+                    + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+                    [ SAssignNew(TargetTitleWidget, STextBlock).Text(TargetTitle)
+                        .Font(FCoreStyle::GetDefaultFontStyle("Bold", 14))
+                        .Justification(ETextJustify::Center) ]
+                    + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+                    [ SAssignNew(TargetDetailsWidget, STextBlock).Text(TargetDetails)
+                        .ColorAndOpacity(FLinearColor(0.72f, 0.76f, 0.80f, 1.0f))
+                        .Justification(ETextJustify::Center) ] ]
+            ]
+            + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 5.0f)
+            [
+                SAssignNew(PromptPanel, SBorder).Padding(FMargin(16.0f, 7.0f))
                 .BorderBackgroundColor(FLinearColor(0.015f, 0.02f, 0.03f, 0.82f))
                 [ SAssignNew(PromptTextWidget, STextBlock).Text(PromptText)
                     .Justification(ETextJustify::Center) ]
             ]
         ];
+}
+
+void UTMOPInteractionPromptWidget::SetTargetInformation(
+    const FText& Title, const FText& Details)
+{
+    TargetTitle = Title;
+    TargetDetails = Details;
+    if (TargetTitleWidget.IsValid()) TargetTitleWidget->SetText(TargetTitle);
+    if (TargetDetailsWidget.IsValid()) TargetDetailsWidget->SetText(TargetDetails);
+    RefreshTargetVisibility();
 }
 
 void UTMOPInteractionPromptWidget::SetPromptText(const FText& NewText)
@@ -41,6 +66,22 @@ void UTMOPInteractionPromptWidget::SetPromptText(const FText& NewText)
         PromptText = NewText;
         if (PromptTextWidget.IsValid()) PromptTextWidget->SetText(PromptText);
     }
-    SetVisibility(PromptText.IsEmpty() ? ESlateVisibility::Collapsed
-        : ESlateVisibility::HitTestInvisible);
+    RefreshTargetVisibility();
+}
+
+void UTMOPInteractionPromptWidget::RefreshTargetVisibility()
+{
+    const bool bHasTarget = !TargetTitle.IsEmpty();
+    const bool bHasPrompt = !PromptText.IsEmpty();
+    if (TargetInformationPanel.IsValid())
+        TargetInformationPanel->SetVisibility(bHasTarget
+            ? EVisibility::HitTestInvisible : EVisibility::Collapsed);
+    if (PromptPanel.IsValid())
+        PromptPanel->SetVisibility(bHasPrompt
+            ? EVisibility::HitTestInvisible : EVisibility::Collapsed);
+    if (TargetReticleWidget.IsValid())
+        TargetReticleWidget->SetVisibility((bHasTarget || bHasPrompt)
+            ? EVisibility::HitTestInvisible : EVisibility::Collapsed);
+    SetVisibility((bHasTarget || bHasPrompt)
+        ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
 }

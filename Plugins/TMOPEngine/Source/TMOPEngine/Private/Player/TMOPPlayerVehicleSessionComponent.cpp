@@ -3,11 +3,24 @@
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
 #include "Player/TMOPPlayerVehicleDrivingComponent.h"
+#include "Vehicles/TMOPConfiguredVehicle.h"
 #include "Vehicles/TMOPVehicleBase.h"
 
 UTMOPPlayerVehicleSessionComponent::UTMOPPlayerVehicleSessionComponent()
 {
-    PrimaryComponentTick.bCanEverTick = false;
+    PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.bStartWithTickEnabled = false;
+}
+
+void UTMOPPlayerVehicleSessionComponent::TickComponent(const float DeltaTime,
+    const ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+    Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    const UTMOPVehicleTakeoverComponent* Takeover = GetTakeover();
+    if (!IsValid(Takeover)) return;
+    if (ATMOPConfiguredVehicle* Vehicle =
+        Cast<ATMOPConfiguredVehicle>(Takeover->CurrentVehicle))
+        Vehicle->UpdatePlayerVehicleCamera(DeltaTime);
 }
 
 UTMOPVehicleTakeoverComponent* UTMOPPlayerVehicleSessionComponent::GetTakeover() const
@@ -43,6 +56,7 @@ ETMOPVehicleTakeoverResult UTMOPPlayerVehicleSessionComponent::EnterNearestVehic
         }
         if (bUseVehicleAsCameraTarget)
             SetCameraTarget(Takeover->CurrentVehicle, EnterCameraBlendSeconds);
+        SetComponentTickEnabled(true);
         OnVehicleSessionStarted.Broadcast(Takeover->CurrentVehicle, bDriver);
     }
     return Result;
@@ -68,6 +82,7 @@ ETMOPVehicleTakeoverResult UTMOPPlayerVehicleSessionComponent::EnterVehicle(
             }
         }
         if (bUseVehicleAsCameraTarget) SetCameraTarget(Vehicle, EnterCameraBlendSeconds);
+        SetComponentTickEnabled(true);
         OnVehicleSessionStarted.Broadcast(Vehicle, bDriver);
     }
     return Result;
@@ -83,6 +98,7 @@ bool UTMOPPlayerVehicleSessionComponent::ExitVehicle()
         if (UTMOPPlayerVehicleDrivingComponent* Driving = GetDriving()) Driving->EndDriving();
     if (!Takeover->ExitCurrentVehicle()) return false;
     SetCameraTarget(GetOwner(), ExitCameraBlendSeconds);
+    SetComponentTickEnabled(false);
     OnVehicleSessionEnded.Broadcast(Vehicle, bDriver);
     return true;
 }
@@ -117,6 +133,13 @@ void UTMOPPlayerVehicleSessionComponent::VehicleBrake(const float Value)
 void UTMOPPlayerVehicleSessionComponent::VehicleHandbrake(const bool bPressed)
 {
     if (IsDrivingVehicle()) if (UTMOPPlayerVehicleDrivingComponent* Driving = GetDriving()) Driving->SetHandbrakeInput(bPressed);
+}
+
+void UTMOPPlayerVehicleSessionComponent::VehicleHighSpeedMode(const bool bEnabled)
+{
+    if (IsDrivingVehicle())
+        if (UTMOPPlayerVehicleDrivingComponent* Driving = GetDriving())
+            Driving->SetHighSpeedMode(bEnabled);
 }
 
 void UTMOPPlayerVehicleSessionComponent::SetCameraTarget(AActor* Target,

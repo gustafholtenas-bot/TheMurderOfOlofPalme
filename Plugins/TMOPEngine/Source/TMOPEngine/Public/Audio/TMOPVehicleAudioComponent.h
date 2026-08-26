@@ -22,8 +22,17 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle") FName AudioProfileId = TEXT("VOLVO_240");
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle") bool bEngineEnabled = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle") bool bEmergencySirenEnabled = false;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle|Siren",
+        meta=(ClampMin="0.0", Units="cm/s"))
+    float SirenStartSpeedCmPerSecond = 25.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle|Siren",
+        meta=(ClampMin="0.0", Units="cm/s"))
+    float SirenStopSpeedCmPerSecond = 8.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle", meta=(ClampMin="100.0", Units="cm")) float LocalAudioMaximumDistanceCm = 500.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle", meta=(ClampMin="0.0")) float HardStartAccelerationThreshold = 500.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Audio|Vehicle|Collision",
+        meta=(ClampMin="0.0", Units="km/h"))
+    float HighSpeedCollisionThresholdKmh = 25.0f;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void PlayHorn();
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void PlayDoorOpen();
@@ -32,6 +41,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void PlaySkid();
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void PlayTireBurst();
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void PlayHardStart();
+    UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void PlayCollision(float ImpactSpeedCmPerSecond);
     UFUNCTION(BlueprintCallable, Category="TMOP|Audio|Vehicle") void SetEmergencySirenEnabled(bool bEnabled);
 
 private:
@@ -45,4 +55,5 @@ private:
     FVector PreviousLocation = FVector::ZeroVector;
     float PreviousSpeed = 0.0f;
     bool bWasMoving = false;
+    bool bSirenAudibleForMovement = false;
 };

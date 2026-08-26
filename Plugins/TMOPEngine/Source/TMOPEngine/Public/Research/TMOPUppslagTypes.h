@@ -114,6 +114,11 @@ struct TMOPENGINE_API FTMOPUppslagRow : public FTableRowBase
         meta=(DisplayName="Relevant för spelet"))
     bool bRelevantToGame = true;
 
+    /** High-priority material for the playable murder-night window, especially 23:00-23:45. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Checklist",
+        meta=(DisplayName="Hög prioritet för spelet (mordnatten 23:00-23:45)"))
+    bool bHighPriorityForGame = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Uppslag|Source",
         meta=(DisplayName="WPU URL"))
     FString SourceUrl;

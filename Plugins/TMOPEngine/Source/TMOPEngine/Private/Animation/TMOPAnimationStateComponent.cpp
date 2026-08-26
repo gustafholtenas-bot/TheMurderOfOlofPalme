@@ -27,7 +27,12 @@ void UTMOPAnimationStateComponent::UpdateFromOwner()
         bIsDeadOnGround = false;
         return;
     }
-    bIsDeadOnGround = Agent->LifeState == ETMOPAgentLifeState::Dead;
+    // Unconscious casualties must use the grounded body posture as well.
+    // This keeps medical simulations historically correct without falsely
+    // marking a casualty Dead merely to obtain the lying animation.
+    bIsDeadOnGround =
+        Agent->LifeState == ETMOPAgentLifeState::Dead ||
+        Agent->LifeState == ETMOPAgentLifeState::Unconscious;
     SocialLookYaw = Agent->SocialLookYaw;
     SocialLookPitch = Agent->SocialLookPitch;
     SocialLookAlpha = Agent->SocialLookAlpha;

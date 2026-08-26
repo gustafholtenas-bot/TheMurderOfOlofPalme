@@ -17,6 +17,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Inventory/TMOPInventoryComponent.h"
 #include "Inventory/TMOPInventoryInputComponent.h"
+#include "Inventory/TMOPItemDefinition.h"
 #include "Items/TMOPPlayerItemUseComponent.h"
 #include "Items/TMOPInteractable.h"
 #include "Items/TMOPWorldItem.h"
@@ -175,10 +176,13 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         }
     }
 
-    if (bCreateInteractionPromptWidget && !IsValid(InteractionPromptWidget.Get()))
+    if ((bCreateInteractionPromptWidget || bForceNativeTargetInformationWidget) &&
+        !IsValid(InteractionPromptWidget.Get()))
     {
         TSubclassOf<UTMOPInteractionPromptWidget> WidgetClass =
             InteractionPromptWidgetClass;
+        if (bForceNativeTargetInformationWidget)
+            WidgetClass = UTMOPInteractionPromptWidget::StaticClass();
         if (!WidgetClass) WidgetClass = UTMOPInteractionPromptWidget::StaticClass();
         InteractionPromptWidget = CreateWidget<UTMOPInteractionPromptWidget>(
             PlayerController, WidgetClass);
@@ -349,11 +353,21 @@ void ATMOPPlayerCharacter::InputJumpEnded() { StopJumping(); }
 
 void ATMOPPlayerCharacter::InputSprintStarted()
 {
+    if (IsValid(VehicleSession.Get()) && VehicleSession->IsDrivingVehicle())
+    {
+        VehicleSession->VehicleHighSpeedMode(true);
+        return;
+    }
     SetSprinting(true, false);
 }
 
 void ATMOPPlayerCharacter::InputSprintEnded()
 {
+    if (IsValid(VehicleSession.Get()) && VehicleSession->IsDrivingVehicle())
+    {
+        VehicleSession->VehicleHighSpeedMode(false);
+        return;
+    }
     SetSprinting(false, false);
 }
 
@@ -778,7 +792,17 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
         const bool bSprintHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
         const bool bExtraHeld = bSprintHeld && IsValid(PC)
             && PC->IsInputKeyDown(ExtraSprintModifierKey);
-        SetSprinting(bSprintHeld, bExtraHeld);
+        if (IsValid(VehicleSession.Get()) && VehicleSession->IsDrivingVehicle())
+        {
+            VehicleSession->VehicleHighSpeedMode(bSprintHeld);
+            if (bIsSprinting) SetSprinting(false, false);
+        }
+        else
+        {
+            if (IsValid(VehicleSession.Get()))
+                VehicleSession->VehicleHighSpeedMode(false);
+            SetSprinting(bSprintHeld, bExtraHeld);
+        }
     }
     if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectQuickInventoryKeyFallback)
     {
@@ -853,11 +877,49 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
 {
     if (!IsValid(InteractionPromptWidget.Get())) return;
     FText Prompt;
+    FText TargetTitle;
+    FText TargetDetails;
     CurrentInteractionTarget = nullptr;
+    CurrentInformationTarget = nullptr;
     if (!bPauseMenuOpen && !bWorldMapOpen && !bNewspaperOpen && !bDialogOpen &&
         !InventoryInput->bRadialMenuOpen &&
         (!IsValid(VehicleSession.Get()) || !VehicleSession->IsInVehicle()))
     {
+        AActor* InformationTarget = FindInformationTarget();
+        CurrentInformationTarget = InformationTarget;
+        const float DistanceMetres = IsValid(InformationTarget)
+            ? FVector::Dist(GetActorLocation(), InformationTarget->GetActorLocation()) / 100.0f
+            : 0.0f;
+        if (const ATMOPHistoricalAgent* Agent =
+            Cast<ATMOPHistoricalAgent>(InformationTarget))
+        {
+            TargetTitle = !Agent->DisplayName.IsEmpty()
+                ? Agent->DisplayName : NSLOCTEXT("TMOP", "UnknownTargetPerson", "Okänd person");
+            TargetDetails = FText::FromString(FString::Printf(
+                TEXT("Person  ·  %.1f m"), DistanceMetres));
+        }
+        else if (const ATMOPVehicleBase* Vehicle =
+            Cast<ATMOPVehicleBase>(InformationTarget))
+        {
+            TargetTitle = !Vehicle->DisplayName.IsEmpty()
+                ? Vehicle->DisplayName
+                : (!Vehicle->VehicleId.IsNone()
+                    ? FText::FromName(Vehicle->VehicleId)
+                    : NSLOCTEXT("TMOP", "UnknownTargetVehicle", "Okänt fordon"));
+            TargetDetails = FText::FromString(FString::Printf(
+                TEXT("Fordon  ·  %.1f m"), DistanceMetres));
+        }
+        else if (const ATMOPWorldItem* WorldItem =
+            Cast<ATMOPWorldItem>(InformationTarget))
+        {
+            TargetTitle = IsValid(WorldItem->ItemDefinition.Get()) &&
+                !WorldItem->ItemDefinition->DisplayName.IsEmpty()
+                ? WorldItem->ItemDefinition->DisplayName
+                : NSLOCTEXT("TMOP", "UnknownTargetItem", "Föremål");
+            TargetDetails = FText::FromString(FString::Printf(
+                TEXT("Föremål  ·  %.1f m"), DistanceMetres));
+        }
+
         AActor* Target = FindInteractionTarget();
         CurrentInteractionTarget = Target;
         if (const ATMOPHistoricalAgent* Agent =
@@ -878,6 +940,7 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
     if (!Prompt.IsEmpty())
         Prompt = FText::Format(NSLOCTEXT("TMOP", "InteractionWithKey", "[{0}] {1}"),
             GetInteractKeyDisplayText(), Prompt);
+    InteractionPromptWidget->SetTargetInformation(TargetTitle, TargetDetails);
     InteractionPromptWidget->SetPromptText(Prompt);
 }
 
@@ -1195,6 +1258,107 @@ AActor* ATMOPPlayerCharacter::FindInteractionTarget() const
         }
     }
     return BestTarget;
+}
+
+AActor* ATMOPPlayerCharacter::FindInformationTarget() const
+{
+    if (!IsValid(FollowCamera) || GetWorld() == nullptr) return nullptr;
+
+    const FVector CameraLocation = FollowCamera->GetComponentLocation();
+    const FVector CameraForward = FollowCamera->GetForwardVector();
+    const FVector CharacterLocation = GetActorLocation();
+    const FVector CharacterForward = GetActorForwardVector();
+    FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInformationTarget),
+        false, this);
+    FCollisionObjectQueryParams ObjectTypes;
+    ObjectTypes.AddObjectTypesToQuery(ECC_Pawn);
+    ObjectTypes.AddObjectTypesToQuery(ECC_WorldDynamic);
+    ObjectTypes.AddObjectTypesToQuery(ECC_PhysicsBody);
+
+    TArray<FOverlapResult> Overlaps;
+    GetWorld()->OverlapMultiByObjectType(Overlaps, CharacterLocation,
+        FQuat::Identity, ObjectTypes,
+        FCollisionShape::MakeSphere(TargetInformationDistance), Params);
+
+    TArray<AActor*> Candidates;
+    for (const FOverlapResult& Overlap : Overlaps)
+    {
+        AActor* Actor = Overlap.GetActor();
+        if (!IsValid(Actor)) continue;
+        Candidates.AddUnique(Actor);
+        if (const ATMOPVehicleBase* Vehicle = Cast<ATMOPVehicleBase>(Actor))
+            for (const UTMOPVehicleSeatComponent* Seat : Vehicle->GetVehicleSeats())
+                if (IsValid(Seat) && IsValid(Seat->GetOccupantCharacter()))
+                    Candidates.AddUnique(Seat->GetOccupantCharacter());
+    }
+
+    AActor* BestDirectTarget = nullptr;
+    AActor* BestFallbackTarget = nullptr;
+    float BestDirectScore = TNumericLimits<float>::Max();
+    float BestFallbackDistanceSquared = TNumericLimits<float>::Max();
+    for (AActor* Candidate : Candidates)
+    {
+        if (!IsValid(Candidate) || Candidate == this) continue;
+        const bool bSupportedTarget = Candidate->IsA<ATMOPHistoricalAgent>() ||
+            Candidate->IsA<ATMOPVehicleBase>() || Candidate->IsA<ATMOPWorldItem>();
+        if (!bSupportedTarget) continue;
+
+        FVector BoundsOrigin;
+        FVector BoundsExtent;
+        Candidate->GetActorBounds(false, BoundsOrigin, BoundsExtent, true);
+        FVector AimPoint = BoundsOrigin;
+        if (Candidate->IsA<ATMOPHistoricalAgent>())
+            AimPoint.Z += BoundsExtent.Z * 0.35f;
+
+        const FVector CameraToTarget = AimPoint - CameraLocation;
+        const float CameraDistance = CameraToTarget.Size();
+        if (CameraDistance <= 1.0f || CameraDistance > TargetInformationDistance)
+            continue;
+
+        FHitResult VisibilityHit;
+        FCollisionQueryParams VisibilityParams(
+            SCENE_QUERY_STAT(TMOPPlayerInformationTargetVisibility), false, this);
+        const bool bBlocked = GetWorld()->LineTraceSingleByChannel(
+            VisibilityHit, CameraLocation, AimPoint, ECC_Visibility, VisibilityParams);
+        bool bVisible = !bBlocked || VisibilityHit.GetActor() == Candidate;
+        if (!bVisible && Candidate->IsA<ATMOPHistoricalAgent>() &&
+            IsValid(VisibilityHit.GetActor()) &&
+            VisibilityHit.GetActor()->IsA<ATMOPVehicleBase>())
+            bVisible = Candidate->GetAttachParentActor() == VisibilityHit.GetActor();
+        if (!bVisible) continue;
+
+        const FVector CameraDirection = CameraToTarget / CameraDistance;
+        const float CameraDot = FVector::DotProduct(CameraForward, CameraDirection);
+        const float CameraAngle = FMath::RadiansToDegrees(
+            FMath::Acos(FMath::Clamp(CameraDot, -1.0f, 1.0f)));
+        if (CameraAngle <= DirectTargetConeDegrees)
+        {
+            const float Score = CameraAngle /
+                FMath::Max(DirectTargetConeDegrees, 0.1f) +
+                CameraDistance / FMath::Max(TargetInformationDistance, 1.0f) * 0.05f;
+            if (Score < BestDirectScore)
+            {
+                BestDirectScore = Score;
+                BestDirectTarget = Candidate;
+            }
+        }
+
+        if (bUseFrontHemisphereTargetFallback)
+        {
+            const FVector CharacterToTarget = AimPoint - CharacterLocation;
+            const float DistanceSquared = CharacterToTarget.SizeSquared();
+            if (DistanceSquared > 1.0f &&
+                FVector::DotProduct(CharacterForward,
+                    CharacterToTarget.GetSafeNormal()) >= 0.0f &&
+                DistanceSquared < BestFallbackDistanceSquared)
+            {
+                BestFallbackDistanceSquared = DistanceSquared;
+                BestFallbackTarget = Candidate;
+            }
+        }
+    }
+
+    return IsValid(BestDirectTarget) ? BestDirectTarget : BestFallbackTarget;
 }
 
 FText ATMOPPlayerCharacter::GetInteractKeyDisplayText() const

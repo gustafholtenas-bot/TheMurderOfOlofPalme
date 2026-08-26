@@ -2,6 +2,7 @@
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Animation/TMOPAnimationStateComponent.h"
+#include "Audio/TMOPVehicleAudioComponent.h"
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "GameFramework/Character.h"
@@ -90,6 +91,9 @@ ETMOPVehicleTakeoverResult UTMOPVehicleTakeoverComponent::TryEnterVehicle(
             Vehicle, PreviousOccupant);
     CurrentVehicle = Vehicle;
     CurrentSeat = Seat;
+    if (UTMOPVehicleAudioComponent* Audio =
+        Vehicle->FindComponentByClass<UTMOPVehicleAudioComponent>())
+        Audio->PlayDoorCycle();
     return ResolveAndBroadcast(IsValid(PreviousOccupant)
         ? ETMOPVehicleTakeoverResult::SuccessDriverRemoved
         : ETMOPVehicleTakeoverResult::SuccessEmptySeat, Vehicle, PreviousOccupant);
@@ -158,8 +162,13 @@ void UTMOPVehicleTakeoverComponent::ApplyDriverRemovalReaction(ACharacter* Drive
 bool UTMOPVehicleTakeoverComponent::ExitCurrentVehicle()
 {
     ACharacter* Player = Cast<ACharacter>(GetOwner());
+    ATMOPVehicleBase* Vehicle = CurrentVehicle.Get();
     if (!IsValid(Player) || !IsValid(CurrentSeat) ||
         !CurrentSeat->ExitCharacterSeat(Player)) return false;
+    if (IsValid(Vehicle))
+        if (UTMOPVehicleAudioComponent* Audio =
+            Vehicle->FindComponentByClass<UTMOPVehicleAudioComponent>())
+            Audio->PlayDoorCycle();
     CurrentSeat = nullptr;
     CurrentVehicle = nullptr;
     return true;

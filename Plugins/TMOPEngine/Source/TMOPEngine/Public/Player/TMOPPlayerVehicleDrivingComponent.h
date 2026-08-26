@@ -26,6 +26,11 @@ public:
         meta=(ClampMin="0.0"))
     float MaximumForwardSpeedKmh = 110.0f;
 
+    /** Normal full-throttle speed. Hold the player's sprint button for MaximumForwardSpeedKmh. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Speed",
+        meta=(ClampMin="0.0"))
+    float NormalForwardSpeedKmh = 45.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Speed",
         meta=(ClampMin="0.0"))
     float MaximumReverseSpeedKmh = 25.0f;
@@ -57,7 +62,12 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Steering",
         meta=(ClampMin="0.0"))
-    float SteeringResponse = 6.0f;
+    float SteeringResponse = 3.0f;
+
+    /** How quickly the car body reaches the requested yaw rate. Lower values feel heavier. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Steering",
+        meta=(ClampMin="0.1"))
+    float YawInertiaResponse = 2.4f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Steering",
         meta=(ClampMin="0.0"))
@@ -97,6 +107,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
         meta=(ClampMin="1.0"))
     float StepUpSpeedCmPerSecond = 180.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.1"))
+    float GroundHeightResponse = 10.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
+        meta=(ClampMin="0.1"))
+    float GroundRotationResponse = 5.0f;
 
     /** Probe placement relative to the vehicle collision box. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground",
@@ -150,6 +168,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player Driving|Input")
     void SetHandbrakeInput(bool bPressed);
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player Driving|Input")
+    void SetHighSpeedMode(bool bEnabled);
+
     UFUNCTION(BlueprintPure, Category="TMOP|Player Driving")
     bool IsDriving() const;
 
@@ -161,8 +182,10 @@ private:
     float SteeringInput = 0.0f;
     float BrakeInput = 0.0f;
     bool bHandbrakeInput = false;
+    bool bHighSpeedMode = false;
     bool bHasGroundContact = false;
     float LastGroundHeightCm = 0.0f;
+    float CurrentYawRateDegreesPerSecond = 0.0f;
+    float LastCollisionSoundWorldSeconds = -1000.0f;
     TWeakObjectPtr<UTMOPTrafficVehicleMovementComponent> SuspendedTrafficMovement;
 };
-

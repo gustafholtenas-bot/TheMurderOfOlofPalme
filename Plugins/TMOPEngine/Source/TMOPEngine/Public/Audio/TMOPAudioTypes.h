@@ -101,6 +101,8 @@ struct TMOPENGINE_API FTMOPVehicleAudioProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FName DoorOpenAudioId = TEXT("VEHICLE_DOOR_OPEN");
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FName DoorCloseAudioId = TEXT("VEHICLE_DOOR_CLOSE");
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FName TireBurstAudioId = TEXT("VEHICLE_TIRE_BURST");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FName LowSpeedCollisionAudioId = TEXT("VEHICLE_COLLISION_LOW");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FName HighSpeedCollisionAudioId = TEXT("VEHICLE_COLLISION_HIGH");
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FName SirenAudioId = NAME_None;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin="100.0")) float ReferenceTopSpeedCmPerSecond = 1800.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Notes;

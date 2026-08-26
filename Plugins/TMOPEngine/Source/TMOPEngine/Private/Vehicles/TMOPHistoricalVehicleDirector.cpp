@@ -9,6 +9,7 @@
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Entities/TMOPWorldEntityComponent.h"
+#include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
 #include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
@@ -22,6 +23,29 @@
 namespace
 {
     const FName HistoricalVehicleObjectType(TEXT("HistoricalVehicle"));
+}
+
+bool ATMOPHistoricalVehicleDirector::ResolveTimelineEntrySecond(
+    const FTMOPHistoricalVehicleTimelineEntry& Entry,
+    int32& OutSecond) const
+{
+    if (Entry.TimingMode != ETMOPEventTimingMode::Relative)
+    {
+        OutSecond = Entry.Time.ToSecondsFromMidnight();
+        return true;
+    }
+    if (Entry.SharedEventId.IsNone() || GetGameInstance() == nullptr)
+        return false;
+    const UTMOPHistoricalEventSubsystem* Events =
+        GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>();
+    FTMOPHistoricalEventRuntime EventRuntime;
+    if (!IsValid(Events) ||
+        !Events->TryGetEventRuntime(Entry.SharedEventId, EventRuntime) ||
+        !EventRuntime.bHasResolvedTime)
+        return false;
+    OutSecond = EventRuntime.ResolvedTime.ToSecondsFromMidnight() +
+        Entry.EventOffsetSeconds;
+    return true;
 }
 
 ATMOPHistoricalVehicleDirector::ATMOPHistoricalVehicleDirector()
@@ -102,8 +126,10 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
                 continue;
             }
+            int32 EntrySecond = INDEX_NONE;
             if (Runtime.AppliedPlacementEntryIds.Contains(Entry.EntryId) ||
-                Entry.Time.ToSecondsFromMidnight() > CurrentSecond)
+                !ResolveTimelineEntrySecond(Entry, EntrySecond) ||
+                EntrySecond > CurrentSecond)
                 continue;
             const bool bInitialEntry = Index == 0 &&
                 (Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
@@ -138,7 +164,9 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                     TEXT("TMOP VehicleSiren: '%s' set emergency siren %s at %02d:%02d:%02d."),
                     *Runtime.Profile.VehicleId.ToString(),
                     bEnable ? TEXT("ON") : TEXT("OFF"),
-                    Entry.Time.Hour, Entry.Time.Minute, Entry.Time.Second);
+                    FTMOPTime::FromSecondsFromMidnight(EntrySecond).Hour,
+                    FTMOPTime::FromSecondsFromMidnight(EntrySecond).Minute,
+                    FTMOPTime::FromSecondsFromMidnight(EntrySecond).Second);
                 continue;
             }
             const bool bTimedPlacement =
@@ -230,7 +258,9 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
             UE_LOG(LogTemp, Display,
                 TEXT("TMOP VehicleTimedPlacement: '%s' applied '%s' at %02d:%02d:%02d."),
                 *Runtime.Profile.VehicleId.ToString(), *Entry.EntryId.ToString(),
-                Entry.Time.Hour, Entry.Time.Minute, Entry.Time.Second);
+                FTMOPTime::FromSecondsFromMidnight(EntrySecond).Hour,
+                FTMOPTime::FromSecondsFromMidnight(EntrySecond).Minute,
+                FTMOPTime::FromSecondsFromMidnight(EntrySecond).Second);
         }
     }
 }
@@ -242,6 +272,7 @@ void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
     {
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
         int32 DueLifecycleIndex = INDEX_NONE;
+        int32 DueLifecycleSecond = INDEX_NONE;
         for (int32 Index = 0; Index < Runtime.Profile.Timeline.Num(); ++Index)
         {
             const FTMOPHistoricalVehicleTimelineEntry& Entry =
@@ -250,12 +281,16 @@ void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
                 Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Spawn ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Despawn;
+            int32 EntrySecond = INDEX_NONE;
             if (bLifecycleEntry &&
-                Entry.Time.ToSecondsFromMidnight() <= CurrentSecond &&
+                ResolveTimelineEntrySecond(Entry, EntrySecond) &&
+                EntrySecond <= CurrentSecond &&
                 (DueLifecycleIndex == INDEX_NONE ||
-                 Entry.Time.ToSecondsFromMidnight() >=
-                    Runtime.Profile.Timeline[DueLifecycleIndex].Time.ToSecondsFromMidnight()))
+                 EntrySecond >= DueLifecycleSecond))
+            {
                 DueLifecycleIndex = Index;
+                DueLifecycleSecond = EntrySecond;
+            }
         }
         if (DueLifecycleIndex == INDEX_NONE ||
             DueLifecycleIndex == Runtime.LastAppliedLifecycleEntryIndex)
@@ -272,9 +307,9 @@ void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
         UE_LOG(LogTemp, Display,
             TEXT("TMOP Historical Vehicles: despawned '%s' at %02d:%02d:%02d."),
             *Runtime.Profile.VehicleId.ToString(),
-            DespawnEntry.Time.Hour,
-            DespawnEntry.Time.Minute,
-            DespawnEntry.Time.Second);
+            FTMOPTime::FromSecondsFromMidnight(DueLifecycleSecond).Hour,
+            FTMOPTime::FromSecondsFromMidnight(DueLifecycleSecond).Minute,
+            FTMOPTime::FromSecondsFromMidnight(DueLifecycleSecond).Second);
         UnregisterVehicle(Vehicle);
         Vehicle->Destroy();
         Runtime.Vehicle.Reset();
@@ -422,6 +457,8 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
     for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
     {
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
+        if (Runtime.InitialSpawnSecond == INDEX_NONE)
+            Runtime.InitialSpawnSecond = GetInitialSpawnSecond(Runtime.Profile);
         if (!ShouldSpawn(Runtime.Profile, false) ||
             Runtime.InitialSpawnSecond == INDEX_NONE ||
             Runtime.InitialSpawnSecond > CurrentSecond)
@@ -430,6 +467,7 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
         }
 
         int32 DueLifecycleIndex = INDEX_NONE;
+        int32 DueLifecycleSecond = INDEX_NONE;
         for (int32 Index = 0; Index < Runtime.Profile.Timeline.Num(); ++Index)
         {
             const FTMOPHistoricalVehicleTimelineEntry& Entry =
@@ -438,12 +476,16 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
                 Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Spawn ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Despawn;
+            int32 EntrySecond = INDEX_NONE;
             if (bLifecycleEntry &&
-                Entry.Time.ToSecondsFromMidnight() <= CurrentSecond &&
+                ResolveTimelineEntrySecond(Entry, EntrySecond) &&
+                EntrySecond <= CurrentSecond &&
                 (DueLifecycleIndex == INDEX_NONE ||
-                 Entry.Time.ToSecondsFromMidnight() >=
-                    Runtime.Profile.Timeline[DueLifecycleIndex].Time.ToSecondsFromMidnight()))
+                 EntrySecond >= DueLifecycleSecond))
+            {
                 DueLifecycleIndex = Index;
+                DueLifecycleSecond = EntrySecond;
+            }
         }
         if (DueLifecycleIndex == INDEX_NONE ||
             Runtime.Profile.Timeline[DueLifecycleIndex].Action ==
@@ -534,7 +576,9 @@ int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
         if (Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
             Entry.Action == ETMOPHistoricalVehicleAction::Spawn)
         {
-            int32 SpawnSecond = Entry.Time.ToSecondsFromMidnight();
+            int32 SpawnSecond = INDEX_NONE;
+            if (!ResolveTimelineEntrySecond(Entry, SpawnSecond))
+                return INDEX_NONE;
             const FString AnchorId = Entry.PlacementAnchorId.ToString();
             const bool bBoundaryEntry =
                 Entry.PlacementMode ==
@@ -558,10 +602,11 @@ int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
                         Later.Action ==
                             ETMOPHistoricalVehicleAction::EnterTrafficRoute)
                     {
+                        int32 DrivingSecond = INDEX_NONE;
+                        if (!ResolveTimelineEntrySecond(Later, DrivingSecond))
+                            continue;
                         SpawnSecond = FMath::Max(
-                            0,
-                            Later.Time.ToSecondsFromMidnight() -
-                                EntrySpawnLeadSeconds);
+                            0, DrivingSecond - EntrySpawnLeadSeconds);
                         break;
                     }
                 }

@@ -48,6 +48,22 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     FTMOPTime Time = FTMOPTime(23, 0, 0);
 
+    /** Absolute uses Time. Relative resolves SharedEventId and adds EventOffsetSeconds. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Time")
+    ETMOPEventTimingMode TimingMode = ETMOPEventTimingMode::Absolute;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Time",
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative"))
+    FName SharedEventId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Time",
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative",
+            DisplayName="Offset Seconds"))
+    int32 EventOffsetSeconds = 0;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     FTransform WorldTransform = FTransform::Identity;
 

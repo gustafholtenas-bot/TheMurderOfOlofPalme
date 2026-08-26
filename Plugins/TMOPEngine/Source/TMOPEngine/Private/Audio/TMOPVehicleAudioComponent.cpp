@@ -100,8 +100,33 @@ void UTMOPVehicleAudioComponent::TickComponent(
     }
     bWasMoving = bMoving;
 
-    if (bEmergencySirenEnabled && !SirenLoop.IsValid())
-        SetEmergencySirenEnabled(true);
+    // The emergency flag represents the active emergency response and is also
+    // used by the vehicle to keep the blue lights flashing.  The audible
+    // siren is movement-gated independently so a parked police car or
+    // ambulance remains lit without producing a stationary siren loop.
+    if (!bSirenAudibleForMovement && Speed >= SirenStartSpeedCmPerSecond)
+        bSirenAudibleForMovement = true;
+    else if (bSirenAudibleForMovement && Speed <= SirenStopSpeedCmPerSecond)
+        bSirenAudibleForMovement = false;
+
+    const bool bShouldPlaySiren =
+        bEmergencySirenEnabled && bSirenAudibleForMovement;
+    if (bShouldPlaySiren && !SirenLoop.IsValid())
+    {
+        if (!Profile.SirenAudioId.IsNone())
+            for (TActorIterator<ATMOPAudioDirector> It(GetWorld()); It; ++It)
+            {
+                SirenLoop = It->PlayAttachedById(
+                    Profile.SirenAudioId, Owner->GetRootComponent(), 1.0f);
+                break;
+            }
+    }
+    else if (!bShouldPlaySiren && SirenLoop.IsValid())
+    {
+        if (UAudioComponent* Siren = SirenLoop.Get())
+            Siren->FadeOut(0.25f, 0.0f);
+        SirenLoop.Reset();
+    }
 }
 
 void UTMOPVehicleAudioComponent::PlayOneShot(
@@ -135,6 +160,17 @@ void UTMOPVehicleAudioComponent::PlayDoorCycle()
 void UTMOPVehicleAudioComponent::PlaySkid() { PlayOneShot(Profile.SkidAudioId); }
 void UTMOPVehicleAudioComponent::PlayTireBurst() { PlayOneShot(Profile.TireBurstAudioId); }
 void UTMOPVehicleAudioComponent::PlayHardStart() { PlayOneShot(Profile.HardStartAudioId); }
+void UTMOPVehicleAudioComponent::PlayCollision(const float ImpactSpeedCmPerSecond)
+{
+    const float ImpactSpeedKmh = FMath::Abs(ImpactSpeedCmPerSecond) *
+        (3600.0f / 100000.0f);
+    const bool bHighSpeed = ImpactSpeedKmh >= HighSpeedCollisionThresholdKmh;
+    PlayOneShot(bHighSpeed
+        ? Profile.HighSpeedCollisionAudioId
+        : Profile.LowSpeedCollisionAudioId,
+        FMath::GetMappedRangeValueClamped(
+            FVector2D(2.0f, 60.0f), FVector2D(0.35f, 1.0f), ImpactSpeedKmh));
+}
 
 void UTMOPVehicleAudioComponent::SetEmergencySirenEnabled(const bool bEnabled)
 {
@@ -143,15 +179,10 @@ void UTMOPVehicleAudioComponent::SetEmergencySirenEnabled(const bool bEnabled)
     {
         if (UAudioComponent* Siren = SirenLoop.Get()) Siren->FadeOut(0.25f, 0.0f);
         SirenLoop.Reset();
-        return;
     }
-    if (Profile.SirenAudioId.IsNone() || SirenLoop.IsValid() || GetOwner() == nullptr) return;
-    for (TActorIterator<ATMOPAudioDirector> It(GetWorld()); It; ++It)
-    {
-        SirenLoop = It->PlayAttachedById(
-            Profile.SirenAudioId, GetOwner()->GetRootComponent(), 1.0f);
-        break;
-    }
+    // Enabling only arms the siren. TickComponent starts the sound once the
+    // vehicle is actually moving. Blue lights continue to read the emergency
+    // flag directly and therefore remain active while parked.
 }
 
 void UTMOPVehicleAudioComponent::StopLoops()

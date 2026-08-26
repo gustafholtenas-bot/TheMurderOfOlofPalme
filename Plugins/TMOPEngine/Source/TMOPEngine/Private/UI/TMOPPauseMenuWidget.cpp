@@ -31,6 +31,7 @@
 #include "Widgets/Layout/SScrollBox.h"
 #include "Widgets/Layout/SSpacer.h"
 #include "Widgets/Layout/SUniformGridPanel.h"
+#include "Widgets/Layout/SWrapBox.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SLeafWidget.h"
 #include "Widgets/Text/STextBlock.h"
@@ -83,23 +84,100 @@ bool UppslagIdNaturalLess(const FName Left, const FName Right)
     return CompareUppslagIdsNaturally(Left.ToString(), Right.ToString()) < 0;
 }
 
+enum class ETMOPCoverageState : uint8
+{
+    Unknown = 0,
+    Added = 1,
+    OnlineNotAdded = 2,
+    PoliceOnly = 3,
+    PoliceHighPriority = 4
+};
+
+bool IsUppslagAvailableOnline(const FTMOPUppslagRow& Row)
+{
+    switch (Row.Availability)
+    {
+    case ETMOPUppslagAvailability::Available:
+    case ETMOPUppslagAvailability::PartiallyAvailable:
+    case ETMOPUppslagAvailability::Partial:
+    case ETMOPUppslagAvailability::MissingPage:
+    case ETMOPUppslagAvailability::AvailableMasked:
+        return true;
+    default:
+        return Row.bRetrieved || Row.bPartiallyAdded;
+    }
+}
+
+ETMOPCoverageState ClassifyUppslagCoverage(const FTMOPUppslagRow& Row)
+{
+    if (Row.bAddedToProject) return ETMOPCoverageState::Added;
+    if (Row.Availability == ETMOPUppslagAvailability::NotReleased)
+        return Row.bHighPriorityForGame
+            ? ETMOPCoverageState::PoliceHighPriority
+            : ETMOPCoverageState::PoliceOnly;
+    if (IsUppslagAvailableOnline(Row)) return ETMOPCoverageState::OnlineNotAdded;
+    return ETMOPCoverageState::Unknown;
+}
+
+FLinearColor CoverageStateColor(const ETMOPCoverageState State)
+{
+    switch (State)
+    {
+    case ETMOPCoverageState::Added: return FLinearColor(0.12f, 0.72f, 0.28f, 1.0f);
+    case ETMOPCoverageState::OnlineNotAdded: return FLinearColor(0.96f, 0.72f, 0.08f, 1.0f);
+    case ETMOPCoverageState::PoliceOnly: return FLinearColor(0.42f, 0.45f, 0.50f, 1.0f);
+    case ETMOPCoverageState::PoliceHighPriority: return FLinearColor(0.90f, 0.08f, 0.06f, 1.0f);
+    default: return FLinearColor(0.13f, 0.14f, 0.16f, 1.0f);
+    }
+}
+
+struct FTMOPCoverageCounts
+{
+    int32 Total = 0;
+    int32 Added = 0;
+    int32 OnlineNotAdded = 0;
+    int32 PoliceOnly = 0;
+    int32 PoliceHighPriority = 0;
+    int32 Unknown = 0;
+
+    void Add(const ETMOPCoverageState State)
+    {
+        ++Total;
+        switch (State)
+        {
+        case ETMOPCoverageState::Added: ++Added; break;
+        case ETMOPCoverageState::OnlineNotAdded: ++OnlineNotAdded; break;
+        case ETMOPCoverageState::PoliceOnly: ++PoliceOnly; break;
+        case ETMOPCoverageState::PoliceHighPriority: ++PoliceHighPriority; break;
+        default: ++Unknown; break;
+        }
+    }
+
+    int32 AddedPercent() const
+    {
+        return Total > 0 ? FMath::RoundToInt(100.0f * Added / Total) : 0;
+    }
+};
+
 /** Draws one entire investigation-section coverage strip in a single widget. */
 class STMOPUppslagCoverageBar final : public SLeafWidget
 {
 public:
     SLATE_BEGIN_ARGS(STMOPUppslagCoverageBar) {}
-        /** 0 = not retrieved, 1 = retrieved/in project, 2 = police only. */
+        /** ETMOPCoverageState values in natural uppslag order. */
         SLATE_ARGUMENT(TArray<uint8>, EntryStates)
+        SLATE_ARGUMENT(float, DesiredWidth)
     SLATE_END_ARGS()
 
     void Construct(const FArguments& Arguments)
     {
         EntryStates = Arguments._EntryStates;
+        DesiredWidth = FMath::Max(18.0f, Arguments._DesiredWidth);
     }
 
     virtual FVector2D ComputeDesiredSize(float) const override
     {
-        return FVector2D(620.0f, 24.0f);
+        return FVector2D(DesiredWidth, 24.0f);
     }
 
     virtual int32 OnPaint(const FPaintArgs& Args, const FGeometry& Geometry,
@@ -111,31 +189,38 @@ public:
         const float BarWidth = static_cast<float>(Size.X);
         const float BarHeight = static_cast<float>(Size.Y);
         const FSlateBrush* WhiteBrush = FCoreStyle::Get().GetBrush("WhiteBrush");
-        FSlateDrawElement::MakeBox(DrawElements, LayerId,
-            Geometry.ToPaintGeometry(), WhiteBrush, ESlateDrawEffect::None,
-            FLinearColor(0.16f, 0.145f, 0.12f, 1.0f));
+        FSlateDrawElement::MakeBox(DrawElements, LayerId, Geometry.ToPaintGeometry(),
+            WhiteBrush, ESlateDrawEffect::None,
+            CoverageStateColor(ETMOPCoverageState::Unknown));
 
         if (!EntryStates.IsEmpty() && BarWidth > 2.0f)
         {
-            const float Step = BarWidth / static_cast<float>(EntryStates.Num());
-            for (int32 Index = 0; Index < EntryStates.Num(); ++Index)
+            int32 Counts[5] = {0, 0, 0, 0, 0};
+            for (const uint8 RawState : EntryStates)
             {
-                if (EntryStates[Index] == 0) continue;
-                const float X = FMath::Clamp((Index + 0.5f) * Step,
-                    1.0f, BarWidth - 1.0f);
-                TArray<FVector2f> Marker;
-                Marker.Add(FVector2f(X, 1.0f));
-                Marker.Add(FVector2f(X, BarHeight - 1.0f));
-                FSlateDrawElement::MakeLines(DrawElements, LayerId + 1,
-                    Geometry.ToPaintGeometry(), Marker, ESlateDrawEffect::None,
-                    EntryStates[Index] == 1
-                        ? FLinearColor(0.95f, 0.08f, 0.06f, 1.0f)
-                        : FLinearColor(0.38f, 0.55f, 0.68f, 1.0f), true,
-                    FMath::Clamp(Step * 0.72f, 1.0f, 3.0f));
+                const int32 StateIndex = FMath::Clamp(static_cast<int32>(RawState), 0, 4);
+                ++Counts[StateIndex];
+            }
+
+            float X = 0.0f;
+            // Draw known categories first; unknown entries retain the dark remainder.
+            for (int32 StateIndex = 1; StateIndex <= 4; ++StateIndex)
+            {
+                if (Counts[StateIndex] <= 0) continue;
+                const float SegmentWidth = BarWidth * Counts[StateIndex] /
+                    static_cast<float>(EntryStates.Num());
+                const FGeometry SegmentGeometry = Geometry.MakeChild(
+                    FVector2D(SegmentWidth, BarHeight),
+                    FSlateLayoutTransform(FVector2D(X, 0.0f)));
+                FSlateDrawElement::MakeBox(DrawElements, LayerId + 1,
+                    SegmentGeometry.ToPaintGeometry(), WhiteBrush,
+                    ESlateDrawEffect::None,
+                    CoverageStateColor(static_cast<ETMOPCoverageState>(StateIndex)));
+                X += SegmentWidth;
             }
         }
 
-        const FLinearColor BorderColor(0.95f, 0.08f, 0.06f, 1.0f);
+        const FLinearColor BorderColor(0.72f, 0.74f, 0.78f, 1.0f);
         TArray<FVector2f> Border;
         Border.Add(FVector2f(0.5f, 0.5f));
         Border.Add(FVector2f(BarWidth - 0.5f, 0.5f));
@@ -150,6 +235,7 @@ public:
 
 private:
     TArray<uint8> EntryStates;
+    float DesiredWidth = 620.0f;
 };
 
 FText SectionTitle(const ETMOPPauseHubSection Section)
@@ -328,7 +414,33 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
 
     AddHeading(NSLOCTEXT("TMOP", "PoliceSourcesHeading", "1. POLISUPPSLAG"));
     AddBody(NSLOCTEXT("TMOP", "SourcesCoverageIntro",
-        "Varje rad motsvarar ett avsnitt i utredningen. Rött = uppslaget finns i projektets källmaterial. Gråblått = uppslaget är känt men har inte lämnats ut och finns fortfarande endast hos polisen."));
+        "Varje rad motsvarar ett avsnitt i utredningen. Radens längd visar hur många dokument avsnittet innehåller i förhållande till det största avsnittet."));
+
+    const auto MakeLegendEntry = [](const FLinearColor Color, const FText& Label)
+    {
+        return SNew(SHorizontalBox)
+            + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
+            [ SNew(SBorder).BorderBackgroundColor(Color).Padding(0.0f)
+              [ SNew(SBox).WidthOverride(18.0f).HeightOverride(12.0f) ] ]
+            + SHorizontalBox::Slot().AutoWidth().Padding(6.0f, 0.0f, 18.0f, 0.0f)
+              .VAlign(VAlign_Center)
+            [ SNew(STextBlock).Text(Label) ];
+    };
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 7.0f, 2.0f, 12.0f)
+    [ SNew(SWrapBox).UseAllottedSize(true)
+      + SWrapBox::Slot()
+      [ MakeLegendEntry(CoverageStateColor(ETMOPCoverageState::Added),
+          NSLOCTEXT("TMOP", "CoverageAddedLegend", "Grönt: inlagt")) ]
+      + SWrapBox::Slot()
+      [ MakeLegendEntry(CoverageStateColor(ETMOPCoverageState::OnlineNotAdded),
+          NSLOCTEXT("TMOP", "CoverageOnlineLegend", "Gult: online, ej inlagt")) ]
+      + SWrapBox::Slot()
+      [ MakeLegendEntry(CoverageStateColor(ETMOPCoverageState::PoliceOnly),
+          NSLOCTEXT("TMOP", "CoveragePoliceLegend", "Grått: kvar hos polisen")) ]
+      + SWrapBox::Slot()
+      [ MakeLegendEntry(CoverageStateColor(ETMOPCoverageState::PoliceHighPriority),
+          NSLOCTEXT("TMOP", "CoveragePriorityLegend",
+              "Rött: kvar hos polisen, hög prioritet 23:00–23:45")) ] ];
 
     TMap<FName, TArray<FTMOPUppslagRow*>> RowsBySeries;
     TMap<FName, FString> SectionDescriptions;
@@ -349,6 +461,53 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     TArray<FName> SeriesIds;
     RowsBySeries.GetKeys(SeriesIds);
     SeriesIds.Sort(FNameLexicalLess());
+
+    FTMOPCoverageCounts TotalCoverage;
+    int32 MaximumSeriesCount = 0;
+    for (const FName SeriesId : SeriesIds)
+    {
+        const TArray<FTMOPUppslagRow*>& SeriesRows = RowsBySeries.FindChecked(SeriesId);
+        MaximumSeriesCount = FMath::Max(MaximumSeriesCount, SeriesRows.Num());
+        for (const FTMOPUppslagRow* Row : SeriesRows)
+            if (Row != nullptr) TotalCoverage.Add(ClassifyUppslagCoverage(*Row));
+    }
+
+    FString TotalStatistics = FString::Printf(
+        TEXT("TOTALT: %d uppslag\n%d uppslag inlagda\n")
+        TEXT("%d tillgängliga online men ej inlagda\n")
+        TEXT("%d ej utlämnade från polisen\n")
+        TEXT("%d ej utlämnade från polisen men av stort intresse för spelet\n")
+        TEXT("%d procent inlagt"),
+        TotalCoverage.Total, TotalCoverage.Added, TotalCoverage.OnlineNotAdded,
+        TotalCoverage.PoliceOnly, TotalCoverage.PoliceHighPriority,
+        TotalCoverage.AddedPercent());
+    if (TotalCoverage.Unknown > 0)
+        TotalStatistics += FString::Printf(TEXT("\n%d med ännu ej fastställd status"),
+            TotalCoverage.Unknown);
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 4.0f, 2.0f, 14.0f)
+    [ SNew(SBorder).BorderBackgroundColor(FLinearColor(0.055f, 0.07f, 0.095f, 1.0f))
+      .Padding(12.0f)
+      [ SNew(STextBlock).Text(FText::FromString(TotalStatistics))
+        .Font(FCoreStyle::GetDefaultFontStyle("Bold", 15)).AutoWrapText(true) ] ];
+
+    const auto ResolveSectionDescription = [&SectionDescriptions](const FName SeriesId)
+    {
+        FString Description = SectionDescriptions.FindRef(SeriesId);
+        if (!Description.TrimStartAndEnd().IsEmpty()) return Description;
+
+        FString ParentId = SeriesId.ToString();
+        while (ParentId.Len() > 1)
+        {
+            ParentId.LeftChopInline(1);
+            const FString ParentDescription = SectionDescriptions.FindRef(FName(*ParentId));
+            if (!ParentDescription.TrimStartAndEnd().IsEmpty())
+                return FString::Printf(TEXT("Delavsnitt inom %s: %s"),
+                    *ParentId, *ParentDescription);
+        }
+        return FString::Printf(TEXT("Avsnitt %s – detaljerad beskrivning saknas i registret."),
+            *SeriesId.ToString());
+    };
+
     for (const FName SeriesId : SeriesIds)
     {
         TArray<FTMOPUppslagRow*>& SeriesRows = RowsBySeries.FindChecked(SeriesId);
@@ -359,28 +518,32 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
 
         TArray<uint8> EntryStates;
         EntryStates.Reserve(SeriesRows.Num());
-        int32 AvailableCount = 0;
-        int32 AddedCount = 0;
-        int32 PoliceOnlyCount = 0;
+        FTMOPCoverageCounts Coverage;
         for (const FTMOPUppslagRow* Row : SeriesRows)
         {
-            const bool bAvailable = Row != nullptr &&
-                (Row->bRetrieved || Row->bAddedToProject || Row->bPartiallyAdded);
-            const bool bPoliceOnly = Row != nullptr && !bAvailable &&
-                Row->Availability == ETMOPUppslagAvailability::NotReleased;
-            const uint8 EntryState = bAvailable ? uint8(1)
-                : bPoliceOnly ? uint8(2) : uint8(0);
-            EntryStates.Add(EntryState);
-            AvailableCount += bAvailable ? 1 : 0;
-            AddedCount += Row != nullptr && Row->bAddedToProject ? 1 : 0;
-            PoliceOnlyCount += bPoliceOnly ? 1 : 0;
+            if (Row == nullptr) continue;
+            const ETMOPCoverageState State = ClassifyUppslagCoverage(*Row);
+            EntryStates.Add(static_cast<uint8>(State));
+            Coverage.Add(State);
         }
-        const int32 TotalCount = SeriesRows.Num();
-        const int32 AddedPercent = TotalCount > 0
-            ? FMath::RoundToInt(100.0f * AddedCount / TotalCount) : 0;
-        const FText Statistics = FText::FromString(FString::Printf(
-            TEXT("%d/%d uppslag\n%d endast hos polisen\n%d procent inlagt"),
-            AvailableCount, TotalCount, PoliceOnlyCount, AddedPercent));
+        FString StatisticsString = FString::Printf(
+            TEXT("%d uppslag inlagda\n")
+            TEXT("%d tillgängliga online men ej inlagda\n")
+            TEXT("%d ej utlämnade från polisen\n")
+            TEXT("%d ej utlämnade från polisen men av stort intresse för spelet\n")
+            TEXT("%d procent inlagt"),
+            Coverage.Added, Coverage.OnlineNotAdded, Coverage.PoliceOnly,
+            Coverage.PoliceHighPriority, Coverage.AddedPercent());
+        if (Coverage.Unknown > 0)
+            StatisticsString += FString::Printf(TEXT("\n%d ej klassificerade"),
+                Coverage.Unknown);
+        const FText Statistics = FText::FromString(StatisticsString);
+        constexpr float MinimumBarWidth = 24.0f;
+        constexpr float MaximumBarWidth = 620.0f;
+        const float RelativeCount = MaximumSeriesCount > 0
+            ? static_cast<float>(Coverage.Total) / MaximumSeriesCount : 0.0f;
+        const float BarWidth = FMath::Lerp(MinimumBarWidth, MaximumBarWidth,
+            RelativeCount);
 
         ContentBox->AddSlot().AutoHeight().Padding(2.0f, 12.0f)
         [ SNew(SVerticalBox)
@@ -392,14 +555,16 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
                 .Font(FCoreStyle::GetDefaultFontStyle("Bold", 28)) ] ]
             + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
             [ SNew(STextBlock).Text(FText::FromString(
-                SectionDescriptions.FindRef(SeriesId))).AutoWrapText(true) ] ]
+                ResolveSectionDescription(SeriesId))).AutoWrapText(true) ] ]
           + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 7.0f, 0.0f, 0.0f)
           [ SNew(SHorizontalBox)
-            + SHorizontalBox::Slot().FillWidth(1.0f).Padding(105.0f, 0.0f, 18.0f, 0.0f)
+            + SHorizontalBox::Slot().AutoWidth().Padding(105.0f, 0.0f, 18.0f, 0.0f)
               .VAlign(VAlign_Center)
-            [ SNew(STMOPUppslagCoverageBar).EntryStates(EntryStates) ]
+            [ SNew(STMOPUppslagCoverageBar).EntryStates(EntryStates)
+              .DesiredWidth(BarWidth) ]
+            + SHorizontalBox::Slot().FillWidth(1.0f)[ SNew(SSpacer) ]
             + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
-            [ SNew(SBox).WidthOverride(180.0f)
+            [ SNew(SBox).WidthOverride(360.0f)
               [ SNew(STextBlock).Text(Statistics).AutoWrapText(false) ] ] ] ];
     }
 
@@ -480,7 +645,8 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             TEXT("%d källor • %d helt inlagda • %d delvis inlagda"),
             CategoryRows.Num(), FullyAddedCount, PartiallyAddedCount)));
         ContentBox->AddSlot().AutoHeight().Padding(2.0f, 3.0f, 2.0f, 12.0f)
-        [ SNew(STMOPUppslagCoverageBar).EntryStates(EntryStates) ];
+        [ SNew(STMOPUppslagCoverageBar).EntryStates(EntryStates)
+          .DesiredWidth(620.0f) ];
 
         for (const FTMOPUppslagRow* SourceRow : CategoryRows)
         {

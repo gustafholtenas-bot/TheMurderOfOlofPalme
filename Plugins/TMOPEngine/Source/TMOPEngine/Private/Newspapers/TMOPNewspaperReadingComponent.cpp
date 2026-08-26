@@ -82,9 +82,10 @@ bool UTMOPNewspaperReadingComponent::BeginReading(
     PreviousCamera = FindActiveCamera();
     ACharacter* Character = Cast<ACharacter>(GetOwner());
     USkeletalMeshComponent* PlayerMesh = IsValid(Character) ? Character->GetMesh() : nullptr;
-    bUsingExistingPlayerMesh = bUseExistingPlayerMesh && IsValid(PlayerMesh);
+    bUsingExistingPlayerMesh = !bForceFloatingWaistLayout &&
+        bUseExistingPlayerMesh && IsValid(PlayerMesh);
     if (!IsValid(PreviousCamera) || !IsValid(ReadingCamera) ||
-        (!bUsingExistingPlayerMesh && !IsValid(ReadingArms)) || !IsValid(ReadingNewspaper) ||
+        !IsValid(ReadingNewspaper) ||
         !IsValid(NewspaperMesh) || !IsValid(NewspaperMaterial)) return false;
 
     ActiveNewspaper = Newspaper;
@@ -104,28 +105,28 @@ bool UTMOPNewspaperReadingComponent::BeginReading(
     }
     else
     {
-        ReadingArms->AttachToComponent(ReadingCamera,
-            FAttachmentTransformRules::SnapToTargetNotIncludingScale);
         ReadingNewspaper->AttachToComponent(ReadingCamera,
             FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-        USkeletalMesh* ResolvedArms = FirstPersonArmsMesh;
-        if (!IsValid(ResolvedArms) && IsValid(PlayerMesh))
-            ResolvedArms = PlayerMesh->GetSkeletalMeshAsset();
-        ReadingArms->SetSkeletalMeshAsset(ResolvedArms);
-        if (IsValid(PlayerMesh))
-            for (int32 Slot = 0; Slot < PlayerMesh->GetNumMaterials(); ++Slot)
-                ReadingArms->SetMaterial(Slot, PlayerMesh->GetMaterial(Slot));
-
-        ReadingArms->SetRelativeTransform(ArmsRelativeTransform);
+        if (!bForceFloatingWaistLayout && bShowReadingArms && IsValid(ReadingArms))
+        {
+            ReadingArms->AttachToComponent(ReadingCamera,
+                FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+            USkeletalMesh* ResolvedArms = FirstPersonArmsMesh;
+            if (!IsValid(ResolvedArms) && IsValid(PlayerMesh))
+                ResolvedArms = PlayerMesh->GetSkeletalMeshAsset();
+            ReadingArms->SetSkeletalMeshAsset(ResolvedArms);
+            if (IsValid(PlayerMesh))
+                for (int32 Slot = 0; Slot < PlayerMesh->GetNumMaterials(); ++Slot)
+                    ReadingArms->SetMaterial(Slot, PlayerMesh->GetMaterial(Slot));
+            ReadingArms->SetRelativeTransform(ArmsRelativeTransform);
+        }
         CurrentNewspaperTransform = NewspaperRelativeTransform;
     }
     ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
     ReadingNewspaper->SetStaticMesh(nullptr);
-    if (!bUsingExistingPlayerMesh)
-    {
-        ReadingArms->SetVisibility(true, true);
-    }
+    ReadingArms->SetVisibility(!bForceFloatingWaistLayout &&
+        !bUsingExistingPlayerMesh && bShowReadingArms, true);
     ReadingNewspaper->SetVisibility(true, true);
     SetComponentTickEnabled(false);
     const bool bPageShown = ShowPage(PageIndex, false);
@@ -199,7 +200,7 @@ bool UTMOPNewspaperReadingComponent::ShowPage(
         Rotation += FoldedBackRotationOffset;
         CurrentNewspaperTransform.SetRotation(Rotation.Quaternion());
     }
-    ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
+    ApplyNewspaperTransform(DesiredMesh);
 
     if (bUseFoldedMesh) return true;
 
@@ -213,6 +214,24 @@ bool UTMOPNewspaperReadingComponent::ShowPage(
     return true;
 }
 
+void UTMOPNewspaperReadingComponent::ApplyNewspaperTransform(UStaticMesh* Mesh)
+{
+    if (!IsValid(ReadingNewspaper)) return;
+    FTransform Applied = CurrentNewspaperTransform;
+    if (!bUsingExistingPlayerMesh && bCenterMeshBoundsOnFloatingTransform &&
+        IsValid(Mesh))
+    {
+        // Treat NewspaperRelativeTransform as the desired visual centre, not
+        // as the imported mesh pivot. This keeps folded/open meshes centred
+        // even when Blender exported their pivot along one page edge.
+        const FVector ScaledBoundsOrigin =
+            Mesh->GetBounds().Origin * Applied.GetScale3D();
+        Applied.AddToTranslation(
+            -Applied.GetRotation().RotateVector(ScaledBoundsOrigin));
+    }
+    ReadingNewspaper->SetRelativeTransform(Applied);
+}
+
 void UTMOPNewspaperReadingComponent::Pan(
     const float HorizontalDirection, const float VerticalDirection)
 {
@@ -221,8 +240,10 @@ void UTMOPNewspaperReadingComponent::Pan(
     FVector Location = CurrentNewspaperTransform.GetLocation();
     Location += Delta;
     CurrentNewspaperTransform.SetLocation(Location);
-    if (IsValid(ReadingNewspaper)) ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
-    if (!bUsingExistingPlayerMesh && IsValid(ReadingArms))
+    if (IsValid(ReadingNewspaper))
+        ApplyNewspaperTransform(ReadingNewspaper->GetStaticMesh());
+    if (!bForceFloatingWaistLayout && !bUsingExistingPlayerMesh &&
+        bShowReadingArms && IsValid(ReadingArms))
         ReadingArms->AddRelativeLocation(Delta);
 }
 
@@ -232,9 +253,11 @@ void UTMOPNewspaperReadingComponent::Zoom(const float Direction)
     const float OldX = Location.X;
     Location.X = FMath::Clamp(OldX - Direction * ZoomStepCm, 30.0f, 110.0f);
     CurrentNewspaperTransform.SetLocation(Location);
-    if (IsValid(ReadingNewspaper)) ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
-    if (!bUsingExistingPlayerMesh && IsValid(ReadingArms)) ReadingArms->AddRelativeLocation(
-        FVector(Location.X - OldX, 0.0f, 0.0f));
+    if (IsValid(ReadingNewspaper))
+        ApplyNewspaperTransform(ReadingNewspaper->GetStaticMesh());
+    if (!bForceFloatingWaistLayout && !bUsingExistingPlayerMesh &&
+        bShowReadingArms && IsValid(ReadingArms))
+        ReadingArms->AddRelativeLocation(FVector(Location.X - OldX, 0.0f, 0.0f));
 }
 
 void UTMOPNewspaperReadingComponent::EndReading()

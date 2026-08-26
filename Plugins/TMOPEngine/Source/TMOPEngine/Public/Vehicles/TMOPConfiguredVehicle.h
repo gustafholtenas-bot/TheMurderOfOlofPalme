@@ -78,6 +78,32 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Camera")
     TObjectPtr<UCameraComponent> VehicleCamera;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera")
+    bool bAllowMouseOrbitCamera = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera",
+        meta=(ClampMin="-89.0", ClampMax="89.0"))
+    float MinimumCameraPitchDegrees = -55.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera",
+        meta=(ClampMin="-89.0", ClampMax="89.0"))
+    float MaximumCameraPitchDegrees = 25.0f;
+
+    /** Seconds without mouse movement before the camera starts returning behind the vehicle. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera",
+        meta=(ClampMin="0.0"))
+    float CameraReturnDelaySeconds = 1.0f;
+
+    /** Interpolation speed used when the camera returns behind the vehicle. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera",
+        meta=(ClampMin="0.0"))
+    float CameraReturnSpeed = 3.0f;
+
+    /** Default chase-camera pitch when it is centred behind the vehicle. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera",
+        meta=(ClampMin="-89.0", ClampMax="89.0"))
+    float DefaultCameraPitchDegrees = -12.0f;
+
     /** Disabled while parked; BeginDriving in a person's timeline starts it. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Traffic")
     TObjectPtr<UTMOPTrafficVehicleMovementComponent> TrafficMovement;
@@ -112,8 +138,15 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Configured Vehicle")
     bool ApplyConfiguration();
 
+    /** Called every frame only for the vehicle currently viewed by the player. */
+    void UpdatePlayerVehicleCamera(float DeltaSeconds);
+
 private:
     bool ApplyBodyColor();
+
+    FRotator LastVehicleCameraControlRotation = FRotator::ZeroRotator;
+    float SecondsSinceVehicleCameraInput = 0.0f;
+    bool bVehicleCameraTrackingInitialized = false;
     int32 ResolveBodyMaterialSlotIndex() const;
     FName ResolveBodyColorParameterName(
         class UMaterialInterface* Material) const;

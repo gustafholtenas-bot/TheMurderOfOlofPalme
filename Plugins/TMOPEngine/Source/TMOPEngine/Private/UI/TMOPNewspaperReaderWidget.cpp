@@ -56,7 +56,18 @@ bool UTMOPNewspaperReaderWidget::GoToPage(const int32 PageIndex)
 {
     if (!IsValid(Newspaper.Get()) ||
         !Newspaper->Pages.IsValidIndex(PageIndex)) return false;
-    CurrentPageIndex = PageIndex;
+    const int32 LastPageIndex = Newspaper->Pages.Num() - 1;
+    if (PageIndex == 0 || PageIndex == LastPageIndex)
+    {
+        CurrentPageIndex = PageIndex;
+    }
+    else
+    {
+        // Inner pages are shown as physical two-page spreads. Always normalize
+        // to the left page so direct Blueprint calls cannot create overlap.
+        CurrentPageIndex = 1 + 2 * ((PageIndex - 1) / 2);
+        CurrentPageIndex = FMath::Min(CurrentPageIndex, LastPageIndex - 1);
+    }
     RefreshPage();
     return true;
 }

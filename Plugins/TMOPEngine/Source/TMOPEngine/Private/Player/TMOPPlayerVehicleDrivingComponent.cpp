@@ -2,6 +2,7 @@
 
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Audio/TMOPVehicleAudioComponent.h"
 #include "Components/BoxComponent.h"
 
 UTMOPPlayerVehicleDrivingComponent::UTMOPPlayerVehicleDrivingComponent()
@@ -31,6 +32,8 @@ bool UTMOPPlayerVehicleDrivingComponent::BeginDriving(ATMOPVehicleBase* Vehicle)
 
     ThrottleInput = SteeringInput = BrakeInput = 0.0f;
     bHandbrakeInput = false;
+    bHighSpeedMode = false;
+    CurrentYawRateDegreesPerSecond = 0.0f;
     bHasGroundContact = false;
     SetComponentTickEnabled(true);
     OnPlayerDrivingStateChanged.Broadcast(DrivenVehicle, true);
@@ -51,6 +54,8 @@ void UTMOPPlayerVehicleDrivingComponent::EndDriving()
     CurrentSpeedCmPerSecond = 0.0f;
     ThrottleInput = SteeringInput = BrakeInput = 0.0f;
     bHandbrakeInput = false;
+    bHighSpeedMode = false;
+    CurrentYawRateDegreesPerSecond = 0.0f;
     bHasGroundContact = false;
     SetComponentTickEnabled(false);
     if (IsValid(PreviousVehicle)) OnPlayerDrivingStateChanged.Broadcast(PreviousVehicle, false);
@@ -62,7 +67,11 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if (!IsValid(DrivenVehicle) || DeltaTime <= 0.0f) return;
 
-    const float MaxForward = MaximumForwardSpeedKmh * (100000.0f / 3600.0f);
+    const float MaxForwardKmh = bHighSpeedMode
+        ? MaximumForwardSpeedKmh
+        : FMath::Min(NormalForwardSpeedKmh, MaximumForwardSpeedKmh);
+    const float MaxForward = MaxForwardKmh * (100000.0f / 3600.0f);
+    const float AbsoluteMaxForward = MaximumForwardSpeedKmh * (100000.0f / 3600.0f);
     const float MaxReverse = MaximumReverseSpeedKmh * (100000.0f / 3600.0f);
     float EffectiveThrottle = ThrottleInput;
     float EffectiveBrake = BrakeInput;
@@ -100,15 +109,19 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
             VisualSteeringAngleDegrees;
     }
     const float SpeedAlpha = FMath::Clamp(FMath::Abs(CurrentSpeedCmPerSecond) /
-        FMath::Max(1.0f, MaxForward), 0.0f, 1.0f);
+        FMath::Max(1.0f, AbsoluteMaxForward), 0.0f, 1.0f);
     const float EffectiveSteering = FMath::DegreesToRadians(VisualSteeringAngleDegrees) *
         FMath::Lerp(1.0f, 0.55f, SpeedAlpha);
-    const float YawDeltaRadians = MinimumTurnRadiusCm > 1.0f
-        ? (CurrentSpeedCmPerSecond / MinimumTurnRadiusCm) * FMath::Sin(EffectiveSteering) * DeltaTime
+    const float DesiredYawRateDegrees = MinimumTurnRadiusCm > 1.0f
+        ? FMath::RadiansToDegrees(
+            (CurrentSpeedCmPerSecond / MinimumTurnRadiusCm) * FMath::Sin(EffectiveSteering))
         : 0.0f;
+    CurrentYawRateDegreesPerSecond = FMath::FInterpTo(
+        CurrentYawRateDegreesPerSecond, DesiredYawRateDegrees,
+        DeltaTime, YawInertiaResponse);
 
     FRotator Rotation = DrivenVehicle->GetActorRotation();
-    Rotation.Yaw += FMath::RadiansToDegrees(YawDeltaRadians);
+    Rotation.Yaw += CurrentYawRateDegreesPerSecond * DeltaTime;
     const FVector DeltaLocation = Rotation.Vector() * CurrentSpeedCmPerSecond * DeltaTime;
     FVector DesiredLocation = DrivenVehicle->GetActorLocation() + DeltaLocation;
     if (bFollowGround && GetWorld() != nullptr)
@@ -184,8 +197,12 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
                     LastGroundHeightCm + MaxRiseThisFrame);
             }
 
-            DesiredLocation.Z =
+            const float TargetVehicleZ =
                 TargetGroundHeight + RootHalfHeight + GroundClearanceCm;
+            DesiredLocation.Z = bHasGroundContact
+                ? FMath::FInterpTo(DrivenVehicle->GetActorLocation().Z,
+                    TargetVehicleZ, DeltaTime, GroundHeightResponse)
+                : TargetVehicleZ;
             LastGroundHeightCm = TargetGroundHeight;
             bHasGroundContact = true;
 
@@ -194,41 +211,70 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
                 const FVector GroundForward = FVector::VectorPlaneProject(
                     Forward, AverageNormal).GetSafeNormal();
                 if (!GroundForward.IsNearlyZero())
-                    Rotation = FRotationMatrix::MakeFromXZ(
+                {
+                    const FRotator GroundRotation = FRotationMatrix::MakeFromXZ(
                         GroundForward, AverageNormal).Rotator();
+                    Rotation = FMath::RInterpTo(Rotation, GroundRotation,
+                        DeltaTime, GroundRotationResponse);
+                }
             }
         }
     }
 
+    const FVector MovementStart = DrivenVehicle->GetActorLocation();
+    const FRotator RotationStart = DrivenVehicle->GetActorRotation();
+    const float ImpactSpeedCmPerSecond = FMath::Abs(CurrentSpeedCmPerSecond);
     FHitResult Hit;
     const bool bMoved = DrivenVehicle->SetActorLocationAndRotation(
         DesiredLocation, Rotation, bSweepMovement,
         bSweepMovement ? &Hit : nullptr, ETeleportType::None);
     if (bSweepMovement && (!bMoved || Hit.bBlockingHit))
     {
-        // A low kerb may touch the body before every ground probe has reached
-        // its top. Try a bounded vertical step, then keep normal sweeping.
-        const float ObstacleHeight =
-            Hit.ImpactPoint.Z - DrivenVehicle->GetActorLocation().Z;
-        if (ObstacleHeight <= MaximumStepUpHeightCm)
+        // A box sweep into a kerb blocks before the forward ground probe can
+        // pull the vehicle upward. Retry as three distinct moves: restore the
+        // valid start, lift vertically, then sweep forward at the raised
+        // height. This behaves like a wheel climbing a low kerb instead of a
+        // diagonal body teleport.
+        DrivenVehicle->SetActorLocationAndRotation(
+            MovementStart, RotationStart, false, nullptr, ETeleportType::TeleportPhysics);
+        bool bSteppedUp = false;
+        if (MaximumStepUpHeightCm > 0.0f &&
+            FVector::DistSquared2D(MovementStart, DesiredLocation) > 1.0f)
         {
-            const FVector StepLocation = DesiredLocation +
+            const FVector RaisedStart = MovementStart +
                 FVector(0.0f, 0.0f, MaximumStepUpHeightCm);
-            FHitResult StepHit;
-            if (DrivenVehicle->SetActorLocationAndRotation(
-                StepLocation, Rotation, true, &StepHit, ETeleportType::None) &&
-                !StepHit.bBlockingHit)
+            FHitResult LiftHit;
+            const bool bLifted = DrivenVehicle->SetActorLocationAndRotation(
+                RaisedStart, RotationStart, true, &LiftHit, ETeleportType::None) &&
+                !LiftHit.bBlockingHit;
+            if (bLifted)
             {
-                LastGroundHeightCm += MaximumStepUpHeightCm;
-            }
-            else
-            {
-                CurrentSpeedCmPerSecond = 0.0f;
+                FVector RaisedDestination = DesiredLocation;
+                RaisedDestination.Z = FMath::Max(
+                    RaisedDestination.Z, RaisedStart.Z);
+                FHitResult ForwardHit;
+                bSteppedUp = DrivenVehicle->SetActorLocationAndRotation(
+                    RaisedDestination, Rotation, true, &ForwardHit,
+                    ETeleportType::None) && !ForwardHit.bBlockingHit;
             }
         }
-        else
+        if (!bSteppedUp)
         {
+            DrivenVehicle->SetActorLocationAndRotation(
+                MovementStart, RotationStart, false, nullptr,
+                ETeleportType::TeleportPhysics);
             CurrentSpeedCmPerSecond = 0.0f;
+            CurrentYawRateDegreesPerSecond *= 0.35f;
+
+            const float WorldSeconds = GetWorld() != nullptr
+                ? GetWorld()->GetTimeSeconds() : 0.0f;
+            if (WorldSeconds - LastCollisionSoundWorldSeconds >= 0.35f)
+                if (UTMOPVehicleAudioComponent* Audio =
+                    DrivenVehicle->FindComponentByClass<UTMOPVehicleAudioComponent>())
+                {
+                    Audio->PlayCollision(ImpactSpeedCmPerSecond);
+                    LastCollisionSoundWorldSeconds = WorldSeconds;
+                }
         }
     }
 
@@ -255,6 +301,11 @@ void UTMOPPlayerVehicleDrivingComponent::SetBrakeInput(const float Value)
 void UTMOPPlayerVehicleDrivingComponent::SetHandbrakeInput(const bool bPressed)
 {
     bHandbrakeInput = bPressed;
+}
+
+void UTMOPPlayerVehicleDrivingComponent::SetHighSpeedMode(const bool bEnabled)
+{
+    bHighSpeedMode = bEnabled;
 }
 
 float UTMOPPlayerVehicleDrivingComponent::GetCurrentSpeedKmh() const

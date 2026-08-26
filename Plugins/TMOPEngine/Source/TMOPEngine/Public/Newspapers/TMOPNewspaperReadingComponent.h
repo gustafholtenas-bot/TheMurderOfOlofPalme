@@ -14,7 +14,7 @@ class UStaticMesh;
 class UStaticMeshComponent;
 class UTMOPNewspaperItemDefinition;
 
-/** First-person newspaper reader which can reuse the player's existing body mesh. */
+/** First-person newspaper reader with an editor-adjustable floating paper. */
 UCLASS(ClassGroup=(TMOP), BlueprintType, Blueprintable,
     meta=(BlueprintSpawnableComponent))
 class TMOPENGINE_API UTMOPNewspaperReadingComponent : public UActorComponent
@@ -27,9 +27,20 @@ public:
     virtual void TickComponent(float DeltaTime, ELevelTick TickType,
         FActorComponentTickFunction* ThisTickFunction) override;
 
-    /** Reuses the character mesh and attaches the paper to its hand socket. */
+    /** Optional legacy mode. Disabled by default so the paper floats in front of the player. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Player Mesh")
-    bool bUseExistingPlayerMesh = true;
+    bool bUseExistingPlayerMesh = false;
+
+    /**
+     * Authoritative modern layout. When enabled, stale Blueprint values for
+     * hand sockets and reading arms cannot pull the paper back into one hand.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Floating")
+    bool bForceFloatingWaistLayout = true;
+
+    /** Centres meshes whose imported pivot is at an edge instead of the page centre. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Floating")
+    bool bCenterMeshBoundsOnFloatingTransform = true;
 
     /** The paper has one parent socket; the other hand is aligned by the reading pose/IK. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Player Mesh")
@@ -50,9 +61,13 @@ public:
         meta=(ClampMin="0.0"))
     float NewspaperReadingMontageBlendOutTime = 0.2f;
 
-    /** Optional legacy fallback, used only when Use Existing Player Mesh is disabled. */
+    /** Optional first-person arms. Keep disabled for a freely positioned newspaper. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Floating")
+    bool bShowReadingArms = false;
+
+    /** Optional legacy arms mesh, used only when Show Reading Arms is enabled. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D",
-        meta=(EditCondition="!bUseExistingPlayerMesh", EditConditionHides))
+        meta=(EditCondition="!bUseExistingPlayerMesh && bShowReadingArms", EditConditionHides))
     TObjectPtr<USkeletalMesh> FirstPersonArmsMesh;
 
     /** Open mesh with slots: front, pageleft, pageright, endpage. */
@@ -87,13 +102,17 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D")
     FRotator FoldedBackRotationOffset = FRotator(0.0f, 180.0f, 0.0f);
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Floating",
+        meta=(DisplayName="Floating Arms Transform", EditCondition="bShowReadingArms",
+            EditConditionHides, MakeEditWidget="true"))
     FTransform ArmsRelativeTransform = FTransform(FRotator::ZeroRotator,
         FVector(8.0f, 0.0f, -18.0f));
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D")
-    FTransform NewspaperRelativeTransform = FTransform(FRotator(0.0f, 90.0f, 0.0f),
-        FVector(65.0f, 0.0f, -18.0f), FVector(1.0f));
+    /** Position, rotation/tilt and scale relative to the dedicated reading camera. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Floating",
+        meta=(DisplayName="Floating Newspaper Transform", MakeEditWidget="true"))
+    FTransform NewspaperRelativeTransform = FTransform(FRotator(-10.0f, 90.0f, 0.0f),
+        FVector(65.0f, 0.0f, -45.0f), FVector(1.0f));
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Newspaper|3D|Camera")
     FVector FirstPersonCameraOffset = FVector(0.0f, 0.0f, 64.0f);
@@ -133,6 +152,7 @@ private:
     void CreateReadingComponents();
     UMaterialInstanceDynamic* CreatePageMaterial(FName SlotName, int32 FallbackIndex);
     UCameraComponent* FindActiveCamera() const;
+    void ApplyNewspaperTransform(UStaticMesh* Mesh);
 
     UPROPERTY(Transient) TObjectPtr<USkeletalMeshComponent> ReadingArms;
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> ReadingNewspaper;

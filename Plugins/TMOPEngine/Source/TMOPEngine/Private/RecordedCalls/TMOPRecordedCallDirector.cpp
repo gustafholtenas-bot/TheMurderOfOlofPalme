@@ -379,8 +379,6 @@ bool ATMOPRecordedCallDirector::GetActiveSubtitle(const FName RecordingId,
             break;
         }
     }
-    if (ActiveSegment == nullptr || ActiveSegment->Transcript.IsEmpty()) return false;
-
     auto ResolveName = [this](const FName EntityId) -> FText
     {
         if (EntityId.IsNone()) return NSLOCTEXT("TMOP", "UnknownRadioVoice", "Okänd röst");
@@ -391,6 +389,31 @@ bool ATMOPRecordedCallDirector::GetActiveSubtitle(const FName RecordingId,
             !Profile.FullName.IsEmpty()) return Profile.FullName;
         return FText::FromString(EntityId.ToString().Replace(TEXT("_"), TEXT(" ")));
     };
+
+    // Keep the radio overlay alive for recordings whose detailed speaker
+    // segmentation has not yet been entered. Audio must never make the title
+    // and participants disappear merely because SpeechSegments is incomplete.
+    if (ActiveSegment == nullptr || ActiveSegment->Transcript.IsEmpty())
+    {
+        OutSegmentId = FName(TEXT("RECORDING_INFORMATION"));
+        if (!Row->ParticipantEntityIds.IsEmpty())
+            OutLeftSpeaker = ResolveName(Row->ParticipantEntityIds[0]);
+        if (Row->ParticipantEntityIds.IsValidIndex(1))
+            OutRightSpeaker = ResolveName(Row->ParticipantEntityIds[1]);
+        if (OutLeftSpeaker.IsEmpty())
+            OutLeftSpeaker = Row->DisplayName;
+        if (OutRightSpeaker.IsEmpty())
+            OutRightSpeaker = NSLOCTEXT("TMOP", "UnknownRadioParticipant", "Okänd mottagare");
+        OutTranscript = FText::Format(
+            NSLOCTEXT("TMOP", "RecordedCallTranscriptPending",
+                "{0}\nTranskribering saknas för den här delen av inspelningen."),
+            Row->DisplayName);
+        bOutRadioStyle = Row->CallType == ETMOPRecordedCallType::LAC ||
+            Row->CallType == ETMOPRecordedCallType::PoliceRadio ||
+            Row->CallType == ETMOPRecordedCallType::PoliceEmergencyCall ||
+            Row->CallType == ETMOPRecordedCallType::TaxiRadio;
+        return true;
+    }
 
     OutSegmentId = ActiveSegment->SegmentId;
     OutLeftSpeaker = ResolveName(ActiveSegment->SpeakerEntityId);

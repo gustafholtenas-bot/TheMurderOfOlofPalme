@@ -20,6 +20,8 @@ class TMOPENGINE_API UTMOPPlayerVehicleSessionComponent : public UActorComponent
 
 public:
     UTMOPPlayerVehicleSessionComponent();
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+        FActorComponentTickFunction* ThisTickFunction) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle Session|Camera")
     float EnterCameraBlendSeconds = 0.35f;
@@ -63,6 +65,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Vehicle Session|Input")
     void VehicleHandbrake(bool bPressed);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Vehicle Session|Input")
+    void VehicleHighSpeedMode(bool bEnabled);
 
 private:
     UTMOPVehicleTakeoverComponent* GetTakeover() const;

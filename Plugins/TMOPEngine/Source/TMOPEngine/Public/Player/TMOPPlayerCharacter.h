@@ -137,6 +137,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Interaction")
     bool bCreateInteractionPromptWidget = true;
 
+    /** Ignores stale Blueprint widget settings and guarantees the native target HUD. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Interaction")
+    bool bForceNativeTargetInformationWidget = true;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Interaction")
     TObjectPtr<UTMOPInteractionPromptWidget> InteractionPromptWidget;
 
@@ -358,6 +362,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
     float InteractionDistance = 300.0f;
 
+    /** Maximum distance for identifying a nearby person, vehicle or item. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target",
+        meta=(ClampMin="100.0", Units="cm"))
+    float TargetInformationDistance = 900.0f;
+
+    /** A target inside this camera cone counts as something the player looks at. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target",
+        meta=(ClampMin="1.0", ClampMax="45.0", Units="deg"))
+    float DirectTargetConeDegrees = 10.0f;
+
+    /** If no direct target exists, use the nearest target in the character's front 180 degrees. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target")
+    bool bUseFrontHemisphereTargetFallback = true;
+
     /** Maximum off-centre angle for selecting a person or small item. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction",
         meta=(ClampMin="1.0", ClampMax="20.0", Units="deg"))
@@ -371,6 +389,9 @@ public:
     UPROPERTY(Transient, BlueprintReadOnly, Category="TMOP|Player|Interaction")
     TObjectPtr<AActor> CurrentInteractionTarget;
 
+    UPROPERTY(Transient, BlueprintReadOnly, Category="TMOP|Player|Target")
+    TObjectPtr<AActor> CurrentInformationTarget;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Inventory|Drop")
     TSubclassOf<ATMOPWorldItem> WorldItemClass;
 
@@ -379,6 +400,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|Interaction")
     AActor* FindInteractionTarget() const;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|Target")
+    AActor* FindInformationTarget() const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|Player|Interaction")
     FText GetInteractKeyDisplayText() const;

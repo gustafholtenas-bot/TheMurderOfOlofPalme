@@ -163,6 +163,9 @@ private:
     bool ResolveTimelinePlacementTransform(
         const FTMOPHistoricalVehicleTimelineEntry& Entry,
         FTransform& OutTransform) const;
+    bool ResolveTimelineEntrySecond(
+        const FTMOPHistoricalVehicleTimelineEntry& Entry,
+        int32& OutSecond) const;
     bool IsBoundaryEntryVehicle(
         const FTMOPHistoricalVehicleRow& Profile) const;
     void SuppressBoundaryEntryCollision(

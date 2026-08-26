@@ -8,6 +8,7 @@
 #include "Materials/MaterialInterface.h"
 #include "MaterialTypes.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "Camera/CameraComponent.h"
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Audio/TMOPVehicleAudioComponent.h"
@@ -42,7 +43,14 @@ ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
     VehicleCameraBoom->SetRelativeRotation(FRotator(-12.0f, 0.0f, 0.0f));
     VehicleCameraBoom->bDoCollisionTest = true;
     VehicleCameraBoom->bEnableCameraLag = true;
-    VehicleCameraBoom->CameraLagSpeed = 7.0f;
+    VehicleCameraBoom->CameraLagSpeed = 5.0f;
+    VehicleCameraBoom->CameraLagMaxDistance = 180.0f;
+    VehicleCameraBoom->bUseCameraLagSubstepping = true;
+    VehicleCameraBoom->bEnableCameraRotationLag = true;
+    VehicleCameraBoom->CameraRotationLagSpeed = 6.0f;
+    VehicleCameraBoom->bInheritPitch = false;
+    VehicleCameraBoom->bInheritYaw = false;
+    VehicleCameraBoom->bInheritRoll = false;
     VehicleCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("VehicleCamera"));
     VehicleCamera->SetupAttachment(VehicleCameraBoom, USpringArmComponent::SocketName);
 
@@ -310,6 +318,69 @@ void ATMOPConfiguredVehicle::Tick(const float DeltaSeconds)
     Super::Tick(DeltaSeconds);
     UpdateWheelAnimation(DeltaSeconds);
     UpdateVehicleLights();
+}
+
+void ATMOPConfiguredVehicle::UpdatePlayerVehicleCamera(const float DeltaSeconds)
+{
+    if (!bAllowMouseOrbitCamera || !IsValid(VehicleCameraBoom) ||
+        GetWorld() == nullptr)
+    {
+        bVehicleCameraTrackingInitialized = false;
+        return;
+    }
+    APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+    if (!IsValid(PlayerController) || PlayerController->GetViewTarget() != this)
+    {
+        bVehicleCameraTrackingInitialized = false;
+        return;
+    }
+
+    FRotator ControlRotation = PlayerController->GetControlRotation();
+    if (!bVehicleCameraTrackingInitialized)
+    {
+        // Always begin in the familiar chase-camera position behind the car.
+        ControlRotation = FRotator(DefaultCameraPitchDegrees,
+            GetActorRotation().Yaw, 0.0f);
+        PlayerController->SetControlRotation(ControlRotation);
+        LastVehicleCameraControlRotation = ControlRotation;
+        SecondsSinceVehicleCameraInput = 0.0f;
+        bVehicleCameraTrackingInitialized = true;
+    }
+    else
+    {
+        const float ManualYawDelta = FMath::Abs(FMath::FindDeltaAngleDegrees(
+            LastVehicleCameraControlRotation.Yaw, ControlRotation.Yaw));
+        const float ManualPitchDelta = FMath::Abs(FMath::FindDeltaAngleDegrees(
+            LastVehicleCameraControlRotation.Pitch, ControlRotation.Pitch));
+        const bool bReceivedCameraInput = ManualYawDelta > 0.01f ||
+            ManualPitchDelta > 0.01f;
+
+        if (bReceivedCameraInput)
+        {
+            SecondsSinceVehicleCameraInput = 0.0f;
+        }
+        else
+        {
+            SecondsSinceVehicleCameraInput += FMath::Max(0.0f, DeltaSeconds);
+            if (SecondsSinceVehicleCameraInput >= CameraReturnDelaySeconds &&
+                CameraReturnSpeed > 0.0f)
+            {
+                const FRotator TargetRotation(DefaultCameraPitchDegrees,
+                    GetActorRotation().Yaw, 0.0f);
+                ControlRotation = FMath::RInterpTo(ControlRotation,
+                    TargetRotation, DeltaSeconds, CameraReturnSpeed);
+                PlayerController->SetControlRotation(ControlRotation);
+            }
+        }
+    }
+
+    const float RelativeYaw = FMath::FindDeltaAngleDegrees(
+        GetActorRotation().Yaw, ControlRotation.Yaw);
+    const float Pitch = FMath::Clamp(
+        FRotator::NormalizeAxis(ControlRotation.Pitch),
+        MinimumCameraPitchDegrees, MaximumCameraPitchDegrees);
+    VehicleCameraBoom->SetRelativeRotation(FRotator(Pitch, RelativeYaw, 0.0f));
+    LastVehicleCameraControlRotation = ControlRotation;
 }
 
 namespace
