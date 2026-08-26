@@ -34,6 +34,11 @@ public:
     void PanByPixels(FVector2D PixelDelta, FVector2D ViewSize);
     void RequestClose();
 
+    bool ShouldShowPlaces() const { return bShowPlaces; }
+    bool ShouldShowObservations() const { return bShowObservations; }
+    bool ShouldShowPolice() const { return bShowPolice; }
+    void ToggleMapFilter(int32 FilterIndex);
+
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
 
@@ -45,6 +50,9 @@ private:
     TObjectPtr<ATMOPPlayerCharacter> PlayerCharacter;
 
     bool bMinimap = false;
+    bool bShowPlaces = true;
+    bool bShowObservations = true;
+    bool bShowPolice = true;
     float FullMapZoom = 1.0f;
     FVector2D FullMapCenterUV = FVector2D(0.5f, 0.5f);
     FSlateBrush MapBrush;

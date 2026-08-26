@@ -28,8 +28,9 @@ struct TMOPENGINE_API FTMOPNewspaperPage
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Newspaper")
     TSoftObjectPtr<UTexture2D> PageImage;
 
+    /** Used only when automatic page numbering is disabled on the newspaper. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Newspaper",
-        meta=(ClampMin="1"))
+        meta=(ClampMin="1", DisplayName="Manual Printed Page Number"))
     int32 PrintedPageNumber = 1;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Newspaper")
@@ -53,6 +54,11 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Newspaper|Identity")
     FString PublicationDate = TEXT("1986-02-28");
+
+    /** When enabled, array index 0 is page 1, index 1 is page 2, and so on. */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Newspaper|Pages",
+        meta=(DisplayName="Automatically Number Pages"))
+    bool bAutomaticallyNumberPages = true;
 
     /** Pages in reading order, normally beginning with the front page. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Newspaper|Pages")

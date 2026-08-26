@@ -90,6 +90,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Projection")
     float MapNorthYawDegrees = 0.0f;
 
+    /** Rotates the rendered map and every marker 90 degrees clockwise, without changing calibration. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Projection")
+    bool bRotateDisplay90DegreesClockwise = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Minimap",
         meta=(ClampMin="1.0", ClampMax="12.0"))
     float MinimapZoom = 4.0f;

@@ -9,6 +9,7 @@
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Engine/OverlapResult.h"
 #include "EngineUtils.h"
 #include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -35,6 +36,8 @@
 #include "UI/TMOPNewspaperReaderWidget.h"
 #include "UI/TMOPMapComponent.h"
 #include "UI/TMOPMapWidget.h"
+#include "Vehicles/TMOPVehicleBase.h"
+#include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Blueprint/UserWidget.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
@@ -385,7 +388,8 @@ void ATMOPPlayerCharacter::InputInteract()
         VehicleSession->ExitVehicle();
         return;
     }
-    AActor* Target = FindInteractionTarget();
+    AActor* Target = IsValid(CurrentInteractionTarget.Get())
+        ? CurrentInteractionTarget.Get() : FindInteractionTarget();
     if (ATMOPHistoricalAgent* HistoricalAgent =
         Cast<ATMOPHistoricalAgent>(Target))
     {
@@ -395,6 +399,17 @@ void ATMOPPlayerCharacter::InputInteract()
     if (IsValid(Target) && Target->GetClass()->ImplementsInterface(UTMOPInteractable::StaticClass()))
     {
         ITMOPInteractable::Execute_Interact(Target, this);
+        return;
+    }
+    if (ATMOPVehicleBase* Vehicle = Cast<ATMOPVehicleBase>(Target))
+    {
+        if (IsValid(VehicleSession.Get()))
+        {
+            const ETMOPVehicleTakeoverResult Result =
+                VehicleSession->EnterVehicle(Vehicle, true);
+            if (Result == ETMOPVehicleTakeoverResult::SuccessEmptySeat ||
+                Result == ETMOPVehicleTakeoverResult::SuccessDriverRemoved) return;
+        }
         return;
     }
     if (IsValid(VehicleSession.Get()))
@@ -838,10 +853,13 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
 {
     if (!IsValid(InteractionPromptWidget.Get())) return;
     FText Prompt;
-    if (!bPauseMenuOpen && !bWorldMapOpen && !bDialogOpen &&
-        !InventoryInput->bRadialMenuOpen)
+    CurrentInteractionTarget = nullptr;
+    if (!bPauseMenuOpen && !bWorldMapOpen && !bNewspaperOpen && !bDialogOpen &&
+        !InventoryInput->bRadialMenuOpen &&
+        (!IsValid(VehicleSession.Get()) || !VehicleSession->IsInVehicle()))
     {
         AActor* Target = FindInteractionTarget();
+        CurrentInteractionTarget = Target;
         if (const ATMOPHistoricalAgent* Agent =
             Cast<ATMOPHistoricalAgent>(Target))
         {
@@ -851,10 +869,15 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             Prompt = FText::Format(
                 NSLOCTEXT("TMOP", "TalkToPerson", "Prata med {0}"), Name);
         }
+        else if (Cast<ATMOPVehicleBase>(Target))
+            Prompt = NSLOCTEXT("TMOP", "EnterTargetVehicle", "Hoppa in");
         else if (IsValid(Target) && Target->GetClass()->ImplementsInterface(
             UTMOPInteractable::StaticClass()))
             Prompt = ITMOPInteractable::Execute_GetInteractionText(Target);
     }
+    if (!Prompt.IsEmpty())
+        Prompt = FText::Format(NSLOCTEXT("TMOP", "InteractionWithKey", "[{0}] {1}"),
+            GetInteractKeyDisplayText(), Prompt);
     InteractionPromptWidget->SetPromptText(Prompt);
 }
 
@@ -1087,11 +1110,91 @@ AActor* ATMOPPlayerCharacter::FindInteractionTarget() const
 {
     if (!IsValid(FollowCamera) || GetWorld() == nullptr) return nullptr;
     const FVector Start = FollowCamera->GetComponentLocation();
-    const FVector End = Start + FollowCamera->GetForwardVector() * InteractionDistance;
-    FHitResult Hit;
+    const FVector Forward = FollowCamera->GetForwardVector();
     FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInteraction), false, this);
-    return GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params)
-        ? Hit.GetActor() : nullptr;
+    FCollisionObjectQueryParams ObjectTypes;
+    ObjectTypes.AddObjectTypesToQuery(ECC_Pawn);
+    ObjectTypes.AddObjectTypesToQuery(ECC_WorldDynamic);
+    ObjectTypes.AddObjectTypesToQuery(ECC_PhysicsBody);
+
+    TArray<FOverlapResult> Overlaps;
+    GetWorld()->OverlapMultiByObjectType(Overlaps, Start, FQuat::Identity,
+        ObjectTypes, FCollisionShape::MakeSphere(InteractionDistance), Params);
+
+    TArray<AActor*> Candidates;
+    for (const FOverlapResult& Overlap : Overlaps)
+    {
+        AActor* OverlapActor = Overlap.GetActor();
+        if (!IsValid(OverlapActor)) continue;
+        Candidates.Add(OverlapActor);
+        if (const ATMOPVehicleBase* Vehicle = Cast<ATMOPVehicleBase>(OverlapActor))
+            for (const UTMOPVehicleSeatComponent* Seat : Vehicle->GetVehicleSeats())
+                if (IsValid(Seat) && IsValid(Seat->GetOccupantCharacter()))
+                    Candidates.Add(Seat->GetOccupantCharacter());
+    }
+
+    AActor* BestTarget = nullptr;
+    float BestScore = TNumericLimits<float>::Max();
+    TSet<AActor*> TestedActors;
+    for (AActor* Candidate : Candidates)
+    {
+        if (!IsValid(Candidate) || Candidate == this || TestedActors.Contains(Candidate))
+            continue;
+        TestedActors.Add(Candidate);
+
+        const bool bAgent = Candidate->IsA<ATMOPHistoricalAgent>();
+        const bool bVehicle = Candidate->IsA<ATMOPVehicleBase>();
+        const bool bInteractable = Candidate->GetClass()->ImplementsInterface(
+            UTMOPInteractable::StaticClass());
+        if (!bAgent && !bVehicle && !bInteractable) continue;
+
+        FVector BoundsOrigin;
+        FVector BoundsExtent;
+        Candidate->GetActorBounds(false, BoundsOrigin, BoundsExtent, true);
+        FVector AimPoint = BoundsOrigin;
+        if (bAgent) AimPoint.Z += BoundsExtent.Z * 0.35f;
+
+        const FVector ToTarget = AimPoint - Start;
+        const float ForwardDistance = FVector::DotProduct(ToTarget, Forward);
+        if (ForwardDistance <= 1.0f || ForwardDistance > InteractionDistance) continue;
+        const float PerpendicularDistance =
+            (ToTarget - Forward * ForwardDistance).Size();
+        const float AngleDegrees = FMath::RadiansToDegrees(
+            FMath::Atan2(PerpendicularDistance, ForwardDistance));
+        const float AllowedAngle = bVehicle
+            ? VehicleTargetConeDegrees : InteractionTargetConeDegrees;
+        if (AngleDegrees > AllowedAngle) continue;
+
+        FHitResult VisibilityHit;
+        FCollisionQueryParams VisibilityParams(
+            SCENE_QUERY_STAT(TMOPPlayerInteractionVisibility), false, this);
+        const bool bBlocked = GetWorld()->LineTraceSingleByChannel(
+            VisibilityHit, Start, AimPoint, ECC_Visibility, VisibilityParams);
+        bool bVisible = !bBlocked || VisibilityHit.GetActor() == Candidate;
+        if (!bVisible && bAgent && IsValid(VisibilityHit.GetActor()) &&
+            VisibilityHit.GetActor()->IsA<ATMOPVehicleBase>())
+        {
+            FVector VehicleOrigin;
+            FVector VehicleExtent;
+            VisibilityHit.GetActor()->GetActorBounds(
+                false, VehicleOrigin, VehicleExtent, true);
+            const FBox ExpandedVehicleBounds(
+                VehicleOrigin - VehicleExtent * 1.25f,
+                VehicleOrigin + VehicleExtent * 1.25f);
+            bVisible = Candidate->GetAttachParentActor() == VisibilityHit.GetActor() ||
+                ExpandedVehicleBounds.IsInsideOrOn(AimPoint);
+        }
+        if (!bVisible) continue;
+
+        const float Score = AngleDegrees / FMath::Max(AllowedAngle, 0.1f) +
+            ForwardDistance / FMath::Max(InteractionDistance, 1.0f) * 0.04f;
+        if (Score < BestScore)
+        {
+            BestScore = Score;
+            BestTarget = Candidate;
+        }
+    }
+    return BestTarget;
 }
 
 FText ATMOPPlayerCharacter::GetInteractKeyDisplayText() const

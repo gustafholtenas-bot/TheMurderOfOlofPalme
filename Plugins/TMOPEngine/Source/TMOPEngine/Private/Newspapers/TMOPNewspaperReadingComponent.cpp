@@ -1,6 +1,6 @@
 #include "Newspapers/TMOPNewspaperReadingComponent.h"
 
-#include "Animation/AnimSequence.h"
+#include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -39,7 +39,7 @@ void UTMOPNewspaperReadingComponent::CreateReadingComponents()
     ReadingNewspaper->RegisterComponent();
     ReadingCamera->SetupAttachment(Owner->GetRootComponent());
     ReadingCamera->RegisterComponent();
-    ReadingCamera->bUsePawnControlRotation = true;
+    ReadingCamera->bUsePawnControlRotation = false;
     ReadingCamera->SetActive(false);
     ReadingArms->PrimaryComponentTick.bTickEvenWhenPaused = true;
     ReadingArms->SetOnlyOwnerSee(true);
@@ -61,73 +61,155 @@ UCameraComponent* UTMOPNewspaperReadingComponent::FindActiveCamera() const
     return Cameras.IsEmpty() ? nullptr : Cameras[0];
 }
 
+UMaterialInstanceDynamic* UTMOPNewspaperReadingComponent::CreatePageMaterial(
+    const FName SlotName, const int32 FallbackIndex)
+{
+    if (!IsValid(ReadingNewspaper) || !IsValid(NewspaperMaterial)) return nullptr;
+    int32 SlotIndex = ReadingNewspaper->GetMaterialIndex(SlotName);
+    if (SlotIndex == INDEX_NONE) SlotIndex = FallbackIndex;
+    if (SlotIndex < 0 || SlotIndex >= ReadingNewspaper->GetNumMaterials()) return nullptr;
+
+    UMaterialInstanceDynamic* MID = UMaterialInstanceDynamic::Create(NewspaperMaterial, this);
+    ReadingNewspaper->SetMaterial(SlotIndex, MID);
+    return MID;
+}
+
 bool UTMOPNewspaperReadingComponent::BeginReading(
     UTMOPNewspaperItemDefinition* Newspaper, const int32 PageIndex)
 {
-    if (!IsValid(Newspaper)) return false;
+    if (!IsValid(Newspaper) || Newspaper->Pages.IsEmpty()) return false;
     CreateReadingComponents();
     PreviousCamera = FindActiveCamera();
+    ACharacter* Character = Cast<ACharacter>(GetOwner());
+    USkeletalMeshComponent* PlayerMesh = IsValid(Character) ? Character->GetMesh() : nullptr;
+    bUsingExistingPlayerMesh = bUseExistingPlayerMesh && IsValid(PlayerMesh);
     if (!IsValid(PreviousCamera) || !IsValid(ReadingCamera) ||
-        !IsValid(ReadingArms) || !IsValid(ReadingNewspaper) ||
+        (!bUsingExistingPlayerMesh && !IsValid(ReadingArms)) || !IsValid(ReadingNewspaper) ||
         !IsValid(NewspaperMesh) || !IsValid(NewspaperMaterial)) return false;
 
     ActiveNewspaper = Newspaper;
     PreviousCamera->SetActive(false);
     ReadingCamera->SetRelativeLocation(FirstPersonCameraOffset);
+    ReadingCamera->SetRelativeRotation(FirstPersonCameraRotation);
     ReadingCamera->SetFieldOfView(FirstPersonFieldOfView);
     ReadingCamera->SetActive(true);
-    ReadingArms->AttachToComponent(ReadingCamera, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-    ReadingNewspaper->AttachToComponent(ReadingCamera, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+    if (bUsingExistingPlayerMesh)
+    {
+        ReadingArms->SetVisibility(false, true);
+        const FName ResolvedSocket = PlayerMesh->DoesSocketExist(NewspaperHandSocket)
+            ? NewspaperHandSocket : FName(TEXT("hand_r"));
+        ReadingNewspaper->AttachToComponent(PlayerMesh,
+            FAttachmentTransformRules::SnapToTargetNotIncludingScale, ResolvedSocket);
+        CurrentNewspaperTransform = NewspaperHandRelativeTransform;
+    }
+    else
+    {
+        ReadingArms->AttachToComponent(ReadingCamera,
+            FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+        ReadingNewspaper->AttachToComponent(ReadingCamera,
+            FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-    USkeletalMesh* ResolvedArms = FirstPersonArmsMesh;
-    if (!IsValid(ResolvedArms))
-        if (const ACharacter* Character = Cast<ACharacter>(GetOwner()))
-            if (IsValid(Character->GetMesh())) ResolvedArms = Character->GetMesh()->GetSkeletalMeshAsset();
-    ReadingArms->SetSkeletalMeshAsset(ResolvedArms);
-    if (const ACharacter* Character = Cast<ACharacter>(GetOwner()))
-        if (IsValid(Character->GetMesh()))
-            for (int32 Slot = 0; Slot < Character->GetMesh()->GetNumMaterials(); ++Slot)
-                ReadingArms->SetMaterial(Slot, Character->GetMesh()->GetMaterial(Slot));
+        USkeletalMesh* ResolvedArms = FirstPersonArmsMesh;
+        if (!IsValid(ResolvedArms) && IsValid(PlayerMesh))
+            ResolvedArms = PlayerMesh->GetSkeletalMeshAsset();
+        ReadingArms->SetSkeletalMeshAsset(ResolvedArms);
+        if (IsValid(PlayerMesh))
+            for (int32 Slot = 0; Slot < PlayerMesh->GetNumMaterials(); ++Slot)
+                ReadingArms->SetMaterial(Slot, PlayerMesh->GetMaterial(Slot));
 
-    ReadingArms->SetRelativeTransform(ArmsRelativeTransform);
-    CurrentNewspaperTransform = NewspaperRelativeTransform;
+        ReadingArms->SetRelativeTransform(ArmsRelativeTransform);
+        CurrentNewspaperTransform = NewspaperRelativeTransform;
+    }
     ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
-    ReadingNewspaper->SetStaticMesh(NewspaperMesh);
-    NewspaperMID = UMaterialInstanceDynamic::Create(NewspaperMaterial, this);
-    ReadingNewspaper->SetMaterial(0, NewspaperMID);
-    if (IsValid(HoldNewspaperAnimation)) ReadingArms->PlayAnimation(HoldNewspaperAnimation, true);
-    ReadingArms->SetVisibility(true, true);
+    ReadingNewspaper->SetStaticMesh(nullptr);
+    if (!bUsingExistingPlayerMesh)
+    {
+        ReadingArms->SetVisibility(true, true);
+    }
     ReadingNewspaper->SetVisibility(true, true);
-    SetComponentTickEnabled(true);
-    return ShowPage(PageIndex, false);
+    SetComponentTickEnabled(false);
+    const bool bPageShown = ShowPage(PageIndex, false);
+    if (bPageShown && bUsingExistingPlayerMesh && IsValid(NewspaperReadingMontage))
+    {
+        if (UAnimInstance* AnimInstance = PlayerMesh->GetAnimInstance())
+        {
+            AnimInstance->Montage_Play(NewspaperReadingMontage,
+                NewspaperReadingMontagePlayRate);
+        }
+    }
+    return bPageShown;
 }
 
 void UTMOPNewspaperReadingComponent::TickComponent(const float DeltaTime,
     const ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-    if (PageTurnSecondsRemaining <= 0.0f) return;
-    PageTurnSecondsRemaining -= DeltaTime;
-    if (PageTurnSecondsRemaining <= 0.0f && IsValid(ReadingArms) &&
-        IsValid(HoldNewspaperAnimation))
-        ReadingArms->PlayAnimation(HoldNewspaperAnimation, true);
 }
 
 bool UTMOPNewspaperReadingComponent::ShowPage(
     const int32 PageIndex, const bool bPlayTurnAnimation)
 {
-    if (!IsValid(ActiveNewspaper) || !IsValid(NewspaperMID) ||
+    (void)bPlayTurnAnimation;
+    if (!IsValid(ActiveNewspaper) ||
         !ActiveNewspaper->Pages.IsValidIndex(PageIndex)) return false;
-    UTexture2D* Left = ActiveNewspaper->Pages[PageIndex].PageImage.LoadSynchronous();
-    UTexture2D* Right = ActiveNewspaper->Pages.IsValidIndex(PageIndex + 1)
-        ? ActiveNewspaper->Pages[PageIndex + 1].PageImage.LoadSynchronous() : Left;
-    NewspaperMID->SetTextureParameterValue(LeftPageTextureParameter, Left);
-    NewspaperMID->SetTextureParameterValue(RightPageTextureParameter, Right);
-    if (bPlayTurnAnimation && IsValid(TurnPageAnimation) && IsValid(ReadingArms))
+
+    const int32 LastPageIndex = ActiveNewspaper->Pages.Num() - 1;
+    const bool bShowFront = PageIndex == 0;
+    const bool bShowBack = PageIndex == LastPageIndex && LastPageIndex > 0;
+    const bool bUseFoldedMesh = (bShowFront || bShowBack) && IsValid(FoldedNewspaperMesh);
+    UStaticMesh* DesiredMesh = bUseFoldedMesh ? FoldedNewspaperMesh : NewspaperMesh;
+    if (!IsValid(DesiredMesh)) return false;
+
+    if (ReadingNewspaper->GetStaticMesh() != DesiredMesh)
     {
-        ReadingArms->PlayAnimation(TurnPageAnimation, false);
-        PageTurnSecondsRemaining = TurnPageAnimation->GetPlayLength();
+        ReadingNewspaper->SetStaticMesh(DesiredMesh);
+        FrontPageMID = nullptr;
+        LeftPageMID = nullptr;
+        RightPageMID = nullptr;
+        EndPageMID = nullptr;
+
+        if (bUseFoldedMesh)
+        {
+            FrontPageMID = CreatePageMaterial(FrontMaterialSlot, 0);
+            EndPageMID = CreatePageMaterial(EndPageMaterialSlot, 1);
+            if (!IsValid(FrontPageMID) || !IsValid(EndPageMID)) return false;
+        }
+        else
+        {
+            FrontPageMID = CreatePageMaterial(FrontMaterialSlot, 0);
+            LeftPageMID = CreatePageMaterial(LeftPageMaterialSlot, 1);
+            RightPageMID = CreatePageMaterial(RightPageMaterialSlot, 2);
+            EndPageMID = CreatePageMaterial(EndPageMaterialSlot, 3);
+            if (!IsValid(FrontPageMID) || !IsValid(LeftPageMID) ||
+                !IsValid(RightPageMID) || !IsValid(EndPageMID)) return false;
+        }
     }
+
+    UTexture2D* Front = ActiveNewspaper->Pages[0].PageImage.LoadSynchronous();
+    UTexture2D* End = ActiveNewspaper->Pages.Last().PageImage.LoadSynchronous();
+    FrontPageMID->SetTextureParameterValue(PageTextureParameter, Front);
+    EndPageMID->SetTextureParameterValue(PageTextureParameter, End);
+
+    bShowingFoldedMesh = bUseFoldedMesh;
+    CurrentNewspaperTransform = bUsingExistingPlayerMesh
+        ? NewspaperHandRelativeTransform : NewspaperRelativeTransform;
+    if (bShowBack && bUseFoldedMesh)
+    {
+        FRotator Rotation = CurrentNewspaperTransform.Rotator();
+        Rotation += FoldedBackRotationOffset;
+        CurrentNewspaperTransform.SetRotation(Rotation.Quaternion());
+    }
+    ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
+
+    if (bUseFoldedMesh) return true;
+
+    UTexture2D* Left = ActiveNewspaper->Pages[PageIndex].PageImage.LoadSynchronous();
+    const bool bHasRightInnerPage = ActiveNewspaper->Pages.IsValidIndex(PageIndex + 1) &&
+        PageIndex + 1 < ActiveNewspaper->Pages.Num() - 1;
+    UTexture2D* Right = bHasRightInnerPage
+        ? ActiveNewspaper->Pages[PageIndex + 1].PageImage.LoadSynchronous() : Left;
+    LeftPageMID->SetTextureParameterValue(PageTextureParameter, Left);
+    RightPageMID->SetTextureParameterValue(PageTextureParameter, Right);
     return true;
 }
 
@@ -140,7 +222,8 @@ void UTMOPNewspaperReadingComponent::Pan(
     Location += Delta;
     CurrentNewspaperTransform.SetLocation(Location);
     if (IsValid(ReadingNewspaper)) ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
-    if (IsValid(ReadingArms)) ReadingArms->AddRelativeLocation(Delta);
+    if (!bUsingExistingPlayerMesh && IsValid(ReadingArms))
+        ReadingArms->AddRelativeLocation(Delta);
 }
 
 void UTMOPNewspaperReadingComponent::Zoom(const float Direction)
@@ -150,19 +233,39 @@ void UTMOPNewspaperReadingComponent::Zoom(const float Direction)
     Location.X = FMath::Clamp(OldX - Direction * ZoomStepCm, 30.0f, 110.0f);
     CurrentNewspaperTransform.SetLocation(Location);
     if (IsValid(ReadingNewspaper)) ReadingNewspaper->SetRelativeTransform(CurrentNewspaperTransform);
-    if (IsValid(ReadingArms)) ReadingArms->AddRelativeLocation(
+    if (!bUsingExistingPlayerMesh && IsValid(ReadingArms)) ReadingArms->AddRelativeLocation(
         FVector(Location.X - OldX, 0.0f, 0.0f));
 }
 
 void UTMOPNewspaperReadingComponent::EndReading()
 {
+    if (bUsingExistingPlayerMesh && IsValid(NewspaperReadingMontage))
+    {
+        ACharacter* Character = Cast<ACharacter>(GetOwner());
+        USkeletalMeshComponent* PlayerMesh = IsValid(Character) ? Character->GetMesh() : nullptr;
+        if (IsValid(PlayerMesh))
+        {
+            if (UAnimInstance* AnimInstance = PlayerMesh->GetAnimInstance())
+            {
+                AnimInstance->Montage_Stop(NewspaperReadingMontageBlendOutTime,
+                    NewspaperReadingMontage);
+            }
+        }
+    }
     if (IsValid(ReadingArms)) ReadingArms->SetVisibility(false, true);
-    if (IsValid(ReadingNewspaper)) ReadingNewspaper->SetVisibility(false, true);
+    if (IsValid(ReadingNewspaper))
+    {
+        ReadingNewspaper->SetVisibility(false, true);
+        ReadingNewspaper->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+    }
     if (IsValid(ReadingCamera)) ReadingCamera->SetActive(false);
     if (IsValid(PreviousCamera)) PreviousCamera->SetActive(true);
     ActiveNewspaper = nullptr;
-    NewspaperMID = nullptr;
+    FrontPageMID = nullptr;
+    LeftPageMID = nullptr;
+    RightPageMID = nullptr;
+    EndPageMID = nullptr;
     PreviousCamera = nullptr;
-    PageTurnSecondsRemaining = 0.0f;
+    bUsingExistingPlayerMesh = false;
     SetComponentTickEnabled(false);
 }

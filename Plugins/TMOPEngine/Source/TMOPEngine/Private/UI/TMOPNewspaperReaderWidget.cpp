@@ -23,6 +23,7 @@ bool UTMOPNewspaperReaderWidget::OpenNewspaper(
 {
     if (!IsValid(InNewspaper) || InNewspaper->Pages.IsEmpty()) return false;
     Newspaper = InNewspaper;
+    // Start with the folded front page. Next enters the first inner spread.
     CurrentPageIndex = 0;
     Zoom = FMath::Clamp(InNewspaper->InitialZoom, 0.25f, 4.0f);
     SetVisibility(ESlateVisibility::Visible);
@@ -62,12 +63,26 @@ bool UTMOPNewspaperReaderWidget::GoToPage(const int32 PageIndex)
 
 bool UTMOPNewspaperReaderWidget::NextPage()
 {
-    return GoToPage(CurrentPageIndex + 2);
+    const int32 PageCount = GetPageCount();
+    if (PageCount <= 1 || CurrentPageIndex >= PageCount - 1) return false;
+    if (CurrentPageIndex == 0) return GoToPage(PageCount > 2 ? 1 : PageCount - 1);
+
+    const int32 CandidateIndex = CurrentPageIndex + 2;
+    return GoToPage(CandidateIndex < PageCount - 1
+        ? CandidateIndex : PageCount - 1);
 }
 
 bool UTMOPNewspaperReaderWidget::PreviousPage()
 {
-    return GoToPage(CurrentPageIndex - 2);
+    const int32 PageCount = GetPageCount();
+    if (CurrentPageIndex <= 0) return false;
+    if (CurrentPageIndex == PageCount - 1 && PageCount > 2)
+    {
+        const int32 LastInnerLeft = 1 + 2 * ((PageCount - 3) / 2);
+        return GoToPage(LastInnerLeft);
+    }
+    return CurrentPageIndex <= 1
+        ? GoToPage(0) : GoToPage(FMath::Max(1, CurrentPageIndex - 2));
 }
 
 void UTMOPNewspaperReaderWidget::SetZoom(const float NewZoom)
@@ -155,17 +170,29 @@ void UTMOPNewspaperReaderWidget::RefreshPage()
         TitleText->SetText(FText::FromString(
             Newspaper->DisplayName.ToString() + DateSuffix));
     }
+    const bool bIsFront = CurrentPageIndex == 0;
+    const bool bIsBack = CurrentPageIndex == Newspaper->Pages.Num() - 1 &&
+        Newspaper->Pages.Num() > 1;
     if (PageNumberText.IsValid())
-        PageNumberText->SetText(FText::Format(
-            NSLOCTEXT("TMOP", "NewspaperPageCounter", "Uppslag {0}–{1} av {2} sidor"),
-            FText::AsNumber(CurrentPageIndex + 1),
-            FText::AsNumber(FMath::Min(CurrentPageIndex + 2, Newspaper->Pages.Num())),
-            FText::AsNumber(Newspaper->Pages.Num())));
+    {
+        if (bIsFront)
+            PageNumberText->SetText(NSLOCTEXT("TMOP", "NewspaperFrontCover", "Framsida"));
+        else if (bIsBack)
+            PageNumberText->SetText(NSLOCTEXT("TMOP", "NewspaperBackCover", "Baksida"));
+        else
+            PageNumberText->SetText(FText::Format(
+                NSLOCTEXT("TMOP", "NewspaperPageCounter", "Uppslag {0}–{1} av {2} sidor"),
+                FText::AsNumber(CurrentPageIndex + 1),
+                FText::AsNumber(FMath::Min(CurrentPageIndex + 2, Newspaper->Pages.Num() - 1)),
+                FText::AsNumber(Newspaper->Pages.Num())));
+    }
     if (PageLabelText.IsValid())
     {
-        const FText Label = Page.PageLabel.IsEmpty()
+        const int32 ResolvedPrintedPageNumber = Newspaper->bAutomaticallyNumberPages
+            ? CurrentPageIndex + 1 : FMath::Max(1, Page.PrintedPageNumber);
+        const FText Label = Page.PageLabel.IsEmpty() && !bIsFront && !bIsBack
             ? FText::Format(NSLOCTEXT("TMOP", "PrintedNewspaperPage", "Tryckt sida {0}"),
-                FText::AsNumber(Page.PrintedPageNumber))
+                FText::AsNumber(ResolvedPrintedPageNumber))
             : Page.PageLabel;
         PageLabelText->SetText(Label);
     }

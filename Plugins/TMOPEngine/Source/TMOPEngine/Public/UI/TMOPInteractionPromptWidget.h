@@ -19,5 +19,6 @@ protected:
 
 private:
     FText PromptText;
+    TSharedPtr<class STextBlock> TargetReticleWidget;
     TSharedPtr<class STextBlock> PromptTextWidget;
 };

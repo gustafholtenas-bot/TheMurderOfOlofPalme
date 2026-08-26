@@ -358,6 +358,19 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
     float InteractionDistance = 300.0f;
 
+    /** Maximum off-centre angle for selecting a person or small item. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction",
+        meta=(ClampMin="1.0", ClampMax="20.0", Units="deg"))
+    float InteractionTargetConeDegrees = 6.0f;
+
+    /** Vehicles use a tighter centre target so visible occupants can be selected separately. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction",
+        meta=(ClampMin="1.0", ClampMax="20.0", Units="deg"))
+    float VehicleTargetConeDegrees = 4.0f;
+
+    UPROPERTY(Transient, BlueprintReadOnly, Category="TMOP|Player|Interaction")
+    TObjectPtr<AActor> CurrentInteractionTarget;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Inventory|Drop")
     TSubclassOf<ATMOPWorldItem> WorldItemClass;
 
