@@ -1,0 +1,3341 @@
+{
+  "format": "TMOP_PAGE31_RELATIVE_TIMELINE_ANCHORS_V1",
+  "source_page": "http://www.itdemokrati.nu/page31.html",
+  "source_capture": "7abdcac5-cdc2-4cfa-b6cb-263072af1f12.mp4",
+  "source_shot_time": "23:21:22",
+  "game_shared_event_id": "Palme_shot_1",
+  "nominal_game_event_time": "23:21:30",
+  "coordinate_method": "2D affine calibration from three verified simulation-marker/Unreal-anchor control points",
+  "precision_notice": "The capture is rasterised and markers overlap. Reconstructed and inferred coordinates are explicitly labelled; they are not claimed as surveyed historical coordinates.",
+  "anchor_count": 128,
+  "anchors": [
+    {
+      "anchor_id": "ANCHOR_PAGE31_PER_VALLIN_TM20",
+      "display_name": "PER_VALLIN TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 543,
+        "y": 664
+      },
+      "source_object": "PER_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -4111.542,
+        "y": -7228.53,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_PER_VALLIN_TM05",
+      "display_name": "PER_VALLIN TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 693,
+        "y": 664
+      },
+      "source_object": "PER_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2642.557,
+        "y": -4049.955,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_PER_VALLIN_T0",
+      "display_name": "PER_VALLIN T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 743,
+        "y": 664
+      },
+      "source_object": "PER_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2152.895,
+        "y": -2990.43,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_PER_VALLIN_TP07",
+      "display_name": "PER_VALLIN TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 773,
+        "y": 664
+      },
+      "source_object": "PER_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1859.098,
+        "y": -2354.715,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -13.483
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_PER_VALLIN_CRIME_SCENE_FINAL",
+      "display_name": "PER_VALLIN TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 786,
+        "y": 348
+      },
+      "source_object": "PER_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1208.438,
+        "y": -1619.252,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CHRISTINA_VALLIN_TM20",
+      "display_name": "CHRISTINA_VALLIN TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 558,
+        "y": 674
+      },
+      "source_object": "CHRISTINA_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -4057.688,
+        "y": -6925.229,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CHRISTINA_VALLIN_TM05",
+      "display_name": "CHRISTINA_VALLIN TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 708,
+        "y": 674
+      },
+      "source_object": "CHRISTINA_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2588.703,
+        "y": -3746.654,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CHRISTINA_VALLIN_T0",
+      "display_name": "CHRISTINA_VALLIN T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 758,
+        "y": 674
+      },
+      "source_object": "CHRISTINA_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2099.042,
+        "y": -2687.129,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CHRISTINA_VALLIN_TP07",
+      "display_name": "CHRISTINA_VALLIN TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 788,
+        "y": 674
+      },
+      "source_object": "CHRISTINA_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1805.245,
+        "y": -2051.414,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -10.339
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CHRISTINA_VALLIN_CRIME_SCENE_FINAL",
+      "display_name": "CHRISTINA_VALLIN TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 792,
+        "y": 353
+      },
+      "source_object": "CHRISTINA_VALLIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1220.675,
+        "y": -1499.387,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SIRPA_LINDGREN_TM20",
+      "display_name": "SIRPA_LINDGREN TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 664,
+        "y": 664
+      },
+      "source_object": "SIRPA_LINDGREN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2926.56,
+        "y": -4664.48,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SIRPA_LINDGREN_TM05",
+      "display_name": "SIRPA_LINDGREN TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 784,
+        "y": 664
+      },
+      "source_object": "SIRPA_LINDGREN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1751.372,
+        "y": -2121.619,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SIRPA_LINDGREN_T0",
+      "display_name": "SIRPA_LINDGREN T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 824,
+        "y": 664
+      },
+      "source_object": "SIRPA_LINDGREN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1359.643,
+        "y": -1273.999,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SIRPA_LINDGREN_TP07",
+      "display_name": "SIRPA_LINDGREN TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 880,
+        "y": 664
+      },
+      "source_object": "SIRPA_LINDGREN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -811.222,
+        "y": -87.331,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 31.056
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SIRPA_LINDGREN_CRIME_SCENE_FINAL",
+      "display_name": "SIRPA_LINDGREN TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 800,
+        "y": 357
+      },
+      "source_object": "SIRPA_LINDGREN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1261.803,
+        "y": -1335.686,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CARINA_PETTERSSON_TM20",
+      "display_name": "CARINA_PETTERSSON TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 664,
+        "y": 676
+      },
+      "source_object": "CARINA_PETTERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -3038.215,
+        "y": -4681.947,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CARINA_PETTERSSON_TM05",
+      "display_name": "CARINA_PETTERSSON TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 784,
+        "y": 676
+      },
+      "source_object": "CARINA_PETTERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1863.027,
+        "y": -2139.087,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CARINA_PETTERSSON_T0",
+      "display_name": "CARINA_PETTERSSON T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 824,
+        "y": 676
+      },
+      "source_object": "CARINA_PETTERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1471.297,
+        "y": -1291.467,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CARINA_PETTERSSON_TP07",
+      "display_name": "CARINA_PETTERSSON TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 880,
+        "y": 676
+      },
+      "source_object": "CARINA_PETTERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -922.876,
+        "y": -104.799,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 26.572
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CARINA_PETTERSSON_CRIME_SCENE_FINAL",
+      "display_name": "CARINA_PETTERSSON TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 806,
+        "y": 360
+      },
+      "source_object": "CARINA_PETTERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1292.649,
+        "y": -1212.91,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ULRIKA_RYTTERSTAL_TM20",
+      "display_name": "ULRIKA_RYTTERSTAL TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 965,
+        "y": 664
+      },
+      "source_object": "ULRIKA_RYTTERSTAL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 21.203,
+        "y": 1713.861,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ULRIKA_RYTTERSTAL_TM05",
+      "display_name": "ULRIKA_RYTTERSTAL TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 1085,
+        "y": 664
+      },
+      "source_object": "ULRIKA_RYTTERSTAL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1196.391,
+        "y": 4256.721,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ULRIKA_RYTTERSTAL_T0",
+      "display_name": "ULRIKA_RYTTERSTAL T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 1125,
+        "y": 664
+      },
+      "source_object": "ULRIKA_RYTTERSTAL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1588.12,
+        "y": 5104.341,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ULRIKA_RYTTERSTAL_TP07",
+      "display_name": "ULRIKA_RYTTERSTAL TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 1168,
+        "y": 664
+      },
+      "source_object": "ULRIKA_RYTTERSTAL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 2009.229,
+        "y": 6015.533,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 95.388
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ULRIKA_RYTTERSTAL_CRIME_SCENE_FINAL",
+      "display_name": "ULRIKA_RYTTERSTAL TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 814,
+        "y": 363
+      },
+      "source_object": "ULRIKA_RYTTERSTAL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1343.081,
+        "y": -1047.753,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_KARLSSON_TM20",
+      "display_name": "SUSANNE_KARLSSON TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 965,
+        "y": 675
+      },
+      "source_object": "SUSANNE_KARLSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -81.147,
+        "y": 1697.849,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_KARLSSON_TM05",
+      "display_name": "SUSANNE_KARLSSON TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 1085,
+        "y": 675
+      },
+      "source_object": "SUSANNE_KARLSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1094.041,
+        "y": 4240.709,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_KARLSSON_T0",
+      "display_name": "SUSANNE_KARLSSON T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 1125,
+        "y": 675
+      },
+      "source_object": "SUSANNE_KARLSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1485.771,
+        "y": 5088.329,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_KARLSSON_TP07",
+      "display_name": "SUSANNE_KARLSSON TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 1168,
+        "y": 675
+      },
+      "source_object": "SUSANNE_KARLSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1906.88,
+        "y": 5999.521,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 93.871
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_KARLSSON_CRIME_SCENE_FINAL",
+      "display_name": "SUSANNE_KARLSSON TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 820,
+        "y": 359
+      },
+      "source_object": "SUSANNE_KARLSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1439.059,
+        "y": -914.787,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_BJORKMAN_TM20",
+      "display_name": "ANDERS_BJORKMAN TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 549,
+        "y": 359
+      },
+      "source_object": "ANDERS_BJORKMAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1214.908,
+        "y": -6657.413,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_BJORKMAN_TM05",
+      "display_name": "ANDERS_BJORKMAN TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 699,
+        "y": 359
+      },
+      "source_object": "ANDERS_BJORKMAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 254.077,
+        "y": -3478.838,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_BJORKMAN_T0",
+      "display_name": "ANDERS_BJORKMAN T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 749,
+        "y": 359
+      },
+      "source_object": "ANDERS_BJORKMAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 743.739,
+        "y": -2419.313,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -60.782
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_BJORKMAN_TP02_TAKES_COVER",
+      "display_name": "ANDERS_BJORKMAN TP02 takes_cover",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 2,
+      "source_time": "Palme_shot_1+2s",
+      "source_video_seconds": 26,
+      "source_screen_px": {
+        "x": 782,
+        "y": 351
+      },
+      "source_object": "ANDERS_BJORKMAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1141.352,
+        "y": -1708.381,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -45.074
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_BJORKMAN_TP07_DOORWAY_COVER",
+      "display_name": "ANDERS_BJORKMAN TP07 doorway_cover",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 809,
+        "y": 312
+      },
+      "source_object": "ANDERS_BJORKMAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1768.645,
+        "y": -1079.467,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 137.986
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_BJORKMAN_TP18_LOOKS_OUT",
+      "display_name": "ANDERS_BJORKMAN TP18 looks_out",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 18,
+      "source_time": "Palme_shot_1+18s",
+      "source_video_seconds": 42,
+      "source_screen_px": {
+        "x": 795,
+        "y": 337
+      },
+      "source_object": "ANDERS_BJORKMAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1398.927,
+        "y": -1412.525,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 124.629
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_BJORKMAN_CRIME_SCENE_FINAL",
+      "display_name": "ANDERS_BJORKMAN TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 783,
+        "y": 344
+      },
+      "source_object": "ANDERS_BJORKMAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1216.277,
+        "y": -1677.001,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_THE_KILLER_TM20_DECORIMA_WAIT",
+      "display_name": "THE_KILLER TM20 decorima_wait",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 795,
+        "y": 344
+      },
+      "source_object": "THE_KILLER",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1333.795,
+        "y": -1422.715,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 118.481
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_THE_KILLER_TM12_LEAVES_DEKORIMA",
+      "display_name": "THE_KILLER TM12 leaves_dekorima",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -12,
+      "source_time": "Palme_shot_1-12s",
+      "source_video_seconds": 12,
+      "source_screen_px": {
+        "x": 790,
+        "y": 345
+      },
+      "source_object": "THE_KILLER",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1275.525,
+        "y": -1530.123,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 109.725
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_THE_KILLER_TM05_BEHIND_PALMES",
+      "display_name": "THE_KILLER TM05 behind_palmes",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 786,
+        "y": 344
+      },
+      "source_object": "THE_KILLER",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1245.656,
+        "y": -1613.429,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -63.112
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_THE_KILLER_T0",
+      "display_name": "THE_KILLER T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 795,
+        "y": 343
+      },
+      "source_object": "THE_KILLER",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1343.1,
+        "y": -1421.259,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -51.082
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_THE_KILLER_TP02_TURNS_TO_TUNNELGATAN",
+      "display_name": "THE_KILLER TP02 turns_to_tunnelgatan",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 2,
+      "source_time": "Palme_shot_1+2s",
+      "source_video_seconds": 26,
+      "source_screen_px": {
+        "x": 805,
+        "y": 334
+      },
+      "source_object": "THE_KILLER",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1524.773,
+        "y": -1196.253,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -28.543
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_THE_KILLER_TP07_ESCAPE_TUNNELGATAN",
+      "display_name": "THE_KILLER TP07 escape_tunnelgatan",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 810,
+        "y": 312
+      },
+      "source_object": "THE_KILLER",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1778.438,
+        "y": -1058.276,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -22.117
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_THE_KILLER_TP15_ESCAPE_EAST",
+      "display_name": "THE_KILLER TP15 escape_east",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 15,
+      "source_time": "Palme_shot_1+15s",
+      "source_video_seconds": 39,
+      "source_screen_px": {
+        "x": 815,
+        "y": 275
+      },
+      "source_object": "THE_KILLER",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 2171.671,
+        "y": -898.465,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_OLOF_PALME_TM20",
+      "display_name": "OLOF_PALME TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 609,
+        "y": 360
+      },
+      "source_object": "OLOF_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -636.618,
+        "y": -5387.438,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -64.686
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_OLOF_PALME_TM05",
+      "display_name": "OLOF_PALME TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 759,
+        "y": 356
+      },
+      "source_object": "OLOF_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 869.585,
+        "y": -2203.041,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -60.543
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_OLOF_PALME_T0",
+      "display_name": "OLOF_PALME T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 798,
+        "y": 346
+      },
+      "source_object": "OLOF_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1344.566,
+        "y": -1362.055,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_OLOF_PALME_TP02_FALLS",
+      "display_name": "OLOF_PALME TP02 falls",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 2,
+      "source_time": "Palme_shot_1+2s",
+      "source_video_seconds": 26,
+      "source_screen_px": {
+        "x": 798,
+        "y": 346
+      },
+      "source_object": "OLOF_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1344.566,
+        "y": -1362.055,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_OLOF_PALME_TP07_BODY",
+      "display_name": "OLOF_PALME TP07 body",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 798,
+        "y": 346
+      },
+      "source_object": "OLOF_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1344.566,
+        "y": -1362.055,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_OLOF_PALME_CRIME_SCENE_FINAL",
+      "display_name": "OLOF_PALME TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 798,
+        "y": 346
+      },
+      "source_object": "OLOF_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1344.566,
+        "y": -1362.055,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LISBET_PALME_TM20",
+      "display_name": "LISBET_PALME TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 610,
+        "y": 368
+      },
+      "source_object": "LISBET_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -701.261,
+        "y": -5377.893,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -64.428
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LISBET_PALME_TM05",
+      "display_name": "LISBET_PALME TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 759,
+        "y": 362
+      },
+      "source_object": "LISBET_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 813.758,
+        "y": -2211.775,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -61.448
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LISBET_PALME_T0",
+      "display_name": "LISBET_PALME T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 808,
+        "y": 352
+      },
+      "source_object": "LISBET_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1386.671,
+        "y": -1158.883,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -56.613
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LISBET_PALME_TP02_REACTS",
+      "display_name": "LISBET_PALME TP02 reacts",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 2,
+      "source_time": "Palme_shot_1+2s",
+      "source_video_seconds": 26,
+      "source_screen_px": {
+        "x": 812,
+        "y": 350
+      },
+      "source_object": "LISBET_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1444.453,
+        "y": -1071.21,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 132.956
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LISBET_PALME_TP07_BESIDE_OLOF",
+      "display_name": "LISBET_PALME TP07 beside_olof",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 808,
+        "y": 355
+      },
+      "source_object": "LISBET_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1358.758,
+        "y": -1163.25,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 91.419
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LISBET_PALME_CRIME_SCENE_FINAL",
+      "display_name": "LISBET_PALME TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 804,
+        "y": 351
+      },
+      "source_object": "LISBET_PALME",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1356.803,
+        "y": -1242.19,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CHRISTER_PETTERSSON_TM20_ALTERNATIVE_STANDARD",
+      "display_name": "CHRISTER_PETTERSSON TM20 alternative_standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "SPECULATIVE",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 798,
+        "y": 331
+      },
+      "source_object": "CHRISTER_PETTERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1484.134,
+        "y": -1340.22,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_CHRISTER_PETTERSSON_TP07_ALTERNATIVE_ESCAPE",
+      "display_name": "CHRISTER_PETTERSSON TP07 alternative_escape",
+      "category": "WITNESS_POSITION",
+      "confidence": "SPECULATIVE",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 811,
+        "y": 305
+      },
+      "source_object": "CHRISTER_PETTERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1853.363,
+        "y": -1026.896,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STIG_ENGSTROM_TM20",
+      "display_name": "STIG_ENGSTROM TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 394,
+        "y": 364
+      },
+      "source_object": "STIG_ENGSTROM",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2779.381,
+        "y": -9949.219,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STIG_ENGSTROM_TM05",
+      "display_name": "STIG_ENGSTROM TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 543,
+        "y": 364
+      },
+      "source_object": "STIG_ENGSTROM",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1320.19,
+        "y": -6791.834,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STIG_ENGSTROM_T0",
+      "display_name": "STIG_ENGSTROM T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 593,
+        "y": 364
+      },
+      "source_object": "STIG_ENGSTROM",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -830.528,
+        "y": -5732.309,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STIG_ENGSTROM_TP07",
+      "display_name": "STIG_ENGSTROM TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 663,
+        "y": 364
+      },
+      "source_object": "STIG_ENGSTROM",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -145.002,
+        "y": -4248.974,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -62.536
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STIG_ENGSTROM_TP20_ARRIVES_SCENE",
+      "display_name": "STIG_ENGSTROM TP20 arrives_scene",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 20,
+      "source_time": "Palme_shot_1+20s",
+      "source_video_seconds": 44,
+      "source_screen_px": {
+        "x": 754,
+        "y": 351
+      },
+      "source_object": "STIG_ENGSTROM",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 867.141,
+        "y": -2301.715,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -61.307
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STIG_ENGSTROM_CRIME_SCENE_FINAL",
+      "display_name": "STIG_ENGSTROM TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 787,
+        "y": 344
+      },
+      "source_object": "STIG_ENGSTROM",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1255.449,
+        "y": -1592.239,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SVEN_ERIK_ROLFART_FODD_59_TM20",
+      "display_name": "SVEN_ERIK_ROLFART_FODD_59 TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 809,
+        "y": 683
+      },
+      "source_object": "SVEN_ERIK_ROLFART_FODD_59",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1683.327,
+        "y": -1619.514,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SVEN_ERIK_ROLFART_FODD_59_TP07",
+      "display_name": "SVEN_ERIK_ROLFART_FODD_59 TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 812,
+        "y": 675
+      },
+      "source_object": "SVEN_ERIK_ROLFART_FODD_59",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1579.511,
+        "y": -1544.298,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -14.403
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SVEN_ERIK_ROLFART_FODD_59_CRIME_SCENE_FINAL",
+      "display_name": "SVEN_ERIK_ROLFART_FODD_59 TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 828,
+        "y": 355
+      },
+      "source_object": "SVEN_ERIK_ROLFART_FODD_59",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1554.622,
+        "y": -739.44,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_LARSSON_TM20",
+      "display_name": "SUSANNE_LARSSON TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 808,
+        "y": 692
+      },
+      "source_object": "SUSANNE_LARSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1776.861,
+        "y": -1653.806,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_LARSSON_TP07",
+      "display_name": "SUSANNE_LARSSON TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 812,
+        "y": 684
+      },
+      "source_object": "SUSANNE_LARSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1663.252,
+        "y": -1557.398,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -15.698
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SUSANNE_LARSSON_CRIME_SCENE_FINAL",
+      "display_name": "SUSANNE_LARSSON TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 833,
+        "y": 350
+      },
+      "source_object": "SUSANNE_LARSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1650.111,
+        "y": -626.21,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_HELENA_LAHDE_TM20",
+      "display_name": "HELENA_LAHDE TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 558,
+        "y": 688
+      },
+      "source_object": "HELENA_LAHDE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -4187.951,
+        "y": -6945.608,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_HELENA_LAHDE_TM05",
+      "display_name": "HELENA_LAHDE TM05 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 708,
+        "y": 688
+      },
+      "source_object": "HELENA_LAHDE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2718.966,
+        "y": -3767.033,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_HELENA_LAHDE_T0",
+      "display_name": "HELENA_LAHDE T0 shot",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 758,
+        "y": 688
+      },
+      "source_object": "HELENA_LAHDE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2229.305,
+        "y": -2707.508,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_HELENA_LAHDE_TP07",
+      "display_name": "HELENA_LAHDE TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 790,
+        "y": 688
+      },
+      "source_object": "HELENA_LAHDE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1915.921,
+        "y": -2029.412,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -19.116
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_HELENA_LAHDE_CRIME_SCENE_FINAL",
+      "display_name": "HELENA_LAHDE TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 824,
+        "y": 346
+      },
+      "source_object": "HELENA_LAHDE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1599.19,
+        "y": -811.102,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SVEN_TM20",
+      "display_name": "SVEN TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 758,
+        "y": 700
+      },
+      "source_object": "SVEN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2340.959,
+        "y": -2724.976,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SVEN_TP07",
+      "display_name": "SVEN TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 775,
+        "y": 693
+      },
+      "source_object": "SVEN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2109.342,
+        "y": -2354.548,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -23.992
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_SVEN_CRIME_SCENE_FINAL",
+      "display_name": "SVEN TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 831,
+        "y": 342
+      },
+      "source_object": "SVEN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1704.961,
+        "y": -656.945,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_BERIT_TM20",
+      "display_name": "BERIT TM20 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 766,
+        "y": 700
+      },
+      "source_object": "BERIT",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2262.613,
+        "y": -2555.452,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_BERIT_TP07",
+      "display_name": "BERIT TP07 standard",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 783,
+        "y": 693
+      },
+      "source_object": "BERIT",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -2030.996,
+        "y": -2185.024,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -23.516
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_BERIT_CRIME_SCENE_FINAL",
+      "display_name": "BERIT TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 836,
+        "y": 347
+      },
+      "source_object": "BERIT",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1707.404,
+        "y": -558.271,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_EGON_ENOCKSSON_TP24_ENTERS_FRAME_EAST",
+      "display_name": "EGON_ENOCKSSON TP24 enters_frame_east",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 24,
+      "source_time": "Palme_shot_1+24s",
+      "source_video_seconds": 48,
+      "source_screen_px": {
+        "x": 1668,
+        "y": 653
+      },
+      "source_object": "EGON_ENOCKSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 7008.196,
+        "y": 16626.795,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 113.585
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_EGON_ENOCKSSON_TP35_WALKS_WEST",
+      "display_name": "EGON_ENOCKSSON TP35 walks_west",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 35,
+      "source_time": "Palme_shot_1+35s",
+      "source_video_seconds": 59,
+      "source_screen_px": {
+        "x": 1460,
+        "y": 640
+      },
+      "source_object": "EGON_ENOCKSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 5092.162,
+        "y": 12238.095,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 105.624
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_EGON_ENOCKSSON_CRIME_SCENE_FINAL",
+      "display_name": "EGON_ENOCKSSON TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 825,
+        "y": 364
+      },
+      "source_object": "EGON_ENOCKSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1441.502,
+        "y": -816.113,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANNIKA_BLOMQVIST_TP24_ENTERS_FRAME_EAST",
+      "display_name": "ANNIKA_BLOMQVIST TP24 enters_frame_east",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 24,
+      "source_time": "Palme_shot_1+24s",
+      "source_video_seconds": 48,
+      "source_screen_px": {
+        "x": 1668,
+        "y": 660
+      },
+      "source_object": "ANNIKA_BLOMQVIST",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 6943.064,
+        "y": 16616.606,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 113.68
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANNIKA_BLOMQVIST_TP35_WALKS_WEST",
+      "display_name": "ANNIKA_BLOMQVIST TP35 walks_west",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 35,
+      "source_time": "Palme_shot_1+35s",
+      "source_video_seconds": 59,
+      "source_screen_px": {
+        "x": 1460,
+        "y": 648
+      },
+      "source_object": "ANNIKA_BLOMQVIST",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 5017.726,
+        "y": 12226.45,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 104.968
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANNIKA_BLOMQVIST_CRIME_SCENE_FINAL",
+      "display_name": "ANNIKA_BLOMQVIST TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 838,
+        "y": 360
+      },
+      "source_object": "ANNIKA_BLOMQVIST",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1606.032,
+        "y": -534.814,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ALF_LUNDIN_TP28_ENTERS_FRAME_WEST",
+      "display_name": "ALF_LUNDIN TP28 enters_frame_west",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 28,
+      "source_time": "Palme_shot_1+28s",
+      "source_video_seconds": 52,
+      "source_screen_px": {
+        "x": 274,
+        "y": 684
+      },
+      "source_object": "ALF_LUNDIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -6932.012,
+        "y": -12957.888,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -64.437
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ALF_LUNDIN_TP36_WALKS_EAST",
+      "display_name": "ALF_LUNDIN TP36 walks_east",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 36,
+      "source_time": "Palme_shot_1+36s",
+      "source_video_seconds": 60,
+      "source_screen_px": {
+        "x": 500,
+        "y": 675
+      },
+      "source_object": "ALF_LUNDIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -4635.0,
+        "y": -8155.734,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -48.41
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ALF_LUNDIN_CRIME_SCENE_FINAL",
+      "display_name": "ALF_LUNDIN TP43 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 43,
+      "source_time": "Palme_shot_1+43s",
+      "source_video_seconds": 67,
+      "source_screen_px": {
+        "x": 780,
+        "y": 360
+      },
+      "source_object": "ALF_LUNDIN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1038.025,
+        "y": -1763.863,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_TM20_WAITING",
+      "display_name": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A TM20 waiting",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 962,
+        "y": 765
+      },
+      "source_object": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -947.932,
+        "y": 1503.269,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT_TM20_WAITING",
+      "display_name": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT TM20 waiting",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 1068,
+        "y": 499
+      },
+      "source_object": "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 2565.15,
+        "y": 4136.666,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA_TM20_WAITING",
+      "display_name": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA TM20 waiting",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 699,
+        "y": 580
+      },
+      "source_object": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1802.219,
+        "y": -3800.537,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA_TP07_MOVING",
+      "display_name": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA TP07 moving",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 769,
+        "y": 580
+      },
+      "source_object": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -1116.692,
+        "y": -2317.202,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_HANS_JOHANSSON_TAXI_TM20_WAITING",
+      "display_name": "VEHICLE_HANS_JOHANSSON_TAXI TM20 waiting",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -20,
+      "source_time": "Palme_shot_1-20s",
+      "source_video_seconds": 4,
+      "source_screen_px": {
+        "x": 1439,
+        "y": 584
+      },
+      "source_object": "VEHICLE_HANS_JOHANSSON_TAXI",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 5407.556,
+        "y": 11874.611,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_HANS_JOHANSSON_TAXI_TP07_MOVING",
+      "display_name": "VEHICLE_HANS_JOHANSSON_TAXI TP07 moving",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 1534,
+        "y": 584
+      },
+      "source_object": "VEHICLE_HANS_JOHANSSON_TAXI",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 6337.913,
+        "y": 13887.708,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_T0_ENTERS_FRAME_WEST",
+      "display_name": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN T0 enters_frame_west",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 545,
+        "y": 580
+      },
+      "source_object": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -3310.377,
+        "y": -7063.874,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -65.196
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_TP07_AT_SCENE",
+      "display_name": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN TP07 at_scene",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 796,
+        "y": 580
+      },
+      "source_object": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -852.275,
+        "y": -1745.059,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_T0_APPROACHES_EAST",
+      "display_name": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC T0 approaches_east",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 1200,
+        "y": 499
+      },
+      "source_object": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 3857.856,
+        "y": 6933.812,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 114.804
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_TP07_AT_SCENE",
+      "display_name": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC TP07 at_scene",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 1140,
+        "y": 499
+      },
+      "source_object": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 3270.262,
+        "y": 5662.382,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 116.222
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC_TP12_STOPS",
+      "display_name": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC TP12 stops",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 12,
+      "source_time": "Palme_shot_1+12s",
+      "source_video_seconds": 36,
+      "source_screen_px": {
+        "x": 1060,
+        "y": 505
+      },
+      "source_object": "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 2430.977,
+        "y": 3958.408,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_BENGT_PALM_MERCEDES_GUL_TM05_APPROACHES_EAST",
+      "display_name": "VEHICLE_BENGT_PALM_MERCEDES_GUL TM05 approaches_east",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": -5,
+      "source_time": "Palme_shot_1-5s",
+      "source_video_seconds": 19,
+      "source_screen_px": {
+        "x": 1135,
+        "y": 459
+      },
+      "source_object": "VEHICLE_BENGT_PALM_MERCEDES_GUL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 3593.476,
+        "y": 5614.655,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 114.804
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_BENGT_PALM_MERCEDES_GUL_T0_AT_SHOT",
+      "display_name": "VEHICLE_BENGT_PALM_MERCEDES_GUL T0 at_shot",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 0,
+      "source_time": "Palme_shot_1+0s",
+      "source_video_seconds": 24,
+      "source_screen_px": {
+        "x": 809,
+        "y": 459
+      },
+      "source_object": "VEHICLE_BENGT_PALM_MERCEDES_GUL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 400.882,
+        "y": -1293.448,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 114.804
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_BENGT_PALM_MERCEDES_GUL_TP07_CONTINUES_WEST",
+      "display_name": "VEHICLE_BENGT_PALM_MERCEDES_GUL TP07 continues_west",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 324,
+        "y": 459
+      },
+      "source_object": "VEHICLE_BENGT_PALM_MERCEDES_GUL",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -4348.836,
+        "y": -11570.841,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON_TP07_ENTERS_TUNNELGATAN",
+      "display_name": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON TP07 enters_tunnelgatan",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 7,
+      "source_time": "Palme_shot_1+7s",
+      "source_video_seconds": 31,
+      "source_screen_px": {
+        "x": 936,
+        "y": 685
+      },
+      "source_object": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -458.196,
+        "y": 1068.768,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -8.892
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON_TP18_NORTHBOUND",
+      "display_name": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON TP18 northbound",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 18,
+      "source_time": "Palme_shot_1+18s",
+      "source_video_seconds": 42,
+      "source_screen_px": {
+        "x": 936,
+        "y": 610
+      },
+      "source_object": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 239.642,
+        "y": 1177.942,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 3.409
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON_TP26_PASSES_SCENE",
+      "display_name": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON TP26 passes_scene",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 26,
+      "source_time": "Palme_shot_1+26s",
+      "source_video_seconds": 50,
+      "source_screen_px": {
+        "x": 930,
+        "y": 545
+      },
+      "source_object": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 785.676,
+        "y": 1145.416,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_GLANTZ_BASEN_TAXI_E9979_TP18_APPROACHES",
+      "display_name": "VEHICLE_GLANTZ_BASEN_TAXI_E9979 TP18 approaches",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 18,
+      "source_time": "Palme_shot_1+18s",
+      "source_video_seconds": 42,
+      "source_screen_px": {
+        "x": 1000,
+        "y": 610
+      },
+      "source_object": "VEHICLE_GLANTZ_BASEN_TAXI_E9979",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 866.409,
+        "y": 2534.134,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 108.954
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_GLANTZ_BASEN_TAXI_E9979_TP22_STOPS",
+      "display_name": "VEHICLE_GLANTZ_BASEN_TAXI_E9979 TP22 stops",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 22,
+      "source_time": "Palme_shot_1+22s",
+      "source_video_seconds": 46,
+      "source_screen_px": {
+        "x": 930,
+        "y": 590
+      },
+      "source_object": "VEHICLE_GLANTZ_BASEN_TAXI_E9979",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 366.973,
+        "y": 1079.912,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 106.981
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_VEHICLE_VEHICLE_GLANTZ_BASEN_TAXI_E9979_TP35_SCENE",
+      "display_name": "VEHICLE_GLANTZ_BASEN_TAXI_E9979 TP35 scene",
+      "category": "VEHICLE_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 35,
+      "source_time": "Palme_shot_1+35s",
+      "source_video_seconds": 59,
+      "source_screen_px": {
+        "x": 850,
+        "y": 560
+      },
+      "source_object": "VEHICLE_GLANTZ_BASEN_TAXI_E9979",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": -137.35,
+        "y": -571.658,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_ERSSON_TP26_DOOR_SIDE",
+      "display_name": "ANDERS_ERSSON TP26 door_side",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 26,
+      "source_time": "Palme_shot_1+26s",
+      "source_video_seconds": 50,
+      "source_screen_px": {
+        "x": 931,
+        "y": 570
+      },
+      "source_object": "ANDERS_ERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 562.857,
+        "y": 1130.216,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 59.875
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_ERSSON_TP30_RUNS_TO_SCENE",
+      "display_name": "ANDERS_ERSSON TP30 runs_to_scene",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 30,
+      "source_time": "Palme_shot_1+30s",
+      "source_video_seconds": 54,
+      "source_screen_px": {
+        "x": 880,
+        "y": 459
+      },
+      "source_object": "ANDERS_ERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1096.202,
+        "y": 211.078,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 76.831
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANDERS_ERSSON_CRIME_SCENE_FINAL",
+      "display_name": "ANDERS_ERSSON TP39 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 39,
+      "source_time": "Palme_shot_1+39s",
+      "source_video_seconds": 63,
+      "source_screen_px": {
+        "x": 812,
+        "y": 355
+      },
+      "source_object": "ANDERS_ERSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1397.931,
+        "y": -1078.488,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANNE_HAGE_TP09_DOOR_SIDE",
+      "display_name": "ANNE_HAGE TP09 door_side",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 9,
+      "source_time": "Palme_shot_1+9s",
+      "source_video_seconds": 33,
+      "source_screen_px": {
+        "x": 1035,
+        "y": 570
+      },
+      "source_object": "ANNE_HAGE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1581.353,
+        "y": 3334.028,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 95.347
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANNE_HAGE_TP13_RUNS_TO_SCENE",
+      "display_name": "ANNE_HAGE TP13 runs_to_scene",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 13,
+      "source_time": "Palme_shot_1+13s",
+      "source_video_seconds": 37,
+      "source_screen_px": {
+        "x": 900,
+        "y": 455
+      },
+      "source_object": "ANNE_HAGE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1329.285,
+        "y": 640.71,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 90.684
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_ANNE_HAGE_CRIME_SCENE_FINAL",
+      "display_name": "ANNE_HAGE TP20 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 20,
+      "source_time": "Palme_shot_1+20s",
+      "source_video_seconds": 44,
+      "source_screen_px": {
+        "x": 790,
+        "y": 342
+      },
+      "source_object": "ANNE_HAGE",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1303.438,
+        "y": -1525.756,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_GORAN_ISRAELSSON_TP26_DOOR_SIDE",
+      "display_name": "GORAN_ISRAELSSON TP26 door_side",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 26,
+      "source_time": "Palme_shot_1+26s",
+      "source_video_seconds": 50,
+      "source_screen_px": {
+        "x": 925,
+        "y": 565
+      },
+      "source_object": "GORAN_ISRAELSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 550.62,
+        "y": 1010.351,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 59.309
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_GORAN_ISRAELSSON_TP30_RUNS_TO_SCENE",
+      "display_name": "GORAN_ISRAELSSON TP30 runs_to_scene",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 30,
+      "source_time": "Palme_shot_1+30s",
+      "source_video_seconds": 54,
+      "source_screen_px": {
+        "x": 875,
+        "y": 455
+      },
+      "source_object": "GORAN_ISRAELSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1084.454,
+        "y": 110.948,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 77.644
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_GORAN_ISRAELSSON_CRIME_SCENE_FINAL",
+      "display_name": "GORAN_ISRAELSSON TP39 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 39,
+      "source_time": "Palme_shot_1+39s",
+      "source_video_seconds": 63,
+      "source_screen_px": {
+        "x": 805,
+        "y": 350
+      },
+      "source_object": "GORAN_ISRAELSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1375.901,
+        "y": -1219.544,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_KARIN_JOHANSSON_TP09_DOOR_SIDE",
+      "display_name": "KARIN_JOHANSSON TP09 door_side",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 9,
+      "source_time": "Palme_shot_1+9s",
+      "source_video_seconds": 33,
+      "source_screen_px": {
+        "x": 1041,
+        "y": 575
+      },
+      "source_object": "KARIN_JOHANSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1593.59,
+        "y": 3453.892,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 95.318
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_KARIN_JOHANSSON_TP13_RUNS_TO_SCENE",
+      "display_name": "KARIN_JOHANSSON TP13 runs_to_scene",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 13,
+      "source_time": "Palme_shot_1+13s",
+      "source_video_seconds": 37,
+      "source_screen_px": {
+        "x": 905,
+        "y": 459
+      },
+      "source_object": "KARIN_JOHANSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1341.033,
+        "y": 740.84,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 90.157
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_KARIN_JOHANSSON_CRIME_SCENE_FINAL",
+      "display_name": "KARIN_JOHANSSON TP20 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 20,
+      "source_time": "Palme_shot_1+20s",
+      "source_video_seconds": 44,
+      "source_screen_px": {
+        "x": 798,
+        "y": 347
+      },
+      "source_object": "KARIN_JOHANSSON",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1335.262,
+        "y": -1363.51,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LENA_BASEN_TP25_DOOR_SIDE",
+      "display_name": "LENA_BASEN TP25 door_side",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 25,
+      "source_time": "Palme_shot_1+25s",
+      "source_video_seconds": 49,
+      "source_screen_px": {
+        "x": 943,
+        "y": 580
+      },
+      "source_object": "LENA_BASEN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 587.33,
+        "y": 1369.945,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 60.954
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LENA_BASEN_TP29_RUNS_TO_SCENE",
+      "display_name": "LENA_BASEN TP29 runs_to_scene",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 29,
+      "source_time": "Palme_shot_1+29s",
+      "source_video_seconds": 53,
+      "source_screen_px": {
+        "x": 890,
+        "y": 467
+      },
+      "source_object": "LENA_BASEN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1119.698,
+        "y": 411.337,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 75.058
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_LENA_BASEN_CRIME_SCENE_FINAL",
+      "display_name": "LENA_BASEN TP38 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 38,
+      "source_time": "Palme_shot_1+38s",
+      "source_video_seconds": 62,
+      "source_screen_px": {
+        "x": 826,
+        "y": 365
+      },
+      "source_object": "LENA_BASEN",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1441.991,
+        "y": -796.378,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STEFAN_GLANTZ_TP25_DOOR_SIDE",
+      "display_name": "STEFAN_GLANTZ TP25 door_side",
+      "category": "WITNESS_POSITION",
+      "confidence": "RECONSTRUCTED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 25,
+      "source_time": "Palme_shot_1+25s",
+      "source_video_seconds": 49,
+      "source_screen_px": {
+        "x": 937,
+        "y": 575
+      },
+      "source_object": "STEFAN_GLANTZ",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 575.093,
+        "y": 1250.08,
+        "z": 51.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 60.423
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STEFAN_GLANTZ_TP29_RUNS_TO_SCENE",
+      "display_name": "STEFAN_GLANTZ TP29 runs_to_scene",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 29,
+      "source_time": "Palme_shot_1+29s",
+      "source_video_seconds": 53,
+      "source_screen_px": {
+        "x": 885,
+        "y": 463
+      },
+      "source_object": "STEFAN_GLANTZ",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1107.95,
+        "y": 311.208,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 75.97
+      }
+    },
+    {
+      "anchor_id": "ANCHOR_PAGE31_STEFAN_GLANTZ_CRIME_SCENE_FINAL",
+      "display_name": "STEFAN_GLANTZ TP38 crime_scene_final",
+      "category": "WITNESS_POSITION",
+      "confidence": "INFERRED",
+      "event_id": "Palme_shot_1",
+      "event_offset_seconds": 38,
+      "source_time": "Palme_shot_1+38s",
+      "source_video_seconds": 62,
+      "source_screen_px": {
+        "x": 819,
+        "y": 360
+      },
+      "source_object": "STEFAN_GLANTZ",
+      "notes": "Page 31 marker position calibrated into Unreal centimetres. Pixel precision is limited by the supplied raster capture; confidence records reconstructed/inferred points.",
+      "unreal_location_cm": {
+        "x": 1419.961,
+        "y": -937.433,
+        "z": 60.0
+      },
+      "blender_rotation_euler_degrees": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.0
+      }
+    }
+  ]
+}
