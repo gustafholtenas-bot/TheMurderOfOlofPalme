@@ -77,5 +77,8 @@ DerivedDataCache/*
 # Megascans assets imported into this project
 /Content/Megascans/
 
+# Fab assets imported into this project
+/Content/Fab/
+
 # Newspaper source images (kept locally, not in Git)
 /Content/Media/Newspapers/Images/
