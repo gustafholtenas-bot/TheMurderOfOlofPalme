@@ -2,6 +2,7 @@
 
 #include "Components/SplineComponent.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
+#include "Kismet/GameplayStatics.h"
 #include "Time/TMOPClockSubsystem.h"
 
 ATMOPAerialVehicleDirector::ATMOPAerialVehicleDirector()
@@ -32,8 +33,10 @@ void ATMOPAerialVehicleDirector::Tick(const float DeltaSeconds)
 
     const int32 CurrentSecond =
         Clock->GetCurrentTime().ToSecondsFromMidnight();
+    const float WorldDilation = FMath::Max(
+        UGameplayStatics::GetGlobalTimeDilation(this), KINDA_SMALL_NUMBER);
     const float SimulationDelta = Clock->IsClockRunning()
-        ? DeltaSeconds * Clock->GetTimeScale() : 0.0f;
+        ? DeltaSeconds * (Clock->GetTimeScale() / WorldDilation) : 0.0f;
     const int32 LargestExpectedStep =
         FMath::Max(2, FMath::CeilToInt(SimulationDelta) + 1);
     if (LastEvaluatedSecond != INDEX_NONE &&
