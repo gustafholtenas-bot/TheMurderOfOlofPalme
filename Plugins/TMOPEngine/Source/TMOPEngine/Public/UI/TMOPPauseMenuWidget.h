@@ -40,6 +40,10 @@ public:
     FTMOPPauseMenuRequestSignature OnLoadRequested;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Save")
     FString SaveSlotName = TEXT("TMOP_QuickSave");
+    UFUNCTION(BlueprintCallable, Category="TMOP|UI|Pause|Save")
+    bool LoadQuickSave(const FString& SlotName);
+    UFUNCTION(BlueprintCallable, Category="TMOP|UI|Pause")
+    void OpenSettingsPage();
     /** DT_TMOP_Uppslag_REGISTER. Assign the latest register in the HUD widget defaults. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Sources")
     TObjectPtr<UDataTable> UppslagTable;

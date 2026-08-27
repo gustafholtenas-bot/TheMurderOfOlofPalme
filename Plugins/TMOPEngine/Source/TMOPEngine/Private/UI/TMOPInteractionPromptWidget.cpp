@@ -6,6 +6,7 @@
 #include "Widgets/SOverlay.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Text/STextBlock.h"
+#include "UI/TMOPTypographyDirector.h"
 
 TSharedRef<SWidget> UTMOPInteractionPromptWidget::RebuildWidget()
 {
@@ -19,7 +20,8 @@ TSharedRef<SWidget> UTMOPInteractionPromptWidget::RebuildWidget()
                 [
                     SAssignNew(TargetReticleWidget, STextBlock)
                     .Text(FText::FromString(TEXT("□")))
-                    .Font(FCoreStyle::GetDefaultFontStyle("Regular", 28))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("TargetReticle"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 28)))
                     .ColorAndOpacity(FLinearColor(0.96f, 0.96f, 0.90f, 0.96f))
                     .Justification(ETextJustify::Center)
                 ]
@@ -32,10 +34,13 @@ TSharedRef<SWidget> UTMOPInteractionPromptWidget::RebuildWidget()
                 [ SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(TargetTitleWidget, STextBlock).Text(TargetTitle)
-                        .Font(FCoreStyle::GetDefaultFontStyle("Bold", 14))
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("TargetLabel"),
+                            FCoreStyle::GetDefaultFontStyle("Bold", 14)))
                         .Justification(ETextJustify::Center) ]
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(TargetDetailsWidget, STextBlock).Text(TargetDetails)
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                            FCoreStyle::GetDefaultFontStyle("Regular", 12)))
                         .ColorAndOpacity(FLinearColor(0.72f, 0.76f, 0.80f, 1.0f))
                         .Justification(ETextJustify::Center) ] ]
             ]
@@ -44,6 +49,8 @@ TSharedRef<SWidget> UTMOPInteractionPromptWidget::RebuildWidget()
                 SAssignNew(PromptPanel, SBorder).Padding(FMargin(16.0f, 7.0f))
                 .BorderBackgroundColor(FLinearColor(0.015f, 0.02f, 0.03f, 0.82f))
                 [ SAssignNew(PromptTextWidget, STextBlock).Text(PromptText)
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("InteractionPrompt"),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 15)))
                     .Justification(ETextJustify::Center) ]
             ]
         ];

@@ -9,6 +9,7 @@
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/Text/STextBlock.h"
+#include "UI/TMOPTypographyDirector.h"
 
 void UTMOPAgentInfoChartWidget::InitializeAgentInfo(
     ATMOPPlayerCharacter* InPlayerCharacter)
@@ -62,11 +63,13 @@ void UTMOPAgentInfoChartWidget::HideAgentInfo()
 
 TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
 {
-    const auto SectionHeader = [](const FText& Text)
+    const auto SectionHeader = [this](const FText& Text)
     {
         return SNew(STextBlock).Text(Text)
-            .Font(FCoreStyle::GetDefaultFontStyle("Bold", 17))
-            .ColorAndOpacity(FLinearColor(0.95f, 0.70f, 0.20f));
+            .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoHeading"),
+                FCoreStyle::GetDefaultFontStyle("Bold", 17)))
+            .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+                TEXT("AgentInfoHeading"), FLinearColor(0.95f, 0.70f, 0.20f)));
     };
     return SNew(SOverlay)
         + SOverlay::Slot().HAlign(HAlign_Fill).VAlign(VAlign_Fill)
@@ -84,7 +87,8 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                 [ SNew(SHorizontalBox)
                   + SHorizontalBox::Slot().FillWidth(1.0f)
                   [ SAssignNew(NameText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Bold", 28))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoName"),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 28)))
                     .ColorAndOpacity(FLinearColor::White) ]
                   + SHorizontalBox::Slot().AutoWidth()
                   [ SNew(SButton)
@@ -93,11 +97,13 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                         &UTMOPAgentInfoChartWidget::HandleCloseClicked) ] ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 4, 0, 4)
                 [ SAssignNew(IdentityText, STextBlock)
-                  .Font(FCoreStyle::GetDefaultFontStyle("Regular", 15))
+                  .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                      FCoreStyle::GetDefaultFontStyle("Regular", 15)))
                   .ColorAndOpacity(FLinearColor(0.68f, 0.76f, 0.82f)) ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 3, 0, 14)
                 [ SAssignNew(InterviewStatusText, STextBlock)
-                  .Font(FCoreStyle::GetDefaultFontStyle("Bold", 15))
+                  .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoStatus"),
+                      FCoreStyle::GetDefaultFontStyle("Bold", 15)))
                   .ColorAndOpacity(FLinearColor(0.40f, 0.85f, 0.58f)) ]
                 + SVerticalBox::Slot().FillHeight(1.0f)
                 [ SNew(SScrollBox)
@@ -106,7 +112,8 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       "PERSONENS TIDSLINJE")) ]
                   + SScrollBox::Slot().Padding(0, 0, 12, 20)
                   [ SAssignNew(TimelineText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Regular", 16))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.94f, 0.96f))
                     .AutoWrapText(true).WrapTextAt(820.0f) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
@@ -114,7 +121,8 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       "OBSERVATIONER OCH FÖRHÖRSUPPGIFTER")) ]
                   + SScrollBox::Slot().Padding(0, 0, 12, 20)
                   [ SAssignNew(ObservationText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Regular", 16))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.94f, 0.96f))
                     .AutoWrapText(true).WrapTextAt(820.0f) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
@@ -122,7 +130,8 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       "KÄLLOR")) ]
                   + SScrollBox::Slot().Padding(0, 0, 12, 5)
                   [ SAssignNew(SourceText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Regular", 13))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 13)))
                     .ColorAndOpacity(FLinearColor(0.62f, 0.69f, 0.74f))
                     .AutoWrapText(true).WrapTextAt(820.0f) ] ] ] ] ] ];
 }

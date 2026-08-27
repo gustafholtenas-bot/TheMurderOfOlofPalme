@@ -35,6 +35,7 @@
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SLeafWidget.h"
 #include "Widgets/Text/STextBlock.h"
+#include "UI/TMOPTypographyDirector.h"
 
 namespace
 {
@@ -306,7 +307,9 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
 
     TSharedRef<SVerticalBox> PagePanel = SNew(SVerticalBox)
         + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 14.0f)
-        [ SAssignNew(SectionTitleText, STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Bold", 21)) ]
+        [ SAssignNew(SectionTitleText, STextBlock).Font(
+            ATMOPTypographyDirector::ResolveFont(this, TEXT("Heading"),
+                FCoreStyle::GetDefaultFontStyle("Bold", 21))) ]
         + SVerticalBox::Slot().FillHeight(1.0f)
         [ SNew(SScrollBox) + SScrollBox::Slot()[SAssignNew(ContentBox, SVerticalBox)] ]
         + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 14.0f, 0.0f, 0.0f)
@@ -317,7 +320,8 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
         [ SNew(SVerticalBox)
           + SVerticalBox::Slot().AutoHeight().Padding(8.0f, 4.0f, 8.0f, 20.0f)
           [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "PauseHubTitle", "THE MURDER OF OLOF PALME"))
-            .Font(FCoreStyle::GetDefaultFontStyle("Bold", 25)) ]
+            .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MainTitle"),
+                FCoreStyle::GetDefaultFontStyle("Bold", 25))) ]
           + SVerticalBox::Slot().FillHeight(1.0f)
           [ SNew(SHorizontalBox)
             + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 24.0f, 0.0f)
@@ -388,9 +392,13 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
 }
 
 void UTMOPPauseMenuWidget::AddHeading(const FText& Text)
-{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 10.0f)[ SNew(STextBlock).Text(Text).Font(FCoreStyle::GetDefaultFontStyle("Bold", 17)) ]; }
+{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 10.0f)[ SNew(STextBlock).Text(Text).Font(
+    ATMOPTypographyDirector::ResolveFont(this, TEXT("SectionHeading"),
+        FCoreStyle::GetDefaultFontStyle("Bold", 17))) ]; }
 void UTMOPPauseMenuWidget::AddBody(const FText& Text)
-{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 5.0f)[ SNew(STextBlock).Text(Text).AutoWrapText(true) ]; }
+{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 5.0f)[ SNew(STextBlock).Text(Text)
+    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Body"),
+        FCoreStyle::GetDefaultFontStyle("Regular", 16))).AutoWrapText(true) ]; }
 
 void UTMOPPauseMenuWidget::BuildInventoryPage()
 {
@@ -1141,11 +1149,22 @@ FReply UTMOPPauseMenuWidget::HandleSaveClicked()
 
 FReply UTMOPPauseMenuWidget::HandleLoadClicked()
 {
-    UTMOPMenuSaveGame* Save = Cast<UTMOPMenuSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName,0));
-    if (!IsValid(Save) || !IsValid(PlayerCharacter)) { SetStatus(NSLOCTEXT("TMOP", "NoSave", "Ingen giltig sparfil hittades.")); return FReply::Handled(); }
+    LoadQuickSave(SaveSlotName);
+    return FReply::Handled();
+}
+
+void UTMOPPauseMenuWidget::OpenSettingsPage()
+{
+    ShowSection(ETMOPPauseHubSection::Settings);
+}
+
+bool UTMOPPauseMenuWidget::LoadQuickSave(const FString& SlotName)
+{
+    UTMOPMenuSaveGame* Save = Cast<UTMOPMenuSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName,0));
+    if (!IsValid(Save) || !IsValid(PlayerCharacter)) { SetStatus(NSLOCTEXT("TMOP", "NoSave", "Ingen giltig sparfil hittades.")); return false; }
     bool bTimeLoaded = false;
     for (TActorIterator<ATMOPSimulationDebugDirector> It(GetWorld()); It; ++It) { bTimeLoaded = It->JumpToSimulationTime(Save->SavedTime); break; }
-    if (!bTimeLoaded) { SetStatus(NSLOCTEXT("TMOP", "LoadNeedsDirector", "Laddning kräver TMOPSimulationDebugDirector i nivån.")); return FReply::Handled(); }
+    if (!bTimeLoaded) { SetStatus(NSLOCTEXT("TMOP", "LoadNeedsDirector", "Laddning kräver TMOPSimulationDebugDirector i nivån.")); return false; }
     PlayerCharacter->SetActorTransform(Save->PlayerTransform, false, nullptr, ETeleportType::TeleportPhysics);
     if (IsValid(PlayerCharacter->Inventory))
     {
@@ -1156,7 +1175,9 @@ FReply UTMOPPauseMenuWidget::HandleLoadClicked()
         if (UTMOPItemDefinition* Equipped = Cast<UTMOPItemDefinition>(Save->EquippedItemPath.TryLoad())) PlayerCharacter->Inventory->EquipItem(Equipped);
     }
     PlayerCharacter->DiscoveredEvidenceIds = Save->DiscoveredEvidenceIds;
-    SetStatus(NSLOCTEXT("TMOP", "LoadSuccess", "Spelet laddades.")); OnLoadRequested.Broadcast(); return FReply::Handled();
+    SetStatus(NSLOCTEXT("TMOP", "LoadSuccess", "Spelet laddades."));
+    OnLoadRequested.Broadcast();
+    return true;
 }
 
 void UTMOPPauseMenuWidget::BuildQuitPage()

@@ -1,0 +1,6 @@
+[
+  {"Name":"INTRO_01","CardId":"INTRO_01","StartSeconds":0.0,"EndSeconds":8.0,"Heading":"Stockholm, 28 februari 1986","Body":"Du befinner dig i en rekonstruktion av timmarna kring mordet på Sveriges statsminister Olof Palme.","Image":""},
+  {"Name":"INTRO_02","CardId":"INTRO_02","StartSeconds":8.0,"EndSeconds":17.0,"Heading":"Observera","Body":"Tala med människor, undersök föremål och jämför deras rörelser med dokumenterade vittnesuppgifter.","Image":""},
+  {"Name":"INTRO_03","CardId":"INTRO_03","StartSeconds":17.0,"EndSeconds":27.0,"Heading":"Samla information","Body":"Uppslagsmenyn, kartan och AgentInfoChart hjälper dig att ordna observationer, personer och källor.","Image":""},
+  {"Name":"INTRO_04","CardId":"INTRO_04","StartSeconds":27.0,"EndSeconds":45.0,"Heading":"Grand","Body":"Din undersökning börjar utanför biografen Grand på Sveavägen.","Image":""}
+]

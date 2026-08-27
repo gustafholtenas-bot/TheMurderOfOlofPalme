@@ -73,10 +73,13 @@ FName UTMOPAgentAudioComponent::ResolveSurfaceFootstepId(const bool bRunning) co
         return bRunning ? DefaultRunFootstepId : DefaultWalkFootstepId;
     switch (UGameplayStatics::GetSurfaceType(Hit))
     {
-    case SurfaceType1: return InteriorFootstepId;
-    case SurfaceType2: return CarpetFootstepId;
-    case SurfaceType3: return StairFootstepId;
-    case SurfaceType4: return WetFootstepId;
+    case SurfaceType1: return bRunning ? AsphaltRunFootstepId : AsphaltWalkFootstepId;
+    case SurfaceType2: return bRunning ? CarpetRunFootstepId : CarpetWalkFootstepId;
+    case SurfaceType3: return bRunning ? GrassRunFootstepId : GrassWalkFootstepId;
+    case SurfaceType4: return bRunning ? SnowRunFootstepId : SnowWalkFootstepId;
+    case SurfaceType5: return bRunning ? StairsRunFootstepId : StairsWalkFootstepId;
+    case SurfaceType6: return bRunning ? StoneTilesRunFootstepId : StoneTilesWalkFootstepId;
+    case SurfaceType7: return bRunning ? WoodRunFootstepId : WoodWalkFootstepId;
     default: return bRunning ? DefaultRunFootstepId : DefaultWalkFootstepId;
     }
 }

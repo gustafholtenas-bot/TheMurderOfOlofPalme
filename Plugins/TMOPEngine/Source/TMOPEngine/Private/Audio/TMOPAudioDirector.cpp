@@ -8,7 +8,10 @@
 #include "Audio/TMOPVenueAudioEmitter.h"
 #include "Camera/PlayerCameraManager.h"
 #include "Components/AudioComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine/DataTable.h"
+#include "Engine/StaticMesh.h"
+#include "Sound/SoundWave.h"
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 #include "Time/TMOPClockSubsystem.h"
@@ -74,16 +77,23 @@ ATMOPAudioDirector::ATMOPAudioDirector()
 {
     PrimaryActorTick.bCanEverTick = true;
     PrimaryActorTick.TickInterval = 0.1f;
+    TrafficLightNameTokens = {
+        TEXT("trafikljus"), TEXT("trafficlight"), TEXT("traffic_light")};
 }
 
 void ATMOPAudioDirector::BeginPlay()
 {
     Super::BeginPlay();
     DiscoverRuntimeActors();
+    RefreshTrafficLightAudio();
     const TArray<FName> FootstepRows = {
         TEXT("FOOTSTEP_ASPHALT_WALK"), TEXT("FOOTSTEP_ASPHALT_RUN"),
-        TEXT("FOOTSTEP_INTERIOR_HARD"), TEXT("FOOTSTEP_CARPET"),
-        TEXT("FOOTSTEP_STAIRS"), TEXT("FOOTSTEP_WET_GROUND")};
+        TEXT("FOOTSTEP_CARPET_WALK"), TEXT("FOOTSTEP_CARPET_RUN"),
+        TEXT("FOOTSTEP_GRASS_WALK"), TEXT("FOOTSTEP_GRASS_RUN"),
+        TEXT("FOOTSTEP_SNOW_WALK"), TEXT("FOOTSTEP_SNOW_RUN"),
+        TEXT("FOOTSTEP_STAIRS_WALK"), TEXT("FOOTSTEP_STAIRS_RUN"),
+        TEXT("FOOTSTEP_STONE_TILES_WALK"), TEXT("FOOTSTEP_STONE_TILES_RUN"),
+        TEXT("FOOTSTEP_WOOD_WALK"), TEXT("FOOTSTEP_WOOD_RUN")};
     for (const FName AudioId : FootstepRows)
     {
         FTMOPSoundLibraryRow Definition;
@@ -109,6 +119,7 @@ void ATMOPAudioDirector::BeginPlay()
 void ATMOPAudioDirector::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     StopScheduledAudio();
+    StopTrafficLightAudio();
     Super::EndPlay(EndPlayReason);
 }
 
@@ -120,6 +131,13 @@ void ATMOPAudioDirector::Tick(const float DeltaSeconds)
     {
         DiscoveryAccumulator = 0.0f;
         DiscoverRuntimeActors();
+    }
+    TrafficLightRefreshAccumulator += DeltaSeconds;
+    if (bAttachTrafficLightClicksAutomatically &&
+        TrafficLightRefreshAccumulator >= TrafficLightRefreshIntervalSeconds)
+    {
+        TrafficLightRefreshAccumulator = 0.0f;
+        RefreshTrafficLightAudio();
     }
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
@@ -138,22 +156,29 @@ void ATMOPAudioDirector::Tick(const float DeltaSeconds)
 bool ATMOPAudioDirector::FindSoundDefinition(
     const FName AudioId, FTMOPSoundLibraryRow& OutDefinition) const
 {
-    if (SoundLibraryTable == nullptr || AudioId.IsNone()) return false;
-    const FTMOPSoundLibraryRow* Direct =
-        SoundLibraryTable->FindRow<FTMOPSoundLibraryRow>(AudioId, TEXT("TMOP Audio"), false);
-    if (Direct != nullptr)
+    if (AudioId.IsNone()) return false;
+    TArray<UDataTable*> Tables;
+    for (UDataTable* Additional : AdditionalSoundLibraryTables)
+        if (IsValid(Additional)) Tables.Add(Additional);
+    if (IsValid(SoundLibraryTable)) Tables.Add(SoundLibraryTable);
+    for (const UDataTable* Table : Tables)
     {
-        OutDefinition = *Direct;
-        return true;
-    }
-    for (const TPair<FName, uint8*>& Pair : SoundLibraryTable->GetRowMap())
-    {
-        const FTMOPSoundLibraryRow* Row =
-            reinterpret_cast<const FTMOPSoundLibraryRow*>(Pair.Value);
-        if (Row != nullptr && Row->AudioId == AudioId)
+        const FTMOPSoundLibraryRow* Direct =
+            Table->FindRow<FTMOPSoundLibraryRow>(AudioId, TEXT("TMOP Audio"), false);
+        if (Direct != nullptr)
         {
-            OutDefinition = *Row;
+            OutDefinition = *Direct;
             return true;
+        }
+        for (const TPair<FName, uint8*>& Pair : Table->GetRowMap())
+        {
+            const FTMOPSoundLibraryRow* Row =
+                reinterpret_cast<const FTMOPSoundLibraryRow*>(Pair.Value);
+            if (Row != nullptr && Row->AudioId == AudioId)
+            {
+                OutDefinition = *Row;
+                return true;
+            }
         }
     }
     return false;
@@ -190,7 +215,10 @@ USoundBase* ATMOPAudioDirector::ResolveSound(
         FMath::RandRange(0, EligibleIndices.Num() - 1)];
     LastResolvedSoundByAudioId.Add(
         AudioId, Choices[ChoiceIndex].ToSoftObjectPath().ToString());
-    return Choices[ChoiceIndex].LoadSynchronous();
+    USoundBase* Resolved = Choices[ChoiceIndex].LoadSynchronous();
+    if (USoundWave* Wave = Cast<USoundWave>(Resolved))
+        Wave->bLooping = Definition.bLoop;
+    return Resolved;
 }
 
 UAudioComponent* ATMOPAudioDirector::Play2DById(
@@ -319,6 +347,96 @@ void ATMOPAudioDirector::DiscoverRuntimeActors()
             }
         }
     }
+}
+
+bool ATMOPAudioDirector::FindTrafficLightAttachComponent(AActor* Actor,
+    USceneComponent*& OutComponent) const
+{
+    OutComponent = nullptr;
+    if (!IsValid(Actor) || Actor == this) return false;
+    auto Matches = [this](FString Identity)
+    {
+        Identity.ToLowerInline();
+        Identity.ReplaceInline(TEXT("_"), TEXT(""));
+        Identity.ReplaceInline(TEXT("-"), TEXT(""));
+        Identity.ReplaceInline(TEXT(" "), TEXT(""));
+        for (FString Token : TrafficLightNameTokens)
+        {
+            Token.ToLowerInline();
+            Token.ReplaceInline(TEXT("_"), TEXT(""));
+            Token.ReplaceInline(TEXT("-"), TEXT(""));
+            Token.ReplaceInline(TEXT(" "), TEXT(""));
+            if (!Token.IsEmpty() && Identity.Contains(Token)) return true;
+        }
+        return false;
+    };
+
+    TArray<UStaticMeshComponent*> Meshes;
+    Actor->GetComponents<UStaticMeshComponent>(Meshes);
+    if (Meshes.IsEmpty()) return false;
+    const bool bActorMatches = Matches(Actor->GetName());
+    for (UStaticMeshComponent* Mesh : Meshes)
+    {
+        if (!IsValid(Mesh)) continue;
+        const FString MeshAssetName = IsValid(Mesh->GetStaticMesh())
+            ? Mesh->GetStaticMesh()->GetName() : FString();
+        if (bActorMatches || Matches(Mesh->GetName()) || Matches(MeshAssetName))
+        {
+            OutComponent = Mesh;
+            return true;
+        }
+    }
+    return false;
+}
+
+void ATMOPAudioDirector::RefreshTrafficLightAudio()
+{
+    if (!bAttachTrafficLightClicksAutomatically || GetWorld() == nullptr)
+    {
+        StopTrafficLightAudio();
+        return;
+    }
+    const APlayerCameraManager* Camera =
+        UGameplayStatics::GetPlayerCameraManager(this, 0);
+    if (!IsValid(Camera)) return;
+    const FVector ListenerLocation = Camera->GetCameraLocation();
+    const float RadiusSquared = FMath::Square(TrafficLightActivationRadiusCm);
+    TSet<TWeakObjectPtr<AActor>> SeenNearby;
+
+    for (TActorIterator<AActor> It(GetWorld()); It; ++It)
+    {
+        AActor* Actor = *It;
+        USceneComponent* AttachComponent = nullptr;
+        if (!FindTrafficLightAttachComponent(Actor, AttachComponent)) continue;
+        if (FVector::DistSquared(ListenerLocation,
+            AttachComponent->GetComponentLocation()) > RadiusSquared) continue;
+        SeenNearby.Add(Actor);
+        const TWeakObjectPtr<AActor> ActorKey(Actor);
+        UAudioComponent* Existing = ActiveTrafficLightAudio.FindRef(ActorKey).Get();
+        if (IsValid(Existing) && Existing->IsPlaying()) continue;
+        if (UAudioComponent* Started = PlayAttachedById(
+            TrafficLightClickAudioId, AttachComponent, 1.0f))
+            ActiveTrafficLightAudio.Add(ActorKey, Started);
+    }
+
+    for (auto It = ActiveTrafficLightAudio.CreateIterator(); It; ++It)
+    {
+        AActor* Actor = It.Key().Get();
+        UAudioComponent* Audio = It.Value().Get();
+        if (!IsValid(Actor) || !SeenNearby.Contains(TWeakObjectPtr<AActor>(Actor)))
+        {
+            if (IsValid(Audio)) Audio->FadeOut(0.15f, 0.0f);
+            It.RemoveCurrent();
+        }
+    }
+}
+
+void ATMOPAudioDirector::StopTrafficLightAudio()
+{
+    for (auto& Pair : ActiveTrafficLightAudio)
+        if (UAudioComponent* Audio = Pair.Value.Get()) Audio->Stop();
+    ActiveTrafficLightAudio.Reset();
+    TrafficLightRefreshAccumulator = 0.0f;
 }
 
 void ATMOPAudioDirector::EvaluateSchedule(const int32 CurrentSecond)

@@ -4,6 +4,7 @@
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Text/STextBlock.h"
+#include "UI/TMOPTypographyDirector.h"
 
 void UTMOPSpeechBubbleWidget::SetSpeechText(const FText& NewText)
 {
@@ -21,7 +22,8 @@ TSharedRef<SWidget> UTMOPSpeechBubbleWidget::RebuildWidget()
             .Padding(FMargin(18.0f, 12.0f))
             [
                 SAssignNew(SpeechText, STextBlock)
-                .Font(FCoreStyle::GetDefaultFontStyle("Regular", 20))
+                .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeechBubble"),
+                    FCoreStyle::GetDefaultFontStyle("Regular", 20)))
                 .AutoWrapText(true)
                 .WrapTextAt(440.0f)
                 .Justification(ETextJustify::Center)

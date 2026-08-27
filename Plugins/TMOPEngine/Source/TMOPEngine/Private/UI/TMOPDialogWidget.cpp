@@ -13,6 +13,7 @@
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/Text/STextBlock.h"
+#include "UI/TMOPTypographyDirector.h"
 
 UTMOPDialogWidget::UTMOPDialogWidget(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
@@ -64,14 +65,16 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                 [ SNew(SHorizontalBox)
                   + SHorizontalBox::Slot().FillWidth(1.0f)
                   [ SAssignNew(SpeakerText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Bold", 19))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeakerName"),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 19)))
                     .ColorAndOpacity(FLinearColor(0.95f, 0.72f, 0.22f)) ]
                   + SHorizontalBox::Slot().AutoWidth()
                   [ SNew(SButton).Text(NSLOCTEXT("TMOP", "CloseDialog", "Stäng"))
                     .OnClicked_UObject(this, &UTMOPDialogWidget::HandleCloseClicked) ] ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 9.0f, 0.0f, 2.0f)
                 [ SAssignNew(DialogText, STextBlock)
-                  .Font(FCoreStyle::GetDefaultFontStyle("Regular", 18))
+                  .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("DialogBody"),
+                      FCoreStyle::GetDefaultFontStyle("Regular", 18)))
                   .AutoWrapText(true).WrapTextAt(900.0f)
                   .ColorAndOpacity(FLinearColor::White) ] ] ]
             + SVerticalBox::Slot().AutoHeight()
@@ -83,7 +86,8 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                 [ SNew(SHorizontalBox)
                   + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
                   [ SAssignNew(RadioLeftSpeakerText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Bold", 16))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeakerName"),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 16)))
                     .ColorAndOpacity(FLinearColor(0.68f, 0.82f, 0.92f)) ]
                   + SHorizontalBox::Slot().AutoWidth().HAlign(HAlign_Center)
                   [ SNew(SBox).WidthOverride(58.0f).HeightOverride(58.0f)
@@ -91,12 +95,14 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                   + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
                     .HAlign(HAlign_Right)
                   [ SAssignNew(RadioRightSpeakerText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Bold", 16))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeakerName"),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 16)))
                     .Justification(ETextJustify::Right)
                     .ColorAndOpacity(FLinearColor(0.68f, 0.82f, 0.92f)) ] ]
                 + SVerticalBox::Slot().AutoHeight().Padding(16.0f, 7.0f, 16.0f, 3.0f)
                 [ SAssignNew(RadioSubtitleText, STextBlock)
-                  .Font(FCoreStyle::GetDefaultFontStyle("Regular", 17))
+                  .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Subtitle"),
+                      FCoreStyle::GetDefaultFontStyle("Regular", 17)))
                   .AutoWrapText(true).WrapTextAt(880.0f)
                   .Justification(ETextJustify::Center)
                   .ColorAndOpacity(FLinearColor::White) ] ] ] ] ];

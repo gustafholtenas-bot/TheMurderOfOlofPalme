@@ -10,6 +10,7 @@
 #include "Widgets/Layout/SSpacer.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Text/STextBlock.h"
+#include "UI/TMOPTypographyDirector.h"
 
 void UTMOPNewspaperReaderWidget::InitializeReader(
     ATMOPPlayerCharacter* InPlayerCharacter)
@@ -114,7 +115,8 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                 + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
                 [
                     SAssignNew(TitleText, STextBlock)
-                    .Font(FCoreStyle::GetDefaultFontStyle("Bold", 23))
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Heading"),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 23)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.90f, 0.82f))
                 ]
                 + SHorizontalBox::Slot().AutoWidth().Padding(8.0f, 0.0f)
@@ -141,9 +143,12 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                     SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(PageNumberText, STextBlock)
-                        .Font(FCoreStyle::GetDefaultFontStyle("Bold", 17)) ]
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PageNumber"),
+                            FCoreStyle::GetDefaultFontStyle("Bold", 17))) ]
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(PageLabelText, STextBlock)
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                            FCoreStyle::GetDefaultFontStyle("Regular", 12)))
                         .ColorAndOpacity(FLinearColor(0.7f, 0.7f, 0.7f)) ]
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 3.0f)
                     [ SNew(STextBlock)
