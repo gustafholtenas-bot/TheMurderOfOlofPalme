@@ -139,8 +139,11 @@ private:
         int32 LastResolvedAutomaticSpeechSecond = INDEX_NONE;
         bool bSpawnedByDirector = false;
         bool bCompleted = false;
+        /** Physical execution/departure time used by EvaluatePeople. */
         int32 CachedResolvedSecond = INDEX_NONE;
-        /** Resolved execution time of the preceding consumed array entry. */
+        /** Logical timestamp shown in the editor (arrival for ARRIVAL moves). */
+        int32 CachedTimelineSecond = INDEX_NONE;
+        /** Logical timestamp of the preceding consumed array entry. */
         int32 LastResolvedTimelineSecond = INDEX_NONE;
     };
 
@@ -155,6 +158,10 @@ private:
         const FTMOPPersonTimelineEntry& Entry, bool bCatchUp);
     bool ApplyPlacement(ATMOPHistoricalAgent* Agent,
         const FTMOPPersonTimelineEntry& Entry, bool bCatchUp);
+    void ApplyConversationFocus(
+        ATMOPHistoricalAgent* Speaker,
+        const FTMOPPersonTimelineEntry& Entry);
+    void ClearConversationFocus(ATMOPHistoricalAgent* Speaker);
     bool IsAgentBusy(const ATMOPHistoricalAgent* Agent) const;
     bool ResolveEntrySecond(FPersonRuntime& Runtime,
         const FTMOPPersonTimelineEntry& Entry, int32& OutSecond) const;

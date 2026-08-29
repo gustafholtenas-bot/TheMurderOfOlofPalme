@@ -281,6 +281,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Social")
     void BeginDialogueFocus(AActor* Target);
 
+    /** Persistent authored gaze/body turn without the talking overlay. */
+    UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Social")
+    void BeginLookAtFocus(AActor* Target);
+
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Social")
     void EndDialogueFocus();
 

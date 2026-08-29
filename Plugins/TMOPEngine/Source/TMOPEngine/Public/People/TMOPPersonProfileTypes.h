@@ -30,6 +30,13 @@ enum class ETMOPPersonLocationType : uint8
 };
 
 UENUM(BlueprintType)
+enum class ETMOPAnchorOffsetSpace : uint8
+{
+    AnchorLocal UMETA(DisplayName="Anchor Local"),
+    World UMETA(DisplayName="World")
+};
+
+UENUM(BlueprintType)
 enum class ETMOPPersonTimelineAction : uint8
 {
     InitialPlacement,
@@ -58,7 +65,24 @@ enum class ETMOPPersonTimelineAction : uint8
     /** Dissolve TargetGroupId. */
     DissolveGroup,
     /** Change TargetGroupId's runtime leader to NewGroupLeaderEntityId. */
-    SetGroupLeader
+    SetGroupLeader,
+    /** Play one person-specific animation sequence through an Anim Blueprint slot. */
+    PlayUniqueAnimation UMETA(DisplayName="Play Unique Animation"),
+    /** Stop the unique animation currently playing in Animation Slot Name. */
+    StopUniqueAnimation UMETA(DisplayName="Stop Unique Animation"),
+    /** Turn toward and keep looking at TargetAnchorId without talking. */
+    LookAtAnchor UMETA(DisplayName="Look At Anchor")
+};
+
+/** Who a talking/interacting animation addresses. */
+UENUM(BlueprintType)
+enum class ETMOPConversationTargetMode : uint8
+{
+    /** Preserve older rows by using whichever target ID is already filled. */
+    Automatic UMETA(DisplayName="Automatic / Existing Target"),
+    SpecificPerson UMETA(DisplayName="Specific Person"),
+    Group UMETA(DisplayName="Group"),
+    Anchor UMETA(DisplayName="Anchor")
 };
 
 /** Controls whether a historical timeline entry affects the running simulation. */
@@ -136,6 +160,24 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     FName TargetAnchorId = NAME_None;
 
     /**
+     * Physical destination offset from TargetAnchorId, in centimetres.
+     * Applied to placement and the final destination of Move To Anchor; pass
+     * anchors and Look At Anchor remain at their authored positions.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Location",
+        meta=(Units="cm", DisplayName="Anchor Offset",
+            EditCondition="LocationType==ETMOPPersonLocationType::Anchor && (Action==ETMOPPersonTimelineAction::InitialPlacement || Action==ETMOPPersonTimelineAction::Spawn || Action==ETMOPPersonTimelineAction::MoveToAnchor)"))
+    FVector AnchorOffsetCm = FVector::ZeroVector;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Location",
+        meta=(DisplayName="Anchor Offset Space",
+            EditCondition="LocationType==ETMOPPersonLocationType::Anchor && (Action==ETMOPPersonTimelineAction::InitialPlacement || Action==ETMOPPersonTimelineAction::Spawn || Action==ETMOPPersonTimelineAction::MoveToAnchor)"))
+    ETMOPAnchorOffsetSpace AnchorOffsetSpace =
+        ETMOPAnchorOffsetSpace::AnchorLocal;
+
+    /**
      * Planned Future permits this ID before an anchor actor exists. A runtime-enabled
      * entry is ignored while it is missing and becomes executable when an Unreal
      * anchor with the same ID is later added to the world.
@@ -207,7 +249,7 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     /** Runtime group affected by Join/Leave/Split/Dissolve/Set Group Leader. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Group",
-        meta=(EditCondition="Action==ETMOPPersonTimelineAction::JoinGroup || Action==ETMOPPersonTimelineAction::LeaveGroup || Action==ETMOPPersonTimelineAction::SplitGroup || Action==ETMOPPersonTimelineAction::DissolveGroup || Action==ETMOPPersonTimelineAction::SetGroupLeader",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::JoinGroup || Action==ETMOPPersonTimelineAction::LeaveGroup || Action==ETMOPPersonTimelineAction::SplitGroup || Action==ETMOPPersonTimelineAction::DissolveGroup || Action==ETMOPPersonTimelineAction::SetGroupLeader || ((Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation) && ConversationTargetMode==ETMOPConversationTargetMode::Group)",
             DisplayName="Target Group ID"))
     FName TargetGroupId = NAME_None;
 
@@ -234,6 +276,61 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|State")
     ETMOPAgentLifeState LifeState = ETMOPAgentLifeState::Alive;
+
+    /**
+     * Used by Interact and by a talking Play Unique Animation. Selecting a
+     * reference in the People Editor also changes this mode automatically.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Conversation",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation",
+            DisplayName="Conversation Target"))
+    ETMOPConversationTargetMode ConversationTargetMode =
+        ETMOPConversationTargetMode::Automatic;
+
+    /**
+     * Person-specific sequence used for actions such as kneeling, CPR or a
+     * sourced gesture. The Animation Blueprint must contain a slot with the
+     * matching AnimationSlotName. Existing locomotion continues to use the
+     * ordinary TMOP movement state machine.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Animation",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::PlayUniqueAnimation",
+            DisplayName="Animation Asset",
+            AllowedClasses="/Script/Engine.AnimSequenceBase"))
+    TSoftObjectPtr<UObject> AnimationAsset;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Animation",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::PlayUniqueAnimation || Action==ETMOPPersonTimelineAction::StopUniqueAnimation",
+            DisplayName="Animation Slot Name"))
+    FName AnimationSlotName = FName(TEXT("DefaultSlot"));
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Animation",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::PlayUniqueAnimation",
+            ClampMin="0.01", DisplayName="Animation Play Rate"))
+    float AnimationPlayRate = 1.0f;
+
+    /** One plays once. Zero keeps looping until Stop Unique Animation. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Animation",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::PlayUniqueAnimation",
+            ClampMin="0", DisplayName="Animation Loop Count"))
+    int32 AnimationLoopCount = 1;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Animation",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::PlayUniqueAnimation",
+            ClampMin="0.0", Units="s", DisplayName="Animation Blend In"))
+    float AnimationBlendInSeconds = 0.15f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Animation",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::PlayUniqueAnimation || Action==ETMOPPersonTimelineAction::StopUniqueAnimation",
+            ClampMin="0.0", Units="s", DisplayName="Animation Blend Out"))
+    float AnimationBlendOutSeconds = 0.20f;
 
     /** Catch-up may place the person directly when play begins after this entry. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")
@@ -712,6 +809,11 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
     bool bSpawnInSimulation = true;
+
+    /** Explicitly includes this person in the editor's Main Characters filter. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation",
+        meta=(DisplayName="Main Character"))
+    bool bMainCharacter = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
     FTMOPMovementProfile MovementProfile;

@@ -83,6 +83,13 @@ struct TMOPENGINE_API FTMOPScheduleEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Schedule|Action")
     FName TargetAnchorId = NAME_None;
 
+    /** Final destination offset; route pass anchors are not offset. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Schedule|Action")
+    FVector TargetAnchorOffsetCm = FVector::ZeroVector;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Schedule|Action")
+    bool bTargetAnchorOffsetIsLocal = true;
+
     /** Ordered route waypoints visited before TargetAnchorId. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Schedule|Action")
     TArray<FName> PassAnchorIds;

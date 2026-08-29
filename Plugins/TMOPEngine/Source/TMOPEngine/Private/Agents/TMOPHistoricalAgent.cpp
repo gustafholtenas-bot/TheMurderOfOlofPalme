@@ -489,6 +489,37 @@ void ATMOPHistoricalAgent::BeginDialogueFocus(AActor* Target)
     }
 }
 
+void ATMOPHistoricalAgent::BeginLookAtFocus(AActor* Target)
+{
+    if (!IsValid(Target) || Target == this) return;
+
+    const bool bSeated = IsSeatedForDialogue();
+    if (!bDialogueFocusLocked && !bSeated)
+    {
+        DialogueReturnRotation = GetActorRotation();
+        bDialogueReturnRotationSaved = true;
+    }
+
+    // Reuse the persistent focus lock so Move/Wait can end this authored look,
+    // but explicitly omit the talking overlay.
+    bDialogueFocusLocked = false;
+    SetSocialFocus(Target, -1.0f, false);
+    bDialogueFocusLocked = true;
+
+    if (!bSeated && GetVelocity().Size2D() <= 20.0f)
+    {
+        const FVector Direction =
+            Target->GetActorLocation() - GetActorLocation();
+        if (!Direction.IsNearlyZero())
+        {
+            FRotator Facing = Direction.Rotation();
+            Facing.Pitch = 0.0f;
+            Facing.Roll = 0.0f;
+            SetActorRotation(Facing);
+        }
+    }
+}
+
 bool ATMOPHistoricalAgent::IsSeatedForDialogue() const
 {
     if (ActivityState == ETMOPAgentActivityState::Seated ||

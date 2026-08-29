@@ -72,6 +72,16 @@ struct TMOPENGINE_API FTMOPMovementProfile
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement")
     float SlowWalkSpeed = 90.0f;
 
+    /** Deliberately reduced pace for a group walking while conversing. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement",
+        meta=(DisplayName="Group Talking Walk Speed"))
+    float GroupTalkingWalkSpeed = 110.0f;
+
+    /** Comfortable social pace for one or two people talking while walking. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement",
+        meta=(DisplayName="Talking / Social Walk Speed"))
+    float TalkingWalkSpeed = 126.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement")
     float NormalWalkSpeed = 140.0f;
 

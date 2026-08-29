@@ -13,6 +13,7 @@ public class TMOPEngineEditor : ModuleRules
             "Engine",
             "TMOPEngine",
             "UnrealEd",
+            "NavigationSystem",
             "PropertyEditor",
             "Slate",
             "SlateCore",

@@ -32,4 +32,5 @@ private:
     TSharedPtr<IPropertyHandle> ActionHandle;
     TSharedPtr<IPropertyHandle> LocationTypeHandle;
     TSharedPtr<IPropertyHandle> ActivityStateHandle;
+    TSharedPtr<IPropertyHandle> TimeIsArrivalHandle;
 };

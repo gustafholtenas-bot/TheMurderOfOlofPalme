@@ -132,6 +132,10 @@ struct FTMOPPersonGeneralEditorData
     UPROPERTY(EditAnywhere, Category="Simulation")
     bool bSpawnInSimulation = true;
 
+    UPROPERTY(EditAnywhere, Category="Simulation",
+        meta=(DisplayName="Main Character"))
+    bool bMainCharacter = false;
+
     UPROPERTY(EditAnywhere, Category="Simulation")
     FTMOPMovementProfile MovementProfile;
 

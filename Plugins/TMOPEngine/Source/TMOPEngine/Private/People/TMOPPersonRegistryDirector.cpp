@@ -1,11 +1,15 @@
 #include "People/TMOPPersonRegistryDirector.h"
 
+#include "Animation/AnimInstance.h"
+#include "Animation/AnimSequenceBase.h"
+
 #include "Actions/TMOPActionExecutorComponent.h"
 #include "AIController.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Engine/DataTable.h"
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
@@ -35,6 +39,23 @@
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Venues/TMOPCinemaSeatSubsystem.h"
 #include "World/TMOPWorldSubsystem.h"
+
+namespace
+{
+    FVector ApplyAnchorOffset(
+        const ATMOPHistoricalAnchor* Anchor,
+        const FVector& BaseLocation,
+        const FVector& OffsetCm,
+        const ETMOPAnchorOffsetSpace OffsetSpace)
+    {
+        if (!IsValid(Anchor) || OffsetCm.IsNearlyZero())
+            return BaseLocation;
+        return BaseLocation +
+            (OffsetSpace == ETMOPAnchorOffsetSpace::AnchorLocal
+                ? Anchor->GetActorQuat().RotateVector(OffsetCm)
+                : OffsetCm);
+    }
+}
 
 ATMOPPersonRegistryDirector::ATMOPPersonRegistryDirector()
 {
@@ -345,13 +366,24 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
             if (!ResolveEntrySecond(Runtime, Entry, ResolvedSecond) ||
                 ResolvedSecond > CurrentSecond) break;
 
+            // ARRIVAL entries execute at the preceding logical timeline time,
+            // but later Relative-to-Previous entries must continue from the
+            // arrival shown in the editor rather than from that departure.
+            const auto ConsumeTimelineTime = [&Runtime, ResolvedSecond]()
+            {
+                Runtime.LastResolvedTimelineSecond =
+                    Runtime.CachedTimelineSecond != INDEX_NONE
+                    ? Runtime.CachedTimelineSecond : ResolvedSecond;
+                Runtime.CachedResolvedSecond = INDEX_NONE;
+                Runtime.CachedTimelineSecond = INDEX_NONE;
+            };
+
             // Documentation contributes to chronology/relative timing but never
             // creates or changes a physical runtime person.
             if (Entry.Usage == ETMOPPersonTimelineUsage::DocumentationOnly)
             {
-                Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+                ConsumeTimelineTime();
                 ++Runtime.NextTimelineIndex;
-                Runtime.CachedResolvedSecond = INDEX_NONE;
                 continue;
             }
 
@@ -365,9 +397,8 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                     ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
                 if (Anchors == nullptr || !IsValid(Anchors->FindAnchor(Entry.TargetAnchorId)))
                 {
-                    Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+                    ConsumeTimelineTime();
                     ++Runtime.NextTimelineIndex;
-                    Runtime.CachedResolvedSecond = INDEX_NONE;
                     continue;
                 }
             }
@@ -380,18 +411,16 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                      Entry.LocationType == ETMOPPersonLocationType::NotPresent))
                 {
                     // Preserve the historical unknown: no physical person exists yet.
-                    Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+                    ConsumeTimelineTime();
                     ++Runtime.NextTimelineIndex;
-                    Runtime.CachedResolvedSecond = INDEX_NONE;
                     continue;
                 }
                 if (Entry.Action != ETMOPPersonTimelineAction::InitialPlacement &&
                     Entry.Action != ETMOPPersonTimelineAction::Spawn)
                     break;
                 if (!SpawnPerson(Runtime, Entry)) break;
-                Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+                ConsumeTimelineTime();
                 ++Runtime.NextTimelineIndex;
-                Runtime.CachedResolvedSecond = INDEX_NONE;
                 continue;
             }
 
@@ -420,9 +449,8 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                     ResolvedSecond,
                     true,
                     false);
-                Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+                ConsumeTimelineTime();
                 ++Runtime.NextTimelineIndex;
-                Runtime.CachedResolvedSecond = INDEX_NONE;
                 continue;
             }
 
@@ -452,9 +480,8 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
                 bApplied,
                 bEntryCatchUp);
             if (!bApplied) break;
-            Runtime.LastResolvedTimelineSecond = ResolvedSecond;
+            ConsumeTimelineTime();
             ++Runtime.NextTimelineIndex;
-            Runtime.CachedResolvedSecond = INDEX_NONE;
         }
     }
 }
@@ -484,7 +511,11 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
             ? Anchors->FindAnchor(InitialEntry.TargetAnchorId) : nullptr;
         if (!IsValid(Anchor)) return false;
         SpawnTransform = Anchor->GetActorTransform();
-        SpawnTransform.SetLocation(Anchor->GetPlacementLocation(Runtime.Profile.EntityId));
+        SpawnTransform.SetLocation(ApplyAnchorOffset(
+            Anchor,
+            Anchor->GetPlacementLocation(Runtime.Profile.EntityId),
+            InitialEntry.AnchorOffsetCm,
+            InitialEntry.AnchorOffsetSpace));
     }
     else if (InitialEntry.LocationType == ETMOPPersonLocationType::VenueSeat)
     {
@@ -589,7 +620,7 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
         // A previous stationary interaction may have locked the agent's gaze
         // to a shop window or another world anchor.  Movement must release
         // that focus before path following resumes.
-        Agent->EndDialogueFocus();
+        ClearConversationFocus(Agent);
         if (bCatchUp && Entry.bTeleportDuringCatchUp)
             return ApplyPlacement(Agent, Entry, true);
         if (!Agent->SocialGroupId.IsNone() &&
@@ -609,8 +640,11 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                         Anchors->FindAnchor(PassAnchorId))
                         RouteLocations.Add(PassAnchor->GetPlacementLocation(
                             Agent->SocialGroupId));
-                RouteLocations.Add(Anchor->GetPlacementLocation(
-                    Agent->SocialGroupId));
+                RouteLocations.Add(ApplyAnchorOffset(
+                    Anchor,
+                    Anchor->GetPlacementLocation(Agent->SocialGroupId),
+                    Entry.AnchorOffsetCm,
+                    Entry.AnchorOffsetSpace));
 
                 if (!Entry.bTimeIsArrival &&
                     Entry.TravelSpeedOverrideCmPerSecond > 0.0f)
@@ -636,12 +670,10 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                         RemainingPathCm += SegmentCm;
                         Start = End;
                     }
-                    const int32 DepartureSecond =
-                        Runtime.CachedResolvedSecond != INDEX_NONE
-                        ? Runtime.CachedResolvedSecond
+                    const int32 ArrivalSecond =
+                        Runtime.CachedTimelineSecond != INDEX_NONE
+                        ? Runtime.CachedTimelineSecond
                         : Entry.Time.ToSecondsFromMidnight();
-                    const int32 ArrivalSecond = DepartureSecond +
-                        EstimateTravelSeconds(Runtime, Entry);
                     const UTMOPClockSubsystem* Clock =
                         GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
                     const int32 RemainingSeconds = Clock != nullptr
@@ -650,15 +682,9 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                     const float Multiplier =
                         Runtime.Profile.MovementProfile.PersonalSpeedMultiplier *
                         Agent->AppearanceMovementSpeedMultiplier;
-                    const float MinimumSpeed =
-                        Runtime.Profile.MovementProfile.SlowWalkSpeed * Multiplier;
+                    const float MinimumSpeed = 1.0f;
                     const float MaximumSpeed =
-                        (Entry.ActivityState == ETMOPAgentActivityState::Running ||
-                         Entry.ActivityState == ETMOPAgentActivityState::Fleeing)
-                        ? Runtime.Profile.MovementProfile.RunSpeed * Multiplier
-                        : Entry.ActivityState == ETMOPAgentActivityState::Sprinting
-                        ? Runtime.Profile.MovementProfile.SprintSpeed * Multiplier
-                        : Runtime.Profile.MovementProfile.FastWalkSpeed * Multiplier;
+                        Runtime.Profile.MovementProfile.SprintSpeed * Multiplier;
                     const float TimedMinimumSpeed =
                         Entry.TravelSpeedOverrideCmPerSecond > 0.0f
                         ? Entry.TravelSpeedOverrideCmPerSecond
@@ -700,6 +726,10 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                     : Entry.Time.ToSecondsFromMidnight());
             Action.ActionType = ETMOPScheduleActionType::MoveToAnchor;
             Action.TargetAnchorId = Entry.TargetAnchorId;
+            Action.TargetAnchorOffsetCm = Entry.AnchorOffsetCm;
+            Action.bTargetAnchorOffsetIsLocal =
+                Entry.AnchorOffsetSpace ==
+                    ETMOPAnchorOffsetSpace::AnchorLocal;
             Action.PassAnchorIds = Entry.PassAnchorIds;
             Action.ActivityState = Entry.ActivityState == ETMOPAgentActivityState::Idle
                 ? ETMOPAgentActivityState::Walking : Entry.ActivityState;
@@ -712,54 +742,42 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                 const float PersonalMultiplier =
                     Runtime.Profile.MovementProfile.PersonalSpeedMultiplier *
                     Agent->AppearanceMovementSpeedMultiplier;
-                float MinimumSpeed =
-                    Runtime.Profile.MovementProfile.SlowWalkSpeed;
+                // The REQ badge is an exact deadline calculation, not merely
+                // a warning. Let the move choose any gait up to this person's
+                // sprint speed; animation derives walk/jog/run from the exact
+                // MaxWalkSpeed selected by the timed-move executor.
+                float MinimumSpeed = 1.0f;
                 float MaximumSpeed =
-                    Runtime.Profile.MovementProfile.FastWalkSpeed;
-                switch (Action.ActivityState)
-                {
-                case ETMOPAgentActivityState::FastWalking:
-                    MinimumSpeed = Runtime.Profile.MovementProfile.NormalWalkSpeed;
-                    MaximumSpeed = Runtime.Profile.MovementProfile.FastWalkSpeed;
-                    break;
-                case ETMOPAgentActivityState::Jogging:
-                    MinimumSpeed = Runtime.Profile.MovementProfile.FastWalkSpeed;
-                    MaximumSpeed = Runtime.Profile.MovementProfile.JogSpeed;
-                    break;
-                case ETMOPAgentActivityState::Running:
-                case ETMOPAgentActivityState::Fleeing:
-                    MinimumSpeed = Runtime.Profile.MovementProfile.JogSpeed;
-                    MaximumSpeed = Runtime.Profile.MovementProfile.RunSpeed;
-                    break;
-                case ETMOPAgentActivityState::Sprinting:
-                    MinimumSpeed = Runtime.Profile.MovementProfile.RunSpeed;
-                    MaximumSpeed = Runtime.Profile.MovementProfile.SprintSpeed;
-                    break;
-                default:
-                    break;
-                }
-                MinimumSpeed *= PersonalMultiplier;
-                MaximumSpeed *= PersonalMultiplier;
+                    Runtime.Profile.MovementProfile.SprintSpeed *
+                    PersonalMultiplier;
                 if (Entry.TravelSpeedOverrideCmPerSecond > 0.0f)
                 {
                     MinimumSpeed = Entry.TravelSpeedOverrideCmPerSecond;
                     MaximumSpeed = Entry.TravelSpeedOverrideCmPerSecond;
                 }
-                const int32 DepartureSecond =
-                    Runtime.CachedResolvedSecond != INDEX_NONE
-                    ? Runtime.CachedResolvedSecond
+                const int32 ExpectedArrivalSecond =
+                    Runtime.CachedTimelineSecond != INDEX_NONE
+                    ? Runtime.CachedTimelineSecond
                     : Entry.Time.ToSecondsFromMidnight();
-                const int32 ExpectedArrivalSecond = DepartureSecond +
-                    EstimateTravelSeconds(Runtime, Entry);
                 Agent->ActionExecutor->ConfigureNextTimedMove(
                     ExpectedArrivalSecond,
                     MinimumSpeed,
                     MaximumSpeed);
             }
-            return Agent->ActionExecutor->ExecuteScheduleEntry(Action);
+            const bool bStarted =
+                Agent->ActionExecutor->ExecuteScheduleEntry(Action);
+            if (bStarted && !Entry.bTimeIsArrival &&
+                Entry.TravelSpeedOverrideCmPerSecond > 0.0f)
+                if (UCharacterMovementComponent* Movement =
+                    Agent->GetCharacterMovement())
+                    Movement->MaxWalkSpeed =
+                        Entry.TravelSpeedOverrideCmPerSecond;
+            return bStarted;
         }
     case ETMOPPersonTimelineAction::Wait:
     case ETMOPPersonTimelineAction::ChangeActivity:
+        if (Entry.ActivityState != ETMOPAgentActivityState::Interacting)
+            ClearConversationFocus(Agent);
         Agent->SetActivityState(Entry.ActivityState);
         return true;
     case ETMOPPersonTimelineAction::ChangeLifeState:
@@ -836,23 +854,156 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                 Entry.NewGroupLeaderEntityId);
     }
     case ETMOPPersonTimelineAction::Interact:
-        if (!Entry.TargetAnchorId.IsNone() && GetGameInstance() != nullptr)
+        ClearConversationFocus(Agent);
+        ApplyConversationFocus(Agent, Entry);
+        Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
+        return true;
+    case ETMOPPersonTimelineAction::LookAtAnchor:
+        if (GetGameInstance() != nullptr)
         {
             UTMOPAnchorSubsystem* Anchors =
                 GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
-            ATMOPHistoricalAnchor* FocusAnchor = Anchors != nullptr
+            ATMOPHistoricalAnchor* LookTarget = Anchors != nullptr
                 ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
-            if (IsValid(FocusAnchor))
-                Agent->BeginDialogueFocus(FocusAnchor);
+            if (!IsValid(LookTarget)) return false;
+            ClearConversationFocus(Agent);
+            Agent->BeginLookAtFocus(LookTarget);
+            return true;
         }
-        Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
-        return true;
+        return false;
     case ETMOPPersonTimelineAction::Custom:
         Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
         return true;
+    case ETMOPPersonTimelineAction::PlayUniqueAnimation:
+    {
+        // Do not replay a one-off historical gesture merely because the world
+        // was restored after its timestamp. Looping state can be represented
+        // by another current timeline entry if a bake requires it later.
+        if (bCatchUp) return true;
+        UAnimSequenceBase* Animation = Cast<UAnimSequenceBase>(
+            Entry.AnimationAsset.LoadSynchronous());
+        UAnimInstance* AnimInstance = IsValid(Agent->GetMesh())
+            ? Agent->GetMesh()->GetAnimInstance() : nullptr;
+        if (!IsValid(Animation) || !IsValid(AnimInstance)) return false;
+
+        ClearConversationFocus(Agent);
+        Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
+        const int32 LoopCount = Entry.AnimationLoopCount == 0
+            ? MAX_int32 : Entry.AnimationLoopCount;
+        const bool bPlaying =
+            AnimInstance->PlaySlotAnimationAsDynamicMontage(
+            Animation,
+            Entry.AnimationSlotName.IsNone()
+                ? FName(TEXT("DefaultSlot")) : Entry.AnimationSlotName,
+            FMath::Max(0.0f, Entry.AnimationBlendInSeconds),
+            FMath::Max(0.0f, Entry.AnimationBlendOutSeconds),
+            FMath::Max(0.01f, Entry.AnimationPlayRate),
+            LoopCount) != nullptr;
+        if (bPlaying) ApplyConversationFocus(Agent, Entry);
+        return bPlaying;
+    }
+    case ETMOPPersonTimelineAction::StopUniqueAnimation:
+        if (UAnimInstance* AnimInstance = IsValid(Agent->GetMesh())
+            ? Agent->GetMesh()->GetAnimInstance() : nullptr)
+        {
+            AnimInstance->StopSlotAnimation(
+                FMath::Max(0.0f, Entry.AnimationBlendOutSeconds),
+                Entry.AnimationSlotName.IsNone()
+                    ? FName(TEXT("DefaultSlot")) : Entry.AnimationSlotName);
+            ClearConversationFocus(Agent);
+            return true;
+        }
+        return false;
     default:
         return false;
     }
+}
+
+void ATMOPPersonRegistryDirector::ClearConversationFocus(
+    ATMOPHistoricalAgent* Speaker)
+{
+    if (!IsValid(Speaker)) return;
+    Speaker->EndDialogueFocus();
+
+    // Group listeners receive a non-dialogue social focus. Release only the
+    // agents who are looking at this speaker, without disturbing separately
+    // authored conversations elsewhere in the scene.
+    if (GetWorld() == nullptr) return;
+    for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
+    {
+        ATMOPHistoricalAgent* Listener = *It;
+        if (Listener != Speaker &&
+            Listener->GetSocialFocusTarget() == Speaker)
+            Listener->ClearSocialFocus();
+    }
+}
+
+void ATMOPPersonRegistryDirector::ApplyConversationFocus(
+    ATMOPHistoricalAgent* Speaker,
+    const FTMOPPersonTimelineEntry& Entry)
+{
+    if (!IsValid(Speaker) || GetGameInstance() == nullptr) return;
+
+    ETMOPConversationTargetMode Mode = Entry.ConversationTargetMode;
+    if (Mode == ETMOPConversationTargetMode::Automatic)
+    {
+        if (!Entry.TargetEntityId.IsNone())
+            Mode = ETMOPConversationTargetMode::SpecificPerson;
+        else if (!Entry.TargetGroupId.IsNone())
+            Mode = ETMOPConversationTargetMode::Group;
+        else
+            Mode = ETMOPConversationTargetMode::Anchor;
+    }
+
+    AActor* FocusTarget = nullptr;
+    switch (Mode)
+    {
+    case ETMOPConversationTargetMode::SpecificPerson:
+        FocusTarget = FindSpawnedPerson(Entry.TargetEntityId);
+        break;
+
+    case ETMOPConversationTargetMode::Group:
+    {
+        const FName GroupId = !Entry.TargetGroupId.IsNone()
+            ? Entry.TargetGroupId : Speaker->SocialGroupId;
+        float ClosestDistanceSquared = TNumericLimits<float>::Max();
+        if (!GroupId.IsNone() && GetWorld() != nullptr)
+            for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
+            {
+                ATMOPHistoricalAgent* Listener = *It;
+                if (Listener == Speaker ||
+                    Listener->SocialGroupId != GroupId)
+                    continue;
+
+                // The speaker talks; the group members listen and look back.
+                Listener->SetSocialFocus(Speaker, -1.0f, false);
+                const float DistanceSquared = FVector::DistSquared2D(
+                    Speaker->GetActorLocation(),
+                    Listener->GetActorLocation());
+                if (DistanceSquared < ClosestDistanceSquared)
+                {
+                    ClosestDistanceSquared = DistanceSquared;
+                    FocusTarget = Listener;
+                }
+            }
+        break;
+    }
+
+    case ETMOPConversationTargetMode::Anchor:
+    {
+        UTMOPAnchorSubsystem* Anchors =
+            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+        FocusTarget = Anchors != nullptr
+            ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
+        break;
+    }
+
+    case ETMOPConversationTargetMode::Automatic:
+    default:
+        break;
+    }
+
+    if (IsValid(FocusTarget)) Speaker->BeginDialogueFocus(FocusTarget);
 }
 
 bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
@@ -928,7 +1079,11 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
         Agent->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
         const FName StableKey = Agent->EntityIdentity != nullptr
             ? Agent->EntityIdentity->EntityId : NAME_None;
-        Agent->SetActorLocationAndRotation(Anchor->GetPlacementLocation(StableKey), Anchor->GetActorRotation(),
+        Agent->SetActorLocationAndRotation(ApplyAnchorOffset(
+            Anchor,
+            Anchor->GetPlacementLocation(StableKey),
+            Entry.AnchorOffsetCm,
+            Entry.AnchorOffsetSpace), Anchor->GetActorRotation(),
             false, nullptr, ETeleportType::TeleportPhysics);
         Agent->SnapCapsuleToGround();
         Agent->SetActivityState(Entry.ActivityState);
@@ -1009,8 +1164,17 @@ bool ATMOPPersonRegistryDirector::ResolveEntrySecond(FPersonRuntime& Runtime,
             Runtime.LastResolvedTimelineSecond + Entry.EventOffsetSeconds;
     }
 
-    if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor && Entry.bTimeIsArrival)
-        BaseSecond -= EstimateTravelSeconds(Runtime, Entry);
+    Runtime.CachedTimelineSecond = FMath::Max(0, BaseSecond);
+    if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
+        Entry.bTimeIsArrival)
+    {
+        // Match the People Editor: the displayed row time is the arrival and
+        // its available interval begins at the preceding timeline row. When
+        // no preceding row exists, retain the legacy travel-time fallback.
+        BaseSecond = Runtime.LastResolvedTimelineSecond != INDEX_NONE
+            ? Runtime.LastResolvedTimelineSecond
+            : BaseSecond - EstimateTravelSeconds(Runtime, Entry);
+    }
     Runtime.CachedResolvedSecond = FMath::Max(0, BaseSecond);
     OutSecond = Runtime.CachedResolvedSecond;
     return true;
@@ -1041,11 +1205,20 @@ int32 ATMOPPersonRegistryDirector::EstimateTravelSeconds(const FPersonRuntime& R
             Start = Previous.WorldTransform.GetLocation();
             break;
         }
-        if (Previous.LocationType == ETMOPPersonLocationType::Anchor)
+        const bool bChangesPhysicalAnchorLocation =
+            Previous.Action == ETMOPPersonTimelineAction::InitialPlacement ||
+            Previous.Action == ETMOPPersonTimelineAction::Spawn ||
+            Previous.Action == ETMOPPersonTimelineAction::MoveToAnchor;
+        if (bChangesPhysicalAnchorLocation &&
+            Previous.LocationType == ETMOPPersonLocationType::Anchor)
             if (ATMOPHistoricalAnchor* PreviousAnchor =
                 Anchors->FindAnchor(Previous.TargetAnchorId))
             {
-                Start = PreviousAnchor->GetPlacementLocation(StableKey);
+                Start = ApplyAnchorOffset(
+                    PreviousAnchor,
+                    PreviousAnchor->GetPlacementLocation(StableKey),
+                    Previous.AnchorOffsetCm,
+                    Previous.AnchorOffsetSpace);
                 break;
             }
     }
@@ -1053,11 +1226,19 @@ int32 ATMOPPersonRegistryDirector::EstimateTravelSeconds(const FPersonRuntime& R
     TArray<FName> RouteAnchorIds = Entry.PassAnchorIds;
     RouteAnchorIds.Add(Entry.TargetAnchorId);
     double TotalPathLength = 0.0;
-    for (const FName AnchorId : RouteAnchorIds)
+    for (int32 RouteIndex = 0;
+        RouteIndex < RouteAnchorIds.Num(); ++RouteIndex)
     {
+        const FName AnchorId = RouteAnchorIds[RouteIndex];
         ATMOPHistoricalAnchor* Target = Anchors->FindAnchor(AnchorId);
         if (!IsValid(Target)) return 0;
-        const FVector TargetLocation = Target->GetPlacementLocation(StableKey);
+        FVector TargetLocation = Target->GetPlacementLocation(StableKey);
+        if (RouteIndex == RouteAnchorIds.Num() - 1)
+            TargetLocation = ApplyAnchorOffset(
+                Target,
+                TargetLocation,
+                Entry.AnchorOffsetCm,
+                Entry.AnchorOffsetSpace);
         double SegmentLength = FVector::Dist2D(Start, TargetLocation);
         UNavigationSystemV1::GetPathLength(GetWorld(), Start, TargetLocation,
             SegmentLength, nullptr, nullptr);
@@ -1372,6 +1553,10 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor)
                 OutErrors.Add(Prefix + FString::Printf(
                     TEXT(" Timeline[%d] marks arrival time but is not MoveToAnchor."), Index));
+            if (Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor &&
+                Entry.TargetAnchorId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] Look At Anchor requires Target Anchor ID."), Index));
             if ((Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
                  Entry.Action == ETMOPPersonTimelineAction::ExitVehicle ||
                  Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&
@@ -1398,6 +1583,32 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 Entry.NewGroupLeaderEntityId.IsNone())
                 OutErrors.Add(Prefix + FString::Printf(
                     TEXT(" Timeline[%d] requires a new Group Leader Entity ID."), Index));
+            if (Entry.Action == ETMOPPersonTimelineAction::PlayUniqueAnimation &&
+                Entry.AnimationAsset.IsNull())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] Play Unique Animation requires an Animation Asset."), Index));
+            const bool bConversationAction =
+                Entry.Action == ETMOPPersonTimelineAction::Interact ||
+                Entry.Action ==
+                    ETMOPPersonTimelineAction::PlayUniqueAnimation;
+            if (bConversationAction &&
+                Entry.ConversationTargetMode ==
+                    ETMOPConversationTargetMode::SpecificPerson &&
+                Entry.TargetEntityId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] Specific Person conversation requires Target Entity ID."), Index));
+            if (bConversationAction &&
+                Entry.ConversationTargetMode ==
+                    ETMOPConversationTargetMode::Group &&
+                Entry.TargetGroupId.IsNone() && Row->SocialGroupId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] Group conversation requires Target Group ID or the person's own Social Group ID."), Index));
+            if (bConversationAction &&
+                Entry.ConversationTargetMode ==
+                    ETMOPConversationTargetMode::Anchor &&
+                Entry.TargetAnchorId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] Anchor conversation requires Target Anchor ID."), Index));
             const int32 Second = Entry.Time.ToSecondsFromMidnight();
             if (Entry.TimingMode == ETMOPEventTimingMode::Absolute &&
                 PreviousSecond > Second)

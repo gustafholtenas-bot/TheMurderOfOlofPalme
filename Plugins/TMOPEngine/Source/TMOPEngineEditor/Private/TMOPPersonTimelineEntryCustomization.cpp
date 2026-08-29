@@ -63,6 +63,8 @@ void FTMOPPersonTimelineEntryCustomization::CustomizeChildren(
         GET_MEMBER_NAME_CHECKED(FTMOPPersonTimelineEntry, LocationType));
     ActivityStateHandle = StructPropertyHandle->GetChildHandle(
         GET_MEMBER_NAME_CHECKED(FTMOPPersonTimelineEntry, ActivityState));
+    TimeIsArrivalHandle = StructPropertyHandle->GetChildHandle(
+        GET_MEMBER_NAME_CHECKED(FTMOPPersonTimelineEntry, bTimeIsArrival));
 
     if (ActionHandle.IsValid())
         ActionHandle->SetOnPropertyValueChanged(
@@ -82,10 +84,24 @@ void FTMOPPersonTimelineEntryCustomization::HandleActionChanged()
 {
     if (!ActionHandle.IsValid()) return;
     uint8 ActionValue = 0;
-    if (ActionHandle->GetValue(ActionValue) != FPropertyAccess::Success ||
-        static_cast<ETMOPPersonTimelineAction>(ActionValue) !=
-            ETMOPPersonTimelineAction::MoveToAnchor)
+    if (ActionHandle->GetValue(ActionValue) != FPropertyAccess::Success)
         return;
+
+    const ETMOPPersonTimelineAction Action =
+        static_cast<ETMOPPersonTimelineAction>(ActionValue);
+    if (Action != ETMOPPersonTimelineAction::MoveToAnchor)
+    {
+        // Arrival timing only describes the end of a physical route. Clear a
+        // copied value immediately when the row becomes Wait, Interact,
+        // animation, vehicle handling, or any other non-movement action.
+        if (TimeIsArrivalHandle.IsValid())
+            TimeIsArrivalHandle->SetValue(false);
+        if (Action == ETMOPPersonTimelineAction::LookAtAnchor &&
+            LocationTypeHandle.IsValid())
+            LocationTypeHandle->SetValue(static_cast<uint8>(
+                ETMOPPersonLocationType::Unknown));
+        return;
+    }
 
     if (LocationTypeHandle.IsValid())
         LocationTypeHandle->SetValue(static_cast<uint8>(

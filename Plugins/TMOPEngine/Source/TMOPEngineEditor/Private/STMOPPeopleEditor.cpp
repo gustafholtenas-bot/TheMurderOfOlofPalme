@@ -7,10 +7,13 @@
 #include "EngineUtils.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "IStructureDetailsView.h"
+#include "Misc/MessageDialog.h"
+#include "NavigationSystem.h"
 #include "People/TMOPAppearanceResolver.h"
 #include "PropertyEditorModule.h"
 #include "Styling/AppStyle.h"
 #include "UObject/StructOnScope.h"
+#include "UObject/UObjectGlobals.h"
 #include "Vehicles/TMOPHistoricalVehicleTypes.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
@@ -211,6 +214,60 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                         ]
                     ]
                     + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 6.0f)
+                    [
+                        SNew(SHorizontalBox)
+                        + SHorizontalBox::Slot()
+                        .AutoWidth()
+                        .Padding(0.0f, 0.0f, 8.0f, 0.0f)
+                        [
+                            SNew(SCheckBox)
+                            .IsChecked(this,
+                                &STMOPPeopleEditor::GetPeopleFilterCheckState,
+                                EPeopleCategoryFilter::Spawned)
+                            .OnCheckStateChanged(this,
+                                &STMOPPeopleEditor::HandlePeopleFilterChanged,
+                                EPeopleCategoryFilter::Spawned)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("FilterSpawned", "Spawned"))
+                            ]
+                        ]
+                        + SHorizontalBox::Slot()
+                        .AutoWidth()
+                        [
+                            SNew(SCheckBox)
+                            .IsChecked(this,
+                                &STMOPPeopleEditor::GetPeopleFilterCheckState,
+                                EPeopleCategoryFilter::NonSpawned)
+                            .OnCheckStateChanged(this,
+                                &STMOPPeopleEditor::HandlePeopleFilterChanged,
+                                EPeopleCategoryFilter::NonSpawned)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("FilterNonSpawned", "Non-spawned"))
+                            ]
+                        ]
+                    ]
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 6.0f)
+                    [
+                        SNew(SCheckBox)
+                        .IsChecked(this,
+                            &STMOPPeopleEditor::GetPeopleFilterCheckState,
+                            EPeopleCategoryFilter::MainCharacters)
+                        .OnCheckStateChanged(this,
+                            &STMOPPeopleEditor::HandlePeopleFilterChanged,
+                            EPeopleCategoryFilter::MainCharacters)
+                        [
+                            SNew(STextBlock)
+                            .Text(LOCTEXT(
+                                "FilterMainCharacters", "Main Characters"))
+                        ]
+                    ]
+                    + SVerticalBox::Slot()
                     .FillHeight(1.0f)
                     [
                         SAssignNew(PersonListView, SListView<FPersonItem>)
@@ -353,7 +410,28 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                                     SNew(STextBlock)
                                     .Text(this,
                                         &STMOPPeopleEditor::GetReferenceFieldText,
-                                        EReferenceField::TargetEntity)
+                                    EReferenceField::TargetEntity)
+                                ]
+                            ]
+                            + SVerticalBox::Slot().AutoHeight().Padding(0, 5, 0, 2)
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("GroupReference", "Target Group"))
+                            ]
+                            + SVerticalBox::Slot().AutoHeight()
+                            [
+                                SAssignNew(GroupReferenceCombo, SSearchableComboBox)
+                                .OptionsSource(&GroupReferenceItems)
+                                .OnGenerateWidget(this,
+                                    &STMOPPeopleEditor::GenerateReferenceOption)
+                                .OnSelectionChanged(this,
+                                    &STMOPPeopleEditor::HandleReferenceSelected,
+                                    EReferenceField::TargetGroup)
+                                [
+                                    SNew(STextBlock)
+                                    .Text(this,
+                                        &STMOPPeopleEditor::GetReferenceFieldText,
+                                        EReferenceField::TargetGroup)
                                 ]
                             ]
                             + SVerticalBox::Slot().AutoHeight().Padding(0, 5, 0, 2)
@@ -590,6 +668,16 @@ void STMOPPeopleEditor::RefreshPeople()
         if (PeopleCategoryFilter == EPeopleCategoryFilter::Suspect &&
             !bSuspectCategory)
             continue;
+        if (PeopleCategoryFilter == EPeopleCategoryFilter::Spawned &&
+            !Row->bSpawnInSimulation)
+            continue;
+        if (PeopleCategoryFilter == EPeopleCategoryFilter::NonSpawned &&
+            Row->bSpawnInSimulation)
+            continue;
+        if (PeopleCategoryFilter ==
+                EPeopleCategoryFilter::MainCharacters &&
+            !IsMainCharacter(*Row))
+            continue;
 
         PersonItems.Add(MakeShared<FName>(RowName));
     }
@@ -622,6 +710,8 @@ void STMOPPeopleEditor::SelectPerson(const FName RowName)
 
     SelectedRowName = RowName;
     WorkingRow = *Row;
+    LastSavedRow = *Row;
+    bHasLastSavedRow = true;
     RefreshPersonDetailViews();
     SelectedTimelineIndex = INDEX_NONE;
     EntryStructData.Reset();
@@ -639,6 +729,10 @@ void STMOPPeopleEditor::SelectTimelineEntry(const int32 Index)
     EntryStructData =
         MakeShared<FStructOnScope>(
             FTMOPPersonTimelineEntry::StaticStruct());
+    EntryStructData->SetPackage(
+        PeopleTable.IsValid()
+            ? PeopleTable->GetOutermost()
+            : GetTransientPackage());
     *reinterpret_cast<FTMOPPersonTimelineEntry*>(
         EntryStructData->GetStructMemory()) =
             WorkingRow.Timeline[Index];
@@ -660,6 +754,10 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
 {
     CharacteristicsStructData = MakeShared<FStructOnScope>(
         FTMOPPersonCharacteristicsEditorData::StaticStruct());
+    CharacteristicsStructData->SetPackage(
+        PeopleTable.IsValid()
+            ? PeopleTable->GetOutermost()
+            : GetTransientPackage());
     FTMOPPersonCharacteristicsEditorData* Characteristics =
         reinterpret_cast<FTMOPPersonCharacteristicsEditorData*>(
             CharacteristicsStructData->GetStructMemory());
@@ -691,6 +789,10 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
 
     GeneralStructData = MakeShared<FStructOnScope>(
         FTMOPPersonGeneralEditorData::StaticStruct());
+    GeneralStructData->SetPackage(
+        PeopleTable.IsValid()
+            ? PeopleTable->GetOutermost()
+            : GetTransientPackage());
     FTMOPPersonGeneralEditorData* General =
         reinterpret_cast<FTMOPPersonGeneralEditorData*>(
             GeneralStructData->GetStructMemory());
@@ -708,6 +810,7 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
     General->Uppslag = WorkingRow.Uppslag;
     General->AgentClass = WorkingRow.AgentClass;
     General->bSpawnInSimulation = WorkingRow.bSpawnInSimulation;
+    General->bMainCharacter = WorkingRow.bMainCharacter;
     General->MovementProfile = WorkingRow.MovementProfile;
     General->AssociatedVehicleIds = WorkingRow.AssociatedVehicleIds;
     General->SocialGroupId = WorkingRow.SocialGroupId;
@@ -778,6 +881,7 @@ void STMOPPeopleEditor::CommitPersonDetailEdits()
         WorkingRow.Uppslag = General->Uppslag;
         WorkingRow.AgentClass = General->AgentClass;
         WorkingRow.bSpawnInSimulation = General->bSpawnInSimulation;
+        WorkingRow.bMainCharacter = General->bMainCharacter;
         WorkingRow.MovementProfile = General->MovementProfile;
         WorkingRow.AssociatedVehicleIds =
             General->AssociatedVehicleIds;
@@ -793,6 +897,34 @@ void STMOPPeopleEditor::CommitPersonDetailEdits()
         WorkingRow.AutomaticSpeech = General->AutomaticSpeech;
         WorkingRow.Notes = General->Notes;
     }
+}
+
+bool STMOPPeopleEditor::HasUnsavedPersonChanges()
+{
+    if (!bHasLastSavedRow || SelectedRowName.IsNone()) return false;
+
+    CommitEntryEdits();
+    CommitPersonDetailEdits();
+    return !FTMOPPersonProfileRow::StaticStruct()->CompareScriptStruct(
+        &WorkingRow, &LastSavedRow, 0);
+}
+
+void STMOPPeopleEditor::RestorePersonListSelection()
+{
+    if (!PersonListView.IsValid()) return;
+
+    TGuardValue<bool> GuardSelectionCallback(
+        bRestoringPersonSelection, true);
+    for (const FPersonItem& PersonItem : PersonItems)
+    {
+        if (PersonItem.IsValid() && *PersonItem == SelectedRowName)
+        {
+            PersonListView->SetSelection(PersonItem);
+            PersonListView->RequestScrollIntoView(PersonItem);
+            return;
+        }
+    }
+    PersonListView->ClearSelection();
 }
 
 const FSlateBrush* STMOPPeopleEditor::GetReferenceImageBrush() const
@@ -871,6 +1003,11 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GenerateTimelineRow(
     const FTMOPPersonTimelineEntry* Entry =
         WorkingRow.Timeline.IsValidIndex(Index)
         ? &WorkingRow.Timeline[Index] : nullptr;
+    FText SpeedText;
+    FText SpeedToolTip;
+    FLinearColor SpeedColor = FLinearColor(0.45f, 0.45f, 0.45f);
+    const bool bShowSpeedBadge = BuildTimelineSpeedBadge(
+        Index, SpeedText, SpeedToolTip, SpeedColor);
 
     return SNew(STableRow<FTimelineItem>, OwnerTable)
     [
@@ -904,6 +1041,25 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GenerateTimelineRow(
                         ? GetTimelineTimingText(*Entry)
                         : FText::GetEmpty())
                 ]
+                + SHorizontalBox::Slot()
+                .AutoWidth()
+                .Padding(8.0f, 0.0f, 0.0f, 0.0f)
+                [
+                    SNew(SBorder)
+                    .Visibility(bShowSpeedBadge
+                        ? EVisibility::Visible
+                        : EVisibility::Collapsed)
+                    .Padding(FMargin(5.0f, 1.0f))
+                    .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                    .BorderBackgroundColor(SpeedColor)
+                    .ToolTipText(SpeedToolTip)
+                    [
+                        SNew(STextBlock)
+                        .Text(SpeedText)
+                        .Font(FAppStyle::GetFontStyle("SmallFont"))
+                        .ColorAndOpacity(FLinearColor::White)
+                    ]
+                ]
             ]
             + SVerticalBox::Slot().AutoHeight().Padding(28.0f, 3.0f, 0.0f, 0.0f)
             [
@@ -918,7 +1074,35 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GenerateTimelineRow(
 void STMOPPeopleEditor::HandlePersonSelectionChanged(
     const FPersonItem Item, ESelectInfo::Type SelectInfo)
 {
-    if (Item.IsValid()) SelectPerson(*Item);
+    if (bRestoringPersonSelection || !Item.IsValid() ||
+        *Item == SelectedRowName)
+        return;
+
+    const FName RequestedRowName = *Item;
+    if (HasUnsavedPersonChanges())
+    {
+        const EAppReturnType::Type Choice = FMessageDialog::Open(
+            EAppMsgType::YesNoCancel,
+            FText::Format(
+                LOCTEXT("SaveBeforeChangingPerson",
+                    "You have unsaved changes to {0}.\n\nDo you want to save this person?"),
+                GetSelectedPersonTitle()),
+            LOCTEXT("SavePersonPromptTitle", "Unsaved Person Changes"));
+
+        if (Choice == EAppReturnType::Cancel)
+        {
+            RestorePersonListSelection();
+            return;
+        }
+        if (Choice == EAppReturnType::Yes && !SaveCurrentPerson())
+        {
+            RestorePersonListSelection();
+            return;
+        }
+    }
+
+    SelectPerson(RequestedRowName);
+    RestorePersonListSelection();
 }
 
 void STMOPPeopleEditor::HandleTimelineSelectionChanged(
@@ -952,10 +1136,67 @@ void STMOPPeopleEditor::HandlePeopleFilterChanged(
     RefreshPeople();
 }
 
+bool STMOPPeopleEditor::IsMainCharacter(
+    const FTMOPPersonProfileRow& Row) const
+{
+    if (Row.bMainCharacter) return true;
+
+    // These roles remain central even while an alternative scenario
+    // deliberately keeps the observed killer unspawned.
+    static const TSet<FName> CentralEntityIds = {
+        TEXT("OLOF_PALME"),
+        TEXT("LISBET_PALME"),
+        TEXT("THE_KILLER"),
+        TEXT("ANDERS_BJORKMAN")
+    };
+    if (CentralEntityIds.Contains(Row.EntityId)) return true;
+    if (!Row.bSpawnInSimulation) return false;
+
+    // Source-backed people at or immediately around the murder scene.
+    static const TSet<FName> SceneCategories = {
+        TEXT("MAIN_WITNESSES"),
+        TEXT("MURDER_SCENE"),
+        TEXT("ANNE_HAGE_COMPANY"),
+        TEXT("HANS_JOHANSSON_COMPANY"),
+        TEXT("INGE_MORELIUS_COMPANY")
+    };
+    if (SceneCategories.Contains(Row.CategoryId)) return true;
+
+    const FString Category = Row.CategoryId.ToString();
+    const bool bFirstResponder =
+        Category.Equals(TEXT("POLICE"), ESearchCase::IgnoreCase) ||
+        Category.Equals(TEXT("POLIS"), ESearchCase::IgnoreCase) ||
+        Category.Equals(TEXT("AMBULANCE"), ESearchCase::IgnoreCase);
+    if (!bFirstResponder) return false;
+
+    // Police and ambulance personnel are included only when their own
+    // timeline actually references arrival or work at the crime scene.
+    for (const FTMOPPersonTimelineEntry& Entry : Row.Timeline)
+    {
+        FString SceneReference = Entry.EntryId.ToString() + TEXT(" ") +
+            Entry.SharedEventId.ToString() + TEXT(" ") +
+            Entry.TargetAnchorId.ToString();
+        for (const FName PassAnchorId : Entry.PassAnchorIds)
+            SceneReference += TEXT(" ") + PassAnchorId.ToString();
+
+        if (SceneReference.Contains(
+                TEXT("CRIME_SCENE"), ESearchCase::IgnoreCase) ||
+            SceneReference.Contains(
+                TEXT("CRIMESCENE"), ESearchCase::IgnoreCase) ||
+            SceneReference.Contains(
+                TEXT("MORDPLATS"), ESearchCase::IgnoreCase) ||
+            SceneReference.Contains(
+                TEXT("DEKORIMA"), ESearchCase::IgnoreCase))
+            return true;
+    }
+    return false;
+}
+
 void STMOPPeopleEditor::RefreshReferenceOptions()
 {
     AnchorReferenceItems.Reset();
     EntityReferenceItems.Reset();
+    GroupReferenceItems.Reset();
     SeatReferenceItems.Reset();
     EventReferenceItems.Reset();
     ReferenceIdsByLabel.Reset();
@@ -973,6 +1214,14 @@ void STMOPPeopleEditor::RefreshReferenceOptions()
         }
         ReferenceIdsByLabel.Add(Label, Id);
         Items.Add(MakeShared<FString>(MoveTemp(Label)));
+    };
+    TSet<FName> KnownGroupIds;
+    auto AddGroupOption = [this, &AddOption, &KnownGroupIds](
+        const FName GroupId, const FString& Details)
+    {
+        if (GroupId.IsNone() || KnownGroupIds.Contains(GroupId)) return;
+        KnownGroupIds.Add(GroupId);
+        AddOption(GroupReferenceItems, GroupId, Details);
     };
 
     UWorld* EditorWorld = GEditor != nullptr
@@ -1033,6 +1282,22 @@ void STMOPPeopleEditor::RefreshReferenceOptions()
             {
                 AddOption(EntityReferenceItems, Row->EntityId,
                     Row->FullName.ToString() + TEXT("  •  Person"));
+                AddGroupOption(Row->SocialGroupId, TEXT("Social group"));
+                for (const FTMOPPersonTimelineEntry& TimelineEntry :
+                    Row->Timeline)
+                {
+                    AddGroupOption(
+                        TimelineEntry.TargetGroupId,
+                        TEXT("Timeline group"));
+                    AddGroupOption(
+                        TimelineEntry.GroupDefinition.GroupId,
+                        TEXT("Created group"));
+                    for (const FTMOPGroupDefinition& SplitGroup :
+                        TimelineEntry.SplitGroupDefinitions)
+                        AddGroupOption(
+                            SplitGroup.GroupId,
+                            TEXT("Split group"));
+                }
             }
         }
     }
@@ -1086,6 +1351,7 @@ void STMOPPeopleEditor::RefreshReferenceOptions()
     };
     SortItems(AnchorReferenceItems);
     SortItems(EntityReferenceItems);
+    SortItems(GroupReferenceItems);
     SortItems(SeatReferenceItems);
     SortItems(EventReferenceItems);
 
@@ -1093,6 +1359,8 @@ void STMOPPeopleEditor::RefreshReferenceOptions()
         AnchorReferenceCombo->RefreshOptions();
     if (EntityReferenceCombo.IsValid())
         EntityReferenceCombo->RefreshOptions();
+    if (GroupReferenceCombo.IsValid())
+        GroupReferenceCombo->RefreshOptions();
     if (SeatReferenceCombo.IsValid())
         SeatReferenceCombo->RefreshOptions();
     if (EventReferenceCombo.IsValid())
@@ -1136,9 +1404,27 @@ void STMOPPeopleEditor::HandleReferenceSelected(
     {
     case EReferenceField::TargetAnchor:
         Entry->TargetAnchorId = Id;
+        if (Entry->Action == ETMOPPersonTimelineAction::Interact ||
+            Entry->Action ==
+                ETMOPPersonTimelineAction::PlayUniqueAnimation)
+            Entry->ConversationTargetMode =
+                ETMOPConversationTargetMode::Anchor;
         break;
     case EReferenceField::TargetEntity:
         Entry->TargetEntityId = Id;
+        if (Entry->Action == ETMOPPersonTimelineAction::Interact ||
+            Entry->Action ==
+                ETMOPPersonTimelineAction::PlayUniqueAnimation)
+            Entry->ConversationTargetMode =
+                ETMOPConversationTargetMode::SpecificPerson;
+        break;
+    case EReferenceField::TargetGroup:
+        Entry->TargetGroupId = Id;
+        if (Entry->Action == ETMOPPersonTimelineAction::Interact ||
+            Entry->Action ==
+                ETMOPPersonTimelineAction::PlayUniqueAnimation)
+            Entry->ConversationTargetMode =
+                ETMOPConversationTargetMode::Group;
         break;
     case EReferenceField::TargetSeat:
         Entry->TargetSeatId = Id;
@@ -1174,6 +1460,9 @@ FText STMOPPeopleEditor::GetReferenceFieldText(
         break;
     case EReferenceField::TargetEntity:
         Id = Entry->TargetEntityId;
+        break;
+    case EReferenceField::TargetGroup:
+        Id = Entry->TargetGroupId;
         break;
     case EReferenceField::TargetSeat:
         Id = Entry->TargetSeatId;
@@ -1277,11 +1566,17 @@ FReply STMOPPeopleEditor::MoveTimelineEntryDown()
 
 FReply STMOPPeopleEditor::SavePerson()
 {
+    SaveCurrentPerson();
+    return FReply::Handled();
+}
+
+bool STMOPPeopleEditor::SaveCurrentPerson()
+{
     CommitEntryEdits();
     CommitPersonDetailEdits();
     UDataTable* Table = PeopleTable.Get();
     if (!IsValid(Table) || SelectedRowName.IsNone())
-        return FReply::Handled();
+        return false;
 
     const TArray<FString> Errors = ValidateWorkingRow();
     if (!Errors.IsEmpty())
@@ -1289,7 +1584,7 @@ FReply STMOPPeopleEditor::SavePerson()
         SetStatus(
             FText::FromString(TEXT("Not saved: ") + Errors[0]),
             FLinearColor::Red);
-        return FReply::Handled();
+        return false;
     }
 
     Table->Modify();
@@ -1303,7 +1598,7 @@ FReply STMOPPeopleEditor::SavePerson()
                         "Not saved: a row named '{0}' already exists."),
                     FText::FromString(WorkingRow.EntityId.ToString())),
                 FLinearColor::Red);
-            return FReply::Handled();
+            return false;
         }
 
         Table->AddRow(WorkingRow.EntityId, WorkingRow);
@@ -1321,13 +1616,15 @@ FReply STMOPPeopleEditor::SavePerson()
                 LOCTEXT("MissingSelectedRow",
                     "Not saved: the selected DataTable row no longer exists."),
                 FLinearColor::Red);
-            return FReply::Handled();
+            return false;
         }
         *Existing = WorkingRow;
     }
 
     Table->MarkPackageDirty();
     Table->PostEditChange();
+    LastSavedRow = WorkingRow;
+    bHasLastSavedRow = true;
 
     RefreshPeople();
     RefreshTimeline();
@@ -1335,7 +1632,7 @@ FReply STMOPPeopleEditor::SavePerson()
         LOCTEXT("Saved",
             "Person saved to DT_TMOP_People. Save the project to write the asset to disk."),
         FLinearColor(0.4f, 1.0f, 0.4f));
-    return FReply::Handled();
+    return true;
 }
 
 FReply STMOPPeopleEditor::ReloadPerson()
@@ -1470,7 +1767,13 @@ FText STMOPPeopleEditor::GetTimelineSummary(const int32 Index) const
     if (Entry.AnchorReferenceMode == ETMOPAnchorReferenceMode::PlannedFuture)
         Summary += TEXT("[PLANNED] ");
     Summary += ActionLabel(Entry.Action);
-    if (!Entry.TargetAnchorId.IsNone())
+    if ((Entry.Action == ETMOPPersonTimelineAction::Interact ||
+         Entry.Action == ETMOPPersonTimelineAction::PlayUniqueAnimation) &&
+        Entry.ConversationTargetMode ==
+            ETMOPConversationTargetMode::Group &&
+        !Entry.TargetGroupId.IsNone())
+        Summary += TEXT("  → group ") + Entry.TargetGroupId.ToString();
+    else if (!Entry.TargetAnchorId.IsNone())
         Summary += TEXT("  →  ") + Entry.TargetAnchorId.ToString();
     else if (!Entry.TargetSeatId.IsNone())
         Summary += TEXT("  →  ") + Entry.TargetSeatId.ToString();
@@ -1515,6 +1818,432 @@ FText STMOPPeopleEditor::GetTimelineTimingText(
     FString Result = Entry.Time.ToDisplayString();
     if (Entry.bTimeIsArrival) Result += TEXT("  ARRIVAL");
     return FText::FromString(Result);
+}
+
+bool STMOPPeopleEditor::BuildTimelineSpeedBadge(
+    const int32 Index,
+    FText& OutText,
+    FText& OutToolTip,
+    FLinearColor& OutColor) const
+{
+    OutText = FText::GetEmpty();
+    OutToolTip = FText::GetEmpty();
+    OutColor = FLinearColor(0.35f, 0.35f, 0.35f);
+    if (!WorkingRow.Timeline.IsValidIndex(Index)) return false;
+
+    const FTMOPPersonTimelineEntry& Entry = WorkingRow.Timeline[Index];
+    if (Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor)
+        return false;
+
+    auto SetUnavailable = [&](const FString& Reason)
+    {
+        OutText = LOCTEXT("TimelineSpeedUnavailable", "SPEED ?");
+        OutToolTip = FText::FromString(Reason);
+        OutColor = FLinearColor(0.28f, 0.28f, 0.28f);
+        return true;
+    };
+
+    UWorld* EditorWorld = GEditor != nullptr
+        ? GEditor->GetEditorWorldContext().World() : nullptr;
+    if (EditorWorld == nullptr)
+        return SetUnavailable(
+            TEXT("Open a level containing the route anchors to calculate speed."));
+
+    auto FindAnchorLocation = [EditorWorld](
+        const FName AnchorId,
+        const FVector& OffsetCm,
+        const ETMOPAnchorOffsetSpace OffsetSpace,
+        FVector& OutLocation)
+    {
+        if (AnchorId.IsNone()) return false;
+        for (TActorIterator<ATMOPHistoricalAnchor> It(EditorWorld); It; ++It)
+            if (It->GetAnchorId() == AnchorId)
+            {
+                OutLocation = It->GetAnchorLocation();
+                if (!OffsetCm.IsNearlyZero())
+                    OutLocation += OffsetSpace ==
+                        ETMOPAnchorOffsetSpace::AnchorLocal
+                        ? It->GetActorQuat().RotateVector(OffsetCm)
+                        : OffsetCm;
+                return true;
+            }
+        return false;
+    };
+
+    auto FindSeatLocation = [EditorWorld](
+        const FName SeatId, FVector& OutLocation)
+    {
+        if (SeatId.IsNone()) return false;
+        for (TActorIterator<AActor> It(EditorWorld); It; ++It)
+        {
+            TArray<UTMOPCinemaSeatComponent*> CinemaSeats;
+            It->GetComponents<UTMOPCinemaSeatComponent>(CinemaSeats);
+            for (const UTMOPCinemaSeatComponent* Seat : CinemaSeats)
+                if (IsValid(Seat) && Seat->SeatId == SeatId)
+                {
+                    OutLocation = Seat->GetComponentLocation();
+                    return true;
+                }
+
+            TArray<UTMOPVehicleSeatComponent*> VehicleSeats;
+            It->GetComponents<UTMOPVehicleSeatComponent>(VehicleSeats);
+            for (const UTMOPVehicleSeatComponent* Seat : VehicleSeats)
+                if (IsValid(Seat) && Seat->SeatId == SeatId)
+                {
+                    OutLocation = Seat->GetComponentLocation();
+                    return true;
+                }
+        }
+        return false;
+    };
+
+    auto ResolveLocation = [&](const FTMOPPersonTimelineEntry& Candidate,
+                               FVector& OutLocation)
+    {
+        if (Candidate.LocationType == ETMOPPersonLocationType::WorldTransform)
+        {
+            OutLocation = Candidate.WorldTransform.GetLocation();
+            return true;
+        }
+        const bool bChangesPhysicalAnchorLocation =
+            Candidate.Action ==
+                ETMOPPersonTimelineAction::InitialPlacement ||
+            Candidate.Action == ETMOPPersonTimelineAction::Spawn ||
+            Candidate.Action == ETMOPPersonTimelineAction::MoveToAnchor;
+        if (bChangesPhysicalAnchorLocation &&
+            Candidate.LocationType == ETMOPPersonLocationType::Anchor &&
+            !Candidate.TargetAnchorId.IsNone() &&
+            FindAnchorLocation(
+                Candidate.TargetAnchorId,
+                Candidate.AnchorOffsetCm,
+                Candidate.AnchorOffsetSpace,
+                OutLocation))
+            return true;
+        if (!Candidate.TargetSeatId.IsNone() &&
+            FindSeatLocation(Candidate.TargetSeatId, OutLocation))
+            return true;
+        return false;
+    };
+
+    FVector SegmentStart = FVector::ZeroVector;
+    int32 PreviousLocationIndex = INDEX_NONE;
+    for (int32 Previous = Index - 1; Previous >= 0; --Previous)
+        if (ResolveLocation(WorkingRow.Timeline[Previous], SegmentStart))
+        {
+            PreviousLocationIndex = Previous;
+            break;
+        }
+    if (PreviousLocationIndex == INDEX_NONE)
+        return SetUnavailable(
+            TEXT("No earlier timeline position or seat could be resolved."));
+
+    TArray<FName> RouteAnchorIds = Entry.PassAnchorIds;
+    RouteAnchorIds.Add(Entry.TargetAnchorId);
+    if (Entry.TargetAnchorId.IsNone())
+        return SetUnavailable(TEXT("The movement has no target anchor."));
+
+    double RouteLengthCm = 0.0;
+    bool bUsedStraightLineFallback = false;
+    for (int32 RouteIndex = 0;
+        RouteIndex < RouteAnchorIds.Num(); ++RouteIndex)
+    {
+        const FName RouteAnchorId = RouteAnchorIds[RouteIndex];
+        FVector SegmentEnd;
+        const bool bFinalAnchor =
+            RouteIndex == RouteAnchorIds.Num() - 1;
+        if (!FindAnchorLocation(
+                RouteAnchorId,
+                bFinalAnchor ? Entry.AnchorOffsetCm : FVector::ZeroVector,
+                Entry.AnchorOffsetSpace,
+                SegmentEnd))
+            return SetUnavailable(FString::Printf(
+                TEXT("Route anchor '%s' is not present in the open level."),
+                *RouteAnchorId.ToString()));
+
+        double SegmentLengthCm = FVector::Dist2D(SegmentStart, SegmentEnd);
+        double NavPathLengthCm = SegmentLengthCm;
+        const ENavigationQueryResult::Type PathResult =
+            UNavigationSystemV1::GetPathLength(
+                EditorWorld, SegmentStart, SegmentEnd,
+                NavPathLengthCm, nullptr, nullptr);
+        if (PathResult == ENavigationQueryResult::Success &&
+            NavPathLengthCm > KINDA_SMALL_NUMBER)
+        {
+            SegmentLengthCm = NavPathLengthCm;
+        }
+        else
+        {
+            bUsedStraightLineFallback = true;
+        }
+        RouteLengthCm += SegmentLengthCm;
+        SegmentStart = SegmentEnd;
+    }
+
+    if (RouteLengthCm <= KINDA_SMALL_NUMBER)
+        return SetUnavailable(TEXT("The calculated route length is zero."));
+
+    const UDataTable* Events = EventTable.Get();
+    TMap<FName, int32> EventSecondCache;
+    TSet<FName> ResolvingEvents;
+    TFunction<bool(FName, int32&)> ResolveEventSecond;
+    ResolveEventSecond = [&](const FName EventId, int32& OutSecond)
+    {
+        if (const int32* Cached = EventSecondCache.Find(EventId))
+        {
+            OutSecond = *Cached;
+            return true;
+        }
+        if (!IsValid(Events) || EventId.IsNone() ||
+            ResolvingEvents.Contains(EventId))
+            return false;
+
+        const FTMOPHistoricalEventDefinition* Definition =
+            Events->FindRow<FTMOPHistoricalEventDefinition>(
+                EventId, TEXT("TMOPTimelineSpeedEvent"), false);
+        if (Definition == nullptr)
+            for (const FName RowName : Events->GetRowNames())
+                if (const FTMOPHistoricalEventDefinition* Candidate =
+                    Events->FindRow<FTMOPHistoricalEventDefinition>(
+                        RowName, TEXT("TMOPTimelineSpeedEventById"), false))
+                    if (Candidate->EventId == EventId)
+                    {
+                        Definition = Candidate;
+                        break;
+                    }
+        if (Definition == nullptr) return false;
+
+        ResolvingEvents.Add(EventId);
+        bool bResolved = true;
+        switch (Definition->TimingMode)
+        {
+        case ETMOPEventTimingMode::Absolute:
+            OutSecond = Definition->AbsoluteTime.ToSecondsFromMidnight();
+            break;
+        case ETMOPEventTimingMode::Window:
+            OutSecond = Definition->PreferredTime.ToSecondsFromMidnight();
+            break;
+        case ETMOPEventTimingMode::Relative:
+        {
+            int32 TriggerSecond = 0;
+            bResolved = ResolveEventSecond(
+                Definition->TriggerEventId, TriggerSecond);
+            if (bResolved)
+                OutSecond = TriggerSecond +
+                    Definition->PreferredDelaySeconds;
+            break;
+        }
+        case ETMOPEventTimingMode::RelativeToPreviousEntry:
+        default:
+            bResolved = false;
+            break;
+        }
+        ResolvingEvents.Remove(EventId);
+        if (bResolved) EventSecondCache.Add(EventId, OutSecond);
+        return bResolved;
+    };
+
+    TMap<int32, int32> TimelineSecondCache;
+    TSet<int32> ResolvingEntries;
+    TFunction<bool(int32, int32&)> ResolveTimelineSecond;
+    ResolveTimelineSecond = [&](const int32 EntryIndex, int32& OutSecond)
+    {
+        if (!WorkingRow.Timeline.IsValidIndex(EntryIndex)) return false;
+        if (const int32* Cached = TimelineSecondCache.Find(EntryIndex))
+        {
+            OutSecond = *Cached;
+            return true;
+        }
+        if (ResolvingEntries.Contains(EntryIndex)) return false;
+        ResolvingEntries.Add(EntryIndex);
+
+        const FTMOPPersonTimelineEntry& TimelineEntry =
+            WorkingRow.Timeline[EntryIndex];
+        bool bResolved = true;
+        switch (TimelineEntry.TimingMode)
+        {
+        case ETMOPEventTimingMode::Absolute:
+        case ETMOPEventTimingMode::Window:
+            OutSecond = TimelineEntry.Time.ToSecondsFromMidnight();
+            break;
+        case ETMOPEventTimingMode::Relative:
+        {
+            int32 EventSecond = 0;
+            bResolved = ResolveEventSecond(
+                TimelineEntry.SharedEventId, EventSecond);
+            if (bResolved)
+                OutSecond = EventSecond + TimelineEntry.EventOffsetSeconds;
+            break;
+        }
+        case ETMOPEventTimingMode::RelativeToPreviousEntry:
+        {
+            int32 PreviousSecond = 0;
+            bResolved = EntryIndex > 0 && ResolveTimelineSecond(
+                EntryIndex - 1, PreviousSecond);
+            if (bResolved)
+                OutSecond = PreviousSecond +
+                    TimelineEntry.EventOffsetSeconds;
+            break;
+        }
+        default:
+            bResolved = false;
+            break;
+        }
+        ResolvingEntries.Remove(EntryIndex);
+        if (bResolved) TimelineSecondCache.Add(EntryIndex, OutSecond);
+        return bResolved;
+    };
+
+    const FTMOPMovementProfile& Profile = WorkingRow.MovementProfile;
+    const float PersonalMultiplier = FMath::Max(
+        Profile.PersonalSpeedMultiplier, KINDA_SMALL_NUMBER);
+
+    float ActivitySpeedCmPerSecond = Profile.NormalWalkSpeed;
+    switch (Entry.ActivityState)
+    {
+    case ETMOPAgentActivityState::FastWalking:
+        ActivitySpeedCmPerSecond = Profile.FastWalkSpeed;
+        break;
+    case ETMOPAgentActivityState::Jogging:
+        ActivitySpeedCmPerSecond = Profile.JogSpeed;
+        break;
+    case ETMOPAgentActivityState::Running:
+    case ETMOPAgentActivityState::Fleeing:
+        ActivitySpeedCmPerSecond = Profile.RunSpeed;
+        break;
+    case ETMOPAgentActivityState::Sprinting:
+        ActivitySpeedCmPerSecond = Profile.SprintSpeed;
+        break;
+    default:
+        break;
+    }
+    const float ConfiguredSpeedCmPerSecond =
+        Entry.TravelSpeedOverrideCmPerSecond > 0.0f
+        ? Entry.TravelSpeedOverrideCmPerSecond
+        : ActivitySpeedCmPerSecond * PersonalMultiplier;
+
+    float DisplaySpeedCmPerSecond = ConfiguredSpeedCmPerSecond;
+    int32 AvailableSeconds = 0;
+    if (Entry.bTimeIsArrival)
+    {
+        int32 ArrivalSecond = 0;
+        int32 PreviousSecond = 0;
+        if (!ResolveTimelineSecond(Index, ArrivalSecond) ||
+            Index <= 0 ||
+            !ResolveTimelineSecond(Index - 1, PreviousSecond))
+            return SetUnavailable(
+                TEXT("The arrival time or preceding timeline time could not be resolved."));
+        AvailableSeconds = ArrivalSecond - PreviousSecond;
+        if (AvailableSeconds <= 0)
+            return SetUnavailable(FString::Printf(
+                TEXT("No positive travel time: arrival resolves %d second(s) after the preceding entry."),
+                AvailableSeconds));
+        DisplaySpeedCmPerSecond =
+            static_cast<float>(RouteLengthCm / AvailableSeconds);
+    }
+
+    const float Slow = Profile.SlowWalkSpeed * PersonalMultiplier;
+    const float GroupTalking =
+        Profile.GroupTalkingWalkSpeed * PersonalMultiplier;
+    const float Talking = Profile.TalkingWalkSpeed * PersonalMultiplier;
+    const float Normal = Profile.NormalWalkSpeed * PersonalMultiplier;
+    const float Fast = Profile.FastWalkSpeed * PersonalMultiplier;
+    const float Jog = Profile.JogSpeed * PersonalMultiplier;
+    const float Run = Profile.RunSpeed * PersonalMultiplier;
+    const float Sprint = Profile.SprintSpeed * PersonalMultiplier;
+    const float MidSlowGroupTalking = (Slow + GroupTalking) * 0.5f;
+    const float MidGroupTalkingTalking =
+        (GroupTalking + Talking) * 0.5f;
+    const float MidTalkingNormal = (Talking + Normal) * 0.5f;
+    const float MidNormalFast = (Normal + Fast) * 0.5f;
+    const float MidFastJog = (Fast + Jog) * 0.5f;
+    const float MidJogRun = (Jog + Run) * 0.5f;
+    const float MidRunSprint = (Run + Sprint) * 0.5f;
+
+    FString Category;
+    if (DisplaySpeedCmPerSecond < Slow * 0.65f)
+        Category = TEXT("VERY SLOW");
+    else if (DisplaySpeedCmPerSecond < MidSlowGroupTalking)
+        Category = TEXT("SLOW WALK");
+    else if (DisplaySpeedCmPerSecond < MidGroupTalkingTalking)
+        Category = TEXT("GROUP TALKING PACE");
+    else if (DisplaySpeedCmPerSecond < MidTalkingNormal)
+        Category = TEXT("TALKING / SOCIAL PACE");
+    else if (DisplaySpeedCmPerSecond < MidNormalFast)
+        Category = TEXT("NORMAL WALK");
+    else if (DisplaySpeedCmPerSecond < MidFastJog)
+        Category = TEXT("FAST WALK");
+    else if (DisplaySpeedCmPerSecond < MidJogRun)
+        Category = TEXT("JOG");
+    else if (DisplaySpeedCmPerSecond < MidRunSprint)
+        Category = TEXT("RUN");
+    else if (DisplaySpeedCmPerSecond <= Sprint * 1.10f)
+        Category = TEXT("SPRINT");
+    else
+        Category = TEXT("TOO FAST");
+
+    const float DisplaySpeedMetersPerSecond =
+        DisplaySpeedCmPerSecond / 100.0f;
+    OutText = FText::FromString(FString::Printf(
+        TEXT("%s %.1f m/s  %s"),
+        Entry.bTimeIsArrival ? TEXT("REQ") : TEXT("SET"),
+        DisplaySpeedMetersPerSecond, *Category));
+
+    const FString RouteMethod = bUsedStraightLineFallback
+        ? TEXT("NavMesh where available; straight-line fallback")
+        : TEXT("NavMesh path");
+    if (Entry.bTimeIsArrival)
+    {
+        const bool bUsesFixedOverride =
+            Entry.TravelSpeedOverrideCmPerSecond > 0.0f;
+        const bool bFitsConfiguredSpeed = bUsesFixedOverride
+            ? DisplaySpeedCmPerSecond <=
+                ConfiguredSpeedCmPerSecond * 1.05f
+            : DisplaySpeedCmPerSecond <= Sprint;
+        const bool bBeyondSprint =
+            DisplaySpeedCmPerSecond > Sprint;
+        const float RuntimeTargetSpeed = bUsesFixedOverride
+            ? ConfiguredSpeedCmPerSecond
+            : FMath::Min(DisplaySpeedCmPerSecond, Sprint);
+        OutColor = bBeyondSprint
+            ? FLinearColor(0.75f, 0.05f, 0.03f)
+            : bFitsConfiguredSpeed
+                ? FLinearColor(0.05f, 0.42f, 0.12f)
+                : FLinearColor(0.78f, 0.38f, 0.03f);
+        OutToolTip = FText::FromString(FString::Printf(
+            TEXT("Required speed to this ARRIVAL: %.2f m/s. Available time begins at Timeline[%d]; the route begins at the last known position in Timeline[%d]. Route: %.1f m over %d s (%s; %d pass anchor(s)). Runtime target speed: %.2f m/s. %s"),
+            DisplaySpeedMetersPerSecond,
+            Index - 1,
+            PreviousLocationIndex,
+            RouteLengthCm / 100.0,
+            AvailableSeconds,
+            *RouteMethod,
+            Entry.PassAnchorIds.Num(),
+            RuntimeTargetSpeed / 100.0f,
+            bFitsConfiguredSpeed
+                ? bUsesFixedOverride
+                    ? TEXT("The fixed override can meet the arrival time.")
+                    : TEXT("Runtime will select this required gait automatically.")
+                : bUsesFixedOverride
+                    ? TEXT("The fixed override is too slow for the arrival time.")
+                    : TEXT("The required speed exceeds this person's sprint speed.")));
+    }
+    else
+    {
+        const int32 EstimatedTravelSeconds =
+            ConfiguredSpeedCmPerSecond > KINDA_SMALL_NUMBER
+            ? FMath::CeilToInt(
+                RouteLengthCm / ConfiguredSpeedCmPerSecond)
+            : 0;
+        OutColor = FLinearColor(0.08f, 0.30f, 0.52f);
+        OutToolTip = FText::FromString(FString::Printf(
+            TEXT("Departure-timed movement. Configured speed: %.2f m/s. Route: %.1f m (%s; %d pass anchor(s)). Estimated travel time: %d s. There is no fixed arrival time to validate."),
+            ConfiguredSpeedCmPerSecond / 100.0f,
+            RouteLengthCm / 100.0,
+            *RouteMethod,
+            Entry.PassAnchorIds.Num(),
+            EstimatedTravelSeconds));
+    }
+    return true;
 }
 
 FSlateColor STMOPPeopleEditor::GetTimelineColor(
@@ -1594,6 +2323,9 @@ bool STMOPPeopleEditor::EntryHasError(
     if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
         Entry.TargetAnchorId.IsNone())
         return Fail(TEXT("Move To Anchor requires Target Anchor ID"));
+    if (Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor &&
+        Entry.TargetAnchorId.IsNone())
+        return Fail(TEXT("Look At Anchor requires Target Anchor ID"));
     if ((Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
          Entry.Action == ETMOPPersonTimelineAction::ExitVehicle ||
          Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&
@@ -1615,6 +2347,27 @@ bool STMOPPeopleEditor::EntryHasError(
     if (Entry.Action == ETMOPPersonTimelineAction::SetGroupLeader &&
         Entry.NewGroupLeaderEntityId.IsNone())
         return Fail(TEXT("Set Group Leader requires a new leader Entity ID"));
+    if (Entry.Action == ETMOPPersonTimelineAction::PlayUniqueAnimation &&
+        Entry.AnimationAsset.IsNull())
+        return Fail(TEXT("Play Unique Animation requires an Animation Asset"));
+    const bool bConversationAction =
+        Entry.Action == ETMOPPersonTimelineAction::Interact ||
+        Entry.Action == ETMOPPersonTimelineAction::PlayUniqueAnimation;
+    if (bConversationAction &&
+        Entry.ConversationTargetMode ==
+            ETMOPConversationTargetMode::SpecificPerson &&
+        Entry.TargetEntityId.IsNone())
+        return Fail(TEXT("Specific Person conversation requires Target Entity ID"));
+    if (bConversationAction &&
+        Entry.ConversationTargetMode ==
+            ETMOPConversationTargetMode::Group &&
+        Entry.TargetGroupId.IsNone() && WorkingRow.SocialGroupId.IsNone())
+        return Fail(TEXT("Group conversation requires Target Group ID or the person's own Social Group ID"));
+    if (bConversationAction &&
+        Entry.ConversationTargetMode ==
+            ETMOPConversationTargetMode::Anchor &&
+        Entry.TargetAnchorId.IsNone())
+        return Fail(TEXT("Anchor conversation requires Target Anchor ID"));
     if (Index > 0 &&
         Entry.TimingMode == ETMOPEventTimingMode::Absolute)
     {

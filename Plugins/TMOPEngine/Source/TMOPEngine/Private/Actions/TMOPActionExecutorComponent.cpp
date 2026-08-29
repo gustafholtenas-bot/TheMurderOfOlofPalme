@@ -463,6 +463,12 @@ bool UTMOPActionExecutorComponent::MoveToCurrentRouteAnchor()
                                          : Agent->EntityIdentity->EntityId)
         : NAME_None;
     CurrentTargetLocation = TargetAnchor->GetPlacementLocation(StableKey);
+    if (CurrentRouteAnchorIndex == CurrentRouteAnchorIds.Num() - 1 &&
+        !CurrentEntry.TargetAnchorOffsetCm.IsNearlyZero())
+        CurrentTargetLocation += CurrentEntry.bTargetAnchorOffsetIsLocal
+            ? TargetAnchor->GetActorQuat().RotateVector(
+                CurrentEntry.TargetAnchorOffsetCm)
+            : CurrentEntry.TargetAnchorOffsetCm;
     UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
     return true;
 }
@@ -485,8 +491,15 @@ float UTMOPActionExecutorComponent::CalculateRemainingPathLengthCm() const
         const ATMOPHistoricalAnchor* Anchor =
             Anchors->FindAnchor(CurrentRouteAnchorIds[Index]);
         if (!IsValid(Anchor)) return 0.0f;
-        const FVector End = Index == CurrentRouteAnchorIndex
+        FVector End = Index == CurrentRouteAnchorIndex
             ? CurrentTargetLocation : Anchor->GetAnchorLocation();
+        if (Index == CurrentRouteAnchorIds.Num() - 1 &&
+            Index != CurrentRouteAnchorIndex &&
+            !CurrentEntry.TargetAnchorOffsetCm.IsNearlyZero())
+            End += CurrentEntry.bTargetAnchorOffsetIsLocal
+                ? Anchor->GetActorQuat().RotateVector(
+                    CurrentEntry.TargetAnchorOffsetCm)
+                : CurrentEntry.TargetAnchorOffsetCm;
         double Segment = FVector::Dist2D(Start, End);
         UNavigationSystemV1::GetPathLength(
             World, Start, End, Segment, nullptr, nullptr);

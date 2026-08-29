@@ -1,6 +1,7 @@
 #include "Animation/TMOPAnimationStateComponent.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 UTMOPAnimationStateComponent::UTMOPAnimationStateComponent()
 {
@@ -52,17 +53,38 @@ void UTMOPAnimationStateComponent::UpdateFromOwner()
     }
     switch (Agent->ActivityState)
     {
+    case ETMOPAgentActivityState::Walking:
     case ETMOPAgentActivityState::FastWalking:
-        LocomotionStyle = ETMOPAnimLocomotionStyle::Fast;
-        break;
     case ETMOPAgentActivityState::Jogging:
-        LocomotionStyle = ETMOPAnimLocomotionStyle::MildRun;
-        break;
     case ETMOPAgentActivityState::Running:
     case ETMOPAgentActivityState::Sprinting:
     case ETMOPAgentActivityState::Fleeing:
-        LocomotionStyle = ETMOPAnimLocomotionStyle::FastRun;
+    {
+        // Arrival-timed moves can use an exact runtime speed which differs
+        // from the broad ActivityState. Derive the animation gait from the
+        // actual MaxWalkSpeed so a 4.0 m/s deadline selects a run animation,
+        // while a social 1.2 m/s move stays in the normal walking blendspace.
+        const UCharacterMovementComponent* Movement =
+            Agent->GetCharacterMovement();
+        const float DesiredSpeed = IsValid(Movement)
+            ? Movement->MaxWalkSpeed : Agent->GetDesiredMovementSpeed();
+        const float Multiplier =
+            Agent->MovementProfile.PersonalSpeedMultiplier *
+            Agent->AppearanceMovementSpeedMultiplier;
+        const float Normal = Agent->MovementProfile.NormalWalkSpeed * Multiplier;
+        const float Fast = Agent->MovementProfile.FastWalkSpeed * Multiplier;
+        const float Jog = Agent->MovementProfile.JogSpeed * Multiplier;
+        const float Run = Agent->MovementProfile.RunSpeed * Multiplier;
+        if (DesiredSpeed >= (Jog + Run) * 0.5f)
+            LocomotionStyle = ETMOPAnimLocomotionStyle::FastRun;
+        else if (DesiredSpeed >= (Fast + Jog) * 0.5f)
+            LocomotionStyle = ETMOPAnimLocomotionStyle::MildRun;
+        else if (DesiredSpeed >= (Normal + Fast) * 0.5f)
+            LocomotionStyle = ETMOPAnimLocomotionStyle::Fast;
+        else
+            LocomotionStyle = ETMOPAnimLocomotionStyle::Normal;
         break;
+    }
     default:
         break;
     }

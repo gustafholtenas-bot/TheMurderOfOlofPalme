@@ -33,13 +33,17 @@ private:
     {
         All,
         Police,
-        Suspect
+        Suspect,
+        Spawned,
+        NonSpawned,
+        MainCharacters
     };
 
     enum class EReferenceField : uint8
     {
         TargetAnchor,
         TargetEntity,
+        TargetGroup,
         TargetSeat,
         SharedEvent
     };
@@ -61,6 +65,9 @@ private:
     void CommitEntryEdits();
     void RefreshPersonDetailViews();
     void CommitPersonDetailEdits();
+    bool HasUnsavedPersonChanges();
+    bool SaveCurrentPerson();
+    void RestorePersonListSelection();
     void SetStatus(const FText& Message, const FLinearColor& Color);
 
     TSharedRef<ITableRow> GeneratePersonRow(
@@ -79,6 +86,7 @@ private:
     void HandlePeopleFilterChanged(
         ECheckBoxState NewState,
         EPeopleCategoryFilter Filter);
+    bool IsMainCharacter(const FTMOPPersonProfileRow& Row) const;
     void RefreshReferenceOptions();
     TSharedRef<SWidget> GenerateReferenceOption(FReferenceItem Item) const;
     void HandleReferenceSelected(
@@ -104,6 +112,11 @@ private:
     FText GetSelectedPersonSubtitle() const;
     FText GetTimelineSummary(int32 Index) const;
     FText GetTimelineTimingText(const FTMOPPersonTimelineEntry& Entry) const;
+    bool BuildTimelineSpeedBadge(
+        int32 Index,
+        FText& OutText,
+        FText& OutToolTip,
+        FLinearColor& OutColor) const;
     FSlateColor GetTimelineColor(int32 Index) const;
     bool EntryHasError(int32 Index, FString* OutMessage = nullptr) const;
     TArray<FString> ValidateWorkingRow() const;
@@ -117,6 +130,9 @@ private:
     TWeakObjectPtr<UDataTable> AppearanceTable;
     FName SelectedRowName = NAME_None;
     FTMOPPersonProfileRow WorkingRow;
+    FTMOPPersonProfileRow LastSavedRow;
+    bool bHasLastSavedRow = false;
+    bool bRestoringPersonSelection = false;
     int32 SelectedTimelineIndex = INDEX_NONE;
     FString PersonSearch;
     EPeopleCategoryFilter PeopleCategoryFilter =
@@ -137,11 +153,13 @@ private:
 
     TArray<FReferenceItem> AnchorReferenceItems;
     TArray<FReferenceItem> EntityReferenceItems;
+    TArray<FReferenceItem> GroupReferenceItems;
     TArray<FReferenceItem> SeatReferenceItems;
     TArray<FReferenceItem> EventReferenceItems;
     TMap<FString, FName> ReferenceIdsByLabel;
     TSharedPtr<SSearchableComboBox> AnchorReferenceCombo;
     TSharedPtr<SSearchableComboBox> EntityReferenceCombo;
+    TSharedPtr<SSearchableComboBox> GroupReferenceCombo;
     TSharedPtr<SSearchableComboBox> SeatReferenceCombo;
     TSharedPtr<SSearchableComboBox> EventReferenceCombo;
 };
