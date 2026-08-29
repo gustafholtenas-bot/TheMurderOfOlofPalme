@@ -1008,6 +1008,23 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GenerateTimelineRow(
     FLinearColor SpeedColor = FLinearColor(0.45f, 0.45f, 0.45f);
     const bool bShowSpeedBadge = BuildTimelineSpeedBadge(
         Index, SpeedText, SpeedToolTip, SpeedColor);
+    int32 ResolvedSecond = 0;
+    FString ResolveFailureReason;
+    const bool bResolvedTime = ResolveTimelineDisplaySecond(
+        Index, ResolvedSecond, &ResolveFailureReason);
+    const int32 DisplaySecond = FMath::Max(0, ResolvedSecond) % (24 * 3600);
+    const FText ResolvedTimeText = bResolvedTime
+        ? FText::FromString(FString::Printf(
+            TEXT("%02d:%02d:%02d"),
+            DisplaySecond / 3600,
+            (DisplaySecond / 60) % 60,
+            DisplaySecond % 60))
+        : LOCTEXT("TimelineResolvedTimeUnavailable", "TIME ?");
+    const FText ResolvedTimeToolTip = bResolvedTime
+        ? FText::FromString(FString::Printf(
+            TEXT("Resolved timeline time: %s. This is the effective time after applying shared-event or previous-entry offsets."),
+            *ResolvedTimeText.ToString()))
+        : FText::FromString(ResolveFailureReason);
 
     return SNew(STableRow<FTimelineItem>, OwnerTable)
     [
@@ -1045,19 +1062,32 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GenerateTimelineRow(
                 .AutoWidth()
                 .Padding(8.0f, 0.0f, 0.0f, 0.0f)
                 [
-                    SNew(SBorder)
-                    .Visibility(bShowSpeedBadge
-                        ? EVisibility::Visible
-                        : EVisibility::Collapsed)
-                    .Padding(FMargin(5.0f, 1.0f))
-                    .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
-                    .BorderBackgroundColor(SpeedColor)
-                    .ToolTipText(SpeedToolTip)
+                    SNew(SVerticalBox)
+                    + SVerticalBox::Slot().AutoHeight()
+                    [
+                        SNew(SBorder)
+                        .Visibility(bShowSpeedBadge
+                            ? EVisibility::Visible
+                            : EVisibility::Collapsed)
+                        .Padding(FMargin(5.0f, 1.0f))
+                        .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                        .BorderBackgroundColor(SpeedColor)
+                        .ToolTipText(SpeedToolTip)
+                        [
+                            SNew(STextBlock)
+                            .Text(SpeedText)
+                            .Font(FAppStyle::GetFontStyle("SmallFont"))
+                            .ColorAndOpacity(FLinearColor::White)
+                        ]
+                    ]
+                    + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 2.0f, 0.0f, 0.0f)
                     [
                         SNew(STextBlock)
-                        .Text(SpeedText)
+                        .Text(ResolvedTimeText)
+                        .ToolTipText(ResolvedTimeToolTip)
+                        .Justification(ETextJustify::Right)
                         .Font(FAppStyle::GetFontStyle("SmallFont"))
-                        .ColorAndOpacity(FLinearColor::White)
+                        .ColorAndOpacity(FLinearColor(1.0f, 0.72f, 0.05f))
                     ]
                 ]
             ]
@@ -1406,7 +1436,8 @@ void STMOPPeopleEditor::HandleReferenceSelected(
         Entry->TargetAnchorId = Id;
         if (Entry->Action == ETMOPPersonTimelineAction::Interact ||
             Entry->Action ==
-                ETMOPPersonTimelineAction::PlayUniqueAnimation)
+                ETMOPPersonTimelineAction::PlayUniqueAnimation ||
+            Entry->Action == ETMOPPersonTimelineAction::LookAtAnchor)
             Entry->ConversationTargetMode =
                 ETMOPConversationTargetMode::Anchor;
         break;
@@ -1414,7 +1445,8 @@ void STMOPPeopleEditor::HandleReferenceSelected(
         Entry->TargetEntityId = Id;
         if (Entry->Action == ETMOPPersonTimelineAction::Interact ||
             Entry->Action ==
-                ETMOPPersonTimelineAction::PlayUniqueAnimation)
+                ETMOPPersonTimelineAction::PlayUniqueAnimation ||
+            Entry->Action == ETMOPPersonTimelineAction::LookAtAnchor)
             Entry->ConversationTargetMode =
                 ETMOPConversationTargetMode::SpecificPerson;
         break;
@@ -1422,7 +1454,8 @@ void STMOPPeopleEditor::HandleReferenceSelected(
         Entry->TargetGroupId = Id;
         if (Entry->Action == ETMOPPersonTimelineAction::Interact ||
             Entry->Action ==
-                ETMOPPersonTimelineAction::PlayUniqueAnimation)
+                ETMOPPersonTimelineAction::PlayUniqueAnimation ||
+            Entry->Action == ETMOPPersonTimelineAction::LookAtAnchor)
             Entry->ConversationTargetMode =
                 ETMOPConversationTargetMode::Group;
         break;
@@ -1768,11 +1801,20 @@ FText STMOPPeopleEditor::GetTimelineSummary(const int32 Index) const
         Summary += TEXT("[PLANNED] ");
     Summary += ActionLabel(Entry.Action);
     if ((Entry.Action == ETMOPPersonTimelineAction::Interact ||
-         Entry.Action == ETMOPPersonTimelineAction::PlayUniqueAnimation) &&
+         Entry.Action == ETMOPPersonTimelineAction::PlayUniqueAnimation ||
+         Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor) &&
         Entry.ConversationTargetMode ==
             ETMOPConversationTargetMode::Group &&
         !Entry.TargetGroupId.IsNone())
         Summary += TEXT("  → group ") + Entry.TargetGroupId.ToString();
+    else if (Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor &&
+        (Entry.ConversationTargetMode ==
+            ETMOPConversationTargetMode::SpecificPerson ||
+         (Entry.ConversationTargetMode ==
+            ETMOPConversationTargetMode::Automatic &&
+          !Entry.TargetEntityId.IsNone())) &&
+        !Entry.TargetEntityId.IsNone())
+        Summary += TEXT("  →  ") + Entry.TargetEntityId.ToString();
     else if (!Entry.TargetAnchorId.IsNone())
         Summary += TEXT("  →  ") + Entry.TargetAnchorId.ToString();
     else if (!Entry.TargetSeatId.IsNone())
@@ -1818,6 +1860,158 @@ FText STMOPPeopleEditor::GetTimelineTimingText(
     FString Result = Entry.Time.ToDisplayString();
     if (Entry.bTimeIsArrival) Result += TEXT("  ARRIVAL");
     return FText::FromString(Result);
+}
+
+bool STMOPPeopleEditor::ResolveTimelineDisplaySecond(
+    const int32 Index,
+    int32& OutSecond,
+    FString* OutFailureReason) const
+{
+    if (OutFailureReason != nullptr) OutFailureReason->Reset();
+    auto Fail = [OutFailureReason](const FString& Reason)
+    {
+        if (OutFailureReason != nullptr && OutFailureReason->IsEmpty())
+            *OutFailureReason = Reason;
+        return false;
+    };
+
+    if (!WorkingRow.Timeline.IsValidIndex(Index))
+        return Fail(TEXT("The timeline row does not exist."));
+
+    const UDataTable* Events = EventTable.Get();
+    TMap<FName, int32> EventSecondCache;
+    TSet<FName> ResolvingEvents;
+    TFunction<bool(FName, int32&)> ResolveEventSecond;
+    ResolveEventSecond = [&](const FName EventId, int32& EventSecond)
+    {
+        if (const int32* Cached = EventSecondCache.Find(EventId))
+        {
+            EventSecond = *Cached;
+            return true;
+        }
+        if (EventId.IsNone())
+            return Fail(TEXT("The row has no Shared Event ID."));
+        if (!IsValid(Events))
+            return Fail(TEXT("DT_TMOP_HistoricalEvents could not be loaded."));
+        if (ResolvingEvents.Contains(EventId))
+            return Fail(FString::Printf(
+                TEXT("Shared-event cycle detected at '%s'."),
+                *EventId.ToString()));
+
+        const FTMOPHistoricalEventDefinition* Definition =
+            Events->FindRow<FTMOPHistoricalEventDefinition>(
+                EventId, TEXT("TMOPTimelineResolvedTimeEvent"), false);
+        if (Definition == nullptr)
+            for (const FName RowName : Events->GetRowNames())
+                if (const FTMOPHistoricalEventDefinition* Candidate =
+                    Events->FindRow<FTMOPHistoricalEventDefinition>(
+                        RowName,
+                        TEXT("TMOPTimelineResolvedTimeEventById"), false))
+                    if (Candidate->EventId == EventId)
+                    {
+                        Definition = Candidate;
+                        break;
+                    }
+        if (Definition == nullptr)
+            return Fail(FString::Printf(
+                TEXT("Shared event '%s' was not found in DT_TMOP_HistoricalEvents."),
+                *EventId.ToString()));
+
+        ResolvingEvents.Add(EventId);
+        bool bResolved = true;
+        switch (Definition->TimingMode)
+        {
+        case ETMOPEventTimingMode::Absolute:
+            EventSecond =
+                Definition->AbsoluteTime.ToSecondsFromMidnight();
+            break;
+        case ETMOPEventTimingMode::Window:
+            EventSecond =
+                Definition->PreferredTime.ToSecondsFromMidnight();
+            break;
+        case ETMOPEventTimingMode::Relative:
+        {
+            int32 TriggerSecond = 0;
+            bResolved = ResolveEventSecond(
+                Definition->TriggerEventId, TriggerSecond);
+            if (bResolved)
+                EventSecond = TriggerSecond +
+                    Definition->PreferredDelaySeconds;
+            break;
+        }
+        case ETMOPEventTimingMode::RelativeToPreviousEntry:
+        default:
+            bResolved = Fail(FString::Printf(
+                TEXT("Shared event '%s' has no editor-resolvable time mode."),
+                *EventId.ToString()));
+            break;
+        }
+        ResolvingEvents.Remove(EventId);
+        if (bResolved)
+            EventSecondCache.Add(EventId, EventSecond);
+        return bResolved;
+    };
+
+    TMap<int32, int32> TimelineSecondCache;
+    TSet<int32> ResolvingEntries;
+    TFunction<bool(int32, int32&)> ResolveEntrySecond;
+    ResolveEntrySecond = [&](const int32 EntryIndex, int32& EntrySecond)
+    {
+        if (!WorkingRow.Timeline.IsValidIndex(EntryIndex))
+            return Fail(TEXT("A preceding timeline row is missing."));
+        if (const int32* Cached = TimelineSecondCache.Find(EntryIndex))
+        {
+            EntrySecond = *Cached;
+            return true;
+        }
+        if (ResolvingEntries.Contains(EntryIndex))
+            return Fail(FString::Printf(
+                TEXT("Timeline timing cycle detected at row %d."),
+                EntryIndex));
+
+        ResolvingEntries.Add(EntryIndex);
+        const FTMOPPersonTimelineEntry& Entry =
+            WorkingRow.Timeline[EntryIndex];
+        bool bResolved = true;
+        switch (Entry.TimingMode)
+        {
+        case ETMOPEventTimingMode::Absolute:
+        case ETMOPEventTimingMode::Window:
+            EntrySecond = Entry.Time.ToSecondsFromMidnight();
+            break;
+        case ETMOPEventTimingMode::Relative:
+        {
+            int32 EventSecond = 0;
+            bResolved = ResolveEventSecond(
+                Entry.SharedEventId, EventSecond);
+            if (bResolved)
+                EntrySecond = EventSecond + Entry.EventOffsetSeconds;
+            break;
+        }
+        case ETMOPEventTimingMode::RelativeToPreviousEntry:
+        {
+            int32 PreviousSecond = 0;
+            bResolved = EntryIndex > 0
+                ? ResolveEntrySecond(EntryIndex - 1, PreviousSecond)
+                : Fail(TEXT(
+                    "The first timeline row cannot be relative to a previous row."));
+            if (bResolved)
+                EntrySecond = PreviousSecond + Entry.EventOffsetSeconds;
+            break;
+        }
+        default:
+            bResolved = Fail(FString::Printf(
+                TEXT("Timeline row %d has an unsupported timing mode."),
+                EntryIndex));
+            break;
+        }
+        ResolvingEntries.Remove(EntryIndex);
+        if (bResolved)
+            TimelineSecondCache.Add(EntryIndex, EntrySecond);
+        return bResolved;
+    };
+
+    return ResolveEntrySecond(Index, OutSecond);
 }
 
 bool STMOPPeopleEditor::BuildTimelineSpeedBadge(
@@ -1982,117 +2176,6 @@ bool STMOPPeopleEditor::BuildTimelineSpeedBadge(
     if (RouteLengthCm <= KINDA_SMALL_NUMBER)
         return SetUnavailable(TEXT("The calculated route length is zero."));
 
-    const UDataTable* Events = EventTable.Get();
-    TMap<FName, int32> EventSecondCache;
-    TSet<FName> ResolvingEvents;
-    TFunction<bool(FName, int32&)> ResolveEventSecond;
-    ResolveEventSecond = [&](const FName EventId, int32& OutSecond)
-    {
-        if (const int32* Cached = EventSecondCache.Find(EventId))
-        {
-            OutSecond = *Cached;
-            return true;
-        }
-        if (!IsValid(Events) || EventId.IsNone() ||
-            ResolvingEvents.Contains(EventId))
-            return false;
-
-        const FTMOPHistoricalEventDefinition* Definition =
-            Events->FindRow<FTMOPHistoricalEventDefinition>(
-                EventId, TEXT("TMOPTimelineSpeedEvent"), false);
-        if (Definition == nullptr)
-            for (const FName RowName : Events->GetRowNames())
-                if (const FTMOPHistoricalEventDefinition* Candidate =
-                    Events->FindRow<FTMOPHistoricalEventDefinition>(
-                        RowName, TEXT("TMOPTimelineSpeedEventById"), false))
-                    if (Candidate->EventId == EventId)
-                    {
-                        Definition = Candidate;
-                        break;
-                    }
-        if (Definition == nullptr) return false;
-
-        ResolvingEvents.Add(EventId);
-        bool bResolved = true;
-        switch (Definition->TimingMode)
-        {
-        case ETMOPEventTimingMode::Absolute:
-            OutSecond = Definition->AbsoluteTime.ToSecondsFromMidnight();
-            break;
-        case ETMOPEventTimingMode::Window:
-            OutSecond = Definition->PreferredTime.ToSecondsFromMidnight();
-            break;
-        case ETMOPEventTimingMode::Relative:
-        {
-            int32 TriggerSecond = 0;
-            bResolved = ResolveEventSecond(
-                Definition->TriggerEventId, TriggerSecond);
-            if (bResolved)
-                OutSecond = TriggerSecond +
-                    Definition->PreferredDelaySeconds;
-            break;
-        }
-        case ETMOPEventTimingMode::RelativeToPreviousEntry:
-        default:
-            bResolved = false;
-            break;
-        }
-        ResolvingEvents.Remove(EventId);
-        if (bResolved) EventSecondCache.Add(EventId, OutSecond);
-        return bResolved;
-    };
-
-    TMap<int32, int32> TimelineSecondCache;
-    TSet<int32> ResolvingEntries;
-    TFunction<bool(int32, int32&)> ResolveTimelineSecond;
-    ResolveTimelineSecond = [&](const int32 EntryIndex, int32& OutSecond)
-    {
-        if (!WorkingRow.Timeline.IsValidIndex(EntryIndex)) return false;
-        if (const int32* Cached = TimelineSecondCache.Find(EntryIndex))
-        {
-            OutSecond = *Cached;
-            return true;
-        }
-        if (ResolvingEntries.Contains(EntryIndex)) return false;
-        ResolvingEntries.Add(EntryIndex);
-
-        const FTMOPPersonTimelineEntry& TimelineEntry =
-            WorkingRow.Timeline[EntryIndex];
-        bool bResolved = true;
-        switch (TimelineEntry.TimingMode)
-        {
-        case ETMOPEventTimingMode::Absolute:
-        case ETMOPEventTimingMode::Window:
-            OutSecond = TimelineEntry.Time.ToSecondsFromMidnight();
-            break;
-        case ETMOPEventTimingMode::Relative:
-        {
-            int32 EventSecond = 0;
-            bResolved = ResolveEventSecond(
-                TimelineEntry.SharedEventId, EventSecond);
-            if (bResolved)
-                OutSecond = EventSecond + TimelineEntry.EventOffsetSeconds;
-            break;
-        }
-        case ETMOPEventTimingMode::RelativeToPreviousEntry:
-        {
-            int32 PreviousSecond = 0;
-            bResolved = EntryIndex > 0 && ResolveTimelineSecond(
-                EntryIndex - 1, PreviousSecond);
-            if (bResolved)
-                OutSecond = PreviousSecond +
-                    TimelineEntry.EventOffsetSeconds;
-            break;
-        }
-        default:
-            bResolved = false;
-            break;
-        }
-        ResolvingEntries.Remove(EntryIndex);
-        if (bResolved) TimelineSecondCache.Add(EntryIndex, OutSecond);
-        return bResolved;
-    };
-
     const FTMOPMovementProfile& Profile = WorkingRow.MovementProfile;
     const float PersonalMultiplier = FMath::Max(
         Profile.PersonalSpeedMultiplier, KINDA_SMALL_NUMBER);
@@ -2127,16 +2210,34 @@ bool STMOPPeopleEditor::BuildTimelineSpeedBadge(
     {
         int32 ArrivalSecond = 0;
         int32 PreviousSecond = 0;
-        if (!ResolveTimelineSecond(Index, ArrivalSecond) ||
+        if (!ResolveTimelineDisplaySecond(Index, ArrivalSecond) ||
             Index <= 0 ||
-            !ResolveTimelineSecond(Index - 1, PreviousSecond))
+            !ResolveTimelineDisplaySecond(Index - 1, PreviousSecond))
             return SetUnavailable(
                 TEXT("The arrival time or preceding timeline time could not be resolved."));
         AvailableSeconds = ArrivalSecond - PreviousSecond;
         if (AvailableSeconds <= 0)
-            return SetUnavailable(FString::Printf(
-                TEXT("No positive travel time: arrival resolves %d second(s) after the preceding entry."),
+        {
+            const auto FormatTimelineSecond = [](const int32 Second)
+            {
+                const int32 Normalized = FMath::Max(0, Second);
+                return FString::Printf(TEXT("%02d:%02d:%02d"),
+                    Normalized / 3600,
+                    (Normalized / 60) % 60,
+                    Normalized % 60);
+            };
+            OutText = FText::FromString(FString::Printf(
+                TEXT("TIME %s%d s"),
+                AvailableSeconds > 0 ? TEXT("+") : TEXT(""),
                 AvailableSeconds));
+            OutToolTip = FText::FromString(FString::Printf(
+                TEXT("Timeline conflict: this arrival resolves to %s, while the preceding row resolves to %s. The movement therefore has %d second(s), so no speed can be calculated. Relative/shared-event rows ignore the editable Absolute Time fields."),
+                *FormatTimelineSecond(ArrivalSecond),
+                *FormatTimelineSecond(PreviousSecond),
+                AvailableSeconds));
+            OutColor = FLinearColor(0.85f, 0.12f, 0.08f);
+            return true;
+        }
         DisplaySpeedCmPerSecond =
             static_cast<float>(RouteLengthCm / AvailableSeconds);
     }
@@ -2323,9 +2424,26 @@ bool STMOPPeopleEditor::EntryHasError(
     if (Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor &&
         Entry.TargetAnchorId.IsNone())
         return Fail(TEXT("Move To Anchor requires Target Anchor ID"));
-    if (Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor &&
-        Entry.TargetAnchorId.IsNone())
-        return Fail(TEXT("Look At Anchor requires Target Anchor ID"));
+    if (Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor)
+    {
+        const bool bPersonTarget =
+            Entry.ConversationTargetMode ==
+                ETMOPConversationTargetMode::SpecificPerson ||
+            (Entry.ConversationTargetMode ==
+                ETMOPConversationTargetMode::Automatic &&
+             !Entry.TargetEntityId.IsNone());
+        const bool bGroupTarget =
+            Entry.ConversationTargetMode ==
+                ETMOPConversationTargetMode::Group;
+        if (bPersonTarget && Entry.TargetEntityId.IsNone())
+            return Fail(TEXT("Look At Person requires Target Entity ID"));
+        if (bGroupTarget && Entry.TargetGroupId.IsNone() &&
+            WorkingRow.SocialGroupId.IsNone())
+            return Fail(TEXT("Look At Group requires Target Group ID"));
+        if (!bPersonTarget && !bGroupTarget &&
+            Entry.TargetAnchorId.IsNone())
+            return Fail(TEXT("Look At Anchor requires Target Anchor ID"));
+    }
     if ((Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
          Entry.Action == ETMOPPersonTimelineAction::ExitVehicle ||
          Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&

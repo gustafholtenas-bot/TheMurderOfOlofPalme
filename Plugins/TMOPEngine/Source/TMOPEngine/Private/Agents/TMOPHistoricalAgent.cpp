@@ -556,6 +556,27 @@ void ATMOPHistoricalAgent::UpdateSocialFocus(const float DeltaSeconds)
     float TargetAlpha = 0.0f;
     if (const AActor* Target = SocialFocusTarget.Get())
     {
+        // A person target may keep moving after Look At starts. Stationary,
+        // standing agents turn with it continuously instead of letting the
+        // target leave the neck/spine aim range. Seated and walking agents
+        // retain their authored placement/movement rotation.
+        if (bDialogueFocusLocked && !IsSeatedForDialogue() &&
+            GetVelocity().Size2D() <= 20.0f)
+        {
+            FVector FlatDirection =
+                Target->GetActorLocation() - GetActorLocation();
+            FlatDirection.Z = 0.0f;
+            if (!FlatDirection.IsNearlyZero())
+            {
+                FRotator DesiredRotation = FlatDirection.Rotation();
+                DesiredRotation.Pitch = 0.0f;
+                DesiredRotation.Roll = 0.0f;
+                SetActorRotation(FMath::RInterpTo(
+                    GetActorRotation(), DesiredRotation, DeltaSeconds,
+                    SocialLookInterpolationSpeed));
+            }
+        }
+
         const FVector EyeLocation =
             GetActorLocation() + FVector(0.0f, 0.0f, BaseEyeHeight);
         const FVector TargetLocation =

@@ -861,10 +861,50 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     case ETMOPPersonTimelineAction::LookAtAnchor:
         if (GetGameInstance() != nullptr)
         {
-            UTMOPAnchorSubsystem* Anchors =
-                GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
-            ATMOPHistoricalAnchor* LookTarget = Anchors != nullptr
-                ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
+            ETMOPConversationTargetMode Mode = Entry.ConversationTargetMode;
+            if (Mode == ETMOPConversationTargetMode::Automatic)
+                Mode = !Entry.TargetEntityId.IsNone()
+                    ? ETMOPConversationTargetMode::SpecificPerson
+                    : ETMOPConversationTargetMode::Anchor;
+
+            AActor* LookTarget = nullptr;
+            if (Mode == ETMOPConversationTargetMode::SpecificPerson)
+            {
+                LookTarget = FindSpawnedPerson(Entry.TargetEntityId);
+                if (!IsValid(LookTarget))
+                    LookTarget = FindVehicle(Entry.TargetEntityId);
+            }
+            else if (Mode == ETMOPConversationTargetMode::Group)
+            {
+                const FName GroupId = !Entry.TargetGroupId.IsNone()
+                    ? Entry.TargetGroupId : Agent->SocialGroupId;
+                float ClosestDistanceSquared = TNumericLimits<float>::Max();
+                if (!GroupId.IsNone() && GetWorld() != nullptr)
+                    for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld());
+                         It; ++It)
+                    {
+                        ATMOPHistoricalAgent* Candidate = *It;
+                        if (Candidate == Agent ||
+                            Candidate->SocialGroupId != GroupId)
+                            continue;
+                        const float DistanceSquared = FVector::DistSquared2D(
+                            Agent->GetActorLocation(),
+                            Candidate->GetActorLocation());
+                        if (DistanceSquared < ClosestDistanceSquared)
+                        {
+                            ClosestDistanceSquared = DistanceSquared;
+                            LookTarget = Candidate;
+                        }
+                    }
+            }
+            else if (Mode == ETMOPConversationTargetMode::Anchor)
+            {
+                UTMOPAnchorSubsystem* Anchors =
+                    GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+                LookTarget = Anchors != nullptr
+                    ? Anchors->FindAnchor(Entry.TargetAnchorId) : nullptr;
+            }
+
             if (!IsValid(LookTarget)) return false;
             ClearConversationFocus(Agent);
             Agent->BeginLookAtFocus(LookTarget);
@@ -933,6 +973,7 @@ void ATMOPPersonRegistryDirector::ClearConversationFocus(
     {
         ATMOPHistoricalAgent* Listener = *It;
         if (Listener != Speaker &&
+            !Listener->IsDialogueFocused() &&
             Listener->GetSocialFocusTarget() == Speaker)
             Listener->ClearSocialFocus();
     }
@@ -1553,10 +1594,29 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor)
                 OutErrors.Add(Prefix + FString::Printf(
                     TEXT(" Timeline[%d] marks arrival time but is not MoveToAnchor."), Index));
-            if (Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor &&
-                Entry.TargetAnchorId.IsNone())
-                OutErrors.Add(Prefix + FString::Printf(
-                    TEXT(" Timeline[%d] Look At Anchor requires Target Anchor ID."), Index));
+            if (Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor)
+            {
+                const bool bPersonTarget =
+                    Entry.ConversationTargetMode ==
+                        ETMOPConversationTargetMode::SpecificPerson ||
+                    (Entry.ConversationTargetMode ==
+                        ETMOPConversationTargetMode::Automatic &&
+                     !Entry.TargetEntityId.IsNone());
+                const bool bGroupTarget =
+                    Entry.ConversationTargetMode ==
+                        ETMOPConversationTargetMode::Group;
+                if (bPersonTarget && Entry.TargetEntityId.IsNone())
+                    OutErrors.Add(Prefix + FString::Printf(
+                        TEXT(" Timeline[%d] Look At Person requires Target Entity ID."), Index));
+                else if (bGroupTarget && Entry.TargetGroupId.IsNone() &&
+                    Row->SocialGroupId.IsNone())
+                    OutErrors.Add(Prefix + FString::Printf(
+                        TEXT(" Timeline[%d] Look At Group requires Target Group ID."), Index));
+                else if (!bPersonTarget && !bGroupTarget &&
+                    Entry.TargetAnchorId.IsNone())
+                    OutErrors.Add(Prefix + FString::Printf(
+                        TEXT(" Timeline[%d] Look At Anchor requires Target Anchor ID."), Index));
+            }
             if ((Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
                  Entry.Action == ETMOPPersonTimelineAction::ExitVehicle ||
                  Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&

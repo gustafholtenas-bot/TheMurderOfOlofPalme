@@ -112,6 +112,10 @@ private:
     FText GetSelectedPersonSubtitle() const;
     FText GetTimelineSummary(int32 Index) const;
     FText GetTimelineTimingText(const FTMOPPersonTimelineEntry& Entry) const;
+    bool ResolveTimelineDisplaySecond(
+        int32 Index,
+        int32& OutSecond,
+        FString* OutFailureReason = nullptr) const;
     bool BuildTimelineSpeedBadge(
         int32 Index,
         FText& OutText,

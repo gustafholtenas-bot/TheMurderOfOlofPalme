@@ -70,11 +70,11 @@ enum class ETMOPPersonTimelineAction : uint8
     PlayUniqueAnimation UMETA(DisplayName="Play Unique Animation"),
     /** Stop the unique animation currently playing in Animation Slot Name. */
     StopUniqueAnimation UMETA(DisplayName="Stop Unique Animation"),
-    /** Turn toward and keep looking at TargetAnchorId without talking. */
-    LookAtAnchor UMETA(DisplayName="Look At Anchor")
+    /** Keep looking at a selected anchor or moving person without talking. */
+    LookAtAnchor UMETA(DisplayName="Look At")
 };
 
-/** Who a talking/interacting animation addresses. */
+/** Target used by talking, interacting and authored Look At actions. */
 UENUM(BlueprintType)
 enum class ETMOPConversationTargetMode : uint8
 {
@@ -249,7 +249,7 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
 
     /** Runtime group affected by Join/Leave/Split/Dissolve/Set Group Leader. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Group",
-        meta=(EditCondition="Action==ETMOPPersonTimelineAction::JoinGroup || Action==ETMOPPersonTimelineAction::LeaveGroup || Action==ETMOPPersonTimelineAction::SplitGroup || Action==ETMOPPersonTimelineAction::DissolveGroup || Action==ETMOPPersonTimelineAction::SetGroupLeader || ((Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation) && ConversationTargetMode==ETMOPConversationTargetMode::Group)",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::JoinGroup || Action==ETMOPPersonTimelineAction::LeaveGroup || Action==ETMOPPersonTimelineAction::SplitGroup || Action==ETMOPPersonTimelineAction::DissolveGroup || Action==ETMOPPersonTimelineAction::SetGroupLeader || ((Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation || Action==ETMOPPersonTimelineAction::LookAtAnchor) && ConversationTargetMode==ETMOPConversationTargetMode::Group)",
             DisplayName="Target Group ID"))
     FName TargetGroupId = NAME_None;
 
@@ -278,13 +278,14 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
     ETMOPAgentLifeState LifeState = ETMOPAgentLifeState::Alive;
 
     /**
-     * Used by Interact and by a talking Play Unique Animation. Selecting a
-     * reference in the People Editor also changes this mode automatically.
+     * Used by Interact, a talking Play Unique Animation and Look At. Selecting
+     * an anchor/person reference in the People Editor changes this mode
+     * automatically. A person target is tracked continuously while moving.
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Person|Timeline|Conversation",
-        meta=(EditCondition="Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation",
-            DisplayName="Conversation Target"))
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation || Action==ETMOPPersonTimelineAction::LookAtAnchor",
+            DisplayName="Target Type"))
     ETMOPConversationTargetMode ConversationTargetMode =
         ETMOPConversationTargetMode::Automatic;
 
