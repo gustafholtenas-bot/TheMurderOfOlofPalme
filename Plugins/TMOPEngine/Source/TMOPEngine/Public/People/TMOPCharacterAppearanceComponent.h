@@ -8,6 +8,7 @@
 class ATMOPHistoricalAgent;
 class UDataTable;
 class UMaterialInterface;
+class USkeletalMesh;
 class USkeletalMeshComponent;
 
 /** Builds one historical agent from their evidence-backed appearance profile. */
@@ -36,6 +37,22 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Body")
     bool bAdjustMovementSpeedForHeight = true;
 
+    /** Automatically uses Manny for male profiles and Quinn for female profiles.
+     *  Unknown/unspecified genders keep the actor's existing body. Explicit
+     *  catalog body overrides still take precedence outside pilot mode. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Body")
+    bool bAutomaticallySelectMannyOrQuinnByGender = true;
+
+    /** Technical male base body. Defaults to the UE5 Manny Simple asset. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Body",
+        meta=(EditCondition="bAutomaticallySelectMannyOrQuinnByGender"))
+    TSoftObjectPtr<USkeletalMesh> MaleBaseBodyMesh;
+
+    /** Technical female base body. Defaults to the UE5 Quinn Simple asset. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Body",
+        meta=(EditCondition="bAutomaticallySelectMannyOrQuinnByGender"))
+    TSoftObjectPtr<USkeletalMesh> FemaleBaseBodyMesh;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|MetaHuman")
     bool bPreserveMetaHumanBodyPlacement = true;
 
@@ -48,6 +65,22 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Performance")
     bool bEnableAnimationUpdateRateOptimizations = true;
+
+    /**
+     * First integration step for the modular wardrobe.  While enabled, the
+     * component only applies Outerwear and leaves the actor's existing body,
+     * face, hair and other clothing untouched.  This makes it possible to
+     * validate one rigged jacket on every historical/observed NPC before the
+     * complete wardrobe is enabled.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Pilot")
+    bool bOuterwearOnlyPilotMode = true;
+
+    /** Force a fallback jacket even when the source profile says None/Hidden.
+     *  This is a runtime-only visual test and never changes DT_TMOP_People. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Pilot",
+        meta=(EditCondition="bOuterwearOnlyPilotMode"))
+    bool bForceOuterwearOnEveryoneInPilotMode = true;
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     FTMOPResolvedAppearance ResolvedAppearance;
@@ -65,8 +98,10 @@ public:
     bool ValidateAppearance(TArray<FString>& OutWarnings) const;
 
 private:
+    bool ApplyAutomaticGenderBody(ATMOPHistoricalAgent* Agent,
+        ETMOPPersonGender Gender);
     void ApplyBodyAndProportions(ATMOPHistoricalAgent* Agent);
-    void ApplyPart(USkeletalMeshComponent* Component,
+    bool ApplyPart(USkeletalMeshComponent* Component,
         const FTMOPResolvedAppearancePart& Part, bool bPreserveMeshWhenMissing);
     void ApplyCollisionAndPresentation(ATMOPHistoricalAgent* Agent,
         bool bPreserveBespokeBodyPlacement);

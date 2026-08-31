@@ -14,6 +14,10 @@
 UTMOPCharacterAppearanceComponent::UTMOPCharacterAppearanceComponent()
 {
     PrimaryComponentTick.bCanEverTick = false;
+    MaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
+        "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple")));
+    FemaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
+        "/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple.SKM_Quinn_Simple")));
 }
 
 void UTMOPCharacterAppearanceComponent::BeginPlay()
@@ -56,9 +60,55 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     }
 
     CacheBaseBodyTransform(Agent);
+    FTMOPPersonProfileRow ProfileForAppearance = ProfileComponent->Profile;
+    if (bOuterwearOnlyPilotMode && bForceOuterwearOnEveryoneInPilotMode)
+    {
+        if (ProfileForAppearance.OuterwearCategory == ETMOPOuterwearType::None)
+            ProfileForAppearance.OuterwearCategory = ETMOPOuterwearType::Unknown;
+        if (ProfileForAppearance.AppearanceProfile.UnknownPartStyle ==
+            ETMOPUnknownAppearanceStyle::Hidden)
+            ProfileForAppearance.AppearanceProfile.UnknownPartStyle =
+                ETMOPUnknownAppearanceStyle::Obscured;
+    }
     UTMOPAppearanceResolver::ResolveAppearance(
-        ProfileComponent->Profile, ResolveAssetCatalog(), ResolvedAppearance);
+        ProfileForAppearance, ResolveAssetCatalog(), ResolvedAppearance);
+
     const bool bMetaHuman = ResolvedAppearance.bUsesBespokeMetaHuman;
+    const bool bHasExplicitResolvedBody = !ResolvedAppearance.Body.Mesh.IsNull();
+    if (!bMetaHuman && bAutomaticallySelectMannyOrQuinnByGender &&
+        (bOuterwearOnlyPilotMode || !bHasExplicitResolvedBody))
+    {
+        ApplyAutomaticGenderBody(Agent, ProfileComponent->Profile.Gender);
+    }
+
+    if (bOuterwearOnlyPilotMode)
+    {
+        const bool bOuterwearApplied = ApplyPart(
+            Agent->OuterwearMesh, ResolvedAppearance.Outerwear, false);
+        if (bOuterwearApplied)
+        {
+            ApplyMorphs(Agent->OuterwearMesh,
+                ProfileComponent->Profile.AppearanceProfile,
+                ResolvedAppearance.BodyBuild);
+            ApplyBodyRegionMask(Agent);
+            ApplyPerformanceSettings(Agent);
+        }
+        else
+        {
+            const FString CatalogId =
+                ResolvedAppearance.Outerwear.CatalogId.IsNone()
+                ? TEXT("<none>")
+                : ResolvedAppearance.Outerwear.CatalogId.ToString();
+            UE_LOG(LogTemp, Error, TEXT(
+                "TMOP jacket pilot: '%s' could not apply outerwear '%s'. "
+                "Assign a Manny/Quinn-compatible Skeletal Mesh in "
+                "DT_TMOP_AppearanceAssets."),
+                *ProfileComponent->Profile.EntityId.ToString(), *CatalogId);
+        }
+        bHasAppliedAppearance = bOuterwearApplied;
+        return bOuterwearApplied;
+    }
+
     if (!bMetaHuman)
     {
         ApplyBodyAndProportions(Agent);
@@ -83,6 +133,54 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
         bMetaHuman && bPreserveMetaHumanBodyPlacement);
     ApplyPerformanceSettings(Agent);
     bHasAppliedAppearance = true;
+    return true;
+}
+
+bool UTMOPCharacterAppearanceComponent::ApplyAutomaticGenderBody(
+    ATMOPHistoricalAgent* Agent, const ETMOPPersonGender Gender)
+{
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh) ||
+        !bAutomaticallySelectMannyOrQuinnByGender)
+    {
+        return false;
+    }
+
+    const TSoftObjectPtr<USkeletalMesh>* DesiredBody = nullptr;
+    const TCHAR* BodyLabel = TEXT("existing body");
+    switch (Gender)
+    {
+    case ETMOPPersonGender::Female:
+        DesiredBody = &FemaleBaseBodyMesh;
+        BodyLabel = TEXT("Quinn");
+        break;
+    case ETMOPPersonGender::Male:
+        DesiredBody = &MaleBaseBodyMesh;
+        BodyLabel = TEXT("Manny");
+        break;
+    default:
+        // Do not invent a gender when the historical evidence is unknown.
+        return false;
+    }
+
+    USkeletalMesh* Mesh = DesiredBody != nullptr
+        ? DesiredBody->LoadSynchronous() : nullptr;
+    if (Mesh == nullptr)
+    {
+        const FString Path = DesiredBody != nullptr
+            ? DesiredBody->ToSoftObjectPath().ToString() : TEXT("<none>");
+        const FString Message = FString::Printf(TEXT(
+            "Automatic %s body could not load '%s'; keeping the existing body."),
+            BodyLabel, *Path);
+        ResolvedAppearance.Diagnostics.Add(Message);
+        UE_LOG(LogTemp, Warning, TEXT("TMOP appearance: %s"), *Message);
+        return false;
+    }
+
+    Agent->BodyMesh->SetSkeletalMesh(Mesh);
+    Agent->BodyMesh->SetVisibility(true, true);
+    UE_LOG(LogTemp, Verbose, TEXT(
+        "TMOP appearance: '%s' automatically uses %s body '%s'."),
+        *Agent->GetName(), BodyLabel, *Mesh->GetName());
     return true;
 }
 
@@ -203,15 +301,15 @@ void UTMOPCharacterAppearanceComponent::ApplyBodyRegionMask(
     }
 }
 
-void UTMOPCharacterAppearanceComponent::ApplyPart(
+bool UTMOPCharacterAppearanceComponent::ApplyPart(
     USkeletalMeshComponent* Component, const FTMOPResolvedAppearancePart& Part,
     const bool bPreserveMeshWhenMissing)
 {
-    if (!IsValid(Component)) return;
+    if (!IsValid(Component)) return false;
     if (Part.bIntentionallyEmpty)
     {
         Component->SetVisibility(false, true);
-        return;
+        return false;
     }
     if (USkeletalMesh* Mesh = Part.Mesh.LoadSynchronous())
     {
@@ -226,16 +324,26 @@ void UTMOPCharacterAppearanceComponent::ApplyPart(
                 TEXT("Asset '%s' has an incompatible skeleton."),
                 *Part.CatalogId.ToString()));
             Component->SetVisibility(false, true);
-            return;
+            return false;
         }
         Component->SetSkeletalMesh(Mesh);
         if (IsValid(Agent) && Component != Agent->BodyMesh)
             Component->SetLeaderPoseComponent(Agent->BodyMesh);
     }
+    else if (!Part.Mesh.IsNull())
+    {
+        const FString Message = FString::Printf(
+            TEXT("Asset '%s' could not load Skeletal Mesh '%s'."),
+            *Part.CatalogId.ToString(), *Part.Mesh.ToSoftObjectPath().ToString());
+        ResolvedAppearance.Diagnostics.Add(Message);
+        UE_LOG(LogTemp, Error, TEXT("TMOP appearance: %s"), *Message);
+        Component->SetVisibility(false, true);
+        return false;
+    }
     else if (!bPreserveMeshWhenMissing)
     {
         Component->SetVisibility(false, true);
-        return;
+        return false;
     }
     Component->SetVisibility(true, true);
     UMaterialInterface* Material = Part.Material.LoadSynchronous();
@@ -254,6 +362,7 @@ void UTMOPCharacterAppearanceComponent::ApplyPart(
             Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"),
                 Part.ObscurityAmount);
         }
+    return Component->GetSkeletalMeshAsset() != nullptr;
 }
 
 void UTMOPCharacterAppearanceComponent::ApplyCollisionAndPresentation(

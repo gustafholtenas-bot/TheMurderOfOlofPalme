@@ -1734,6 +1734,8 @@ bool ATMOPPersonRegistryDirector::ValidateAppearanceAssetTable(
         return false;
     }
     TSet<FName> CatalogIds;
+    int32 LoadableOuterwearCount = 0;
+    bool bHasLoadableUnknownOuterwear = false;
     for (const FName RowName : AppearanceAssetTable->GetRowNames())
     {
         const FTMOPAppearanceAssetRow* Row =
@@ -1751,11 +1753,28 @@ bool ATMOPPersonRegistryDirector::ValidateAppearanceAssetTable(
         CatalogIds.Add(Row->CatalogId);
         if (Row->Mesh.IsNull())
             OutErrors.Add(Prefix + TEXT(" has no Skeletal Mesh."));
+        else if (Row->Mesh.LoadSynchronous() == nullptr)
+            OutErrors.Add(Prefix + FString::Printf(
+                TEXT(" references a missing/unloadable Skeletal Mesh: %s"),
+                *Row->Mesh.ToSoftObjectPath().ToString()));
+        else if (Row->PartType == ETMOPAppearancePartType::Outerwear)
+        {
+            ++LoadableOuterwearCount;
+            if (RowName == TEXT("UNKNOWN_OUTERWEAR_OBSCURED"))
+                bHasLoadableUnknownOuterwear = true;
+        }
         if (Row->EarliestYear > 1986 || Row->LatestYear < 1986)
             OutErrors.Add(Prefix + TEXT(" is not valid for 1986."));
         if (Row->MaximumAge > 0 && Row->MaximumAge < Row->MinimumAge)
             OutErrors.Add(Prefix + TEXT(" has MaximumAge below MinimumAge."));
     }
+    if (LoadableOuterwearCount == 0)
+        OutErrors.Add(TEXT(
+            "No loadable Outerwear Skeletal Mesh exists; the jacket pilot cannot render."));
+    if (!bHasLoadableUnknownOuterwear)
+        OutErrors.Add(TEXT(
+            "UNKNOWN_OUTERWEAR_OBSCURED needs a loadable Manny/Quinn-compatible "
+            "Skeletal Mesh so NPCs without clothing evidence receive a jacket."));
     return OutErrors.IsEmpty();
 }
 

@@ -1,6 +1,7 @@
 #if WITH_DEV_AUTOMATION_TESTS
 
 #include "Misc/AutomationTest.h"
+#include "People/TMOPCharacterAppearanceComponent.h"
 #include "People/TMOPAppearanceResolver.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTMOPAppearanceDefaultsTest,
@@ -9,6 +10,19 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTMOPAppearanceDefaultsTest,
 
 bool FTMOPAppearanceDefaultsTest::RunTest(const FString& Parameters)
 {
+    const UTMOPCharacterAppearanceComponent* AppearanceComponent =
+        NewObject<UTMOPCharacterAppearanceComponent>();
+    TestTrue(TEXT("Automatic Manny/Quinn selection is enabled by default"),
+        AppearanceComponent->bAutomaticallySelectMannyOrQuinnByGender);
+    TestEqual(TEXT("Default male body is Manny Simple"),
+        AppearanceComponent->MaleBaseBodyMesh.ToSoftObjectPath().ToString(),
+        FString(TEXT(
+            "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple")));
+    TestEqual(TEXT("Default female body is Quinn Simple"),
+        AppearanceComponent->FemaleBaseBodyMesh.ToSoftObjectPath().ToString(),
+        FString(TEXT(
+            "/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple.SKM_Quinn_Simple")));
+
     FTMOPPersonProfileRow Male;
     Male.EntityId = TEXT("TEST_MALE");
     Male.Gender = ETMOPPersonGender::Male;
@@ -36,6 +50,8 @@ bool FTMOPAppearanceDefaultsTest::RunTest(const FString& Parameters)
         First.Body.bUsesObscuredFallback);
     TestEqual(TEXT("Unknown trousers have the reserved ID"),
         First.Trousers.CatalogId, FName(TEXT("UNKNOWN_TROUSERS_OBSCURED")));
+    TestEqual(TEXT("Unknown outerwear has the jacket-pilot fallback ID"),
+        First.Outerwear.CatalogId, FName(TEXT("UNKNOWN_OUTERWEAR_OBSCURED")));
 
     FTMOPAppearanceSlot SwedishCoat;
     SwedishCoat.OriginalText = TEXT("lång mörkblå yllemek rock");
