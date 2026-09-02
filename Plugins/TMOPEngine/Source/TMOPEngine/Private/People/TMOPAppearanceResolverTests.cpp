@@ -1,6 +1,7 @@
 #if WITH_DEV_AUTOMATION_TESTS
 
 #include "Misc/AutomationTest.h"
+#include "Engine/StaticMesh.h"
 #include "People/TMOPCharacterAppearanceComponent.h"
 #include "People/TMOPAppearanceResolver.h"
 
@@ -14,6 +15,11 @@ bool FTMOPAppearanceDefaultsTest::RunTest(const FString& Parameters)
         NewObject<UTMOPCharacterAppearanceComponent>();
     TestTrue(TEXT("Automatic Manny/Quinn selection is enabled by default"),
         AppearanceComponent->bAutomaticallySelectMannyOrQuinnByGender);
+    TestFalse(TEXT("Complete wardrobe is enabled by default"),
+        AppearanceComponent->bOuterwearOnlyPilotMode);
+    TestEqual(TEXT("Static hats use the shared headwear socket"),
+        AppearanceComponent->DefaultHeadwearSocket,
+        FName(TEXT("HeadwearSocket")));
     TestEqual(TEXT("Default male body is Manny Simple"),
         AppearanceComponent->MaleBaseBodyMesh.ToSoftObjectPath().ToString(),
         FString(TEXT(
@@ -74,6 +80,28 @@ bool FTMOPAppearanceDefaultsTest::RunTest(const FString& Parameters)
         HatTags.Contains(TEXT("KnitCap")));
     TestTrue(TEXT("Black is normalized"),
         HatTags.Contains(TEXT("Black")));
+
+    FTMOPPersonProfileRow StaticHatProfile;
+    StaticHatProfile.EntityId = TEXT("TEST_STATIC_HAT");
+    StaticHatProfile.Headwear.OriginalText = TEXT("svart hatt");
+    StaticHatProfile.AppearanceProfile.Headwear.StaticMeshOverride =
+        TSoftObjectPtr<UStaticMesh>(FSoftObjectPath(TEXT(
+            "/Game/Test/SM_TestHat.SM_TestHat")));
+    StaticHatProfile.AppearanceProfile.Headwear.AttachmentSocket =
+        TEXT("HeadwearSocket");
+    StaticHatProfile.AppearanceProfile.Headwear.AttachmentTransform =
+        FTransform(FRotator(0.0, 10.0, 0.0), FVector(0.0, 0.0, 2.0));
+    FTMOPResolvedAppearance StaticHatResult;
+    UTMOPAppearanceResolver::ResolveAppearance(
+        StaticHatProfile, nullptr, StaticHatResult);
+    TestEqual(TEXT("Static headwear override is preserved"),
+        StaticHatResult.Headwear.StaticMesh.ToSoftObjectPath().ToString(),
+        FString(TEXT("/Game/Test/SM_TestHat.SM_TestHat")));
+    TestEqual(TEXT("Headwear socket is preserved"),
+        StaticHatResult.Headwear.AttachmentSocket,
+        FName(TEXT("HeadwearSocket")));
+    TestEqual(TEXT("Headwear offset is preserved"),
+        StaticHatResult.Headwear.AttachmentTransform.GetLocation().Z, 2.0);
 
     FTMOPPersonProfileRow HiddenUnknown;
     HiddenUnknown.EntityId = TEXT("TEST_HIDDEN_UNKNOWN");

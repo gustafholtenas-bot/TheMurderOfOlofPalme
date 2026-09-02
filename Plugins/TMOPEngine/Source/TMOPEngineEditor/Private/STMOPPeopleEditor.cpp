@@ -2587,9 +2587,15 @@ TArray<FString> STMOPPeopleEditor::ValidateAppearanceRow(
                 Named.Label));
         if (!Part.bUsesObscuredFallback &&
             Part.PartType != ETMOPAppearancePartType::Body &&
-            Part.CatalogId.IsNone() && Part.Mesh.IsNull())
+            Part.CatalogId.IsNone() && Part.Mesh.IsNull() &&
+            Part.StaticMesh.IsNull())
             Warnings.Add(FString::Printf(
                 TEXT("%s resolved without an asset or fallback."), Named.Label));
+        if (Part.PartType == ETMOPAppearancePartType::Headwear &&
+            Part.StaticMesh.IsNull() && !Part.Mesh.IsNull())
+            Warnings.Add(FString::Printf(TEXT(
+                "%s still uses legacy Skeletal Mesh; assign StaticMesh for socket attachment."),
+                Named.Label));
     }
     return Warnings;
 }

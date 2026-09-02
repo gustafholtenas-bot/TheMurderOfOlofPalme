@@ -11,6 +11,7 @@ class ACharacter;
 class UDataTable;
 class USkeletalMesh;
 class USkeletalMeshComponent;
+class UStaticMeshComponent;
 
 /**
  * Level actor that gives the playable character an evidence/catalog driven
@@ -72,6 +73,12 @@ public:
         meta=(EditCondition="bAutomaticallySelectMannyOrQuinnByGender"))
     TSoftObjectPtr<USkeletalMesh> FemaleBaseBodyMesh;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Appearance|Headwear")
+    FName DefaultHeadwearSocket = TEXT("HeadwearSocket");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Appearance|Headwear")
+    FName HeadwearFallbackBone = TEXT("head");
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Appearance|Startup")
     bool bApplyOnBeginPlay = true;
 
@@ -117,6 +124,10 @@ private:
         USkeletalMeshComponent* Body, FName ComponentName);
     bool ApplyResolvedPart(ACharacter* Character, USkeletalMeshComponent* Body,
         FName ComponentName, const FTMOPResolvedAppearancePart& Part);
+    UStaticMeshComponent* EnsureHeadwearComponent(ACharacter* Character,
+        USkeletalMeshComponent* Body);
+    bool ApplyResolvedHeadwear(ACharacter* Character,
+        USkeletalMeshComponent* Body, const FTMOPResolvedAppearancePart& Part);
     bool ApplyResolvedBody(USkeletalMeshComponent* Body,
         const FTMOPPersonProfileRow& Profile);
     void ApplyBodyRegionMask(USkeletalMeshComponent* Body);
@@ -124,6 +135,9 @@ private:
 
     UPROPERTY(Transient)
     TArray<TObjectPtr<USkeletalMeshComponent>> ManagedPartComponents;
+
+    UPROPERTY(Transient)
+    TObjectPtr<UStaticMeshComponent> ManagedHeadwearComponent;
 
     FTimerHandle StartupRetryTimer;
     int32 RemainingStartupRetries = 0;

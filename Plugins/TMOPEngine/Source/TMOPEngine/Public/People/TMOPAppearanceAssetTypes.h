@@ -7,6 +7,7 @@
 
 class UMaterialInterface;
 class USkeletalMesh;
+class UStaticMesh;
 
 /** Body areas hidden by a garment to prevent skin clipping through cloth. */
 UENUM(BlueprintType, meta=(Bitflags))
@@ -55,6 +56,20 @@ struct TMOPENGINE_API FTMOPAppearanceAssetRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<USkeletalMesh> Mesh;
+
+    /** Static accessory used by Headwear. Static hats avoid skinning, leader-pose
+     *  evaluation and clothing morphs. Mesh remains as a legacy fallback while
+     *  existing catalog rows are migrated. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
+    TSoftObjectPtr<UStaticMesh> StaticMesh;
+
+    /** Socket used by static headwear. Missing sockets safely fall back to head. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Attachment")
+    FName AttachmentSocket = TEXT("HeadwearSocket");
+
+    /** Per-asset adjustment after snapping the static mesh to AttachmentSocket. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Attachment")
+    FTransform AttachmentTransform = FTransform::Identity;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<UMaterialInterface> Material;
@@ -117,6 +132,15 @@ struct TMOPENGINE_API FTMOPResolvedAppearancePart
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     TSoftObjectPtr<USkeletalMesh> Mesh;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
+    TSoftObjectPtr<UStaticMesh> StaticMesh;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
+    FName AttachmentSocket = TEXT("HeadwearSocket");
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
+    FTransform AttachmentTransform = FTransform::Identity;
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     TSoftObjectPtr<UMaterialInterface> Material;

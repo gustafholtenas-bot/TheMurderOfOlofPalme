@@ -101,7 +101,6 @@ ATMOPHistoricalAgent::ATMOPHistoricalAgent()
     TrousersMesh = CreateModularPart(TEXT("TrousersMesh"));
     FootwearMesh = CreateModularPart(TEXT("FootwearMesh"));
     GlovesMesh = CreateModularPart(TEXT("GlovesMesh"));
-    HeadwearMesh = CreateModularPart(TEXT("HeadwearMesh"));
     ScarfMesh = CreateModularPart(TEXT("ScarfMesh"));
     GlassesMesh = CreateModularPart(TEXT("GlassesMesh"));
 
@@ -312,7 +311,7 @@ void ATMOPHistoricalAgent::BeginPlay()
     Super::BeginPlay();
     const TArray<USkeletalMeshComponent*> ModularParts = {
         FaceMesh.Get(), HairMesh.Get(), OuterwearMesh.Get(), UpperBodyMesh.Get(),
-        TrousersMesh.Get(), FootwearMesh.Get(), GlovesMesh.Get(), HeadwearMesh.Get() };
+        TrousersMesh.Get(), FootwearMesh.Get(), GlovesMesh.Get() };
     for (USkeletalMeshComponent* Part : ModularParts)
         if (IsValid(Part) && IsValid(BodyMesh)) Part->SetLeaderPoseComponent(BodyMesh);
     RefreshNameLabel();

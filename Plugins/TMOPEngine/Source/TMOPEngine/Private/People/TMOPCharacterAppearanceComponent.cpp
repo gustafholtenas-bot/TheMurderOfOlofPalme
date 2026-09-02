@@ -3,8 +3,10 @@
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine/DataTable.h"
 #include "Engine/SkeletalMesh.h"
+#include "Engine/StaticMesh.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
 #include "People/TMOPAppearanceResolver.h"
@@ -121,7 +123,7 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     ApplyPart(Agent->TrousersMesh, ResolvedAppearance.Trousers, false);
     ApplyPart(Agent->FootwearMesh, ResolvedAppearance.Footwear, false);
     ApplyPart(Agent->GlovesMesh, ResolvedAppearance.Gloves, false);
-    ApplyPart(Agent->HeadwearMesh, ResolvedAppearance.Headwear, false);
+    ApplyHeadwear(Agent, ResolvedAppearance.Headwear);
     ApplyPart(Agent->ScarfMesh, ResolvedAppearance.Scarf, false);
     ApplyPart(Agent->GlassesMesh, ResolvedAppearance.Glasses, false);
     ApplyModularMorphs(Agent, ProfileComponent->Profile.AppearanceProfile,
@@ -257,8 +259,7 @@ void UTMOPCharacterAppearanceComponent::ApplyModularMorphs(
         Agent->FaceMesh.Get(), Agent->HairMesh.Get(), Agent->FacialHairMesh.Get(),
         Agent->ScarfMesh.Get(), Agent->GlassesMesh.Get(), Agent->OuterwearMesh.Get(),
         Agent->UpperBodyMesh.Get(), Agent->TrousersMesh.Get(),
-        Agent->FootwearMesh.Get(), Agent->GlovesMesh.Get(),
-        Agent->HeadwearMesh.Get() };
+        Agent->FootwearMesh.Get(), Agent->GlovesMesh.Get() };
     for (USkeletalMeshComponent* Part : Parts)
         if (IsValid(Part) && Part->IsVisible() &&
             (bIncludeBespokeHeadParts ||
@@ -365,6 +366,118 @@ bool UTMOPCharacterAppearanceComponent::ApplyPart(
     return Component->GetSkeletalMeshAsset() != nullptr;
 }
 
+bool UTMOPCharacterAppearanceComponent::ApplyHeadwear(
+    ATMOPHistoricalAgent* Agent, const FTMOPResolvedAppearancePart& Part)
+{
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return false;
+
+    // A migrated static hat always wins. Keep the old component empty so it
+    // contributes no leader-pose, skinning or morph evaluation cost.
+    if (IsValid(Agent->HeadwearMesh))
+    {
+        Agent->HeadwearMesh->SetSkeletalMesh(nullptr);
+        Agent->HeadwearMesh->SetVisibility(false, true);
+    }
+    if (Part.bIntentionallyEmpty)
+    {
+        if (IsValid(Agent->HeadwearStaticMesh))
+        {
+            Agent->HeadwearStaticMesh->SetStaticMesh(nullptr);
+            Agent->HeadwearStaticMesh->SetVisibility(false, true);
+        }
+        return true;
+    }
+
+    UStaticMesh* Mesh = Part.StaticMesh.LoadSynchronous();
+    if (Mesh == nullptr)
+    {
+        if (IsValid(Agent->HeadwearStaticMesh))
+        {
+            Agent->HeadwearStaticMesh->SetStaticMesh(nullptr);
+            Agent->HeadwearStaticMesh->SetVisibility(false, true);
+        }
+        if (!Part.StaticMesh.IsNull())
+        {
+            const FString Message = FString::Printf(TEXT(
+                "Headwear '%s' could not load Static Mesh '%s'."),
+                *Part.CatalogId.ToString(),
+                *Part.StaticMesh.ToSoftObjectPath().ToString());
+            ResolvedAppearance.Diagnostics.Add(Message);
+            UE_LOG(LogTemp, Error, TEXT("TMOP appearance: %s"), *Message);
+            return false;
+        }
+
+        // Temporary migration fallback. Old catalog rows continue to render,
+        // but the heavier skeletal component is created only for those agents.
+        if (!Part.Mesh.IsNull())
+        {
+            ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+                "Headwear '%s' still uses legacy Skeletal Mesh; migrate it to StaticMesh."),
+                *Part.CatalogId.ToString()));
+            if (!IsValid(Agent->HeadwearMesh))
+            {
+                Agent->HeadwearMesh = NewObject<USkeletalMeshComponent>(
+                    Agent, FName(TEXT("HeadwearMesh_Legacy")));
+                if (!IsValid(Agent->HeadwearMesh)) return false;
+                Agent->AddInstanceComponent(Agent->HeadwearMesh);
+                Agent->HeadwearMesh->SetupAttachment(Agent->BodyMesh);
+                Agent->HeadwearMesh->SetCollisionEnabled(
+                    ECollisionEnabled::NoCollision);
+                Agent->HeadwearMesh->SetGenerateOverlapEvents(false);
+                Agent->HeadwearMesh->RegisterComponent();
+            }
+            return ApplyPart(Agent->HeadwearMesh, Part, false);
+        }
+        return false;
+    }
+
+    if (!IsValid(Agent->HeadwearStaticMesh))
+    {
+        Agent->HeadwearStaticMesh = NewObject<UStaticMeshComponent>(
+            Agent, FName(TEXT("HeadwearStaticMesh")));
+        if (!IsValid(Agent->HeadwearStaticMesh)) return false;
+        Agent->AddInstanceComponent(Agent->HeadwearStaticMesh);
+        Agent->HeadwearStaticMesh->SetupAttachment(Agent->BodyMesh);
+        Agent->HeadwearStaticMesh->SetCollisionEnabled(
+            ECollisionEnabled::NoCollision);
+        Agent->HeadwearStaticMesh->SetGenerateOverlapEvents(false);
+        Agent->HeadwearStaticMesh->RegisterComponent();
+    }
+    UStaticMeshComponent* Component = Agent->HeadwearStaticMesh;
+    Component->SetStaticMesh(Mesh);
+    FName Socket = Part.AttachmentSocket.IsNone()
+        ? DefaultHeadwearSocket : Part.AttachmentSocket;
+    if (!Agent->BodyMesh->DoesSocketExist(Socket))
+    {
+        const FName RequestedSocket = Socket;
+        Socket = Agent->BodyMesh->DoesSocketExist(HeadwearFallbackBone)
+            ? HeadwearFallbackBone : NAME_None;
+        ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+            "Headwear socket '%s' is missing; using '%s'."),
+            *RequestedSocket.ToString(),
+            Socket.IsNone() ? TEXT("component root") : *Socket.ToString()));
+    }
+    Component->AttachToComponent(Agent->BodyMesh,
+        FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
+    Component->SetRelativeTransform(Part.AttachmentTransform);
+    Component->SetVisibility(true, true);
+
+    if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
+        for (int32 Index = 0; Index < Component->GetNumMaterials(); ++Index)
+        {
+            UMaterialInstanceDynamic* Dynamic =
+                Component->CreateDynamicMaterialInstance(Index, Material);
+            if (Dynamic == nullptr) continue;
+            Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
+            Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"),
+                Part.bUsesObscuredFallback ? 1.0f : 0.0f);
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"),
+                Part.ObscurityAmount);
+        }
+    return true;
+}
+
 void UTMOPCharacterAppearanceComponent::ApplyCollisionAndPresentation(
     ATMOPHistoricalAgent* Agent, const bool bPreserveBespokeBodyPlacement)
 {
@@ -403,7 +516,7 @@ void UTMOPCharacterAppearanceComponent::ApplyPerformanceSettings(
             Agent->ScarfMesh.Get(), Agent->GlassesMesh.Get(),
             Agent->OuterwearMesh.Get(), Agent->UpperBodyMesh.Get(),
             Agent->TrousersMesh.Get(), Agent->FootwearMesh.Get(),
-            Agent->GlovesMesh.Get(), Agent->HeadwearMesh.Get() };
+            Agent->GlovesMesh.Get() };
     for (USkeletalMeshComponent* Part : Parts)
     {
         if (!IsValid(Part)) continue;
@@ -413,6 +526,11 @@ void UTMOPCharacterAppearanceComponent::ApplyPerformanceSettings(
             EVisibilityBasedAnimTickOption::OnlyTickPoseWhenRendered;
         Part->bEnableUpdateRateOptimizations =
             bEnableAnimationUpdateRateOptimizations;
+    }
+    if (IsValid(Agent->HeadwearStaticMesh))
+    {
+        Agent->HeadwearStaticMesh->SetCullDistance(CullDistanceCentimeters);
+        Agent->HeadwearStaticMesh->bAllowCullDistanceVolume = true;
     }
 }
 
@@ -440,6 +558,11 @@ void UTMOPCharacterAppearanceComponent::ResetAppearance()
     }
     for (USkeletalMeshComponent* Part : ModularParts)
         if (IsValid(Part)) { Part->SetSkeletalMesh(nullptr); Part->SetVisibility(false, true); }
+    if (IsValid(Agent->HeadwearStaticMesh))
+    {
+        Agent->HeadwearStaticMesh->SetStaticMesh(nullptr);
+        Agent->HeadwearStaticMesh->SetVisibility(false, true);
+    }
     ResolvedAppearance = FTMOPResolvedAppearance();
     ApplyBodyRegionMask(Agent);
     Agent->AppearanceMovementSpeedMultiplier = 1.0f;

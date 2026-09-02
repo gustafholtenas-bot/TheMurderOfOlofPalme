@@ -37,6 +37,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Body")
     bool bAdjustMovementSpeedForHeight = true;
 
+    /** Preferred socket shared by Manny and Quinn for rigid hats. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
+    FName DefaultHeadwearSocket = TEXT("HeadwearSocket");
+
+    /** Used while a Skeleton asset has not yet received DefaultHeadwearSocket. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
+    FName HeadwearFallbackBone = TEXT("head");
+
     /** Automatically uses Manny for male profiles and Quinn for female profiles.
      *  Unknown/unspecified genders keep the actor's existing body. Explicit
      *  catalog body overrides still take precedence outside pilot mode. */
@@ -74,7 +82,7 @@ public:
      * complete wardrobe is enabled.
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Pilot")
-    bool bOuterwearOnlyPilotMode = true;
+    bool bOuterwearOnlyPilotMode = false;
 
     /** Force a fallback jacket even when the source profile says None/Hidden.
      *  This is a runtime-only visual test and never changes DT_TMOP_People. */
@@ -103,6 +111,8 @@ private:
     void ApplyBodyAndProportions(ATMOPHistoricalAgent* Agent);
     bool ApplyPart(USkeletalMeshComponent* Component,
         const FTMOPResolvedAppearancePart& Part, bool bPreserveMeshWhenMissing);
+    bool ApplyHeadwear(ATMOPHistoricalAgent* Agent,
+        const FTMOPResolvedAppearancePart& Part);
     void ApplyCollisionAndPresentation(ATMOPHistoricalAgent* Agent,
         bool bPreserveBespokeBodyPlacement);
     void ApplyPerformanceSettings(ATMOPHistoricalAgent* Agent);

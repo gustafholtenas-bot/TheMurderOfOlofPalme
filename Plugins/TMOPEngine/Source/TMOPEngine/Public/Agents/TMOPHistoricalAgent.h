@@ -75,8 +75,14 @@ public:
     TObjectPtr<USkeletalMeshComponent> FootwearMesh;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
     TObjectPtr<USkeletalMeshComponent> GlovesMesh;
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    /** Deprecated migration fallback, created only when an old skinned hat is used. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance",
+        meta=(DeprecatedProperty, DeprecationMessage="Use HeadwearStaticMesh"))
     TObjectPtr<USkeletalMeshComponent> HeadwearMesh;
+
+    /** Rigid hat attached to HeadwearSocket (or the head bone fallback). */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
+    TObjectPtr<UStaticMeshComponent> HeadwearStaticMesh;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")
     TObjectPtr<USkeletalMeshComponent> ScarfMesh;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Appearance")

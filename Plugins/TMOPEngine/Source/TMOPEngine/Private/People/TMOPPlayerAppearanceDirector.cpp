@@ -1,7 +1,9 @@
 #include "People/TMOPPlayerAppearanceDirector.h"
 
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine/SkeletalMesh.h"
+#include "Engine/StaticMesh.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialInstanceDynamic.h"
@@ -63,7 +65,7 @@ bool ATMOPPlayerAppearanceDirector::BuildPlayerProfile(
 {
     if (bUsePersonProfileRow)
     {
-        UDataTable* Table = PlayerProfileRow.DataTable;
+        const UDataTable* Table = PlayerProfileRow.DataTable;
         if (!IsValid(Table) || PlayerProfileRow.RowName.IsNone() ||
             Table->GetRowStruct() != FTMOPPersonProfileRow::StaticStruct())
         {
@@ -177,6 +179,115 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedPart(
     return true;
 }
 
+UStaticMeshComponent* ATMOPPlayerAppearanceDirector::EnsureHeadwearComponent(
+    ACharacter* Character, USkeletalMeshComponent* Body)
+{
+    if (!IsValid(Character) || !IsValid(Body)) return nullptr;
+    if (IsValid(ManagedHeadwearComponent)) return ManagedHeadwearComponent;
+
+    TArray<UStaticMeshComponent*> ExistingComponents;
+    Character->GetComponents<UStaticMeshComponent>(ExistingComponents);
+    for (UStaticMeshComponent* Existing : ExistingComponents)
+        if (IsValid(Existing) && Existing->GetFName() ==
+            FName(TEXT("TMOP_Player_Headwear")))
+        {
+            ManagedHeadwearComponent = Existing;
+            return Existing;
+        }
+
+    UStaticMeshComponent* Component = NewObject<UStaticMeshComponent>(
+        Character, FName(TEXT("TMOP_Player_Headwear")));
+    if (!IsValid(Component)) return nullptr;
+    Character->AddInstanceComponent(Component);
+    Component->SetupAttachment(Body);
+    Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    Component->SetGenerateOverlapEvents(false);
+    Component->SetOwnerNoSee(Body->bOwnerNoSee);
+    Component->SetOnlyOwnerSee(Body->bOnlyOwnerSee);
+    Component->SetCastShadow(Body->CastShadow);
+    Component->RegisterComponent();
+    ManagedHeadwearComponent = Component;
+    return Component;
+}
+
+bool ATMOPPlayerAppearanceDirector::ApplyResolvedHeadwear(
+    ACharacter* Character, USkeletalMeshComponent* Body,
+    const FTMOPResolvedAppearancePart& Part)
+{
+    UStaticMeshComponent* Component = EnsureHeadwearComponent(Character, Body);
+    if (!IsValid(Component)) return false;
+    if (Part.bIntentionallyEmpty)
+    {
+        Component->SetStaticMesh(nullptr);
+        Component->SetVisibility(false, true);
+        return true;
+    }
+
+    UStaticMesh* Mesh = Part.StaticMesh.LoadSynchronous();
+    if (Mesh == nullptr)
+    {
+        Component->SetStaticMesh(nullptr);
+        Component->SetVisibility(false, true);
+        if (!Part.StaticMesh.IsNull())
+        {
+            ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+                "Player headwear '%s' could not load Static Mesh '%s'."),
+                *Part.CatalogId.ToString(),
+                *Part.StaticMesh.ToSoftObjectPath().ToString()));
+            return false;
+        }
+        if (!Part.Mesh.IsNull())
+        {
+            ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+                "Player headwear '%s' still uses legacy Skeletal Mesh; migrate it to StaticMesh."),
+                *Part.CatalogId.ToString()));
+            return ApplyResolvedPart(Character, Body,
+                TEXT("TMOP_Player_Headwear_Legacy"), Part);
+        }
+        return false;
+    }
+
+    Component->SetStaticMesh(Mesh);
+    for (USkeletalMeshComponent* Legacy : ManagedPartComponents)
+        if (IsValid(Legacy) && Legacy->GetFName() ==
+            FName(TEXT("TMOP_Player_Headwear_Legacy")))
+        {
+            Legacy->SetSkeletalMesh(nullptr);
+            Legacy->SetVisibility(false, true);
+        }
+    FName Socket = Part.AttachmentSocket.IsNone()
+        ? DefaultHeadwearSocket : Part.AttachmentSocket;
+    if (!Body->DoesSocketExist(Socket))
+    {
+        const FName RequestedSocket = Socket;
+        Socket = Body->DoesSocketExist(HeadwearFallbackBone)
+            ? HeadwearFallbackBone : NAME_None;
+        ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+            "Player headwear socket '%s' is missing; using '%s'."),
+            *RequestedSocket.ToString(),
+            Socket.IsNone() ? TEXT("component root") : *Socket.ToString()));
+    }
+    Component->AttachToComponent(Body,
+        FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
+    Component->SetRelativeTransform(Part.AttachmentTransform);
+    Component->SetVisibility(true, true);
+
+    if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
+        for (int32 Index = 0; Index < Component->GetNumMaterials(); ++Index)
+        {
+            UMaterialInstanceDynamic* Dynamic =
+                Component->CreateDynamicMaterialInstance(Index, Material);
+            if (Dynamic == nullptr) continue;
+            Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
+            Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"),
+                Part.bUsesObscuredFallback ? 1.0f : 0.0f);
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"),
+                Part.ObscurityAmount);
+        }
+    return true;
+}
+
 bool ATMOPPlayerAppearanceDirector::ApplyResolvedBody(
     USkeletalMeshComponent* Body, const FTMOPPersonProfileRow& Profile)
 {
@@ -277,7 +388,7 @@ bool ATMOPPlayerAppearanceDirector::ApplyPlayerAppearance()
         ResolvedAppearance.Footwear);
     bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_Gloves"),
         ResolvedAppearance.Gloves);
-    bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_Headwear"),
+    bSuccess &= ApplyResolvedHeadwear(Character, Body,
         ResolvedAppearance.Headwear);
     bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_Scarf"),
         ResolvedAppearance.Scarf);
@@ -302,6 +413,11 @@ void ATMOPPlayerAppearanceDirector::ClearPlayerAppearance()
         Component->SetVisibility(false, true);
     }
     ManagedPartComponents.Reset();
+    if (IsValid(ManagedHeadwearComponent))
+    {
+        ManagedHeadwearComponent->SetStaticMesh(nullptr);
+        ManagedHeadwearComponent->SetVisibility(false, true);
+    }
     ResolvedAppearance = FTMOPResolvedAppearance();
     bHasAppliedAppearance = false;
 }
@@ -338,8 +454,19 @@ void ATMOPPlayerAppearanceDirector::ValidatePlayerAppearance()
     if (!IsValid(ResolveAssetCatalog()))
         Problems.Add(TEXT("No Appearance Asset Table is available."));
     FTMOPPersonProfileRow Profile;
-    if (!BuildPlayerProfile(Profile))
+    const bool bProfileValid = BuildPlayerProfile(Profile);
+    if (!bProfileValid)
         Problems.Add(TEXT("Player profile is invalid."));
+    UDataTable* Catalog = ResolveAssetCatalog();
+    if (bProfileValid && IsValid(Catalog))
+    {
+        FTMOPResolvedAppearance Preview;
+        UTMOPAppearanceResolver::ResolveAppearance(Profile, Catalog, Preview);
+        if (Preview.Headwear.StaticMesh.IsNull() &&
+            !Preview.Headwear.Mesh.IsNull())
+            Problems.Add(TEXT(
+                "Selected headwear still uses legacy Skeletal Mesh; assign StaticMesh for socket attachment."));
+    }
 
     if (Problems.IsEmpty())
     {

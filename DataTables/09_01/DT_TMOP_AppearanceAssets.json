@@ -1,0 +1,2492 @@
+[
+  {
+    "Name": "BEARD_BROWN",
+    "CatalogId": "BEARD_BROWN",
+    "PartType": "FacialHair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Beard.SK_TMOP_Beard",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Beard",
+      "MustacheAndBeard",
+      "Brown"
+    ],
+    "SelectionWeight": 0.9,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BEARD_DARK",
+    "CatalogId": "BEARD_DARK",
+    "PartType": "FacialHair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Beard.SK_TMOP_Beard",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Beard",
+      "MustacheAndBeard",
+      "Dark"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BEARD_GREY",
+    "CatalogId": "BEARD_GREY",
+    "PartType": "FacialHair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Beard.SK_TMOP_Beard",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 30,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Beard",
+      "MustacheAndBeard",
+      "Grey"
+    ],
+    "SelectionWeight": 0.6,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BODY_FEMALE_AVERAGE_1986",
+    "CatalogId": "BODY_FEMALE_AVERAGE_1986",
+    "PartType": "Body",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Bodies/SK_TMOP_Body_Female_Average.SK_TMOP_Body_Female_Average",
+    "Material": "None",
+    "Gender": "Female",
+    "CompatibleBodyBuilds": [
+      "Average",
+      "Athletic",
+      "Strong"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Female",
+      "Average",
+      "Athletic",
+      "Strong",
+      "Human1986"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BODY_FEMALE_HEAVY_1986",
+    "CatalogId": "BODY_FEMALE_HEAVY_1986",
+    "PartType": "Body",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Bodies/SK_TMOP_Body_Female_Heavy.SK_TMOP_Body_Female_Heavy",
+    "Material": "None",
+    "Gender": "Female",
+    "CompatibleBodyBuilds": [
+      "Heavy"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Female",
+      "Heavy",
+      "Human1986"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BODY_FEMALE_SLIM_1986",
+    "CatalogId": "BODY_FEMALE_SLIM_1986",
+    "PartType": "Body",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Bodies/SK_TMOP_Body_Female_Slim.SK_TMOP_Body_Female_Slim",
+    "Material": "None",
+    "Gender": "Female",
+    "CompatibleBodyBuilds": [
+      "Thin",
+      "Slim"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Female",
+      "Thin",
+      "Slim",
+      "Human1986"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BODY_MALE_AVERAGE_1986",
+    "CatalogId": "BODY_MALE_AVERAGE_1986",
+    "PartType": "Body",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Bodies/SK_TMOP_Body_Male_Average.SK_TMOP_Body_Male_Average",
+    "Material": "None",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [
+      "Average",
+      "Athletic",
+      "Strong"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Male",
+      "Average",
+      "Athletic",
+      "Strong",
+      "Human1986"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BODY_MALE_HEAVY_1986",
+    "CatalogId": "BODY_MALE_HEAVY_1986",
+    "PartType": "Body",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Bodies/SK_TMOP_Body_Male_Heavy.SK_TMOP_Body_Male_Heavy",
+    "Material": "None",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [
+      "Heavy"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Male",
+      "Heavy",
+      "Human1986"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BODY_MALE_SLIM_1986",
+    "CatalogId": "BODY_MALE_SLIM_1986",
+    "PartType": "Body",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Bodies/SK_TMOP_Body_Male_Slim.SK_TMOP_Body_Male_Slim",
+    "Material": "None",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [
+      "Thin",
+      "Slim"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Male",
+      "Thin",
+      "Slim",
+      "Human1986"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BOOTS_DARKBROWN_01",
+    "CatalogId": "BOOTS_DARKBROWN_01",
+    "PartType": "Footwear",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Boots.SK_TMOP_Boots",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBrown.MI_TMOP_Clothing_DarkBrown",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 12,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Boots",
+      "DarkBrown",
+      "Dark",
+      "Leather"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 128,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.075,
+      "G": 0.038,
+      "B": 0.022,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.075,
+      "G": 0.038,
+      "B": 0.022,
+      "A": 1
+    }
+  },
+  {
+    "Name": "BRIMMED_HAT_BLACK_01",
+    "CatalogId": "BRIMMED_HAT_BLACK_01",
+    "PartType": "Headwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/cowboyhat.cowboyhat",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "BrimmedHat",
+      "Hat",
+      "Black",
+      "Dark"
+    ],
+    "SelectionWeight": 0.5,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "CAP_DARKBLUE_01",
+    "CatalogId": "CAP_DARKBLUE_01",
+    "PartType": "Headwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/baseballcap.baseballcap",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBlue.MI_TMOP_Clothing_DarkBlue",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 8,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Cap",
+      "DarkBlue",
+      "Dark"
+    ],
+    "SelectionWeight": 0.7,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    }
+  },
+  {
+    "Name": "COAT_LONG_BLACK_01",
+    "CatalogId": "COAT_LONG_BLACK_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/TunnJackaGhandiSkynke.TunnJackaGhandiSkynke",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 15,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "Coat",
+      "Long",
+      "Black",
+      "Dark",
+      "Winter",
+      "Wool"
+    ],
+    "SelectionWeight": 1.5,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "COAT_LONG_DARKBLUE_01",
+    "CatalogId": "COAT_LONG_DARKBLUE_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/WinterCoatKrageupp.WinterCoatKrageupp",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBlue.MI_TMOP_Clothing_DarkBlue",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 15,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "Coat",
+      "Long",
+      "DarkBlue",
+      "Dark",
+      "Winter",
+      "Wool"
+    ],
+    "SelectionWeight": 1.5,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    }
+  },
+  {
+    "Name": "COAT_SHORT_GREY_01",
+    "CatalogId": "COAT_SHORT_GREY_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Coat_Short.SK_TMOP_Coat_Short",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Grey.MI_TMOP_Clothing_Grey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 15,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "Coat",
+      "Short",
+      "Grey",
+      "Winter",
+      "Wool"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.27,
+      "G": 0.28,
+      "B": 0.3,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.27,
+      "G": 0.28,
+      "B": 0.3,
+      "A": 1
+    }
+  },
+  {
+    "Name": "DRESS_TROUSERS_CHARCOAL_01",
+    "CatalogId": "DRESS_TROUSERS_CHARCOAL_01",
+    "PartType": "Trousers",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_DressTrousers.SK_TMOP_DressTrousers",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Charcoal.MI_TMOP_Clothing_Charcoal",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "DressTrousers",
+      "Trousers",
+      "Charcoal",
+      "Dark",
+      "Formal"
+    ],
+    "SelectionWeight": 0.7,
+    "HiddenBodyRegions": 96,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.075,
+      "G": 0.08,
+      "B": 0.09,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.075,
+      "G": 0.08,
+      "B": 0.09,
+      "A": 1
+    }
+  },
+  {
+    "Name": "FACE_FEMALE_GENERIC",
+    "CatalogId": "FACE_FEMALE_GENERIC",
+    "PartType": "Face",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Faces/Standard/SK_TMOP_Face_Female_Generic.SK_TMOP_Face_Female_Generic",
+    "Material": "None",
+    "Gender": "Female",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 15,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "GenericFace",
+      "RectangularFace",
+      "SquareFace",
+      "RoundFace",
+      "OvalFace",
+      "NarrowFace",
+      "WideFace",
+      "LargeNose",
+      "LongNose",
+      "NarrowNose",
+      "WideNose",
+      "SmallNose",
+      "MarkedCheekbones",
+      "ProjectedJaw",
+      "StrongJaw",
+      "ThinLips",
+      "FullLips",
+      "StraightBrows",
+      "StaringEyes"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.42,
+      "G": 0.28,
+      "B": 0.21,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.42,
+      "G": 0.28,
+      "B": 0.21,
+      "A": 1
+    }
+  },
+  {
+    "Name": "FACE_MALE_GENERIC",
+    "CatalogId": "FACE_MALE_GENERIC",
+    "PartType": "Face",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Faces/Standard/SK_TMOP_Face_Male_Generic.SK_TMOP_Face_Male_Generic",
+    "Material": "None",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 15,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "GenericFace",
+      "RectangularFace",
+      "SquareFace",
+      "RoundFace",
+      "OvalFace",
+      "NarrowFace",
+      "WideFace",
+      "LargeNose",
+      "LongNose",
+      "NarrowNose",
+      "WideNose",
+      "SmallNose",
+      "MarkedCheekbones",
+      "ProjectedJaw",
+      "StrongJaw",
+      "ThinLips",
+      "FullLips",
+      "StraightBrows",
+      "StaringEyes"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.42,
+      "G": 0.28,
+      "B": 0.21,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.42,
+      "G": 0.28,
+      "B": 0.21,
+      "A": 1
+    }
+  },
+  {
+    "Name": "FACE_UNISEX_GENERIC",
+    "CatalogId": "FACE_UNISEX_GENERIC",
+    "PartType": "Face",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Faces/Standard/SK_TMOP_Face_Unisex_Generic.SK_TMOP_Face_Unisex_Generic",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 15,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "GenericFace",
+      "RectangularFace",
+      "SquareFace",
+      "RoundFace",
+      "OvalFace",
+      "NarrowFace",
+      "WideFace",
+      "LargeNose",
+      "LongNose",
+      "NarrowNose",
+      "WideNose",
+      "SmallNose",
+      "MarkedCheekbones",
+      "ProjectedJaw",
+      "StrongJaw",
+      "ThinLips",
+      "FullLips",
+      "StraightBrows",
+      "StaringEyes"
+    ],
+    "SelectionWeight": 0.5,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.42,
+      "G": 0.28,
+      "B": 0.21,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.42,
+      "G": 0.28,
+      "B": 0.21,
+      "A": 1
+    }
+  },
+  {
+    "Name": "FUR_HAT_DARKBROWN_01",
+    "CatalogId": "FUR_HAT_DARKBROWN_01",
+    "PartType": "Headwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/RussianHat.RussianHat",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBrown.MI_TMOP_Clothing_DarkBrown",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 12,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "FurHat",
+      "Hat",
+      "DarkBrown",
+      "Winter"
+    ],
+    "SelectionWeight": 0.6,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.075,
+      "G": 0.038,
+      "B": 0.022,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.075,
+      "G": 0.038,
+      "B": 0.022,
+      "A": 1
+    }
+  },
+  {
+    "Name": "GLASSES_BLACK_FRAME",
+    "CatalogId": "GLASSES_BLACK_FRAME",
+    "PartType": "Glasses",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Glasses_Plastic.SK_TMOP_Glasses_Plastic",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Glasses",
+      "BlackFrame",
+      "Black"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "GLASSES_METAL_FRAME",
+    "CatalogId": "GLASSES_METAL_FRAME",
+    "PartType": "Glasses",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Glasses_Metal.SK_TMOP_Glasses_Metal",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Glasses",
+      "MetalFrame",
+      "Grey"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.32,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.32,
+      "A": 1
+    }
+  },
+  {
+    "Name": "GLOVES_BLACK_01",
+    "CatalogId": "GLOVES_BLACK_01",
+    "PartType": "Gloves",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Gloves.SK_TMOP_Gloves",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Gloves",
+      "Black",
+      "Dark",
+      "Winter"
+    ],
+    "SelectionWeight": 1.5,
+    "HiddenBodyRegions": 16,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "GLOVES_BROWN_01",
+    "CatalogId": "GLOVES_BROWN_01",
+    "PartType": "Gloves",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Gloves.SK_TMOP_Gloves",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Brown.MI_TMOP_Clothing_Brown",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Gloves",
+      "Brown",
+      "Winter"
+    ],
+    "SelectionWeight": 0.6,
+    "HiddenBodyRegions": 16,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.18,
+      "G": 0.095,
+      "B": 0.045,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.18,
+      "G": 0.095,
+      "B": 0.045,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_CURLY_DARK",
+    "CatalogId": "HAIR_CURLY_DARK",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Curly.SK_TMOP_Hair_Curly",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Curly",
+      "Dark"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_LONG_BROWN",
+    "CatalogId": "HAIR_LONG_BROWN",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Long.SK_TMOP_Hair_Long",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Long",
+      "Brown",
+      "Straight"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_LONG_DARK",
+    "CatalogId": "HAIR_LONG_DARK",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Long.SK_TMOP_Hair_Long",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Long",
+      "Dark",
+      "Straight"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_MEDIUM_DARK",
+    "CatalogId": "HAIR_MEDIUM_DARK",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Medium.SK_TMOP_Hair_Medium",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "MediumLength",
+      "Dark",
+      "Straight"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_RECEDING_GREY",
+    "CatalogId": "HAIR_RECEDING_GREY",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Receding.SK_TMOP_Hair_Receding",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 30,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Short",
+      "Receding",
+      "Grey"
+    ],
+    "SelectionWeight": 0.7,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_SHORT_BLOND",
+    "CatalogId": "HAIR_SHORT_BLOND",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Short.SK_TMOP_Hair_Short",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Blond.MI_TMOP_Hair_Blond",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Short",
+      "Blond",
+      "Straight"
+    ],
+    "SelectionWeight": 1.1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.43,
+      "G": 0.31,
+      "B": 0.16,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.43,
+      "G": 0.31,
+      "B": 0.16,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_SHORT_BROWN",
+    "CatalogId": "HAIR_SHORT_BROWN",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Short.SK_TMOP_Hair_Short",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Short",
+      "Brown",
+      "Straight"
+    ],
+    "SelectionWeight": 1.3,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_SHORT_DARK",
+    "CatalogId": "HAIR_SHORT_DARK",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Short.SK_TMOP_Hair_Short",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Short",
+      "Dark",
+      "Straight"
+    ],
+    "SelectionWeight": 1.4,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    }
+  },
+  {
+    "Name": "HAIR_SHORT_GREY",
+    "CatalogId": "HAIR_SHORT_GREY",
+    "PartType": "Hair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Hair/1986/SK_TMOP_Hair_Short.SK_TMOP_Hair_Short",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 25,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Hair",
+      "Short",
+      "Grey",
+      "Straight"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    }
+  },
+  {
+    "Name": "JACKET_BLACK_01",
+    "CatalogId": "JACKET_BLACK_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/leatherJacket.leatherJacket",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [
+      "Unknown"
+    ],
+    "MinimumAge": 12,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "Jacket",
+      "Black",
+      "Dark",
+      "Winter"
+    ],
+    "SelectionWeight": 1.4,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "JACKET_DARKBLUE_01",
+    "CatalogId": "JACKET_DARKBLUE_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/jeans_denim_jacket.jeans_denim_jacket",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBlue.MI_TMOP_Clothing_DarkBlue",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 12,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "Jacket",
+      "DarkBlue",
+      "Dark",
+      "Winter"
+    ],
+    "SelectionWeight": 1.5,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    }
+  },
+  {
+    "Name": "JEANS_DARKBLUE_01",
+    "CatalogId": "JEANS_DARKBLUE_01",
+    "PartType": "Trousers",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Jeans.SK_TMOP_Jeans",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBlue.MI_TMOP_Clothing_DarkBlue",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Jeans",
+      "Trousers",
+      "DarkBlue",
+      "Denim"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 96,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    }
+  },
+  {
+    "Name": "KNIT_CAP_BLACK_01",
+    "CatalogId": "KNIT_CAP_BLACK_01",
+    "PartType": "Headwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/baseballcap.baseballcap",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 8,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "KnitCap",
+      "Cap",
+      "Black",
+      "Dark",
+      "Winter"
+    ],
+    "SelectionWeight": 1.3,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "KNIT_CAP_DARKBLUE_01",
+    "CatalogId": "KNIT_CAP_DARKBLUE_01",
+    "PartType": "Headwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/baseballcap.baseballcap",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBlue.MI_TMOP_Clothing_DarkBlue",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 8,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "KnitCap",
+      "Cap",
+      "DarkBlue",
+      "Dark",
+      "Winter"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    }
+  },
+  {
+    "Name": "LEATHER_JACKET_BLACK_01",
+    "CatalogId": "LEATHER_JACKET_BLACK_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/leatherJacket.leatherJacket",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "leatherJacket",
+      "Jacket",
+      "Leather",
+      "Black",
+      "Dark"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "MUSTACHE_BROWN",
+    "CatalogId": "MUSTACHE_BROWN",
+    "PartType": "FacialHair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Mustache.SK_TMOP_Mustache",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Mustache",
+      "Brown"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.115,
+      "G": 0.055,
+      "B": 0.025,
+      "A": 1
+    }
+  },
+  {
+    "Name": "MUSTACHE_DARK",
+    "CatalogId": "MUSTACHE_DARK",
+    "PartType": "FacialHair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Mustache.SK_TMOP_Mustache",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Mustache",
+      "Dark"
+    ],
+    "SelectionWeight": 1.2,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    }
+  },
+  {
+    "Name": "MUSTACHE_GREY",
+    "CatalogId": "MUSTACHE_GREY",
+    "PartType": "FacialHair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Mustache.SK_TMOP_Mustache",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 30,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Mustache",
+      "Grey"
+    ],
+    "SelectionWeight": 0.7,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.3,
+      "G": 0.3,
+      "B": 0.29,
+      "A": 1
+    }
+  },
+  {
+    "Name": "PARKA_OLIVE_01",
+    "CatalogId": "PARKA_OLIVE_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Parka.SK_TMOP_Parka",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Olive.MI_TMOP_Clothing_Olive",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 12,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "Parka",
+      "Jacket",
+      "Olive",
+      "Winter",
+      "Hood"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.16,
+      "G": 0.17,
+      "B": 0.075,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.16,
+      "G": 0.17,
+      "B": 0.075,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SAILING_JACKET_BLUE_01",
+    "CatalogId": "SAILING_JACKET_BLUE_01",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_SailingJacket.SK_TMOP_SailingJacket",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBlue.MI_TMOP_Clothing_DarkBlue",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 12,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "SailingJacket",
+      "Jacket",
+      "Blue",
+      "DarkBlue",
+      "Winter"
+    ],
+    "SelectionWeight": 0.5,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SCARF_DARKBLUE",
+    "CatalogId": "SCARF_DARKBLUE",
+    "PartType": "Scarf",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Scarf_Wool.SK_TMOP_Scarf_Wool",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkBlue.MI_TMOP_Clothing_DarkBlue",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Scarf",
+      "DarkBlue",
+      "Dark",
+      "Wool",
+      "Winter"
+    ],
+    "SelectionWeight": 1.2,
+    "HiddenBodyRegions": 2,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.055,
+      "B": 0.12,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SCARF_GREY",
+    "CatalogId": "SCARF_GREY",
+    "PartType": "Scarf",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Scarf_Wool.SK_TMOP_Scarf_Wool",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Grey.MI_TMOP_Clothing_Grey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Scarf",
+      "Grey",
+      "Wool",
+      "Winter"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 2,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.27,
+      "G": 0.28,
+      "B": 0.3,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.27,
+      "G": 0.28,
+      "B": 0.3,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SCARF_RED",
+    "CatalogId": "SCARF_RED",
+    "PartType": "Scarf",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Scarf_Wool.SK_TMOP_Scarf_Wool",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Red.MI_TMOP_Clothing_Red",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Scarf",
+      "Red",
+      "Wool",
+      "Winter"
+    ],
+    "SelectionWeight": 0.6,
+    "HiddenBodyRegions": 2,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.32,
+      "G": 0.025,
+      "B": 0.025,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.32,
+      "G": 0.025,
+      "B": 0.025,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SHIRT_WHITE_01",
+    "CatalogId": "SHIRT_WHITE_01",
+    "PartType": "UpperBody",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/t_shirt.t_shirt",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_White.MI_TMOP_Clothing_White",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 12,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Shirt",
+      "White",
+      "Formal"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.72,
+      "G": 0.72,
+      "B": 0.68,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.72,
+      "G": 0.72,
+      "B": 0.68,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SHOES_BLACK_01",
+    "CatalogId": "SHOES_BLACK_01",
+    "PartType": "Footwear",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Shoes.SK_TMOP_Shoes",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Shoes",
+      "Black",
+      "Dark"
+    ],
+    "SelectionWeight": 1.5,
+    "HiddenBodyRegions": 128,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "STUBBLE_DARK",
+    "CatalogId": "STUBBLE_DARK",
+    "PartType": "FacialHair",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Accessories/1986/SK_TMOP_Stubble.SK_TMOP_Stubble",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Stubble",
+      "Dark"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.035,
+      "G": 0.022,
+      "B": 0.015,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SWEATER_BEIGE_01",
+    "CatalogId": "SWEATER_BEIGE_01",
+    "PartType": "UpperBody",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Sweater.SK_TMOP_Sweater",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Beige.MI_TMOP_Clothing_Beige",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Sweater",
+      "Beige",
+      "Wool",
+      "Winter"
+    ],
+    "SelectionWeight": 0.8,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.48,
+      "G": 0.39,
+      "B": 0.25,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.48,
+      "G": 0.39,
+      "B": 0.25,
+      "A": 1
+    }
+  },
+  {
+    "Name": "SWEATER_DARKGREY_01",
+    "CatalogId": "SWEATER_DARKGREY_01",
+    "PartType": "UpperBody",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Sweater.SK_TMOP_Sweater",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkGrey.MI_TMOP_Clothing_DarkGrey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Sweater",
+      "DarkGrey",
+      "Dark",
+      "Wool",
+      "Winter"
+    ],
+    "SelectionWeight": 1.4,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.12,
+      "G": 0.13,
+      "B": 0.145,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.12,
+      "G": 0.13,
+      "B": 0.145,
+      "A": 1
+    }
+  },
+  {
+    "Name": "TROUSERS_BLACK_01",
+    "CatalogId": "TROUSERS_BLACK_01",
+    "PartType": "Trousers",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_Trousers_Straight.SK_TMOP_Trousers_Straight",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Trousers",
+      "Straight",
+      "Black",
+      "Dark"
+    ],
+    "SelectionWeight": 1.4,
+    "HiddenBodyRegions": 96,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "TROUSERS_DARKGREY_01",
+    "CatalogId": "TROUSERS_DARKGREY_01",
+    "PartType": "Trousers",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Pants/cargopants.cargopants",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_DarkGrey.MI_TMOP_Clothing_DarkGrey",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Trousers",
+      "Straight",
+      "DarkGrey",
+      "Dark"
+    ],
+    "SelectionWeight": 1.5,
+    "HiddenBodyRegions": 96,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.12,
+      "G": 0.13,
+      "B": 0.145,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.12,
+      "G": 0.13,
+      "B": 0.145,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_BODY_STANDARD",
+    "CatalogId": "UNKNOWN_BODY_STANDARD",
+    "PartType": "Body",
+    "Mesh": "None",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Average"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.5,
+      "G": 0.5,
+      "B": 0.5,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.5,
+      "G": 0.5,
+      "B": 0.5,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_FACE_OBSCURED",
+    "CatalogId": "UNKNOWN_FACE_OBSCURED",
+    "PartType": "Face",
+    "Mesh": "None",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownFace.MI_TMOP_UnknownFace",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.34,
+      "G": 0.31,
+      "B": 0.29,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.34,
+      "G": 0.31,
+      "B": 0.29,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_FOOTWEAR_OBSCURED",
+    "CatalogId": "UNKNOWN_FOOTWEAR_OBSCURED",
+    "PartType": "Footwear",
+    "Mesh": "None",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownFootwear.MI_TMOP_UnknownFootwear",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.055,
+      "G": 0.055,
+      "B": 0.06,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.055,
+      "G": 0.055,
+      "B": 0.06,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_GLOVES_OBSCURED",
+    "CatalogId": "UNKNOWN_GLOVES_OBSCURED",
+    "PartType": "Gloves",
+    "Mesh": "None",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownGloves.MI_TMOP_UnknownGloves",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown",
+      "Winter"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.07,
+      "G": 0.07,
+      "B": 0.075,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.07,
+      "G": 0.07,
+      "B": 0.075,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_HAIR_OBSCURED",
+    "CatalogId": "UNKNOWN_HAIR_OBSCURED",
+    "PartType": "Hair",
+    "Mesh": "None",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownHair.MI_TMOP_UnknownHair",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.12,
+      "G": 0.12,
+      "B": 0.13,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.12,
+      "G": 0.12,
+      "B": 0.13,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_HEADWEAR_OBSCURED",
+    "CatalogId": "UNKNOWN_HEADWEAR_OBSCURED",
+    "PartType": "Headwear",
+    "Mesh": "None",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownHeadwear.MI_TMOP_UnknownHeadwear",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown",
+      "Winter"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.14,
+      "G": 0.15,
+      "B": 0.17,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.14,
+      "G": 0.15,
+      "B": 0.17,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_OUTERWEAR_OBSCURED",
+    "CatalogId": "UNKNOWN_OUTERWEAR_OBSCURED",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/WinterCoatKrageupp.WinterCoatKrageupp",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownOuterwear.MI_TMOP_UnknownOuterwear",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown",
+      "Winter"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.1,
+      "G": 0.13,
+      "B": 0.18,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.1,
+      "G": 0.13,
+      "B": 0.18,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_TROUSERS_OBSCURED",
+    "CatalogId": "UNKNOWN_TROUSERS_OBSCURED",
+    "PartType": "Trousers",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Pants/cargopants.cargopants",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownTrousers.MI_TMOP_UnknownTrousers",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.12,
+      "G": 0.13,
+      "B": 0.15,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.12,
+      "G": 0.13,
+      "B": 0.15,
+      "A": 1
+    }
+  },
+  {
+    "Name": "UNKNOWN_UPPER_BODY_OBSCURED",
+    "CatalogId": "UNKNOWN_UPPER_BODY_OBSCURED",
+    "PartType": "UpperBody",
+    "Mesh": "None",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Unknown/MI_TMOP_UnknownUpperBody.MI_TMOP_UnknownUpperBody",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "Obscured",
+      "Unknown"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": true,
+    "DefaultPrimaryColor": {
+      "R": 0.22,
+      "G": 0.23,
+      "B": 0.25,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.22,
+      "G": 0.23,
+      "B": 0.25,
+      "A": 1
+    }
+  },
+  {
+    "Name": "WINTER_BOOTS_BLACK_01",
+    "CatalogId": "WINTER_BOOTS_BLACK_01",
+    "PartType": "Footwear",
+    "Mesh": "/Game/TMOP/Characters/Appearance/Clothing/1986/Meshes/SK_TMOP_WinterBoots.SK_TMOP_WinterBoots",
+    "Material": "/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_Black.MI_TMOP_Clothing_Black",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 10,
+    "MaximumAge": 0,
+    "EarliestYear": 1975,
+    "LatestYear": 1989,
+    "Tags": [
+      "WinterBoots",
+      "Boots",
+      "Black",
+      "Dark",
+      "Winter"
+    ],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 128,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.025,
+      "G": 0.025,
+      "B": 0.03,
+      "A": 1
+    }
+  },
+  {
+    "Name": "POLICE_JACKET",
+    "CatalogId": "POLICE_JACKET",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/police_jacket.POLICE_JACKET",
+    "Material": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/police_jacket_tex_Mat.police_jacket_tex_Mat",
+    "Gender": "Male",
+    "CompatibleBodyBuilds": [
+      "Average"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 100,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "POLICE_HAT",
+    "CatalogId": "POLICE_HAT",
+    "PartType": "Headwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/police_hat.POLICE_HAT",
+    "Material": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/police_hat_mat.police_hat_mat",
+    "Gender": "OtherOrUnspecified",
+    "CompatibleBodyBuilds": [
+      "Thin",
+      "Slim",
+      "Average",
+      "Athletic",
+      "Strong",
+      "Heavy"
+    ],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "PUFFER_Jacket",
+    "CatalogId": "PUFFER_Jacket",
+    "PartType": "Body",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/puffer_jacket.puffer_jacket",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [],
+    "MinimumAge": 0,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [],
+    "SelectionWeight": 1,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 1,
+      "G": 1,
+      "B": 1,
+      "A": 1
+    }
+  },
+  {
+    "Name": "MILITARY_BOOTS",
+    "CatalogId": "MILITARY_BOOTS",
+    "PartType": "Footwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Footwear/militaryboots.militaryboots",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [
+      "Thin",
+      "Slim",
+      "Average",
+      "Athletic",
+      "Strong",
+      "Heavy"
+    ],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "MilitaryBoots",
+      "Boots",
+      "Police",
+      "Uniform",
+      "Black",
+      "Leather"
+    ],
+    "SelectionWeight": 0,
+    "HiddenBodyRegions": 128,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.015,
+      "G": 0.015,
+      "B": 0.018,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.015,
+      "G": 0.015,
+      "B": 0.018,
+      "A": 1
+    }
+  },
+  {
+    "Name": "ABAB_väktare_jacka",
+    "CatalogId": "ABAB_väktare_jacka",
+    "PartType": "Outerwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Outerwear/ABAB_väktare_jacka.ABAB_väktare_jacka",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [
+      "Thin",
+      "Slim",
+      "Average",
+      "Athletic",
+      "Strong",
+      "Heavy"
+    ],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "ABAB",
+      "Väktare",
+      "SecurityGuard",
+      "Uniform",
+      "Jacket",
+      "Olive"
+    ],
+    "SelectionWeight": 0,
+    "HiddenBodyRegions": 12,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.075,
+      "G": 0.082,
+      "B": 0.045,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.11,
+      "G": 0.052,
+      "B": 0.025,
+      "A": 1
+    }
+  },
+  {
+    "Name": "ABAB_väktare_basker",
+    "CatalogId": "ABAB_väktare_basker",
+    "PartType": "Headwear",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Headwear/ABAB_väktare_basker.ABAB_väktare_basker",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [
+      "Thin",
+      "Slim",
+      "Average",
+      "Athletic",
+      "Strong",
+      "Heavy"
+    ],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "ABAB",
+      "Väktare",
+      "SecurityGuard",
+      "Uniform",
+      "Beret",
+      "Olive"
+    ],
+    "SelectionWeight": 0,
+    "HiddenBodyRegions": 0,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.075,
+      "G": 0.082,
+      "B": 0.045,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.075,
+      "G": 0.082,
+      "B": 0.045,
+      "A": 1
+    }
+  },
+  {
+    "Name": "ABAB_väktare_pants",
+    "CatalogId": "ABAB_väktare_pants",
+    "PartType": "Trousers",
+    "Mesh": "/Game/TMOP/Appearance/Clothing/1986/Meshes/Pants/ABAB_väktare_pants.ABAB_väktare_pants",
+    "Material": "None",
+    "Gender": "Unknown",
+    "CompatibleBodyBuilds": [
+      "Thin",
+      "Slim",
+      "Average",
+      "Athletic",
+      "Strong",
+      "Heavy"
+    ],
+    "MinimumAge": 16,
+    "MaximumAge": 0,
+    "EarliestYear": 1970,
+    "LatestYear": 1989,
+    "Tags": [
+      "ABAB",
+      "Väktare",
+      "SecurityGuard",
+      "Uniform",
+      "Trousers",
+      "Olive",
+      "ReflectiveBands"
+    ],
+    "SelectionWeight": 0,
+    "HiddenBodyRegions": 96,
+    "bObscuredFallback": false,
+    "DefaultPrimaryColor": {
+      "R": 0.075,
+      "G": 0.082,
+      "B": 0.045,
+      "A": 1
+    },
+    "DefaultSecondaryColor": {
+      "R": 0.075,
+      "G": 0.082,
+      "B": 0.045,
+      "A": 1
+    }
+  }
+]

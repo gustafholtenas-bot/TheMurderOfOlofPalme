@@ -15,6 +15,7 @@ class UTexture2D;
 class USoundBase;
 class USkeletalMesh;
 class UMaterialInterface;
+class UStaticMesh;
 
 UENUM(BlueprintType)
 enum class ETMOPPersonLocationType : uint8
@@ -570,6 +571,16 @@ struct TMOPENGINE_API FTMOPAppearancePartChoice
     /** Optional direct asset override for bespoke people. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
     TSoftObjectPtr<USkeletalMesh> MeshOverride;
+
+    /** Direct static-mesh override for rigid headwear attached to a socket. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    TSoftObjectPtr<UStaticMesh> StaticMeshOverride;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    FName AttachmentSocket = TEXT("HeadwearSocket");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    FTransform AttachmentTransform = FTransform::Identity;
 
     /** Optional direct material override. Unknown parts normally use the shared obscured material. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")

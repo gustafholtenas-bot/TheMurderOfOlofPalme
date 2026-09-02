@@ -36,9 +36,11 @@ Directorn hittar Player Character efter BeginPlay och försöker igen en kort
 stund om spelaren spawnas senare. `Refresh Player Appearance` kan anropas från
 Blueprint efter respawn, klädbyte eller byte av spelbar Pawn.
 
-Alla modulara delar skapas som Skeletal Mesh Components, använder samma
-Skeleton som spelarens Body Mesh och får Body Mesh som Leader Pose. Den
-befintliga Anim Blueprinten på kroppen behålls.
+Kläder som deformeras skapas som Skeletal Mesh Components, använder samma
+Skeleton som spelarens Body Mesh och får Body Mesh som Leader Pose. Headwear är
+undantaget: hatten är en Static Mesh som fästs på `HeadwearSocket`, med `head`
+som reserv om socketen ännu inte finns. Den får varken skinning, Leader Pose
+eller kroppsmorphs. Den befintliga Anim Blueprinten på kroppen behålls.
 
 Kvinnlig profil använder Quinn och manlig profil Manny när ingen uttrycklig
 Body-mesh har valts. MetaHuman-kroppar skrivs inte över.

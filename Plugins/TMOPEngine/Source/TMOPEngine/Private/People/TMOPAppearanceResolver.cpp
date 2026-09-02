@@ -244,6 +244,9 @@ void CopyAsset(const FTMOPAppearanceAssetRow& Asset,
 {
     Out.CatalogId = Asset.CatalogId;
     Out.Mesh = Asset.Mesh;
+    Out.StaticMesh = Asset.StaticMesh;
+    Out.AttachmentSocket = Asset.AttachmentSocket;
+    Out.AttachmentTransform = Asset.AttachmentTransform;
     Out.Material = Asset.Material;
     Out.PrimaryColor = Asset.DefaultPrimaryColor;
     Out.SecondaryColor = Asset.DefaultSecondaryColor;
@@ -338,16 +341,21 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
         return Result;
     }
 
-    if (!Override.CatalogId.IsNone() || !Override.MeshOverride.IsNull())
+    if (!Override.CatalogId.IsNone() || !Override.MeshOverride.IsNull() ||
+        !Override.StaticMeshOverride.IsNull())
     {
         Result.CatalogId = Override.CatalogId;
         Result.Mesh = Override.MeshOverride;
+        Result.StaticMesh = Override.StaticMeshOverride;
+        Result.AttachmentSocket = Override.AttachmentSocket;
+        Result.AttachmentTransform = Override.AttachmentTransform;
         Result.Material = Override.MaterialOverride;
         Result.PrimaryColor = Override.PrimaryColor;
         Result.SecondaryColor = Override.SecondaryColor;
     }
 
-    const bool bNeedsCatalogLookup = Result.Mesh.IsNull();
+    const bool bNeedsCatalogLookup = Result.Mesh.IsNull() &&
+        Result.StaticMesh.IsNull();
     if (IsValid(AssetCatalog) &&
         AssetCatalog->GetRowStruct() == FTMOPAppearanceAssetRow::StaticStruct() &&
         bNeedsCatalogLookup)
@@ -383,7 +391,8 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
         }
     }
 
-    if (Result.CatalogId.IsNone() && Result.Mesh.IsNull())
+    if (Result.CatalogId.IsNone() && Result.Mesh.IsNull() &&
+        Result.StaticMesh.IsNull())
     {
         Result.CatalogId = UnknownCatalogId;
         Result.bUsesObscuredFallback = true;
