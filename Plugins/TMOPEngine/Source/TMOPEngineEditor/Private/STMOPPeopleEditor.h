@@ -60,6 +60,9 @@ private:
     void LoadDefaultTable();
     void RefreshPeople();
     void RefreshTimeline();
+    void RefreshComparisonPeople();
+    void SelectDefaultComparisonPerson();
+    void RefreshComparisonTimeline();
     void SelectPerson(FName RowName);
     void SelectTimelineEntry(int32 Index);
     void CommitEntryEdits();
@@ -76,6 +79,14 @@ private:
     TSharedRef<ITableRow> GenerateTimelineRow(
         FTimelineItem Item,
         const TSharedRef<STableViewBase>& OwnerTable);
+    TSharedRef<ITableRow> GenerateComparisonTimelineRow(
+        FTimelineItem Item,
+        const TSharedRef<STableViewBase>& OwnerTable);
+    TSharedRef<SWidget> GenerateComparisonPersonOption(
+        FReferenceItem Item) const;
+    void HandleComparisonPersonSelected(
+        FReferenceItem Item, ESelectInfo::Type SelectInfo);
+    FText GetComparisonPersonText() const;
     void HandlePersonSelectionChanged(
         FPersonItem Item, ESelectInfo::Type SelectInfo);
     void HandleTimelineSelectionChanged(
@@ -116,7 +127,22 @@ private:
         int32 Index,
         int32& OutSecond,
         FString* OutFailureReason = nullptr) const;
+    bool ResolveTimelineDisplaySecondForRow(
+        const FTMOPPersonProfileRow& Row,
+        int32 Index,
+        int32& OutSecond,
+        FString* OutFailureReason = nullptr) const;
+    bool ResolveTimelinePositionKey(
+        const FTMOPPersonProfileRow& Row,
+        int32 Index,
+        FString& OutKey,
+        FString& OutLabel) const;
     bool BuildTimelineSpeedBadge(
+        int32 Index,
+        FText& OutText,
+        FText& OutToolTip,
+        FLinearColor& OutColor) const;
+    bool BuildVehicleTimelineSpeedBadge(
         int32 Index,
         FText& OutText,
         FText& OutToolTip,
@@ -144,8 +170,16 @@ private:
 
     TArray<FPersonItem> PersonItems;
     TArray<FTimelineItem> TimelineItems;
+    TArray<FReferenceItem> ComparisonPersonItems;
+    TArray<FTimelineItem> ComparisonTimelineItems;
     TSharedPtr<SListView<FPersonItem>> PersonListView;
     TSharedPtr<SListView<FTimelineItem>> TimelineListView;
+    TSharedPtr<SListView<FTimelineItem>> ComparisonTimelineListView;
+    TSharedPtr<SSearchableComboBox> ComparisonPersonCombo;
+    TMap<FString, FName> ComparisonRowNamesByLabel;
+    FName ComparisonRowName = NAME_None;
+    FTMOPPersonProfileRow ComparisonRow;
+    bool bHasComparisonRow = false;
     TSharedPtr<IStructureDetailsView> EntryDetailsView;
     TSharedPtr<FStructOnScope> EntryStructData;
     TSharedPtr<IStructureDetailsView> CharacteristicsDetailsView;

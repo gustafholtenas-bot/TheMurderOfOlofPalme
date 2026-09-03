@@ -12,6 +12,7 @@
 #include "People/TMOPAppearanceResolver.h"
 #include "PropertyEditorModule.h"
 #include "Styling/AppStyle.h"
+#include "Traffic/TMOPTrafficLaneComponent.h"
 #include "UObject/StructOnScope.h"
 #include "UObject/UObjectGlobals.h"
 #include "Vehicles/TMOPHistoricalVehicleTypes.h"
@@ -332,7 +333,7 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                         ]
                     ]
                     + SVerticalBox::Slot()
-                    .FillHeight(1.0f)
+                    .FillHeight(0.56f)
                     [
                         SAssignNew(TimelineListView, SListView<FTimelineItem>)
                         .ListItemsSource(&TimelineItems)
@@ -342,6 +343,55 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                             this,
                             &STMOPPeopleEditor::HandleTimelineSelectionChanged)
                         .SelectionMode(ESelectionMode::Single)
+                    ]
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 8.0f, 0.0f, 4.0f)
+                    [
+                        SNew(SBorder)
+                        .Padding(6.0f)
+                        .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                        [
+                            SNew(SVerticalBox)
+                            + SVerticalBox::Slot().AutoHeight()
+                            [
+                                SNew(STextBlock)
+                                .Text(LOCTEXT("ComparisonTimelineTitle",
+                                    "REFERENCE TIMELINE"))
+                                .Font(FAppStyle::GetFontStyle(
+                                    "HeadingExtraSmall"))
+                            ]
+                            + SVerticalBox::Slot().AutoHeight()
+                            .Padding(0.0f, 4.0f, 0.0f, 0.0f)
+                            [
+                                SAssignNew(ComparisonPersonCombo,
+                                    SSearchableComboBox)
+                                .OptionsSource(&ComparisonPersonItems)
+                                .OnGenerateWidget(this,
+                                    &STMOPPeopleEditor::
+                                        GenerateComparisonPersonOption)
+                                .OnSelectionChanged(this,
+                                    &STMOPPeopleEditor::
+                                        HandleComparisonPersonSelected)
+                                [
+                                    SNew(STextBlock)
+                                    .Text(this,
+                                        &STMOPPeopleEditor::
+                                            GetComparisonPersonText)
+                                ]
+                            ]
+                        ]
+                    ]
+                    + SVerticalBox::Slot()
+                    .FillHeight(0.44f)
+                    [
+                        SAssignNew(ComparisonTimelineListView,
+                            SListView<FTimelineItem>)
+                        .ListItemsSource(&ComparisonTimelineItems)
+                        .OnGenerateRow(this,
+                            &STMOPPeopleEditor::
+                                GenerateComparisonTimelineRow)
+                        .SelectionMode(ESelectionMode::None)
                     ]
                 ]
             ]
@@ -696,6 +746,131 @@ void STMOPPeopleEditor::RefreshTimeline()
         TimelineItems.Add(MakeShared<int32>(Index));
     if (TimelineListView.IsValid())
         TimelineListView->RequestListRefresh();
+    if (ComparisonTimelineListView.IsValid())
+        ComparisonTimelineListView->RequestListRefresh();
+}
+
+void STMOPPeopleEditor::RefreshComparisonPeople()
+{
+    ComparisonPersonItems.Reset();
+    ComparisonRowNamesByLabel.Reset();
+    const UDataTable* Table = PeopleTable.Get();
+    if (!IsValid(Table)) return;
+
+    struct FComparisonCandidate
+    {
+        int32 Priority = 2;
+        FString Label;
+        FName RowName = NAME_None;
+    };
+    TArray<FComparisonCandidate> Candidates;
+    for (const FName RowName : Table->GetRowNames())
+    {
+        const FTMOPPersonProfileRow* Row =
+            Table->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("TMOPComparisonPersonList"), false);
+        if (Row == nullptr || RowName == SelectedRowName) continue;
+
+        const bool bSameGroup = !WorkingRow.SocialGroupId.IsNone() &&
+            Row->SocialGroupId == WorkingRow.SocialGroupId;
+        const bool bLeader = bSameGroup &&
+            ((!WorkingRow.GroupLeaderEntityId.IsNone() &&
+              Row->EntityId == WorkingRow.GroupLeaderEntityId) ||
+             (!Row->GroupLeaderEntityId.IsNone() &&
+              Row->EntityId == Row->GroupLeaderEntityId));
+        const FString Name = !Row->FullName.IsEmpty()
+            ? Row->FullName.ToString() : Row->EntityId.ToString();
+        const FString Prefix = bLeader
+            ? TEXT("[GROUP LEADER] ")
+            : bSameGroup ? TEXT("[SAME GROUP] ") : FString();
+        FComparisonCandidate Candidate;
+        Candidate.Priority = bLeader ? 0 : bSameGroup ? 1 : 2;
+        Candidate.Label = Prefix + Name + TEXT("  •  ") +
+            Row->EntityId.ToString();
+        Candidate.RowName = RowName;
+        Candidates.Add(MoveTemp(Candidate));
+    }
+    Candidates.Sort([](const FComparisonCandidate& A,
+                       const FComparisonCandidate& B)
+    {
+        return A.Priority != B.Priority
+            ? A.Priority < B.Priority
+            : A.Label < B.Label;
+    });
+    for (const FComparisonCandidate& Candidate : Candidates)
+    {
+        ComparisonPersonItems.Add(
+            MakeShared<FString>(Candidate.Label));
+        ComparisonRowNamesByLabel.Add(
+            Candidate.Label, Candidate.RowName);
+    }
+    if (ComparisonPersonCombo.IsValid())
+        ComparisonPersonCombo->RefreshOptions();
+}
+
+void STMOPPeopleEditor::SelectDefaultComparisonPerson()
+{
+    ComparisonRowName = NAME_None;
+    bHasComparisonRow = false;
+    ComparisonTimelineItems.Reset();
+    if (ComparisonPersonCombo.IsValid())
+        ComparisonPersonCombo->ClearSelection();
+
+    FName PreferredLeaderId = WorkingRow.GroupLeaderEntityId;
+    const UDataTable* Table = PeopleTable.Get();
+    if (PreferredLeaderId.IsNone() && IsValid(Table) &&
+        !WorkingRow.SocialGroupId.IsNone())
+        for (const FName RowName : Table->GetRowNames())
+            if (const FTMOPPersonProfileRow* Candidate =
+                Table->FindRow<FTMOPPersonProfileRow>(
+                    RowName, TEXT("TMOPFindGroupLeader"), false))
+                if (Candidate->SocialGroupId == WorkingRow.SocialGroupId &&
+                    !Candidate->GroupLeaderEntityId.IsNone())
+                {
+                    PreferredLeaderId = Candidate->GroupLeaderEntityId;
+                    break;
+                }
+
+    FReferenceItem PreferredItem;
+    FReferenceItem SameGroupItem;
+    for (const FReferenceItem& Item : ComparisonPersonItems)
+    {
+        if (!Item.IsValid()) continue;
+        const FName* RowName = ComparisonRowNamesByLabel.Find(*Item);
+        const FTMOPPersonProfileRow* Candidate =
+            IsValid(Table) && RowName != nullptr
+            ? Table->FindRow<FTMOPPersonProfileRow>(
+                *RowName, TEXT("TMOPChooseComparisonPerson"), false)
+            : nullptr;
+        if (Candidate == nullptr) continue;
+        if (!PreferredLeaderId.IsNone() &&
+            Candidate->EntityId == PreferredLeaderId &&
+            Candidate->EntityId != WorkingRow.EntityId)
+        {
+            PreferredItem = Item;
+            break;
+        }
+        if (!WorkingRow.SocialGroupId.IsNone() &&
+            Candidate->SocialGroupId == WorkingRow.SocialGroupId &&
+            !SameGroupItem.IsValid())
+            SameGroupItem = Item;
+    }
+    if (!PreferredItem.IsValid()) PreferredItem = SameGroupItem;
+    if (PreferredItem.IsValid() && ComparisonPersonCombo.IsValid())
+        ComparisonPersonCombo->SetSelectedItem(PreferredItem);
+    else
+        RefreshComparisonTimeline();
+}
+
+void STMOPPeopleEditor::RefreshComparisonTimeline()
+{
+    ComparisonTimelineItems.Reset();
+    if (bHasComparisonRow)
+        for (int32 Index = 0;
+            Index < ComparisonRow.Timeline.Num(); ++Index)
+            ComparisonTimelineItems.Add(MakeShared<int32>(Index));
+    if (ComparisonTimelineListView.IsValid())
+        ComparisonTimelineListView->RequestListRefresh();
 }
 
 void STMOPPeopleEditor::SelectPerson(const FName RowName)
@@ -717,6 +892,8 @@ void STMOPPeopleEditor::SelectPerson(const FName RowName)
     EntryStructData.Reset();
     EntryDetailsView->SetStructureData(nullptr);
     RefreshTimeline();
+    RefreshComparisonPeople();
+    SelectDefaultComparisonPerson();
     if (!WorkingRow.Timeline.IsEmpty())
         SelectTimelineEntry(0);
 }
@@ -748,6 +925,10 @@ void STMOPPeopleEditor::CommitEntryEdits()
     WorkingRow.Timeline[SelectedTimelineIndex] =
         *reinterpret_cast<FTMOPPersonTimelineEntry*>(
             EntryStructData->GetStructMemory());
+    if (TimelineListView.IsValid())
+        TimelineListView->RequestListRefresh();
+    if (ComparisonTimelineListView.IsValid())
+        ComparisonTimelineListView->RequestListRefresh();
 }
 
 void STMOPPeopleEditor::RefreshPersonDetailViews()
@@ -991,6 +1172,220 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GeneratePersonRow(
             .Text(Secondary)
             .ColorAndOpacity(FSlateColor::UseSubduedForeground())
             .Font(FAppStyle::GetFontStyle("SmallFont"))
+        ]
+    ];
+}
+
+TSharedRef<SWidget> STMOPPeopleEditor::GenerateComparisonPersonOption(
+    const FReferenceItem Item) const
+{
+    return SNew(STextBlock)
+        .Text(Item.IsValid()
+            ? FText::FromString(*Item) : FText::GetEmpty());
+}
+
+void STMOPPeopleEditor::HandleComparisonPersonSelected(
+    const FReferenceItem Item,
+    const ESelectInfo::Type SelectInfo)
+{
+    if (!Item.IsValid() ||
+        SelectInfo == ESelectInfo::Direct &&
+        !ComparisonRowNamesByLabel.Contains(*Item))
+        return;
+    const FName* RowName = ComparisonRowNamesByLabel.Find(*Item);
+    const UDataTable* Table = PeopleTable.Get();
+    const FTMOPPersonProfileRow* Row =
+        IsValid(Table) && RowName != nullptr
+        ? Table->FindRow<FTMOPPersonProfileRow>(
+            *RowName, TEXT("TMOPSelectComparisonPerson"), false)
+        : nullptr;
+    if (Row == nullptr) return;
+    ComparisonRowName = *RowName;
+    ComparisonRow = *Row;
+    bHasComparisonRow = true;
+    RefreshComparisonTimeline();
+}
+
+FText STMOPPeopleEditor::GetComparisonPersonText() const
+{
+    if (!bHasComparisonRow)
+        return LOCTEXT("NoComparisonPerson",
+            "Choose person (group leader is automatic)");
+    const FString Name = !ComparisonRow.FullName.IsEmpty()
+        ? ComparisonRow.FullName.ToString()
+        : ComparisonRow.EntityId.ToString();
+    const bool bIsLeader =
+        (!WorkingRow.GroupLeaderEntityId.IsNone() &&
+         ComparisonRow.EntityId == WorkingRow.GroupLeaderEntityId) ||
+        (!ComparisonRow.GroupLeaderEntityId.IsNone() &&
+         ComparisonRow.EntityId == ComparisonRow.GroupLeaderEntityId);
+    return FText::FromString(
+        (bIsLeader ? TEXT("GROUP LEADER: ") : TEXT("REFERENCE: ")) +
+        Name);
+}
+
+TSharedRef<ITableRow>
+STMOPPeopleEditor::GenerateComparisonTimelineRow(
+    const FTimelineItem Item,
+    const TSharedRef<STableViewBase>& OwnerTable)
+{
+    const int32 Index = Item.IsValid() ? *Item : INDEX_NONE;
+    const FTMOPPersonTimelineEntry* Entry =
+        bHasComparisonRow && ComparisonRow.Timeline.IsValidIndex(Index)
+        ? &ComparisonRow.Timeline[Index] : nullptr;
+
+    int32 ReferenceSecond = 0;
+    FString Failure;
+    const bool bHasTime = Entry != nullptr &&
+        ResolveTimelineDisplaySecondForRow(
+            ComparisonRow, Index, ReferenceSecond, &Failure);
+    const int32 NormalizedSecond =
+        FMath::Max(0, ReferenceSecond) % (24 * 3600);
+    const FString TimeLabel = bHasTime
+        ? FString::Printf(TEXT("%02d:%02d:%02d"),
+            NormalizedSecond / 3600,
+            (NormalizedSecond / 60) % 60,
+            NormalizedSecond % 60)
+        : TEXT("TIME ?");
+
+    FString ComparisonLabel = TEXT("NO TIME MATCH");
+    FString ComparisonToolTip = bHasTime
+        ? TEXT("No editable timeline row has exactly this resolved time.")
+        : Failure;
+    FLinearColor ComparisonColor(0.28f, 0.28f, 0.28f);
+    int32 ClosestDelta = TNumericLimits<int32>::Max();
+    if (bHasTime)
+    {
+        FString ReferencePositionKey;
+        FString ReferencePositionLabel;
+        const bool bHasReferencePosition = ResolveTimelinePositionKey(
+            ComparisonRow, Index,
+            ReferencePositionKey, ReferencePositionLabel);
+        bool bFoundSameTime = false;
+        bool bFoundSamePosition = false;
+        FString CurrentPositionLabel;
+        for (int32 CurrentIndex = 0;
+            CurrentIndex < WorkingRow.Timeline.Num(); ++CurrentIndex)
+        {
+            int32 CurrentSecond = 0;
+            if (!ResolveTimelineDisplaySecondForRow(
+                WorkingRow, CurrentIndex, CurrentSecond))
+                continue;
+            ClosestDelta = FMath::Min(
+                ClosestDelta, FMath::Abs(CurrentSecond - ReferenceSecond));
+            if (CurrentSecond != ReferenceSecond) continue;
+            bFoundSameTime = true;
+            FString CurrentPositionKey;
+            if (ResolveTimelinePositionKey(
+                WorkingRow, CurrentIndex,
+                CurrentPositionKey, CurrentPositionLabel) &&
+                bHasReferencePosition &&
+                CurrentPositionKey == ReferencePositionKey)
+            {
+                bFoundSamePosition = true;
+                break;
+            }
+        }
+        if (bFoundSamePosition)
+        {
+            ComparisonLabel = TEXT("SAME TIME + POSITION");
+            ComparisonToolTip = FString::Printf(
+                TEXT("Both timelines resolve to %s at %s."),
+                *TimeLabel, *ReferencePositionLabel);
+            ComparisonColor = FLinearColor(0.05f, 0.42f, 0.12f);
+        }
+        else if (bFoundSameTime)
+        {
+            ComparisonLabel = TEXT("SAME TIME / CHECK POSITION");
+            ComparisonToolTip = bHasReferencePosition
+                ? FString::Printf(
+                    TEXT("Both timelines resolve to %s, but no matching position was found. Reference position: %s. Editable position: %s."),
+                    *TimeLabel, *ReferencePositionLabel,
+                    CurrentPositionLabel.IsEmpty()
+                        ? TEXT("unknown") : *CurrentPositionLabel)
+                : FString::Printf(
+                    TEXT("Both timelines resolve to %s, but the reference position is unknown."),
+                    *TimeLabel);
+            ComparisonColor = FLinearColor(0.78f, 0.38f, 0.03f);
+        }
+        else if (ClosestDelta != TNumericLimits<int32>::Max())
+        {
+            ComparisonLabel = FString::Printf(
+                TEXT("NEAREST %d s"), ClosestDelta);
+            ComparisonToolTip = FString::Printf(
+                TEXT("The closest editable timeline event is %d second(s) from this reference event."),
+                ClosestDelta);
+        }
+    }
+
+    FString Summary = Entry != nullptr
+        ? ActionLabel(Entry->Action) : FString();
+    if (Entry != nullptr)
+    {
+        if (!Entry->TargetAnchorId.IsNone())
+            Summary += TEXT("  →  ") + Entry->TargetAnchorId.ToString();
+        else if (!Entry->TargetSeatId.IsNone())
+            Summary += TEXT("  →  ") + Entry->TargetSeatId.ToString();
+        else if (!Entry->TargetEntityId.IsNone())
+            Summary += TEXT("  →  ") + Entry->TargetEntityId.ToString();
+    }
+
+    return SNew(STableRow<FTimelineItem>, OwnerTable)
+    [
+        SNew(SBorder)
+        .Padding(FMargin(7.0f, 5.0f))
+        .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+        [
+            SNew(SVerticalBox)
+            + SVerticalBox::Slot().AutoHeight()
+            [
+                SNew(SHorizontalBox)
+                + SHorizontalBox::Slot().AutoWidth()
+                [
+                    SNew(STextBlock)
+                    .Text(FText::FromString(FString::Printf(
+                        TEXT("%02d"), Index)))
+                    .ColorAndOpacity(FSlateColor::UseSubduedForeground())
+                ]
+                + SHorizontalBox::Slot().FillWidth(1.0f)
+                .Padding(8.0f, 0.0f)
+                [
+                    SNew(STextBlock)
+                    .Text(Entry != nullptr
+                        ? FText::FromString(Entry->EntryId.ToString())
+                        : FText::GetEmpty())
+                    .ColorAndOpacity(FLinearColor(0.55f, 0.75f, 1.0f))
+                ]
+                + SHorizontalBox::Slot().AutoWidth()
+                [
+                    SNew(STextBlock)
+                    .Text(FText::FromString(TimeLabel))
+                    .ColorAndOpacity(FLinearColor(1.0f, 0.72f, 0.05f))
+                ]
+            ]
+            + SVerticalBox::Slot().AutoHeight()
+            .Padding(28.0f, 3.0f, 0.0f, 0.0f)
+            [
+                SNew(STextBlock)
+                .Text(FText::FromString(Summary))
+                .ColorAndOpacity(FSlateColor::UseSubduedForeground())
+                .Font(FAppStyle::GetFontStyle("SmallFont"))
+            ]
+            + SVerticalBox::Slot().AutoHeight()
+            .Padding(28.0f, 3.0f, 0.0f, 0.0f)
+            [
+                SNew(SBorder)
+                .Padding(FMargin(5.0f, 1.0f))
+                .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                .BorderBackgroundColor(ComparisonColor)
+                .ToolTipText(FText::FromString(ComparisonToolTip))
+                [
+                    SNew(STextBlock)
+                    .Text(FText::FromString(ComparisonLabel))
+                    .Font(FAppStyle::GetFontStyle("SmallFont"))
+                    .ColorAndOpacity(FLinearColor::White)
+                ]
+            ]
         ]
     ];
 }
@@ -1867,6 +2262,16 @@ bool STMOPPeopleEditor::ResolveTimelineDisplaySecond(
     int32& OutSecond,
     FString* OutFailureReason) const
 {
+    return ResolveTimelineDisplaySecondForRow(
+        WorkingRow, Index, OutSecond, OutFailureReason);
+}
+
+bool STMOPPeopleEditor::ResolveTimelineDisplaySecondForRow(
+    const FTMOPPersonProfileRow& Row,
+    const int32 Index,
+    int32& OutSecond,
+    FString* OutFailureReason) const
+{
     if (OutFailureReason != nullptr) OutFailureReason->Reset();
     auto Fail = [OutFailureReason](const FString& Reason)
     {
@@ -1875,7 +2280,7 @@ bool STMOPPeopleEditor::ResolveTimelineDisplaySecond(
         return false;
     };
 
-    if (!WorkingRow.Timeline.IsValidIndex(Index))
+    if (!Row.Timeline.IsValidIndex(Index))
         return Fail(TEXT("The timeline row does not exist."));
 
     const UDataTable* Events = EventTable.Get();
@@ -1957,7 +2362,7 @@ bool STMOPPeopleEditor::ResolveTimelineDisplaySecond(
     TFunction<bool(int32, int32&)> ResolveEntrySecond;
     ResolveEntrySecond = [&](const int32 EntryIndex, int32& EntrySecond)
     {
-        if (!WorkingRow.Timeline.IsValidIndex(EntryIndex))
+        if (!Row.Timeline.IsValidIndex(EntryIndex))
             return Fail(TEXT("A preceding timeline row is missing."));
         if (const int32* Cached = TimelineSecondCache.Find(EntryIndex))
         {
@@ -1971,7 +2376,7 @@ bool STMOPPeopleEditor::ResolveTimelineDisplaySecond(
 
         ResolvingEntries.Add(EntryIndex);
         const FTMOPPersonTimelineEntry& Entry =
-            WorkingRow.Timeline[EntryIndex];
+            Row.Timeline[EntryIndex];
         bool bResolved = true;
         switch (Entry.TimingMode)
         {
@@ -2014,6 +2419,87 @@ bool STMOPPeopleEditor::ResolveTimelineDisplaySecond(
     return ResolveEntrySecond(Index, OutSecond);
 }
 
+bool STMOPPeopleEditor::ResolveTimelinePositionKey(
+    const FTMOPPersonProfileRow& Row,
+    const int32 Index,
+    FString& OutKey,
+    FString& OutLabel) const
+{
+    OutKey.Reset();
+    OutLabel.Reset();
+    if (!Row.Timeline.IsValidIndex(Index)) return false;
+
+    for (int32 CandidateIndex = Index;
+        CandidateIndex >= 0; --CandidateIndex)
+    {
+        const FTMOPPersonTimelineEntry& Entry =
+            Row.Timeline[CandidateIndex];
+        if (Entry.LocationType == ETMOPPersonLocationType::NotPresent ||
+            Entry.Action == ETMOPPersonTimelineAction::Despawn)
+        {
+            OutKey = TEXT("NOT_PRESENT");
+            OutLabel = TEXT("not present");
+            return true;
+        }
+        if (Entry.LocationType ==
+            ETMOPPersonLocationType::WorldTransform)
+        {
+            const FVector Location = Entry.WorldTransform.GetLocation();
+            const int32 X = FMath::RoundToInt(Location.X / 100.0f);
+            const int32 Y = FMath::RoundToInt(Location.Y / 100.0f);
+            const int32 Z = FMath::RoundToInt(Location.Z / 100.0f);
+            OutKey = FString::Printf(
+                TEXT("WORLD:%d:%d:%d"), X, Y, Z);
+            OutLabel = FString::Printf(
+                TEXT("world position %.0f, %.0f, %.0f cm"),
+                Location.X, Location.Y, Location.Z);
+            return true;
+        }
+
+        const bool bAnchorChangesPosition =
+            Entry.Action ==
+                ETMOPPersonTimelineAction::InitialPlacement ||
+            Entry.Action == ETMOPPersonTimelineAction::Spawn ||
+            Entry.Action == ETMOPPersonTimelineAction::MoveToAnchor;
+        if (bAnchorChangesPosition && !Entry.TargetAnchorId.IsNone())
+        {
+            // Group members may intentionally have different formation
+            // offsets.  The shared anchor is the comparable position.
+            OutKey = TEXT("ANCHOR:") +
+                Entry.TargetAnchorId.ToString();
+            OutLabel = Entry.TargetAnchorId.ToString();
+            if (!Entry.AnchorOffsetCm.IsNearlyZero())
+                OutLabel += TEXT(" + offset ") +
+                    Entry.AnchorOffsetCm.ToCompactString();
+            return true;
+        }
+        if (!Entry.TargetSeatId.IsNone())
+        {
+            OutKey = TEXT("SEAT:") + Entry.TargetSeatId.ToString();
+            if (!Entry.TargetEntityId.IsNone())
+                OutKey += TEXT(":") + Entry.TargetEntityId.ToString();
+            OutLabel = Entry.TargetSeatId.ToString();
+            if (!Entry.TargetEntityId.IsNone())
+                OutLabel += TEXT(" in ") +
+                    Entry.TargetEntityId.ToString();
+            return true;
+        }
+        if ((Entry.LocationType == ETMOPPersonLocationType::VehicleSeat ||
+             Entry.LocationType == ETMOPPersonLocationType::BusSeat ||
+             Entry.LocationType ==
+                ETMOPPersonLocationType::StandingInVehicle ||
+             Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&
+            !Entry.TargetEntityId.IsNone())
+        {
+            OutKey = TEXT("VEHICLE:") +
+                Entry.TargetEntityId.ToString();
+            OutLabel = Entry.TargetEntityId.ToString();
+            return true;
+        }
+    }
+    return false;
+}
+
 bool STMOPPeopleEditor::BuildTimelineSpeedBadge(
     const int32 Index,
     FText& OutText,
@@ -2026,6 +2512,9 @@ bool STMOPPeopleEditor::BuildTimelineSpeedBadge(
     if (!WorkingRow.Timeline.IsValidIndex(Index)) return false;
 
     const FTMOPPersonTimelineEntry& Entry = WorkingRow.Timeline[Index];
+    if (Entry.Action == ETMOPPersonTimelineAction::BeginDriving)
+        return BuildVehicleTimelineSpeedBadge(
+            Index, OutText, OutToolTip, OutColor);
     if (Entry.Action != ETMOPPersonTimelineAction::MoveToAnchor)
         return false;
 
@@ -2344,6 +2833,218 @@ bool STMOPPeopleEditor::BuildTimelineSpeedBadge(
             Entry.PassAnchorIds.Num(),
             EstimatedTravelSeconds));
     }
+    return true;
+}
+
+bool STMOPPeopleEditor::BuildVehicleTimelineSpeedBadge(
+    const int32 Index,
+    FText& OutText,
+    FText& OutToolTip,
+    FLinearColor& OutColor) const
+{
+    OutText = FText::GetEmpty();
+    OutToolTip = FText::GetEmpty();
+    OutColor = FLinearColor(0.35f, 0.35f, 0.35f);
+    if (!WorkingRow.Timeline.IsValidIndex(Index)) return false;
+
+    const FTMOPPersonTimelineEntry& Entry = WorkingRow.Timeline[Index];
+    if (Entry.Action != ETMOPPersonTimelineAction::BeginDriving)
+        return false;
+
+    auto SetUnavailable = [&](const FString& Reason)
+    {
+        OutText = LOCTEXT("VehicleTimelineSpeedUnavailable", "SPEED ?");
+        OutToolTip = FText::FromString(Reason);
+        OutColor = FLinearColor(0.28f, 0.28f, 0.28f);
+        return true;
+    };
+
+    UWorld* EditorWorld = GEditor != nullptr
+        ? GEditor->GetEditorWorldContext().World() : nullptr;
+    if (EditorWorld == nullptr)
+        return SetUnavailable(
+            TEXT("Open the driving level to calculate vehicle speed."));
+
+    auto FindLane = [EditorWorld](const FName LaneId)
+        -> UTMOPTrafficLaneComponent*
+    {
+        if (LaneId.IsNone()) return nullptr;
+        for (TActorIterator<AActor> It(EditorWorld); It; ++It)
+        {
+            TArray<UTMOPTrafficLaneComponent*> Lanes;
+            It->GetComponents<UTMOPTrafficLaneComponent>(Lanes);
+            for (UTMOPTrafficLaneComponent* Lane : Lanes)
+                if (IsValid(Lane) && Lane->LaneId == LaneId)
+                    return Lane;
+        }
+        return nullptr;
+    };
+
+    TArray<FName> RouteLaneIds = Entry.OrderedLaneIds;
+    FString RouteSource = TEXT("person timeline");
+    if (RouteLaneIds.IsEmpty())
+    {
+        const UDataTable* Vehicles = VehicleTable.Get();
+        if (!IsValid(Vehicles) || Vehicles->GetRowStruct() !=
+            FTMOPHistoricalVehicleRow::StaticStruct())
+            return SetUnavailable(
+                TEXT("DT_TMOP_HistoricalVehicles could not be loaded."));
+
+        const FTMOPHistoricalVehicleRow* Vehicle =
+            Vehicles->FindRow<FTMOPHistoricalVehicleRow>(
+                Entry.TargetEntityId,
+                TEXT("TMOPVehicleTimelineSpeedByRowName"), false);
+        if (Vehicle == nullptr)
+            for (const FName RowName : Vehicles->GetRowNames())
+                if (const FTMOPHistoricalVehicleRow* Candidate =
+                    Vehicles->FindRow<FTMOPHistoricalVehicleRow>(
+                        RowName,
+                        TEXT("TMOPVehicleTimelineSpeedById"), false))
+                    if (Candidate->VehicleId == Entry.TargetEntityId)
+                    {
+                        Vehicle = Candidate;
+                        break;
+                    }
+        if (Vehicle == nullptr)
+            return SetUnavailable(FString::Printf(
+                TEXT("Vehicle '%s' was not found in DT_TMOP_HistoricalVehicles."),
+                *Entry.TargetEntityId.ToString()));
+
+        TArray<const FTMOPHistoricalVehicleTimelineEntry*> DrivingEntries;
+        for (const FTMOPHistoricalVehicleTimelineEntry& VehicleEntry :
+            Vehicle->Timeline)
+        {
+            const bool bDrivingAction =
+                VehicleEntry.Action ==
+                    ETMOPHistoricalVehicleAction::BeginDriving ||
+                VehicleEntry.Action ==
+                    ETMOPHistoricalVehicleAction::EnterTrafficRoute;
+            const bool bDriverMatches =
+                VehicleEntry.DriverEntityId.IsNone() ||
+                VehicleEntry.DriverEntityId == WorkingRow.EntityId;
+            if (bDrivingAction && bDriverMatches &&
+                !VehicleEntry.OrderedLaneIds.IsEmpty())
+                DrivingEntries.Add(&VehicleEntry);
+        }
+
+        const FTMOPHistoricalVehicleTimelineEntry* SelectedDrivingEntry =
+            nullptr;
+        for (const FTMOPHistoricalVehicleTimelineEntry* Candidate :
+            DrivingEntries)
+            if (Candidate->EntryId == Entry.EntryId)
+            {
+                SelectedDrivingEntry = Candidate;
+                break;
+            }
+        if (SelectedDrivingEntry == nullptr && !DrivingEntries.IsEmpty())
+        {
+            int32 DrivingOrdinal = 0;
+            for (int32 Previous = 0; Previous < Index; ++Previous)
+                if (WorkingRow.Timeline[Previous].Action ==
+                    ETMOPPersonTimelineAction::BeginDriving &&
+                    WorkingRow.Timeline[Previous].TargetEntityId ==
+                        Entry.TargetEntityId)
+                    ++DrivingOrdinal;
+            SelectedDrivingEntry = DrivingEntries[
+                FMath::Min(DrivingOrdinal, DrivingEntries.Num() - 1)];
+        }
+        if (SelectedDrivingEntry == nullptr)
+            return SetUnavailable(FString::Printf(
+                TEXT("Vehicle '%s' has no lane route for this driver."),
+                *Entry.TargetEntityId.ToString()));
+        RouteLaneIds = SelectedDrivingEntry->OrderedLaneIds;
+        RouteSource = TEXT("vehicle timeline");
+    }
+
+    RouteLaneIds.RemoveAll(
+        [](const FName LaneId) { return LaneId.IsNone(); });
+    if (RouteLaneIds.IsEmpty())
+        return SetUnavailable(TEXT("The driving route has no lane IDs."));
+
+    double RouteLengthCm = 0.0;
+    for (int32 LaneIndex = 0; LaneIndex < RouteLaneIds.Num(); ++LaneIndex)
+    {
+        UTMOPTrafficLaneComponent* Lane =
+            FindLane(RouteLaneIds[LaneIndex]);
+        if (!IsValid(Lane))
+            return SetUnavailable(FString::Printf(
+                TEXT("Traffic lane '%s' is not present in the open level."),
+                *RouteLaneIds[LaneIndex].ToString()));
+
+        double LaneLengthCm = Lane->GetSplineLength();
+        if (LaneIndex == 0)
+            LaneLengthCm -= FMath::Clamp(
+                static_cast<double>(
+                    Entry.VehicleStartDistanceAlongFirstLaneCm),
+                0.0, LaneLengthCm);
+
+        if (LaneIndex == RouteLaneIds.Num() - 1 &&
+            !Entry.DrivingDestinationAnchorId.IsNone())
+        {
+            for (TActorIterator<ATMOPHistoricalAnchor> It(EditorWorld);
+                It; ++It)
+                if (It->GetAnchorId() ==
+                    Entry.DrivingDestinationAnchorId)
+                {
+                    const float InputKey =
+                        Lane->FindInputKeyClosestToWorldLocation(
+                            It->GetAnchorLocation());
+                    const double DestinationDistanceCm =
+                        Lane->GetDistanceAlongSplineAtSplineInputKey(
+                            InputKey);
+                    LaneLengthCm = LaneIndex == 0
+                        ? FMath::Max(0.0,
+                            DestinationDistanceCm -
+                            Entry.VehicleStartDistanceAlongFirstLaneCm)
+                        : DestinationDistanceCm;
+                    break;
+                }
+        }
+        RouteLengthCm += FMath::Max(0.0, LaneLengthCm);
+    }
+    if (RouteLengthCm <= KINDA_SMALL_NUMBER)
+        return SetUnavailable(
+            TEXT("The calculated vehicle route length is zero."));
+
+    int32 StartSecond = 0;
+    if (!ResolveTimelineDisplaySecond(Index, StartSecond))
+        return SetUnavailable(
+            TEXT("The driving start time could not be resolved."));
+
+    int32 EndSecond = 0;
+    int32 EndIndex = INDEX_NONE;
+    for (int32 Next = Index + 1;
+        Next < WorkingRow.Timeline.Num(); ++Next)
+        if (ResolveTimelineDisplaySecond(Next, EndSecond) &&
+            EndSecond > StartSecond)
+        {
+            EndIndex = Next;
+            break;
+        }
+    if (EndIndex == INDEX_NONE)
+        return SetUnavailable(
+            TEXT("Add a later timeline entry to define when this drive ends."));
+
+    const int32 AvailableSeconds = EndSecond - StartSecond;
+    const double SpeedKmh =
+        (RouteLengthCm / 100000.0) /
+        (static_cast<double>(AvailableSeconds) / 3600.0);
+    OutText = FText::FromString(FString::Printf(
+        TEXT("AVG %.1f km/h"), SpeedKmh));
+    OutColor = SpeedKmh <= 50.0
+        ? FLinearColor(0.05f, 0.42f, 0.12f)
+        : SpeedKmh <= 70.0
+            ? FLinearColor(0.78f, 0.38f, 0.03f)
+            : FLinearColor(0.75f, 0.05f, 0.03f);
+    OutToolTip = FText::FromString(FString::Printf(
+        TEXT("Average vehicle speed: %.2f km/h. Route: %.1f km over %d s, from Timeline[%d] to Timeline[%d], using %d lane(s) from the %s. Traffic, braking and acceleration can make the instantaneous runtime speed differ."),
+        SpeedKmh,
+        RouteLengthCm / 100000.0,
+        AvailableSeconds,
+        Index,
+        EndIndex,
+        RouteLaneIds.Num(),
+        *RouteSource));
     return true;
 }
 
