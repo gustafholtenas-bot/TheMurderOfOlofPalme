@@ -15,10 +15,13 @@ public:
 private:
     void RegisterMenus();
     void OpenPeopleEditor();
+    void OpenVehicleEditor();
     void GenerateExitChildrenFromSelection();
     void GenerateIntersectionCornersFromSelection();
     void SnapSelectedVehicleAnchorsToGround();
     TSharedRef<SDockTab> SpawnPeopleEditorTab(const FSpawnTabArgs& Args);
+    TSharedRef<SDockTab> SpawnVehicleEditorTab(const FSpawnTabArgs& Args);
 
     static const FName PeopleEditorTabName;
+    static const FName VehicleEditorTabName;
 };

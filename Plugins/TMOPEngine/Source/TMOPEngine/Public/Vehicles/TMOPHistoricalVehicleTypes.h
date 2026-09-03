@@ -33,6 +33,19 @@ enum class ETMOPHistoricalVehiclePlacementMode : uint8
     Anchor
 };
 
+/** Reusable driving behaviour; Custom Speed Override always has priority. */
+UENUM(BlueprintType)
+enum class ETMOPVehicleDrivingPreset : uint8
+{
+    AutomaticFromTimeline UMETA(DisplayName="Automatic From Timeline"),
+    Parking UMETA(DisplayName="Parking / Crawl"),
+    SlowCity UMETA(DisplayName="Slow City Traffic"),
+    NormalCity UMETA(DisplayName="Normal City Traffic"),
+    Fast UMETA(DisplayName="Fast"),
+    Emergency UMETA(DisplayName="Emergency"),
+    Fleeing UMETA(DisplayName="Fleeing")
+};
+
 /** One source-backed state or action in a historical vehicle's schedule. */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
@@ -45,12 +58,24 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     ETMOPHistoricalVehicleAction Action = ETMOPHistoricalVehicleAction::InitialPlacement;
 
+    /** Friendly description such as "Grand to crime scene". */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            DisplayName="Route Segment Name"))
+    FText RouteSegmentName;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     FTMOPTime Time = FTMOPTime(23, 0, 0);
 
-    /** Absolute uses Time. Relative resolves SharedEventId and adds EventOffsetSeconds. */
+    /**
+     * Absolute uses Time. Relative to Shared Event resolves SharedEventId.
+     * Relative to Previous Entry uses the resolved time of the timeline item
+     * immediately above this one. Both relative modes add EventOffsetSeconds.
+     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Historical Vehicle|Timeline|Time")
+        Category="TMOP|Historical Vehicle|Timeline|Time",
+        meta=(ValidEnumValues="Absolute,Relative,RelativeToPreviousEntry"))
     ETMOPEventTimingMode TimingMode = ETMOPEventTimingMode::Absolute;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
@@ -60,24 +85,48 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Historical Vehicle|Timeline|Time",
-        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative",
+        meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative || TimingMode==ETMOPEventTimingMode::RelativeToPreviousEntry",
             DisplayName="Offset Seconds"))
     int32 EventOffsetSeconds = 0;
+
+    /**
+     * For a driving entry, Time is the planned arrival instead of departure.
+     * The preceding timeline entry supplies the departure time.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Time",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            DisplayName="Time Is Arrival"))
+    bool bTimeIsArrival = false;
+
+    /** Zero derives cruise speed from route distance and departure/arrival. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Driving",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            ClampMin="0.0", Units="km/h", DisplayName="Cruise Speed Override"))
+    float CruiseSpeedOverrideKmh = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Driving",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            DisplayName="Driving Preset"))
+    ETMOPVehicleDrivingPreset DrivingPreset =
+        ETMOPVehicleDrivingPreset::AutomaticFromTimeline;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     FTransform WorldTransform = FTransform::Identity;
 
-    /** Select how an Initial Placement or Spawn entry positions the vehicle. */
+    /** Select how a placement, stop or park entry positions the vehicle. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Historical Vehicle|Timeline|Placement",
-        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn"))
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn || Action==ETMOPHistoricalVehicleAction::Stop || Action==ETMOPHistoricalVehicleAction::Park"))
     ETMOPHistoricalVehiclePlacementMode PlacementMode =
         ETMOPHistoricalVehiclePlacementMode::WorldTransform;
 
     /** Anchor used when Placement Mode is Anchor, for example LarsKnubbBil. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Historical Vehicle|Timeline|Placement",
-        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn) && PlacementMode==ETMOPHistoricalVehiclePlacementMode::Anchor",
+        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn || Action==ETMOPHistoricalVehicleAction::Stop || Action==ETMOPHistoricalVehicleAction::Park) && PlacementMode==ETMOPHistoricalVehiclePlacementMode::Anchor",
             DisplayName="Placement Anchor ID"))
     FName PlacementAnchorId = NAME_None;
 
@@ -87,13 +136,70 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Historical Vehicle|Timeline|Placement",
-        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn) && PlacementMode==ETMOPHistoricalVehiclePlacementMode::Anchor",
+        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::InitialPlacement || Action==ETMOPHistoricalVehicleAction::Spawn || Action==ETMOPHistoricalVehicleAction::Stop || Action==ETMOPHistoricalVehicleAction::Park) && PlacementMode==ETMOPHistoricalVehiclePlacementMode::Anchor",
             DisplayName="Anchor Local Offset"))
     FTransform AnchorLocalOffset = FTransform::Identity;
 
     /** Lane route used after this entry, when one has been reconstructed. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     TArray<FName> OrderedLaneIds;
+
+    /** Optional explicit route start. Empty uses the preceding placement. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
+    FName RouteStartAnchorId = NAME_None;
+
+    /** Empty resolves the closest lane to Route Start Anchor/placement. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
+    FName RouteStartLaneId = NAME_None;
+
+    /** Optional explicit destination. Empty uses the following Stop/Park. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
+    FName RouteDestinationAnchorId = NAME_None;
+
+    /** Empty resolves the closest lane to the destination anchor/placement. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
+    FName RouteDestinationLaneId = NAME_None;
+
+    /** Ordered anchors that automatic routing must pass before destination. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
+    TArray<FName> RouteViaAnchorIds;
+
+    /** Ordered lanes visited after via anchors and before destination. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
+    TArray<FName> RouteViaLaneIds;
+
+    /** Allows disabled/restricted lane connections when following this route. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Rules",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            DisplayName="Ignore One-Way / Restricted Connections"))
+    bool bIgnoreOneWayRestrictions = false;
+
+    /** Traffic signals do not add stop constraints while this route is active. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Rules",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            DisplayName="Run Red Lights"))
+    bool bRunRedLights = false;
+
+    /** Retry departure until every listed driver/passenger is seated. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Occupants",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            DisplayName="Wait For Listed Occupants"))
+    bool bWaitForListedOccupants = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Occupants")
     FName DriverEntityId = NAME_None;
@@ -173,6 +279,11 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleRow : public FTableRowBase
         meta=(EditCondition="bOverrideBodyColor",
             DisplayName="Body Color"))
     FLinearColor BodyColor = FLinearColor::White;
+
+    /** Optional rigid mesh attached to the model's RoofAccessorySocket. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Appearance")
+    FTMOPRoofAccessoryVisual RoofAccessory;
 
     /** Empty uses the future historical vehicle director's default vehicle class. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Simulation")

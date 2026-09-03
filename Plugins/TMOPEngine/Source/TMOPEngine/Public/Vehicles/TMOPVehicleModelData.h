@@ -65,10 +65,17 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Accessories")
     FTransform RoofMountTransform = FTransform::Identity;
 
+    /** When the mount transform has no translation, derive roof height from the body bounds. */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Accessories")
+    bool bAutoPlaceRoofMountFromBodyBounds = true;
+
+    /** Ambulances and police vans with lights modelled into BodyMesh should enable this. */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Accessories")
+    bool bRoofAccessoryBuiltIntoBodyMesh = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Dimensions")
     float VehicleLengthCm = 450.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle Model|Dimensions")
     float VehicleWidthCm = 180.0f;
 };
-

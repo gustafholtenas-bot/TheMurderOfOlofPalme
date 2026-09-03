@@ -164,7 +164,8 @@ private:
         const FTMOPHistoricalVehicleTimelineEntry& Entry,
         FTransform& OutTransform) const;
     bool ResolveTimelineEntrySecond(
-        const FTMOPHistoricalVehicleTimelineEntry& Entry,
+        const FTMOPHistoricalVehicleRow& Profile,
+        int32 EntryIndex,
         int32& OutSecond) const;
     bool IsBoundaryEntryVehicle(
         const FTMOPHistoricalVehicleRow& Profile) const;
@@ -180,7 +181,8 @@ private:
     int32 SpawnVehicles(bool bIgnoreRowFlags);
     const FTMOPHistoricalVehicleTimelineEntry* FindDrivingEntry(
         const FTMOPHistoricalVehicleRow& Profile,
-        FName DriverEntityId) const;
+        FName DriverEntityId,
+        int32 CurrentSecond) const;
     bool ReportDrivingFailure(
         FName VehicleId,
         const FString& FailureCode,

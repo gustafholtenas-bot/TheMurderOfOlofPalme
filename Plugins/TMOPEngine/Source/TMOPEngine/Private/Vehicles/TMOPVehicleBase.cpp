@@ -45,6 +45,11 @@ ATMOPVehicleBase::ATMOPVehicleBase()
     VehicleRoot->SetupAttachment(VehicleCollision);
     VehicleRoot->SetRelativeLocation(FVector(0.0f, 0.0f, -60.0f));
 
+    RoofAccessorySocket =
+        CreateDefaultSubobject<USceneComponent>(TEXT("RoofAccessorySocket"));
+    RoofAccessorySocket->SetupAttachment(VehicleRoot);
+    RoofAccessorySocket->SetRelativeLocation(FVector(0.0f, 0.0f, 140.0f));
+
     NameLabel =
         CreateDefaultSubobject<UTextRenderComponent>(TEXT("NameLabel"));
     NameLabel->SetupAttachment(VehicleCollision);

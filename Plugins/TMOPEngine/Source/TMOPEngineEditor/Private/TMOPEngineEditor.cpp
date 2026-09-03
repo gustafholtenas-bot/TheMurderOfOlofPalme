@@ -10,6 +10,7 @@
 #include "Math/RotationMatrix.h"
 #include "ScopedTransaction.h"
 #include "STMOPPeopleEditor.h"
+#include "STMOPVehicleEditor.h"
 #include "ToolMenus.h"
 #include "Widgets/Docking/SDockTab.h"
 
@@ -17,6 +18,8 @@
 
 const FName FTMOPEngineEditorModule::PeopleEditorTabName(
     TEXT("TMOPPeopleEditor"));
+const FName FTMOPEngineEditorModule::VehicleEditorTabName(
+    TEXT("TMOPVehicleEditor"));
 
 void FTMOPEngineEditorModule::StartupModule()
 {
@@ -30,6 +33,15 @@ void FTMOPEngineEditorModule::StartupModule()
             "Edit DT_TMOP_People in a focused visual timeline editor."))
         .SetMenuType(ETabSpawnerMenuType::Hidden);
 
+    FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
+        VehicleEditorTabName,
+        FOnSpawnTab::CreateRaw(
+            this, &FTMOPEngineEditorModule::SpawnVehicleEditorTab))
+        .SetDisplayName(LOCTEXT("VehicleEditorTitle", "TMOP Vehicle Editor"))
+        .SetTooltipText(LOCTEXT("VehicleEditorTooltip",
+            "Edit historical vehicles, routes, occupants and timing."))
+        .SetMenuType(ETabSpawnerMenuType::Hidden);
+
     UToolMenus::RegisterStartupCallback(
         FSimpleMulticastDelegate::FDelegate::CreateRaw(
             this, &FTMOPEngineEditorModule::RegisterMenus));
@@ -40,6 +52,7 @@ void FTMOPEngineEditorModule::ShutdownModule()
     UToolMenus::UnRegisterStartupCallback(this);
     UToolMenus::UnregisterOwner(this);
     FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(PeopleEditorTabName);
+    FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(VehicleEditorTabName);
 }
 
 void FTMOPEngineEditorModule::RegisterMenus()
@@ -57,6 +70,14 @@ void FTMOPEngineEditorModule::RegisterMenus()
         FSlateIcon(),
         FUIAction(FExecuteAction::CreateRaw(
             this, &FTMOPEngineEditorModule::OpenPeopleEditor)));
+    Section.AddMenuEntry(
+        TEXT("OpenTMOPVehicleEditor"),
+        LOCTEXT("OpenVehicleEditor", "TMOP Vehicle Editor"),
+        LOCTEXT("OpenVehicleEditorTooltip",
+            "Open the visual vehicle, route and timing editor."),
+        FSlateIcon(),
+        FUIAction(FExecuteAction::CreateRaw(
+            this, &FTMOPEngineEditorModule::OpenVehicleEditor)));
     Section.AddMenuEntry(
         TEXT("GenerateTMOPExitChildren"),
         LOCTEXT("GenerateExitChildren",
@@ -92,6 +113,11 @@ void FTMOPEngineEditorModule::RegisterMenus()
 void FTMOPEngineEditorModule::OpenPeopleEditor()
 {
     FGlobalTabmanager::Get()->TryInvokeTab(PeopleEditorTabName);
+}
+
+void FTMOPEngineEditorModule::OpenVehicleEditor()
+{
+    FGlobalTabmanager::Get()->TryInvokeTab(VehicleEditorTabName);
 }
 
 void FTMOPEngineEditorModule::GenerateExitChildrenFromSelection()
@@ -454,6 +480,16 @@ TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnPeopleEditorTab(
         .TabRole(ETabRole::NomadTab)
         [
             SNew(STMOPPeopleEditor)
+        ];
+}
+
+TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnVehicleEditorTab(
+    const FSpawnTabArgs& Args)
+{
+    return SNew(SDockTab)
+        .TabRole(ETabRole::NomadTab)
+        [
+            SNew(STMOPVehicleEditor)
         ];
 }
 

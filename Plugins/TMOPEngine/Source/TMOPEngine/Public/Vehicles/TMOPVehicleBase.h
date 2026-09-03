@@ -31,6 +31,15 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle")
     TObjectPtr<USceneComponent> VehicleRoot;
 
+    /**
+     * Common roof attachment point for rigid accessories such as taxi signs
+     * and police lightbars. Attach accessory components to this component;
+     * configured vehicles position it from their model data automatically.
+     */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
+        Category="TMOP|Vehicle|Accessories")
+    TObjectPtr<USceneComponent> RoofAccessorySocket;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle")
     FName VehicleId = NAME_None;
 

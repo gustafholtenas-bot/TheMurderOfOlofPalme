@@ -364,7 +364,10 @@ void UTMOPTrafficVehicleMovementComponent::DespawnAtCompletedRoute()
 
 float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLaneComponent* Lane)
 {
-    float Target = Lane->GetSpeedLimitCentimetersPerSecond() * FMath::Max(0.0f, SpeedLimitMultiplier);
+    float Target = DesiredCruiseSpeedKmh > 0.0f
+        ? DesiredCruiseSpeedKmh * (100000.0f / 3600.0f)
+        : Lane->GetSpeedLimitCentimetersPerSecond() *
+            FMath::Max(0.0f, SpeedLimitMultiplier);
     TrafficState = ETMOPTrafficVehicleState::Driving;
     UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     UTMOPTrafficVehicleSubsystem* Traffic = GameInstance != nullptr
@@ -464,11 +467,13 @@ FName UTMOPTrafficVehicleMovementComponent::ChooseNextLaneId(
     {
         const FName PlannedNext = PlannedLaneIds[PlannedLaneIndex + 1];
         for (const FTMOPLaneConnection& Connection : CurrentLane->NextLanes)
-            if (Connection.bAllowed && Connection.TargetLaneId == PlannedNext) return PlannedNext;
+            if ((Connection.bAllowed || bIgnoreOneWayRestrictions) &&
+                Connection.TargetLaneId == PlannedNext) return PlannedNext;
         return NAME_None;
     }
     for (const FTMOPLaneConnection& Connection : CurrentLane->NextLanes)
-        if (Connection.bAllowed) return Connection.TargetLaneId;
+        if (Connection.bAllowed || bIgnoreOneWayRestrictions)
+            return Connection.TargetLaneId;
     return NAME_None;
 }
 

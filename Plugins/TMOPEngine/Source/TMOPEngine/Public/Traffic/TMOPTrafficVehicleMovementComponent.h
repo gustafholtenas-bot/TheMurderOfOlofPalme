@@ -66,6 +66,19 @@ public:
         meta=(ClampMin="0.1"))
     float SpeedLimitMultiplier = 1.0f;
 
+    /** Zero follows lane speed limits; positive values set this route's cruise speed. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Driving",
+        meta=(ClampMin="0.0", Units="km/h"))
+    float DesiredCruiseSpeedKmh = 0.0f;
+
+    /** Allows explicitly planned connections even when marked restricted. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Rules")
+    bool bIgnoreOneWayRestrictions = false;
+
+    /** Signal controllers leave this vehicle unconstrained at red lights. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Rules")
+    bool bRunRedLights = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Driving",
         meta=(ClampMin="1.0"))
     float AccelerationCmPerSecondSquared = 220.0f;

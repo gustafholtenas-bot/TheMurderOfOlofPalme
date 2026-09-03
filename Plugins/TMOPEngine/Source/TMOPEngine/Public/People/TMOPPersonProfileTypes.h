@@ -222,12 +222,14 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
      * Optional driving route for BeginDriving. When empty, the route is read
      * from the target vehicle's BeginDriving/EnterTrafficRoute timeline entry.
      */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay,
+        Category="TMOP|Person|Timeline|Driving",
         meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
-            DisplayName="Ordered Lane IDs"))
+            DisplayName="Legacy Route Override (Fallback Only)"))
     TArray<FName> OrderedLaneIds;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay,
+        Category="TMOP|Person|Timeline|Driving",
         meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving"))
     ETMOPVehicleRouteMode VehicleRouteMode =
         ETMOPVehicleRouteMode::ManualLaneRoute;
@@ -237,13 +239,15 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
      * complete route to it. Manual Lane Route uses it for the smooth final
      * approach from the last supplied lane.
      */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay,
+        Category="TMOP|Person|Timeline|Driving",
         meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
-            DisplayName="Destination Anchor ID"))
+            DisplayName="Legacy Destination (Fallback Only)"))
     FName DrivingDestinationAnchorId = NAME_None;
 
     /** Distance from the beginning of the first lane at which driving starts. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Driving",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay,
+        Category="TMOP|Person|Timeline|Driving",
         meta=(EditCondition="Action==ETMOPPersonTimelineAction::BeginDriving",
             ClampMin="0.0", DisplayName="Start Distance Along First Lane (cm)"))
     float VehicleStartDistanceAlongFirstLaneCm = 0.0f;

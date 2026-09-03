@@ -60,6 +60,15 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle")
     TObjectPtr<UStaticMeshComponent> BodyMesh;
 
+    /** Rigid taxi sign, lightbar or beacon attached to RoofAccessorySocket. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
+        Category="TMOP|Configured Vehicle|Accessories")
+    TObjectPtr<UStaticMeshComponent> RoofAccessoryMesh;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Configured Vehicle|Accessories")
+    FTMOPRoofAccessoryVisual RoofAccessory;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle")
     TObjectPtr<UStaticMeshComponent> WheelFrontLeft;
 
@@ -80,6 +89,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera")
     bool bAllowMouseOrbitCamera = true;
+
+    /** Keeps the normal driving view rigidly centred behind the vehicle. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera")
+    bool bLockCameraBehindVehicle = true;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Camera",
         meta=(ClampMin="-89.0", ClampMax="89.0"))

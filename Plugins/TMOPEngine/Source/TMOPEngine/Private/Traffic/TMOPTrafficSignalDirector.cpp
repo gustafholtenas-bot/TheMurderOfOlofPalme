@@ -56,6 +56,15 @@ void ATMOPTrafficSignalDirector::UpdateVehicleConstraints()
         for (UTMOPTrafficVehicleMovementComponent* Vehicle : Vehicles)
         {
             if (!IsValid(Vehicle)) continue;
+            if (Vehicle->bRunRedLights)
+            {
+                for (UTMOPTrafficStopLineComponent* StopLine : StopLines)
+                    if (IsValid(StopLine))
+                        Vehicle->ClearNamedStopConstraint(FName(
+                            *FString::Printf(TEXT("SIGNAL_%s"),
+                                *StopLine->StopLineId.ToString())));
+                continue;
+            }
             for (UTMOPTrafficStopLineComponent* StopLine : StopLines)
             {
                 if (!IsValid(StopLine)) continue;

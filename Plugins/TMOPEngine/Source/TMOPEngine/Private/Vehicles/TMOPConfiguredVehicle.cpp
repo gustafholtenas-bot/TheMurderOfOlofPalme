@@ -21,10 +21,16 @@ ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
     PrimaryActorTick.bCanEverTick = true;
     VisualRoot = CreateDefaultSubobject<USceneComponent>(TEXT("VisualRoot"));
     VisualRoot->SetupAttachment(VehicleRoot);
+    RoofAccessorySocket->SetupAttachment(VisualRoot);
     BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
     BodyMesh->SetupAttachment(VisualRoot);
     BodyMesh->SetSimulatePhysics(false);
     BodyMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    RoofAccessoryMesh =
+        CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RoofAccessoryMesh"));
+    RoofAccessoryMesh->SetupAttachment(RoofAccessorySocket);
+    RoofAccessoryMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    RoofAccessoryMesh->SetGenerateOverlapEvents(false);
     WheelFrontLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelFrontLeft"));
     WheelFrontRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelFrontRight"));
     WheelRearLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WheelRearLeft"));
@@ -42,15 +48,17 @@ ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
     VehicleCameraBoom->TargetOffset = FVector(0.0f, 0.0f, 180.0f);
     VehicleCameraBoom->SetRelativeRotation(FRotator(-12.0f, 0.0f, 0.0f));
     VehicleCameraBoom->bDoCollisionTest = true;
-    VehicleCameraBoom->bEnableCameraLag = true;
+    VehicleCameraBoom->bEnableCameraLag = false;
     VehicleCameraBoom->CameraLagSpeed = 5.0f;
     VehicleCameraBoom->CameraLagMaxDistance = 180.0f;
     VehicleCameraBoom->bUseCameraLagSubstepping = true;
-    VehicleCameraBoom->bEnableCameraRotationLag = true;
+    VehicleCameraBoom->bEnableCameraRotationLag = false;
     VehicleCameraBoom->CameraRotationLagSpeed = 6.0f;
     VehicleCameraBoom->bInheritPitch = false;
     VehicleCameraBoom->bInheritYaw = false;
     VehicleCameraBoom->bInheritRoll = false;
+    VehicleCameraBoom->bUsePawnControlRotation = false;
+    VehicleCameraBoom->SetUsingAbsoluteRotation(false);
     VehicleCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("VehicleCamera"));
     VehicleCamera->SetupAttachment(VehicleCameraBoom, USpringArmComponent::SocketName);
 
@@ -144,7 +152,8 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     // being reinstanced. Never dereference native subobjects until all parts
     // required by the configuration are valid.
     if (!IsValid(VehicleCollision) || !IsValid(VehicleRoot) ||
-        !IsValid(VisualRoot) || !IsValid(BodyMesh))
+        !IsValid(VisualRoot) || !IsValid(BodyMesh) ||
+        !IsValid(RoofAccessorySocket) || !IsValid(RoofAccessoryMesh))
     {
         UE_LOG(LogTemp, Warning,
             TEXT("TMOP configured vehicle '%s' skipped configuration because a required component is invalid."),
@@ -170,6 +179,30 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
         BodyTransform.SetTranslation(Translation);
     }
     BodyMesh->SetRelativeTransform(BodyTransform);
+
+    FTransform RoofMount = Model->RoofMountTransform;
+    if (Model->bAutoPlaceRoofMountFromBodyBounds &&
+        RoofMount.GetTranslation().IsNearlyZero() && IsValid(Model->BodyMesh))
+    {
+        const FBoxSphereBounds Bounds = Model->BodyMesh->GetBounds();
+        const FVector BodyRoofPoint = Bounds.Origin +
+            FVector(0.0f, 0.0f, Bounds.BoxExtent.Z);
+        RoofMount.SetTranslation(BodyTransform.TransformPosition(BodyRoofPoint));
+        RoofMount.SetRotation(BodyTransform.GetRotation());
+    }
+    RoofAccessorySocket->SetRelativeTransform(RoofMount);
+
+    const bool bShowExternalRoofAccessory =
+        !Model->bRoofAccessoryBuiltIntoBodyMesh &&
+        RoofAccessory.Type != ETMOPRoofAccessoryType::None &&
+        IsValid(RoofAccessory.Mesh);
+    RoofAccessoryMesh->SetStaticMesh(
+        bShowExternalRoofAccessory ? RoofAccessory.Mesh.Get() : nullptr);
+    RoofAccessoryMesh->SetRelativeTransform(RoofAccessory.LocalTransform);
+    RoofAccessoryMesh->SetVisibility(bShowExternalRoofAccessory, true);
+    RoofAccessoryMesh->EmptyOverrideMaterials();
+    if (bShowExternalRoofAccessory && IsValid(RoofAccessory.Material))
+        RoofAccessoryMesh->SetMaterial(0, RoofAccessory.Material.Get());
     ApplyBodyColor();
     InitializeVehicleLightMaterials();
     ApplyWheel(WheelFrontLeft, Model->WheelMesh, Model->Wheels.FrontLeft);
@@ -322,8 +355,7 @@ void ATMOPConfiguredVehicle::Tick(const float DeltaSeconds)
 
 void ATMOPConfiguredVehicle::UpdatePlayerVehicleCamera(const float DeltaSeconds)
 {
-    if (!bAllowMouseOrbitCamera || !IsValid(VehicleCameraBoom) ||
-        GetWorld() == nullptr)
+    if (!IsValid(VehicleCameraBoom) || GetWorld() == nullptr)
     {
         bVehicleCameraTrackingInitialized = false;
         return;
@@ -331,6 +363,20 @@ void ATMOPConfiguredVehicle::UpdatePlayerVehicleCamera(const float DeltaSeconds)
     APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
     if (!IsValid(PlayerController) || PlayerController->GetViewTarget() != this)
     {
+        bVehicleCameraTrackingInitialized = false;
+        return;
+    }
+
+    if (bLockCameraBehindVehicle || !bAllowMouseOrbitCamera)
+    {
+        // Vehicle-local rotation is immune to controller yaw and cannot remain
+        // stranded beside the car after a turn or after mouse input.
+        VehicleCameraBoom->bEnableCameraLag = false;
+        VehicleCameraBoom->bEnableCameraRotationLag = false;
+        VehicleCameraBoom->SetRelativeRotation(
+            FRotator(DefaultCameraPitchDegrees, 0.0f, 0.0f));
+        LastVehicleCameraControlRotation = PlayerController->GetControlRotation();
+        SecondsSinceVehicleCameraInput = 0.0f;
         bVehicleCameraTrackingInitialized = false;
         return;
     }
