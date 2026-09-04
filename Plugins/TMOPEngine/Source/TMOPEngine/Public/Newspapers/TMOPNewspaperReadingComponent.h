@@ -4,15 +4,48 @@
 #include "Components/ActorComponent.h"
 #include "TMOPNewspaperReadingComponent.generated.h"
 
+class AActor;
+class ACameraActor;
 class UCameraComponent;
 class UAnimMontage;
 class UMaterialInterface;
 class UMaterialInstanceDynamic;
+class UMeshComponent;
 class USkeletalMesh;
 class USkeletalMeshComponent;
 class UStaticMesh;
 class UStaticMeshComponent;
 class UTMOPNewspaperItemDefinition;
+
+USTRUCT()
+struct FTMOPNewspaperMeshVisibilityState
+{
+    GENERATED_BODY()
+
+    UPROPERTY(Transient)
+    TObjectPtr<UMeshComponent> Component;
+
+    UPROPERTY(Transient)
+    bool bPreviousOwnerNoSee = false;
+
+    UPROPERTY(Transient)
+    bool bPreviousVisible = true;
+
+    UPROPERTY(Transient)
+    bool bPreviousHiddenInGame = false;
+};
+
+USTRUCT()
+struct FTMOPNewspaperCameraActiveState
+{
+    GENERATED_BODY()
+
+    UPROPERTY(Transient)
+    TObjectPtr<UCameraComponent> Component;
+
+    UPROPERTY(Transient)
+    bool bPreviousActive = false;
+};
 
 /** First-person newspaper reader with an editor-adjustable floating paper. */
 UCLASS(ClassGroup=(TMOP), BlueprintType, Blueprintable,
@@ -151,22 +184,27 @@ public:
 private:
     void CreateReadingComponents();
     UMaterialInstanceDynamic* CreatePageMaterial(FName SlotName, int32 FallbackIndex);
-    UCameraComponent* FindActiveCamera() const;
     void ApplyNewspaperTransform(UStaticMesh* Mesh);
+    void ActivateReadingCamera();
+    void RestorePreviousCameras();
+    void HidePlayerAppearanceMeshes();
+    void RestorePlayerAppearanceMeshes();
 
     UPROPERTY(Transient) TObjectPtr<USkeletalMeshComponent> ReadingArms;
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> ReadingNewspaper;
     UPROPERTY(Transient) TObjectPtr<UCameraComponent> ReadingCamera;
-    UPROPERTY(Transient) TObjectPtr<UCameraComponent> PreviousCamera;
-    UPROPERTY(Transient) TObjectPtr<USkeletalMeshComponent> HiddenPlayerMesh;
+    UPROPERTY(Transient) TObjectPtr<ACameraActor> ReadingCameraActor;
+    UPROPERTY(Transient) TObjectPtr<AActor> PreviousViewTarget;
     UPROPERTY(Transient) TObjectPtr<UMaterialInstanceDynamic> FrontPageMID;
     UPROPERTY(Transient) TObjectPtr<UMaterialInstanceDynamic> LeftPageMID;
     UPROPERTY(Transient) TObjectPtr<UMaterialInstanceDynamic> RightPageMID;
     UPROPERTY(Transient) TObjectPtr<UMaterialInstanceDynamic> EndPageMID;
     UPROPERTY(Transient) TObjectPtr<UTMOPNewspaperItemDefinition> ActiveNewspaper;
+    UPROPERTY(Transient)
+    TArray<FTMOPNewspaperMeshVisibilityState> HiddenAppearanceMeshes;
+    UPROPERTY(Transient)
+    TArray<FTMOPNewspaperCameraActiveState> PreviousCameraStates;
     FTransform CurrentNewspaperTransform;
     bool bUsingExistingPlayerMesh = false;
     bool bShowingFoldedMesh = false;
-    bool bPreviousPlayerMeshOwnerNoSee = false;
-    bool bPlayerMeshVisibilityOverridden = false;
 };

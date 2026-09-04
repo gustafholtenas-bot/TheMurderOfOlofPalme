@@ -55,7 +55,10 @@ ATMOPConfiguredVehicle::ATMOPConfiguredVehicle()
     VehicleCameraBoom->bEnableCameraRotationLag = false;
     VehicleCameraBoom->CameraRotationLagSpeed = 6.0f;
     VehicleCameraBoom->bInheritPitch = false;
-    VehicleCameraBoom->bInheritYaw = false;
+    // The chase camera must rotate with the vehicle. Disabling inherited yaw
+    // leaves the boom facing a fixed world direction, which becomes a side
+    // view as soon as the vehicle turns.
+    VehicleCameraBoom->bInheritYaw = true;
     VehicleCameraBoom->bInheritRoll = false;
     VehicleCameraBoom->bUsePawnControlRotation = false;
     VehicleCameraBoom->SetUsingAbsoluteRotation(false);
@@ -366,6 +369,11 @@ void ATMOPConfiguredVehicle::UpdatePlayerVehicleCamera(const float DeltaSeconds)
         bVehicleCameraTrackingInitialized = false;
         return;
     }
+
+    // Enforce this at runtime too: existing Blueprint children may have
+    // serialized the old false value before the native default was corrected.
+    VehicleCameraBoom->bInheritYaw = true;
+    VehicleCameraBoom->SetUsingAbsoluteRotation(false);
 
     if (bLockCameraBehindVehicle || !bAllowMouseOrbitCamera)
     {

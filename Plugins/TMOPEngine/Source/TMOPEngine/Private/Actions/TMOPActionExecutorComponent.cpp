@@ -627,7 +627,7 @@ void UTMOPActionExecutorComponent::CompleteCurrentAction(
                 Candidate->SocialGroupId == CompletedGroupId;
             if (bSameAgent || bSameGroup)
             {
-                Candidate->Destroy();
+                Candidate->RequestDespawnWithFade();
                 ++DespawnedCount;
             }
         }

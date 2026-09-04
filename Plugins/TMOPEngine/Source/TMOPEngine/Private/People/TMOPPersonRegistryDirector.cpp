@@ -562,6 +562,19 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
     Agent->SocialGroupId = Runtime.Profile.SocialGroupId;
     Agent->ActivityState = InitialEntry.ActivityState;
     Agent->LifeState = InitialEntry.LifeState;
+    Agent->bEnableSpawnFade = bEnablePersonSpawnFade;
+    Agent->bEnableDespawnFade = bEnablePersonDespawnFade;
+    Agent->SpawnFadeDurationSeconds = PersonSpawnFadeDurationSeconds;
+    Agent->DespawnFadeDurationSeconds = PersonDespawnFadeDurationSeconds;
+    Agent->VisibilityFadeCurve = PersonVisibilityFadeCurve;
+    Agent->VisibilityFadeMaterialParameter =
+        PersonVisibilityFadeMaterialParameter;
+    Agent->bWriteVisibilityFadeToCustomPrimitiveData =
+        bWritePersonFadeToCustomPrimitiveData;
+    Agent->VisibilityFadeCustomPrimitiveDataIndex =
+        PersonFadeCustomPrimitiveDataIndex;
+    Agent->bWriteVisibilityFadeMaterialParameter =
+        bWritePersonFadeMaterialParameter;
     UGameplayStatics::FinishSpawningActor(Agent, SpawnTransform);
 
     UTMOPPersonProfileComponent* ProfileComponent =
@@ -579,10 +592,16 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
     {
         // These actors visualize uncertain observations.  They must not be
         // able to jam an otherwise deterministic historical traffic route.
-        Agent->SetActorEnableCollision(false);
+        // Keep a query-only capsule, however, so the player's ordinary target
+        // and inspection system can discover them just like known people.
+        Agent->SetActorEnableCollision(true);
         if (UCapsuleComponent* Capsule = Agent->GetCapsuleComponent())
         {
-            Capsule->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            Capsule->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+            Capsule->SetCollisionObjectType(ECC_Pawn);
+            Capsule->SetCollisionResponseToAllChannels(ECR_Ignore);
+            Capsule->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+            Capsule->SetGenerateOverlapEvents(false);
             Capsule->SetCanEverAffectNavigation(false);
         }
     }
@@ -594,6 +613,9 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
         Runtime.Agent.Reset();
         return false;
     }
+    // Profile loading can attach clothing after BeginPlay. Replaying here makes
+    // the first visible frame include every modular part and held item.
+    Agent->PlaySpawnFade();
     UE_LOG(LogTemp, Display, TEXT("TMOP person '%s' spawned from row '%s'."),
         *Runtime.Profile.EntityId.ToString(), *Runtime.RowName.ToString());
     return true;
@@ -610,7 +632,12 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
     case ETMOPPersonTimelineAction::Spawn:
         return ApplyPlacement(Agent, Entry, bCatchUp);
     case ETMOPPersonTimelineAction::Despawn:
-        Agent->Destroy();
+        // Catch-up and world-bake seeks must leave no short-lived ghost actor.
+        // Only a despawn reached during normal forward play is animated.
+        if (bCatchUp)
+            Agent->Destroy();
+        else
+            Agent->RequestDespawnWithFade();
         Runtime.Agent.Reset();
         Runtime.bSpawnedByDirector = false;
         return true;

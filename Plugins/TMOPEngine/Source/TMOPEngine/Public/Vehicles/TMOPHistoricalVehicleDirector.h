@@ -142,12 +142,18 @@ private:
         FVector BoundaryDrivingStartLocation = FVector::ZeroVector;
         TSet<FName> AppliedPlacementEntryIds;
         int32 InitialSpawnSecond = INDEX_NONE;
+        int32 ActiveOffscreenTransferEntryIndex = INDEX_NONE;
+        int32 OffscreenTransferRevealSecond = INDEX_NONE;
     };
 
     void DiscoverPlacedVehicles();
     int32 SpawnDueVehicles(int32 CurrentSecond);
     void DespawnDueVehicles(int32 CurrentSecond);
     void ApplyDueVehiclePlacements(int32 CurrentSecond);
+    void CompleteDueOffscreenTransfer(
+        FHistoricalVehicleRuntime& Runtime, int32 CurrentSecond);
+    void SetVehicleAndOccupantsHidden(
+        ATMOPVehicleBase* Vehicle, bool bShouldHide) const;
     int32 GetInitialSpawnSecond(
         const FTMOPHistoricalVehicleRow& Profile) const;
     void ApplyDeferredPlacedVehicleState(int32 CurrentSecond);
@@ -166,6 +172,14 @@ private:
     bool ResolveTimelineEntrySecond(
         const FTMOPHistoricalVehicleRow& Profile,
         int32 EntryIndex,
+        int32& OutSecond) const;
+    bool ResolveTimelineEntryCompletionSecond(
+        const FTMOPHistoricalVehicleRow& Profile,
+        int32 EntryIndex,
+        int32& OutSecond) const;
+    bool ResolveDrivingDepartureSecond(
+        const FTMOPHistoricalVehicleRow& Profile,
+        int32 DrivingEntryIndex,
         int32& OutSecond) const;
     bool IsBoundaryEntryVehicle(
         const FTMOPHistoricalVehicleRow& Profile) const;

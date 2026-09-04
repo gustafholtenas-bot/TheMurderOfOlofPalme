@@ -9,12 +9,105 @@
 #include "Engine/DataTable.h"
 #include "Engine/Font.h"
 #include "EngineUtils.h"
+#include "Vehicles/TMOPVehicleBase.h"
 #include "Widgets/Text/STextBlock.h"
+
+namespace
+{
+FName TypographyFallback(const FName StyleId)
+{
+    const FString Id = StyleId.ToString();
+    if (Id.EndsWith(TEXT("3D"))) return TEXT("AgentName");
+    if (Id.Contains(TEXT("Speaker"))) return TEXT("SpeakerName");
+    if (Id.Contains(TEXT("Subtitle"))) return TEXT("Subtitle");
+    if (Id.Contains(TEXT("Button")) || Id.Contains(TEXT("Navigation")))
+        return TEXT("MenuButton");
+    if (Id.Contains(TEXT("Heading")) || Id.Contains(TEXT("Title")) ||
+        Id.Contains(TEXT("Name"))) return TEXT("Heading");
+    if (Id.Contains(TEXT("Caption")) || Id.Contains(TEXT("Hint")) ||
+        Id.Contains(TEXT("Details")) || Id.Contains(TEXT("Status")) ||
+        Id.Contains(TEXT("PageNumber"))) return TEXT("Caption");
+    if (Id.Contains(TEXT("Target")) || Id.Contains(TEXT("Interaction")))
+        return TEXT("TargetLabel");
+    return TEXT("Body");
+}
+}
 
 ATMOPTypographyDirector::ATMOPTypographyDirector()
 {
     PrimaryActorTick.bCanEverTick = true;
     PrimaryActorTick.TickInterval = 0.1f;
+
+    const auto AddUsage = [this](const TCHAR* Id, const TCHAR* Usage)
+    {
+        FTMOPTypographyUsageReference& Entry = StyleUsageReference.AddDefaulted_GetRef();
+        Entry.StyleId = FName(Id);
+        Entry.UsedBy = FText::FromString(FString(Usage));
+    };
+    AddUsage(TEXT("MainMenuButton"), TEXT("Startmenyn: Starta nytt, Ladda, Inställningar och Stäng av"));
+    AddUsage(TEXT("MainMenuLoadHeading"), TEXT("Startmenyn: rubriken Ladda spel"));
+    AddUsage(TEXT("MainMenuLoadStatus"), TEXT("Startmenyn: status- och felmeddelanden vid laddning"));
+    AddUsage(TEXT("MainMenuSaveTitle"), TEXT("Startmenyn: sparfilens namn och klockslag"));
+    AddUsage(TEXT("MainMenuSaveDetails"), TEXT("Startmenyn: plats, nivå och sparningsdatum"));
+    AddUsage(TEXT("IntroCardHeading"), TEXT("Introsekvensens centrerade kortrubrik"));
+    AddUsage(TEXT("IntroCardBody"), TEXT("Introsekvensens centrerade korttext"));
+    AddUsage(TEXT("IntroSkipButton"), TEXT("SKIP-knappen nere till höger under bilintrot"));
+    AddUsage(TEXT("PauseMenuMainTitle"), TEXT("Pausmenyn: THE MURDER OF OLOF PALME"));
+    AddUsage(TEXT("PauseMenuNavigation"), TEXT("Pausmenyns vänstra navigationsknappar"));
+    AddUsage(TEXT("PauseMenuSectionTitle"), TEXT("Pausmenyn: aktuell sidas stora rubrik"));
+    AddUsage(TEXT("PauseMenuSectionHeading"), TEXT("Pausmenyn: underrubriker inne på en sida"));
+    AddUsage(TEXT("PauseMenuBody"), TEXT("Pausmenyn: vanlig sidtext"));
+    AddUsage(TEXT("PauseMenuStatus"), TEXT("Pausmenyn: status- och felmeddelanden"));
+    AddUsage(TEXT("PauseMenuSourceHeading"), TEXT("Källor/Uppslag: uppslagets ID och titel"));
+    AddUsage(TEXT("PauseMenuSourceDetails"), TEXT("Källor/Uppslag: status, datum och webbadress"));
+    AddUsage(TEXT("PauseMenuSaveTitle"), TEXT("Spara/Ladda: sparfilens namn och speltid"));
+    AddUsage(TEXT("PauseMenuSaveDetails"), TEXT("Spara/Ladda: plats, nivå och sparningsdatum"));
+    AddUsage(TEXT("DialogSpeakerName"), TEXT("Dialog och radio: talarens namn"));
+    AddUsage(TEXT("DialogBody"), TEXT("Dialogrutan: repliken"));
+    AddUsage(TEXT("Subtitle"), TEXT("Undertexter i världen och filmsekvenser"));
+    AddUsage(TEXT("InteractionReticle"), TEXT("Siktpunkt vid interaktion"));
+    AddUsage(TEXT("InteractionTargetName"), TEXT("Namnet på objektet spelaren tittar på"));
+    AddUsage(TEXT("InteractionHint"), TEXT("Extra instruktion under interaktionsnamnet"));
+    AddUsage(TEXT("InteractionPrompt"), TEXT("Tryck E och liknande interaktionsuppmaningar"));
+    AddUsage(TEXT("QuickInventoryHeading"), TEXT("Snabbinventariets mittrubrik"));
+    AddUsage(TEXT("QuickInventoryItem"), TEXT("Föremålsnamn i snabbinventariet"));
+    AddUsage(TEXT("NewspaperTitle"), TEXT("Tidningsläsaren: tidningens namn och datum"));
+    AddUsage(TEXT("NewspaperPageNumber"), TEXT("Tidningsläsaren: uppslag och sidnummer"));
+    AddUsage(TEXT("NewspaperHint"), TEXT("Tidningsläsaren: kontroller och sidbeskrivning"));
+    AddUsage(TEXT("SpeechBubble"), TEXT("Pratbubblor ovanför personer"));
+    AddUsage(TEXT("AgentInfoHeading"), TEXT("Personkort: sektionsrubriker"));
+    AddUsage(TEXT("AgentInfoName"), TEXT("Personkort: personens namn"));
+    AddUsage(TEXT("AgentInfoIdentity"), TEXT("Personkort: yrke, ålder och uppslag"));
+    AddUsage(TEXT("AgentInfoStatus"), TEXT("Personkort: förhörsstatus"));
+    AddUsage(TEXT("AgentInfoBody"), TEXT("Personkort: tidslinje och observationer"));
+    AddUsage(TEXT("AgentInfoSources"), TEXT("Personkort: källhänvisningar"));
+    AddUsage(TEXT("MapMarkerLabel"), TEXT("Stora kartan: namn vid platsmarkörer"));
+    AddUsage(TEXT("MapLegendHeading"), TEXT("Stora kartan: rubriken Teckenförklaring"));
+    AddUsage(TEXT("MapLegendBody"), TEXT("Stora kartan: teckenförklaring och filter"));
+    AddUsage(TEXT("MapFixedLabel"), TEXT("Stora kartan: Du är här och Olof Palme"));
+    AddUsage(TEXT("MapHint"), TEXT("Stora kartan: kontroller och hjälptext"));
+    AddUsage(TEXT("HUDClock"), TEXT("Blueprint HUD: spelets klockslag"));
+    AddUsage(TEXT("HUDDate"), TEXT("Blueprint HUD: datum"));
+    AddUsage(TEXT("HUDCountdown"), TEXT("Blueprint HUD: tid till eller efter mordet"));
+    AddUsage(TEXT("HUDObjective"), TEXT("Blueprint HUD: aktuellt mål eller instruktion"));
+    AddUsage(TEXT("AgentName3D"), TEXT("3D-namn ovanför personer; använd endast legacy offline UFont om World Font aktiveras"));
+    AddUsage(TEXT("VehicleName3D"), TEXT("3D-namn ovanför historiska fordon"));
+}
+
+const FTMOPTypographyStyleRow* ATMOPTypographyDirector::FindExactStyle(
+    const FName StyleId) const
+{
+    if (!IsValid(TypographyTable) || StyleId.IsNone()) return nullptr;
+    if (const FTMOPTypographyStyleRow* Direct =
+        TypographyTable->FindRow<FTMOPTypographyStyleRow>(StyleId,
+            TEXT("TMOP Typography"), false)) return Direct;
+    for (const TPair<FName, uint8*>& Pair : TypographyTable->GetRowMap())
+    {
+        const FTMOPTypographyStyleRow* Row =
+            reinterpret_cast<const FTMOPTypographyStyleRow*>(Pair.Value);
+        if (Row != nullptr && Row->StyleId == StyleId) return Row;
+    }
+    return nullptr;
 }
 
 void ATMOPTypographyDirector::Tick(const float DeltaSeconds)
@@ -32,25 +125,15 @@ void ATMOPTypographyDirector::Tick(const float DeltaSeconds)
 bool ATMOPTypographyDirector::GetTypographyStyle(const FName StyleId,
     FTMOPTypographyStyleRow& OutStyle) const
 {
-    if (!IsValid(TypographyTable) || StyleId.IsNone()) return false;
-    if (const FTMOPTypographyStyleRow* Direct =
-        TypographyTable->FindRow<FTMOPTypographyStyleRow>(StyleId,
-            TEXT("TMOP Typography"), false))
+    const FTMOPTypographyStyleRow* Style = FindExactStyle(StyleId);
+    if (Style == nullptr)
     {
-        OutStyle = *Direct;
-        return true;
+        const FName FallbackId = TypographyFallback(StyleId);
+        if (FallbackId != StyleId) Style = FindExactStyle(FallbackId);
     }
-    for (const TPair<FName, uint8*>& Pair : TypographyTable->GetRowMap())
-    {
-        const FTMOPTypographyStyleRow* Row =
-            reinterpret_cast<const FTMOPTypographyStyleRow*>(Pair.Value);
-        if (Row != nullptr && Row->StyleId == StyleId)
-        {
-            OutStyle = *Row;
-            return true;
-        }
-    }
-    return false;
+    if (Style == nullptr) return false;
+    OutStyle = *Style;
+    return true;
 }
 
 bool ATMOPTypographyDirector::ApplyTypographyStyle(UTextBlock* TextBlock,
@@ -79,10 +162,15 @@ bool ATMOPTypographyDirector::ApplyWorldTextStyle(
     if (!IsValid(TextRender)) return false;
     FTMOPTypographyStyleRow Style;
     if (!GetTypographyStyle(StyleId, Style)) return false;
-    if (UFont* Font = Cast<UFont>(Style.FontAsset.LoadSynchronous()))
-        TextRender->SetFont(Font);
-    TextRender->SetWorldSize(static_cast<float>(Style.Size));
-    TextRender->SetTextRenderColor(Style.Color.ToFColor(true));
+    const bool bWasVisible = TextRender->IsVisible();
+    if (Style.bOverrideWorldFont)
+        if (UFont* Font = Cast<UFont>(Style.FontAsset.LoadSynchronous()))
+            TextRender->SetFont(Font);
+    if (Style.bOverrideWorldSize && Style.Size > 0)
+        TextRender->SetWorldSize(static_cast<float>(Style.Size));
+    if (Style.bOverrideWorldColor && Style.Color.A > KINDA_SMALL_NUMBER)
+        TextRender->SetTextRenderColor(Style.Color.ToFColor(true));
+    TextRender->SetVisibility(bWasVisible, true);
     return true;
 }
 
@@ -93,8 +181,19 @@ FName ATMOPTypographyDirector::InferStyleId(const UTextBlock* TextBlock) const
     if (const FName* Override = WidgetNameStyleOverrides.Find(WidgetName))
         return *Override;
     const FString Name = WidgetName.ToString().ToLower();
+    if (Name.Contains(TEXT("countdown")) || Name.Contains(TEXT("murdertime")))
+        return TEXT("HUDCountdown");
+    if (Name.Contains(TEXT("clock")) || Name.Contains(TEXT("gametime")))
+        return TEXT("HUDClock");
+    if (Name.Contains(TEXT("date"))) return TEXT("HUDDate");
+    if (Name.Contains(TEXT("objective")) || Name.Contains(TEXT("mission")))
+        return TEXT("HUDObjective");
     if (Name.Contains(TEXT("agentname")) || Name.Contains(TEXT("nameplate")))
         return TEXT("AgentName");
+    if (Name.Contains(TEXT("mainmenu")) && Name.Contains(TEXT("button")))
+        return TEXT("MainMenuButton");
+    if (Name.Contains(TEXT("pause")) && Name.Contains(TEXT("title")))
+        return TEXT("PauseMenuSectionTitle");
     if (Name.Contains(TEXT("title")) || Name.Contains(TEXT("heading")) ||
         Name.Contains(TEXT("header"))) return TEXT("Heading");
     if (Name.Contains(TEXT("button")) || Name.Contains(TEXT("menu")))
@@ -125,7 +224,16 @@ void ATMOPTypographyDirector::RefreshAllBlueprintText()
     }
     for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
         if (IsValid(It->NameLabel))
-            ApplyWorldTextStyle(It->NameLabel, TEXT("AgentName"));
+        {
+            It->RefreshNameLabel();
+            ApplyWorldTextStyle(It->NameLabel, TEXT("AgentName3D"));
+        }
+    for (TActorIterator<ATMOPVehicleBase> It(GetWorld()); It; ++It)
+        if (IsValid(It->NameLabel))
+        {
+            It->RefreshNameLabel();
+            ApplyWorldTextStyle(It->NameLabel, TEXT("VehicleName3D"));
+        }
 }
 
 const ATMOPTypographyDirector* ATMOPTypographyDirector::Find(
@@ -161,6 +269,13 @@ FSlateColor ATMOPTypographyDirector::ResolveColor(const UObject* WorldContext,
     const ATMOPTypographyDirector* Director = Find(WorldContext);
     return IsValid(Director) && Director->GetTypographyStyle(StyleId, Style)
         ? FSlateColor(Style.Color) : FSlateColor(Fallback);
+}
+
+FTMOPMenuColorPalette ATMOPTypographyDirector::ResolveMenuColors(
+    const UObject* WorldContext)
+{
+    const ATMOPTypographyDirector* Director = Find(WorldContext);
+    return IsValid(Director) ? Director->MenuColors : FTMOPMenuColorPalette();
 }
 
 void ATMOPTypographyDirector::ApplySlateStyle(const UObject* WorldContext,

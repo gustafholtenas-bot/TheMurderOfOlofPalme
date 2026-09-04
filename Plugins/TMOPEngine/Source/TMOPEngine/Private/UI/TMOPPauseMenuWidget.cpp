@@ -12,6 +12,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Newspapers/TMOPNewspaperItemDefinition.h"
+#include "Observations/TMOPObservationDirector.h"
 #include "Player/TMOPPlayerCharacter.h"
 #include "Research/TMOPUppslagTypes.h"
 #include "Rendering/DrawElements.h"
@@ -22,6 +23,7 @@
 #include "UI/TMOPMapWidget.h"
 #include "UI/TMOPMapComponent.h"
 #include "UI/TMOPMenuSaveGame.h"
+#include "UI/TMOPSaveGameService.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "World/TMOPFindingActor.h"
 #include "Widgets/Input/SButton.h"
@@ -247,6 +249,7 @@ FText SectionTitle(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::Evidence: return NSLOCTEXT("TMOP", "HubEvidence", "NOTEBOOK / EVIDENCE");
     case ETMOPPauseHubSection::Sources: return NSLOCTEXT("TMOP", "HubSources", "KÄLLOR / UPPSLAG");
     case ETMOPPauseHubSection::Publications: return NSLOCTEXT("TMOP", "HubPublications", "NEWSPAPERS / BOOKS");
+    case ETMOPPauseHubSection::Map: return NSLOCTEXT("TMOP", "HubMap", "KARTA");
     case ETMOPPauseHubSection::Settings: return NSLOCTEXT("TMOP", "HubSettings", "SETTINGS");
     case ETMOPPauseHubSection::Controls: return NSLOCTEXT("TMOP", "HubControls", "CONTROLS");
     case ETMOPPauseHubSection::SaveLoad: return NSLOCTEXT("TMOP", "HubSaveLoad", "SAVE / LOAD");
@@ -277,10 +280,21 @@ void UTMOPPauseMenuWidget::SetMenuVisible(const bool bVisible)
 
 TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
 {
-    auto MakeNavigationButton = [this](const FText& Label, const ETMOPPauseHubSection Section)
+    const FTMOPMenuColorPalette MenuColors =
+        ATMOPTypographyDirector::ResolveMenuColors(this);
+    auto MakeNavigationButton = [this, &MenuColors](const FText& Label,
+        const ETMOPPauseHubSection Section)
     {
-        return SNew(SButton).Text(Label)
-            .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleSectionClicked, Section);
+        return SNew(SButton)
+            .ButtonColorAndOpacity(MenuColors.ButtonBackground)
+            .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleSectionClicked, Section)
+            [ SNew(STextBlock).Text(Label)
+              .Font(ATMOPTypographyDirector::ResolveFont(this,
+                  TEXT("PauseMenuNavigation"),
+                  FCoreStyle::GetDefaultFontStyle("Regular", 16)))
+              .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+                  TEXT("PauseMenuNavigation"),
+                  MenuColors.PauseMenuButtonText)) ];
     };
     TSharedRef<SVerticalBox> NavigationPanel = SNew(SVerticalBox);
     auto AddNavigationEntry = [&NavigationPanel, &MakeNavigationButton](
@@ -293,41 +307,57 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
     AddNavigationEntry(ETMOPPauseHubSection::Evidence);
     AddNavigationEntry(ETMOPPauseHubSection::Sources);
     AddNavigationEntry(ETMOPPauseHubSection::Publications);
+    AddNavigationEntry(ETMOPPauseHubSection::Map);
     AddNavigationEntry(ETMOPPauseHubSection::Settings);
     AddNavigationEntry(ETMOPPauseHubSection::Controls);
     AddNavigationEntry(ETMOPPauseHubSection::SaveLoad);
     AddNavigationEntry(ETMOPPauseHubSection::Quit);
-    NavigationPanel->AddSlot().FillHeight(1.0f)[SNew(SSpacer)];
-    NavigationPanel->AddSlot().AutoHeight().Padding(3.0f, 20.0f, 3.0f, 3.0f)
+    // Keep the time controls directly beneath Quit. A FillHeight spacer used
+    // to pin them to the bottom of the viewport where they overlapped the HUD
+    // clock/countdown on common 16:9 resolutions.
+    NavigationPanel->AddSlot().AutoHeight().Padding(3.0f, 12.0f, 3.0f, 3.0f)
     [ MakeNavigationButton(SectionTitle(ETMOPPauseHubSection::MoveInTime),
         ETMOPPauseHubSection::MoveInTime) ];
-    NavigationPanel->AddSlot().AutoHeight().Padding(3.0f, 14.0f, 3.0f, 3.0f)
-    [ SNew(SButton).Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT (ENTER / ESC)"))
-      .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked) ];
+    NavigationPanel->AddSlot().AutoHeight().Padding(3.0f)
+    [ SNew(SButton).ButtonColorAndOpacity(MenuColors.ButtonBackground)
+      .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked)
+      [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT (ENTER / ESC)"))
+        .Font(ATMOPTypographyDirector::ResolveFont(this,
+            TEXT("PauseMenuNavigation"),
+            FCoreStyle::GetDefaultFontStyle("Regular", 16)))
+        .ColorAndOpacity(MenuColors.PauseMenuButtonText) ] ];
 
     TSharedRef<SVerticalBox> PagePanel = SNew(SVerticalBox)
         + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 14.0f)
         [ SAssignNew(SectionTitleText, STextBlock).Font(
-            ATMOPTypographyDirector::ResolveFont(this, TEXT("Heading"),
-                FCoreStyle::GetDefaultFontStyle("Bold", 21))) ]
+            ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSectionTitle"),
+                FCoreStyle::GetDefaultFontStyle("Bold", 21)))
+          .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+              TEXT("PauseMenuSectionTitle"), MenuColors.AccentText)) ]
         + SVerticalBox::Slot().FillHeight(1.0f)
         [ SNew(SScrollBox) + SScrollBox::Slot()[SAssignNew(ContentBox, SVerticalBox)] ]
         + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 14.0f, 0.0f, 0.0f)
-        [ SAssignNew(StatusText, STextBlock).ColorAndOpacity(FLinearColor(0.95f, 0.7f, 0.2f)) ];
+        [ SAssignNew(StatusText, STextBlock)
+          .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuStatus"),
+              FCoreStyle::GetDefaultFontStyle("Regular", 14)))
+          .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+              TEXT("PauseMenuStatus"), MenuColors.StatusText)) ];
 
     TSharedRef<SWidget> RootWidget = SNew(SBorder)
-        .BorderBackgroundColor(FLinearColor(0.008f, 0.012f, 0.022f, 0.97f)).Padding(34.0f)
+        .BorderBackgroundColor(MenuColors.MenuBackground).Padding(34.0f)
         [ SNew(SVerticalBox)
           + SVerticalBox::Slot().AutoHeight().Padding(8.0f, 4.0f, 8.0f, 20.0f)
           [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "PauseHubTitle", "THE MURDER OF OLOF PALME"))
-            .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MainTitle"),
-                FCoreStyle::GetDefaultFontStyle("Bold", 25))) ]
+            .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuMainTitle"),
+                FCoreStyle::GetDefaultFontStyle("Bold", 25)))
+            .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+                TEXT("PauseMenuMainTitle"), FLinearColor::White)) ]
           + SVerticalBox::Slot().FillHeight(1.0f)
           [ SNew(SHorizontalBox)
             + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 24.0f, 0.0f)
             [ SNew(SBox).WidthOverride(255.0f)[NavigationPanel] ]
             + SHorizontalBox::Slot().FillWidth(1.0f)
-            [ SNew(SBorder).BorderBackgroundColor(FLinearColor(0.025f, 0.035f, 0.055f, 0.96f))
+            [ SNew(SBorder).BorderBackgroundColor(MenuColors.PanelBackground)
               .Padding(24.0f)[PagePanel] ] ] ];
     ShowSection(CurrentSection);
     return RootWidget;
@@ -335,6 +365,17 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
 
 FReply UTMOPPauseMenuWidget::HandleSectionClicked(const ETMOPPauseHubSection Section)
 {
+    if (Section == ETMOPPauseHubSection::Map)
+    {
+        // Open the exact same full-screen map as the M key. Close the pause
+        // hub first because OpenWorldMap intentionally rejects stacked menus.
+        if (IsValid(PlayerCharacter))
+        {
+            PlayerCharacter->SetPauseMenuOpen(false);
+            PlayerCharacter->OpenWorldMap();
+        }
+        return FReply::Handled();
+    }
     if (Section == ETMOPPauseHubSection::Sources)
     {
         SelectedSourceMainSection = NAME_None;
@@ -393,12 +434,16 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
 
 void UTMOPPauseMenuWidget::AddHeading(const FText& Text)
 { ContentBox->AddSlot().AutoHeight().Padding(2.0f, 10.0f)[ SNew(STextBlock).Text(Text).Font(
-    ATMOPTypographyDirector::ResolveFont(this, TEXT("SectionHeading"),
-        FCoreStyle::GetDefaultFontStyle("Bold", 17))) ]; }
+    ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSectionHeading"),
+        FCoreStyle::GetDefaultFontStyle("Bold", 17)))
+    .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+        TEXT("PauseMenuSectionHeading"), FLinearColor::White)) ]; }
 void UTMOPPauseMenuWidget::AddBody(const FText& Text)
 { ContentBox->AddSlot().AutoHeight().Padding(2.0f, 5.0f)[ SNew(STextBlock).Text(Text)
-    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Body"),
-        FCoreStyle::GetDefaultFontStyle("Regular", 16))).AutoWrapText(true) ]; }
+    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuBody"),
+        FCoreStyle::GetDefaultFontStyle("Regular", 16)))
+    .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+        TEXT("PauseMenuBody"), FLinearColor::White)).AutoWrapText(true) ]; }
 
 void UTMOPPauseMenuWidget::BuildInventoryPage()
 {
@@ -767,13 +812,29 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     {
         if (Row == nullptr) continue;
         const FString Title = Row->Title.IsEmpty() ? TEXT("Utan titel") : Row->Title.ToString();
-        AddHeading(FText::FromString(FString::Printf(TEXT("%s — %s"),
-            *Row->UppslagId.ToString(), *Title)));
+        const FLinearColor RowColor = ClassifyUppslagCoverage(*Row) ==
+            ETMOPCoverageState::Unknown
+            ? FLinearColor(0.78f, 0.80f, 0.84f, 1.0f)
+            : CoverageStateColor(ClassifyUppslagCoverage(*Row));
+        const FText RowHeading = FText::FromString(FString::Printf(TEXT("%s — %s"),
+            *Row->UppslagId.ToString(), *Title));
         FString Details = Row->bAddedToProject ? TEXT("Inlagt")
             : Row->bPartiallyAdded ? TEXT("Delvis inlagt") : TEXT("Ej inlagt");
         if (!Row->DocumentDate.IsEmpty()) Details += TEXT(" • ") + Row->DocumentDate;
         if (!Row->SourceUrl.IsEmpty()) Details += TEXT("\n") + Row->SourceUrl;
-        AddBody(FText::FromString(Details));
+        // One source is one color block: title, state, date and URL all use the
+        // exact same classification as the coverage bar and legend above.
+        ContentBox->AddSlot().AutoHeight().Padding(2.0f, 8.0f, 2.0f, 5.0f)
+        [ SNew(SVerticalBox)
+          + SVerticalBox::Slot().AutoHeight()
+          [ SNew(STextBlock).Text(RowHeading).ColorAndOpacity(RowColor)
+            .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSourceHeading"),
+                FCoreStyle::GetDefaultFontStyle("Bold", 17))) ]
+          + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f, 0.0f, 0.0f)
+          [ SNew(STextBlock).Text(FText::FromString(Details))
+            .ColorAndOpacity(RowColor).AutoWrapText(true)
+            .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSourceDetails"),
+                FCoreStyle::GetDefaultFontStyle("Regular", 16))) ] ];
         if (++VisibleDetailCount >= 300) break;
     }
     return;
@@ -1059,7 +1120,23 @@ void UTMOPPauseMenuWidget::BuildSettingsPage()
     ContentBox->AddSlot().AutoHeight()[Quality];
     AddHeading(NSLOCTEXT("TMOP", "InterfaceSettings", "Gränssnitt"));
     ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleLabels", "Visa/dölj namn och ikoner i världen")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleWorldLabels) ];
+    AddBody(NSLOCTEXT("TMOP", "PersonLabelTextSizeHeading",
+        "Textstorlek ovanför personer"));
+    TSharedRef<SHorizontalBox> PersonTextSize = SNew(SHorizontalBox);
+    const TArray<FText> PersonTextSizeLabels = {
+        NSLOCTEXT("TMOP", "PersonLabelSmall", "Liten"),
+        NSLOCTEXT("TMOP", "PersonLabelMedium", "Medium"),
+        NSLOCTEXT("TMOP", "PersonLabelLarge", "Stor") };
+    for (int32 I = 0; I < PersonTextSizeLabels.Num(); ++I)
+        PersonTextSize->AddSlot().AutoWidth().Padding(3.0f)
+        [ SNew(SButton).Text(PersonTextSizeLabels[I])
+          .OnClicked_UObject(this,
+              &UTMOPPauseMenuWidget::HandlePersonLabelTextSize, I) ];
+    ContentBox->AddSlot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 4.0f)
+    [ PersonTextSize ];
     ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleMinimap", "Visa/dölj minimap")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleMinimap) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleOlofLocationLine", "Visa/dölj röd positionslinje över Olof Palme")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleOlofLocationLine) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleObservationLines", "Visa/dölj aktiva observationslinjer")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleObservationLines) ];
     ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleVSync", "Växla VSync")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleVSync) ];
 }
 
@@ -1085,15 +1162,70 @@ FReply UTMOPPauseMenuWidget::HandleToggleWorldLabels()
     return FReply::Handled();
 }
 
+FReply UTMOPPauseMenuWidget::HandlePersonLabelTextSize(const int32 SizeIndex)
+{
+    const ETMOPPersonLabelTextSize Size =
+        static_cast<ETMOPPersonLabelTextSize>(FMath::Clamp(SizeIndex, 0, 2));
+    ATMOPHistoricalAgent::SaveNameLabelTextSize(Size);
+    if (GetWorld() != nullptr)
+        for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
+            It->RefreshNameLabel();
+
+    const FText SizeName = Size == ETMOPPersonLabelTextSize::Small
+        ? NSLOCTEXT("TMOP", "PersonLabelSmallApplied", "liten")
+        : Size == ETMOPPersonLabelTextSize::Medium
+            ? NSLOCTEXT("TMOP", "PersonLabelMediumApplied", "medium")
+            : NSLOCTEXT("TMOP", "PersonLabelLargeApplied", "stor");
+    SetStatus(FText::Format(
+        NSLOCTEXT("TMOP", "PersonLabelSizeApplied",
+            "Textstorlek ovanför personer: {0}."),
+        SizeName));
+    return FReply::Handled();
+}
+
 FReply UTMOPPauseMenuWidget::HandleToggleMinimap()
 {
     if (IsValid(PlayerCharacter) && IsValid(PlayerCharacter->MapComponent))
     {
         PlayerCharacter->MapComponent->bShowMinimap = !PlayerCharacter->MapComponent->bShowMinimap;
         if (IsValid(PlayerCharacter->MinimapWidget))
-            PlayerCharacter->MinimapWidget->SetMapVisible(PlayerCharacter->MapComponent->bShowMinimap);
+            PlayerCharacter->MinimapWidget->SetMapVisible(
+                PlayerCharacter->IsGameplayHUDVisible() &&
+                PlayerCharacter->MapComponent->bShowMinimap);
         SetStatus(PlayerCharacter->MapComponent->bShowMinimap ? NSLOCTEXT("TMOP", "MinimapShown", "Minimap visas.") : NSLOCTEXT("TMOP", "MinimapHidden", "Minimap är dold."));
     }
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleToggleOlofLocationLine()
+{
+    const bool bShow =
+        !ATMOPObservationDirector::GetSavedShowOlofLocationLine();
+    ATMOPObservationDirector::SaveShowOlofLocationLine(bShow);
+    if (GetWorld() != nullptr)
+        for (TActorIterator<ATMOPObservationDirector> It(GetWorld()); It; ++It)
+            It->bShowOlofLocationLine = bShow;
+    SetStatus(bShow
+        ? NSLOCTEXT("TMOP", "OlofLocationLineShown",
+            "Den röda positionslinjen över Olof Palme visas.")
+        : NSLOCTEXT("TMOP", "OlofLocationLineHidden",
+            "Den röda positionslinjen över Olof Palme är dold."));
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleToggleObservationLines()
+{
+    const bool bShow =
+        !ATMOPObservationDirector::GetSavedShowActiveObservationLines();
+    ATMOPObservationDirector::SaveShowActiveObservationLines(bShow);
+    if (GetWorld() != nullptr)
+        for (TActorIterator<ATMOPObservationDirector> It(GetWorld()); It; ++It)
+            It->bShowActiveObservationLines = bShow;
+    SetStatus(bShow
+        ? NSLOCTEXT("TMOP", "ObservationLinesShown",
+            "Linjer för aktiva observationer visas.")
+        : NSLOCTEXT("TMOP", "ObservationLinesHidden",
+            "Linjer för aktiva observationer är dolda."));
     return FReply::Handled();
 }
 
@@ -1125,26 +1257,73 @@ void UTMOPPauseMenuWidget::BuildControlsPage()
 
 void UTMOPPauseMenuWidget::BuildSaveLoadPage()
 {
-    AddBody(FText::Format(NSLOCTEXT("TMOP", "SaveSlotInfo", "Aktiv sparplats: {0}"), FText::FromString(SaveSlotName)));
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f,5.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "SaveGame", "SPARA SPELET")).OnClicked_UObject(this,&UTMOPPauseMenuWidget::HandleSaveClicked) ];
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f,5.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "LoadGame", "LADDA SPELET")).OnClicked_UObject(this,&UTMOPPauseMenuWidget::HandleLoadClicked) ];
+    AddBody(NSLOCTEXT("TMOP", "SaveLoadIntro",
+        "Skapa en ny sparning eller välj en tidigare sparning. Varje post visar var och när spelet sparades."));
+    const FString FreeSlot = FTMOPSaveGameService::FindFirstFreeManualSlot(
+        ManualSaveSlotPrefix, ManualSaveSlotCount);
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 7.0f, 2.0f, 14.0f)
+    [ SNew(SButton)
+      .Text(FreeSlot.IsEmpty()
+          ? NSLOCTEXT("TMOP", "SaveSlotsFull", "ALLA SPARPLATSER ÄR UPPTAGNA")
+          : NSLOCTEXT("TMOP", "CreateNewSave", "+ SKAPA NY SPARNING"))
+      .IsEnabled(!FreeSlot.IsEmpty())
+      .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleCreateNewSaveClicked) ];
+
+    const TArray<FTMOPSaveSlotInfo> Slots = FTMOPSaveGameService::FindSaveSlots(
+        ManualSaveSlotPrefix, ManualSaveSlotCount, SaveSlotName);
+    if (Slots.IsEmpty())
+    {
+        AddBody(NSLOCTEXT("TMOP", "NoSavedGames", "Det finns inga sparade spel ännu."));
+        return;
+    }
+    for (const FTMOPSaveSlotInfo& Info : Slots)
+    {
+        const FString Detail = FString::Printf(TEXT("Plats: %s   •   Nivå: %s   •   Sparad: %s"),
+            *Info.LocationName,
+            Info.MapName.IsEmpty() ? TEXT("Okänd") : *Info.MapName,
+            Info.SavedAtText.IsEmpty() ? TEXT("Äldre sparfil") : *Info.SavedAtText);
+        const FText Title = FText::FromString(FString::Printf(TEXT("%s   —   %s"),
+            *Info.DisplayName, *Info.GameTime.ToDisplayString()));
+        ContentBox->AddSlot().AutoHeight().Padding(2.0f, 5.0f)
+        [ SNew(SBorder).Padding(12.0f)
+          [ SNew(SVerticalBox)
+            + SVerticalBox::Slot().AutoHeight()
+            [ SNew(STextBlock).Text(Title).Font(
+                ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSaveTitle"),
+                    FCoreStyle::GetDefaultFontStyle("Bold", 17)))
+              .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+                  TEXT("PauseMenuSaveTitle"), FLinearColor::White)) ]
+            + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f, 0.0f, 8.0f)
+            [ SNew(STextBlock).Text(FText::FromString(Detail))
+              .Font(ATMOPTypographyDirector::ResolveFont(this,
+                  TEXT("PauseMenuSaveDetails"),
+                  FCoreStyle::GetDefaultFontStyle("Regular", 14)))
+              .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
+                  TEXT("PauseMenuSaveDetails"),
+                  FLinearColor(0.8f, 0.82f, 0.85f))) ]
+            + SVerticalBox::Slot().AutoHeight()
+            [ SNew(SHorizontalBox)
+              + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+              [ SNew(SButton).Text(NSLOCTEXT("TMOP", "LoadSelectedSave", "LADDA"))
+                .OnClicked_UObject(this,
+                    &UTMOPPauseMenuWidget::HandleLoadSaveSlotClicked, Info.SlotName) ]
+              + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
+              [ SNew(SButton).Text(NSLOCTEXT("TMOP", "OverwriteSelectedSave", "SKRIV ÖVER"))
+                .OnClicked_UObject(this,
+                    &UTMOPPauseMenuWidget::HandleOverwriteSaveClicked, Info.SlotName) ]
+              + SHorizontalBox::Slot().AutoWidth()
+              [ SNew(SButton)
+                .Text(PendingDeleteSaveSlot == Info.SlotName
+                    ? NSLOCTEXT("TMOP", "ConfirmDeleteSave", "BEKRÄFTA RADERING")
+                    : NSLOCTEXT("TMOP", "DeleteSelectedSave", "RADERA"))
+                .OnClicked_UObject(this,
+                    &UTMOPPauseMenuWidget::HandleDeleteSaveSlotClicked, Info.SlotName) ] ] ] ];
+    }
 }
 
 FReply UTMOPPauseMenuWidget::HandleSaveClicked()
 {
-    if (!IsValid(PlayerCharacter)) return FReply::Handled();
-    UTMOPMenuSaveGame* Save = Cast<UTMOPMenuSaveGame>(UGameplayStatics::CreateSaveGameObject(UTMOPMenuSaveGame::StaticClass()));
-    if (!IsValid(Save)) return FReply::Handled();
-    Save->PlayerTransform = PlayerCharacter->GetActorTransform();
-    if (UTMOPClockSubsystem* Clock = PlayerCharacter->GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()) Save->SavedTime = Clock->GetCurrentTime();
-    if (IsValid(PlayerCharacter->Inventory))
-        for (const FTMOPInventoryEntry& Entry : PlayerCharacter->Inventory->Items)
-            if (IsValid(Entry.Item)) { Save->InventoryItemPaths.Add(FSoftObjectPath(Entry.Item->GetPathName())); Save->InventoryQuantities.Add(Entry.Quantity); }
-    if (IsValid(PlayerCharacter->Inventory) && IsValid(PlayerCharacter->Inventory->EquippedItem)) Save->EquippedItemPath = FSoftObjectPath(PlayerCharacter->Inventory->EquippedItem->GetPathName());
-    Save->DiscoveredEvidenceIds = PlayerCharacter->DiscoveredEvidenceIds;
-    const bool bSaved = UGameplayStatics::SaveGameToSlot(Save, SaveSlotName, 0);
-    SetStatus(bSaved ? NSLOCTEXT("TMOP", "SaveSuccess", "Spelet sparades.") : NSLOCTEXT("TMOP", "SaveFailed", "Kunde inte spara spelet."));
-    if (bSaved) OnSaveRequested.Broadcast(); return FReply::Handled();
+    return HandleCreateNewSaveClicked();
 }
 
 FReply UTMOPPauseMenuWidget::HandleLoadClicked()
@@ -1160,24 +1339,80 @@ void UTMOPPauseMenuWidget::OpenSettingsPage()
 
 bool UTMOPPauseMenuWidget::LoadQuickSave(const FString& SlotName)
 {
-    UTMOPMenuSaveGame* Save = Cast<UTMOPMenuSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName,0));
-    if (!IsValid(Save) || !IsValid(PlayerCharacter)) { SetStatus(NSLOCTEXT("TMOP", "NoSave", "Ingen giltig sparfil hittades.")); return false; }
-    bool bTimeLoaded = false;
-    for (TActorIterator<ATMOPSimulationDebugDirector> It(GetWorld()); It; ++It) { bTimeLoaded = It->JumpToSimulationTime(Save->SavedTime); break; }
-    if (!bTimeLoaded) { SetStatus(NSLOCTEXT("TMOP", "LoadNeedsDirector", "Laddning kräver TMOPSimulationDebugDirector i nivån.")); return false; }
-    PlayerCharacter->SetActorTransform(Save->PlayerTransform, false, nullptr, ETeleportType::TeleportPhysics);
-    if (IsValid(PlayerCharacter->Inventory))
+    FText Status;
+    const bool bLoaded = FTMOPSaveGameService::LoadPlayer(
+        GetWorld(), PlayerCharacter, SlotName, Status);
+    SetStatus(Status);
+    if (bLoaded) OnLoadRequested.Broadcast();
+    return bLoaded;
+}
+
+FReply UTMOPPauseMenuWidget::HandleCreateNewSaveClicked()
+{
+    const FString NewSaveSlot = FTMOPSaveGameService::FindFirstFreeManualSlot(
+        ManualSaveSlotPrefix, ManualSaveSlotCount);
+    if (NewSaveSlot.IsEmpty())
     {
-        const TArray<FTMOPInventoryEntry> Existing = PlayerCharacter->Inventory->Items;
-        for (const FTMOPInventoryEntry& Entry : Existing) if (IsValid(Entry.Item)) PlayerCharacter->Inventory->RemoveItem(Entry.Item, Entry.Quantity);
-        for (int32 I=0; I<Save->InventoryItemPaths.Num(); ++I)
-            if (UTMOPItemDefinition* Item = Cast<UTMOPItemDefinition>(Save->InventoryItemPaths[I].TryLoad())) PlayerCharacter->Inventory->AddItem(Item, Save->InventoryQuantities.IsValidIndex(I)?Save->InventoryQuantities[I]:1);
-        if (UTMOPItemDefinition* Equipped = Cast<UTMOPItemDefinition>(Save->EquippedItemPath.TryLoad())) PlayerCharacter->Inventory->EquipItem(Equipped);
+        SetStatus(NSLOCTEXT("TMOP", "NoFreeSaveSlot",
+            "Alla sparplatser används. Skriv över eller radera en befintlig sparning."));
+        return FReply::Handled();
     }
-    PlayerCharacter->DiscoveredEvidenceIds = Save->DiscoveredEvidenceIds;
-    SetStatus(NSLOCTEXT("TMOP", "LoadSuccess", "Spelet laddades."));
-    OnLoadRequested.Broadcast();
-    return true;
+    int32 SlotIndex = 1;
+    for (; SlotIndex <= ManualSaveSlotCount; ++SlotIndex)
+        if (FTMOPSaveGameService::MakeManualSlotName(
+            ManualSaveSlotPrefix, SlotIndex) == NewSaveSlot) break;
+    FText Status;
+    const bool bSaved = FTMOPSaveGameService::SavePlayer(GetWorld(),
+        PlayerCharacter, NewSaveSlot,
+        FString::Printf(TEXT("Manuell sparning %d"), SlotIndex),
+        ETMOPMenuSaveKind::Manual, Status);
+    PendingDeleteSaveSlot.Reset();
+    if (ContentBox.IsValid()) { ContentBox->ClearChildren(); BuildSaveLoadPage(); }
+    SetStatus(Status);
+    if (bSaved) OnSaveRequested.Broadcast();
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleOverwriteSaveClicked(FString SlotName)
+{
+    UTMOPMenuSaveGame* Existing = Cast<UTMOPMenuSaveGame>(
+        UGameplayStatics::LoadGameFromSlot(SlotName, 0));
+    const FString DisplayName = IsValid(Existing) && !Existing->SlotDisplayName.IsEmpty()
+        ? Existing->SlotDisplayName : TEXT("Manuell sparning");
+    FText Status;
+    const bool bSaved = FTMOPSaveGameService::SavePlayer(GetWorld(),
+        PlayerCharacter, SlotName, DisplayName, ETMOPMenuSaveKind::Manual, Status);
+    PendingDeleteSaveSlot.Reset();
+    if (ContentBox.IsValid()) { ContentBox->ClearChildren(); BuildSaveLoadPage(); }
+    SetStatus(Status);
+    if (bSaved) OnSaveRequested.Broadcast();
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleLoadSaveSlotClicked(FString SlotName)
+{
+    if (LoadQuickSave(SlotName) && IsValid(PlayerCharacter))
+        PlayerCharacter->SetPauseMenuOpen(false);
+    return FReply::Handled();
+}
+
+FReply UTMOPPauseMenuWidget::HandleDeleteSaveSlotClicked(FString SlotName)
+{
+    if (PendingDeleteSaveSlot != SlotName)
+    {
+        PendingDeleteSaveSlot = SlotName;
+        if (ContentBox.IsValid()) { ContentBox->ClearChildren(); BuildSaveLoadPage(); }
+        SetStatus(NSLOCTEXT("TMOP", "DeleteSaveConfirmStatus",
+            "Klicka på BEKRÄFTA RADERING för att ta bort sparningen permanent."));
+        return FReply::Handled();
+    }
+    const bool bDeleted = UGameplayStatics::DeleteGameInSlot(SlotName, 0);
+    PendingDeleteSaveSlot.Reset();
+    if (ContentBox.IsValid()) { ContentBox->ClearChildren(); BuildSaveLoadPage(); }
+    SetStatus(bDeleted
+        ? NSLOCTEXT("TMOP", "DeleteSaveSuccess", "Sparningen raderades.")
+        : NSLOCTEXT("TMOP", "DeleteSaveFailed", "Sparningen kunde inte raderas."));
+    return FReply::Handled();
 }
 
 void UTMOPPauseMenuWidget::BuildQuitPage()

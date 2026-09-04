@@ -6,6 +6,7 @@
 #include "Engine/Texture2D.h"
 #include "EngineUtils.h"
 #include "Events/TMOPHistoricalEventTypes.h"
+#include "Framework/MultiBox/MultiBoxBuilder.h"
 #include "IStructureDetailsView.h"
 #include "Misc/MessageDialog.h"
 #include "NavigationSystem.h"
@@ -391,7 +392,13 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                         .OnGenerateRow(this,
                             &STMOPPeopleEditor::
                                 GenerateComparisonTimelineRow)
-                        .SelectionMode(ESelectionMode::None)
+                        .OnSelectionChanged(this,
+                            &STMOPPeopleEditor::
+                                HandleComparisonTimelineSelectionChanged)
+                        .OnContextMenuOpening(this,
+                            &STMOPPeopleEditor::
+                                BuildComparisonTimelineContextMenu)
+                        .SelectionMode(ESelectionMode::Single)
                     ]
                 ]
             ]
@@ -864,6 +871,7 @@ void STMOPPeopleEditor::SelectDefaultComparisonPerson()
 
 void STMOPPeopleEditor::RefreshComparisonTimeline()
 {
+    SelectedComparisonTimelineIndex = INDEX_NONE;
     ComparisonTimelineItems.Reset();
     if (bHasComparisonRow)
         for (int32 Index = 0;
@@ -1534,6 +1542,159 @@ void STMOPPeopleEditor::HandleTimelineSelectionChanged(
     const FTimelineItem Item, ESelectInfo::Type SelectInfo)
 {
     if (Item.IsValid()) SelectTimelineEntry(*Item);
+}
+
+void STMOPPeopleEditor::HandleComparisonTimelineSelectionChanged(
+    const FTimelineItem Item,
+    const ESelectInfo::Type SelectInfo)
+{
+    SelectedComparisonTimelineIndex = Item.IsValid()
+        ? *Item : INDEX_NONE;
+}
+
+int32 STMOPPeopleEditor::FindClosestWorkingTimelineIndex(
+    const int32 ReferenceIndex,
+    int32* OutDeltaSeconds) const
+{
+    if (OutDeltaSeconds != nullptr)
+        *OutDeltaSeconds = TNumericLimits<int32>::Max();
+    if (!bHasComparisonRow ||
+        !ComparisonRow.Timeline.IsValidIndex(ReferenceIndex))
+        return INDEX_NONE;
+
+    int32 ReferenceSecond = 0;
+    if (!ResolveTimelineDisplaySecondForRow(
+        ComparisonRow, ReferenceIndex, ReferenceSecond))
+        return INDEX_NONE;
+
+    int32 ClosestIndex = INDEX_NONE;
+    int32 ClosestDelta = TNumericLimits<int32>::Max();
+    for (int32 Index = 0; Index < WorkingRow.Timeline.Num(); ++Index)
+    {
+        int32 CurrentSecond = 0;
+        if (!ResolveTimelineDisplaySecondForRow(
+            WorkingRow, Index, CurrentSecond))
+            continue;
+        const int32 Delta = FMath::Abs(
+            CurrentSecond - ReferenceSecond);
+        if (Delta < ClosestDelta)
+        {
+            ClosestDelta = Delta;
+            ClosestIndex = Index;
+        }
+    }
+    if (OutDeltaSeconds != nullptr) *OutDeltaSeconds = ClosestDelta;
+    return ClosestIndex;
+}
+
+TSharedPtr<SWidget>
+STMOPPeopleEditor::BuildComparisonTimelineContextMenu()
+{
+    int32 DeltaSeconds = 0;
+    const int32 TargetIndex = FindClosestWorkingTimelineIndex(
+        SelectedComparisonTimelineIndex, &DeltaSeconds);
+    if (TargetIndex == INDEX_NONE || DeltaSeconds <= 0)
+        return nullptr;
+
+    FMenuBuilder MenuBuilder(true, nullptr);
+    MenuBuilder.AddMenuEntry(
+        LOCTEXT("SyncNearestTimelineTime",
+            "Ändra personens tid till referenspersonens tid"),
+        FText::Format(
+            LOCTEXT("SyncNearestTimelineTimeTip",
+                "Ändra Timeline[{0}] med {1} sekunder så att den får exakt samma lösta tid som den valda referensraden."),
+            FText::AsNumber(TargetIndex),
+            FText::AsNumber(DeltaSeconds)),
+        FSlateIcon(),
+        FUIAction(FExecuteAction::CreateSP(
+            this,
+            &STMOPPeopleEditor::
+                ApplyReferenceTimeToNearestTimelineEntry)));
+    return MenuBuilder.MakeWidget();
+}
+
+void STMOPPeopleEditor::ApplyReferenceTimeToNearestTimelineEntry()
+{
+    CommitEntryEdits();
+    int32 DeltaSeconds = 0;
+    const int32 TargetIndex = FindClosestWorkingTimelineIndex(
+        SelectedComparisonTimelineIndex, &DeltaSeconds);
+    if (TargetIndex == INDEX_NONE || DeltaSeconds <= 0 ||
+        !ComparisonRow.Timeline.IsValidIndex(
+            SelectedComparisonTimelineIndex))
+        return;
+
+    int32 ReferenceSecond = 0;
+    int32 CurrentSecond = 0;
+    if (!ResolveTimelineDisplaySecondForRow(
+            ComparisonRow, SelectedComparisonTimelineIndex,
+            ReferenceSecond) ||
+        !ResolveTimelineDisplaySecondForRow(
+            WorkingRow, TargetIndex, CurrentSecond))
+        return;
+
+    const FTMOPPersonTimelineEntry& ReferenceEntry =
+        ComparisonRow.Timeline[SelectedComparisonTimelineIndex];
+    FTMOPPersonTimelineEntry& TargetEntry =
+        WorkingRow.Timeline[TargetIndex];
+    const int32 SignedAdjustment = ReferenceSecond - CurrentSecond;
+    const int32 NormalizedReference =
+        FMath::Max(0, ReferenceSecond) % (24 * 3600);
+    const FString ReferenceTime = FString::Printf(
+        TEXT("%02d:%02d:%02d"),
+        NormalizedReference / 3600,
+        (NormalizedReference / 60) % 60,
+        NormalizedReference % 60);
+    const EAppReturnType::Type Choice = FMessageDialog::Open(
+        EAppMsgType::YesNo,
+        FText::FromString(FString::Printf(
+            TEXT("Ändra '%s' i Timeline[%d] till referensraden '%s' (%s)?\n\nDen lösta tiden flyttas %s%d sekunder. Tidsmodellen behålls."),
+            *TargetEntry.EntryId.ToString(),
+            TargetIndex,
+            *ReferenceEntry.EntryId.ToString(),
+            *ReferenceTime,
+            SignedAdjustment >= 0 ? TEXT("+") : TEXT(""),
+            SignedAdjustment)));
+    if (Choice != EAppReturnType::Yes) return;
+
+    switch (TargetEntry.TimingMode)
+    {
+    case ETMOPEventTimingMode::Absolute:
+    case ETMOPEventTimingMode::Window:
+        TargetEntry.Time =
+            FTMOPTime::FromSecondsFromMidnight(ReferenceSecond);
+        break;
+    case ETMOPEventTimingMode::Relative:
+        TargetEntry.EventOffsetSeconds += SignedAdjustment;
+        break;
+    case ETMOPEventTimingMode::RelativeToPreviousEntry:
+    {
+        int32 PreviousSecond = 0;
+        if (TargetIndex <= 0 ||
+            !ResolveTimelineDisplaySecondForRow(
+                WorkingRow, TargetIndex - 1, PreviousSecond))
+            return;
+        TargetEntry.EventOffsetSeconds =
+            ReferenceSecond - PreviousSecond;
+        break;
+    }
+    default:
+        return;
+    }
+
+    if (SelectedTimelineIndex == TargetIndex &&
+        EntryStructData.IsValid())
+    {
+        *reinterpret_cast<FTMOPPersonTimelineEntry*>(
+            EntryStructData->GetStructMemory()) = TargetEntry;
+        EntryDetailsView->SetStructureData(EntryStructData);
+    }
+    RefreshTimeline();
+    SetStatus(FText::FromString(FString::Printf(
+        TEXT("Timeline[%d] synkad till %s från %s. Spara personen för att skriva ändringen till DataTable."),
+        TargetIndex, *ReferenceTime,
+        *ComparisonRow.EntityId.ToString())),
+        FLinearColor(0.4f, 1.0f, 0.4f));
 }
 
 void STMOPPeopleEditor::HandlePersonSearchChanged(

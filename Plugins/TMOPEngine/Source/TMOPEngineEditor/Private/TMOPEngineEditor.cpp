@@ -10,7 +10,9 @@
 #include "Math/RotationMatrix.h"
 #include "ScopedTransaction.h"
 #include "STMOPPeopleEditor.h"
+#include "STMOPLaneRepairEditor.h"
 #include "STMOPVehicleEditor.h"
+#include "TMOPNewspaperFolderImporter.h"
 #include "ToolMenus.h"
 #include "Widgets/Docking/SDockTab.h"
 
@@ -20,6 +22,8 @@ const FName FTMOPEngineEditorModule::PeopleEditorTabName(
     TEXT("TMOPPeopleEditor"));
 const FName FTMOPEngineEditorModule::VehicleEditorTabName(
     TEXT("TMOPVehicleEditor"));
+const FName FTMOPEngineEditorModule::LaneRepairEditorTabName(
+    TEXT("TMOPLaneRepairEditor"));
 
 void FTMOPEngineEditorModule::StartupModule()
 {
@@ -42,6 +46,15 @@ void FTMOPEngineEditorModule::StartupModule()
             "Edit historical vehicles, routes, occupants and timing."))
         .SetMenuType(ETabSpawnerMenuType::Hidden);
 
+    FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
+        LaneRepairEditorTabName,
+        FOnSpawnTab::CreateRaw(
+            this, &FTMOPEngineEditorModule::SpawnLaneRepairEditorTab))
+        .SetDisplayName(LOCTEXT("LaneRepairEditorTitle", "TMOP Lane Repair"))
+        .SetTooltipText(LOCTEXT("LaneRepairEditorTooltip",
+            "Audit and repair lane connections, neighbours and restricted one-way routes."))
+        .SetMenuType(ETabSpawnerMenuType::Hidden);
+
     UToolMenus::RegisterStartupCallback(
         FSimpleMulticastDelegate::FDelegate::CreateRaw(
             this, &FTMOPEngineEditorModule::RegisterMenus));
@@ -53,6 +66,7 @@ void FTMOPEngineEditorModule::ShutdownModule()
     UToolMenus::UnregisterOwner(this);
     FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(PeopleEditorTabName);
     FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(VehicleEditorTabName);
+    FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(LaneRepairEditorTabName);
 }
 
 void FTMOPEngineEditorModule::RegisterMenus()
@@ -78,6 +92,24 @@ void FTMOPEngineEditorModule::RegisterMenus()
         FSlateIcon(),
         FUIAction(FExecuteAction::CreateRaw(
             this, &FTMOPEngineEditorModule::OpenVehicleEditor)));
+    Section.AddMenuEntry(
+        TEXT("OpenTMOPLaneRepairEditor"),
+        LOCTEXT("OpenLaneRepairEditor", "TMOP Lane Repair"),
+        LOCTEXT("OpenLaneRepairEditorTooltip",
+            "Scan the open level and create safe or restricted lane connectors."),
+        FSlateIcon(),
+        FUIAction(FExecuteAction::CreateRaw(
+            this, &FTMOPEngineEditorModule::OpenLaneRepairEditor)));
+    Section.AddMenuEntry(
+        TEXT("CreateOrUpdateTMOPNewspapers"),
+        LOCTEXT("CreateOrUpdateNewspapers",
+            "Create/Update Newspapers From Selected Folders"),
+        LOCTEXT("CreateOrUpdateNewspapersTooltip",
+            "Create one newspaper data asset per selected Content Browser folder and fill its pages from the textures in natural reading order."),
+        FSlateIcon(),
+        FUIAction(FExecuteAction::CreateRaw(
+            this,
+            &FTMOPEngineEditorModule::CreateOrUpdateNewspapersFromSelectedFolders)));
     Section.AddMenuEntry(
         TEXT("GenerateTMOPExitChildren"),
         LOCTEXT("GenerateExitChildren",
@@ -118,6 +150,16 @@ void FTMOPEngineEditorModule::OpenPeopleEditor()
 void FTMOPEngineEditorModule::OpenVehicleEditor()
 {
     FGlobalTabmanager::Get()->TryInvokeTab(VehicleEditorTabName);
+}
+
+void FTMOPEngineEditorModule::OpenLaneRepairEditor()
+{
+    FGlobalTabmanager::Get()->TryInvokeTab(LaneRepairEditorTabName);
+}
+
+void FTMOPEngineEditorModule::CreateOrUpdateNewspapersFromSelectedFolders()
+{
+    FTMOPNewspaperFolderImporter::ImportSelectedFolders();
 }
 
 void FTMOPEngineEditorModule::GenerateExitChildrenFromSelection()
@@ -490,6 +532,16 @@ TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnVehicleEditorTab(
         .TabRole(ETabRole::NomadTab)
         [
             SNew(STMOPVehicleEditor)
+        ];
+}
+
+TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnLaneRepairEditorTab(
+    const FSpawnTabArgs& Args)
+{
+    return SNew(SDockTab)
+        .TabRole(ETabRole::NomadTab)
+        [
+            SNew(STMOPLaneRepairEditor)
         ];
 }
 

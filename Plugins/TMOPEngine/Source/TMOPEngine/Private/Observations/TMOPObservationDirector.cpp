@@ -3,13 +3,39 @@
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Components/ActorComponent.h"
+#include "DrawDebugHelpers.h"
 #include "Engine/DataTable.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
+#include "Misc/ConfigCacheIni.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Vehicles/TMOPVehicleBase.h"
+
+namespace
+{
+const TCHAR* WorldGuideSettingsSection = TEXT("TMOP.WorldGuideSettings");
+const TCHAR* ShowOlofLineKey = TEXT("ShowOlofLocationLine");
+const TCHAR* ShowObservationLinesKey = TEXT("ShowActiveObservationLines");
+
+bool ReadWorldGuideSetting(const TCHAR* Key, const bool DefaultValue)
+{
+    bool Value = DefaultValue;
+    if (GConfig != nullptr)
+        GConfig->GetBool(WorldGuideSettingsSection, Key, Value,
+            GGameUserSettingsIni);
+    return Value;
+}
+
+void WriteWorldGuideSetting(const TCHAR* Key, const bool Value)
+{
+    if (GConfig == nullptr) return;
+    GConfig->SetBool(WorldGuideSettingsSection, Key, Value,
+        GGameUserSettingsIni);
+    GConfig->Flush(false, GGameUserSettingsIni);
+}
+}
 
 ATMOPObservationDirector::ATMOPObservationDirector()
 {
@@ -21,6 +47,9 @@ ATMOPObservationDirector::ATMOPObservationDirector()
 void ATMOPObservationDirector::BeginPlay()
 {
     Super::BeginPlay();
+
+    bShowOlofLocationLine = GetSavedShowOlofLocationLine();
+    bShowActiveObservationLines = GetSavedShowActiveObservationLines();
 
     ReloadObservationData();
 
@@ -65,12 +94,105 @@ void ATMOPObservationDirector::EndPlay(
 void ATMOPObservationDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if (!bEnableLinkedTrackSimulation || GetGameInstance() == nullptr) return;
-    const UTMOPClockSubsystem* Clock =
-        GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
-    if (Clock != nullptr)
+    const UGameInstance* GameInstance = GetGameInstance();
+    const UTMOPClockSubsystem* Clock = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    const int32 CurrentSecond = Clock != nullptr
+        ? Clock->GetCurrentTime().ToSecondsFromMidnight() : INDEX_NONE;
+    if (bEnableLinkedTrackSimulation && CurrentSecond != INDEX_NONE)
         UpdateObservationTracks(
-            Clock->GetCurrentTime().ToSecondsFromMidnight());
+            CurrentSecond);
+    DrawWorldGuideLines(CurrentSecond);
+}
+
+bool ATMOPObservationDirector::GetSavedShowOlofLocationLine()
+{
+    return ReadWorldGuideSetting(ShowOlofLineKey, true);
+}
+
+bool ATMOPObservationDirector::GetSavedShowActiveObservationLines()
+{
+    return ReadWorldGuideSetting(ShowObservationLinesKey, true);
+}
+
+void ATMOPObservationDirector::SaveShowOlofLocationLine(const bool bShow)
+{
+    WriteWorldGuideSetting(ShowOlofLineKey, bShow);
+}
+
+void ATMOPObservationDirector::SaveShowActiveObservationLines(const bool bShow)
+{
+    WriteWorldGuideSetting(ShowObservationLinesKey, bShow);
+}
+
+void ATMOPObservationDirector::SetShowOlofLocationLine(const bool bShow)
+{
+    bShowOlofLocationLine = bShow;
+    SaveShowOlofLocationLine(bShow);
+}
+
+void ATMOPObservationDirector::SetShowActiveObservationLines(const bool bShow)
+{
+    bShowActiveObservationLines = bShow;
+    SaveShowActiveObservationLines(bShow);
+}
+
+void ATMOPObservationDirector::DrawWorldGuideLines(
+    const int32 CurrentSecond) const
+{
+    UWorld* World = GetWorld();
+    if (World == nullptr) return;
+
+    if (bShowOlofLocationLine)
+    {
+        if (AActor* Olof = FindEntityActor(OlofPalmeEntityId);
+            IsValid(Olof))
+        {
+            const FVector Start = Olof->GetActorLocation();
+            DrawDebugLine(World, Start,
+                Start + FVector::UpVector * OlofLocationLineHeightCm,
+                OlofLocationLineColor.ToFColor(true), false, 0.0f, 0,
+                WorldGuideLineThickness);
+        }
+    }
+
+    if (!bShowActiveObservationLines || CurrentSecond == INDEX_NONE) return;
+    for (const TPair<FName, FTMOPObservationDefinition>& Pair :
+        LoadedObservations)
+    {
+        const FTMOPObservationDefinition& Definition = Pair.Value;
+        const FTMOPObservationRuntime* Runtime =
+            RuntimeObservations.Find(Pair.Key);
+        if (!Definition.bEnabled || Runtime == nullptr ||
+            !Runtime->bHasResolvedCanonicalTime ||
+            Definition.ObservedEntityId.IsNone())
+            continue;
+
+        const int32 StartSecond =
+            Runtime->ResolvedCanonicalStartTime.ToSecondsFromMidnight();
+        const int32 EndSecond =
+            Runtime->ResolvedCanonicalEndTime.ToSecondsFromMidnight();
+        if (CurrentSecond < StartSecond || CurrentSecond > EndSecond)
+            continue;
+
+        AActor* Observed = FindEntityActor(Definition.ObservedEntityId);
+        if (!IsValid(Observed)) continue;
+        const FVector ObservedPoint =
+            Observed->GetActorLocation() + FVector(0.0f, 0.0f, 70.0f);
+        for (const FName ObserverId : Definition.ObserverEntityIds)
+        {
+            AActor* Observer = FindEntityActor(ObserverId);
+            if (!IsValid(Observer)) continue;
+            const FVector ObserverPoint =
+                Observer->GetActorLocation() + FVector(0.0f, 0.0f, 70.0f);
+            const float ArrowSize = FMath::Min(ObservationArrowSizeCm,
+                FVector::Distance(ObserverPoint, ObservedPoint) * 0.25f);
+            DrawDebugDirectionalArrow(World, ObserverPoint, ObservedPoint,
+                FMath::Max(5.0f, ArrowSize),
+                ObservationLineColor.ToFColor(true), false, 0.0f, 0,
+                ObservationLineThickness);
+        }
+    }
 }
 
 int32 ATMOPObservationDirector::ReloadObservationData()
@@ -79,6 +201,7 @@ int32 ATMOPObservationDirector::ReloadObservationData()
     LoadedLinks.Reset();
     RuntimeTracks.Reset();
     ResolvedTracks.Reset();
+    EntityActorCache.Reset();
 
     if (IsValid(ObservationTable) &&
         ObservationTable->GetRowStruct() ==
@@ -791,6 +914,13 @@ AActor* ATMOPObservationDirector::FindEntityActor(
         return nullptr;
     }
 
+    if (const TWeakObjectPtr<AActor>* Cached =
+        EntityActorCache.Find(EntityId))
+    {
+        if (Cached->IsValid()) return Cached->Get();
+        EntityActorCache.Remove(EntityId);
+    }
+
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
     {
         AActor* Actor = *It;
@@ -799,6 +929,7 @@ AActor* ATMOPObservationDirector::FindEntityActor(
         {
             if (Vehicle->VehicleId == EntityId)
             {
+                EntityActorCache.Add(EntityId, Actor);
                 return Actor;
             }
         }
@@ -809,6 +940,7 @@ AActor* ATMOPObservationDirector::FindEntityActor(
                 : nullptr;
         if (Identity != nullptr && Identity->EntityId == EntityId)
         {
+            EntityActorCache.Add(EntityId, Actor);
             return Actor;
         }
     }

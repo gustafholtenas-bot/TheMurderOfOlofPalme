@@ -29,7 +29,7 @@ TSharedRef<SWidget> UTMOPQuickInventoryWidget::RebuildWidget()
                     .BorderBackgroundColor(FLinearColor(0.02f, 0.025f, 0.04f, 0.96f))
                     [ SAssignNew(CenterLabel, STextBlock)
                         .Text(NSLOCTEXT("TMOP", "InventoryCenter", "INVENTORY"))
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Heading"),
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("QuickInventoryHeading"),
                             FCoreStyle::GetDefaultFontStyle("Bold", 22)))
                         .Justification(ETextJustify::Center) ]
                 ]
@@ -135,7 +135,7 @@ void UTMOPQuickInventoryWidget::RebuildEntries()
                     [ SNew(SImage).Image(Brush.Get()) ] ]
                 + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(3.0f)
                 [ SNew(STextBlock).Text(GetEntryName(Index))
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("InventoryItem"),
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("QuickInventoryItem"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 13)))
                     .ColorAndOpacity(bSelected ? SelectedColor : NormalColor)
                     .Justification(ETextJustify::Center) ]

@@ -6,6 +6,7 @@
 #include "Player/TMOPPlayerCharacter.h"
 #include "Styling/CoreStyle.h"
 #include "UI/TMOPMapComponent.h"
+#include "UI/TMOPTypographyDirector.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/SLeafWidget.h"
 #include "Widgets/SOverlay.h"
@@ -170,7 +171,9 @@ public:
                 const FGeometry LabelGeometry = Geometry.MakeChild(FVector2D(150.0f, 24.0f),
                     FSlateLayoutTransform(P + FVector2D(-75.0f, IconSize * 0.6f + 2.0f)));
                 FSlateDrawElement::MakeText(Out, Layer + 1, LabelGeometry.ToPaintGeometry(),
-                    Marker.DisplayName, FCoreStyle::GetDefaultFontStyle("Bold", 12),
+                    Marker.DisplayName, ATMOPTypographyDirector::ResolveFont(Widget,
+                        TEXT("MapMarkerLabel"),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 12)),
                     ESlateDrawEffect::None, FLinearColor::White);
             }
         }
@@ -343,7 +346,8 @@ public:
                 FSlateLayoutTransform(FVector2D(LegendX, LegendY - 38.0f)));
             FSlateDrawElement::MakeText(Out, Layer, LegendTitle.ToPaintGeometry(),
                 NSLOCTEXT("TMOP", "MapLegendTitle", "TECKENFÖRKLARING"),
-                FCoreStyle::GetDefaultFontStyle("Bold", 13),
+                ATMOPTypographyDirector::ResolveFont(Widget, TEXT("MapLegendHeading"),
+                    FCoreStyle::GetDefaultFontStyle("Bold", 13)),
                 ESlateDrawEffect::None, FLinearColor(0.92f, 0.92f, 0.88f));
             for (const FLegendEntry& Entry : Legend)
             {
@@ -373,7 +377,8 @@ public:
                     FSlateLayoutTransform(FVector2D(LegendX + 28.0f, LegendY - 1.0f)));
                 FSlateDrawElement::MakeText(Out, Layer + 1,
                     TextGeometry.ToPaintGeometry(), Entry.Label,
-                    FCoreStyle::GetDefaultFontStyle("Regular", 11),
+                    ATMOPTypographyDirector::ResolveFont(Widget, TEXT("MapLegendBody"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 11)),
                     ESlateDrawEffect::None, FLinearColor(0.9f, 0.9f, 0.88f));
                 LegendY += 27.0f;
             }
@@ -409,7 +414,8 @@ public:
                     FSlateLayoutTransform(FVector2D(LegendX + 28.0f, LegendY - 1.0f)));
                 FSlateDrawElement::MakeText(Out, Layer + 1,
                     FilterText.ToPaintGeometry(), Filter.Label,
-                    FCoreStyle::GetDefaultFontStyle("Regular", 11),
+                    ATMOPTypographyDirector::ResolveFont(Widget, TEXT("MapLegendBody"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 11)),
                     ESlateDrawEffect::None,
                     Filter.bEnabled ? FLinearColor::White
                         : FLinearColor(0.5f, 0.5f, 0.5f, 1.0f));
@@ -426,7 +432,8 @@ public:
                 FSlateLayoutTransform(PlayerLabelAnchor + FVector2D(-90.0f, -7.0f)));
             FSlateDrawElement::MakeText(Out, Layer++, PlayerTopLabel.ToPaintGeometry(),
                 NSLOCTEXT("TMOP", "PlayerFixedMapLabel", "DU ÄR HÄR"),
-                FCoreStyle::GetDefaultFontStyle("Bold", 15),
+                ATMOPTypographyDirector::ResolveFont(Widget, TEXT("MapFixedLabel"),
+                    FCoreStyle::GetDefaultFontStyle("Bold", 15)),
                 ESlateDrawEffect::None, FLinearColor::White);
 
             const FVector2D LabelAnchor(ViewSize.X * 0.5f, ViewSize.Y - 48.0f);
@@ -444,7 +451,8 @@ public:
             FSlateDrawElement::MakeText(Out, Layer++,
                 OlofBottomLabel.ToPaintGeometry(),
                 NSLOCTEXT("TMOP", "OlofPalmeFixedMapLabel", "OLOF PALME"),
-                FCoreStyle::GetDefaultFontStyle("Bold", 15),
+                ATMOPTypographyDirector::ResolveFont(Widget, TEXT("MapFixedLabel"),
+                    FCoreStyle::GetDefaultFontStyle("Bold", 15)),
                 ESlateDrawEffect::None, Map->OlofPalmeMarkerColor);
         }
 
@@ -554,6 +562,8 @@ TSharedRef<SWidget> UTMOPMapWidget::RebuildWidget()
         + SOverlay::Slot().HAlign(HAlign_Right).VAlign(VAlign_Top).Padding(24.0f)
         [ SNew(STextBlock)
             .Text(NSLOCTEXT("TMOP", "WorldMapHelp", "KARTA  •  mushjul: zoom  •  dra: panorera  •  M/Esc: stäng"))
+            .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MapHint"),
+                FCoreStyle::GetDefaultFontStyle("Regular", 14)))
             .ColorAndOpacity(FLinearColor::White) ];
 }
 

@@ -5,6 +5,12 @@
 #include "Time/TMOPTime.h"
 #include "TMOPGrandFilmDirector.generated.h"
 
+class UMediaPlayer;
+class UMediaSoundComponent;
+class UMediaSource;
+class USceneComponent;
+class UTMOPClockSubsystem;
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTMOPGrandFilmTimeSignature, FTMOPTime, EventTime);
 
 USTRUCT(BlueprintType)
@@ -20,7 +26,7 @@ struct TMOPENGINE_API FTMOPGrandStandingRule
     bool bStandAtFilmEnd = true;
 };
 
-/** Resolves the uncertain film ending and tells spectators when to stand. */
+/** Plays Grand's film against the scenario clock and tells spectators when to stand. */
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPGrandFilmDirector : public AActor
 {
@@ -30,6 +36,61 @@ public:
     ATMOPGrandFilmDirector();
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+    virtual void Tick(float DeltaSeconds) override;
+
+    /** Media Player also used by the Media Texture on the cinema screen. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback")
+    TObjectPtr<UMediaPlayer> FilmMediaPlayer = nullptr;
+
+    /** Usually a File Media Source pointing at Content/Movies. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback")
+    TObjectPtr<UMediaSource> FilmMediaSource = nullptr;
+
+    /** Spatial film audio. Move this inherited component to the screen. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
+        Category="TMOP|Grand Film|Playback")
+    TObjectPtr<UMediaSoundComponent> FilmSoundComponent = nullptr;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly,
+        Category="TMOP|Grand Film|Playback")
+    TObjectPtr<USceneComponent> SceneRoot = nullptr;
+
+    /** Open Film Media Source automatically when play begins. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback")
+    bool bAutoOpenFilm = true;
+
+    /**
+     * Recommended for a complete film or ending clip. The last frame is
+     * aligned with Resolved Film End, including after loop randomisation.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback")
+    bool bAlignMediaEndToResolvedFilmEnd = true;
+
+    /** Used when Align Media End is disabled: game time at media time 00:00. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback",
+        meta=(EditCondition="!bAlignMediaEndToResolvedFilmEnd"))
+    FTMOPTime MediaStartGameTime = FTMOPTime(21, 30, 0);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback",
+        meta=(ClampMin="0.0", ClampMax="2.0"))
+    float FilmVolume = 1.0f;
+
+    /** Above this clock speed the movie pauses and seeks instead of racing. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback",
+        meta=(ClampMin="1.0", ClampMax="8.0"))
+    float MaximumRealtimePlaybackScale = 4.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Grand Film|Playback",
+        meta=(ClampMin="0.1", ClampMax="10.0", Units="s"))
+    float ResyncThresholdSeconds = 0.75f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Grand Film|Uncertainty")
     FTMOPTime EarliestFilmEnd = FTMOPTime(23, 5, 0);
@@ -71,6 +132,15 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Grand Film")
     void EvaluateAtTime(FTMOPTime CurrentTime);
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Grand Film|Playback")
+    bool OpenFilm();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Grand Film|Playback")
+    void SynchronizeFilmToClock();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Grand Film|Playback")
+    void StopFilm();
+
 private:
     UFUNCTION()
     void HandleSecondChanged(FTMOPTime NewTime);
@@ -78,9 +148,21 @@ private:
     UFUNCTION()
     void HandleLoopRestarted(int32 NewLoopNumber, FTMOPTime RestartTime);
 
+    UFUNCTION()
+    void HandleMediaOpened(FString OpenedUrl);
+
+    UFUNCTION()
+    void HandleMediaOpenFailed(FString FailedUrl);
+
     void TriggerStandingGroup(bool bAtFilmEnd);
     void ResetBehaviors();
+    double ResolveMediaStartSecond() const;
+
+    UPROPERTY(Transient)
+    TObjectPtr<UTMOPClockSubsystem> Clock = nullptr;
 
     bool bCreditsTriggered = false;
     bool bFilmEndTriggered = false;
+    bool bFilmMediaOpen = false;
+    int32 LastSynchronizedClockSecond = INDEX_NONE;
 };

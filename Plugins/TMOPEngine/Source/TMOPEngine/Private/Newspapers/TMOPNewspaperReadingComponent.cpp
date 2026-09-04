@@ -1,11 +1,15 @@
 #include "Newspapers/TMOPNewspaperReadingComponent.h"
 
 #include "Animation/AnimInstance.h"
+#include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
+#include "Camera/PlayerCameraManager.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/MeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Texture2D.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/PlayerController.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Newspapers/TMOPNewspaperItemDefinition.h"
 
@@ -52,13 +56,80 @@ void UTMOPNewspaperReadingComponent::CreateReadingComponents()
     ReadingNewspaper->SetVisibility(false, true);
 }
 
-UCameraComponent* UTMOPNewspaperReadingComponent::FindActiveCamera() const
+void UTMOPNewspaperReadingComponent::ActivateReadingCamera()
 {
+    AActor* Owner = GetOwner();
+    if (!IsValid(Owner) || !IsValid(ReadingCamera)) return;
+
+    PreviousCameraStates.Reset();
     TArray<UCameraComponent*> Cameras;
-    if (IsValid(GetOwner())) GetOwner()->GetComponents(Cameras);
+    Owner->GetComponents(Cameras);
     for (UCameraComponent* Camera : Cameras)
-        if (IsValid(Camera) && Camera->IsActive()) return Camera;
-    return Cameras.IsEmpty() ? nullptr : Cameras[0];
+    {
+        if (!IsValid(Camera) || Camera == ReadingCamera.Get()) continue;
+        FTMOPNewspaperCameraActiveState& State =
+            PreviousCameraStates.AddDefaulted_GetRef();
+        State.Component = Camera;
+        State.bPreviousActive = Camera->IsActive();
+        Camera->SetActive(false);
+    }
+
+    ReadingCamera->Activate(true);
+    if (const APawn* Pawn = Cast<APawn>(Owner))
+    {
+        if (APlayerController* PC = Cast<APlayerController>(Pawn->GetController()))
+        {
+            PreviousViewTarget = PC->GetViewTarget();
+
+            // A dedicated camera actor is used as the view target. Merely changing
+            // the active camera component on the already-active pawn is not enough
+            // for every PlayerCameraManager/Blueprint combination: some keep using
+            // the previously cached third-person component while the target actor
+            // itself has not changed.
+            if (UWorld* World = GetWorld())
+            {
+                ReadingCameraActor = World->SpawnActor<ACameraActor>(
+                    ACameraActor::StaticClass(), ReadingCamera->GetComponentTransform());
+                if (IsValid(ReadingCameraActor))
+                {
+                    ReadingCameraActor->AttachToActor(Owner,
+                        FAttachmentTransformRules::KeepWorldTransform);
+                    ReadingCameraActor->GetCameraComponent()->SetFieldOfView(
+                        ReadingCamera->FieldOfView);
+                }
+            }
+            PC->SetViewTarget(IsValid(ReadingCameraActor)
+                ? ReadingCameraActor.Get() : Owner);
+            // Opening may pause the world in this same frame. Force the camera
+            // manager to consume the new active camera before that happens.
+            if (IsValid(PC->PlayerCameraManager))
+                PC->PlayerCameraManager->UpdateCamera(0.0f);
+        }
+    }
+}
+
+void UTMOPNewspaperReadingComponent::RestorePreviousCameras()
+{
+    if (IsValid(ReadingCamera)) ReadingCamera->SetActive(false);
+    for (const FTMOPNewspaperCameraActiveState& State : PreviousCameraStates)
+        if (IsValid(State.Component))
+            State.Component->SetActive(State.bPreviousActive);
+    PreviousCameraStates.Reset();
+
+    AActor* Owner = GetOwner();
+    if (const APawn* Pawn = Cast<APawn>(Owner))
+    {
+        if (APlayerController* PC = Cast<APlayerController>(Pawn->GetController()))
+        {
+            PC->SetViewTarget(IsValid(PreviousViewTarget)
+                ? PreviousViewTarget.Get() : Owner);
+            if (IsValid(PC->PlayerCameraManager))
+                PC->PlayerCameraManager->UpdateCamera(0.0f);
+        }
+    }
+    PreviousViewTarget = nullptr;
+    if (IsValid(ReadingCameraActor)) ReadingCameraActor->Destroy();
+    ReadingCameraActor = nullptr;
 }
 
 UMaterialInstanceDynamic* UTMOPNewspaperReadingComponent::CreatePageMaterial(
@@ -74,37 +145,94 @@ UMaterialInstanceDynamic* UTMOPNewspaperReadingComponent::CreatePageMaterial(
     return MID;
 }
 
+void UTMOPNewspaperReadingComponent::HidePlayerAppearanceMeshes()
+{
+    AActor* Owner = GetOwner();
+    if (!IsValid(Owner)) return;
+
+    TArray<UMeshComponent*> MeshComponents;
+    Owner->GetComponents<UMeshComponent>(MeshComponents);
+    for (UMeshComponent* Component : MeshComponents)
+    {
+        if (!IsValid(Component) || Component == ReadingArms.Get() ||
+            Component == ReadingNewspaper.Get())
+            continue;
+
+        FTMOPNewspaperMeshVisibilityState* ExistingState =
+            HiddenAppearanceMeshes.FindByPredicate(
+                [Component](const FTMOPNewspaperMeshVisibilityState& State)
+                {
+                    return State.Component == Component;
+                });
+        if (ExistingState == nullptr)
+        {
+            FTMOPNewspaperMeshVisibilityState& State =
+                HiddenAppearanceMeshes.AddDefaulted_GetRef();
+            State.Component = Component;
+            State.bPreviousOwnerNoSee = Component->bOwnerNoSee;
+            State.bPreviousVisible = Component->IsVisible();
+            State.bPreviousHiddenInGame = Component->bHiddenInGame;
+            ExistingState = &State;
+        }
+        else
+        {
+            // If the appearance system changed a property since our previous
+            // pass, remember that newer intended value for restoration.
+            if (Component->bOwnerNoSee != true)
+                ExistingState->bPreviousOwnerNoSee = Component->bOwnerNoSee;
+            if (Component->IsVisible() != false)
+                ExistingState->bPreviousVisible = Component->IsVisible();
+            if (Component->bHiddenInGame != true)
+                ExistingState->bPreviousHiddenInGame = Component->bHiddenInGame;
+        }
+
+        // Re-apply every tick. The delayed appearance director may both create
+        // components and make an existing clothing component visible after the
+        // newspaper was opened.
+        Component->SetOwnerNoSee(true);
+        Component->SetHiddenInGame(true, false);
+        Component->SetVisibility(false, false);
+    }
+}
+
+void UTMOPNewspaperReadingComponent::RestorePlayerAppearanceMeshes()
+{
+    for (const FTMOPNewspaperMeshVisibilityState& State : HiddenAppearanceMeshes)
+        if (IsValid(State.Component))
+        {
+            State.Component->SetOwnerNoSee(State.bPreviousOwnerNoSee);
+            State.Component->SetHiddenInGame(State.bPreviousHiddenInGame, false);
+            State.Component->SetVisibility(State.bPreviousVisible, false);
+        }
+    HiddenAppearanceMeshes.Reset();
+}
+
 bool UTMOPNewspaperReadingComponent::BeginReading(
     UTMOPNewspaperItemDefinition* Newspaper, const int32 PageIndex)
 {
     if (!IsValid(Newspaper) || Newspaper->Pages.IsEmpty()) return false;
     CreateReadingComponents();
-    PreviousCamera = FindActiveCamera();
     ACharacter* Character = Cast<ACharacter>(GetOwner());
     USkeletalMeshComponent* PlayerMesh = IsValid(Character) ? Character->GetMesh() : nullptr;
     bUsingExistingPlayerMesh = !bForceFloatingWaistLayout &&
         bUseExistingPlayerMesh && IsValid(PlayerMesh);
-    if (!IsValid(PreviousCamera) || !IsValid(ReadingCamera) ||
+    if (!IsValid(ReadingCamera) ||
         !IsValid(ReadingNewspaper) ||
         !IsValid(NewspaperMesh) || !IsValid(NewspaperMaterial)) return false;
 
     ActiveNewspaper = Newspaper;
-    // The dedicated reading camera sits inside the character. Hide the owner's
-    // regular body only from that owner's view while reading so the head and
-    // limbs cannot clip through the floating newspaper. Preserve the previous
-    // value because another first-person system may already use Owner No See.
-    if (!bUsingExistingPlayerMesh && IsValid(PlayerMesh))
+    // Hide every mesh owned by the player, including modular clothes and
+    // Blueprint-added parts. The reading paper and optional reading arms are
+    // explicitly excluded and every previous visibility state is restored.
+    if (!bUsingExistingPlayerMesh)
     {
-        HiddenPlayerMesh = PlayerMesh;
-        bPreviousPlayerMeshOwnerNoSee = PlayerMesh->bOwnerNoSee;
-        bPlayerMeshVisibilityOverridden = true;
-        PlayerMesh->SetOwnerNoSee(true);
+        RestorePlayerAppearanceMeshes();
+        HidePlayerAppearanceMeshes();
     }
-    PreviousCamera->SetActive(false);
     ReadingCamera->SetRelativeLocation(FirstPersonCameraOffset);
     ReadingCamera->SetRelativeRotation(FirstPersonCameraRotation);
     ReadingCamera->SetFieldOfView(FirstPersonFieldOfView);
-    ReadingCamera->SetActive(true);
+    ActivateReadingCamera();
     if (bUsingExistingPlayerMesh)
     {
         ReadingArms->SetVisibility(false, true);
@@ -139,7 +267,9 @@ bool UTMOPNewspaperReadingComponent::BeginReading(
     ReadingArms->SetVisibility(!bForceFloatingWaistLayout &&
         !bUsingExistingPlayerMesh && bShowReadingArms, true);
     ReadingNewspaper->SetVisibility(true, true);
-    SetComponentTickEnabled(false);
+    // Keep checking while reading so modular clothes/headwear spawned by the
+    // delayed player appearance setup are hidden as soon as they appear.
+    SetComponentTickEnabled(!bUsingExistingPlayerMesh);
     const bool bPageShown = ShowPage(PageIndex, false);
     if (!bPageShown)
     {
@@ -161,6 +291,29 @@ void UTMOPNewspaperReadingComponent::TickComponent(const float DeltaTime,
     const ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    if (IsValid(ActiveNewspaper) && !bUsingExistingPlayerMesh)
+    {
+        HidePlayerAppearanceMeshes();
+
+        // Another camera system or Blueprint can reactivate a pawn camera after
+        // opening. Keep the dedicated first-person reader view authoritative.
+        if (IsValid(ReadingCameraActor) && IsValid(ReadingCamera))
+        {
+            ReadingCameraActor->SetActorTransform(
+                ReadingCamera->GetComponentTransform());
+            ReadingCameraActor->GetCameraComponent()->SetFieldOfView(
+                ReadingCamera->FieldOfView);
+            if (const APawn* Pawn = Cast<APawn>(GetOwner()))
+            {
+                if (APlayerController* PC =
+                    Cast<APlayerController>(Pawn->GetController()))
+                {
+                    if (PC->GetViewTarget() != ReadingCameraActor.Get())
+                        PC->SetViewTarget(ReadingCameraActor.Get());
+                }
+            }
+        }
+    }
 }
 
 bool UTMOPNewspaperReadingComponent::ShowPage(
@@ -292,23 +445,18 @@ void UTMOPNewspaperReadingComponent::EndReading()
         }
     }
     if (IsValid(ReadingArms)) ReadingArms->SetVisibility(false, true);
-    if (bPlayerMeshVisibilityOverridden && IsValid(HiddenPlayerMesh))
-        HiddenPlayerMesh->SetOwnerNoSee(bPreviousPlayerMeshOwnerNoSee);
-    HiddenPlayerMesh = nullptr;
-    bPlayerMeshVisibilityOverridden = false;
+    RestorePlayerAppearanceMeshes();
     if (IsValid(ReadingNewspaper))
     {
         ReadingNewspaper->SetVisibility(false, true);
         ReadingNewspaper->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
     }
-    if (IsValid(ReadingCamera)) ReadingCamera->SetActive(false);
-    if (IsValid(PreviousCamera)) PreviousCamera->SetActive(true);
+    RestorePreviousCameras();
     ActiveNewspaper = nullptr;
     FrontPageMID = nullptr;
     LeftPageMID = nullptr;
     RightPageMID = nullptr;
     EndPageMID = nullptr;
-    PreviousCamera = nullptr;
     bUsingExistingPlayerMesh = false;
     SetComponentTickEnabled(false);
 }

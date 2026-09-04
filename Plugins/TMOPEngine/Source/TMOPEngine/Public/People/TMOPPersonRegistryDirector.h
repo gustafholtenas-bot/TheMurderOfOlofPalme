@@ -10,6 +10,7 @@ class ATMOPVehicleBase;
 class ATMOPGroupDirector;
 class ATMOPTimelineValidationDirector;
 class UDataTable;
+class UCurveFloat;
 struct FTMOPGroupProfileRow;
 
 DECLARE_MULTICAST_DELEGATE_FiveParams(
@@ -59,6 +60,38 @@ public:
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     bool bDisableCollisionForObservedUnknownPeople = true;
+
+    /** Central defaults copied to every person spawned by this director. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade")
+    bool bEnablePersonSpawnFade = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade")
+    bool bEnablePersonDespawnFade = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade",
+        meta=(ClampMin="0.0", ClampMax="10.0", Units="s"))
+    float PersonSpawnFadeDurationSeconds = 0.75f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade",
+        meta=(ClampMin="0.0", ClampMax="10.0", Units="s"))
+    float PersonDespawnFadeDurationSeconds = 0.75f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade")
+    TObjectPtr<UCurveFloat> PersonVisibilityFadeCurve;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade")
+    FName PersonVisibilityFadeMaterialParameter = TEXT("TMOP_VisibilityFade");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade")
+    bool bWritePersonFadeToCustomPrimitiveData = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade",
+        meta=(EditCondition="bWritePersonFadeToCustomPrimitiveData", ClampMin="0", ClampMax="31"))
+    int32 PersonFadeCustomPrimitiveDataIndex = 0;
+
+    /** Enable only for legacy materials that cannot read Custom Primitive Data. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade")
+    bool bWritePersonFadeMaterialParameter = false;
 
     /** Automatically validates every spawned person's real timeline execution. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Validation")

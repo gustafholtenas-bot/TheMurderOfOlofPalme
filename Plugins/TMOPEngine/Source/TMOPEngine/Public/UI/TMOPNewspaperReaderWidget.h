@@ -46,6 +46,8 @@ public:
 
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
+    virtual FReply NativeOnPreviewKeyDown(
+        const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
     virtual FReply NativeOnKeyDown(
         const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
     virtual FReply NativeOnMouseWheel(
@@ -58,6 +60,7 @@ private:
     FReply HandleZoomInClicked();
     FReply HandleCloseClicked();
     FReply PanPage(float HorizontalDirection, float VerticalDirection);
+    FReply HandleReaderKey(const FKey& Key);
     void RefreshPage();
 
     UPROPERTY(Transient)

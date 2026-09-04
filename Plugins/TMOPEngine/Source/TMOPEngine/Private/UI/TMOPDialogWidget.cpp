@@ -65,7 +65,7 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                 [ SNew(SHorizontalBox)
                   + SHorizontalBox::Slot().FillWidth(1.0f)
                   [ SAssignNew(SpeakerText, STextBlock)
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeakerName"),
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("DialogSpeakerName"),
                         FCoreStyle::GetDefaultFontStyle("Bold", 19)))
                     .ColorAndOpacity(FLinearColor(0.95f, 0.72f, 0.22f)) ]
                   + SHorizontalBox::Slot().AutoWidth()
@@ -86,7 +86,7 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                 [ SNew(SHorizontalBox)
                   + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
                   [ SAssignNew(RadioLeftSpeakerText, STextBlock)
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeakerName"),
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("DialogSpeakerName"),
                         FCoreStyle::GetDefaultFontStyle("Bold", 16)))
                     .ColorAndOpacity(FLinearColor(0.68f, 0.82f, 0.92f)) ]
                   + SHorizontalBox::Slot().AutoWidth().HAlign(HAlign_Center)
@@ -95,7 +95,7 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                   + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
                     .HAlign(HAlign_Right)
                   [ SAssignNew(RadioRightSpeakerText, STextBlock)
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeakerName"),
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("DialogSpeakerName"),
                         FCoreStyle::GetDefaultFontStyle("Bold", 16)))
                     .Justification(ETextJustify::Right)
                     .ColorAndOpacity(FLinearColor(0.68f, 0.82f, 0.92f)) ] ]

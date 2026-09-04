@@ -14,6 +14,7 @@ class STextBlock;
 class UDataTable;
 class FStructOnScope;
 class STMOPVehicleRouteMap;
+struct FTMOPPersonProfileRow;
 
 class STMOPVehicleEditor final : public SCompoundWidget
 {
@@ -23,6 +24,22 @@ public:
     void Construct(const FArguments& Args);
 
 private:
+    struct FBoardingFeasibility
+    {
+        bool bFoundBoardingEntry = false;
+        bool bUsedStraightLineFallback = false;
+        bool bRouteResolved = false;
+        int32 BoardingSecond = INDEX_NONE;
+        int32 DepartureSecond = INDEX_NONE;
+        int32 AvailableSeconds = 0;
+        int32 RequiredSeconds = 0;
+        int32 MarginSeconds = 0;
+        double DistanceCm = 0.0;
+        float SpeedCmPerSecond = 0.0f;
+        FName SeatId = NAME_None;
+        FString Failure;
+    };
+
     using FVehicleItem = TSharedPtr<FName>;
     using FTimelineItem = TSharedPtr<int32>;
     using FAnchorItem = TSharedPtr<FString>;
@@ -86,6 +103,9 @@ private:
     TSharedRef<SWidget> GenerateEventOption(FEventItem Item) const;
     void OnEventSelected(FEventItem Item, ESelectInfo::Type SelectInfo);
     FText GetSelectedEventText() const;
+    void OnDepartureEventSelected(FEventItem Item,
+        ESelectInfo::Type SelectInfo);
+    FText GetSelectedDepartureEventText() const;
     TSharedRef<SWidget> GenerateLaneOption(FLaneItem Item) const;
     void OnRouteReferenceSelected(TSharedPtr<FString> Item,
         ESelectInfo::Type SelectInfo, ERouteReferenceField Field);
@@ -107,12 +127,23 @@ private:
 
     bool ResolveTime(const FTMOPHistoricalVehicleRow& Row,
         int32 Index, int32& OutSecond, FString* Failure = nullptr) const;
+    bool ResolveEntryCompletionTime(const FTMOPHistoricalVehicleRow& Row,
+        int32 Index, int32& OutSecond, FString* Failure = nullptr) const;
+    bool ResolveDrivingDepartureTime(const FTMOPHistoricalVehicleRow& Row,
+        int32 Index, int32& OutSecond, FString* Failure = nullptr) const;
     bool CalculateDrive(const FTMOPHistoricalVehicleRow& Row,
         int32 Index, double& OutDistanceCm,
         int32& OutDepartureSecond, int32& OutArrivalSecond,
         int32& OutDurationSeconds, double& OutKmh,
         FString& OutFailure) const;
     TArray<FString> ValidateRow(const FTMOPHistoricalVehicleRow& Row) const;
+    bool CalculateBoardingFeasibility(
+        const FTMOPHistoricalVehicleRow& Vehicle,
+        int32 DrivingIndex,
+        const FTMOPPersonProfileRow& Person,
+        FBoardingFeasibility& OutResult) const;
+    bool ResolvePersonTime(const FTMOPPersonProfileRow& Person,
+        int32 Index, int32& OutSecond) const;
     FString BuildOccupantsText(int32 TimelineIndex) const;
     FText GetTitle() const;
     FText GetSubtitle() const;
@@ -146,6 +177,7 @@ private:
     TSharedPtr<STMOPVehicleRouteMap> RouteMap;
     TSharedPtr<SSearchableComboBox> AnchorCombo;
     TSharedPtr<SSearchableComboBox> EventCombo;
+    TSharedPtr<SSearchableComboBox> DepartureEventCombo;
     TSharedPtr<SSearchableComboBox> StartAnchorCombo;
     TSharedPtr<SSearchableComboBox> StartLaneCombo;
     TSharedPtr<SSearchableComboBox> DestinationAnchorCombo;

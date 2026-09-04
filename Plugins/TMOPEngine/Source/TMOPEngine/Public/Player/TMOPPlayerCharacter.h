@@ -441,6 +441,28 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
     void TogglePauseMenu();
 
+    /**
+     * Hides the normal clock/HUD and minimap for a named reason. Multiple
+     * systems may hide it simultaneously without one system revealing it too
+     * early. Use the same Reason with bShouldHide=false when that system finishes.
+     */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|HUD")
+    void SetGameplayHUDHidden(FName Reason, bool bShouldHide);
+
+    /** Convenience function for Sequencer Event Tracks. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|HUD")
+    void SetCinematicHUDHidden(bool bShouldHide);
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Player|UI|HUD")
+    bool IsGameplayHUDVisible() const { return bGameplayHUDVisible; }
+
+    /** Use this in a custom Blueprint clock widget if it was added directly to the viewport. */
+    UFUNCTION(BlueprintImplementableEvent, Category="TMOP|Player|UI|HUD")
+    void OnGameplayHUDVisibilityChanged(bool bVisible);
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|HUD")
+    bool bGameplayHUDVisible = true;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Map")
     bool OpenWorldMap();
 
@@ -473,6 +495,7 @@ public:
 
 private:
     void InitializePlayerInterface();
+    void UpdateGameplayHUDVisibility();
     void InputMove(const FInputActionValue& Value);
     void InputMoveCompleted();
     void InputLook(const FInputActionValue& Value);
@@ -521,6 +544,7 @@ private:
     bool bNewspaperPausedSimulation = false;
     bool bDropFallbackHeld = false;
     bool bInteractFallbackHeld = false;
+    TSet<FName> GameplayHUDHiddenReasons;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
     UPROPERTY(Transient)
     TObjectPtr<ACameraActor> DialogCameraActor;

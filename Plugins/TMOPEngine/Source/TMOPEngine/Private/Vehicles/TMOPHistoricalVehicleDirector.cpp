@@ -4,6 +4,7 @@
 #include "Engine/World.h"
 #include "Engine/OverlapResult.h"
 #include "EngineUtils.h"
+#include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Anchors/TMOPAnchorSubsystem.h"
@@ -79,6 +80,74 @@ bool ATMOPHistoricalVehicleDirector::ResolveTimelineEntrySecond(
     return true;
 }
 
+bool ATMOPHistoricalVehicleDirector::ResolveTimelineEntryCompletionSecond(
+    const FTMOPHistoricalVehicleRow& Profile,
+    const int32 EntryIndex,
+    int32& OutSecond) const
+{
+    if (!ResolveTimelineEntrySecond(Profile, EntryIndex, OutSecond))
+        return false;
+    if (Profile.Timeline.IsValidIndex(EntryIndex) &&
+        Profile.Timeline[EntryIndex].Action ==
+            ETMOPHistoricalVehicleAction::OffscreenTransfer)
+    {
+        OutSecond += FMath::Max(0,
+            Profile.Timeline[EntryIndex].OffscreenTransferDurationSeconds);
+    }
+    return true;
+}
+
+bool ATMOPHistoricalVehicleDirector::ResolveDrivingDepartureSecond(
+    const FTMOPHistoricalVehicleRow& Profile,
+    const int32 DrivingEntryIndex,
+    int32& OutSecond) const
+{
+    if (!Profile.Timeline.IsValidIndex(DrivingEntryIndex)) return false;
+    const FTMOPHistoricalVehicleTimelineEntry& Entry =
+        Profile.Timeline[DrivingEntryIndex];
+    const bool bDriving =
+        Entry.Action == ETMOPHistoricalVehicleAction::BeginDriving ||
+        Entry.Action == ETMOPHistoricalVehicleAction::EnterTrafficRoute;
+    if (!bDriving) return false;
+    if (!Entry.bTimeIsArrival)
+        return ResolveTimelineEntrySecond(Profile, DrivingEntryIndex, OutSecond);
+
+    if (!Entry.bUseExplicitDepartureTime)
+        return ResolveTimelineEntryCompletionSecond(
+            Profile, DrivingEntryIndex - 1, OutSecond);
+
+    if (Entry.DepartureTimingMode ==
+        ETMOPEventTimingMode::RelativeToPreviousEntry)
+    {
+        int32 PreviousCompletionSecond = INDEX_NONE;
+        if (!ResolveTimelineEntryCompletionSecond(
+                Profile, DrivingEntryIndex - 1, PreviousCompletionSecond))
+            return false;
+        OutSecond = FMath::Max(0,
+            PreviousCompletionSecond + Entry.DepartureOffsetSeconds);
+        return true;
+    }
+    if (Entry.DepartureTimingMode != ETMOPEventTimingMode::Relative)
+    {
+        OutSecond = Entry.DepartureTime.ToSecondsFromMidnight();
+        return true;
+    }
+    if (Entry.DepartureSharedEventId.IsNone() || GetGameInstance() == nullptr)
+        return false;
+    const UTMOPHistoricalEventSubsystem* Events =
+        GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>();
+    FTMOPHistoricalEventRuntime EventRuntime;
+    if (!IsValid(Events) ||
+        !Events->TryGetEventRuntime(
+            Entry.DepartureSharedEventId, EventRuntime) ||
+        !EventRuntime.bHasResolvedTime)
+        return false;
+    OutSecond = FMath::Max(0,
+        EventRuntime.ResolvedTime.ToSecondsFromMidnight() +
+        Entry.DepartureOffsetSeconds);
+    return true;
+}
+
 ATMOPHistoricalVehicleDirector::ATMOPHistoricalVehicleDirector()
 {
     PrimaryActorTick.bCanEverTick = true;
@@ -145,6 +214,7 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
         ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
         if (!IsValid(Vehicle)) continue;
+        CompleteDueOffscreenTransfer(Runtime, CurrentSecond);
         for (int32 Index = 0; Index < Runtime.Profile.Timeline.Num(); ++Index)
         {
             const FTMOPHistoricalVehicleTimelineEntry& Entry =
@@ -204,7 +274,9 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
             const bool bTimedPlacement =
                 Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
-                Entry.Action == ETMOPHistoricalVehicleAction::Park;
+                Entry.Action == ETMOPHistoricalVehicleAction::Park ||
+                Entry.Action ==
+                    ETMOPHistoricalVehicleAction::OffscreenTransfer;
             if (!bTimedPlacement) continue;
             FTransform Target = Entry.WorldTransform;
             if (Entry.PlacementMode ==
@@ -223,6 +295,48 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 Target = Entry.AnchorLocalOffset * FTransform(
                     Anchor->GetAnchorRotation(), Anchor->GetAnchorLocation(),
                     FVector::OneVector);
+            }
+            if (Entry.Action ==
+                ETMOPHistoricalVehicleAction::OffscreenTransfer)
+            {
+                if (UTMOPTrafficVehicleMovementComponent* Movement =
+                    Vehicle->FindComponentByClass<
+                        UTMOPTrafficVehicleMovementComponent>())
+                {
+                    Movement->StopDriving();
+                    Movement->PlannedLaneIds.Reset();
+                    Movement->TrafficState =
+                        ETMOPTrafficVehicleState::RouteComplete;
+                    Movement->bDetectPhysicalObstacles = false;
+                }
+                // Hide before teleporting so neither the vehicle nor an
+                // attached occupant can flash across the playable area.
+                SetVehicleAndOccupantsHidden(Vehicle, true);
+                Vehicle->SetActorEnableCollision(false);
+                Vehicle->SetActorTransform(
+                    Target, false, nullptr, ETeleportType::TeleportPhysics);
+                Runtime.bBoundaryCollisionSuppressed = false;
+                Runtime.bBoundaryVehicleHasStartedDriving = false;
+                Runtime.ActiveOffscreenTransferEntryIndex = Index;
+                Runtime.OffscreenTransferRevealSecond = EntrySecond +
+                    FMath::Max(0,
+                        Entry.OffscreenTransferDurationSeconds);
+                Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+                UE_LOG(LogTemp, Display,
+                    TEXT("TMOP VehicleOffscreenTransfer: '%s' moved to '%s' and remains hidden until %02d:%02d:%02d."),
+                    *Runtime.Profile.VehicleId.ToString(),
+                    Entry.PlacementMode ==
+                            ETMOPHistoricalVehiclePlacementMode::Anchor
+                        ? *Entry.PlacementAnchorId.ToString()
+                        : TEXT("world transform"),
+                    FTMOPTime::FromSecondsFromMidnight(
+                        Runtime.OffscreenTransferRevealSecond).Hour,
+                    FTMOPTime::FromSecondsFromMidnight(
+                        Runtime.OffscreenTransferRevealSecond).Minute,
+                    FTMOPTime::FromSecondsFromMidnight(
+                        Runtime.OffscreenTransferRevealSecond).Second);
+                CompleteDueOffscreenTransfer(Runtime, CurrentSecond);
+                continue;
             }
             if (UTMOPTrafficVehicleMovementComponent* Movement =
                 Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
@@ -297,6 +411,71 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
     }
 }
 
+void ATMOPHistoricalVehicleDirector::SetVehicleAndOccupantsHidden(
+    ATMOPVehicleBase* Vehicle, const bool bShouldHide) const
+{
+    if (!IsValid(Vehicle)) return;
+    Vehicle->SetActorHiddenInGame(bShouldHide);
+    for (UTMOPVehicleSeatComponent* Seat : Vehicle->GetVehicleSeats())
+    {
+        ACharacter* Occupant = IsValid(Seat)
+            ? Seat->GetOccupantCharacter() : nullptr;
+        if (IsValid(Occupant)) Occupant->SetActorHiddenInGame(bShouldHide);
+    }
+}
+
+void ATMOPHistoricalVehicleDirector::CompleteDueOffscreenTransfer(
+    FHistoricalVehicleRuntime& Runtime, const int32 CurrentSecond)
+{
+    if (Runtime.ActiveOffscreenTransferEntryIndex == INDEX_NONE ||
+        Runtime.OffscreenTransferRevealSecond == INDEX_NONE ||
+        CurrentSecond < Runtime.OffscreenTransferRevealSecond)
+        return;
+
+    ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
+    if (!IsValid(Vehicle))
+    {
+        Runtime.ActiveOffscreenTransferEntryIndex = INDEX_NONE;
+        Runtime.OffscreenTransferRevealSecond = INDEX_NONE;
+        return;
+    }
+
+    const int32 CompletedIndex =
+        Runtime.ActiveOffscreenTransferEntryIndex;
+    const FTMOPHistoricalVehicleTimelineEntry* TransferEntry =
+        Runtime.Profile.Timeline.IsValidIndex(CompletedIndex)
+            ? &Runtime.Profile.Timeline[CompletedIndex] : nullptr;
+    Vehicle->SetActorTickEnabled(true);
+    SetVehicleAndOccupantsHidden(Vehicle, false);
+
+    if (IsVehicleClearForCollisionRestore(Vehicle))
+    {
+        Vehicle->SetActorEnableCollision(true);
+        if (UTMOPTrafficVehicleMovementComponent* Movement =
+            Vehicle->FindComponentByClass<
+                UTMOPTrafficVehicleMovementComponent>())
+            Movement->bDetectPhysicalObstacles = true;
+        Runtime.bBoundaryCollisionSuppressed = false;
+    }
+    else
+    {
+        // Keep a transferred car ghosted until it has driven clear of an
+        // occupied entry point, exactly like a normal boundary spawn.
+        SuppressBoundaryEntryCollision(Runtime, true);
+    }
+
+    Runtime.ActiveOffscreenTransferEntryIndex = INDEX_NONE;
+    Runtime.OffscreenTransferRevealSecond = INDEX_NONE;
+    UE_LOG(LogTemp, Display,
+        TEXT("TMOP VehicleOffscreenTransfer: '%s' reappeared at '%s'."),
+        *Runtime.Profile.VehicleId.ToString(),
+        TransferEntry != nullptr &&
+                TransferEntry->PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::Anchor
+            ? *TransferEntry->PlacementAnchorId.ToString()
+            : TEXT("world transform"));
+}
+
 void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
     const int32 CurrentSecond)
 {
@@ -350,6 +529,8 @@ void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
         Runtime.bDeferredPlacedVehicle = false;
         Runtime.bBoundaryCollisionSuppressed = false;
         Runtime.bBoundaryVehicleHasStartedDriving = false;
+        Runtime.ActiveOffscreenTransferEntryIndex = INDEX_NONE;
+        Runtime.OffscreenTransferRevealSecond = INDEX_NONE;
     }
 }
 
@@ -641,10 +822,8 @@ int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
                             ETMOPHistoricalVehicleAction::EnterTrafficRoute)
                     {
                         int32 DrivingSecond = INDEX_NONE;
-                        const int32 DepartureIndex = Later.bTimeIsArrival
-                            ? LaterIndex - 1 : LaterIndex;
-                        if (!ResolveTimelineEntrySecond(
-                                Profile, DepartureIndex, DrivingSecond))
+                        if (!ResolveDrivingDepartureSecond(
+                                Profile, LaterIndex, DrivingSecond))
                             continue;
                         SpawnSecond = FMath::Max(
                             0, DrivingSecond - EntrySpawnLeadSeconds);
@@ -1190,7 +1369,11 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
         {
             const bool bPlacementEntry =
                 Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
-                Entry.Action == ETMOPHistoricalVehicleAction::Spawn;
+                Entry.Action == ETMOPHistoricalVehicleAction::Spawn ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
+                Entry.Action == ETMOPHistoricalVehicleAction::Park ||
+                Entry.Action ==
+                    ETMOPHistoricalVehicleAction::OffscreenTransfer;
             if (bPlacementEntry &&
                 Entry.PlacementMode ==
                     ETMOPHistoricalVehiclePlacementMode::Anchor &&
@@ -1198,6 +1381,13 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
             {
                 OutErrors.Add(Prefix +
                     TEXT(" has anchor placement without a Placement Anchor ID."));
+            }
+            if (Entry.Action ==
+                    ETMOPHistoricalVehicleAction::OffscreenTransfer &&
+                Entry.OffscreenTransferDurationSeconds < 0)
+            {
+                OutErrors.Add(Prefix +
+                    TEXT(" has an Offscreen Transfer with a negative duration."));
             }
         }
     }
@@ -1230,8 +1420,7 @@ ATMOPHistoricalVehicleDirector::FindDrivingEntry(
             Entry.DriverEntityId == DriverEntityId;
         if (!bDrivingAction || !bDriverMatches) continue;
         int32 DepartureSecond = INDEX_NONE;
-        const int32 DepartureIndex = Entry.bTimeIsArrival ? Index - 1 : Index;
-        if (!ResolveTimelineEntrySecond(Profile, DepartureIndex, DepartureSecond))
+        if (!ResolveDrivingDepartureSecond(Profile, Index, DepartureSecond))
             continue;
         const int32 Difference = FMath::Abs(DepartureSecond - CurrentSecond);
         if (Difference < BestDifference)
@@ -1288,6 +1477,14 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     {
         return ReportDrivingFailure(VehicleId, TEXT("VehicleNotSpawned"),
             FString::Printf(TEXT("Vehicle '%s' is not spawned."),
+                *VehicleId.ToString()));
+    }
+    if (Runtime->ActiveOffscreenTransferEntryIndex != INDEX_NONE)
+    {
+        return ReportDrivingFailure(VehicleId,
+            TEXT("VehicleOffscreenTransferActive"),
+            FString::Printf(
+                TEXT("Vehicle '%s' is still in an offscreen transfer."),
                 *VehicleId.ToString()));
     }
 
@@ -1567,8 +1764,8 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
         bool bHasArrival = false;
         if (DrivingEntry->bTimeIsArrival)
         {
-            bHasDeparture = ResolveTimelineEntrySecond(Runtime->Profile,
-                DrivingIndex - 1, DepartureSecond);
+            bHasDeparture = ResolveDrivingDepartureSecond(Runtime->Profile,
+                DrivingIndex, DepartureSecond);
             bHasArrival = ResolveTimelineEntrySecond(Runtime->Profile,
                 DrivingIndex, ArrivalSecond);
         }

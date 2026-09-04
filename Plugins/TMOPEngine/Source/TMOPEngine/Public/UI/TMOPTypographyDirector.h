@@ -30,6 +30,10 @@ public:
     float BlueprintRefreshIntervalSeconds = 0.5f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Typography")
     TMap<FName, FName> WidgetNameStyleOverrides;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Typography|Menu Colors")
+    FTMOPMenuColorPalette MenuColors;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Typography|Style Reference")
+    TArray<FTMOPTypographyUsageReference> StyleUsageReference;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Typography")
     bool ApplyTypographyStyle(UTextBlock* TextBlock, FName StyleId) const;
@@ -45,10 +49,12 @@ public:
         const FSlateFontInfo& Fallback);
     static FSlateColor ResolveColor(const UObject* WorldContext, FName StyleId,
         const FLinearColor& Fallback);
+    static FTMOPMenuColorPalette ResolveMenuColors(const UObject* WorldContext);
     static void ApplySlateStyle(const UObject* WorldContext,
         const TSharedPtr<STextBlock>& TextBlock, FName StyleId);
 
 private:
+    const FTMOPTypographyStyleRow* FindExactStyle(FName StyleId) const;
     FName InferStyleId(const UTextBlock* TextBlock) const;
     float RefreshAccumulator = 0.0f;
 };

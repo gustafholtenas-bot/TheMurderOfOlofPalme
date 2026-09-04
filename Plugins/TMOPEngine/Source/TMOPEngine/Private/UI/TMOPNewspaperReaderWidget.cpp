@@ -115,7 +115,7 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                 + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
                 [
                     SAssignNew(TitleText, STextBlock)
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Heading"),
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperTitle"),
                         FCoreStyle::GetDefaultFontStyle("Bold", 23)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.90f, 0.82f))
                 ]
@@ -143,17 +143,19 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                     SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(PageNumberText, STextBlock)
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PageNumber"),
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperPageNumber"),
                             FCoreStyle::GetDefaultFontStyle("Bold", 17))) ]
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(PageLabelText, STextBlock)
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperHint"),
                             FCoreStyle::GetDefaultFontStyle("Regular", 12)))
                         .ColorAndOpacity(FLinearColor(0.7f, 0.7f, 0.7f)) ]
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 3.0f)
                     [ SNew(STextBlock)
                         .Text(NSLOCTEXT("TMOP", "NewspaperReaderControls",
                             "Pilar/WASD: flytta  •  Mushjul/+/−: zoom  •  Q/E: vänd blad  •  Esc: stäng"))
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperHint"),
+                            FCoreStyle::GetDefaultFontStyle("Regular", 12)))
                         .ColorAndOpacity(FLinearColor(0.58f, 0.58f, 0.58f)) ]
                 ]
                 + SHorizontalBox::Slot().AutoWidth()
@@ -228,7 +230,24 @@ FReply UTMOPNewspaperReaderWidget::HandleCloseClicked()
 FReply UTMOPNewspaperReaderWidget::NativeOnKeyDown(
     const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
 {
-    const FKey Key = InKeyEvent.GetKey();
+    const FReply Reply = HandleReaderKey(InKeyEvent.GetKey());
+    return Reply.IsEventHandled()
+        ? Reply : Super::NativeOnKeyDown(InGeometry, InKeyEvent);
+}
+
+FReply UTMOPNewspaperReaderWidget::NativeOnPreviewKeyDown(
+    const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
+{
+    // Slate buttons take keyboard focus when clicked. Handle the reader's
+    // shortcuts during tunnelling so they keep working regardless of which
+    // on-screen button currently owns focus.
+    const FReply Reply = HandleReaderKey(InKeyEvent.GetKey());
+    return Reply.IsEventHandled()
+        ? Reply : Super::NativeOnPreviewKeyDown(InGeometry, InKeyEvent);
+}
+
+FReply UTMOPNewspaperReaderWidget::HandleReaderKey(const FKey& Key)
+{
     if (Key == EKeys::Escape) return HandleCloseClicked();
     if (Key == EKeys::Right || Key == EKeys::D) return PanPage(1.0f, 0.0f);
     if (Key == EKeys::Left || Key == EKeys::A) return PanPage(-1.0f, 0.0f);
@@ -242,7 +261,7 @@ FReply UTMOPNewspaperReaderWidget::NativeOnKeyDown(
         return HandleZoomInClicked();
     if (Key == EKeys::Subtract || Key == EKeys::Hyphen)
         return HandleZoomOutClicked();
-    return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
+    return FReply::Unhandled();
 }
 
 FReply UTMOPNewspaperReaderWidget::NativeOnMouseWheel(

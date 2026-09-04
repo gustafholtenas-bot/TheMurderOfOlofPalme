@@ -12,6 +12,8 @@ public class TMOPEngineEditor : ModuleRules
             "CoreUObject",
             "Engine",
             "TMOPEngine",
+            "AssetRegistry",
+            "ContentBrowser",
             "UnrealEd",
             "NavigationSystem",
             "PropertyEditor",

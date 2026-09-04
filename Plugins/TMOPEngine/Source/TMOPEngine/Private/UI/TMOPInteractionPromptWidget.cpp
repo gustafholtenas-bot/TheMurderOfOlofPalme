@@ -20,7 +20,7 @@ TSharedRef<SWidget> UTMOPInteractionPromptWidget::RebuildWidget()
                 [
                     SAssignNew(TargetReticleWidget, STextBlock)
                     .Text(FText::FromString(TEXT("□")))
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("TargetReticle"),
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("InteractionReticle"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 28)))
                     .ColorAndOpacity(FLinearColor(0.96f, 0.96f, 0.90f, 0.96f))
                     .Justification(ETextJustify::Center)
@@ -34,12 +34,12 @@ TSharedRef<SWidget> UTMOPInteractionPromptWidget::RebuildWidget()
                 [ SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(TargetTitleWidget, STextBlock).Text(TargetTitle)
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("TargetLabel"),
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("InteractionTargetName"),
                             FCoreStyle::GetDefaultFontStyle("Bold", 14)))
                         .Justification(ETextJustify::Center) ]
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                     [ SAssignNew(TargetDetailsWidget, STextBlock).Text(TargetDetails)
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("InteractionHint"),
                             FCoreStyle::GetDefaultFontStyle("Regular", 12)))
                         .ColorAndOpacity(FLinearColor(0.72f, 0.76f, 0.80f, 1.0f))
                         .Justification(ETextJustify::Center) ] ]

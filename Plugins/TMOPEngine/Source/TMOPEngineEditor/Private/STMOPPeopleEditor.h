@@ -91,6 +91,13 @@ private:
         FPersonItem Item, ESelectInfo::Type SelectInfo);
     void HandleTimelineSelectionChanged(
         FTimelineItem Item, ESelectInfo::Type SelectInfo);
+    void HandleComparisonTimelineSelectionChanged(
+        FTimelineItem Item, ESelectInfo::Type SelectInfo);
+    TSharedPtr<SWidget> BuildComparisonTimelineContextMenu();
+    void ApplyReferenceTimeToNearestTimelineEntry();
+    int32 FindClosestWorkingTimelineIndex(
+        int32 ReferenceIndex,
+        int32* OutDeltaSeconds = nullptr) const;
     void HandlePersonSearchChanged(const FText& SearchText);
     ECheckBoxState GetPeopleFilterCheckState(
         EPeopleCategoryFilter Filter) const;
@@ -164,6 +171,7 @@ private:
     bool bHasLastSavedRow = false;
     bool bRestoringPersonSelection = false;
     int32 SelectedTimelineIndex = INDEX_NONE;
+    int32 SelectedComparisonTimelineIndex = INDEX_NONE;
     FString PersonSearch;
     EPeopleCategoryFilter PeopleCategoryFilter =
         EPeopleCategoryFilter::All;

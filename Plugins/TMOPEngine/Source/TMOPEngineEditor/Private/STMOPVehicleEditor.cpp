@@ -8,6 +8,7 @@
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "IStructureDetailsView.h"
 #include "InputCoreTypes.h"
+#include "Misc/MessageDialog.h"
 #include "NavigationSystem.h"
 #include "People/TMOPPersonProfileTypes.h"
 #include "PropertyEditorModule.h"
@@ -58,7 +59,8 @@ namespace
         return Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
             Action == ETMOPHistoricalVehicleAction::Spawn ||
             Action == ETMOPHistoricalVehicleAction::Stop ||
-            Action == ETMOPHistoricalVehicleAction::Park;
+            Action == ETMOPHistoricalVehicleAction::Park ||
+            Action == ETMOPHistoricalVehicleAction::OffscreenTransfer;
     }
 
     FString FormatClockSecond(const int32 Second)
@@ -538,6 +540,36 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
                     .OnGenerateWidget(this, &STMOPVehicleEditor::GenerateEventOption)
                     .OnSelectionChanged(this, &STMOPVehicleEditor::OnEventSelected)
                     [ SNew(STextBlock).Text(this, &STMOPVehicleEditor::GetSelectedEventText) ] ]
+                + SVerticalBox::Slot().AutoHeight().Padding(7,5,7,2)
+                [ SNew(STextBlock).Text(LOCTEXT("DepartureSharedEvent",
+                    "DEPARTURE SHARED EVENT (TIME IS ARRIVAL)"))
+                    .Font(FAppStyle::GetFontStyle("HeadingExtraSmall"))
+                    .Visibility_Lambda([this]()
+                    {
+                        if (!EntryStruct.IsValid()) return EVisibility::Collapsed;
+                        const auto* Entry = reinterpret_cast<const
+                            FTMOPHistoricalVehicleTimelineEntry*>(
+                                EntryStruct->GetStructMemory());
+                        return IsDriving(Entry->Action) && Entry->bTimeIsArrival
+                            ? EVisibility::Visible : EVisibility::Collapsed;
+                    }) ]
+                + SVerticalBox::Slot().AutoHeight().Padding(7,2,7,6)
+                [ SAssignNew(DepartureEventCombo, SSearchableComboBox)
+                    .OptionsSource(&EventItems)
+                    .OnGenerateWidget(this, &STMOPVehicleEditor::GenerateEventOption)
+                    .OnSelectionChanged(this,
+                        &STMOPVehicleEditor::OnDepartureEventSelected)
+                    .Visibility_Lambda([this]()
+                    {
+                        if (!EntryStruct.IsValid()) return EVisibility::Collapsed;
+                        const auto* Entry = reinterpret_cast<const
+                            FTMOPHistoricalVehicleTimelineEntry*>(
+                                EntryStruct->GetStructMemory());
+                        return IsDriving(Entry->Action) && Entry->bTimeIsArrival
+                            ? EVisibility::Visible : EVisibility::Collapsed;
+                    })
+                    [ SNew(STextBlock).Text(this,
+                        &STMOPVehicleEditor::GetSelectedDepartureEventText) ] ]
                 + SVerticalBox::Slot().FillHeight(0.48f).Padding(4)
                 [ SAssignNew(RouteMap, STMOPVehicleRouteMap) ]
                 + SVerticalBox::Slot().AutoHeight().Padding(7,2)
@@ -722,6 +754,7 @@ void STMOPVehicleEditor::RefreshEventOptions()
     EventItems.Sort([](const FEventItem& A, const FEventItem& B)
         { return A.IsValid() && B.IsValid() ? *A < *B : A.IsValid(); });
     if (EventCombo.IsValid()) EventCombo->RefreshOptions();
+    if (DepartureEventCombo.IsValid()) DepartureEventCombo->RefreshOptions();
 }
 
 TSharedRef<SWidget> STMOPVehicleEditor::GenerateAnchorOption(
@@ -799,6 +832,40 @@ FText STMOPVehicleEditor::GetSelectedEventText() const
     return Entry->SharedEventId.IsNone()
         ? LOCTEXT("SearchVehicleEvent", "Type to search shared events...")
         : FText::FromName(Entry->SharedEventId);
+}
+
+void STMOPVehicleEditor::OnDepartureEventSelected(
+    const FEventItem Item, ESelectInfo::Type)
+{
+    if (!Item.IsValid() || !EntryStruct.IsValid()) return;
+    const FName* EventId = EventIdsByLabel.Find(*Item);
+    if (EventId == nullptr) return;
+    auto* Entry = reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(
+        EntryStruct->GetStructMemory());
+    if (!IsDriving(Entry->Action)) return;
+    Entry->bTimeIsArrival = true;
+    Entry->bUseExplicitDepartureTime = true;
+    Entry->DepartureTimingMode = ETMOPEventTimingMode::Relative;
+    Entry->DepartureSharedEventId = *EventId;
+    EntryDetails->SetStructureData(EntryStruct);
+    CommitEntry();
+    RebuildValidation();
+    RebuildRoutePreview();
+    SetStatus(FText::FromString(TEXT("Selected departure shared event: ") +
+        EventId->ToString()), FLinearColor(.55f,.8f,.55f));
+}
+
+FText STMOPVehicleEditor::GetSelectedDepartureEventText() const
+{
+    if (!EntryStruct.IsValid())
+        return LOCTEXT("SelectEntryForDepartureEvent",
+            "Select a driving timeline entry");
+    const auto* Entry = reinterpret_cast<const
+        FTMOPHistoricalVehicleTimelineEntry*>(
+            EntryStruct->GetStructMemory());
+    return Entry->DepartureSharedEventId.IsNone()
+        ? LOCTEXT("SearchDepartureEvent", "Type to search departure event...")
+        : FText::FromName(Entry->DepartureSharedEventId);
 }
 
 TSharedRef<SWidget> STMOPVehicleEditor::GenerateLaneOption(
@@ -1306,6 +1373,9 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateTimelineRow(const FTimelineIte
     FString Badge; FString Tip;
     if (E&&IsDriving(E->Action)) { double D=0,K=0; int32 Departure=0,Arrival=0,S=0; if(CalculateDrive(WorkingRow,I,D,Departure,Arrival,S,K,Fail)){Badge=FString::Printf(TEXT("DEP %s  ARR %s  REQ %.1f km/h"),*FormatClockSecond(Departure),*FormatClockSecond(Arrival),K);const float SetKmh=E->CruiseSpeedOverrideKmh>0?E->CruiseSpeedOverrideKmh:DrivingPresetSpeedKmh(E->DrivingPreset);if(SetKmh>0){const int32 EstimatedSeconds=FMath::RoundToInt((D/100000.0)/(SetKmh/3600.0));const int32 EstimatedArrival=Departure+EstimatedSeconds;Badge+=FString::Printf(TEXT("  SET %.1f  ETA %s"),SetKmh,*FormatClockSecond(EstimatedArrival));Tip=FString::Printf(TEXT("%.2f km. Selected speed estimates arrival %+d seconds versus plan."),D/100000.0,EstimatedArrival-Arrival);}else Tip=FString::Printf(TEXT("%.2f km over %d seconds."),D/100000.0,S);Color=K<=50?FLinearColor(0.05f,.42f,.12f):K<=90?FLinearColor(.78f,.38f,.03f):FLinearColor(.75f,.05f,.03f);if(E->bIgnoreOneWayRestrictions)Tip+=TEXT(" Ignores restricted lane connections.");if(E->bRunRedLights)Tip+=TEXT(" May run red lights.");} else {Badge=TEXT("SPEED ?");Tip=Fail;Color=FLinearColor(.55f,.12f,.08f);} }
     FString Summary=E?VehicleActionLabel(E->Action):FString(); if(E&&IsDriving(E->Action)&&!E->RouteSegmentName.IsEmpty())Summary+=TEXT(" • ")+E->RouteSegmentName.ToString();if(E&&!E->PlacementAnchorId.IsNone()) Summary+=TEXT(" → ")+E->PlacementAnchorId.ToString(); if(E&&!E->OrderedLaneIds.IsEmpty()) Summary+=FString::Printf(TEXT(" • %d lanes"),E->OrderedLaneIds.Num());if(E&&IsDriving(E->Action)&&E->DrivingPreset!=ETMOPVehicleDrivingPreset::AutomaticFromTimeline)Summary+=TEXT(" • ")+DrivingPresetLabel(E->DrivingPreset);
+    if (E && E->Action == ETMOPHistoricalVehicleAction::OffscreenTransfer)
+        Summary += FString::Printf(TEXT(" • hidden %d s"),
+            FMath::Max(0, E->OffscreenTransferDurationSeconds));
     if (E && E->TimingMode == ETMOPEventTimingMode::Relative)
         Summary += FString::Printf(TEXT(" • @ %s %+d s"),
             *E->SharedEventId.ToString(), E->EventOffsetSeconds);
@@ -1315,6 +1385,9 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateTimelineRow(const FTimelineIte
             E->EventOffsetSeconds);
     if (E && IsDriving(E->Action) && E->bTimeIsArrival)
         Summary += TEXT(" • TIME IS ARRIVAL");
+    if (E && IsDriving(E->Action) && E->bTimeIsArrival &&
+        E->bUseExplicitDepartureTime)
+        Summary += TEXT(" • DEPARTURE SET ON ROW");
     const int32 N=FMath::Max(0,Sec)%(24*3600); const FString Time=HasTime?FString::Printf(TEXT("%02d:%02d:%02d"),N/3600,(N/60)%60,N%60):TEXT("TIME ?");
     return SNew(STableRow<FTimelineItem>,Owner)[SNew(SBorder).Padding(6).BorderImage(FAppStyle::GetBrush("Brushes.Panel"))[SNew(SVerticalBox)
         +SVerticalBox::Slot().AutoHeight()[SNew(SHorizontalBox)+SHorizontalBox::Slot().AutoWidth()[SNew(STextBlock).Text(FText::AsNumber(I)).ColorAndOpacity(FSlateColor::UseSubduedForeground())]+SHorizontalBox::Slot().FillWidth(1).Padding(7,0)[SNew(STextBlock).Text(E?FText::FromName(E->EntryId):FText::GetEmpty()).ColorAndOpacity(Color)]+SHorizontalBox::Slot().AutoWidth()[SNew(STextBlock).Text(FText::FromString(Time)).ColorAndOpacity(FLinearColor(1,.72f,.05f))]]
@@ -1382,11 +1455,20 @@ FReply STMOPVehicleEditor::SaveVehicle()
     CurrentErrors = ValidateRow(WorkingRow);
     const FString* BlockingError = CurrentErrors.FindByPredicate(
         [](const FString& Message) { return Message.StartsWith(TEXT("ERROR")); });
+    bool bSavedWithValidationErrors = false;
     if (BlockingError)
     {
-        SetStatus(FText::FromString(TEXT("Not saved: ") + *BlockingError),
-            FLinearColor::Red);
-        return FReply::Handled();
+        const FString Prompt = FString::Printf(
+            TEXT("The vehicle has validation errors.\n\nFirst error:\n%s\n\nSave anyway?"),
+            **BlockingError);
+        if (FMessageDialog::Open(EAppMsgType::YesNo,
+            FText::FromString(Prompt)) != EAppReturnType::Yes)
+        {
+            SetStatus(FText::FromString(TEXT("Not saved: ") + *BlockingError),
+                FLinearColor::Red);
+            return FReply::Handled();
+        }
+        bSavedWithValidationErrors = true;
     }
 
     const FName NewRowName = WorkingRow.VehicleId;
@@ -1417,7 +1499,9 @@ FReply STMOPVehicleEditor::SaveVehicle()
     SavedRow = WorkingRow;
     RefreshVehicles();
     RefreshTimeline();
-    SetStatus(LOCTEXT("Saved", "Vehicle saved. Save the project to write the asset to disk."),
+    SetStatus(bSavedWithValidationErrors
+        ? LOCTEXT("SavedWithErrors", "Vehicle saved with validation errors. Save the project to write the asset to disk.")
+        : LOCTEXT("Saved", "Vehicle saved. Save the project to write the asset to disk."),
         CurrentErrors.IsEmpty() ? FLinearColor(.4f,1,.4f) : FLinearColor(1,.65f,.1f));
     return FReply::Handled();
 }
@@ -1529,9 +1613,60 @@ bool STMOPVehicleEditor::ResolveTime(const FTMOPHistoricalVehicleRow& Row,const 
     return ResolveEntry(I, Out);
 }
 
+bool STMOPVehicleEditor::ResolveEntryCompletionTime(
+    const FTMOPHistoricalVehicleRow& Row, const int32 Index,
+    int32& OutSecond, FString* Failure) const
+{
+    if (!ResolveTime(Row, Index, OutSecond, Failure)) return false;
+    if (Row.Timeline.IsValidIndex(Index) &&
+        Row.Timeline[Index].Action ==
+            ETMOPHistoricalVehicleAction::OffscreenTransfer)
+    {
+        OutSecond += FMath::Max(0,
+            Row.Timeline[Index].OffscreenTransferDurationSeconds);
+    }
+    return true;
+}
+
+bool STMOPVehicleEditor::ResolveDrivingDepartureTime(
+    const FTMOPHistoricalVehicleRow& Row, const int32 Index,
+    int32& OutSecond, FString* Failure) const
+{
+    if (!Row.Timeline.IsValidIndex(Index) ||
+        !IsDriving(Row.Timeline[Index].Action))
+    {
+        if (Failure) *Failure = TEXT("Not a driving entry.");
+        return false;
+    }
+    const FTMOPHistoricalVehicleTimelineEntry& Entry = Row.Timeline[Index];
+    if (!Entry.bTimeIsArrival)
+        return ResolveTime(Row, Index, OutSecond, Failure);
+    if (!Entry.bUseExplicitDepartureTime)
+        return ResolveEntryCompletionTime(Row, Index - 1, OutSecond, Failure);
+    if (Entry.DepartureTimingMode ==
+        ETMOPEventTimingMode::RelativeToPreviousEntry)
+    {
+        if (!ResolveEntryCompletionTime(Row, Index - 1, OutSecond, Failure))
+            return false;
+        OutSecond += Entry.DepartureOffsetSeconds;
+        return true;
+    }
+
+    // Reuse the normal time resolver so absolute and shared-event departure
+    // references follow exactly the same rules as the row's arrival time.
+    FTMOPHistoricalVehicleRow DepartureRow = Row;
+    FTMOPHistoricalVehicleTimelineEntry& DepartureEntry =
+        DepartureRow.Timeline[Index];
+    DepartureEntry.TimingMode = Entry.DepartureTimingMode;
+    DepartureEntry.Time = Entry.DepartureTime;
+    DepartureEntry.SharedEventId = Entry.DepartureSharedEventId;
+    DepartureEntry.EventOffsetSeconds = Entry.DepartureOffsetSeconds;
+    return ResolveTime(DepartureRow, Index, OutSecond, Failure);
+}
+
 bool STMOPVehicleEditor::CalculateDrive(const FTMOPHistoricalVehicleRow& Row,const int32 I,double& Distance,int32& Departure,int32& Arrival,int32& Duration,double& Kmh,FString& Failure)const
 {
-    Distance=0;Departure=0;Arrival=0;Duration=0;Kmh=0;Failure.Reset();if(!Row.Timeline.IsValidIndex(I)||!IsDriving(Row.Timeline[I].Action)){Failure=TEXT("Not a driving entry.");return false;}const auto&E=Row.Timeline[I];if(E.OrderedLaneIds.IsEmpty()){Failure=TEXT("No Ordered Lane IDs.");return false;}UWorld*W=GEditor?GEditor->GetEditorWorldContext().World():nullptr;if(!W){Failure=TEXT("Open the level containing the lanes.");return false;}TMap<FName,UTMOPTrafficLaneComponent*>Lanes;for(TActorIterator<AActor>It(W);It;++It){TArray<UTMOPTrafficLaneComponent*>Cs;It->GetComponents<UTMOPTrafficLaneComponent>(Cs);for(auto*C:Cs)if(IsValid(C)&&!C->LaneId.IsNone())Lanes.Add(C->LaneId,C);}for(const FName L:E.OrderedLaneIds){auto**C=Lanes.Find(L);if(!C||!IsValid(*C)){Failure=FString::Printf(TEXT("Lane '%s' is missing."),*L.ToString());return false;}Distance+=(*C)->GetSplineLength();}if(E.bTimeIsArrival){if(I<=0||!ResolveTime(Row,I-1,Departure)){Failure=TEXT("Time Is Arrival needs a valid previous entry as departure.");return false;}if(!ResolveTime(Row,I,Arrival)){Failure=TEXT("Arrival time cannot be resolved.");return false;}}else{if(!ResolveTime(Row,I,Departure)){Failure=TEXT("Departure time cannot be resolved.");return false;}int32 StopIndex=INDEX_NONE;for(int32 N=I+1;N<Row.Timeline.Num();++N)if(IsStop(Row.Timeline[N].Action)){StopIndex=N;break;}if(StopIndex==INDEX_NONE||!ResolveTime(Row,StopIndex,Arrival)){Failure=TEXT("No later Stop/Park with a valid arrival time.");return false;}}Duration=Arrival-Departure;if(Duration<=0){Failure=TEXT("Arrival occurs before departure.");return false;}Kmh=(Distance/100000.0)/(Duration/3600.0);return true;
+    Distance=0;Departure=0;Arrival=0;Duration=0;Kmh=0;Failure.Reset();if(!Row.Timeline.IsValidIndex(I)||!IsDriving(Row.Timeline[I].Action)){Failure=TEXT("Not a driving entry.");return false;}const auto&E=Row.Timeline[I];if(E.OrderedLaneIds.IsEmpty()){Failure=TEXT("No Ordered Lane IDs.");return false;}UWorld*W=GEditor?GEditor->GetEditorWorldContext().World():nullptr;if(!W){Failure=TEXT("Open the level containing the lanes.");return false;}TMap<FName,UTMOPTrafficLaneComponent*>Lanes;for(TActorIterator<AActor>It(W);It;++It){TArray<UTMOPTrafficLaneComponent*>Cs;It->GetComponents<UTMOPTrafficLaneComponent>(Cs);for(auto*C:Cs)if(IsValid(C)&&!C->LaneId.IsNone())Lanes.Add(C->LaneId,C);}for(const FName L:E.OrderedLaneIds){auto**C=Lanes.Find(L);if(!C||!IsValid(*C)){Failure=FString::Printf(TEXT("Lane '%s' is missing."),*L.ToString());return false;}Distance+=(*C)->GetSplineLength();}if(E.bTimeIsArrival){if(!ResolveDrivingDepartureTime(Row,I,Departure,&Failure)){if(Failure.IsEmpty())Failure=TEXT("Time Is Arrival needs a valid departure time.");return false;}if(!ResolveTime(Row,I,Arrival)){Failure=TEXT("Arrival time cannot be resolved.");return false;}}else{if(!ResolveTime(Row,I,Departure)){Failure=TEXT("Departure time cannot be resolved.");return false;}int32 StopIndex=INDEX_NONE;for(int32 N=I+1;N<Row.Timeline.Num();++N)if(IsStop(Row.Timeline[N].Action)){StopIndex=N;break;}if(StopIndex==INDEX_NONE||!ResolveTime(Row,StopIndex,Arrival)){Failure=TEXT("No later Stop/Park with a valid arrival time.");return false;}}Duration=Arrival-Departure;if(Duration<=0){Failure=TEXT("Arrival occurs before departure.");return false;}Kmh=(Distance/100000.0)/(Duration/3600.0);return true;
 }
 
 bool STMOPVehicleEditor::ResolvePersonTime(
@@ -1880,8 +2015,7 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                 *Entry.EntryId.ToString()));
         EntryIds.Add(Entry.EntryId);
 
-        if ((Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
-             Entry.Action == ETMOPHistoricalVehicleAction::Spawn || IsStop(Entry.Action)) &&
+        if (HasPlacement(Entry.Action) &&
             Entry.PlacementMode == ETMOPHistoricalVehiclePlacementMode::Anchor &&
             Entry.PlacementAnchorId.IsNone())
             Results.Add(FString::Printf(
@@ -1893,6 +2027,11 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                 TEXT("ERROR Timeline[%d]: anchor '%s' is not present in the open level."),
                 Index, *Entry.PlacementAnchorId.ToString()));
 
+        if (Entry.Action == ETMOPHistoricalVehicleAction::OffscreenTransfer &&
+            Entry.OffscreenTransferDurationSeconds < 0)
+            Results.Add(FString::Printf(
+                TEXT("ERROR Timeline[%d]: offscreen transfer duration cannot be negative."),
+                Index));
         int32 ResolvedSecond = INDEX_NONE;
         FString TimingFailure;
         if (!ResolveTime(Row, Index, ResolvedSecond, &TimingFailure))
@@ -1908,8 +2047,33 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                     Index));
         }
 
+        if (Entry.Action == ETMOPHistoricalVehicleAction::OffscreenTransfer &&
+            ResolvedSecond != INDEX_NONE)
+        {
+            const int32 RevealSecond = ResolvedSecond +
+                FMath::Max(0, Entry.OffscreenTransferDurationSeconds);
+            for (int32 LaterIndex = Index + 1;
+                LaterIndex < Row.Timeline.Num(); ++LaterIndex)
+            {
+                const FTMOPHistoricalVehicleTimelineEntry& Later =
+                    Row.Timeline[LaterIndex];
+                if (!IsDriving(Later.Action)) continue;
+                int32 DepartureSecond = INDEX_NONE;
+                if (ResolveDrivingDepartureTime(Row, LaterIndex, DepartureSecond) &&
+                    DepartureSecond < RevealSecond)
+                    Results.Add(FString::Printf(
+                        TEXT("ERROR Timeline[%d]: driving begins at %s, before offscreen transfer [%d] finishes at %s."),
+                        LaterIndex, *FormatClockSecond(DepartureSecond), Index,
+                        *FormatClockSecond(RevealSecond)));
+                break;
+            }
+        }
+
         if (!IsDriving(Entry.Action)) continue;
-        if (Entry.bTimeIsArrival && Index == 0)
+        if (Entry.bTimeIsArrival && Index == 0 &&
+            (!Entry.bUseExplicitDepartureTime ||
+             Entry.DepartureTimingMode ==
+                ETMOPEventTimingMode::RelativeToPreviousEntry))
             Results.Add(FString::Printf(
                 TEXT("ERROR Timeline[%d]: Time Is Arrival needs a previous departure entry."),
                 Index));
@@ -2003,6 +2167,7 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                 ? PersonRowName : Person->EntityId;
             bool bInside = false;
             bool bTargetsVehicleBoarding = false;
+            int32 LatestBoardingSecond = INDEX_NONE;
             FName SeatId = NAME_None;
             for (int32 PersonIndex = 0;
                 PersonIndex < Person->Timeline.Num(); ++PersonIndex)
@@ -2014,7 +2179,12 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                     continue;
                 if (PersonEntry.TargetEntityId != Row.VehicleId) continue;
                 if (PersonEntry.Action == ETMOPPersonTimelineAction::EnterVehicle)
+                {
                     bTargetsVehicleBoarding = true;
+                    if (PersonSecond <= Departure)
+                        LatestBoardingSecond = FMath::Max(
+                            LatestBoardingSecond, PersonSecond);
+                }
                 if (PersonEntry.Action == ETMOPPersonTimelineAction::BeginDriving &&
                     FMath::Abs(PersonSecond - Departure) <= 10)
                 {
@@ -2048,14 +2218,32 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                     SeatId = PersonEntry.TargetSeatId;
                 }
             }
+            bool bAlreadyCarriedByEarlierSegment = false;
+            if (bInside && LatestBoardingSecond != INDEX_NONE)
+            {
+                for (int32 EarlierIndex = 0; EarlierIndex < Index;
+                    ++EarlierIndex)
+                {
+                    if (!IsDriving(Row.Timeline[EarlierIndex].Action)) continue;
+                    int32 EarlierDeparture = INDEX_NONE;
+                    if (ResolveDrivingDepartureTime(Row, EarlierIndex,
+                        EarlierDeparture) &&
+                        EarlierDeparture >= LatestBoardingSecond &&
+                        EarlierDeparture < Departure)
+                    {
+                        bAlreadyCarriedByEarlierSegment = true;
+                        break;
+                    }
+                }
+            }
             FBoardingFeasibility Boarding;
-            if (bTargetsVehicleBoarding &&
+            if (bTargetsVehicleBoarding && !bAlreadyCarriedByEarlierSegment &&
                 CalculateBoardingFeasibility(Row, Index, *Person, Boarding))
             {
                 if (Boarding.MarginSeconds < -10 &&
                     !Boarding.bUsedStraightLineFallback)
                     Results.Add(FString::Printf(
-                        TEXT("ERROR Timeline[%d]: '%s' cannot reach the car by departure; needs %d s, has %d s (%d s late)."),
+                        TEXT("WARNING Timeline[%d]: '%s' cannot reach the car by departure; needs %d s, has %d s (%d s late)."),
                         Index, *PersonId.ToString(), Boarding.RequiredSeconds,
                         Boarding.AvailableSeconds, -Boarding.MarginSeconds));
                 else if (Boarding.MarginSeconds < 0)
@@ -2277,6 +2465,7 @@ FString STMOPVehicleEditor::BuildOccupantsText(const int32 TimelineIndex)const
             ? PersonId.ToString() : Person->FullName.ToString();
         bool bInside = false;
         bool bHasBoarding = false;
+        int32 LatestBoardingSecond = INDEX_NONE;
         FName SeatId = NAME_None;
         for (int32 Index = 0; Index < Person->Timeline.Num(); ++Index)
         {
@@ -2285,7 +2474,12 @@ FString STMOPVehicleEditor::BuildOccupantsText(const int32 TimelineIndex)const
             int32 Second = 0;
             if (!ResolvePersonTime(*Person, Index, Second)) continue;
             if (Entry.Action == ETMOPPersonTimelineAction::EnterVehicle)
+            {
                 bHasBoarding = true;
+                if (Second <= At)
+                    LatestBoardingSecond = FMath::Max(
+                        LatestBoardingSecond, Second);
+            }
             if (Second > At) continue;
             if (Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
                 Entry.LocationType == ETMOPPersonLocationType::VehicleSeat)
@@ -2294,7 +2488,26 @@ FString STMOPVehicleEditor::BuildOccupantsText(const int32 TimelineIndex)const
             { bInside = false; SeatId = NAME_None; }
         }
         FString FeasibilityText;
-        if (bDriving && bHasBoarding)
+        bool bAlreadyCarriedByEarlierSegment = false;
+        if (bDriving && bInside && LatestBoardingSecond != INDEX_NONE)
+        {
+            for (int32 EarlierIndex = 0; EarlierIndex < TimelineIndex;
+                ++EarlierIndex)
+            {
+                if (!IsDriving(WorkingRow.Timeline[EarlierIndex].Action))
+                    continue;
+                int32 EarlierDeparture = INDEX_NONE;
+                if (ResolveDrivingDepartureTime(WorkingRow, EarlierIndex,
+                    EarlierDeparture) &&
+                    EarlierDeparture >= LatestBoardingSecond &&
+                    EarlierDeparture < At)
+                {
+                    bAlreadyCarriedByEarlierSegment = true;
+                    break;
+                }
+            }
+        }
+        if (bDriving && bHasBoarding && !bAlreadyCarriedByEarlierSegment)
         {
             FBoardingFeasibility Boarding;
             if (CalculateBoardingFeasibility(

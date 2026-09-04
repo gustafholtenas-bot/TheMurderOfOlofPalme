@@ -97,7 +97,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                         &UTMOPAgentInfoChartWidget::HandleCloseClicked) ] ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 4, 0, 4)
                 [ SAssignNew(IdentityText, STextBlock)
-                  .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                  .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoIdentity"),
                       FCoreStyle::GetDefaultFontStyle("Regular", 15)))
                   .ColorAndOpacity(FLinearColor(0.68f, 0.76f, 0.82f)) ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 3, 0, 14)
@@ -130,7 +130,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       "KÄLLOR")) ]
                   + SScrollBox::Slot().Padding(0, 0, 12, 5)
                   [ SAssignNew(SourceText, STextBlock)
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("Caption"),
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoSources"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 13)))
                     .ColorAndOpacity(FLinearColor(0.62f, 0.69f, 0.74f))
                     .AutoWrapText(true).WrapTextAt(820.0f) ] ] ] ] ] ];

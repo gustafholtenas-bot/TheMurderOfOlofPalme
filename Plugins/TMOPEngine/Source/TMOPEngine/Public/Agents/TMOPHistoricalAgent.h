@@ -20,6 +20,8 @@ class UTMOPPersonProfileComponent;
 class USkeletalMeshComponent;
 class UMaterialInterface;
 class UStaticMeshComponent;
+class UCurveFloat;
+class UMeshComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FTMOPAgentStateChangedSignature,
@@ -34,6 +36,14 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     OldActivity,
     ETMOPAgentActivityState,
     NewActivity);
+
+UENUM(BlueprintType)
+enum class ETMOPPersonLabelTextSize : uint8
+{
+    Small UMETA(DisplayName="Small"),
+    Medium UMETA(DisplayName="Medium"),
+    Large UMETA(DisplayName="Large")
+};
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPHistoricalAgent : public ACharacter
@@ -268,6 +278,62 @@ public:
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Debug")
     void SetNameLabelVisible(bool bVisible);
 
+    /**
+     * Material-driven appearance transition used by timeline spawning. Character
+     * materials should read either VisibilityFadeMaterialParameter or the custom
+     * primitive-data slot and feed it through DitherTemporalAA to Opacity Mask.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade")
+    bool bEnableSpawnFade = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade")
+    bool bEnableDespawnFade = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade",
+        meta=(ClampMin="0.0", ClampMax="10.0", Units="s"))
+    float SpawnFadeDurationSeconds = 0.75f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade",
+        meta=(ClampMin="0.0", ClampMax="10.0", Units="s"))
+    float DespawnFadeDurationSeconds = 0.75f;
+
+    /** Optional 0..1 timing curve. A smooth ease is used when this is empty. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade")
+    TObjectPtr<UCurveFloat> VisibilityFadeCurve;
+
+    /** Scalar parameter supported by ordinary character material instances. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade")
+    FName VisibilityFadeMaterialParameter = TEXT("TMOP_VisibilityFade");
+
+    /**
+     * Also writes the alpha to Custom Primitive Data. This avoids one dynamic
+     * material per person when the shared master material reads this index.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade")
+    bool bWriteVisibilityFadeToCustomPrimitiveData = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade",
+        meta=(EditCondition="bWriteVisibilityFadeToCustomPrimitiveData", ClampMin="0", ClampMax="31"))
+    int32 VisibilityFadeCustomPrimitiveDataIndex = 0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Agent|Visibility Fade")
+    bool bWriteVisibilityFadeMaterialParameter = false;
+
+    /** Replays fade-in after profile-driven clothing has been attached. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Agent|Visibility Fade")
+    void PlaySpawnFade();
+
+    /** Fades out, disables interaction/collision, then destroys the actor. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Agent|Visibility Fade")
+    void RequestDespawnWithFade();
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Agent|Visibility Fade")
+    bool IsDespawningWithFade() const { return bDestroyAfterVisibilityFade; }
+
+    /** Per-user text-size choice. Large preserves the original authored size. */
+    static ETMOPPersonLabelTextSize GetSavedNameLabelTextSize();
+    static void SaveNameLabelTextSize(ETMOPPersonLabelTextSize Size);
+
     /** Updates the category used for automatic name-label coloring. */
     UFUNCTION(BlueprintCallable, Category = "TMOP|Agent|Debug")
     void SetPersonCategoryId(FName InCategoryId);
@@ -437,6 +503,13 @@ protected:
         ETMOPAgentActivityState NewActivity);
 
 private:
+    void UpdateVisibilityFade(float DeltaSeconds);
+    void ApplyVisibilityFade(float Alpha);
+    void RefreshVisibilityFadeMeshes(bool bForceAll);
+    void ApplyVisibilityFadeToMesh(UMeshComponent* MeshComponent);
+    void BeginVisibilityFade(float TargetAlpha, float DurationSeconds,
+        bool bDestroyWhenFinished);
+
     void UpdateHeldItemVisibility();
     bool IsHeldItemVisibleNow(const FTMOPHeldItemDefinition& Item) const;
     FTMOPHeldItemDefinition ActiveLeftHandItem;
@@ -488,4 +561,13 @@ private:
     UPROPERTY(Transient)
     TObjectPtr<UAudioComponent> ActiveSpeechAudio;
     FQuat BaseMeshRelativeRotation = FQuat::Identity;
+    float CurrentVisibilityFadeAlpha = 1.0f;
+    float VisibilityFadeStartAlpha = 1.0f;
+    float VisibilityFadeTargetAlpha = 1.0f;
+    float VisibilityFadeElapsedSeconds = 0.0f;
+    float ActiveVisibilityFadeDurationSeconds = 0.0f;
+    bool bVisibilityFadeActive = false;
+    bool bDestroyAfterVisibilityFade = false;
+    float VisibilityFadeMeshRefreshAccumulator = 0.0f;
+    TSet<TWeakObjectPtr<UMeshComponent>> VisibilityFadeInitializedMeshes;
 };

@@ -1,0 +1,54 @@
+[
+	{
+		"Name": "BACKGROUND_SCORE_2300",
+		"AudioId": "MUSIC_BACKGROUND_2300",
+		"StartSecond": 82800,
+		"EndSecond": 84090,
+		"bBackground2D": true,
+		"AnchorId": "None",
+		"VolumeMultiplier": 1,
+		"FadeInSeconds": 3,
+		"FadeOutSeconds": 2,
+		"bEnabled": true,
+		"Notes": "Pre-murder background score."
+	},
+	{
+		"Name": "PALME_SHOT_1_AUDIO",
+		"AudioId": "PALME_SHOT_1",
+		"StartSecond": 84090,
+		"EndSecond": 84091,
+		"bBackground2D": false,
+		"AnchorId": "Mordplatsen",
+		"VolumeMultiplier": 1,
+		"FadeInSeconds": 0,
+		"FadeOutSeconds": 0,
+		"bEnabled": true,
+		"Notes": "First shot, 23:21:30."
+	},
+	{
+		"Name": "PALME_SHOT_2_AUDIO",
+		"AudioId": "PALME_SHOT_2",
+		"StartSecond": 84091,
+		"EndSecond": 84092,
+		"bBackground2D": false,
+		"AnchorId": "Mordplatsen",
+		"VolumeMultiplier": 1,
+		"FadeInSeconds": 0,
+		"FadeOutSeconds": 0,
+		"bEnabled": true,
+		"Notes": "Temporary reconstructed one-second offset."
+	},
+	{
+		"Name": "BACKGROUND_SCORE_POST_SHOT",
+		"AudioId": "MUSIC_BACKGROUND_POST_SHOT",
+		"StartSecond": 84092,
+		"EndSecond": 85500,
+		"bBackground2D": true,
+		"AnchorId": "None",
+		"VolumeMultiplier": 1,
+		"FadeInSeconds": 2,
+		"FadeOutSeconds": 3,
+		"bEnabled": true,
+		"Notes": "Post-murder background score."
+	}
+]

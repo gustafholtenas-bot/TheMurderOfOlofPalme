@@ -18,7 +18,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTMOPPauseMenuRequestSignature);
 UENUM()
 enum class ETMOPPauseHubSection : uint8
 {
-    Inventory, Evidence, Sources, Publications, Settings, Controls, SaveLoad, Quit,
+    Inventory, Evidence, Sources, Publications, Map, Settings, Controls, SaveLoad, Quit,
     MoveInTime
 };
 
@@ -40,6 +40,11 @@ public:
     FTMOPPauseMenuRequestSignature OnLoadRequested;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Save")
     FString SaveSlotName = TEXT("TMOP_QuickSave");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Save")
+    FString ManualSaveSlotPrefix = TEXT("TMOP_Manual_");
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Save",
+        meta=(ClampMin="1", ClampMax="99"))
+    int32 ManualSaveSlotCount = 12;
     UFUNCTION(BlueprintCallable, Category="TMOP|UI|Pause|Save")
     bool LoadQuickSave(const FString& SlotName);
     UFUNCTION(BlueprintCallable, Category="TMOP|UI|Pause")
@@ -63,10 +68,17 @@ private:
     FReply HandleOpenPublication(UTMOPNewspaperItemDefinition* Newspaper);
     FReply HandleGraphicsQuality(int32 Quality);
     FReply HandleToggleWorldLabels();
+    FReply HandlePersonLabelTextSize(int32 SizeIndex);
     FReply HandleToggleMinimap();
+    FReply HandleToggleOlofLocationLine();
+    FReply HandleToggleObservationLines();
     FReply HandleToggleVSync();
     FReply HandleSaveClicked();
     FReply HandleLoadClicked();
+    FReply HandleCreateNewSaveClicked();
+    FReply HandleOverwriteSaveClicked(FString SlotName);
+    FReply HandleLoadSaveSlotClicked(FString SlotName);
+    FReply HandleDeleteSaveSlotClicked(FString SlotName);
     FReply HandleQuitClicked();
     FReply HandleMoveInTimeClicked();
     void ShowSection(ETMOPPauseHubSection Section);
@@ -93,4 +105,5 @@ private:
     FName SelectedSourceMainSection = NAME_None;
     FName SelectedSourceSeries = NAME_None;
     bool bWorldLabelsVisible = true;
+    FString PendingDeleteSaveSlot;
 };

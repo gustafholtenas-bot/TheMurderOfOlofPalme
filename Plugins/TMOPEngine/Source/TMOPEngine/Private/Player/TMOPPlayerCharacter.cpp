@@ -13,6 +13,7 @@
 #include "EngineUtils.h"
 #include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/HUD.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Inventory/TMOPInventoryComponent.h"
@@ -254,6 +255,10 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         (!bCreateAgentInfoChartWidget || IsValid(AgentInfoChartWidget.Get())) &&
         (!bCreateNewspaperReaderWidget ||
             IsValid(NewspaperReaderWidget.Get()));
+
+    // A menu/cinematic may have requested hidden HUD before the widgets were
+    // constructed. Apply the current effective state to newly created widgets.
+    UpdateGameplayHUDVisibility();
 }
 
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -639,6 +644,7 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
     }
 
     bPauseMenuOpen = bOpen;
+    SetGameplayHUDHidden(TEXT("PauseMenu"), bOpen);
     if (bOpen && IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
     PauseMenuWidget->SetMenuVisible(bOpen);
 
@@ -661,6 +667,46 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
         if (IsValid(Clock) && bClockWasRunningBeforePause) Clock->StartClock();
         bClockWasRunningBeforePause = false;
     }
+}
+
+void ATMOPPlayerCharacter::SetGameplayHUDHidden(
+    const FName Reason, const bool bShouldHide)
+{
+    const FName ResolvedReason = Reason.IsNone() ? FName(TEXT("Unspecified")) : Reason;
+    if (bShouldHide) GameplayHUDHiddenReasons.Add(ResolvedReason);
+    else GameplayHUDHiddenReasons.Remove(ResolvedReason);
+    UpdateGameplayHUDVisibility();
+}
+
+void ATMOPPlayerCharacter::SetCinematicHUDHidden(const bool bShouldHide)
+{
+    SetGameplayHUDHidden(TEXT("Cinematic"), bShouldHide);
+}
+
+void ATMOPPlayerCharacter::UpdateGameplayHUDVisibility()
+{
+    const bool bShouldBeVisible = GameplayHUDHiddenReasons.IsEmpty();
+    const bool bVisibilityChanged = bGameplayHUDVisible != bShouldBeVisible;
+    bGameplayHUDVisible = bShouldBeVisible;
+
+    if (IsValid(MinimapWidget.Get()))
+    {
+        const bool bShowMinimap = bGameplayHUDVisible && !bWorldMapOpen &&
+            IsValid(MapComponent.Get()) && MapComponent->bShowMinimap;
+        MinimapWidget->SetMapVisible(bShowMinimap);
+    }
+
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        if (AHUD* HUD = PC->GetHUD())
+        {
+            if (HUD->bShowHUD != bGameplayHUDVisible)
+                HUD->ShowHUD();
+        }
+    }
+
+    if (bVisibilityChanged)
+        OnGameplayHUDVisibilityChanged(bGameplayHUDVisible);
 }
 
 void ATMOPPlayerCharacter::HandleItemMenuRequested(
@@ -712,8 +758,7 @@ void ATMOPPlayerCharacter::CloseWorldMap()
     if (!bWorldMapOpen) return;
     bWorldMapOpen = false;
     if (IsValid(WorldMapWidget.Get())) WorldMapWidget->SetMapVisible(false);
-    if (IsValid(MinimapWidget.Get())) MinimapWidget->SetMapVisible(
-        IsValid(MapComponent.Get()) && MapComponent->bShowMinimap);
+    UpdateGameplayHUDVisibility();
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (APlayerController* PC = Cast<APlayerController>(Controller))
@@ -777,6 +822,9 @@ bool ATMOPPlayerCharacter::OpenNewspaper(
         Mode.SetWidgetToFocus(NewspaperReaderWidget->TakeWidget());
         Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
         PC->SetInputMode(Mode);
+        // SetInputMode supplies the initial Slate focus target, while this
+        // explicit user focus also covers readers opened during a paused game.
+        NewspaperReaderWidget->SetUserFocus(PC);
         PC->SetIgnoreMoveInput(true);
         PC->SetIgnoreLookInput(true);
     }

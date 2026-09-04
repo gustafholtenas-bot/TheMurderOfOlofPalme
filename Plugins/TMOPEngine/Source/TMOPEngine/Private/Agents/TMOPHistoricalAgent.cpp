@@ -9,6 +9,8 @@
 #include "Components/TextRenderComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/AudioComponent.h"
+#include "Components/MeshComponent.h"
+#include "Curves/CurveFloat.h"
 #include "Materials/MaterialInterface.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/OverlapResult.h"
@@ -26,6 +28,7 @@
 #include "People/TMOPPersonProfileComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Items/TMOPItemMeshSubsystem.h"
+#include "Misc/ConfigCacheIni.h"
 #include "Sound/SoundBase.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPSpeechBubbleWidget.h"
@@ -34,6 +37,19 @@
 
 namespace
 {
+const TCHAR* InterfaceSettingsSection = TEXT("TMOP.InterfaceSettings");
+const TCHAR* PersonLabelTextSizeKey = TEXT("PersonLabelTextSize");
+
+float PersonLabelSizeScale(const ETMOPPersonLabelTextSize Size)
+{
+    switch (Size)
+    {
+    case ETMOPPersonLabelTextSize::Small: return 0.50f;
+    case ETMOPPersonLabelTextSize::Medium: return 0.75f;
+    default: return 1.0f;
+    }
+}
+
 FString CompactSourceNumber(FString Source)
 {
     Source.TrimStartAndEndInline();
@@ -321,11 +337,23 @@ void ATMOPHistoricalAgent::BeginPlay()
     BaseMeshRelativeRotation = GetMesh()->GetRelativeRotation().Quaternion();
     LastUnstuckLocation = GetActorLocation();
     bUnstuckInitialized = true;
+    PlaySpawnFade();
 }
 
 void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    UpdateVisibilityFade(DeltaSeconds);
+    if (IsActorBeingDestroyed()) return;
+    if (!bVisibilityFadeActive)
+    {
+        VisibilityFadeMeshRefreshAccumulator += FMath::Max(0.0f, DeltaSeconds);
+        if (VisibilityFadeMeshRefreshAccumulator >= 0.5f)
+        {
+            VisibilityFadeMeshRefreshAccumulator = 0.0f;
+            RefreshVisibilityFadeMeshes(false);
+        }
+    }
     UpdateHeldItemVisibility();
     UpdateAutomaticUnstuck(DeltaSeconds);
     UpdateSocialFocus(DeltaSeconds);
@@ -352,6 +380,117 @@ void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
             NameLabel->SetWorldRotation(ToCamera.Rotation());
         }
     }
+}
+
+void ATMOPHistoricalAgent::PlaySpawnFade()
+{
+    bDestroyAfterVisibilityFade = false;
+    if (!bEnableSpawnFade || SpawnFadeDurationSeconds <= KINDA_SMALL_NUMBER)
+    {
+        bVisibilityFadeActive = false;
+        ApplyVisibilityFade(1.0f);
+        if (IsValid(NameLabel)) NameLabel->SetVisibility(ShouldDisplayNameLabel(), true);
+        return;
+    }
+
+    ApplyVisibilityFade(0.0f);
+    BeginVisibilityFade(1.0f, SpawnFadeDurationSeconds, false);
+}
+
+void ATMOPHistoricalAgent::RequestDespawnWithFade()
+{
+    if (bDestroyAfterVisibilityFade || IsActorBeingDestroyed()) return;
+    if (!bEnableDespawnFade || DespawnFadeDurationSeconds <= KINDA_SMALL_NUMBER)
+    {
+        Destroy();
+        return;
+    }
+
+    bDestroyAfterVisibilityFade = true;
+    if (Controller != nullptr) Controller->StopMovement();
+    if (UCharacterMovementComponent* Movement = GetCharacterMovement())
+        Movement->DisableMovement();
+    SetActorEnableCollision(false);
+    if (IsValid(NameLabel)) NameLabel->SetVisibility(false, true);
+    if (IsValid(SpeechBubble)) SpeechBubble->SetVisibility(false);
+    BeginVisibilityFade(0.0f, DespawnFadeDurationSeconds, true);
+}
+
+void ATMOPHistoricalAgent::BeginVisibilityFade(const float TargetAlpha,
+    const float DurationSeconds, const bool bDestroyWhenFinished)
+{
+    VisibilityFadeStartAlpha = CurrentVisibilityFadeAlpha;
+    VisibilityFadeTargetAlpha = FMath::Clamp(TargetAlpha, 0.0f, 1.0f);
+    VisibilityFadeElapsedSeconds = 0.0f;
+    ActiveVisibilityFadeDurationSeconds = FMath::Max(DurationSeconds, KINDA_SMALL_NUMBER);
+    bVisibilityFadeActive = true;
+    bDestroyAfterVisibilityFade = bDestroyWhenFinished;
+    SetActorTickEnabled(true);
+    if (IsValid(NameLabel)) NameLabel->SetVisibility(false, true);
+}
+
+void ATMOPHistoricalAgent::UpdateVisibilityFade(const float DeltaSeconds)
+{
+    if (!bVisibilityFadeActive) return;
+    VisibilityFadeElapsedSeconds += FMath::Max(0.0f, DeltaSeconds);
+    const float LinearProgress = FMath::Clamp(
+        VisibilityFadeElapsedSeconds / ActiveVisibilityFadeDurationSeconds,
+        0.0f, 1.0f);
+    const float ShapedProgress = IsValid(VisibilityFadeCurve)
+        ? FMath::Clamp(VisibilityFadeCurve->GetFloatValue(LinearProgress), 0.0f, 1.0f)
+        : FMath::SmoothStep(0.0f, 1.0f, LinearProgress);
+    ApplyVisibilityFade(FMath::Lerp(
+        VisibilityFadeStartAlpha, VisibilityFadeTargetAlpha, ShapedProgress));
+
+    if (LinearProgress < 1.0f) return;
+    bVisibilityFadeActive = false;
+    ApplyVisibilityFade(VisibilityFadeTargetAlpha);
+    if (bDestroyAfterVisibilityFade)
+    {
+        Destroy();
+        return;
+    }
+    if (IsValid(NameLabel)) NameLabel->SetVisibility(ShouldDisplayNameLabel(), true);
+}
+
+void ATMOPHistoricalAgent::ApplyVisibilityFade(const float Alpha)
+{
+    CurrentVisibilityFadeAlpha = FMath::Clamp(Alpha, 0.0f, 1.0f);
+    RefreshVisibilityFadeMeshes(true);
+    if (bVisibilityFadeActive && IsValid(NameLabel))
+        NameLabel->SetVisibility(false, true);
+}
+
+void ATMOPHistoricalAgent::RefreshVisibilityFadeMeshes(const bool bForceAll)
+{
+    TArray<UMeshComponent*> MeshComponents;
+    GetComponents<UMeshComponent>(MeshComponents);
+    for (UMeshComponent* MeshComponent : MeshComponents)
+    {
+        if (!IsValid(MeshComponent)) continue;
+        const TWeakObjectPtr<UMeshComponent> MeshKey(MeshComponent);
+        if (!bForceAll && VisibilityFadeInitializedMeshes.Contains(MeshKey))
+            continue;
+        ApplyVisibilityFadeToMesh(MeshComponent);
+        VisibilityFadeInitializedMeshes.Add(MeshKey);
+    }
+    for (auto It = VisibilityFadeInitializedMeshes.CreateIterator(); It; ++It)
+        if (!It->IsValid()) It.RemoveCurrent();
+}
+
+void ATMOPHistoricalAgent::ApplyVisibilityFadeToMesh(
+    UMeshComponent* MeshComponent)
+{
+    if (!IsValid(MeshComponent)) return;
+    if (bWriteVisibilityFadeToCustomPrimitiveData)
+        MeshComponent->SetCustomPrimitiveDataFloat(
+            VisibilityFadeCustomPrimitiveDataIndex,
+            CurrentVisibilityFadeAlpha);
+    if (bWriteVisibilityFadeMaterialParameter &&
+        !VisibilityFadeMaterialParameter.IsNone())
+        MeshComponent->SetScalarParameterValueOnMaterials(
+            VisibilityFadeMaterialParameter,
+            CurrentVisibilityFadeAlpha);
 }
 
 float ATMOPHistoricalAgent::ShowAutomaticSpeech(
@@ -1021,7 +1160,8 @@ void ATMOPHistoricalAgent::RefreshNameLabel()
     FullLabel += TEXT("\n") + LabelText.ToString();
     NameLabel->SetText(FText::FromString(FullLabel));
     NameLabel->SetRelativeLocation(FVector(0.0f, 0.0f, NameLabelHeightCm));
-    NameLabel->SetWorldSize(NameLabelWorldSize);
+    NameLabel->SetWorldSize(NameLabelWorldSize *
+        PersonLabelSizeScale(GetSavedNameLabelTextSize()));
     NameLabel->SetTextRenderColor(ResolveNameLabelColor());
     if (IsValid(NameLabelUnlitMaterial))
         NameLabel->SetTextMaterial(NameLabelUnlitMaterial);
@@ -1072,6 +1212,24 @@ void ATMOPHistoricalAgent::SetNameLabelVisible(const bool bVisible)
 {
     bShowNameLabel = bVisible;
     RefreshNameLabel();
+}
+
+ETMOPPersonLabelTextSize ATMOPHistoricalAgent::GetSavedNameLabelTextSize()
+{
+    int32 Value = static_cast<int32>(ETMOPPersonLabelTextSize::Large);
+    if (GConfig != nullptr)
+        GConfig->GetInt(InterfaceSettingsSection, PersonLabelTextSizeKey,
+            Value, GGameUserSettingsIni);
+    return static_cast<ETMOPPersonLabelTextSize>(FMath::Clamp(Value, 0, 2));
+}
+
+void ATMOPHistoricalAgent::SaveNameLabelTextSize(
+    const ETMOPPersonLabelTextSize Size)
+{
+    if (GConfig == nullptr) return;
+    GConfig->SetInt(InterfaceSettingsSection, PersonLabelTextSizeKey,
+        static_cast<int32>(Size), GGameUserSettingsIni);
+    GConfig->Flush(false, GGameUserSettingsIni);
 }
 
 void ATMOPHistoricalAgent::SetPersonCategoryId(const FName InCategoryId)

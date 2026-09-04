@@ -47,6 +47,63 @@ public:
         Category="TMOP|Observations|Linked Tracks")
     bool bEnableLinkedTrackSimulation = true;
 
+    /** Draws a red world-space beacon 1000 metres above Olof Palme. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides")
+    bool bShowOlofLocationLine = true;
+
+    /** Draws observer-to-subject lines only during each observation window. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides")
+    bool bShowActiveObservationLines = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides")
+    FName OlofPalmeEntityId = TEXT("OLOF_PALME");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides",
+        meta=(ClampMin="100.0", Units="cm"))
+    float OlofLocationLineHeightCm = 100000.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides")
+    FLinearColor OlofLocationLineColor = FLinearColor(1.0f, 0.0f, 0.0f, 1.0f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides")
+    FLinearColor ObservationLineColor = FLinearColor(1.0f, 0.65f, 0.05f, 0.45f);
+
+    /** Thickness of the vertical Olof beacon. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides",
+        meta=(ClampMin="0.1"))
+    float WorldGuideLineThickness = 3.0f;
+
+    /** Thin observer-to-subject line, separate from the Olof beacon. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides",
+        meta=(ClampMin="0.1"))
+    float ObservationLineThickness = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides",
+        meta=(ClampMin="5.0", Units="cm"))
+    float ObservationArrowSizeCm = 50.0f;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Observations|World Guides")
+    void SetShowOlofLocationLine(bool bShow);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Observations|World Guides")
+    void SetShowActiveObservationLines(bool bShow);
+
+    /** Per-user values used by the pause-menu settings, including before this
+     * director has spawned in the gameplay world. */
+    static bool GetSavedShowOlofLocationLine();
+    static bool GetSavedShowActiveObservationLines();
+    static void SaveShowOlofLocationLine(bool bShow);
+    static void SaveShowActiveObservationLines(bool bShow);
+
     UPROPERTY(BlueprintAssignable, Category="TMOP|Observations")
     FTMOPObservationEvaluatedSignature OnObservationEvaluated;
 
@@ -110,6 +167,7 @@ private:
     TArray<FName> GetLinkObservationIds(
         const FTMOPObservationLinkDefinition& Link) const;
     void UpdateObservationTracks(int32 CurrentSecond);
+    void DrawWorldGuideLines(int32 CurrentSecond) const;
 
     struct FResolvedTrackPoint
     {
@@ -154,4 +212,5 @@ private:
     TMap<FName, FTMOPObservationTrackRuntime> RuntimeTracks;
 
     TMap<FName, FResolvedTrack> ResolvedTracks;
+    mutable TMap<FName, TWeakObjectPtr<AActor>> EntityActorCache;
 };
