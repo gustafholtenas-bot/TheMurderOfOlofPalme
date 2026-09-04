@@ -60,6 +60,8 @@ private:
     void LoadDefaultTable();
     void RefreshPeople();
     void RefreshTimeline();
+    EActiveTimerReturnType HandleRuntimeValidationRefresh(
+        double CurrentTime, float DeltaTime);
     void RefreshComparisonPeople();
     void SelectDefaultComparisonPerson();
     void RefreshComparisonTimeline();
@@ -196,6 +198,7 @@ private:
     TSharedPtr<FStructOnScope> GeneralStructData;
     mutable FSlateBrush ReferenceImageBrush;
     TSharedPtr<STextBlock> StatusText;
+    uint64 LastRuntimeValidationRevision = 0;
 
     TArray<FReferenceItem> AnchorReferenceItems;
     TArray<FReferenceItem> EntityReferenceItems;

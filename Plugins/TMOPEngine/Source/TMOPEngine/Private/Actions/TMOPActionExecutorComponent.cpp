@@ -93,7 +93,8 @@ void UTMOPActionExecutorComponent::TickComponent(
     }
 
     TimedSpeedUpdateAccumulator += DeltaTime;
-    if (TimedSpeedUpdateAccumulator >= 0.5f)
+    if (TimedSpeedUpdateAccumulator >=
+        FMath::Max(0.02f, TimedSpeedUpdateIntervalSeconds))
     {
         TimedSpeedUpdateAccumulator = 0.0f;
         UpdateTimedMovementSpeed();
@@ -103,6 +104,16 @@ void UTMOPActionExecutorComponent::TickComponent(
     if (!IsValid(OwnerActor))
     {
         CompleteCurrentAction(false);
+        return;
+    }
+
+    const double CurrentSimulationSecond = GetCurrentSimulationSecondExact();
+    if (ActiveExpectedArrivalSecond != INDEX_NONE &&
+        bEnforceExactTimedArrival &&
+        CurrentSimulationSecond >=
+            static_cast<double>(ActiveExpectedArrivalSecond))
+    {
+        CompleteTimedArrivalAtDeadline();
         return;
     }
 
@@ -133,6 +144,19 @@ void UTMOPActionExecutorComponent::TickComponent(
             {
                 CompleteCurrentAction(false);
             }
+            return;
+        }
+        if (ActiveExpectedArrivalSecond != INDEX_NONE &&
+            bEnforceExactTimedArrival &&
+            CurrentSimulationSecond <
+                static_cast<double>(ActiveExpectedArrivalSecond))
+        {
+            if (AController* Controller = GetHistoricalAgent()->GetController())
+                Controller->StopMovement();
+            if (UCharacterMovementComponent* Movement =
+                GetHistoricalAgent()->GetCharacterMovement())
+                Movement->MaxWalkSpeed = 0.0f;
+            bHoldingForTimedArrival = true;
             return;
         }
         CompleteCurrentAction(true);
@@ -418,6 +442,7 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
     PendingMinimumSpeedCmPerSecond = 0.0f;
     PendingMaximumSpeedCmPerSecond = 0.0f;
     TimedSpeedUpdateAccumulator = 0.0f;
+    bHoldingForTimedArrival = false;
     Agent->SetActivityState(Entry.ActivityState);
 
     if (!Agent->CanMove())
@@ -520,22 +545,75 @@ void UTMOPActionExecutorComponent::UpdateTimedMovementSpeed(
     const UTMOPClockSubsystem* Clock = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (!IsValid(Movement) || Clock == nullptr) return;
+    if (!Clock->IsClockRunning())
+    {
+        Movement->MaxWalkSpeed = 0.0f;
+        return;
+    }
 
     ActiveRemainingPathCm = CalculateRemainingPathLengthCm();
-    const int32 RemainingSeconds = ActiveExpectedArrivalSecond -
-        Clock->GetCurrentTime().ToSecondsFromMidnight();
-    ActiveRequiredSpeedCmPerSecond = RemainingSeconds > 0
-        ? ActiveRemainingPathCm / static_cast<float>(RemainingSeconds)
+    const double RemainingSeconds =
+        static_cast<double>(ActiveExpectedArrivalSecond) -
+        Clock->GetCurrentTimeSecondsExact();
+    const float SimulationRate = FMath::Max(0.0f, Clock->GetTimeScale());
+    ActiveRequiredSpeedCmPerSecond = RemainingSeconds > KINDA_SMALL_NUMBER
+        ? ActiveRemainingPathCm / static_cast<float>(RemainingSeconds) *
+            SimulationRate
         : ActiveMaximumSpeedCmPerSecond;
     bActiveMovePhysicallyPossible = RemainingSeconds > 0 &&
-        ActiveRequiredSpeedCmPerSecond <= ActiveMaximumSpeedCmPerSecond;
+        ActiveRequiredSpeedCmPerSecond <=
+            ActiveMaximumSpeedCmPerSecond * SimulationRate;
     const float ChosenSpeed = FMath::Clamp(
         ActiveRequiredSpeedCmPerSecond,
-        ActiveMinimumSpeedCmPerSecond,
-        ActiveMaximumSpeedCmPerSecond);
+        ActiveMinimumSpeedCmPerSecond * SimulationRate,
+        ActiveMaximumSpeedCmPerSecond * SimulationRate);
     if (bForceUpdate ||
         !FMath::IsNearlyEqual(Movement->MaxWalkSpeed, ChosenSpeed, 1.0f))
         Movement->MaxWalkSpeed = ChosenSpeed;
+}
+
+double UTMOPActionExecutorComponent::GetCurrentSimulationSecondExact() const
+{
+    const UGameInstance* GameInstance = GetWorld() != nullptr
+        ? GetWorld()->GetGameInstance() : nullptr;
+    const UTMOPClockSubsystem* Clock = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    return Clock != nullptr ? Clock->GetCurrentTimeSecondsExact() : 0.0;
+}
+
+void UTMOPActionExecutorComponent::CompleteTimedArrivalAtDeadline()
+{
+    ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
+    if (!IsValid(Agent))
+    {
+        CompleteCurrentAction(false);
+        return;
+    }
+
+    // A deadline applies to the final anchor, not to an intermediate via point.
+    if (CurrentRouteAnchorIds.IsValidIndex(CurrentRouteAnchorIndex + 1))
+    {
+        CurrentRouteAnchorIndex = CurrentRouteAnchorIds.Num() - 1;
+        if (!MoveToCurrentRouteAnchor())
+        {
+            CompleteCurrentAction(false);
+            return;
+        }
+    }
+    if (AController* Controller = Agent->GetController())
+        Controller->StopMovement();
+    const float CorrectionCm = FVector::Dist2D(
+        Agent->GetActorLocation(), CurrentTargetLocation);
+    if (bCorrectPositionAtTimedDeadline && CorrectionCm > 1.0f)
+    {
+        Agent->SetActorLocation(
+            CurrentTargetLocation, false, nullptr, ETeleportType::TeleportPhysics);
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP timeline precision: '%s' corrected %.0f cm at arrival deadline %d."),
+            *GetOwnerEntityId().ToString(), CorrectionCm,
+            ActiveExpectedArrivalSecond);
+    }
+    CompleteCurrentAction(true);
 }
 
 void UTMOPActionExecutorComponent::RestoreMovementSpeed()
@@ -548,6 +626,7 @@ void UTMOPActionExecutorComponent::RestoreMovementSpeed()
     ActiveRemainingPathCm = 0.0f;
     ActiveRequiredSpeedCmPerSecond = 0.0f;
     bActiveMovePhysicallyPossible = true;
+    bHoldingForTimedArrival = false;
 }
 
 void UTMOPActionExecutorComponent::CompleteCurrentAction(

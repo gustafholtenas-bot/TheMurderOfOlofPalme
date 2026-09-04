@@ -75,6 +75,8 @@ private:
     void LoadTables();
     void RefreshVehicles();
     void RefreshTimeline();
+    EActiveTimerReturnType HandleRuntimeValidationRefresh(
+        double CurrentTime, float DeltaTime);
     void SelectVehicle(FName RowName);
     void SelectTimelineEntry(int32 Index);
     void CommitEntry();
@@ -185,4 +187,5 @@ private:
     TSharedPtr<SSearchableComboBox> ViaAnchorCombo;
     TSharedPtr<SSearchableComboBox> ViaLaneCombo;
     TSharedPtr<STextBlock> StatusText;
+    uint64 LastRuntimeValidationRevision = 0;
 };

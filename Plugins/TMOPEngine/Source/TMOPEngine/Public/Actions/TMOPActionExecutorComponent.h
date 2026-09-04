@@ -68,6 +68,19 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions")
     float ArrivalRadius = 75.0f;
 
+    /** Arrival-timed moves wait until their yellow timeline time before completing. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions|Timeline Precision")
+    bool bEnforceExactTimedArrival = true;
+
+    /** Recalculate catch-up speed this often in real seconds. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions|Timeline Precision",
+        meta=(ClampMin="0.02", ClampMax="1.0", Units="s"))
+    float TimedSpeedUpdateIntervalSeconds = 0.10f;
+
+    /** At the deadline, correct the last residual navigation error onto the anchor. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions|Timeline Precision")
+    bool bCorrectPositionAtTimedDeadline = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions")
     bool bAutoExecuteScheduleEntries = true;
 
@@ -109,8 +122,9 @@ public:
 
     /**
      * Supplies the historical arrival deadline for the next MoveToAnchor.
-     * Speeds are centimetres/second and are clamped to a realistic range.
-     * No teleport is used when the deadline cannot be reached.
+     * Speeds are centimetres/second and are clamped to the configured catch-up
+     * range. A residual miss is corrected at the deadline when strict arrival
+     * is enabled, so later timeline rows start from the authoritative anchor.
      */
     void ConfigureNextTimedMove(
         int32 ExpectedArrivalSecond,
@@ -136,6 +150,8 @@ private:
     bool MoveToCurrentRouteAnchor();
     void UpdateTimedMovementSpeed(bool bForceUpdate = false);
     float CalculateRemainingPathLengthCm() const;
+    double GetCurrentSimulationSecondExact() const;
+    void CompleteTimedArrivalAtDeadline();
     void RestoreMovementSpeed();
     void QueueScheduleEntry(
         const FTMOPScheduleEntry& Entry,
@@ -173,6 +189,7 @@ private:
     float ActiveRemainingPathCm = 0.0f;
     float ActiveRequiredSpeedCmPerSecond = 0.0f;
     bool bActiveMovePhysicallyPossible = true;
+    bool bHoldingForTimedArrival = false;
     float TimedSpeedUpdateAccumulator = 0.0f;
 
     /** Entries whose scheduled time passed while an earlier action was active. */

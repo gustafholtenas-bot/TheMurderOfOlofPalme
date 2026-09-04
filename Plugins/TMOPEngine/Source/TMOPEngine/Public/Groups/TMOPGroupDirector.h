@@ -109,6 +109,15 @@ public:
         const TArray<FVector>& RouteLocations,
         float AcceptanceRadius = 100.0f);
 
+    /** Timeline-aware variant: continuously compensates speed and completes
+     * the whole formation exactly at ExpectedArrivalSecond. */
+    bool MoveGroupThroughLocationsTimed(FName GroupId,
+        const TArray<FVector>& RouteLocations,
+        float AcceptanceRadius,
+        int32 ExpectedArrivalSecond,
+        float MinimumSpeedCmPerSecond,
+        float MaximumSpeedCmPerSecond);
+
     UFUNCTION(BlueprintCallable, Category="TMOP|Groups")
     bool StopGroup(FName GroupId);
 
@@ -154,6 +163,9 @@ private:
         float NextSpeakerChangeSeconds = 0.0f;
         int32 ActiveSpeakerIndex = INDEX_NONE;
         bool bWaitingCircleInitialized = false;
+        int32 ExpectedArrivalSecond = INDEX_NONE;
+        float TimedMinimumSpeedCmPerSecond = 1.0f;
+        float TimedMaximumSpeedCmPerSecond = 600.0f;
     };
 
     ATMOPHistoricalAgent* FindAgent(FName EntityId) const;

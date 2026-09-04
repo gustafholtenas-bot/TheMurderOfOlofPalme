@@ -1,0 +1,433 @@
+{
+  "SourcePeople": "DataTables/09_04/DT_TMOP_People.zip",
+  "SourceVehicles": "DataTables/09_04/DT_TMOP_HistoricalVehicles.json",
+  "ProtectionBaseline": "DataTables/09_01/DT_TMOP_HistoricalVehicles.json",
+  "ProtectedVehicleIds": [
+    "AMBULANCE_912",
+    "AMBULANCE_A951",
+    "VEHICLE_AKE_LARSSONS_BIL_FORD_ESCORT_GRAMETALLIC",
+    "VEHICLE_ANDERS_DELBOMS_TAXI_BIL_JARFALLA_TAXI_MITSUBISHI_GALANT",
+    "VEHICLE_ANNETTE_KOHUTS_BIL",
+    "VEHICLE_BENGT_PALM_MERCEDES_GUL",
+    "VEHICLE_EAE501_00_WOMENS_MASKED_CAR",
+    "VEHICLE_EAE9773_05_WHITE_MERCEDES_190",
+    "VEHICLE_INTRO_JAN_NILSSON_LIMO"
+  ],
+  "Migrated": [
+    {
+      "VehicleId": "VEHICLE_POLICE_RB2120",
+      "DriverEntityId": "BRITT_WALLBERG",
+      "PersonEntryId": "BRITT_WALLBERG_BEGINS_DRIVING_RB2120",
+      "VehicleEntryId": "VEHICLE_POLICE_RB2120_BRITT_WALLBERG_BEGINS_DRIVING_RB2120_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_CLAES_DJURFELDT_VW1500",
+      "DriverEntityId": "CLAES_DJURFELDT",
+      "PersonEntryId": "CLAES_DRIVES_PRIVATE_VW_TO_DAVID_BAGARES",
+      "VehicleEntryId": "VEHICLE_CLAES_DJURFELDT_VW1500_CLAES_DRIVES_PRIVATE_VW_TO_DAVID_BAGARES_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA",
+      "DriverEntityId": "HANS_HONGELINS",
+      "PersonEntryId": "HANS_HONGELINS_VEHICLE_01",
+      "VehicleEntryId": "VEHICLE_HANS_HONGELINS_TAXI_BIL_VOLVO_740_MELLANBLA_HANS_HONGELINS_VEHICLE_01_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_HANS_JOHANSSON_TAXI",
+      "DriverEntityId": "HANS_JOHANSSON",
+      "PersonEntryId": "HANS_JOHANSSON_UTURN_TO_CRIME_SCENE",
+      "VehicleEntryId": "VEHICLE_HANS_JOHANSSON_TAXI_HANS_JOHANSSON_UTURN_TO_CRIME_SCENE_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1210",
+      "DriverEntityId": "HANS_REHNSTAM",
+      "PersonEntryId": "HANS_REHNSTAM_TO_MALMSKILLNAD_BRUNNSGATAN",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1210_HANS_REHNSTAM_TO_MALMSKILLNAD_BRUNNSGATAN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1210",
+      "DriverEntityId": "HANS_REHNSTAM",
+      "PersonEntryId": "HANS_REHNSTAM_TO_JOHANNES_CHURCHYARD",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1210_HANS_REHNSTAM_TO_JOHANNES_CHURCHYARD_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1210",
+      "DriverEntityId": "HANS_REHNSTAM",
+      "PersonEntryId": "HANS_REHNSTAM_TO_DAVID_BAGARES_GATA",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1210_HANS_REHNSTAM_TO_DAVID_BAGARES_GATA_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1210",
+      "DriverEntityId": "HANS_REHNSTAM",
+      "PersonEntryId": "HANS_REHNSTAM_TO_CRIME_SCENE",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1210_HANS_REHNSTAM_TO_CRIME_SCENE_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1210",
+      "DriverEntityId": "HANS_REHNSTAM",
+      "PersonEntryId": "HANS_REHNSTAM_LEAVES_FOR_SABBATSBERG",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1210_HANS_REHNSTAM_LEAVES_FOR_SABBATSBERG_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+      "DriverEntityId": "INGE_MORELIUS_G",
+      "PersonEntryId": "INGE_MORELIUS_DRIVES_FROM_SOUTH_SVEAVAGEN_TO_ATM_DROPOFF",
+      "VehicleEntryId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_INGE_MORELIUS_DRIVES_FROM_SOUTH_SVEAVAGEN_TO_ATM_DROPOFF_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+      "DriverEntityId": "INGE_MORELIUS_G",
+      "PersonEntryId": "INGE_MORELIUS_TURNS_BEFORE_OLOFSGATAN_AND_PARKS",
+      "VehicleEntryId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_INGE_MORELIUS_TURNS_BEFORE_OLOFSGATAN_AND_PARKS_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A",
+      "DriverEntityId": "INGE_MORELIUS_G",
+      "PersonEntryId": "INGE_MORELIUS_DRIVES_GROUP_TOWARD_ALBATROSS",
+      "VehicleEntryId": "VEHICLE_INGE_MORELIUS_MORK_GUL_OPEL_REKORD_73_A_INGE_MORELIUS_DRIVES_GROUP_TOWARD_ALBATROSS_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA",
+      "DriverEntityId": "JAN_AKE_SVENSSON",
+      "PersonEntryId": "JAN_AKE_SVENSSON_VEHICLE_01",
+      "VehicleEntryId": "VEHICLE_JAN_AKE_SVENSSON_S_BIL_BMW_GRA_JAN_AKE_SVENSSON_VEHICLE_01_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1117",
+      "DriverEntityId": "JOHAN_DAHLIN",
+      "PersonEntryId": "JOHAN_DAHLIN_DRIVES_TOWARD_HUMLEGARDEN",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1117_JOHAN_DAHLIN_DRIVES_TOWARD_HUMLEGARDEN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB2160",
+      "DriverEntityId": "LEIF_BIDEFJORD",
+      "PersonEntryId": "LEIF_BIDEFJORD_BEGINS_DRIVING_RB2160",
+      "VehicleEntryId": "VEHICLE_POLICE_RB2160_LEIF_BIDEFJORD_BEGINS_DRIVING_RB2160_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_ENWALL_BILD",
+      "DriverEntityId": "LEIF_ENWALL",
+      "PersonEntryId": "LEIF_ENWALL_L865_BEGINS_DRIVING",
+      "VehicleEntryId": "VEHICLE_ENWALL_BILD_LEIF_ENWALL_L865_BEGINS_DRIVING_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN",
+      "DriverEntityId": "LEIF_LJUNGQVIST",
+      "PersonEntryId": "LEIF_LJUNGQVIST_VEHICLE_01",
+      "VehicleEntryId": "VEHICLE_LEIF_LJUNGQVIST_CHEVROLET_SUBURBAN_LEIF_LJUNGQVIST_VEHICLE_01_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_PIKET3230",
+      "DriverEntityId": "LEIF_SVENSSON",
+      "PersonEntryId": "LEIF_DRIVES_3230_FOLLOWING_CLAES",
+      "VehicleEntryId": "VEHICLE_POLICE_PIKET3230_LEIF_DRIVES_3230_FOLLOWING_CLAES_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_PIKET3230",
+      "DriverEntityId": "LEIF_SVENSSON",
+      "PersonEntryId": "LEIF_REROUTES_3230_TO_CRIME_SCENE",
+      "VehicleEntryId": "VEHICLE_POLICE_PIKET3230_LEIF_REROUTES_3230_TO_CRIME_SCENE_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1170",
+      "DriverEntityId": "MATS_ERIKSSON",
+      "PersonEntryId": "MATS_ERIKSSON_RB1170_DRIVES_TO_SNICKARBACKEN",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1170_MATS_ERIKSSON_RB1170_DRIVES_TO_SNICKARBACKEN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_OVE_PERSSON_VW_PASSAT_EAD10245",
+      "DriverEntityId": "OVE_PERSSON_NARKOTIKAROTELN",
+      "PersonEntryId": "OVE_EAD10245_DRIVES_TO_VIRVELN",
+      "VehicleEntryId": "VEHICLE_OVE_PERSSON_VW_PASSAT_EAD10245_OVE_EAD10245_DRIVES_TO_VIRVELN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_OVE_PERSSON_VW_PASSAT_EAD10245",
+      "DriverEntityId": "OVE_PERSSON_NARKOTIKAROTELN",
+      "PersonEntryId": "OVE_EAD10245_DRIVES_TO_TUNNEL_SVEA",
+      "VehicleEntryId": "VEHICLE_OVE_PERSSON_VW_PASSAT_EAD10245_OVE_EAD10245_DRIVES_TO_TUNNEL_SVEA_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_OVE_PERSSON_VW_PASSAT_EAD10245",
+      "DriverEntityId": "OVE_PERSSON_NARKOTIKAROTELN",
+      "PersonEntryId": "OVE_EAD10245_DRIVES_TO_SODERLEDEN",
+      "VehicleEntryId": "VEHICLE_OVE_PERSSON_VW_PASSAT_EAD10245_OVE_EAD10245_DRIVES_TO_SODERLEDEN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1120",
+      "DriverEntityId": "POLIS_PER_ENGLUND",
+      "PersonEntryId": "POLIS_PER_ENGLUND_DRIVES_TO_DANICA",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1120_POLIS_PER_ENGLUND_DRIVES_TO_DANICA_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1120",
+      "DriverEntityId": "POLIS_PER_ENGLUND",
+      "PersonEntryId": "POLIS_PER_ENGLUND_DRIVES_DANICA_TO_HER_CAR",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1120_POLIS_PER_ENGLUND_DRIVES_DANICA_TO_HER_CAR_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1120",
+      "DriverEntityId": "POLIS_PER_ENGLUND",
+      "PersonEntryId": "POLIS_PER_ENGLUND_DRIVES_TO_VD1",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1120_POLIS_PER_ENGLUND_DRIVES_TO_VD1_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1120",
+      "DriverEntityId": "POLIS_PER_ENGLUND",
+      "PersonEntryId": "POLIS_PER_ENGLUND_SEARCHES_CRIME_SCENE_AREA",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1120_POLIS_PER_ENGLUND_SEARCHES_CRIME_SCENE_AREA_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1120",
+      "DriverEntityId": "POLIS_PER_ENGLUND",
+      "PersonEntryId": "POLIS_PER_ENGLUND_ORDERED_TO_SABBATSBERG",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1120_POLIS_PER_ENGLUND_ORDERED_TO_SABBATSBERG_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_CIVIL2733",
+      "DriverEntityId": "PONTUS_WIKNER",
+      "PersonEntryId": "PONTUS_WIKNER_TOWARD_SVEAVAGEN",
+      "VehicleEntryId": "VEHICLE_POLICE_CIVIL2733_PONTUS_WIKNER_TOWARD_SVEAVAGEN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_CIVIL2733",
+      "DriverEntityId": "PONTUS_WIKNER",
+      "PersonEntryId": "PONTUS_WIKNER_TO_AFK_LUNTMAKAR",
+      "VehicleEntryId": "VEHICLE_POLICE_CIVIL2733_PONTUS_WIKNER_TO_AFK_LUNTMAKAR_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_CIVIL2733",
+      "DriverEntityId": "PONTUS_WIKNER",
+      "PersonEntryId": "PONTUS_WIKNER_SEARCH_ROUTE_TO_KARELIA",
+      "VehicleEntryId": "VEHICLE_POLICE_CIVIL2733_PONTUS_WIKNER_SEARCH_ROUTE_TO_KARELIA_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_CIVIL2733",
+      "DriverEntityId": "PONTUS_WIKNER",
+      "PersonEntryId": "PONTUS_WIKNER_TO_JOHANNESGATAN_GAME_CLUB",
+      "VehicleEntryId": "VEHICLE_POLICE_CIVIL2733_PONTUS_WIKNER_TO_JOHANNESGATAN_GAME_CLUB_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_THEODOROS_ATHANASIOU_BIL",
+      "DriverEntityId": "THEODOROS_ATHANASIOU",
+      "PersonEntryId": "THEODOROS_ATHANASIOU_VEHICLE_01",
+      "VehicleEntryId": "VEHICLE_THEODOROS_ATHANASIOU_BIL_THEODOROS_ATHANASIOU_VEHICLE_01_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB1520",
+      "DriverEntityId": "THOMAS_EKESATER",
+      "PersonEntryId": "THOMAS_EKESATER_DRIVES_TO_DAVID_BAGARES",
+      "VehicleEntryId": "VEHICLE_POLICE_RB1520_THOMAS_EKESATER_DRIVES_TO_DAVID_BAGARES_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_AFTONBLADET_PRESS_CAR_1",
+      "DriverEntityId": "TOMAS_SJOBERG",
+      "PersonEntryId": "TOMAS_SJOBERG_DRIVES_TOWARD_SABBATSBERG",
+      "VehicleEntryId": "VEHICLE_AFTONBLADET_PRESS_CAR_1_TOMAS_SJOBERG_DRIVES_TOWARD_SABBATSBERG_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_VAGNHARAD_COUPLE_EAD13783",
+      "DriverEntityId": "VAGNHARADSKVINNANS_MAN_EAD13783",
+      "PersonEntryId": "EAD13783_HUSBAND_DRIVES_SOUTH_SVEA",
+      "VehicleEntryId": "VEHICLE_VAGNHARAD_COUPLE_EAD13783_EAD13783_HUSBAND_DRIVES_SOUTH_SVEA_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_VAGNHARAD_COUPLE_EAD13783",
+      "DriverEntityId": "VAGNHARADSKVINNANS_MAN_EAD13783",
+      "PersonEntryId": "EAD13783_HUSBAND_REACHES_KUNGSGATAN",
+      "VehicleEntryId": "VEHICLE_VAGNHARAD_COUPLE_EAD13783_EAD13783_HUSBAND_REACHES_KUNGSGATAN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_VAGNHARAD_COUPLE_EAD13783",
+      "DriverEntityId": "VAGNHARADSKVINNANS_MAN_EAD13783",
+      "PersonEntryId": "EAD13783_HUSBAND_STARTS_ON_GREEN",
+      "VehicleEntryId": "VEHICLE_VAGNHARAD_COUPLE_EAD13783_EAD13783_HUSBAND_STARTS_ON_GREEN_MIGRATED"
+    },
+    {
+      "VehicleId": "VEHICLE_L1639_WOMENS_CAR",
+      "DriverEntityId": "VITTNE_L1639_1",
+      "PersonEntryId": "VITTNE_L1639_1_BEGINS_DRIVING",
+      "VehicleEntryId": "VEHICLE_L1639_WOMENS_CAR_VITTNE_L1639_1_BEGINS_DRIVING_MIGRATED"
+    }
+  ],
+  "AdoptedExisting": [
+    {
+      "VehicleId": "VEHICLE_BJORN_ROSENGRENS_BIL",
+      "DriverEntityId": "BJORN_ROSENGREN",
+      "PersonEntryId": "BJORN_ROSENGREN_BEGINS_DRIVING_HOME",
+      "VehicleEntryId": "VEHICLE_BJORN_ROSENGRENS_BIL_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_LIVVAKTER_SUND_ANDERSSON",
+      "DriverEntityId": "GORAN_SUND",
+      "PersonEntryId": "GORAN_SUND_DRIVES_LIVVAKTER_TO_CRIME_SCENE",
+      "VehicleEntryId": "LIFEGUARD_CAR_TO_CRIME_SCENE"
+    },
+    {
+      "VehicleId": "VEHICLE_HANS_JOHANSSON_TAXI",
+      "DriverEntityId": "HANS_JOHANSSON",
+      "PersonEntryId": "HANS_JOHANSSON_VEHICLE_01",
+      "VehicleEntryId": "MIRROR_HANS_JOHANSSON_VEHICLE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_RB2520",
+      "DriverEntityId": "INGVAR_WIDEN",
+      "PersonEntryId": "INGVAR_WIDEN_DRIVES_RB2520_TO_CRIME_SCENE",
+      "VehicleEntryId": "VEHICLE_POLICE_RB2520_DRIVE_TO_CRIME_SCENE"
+    },
+    {
+      "VehicleId": "VEHICLE_MERCEDES_LIMOSINE_JAN_NILSSON",
+      "DriverEntityId": "JAN_NILSSON",
+      "PersonEntryId": "JAN_NILSSON_VEHICLE_01",
+      "VehicleEntryId": "MIRROR_JAN_NILSSON_VEHICLE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_KJELL_AKE_JANSSONS_BIL",
+      "DriverEntityId": "KJELL_AKE_JANSSON_38_AR",
+      "PersonEntryId": "KJELL_AKE_JANSSON_BEGINS_DRIVING_L825_CAR",
+      "VehicleEntryId": "VEHICLE_KJELL_AKE_JANSSONS_BIL_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT",
+      "DriverEntityId": "LARS_ERIC_ERIKSSON",
+      "PersonEntryId": "LARS_ERIC_ERIKSSON_BEGINS_DRIVING",
+      "VehicleEntryId": "VEHICLE_LARS_ERIC_ERIKSSON_SILVERGRA_VOLVO_GLT_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_PIKET3230",
+      "DriverEntityId": "LEIF_SVENSSON",
+      "PersonEntryId": "LEIF_DRIVES_3230_TO_REGERINGSGATAN_103",
+      "VehicleEntryId": "PIKET3230_TO_REGERINGSGATAN_103"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_PIKET3230",
+      "DriverEntityId": "LEIF_SVENSSON",
+      "PersonEntryId": "PIKET3230_LEIF_SVENSSON_TOWARD_NIGHT_FIKA",
+      "VehicleEntryId": "PIKET3230_TOWARD_BRUNKEBERGSTORG"
+    },
+    {
+      "VehicleId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS",
+      "DriverEntityId": "LENA_LARSSON",
+      "PersonEntryId": "LENA_LARSSON_DRIVES_AWAY",
+      "VehicleEntryId": "VEHICLE_MIKEAL_ASTROMS_BIL_ORANGE_FORD_TANUS_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_FINARE_PARETS_BIL",
+      "DriverEntityId": "MAN_FINARE_PAR",
+      "PersonEntryId": "MAN_FINARE_PAR_VEHICLE_05",
+      "VehicleEntryId": "VEHICLE_FINARE_PARETS_BIL_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD",
+      "DriverEntityId": "MARCO_NEESERS_KOMPIS_2",
+      "PersonEntryId": "MARCO_NEESERS_KOMPIS_2_VEHICLE_01",
+      "VehicleEntryId": "VEHICLE_MARCO_NEESERS_KOMPIS_BIL_MORKROD_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL",
+      "DriverEntityId": "MIKAEL_LINDBLAD",
+      "PersonEntryId": "MIKAEL_LINDBLAD_VEHICLE_01",
+      "VehicleEntryId": "VEHICLE_MIKAEL_LINDBLAD_TAXI_BIL_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_PIKET1230",
+      "DriverEntityId": "PER_BORG",
+      "PersonEntryId": "PER_BORG_DRIVES_PIKET1230_TO_CRIME_SCENE",
+      "VehicleEntryId": "VEHICLE_POLICE_PIKET1230_DRIVE_TO_CRIME_SCENE"
+    },
+    {
+      "VehicleId": "VEHICLE_POLICE_HOLMER_DAHLGREN",
+      "DriverEntityId": "ROLF_DAHLGREN",
+      "PersonEntryId": "ROLF_DAHLGREN_DRIVE_SVEAVAGEN_NORTH",
+      "VehicleEntryId": "HOLMER_DAHLGREN_SVEAVAGEN_NORTHBOUND"
+    },
+    {
+      "VehicleId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN",
+      "DriverEntityId": "SIGGE_CEDERGREN",
+      "PersonEntryId": "SIGGE_CEDERGREN_DRIVES_OXEN_TO_HOME",
+      "VehicleEntryId": "VEHICLE_SIGGES_BIL_SAAB_900_BRUN_DRIVE_OXEN_TO_HOME"
+    },
+    {
+      "VehicleId": "VEHICLE_VAKTARE_BIL",
+      "DriverEntityId": "VAKTARE",
+      "PersonEntryId": "VAKTARE_VEHICLE_03",
+      "VehicleEntryId": "VEHICLE_VAKTARE_BIL_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_ANONYMTVITTNE_L1100_BIL",
+      "DriverEntityId": "VITTNE_1100",
+      "PersonEntryId": "VITTNE_1100_VEHICLE_06",
+      "VehicleEntryId": "VEHICLE_ANONYMTVITTNE_L1100_BIL_BLENDER_ROUTE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_E5751_MASKED_COUPLE_CAR",
+      "DriverEntityId": "VITTNE_E5751_MASKED_MALE_DRIVER",
+      "PersonEntryId": "VITTNE_E5751_MASKED_MALE_DRIVER_DRIVES_NORTH_ON_SVEAVAGEN",
+      "VehicleEntryId": "VEHICLE_E5751_MASKED_COUPLE_CAR_NORTHBOUND"
+    },
+    {
+      "VehicleId": "VEHICLE_EAE15568_MASKED_TAXI",
+      "DriverEntityId": "VITTNE_EAE15568_MASKED_TAXI_DRIVER",
+      "PersonEntryId": "EAE15568_TAXI_DRIVER_DRIVES_NORTH",
+      "VehicleEntryId": "EAE15568_TAXI_DRIVES_SVEAVAGEN_NORTH"
+    },
+    {
+      "VehicleId": "VEHICLE_EAE15568_MASKED_TAXI",
+      "DriverEntityId": "VITTNE_EAE15568_MASKED_TAXI_DRIVER",
+      "PersonEntryId": "EAE15568_TAXI_DRIVER_RESUMES_NORTH",
+      "VehicleEntryId": "EAE15568_TAXI_RESUMES_NORTH"
+    },
+    {
+      "VehicleId": "VEHICLE_EAE20995_MASKED_CAR",
+      "DriverEntityId": "VITTNE_EAE20995_MASKED_DRIVER",
+      "PersonEntryId": "EAE20995_DRIVER_TURNS_NORTH_AND_PASSES_SCENE",
+      "VehicleEntryId": "EAE20995_CAR_TURNS_NORTH_PAST_CRIME_SCENE"
+    },
+    {
+      "VehicleId": "VEHICLE_EAE20995_MASKED_CAR",
+      "DriverEntityId": "VITTNE_EAE20995_MASKED_DRIVER",
+      "PersonEntryId": "EAE20995_DRIVER_CONTINUES_NORTH_WITH_PASSENGER",
+      "VehicleEntryId": "EAE20995_CAR_CONTINUES_NORTH_WITH_PASSENGER"
+    },
+    {
+      "VehicleId": "VEHICLE_EAE7010_00_MASKED_TAXI",
+      "DriverEntityId": "VITTNE_EAE7010_00_MASKED_TAXI_DRIVER",
+      "PersonEntryId": "EAE7010_00_TAXI_DRIVER_DRIVES_TOWARD_SVEAVAGEN",
+      "VehicleEntryId": "EAE7010_00_TAXI_UTURN_AND_DRIVES_WEST_ON_KUNGSGATAN"
+    },
+    {
+      "VehicleId": "VEHICLE_ANONYMTVITTNE_L837S_BIL",
+      "DriverEntityId": "VITTNE_L837",
+      "PersonEntryId": "VITTNE_L837_VEHICLE_06",
+      "VehicleEntryId": "VEHICLE_ANONYMTVITTNE_L837S_BIL_BLENDER_ROUTE_01"
+    }
+  ],
+  "SkippedProtected": [
+    {
+      "VehicleId": "VEHICLE_ANNETTE_KOHUTS_BIL",
+      "DriverEntityId": "ANNETTE_KOHUT",
+      "PersonEntryId": "ANNETTE_KOHUT_VEHICLE_01"
+    },
+    {
+      "VehicleId": "VEHICLE_BENGT_PALM_MERCEDES_GUL",
+      "DriverEntityId": "BENGT_PALM",
+      "PersonEntryId": "BENGT_PALM_VEHICLE_01"
+    }
+  ],
+  "Unresolved": [
+    {
+      "VehicleId": "VEHICLE_GLANTZ_BASEN_TAXI_E9979",
+      "DriverEntityId": "UNKNOWN_DRIVER_GLANTZ_TAXI_E9979",
+      "PersonEntryId": "UNKNOWN_DRIVER_GLANTZ_TAXI_E9979_BEGIN_DRIVING",
+      "OriginalVehicleId": "VEHICLE_GLANTZ_BASEN_TAXI_E9979",
+      "Reason": "Legacy drive has neither usable lanes nor a destination anchor"
+    }
+  ],
+  "Counts": {
+    "ProtectedVehicles": 9,
+    "MigratedNewEntries": 39,
+    "AdoptedExistingEntries": 25,
+    "ConvertedPersonEntries": 64,
+    "SkippedProtectedEntries": 2,
+    "UnresolvedEntries": 1
+  }
+}

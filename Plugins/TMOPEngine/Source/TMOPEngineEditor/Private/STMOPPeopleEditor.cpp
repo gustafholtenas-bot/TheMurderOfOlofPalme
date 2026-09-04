@@ -1,4 +1,5 @@
 #include "STMOPPeopleEditor.h"
+#include "TMOPRuntimeValidationReader.h"
 
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Editor.h"
@@ -657,6 +658,13 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
     ];
 
     LoadDefaultTable();
+    LastRuntimeValidationRevision =
+        TMOPRuntimeValidation::GetLatestReportRevision();
+    RegisterActiveTimer(
+        2.0f,
+        FWidgetActiveTimerDelegate::CreateSP(
+            this,
+            &STMOPPeopleEditor::HandleRuntimeValidationRefresh));
 }
 
 void STMOPPeopleEditor::LoadDefaultTable()
@@ -755,6 +763,20 @@ void STMOPPeopleEditor::RefreshTimeline()
         TimelineListView->RequestListRefresh();
     if (ComparisonTimelineListView.IsValid())
         ComparisonTimelineListView->RequestListRefresh();
+}
+
+EActiveTimerReturnType STMOPPeopleEditor::HandleRuntimeValidationRefresh(
+    const double, const float)
+{
+    const uint64 Revision =
+        TMOPRuntimeValidation::GetLatestReportRevision();
+    if (Revision != LastRuntimeValidationRevision)
+    {
+        LastRuntimeValidationRevision = Revision;
+        if (TimelineListView.IsValid())
+            TimelineListView->RequestListRefresh();
+    }
+    return EActiveTimerReturnType::Continue;
 }
 
 void STMOPPeopleEditor::RefreshComparisonPeople()
@@ -1411,6 +1433,16 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GenerateTimelineRow(
     FLinearColor SpeedColor = FLinearColor(0.45f, 0.45f, 0.45f);
     const bool bShowSpeedBadge = BuildTimelineSpeedBadge(
         Index, SpeedText, SpeedToolTip, SpeedColor);
+    FText ArrivalText;
+    FText ArrivalToolTip;
+    FLinearColor ArrivalColor = FLinearColor::Transparent;
+    const bool bShowArrivalBadge = Entry != nullptr &&
+        TMOPRuntimeValidation::BuildArrivalBadge(
+            WorkingRow.EntityId,
+            Entry->EntryId,
+            ArrivalText,
+            ArrivalToolTip,
+            ArrivalColor);
     int32 ResolvedSecond = 0;
     FString ResolveFailureReason;
     const bool bResolvedTime = ResolveTimelineDisplaySecond(
@@ -1499,6 +1531,23 @@ TSharedRef<ITableRow> STMOPPeopleEditor::GenerateTimelineRow(
                 SNew(STextBlock)
                 .Text(GetTimelineSummary(Index))
                 .ColorAndOpacity(FSlateColor::UseSubduedForeground())
+            ]
+            + SVerticalBox::Slot().AutoHeight().Padding(28.0f, 3.0f, 0.0f, 0.0f)
+            [
+                SNew(SBorder)
+                .Visibility(bShowArrivalBadge
+                    ? EVisibility::Visible
+                    : EVisibility::Collapsed)
+                .Padding(FMargin(5.0f, 1.0f))
+                .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                .BorderBackgroundColor(ArrivalColor)
+                .ToolTipText(ArrivalToolTip)
+                [
+                    SNew(STextBlock)
+                    .Text(ArrivalText)
+                    .Font(FAppStyle::GetFontStyle("SmallFont"))
+                    .ColorAndOpacity(FLinearColor::White)
+                ]
             ]
         ]
     ];

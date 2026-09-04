@@ -5,6 +5,8 @@
 #include "Animation/TMOPAnimationStateComponent.h"
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Time/TMOPClockSubsystem.h"
 
 ATMOPGroupDirector::ATMOPGroupDirector()
 {
@@ -300,6 +302,7 @@ bool ATMOPGroupDirector::MoveGroupToLocation(const FName GroupId,
     Group->RouteLocationIndex = INDEX_NONE;
     Group->TargetLocation = TargetLocation;
     Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
+    Group->ExpectedArrivalSecond = INDEX_NONE;
     SetState(*Group, ETMOPGroupState::Moving);
     UpdateMovement(*Group);
     return true;
@@ -315,6 +318,33 @@ bool ATMOPGroupDirector::MoveGroupThroughLocations(const FName GroupId,
     Group->RouteLocationIndex = 0;
     Group->TargetLocation = Group->RouteLocations[0];
     Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
+    Group->ExpectedArrivalSecond = INDEX_NONE;
+    SetState(*Group, ETMOPGroupState::Moving);
+    UpdateMovement(*Group);
+    return true;
+}
+
+bool ATMOPGroupDirector::MoveGroupThroughLocationsTimed(const FName GroupId,
+    const TArray<FVector>& RouteLocations, const float AcceptanceRadius,
+    const int32 ExpectedArrivalSecond,
+    const float MinimumSpeedCmPerSecond,
+    const float MaximumSpeedCmPerSecond)
+{
+    FRuntimeGroup* Group = FindGroup(GroupId);
+    ATMOPHistoricalAgent* Leader = Group != nullptr
+        ? FindLeader(*Group) : nullptr;
+    if (Group == nullptr || !IsValid(Leader) || RouteLocations.IsEmpty())
+        return false;
+    Group->RouteLocations = RouteLocations;
+    Group->RouteLocationIndex = 0;
+    Group->TargetLocation = Group->RouteLocations[0];
+    Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
+    Group->ExpectedArrivalSecond = ExpectedArrivalSecond;
+    Group->TimedMinimumSpeedCmPerSecond =
+        FMath::Max(1.0f, MinimumSpeedCmPerSecond);
+    Group->TimedMaximumSpeedCmPerSecond = FMath::Max(
+        Group->TimedMinimumSpeedCmPerSecond,
+        MaximumSpeedCmPerSecond);
     SetState(*Group, ETMOPGroupState::Moving);
     UpdateMovement(*Group);
     return true;
@@ -324,6 +354,7 @@ bool ATMOPGroupDirector::StopGroup(const FName GroupId)
 {
     FRuntimeGroup* Group = FindGroup(GroupId);
     if (Group == nullptr) return false;
+    Group->ExpectedArrivalSecond = INDEX_NONE;
     for (TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group->Members)
         if (ATMOPHistoricalAgent* Agent = Member.Get())
         {
@@ -535,6 +566,57 @@ void ATMOPGroupDirector::UpdateMovement(FRuntimeGroup& Group)
 {
     ATMOPHistoricalAgent* Leader = FindLeader(Group);
     if (!IsValid(Leader)) { SetState(Group, ETMOPGroupState::WaitingForMembers); return; }
+
+    const UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    const double Now = Clock != nullptr
+        ? Clock->GetCurrentTimeSecondsExact() : 0.0;
+    if (Group.ExpectedArrivalSecond != INDEX_NONE)
+    {
+        if (Now >= static_cast<double>(Group.ExpectedArrivalSecond))
+        {
+            const FVector FinalTarget = Group.RouteLocations.IsEmpty()
+                ? Group.TargetLocation : Group.RouteLocations.Last();
+            Leader->SetActorLocation(
+                FinalTarget, false, nullptr, ETeleportType::TeleportPhysics);
+            for (int32 Index = 0; Index < Group.Members.Num(); ++Index)
+            {
+                ATMOPHistoricalAgent* Agent = Group.Members[Index].Get();
+                if (!IsValid(Agent) || Agent == Leader) continue;
+                Agent->SetActorLocation(
+                    Leader->GetActorTransform().TransformPosition(
+                        GetFormationOffset(Group, Index)),
+                    false, nullptr, ETeleportType::TeleportPhysics);
+            }
+            Group.ExpectedArrivalSecond = INDEX_NONE;
+            StopGroup(Group.Definition.GroupId);
+            SetState(Group, ETMOPGroupState::Arrived);
+            return;
+        }
+
+        double RemainingPathCm = FVector::Dist2D(
+            Leader->GetActorLocation(), Group.TargetLocation);
+        for (int32 Index = Group.RouteLocationIndex + 1;
+            Index < Group.RouteLocations.Num(); ++Index)
+            RemainingPathCm += FVector::Dist2D(
+                Group.RouteLocations[Index - 1], Group.RouteLocations[Index]);
+        const double RemainingSeconds =
+            static_cast<double>(Group.ExpectedArrivalSecond) - Now;
+        const float SimulationRate = Clock != nullptr
+            ? FMath::Max(0.0f, Clock->GetTimeScale()) : 1.0f;
+        const float RequiredSpeed = RemainingSeconds > KINDA_SMALL_NUMBER
+            ? static_cast<float>(RemainingPathCm / RemainingSeconds) *
+                SimulationRate
+            : Group.TimedMaximumSpeedCmPerSecond;
+        const float ChosenSpeed = FMath::Clamp(RequiredSpeed,
+            Group.TimedMinimumSpeedCmPerSecond * SimulationRate,
+            Group.TimedMaximumSpeedCmPerSecond * SimulationRate);
+        for (TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group.Members)
+            if (ATMOPHistoricalAgent* Agent = Member.Get())
+                if (UCharacterMovementComponent* Movement =
+                    Agent->GetCharacterMovement())
+                    Movement->MaxWalkSpeed = ChosenSpeed;
+    }
     if (FVector::DistSquared2D(Leader->GetActorLocation(), Group.TargetLocation) <= FMath::Square(Group.AcceptanceRadius))
     {
         // Reaching the leader target is not the same as the group arriving.
@@ -585,6 +667,17 @@ void ATMOPGroupDirector::UpdateMovement(FRuntimeGroup& Group)
             UpdateMovement(Group);
             return;
         }
+        if (Group.ExpectedArrivalSecond != INDEX_NONE &&
+            Now < static_cast<double>(Group.ExpectedArrivalSecond))
+        {
+            for (TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group.Members)
+                if (ATMOPHistoricalAgent* Agent = Member.Get())
+                    if (AAIController* Controller =
+                        Cast<AAIController>(Agent->GetController()))
+                        Controller->StopMovement();
+            return;
+        }
+        Group.ExpectedArrivalSecond = INDEX_NONE;
         StopGroup(Group.Definition.GroupId);
         SetState(Group, ETMOPGroupState::Arrived);
         return;

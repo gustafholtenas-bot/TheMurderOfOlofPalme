@@ -53,6 +53,13 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     bool bCatchUpToCurrentClockOnBeginPlay = true;
 
+    /** Arrival-timed walkers may temporarily exceed their normal sprint speed
+     * by this factor after delays. The deadline correction remains exact. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|People|Simulation|Timeline Precision",
+        meta=(ClampMin="1.0", ClampMax="3.0"))
+    float TimelineCatchUpSpeedMultiplier = 1.35f;
+
     /**
      * ObservedUnknown people are evidence markers rather than authoritative
      * traffic participants.  Keeping their collision disabled prevents a

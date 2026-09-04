@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
 #include "Events/TMOPHistoricalEventTypes.h"
+#include "Traffic/TMOPTrafficTypes.h"
 #include "Vehicles/TMOPVehicleCatalogTypes.h"
 #include "UI/TMOPEntityLabelTypes.h"
 #include "TMOPHistoricalVehicleTypes.generated.h"
@@ -193,6 +194,21 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline")
     TArray<FName> OrderedLaneIds;
 
+    /** When enabled, the vehicle director starts this route directly instead
+     * of waiting for a legacy BeginDriving entry in the driver's timeline. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            DisplayName="Auto Start From Vehicle Timeline"))
+    bool bAutoStartFromVehicleTimeline = false;
+
+    /** Route interpretation copied from legacy person-driven vehicle entries. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
+    ETMOPVehicleRouteMode VehicleRouteMode =
+        ETMOPVehicleRouteMode::ManualLaneRoute;
+
     /** Optional explicit route start. Empty uses the preceding placement. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Historical Vehicle|Timeline|Route",
@@ -204,6 +220,14 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
         Category="TMOP|Historical Vehicle|Timeline|Route",
         meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute"))
     FName RouteStartLaneId = NAME_None;
+
+    /** Exact legacy start distance on the first lane. Zero resolves it from
+     * the vehicle/start anchor as before. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
+            ClampMin="0.0", Units="cm"))
+    float RouteStartDistanceAlongFirstLaneCm = 0.0f;
 
     /** Optional explicit destination. Empty uses the following Stop/Park. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,

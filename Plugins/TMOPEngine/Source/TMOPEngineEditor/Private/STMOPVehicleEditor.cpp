@@ -1,4 +1,5 @@
 #include "STMOPVehicleEditor.h"
+#include "TMOPRuntimeValidationReader.h"
 
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "DrawDebugHelpers.h"
@@ -604,6 +605,13 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
                 const bool bDestination, const bool bVia)
             { HandleMapLaneClicked(LaneId, bStart, bDestination, bVia); });
     LoadTables();
+    LastRuntimeValidationRevision =
+        TMOPRuntimeValidation::GetLatestReportRevision();
+    RegisterActiveTimer(
+        2.0f,
+        FWidgetActiveTimerDelegate::CreateSP(
+            this,
+            &STMOPVehicleEditor::HandleRuntimeValidationRefresh));
 }
 
 void STMOPVehicleEditor::LoadTables()
@@ -651,6 +659,20 @@ void STMOPVehicleEditor::RefreshTimeline()
     if (TimelineList.IsValid()) TimelineList->RequestListRefresh();
     RebuildValidation();
     RebuildRoutePreview();
+}
+
+EActiveTimerReturnType STMOPVehicleEditor::HandleRuntimeValidationRefresh(
+    const double, const float)
+{
+    const uint64 Revision =
+        TMOPRuntimeValidation::GetLatestReportRevision();
+    if (Revision != LastRuntimeValidationRevision)
+    {
+        LastRuntimeValidationRevision = Revision;
+        if (TimelineList.IsValid())
+            TimelineList->RequestListRefresh();
+    }
+    return EActiveTimerReturnType::Continue;
 }
 
 void STMOPVehicleEditor::SelectVehicle(const FName RowName)
@@ -1369,6 +1391,12 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateVehicleRow(const FVehicleItem 
 TSharedRef<ITableRow> STMOPVehicleEditor::GenerateTimelineRow(const FTimelineItem Item, const TSharedRef<STableViewBase>& Owner)
 {
     const int32 I=Item.IsValid()?*Item:INDEX_NONE; const FTMOPHistoricalVehicleTimelineEntry* E=WorkingRow.Timeline.IsValidIndex(I)?&WorkingRow.Timeline[I]:nullptr;
+    FText ArrivalText; FText ArrivalToolTip;
+    FLinearColor ArrivalColor = FLinearColor::Transparent;
+    const bool bShowArrivalBadge = E &&
+        TMOPRuntimeValidation::BuildArrivalBadge(
+            WorkingRow.VehicleId, E->EntryId, ArrivalText,
+            ArrivalToolTip, ArrivalColor);
     int32 Sec=0; FString Fail; const bool HasTime=E&&ResolveTime(WorkingRow,I,Sec,&Fail); FLinearColor Color(0.35f,0.75f,1);
     FString Badge; FString Tip;
     if (E&&IsDriving(E->Action)) { double D=0,K=0; int32 Departure=0,Arrival=0,S=0; if(CalculateDrive(WorkingRow,I,D,Departure,Arrival,S,K,Fail)){Badge=FString::Printf(TEXT("DEP %s  ARR %s  REQ %.1f km/h"),*FormatClockSecond(Departure),*FormatClockSecond(Arrival),K);const float SetKmh=E->CruiseSpeedOverrideKmh>0?E->CruiseSpeedOverrideKmh:DrivingPresetSpeedKmh(E->DrivingPreset);if(SetKmh>0){const int32 EstimatedSeconds=FMath::RoundToInt((D/100000.0)/(SetKmh/3600.0));const int32 EstimatedArrival=Departure+EstimatedSeconds;Badge+=FString::Printf(TEXT("  SET %.1f  ETA %s"),SetKmh,*FormatClockSecond(EstimatedArrival));Tip=FString::Printf(TEXT("%.2f km. Selected speed estimates arrival %+d seconds versus plan."),D/100000.0,EstimatedArrival-Arrival);}else Tip=FString::Printf(TEXT("%.2f km over %d seconds."),D/100000.0,S);Color=K<=50?FLinearColor(0.05f,.42f,.12f):K<=90?FLinearColor(.78f,.38f,.03f):FLinearColor(.75f,.05f,.03f);if(E->bIgnoreOneWayRestrictions)Tip+=TEXT(" Ignores restricted lane connections.");if(E->bRunRedLights)Tip+=TEXT(" May run red lights.");} else {Badge=TEXT("SPEED ?");Tip=Fail;Color=FLinearColor(.55f,.12f,.08f);} }
@@ -1392,7 +1420,8 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateTimelineRow(const FTimelineIte
     return SNew(STableRow<FTimelineItem>,Owner)[SNew(SBorder).Padding(6).BorderImage(FAppStyle::GetBrush("Brushes.Panel"))[SNew(SVerticalBox)
         +SVerticalBox::Slot().AutoHeight()[SNew(SHorizontalBox)+SHorizontalBox::Slot().AutoWidth()[SNew(STextBlock).Text(FText::AsNumber(I)).ColorAndOpacity(FSlateColor::UseSubduedForeground())]+SHorizontalBox::Slot().FillWidth(1).Padding(7,0)[SNew(STextBlock).Text(E?FText::FromName(E->EntryId):FText::GetEmpty()).ColorAndOpacity(Color)]+SHorizontalBox::Slot().AutoWidth()[SNew(STextBlock).Text(FText::FromString(Time)).ColorAndOpacity(FLinearColor(1,.72f,.05f))]]
         +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(STextBlock).Text(FText::FromString(Summary)).Font(FAppStyle::GetFontStyle("SmallFont")).ColorAndOpacity(FSlateColor::UseSubduedForeground())]
-        +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(STextBlock).Text(FText::FromString(Badge)).ToolTipText(FText::FromString(Tip)).ColorAndOpacity(Color)]]];
+        +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(STextBlock).Text(FText::FromString(Badge)).ToolTipText(FText::FromString(Tip)).ColorAndOpacity(Color)]
+        +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(SBorder).Visibility(bShowArrivalBadge?EVisibility::Visible:EVisibility::Collapsed).Padding(FMargin(5,1)).BorderImage(FAppStyle::GetBrush("Brushes.Panel")).BorderBackgroundColor(ArrivalColor).ToolTipText(ArrivalToolTip)[SNew(STextBlock).Text(ArrivalText).Font(FAppStyle::GetFontStyle("SmallFont")).ColorAndOpacity(FLinearColor::White)]]]];
 }
 
 void STMOPVehicleEditor::OnVehicleSelected(FVehicleItem I,ESelectInfo::Type){if(I.IsValid())SelectVehicle(*I);} void STMOPVehicleEditor::OnTimelineSelected(FTimelineItem I,ESelectInfo::Type){if(I.IsValid())SelectTimelineEntry(*I);} void STMOPVehicleEditor::OnSearchChanged(const FText& T){Search=T.ToString();RefreshVehicles();}

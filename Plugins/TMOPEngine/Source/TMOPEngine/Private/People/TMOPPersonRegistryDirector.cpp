@@ -711,15 +711,13 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                         Agent->AppearanceMovementSpeedMultiplier;
                     const float MinimumSpeed = 1.0f;
                     const float MaximumSpeed =
-                        Runtime.Profile.MovementProfile.SprintSpeed * Multiplier;
-                    const float TimedMinimumSpeed =
-                        Entry.TravelSpeedOverrideCmPerSecond > 0.0f
-                        ? Entry.TravelSpeedOverrideCmPerSecond
-                        : MinimumSpeed;
-                    const float TimedMaximumSpeed =
-                        Entry.TravelSpeedOverrideCmPerSecond > 0.0f
-                        ? Entry.TravelSpeedOverrideCmPerSecond
-                        : MaximumSpeed;
+                        Runtime.Profile.MovementProfile.SprintSpeed * Multiplier *
+                        FMath::Max(1.0f, TimelineCatchUpSpeedMultiplier);
+                    // An authored speed is a preferred gait, never a lock
+                    // that prevents deadline catch-up.
+                    const float TimedMinimumSpeed = MinimumSpeed;
+                    const float TimedMaximumSpeed = FMath::Max(MaximumSpeed,
+                        Entry.TravelSpeedOverrideCmPerSecond);
                     const float RequiredSpeed = RemainingSeconds > 0
                         ? static_cast<float>(RemainingPathCm) / RemainingSeconds
                         : TimedMaximumSpeed;
@@ -737,9 +735,25 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                             *Entry.TargetAnchorId.ToString(), ArrivalSecond,
                             RequiredSpeed, TimedMaximumSpeed);
                 }
+                if (Entry.bTimeIsArrival)
+                {
+                    const float Multiplier =
+                        Runtime.Profile.MovementProfile.PersonalSpeedMultiplier *
+                        Agent->AppearanceMovementSpeedMultiplier;
+                    return Groups->MoveGroupThroughLocationsTimed(
+                        Agent->SocialGroupId, RouteLocations,
+                        FMath::Max(80.0f, Anchor->MinimumSpacingCm),
+                        Runtime.CachedTimelineSecond != INDEX_NONE
+                            ? Runtime.CachedTimelineSecond
+                            : Entry.Time.ToSecondsFromMidnight(),
+                        1.0f,
+                        FMath::Max(
+                            Runtime.Profile.MovementProfile.SprintSpeed * Multiplier *
+                                FMath::Max(1.0f, TimelineCatchUpSpeedMultiplier),
+                            Entry.TravelSpeedOverrideCmPerSecond));
+                }
                 return Groups->MoveGroupThroughLocations(
-                    Agent->SocialGroupId,
-                    RouteLocations,
+                    Agent->SocialGroupId, RouteLocations,
                     FMath::Max(80.0f, Anchor->MinimumSpacingCm));
             }
         }
@@ -776,12 +790,10 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                 float MinimumSpeed = 1.0f;
                 float MaximumSpeed =
                     Runtime.Profile.MovementProfile.SprintSpeed *
-                    PersonalMultiplier;
-                if (Entry.TravelSpeedOverrideCmPerSecond > 0.0f)
-                {
-                    MinimumSpeed = Entry.TravelSpeedOverrideCmPerSecond;
-                    MaximumSpeed = Entry.TravelSpeedOverrideCmPerSecond;
-                }
+                    PersonalMultiplier *
+                    FMath::Max(1.0f, TimelineCatchUpSpeedMultiplier);
+                MaximumSpeed = FMath::Max(MaximumSpeed,
+                    Entry.TravelSpeedOverrideCmPerSecond);
                 const int32 ExpectedArrivalSecond =
                     Runtime.CachedTimelineSecond != INDEX_NONE
                     ? Runtime.CachedTimelineSecond

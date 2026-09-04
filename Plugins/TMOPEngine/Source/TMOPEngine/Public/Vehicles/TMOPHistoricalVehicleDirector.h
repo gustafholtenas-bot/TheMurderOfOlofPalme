@@ -9,6 +9,14 @@
 class ATMOPVehicleBase;
 class UDataTable;
 
+DECLARE_MULTICAST_DELEGATE_FiveParams(
+    FTMOPVehicleTimelineArrivalEvent,
+    FName,
+    const FTMOPHistoricalVehicleTimelineEntry&,
+    int32,
+    int32,
+    bool);
+
 /**
  * Loads DT_TMOP_HistoricalVehicles, reuses matching vehicles already placed in
  * the level, and spawns enabled historical vehicles at their initial transform.
@@ -23,6 +31,10 @@ public:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void Tick(float DeltaSeconds) override;
+
+    /** Runtime result for a Stop/Park row: vehicle, row, planned second,
+     * actual second and whether the destination was reached. */
+    FTMOPVehicleTimelineArrivalEvent OnTimelineEntryArrived;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles")
     TObjectPtr<UDataTable> HistoricalVehicleTable;
@@ -79,6 +91,13 @@ public:
         Category="TMOP|Historical Vehicles|Parking",
         meta=(ClampMin="0.0", Units="cm"))
     float TimedParkingAlignmentToleranceCm = 125.0f;
+
+    /** Maximum temporary catch-up speed for arrival-timed routes. The car only
+     * uses as much as required to recover a delay. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicles|Timeline Precision",
+        meta=(ClampMin="10.0", ClampMax="250.0", Units="km/h"))
+    float TimelineCatchUpMaximumSpeedKmh = 90.0f;
 
     /** Compatibility switch for old tables that intentionally used distant
      * Stop/Park entries as teleports. Keep false for historical simulation. */
@@ -144,12 +163,17 @@ private:
         int32 InitialSpawnSecond = INDEX_NONE;
         int32 ActiveOffscreenTransferEntryIndex = INDEX_NONE;
         int32 OffscreenTransferRevealSecond = INDEX_NONE;
+        TSet<FName> AppliedDrivingEntryIds;
+        FName PendingArrivalEntryId = NAME_None;
+        int32 PendingArrivalPlannedSecond = INDEX_NONE;
     };
 
     void DiscoverPlacedVehicles();
     int32 SpawnDueVehicles(int32 CurrentSecond);
     void DespawnDueVehicles(int32 CurrentSecond);
     void ApplyDueVehiclePlacements(int32 CurrentSecond);
+    void StartDueVehicleRoutes(int32 CurrentSecond);
+    void ReportCompletedVehicleArrivals(int32 CurrentSecond);
     void CompleteDueOffscreenTransfer(
         FHistoricalVehicleRuntime& Runtime, int32 CurrentSecond);
     void SetVehicleAndOccupantsHidden(
@@ -205,5 +229,6 @@ private:
     TMap<FName, FHistoricalVehicleRuntime> RuntimeVehicles;
     TMap<FName, FString> LastDrivingFailureCodes;
     TMap<FName, FString> LastDrivingFailureDetails;
+    TMap<FName, FName> RequestedDrivingEntryOverrides;
     int32 LastEvaluatedSecond = INDEX_NONE;
 };

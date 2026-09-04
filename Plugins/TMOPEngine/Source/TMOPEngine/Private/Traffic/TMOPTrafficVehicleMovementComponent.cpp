@@ -13,6 +13,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/DamageType.h"
 #include "GameFramework/Pawn.h"
+#include "Time/TMOPClockSubsystem.h"
 
 UTMOPTrafficVehicleMovementComponent::UTMOPTrafficVehicleMovementComponent()
 {
@@ -88,6 +89,14 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if (!bDrivingEnabled || DeltaTime <= 0.0f) return;
 
+    if (TimedArrivalSecond != INDEX_NONE &&
+        GetCurrentSimulationSecondExact() >=
+            static_cast<double>(TimedArrivalSecond))
+    {
+        ForceCompleteTimedArrival();
+        return;
+    }
+
     if (bFinalApproachInProgress)
     {
         UpdateFinalApproach(DeltaTime);
@@ -160,8 +169,14 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
         {
             DistanceAlongLane = Lane->GetSplineLength();
             CurrentSpeedCmPerSecond = 0.0f;
-            TrafficState = ETMOPTrafficVehicleState::RouteComplete;
-            bDrivingEnabled = false;
+            const bool bWaitingForDeadline =
+                TimedArrivalSecond != INDEX_NONE &&
+                GetCurrentSimulationSecondExact() <
+                    static_cast<double>(TimedArrivalSecond);
+            TrafficState = bWaitingForDeadline
+                ? ETMOPTrafficVehicleState::Stopped
+                : ETMOPTrafficVehicleState::RouteComplete;
+            bDrivingEnabled = bWaitingForDeadline;
             ApplyVehicleTransform(Lane);
             if (bDespawnAtRouteEnd)
             {
@@ -368,6 +383,25 @@ float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLan
         ? DesiredCruiseSpeedKmh * (100000.0f / 3600.0f)
         : Lane->GetSpeedLimitCentimetersPerSecond() *
             FMath::Max(0.0f, SpeedLimitMultiplier);
+    if (TimedArrivalSecond != INDEX_NONE)
+    {
+        const double RemainingSeconds =
+            static_cast<double>(TimedArrivalSecond) -
+            GetCurrentSimulationSecondExact();
+        const UGameInstance* TimedGameInstance = GetWorld() != nullptr
+            ? GetWorld()->GetGameInstance() : nullptr;
+        const UTMOPClockSubsystem* TimedClock = TimedGameInstance != nullptr
+            ? TimedGameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+        const float SimulationRate = TimedClock != nullptr
+            ? FMath::Max(0.0f, TimedClock->GetTimeScale()) : 1.0f;
+        const float RequiredSpeed = RemainingSeconds > KINDA_SMALL_NUMBER
+            ? CalculateRemainingRouteDistanceCm() /
+                static_cast<float>(RemainingSeconds) * SimulationRate
+            : MaximumTimedCatchUpSpeedCmPerSecond;
+        Target = FMath::Clamp(
+            RequiredSpeed, 0.0f,
+            MaximumTimedCatchUpSpeedCmPerSecond * SimulationRate);
+    }
     TrafficState = ETMOPTrafficVehicleState::Driving;
     UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     UTMOPTrafficVehicleSubsystem* Traffic = GameInstance != nullptr
@@ -628,6 +662,100 @@ void UTMOPTrafficVehicleMovementComponent::StopDriving()
     CurrentSpeedCmPerSecond = 0.0f;
     VisualSteeringAngleDegrees = 0.0f;
     TrafficState = ETMOPTrafficVehicleState::Stopped;
+    TimedArrivalSecond = INDEX_NONE;
+}
+
+void UTMOPTrafficVehicleMovementComponent::ConfigureTimedArrival(
+    const int32 ExpectedArrivalSecond,
+    const float MaximumCatchUpSpeedKmh)
+{
+    TimedArrivalSecond = ExpectedArrivalSecond;
+    MaximumTimedCatchUpSpeedCmPerSecond = FMath::Max(
+        100.0f, MaximumCatchUpSpeedKmh * (100000.0f / 3600.0f));
+}
+
+double UTMOPTrafficVehicleMovementComponent::GetCurrentSimulationSecondExact() const
+{
+    const UGameInstance* GameInstance = GetWorld() != nullptr
+        ? GetWorld()->GetGameInstance() : nullptr;
+    const UTMOPClockSubsystem* Clock = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    return Clock != nullptr ? Clock->GetCurrentTimeSecondsExact() : 0.0;
+}
+
+float UTMOPTrafficVehicleMovementComponent::CalculateRemainingRouteDistanceCm() const
+{
+    const UTMOPTrafficLaneComponent* Lane = GetCurrentLane();
+    if (!IsValid(Lane)) return 0.0f;
+    float Remaining = FMath::Max(0.0f,
+        (bHasFinalApproach && CurrentLaneId == FinalApproachLaneId
+            ? FinalApproachLaneDistanceCm : Lane->GetSplineLength()) -
+        DistanceAlongLane);
+    UGameInstance* GameInstance = GetWorld() != nullptr
+        ? GetWorld()->GetGameInstance() : nullptr;
+    UTMOPTrafficNetworkSubsystem* Network = GameInstance != nullptr
+        ? GameInstance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
+    for (int32 Index = PlannedLaneIndex + 1;
+        Network != nullptr && Index < PlannedLaneIds.Num(); ++Index)
+    {
+        const UTMOPTrafficLaneComponent* RouteLane =
+            Network->FindLane(PlannedLaneIds[Index]);
+        if (IsValid(RouteLane))
+            Remaining += Index == PlannedLaneIds.Num() - 1 &&
+                    bHasFinalApproach &&
+                    PlannedLaneIds[Index] == FinalApproachLaneId
+                ? FinalApproachLaneDistanceCm
+                : RouteLane->GetSplineLength();
+    }
+    if (bHasFinalApproach && Network != nullptr)
+    {
+        const UTMOPTrafficLaneComponent* FinalLane =
+            Network->FindLane(FinalApproachLaneId);
+        if (IsValid(FinalLane))
+            Remaining += FVector::Dist2D(
+                FinalLane->GetLaneTransformAtDistance(
+                    FinalApproachLaneDistanceCm).GetLocation(),
+                FinalApproachTargetTransform.GetLocation());
+    }
+    return Remaining;
+}
+
+bool UTMOPTrafficVehicleMovementComponent::ForceCompleteTimedArrival()
+{
+    if (TimedArrivalSecond == INDEX_NONE || GetOwner() == nullptr)
+        return false;
+    if (bHasFinalApproach || bFinalApproachInProgress)
+    {
+        GetOwner()->SetActorTransform(FinalApproachTargetTransform,
+            false, nullptr, ETeleportType::TeleportPhysics);
+        ClearFinalApproach();
+    }
+    else
+    {
+        UTMOPTrafficLaneComponent* FinalLane = nullptr;
+        if (!PlannedLaneIds.IsEmpty())
+        {
+            UGameInstance* GameInstance = GetWorld() != nullptr
+                ? GetWorld()->GetGameInstance() : nullptr;
+            UTMOPTrafficNetworkSubsystem* Network = GameInstance != nullptr
+                ? GameInstance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
+            FinalLane = Network != nullptr
+                ? Network->FindLane(PlannedLaneIds.Last()) : nullptr;
+        }
+        if (IsValid(FinalLane))
+        {
+            CurrentLaneId = PlannedLaneIds.Last();
+            PlannedLaneIndex = PlannedLaneIds.Num() - 1;
+            DistanceAlongLane = FinalLane->GetSplineLength();
+            ApplyVehicleTransform(FinalLane);
+        }
+    }
+    TimedArrivalSecond = INDEX_NONE;
+    bDrivingEnabled = false;
+    CurrentSpeedCmPerSecond = 0.0f;
+    VisualSteeringAngleDegrees = 0.0f;
+    TrafficState = ETMOPTrafficVehicleState::RouteComplete;
+    return true;
 }
 
 void UTMOPTrafficVehicleMovementComponent::ConfigureFinalApproach(
@@ -686,6 +814,18 @@ void UTMOPTrafficVehicleMovementComponent::BeginFinalApproach(
         Distance / FMath::Max(50.0f, FinalApproachSpeedCmPerSecond),
         MinimumFinalApproachDurationSeconds,
         MaximumFinalApproachDurationSeconds);
+    if (TimedArrivalSecond != INDEX_NONE)
+    {
+        const UGameInstance* GameInstance = GetWorld() != nullptr
+            ? GetWorld()->GetGameInstance() : nullptr;
+        const UTMOPClockSubsystem* Clock = GameInstance != nullptr
+            ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+        const float SimulationRate = Clock != nullptr
+            ? FMath::Max(0.01f, Clock->GetTimeScale()) : 1.0f;
+        FinalApproachDurationSeconds = FMath::Max(0.01f,
+            static_cast<float>(static_cast<double>(TimedArrivalSecond) -
+                GetCurrentSimulationSecondExact()) / SimulationRate);
+    }
     FinalApproachElapsedSeconds = 0.0f;
     CurrentSpeedCmPerSecond = Distance /
         FMath::Max(0.1f, FinalApproachDurationSeconds);
@@ -727,6 +867,7 @@ void UTMOPTrafficVehicleMovementComponent::UpdateFinalApproach(
         CurrentSpeedCmPerSecond = 0.0f;
         VisualSteeringAngleDegrees = 0.0f;
         TrafficState = ETMOPTrafficVehicleState::RouteComplete;
+        TimedArrivalSecond = INDEX_NONE;
     }
 }
 

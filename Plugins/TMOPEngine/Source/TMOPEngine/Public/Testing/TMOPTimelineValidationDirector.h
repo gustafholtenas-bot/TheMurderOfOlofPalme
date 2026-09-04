@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Actions/TMOPActionExecutorComponent.h"
+#include "Groups/TMOPGroupTypes.h"
 #include "GameFramework/Actor.h"
 #include "TMOPTimelineValidationDirector.generated.h"
 
@@ -267,6 +268,7 @@ private:
         FName ActiveTargetAnchorId = NAME_None;
         int32 ActivePlannedSecond = INDEX_NONE;
         bool bRegistryManagedMove = false;
+        bool bRegistryManagedTimedArrival = false;
         FName LastTimelineEntryId = NAME_None;
         FName LastTimelineAnchorId = NAME_None;
         FName LastFailureEntryId = NAME_None;
@@ -332,6 +334,18 @@ private:
         int32 ResolvedSecond,
         bool bSuccessful,
         bool bCatchUp);
+
+    UFUNCTION()
+    void HandleGroupStateChanged(
+        FName GroupId,
+        ETMOPGroupState NewState);
+
+    void HandleVehicleTimelineArrived(
+        FName VehicleId,
+        const struct FTMOPHistoricalVehicleTimelineEntry& Entry,
+        int32 PlannedSecond,
+        int32 ActualSecond,
+        bool bSuccessful);
 
     TMap<FName, FTrackedAgent> TrackedAgents;
     TMap<FName, FTrackedVehicle> TrackedVehicles;

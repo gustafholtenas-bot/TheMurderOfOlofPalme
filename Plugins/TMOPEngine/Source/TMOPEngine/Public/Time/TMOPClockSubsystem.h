@@ -38,6 +38,13 @@ public:
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
     FTMOPTime GetCurrentTime() const;
 
+    /** Simulation time including the fractional second between clock ticks. */
+    UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
+    double GetCurrentTimeSecondsExact() const
+    {
+        return static_cast<double>(CurrentTimeSeconds) + FractionalSeconds;
+    }
+
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
     FTMOPTime GetLoopStartTime() const;
 

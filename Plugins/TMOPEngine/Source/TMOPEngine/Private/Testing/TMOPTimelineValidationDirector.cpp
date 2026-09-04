@@ -119,11 +119,17 @@ void ATMOPTimelineValidationDirector::BeginPlay()
     for (TActorIterator<ATMOPGroupDirector> It(GetWorld()); It; ++It)
     {
         GroupDirector = *It;
+        GroupDirector->OnGroupStateChanged.AddDynamic(
+            this,
+            &ATMOPTimelineValidationDirector::HandleGroupStateChanged);
         break;
     }
     for (TActorIterator<ATMOPHistoricalVehicleDirector> It(GetWorld()); It; ++It)
     {
         VehicleDirector = *It;
+        VehicleDirector->OnTimelineEntryArrived.AddUObject(
+            this,
+            &ATMOPTimelineValidationDirector::HandleVehicleTimelineArrived);
         break;
     }
     if (bStartAutomatically) StartValidation();
@@ -137,6 +143,12 @@ void ATMOPTimelineValidationDirector::EndPlay(
     if (bExportOnEndPlay && bWasActive) ExportReports();
     if (PeopleDirector.IsValid())
         PeopleDirector->OnTimelineEntryApplied.RemoveAll(this);
+    if (GroupDirector.IsValid())
+        GroupDirector->OnGroupStateChanged.RemoveDynamic(
+            this,
+            &ATMOPTimelineValidationDirector::HandleGroupStateChanged);
+    if (VehicleDirector.IsValid())
+        VehicleDirector->OnTimelineEntryArrived.RemoveAll(this);
     for (TPair<FName, FTrackedAgent>& Pair : TrackedAgents)
         if (Pair.Value.Executor.IsValid())
             Pair.Value.Executor->OnActionValidationEvent.RemoveAll(this);
@@ -861,10 +873,45 @@ void ATMOPTimelineValidationDirector::SampleAgents(const float DeltaSeconds)
                 Agent->SocialGroupId, bFoundGroup);
             if (bFoundGroup && Group.State == ETMOPGroupState::Arrived)
             {
+                if (Tracked.bRegistryManagedTimedArrival &&
+                    Tracked.ActivePlannedSecond != INDEX_NONE &&
+                    !Tracked.ActiveEntryId.IsNone())
+                {
+                    FTMOPTimelineValidationRecord Arrival;
+                    Arrival.EntityId = Pair.Key;
+                    Arrival.EntryId = Tracked.ActiveEntryId;
+                    Arrival.Event = TEXT("Completed");
+                    Arrival.Action = TEXT("Move To Anchor");
+                    Arrival.TargetAnchorId = Tracked.ActiveTargetAnchorId;
+                    Arrival.PlannedSecond = Tracked.ActivePlannedSecond;
+                    Arrival.ActualSecond = GetSimulationSecond();
+                    Arrival.TimeDeviationSeconds =
+                        Arrival.ActualSecond - Arrival.PlannedSecond;
+                    Arrival.bScheduledAsArrival = true;
+                    Arrival.ActualLocation = Agent->GetActorLocation();
+                    PopulateRecordRuntimeDiagnostics(Arrival, &Tracked);
+                    const float AbsDeviation =
+                        FMath::Abs(Arrival.TimeDeviationSeconds);
+                    if (AbsDeviation > TimingErrorSeconds)
+                        Arrival.Severity =
+                            ETMOPTimelineValidationSeverity::Error;
+                    else if (AbsDeviation > TimingWarningSeconds)
+                        Arrival.Severity =
+                            ETMOPTimelineValidationSeverity::Warning;
+                    Arrival.Message = AbsDeviation < 0.5f
+                        ? TEXT("Group arrived at the historical deadline.")
+                        : FString::Printf(
+                            TEXT("Group arrived %.0f seconds %s the historical deadline."),
+                            AbsDeviation,
+                            Arrival.TimeDeviationSeconds >= 0.0f
+                                ? TEXT("late") : TEXT("early"));
+                    AddRecord(Arrival);
+                }
                 Tracked.ActiveEntryId = NAME_None;
                 Tracked.ActiveTargetAnchorId = NAME_None;
                 Tracked.ActivePlannedSecond = INDEX_NONE;
                 Tracked.bRegistryManagedMove = false;
+                Tracked.bRegistryManagedTimedArrival = false;
                 Tracked.StationarySeconds = 0.0f;
                 Tracked.bStuckReportedForCurrentMove = false;
                 Tracked.LastLocation = Agent->GetActorLocation();
@@ -1227,6 +1274,10 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
         TimedRequiredSpeed, bTimedPossible);
     if (bHasTimedMove)
     {
+        // This record represents an arrival deadline. The editor report
+        // reader uses this flag to distinguish it from ordinary movement
+        // rows whose scheduled time only means "start walking now".
+        Record.bScheduledAsArrival = true;
         Record.ExpectedArrivalSecond = TimedExpectedArrival;
         Record.RemainingPathCm = TimedRemainingPath;
         Record.RequiredSpeedCmPerSecond = TimedRequiredSpeed;
@@ -1359,6 +1410,7 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
         Tracked->ActiveTargetAnchorId = NAME_None;
         Tracked->ActivePlannedSecond = INDEX_NONE;
         Tracked->bRegistryManagedMove = false;
+        Tracked->bRegistryManagedTimedArrival = false;
         Tracked->StationarySeconds = 0.0f;
     }
 }
@@ -1477,6 +1529,7 @@ void ATMOPTimelineValidationDirector::HandlePersonTimelineApplied(
             Tracked->ActiveTargetAnchorId = Entry.TargetAnchorId;
             Tracked->ActivePlannedSecond = ResolvedSecond;
             Tracked->bRegistryManagedMove = true;
+            Tracked->bRegistryManagedTimedArrival = Entry.bTimeIsArrival;
             Tracked->StationarySeconds = 0.0f;
             Tracked->bStuckReportedForCurrentMove = false;
         }
@@ -1493,6 +1546,132 @@ void ATMOPTimelineValidationDirector::HandlePersonTimelineApplied(
             Tracked->LastTimelineAnchorId = Entry.TargetAnchorId;
     }
     AddRecord(Record);
+}
+
+void ATMOPTimelineValidationDirector::HandleVehicleTimelineArrived(
+    const FName VehicleId,
+    const FTMOPHistoricalVehicleTimelineEntry& Entry,
+    const int32 PlannedSecond,
+    const int32 ActualSecond,
+    const bool bSuccessful)
+{
+    if (!bValidationActive) return;
+
+    FTMOPTimelineValidationRecord Record;
+    Record.EntityId = VehicleId;
+    Record.EntryId = Entry.EntryId;
+    Record.Event = bSuccessful
+        ? TEXT("VehicleArrived") : TEXT("VehicleArrivalFailed");
+    Record.Action = EnumText(Entry.Action);
+    Record.TimingMode = EnumText(Entry.TimingMode);
+    Record.HistoricalSecond = Entry.Time.ToSecondsFromMidnight();
+    Record.bScheduledAsArrival = true;
+    Record.TargetAnchorId = Entry.PlacementAnchorId;
+    Record.PlannedSecond = PlannedSecond;
+    Record.ActualSecond = ActualSecond;
+    Record.TimeDeviationSeconds = ActualSecond - PlannedSecond;
+
+    const ATMOPVehicleBase* Vehicle = FindVehicle(VehicleId);
+    if (IsValid(Vehicle))
+        Record.ActualLocation = Vehicle->GetActorLocation();
+    if (!Entry.PlacementAnchorId.IsNone() && GetGameInstance() != nullptr)
+    {
+        UTMOPAnchorSubsystem* Anchors =
+            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+        const ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
+            ? Anchors->FindAnchor(Entry.PlacementAnchorId) : nullptr;
+        if (IsValid(Anchor) && IsValid(Vehicle))
+            Record.DistanceToTargetCm = FVector::Dist2D(
+                Vehicle->GetActorLocation(), Anchor->GetAnchorLocation());
+    }
+
+    const float AbsDeviation = FMath::Abs(Record.TimeDeviationSeconds);
+    if (!bSuccessful)
+    {
+        Record.Severity = ETMOPTimelineValidationSeverity::Error;
+        Record.FailureCode = TEXT("VehicleMissedArrivalAnchor");
+        Record.Message = Record.DistanceToTargetCm >= 0.0f
+            ? FString::Printf(
+                TEXT("Vehicle missed the arrival anchor by %.0f cm."),
+                Record.DistanceToTargetCm)
+            : TEXT("Vehicle did not reach the scheduled arrival anchor.");
+    }
+    else
+    {
+        if (AbsDeviation > TimingErrorSeconds)
+            Record.Severity = ETMOPTimelineValidationSeverity::Error;
+        else if (AbsDeviation > TimingWarningSeconds)
+            Record.Severity = ETMOPTimelineValidationSeverity::Warning;
+        Record.Message = AbsDeviation < 0.5f
+            ? TEXT("Vehicle arrived at the historical deadline.")
+            : FString::Printf(
+                TEXT("Vehicle arrived %.0f seconds %s the historical deadline."),
+                AbsDeviation,
+                Record.TimeDeviationSeconds >= 0.0f
+                    ? TEXT("late") : TEXT("early"));
+    }
+    AddRecord(Record);
+}
+
+void ATMOPTimelineValidationDirector::HandleGroupStateChanged(
+    const FName GroupId,
+    const ETMOPGroupState NewState)
+{
+    if (!bValidationActive || GroupId.IsNone() ||
+        NewState != ETMOPGroupState::Arrived)
+        return;
+
+    const int32 ActualSecond = GetSimulationSecond();
+    for (TPair<FName, FTrackedAgent>& Pair : TrackedAgents)
+    {
+        FTrackedAgent& Tracked = Pair.Value;
+        ATMOPHistoricalAgent* Agent = Tracked.Agent.Get();
+        if (!IsValid(Agent) || Agent->SocialGroupId != GroupId ||
+            !Tracked.bRegistryManagedTimedArrival ||
+            Tracked.ActivePlannedSecond == INDEX_NONE ||
+            Tracked.ActiveEntryId.IsNone())
+            continue;
+
+        FTMOPTimelineValidationRecord Arrival;
+        Arrival.EntityId = Pair.Key;
+        Arrival.EntryId = Tracked.ActiveEntryId;
+        Arrival.Event = TEXT("Completed");
+        Arrival.Action = TEXT("Move To Anchor");
+        Arrival.TargetAnchorId = Tracked.ActiveTargetAnchorId;
+        Arrival.PlannedSecond = Tracked.ActivePlannedSecond;
+        Arrival.ActualSecond = ActualSecond;
+        Arrival.TimeDeviationSeconds =
+            Arrival.ActualSecond - Arrival.PlannedSecond;
+        Arrival.bScheduledAsArrival = true;
+        Arrival.ActualLocation = Agent->GetActorLocation();
+        PopulateRecordRuntimeDiagnostics(Arrival, &Tracked);
+        const float AbsDeviation =
+            FMath::Abs(Arrival.TimeDeviationSeconds);
+        if (AbsDeviation > TimingErrorSeconds)
+            Arrival.Severity = ETMOPTimelineValidationSeverity::Error;
+        else if (AbsDeviation > TimingWarningSeconds)
+            Arrival.Severity = ETMOPTimelineValidationSeverity::Warning;
+        Arrival.Message = AbsDeviation < 0.5f
+            ? TEXT("Group arrived at the historical deadline.")
+            : FString::Printf(
+                TEXT("Group arrived %.0f seconds %s the historical deadline."),
+                AbsDeviation,
+                Arrival.TimeDeviationSeconds >= 0.0f
+                    ? TEXT("late") : TEXT("early"));
+        AddRecord(Arrival);
+
+        // The state-change delegate is synchronous, so this is the exact
+        // simulation second. Clearing here prevents the slower diagnostic
+        // sampler from recording a duplicate one second later.
+        Tracked.ActiveEntryId = NAME_None;
+        Tracked.ActiveTargetAnchorId = NAME_None;
+        Tracked.ActivePlannedSecond = INDEX_NONE;
+        Tracked.bRegistryManagedMove = false;
+        Tracked.bRegistryManagedTimedArrival = false;
+        Tracked.StationarySeconds = 0.0f;
+        Tracked.bStuckReportedForCurrentMove = false;
+        Tracked.LastLocation = Agent->GetActorLocation();
+    }
 }
 
 void ATMOPTimelineValidationDirector::ValidateSharedEventReferences()

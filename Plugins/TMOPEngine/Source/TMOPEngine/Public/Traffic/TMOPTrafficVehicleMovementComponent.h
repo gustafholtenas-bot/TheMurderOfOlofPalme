@@ -213,6 +213,18 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic")
     void StopDriving();
 
+    /** Makes route speed follow an absolute simulation arrival deadline. */
+    void ConfigureTimedArrival(int32 ExpectedArrivalSecond,
+        float MaximumCatchUpSpeedKmh = 90.0f);
+
+    /** Applies the exact final route/anchor transform when its deadline is due. */
+    bool ForceCompleteTimedArrival();
+
+    bool HasTimedArrival() const
+    {
+        return TimedArrivalSecond != INDEX_NONE;
+    }
+
     /**
      * Finish the final lane at the point nearest a destination anchor, then
      * blend the remaining short parking manoeuvre to the anchor transform.
@@ -301,6 +313,8 @@ public:
 
 private:
     float CalculateTargetSpeed(UTMOPTrafficLaneComponent* Lane);
+    float CalculateRemainingRouteDistanceCm() const;
+    double GetCurrentSimulationSecondExact() const;
     bool AdvanceToNextLane(UTMOPTrafficLaneComponent* CurrentLane);
     FName ChooseNextLaneId(const UTMOPTrafficLaneComponent* CurrentLane) const;
     void ApplyVehicleTransform(UTMOPTrafficLaneComponent* Lane);
@@ -345,4 +359,6 @@ private:
     FTransform FinalApproachTargetTransform = FTransform::Identity;
     float FinalApproachElapsedSeconds = 0.0f;
     float FinalApproachDurationSeconds = 1.0f;
+    int32 TimedArrivalSecond = INDEX_NONE;
+    float MaximumTimedCatchUpSpeedCmPerSecond = 2500.0f;
 };
