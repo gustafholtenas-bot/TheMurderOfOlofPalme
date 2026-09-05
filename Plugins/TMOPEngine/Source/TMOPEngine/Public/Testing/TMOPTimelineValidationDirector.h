@@ -22,6 +22,9 @@ struct TMOPENGINE_API FTMOPTimelineValidationRecord
     UPROPERTY(BlueprintReadOnly) FName EntityId = NAME_None;
     UPROPERTY(BlueprintReadOnly) FName EntryId = NAME_None;
     UPROPERTY(BlueprintReadOnly) FString Event;
+    UPROPERTY(BlueprintReadOnly) FString TimelineFingerprint;
+    UPROPERTY(BlueprintReadOnly) float ArrivalCorrectionCm = 0.0f;
+    UPROPERTY(BlueprintReadOnly) bool bArrivalBlocked = false;
     UPROPERTY(BlueprintReadOnly) FName TargetAnchorId = NAME_None;
     UPROPERTY(BlueprintReadOnly) int32 PlannedSecond = INDEX_NONE;
     UPROPERTY(BlueprintReadOnly) int32 ActualSecond = INDEX_NONE;

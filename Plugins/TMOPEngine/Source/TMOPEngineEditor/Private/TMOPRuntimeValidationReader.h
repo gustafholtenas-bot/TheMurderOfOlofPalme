@@ -13,5 +13,6 @@ namespace TMOPRuntimeValidation
         FName EntryId,
         FText& OutText,
         FText& OutToolTip,
-        FLinearColor& OutColor);
+        FLinearColor& OutColor,
+        const FString& ExpectedFingerprint = FString());
 }

@@ -189,8 +189,9 @@ void ATMOPHistoricalAgent::ApplyHeldItems(
         FTransform CatalogTransform = FTransform::Identity;
         ETMOPHeldItemPose ResolvedPose = Item.GripPose;
         if (!IsValid(LoadedMesh) && !Item.ItemId.IsNone())
-            if (UTMOPItemMeshSubsystem* Catalog = GetGameInstance() != nullptr
-                ? GetGameInstance()->GetSubsystem<UTMOPItemMeshSubsystem>() : nullptr)
+            if (const UTMOPItemMeshSubsystem* Catalog = GetGameInstance() != nullptr
+                ? GetGameInstance()->GetSubsystem<UTMOPItemMeshSubsystem>()
+                : GetDefault<UTMOPItemMeshSubsystem>())
             {
                 FTMOPItemMeshRow Definition;
                 if (Catalog->FindItemMeshDefinition(Item.ItemId, Definition))
@@ -204,7 +205,9 @@ void ATMOPHistoricalAgent::ApplyHeldItems(
         OutPose = IsValid(LoadedMesh) && IsHeldItemVisibleNow(Item)
             ? ResolvedPose : ETMOPHeldItemPose::None;
         Component->SetStaticMesh(LoadedMesh);
-        const FName Socket = Item.SocketName.IsNone() ? DefaultSocket : Item.SocketName;
+        FName Socket = Item.SocketName.IsNone() ? DefaultSocket : Item.SocketName;
+        if (Item.SocketName.IsNone() && !BodyMesh->DoesSocketExist(Socket))
+            Socket = DefaultSocket == TEXT("hand_lSocket") ? FName(TEXT("hand_l")) : FName(TEXT("hand_r"));
         Component->AttachToComponent(BodyMesh,
             FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
         Component->SetRelativeTransform(CatalogTransform * Item.RelativeTransform);
@@ -217,16 +220,18 @@ void ATMOPHistoricalAgent::ApplyHeldItems(
     ResolvedRightHandGripPose = RightHandGripPose;
 
     for (UStaticMeshComponent* Component : AdditionalCarriedItemComponents)
-        if (IsValid(Component)) Component->DestroyComponent();
+        if (IsValid(Component)) { RemoveInstanceComponent(Component); Component->DestroyComponent(); }
     AdditionalCarriedItemComponents.Reset();
+    ActiveAdditionalItems.Reset();
     for (int32 Index = 0; Index < AdditionalItems.Num(); ++Index)
     {
         const FTMOPHeldItemDefinition& Item = AdditionalItems[Index];
         UStaticMesh* LoadedMesh = Item.Mesh.LoadSynchronous();
         FTransform CatalogTransform = FTransform::Identity;
         if (!IsValid(LoadedMesh) && !Item.ItemId.IsNone())
-            if (UTMOPItemMeshSubsystem* Catalog = GetGameInstance() != nullptr
-                ? GetGameInstance()->GetSubsystem<UTMOPItemMeshSubsystem>() : nullptr)
+            if (const UTMOPItemMeshSubsystem* Catalog = GetGameInstance() != nullptr
+                ? GetGameInstance()->GetSubsystem<UTMOPItemMeshSubsystem>()
+                : GetDefault<UTMOPItemMeshSubsystem>())
             {
                 FTMOPItemMeshRow Definition;
                 if (Catalog->FindItemMeshDefinition(Item.ItemId, Definition))
@@ -239,7 +244,7 @@ void ATMOPHistoricalAgent::ApplyHeldItems(
         const FName ComponentName(*FString::Printf(TEXT("CarriedItem_%d_%s"),
             Index, *Item.ItemId.ToString()));
         UStaticMeshComponent* Component = NewObject<UStaticMeshComponent>(this,
-            UStaticMeshComponent::StaticClass(), ComponentName);
+            UStaticMeshComponent::StaticClass(), MakeUniqueObjectName(this, UStaticMeshComponent::StaticClass(), ComponentName));
         if (!IsValid(Component)) continue;
         AddInstanceComponent(Component);
         Component->SetupAttachment(BodyMesh);
@@ -268,7 +273,9 @@ void ATMOPHistoricalAgent::ApplyHeldItems(
         Component->AttachToComponent(BodyMesh,
             FAttachmentTransformRules::SnapToTargetNotIncludingScale, ResolvedSocket);
         Component->SetRelativeTransform(CatalogTransform * Item.RelativeTransform);
+        Component->SetVisibility(IsHeldItemVisibleNow(Item), true);
         AdditionalCarriedItemComponents.Add(Component);
+        ActiveAdditionalItems.Add(Item);
     }
 }
 
@@ -280,8 +287,12 @@ bool ATMOPHistoricalAgent::IsHeldItemVisibleNow(
     UGameInstance* GameInstance = GetGameInstance();
     UTMOPClockSubsystem* Clock = IsValid(GameInstance)
         ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
-    if (!IsValid(Clock)) return false;
-    const int32 Now = Clock->GetCurrentTime().ToSecondsFromMidnight();
+    int32 Now = IsValid(Clock) ? Clock->GetCurrentTime().ToSecondsFromMidnight() : INDEX_NONE;
+#if WITH_EDITOR
+    if (GetWorld() && GetWorld()->WorldType == EWorldType::EditorPreview)
+        Now = AppearancePreviewSecond;
+#endif
+    if (Now == INDEX_NONE) return false;
     return Now >= Item.VisibleFrom.ToSecondsFromMidnight() &&
         Now <= Item.VisibleUntil.ToSecondsFromMidnight();
 }
@@ -294,6 +305,9 @@ void ATMOPHistoricalAgent::UpdateHeldItemVisibility()
         IsValid(RightHandHeldItem->GetStaticMesh()) && IsHeldItemVisibleNow(ActiveRightHandItem);
     if (IsValid(LeftHandHeldItem)) LeftHandHeldItem->SetVisibility(bLeftVisible, true);
     if (IsValid(RightHandHeldItem)) RightHandHeldItem->SetVisibility(bRightVisible, true);
+    for (int32 Index = 0; Index < AdditionalCarriedItemComponents.Num(); ++Index)
+        if (IsValid(AdditionalCarriedItemComponents[Index]) && ActiveAdditionalItems.IsValidIndex(Index))
+            AdditionalCarriedItemComponents[Index]->SetVisibility(IsHeldItemVisibleNow(ActiveAdditionalItems[Index]), true);
     LeftHandGripPose = bLeftVisible ? ResolvedLeftHandGripPose : ETMOPHeldItemPose::None;
     RightHandGripPose = bRightVisible ? ResolvedRightHandGripPose : ETMOPHeldItemPose::None;
 }

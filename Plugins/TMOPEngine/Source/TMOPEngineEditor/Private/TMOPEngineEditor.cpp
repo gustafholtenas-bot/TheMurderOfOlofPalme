@@ -554,11 +554,10 @@ TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnPeopleEditorTab(
 TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnVehicleEditorTab(
     const FSpawnTabArgs& Args)
 {
-    return SNew(SDockTab)
-        .TabRole(ETabRole::NomadTab)
-        [
-            SNew(STMOPVehicleEditor)
-        ];
+    const TSharedRef<STMOPVehicleEditor> Editor = SNew(STMOPVehicleEditor);
+    const TSharedRef<SDockTab> Tab = SNew(SDockTab).TabRole(ETabRole::NomadTab)[Editor];
+    Tab->SetCanCloseTab(SDockTab::FCanCloseTab::CreateSP(Editor, &STMOPVehicleEditor::CanClose));
+    return Tab;
 }
 
 TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnLaneRepairEditorTab(

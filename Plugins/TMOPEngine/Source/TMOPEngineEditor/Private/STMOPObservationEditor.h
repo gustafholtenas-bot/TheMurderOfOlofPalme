@@ -7,10 +7,13 @@
 #include "Widgets/Views/SListView.h"
 
 class IStructureDetailsView;
+struct FPropertyChangedEvent;
 class STextBlock;
 class UDataTable;
 class FStructOnScope;
 class STMOPObservationMap;
+class STMOPAppearancePreview;
+struct FTMOPAppearanceProfile;
 template<typename OptionType> class SComboBox;
 
 /** Visual authoring tool for observation hypotheses and interpolated tracks. */
@@ -42,6 +45,13 @@ private:
     void RefreshMembers();
     void RefreshKnownPeople();
     void RefreshObservationInfo();
+    void RefreshAppearancePreview();
+    void OnLinkAppearanceChanged(const FPropertyChangedEvent& Event);
+    void OnPreviewAppearanceChanged(const FTMOPAppearanceProfile& Profile);
+    TSharedPtr<STMOPAppearancePreview> AppearancePreview;
+    FName PreviewPersonEntityId = NAME_None;
+    bool bPreviewLinkedEntity = false;
+    bool bRefreshingLinkDetails = false;
     void RefreshLevelGeometry();
     void RefreshValidationReport();
     void RebuildMap();

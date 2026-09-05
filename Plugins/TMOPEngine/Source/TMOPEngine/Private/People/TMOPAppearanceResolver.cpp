@@ -459,7 +459,7 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
         GlovesEvidence = Profile.OtherCharacteristics;
 
     OutAppearance.Body = ResolvePart(Profile, AssetCatalog,
-        ETMOPAppearancePartType::Body, FTMOPAppearancePartChoice(),
+        ETMOPAppearancePartType::Body, A.Body,
         { BodyEvidence }, TEXT("UNKNOWN_BODY_STANDARD"), false,
         Random, OutAppearance.Diagnostics);
     // Missing build evidence means a normal average body, not an anonymised body.

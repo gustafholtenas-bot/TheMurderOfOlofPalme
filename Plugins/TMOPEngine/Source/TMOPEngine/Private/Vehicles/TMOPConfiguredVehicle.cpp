@@ -13,6 +13,7 @@
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Audio/TMOPVehicleAudioComponent.h"
 #include "Vehicles/TMOPVehicleModelData.h"
+#include "Vehicles/TMOPVehiclePresentation.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Vehicles/TMOPVehicleDoorComponent.h"
 
@@ -195,18 +196,30 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
     }
     RoofAccessorySocket->SetRelativeTransform(RoofMount);
 
-    const bool bShowExternalRoofAccessory =
+    AccessoryWarnings.Reset();
+    bool bShowExternalRoofAccessory =
         !Model->bRoofAccessoryBuiltIntoBodyMesh &&
         RoofAccessory.Type != ETMOPRoofAccessoryType::None &&
         IsValid(RoofAccessory.Mesh);
     RoofAccessoryMesh->SetStaticMesh(
         bShowExternalRoofAccessory ? RoofAccessory.Mesh.Get() : nullptr);
-    RoofAccessoryMesh->SetRelativeTransform(RoofAccessory.LocalTransform);
+    if (bShowExternalRoofAccessory)
+    {
+        FString Warning;
+        bShowExternalRoofAccessory = TMOPVehiclePresentation::Attach(RoofAccessoryMesh,
+            BodyMesh, RoofAccessorySocket, RoofAccessory.SocketName, RoofAccessory.LocalTransform, Warning);
+        if (!bShowExternalRoofAccessory) AccessoryWarnings.Add(Warning);
+    }
+    if (RoofAccessory.Type != ETMOPRoofAccessoryType::None && !IsValid(RoofAccessory.Mesh) &&
+        !Model->bRoofAccessoryBuiltIntoBodyMesh)
+        AccessoryWarnings.Add(TEXT("Roof Accessory: choose a mesh."));
+    TMOPVehiclePresentation::BuildAccessories(this, BodyMesh, AdditionalAccessories, AccessoryWarnings);
     RoofAccessoryMesh->SetVisibility(bShowExternalRoofAccessory, true);
     RoofAccessoryMesh->EmptyOverrideMaterials();
     if (bShowExternalRoofAccessory && IsValid(RoofAccessory.Material))
         RoofAccessoryMesh->SetMaterial(0, RoofAccessory.Material.Get());
-    ApplyBodyColor();
+    if (!ApplyBodyColor() && bOverrideBodyColor)
+        AccessoryWarnings.Add(TEXT("Body color could not be applied. Check the model body material slot and VehicleColor vector parameter."));
     InitializeVehicleLightMaterials();
     ApplyWheel(WheelFrontLeft, Model->WheelMesh, Model->Wheels.FrontLeft);
     ApplyWheel(WheelFrontRight, Model->WheelMesh, Model->Wheels.FrontRight);

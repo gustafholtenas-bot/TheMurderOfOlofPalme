@@ -22,7 +22,10 @@ public class TMOPEngineEditor : ModuleRules
             "ToolMenus",
             "LevelEditor",
             "InputCore",
-            "Json"
+            "RenderCore",
+            "RHI",
+            "Json",
+            "JsonUtilities"
         });
     }
 }

@@ -69,6 +69,13 @@ public:
         Category="TMOP|Configured Vehicle|Accessories")
     FTMOPRoofAccessoryVisual RoofAccessory;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Configured Vehicle|Accessories",
+        meta=(TitleProperty="AccessoryId"))
+    TArray<FTMOPVehicleAccessoryVisual> AdditionalAccessories;
+
+    UPROPERTY(Transient, BlueprintReadOnly, Category="TMOP|Configured Vehicle|Accessories")
+    TArray<FString> AccessoryWarnings;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Configured Vehicle")
     TObjectPtr<UStaticMeshComponent> WheelFrontLeft;
 

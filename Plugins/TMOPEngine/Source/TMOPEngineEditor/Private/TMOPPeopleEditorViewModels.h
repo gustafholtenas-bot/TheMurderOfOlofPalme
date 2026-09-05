@@ -22,6 +22,15 @@ struct FTMOPPersonCharacteristicsEditorData
         meta=(DisplayName="Runtime Appearance Profile"))
     FTMOPAppearanceProfile AppearanceProfile;
 
+    UPROPERTY(EditAnywhere, Category="Held Items")
+    FTMOPHeldItemDefinition LeftHandItem;
+
+    UPROPERTY(EditAnywhere, Category="Held Items")
+    FTMOPHeldItemDefinition RightHandItem;
+
+    UPROPERTY(EditAnywhere, Category="Held Items", meta=(TitleProperty="ItemId"))
+    TArray<FTMOPHeldItemDefinition> AdditionalCarriedItems;
+
     UPROPERTY(EditAnywhere, Category="Image Reference",
         meta=(DisplayName="Reference Image"))
     TSoftObjectPtr<UTexture2D> ReferenceImage;

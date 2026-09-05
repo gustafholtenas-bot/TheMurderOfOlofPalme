@@ -54,6 +54,11 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning")
     bool bReusePlacedVehicles = true;
 
+    /** Optional legacy optimization. Off by default so authored spawn times
+     * are not silently replaced by departure minus a lead time. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning")
+    bool bUseBoundarySpawnLead = false;
+
     /** Boundary vehicles appear only this many seconds before first driving. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicles|Spawning",
         meta=(ClampMin="0", Units="s"))
@@ -137,6 +142,10 @@ public:
         float StartDistanceAlongFirstLaneCm = 0.0f,
         bool bUseTimelineRouteOverride = true);
 
+    bool ResolveDrivingWindow(const FTMOPHistoricalVehicleRow& Profile,
+        int32 Index, int32& Departure, int32& Arrival) const;
+    FString GetTimelineFingerprint(FName VehicleId, FName EntryId) const;
+
     /** Returns the most recent detailed reason BeginDrivingVehicle rejected
      * this vehicle. The diagnostic is cleared when a new attempt succeeds. */
     bool GetLastDrivingFailure(
@@ -147,6 +156,9 @@ public:
 private:
     struct FHistoricalVehicleRuntime
     {
+        bool bReconstructCurrentRoute = true;
+        int32 FirstVisibleSpawnSecond = INDEX_NONE;
+        bool bHiddenUntilSpawn = false;
         FName RowName = NAME_None;
         FTMOPHistoricalVehicleRow Profile;
         TWeakObjectPtr<ATMOPVehicleBase> Vehicle;
@@ -232,4 +244,5 @@ private:
     TMap<FName, FString> LastDrivingFailureDetails;
     TMap<FName, FName> RequestedDrivingEntryOverrides;
     int32 LastEvaluatedSecond = INDEX_NONE;
+    int32 ReconstructionSecond = INDEX_NONE;
 };

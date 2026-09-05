@@ -658,6 +658,10 @@ struct TMOPENGINE_API FTMOPAppearanceProfile
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Color")
     FName EyeColorId = NAME_None;
 
+    /** Optional exact modular body asset. Empty keeps body selection automatic. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
+    FTMOPAppearancePartChoice Body;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Parts")
     FTMOPAppearancePartChoice Face;
 

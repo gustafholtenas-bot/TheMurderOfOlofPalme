@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Vehicles/TMOPVehicleRoutePlan.h"
 #include "TMOPTrafficVehicleMovementComponent.generated.h"
 
 class UTMOPTrafficLaneComponent;
@@ -214,6 +215,16 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic")
     void StopDriving();
 
+    /** Shared historical plan. Seek reconstructs progress; a normal late start
+     * keeps the actual position and catches up within the speed limit. */
+    bool StartRoutePlan(const FTMOPVehicleRoutePlan& Plan, int32 Departure,
+        int32 Arrival, float CatchUpKmh, bool bSeek, bool bStopAtVia = false);
+    double LastArrivalCorrectionCm = 0.0;
+    bool bLastArrivalBlocked = false;
+    FString LastArrivalBlocker;
+    FString ActiveTimelineFingerprint;
+    bool WasArrivalCorrected() const { return LastArrivalCorrectionCm > 1.0; }
+
     /** Makes route speed follow an absolute simulation arrival deadline. */
     void ConfigureTimedArrival(int32 ExpectedArrivalSecond,
         float MaximumCatchUpSpeedKmh = 90.0f);
@@ -328,6 +339,13 @@ public:
     bool IsChangingLane() const { return !TargetLaneId.IsNone(); }
 
 private:
+    bool ApplyManeuverPose(const FTransform& Pose);
+    FTMOPVehicleRoutePlan ActiveRoutePlan;
+    double ManeuverProgressCm = 0.0;
+    double TimedRouteProgressCm = 0.0;
+    int32 TimedDepartureSecond = INDEX_NONE;
+    bool bManeuverStopAtVia = false;
+    double FinalApproachStartSecond = 0.0;
     float CalculateTargetSpeed(UTMOPTrafficLaneComponent* Lane);
     float CalculateRemainingRouteDistanceCm() const;
     double GetCurrentSimulationSecondExact() const;

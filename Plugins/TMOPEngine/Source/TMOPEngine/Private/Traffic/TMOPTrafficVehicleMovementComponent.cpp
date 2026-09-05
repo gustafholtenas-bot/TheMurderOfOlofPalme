@@ -88,6 +88,11 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if (!bDrivingEnabled || DeltaTime <= 0.0f) return;
+    const UGameInstance* ClockInstance = GetWorld() ? GetWorld()->GetGameInstance() : nullptr;
+    const auto* TimelineClock = ClockInstance ? ClockInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (TimedArrivalSecond != INDEX_NONE && TimelineClock &&
+        (!TimelineClock->IsClockRunning() || TimelineClock->GetTimeScale() <= 0.0f))
+        return;
 
     if (TimedArrivalSecond != INDEX_NONE &&
         GetCurrentSimulationSecondExact() >=
@@ -147,7 +152,17 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
     // reaching the bus service's arrival tolerance.
     const float ActiveStopDistance = GetNearestActiveStopDistance();
     const float PreviousDistanceAlongLane = DistanceAlongLane;
-    DistanceAlongLane += CurrentSpeedCmPerSecond * DeltaTime;
+    double TravelCm = CurrentSpeedCmPerSecond * DeltaTime;
+    if (TimedDepartureSecond != INDEX_NONE && TimedArrivalSecond > TimedDepartureSecond)
+    {
+        const double Alpha = FMath::Clamp((GetCurrentSimulationSecondExact() - TimedDepartureSecond) /
+            double(TimedArrivalSecond - TimedDepartureSecond), 0.0, 1.0);
+        // Catch-up may recover lost progress, but cannot put the car ahead of
+        // its scheduled route position or at its final anchor too early.
+        TravelCm = FMath::Min(TravelCm, FMath::Max(0.0, ActiveRoutePlan.LengthCm * Alpha - TimedRouteProgressCm));
+        TimedRouteProgressCm += TravelCm;
+    }
+    DistanceAlongLane += float(TravelCm);
 
     if (bHasFinalApproach && CurrentLaneId == FinalApproachLaneId &&
         PreviousDistanceAlongLane <= FinalApproachLaneDistanceCm &&
@@ -665,11 +680,13 @@ void UTMOPTrafficVehicleMovementComponent::StopDriving()
 {
     EndObstacleBypass();
     ClearAnchorManeuver();
+    ClearFinalApproach();
     bDrivingEnabled = false;
     CurrentSpeedCmPerSecond = 0.0f;
     VisualSteeringAngleDegrees = 0.0f;
     TrafficState = ETMOPTrafficVehicleState::Stopped;
     TimedArrivalSecond = INDEX_NONE;
+    TimedDepartureSecond = INDEX_NONE;
 }
 
 void UTMOPTrafficVehicleMovementComponent::ConfigureTimedArrival(
@@ -682,93 +699,127 @@ void UTMOPTrafficVehicleMovementComponent::ConfigureTimedArrival(
 }
 
 bool UTMOPTrafficVehicleMovementComponent::StartAnchorManeuver(
-    const TArray<FTransform>& InAnchorTransforms,
-    const int32 ExpectedArrivalSecond,
-    const float CurveStrength,
-    const bool bReverse)
+    const TArray<FTransform>& InAnchorTransforms, const int32 ExpectedArrivalSecond,
+    const float CurveStrength, const bool bReverse)
 {
-    AActor* OwnerActor = GetOwner();
-    if (!IsValid(OwnerActor) || InAnchorTransforms.Num() < 2)
+    FTMOPVehicleRoutePlan Plan;
+    TMOPVehicleRoute::BuildManeuver(InAnchorTransforms, CurveStrength, bReverse,
+        ETMOPVehicleManeuverTurn::Automatic, 0.0f, Plan);
+    const int32 Now = FMath::FloorToInt(GetCurrentSimulationSecondExact());
+    const int32 Arrival = ExpectedArrivalSecond != INDEX_NONE ? ExpectedArrivalSecond :
+        Now + FMath::Max(1, FMath::CeilToInt(Plan.LengthCm /
+            FMath::Max(100.0f, DesiredCruiseSpeedKmh / 0.036f)));
+    return StartRoutePlan(Plan, Now, Arrival, 90.0f, false);
+}
+
+bool UTMOPTrafficVehicleMovementComponent::StartRoutePlan(
+    const FTMOPVehicleRoutePlan& Plan, int32 Departure, int32 Arrival,
+    float CatchUpKmh, bool bSeek, bool bStopAtVia)
+{
+    if (!GetOwner() || Plan.Samples.Num() < 2 || Arrival <= Departure) return false;
+    StopDriving();
+    ActiveRoutePlan = Plan;
+    if (!bSeek && FVector::Distance(GetOwner()->GetActorLocation(), Plan.Samples[0].GetLocation()) > 300.0)
         return false;
-
-    ClearFinalApproach();
-    ClearAnchorManeuver();
-    PlannedLaneIds.Reset();
-    CurrentLaneId = NAME_None;
-    PlannedLaneIndex = INDEX_NONE;
-    DistanceAlongLane = 0.0f;
-
-    AnchorManeuverTransforms = InAnchorTransforms;
-    AnchorManeuverCurveStrength = FMath::Clamp(CurveStrength, 0.0f, 2.0f);
-    bAnchorManeuverReverse = bReverse;
-    AnchorManeuverStartSecond = GetCurrentSimulationSecondExact();
-    AnchorManeuverElapsedSeconds = 0.0f;
-    AnchorManeuverApproximateLengthCm = 0.0f;
-    AnchorManeuverSegmentWeights.Reset();
-
-    TArray<float> SegmentLengths;
-    SegmentLengths.Reserve(AnchorManeuverTransforms.Num() - 1);
-    for (int32 Index = 0;
-        Index + 1 < AnchorManeuverTransforms.Num(); ++Index)
+    LastArrivalCorrectionCm = 0.0;
+    bLastArrivalBlocked = false;
+    LastArrivalBlocker.Reset();
+    bManeuverStopAtVia = bStopAtVia;
+    const double Now = GetCurrentSimulationSecondExact();
+    const double Alpha = bSeek ? FMath::Clamp((Now - Departure) / double(Arrival - Departure), 0.0, 1.0) : 0.0;
+    ManeuverProgressCm = TMOPVehicleRoute::DistanceAtTime(Plan, Alpha, bStopAtVia);
+    ConfigureTimedArrival(Arrival, CatchUpKmh);
+    if (Plan.bAnchorManeuver)
     {
-        const FTransform& Start = AnchorManeuverTransforms[Index];
-        const FTransform& End = AnchorManeuverTransforms[Index + 1];
-        const FVector P0 = Start.GetLocation();
-        const FVector P3 = End.GetLocation();
-        const float TangentLength = FVector::Distance(P0, P3) * 0.5f *
-            AnchorManeuverCurveStrength;
-        const float DirectionSign = bAnchorManeuverReverse ? -1.0f : 1.0f;
-        const FVector P1 = P0 + Start.GetRotation().GetForwardVector() *
-            DirectionSign * TangentLength;
-        const FVector P2 = P3 - End.GetRotation().GetForwardVector() *
-            DirectionSign * TangentLength;
-        float SegmentLength = 0.0f;
-        FVector Previous = P0;
-        constexpr int32 Samples = 24;
-        for (int32 Sample = 1; Sample <= Samples; ++Sample)
+        PlannedLaneIds.Reset(); CurrentLaneId = NAME_None; PlannedLaneIndex = INDEX_NONE;
+        AnchorManeuverTransforms = Plan.Anchors;
+        AnchorManeuverApproximateLengthCm = float(Plan.LengthCm);
+        AnchorManeuverStartSecond = Departure;
+        AnchorManeuverDurationSeconds = float(Arrival - Departure);
+        bAnchorManeuverInProgress = true;
+        bDrivingEnabled = true;
+        TrafficState = ETMOPTrafficVehicleState::AnchorManeuver;
+        if (bSeek) GetOwner()->SetActorTransform(Plan.Sample(ManeuverProgressCm),
+            false, nullptr, ETeleportType::TeleportPhysics);
+        else
         {
-            const float RawAlpha = static_cast<float>(Sample) / Samples;
-            const float Alpha = FMath::SmoothStep(0.0f, 1.0f, RawAlpha);
-            const float OneMinusT = 1.0f - Alpha;
-            const FVector Current =
-                OneMinusT * OneMinusT * OneMinusT * P0 +
-                3.0f * OneMinusT * OneMinusT * Alpha * P1 +
-                3.0f * OneMinusT * Alpha * Alpha * P2 +
-                Alpha * Alpha * Alpha * P3;
-            SegmentLength += FVector::Distance(Previous, Current);
-            Previous = Current;
+            // Do not silently teleport a normally starting car onto a remote anchor.
+            if (FVector::Distance(GetOwner()->GetActorLocation(), Plan.Samples[0].GetLocation()) > 300.0)
+            { StopDriving(); return false; }
+            if (!ApplyManeuverPose(Plan.Samples[0])) { StopDriving(); return false; }
         }
-        SegmentLength = FMath::Max(1.0f, SegmentLength);
-        SegmentLengths.Add(SegmentLength);
-        AnchorManeuverApproximateLengthCm += SegmentLength;
     }
-    float AccumulatedWeight = 0.0f;
-    for (const float SegmentLength : SegmentLengths)
+    else
     {
-        AccumulatedWeight += SegmentLength /
-            FMath::Max(1.0f, AnchorManeuverApproximateLengthCm);
-        AnchorManeuverSegmentWeights.Add(AccumulatedWeight);
+        PlannedLaneIds = Plan.LaneIds;
+        UGameInstance* Instance = GetWorld() ? GetWorld()->GetGameInstance() : nullptr;
+        auto* Network = Instance ? Instance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
+        if (!Network || PlannedLaneIds.IsEmpty()) return false;
+        Network->DiscoverLanesInWorld();
+        float Remaining = float(ManeuverProgressCm);
+        int32 LaneIndex = 0;
+        float Coordinate = Plan.StartDistanceCm;
+        for (; LaneIndex < PlannedLaneIds.Num(); ++LaneIndex)
+        {
+            const auto* Lane = Network->FindLane(PlannedLaneIds[LaneIndex]);
+            if (!Lane) return false;
+            const float Begin = LaneIndex == 0 ? Plan.StartDistanceCm : 0.0f;
+            const float End = LaneIndex == PlannedLaneIds.Num() - 1 ? Plan.EndDistanceCm : Lane->GetSplineLength();
+            if (Remaining <= End - Begin || LaneIndex == PlannedLaneIds.Num() - 1)
+            { Coordinate = FMath::Min(End, Begin + Remaining); break; }
+            Remaining -= End - Begin;
+        }
+        const int32 ChosenIndex = FMath::Min(LaneIndex, PlannedLaneIds.Num() - 1);
+        if (!InitializeOnLane(PlannedLaneIds[ChosenIndex], Coordinate)) return false;
+        PlannedLaneIndex = ChosenIndex;
+        if (Plan.bHasDestination)
+            ConfigureFinalApproach(PlannedLaneIds.Last(), Plan.EndDistanceCm, Plan.Destination);
+        // Authored routes must not wander onto a neighbor that is not in the plan.
+        bAllowLaneChanges = false;
+        StartDriving();
+        if (bSeek && ChosenIndex == PlannedLaneIds.Num() - 1 &&
+            Coordinate >= Plan.EndDistanceCm && Plan.bHasDestination)
+        {
+            BeginFinalApproach(Network->FindLane(PlannedLaneIds.Last()));
+            FinalApproachStartTransform = Plan.Sample(ManeuverProgressCm);
+            GetOwner()->SetActorTransform(FinalApproachStartTransform, false, nullptr, ETeleportType::TeleportPhysics);
+            FinalApproachStartSecond = Now;
+            FinalApproachDurationSeconds = FMath::Max(0.01f, float(Arrival - Now));
+        }
     }
-    if (!AnchorManeuverSegmentWeights.IsEmpty())
-        AnchorManeuverSegmentWeights.Last() = 1.0f;
+    ConfigureTimedArrival(Arrival, CatchUpKmh);
+    TimedDepartureSecond = Departure;
+    TimedRouteProgressCm = ManeuverProgressCm;
+    return true;
+}
 
-    TimedArrivalSecond = ExpectedArrivalSecond;
-    const double SimulationDuration = ExpectedArrivalSecond != INDEX_NONE
-        ? static_cast<double>(ExpectedArrivalSecond) -
-            AnchorManeuverStartSecond
-        : 0.0;
-    AnchorManeuverDurationSeconds = SimulationDuration > 0.0
-        ? static_cast<float>(SimulationDuration)
-        : FMath::Max(0.25f, AnchorManeuverApproximateLengthCm /
-            FMath::Max(100.0f, DesiredCruiseSpeedKmh *
-                (100000.0f / 3600.0f)));
-    CurrentSpeedCmPerSecond = AnchorManeuverApproximateLengthCm /
-        FMath::Max(0.1f, AnchorManeuverDurationSeconds);
-    bAnchorManeuverInProgress = true;
-    bDrivingEnabled = true;
-    TrafficState = ETMOPTrafficVehicleState::AnchorManeuver;
-    OwnerActor->SetActorTransform(AnchorManeuverTransforms[0],
-        false, nullptr, ETeleportType::TeleportPhysics);
+bool UTMOPTrafficVehicleMovementComponent::ApplyManeuverPose(const FTransform& Pose)
+{
+    AActor* VehicleActor = GetOwner();
+    if (!VehicleActor) return false;
+    FTMOPVehicleRoutePlan Step;
+    Step.AddSample(VehicleActor->GetActorTransform()); Step.AddSample(Pose);
+    FHitResult Hit;
+    if (TMOPVehicleRoute::FindObstacle(GetWorld(), Step,
+        FVector(VehicleLengthCm * 0.45f, ObstacleSensorHalfWidthCm, 50.0f), Hit, VehicleActor))
+    {
+        bLastArrivalBlocked = true;
+        LastArrivalBlocker = GetNameSafe(Hit.GetActor());
+        CurrentSpeedCmPerSecond = 0.0f;
+        return false;
+    }
+    FTransform ScaledPose = Pose;
+    ScaledPose.SetScale3D(VehicleActor->GetActorScale3D());
+    VehicleActor->SetActorTransform(ScaledPose, true, &Hit, ETeleportType::TeleportPhysics);
+    if (Hit.bBlockingHit)
+    {
+        bLastArrivalBlocked = true;
+        LastArrivalBlocker = GetNameSafe(Hit.GetActor());
+        CurrentSpeedCmPerSecond = 0.0f;
+        return false;
+    }
+    bLastArrivalBlocked = false;
+    LastArrivalBlocker.Reset();
     return true;
 }
 
@@ -836,138 +887,55 @@ float UTMOPTrafficVehicleMovementComponent::CalculateRemainingRouteDistanceCm() 
 
 bool UTMOPTrafficVehicleMovementComponent::ForceCompleteTimedArrival()
 {
-    if (TimedArrivalSecond == INDEX_NONE || GetOwner() == nullptr)
-        return false;
-    if (bAnchorManeuverInProgress &&
-        AnchorManeuverTransforms.Num() >= 2)
+    if (TimedArrivalSecond == INDEX_NONE || !GetOwner()) return false;
+    FTransform Target = GetOwner()->GetActorTransform();
+    if (bAnchorManeuverInProgress && !ActiveRoutePlan.Samples.IsEmpty()) Target = ActiveRoutePlan.Destination;
+    else if (bHasFinalApproach) Target = FinalApproachTargetTransform;
+    else if (auto* Lane = GetCurrentLane()) Target = Lane->GetLaneTransformAtDistance(Lane->GetSplineLength());
+    LastArrivalCorrectionCm = FVector::Distance(GetOwner()->GetActorLocation(), Target.GetLocation());
+    bool bApplied = true;
+    if (bAnchorManeuverInProgress)
     {
-        GetOwner()->SetActorTransform(AnchorManeuverTransforms.Last(),
-            false, nullptr, ETeleportType::TeleportPhysics);
-        ClearAnchorManeuver();
-    }
-    else if (bHasFinalApproach || bFinalApproachInProgress)
-    {
-        GetOwner()->SetActorTransform(FinalApproachTargetTransform,
-            false, nullptr, ETeleportType::TeleportPhysics);
-        ClearFinalApproach();
-    }
-    else
-    {
-        UTMOPTrafficLaneComponent* FinalLane = nullptr;
-        if (!PlannedLaneIds.IsEmpty())
+        // Sweep along the curve, never cut straight through an obstacle at the deadline.
+        while (ManeuverProgressCm < ActiveRoutePlan.LengthCm - 0.01)
         {
-            UGameInstance* GameInstance = GetWorld() != nullptr
-                ? GetWorld()->GetGameInstance() : nullptr;
-            UTMOPTrafficNetworkSubsystem* Network = GameInstance != nullptr
-                ? GameInstance->GetSubsystem<UTMOPTrafficNetworkSubsystem>() : nullptr;
-            FinalLane = Network != nullptr
-                ? Network->FindLane(PlannedLaneIds.Last()) : nullptr;
-        }
-        if (IsValid(FinalLane))
-        {
-            CurrentLaneId = PlannedLaneIds.Last();
-            PlannedLaneIndex = PlannedLaneIds.Num() - 1;
-            DistanceAlongLane = FinalLane->GetSplineLength();
-            ApplyVehicleTransform(FinalLane);
+            const double Next = FMath::Min(ActiveRoutePlan.LengthCm, ManeuverProgressCm + 30.0);
+            if (!ApplyManeuverPose(ActiveRoutePlan.Sample(Next))) { bApplied = false; break; }
+            ManeuverProgressCm = Next;
         }
     }
+    else bApplied = ApplyManeuverPose(Target);
+    ClearAnchorManeuver(); ClearFinalApproach();
     TimedArrivalSecond = INDEX_NONE;
-    bDrivingEnabled = false;
-    CurrentSpeedCmPerSecond = 0.0f;
-    VisualSteeringAngleDegrees = 0.0f;
-    TrafficState = ETMOPTrafficVehicleState::RouteComplete;
-    return true;
+    bDrivingEnabled = false; CurrentSpeedCmPerSecond = 0.0f; VisualSteeringAngleDegrees = 0.0f;
+    TrafficState = bApplied ? ETMOPTrafficVehicleState::RouteComplete : ETMOPTrafficVehicleState::Stopped;
+    return bApplied;
 }
 
-FTransform UTMOPTrafficVehicleMovementComponent::EvaluateAnchorManeuver(
-    const float InAlpha) const
+FTransform UTMOPTrafficVehicleMovementComponent::EvaluateAnchorManeuver(const float Alpha) const
 {
-    if (AnchorManeuverTransforms.Num() < 2)
-        return GetOwner() != nullptr
-            ? GetOwner()->GetActorTransform() : FTransform::Identity;
-
-    const float Alpha = FMath::Clamp(InAlpha, 0.0f, 1.0f);
-    int32 SegmentIndex = 0;
-    float SegmentStartWeight = 0.0f;
-    for (; SegmentIndex < AnchorManeuverSegmentWeights.Num(); ++SegmentIndex)
-    {
-        if (Alpha <= AnchorManeuverSegmentWeights[SegmentIndex])
-            break;
-        SegmentStartWeight = AnchorManeuverSegmentWeights[SegmentIndex];
-    }
-    SegmentIndex = FMath::Clamp(SegmentIndex, 0,
-        AnchorManeuverTransforms.Num() - 2);
-    const float SegmentEndWeight = AnchorManeuverSegmentWeights.IsValidIndex(
-        SegmentIndex) ? AnchorManeuverSegmentWeights[SegmentIndex] : 1.0f;
-    const float LocalAlpha = FMath::Clamp(
-        (Alpha - SegmentStartWeight) /
-            FMath::Max(KINDA_SMALL_NUMBER,
-                SegmentEndWeight - SegmentStartWeight),
-        0.0f, 1.0f);
-    const float SmoothAlpha = FMath::SmoothStep(0.0f, 1.0f, LocalAlpha);
-
-    const FTransform& Start = AnchorManeuverTransforms[SegmentIndex];
-    const FTransform& End = AnchorManeuverTransforms[SegmentIndex + 1];
-    const FVector P0 = Start.GetLocation();
-    const FVector P3 = End.GetLocation();
-    const float DirectDistance = FVector::Distance(P0, P3);
-    const float TangentLength = DirectDistance *
-        0.5f * AnchorManeuverCurveStrength;
-    const float DirectionSign = bAnchorManeuverReverse ? -1.0f : 1.0f;
-    const FVector StartDirection =
-        Start.GetRotation().GetForwardVector() * DirectionSign;
-    const FVector EndDirection =
-        End.GetRotation().GetForwardVector() * DirectionSign;
-    const FVector P1 = P0 + StartDirection * TangentLength;
-    const FVector P2 = P3 - EndDirection * TangentLength;
-    const float OneMinusT = 1.0f - SmoothAlpha;
-    const FVector Location =
-        OneMinusT * OneMinusT * OneMinusT * P0 +
-        3.0f * OneMinusT * OneMinusT * SmoothAlpha * P1 +
-        3.0f * OneMinusT * SmoothAlpha * SmoothAlpha * P2 +
-        SmoothAlpha * SmoothAlpha * SmoothAlpha * P3;
-    const FQuat Rotation = FQuat::Slerp(
-        Start.GetRotation(), End.GetRotation(), SmoothAlpha).GetNormalized();
-    const FVector Scale = FMath::Lerp(
-        Start.GetScale3D(), End.GetScale3D(), SmoothAlpha);
-    return FTransform(Rotation, Location, Scale);
+    return ActiveRoutePlan.Sample(TMOPVehicleRoute::DistanceAtTime(ActiveRoutePlan, Alpha, bManeuverStopAtVia));
 }
 
-void UTMOPTrafficVehicleMovementComponent::UpdateAnchorManeuver(
-    const float DeltaTime)
+void UTMOPTrafficVehicleMovementComponent::UpdateAnchorManeuver(const float DeltaTime)
 {
-    AActor* OwnerActor = GetOwner();
-    if (!bAnchorManeuverInProgress || !IsValid(OwnerActor))
-        return;
-
-    AnchorManeuverElapsedSeconds += DeltaTime;
-    float Alpha = AnchorManeuverElapsedSeconds /
-        FMath::Max(0.1f, AnchorManeuverDurationSeconds);
-    if (TimedArrivalSecond != INDEX_NONE)
+    if (!bAnchorManeuverInProgress || !GetOwner()) return;
+    const double Alpha = FMath::Clamp((GetCurrentSimulationSecondExact() - AnchorManeuverStartSecond) /
+        FMath::Max(0.1, double(AnchorManeuverDurationSeconds)), 0.0, 1.0);
+    const double Desired = TMOPVehicleRoute::DistanceAtTime(ActiveRoutePlan, Alpha, bManeuverStopAtVia);
+    const double Before = ManeuverProgressCm;
+    const auto* Instance = GetWorld() ? GetWorld()->GetGameInstance() : nullptr;
+    const auto* Clock = Instance ? Instance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    const double TimeScale = Clock ? Clock->GetTimeScale() : 1.0;
+    const double Limit = FMath::Min(Desired, Before + MaximumTimedCatchUpSpeedCmPerSecond * DeltaTime * TimeScale);
+    while (ManeuverProgressCm < Limit - 0.01)
     {
-        const double Total = static_cast<double>(TimedArrivalSecond) -
-            AnchorManeuverStartSecond;
-        Alpha = Total > 0.0
-            ? static_cast<float>((GetCurrentSimulationSecondExact() -
-                AnchorManeuverStartSecond) / Total)
-            : 1.0f;
+        const double Next = FMath::Min(Limit, ManeuverProgressCm + 30.0);
+        if (!ApplyManeuverPose(ActiveRoutePlan.Sample(Next))) break;
+        ManeuverProgressCm = Next;
     }
-    Alpha = FMath::Clamp(Alpha, 0.0f, 1.0f);
-    OwnerActor->SetActorTransform(EvaluateAnchorManeuver(Alpha),
-        false, nullptr, ETeleportType::TeleportPhysics);
-    TrafficState = ETMOPTrafficVehicleState::AnchorManeuver;
-
-    if (Alpha >= 1.0f)
-    {
-        OwnerActor->SetActorTransform(AnchorManeuverTransforms.Last(),
-            false, nullptr, ETeleportType::TeleportPhysics);
-        ClearAnchorManeuver();
-        bDrivingEnabled = false;
-        CurrentSpeedCmPerSecond = 0.0f;
-        VisualSteeringAngleDegrees = 0.0f;
-        TrafficState = ETMOPTrafficVehicleState::RouteComplete;
-        TimedArrivalSecond = INDEX_NONE;
-    }
+    CurrentSpeedCmPerSecond = DeltaTime > 0.0f ? float((ManeuverProgressCm - Before) / DeltaTime) : 0.0f;
+    TrafficState = bLastArrivalBlocked ? ETMOPTrafficVehicleState::Stopped : ETMOPTrafficVehicleState::AnchorManeuver;
 }
 
 void UTMOPTrafficVehicleMovementComponent::ClearAnchorManeuver()
@@ -1036,18 +1004,10 @@ void UTMOPTrafficVehicleMovementComponent::BeginFinalApproach(
         Distance / FMath::Max(50.0f, FinalApproachSpeedCmPerSecond),
         MinimumFinalApproachDurationSeconds,
         MaximumFinalApproachDurationSeconds);
+    FinalApproachStartSecond = GetCurrentSimulationSecondExact();
     if (TimedArrivalSecond != INDEX_NONE)
-    {
-        const UGameInstance* GameInstance = GetWorld() != nullptr
-            ? GetWorld()->GetGameInstance() : nullptr;
-        const UTMOPClockSubsystem* Clock = GameInstance != nullptr
-            ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
-        const float SimulationRate = Clock != nullptr
-            ? FMath::Max(0.01f, Clock->GetTimeScale()) : 1.0f;
         FinalApproachDurationSeconds = FMath::Max(0.01f,
-            static_cast<float>(static_cast<double>(TimedArrivalSecond) -
-                GetCurrentSimulationSecondExact()) / SimulationRate);
-    }
+            float(TimedArrivalSecond - FinalApproachStartSecond));
     FinalApproachElapsedSeconds = 0.0f;
     CurrentSpeedCmPerSecond = Distance /
         FMath::Max(0.1f, FinalApproachDurationSeconds);
@@ -1061,7 +1021,9 @@ void UTMOPTrafficVehicleMovementComponent::UpdateFinalApproach(
     AActor* OwnerActor = GetOwner();
     if (!bFinalApproachInProgress || !IsValid(OwnerActor)) return;
 
-    FinalApproachElapsedSeconds += DeltaTime;
+    if (TimedArrivalSecond != INDEX_NONE)
+        FinalApproachElapsedSeconds = float(GetCurrentSimulationSecondExact() - FinalApproachStartSecond);
+    else FinalApproachElapsedSeconds += DeltaTime;
     const float LinearAlpha = FMath::Clamp(
         FinalApproachElapsedSeconds /
             FMath::Max(0.1f, FinalApproachDurationSeconds),
@@ -1072,8 +1034,7 @@ void UTMOPTrafficVehicleMovementComponent::UpdateFinalApproach(
         FinalApproachStartTransform,
         FinalApproachTargetTransform,
         SmoothAlpha);
-    OwnerActor->SetActorTransform(
-        BlendedTransform, false, nullptr, ETeleportType::TeleportPhysics);
+    if (!ApplyManeuverPose(BlendedTransform)) return;
     TrafficState = ETMOPTrafficVehicleState::FinalApproach;
 
     if (LinearAlpha >= 1.0f)

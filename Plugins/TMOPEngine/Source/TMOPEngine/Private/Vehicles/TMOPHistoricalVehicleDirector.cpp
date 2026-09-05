@@ -1,4 +1,7 @@
 #include "Vehicles/TMOPHistoricalVehicleDirector.h"
+#include "Vehicles/TMOPVehicleRoutePlan.h"
+#include "Vehicles/TMOPVehicleTimeline.h"
+#include "Vehicles/TMOPVehicleRouteMath.h"
 
 #include "Engine/DataTable.h"
 #include "Engine/World.h"
@@ -18,6 +21,7 @@
 #include "Vehicles/TMOPConfiguredVehicle.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "Vehicles/TMOPVehicleModelData.h"
+#include "Vehicles/TMOPVehiclePresentation.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Audio/TMOPVehicleAudioComponent.h"
 #include "World/TMOPWorldSubsystem.h"
@@ -26,20 +30,7 @@ namespace
 {
     const FName HistoricalVehicleObjectType(TEXT("HistoricalVehicle"));
 
-    float SpeedForPreset(const ETMOPVehicleDrivingPreset Preset)
-    {
-        switch (Preset)
-        {
-        case ETMOPVehicleDrivingPreset::Parking: return 8.0f;
-        case ETMOPVehicleDrivingPreset::SlowCity: return 20.0f;
-        case ETMOPVehicleDrivingPreset::NormalCity: return 35.0f;
-        case ETMOPVehicleDrivingPreset::Fast: return 60.0f;
-        case ETMOPVehicleDrivingPreset::Emergency: return 90.0f;
-        case ETMOPVehicleDrivingPreset::Fleeing: return 110.0f;
-        case ETMOPVehicleDrivingPreset::AutomaticFromTimeline:
-        default: return 0.0f;
-        }
-    }
+
 }
 
 bool ATMOPHistoricalVehicleDirector::ResolveTimelineEntrySecond(
@@ -47,37 +38,14 @@ bool ATMOPHistoricalVehicleDirector::ResolveTimelineEntrySecond(
     const int32 EntryIndex,
     int32& OutSecond) const
 {
-    if (!Profile.Timeline.IsValidIndex(EntryIndex)) return false;
-    const FTMOPHistoricalVehicleTimelineEntry& Entry =
-        Profile.Timeline[EntryIndex];
-    if (Entry.TimingMode == ETMOPEventTimingMode::RelativeToPreviousEntry)
+    auto EventTime = [this](FName Id, int32& Second)
     {
-        int32 PreviousSecond = INDEX_NONE;
-        if (EntryIndex <= 0 ||
-            !ResolveTimelineEntrySecond(
-                Profile, EntryIndex - 1, PreviousSecond))
-            return false;
-        OutSecond = FMath::Max(0,
-            PreviousSecond + Entry.EventOffsetSeconds);
-        return true;
-    }
-    if (Entry.TimingMode != ETMOPEventTimingMode::Relative)
-    {
-        OutSecond = Entry.Time.ToSecondsFromMidnight();
-        return true;
-    }
-    if (Entry.SharedEventId.IsNone() || GetGameInstance() == nullptr)
-        return false;
-    const UTMOPHistoricalEventSubsystem* Events =
-        GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>();
-    FTMOPHistoricalEventRuntime EventRuntime;
-    if (!IsValid(Events) ||
-        !Events->TryGetEventRuntime(Entry.SharedEventId, EventRuntime) ||
-        !EventRuntime.bHasResolvedTime)
-        return false;
-    OutSecond = EventRuntime.ResolvedTime.ToSecondsFromMidnight() +
-        Entry.EventOffsetSeconds;
-    return true;
+        const auto* Events = GetGameInstance() ? GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>() : nullptr;
+        FTMOPHistoricalEventRuntime Event;
+        if (!Events || !Events->TryGetEventRuntime(Id, Event) || !Event.bHasResolvedTime) return false;
+        Second = Event.ResolvedTime.ToSecondsFromMidnight(); return true;
+    };
+    return TMOPVehicleTimeline::ResolveEntry(Profile, EntryIndex, EventTime, OutSecond);
 }
 
 bool ATMOPHistoricalVehicleDirector::ResolveTimelineEntryCompletionSecond(
@@ -87,13 +55,7 @@ bool ATMOPHistoricalVehicleDirector::ResolveTimelineEntryCompletionSecond(
 {
     if (!ResolveTimelineEntrySecond(Profile, EntryIndex, OutSecond))
         return false;
-    if (Profile.Timeline.IsValidIndex(EntryIndex) &&
-        Profile.Timeline[EntryIndex].Action ==
-            ETMOPHistoricalVehicleAction::OffscreenTransfer)
-    {
-        OutSecond += FMath::Max(0,
-            Profile.Timeline[EntryIndex].OffscreenTransferDurationSeconds);
-    }
+    OutSecond += TMOPVehicleRoute::CompletionDelay(Profile.Timeline[EntryIndex]);
     return true;
 }
 
@@ -102,50 +64,14 @@ bool ATMOPHistoricalVehicleDirector::ResolveDrivingDepartureSecond(
     const int32 DrivingEntryIndex,
     int32& OutSecond) const
 {
-    if (!Profile.Timeline.IsValidIndex(DrivingEntryIndex)) return false;
-    const FTMOPHistoricalVehicleTimelineEntry& Entry =
-        Profile.Timeline[DrivingEntryIndex];
-    const bool bDriving =
-        Entry.Action == ETMOPHistoricalVehicleAction::BeginDriving ||
-        Entry.Action == ETMOPHistoricalVehicleAction::EnterTrafficRoute;
-    if (!bDriving) return false;
-    if (!Entry.bTimeIsArrival)
-        return ResolveTimelineEntrySecond(Profile, DrivingEntryIndex, OutSecond);
-
-    if (!Entry.bUseExplicitDepartureTime)
-        return ResolveTimelineEntryCompletionSecond(
-            Profile, DrivingEntryIndex - 1, OutSecond);
-
-    if (Entry.DepartureTimingMode ==
-        ETMOPEventTimingMode::RelativeToPreviousEntry)
+    auto EventTime = [this](FName Id, int32& Second)
     {
-        int32 PreviousCompletionSecond = INDEX_NONE;
-        if (!ResolveTimelineEntryCompletionSecond(
-                Profile, DrivingEntryIndex - 1, PreviousCompletionSecond))
-            return false;
-        OutSecond = FMath::Max(0,
-            PreviousCompletionSecond + Entry.DepartureOffsetSeconds);
-        return true;
-    }
-    if (Entry.DepartureTimingMode != ETMOPEventTimingMode::Relative)
-    {
-        OutSecond = Entry.DepartureTime.ToSecondsFromMidnight();
-        return true;
-    }
-    if (Entry.DepartureSharedEventId.IsNone() || GetGameInstance() == nullptr)
-        return false;
-    const UTMOPHistoricalEventSubsystem* Events =
-        GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>();
-    FTMOPHistoricalEventRuntime EventRuntime;
-    if (!IsValid(Events) ||
-        !Events->TryGetEventRuntime(
-            Entry.DepartureSharedEventId, EventRuntime) ||
-        !EventRuntime.bHasResolvedTime)
-        return false;
-    OutSecond = FMath::Max(0,
-        EventRuntime.ResolvedTime.ToSecondsFromMidnight() +
-        Entry.DepartureOffsetSeconds);
-    return true;
+        const auto* Events = GetGameInstance() ? GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>() : nullptr;
+        FTMOPHistoricalEventRuntime Event;
+        if (!Events || !Events->TryGetEventRuntime(Id, Event) || !Event.bHasResolvedTime) return false;
+        Second = Event.ResolvedTime.ToSecondsFromMidnight(); return true;
+    };
+    return TMOPVehicleTimeline::ResolveDeparture(Profile, DrivingEntryIndex, EventTime, OutSecond);
 }
 
 ATMOPHistoricalVehicleDirector::ATMOPHistoricalVehicleDirector()
@@ -188,8 +114,10 @@ void ATMOPHistoricalVehicleDirector::Tick(const float DeltaSeconds)
 
     const int32 CurrentSecond =
         Clock->GetCurrentTime().ToSecondsFromMidnight();
+    const int32 ExpectedStep = FMath::CeilToInt(DeltaSeconds * FMath::Max(0.0f, Clock->GetTimeScale()));
     if (LastEvaluatedSecond != INDEX_NONE &&
-        CurrentSecond < LastEvaluatedSecond)
+        (CurrentSecond < LastEvaluatedSecond ||
+         CurrentSecond - LastEvaluatedSecond > FMath::Max(3, ExpectedStep + 2)))
     {
         InitializeHistoricalVehicles();
         return;
@@ -214,9 +142,13 @@ void ATMOPHistoricalVehicleDirector::StartDueVehicleRoutes(
     {
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
         ATMOPVehicleBase* Vehicle = Runtime.Vehicle.Get();
-        if (!IsValid(Vehicle) ||
-            Runtime.ActiveOffscreenTransferEntryIndex != INDEX_NONE)
+        if (!IsValid(Vehicle) || Runtime.ActiveOffscreenTransferEntryIndex != INDEX_NONE)
             continue;
+        if (Runtime.bHiddenUntilSpawn)
+        {
+            SetVehicleAndOccupantsHidden(Vehicle, true);
+            continue;
+        }
 
         for (int32 Index = 0; Index < Runtime.Profile.Timeline.Num(); ++Index)
         {
@@ -235,13 +167,30 @@ void ATMOPHistoricalVehicleDirector::StartDueVehicleRoutes(
                 DepartureSecond > CurrentSecond)
                 continue;
 
+            int32 WindowDeparture, WindowArrival;
+            if (!ResolveDrivingWindow(Runtime.Profile, Index, WindowDeparture, WindowArrival))
+            {
+                ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("UnresolvedDrivingWindow"),
+                    FString::Printf(TEXT("Route '%s' needs valid departure and arrival times."), *Entry.EntryId.ToString()));
+                continue;
+            }
+            if (CurrentSecond >= WindowArrival || Index < Runtime.LastAppliedLifecycleEntryIndex)
+            {
+                Runtime.AppliedDrivingEntryIds.Add(Entry.EntryId);
+                continue; // Expired routes never replay after late boarding or a seek.
+            }
+            const FName RequiredDriver = TMOPVehicleRoute::Driver(Runtime.Profile, Entry);
             ATMOPHistoricalAgent* Driver = Vehicle->GetDriverAgent();
             const FName SeatedDriverId =
                 IsValid(Driver) && IsValid(Driver->EntityIdentity)
                 ? Driver->EntityIdentity->EntityId : NAME_None;
-            if (Entry.DriverEntityId.IsNone() ||
-                SeatedDriverId != Entry.DriverEntityId)
+            if (RequiredDriver.IsNone() || SeatedDriverId != RequiredDriver)
+            {
+                ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("WaitingForDriver"),
+                    FString::Printf(TEXT("Route '%s' needs seated driver '%s'; seated now '%s'."),
+                        *Entry.EntryId.ToString(), *RequiredDriver.ToString(), *SeatedDriverId.ToString()));
                 continue;
+            }
 
             if (Entry.bWaitForListedOccupants)
             {
@@ -276,7 +225,7 @@ void ATMOPHistoricalVehicleDirector::StartDueVehicleRoutes(
             RequestedDrivingEntryOverrides.Add(
                 Runtime.Profile.VehicleId, Entry.EntryId);
             const bool bStarted = BeginDrivingVehicle(Runtime.Profile.VehicleId,
-                Entry.DriverEntityId, Entry.OrderedLaneIds,
+                RequiredDriver, Entry.OrderedLaneIds,
                 Entry.RouteViaAnchorIds, Entry.VehicleRouteMode,
                 Entry.RouteDestinationAnchorId,
                 Entry.RouteStartDistanceAlongFirstLaneCm);
@@ -365,6 +314,7 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 continue;
             }
             const bool bTimedPlacement =
+                Entry.Action == ETMOPHistoricalVehicleAction::ExitTrafficRoute ||
                 Entry.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Park ||
@@ -372,6 +322,7 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                     ETMOPHistoricalVehicleAction::OffscreenTransfer;
             if (!bTimedPlacement) continue;
             const bool bArrivalEntry =
+                Entry.Action == ETMOPHistoricalVehicleAction::ExitTrafficRoute ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
                 Entry.Action == ETMOPHistoricalVehicleAction::Park;
             FTransform Target = Entry.WorldTransform;
@@ -434,6 +385,17 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 CompleteDueOffscreenTransfer(Runtime, CurrentSecond);
                 continue;
             }
+            if (bArrivalEntry && Runtime.bReconstructCurrentRoute &&
+                ReconstructionSecond != INDEX_NONE && EntrySecond < ReconstructionSecond)
+            {
+                // A seek reconstructs past state; it is not an observed arrival
+                // and must not generate a passed/failed validation result.
+                if (auto* Movement = Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+                    Movement->StopDriving();
+                Vehicle->SetActorTransform(Target, false, nullptr, ETeleportType::TeleportPhysics);
+                Runtime.AppliedPlacementEntryIds.Add(Entry.EntryId);
+                continue;
+            }
             if (UTMOPTrafficVehicleMovementComponent* Movement =
                 Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
             {
@@ -442,7 +404,8 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 // configured final approach finish naturally and update its
                 // exact parking transform from this timeline entry.
                 if ((Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
-                     Entry.Action == ETMOPHistoricalVehicleAction::Park) &&
+                     Entry.Action == ETMOPHistoricalVehicleAction::Park ||
+                     Entry.Action == ETMOPHistoricalVehicleAction::ExitTrafficRoute) &&
                     !Movement->HasTimedArrival() &&
                     Movement->UpdateFinalApproachTarget(Target))
                 {
@@ -456,7 +419,8 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                     continue;
                 }
                 if (Entry.Action == ETMOPHistoricalVehicleAction::Stop ||
-                    Entry.Action == ETMOPHistoricalVehicleAction::Park)
+                    Entry.Action == ETMOPHistoricalVehicleAction::Park ||
+                    Entry.Action == ETMOPHistoricalVehicleAction::ExitTrafficRoute)
                 {
                     if (Movement->HasTimedArrival())
                     {
@@ -465,8 +429,8 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                     }
                     const float CorrectionDistanceCm = FVector::Dist2D(
                         Vehicle->GetActorLocation(), Target.GetLocation());
-                    if (!bAllowDistantTimedParkingTeleport &&
-                        CorrectionDistanceCm > TimedParkingAlignmentToleranceCm)
+                    if (Movement->bLastArrivalBlocked || (!bAllowDistantTimedParkingTeleport &&
+                        CorrectionDistanceCm > TimedParkingAlignmentToleranceCm))
                     {
                         // A timetable is not permission to hide an invalid or
                         // blocked route. Stop where the vehicle really is and
@@ -517,6 +481,8 @@ void ATMOPHistoricalVehicleDirector::ApplyDueVehiclePlacements(
                 OnTimelineEntryArrived.Broadcast(
                     Runtime.Profile.VehicleId, Entry,
                     EntrySecond, CurrentSecond, true);
+                if (auto* Movement = Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
+                    Movement->LastArrivalCorrectionCm = 0.0;
             }
             UE_LOG(LogTemp, Display,
                 TEXT("TMOP VehicleTimedPlacement: '%s' applied '%s' at %02d:%02d:%02d."),
@@ -752,6 +718,17 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
         Runtime.RowName = Pair.Key;
         Runtime.Profile = *Row;
         Runtime.InitialSpawnSecond = GetInitialSpawnSecond(*Row);
+        // Keep a hidden staged actor available for early seat assignments.
+        // An explicit Spawn before the first Despawn controls its visibility.
+        for (int32 Index = 0; Index < Row->Timeline.Num(); ++Index)
+        {
+            if (Row->Timeline[Index].Action == ETMOPHistoricalVehicleAction::Despawn) break;
+            if (Row->Timeline[Index].Action == ETMOPHistoricalVehicleAction::Spawn)
+            {
+                ResolveTimelineEntrySecond(*Row, Index, Runtime.FirstVisibleSpawnSecond);
+                break;
+            }
+        }
         RuntimeVehicles.Add(Row->VehicleId, MoveTemp(Runtime));
     }
 
@@ -766,7 +743,8 @@ int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
         ? Clock->GetCurrentTime().ToSecondsFromMidnight()
         : FTMOPTime(23, 0, 0).ToSecondsFromMidnight();
     ApplyDeferredPlacedVehicleState(CurrentSecond);
-    LastEvaluatedSecond = CurrentSecond;
+    ReconstructionSecond = CurrentSecond;
+    LastEvaluatedSecond = INDEX_NONE; // Apply all due lifecycle/placement rows before starting the active route.
     return bSpawnVehiclesAutomatically
         ? SpawnDueVehicles(CurrentSecond)
         : RuntimeVehicles.Num();
@@ -893,10 +871,10 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
                 SpawnEntry.PlacementAnchorId.ToString().StartsWith(
                     TEXT("Enter"), ESearchCase::IgnoreCase);
             FTransform QueuedTransform;
-            if (bBoundarySpawn && FindClearBoundarySpawnTransform(
+            if (bBoundarySpawn && bUseBoundarySpawnLead && FindClearBoundarySpawnTransform(
                     ClearSpawnTransform, QueuedTransform))
                 ClearSpawnTransform = QueuedTransform;
-            else if (bBoundarySpawn)
+            else if (bBoundarySpawn && bUseBoundarySpawnLead)
             {
                 UE_LOG(LogTemp, Warning,
                     TEXT("TMOP VehicleEntryGhostSpawn: '%s' uses collision-free boundary staging because every queue slot is occupied."),
@@ -907,6 +885,12 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
         }
         if (bNewLifecycleSpawn && Runtime.Vehicle.IsValid())
         {
+            if (Runtime.Profile.Timeline[DueLifecycleIndex].Action == ETMOPHistoricalVehicleAction::Spawn)
+            {
+                FTransform SpawnPose;
+                if (ResolveTimelinePlacementTransform(Runtime.Profile.Timeline[DueLifecycleIndex], SpawnPose))
+                    Runtime.Vehicle->SetActorTransform(SpawnPose, false, nullptr, ETeleportType::TeleportPhysics);
+            }
             Runtime.LastAppliedLifecycleEntryIndex = DueLifecycleIndex;
             UE_LOG(LogTemp, Display,
                 TEXT("TMOP Historical Vehicles: lifecycle spawn %d applied for '%s'."),
@@ -914,6 +898,19 @@ int32 ATMOPHistoricalVehicleDirector::SpawnDueVehicles(
         }
         if (Runtime.Vehicle.IsValid())
         {
+            const bool bStage = Runtime.FirstVisibleSpawnSecond != INDEX_NONE && CurrentSecond < Runtime.FirstVisibleSpawnSecond;
+            if (bStage)
+            {
+                SetVehicleAndOccupantsHidden(Runtime.Vehicle.Get(), true);
+                Runtime.Vehicle->SetActorEnableCollision(false);
+                Runtime.bHiddenUntilSpawn = true;
+            }
+            else if (Runtime.bHiddenUntilSpawn)
+            {
+                SetVehicleAndOccupantsHidden(Runtime.Vehicle.Get(), false);
+                Runtime.bHiddenUntilSpawn = false;
+                SuppressBoundaryEntryCollision(Runtime, true);
+            }
             ++AvailableCount;
         }
     }
@@ -966,7 +963,7 @@ int32 ATMOPHistoricalVehicleDirector::GetInitialSpawnSecond(
             const bool bOccupiedAtInitialPlacement =
                 !Entry.DriverEntityId.IsNone() ||
                 !Entry.PassengerEntityIds.IsEmpty();
-            if (bBoundaryEntry && !bOccupiedAtInitialPlacement)
+            if (bUseBoundarySpawnLead && bBoundaryEntry && !bOccupiedAtInitialPlacement)
             {
                 for (int32 LaterIndex = Index + 1;
                     LaterIndex < Profile.Timeline.Num(); ++LaterIndex)
@@ -1221,8 +1218,10 @@ void ATMOPHistoricalVehicleDirector::DiscoverPlacedVehicles()
                 Runtime->Profile.bOverrideBodyColor;
             Configured->BodyColor = Runtime->Profile.BodyColor;
             Configured->RoofAccessory = Runtime->Profile.RoofAccessory;
-            Configured->ApplyConfiguration();
+            Configured->AdditionalAccessories = Runtime->Profile.AdditionalAccessories;
+            TMOPVehiclePresentation::ApplyProfile(Configured, Runtime->Profile);
         }
+        else TMOPVehiclePresentation::ApplyProfile(Vehicle, Runtime->Profile);
         if (UTMOPTrafficVehicleMovementComponent* Movement =
             Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
             Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle;
@@ -1240,34 +1239,8 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
         return nullptr;
     }
 
-    // A valid ModelData row must never fall back to a Blueprint's proxy mesh.
-    // If no explicit class resolves, use the native configured vehicle.
-    TSubclassOf<ATMOPVehicleBase> SpawnClass = DefaultVehicleClass;
-    if (IsValid(Runtime.Profile.ModelData))
-    {
-        SpawnClass = ATMOPConfiguredVehicle::StaticClass();
-    }
-    if (UClass* RowClass = Runtime.Profile.VehicleClass.Get())
-    {
-        if (RowClass->IsChildOf(ATMOPVehicleBase::StaticClass()))
-        {
-            // Configured Blueprint subclasses can contain a permanently visible
-            // proxy mesh. ModelData is authoritative, so use the clean native
-            // configured actor for that case. Bespoke non-configured classes
-            // (bus, ambulance, etc.) remain supported.
-            SpawnClass =
-                IsValid(Runtime.Profile.ModelData) &&
-                RowClass->IsChildOf(ATMOPConfiguredVehicle::StaticClass())
-                ? ATMOPConfiguredVehicle::StaticClass()
-                : RowClass;
-        }
-        else
-        {
-            UE_LOG(LogTemp, Warning,
-                TEXT("TMOP Historical Vehicles: class on '%s' is not a TMOPVehicleBase."),
-                *Runtime.Profile.VehicleId.ToString());
-        }
-    }
+    TSubclassOf<ATMOPVehicleBase> SpawnClass = TMOPVehiclePresentation::ResolveClass(
+        Runtime.Profile, DefaultVehicleClass.Get());
     if (SpawnClass.Get() == nullptr)
     {
         UE_LOG(LogTemp, Warning,
@@ -1301,8 +1274,11 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
             Runtime.Profile.bOverrideBodyColor;
         Configured->BodyColor = Runtime.Profile.BodyColor;
         Configured->RoofAccessory = Runtime.Profile.RoofAccessory;
+        Configured->AdditionalAccessories = Runtime.Profile.AdditionalAccessories;
     }
     UGameplayStatics::FinishSpawningActor(Vehicle, InitialTransform);
+    if (!Cast<ATMOPConfiguredVehicle>(Vehicle))
+        TMOPVehiclePresentation::ApplyProfile(Vehicle, Runtime.Profile);
 
     if (UTMOPTrafficVehicleMovementComponent* Movement =
         Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>())
@@ -1319,7 +1295,8 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::SpawnVehicle(
             Runtime.Profile.bOverrideBodyColor;
         Configured->BodyColor = Runtime.Profile.BodyColor;
         Configured->RoofAccessory = Runtime.Profile.RoofAccessory;
-        const bool bApplied = Configured->ApplyConfiguration();
+        Configured->AdditionalAccessories = Runtime.Profile.AdditionalAccessories;
+        const bool bApplied = TMOPVehiclePresentation::ApplyProfile(Configured, Runtime.Profile);
         const bool bCorrectMesh =
             bApplied &&
             IsValid(Runtime.Profile.ModelData) &&
@@ -1555,7 +1532,7 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
                     TEXT(" auto-start entry '%s'"), *Entry.EntryId.ToString());
                 if (Entry.EntryId.IsNone())
                     OutErrors.Add(EntryPrefix + TEXT(" has no Entry ID."));
-                if (Entry.DriverEntityId.IsNone())
+                if (TMOPVehicleRoute::Driver(*Row, Entry).IsNone())
                     OutErrors.Add(EntryPrefix + TEXT(" has no Driver Entity ID."));
                 if (Entry.VehicleRouteMode ==
                         ETMOPVehicleRouteMode::ManualLaneRoute &&
@@ -1591,28 +1568,53 @@ ATMOPHistoricalVehicleDirector::FindDrivingEntry(
     const int32 CurrentSecond) const
 {
     const FTMOPHistoricalVehicleTimelineEntry* BestEntry = nullptr;
-    int32 BestDifference = MAX_int32;
+    int32 LatestDeparture = INDEX_NONE;
     for (int32 Index = 0; Index < Profile.Timeline.Num(); ++Index)
     {
-        const FTMOPHistoricalVehicleTimelineEntry& Entry =
-            Profile.Timeline[Index];
-        const bool bDrivingAction =
-            Entry.Action == ETMOPHistoricalVehicleAction::BeginDriving ||
-            Entry.Action == ETMOPHistoricalVehicleAction::EnterTrafficRoute;
-        const bool bDriverMatches = Entry.DriverEntityId.IsNone() ||
-            Entry.DriverEntityId == DriverEntityId;
-        if (!bDrivingAction || !bDriverMatches) continue;
-        int32 DepartureSecond = INDEX_NONE;
-        if (!ResolveDrivingDepartureSecond(Profile, Index, DepartureSecond))
-            continue;
-        const int32 Difference = FMath::Abs(DepartureSecond - CurrentSecond);
-        if (Difference < BestDifference)
-        {
-            BestDifference = Difference;
-            BestEntry = &Entry;
-        }
+        const auto& Entry = Profile.Timeline[Index];
+        if (!TMOPVehicleRoute::IsDriving(Entry.Action) ||
+            TMOPVehicleRoute::Driver(Profile, Entry) != DriverEntityId) continue;
+        int32 Departure, Arrival;
+        if (!ResolveDrivingWindow(Profile, Index, Departure, Arrival) ||
+            !TMOPVehicleRouteMath::IsActive(CurrentSecond, Departure, Arrival)) continue;
+        if (Departure > LatestDeparture)
+        { LatestDeparture = Departure; BestEntry = &Entry; }
     }
     return BestEntry;
+}
+
+bool ATMOPHistoricalVehicleDirector::ResolveDrivingWindow(
+    const FTMOPHistoricalVehicleRow& Profile, int32 Index,
+    int32& Departure, int32& Arrival) const
+{
+    if (!ResolveDrivingDepartureSecond(Profile, Index, Departure)) return false;
+    if (Profile.Timeline[Index].bTimeIsArrival)
+        return ResolveTimelineEntrySecond(Profile, Index, Arrival) && Arrival > Departure;
+    for (int32 Next = Index + 1; Next < Profile.Timeline.Num(); ++Next)
+    {
+        if (TMOPVehicleRoute::IsDriving(Profile.Timeline[Next].Action)) break;
+        if (TMOPVehicleRoute::IsStop(Profile.Timeline[Next].Action))
+            return ResolveTimelineEntrySecond(Profile, Next, Arrival) && Arrival > Departure;
+    }
+    return false;
+}
+
+FString ATMOPHistoricalVehicleDirector::GetTimelineFingerprint(FName VehicleId, FName EntryId) const
+{
+    const auto* Runtime = RuntimeVehicles.Find(VehicleId);
+    if (!Runtime) return FString();
+    int32 Index = Runtime->Profile.Timeline.IndexOfByPredicate(
+        [EntryId](const FTMOPHistoricalVehicleTimelineEntry& Entry) { return Entry.EntryId == EntryId; });
+    for (; Index >= 0; --Index)
+        if (TMOPVehicleRoute::IsDriving(Runtime->Profile.Timeline[Index].Action))
+        {
+            int32 Departure, Arrival; FTMOPVehicleRoutePlan Plan; FString Failure;
+            if (ResolveDrivingWindow(Runtime->Profile, Index, Departure, Arrival) &&
+                TMOPVehicleRoute::Build(GetWorld(), Runtime->Profile, Index, Plan, Failure))
+                return TMOPVehicleRoute::Fingerprint(Runtime->Profile, Plan, Departure, Arrival);
+            break;
+        }
+    return FString();
 }
 
 bool ATMOPHistoricalVehicleDirector::GetLastDrivingFailure(
@@ -1632,6 +1634,8 @@ bool ATMOPHistoricalVehicleDirector::ReportDrivingFailure(
     const FString& FailureCode,
     const FString& FailureDetails)
 {
+    if (LastDrivingFailureCodes.FindRef(VehicleId) == FailureCode &&
+        LastDrivingFailureDetails.FindRef(VehicleId) == FailureDetails) return false;
     LastDrivingFailureCodes.Add(VehicleId, FailureCode);
     LastDrivingFailureDetails.Add(VehicleId, FailureDetails);
     UE_LOG(LogTemp, Error, TEXT("TMOP driving [%s]: %s"),
@@ -1649,8 +1653,6 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     const float StartDistanceAlongFirstLaneCm,
     const bool bUseTimelineRouteOverride)
 {
-    LastDrivingFailureCodes.Remove(VehicleId);
-    LastDrivingFailureDetails.Remove(VehicleId);
     if (RuntimeVehicles.IsEmpty())
         InitializeHistoricalVehicles();
 
@@ -1683,16 +1685,6 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                 *DriverEntityId.ToString(), *VehicleId.ToString(),
                 *OccupantId.ToString()));
     }
-    if (!Runtime->Profile.KnownDriverEntityId.IsNone() &&
-        Runtime->Profile.KnownDriverEntityId != DriverEntityId)
-    {
-        return ReportDrivingFailure(VehicleId, TEXT("KnownDriverMismatch"),
-            FString::Printf(TEXT("'%s' does not match known driver '%s' for '%s'."),
-                *DriverEntityId.ToString(),
-                *Runtime->Profile.KnownDriverEntityId.ToString(),
-                *VehicleId.ToString()));
-    }
-
     const UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     const int32 CurrentSecond = Clock != nullptr
@@ -1707,6 +1699,8 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                 return Entry.EntryId == *RequestedEntryId;
             })
         : FindDrivingEntry(Runtime->Profile, DriverEntityId, CurrentSecond);
+    if (DrivingEntry && TMOPVehicleRoute::Driver(Runtime->Profile, *DrivingEntry) != DriverEntityId)
+        return ReportDrivingFailure(VehicleId, TEXT("WrongRouteDriver"), TEXT("The seated driver does not match this driving row."));
     if (DrivingEntry != nullptr && DrivingEntry->bWaitForListedOccupants)
     {
         TSet<FName> SeatedEntityIds;
@@ -1727,551 +1721,76 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
                     FString::Printf(TEXT("'%s' is not seated in '%s' yet."),
                         *RequiredId.ToString(), *VehicleId.ToString()));
     }
-    TArray<FName> Route = OrderedLaneIds;
-    ETMOPVehicleRouteMode EffectiveRouteMode = RouteMode;
-    if (DrivingEntry != nullptr &&
-        DrivingEntry->VehicleRouteMode ==
-            ETMOPVehicleRouteMode::AnchorManeuver)
+    FTMOPHistoricalVehicleRow LegacyProfile;
+    const FTMOPHistoricalVehicleRow* RouteProfile = &Runtime->Profile;
+    int32 DrivingIndex = DrivingEntry ? int32(DrivingEntry - Runtime->Profile.Timeline.GetData()) : INDEX_NONE;
+    int32 Departure = CurrentSecond, Arrival = INDEX_NONE;
+    if (DrivingEntry)
     {
-        // Anchor maneuvers deliberately ignore stale lane data. This mode is
-        // used for parking, reversing and U-turns outside the lane graph.
-        Route.Reset();
-        EffectiveRouteMode = ETMOPVehicleRouteMode::AnchorManeuver;
+        if (!ResolveDrivingWindow(*RouteProfile, DrivingIndex, Departure, Arrival) ||
+            !TMOPVehicleRouteMath::IsActive(CurrentSecond, Departure, Arrival))
+            return ReportDrivingFailure(VehicleId, TEXT("OutsideDrivingWindow"),
+                TEXT("This route has not started yet or its arrival deadline has already passed."));
+        if (Runtime->AppliedDrivingEntryIds.Contains(DrivingEntry->EntryId))
+            return true; // Idempotent legacy + vehicle-timeline calls.
     }
-    else if (DrivingEntry != nullptr &&
-        !DrivingEntry->OrderedLaneIds.IsEmpty())
+    else
     {
-        // An editor-generated vehicle route is authoritative when the person
-        // entry does not provide its own route.
-        Route = DrivingEntry->OrderedLaneIds;
-        EffectiveRouteMode = DrivingEntry->bAutoStartFromVehicleTimeline
-            ? DrivingEntry->VehicleRouteMode
-            : ETMOPVehicleRouteMode::ManualLaneRoute;
+        if (bUseTimelineRouteOverride && Runtime->Profile.Timeline.ContainsByPredicate(
+            [](const FTMOPHistoricalVehicleTimelineEntry& Entry)
+            { return TMOPVehicleRoute::IsDriving(Entry.Action) && Entry.bAutoStartFromVehicleTimeline; }))
+            return ReportDrivingFailure(VehicleId, TEXT("NoActiveVehicleRoute"),
+                TEXT("The vehicle timeline is authoritative and has no active route now."));
+        LegacyProfile = Runtime->Profile; LegacyProfile.Timeline.Reset();
+        FTMOPHistoricalVehicleTimelineEntry Placement;
+        Placement.WorldTransform = Vehicle->GetActorTransform(); LegacyProfile.Timeline.Add(Placement);
+        FTMOPHistoricalVehicleTimelineEntry LegacyDrive;
+        LegacyDrive.Action = ETMOPHistoricalVehicleAction::BeginDriving;
+        LegacyDrive.VehicleRouteMode = RouteMode;
+        LegacyDrive.OrderedLaneIds = OrderedLaneIds;
+        LegacyDrive.RouteViaAnchorIds = PassAnchorIds;
+        LegacyDrive.RouteDestinationAnchorId = DestinationAnchorId;
+        LegacyDrive.RouteStartDistanceAlongFirstLaneCm = StartDistanceAlongFirstLaneCm;
+        LegacyProfile.Timeline.Add(LegacyDrive); RouteProfile = &LegacyProfile; DrivingIndex = 1;
     }
-    Route.RemoveAll([](const FName LaneId) { return LaneId.IsNone(); });
-
-    FName ResolvedDestinationAnchorId = DrivingEntry != nullptr &&
-        !DrivingEntry->RouteDestinationAnchorId.IsNone()
-        ? DrivingEntry->RouteDestinationAnchorId : DestinationAnchorId;
-    TArray<FName> ResolvedPassAnchorIds = PassAnchorIds;
-    if (DrivingEntry != nullptr && !DrivingEntry->RouteViaAnchorIds.IsEmpty())
-        ResolvedPassAnchorIds = DrivingEntry->RouteViaAnchorIds;
-
-    if (EffectiveRouteMode == ETMOPVehicleRouteMode::AnchorManeuver)
+    FTMOPVehicleRoutePlan Plan; FString Failure;
+    if (!TMOPVehicleRoute::Build(GetWorld(), *RouteProfile, DrivingIndex, Plan, Failure))
+        return ReportDrivingFailure(VehicleId, TEXT("InvalidRoutePlan"), Failure);
+    if (Arrival == INDEX_NONE)
+        Arrival = Departure + FMath::Max(1, FMath::CeilToInt(Plan.LengthCm / (35.0 / 0.036)));
+    const auto& Entry = RouteProfile->Timeline[DrivingIndex];
+    auto* Movement = Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
+    if (!Movement)
     {
-        if (DrivingEntry == nullptr || GetGameInstance() == nullptr)
-        {
-            return ReportDrivingFailure(VehicleId,
-                TEXT("AnchorManeuverEntryMissing"),
-                TEXT("Anchor Maneuver requires its vehicle timeline entry."));
-        }
-        UTMOPAnchorSubsystem* Anchors =
-            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
-        if (Anchors == nullptr || ResolvedDestinationAnchorId.IsNone())
-        {
-            return ReportDrivingFailure(VehicleId,
-                TEXT("AnchorManeuverDestinationMissing"),
-                FString::Printf(TEXT("Anchor Maneuver for '%s' needs a destination anchor."),
-                    *VehicleId.ToString()));
-        }
-
-        const int32 DrivingIndex = static_cast<int32>(
-            DrivingEntry - Runtime->Profile.Timeline.GetData());
-        TArray<FTransform> ManeuverTransforms;
-        FName StartAnchorId = DrivingEntry->RouteStartAnchorId;
-        if (!StartAnchorId.IsNone())
-        {
-            ATMOPHistoricalAnchor* StartAnchor =
-                Anchors->FindAnchor(StartAnchorId);
-            if (!IsValid(StartAnchor))
-            {
-                return ReportDrivingFailure(VehicleId,
-                    TEXT("AnchorManeuverStartUnavailable"),
-                    FString::Printf(TEXT("Start anchor '%s' is unavailable."),
-                        *StartAnchorId.ToString()));
-            }
-            ManeuverTransforms.Add(FTransform(StartAnchor->GetAnchorRotation(),
-                StartAnchor->GetAnchorLocation(), FVector::OneVector));
-        }
-        else
-        {
-            // A preceding placement is a deterministic start even when the
-            // driving row does not repeat the same anchor ID.
-            for (int32 Index = DrivingIndex - 1; Index >= 0; --Index)
-            {
-                const FTMOPHistoricalVehicleTimelineEntry& Previous =
-                    Runtime->Profile.Timeline[Index];
-                const bool bPlacement =
-                    Previous.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
-                    Previous.Action == ETMOPHistoricalVehicleAction::Spawn ||
-                    Previous.Action == ETMOPHistoricalVehicleAction::Stop ||
-                    Previous.Action == ETMOPHistoricalVehicleAction::Park ||
-                    Previous.Action == ETMOPHistoricalVehicleAction::OffscreenTransfer;
-                if (!bPlacement) continue;
-                if (Previous.PlacementMode ==
-                    ETMOPHistoricalVehiclePlacementMode::WorldTransform)
-                {
-                    ManeuverTransforms.Add(Previous.WorldTransform);
-                    break;
-                }
-                ATMOPHistoricalAnchor* PreviousAnchor =
-                    Anchors->FindAnchor(Previous.PlacementAnchorId);
-                if (IsValid(PreviousAnchor))
-                {
-                    const FTransform AnchorTransform(
-                        PreviousAnchor->GetAnchorRotation(),
-                        PreviousAnchor->GetAnchorLocation(), FVector::OneVector);
-                    ManeuverTransforms.Add(
-                        Previous.AnchorLocalOffset * AnchorTransform);
-                    break;
-                }
-            }
-        }
-        if (ManeuverTransforms.IsEmpty())
-        {
-            return ReportDrivingFailure(VehicleId,
-                TEXT("AnchorManeuverStartMissing"),
-                TEXT("Set Route Start Anchor ID or add a valid preceding placement."));
-        }
-        for (const FName ViaAnchorId : ResolvedPassAnchorIds)
-        {
-            if (ViaAnchorId.IsNone()) continue;
-            ATMOPHistoricalAnchor* ViaAnchor = Anchors->FindAnchor(ViaAnchorId);
-            if (!IsValid(ViaAnchor))
-            {
-                return ReportDrivingFailure(VehicleId,
-                    TEXT("AnchorManeuverViaUnavailable"),
-                    FString::Printf(TEXT("Via anchor '%s' is unavailable."),
-                        *ViaAnchorId.ToString()));
-            }
-            ManeuverTransforms.Add(FTransform(ViaAnchor->GetAnchorRotation(),
-                ViaAnchor->GetAnchorLocation(), FVector::OneVector));
-        }
-        ATMOPHistoricalAnchor* Destination =
-            Anchors->FindAnchor(ResolvedDestinationAnchorId);
-        if (!IsValid(Destination))
-        {
-            return ReportDrivingFailure(VehicleId,
-                TEXT("AnchorManeuverDestinationUnavailable"),
-                FString::Printf(TEXT("Destination anchor '%s' is unavailable."),
-                    *ResolvedDestinationAnchorId.ToString()));
-        }
-        ManeuverTransforms.Add(FTransform(Destination->GetAnchorRotation(),
-            Destination->GetAnchorLocation(), FVector::OneVector));
-
-        int32 ArrivalSecond = INDEX_NONE;
-        bool bHasArrival = false;
-        if (DrivingEntry->bTimeIsArrival)
-        {
-            bHasArrival = ResolveTimelineEntrySecond(Runtime->Profile,
-                DrivingIndex, ArrivalSecond);
-        }
-        else
-        {
-            for (int32 Index = DrivingIndex + 1;
-                Index < Runtime->Profile.Timeline.Num(); ++Index)
-            {
-                const ETMOPHistoricalVehicleAction Action =
-                    Runtime->Profile.Timeline[Index].Action;
-                if (Action != ETMOPHistoricalVehicleAction::Stop &&
-                    Action != ETMOPHistoricalVehicleAction::Park &&
-                    Action != ETMOPHistoricalVehicleAction::ExitTrafficRoute)
-                    continue;
-                if (ResolveTimelineEntrySecond(Runtime->Profile,
-                    Index, ArrivalSecond))
-                { bHasArrival = true; break; }
-            }
-        }
-        if (!bHasArrival)
-        {
-            return ReportDrivingFailure(VehicleId,
-                TEXT("AnchorManeuverArrivalMissing"),
-                TEXT("Anchor Maneuver needs an arrival time or a later Stop/Park row."));
-        }
-
-        UTMOPTrafficVehicleMovementComponent* Movement =
-            Vehicle->FindComponentByClass<
-                UTMOPTrafficVehicleMovementComponent>();
-        if (!IsValid(Movement))
-        {
-            Movement = NewObject<UTMOPTrafficVehicleMovementComponent>(
-                Vehicle, TEXT("HistoricalTrafficMovement"));
-            Vehicle->AddInstanceComponent(Movement);
-            Movement->bStartDrivingAutomatically = false;
-            Movement->RegisterComponent();
-        }
-        Movement->StopDriving();
-        Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle;
-        Movement->bIgnoreOneWayRestrictions =
-            DrivingEntry->bIgnoreOneWayRestrictions;
-        Movement->bRunRedLights = DrivingEntry->bRunRedLights;
-        Movement->DesiredCruiseSpeedKmh = FMath::Max(0.0f,
-            DrivingEntry->CruiseSpeedOverrideKmh);
-        if (Movement->DesiredCruiseSpeedKmh <= 0.0f)
-            Movement->DesiredCruiseSpeedKmh =
-                SpeedForPreset(DrivingEntry->DrivingPreset);
-        Movement->bDespawnAtRouteEnd = false;
-        if (!Movement->StartAnchorManeuver(ManeuverTransforms,
-            ArrivalSecond, DrivingEntry->AnchorManeuverCurveStrength,
-            DrivingEntry->bAnchorManeuverReverse))
-        {
-            return ReportDrivingFailure(VehicleId,
-                TEXT("AnchorManeuverStartFailed"),
-                TEXT("The anchor maneuver movement component rejected the path."));
-        }
-        if (DrivingEntry->bAutoStartFromVehicleTimeline)
-            Runtime->AppliedDrivingEntryIds.Add(DrivingEntry->EntryId);
-        if (Runtime->bBoundaryCollisionSuppressed)
-        {
-            Movement->bDetectPhysicalObstacles = false;
-            Vehicle->SetActorEnableCollision(false);
-            Runtime->bBoundaryVehicleHasStartedDriving = true;
-            Runtime->BoundaryDrivingSeconds = 0.0f;
-            Runtime->BoundaryDrivingStartLocation = Vehicle->GetActorLocation();
-        }
-        UE_LOG(LogTemp, Display,
-            TEXT("TMOP driving: '%s' started anchor maneuver '%s' through %d anchor(s), arriving at %d."),
-            *DriverEntityId.ToString(), *VehicleId.ToString(),
-            ManeuverTransforms.Num(), ArrivalSecond);
-        return true;
-    }
-
-    float ResolvedStartDistance = StartDistanceAlongFirstLaneCm;
-    FName FinalDestinationLaneId = NAME_None;
-    float FinalDestinationLaneDistance = 0.0f;
-    FTransform FinalDestinationTransform = FTransform::Identity;
-    if (EffectiveRouteMode != ETMOPVehicleRouteMode::ManualLaneRoute)
-    {
-        if (ResolvedDestinationAnchorId.IsNone() || GetGameInstance() == nullptr)
-        {
-            return ReportDrivingFailure(VehicleId,
-                TEXT("AutomaticDestinationMissing"),
-                FString::Printf(TEXT("Automatic route for '%s' needs a destination anchor ID."),
-                    *VehicleId.ToString()));
-        }
-        UTMOPAnchorSubsystem* Anchors =
-            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
-        ATMOPHistoricalAnchor* Destination =
-            Anchors != nullptr
-            ? Anchors->FindAnchor(ResolvedDestinationAnchorId) : nullptr;
-        UTMOPTrafficNetworkSubsystem* Network =
-            GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>();
-        if (!IsValid(Destination) || Network == nullptr)
-        {
-            return ReportDrivingFailure(VehicleId,
-                !IsValid(Destination) ? TEXT("DestinationAnchorUnavailable")
-                    : TEXT("TrafficNetworkUnavailable"),
-                FString::Printf(TEXT("Destination anchor '%s' valid=%s; traffic network valid=%s."),
-                    *ResolvedDestinationAnchorId.ToString(),
-                    IsValid(Destination) ? TEXT("true") : TEXT("false"),
-                    Network != nullptr ? TEXT("true") : TEXT("false")));
-        }
-        Network->DiscoverLanesInWorld();
-
-        FName RouteStartLaneId;
-        if (EffectiveRouteMode == ETMOPVehicleRouteMode::ManualThenAutomatic &&
-            !Route.IsEmpty())
-        {
-            RouteStartLaneId = Route.Last();
-        }
-        else
-        {
-            float NearestStartDistance = 0.0f;
-            RouteStartLaneId = DrivingEntry != nullptr
-                ? DrivingEntry->RouteStartLaneId : NAME_None;
-            const bool bHasExplicitStartLane =
-                !RouteStartLaneId.IsNone() &&
-                IsValid(Network->FindLane(RouteStartLaneId));
-            if (!bHasExplicitStartLane && !Network->FindNearestLane(
-                    Vehicle->GetActorLocation(),
-                    RouteStartLaneId,
-                    NearestStartDistance))
-            {
-                return ReportDrivingFailure(VehicleId,
-                    TEXT("StartLaneNotFound"),
-                    FString::Printf(TEXT("No start lane was found near '%s' at %s."),
-                        *VehicleId.ToString(),
-                        *Vehicle->GetActorLocation().ToCompactString()));
-            }
-            Route.Reset();
-            if (StartDistanceAlongFirstLaneCm <= 0.0f)
-            {
-                ResolvedStartDistance = NearestStartDistance;
-            }
-        }
-
-        TArray<FName> RouteAnchorIds = ResolvedPassAnchorIds;
-        RouteAnchorIds.RemoveAll(
-            [](const FName AnchorId) { return AnchorId.IsNone(); });
-        RouteAnchorIds.Add(ResolvedDestinationAnchorId);
-
-        FName SegmentStartLaneId = RouteStartLaneId;
-        for (const FName RouteAnchorId : RouteAnchorIds)
-        {
-            ATMOPHistoricalAnchor* RouteAnchor =
-                Anchors->FindAnchor(RouteAnchorId);
-            if (!IsValid(RouteAnchor))
-            {
-                return ReportDrivingFailure(VehicleId,
-                    TEXT("RouteAnchorUnavailable"),
-                    FString::Printf(TEXT("Pass/destination anchor '%s' is unavailable."),
-                        *RouteAnchorId.ToString()));
-            }
-
-            TArray<FName> AutomaticSegment;
-            FName SegmentDestinationLaneId;
-            float SegmentDestinationDistance = 0.0f;
-            if (!Network->FindNearestReachableLane(
-                RouteAnchor->GetAnchorLocation(),
-                SegmentStartLaneId,
-                SegmentDestinationLaneId,
-                SegmentDestinationDistance,
-                AutomaticSegment))
-            {
-                return ReportDrivingFailure(VehicleId,
-                    TEXT("LaneRouteDisconnected"),
-                    FString::Printf(TEXT("No reachable lane candidate from '%s' through anchor '%s'."),
-                        *SegmentStartLaneId.ToString(),
-                        *RouteAnchorId.ToString()));
-            }
-            if (!Route.IsEmpty() && !AutomaticSegment.IsEmpty() &&
-                Route.Last() == AutomaticSegment[0])
-            {
-                AutomaticSegment.RemoveAt(0);
-            }
-            Route.Append(AutomaticSegment);
-            SegmentStartLaneId = SegmentDestinationLaneId;
-            if (RouteAnchorId == ResolvedDestinationAnchorId)
-            {
-                FinalDestinationLaneId = SegmentDestinationLaneId;
-                FinalDestinationLaneDistance = SegmentDestinationDistance;
-                FinalDestinationTransform = FTransform(
-                    RouteAnchor->GetAnchorRotation(),
-                    RouteAnchor->GetAnchorLocation(),
-                    FVector::OneVector);
-            }
-        }
-        UE_LOG(LogTemp, Display,
-            TEXT("TMOP driving: calculated %d lane(s) through %d pass anchor(s) to '%s'."),
-            Route.Num(), ResolvedPassAnchorIds.Num(),
-            *ResolvedDestinationAnchorId.ToString());
-    }
-
-    // Manual lane routes also need their exact parking transform. Previously
-    // DestinationAnchorId was ignored in this mode, so emergency vehicles
-    // drove to the end of the last lane and a timed Stop later teleported them
-    // back. Use the closest point on the final supplied lane and the same
-    // smooth final approach as automatic routing.
-    if (EffectiveRouteMode == ETMOPVehicleRouteMode::ManualLaneRoute &&
-        !ResolvedDestinationAnchorId.IsNone() && !Route.IsEmpty() &&
-        GetGameInstance() != nullptr)
-    {
-        UTMOPAnchorSubsystem* Anchors =
-            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
-        UTMOPTrafficNetworkSubsystem* Network =
-            GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>();
-        ATMOPHistoricalAnchor* Destination = Anchors != nullptr
-            ? Anchors->FindAnchor(ResolvedDestinationAnchorId) : nullptr;
-        if (Network != nullptr) Network->DiscoverLanesInWorld();
-        UTMOPTrafficLaneComponent* FinalLane = Network != nullptr
-            ? Network->FindLane(Route.Last()) : nullptr;
-        if (!IsValid(Destination) || !IsValid(FinalLane))
-        {
-            return ReportDrivingFailure(VehicleId,
-                !IsValid(Destination)
-                    ? TEXT("ManualDestinationAnchorUnavailable")
-                    : TEXT("ManualFinalLaneUnavailable"),
-                FString::Printf(
-                    TEXT("Manual route for '%s' cannot resolve destination '%s' on final lane '%s'."),
-                    *VehicleId.ToString(),
-                    *ResolvedDestinationAnchorId.ToString(),
-                    *Route.Last().ToString()));
-        }
-        FinalDestinationLaneId = Route.Last();
-        const float DestinationInputKey =
-            FinalLane->FindInputKeyClosestToWorldLocation(
-                Destination->GetAnchorLocation());
-        FinalDestinationLaneDistance =
-            FinalLane->GetDistanceAlongSplineAtSplineInputKey(
-                DestinationInputKey);
-        FinalDestinationTransform = FTransform(
-            Destination->GetAnchorRotation(),
-            Destination->GetAnchorLocation(), FVector::OneVector);
-    }
-
-    if (Route.IsEmpty())
-    {
-        return ReportDrivingFailure(VehicleId, TEXT("OrderedLaneRouteEmpty"),
-            FString::Printf(TEXT("Vehicle '%s' has no ordered lane route."),
-                *VehicleId.ToString()));
-    }
-
-    UTMOPTrafficVehicleMovementComponent* Movement =
-        Vehicle->FindComponentByClass<
-            UTMOPTrafficVehicleMovementComponent>();
-    if (!IsValid(Movement))
-    {
-        Movement = NewObject<UTMOPTrafficVehicleMovementComponent>(
-            Vehicle, TEXT("HistoricalTrafficMovement"));
-        Vehicle->AddInstanceComponent(Movement);
-        Movement->bStartDrivingAutomatically = false;
+        Movement = NewObject<UTMOPTrafficVehicleMovementComponent>(Vehicle, TEXT("HistoricalTrafficMovement"));
+        Vehicle->AddInstanceComponent(Movement); Movement->bStartDrivingAutomatically = false;
         Movement->RegisterComponent();
     }
-
-    Movement->StopDriving();
-    Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle;
-    Movement->bIgnoreOneWayRestrictions = DrivingEntry != nullptr &&
-        DrivingEntry->bIgnoreOneWayRestrictions;
-    Movement->bRunRedLights = DrivingEntry != nullptr &&
-        DrivingEntry->bRunRedLights;
-    Movement->DesiredCruiseSpeedKmh = DrivingEntry != nullptr
-        ? FMath::Max(0.0f, DrivingEntry->CruiseSpeedOverrideKmh) : 0.0f;
-    if (DrivingEntry != nullptr && Movement->DesiredCruiseSpeedKmh <= 0.0f)
-        Movement->DesiredCruiseSpeedKmh =
-            SpeedForPreset(DrivingEntry->DrivingPreset);
-    if (DrivingEntry != nullptr &&
-        DrivingEntry->DrivingPreset == ETMOPVehicleDrivingPreset::Fleeing)
-    {
-        Movement->bFleeingVehicle = true;
-        Movement->bRunRedLights = true;
-        Movement->bIgnoreOneWayRestrictions = true;
-    }
-    if (DrivingEntry != nullptr && Movement->DesiredCruiseSpeedKmh <= 0.0f)
-    {
-        const int32 DrivingIndex = static_cast<int32>(
-            DrivingEntry - Runtime->Profile.Timeline.GetData());
-        int32 DepartureSecond = INDEX_NONE;
-        int32 ArrivalSecond = INDEX_NONE;
-        bool bHasDeparture = false;
-        bool bHasArrival = false;
-        if (DrivingEntry->bTimeIsArrival)
-        {
-            bHasDeparture = ResolveDrivingDepartureSecond(Runtime->Profile,
-                DrivingIndex, DepartureSecond);
-            bHasArrival = ResolveTimelineEntrySecond(Runtime->Profile,
-                DrivingIndex, ArrivalSecond);
-        }
-        else
-        {
-            bHasDeparture = ResolveTimelineEntrySecond(Runtime->Profile,
-                DrivingIndex, DepartureSecond);
-            for (int32 Index = DrivingIndex + 1;
-                Index < Runtime->Profile.Timeline.Num(); ++Index)
-            {
-                const ETMOPHistoricalVehicleAction Action =
-                    Runtime->Profile.Timeline[Index].Action;
-                if (Action != ETMOPHistoricalVehicleAction::Stop &&
-                    Action != ETMOPHistoricalVehicleAction::Park &&
-                    Action != ETMOPHistoricalVehicleAction::ExitTrafficRoute)
-                    continue;
-                if (ResolveTimelineEntrySecond(Runtime->Profile,
-                    Index, ArrivalSecond))
-                { bHasArrival = true; break; }
-            }
-        }
-        const int32 DurationSeconds = ArrivalSecond - DepartureSecond;
-        if (bHasDeparture && bHasArrival && DurationSeconds > 0 &&
-            GetGameInstance() != nullptr)
-        {
-            UTMOPTrafficNetworkSubsystem* Network =
-                GetGameInstance()->GetSubsystem<UTMOPTrafficNetworkSubsystem>();
-            if (Network != nullptr)
-            {
-                Network->DiscoverLanesInWorld();
-                double DistanceCm = 0.0;
-                bool bCompleteRoute = true;
-                for (const FName LaneId : Route)
-                {
-                    UTMOPTrafficLaneComponent* Lane = Network->FindLane(LaneId);
-                    if (!IsValid(Lane)) { bCompleteRoute = false; break; }
-                    DistanceCm += Lane->GetSplineLength();
-                }
-                if (bCompleteRoute && DistanceCm > 0.0)
-                    Movement->DesiredCruiseSpeedKmh = static_cast<float>(
-                        (DistanceCm / 100000.0) /
-                        (static_cast<double>(DurationSeconds) / 3600.0));
-            }
-        }
-    }
-    // Historical vehicles are governed by their DataTable timeline. Reaching
-    // the final lane means stop and remain available; only an explicit
-    // HistoricalVehicle Despawn entry may destroy the car and its occupants.
+    Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle ||
+        Entry.DrivingPreset == ETMOPVehicleDrivingPreset::Fleeing;
+    Movement->bIgnoreOneWayRestrictions = Entry.bIgnoreOneWayRestrictions;
+    Movement->bRunRedLights = Entry.bRunRedLights;
+    // Timed routes have one authority: distance / scheduled time. Presets do
+    // not secretly replace a deadline with their own arrival estimate.
+    Movement->DesiredCruiseSpeedKmh = float(Plan.LengthCm * 0.036 / (Arrival - Departure));
     Movement->bDespawnAtRouteEnd = false;
-    Movement->PlannedLaneIds = Route;
-    Movement->InitialLaneId = Route[0];
-    if (!Movement->InitializeOnLane(
-        Route[0], ResolvedStartDistance))
-    {
-        TArray<FString> RouteNames;
-        RouteNames.Reserve(Route.Num());
-        for (const FName LaneId : Route)
-            RouteNames.Add(LaneId.ToString());
-        return ReportDrivingFailure(VehicleId,
-            TEXT("InitializeOnLaneFailed"),
-            FString::Printf(TEXT("InitializeOnLane rejected lane '%s' at %.1f cm for route [%s]."),
-                *Route[0].ToString(), ResolvedStartDistance,
-                *FString::Join(RouteNames, TEXT(","))));
-    }
-    if (!FinalDestinationLaneId.IsNone())
-    {
-        Movement->ConfigureFinalApproach(
-            FinalDestinationLaneId,
-            FinalDestinationLaneDistance,
-            FinalDestinationTransform);
-    }
-    if (DrivingEntry != nullptr)
-    {
-        const int32 DrivingIndex = static_cast<int32>(
-            DrivingEntry - Runtime->Profile.Timeline.GetData());
-        int32 ArrivalSecond = INDEX_NONE;
-        bool bHasArrival = false;
-        if (DrivingEntry->bTimeIsArrival)
-        {
-            bHasArrival = ResolveTimelineEntrySecond(
-                Runtime->Profile, DrivingIndex, ArrivalSecond);
-        }
-        else
-        {
-            for (int32 Index = DrivingIndex + 1;
-                Index < Runtime->Profile.Timeline.Num(); ++Index)
-            {
-                const ETMOPHistoricalVehicleAction Action =
-                    Runtime->Profile.Timeline[Index].Action;
-                if (Action != ETMOPHistoricalVehicleAction::Stop &&
-                    Action != ETMOPHistoricalVehicleAction::Park &&
-                    Action != ETMOPHistoricalVehicleAction::ExitTrafficRoute)
-                    continue;
-                if (ResolveTimelineEntrySecond(
-                    Runtime->Profile, Index, ArrivalSecond))
-                {
-                    bHasArrival = true;
-                    break;
-                }
-            }
-        }
-        if (bHasArrival)
-            Movement->ConfigureTimedArrival(
-                ArrivalSecond, TimelineCatchUpMaximumSpeedKmh);
-    }
-    Movement->StartDriving();
-    // If an old People table is accidentally used with a migrated Vehicles
-    // table, the legacy person call can still start this same entry. Mark it
-    // consumed here as well so the vehicle-owned retry cannot replay it later.
-    if (DrivingEntry != nullptr &&
-        DrivingEntry->bAutoStartFromVehicleTimeline)
-    {
-        Runtime->AppliedDrivingEntryIds.Add(DrivingEntry->EntryId);
-    }
+    if (!Movement->StartRoutePlan(Plan, Departure, Arrival, TimelineCatchUpMaximumSpeedKmh,
+        Runtime->bReconstructCurrentRoute && ReconstructionSecond > Departure && ReconstructionSecond < Arrival, Entry.bStopAtViaAnchors))
+        return ReportDrivingFailure(VehicleId, TEXT("RouteStartBlocked"),
+            TEXT("Could not start the route. Check its start position, lanes and physical clearance."));
+    Runtime->bReconstructCurrentRoute = false;
+    Movement->ActiveTimelineFingerprint = TMOPVehicleRoute::Fingerprint(*RouteProfile, Plan, Departure, Arrival);
+    if (DrivingEntry) Runtime->AppliedDrivingEntryIds.Add(DrivingEntry->EntryId);
     if (Runtime->bBoundaryCollisionSuppressed)
     {
-        Movement->bDetectPhysicalObstacles = false;
-        Vehicle->SetActorEnableCollision(false);
+        Movement->bDetectPhysicalObstacles = false; Vehicle->SetActorEnableCollision(false);
         Runtime->bBoundaryVehicleHasStartedDriving = true;
         Runtime->BoundaryDrivingSeconds = 0.0f;
         Runtime->BoundaryDrivingStartLocation = Vehicle->GetActorLocation();
     }
-    UE_LOG(LogTemp, Display,
-        TEXT("TMOP driving: '%s' started '%s' on %d ordered lane(s)."),
-        *DriverEntityId.ToString(), *VehicleId.ToString(), Route.Num());
+    LastDrivingFailureCodes.Remove(VehicleId);
+    LastDrivingFailureDetails.Remove(VehicleId);
+    UE_LOG(LogTemp, Display, TEXT("TMOP route '%s': %d -> %d, %.1f m, %d lanes."),
+        *Entry.EntryId.ToString(), Departure, Arrival, Plan.LengthCm / 100.0, Plan.LaneIds.Num());
     return true;
 }

@@ -15,6 +15,8 @@ namespace
         int32 ActualSecond = INDEX_NONE;
         float DeviationSeconds = 0.0f;
         FString Event;
+        FString TimelineFingerprint;
+        double CorrectionCm = 0.0;
         FString Severity;
         FString Message;
         FString ReportPath;
@@ -143,6 +145,8 @@ namespace
                 Result.ActualSecond = FMath::RoundToInt(Actual);
                 Result.DeviationSeconds = static_cast<float>(Deviation);
                 Result.Event = Event;
+                Object->TryGetStringField(TEXT("timelineFingerprint"), Result.TimelineFingerprint);
+                Object->TryGetNumberField(TEXT("arrivalCorrectionCm"), Result.CorrectionCm);
                 Object->TryGetStringField(TEXT("severity"), Result.Severity);
                 Object->TryGetStringField(TEXT("message"), Result.Message);
                 Result.ReportPath = LatestPath;
@@ -168,7 +172,8 @@ bool TMOPRuntimeValidation::BuildArrivalBadge(
     const FName EntryId,
     FText& OutText,
     FText& OutToolTip,
-    FLinearColor& OutColor)
+    FLinearColor& OutColor,
+    const FString& ExpectedFingerprint)
 {
     if (EntityId.IsNone() || EntryId.IsNone()) return false;
     const FArrivalResult* Result =
@@ -208,11 +213,24 @@ bool TMOPRuntimeValidation::BuildArrivalBadge(
         }
     }
 
+    if (Result->CorrectionCm > 1.0 && Result->Event == TEXT("VehicleArrived"))
+    {
+        OutText = FText::FromString(FString::Printf(TEXT("KORRIGERAD %.2f m"), Result->CorrectionCm / 100.0));
+        OutColor = FLinearColor(0.78f, 0.38f, 0.03f);
+    }
+    const bool bStale = !ExpectedFingerprint.IsEmpty() &&
+        ExpectedFingerprint != Result->TimelineFingerprint;
+    if (bStale)
+    {
+        OutText = FText::FromString(TEXT("ÄLDRE RESULTAT – kör validering igen"));
+        OutColor = FLinearColor(0.35f, 0.35f, 0.35f);
+    }
     FString ToolTip = FString::Printf(
         TEXT("Planerad ankomst: %s\nFaktisk ankomst: %s\nAvvikelse: %+.0f sekunder"),
         *FormatClock(Result->PlannedSecond),
         *FormatClock(Result->ActualSecond),
         Result->DeviationSeconds);
+    if (bStale) ToolTip = TEXT("Rutten, tiderna eller tabellen har ändrats sedan denna körning.\n") + ToolTip;
     if (!Result->Message.IsEmpty()) ToolTip += TEXT("\n") + Result->Message;
     ToolTip += TEXT("\nRapport: ") + Result->ReportPath;
     OutToolTip = FText::FromString(ToolTip);

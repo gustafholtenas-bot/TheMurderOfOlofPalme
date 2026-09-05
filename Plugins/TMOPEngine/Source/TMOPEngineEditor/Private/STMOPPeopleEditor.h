@@ -9,6 +9,8 @@
 #include "Widgets/Views/SListView.h"
 
 class IStructureDetailsView;
+struct FPropertyChangedEvent;
+class STMOPAppearancePreview;
 class SEditableTextBox;
 class SSearchBox;
 class SSearchableComboBox;
@@ -69,6 +71,11 @@ private:
     void SelectTimelineEntry(int32 Index);
     void CommitEntryEdits();
     void RefreshPersonDetailViews();
+    void RefreshAppearancePreview();
+    void OnAppearanceDetailsChanged(const FPropertyChangedEvent& Event);
+    void OnPreviewAppearanceChanged(const FTMOPAppearanceProfile& Profile);
+    bool bRefreshingAppearanceDetails = false;
+    TSharedPtr<STMOPAppearancePreview> AppearancePreview;
     void CommitPersonDetailEdits();
     bool HasUnsavedPersonChanges();
     bool SaveCurrentPerson();

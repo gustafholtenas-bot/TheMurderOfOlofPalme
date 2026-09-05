@@ -127,6 +127,11 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Agent|Held Items")
     void ClearHeldItems();
 
+#if WITH_EDITOR
+    /** Isolated editor previews can evaluate props without a game clock. */
+    int32 AppearancePreviewSecond = INDEX_NONE;
+#endif
+
     UFUNCTION(BlueprintPure, Category="TMOP|Agent|Held Items")
     FName GetDefaultItemSocket(ETMOPItemAttachmentPoint AttachmentPoint) const;
 
@@ -514,6 +519,7 @@ private:
     bool IsHeldItemVisibleNow(const FTMOPHeldItemDefinition& Item) const;
     FTMOPHeldItemDefinition ActiveLeftHandItem;
     FTMOPHeldItemDefinition ActiveRightHandItem;
+    TArray<FTMOPHeldItemDefinition> ActiveAdditionalItems;
     ETMOPHeldItemPose ResolvedLeftHandGripPose = ETMOPHeldItemPose::None;
     ETMOPHeldItemPose ResolvedRightHandGripPose = ETMOPHeldItemPose::None;
     FColor ResolveNameLabelColor() const;

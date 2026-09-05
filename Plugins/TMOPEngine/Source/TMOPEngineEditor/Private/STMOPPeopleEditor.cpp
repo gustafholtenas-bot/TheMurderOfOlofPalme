@@ -1,4 +1,7 @@
 #include "STMOPPeopleEditor.h"
+#include "STMOPAppearancePreview.h"
+#include "Widgets/Layout/SScrollBox.h"
+#include "Templates/UnrealTemplate.h"
 #include "TMOPRuntimeValidationReader.h"
 
 #include "Anchors/TMOPHistoricalAnchor.h"
@@ -59,8 +62,8 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
 
     FStructureDetailsViewArgs StructureArgs;
     StructureArgs.bShowObjects = false;
-    StructureArgs.bShowAssets = false;
-    StructureArgs.bShowClasses = false;
+    StructureArgs.bShowAssets = true;
+    StructureArgs.bShowClasses = true;
     StructureArgs.bShowInterfaces = false;
 
     FPropertyEditorModule& PropertyEditor =
@@ -72,6 +75,13 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
         DetailsArgs, StructureArgs, nullptr);
     GeneralDetailsView = PropertyEditor.CreateStructureDetailView(
         DetailsArgs, StructureArgs, nullptr);
+
+    CharacteristicsDetailsView->GetOnFinishedChangingPropertiesDelegate().AddSP(this,
+        &STMOPPeopleEditor::OnAppearanceDetailsChanged);
+    GeneralDetailsView->GetOnFinishedChangingPropertiesDelegate().AddSP(this,
+        &STMOPPeopleEditor::OnAppearanceDetailsChanged);
+    EntryDetailsView->GetOnFinishedChangingPropertiesDelegate().AddSP(this,
+        &STMOPPeopleEditor::OnAppearanceDetailsChanged);
 
     ChildSlot
     [
@@ -594,6 +604,10 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                 .Padding(6.0f)
                 [
                     SNew(SVerticalBox)
+                    + SVerticalBox::Slot().FillHeight(0.65f).Padding(0,0,0,5)
+                    [ SAssignNew(AppearancePreview, STMOPAppearancePreview)
+                        .OnPersonAppearanceChanged(this,
+                            &STMOPPeopleEditor::OnPreviewAppearanceChanged) ]
                     + SVerticalBox::Slot()
                     .AutoHeight()
                     .Padding(0.0f, 0.0f, 0.0f, 6.0f)
@@ -628,7 +642,7 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                         [
                             SNew(SBox)
                             .WidthOverride(220.0f)
-                            .HeightOverride(260.0f)
+                            .HeightOverride(130.0f)
                             [
                                 SNew(SBorder)
                                 .Padding(3.0f)
@@ -712,14 +726,11 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
 
 void STMOPPeopleEditor::LoadDefaultTable()
 {
-    PeopleTable = LoadObject<UDataTable>(
-        nullptr, DefaultPeopleTablePath);
+    PeopleTable = TMOPAppearancePreview::PeopleTable();
     EventTable = LoadObject<UDataTable>(
         nullptr, DefaultEventTablePath);
-    VehicleTable = LoadObject<UDataTable>(
-        nullptr, DefaultVehicleTablePath);
-    AppearanceTable = LoadObject<UDataTable>(
-        nullptr, DefaultAppearanceTablePath);
+    VehicleTable = TMOPAppearancePreview::VehicleTable();
+    AppearanceTable = TMOPAppearancePreview::AppearanceTable();
     if (!PeopleTable.IsValid() ||
         PeopleTable->GetRowStruct() !=
             FTMOPPersonProfileRow::StaticStruct())
@@ -969,6 +980,7 @@ void STMOPPeopleEditor::SelectPerson(const FName RowName)
     SelectDefaultComparisonPerson();
     if (!WorkingRow.Timeline.IsEmpty())
         SelectTimelineEntry(0);
+    else RefreshAppearancePreview();
 }
 
 void STMOPPeopleEditor::SelectTimelineEntry(const int32 Index)
@@ -988,6 +1000,7 @@ void STMOPPeopleEditor::SelectTimelineEntry(const int32 Index)
             WorkingRow.Timeline[Index];
     EntryDetailsView->SetStructureData(EntryStructData);
     RefreshReferenceOptions();
+    RefreshAppearancePreview();
 }
 
 void STMOPPeopleEditor::CommitEntryEdits()
@@ -1006,6 +1019,7 @@ void STMOPPeopleEditor::CommitEntryEdits()
 
 void STMOPPeopleEditor::RefreshPersonDetailViews()
 {
+    TGuardValue<bool> RefreshGuard(bRefreshingAppearanceDetails, true);
     CharacteristicsStructData = MakeShared<FStructOnScope>(
         FTMOPPersonCharacteristicsEditorData::StaticStruct());
     CharacteristicsStructData->SetPackage(
@@ -1019,6 +1033,9 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
     Characteristics->HeightCentimeters = WorkingRow.HeightCentimeters;
     Characteristics->AppearanceProfile = WorkingRow.AppearanceProfile;
     Characteristics->ReferenceImage = WorkingRow.ReferenceImage;
+    Characteristics->LeftHandItem = WorkingRow.LeftHandItem;
+    Characteristics->RightHandItem = WorkingRow.RightHandItem;
+    Characteristics->AdditionalCarriedItems = WorkingRow.AdditionalCarriedItems;
     Characteristics->HairColorCategory = WorkingRow.HairColorCategory;
     Characteristics->HeadwearCategory = WorkingRow.HeadwearCategory;
     Characteristics->FacialHairCategory = WorkingRow.FacialHairCategory;
@@ -1080,6 +1097,40 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
     GeneralDetailsView->SetStructureData(GeneralStructData);
 }
 
+void STMOPPeopleEditor::RefreshAppearancePreview()
+{
+    if (!AppearancePreview) return;
+    if (SelectedRowName.IsNone()) { AppearancePreview->Clear(TEXT("Select a person.")); return; }
+    int32 AtSecond = 23 * 3600;
+    if (SelectedTimelineIndex != INDEX_NONE) ResolveTimelineDisplaySecond(SelectedTimelineIndex, AtSecond);
+    AppearancePreview->ShowPerson(WorkingRow, AppearanceTable.Get(), AtSecond);
+}
+
+void STMOPPeopleEditor::OnAppearanceDetailsChanged(const FPropertyChangedEvent& Event)
+{
+    if (bRefreshingAppearanceDetails || SelectedRowName.IsNone()) return;
+    CommitEntryEdits();
+    CommitPersonDetailEdits();
+    RefreshAppearancePreview();
+}
+
+void STMOPPeopleEditor::OnPreviewAppearanceChanged(
+    const FTMOPAppearanceProfile& Profile)
+{
+    if (SelectedRowName.IsNone()) return;
+    WorkingRow.AppearanceProfile = Profile;
+    if (CharacteristicsStructData.IsValid())
+    {
+        FTMOPPersonCharacteristicsEditorData* Characteristics =
+            reinterpret_cast<FTMOPPersonCharacteristicsEditorData*>(
+                CharacteristicsStructData->GetStructMemory());
+        Characteristics->AppearanceProfile = Profile;
+    }
+    SetStatus(LOCTEXT("AppearanceSelectionChanged",
+        "Appearance asset changed in the working copy. Press Save Person to store it in DT_TMOP_People."),
+        FLinearColor(1.0f, 0.75f, 0.2f));
+}
+
 void STMOPPeopleEditor::CommitPersonDetailEdits()
 {
     if (CharacteristicsStructData.IsValid())
@@ -1091,6 +1142,9 @@ void STMOPPeopleEditor::CommitPersonDetailEdits()
         WorkingRow.HeightCentimeters = Characteristics->HeightCentimeters;
         WorkingRow.AppearanceProfile = Characteristics->AppearanceProfile;
         WorkingRow.ReferenceImage = Characteristics->ReferenceImage;
+        WorkingRow.LeftHandItem = Characteristics->LeftHandItem;
+        WorkingRow.RightHandItem = Characteristics->RightHandItem;
+        WorkingRow.AdditionalCarriedItems = Characteristics->AdditionalCarriedItems;
         WorkingRow.HairColorCategory = Characteristics->HairColorCategory;
         WorkingRow.HeadwearCategory = Characteristics->HeadwearCategory;
         WorkingRow.FacialHairCategory =

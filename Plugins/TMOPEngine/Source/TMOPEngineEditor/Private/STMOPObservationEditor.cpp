@@ -1,4 +1,7 @@
 #include "STMOPObservationEditor.h"
+#include "STMOPAppearancePreview.h"
+#include "Templates/UnrealTemplate.h"
+#include "Vehicles/TMOPHistoricalVehicleTypes.h"
 
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "AssetRegistry/AssetRegistryModule.h"
@@ -374,8 +377,10 @@ private:
         const float Scale = FMath::Min(
             (Size.X - Padding * 2.0f) / FMath::Max(Extent.X, 1.0f),
             (Size.Y - Padding * 2.0f) / FMath::Max(Extent.Y, 1.0f));
+        // Preserve Unreal world X/Y orientation. The previous screen-space
+        // subtraction mirrored the complete observation map along its Y axis.
         return FVector2D(Padding + (Position.X - Bounds.Min.X) * Scale,
-            Size.Y - Padding - (Position.Y - Bounds.Min.Y) * Scale);
+            Padding + (Position.Y - Bounds.Min.Y) * Scale);
     }
 
     TArray<FPoint> Points;
@@ -416,6 +421,8 @@ void STMOPObservationEditor::Construct(const FArguments& Args)
         FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
     LinkDetails = PropertyEditor.CreateStructureDetailView(
         DetailsArgs, StructureArgs, nullptr);
+    LinkDetails->GetOnFinishedChangingPropertiesDelegate().AddSP(this,
+        &STMOPObservationEditor::OnLinkAppearanceChanged);
 
     ChildSlot
     [
@@ -631,7 +638,8 @@ void STMOPObservationEditor::Construct(const FArguments& Args)
                         [ SAssignNew(MemberList, SListView<FMemberItem>)
                             .ListItemsSource(&MemberItems)
                             .OnGenerateRow(this,
-                                &STMOPObservationEditor::GenerateMemberRow) ]
+                                &STMOPObservationEditor::GenerateMemberRow)
+                            .OnSelectionChanged(this, &STMOPObservationEditor::OnObservationSelected) ]
                     ]
                 ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0, 4)
@@ -661,6 +669,23 @@ void STMOPObservationEditor::Construct(const FArguments& Args)
             [
                 SNew(SVerticalBox)
                 + SVerticalBox::Slot().AutoHeight()
+                [ SNew(SHorizontalBox)
+                    + SHorizontalBox::Slot().AutoWidth()
+                    [ SNew(SButton).Text(LOCTEXT("PreviewObservation", "Observation"))
+                        .OnClicked_Lambda([this]{bPreviewLinkedEntity=false;RefreshAppearancePreview();return FReply::Handled();}) ]
+                    + SHorizontalBox::Slot().AutoWidth()
+                    [ SNew(SButton).Text(LOCTEXT("PreviewLinkedEntity", "Linked entity"))
+                        .OnClicked_Lambda([this]{bPreviewLinkedEntity=true;CommitLinkDetails();RefreshAppearancePreview();return FReply::Handled();}) ]
+                ]
+                + SVerticalBox::Slot().AutoHeight()
+                [ SNew(STextBlock).Text_Lambda([this]{return bPreviewLinkedEntity?
+                    LOCTEXT("PreviewLinkMode", "Showing: linked representative"):
+                    LOCTEXT("PreviewObservationMode", "Showing: observed entity");}) ]
+                + SVerticalBox::Slot().FillHeight(0.5f).Padding(0,3)
+                [ SAssignNew(AppearancePreview, STMOPAppearancePreview)
+                    .OnPersonAppearanceChanged(this,
+                        &STMOPObservationEditor::OnPreviewAppearanceChanged) ]
+                + SVerticalBox::Slot().AutoHeight()
                 [ SNew(STextBlock).Text(LOCTEXT("Links", "OBSERVATION LINKS")) ]
                 + SVerticalBox::Slot().FillHeight(0.34f)
                 [ SAssignNew(LinkList, SListView<FLinkItem>)
@@ -672,7 +697,7 @@ void STMOPObservationEditor::Construct(const FArguments& Args)
                     "VALIDATION SUMMARY")) ]
                 + SVerticalBox::Slot().AutoHeight()
                 [
-                    SNew(SBox).HeightOverride(155.0f)
+                    SNew(SBox).HeightOverride(85.0f)
                     [
                         SNew(SBorder).Padding(5.0f)
                         [
@@ -710,7 +735,7 @@ void STMOPObservationEditor::LoadTables()
 {
     ObservationTable = LoadObject<UDataTable>(nullptr, ObservationTablePath);
     LinkTable = LoadObject<UDataTable>(nullptr, LinkTablePath);
-    PeopleTable = LoadObject<UDataTable>(nullptr, PeopleTablePath);
+    PeopleTable = TMOPAppearancePreview::PeopleTable();
     if (ObservationTable.IsValid() && LinkTable.IsValid() &&
         PeopleTable.IsValid()) return;
     FAssetRegistryModule& Registry = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
@@ -1056,8 +1081,99 @@ FString STMOPObservationEditor::BuildObservationSearchText(
     return Result;
 }
 
+void STMOPObservationEditor::RefreshAppearancePreview()
+{
+    if (!AppearancePreview) return;
+    PreviewPersonEntityId = NAME_None;
+    FName EntityId = NAME_None;
+    ETMOPObservedEntityType Kind = ETMOPObservedEntityType::Unknown;
+    int32 AtSecond = PreviewSecond;
+    if (bPreviewLinkedEntity)
+    {
+        EntityId = WorkingLink.LinkedEntityId;
+        Kind = WorkingLink.LinkedEntityType;
+    }
+    else if (const FTMOPObservationDefinition* Observation = ObservationsById.Find(SelectedObservationId))
+    {
+        EntityId = Observation->ObservedEntityId;
+        Kind = Observation->ObservedEntityType;
+        AtSecond = ResolveObservationSecond(SelectedObservationId);
+    }
+    if (EntityId.IsNone())
+    {
+        AppearancePreview->Clear(bPreviewLinkedEntity
+            ? TEXT("Choose Linked Entity ID to preview the link's representative.")
+            : TEXT("Select an observation with an Observed Entity ID."));
+        return;
+    }
+    const FTMOPPersonProfileRow* Person = nullptr;
+    const FTMOPHistoricalVehicleRow* Vehicle = nullptr;
+    if (PeopleTable.IsValid() && (Kind == ETMOPObservedEntityType::Person || Kind == ETMOPObservedEntityType::Unknown))
+        for (const FName RowName : PeopleTable->GetRowNames())
+            if (const auto* Row = PeopleTable->FindRow<FTMOPPersonProfileRow>(RowName,TEXT("AppearancePreview"),false))
+                if (Row->EntityId == EntityId) { Person = Row; break; }
+    if (Kind == ETMOPObservedEntityType::Vehicle || Kind == ETMOPObservedEntityType::Unknown)
+        if (UDataTable* Table = TMOPAppearancePreview::VehicleTable())
+            for (const FName RowName : Table->GetRowNames())
+                if (const auto* Row = Table->FindRow<FTMOPHistoricalVehicleRow>(RowName,TEXT("AppearancePreview"),false))
+                    if (Row->VehicleId == EntityId) { Vehicle = Row; break; }
+    if (Person && Vehicle)
+        AppearancePreview->Clear(TEXT("Entity ID exists in both tables. Set the entity type."));
+    else if (Person)
+    {
+        PreviewPersonEntityId = Person->EntityId;
+        AppearancePreview->ShowPerson(*Person,
+            TMOPAppearancePreview::AppearanceTable(), AtSecond);
+    }
+    else if (Vehicle)
+        AppearancePreview->ShowVehicle(*Vehicle);
+    else
+        AppearancePreview->Clear(FString::Printf(TEXT("No person/vehicle profile found for '%s'. Choose an existing entity ID."),
+            *EntityId.ToString()));
+}
+
+void STMOPObservationEditor::OnPreviewAppearanceChanged(
+    const FTMOPAppearanceProfile& Profile)
+{
+    UDataTable* Table = PeopleTable.Get();
+    if (!IsValid(Table) || PreviewPersonEntityId.IsNone())
+    {
+        SetStatus(LOCTEXT("AppearanceNeedsPerson",
+            "Appearance cannot be changed: the preview is not linked to a People-table person."),
+            FLinearColor::Red);
+        return;
+    }
+    for (const FName RowName : Table->GetRowNames())
+    {
+        FTMOPPersonProfileRow* Person = Table->FindRow<FTMOPPersonProfileRow>(
+            RowName, TEXT("Observation appearance edit"), false);
+        if (!Person || Person->EntityId != PreviewPersonEntityId) continue;
+        const FScopedTransaction Transaction(LOCTEXT("EditObservedAppearance",
+            "Change observed person appearance"));
+        Table->Modify();
+        Person->AppearanceProfile = Profile;
+        Table->MarkPackageDirty();
+        Table->PostEditChange();
+        SetStatus(LOCTEXT("ObservedAppearanceChanged",
+            "Appearance changed in DT_TMOP_People. Use Save All to write the asset to disk."),
+            FLinearColor(0.4f, 1.0f, 0.4f));
+        return;
+    }
+    SetStatus(LOCTEXT("AppearancePersonMissing",
+        "The previewed person is no longer present in DT_TMOP_People."),
+        FLinearColor::Red);
+}
+void STMOPObservationEditor::OnLinkAppearanceChanged(const FPropertyChangedEvent& Event)
+{
+    if (bRefreshingLinkDetails) return;
+    CommitLinkDetails();
+    RefreshMembers();
+    RebuildMap();
+}
+
 void STMOPObservationEditor::RefreshObservationInfo()
 {
+    RefreshAppearancePreview();
     if (!ObservationInfoText) return;
     const FTMOPObservationDefinition* Observation =
         ObservationsById.Find(SelectedObservationId);
@@ -1325,6 +1441,7 @@ void STMOPObservationEditor::RefreshMembers()
     for (const FName Id : WorkingLink.ObservationIds)
         MemberItems.Add(MakeShared<FName>(Id));
     if (MemberList) MemberList->RequestListRefresh();
+    RefreshAppearancePreview();
 }
 
 void STMOPObservationEditor::RebuildMap()
@@ -1558,6 +1675,7 @@ FText STMOPObservationEditor::GetPreviewTimeText() const
 void STMOPObservationEditor::OnObservationSelected(
     FObservationItem Item, ESelectInfo::Type)
 {
+    bPreviewLinkedEntity = false;
     SelectedObservationId = Item ? *Item : NAME_None;
     SelectedKnownPersonId = NAME_None;
     const FTMOPObservationDefinition* Observation =
@@ -1618,11 +1736,13 @@ void STMOPObservationEditor::OnPreviewSliderChanged(const float Value)
         FMath::Clamp(Value, 0.0f, 1.0f) *
         static_cast<float>(EndSecond - StartSecond))) % (24 * 3600);
     RebuildMap();
+    if (bPreviewLinkedEntity) RefreshAppearancePreview();
 }
 
 void STMOPObservationEditor::OnMapObservationSelected(
     const FName ObservationId)
 {
+    bPreviewLinkedEntity = false;
     SelectedObservationId = ObservationId;
     if (ObservationList)
     {
@@ -1713,6 +1833,7 @@ void STMOPObservationEditor::SelectLink(const FName RowName)
             TEXT("ObservationEditorSelect"), false);
     if (!Row) return;
     SelectedLinkRow = RowName;
+    bPreviewLinkedEntity = true;
     WorkingLink = *Row;
     if (WorkingLink.ObservationIds.IsEmpty())
     {
@@ -2304,6 +2425,7 @@ void STMOPObservationEditor::CommitLinkDetails()
 
 void STMOPObservationEditor::RefreshLinkDetails()
 {
+    TGuardValue<bool> Guard(bRefreshingLinkDetails, true);
     LinkStruct = MakeShared<FStructOnScope>(
         FTMOPObservationLinkDefinition::StaticStruct());
     LinkStruct->SetPackage(LinkTable.IsValid()

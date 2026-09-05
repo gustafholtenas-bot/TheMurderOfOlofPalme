@@ -2,11 +2,14 @@
 
 #include "CoreMinimal.h"
 #include "Vehicles/TMOPHistoricalVehicleTypes.h"
+#include "Vehicles/TMOPVehicleRoutePlan.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/Input/SCheckBox.h"
+#include "Widgets/Input/SEditableTextBox.h"
 #include "Widgets/Views/SListView.h"
 
 class IStructureDetailsView;
+class STMOPAppearancePreview;
 class SEditableTextBox;
 class SSearchBox;
 class SSearchableComboBox;
@@ -14,6 +17,7 @@ class STextBlock;
 class UDataTable;
 class FStructOnScope;
 class STMOPVehicleRouteMap;
+template<typename OptionType> class SComboBox;
 struct FTMOPPersonProfileRow;
 
 class STMOPVehicleEditor final : public SCompoundWidget
@@ -22,8 +26,59 @@ public:
     SLATE_BEGIN_ARGS(STMOPVehicleEditor) {}
     SLATE_END_ARGS()
     void Construct(const FArguments& Args);
+    bool CanClose();
+    virtual bool SupportsKeyboardFocus() const override { return true; }
+    virtual FReply OnKeyDown(const FGeometry& Geometry, const FKeyEvent& Event) override;
+    bool HasUnsavedChanges();
+
 
 private:
+    bool ConfirmDiscardOrSave();
+    void OnDetailsChanged(const FPropertyChangedEvent& Event, bool bVehicleDetails);
+    void SyncDetailsFromWorking();
+    void RefreshAppearancePreview();
+    TSharedRef<SWidget> BuildAccessoryControls();
+    void RefreshAccessoryChoices();
+    void SelectAccessory(TSharedPtr<int32> Item, ESelectInfo::Type);
+    void OnAccessoryDetailsChanged(const FPropertyChangedEvent& Event);
+    FReply AddAccessory(ETMOPRoofAccessoryType Type);
+    FReply RemoveAccessory();
+    void SelectAccessorySocket(TSharedPtr<FString> Item, ESelectInfo::Type);
+    TSharedPtr<STMOPAppearancePreview> AppearancePreview;
+    TSharedPtr<IStructureDetailsView> AccessoryDetails;
+    TSharedPtr<FStructOnScope> AccessoryStruct;
+    TArray<TSharedPtr<int32>> AccessoryChoices;
+    TArray<TSharedPtr<FString>> AccessorySockets;
+    TSharedPtr<SComboBox<TSharedPtr<int32>>> AccessoryCombo;
+    TSharedPtr<SSearchableComboBox> AccessorySocketCombo;
+    int32 SelectedAccessoryIndex = INDEX_NONE;
+    bool bRefreshingAccessories = false;
+    TSharedRef<SWidget> BuildDrivingControls();
+    FText GetDrivingSummary() const;
+    FText BuildDrivingSummary() const;
+    FText BuildRouteEndpointsText() const;
+    FText GetClockField(bool bArrival) const;
+    void SetClockField(const FText& Text, ETextCommit::Type CommitType, bool bArrival);
+    void SetStopDuration(int32 Seconds);
+    EVisibility DrivingVisibility() const;
+    EVisibility LaneVisibility() const;
+    EVisibility PlacementVisibility() const;
+    EVisibility StopVisibility() const;
+    void SetPreviewAlpha(float Alpha);
+    FReply TogglePreview();
+    EActiveTimerReturnType TickPreview(double Now, float DeltaTime);
+    FString GetEntryFingerprint(int32 Index) const;
+    void RefreshValidationItems();
+    struct FValidationItem
+    {
+        FName VehicleRow;
+        int32 EntryIndex = INDEX_NONE;
+        FString Message;
+    };
+    using FValidationItemPtr = TSharedPtr<FValidationItem>;
+    TSharedRef<ITableRow> GenerateValidationRow(
+        FValidationItemPtr Item, const TSharedRef<STableViewBase>& Owner);
+
     struct FBoardingFeasibility
     {
         bool bFoundBoardingEntry = false;
@@ -188,4 +243,19 @@ private:
     TSharedPtr<SSearchableComboBox> ViaLaneCombo;
     TSharedPtr<STextBlock> StatusText;
     uint64 LastRuntimeValidationRevision = 0;
+    bool bChangingSelection = false;
+    bool bSynchronizingDetails = false;
+    bool bPreviewPlaying = false;
+    bool bPreviewTimerRegistered = false;
+    bool bPreviewInLevel = false;
+    float PreviewAlpha = 0.0f;
+    int32 PreviewDeparture = 0;
+    int32 PreviewArrival = 0;
+    FTMOPVehicleRoutePlan PreviewPlan;
+    FString CachedOccupants;
+    FText CachedDrivingSummary;
+    FText CachedRouteEndpoints;
+    mutable TMap<int32, FString> CachedFingerprints;
+    TArray<FValidationItemPtr> ValidationItems;
+    TSharedPtr<SListView<FValidationItemPtr>> ValidationList;
 };

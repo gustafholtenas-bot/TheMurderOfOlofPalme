@@ -1582,9 +1582,22 @@ void ATMOPTimelineValidationDirector::HandleVehicleTimelineArrived(
             ? Anchors->FindAnchor(Entry.PlacementAnchorId) : nullptr;
         if (IsValid(Anchor) && IsValid(Vehicle))
             Record.DistanceToTargetCm = FVector::Dist2D(
-                Vehicle->GetActorLocation(), Anchor->GetAnchorLocation());
+                Vehicle->GetActorLocation(), (Entry.AnchorLocalOffset * FTransform(
+                    Anchor->GetAnchorRotation(), Anchor->GetAnchorLocation())).GetLocation());
     }
 
+    for (TActorIterator<ATMOPHistoricalVehicleDirector> It(GetWorld()); It; ++It)
+    {
+        Record.TimelineFingerprint = It->GetTimelineFingerprint(VehicleId, Entry.EntryId);
+        if (!Record.TimelineFingerprint.IsEmpty()) break;
+    }
+    if (const auto* Movement = IsValid(Vehicle)
+        ? Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>() : nullptr)
+    {
+        Record.ArrivalCorrectionCm = float(Movement->LastArrivalCorrectionCm);
+        Record.bArrivalBlocked = Movement->bLastArrivalBlocked;
+        if (Record.bArrivalBlocked) Record.FailureDetails = Movement->LastArrivalBlocker;
+    }
     const float AbsDeviation = FMath::Abs(Record.TimeDeviationSeconds);
     if (!bSuccessful)
     {
@@ -1610,6 +1623,15 @@ void ATMOPTimelineValidationDirector::HandleVehicleTimelineArrived(
                 Record.TimeDeviationSeconds >= 0.0f
                     ? TEXT("late") : TEXT("early"));
     }
+    if (bSuccessful && Record.ArrivalCorrectionCm > 1.0f)
+    {
+        if (Record.Severity == ETMOPTimelineValidationSeverity::Passed)
+            Record.Severity = ETMOPTimelineValidationSeverity::Warning;
+        Record.Message = FString::Printf(TEXT("Deadline reached with a %.2f m position correction; not an unassisted arrival."),
+            Record.ArrivalCorrectionCm / 100.0f);
+    }
+    if (Record.bArrivalBlocked)
+        Record.Message += TEXT(" Blocked by: ") + Record.FailureDetails;
     AddRecord(Record);
 }
 
@@ -1832,6 +1854,9 @@ bool ATMOPTimelineValidationDirector::ExportReports()
         O->SetStringField(TEXT("entityId"), R.EntityId.ToString());
         O->SetStringField(TEXT("entryId"), R.EntryId.ToString());
         O->SetStringField(TEXT("event"), R.Event);
+        O->SetStringField(TEXT("timelineFingerprint"), R.TimelineFingerprint);
+        O->SetNumberField(TEXT("arrivalCorrectionCm"), R.ArrivalCorrectionCm);
+        O->SetBoolField(TEXT("arrivalBlocked"), R.bArrivalBlocked);
         O->SetStringField(TEXT("targetAnchorId"), R.TargetAnchorId.ToString());
         O->SetNumberField(TEXT("plannedSecond"), R.PlannedSecond);
         O->SetNumberField(TEXT("actualSecond"), R.ActualSecond);
