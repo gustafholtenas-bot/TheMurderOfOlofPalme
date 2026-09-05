@@ -1,7 +1,9 @@
 #include "Observations/TMOPObservationDirector.h"
+#include "Observations/TMOPObservationSignalementLibrary.h"
 
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
+#include "Agents/TMOPHistoricalAgent.h"
 #include "Components/ActorComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/DataTable.h"
@@ -10,8 +12,13 @@
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Misc/ConfigCacheIni.h"
+#include "NavigationPath.h"
+#include "NavigationSystem.h"
 #include "Time/TMOPClockSubsystem.h"
+#include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Vehicles/TMOPHistoricalVehicleDirector.h"
+#include "Vehicles/TMOPVehicleSeatComponent.h"
 
 namespace
 {
@@ -97,12 +104,12 @@ void ATMOPObservationDirector::Tick(const float DeltaSeconds)
     const UGameInstance* GameInstance = GetGameInstance();
     const UTMOPClockSubsystem* Clock = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
-    const int32 CurrentSecond = Clock != nullptr
-        ? Clock->GetCurrentTime().ToSecondsFromMidnight() : INDEX_NONE;
-    if (bEnableLinkedTrackSimulation && CurrentSecond != INDEX_NONE)
-        UpdateObservationTracks(
-            CurrentSecond);
-    DrawWorldGuideLines(CurrentSecond);
+    const double CurrentSecond = Clock != nullptr
+        ? Clock->GetCurrentTimeSecondsExact() : -1.0;
+    if (bEnableLinkedTrackSimulation && CurrentSecond >= 0.0)
+        UpdateObservationTracks(CurrentSecond);
+    DrawWorldGuideLines(CurrentSecond >= 0.0
+        ? FMath::FloorToInt(CurrentSecond) : INDEX_NONE);
 }
 
 bool ATMOPObservationDirector::GetSavedShowOlofLocationLine()
@@ -175,7 +182,7 @@ void ATMOPObservationDirector::DrawWorldGuideLines(
         if (CurrentSecond < StartSecond || CurrentSecond > EndSecond)
             continue;
 
-        AActor* Observed = FindEntityActor(Definition.ObservedEntityId);
+        AActor* Observed = FindObservedActorForObservation(Definition);
         if (!IsValid(Observed)) continue;
         const FVector ObservedPoint =
             Observed->GetActorLocation() + FVector(0.0f, 0.0f, 70.0f);
@@ -201,6 +208,7 @@ int32 ATMOPObservationDirector::ReloadObservationData()
     LoadedLinks.Reset();
     RuntimeTracks.Reset();
     ResolvedTracks.Reset();
+    ObservationPlaybackEntities.Reset();
     EntityActorCache.Reset();
 
     if (IsValid(ObservationTable) &&
@@ -420,6 +428,7 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
                 Pair.Value.bActorCollisionWasEnabled);
     ResolvedTracks.Reset();
     RuntimeTracks.Reset();
+    ObservationPlaybackEntities.Reset();
 
     UTMOPAnchorSubsystem* Anchors = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
@@ -437,6 +446,7 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
         const TArray<FName> MemberIds = GetLinkObservationIds(Link);
         FResolvedTrack Track;
         bool bInvalid = MemberIds.Num() < 2;
+        bool bHasOverlappingWindows = false;
         for (const FName ObservationId : MemberIds)
         {
             const FTMOPObservationDefinition* Definition =
@@ -493,9 +503,19 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
             FResolvedTrackSegment Segment;
             Segment.FromObservationId = From.ObservationId;
             Segment.ToObservationId = To.ObservationId;
-            Segment.TravelStartSecond = From.EndSecond;
             Segment.TravelEndSecond = To.StartSecond;
             Segment.PolylinePoints.Add(From.Location);
+
+            const bool bSamePlace = From.AnchorId == To.AnchorId ||
+                From.Location.Equals(To.Location, 1.0f);
+            if (To.StartSecond < From.EndSecond && !bSamePlace)
+                bHasOverlappingWindows = true;
+
+            // Multiple witnesses can report the same subject at the same
+            // place during overlapping windows. That is one stationary
+            // interval, not an impossible movement leg.
+            if (To.StartSecond <= From.EndSecond && bSamePlace)
+                continue;
 
             const FTMOPObservationTrackSegment* Authored =
                 Link.TrackSegments.FindByPredicate(
@@ -504,6 +524,37 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
                         return Candidate.FromObservationId == From.ObservationId &&
                             Candidate.ToObservationId == To.ObservationId;
                     });
+            if (Authored != nullptr)
+            {
+                Segment.MovementMode = Authored->MovementMode;
+                Segment.VehicleEntityId = Authored->VehicleEntityId;
+                Segment.VehicleSeatId = Authored->VehicleSeatId;
+                Segment.MaximumBoardingDistanceCm =
+                    Authored->MaximumBoardingDistanceCm;
+                Segment.DriverEntityId = Authored->DriverEntityId;
+                Segment.OrderedLaneIds = Authored->OrderedLaneIds;
+                Segment.VehiclePassAnchorIds =
+                    Authored->VehiclePassAnchorIds;
+                Segment.VehicleRouteMode = Authored->VehicleRouteMode;
+                Segment.VehicleDestinationAnchorId =
+                    Authored->VehicleDestinationAnchorId;
+                Segment.VehicleStartDistanceAlongFirstLaneCm =
+                    Authored->VehicleStartDistanceAlongFirstLaneCm;
+                Segment.VehicleCruiseSpeedKmh =
+                    Authored->VehicleCruiseSpeedKmh;
+                Segment.bIgnoreOneWayRestrictions =
+                    Authored->bIgnoreOneWayRestrictions;
+                Segment.bRunRedLights = Authored->bRunRedLights;
+                if ((Authored->MovementMode ==
+                        ETMOPObservationSegmentMovementMode::WalkToVehicleAndBoard ||
+                     Authored->MovementMode ==
+                        ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard) &&
+                    Authored->BoardingLeadSeconds > 0.0f)
+                    Segment.TravelEndSecond = FMath::Max(
+                        static_cast<double>(From.EndSecond),
+                        Segment.TravelEndSecond -
+                            static_cast<double>(Authored->BoardingLeadSeconds));
+            }
             const TArray<FName>* RouteIds = Authored != nullptr
                 ? &Authored->RouteAnchorIds : nullptr;
             if (RouteIds == nullptr && Index == 0 &&
@@ -518,6 +569,46 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
                             RouteAnchor->GetAnchorLocation());
             Segment.PolylinePoints.Add(To.Location);
 
+            const ETMOPObservedEntityType SegmentEntityType =
+                Link.LinkedEntityType != ETMOPObservedEntityType::Unknown
+                ? Link.LinkedEntityType
+                : LoadedObservations.FindChecked(From.ObservationId)
+                    .ObservedEntityType;
+            if (Segment.MovementMode ==
+                ETMOPObservationSegmentMovementMode::Automatic)
+            {
+                if (SegmentEntityType == ETMOPObservedEntityType::Vehicle)
+                    Segment.MovementMode = Authored != nullptr &&
+                            (!Authored->OrderedLaneIds.IsEmpty() ||
+                             !Authored->VehicleDestinationAnchorId.IsNone())
+                        ? ETMOPObservationSegmentMovementMode::VehicleLaneRoute
+                        : ETMOPObservationSegmentMovementMode::VehicleDirectInterpolation;
+                else
+                    Segment.MovementMode =
+                        ETMOPObservationSegmentMovementMode::Walk;
+            }
+            const bool bPedestrianPath =
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::Walk ||
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::Run ||
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::Sprint ||
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::WalkToVehicleAndBoard ||
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard ||
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::ExitVehicleThenWalk ||
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::ExitVehicleThenRun;
+            if ((RouteIds == nullptr || RouteIds->IsEmpty()) &&
+                bPedestrianPath &&
+                Link.bUseNavigationPathForPeople)
+            {
+                if (UNavigationPath* NavigationPath =
+                    UNavigationSystemV1::FindPathToLocationSynchronously(
+                        GetWorld(), From.Location, To.Location))
+                {
+                    if (NavigationPath->IsValid() &&
+                        NavigationPath->PathPoints.Num() >= 2)
+                        Segment.PolylinePoints = NavigationPath->PathPoints;
+                }
+            }
+
             Segment.CumulativeDistancesCm.Add(0.0f);
             for (int32 PointIndex = 1;
                 PointIndex < Segment.PolylinePoints.Num(); ++PointIndex)
@@ -529,14 +620,48 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
             }
             if (Authored != nullptr && Authored->AuthoredDistanceCm > 0.0f)
                 Segment.DistanceCm = Authored->AuthoredDistanceCm;
-            const int32 TravelSeconds =
+            const double AvailableTravelSeconds =
+                Segment.TravelEndSecond - static_cast<double>(From.EndSecond);
+            const float MinimumRequiredSpeed = AvailableTravelSeconds > 0.0
+                ? Segment.DistanceCm /
+                    static_cast<float>(AvailableTravelSeconds)
+                : TNumericLimits<float>::Max();
+            const float ModeDefaultSpeed =
+                Segment.MovementMode == ETMOPObservationSegmentMovementMode::Sprint
+                    ? 600.0f
+                : Segment.MovementMode == ETMOPObservationSegmentMovementMode::Run ||
+                  Segment.MovementMode == ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard ||
+                  Segment.MovementMode == ETMOPObservationSegmentMovementMode::ExitVehicleThenRun
+                    ? 350.0f
+                : Segment.MovementMode == ETMOPObservationSegmentMovementMode::VehicleLaneRoute ||
+                  Segment.MovementMode == ETMOPObservationSegmentMovementMode::VehicleDirectInterpolation ||
+                  Segment.MovementMode == ETMOPObservationSegmentMovementMode::RideInVehicle
+                    ? 1200.0f : 140.0f;
+            const float PreferredSpeed = Authored != nullptr &&
+                    Authored->PreferredTravelSpeedCmPerSecond > 0.0f
+                ? Authored->PreferredTravelSpeedCmPerSecond
+                : Link.PreferredTravelSpeedCmPerSecond > 0.0f
+                ? Link.PreferredTravelSpeedCmPerSecond : ModeDefaultSpeed;
+            Segment.TravelStartSecond = From.EndSecond;
+            if (Link.TravelTimingMode ==
+                    ETMOPObservationTravelTimingMode::ArriveAtPreferredSpeed &&
+                AvailableTravelSeconds > 0.0 && PreferredSpeed > 0.0f)
+            {
+                const double PreferredDuration =
+                    Segment.DistanceCm / PreferredSpeed;
+                Segment.TravelStartSecond = FMath::Max(
+                    static_cast<double>(From.EndSecond),
+                    Segment.TravelEndSecond - PreferredDuration);
+            }
+            const double PlannedTravelSeconds =
                 Segment.TravelEndSecond - Segment.TravelStartSecond;
-            Segment.RequiredSpeedCmPerSecond = TravelSeconds > 0
-                ? Segment.DistanceCm / static_cast<float>(TravelSeconds)
+            Segment.RequiredSpeedCmPerSecond = PlannedTravelSeconds > 0.0
+                ? Segment.DistanceCm /
+                    static_cast<float>(PlannedTravelSeconds)
                 : TNumericLimits<float>::Max();
             Runtime.MaximumRequiredSpeedCmPerSecond = FMath::Max(
                 Runtime.MaximumRequiredSpeedCmPerSecond,
-                Segment.RequiredSpeedCmPerSecond);
+                MinimumRequiredSpeed);
             Track.Segments.Add(MoveTemp(Segment));
         }
 
@@ -560,11 +685,12 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
             Runtime.State = ETMOPObservationTrackRuntimeState::Invalid;
             Runtime.Diagnostic = TEXT("Rejected links are never interpolated.");
         }
-        else if (bInvalid || Track.Points.Num() < 2)
+        else if (bInvalid || Track.Points.Num() < 2 || bHasOverlappingWindows)
         {
             Runtime.State = ETMOPObservationTrackRuntimeState::Invalid;
-            Runtime.Diagnostic =
-                TEXT("Track needs at least two valid, timed observations with anchors.");
+            Runtime.Diagnostic = bHasOverlappingWindows
+                ? TEXT("Consecutive observation windows overlap; split the hypothesis or remove duplicate sightings before interpolation.")
+                : TEXT("Track needs at least two valid, timed observations with anchors.");
         }
         else
         {
@@ -580,14 +706,203 @@ int32 ATMOPObservationDirector::RebuildObservationTracks()
             ++BuiltCount;
         }
 
+        if (Link.SimulationMode ==
+                ETMOPObservationTrackSimulationMode::InterpolateExistingActor &&
+            !Runtime.LinkedEntityId.IsNone())
+            for (const FResolvedTrackPoint& Point : Track.Points)
+                ObservationPlaybackEntities.FindOrAdd(
+                    Point.ObservationId, Runtime.LinkedEntityId);
+
         RuntimeTracks.Add(Pair.Key, Runtime);
         ResolvedTracks.Add(Pair.Key, MoveTemp(Track));
     }
     return BuiltCount;
 }
 
+bool ATMOPObservationDirector::ApplySegmentTransition(
+    const FTMOPObservationLinkDefinition& /*Link*/,
+    FResolvedTrackSegment& Segment,
+    FTMOPObservationTrackRuntime& Runtime,
+    const double CurrentSecond)
+{
+    AActor* PlaybackActor = FindEntityActor(Runtime.LinkedEntityId);
+    ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(PlaybackActor);
+    const FName VehicleId = !Segment.VehicleEntityId.IsNone()
+        ? Segment.VehicleEntityId
+        : Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::VehicleLaneRoute
+        ? Runtime.LinkedEntityId : NAME_None;
+    ATMOPVehicleBase* Vehicle = Cast<ATMOPVehicleBase>(
+        FindEntityActor(VehicleId));
+
+    auto IsAgentSeatedInVehicle = [](ATMOPHistoricalAgent* Candidate,
+        ATMOPVehicleBase* CandidateVehicle)
+    {
+        if (!IsValid(Candidate) || !IsValid(CandidateVehicle)) return false;
+        for (const UTMOPVehicleSeatComponent* Seat :
+            CandidateVehicle->GetVehicleSeats())
+            if (IsValid(Seat) && Seat->GetOccupant() == Candidate) return true;
+        return false;
+    };
+
+    const bool bExitAtStart =
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::ExitVehicleThenWalk ||
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::ExitVehicleThenRun;
+    const bool bSeatAtStart =
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::RideInVehicle;
+    const bool bSeatAtEnd =
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::WalkToVehicleAndBoard ||
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard;
+
+    if (CurrentSecond >= Segment.TravelStartSecond &&
+        !Segment.bStartTransitionApplied)
+    {
+        if (bExitAtStart)
+        {
+            if (!IsValid(Agent) || !IsValid(Vehicle))
+            {
+                Runtime.Diagnostic = TEXT(
+                    "Exit-vehicle segment is waiting for its person and vehicle actors.");
+                return false;
+            }
+            Segment.bStartTransitionApplied =
+                !IsAgentSeatedInVehicle(Agent, Vehicle) ||
+                Vehicle->ExitVehicle(Agent);
+        }
+        else if (bSeatAtStart)
+        {
+            if (!IsValid(Agent) || !IsValid(Vehicle))
+            {
+                Runtime.Diagnostic = TEXT(
+                    "Ride segment is waiting for its person and vehicle actors.");
+                return false;
+            }
+            if (!IsAgentSeatedInVehicle(Agent, Vehicle))
+            {
+                const float BoardingDistanceCm = FVector::Dist(
+                    Agent->GetActorLocation(), Vehicle->GetActorLocation());
+                if (Segment.MaximumBoardingDistanceCm > 0.0f &&
+                    BoardingDistanceCm > Segment.MaximumBoardingDistanceCm)
+                {
+                    Runtime.Diagnostic = FString::Printf(
+                        TEXT("Ride refused: '%s' is %.0f cm from '%s' (maximum %.0f cm)."),
+                        *Runtime.LinkedEntityId.ToString(), BoardingDistanceCm,
+                        *VehicleId.ToString(),
+                        Segment.MaximumBoardingDistanceCm);
+                    return false;
+                }
+            }
+            Segment.bStartTransitionApplied =
+                IsAgentSeatedInVehicle(Agent, Vehicle) ||
+                Vehicle->EnterVehicle(Agent, Segment.VehicleSeatId);
+        }
+        else
+        {
+            Segment.bStartTransitionApplied = true;
+        }
+    }
+
+    if (Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::VehicleLaneRoute &&
+        CurrentSecond >= Segment.TravelStartSecond &&
+        CurrentSecond <= Segment.TravelEndSecond &&
+        !Segment.bVehicleRouteStarted)
+    {
+        if (!IsValid(Vehicle))
+        {
+            Runtime.Diagnostic = TEXT(
+                "Vehicle lane segment is waiting for the linked vehicle actor.");
+            return false;
+        }
+        if (!Segment.DriverEntityId.IsNone() &&
+            !IsValid(Vehicle->GetDriverAgent()))
+            if (ATMOPHistoricalAgent* Driver = Cast<ATMOPHistoricalAgent>(
+                FindEntityActor(Segment.DriverEntityId)))
+                Vehicle->EnterDriverSeat(Driver);
+
+        ATMOPHistoricalVehicleDirector* VehicleDirector = nullptr;
+        if (GetWorld() != nullptr)
+            for (TActorIterator<ATMOPHistoricalVehicleDirector> It(GetWorld());
+                It; ++It)
+            {
+                VehicleDirector = *It;
+                break;
+            }
+        if (!IsValid(VehicleDirector) ||
+            !VehicleDirector->BeginDrivingVehicle(
+                VehicleId, Segment.DriverEntityId,
+                Segment.OrderedLaneIds, Segment.VehiclePassAnchorIds,
+                Segment.VehicleRouteMode,
+                Segment.VehicleDestinationAnchorId,
+                Segment.VehicleStartDistanceAlongFirstLaneCm,
+                false))
+        {
+            Runtime.Diagnostic = TEXT(
+                "Vehicle lane route could not start; check driver seat, lanes and destination anchor.");
+            return false;
+        }
+        if (UTMOPTrafficVehicleMovementComponent* Movement =
+            Vehicle->FindComponentByClass<
+                UTMOPTrafficVehicleMovementComponent>())
+        {
+            Movement->bDespawnAtRouteEnd = false;
+            Movement->bIgnoreOneWayRestrictions =
+                Segment.bIgnoreOneWayRestrictions;
+            Movement->bRunRedLights = Segment.bRunRedLights;
+            if (Segment.VehicleCruiseSpeedKmh > 0.0f)
+                Movement->DesiredCruiseSpeedKmh =
+                    Segment.VehicleCruiseSpeedKmh;
+            Movement->ConfigureTimedArrival(
+                FMath::RoundToInt(Segment.TravelEndSecond));
+        }
+        Segment.bVehicleRouteStarted = true;
+    }
+
+    if (bSeatAtEnd && CurrentSecond >= Segment.TravelEndSecond &&
+        !Segment.bEndTransitionApplied)
+    {
+        if (!IsValid(Agent) || !IsValid(Vehicle))
+        {
+            Runtime.Diagnostic = TEXT(
+                "Boarding segment reached its deadline but person or vehicle is unavailable.");
+            return false;
+        }
+        const float BoardingDistanceCm = FVector::Dist(
+            Agent->GetActorLocation(), Vehicle->GetActorLocation());
+        if (Segment.MaximumBoardingDistanceCm > 0.0f &&
+            BoardingDistanceCm > Segment.MaximumBoardingDistanceCm)
+        {
+            Runtime.Diagnostic = FString::Printf(
+                TEXT("Boarding refused: '%s' is %.0f cm from '%s' (maximum %.0f cm)."),
+                *Runtime.LinkedEntityId.ToString(), BoardingDistanceCm,
+                *VehicleId.ToString(), Segment.MaximumBoardingDistanceCm);
+            return false;
+        }
+        Segment.bEndTransitionApplied =
+            IsAgentSeatedInVehicle(Agent, Vehicle) ||
+            Vehicle->EnterVehicle(Agent, Segment.VehicleSeatId);
+        if (!Segment.bEndTransitionApplied)
+        {
+            Runtime.Diagnostic = FString::Printf(
+                TEXT("Could not board '%s' into seat '%s' of '%s'."),
+                *Runtime.LinkedEntityId.ToString(),
+                *Segment.VehicleSeatId.ToString(), *VehicleId.ToString());
+            return false;
+        }
+    }
+
+    Runtime.bPlaybackActorSeated =
+        IsAgentSeatedInVehicle(Agent, Vehicle);
+    return true;
+}
+
 void ATMOPObservationDirector::UpdateObservationTracks(
-    const int32 CurrentSecond)
+    const double CurrentSecond)
 {
     for (const TPair<FName, FTMOPObservationLinkDefinition>& Pair : LoadedLinks)
     {
@@ -607,6 +922,10 @@ void ATMOPObservationDirector::UpdateObservationTracks(
         Runtime->CurrentToObservationId = NAME_None;
         Runtime->SegmentAlpha = 0.0f;
         Runtime->CurrentRequiredSpeedCmPerSecond = 0.0f;
+        Runtime->CurrentMovementMode =
+            ETMOPObservationSegmentMovementMode::Automatic;
+        Runtime->CurrentVehicleEntityId = NAME_None;
+        Runtime->bPlaybackActorSeated = false;
 
         if (CurrentSecond < Track->Points[0].StartSecond)
         {
@@ -615,6 +934,13 @@ void ATMOPObservationDirector::UpdateObservationTracks(
             Runtime->InferredLocation = Track->Points[0].Location;
             continue;
         }
+
+        if (Link.SimulationMode ==
+            ETMOPObservationTrackSimulationMode::InterpolateExistingActor)
+            for (FResolvedTrackSegment& Segment : Track->Segments)
+                if (CurrentSecond >= Segment.TravelStartSecond)
+                    ApplySegmentTransition(
+                        Link, Segment, *Runtime, CurrentSecond);
 
         for (const FResolvedTrackPoint& Point : Track->Points)
             if (CurrentSecond >= Point.StartSecond &&
@@ -632,12 +958,12 @@ void ATMOPObservationDirector::UpdateObservationTracks(
         if (!bHasWorldPosition)
             for (int32 Index = 0; Index < Track->Segments.Num(); ++Index)
             {
-                const FResolvedTrackSegment& Segment = Track->Segments[Index];
+                FResolvedTrackSegment& Segment = Track->Segments[Index];
                 if (CurrentSecond < Segment.TravelStartSecond ||
                     CurrentSecond > Segment.TravelEndSecond)
                     continue;
-                const int32 Duration = FMath::Max(
-                    1, Segment.TravelEndSecond - Segment.TravelStartSecond);
+                const double Duration = FMath::Max(
+                    0.001, Segment.TravelEndSecond - Segment.TravelStartSecond);
                 const float Alpha = FMath::Clamp(
                     static_cast<float>(CurrentSecond -
                         Segment.TravelStartSecond) /
@@ -674,6 +1000,25 @@ void ATMOPObservationDirector::UpdateObservationTracks(
                 Runtime->SegmentAlpha = Alpha;
                 Runtime->CurrentRequiredSpeedCmPerSecond =
                     Segment.RequiredSpeedCmPerSecond;
+                Runtime->CurrentMovementMode = Segment.MovementMode;
+                Runtime->CurrentVehicleEntityId =
+                    !Segment.VehicleEntityId.IsNone()
+                    ? Segment.VehicleEntityId
+                    : Segment.MovementMode ==
+                            ETMOPObservationSegmentMovementMode::VehicleLaneRoute ||
+                      Segment.MovementMode ==
+                            ETMOPObservationSegmentMovementMode::VehicleDirectInterpolation
+                    ? Runtime->LinkedEntityId : NAME_None;
+                if (Segment.MovementMode ==
+                        ETMOPObservationSegmentMovementMode::RideInVehicle ||
+                    Segment.MovementMode ==
+                        ETMOPObservationSegmentMovementMode::VehicleLaneRoute)
+                    if (AActor* Controlled = FindEntityActor(
+                        Runtime->LinkedEntityId))
+                        TargetLocation = Controlled->GetActorLocation();
+                if (Segment.MovementMode ==
+                    ETMOPObservationSegmentMovementMode::HoldPosition)
+                    TargetLocation = Segment.PolylinePoints[0];
                 bHasWorldPosition = true;
                 break;
             }
@@ -686,8 +1031,10 @@ void ATMOPObservationDirector::UpdateObservationTracks(
             if (Track->bCollisionSuppressedByTrack &&
                 Track->ControlledActor.IsValid())
             {
-                Track->ControlledActor->SetActorEnableCollision(
-                    Track->bActorCollisionWasEnabled);
+                if (!IsValid(
+                    Track->ControlledActor->GetAttachParentActor()))
+                    Track->ControlledActor->SetActorEnableCollision(
+                        Track->bActorCollisionWasEnabled);
                 Track->bCollisionSuppressedByTrack = false;
             }
             continue;
@@ -721,6 +1068,20 @@ void ATMOPObservationDirector::UpdateObservationTracks(
                 *Runtime->LinkedEntityId.ToString());
             continue;
         }
+        const bool bAttachedToVehicle =
+            IsValid(Cast<ATMOPVehicleBase>(Actor->GetAttachParentActor()));
+        const bool bMovementOwnedByVehicle =
+            Runtime->CurrentMovementMode ==
+                ETMOPObservationSegmentMovementMode::VehicleLaneRoute ||
+            Runtime->CurrentMovementMode ==
+                ETMOPObservationSegmentMovementMode::RideInVehicle ||
+            bAttachedToVehicle;
+        Runtime->bPlaybackActorSeated = bAttachedToVehicle;
+        if (bMovementOwnedByVehicle)
+        {
+            Runtime->InferredLocation = Actor->GetActorLocation();
+            continue;
+        }
         if (Link.bDisableCollisionWhileInterpolating &&
             !Track->bCollisionSuppressedByTrack)
         {
@@ -732,6 +1093,25 @@ void ATMOPObservationDirector::UpdateObservationTracks(
         TargetDirection.Z = 0.0f;
         if (!TargetDirection.IsNearlyZero())
             TargetRotation.Yaw = TargetDirection.Rotation().Yaw;
+        if (ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(Actor))
+        {
+            ETMOPAgentActivityState Activity =
+                ETMOPAgentActivityState::Standing;
+            if (Runtime->State ==
+                ETMOPObservationTrackRuntimeState::Interpolating)
+                Activity = Runtime->CurrentMovementMode ==
+                        ETMOPObservationSegmentMovementMode::Sprint
+                    ? ETMOPAgentActivityState::Sprinting
+                    : Runtime->CurrentMovementMode ==
+                            ETMOPObservationSegmentMovementMode::Run ||
+                      Runtime->CurrentMovementMode ==
+                            ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard ||
+                      Runtime->CurrentMovementMode ==
+                            ETMOPObservationSegmentMovementMode::ExitVehicleThenRun
+                    ? ETMOPAgentActivityState::Running
+                    : ETMOPAgentActivityState::Walking;
+            Agent->SetActivityState(Activity);
+        }
         Actor->SetActorLocationAndRotation(
             TargetLocation, TargetRotation, false, nullptr,
             ETeleportType::TeleportPhysics);
@@ -820,7 +1200,7 @@ bool ATMOPObservationDirector::EvaluateGeometry(
     ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
         ? Anchors->FindAnchor(Definition.ObservationAnchorId)
         : nullptr;
-    AActor* ObservedActor = FindEntityActor(Definition.ObservedEntityId);
+    AActor* ObservedActor = FindObservedActorForObservation(Definition);
 
     if (!IsValid(Anchor))
     {
@@ -904,6 +1284,16 @@ bool ATMOPObservationDirector::EvaluateGeometry(
     Runtime.Diagnostic =
         TEXT("No configured observer currently satisfies distance and line-of-sight.");
     return false;
+}
+
+AActor* ATMOPObservationDirector::FindObservedActorForObservation(
+    const FTMOPObservationDefinition& Definition) const
+{
+    if (const FName* PlaybackEntity =
+        ObservationPlaybackEntities.Find(Definition.ObservationId))
+        if (AActor* Actor = FindEntityActor(*PlaybackEntity); IsValid(Actor))
+            return Actor;
+    return FindEntityActor(Definition.ObservedEntityId);
 }
 
 AActor* ATMOPObservationDirector::FindEntityActor(
@@ -1021,6 +1411,8 @@ bool ATMOPObservationDirector::ValidateObservationData(
     TArray<FString>& OutErrors) const
 {
     OutErrors.Reset();
+    TMap<FName, FName> InterpolatedObservationOwners;
+    TMap<FName, FName> InterpolatedEntityOwners;
 
     if (IsValid(ObservationTable) &&
         ObservationTable->GetRowStruct() !=
@@ -1040,7 +1432,8 @@ bool ATMOPObservationDirector::ValidateObservationData(
         LoadedObservations)
     {
         const FTMOPObservationDefinition& Definition = Pair.Value;
-        if (Definition.ObserverEntityIds.IsEmpty())
+        if (Definition.ObserverEntityIds.IsEmpty() &&
+            !Definition.bAllowUnattributedObservation)
         {
             OutErrors.Add(FString::Printf(
                 TEXT("Observation '%s' has no observers."),
@@ -1066,6 +1459,45 @@ bool ATMOPObservationDirector::ValidateObservationData(
                 TEXT("Observation '%s' has no reference shared event."),
                 *Pair.Key.ToString()));
         }
+        if (Definition.bNoFurtherSignalementInSource &&
+            !Definition.bSignalementSourceReviewed)
+            OutErrors.Add(FString::Printf(
+                TEXT("Observation '%s' says no further signalement exists, but its source is not marked reviewed."),
+                *Pair.Key.ToString()));
+        if (Definition.bNoFurtherSignalementInSource &&
+            !Definition.WitnessSignalements.IsEmpty())
+            OutErrors.Add(FString::Printf(
+                TEXT("Observation '%s' both contains signalement and says none exists in the source."),
+                *Pair.Key.ToString()));
+        for (const FTMOPObservationWitnessSignalement& Signalement :
+            Definition.WitnessSignalements)
+        {
+            if (!Signalement.ObserverEntityId.IsNone() &&
+                !Definition.ObserverEntityIds.Contains(
+                    Signalement.ObserverEntityId))
+                OutErrors.Add(FString::Printf(
+                    TEXT("Observation '%s' signalement is attributed to '%s', who is not in ObserverEntityIds."),
+                    *Pair.Key.ToString(),
+                    *Signalement.ObserverEntityId.ToString()));
+            const bool bPartialAgeRange =
+                (Signalement.EstimatedAgeMinimum > 0) !=
+                    (Signalement.EstimatedAgeMaximum > 0);
+            if (bPartialAgeRange ||
+                Signalement.EstimatedAgeMaximum <
+                    Signalement.EstimatedAgeMinimum)
+                OutErrors.Add(FString::Printf(
+                    TEXT("Observation '%s' has an invalid signalement age range."),
+                    *Pair.Key.ToString()));
+            const bool bPartialHeightRange =
+                (Signalement.EstimatedHeightMinimumCm > 0.0f) !=
+                    (Signalement.EstimatedHeightMaximumCm > 0.0f);
+            if (bPartialHeightRange ||
+                Signalement.EstimatedHeightMaximumCm <
+                    Signalement.EstimatedHeightMinimumCm)
+                OutErrors.Add(FString::Printf(
+                    TEXT("Observation '%s' has an invalid signalement height range."),
+                    *Pair.Key.ToString()));
+        }
     }
 
     for (const TPair<FName, FTMOPObservationLinkDefinition>& Pair :
@@ -1084,10 +1516,40 @@ bool ATMOPObservationDirector::ValidateObservationData(
             OutErrors.Add(FString::Printf(
                 TEXT("Link '%s' contains empty or duplicate ObservationIds."),
                 *Pair.Key.ToString()));
+        if (Link.SimulationMode ==
+                ETMOPObservationTrackSimulationMode::InterpolateExistingActor &&
+            Link.LinkedEntityId.IsNone())
+            OutErrors.Add(FString::Printf(
+                TEXT("Interpolated link '%s' needs a LinkedEntityId."),
+                *Pair.Key.ToString()));
+        else if (Link.SimulationMode ==
+                ETMOPObservationTrackSimulationMode::InterpolateExistingActor)
+        {
+            if (const FName* ExistingLink =
+                InterpolatedEntityOwners.Find(Link.LinkedEntityId))
+                OutErrors.Add(FString::Printf(
+                    TEXT("Entity '%s' is controlled by both interpolated links '%s' and '%s'."),
+                    *Link.LinkedEntityId.ToString(),
+                    *ExistingLink->ToString(), *Pair.Key.ToString()));
+            else
+                InterpolatedEntityOwners.Add(Link.LinkedEntityId, Pair.Key);
+        }
 
         ETMOPObservedEntityType FirstType = ETMOPObservedEntityType::Unknown;
         for (const FName ObservationId : MemberIds)
         {
+            if (Link.SimulationMode ==
+                ETMOPObservationTrackSimulationMode::InterpolateExistingActor)
+            {
+                if (const FName* ExistingOwner =
+                    InterpolatedObservationOwners.Find(ObservationId))
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Observation '%s' is controlled by both interpolated links '%s' and '%s'."),
+                        *ObservationId.ToString(), *ExistingOwner->ToString(),
+                        *Pair.Key.ToString()));
+                else
+                    InterpolatedObservationOwners.Add(ObservationId, Pair.Key);
+            }
             const FTMOPObservationDefinition* Observation =
                 LoadedObservations.Find(ObservationId);
             if (Observation == nullptr)
@@ -1113,6 +1575,39 @@ bool ATMOPObservationDirector::ValidateObservationData(
                 TEXT("Link '%s' LinkedEntityType contradicts its observations."),
                 *Pair.Key.ToString()));
 
+        if (Link.bRequireSignalementCompatibility &&
+            FirstType == ETMOPObservedEntityType::Person)
+        {
+            for (int32 MemberIndex = 0;
+                MemberIndex + 1 < MemberIds.Num(); ++MemberIndex)
+            {
+                const FTMOPObservationDefinition* FirstObservation =
+                    LoadedObservations.Find(MemberIds[MemberIndex]);
+                const FTMOPObservationDefinition* SecondObservation =
+                    LoadedObservations.Find(MemberIds[MemberIndex + 1]);
+                if (FirstObservation == nullptr || SecondObservation == nullptr)
+                    continue;
+                const FTMOPSignalementComparison Comparison =
+                    UTMOPObservationSignalementLibrary::CompareSignalements(
+                        *FirstObservation, *SecondObservation);
+                if (!Comparison.bHasComparableEvidence)
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Link '%s' requires signalement matching, but '%s' and '%s' have no comparable structured evidence."),
+                        *Pair.Key.ToString(),
+                        *MemberIds[MemberIndex].ToString(),
+                        *MemberIds[MemberIndex + 1].ToString()));
+                else if (Comparison.CompatibilityScore <
+                    Link.MinimumSignalementCompatibility)
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Link '%s' signalement mismatch between '%s' and '%s': %.0f%% is below %.0f%%."),
+                        *Pair.Key.ToString(),
+                        *MemberIds[MemberIndex].ToString(),
+                        *MemberIds[MemberIndex + 1].ToString(),
+                        Comparison.CompatibilityScore * 100.0f,
+                        Link.MinimumSignalementCompatibility * 100.0f));
+            }
+        }
+
         for (const FTMOPObservationTrackSegment& Segment : Link.TrackSegments)
         {
             if (!MemberIds.Contains(Segment.FromObservationId) ||
@@ -1121,6 +1616,68 @@ bool ATMOPObservationDirector::ValidateObservationData(
                 OutErrors.Add(FString::Printf(
                     TEXT("Link '%s' has a track segment outside its ObservationIds array."),
                     *Pair.Key.ToString()));
+
+            const bool bPersonVehicleTransition =
+                Segment.MovementMode ==
+                    ETMOPObservationSegmentMovementMode::WalkToVehicleAndBoard ||
+                Segment.MovementMode ==
+                    ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard ||
+                Segment.MovementMode ==
+                    ETMOPObservationSegmentMovementMode::RideInVehicle ||
+                Segment.MovementMode ==
+                    ETMOPObservationSegmentMovementMode::ExitVehicleThenWalk ||
+                Segment.MovementMode ==
+                    ETMOPObservationSegmentMovementMode::ExitVehicleThenRun;
+            const ETMOPObservedEntityType EffectiveLinkType =
+                Link.LinkedEntityType != ETMOPObservedEntityType::Unknown
+                ? Link.LinkedEntityType : FirstType;
+            if (bPersonVehicleTransition &&
+                EffectiveLinkType != ETMOPObservedEntityType::Person)
+                OutErrors.Add(FString::Printf(
+                    TEXT("Link '%s' uses a person/vehicle transition but LinkedEntityType is not Person."),
+                    *Pair.Key.ToString()));
+            if (bPersonVehicleTransition && Segment.VehicleEntityId.IsNone())
+                OutErrors.Add(FString::Printf(
+                    TEXT("Link '%s' has a boarding/riding/exiting segment without VehicleEntityId."),
+                    *Pair.Key.ToString()));
+
+            if (Segment.MovementMode ==
+                ETMOPObservationSegmentMovementMode::VehicleLaneRoute)
+            {
+                const FName EffectiveVehicleId =
+                    !Segment.VehicleEntityId.IsNone()
+                    ? Segment.VehicleEntityId : Link.LinkedEntityId;
+                if (EffectiveVehicleId.IsNone())
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Link '%s' has a vehicle lane segment without a vehicle entity."),
+                        *Pair.Key.ToString()));
+                if (Segment.DriverEntityId.IsNone())
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Link '%s' has a vehicle lane segment without DriverEntityId."),
+                        *Pair.Key.ToString()));
+                if (Segment.VehicleRouteMode ==
+                        ETMOPVehicleRouteMode::ManualLaneRoute &&
+                    Segment.OrderedLaneIds.IsEmpty())
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Link '%s' has a manual vehicle route without OrderedLaneIds."),
+                        *Pair.Key.ToString()));
+                if (Segment.VehicleRouteMode !=
+                        ETMOPVehicleRouteMode::ManualLaneRoute &&
+                    Segment.VehicleDestinationAnchorId.IsNone())
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Link '%s' has an automatic vehicle route without VehicleDestinationAnchorId."),
+                        *Pair.Key.ToString()));
+            }
+
+            TSet<FName> UniqueLaneIds;
+            for (const FName LaneId : Segment.OrderedLaneIds)
+            {
+                if (LaneId.IsNone() || UniqueLaneIds.Contains(LaneId))
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Link '%s' has an empty or duplicate OrderedLaneId."),
+                        *Pair.Key.ToString()));
+                UniqueLaneIds.Add(LaneId);
+            }
             for (const FTMOPObservationRouteAlternative& Alternative :
                 Segment.AlternativeRoutes)
                 if (Alternative.RouteId.IsNone())

@@ -11,6 +11,7 @@
 #include "ScopedTransaction.h"
 #include "STMOPPeopleEditor.h"
 #include "STMOPLaneRepairEditor.h"
+#include "STMOPObservationEditor.h"
 #include "STMOPVehicleEditor.h"
 #include "TMOPNewspaperFolderImporter.h"
 #include "ToolMenus.h"
@@ -24,6 +25,8 @@ const FName FTMOPEngineEditorModule::VehicleEditorTabName(
     TEXT("TMOPVehicleEditor"));
 const FName FTMOPEngineEditorModule::LaneRepairEditorTabName(
     TEXT("TMOPLaneRepairEditor"));
+const FName FTMOPEngineEditorModule::ObservationEditorTabName(
+    TEXT("TMOPObservationEditor"));
 
 void FTMOPEngineEditorModule::StartupModule()
 {
@@ -35,6 +38,15 @@ void FTMOPEngineEditorModule::StartupModule()
         .SetTooltipText(LOCTEXT(
             "PeopleEditorTooltip",
             "Edit DT_TMOP_People in a focused visual timeline editor."))
+        .SetMenuType(ETabSpawnerMenuType::Hidden);
+
+    FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
+        ObservationEditorTabName,
+        FOnSpawnTab::CreateRaw(
+            this, &FTMOPEngineEditorModule::SpawnObservationEditorTab))
+        .SetDisplayName(LOCTEXT("ObservationEditorTitle", "TMOP Observation Editor"))
+        .SetTooltipText(LOCTEXT("ObservationEditorTooltip",
+            "Connect observations into chronological interpolated tracks."))
         .SetMenuType(ETabSpawnerMenuType::Hidden);
 
     FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
@@ -67,6 +79,7 @@ void FTMOPEngineEditorModule::ShutdownModule()
     FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(PeopleEditorTabName);
     FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(VehicleEditorTabName);
     FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(LaneRepairEditorTabName);
+    FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(ObservationEditorTabName);
 }
 
 void FTMOPEngineEditorModule::RegisterMenus()
@@ -100,6 +113,14 @@ void FTMOPEngineEditorModule::RegisterMenus()
         FSlateIcon(),
         FUIAction(FExecuteAction::CreateRaw(
             this, &FTMOPEngineEditorModule::OpenLaneRepairEditor)));
+    Section.AddMenuEntry(
+        TEXT("OpenTMOPObservationEditor"),
+        LOCTEXT("OpenObservationEditor", "TMOP Observation Editor"),
+        LOCTEXT("OpenObservationEditorTooltip",
+            "Link observations, sort their playback order and inspect them on a map."),
+        FSlateIcon(),
+        FUIAction(FExecuteAction::CreateRaw(
+            this, &FTMOPEngineEditorModule::OpenObservationEditor)));
     Section.AddMenuEntry(
         TEXT("CreateOrUpdateTMOPNewspapers"),
         LOCTEXT("CreateOrUpdateNewspapers",
@@ -155,6 +176,11 @@ void FTMOPEngineEditorModule::OpenVehicleEditor()
 void FTMOPEngineEditorModule::OpenLaneRepairEditor()
 {
     FGlobalTabmanager::Get()->TryInvokeTab(LaneRepairEditorTabName);
+}
+
+void FTMOPEngineEditorModule::OpenObservationEditor()
+{
+    FGlobalTabmanager::Get()->TryInvokeTab(ObservationEditorTabName);
 }
 
 void FTMOPEngineEditorModule::CreateOrUpdateNewspapersFromSelectedFolders()
@@ -542,6 +568,16 @@ TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnLaneRepairEditorTab(
         .TabRole(ETabRole::NomadTab)
         [
             SNew(STMOPLaneRepairEditor)
+        ];
+}
+
+TSharedRef<SDockTab> FTMOPEngineEditorModule::SpawnObservationEditorTab(
+    const FSpawnTabArgs& Args)
+{
+    return SNew(SDockTab)
+        .TabRole(ETabRole::NomadTab)
+        [
+            SNew(STMOPObservationEditor)
         ];
 }
 

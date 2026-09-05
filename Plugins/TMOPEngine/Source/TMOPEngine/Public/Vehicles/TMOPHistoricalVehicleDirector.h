@@ -134,7 +134,8 @@ public:
         ETMOPVehicleRouteMode RouteMode =
             ETMOPVehicleRouteMode::ManualLaneRoute,
         FName DestinationAnchorId = NAME_None,
-        float StartDistanceAlongFirstLaneCm = 0.0f);
+        float StartDistanceAlongFirstLaneCm = 0.0f,
+        bool bUseTimelineRouteOverride = true);
 
     /** Returns the most recent detailed reason BeginDrivingVehicle rejected
      * this vehicle. The diagnostic is cleared when a new attempt succeeds. */

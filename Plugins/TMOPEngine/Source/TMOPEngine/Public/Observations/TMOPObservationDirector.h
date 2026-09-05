@@ -153,6 +153,8 @@ public:
     bool ValidateObservationData(TArray<FString>& OutErrors) const;
 
 private:
+    struct FResolvedTrackSegment;
+
     UFUNCTION()
     void HandleSecondChanged(FTMOPTime NewTime);
 
@@ -163,10 +165,17 @@ private:
     bool EvaluateGeometry(
         const FTMOPObservationDefinition& Definition,
         FTMOPObservationRuntime& Runtime) const;
+    AActor* FindObservedActorForObservation(
+        const FTMOPObservationDefinition& Definition) const;
+    bool ApplySegmentTransition(
+        const FTMOPObservationLinkDefinition& Link,
+        FResolvedTrackSegment& Segment,
+        FTMOPObservationTrackRuntime& Runtime,
+        double CurrentSecond);
     AActor* FindEntityActor(FName EntityId) const;
     TArray<FName> GetLinkObservationIds(
         const FTMOPObservationLinkDefinition& Link) const;
-    void UpdateObservationTracks(int32 CurrentSecond);
+    void UpdateObservationTracks(double CurrentSecond);
     void DrawWorldGuideLines(int32 CurrentSecond) const;
 
     struct FResolvedTrackPoint
@@ -182,12 +191,30 @@ private:
     {
         FName FromObservationId = NAME_None;
         FName ToObservationId = NAME_None;
-        int32 TravelStartSecond = INDEX_NONE;
-        int32 TravelEndSecond = INDEX_NONE;
+        double TravelStartSecond = -1.0;
+        double TravelEndSecond = -1.0;
         TArray<FVector> PolylinePoints;
         TArray<float> CumulativeDistancesCm;
         float DistanceCm = 0.0f;
         float RequiredSpeedCmPerSecond = 0.0f;
+        ETMOPObservationSegmentMovementMode MovementMode =
+            ETMOPObservationSegmentMovementMode::Automatic;
+        FName VehicleEntityId = NAME_None;
+        FName VehicleSeatId = NAME_None;
+        float MaximumBoardingDistanceCm = 600.0f;
+        FName DriverEntityId = NAME_None;
+        TArray<FName> OrderedLaneIds;
+        TArray<FName> VehiclePassAnchorIds;
+        ETMOPVehicleRouteMode VehicleRouteMode =
+            ETMOPVehicleRouteMode::ManualLaneRoute;
+        FName VehicleDestinationAnchorId = NAME_None;
+        float VehicleStartDistanceAlongFirstLaneCm = 0.0f;
+        float VehicleCruiseSpeedKmh = 0.0f;
+        bool bIgnoreOneWayRestrictions = false;
+        bool bRunRedLights = false;
+        bool bStartTransitionApplied = false;
+        bool bEndTransitionApplied = false;
+        bool bVehicleRouteStarted = false;
     };
 
     struct FResolvedTrack
@@ -212,5 +239,6 @@ private:
     TMap<FName, FTMOPObservationTrackRuntime> RuntimeTracks;
 
     TMap<FName, FResolvedTrack> ResolvedTracks;
+    TMap<FName, FName> ObservationPlaybackEntities;
     mutable TMap<FName, TWeakObjectPtr<AActor>> EntityActorCache;
 };

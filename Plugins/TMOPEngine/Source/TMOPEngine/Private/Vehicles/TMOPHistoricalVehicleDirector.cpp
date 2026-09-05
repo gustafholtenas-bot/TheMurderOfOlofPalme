@@ -1646,7 +1646,8 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     const TArray<FName>& PassAnchorIds,
     const ETMOPVehicleRouteMode RouteMode,
     const FName DestinationAnchorId,
-    const float StartDistanceAlongFirstLaneCm)
+    const float StartDistanceAlongFirstLaneCm,
+    const bool bUseTimelineRouteOverride)
 {
     LastDrivingFailureCodes.Remove(VehicleId);
     LastDrivingFailureDetails.Remove(VehicleId);
@@ -1699,7 +1700,7 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     const FName* RequestedEntryId =
         RequestedDrivingEntryOverrides.Find(VehicleId);
     const FTMOPHistoricalVehicleTimelineEntry* DrivingEntry =
-        RequestedEntryId != nullptr
+        !bUseTimelineRouteOverride ? nullptr : RequestedEntryId != nullptr
         ? Runtime->Profile.Timeline.FindByPredicate(
             [RequestedEntryId](const FTMOPHistoricalVehicleTimelineEntry& Entry)
             {

@@ -17,6 +17,7 @@ private:
     void OpenPeopleEditor();
     void OpenVehicleEditor();
     void OpenLaneRepairEditor();
+    void OpenObservationEditor();
     void CreateOrUpdateNewspapersFromSelectedFolders();
     void GenerateExitChildrenFromSelection();
     void GenerateIntersectionCornersFromSelection();
@@ -24,8 +25,10 @@ private:
     TSharedRef<SDockTab> SpawnPeopleEditorTab(const FSpawnTabArgs& Args);
     TSharedRef<SDockTab> SpawnVehicleEditorTab(const FSpawnTabArgs& Args);
     TSharedRef<SDockTab> SpawnLaneRepairEditorTab(const FSpawnTabArgs& Args);
+    TSharedRef<SDockTab> SpawnObservationEditorTab(const FSpawnTabArgs& Args);
 
     static const FName PeopleEditorTabName;
     static const FName VehicleEditorTabName;
     static const FName LaneRepairEditorTabName;
+    static const FName ObservationEditorTabName;
 };
