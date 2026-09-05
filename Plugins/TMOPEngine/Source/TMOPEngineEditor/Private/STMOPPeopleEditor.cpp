@@ -335,6 +335,49 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                         ]
                     ]
                     + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 3.0f)
+                    [
+                        SNew(SHorizontalBox)
+                        + SHorizontalBox::Slot().AutoWidth()
+                        [
+                            SNew(SButton)
+                            .Text(LOCTEXT("CopyPersonTimeline", "Copy timeline"))
+                            .ToolTipText(LOCTEXT("CopyPersonTimelineTooltip",
+                                "Copy every timeline entry from the selected person. This does not copy identity, appearance, dialogue, groups or other person data."))
+                            .IsEnabled_Lambda([this]()
+                            {
+                                return !SelectedRowName.IsNone();
+                            })
+                            .OnClicked(
+                                this, &STMOPPeopleEditor::CopyPersonTimeline)
+                        ]
+                        + SHorizontalBox::Slot().AutoWidth().Padding(4.0f, 0.0f)
+                        [
+                            SNew(SButton)
+                            .Text(LOCTEXT("PastePersonTimeline", "Paste / replace"))
+                            .ToolTipText(LOCTEXT("PastePersonTimelineTooltip",
+                                "Replace the selected person's complete working timeline with the copied timeline. Press Save Person afterwards to write the change to the Data Table."))
+                            .IsEnabled_Lambda([this]()
+                            {
+                                return bHasCopiedTimeline &&
+                                    !SelectedRowName.IsNone() &&
+                                    SelectedRowName != CopiedTimelineSourceRow;
+                            })
+                            .OnClicked(
+                                this, &STMOPPeopleEditor::PastePersonTimeline)
+                        ]
+                    ]
+                    + SVerticalBox::Slot()
+                    .AutoHeight()
+                    .Padding(0.0f, 0.0f, 0.0f, 5.0f)
+                    [
+                        SNew(STextBlock)
+                        .Text(this,
+                            &STMOPPeopleEditor::GetCopiedTimelineStatusText)
+                        .ColorAndOpacity(FSlateColor::UseSubduedForeground())
+                    ]
+                    + SVerticalBox::Slot()
                     .FillHeight(0.56f)
                     [
                         SAssignNew(TimelineListView, SListView<FTimelineItem>)
@@ -2202,6 +2245,74 @@ FReply STMOPPeopleEditor::MoveTimelineEntryDown()
     return FReply::Handled();
 }
 
+FReply STMOPPeopleEditor::CopyPersonTimeline()
+{
+    if (SelectedRowName.IsNone())
+        return FReply::Handled();
+
+    CommitEntryEdits();
+    CopiedTimeline = WorkingRow.Timeline;
+    CopiedTimelineSourceRow = SelectedRowName;
+    CopiedTimelineSourceLabel = !WorkingRow.FullName.IsEmpty()
+        ? WorkingRow.FullName.ToString()
+        : WorkingRow.EntityId.ToString();
+    bHasCopiedTimeline = true;
+
+    SetStatus(
+        FText::Format(
+            LOCTEXT("PersonTimelineCopied",
+                "Copied {0} timeline entries from {1}. Select another person and choose Paste / replace."),
+            FText::AsNumber(CopiedTimeline.Num()),
+            FText::FromString(CopiedTimelineSourceLabel)),
+        FLinearColor(0.45f, 0.8f, 1.0f));
+    return FReply::Handled();
+}
+
+FReply STMOPPeopleEditor::PastePersonTimeline()
+{
+    if (!bHasCopiedTimeline || SelectedRowName.IsNone() ||
+        SelectedRowName == CopiedTimelineSourceRow)
+        return FReply::Handled();
+
+    CommitEntryEdits();
+    CommitPersonDetailEdits();
+
+    const FString TargetLabel = !WorkingRow.FullName.IsEmpty()
+        ? WorkingRow.FullName.ToString()
+        : WorkingRow.EntityId.ToString();
+    const EAppReturnType::Type Choice = FMessageDialog::Open(
+        EAppMsgType::YesNo,
+        FText::Format(
+            LOCTEXT("ConfirmPastePersonTimeline",
+                "Replace all {0} timeline entries for {1} with the {2} entries copied from {3}?\n\nOnly the timeline is replaced. Identity, appearance, dialogue, groups and other person data remain unchanged. The Data Table is not changed until you press Save Person."),
+            FText::AsNumber(WorkingRow.Timeline.Num()),
+            FText::FromString(TargetLabel),
+            FText::AsNumber(CopiedTimeline.Num()),
+            FText::FromString(CopiedTimelineSourceLabel)),
+        LOCTEXT("ConfirmPastePersonTimelineTitle", "Replace Person Timeline?"));
+    if (Choice != EAppReturnType::Yes)
+        return FReply::Handled();
+
+    WorkingRow.Timeline = CopiedTimeline;
+    SelectedTimelineIndex = INDEX_NONE;
+    EntryStructData.Reset();
+    if (EntryDetailsView.IsValid())
+        EntryDetailsView->SetStructureData(nullptr);
+    RefreshTimeline();
+    if (!WorkingRow.Timeline.IsEmpty())
+        SelectTimelineEntry(0);
+
+    SetStatus(
+        FText::Format(
+            LOCTEXT("PersonTimelinePasted",
+                "Pasted {0} timeline entries from {1} to {2}. Review them, then press Save Person."),
+            FText::AsNumber(WorkingRow.Timeline.Num()),
+            FText::FromString(CopiedTimelineSourceLabel),
+            FText::FromString(TargetLabel)),
+        FLinearColor(1.0f, 0.72f, 0.15f));
+    return FReply::Handled();
+}
+
 FReply STMOPPeopleEditor::SavePerson()
 {
     SaveCurrentPerson();
@@ -2391,6 +2502,17 @@ FText STMOPPeopleEditor::GetSelectedPersonSubtitle() const
         WorkingRow.CategoryId.ToString() + TEXT("  •  ") +
         FString::Printf(TEXT("%d timeline entries"),
             WorkingRow.Timeline.Num()));
+}
+
+FText STMOPPeopleEditor::GetCopiedTimelineStatusText() const
+{
+    if (!bHasCopiedTimeline)
+        return LOCTEXT("NoCopiedPersonTimeline", "No timeline copied");
+
+    return FText::Format(
+        LOCTEXT("CopiedPersonTimelineStatus", "Copied: {0} ({1} entries)"),
+        FText::FromString(CopiedTimelineSourceLabel),
+        FText::AsNumber(CopiedTimeline.Num()));
 }
 
 FText STMOPPeopleEditor::GetTimelineSummary(const int32 Index) const

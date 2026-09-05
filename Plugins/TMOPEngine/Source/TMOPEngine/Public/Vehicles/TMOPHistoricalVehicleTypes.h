@@ -209,6 +209,22 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
     ETMOPVehicleRouteMode VehicleRouteMode =
         ETMOPVehicleRouteMode::ManualLaneRoute;
 
+    /** Curvature of an Anchor Maneuver. Zero is nearly straight; one gives
+     * start/end anchor rotations strong influence over the path. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Anchor Maneuver",
+        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute) && VehicleRouteMode==ETMOPVehicleRouteMode::AnchorManeuver",
+            ClampMin="0.0", ClampMax="2.0", DisplayName="Curve Strength"))
+    float AnchorManeuverCurveStrength = 0.5f;
+
+    /** Move backwards while retaining the rotations authored on the anchors.
+     * Useful for reversing into a parking space. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Historical Vehicle|Timeline|Anchor Maneuver",
+        meta=(EditCondition="(Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute) && VehicleRouteMode==ETMOPVehicleRouteMode::AnchorManeuver",
+            DisplayName="Reverse Maneuver"))
+    bool bAnchorManeuverReverse = false;
+
     /** Optional explicit route start. Empty uses the preceding placement. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Historical Vehicle|Timeline|Route",

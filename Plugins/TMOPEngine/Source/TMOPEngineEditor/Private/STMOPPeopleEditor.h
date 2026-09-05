@@ -123,6 +123,8 @@ private:
     FReply DeleteTimelineEntry();
     FReply MoveTimelineEntryUp();
     FReply MoveTimelineEntryDown();
+    FReply CopyPersonTimeline();
+    FReply PastePersonTimeline();
     FReply SavePerson();
     FReply ReloadPerson();
     FReply ResolveCurrentAppearance();
@@ -130,6 +132,7 @@ private:
 
     FText GetSelectedPersonTitle() const;
     FText GetSelectedPersonSubtitle() const;
+    FText GetCopiedTimelineStatusText() const;
     FText GetTimelineSummary(int32 Index) const;
     FText GetTimelineTimingText(const FTMOPPersonTimelineEntry& Entry) const;
     bool ResolveTimelineDisplaySecond(
@@ -174,6 +177,10 @@ private:
     bool bRestoringPersonSelection = false;
     int32 SelectedTimelineIndex = INDEX_NONE;
     int32 SelectedComparisonTimelineIndex = INDEX_NONE;
+    TArray<FTMOPPersonTimelineEntry> CopiedTimeline;
+    FName CopiedTimelineSourceRow = NAME_None;
+    FString CopiedTimelineSourceLabel;
+    bool bHasCopiedTimeline = false;
     FString PersonSearch;
     EPeopleCategoryFilter PeopleCategoryFilter =
         EPeopleCategoryFilter::All;

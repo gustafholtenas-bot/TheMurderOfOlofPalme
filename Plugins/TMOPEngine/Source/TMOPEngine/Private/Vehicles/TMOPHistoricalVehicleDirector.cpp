@@ -1730,6 +1730,15 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     TArray<FName> Route = OrderedLaneIds;
     ETMOPVehicleRouteMode EffectiveRouteMode = RouteMode;
     if (DrivingEntry != nullptr &&
+        DrivingEntry->VehicleRouteMode ==
+            ETMOPVehicleRouteMode::AnchorManeuver)
+    {
+        // Anchor maneuvers deliberately ignore stale lane data. This mode is
+        // used for parking, reversing and U-turns outside the lane graph.
+        Route.Reset();
+        EffectiveRouteMode = ETMOPVehicleRouteMode::AnchorManeuver;
+    }
+    else if (DrivingEntry != nullptr &&
         !DrivingEntry->OrderedLaneIds.IsEmpty())
     {
         // An editor-generated vehicle route is authoritative when the person
@@ -1747,6 +1756,185 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     TArray<FName> ResolvedPassAnchorIds = PassAnchorIds;
     if (DrivingEntry != nullptr && !DrivingEntry->RouteViaAnchorIds.IsEmpty())
         ResolvedPassAnchorIds = DrivingEntry->RouteViaAnchorIds;
+
+    if (EffectiveRouteMode == ETMOPVehicleRouteMode::AnchorManeuver)
+    {
+        if (DrivingEntry == nullptr || GetGameInstance() == nullptr)
+        {
+            return ReportDrivingFailure(VehicleId,
+                TEXT("AnchorManeuverEntryMissing"),
+                TEXT("Anchor Maneuver requires its vehicle timeline entry."));
+        }
+        UTMOPAnchorSubsystem* Anchors =
+            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+        if (Anchors == nullptr || ResolvedDestinationAnchorId.IsNone())
+        {
+            return ReportDrivingFailure(VehicleId,
+                TEXT("AnchorManeuverDestinationMissing"),
+                FString::Printf(TEXT("Anchor Maneuver for '%s' needs a destination anchor."),
+                    *VehicleId.ToString()));
+        }
+
+        const int32 DrivingIndex = static_cast<int32>(
+            DrivingEntry - Runtime->Profile.Timeline.GetData());
+        TArray<FTransform> ManeuverTransforms;
+        FName StartAnchorId = DrivingEntry->RouteStartAnchorId;
+        if (!StartAnchorId.IsNone())
+        {
+            ATMOPHistoricalAnchor* StartAnchor =
+                Anchors->FindAnchor(StartAnchorId);
+            if (!IsValid(StartAnchor))
+            {
+                return ReportDrivingFailure(VehicleId,
+                    TEXT("AnchorManeuverStartUnavailable"),
+                    FString::Printf(TEXT("Start anchor '%s' is unavailable."),
+                        *StartAnchorId.ToString()));
+            }
+            ManeuverTransforms.Add(FTransform(StartAnchor->GetAnchorRotation(),
+                StartAnchor->GetAnchorLocation(), FVector::OneVector));
+        }
+        else
+        {
+            // A preceding placement is a deterministic start even when the
+            // driving row does not repeat the same anchor ID.
+            for (int32 Index = DrivingIndex - 1; Index >= 0; --Index)
+            {
+                const FTMOPHistoricalVehicleTimelineEntry& Previous =
+                    Runtime->Profile.Timeline[Index];
+                const bool bPlacement =
+                    Previous.Action == ETMOPHistoricalVehicleAction::InitialPlacement ||
+                    Previous.Action == ETMOPHistoricalVehicleAction::Spawn ||
+                    Previous.Action == ETMOPHistoricalVehicleAction::Stop ||
+                    Previous.Action == ETMOPHistoricalVehicleAction::Park ||
+                    Previous.Action == ETMOPHistoricalVehicleAction::OffscreenTransfer;
+                if (!bPlacement) continue;
+                if (Previous.PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::WorldTransform)
+                {
+                    ManeuverTransforms.Add(Previous.WorldTransform);
+                    break;
+                }
+                ATMOPHistoricalAnchor* PreviousAnchor =
+                    Anchors->FindAnchor(Previous.PlacementAnchorId);
+                if (IsValid(PreviousAnchor))
+                {
+                    const FTransform AnchorTransform(
+                        PreviousAnchor->GetAnchorRotation(),
+                        PreviousAnchor->GetAnchorLocation(), FVector::OneVector);
+                    ManeuverTransforms.Add(
+                        Previous.AnchorLocalOffset * AnchorTransform);
+                    break;
+                }
+            }
+        }
+        if (ManeuverTransforms.IsEmpty())
+        {
+            return ReportDrivingFailure(VehicleId,
+                TEXT("AnchorManeuverStartMissing"),
+                TEXT("Set Route Start Anchor ID or add a valid preceding placement."));
+        }
+        for (const FName ViaAnchorId : ResolvedPassAnchorIds)
+        {
+            if (ViaAnchorId.IsNone()) continue;
+            ATMOPHistoricalAnchor* ViaAnchor = Anchors->FindAnchor(ViaAnchorId);
+            if (!IsValid(ViaAnchor))
+            {
+                return ReportDrivingFailure(VehicleId,
+                    TEXT("AnchorManeuverViaUnavailable"),
+                    FString::Printf(TEXT("Via anchor '%s' is unavailable."),
+                        *ViaAnchorId.ToString()));
+            }
+            ManeuverTransforms.Add(FTransform(ViaAnchor->GetAnchorRotation(),
+                ViaAnchor->GetAnchorLocation(), FVector::OneVector));
+        }
+        ATMOPHistoricalAnchor* Destination =
+            Anchors->FindAnchor(ResolvedDestinationAnchorId);
+        if (!IsValid(Destination))
+        {
+            return ReportDrivingFailure(VehicleId,
+                TEXT("AnchorManeuverDestinationUnavailable"),
+                FString::Printf(TEXT("Destination anchor '%s' is unavailable."),
+                    *ResolvedDestinationAnchorId.ToString()));
+        }
+        ManeuverTransforms.Add(FTransform(Destination->GetAnchorRotation(),
+            Destination->GetAnchorLocation(), FVector::OneVector));
+
+        int32 ArrivalSecond = INDEX_NONE;
+        bool bHasArrival = false;
+        if (DrivingEntry->bTimeIsArrival)
+        {
+            bHasArrival = ResolveTimelineEntrySecond(Runtime->Profile,
+                DrivingIndex, ArrivalSecond);
+        }
+        else
+        {
+            for (int32 Index = DrivingIndex + 1;
+                Index < Runtime->Profile.Timeline.Num(); ++Index)
+            {
+                const ETMOPHistoricalVehicleAction Action =
+                    Runtime->Profile.Timeline[Index].Action;
+                if (Action != ETMOPHistoricalVehicleAction::Stop &&
+                    Action != ETMOPHistoricalVehicleAction::Park &&
+                    Action != ETMOPHistoricalVehicleAction::ExitTrafficRoute)
+                    continue;
+                if (ResolveTimelineEntrySecond(Runtime->Profile,
+                    Index, ArrivalSecond))
+                { bHasArrival = true; break; }
+            }
+        }
+        if (!bHasArrival)
+        {
+            return ReportDrivingFailure(VehicleId,
+                TEXT("AnchorManeuverArrivalMissing"),
+                TEXT("Anchor Maneuver needs an arrival time or a later Stop/Park row."));
+        }
+
+        UTMOPTrafficVehicleMovementComponent* Movement =
+            Vehicle->FindComponentByClass<
+                UTMOPTrafficVehicleMovementComponent>();
+        if (!IsValid(Movement))
+        {
+            Movement = NewObject<UTMOPTrafficVehicleMovementComponent>(
+                Vehicle, TEXT("HistoricalTrafficMovement"));
+            Vehicle->AddInstanceComponent(Movement);
+            Movement->bStartDrivingAutomatically = false;
+            Movement->RegisterComponent();
+        }
+        Movement->StopDriving();
+        Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle;
+        Movement->bIgnoreOneWayRestrictions =
+            DrivingEntry->bIgnoreOneWayRestrictions;
+        Movement->bRunRedLights = DrivingEntry->bRunRedLights;
+        Movement->DesiredCruiseSpeedKmh = FMath::Max(0.0f,
+            DrivingEntry->CruiseSpeedOverrideKmh);
+        if (Movement->DesiredCruiseSpeedKmh <= 0.0f)
+            Movement->DesiredCruiseSpeedKmh =
+                SpeedForPreset(DrivingEntry->DrivingPreset);
+        Movement->bDespawnAtRouteEnd = false;
+        if (!Movement->StartAnchorManeuver(ManeuverTransforms,
+            ArrivalSecond, DrivingEntry->AnchorManeuverCurveStrength,
+            DrivingEntry->bAnchorManeuverReverse))
+        {
+            return ReportDrivingFailure(VehicleId,
+                TEXT("AnchorManeuverStartFailed"),
+                TEXT("The anchor maneuver movement component rejected the path."));
+        }
+        if (DrivingEntry->bAutoStartFromVehicleTimeline)
+            Runtime->AppliedDrivingEntryIds.Add(DrivingEntry->EntryId);
+        if (Runtime->bBoundaryCollisionSuppressed)
+        {
+            Movement->bDetectPhysicalObstacles = false;
+            Vehicle->SetActorEnableCollision(false);
+            Runtime->bBoundaryVehicleHasStartedDriving = true;
+            Runtime->BoundaryDrivingSeconds = 0.0f;
+            Runtime->BoundaryDrivingStartLocation = Vehicle->GetActorLocation();
+        }
+        UE_LOG(LogTemp, Display,
+            TEXT("TMOP driving: '%s' started anchor maneuver '%s' through %d anchor(s), arriving at %d."),
+            *DriverEntityId.ToString(), *VehicleId.ToString(),
+            ManeuverTransforms.Num(), ArrivalSecond);
+        return true;
+    }
 
     float ResolvedStartDistance = StartDistanceAlongFirstLaneCm;
     FName FinalDestinationLaneId = NAME_None;

@@ -92,6 +92,53 @@ namespace
         default: return 0.0f;
         }
     }
+
+    FTransform EvaluateAnchorManeuverSegment(const FTransform& Start,
+        const FTransform& End, const float InAlpha,
+        const float CurveStrength, const bool bReverse)
+    {
+        const float Alpha = FMath::Clamp(InAlpha, 0.0f, 1.0f);
+        const float SmoothAlpha = FMath::SmoothStep(0.0f, 1.0f, Alpha);
+        const FVector P0 = Start.GetLocation();
+        const FVector P3 = End.GetLocation();
+        const float TangentLength = FVector::Distance(P0, P3) * 0.5f *
+            FMath::Clamp(CurveStrength, 0.0f, 2.0f);
+        const float DirectionSign = bReverse ? -1.0f : 1.0f;
+        const FVector P1 = P0 + Start.GetRotation().GetForwardVector() *
+            DirectionSign * TangentLength;
+        const FVector P2 = P3 - End.GetRotation().GetForwardVector() *
+            DirectionSign * TangentLength;
+        const float OneMinusT = 1.0f - SmoothAlpha;
+        const FVector Location =
+            OneMinusT * OneMinusT * OneMinusT * P0 +
+            3.0f * OneMinusT * OneMinusT * SmoothAlpha * P1 +
+            3.0f * OneMinusT * SmoothAlpha * SmoothAlpha * P2 +
+            SmoothAlpha * SmoothAlpha * SmoothAlpha * P3;
+        const FQuat Rotation = FQuat::Slerp(Start.GetRotation(),
+            End.GetRotation(), SmoothAlpha).GetNormalized();
+        return FTransform(Rotation, Location, FVector::OneVector);
+    }
+
+    double MeasureAnchorManeuver(const TArray<FTransform>& Transforms,
+        const float CurveStrength, const bool bReverse)
+    {
+        double Distance = 0.0;
+        constexpr int32 SamplesPerSegment = 24;
+        for (int32 Segment = 0; Segment + 1 < Transforms.Num(); ++Segment)
+        {
+            FVector Previous = Transforms[Segment].GetLocation();
+            for (int32 Sample = 1; Sample <= SamplesPerSegment; ++Sample)
+            {
+                const FVector Current = EvaluateAnchorManeuverSegment(
+                    Transforms[Segment], Transforms[Segment + 1],
+                    static_cast<float>(Sample) / SamplesPerSegment,
+                    CurveStrength, bReverse).GetLocation();
+                Distance += FVector::Distance(Previous, Current);
+                Previous = Current;
+            }
+        }
+        return Distance;
+    }
 }
 
 class STMOPVehicleRouteMap final : public SLeafWidget
@@ -1135,6 +1182,74 @@ bool STMOPVehicleEditor::RecalculateSelectedRoute(FString& OutFailure)
 
     FTMOPHistoricalVehicleTimelineEntry& Entry =
         WorkingRow.Timeline[SelectedTimelineIndex];
+    if (Entry.VehicleRouteMode == ETMOPVehicleRouteMode::AnchorManeuver)
+    {
+        TSet<FName> KnownAnchorIds;
+        bool bHasPreviousWorldTransformStart = false;
+        for (TActorIterator<ATMOPHistoricalAnchor> It(World); It; ++It)
+            if (!It->GetAnchorId().IsNone())
+                KnownAnchorIds.Add(It->GetAnchorId());
+        if (Entry.RouteStartAnchorId.IsNone())
+        {
+            for (int32 Index = SelectedTimelineIndex - 1;
+                Index >= 0; --Index)
+            {
+                if (!HasPlacement(WorkingRow.Timeline[Index].Action))
+                    continue;
+                const FTMOPHistoricalVehicleTimelineEntry& Previous =
+                    WorkingRow.Timeline[Index];
+                if (Previous.PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::WorldTransform)
+                    bHasPreviousWorldTransformStart = true;
+                else
+                    Entry.RouteStartAnchorId = Previous.PlacementAnchorId;
+                break;
+            }
+        }
+        if (Entry.RouteDestinationAnchorId.IsNone())
+        {
+            OutFailure = TEXT("select a Route Destination Anchor ID");
+            return false;
+        }
+        if (!Entry.RouteStartAnchorId.IsNone() &&
+            !KnownAnchorIds.Contains(Entry.RouteStartAnchorId))
+        {
+            OutFailure = FString::Printf(TEXT("start anchor '%s' is missing"),
+                *Entry.RouteStartAnchorId.ToString());
+            return false;
+        }
+        if (Entry.RouteStartAnchorId.IsNone() &&
+            !bHasPreviousWorldTransformStart)
+        {
+            OutFailure = TEXT("select a Route Start Anchor ID or add a preceding anchor placement");
+            return false;
+        }
+        if (!KnownAnchorIds.Contains(Entry.RouteDestinationAnchorId))
+        {
+            OutFailure = FString::Printf(TEXT("destination anchor '%s' is missing"),
+                *Entry.RouteDestinationAnchorId.ToString());
+            return false;
+        }
+        for (const FName ViaAnchorId : Entry.RouteViaAnchorIds)
+        {
+            if (!ViaAnchorId.IsNone() && !KnownAnchorIds.Contains(ViaAnchorId))
+            {
+                OutFailure = FString::Printf(TEXT("via anchor '%s' is missing"),
+                    *ViaAnchorId.ToString());
+                return false;
+            }
+        }
+        Entry.OrderedLaneIds.Reset();
+        Entry.RouteStartLaneId = NAME_None;
+        Entry.RouteDestinationLaneId = NAME_None;
+        Entry.RouteViaLaneIds.Reset();
+        if (EntryStruct.IsValid())
+            *reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(
+                EntryStruct->GetStructMemory()) = Entry;
+        RebuildValidation();
+        RebuildRoutePreview();
+        return true;
+    }
     TMap<FName, UTMOPTrafficLaneComponent*> Lanes;
     TMap<FName, FVector> Anchors;
     for (TActorIterator<ATMOPHistoricalAnchor> It(World); It; ++It)
@@ -1351,6 +1466,13 @@ FText STMOPVehicleEditor::GetRouteEndpointsText() const
         { Destination = WorkingRow.Timeline[Index].PlacementAnchorId; break; }
     TArray<FString> ViaAnchors;
     for (const FName Id : Drive.RouteViaAnchorIds) ViaAnchors.Add(Id.ToString());
+    if (Drive.VehicleRouteMode == ETMOPVehicleRouteMode::AnchorManeuver)
+        return FText::FromString(FString::Printf(
+            TEXT("ANCHOR MANEUVER (NO LANES)\nStart anchor: %s\nEnd anchor: %s\nVia anchors: %s\nAnchor rotations control the curve and exact final rotation."),
+            Start.IsNone() ? TEXT("not set") : *Start.ToString(),
+            Destination.IsNone() ? TEXT("not set") : *Destination.ToString(),
+            ViaAnchors.IsEmpty() ? TEXT("none") :
+                *FString::Join(ViaAnchors, TEXT(", "))));
     TArray<FString> ViaLanes;
     for (const FName Id : Drive.RouteViaLaneIds) ViaLanes.Add(Id.ToString());
     return FText::FromString(FString::Printf(
@@ -1400,7 +1522,7 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateTimelineRow(const FTimelineIte
     int32 Sec=0; FString Fail; const bool HasTime=E&&ResolveTime(WorkingRow,I,Sec,&Fail); FLinearColor Color(0.35f,0.75f,1);
     FString Badge; FString Tip;
     if (E&&IsDriving(E->Action)) { double D=0,K=0; int32 Departure=0,Arrival=0,S=0; if(CalculateDrive(WorkingRow,I,D,Departure,Arrival,S,K,Fail)){Badge=FString::Printf(TEXT("DEP %s  ARR %s  REQ %.1f km/h"),*FormatClockSecond(Departure),*FormatClockSecond(Arrival),K);const float SetKmh=E->CruiseSpeedOverrideKmh>0?E->CruiseSpeedOverrideKmh:DrivingPresetSpeedKmh(E->DrivingPreset);if(SetKmh>0){const int32 EstimatedSeconds=FMath::RoundToInt((D/100000.0)/(SetKmh/3600.0));const int32 EstimatedArrival=Departure+EstimatedSeconds;Badge+=FString::Printf(TEXT("  SET %.1f  ETA %s"),SetKmh,*FormatClockSecond(EstimatedArrival));Tip=FString::Printf(TEXT("%.2f km. Selected speed estimates arrival %+d seconds versus plan."),D/100000.0,EstimatedArrival-Arrival);}else Tip=FString::Printf(TEXT("%.2f km over %d seconds."),D/100000.0,S);Color=K<=50?FLinearColor(0.05f,.42f,.12f):K<=90?FLinearColor(.78f,.38f,.03f):FLinearColor(.75f,.05f,.03f);if(E->bIgnoreOneWayRestrictions)Tip+=TEXT(" Ignores restricted lane connections.");if(E->bRunRedLights)Tip+=TEXT(" May run red lights.");} else {Badge=TEXT("SPEED ?");Tip=Fail;Color=FLinearColor(.55f,.12f,.08f);} }
-    FString Summary=E?VehicleActionLabel(E->Action):FString(); if(E&&IsDriving(E->Action)&&!E->RouteSegmentName.IsEmpty())Summary+=TEXT(" • ")+E->RouteSegmentName.ToString();if(E&&!E->PlacementAnchorId.IsNone()) Summary+=TEXT(" → ")+E->PlacementAnchorId.ToString(); if(E&&!E->OrderedLaneIds.IsEmpty()) Summary+=FString::Printf(TEXT(" • %d lanes"),E->OrderedLaneIds.Num());if(E&&IsDriving(E->Action)&&E->DrivingPreset!=ETMOPVehicleDrivingPreset::AutomaticFromTimeline)Summary+=TEXT(" • ")+DrivingPresetLabel(E->DrivingPreset);
+    FString Summary=E?VehicleActionLabel(E->Action):FString(); if(E&&IsDriving(E->Action)&&!E->RouteSegmentName.IsEmpty())Summary+=TEXT(" • ")+E->RouteSegmentName.ToString();if(E&&!E->PlacementAnchorId.IsNone()) Summary+=TEXT(" → ")+E->PlacementAnchorId.ToString(); if(E&&IsDriving(E->Action)&&E->VehicleRouteMode==ETMOPVehicleRouteMode::AnchorManeuver)Summary+=TEXT(" • ANCHOR MANEUVER • NO LANES");else if(E&&!E->OrderedLaneIds.IsEmpty()) Summary+=FString::Printf(TEXT(" • %d lanes"),E->OrderedLaneIds.Num());if(E&&IsDriving(E->Action)&&E->DrivingPreset!=ETMOPVehicleDrivingPreset::AutomaticFromTimeline)Summary+=TEXT(" • ")+DrivingPresetLabel(E->DrivingPreset);
     if (E && E->Action == ETMOPHistoricalVehicleAction::OffscreenTransfer)
         Summary += FString::Printf(TEXT(" • hidden %d s"),
             FMath::Max(0, E->OffscreenTransferDurationSeconds));
@@ -1416,10 +1538,50 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateTimelineRow(const FTimelineIte
     if (E && IsDriving(E->Action) && E->bTimeIsArrival &&
         E->bUseExplicitDepartureTime)
         Summary += TEXT(" • DEPARTURE SET ON ROW");
+    FString DestinationText;
+    FText DestinationToolTip;
+    FLinearColor DestinationColor = FLinearColor(0.35f, 0.85f, 0.45f);
+    const bool bShowDestination = E && IsDriving(E->Action);
+    if (bShowDestination)
+    {
+        if (!E->RouteDestinationAnchorId.IsNone())
+        {
+            DestinationText = TEXT("END ANCHOR → ") +
+                E->RouteDestinationAnchorId.ToString();
+            DestinationToolTip = LOCTEXT("ExplicitRouteDestinationTip",
+                "This driving row has an explicit Route Destination Anchor ID. The vehicle can use its exact transform for the final approach.");
+        }
+        else
+        {
+            FName FollowingStopAnchor = NAME_None;
+            for (int32 NextIndex = I + 1;
+                NextIndex < WorkingRow.Timeline.Num(); ++NextIndex)
+            {
+                const FTMOPHistoricalVehicleTimelineEntry& NextEntry =
+                    WorkingRow.Timeline[NextIndex];
+                if (!IsStop(NextEntry.Action))
+                    continue;
+                FollowingStopAnchor = NextEntry.PlacementAnchorId;
+                break;
+            }
+
+            DestinationText = TEXT("END ANCHOR SAKNAS");
+            if (!E->RouteDestinationLaneId.IsNone())
+                DestinationText += TEXT(" • bara lane: ") +
+                    E->RouteDestinationLaneId.ToString();
+            if (!FollowingStopAnchor.IsNone())
+                DestinationText += TEXT(" • nästa Stop: ") +
+                    FollowingStopAnchor.ToString() + TEXT(" (inte kopplad)");
+            DestinationColor = FLinearColor(1.0f, 0.28f, 0.18f);
+            DestinationToolTip = LOCTEXT("MissingRouteDestinationTip",
+                "Route Destination Anchor ID is empty. Recalculate Route may infer an end lane from the next Stop row, but that does not give the vehicle the exact anchor transform. Select End anchor explicitly.");
+        }
+    }
     const int32 N=FMath::Max(0,Sec)%(24*3600); const FString Time=HasTime?FString::Printf(TEXT("%02d:%02d:%02d"),N/3600,(N/60)%60,N%60):TEXT("TIME ?");
     return SNew(STableRow<FTimelineItem>,Owner)[SNew(SBorder).Padding(6).BorderImage(FAppStyle::GetBrush("Brushes.Panel"))[SNew(SVerticalBox)
         +SVerticalBox::Slot().AutoHeight()[SNew(SHorizontalBox)+SHorizontalBox::Slot().AutoWidth()[SNew(STextBlock).Text(FText::AsNumber(I)).ColorAndOpacity(FSlateColor::UseSubduedForeground())]+SHorizontalBox::Slot().FillWidth(1).Padding(7,0)[SNew(STextBlock).Text(E?FText::FromName(E->EntryId):FText::GetEmpty()).ColorAndOpacity(Color)]+SHorizontalBox::Slot().AutoWidth()[SNew(STextBlock).Text(FText::FromString(Time)).ColorAndOpacity(FLinearColor(1,.72f,.05f))]]
         +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(STextBlock).Text(FText::FromString(Summary)).Font(FAppStyle::GetFontStyle("SmallFont")).ColorAndOpacity(FSlateColor::UseSubduedForeground())]
+        +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(STextBlock).Visibility(bShowDestination?EVisibility::Visible:EVisibility::Collapsed).Text(FText::FromString(DestinationText)).ToolTipText(DestinationToolTip).Font(FAppStyle::GetFontStyle("SmallFont")).ColorAndOpacity(DestinationColor)]
         +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(STextBlock).Text(FText::FromString(Badge)).ToolTipText(FText::FromString(Tip)).ColorAndOpacity(Color)]
         +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(SBorder).Visibility(bShowArrivalBadge?EVisibility::Visible:EVisibility::Collapsed).Padding(FMargin(5,1)).BorderImage(FAppStyle::GetBrush("Brushes.Panel")).BorderBackgroundColor(ArrivalColor).ToolTipText(ArrivalToolTip)[SNew(STextBlock).Text(ArrivalText).Font(FAppStyle::GetFontStyle("SmallFont")).ColorAndOpacity(FLinearColor::White)]]]];
 }
@@ -1693,9 +1855,161 @@ bool STMOPVehicleEditor::ResolveDrivingDepartureTime(
     return ResolveTime(DepartureRow, Index, OutSecond, Failure);
 }
 
-bool STMOPVehicleEditor::CalculateDrive(const FTMOPHistoricalVehicleRow& Row,const int32 I,double& Distance,int32& Departure,int32& Arrival,int32& Duration,double& Kmh,FString& Failure)const
+bool STMOPVehicleEditor::CalculateDrive(
+    const FTMOPHistoricalVehicleRow& Row, const int32 I,
+    double& Distance, int32& Departure, int32& Arrival,
+    int32& Duration, double& Kmh, FString& Failure) const
 {
-    Distance=0;Departure=0;Arrival=0;Duration=0;Kmh=0;Failure.Reset();if(!Row.Timeline.IsValidIndex(I)||!IsDriving(Row.Timeline[I].Action)){Failure=TEXT("Not a driving entry.");return false;}const auto&E=Row.Timeline[I];if(E.OrderedLaneIds.IsEmpty()){Failure=TEXT("No Ordered Lane IDs.");return false;}UWorld*W=GEditor?GEditor->GetEditorWorldContext().World():nullptr;if(!W){Failure=TEXT("Open the level containing the lanes.");return false;}TMap<FName,UTMOPTrafficLaneComponent*>Lanes;for(TActorIterator<AActor>It(W);It;++It){TArray<UTMOPTrafficLaneComponent*>Cs;It->GetComponents<UTMOPTrafficLaneComponent>(Cs);for(auto*C:Cs)if(IsValid(C)&&!C->LaneId.IsNone())Lanes.Add(C->LaneId,C);}for(const FName L:E.OrderedLaneIds){auto**C=Lanes.Find(L);if(!C||!IsValid(*C)){Failure=FString::Printf(TEXT("Lane '%s' is missing."),*L.ToString());return false;}Distance+=(*C)->GetSplineLength();}if(E.bTimeIsArrival){if(!ResolveDrivingDepartureTime(Row,I,Departure,&Failure)){if(Failure.IsEmpty())Failure=TEXT("Time Is Arrival needs a valid departure time.");return false;}if(!ResolveTime(Row,I,Arrival)){Failure=TEXT("Arrival time cannot be resolved.");return false;}}else{if(!ResolveTime(Row,I,Departure)){Failure=TEXT("Departure time cannot be resolved.");return false;}int32 StopIndex=INDEX_NONE;for(int32 N=I+1;N<Row.Timeline.Num();++N)if(IsStop(Row.Timeline[N].Action)){StopIndex=N;break;}if(StopIndex==INDEX_NONE||!ResolveTime(Row,StopIndex,Arrival)){Failure=TEXT("No later Stop/Park with a valid arrival time.");return false;}}Duration=Arrival-Departure;if(Duration<=0){Failure=TEXT("Arrival occurs before departure.");return false;}Kmh=(Distance/100000.0)/(Duration/3600.0);return true;
+    Distance = 0.0;
+    Departure = 0;
+    Arrival = 0;
+    Duration = 0;
+    Kmh = 0.0;
+    Failure.Reset();
+    if (!Row.Timeline.IsValidIndex(I) ||
+        !IsDriving(Row.Timeline[I].Action))
+    {
+        Failure = TEXT("Not a driving entry.");
+        return false;
+    }
+    const FTMOPHistoricalVehicleTimelineEntry& Entry = Row.Timeline[I];
+    UWorld* World = GEditor ? GEditor->GetEditorWorldContext().World() : nullptr;
+    if (World == nullptr)
+    {
+        Failure = TEXT("Open the level containing the anchors/lanes.");
+        return false;
+    }
+
+    if (Entry.VehicleRouteMode == ETMOPVehicleRouteMode::AnchorManeuver)
+    {
+        TMap<FName, FTransform> Anchors;
+        for (TActorIterator<ATMOPHistoricalAnchor> It(World); It; ++It)
+            if (!It->GetAnchorId().IsNone())
+                Anchors.Add(It->GetAnchorId(), FTransform(
+                    It->GetAnchorRotation(), It->GetAnchorLocation(),
+                    FVector::OneVector));
+
+        TArray<FTransform> Transforms;
+        if (const FTransform* Start = Anchors.Find(Entry.RouteStartAnchorId))
+            Transforms.Add(*Start);
+        if (Transforms.IsEmpty())
+        {
+            for (int32 Index = I - 1; Index >= 0; --Index)
+            {
+                const FTMOPHistoricalVehicleTimelineEntry& Previous =
+                    Row.Timeline[Index];
+                if (!HasPlacement(Previous.Action)) continue;
+                if (Previous.PlacementMode ==
+                    ETMOPHistoricalVehiclePlacementMode::WorldTransform)
+                {
+                    Transforms.Add(Previous.WorldTransform);
+                    break;
+                }
+                if (const FTransform* Anchor =
+                    Anchors.Find(Previous.PlacementAnchorId))
+                {
+                    Transforms.Add(Previous.AnchorLocalOffset * *Anchor);
+                    break;
+                }
+            }
+        }
+        if (Transforms.IsEmpty())
+        {
+            Failure = TEXT("Anchor Maneuver needs a start anchor or preceding placement.");
+            return false;
+        }
+        for (const FName ViaAnchorId : Entry.RouteViaAnchorIds)
+        {
+            const FTransform* Via = Anchors.Find(ViaAnchorId);
+            if (Via == nullptr)
+            {
+                Failure = FString::Printf(TEXT("Via anchor '%s' is missing."),
+                    *ViaAnchorId.ToString());
+                return false;
+            }
+            Transforms.Add(*Via);
+        }
+        const FTransform* End = Anchors.Find(Entry.RouteDestinationAnchorId);
+        if (End == nullptr)
+        {
+            Failure = TEXT("Anchor Maneuver needs a valid destination anchor.");
+            return false;
+        }
+        Transforms.Add(*End);
+        Distance = MeasureAnchorManeuver(Transforms,
+            Entry.AnchorManeuverCurveStrength,
+            Entry.bAnchorManeuverReverse);
+    }
+    else
+    {
+        if (Entry.OrderedLaneIds.IsEmpty())
+        {
+            Failure = TEXT("No Ordered Lane IDs.");
+            return false;
+        }
+        TMap<FName, UTMOPTrafficLaneComponent*> Lanes;
+        for (TActorIterator<AActor> It(World); It; ++It)
+        {
+            TArray<UTMOPTrafficLaneComponent*> Components;
+            It->GetComponents<UTMOPTrafficLaneComponent>(Components);
+            for (UTMOPTrafficLaneComponent* Component : Components)
+                if (IsValid(Component) && !Component->LaneId.IsNone())
+                    Lanes.Add(Component->LaneId, Component);
+        }
+        for (const FName LaneId : Entry.OrderedLaneIds)
+        {
+            UTMOPTrafficLaneComponent* const* Lane = Lanes.Find(LaneId);
+            if (Lane == nullptr || !IsValid(*Lane))
+            {
+                Failure = FString::Printf(TEXT("Lane '%s' is missing."),
+                    *LaneId.ToString());
+                return false;
+            }
+            Distance += (*Lane)->GetSplineLength();
+        }
+    }
+
+    if (Entry.bTimeIsArrival)
+    {
+        if (!ResolveDrivingDepartureTime(Row, I, Departure, &Failure))
+        {
+            if (Failure.IsEmpty())
+                Failure = TEXT("Time Is Arrival needs a valid departure time.");
+            return false;
+        }
+        if (!ResolveTime(Row, I, Arrival))
+        {
+            Failure = TEXT("Arrival time cannot be resolved.");
+            return false;
+        }
+    }
+    else
+    {
+        if (!ResolveTime(Row, I, Departure))
+        {
+            Failure = TEXT("Departure time cannot be resolved.");
+            return false;
+        }
+        int32 StopIndex = INDEX_NONE;
+        for (int32 Index = I + 1; Index < Row.Timeline.Num(); ++Index)
+            if (IsStop(Row.Timeline[Index].Action))
+            { StopIndex = Index; break; }
+        if (StopIndex == INDEX_NONE ||
+            !ResolveTime(Row, StopIndex, Arrival))
+        {
+            Failure = TEXT("No later Stop/Park with a valid arrival time.");
+            return false;
+        }
+    }
+    Duration = Arrival - Departure;
+    if (Duration <= 0)
+    {
+        Failure = TEXT("Arrival occurs before departure.");
+        return false;
+    }
+    Kmh = (Distance / 100000.0) /
+        (static_cast<double>(Duration) / 3600.0);
+    return true;
 }
 
 bool STMOPVehicleEditor::ResolvePersonTime(
@@ -2129,11 +2443,23 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                 Results.Add(FString::Printf(
                     TEXT("ERROR Timeline[%d]: route lane '%s' is missing."),
                     Index, *LaneId.ToString()));
-        if (Entry.OrderedLaneIds.IsEmpty())
+        if (Entry.VehicleRouteMode !=
+                ETMOPVehicleRouteMode::AnchorManeuver &&
+            Entry.OrderedLaneIds.IsEmpty())
             Results.Add(FString::Printf(
                 TEXT("ERROR Timeline[%d]: driving route has no lanes."), Index));
 
-        for (int32 LaneIndex = 0; LaneIndex + 1 < Entry.OrderedLaneIds.Num(); ++LaneIndex)
+        if (Entry.VehicleRouteMode ==
+                ETMOPVehicleRouteMode::AnchorManeuver &&
+            Entry.RouteStartAnchorId.IsNone())
+            Results.Add(FString::Printf(
+                TEXT("WARNING Timeline[%d]: Anchor Maneuver inherits its start from the previous placement; set Route Start Anchor ID explicitly for clarity."),
+                Index));
+
+        for (int32 LaneIndex = 0;
+            Entry.VehicleRouteMode !=
+                ETMOPVehicleRouteMode::AnchorManeuver &&
+            LaneIndex + 1 < Entry.OrderedLaneIds.Num(); ++LaneIndex)
         {
             UTMOPTrafficLaneComponent* const* Lane =
                 Lanes.Find(Entry.OrderedLaneIds[LaneIndex]);
@@ -2409,52 +2735,117 @@ void STMOPVehicleEditor::RebuildRoutePreview()
         {
             const FTMOPHistoricalVehicleTimelineEntry& DriveEntry =
                 WorkingRow.Timeline[DriveIndex];
-            for (const FName LaneId : DriveEntry.OrderedLaneIds)
-                if (const TArray<FVector2D>* Line = LinesByLaneId.Find(LaneId))
-                    Route.Add(*Line);
-            if (const FTransform* Transform =
-                AnchorTransforms.Find(DriveEntry.RouteStartAnchorId))
+            if (DriveEntry.VehicleRouteMode ==
+                ETMOPVehicleRouteMode::AnchorManeuver)
             {
-                const FVector Location = Transform->GetLocation();
-                StartAnchor = FVector2D(Location.X, Location.Y);
-            }
-            else if (const TArray<FVector2D>* Line =
-                LinesByLaneId.Find(DriveEntry.RouteStartLaneId))
-                if (!Line->IsEmpty()) StartAnchor = (*Line)[0];
-            if (!StartAnchor.IsSet())
-                for (int32 Index = DriveIndex - 1; Index >= 0; --Index)
-                {
-                    if (!HasPlacement(WorkingRow.Timeline[Index].Action))
-                        continue;
-                    FVector2D Point;
-                    if (ResolvePlacementPoint(
-                            WorkingRow.Timeline[Index], Point))
-                    { StartAnchor = Point; break; }
-                }
-            if (const FTransform* Transform =
-                AnchorTransforms.Find(DriveEntry.RouteDestinationAnchorId))
-            {
-                const FVector Location = Transform->GetLocation();
-                EndAnchor = FVector2D(Location.X, Location.Y);
-            }
-            else if (const TArray<FVector2D>* Line =
-                LinesByLaneId.Find(DriveEntry.RouteDestinationLaneId))
-                if (!Line->IsEmpty()) EndAnchor = Line->Last();
-            if (!EndAnchor.IsSet())
-                for (int32 Index = DriveIndex + 1;
-                    Index < WorkingRow.Timeline.Num(); ++Index)
-                    if (IsStop(WorkingRow.Timeline[Index].Action))
+                TArray<FTransform> ManeuverTransforms;
+                if (const FTransform* Transform =
+                    AnchorTransforms.Find(DriveEntry.RouteStartAnchorId))
+                    ManeuverTransforms.Add(*Transform);
+                if (ManeuverTransforms.IsEmpty())
+                    for (int32 Index = DriveIndex - 1;
+                        Index >= 0; --Index)
                     {
+                        const FTMOPHistoricalVehicleTimelineEntry& Previous =
+                            WorkingRow.Timeline[Index];
+                        if (!HasPlacement(Previous.Action)) continue;
+                        if (Previous.PlacementMode ==
+                            ETMOPHistoricalVehiclePlacementMode::WorldTransform)
+                            ManeuverTransforms.Add(Previous.WorldTransform);
+                        else if (const FTransform* AnchorTransform =
+                            AnchorTransforms.Find(Previous.PlacementAnchorId))
+                            ManeuverTransforms.Add(
+                                Previous.AnchorLocalOffset * *AnchorTransform);
+                        break;
+                    }
+                for (const FName ViaAnchorId : DriveEntry.RouteViaAnchorIds)
+                    if (const FTransform* Transform =
+                        AnchorTransforms.Find(ViaAnchorId))
+                        ManeuverTransforms.Add(*Transform);
+                if (const FTransform* Transform = AnchorTransforms.Find(
+                    DriveEntry.RouteDestinationAnchorId))
+                    ManeuverTransforms.Add(*Transform);
+
+                if (ManeuverTransforms.Num() >= 2)
+                {
+                    const FVector StartLocation =
+                        ManeuverTransforms[0].GetLocation();
+                    const FVector EndLocation =
+                        ManeuverTransforms.Last().GetLocation();
+                    StartAnchor = FVector2D(StartLocation.X, StartLocation.Y);
+                    EndAnchor = FVector2D(EndLocation.X, EndLocation.Y);
+                    for (int32 Segment = 0;
+                        Segment + 1 < ManeuverTransforms.Num(); ++Segment)
+                    {
+                        TArray<FVector2D> Curve;
+                        constexpr int32 Samples = 24;
+                        for (int32 Sample = 0; Sample <= Samples; ++Sample)
+                        {
+                            const FVector Point = EvaluateAnchorManeuverSegment(
+                                ManeuverTransforms[Segment],
+                                ManeuverTransforms[Segment + 1],
+                                static_cast<float>(Sample) / Samples,
+                                DriveEntry.AnchorManeuverCurveStrength,
+                                DriveEntry.bAnchorManeuverReverse).GetLocation();
+                            Curve.Add(FVector2D(Point.X, Point.Y));
+                        }
+                        Route.Add(MoveTemp(Curve));
+                    }
+                }
+                Caption = FString::Printf(
+                    TEXT("ANCHOR MANEUVER • %d anchors • no lanes • anchor rotations control the turn"),
+                    ManeuverTransforms.Num());
+            }
+            else
+            {
+                for (const FName LaneId : DriveEntry.OrderedLaneIds)
+                    if (const TArray<FVector2D>* Line =
+                        LinesByLaneId.Find(LaneId))
+                        Route.Add(*Line);
+                if (const FTransform* Transform =
+                    AnchorTransforms.Find(DriveEntry.RouteStartAnchorId))
+                {
+                    const FVector Location = Transform->GetLocation();
+                    StartAnchor = FVector2D(Location.X, Location.Y);
+                }
+                else if (const TArray<FVector2D>* Line =
+                    LinesByLaneId.Find(DriveEntry.RouteStartLaneId))
+                    if (!Line->IsEmpty()) StartAnchor = (*Line)[0];
+                if (!StartAnchor.IsSet())
+                    for (int32 Index = DriveIndex - 1;
+                        Index >= 0; --Index)
+                    {
+                        if (!HasPlacement(WorkingRow.Timeline[Index].Action))
+                            continue;
                         FVector2D Point;
                         if (ResolvePlacementPoint(
                                 WorkingRow.Timeline[Index], Point))
-                        { EndAnchor = Point; break; }
+                        { StartAnchor = Point; break; }
                     }
+                if (const FTransform* Transform = AnchorTransforms.Find(
+                    DriveEntry.RouteDestinationAnchorId))
+                {
+                    const FVector Location = Transform->GetLocation();
+                    EndAnchor = FVector2D(Location.X, Location.Y);
+                }
+                else if (const TArray<FVector2D>* Line = LinesByLaneId.Find(
+                    DriveEntry.RouteDestinationLaneId))
+                    if (!Line->IsEmpty()) EndAnchor = Line->Last();
+                if (!EndAnchor.IsSet())
+                    for (int32 Index = DriveIndex + 1;
+                        Index < WorkingRow.Timeline.Num(); ++Index)
+                        if (IsStop(WorkingRow.Timeline[Index].Action))
+                        {
+                            FVector2D Point;
+                            if (ResolvePlacementPoint(
+                                    WorkingRow.Timeline[Index], Point))
+                            { EndAnchor = Point; break; }
+                        }
+                Caption = FString::Printf(
+                    TEXT("%d lanes • Shift+click=start • Ctrl+click=end • right-click=via"),
+                    Route.Num());
+            }
         }
-
-        Caption = FString::Printf(
-            TEXT("%d lanes • Shift+click=start • Ctrl+click=end • right-click=via"),
-            Route.Num());
     }
     RouteMap->SetRoute(MoveTemp(Network), MoveTemp(NetworkLaneIds),
         MoveTemp(Route), Caption,

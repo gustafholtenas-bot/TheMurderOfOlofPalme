@@ -15,6 +15,15 @@ enum class ETMOPObservedEntityType : uint8
     Unknown
 };
 
+/** Whether the person being seen is an existing known person or an identity hypothesis. */
+UENUM(BlueprintType)
+enum class ETMOPObservedPersonIdentityStatus : uint8
+{
+    Unclassified UMETA(DisplayName="Not classified"),
+    UnknownPerson UMETA(DisplayName="Unknown observed person"),
+    KnownPerson UMETA(DisplayName="Known person / witness")
+};
+
 UENUM(BlueprintType)
 enum class ETMOPObservationTimingMode : uint8
 {
@@ -246,6 +255,15 @@ struct TMOPENGINE_API FTMOPObservationDefinition : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Observation|Entities")
     ETMOPObservedEntityType ObservedEntityType =
         ETMOPObservedEntityType::Unknown;
+
+    /**
+     * KnownPerson means ObservedEntityId points directly to a People-table row.
+     * Such an observation is factual and must never be placed in an
+     * ObservationLink identity hypothesis.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Observation|Entities")
+    ETMOPObservedPersonIdentityStatus ObservedPersonIdentityStatus =
+        ETMOPObservedPersonIdentityStatus::Unclassified;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Observation|Place")
     FName ObservationAnchorId = NAME_None;

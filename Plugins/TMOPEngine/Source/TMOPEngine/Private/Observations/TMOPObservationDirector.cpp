@@ -1459,6 +1459,12 @@ bool ATMOPObservationDirector::ValidateObservationData(
                 TEXT("Observation '%s' has no reference shared event."),
                 *Pair.Key.ToString()));
         }
+        if (Definition.ObservedPersonIdentityStatus !=
+                ETMOPObservedPersonIdentityStatus::Unclassified &&
+            Definition.ObservedEntityType != ETMOPObservedEntityType::Person)
+            OutErrors.Add(FString::Printf(
+                TEXT("Observation '%s' has a person identity classification but is not a Person observation."),
+                *Pair.Key.ToString()));
         if (Definition.bNoFurtherSignalementInSource &&
             !Definition.bSignalementSourceReviewed)
             OutErrors.Add(FString::Printf(
@@ -1559,6 +1565,11 @@ bool ATMOPObservationDirector::ValidateObservationData(
                     *Pair.Key.ToString(), *ObservationId.ToString()));
                 continue;
             }
+            if (Observation->ObservedPersonIdentityStatus ==
+                ETMOPObservedPersonIdentityStatus::KnownPerson)
+                OutErrors.Add(FString::Printf(
+                    TEXT("Link '%s' contains known-person observation '%s'; known people must be associated directly and cannot use ObservationLinks."),
+                    *Pair.Key.ToString(), *ObservationId.ToString()));
             if (FirstType == ETMOPObservedEntityType::Unknown)
                 FirstType = Observation->ObservedEntityType;
             else if (Observation->ObservedEntityType !=

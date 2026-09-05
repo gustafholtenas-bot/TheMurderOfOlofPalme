@@ -29,7 +29,9 @@ enum class ETMOPVehicleRouteMode : uint8
     /** Find a connected lane route from the vehicle to Destination Anchor ID. */
     AutomaticToAnchor,
     /** Follow Ordered Lane IDs first, then calculate the rest to the anchor. */
-    ManualThenAutomatic
+    ManualThenAutomatic,
+    /** Move directly between anchors on a smooth authored curve, without lanes. */
+    AnchorManeuver UMETA(DisplayName="Anchor Maneuver (No Lanes)")
 };
 
 USTRUCT(BlueprintType)

@@ -18,7 +18,8 @@ enum class ETMOPTrafficVehicleState : uint8
     Stopped,
     RouteComplete,
     InvalidLane,
-    FinalApproach
+    FinalApproach,
+    AnchorManeuver
 };
 
 /** Deterministic lane-following movement shared by cars and buses. */
@@ -244,6 +245,21 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Traffic|Route")
     bool HasFinalApproach() const { return bHasFinalApproach; }
 
+    /** Starts a deterministic off-lane curve through two or more anchor
+     * transforms. Anchor rotations control vehicle orientation and curve
+     * tangents, so opposite rotations naturally form a U-turn. */
+    bool StartAnchorManeuver(
+        const TArray<FTransform>& AnchorTransforms,
+        int32 ExpectedArrivalSecond,
+        float CurveStrength = 0.5f,
+        bool bReverse = false);
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Traffic|Route")
+    bool IsAnchorManeuverActive() const
+    {
+        return bAnchorManeuverInProgress;
+    }
+
     /** Approximate speed of the short off-lane parking manoeuvre. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Route",
         meta=(ClampMin="50.0"))
@@ -329,6 +345,9 @@ private:
     void BeginFinalApproach(UTMOPTrafficLaneComponent* Lane);
     void UpdateFinalApproach(float DeltaTime);
     void ClearFinalApproach();
+    void UpdateAnchorManeuver(float DeltaTime);
+    void ClearAnchorManeuver();
+    FTransform EvaluateAnchorManeuver(float Alpha) const;
     void UpdateVisualSteeringForLane(UTMOPTrafficLaneComponent* Lane);
     void UpdateFleeingVehicleImpacts(float DeltaTime);
     void TryAutomaticHorn(AActor* BlockingActor);
@@ -359,6 +378,15 @@ private:
     FTransform FinalApproachTargetTransform = FTransform::Identity;
     float FinalApproachElapsedSeconds = 0.0f;
     float FinalApproachDurationSeconds = 1.0f;
+    bool bAnchorManeuverInProgress = false;
+    bool bAnchorManeuverReverse = false;
+    float AnchorManeuverCurveStrength = 0.5f;
+    double AnchorManeuverStartSecond = 0.0;
+    float AnchorManeuverElapsedSeconds = 0.0f;
+    float AnchorManeuverDurationSeconds = 1.0f;
+    float AnchorManeuverApproximateLengthCm = 0.0f;
+    TArray<FTransform> AnchorManeuverTransforms;
+    TArray<float> AnchorManeuverSegmentWeights;
     int32 TimedArrivalSecond = INDEX_NONE;
     float MaximumTimedCatchUpSpeedCmPerSecond = 2500.0f;
 };
