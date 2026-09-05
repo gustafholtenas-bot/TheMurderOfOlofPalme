@@ -36,6 +36,17 @@ private:
     bool ConfirmDiscardOrSave();
     void OnDetailsChanged(const FPropertyChangedEvent& Event, bool bVehicleDetails);
     void SyncDetailsFromWorking();
+    void QueueStructureData(const TSharedPtr<IStructureDetailsView>& View,
+        const TSharedPtr<FStructOnScope>& Data);
+    bool FlushStructureData(float DeltaTime);
+    struct FPendingStructureUpdate
+    {
+        TSharedPtr<IStructureDetailsView> View;
+        TSharedPtr<FStructOnScope> Data;
+    };
+    TArray<FPendingStructureUpdate> PendingStructureUpdates;
+    TArray<FPendingStructureUpdate> DisplayedStructures;
+    bool bStructureUpdateQueued = false;
     void RefreshAppearancePreview();
     TSharedRef<SWidget> BuildAccessoryControls();
     void RefreshAccessoryChoices();

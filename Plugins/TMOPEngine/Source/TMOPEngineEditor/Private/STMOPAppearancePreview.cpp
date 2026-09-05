@@ -242,7 +242,7 @@ public:
         const TWeakPtr<SEditorViewport>& Widget)
         : FEditorViewportClient(nullptr, &InScene.Get(), Widget), SceneOwner(InScene)
     {
-        SetViewMode(VMI_Lit);
+        SetViewMode(VMI_Unlit);
         SetViewportType(LVT_Perspective);
         SetRealtime(true);
         EngineShowFlags.SetGrid(false);
@@ -762,3 +762,4 @@ EActiveTimerReturnType STMOPAppearancePreview::TickPose(double Now,float DeltaSe
     return EActiveTimerReturnType::Continue;
 }
 #undef LOCTEXT_NAMESPACE
+

@@ -1,4 +1,5 @@
 #include "STMOPVehicleEditor.h"
+#include "Containers/Ticker.h"
 #include "STMOPAppearancePreview.h"
 #include "Widgets/Input/SComboBox.h"
 #include "Widgets/Layout/SExpandableArea.h"
@@ -713,11 +714,20 @@ void STMOPVehicleEditor::SelectVehicle(const FName RowName)
     const UDataTable* Table = VehicleTable.Get();
     const FTMOPHistoricalVehicleRow* Row = IsValid(Table) ? Table->FindRow<FTMOPHistoricalVehicleRow>(RowName, TEXT("VehicleEditorSelect"), false) : nullptr;
     if (!Row) return;
+    // Detach property nodes while their old backing structs are still alive.
+    // Selection also rebuilds nested timeline/accessory arrays and the preview.
+    TGuardValue<bool> DetailsGuard(bSynchronizingDetails, true);
+    QueueStructureData(VehicleDetails, nullptr);
+    QueueStructureData(EntryDetails, nullptr);
+    {
+        TGuardValue<bool> AccessoryGuard(bRefreshingAccessories, true);
+        QueueStructureData(AccessoryDetails, nullptr);
+    }
     SelectedRowName=RowName; WorkingRow=*Row; SavedRow=*Row; SelectedTimelineIndex=INDEX_NONE;
     VehicleStruct=MakeShared<FStructOnScope>(FTMOPHistoricalVehicleRow::StaticStruct());
     *reinterpret_cast<FTMOPHistoricalVehicleRow*>(VehicleStruct->GetStructMemory())=WorkingRow;
-    VehicleDetails->SetStructureData(VehicleStruct);
-    EntryStruct.Reset(); EntryDetails->SetStructureData(nullptr); RefreshTimeline();
+    QueueStructureData(VehicleDetails, VehicleStruct);
+    EntryStruct.Reset(); QueueStructureData(EntryDetails, nullptr); RefreshTimeline();
     if (!WorkingRow.Timeline.IsEmpty()) SelectTimelineEntry(0);
     SelectedAccessoryIndex = INDEX_NONE;
     RefreshAppearancePreview();
@@ -728,13 +738,15 @@ void STMOPVehicleEditor::SelectTimelineEntry(const int32 Index)
 {
     CommitEntry();
     if (!WorkingRow.Timeline.IsValidIndex(Index)) return;
+    TGuardValue<bool> DetailsGuard(bSynchronizingDetails, true);
+    QueueStructureData(EntryDetails, nullptr);
     bPreviewPlaying = false;
     PreviewAlpha = 0.0f;
     if (RouteMap.IsValid()) RouteMap->Fit();
     SelectedTimelineIndex=Index;
     EntryStruct=MakeShared<FStructOnScope>(FTMOPHistoricalVehicleTimelineEntry::StaticStruct());
     *reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(EntryStruct->GetStructMemory())=WorkingRow.Timeline[Index];
-    EntryDetails->SetStructureData(EntryStruct); RebuildValidation(); RebuildRoutePreview();
+    QueueStructureData(EntryDetails, EntryStruct); RebuildValidation(); RebuildRoutePreview();
 }
 
 void STMOPVehicleEditor::RefreshAnchorOptions()
@@ -835,7 +847,7 @@ void STMOPVehicleEditor::OnAnchorSelected(
             EntryStruct->GetStructMemory());
     Entry->PlacementMode = ETMOPHistoricalVehiclePlacementMode::Anchor;
     Entry->PlacementAnchorId = *Id;
-    EntryDetails->SetStructureData(EntryStruct);
+    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
     RebuildValidation();
     RebuildRoutePreview();
@@ -874,7 +886,7 @@ void STMOPVehicleEditor::OnEventSelected(
             EntryStruct->GetStructMemory());
     Entry->TimingMode = ETMOPEventTimingMode::Relative;
     Entry->SharedEventId = *EventId;
-    EntryDetails->SetStructureData(EntryStruct);
+    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
     RebuildValidation();
     RebuildRoutePreview();
@@ -907,7 +919,7 @@ void STMOPVehicleEditor::OnDepartureEventSelected(
     Entry->bUseExplicitDepartureTime = true;
     Entry->DepartureTimingMode = ETMOPEventTimingMode::Relative;
     Entry->DepartureSharedEventId = *EventId;
-    EntryDetails->SetStructureData(EntryStruct);
+    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
     RebuildValidation();
     RebuildRoutePreview();
@@ -976,7 +988,7 @@ void STMOPVehicleEditor::OnRouteReferenceSelected(
         Entry->RouteViaLaneIds.AddUnique(*Id);
         break;
     }
-    EntryDetails->SetStructureData(EntryStruct);
+    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
     FString Failure;
     if (RecalculateSelectedRoute(Failure))
@@ -1047,7 +1059,7 @@ FReply STMOPVehicleEditor::ClearViaPoints()
         EntryStruct->GetStructMemory());
     Entry->RouteViaAnchorIds.Reset();
     Entry->RouteViaLaneIds.Reset();
-    EntryDetails->SetStructureData(EntryStruct);
+    QueueStructureData(EntryDetails, EntryStruct);
     return RecalculateRoute();
 }
 
@@ -1093,7 +1105,7 @@ void STMOPVehicleEditor::HandleMapLaneClicked(const FName LaneId,
             *LaneId.ToString())), FLinearColor(.55f, .8f, 1.0f));
         return;
     }
-    EntryDetails->SetStructureData(EntryStruct);
+    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
     FString Failure;
     if (RecalculateSelectedRoute(Failure))
@@ -1292,7 +1304,7 @@ bool STMOPVehicleEditor::PassesVehicleFilter(
 
 FReply STMOPVehicleEditor::AddEntry(){CommitEntry();FTMOPHistoricalVehicleTimelineEntry E;E.EntryId=TMOPVehicleRoute::UniqueEntryId(WorkingRow, WorkingRow.VehicleId.ToString()+TEXT("_ENTRY"));E.bAutoStartFromVehicleTimeline=true;WorkingRow.Timeline.Add(E);RefreshTimeline();SelectTimelineEntry(WorkingRow.Timeline.Num()-1);return FReply::Handled();}
 FReply STMOPVehicleEditor::DuplicateEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){auto E=WorkingRow.Timeline[SelectedTimelineIndex];E.EntryId=TMOPVehicleRoute::UniqueEntryId(WorkingRow, E.EntryId.ToString()+TEXT("_COPY"));WorkingRow.Timeline.Insert(E,SelectedTimelineIndex+1);RefreshTimeline();SelectTimelineEntry(SelectedTimelineIndex+1);}return FReply::Handled();}
-FReply STMOPVehicleEditor::DeleteEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){WorkingRow.Timeline.RemoveAt(SelectedTimelineIndex);SelectedTimelineIndex=INDEX_NONE;EntryStruct.Reset();EntryDetails->SetStructureData(nullptr);RefreshTimeline();}return FReply::Handled();}
+FReply STMOPVehicleEditor::DeleteEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){WorkingRow.Timeline.RemoveAt(SelectedTimelineIndex);SelectedTimelineIndex=INDEX_NONE;EntryStruct.Reset();QueueStructureData(EntryDetails, nullptr);RefreshTimeline();}return FReply::Handled();}
 FReply STMOPVehicleEditor::MoveEntry(const int32 D){CommitEntry();const int32 N=SelectedTimelineIndex+D;if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)&&WorkingRow.Timeline.IsValidIndex(N)){WorkingRow.Timeline.Swap(SelectedTimelineIndex,N);SelectedTimelineIndex=INDEX_NONE;RefreshTimeline();SelectTimelineEntry(N);}return FReply::Handled();}
 
 FReply STMOPVehicleEditor::SaveVehicle()
@@ -2410,25 +2422,72 @@ bool STMOPVehicleEditor::CanClose()
     if (bClose) bPreviewPlaying = false;
     return bClose;
 }
+void STMOPVehicleEditor::QueueStructureData(
+    const TSharedPtr<IStructureDetailsView>& View,
+    const TSharedPtr<FStructOnScope>& Data)
+{
+    if (!View.IsValid()) return;
+    FPendingStructureUpdate* Pending = PendingStructureUpdates.FindByPredicate(
+        [&View](const FPendingStructureUpdate& Item) { return Item.View == View; });
+    if (Pending) Pending->Data = Data;
+    else PendingStructureUpdates.Add({View, Data});
+    if (bStructureUpdateQueued) return;
+    bStructureUpdateQueued = true;
+    // CreateSP is weak: closing the editor cancels execution on this widget.
+    FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateSP(
+        this, &STMOPVehicleEditor::FlushStructureData));
+}
+
+bool STMOPVehicleEditor::FlushStructureData(float)
+{
+    TGuardValue<bool> DetailsGuard(bSynchronizingDetails, true);
+    TGuardValue<bool> AccessoryGuard(bRefreshingAccessories, true);
+    auto Updates = MoveTemp(PendingStructureUpdates);
+    PendingStructureUpdates.Reset();
+    // Keep the old backing allocations alive until every affected tree is detached.
+    const auto PreviousStructures = DisplayedStructures;
+    for (const auto& Update : Updates) Update.View->SetStructureData(nullptr);
+    for (const auto& Update : Updates)
+    {
+        DisplayedStructures.RemoveAll([&Update](const FPendingStructureUpdate& Item)
+            { return Item.View == Update.View; });
+        Update.View->SetStructureData(Update.Data);
+        DisplayedStructures.Add(Update);
+    }
+    bStructureUpdateQueued = false;
+    return false;
+}
+
 void STMOPVehicleEditor::SyncDetailsFromWorking()
 {
     TGuardValue<bool> Guard(bSynchronizingDetails, true);
+    // Never replace nested arrays in memory still referenced by a details tree.
     if (VehicleStruct.IsValid())
-        *reinterpret_cast<FTMOPHistoricalVehicleRow*>(VehicleStruct->GetStructMemory()) = WorkingRow;
+    {
+        auto Fresh = MakeShared<FStructOnScope>(FTMOPHistoricalVehicleRow::StaticStruct());
+        *reinterpret_cast<FTMOPHistoricalVehicleRow*>(Fresh->GetStructMemory()) = WorkingRow;
+        VehicleStruct = Fresh;
+        QueueStructureData(VehicleDetails, VehicleStruct);
+    }
     if (EntryStruct.IsValid() && WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
-        *reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(EntryStruct->GetStructMemory()) =
+    {
+        auto Fresh = MakeShared<FStructOnScope>(FTMOPHistoricalVehicleTimelineEntry::StaticStruct());
+        *reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(Fresh->GetStructMemory()) =
             WorkingRow.Timeline[SelectedTimelineIndex];
+        EntryStruct = Fresh;
+        QueueStructureData(EntryDetails, EntryStruct);
+    }
 }
 void STMOPVehicleEditor::OnDetailsChanged(const FPropertyChangedEvent& Event, bool bVehicleDetails)
 {
-    if (bSynchronizingDetails) return;
+    if (bSynchronizingDetails || bStructureUpdateQueued) return;
     if (bVehicleDetails && Event.MemberProperty &&
         Event.MemberProperty->GetFName() == GET_MEMBER_NAME_CHECKED(FTMOPHistoricalVehicleRow, Timeline) &&
         VehicleStruct.IsValid())
     {
         WorkingRow = *reinterpret_cast<FTMOPHistoricalVehicleRow*>(VehicleStruct->GetStructMemory());
         if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
-        { SelectedTimelineIndex = INDEX_NONE; EntryStruct.Reset(); EntryDetails->SetStructureData(nullptr); }
+        { SelectedTimelineIndex = INDEX_NONE; EntryStruct.Reset(); QueueStructureData(EntryDetails, nullptr); }
         SyncDetailsFromWorking();
     }
     else { CommitEntry(); CommitVehicle(); }
@@ -2518,6 +2577,7 @@ void STMOPVehicleEditor::SelectAccessory(TSharedPtr<int32> Item,ESelectInfo::Typ
     if(bRefreshingAccessories || !Item.IsValid())return;
     TGuardValue<bool> Guard(bRefreshingAccessories,true);
     SelectedAccessoryIndex=*Item;
+    QueueStructureData(AccessoryDetails, nullptr);
     if(WorkingRow.AdditionalAccessories.IsValidIndex(SelectedAccessoryIndex))
     {
         AccessoryStruct=MakeShared<FStructOnScope>(FTMOPVehicleAccessoryVisual::StaticStruct());
@@ -2529,11 +2589,11 @@ void STMOPVehicleEditor::SelectAccessory(TSharedPtr<int32> Item,ESelectInfo::Typ
         AccessoryStruct=MakeShared<FStructOnScope>(FTMOPRoofAccessoryVisual::StaticStruct());
         *reinterpret_cast<FTMOPRoofAccessoryVisual*>(AccessoryStruct->GetStructMemory())=WorkingRow.RoofAccessory;
     }
-    AccessoryDetails->SetStructureData(AccessoryStruct);
+    QueueStructureData(AccessoryDetails, AccessoryStruct);
 }
 void STMOPVehicleEditor::OnAccessoryDetailsChanged(const FPropertyChangedEvent& Event)
 {
-    if(bRefreshingAccessories || !AccessoryStruct.IsValid() || SelectedRowName.IsNone())return;
+    if(bRefreshingAccessories || bStructureUpdateQueued || !AccessoryStruct.IsValid() || SelectedRowName.IsNone())return;
     CommitEntry();CommitVehicle();
     if(WorkingRow.AdditionalAccessories.IsValidIndex(SelectedAccessoryIndex))
         WorkingRow.AdditionalAccessories[SelectedAccessoryIndex]=
