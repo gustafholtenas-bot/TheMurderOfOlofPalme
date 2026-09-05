@@ -1,4 +1,5 @@
 #include "TMOPEngineEditor.h"
+#include "STMOPAddressEditor.h"
 
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Editor.h"
@@ -30,6 +31,7 @@ const FName FTMOPEngineEditorModule::ObservationEditorTabName(
 
 void FTMOPEngineEditorModule::StartupModule()
 {
+    RegisterTMOPAddressEditor();
     FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
         PeopleEditorTabName,
         FOnSpawnTab::CreateRaw(
@@ -74,6 +76,7 @@ void FTMOPEngineEditorModule::StartupModule()
 
 void FTMOPEngineEditorModule::ShutdownModule()
 {
+    UnregisterTMOPAddressEditor();
     UToolMenus::UnRegisterStartupCallback(this);
     UToolMenus::UnregisterOwner(this);
     FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(PeopleEditorTabName);
@@ -85,6 +88,7 @@ void FTMOPEngineEditorModule::ShutdownModule()
 void FTMOPEngineEditorModule::RegisterMenus()
 {
     FToolMenuOwnerScoped OwnerScoped(this);
+    AddTMOPAddressEditorMenu();
     UToolMenu* ToolsMenu =
         UToolMenus::Get()->ExtendMenu(TEXT("LevelEditor.MainMenu.Tools"));
     FToolMenuSection& Section =

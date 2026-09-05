@@ -19,6 +19,7 @@ public class TMOPEngineEditor : ModuleRules
             "PropertyEditor",
             "Slate",
             "SlateCore",
+            "UMG",
             "ToolMenus",
             "LevelEditor",
             "InputCore",
@@ -29,3 +30,4 @@ public class TMOPEngineEditor : ModuleRules
         });
     }
 }
+
