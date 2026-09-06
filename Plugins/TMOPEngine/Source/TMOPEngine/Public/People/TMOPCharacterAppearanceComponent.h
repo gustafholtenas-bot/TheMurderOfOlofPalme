@@ -5,6 +5,7 @@
 #include "People/TMOPAppearanceAssetTypes.h"
 #include "TMOPCharacterAppearanceComponent.generated.h"
 
+class UChildActorComponent;
 class ATMOPHistoricalAgent;
 class UDataTable;
 class UMaterialInterface;
@@ -21,6 +22,7 @@ class TMOPENGINE_API UTMOPCharacterAppearanceComponent : public UActorComponent
 public:
     UTMOPCharacterAppearanceComponent();
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
     /** Optional per-agent catalog. Empty uses the registry's central table. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance")
@@ -106,6 +108,19 @@ public:
     bool ValidateAppearance(TArray<FString>& OutWarnings) const;
 
 private:
+    void ApplyHybridHead(ATMOPHistoricalAgent* Agent);
+    void ClearHybridHead();
+
+    UPROPERTY(Transient)
+    TObjectPtr<UChildActorComponent> HybridPresentation;
+
+    UPROPERTY(Transient)
+    TObjectPtr<USkeletalMeshComponent> HybridSource;
+
+    bool bHybridHeadActive = false;
+    uint8 SavedHybridSourceTickPolicy = 0;
+    bool bSavedHybridSourceURO = false;
+
     bool ApplyAutomaticGenderBody(ATMOPHistoricalAgent* Agent,
         ETMOPPersonGender Gender);
     void ApplyBodyAndProportions(ATMOPHistoricalAgent* Agent);

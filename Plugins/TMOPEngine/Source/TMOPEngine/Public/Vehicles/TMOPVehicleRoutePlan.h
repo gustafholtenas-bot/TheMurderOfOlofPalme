@@ -54,5 +54,7 @@ namespace TMOPVehicleRoute
     /** Non-mutating, vehicle-sized world-static sweep for authored maneuvers. */
     TMOPENGINE_API bool FindObstacle(UWorld* World,
         const FTMOPVehicleRoutePlan& Plan, FVector HalfExtent,
-        FHitResult& Hit, const AActor* IgnoreActor = nullptr);
+        FHitResult& Hit, const AActor* IgnoreActor = nullptr,
+        bool bIgnoreStaticScenery = false);
+    TMOPENGINE_API bool IsStaticSceneryHit(const FHitResult& Hit);
 }

@@ -117,7 +117,7 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
     UTMOPTrafficLaneComponent* Lane = GetCurrentLane();
     if (!IsValid(Lane)) { TrafficState = ETMOPTrafficVehicleState::InvalidLane; return; }
 
-    if (bFleeingVehicle)
+    if (bFleeingVehicle && !bPrioritizeTimeline)
         UpdateFleeingVehicleImpacts(DeltaTime);
 
     if (bHasFinalApproach && CurrentLaneId == FinalApproachLaneId &&
@@ -133,7 +133,7 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
 
     LaneChangeCooldownSeconds = FMath::Max(0.0f, LaneChangeCooldownSeconds - DeltaTime);
     LaneChangeCheckAccumulator += DeltaTime;
-    if (!IsChangingLane() && bAllowLaneChanges && LaneChangeCooldownSeconds <= 0.0f &&
+    if (!bPrioritizeTimeline && !IsChangingLane() && bAllowLaneChanges && LaneChangeCooldownSeconds <= 0.0f &&
         LaneChangeCheckAccumulator >= LaneChangeCheckIntervalSeconds)
     {
         LaneChangeCheckAccumulator = 0.0f;
@@ -220,6 +220,7 @@ void UTMOPTrafficVehicleMovementComponent::UpdateObstacleBypass(const float Delt
 {
     AActor* OwnerActor = GetOwner();
     if (!IsValid(OwnerActor)) return;
+    if (bPrioritizeTimeline) { EndObstacleBypass(); return; }
 
     if (bObstacleBypassActive)
     {
@@ -428,7 +429,7 @@ float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLan
     UTMOPTrafficVehicleSubsystem* Traffic = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPTrafficVehicleSubsystem>() : nullptr;
     float CenterDistance = 0.0f;
-    UTMOPTrafficVehicleMovementComponent* Lead = !bObstacleBypassActive && Traffic != nullptr
+    UTMOPTrafficVehicleMovementComponent* Lead = !bPrioritizeTimeline && !bObstacleBypassActive && Traffic != nullptr
         ? Traffic->FindLeadVehicle(this, CenterDistance) : nullptr;
     if (IsValid(Lead))
     {
@@ -801,8 +802,9 @@ bool UTMOPTrafficVehicleMovementComponent::ApplyManeuverPose(const FTransform& P
     FTMOPVehicleRoutePlan Step;
     Step.AddSample(VehicleActor->GetActorTransform()); Step.AddSample(Pose);
     FHitResult Hit;
-    if (TMOPVehicleRoute::FindObstacle(GetWorld(), Step,
-        FVector(VehicleLengthCm * 0.45f, ObstacleSensorHalfWidthCm, 50.0f), Hit, VehicleActor))
+    if (!bPrioritizeTimeline && TMOPVehicleRoute::FindObstacle(GetWorld(), Step,
+        FVector(VehicleLengthCm * 0.45f, ObstacleSensorHalfWidthCm, 50.0f), Hit, VehicleActor,
+        bIgnoreStaticScenery))
     {
         bLastArrivalBlocked = true;
         LastArrivalBlocker = GetNameSafe(Hit.GetActor());
@@ -811,7 +813,11 @@ bool UTMOPTrafficVehicleMovementComponent::ApplyManeuverPose(const FTransform& P
     }
     FTransform ScaledPose = Pose;
     ScaledPose.SetScale3D(VehicleActor->GetActorScale3D());
-    VehicleActor->SetActorTransform(ScaledPose, true, &Hit, ETeleportType::TeleportPhysics);
+    // The filtered sweep above checks other road users. An additional unfiltered
+    // root sweep would reintroduce static scenery as a blocker.
+    Hit = FHitResult();
+    VehicleActor->SetActorTransform(ScaledPose, !bIgnoreStaticScenery && !bPrioritizeTimeline,
+        &Hit, ETeleportType::TeleportPhysics);
     if (Hit.bBlockingHit)
     {
         bLastArrivalBlocked = true;
@@ -1152,7 +1158,7 @@ bool UTMOPTrafficVehicleMovementComponent::GetPhysicalObstacleDiagnostics(
     OutBlockingActor = nullptr;
     UWorld* World = GetWorld();
     const AActor* OwnerActor = GetOwner();
-    if (bFleeingVehicle || !bDetectPhysicalObstacles ||
+    if (bPrioritizeTimeline || bFleeingVehicle || !bDetectPhysicalObstacles ||
         World == nullptr || OwnerActor == nullptr)
         return false;
 
@@ -1188,6 +1194,7 @@ bool UTMOPTrafficVehicleMovementComponent::GetPhysicalObstacleDiagnostics(
     for (const FHitResult& Hit : Hits)
     {
         if (!IsValid(Hit.GetActor()) || Hit.GetActor() == OwnerActor) continue;
+        if (bIgnoreStaticScenery && TMOPVehicleRoute::IsStaticSceneryHit(Hit)) continue;
         const float ForwardDistance = FVector::DotProduct(Hit.ImpactPoint - Start, Forward);
         if (ForwardDistance >= 0.0f && ForwardDistance < Nearest)
         {

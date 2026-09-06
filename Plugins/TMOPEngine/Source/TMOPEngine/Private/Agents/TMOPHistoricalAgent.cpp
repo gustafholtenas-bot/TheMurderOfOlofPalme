@@ -354,8 +354,38 @@ void ATMOPHistoricalAgent::BeginPlay()
     PlaySpawnFade();
 }
 
+void ATMOPHistoricalAgent::UpdateTimelinePriority()
+{
+    UCapsuleComponent* Capsule = GetCapsuleComponent();
+    UCharacterMovementComponent* Movement = GetCharacterMovement();
+    if (!IsValid(Capsule) || !IsValid(Movement)) return;
+    const bool bEnabled = IsValid(PersonProfile) && PersonProfile->Profile.bPrioritizeTimeline;
+    if (bEnabled)
+    {
+        if (!bTimelinePriorityApplied)
+        {
+            PrioritySavedPawnResponse = Capsule->GetCollisionResponseToChannel(ECC_Pawn);
+            PrioritySavedVehicleResponse = Capsule->GetCollisionResponseToChannel(ECC_Vehicle);
+            bPrioritySavedRVO = Movement->bUseRVOAvoidance;
+            bTimelinePriorityApplied = true;
+        }
+        // Do not disable the capsule: its WorldStatic collision supports the feet.
+        Capsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+        Capsule->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Ignore);
+        if (Movement->bUseRVOAvoidance) Movement->SetAvoidanceEnabled(false);
+    }
+    else if (bTimelinePriorityApplied)
+    {
+        Capsule->SetCollisionResponseToChannel(ECC_Pawn, PrioritySavedPawnResponse);
+        Capsule->SetCollisionResponseToChannel(ECC_Vehicle, PrioritySavedVehicleResponse);
+        Movement->SetAvoidanceEnabled(bPrioritySavedRVO);
+        bTimelinePriorityApplied = false;
+    }
+}
+
 void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
 {
+    UpdateTimelinePriority();
     Super::Tick(DeltaSeconds);
     UpdateVisibilityFade(DeltaSeconds);
     if (IsActorBeingDestroyed()) return;

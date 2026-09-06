@@ -436,6 +436,12 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Simulation")
     bool bSpawnInSimulation = false;
 
+    /** Opt-in: pass other road users so they cannot obstruct this authored timeline. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Simulation|Priority",
+        meta=(DisplayName="Prioritize Timeline"))
+    bool bPrioritizeTimeline = false;
+
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Historical Vehicle|Simulation")
     TArray<FTMOPHistoricalVehicleTimelineEntry> Timeline;
 

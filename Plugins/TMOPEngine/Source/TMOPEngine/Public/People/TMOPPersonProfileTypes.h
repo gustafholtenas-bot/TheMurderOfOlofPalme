@@ -11,6 +11,8 @@
 #include "Traffic/TMOPTrafficTypes.h"
 #include "TMOPPersonProfileTypes.generated.h"
 
+class AActor;
+class UAnimInstance;
 class UTexture2D;
 class USoundBase;
 class USkeletalMesh;
@@ -706,6 +708,27 @@ struct TMOPENGINE_API FTMOPAppearanceProfile
     ETMOPAppearanceGenerationMode GenerationMode =
         ETMOPAppearanceGenerationMode::AutomaticFromEvidence;
 
+    /** Assembled MetaHuman used only for its head/grooms; TMOP keeps body/clothes. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Hybrid")
+    bool bUseMetaHumanHybridHead = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Hybrid")
+    TSoftClassPtr<AActor> MetaHumanPresentationClass;
+
+    /** Target-body AnimBP containing Retarget Pose From Mesh with an IK Retargeter. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Hybrid")
+    TSoftClassPtr<UAnimInstance> MetaHumanBodyRetargetAnimClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Hybrid")
+    FName MetaHumanBodyComponentName = TEXT("Body");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Hybrid")
+    FName MetaHumanFaceComponentName = TEXT("Face");
+
+    /** Mesh-space alignment, inherited once from the TMOP body's scale. No head socket. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance|Hybrid")
+    FTransform MetaHumanBodyAlignment = FTransform::Identity;
+
     /** Zero derives a stable seed from EntityId, giving the same person on every run. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance",
         meta=(ClampMin="0"))
@@ -930,6 +953,12 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation",
         meta=(DisplayName="Main Character"))
     bool bMainCharacter = false;
+
+    /** Opt-in: pass other road users so they cannot obstruct this authored timeline. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Simulation|Priority",
+        meta=(DisplayName="Prioritize Timeline"))
+    bool bPrioritizeTimeline = false;
+
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation")
     FTMOPMovementProfile MovementProfile;

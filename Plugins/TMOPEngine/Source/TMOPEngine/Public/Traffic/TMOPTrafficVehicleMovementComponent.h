@@ -104,6 +104,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection")
     bool bDetectPhysicalObstacles = true;
 
+    /** Authored traffic may pass through static scenery; other road users still block. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Obstacle Detection")
+    bool bIgnoreStaticScenery = true;
+
+    /** Set from the historical vehicle profile when a route starts. */
+    UPROPERTY(Transient, BlueprintReadOnly, Category="TMOP|Traffic|Priority")
+    bool bPrioritizeTimeline = false;
+
+
+
     /** Ignore pedestrian obstacles and run them down instead of stopping. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic|Fleeing")
     bool bFleeingVehicle = false;

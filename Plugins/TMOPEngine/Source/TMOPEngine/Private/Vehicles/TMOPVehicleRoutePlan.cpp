@@ -4,6 +4,7 @@
 #include "Traffic/TMOPTrafficLaneComponent.h"
 #include "Engine/World.h"
 #include "Engine/HitResult.h"
+#include "Components/StaticMeshComponent.h"
 #include "CollisionQueryParams.h"
 #include "EngineUtils.h"
 #include "GameFramework/Actor.h"
@@ -388,18 +389,30 @@ FName UniqueEntryId(const FTMOPHistoricalVehicleRow& Row, const FString& Base)
         if (!Used.Contains(Candidate)) return Candidate;
     }
 }
+bool IsStaticSceneryHit(const FHitResult& Hit)
+{
+    const UPrimitiveComponent* Component = Hit.GetComponent();
+    if (!IsValid(Component)) return false;
+    // Test the component, not the actor name: Blueprint scenery may also be static.
+    return Component->GetCollisionObjectType() == ECC_WorldStatic ||
+        (Component->IsA<UStaticMeshComponent>() &&
+         Component->Mobility != EComponentMobility::Movable);
+}
+
 bool FindObstacle(UWorld* World, const FTMOPVehicleRoutePlan& Plan,
-    FVector HalfExtent, FHitResult& Hit, const AActor* IgnoreActor)
+    FVector HalfExtent, FHitResult& Hit, const AActor* IgnoreActor,
+    bool bIgnoreStaticScenery)
 {
     if (!World) return false;
     FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPManeuverPreview), false, IgnoreActor);
     FCollisionObjectQueryParams Objects;
-    Objects.AddObjectTypesToQuery(ECC_WorldStatic);
+    if (!bIgnoreStaticScenery) Objects.AddObjectTypesToQuery(ECC_WorldStatic);
     if (IgnoreActor)
     {
         Objects.AddObjectTypesToQuery(ECC_WorldDynamic);
         Objects.AddObjectTypesToQuery(ECC_Vehicle);
         Objects.AddObjectTypesToQuery(ECC_Pawn);
+        Objects.AddObjectTypesToQuery(ECC_PhysicsBody);
         TArray<AActor*> Attached;
         IgnoreActor->GetAttachedActors(Attached, true, true);
         Params.AddIgnoredActors(Attached);
@@ -407,9 +420,18 @@ bool FindObstacle(UWorld* World, const FTMOPVehicleRoutePlan& Plan,
     // Lift the sensor above the road so road surfaces are not obstacles.
     const FVector Lift(0.0, 0.0, HalfExtent.Z + 30.0);
     for (int32 Index = 1; Index < Plan.Samples.Num(); ++Index)
-        if (World->SweepSingleByObjectType(Hit, Plan.Samples[Index - 1].GetLocation() + Lift,
+    {
+        TArray<FHitResult> Hits;
+        World->SweepMultiByObjectType(Hits, Plan.Samples[Index - 1].GetLocation() + Lift,
             Plan.Samples[Index].GetLocation() + Lift, Plan.Samples[Index].GetRotation(),
-            Objects, FCollisionShape::MakeBox(HalfExtent), Params)) return true;
+            Objects, FCollisionShape::MakeBox(HalfExtent), Params);
+        for (const FHitResult& Candidate : Hits)
+        {
+            if (bIgnoreStaticScenery && IsStaticSceneryHit(Candidate)) continue;
+            Hit = Candidate;
+            return true;
+        }
+    }
     return false;
 }
 }

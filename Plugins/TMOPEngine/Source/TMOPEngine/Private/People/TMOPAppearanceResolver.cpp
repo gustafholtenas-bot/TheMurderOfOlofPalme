@@ -458,9 +458,16 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
         OtherText.Contains(TEXT("vante"), ESearchCase::IgnoreCase))
         GlovesEvidence = Profile.OtherCharacteristics;
 
+    // Gender-specific fallback meshes must be configured in the asset catalog.
+    // Keep the neutral ID for profiles whose gender is unspecified.
+    FName BodyFallbackId(TEXT("UNKNOWN_BODY_STANDARD"));
+    if (Profile.Gender == ETMOPPersonGender::Male)
+        BodyFallbackId = TEXT("UNKNOWN_BODY_STANDARD_male");
+    else if (Profile.Gender == ETMOPPersonGender::Female)
+        BodyFallbackId = TEXT("UNKNOWN_BODY_STANDARD_female");
     OutAppearance.Body = ResolvePart(Profile, AssetCatalog,
         ETMOPAppearancePartType::Body, A.Body,
-        { BodyEvidence }, TEXT("UNKNOWN_BODY_STANDARD"), false,
+        { BodyEvidence }, BodyFallbackId, false,
         Random, OutAppearance.Diagnostics);
     // Missing build evidence means a normal average body, not an anonymised body.
     OutAppearance.Body.bUsesObscuredFallback = false;
@@ -510,7 +517,8 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
         Random, OutAppearance.Diagnostics);
     OutAppearance.FaceMorphs = GenerateFaceMorphs(
         Profile, OutAppearance.ResolvedSeed);
-    if (A.GenerationMode == ETMOPAppearanceGenerationMode::MetaHuman)
+    if (A.GenerationMode == ETMOPAppearanceGenerationMode::MetaHuman &&
+        !A.bUseMetaHumanHybridHead)
     {
         OutAppearance.bUsesBespokeMetaHuman = true;
         auto PreserveBespokePart = [](FTMOPResolvedAppearancePart& Part,

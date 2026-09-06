@@ -1794,10 +1794,11 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
         Vehicle->AddInstanceComponent(Movement); Movement->bStartDrivingAutomatically = false;
         Movement->RegisterComponent();
     }
+    Movement->bPrioritizeTimeline = Runtime->Profile.bPrioritizeTimeline;
     Movement->bFleeingVehicle = Runtime->Profile.bFleeingVehicle ||
         Entry.DrivingPreset == ETMOPVehicleDrivingPreset::Fleeing;
     Movement->bIgnoreOneWayRestrictions = Entry.bIgnoreOneWayRestrictions;
-    Movement->bRunRedLights = Entry.bRunRedLights;
+    Movement->bRunRedLights = Entry.bRunRedLights || Runtime->Profile.bPrioritizeTimeline;
     // Timed routes have one authority: distance / scheduled time. Presets do
     // not secretly replace a deadline with their own arrival estimate.
     Movement->DesiredCruiseSpeedKmh = float(Plan.LengthCm * 0.036 / (Arrival - Departure));

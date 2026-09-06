@@ -1,6 +1,9 @@
 #include "People/TMOPCharacterAppearanceComponent.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Components/ChildActorComponent.h"
+#include "Animation/AnimInstance.h"
+#include "GameFramework/Pawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -61,9 +64,11 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
         if (bHasAppliedAppearance) return true;
     }
 
+    ClearHybridHead();
     CacheBaseBodyTransform(Agent);
     FTMOPPersonProfileRow ProfileForAppearance = ProfileComponent->Profile;
-    if (bOuterwearOnlyPilotMode && bForceOuterwearOnEveryoneInPilotMode)
+    if (bOuterwearOnlyPilotMode && bForceOuterwearOnEveryoneInPilotMode &&
+        !ProfileComponent->Profile.AppearanceProfile.bUseMetaHumanHybridHead)
     {
         if (ProfileForAppearance.OuterwearCategory == ETMOPOuterwearType::None)
             ProfileForAppearance.OuterwearCategory = ETMOPOuterwearType::Unknown;
@@ -75,15 +80,21 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     UTMOPAppearanceResolver::ResolveAppearance(
         ProfileForAppearance, ResolveAssetCatalog(), ResolvedAppearance);
 
+    // Hybrid has a normal modular TMOP body even if the old MetaHuman mode was selected.
+    if (ProfileComponent->Profile.AppearanceProfile.bUseMetaHumanHybridHead)
+        ResolvedAppearance.bUsesBespokeMetaHuman = false;
     const bool bMetaHuman = ResolvedAppearance.bUsesBespokeMetaHuman;
     const bool bHasExplicitResolvedBody = !ResolvedAppearance.Body.Mesh.IsNull();
     if (!bMetaHuman && bAutomaticallySelectMannyOrQuinnByGender &&
-        (bOuterwearOnlyPilotMode || !bHasExplicitResolvedBody))
+        ((bOuterwearOnlyPilotMode &&
+          !ProfileComponent->Profile.AppearanceProfile.bUseMetaHumanHybridHead) ||
+         !bHasExplicitResolvedBody))
     {
         ApplyAutomaticGenderBody(Agent, ProfileComponent->Profile.Gender);
     }
 
-    if (bOuterwearOnlyPilotMode)
+    if (bOuterwearOnlyPilotMode &&
+        !ProfileComponent->Profile.AppearanceProfile.bUseMetaHumanHybridHead)
     {
         const bool bOuterwearApplied = ApplyPart(
             Agent->OuterwearMesh, ResolvedAppearance.Outerwear, false);
@@ -130,6 +141,7 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
         ResolvedAppearance.BodyBuild, !bMetaHuman);
     if (!bMetaHuman)
         ApplyFaceMorphs(Agent->FaceMesh, ResolvedAppearance.FaceMorphs);
+    ApplyHybridHead(Agent);
     ApplyBodyRegionMask(Agent);
     ApplyCollisionAndPresentation(Agent,
         bMetaHuman && bPreserveMetaHumanBodyPlacement);
@@ -241,8 +253,44 @@ void UTMOPCharacterAppearanceComponent::ApplyMorphs(
         ? DefaultWeight : Profile.BodyWeightMorph;
     const float Muscularity = FMath::IsNearlyZero(Profile.MuscularityMorph)
         ? DefaultMuscularity : Profile.MuscularityMorph;
-    Body->SetMorphTarget(TEXT("TMOP_BodyWeight"), Weight);
-    Body->SetMorphTarget(TEXT("TMOP_Muscularity"), Muscularity);
+    // Authored relative shapes use Body_workout as the Basis (all values zero).
+    // ApplyMorphs is shared by the body and modular garments, so their names
+    // and category weights stay in sync without overwriting unrelated morphs.
+    USkeletalMesh* Mesh = Body->GetSkeletalMeshAsset();
+    const FName NormalName(TEXT("Body_normal"));
+    const FName HeavyName(TEXT("Body_heavy"));
+    const FName ThinName(TEXT("Body_thin"));
+    const bool bUsesAuthoredBodyShapes = Mesh->FindMorphTarget(NormalName) != nullptr ||
+        Mesh->FindMorphTarget(HeavyName) != nullptr ||
+        Mesh->FindMorphTarget(ThinName) != nullptr;
+    if (bUsesAuthoredBodyShapes)
+    {
+        float Normal = 0.0f, Heavy = 0.0f, Thin = 0.0f;
+        switch (BodyBuild)
+        {
+        case ETMOPBodyBuild::Thin: Thin = 1.0f; break;
+        case ETMOPBodyBuild::Slim: Normal = 0.5f; Thin = 0.5f; break;
+        case ETMOPBodyBuild::Heavy: Heavy = 1.0f; break;
+        case ETMOPBodyBuild::Athletic:
+        case ETMOPBodyBuild::Strong: break; // Strong uses workout until authored.
+        default: Normal = 1.0f; break;
+        }
+        // Always write zeroes as well: Heavy -> Average/Workout must reset Heavy.
+        if (Mesh->FindMorphTarget(NormalName)) Body->SetMorphTarget(NormalName, Normal);
+        if (Mesh->FindMorphTarget(HeavyName)) Body->SetMorphTarget(HeavyName, Heavy);
+        if (Mesh->FindMorphTarget(ThinName)) Body->SetMorphTarget(ThinName, Thin);
+        // Do not stack the old signed weight/muscularity system on these shapes.
+        if (Mesh->FindMorphTarget(TEXT("TMOP_BodyWeight")))
+            Body->SetMorphTarget(TEXT("TMOP_BodyWeight"), 0.0f);
+        if (Mesh->FindMorphTarget(TEXT("TMOP_Muscularity")))
+            Body->SetMorphTarget(TEXT("TMOP_Muscularity"), 0.0f);
+    }
+    else
+    {
+        // Preserve existing assets that use the original TMOP morph convention.
+        Body->SetMorphTarget(TEXT("TMOP_BodyWeight"), Weight);
+        Body->SetMorphTarget(TEXT("TMOP_Muscularity"), Muscularity);
+    }
     Body->SetMorphTarget(TEXT("TMOP_HeadScale"), Profile.HeadScale - 1.0f);
     Body->SetMorphTarget(TEXT("TMOP_ShoulderScale"), Profile.ShoulderScale - 1.0f);
     Body->SetMorphTarget(TEXT("TMOP_TorsoLength"), Profile.TorsoLengthScale - 1.0f);
@@ -272,13 +320,31 @@ void UTMOPCharacterAppearanceComponent::ApplyBodyRegionMask(
     ATMOPHistoricalAgent* Agent)
 {
     if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return;
-    const int32 Mask = ResolvedAppearance.Outerwear.HiddenBodyRegions |
-        ResolvedAppearance.UpperBody.HiddenBodyRegions |
-        ResolvedAppearance.Trousers.HiddenBodyRegions |
-        ResolvedAppearance.Footwear.HiddenBodyRegions |
-        ResolvedAppearance.Gloves.HiddenBodyRegions |
-        ResolvedAppearance.Headwear.HiddenBodyRegions |
-        ResolvedAppearance.Scarf.HiddenBodyRegions;
+    // Rebuild from zero each appearance application. A failed/hidden garment
+    // must not remove skin. Face only masks regions explicitly set in its row.
+    int32 Mask = bHybridHeadActive ? static_cast<int32>(ETMOPBodyRegion::Head) : 0;
+    auto IncludeVisibleSkeletalPart = [&Mask](
+        USkeletalMeshComponent* Component, const FTMOPResolvedAppearancePart& Part)
+    {
+        if (!Part.bIntentionallyEmpty && IsValid(Component) &&
+            Component->IsVisible() && !Component->bHiddenInGame &&
+            Component->GetSkeletalMeshAsset() != nullptr)
+            Mask |= Part.HiddenBodyRegions;
+    };
+    IncludeVisibleSkeletalPart(Agent->FaceMesh.Get(), ResolvedAppearance.Face);
+    IncludeVisibleSkeletalPart(Agent->OuterwearMesh.Get(), ResolvedAppearance.Outerwear);
+    IncludeVisibleSkeletalPart(Agent->UpperBodyMesh.Get(), ResolvedAppearance.UpperBody);
+    IncludeVisibleSkeletalPart(Agent->TrousersMesh.Get(), ResolvedAppearance.Trousers);
+    IncludeVisibleSkeletalPart(Agent->FootwearMesh.Get(), ResolvedAppearance.Footwear);
+    IncludeVisibleSkeletalPart(Agent->GlovesMesh.Get(), ResolvedAppearance.Gloves);
+    IncludeVisibleSkeletalPart(Agent->ScarfMesh.Get(), ResolvedAppearance.Scarf);
+    IncludeVisibleSkeletalPart(Agent->HeadwearMesh.Get(), ResolvedAppearance.Headwear);
+    if (!ResolvedAppearance.Headwear.bIntentionallyEmpty &&
+        IsValid(Agent->HeadwearStaticMesh) &&
+        Agent->HeadwearStaticMesh->IsVisible() &&
+        !Agent->HeadwearStaticMesh->bHiddenInGame &&
+        Agent->HeadwearStaticMesh->GetStaticMesh() != nullptr)
+        Mask |= ResolvedAppearance.Headwear.HiddenBodyRegions;
     struct FMaskParameter { const TCHAR* Name; ETMOPBodyRegion Region; };
     const FMaskParameter Parameters[] = {
         { TEXT("TMOP_HideHead"), ETMOPBodyRegion::Head },
@@ -527,6 +593,12 @@ void UTMOPCharacterAppearanceComponent::ApplyPerformanceSettings(
         Part->bEnableUpdateRateOptimizations =
             bEnableAnimationUpdateRateOptimizations;
     }
+    if (bHybridHeadActive && IsValid(HybridSource))
+    {
+        HybridSource->VisibilityBasedAnimTickOption =
+            EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+        HybridSource->bEnableUpdateRateOptimizations = false;
+    }
     if (IsValid(Agent->HeadwearStaticMesh))
     {
         Agent->HeadwearStaticMesh->SetCullDistance(CullDistanceCentimeters);
@@ -538,6 +610,7 @@ void UTMOPCharacterAppearanceComponent::ResetAppearance()
 {
     ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
     if (!IsValid(Agent)) return;
+    ClearHybridHead();
     const bool bWasMetaHuman = ResolvedAppearance.bUsesBespokeMetaHuman;
     if (bBaseBodyTransformCached && IsValid(Agent->BodyMesh))
     {
@@ -576,4 +649,142 @@ bool UTMOPCharacterAppearanceComponent::ValidateAppearance(
     if (!IsValid(ResolveAssetCatalog()))
         OutWarnings.Add(TEXT("No DT_TMOP_AppearanceAssets table is configured."));
     return OutWarnings.IsEmpty();
+}
+
+
+void UTMOPCharacterAppearanceComponent::EndPlay(const EEndPlayReason::Type Reason)
+{
+    ClearHybridHead();
+    Super::EndPlay(Reason);
+}
+
+void UTMOPCharacterAppearanceComponent::ClearHybridHead()
+{
+    bHybridHeadActive = false;
+    if (IsValid(HybridPresentation))
+    {
+        HybridPresentation->DestroyChildActor();
+        HybridPresentation->DestroyComponent();
+    }
+    HybridPresentation = nullptr;
+    if (IsValid(HybridSource))
+    {
+        HybridSource->VisibilityBasedAnimTickOption =
+            static_cast<EVisibilityBasedAnimTickOption>(SavedHybridSourceTickPolicy);
+        HybridSource->bEnableUpdateRateOptimizations = bSavedHybridSourceURO;
+    }
+    HybridSource = nullptr;
+}
+
+void UTMOPCharacterAppearanceComponent::ApplyHybridHead(ATMOPHistoricalAgent* Agent)
+{
+    if (!IsValid(Agent) || !IsValid(Agent->PersonProfile)) return;
+    const FTMOPAppearanceProfile& P = Agent->PersonProfile->Profile.AppearanceProfile;
+    if (!P.bUseMetaHumanHybridHead) return;
+    auto Fail = [this](const FString& Message)
+    {
+        ClearHybridHead();
+        const FString Diagnostic = TEXT("MetaHuman hybrid: ") + Message;
+        ResolvedAppearance.Diagnostics.Add(Diagnostic);
+        UE_LOG(LogTemp, Warning, TEXT("%s"), *Diagnostic);
+    };
+    if (!IsValid(Agent->BodyMesh) || !Agent->BodyMesh->GetSkeletalMeshAsset())
+    {
+        Fail(TEXT("No TMOP source body; using normal appearance."));
+        return;
+    }
+    UClass* PresentationClass = P.MetaHumanPresentationClass.LoadSynchronous();
+    UClass* RetargetClass = P.MetaHumanBodyRetargetAnimClass.LoadSynchronous();
+    if (!PresentationClass || PresentationClass->IsChildOf(APawn::StaticClass()) ||
+        PresentationClass->HasAnyClassFlags(CLASS_Abstract) || !RetargetClass ||
+        RetargetClass->HasAnyClassFlags(CLASS_Abstract))
+    {
+        Fail(TEXT("Select an assembled Actor Blueprint (not Pawn) and a target-body retarget AnimBP."));
+        return;
+    }
+    // Do not hide the ordinary head when the configured skin cannot mask it.
+    if (Agent->BodyMesh->GetNumMaterials() == 0)
+    {
+        Fail(TEXT("TMOP body has no materials."));
+        return;
+    }
+    for (int32 Index = 0; Index < Agent->BodyMesh->GetNumMaterials(); ++Index)
+    {
+        UMaterialInterface* Material = Agent->BodyMesh->GetMaterial(Index);
+        float Value = 0.0f;
+        if (!Material || !Material->GetScalarParameterValue(
+            FMaterialParameterInfo(TEXT("TMOP_HideHead")), Value))
+        {
+            Fail(TEXT("Each TMOP body material must support R22 TMOP_HideHead. Check region UV/mask wiring too."));
+            return;
+        }
+    }
+    HybridPresentation = NewObject<UChildActorComponent>(Agent);
+    Agent->AddInstanceComponent(HybridPresentation);
+    HybridPresentation->SetupAttachment(Agent->BodyMesh);
+    HybridPresentation->SetChildActorClass(PresentationClass);
+    HybridPresentation->RegisterComponent();
+    AActor* Presentation = HybridPresentation->GetChildActor();
+    if (!IsValid(Presentation))
+    {
+        Fail(TEXT("Could not create presentation actor."));
+        return;
+    }
+    Presentation->SetActorEnableCollision(false);
+    TArray<USkeletalMeshComponent*> Meshes;
+    Presentation->GetComponents<USkeletalMeshComponent>(Meshes);
+    USkeletalMeshComponent* Bridge = nullptr;
+    USkeletalMeshComponent* Face = nullptr;
+    for (USkeletalMeshComponent* Mesh : Meshes)
+    {
+        if (Mesh->GetFName() == P.MetaHumanBodyComponentName) Bridge = Mesh;
+        if (Mesh->GetFName() == P.MetaHumanFaceComponentName) Face = Mesh;
+    }
+    if (!Bridge || !Face || Bridge == Face || !Bridge->GetSkeletalMeshAsset() ||
+        !Face->GetSkeletalMeshAsset() || !Face->IsAttachedTo(Bridge))
+    {
+        Fail(TEXT("Body/Face component names, meshes or Face-under-Body hierarchy are invalid."));
+        return;
+    }
+    // Keep the original face hierarchy, DNA, post-process graph, bindings and LODSync.
+    // The invisible MH body is the animation bridge; no socket applies head motion twice.
+    Bridge->AttachToComponent(Agent->BodyMesh, FAttachmentTransformRules::KeepRelativeTransform);
+    Bridge->SetRelativeTransform(P.MetaHumanBodyAlignment);
+    Bridge->SetLeaderPoseComponent(nullptr);
+    Bridge->SetAnimInstanceClass(RetargetClass);
+    if (!Bridge->GetAnimInstance())
+    {
+        Fail(TEXT("Retarget AnimBP could not initialize on the MetaHuman body."));
+        return;
+    }
+    Bridge->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+    Bridge->bEnableUpdateRateOptimizations = false;
+    Bridge->AddTickPrerequisiteComponent(Agent->BodyMesh);
+    Face->AddTickPrerequisiteComponent(Bridge);
+    TArray<UPrimitiveComponent*> Primitives;
+    Presentation->GetComponents<UPrimitiveComponent>(Primitives);
+    for (UPrimitiveComponent* Part : Primitives)
+    {
+        Part->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        Part->SetGenerateOverlapEvents(false);
+        if (Part != Face && !Part->IsAttachedTo(Face))
+        {
+            Part->SetVisibility(false, false);
+            Part->SetHiddenInGame(true, false);
+        }
+    }
+    Face->SetVisibility(true, false);
+    Face->SetHiddenInGame(false, false);
+    Face->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+    Face->bEnableUpdateRateOptimizations = false;
+    HybridSource = Agent->BodyMesh;
+    SavedHybridSourceTickPolicy = static_cast<uint8>(HybridSource->VisibilityBasedAnimTickOption);
+    bSavedHybridSourceURO = HybridSource->bEnableUpdateRateOptimizations;
+    HybridSource->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+    HybridSource->bEnableUpdateRateOptimizations = false;
+    for (USkeletalMeshComponent* Part : { Agent->FaceMesh.Get(), Agent->HairMesh.Get(),
+        Agent->FacialHairMesh.Get() })
+        if (IsValid(Part)) Part->SetVisibility(false, true);
+    bHybridHeadActive = true;
+    ResolvedAppearance.Diagnostics.Add(TEXT("MetaHuman hybrid active. Verify neck seam, retargeting and groom LODs in play."));
 }

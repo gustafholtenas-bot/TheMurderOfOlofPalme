@@ -1,4 +1,6 @@
 #include "STMOPVehicleEditor.h"
+#include "Agents/TMOPHistoricalAgent.h"
+#include "Entities/TMOPWorldEntityComponent.h"
 #include "STMOPAppearancePreview.h"
 #include "Widgets/Input/SComboBox.h"
 #include "Widgets/Layout/SExpandableArea.h"
@@ -310,7 +312,7 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
             [ SNew(SButton).Text(LOCTEXT("Reload", "Reload"))
                 .OnClicked(this, &STMOPVehicleEditor::ReloadVehicle) ]
             + SHorizontalBox::Slot().AutoWidth().Padding(3,0)
-            [ SNew(SButton).Text(LOCTEXT("ValidateAll", "Validate All"))
+            [ SNew(SButton).Text(LOCTEXT("ValidateAll", "Check Before Play"))
                 .OnClicked(this, &STMOPVehicleEditor::ValidateAll) ]
             + SHorizontalBox::Slot().AutoWidth()
             [ SNew(SButton).Text(LOCTEXT("Save", "Save Vehicle"))
@@ -626,6 +628,13 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
                 + SVerticalBox::Slot().AutoHeight().Padding(7,2)
                 [ SNew(STextBlock).Text(LOCTEXT("Occupants", "OCCUPANTS / BOARDING FEASIBILITY"))
                     .Font(FAppStyle::GetFontStyle("HeadingExtraSmall")) ]
+                + SVerticalBox::Slot().AutoHeight().Padding(7,2)
+                [ SNew(STextBlock).Text(this, &STMOPVehicleEditor::GetLiveDriverStatusText)
+                    .AutoWrapText(true) ]
+                + SVerticalBox::Slot().AutoHeight().Padding(7,2)
+                [ SNew(STextBlock).Text(LOCTEXT("PlannedOccupantsLabel",
+                    "PLANNED OCCUPANTS — timeline prediction, not proof of actual boarding"))
+                    .AutoWrapText(true) ]
                 + SVerticalBox::Slot().AutoHeight().Padding(7,2)
                 [ SNew(STextBlock).Text_Lambda([this]()
                     { return FText::FromString(CachedOccupants); })
@@ -1634,7 +1643,7 @@ FReply STMOPVehicleEditor::ValidateAll()
     CommitEntry(); CommitVehicle();
     const UDataTable* Table = VehicleTable.Get();
     if (!Table) return FReply::Handled();
-    ValidationItems.Reset(); int32 Vehicles = 0;
+    ValidationItems.Reset(); int32 Vehicles = 0; int32 Errors = 0; int32 Warnings = 0;
     for (FName RowName : Table->GetRowNames())
     {
         const auto* Row = RowName == SelectedRowName ? &WorkingRow :
@@ -1643,6 +1652,8 @@ FReply STMOPVehicleEditor::ValidateAll()
         ++Vehicles;
         for (const FString& Message : ValidateRow(*Row))
         {
+            if (Message.StartsWith(TEXT("ERROR"))) ++Errors;
+            else if (Message.StartsWith(TEXT("WARNING"))) ++Warnings;
             auto Item = MakeShared<FValidationItem>(); Item->VehicleRow = RowName;
             Item->Message = Message + TEXT(" | ") + RowName.ToString();
             const int32 Start = Message.Find(TEXT("Timeline["));
@@ -1651,8 +1662,8 @@ FReply STMOPVehicleEditor::ValidateAll()
         }
     }
     ValidationList->RequestListRefresh();
-    SetStatus(FText::FromString(FString::Printf(TEXT("Checked %d vehicles: %d messages. Click a message to open its row."),
-        Vehicles, ValidationItems.Num())), FLinearColor(1.0f,0.7f,0.3f));
+    SetStatus(FText::FromString(FString::Printf(TEXT("PRE-PLAY: %d vehicles, %d errors, %d warnings. Click an issue for its row. Static checks only; live boarding/traffic still require a test."),
+        Vehicles, Errors, Warnings)), Errors > 0 ? FLinearColor(1,0.25f,0.15f) : FLinearColor(1.0f,0.7f,0.3f));
     return FReply::Handled();
 }
 
@@ -2298,8 +2309,57 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
             UWorld* World = GEditor ? GEditor->GetEditorWorldContext().World() : nullptr;
             if (TMOPVehicleRoute::Build(World, Row, Index, Plan, RouteFailure) &&
                 TMOPVehicleRoute::FindObstacle(World, Plan, FVector(202.5,90,50), Hit))
-                Results.Add(FString::Printf(TEXT("WARNING Timeline[%d]: maneuver footprint intersects '%s'. Adjust turn side, radius or via anchors and preview."),
+                Results.Add(FString::Printf(TEXT("WARNING Timeline[%d]: maneuver footprint visually intersects '%s'. Static scenery is ignored by default during authored driving; adjust the curve only if you want to avoid visual clipping."),
                     Index, *GetNameSafe(Hit.GetActor())));
+        }
+
+        // Compare intended end/start positions. A successful earlier arrival is assumed;
+        // this cannot certify that the vehicle will actually get there during play.
+        {
+            UWorld* World = GEditor ? GEditor->GetEditorWorldContext().World() : nullptr;
+            FTMOPVehicleRoutePlan CurrentPlan; FString PlanFailure;
+            if (TMOPVehicleRoute::Build(World, Row, Index, CurrentPlan, PlanFailure) &&
+                !CurrentPlan.Samples.IsEmpty())
+            {
+                TOptional<FVector> PreviousPosition;
+                for (int32 Earlier = Index - 1; Earlier >= 0; --Earlier)
+                {
+                    const auto& Prior = Row.Timeline[Earlier];
+                    if (Prior.Action == ETMOPHistoricalVehicleAction::Despawn)
+                    {
+                        Results.Add(FString::Printf(TEXT("ERROR Timeline[%d]: driving follows Despawn without a new placement/spawn. FIX: add Spawn before this route."), Index));
+                        break;
+                    }
+                    if (IsDriving(Prior.Action))
+                    {
+                        FTMOPVehicleRoutePlan PriorPlan; FString PriorFailure;
+                        if (TMOPVehicleRoute::Build(World, Row, Earlier, PriorPlan, PriorFailure))
+                            PreviousPosition = PriorPlan.Destination.GetLocation();
+                        else Results.Add(FString::Printf(TEXT("WARNING Timeline[%d]: previous route [%d] is invalid; start continuity is unverified. FIX: repair that earlier route first."), Index, Earlier));
+                        break;
+                    }
+                    if (HasPlacement(Prior.Action))
+                    {
+                        if (Prior.PlacementMode == ETMOPHistoricalVehiclePlacementMode::WorldTransform)
+                            PreviousPosition = Prior.WorldTransform.GetLocation();
+                        else if (World)
+                            for (TActorIterator<ATMOPHistoricalAnchor> It(World); It; ++It)
+                                if (It->GetAnchorId() == Prior.PlacementAnchorId)
+                                {
+                                    PreviousPosition = (Prior.AnchorLocalOffset * FTransform(
+                                        It->GetAnchorRotation(), It->GetAnchorLocation())).GetLocation();
+                                    break;
+                                }
+                        break;
+                    }
+                }
+                if (PreviousPosition.IsSet())
+                {
+                    const double Gap = FVector::Distance(PreviousPosition.GetValue(), CurrentPlan.Samples[0].GetLocation());
+                    if (Gap > 300.0)
+                        Results.Add(FString::Printf(TEXT("ERROR Timeline[%d]: planned start is %.2f m from the previous endpoint/placement; runtime rejects starts beyond 3 m. FIX: align the start anchor and offsets, or add a connecting maneuver."), Index, Gap / 100.0));
+                }
+            }
         }
 
         if (!PeopleTable.IsValid())
@@ -2334,6 +2394,17 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                 int32 PersonSecond = INDEX_NONE;
                 if (!ResolvePersonTime(*Person, PersonIndex, PersonSecond))
                     continue;
+                if (PersonSecond <= Departure)
+                {
+                    if (PersonEntry.Action == ETMOPPersonTimelineAction::Despawn)
+                    { bInside = false; SeatId = NAME_None; continue; }
+                    if (PersonEntry.Action == ETMOPPersonTimelineAction::ExitVehicle)
+                    { bInside = false; SeatId = NAME_None; }
+                    else if ((PersonEntry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
+                              PersonEntry.LocationType == ETMOPPersonLocationType::VehicleSeat) &&
+                             PersonEntry.TargetEntityId != Row.VehicleId)
+                    { bInside = false; SeatId = NAME_None; }
+                }
                 if (PersonEntry.TargetEntityId != Row.VehicleId) continue;
                 if (PersonEntry.Action == ETMOPPersonTimelineAction::EnterVehicle)
                 {
@@ -2455,6 +2526,26 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                     Index, *PassengerId.ToString(), Entry.bWaitForListedOccupants
                         ? TEXT("; this route waits for that person") : TEXT("")));
     }
+    for (FString& Issue : Results)
+    {
+        if (Issue.Contains(TEXT("FIX:"))) continue;
+        if (Issue.Contains(TEXT("driver"), ESearchCase::IgnoreCase) || Issue.Contains(TEXT("FRONT_LEFT")))
+            Issue += TEXT(" FIX: check Driver Entity Id, enable the person, and set Enter Vehicle to this Vehicle Id / FRONT_LEFT before departure; check later Exit Vehicle or Despawn rows.");
+        else if (Issue.Contains(TEXT("boarding"), ESearchCase::IgnoreCase) || Issue.Contains(TEXT("seated")) || Issue.Contains(TEXT("seat '")))
+            Issue += TEXT(" FIX: inspect the person's Enter/Exit Vehicle target, seat and timing; allow enough travel time and avoid duplicate seat assignments.");
+        else if (Issue.Contains(TEXT("maneuver footprint")))
+            Issue += TEXT(" FIX (visual only with Ignore Static Scenery enabled): adjust the curve or accept the scenery overlap. This approximate check does not certify dynamic obstacle clearance.");
+        else if (Issue.Contains(TEXT("anchor"), ESearchCase::IgnoreCase))
+            Issue += TEXT(" FIX: verify the Anchor ID in the open level (not only its Outliner label), select it again, and recalculate the route. Check stop and route-end offsets.");
+        else if (Issue.Contains(TEXT("lane"), ESearchCase::IgnoreCase))
+            Issue += TEXT(" FIX: select valid lanes in the correct direction, check their allowed connectors, then recalculate the route.");
+        else if (Issue.Contains(TEXT("speed"), ESearchCase::IgnoreCase))
+            Issue += TEXT(" FIX: allow more travel time or shorten the route; check for an unintended detour.");
+        else if (Issue.Contains(TEXT("time"), ESearchCase::IgnoreCase) || Issue.Contains(TEXT("arrival"), ESearchCase::IgnoreCase) || Issue.Contains(TEXT("departure"), ESearchCase::IgnoreCase) || Issue.Contains(TEXT("overlap")))
+            Issue += TEXT(" FIX: check departure, arrival, relative offsets and shared events. The next drive must not start before the previous action completes.");
+        else if (Issue.Contains(TEXT("Entry ID")))
+            Issue += TEXT(" FIX: give this timeline row a non-empty unique Entry ID.");
+    }
     return Results;
 }
 
@@ -2518,6 +2609,45 @@ void STMOPVehicleEditor::RebuildRoutePreview()
         Start, End, Placement);
     RouteMap->SetPlan(PreviewPlan);
     SetPreviewAlpha(PreviewAlpha);
+}
+
+FText STMOPVehicleEditor::GetLiveDriverStatusText() const
+{
+    if (SelectedRowName.IsNone())
+        return LOCTEXT("DriverSelectVehicle", "DRIVER CHECK: select a vehicle.");
+    const FTMOPHistoricalVehicleTimelineEntry EmptyEntry;
+    const auto& Entry = WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)
+        ? WorkingRow.Timeline[SelectedTimelineIndex] : EmptyEntry;
+    const FName Expected = TMOPVehicleRoute::Driver(WorkingRow, Entry);
+    if (Expected.IsNone())
+        return LOCTEXT("DriverNotSpecified", "DRIVER CHECK: no expected driver specified for this row/vehicle.");
+    UWorld* PlayWorld = GEditor ? GEditor->PlayWorld : nullptr;
+    if (!PlayWorld)
+        return FText::FromString(FString::Printf(TEXT(
+            "DRIVER CHECK: expected %s. Actual seating is NOT VERIFIED. Run Play/Simulate; the list below is a timeline prediction."),
+            *Expected.ToString()));
+    ATMOPVehicleBase* Vehicle = nullptr;
+    for (TActorIterator<ATMOPHistoricalVehicleDirector> It(PlayWorld); It; ++It)
+    {
+        Vehicle = It->FindHistoricalVehicle(WorkingRow.VehicleId);
+        if (IsValid(Vehicle)) break;
+    }
+    if (!IsValid(Vehicle))
+        return LOCTEXT("DriverVehicleAbsent", "LIVE NOW: vehicle is not spawned/found. Driver seating cannot be checked.");
+    ATMOPHistoricalAgent* Driver = Vehicle->GetDriverAgent();
+    if (!IsValid(Driver))
+        return FText::FromString(FString::Printf(TEXT(
+            "LIVE NOW: DRIVER SEAT EMPTY — expected %s. The route cannot start in this state."), *Expected.ToString()));
+    if (!IsValid(Driver->EntityIdentity) || Driver->EntityIdentity->EntityId.IsNone())
+        return LOCTEXT("DriverIdentityUnknown", "LIVE NOW: driver seat occupied, but the occupant has no valid EntityId. Driver match cannot be verified.");
+    const FName Actual = Driver->EntityIdentity->EntityId;
+    if (Actual == Expected)
+        return FText::FromString(FString::Printf(
+            TEXT("LIVE NOW: MATCH — %s is registered in the driver seat. This checks the current play time, not a future departure or route clearance."),
+            *Actual.ToString()));
+    return FText::FromString(FString::Printf(
+        TEXT("LIVE NOW: WRONG DRIVER — seated %s; expected %s for the selected row."),
+        *Actual.ToString(), *Expected.ToString()));
 }
 
 FString STMOPVehicleEditor::BuildOccupantsText(const int32 TimelineIndex)const
@@ -3193,7 +3323,7 @@ void STMOPVehicleEditor::RefreshValidationItems()
     if (ValidationItems.IsEmpty())
     {
         auto Item = MakeShared<FValidationItem>(); Item->VehicleRow = SelectedRowName;
-        Item->Message = TEXT("No errors detected in this vehicle."); ValidationItems.Add(Item);
+        Item->Message = TEXT("No static issues detected. Actual boarding and collision-free execution are NOT verified; run a validation test."); ValidationItems.Add(Item);
     }
     if (ValidationList.IsValid()) ValidationList->RequestListRefresh();
 }

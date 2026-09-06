@@ -508,6 +508,12 @@ protected:
         ETMOPAgentActivityState NewActivity);
 
 private:
+    void UpdateTimelinePriority();
+    bool bTimelinePriorityApplied = false;
+    TEnumAsByte<ECollisionResponse> PrioritySavedPawnResponse = ECR_Block;
+    TEnumAsByte<ECollisionResponse> PrioritySavedVehicleResponse = ECR_Block;
+    bool bPrioritySavedRVO = false;
+
     void UpdateVisibilityFade(float DeltaSeconds);
     void ApplyVisibilityFade(float Alpha);
     void RefreshVisibilityFadeMeshes(bool bForceAll);

@@ -227,6 +227,7 @@ private:
     bool ResolvePersonTime(const FTMOPPersonProfileRow& Person,
         int32 Index, int32& OutSecond) const;
     FString BuildOccupantsText(int32 TimelineIndex) const;
+    FText GetLiveDriverStatusText() const;
     FText GetTitle() const;
     FText GetSubtitle() const;
     FText GetValidationText() const;
