@@ -1,5 +1,4 @@
 #include "STMOPVehicleEditor.h"
-#include "Containers/Ticker.h"
 #include "STMOPAppearancePreview.h"
 #include "Widgets/Input/SComboBox.h"
 #include "Widgets/Layout/SExpandableArea.h"
@@ -12,7 +11,7 @@
 #include "Engine/DataTable.h"
 #include "EngineUtils.h"
 #include "Events/TMOPHistoricalEventTypes.h"
-#include "IStructureDetailsView.h"
+#include "TMOPVehicleEditorObjects.h"
 #include "IDetailsView.h"
 #include "FileHelpers.h"
 #include "ScopedTransaction.h"
@@ -222,7 +221,12 @@ public:
             const FVector2D Right(-Forward.Y, Forward.X);
             TArray<FVector2D> Arrow = { Center - Forward * 8.0 + Right * 6.0,
                 Center + Forward * 12.0, Center - Forward * 8.0 - Right * 6.0 };
-            if (bCar) Arrow.Add(Arrow[0]);
+            if (bCar)
+            {
+                // Add must not receive a reference into the array being modified.
+                const FVector2D ClosingPoint = Arrow[0];
+                Arrow.Add(ClosingPoint);
+            }
             Line(Arrow, Color, bCar ? 3.0f : 2.0f);
             if (!Name.IsEmpty()) Label(Center + FVector2D(12,12), Name, Color);
         };
@@ -263,25 +267,27 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
     DetailsArgs.bLockable = false;
     DetailsArgs.bUpdatesFromSelection = false;
     DetailsArgs.NameAreaSettings = FDetailsViewArgs::HideNameArea;
-    FStructureDetailsViewArgs StructureArgs;
-    StructureArgs.bShowObjects = false;
-    StructureArgs.bShowAssets = true;
-    StructureArgs.bShowClasses = true;
-    StructureArgs.bShowInterfaces = false;
     FPropertyEditorModule& PropertyEditor =
-        FModuleManager::LoadModuleChecked<FPropertyEditorModule>(
-            TEXT("PropertyEditor"));
-    VehicleDetails = PropertyEditor.CreateStructureDetailView(
-        DetailsArgs, StructureArgs, nullptr);
-    EntryDetails = PropertyEditor.CreateStructureDetailView(
-        DetailsArgs, StructureArgs, nullptr);
-    AccessoryDetails = PropertyEditor.CreateStructureDetailView(DetailsArgs, StructureArgs, nullptr);
-    AccessoryDetails->GetOnFinishedChangingPropertiesDelegate().AddSP(this,
+        FModuleManager::LoadModuleChecked<FPropertyEditorModule>(TEXT("PropertyEditor"));
+    VehicleDetails = PropertyEditor.CreateDetailView(DetailsArgs);
+    EntryDetails = PropertyEditor.CreateDetailView(DetailsArgs);
+    AccessoryDetails = PropertyEditor.CreateDetailView(DetailsArgs);
+    const auto CanEdit = TAttribute<bool>::Create(
+        TAttribute<bool>::FGetter::CreateSP(this, &STMOPVehicleEditor::CanEditDetails));
+    VehicleDetails->SetEnabled(CanEdit);
+    EntryDetails->SetEnabled(CanEdit);
+    AccessoryDetails->SetEnabled(CanEdit);
+    VehicleDetails->SetIsPropertyVisibleDelegate(
+        FIsPropertyVisible::CreateLambda([](const FPropertyAndParent& Property)
+        {
+            return Property.Property.GetFName() !=
+                GET_MEMBER_NAME_CHECKED(FTMOPHistoricalVehicleRow, Timeline);
+        }));
+    AccessoryDetails->OnFinishedChangingProperties().AddSP(this,
         &STMOPVehicleEditor::OnAccessoryDetailsChanged);
-
-    EntryDetails->GetOnFinishedChangingPropertiesDelegate().AddSP(
+    EntryDetails->OnFinishedChangingProperties().AddSP(
         this, &STMOPVehicleEditor::OnDetailsChanged, false);
-    VehicleDetails->GetOnFinishedChangingPropertiesDelegate().AddSP(
+    VehicleDetails->OnFinishedChangingProperties().AddSP(
         this, &STMOPVehicleEditor::OnDetailsChanged, true);
 
     ChildSlot
@@ -604,10 +610,10 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
                         .BodyContent()[BuildAccessoryControls()]
                     ]
                     + SVerticalBox::Slot().FillHeight(1)
-                    [ SNew(SBorder).Padding(5)[VehicleDetails->GetWidget().ToSharedRef()] ]
+                    [ SNew(SBorder).Padding(5)[VehicleDetails.ToSharedRef()] ]
                 ]
                 + SSplitter::Slot().Value(0.34f)
-                [ SNew(SBorder).Padding(5)[EntryDetails->GetWidget().ToSharedRef()] ]
+                [ SNew(SBorder).Padding(5)[EntryDetails.ToSharedRef()] ]
             ]
         ]
         + SVerticalBox::Slot().AutoHeight().Padding(8,4)
@@ -618,7 +624,13 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
             [this](const FName LaneId, const bool bStart,
                 const bool bDestination, const bool bVia)
             { HandleMapLaneClicked(LaneId, bStart, bDestination, bVia); });
-    LoadTables();
+    if (IsValid(Args._VehicleTableOverride))
+    {
+        VehicleTable = Args._VehicleTableOverride;
+        RefreshVehicles();
+    }
+    else LoadTables();
+    UE_LOG(LogTemp, Display, TEXT("TMOP Vehicle Editor: route marker and selection fix 2026-09-06 r4"));
     LastRuntimeValidationRevision =
         TMOPRuntimeValidation::GetLatestReportRevision();
     RegisterActiveTimer(
@@ -703,50 +715,35 @@ void STMOPVehicleEditor::SelectVehicle(const FName RowName)
 {
     if (bChangingSelection) return;
     TGuardValue<bool> SelectionGuard(bChangingSelection, true);
-    if (!ConfirmDiscardOrSave())
-    {
-        for (const auto& Item : VehicleItems)
-            if (Item.IsValid() && *Item == SelectedRowName)
-            { VehicleList->SetSelection(Item, ESelectInfo::Direct); break; }
-        return;
-    }
+    SyncVehicleListSelection();
+    if (!ConfirmDiscardOrSave()) return;
     CommitEntry(); CommitVehicle();
     const UDataTable* Table = VehicleTable.Get();
     const FTMOPHistoricalVehicleRow* Row = IsValid(Table) ? Table->FindRow<FTMOPHistoricalVehicleRow>(RowName, TEXT("VehicleEditorSelect"), false) : nullptr;
     if (!Row) return;
-    // Detach property nodes while their old backing structs are still alive.
-    // Selection also rebuilds nested timeline/accessory arrays and the preview.
-    TGuardValue<bool> DetailsGuard(bSynchronizingDetails, true);
-    QueueStructureData(VehicleDetails, nullptr);
-    QueueStructureData(EntryDetails, nullptr);
-    {
-        TGuardValue<bool> AccessoryGuard(bRefreshingAccessories, true);
-        QueueStructureData(AccessoryDetails, nullptr);
-    }
+    UE_LOG(LogTemp, Log, TEXT("TMOP Vehicle Editor select: row=%s vehicle=%s entries=%d"),
+        *RowName.ToString(), *Row->VehicleId.ToString(), Row->Timeline.Num());
     SelectedRowName=RowName; WorkingRow=*Row; SavedRow=*Row; SelectedTimelineIndex=INDEX_NONE;
-    VehicleStruct=MakeShared<FStructOnScope>(FTMOPHistoricalVehicleRow::StaticStruct());
-    *reinterpret_cast<FTMOPHistoricalVehicleRow*>(VehicleStruct->GetStructMemory())=WorkingRow;
-    QueueStructureData(VehicleDetails, VehicleStruct);
-    EntryStruct.Reset(); QueueStructureData(EntryDetails, nullptr); RefreshTimeline();
-    if (!WorkingRow.Timeline.IsEmpty()) SelectTimelineEntry(0);
     SelectedAccessoryIndex = INDEX_NONE;
+    SyncDetailsFromWorking();
     RefreshAppearancePreview();
+    RefreshTimeline();
+    if (!WorkingRow.Timeline.IsEmpty()) SelectTimelineEntry(0);
     RefreshAccessoryChoices();
+    SyncVehicleListSelection();
 }
 
 void STMOPVehicleEditor::SelectTimelineEntry(const int32 Index)
 {
     CommitEntry();
     if (!WorkingRow.Timeline.IsValidIndex(Index)) return;
-    TGuardValue<bool> DetailsGuard(bSynchronizingDetails, true);
-    QueueStructureData(EntryDetails, nullptr);
     bPreviewPlaying = false;
     PreviewAlpha = 0.0f;
     if (RouteMap.IsValid()) RouteMap->Fit();
     SelectedTimelineIndex=Index;
-    EntryStruct=MakeShared<FStructOnScope>(FTMOPHistoricalVehicleTimelineEntry::StaticStruct());
-    *reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(EntryStruct->GetStructMemory())=WorkingRow.Timeline[Index];
-    QueueStructureData(EntryDetails, EntryStruct); RebuildValidation(); RebuildRoutePreview();
+    SyncDetailsFromWorking();
+    RebuildValidation();
+    RebuildRoutePreview();
 }
 
 void STMOPVehicleEditor::RefreshAnchorOptions()
@@ -847,8 +844,8 @@ void STMOPVehicleEditor::OnAnchorSelected(
             EntryStruct->GetStructMemory());
     Entry->PlacementMode = ETMOPHistoricalVehiclePlacementMode::Anchor;
     Entry->PlacementAnchorId = *Id;
-    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
+    SyncDetailsFromWorking();
     RebuildValidation();
     RebuildRoutePreview();
     SetStatus(FText::FromString(TEXT("Selected anchor: ") + Id->ToString()),
@@ -886,8 +883,8 @@ void STMOPVehicleEditor::OnEventSelected(
             EntryStruct->GetStructMemory());
     Entry->TimingMode = ETMOPEventTimingMode::Relative;
     Entry->SharedEventId = *EventId;
-    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
+    SyncDetailsFromWorking();
     RebuildValidation();
     RebuildRoutePreview();
     SetStatus(FText::FromString(TEXT("Selected shared event: ") +
@@ -919,8 +916,8 @@ void STMOPVehicleEditor::OnDepartureEventSelected(
     Entry->bUseExplicitDepartureTime = true;
     Entry->DepartureTimingMode = ETMOPEventTimingMode::Relative;
     Entry->DepartureSharedEventId = *EventId;
-    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
+    SyncDetailsFromWorking();
     RebuildValidation();
     RebuildRoutePreview();
     SetStatus(FText::FromString(TEXT("Selected departure shared event: ") +
@@ -988,8 +985,8 @@ void STMOPVehicleEditor::OnRouteReferenceSelected(
         Entry->RouteViaLaneIds.AddUnique(*Id);
         break;
     }
-    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
+    SyncDetailsFromWorking();
     FString Failure;
     if (RecalculateSelectedRoute(Failure))
         SetStatus(LOCTEXT("RouteRecalculated", "Route recalculated and map updated."),
@@ -1059,7 +1056,8 @@ FReply STMOPVehicleEditor::ClearViaPoints()
         EntryStruct->GetStructMemory());
     Entry->RouteViaAnchorIds.Reset();
     Entry->RouteViaLaneIds.Reset();
-    QueueStructureData(EntryDetails, EntryStruct);
+    CommitEntry();
+    SyncDetailsFromWorking();
     return RecalculateRoute();
 }
 
@@ -1105,8 +1103,8 @@ void STMOPVehicleEditor::HandleMapLaneClicked(const FName LaneId,
             *LaneId.ToString())), FLinearColor(.55f, .8f, 1.0f));
         return;
     }
-    QueueStructureData(EntryDetails, EntryStruct);
     CommitEntry();
+    SyncDetailsFromWorking();
     FString Failure;
     if (RecalculateSelectedRoute(Failure))
         SetStatus(FText::FromString(FString::Printf(
@@ -1257,7 +1255,10 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateTimelineRow(const FTimelineIte
         +SVerticalBox::Slot().AutoHeight().Padding(22,2,0,0)[SNew(SBorder).Visibility(bShowArrivalBadge?EVisibility::Visible:EVisibility::Collapsed).Padding(FMargin(5,1)).BorderImage(FAppStyle::GetBrush("Brushes.Panel")).BorderBackgroundColor(ArrivalColor).ToolTipText(ArrivalToolTip)[SNew(STextBlock).Text(ArrivalText).Font(FAppStyle::GetFontStyle("SmallFont")).ColorAndOpacity(FLinearColor::White)]]]];
 }
 
-void STMOPVehicleEditor::OnVehicleSelected(FVehicleItem I,ESelectInfo::Type){if(I.IsValid())SelectVehicle(*I);} void STMOPVehicleEditor::OnTimelineSelected(FTimelineItem I,ESelectInfo::Type){if(I.IsValid())SelectTimelineEntry(*I);} void STMOPVehicleEditor::OnSearchChanged(const FText& T){Search=T.ToString();RefreshVehicles();}
+void STMOPVehicleEditor::OnVehicleSelected(FVehicleItem Item, ESelectInfo::Type)
+{
+    if (Item.IsValid() && *Item != SelectedRowName) SelectVehicle(*Item);
+} void STMOPVehicleEditor::OnTimelineSelected(FTimelineItem I,ESelectInfo::Type){if(I.IsValid())SelectTimelineEntry(*I);} void STMOPVehicleEditor::OnSearchChanged(const FText& T){Search=T.ToString();RefreshVehicles();}
 
 ECheckBoxState STMOPVehicleEditor::GetVehicleFilterCheckState(
     const EVehicleListFilter Filter) const
@@ -1302,9 +1303,9 @@ bool STMOPVehicleEditor::PassesVehicleFilter(
     }
 }
 
-FReply STMOPVehicleEditor::AddEntry(){CommitEntry();FTMOPHistoricalVehicleTimelineEntry E;E.EntryId=TMOPVehicleRoute::UniqueEntryId(WorkingRow, WorkingRow.VehicleId.ToString()+TEXT("_ENTRY"));E.bAutoStartFromVehicleTimeline=true;WorkingRow.Timeline.Add(E);RefreshTimeline();SelectTimelineEntry(WorkingRow.Timeline.Num()-1);return FReply::Handled();}
+FReply STMOPVehicleEditor::AddEntry(){if(SelectedRowName.IsNone())return FReply::Handled();CommitEntry();FTMOPHistoricalVehicleTimelineEntry E;E.EntryId=TMOPVehicleRoute::UniqueEntryId(WorkingRow, WorkingRow.VehicleId.ToString()+TEXT("_ENTRY"));E.bAutoStartFromVehicleTimeline=true;WorkingRow.Timeline.Add(E);RefreshTimeline();SelectTimelineEntry(WorkingRow.Timeline.Num()-1);return FReply::Handled();}
 FReply STMOPVehicleEditor::DuplicateEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){auto E=WorkingRow.Timeline[SelectedTimelineIndex];E.EntryId=TMOPVehicleRoute::UniqueEntryId(WorkingRow, E.EntryId.ToString()+TEXT("_COPY"));WorkingRow.Timeline.Insert(E,SelectedTimelineIndex+1);RefreshTimeline();SelectTimelineEntry(SelectedTimelineIndex+1);}return FReply::Handled();}
-FReply STMOPVehicleEditor::DeleteEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){WorkingRow.Timeline.RemoveAt(SelectedTimelineIndex);SelectedTimelineIndex=INDEX_NONE;EntryStruct.Reset();QueueStructureData(EntryDetails, nullptr);RefreshTimeline();}return FReply::Handled();}
+FReply STMOPVehicleEditor::DeleteEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){WorkingRow.Timeline.RemoveAt(SelectedTimelineIndex);SelectedTimelineIndex=INDEX_NONE;EntryStruct.Reset();RefreshTimeline();}return FReply::Handled();}
 FReply STMOPVehicleEditor::MoveEntry(const int32 D){CommitEntry();const int32 N=SelectedTimelineIndex+D;if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)&&WorkingRow.Timeline.IsValidIndex(N)){WorkingRow.Timeline.Swap(SelectedTimelineIndex,N);SelectedTimelineIndex=INDEX_NONE;RefreshTimeline();SelectTimelineEntry(N);}return FReply::Handled();}
 
 FReply STMOPVehicleEditor::SaveVehicle()
@@ -1313,6 +1314,11 @@ FReply STMOPVehicleEditor::SaveVehicle()
     CommitVehicle();
     UDataTable* Table = VehicleTable.Get();
     if (!IsValid(Table) || SelectedRowName.IsNone()) return FReply::Handled();
+    if (!Table->GetRowMap().Contains(SelectedRowName))
+    {
+        SetStatus(LOCTEXT("VehicleRemovedBeforeSave", "The selected row no longer exists. Reload the table before saving."), FLinearColor::Red);
+        return FReply::Handled();
+    }
 
     CurrentErrors = ValidateRow(WorkingRow);
     const FString* BlockingError = CurrentErrors.FindByPredicate(
@@ -1344,8 +1350,14 @@ FReply STMOPVehicleEditor::SaveVehicle()
     }
 
     const FName PreviousRowName = SelectedRowName;
-    const FTMOPHistoricalVehicleRow PreviousTableRow =
-        *Table->FindRow<FTMOPHistoricalVehicleRow>(SelectedRowName, TEXT("SaveBackup"), false);
+    const FTMOPHistoricalVehicleRow* ExistingRow =
+        Table->FindRow<FTMOPHistoricalVehicleRow>(SelectedRowName, TEXT("SaveBackup"), false);
+    if (!ExistingRow)
+    {
+        SetStatus(LOCTEXT("VehicleRemovedBeforeSave", "The selected row no longer exists. Reload the table before saving."), FLinearColor::Red);
+        return FReply::Handled();
+    }
+    const FTMOPHistoricalVehicleRow PreviousTableRow = *ExistingRow;
     const FScopedTransaction SaveTransaction(LOCTEXT("SaveVehicleTransaction", "Edit vehicle timeline"));
     Table->Modify();
     if (NewRowName != SelectedRowName)
@@ -2209,7 +2221,7 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
 
 void STMOPVehicleEditor::RebuildValidation()
 {
-    CommitEntry(); CommitVehicle();
+    // Validation must not commit stale buffers during a selection/command refresh.
     CachedFingerprints.Reset();
     CurrentErrors = ValidateRow(WorkingRow);
     CachedDrivingSummary = BuildDrivingSummary();
@@ -2389,7 +2401,12 @@ FString STMOPVehicleEditor::BuildOccupantsText(const int32 TimelineIndex)const
         : FString::Join(Lines, TEXT("\n"));
 }
 
-FText STMOPVehicleEditor::GetTitle()const{return SelectedRowName.IsNone()?LOCTEXT("Title","TMOP Vehicle Editor"):(!WorkingRow.DisplayName.IsEmpty()?WorkingRow.DisplayName:FText::FromName(WorkingRow.VehicleId));}
+FText STMOPVehicleEditor::GetTitle() const
+{
+    const FText Name = SelectedRowName.IsNone() ? LOCTEXT("Title", "TMOP Vehicle Editor")
+        : (!WorkingRow.DisplayName.IsEmpty() ? WorkingRow.DisplayName : FText::FromName(WorkingRow.VehicleId));
+    return FText::Format(LOCTEXT("VehicleEditorR4Title", "{0} [R4]"), Name);
+}
 FText STMOPVehicleEditor::GetSubtitle()const{return FText::FromString(WorkingRow.VehicleId.ToString()+FString::Printf(TEXT(" • %d timeline entries%s"),WorkingRow.Timeline.Num(), FTMOPHistoricalVehicleRow::StaticStruct()->CompareScriptStruct(&WorkingRow,&SavedRow,0)?TEXT(""):TEXT(" • UNSAVED")));}
 FText STMOPVehicleEditor::GetValidationText()const{return CurrentErrors.IsEmpty()?LOCTEXT("NoErrors","No errors detected."):FText::FromString(FString::Join(CurrentErrors,TEXT("\n")));}
 void STMOPVehicleEditor::SetStatus(const FText&Text,const FLinearColor&Color){if(StatusText.IsValid()){StatusText->SetText(Text);StatusText->SetColorAndOpacity(Color);}}
@@ -2408,9 +2425,15 @@ bool STMOPVehicleEditor::HasUnsavedChanges()
 }
 bool STMOPVehicleEditor::ConfirmDiscardOrSave()
 {
+    if (bConfirmingUnsavedChanges) return false;
+    TGuardValue<bool> DialogGuard(bConfirmingUnsavedChanges, true);
     if (!HasUnsavedChanges()) return true;
+    bPreviewPlaying = false;
+    RefreshAppearancePreview();
     const EAppReturnType::Type Choice = FMessageDialog::Open(EAppMsgType::YesNoCancel,
-        LOCTEXT("UnsavedVehicle", "This vehicle has unsaved changes.\nYes: save to disk\nNo: discard changes\nCancel: keep editing"));
+        FText::Format(LOCTEXT("UnsavedNamedVehicle",
+            "{0}\nRow: {1}\n\nThis vehicle has unsaved changes.\nYes: save to disk\nNo: discard changes\nCancel: keep editing"),
+            GetTitle(), FText::FromName(SelectedRowName)));
     if (Choice == EAppReturnType::Cancel) return false;
     if (Choice == EAppReturnType::Yes) { SaveVehicle(); return !HasUnsavedChanges(); }
     WorkingRow = SavedRow; SyncDetailsFromWorking();
@@ -2422,84 +2445,58 @@ bool STMOPVehicleEditor::CanClose()
     if (bClose) bPreviewPlaying = false;
     return bClose;
 }
-void STMOPVehicleEditor::QueueStructureData(
-    const TSharedPtr<IStructureDetailsView>& View,
-    const TSharedPtr<FStructOnScope>& Data)
-{
-    if (!View.IsValid()) return;
-    FPendingStructureUpdate* Pending = PendingStructureUpdates.FindByPredicate(
-        [&View](const FPendingStructureUpdate& Item) { return Item.View == View; });
-    if (Pending) Pending->Data = Data;
-    else PendingStructureUpdates.Add({View, Data});
-    if (bStructureUpdateQueued) return;
-    bStructureUpdateQueued = true;
-    // CreateSP is weak: closing the editor cancels execution on this widget.
-    FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateSP(
-        this, &STMOPVehicleEditor::FlushStructureData));
-}
-
-bool STMOPVehicleEditor::FlushStructureData(float)
-{
-    TGuardValue<bool> DetailsGuard(bSynchronizingDetails, true);
-    TGuardValue<bool> AccessoryGuard(bRefreshingAccessories, true);
-    auto Updates = MoveTemp(PendingStructureUpdates);
-    PendingStructureUpdates.Reset();
-    // Keep the old backing allocations alive until every affected tree is detached.
-    const auto PreviousStructures = DisplayedStructures;
-    for (const auto& Update : Updates) Update.View->SetStructureData(nullptr);
-    for (const auto& Update : Updates)
-    {
-        DisplayedStructures.RemoveAll([&Update](const FPendingStructureUpdate& Item)
-            { return Item.View == Update.View; });
-        Update.View->SetStructureData(Update.Data);
-        DisplayedStructures.Add(Update);
-    }
-    bStructureUpdateQueued = false;
-    return false;
-}
-
 void STMOPVehicleEditor::SyncDetailsFromWorking()
 {
-    TGuardValue<bool> Guard(bSynchronizingDetails, true);
-    // Never replace nested arrays in memory still referenced by a details tree.
-    if (VehicleStruct.IsValid())
+    // Unbound command buffers; PropertyEditor only receives the UObjects below.
+    if (!SelectedRowName.IsNone())
     {
-        auto Fresh = MakeShared<FStructOnScope>(FTMOPHistoricalVehicleRow::StaticStruct());
-        *reinterpret_cast<FTMOPHistoricalVehicleRow*>(Fresh->GetStructMemory()) = WorkingRow;
-        VehicleStruct = Fresh;
-        QueueStructureData(VehicleDetails, VehicleStruct);
+        auto Next = MakeShared<FStructOnScope>(FTMOPHistoricalVehicleRow::StaticStruct());
+        auto* Data = reinterpret_cast<FTMOPHistoricalVehicleRow*>(Next->GetStructMemory());
+        *Data = WorkingRow;
+        Data->Timeline.Reset();
+        VehicleStruct = Next;
     }
-    if (EntryStruct.IsValid() && WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
+    else VehicleStruct.Reset();
+    if (WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
     {
-        auto Fresh = MakeShared<FStructOnScope>(FTMOPHistoricalVehicleTimelineEntry::StaticStruct());
-        *reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(Fresh->GetStructMemory()) =
+        auto Next = MakeShared<FStructOnScope>(FTMOPHistoricalVehicleTimelineEntry::StaticStruct());
+        *reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(Next->GetStructMemory()) =
             WorkingRow.Timeline[SelectedTimelineIndex];
-        EntryStruct = Fresh;
-        QueueStructureData(EntryDetails, EntryStruct);
+        EntryStruct = Next;
     }
+    else EntryStruct.Reset();
+    QueueDetailsRefresh();
 }
 void STMOPVehicleEditor::OnDetailsChanged(const FPropertyChangedEvent& Event, bool bVehicleDetails)
 {
-    if (bSynchronizingDetails || bStructureUpdateQueued) return;
-    if (bVehicleDetails && Event.MemberProperty &&
-        Event.MemberProperty->GetFName() == GET_MEMBER_NAME_CHECKED(FTMOPHistoricalVehicleRow, Timeline) &&
-        VehicleStruct.IsValid())
+    if (bSynchronizingDetails || SelectedRowName.IsNone()) return;
+    UObject* EditedObject = bVehicleDetails
+        ? static_cast<UObject*>(VehicleDetailsObject.Get())
+        : static_cast<UObject*>(EntryDetailsObject.Get());
+    if (!EditedObject) return;
+    const UObject* EventObject = Event.GetObjectBeingEdited(0);
+    if (EventObject && EventObject != EditedObject) return;
+    if (bPendingDetailsRefresh && PendingEditedObject.Get() != EditedObject) return;
+    if (Event.ChangeType & EPropertyChangeType::Interactive) return;
+    CommitEntry();
+    if (bVehicleDetails && VehicleDetailsObject)
     {
-        WorkingRow = *reinterpret_cast<FTMOPHistoricalVehicleRow*>(VehicleStruct->GetStructMemory());
-        if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
-        { SelectedTimelineIndex = INDEX_NONE; EntryStruct.Reset(); QueueStructureData(EntryDetails, nullptr); }
-        SyncDetailsFromWorking();
+        auto Details = VehicleDetailsObject->Data;
+        Details.Timeline = WorkingRow.Timeline;
+        WorkingRow = MoveTemp(Details);
     }
-    else { CommitEntry(); CommitVehicle(); }
+    else if (!bVehicleDetails && EntryDetailsObject && WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
+        WorkingRow.Timeline[SelectedTimelineIndex] = EntryDetailsObject->Data;
     bPreviewPlaying = false;
-    RefreshTimeline();
-    if (bVehicleDetails) { RefreshAppearancePreview(); RefreshAccessoryChoices(); }
+    SyncDetailsFromWorking();
+    PendingEditedObject = EditedObject;
 }
 void STMOPVehicleEditor::RefreshAppearancePreview()
 {
     if (!AppearancePreview) return;
     if (SelectedRowName.IsNone()) { AppearancePreview->Clear(TEXT("Select a vehicle.")); return; }
     AppearancePreview->ShowVehicle(WorkingRow);
+    TGuardValue<bool> Guard(bRefreshingAccessories, true);
     AccessorySockets.Reset();
     for (const FName Socket : AppearancePreview->GetSockets())
         AccessorySockets.Add(MakeShared<FString>(Socket.ToString()));
@@ -2555,7 +2552,7 @@ TSharedRef<SWidget> STMOPVehicleEditor::BuildAccessoryControls()
                     return FText::FromString(TEXT("Socket: ")+Socket.ToString());
                 }) ] ]
         + SVerticalBox::Slot().AutoHeight()
-        [ SNew(SBox).HeightOverride(210)[AccessoryDetails->GetWidget().ToSharedRef()] ];
+        [ SNew(SBox).HeightOverride(210)[AccessoryDetails.ToSharedRef()] ];
 }
 
 void STMOPVehicleEditor::RefreshAccessoryChoices()
@@ -2572,34 +2569,29 @@ void STMOPVehicleEditor::RefreshAccessoryChoices()
     SelectAccessory(MakeShared<int32>(SelectedAccessoryIndex),ESelectInfo::Direct);
 }
 
-void STMOPVehicleEditor::SelectAccessory(TSharedPtr<int32> Item,ESelectInfo::Type)
+void STMOPVehicleEditor::SelectAccessory(TSharedPtr<int32> Item, ESelectInfo::Type)
 {
-    if(bRefreshingAccessories || !Item.IsValid())return;
-    TGuardValue<bool> Guard(bRefreshingAccessories,true);
-    SelectedAccessoryIndex=*Item;
-    QueueStructureData(AccessoryDetails, nullptr);
-    if(WorkingRow.AdditionalAccessories.IsValidIndex(SelectedAccessoryIndex))
-    {
-        AccessoryStruct=MakeShared<FStructOnScope>(FTMOPVehicleAccessoryVisual::StaticStruct());
-        *reinterpret_cast<FTMOPVehicleAccessoryVisual*>(AccessoryStruct->GetStructMemory())=
-            WorkingRow.AdditionalAccessories[SelectedAccessoryIndex];
-    }
-    else
-    {
-        AccessoryStruct=MakeShared<FStructOnScope>(FTMOPRoofAccessoryVisual::StaticStruct());
-        *reinterpret_cast<FTMOPRoofAccessoryVisual*>(AccessoryStruct->GetStructMemory())=WorkingRow.RoofAccessory;
-    }
-    QueueStructureData(AccessoryDetails, AccessoryStruct);
+    if (bRefreshingAccessories || !Item.IsValid()) return;
+    TGuardValue<bool> Guard(bRefreshingAccessories, true);
+    SelectedAccessoryIndex = *Item;
+    QueueDetailsRefresh();
 }
 void STMOPVehicleEditor::OnAccessoryDetailsChanged(const FPropertyChangedEvent& Event)
 {
-    if(bRefreshingAccessories || bStructureUpdateQueued || !AccessoryStruct.IsValid() || SelectedRowName.IsNone())return;
-    CommitEntry();CommitVehicle();
-    if(WorkingRow.AdditionalAccessories.IsValidIndex(SelectedAccessoryIndex))
-        WorkingRow.AdditionalAccessories[SelectedAccessoryIndex]=
-            *reinterpret_cast<FTMOPVehicleAccessoryVisual*>(AccessoryStruct->GetStructMemory());
-    else WorkingRow.RoofAccessory=*reinterpret_cast<FTMOPRoofAccessoryVisual*>(AccessoryStruct->GetStructMemory());
-    SyncDetailsFromWorking();RefreshAppearancePreview();
+    if (bSynchronizingDetails || bRefreshingAccessories || SelectedRowName.IsNone()) return;
+    UObject* EditedObject = AccessoryDetailsObject
+        ? static_cast<UObject*>(AccessoryDetailsObject.Get()) : static_cast<UObject*>(RoofDetailsObject.Get());
+    if (!EditedObject) return;
+    const UObject* EventObject = Event.GetObjectBeingEdited(0);
+    if (EventObject && EventObject != EditedObject) return;
+    if (bPendingDetailsRefresh && PendingEditedObject.Get() != EditedObject) return;
+    if (Event.ChangeType & EPropertyChangeType::Interactive) return;
+    CommitEntry(); CommitVehicle();
+    if (AccessoryDetailsObject && WorkingRow.AdditionalAccessories.IsValidIndex(SelectedAccessoryIndex))
+        WorkingRow.AdditionalAccessories[SelectedAccessoryIndex] = AccessoryDetailsObject->Data;
+    else if (RoofDetailsObject) WorkingRow.RoofAccessory = RoofDetailsObject->Data;
+    SyncDetailsFromWorking();
+    PendingEditedObject = EditedObject;
 }
 FReply STMOPVehicleEditor::AddAccessory(ETMOPRoofAccessoryType Type)
 {
@@ -2988,6 +2980,100 @@ TSharedRef<ITableRow> STMOPVehicleEditor::GenerateValidationRow(
             .ColorAndOpacity(Item.IsValid() && Item->Message.StartsWith(TEXT("ERROR")) ?
                 FLinearColor(1,0.25f,0.15f) : FLinearColor(1,0.75f,0.3f)) ]
     ];
+}
+
+
+STMOPVehicleEditor::~STMOPVehicleEditor()
+{
+    bSynchronizingDetails = true;
+    for (const auto& View : {VehicleDetails, EntryDetails, AccessoryDetails})
+        if (View.IsValid())
+        {
+            View->OnFinishedChangingProperties().RemoveAll(this);
+            View->SetObject(nullptr);
+        }
+    VehicleStruct.Reset(); EntryStruct.Reset();
+}
+void STMOPVehicleEditor::AddReferencedObjects(FReferenceCollector& Collector)
+{
+    UDataTable* Vehicles = VehicleTable.Get();
+    UDataTable* People = PeopleTable.Get();
+    UDataTable* Events = EventTable.Get();
+    Collector.AddReferencedObject(Vehicles);
+    Collector.AddReferencedObject(People);
+    Collector.AddReferencedObject(Events);
+    Collector.AddReferencedObject(VehicleDetailsObject);
+    Collector.AddReferencedObject(EntryDetailsObject);
+    Collector.AddReferencedObject(AccessoryDetailsObject);
+    Collector.AddReferencedObject(RoofDetailsObject);
+    Collector.AddPropertyReferencesWithStructARO(FTMOPHistoricalVehicleRow::StaticStruct(), &WorkingRow, nullptr);
+    Collector.AddPropertyReferencesWithStructARO(FTMOPHistoricalVehicleRow::StaticStruct(), &SavedRow, nullptr);
+    for (const auto& Data : {VehicleStruct, EntryStruct})
+        if (Data.IsValid()) Data->AddReferencedObjects(Collector);
+}
+void STMOPVehicleEditor::SyncVehicleListSelection()
+{
+    if (!VehicleList.IsValid()) return;
+    TGuardValue<bool> SelectionGuard(bChangingSelection, true);
+    for (const auto& Item : VehicleItems)
+        if (Item.IsValid() && *Item == SelectedRowName)
+        {
+            VehicleList->SetSelection(Item, ESelectInfo::Direct);
+            return;
+        }
+    VehicleList->ClearSelection();
+}
+void STMOPVehicleEditor::QueueDetailsRefresh()
+{
+    if (bSynchronizingDetails) return;
+    PendingEditedObject.Reset();
+    if (bPendingDetailsRefresh) return;
+    bPendingDetailsRefresh = true;
+    RegisterActiveTimer(0.0f, FWidgetActiveTimerDelegate::CreateSP(
+        this, &STMOPVehicleEditor::ApplyPendingDetailsRefresh));
+}
+EActiveTimerReturnType STMOPVehicleEditor::ApplyPendingDetailsRefresh(double, float)
+{
+    // A modal loop can pump timers while the original input handler is active.
+    if (bChangingSelection || bConfirmingUnsavedChanges) return EActiveTimerReturnType::Continue;
+    TGuardValue<bool> Guard(bSynchronizingDetails, true);
+    UE_LOG(LogTemp, Log, TEXT("TMOP Vehicle Editor refresh begin: row=%s entry=%d"), *SelectedRowName.ToString(), SelectedTimelineIndex);
+    RefreshTimeline();
+    RefreshAppearancePreview();
+    RefreshAccessoryChoices();
+    VehicleDetailsObject = nullptr;
+    EntryDetailsObject = nullptr;
+    AccessoryDetailsObject = nullptr;
+    RoofDetailsObject = nullptr;
+    if (!SelectedRowName.IsNone())
+    {
+        VehicleDetailsObject = NewObject<UTMOPVehicleDetailsObject>(GetTransientPackage());
+        VehicleDetailsObject->Data = WorkingRow;
+        VehicleDetailsObject->Data.Timeline.Reset();
+        if (WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
+        {
+            EntryDetailsObject = NewObject<UTMOPVehicleEntryDetailsObject>(GetTransientPackage());
+            EntryDetailsObject->Data = WorkingRow.Timeline[SelectedTimelineIndex];
+        }
+        if (WorkingRow.AdditionalAccessories.IsValidIndex(SelectedAccessoryIndex))
+        {
+            AccessoryDetailsObject = NewObject<UTMOPVehicleAccessoryDetailsObject>(GetTransientPackage());
+            AccessoryDetailsObject->Data = WorkingRow.AdditionalAccessories[SelectedAccessoryIndex];
+        }
+        else
+        {
+            RoofDetailsObject = NewObject<UTMOPVehicleRoofDetailsObject>(GetTransientPackage());
+            RoofDetailsObject->Data = WorkingRow.RoofAccessory;
+        }
+    }
+    VehicleDetails->SetObject(VehicleDetailsObject.Get());
+    EntryDetails->SetObject(EntryDetailsObject.Get());
+    AccessoryDetails->SetObject(AccessoryDetailsObject
+        ? static_cast<UObject*>(AccessoryDetailsObject.Get()) : static_cast<UObject*>(RoofDetailsObject.Get()));
+    UE_LOG(LogTemp, Log, TEXT("TMOP Vehicle Editor refresh complete: row=%s"), *SelectedRowName.ToString());
+    bPendingDetailsRefresh = false;
+    PendingEditedObject.Reset();
+    return EActiveTimerReturnType::Stop;
 }
 
 #undef LOCTEXT_NAMESPACE

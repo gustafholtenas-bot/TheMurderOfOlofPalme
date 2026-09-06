@@ -30,6 +30,7 @@ public:
     void ClearActor();
     void SetActor(AActor* Actor, bool bRefocus);
     void Fit();
+    void SetVehicleUnlit(bool bVehicleUnlit);
     void Turn(float Degrees);
     void Zoom(float Factor);
     void EvaluatePose(UAnimSequence* Animation, float Seconds);

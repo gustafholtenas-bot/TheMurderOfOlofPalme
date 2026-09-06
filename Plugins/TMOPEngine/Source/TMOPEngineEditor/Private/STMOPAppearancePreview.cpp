@@ -242,7 +242,7 @@ public:
         const TWeakPtr<SEditorViewport>& Widget)
         : FEditorViewportClient(nullptr, &InScene.Get(), Widget), SceneOwner(InScene)
     {
-        SetViewMode(VMI_Unlit);
+        SetViewMode(VMI_Lit);
         SetViewportType(LVT_Perspective);
         SetRealtime(true);
         EngineShowFlags.SetGrid(false);
@@ -257,6 +257,15 @@ public:
     virtual FLinearColor GetBackgroundColor() const override
     { return FLinearColor(0.055f, 0.065f, 0.08f); }
     virtual bool GetPivotForOrbit(FVector& OutPivot) const override { OutPivot = Pivot; return true; }
+    void SetVehicleUnlit(const bool bVehicleUnlit)
+    {
+        SetViewMode(bVehicleUnlit ? VMI_Unlit : VMI_Lit);
+        EngineShowFlags.SetLighting(!bVehicleUnlit);
+        EngineShowFlags.SetPostProcessing(!bVehicleUnlit);
+        EngineShowFlags.SetBloom(false);
+        EngineShowFlags.SetEyeAdaptation(false);
+        Invalidate();
+    }
     void FitActor(AActor* Actor)
     {
         FBox Bounds = VisibleBounds(Actor);
@@ -503,6 +512,7 @@ void STMOPAppearancePreview::AddReferencedObjects(FReferenceCollector& Collector
 }
 void STMOPAppearancePreview::ShowVehicle(const FTMOPHistoricalVehicleRow& Profile)
 {
+    ViewportWidget->SetVehicleUnlit(true);
     if(VehicleProfile.IsSet() && ViewportWidget->GetActor() &&
         FTMOPHistoricalVehicleRow::StaticStruct()->CompareScriptStruct(&VehicleProfile.GetValue(),&Profile,0)) return;
     const bool bRefocus=!VehicleProfile.IsSet() || VehicleProfile->VehicleId!=Profile.VehicleId ||
@@ -513,6 +523,7 @@ void STMOPAppearancePreview::ShowVehicle(const FTMOPHistoricalVehicleRow& Profil
 }
 void STMOPAppearancePreview::ShowPerson(const FTMOPPersonProfileRow& Profile, UDataTable* Catalog, int32 AtSecond)
 {
+    ViewportWidget->SetVehicleUnlit(false);
     if(PersonProfile.IsSet() && AppearanceCatalog.Get()==Catalog && ViewportWidget->GetActor() &&
         FTMOPPersonProfileRow::StaticStruct()->CompareScriptStruct(&PersonProfile.GetValue(),&Profile,0))
     {
@@ -763,3 +774,7 @@ EActiveTimerReturnType STMOPAppearancePreview::TickPose(double Now,float DeltaSe
 }
 #undef LOCTEXT_NAMESPACE
 
+void STMOPAppearanceViewport::SetVehicleUnlit(const bool bVehicleUnlit)
+{
+    if (PreviewClient) PreviewClient->SetVehicleUnlit(bVehicleUnlit);
+}

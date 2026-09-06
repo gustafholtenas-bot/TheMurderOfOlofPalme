@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UObject/GCObject.h"
 #include "Vehicles/TMOPHistoricalVehicleTypes.h"
 #include "Vehicles/TMOPVehicleRoutePlan.h"
 #include "Widgets/SCompoundWidget.h"
@@ -8,7 +9,11 @@
 #include "Widgets/Input/SEditableTextBox.h"
 #include "Widgets/Views/SListView.h"
 
-class IStructureDetailsView;
+class IDetailsView;
+class UTMOPVehicleDetailsObject;
+class UTMOPVehicleEntryDetailsObject;
+class UTMOPVehicleAccessoryDetailsObject;
+class UTMOPVehicleRoofDetailsObject;
 class STMOPAppearancePreview;
 class SEditableTextBox;
 class SSearchBox;
@@ -20,11 +25,15 @@ class STMOPVehicleRouteMap;
 template<typename OptionType> class SComboBox;
 struct FTMOPPersonProfileRow;
 
-class STMOPVehicleEditor final : public SCompoundWidget
+class STMOPVehicleEditor final : public SCompoundWidget, public FGCObject
 {
 public:
-    SLATE_BEGIN_ARGS(STMOPVehicleEditor) {}
+    SLATE_BEGIN_ARGS(STMOPVehicleEditor) : _VehicleTableOverride(nullptr) {}
+        SLATE_ARGUMENT(UDataTable*, VehicleTableOverride)
     SLATE_END_ARGS()
+    virtual ~STMOPVehicleEditor() override;
+    virtual void AddReferencedObjects(FReferenceCollector& Collector) override;
+    virtual FString GetReferencerName() const override { return TEXT("STMOPVehicleEditor"); }
     void Construct(const FArguments& Args);
     bool CanClose();
     virtual bool SupportsKeyboardFocus() const override { return true; }
@@ -33,20 +42,21 @@ public:
 
 
 private:
+    friend class FTMOPVehicleEditorDetailsLifetimeTest;
+    bool CanEditDetails() const { return !bPendingDetailsRefresh && !bConfirmingUnsavedChanges; }
     bool ConfirmDiscardOrSave();
+    bool bConfirmingUnsavedChanges = false;
+    void SyncVehicleListSelection();
+    void QueueDetailsRefresh();
+    EActiveTimerReturnType ApplyPendingDetailsRefresh(double Now, float DeltaTime);
+    bool bPendingDetailsRefresh = false;
+    TWeakObjectPtr<UObject> PendingEditedObject;
+    TObjectPtr<UTMOPVehicleDetailsObject> VehicleDetailsObject = nullptr;
+    TObjectPtr<UTMOPVehicleEntryDetailsObject> EntryDetailsObject = nullptr;
+    TObjectPtr<UTMOPVehicleAccessoryDetailsObject> AccessoryDetailsObject = nullptr;
+    TObjectPtr<UTMOPVehicleRoofDetailsObject> RoofDetailsObject = nullptr;
     void OnDetailsChanged(const FPropertyChangedEvent& Event, bool bVehicleDetails);
     void SyncDetailsFromWorking();
-    void QueueStructureData(const TSharedPtr<IStructureDetailsView>& View,
-        const TSharedPtr<FStructOnScope>& Data);
-    bool FlushStructureData(float DeltaTime);
-    struct FPendingStructureUpdate
-    {
-        TSharedPtr<IStructureDetailsView> View;
-        TSharedPtr<FStructOnScope> Data;
-    };
-    TArray<FPendingStructureUpdate> PendingStructureUpdates;
-    TArray<FPendingStructureUpdate> DisplayedStructures;
-    bool bStructureUpdateQueued = false;
     void RefreshAppearancePreview();
     TSharedRef<SWidget> BuildAccessoryControls();
     void RefreshAccessoryChoices();
@@ -56,8 +66,7 @@ private:
     FReply RemoveAccessory();
     void SelectAccessorySocket(TSharedPtr<FString> Item, ESelectInfo::Type);
     TSharedPtr<STMOPAppearancePreview> AppearancePreview;
-    TSharedPtr<IStructureDetailsView> AccessoryDetails;
-    TSharedPtr<FStructOnScope> AccessoryStruct;
+    TSharedPtr<IDetailsView> AccessoryDetails;
     TArray<TSharedPtr<int32>> AccessoryChoices;
     TArray<TSharedPtr<FString>> AccessorySockets;
     TSharedPtr<SComboBox<TSharedPtr<int32>>> AccessoryCombo;
@@ -238,8 +247,8 @@ private:
     TMap<FString, FName> LaneIdsByLabel;
     TSharedPtr<SListView<FVehicleItem>> VehicleList;
     TSharedPtr<SListView<FTimelineItem>> TimelineList;
-    TSharedPtr<IStructureDetailsView> VehicleDetails;
-    TSharedPtr<IStructureDetailsView> EntryDetails;
+    TSharedPtr<IDetailsView> VehicleDetails;
+    TSharedPtr<IDetailsView> EntryDetails;
     TSharedPtr<FStructOnScope> VehicleStruct;
     TSharedPtr<FStructOnScope> EntryStruct;
     TSharedPtr<STMOPVehicleRouteMap> RouteMap;

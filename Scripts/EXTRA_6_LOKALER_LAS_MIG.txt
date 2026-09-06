@@ -1,0 +1,43 @@
+Sex kompletterande lokalplaner
+
+Packa upp i projektroten. Personfilen och den äldre lokalplanen ändras inte.
+
+Per lokal: 16 bord med 4 sittankare vardera, 12 barplatser,
+4 stående personalplatser och 6 valfria scenankare. Totalt 516 ankare.
+Sittankarnas namn är kompatibla med TMOPVenueFurnitureGenerator.
+Bordens mittpunkter räknas ut från deras fyra sittankare av möbelgeneratorn.
+Scenankare genererar ingen fysisk scen och innebär inte att lokalen historiskt hade en scen.
+
+IMPORT I UNREAL
+1. Öppna banan. Använd en separat TMOPVenueLayoutImporter-aktör för detta tillägg.
+2. Json File Path: TMOP/Data/TMOP_VENUE_LAYOUT_ANCHORS_EXTRA_6.json
+3. Sätt Anchor Class till samma klass som den tidigare lokalimportören.
+4. Kontrollera att följande AnchorId finns i banan:
+   KlubbOxen_inside
+   RestaurangRiviera_inside
+   Tegnerkallaren_inside
+   newgeneration_inside
+   MonteCarlo_inside
+   KingCreole_inside
+   Riviera och Tegnérkällarens ID saknades i bifogad persontimeline.
+   Om dina befintliga ankare heter annorlunda: ändra parent_anchor_id
+   för respektive lokal i tilläggsfilen före importen. Skapa inte dubbletter.
+5. Tryck Import Or Update Venue Layout Anchors. Läs Last Error Count och loggen.
+   Saknade inside-ankare medför att den lokalens punkter inte skapas.
+6. Justera punkterna till rummens faktiska golv, väggar och möblering.
+   Planerna är generiska, cirka 13 x 20 meter inklusive marginaler.
+   Inga historiska mått eller exakta möbleringar påstås.
+7. På befintlig TMOPVenueFurnitureGenerator: kontrollera Chair Mesh,
+   Bar Stool Mesh, Table Mesh och Bar Counter Mesh, tryck därefter
+   Generate Or Update Venue Furniture. Den arbetar även på befintliga lokaler;
+   kontrollera dess inställningar så befintlig möblering inte får oönskade ändringar.
+8. Kontrollera resultatet och spara banan.
+
+Återimport med Update Existing Anchors aktiverat återställer punkterna till JSON-planen.
+Stäng av den inställningen efter första importen om punkterna har flyttats manuellt.
+Importören räknar då överhoppade befintliga ankare som fel; kontrollera loggen.
+
+Inga personer är automatiskt kopplade till dessa nya punkter ännu.
+Nästa personfördelning ska reservera hela bord per sällskap, inte fylla lediga stolar
+med personer ur andra sällskap. Ensamma gäster får eget bord eller egen barplats.
+Ankarna är verifierade mot projektets JSON-format och namnmönster, inte provkörda i Unreal.
