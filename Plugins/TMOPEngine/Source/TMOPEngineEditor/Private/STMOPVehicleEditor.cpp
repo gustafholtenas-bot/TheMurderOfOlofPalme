@@ -391,6 +391,11 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
                         [ SNew(SButton).Text(LOCTEXT("Add", "+ Add"))
                             .OnClicked(this, &STMOPVehicleEditor::AddEntry) ]
                         + SHorizontalBox::Slot().AutoWidth().Padding(3,0)
+                        [ SNew(SButton).Text(LOCTEXT("QuickAddStop", "+ Add Stop"))
+                            .ToolTipText(LOCTEXT("QuickAddStopTip", "Insert a stop after the selected row at its destination, relative to the previous entry +30 seconds."))
+                            .IsEnabled_Lambda([this]() { return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex); })
+                            .OnClicked(this, &STMOPVehicleEditor::AddStopEntry) ]
+                        + SHorizontalBox::Slot().AutoWidth().Padding(3,0)
                         [ SNew(SButton).Text(LOCTEXT("Duplicate", "Duplicate"))
                             .OnClicked(this, &STMOPVehicleEditor::DuplicateEntry) ]
                         + SHorizontalBox::Slot().AutoWidth()
@@ -1374,6 +1379,67 @@ bool STMOPVehicleEditor::PassesVehicleFilter(
     default:
         return true;
     }
+}
+
+FReply STMOPVehicleEditor::AddStopEntry()
+{
+    CommitEntry();
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)) return FReply::Handled();
+    // Own the source value before Insert can reallocate the timeline.
+    const auto Source = WorkingRow.Timeline[SelectedTimelineIndex];
+    const int32 NewIndex = SelectedTimelineIndex + 1;
+    FTMOPHistoricalVehicleTimelineEntry Stop;
+    Stop.EntryId = TMOPVehicleRoute::UniqueEntryId(WorkingRow,
+        Source.EntryId.ToString() + TEXT("_STOP"));
+    Stop.Action = ETMOPHistoricalVehicleAction::Stop;
+    Stop.TimingMode = ETMOPEventTimingMode::RelativeToPreviousEntry;
+    Stop.EventOffsetSeconds = 30;
+    Stop.bTimeIsArrival = false;
+    Stop.DriverEntityId = TMOPVehicleRoute::Driver(WorkingRow, Source);
+    Stop.PassengerEntityIds = Source.PassengerEntityIds;
+    Stop.PassengerEntityIds.Remove(Stop.DriverEntityId);
+    if (TMOPVehicleRoute::IsDriving(Source.Action))
+    {
+        Stop.PlacementMode = ETMOPHistoricalVehiclePlacementMode::Anchor;
+        Stop.PlacementAnchorId = Source.RouteDestinationAnchorId;
+        // Match the same following-stop anchor/offset used by the route builder.
+        for (int32 Next = NewIndex; Next < WorkingRow.Timeline.Num(); ++Next)
+        {
+            const auto& Following = WorkingRow.Timeline[Next];
+            if (TMOPVehicleRoute::IsDriving(Following.Action) ||
+                Following.Action == ETMOPHistoricalVehicleAction::Despawn) break;
+            if (!TMOPVehicleRoute::IsStop(Following.Action)) continue;
+            if (Stop.PlacementAnchorId.IsNone() || Stop.PlacementAnchorId == Following.PlacementAnchorId)
+            {
+                Stop.PlacementMode = Following.PlacementMode;
+                Stop.PlacementAnchorId = Following.PlacementAnchorId;
+                Stop.AnchorLocalOffset = Following.AnchorLocalOffset;
+                Stop.WorldTransform = Following.WorldTransform;
+            }
+            break;
+        }
+    }
+    else if (TMOPVehicleRoute::HasPlacement(Source.Action))
+    {
+        Stop.PlacementMode = Source.PlacementMode;
+        Stop.PlacementAnchorId = Source.PlacementAnchorId;
+        Stop.AnchorLocalOffset = Source.AnchorLocalOffset;
+        Stop.WorldTransform = Source.WorldTransform;
+    }
+    else
+    {
+        FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("QuickStopNoPosition", "Select a driving or placement row with a destination first."));
+        return FReply::Handled();
+    }
+    if (Stop.PlacementMode == ETMOPHistoricalVehiclePlacementMode::Anchor && Stop.PlacementAnchorId.IsNone())
+    {
+        FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("QuickStopNeedsAnchor", "This route ends on a lane without a destination anchor. Set its end anchor before adding a stop."));
+        return FReply::Handled();
+    }
+    WorkingRow.Timeline.Insert(Stop, NewIndex);
+    RefreshTimeline();
+    SelectTimelineEntry(NewIndex);
+    return FReply::Handled();
 }
 
 FReply STMOPVehicleEditor::AddEntry()

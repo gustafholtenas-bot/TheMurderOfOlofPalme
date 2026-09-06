@@ -198,6 +198,7 @@ private:
         bool bSetDestination, bool bAddVia);
     bool RecalculateSelectedRoute(FString& OutFailure);
     FReply AddEntry();
+    FReply AddStopEntry();
     FReply DuplicateEntry();
     FReply DeleteEntry();
     FReply MoveEntry(int32 Direction);

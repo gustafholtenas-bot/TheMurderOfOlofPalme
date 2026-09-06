@@ -319,6 +319,11 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                                 this, &STMOPPeopleEditor::AddTimelineEntry)
                         ]
                         + SHorizontalBox::Slot().AutoWidth().Padding(3.0f, 0.0f)
+                        [ SNew(SButton).Text(LOCTEXT("QuickAddWait", "+ Add Wait"))
+                            .ToolTipText(LOCTEXT("QuickAddWaitTip", "Insert a wait after the selected row, at the same location, relative to the previous entry +30 seconds."))
+                            .IsEnabled_Lambda([this]() { return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex); })
+                            .OnClicked(this, &STMOPPeopleEditor::AddWaitEntry) ]
+                        + SHorizontalBox::Slot().AutoWidth().Padding(3.0f, 0.0f)
                         [
                             SNew(SButton)
                             .Text(LOCTEXT("AddMeetingDialogue", "+ Meeting Dialogue"))
@@ -2234,6 +2239,54 @@ FText STMOPPeopleEditor::GetReferenceFieldText(
     return Id.IsNone()
         ? LOCTEXT("SearchReference", "Type to search...")
         : FText::FromName(Id);
+}
+
+FReply STMOPPeopleEditor::AddWaitEntry()
+{
+    CommitEntryEdits();
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)) return FReply::Handled();
+    const auto Source = WorkingRow.Timeline[SelectedTimelineIndex];
+    const int32 NewIndex = SelectedTimelineIndex + 1;
+    FTMOPPersonTimelineEntry Wait;
+    Wait.Action = ETMOPPersonTimelineAction::Wait;
+    Wait.ActivityState = ETMOPAgentActivityState::Idle;
+    Wait.TimingMode = ETMOPEventTimingMode::RelativeToPreviousEntry;
+    Wait.EventOffsetSeconds = 30;
+    Wait.bTimeIsArrival = false;
+    Wait.LocationType = Source.LocationType;
+    Wait.TargetAnchorId = Source.TargetAnchorId;
+    Wait.AnchorOffsetCm = Source.AnchorOffsetCm;
+    Wait.AnchorOffsetSpace = Source.AnchorOffsetSpace;
+    Wait.AnchorReferenceMode = Source.AnchorReferenceMode;
+    Wait.PlannedAnchorDisplayName = Source.PlannedAnchorDisplayName;
+    Wait.PlannedAnchorNotes = Source.PlannedAnchorNotes;
+    Wait.TargetEntityId = Source.TargetEntityId;
+    Wait.TargetSeatId = Source.TargetSeatId;
+    Wait.WorldTransform = Source.WorldTransform;
+    if (Wait.LocationType == ETMOPPersonLocationType::VenueSeat ||
+        Wait.LocationType == ETMOPPersonLocationType::VehicleSeat ||
+        Wait.LocationType == ETMOPPersonLocationType::BusSeat)
+        Wait.ActivityState = Source.ActivityState;
+    if (Wait.LocationType == ETMOPPersonLocationType::NotPresent ||
+        Source.Action == ETMOPPersonTimelineAction::BeginDriving)
+    {
+        FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("QuickWaitInvalidSource", "Select a person's placement or walking row. Add vehicle stops in the vehicle editor."));
+        return FReply::Handled();
+    }
+    if (Wait.LocationType == ETMOPPersonLocationType::Anchor && Wait.TargetAnchorId.IsNone())
+    {
+        FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("QuickWaitNeedsAnchor", "The selected row has no anchor. Select a row with a location before adding a wait."));
+        return FReply::Handled();
+    }
+    const FString Base = Source.EntryId.ToString() + TEXT("_WAIT");
+    Wait.EntryId = FName(*Base);
+    for (int32 Suffix = 1; WorkingRow.Timeline.ContainsByPredicate(
+        [&Wait](const FTMOPPersonTimelineEntry& Existing) { return Existing.EntryId == Wait.EntryId; }); ++Suffix)
+        Wait.EntryId = FName(*FString::Printf(TEXT("%s_%d"), *Base, Suffix));
+    WorkingRow.Timeline.Insert(Wait, NewIndex);
+    RefreshTimeline();
+    SelectTimelineEntry(NewIndex);
+    return FReply::Handled();
 }
 
 FReply STMOPPeopleEditor::AddTimelineEntry()

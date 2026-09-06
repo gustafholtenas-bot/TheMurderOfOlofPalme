@@ -128,6 +128,7 @@ private:
     EVisibility GetReferenceImagePlaceholderVisibility() const;
 
     FReply AddTimelineEntry();
+    FReply AddWaitEntry();
     FReply AddMeetingDialogue();
     FReply OpenMeetingDialogueOwner();
     bool CanOpenMeetingDialogueOwner() const;
