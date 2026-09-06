@@ -67,7 +67,24 @@ int32 CompletionDelay(const FTMOPHistoricalVehicleTimelineEntry& Entry)
 FName Driver(const FTMOPHistoricalVehicleRow& Row,
     const FTMOPHistoricalVehicleTimelineEntry& Entry)
 {
-    return Entry.DriverEntityId.IsNone() ? Row.KnownDriverEntityId : Entry.DriverEntityId;
+    if (!Entry.DriverEntityId.IsNone()) return Entry.DriverEntityId;
+    // Use row identity, not pointer arithmetic: editors can pass an entry copy.
+    // Never inherit from a future row or across a despawn/new vehicle life.
+    int32 EntryIndex = INDEX_NONE;
+    for (int32 Index = 0; Index < Row.Timeline.Num(); ++Index)
+        if (&Row.Timeline[Index] == &Entry) { EntryIndex = Index; break; }
+    if (EntryIndex == INDEX_NONE && !Entry.EntryId.IsNone())
+        EntryIndex = Row.Timeline.IndexOfByPredicate([&Entry](const auto& Candidate)
+            { return Candidate.EntryId == Entry.EntryId; });
+    for (int32 Index = EntryIndex - 1; Index >= 0; --Index)
+    {
+        const auto& Previous = Row.Timeline[Index];
+        if (Previous.Action == ETMOPHistoricalVehicleAction::Despawn) break;
+        if (!Previous.DriverEntityId.IsNone()) return Previous.DriverEntityId;
+        if (Previous.Action == ETMOPHistoricalVehicleAction::Spawn ||
+            Previous.Action == ETMOPHistoricalVehicleAction::InitialPlacement) break;
+    }
+    return Row.KnownDriverEntityId;
 }
 
 void BuildManeuver(const TArray<FTransform>& Anchors, float Strength,

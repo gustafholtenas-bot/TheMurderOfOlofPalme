@@ -165,6 +165,19 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|People|Dialog")
     FText GetPersonDialog(FName EntityId, bool bAfterShot) const;
 
+    UPROPERTY(EditAnywhere, Category="TMOP|People|Dialogue Test")
+    FName TestDialoguePersonA;
+
+    UPROPERTY(EditAnywhere, Category="TMOP|People|Dialogue Test")
+    FName TestDialoguePersonB;
+
+    UPROPERTY(EditAnywhere, Category="TMOP|People|Dialogue Test")
+    FName TestDialogueAnchor;
+
+    /** PIE only. Temporary test; never writes people or event DataTables. */
+    UFUNCTION(CallInEditor, BlueprintCallable, Category="TMOP|People|Dialogue Test")
+    void PlayTestMeetingDialogue();
+
     /** Telemetry for all consumed entries, including group and vehicle actions. */
     FTMOPPersonTimelineAppliedNativeSignature OnTimelineEntryApplied;
 
@@ -179,6 +192,7 @@ private:
         int32 LastResolvedAutomaticSpeechSecond = INDEX_NONE;
         bool bSpawnedByDirector = false;
         bool bCompleted = false;
+        FName ActiveMeetingDialogueId = NAME_None;
         /** Physical execution/departure time used by EvaluatePeople. */
         int32 CachedResolvedSecond = INDEX_NONE;
         /** Logical timestamp shown in the editor (arrival for ARRIVAL moves). */
@@ -189,6 +203,7 @@ private:
 
     void EvaluatePeople(int32 CurrentSecond, bool bCatchUp);
     void EvaluateAutomaticSpeech(int32 CurrentSecond, int32 PreviousSecond);
+    void EvaluateMeetingDialogues(int32 CurrentSecond, int32 PreviousSecond);
     bool ResolveAutomaticSpeechSecond(
         const FPersonRuntime& Runtime,
         const FTMOPTimedSpeechLine& Line,
@@ -223,6 +238,10 @@ private:
     bool bRestoringWorldBake = false;
 
     TMap<FName, FPersonRuntime> RuntimePeople;
+    /** Definitions are unique by DialogueId and loaded from their owner rows. */
+    TMap<FName, FTMOPMeetingDialogueDefinition> RuntimeMeetingDialogues;
+    /** Composite DialogueId/LineId keys already emitted in this clock pass. */
+    TSet<FName> DeliveredMeetingDialogueLines;
     TMap<TWeakObjectPtr<class APawn>, FTransform> LastSafePawnTransforms;
     float FallSafetyAccumulator = 0.0f;
     int32 LastEvaluatedSecond = INDEX_NONE;

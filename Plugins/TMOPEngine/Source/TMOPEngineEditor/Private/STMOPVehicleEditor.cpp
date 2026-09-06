@@ -506,6 +506,41 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
                             "Draw the selected route and direction arrows in the open level for 20 seconds."))
                         .OnClicked(this, &STMOPVehicleEditor::PreviewRouteInLevel) ]
                 ]
+                + SVerticalBox::Slot().AutoHeight().Padding(7,2)
+                [
+                    SNew(SHorizontalBox)
+                    + SHorizontalBox::Slot().AutoWidth()
+                    [ SNew(SButton).Text(LOCTEXT("ClearStartAnchor", "Clear start anchor"))
+                        .OnClicked(this, &STMOPVehicleEditor::ClearRouteReference,
+                            ERouteReferenceField::StartAnchor) ]
+                    + SHorizontalBox::Slot().AutoWidth().Padding(4,0,0,0)
+                    [ SNew(SButton).Text(LOCTEXT("ClearStartLane", "Clear start lane"))
+                        .OnClicked(this, &STMOPVehicleEditor::ClearRouteReference,
+                            ERouteReferenceField::StartLane) ]
+                    + SHorizontalBox::Slot().AutoWidth().Padding(4,0,0,0)
+                    [ SNew(SButton).Text(LOCTEXT("ClearEndAnchor", "Clear end anchor"))
+                        .OnClicked(this, &STMOPVehicleEditor::ClearRouteReference,
+                            ERouteReferenceField::DestinationAnchor) ]
+                    + SHorizontalBox::Slot().AutoWidth().Padding(4,0,0,0)
+                    [ SNew(SButton).Text(LOCTEXT("ClearEndLane", "Clear end lane"))
+                        .OnClicked(this, &STMOPVehicleEditor::ClearRouteReference,
+                            ERouteReferenceField::DestinationLane) ]
+                ]
+                + SVerticalBox::Slot().AutoHeight().Padding(7,2)
+                [
+                    SNew(SHorizontalBox)
+                    + SHorizontalBox::Slot().AutoWidth()
+                    [ SNew(SButton).Text(LOCTEXT("ClearViaAnchors", "Clear via anchors"))
+                        .OnClicked(this, &STMOPVehicleEditor::ClearRouteReference,
+                            ERouteReferenceField::ViaAnchor) ]
+                    + SHorizontalBox::Slot().AutoWidth().Padding(4,0,0,0)
+                    [ SNew(SButton).Text(LOCTEXT("ClearViaLanes", "Clear via lanes"))
+                        .OnClicked(this, &STMOPVehicleEditor::ClearRouteReference,
+                            ERouteReferenceField::ViaLane) ]
+                    + SHorizontalBox::Slot().AutoWidth().Padding(4,0,0,0)
+                    [ SNew(SButton).Text(LOCTEXT("ClearAllRouteFields", "Clear all route fields"))
+                        .OnClicked(this, &STMOPVehicleEditor::ClearAllRouteReferences) ]
+                ]
                 + SVerticalBox::Slot().AutoHeight().Padding(7,5,7,2)
                 [ SNew(STextBlock).Visibility(this, &STMOPVehicleEditor::PlacementVisibility).Text(LOCTEXT("EntryAnchor", "PLACEMENT ANCHOR"))
                     .Font(FAppStyle::GetFontStyle("HeadingExtraSmall")) ]
@@ -630,7 +665,7 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
         RefreshVehicles();
     }
     else LoadTables();
-    UE_LOG(LogTemp, Display, TEXT("TMOP Vehicle Editor: route marker and selection fix 2026-09-06 r4"));
+    UE_LOG(LogTemp, Display, TEXT("TMOP Vehicle Editor: route clear controls 2026-09-06 r6"));
     LastRuntimeValidationRevision =
         TMOPRuntimeValidation::GetLatestReportRevision();
     RegisterActiveTimer(
@@ -1061,6 +1096,44 @@ FReply STMOPVehicleEditor::ClearViaPoints()
     return RecalculateRoute();
 }
 
+FReply STMOPVehicleEditor::ClearRouteReference(const ERouteReferenceField Field)
+{
+    if (!EntryStruct.IsValid()) return FReply::Handled();
+    auto* Entry = reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(
+        EntryStruct->GetStructMemory());
+    if (!IsDriving(Entry->Action)) return FReply::Handled();
+    switch (Field)
+    {
+    case ERouteReferenceField::StartAnchor: Entry->RouteStartAnchorId = NAME_None; break;
+    case ERouteReferenceField::StartLane: Entry->RouteStartLaneId = NAME_None; break;
+    case ERouteReferenceField::DestinationAnchor: Entry->RouteDestinationAnchorId = NAME_None; break;
+    case ERouteReferenceField::DestinationLane: Entry->RouteDestinationLaneId = NAME_None; break;
+    case ERouteReferenceField::ViaAnchor: Entry->RouteViaAnchorIds.Reset(); break;
+    case ERouteReferenceField::ViaLane: Entry->RouteViaLaneIds.Reset(); break;
+    }
+    CommitEntry();
+    SyncDetailsFromWorking();
+    return RecalculateRoute();
+}
+
+FReply STMOPVehicleEditor::ClearAllRouteReferences()
+{
+    if (!EntryStruct.IsValid()) return FReply::Handled();
+    auto* Entry = reinterpret_cast<FTMOPHistoricalVehicleTimelineEntry*>(
+        EntryStruct->GetStructMemory());
+    if (!IsDriving(Entry->Action)) return FReply::Handled();
+    Entry->RouteStartAnchorId = NAME_None;
+    Entry->RouteStartLaneId = NAME_None;
+    Entry->RouteDestinationAnchorId = NAME_None;
+    Entry->RouteDestinationLaneId = NAME_None;
+    Entry->RouteViaAnchorIds.Reset();
+    Entry->RouteViaLaneIds.Reset();
+    Entry->OrderedLaneIds.Reset();
+    CommitEntry();
+    SyncDetailsFromWorking();
+    return RecalculateRoute();
+}
+
 FReply STMOPVehicleEditor::PreviewRouteInLevel()
 {
     CommitEntry(); RebuildRoutePreview();
@@ -1303,7 +1376,67 @@ bool STMOPVehicleEditor::PassesVehicleFilter(
     }
 }
 
-FReply STMOPVehicleEditor::AddEntry(){if(SelectedRowName.IsNone())return FReply::Handled();CommitEntry();FTMOPHistoricalVehicleTimelineEntry E;E.EntryId=TMOPVehicleRoute::UniqueEntryId(WorkingRow, WorkingRow.VehicleId.ToString()+TEXT("_ENTRY"));E.bAutoStartFromVehicleTimeline=true;WorkingRow.Timeline.Add(E);RefreshTimeline();SelectTimelineEntry(WorkingRow.Timeline.Num()-1);return FReply::Handled();}
+FReply STMOPVehicleEditor::AddEntry()
+{
+    if (SelectedRowName.IsNone()) return FReply::Handled();
+
+    CommitEntry();
+
+    FTMOPHistoricalVehicleTimelineEntry NewEntry;
+    NewEntry.EntryId = TMOPVehicleRoute::UniqueEntryId(
+        WorkingRow, WorkingRow.VehicleId.ToString() + TEXT("_ENTRY"));
+    NewEntry.bAutoStartFromVehicleTimeline = true;
+
+    // Occupants describe who is expected to be in the vehicle for a timeline
+    // segment. Carry the most recently authored values forward so adding a
+    // Stop followed by another drive does not require re-entering everybody.
+    // Copy into NewEntry before modifying Timeline: never retain references to
+    // TArray elements across Add/Insert, because those operations may reallocate.
+    bool bFoundDriver = false;
+    bool bFoundPassengers = false;
+    for (int32 Index = WorkingRow.Timeline.Num() - 1;
+         Index >= 0 && (!bFoundDriver || !bFoundPassengers);
+         --Index)
+    {
+        const FTMOPHistoricalVehicleTimelineEntry& PreviousEntry =
+            WorkingRow.Timeline[Index];
+
+        if (!bFoundDriver && !PreviousEntry.DriverEntityId.IsNone())
+        {
+            NewEntry.DriverEntityId = PreviousEntry.DriverEntityId;
+            bFoundDriver = true;
+        }
+
+        if (!bFoundPassengers && !PreviousEntry.PassengerEntityIds.IsEmpty())
+        {
+            NewEntry.PassengerEntityIds = PreviousEntry.PassengerEntityIds;
+            bFoundPassengers = true;
+        }
+    }
+
+    if (!bFoundDriver)
+    {
+        NewEntry.DriverEntityId = WorkingRow.KnownDriverEntityId;
+    }
+
+    // Keep the driver out of the passenger array and clean up accidental
+    // duplicates while the data is being inherited.
+    TArray<FName> CleanPassengers;
+    CleanPassengers.Reserve(NewEntry.PassengerEntityIds.Num());
+    for (const FName PassengerId : NewEntry.PassengerEntityIds)
+    {
+        if (!PassengerId.IsNone() && PassengerId != NewEntry.DriverEntityId)
+        {
+            CleanPassengers.AddUnique(PassengerId);
+        }
+    }
+    NewEntry.PassengerEntityIds = MoveTemp(CleanPassengers);
+
+    WorkingRow.Timeline.Add(MoveTemp(NewEntry));
+    RefreshTimeline();
+    SelectTimelineEntry(WorkingRow.Timeline.Num() - 1);
+    return FReply::Handled();
+}
 FReply STMOPVehicleEditor::DuplicateEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){auto E=WorkingRow.Timeline[SelectedTimelineIndex];E.EntryId=TMOPVehicleRoute::UniqueEntryId(WorkingRow, E.EntryId.ToString()+TEXT("_COPY"));WorkingRow.Timeline.Insert(E,SelectedTimelineIndex+1);RefreshTimeline();SelectTimelineEntry(SelectedTimelineIndex+1);}return FReply::Handled();}
 FReply STMOPVehicleEditor::DeleteEntry(){CommitEntry();if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)){WorkingRow.Timeline.RemoveAt(SelectedTimelineIndex);SelectedTimelineIndex=INDEX_NONE;EntryStruct.Reset();RefreshTimeline();}return FReply::Handled();}
 FReply STMOPVehicleEditor::MoveEntry(const int32 D){CommitEntry();const int32 N=SelectedTimelineIndex+D;if(WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)&&WorkingRow.Timeline.IsValidIndex(N)){WorkingRow.Timeline.Swap(SelectedTimelineIndex,N);SelectedTimelineIndex=INDEX_NONE;RefreshTimeline();SelectTimelineEntry(N);}return FReply::Handled();}
@@ -2030,8 +2163,7 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
             Results.Add(FString::Printf(
                 TEXT("WARNING Timeline[%d]: required average speed is %.1f km/h."),
                 Index, Kmh));
-        if (!Entry.bAutoStartFromVehicleTimeline)
-            Results.Add(FString::Printf(TEXT("WARNING Timeline[%d]: this row waits for the driver's legacy timeline. Enable Start from this vehicle timeline to own its departure."), Index));
+
         if (TMOPVehicleRoute::Driver(Row, Entry).IsNone())
             Results.Add(FString::Printf(TEXT("ERROR Timeline[%d]: no driver on this row or in the vehicle defaults."), Index));
         if (Arrival > Departure)
@@ -2077,10 +2209,15 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                     Index, *GetNameSafe(Hit.GetActor())));
         }
 
-        if (!PeopleTable.IsValid() || Departure <= 0 || Arrival <= Departure)
+        if (!PeopleTable.IsValid())
+        {
+            Results.Add(FString::Printf(TEXT("ERROR Timeline[%d]: no People table loaded; driver and boarding cannot be validated."), Index));
             continue;
+        }
+        if (Departure <= 0 || Arrival <= Departure) continue;
         TMap<FName, FName> SeatOwners;
         TSet<FName> PeopleInside;
+        TSet<FName> EnabledPeople;
         TArray<FName> DriversAtDeparture;
         const UDataTable* People = PeopleTable.Get();
         for (const FName PersonRowName : People->GetRowNames())
@@ -2088,9 +2225,10 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
             const FTMOPPersonProfileRow* Person =
                 People->FindRow<FTMOPPersonProfileRow>(PersonRowName,
                     TEXT("VehicleEditorOccupantValidation"), false);
-            if (Person == nullptr) continue;
+            if (Person == nullptr || !Person->bSpawnInSimulation) continue;
             const FName PersonId = Person->EntityId.IsNone()
                 ? PersonRowName : Person->EntityId;
+            EnabledPeople.Add(PersonId);
             bool bInside = false;
             bool bTargetsVehicleBoarding = false;
             int32 LatestBoardingSecond = INDEX_NONE;
@@ -2199,11 +2337,17 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
                 else SeatOwners.Add(SeatId, PersonId);
             }
         }
-        FName RequiredDriver = Entry.DriverEntityId;
-        if (RequiredDriver.IsNone()) RequiredDriver = Row.KnownDriverEntityId;
+        const FName RequiredDriver = TMOPVehicleRoute::Driver(Row, Entry);
+        if (!RequiredDriver.IsNone() && !EnabledPeople.Contains(RequiredDriver))
+            Results.Add(FString::Printf(TEXT("ERROR Timeline[%d]: driver '%s' is missing from the loaded People table or disabled for simulation."),
+                Index, *RequiredDriver.ToString()));
+        const FName* FrontLeft = SeatOwners.Find(FName(TEXT("FRONT_LEFT")));
+        if (!RequiredDriver.IsNone() && PeopleInside.Contains(RequiredDriver) &&
+            (!FrontLeft || *FrontLeft != RequiredDriver))
+            Results.Add(FString::Printf(TEXT("ERROR Timeline[%d]: driver '%s' is not assigned to FRONT_LEFT."), Index, *RequiredDriver.ToString()));
         if (!RequiredDriver.IsNone() && !PeopleInside.Contains(RequiredDriver))
             Results.Add(FString::Printf(
-                TEXT("WARNING Timeline[%d]: driver '%s' is not inside the vehicle at departure %s."),
+                TEXT("ERROR Timeline[%d]: driver '%s' is not inside the vehicle at departure %s; this route cannot start."),
                 Index, *RequiredDriver.ToString(), *FormatClockSecond(Departure)));
         if (!RequiredDriver.IsNone() && !DriversAtDeparture.IsEmpty() &&
             !DriversAtDeparture.Contains(RequiredDriver))
@@ -2213,8 +2357,10 @@ TArray<FString> STMOPVehicleEditor::ValidateRow(const FTMOPHistoricalVehicleRow&
         for (const FName PassengerId : Entry.PassengerEntityIds)
             if (!PassengerId.IsNone() && !PeopleInside.Contains(PassengerId))
                 Results.Add(FString::Printf(
-                    TEXT("WARNING Timeline[%d]: listed passenger '%s' is not seated at departure."),
-                    Index, *PassengerId.ToString()));
+                    TEXT("%s Timeline[%d]: listed passenger '%s' is not seated at departure%s."),
+                    Entry.bWaitForListedOccupants ? TEXT("ERROR") : TEXT("WARNING"),
+                    Index, *PassengerId.ToString(), Entry.bWaitForListedOccupants
+                        ? TEXT("; this route waits for that person") : TEXT("")));
     }
     return Results;
 }
@@ -2405,7 +2551,7 @@ FText STMOPVehicleEditor::GetTitle() const
 {
     const FText Name = SelectedRowName.IsNone() ? LOCTEXT("Title", "TMOP Vehicle Editor")
         : (!WorkingRow.DisplayName.IsEmpty() ? WorkingRow.DisplayName : FText::FromName(WorkingRow.VehicleId));
-    return FText::Format(LOCTEXT("VehicleEditorR4Title", "{0} [R4]"), Name);
+    return FText::Format(LOCTEXT("VehicleEditorR6Title", "{0} [R6]"), Name);
 }
 FText STMOPVehicleEditor::GetSubtitle()const{return FText::FromString(WorkingRow.VehicleId.ToString()+FString::Printf(TEXT(" • %d timeline entries%s"),WorkingRow.Timeline.Num(), FTMOPHistoricalVehicleRow::StaticStruct()->CompareScriptStruct(&WorkingRow,&SavedRow,0)?TEXT(""):TEXT(" • UNSAVED")));}
 FText STMOPVehicleEditor::GetValidationText()const{return CurrentErrors.IsEmpty()?LOCTEXT("NoErrors","No errors detected."):FText::FromString(FString::Join(CurrentErrors,TEXT("\n")));}
@@ -2445,9 +2591,10 @@ bool STMOPVehicleEditor::CanClose()
     if (bClose) bPreviewPlaying = false;
     return bClose;
 }
-void STMOPVehicleEditor::SyncDetailsFromWorking()
+void STMOPVehicleEditor::RefreshCommandBuffersFromWorking()
 {
-    // Unbound command buffers; PropertyEditor only receives the UObjects below.
+    // These snapshots are never bound to PropertyEditor. Commands still read
+    // them, so keep them current without replacing any visible UObject.
     if (!SelectedRowName.IsNone())
     {
         auto Next = MakeShared<FStructOnScope>(FTMOPHistoricalVehicleRow::StaticStruct());
@@ -2465,6 +2612,10 @@ void STMOPVehicleEditor::SyncDetailsFromWorking()
         EntryStruct = Next;
     }
     else EntryStruct.Reset();
+}
+void STMOPVehicleEditor::SyncDetailsFromWorking()
+{
+    RefreshCommandBuffersFromWorking();
     QueueDetailsRefresh();
 }
 void STMOPVehicleEditor::OnDetailsChanged(const FPropertyChangedEvent& Event, bool bVehicleDetails)
@@ -2590,8 +2741,12 @@ void STMOPVehicleEditor::OnAccessoryDetailsChanged(const FPropertyChangedEvent& 
     if (AccessoryDetailsObject && WorkingRow.AdditionalAccessories.IsValidIndex(SelectedAccessoryIndex))
         WorkingRow.AdditionalAccessories[SelectedAccessoryIndex] = AccessoryDetailsObject->Data;
     else if (RoofDetailsObject) WorkingRow.RoofAccessory = RoofDetailsObject->Data;
-    SyncDetailsFromWorking();
-    PendingEditedObject = EditedObject;
+    // The active transform widget owns handles into EditedObject until its
+    // notification stack has completely unwound. Do not queue SetObject here:
+    // the visible UObject already contains the new value. Only refresh the
+    // unbound command snapshots and the separate 3D preview.
+    RefreshCommandBuffersFromWorking();
+    RefreshAppearancePreview();
 }
 FReply STMOPVehicleEditor::AddAccessory(ETMOPRoofAccessoryType Type)
 {
@@ -2687,16 +2842,8 @@ TSharedRef<SWidget> STMOPVehicleEditor::BuildDrivingControls()
                 }) ]
         ]
         + SVerticalBox::Slot().AutoHeight().Padding(0,4)
-        [ SNew(SCheckBox)
-            .IsChecked_Lambda([this]() { return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex) &&
-                WorkingRow.Timeline[SelectedTimelineIndex].bAutoStartFromVehicleTimeline ? ECheckBoxState::Checked : ECheckBoxState::Unchecked; })
-            .OnCheckStateChanged_Lambda([this](ECheckBoxState State)
-            {
-                if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)) return;
-                CommitEntry(); WorkingRow.Timeline[SelectedTimelineIndex].bAutoStartFromVehicleTimeline = State == ECheckBoxState::Checked;
-                SyncDetailsFromWorking(); RefreshTimeline();
-            })
-            [ SNew(STextBlock).Text(LOCTEXT("VehicleOwnsRoute","Start from this vehicle timeline")) ] ]
+        [ SNew(STextBlock).Text(LOCTEXT("VehicleOwnsRouteAlways",
+            "Starts automatically at departure when driver and required passengers are seated")) ]
         + SVerticalBox::Slot().AutoHeight()
         [
             SNew(SHorizontalBox)
@@ -2867,7 +3014,7 @@ FText STMOPVehicleEditor::BuildDrivingSummary() const
     const FName DriverId = TMOPVehicleRoute::Driver(WorkingRow, Entry);
     FString Text = FString::Printf(TEXT("Driver: %s%s | %s"),
         *DriverId.ToString(), Entry.DriverEntityId.IsNone() ? TEXT(" (vehicle default)") : TEXT(""),
-        Entry.bAutoStartFromVehicleTimeline ? TEXT("Vehicle timeline") : TEXT("Waiting for driver's legacy timeline"));
+        TEXT("Vehicle timeline (automatic)"));
     if (CalculateDrive(WorkingRow, SelectedTimelineIndex, Distance, Departure, Arrival, Duration, Kmh, Failure))
         Text += FString::Printf(TEXT("\n%d s | %.1f m | %.1f km/h average. Timeline controls arrival."),
             Duration, Distance / 100.0, Kmh);

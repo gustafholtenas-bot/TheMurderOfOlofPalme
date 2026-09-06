@@ -11,8 +11,10 @@
 #include "EngineUtils.h"
 #include "Events/TMOPHistoricalEventTypes.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
+#include "Framework/Application/SlateApplication.h"
 #include "IStructureDetailsView.h"
 #include "Misc/MessageDialog.h"
+#include "ScopedTransaction.h"
 #include "NavigationSystem.h"
 #include "People/TMOPAppearanceResolver.h"
 #include "PropertyEditorModule.h"
@@ -28,6 +30,7 @@
 #include "Widgets/Input/SCheckBox.h"
 #include "Widgets/Input/SSearchBox.h"
 #include "Widgets/Input/SSearchableComboBox.h"
+#include "Widgets/Input/SEditableTextBox.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"
@@ -37,6 +40,7 @@
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/Views/SListView.h"
 #include "Widgets/Views/STableRow.h"
+#include "Widgets/SWindow.h"
 
 #define LOCTEXT_NAMESPACE "STMOPPeopleEditor"
 
@@ -317,10 +321,29 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                         + SHorizontalBox::Slot().AutoWidth().Padding(3.0f, 0.0f)
                         [
                             SNew(SButton)
+                            .Text(LOCTEXT("AddMeetingDialogue", "+ Meeting Dialogue"))
+                            .ToolTipText(LOCTEXT("AddMeetingDialogueTip",
+                                "Create one central meeting dialogue and linked timeline rows for every selected participant."))
+                            .OnClicked(this, &STMOPPeopleEditor::AddMeetingDialogue)
+                        ]
+                        + SHorizontalBox::Slot().AutoWidth().Padding(3.0f, 0.0f)
+                        [
+                            SNew(SButton)
                             .Text(LOCTEXT("DuplicateEntry", "Duplicate"))
                             .OnClicked(
                                 this,
                                 &STMOPPeopleEditor::DuplicateTimelineEntry)
+                        ]
+                        + SHorizontalBox::Slot().AutoWidth().Padding(3.0f, 0.0f)
+                        [
+                            SNew(SButton)
+                            .Text(LOCTEXT("OpenMeetingDialogue", "Edit Meeting"))
+                            .ToolTipText(LOCTEXT("OpenMeetingDialogueTip",
+                                "Open the person row that owns this linked dialogue's participants and spoken lines."))
+                            .IsEnabled(this,
+                                &STMOPPeopleEditor::CanOpenMeetingDialogueOwner)
+                            .OnClicked(this,
+                                &STMOPPeopleEditor::OpenMeetingDialogueOwner)
                         ]
                         + SHorizontalBox::Slot().AutoWidth()
                         [
@@ -1093,6 +1116,7 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
         WorkingRow.bFollowGroupLeaderSchedule;
     General->Dialog = WorkingRow.Dialog;
     General->AutomaticSpeech = WorkingRow.AutomaticSpeech;
+    General->MeetingDialogues = WorkingRow.MeetingDialogues;
     General->Notes = WorkingRow.Notes;
     GeneralDetailsView->SetStructureData(GeneralStructData);
 }
@@ -1203,6 +1227,7 @@ void STMOPPeopleEditor::CommitPersonDetailEdits()
             General->bFollowGroupLeaderSchedule;
         WorkingRow.Dialog = General->Dialog;
         WorkingRow.AutomaticSpeech = General->AutomaticSpeech;
+        WorkingRow.MeetingDialogues = General->MeetingDialogues;
         WorkingRow.Notes = General->Notes;
     }
 }
@@ -2234,11 +2259,299 @@ FReply STMOPPeopleEditor::AddTimelineEntry()
     return FReply::Handled();
 }
 
+FReply STMOPPeopleEditor::AddMeetingDialogue()
+{
+    CommitEntryEdits();
+    CommitPersonDetailEdits();
+    UDataTable* Table = PeopleTable.Get();
+    if (!IsValid(Table) || SelectedRowName.IsNone() ||
+        WorkingRow.EntityId.IsNone())
+        return FReply::Handled();
+
+    const FTMOPPersonTimelineEntry* SelectedEntry =
+        WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)
+        ? &WorkingRow.Timeline[SelectedTimelineIndex] : nullptr;
+    const FString DefaultDialogueId = FString::Printf(
+        TEXT("DIALOGUE_%s_%02d"), *WorkingRow.EntityId.ToString(),
+        WorkingRow.MeetingDialogues.Num() + 1);
+
+    TSharedPtr<SEditableTextBox> DialogueIdBox;
+    TSharedPtr<SEditableTextBox> SharedEventBox;
+    TSharedPtr<SEditableTextBox> AnchorBox;
+    const TSharedRef<TSet<FName>> SelectedParticipants =
+        MakeShared<TSet<FName>>();
+    SelectedParticipants->Add(WorkingRow.EntityId);
+    const TSharedRef<bool> bAccepted = MakeShared<bool>(false);
+
+    TSharedRef<SVerticalBox> ParticipantList = SNew(SVerticalBox);
+    for (const FName RowName : Table->GetRowNames())
+    {
+        const FTMOPPersonProfileRow* Candidate =
+            Table->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("TMOPMeetingDialogueWizard"), false);
+        if (Candidate == nullptr || Candidate->EntityId.IsNone()) continue;
+        const FName EntityId = Candidate->EntityId;
+        const bool bOwner = EntityId == WorkingRow.EntityId;
+        const FText Label = !Candidate->FullName.IsEmpty()
+            ? FText::Format(LOCTEXT("MeetingParticipantLabel", "{0}  ({1})"),
+                Candidate->FullName, FText::FromName(EntityId))
+            : FText::FromName(EntityId);
+        ParticipantList->AddSlot().AutoHeight().Padding(1.0f)
+        [
+            SNew(SCheckBox)
+            .IsEnabled(!bOwner)
+            .IsChecked_Lambda([SelectedParticipants, EntityId]()
+            {
+                return SelectedParticipants->Contains(EntityId)
+                    ? ECheckBoxState::Checked
+                    : ECheckBoxState::Unchecked;
+            })
+            .OnCheckStateChanged_Lambda(
+                [SelectedParticipants, EntityId](ECheckBoxState State)
+                {
+                    if (State == ECheckBoxState::Checked)
+                        SelectedParticipants->Add(EntityId);
+                    else
+                        SelectedParticipants->Remove(EntityId);
+                })
+            [ SNew(STextBlock).Text(Label) ]
+        ];
+    }
+
+    const TSharedRef<SWindow> Window = SNew(SWindow)
+        .Title(LOCTEXT("MeetingDialogueWizardTitle", "Create Linked Meeting Dialogue"))
+        .ClientSize(FVector2D(620.0f, 650.0f))
+        .SupportsMaximize(false)
+        .SupportsMinimize(false);
+    const TWeakPtr<SWindow> WeakWindow = Window;
+    Window->SetContent(
+        SNew(SBorder).Padding(12.0f)
+        [
+            SNew(SVerticalBox)
+            + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
+            [ SNew(STextBlock)
+                .Text(LOCTEXT("MeetingWizardHelp",
+                    "Choose all participants. One definition owns the text; every participant receives a linked timeline row."))
+                .AutoWrapText(true) ]
+            + SVerticalBox::Slot().AutoHeight()
+            [ SNew(STextBlock).Text(LOCTEXT("MeetingDialogueId", "Dialogue ID")) ]
+            + SVerticalBox::Slot().AutoHeight().Padding(0, 2, 0, 8)
+            [ SAssignNew(DialogueIdBox, SEditableTextBox)
+                .Text(FText::FromString(DefaultDialogueId)) ]
+            + SVerticalBox::Slot().AutoHeight()
+            [ SNew(STextBlock).Text(LOCTEXT("MeetingSharedEvent", "Shared Event ID (meeting start)")) ]
+            + SVerticalBox::Slot().AutoHeight().Padding(0, 2, 0, 8)
+            [ SAssignNew(SharedEventBox, SEditableTextBox)
+                .Text(SelectedEntry != nullptr
+                    ? FText::FromName(SelectedEntry->SharedEventId)
+                    : FText::GetEmpty()) ]
+            + SVerticalBox::Slot().AutoHeight()
+            [ SNew(STextBlock).Text(LOCTEXT("MeetingAnchor", "Anchor ID (meeting place)")) ]
+            + SVerticalBox::Slot().AutoHeight().Padding(0, 2, 0, 8)
+            [ SAssignNew(AnchorBox, SEditableTextBox)
+                .Text(SelectedEntry != nullptr
+                    ? FText::FromName(SelectedEntry->TargetAnchorId)
+                    : FText::GetEmpty()) ]
+            + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 4)
+            [ SNew(STextBlock).Text(LOCTEXT("MeetingParticipants", "Participants")) ]
+            + SVerticalBox::Slot().FillHeight(1.0f)
+            [ SNew(SBorder).Padding(5.0f)
+                [ SNew(SScrollBox)
+                    + SScrollBox::Slot()[ ParticipantList ] ] ]
+            + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Right).Padding(0, 10, 0, 0)
+            [
+                SNew(SHorizontalBox)
+                + SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 6, 0)
+                [ SNew(SButton)
+                    .Text(LOCTEXT("MeetingCancel", "Cancel"))
+                    .OnClicked_Lambda([WeakWindow]()
+                    {
+                        if (const TSharedPtr<SWindow> Pinned = WeakWindow.Pin())
+                            Pinned->RequestDestroyWindow();
+                        return FReply::Handled();
+                    }) ]
+                + SHorizontalBox::Slot().AutoWidth()
+                [ SNew(SButton)
+                    .ButtonStyle(FAppStyle::Get(), "PrimaryButton")
+                    .Text(LOCTEXT("MeetingCreate", "Create linked dialogue"))
+                    .OnClicked_Lambda([WeakWindow, bAccepted]()
+                    {
+                        *bAccepted = true;
+                        if (const TSharedPtr<SWindow> Pinned = WeakWindow.Pin())
+                            Pinned->RequestDestroyWindow();
+                        return FReply::Handled();
+                    }) ]
+            ]
+        ]);
+
+    FSlateApplication::Get().AddModalWindow(
+        Window, FSlateApplication::Get().FindWidgetWindow(AsShared()), false);
+    if (!*bAccepted) return FReply::Handled();
+
+    const FName DialogueId(*DialogueIdBox->GetText().ToString().TrimStartAndEnd());
+    const FName SharedEventId(*SharedEventBox->GetText().ToString().TrimStartAndEnd());
+    const FName AnchorId(*AnchorBox->GetText().ToString().TrimStartAndEnd());
+    if (DialogueId.IsNone() || SharedEventId.IsNone() || AnchorId.IsNone() ||
+        SelectedParticipants->Num() < 2)
+    {
+        FMessageDialog::Open(EAppMsgType::Ok,
+            LOCTEXT("MeetingWizardMissing",
+                "Dialogue ID, Shared Event ID, Anchor ID and at least two participants are required."));
+        return FReply::Handled();
+    }
+    bool bEventExists = false;
+    if (EventTable.IsValid())
+        for (const FName EventRowName : EventTable->GetRowNames())
+            if (const FTMOPHistoricalEventDefinition* Event =
+                EventTable->FindRow<FTMOPHistoricalEventDefinition>(
+                    EventRowName, TEXT("TMOPMeetingWizardEvent"), false))
+                if (EventRowName == SharedEventId ||
+                    Event->EventId == SharedEventId)
+                {
+                    bEventExists = true;
+                    break;
+                }
+    bool bAnchorExists = false;
+    for (const FReferenceItem& Item : AnchorReferenceItems)
+        if (GetReferenceId(Item) == AnchorId)
+        {
+            bAnchorExists = true;
+            break;
+        }
+    if (!bEventExists || !bAnchorExists)
+    {
+        FMessageDialog::Open(EAppMsgType::Ok,
+            FText::Format(LOCTEXT("MeetingWizardBadReferences",
+                "Cannot create the dialogue. Shared event found: {0}. Anchor found in the open level: {1}."),
+                bEventExists ? FText::FromString(TEXT("yes"))
+                             : FText::FromString(TEXT("no")),
+                bAnchorExists ? FText::FromString(TEXT("yes"))
+                              : FText::FromString(TEXT("no"))));
+        return FReply::Handled();
+    }
+    for (const FName RowName : Table->GetRowNames())
+        if (const FTMOPPersonProfileRow* Row =
+            Table->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("TMOPMeetingDialogueDuplicate"), false))
+            if (Row->MeetingDialogues.ContainsByPredicate(
+                [DialogueId](const FTMOPMeetingDialogueDefinition& Existing)
+                { return Existing.DialogueId == DialogueId; }))
+            {
+                FMessageDialog::Open(EAppMsgType::Ok,
+                    FText::Format(LOCTEXT("MeetingDuplicateId",
+                        "Meeting Dialogue ID '{0}' already exists."),
+                        FText::FromName(DialogueId)));
+                return FReply::Handled();
+            }
+
+    const FScopedTransaction Transaction(
+        LOCTEXT("CreateMeetingDialogueTransaction", "Create linked meeting dialogue"));
+    Table->Modify();
+
+    FTMOPMeetingDialogueDefinition Definition;
+    Definition.DialogueId = DialogueId;
+    Definition.DisplayName = FText::FromName(DialogueId);
+    Definition.SharedEventId = SharedEventId;
+    Definition.AnchorId = AnchorId;
+    Definition.ParticipantEntityIds = SelectedParticipants->Array();
+    Definition.ParticipantEntityIds.Sort(
+        [](const FName A, const FName B) { return A.LexicalLess(B); });
+
+    auto AddLinkedEntry = [&](FTMOPPersonProfileRow& Row)
+    {
+        FTMOPPersonTimelineEntry Entry;
+        Entry.Action = ETMOPPersonTimelineAction::MeetingDialogue;
+        Entry.EntryId = FName(*FString::Printf(TEXT("%s_%s"),
+            *Row.EntityId.ToString(), *DialogueId.ToString()));
+        int32 Suffix = 2;
+        while (Row.Timeline.ContainsByPredicate(
+            [&Entry](const FTMOPPersonTimelineEntry& Existing)
+            { return Existing.EntryId == Entry.EntryId; }))
+            Entry.EntryId = FName(*FString::Printf(TEXT("%s_%s_%d"),
+                *Row.EntityId.ToString(), *DialogueId.ToString(), Suffix++));
+        Entry.TimingMode = ETMOPEventTimingMode::Relative;
+        Entry.SharedEventId = SharedEventId;
+        Entry.TargetAnchorId = AnchorId;
+        Entry.LocationType = ETMOPPersonLocationType::Anchor;
+        Entry.MeetingDialogueId = DialogueId;
+        Entry.ConversationTargetMode =
+            ETMOPConversationTargetMode::SpecificPerson;
+        const int32 ParticipantIndex =
+            Definition.ParticipantEntityIds.IndexOfByKey(Row.EntityId);
+        if (ParticipantIndex != INDEX_NONE &&
+            Definition.ParticipantEntityIds.Num() > 1)
+            Entry.TargetEntityId = Definition.ParticipantEntityIds[
+                (ParticipantIndex + 1) %
+                Definition.ParticipantEntityIds.Num()];
+        FTMOPPersonProfileRow ProbeRow = Row;
+        ProbeRow.Timeline.Add(Entry);
+        int32 NewSecond = INDEX_NONE;
+        const bool bResolved = ResolveTimelineDisplaySecondForRow(
+            ProbeRow, ProbeRow.Timeline.Num() - 1, NewSecond, nullptr);
+        int32 InsertIndex = Row.Timeline.Num();
+        if (bResolved)
+            for (int32 Index = 0; Index < Row.Timeline.Num(); ++Index)
+            {
+                int32 ExistingSecond = INDEX_NONE;
+                if (ResolveTimelineDisplaySecondForRow(
+                        Row, Index, ExistingSecond, nullptr) &&
+                    ExistingSecond > NewSecond)
+                {
+                    InsertIndex = Index;
+                    break;
+                }
+            }
+        Row.Timeline.Insert(Entry, InsertIndex);
+        return InsertIndex;
+    };
+
+    WorkingRow.MeetingDialogues.Add(Definition);
+    const int32 OwnerTimelineIndex = AddLinkedEntry(WorkingRow);
+    for (const FName ParticipantId : Definition.ParticipantEntityIds)
+    {
+        if (ParticipantId == WorkingRow.EntityId) continue;
+        FTMOPPersonProfileRow* ParticipantRow =
+            Table->FindRow<FTMOPPersonProfileRow>(
+                ParticipantId, TEXT("TMOPAddMeetingDialogueLink"), false);
+        if (ParticipantRow == nullptr) continue;
+        AddLinkedEntry(*ParticipantRow);
+    }
+
+    if (FTMOPPersonProfileRow* OwnerRow =
+        Table->FindRow<FTMOPPersonProfileRow>(
+            SelectedRowName, TEXT("TMOPSaveMeetingDialogueOwner"), false))
+        *OwnerRow = WorkingRow;
+    Table->MarkPackageDirty();
+    Table->PostEditChange();
+    LastSavedRow = WorkingRow;
+    bHasLastSavedRow = true;
+    RefreshPersonDetailViews();
+    EntryDetailsView->SetStructureData(nullptr);
+    EntryStructData.Reset();
+    SelectedTimelineIndex = INDEX_NONE;
+    RefreshTimeline();
+    SelectTimelineEntry(OwnerTimelineIndex);
+    SetStatus(FText::Format(LOCTEXT("MeetingCreated",
+        "Created linked meeting dialogue {0} for {1} participants. Add ordered lines under Meeting Dialogues, then Save Person."),
+        FText::FromName(DialogueId),
+        FText::AsNumber(Definition.ParticipantEntityIds.Num())),
+        FLinearColor(0.4f, 1.0f, 0.4f));
+    return FReply::Handled();
+}
+
 FReply STMOPPeopleEditor::DuplicateTimelineEntry()
 {
     CommitEntryEdits();
     if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
         return FReply::Handled();
+    if (WorkingRow.Timeline[SelectedTimelineIndex].Action ==
+        ETMOPPersonTimelineAction::MeetingDialogue)
+    {
+        FMessageDialog::Open(EAppMsgType::Ok,
+            LOCTEXT("CannotDuplicateMeetingLink",
+                "A Meeting Dialogue row is a synchronized link and cannot be duplicated. Use + Meeting Dialogue to create another meeting."));
+        return FReply::Handled();
+    }
     FTMOPPersonTimelineEntry Copy =
         WorkingRow.Timeline[SelectedTimelineIndex];
     Copy.EntryId = FName(*(Copy.EntryId.ToString() + TEXT("_COPY")));
@@ -2249,11 +2562,122 @@ FReply STMOPPeopleEditor::DuplicateTimelineEntry()
     return FReply::Handled();
 }
 
+bool STMOPPeopleEditor::CanOpenMeetingDialogueOwner() const
+{
+    return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex) &&
+        WorkingRow.Timeline[SelectedTimelineIndex].Action ==
+            ETMOPPersonTimelineAction::MeetingDialogue &&
+        !WorkingRow.Timeline[SelectedTimelineIndex].MeetingDialogueId.IsNone();
+}
+
+FReply STMOPPeopleEditor::OpenMeetingDialogueOwner()
+{
+    CommitEntryEdits();
+    if (!CanOpenMeetingDialogueOwner()) return FReply::Handled();
+    const FName DialogueId =
+        WorkingRow.Timeline[SelectedTimelineIndex].MeetingDialogueId;
+    UDataTable* Table = PeopleTable.Get();
+    if (!IsValid(Table)) return FReply::Handled();
+
+    FName OwnerRowName = NAME_None;
+    for (const FName RowName : Table->GetRowNames())
+        if (const FTMOPPersonProfileRow* Row =
+            Table->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("TMOPFindMeetingDialogueOwner"), false))
+            if (Row->MeetingDialogues.ContainsByPredicate(
+                [DialogueId](const FTMOPMeetingDialogueDefinition& Dialogue)
+                { return Dialogue.DialogueId == DialogueId; }))
+            {
+                OwnerRowName = RowName;
+                break;
+            }
+    if (OwnerRowName.IsNone())
+    {
+        SetStatus(FText::Format(LOCTEXT("MeetingOwnerMissing",
+            "No owner definition was found for meeting dialogue {0}."),
+            FText::FromName(DialogueId)), FLinearColor::Red);
+        return FReply::Handled();
+    }
+    if (OwnerRowName != SelectedRowName && HasUnsavedPersonChanges())
+    {
+        const EAppReturnType::Type Choice = FMessageDialog::Open(
+            EAppMsgType::YesNoCancel,
+            LOCTEXT("SaveBeforeOpeningMeeting",
+                "This person has unsaved changes. Save before opening the meeting dialogue owner?"));
+        if (Choice == EAppReturnType::Cancel) return FReply::Handled();
+        if (Choice == EAppReturnType::Yes && !SaveCurrentPerson())
+            return FReply::Handled();
+    }
+    if (OwnerRowName != SelectedRowName)
+    {
+        SelectPerson(OwnerRowName);
+        RestorePersonListSelection();
+    }
+    SetStatus(FText::Format(LOCTEXT("MeetingOwnerOpened",
+        "Meeting dialogue {0} is under DATA → Meeting Dialogues on this owner row."),
+        FText::FromName(DialogueId)), FLinearColor(0.45f, 0.8f, 1.0f));
+    return FReply::Handled();
+}
+
 FReply STMOPPeopleEditor::DeleteTimelineEntry()
 {
     CommitEntryEdits();
     if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
         return FReply::Handled();
+    const FName LinkedDialogueId =
+        WorkingRow.Timeline[SelectedTimelineIndex].Action ==
+            ETMOPPersonTimelineAction::MeetingDialogue
+        ? WorkingRow.Timeline[SelectedTimelineIndex].MeetingDialogueId
+        : NAME_None;
+    if (!LinkedDialogueId.IsNone())
+    {
+        if (FMessageDialog::Open(EAppMsgType::YesNo,
+            FText::Format(LOCTEXT("DeleteLinkedMeetingConfirm",
+                "Delete linked meeting dialogue '{0}' from every participant and remove its central text definition?"),
+                FText::FromName(LinkedDialogueId))) != EAppReturnType::Yes)
+            return FReply::Handled();
+
+        UDataTable* Table = PeopleTable.Get();
+        if (IsValid(Table))
+        {
+            const FScopedTransaction Transaction(
+                LOCTEXT("DeleteLinkedMeetingTransaction",
+                    "Delete linked meeting dialogue"));
+            Table->Modify();
+            for (const FName RowName : Table->GetRowNames())
+                if (FTMOPPersonProfileRow* Row =
+                    Table->FindRow<FTMOPPersonProfileRow>(
+                        RowName, TEXT("TMOPDeleteMeetingDialogue"), false))
+                {
+                    Row->Timeline.RemoveAll(
+                        [LinkedDialogueId](const FTMOPPersonTimelineEntry& Entry)
+                        {
+                            return Entry.Action ==
+                                    ETMOPPersonTimelineAction::MeetingDialogue &&
+                                Entry.MeetingDialogueId == LinkedDialogueId;
+                        });
+                    Row->MeetingDialogues.RemoveAll(
+                        [LinkedDialogueId](
+                            const FTMOPMeetingDialogueDefinition& Dialogue)
+                        { return Dialogue.DialogueId == LinkedDialogueId; });
+                    if (RowName == SelectedRowName) WorkingRow = *Row;
+                }
+            Table->MarkPackageDirty();
+            Table->PostEditChange();
+            LastSavedRow = WorkingRow;
+            bHasLastSavedRow = true;
+        }
+        SelectedTimelineIndex = INDEX_NONE;
+        EntryStructData.Reset();
+        EntryDetailsView->SetStructureData(nullptr);
+        RefreshPersonDetailViews();
+        RefreshTimeline();
+        SetStatus(FText::Format(LOCTEXT("DeletedLinkedMeeting",
+            "Deleted linked meeting dialogue {0} from all participants."),
+            FText::FromName(LinkedDialogueId)),
+            FLinearColor(0.8f, 0.8f, 0.8f));
+        return FReply::Handled();
+    }
     WorkingRow.Timeline.RemoveAt(SelectedTimelineIndex);
     const int32 NextIndex = FMath::Min(
         SelectedTimelineIndex,
@@ -2305,7 +2729,12 @@ FReply STMOPPeopleEditor::CopyPersonTimeline()
         return FReply::Handled();
 
     CommitEntryEdits();
-    CopiedTimeline = WorkingRow.Timeline;
+    CopiedTimeline = WorkingRow.Timeline.FilterByPredicate(
+        [](const FTMOPPersonTimelineEntry& Entry)
+        {
+            return Entry.Action !=
+                ETMOPPersonTimelineAction::MeetingDialogue;
+        });
     CopiedTimelineSourceRow = SelectedRowName;
     CopiedTimelineSourceLabel = !WorkingRow.FullName.IsEmpty()
         ? WorkingRow.FullName.ToString()
@@ -2315,7 +2744,7 @@ FReply STMOPPeopleEditor::CopyPersonTimeline()
     SetStatus(
         FText::Format(
             LOCTEXT("PersonTimelineCopied",
-                "Copied {0} timeline entries from {1}. Select another person and choose Paste / replace."),
+                "Copied {0} non-linked timeline entries from {1}. Meeting Dialogues stay linked and are intentionally excluded. Select another person and choose Paste / replace."),
             FText::AsNumber(CopiedTimeline.Num()),
             FText::FromString(CopiedTimelineSourceLabel)),
         FLinearColor(0.45f, 0.8f, 1.0f));
@@ -2347,7 +2776,12 @@ FReply STMOPPeopleEditor::PastePersonTimeline()
     if (Choice != EAppReturnType::Yes)
         return FReply::Handled();
 
+    const TArray<FTMOPPersonTimelineEntry> MeetingLinks =
+        WorkingRow.Timeline.FilterByPredicate(
+            [](const FTMOPPersonTimelineEntry& Entry)
+            { return Entry.Action == ETMOPPersonTimelineAction::MeetingDialogue; });
     WorkingRow.Timeline = CopiedTimeline;
+    WorkingRow.Timeline.Append(MeetingLinks);
     SelectedTimelineIndex = INDEX_NONE;
     EntryStructData.Reset();
     if (EntryDetailsView.IsValid())
@@ -2375,6 +2809,9 @@ FReply STMOPPeopleEditor::SavePerson()
 
 bool STMOPPeopleEditor::SaveCurrentPerson()
 {
+    const TArray<FTMOPMeetingDialogueDefinition> PreviousMeetingDialogues =
+        bHasLastSavedRow ? LastSavedRow.MeetingDialogues
+                         : TArray<FTMOPMeetingDialogueDefinition>();
     CommitEntryEdits();
     CommitPersonDetailEdits();
     UDataTable* Table = PeopleTable.Get();
@@ -2424,6 +2861,15 @@ bool STMOPPeopleEditor::SaveCurrentPerson()
         *Existing = WorkingRow;
     }
 
+    SynchronizeOwnedMeetingDialogues(PreviousMeetingDialogues);
+
+    // Synchronization can remove/reindex rows. Never commit the previous
+    // details buffer into the new array at its stale index on the next click.
+    EntryDetailsView->SetStructureData(nullptr);
+    EntryStructData.Reset();
+    SelectedTimelineIndex = INDEX_NONE;
+    RefreshPersonDetailViews();
+
     Table->MarkPackageDirty();
     Table->PostEditChange();
     LastSavedRow = WorkingRow;
@@ -2436,6 +2882,118 @@ bool STMOPPeopleEditor::SaveCurrentPerson()
             "Person saved to DT_TMOP_People. Save the project to write the asset to disk."),
         FLinearColor(0.4f, 1.0f, 0.4f));
     return true;
+}
+
+void STMOPPeopleEditor::SynchronizeOwnedMeetingDialogues(
+    const TArray<FTMOPMeetingDialogueDefinition>& PreviousDefinitions)
+{
+    UDataTable* Table = PeopleTable.Get();
+    if (!IsValid(Table)) return;
+
+    TSet<FName> CurrentIds;
+    for (const FTMOPMeetingDialogueDefinition& Dialogue :
+         WorkingRow.MeetingDialogues)
+        if (!Dialogue.DialogueId.IsNone())
+            CurrentIds.Add(Dialogue.DialogueId);
+
+    // A deleted or renamed owner definition removes every stale participant
+    // link. This is deliberately all-or-nothing so no orphan dialogue remains.
+    for (const FTMOPMeetingDialogueDefinition& Previous : PreviousDefinitions)
+        if (!Previous.DialogueId.IsNone() &&
+            !CurrentIds.Contains(Previous.DialogueId))
+            for (const FName RowName : Table->GetRowNames())
+                if (FTMOPPersonProfileRow* Row =
+                    Table->FindRow<FTMOPPersonProfileRow>(
+                        RowName, TEXT("TMOPRemoveMeetingDialogueLinks"), false))
+                    Row->Timeline.RemoveAll(
+                        [&Previous](const FTMOPPersonTimelineEntry& Entry)
+                        {
+                            return Entry.Action ==
+                                    ETMOPPersonTimelineAction::MeetingDialogue &&
+                                Entry.MeetingDialogueId == Previous.DialogueId;
+                        });
+
+    for (const FTMOPMeetingDialogueDefinition& Dialogue :
+         WorkingRow.MeetingDialogues)
+    {
+        if (Dialogue.DialogueId.IsNone()) continue;
+        const TSet<FName> Participants = [&Dialogue]()
+        {
+            TSet<FName> Result;
+            for (const FName Id : Dialogue.ParticipantEntityIds)
+                Result.Add(Id);
+            return Result;
+        }();
+
+        for (const FName RowName : Table->GetRowNames())
+        {
+            FTMOPPersonProfileRow* Row =
+                Table->FindRow<FTMOPPersonProfileRow>(
+                    RowName, TEXT("TMOPSyncMeetingDialogueLinks"), false);
+            if (Row == nullptr) continue;
+            TArray<int32> LinkIndices;
+            for (int32 Index = 0; Index < Row->Timeline.Num(); ++Index)
+                if (Row->Timeline[Index].Action ==
+                        ETMOPPersonTimelineAction::MeetingDialogue &&
+                    Row->Timeline[Index].MeetingDialogueId ==
+                        Dialogue.DialogueId)
+                    LinkIndices.Add(Index);
+
+            if (!Participants.Contains(Row->EntityId))
+            {
+                for (int32 Index = LinkIndices.Num() - 1; Index >= 0; --Index)
+                    Row->Timeline.RemoveAt(LinkIndices[Index]);
+                continue;
+            }
+
+            if (LinkIndices.IsEmpty())
+            {
+                FTMOPPersonTimelineEntry NewEntry;
+                NewEntry.EntryId = FName(*FString::Printf(TEXT("%s_%s"),
+                    *Row->EntityId.ToString(),
+                    *Dialogue.DialogueId.ToString()));
+                int32 EntrySuffix = 2;
+                while (Row->Timeline.ContainsByPredicate(
+                    [&NewEntry](const FTMOPPersonTimelineEntry& Existing)
+                    { return Existing.EntryId == NewEntry.EntryId; }))
+                    NewEntry.EntryId = FName(*FString::Printf(
+                        TEXT("%s_%s_%d"), *Row->EntityId.ToString(),
+                        *Dialogue.DialogueId.ToString(), EntrySuffix++));
+                Row->Timeline.Add(NewEntry);
+                LinkIndices.Add(Row->Timeline.Num() - 1);
+            }
+            for (int32 Extra = LinkIndices.Num() - 1; Extra > 0; --Extra)
+            {
+                Row->Timeline.RemoveAt(LinkIndices[Extra]);
+                LinkIndices.RemoveAt(Extra);
+            }
+
+            FTMOPPersonTimelineEntry& Link = Row->Timeline[LinkIndices[0]];
+            Link.Action = ETMOPPersonTimelineAction::MeetingDialogue;
+            Link.TimingMode = ETMOPEventTimingMode::Relative;
+            Link.SharedEventId = Dialogue.SharedEventId;
+            Link.EventOffsetSeconds = Dialogue.EventOffsetSeconds;
+            Link.LocationType = ETMOPPersonLocationType::Anchor;
+            Link.TargetAnchorId = Dialogue.AnchorId;
+            Link.MeetingDialogueId = Dialogue.DialogueId;
+            Link.ConversationTargetMode =
+                ETMOPConversationTargetMode::SpecificPerson;
+            Link.TargetEntityId = NAME_None;
+            const int32 ParticipantIndex =
+                Dialogue.ParticipantEntityIds.IndexOfByKey(Row->EntityId);
+            if (ParticipantIndex != INDEX_NONE &&
+                Dialogue.ParticipantEntityIds.Num() > 1)
+                Link.TargetEntityId = Dialogue.ParticipantEntityIds[
+                    (ParticipantIndex + 1) %
+                    Dialogue.ParticipantEntityIds.Num()];
+        }
+    }
+
+    // Synchronization may have updated the selected owner's table row too.
+    if (FTMOPPersonProfileRow* Owner =
+        Table->FindRow<FTMOPPersonProfileRow>(
+            SelectedRowName, TEXT("TMOPReloadSyncedMeetingOwner"), false))
+        WorkingRow = *Owner;
 }
 
 FReply STMOPPeopleEditor::ReloadPerson()
@@ -2581,7 +3139,11 @@ FText STMOPPeopleEditor::GetTimelineSummary(const int32 Index) const
     if (Entry.AnchorReferenceMode == ETMOPAnchorReferenceMode::PlannedFuture)
         Summary += TEXT("[PLANNED] ");
     Summary += ActionLabel(Entry.Action);
-    if ((Entry.Action == ETMOPPersonTimelineAction::Interact ||
+    if (Entry.Action == ETMOPPersonTimelineAction::MeetingDialogue &&
+        !Entry.MeetingDialogueId.IsNone())
+        Summary += TEXT("  → dialogue ") +
+            Entry.MeetingDialogueId.ToString();
+    else if ((Entry.Action == ETMOPPersonTimelineAction::Interact ||
          Entry.Action == ETMOPPersonTimelineAction::PlayUniqueAnimation ||
          Entry.Action == ETMOPPersonTimelineAction::LookAtAnchor) &&
         Entry.ConversationTargetMode ==
@@ -3531,11 +4093,26 @@ bool STMOPPeopleEditor::EntryHasError(
             Entry.TargetAnchorId.IsNone())
             return Fail(TEXT("Look At Anchor requires Target Anchor ID"));
     }
-    if ((Entry.Action == ETMOPPersonTimelineAction::EnterVehicle ||
-         Entry.Action == ETMOPPersonTimelineAction::ExitVehicle ||
-         Entry.Action == ETMOPPersonTimelineAction::BeginDriving) &&
+    if (Entry.Action == ETMOPPersonTimelineAction::EnterVehicle &&
         Entry.TargetEntityId.IsNone())
-        return Fail(TEXT("Vehicle action requires Target Entity ID"));
+        return Fail(TEXT("Enter Vehicle is missing Vehicle ID (Target Entity ID)"));
+    if (Entry.Action == ETMOPPersonTimelineAction::ExitVehicle &&
+        Entry.TargetEntityId.IsNone())
+        return Fail(TEXT("Exit Vehicle is missing Vehicle ID (Target Entity ID)"));
+    if (Entry.Action == ETMOPPersonTimelineAction::BeginDriving &&
+        Entry.TargetEntityId.IsNone())
+        return Fail(TEXT("Begin Driving is missing Vehicle ID (Target Entity ID)"));
+    if (Entry.Action == ETMOPPersonTimelineAction::MeetingDialogue)
+    {
+        if (Entry.MeetingDialogueId.IsNone())
+            return Fail(TEXT("Meeting Dialogue ID is missing"));
+        if (Entry.SharedEventId.IsNone())
+            return Fail(TEXT("Meeting Dialogue Shared Event ID is missing"));
+        if (Entry.TargetAnchorId.IsNone())
+            return Fail(TEXT("Meeting Dialogue Anchor ID is missing"));
+        if (Entry.TargetEntityId.IsNone())
+            return Fail(TEXT("Meeting Dialogue has no other participant target"));
+    }
     if ((Entry.Action == ETMOPPersonTimelineAction::JoinGroup ||
          Entry.Action == ETMOPPersonTimelineAction::SplitGroup ||
          Entry.Action == ETMOPPersonTimelineAction::DissolveGroup ||
@@ -3618,6 +4195,83 @@ TArray<FString> STMOPPeopleEditor::ValidateWorkingRow() const
                 TEXT("Timeline[%d]: duplicate Entry ID '%s'."),
                 Index, *EntryId.ToString()));
         EntryIds.Add(EntryId);
+    }
+    TSet<FName> DialogueIds;
+    for (int32 DialogueIndex = 0;
+         DialogueIndex < WorkingRow.MeetingDialogues.Num(); ++DialogueIndex)
+    {
+        const FTMOPMeetingDialogueDefinition& Dialogue =
+            WorkingRow.MeetingDialogues[DialogueIndex];
+        const FString Prefix = FString::Printf(
+            TEXT("Meeting Dialogues[%d]: "), DialogueIndex);
+        if (Dialogue.DialogueId.IsNone())
+            Errors.Add(Prefix + TEXT("Dialogue ID is missing."));
+        else if (DialogueIds.Contains(Dialogue.DialogueId))
+            Errors.Add(Prefix + TEXT("Dialogue ID is duplicated."));
+        DialogueIds.Add(Dialogue.DialogueId);
+        if (Dialogue.SharedEventId.IsNone())
+            Errors.Add(Prefix + TEXT("Shared Event ID is missing."));
+        if (Dialogue.AnchorId.IsNone())
+            Errors.Add(Prefix + TEXT("Anchor ID is missing."));
+        if (Dialogue.ParticipantEntityIds.Num() < 2)
+            Errors.Add(Prefix + TEXT("At least two participants are required."));
+        if (!Dialogue.ParticipantEntityIds.Contains(WorkingRow.EntityId))
+            Errors.Add(Prefix + TEXT("The owner must be a participant."));
+        TSet<FName> ParticipantIds;
+        for (const FName ParticipantId : Dialogue.ParticipantEntityIds)
+        {
+            if (ParticipantId.IsNone() ||
+                ParticipantIds.Contains(ParticipantId))
+                Errors.Add(Prefix + TEXT("A participant is empty or duplicated."));
+            ParticipantIds.Add(ParticipantId);
+            bool bParticipantExists = false;
+            if (PeopleTable.IsValid())
+                for (const FName RowName : PeopleTable->GetRowNames())
+                    if (const FTMOPPersonProfileRow* Person =
+                        PeopleTable->FindRow<FTMOPPersonProfileRow>(
+                            RowName, TEXT("TMOPValidateMeetingParticipant"), false))
+                        if (Person->EntityId == ParticipantId)
+                        {
+                            bParticipantExists = true;
+                            break;
+                        }
+            if (!ParticipantId.IsNone() && !bParticipantExists)
+                Errors.Add(Prefix + FString::Printf(
+                    TEXT("participant '%s' does not exist."),
+                    *ParticipantId.ToString()));
+        }
+        TSet<FName> LineIds;
+        for (int32 LineIndex = 0; LineIndex < Dialogue.Lines.Num(); ++LineIndex)
+        {
+            const FTMOPMeetingDialogueLine& Line = Dialogue.Lines[LineIndex];
+            if (Line.LineId.IsNone() || LineIds.Contains(Line.LineId))
+                Errors.Add(Prefix + FString::Printf(
+                    TEXT("line %d has an empty or duplicate Line ID."),
+                    LineIndex));
+            LineIds.Add(Line.LineId);
+            if (!ParticipantIds.Contains(Line.SpeakerEntityId))
+                Errors.Add(Prefix + FString::Printf(
+                    TEXT("line %d speaker is not a participant."), LineIndex));
+            if (Line.Text.IsEmpty())
+                Errors.Add(Prefix + FString::Printf(
+                    TEXT("line %d has no Spoken Text."), LineIndex));
+        }
+        if (PeopleTable.IsValid() && !Dialogue.DialogueId.IsNone())
+            for (const FName RowName : PeopleTable->GetRowNames())
+            {
+                if (RowName == SelectedRowName) continue;
+                if (const FTMOPPersonProfileRow* Other =
+                    PeopleTable->FindRow<FTMOPPersonProfileRow>(
+                        RowName, TEXT("TMOPValidateMeetingOwner"), false))
+                    if (Other->MeetingDialogues.ContainsByPredicate(
+                        [&Dialogue](const FTMOPMeetingDialogueDefinition& Existing)
+                        { return Existing.DialogueId == Dialogue.DialogueId; }))
+                    {
+                        Errors.Add(Prefix + TEXT(
+                            "Dialogue ID is already owned by another person."));
+                        break;
+                    }
+            }
     }
     return Errors;
 }

@@ -56,6 +56,7 @@ private:
     TObjectPtr<UTMOPVehicleAccessoryDetailsObject> AccessoryDetailsObject = nullptr;
     TObjectPtr<UTMOPVehicleRoofDetailsObject> RoofDetailsObject = nullptr;
     void OnDetailsChanged(const FPropertyChangedEvent& Event, bool bVehicleDetails);
+    void RefreshCommandBuffersFromWorking();
     void SyncDetailsFromWorking();
     void RefreshAppearancePreview();
     TSharedRef<SWidget> BuildAccessoryControls();
@@ -190,6 +191,8 @@ private:
     FText GetRouteEndpointsText() const;
     FReply RecalculateRoute();
     FReply ClearViaPoints();
+    FReply ClearRouteReference(ERouteReferenceField Field);
+    FReply ClearAllRouteReferences();
     FReply PreviewRouteInLevel();
     void HandleMapLaneClicked(FName LaneId, bool bSetStart,
         bool bSetDestination, bool bAddVia);

@@ -99,6 +99,8 @@ void ATMOPPersonRegistryDirector::EndPlay(const EEndPlayReason::Type EndPlayReas
         if (Pair.Value.bSpawnedByDirector && Pair.Value.Agent.IsValid())
             Pair.Value.Agent->Destroy();
     RuntimePeople.Reset();
+    RuntimeMeetingDialogues.Reset();
+    DeliveredMeetingDialogueLines.Reset();
     Super::EndPlay(EndPlayReason);
 }
 
@@ -120,6 +122,7 @@ void ATMOPPersonRegistryDirector::Tick(const float DeltaSeconds)
         const int32 PreviousSecond = LastEvaluatedSecond;
         EvaluatePeople(CurrentSecond, false);
         EvaluateAutomaticSpeech(CurrentSecond, PreviousSecond);
+        EvaluateMeetingDialogues(CurrentSecond, PreviousSecond);
         LastEvaluatedSecond = CurrentSecond;
     }
 }
@@ -202,6 +205,8 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
         if (Pair.Value.bSpawnedByDirector && Pair.Value.Agent.IsValid())
             Pair.Value.Agent->Destroy();
     RuntimePeople.Reset();
+    RuntimeMeetingDialogues.Reset();
+    DeliveredMeetingDialogueLines.Reset();
     if (!IsValid(PersonProfileTable) ||
         PersonProfileTable->GetRowStruct() != FTMOPPersonProfileRow::StaticStruct()) return 0;
 
@@ -242,6 +247,30 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
         RuntimePeople.Add(Row->EntityId, MoveTemp(Runtime));
     }
 
+    // Meeting dialogue definitions live on exactly one owner person row. The
+    // runtime cache keeps the spoken text central while linked timeline rows
+    // on every participant control presence/focus at the meeting.
+    for (const FName RowName : RowNames)
+    {
+        const FTMOPPersonProfileRow* Row =
+            PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("TMOPMeetingDialogues"), false);
+        if (Row == nullptr) continue;
+        for (const FTMOPMeetingDialogueDefinition& Dialogue :
+             Row->MeetingDialogues)
+        {
+            if (Dialogue.DialogueId.IsNone()) continue;
+            if (RuntimeMeetingDialogues.Contains(Dialogue.DialogueId))
+            {
+                UE_LOG(LogTemp, Error,
+                    TEXT("TMOP Meeting Dialogue '%s' is owned by more than one person row; the first definition wins."),
+                    *Dialogue.DialogueId.ToString());
+                continue;
+            }
+            RuntimeMeetingDialogues.Add(Dialogue.DialogueId, Dialogue);
+        }
+    }
+
     if (HasValidGroupTable()) ApplyGroupTableMemberships();
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
@@ -265,6 +294,7 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
     if (CurrentSecond > InitialEvaluationSecond)
         EvaluatePeople(CurrentSecond, bCatchUpToCurrentClockOnBeginPlay);
     EvaluateAutomaticSpeech(CurrentSecond, CurrentSecond - 1);
+    EvaluateMeetingDialogues(CurrentSecond, CurrentSecond - 1);
     LastEvaluatedSecond = CurrentSecond;
     UE_LOG(LogTemp, Display, TEXT("TMOP People: initialized %d timeline profile(s), %d active agent(s)."),
         RuntimePeople.Num(), RefreshAllActiveProfiles());
@@ -308,6 +338,175 @@ void ATMOPPersonRegistryDirector::EvaluateAutomaticSpeech(
         Agent->ShowAutomaticSpeech(
             LatestDueLine->Text, VoiceOver,
             LatestDueLine->DisplayDurationOverrideSeconds);
+    }
+}
+
+void ATMOPPersonRegistryDirector::PlayTestMeetingDialogue()
+{
+    if (GetWorld() == nullptr || !GetWorld()->IsGameWorld() ||
+        GetGameInstance() == nullptr) return;
+    UTMOPClockSubsystem* Clock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
+    UTMOPHistoricalEventSubsystem* Events =
+        GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>();
+    UTMOPAnchorSubsystem* Anchors = GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+    ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
+        ? Anchors->FindAnchor(TestDialogueAnchor) : nullptr;
+    FPersonRuntime* A = RuntimePeople.Find(TestDialoguePersonA);
+    FPersonRuntime* B = RuntimePeople.Find(TestDialoguePersonB);
+    if (!IsValid(Clock) || !IsValid(Events) || !IsValid(Anchor) ||
+        A == nullptr || B == nullptr || A == B ||
+        !A->Agent.IsValid() || !B->Agent.IsValid())
+    {
+        UE_LOG(LogTemp, Warning, TEXT("TMOP dialogue test: choose two spawned people and a valid anchor in PIE."));
+        return;
+    }
+    for (FPersonRuntime* Person : { A, B })
+        if (IsAgentBusy(Person->Agent.Get()) ||
+            FVector::DistSquared(Person->Agent->GetActorLocation(),
+                Anchor->GetActorLocation()) > FMath::Square(500.0f))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("TMOP dialogue test: both people must be idle within 5 metres of the anchor. No teleport or table changes performed."));
+            return;
+        }
+    const FName TestId(TEXT("TMOP_DEBUG_MEETING_TEST"));
+    if (RuntimeMeetingDialogues.Contains(TestId))
+    {
+        UE_LOG(LogTemp, Warning, TEXT("TMOP dialogue test already installed. Restart PIE to repeat."));
+        return;
+    }
+    if (Events->HasEventDefinition(TestId)) return;
+    const int32 Start = Clock->GetCurrentTime().ToSecondsFromMidnight() + 3;
+    FTMOPHistoricalEventDefinition Event;
+    Event.EventId = TestId;
+    Event.AbsoluteTime = FTMOPTime(Start / 3600, (Start / 60) % 60, Start % 60);
+    if (!Events->RegisterEventDefinition(Event)) return;
+    FTMOPMeetingDialogueDefinition Dialogue;
+    Dialogue.DialogueId = TestId;
+    Dialogue.SharedEventId = TestId;
+    Dialogue.AnchorId = TestDialogueAnchor;
+    Dialogue.ParticipantEntityIds = { TestDialoguePersonA, TestDialoguePersonB };
+    Dialogue.Notes = TEXT("DEBUG ONLY: invented UI test, not historical evidence.");
+    const TCHAR* Texts[] = {
+        TEXT("[TEST] Hej! Ser du min pratbubbla?"),
+        TEXT("[TEST] Ja. Nu svarar jag med min egen pratbubbla."),
+        TEXT("[TEST] Vi turas om inom samma länkade samtal."),
+        TEXT("[TEST] Samtalet är klart. Detta var bara ett funktionstest.") };
+    for (int32 Index = 0; Index < 4; ++Index)
+    {
+        FTMOPMeetingDialogueLine Line;
+        Line.LineId = FName(*FString::Printf(TEXT("TEST_LINE_%d"), Index));
+        Line.SpeakerEntityId = Index % 2 == 0 ? TestDialoguePersonA : TestDialoguePersonB;
+        Line.OffsetSeconds = Index * 6;
+        Line.Text = FText::FromString(Texts[Index]);
+        Line.DisplayDurationOverrideSeconds = 5.0f;
+        Dialogue.Lines.Add(Line);
+    }
+    RuntimeMeetingDialogues.Add(TestId, Dialogue);
+    for (FPersonRuntime* Person : { A, B })
+    {
+        FTMOPPersonTimelineEntry Meeting;
+        Meeting.EntryId = TestId;
+        Meeting.Action = ETMOPPersonTimelineAction::MeetingDialogue;
+        Meeting.MeetingDialogueId = TestId;
+        Meeting.TimingMode = ETMOPEventTimingMode::Relative;
+        Meeting.SharedEventId = TestId;
+        Meeting.TargetAnchorId = TestDialogueAnchor;
+        Meeting.ConversationTargetMode = ETMOPConversationTargetMode::SpecificPerson;
+        Meeting.TargetEntityId = Person == A ? TestDialoguePersonB : TestDialoguePersonA;
+        FTMOPPersonTimelineEntry End = Meeting;
+        End.EntryId = FName(TEXT("TMOP_DEBUG_MEETING_END"));
+        End.Action = ETMOPPersonTimelineAction::Wait;
+        End.EventOffsetSeconds = 25;
+        Person->Profile.Timeline.Insert(Meeting, Person->NextTimelineIndex);
+        Person->Profile.Timeline.Insert(End, Person->NextTimelineIndex + 1);
+        Person->CachedResolvedSecond = INDEX_NONE;
+        Person->CachedTimelineSecond = INDEX_NONE;
+        Person->bCompleted = false;
+    }
+    UE_LOG(LogTemp, Display, TEXT("TMOP dialogue test: four alternating speech bubbles start in 3 simulation seconds. DataTables unchanged. Restart PIE after the test."));
+}
+
+void ATMOPPersonRegistryDirector::EvaluateMeetingDialogues(
+    const int32 CurrentSecond, const int32 PreviousSecond)
+{
+    const UTMOPHistoricalEventSubsystem* Events = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>()
+        : nullptr;
+    if (!IsValid(Events)) return;
+
+    for (const TPair<FName, FTMOPMeetingDialogueDefinition>& Pair :
+         RuntimeMeetingDialogues)
+    {
+        const FTMOPMeetingDialogueDefinition& Dialogue = Pair.Value;
+        if (Dialogue.SharedEventId.IsNone()) continue;
+        FTMOPHistoricalEventRuntime EventRuntime;
+        if (!Events->TryGetEventRuntime(
+                Dialogue.SharedEventId, EventRuntime) ||
+            !EventRuntime.bHasResolvedTime ||
+            EventRuntime.State == ETMOPEventRuntimeState::Cancelled)
+            continue;
+
+        const UTMOPAnchorSubsystem* Anchors =
+            GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+        const ATMOPHistoricalAnchor* Anchor = Anchors != nullptr
+            ? Anchors->FindAnchor(Dialogue.AnchorId) : nullptr;
+        bool bParticipantsReady = IsValid(Anchor) &&
+            Dialogue.ParticipantEntityIds.Num() >= 2;
+        for (const FName ParticipantId : Dialogue.ParticipantEntityIds)
+        {
+            const FPersonRuntime* Participant = RuntimePeople.Find(ParticipantId);
+            const ATMOPHistoricalAgent* Agent = Participant != nullptr
+                ? Participant->Agent.Get() : nullptr;
+            if (!IsValid(Agent) || Agent->IsHidden() ||
+                Participant->ActiveMeetingDialogueId != Dialogue.DialogueId ||
+                (IsValid(Anchor) && FVector::DistSquared(
+                    Agent->GetActorLocation(), Anchor->GetActorLocation()) >
+                    FMath::Square(500.0f)))
+            {
+                bParticipantsReady = false;
+                break;
+            }
+        }
+        if (!bParticipantsReady) continue;
+
+        const int32 StartSecond =
+            EventRuntime.ResolvedTime.ToSecondsFromMidnight() +
+            Dialogue.EventOffsetSeconds;
+        for (int32 LineIndex = 0; LineIndex < Dialogue.Lines.Num();
+             ++LineIndex)
+        {
+            const FTMOPMeetingDialogueLine& Line = Dialogue.Lines[LineIndex];
+            const int32 LineSecond = StartSecond + Line.OffsetSeconds;
+            if (LineSecond <= PreviousSecond || LineSecond > CurrentSecond ||
+                Line.Text.IsEmpty() || Line.SpeakerEntityId.IsNone() ||
+                !Dialogue.ParticipantEntityIds.Contains(Line.SpeakerEntityId))
+                continue;
+
+            const FName DeliveryKey(*FString::Printf(
+                TEXT("%s::%s::%d"), *Dialogue.DialogueId.ToString(),
+                *Line.LineId.ToString(), LineIndex));
+            if (DeliveredMeetingDialogueLines.Contains(DeliveryKey)) continue;
+
+            FPersonRuntime* SpeakerRuntime =
+                RuntimePeople.Find(Line.SpeakerEntityId);
+            ATMOPHistoricalAgent* Speaker = SpeakerRuntime != nullptr
+                ? SpeakerRuntime->Agent.Get() : nullptr;
+            if (!IsValid(Speaker)) continue;
+
+            for (const FName ListenerId : Dialogue.ParticipantEntityIds)
+                if (ListenerId != Line.SpeakerEntityId)
+                    if (ATMOPHistoricalAgent* Listener = FindSpawnedPerson(ListenerId))
+                    {
+                        Listener->BeginLookAtFocus(Speaker);
+                    }
+
+            USoundBase* VoiceOver = Line.VoiceOver.IsNull()
+                ? nullptr : Line.VoiceOver.LoadSynchronous();
+            Speaker->ShowAutomaticSpeech(
+                Line.Text, VoiceOver,
+                Line.DisplayDurationOverrideSeconds);
+            DeliveredMeetingDialogueLines.Add(DeliveryKey);
+        }
     }
 }
 
@@ -626,6 +825,8 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
 {
     ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
     if (!IsValid(Agent)) return false;
+    if (Entry.Action != ETMOPPersonTimelineAction::MeetingDialogue)
+        Runtime.ActiveMeetingDialogueId = NAME_None;
     switch (Entry.Action)
     {
     case ETMOPPersonTimelineAction::InitialPlacement:
@@ -893,6 +1094,18 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
                 Entry.NewGroupLeaderEntityId);
     }
     case ETMOPPersonTimelineAction::Interact:
+        ClearConversationFocus(Agent);
+        ApplyConversationFocus(Agent, Entry);
+        Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
+        return true;
+    case ETMOPPersonTimelineAction::MeetingDialogue:
+        // The editor gives every participant a linked row and chooses another
+        // participant as TargetEntityId. Dialogue text is emitted centrally by
+        // EvaluateMeetingDialogues, so linked rows never duplicate speech.
+        if (Entry.MeetingDialogueId.IsNone() ||
+            !RuntimeMeetingDialogues.Contains(Entry.MeetingDialogueId))
+            return false;
+        Runtime.ActiveMeetingDialogueId = Entry.MeetingDialogueId;
         ClearConversationFocus(Agent);
         ApplyConversationFocus(Agent, Entry);
         Agent->SetActivityState(ETMOPAgentActivityState::Interacting);
@@ -1662,6 +1875,10 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 Entry.TargetEntityId.IsNone())
                 OutErrors.Add(Prefix + FString::Printf(
                     TEXT(" Timeline[%d] requires a target Vehicle ID."), Index));
+            if (Entry.Action == ETMOPPersonTimelineAction::MeetingDialogue &&
+                Entry.MeetingDialogueId.IsNone())
+                OutErrors.Add(Prefix + FString::Printf(
+                    TEXT(" Timeline[%d] Meeting Dialogue requires a Meeting Dialogue ID."), Index));
             if ((Entry.Action == ETMOPPersonTimelineAction::JoinGroup ||
                  Entry.Action == ETMOPPersonTimelineAction::SplitGroup ||
                  Entry.Action == ETMOPPersonTimelineAction::DissolveGroup ||
@@ -1753,10 +1970,129 @@ bool ATMOPPersonRegistryDirector::ValidatePeopleTable(TArray<FString>& OutErrors
                 OutErrors.Add(Prefix + TEXT(
                     " AutomaticSpeech[0] cannot be Relative to Previous Line."));
         }
+        TSet<FName> OwnedDialogueIds;
+        for (int32 DialogueIndex = 0;
+             DialogueIndex < Row->MeetingDialogues.Num(); ++DialogueIndex)
+        {
+            const FTMOPMeetingDialogueDefinition& Dialogue =
+                Row->MeetingDialogues[DialogueIndex];
+            const FString DialoguePrefix = Prefix + FString::Printf(
+                TEXT(" MeetingDialogues[%d]"), DialogueIndex);
+            if (Dialogue.DialogueId.IsNone() ||
+                OwnedDialogueIds.Contains(Dialogue.DialogueId))
+                OutErrors.Add(DialoguePrefix +
+                    TEXT(" has a missing/duplicate Dialogue ID."));
+            OwnedDialogueIds.Add(Dialogue.DialogueId);
+            if (Dialogue.SharedEventId.IsNone())
+                OutErrors.Add(DialoguePrefix +
+                    TEXT(" requires a Shared Event ID."));
+            if (Dialogue.AnchorId.IsNone())
+                OutErrors.Add(DialoguePrefix + TEXT(" requires an Anchor ID."));
+            if (Dialogue.ParticipantEntityIds.Num() < 2)
+                OutErrors.Add(DialoguePrefix +
+                    TEXT(" requires at least two participants."));
+            if (!Dialogue.ParticipantEntityIds.Contains(Row->EntityId))
+                OutErrors.Add(DialoguePrefix +
+                    TEXT(" must include its owner as a participant."));
+            TSet<FName> Participants;
+            for (const FName ParticipantId : Dialogue.ParticipantEntityIds)
+            {
+                if (ParticipantId.IsNone() || Participants.Contains(ParticipantId))
+                    OutErrors.Add(DialoguePrefix +
+                        TEXT(" has a missing/duplicate participant."));
+                Participants.Add(ParticipantId);
+            }
+            TSet<FName> LineIds;
+            for (int32 LineIndex = 0; LineIndex < Dialogue.Lines.Num();
+                 ++LineIndex)
+            {
+                const FTMOPMeetingDialogueLine& Line =
+                    Dialogue.Lines[LineIndex];
+                if (Line.LineId.IsNone() || LineIds.Contains(Line.LineId))
+                    OutErrors.Add(DialoguePrefix + FString::Printf(
+                        TEXT(" line %d has a missing/duplicate Line ID."),
+                        LineIndex));
+                LineIds.Add(Line.LineId);
+                if (!Participants.Contains(Line.SpeakerEntityId))
+                    OutErrors.Add(DialoguePrefix + FString::Printf(
+                        TEXT(" line %d speaker is not a participant."),
+                        LineIndex));
+                if (Line.Text.IsEmpty())
+                    OutErrors.Add(DialoguePrefix + FString::Printf(
+                        TEXT(" line %d has no Spoken Text."), LineIndex));
+            }
+        }
         if (!HasValidGroupTable() && !Row->SocialGroupId.IsNone() &&
             Row->GroupLeaderEntityId.IsNone())
             OutErrors.Add(Prefix + TEXT(" belongs to a group but has no GroupLeaderEntityId."));
     }
+
+    TMap<FName, const FTMOPMeetingDialogueDefinition*> DialogueById;
+    TMap<FName, TSet<FName>> LinkedParticipantsByDialogue;
+    for (const FName RowName : PersonProfileTable->GetRowNames())
+    {
+        const FTMOPPersonProfileRow* Row =
+            PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
+                RowName, TEXT("ValidateMeetingDialogueLinks"), false);
+        if (Row == nullptr) continue;
+        for (const FTMOPMeetingDialogueDefinition& Dialogue :
+             Row->MeetingDialogues)
+        {
+            if (Dialogue.DialogueId.IsNone()) continue;
+            if (DialogueById.Contains(Dialogue.DialogueId))
+                OutErrors.Add(FString::Printf(
+                    TEXT("Meeting Dialogue '%s' has more than one owner."),
+                    *Dialogue.DialogueId.ToString()));
+            else
+                DialogueById.Add(Dialogue.DialogueId, &Dialogue);
+            for (const FName ParticipantId : Dialogue.ParticipantEntityIds)
+                if (!ParticipantId.IsNone() &&
+                    !EntityIds.Contains(ParticipantId))
+                    OutErrors.Add(FString::Printf(
+                        TEXT("Meeting Dialogue '%s' references unknown participant '%s'."),
+                        *Dialogue.DialogueId.ToString(),
+                        *ParticipantId.ToString()));
+        }
+        for (const FTMOPPersonTimelineEntry& Entry : Row->Timeline)
+            if (Entry.Action == ETMOPPersonTimelineAction::MeetingDialogue &&
+                !Entry.MeetingDialogueId.IsNone())
+                LinkedParticipantsByDialogue.FindOrAdd(
+                    Entry.MeetingDialogueId).Add(Row->EntityId);
+    }
+    for (const TPair<FName, TSet<FName>>& LinkPair :
+         LinkedParticipantsByDialogue)
+    {
+        const FTMOPMeetingDialogueDefinition* const* Found =
+            DialogueById.Find(LinkPair.Key);
+        if (Found == nullptr)
+        {
+            OutErrors.Add(FString::Printf(
+                TEXT("Meeting Dialogue timeline link '%s' has no owned definition."),
+                *LinkPair.Key.ToString()));
+            continue;
+        }
+        TSet<FName> Expected;
+        for (const FName ParticipantId : (*Found)->ParticipantEntityIds)
+            Expected.Add(ParticipantId);
+        bool bLinksMatch = Expected.Num() == LinkPair.Value.Num();
+        if (bLinksMatch)
+            for (const FName ExpectedId : Expected)
+                if (!LinkPair.Value.Contains(ExpectedId))
+                {
+                    bLinksMatch = false;
+                    break;
+                }
+        if (!bLinksMatch)
+            OutErrors.Add(FString::Printf(
+                TEXT("Meeting Dialogue '%s' participant list and linked person timelines are out of sync."),
+                *LinkPair.Key.ToString()));
+    }
+    for (const TPair<FName, const FTMOPMeetingDialogueDefinition*>&
+         DialoguePair : DialogueById)
+        if (!LinkedParticipantsByDialogue.Contains(DialoguePair.Key))
+            OutErrors.Add(FString::Printf(
+                TEXT("Meeting Dialogue '%s' has no linked participant timeline rows."),
+                *DialoguePair.Key.ToString()));
     return OutErrors.IsEmpty();
 }
 

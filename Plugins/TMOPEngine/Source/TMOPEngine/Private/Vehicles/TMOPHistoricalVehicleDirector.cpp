@@ -157,25 +157,35 @@ void ATMOPHistoricalVehicleDirector::StartDueVehicleRoutes(
             const bool bDrivingAction =
                 Entry.Action == ETMOPHistoricalVehicleAction::BeginDriving ||
                 Entry.Action == ETMOPHistoricalVehicleAction::EnterTrafficRoute;
-            if (!bDrivingAction || !Entry.bAutoStartFromVehicleTimeline ||
+            if (!bDrivingAction ||
                 Runtime.AppliedDrivingEntryIds.Contains(Entry.EntryId))
                 continue;
 
             int32 DepartureSecond = INDEX_NONE;
-            if (!ResolveDrivingDepartureSecond(
-                    Runtime.Profile, Index, DepartureSecond) ||
-                DepartureSecond > CurrentSecond)
-                continue;
+            if (!ResolveDrivingDepartureSecond(Runtime.Profile, Index, DepartureSecond))
+            {
+                ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("UnresolvedDeparture"),
+                    FString::Printf(TEXT("Route '%s' cannot resolve its departure. Check the shared event and previous row."), *Entry.EntryId.ToString()));
+                break;
+            }
+            if (DepartureSecond > CurrentSecond) continue;
 
             int32 WindowDeparture, WindowArrival;
             if (!ResolveDrivingWindow(Runtime.Profile, Index, WindowDeparture, WindowArrival))
             {
                 ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("UnresolvedDrivingWindow"),
                     FString::Printf(TEXT("Route '%s' needs valid departure and arrival times."), *Entry.EntryId.ToString()));
-                continue;
+                break;
             }
             if (CurrentSecond >= WindowArrival || Index < Runtime.LastAppliedLifecycleEntryIndex)
             {
+                if (CurrentSecond >= WindowArrival && Index >= Runtime.LastAppliedLifecycleEntryIndex)
+                {
+                    const FString PreviousFailure = LastDrivingFailureDetails.FindRef(Runtime.Profile.VehicleId);
+                    ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("RouteNeverStarted"),
+                        FString::Printf(TEXT("Route '%s' expired without starting (%d -> %d). Last start failure: %s"),
+                            *Entry.EntryId.ToString(), WindowDeparture, WindowArrival, *PreviousFailure));
+                }
                 Runtime.AppliedDrivingEntryIds.Add(Entry.EntryId);
                 continue; // Expired routes never replay after late boarding or a seek.
             }
@@ -189,7 +199,7 @@ void ATMOPHistoricalVehicleDirector::StartDueVehicleRoutes(
                 ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("WaitingForDriver"),
                     FString::Printf(TEXT("Route '%s' needs seated driver '%s'; seated now '%s'."),
                         *Entry.EntryId.ToString(), *RequiredDriver.ToString(), *SeatedDriverId.ToString()));
-                continue;
+                break;
             }
 
             if (Entry.bWaitForListedOccupants)
@@ -207,20 +217,34 @@ void ATMOPHistoricalVehicleDirector::StartDueVehicleRoutes(
                     if (!PassengerId.IsNone() && !SeatedIds.Contains(PassengerId))
                     {
                         bAllSeated = false;
+                        ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("WaitingForListedOccupants"),
+                            FString::Printf(TEXT("Route '%s' waits for passenger '%s' to board '%s'."),
+                                *Entry.EntryId.ToString(), *PassengerId.ToString(), *Runtime.Profile.VehicleId.ToString()));
                         break;
                     }
-                if (!bAllSeated) continue;
+                if (!bAllSeated) break;
             }
 
-            if (const UTMOPTrafficVehicleMovementComponent* Movement =
-                Vehicle->FindComponentByClass<
-                    UTMOPTrafficVehicleMovementComponent>())
+            // A previous route may still have its movement flag set on the
+            // boundary tick. Its flag must not suppress a scheduled successor.
+            // Reject genuinely overlapping windows instead; StartRoutePlan
+            // still checks the actual start position before replacing a plan.
+            bool bOverlaps = false;
+            for (int32 Earlier = 0; Earlier < Index; ++Earlier)
             {
-                // Compatibility safety when both migrated tables were not
-                // imported together: never restart an already moving route.
-                if (Movement->IsDrivingEnabled())
-                    continue;
+                if (!TMOPVehicleRoute::IsDriving(Runtime.Profile.Timeline[Earlier].Action)) continue;
+                int32 EarlierDeparture, EarlierArrival;
+                if (ResolveDrivingWindow(Runtime.Profile, Earlier, EarlierDeparture, EarlierArrival) &&
+                    EarlierDeparture < WindowArrival && EarlierArrival > WindowDeparture)
+                {
+                    ReportDrivingFailure(Runtime.Profile.VehicleId, TEXT("OverlappingDrivingWindows"),
+                        FString::Printf(TEXT("Route '%s' overlaps '%s'. Correct their departure/arrival times."),
+                            *Entry.EntryId.ToString(), *Runtime.Profile.Timeline[Earlier].EntryId.ToString()));
+                    bOverlaps = true;
+                    break;
+                }
             }
+            if (bOverlaps) break;
 
             RequestedDrivingEntryOverrides.Add(
                 Runtime.Profile.VehicleId, Entry.EntryId);
@@ -1499,8 +1523,12 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
                         TEXT(" has a Swedish registration that is not formatted ABC-123."));
             }
         }
+        TSet<FName> TimelineEntryIds;
         for (const FTMOPHistoricalVehicleTimelineEntry& Entry : Row->Timeline)
         {
+            if (Entry.EntryId.IsNone() || TimelineEntryIds.Contains(Entry.EntryId))
+                OutErrors.Add(Prefix + FString::Printf(TEXT(" has an empty or duplicate timeline Entry ID '%s'."), *Entry.EntryId.ToString()));
+            TimelineEntryIds.Add(Entry.EntryId);
             const bool bDrivingEntry =
                 Entry.Action == ETMOPHistoricalVehicleAction::BeginDriving ||
                 Entry.Action == ETMOPHistoricalVehicleAction::EnterTrafficRoute;
@@ -1526,7 +1554,7 @@ bool ATMOPHistoricalVehicleDirector::ValidateHistoricalVehicleTable(
                 OutErrors.Add(Prefix +
                     TEXT(" has an Offscreen Transfer with a negative duration."));
             }
-            if (bDrivingEntry && Entry.bAutoStartFromVehicleTimeline)
+            if (bDrivingEntry)
             {
                 const FString EntryPrefix = Prefix + FString::Printf(
                     TEXT(" auto-start entry '%s'"), *Entry.EntryId.ToString());
@@ -1738,7 +1766,7 @@ bool ATMOPHistoricalVehicleDirector::BeginDrivingVehicle(
     {
         if (bUseTimelineRouteOverride && Runtime->Profile.Timeline.ContainsByPredicate(
             [](const FTMOPHistoricalVehicleTimelineEntry& Entry)
-            { return TMOPVehicleRoute::IsDriving(Entry.Action) && Entry.bAutoStartFromVehicleTimeline; }))
+            { return TMOPVehicleRoute::IsDriving(Entry.Action); }))
             return ReportDrivingFailure(VehicleId, TEXT("NoActiveVehicleRoute"),
                 TEXT("The vehicle timeline is authoritative and has no active route now."));
         LegacyProfile = Runtime->Profile; LegacyProfile.Timeline.Reset();

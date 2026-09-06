@@ -72,7 +72,9 @@ enum class ETMOPPersonTimelineAction : uint8
     /** Stop the unique animation currently playing in Animation Slot Name. */
     StopUniqueAnimation UMETA(DisplayName="Stop Unique Animation"),
     /** Keep looking at a selected anchor or moving person without talking. */
-    LookAtAnchor UMETA(DisplayName="Look At")
+    LookAtAnchor UMETA(DisplayName="Look At"),
+    /** One participant's linked timeline marker for a centrally authored meeting dialogue. */
+    MeetingDialogue UMETA(DisplayName="Meeting Dialogue")
 };
 
 /** Target used by talking, interacting and authored Look At actions. */
@@ -289,10 +291,21 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Person|Timeline|Conversation",
-        meta=(EditCondition="Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation || Action==ETMOPPersonTimelineAction::LookAtAnchor",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::Interact || Action==ETMOPPersonTimelineAction::PlayUniqueAnimation || Action==ETMOPPersonTimelineAction::LookAtAnchor || Action==ETMOPPersonTimelineAction::MeetingDialogue",
             DisplayName="Target Type"))
     ETMOPConversationTargetMode ConversationTargetMode =
         ETMOPConversationTargetMode::Automatic;
+
+    /**
+     * Links this row to exactly one FTMOPMeetingDialogueDefinition. Every
+     * participant receives a timeline row with the same ID; dialogue text is
+     * stored only once on the owning person row.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Meeting Dialogue",
+        meta=(EditCondition="Action==ETMOPPersonTimelineAction::MeetingDialogue",
+            DisplayName="Meeting Dialogue ID"))
+    FName MeetingDialogueId = NAME_None;
 
     /**
      * Person-specific sequence used for actions such as kneeling, CPR or a
@@ -436,6 +449,89 @@ struct TMOPENGINE_API FTMOPTimedSpeechLine
     FString SourceReference;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech")
+    FString Notes;
+};
+
+/** One ordered spoken line inside a linked meeting dialogue. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPMeetingDialogueLine
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(DisplayName="Line ID"))
+    FName LineId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(DisplayName="Speaker Entity ID"))
+    FName SpeakerEntityId = NAME_None;
+
+    /** Offset from the meeting start/shared event, not from the previous line. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(Units="s", DisplayName="Offset Seconds"))
+    int32 OffsetSeconds = 0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(MultiLine="true", DisplayName="Spoken Text"))
+    FText Text;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(DisplayName="Voice Over"))
+    TSoftObjectPtr<USoundBase> VoiceOver;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(ClampMin="0.0", Units="s", DisplayName="Display Duration Override"))
+    float DisplayDurationOverrideSeconds = 0.0f;
+};
+
+/**
+ * Single source of truth for a meeting involving two or more people. It is
+ * stored on one owner row, while every participant timeline references
+ * DialogueId. SharedEventId controls the start and AnchorId records the place.
+ */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPMeetingDialogueDefinition
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(DisplayName="Dialogue ID"))
+    FName DialogueId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue")
+    FText DisplayName;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue|Time", meta=(DisplayName="Shared Event ID"))
+    FName SharedEventId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue|Time", meta=(Units="s", DisplayName="Start Offset Seconds"))
+    int32 EventOffsetSeconds = 0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue|Location", meta=(DisplayName="Anchor ID"))
+    FName AnchorId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(DisplayName="Participant Entity IDs"))
+    TArray<FName> ParticipantEntityIds;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue", meta=(TitleProperty="LineId"))
+    TArray<FTMOPMeetingDialogueLine> Lines;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue|Source")
+    ETMOPHistoricalConfidence Confidence = ETMOPHistoricalConfidence::Documented;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue|Source")
+    FString SourceReference;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Meeting Dialogue|Source", meta=(MultiLine="true"))
     FString Notes;
 };
 
@@ -878,6 +974,14 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Automatic Speech",
         meta=(TitleProperty="LineId"))
     TArray<FTMOPTimedSpeechLine> AutomaticSpeech;
+
+    /**
+     * Dialogues owned by this row. Other participants reference these through
+     * MeetingDialogue timeline entries; do not duplicate definitions.
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Meeting Dialogues",
+        meta=(TitleProperty="DialogueId"))
+    TArray<FTMOPMeetingDialogueDefinition> MeetingDialogues;
 
     /** Slot 0 is the initial marker. It may occur later than 23:00. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline")

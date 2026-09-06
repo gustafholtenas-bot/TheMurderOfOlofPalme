@@ -289,6 +289,8 @@ private:
         float StationarySeconds = 0.0f;
         float MaximumStationarySeconds = 0.0f;
         bool bMissingReported = false;
+        FString LastRouteFailureCode;
+        FString LastRouteFailureDetails;
     };
 
     void DiscoverAgents();

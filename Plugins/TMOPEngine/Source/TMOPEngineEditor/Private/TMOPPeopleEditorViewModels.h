@@ -173,6 +173,11 @@ struct FTMOPPersonGeneralEditorData
         meta=(TitleProperty="LineId"))
     TArray<FTMOPTimedSpeechLine> AutomaticSpeech;
 
+    /** Central definitions; participant timelines only keep linked IDs. */
+    UPROPERTY(EditAnywhere, Category="Meeting Dialogues",
+        meta=(TitleProperty="DialogueId"))
+    TArray<FTMOPMeetingDialogueDefinition> MeetingDialogues;
+
     UPROPERTY(EditAnywhere, Category="Notes", meta=(MultiLine="true"))
     FString Notes;
 };

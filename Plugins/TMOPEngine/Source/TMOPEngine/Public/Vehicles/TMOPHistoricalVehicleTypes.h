@@ -213,13 +213,11 @@ struct TMOPENGINE_API FTMOPHistoricalVehicleTimelineEntry
         meta=(EditCondition="VehicleRouteMode!=ETMOPVehicleRouteMode::AnchorManeuver", EditConditionHides, AdvancedDisplay))
     TArray<FName> OrderedLaneIds;
 
-    /** When enabled, the vehicle director starts this route directly instead
-     * of waiting for a legacy BeginDriving entry in the driver's timeline. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Historical Vehicle|Timeline|Route",
-        meta=(EditCondition="Action==ETMOPHistoricalVehicleAction::BeginDriving || Action==ETMOPHistoricalVehicleAction::EnterTrafficRoute",
-            DisplayName="Auto Start From Vehicle Timeline", EditConditionHides))
-    bool bAutoStartFromVehicleTimeline = false;
+    /** Retained for old JSON/assets. All vehicle driving rows now start from
+     * their own timeline, including rows serialized with this value false. */
+    UPROPERTY(BlueprintReadWrite, Category="TMOP|Historical Vehicle|Timeline|Route",
+        meta=(DeprecatedProperty, DeprecationMessage="Vehicle timeline routes now always start automatically."))
+    bool bAutoStartFromVehicleTimeline = true;
 
     /** Route interpretation copied from legacy person-driven vehicle entries. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite,

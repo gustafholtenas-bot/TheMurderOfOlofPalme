@@ -79,6 +79,8 @@ private:
     void CommitPersonDetailEdits();
     bool HasUnsavedPersonChanges();
     bool SaveCurrentPerson();
+    void SynchronizeOwnedMeetingDialogues(
+        const TArray<FTMOPMeetingDialogueDefinition>& PreviousDefinitions);
     void RestorePersonListSelection();
     void SetStatus(const FText& Message, const FLinearColor& Color);
 
@@ -126,6 +128,9 @@ private:
     EVisibility GetReferenceImagePlaceholderVisibility() const;
 
     FReply AddTimelineEntry();
+    FReply AddMeetingDialogue();
+    FReply OpenMeetingDialogueOwner();
+    bool CanOpenMeetingDialogueOwner() const;
     FReply DuplicateTimelineEntry();
     FReply DeleteTimelineEntry();
     FReply MoveTimelineEntryUp();

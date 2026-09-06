@@ -335,6 +335,34 @@ void ATMOPTimelineValidationDirector::SampleVehicles(const float DeltaSeconds)
             }
             continue;
         }
+        // Vehicle-owned routes have no person BeginDriving action to fail.
+        // Capture their failures directly, including routes that never moved.
+        FString FailureCode, FailureDetails;
+        if (VehicleDirector.IsValid() && VehicleDirector->GetLastDrivingFailure(
+                Pair.Key, FailureCode, FailureDetails))
+        {
+            if (FailureCode != Tracked.LastRouteFailureCode ||
+                FailureDetails != Tracked.LastRouteFailureDetails)
+            {
+                FTMOPTimelineValidationRecord Failure;
+                Failure.EntityId = Pair.Key;
+                Failure.Event = TEXT("VehicleRouteStartFailed");
+                Failure.ActualSecond = GetSimulationSecond();
+                Failure.ActualLocation = Vehicle->GetActorLocation();
+                Failure.FailureCode = FailureCode;
+                Failure.FailureDetails = FailureDetails;
+                Failure.Severity = ETMOPTimelineValidationSeverity::Error;
+                Failure.Message = FailureDetails;
+                AddRecord(Failure);
+                Tracked.LastRouteFailureCode = FailureCode;
+                Tracked.LastRouteFailureDetails = FailureDetails;
+            }
+        }
+        else
+        {
+            Tracked.LastRouteFailureCode.Reset();
+            Tracked.LastRouteFailureDetails.Reset();
+        }
         const float MovedCm = FVector::Dist2D(
             Tracked.LastLocation, Vehicle->GetActorLocation());
         Tracked.LastLocation = Vehicle->GetActorLocation();
@@ -2352,8 +2380,19 @@ bool ATMOPTimelineValidationDirector::ExportReports()
                     Entry.Time.ToSecondsFromMidnight());
                 E->SetStringField(TEXT("placementAnchorId"),
                     Entry.PlacementAnchorId.ToString());
-                E->SetStringField(TEXT("driverEntityId"),
-                    Entry.DriverEntityId.ToString());
+                E->SetStringField(TEXT("driverEntityId"), Entry.DriverEntityId.ToString());
+                E->SetBoolField(TEXT("vehicleOwnsDeparture"), true);
+                E->SetBoolField(TEXT("legacyAutoStartFlag"), Entry.bAutoStartFromVehicleTimeline);
+                E->SetStringField(TEXT("timingMode"), EnumText(Entry.TimingMode));
+                E->SetBoolField(TEXT("timeIsArrival"), Entry.bTimeIsArrival);
+                E->SetStringField(TEXT("sharedEventId"), Entry.SharedEventId.ToString());
+                E->SetNumberField(TEXT("eventOffsetSeconds"), Entry.EventOffsetSeconds);
+                E->SetStringField(TEXT("routeMode"), EnumText(Entry.VehicleRouteMode));
+                E->SetBoolField(TEXT("waitForListedOccupants"), Entry.bWaitForListedOccupants);
+                TArray<TSharedPtr<FJsonValue>> Passengers;
+                for (const FName Id : Entry.PassengerEntityIds)
+                    Passengers.Add(MakeShared<FJsonValueString>(Id.ToString()));
+                E->SetArrayField(TEXT("passengerEntityIds"), Passengers);
                 TArray<TSharedPtr<FJsonValue>> Lanes;
                 for (const FName LaneId : Entry.OrderedLaneIds)
                     Lanes.Add(MakeShared<FJsonValueString>(LaneId.ToString()));

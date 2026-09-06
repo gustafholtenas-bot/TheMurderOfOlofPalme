@@ -717,10 +717,11 @@ bool UTMOPTrafficVehicleMovementComponent::StartRoutePlan(
     float CatchUpKmh, bool bSeek, bool bStopAtVia)
 {
     if (!GetOwner() || Plan.Samples.Num() < 2 || Arrival <= Departure) return false;
-    StopDriving();
-    ActiveRoutePlan = Plan;
+    // Reject a remote start before destroying the currently executing plan.
     if (!bSeek && FVector::Distance(GetOwner()->GetActorLocation(), Plan.Samples[0].GetLocation()) > 300.0)
         return false;
+    StopDriving();
+    ActiveRoutePlan = Plan;
     LastArrivalCorrectionCm = 0.0;
     bLastArrivalBlocked = false;
     LastArrivalBlocker.Reset();
