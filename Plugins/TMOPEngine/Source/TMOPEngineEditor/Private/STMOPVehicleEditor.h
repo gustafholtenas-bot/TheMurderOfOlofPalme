@@ -199,6 +199,7 @@ private:
     bool RecalculateSelectedRoute(FString& OutFailure);
     FReply AddEntry();
     FReply AddStopEntry();
+    FReply AddDespawnEntry();
     FReply DuplicateEntry();
     FReply DeleteEntry();
     FReply MoveEntry(int32 Direction);

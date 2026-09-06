@@ -129,6 +129,7 @@ private:
 
     FReply AddTimelineEntry();
     FReply AddWaitEntry();
+    FReply AddDespawnEntry();
     FReply AddMeetingDialogue();
     FReply OpenMeetingDialogueOwner();
     bool CanOpenMeetingDialogueOwner() const;

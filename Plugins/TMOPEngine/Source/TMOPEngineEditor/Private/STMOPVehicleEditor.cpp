@@ -396,6 +396,11 @@ void STMOPVehicleEditor::Construct(const FArguments& Args)
                             .IsEnabled_Lambda([this]() { return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex); })
                             .OnClicked(this, &STMOPVehicleEditor::AddStopEntry) ]
                         + SHorizontalBox::Slot().AutoWidth().Padding(3,0)
+                        [ SNew(SButton).Text(LOCTEXT("QuickAddDespawn", "+ Add Despawn"))
+                            .ToolTipText(LOCTEXT("QuickAddDespawnTip", "Insert a despawn after the selected row, relative to the previous entry +2 seconds."))
+                            .IsEnabled_Lambda([this]() { return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex); })
+                            .OnClicked(this, &STMOPVehicleEditor::AddDespawnEntry) ]
+                        + SHorizontalBox::Slot().AutoWidth().Padding(3,0)
                         [ SNew(SButton).Text(LOCTEXT("Duplicate", "Duplicate"))
                             .OnClicked(this, &STMOPVehicleEditor::DuplicateEntry) ]
                         + SHorizontalBox::Slot().AutoWidth()
@@ -1379,6 +1384,28 @@ bool STMOPVehicleEditor::PassesVehicleFilter(
     default:
         return true;
     }
+}
+
+FReply STMOPVehicleEditor::AddDespawnEntry()
+{
+    CommitEntry();
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)) return FReply::Handled();
+    const int32 NewIndex = SelectedTimelineIndex + 1;
+    // Copy the ID before Insert can reallocate the timeline storage.
+    const FString Base = WorkingRow.Timeline[SelectedTimelineIndex].EntryId.ToString() + TEXT("_DESPAWN");
+    FTMOPHistoricalVehicleTimelineEntry Entry;
+    Entry.Action = ETMOPHistoricalVehicleAction::Despawn;
+    Entry.TimingMode = ETMOPEventTimingMode::RelativeToPreviousEntry;
+    Entry.EventOffsetSeconds = 2;
+    Entry.bTimeIsArrival = false;
+    Entry.EntryId = FName(*Base);
+    for (int32 Suffix = 1; WorkingRow.Timeline.ContainsByPredicate(
+        [&Entry](const FTMOPHistoricalVehicleTimelineEntry& Existing) { return Existing.EntryId == Entry.EntryId; }); ++Suffix)
+        Entry.EntryId = FName(*FString::Printf(TEXT("%s_%d"), *Base, Suffix));
+    WorkingRow.Timeline.Insert(Entry, NewIndex);
+    RefreshTimeline();
+    SelectTimelineEntry(NewIndex);
+    return FReply::Handled();
 }
 
 FReply STMOPVehicleEditor::AddStopEntry()

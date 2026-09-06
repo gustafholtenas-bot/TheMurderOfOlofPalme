@@ -323,6 +323,11 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                             .ToolTipText(LOCTEXT("QuickAddWaitTip", "Insert a wait after the selected row, at the same location, relative to the previous entry +30 seconds."))
                             .IsEnabled_Lambda([this]() { return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex); })
                             .OnClicked(this, &STMOPPeopleEditor::AddWaitEntry) ]
+                        + SHorizontalBox::Slot().AutoWidth().Padding(3,0)
+                        [ SNew(SButton).Text(LOCTEXT("QuickAddDespawn", "+ Add Despawn"))
+                            .ToolTipText(LOCTEXT("QuickAddDespawnTip", "Insert a despawn after the selected row, relative to the previous entry +2 seconds."))
+                            .IsEnabled_Lambda([this]() { return WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex); })
+                            .OnClicked(this, &STMOPPeopleEditor::AddDespawnEntry) ]
                         + SHorizontalBox::Slot().AutoWidth().Padding(3.0f, 0.0f)
                         [
                             SNew(SButton)
@@ -2239,6 +2244,29 @@ FText STMOPPeopleEditor::GetReferenceFieldText(
     return Id.IsNone()
         ? LOCTEXT("SearchReference", "Type to search...")
         : FText::FromName(Id);
+}
+
+FReply STMOPPeopleEditor::AddDespawnEntry()
+{
+    CommitEntryEdits();
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)) return FReply::Handled();
+    const int32 NewIndex = SelectedTimelineIndex + 1;
+    // Copy the ID before Insert can reallocate the timeline storage.
+    const FString Base = WorkingRow.Timeline[SelectedTimelineIndex].EntryId.ToString() + TEXT("_DESPAWN");
+    FTMOPPersonTimelineEntry Entry;
+    Entry.Action = ETMOPPersonTimelineAction::Despawn;
+    Entry.TimingMode = ETMOPEventTimingMode::RelativeToPreviousEntry;
+    Entry.EventOffsetSeconds = 2;
+    Entry.bTimeIsArrival = false;
+    Entry.LocationType = ETMOPPersonLocationType::NotPresent;
+    Entry.EntryId = FName(*Base);
+    for (int32 Suffix = 1; WorkingRow.Timeline.ContainsByPredicate(
+        [&Entry](const FTMOPPersonTimelineEntry& Existing) { return Existing.EntryId == Entry.EntryId; }); ++Suffix)
+        Entry.EntryId = FName(*FString::Printf(TEXT("%s_%d"), *Base, Suffix));
+    WorkingRow.Timeline.Insert(Entry, NewIndex);
+    RefreshTimeline();
+    SelectTimelineEntry(NewIndex);
+    return FReply::Handled();
 }
 
 FReply STMOPPeopleEditor::AddWaitEntry()
