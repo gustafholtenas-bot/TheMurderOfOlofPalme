@@ -1,6 +1,7 @@
 #include "Anchors/TMOPVenueLayoutImporter.h"
 
 #include "Anchors/TMOPHistoricalAnchor.h"
+#include "Venues/TMOPCinemaSeatComponent.h"
 #include "Dom/JsonObject.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
@@ -125,11 +126,6 @@ void ATMOPVenueLayoutImporter::ImportOrUpdateVenueLayoutAnchors()
 
         ATMOPHistoricalAnchor* Anchor = FindExistingAnchor(AnchorId);
         const bool bUpdating = IsValid(Anchor);
-        if (bUpdating && !bUpdateExistingAnchors)
-        {
-            ++LastErrorCount;
-            continue;
-        }
 
         if (!bUpdating)
         {
@@ -147,8 +143,9 @@ void ATMOPVenueLayoutImporter::ImportOrUpdateVenueLayoutAnchors()
         else
         {
             Anchor->Modify();
-            Anchor->SetActorLocationAndRotation(Location, Rotation, false, nullptr,
-                ETeleportType::TeleportPhysics);
+            if (bUpdateExistingAnchors)
+                Anchor->SetActorLocationAndRotation(Location, Rotation, false, nullptr,
+                    ETeleportType::TeleportPhysics);
             ++LastUpdatedCount;
         }
 
@@ -165,6 +162,40 @@ void ATMOPVenueLayoutImporter::ImportOrUpdateVenueLayoutAnchors()
         Anchor->bHardHistoricalAnchor = false;
         Json->TryGetStringField(TEXT("notes"), Anchor->Notes);
         Anchor->Tags.AddUnique(ImportedVenueLayoutTag);
+
+        FString LayoutRole;
+        Json->TryGetStringField(TEXT("role"), LayoutRole);
+        const bool bBarSeat = LayoutRole.Equals(TEXT("BarSeat"), ESearchCase::IgnoreCase);
+        if (bCreateSeatComponents && (bBarSeat ||
+            LayoutRole.Equals(TEXT("TableSeat"), ESearchCase::IgnoreCase)))
+        {
+            UTMOPCinemaSeatComponent* Seat =
+                Anchor->FindComponentByClass<UTMOPCinemaSeatComponent>();
+            const bool bNewSeat = !IsValid(Seat);
+            if (bNewSeat)
+            {
+                Seat = NewObject<UTMOPCinemaSeatComponent>(Anchor,
+                    MakeUniqueObjectName(Anchor, UTMOPCinemaSeatComponent::StaticClass(),
+                        TEXT("VenueSeat")), RF_Transactional);
+                Anchor->AddInstanceComponent(Seat);
+                Seat->SetupAttachment(Anchor->GetRootComponent());
+                Seat->RegisterComponent();
+            }
+            Seat->Modify();
+            Seat->SeatId = AnchorId;
+            Seat->VenueId = ParentId;
+            Seat->AuditoriumId = NAME_None;
+            if (bNewSeat || bUpdateExistingSeatAlignment)
+            {
+                const float Height = bBarSeat ? BarSeatHeightCm : ChairSeatHeightCm;
+                Seat->SetRelativeLocation(FVector(0.0f, 0.0f, Height));
+                Seat->bReverseSeatedFacing = false;
+                Seat->ApproachDistance = -85.0f;
+                Seat->ApproachVerticalOffset = -Height;
+                Seat->bApproachIsFootLocation = true;
+            }
+            Seat->MarkPackageDirty();
+        }
 
 #if WITH_EDITOR
         Anchor->SetActorLabel(IdString);

@@ -24,6 +24,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Venue Layout Import")
     bool bUpdateExistingAnchors = true;
 
+    /** Creates real reservable seats for TableSeat and BarSeat layout rows. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Venue Layout Import|Seats")
+    bool bCreateSeatComponents = true;
+
+    /** Preserve hand-adjusted seat components on subsequent imports. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Venue Layout Import|Seats")
+    bool bUpdateExistingSeatAlignment = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Venue Layout Import|Seats", meta=(Units="cm"))
+    float ChairSeatHeightCm = 37.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Venue Layout Import|Seats", meta=(Units="cm"))
+    float BarSeatHeightCm = 91.0f;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Venue Layout Import")
     int32 LastCreatedCount = 0;
 
