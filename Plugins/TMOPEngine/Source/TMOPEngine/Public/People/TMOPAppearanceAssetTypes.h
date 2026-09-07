@@ -13,17 +13,21 @@ class UStaticMesh;
 UENUM(BlueprintType, meta=(Bitflags))
 enum class ETMOPBodyRegion : uint8
 {
-    None  = 0 UMETA(Hidden),
-    Head  = 1 << 0,
-    Neck  = 1 << 1,
-    Torso = 1 << 2,
-    Arms  = 1 << 3,
-    Hands = 1 << 4,
-    Hips  = 1 << 5,
-    Legs  = 1 << 6,
-    Feet  = 1 << 7
+    Head  = 0,
+    Neck  = 1,
+    Torso = 2,
+    Arms  = 3,
+    Hands = 4,
+    Hips  = 5,
+    Legs  = 6,
+    Feet  = 7
 };
-ENUM_CLASS_FLAGS(ETMOPBodyRegion)
+
+/** Convert the editor-facing enum value (a bit position) to its stored mask bit. */
+constexpr int32 TMOPBodyRegionMask(const ETMOPBodyRegion Region)
+{
+    return 1 << static_cast<uint8>(Region);
+}
 
 UENUM(BlueprintType)
 enum class ETMOPAppearancePartType : uint8

@@ -312,6 +312,29 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedBody(
     if (DesiredBody != nullptr)
         Body->SetSkeletalMesh(DesiredBody);
     Body->SetVisibility(Body->GetSkeletalMeshAsset() != nullptr, true);
+
+    // Mirror the NPC appearance path: a catalog material override belongs to
+    // the body row and must be installed before the region-mask parameters are
+    // written. SetSkeletalMesh restores the mesh's default materials, so doing
+    // this only in the Blueprint/player mesh asset is not sufficient.
+    if (UMaterialInterface* Material =
+        ResolvedAppearance.Body.Material.LoadSynchronous())
+    {
+        for (int32 Index = 0; Index < Body->GetNumMaterials(); ++Index)
+        {
+            UMaterialInstanceDynamic* Dynamic =
+                Body->CreateDynamicMaterialInstance(Index, Material);
+            if (Dynamic == nullptr) continue;
+            Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"),
+                ResolvedAppearance.Body.PrimaryColor);
+            Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"),
+                ResolvedAppearance.Body.SecondaryColor);
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"),
+                ResolvedAppearance.Body.bUsesObscuredFallback ? 1.0f : 0.0f);
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"),
+                ResolvedAppearance.Body.ObscurityAmount);
+        }
+    }
     return Body->GetSkeletalMeshAsset() != nullptr;
 }
 
@@ -319,13 +342,40 @@ void ATMOPPlayerAppearanceDirector::ApplyBodyRegionMask(
     USkeletalMeshComponent* Body)
 {
     if (!IsValid(Body)) return;
-    const int32 Mask = ResolvedAppearance.Outerwear.HiddenBodyRegions |
-        ResolvedAppearance.UpperBody.HiddenBodyRegions |
-        ResolvedAppearance.Trousers.HiddenBodyRegions |
-        ResolvedAppearance.Footwear.HiddenBodyRegions |
-        ResolvedAppearance.Gloves.HiddenBodyRegions |
-        ResolvedAppearance.Headwear.HiddenBodyRegions |
-        ResolvedAppearance.Scarf.HiddenBodyRegions;
+    int32 Mask = 0;
+    auto IncludeVisibleSkeletalPart = [this, &Mask](
+        const FName ComponentName, const FTMOPResolvedAppearancePart& Part)
+    {
+        if (Part.bIntentionallyEmpty) return;
+        for (USkeletalMeshComponent* Component : ManagedPartComponents)
+            if (IsValid(Component) && Component->GetFName() == ComponentName &&
+                Component->IsVisible() && !Component->bHiddenInGame &&
+                Component->GetSkeletalMeshAsset() != nullptr)
+            {
+                Mask |= Part.HiddenBodyRegions;
+                return;
+            }
+    };
+    IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Outerwear"),
+        ResolvedAppearance.Outerwear);
+    IncludeVisibleSkeletalPart(TEXT("TMOP_Player_UpperBody"),
+        ResolvedAppearance.UpperBody);
+    IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Trousers"),
+        ResolvedAppearance.Trousers);
+    IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Footwear"),
+        ResolvedAppearance.Footwear);
+    IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Gloves"),
+        ResolvedAppearance.Gloves);
+    IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Scarf"),
+        ResolvedAppearance.Scarf);
+    IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Headwear_Legacy"),
+        ResolvedAppearance.Headwear);
+    if (!ResolvedAppearance.Headwear.bIntentionallyEmpty &&
+        IsValid(ManagedHeadwearComponent) &&
+        ManagedHeadwearComponent->IsVisible() &&
+        !ManagedHeadwearComponent->bHiddenInGame &&
+        ManagedHeadwearComponent->GetStaticMesh() != nullptr)
+        Mask |= ResolvedAppearance.Headwear.HiddenBodyRegions;
 
     struct FMaskParameter { const TCHAR* Name; ETMOPBodyRegion Region; };
     const FMaskParameter Parameters[] = {
@@ -347,7 +397,7 @@ void ATMOPPlayerAppearanceDirector::ApplyBodyRegionMask(
         if (Dynamic == nullptr) continue;
         for (const FMaskParameter& Parameter : Parameters)
             Dynamic->SetScalarParameterValue(Parameter.Name,
-                (Mask & static_cast<int32>(Parameter.Region)) != 0 ? 1.0f : 0.0f);
+                (Mask & TMOPBodyRegionMask(Parameter.Region)) != 0 ? 1.0f : 0.0f);
     }
 }
 

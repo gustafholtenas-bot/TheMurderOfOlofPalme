@@ -322,7 +322,7 @@ void UTMOPCharacterAppearanceComponent::ApplyBodyRegionMask(
     if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return;
     // Rebuild from zero each appearance application. A failed/hidden garment
     // must not remove skin. Face only masks regions explicitly set in its row.
-    int32 Mask = bHybridHeadActive ? static_cast<int32>(ETMOPBodyRegion::Head) : 0;
+    int32 Mask = bHybridHeadActive ? TMOPBodyRegionMask(ETMOPBodyRegion::Head) : 0;
     auto IncludeVisibleSkeletalPart = [&Mask](
         USkeletalMeshComponent* Component, const FTMOPResolvedAppearancePart& Part)
     {
@@ -364,7 +364,7 @@ void UTMOPCharacterAppearanceComponent::ApplyBodyRegionMask(
         if (Dynamic == nullptr) continue;
         for (const FMaskParameter& Parameter : Parameters)
             Dynamic->SetScalarParameterValue(Parameter.Name,
-                (Mask & static_cast<int32>(Parameter.Region)) != 0 ? 1.0f : 0.0f);
+                (Mask & TMOPBodyRegionMask(Parameter.Region)) != 0 ? 1.0f : 0.0f);
     }
 }
 
