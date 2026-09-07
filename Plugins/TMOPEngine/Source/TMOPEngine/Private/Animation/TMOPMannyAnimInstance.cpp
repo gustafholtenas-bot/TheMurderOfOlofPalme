@@ -12,6 +12,7 @@ void UTMOPMannyAnimInstance::NativeInitializeAnimation()
     HistoricalAgent = Cast<ATMOPHistoricalAgent>(CharacterOwner);
     AnimationState = IsValid(CharacterOwner)
         ? CharacterOwner->FindComponentByClass<UTMOPAnimationStateComponent>() : nullptr;
+    bMovementSmoothingInitialized = false;
 }
 
 void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
@@ -21,6 +22,8 @@ void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
     if (!IsValid(CharacterOwner))
     {
         Speed = 0.0f; Direction = 0.0f; bIsMoving = false; bIsInAir = false;
+        SmoothedSpeed = 0.0f; SmoothedDirection = 0.0f;
+        LocomotionPlayRate = 1.0f;
         bIsAccelerating = false; bIsSeated = false; bIsStandingStill = true;
         VerticalVelocity = 0.0f; AirTimeSeconds = 0.0f; bJustLanded = false;
         bIsCrouching = false; bIsPunching = false; bIsKicking = false;
@@ -35,7 +38,23 @@ void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
     const FVector LocalVelocity = CharacterOwner->GetActorTransform().InverseTransformVectorNoScale(Velocity);
     Direction = Speed > KINDA_SMALL_NUMBER
         ? FMath::RadiansToDegrees(FMath::Atan2(LocalVelocity.Y, LocalVelocity.X)) : 0.0f;
-    bIsMoving = Speed > 3.0f;
+    const float SafeDeltaSeconds = FMath::Max(0.0f, DeltaSeconds);
+    if (!bMovementSmoothingInitialized)
+    {
+        SmoothedSpeed = Speed;
+        SmoothedDirection = Direction;
+        bMovementSmoothingInitialized = true;
+    }
+    else
+    {
+        SmoothedSpeed = FMath::FInterpTo(SmoothedSpeed, Speed,
+            SafeDeltaSeconds, SpeedInterpolationRate);
+        if (Speed > 1.0f)
+            SmoothedDirection = FMath::FixedTurn(SmoothedDirection, Direction,
+                DirectionInterpolationDegreesPerSecond * SafeDeltaSeconds);
+    }
+    // Separate start/stop thresholds prevent idle/walk chatter around zero.
+    bIsMoving = bIsMoving ? SmoothedSpeed > 2.0f : SmoothedSpeed > 8.0f;
     if (IsValid(HistoricalAgent)) ActivityState = HistoricalAgent->ActivityState;
     if (const UCharacterMovementComponent* Movement = CharacterOwner->GetCharacterMovement())
     {
@@ -67,12 +86,43 @@ void UTMOPMannyAnimInstance::NativeUpdateAnimation(const float DeltaSeconds)
         bIsDeadOnGround = IsValid(HistoricalAgent) &&
             HistoricalAgent->LifeState == ETMOPAgentLifeState::Dead;
     }
+
+    float ReferenceSpeed = 140.0f;
+    if (IsValid(HistoricalAgent))
+    {
+        const float Multiplier =
+            HistoricalAgent->MovementProfile.PersonalSpeedMultiplier *
+            HistoricalAgent->AppearanceMovementSpeedMultiplier;
+        switch (LocomotionStyle)
+        {
+        case ETMOPAnimLocomotionStyle::Fast:
+            ReferenceSpeed = HistoricalAgent->MovementProfile.FastWalkSpeed * Multiplier;
+            break;
+        case ETMOPAnimLocomotionStyle::MildRun:
+            ReferenceSpeed = HistoricalAgent->MovementProfile.JogSpeed * Multiplier;
+            break;
+        case ETMOPAnimLocomotionStyle::FastRun:
+            ReferenceSpeed = HistoricalAgent->MovementProfile.RunSpeed * Multiplier;
+            break;
+        default:
+            ReferenceSpeed = HistoricalAgent->MovementProfile.NormalWalkSpeed * Multiplier;
+            break;
+        }
+    }
+    const float TargetPlayRate = bIsMoving
+        ? FMath::Clamp(SmoothedSpeed / FMath::Max(1.0f, ReferenceSpeed),
+            MinimumLocomotionPlayRate, MaximumLocomotionPlayRate)
+        : 1.0f;
+    LocomotionPlayRate = FMath::FInterpTo(LocomotionPlayRate, TargetPlayRate,
+        SafeDeltaSeconds, PlayRateInterpolationRate);
     bIsSeated = Posture == ETMOPAnimPosture::Sitting || Posture == ETMOPAnimPosture::SittingInCar;
     if (!IsValid(HistoricalAgent))
     {
         if (bIsSeated) ActivityState = ETMOPAgentActivityState::Seated;
         else if (bIsMoving)
-            ActivityState = Speed > 350.0f ? ETMOPAgentActivityState::Running : ETMOPAgentActivityState::Walking;
+            ActivityState = SmoothedSpeed > 350.0f
+                ? ETMOPAgentActivityState::Running
+                : ETMOPAgentActivityState::Walking;
         else ActivityState = ETMOPAgentActivityState::Idle;
     }
     bIsGrounded = Posture == ETMOPAnimPosture::Grounded;

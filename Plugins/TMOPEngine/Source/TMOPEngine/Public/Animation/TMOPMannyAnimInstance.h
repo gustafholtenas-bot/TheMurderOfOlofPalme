@@ -22,6 +22,38 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement")
     float Direction = 0.0f;
 
+    /** Animation-facing speed. Use this in locomotion BlendSpaces instead of raw Speed. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement|Smoothed")
+    float SmoothedSpeed = 0.0f;
+
+    /** Animation-facing local movement direction with wrap-safe interpolation. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement|Smoothed")
+    float SmoothedDirection = 0.0f;
+
+    /** Continuous cycle-rate correction. Connect to the BlendSpace player's Play Rate. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement|Smoothed")
+    float LocomotionPlayRate = 1.0f;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,
+        Category="TMOP|Animation|Movement|Tuning", meta=(ClampMin="0.1"))
+    float SpeedInterpolationRate = 6.0f;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,
+        Category="TMOP|Animation|Movement|Tuning", meta=(ClampMin="1.0"))
+    float DirectionInterpolationDegreesPerSecond = 540.0f;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,
+        Category="TMOP|Animation|Movement|Tuning", meta=(ClampMin="0.1"))
+    float PlayRateInterpolationRate = 8.0f;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,
+        Category="TMOP|Animation|Movement|Tuning", meta=(ClampMin="0.1"))
+    float MinimumLocomotionPlayRate = 0.72f;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,
+        Category="TMOP|Animation|Movement|Tuning", meta=(ClampMin="0.1"))
+    float MaximumLocomotionPlayRate = 1.30f;
+
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Animation|Movement")
     bool bIsMoving = false;
 
@@ -101,4 +133,5 @@ private:
     TObjectPtr<class UTMOPAnimationStateComponent> AnimationState;
 
     bool bWasInAir = false;
+    bool bMovementSmoothingInitialized = false;
 };

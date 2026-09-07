@@ -169,8 +169,8 @@ void ATMOPVenueLayoutImporter::ImportOrUpdateVenueLayoutAnchors()
 #if WITH_EDITOR
         Anchor->SetActorLabel(IdString);
         Anchor->SetFolderPath(*FString::Printf(TEXT("TMOP/Anchors/VenueLayouts/%s"), *ParentString));
-#endif
         Anchor->RerunConstructionScripts();
+#endif
         Anchor->MarkPackageDirty();
     }
 

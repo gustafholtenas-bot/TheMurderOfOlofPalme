@@ -241,8 +241,8 @@ void ATMOPShot1AnchorImporter::ImportOrUpdateShot1Anchors()
 #if WITH_EDITOR
         Anchor->SetActorLabel(AnchorIdString);
         Anchor->SetFolderPath(TEXT("TMOP/Anchors/Shot1Witnesses"));
-#endif
         Anchor->RerunConstructionScripts();
+#endif
         Anchor->MarkPackageDirty();
     }
 

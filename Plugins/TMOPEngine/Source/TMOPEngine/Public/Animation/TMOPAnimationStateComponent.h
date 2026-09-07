@@ -29,6 +29,18 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Animation")
     ETMOPAnimLocomotionStyle LocomotionStyle = ETMOPAnimLocomotionStyle::Normal;
 
+    /** Dead band around gait thresholds; prevents rapid back-and-forth switching. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Animation|Locomotion Stability",
+        meta=(ClampMin="0.0", Units="cm/s"))
+    float LocomotionStyleHysteresisCmPerSecond = 18.0f;
+
+    /** A new automatic gait must remain requested this long before it is accepted. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Animation|Locomotion Stability",
+        meta=(ClampMin="0.0", Units="s"))
+    float LocomotionStyleChangeDelaySeconds = 0.20f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Animation")
     ETMOPAnimOverlay Overlay = ETMOPAnimOverlay::None;
 
@@ -76,6 +88,9 @@ public:
     void SetAutomaticStateDerivation(bool bEnabled);
 
 private:
-    void UpdateFromOwner();
+    void UpdateFromOwner(float DeltaTime);
     float ReactionTimeRemaining = 0.0f;
+    ETMOPAnimLocomotionStyle PendingLocomotionStyle =
+        ETMOPAnimLocomotionStyle::Normal;
+    float PendingLocomotionStyleSeconds = 0.0f;
 };

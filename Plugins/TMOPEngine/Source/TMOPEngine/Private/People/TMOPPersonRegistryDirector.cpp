@@ -747,7 +747,8 @@ bool ATMOPPersonRegistryDirector::SpawnPerson(FPersonRuntime& Runtime,
     }
 
     ATMOPHistoricalAgent* Agent = GetWorld()->SpawnActorDeferred<ATMOPHistoricalAgent>(
-        Class, SpawnTransform, this, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
+        Class, SpawnTransform, this, nullptr,
+        ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
     if (!IsValid(Agent)) return false;
     Agent->EntityIdentity->EntityId = Runtime.Profile.EntityId;
     Agent->EntityIdentity->EntityType = TEXT("Agent");
@@ -1299,6 +1300,116 @@ void ATMOPPersonRegistryDirector::ApplyConversationFocus(
     if (IsValid(FocusTarget)) Speaker->BeginDialogueFocus(FocusTarget);
 }
 
+bool ATMOPPersonRegistryDirector::ResolveSafeStandingPlacement(
+    ATMOPHistoricalAgent* Agent, const FName StableKey) const
+{
+    if (!bUseSafeStandingSpawnPlacement || !IsValid(Agent) ||
+        GetWorld() == nullptr || !IsValid(Agent->GetCapsuleComponent()))
+        return false;
+
+    UWorld* World = GetWorld();
+    const UCapsuleComponent* Capsule = Agent->GetCapsuleComponent();
+    const float CapsuleRadius = Capsule->GetScaledCapsuleRadius();
+    const float CapsuleHalfHeight = Capsule->GetScaledCapsuleHalfHeight();
+    const FCollisionShape TestShape = FCollisionShape::MakeCapsule(
+        FMath::Max(1.0f, CapsuleRadius - 3.0f),
+        FMath::Max(CapsuleRadius, CapsuleHalfHeight - 3.0f));
+    FCollisionQueryParams OverlapQuery(
+        SCENE_QUERY_STAT(TMOPSafeStandingSpawn), false, Agent);
+
+    auto IsClear = [&](const FVector& CapsuleCenter)
+    {
+        return !World->OverlapBlockingTestByProfile(
+            CapsuleCenter, Agent->GetActorQuat(),
+            Capsule->GetCollisionProfileName(), TestShape, OverlapQuery);
+    };
+
+    const FVector RequestedCenter = Agent->GetActorLocation();
+    if (IsClear(RequestedCenter)) return true;
+
+    UNavigationSystemV1* Navigation =
+        UNavigationSystemV1::GetCurrent(World);
+    const float SearchRadius = FMath::Max(0.0f,
+        SafeStandingSpawnSearchRadiusCm);
+    const float SearchStep = FMath::Max(20.0f,
+        SafeStandingSpawnSearchStepCm);
+    const int32 RingCount = FMath::CeilToInt(SearchRadius / SearchStep);
+    const uint32 Hash = GetTypeHash(
+        StableKey.IsNone() ? Agent->GetFName() : StableKey);
+    const float StartAngle = static_cast<float>(Hash % 360) * PI / 180.0f;
+
+    auto GroundCandidate = [&](const FVector& HorizontalCandidate,
+        FVector& OutCapsuleCenter)
+    {
+        FVector Surface = HorizontalCandidate;
+        bool bFoundGround = false;
+        if (Navigation != nullptr)
+        {
+            FNavLocation Projected;
+            if (Navigation->ProjectPointToNavigation(
+                HorizontalCandidate, Projected,
+                FVector(SearchStep * 0.6f, SearchStep * 0.6f, 300.0f)))
+            {
+                Surface = Projected.Location;
+                bFoundGround = true;
+            }
+        }
+        if (!bFoundGround)
+        {
+            FCollisionObjectQueryParams StaticOnly;
+            StaticOnly.AddObjectTypesToQuery(ECC_WorldStatic);
+            FCollisionQueryParams GroundQuery(
+                SCENE_QUERY_STAT(TMOPSafeStandingGround), false, Agent);
+            FHitResult Hit;
+            const FVector Start = HorizontalCandidate + FVector(0.0f, 0.0f, 500.0f);
+            const FVector End = HorizontalCandidate - FVector(0.0f, 0.0f, 500.0f);
+            if (World->LineTraceSingleByObjectType(
+                Hit, Start, End, StaticOnly, GroundQuery))
+            {
+                Surface = Hit.ImpactPoint;
+                bFoundGround = true;
+            }
+        }
+        if (!bFoundGround) return false;
+        OutCapsuleCenter = Surface;
+        OutCapsuleCenter.Z += CapsuleHalfHeight + 2.0f;
+        return FVector::DistSquared2D(OutCapsuleCenter, RequestedCenter) <=
+            FMath::Square(SearchRadius + SearchStep);
+    };
+
+    constexpr int32 CandidatesPerRing = 12;
+    for (int32 Ring = 1; Ring <= RingCount; ++Ring)
+    {
+        const float Radius = FMath::Min(SearchRadius, Ring * SearchStep);
+        for (int32 CandidateIndex = 0;
+            CandidateIndex < CandidatesPerRing; ++CandidateIndex)
+        {
+            const float Angle = StartAngle +
+                2.0f * PI * static_cast<float>(CandidateIndex) /
+                    static_cast<float>(CandidatesPerRing);
+            FVector Candidate = RequestedCenter + FVector(
+                FMath::Cos(Angle) * Radius,
+                FMath::Sin(Angle) * Radius, 0.0f);
+            FVector GroundedCenter;
+            if (!GroundCandidate(Candidate, GroundedCenter) ||
+                !IsClear(GroundedCenter))
+                continue;
+            Agent->SetActorLocation(GroundedCenter, false, nullptr,
+                ETeleportType::TeleportPhysics);
+            UE_LOG(LogTemp, Verbose, TEXT(
+                "TMOP person '%s': adjusted blocked standing spawn by %.0f cm."),
+                *StableKey.ToString(),
+                FVector::Dist2D(RequestedCenter, GroundedCenter));
+            return true;
+        }
+    }
+
+    UE_LOG(LogTemp, Warning, TEXT(
+        "TMOP person '%s': no clear standing spawn within %.0f cm; keeping requested point."),
+        *StableKey.ToString(), SearchRadius);
+    return false;
+}
+
 bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
     const FTMOPPersonTimelineEntry& Entry, const bool bCatchUp)
 {
@@ -1379,12 +1490,15 @@ bool ATMOPPersonRegistryDirector::ApplyPlacement(ATMOPHistoricalAgent* Agent,
             Entry.AnchorOffsetSpace), Anchor->GetActorRotation(),
             false, nullptr, ETeleportType::TeleportPhysics);
         Agent->SnapCapsuleToGround();
+        ResolveSafeStandingPlacement(Agent, StableKey);
         Agent->SetActivityState(Entry.ActivityState);
         return true;
     }
     case ETMOPPersonLocationType::WorldTransform:
         Agent->SetActorTransform(Entry.WorldTransform, false, nullptr, ETeleportType::TeleportPhysics);
         Agent->SnapCapsuleToGround();
+        ResolveSafeStandingPlacement(Agent,
+            IsValid(Agent->EntityIdentity) ? Agent->EntityIdentity->EntityId : Agent->GetFName());
         Agent->SetActivityState(Entry.ActivityState);
         return true;
     case ETMOPPersonLocationType::VenueSeat:

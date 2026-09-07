@@ -68,6 +68,23 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Simulation")
     bool bDisableCollisionForObservedUnknownPeople = true;
 
+    /** Prevents newly spawned standing people from sharing a blocking capsule. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|People|Simulation|Spawn Safety")
+    bool bUseSafeStandingSpawnPlacement = true;
+
+    /** Maximum horizontal adjustment used only when the requested point is blocked. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|People|Simulation|Spawn Safety",
+        meta=(ClampMin="0.0", Units="cm", EditCondition="bUseSafeStandingSpawnPlacement"))
+    float SafeStandingSpawnSearchRadiusCm = 300.0f;
+
+    /** Distance between deterministic candidate rings around a blocked point. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|People|Simulation|Spawn Safety",
+        meta=(ClampMin="20.0", Units="cm", EditCondition="bUseSafeStandingSpawnPlacement"))
+    float SafeStandingSpawnSearchStepCm = 90.0f;
+
     /** Central defaults copied to every person spawned by this director. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|People|Spawn Fade")
     bool bEnablePersonSpawnFade = true;
@@ -213,6 +230,8 @@ private:
         const FTMOPPersonTimelineEntry& Entry, bool bCatchUp);
     bool ApplyPlacement(ATMOPHistoricalAgent* Agent,
         const FTMOPPersonTimelineEntry& Entry, bool bCatchUp);
+    bool ResolveSafeStandingPlacement(ATMOPHistoricalAgent* Agent,
+        FName StableKey) const;
     void ApplyConversationFocus(
         ATMOPHistoricalAgent* Speaker,
         const FTMOPPersonTimelineEntry& Entry);

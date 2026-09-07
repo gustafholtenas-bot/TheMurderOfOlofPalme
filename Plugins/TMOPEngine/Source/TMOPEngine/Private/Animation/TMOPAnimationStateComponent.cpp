@@ -12,7 +12,7 @@ void UTMOPAnimationStateComponent::TickComponent(const float DeltaTime,
     const ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-    if (bDerivePostureAndMovementFromAgent) UpdateFromOwner();
+    if (bDerivePostureAndMovementFromAgent) UpdateFromOwner(DeltaTime);
     if (ActiveReaction != ETMOPAnimReaction::None && ReactionTimeRemaining >= 0.0f)
     {
         ReactionTimeRemaining -= DeltaTime;
@@ -20,7 +20,7 @@ void UTMOPAnimationStateComponent::TickComponent(const float DeltaTime,
     }
 }
 
-void UTMOPAnimationStateComponent::UpdateFromOwner()
+void UTMOPAnimationStateComponent::UpdateFromOwner(const float DeltaTime)
 {
     const ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
     if (!IsValid(Agent))
@@ -75,14 +75,61 @@ void UTMOPAnimationStateComponent::UpdateFromOwner()
         const float Fast = Agent->MovementProfile.FastWalkSpeed * Multiplier;
         const float Jog = Agent->MovementProfile.JogSpeed * Multiplier;
         const float Run = Agent->MovementProfile.RunSpeed * Multiplier;
-        if (DesiredSpeed >= (Jog + Run) * 0.5f)
-            LocomotionStyle = ETMOPAnimLocomotionStyle::FastRun;
-        else if (DesiredSpeed >= (Fast + Jog) * 0.5f)
-            LocomotionStyle = ETMOPAnimLocomotionStyle::MildRun;
-        else if (DesiredSpeed >= (Normal + Fast) * 0.5f)
-            LocomotionStyle = ETMOPAnimLocomotionStyle::Fast;
+        const float NormalFastThreshold = (Normal + Fast) * 0.5f;
+        const float FastJogThreshold = (Fast + Jog) * 0.5f;
+        const float JogRunThreshold = (Jog + Run) * 0.5f;
+        const float Hysteresis = FMath::Max(0.0f,
+            LocomotionStyleHysteresisCmPerSecond);
+
+        ETMOPAnimLocomotionStyle RequestedStyle = LocomotionStyle;
+        switch (LocomotionStyle)
+        {
+        case ETMOPAnimLocomotionStyle::Normal:
+            if (DesiredSpeed > NormalFastThreshold + Hysteresis)
+                RequestedStyle = ETMOPAnimLocomotionStyle::Fast;
+            break;
+        case ETMOPAnimLocomotionStyle::Fast:
+            if (DesiredSpeed < NormalFastThreshold - Hysteresis)
+                RequestedStyle = ETMOPAnimLocomotionStyle::Normal;
+            else if (DesiredSpeed > FastJogThreshold + Hysteresis)
+                RequestedStyle = ETMOPAnimLocomotionStyle::MildRun;
+            break;
+        case ETMOPAnimLocomotionStyle::MildRun:
+            if (DesiredSpeed < FastJogThreshold - Hysteresis)
+                RequestedStyle = ETMOPAnimLocomotionStyle::Fast;
+            else if (DesiredSpeed > JogRunThreshold + Hysteresis)
+                RequestedStyle = ETMOPAnimLocomotionStyle::FastRun;
+            break;
+        case ETMOPAnimLocomotionStyle::FastRun:
+            if (DesiredSpeed < JogRunThreshold - Hysteresis)
+                RequestedStyle = ETMOPAnimLocomotionStyle::MildRun;
+            break;
+        default:
+            // Drunk and HurtLeg are authored styles, not automatic speed bands.
+            RequestedStyle = LocomotionStyle;
+            break;
+        }
+
+        if (RequestedStyle == LocomotionStyle)
+        {
+            PendingLocomotionStyle = LocomotionStyle;
+            PendingLocomotionStyleSeconds = 0.0f;
+        }
         else
-            LocomotionStyle = ETMOPAnimLocomotionStyle::Normal;
+        {
+            if (RequestedStyle != PendingLocomotionStyle)
+            {
+                PendingLocomotionStyle = RequestedStyle;
+                PendingLocomotionStyleSeconds = 0.0f;
+            }
+            PendingLocomotionStyleSeconds += FMath::Max(0.0f, DeltaTime);
+            if (PendingLocomotionStyleSeconds >=
+                FMath::Max(0.0f, LocomotionStyleChangeDelaySeconds))
+            {
+                LocomotionStyle = PendingLocomotionStyle;
+                PendingLocomotionStyleSeconds = 0.0f;
+            }
+        }
         break;
     }
     default:
@@ -92,7 +139,13 @@ void UTMOPAnimationStateComponent::UpdateFromOwner()
 
 void UTMOPAnimationStateComponent::SetOverlay(const ETMOPAnimOverlay NewOverlay) { Overlay = NewOverlay; }
 void UTMOPAnimationStateComponent::SetWeaponPose(const ETMOPAnimWeaponPose NewWeaponPose) { WeaponPose = NewWeaponPose; }
-void UTMOPAnimationStateComponent::SetLocomotionStyle(const ETMOPAnimLocomotionStyle NewStyle) { LocomotionStyle = NewStyle; }
+void UTMOPAnimationStateComponent::SetLocomotionStyle(
+    const ETMOPAnimLocomotionStyle NewStyle)
+{
+    LocomotionStyle = NewStyle;
+    PendingLocomotionStyle = NewStyle;
+    PendingLocomotionStyleSeconds = 0.0f;
+}
 void UTMOPAnimationStateComponent::SetPostureOverride(const ETMOPAnimPosture NewPosture)
 {
     bDerivePostureAndMovementFromAgent = false;

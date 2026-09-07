@@ -1,0 +1,1927 @@
+[
+	{
+		"Name": "GRAND_SALON_1",
+		"VenueId": "GRAND_SALON_1",
+		"PlacementAnchorId": "GrandFoaje",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "GRAND_FILM_BRODERNA_MOZART",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "GRAND_SALON_2",
+		"VenueId": "GRAND_SALON_2",
+		"PlacementAnchorId": "GrandFoaje",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "GRAND_FILM_GA_OCH_SE",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "GRAND_FOAJE",
+		"VenueId": "GRAND_FOAJE",
+		"PlacementAnchorId": "GrandFoaje",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "GRAND_FOAJER_CROWD",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "GRAND_PROJECTOR_ROOM",
+		"VenueId": "GRAND_PROJECTOR_ROOM",
+		"PlacementAnchorId": "Grand_Projectorrum",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "GRAND_PROJECTOR_LOOP",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "KING_CREOLE",
+		"VenueId": "KING_CREOLE",
+		"PlacementAnchorId": "KingCreole_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_KING_CREOLE_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_KING_CREOLE_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_KING_CREOLE_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_KING_CREOLE_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "NEW_GENERATION",
+		"VenueId": "NEW_GENERATION",
+		"PlacementAnchorId": "newgeneration_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_NEW_GENERATION_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_NEW_GENERATION_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_NEW_GENERATION_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_NEW_GENERATION_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "MONTE_CARLO",
+		"VenueId": "MONTE_CARLO",
+		"PlacementAnchorId": "MonteCarlo_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_MONTE_CARLO_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_MONTE_CARLO_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_MONTE_CARLO_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_MONTE_CARLO_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "ALEXANDRA",
+		"VenueId": "ALEXANDRA",
+		"PlacementAnchorId": "NattklubbAlexandra_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_ALEXANDRA_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_ALEXANDRA_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_ALEXANDRA_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_ALEXANDRA_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "KLUBB_88",
+		"VenueId": "KLUBB_88",
+		"PlacementAnchorId": "Klubb88_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_KLUBB_88_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_KLUBB_88_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_KLUBB_88_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_KLUBB_88_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "MAROKANSK_KLUBB",
+		"VenueId": "MAROKANSK_KLUBB",
+		"PlacementAnchorId": "MarokanskKlubb_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_MAROKANSK_KLUBB_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_MAROKANSK_KLUBB_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_MAROKANSK_KLUBB_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_MAROKANSK_KLUBB_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "RESTAURANG_ST_CLARA",
+		"VenueId": "RESTAURANG_ST_CLARA",
+		"PlacementAnchorId": "RestaurangStClara_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_ST_CLARA_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_ST_CLARA_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_ST_CLARA_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_ST_CLARA_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "HOTEL_KARELIA",
+		"VenueId": "HOTEL_KARELIA",
+		"PlacementAnchorId": "HotelKarelia_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_HOTEL_KARELIA_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_HOTEL_KARELIA_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_HOTEL_KARELIA_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_HOTEL_KARELIA_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "LA_CARTERIE",
+		"VenueId": "LA_CARTERIE",
+		"PlacementAnchorId": "LaCarterie_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_LA_CARTERIE_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_LA_CARTERIE_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_LA_CARTERIE_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_LA_CARTERIE_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "LA_COCARADE",
+		"VenueId": "LA_COCARADE",
+		"PlacementAnchorId": "ResturangLaCocarade_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_LA_COCARADE_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_LA_COCARADE_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_LA_COCARADE_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_LA_COCARADE_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "BOHEMIA",
+		"VenueId": "BOHEMIA",
+		"PlacementAnchorId": "ResturangBohemia_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_BOHEMIA_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_BOHEMIA_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_BOHEMIA_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_BOHEMIA_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "SANDREWS",
+		"VenueId": "SANDREWS",
+		"PlacementAnchorId": "sandrews_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "VENUE_SANDREWS_TRACK_01",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "VENUE_SANDREWS_TRACK_02",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "VENUE_SANDREWS_TRACK_03",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "VENUE_SANDREWS_TRACK_04",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "JOHANNES_CHURCH",
+		"VenueId": "JOHANNES_CHURCH",
+		"PlacementAnchorId": "JohannesKyrkan_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "CHURCH_ORGAN",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "ADOLF_FREDRIK_CHURCH",
+		"VenueId": "ADOLF_FREDRIK_CHURCH",
+		"PlacementAnchorId": "AFkyrka",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "CHURCH_ORGAN",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "SKANDIA",
+		"VenueId": "SKANDIA",
+		"PlacementAnchorId": "Skandia_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "OFFICE_ROOM_TONE",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": true
+			},
+			{
+				"SlotId": "TRACK_02",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_03",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_04",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_05",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_06",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_07",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			},
+			{
+				"SlotId": "TRACK_08",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": false,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1.5,
+				"FadeOutSeconds": 1.5,
+				"bEnabled": false
+			}
+		],
+		"DefaultInnerRadiusCm": 450,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": "Place BP_TMOPVenueAudioEmitter or let it snap to this inside anchor. Add an Audio Volume to the interior."
+	},
+	{
+		"Name": "NewRow",
+		"VenueId": "bolaget",
+		"PlacementAnchorId": "bolaget_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "jazz",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1,
+				"FadeOutSeconds": 1,
+				"bEnabled": true
+			}
+		],
+		"DefaultInnerRadiusCm": 400,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": ""
+	},
+	{
+		"Name": "trebackar",
+		"VenueId": "tre_backar",
+		"PlacementAnchorId": "TreBackar_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "blues",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1,
+				"FadeOutSeconds": 1,
+				"bEnabled": true
+			}
+		],
+		"DefaultInnerRadiusCm": 400,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": ""
+	},
+	{
+		"Name": "finskahuset",
+		"VenueId": "finskahuset",
+		"PlacementAnchorId": "finskahuset_inside",
+		"AudioSlots": [
+			{
+				"SlotId": "TRACK_01",
+				"AudioId": "None",
+				"StartSecond": 82800,
+				"EndSecond": 85500,
+				"bLoop": true,
+				"VolumeMultiplier": 1,
+				"FadeInSeconds": 1,
+				"FadeOutSeconds": 1,
+				"bEnabled": true
+			}
+		],
+		"DefaultInnerRadiusCm": 400,
+		"DefaultFalloffDistanceCm": 2500,
+		"Notes": ""
+	}
+]
