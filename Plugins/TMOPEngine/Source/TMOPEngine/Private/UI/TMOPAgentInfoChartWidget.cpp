@@ -1,4 +1,5 @@
 #include "UI/TMOPAgentInfoChartWidget.h"
+#include "UI/TMOPControlUIHelpers.h"
 #include "UI/TMOPLocalPanel.h"
 #include "People/TMOPPersonNameLibrary.h"
 #include "InputCoreTypes.h"
@@ -146,13 +147,19 @@ FReply UTMOPAgentInfoChartWidget::NativeOnPreviewKeyDown(const FGeometry& Geomet
     if (bChartVisible)
     {
         const FKey Key = Event.GetKey();
-        if (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right)
+        const bool bProfiles = TMOPHasControlProfiles(this);
+        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack)) ||
+            (!bProfiles && (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right)))
             return HandleCloseClicked();
         float Delta = 0.0f;
-        if (Key == EKeys::Gamepad_DPad_Up) Delta = -64.0f;
-        if (Key == EKeys::Gamepad_DPad_Down) Delta = 64.0f;
-        if (Key == EKeys::Gamepad_LeftShoulder) Delta = -360.0f;
-        if (Key == EKeys::Gamepad_RightShoulder) Delta = 360.0f;
+        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuUp)) ||
+            (!bProfiles && Key == EKeys::Gamepad_DPad_Up)) Delta = -64.0f;
+        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuDown)) ||
+            (!bProfiles && Key == EKeys::Gamepad_DPad_Down)) Delta = 64.0f;
+        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuZoomOut)) ||
+            (!bProfiles && Key == EKeys::Gamepad_LeftShoulder)) Delta = -360.0f;
+        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuZoomIn)) ||
+            (!bProfiles && Key == EKeys::Gamepad_RightShoulder)) Delta = 360.0f;
         if (ScrollBox.IsValid() && Delta != 0.0f)
         {
             ScrollBox->SetScrollOffset(FMath::Max(0.0f, ScrollBox->GetScrollOffset() + Delta));

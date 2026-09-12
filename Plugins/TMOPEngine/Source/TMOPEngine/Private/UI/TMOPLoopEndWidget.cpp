@@ -1,5 +1,6 @@
 #include "UI/TMOPLoopEndWidget.h"
 #include "UI/TMOPLocalPanel.h"
+#include "UI/TMOPControlUIHelpers.h"
 
 #include "Framework/Application/SlateApplication.h"
 #include "InputCoreTypes.h"
@@ -108,9 +109,12 @@ FReply UTMOPLoopEndWidget::NativeOnKeyDown(
     const FGeometry& Geometry, const FKeyEvent& KeyEvent)
 {
     // The end state must always be resolved through one of the three choices.
-    if (KeyEvent.GetKey() == EKeys::Escape ||
-        KeyEvent.GetKey() == EKeys::Gamepad_FaceButton_Right ||
-        KeyEvent.GetKey() == EKeys::Gamepad_Special_Right)
+    const bool bProfiles = TMOPHasControlProfiles(this);
+    if ((bProfiles && (TMOPMatchesControl(this, KeyEvent.GetKey(), ETMOPControlAction::MenuBack) ||
+                       TMOPMatchesControl(this, KeyEvent.GetKey(), ETMOPControlAction::Pause))) ||
+        (!bProfiles && (KeyEvent.GetKey() == EKeys::Escape ||
+            KeyEvent.GetKey() == EKeys::Gamepad_FaceButton_Right ||
+            KeyEvent.GetKey() == EKeys::Gamepad_Special_Right)))
         return FReply::Handled();
     return Super::NativeOnKeyDown(Geometry, KeyEvent);
 }

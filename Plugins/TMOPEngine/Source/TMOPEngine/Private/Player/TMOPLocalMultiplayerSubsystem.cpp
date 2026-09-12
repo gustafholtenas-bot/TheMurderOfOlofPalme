@@ -16,6 +16,7 @@
 #include "Templates/UnrealTemplate.h"
 #include "People/TMOPPlayerAppearanceDirector.h"
 #include "Player/TMOPPlayerCharacter.h"
+#include "Player/TMOPControlSettingsSubsystem.h"
 #include "Player/TMOPPlayerVehicleSessionComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPMainMenuIntroDirector.h"
@@ -97,13 +98,20 @@ void UTMOPLocalMultiplayerSubsystem::GetPlayerViewRect(
     }
 }
 
-void UTMOPLocalMultiplayerSubsystem::ConfigureSession(int32 PlayerCount, bool bKeyboardForPlayerOne)
+void UTMOPLocalMultiplayerSubsystem::ConfigureSession(int32 PlayerCount,
+    bool bKeyboardForPlayerOne, bool bSharedKeyboardForPlayerTwo)
 {
     SelectedPlayerCount = FMath::Clamp(PlayerCount, 1, 4);
     bUseKeyboardForPlayerOne = bKeyboardForPlayerOne;
+    bUseSharedKeyboardForPlayerTwo = bUseKeyboardForPlayerOne &&
+        bSharedKeyboardForPlayerTwo && SelectedPlayerCount == 2;
     // Session-only: do not save over the user's project settings.
     GetMutableDefault<UGameMapsSettings>()->bOffsetPlayerGamepadIds =
         bUseKeyboardForPlayerOne && SelectedPlayerCount > 1;
+    if (UTMOPControlSettingsSubsystem* Controls =
+        GetGameInstance()->GetSubsystem<UTMOPControlSettingsSubsystem>())
+        Controls->ConfigureForSession(SelectedPlayerCount, bUseKeyboardForPlayerOne,
+            bUseSharedKeyboardForPlayerTwo);
 }
 
 void UTMOPLocalMultiplayerSubsystem::SetSplitScreenEnabled(bool bEnabled)
@@ -113,6 +121,18 @@ void UTMOPLocalMultiplayerSubsystem::SetSplitScreenEnabled(bool bEnabled)
     {
         Viewport->SetForceDisableSplitscreen(!bEnabled);
         Viewport->LayoutPlayers();
+    }
+}
+
+void UTMOPLocalMultiplayerSubsystem::UpdateControlLayoutFromProfiles()
+{
+    if (auto* Controls = GetGameInstance()->GetSubsystem<UTMOPControlSettingsSubsystem>())
+    {
+        bUseKeyboardForPlayerOne = Controls->GetProfile(0).Device == ETMOPControlDevice::KeyboardMouse;
+        bUseSharedKeyboardForPlayerTwo = SelectedPlayerCount == 2 &&
+            Controls->GetProfile(1).Device == ETMOPControlDevice::KeyboardOnly;
+        GetMutableDefault<UGameMapsSettings>()->bOffsetPlayerGamepadIds =
+            bUseKeyboardForPlayerOne && SelectedPlayerCount > 1;
     }
 }
 
@@ -163,7 +183,6 @@ bool UTMOPLocalMultiplayerSubsystem::EnsurePlayerCount(int32 Count, FText& OutEr
         if (APlayerController* PC = Cast<APlayerController>(Player->GetController()))
         {
             PC->PrimaryActorTick.bTickEvenWhenPaused = true;
-            PC->bShouldPerformFullTickWhenPaused = true;
         }
     return true;
 }

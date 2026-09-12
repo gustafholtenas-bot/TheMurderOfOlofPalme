@@ -38,6 +38,7 @@ public:
     /** Version 3 adds all local players; legacy fields below remain readable. */
     UPROPERTY(SaveGame) TArray<FTMOPLocalPlayerSave> LocalPlayers;
     UPROPERTY(SaveGame) bool bKeyboardForPlayerOne = true;
+    UPROPERTY(SaveGame) bool bSharedKeyboardForPlayerTwo = false;
     UPROPERTY(SaveGame) FString SlotDisplayName;
     UPROPERTY(SaveGame) FString LocationDisplayName;
     UPROPERTY(SaveGame) FString MapDisplayName;

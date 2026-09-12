@@ -4,6 +4,10 @@
 #include "Player/TMOPLocalSessionPolicy.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Player/TMOPPlayerCharacter.h"
+#include "Player/TMOPPlayerVehicleSessionComponent.h"
+#include "Templates/UnrealTemplate.h"
 
 UTMOPClockSubsystem::UTMOPClockSubsystem()
 {
@@ -72,6 +76,15 @@ void UTMOPClockSubsystem::PauseClock()
 
 void UTMOPClockSubsystem::RestartLoop()
 {
+    if (bRestartInProgress) return;
+    TGuardValue<bool> RestartGuard(bRestartInProgress, true);
+    // Every restart path, including debug time jumps and Blueprint callers,
+    // must detach players before listeners destroy historical actors.
+    for (auto* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+    {
+        Player->CloseSessionMenus();
+        if (Player->VehicleSession) Player->VehicleSession->ExitVehicle();
+    }
     ++LoopNumber;
     CurrentTimeSeconds = LoopStartSeconds;
     FractionalSeconds = 0.0;

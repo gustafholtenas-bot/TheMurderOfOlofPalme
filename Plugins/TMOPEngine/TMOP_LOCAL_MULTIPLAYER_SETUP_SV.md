@@ -35,13 +35,14 @@ projektets layoutinställningar. Ingen nätverkssession, lobby eller replikering
 
 ## Kontroller och startplats
 
-Huvudmenyn väljer också mellan tangentbord/mus för spelare 1 eller handkontroller
-för alla. Tangentbordsläget använder första handkontrollen för spelare 2. För fyra
-spelare behövs då tre handkontroller; alternativt fyra handkontroller när alla
-spelar med handkontroll. Det finns inte flera oberoende muspekare.
+Huvudmenyn väljer också mellan tangentbordsläge och handkontroller för alla.
+Med exakt två spelare ger tangentbordsläget P1 tangentbord/mus och P2 en separat
+tangentbordsuppsättning. Med tre eller fyra spelare använder P1 tangentbord/mus
+och övriga handkontroller. Det finns inte flera oberoende muspekare.
 
-Input-inställningarna ändras för sessionen och skrivs inte över i projektets ini.
-De återställs när subsystemet avslutas. Meny-/introfasen har bara en lokal spelare.
+Gamepad-offset och splitscreen ändras bara för sessionen och skrivs inte över i
+projektets ini. Spelarnas egna kontrollprofiler sparas däremot avsiktligt i
+`TMOP_ControlSettings_v1`. Meny-/introfasen har bara en lokal spelare.
 
 På `TMOPMainMenuIntroDirector`:
 
@@ -94,8 +95,9 @@ inventarier/upptäckter behålls enligt den befintliga loopmodellen.
 
 ## Handkontroller i läsvyer
 
-Befintliga Enhanced Input-mappningar används för spelandet. Standardassets
-innehåller redan gamepad-mappningar; deras faktiska funktion måste testas i nivån.
+De beständiga kontrollprofilerna används för spelandet när `bUseControlProfiles`
+är aktivt. Den äldre Enhanced Input-contexten och de direkta native-fallbackarna
+kopplas då bort för att undvika dubbelinput. Se `TMOP_CONTROL_PROFILES_SETUP_SV.md`.
 Följande direkta UI-kontroller har kompletterats:
 
 | Vy | Standardknappar (Xbox-benämningar) |

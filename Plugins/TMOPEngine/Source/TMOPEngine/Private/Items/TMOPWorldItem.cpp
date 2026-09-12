@@ -103,8 +103,15 @@ bool ATMOPWorldItem::TryPickup(UTMOPInventoryComponent* TargetInventory)
     if (IsActorBeingDestroyed() || Quantity <= 0 || !IsValid(TargetInventory) || !IsValid(ItemDefinition.Get())) return false;
     const int32 Transfer = FMath::Min(Quantity,
         TargetInventory->GetRemainingCapacity(ItemDefinition.Get()));
-    if (Transfer <= 0 || !TargetInventory->AddItem(ItemDefinition.Get(), Transfer)) return false;
+    if (Transfer <= 0) return false;
+    // Reserve before AddItem broadcasts. A Blueprint listener may try to pick
+    // up this actor for another player synchronously inside that broadcast.
     Quantity -= Transfer;
+    if (!TargetInventory->AddItem(ItemDefinition.Get(), Transfer))
+    {
+        Quantity += Transfer;
+        return false;
+    }
     if (Quantity <= 0) Destroy();
     return true;
 }

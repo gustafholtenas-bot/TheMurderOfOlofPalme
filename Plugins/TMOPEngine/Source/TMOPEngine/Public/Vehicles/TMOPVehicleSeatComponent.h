@@ -25,6 +25,7 @@ class TMOPENGINE_API UTMOPVehicleSeatComponent : public USceneComponent
 
 public:
     UTMOPVehicleSeatComponent();
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle Seat")
     FName SeatId = NAME_None;

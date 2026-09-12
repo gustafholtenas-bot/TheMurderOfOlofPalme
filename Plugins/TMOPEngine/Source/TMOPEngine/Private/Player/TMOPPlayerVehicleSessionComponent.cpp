@@ -23,6 +23,13 @@ void UTMOPPlayerVehicleSessionComponent::TickComponent(const float DeltaTime,
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     const UTMOPVehicleTakeoverComponent* Takeover = GetTakeover();
     if (!IsValid(Takeover)) return;
+    if (!Takeover->IsInsideVehicle())
+    {
+        if (auto* Driving = GetDriving()) Driving->EndDriving();
+        SetCameraTarget(GetOwner(), 0.0f);
+        SetComponentTickEnabled(false);
+        return;
+    }
     if (IsValid(LocalVehicleCamera)) { UpdateLocalVehicleCamera(DeltaTime); return; }
     if (ATMOPConfiguredVehicle* Vehicle =
         Cast<ATMOPConfiguredVehicle>(Takeover->CurrentVehicle))

@@ -24,6 +24,7 @@ class TMOPENGINE_API UTMOPPlayerRadioComponent : public UActorComponent
 public:
     UTMOPPlayerRadioComponent();
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Radio")
     TObjectPtr<UTMOPRadioScheduleData> Schedule;
@@ -37,6 +38,10 @@ public:
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Radio")
     bool bRadioOn = false;
+
+    /** Local players share one sound output. The last receiver operated has audio focus. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Radio")
+    bool bSharedOutputMuted = false;
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Radio")
     int32 CurrentChannelIndex = 0;
@@ -86,6 +91,7 @@ private:
     void RefreshBroadcast(bool bForceRestart);
     void BroadcastState();
     bool IsRadioEquipped() const;
+    void SelectSharedOutput(bool bPreferThisReceiver);
 
     UPROPERTY(Transient)
     TObjectPtr<UAudioComponent> AudioComponent;

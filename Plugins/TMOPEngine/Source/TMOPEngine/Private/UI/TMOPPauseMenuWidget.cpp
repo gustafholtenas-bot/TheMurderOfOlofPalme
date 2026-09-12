@@ -39,6 +39,8 @@
 #include "Widgets/SLeafWidget.h"
 #include "Widgets/Text/STextBlock.h"
 #include "UI/TMOPTypographyDirector.h"
+#include "UI/TMOPControlsPanel.h"
+#include "UI/TMOPControlUIHelpers.h"
 
 namespace
 {
@@ -322,7 +324,10 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
     NavigationPanel->AddSlot().AutoHeight().Padding(3.0f)
     [ SNew(SButton).ButtonColorAndOpacity(MenuColors.ButtonBackground)
       .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked)
-      [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT (ENTER / ESC)"))
+      [ SNew(STextBlock).Text_Lambda([this]()
+        { return FText::Format(FText::FromString(TEXT("FORTSÄTT ({0} / {1})")),
+            TMOPControlDisplayText(this, ETMOPControlAction::Pause, FText::FromString(TEXT("Enter"))),
+            TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, FText::FromString(TEXT("Esc")))); })
         .Font(ATMOPTypographyDirector::ResolveFont(this,
             TEXT("PauseMenuNavigation"),
             FCoreStyle::GetDefaultFontStyle("Regular", 16)))
@@ -1239,21 +1244,8 @@ FReply UTMOPPauseMenuWidget::HandleToggleVSync()
 
 void UTMOPPauseMenuWidget::BuildControlsPage()
 {
-    AddBody(NSLOCTEXT("TMOP", "ControlsIntro", "Aktiva standardkontroller. Listan visas i två kolumner."));
-    const TArray<TPair<FString,FString>> Controls = {
-        {TEXT("WASD"),TEXT("Rörelse / körning")},{TEXT("Mouse"),TEXT("Kamera")},{TEXT("E"),TEXT("Interagera / prata")},{TEXT("Enter"),TEXT("Pausmeny")},
-        {TEXT("Escape"),TEXT("Stäng / tillbaka")},{TEXT("M"),TEXT("Stor karta")},{TEXT("Tab (håll)"),TEXT("Snabb-inventory")},{TEXT("Q / E"),TEXT("Föregående / nästa item")},
-        {TEXT("Left Shift"),TEXT("Spring")},{TEXT("Left Ctrl + Shift"),TEXT("Extra snabbt")},{TEXT("G"),TEXT("Släpp item")},{TEXT("Space"),TEXT("Hoppa")},
-        {TEXT("Gamepad Start"),TEXT("Pausmeny")},{TEXT("Gamepad B"),TEXT("Stäng / tillbaka")},{TEXT("Gamepad LB"),TEXT("Snabb-inventory")},{TEXT("Mushjul"),TEXT("Zoom på karta/tidning")}
-    };
-    TSharedRef<SUniformGridPanel> Grid = SNew(SUniformGridPanel).SlotPadding(FMargin(5.0f));
-    for (int32 I=0; I<Controls.Num(); ++I)
-    {
-        const int32 Column = I % 2, Row = I / 2;
-        Grid->AddSlot(Column, Row)[ SNew(SBorder).Padding(8.0f)
-            [ SNew(STextBlock).Text(FText::FromString(Controls[I].Key + TEXT(" — ") + Controls[I].Value)).AutoWrapText(true) ] ];
-    }
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f,8.0f)[Grid];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 8.0f)
+    [ SNew(STMOPControlsPanel).PlayerCharacter(PlayerCharacter) ];
 }
 
 void UTMOPPauseMenuWidget::BuildSaveLoadPage()
@@ -1453,8 +1445,11 @@ FReply UTMOPPauseMenuWidget::HandleResumeClicked()
 FReply UTMOPPauseMenuWidget::NativeOnKeyDown(const FGeometry& Geometry,const FKeyEvent& Event)
 {
     const FKey Key=Event.GetKey();
-    if (Key==EKeys::Enter || Key==EKeys::Escape ||
-        Key==EKeys::Gamepad_Special_Right || Key==EKeys::Gamepad_FaceButton_Right)
+    const bool bProfiles = TMOPHasControlProfiles(this);
+    if ((bProfiles && (TMOPMatchesControl(this, Key, ETMOPControlAction::Pause) ||
+                       TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack))) ||
+        (!bProfiles && (Key==EKeys::Enter || Key==EKeys::Escape ||
+            Key==EKeys::Gamepad_Special_Right || Key==EKeys::Gamepad_FaceButton_Right)))
         return HandleResumeClicked();
     return Super::NativeOnKeyDown(Geometry,Event);
 }

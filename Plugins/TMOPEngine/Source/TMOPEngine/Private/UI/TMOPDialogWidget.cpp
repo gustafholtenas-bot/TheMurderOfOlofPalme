@@ -1,5 +1,6 @@
 #include "UI/TMOPDialogWidget.h"
 #include "UI/TMOPLocalPanel.h"
+#include "UI/TMOPControlUIHelpers.h"
 
 #include "Engine/Texture2D.h"
 #include "EngineUtils.h"
@@ -194,8 +195,11 @@ FReply UTMOPDialogWidget::HandleCloseClicked()
 FReply UTMOPDialogWidget::NativeOnKeyDown(const FGeometry& InGeometry,
     const FKeyEvent& InKeyEvent)
 {
-    if (bDialogVisible && (InKeyEvent.GetKey() == EKeys::Escape ||
-        InKeyEvent.GetKey() == EKeys::Gamepad_FaceButton_Right))
+    const bool bProfiles = TMOPHasControlProfiles(this);
+    if (bDialogVisible && ((bProfiles && TMOPMatchesControl(this,
+            InKeyEvent.GetKey(), ETMOPControlAction::MenuBack)) ||
+        (!bProfiles && (InKeyEvent.GetKey() == EKeys::Escape ||
+            InKeyEvent.GetKey() == EKeys::Gamepad_FaceButton_Right))))
         return HandleCloseClicked();
     return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
 }

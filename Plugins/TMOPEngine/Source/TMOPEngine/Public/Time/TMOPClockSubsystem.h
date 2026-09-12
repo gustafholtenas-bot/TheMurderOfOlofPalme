@@ -134,4 +134,5 @@ private:
     float TimeScale = 1.0f;
     bool bClockRunning = true;
     bool bAwaitingLoopDecision = false;
+    bool bRestartInProgress = false;
 };

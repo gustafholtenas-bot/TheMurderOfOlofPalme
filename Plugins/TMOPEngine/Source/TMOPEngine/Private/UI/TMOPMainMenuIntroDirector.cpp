@@ -187,7 +187,7 @@ void ATMOPMainMenuIntroDirector::StartNewGame()
     StartupStatus = FText::GetEmpty();
     ActiveIntroDestinationAnchorId = IntroDestinationAnchorId;
     GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->ConfigureSession(
-        LocalPlayerCount, bKeyboardForPlayerOne);
+        LocalPlayerCount, bKeyboardForPlayerOne, bSharedKeyboardForPlayerTwo);
     if (IsValid(MainMenuWidget))
     {
         MainMenuWidget->SetMenuMode(false);

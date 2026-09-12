@@ -29,6 +29,9 @@ public:
     int32 LocalPlayerCount = 1;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Local Multiplayer")
     bool bKeyboardForPlayerOne = true;
+    /** With exactly two players, player 2 receives a disjoint keyboard layout. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Local Multiplayer")
+    bool bSharedKeyboardForPlayerTwo = true;
     /** Empty uses the intro destination. All players spawn within 6 m of this anchor. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Local Multiplayer")
     FName PlayerStartAnchorId;

@@ -4,6 +4,8 @@
 #include "Inventory/TMOPInventoryComponent.h"
 #include "Inventory/TMOPItemDefinition.h"
 #include "Sound/SoundBase.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Player/TMOPPlayerCharacter.h"
 
 UTMOPPlayerRadioComponent::UTMOPPlayerRadioComponent()
 {
@@ -43,12 +45,44 @@ bool UTMOPPlayerRadioComponent::IsRadioEquipped() const
     return IsValid(Item) && Item->ItemType == ETMOPItemType::Radio;
 }
 
+void UTMOPPlayerRadioComponent::SelectSharedOutput(const bool bPreferThisReceiver)
+{
+    TArray<UTMOPPlayerRadioComponent*> Receivers;
+    for (auto* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+        if (IsValid(Player) && !Player->IsActorBeingDestroyed())
+            if (auto* Radio = Player->FindComponentByClass<UTMOPPlayerRadioComponent>())
+                Receivers.Add(Radio);
+    UTMOPPlayerRadioComponent* Audible = bPreferThisReceiver && bRadioOn ? this : nullptr;
+    if (!Audible)
+        for (auto* Radio : Receivers)
+            if (Radio->bRadioOn && !Radio->bSharedOutputMuted) { Audible = Radio; break; }
+    if (!Audible)
+        for (auto* Radio : Receivers)
+            if (Radio->bRadioOn) { Audible = Radio; break; }
+    // Stop every previous receiver before starting the selected one.
+    for (auto* Radio : Receivers)
+    {
+        Radio->bSharedOutputMuted = Radio->bRadioOn && Radio != Audible;
+        if (Radio != Audible && Radio->AudioComponent) Radio->AudioComponent->Stop();
+    }
+    for (auto* Radio : Receivers) Radio->RefreshBroadcast(Radio == Audible);
+    if (!Receivers.Contains(this)) RefreshBroadcast(true);
+}
+
+void UTMOPPlayerRadioComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    bRadioOn = false;
+    if (AudioComponent) AudioComponent->Stop();
+    SelectSharedOutput(false);
+    Super::EndPlay(EndPlayReason);
+}
+
 void UTMOPPlayerRadioComponent::SetRadioOn(const bool bEnabled)
 {
     const bool bNewValue = bEnabled && (!bRequireRadioItemEquipped || IsRadioEquipped());
     if (bRadioOn == bNewValue) return;
     bRadioOn = bNewValue;
-    RefreshBroadcast(true);
+    SelectSharedOutput(bRadioOn);
 }
 
 void UTMOPPlayerRadioComponent::ToggleRadio()
@@ -62,7 +96,7 @@ bool UTMOPPlayerRadioComponent::SetChannelById(const FName ChannelId)
     const int32 Index = Schedule->FindChannelIndex(ChannelId);
     if (Index == INDEX_NONE) return false;
     CurrentChannelIndex = Index;
-    RefreshBroadcast(true);
+    SelectSharedOutput(bRadioOn);
     return true;
 }
 
@@ -72,7 +106,7 @@ bool UTMOPPlayerRadioComponent::CycleChannel(const int32 Direction)
     const int32 Step = Direction >= 0 ? 1 : -1;
     CurrentChannelIndex = (CurrentChannelIndex + Step + Schedule->Channels.Num()) %
         Schedule->Channels.Num();
-    RefreshBroadcast(true);
+    SelectSharedOutput(bRadioOn);
     return true;
 }
 
@@ -98,7 +132,7 @@ void UTMOPPlayerRadioComponent::SetSimulationTime(const int32 Hour,
 void UTMOPPlayerRadioComponent::RefreshBroadcast(const bool bForceRestart)
 {
     if (!IsValid(AudioComponent.Get())) return;
-    if (!bRadioOn || !IsValid(Schedule.Get()) ||
+    if (!bRadioOn || bSharedOutputMuted || !IsValid(Schedule.Get()) ||
         !Schedule->Channels.IsValidIndex(CurrentChannelIndex))
     {
         AudioComponent->Stop();
@@ -141,7 +175,9 @@ FText UTMOPPlayerRadioComponent::GetCurrentProgramName() const
 {
     const FTMOPRadioProgramSegment* Segment = IsValid(Schedule.Get())
         ? Schedule->FindSegment(CurrentChannelIndex, CurrentSecondOfDay) : nullptr;
-    return Segment != nullptr ? Segment->DisplayName : FText::GetEmpty();
+    const FText Name = Segment != nullptr ? Segment->DisplayName : FText::GetEmpty();
+    return bSharedOutputMuted ? FText::Format(NSLOCTEXT("TMOP", "SharedRadioOutput",
+        "{0} (annan spelares radio hörs – byt kanal för att lyssna här)"), Name) : Name;
 }
 
 void UTMOPPlayerRadioComponent::BroadcastState()

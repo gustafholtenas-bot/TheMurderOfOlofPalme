@@ -141,6 +141,7 @@ bool FTMOPSaveGameService::SavePlayer(UWorld* World,
     Save->SaveFormatVersion = 3;
     auto* Session = Player->GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
     Save->bKeyboardForPlayerOne = Session->UsesKeyboardForPlayerOne();
+    Save->bSharedKeyboardForPlayerTwo = Session->UsesSharedKeyboardForPlayerTwo();
     for (ATMOPPlayerCharacter* Member : Party)
     {
         auto& State = Save->LocalPlayers.AddDefaulted_GetRef();
@@ -247,7 +248,8 @@ bool FTMOPSaveGameService::LoadPlayer(UWorld* World,
     // Detach everyone before the historical vehicle director reconstructs the world.
     for (ATMOPPlayerCharacter* Member : UTMOPLocalMultiplayerSubsystem::GetPlayers(World))
         if (Member->VehicleSession) Member->VehicleSession->ExitVehicle();
-    Session->ConfigureSession(Count, Save->bKeyboardForPlayerOne);
+    Session->ConfigureSession(Count, Save->bKeyboardForPlayerOne,
+        Save->bSharedKeyboardForPlayerTwo);
     if (!Session->EnsurePlayerCount(Count, OutStatus))
     {
         Clock->ReleasePause(Session, TEXT("LoadGame"));

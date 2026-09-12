@@ -113,9 +113,13 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 8)
           [ SNew(SButton).OnClicked_UObject(this, &UTMOPMainMenuWidget::KeyboardModeClicked)
             [ SNew(STextBlock).Text_Lambda([this]()
-              { return FText::FromString(Director.IsValid() && Director->bKeyboardForPlayerOne
-                  ? TEXT("Styrning: P1 tangentbord/mus · P2–P4 handkontroller")
-                  : TEXT("Styrning: en handkontroll per spelare")); }) ] ]
+              {
+                  if (!Director.IsValid() || !Director->bKeyboardForPlayerOne)
+                      return FText::FromString(TEXT("Styrning: en handkontroll per spelare"));
+                  if (Director->LocalPlayerCount == 2 && Director->bSharedKeyboardForPlayerTwo)
+                      return FText::FromString(TEXT("Styrning: P1 + P2 delar tangentbordet"));
+                  return FText::FromString(TEXT("Styrning: P1 tangentbord/mus · övriga handkontroller"));
+              }) ] ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
           [ SNew(STextBlock).AutoWrapText(true).ColorAndOpacity(FLinearColor(1,0.4f,0.2f))
             .Text_Lambda([this]() { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); }) ]
@@ -228,7 +232,25 @@ FReply UTMOPMainMenuWidget::PlayerCountClicked(int32 Count)
 
 FReply UTMOPMainMenuWidget::KeyboardModeClicked()
 {
-    if (Director.IsValid()) Director->bKeyboardForPlayerOne = !Director->bKeyboardForPlayerOne;
+    if (Director.IsValid())
+    {
+        // Cycle all supported layouts without hiding the established
+        // P1-keyboard + P2-controller option.
+        if (!Director->bKeyboardForPlayerOne)
+        {
+            Director->bKeyboardForPlayerOne = true;
+            Director->bSharedKeyboardForPlayerTwo = false;
+        }
+        else if (!Director->bSharedKeyboardForPlayerTwo)
+        {
+            Director->bSharedKeyboardForPlayerTwo = true;
+        }
+        else
+        {
+            Director->bKeyboardForPlayerOne = false;
+            Director->bSharedKeyboardForPlayerTwo = false;
+        }
+    }
     return FReply::Handled();
 }
 

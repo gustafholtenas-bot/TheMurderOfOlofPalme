@@ -19,11 +19,14 @@ public:
     virtual void Deinitialize() override;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Local Multiplayer")
-    void ConfigureSession(int32 PlayerCount, bool bKeyboardForPlayerOne);
+    void ConfigureSession(int32 PlayerCount, bool bKeyboardForPlayerOne,
+        bool bSharedKeyboardForPlayerTwo);
     UFUNCTION(BlueprintPure, Category="TMOP|Local Multiplayer")
     int32 GetSelectedPlayerCount() const { return SelectedPlayerCount; }
     UFUNCTION(BlueprintPure, Category="TMOP|Local Multiplayer")
     bool UsesKeyboardForPlayerOne() const { return bUseKeyboardForPlayerOne; }
+    UFUNCTION(BlueprintPure, Category="TMOP|Local Multiplayer")
+    bool UsesSharedKeyboardForPlayerTwo() const { return bUseSharedKeyboardForPlayerTwo; }
 
     bool StartParty(FName AnchorId, const FTransform& Fallback, FText& OutError);
     bool EnsurePlayerCount(int32 Count, FText& OutError);
@@ -34,6 +37,7 @@ public:
     void AdoptLoadedSession();
     void CloseAllPlayerMenus();
     void SetSplitScreenEnabled(bool bEnabled);
+    void UpdateControlLayoutFromProfiles();
 
     static TArray<ATMOPPlayerCharacter*> GetPlayers(const UObject* Context);
     static bool IsMultiplayer(const UObject* Context);
@@ -44,6 +48,7 @@ public:
 private:
     int32 SelectedPlayerCount = 1;
     bool bUseKeyboardForPlayerOne = true;
+    bool bUseSharedKeyboardForPlayerTwo = false;
     FName StartAnchorId;
     FTransform StartFallback = FTransform::Identity;
     TWeakObjectPtr<UWorld> SessionWorld;

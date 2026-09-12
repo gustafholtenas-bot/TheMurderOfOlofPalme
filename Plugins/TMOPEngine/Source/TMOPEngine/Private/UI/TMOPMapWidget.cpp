@@ -8,6 +8,7 @@
 #include "Styling/CoreStyle.h"
 #include "UI/TMOPMapComponent.h"
 #include "UI/TMOPTypographyDirector.h"
+#include "UI/TMOPControlUIHelpers.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/SLeafWidget.h"
 #include "Widgets/SOverlay.h"
@@ -524,8 +525,15 @@ public:
     {
         if (!OwnerWidget.IsValid() || OwnerWidget->IsMinimap()) return FReply::Unhandled();
         const float Value = FMath::Abs(Event.GetAnalogValue()) > 0.2f ? Event.GetAnalogValue() : 0.0f;
-        if (Event.GetKey() == EKeys::Gamepad_LeftX) { PanAxis.X = Value; return FReply::Handled(); }
-        if (Event.GetKey() == EKeys::Gamepad_LeftY) { PanAxis.Y = Value; return FReply::Handled(); }
+        const bool bProfiles = TMOPHasControlProfiles(OwnerWidget.Get());
+        if ((bProfiles && (TMOPMatchesControl(OwnerWidget.Get(), Event.GetKey(), ETMOPControlAction::MenuLeft) ||
+                          TMOPMatchesControl(OwnerWidget.Get(), Event.GetKey(), ETMOPControlAction::MenuRight))) ||
+            (!bProfiles && Event.GetKey() == EKeys::Gamepad_LeftX))
+        { PanAxis.X = Value; return FReply::Handled(); }
+        if ((bProfiles && (TMOPMatchesControl(OwnerWidget.Get(), Event.GetKey(), ETMOPControlAction::MenuUp) ||
+                          TMOPMatchesControl(OwnerWidget.Get(), Event.GetKey(), ETMOPControlAction::MenuDown))) ||
+            (!bProfiles && Event.GetKey() == EKeys::Gamepad_LeftY))
+        { PanAxis.Y = Value; return FReply::Handled(); }
         return FReply::Unhandled();
     }
 
@@ -533,27 +541,39 @@ public:
     {
         if (!OwnerWidget.IsValid() || OwnerWidget->IsMinimap()) return FReply::Unhandled();
         const FKey Key = Event.GetKey();
-        if (Key == EKeys::Escape || Key == EKeys::M || Key == EKeys::Gamepad_FaceButton_Right ||
-            Key == EKeys::Gamepad_Special_Left)
+        const bool bProfiles = TMOPHasControlProfiles(OwnerWidget.Get());
+        if ((bProfiles && (TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuBack) ||
+                          TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::WorldMap))) ||
+            (!bProfiles && (Key == EKeys::Escape || Key == EKeys::M ||
+                Key == EKeys::Gamepad_FaceButton_Right || Key == EKeys::Gamepad_Special_Left)))
         {
             if (!Event.IsRepeat()) OwnerWidget->RequestClose();
             return FReply::Handled();
         }
-        if (Key == EKeys::Gamepad_RightShoulder || Key == EKeys::Gamepad_LeftShoulder)
+        if ((bProfiles && (TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuZoomIn) ||
+                          TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuZoomOut))) ||
+            (!bProfiles && (Key == EKeys::Gamepad_RightShoulder || Key == EKeys::Gamepad_LeftShoulder)))
         {
-            OwnerWidget->ChangeZoom(Key == EKeys::Gamepad_RightShoulder ? 1.0f : -1.0f);
+            OwnerWidget->ChangeZoom((bProfiles && TMOPMatchesControl(OwnerWidget.Get(), Key,
+                ETMOPControlAction::MenuZoomIn)) || (!bProfiles && Key == EKeys::Gamepad_RightShoulder)
+                ? 1.0f : -1.0f);
             return FReply::Handled();
         }
-        if (Key == EKeys::Gamepad_FaceButton_Left)
+        if ((bProfiles && TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuReset)) ||
+            (!bProfiles && Key == EKeys::Gamepad_FaceButton_Left))
         {
             OwnerWidget->ResetViewToPlayer();
             return FReply::Handled();
         }
         FVector2D Delta = FVector2D::ZeroVector;
-        if (Key == EKeys::Gamepad_DPad_Right || Key == EKeys::Right) Delta.X = -64.0f;
-        if (Key == EKeys::Gamepad_DPad_Left || Key == EKeys::Left) Delta.X = 64.0f;
-        if (Key == EKeys::Gamepad_DPad_Up || Key == EKeys::Up) Delta.Y = 64.0f;
-        if (Key == EKeys::Gamepad_DPad_Down || Key == EKeys::Down) Delta.Y = -64.0f;
+        if ((bProfiles && TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuRight)) ||
+            (!bProfiles && (Key == EKeys::Gamepad_DPad_Right || Key == EKeys::Right))) Delta.X = -64.0f;
+        if ((bProfiles && TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuLeft)) ||
+            (!bProfiles && (Key == EKeys::Gamepad_DPad_Left || Key == EKeys::Left))) Delta.X = 64.0f;
+        if ((bProfiles && TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuUp)) ||
+            (!bProfiles && (Key == EKeys::Gamepad_DPad_Up || Key == EKeys::Up))) Delta.Y = 64.0f;
+        if ((bProfiles && TMOPMatchesControl(OwnerWidget.Get(), Key, ETMOPControlAction::MenuDown)) ||
+            (!bProfiles && (Key == EKeys::Gamepad_DPad_Down || Key == EKeys::Down))) Delta.Y = -64.0f;
         if (!Delta.IsNearlyZero())
         {
             OwnerWidget->PanByPixels(Delta, Geometry.GetLocalSize());
@@ -563,6 +583,13 @@ public:
     }
 
     virtual bool SupportsKeyboardFocus() const override { return !OwnerWidget.IsValid() || !OwnerWidget->IsMinimap(); }
+
+    virtual void OnFocusLost(const FFocusEvent& Event) override
+    {
+        PanAxis = FVector2D::ZeroVector;
+        bDragging = false;
+        SLeafWidget::OnFocusLost(Event);
+    }
 
 private:
     TWeakObjectPtr<UTMOPMapWidget> OwnerWidget;
@@ -601,7 +628,15 @@ TSharedRef<SWidget> UTMOPMapWidget::RebuildWidget()
         + SOverlay::Slot()[ Canvas ]
         + SOverlay::Slot().HAlign(HAlign_Right).VAlign(VAlign_Top).Padding(24.0f)
         [ SNew(STextBlock)
-            .Text(NSLOCTEXT("TMOP", "WorldMapHelp", "KARTA  •  mushjul / LB/RB: zoom  •  dra / vänsterspak: panorera  •  M/Esc/B: stäng"))
+            .Text_Lambda([this]() { return FText::Format(FText::FromString(
+                TEXT("KARTA  •  {0}/{1}: zoom  •  {2}/{3}/{4}/{5}: panorera  •  {6}: stäng")),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomOut, FText::FromString(TEXT("−"))),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomIn, FText::FromString(TEXT("+"))),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuUp, FText::FromString(TEXT("Upp"))),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuDown, FText::FromString(TEXT("Ned"))),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuLeft, FText::FromString(TEXT("Vänster"))),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuRight, FText::FromString(TEXT("Höger"))),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, FText::FromString(TEXT("Esc")))); })
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MapHint"),
                 FCoreStyle::GetDefaultFontStyle("Regular", 14)))
             .ColorAndOpacity(FLinearColor::White) ]);

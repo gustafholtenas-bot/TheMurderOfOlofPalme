@@ -1,4 +1,5 @@
 #include "UI/TMOPNewspaperReaderWidget.h"
+#include "UI/TMOPControlUIHelpers.h"
 #include "UI/TMOPLocalPanel.h"
 
 #include "InputCoreTypes.h"
@@ -137,7 +138,10 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
             [
                 SNew(SHorizontalBox)
                 + SHorizontalBox::Slot().AutoWidth()
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "PreviousNewspaperPage", "Q  Föregående sida"))
+                [ SNew(SButton).Text_Lambda([this]() { return FText::Format(
+                    FText::FromString(TEXT("{0}  Föregående sida")),
+                    TMOPControlDisplayText(this, ETMOPControlAction::MenuPreviousPage,
+                        FText::FromString(TEXT("Q")))); })
                     .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandlePreviousClicked) ]
                 + SHorizontalBox::Slot().FillWidth(1.0f).HAlign(HAlign_Center).VAlign(VAlign_Center)
                 [
@@ -153,14 +157,26 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                         .ColorAndOpacity(FLinearColor(0.7f, 0.7f, 0.7f)) ]
                     + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 3.0f)
                     [ SNew(STextBlock)
-                        .Text(NSLOCTEXT("TMOP", "NewspaperReaderControls",
-                            "Pilar/WASD: flytta  •  Mushjul/+/−: zoom  •  Q/E: vänd blad  •  Esc: stäng"))
+                        .Text_Lambda([this]() { return FText::Format(FText::FromString(
+                            TEXT("{0}/{1}/{2}/{3}: flytta  •  {4}/{5}: zoom  •  {6}/{7}: vänd blad  •  {8}: stäng")),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuUp, FText::FromString(TEXT("Upp"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuDown, FText::FromString(TEXT("Ned"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuLeft, FText::FromString(TEXT("Vänster"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuRight, FText::FromString(TEXT("Höger"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomOut, FText::FromString(TEXT("−"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomIn, FText::FromString(TEXT("+"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuPreviousPage, FText::FromString(TEXT("Q"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuNextPage, FText::FromString(TEXT("E"))),
+                            TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, FText::FromString(TEXT("Esc")))); })
                         .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperHint"),
                             FCoreStyle::GetDefaultFontStyle("Regular", 12)))
                         .ColorAndOpacity(FLinearColor(0.58f, 0.58f, 0.58f)) ]
                 ]
                 + SHorizontalBox::Slot().AutoWidth()
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "NextNewspaperPage", "Nästa sida  E"))
+                [ SNew(SButton).Text_Lambda([this]() { return FText::Format(
+                    FText::FromString(TEXT("Nästa sida  {0}")),
+                    TMOPControlDisplayText(this, ETMOPControlAction::MenuNextPage,
+                        FText::FromString(TEXT("E")))); })
                     .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleNextClicked) ]
             ]
         ]);
@@ -249,6 +265,19 @@ FReply UTMOPNewspaperReaderWidget::NativeOnPreviewKeyDown(
 
 FReply UTMOPNewspaperReaderWidget::HandleReaderKey(const FKey& Key)
 {
+    if (TMOPHasControlProfiles(this))
+    {
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack)) return HandleCloseClicked();
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuRight)) return PanPage(1.0f, 0.0f);
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuLeft)) return PanPage(-1.0f, 0.0f);
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuUp)) return PanPage(0.0f, -1.0f);
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuDown)) return PanPage(0.0f, 1.0f);
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuNextPage)) return HandleNextClicked();
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuPreviousPage)) return HandlePreviousClicked();
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuZoomIn)) return HandleZoomInClicked();
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuZoomOut)) return HandleZoomOutClicked();
+        return FReply::Unhandled();
+    }
     if (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right) return HandleCloseClicked();
     if (Key == EKeys::Gamepad_DPad_Right) return PanPage(1.0f, 0.0f);
     if (Key == EKeys::Gamepad_DPad_Left) return PanPage(-1.0f, 0.0f);

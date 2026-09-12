@@ -1,5 +1,6 @@
 #include "Player/TMOPPlayerCharacter.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Player/TMOPControlSettingsSubsystem.h"
 #include "Engine/LocalPlayer.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Framework/Application/SlateUser.h"
@@ -137,6 +138,7 @@ void ATMOPPlayerCharacter::PossessedBy(AController* NewController)
 
 void ATMOPPlayerCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    CloseSessionMenus();
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
     {
@@ -169,7 +171,6 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
     APlayerController* PlayerController = Cast<APlayerController>(Controller);
     if (!IsValid(PlayerController) || !PlayerController->IsLocalController()) return;
     PlayerController->PrimaryActorTick.bTickEvenWhenPaused = true;
-    PlayerController->bShouldPerformFullTickWhenPaused = true;
     if (!LocalPlayerOverlay)
     {
         LocalPlayerOverlay = CreateWidget<UTMOPLocalPlayerOverlay>(PlayerController, UTMOPLocalPlayerOverlay::StaticClass());
@@ -190,7 +191,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         ScenarioClock->OnLoopEnded.AddUniqueDynamic(
             this, &ATMOPPlayerCharacter::HandleLoopEnded);
 
-    if (!bInputMappingContextAdded)
+    if (!bUseControlProfiles && !bInputMappingContextAdded)
     {
         if (ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer())
             if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
@@ -334,7 +335,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
     }
 
     bPlayerInterfaceInitialized =
-        bInputMappingContextAdded &&
+        (bUseControlProfiles || bInputMappingContextAdded) &&
         (!bCreateQuickInventoryWidget || IsValid(QuickInventoryWidget.Get())) &&
         (!bCreatePauseMenuWidget || IsValid(PauseMenuWidget.Get())) &&
         (!bCreateLoopEndWidget || IsValid(LoopEndWidget.Get())) &&
@@ -354,6 +355,10 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
     Super::SetupPlayerInputComponent(PlayerInputComponent);
+    // Profile input is polled once per local player. Keeping Enhanced Input bindings
+    // active as well would execute the same action twice after a remap.
+    if (bUseControlProfiles && GetGameInstance() &&
+        GetGameInstance()->GetSubsystem<UTMOPControlSettingsSubsystem>()) return;
     UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(PlayerInputComponent);
     if (Input == nullptr) return;
     if (MoveAction)
@@ -780,6 +785,14 @@ bool ATMOPPlayerCharacter::IsSessionGameplayBlocked() const
 
 void ATMOPPlayerCharacter::ApplyLocalInputMode(UUserWidget* FocusWidget)
 {
+    if (bUseControlProfiles && GetGameInstance())
+        if (UTMOPControlSettingsSubsystem* Controls =
+            GetGameInstance()->GetSubsystem<UTMOPControlSettingsSubsystem>())
+        {
+            Controls->ClearHeldInput(UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(this));
+            Controls->SetMenuNavigation(UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(this), FocusWidget != nullptr);
+            ProfileActionStates.Reset();
+        }
     APlayerController* PC = Cast<APlayerController>(Controller);
     if (!PC || !PC->IsLocalController()) return;
     TFunction<TSharedPtr<SWidget>(TSharedRef<SWidget>)> FirstFocusable;
@@ -1134,10 +1147,203 @@ void ATMOPPlayerCharacter::CloseNewspaper()
     bNewspaperOpen = false;
 }
 
+void ATMOPPlayerCharacter::ProcessControlProfileInput(const float DeltaSeconds)
+{
+    UGameInstance* GI = GetGameInstance();
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    UTMOPControlSettingsSubsystem* Controls = GI
+        ? GI->GetSubsystem<UTMOPControlSettingsSubsystem>() : nullptr;
+    const int32 PlayerIndex = UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(this);
+    if (!Controls || !PC || PlayerIndex == INDEX_NONE) return;
+
+    const FTMOPPlayerControlProfile Profile = Controls->GetProfile(PlayerIndex);
+    LookYawSensitivity = Profile.LookSensitivityX;
+    LookPitchSensitivity = Profile.LookSensitivityY;
+    bInvertLookY = Profile.bInvertLookY;
+    if (IsValid(CameraPerspective.Get()))
+    {
+        CameraPerspective->bBindToggleKeysAutomatically = false;
+        CameraPerspective->bReadZoomKeysAutomatically = false;
+        CameraPerspective->ZoomFieldOfView = Profile.CameraZoomFov;
+    }
+
+    auto Down = [Controls, PC, PlayerIndex](const ETMOPControlAction Action)
+    { return Controls->IsActionDown(PC, PlayerIndex, Action); };
+    auto Value = [Controls, PC, PlayerIndex](const ETMOPControlAction Action)
+    { return Controls->GetActionValue(PC, PlayerIndex, Action); };
+    auto Pressed = [this, &Down](const ETMOPControlAction Action)
+    {
+        const uint8 Id = static_cast<uint8>(Action);
+        const bool bNow = Down(Action);
+        const bool bWas = ProfileActionStates.FindRef(Id);
+        return bNow && !bWas;
+    };
+    auto Released = [this, &Down](const ETMOPControlAction Action)
+    {
+        const uint8 Id = static_cast<uint8>(Action);
+        const bool bNow = Down(Action);
+        const bool bWas = ProfileActionStates.FindRef(Id);
+        return !bNow && bWas;
+    };
+
+    const bool bPausePressed = Pressed(ETMOPControlAction::Pause);
+    const bool bCancelPressed = Pressed(ETMOPControlAction::Cancel);
+    const bool bMapPressed = Pressed(ETMOPControlAction::WorldMap);
+    if (bPausePressed && !bNewspaperOpen)
+    {
+        if (InventoryInput->bRadialMenuOpen) FinishQuickInventory(false);
+        else if (bAddressDirectoryOpen) CloseAddressDirectory();
+        else TogglePauseMenu();
+    }
+    else if (bCancelPressed && !IsSessionGameplayBlocked() &&
+        (!IsValid(VehicleSession.Get()) || !VehicleSession->IsInVehicle()))
+    {
+        InputCancel();
+    }
+    else if (bMapPressed && !bPauseMenuOpen && !bNewspaperOpen)
+    {
+        ToggleWorldMap();
+    }
+
+    const bool bBlocked = IsSessionGameplayBlocked() || bAddressDirectoryOpen ||
+        bPauseMenuOpen || bWorldMapOpen || bNewspaperOpen || bDialogOpen ||
+        bAgentInfoChartOpen;
+    if (bBlocked)
+    {
+        InputMoveCompleted();
+        SetSprinting(false, false);
+        if (!bProfileGameplayWasBlocked)
+        {
+            StopJumping();
+            InputSecondaryActionEnded();
+        }
+        bProfileGameplayWasBlocked = true;
+        if (IsValid(VehicleSession.Get()))
+        {
+            VehicleSession->VehicleThrottle(0.0f);
+            VehicleSession->VehicleSteering(0.0f);
+            VehicleSession->VehicleBrake(0.0f);
+            VehicleSession->VehicleHandbrake(false);
+            VehicleSession->VehicleHighSpeedMode(false);
+        }
+        if (IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
+        // Update all important held edges while a panel owns input. This prevents
+        // a key held during rebinding/menu navigation from firing after close.
+        for (uint8 Raw = static_cast<uint8>(ETMOPControlAction::MoveForward);
+            Raw <= static_cast<uint8>(ETMOPControlAction::MenuBack); ++Raw)
+        {
+            const ETMOPControlAction Action = static_cast<ETMOPControlAction>(Raw);
+            ProfileActionStates.Add(Raw, Down(Action));
+        }
+        return;
+    }
+
+    bProfileGameplayWasBlocked = false;
+    const bool bInVehicle = IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle();
+    if (bInVehicle)
+    {
+        float Throttle = Value(ETMOPControlAction::VehicleAccelerate) -
+            Value(ETMOPControlAction::VehicleReverse);
+        float Steering = Value(ETMOPControlAction::VehicleRight) -
+            Value(ETMOPControlAction::VehicleLeft);
+        const FKey ForwardKey = Controls->GetKey(PlayerIndex, ETMOPControlAction::VehicleAccelerate);
+        if (ForwardKey == Controls->GetKey(PlayerIndex, ETMOPControlAction::VehicleReverse))
+            Throttle = Value(ETMOPControlAction::VehicleAccelerate);
+        const FKey RightKey = Controls->GetKey(PlayerIndex, ETMOPControlAction::VehicleRight);
+        if (RightKey == Controls->GetKey(PlayerIndex, ETMOPControlAction::VehicleLeft))
+            Steering = Value(ETMOPControlAction::VehicleRight);
+        VehicleSession->VehicleThrottle(FMath::Clamp(Throttle, -1.0f, 1.0f));
+        VehicleSession->VehicleSteering(FMath::Clamp(Steering, -1.0f, 1.0f));
+        VehicleSession->VehicleBrake(Down(ETMOPControlAction::VehicleBrake) ? 1.0f : 0.0f);
+        VehicleSession->VehicleHandbrake(Down(ETMOPControlAction::VehicleHandbrake));
+        VehicleSession->VehicleHighSpeedMode(Down(ETMOPControlAction::VehicleHighSpeed));
+        if (Pressed(ETMOPControlAction::VehicleExit)) VehicleSession->ExitVehicle();
+    }
+    else
+    {
+        float Forward = Value(ETMOPControlAction::MoveForward) -
+            Value(ETMOPControlAction::MoveBackward);
+        float Right = Value(ETMOPControlAction::MoveRight) -
+            Value(ETMOPControlAction::MoveLeft);
+        if (Controls->GetKey(PlayerIndex, ETMOPControlAction::MoveForward) ==
+            Controls->GetKey(PlayerIndex, ETMOPControlAction::MoveBackward))
+            Forward = Value(ETMOPControlAction::MoveForward);
+        if (Controls->GetKey(PlayerIndex, ETMOPControlAction::MoveRight) ==
+            Controls->GetKey(PlayerIndex, ETMOPControlAction::MoveLeft))
+            Right = Value(ETMOPControlAction::MoveRight);
+        const FRotator Rotation(0.0f, Controller ? Controller->GetControlRotation().Yaw : 0.0f, 0.0f);
+        if (!PlayerActions->bMovementBlocked && !InventoryInput->bRadialMenuOpen)
+        {
+            AddMovementInput(FRotationMatrix(Rotation).GetUnitAxis(EAxis::X),
+                FMath::Clamp(Forward, -1.0f, 1.0f));
+            AddMovementInput(FRotationMatrix(Rotation).GetUnitAxis(EAxis::Y),
+                FMath::Clamp(Right, -1.0f, 1.0f));
+        }
+        const bool bSprint = Down(ETMOPControlAction::Sprint);
+        SetSprinting(bSprint, bSprint && Down(ETMOPControlAction::ExtraSprint));
+        if (Pressed(ETMOPControlAction::Jump)) InputJumpStarted();
+        if (Released(ETMOPControlAction::Jump)) InputJumpEnded();
+        if (Pressed(ETMOPControlAction::Interact)) InputInteract();
+        if (Pressed(ETMOPControlAction::PrimaryAction)) InputPrimaryAction();
+        if (Pressed(ETMOPControlAction::SecondaryAction)) InputSecondaryActionStarted();
+        if (Released(ETMOPControlAction::SecondaryAction)) InputSecondaryActionEnded();
+        if (Pressed(ETMOPControlAction::Crouch)) InputToggleSquat();
+        if (Pressed(ETMOPControlAction::Kick)) InputKick();
+        if (Pressed(ETMOPControlAction::ShoulderSwap)) InputShoulderSwap();
+        if (Pressed(ETMOPControlAction::DropItem)) InputDropEquippedItem();
+
+        const bool bInventory = Down(ETMOPControlAction::QuickInventory);
+        const uint8 InventoryId = static_cast<uint8>(ETMOPControlAction::QuickInventory);
+        const bool bInventoryWas = ProfileActionStates.FindRef(InventoryId);
+        ProfileActionStates.Add(InventoryId, bInventory);
+        if (bInventory && !bInventoryWas) InputQuickInventoryStarted();
+        else if (!bInventory && bInventoryWas) InputQuickInventoryCompleted();
+        if (InventoryInput->bRadialMenuOpen)
+        {
+            if (Pressed(ETMOPControlAction::InventoryPrevious))
+                InventoryInput->StepRadialSelection(-1);
+            if (Pressed(ETMOPControlAction::InventoryNext))
+                InventoryInput->StepRadialSelection(1);
+        }
+    }
+
+    float LookX = Value(ETMOPControlAction::LookRight) - Value(ETMOPControlAction::LookLeft);
+    float LookY = Value(ETMOPControlAction::LookUp) - Value(ETMOPControlAction::LookDown);
+    if (Profile.Device == ETMOPControlDevice::Gamepad || Profile.Device == ETMOPControlDevice::KeyboardMouse)
+    {
+        if (Controls->GetKey(PlayerIndex, ETMOPControlAction::LookRight) ==
+            Controls->GetKey(PlayerIndex, ETMOPControlAction::LookLeft))
+            LookX = Value(ETMOPControlAction::LookRight);
+        if (Controls->GetKey(PlayerIndex, ETMOPControlAction::LookUp) ==
+            Controls->GetKey(PlayerIndex, ETMOPControlAction::LookDown))
+            LookY = Value(ETMOPControlAction::LookUp);
+    }
+    if (!InventoryInput->bRadialMenuOpen && (!FMath::IsNearlyZero(LookX) || !FMath::IsNearlyZero(LookY)))
+    {
+        const float ZoomSensitivity = IsValid(CameraPerspective.Get())
+            ? CameraPerspective->GetLookSensitivityScale() : 1.0f;
+        AddControllerYawInput(LookX * LookYawSensitivity * ZoomSensitivity);
+        AddControllerPitchInput(LookY * LookPitchSensitivity * ZoomSensitivity *
+            (bInvertLookY ? -1.0f : 1.0f));
+    }
+    if (IsValid(CameraPerspective.Get()))
+    {
+        CameraPerspective->SetLookZoomAmount(FMath::Abs(
+            Value(ETMOPControlAction::LookZoom)));
+        if (Pressed(ETMOPControlAction::TogglePerspective))
+            CameraPerspective->TogglePerspective();
+    }
+    for (uint8 Raw = static_cast<uint8>(ETMOPControlAction::MoveForward);
+        Raw <= static_cast<uint8>(ETMOPControlAction::MenuBack); ++Raw)
+        ProfileActionStates.Add(Raw, Down(static_cast<ETMOPControlAction>(Raw)));
+}
+
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!IsLocallyControlled()) return;
+    if (bDialogOpen && !ActiveDialogAgent.IsValid()) ClosePersonDialog();
+    if (bUseControlProfiles) ProcessControlProfileInput(DeltaSeconds);
     if (UGameplayStatics::IsGamePaused(this))
     {
         GetCharacterMovement()->StopMovementImmediately();
@@ -1159,7 +1365,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
                 FMath::Square(DialogMaximumDistanceCm))
             ClosePersonDialog();
     }
-    if (!IsSessionGameplayBlocked() && !bAddressDirectoryOpen && bUseDirectSprintKeyFallback)
+    if (!bUseControlProfiles && !IsSessionGameplayBlocked() && !bAddressDirectoryOpen && bUseDirectSprintKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bSprintHeld = IsMappedActionHeld(PC, DefaultMappingContext, SprintAction,
@@ -1178,7 +1384,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             SetSprinting(bSprintHeld, bExtraHeld);
         }
     }
-    if (!IsSessionGameplayBlocked() && !bAddressDirectoryOpen && bUseDirectQuickInventoryKeyFallback)
+    if (!bUseControlProfiles && !IsSessionGameplayBlocked() && !bAddressDirectoryOpen && bUseDirectQuickInventoryKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -1191,7 +1397,8 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             else InputQuickInventoryCompleted();
         }
     }
-    if (!bNewspaperOpen && bUseDirectPauseKeyFallback)
+    if (!bUseControlProfiles && !bNewspaperOpen && bUseDirectPauseKeyFallback)
+    if (!bUseControlProfiles)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -1222,7 +1429,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
                 ToggleWorldMap();
         }
     }
-    if (!bAddressDirectoryOpen && !bNewspaperOpen && !bWorldMapOpen && bUseDirectDropKeyFallback)
+    if (!bUseControlProfiles && !bAddressDirectoryOpen && !bNewspaperOpen && !bWorldMapOpen && bUseDirectDropKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(DropItemFallbackKey);
@@ -1232,7 +1439,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             if (bKeyHeld) DropEquippedItem();
         }
     }
-    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectInteractKeyFallback)
+    if (!bUseControlProfiles && !bNewspaperOpen && !bWorldMapOpen && bUseDirectInteractKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsMappedActionHeld(PC, DefaultMappingContext, InteractAction,
@@ -2002,6 +2209,12 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
 
 FText ATMOPPlayerCharacter::GetInteractKeyDisplayText() const
 {
+    if (bUseControlProfiles && GetGameInstance())
+        if (const UTMOPControlSettingsSubsystem* Controls =
+            GetGameInstance()->GetSubsystem<UTMOPControlSettingsSubsystem>())
+            return Controls->GetKeyDisplayText(
+                UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(this),
+                ETMOPControlAction::Interact);
     return InteractFallbackKey.IsValid()
         ? InteractFallbackKey.GetDisplayName(false)
         : FText::FromString(TEXT("E"));

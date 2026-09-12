@@ -256,6 +256,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
+    /** Uses the persistent player 1-4 profiles instead of fixed Blueprint/direct fallbacks. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
+    bool bUseControlProfiles = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> MoveAction;
 
@@ -562,6 +566,7 @@ public:
 private:
     void InitializePlayerInterface();
     void UpdateGameplayHUDVisibility();
+    void ProcessControlProfileInput(float DeltaSeconds);
     void InputMove(const FInputActionValue& Value);
     void InputMoveCompleted();
     void InputLook(const FInputActionValue& Value);
@@ -617,6 +622,8 @@ private:
     bool bNewspaperPausedSimulation = false;
     bool bDropFallbackHeld = false;
     bool bInteractFallbackHeld = false;
+    TMap<uint8, bool> ProfileActionStates;
+    bool bProfileGameplayWasBlocked = false;
     uint64 AddressDirectoryClosedFrame = MAX_uint64;
     TWeakObjectPtr<UTMOPInspectableComponent> ActiveInspection;
     TSet<FName> GameplayHUDHiddenReasons;

@@ -4,10 +4,24 @@
 #include "Animation/TMOPAnimationStateComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/TMOPPlayerVehicleSessionComponent.h"
 
 UTMOPVehicleSeatComponent::UTMOPVehicleSeatComponent()
 {
     PrimaryComponentTick.bCanEverTick = false;
+}
+
+void UTMOPVehicleSeatComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    if (ACharacter* Occupant = CharacterOccupant.Get())
+        if (IsValid(Occupant) && !Occupant->IsActorBeingDestroyed())
+        {
+            if (auto* Session = Occupant->FindComponentByClass<UTMOPPlayerVehicleSessionComponent>())
+                Session->ExitVehicle();
+            // Despawn must not leave an attached pawn with movement/collision disabled.
+            if (CharacterOccupant == Occupant) ExitCharacterSeat(Occupant);
+        }
+    Super::EndPlay(EndPlayReason);
 }
 
 bool UTMOPVehicleSeatComponent::IsOccupied() const

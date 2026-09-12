@@ -1,4 +1,6 @@
 #include "Time/TMOPSimulationDebugDirector.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Player/TMOPPlayerCharacter.h"
 
 #include "AIController.h"
 #include "Actions/TMOPActionExecutorComponent.h"
@@ -993,6 +995,9 @@ ATMOPSimulationDebugDirector::FindObservationDirector() const
 
 void ATMOPSimulationDebugDirector::HandleDigit(const int32 Digit)
 {
+    // Profile keys may use digits; legacy debug input must not also seek the world.
+    for (auto* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+        if (Player->bUseControlProfiles) return;
     const APlayerController* PC = GetWorld() != nullptr
         ? GetWorld()->GetFirstPlayerController() : nullptr;
     const bool bShift = IsValid(PC) &&
@@ -1045,6 +1050,8 @@ void ATMOPSimulationDebugDirector::DebugKey9() { HandleDigit(9); }
 
 void ATMOPSimulationDebugDirector::DebugBakeKey()
 {
+    for (auto* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+        if (Player->bUseControlProfiles) return;
     if (bRecordingBake) StopPersonBakeRecordingAndSave();
     else StartPersonBakeRecording();
 }
