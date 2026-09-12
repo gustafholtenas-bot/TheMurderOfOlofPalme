@@ -1,4 +1,5 @@
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "People/TMOPPersonNameLibrary.h"
 
 #include "AIController.h"
@@ -404,7 +405,9 @@ void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
     UpdateSocialFocus(DeltaSeconds);
     UpdateAutomaticSpeech(DeltaSeconds);
 
-    if (!bShowNameLabel || !IsValid(NameLabel) || GetWorld() == nullptr)
+    if (NameLabel) NameLabel->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
+    if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ||
+        !bShowNameLabel || !IsValid(NameLabel) || GetWorld() == nullptr)
     {
         return;
     }

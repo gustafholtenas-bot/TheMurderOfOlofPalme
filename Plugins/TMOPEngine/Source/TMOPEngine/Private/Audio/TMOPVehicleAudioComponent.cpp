@@ -1,4 +1,5 @@
 #include "Audio/TMOPVehicleAudioComponent.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Audio/TMOPAudioDirector.h"
 #include "Camera/PlayerCameraManager.h"
@@ -53,7 +54,7 @@ void UTMOPVehicleAudioComponent::TickComponent(
     const bool bMoving = Speed > 15.0f;
 
     const APlayerCameraManager* Camera =
-        UGameplayStatics::GetPlayerCameraManager(this, 0);
+        UTMOPLocalMultiplayerSubsystem::FindNearestCamera(this, CurrentLocation);
     const bool bListenerIsNear = IsValid(Camera) &&
         FVector::DistSquared(Camera->GetCameraLocation(), CurrentLocation) <=
         FMath::Square(LocalAudioMaximumDistanceCm);

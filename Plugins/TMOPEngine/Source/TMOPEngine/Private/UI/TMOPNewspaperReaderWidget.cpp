@@ -1,4 +1,5 @@
 #include "UI/TMOPNewspaperReaderWidget.h"
+#include "UI/TMOPLocalPanel.h"
 
 #include "InputCoreTypes.h"
 #include "Newspapers/TMOPNewspaperItemDefinition.h"
@@ -104,7 +105,7 @@ void UTMOPNewspaperReaderWidget::SetZoom(const float NewZoom)
 
 TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
 {
-    return SNew(SBorder)
+    return TMOPFitLocalPanel(this, SNew(SBorder)
         .BorderBackgroundColor(FLinearColor::Transparent)
         .Padding(18.0f)
         [
@@ -162,7 +163,7 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                 [ SNew(SButton).Text(NSLOCTEXT("TMOP", "NextNewspaperPage", "Nästa sida  E"))
                     .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleNextClicked) ]
             ]
-        ];
+        ]);
 }
 
 FReply UTMOPNewspaperReaderWidget::PanPage(
@@ -248,7 +249,15 @@ FReply UTMOPNewspaperReaderWidget::NativeOnPreviewKeyDown(
 
 FReply UTMOPNewspaperReaderWidget::HandleReaderKey(const FKey& Key)
 {
-    if (Key == EKeys::Escape) return HandleCloseClicked();
+    if (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right) return HandleCloseClicked();
+    if (Key == EKeys::Gamepad_DPad_Right) return PanPage(1.0f, 0.0f);
+    if (Key == EKeys::Gamepad_DPad_Left) return PanPage(-1.0f, 0.0f);
+    if (Key == EKeys::Gamepad_DPad_Up) return PanPage(0.0f, -1.0f);
+    if (Key == EKeys::Gamepad_DPad_Down) return PanPage(0.0f, 1.0f);
+    if (Key == EKeys::Gamepad_RightShoulder) return HandleNextClicked();
+    if (Key == EKeys::Gamepad_LeftShoulder) return HandlePreviousClicked();
+    if (Key == EKeys::Gamepad_RightTrigger) return HandleZoomInClicked();
+    if (Key == EKeys::Gamepad_LeftTrigger) return HandleZoomOutClicked();
     if (Key == EKeys::Right || Key == EKeys::D) return PanPage(1.0f, 0.0f);
     if (Key == EKeys::Left || Key == EKeys::A) return PanPage(-1.0f, 0.0f);
     if (Key == EKeys::Up || Key == EKeys::W) return PanPage(0.0f, -1.0f);

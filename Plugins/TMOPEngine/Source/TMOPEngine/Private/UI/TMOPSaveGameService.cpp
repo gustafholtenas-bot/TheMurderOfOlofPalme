@@ -1,9 +1,14 @@
 #include "UI/TMOPSaveGameService.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Player/TMOPPlayerVehicleSessionComponent.h"
+#include "Radio/TMOPPlayerRadioComponent.h"
 
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
 #include "Anchors/TMOPHistoricalPlace.h"
 #include "EngineUtils.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "Inventory/TMOPInventoryComponent.h"
 #include "Inventory/TMOPItemDefinition.h"
 #include "Kismet/GameplayStatics.h"
@@ -118,10 +123,48 @@ bool FTMOPSaveGameService::SavePlayer(UWorld* World,
         OutStatus = NSLOCTEXT("TMOP", "SaveInvalidTarget", "Kunde inte skapa sparningen.");
         return false;
     }
+    if (UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(Player) != 0)
+    {
+        OutStatus = NSLOCTEXT("TMOP", "SavePartyLeader", "Spelare 1 sparar och laddar för hela gruppen.");
+        return false;
+    }
+    const auto Party = UTMOPLocalMultiplayerSubsystem::GetPlayers(World);
+    for (ATMOPPlayerCharacter* Member : Party)
+        if (Member->VehicleSession && Member->VehicleSession->IsInVehicle())
+        {
+            OutStatus = NSLOCTEXT("TMOP", "SaveExitVehicles", "Kliv ur fordonen före sparning. Spelarstyrda fordonslägen ingår ännu inte i sparformatet.");
+            return false;
+        }
     UTMOPMenuSaveGame* Save = Cast<UTMOPMenuSaveGame>(
         UGameplayStatics::CreateSaveGameObject(UTMOPMenuSaveGame::StaticClass()));
     if (!IsValid(Save)) return false;
-    Save->SaveFormatVersion = 2;
+    Save->SaveFormatVersion = 3;
+    auto* Session = Player->GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
+    Save->bKeyboardForPlayerOne = Session->UsesKeyboardForPlayerOne();
+    for (ATMOPPlayerCharacter* Member : Party)
+    {
+        auto& State = Save->LocalPlayers.AddDefaulted_GetRef();
+        State.Transform = Member->GetActorTransform();
+        if (const auto* PC = Cast<APlayerController>(Member->GetController()))
+            State.ViewRotation = PC->GetControlRotation();
+        State.DiscoveredEvidenceIds = Member->DiscoveredEvidenceIds;
+        if (Member->Inventory)
+        {
+            for (const FTMOPInventoryEntry& Entry : Member->Inventory->Items)
+                if (IsValid(Entry.Item))
+                {
+                    State.InventoryItemPaths.Add(FSoftObjectPath(Entry.Item->GetPathName()));
+                    State.InventoryQuantities.Add(Entry.Quantity);
+                }
+            if (Member->Inventory->EquippedItem)
+                State.EquippedItemPath = FSoftObjectPath(Member->Inventory->EquippedItem->GetPathName());
+        }
+        if (Member->Radio)
+        {
+            State.RadioChannelId = Member->Radio->GetCurrentChannel().ChannelId;
+            State.bRadioOn = Member->Radio->bRadioOn;
+        }
+    }
     Save->SlotDisplayName = DisplayName;
     Save->LocationDisplayName = ResolveLocationName(World, Player->GetActorLocation());
     Save->MapDisplayName = UGameplayStatics::GetCurrentLevelName(World, true);
@@ -161,20 +204,111 @@ bool FTMOPSaveGameService::LoadPlayer(UWorld* World,
         OutStatus = NSLOCTEXT("TMOP", "NoSave", "Ingen giltig sparfil hittades.");
         return false;
     }
-    bool bTimeLoaded = false;
-    for (TActorIterator<ATMOPSimulationDebugDirector> It(World); It; ++It)
+    if (UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(Player) != 0)
     {
-        bTimeLoaded = It->JumpToSimulationTime(Save->SavedTime);
-        break;
+        OutStatus = NSLOCTEXT("TMOP", "LoadPartyLeader", "Spelare 1 sparar och laddar för hela gruppen.");
+        return false;
     }
+    if (Save->SaveFormatVersion > 3 || (Save->SaveFormatVersion >= 3 &&
+        (Save->LocalPlayers.IsEmpty() || Save->LocalPlayers.Num() > 4)))
+    {
+        OutStatus = NSLOCTEXT("TMOP", "BadLocalSave", "Sparfilens spelarantal eller format stöds inte.");
+        return false;
+    }
+    if (!Save->MapDisplayName.IsEmpty() &&
+        Save->MapDisplayName != UGameplayStatics::GetCurrentLevelName(World, true))
+    {
+        OutStatus = NSLOCTEXT("TMOP", "SaveWrongMap", "Öppna nivån som sparningen skapades i innan du laddar den.");
+        return false;
+    }
+    ATMOPSimulationDebugDirector* DebugDirector = nullptr;
+    for (TActorIterator<ATMOPSimulationDebugDirector> It(World); It; ++It) { DebugDirector = *It; break; }
+    if (!DebugDirector)
+    {
+        OutStatus = NSLOCTEXT("TMOP", "PartyLoadDirector", "Laddning kräver TMOPSimulationDebugDirector i nivån.");
+        return false;
+    }
+    auto* Session = Player->GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
+    const int32 Count = Save->SaveFormatVersion >= 3 ? Save->LocalPlayers.Num() : 1;
+    auto* Clock = Player->GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
+    const int32 SavedSecond = Save->SavedTime.ToSecondsFromMidnight();
+    bool bValidState = Clock && Session && SavedSecond >= Clock->GetLoopStartTime().ToSecondsFromMidnight()
+        && SavedSecond <= Clock->GetLoopEndTime().ToSecondsFromMidnight();
+    if (Save->SaveFormatVersion >= 3)
+        for (const auto& State : Save->LocalPlayers)
+            bValidState &= !State.Transform.ContainsNaN() && !State.ViewRotation.ContainsNaN();
+    else bValidState &= !Save->PlayerTransform.ContainsNaN();
+    if (!bValidState)
+    {
+        OutStatus = NSLOCTEXT("TMOP", "BadPartySaveState", "Sparfilen innehåller en ogiltig tid eller position.");
+        return false;
+    }
+    Clock->RequestPause(Session, TEXT("LoadGame"));
+    // Detach everyone before the historical vehicle director reconstructs the world.
+    for (ATMOPPlayerCharacter* Member : UTMOPLocalMultiplayerSubsystem::GetPlayers(World))
+        if (Member->VehicleSession) Member->VehicleSession->ExitVehicle();
+    Session->ConfigureSession(Count, Save->bKeyboardForPlayerOne);
+    if (!Session->EnsurePlayerCount(Count, OutStatus))
+    {
+        Clock->ReleasePause(Session, TEXT("LoadGame"));
+        return false;
+    }
+    const bool bTimeLoaded = DebugDirector->JumpToSimulationTime(Save->SavedTime);
     if (!bTimeLoaded)
     {
         OutStatus = NSLOCTEXT("TMOP", "LoadNeedsDirector",
             "Laddning kräver TMOPSimulationDebugDirector i nivån.");
+        Clock->ReleasePause(Session, TEXT("LoadGame"));
         return false;
+    }
+    Session->CloseAllPlayerMenus();
+    if (Save->SaveFormatVersion >= 3)
+    {
+        const auto Members = UTMOPLocalMultiplayerSubsystem::GetPlayers(World);
+        for (int32 Slot = 0; Slot < Members.Num(); ++Slot)
+        {
+            ATMOPPlayerCharacter* Member = Members[Slot];
+            const auto& State = Save->LocalPlayers[Slot];
+            Member->SetActorTransform(State.Transform, false, nullptr, ETeleportType::TeleportPhysics);
+            Member->GetCharacterMovement()->StopMovementImmediately();
+            if (auto* PC = Cast<APlayerController>(Member->GetController()))
+            {
+                PC->SetControlRotation(State.ViewRotation);
+                PC->SetViewTarget(Member);
+            }
+            Member->DiscoveredEvidenceIds = State.DiscoveredEvidenceIds;
+            if (Member->Inventory)
+            {
+                const auto Existing = Member->Inventory->Items;
+                for (const FTMOPInventoryEntry& Entry : Existing)
+                    if (Entry.Item) Member->Inventory->RemoveItem(Entry.Item, Entry.Quantity);
+                for (int32 Index = 0; Index < State.InventoryItemPaths.Num(); ++Index)
+                    if (auto* Item = Cast<UTMOPItemDefinition>(State.InventoryItemPaths[Index].TryLoad()))
+                        Member->Inventory->AddItem(Item, State.InventoryQuantities.IsValidIndex(Index)
+                            ? FMath::Max(1, State.InventoryQuantities[Index]) : 1);
+                if (auto* Item = Cast<UTMOPItemDefinition>(State.EquippedItemPath.TryLoad())) Member->Inventory->EquipItem(Item);
+            }
+            if (Member->Radio)
+            {
+                Member->Radio->SetSimulationSecondOfDay(Save->SavedTime.ToSecondsFromMidnight());
+                Member->Radio->SetChannelById(State.RadioChannelId);
+                Member->Radio->SetRadioOn(State.bRadioOn);
+            }
+        }
+        Session->AdoptLoadedSession();
+        Clock->ReleasePause(Session, TEXT("LoadGame"));
+        Clock->StartClock();
+        OutStatus = NSLOCTEXT("TMOP", "PartyLoadSuccess", "Hela den lokala spelomgången laddades.");
+        return true;
     }
     Player->SetActorTransform(Save->PlayerTransform, false, nullptr,
         ETeleportType::TeleportPhysics);
+    Player->GetCharacterMovement()->StopMovementImmediately();
+    if (auto* PC = Cast<APlayerController>(Player->GetController()))
+    {
+        PC->SetControlRotation(Save->PlayerTransform.Rotator());
+        PC->SetViewTarget(Player);
+    }
     if (IsValid(Player->Inventory))
     {
         const TArray<FTMOPInventoryEntry> Existing = Player->Inventory->Items;
@@ -192,6 +326,9 @@ bool FTMOPSaveGameService::LoadPlayer(UWorld* World,
             Player->Inventory->EquipItem(Equipped);
     }
     Player->DiscoveredEvidenceIds = Save->DiscoveredEvidenceIds;
+    Session->AdoptLoadedSession();
+    Clock->ReleasePause(Session, TEXT("LoadGame"));
+    Clock->StartClock();
     OutStatus = NSLOCTEXT("TMOP", "LoadSuccess", "Spelet laddades.");
     return true;
 }

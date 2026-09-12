@@ -1,4 +1,5 @@
 #include "UI/TMOPPauseMenuWidget.h"
+#include "UI/TMOPLocalPanel.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Components/TextRenderComponent.h"
@@ -360,7 +361,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
             [ SNew(SBorder).BorderBackgroundColor(MenuColors.PanelBackground)
               .Padding(24.0f)[PagePanel] ] ] ];
     ShowSection(CurrentSection);
-    return RootWidget;
+    return TMOPFitLocalPanel(this, RootWidget);
 }
 
 FReply UTMOPPauseMenuWidget::HandleSectionClicked(const ETMOPPauseHubSection Section)

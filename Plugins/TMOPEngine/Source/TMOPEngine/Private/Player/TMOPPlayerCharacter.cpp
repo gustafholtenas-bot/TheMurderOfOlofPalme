@@ -1,4 +1,8 @@
 #include "Player/TMOPPlayerCharacter.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Engine/LocalPlayer.h"
+#include "Framework/Application/SlateApplication.h"
+#include "Framework/Application/SlateUser.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Animation/TMOPAnimationStateComponent.h"
@@ -9,6 +13,7 @@
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedActionKeyMapping.h"
 #include "Engine/OverlapResult.h"
 #include "EngineUtils.h"
 #include "InputMappingContext.h"
@@ -36,6 +41,7 @@
 #include "UI/TMOPQuickInventoryWidget.h"
 #include "UI/TMOPPauseMenuWidget.h"
 #include "UI/TMOPLoopEndWidget.h"
+#include "UI/TMOPLocalPlayerOverlay.h"
 #include "UI/TMOPInteractionPromptWidget.h"
 #include "UI/TMOPDialogWidget.h"
 #include "UI/TMOPAddressDirectoryWidget.h"
@@ -52,6 +58,25 @@
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+
+namespace
+{
+bool IsMappedActionHeld(const APlayerController* PC, const UInputMappingContext* Context,
+    const UInputAction* Action, FKey KeyboardKey, FKey GamepadFallback)
+{
+    if (!PC) return false;
+    if (PC->IsInputKeyDown(KeyboardKey)) return true;
+    bool bHasGamepadMapping = false;
+    if (Context && Action)
+        for (const FEnhancedActionKeyMapping& Mapping : Context->GetMappings())
+            if (Mapping.Action == Action && Mapping.Key.IsGamepadKey())
+            {
+                bHasGamepadMapping = true;
+                if (PC->IsInputKeyDown(Mapping.Key)) return true;
+            }
+    return !bHasGamepadMapping && PC->IsInputKeyDown(GamepadFallback);
+}
+}
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
@@ -114,8 +139,17 @@ void ATMOPPlayerCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+    {
         Clock->OnLoopEnded.RemoveDynamic(this, &ATMOPPlayerCharacter::HandleLoopEnded);
+        Clock->ReleaseAllPauses(this);
+    }
+    if (IsValid(VehicleSession)) VehicleSession->ExitVehicle();
+    // All widgets belong to this local player and must not survive a removed pawn.
+    const TArray<UUserWidget*> Widgets = {QuickInventoryWidget, PauseMenuWidget, WorldMapWidget,
+        MinimapWidget, InteractionPromptWidget, DialogWidget, AgentInfoChartWidget, NewspaperReaderWidget};
+    for (UUserWidget* Widget : Widgets) if (IsValid(Widget)) Widget->RemoveFromParent();
     if (IsValid(LoopEndWidget.Get())) LoopEndWidget->RemoveFromParent();
+    if (LocalPlayerOverlay) LocalPlayerOverlay->RemoveFromParent();
     LoopEndWidget = nullptr;
     bLoopEndMenuOpen = false;
     CloseAddressDirectory();
@@ -133,7 +167,18 @@ void ATMOPPlayerCharacter::OnRep_Controller()
 void ATMOPPlayerCharacter::InitializePlayerInterface()
 {
     APlayerController* PlayerController = Cast<APlayerController>(Controller);
-    if (!IsValid(PlayerController)) return;
+    if (!IsValid(PlayerController) || !PlayerController->IsLocalController()) return;
+    PlayerController->PrimaryActorTick.bTickEvenWhenPaused = true;
+    PlayerController->bShouldPerformFullTickWhenPaused = true;
+    if (!LocalPlayerOverlay)
+    {
+        LocalPlayerOverlay = CreateWidget<UTMOPLocalPlayerOverlay>(PlayerController, UTMOPLocalPlayerOverlay::StaticClass());
+        if (LocalPlayerOverlay)
+        {
+            LocalPlayerOverlay->AddToPlayerScreen(1500);
+            LocalPlayerOverlay->SetVisibility(ESlateVisibility::HitTestInvisible);
+        }
+    }
 
     if (IsValid(Inventory.Get()))
         Inventory->OnItemMenuRequested.AddUniqueDynamic(
@@ -166,7 +211,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(QuickInventoryWidget.Get()))
         {
             QuickInventoryWidget->InitializeInventoryInput(InventoryInput);
-            QuickInventoryWidget->AddToViewport(50);
+            QuickInventoryWidget->AddToPlayerScreen(50);
             QuickInventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
         }
     }
@@ -180,7 +225,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(PauseMenuWidget.Get()))
         {
             PauseMenuWidget->InitializePauseMenu(PlayerController, this);
-            PauseMenuWidget->AddToViewport(100);
+            PauseMenuWidget->AddToPlayerScreen(100);
             PauseMenuWidget->SetMenuVisible(false);
         }
     }
@@ -193,7 +238,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(LoopEndWidget.Get()))
         {
             LoopEndWidget->InitializeLoopEnd(this);
-            LoopEndWidget->AddToViewport(2000);
+            LoopEndWidget->AddToPlayerScreen(2000);
             LoopEndWidget->SetMenuVisible(false);
         }
     }
@@ -206,7 +251,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(WorldMapWidget.Get()))
         {
             WorldMapWidget->InitializeMap(MapComponent, this, false);
-            WorldMapWidget->AddToViewport(95);
+            WorldMapWidget->AddToPlayerScreen(95);
             WorldMapWidget->SetMapVisible(false);
         }
     }
@@ -218,7 +263,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(MinimapWidget.Get()))
         {
             MinimapWidget->InitializeMap(MapComponent, this, true);
-            MinimapWidget->AddToViewport(20);
+            MinimapWidget->AddToPlayerScreen(20);
             MinimapWidget->SetMapVisible(IsValid(MapComponent) && MapComponent->bShowMinimap);
         }
     }
@@ -235,7 +280,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
             PlayerController, WidgetClass);
         if (IsValid(InteractionPromptWidget.Get()))
         {
-            InteractionPromptWidget->AddToViewport(40);
+            InteractionPromptWidget->AddToPlayerScreen(40);
             InteractionPromptWidget->SetPromptText(FText::GetEmpty());
         }
     }
@@ -249,7 +294,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(DialogWidget.Get()))
         {
             DialogWidget->InitializeDialog(this);
-            DialogWidget->AddToViewport(80);
+            DialogWidget->AddToPlayerScreen(80);
             DialogWidget->HideDialog();
         }
     }
@@ -264,7 +309,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(AgentInfoChartWidget.Get()))
         {
             AgentInfoChartWidget->InitializeAgentInfo(this);
-            AgentInfoChartWidget->AddToViewport(85);
+            AgentInfoChartWidget->AddToPlayerScreen(85);
             AgentInfoChartWidget->HideAgentInfo();
         }
     }
@@ -282,7 +327,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         if (IsValid(NewspaperReaderWidget.Get()))
         {
             NewspaperReaderWidget->InitializeReader(this);
-            NewspaperReaderWidget->AddToViewport(90);
+            NewspaperReaderWidget->AddToPlayerScreen(90);
             NewspaperReaderWidget->SetVisibility(
                 ESlateVisibility::Collapsed);
         }
@@ -388,6 +433,7 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (PlayerActions->bMovementBlocked || InventoryInput->bRadialMenuOpen) return;
     const FVector2D Axis = Value.Get<FVector2D>();
@@ -415,6 +461,7 @@ void ATMOPPlayerCharacter::InputMoveCompleted()
 
 void ATMOPPlayerCharacter::InputLook(const FInputActionValue& Value)
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     const FVector2D Axis = Value.Get<FVector2D>();
@@ -424,11 +471,12 @@ void ATMOPPlayerCharacter::InputLook(const FInputActionValue& Value)
     AddControllerPitchInput(Axis.Y * LookPitchSensitivity * ZoomSensitivity * (bInvertLookY ? -1.0f : 1.0f));
 }
 
-void ATMOPPlayerCharacter::InputJumpStarted() { if (!bAddressDirectoryOpen) Jump(); }
+void ATMOPPlayerCharacter::InputJumpStarted() { if (!IsSessionGameplayBlocked() && !bAddressDirectoryOpen) Jump(); }
 void ATMOPPlayerCharacter::InputJumpEnded() { StopJumping(); }
 
 void ATMOPPlayerCharacter::InputSprintStarted()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsDrivingVehicle())
     {
@@ -486,6 +534,7 @@ void ATMOPPlayerCharacter::InputInteract()
         CloseAgentInfoChart();
         return;
     }
+    if (IsSessionGameplayBlocked()) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
     {
@@ -550,6 +599,7 @@ void ATMOPPlayerCharacter::InputDropEquippedItem()
 
 bool ATMOPPlayerCharacter::DropEquippedItem()
 {
+    if (IsSessionGameplayBlocked()) return false;
     if (bAddressDirectoryOpen) return false;
     if (bPauseMenuOpen || InventoryInput->bRadialMenuOpen || !IsValid(Inventory.Get()))
         return false;
@@ -583,6 +633,7 @@ bool ATMOPPlayerCharacter::DropEquippedItem()
 
 void ATMOPPlayerCharacter::InputPrimaryAction()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (bNewspaperOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
@@ -593,6 +644,7 @@ void ATMOPPlayerCharacter::InputPrimaryAction()
 
 void ATMOPPlayerCharacter::InputSecondaryActionStarted()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (bNewspaperOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
@@ -650,6 +702,7 @@ void ATMOPPlayerCharacter::InputCancel()
 
 void ATMOPPlayerCharacter::InputToggleSquat()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (bIsCrouched)
@@ -667,6 +720,7 @@ void ATMOPPlayerCharacter::InputToggleSquat()
 
 void ATMOPPlayerCharacter::InputKick()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (!Inventory->HasEquippedItem())
@@ -675,6 +729,7 @@ void ATMOPPlayerCharacter::InputKick()
 
 void ATMOPPlayerCharacter::InputShoulderSwap()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     bRightShoulderCamera = !bRightShoulderCamera;
@@ -689,6 +744,7 @@ void ATMOPPlayerCharacter::InputTogglePauseMenu()
 
 void ATMOPPlayerCharacter::InputVehicleBrakeStarted()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (IsValid(VehicleSession.Get())) VehicleSession->VehicleBrake(1.0f);
 }
 
@@ -699,6 +755,7 @@ void ATMOPPlayerCharacter::InputVehicleBrakeEnded()
 
 void ATMOPPlayerCharacter::InputVehicleHandbrakeStarted()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (IsValid(VehicleSession.Get())) VehicleSession->VehicleHandbrake(true);
 }
 
@@ -713,6 +770,80 @@ void ATMOPPlayerCharacter::TogglePauseMenu()
     SetPauseMenuOpen(!bPauseMenuOpen);
 }
 
+bool ATMOPPlayerCharacter::IsSessionGameplayBlocked() const
+{
+    return !IsLocallyControlled() || !bGameplayHUDVisible || bLoopEndMenuOpen ||
+        bPauseMenuOpen || bWorldMapOpen || bNewspaperOpen || bDialogOpen ||
+        bAgentInfoChartOpen || bAddressDirectoryOpen ||
+        UGameplayStatics::IsGamePaused(this);
+}
+
+void ATMOPPlayerCharacter::ApplyLocalInputMode(UUserWidget* FocusWidget)
+{
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (!PC || !PC->IsLocalController()) return;
+    TFunction<TSharedPtr<SWidget>(TSharedRef<SWidget>)> FirstFocusable;
+    FirstFocusable = [&FirstFocusable](TSharedRef<SWidget> Widget) -> TSharedPtr<SWidget>
+    {
+        if (!Widget->GetVisibility().IsVisible() || !Widget->IsEnabled()) return nullptr;
+        FChildren* Children = Widget->GetChildren();
+        for (int32 Index = 0; Children && Index < Children->Num(); ++Index)
+            if (TSharedPtr<SWidget> Child = FirstFocusable(Children->GetChildAt(Index))) return Child;
+        return Widget->SupportsKeyboardFocus() ? TSharedPtr<SWidget>(Widget) : nullptr;
+    };
+    TSharedPtr<SWidget> FocusTarget = FocusWidget ? FirstFocusable(FocusWidget->TakeWidget()) : nullptr;
+    if (FocusWidget && !FocusTarget) FocusTarget = FocusWidget->TakeWidget();
+    if (!UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
+    {
+        if (FocusWidget)
+        {
+            FInputModeGameAndUI Mode;
+            Mode.SetWidgetToFocus(FocusTarget);
+            Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+            PC->SetInputMode(Mode);
+        }
+        else PC->SetInputMode(FInputModeGameOnly());
+        PC->bShowMouseCursor = FocusWidget != nullptr;
+        return;
+    }
+    // Input mode/capture is viewport-global. Do not let a second player reset
+    // it while the first player is reading. Slate focus itself is per user.
+    PC->bShowMouseCursor = FocusWidget && UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(this) == 0;
+    ULocalPlayer* Local = PC->GetLocalPlayer();
+    if (!Local || !Local->GetSlateUser().IsValid()) return;
+    const uint32 UserIndex = Local->GetSlateUser()->GetUserIndex();
+    if (FocusWidget)
+        FSlateApplication::Get().SetUserFocus(UserIndex, FocusTarget, EFocusCause::SetDirectly);
+    else FSlateApplication::Get().SetUserFocusToGameViewport(UserIndex, EFocusCause::SetDirectly);
+}
+
+void ATMOPPlayerCharacter::CloseSessionMenus()
+{
+    CloseLoopEndMenu();
+    SetPauseMenuOpen(false);
+    CloseWorldMap();
+    CloseNewspaper();
+    ClosePersonDialog();
+    CloseAgentInfoChart();
+    CloseAddressDirectory();
+    FinishQuickInventory(false);
+    if (GetGameInstance())
+        GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->ReleaseAllPauses(this);
+    SetGameplayHUDHidden(TEXT("MainMenu"), false);
+    SetGameplayHUDHidden(TEXT("Cinematic"), false);
+    ApplyLocalInputMode();
+}
+
+void ATMOPPlayerCharacter::RefreshLoopEndMenu()
+{
+    if (GetGameInstance())
+        if (GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->IsAwaitingLoopDecision())
+        {
+            OpenLoopEndMenu();
+            if (bLoopEndMenuOpen && LoopEndWidget) ApplyLocalInputMode(LoopEndWidget);
+        }
+}
+
 void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 {
     if (bOpen && bLoopEndMenuOpen) return;
@@ -720,15 +851,16 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
     if (bOpen && bWorldMapOpen) CloseWorldMap();
     if (bOpen && bNewspaperOpen) CloseNewspaper();
     if (bOpen && bDialogOpen) ClosePersonDialog();
+    if (bOpen && bAgentInfoChartOpen) CloseAgentInfoChart();
     if (bOpen && bAddressDirectoryOpen) CloseAddressDirectory();
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (bOpen)
     {
-        bClockWasRunningBeforePause = IsValid(Clock) && Clock->IsClockRunning();
-        if (IsValid(Clock)) Clock->PauseClock();
+        if (IsValid(Clock)) Clock->RequestPause(this, TEXT("PauseMenu"));
     }
+    else if (IsValid(Clock)) Clock->ReleasePause(this, TEXT("PauseMenu"));
 
     bPauseMenuOpen = bOpen;
     SetGameplayHUDHidden(TEXT("PauseMenu"), bOpen);
@@ -737,21 +869,18 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 
     APlayerController* PC = Cast<APlayerController>(Controller);
     if (!IsValid(PC)) return;
-    PC->SetPause(bOpen);
     PC->bShowMouseCursor = bOpen;
     if (bOpen)
     {
-        FInputModeGameAndUI Mode;
-        Mode.SetWidgetToFocus(PauseMenuWidget->TakeWidget());
-        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-        PC->SetInputMode(Mode);
+        PC->SetIgnoreMoveInput(true);
+        PC->SetIgnoreLookInput(true);
+        ApplyLocalInputMode(PauseMenuWidget);
     }
     else
     {
-        PC->SetInputMode(FInputModeGameOnly());
+        ApplyLocalInputMode();
         PC->SetIgnoreMoveInput(false);
         PC->SetIgnoreLookInput(false);
-        if (IsValid(Clock) && bClockWasRunningBeforePause) Clock->StartClock();
         bClockWasRunningBeforePause = false;
     }
 }
@@ -784,15 +913,10 @@ void ATMOPPlayerCharacter::OpenLoopEndMenu()
     bLoopEndMenuOpen = true;
     SetGameplayHUDHidden(TEXT("LoopEnd"), true);
     LoopEndWidget->SetMenuVisible(true);
-    PC->SetPause(true);
     PC->bShowMouseCursor = true;
     PC->SetIgnoreMoveInput(true);
     PC->SetIgnoreLookInput(true);
-    FInputModeUIOnly Mode;
-    Mode.SetWidgetToFocus(LoopEndWidget->TakeWidget());
-    Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-    PC->SetInputMode(Mode);
-    LoopEndWidget->SetUserFocus(PC);
+    ApplyLocalInputMode(LoopEndWidget);
 }
 
 void ATMOPPlayerCharacter::CloseLoopEndMenu()
@@ -803,34 +927,23 @@ void ATMOPPlayerCharacter::CloseLoopEndMenu()
     SetGameplayHUDHidden(TEXT("LoopEnd"), false);
     if (APlayerController* PC = Cast<APlayerController>(Controller))
     {
-        PC->SetPause(false);
         PC->bShowMouseCursor = false;
         PC->SetIgnoreMoveInput(false);
         PC->SetIgnoreLookInput(false);
-        PC->SetInputMode(FInputModeGameOnly());
+        ApplyLocalInputMode();
     }
 }
 
 void ATMOPPlayerCharacter::ReplayLoopFromBeginning()
 {
     if (!bLoopEndMenuOpen) return;
-    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
-        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
-    CloseLoopEndMenu();
-    if (IsValid(Clock))
-    {
-        Clock->RestartLoop();
-        Clock->StartClock();
-    }
+    if (GetGameInstance()) GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->RestartFromBeginning();
 }
 
 void ATMOPPlayerCharacter::ReturnToMainMenuFromLoopEnd()
 {
     if (!bLoopEndMenuOpen || GetWorld() == nullptr) return;
-    const FString CurrentLevel = UGameplayStatics::GetCurrentLevelName(this, true);
-    if (CurrentLevel.IsEmpty()) return;
-    CloseLoopEndMenu();
-    UGameplayStatics::OpenLevel(this, FName(*CurrentLevel));
+    if (GetGameInstance()) GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->ReturnToMainMenu();
 }
 
 void ATMOPPlayerCharacter::QuitFromLoopEnd()
@@ -899,10 +1012,11 @@ void ATMOPPlayerCharacter::HandleItemMenuRequested(
 
 bool ATMOPPlayerCharacter::OpenWorldMap()
 {
-    if (bWorldMapOpen || bPauseMenuOpen || bNewspaperOpen ||
+    if (bLoopEndMenuOpen || !bGameplayHUDVisible || bWorldMapOpen || bPauseMenuOpen || bNewspaperOpen ||
         !IsValid(WorldMapWidget.Get())) return false;
     if (bDialogOpen) ClosePersonDialog();
     if (bAddressDirectoryOpen) CloseAddressDirectory();
+    if (bAgentInfoChartOpen) CloseAgentInfoChart();
     if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
     if (IsValid(MinimapWidget.Get())) MinimapWidget->SetMapVisible(false);
     WorldMapWidget->ResetViewToPlayer();
@@ -911,18 +1025,13 @@ bool ATMOPPlayerCharacter::OpenWorldMap()
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
-    bClockWasRunningBeforeMap = IsValid(Clock) && Clock->IsClockRunning();
-    if (IsValid(Clock)) Clock->PauseClock();
+    if (IsValid(Clock)) Clock->RequestPause(this, TEXT("WorldMap"));
     if (APlayerController* PC = Cast<APlayerController>(Controller))
     {
-        PC->SetPause(true);
         PC->bShowMouseCursor = true;
         PC->SetIgnoreMoveInput(true);
         PC->SetIgnoreLookInput(true);
-        FInputModeGameAndUI Mode;
-        Mode.SetWidgetToFocus(WorldMapWidget->TakeWidget());
-        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-        PC->SetInputMode(Mode);
+        ApplyLocalInputMode(WorldMapWidget);
     }
     return true;
 }
@@ -937,13 +1046,12 @@ void ATMOPPlayerCharacter::CloseWorldMap()
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (APlayerController* PC = Cast<APlayerController>(Controller))
     {
-        PC->SetPause(false);
         PC->bShowMouseCursor = false;
         PC->SetIgnoreMoveInput(false);
         PC->SetIgnoreLookInput(false);
-        PC->SetInputMode(FInputModeGameOnly());
+        ApplyLocalInputMode();
     }
-    if (IsValid(Clock) && bClockWasRunningBeforeMap) Clock->StartClock();
+    if (IsValid(Clock)) Clock->ReleasePause(this, TEXT("WorldMap"));
     bClockWasRunningBeforeMap = false;
 }
 
@@ -966,10 +1074,12 @@ bool ATMOPPlayerCharacter::OpenNewspaper(
 {
     if (bAddressDirectoryOpen) return false;
     if (!IsValid(Newspaper) || Newspaper->Pages.IsEmpty() ||
-        bPauseMenuOpen || !IsValid(NewspaperReaderWidget.Get()))
+        bPauseMenuOpen || bWorldMapOpen || bNewspaperOpen || bLoopEndMenuOpen ||
+        !bGameplayHUDVisible || !IsValid(NewspaperReaderWidget.Get()))
         return false;
     if (bDialogOpen) ClosePersonDialog();
     if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
+    if (bAgentInfoChartOpen) CloseAgentInfoChart();
     if (!NewspaperReaderWidget->OpenNewspaper(Newspaper)) return false;
     if (!IsValid(NewspaperReading) || !NewspaperReading->BeginReading(Newspaper, 0))
     {
@@ -983,23 +1093,16 @@ bool ATMOPPlayerCharacter::OpenNewspaper(
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (bNewspaperPausedSimulation)
     {
-        bClockWasRunningBeforeNewspaper =
-            IsValid(Clock) && Clock->IsClockRunning();
-        if (IsValid(Clock)) Clock->PauseClock();
+        if (IsValid(Clock)) Clock->RequestPause(this, TEXT("Newspaper"));
     }
 
     APlayerController* PC = Cast<APlayerController>(Controller);
     if (IsValid(PC))
     {
-        if (bNewspaperPausedSimulation) PC->SetPause(true);
         PC->bShowMouseCursor = true;
-        FInputModeGameAndUI Mode;
-        Mode.SetWidgetToFocus(NewspaperReaderWidget->TakeWidget());
-        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-        PC->SetInputMode(Mode);
+        ApplyLocalInputMode(NewspaperReaderWidget);
         // SetInputMode supplies the initial Slate focus target, while this
         // explicit user focus also covers readers opened during a paused game.
-        NewspaperReaderWidget->SetUserFocus(PC);
         PC->SetIgnoreMoveInput(true);
         PC->SetIgnoreLookInput(true);
     }
@@ -1020,14 +1123,12 @@ void ATMOPPlayerCharacter::CloseNewspaper()
     APlayerController* PC = Cast<APlayerController>(Controller);
     if (IsValid(PC))
     {
-        if (bNewspaperPausedSimulation) PC->SetPause(false);
         PC->bShowMouseCursor = false;
-        PC->SetInputMode(FInputModeGameOnly());
+        ApplyLocalInputMode();
         PC->SetIgnoreMoveInput(false);
         PC->SetIgnoreLookInput(false);
     }
-    if (IsValid(Clock) && bClockWasRunningBeforeNewspaper)
-        Clock->StartClock();
+    if (IsValid(Clock)) Clock->ReleasePause(this, TEXT("Newspaper"));
     bClockWasRunningBeforeNewspaper = false;
     bNewspaperPausedSimulation = false;
     bNewspaperOpen = false;
@@ -1036,6 +1137,13 @@ void ATMOPPlayerCharacter::CloseNewspaper()
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if (!IsLocallyControlled()) return;
+    if (UGameplayStatics::IsGamePaused(this))
+    {
+        GetCharacterMovement()->StopMovementImmediately();
+        InputMoveCompleted();
+        SetSprinting(false, false);
+    }
     if (bAddressDirectoryOpen && (!ActiveInspection.IsValid() ||
         !ActiveInspection->HasReadableContent() ||
         FVector::DistSquared(GetActorLocation(), ActiveInspection->GetInteractionLocation()) >
@@ -1051,10 +1159,11 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
                 FMath::Square(DialogMaximumDistanceCm))
             ClosePersonDialog();
     }
-    if (!bAddressDirectoryOpen && !bNewspaperOpen && !bWorldMapOpen && bUseDirectSprintKeyFallback)
+    if (!IsSessionGameplayBlocked() && !bAddressDirectoryOpen && bUseDirectSprintKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
-        const bool bSprintHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
+        const bool bSprintHeld = IsMappedActionHeld(PC, DefaultMappingContext, SprintAction,
+            SprintFallbackKey, EKeys::Gamepad_LeftThumbstick);
         const bool bExtraHeld = bSprintHeld && IsValid(PC)
             && PC->IsInputKeyDown(ExtraSprintModifierKey);
         if (IsValid(VehicleSession.Get()) && VehicleSession->IsDrivingVehicle())
@@ -1069,7 +1178,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             SetSprinting(bSprintHeld, bExtraHeld);
         }
     }
-    if (!bAddressDirectoryOpen && !bNewspaperOpen && !bWorldMapOpen && bUseDirectQuickInventoryKeyFallback)
+    if (!IsSessionGameplayBlocked() && !bAddressDirectoryOpen && bUseDirectQuickInventoryKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -1104,7 +1213,8 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     }
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
-        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(WorldMapFallbackKey);
+        const bool bKeyHeld = IsValid(PC) && (PC->IsInputKeyDown(WorldMapFallbackKey) ||
+            PC->IsInputKeyDown(WorldMapGamepadFallbackKey));
         if (bKeyHeld != bMapFallbackHeld)
         {
             bMapFallbackHeld = bKeyHeld;
@@ -1125,7 +1235,8 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectInteractKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
-        const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(InteractFallbackKey);
+        const bool bKeyHeld = IsMappedActionHeld(PC, DefaultMappingContext, InteractAction,
+            InteractFallbackKey, EKeys::Gamepad_FaceButton_Left);
         if (bKeyHeld != bInteractFallbackHeld)
         {
             bInteractFallbackHeld = bKeyHeld;
@@ -1211,18 +1322,15 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             APlayerController* PlayerController =
                 Cast<APlayerController>(Controller);
             FVector2D ScreenPosition;
-            int32 ViewportWidth = 0;
-            int32 ViewportHeight = 0;
             if (IsValid(PlayerController) &&
                 PlayerController->ProjectWorldLocationToScreen(
                     MarkerWorldLocation, ScreenPosition, true))
             {
-                PlayerController->GetViewportSize(ViewportWidth, ViewportHeight);
+                FVector2D ViewOrigin, ViewSize;
+                UTMOPLocalMultiplayerSubsystem::GetPlayerViewRect(PlayerController, ViewOrigin, ViewSize);
                 const float ViewportScale = FMath::Max(0.01f,
                     UWidgetLayoutLibrary::GetViewportScale(this));
-                const FVector2D ViewportSize(
-                    ViewportWidth / ViewportScale,
-                    ViewportHeight / ViewportScale);
+                const FVector2D ViewportSize = ViewSize / ViewportScale;
                 FVector2D SlatePosition = ScreenPosition / ViewportScale;
                 const float Padding = TargetMarkerScreenEdgePadding /
                     ViewportScale;
@@ -1304,7 +1412,7 @@ bool ATMOPPlayerCharacter::OpenInformation(UTMOPInspectableComponent* Inspection
             PC, UTMOPAddressDirectoryWidget::StaticClass());
         if (!IsValid(AddressDirectoryWidget.Get())) return false;
         AddressDirectoryWidget->InitializeDirectory(this);
-        AddressDirectoryWidget->AddToViewport(88);
+        AddressDirectoryWidget->AddToPlayerScreen(88);
     }
     if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
     ActiveInspection = Inspection;
@@ -1317,10 +1425,7 @@ bool ATMOPPlayerCharacter::OpenInformation(UTMOPInspectableComponent* Inspection
     PC->bShowMouseCursor = true;
     PC->SetIgnoreMoveInput(true);
     PC->SetIgnoreLookInput(true);
-    FInputModeGameAndUI Mode;
-    Mode.SetWidgetToFocus(AddressDirectoryWidget->TakeWidget());
-    Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-    PC->SetInputMode(Mode);
+    ApplyLocalInputMode(AddressDirectoryWidget);
     UpdateInteractionPrompt();
     return true;
 }
@@ -1337,7 +1442,7 @@ void ATMOPPlayerCharacter::CloseAddressDirectory()
         PC->bShowMouseCursor = false;
         PC->SetIgnoreMoveInput(false);
         PC->SetIgnoreLookInput(false);
-        PC->SetInputMode(FInputModeGameOnly());
+        ApplyLocalInputMode();
         // Consume keys used by the UI so direct fallback polling cannot reopen it.
         bInteractFallbackHeld = PC->IsInputKeyDown(InteractFallbackKey);
         bPauseFallbackHeld = PC->IsInputKeyDown(PauseMenuFallbackKey) ||
@@ -1349,7 +1454,7 @@ bool ATMOPPlayerCharacter::OpenPersonDialog(
     ATMOPHistoricalAgent* HistoricalAgent)
 {
     if (!IsValid(HistoricalAgent) || !IsValid(DialogWidget.Get()) ||
-        GetWorld() == nullptr || bPauseMenuOpen || bAddressDirectoryOpen)
+        GetWorld() == nullptr || IsSessionGameplayBlocked() || HistoricalAgent->IsDialogueFocused())
         return false;
 
     const FName EntityId = IsValid(HistoricalAgent->EntityIdentity.Get())
@@ -1392,10 +1497,7 @@ bool ATMOPPlayerCharacter::OpenPersonDialog(
         PC->bShowMouseCursor = true;
         PC->SetIgnoreMoveInput(true);
         PC->SetIgnoreLookInput(true);
-        FInputModeGameAndUI Mode;
-        Mode.SetWidgetToFocus(DialogWidget->TakeWidget());
-        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-        PC->SetInputMode(Mode);
+        ApplyLocalInputMode(DialogWidget);
     }
     return true;
 }
@@ -1415,7 +1517,7 @@ void ATMOPPlayerCharacter::ClosePersonDialog()
         PC->bShowMouseCursor = false;
         PC->SetIgnoreMoveInput(false);
         PC->SetIgnoreLookInput(false);
-        PC->SetInputMode(FInputModeGameOnly());
+        ApplyLocalInputMode();
     }
 }
 
@@ -1423,7 +1525,7 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
     ATMOPHistoricalAgent* HistoricalAgent)
 {
     if (!IsValid(HistoricalAgent) || !IsValid(AgentInfoChartWidget.Get()) ||
-        bPauseMenuOpen || bNewspaperOpen || bAddressDirectoryOpen)
+        IsSessionGameplayBlocked())
         return false;
 
     UTMOPPersonProfileComponent* ProfileComponent =
@@ -1508,10 +1610,7 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
         PC->bShowMouseCursor = true;
         PC->SetIgnoreMoveInput(true);
         PC->SetIgnoreLookInput(true);
-        FInputModeGameAndUI Mode;
-        Mode.SetWidgetToFocus(AgentInfoChartWidget->TakeWidget());
-        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-        PC->SetInputMode(Mode);
+        ApplyLocalInputMode(AgentInfoChartWidget);
     }
     return true;
 }
@@ -1527,7 +1626,7 @@ void ATMOPPlayerCharacter::CloseAgentInfoChart()
         PC->bShowMouseCursor = false;
         PC->SetIgnoreMoveInput(false);
         PC->SetIgnoreLookInput(false);
-        PC->SetInputMode(FInputModeGameOnly());
+        ApplyLocalInputMode();
     }
 }
 
@@ -1607,21 +1706,20 @@ void ATMOPPlayerCharacter::EndDialogCloseUp()
 
 void ATMOPPlayerCharacter::InputQuickInventoryStarted()
 {
+    if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (bPauseMenuOpen || !InventoryInput->OpenRadialMenu()) return;
     SetSprinting(false, false);
     GetCharacterMovement()->StopMovementImmediately();
     if (APlayerController* PC = Cast<APlayerController>(Controller))
     {
-        int32 SizeX = 0, SizeY = 0;
-        PC->GetViewportSize(SizeX, SizeY);
-        PC->SetMouseLocation(SizeX / 2, SizeY / 2);
+        FVector2D Origin, Size;
+        UTMOPLocalMultiplayerSubsystem::GetPlayerViewRect(PC, Origin, Size);
+        if (UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(this) == 0)
+            PC->SetMouseLocation(FMath::RoundToInt(Origin.X + Size.X * 0.5f),
+                FMath::RoundToInt(Origin.Y + Size.Y * 0.5f));
         PC->bShowMouseCursor = true;
-        FInputModeGameAndUI Mode;
-        if (IsValid(QuickInventoryWidget.Get()))
-            Mode.SetWidgetToFocus(QuickInventoryWidget->TakeWidget());
-        Mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
-        PC->SetInputMode(Mode);
+        ApplyLocalInputMode(QuickInventoryWidget);
     }
 }
 
@@ -1640,7 +1738,7 @@ void ATMOPPlayerCharacter::FinishQuickInventory(const bool bConfirm)
         if (!bPauseMenuOpen)
         {
             PC->bShowMouseCursor = false;
-            PC->SetInputMode(FInputModeGameOnly());
+            ApplyLocalInputMode();
         }
     }
 }
@@ -1650,13 +1748,18 @@ void ATMOPPlayerCharacter::UpdateQuickInventoryPointer()
     APlayerController* PC = Cast<APlayerController>(Controller);
     if (!IsValid(PC)) return;
 
-    int32 SizeX = 0, SizeY = 0;
     float MouseX = 0.0f, MouseY = 0.0f;
-    PC->GetViewportSize(SizeX, SizeY);
-    if (PC->GetMousePosition(MouseX, MouseY) && SizeX > 0 && SizeY > 0)
+    FVector2D Origin, Size;
+    UTMOPLocalMultiplayerSubsystem::GetPlayerViewRect(PC, Origin, Size);
+    const FVector2D Stick(PC->GetInputAnalogKeyState(EKeys::Gamepad_LeftX),
+        PC->GetInputAnalogKeyState(EKeys::Gamepad_LeftY));
+    if (Stick.SizeSquared() > 0.04f) InventoryInput->UpdateRadialSelection(Stick);
+    else if (UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(this) == 0 &&
+        PC->GetMousePosition(MouseX, MouseY) && Size.X > 0 && Size.Y > 0)
     {
-        const FVector2D Direction(MouseX - SizeX * 0.5f, SizeY * 0.5f - MouseY);
-        const float Normalizer = FMath::Max(1.0f, FMath::Min(SizeX, SizeY) * 0.22f);
+        const FVector2D Direction(MouseX - Origin.X - Size.X * 0.5f,
+            Origin.Y + Size.Y * 0.5f - MouseY);
+        const float Normalizer = FMath::Max(1.0f, FMath::Min(Size.X, Size.Y) * 0.22f);
         InventoryInput->UpdateRadialSelection(Direction / Normalizer);
     }
 

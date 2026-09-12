@@ -97,6 +97,28 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
           [ SNew(SBox).WidthOverride(760.0f).HeightOverride(260.0f)
             [ SNew(SImage).Image(&LogoBrush) ] ]
+          + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+          [ SNew(SHorizontalBox)
+            + SHorizontalBox::Slot().AutoWidth()
+            [ MenuButton(FText::FromString(TEXT("1 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 1)) ]
+            + SHorizontalBox::Slot().AutoWidth()
+            [ MenuButton(FText::FromString(TEXT("2 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 2)) ]
+            + SHorizontalBox::Slot().AutoWidth()
+            [ MenuButton(FText::FromString(TEXT("3 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 3)) ]
+            + SHorizontalBox::Slot().AutoWidth()
+            [ MenuButton(FText::FromString(TEXT("4 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 4)) ] ]
+          + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+          [ SNew(STextBlock).Text_Lambda([this]()
+            { return FText::FromString(FString::Printf(TEXT("Valt: %d spelare · lokal delad skärm"), Director.IsValid() ? Director->LocalPlayerCount : 1)); }) ]
+          + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 8)
+          [ SNew(SButton).OnClicked_UObject(this, &UTMOPMainMenuWidget::KeyboardModeClicked)
+            [ SNew(STextBlock).Text_Lambda([this]()
+              { return FText::FromString(Director.IsValid() && Director->bKeyboardForPlayerOne
+                  ? TEXT("Styrning: P1 tangentbord/mus · P2–P4 handkontroller")
+                  : TEXT("Styrning: en handkontroll per spelare")); }) ] ]
+          + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+          [ SNew(STextBlock).AutoWrapText(true).ColorAndOpacity(FLinearColor(1,0.4f,0.2f))
+            .Text_Lambda([this]() { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); }) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 28, 0, 0)
           [ MenuButton(NSLOCTEXT("TMOP", "MainMenuNewGame", "STARTA NYTT SPEL"),
               FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::StartClicked)) ]
@@ -196,6 +218,18 @@ void UTMOPMainMenuWidget::ApplyIntroTextStyle()
         IntroBody->SetFont(Font);
         IntroBody->SetColorAndOpacity(IntroTextSettings.BodyColor);
     }
+}
+
+FReply UTMOPMainMenuWidget::PlayerCountClicked(int32 Count)
+{
+    if (Director.IsValid()) Director->LocalPlayerCount = FMath::Clamp(Count, 1, 4);
+    return FReply::Handled();
+}
+
+FReply UTMOPMainMenuWidget::KeyboardModeClicked()
+{
+    if (Director.IsValid()) Director->bKeyboardForPlayerOne = !Director->bKeyboardForPlayerOne;
+    return FReply::Handled();
 }
 
 void UTMOPMainMenuWidget::ResetTypewriter()

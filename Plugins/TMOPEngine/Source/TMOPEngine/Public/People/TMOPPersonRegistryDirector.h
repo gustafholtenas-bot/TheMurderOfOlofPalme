@@ -205,8 +205,8 @@ private:
         FTMOPPersonProfileRow Profile;
         TWeakObjectPtr<ATMOPHistoricalAgent> Agent;
         int32 NextTimelineIndex = 0;
-        int32 NextAutomaticSpeechIndex = 0;
-        int32 LastResolvedAutomaticSpeechSecond = INDEX_NONE;
+        /** Consumed independently: shared events can change chronological order. */
+        TSet<int32> ConsumedAutomaticSpeechIndices;
         bool bSpawnedByDirector = false;
         bool bCompleted = false;
         FName ActiveMeetingDialogueId = NAME_None;
@@ -222,8 +222,8 @@ private:
     void EvaluateAutomaticSpeech(int32 CurrentSecond, int32 PreviousSecond);
     void EvaluateMeetingDialogues(int32 CurrentSecond, int32 PreviousSecond);
     bool ResolveAutomaticSpeechSecond(
-        const FPersonRuntime& Runtime,
         const FTMOPTimedSpeechLine& Line,
+        int32 PreviousLineSecond,
         int32& OutSecond) const;
     bool SpawnPerson(FPersonRuntime& Runtime, const FTMOPPersonTimelineEntry& InitialEntry);
     bool ApplyTimelineEntry(FPersonRuntime& Runtime,

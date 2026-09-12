@@ -1,4 +1,5 @@
 #include "Newspapers/TMOPNewspaperReadingComponent.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraActor.h"
@@ -190,8 +191,11 @@ void UTMOPNewspaperReadingComponent::HidePlayerAppearanceMeshes()
         // components and make an existing clothing component visible after the
         // newspaper was opened.
         Component->SetOwnerNoSee(true);
-        Component->SetHiddenInGame(true, false);
-        Component->SetVisibility(false, false);
+        if (!UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
+        {
+            Component->SetHiddenInGame(true, false);
+            Component->SetVisibility(false, false);
+        }
     }
 }
 

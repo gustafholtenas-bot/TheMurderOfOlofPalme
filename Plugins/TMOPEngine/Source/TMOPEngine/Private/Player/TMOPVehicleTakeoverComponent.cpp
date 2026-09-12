@@ -56,6 +56,8 @@ ETMOPVehicleTakeoverResult UTMOPVehicleTakeoverComponent::TryEnterVehicle(
     ACharacter* PreviousOccupant = Seat->GetOccupantCharacter();
     if (IsValid(PreviousOccupant))
     {
+        if (PreviousOccupant->IsPlayerControlled())
+            return ResolveAndBroadcast(ETMOPVehicleTakeoverResult::FailedDriverCannotBeRemoved, Vehicle, PreviousOccupant);
         if (Seat->SeatRole != ETMOPVehicleSeatRole::Driver)
             return ResolveAndBroadcast(ETMOPVehicleTakeoverResult::FailedOccupiedPassengerSeat,
                 Vehicle, PreviousOccupant);
@@ -109,8 +111,10 @@ UTMOPVehicleSeatComponent* UTMOPVehicleTakeoverComponent::SelectSeat(
         ? ETMOPVehicleSeatRole::Driver : ETMOPVehicleSeatRole::FrontPassenger;
     for (UTMOPVehicleSeatComponent* Seat : Seats)
         if (IsValid(Seat) && Seat->SeatRole == Preferred &&
-            (!Seat->IsOccupied() || Preferred == ETMOPVehicleSeatRole::Driver)) return Seat;
-    if (!bPreferDriverSeat)
+            (!Seat->IsOccupied() || (Preferred == ETMOPVehicleSeatRole::Driver &&
+                (!Seat->GetOccupantCharacter() || !Seat->GetOccupantCharacter()->IsPlayerControlled())))) return Seat;
+    // An occupied player driver's seat falls back to a free passenger seat.
+    if (!bPreferDriverSeat || Preferred == ETMOPVehicleSeatRole::Driver)
         for (UTMOPVehicleSeatComponent* Seat : Seats)
             if (IsValid(Seat) && Seat->SeatRole != ETMOPVehicleSeatRole::Driver && !Seat->IsOccupied()) return Seat;
     return nullptr;

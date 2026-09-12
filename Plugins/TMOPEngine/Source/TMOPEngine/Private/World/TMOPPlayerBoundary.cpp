@@ -1,4 +1,6 @@
 #include "World/TMOPPlayerBoundary.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Player/TMOPPlayerCharacter.h"
 
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
@@ -68,7 +70,16 @@ void ATMOPPlayerBoundary::Tick(const float DeltaSeconds)
     Super::Tick(DeltaSeconds);
     if (bEnablePlayerBlocking)
     {
-        ConstrainPlayerToAllowedSide();
+        TSet<AActor*> Seen;
+        for (ATMOPPlayerCharacter* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+        {
+            AActor* Controlled = ResolveControlledActor(Player);
+            if (Controlled && !Seen.Contains(Controlled))
+            {
+                Seen.Add(Controlled);
+                ConstrainPlayerToAllowedSide(Controlled);
+            }
+        }
     }
 }
 
@@ -132,9 +143,8 @@ void ATMOPPlayerBoundary::RefreshComponents()
     }
 }
 
-AActor* ATMOPPlayerBoundary::ResolveControlledActor() const
+AActor* ATMOPPlayerBoundary::ResolveControlledActor(APawn* PlayerPawn) const
 {
-    APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(this, 0);
     if (!IsValid(PlayerPawn))
     {
         return nullptr;
@@ -176,9 +186,8 @@ float ATMOPPlayerBoundary::ResolveClearanceCm(
     return 50.0f;
 }
 
-void ATMOPPlayerBoundary::ConstrainPlayerToAllowedSide()
+void ATMOPPlayerBoundary::ConstrainPlayerToAllowedSide(AActor* ControlledActor)
 {
-    AActor* ControlledActor = ResolveControlledActor();
     if (!IsValid(ControlledActor))
     {
         return;

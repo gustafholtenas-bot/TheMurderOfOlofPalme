@@ -13,6 +13,16 @@ class USkeletalMesh;
 class USkeletalMeshComponent;
 class UStaticMeshComponent;
 
+USTRUCT(BlueprintType)
+struct FTMOPLocalPlayerAppearancePreset
+{
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bUsePersonProfileRow = false;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FDataTableRowHandle PlayerProfileRow;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) ETMOPPersonGender PlayerGender = ETMOPPersonGender::Male;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) FTMOPAppearanceProfile Appearance;
+};
+
 /**
  * Level actor that gives the playable character an evidence/catalog driven
  * modular appearance using the same resolver and DT_TMOP_AppearanceAssets as
@@ -34,6 +44,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Appearance|Target",
         meta=(ClampMin="0"))
     int32 PlayerIndex = 0;
+
+    /** Optional four slots on the P1 director (indices 0–3). Empty preserves legacy
+     * per-director profiles. A separately placed director for a slot takes precedence. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Appearance|Local Multiplayer", meta=(TitleProperty="PlayerGender"))
+    TArray<FTMOPLocalPlayerAppearancePreset> LocalPlayerAppearances;
+
+    void ConfigureForLocalPlayer(const ATMOPPlayerAppearanceDirector* TemplateDirector,
+        ACharacter* Character, int32 Slot);
 
     /** Optional full-body component. Empty uses ACharacter::GetMesh(). */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Appearance|Target")

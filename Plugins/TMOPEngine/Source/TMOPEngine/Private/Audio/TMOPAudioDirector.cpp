@@ -1,4 +1,5 @@
 #include "Audio/TMOPAudioDirector.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Anchors/TMOPAnchorSubsystem.h"
@@ -41,7 +42,7 @@ bool HasListenerWithinDistance(
 {
     if (!IsValid(WorldContext)) return false;
     const APlayerCameraManager* Camera =
-        UGameplayStatics::GetPlayerCameraManager(WorldContext, 0);
+        UTMOPLocalMultiplayerSubsystem::FindNearestCamera(WorldContext, SoundLocation);
     // Dedicated/server-side simulations have no listener.  Do not allocate
     // local transient sounds there.
     if (!IsValid(Camera)) return false;
@@ -396,11 +397,6 @@ void ATMOPAudioDirector::RefreshTrafficLightAudio()
         StopTrafficLightAudio();
         return;
     }
-    const APlayerCameraManager* Camera =
-        UGameplayStatics::GetPlayerCameraManager(this, 0);
-    if (!IsValid(Camera)) return;
-    const FVector ListenerLocation = Camera->GetCameraLocation();
-    const float RadiusSquared = FMath::Square(TrafficLightActivationRadiusCm);
     TSet<TWeakObjectPtr<AActor>> SeenNearby;
 
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
@@ -408,8 +404,8 @@ void ATMOPAudioDirector::RefreshTrafficLightAudio()
         AActor* Actor = *It;
         USceneComponent* AttachComponent = nullptr;
         if (!FindTrafficLightAttachComponent(Actor, AttachComponent)) continue;
-        if (FVector::DistSquared(ListenerLocation,
-            AttachComponent->GetComponentLocation()) > RadiusSquared) continue;
+        if (!HasListenerWithinDistance(this, AttachComponent->GetComponentLocation(),
+            TrafficLightActivationRadiusCm)) continue;
         SeenNearby.Add(Actor);
         const TWeakObjectPtr<AActor> ActorKey(Actor);
         UAudioComponent* Existing = ActiveTrafficLightAudio.FindRef(ActorKey).Get();

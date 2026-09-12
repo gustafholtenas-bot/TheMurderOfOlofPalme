@@ -1,4 +1,5 @@
 #include "Audio/TMOPAgentAudioComponent.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Audio/TMOPAudioDirector.h"
 #include "Camera/PlayerCameraManager.h"
@@ -36,7 +37,7 @@ void UTMOPAgentAudioComponent::TickComponent(
     // footsteps cannot be heard.  Reset the cadence so returning into range
     // never produces a burst of deferred footsteps.
     const APlayerCameraManager* Camera =
-        UGameplayStatics::GetPlayerCameraManager(this, 0);
+        UTMOPLocalMultiplayerSubsystem::FindNearestCamera(this, Location);
     if (!IsValid(Camera) ||
         FVector::DistSquared(Camera->GetCameraLocation(), Location) >
             FMath::Square(MaximumAudibleDistanceCm))
@@ -93,7 +94,7 @@ void UTMOPAgentAudioComponent::NotifyFootstep(const FName ExplicitAudioId)
     for (TActorIterator<ATMOPAudioDirector> It(GetWorld()); It; ++It)
     {
         const APawn* Pawn = Cast<APawn>(Owner);
-        if (IsValid(Pawn) && Pawn->IsLocallyControlled())
+        if (IsValid(Pawn) && Pawn->IsLocallyControlled() && !UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
             It->Play2DById(AudioId, 1.0f);
         else
             It->PlayAtLocationById(

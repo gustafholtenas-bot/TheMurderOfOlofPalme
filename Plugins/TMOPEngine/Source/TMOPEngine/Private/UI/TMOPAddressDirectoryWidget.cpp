@@ -1,4 +1,5 @@
 #include "UI/TMOPAddressDirectoryWidget.h"
+#include "UI/TMOPLocalPanel.h"
 
 #include "InputCoreTypes.h"
 #include "Player/TMOPPlayerCharacter.h"
@@ -52,7 +53,7 @@ void UTMOPAddressDirectoryWidget::HideDirectory()
 
 TSharedRef<SWidget> UTMOPAddressDirectoryWidget::RebuildWidget()
 {
-    return SNew(SOverlay)
+    return TMOPFitLocalPanel(this, SNew(SOverlay)
         + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center).Padding(24.0f)
         [ SNew(SBox).WidthOverride(800.0f).HeightOverride(580.0f)
           [ SNew(SBorder).Padding(26.0f)
@@ -94,7 +95,7 @@ TSharedRef<SWidget> UTMOPAddressDirectoryWidget::RebuildWidget()
                     NSLOCTEXT("TMOP", "AddressCloseHint", "{0} / Esc — Stäng"),
                     Player.IsValid() ? Player->GetInteractKeyDisplayText() : FText::FromString(TEXT("E"))); })
                 .Font(FCoreStyle::GetDefaultFontStyle("Regular", 14))
-                .ColorAndOpacity(FLinearColor(0.7f, 0.73f, 0.76f)) ] ] ] ];
+                .ColorAndOpacity(FLinearColor(0.7f, 0.73f, 0.76f)) ] ] ] ]);
 }
 
 FReply UTMOPAddressDirectoryWidget::HandleClose()
@@ -108,6 +109,19 @@ FReply UTMOPAddressDirectoryWidget::NativeOnPreviewKeyDown(const FGeometry& Geom
     const FKeyEvent& KeyEvent)
 {
     const FKey Key = KeyEvent.GetKey();
+    if (ScrollBox.IsValid())
+    {
+        float ScrollDelta = 0.0f;
+        if (Key == EKeys::Gamepad_DPad_Down) ScrollDelta = 64.0f;
+        if (Key == EKeys::Gamepad_DPad_Up) ScrollDelta = -64.0f;
+        if (Key == EKeys::Gamepad_RightShoulder) ScrollDelta = 360.0f;
+        if (Key == EKeys::Gamepad_LeftShoulder) ScrollDelta = -360.0f;
+        if (ScrollDelta != 0.0f)
+        {
+            ScrollBox->SetScrollOffset(FMath::Max(0.0f, ScrollBox->GetScrollOffset() + ScrollDelta));
+            return FReply::Handled();
+        }
+    }
     if (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right ||
         (Player.IsValid() && Key == Player->InteractFallbackKey))
     {

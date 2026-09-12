@@ -31,6 +31,8 @@ protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
 private:
     FReply StartClicked();
+    FReply PlayerCountClicked(int32 Count);
+    FReply KeyboardModeClicked();
     FReply LoadClicked();
     FReply LoadSlotClicked(FString SlotName);
     FReply LoadBackClicked();

@@ -13,6 +13,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "People/TMOPPersonRegistryDirector.h"
 #include "Player/TMOPPlayerCharacter.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "Player/TMOPPlayerVehicleSessionComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Traffic/TMOPTrafficNetworkSubsystem.h"
@@ -140,6 +141,8 @@ void ATMOPMainMenuIntroDirector::TryInitializeMenu()
 {
     APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
     if (!IsValid(Controller) || !IsValid(GetPlayerCharacter())) return;
+    if (GetGameInstance())
+        GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->PrepareMainMenu();
     TSubclassOf<UTMOPMainMenuWidget> WidgetClass = MainMenuWidgetClass;
     if (!WidgetClass) WidgetClass = UTMOPMainMenuWidget::StaticClass();
     MainMenuWidget = CreateWidget<UTMOPMainMenuWidget>(Controller, WidgetClass);
@@ -160,8 +163,13 @@ void ATMOPMainMenuIntroDirector::SetMenuInput(const bool bMenuInput)
     APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
     if (!IsValid(Controller)) return;
     Controller->bShowMouseCursor = bMenuInput;
-    Controller->SetIgnoreMoveInput(bMenuInput);
-    Controller->SetIgnoreLookInput(bMenuInput);
+    // Ignore-input uses a counter; repeated intro/menu refreshes must not stack it.
+    if (bMenuInputApplied != bMenuInput)
+    {
+        Controller->SetIgnoreMoveInput(bMenuInput);
+        Controller->SetIgnoreLookInput(bMenuInput);
+        bMenuInputApplied = bMenuInput;
+    }
     if (bMenuInput && IsValid(MainMenuWidget))
     {
         FInputModeUIOnly Mode;
@@ -174,6 +182,12 @@ void ATMOPMainMenuIntroDirector::SetMenuInput(const bool bMenuInput)
 
 void ATMOPMainMenuIntroDirector::StartNewGame()
 {
+    if (bNewGameRequested || !GetGameInstance()) return;
+    bNewGameRequested = true;
+    StartupStatus = FText::GetEmpty();
+    ActiveIntroDestinationAnchorId = IntroDestinationAnchorId;
+    GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->ConfigureSession(
+        LocalPlayerCount, bKeyboardForPlayerOne);
     if (IsValid(MainMenuWidget))
     {
         MainMenuWidget->SetMenuMode(false);
@@ -492,12 +506,28 @@ void ATMOPMainMenuIntroDirector::FinishIntro()
     if (IsValid(IntroVehicle)) IntroVehicle->Destroy();
     if (IsValid(RuntimeFollowCamera)) RuntimeFollowCamera->Destroy();
     IntroDriver = nullptr; IntroVehicle = nullptr; RuntimeFollowCamera = nullptr;
+    auto* LocalSession = GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
+    const FName PartyAnchor = PlayerStartAnchorId.IsNone() ? ActiveIntroDestinationAnchorId : PlayerStartAnchorId;
+    if (!LocalSession->StartParty(PartyAnchor,
+        Player ? Player->GetActorTransform() : GetActorTransform(), StartupStatus))
+    {
+        bNewGameRequested = false;
+        if (IsValid(MainMenuWidget)) MainMenuWidget->SetMenuMode(true);
+        if (Player)
+        {
+            Player->SetGameplayHUDHidden(TEXT("Cinematic"), false);
+            Player->SetGameplayHUDHidden(TEXT("MainMenu"), true);
+        }
+        SetMenuInput(true);
+        return;
+    }
     if (IsValid(MainMenuWidget)) MainMenuWidget->RemoveFromParent();
     SetMenuInput(false);
-    if (IsValid(Player))
+    for (ATMOPPlayerCharacter* PartyPlayer : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
     {
-        Player->SetGameplayHUDHidden(TEXT("MainMenu"), false);
-        Player->SetGameplayHUDHidden(TEXT("Cinematic"), false);
+        PartyPlayer->SetGameplayHUDHidden(TEXT("MainMenu"), false);
+        PartyPlayer->SetGameplayHUDHidden(TEXT("Cinematic"), false);
+        PartyPlayer->ApplyLocalInputMode();
     }
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
@@ -529,6 +559,11 @@ bool ATMOPMainMenuIntroDirector::LoadGameSlot(const FString& SlotName)
         Controller->SetViewTarget(Player);
     Player->SetGameplayHUDHidden(TEXT("MainMenu"), false);
     Player->SetGameplayHUDHidden(TEXT("Cinematic"), false);
+    for (ATMOPPlayerCharacter* Member : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+    {
+        Member->ApplyLocalInputMode();
+        Member->RefreshLoopEndMenu();
+    }
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
         Clock->StartClock();

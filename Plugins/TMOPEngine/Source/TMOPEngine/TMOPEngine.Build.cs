@@ -10,7 +10,7 @@ public class TMOPEngine : ModuleRules
             "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
             "AIModule", "NavigationSystem", "GameplayTasks", "UMG", "Slate", "SlateCore",
             "DeveloperSettings", "Json", "JsonUtilities", "Niagara", "MediaAssets",
-            "AudioMixer"
+            "AudioMixer", "EngineSettings"
         });
     }
 }

@@ -1,4 +1,5 @@
 #include "UI/TMOPLoopEndWidget.h"
+#include "UI/TMOPLocalPanel.h"
 
 #include "Framework/Application/SlateApplication.h"
 #include "InputCoreTypes.h"
@@ -21,9 +22,7 @@ void UTMOPLoopEndWidget::InitializeLoopEnd(ATMOPPlayerCharacter* InPlayerCharact
 void UTMOPLoopEndWidget::SetMenuVisible(const bool bVisible)
 {
     SetVisibility(bVisible ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
-    if (bVisible && ReplayButton.IsValid())
-        FSlateApplication::Get().SetKeyboardFocus(
-            ReplayButton, EFocusCause::SetDirectly);
+    // Focus is assigned by the owning player, never to the global keyboard user.
 }
 
 TSharedRef<SWidget> UTMOPLoopEndWidget::RebuildWidget()
@@ -46,7 +45,7 @@ TSharedRef<SWidget> UTMOPLoopEndWidget::RebuildWidget()
               .ColorAndOpacity(ButtonText) ];
     };
 
-    return SNew(SOverlay)
+    return TMOPFitLocalPanel(this, SNew(SOverlay)
         + SOverlay::Slot()
         [ SNew(SBorder).BorderBackgroundColor(FLinearColor(0.0f, 0.0f, 0.0f, 0.82f)) ]
         + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center).Padding(32.0f)
@@ -84,7 +83,7 @@ TSharedRef<SWidget> UTMOPLoopEndWidget::RebuildWidget()
               + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f)
               [ MakeButton(NSLOCTEXT("TMOP", "LoopEndQuit", "AVSLUTA SPELET"),
                     FOnClicked::CreateUObject(this,
-                        &UTMOPLoopEndWidget::HandleQuitClicked)) ] ] ] ];
+                        &UTMOPLoopEndWidget::HandleQuitClicked)) ] ] ] ]);
 }
 
 FReply UTMOPLoopEndWidget::HandleReplayClicked()

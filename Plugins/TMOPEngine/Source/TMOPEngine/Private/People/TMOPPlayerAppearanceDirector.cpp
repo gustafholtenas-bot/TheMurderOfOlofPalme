@@ -183,7 +183,9 @@ UStaticMeshComponent* ATMOPPlayerAppearanceDirector::EnsureHeadwearComponent(
     ACharacter* Character, USkeletalMeshComponent* Body)
 {
     if (!IsValid(Character) || !IsValid(Body)) return nullptr;
-    if (IsValid(ManagedHeadwearComponent)) return ManagedHeadwearComponent;
+    if (IsValid(ManagedHeadwearComponent) && ManagedHeadwearComponent->GetOwner() == Character)
+        return ManagedHeadwearComponent;
+    ManagedHeadwearComponent = nullptr;
 
     TArray<UStaticMeshComponent*> ExistingComponents;
     Character->GetComponents<UStaticMeshComponent>(ExistingComponents);
@@ -470,6 +472,36 @@ void ATMOPPlayerAppearanceDirector::ClearPlayerAppearance()
     }
     ResolvedAppearance = FTMOPResolvedAppearance();
     bHasAppliedAppearance = false;
+}
+
+void ATMOPPlayerAppearanceDirector::ConfigureForLocalPlayer(
+    const ATMOPPlayerAppearanceDirector* TemplateDirector, ACharacter* Character, int32 Slot)
+{
+    if (!TemplateDirector || !Character) return;
+    TargetCharacterOverride = Character;
+    // Preserve an explicitly selected mesh on this pawn, but never share P1's
+    // mesh component with another local player's pawn.
+    if (IsValid(BodyMeshOverride) && BodyMeshOverride->GetOwner() != Character)
+        BodyMeshOverride = nullptr;
+    PlayerIndex = Slot;
+    bUsePersonProfileRow = TemplateDirector->bUsePersonProfileRow;
+    PlayerProfileRow = TemplateDirector->PlayerProfileRow;
+    PlayerGender = TemplateDirector->PlayerGender;
+    InlineAppearanceProfile = TemplateDirector->InlineAppearanceProfile;
+    AppearanceAssetTableOverride = TemplateDirector->AppearanceAssetTableOverride;
+    bAutomaticallySelectMannyOrQuinnByGender = TemplateDirector->bAutomaticallySelectMannyOrQuinnByGender;
+    MaleBaseBodyMesh = TemplateDirector->MaleBaseBodyMesh;
+    FemaleBaseBodyMesh = TemplateDirector->FemaleBaseBodyMesh;
+    DefaultHeadwearSocket = TemplateDirector->DefaultHeadwearSocket;
+    HeadwearFallbackBone = TemplateDirector->HeadwearFallbackBone;
+    if (TemplateDirector->LocalPlayerAppearances.IsValidIndex(Slot))
+    {
+        const auto& Preset = TemplateDirector->LocalPlayerAppearances[Slot];
+        bUsePersonProfileRow = Preset.bUsePersonProfileRow;
+        PlayerProfileRow = Preset.PlayerProfileRow;
+        PlayerGender = Preset.PlayerGender;
+        InlineAppearanceProfile = Preset.Appearance;
+    }
 }
 
 bool ATMOPPlayerAppearanceDirector::RefreshPlayerAppearance()

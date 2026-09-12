@@ -8,6 +8,7 @@
 class ATMOPPlayerCharacter;
 class SBorder;
 class STextBlock;
+class SScrollBox;
 
 /** Full-screen research card opened when the player interacts with a person. */
 UCLASS(BlueprintType, Blueprintable)
@@ -23,6 +24,8 @@ public:
 
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
+    virtual FReply NativeOnPreviewKeyDown(const FGeometry& Geometry, const FKeyEvent& Event) override;
+    virtual void ReleaseSlateResources(bool bReleaseChildren) override;
 
 private:
     FReply HandleCloseClicked();
@@ -30,6 +33,7 @@ private:
 
     TWeakObjectPtr<ATMOPPlayerCharacter> PlayerCharacter;
     TSharedPtr<SBorder> MainPanel;
+    TSharedPtr<SScrollBox> ScrollBox;
     TSharedPtr<STextBlock> NameText;
     TSharedPtr<STextBlock> IdentityText;
     TSharedPtr<STextBlock> InterviewStatusText;

@@ -5,6 +5,7 @@
 #include "TMOPPlayerBoundary.generated.h"
 
 class UArrowComponent;
+class APawn;
 class UBoxComponent;
 class UMaterialInterface;
 class UNiagaraComponent;
@@ -89,8 +90,8 @@ public:
     FVector FogEffectScale = FVector(5.0f, 50.0f, 10.0f);
 
 private:
-    AActor* ResolveControlledActor() const;
+    AActor* ResolveControlledActor(APawn* PlayerPawn) const;
     float ResolveClearanceCm(const AActor* ControlledActor) const;
-    void ConstrainPlayerToAllowedSide();
+    void ConstrainPlayerToAllowedSide(AActor* ControlledActor);
     void RefreshComponents();
 };

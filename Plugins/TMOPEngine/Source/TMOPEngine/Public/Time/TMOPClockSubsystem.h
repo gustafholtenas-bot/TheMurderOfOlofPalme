@@ -66,7 +66,22 @@ public:
     int32 GetLoopNumber() const { return LoopNumber; }
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
-    bool IsClockRunning() const { return bClockRunning; }
+    bool IsClockRunning() const;
+    /** Run intent before temporary menu/world pause gates, for time reconstruction. */
+    bool IsClockRunRequested() const { return bClockRunning; }
+
+    /** Idempotent, owner-scoped pause: releasing one menu cannot resume another. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Clock|Pause")
+    void RequestPause(UObject* Owner, FName Reason, bool bPauseWorld = true);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Clock|Pause")
+    void ReleasePause(UObject* Owner, FName Reason);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Clock|Pause")
+    void ReleaseAllPauses(UObject* Owner);
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Clock|Pause")
+    bool HasPauseRequests() const;
 
     /** True after 23:45 until the player chooses how to continue. */
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
@@ -94,6 +109,16 @@ public:
     void SetTimeScale(float NewTimeScale);
 
 private:
+    struct FPauseRequest
+    {
+        TWeakObjectPtr<UObject> Owner;
+        FName Reason;
+        bool bPauseWorld = true;
+    };
+    TArray<FPauseRequest> PauseRequests;
+    TWeakObjectPtr<UWorld> PausedWorld;
+    bool bOwnsWorldPause = false;
+    void UpdatePauseState();
     bool TickClock(float DeltaSeconds);
     void AdvanceOneSecond();
     void ReachLoopEnd();

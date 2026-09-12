@@ -1,5 +1,7 @@
 #include "UI/TMOPAgentInfoChartWidget.h"
+#include "UI/TMOPLocalPanel.h"
 #include "People/TMOPPersonNameLibrary.h"
+#include "InputCoreTypes.h"
 
 #include "Player/TMOPPlayerCharacter.h"
 #include "Styling/CoreStyle.h"
@@ -54,6 +56,7 @@ void UTMOPAgentInfoChartWidget::ShowAgentInfo(
         ? NSLOCTEXT("TMOP", "AgentInfoNoSources", "Källhänvisning saknas.")
         : FText::FromString(Sources));
     bChartVisible = true;
+    if (ScrollBox.IsValid()) ScrollBox->ScrollToStart();
     RefreshVisibility();
 }
 
@@ -73,7 +76,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
             .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
                 TEXT("AgentInfoHeading"), FLinearColor(0.95f, 0.70f, 0.20f)));
     };
-    return SNew(SOverlay)
+    return TMOPFitLocalPanel(this, SNew(SOverlay)
         + SOverlay::Slot().HAlign(HAlign_Fill).VAlign(VAlign_Fill)
         [ SAssignNew(MainPanel, SBorder)
           .Visibility(EVisibility::Collapsed)
@@ -108,7 +111,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       FCoreStyle::GetDefaultFontStyle("Bold", 15)))
                   .ColorAndOpacity(FLinearColor(0.40f, 0.85f, 0.58f)) ]
                 + SVerticalBox::Slot().FillHeight(1.0f)
-                [ SNew(SScrollBox)
+                [ SAssignNew(ScrollBox, SScrollBox)
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoTimelineHeader",
                       "PERSONENS TIDSLINJE")) ]
@@ -135,7 +138,41 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoSources"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 13)))
                     .ColorAndOpacity(FLinearColor(0.62f, 0.69f, 0.74f))
-                    .AutoWrapText(true).WrapTextAt(820.0f) ] ] ] ] ] ];
+                    .AutoWrapText(true).WrapTextAt(820.0f) ] ] ] ] ] ]);
+}
+
+FReply UTMOPAgentInfoChartWidget::NativeOnPreviewKeyDown(const FGeometry& Geometry, const FKeyEvent& Event)
+{
+    if (bChartVisible)
+    {
+        const FKey Key = Event.GetKey();
+        if (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right)
+            return HandleCloseClicked();
+        float Delta = 0.0f;
+        if (Key == EKeys::Gamepad_DPad_Up) Delta = -64.0f;
+        if (Key == EKeys::Gamepad_DPad_Down) Delta = 64.0f;
+        if (Key == EKeys::Gamepad_LeftShoulder) Delta = -360.0f;
+        if (Key == EKeys::Gamepad_RightShoulder) Delta = 360.0f;
+        if (ScrollBox.IsValid() && Delta != 0.0f)
+        {
+            ScrollBox->SetScrollOffset(FMath::Max(0.0f, ScrollBox->GetScrollOffset() + Delta));
+            return FReply::Handled();
+        }
+    }
+    return Super::NativeOnPreviewKeyDown(Geometry, Event);
+}
+
+void UTMOPAgentInfoChartWidget::ReleaseSlateResources(bool bReleaseChildren)
+{
+    Super::ReleaseSlateResources(bReleaseChildren);
+    ScrollBox.Reset();
+    MainPanel.Reset();
+    NameText.Reset();
+    IdentityText.Reset();
+    InterviewStatusText.Reset();
+    TimelineText.Reset();
+    ObservationText.Reset();
+    SourceText.Reset();
 }
 
 FReply UTMOPAgentInfoChartWidget::HandleCloseClicked()

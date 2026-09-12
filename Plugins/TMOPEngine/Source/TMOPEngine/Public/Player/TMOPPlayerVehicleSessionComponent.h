@@ -7,6 +7,8 @@
 
 class ATMOPVehicleBase;
 class UTMOPPlayerVehicleDrivingComponent;
+class ACameraActor;
+class USpringArmComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTMOPVehicleSessionSignature,
     ATMOPVehicleBase*, Vehicle, bool, bDriver);
@@ -20,6 +22,7 @@ class TMOPENGINE_API UTMOPPlayerVehicleSessionComponent : public UActorComponent
 
 public:
     UTMOPPlayerVehicleSessionComponent();
+    virtual void EndPlay(const EEndPlayReason::Type Reason) override;
     virtual void TickComponent(float DeltaTime, ELevelTick TickType,
         FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -70,7 +73,12 @@ public:
     void VehicleHighSpeedMode(bool bEnabled);
 
 private:
+    UPROPERTY(Transient) TObjectPtr<ACameraActor> LocalVehicleCamera;
+    UPROPERTY(Transient) TObjectPtr<USpringArmComponent> LocalVehicleBoom;
+    FRotator LastLocalControlRotation = FRotator::ZeroRotator;
+    float SecondsSinceLocalCameraInput = 0.0f;
+    void UpdateLocalVehicleCamera(float DeltaTime);
     UTMOPVehicleTakeoverComponent* GetTakeover() const;
     UTMOPPlayerVehicleDrivingComponent* GetDriving() const;
-    void SetCameraTarget(AActor* Target, float BlendSeconds) const;
+    void SetCameraTarget(AActor* Target, float BlendSeconds);
 };

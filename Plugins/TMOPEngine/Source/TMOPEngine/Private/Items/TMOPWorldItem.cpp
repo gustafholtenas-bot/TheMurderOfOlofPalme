@@ -1,4 +1,5 @@
 #include "Items/TMOPWorldItem.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -72,6 +73,8 @@ void ATMOPWorldItem::RefreshVisual()
 void ATMOPWorldItem::UpdateWorldPrompt()
 {
     if (!IsValid(WorldPrompt.Get()) || GetWorld() == nullptr) return;
+    WorldPrompt->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
+    if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this)) return; // Each player's target HUD supplies the prompt.
     APlayerController* PC = GetWorld()->GetFirstPlayerController();
     ATMOPPlayerCharacter* Player = IsValid(PC)
         ? Cast<ATMOPPlayerCharacter>(PC->GetPawn()) : nullptr;
@@ -97,7 +100,7 @@ void ATMOPWorldItem::UpdateWorldPrompt()
 
 bool ATMOPWorldItem::TryPickup(UTMOPInventoryComponent* TargetInventory)
 {
-    if (!IsValid(TargetInventory) || !IsValid(ItemDefinition.Get())) return false;
+    if (IsActorBeingDestroyed() || Quantity <= 0 || !IsValid(TargetInventory) || !IsValid(ItemDefinition.Get())) return false;
     const int32 Transfer = FMath::Min(Quantity,
         TargetInventory->GetRemainingCapacity(ItemDefinition.Get()));
     if (Transfer <= 0 || !TargetInventory->AddItem(ItemDefinition.Get(), Transfer)) return false;

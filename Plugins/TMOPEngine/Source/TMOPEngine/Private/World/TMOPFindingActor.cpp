@@ -1,4 +1,5 @@
 #include "World/TMOPFindingActor.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
@@ -72,6 +73,8 @@ void ATMOPFindingActor::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!IsValid(FindingLabel) || GetWorld() == nullptr) return;
+    FindingLabel->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
+    if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this)) return;
     const APlayerController* PC = GetWorld()->GetFirstPlayerController();
     const APlayerCameraManager* Camera = IsValid(PC) ? PC->PlayerCameraManager : nullptr;
     if (!IsValid(Camera)) return;

@@ -1,4 +1,6 @@
 #include "Events/TMOPPalmeShotDirector.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
+#include "Player/TMOPPlayerCharacter.h"
 
 #include "Actions/TMOPActionExecutorComponent.h"
 #include "Agents/TMOPHistoricalAgent.h"
@@ -142,13 +144,13 @@ void ATMOPPalmeShotDirector::TryActivateProximitySlowMotion(
     if (NewTime.ToSecondsFromMidnight() != EvaluationSeconds) return;
 
     bSlowMotionEvaluated = true;
-    const APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(this, 0);
     const FVector MurderLocation = ResolveAnchorLocation(OlofStartAnchorId,
         OlofAgent.IsValid() ? OlofAgent->GetActorLocation() : GetActorLocation());
     const float RadiusCm = SlowMotionActivationRadiusMeters * 100.0f;
-    if (!IsValid(PlayerPawn) ||
-        FVector::DistSquared2D(PlayerPawn->GetActorLocation(), MurderLocation) >
-        FMath::Square(RadiusCm)) return;
+    bool bAnyPlayerNear = false;
+    for (const ATMOPPlayerCharacter* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+        bAnyPlayerNear |= FVector::DistSquared2D(Player->GetActorLocation(), MurderLocation) <= FMath::Square(RadiusCm);
+    if (!bAnyPlayerNear) return;
 
     if (UTMOPClockSubsystem* Clock =
         GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>())

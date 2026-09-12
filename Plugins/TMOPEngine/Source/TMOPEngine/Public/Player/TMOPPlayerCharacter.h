@@ -20,6 +20,8 @@ class UTMOPPlayerActionComponent;
 class UTMOPQuickInventoryWidget;
 class UTMOPPauseMenuWidget;
 class UTMOPLoopEndWidget;
+class UTMOPLocalPlayerOverlay;
+class UUserWidget;
 class ATMOPWorldItem;
 class UTMOPInteractionPromptWidget;
 class UTMOPDialogWidget;
@@ -155,6 +157,8 @@ public:
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Loop End")
     TObjectPtr<UTMOPLoopEndWidget> LoopEndWidget;
+    UPROPERTY(Transient)
+    TObjectPtr<UTMOPLocalPlayerOverlay> LocalPlayerOverlay;
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Loop End")
     bool bLoopEndMenuOpen = false;
@@ -325,6 +329,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input|Map")
     FKey WorldMapFallbackKey = EKeys::M;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Input")
+    FKey WorldMapGamepadFallbackKey = EKeys::Gamepad_Special_Left;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input|Inventory")
     TObjectPtr<UInputAction> QuickInventoryAction;
 
@@ -484,6 +491,12 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
     void TogglePauseMenu();
+
+    /** Session transitions close every player's UI, not just the initiating player. */
+    void CloseSessionMenus();
+    void RefreshLoopEndMenu();
+    void ApplyLocalInputMode(UUserWidget* FocusWidget = nullptr);
+    bool IsSessionGameplayBlocked() const;
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Loop End")
     void ReplayLoopFromBeginning();

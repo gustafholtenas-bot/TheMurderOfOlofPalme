@@ -1,4 +1,5 @@
 #include "UI/TMOPMapWidget.h"
+#include "UI/TMOPLocalPanel.h"
 
 #include "Engine/Texture2D.h"
 #include "HAL/PlatformTime.h"
@@ -40,6 +41,10 @@ public:
         const float DeltaTime) override
     {
         SLeafWidget::Tick(AllottedGeometry, CurrentTime, DeltaTime);
+        if (OwnerWidget.IsValid() && !OwnerWidget->IsMinimap() && HasAnyUserFocus())
+            OwnerWidget->PanByPixels(FVector2D(-PanAxis.X, PanAxis.Y) * 480.0f * DeltaTime,
+                AllottedGeometry.GetLocalSize());
+        else PanAxis = FVector2D::ZeroVector;
         Invalidate(EInvalidateWidgetReason::Paint);
     }
 
@@ -515,11 +520,43 @@ public:
         return FReply::Unhandled();
     }
 
-    virtual FReply OnKeyDown(const FGeometry&, const FKeyEvent& Event) override
+    virtual FReply OnAnalogValueChanged(const FGeometry&, const FAnalogInputEvent& Event) override
     {
-        if (Event.GetKey() == EKeys::Escape || Event.GetKey() == EKeys::M)
+        if (!OwnerWidget.IsValid() || OwnerWidget->IsMinimap()) return FReply::Unhandled();
+        const float Value = FMath::Abs(Event.GetAnalogValue()) > 0.2f ? Event.GetAnalogValue() : 0.0f;
+        if (Event.GetKey() == EKeys::Gamepad_LeftX) { PanAxis.X = Value; return FReply::Handled(); }
+        if (Event.GetKey() == EKeys::Gamepad_LeftY) { PanAxis.Y = Value; return FReply::Handled(); }
+        return FReply::Unhandled();
+    }
+
+    virtual FReply OnKeyDown(const FGeometry& Geometry, const FKeyEvent& Event) override
+    {
+        if (!OwnerWidget.IsValid() || OwnerWidget->IsMinimap()) return FReply::Unhandled();
+        const FKey Key = Event.GetKey();
+        if (Key == EKeys::Escape || Key == EKeys::M || Key == EKeys::Gamepad_FaceButton_Right ||
+            Key == EKeys::Gamepad_Special_Left)
         {
-            if (OwnerWidget.IsValid()) OwnerWidget->RequestClose();
+            if (!Event.IsRepeat()) OwnerWidget->RequestClose();
+            return FReply::Handled();
+        }
+        if (Key == EKeys::Gamepad_RightShoulder || Key == EKeys::Gamepad_LeftShoulder)
+        {
+            OwnerWidget->ChangeZoom(Key == EKeys::Gamepad_RightShoulder ? 1.0f : -1.0f);
+            return FReply::Handled();
+        }
+        if (Key == EKeys::Gamepad_FaceButton_Left)
+        {
+            OwnerWidget->ResetViewToPlayer();
+            return FReply::Handled();
+        }
+        FVector2D Delta = FVector2D::ZeroVector;
+        if (Key == EKeys::Gamepad_DPad_Right || Key == EKeys::Right) Delta.X = -64.0f;
+        if (Key == EKeys::Gamepad_DPad_Left || Key == EKeys::Left) Delta.X = 64.0f;
+        if (Key == EKeys::Gamepad_DPad_Up || Key == EKeys::Up) Delta.Y = 64.0f;
+        if (Key == EKeys::Gamepad_DPad_Down || Key == EKeys::Down) Delta.Y = -64.0f;
+        if (!Delta.IsNearlyZero())
+        {
+            OwnerWidget->PanByPixels(Delta, Geometry.GetLocalSize());
             return FReply::Handled();
         }
         return FReply::Unhandled();
@@ -532,6 +569,7 @@ private:
     FSlateBrush* MapBrush = nullptr;
     bool bDragging = false;
     FVector2D LastMousePosition = FVector2D::ZeroVector;
+    FVector2D PanAxis = FVector2D::ZeroVector;
 };
 }
 
@@ -556,15 +594,17 @@ TSharedRef<SWidget> UTMOPMapWidget::RebuildWidget()
         return SNew(SOverlay)
             + SOverlay::Slot().HAlign(HAlign_Right).VAlign(VAlign_Bottom)
                 .Padding(FMargin(0.0f, 0.0f, 28.0f, 28.0f))
-            [ SNew(SBox).WidthOverride(290.0f).HeightOverride(290.0f)[ Canvas ] ];
-    return SNew(SOverlay)
+            [ SNew(SBox)
+                .WidthOverride_Lambda([this]() { return UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ? 165.0f : 290.0f; })
+                .HeightOverride_Lambda([this]() { return UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ? 165.0f : 290.0f; })[ Canvas ] ];
+    return TMOPFitLocalPanel(this, SNew(SOverlay)
         + SOverlay::Slot()[ Canvas ]
         + SOverlay::Slot().HAlign(HAlign_Right).VAlign(VAlign_Top).Padding(24.0f)
         [ SNew(STextBlock)
-            .Text(NSLOCTEXT("TMOP", "WorldMapHelp", "KARTA  •  mushjul: zoom  •  dra: panorera  •  M/Esc: stäng"))
+            .Text(NSLOCTEXT("TMOP", "WorldMapHelp", "KARTA  •  mushjul / LB/RB: zoom  •  dra / vänsterspak: panorera  •  M/Esc/B: stäng"))
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MapHint"),
                 FCoreStyle::GetDefaultFontStyle("Regular", 14)))
-            .ColorAndOpacity(FLinearColor::White) ];
+            .ColorAndOpacity(FLinearColor::White) ]);
 }
 
 void UTMOPMapWidget::SetMapVisible(const bool bVisible)

@@ -1,4 +1,5 @@
 #include "People/TMOPPersonRegistryDirector.h"
+#include "TMOPAutomaticSpeechScheduler.h"
 
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimSequenceBase.h"
@@ -313,31 +314,31 @@ void ATMOPPersonRegistryDirector::EvaluateAutomaticSpeech(
     for (TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
     {
         FPersonRuntime& Runtime = Pair.Value;
-        const FTMOPTimedSpeechLine* LatestDueLine = nullptr;
-        while (Runtime.Profile.AutomaticSpeech.IsValidIndex(
-            Runtime.NextAutomaticSpeechIndex))
+        if (Runtime.Profile.AutomaticSpeech.IsEmpty()) continue;
+
+        TArray<int32> ResolvedSeconds;
+        ResolvedSeconds.Reserve(Runtime.Profile.AutomaticSpeech.Num());
+        int32 PreviousLineSecond = INDEX_NONE;
+        for (const FTMOPTimedSpeechLine& Line : Runtime.Profile.AutomaticSpeech)
         {
-            const FTMOPTimedSpeechLine& Line =
-                Runtime.Profile.AutomaticSpeech[
-                    Runtime.NextAutomaticSpeechIndex];
             int32 LineSecond = INDEX_NONE;
-            if (!ResolveAutomaticSpeechSecond(
-                Runtime, Line, LineSecond))
-                break;
-            if (LineSecond > CurrentSecond) break;
-            if (LineSecond > PreviousSecond && !Line.Text.IsEmpty())
-                LatestDueLine = &Line;
-            Runtime.LastResolvedAutomaticSpeechSecond = LineSecond;
-            ++Runtime.NextAutomaticSpeechIndex;
+            ResolveAutomaticSpeechSecond(Line, PreviousLineSecond, LineSecond);
+            // Previous means the preceding source-array line's start time,
+            // regardless of whether it has already played or has empty text.
+            PreviousLineSecond = LineSecond;
+            ResolvedSeconds.Add(Line.Text.IsEmpty() ? INDEX_NONE : LineSecond);
         }
 
+        const int32 DueIndex = TMOPAutomaticSpeech::ConsumeDueLines(
+            ResolvedSeconds, Runtime.ConsumedAutomaticSpeechIndices,
+            CurrentSecond, PreviousSecond);
         ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
-        if (LatestDueLine == nullptr || !IsValid(Agent)) continue;
-        USoundBase* VoiceOver = LatestDueLine->VoiceOver.IsNull()
-            ? nullptr : LatestDueLine->VoiceOver.LoadSynchronous();
+        if (DueIndex == INDEX_NONE || !IsValid(Agent)) continue;
+        const FTMOPTimedSpeechLine& DueLine = Runtime.Profile.AutomaticSpeech[DueIndex];
+        USoundBase* VoiceOver = DueLine.VoiceOver.IsNull()
+            ? nullptr : DueLine.VoiceOver.LoadSynchronous();
         Agent->ShowAutomaticSpeech(
-            LatestDueLine->Text, VoiceOver,
-            LatestDueLine->DisplayDurationOverrideSeconds);
+            DueLine.Text, VoiceOver, DueLine.DisplayDurationOverrideSeconds);
     }
 }
 
@@ -511,8 +512,8 @@ void ATMOPPersonRegistryDirector::EvaluateMeetingDialogues(
 }
 
 bool ATMOPPersonRegistryDirector::ResolveAutomaticSpeechSecond(
-    const FPersonRuntime& Runtime,
     const FTMOPTimedSpeechLine& Line,
+    const int32 PreviousLineSecond,
     int32& OutSecond) const
 {
     OutSecond = INDEX_NONE;
@@ -523,10 +524,9 @@ bool ATMOPPersonRegistryDirector::ResolveAutomaticSpeechSecond(
             return true;
 
         case ETMOPSpeechTimingMode::RelativeToPreviousLine:
-            if (Runtime.LastResolvedAutomaticSpeechSecond == INDEX_NONE)
+            if (PreviousLineSecond == INDEX_NONE)
                 return false;
-            OutSecond = Runtime.LastResolvedAutomaticSpeechSecond +
-                Line.OffsetSeconds;
+            OutSecond = PreviousLineSecond + Line.OffsetSeconds;
             return true;
 
         case ETMOPSpeechTimingMode::RelativeToSharedEvent:
@@ -540,7 +540,8 @@ bool ATMOPPersonRegistryDirector::ResolveAutomaticSpeechSecond(
             if (!IsValid(Events) ||
                 !Events->TryGetEventRuntime(
                     Line.SharedEventId, EventRuntime) ||
-                !EventRuntime.bHasResolvedTime)
+                !EventRuntime.bHasResolvedTime ||
+                EventRuntime.State == ETMOPEventRuntimeState::Cancelled)
                 return false;
             OutSecond =
                 EventRuntime.ResolvedTime.ToSecondsFromMidnight() +

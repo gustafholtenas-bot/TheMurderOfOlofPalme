@@ -13,7 +13,8 @@
 ATMOPGrandFilmDirector::ATMOPGrandFilmDirector()
 {
     PrimaryActorTick.bCanEverTick = true;
-    PrimaryActorTick.TickInterval = 0.1f;
+    PrimaryActorTick.bTickEvenWhenPaused = true;
+    PrimaryActorTick.TickInterval = 0.0f;
     SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
     RootComponent = SceneRoot;
     FilmSoundComponent = CreateDefaultSubobject<UMediaSoundComponent>(

@@ -138,7 +138,7 @@ bool ATMOPSimulationDebugDirector::JumpToSimulationTime(const FTMOPTime TargetTi
         return false;
     }
 
-    const bool bWasRunning = Clock->IsClockRunning();
+    const bool bWasRunning = Clock->IsClockRunRequested();
     Clock->PauseClock();
     Clock->RestartLoop();
 

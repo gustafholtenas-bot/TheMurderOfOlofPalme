@@ -1,4 +1,5 @@
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Audio/TMOPVehicleAudioComponent.h"
@@ -81,7 +82,8 @@ void ATMOPVehicleBase::BeginPlay()
 void ATMOPVehicleBase::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if (!bShowNameLabel || !IsValid(NameLabel) ||
+    if (NameLabel) NameLabel->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
+    if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) || !bShowNameLabel || !IsValid(NameLabel) ||
         GetWorld() == nullptr)
         return;
     const APlayerController* PlayerController =

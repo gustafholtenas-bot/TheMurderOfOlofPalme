@@ -25,6 +25,16 @@ public:
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void Tick(float DeltaSeconds) override;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Local Multiplayer", meta=(ClampMin="1", ClampMax="4"))
+    int32 LocalPlayerCount = 1;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Local Multiplayer")
+    bool bKeyboardForPlayerOne = true;
+    /** Empty uses the intro destination. All players spawn within 6 m of this anchor. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Local Multiplayer")
+    FName PlayerStartAnchorId;
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Local Multiplayer")
+    FText StartupStatus;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Main Menu") bool bEnableMainMenu = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Main Menu") bool bEnableIntro = true;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Main Menu") TObjectPtr<ACameraActor> MainMenuBackgroundCamera;
@@ -104,6 +114,8 @@ private:
     int32 ActiveCameraShotIndex = INDEX_NONE;
     FName ActiveCardId = NAME_None;
     bool bInitialized = false;
+    bool bMenuInputApplied = false;
+    bool bNewGameRequested = false;
     bool bIntroActive = false;
     bool bWaitingForSettingsClose = false;
     FName ActiveIntroDestinationAnchorId = NAME_None;

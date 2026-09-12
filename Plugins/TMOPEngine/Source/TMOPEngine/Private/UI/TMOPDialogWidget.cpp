@@ -1,4 +1,5 @@
 #include "UI/TMOPDialogWidget.h"
+#include "UI/TMOPLocalPanel.h"
 
 #include "Engine/Texture2D.h"
 #include "EngineUtils.h"
@@ -50,7 +51,7 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
     RadioIconBrush.ImageSize = FVector2D(58.0f);
     RadioIconBrush.DrawAs = ESlateBrushDrawType::Image;
     RadioIconBrush.SetResourceObject(RadioIcon);
-    return SNew(SOverlay)
+    return TMOPFitLocalPanel(this, SNew(SOverlay)
         + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Bottom)
         .Padding(48.0f, 48.0f, 48.0f, 86.0f)
         [ SNew(SBox).WidthOverride(960.0f)
@@ -105,7 +106,7 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                       FCoreStyle::GetDefaultFontStyle("Regular", 17)))
                   .AutoWrapText(true).WrapTextAt(880.0f)
                   .Justification(ETextJustify::Center)
-                  .ColorAndOpacity(FLinearColor::White) ] ] ] ] ];
+                  .ColorAndOpacity(FLinearColor::White) ] ] ] ] ]);
 }
 
 void UTMOPDialogWidget::NativeTick(const FGeometry& MyGeometry, const float InDeltaTime)
@@ -193,7 +194,8 @@ FReply UTMOPDialogWidget::HandleCloseClicked()
 FReply UTMOPDialogWidget::NativeOnKeyDown(const FGeometry& InGeometry,
     const FKeyEvent& InKeyEvent)
 {
-    if (bDialogVisible && InKeyEvent.GetKey() == EKeys::Escape)
+    if (bDialogVisible && (InKeyEvent.GetKey() == EKeys::Escape ||
+        InKeyEvent.GetKey() == EKeys::Gamepad_FaceButton_Right))
         return HandleCloseClicked();
     return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
 }
