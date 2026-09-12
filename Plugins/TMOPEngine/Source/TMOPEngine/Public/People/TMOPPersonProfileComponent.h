@@ -33,7 +33,10 @@ public:
     bool LoadProfile();
 
     UFUNCTION(BlueprintPure, Category="TMOP|Person")
-    FText GetFullName() const { return Profile.FullName; }
+    FText GetFullName() const;
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Person")
+    FText GetInGameDisplayName() const;
 
     UFUNCTION(BlueprintPure, Category="TMOP|Person")
     float GetHeightCentimeters() const { return Profile.HeightCentimeters; }

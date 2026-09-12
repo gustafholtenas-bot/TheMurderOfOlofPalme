@@ -1,4 +1,5 @@
 #include "Agents/TMOPHistoricalAgent.h"
+#include "People/TMOPPersonNameLibrary.h"
 
 #include "AIController.h"
 #include "AI/TMOPHistoricalAIController.h"
@@ -1154,8 +1155,18 @@ bool ATMOPHistoricalAgent::TryThresholdStep(const FVector& Destination)
     return true;
 }
 
+FText ATMOPHistoricalAgent::GetInGameDisplayName() const
+{
+    const FText Name = IsValid(PersonProfile.Get()) && PersonProfile->bHasLoadedProfile
+        ? PersonProfile->GetInGameDisplayName()
+        : UTMOPPersonNameLibrary::FormatUnstructuredPersonName(DisplayName);
+    return Name.IsEmpty() ? NSLOCTEXT("TMOP", "UnnamedPersonDisplay", "Okänd person") : Name;
+}
+
 void ATMOPHistoricalAgent::RefreshNameLabel()
 {
+    // Keep the existing DisplayName property safe for Blueprint widgets during play too.
+    if (GetWorld() && GetWorld()->IsGameWorld()) DisplayName = GetInGameDisplayName();
     if (!IsValid(NameLabel))
     {
         return;

@@ -19,6 +19,7 @@ class UTMOPAnimationStateComponent;
 class UTMOPPlayerActionComponent;
 class UTMOPQuickInventoryWidget;
 class UTMOPPauseMenuWidget;
+class UTMOPLoopEndWidget;
 class ATMOPWorldItem;
 class UTMOPInteractionPromptWidget;
 class UTMOPDialogWidget;
@@ -37,6 +38,9 @@ class UTMOPPlayerMovementAudioComponent;
 class UTMOPMapComponent;
 class ACameraActor;
 class UTMOPMapWidget;
+class UTMOPAddressComponent;
+class UTMOPInspectableComponent;
+class UTMOPAddressDirectoryWidget;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
@@ -46,6 +50,7 @@ class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
 public:
     ATMOPPlayerCharacter();
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void PossessedBy(AController* NewController) override;
     virtual void OnRep_Controller() override;
     virtual void Tick(float DeltaSeconds) override;
@@ -56,6 +61,10 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<UCameraComponent> FollowCamera;
+
+    /** Camera currently used for first/third-person play and interaction traces. */
+    UFUNCTION(BlueprintPure, Category="TMOP|Player|Camera")
+    UCameraComponent* GetGameplayCamera() const;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<UTMOPAnimationStateComponent> AnimationState;
@@ -137,6 +146,19 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Pause")
     bool bPauseMenuOpen = false;
 
+    /** Optional visual class. Empty uses the built-in non-dismissible 23:45 menu. */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Loop End")
+    TSubclassOf<UTMOPLoopEndWidget> LoopEndWidgetClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Loop End")
+    bool bCreateLoopEndWidget = true;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Loop End")
+    TObjectPtr<UTMOPLoopEndWidget> LoopEndWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Loop End")
+    bool bLoopEndMenuOpen = false;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Interaction")
     TSubclassOf<UTMOPInteractionPromptWidget> InteractionPromptWidgetClass;
 
@@ -173,6 +195,28 @@ public:
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Agent Info")
     bool bAgentInfoChartOpen = false;
+
+    UPROPERTY(Transient, BlueprintReadOnly, Category="TMOP|Player|UI|Address")
+    TObjectPtr<UTMOPAddressDirectoryWidget> AddressDirectoryWidget;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Address")
+    bool bAddressDirectoryOpen = false;
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Address")
+    bool OpenAddressDirectory(UTMOPAddressComponent* Address);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Address")
+    void CloseAddressDirectory();
+
+    /** Shared reading window for addresses and freestanding information. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Information")
+    bool OpenInformation(UTMOPInspectableComponent* Inspection);
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Information")
+    void CloseInformation() { CloseAddressDirectory(); }
+
+    UFUNCTION(BlueprintPure, Category="TMOP|Player|UI|Information")
+    bool IsInformationOpen() const { return bAddressDirectoryOpen; }
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|UI|Newspaper")
     TSubclassOf<UTMOPNewspaperReaderWidget> NewspaperReaderWidgetClass;
@@ -441,6 +485,15 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Pause")
     void TogglePauseMenu();
 
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Loop End")
+    void ReplayLoopFromBeginning();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Loop End")
+    void ReturnToMainMenuFromLoopEnd();
+
+    UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Loop End")
+    void QuitFromLoopEnd();
+
     /**
      * Hides the normal clock/HUD and minimap for a named reason. Multiple
      * systems may hide it simultaneously without one system revealing it too
@@ -524,6 +577,7 @@ private:
     void FinishQuickInventory(bool bConfirm);
     void UpdateQuickInventoryPointer();
     void UpdateInteractionPrompt();
+    AActor* FindInteractionTargetForInformation(AActor* InformationTarget) const;
     void SetSprinting(bool bEnabled, bool bExtraSprint = false);
     void BeginDialogCloseUp(ATMOPHistoricalAgent* HistoricalAgent);
     void UpdateDialogCloseUp(float DeltaSeconds);
@@ -531,6 +585,12 @@ private:
 
     UFUNCTION()
     void HandleItemMenuRequested(UTMOPItemDefinition* Item);
+
+    UFUNCTION()
+    void HandleLoopEnded(int32 FinishedLoopNumber, FTMOPTime EndTime);
+
+    void OpenLoopEndMenu();
+    void CloseLoopEndMenu();
 
     bool bRightShoulderCamera = true;
     bool bInputMappingContextAdded = false;
@@ -544,6 +604,8 @@ private:
     bool bNewspaperPausedSimulation = false;
     bool bDropFallbackHeld = false;
     bool bInteractFallbackHeld = false;
+    uint64 AddressDirectoryClosedFrame = MAX_uint64;
+    TWeakObjectPtr<UTMOPInspectableComponent> ActiveInspection;
     TSet<FName> GameplayHUDHiddenReasons;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
     UPROPERTY(Transient)

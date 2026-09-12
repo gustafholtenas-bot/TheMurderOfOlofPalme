@@ -138,6 +138,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Identity")
     FText DisplayName;
 
+    /** Public name for gameplay widgets; surnames are shown as initials. */
+    UFUNCTION(BlueprintPure, Category="TMOP|Agent|Identity")
+    FText GetInGameDisplayName() const;
+
     /** Category loaded from DT_TMOP_People and used by the name-label style. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Identity")
     FName PersonCategoryId = NAME_None;

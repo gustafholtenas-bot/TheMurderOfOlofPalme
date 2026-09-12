@@ -35,8 +35,13 @@
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPQuickInventoryWidget.h"
 #include "UI/TMOPPauseMenuWidget.h"
+#include "UI/TMOPLoopEndWidget.h"
 #include "UI/TMOPInteractionPromptWidget.h"
 #include "UI/TMOPDialogWidget.h"
+#include "UI/TMOPAddressDirectoryWidget.h"
+#include "Addresses/TMOPAddressComponent.h"
+#include "World/TMOPInspectableComponent.h"
+#include "EngineGlobals.h"
 #include "UI/TMOPAgentInfoChartWidget.h"
 #include "UI/TMOPNewspaperReaderWidget.h"
 #include "UI/TMOPMapComponent.h"
@@ -45,6 +50,8 @@
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
@@ -103,6 +110,20 @@ void ATMOPPlayerCharacter::PossessedBy(AController* NewController)
     InitializePlayerInterface();
 }
 
+void ATMOPPlayerCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+        Clock->OnLoopEnded.RemoveDynamic(this, &ATMOPPlayerCharacter::HandleLoopEnded);
+    if (IsValid(LoopEndWidget.Get())) LoopEndWidget->RemoveFromParent();
+    LoopEndWidget = nullptr;
+    bLoopEndMenuOpen = false;
+    CloseAddressDirectory();
+    if (IsValid(AddressDirectoryWidget.Get())) AddressDirectoryWidget->RemoveFromParent();
+    AddressDirectoryWidget = nullptr;
+    Super::EndPlay(EndPlayReason);
+}
+
 void ATMOPPlayerCharacter::OnRep_Controller()
 {
     Super::OnRep_Controller();
@@ -117,6 +138,12 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
     if (IsValid(Inventory.Get()))
         Inventory->OnItemMenuRequested.AddUniqueDynamic(
             this, &ATMOPPlayerCharacter::HandleItemMenuRequested);
+
+    UTMOPClockSubsystem* ScenarioClock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (IsValid(ScenarioClock))
+        ScenarioClock->OnLoopEnded.AddUniqueDynamic(
+            this, &ATMOPPlayerCharacter::HandleLoopEnded);
 
     if (!bInputMappingContextAdded)
     {
@@ -155,6 +182,19 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
             PauseMenuWidget->InitializePauseMenu(PlayerController, this);
             PauseMenuWidget->AddToViewport(100);
             PauseMenuWidget->SetMenuVisible(false);
+        }
+    }
+
+    if (bCreateLoopEndWidget && !IsValid(LoopEndWidget.Get()))
+    {
+        TSubclassOf<UTMOPLoopEndWidget> WidgetClass = LoopEndWidgetClass;
+        if (!WidgetClass) WidgetClass = UTMOPLoopEndWidget::StaticClass();
+        LoopEndWidget = CreateWidget<UTMOPLoopEndWidget>(PlayerController, WidgetClass);
+        if (IsValid(LoopEndWidget.Get()))
+        {
+            LoopEndWidget->InitializeLoopEnd(this);
+            LoopEndWidget->AddToViewport(2000);
+            LoopEndWidget->SetMenuVisible(false);
         }
     }
 
@@ -252,6 +292,7 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         bInputMappingContextAdded &&
         (!bCreateQuickInventoryWidget || IsValid(QuickInventoryWidget.Get())) &&
         (!bCreatePauseMenuWidget || IsValid(PauseMenuWidget.Get())) &&
+        (!bCreateLoopEndWidget || IsValid(LoopEndWidget.Get())) &&
         (!bCreateAgentInfoChartWidget || IsValid(AgentInfoChartWidget.Get())) &&
         (!bCreateNewspaperReaderWidget ||
             IsValid(NewspaperReaderWidget.Get()));
@@ -259,6 +300,10 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
     // A menu/cinematic may have requested hidden HUD before the widgets were
     // constructed. Apply the current effective state to newly created widgets.
     UpdateGameplayHUDVisibility();
+
+    // Also covers loading/possessing a player when the clock is already at 23:45.
+    if (IsValid(ScenarioClock) && ScenarioClock->IsAwaitingLoopDecision())
+        OpenLoopEndMenu();
 }
 
 void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -343,6 +388,7 @@ void ATMOPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ATMOPPlayerCharacter::InputMove(const FInputActionValue& Value)
 {
+    if (bAddressDirectoryOpen) return;
     if (PlayerActions->bMovementBlocked || InventoryInput->bRadialMenuOpen) return;
     const FVector2D Axis = Value.Get<FVector2D>();
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
@@ -369,17 +415,21 @@ void ATMOPPlayerCharacter::InputMoveCompleted()
 
 void ATMOPPlayerCharacter::InputLook(const FInputActionValue& Value)
 {
+    if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     const FVector2D Axis = Value.Get<FVector2D>();
-    AddControllerYawInput(Axis.X * LookYawSensitivity);
-    AddControllerPitchInput(Axis.Y * LookPitchSensitivity * (bInvertLookY ? -1.0f : 1.0f));
+    const float ZoomSensitivity = IsValid(CameraPerspective.Get())
+        ? CameraPerspective->GetLookSensitivityScale() : 1.0f;
+    AddControllerYawInput(Axis.X * LookYawSensitivity * ZoomSensitivity);
+    AddControllerPitchInput(Axis.Y * LookPitchSensitivity * ZoomSensitivity * (bInvertLookY ? -1.0f : 1.0f));
 }
 
-void ATMOPPlayerCharacter::InputJumpStarted() { Jump(); }
+void ATMOPPlayerCharacter::InputJumpStarted() { if (!bAddressDirectoryOpen) Jump(); }
 void ATMOPPlayerCharacter::InputJumpEnded() { StopJumping(); }
 
 void ATMOPPlayerCharacter::InputSprintStarted()
 {
+    if (bAddressDirectoryOpen) return;
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsDrivingVehicle())
     {
         VehicleSession->VehicleHighSpeedMode(true);
@@ -413,6 +463,14 @@ void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled, const bool bExtraSp
 
 void ATMOPPlayerCharacter::InputInteract()
 {
+    // A UI key can also reach the direct-key fallback during this frame.
+    if (AddressDirectoryClosedFrame == GFrameCounter || bPauseMenuOpen ||
+        bWorldMapOpen || !bGameplayHUDVisible) return;
+    if (bAddressDirectoryOpen)
+    {
+        CloseAddressDirectory();
+        return;
+    }
     if (bNewspaperOpen)
     {
         CloseNewspaper();
@@ -434,10 +492,23 @@ void ATMOPPlayerCharacter::InputInteract()
         VehicleSession->ExitVehicle();
         return;
     }
-    AActor* Target = IsValid(CurrentInteractionTarget.Get())
-        ? CurrentInteractionTarget.Get() : FindInteractionTarget();
+    AActor* InformationTarget = FindInformationTarget();
+    AActor* Target = FindInteractionTargetForInformation(InformationTarget);
+    // Use the same readable point as the hover marker, even when another target is nearby.
+    if (UTMOPInspectableComponent* Inspection = IsValid(InformationTarget)
+        ? InformationTarget->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
+    {
+        OpenInformation(Inspection); // Revalidates range and visibility on the press.
+        return;
+    }
+    if (UTMOPInspectableComponent* Inspection = IsValid(Target)
+        ? Target->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
+    {
+        OpenInformation(Inspection);
+        return;
+    }
     if (ATMOPHistoricalAgent* LockedAgent =
-        Cast<ATMOPHistoricalAgent>(CurrentInformationTarget.Get()))
+        Cast<ATMOPHistoricalAgent>(InformationTarget))
         if (FVector::DistSquared(GetActorLocation(), LockedAgent->GetActorLocation()) <=
             FMath::Square(InteractionDistance))
             Target = LockedAgent;
@@ -479,6 +550,7 @@ void ATMOPPlayerCharacter::InputDropEquippedItem()
 
 bool ATMOPPlayerCharacter::DropEquippedItem()
 {
+    if (bAddressDirectoryOpen) return false;
     if (bPauseMenuOpen || InventoryInput->bRadialMenuOpen || !IsValid(Inventory.Get()))
         return false;
     UTMOPItemDefinition* Item = Inventory->EquippedItem.Get();
@@ -511,6 +583,7 @@ bool ATMOPPlayerCharacter::DropEquippedItem()
 
 void ATMOPPlayerCharacter::InputPrimaryAction()
 {
+    if (bAddressDirectoryOpen) return;
     if (bNewspaperOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Primary,
@@ -520,6 +593,7 @@ void ATMOPPlayerCharacter::InputPrimaryAction()
 
 void ATMOPPlayerCharacter::InputSecondaryActionStarted()
 {
+    if (bAddressDirectoryOpen) return;
     if (bNewspaperOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (InventoryInput->SendEquippedItemInput(ETMOPItemInput::Secondary,
@@ -536,6 +610,11 @@ void ATMOPPlayerCharacter::InputSecondaryActionEnded()
 
 void ATMOPPlayerCharacter::InputCancel()
 {
+    if (bAddressDirectoryOpen)
+    {
+        CloseAddressDirectory();
+        return;
+    }
     if (bPauseMenuOpen)
     {
         SetPauseMenuOpen(false);
@@ -571,6 +650,7 @@ void ATMOPPlayerCharacter::InputCancel()
 
 void ATMOPPlayerCharacter::InputToggleSquat()
 {
+    if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (bIsCrouched)
     {
@@ -587,6 +667,7 @@ void ATMOPPlayerCharacter::InputToggleSquat()
 
 void ATMOPPlayerCharacter::InputKick()
 {
+    if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (!Inventory->HasEquippedItem())
         PlayerActions->StartAction(ETMOPPlayerAction::Kick, FindInteractionTarget(), 0.8f, true);
@@ -594,12 +675,15 @@ void ATMOPPlayerCharacter::InputKick()
 
 void ATMOPPlayerCharacter::InputShoulderSwap()
 {
+    if (bAddressDirectoryOpen) return;
     if (InventoryInput->bRadialMenuOpen) return;
     bRightShoulderCamera = !bRightShoulderCamera;
 }
 
 void ATMOPPlayerCharacter::InputTogglePauseMenu()
 {
+    if (AddressDirectoryClosedFrame == GFrameCounter) return;
+    if (bAddressDirectoryOpen) { CloseAddressDirectory(); return; }
     TogglePauseMenu();
 }
 
@@ -625,15 +709,18 @@ void ATMOPPlayerCharacter::InputVehicleHandbrakeEnded()
 
 void ATMOPPlayerCharacter::TogglePauseMenu()
 {
+    if (bLoopEndMenuOpen) return;
     SetPauseMenuOpen(!bPauseMenuOpen);
 }
 
 void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 {
+    if (bOpen && bLoopEndMenuOpen) return;
     if (bPauseMenuOpen == bOpen || !IsValid(PauseMenuWidget.Get())) return;
     if (bOpen && bWorldMapOpen) CloseWorldMap();
     if (bOpen && bNewspaperOpen) CloseNewspaper();
     if (bOpen && bDialogOpen) ClosePersonDialog();
+    if (bOpen && bAddressDirectoryOpen) CloseAddressDirectory();
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
@@ -669,6 +756,90 @@ void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
     }
 }
 
+void ATMOPPlayerCharacter::HandleLoopEnded(
+    const int32 FinishedLoopNumber, const FTMOPTime EndTime)
+{
+    UE_LOG(LogTemp, Log, TEXT("TMOP loop %d ended at %s; opening choice menu."),
+        FinishedLoopNumber, *EndTime.ToDisplayString());
+    OpenLoopEndMenu();
+}
+
+void ATMOPPlayerCharacter::OpenLoopEndMenu()
+{
+    if (bLoopEndMenuOpen || !IsValid(LoopEndWidget.Get())) return;
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    if (!IsValid(PC) || !PC->IsLocalController()) return;
+
+    if (bPauseMenuOpen) SetPauseMenuOpen(false);
+    if (bWorldMapOpen) CloseWorldMap();
+    if (bNewspaperOpen) CloseNewspaper();
+    if (bDialogOpen) ClosePersonDialog();
+    if (bAgentInfoChartOpen) CloseAgentInfoChart();
+    if (bAddressDirectoryOpen) CloseAddressDirectory();
+    if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
+    if (IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
+    GetCharacterMovement()->StopMovementImmediately();
+    SetSprinting(false, false);
+
+    bLoopEndMenuOpen = true;
+    SetGameplayHUDHidden(TEXT("LoopEnd"), true);
+    LoopEndWidget->SetMenuVisible(true);
+    PC->SetPause(true);
+    PC->bShowMouseCursor = true;
+    PC->SetIgnoreMoveInput(true);
+    PC->SetIgnoreLookInput(true);
+    FInputModeUIOnly Mode;
+    Mode.SetWidgetToFocus(LoopEndWidget->TakeWidget());
+    Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+    PC->SetInputMode(Mode);
+    LoopEndWidget->SetUserFocus(PC);
+}
+
+void ATMOPPlayerCharacter::CloseLoopEndMenu()
+{
+    if (!bLoopEndMenuOpen) return;
+    bLoopEndMenuOpen = false;
+    if (IsValid(LoopEndWidget.Get())) LoopEndWidget->SetMenuVisible(false);
+    SetGameplayHUDHidden(TEXT("LoopEnd"), false);
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->SetPause(false);
+        PC->bShowMouseCursor = false;
+        PC->SetIgnoreMoveInput(false);
+        PC->SetIgnoreLookInput(false);
+        PC->SetInputMode(FInputModeGameOnly());
+    }
+}
+
+void ATMOPPlayerCharacter::ReplayLoopFromBeginning()
+{
+    if (!bLoopEndMenuOpen) return;
+    UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    CloseLoopEndMenu();
+    if (IsValid(Clock))
+    {
+        Clock->RestartLoop();
+        Clock->StartClock();
+    }
+}
+
+void ATMOPPlayerCharacter::ReturnToMainMenuFromLoopEnd()
+{
+    if (!bLoopEndMenuOpen || GetWorld() == nullptr) return;
+    const FString CurrentLevel = UGameplayStatics::GetCurrentLevelName(this, true);
+    if (CurrentLevel.IsEmpty()) return;
+    CloseLoopEndMenu();
+    UGameplayStatics::OpenLevel(this, FName(*CurrentLevel));
+}
+
+void ATMOPPlayerCharacter::QuitFromLoopEnd()
+{
+    if (!bLoopEndMenuOpen) return;
+    UKismetSystemLibrary::QuitGame(this, Cast<APlayerController>(Controller),
+        EQuitPreference::Quit, false);
+}
+
 void ATMOPPlayerCharacter::SetGameplayHUDHidden(
     const FName Reason, const bool bShouldHide)
 {
@@ -688,6 +859,8 @@ void ATMOPPlayerCharacter::UpdateGameplayHUDVisibility()
     const bool bShouldBeVisible = GameplayHUDHiddenReasons.IsEmpty();
     const bool bVisibilityChanged = bGameplayHUDVisible != bShouldBeVisible;
     bGameplayHUDVisible = bShouldBeVisible;
+    if (!bGameplayHUDVisible && IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
+    if (!bGameplayHUDVisible && bAddressDirectoryOpen) CloseAddressDirectory();
 
     if (IsValid(MinimapWidget.Get()))
     {
@@ -729,6 +902,7 @@ bool ATMOPPlayerCharacter::OpenWorldMap()
     if (bWorldMapOpen || bPauseMenuOpen || bNewspaperOpen ||
         !IsValid(WorldMapWidget.Get())) return false;
     if (bDialogOpen) ClosePersonDialog();
+    if (bAddressDirectoryOpen) CloseAddressDirectory();
     if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
     if (IsValid(MinimapWidget.Get())) MinimapWidget->SetMapVisible(false);
     WorldMapWidget->ResetViewToPlayer();
@@ -790,6 +964,7 @@ bool ATMOPPlayerCharacter::DiscoverEvidence(const FName EvidenceId)
 bool ATMOPPlayerCharacter::OpenNewspaper(
     UTMOPNewspaperItemDefinition* Newspaper)
 {
+    if (bAddressDirectoryOpen) return false;
     if (!IsValid(Newspaper) || Newspaper->Pages.IsEmpty() ||
         bPauseMenuOpen || !IsValid(NewspaperReaderWidget.Get()))
         return false;
@@ -861,6 +1036,11 @@ void ATMOPPlayerCharacter::CloseNewspaper()
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if (bAddressDirectoryOpen && (!ActiveInspection.IsValid() ||
+        !ActiveInspection->HasReadableContent() ||
+        FVector::DistSquared(GetActorLocation(), ActiveInspection->GetInteractionLocation()) >
+            FMath::Square(InteractionDistance + 100.0f)))
+        CloseAddressDirectory();
     if (bDialogOpen) UpdateDialogCloseUp(DeltaSeconds);
     if (!bPlayerInterfaceInitialized) InitializePlayerInterface();
     if (bDialogOpen)
@@ -871,7 +1051,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
                 FMath::Square(DialogMaximumDistanceCm))
             ClosePersonDialog();
     }
-    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectSprintKeyFallback)
+    if (!bAddressDirectoryOpen && !bNewspaperOpen && !bWorldMapOpen && bUseDirectSprintKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bSprintHeld = IsValid(PC) && PC->IsInputKeyDown(SprintFallbackKey);
@@ -889,7 +1069,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             SetSprinting(bSprintHeld, bExtraHeld);
         }
     }
-    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectQuickInventoryKeyFallback)
+    if (!bAddressDirectoryOpen && !bNewspaperOpen && !bWorldMapOpen && bUseDirectQuickInventoryKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -914,7 +1094,11 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             if (bKeyHeld)
             {
                 if (InventoryInput->bRadialMenuOpen) FinishQuickInventory(false);
-                else TogglePauseMenu();
+                else if (AddressDirectoryClosedFrame != GFrameCounter)
+                {
+                    if (bAddressDirectoryOpen) CloseAddressDirectory();
+                    else TogglePauseMenu();
+                }
             }
         }
     }
@@ -928,7 +1112,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
                 ToggleWorldMap();
         }
     }
-    if (!bNewspaperOpen && !bWorldMapOpen && bUseDirectDropKeyFallback)
+    if (!bAddressDirectoryOpen && !bNewspaperOpen && !bWorldMapOpen && bUseDirectDropKeyFallback)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) && PC->IsInputKeyDown(DropItemFallbackKey);
@@ -966,7 +1150,8 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
     FText TargetDetails;
     CurrentInteractionTarget = nullptr;
     CurrentInformationTarget = nullptr;
-    if (!bPauseMenuOpen && !bWorldMapOpen && !bNewspaperOpen && !bDialogOpen &&
+    if (bGameplayHUDVisible && !bAddressDirectoryOpen && !bAgentInfoChartOpen &&
+        !bPauseMenuOpen && !bWorldMapOpen && !bNewspaperOpen && !bDialogOpen &&
         !InventoryInput->bRadialMenuOpen &&
         (!IsValid(VehicleSession.Get()) || !VehicleSession->IsInVehicle()))
     {
@@ -978,8 +1163,7 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
         if (const ATMOPHistoricalAgent* Agent =
             Cast<ATMOPHistoricalAgent>(InformationTarget))
         {
-            TargetTitle = !Agent->DisplayName.IsEmpty()
-                ? Agent->DisplayName : NSLOCTEXT("TMOP", "UnknownTargetPerson", "Okänd person");
+            TargetTitle = Agent->GetInGameDisplayName();
             TargetDetails = FText::FromString(FString::Printf(
                 TEXT("Person  ·  %.1f m"), DistanceMetres));
         }
@@ -1004,6 +1188,12 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             TargetDetails = FText::FromString(FString::Printf(
                 TEXT("Föremål  ·  %.1f m"), DistanceMetres));
         }
+        else if (const UTMOPInspectableComponent* Inspection = IsValid(InformationTarget)
+            ? InformationTarget->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
+        {
+            TargetTitle = Inspection->GetInspectionTitle();
+            TargetDetails = Inspection->GetInspectionCategory();
+        }
 
         if (IsValid(InformationTarget))
         {
@@ -1012,6 +1202,8 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             InformationTarget->GetActorBounds(
                 false, BoundsOrigin, BoundsExtent, true);
             FVector MarkerWorldLocation = BoundsOrigin;
+            if (const auto* Inspection = InformationTarget->FindComponentByClass<UTMOPInspectableComponent>())
+                MarkerWorldLocation = Inspection->GetInteractionLocation();
             if (InformationTarget->IsA<ATMOPHistoricalAgent>())
                 MarkerWorldLocation.Z += BoundsExtent.Z *
                     PersonTargetMarkerHeightFraction;
@@ -1053,19 +1245,28 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
                 FVector2D::ZeroVector);
         }
 
-        AActor* Target = FindInteractionTarget();
+        AActor* Target = FindInteractionTargetForInformation(InformationTarget);
+        if (const auto* Inspection = IsValid(InformationTarget)
+            ? InformationTarget->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
+        {
+            Target = Inspection->HasReadableContent() && FVector::DistSquared(
+                GetActorLocation(), Inspection->GetInteractionLocation()) <= FMath::Square(InteractionDistance)
+                ? InformationTarget : nullptr;
+            if (!Target) TargetDetails = NSLOCTEXT("TMOP", "AddressTooFar", "Gå närmare för att läsa");
+        }
         CurrentInteractionTarget = Target;
         if (const ATMOPHistoricalAgent* Agent =
             Cast<ATMOPHistoricalAgent>(Target))
         {
-            const FText Name = !Agent->DisplayName.IsEmpty()
-                ? Agent->DisplayName
-                : FText::FromString(TEXT("personen"));
+            const FText Name = Agent->GetInGameDisplayName();
             Prompt = FText::Format(
                 NSLOCTEXT("TMOP", "InspectPerson", "Visa personakt: {0}"), Name);
         }
         else if (Cast<ATMOPVehicleBase>(Target))
             Prompt = NSLOCTEXT("TMOP", "EnterTargetVehicle", "Hoppa in");
+        else if (const auto* Inspection = IsValid(Target)
+            ? Target->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
+            Prompt = Inspection->GetInspectionAction();
         else if (IsValid(Target) && Target->GetClass()->ImplementsInterface(
             UTMOPInteractable::StaticClass()))
             Prompt = ITMOPInteractable::Execute_GetInteractionText(Target);
@@ -1079,11 +1280,76 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
     InteractionPromptWidget->SetPromptText(Prompt);
 }
 
+bool ATMOPPlayerCharacter::OpenAddressDirectory(UTMOPAddressComponent* Address)
+{
+    return OpenInformation(Address);
+}
+
+bool ATMOPPlayerCharacter::OpenInformation(UTMOPInspectableComponent* Inspection)
+{
+    APlayerController* PC = Cast<APlayerController>(Controller);
+    UCameraComponent* Camera = GetGameplayCamera();
+    if (!IsValid(PC) || !PC->IsLocalController() || !IsValid(Inspection) ||
+        !Inspection->HasReadableContent() || !IsValid(Camera) ||
+        bAddressDirectoryOpen || bPauseMenuOpen || bWorldMapOpen || bNewspaperOpen ||
+        bDialogOpen || bAgentInfoChartOpen || !bGameplayHUDVisible ||
+        (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle()) ||
+        FVector::DistSquared(GetActorLocation(), Inspection->GetInteractionLocation()) >
+            FMath::Square(InteractionDistance) ||
+        !Inspection->IsVisibleFrom(Camera->GetComponentLocation(), this)) return false;
+
+    if (!IsValid(AddressDirectoryWidget.Get()))
+    {
+        AddressDirectoryWidget = CreateWidget<UTMOPAddressDirectoryWidget>(
+            PC, UTMOPAddressDirectoryWidget::StaticClass());
+        if (!IsValid(AddressDirectoryWidget.Get())) return false;
+        AddressDirectoryWidget->InitializeDirectory(this);
+        AddressDirectoryWidget->AddToViewport(88);
+    }
+    if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
+    ActiveInspection = Inspection;
+    bAddressDirectoryOpen = true;
+    if (IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
+    AddressDirectoryWidget->ShowInformation(Inspection->GetInspectionTitle(), Inspection->GetInspectionText(),
+        Inspection->GetInspectionCategory(), Inspection->GetInspectionSource());
+    GetCharacterMovement()->StopMovementImmediately();
+    SetSprinting(false, false);
+    PC->bShowMouseCursor = true;
+    PC->SetIgnoreMoveInput(true);
+    PC->SetIgnoreLookInput(true);
+    FInputModeGameAndUI Mode;
+    Mode.SetWidgetToFocus(AddressDirectoryWidget->TakeWidget());
+    Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+    PC->SetInputMode(Mode);
+    UpdateInteractionPrompt();
+    return true;
+}
+
+void ATMOPPlayerCharacter::CloseAddressDirectory()
+{
+    if (!bAddressDirectoryOpen) return;
+    bAddressDirectoryOpen = false;
+    ActiveInspection.Reset();
+    AddressDirectoryClosedFrame = GFrameCounter;
+    if (IsValid(AddressDirectoryWidget.Get())) AddressDirectoryWidget->HideDirectory();
+    if (APlayerController* PC = Cast<APlayerController>(Controller))
+    {
+        PC->bShowMouseCursor = false;
+        PC->SetIgnoreMoveInput(false);
+        PC->SetIgnoreLookInput(false);
+        PC->SetInputMode(FInputModeGameOnly());
+        // Consume keys used by the UI so direct fallback polling cannot reopen it.
+        bInteractFallbackHeld = PC->IsInputKeyDown(InteractFallbackKey);
+        bPauseFallbackHeld = PC->IsInputKeyDown(PauseMenuFallbackKey) ||
+            PC->IsInputKeyDown(PauseMenuGamepadFallbackKey);
+    }
+}
+
 bool ATMOPPlayerCharacter::OpenPersonDialog(
     ATMOPHistoricalAgent* HistoricalAgent)
 {
     if (!IsValid(HistoricalAgent) || !IsValid(DialogWidget.Get()) ||
-        GetWorld() == nullptr || bPauseMenuOpen)
+        GetWorld() == nullptr || bPauseMenuOpen || bAddressDirectoryOpen)
         return false;
 
     const FName EntityId = IsValid(HistoricalAgent->EntityIdentity.Get())
@@ -1109,11 +1375,7 @@ bool ATMOPPlayerCharacter::OpenPersonDialog(
         Dialog = NSLOCTEXT(
             "TMOP", "EmptyPersonDialog", "Jag har inget att säga just nu.");
 
-    FText Speaker = HistoricalAgent->DisplayName;
-    if (Speaker.IsEmpty() && !EntityId.IsNone())
-        Speaker = FText::FromName(EntityId);
-    if (Speaker.IsEmpty())
-        Speaker = NSLOCTEXT("TMOP", "UnknownDialogSpeaker", "Okänd person");
+    const FText Speaker = HistoricalAgent->GetInGameDisplayName();
 
     ActiveDialogAgent = HistoricalAgent;
     bDialogOpen = true;
@@ -1161,7 +1423,7 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
     ATMOPHistoricalAgent* HistoricalAgent)
 {
     if (!IsValid(HistoricalAgent) || !IsValid(AgentInfoChartWidget.Get()) ||
-        bPauseMenuOpen || bNewspaperOpen)
+        bPauseMenuOpen || bNewspaperOpen || bAddressDirectoryOpen)
         return false;
 
     UTMOPPersonProfileComponent* ProfileComponent =
@@ -1345,6 +1607,7 @@ void ATMOPPlayerCharacter::EndDialogCloseUp()
 
 void ATMOPPlayerCharacter::InputQuickInventoryStarted()
 {
+    if (bAddressDirectoryOpen) return;
     if (bPauseMenuOpen || !InventoryInput->OpenRadialMenu()) return;
     SetSprinting(false, false);
     GetCharacterMovement()->StopMovementImmediately();
@@ -1407,20 +1670,40 @@ void ATMOPPlayerCharacter::UpdateQuickInventoryPointer()
 
 void ATMOPPlayerCharacter::InputInventoryNavigate(const FInputActionValue& Value)
 {
+    if (bAddressDirectoryOpen) return;
     InventoryInput->UpdateRadialSelection(Value.Get<FVector2D>());
 }
 
 void ATMOPPlayerCharacter::InputInventoryCycle(const FInputActionValue& Value)
 {
+    if (bAddressDirectoryOpen) return;
     const float Direction = Value.Get<float>();
     if (!FMath::IsNearlyZero(Direction)) InventoryInput->CycleInventory(Direction > 0.0f ? 1 : -1);
 }
 
+UCameraComponent* ATMOPPlayerCharacter::GetGameplayCamera() const
+{
+    if (IsValid(CameraPerspective.Get())) return CameraPerspective->GetActivePerspectiveCamera();
+    return IsValid(FollowCamera.Get()) && FollowCamera->IsActive() ? FollowCamera.Get() : nullptr;
+}
+
 AActor* ATMOPPlayerCharacter::FindInteractionTarget() const
 {
-    if (!IsValid(FollowCamera) || GetWorld() == nullptr) return nullptr;
-    const FVector Start = FollowCamera->GetComponentLocation();
-    const FVector Forward = FollowCamera->GetForwardVector();
+    return FindInteractionTargetForInformation(FindInformationTarget());
+}
+
+AActor* ATMOPPlayerCharacter::FindInteractionTargetForInformation(AActor* InformationTarget) const
+{
+    UCameraComponent* Camera = GetGameplayCamera();
+    if (!IsValid(Camera) || GetWorld() == nullptr) return nullptr;
+    // Readable-point interaction range is measured from the player, not the trailing camera.
+    if (AActor* Hovered = InformationTarget)
+        if (const auto* Inspection = Hovered->FindComponentByClass<UTMOPInspectableComponent>())
+            return Inspection->HasReadableContent() && FVector::DistSquared(GetActorLocation(),
+                Inspection->GetInteractionLocation()) <= FMath::Square(InteractionDistance)
+                ? Hovered : nullptr;
+    const FVector Start = Camera->GetComponentLocation();
+    const FVector Forward = Camera->GetForwardVector();
     FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInteraction), false, this);
     FCollisionObjectQueryParams ObjectTypes;
     ObjectTypes.AddObjectTypesToQuery(ECC_Pawn);
@@ -1509,10 +1792,11 @@ AActor* ATMOPPlayerCharacter::FindInteractionTarget() const
 
 AActor* ATMOPPlayerCharacter::FindInformationTarget() const
 {
-    if (!IsValid(FollowCamera) || GetWorld() == nullptr) return nullptr;
+    UCameraComponent* Camera = GetGameplayCamera();
+    if (!IsValid(Camera) || GetWorld() == nullptr) return nullptr;
 
-    const FVector CameraLocation = FollowCamera->GetComponentLocation();
-    const FVector CameraForward = FollowCamera->GetForwardVector();
+    const FVector CameraLocation = Camera->GetComponentLocation();
+    const FVector CameraForward = Camera->GetForwardVector();
     const FVector CharacterLocation = GetActorLocation();
     const FVector CharacterForward = GetActorForwardVector();
     FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInformationTarget),
@@ -1547,8 +1831,11 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
     {
         if (!IsValid(Candidate) || Candidate == this) continue;
         const bool bSupportedTarget = Candidate->IsA<ATMOPHistoricalAgent>() ||
-            Candidate->IsA<ATMOPVehicleBase>() || Candidate->IsA<ATMOPWorldItem>();
+            Candidate->IsA<ATMOPVehicleBase>() || Candidate->IsA<ATMOPWorldItem>() ||
+            Candidate->FindComponentByClass<UTMOPInspectableComponent>();
         if (!bSupportedTarget) continue;
+        const auto* Inspection = Candidate->FindComponentByClass<UTMOPInspectableComponent>();
+        if (Inspection && !Inspection->HasReadableContent()) continue;
 
         FVector BoundsOrigin;
         FVector BoundsExtent;
@@ -1556,6 +1843,7 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
         FVector AimPoint = BoundsOrigin;
         if (Candidate->IsA<ATMOPHistoricalAgent>())
             AimPoint.Z += BoundsExtent.Z * 0.35f;
+        if (Inspection) AimPoint = Inspection->GetInteractionLocation();
 
         const FVector CameraToTarget = AimPoint - CameraLocation;
         const float CameraDistance = CameraToTarget.Size();
@@ -1565,9 +1853,10 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
         FHitResult VisibilityHit;
         FCollisionQueryParams VisibilityParams(
             SCENE_QUERY_STAT(TMOPPlayerInformationTargetVisibility), false, this);
-        const bool bBlocked = GetWorld()->LineTraceSingleByChannel(
+        const bool bBlocked = !Inspection && GetWorld()->LineTraceSingleByChannel(
             VisibilityHit, CameraLocation, AimPoint, ECC_Visibility, VisibilityParams);
-        bool bVisible = !bBlocked || VisibilityHit.GetActor() == Candidate;
+        bool bVisible = Inspection ? Inspection->IsVisibleFrom(CameraLocation, this)
+            : (!bBlocked || VisibilityHit.GetActor() == Candidate);
         if (!bVisible && Candidate->IsA<ATMOPHistoricalAgent>() &&
             IsValid(VisibilityHit.GetActor()) &&
             VisibilityHit.GetActor()->IsA<ATMOPVehicleBase>())
@@ -1590,7 +1879,7 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
             }
         }
 
-        if (bUseFrontHemisphereTargetFallback)
+        if (!Inspection && bUseFrontHemisphereTargetFallback)
         {
             const FVector CharacterToTarget = AimPoint - CharacterLocation;
             const float DistanceSquared = CharacterToTarget.SizeSquared();

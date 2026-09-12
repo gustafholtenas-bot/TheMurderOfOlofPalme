@@ -1,5 +1,6 @@
 #include "Time/TMOPClockSubsystem.h"
 #include "Time/TMOPSimulationSettings.h"
+#include "Time/TMOPLoopEndPolicy.h"
 
 UTMOPClockSubsystem::UTMOPClockSubsystem()
 {
@@ -23,6 +24,7 @@ void UTMOPClockSubsystem::Initialize(FSubsystemCollectionBase& Collection)
     FractionalSeconds = 0.0;
     LoopNumber = 1;
     bClockRunning = true;
+    bAwaitingLoopDecision = false;
 
     TickerHandle = FTSTicker::GetCoreTicker().AddTicker(
         FTickerDelegate::CreateUObject(this, &UTMOPClockSubsystem::TickClock));
@@ -56,7 +58,8 @@ FTMOPTime UTMOPClockSubsystem::GetLoopEndTime() const
 
 void UTMOPClockSubsystem::StartClock()
 {
-    bClockRunning = true;
+    // Menus and other callers cannot accidentally run past the unresolved end state.
+    if (!bAwaitingLoopDecision) bClockRunning = true;
 }
 
 void UTMOPClockSubsystem::PauseClock()
@@ -69,6 +72,7 @@ void UTMOPClockSubsystem::RestartLoop()
     ++LoopNumber;
     CurrentTimeSeconds = LoopStartSeconds;
     FractionalSeconds = 0.0;
+    bAwaitingLoopDecision = false;
 
     const FTMOPTime RestartTime = GetCurrentTime();
     OnLoopRestarted.Broadcast(LoopNumber, RestartTime);
@@ -79,6 +83,12 @@ void UTMOPClockSubsystem::SetCurrentTime(const FTMOPTime NewTime)
 {
     CurrentTimeSeconds = NewTime.ToSecondsFromMidnight();
     FractionalSeconds = 0.0;
+    if (TMOPLoopEndPolicy::HasReachedEnd(CurrentTimeSeconds, LoopEndSeconds))
+    {
+        ReachLoopEnd();
+        return;
+    }
+    bAwaitingLoopDecision = false;
     OnSecondChanged.Broadcast(GetCurrentTime());
 }
 
@@ -100,6 +110,7 @@ bool UTMOPClockSubsystem::SetLoopRange(
         CurrentTimeSeconds,
         LoopStartSeconds,
         LoopEndSeconds);
+    bAwaitingLoopDecision = false;
 
     return true;
 }
@@ -118,7 +129,7 @@ bool UTMOPClockSubsystem::TickClock(const float DeltaSeconds)
 
     FractionalSeconds += static_cast<double>(DeltaSeconds) * TimeScale;
 
-    while (FractionalSeconds >= 1.0)
+    while (bClockRunning && FractionalSeconds >= 1.0)
     {
         FractionalSeconds -= 1.0;
         AdvanceOneSecond();
@@ -131,11 +142,24 @@ void UTMOPClockSubsystem::AdvanceOneSecond()
 {
     ++CurrentTimeSeconds;
 
-    if (CurrentTimeSeconds >= LoopEndSeconds)
+    if (TMOPLoopEndPolicy::HasReachedEnd(CurrentTimeSeconds, LoopEndSeconds))
     {
-        RestartLoop();
+        ReachLoopEnd();
         return;
     }
 
     OnSecondChanged.Broadcast(GetCurrentTime());
+}
+
+void UTMOPClockSubsystem::ReachLoopEnd()
+{
+    CurrentTimeSeconds = LoopEndSeconds;
+    FractionalSeconds = 0.0;
+    bClockRunning = false;
+    if (bAwaitingLoopDecision) return;
+    bAwaitingLoopDecision = true;
+
+    const FTMOPTime EndTime = GetCurrentTime();
+    OnSecondChanged.Broadcast(EndTime);
+    OnLoopEnded.Broadcast(LoopNumber, EndTime);
 }

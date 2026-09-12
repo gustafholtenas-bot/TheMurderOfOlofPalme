@@ -1,4 +1,6 @@
 #include "People/TMOPPersonProfileComponent.h"
+#include "People/TMOPPersonNameLibrary.h"
+#include "Engine/World.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
@@ -42,6 +44,17 @@ FName UTMOPPersonProfileComponent::ResolveEntityId() const
         ? Agent->EntityIdentity->EntityId : NAME_None;
 }
 
+FText UTMOPPersonProfileComponent::GetInGameDisplayName() const
+{
+    return UTMOPPersonNameLibrary::FormatPersonName(Profile.FullName, Profile.FirstName, Profile.LastName);
+}
+
+FText UTMOPPersonProfileComponent::GetFullName() const
+{
+    // Compatibility with existing Blueprint bindings; the archival field remains available in Profile.
+    return GetWorld() && GetWorld()->IsGameWorld() ? GetInGameDisplayName() : Profile.FullName;
+}
+
 bool UTMOPPersonProfileComponent::LoadProfile()
 {
     ResolvedEntityId = ResolveEntityId();
@@ -53,7 +66,7 @@ bool UTMOPPersonProfileComponent::LoadProfile()
     if (bHasLoadedProfile)
         if (ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner()))
         {
-            Agent->DisplayName = Profile.FullName;
+            Agent->DisplayName = GetFullName();
             Agent->PersonCategoryId = Profile.CategoryId;
             Agent->SourceReference = Profile.GeneralSourceReference;
             Agent->SourceDocumentNumber = Profile.Uppslag.IsEmpty()

@@ -1,19 +1,22 @@
 #include "Addresses/TMOPAddressRegistryTypes.h"
+#include "People/TMOPPersonNameLibrary.h"
 
 FString TMOPAddressDisplay::Resident(const FTMOPAddressResident& Person)
 {
-    if (!Person.InGameDisplayName.TrimStartAndEnd().IsEmpty()) return Person.InGameDisplayName;
-    if (Person.bAllowArchivalNameInGame) return Person.ArchivalFullName;
+    if (!Person.InGameDisplayName.TrimStartAndEnd().IsEmpty())
+        return UTMOPPersonNameLibrary::FormatUnstructuredPersonName(FText::FromString(Person.InGameDisplayName)).ToString();
+    if (Person.bAllowArchivalNameInGame)
+        return UTMOPPersonNameLibrary::FormatUnstructuredPersonName(FText::FromString(Person.ArchivalFullName)).ToString();
     TArray<FString> Parts;
     Person.ArchivalFullName.TrimStartAndEnd().ParseIntoArrayWS(Parts);
     if (Parts.Num() < 2) return Parts.IsEmpty() ? TEXT("Okänd boende") : Parts[0];
-    return Parts[0].Left(1) + TEXT(". ") + Parts.Last();
+    return Parts[0].Left(1) + TEXT(". ") + UTMOPPersonNameLibrary::GetSurnameInitial(FText::FromString(Parts.Last())).ToString();
 }
 
 FString TMOPAddressDisplay::Household(const FTMOPAddressHousehold& Home)
 {
     if (Home.bConfirmedFamily && !Home.FamilySurname.TrimStartAndEnd().IsEmpty())
-        return TEXT("Familjen ") + Home.FamilySurname.TrimStartAndEnd();
+        return TEXT("Familjen ") + UTMOPPersonNameLibrary::GetSurnameInitial(FText::FromString(Home.FamilySurname)).ToString();
     TArray<FString> Names;
     for (const auto& Person : Home.Residents) Names.Add(Resident(Person));
     return Names.IsEmpty() ? TEXT("Inga registrerade boende") : FString::Join(Names, TEXT(", "));

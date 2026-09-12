@@ -18,6 +18,14 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FTMOPTime,
     RestartTime);
 
+/** Fired once when the scenario reaches its configured end time. */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+    FTMOPLoopEndedSignature,
+    int32,
+    FinishedLoopNumber,
+    FTMOPTime,
+    EndTime);
+
 UCLASS(BlueprintType)
 class TMOPENGINE_API UTMOPClockSubsystem final : public UGameInstanceSubsystem
 {
@@ -34,6 +42,9 @@ public:
 
     UPROPERTY(BlueprintAssignable, Category = "TMOP|Clock")
     FTMOPLoopRestartedSignature OnLoopRestarted;
+
+    UPROPERTY(BlueprintAssignable, Category = "TMOP|Clock")
+    FTMOPLoopEndedSignature OnLoopEnded;
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
     FTMOPTime GetCurrentTime() const;
@@ -56,6 +67,10 @@ public:
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
     bool IsClockRunning() const { return bClockRunning; }
+
+    /** True after 23:45 until the player chooses how to continue. */
+    UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
+    bool IsAwaitingLoopDecision() const { return bAwaitingLoopDecision; }
 
     UFUNCTION(BlueprintPure, Category = "TMOP|Clock")
     float GetTimeScale() const { return TimeScale; }
@@ -81,6 +96,7 @@ public:
 private:
     bool TickClock(float DeltaSeconds);
     void AdvanceOneSecond();
+    void ReachLoopEnd();
 
     FTSTicker::FDelegateHandle TickerHandle;
 
@@ -92,4 +108,5 @@ private:
     double FractionalSeconds = 0.0;
     float TimeScale = 1.0f;
     bool bClockRunning = true;
+    bool bAwaitingLoopDecision = false;
 };

@@ -1,4 +1,5 @@
 #include "UI/TMOPAgentInfoChartWidget.h"
+#include "People/TMOPPersonNameLibrary.h"
 
 #include "Player/TMOPPlayerCharacter.h"
 #include "Styling/CoreStyle.h"
@@ -22,8 +23,9 @@ void UTMOPAgentInfoChartWidget::ShowAgentInfo(
     const FTMOPPersonProfileRow& Profile, const FText& TimelineSummary,
     const bool bPoliceInterviewed)
 {
-    if (NameText.IsValid()) NameText->SetText(Profile.FullName.IsEmpty()
-        ? FText::FromName(Profile.EntityId) : Profile.FullName);
+    const FText Name = UTMOPPersonNameLibrary::FormatPersonName(Profile.FullName, Profile.FirstName, Profile.LastName);
+    if (NameText.IsValid()) NameText->SetText(Name.IsEmpty()
+        ? NSLOCTEXT("TMOP", "UnnamedPersonDisplay", "Okänd person") : Name);
 
     TArray<FString> IdentityParts;
     if (!Profile.Occupation.IsEmpty()) IdentityParts.Add(Profile.Occupation);
