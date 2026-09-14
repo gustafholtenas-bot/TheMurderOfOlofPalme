@@ -128,6 +128,18 @@ förlustfri återställning av varje möjlig interaktion.
 
 ## Obligatoriskt test i Unreal
 
+### Startmenyns multiplayerflöde
+
+När **Starta nytt spel** trycks skapas nu alla valda LocalPlayers innan menyn
+döljs. Om skapandet misslyckas ligger menyn kvar och visar felet utan att starta
+introt. Under introsekvensen hålls alla skapade spelares rörelse och kamera låsta;
+låsen släpps gemensamt när spelet börjar.
+
+Ett saknat `PlayerStartAnchorId` använder spelarens aktuella transform som
+reserv. En placeringsmiss raderar inte längre spelare 2–4. Introsekvensen har
+dessutom säkerhetsgränsen `IntroTimeoutSeconds` (standard 120 sekunder), så att
+en blockerad trafikroute inte kan låsa startflödet permanent.
+
 Kör varje relevant rad med 1, 2, 3 och 4 spelare. Kör både tangentbord + pads och
 bara pads. Markera som godkänt först efter faktiskt test, inte utifrån källkontrollerna.
 
@@ -158,7 +170,7 @@ binära Blueprint-grafer eller Epic-exempellägen som SideScroller.
 
 ## Tester som kan köras utan Unreal
 
-`python Scripts/tests/test_local_multiplayer_contracts.py`: 12 källkontrakt.
+`python Scripts/tests/test_local_multiplayer_contracts.py`: 13 källkontrakt.
 `test_local_session_policy.cpp`: spelargränser, 16 klockkombinationer, 65
 startkandidater och plats för fyra kapslar. Portabla regressionstester för
 slutmeny, blickzoom (25), killer-grenar (21), namn (25) och informationstider (19)

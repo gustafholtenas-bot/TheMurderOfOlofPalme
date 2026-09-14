@@ -1,0 +1,156 @@
+[
+  {
+    "Name": "HOTORGET_N_230400_L17",
+    "StationId": "HOTORGET",
+    "StationName": "Hötorget",
+    "Direction": "Northbound",
+    "Line": 17,
+    "Destination": "Vällingby",
+    "ArrivalTime": { "Hour": 23, "Minute": 4, "Second": 0 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Hötorget ankomst är TCE avgång + 00:30."
+  },
+  {
+    "Name": "HOTORGET_N_230900_L19",
+    "StationId": "HOTORGET",
+    "StationName": "Hötorget",
+    "Direction": "Northbound",
+    "Line": 19,
+    "Destination": "Alvik",
+    "ArrivalTime": { "Hour": 23, "Minute": 9, "Second": 0 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Hötorget ankomst är TCE avgång + 00:30."
+  },
+  {
+    "Name": "HOTORGET_N_231400_L18",
+    "StationId": "HOTORGET",
+    "StationName": "Hötorget",
+    "Direction": "Northbound",
+    "Line": 18,
+    "Destination": "Hässelby strand",
+    "ArrivalTime": { "Hour": 23, "Minute": 14, "Second": 0 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Hötorget ankomst är TCE avgång + 00:30."
+  },
+  {
+    "Name": "HOTORGET_N_232400_L17",
+    "StationId": "HOTORGET",
+    "StationName": "Hötorget",
+    "Direction": "Northbound",
+    "Line": 17,
+    "Destination": "Vällingby",
+    "ArrivalTime": { "Hour": 23, "Minute": 24, "Second": 0 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Hötorget ankomst är TCE avgång + 00:30."
+  },
+  {
+    "Name": "HOTORGET_N_232900_L19",
+    "StationId": "HOTORGET",
+    "StationName": "Hötorget",
+    "Direction": "Northbound",
+    "Line": 19,
+    "Destination": "Alvik",
+    "ArrivalTime": { "Hour": 23, "Minute": 29, "Second": 0 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Hötorget ankomst är TCE avgång + 00:30."
+  },
+  {
+    "Name": "HOTORGET_N_233400_L18",
+    "StationId": "HOTORGET",
+    "StationName": "Hötorget",
+    "Direction": "Northbound",
+    "Line": 18,
+    "Destination": "Hässelby strand",
+    "ArrivalTime": { "Hour": 23, "Minute": 34, "Second": 0 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Hötorget ankomst är TCE avgång + 00:30."
+  },
+  {
+    "Name": "HOTORGET_N_234400_L17",
+    "StationId": "HOTORGET",
+    "StationName": "Hötorget",
+    "Direction": "Northbound",
+    "Line": 17,
+    "Destination": "Vällingby",
+    "ArrivalTime": { "Hour": 23, "Minute": 44, "Second": 0 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Hötorget ankomst är TCE avgång + 00:30."
+  },
+  {
+    "Name": "RADMANS_GATAN_N_230540_L17",
+    "StationId": "RADMANS_GATAN",
+    "StationName": "Rådmansgatan",
+    "Direction": "Northbound",
+    "Line": 17,
+    "Destination": "Vällingby",
+    "ArrivalTime": { "Hour": 23, "Minute": 5, "Second": 40 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Rådmansgatan ankomst är TCE avgång + 02:10."
+  },
+  {
+    "Name": "RADMANS_GATAN_N_231040_L19",
+    "StationId": "RADMANS_GATAN",
+    "StationName": "Rådmansgatan",
+    "Direction": "Northbound",
+    "Line": 19,
+    "Destination": "Alvik",
+    "ArrivalTime": { "Hour": 23, "Minute": 10, "Second": 40 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Rådmansgatan ankomst är TCE avgång + 02:10."
+  },
+  {
+    "Name": "RADMANS_GATAN_N_231540_L18",
+    "StationId": "RADMANS_GATAN",
+    "StationName": "Rådmansgatan",
+    "Direction": "Northbound",
+    "Line": 18,
+    "Destination": "Hässelby strand",
+    "ArrivalTime": { "Hour": 23, "Minute": 15, "Second": 40 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Rådmansgatan ankomst är TCE avgång + 02:10."
+  },
+  {
+    "Name": "RADMANS_GATAN_N_232540_L17",
+    "StationId": "RADMANS_GATAN",
+    "StationName": "Rådmansgatan",
+    "Direction": "Northbound",
+    "Line": 17,
+    "Destination": "Vällingby",
+    "ArrivalTime": { "Hour": 23, "Minute": 25, "Second": 40 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Rådmansgatan ankomst är TCE avgång + 02:10."
+  },
+  {
+    "Name": "RADMANS_GATAN_N_233040_L19",
+    "StationId": "RADMANS_GATAN",
+    "StationName": "Rådmansgatan",
+    "Direction": "Northbound",
+    "Line": 19,
+    "Destination": "Alvik",
+    "ArrivalTime": { "Hour": 23, "Minute": 30, "Second": 40 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Rådmansgatan ankomst är TCE avgång + 02:10."
+  },
+  {
+    "Name": "RADMANS_GATAN_N_233540_L18",
+    "StationId": "RADMANS_GATAN",
+    "StationName": "Rådmansgatan",
+    "Direction": "Northbound",
+    "Line": 18,
+    "Destination": "Hässelby strand",
+    "ArrivalTime": { "Hour": 23, "Minute": 35, "Second": 40 },
+    "bWithinSimulationWindow": true,
+    "SourceNote": "Körplan norrut måndag–fredag; Rådmansgatan ankomst är TCE avgång + 02:10."
+  },
+  {
+    "Name": "RADMANS_GATAN_N_234540_L17",
+    "StationId": "RADMANS_GATAN",
+    "StationName": "Rådmansgatan",
+    "Direction": "Northbound",
+    "Line": 17,
+    "Destination": "Vällingby",
+    "ArrivalTime": { "Hour": 23, "Minute": 45, "Second": 40 },
+    "bWithinSimulationWindow": false,
+    "SourceNote": "Körplan norrut måndag–fredag; ankomsten sker 40 sekunder efter simulationens slut 23:45."
+  }
+]

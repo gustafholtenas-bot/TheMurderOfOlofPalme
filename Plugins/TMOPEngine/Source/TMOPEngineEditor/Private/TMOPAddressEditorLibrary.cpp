@@ -8,6 +8,43 @@
 #include "EngineUtils.h"
 #include "ScopedTransaction.h"
 
+FString UTMOPAddressEditorLibrary::ReplaceAddressRegistryJson(UDataTable* Registry,
+    const FString& Json, const bool bDryRun)
+{
+    if (!GEditor || GEditor->PlayWorld)
+        return TEXT("Öppna banan i editorn och stoppa Play före import.");
+    if (!IsValid(Registry) || Registry->GetRowStruct() != FTMOPAddressRegistryRow::StaticStruct())
+        return TEXT("Fel tabell eller radtyp: välj TMOPAddressRegistryRow.");
+    if (Json.TrimStartAndEnd().IsEmpty()) return TEXT("Adressfilen är tom.");
+
+    UDataTable* Temp = NewObject<UDataTable>(GetTransientPackage());
+    Temp->RowStruct = FTMOPAddressRegistryRow::StaticStruct();
+    Temp->bIgnoreMissingFields = true;
+    const TArray<FString> Errors = Temp->CreateTableFromJSONString(Json);
+    if (!Errors.IsEmpty() || Temp->GetRowNames().IsEmpty())
+        return TEXT("Adressimporten är ogiltig: ") + FString::Join(Errors, TEXT("; "));
+
+    TSet<FName> AddressIds;
+    for (const FName Name : Temp->GetRowNames())
+    {
+        const auto* Row = Temp->FindRow<FTMOPAddressRegistryRow>(Name, TEXT("Validate address import"));
+        if (!Row || Row->AddressId.IsNone()) return TEXT("En adressrad saknar AddressId.");
+        if (AddressIds.Contains(Row->AddressId))
+            return TEXT("Flera adressrader delar AddressId: ") + Row->AddressId.ToString();
+        AddressIds.Add(Row->AddressId);
+    }
+    if (bDryRun) return FString();
+
+    const FScopedTransaction Transaction(
+        NSLOCTEXT("TMOP", "ReplaceAddressRegistryJson", "Uppdatera TMOP-adressregister"));
+    Registry->Modify();
+    Registry->EmptyTable();
+    for (const FName Name : Temp->GetRowNames())
+        Registry->AddRow(Name, *Temp->FindRow<FTMOPAddressRegistryRow>(Name, TEXT("Copy address import")));
+    Registry->MarkPackageDirty();
+    return FString();
+}
+
 FString UTMOPAddressEditorLibrary::BindAddressAnchor(ATMOPHistoricalAnchor* Anchor,
     UDataTable* Registry, FName RowName, bool bDryRun)
 {

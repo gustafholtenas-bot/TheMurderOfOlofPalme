@@ -18,6 +18,7 @@ public:
     ATMOPHistoricalAnchor();
 
     virtual void OnConstruction(const FTransform& Transform) override;
+    virtual void BeginPlay() override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Anchor")
     FText DisplayName;

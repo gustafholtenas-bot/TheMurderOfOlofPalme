@@ -938,6 +938,11 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
         meta=(MultiLine="true"))
     FText ObservationSummary;
 
+    /** Source-backed consequences, later experiences or investigation history after the murder. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Agent Info",
+        meta=(MultiLine="true", DisplayName="Händelser efter mordet"))
+    FText PostMurderEventsSummary;
+
     /** Documents supporting the information displayed in the chart. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Agent Info")
     FString AgentInfoSourceReference;

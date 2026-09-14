@@ -14,6 +14,14 @@
 #include "Widgets/SOverlay.h"
 #include "Widgets/Text/STextBlock.h"
 
+UTMOPMainMenuWidget::UTMOPMainMenuWidget(const FObjectInitializer& ObjectInitializer)
+    : Super(ObjectInitializer)
+{
+    // SetMenuInput focuses this widget. A non-focusable root causes UIOnly to
+    // reject focus and can leave keyboard/controller navigation on a stale menu.
+    SetIsFocusable(true);
+}
+
 void UTMOPMainMenuWidget::InitializeMainMenu(
     ATMOPMainMenuIntroDirector* InDirector, UTexture2D* InLogo)
 {

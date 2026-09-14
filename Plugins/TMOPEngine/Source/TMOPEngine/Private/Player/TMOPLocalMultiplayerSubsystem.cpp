@@ -197,10 +197,14 @@ bool UTMOPLocalMultiplayerSubsystem::PlaceParty(
         ATMOPHistoricalAnchor* Anchor = Anchors ? Anchors->FindAnchor(AnchorId) : nullptr;
         if (!Anchor)
         {
-            OutError = FText::Format(NSLOCTEXT("TMOP", "MissingPartyAnchor", "Startankaret {0} saknas."), FText::FromName(AnchorId));
-            return false;
+            // An optional/moved anchor must not make multiplayer collapse back
+            // to one player. The party leader's known transform is safe enough
+            // for the normal grounded placement search below.
+            UE_LOG(LogTemp, Warning,
+                TEXT("TMOP local multiplayer: start anchor '%s' is missing; using fallback transform."),
+                *AnchorId.ToString());
         }
-        Centre = Anchor->GetActorTransform();
+        else Centre = Anchor->GetActorTransform();
     }
     const TArray<ATMOPPlayerCharacter*> Players = GetPlayers(this);
     TArray<FVector> Positions;
@@ -220,8 +224,8 @@ bool UTMOPLocalMultiplayerSubsystem::PlaceParty(
             const FVector Offset(Candidate.X, Candidate.Y, 0);
             FVector Point = Centre.GetLocation() + Centre.GetRotation().RotateVector(Offset);
             FHitResult Hit;
-            if (!GetWorld()->LineTraceSingleByChannel(Hit, Point + FVector(0,0,200),
-                Point - FVector(0,0,350), ECC_Visibility, Query) || Hit.ImpactNormal.Z < 0.7f) continue;
+            if (!GetWorld()->LineTraceSingleByChannel(Hit, Point + FVector(0,0,1000),
+                Point - FVector(0,0,2000), ECC_Visibility, Query) || Hit.ImpactNormal.Z < 0.7f) continue;
             Point = Hit.ImpactPoint + FVector(0,0,HalfHeight + 3.0f);
             bool bOverlapsParty = false;
             for (int32 Index = 0; Index < Positions.Num(); ++Index)
@@ -256,9 +260,15 @@ bool UTMOPLocalMultiplayerSubsystem::StartParty(FName AnchorId, const FTransform
 {
     if (bChangingSession) return false;
     TGuardValue<bool> Guard(bChangingSession, true);
-    if (!EnsurePlayerCount(SelectedPlayerCount, OutError) || !PlaceParty(AnchorId, Fallback, OutError))
+    if (!EnsurePlayerCount(SelectedPlayerCount, OutError))
     {
-        FText Ignored; EnsurePlayerCount(1, Ignored);
+        SetSplitScreenEnabled(false);
+        return false;
+    }
+    if (!PlaceParty(AnchorId, Fallback, OutError))
+    {
+        // Keep the selected local players alive so a placement/configuration
+        // error never silently turns a 2–4 player selection into one player.
         SetSplitScreenEnabled(false);
         return false;
     }

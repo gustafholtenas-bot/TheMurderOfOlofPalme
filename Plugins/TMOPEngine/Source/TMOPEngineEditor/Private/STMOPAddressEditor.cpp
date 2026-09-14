@@ -46,16 +46,44 @@ FString Key(FString S)
     }
     return Out;
 }
+void AddComparableKeys(TSet<FString>& Keys, const FString& Value)
+{
+    const FString Normalized = Key(Value);
+    if (Normalized.IsEmpty()) return;
+    Keys.Add(Normalized);
+    static const TArray<FString> Prefixes = {
+        TEXT("tmopaddress"), TEXT("tmopadress"), TEXT("addressanchor"),
+        TEXT("adressankare"), TEXT("doorbell"), TEXT("address"), TEXT("adress"),
+        TEXT("entrance"), TEXT("anchor"), TEXT("ankare"), TEXT("port")
+    };
+    for (const FString& Prefix : Prefixes)
+        if (Normalized.StartsWith(Prefix) && Normalized.Len() > Prefix.Len())
+            Keys.Add(Normalized.RightChop(Prefix.Len()));
+}
+bool Intersects(const TSet<FString>& Left, const TSet<FString>& Right)
+{
+    for (const FString& Candidate : Left) if (Right.Contains(Candidate)) return true;
+    return false;
+}
 bool Matches(const ATMOPHistoricalAnchor* A, const FTMOPAddressRegistryRow& R)
 {
     if (!A->GetAnchorId().IsNone() && (A->GetAnchorId() == R.EntranceAnchorId || A->GetAnchorId() == R.BuildingAnchorId)) return true;
     // An explicit unresolved link must not silently fall back to another actor.
     if (!R.EntranceAnchorId.IsNone() || !R.BuildingAnchorId.IsNone()) return false;
-    const FString Address = Key(FString::Printf(TEXT("%s%d%s"), *R.StreetName, R.StreetNumber, *R.EntranceSuffix));
-    const FString Id = Key(R.AddressId.ToString());
-    const FString AnchorId = Key(A->GetAnchorId().ToString());
-    const FString Label = Key(A->GetActorLabel());
-    return AnchorId == Address || Label == Address || (!R.AddressId.IsNone() && (AnchorId == Id || Label == Id));
+    if (const auto* Existing = A->FindComponentByClass<UTMOPAddressComponent>())
+        if (Existing->RowName == R.AddressId) return true;
+    if (!R.DoorbellActorTag.IsNone() && A->Tags.Contains(R.DoorbellActorTag)) return true;
+
+    TSet<FString> RowKeys, AnchorKeys;
+    AddComparableKeys(RowKeys, FString::Printf(TEXT("%s%d%s"),
+        *R.StreetName, R.StreetNumber, *R.EntranceSuffix));
+    AddComparableKeys(RowKeys, R.RegistrySearchText);
+    AddComparableKeys(RowKeys, R.AddressId.ToString());
+    AddComparableKeys(AnchorKeys, A->GetAnchorId().ToString());
+    AddComparableKeys(AnchorKeys, A->GetActorLabel());
+    AddComparableKeys(AnchorKeys, A->DisplayName.ToString());
+    for (const FName Tag : A->Tags) AddComparableKeys(AnchorKeys, Tag.ToString());
+    return Intersects(RowKeys, AnchorKeys);
 }
 }
 

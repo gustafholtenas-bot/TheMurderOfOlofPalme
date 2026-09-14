@@ -195,11 +195,12 @@ FReply UTMOPDialogWidget::HandleCloseClicked()
 FReply UTMOPDialogWidget::NativeOnKeyDown(const FGeometry& InGeometry,
     const FKeyEvent& InKeyEvent)
 {
-    const bool bProfiles = TMOPHasControlProfiles(this);
-    if (bDialogVisible && ((bProfiles && TMOPMatchesControl(this,
-            InKeyEvent.GetKey(), ETMOPControlAction::MenuBack)) ||
-        (!bProfiles && (InKeyEvent.GetKey() == EKeys::Escape ||
-            InKeyEvent.GetKey() == EKeys::Gamepad_FaceButton_Right))))
+    const FKey Key = InKeyEvent.GetKey();
+    if (bDialogVisible &&
+        (TMOPMatchesControl(this, Key, ETMOPControlAction::Cancel) ||
+         TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack) ||
+         (!TMOPHasControlProfiles(this) &&
+          (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right))))
         return HandleCloseClicked();
     return Super::NativeOnKeyDown(InGeometry, InKeyEvent);
 }

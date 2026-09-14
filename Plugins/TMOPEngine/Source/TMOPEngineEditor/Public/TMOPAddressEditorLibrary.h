@@ -13,6 +13,11 @@ class TMOPENGINEEDITOR_API UTMOPAddressEditorLibrary : public UBlueprintFunction
 {
     GENERATED_BODY()
 public:
+    /** Validate and replace the rows of the existing registry asset without changing its identity. */
+    UFUNCTION(BlueprintCallable, Category="TMOP|Editor|Address")
+    static FString ReplaceAddressRegistryJson(UDataTable* Registry, const FString& Json,
+        bool bDryRun = false);
+
     /** Empty result means success. Dry run performs all checks without modifying anything. */
     UFUNCTION(BlueprintCallable, Category="TMOP|Editor|Address")
     static FString BindAddressAnchor(ATMOPHistoricalAnchor* Anchor, UDataTable* Registry,

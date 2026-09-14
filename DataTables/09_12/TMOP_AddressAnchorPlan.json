@@ -1,0 +1,3683 @@
+{
+  "RegistryRows": 334,
+  "PreferredMatchCounts": {
+    "doorbell_tag": 289,
+    "exact_address": 45
+  },
+  "Addresses": [
+    {
+      "AddressId": "ADOLF_FREDRIKS_KYRKOGATA_5_7",
+      "Address": "Adolf Fredriks kyrkogata 5-7",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_ADOLF_FREDRIKS_KYRKOGATA_5_7",
+      "ExactFallbacks": [
+        "ADOLF_FREDRIKS_KYRKOGATA_5_7",
+        "Adolf Fredriks Kyrkog 5-7"
+      ]
+    },
+    {
+      "AddressId": "ADOLF_FREDRIKS_KYRKOGATA_12",
+      "Address": "Adolf Fredriks kyrkogata 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_ADOLF_FREDRIKS_KYRKOGATA_12",
+      "ExactFallbacks": [
+        "ADOLF_FREDRIKS_KYRKOGATA_12",
+        "Adolf Fredriks Kyrkog 12"
+      ]
+    },
+    {
+      "AddressId": "ADOLF_FREDRIKS_KYRKOGATA_13",
+      "Address": "Adolf Fredriks kyrkogata 13",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_ADOLF_FREDRIKS_KYRKOGATA_13",
+      "ExactFallbacks": [
+        "ADOLF_FREDRIKS_KYRKOGATA_13",
+        "Adolf Fredriks Kyrkog 13"
+      ]
+    },
+    {
+      "AddressId": "ADOLF_FREDRIKS_KYRKOGATA_15",
+      "Address": "Adolf Fredriks kyrkogata 15",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_ADOLF_FREDRIKS_KYRKOGATA_15",
+      "ExactFallbacks": [
+        "ADOLF_FREDRIKS_KYRKOGATA_15",
+        "Adolf Fredriks Kyrkog 15"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_3",
+      "Address": "Brunnsgatan 3",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_3",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_3",
+        "Brunnsg 3"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_4",
+      "Address": "Brunnsgatan 4",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_4",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_4",
+        "Brunnsg 4"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_7",
+      "Address": "Brunnsgatan 7",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_7",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_7",
+        "Brunnsg 7"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_15",
+      "Address": "Brunnsgatan 15",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_15",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_15",
+        "Brunnsg 15"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_18",
+      "Address": "Brunnsgatan 18",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_18",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_18",
+        "Brunnsg 18"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_21",
+      "Address": "Brunnsgatan 21",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_21",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_21",
+        "Brunnsg 21"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_21_B",
+      "Address": "Brunnsgatan 21B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_21_B",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_21_B",
+        "Brunnsg 21 B"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_26",
+      "Address": "Brunnsgatan 26",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_26",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_26",
+        "Brunnsg 26"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_26_A",
+      "Address": "Brunnsgatan 26A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_26_A",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_26_A",
+        "Brunnsg 26 A"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_26_C",
+      "Address": "Brunnsgatan 26C",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_26_C",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_26_C",
+        "Brunnsg 26 C"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_26_D",
+      "Address": "Brunnsgatan 26D",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_26_D",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_26_D",
+        "Brunnsg 26 D"
+      ]
+    },
+    {
+      "AddressId": "BRUNNSGATAN_26_F",
+      "Address": "Brunnsgatan 26F",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BRUNNSGATAN_26_F",
+      "ExactFallbacks": [
+        "BRUNNSGATAN_26_F",
+        "Brunnsg 26 F"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_10",
+      "Address": "David Bagares gata 10",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DAVID_BAGARES_GATA_10",
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_10",
+        "David Bagaresg 10"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_12",
+      "Address": "David Bagares gata 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DAVID_BAGARES_GATA_12",
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_12",
+        "David Bagaresg 12"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_14",
+      "Address": "David Bagares gata 14",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DAVID_BAGARES_GATA_14",
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_14",
+        "David Bagaresg 14"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_26_A",
+      "Address": "David Bagares gata 26A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DAVID_BAGARES_GATA_26_A",
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_26_A",
+        "David Bagaresg 26 A"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_26_B",
+      "Address": "David Bagares gata 26B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DAVID_BAGARES_GATA_26_B",
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_26_B",
+        "David Bagaresg 26 B"
+      ]
+    },
+    {
+      "AddressId": "DROTTNINGHUSGRAND_2",
+      "Address": "Drottninghusgränd 2",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DROTTNINGHUSGRAND_2",
+      "ExactFallbacks": [
+        "DROTTNINGHUSGRAND_2",
+        "Drottninghusgränd 2"
+      ]
+    },
+    {
+      "AddressId": "DROTTNINGHUSGRAND_3",
+      "Address": "Drottninghusgränd 3",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DROTTNINGHUSGRAND_3",
+      "ExactFallbacks": [
+        "DROTTNINGHUSGRAND_3",
+        "Drottninghusgränd 3"
+      ]
+    },
+    {
+      "AddressId": "DROTTNINGHUSGRAND_5",
+      "Address": "Drottninghusgränd 5",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DROTTNINGHUSGRAND_5",
+      "ExactFallbacks": [
+        "DROTTNINGHUSGRAND_5",
+        "Drottninghusgränd 5"
+      ]
+    },
+    {
+      "AddressId": "DROTTNINGHUSGRAND_7",
+      "Address": "Drottninghusgränd 7",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DROTTNINGHUSGRAND_7",
+      "ExactFallbacks": [
+        "DROTTNINGHUSGRAND_7",
+        "Drottninghusgränd 7"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_1",
+      "Address": "Döbelnsgatan 1",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_1",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_1",
+        "Döbelnsg 1"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_4",
+      "Address": "Döbelnsgatan 4",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_4",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_4",
+        "Döbelnsg 4"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_5",
+      "Address": "Döbelnsgatan 5",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_5",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_5",
+        "Döbelnsg 5"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_6",
+      "Address": "Döbelnsgatan 6",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_6",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_6",
+        "Döbelnsg 6"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_6_A",
+      "Address": "Döbelnsgatan 6A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_6_A",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_6_A",
+        "Döbelnsg 6 A"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_6_B",
+      "Address": "Döbelnsgatan 6B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_6_B",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_6_B",
+        "Döbelnsg 6 B"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_9",
+      "Address": "Döbelnsgatan 9",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_9",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_9",
+        "Döbelnsg 9"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_12",
+      "Address": "Döbelnsgatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_12",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_12",
+        "Döbelnsg 12"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_13",
+      "Address": "Döbelnsgatan 13",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_13",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_13",
+        "Döbelnsg 13"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_14",
+      "Address": "Döbelnsgatan 14",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_14",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_14",
+        "Döbelnsg 14"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_15",
+      "Address": "Döbelnsgatan 15",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_15",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_15",
+        "Döbelnsg 15"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_16",
+      "Address": "Döbelnsgatan 16",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_16",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_16",
+        "Döbelnsg 16"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_16_A",
+      "Address": "Döbelnsgatan 16A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_16_A",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_16_A",
+        "Döbelnsg 16 A"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_16_B",
+      "Address": "Döbelnsgatan 16B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_16_B",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_16_B",
+        "Döbelnsg 16 B"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_19",
+      "Address": "Döbelnsgatan 19",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_19",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_19",
+        "Döbelnsg 19"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_25",
+      "Address": "Döbelnsgatan 25",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_25",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_25",
+        "Döbelnsg 25"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_29",
+      "Address": "Döbelnsgatan 29",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_29",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_29",
+        "Döbelnsg 29"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_31",
+      "Address": "Döbelnsgatan 31",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_31",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_31",
+        "Döbelnsg 31"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_33",
+      "Address": "Döbelnsgatan 33",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_33",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_33",
+        "Döbelnsg 33"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_35",
+      "Address": "Döbelnsgatan 35",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_35",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_35",
+        "Döbelnsg 35"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_40",
+      "Address": "Döbelnsgatan 40",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_40",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_40",
+        "Döbelnsg 40"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_41",
+      "Address": "Döbelnsgatan 41",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_41",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_41",
+        "Döbelnsg 41"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_42",
+      "Address": "Döbelnsgatan 42",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_42",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_42",
+        "Döbelnsg 42"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_43",
+      "Address": "Döbelnsgatan 43",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_43",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_43",
+        "Döbelnsg 43"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_43_A",
+      "Address": "Döbelnsgatan 43A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_43_A",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_43_A",
+        "Döbelnsg 43 A"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_44",
+      "Address": "Döbelnsgatan 44",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_44",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_44",
+        "Döbelnsg 44"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_45",
+      "Address": "Döbelnsgatan 45",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_45",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_45",
+        "Döbelnsg 45"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_46",
+      "Address": "Döbelnsgatan 46",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_46",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_46",
+        "Döbelnsg 46"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_47",
+      "Address": "Döbelnsgatan 47",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_47",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_47",
+        "Döbelnsg 47"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_48",
+      "Address": "Döbelnsgatan 48",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_48",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_48",
+        "Döbelnsg 48"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_50",
+      "Address": "Döbelnsgatan 50",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_50",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_50",
+        "Döbelnsg 50"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_52",
+      "Address": "Döbelnsgatan 52",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_52",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_52",
+        "Döbelnsg 52"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_53",
+      "Address": "Döbelnsgatan 53",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_53",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_53",
+        "Döbelnsg 53"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_56",
+      "Address": "Döbelnsgatan 56",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_56",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_56",
+        "Döbelnsg 56"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_57",
+      "Address": "Döbelnsgatan 57",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_57",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_57",
+        "Döbelnsg 57"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_58",
+      "Address": "Döbelnsgatan 58",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_58",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_58",
+        "Döbelnsg 58"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_60",
+      "Address": "Döbelnsgatan 60",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_60",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_60",
+        "Döbelnsg 60"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_63",
+      "Address": "Döbelnsgatan 63",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_63",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_63",
+        "Döbelnsg 63"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_64",
+      "Address": "Döbelnsgatan 64",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_64",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_64",
+        "Döbelnsg 64"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_65",
+      "Address": "Döbelnsgatan 65",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_65",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_65",
+        "Döbelnsg 65"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_67_B",
+      "Address": "Döbelnsgatan 67B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_67_B",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_67_B",
+        "Döbelnsg 67 B"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_71",
+      "Address": "Döbelnsgatan 71",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_71",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_71",
+        "Döbelnsg 71"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_79",
+      "Address": "Döbelnsgatan 79",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_79",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_79",
+        "Döbelnsg 79"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_81",
+      "Address": "Döbelnsgatan 81",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_81",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_81",
+        "Döbelnsg 81"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_85",
+      "Address": "Döbelnsgatan 85",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_85",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_85",
+        "Döbelnsg 85"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_87",
+      "Address": "Döbelnsgatan 87",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_87",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_87",
+        "Döbelnsg 87"
+      ]
+    },
+    {
+      "AddressId": "DOBELNSGATAN_93",
+      "Address": "Döbelnsgatan 93",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DOBELNSGATAN_93",
+      "ExactFallbacks": [
+        "DOBELNSGATAN_93",
+        "Döbelnsg 93"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_9",
+      "Address": "Holländargatan 9",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_9",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_9",
+        "Holländarg 9"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_9_A",
+      "Address": "Holländargatan 9A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_9_A",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_9_A",
+        "Holländarg 9 A"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_9_B",
+      "Address": "Holländargatan 9B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_9_B",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_9_B",
+        "Holländarg 9 B"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_12",
+      "Address": "Holländargatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_12",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_12",
+        "Holländarg 12"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_16",
+      "Address": "Holländargatan 16",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_16",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_16",
+        "Holländarg 16"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_18",
+      "Address": "Holländargatan 18",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_18",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_18",
+        "Holländarg 18"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_22",
+      "Address": "Holländargatan 22",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_22",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_22",
+        "Holländarg 22"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_24",
+      "Address": "Holländargatan 24",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_24",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_24",
+        "Holländarg 24"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_26_A",
+      "Address": "Holländargatan 26A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_26_A",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_26_A",
+        "Holländarg 26 A"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_26_B",
+      "Address": "Holländargatan 26B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_26_B",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_26_B",
+        "Holländarg 26 B"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_27",
+      "Address": "Holländargatan 27",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_27",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_27",
+        "Holländarg 27"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_27_A",
+      "Address": "Holländargatan 27A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_27_A",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_27_A",
+        "Holländarg 27 A"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_29",
+      "Address": "Holländargatan 29",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_29",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_29",
+        "Holländarg 29"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_31",
+      "Address": "Holländargatan 31",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_31",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_31",
+        "Holländarg 31"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_33",
+      "Address": "Holländargatan 33",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_33",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_33",
+        "Holländarg 33"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_36",
+      "Address": "Holländargatan 36",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_36",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_36",
+        "Holländarg 36"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_38",
+      "Address": "Holländargatan 38",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_38",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_38",
+        "Holländarg 38"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_40",
+      "Address": "Holländargatan 40",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_HOLLANDARGATAN_40",
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_40",
+        "Holländarg 40"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_2",
+      "Address": "Johannesgatan 2",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_2",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_2",
+        "Johannesg 2"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_4",
+      "Address": "Johannesgatan 4",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_4",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_4",
+        "Johannesg 4"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_6",
+      "Address": "Johannesgatan 6",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_6",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_6",
+        "Johannesg 6"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_8",
+      "Address": "Johannesgatan 8",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_8",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_8",
+        "Johannesg 8"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_10",
+      "Address": "Johannesgatan 10",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_10",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_10",
+        "Johannesg 10"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_12",
+      "Address": "Johannesgatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_12",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_12",
+        "Johannesg 12"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_16",
+      "Address": "Johannesgatan 16",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_16",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_16",
+        "Johannesg 16"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_18",
+      "Address": "Johannesgatan 18",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_18",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_18",
+        "Johannesg 18"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_20",
+      "Address": "Johannesgatan 20",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_20",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_20",
+        "Johannesg 20"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_22",
+      "Address": "Johannesgatan 22",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_22",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_22",
+        "Johannesg 22"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_24",
+      "Address": "Johannesgatan 24",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_24",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_24",
+        "Johannesg 24"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_26",
+      "Address": "Johannesgatan 26",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_26",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_26",
+        "Johannesg 26"
+      ]
+    },
+    {
+      "AddressId": "JOHANNESGATAN_28",
+      "Address": "Johannesgatan 28",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JOHANNESGATAN_28",
+      "ExactFallbacks": [
+        "JOHANNESGATAN_28",
+        "Johannesg 28"
+      ]
+    },
+    {
+      "AddressId": "JUTAS_BACKE_1",
+      "Address": "Jutas backe 1",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JUTAS_BACKE_1",
+      "ExactFallbacks": [
+        "JUTAS_BACKE_1",
+        "Jutas Backe 1"
+      ]
+    },
+    {
+      "AddressId": "JUTAS_BACKE_5",
+      "Address": "Jutas backe 5",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_JUTAS_BACKE_5",
+      "ExactFallbacks": [
+        "JUTAS_BACKE_5",
+        "Jutas Backe 5"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_3",
+      "Address": "Kungsgatan 3",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KUNGSGATAN_3",
+      "ExactFallbacks": [
+        "KUNGSGATAN_3",
+        "Kungsg 3"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_4_A",
+      "Address": "Kungsgatan 4A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KUNGSGATAN_4_A",
+      "ExactFallbacks": [
+        "KUNGSGATAN_4_A",
+        "Kungsg 4 A"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_24",
+      "Address": "Kungsgatan 24",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KUNGSGATAN_24",
+      "ExactFallbacks": [
+        "KUNGSGATAN_24",
+        "Kungsg 24"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_27",
+      "Address": "Kungsgatan 27",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KUNGSGATAN_27",
+      "ExactFallbacks": [
+        "KUNGSGATAN_27",
+        "Kungsg 27"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_32",
+      "Address": "Kungsgatan 32",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KUNGSGATAN_32",
+      "ExactFallbacks": [
+        "KUNGSGATAN_32",
+        "Kungsg 32"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_34",
+      "Address": "Kungsgatan 34",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KUNGSGATAN_34",
+      "ExactFallbacks": [
+        "KUNGSGATAN_34",
+        "Kungsg 34"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_38",
+      "Address": "Kungsgatan 38",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KUNGSGATAN_38",
+      "ExactFallbacks": [
+        "KUNGSGATAN_38",
+        "Kungsg 38"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_12",
+      "Address": "Luntmakargatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_12",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_12",
+        "Luntmakarg 12"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_13",
+      "Address": "Luntmakargatan 13",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_13",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_13",
+        "Luntmakarg 13"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_15",
+      "Address": "Luntmakargatan 15",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_15",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_15",
+        "Luntmakarg 15"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_36",
+      "Address": "Luntmakargatan 36",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_36",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_36",
+        "Luntmakarg 36"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_52",
+      "Address": "Luntmakargatan 52",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_52",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_52",
+        "Luntmakarg 52"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_54",
+      "Address": "Luntmakargatan 54",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_54",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_54",
+        "Luntmakarg 54"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_56",
+      "Address": "Luntmakargatan 56",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_56",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_56",
+        "Luntmakarg 56"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_59",
+      "Address": "Luntmakargatan 59",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_59",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_59",
+        "Luntmakarg 59"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_63",
+      "Address": "Luntmakargatan 63",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_63",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_63",
+        "Luntmakarg 63"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_64",
+      "Address": "Luntmakargatan 64",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_64",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_64",
+        "Luntmakarg 64"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_65",
+      "Address": "Luntmakargatan 65",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_LUNTMAKARGATAN_65",
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_65",
+        "Luntmakarg 65"
+      ]
+    },
+    {
+      "AddressId": "OLOFSGATAN_7_B",
+      "Address": "Olofsgatan 7B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_OLOFSGATAN_7_B",
+      "ExactFallbacks": [
+        "OLOFSGATAN_7_B",
+        "Olofsg 7 B"
+      ]
+    },
+    {
+      "AddressId": "OLOFSGATAN_11",
+      "Address": "Olofsgatan 11",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_OLOFSGATAN_11",
+      "ExactFallbacks": [
+        "OLOFSGATAN_11",
+        "Olofsg 11"
+      ]
+    },
+    {
+      "AddressId": "OLOFSGATAN_12",
+      "Address": "Olofsgatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_OLOFSGATAN_12",
+      "ExactFallbacks": [
+        "OLOFSGATAN_12",
+        "Olofsg 12"
+      ]
+    },
+    {
+      "AddressId": "OLOFSGATAN_14_16",
+      "Address": "Olofsgatan 14-16",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_OLOFSGATAN_14_16",
+      "ExactFallbacks": [
+        "OLOFSGATAN_14_16",
+        "Olofsg 14-16"
+      ]
+    },
+    {
+      "AddressId": "OLOFSGATAN_18",
+      "Address": "Olofsgatan 18",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_OLOFSGATAN_18",
+      "ExactFallbacks": [
+        "OLOFSGATAN_18",
+        "Olofsg 18"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_58",
+      "Address": "Regeringsgatan 58",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_58",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_58",
+        "Regeringsg 58"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_70",
+      "Address": "Regeringsgatan 70",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_70",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_70",
+        "Regeringsg 70"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_70_A",
+      "Address": "Regeringsgatan 70A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_70_A",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_70_A",
+        "Regeringsg 70 A"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_70_B",
+      "Address": "Regeringsgatan 70B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_70_B",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_70_B",
+        "Regeringsg 70 B"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_70_C",
+      "Address": "Regeringsgatan 70C",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_70_C",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_70_C",
+        "Regeringsg 70 C"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_70_D",
+      "Address": "Regeringsgatan 70D",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_70_D",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_70_D",
+        "Regeringsg 70 D"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_70_E",
+      "Address": "Regeringsgatan 70E",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_70_E",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_70_E",
+        "Regeringsg 70 E"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_70_F",
+      "Address": "Regeringsgatan 70F",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_70_F",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_70_F",
+        "Regeringsg 70 F"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_72",
+      "Address": "Regeringsgatan 72",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_72",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_72",
+        "Regeringsg 72"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_74",
+      "Address": "Regeringsgatan 74",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_74",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_74",
+        "Regeringsg 74"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_76",
+      "Address": "Regeringsgatan 76",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_76",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_76",
+        "Regeringsg 76"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_77",
+      "Address": "Regeringsgatan 77",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_77",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_77",
+        "Regeringsg 77"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_78",
+      "Address": "Regeringsgatan 78",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_78",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_78",
+        "Regeringsg 78"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_78_A",
+      "Address": "Regeringsgatan 78A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_78_A",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_78_A",
+        "Regeringsg 78 A"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_80",
+      "Address": "Regeringsgatan 80",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_80",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_80",
+        "Regeringsg 80"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_82",
+      "Address": "Regeringsgatan 82",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_82",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_82",
+        "Regeringsg 82"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_83",
+      "Address": "Regeringsgatan 83",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_83",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_83",
+        "Regeringsg 83"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_84",
+      "Address": "Regeringsgatan 84",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_84",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_84",
+        "Regeringsg 84"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_85",
+      "Address": "Regeringsgatan 85",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_85",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_85",
+        "Regeringsg 85"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_87",
+      "Address": "Regeringsgatan 87",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_87",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_87",
+        "Regeringsg 87"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_89",
+      "Address": "Regeringsgatan 89",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_89",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_89",
+        "Regeringsg 89"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_90",
+      "Address": "Regeringsgatan 90",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_90",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_90",
+        "Regeringsg 90"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_91",
+      "Address": "Regeringsgatan 91",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_91",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_91",
+        "Regeringsg 91"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_93",
+      "Address": "Regeringsgatan 93",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_93",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_93",
+        "Regeringsg 93"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_95",
+      "Address": "Regeringsgatan 95",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_95",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_95",
+        "Regeringsg 95"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_95_A",
+      "Address": "Regeringsgatan 95A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_95_A",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_95_A",
+        "Regeringsg 95 A"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_95_B",
+      "Address": "Regeringsgatan 95B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_95_B",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_95_B",
+        "Regeringsg 95 B"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_97",
+      "Address": "Regeringsgatan 97",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_97",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_97",
+        "Regeringsg 97"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_111",
+      "Address": "Regeringsgatan 111",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_111",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_111",
+        "Regeringsg 111"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_111_B",
+      "Address": "Regeringsgatan 111B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_111_B",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_111_B",
+        "Regeringsg 111 B"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_111_C",
+      "Address": "Regeringsgatan 111C",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_111_C",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_111_C",
+        "Regeringsg 111 C"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_113",
+      "Address": "Regeringsgatan 113",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_REGERINGSGATAN_113",
+      "ExactFallbacks": [
+        "REGERINGSGATAN_113",
+        "Regeringsg 113"
+      ]
+    },
+    {
+      "AddressId": "ROSENGATAN_5",
+      "Address": "Rosengatan 5",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_ROSENGATAN_5",
+      "ExactFallbacks": [
+        "ROSENGATAN_5",
+        "Roseng 5"
+      ]
+    },
+    {
+      "AddressId": "SMALA_GRAND_3",
+      "Address": "Smala gränd 3",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SMALA_GRAND_3",
+      "ExactFallbacks": [
+        "SMALA_GRAND_3",
+        "Smala Gränd 3"
+      ]
+    },
+    {
+      "AddressId": "SMALA_GRAND_5",
+      "Address": "Smala gränd 5",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SMALA_GRAND_5",
+      "ExactFallbacks": [
+        "SMALA_GRAND_5",
+        "Smala Gränd 5"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_25",
+      "Address": "Sveavägen 25",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_25",
+      "ExactFallbacks": [
+        "SVEAVAGEN_25",
+        "Sveav 25"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_32",
+      "Address": "Sveavägen 32",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_32",
+      "ExactFallbacks": [
+        "SVEAVAGEN_32",
+        "Sveav 32"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_33",
+      "Address": "Sveavägen 33",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_33",
+      "ExactFallbacks": [
+        "SVEAVAGEN_33",
+        "Sveav 33"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_35",
+      "Address": "Sveavägen 35",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_35",
+      "ExactFallbacks": [
+        "SVEAVAGEN_35",
+        "Sveav 35"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_35_37",
+      "Address": "Sveavägen 35-37",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_35_37",
+      "ExactFallbacks": [
+        "SVEAVAGEN_35_37",
+        "Sveav 35-37"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_39",
+      "Address": "Sveavägen 39",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_39",
+      "ExactFallbacks": [
+        "SVEAVAGEN_39",
+        "Sveav 39"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_43",
+      "Address": "Sveavägen 43",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_43",
+      "ExactFallbacks": [
+        "SVEAVAGEN_43",
+        "Sveav 43"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_45",
+      "Address": "Sveavägen 45",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_45",
+      "ExactFallbacks": [
+        "SVEAVAGEN_45",
+        "Sveav 45"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_47",
+      "Address": "Sveavägen 47",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_47",
+      "ExactFallbacks": [
+        "SVEAVAGEN_47",
+        "Sveav 47"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_49",
+      "Address": "Sveavägen 49",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_49",
+      "ExactFallbacks": [
+        "SVEAVAGEN_49",
+        "Sveav 49"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_52",
+      "Address": "Sveavägen 52",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_52",
+      "ExactFallbacks": [
+        "SVEAVAGEN_52",
+        "Sveav 52"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_60",
+      "Address": "Sveavägen 60",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_60",
+      "ExactFallbacks": [
+        "SVEAVAGEN_60",
+        "Sveav 60"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_62",
+      "Address": "Sveavägen 62",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_62",
+      "ExactFallbacks": [
+        "SVEAVAGEN_62",
+        "Sveav 62"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_74",
+      "Address": "Sveavägen 74",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_74",
+      "ExactFallbacks": [
+        "SVEAVAGEN_74",
+        "Sveav 74"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_76",
+      "Address": "Sveavägen 76",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_76",
+      "ExactFallbacks": [
+        "SVEAVAGEN_76",
+        "Sveav 76"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_78",
+      "Address": "Sveavägen 78",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_78",
+      "ExactFallbacks": [
+        "SVEAVAGEN_78",
+        "Sveav 78"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_80",
+      "Address": "Sveavägen 80",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_80",
+      "ExactFallbacks": [
+        "SVEAVAGEN_80",
+        "Sveav 80"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_1",
+      "Address": "Tegnérgatan 1",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_1",
+      "ExactFallbacks": [
+        "TEGNERGATAN_1",
+        "Tegnerg 1"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_4",
+      "Address": "Tegnérgatan 4",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_4",
+      "ExactFallbacks": [
+        "TEGNERGATAN_4",
+        "Tegnerg 4"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_5",
+      "Address": "Tegnérgatan 5",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_5",
+      "ExactFallbacks": [
+        "TEGNERGATAN_5",
+        "Tegnerg 5"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_6",
+      "Address": "Tegnérgatan 6",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_6",
+      "ExactFallbacks": [
+        "TEGNERGATAN_6",
+        "Tegnerg 6"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_7",
+      "Address": "Tegnérgatan 7",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_7",
+      "ExactFallbacks": [
+        "TEGNERGATAN_7",
+        "Tegnerg 7"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_9",
+      "Address": "Tegnérgatan 9",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_9",
+      "ExactFallbacks": [
+        "TEGNERGATAN_9",
+        "Tegnerg 9"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_10",
+      "Address": "Tegnérgatan 10",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_10",
+      "ExactFallbacks": [
+        "TEGNERGATAN_10",
+        "Tegnerg 10"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_12",
+      "Address": "Tegnérgatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_12",
+      "ExactFallbacks": [
+        "TEGNERGATAN_12",
+        "Tegnerg 12"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_13",
+      "Address": "Tegnérgatan 13",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_13",
+      "ExactFallbacks": [
+        "TEGNERGATAN_13",
+        "Tegnerg 13"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_14",
+      "Address": "Tegnérgatan 14",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_14",
+      "ExactFallbacks": [
+        "TEGNERGATAN_14",
+        "Tegnerg 14"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_15",
+      "Address": "Tegnérgatan 15",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_15",
+      "ExactFallbacks": [
+        "TEGNERGATAN_15",
+        "Tegnerg 15"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_16",
+      "Address": "Tegnérgatan 16",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_16",
+      "ExactFallbacks": [
+        "TEGNERGATAN_16",
+        "Tegnerg 16"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_17",
+      "Address": "Tegnérgatan 17",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_17",
+      "ExactFallbacks": [
+        "TEGNERGATAN_17",
+        "Tegnerg 17"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_18",
+      "Address": "Tegnérgatan 18",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_18",
+      "ExactFallbacks": [
+        "TEGNERGATAN_18",
+        "Tegnerg 18"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_19",
+      "Address": "Tegnérgatan 19",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_19",
+      "ExactFallbacks": [
+        "TEGNERGATAN_19",
+        "Tegnerg 19"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_20_A",
+      "Address": "Tegnérgatan 20A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_20_A",
+      "ExactFallbacks": [
+        "TEGNERGATAN_20_A",
+        "Tegnerg 20 A"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_24",
+      "Address": "Tegnérgatan 24",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_24",
+      "ExactFallbacks": [
+        "TEGNERGATAN_24",
+        "Tegnerg 24"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_28",
+      "Address": "Tegnérgatan 28",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_28",
+      "ExactFallbacks": [
+        "TEGNERGATAN_28",
+        "Tegnerg 28"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_29",
+      "Address": "Tegnérgatan 29",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_29",
+      "ExactFallbacks": [
+        "TEGNERGATAN_29",
+        "Tegnerg 29"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_35",
+      "Address": "Tegnérgatan 35",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_35",
+      "ExactFallbacks": [
+        "TEGNERGATAN_35",
+        "Tegnerg 35"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_36",
+      "Address": "Tegnérgatan 36",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_36",
+      "ExactFallbacks": [
+        "TEGNERGATAN_36",
+        "Tegnerg 36"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_38",
+      "Address": "Tegnérgatan 38",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_38",
+      "ExactFallbacks": [
+        "TEGNERGATAN_38",
+        "Tegnerg 38"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_39",
+      "Address": "Tegnérgatan 39",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_39",
+      "ExactFallbacks": [
+        "TEGNERGATAN_39",
+        "Tegnerg 39"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_40",
+      "Address": "Tegnérgatan 40",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_40",
+      "ExactFallbacks": [
+        "TEGNERGATAN_40",
+        "Tegnerg 40"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_45",
+      "Address": "Tegnérgatan 45",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_45",
+      "ExactFallbacks": [
+        "TEGNERGATAN_45",
+        "Tegnerg 45"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_48",
+      "Address": "Tegnérgatan 48",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_48",
+      "ExactFallbacks": [
+        "TEGNERGATAN_48",
+        "Tegnerg 48"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_49",
+      "Address": "Tegnérgatan 49",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_49",
+      "ExactFallbacks": [
+        "TEGNERGATAN_49",
+        "Tegnerg 49"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_55",
+      "Address": "Tegnérgatan 55",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_55",
+      "ExactFallbacks": [
+        "TEGNERGATAN_55",
+        "Tegnerg 55"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_57",
+      "Address": "Tegnérgatan 57",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TEGNERGATAN_57",
+      "ExactFallbacks": [
+        "TEGNERGATAN_57",
+        "Tegnerg 57"
+      ]
+    },
+    {
+      "AddressId": "TULEGATAN_3",
+      "Address": "Tulegatan 3",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TULEGATAN_3",
+      "ExactFallbacks": [
+        "TULEGATAN_3",
+        "Tuleg 3"
+      ]
+    },
+    {
+      "AddressId": "TULEGATAN_4",
+      "Address": "Tulegatan 4",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TULEGATAN_4",
+      "ExactFallbacks": [
+        "TULEGATAN_4",
+        "Tuleg 4"
+      ]
+    },
+    {
+      "AddressId": "TULEGATAN_5",
+      "Address": "Tulegatan 5",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TULEGATAN_5",
+      "ExactFallbacks": [
+        "TULEGATAN_5",
+        "Tuleg 5"
+      ]
+    },
+    {
+      "AddressId": "TULEGATAN_10",
+      "Address": "Tulegatan 10",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TULEGATAN_10",
+      "ExactFallbacks": [
+        "TULEGATAN_10",
+        "Tuleg 10"
+      ]
+    },
+    {
+      "AddressId": "TULEGATAN_10_A",
+      "Address": "Tulegatan 10A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TULEGATAN_10_A",
+      "ExactFallbacks": [
+        "TULEGATAN_10_A",
+        "Tuleg 10 A"
+      ]
+    },
+    {
+      "AddressId": "TULEGATAN_12",
+      "Address": "Tulegatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TULEGATAN_12",
+      "ExactFallbacks": [
+        "TULEGATAN_12",
+        "Tuleg 12"
+      ]
+    },
+    {
+      "AddressId": "WALLINGATAN_3_B",
+      "Address": "Wallingatan 3B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_WALLINGATAN_3_B",
+      "ExactFallbacks": [
+        "WALLINGATAN_3_B",
+        "Walling 3 B"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_20",
+      "Address": "Birger Jarlsgatan 20",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_20",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_20",
+        "Birger Jarlsg 20"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_32",
+      "Address": "Birger Jarlsgatan 32",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_32",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_32",
+        "Birger Jarlsg 32"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_34",
+      "Address": "Birger Jarlsgatan 34",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_34",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_34",
+        "Birger Jarlsg 34"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_36",
+      "Address": "Birger Jarlsgatan 36",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_36",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_36",
+        "Birger Jarlsg 36"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_37",
+      "Address": "Birger Jarlsgatan 37",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_37",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_37",
+        "Birger Jarlsg 37"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_38",
+      "Address": "Birger Jarlsgatan 38",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_38",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_38",
+        "Birger Jarlsg 38"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_39",
+      "Address": "Birger Jarlsgatan 39",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_39",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_39",
+        "Birger Jarlsg 39"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_42",
+      "Address": "Birger Jarlsgatan 42",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_42",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_42",
+        "Birger Jarlsg 42"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_44",
+      "Address": "Birger Jarlsgatan 44",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_44",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_44",
+        "Birger Jarlsg 44"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_46",
+      "Address": "Birger Jarlsgatan 46",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_46",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_46",
+        "Birger Jarlsg 46"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_46_A",
+      "Address": "Birger Jarlsgatan 46A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_46_A",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_46_A",
+        "Birger Jarlsg 46 A"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_46_B",
+      "Address": "Birger Jarlsgatan 46B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_46_B",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_46_B",
+        "Birger Jarlsg 46 B"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_48",
+      "Address": "Birger Jarlsgatan 48",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_48",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_48",
+        "Birger Jarlsg 48"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_58",
+      "Address": "Birger Jarlsgatan 58",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_58",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_58",
+        "Birger Jarlsg 58"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_93_A",
+      "Address": "Birger Jarlsgatan 93A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_93_A",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_93_A",
+        "Birger Jarlsg 93 A"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_119",
+      "Address": "Birger Jarlsgatan 119",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_BIRGER_JARLSGATAN_119",
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_119",
+        "Birger Jarlsg 119"
+      ]
+    },
+    {
+      "AddressId": "NORRLANDSGATAN_31_33",
+      "Address": "Norrlandsgatan 31",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_NORRLANDSGATAN_31_33",
+      "ExactFallbacks": [
+        "NORRLANDSGATAN_31_33",
+        "Norrlandsg 31-33"
+      ]
+    },
+    {
+      "AddressId": "TUNNELGATAN_25",
+      "Address": "Tunnelgatan 25",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TUNNELGATAN_25",
+      "ExactFallbacks": [
+        "TUNNELGATAN_25",
+        "Tunnelgatan 25"
+      ]
+    },
+    {
+      "AddressId": "TUNNELGATAN_16",
+      "Address": "Tunnelgatan 16",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TUNNELGATAN_16",
+      "ExactFallbacks": [
+        "TUNNELGATAN_16",
+        "Tunnelgatan 16"
+      ]
+    },
+    {
+      "AddressId": "TUNNELGATAN_12",
+      "Address": "Tunnelgatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_TUNNELGATAN_12",
+      "ExactFallbacks": [
+        "TUNNELGATAN_12",
+        "Tunnelgatan 12"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_20",
+      "Address": "David Bagares gata 20",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DAVID_BAGARES_GATA_20",
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_20",
+        "David Bagaresg 20"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_20_A",
+      "Address": "David Bagares gata 20A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_DAVID_BAGARES_GATA_20_A",
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_20_A",
+        "David Bagaresg 20 A"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_88",
+      "Address": "Sveavägen 88",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_88",
+      "ExactFallbacks": [
+        "SVEAVAGEN_88",
+        "Sveav 88"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_138",
+      "Address": "Sveavägen 138",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_138",
+      "ExactFallbacks": [
+        "SVEAVAGEN_138",
+        "Sveav 138"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_120",
+      "Address": "Sveavägen 120",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_120",
+      "ExactFallbacks": [
+        "SVEAVAGEN_120",
+        "Sveav 120"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_124",
+      "Address": "Sveavägen 124",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_124",
+      "ExactFallbacks": [
+        "SVEAVAGEN_124",
+        "Sveav 124"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_82",
+      "Address": "Sveavägen 82",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_82",
+      "ExactFallbacks": [
+        "SVEAVAGEN_82",
+        "Sveav 82"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_79",
+      "Address": "Sveavägen 79",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_79",
+      "ExactFallbacks": [
+        "SVEAVAGEN_79",
+        "Sveav 79"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_105",
+      "Address": "Sveavägen 105",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_105",
+      "ExactFallbacks": [
+        "SVEAVAGEN_105",
+        "Sveav 105"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_83",
+      "Address": "Sveavägen 83",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_83",
+      "ExactFallbacks": [
+        "SVEAVAGEN_83",
+        "Sveav 83"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_95",
+      "Address": "Sveavägen 95",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_95",
+      "ExactFallbacks": [
+        "SVEAVAGEN_95",
+        "Sveav 95"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_121",
+      "Address": "Sveavägen 121",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_121",
+      "ExactFallbacks": [
+        "SVEAVAGEN_121",
+        "Sveav 121"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_115",
+      "Address": "Sveavägen 115",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_115",
+      "ExactFallbacks": [
+        "SVEAVAGEN_115",
+        "Sveav 115"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_122",
+      "Address": "Sveavägen 122",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_122",
+      "ExactFallbacks": [
+        "SVEAVAGEN_122",
+        "Sveav 122"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_112",
+      "Address": "Sveavägen 112",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_112",
+      "ExactFallbacks": [
+        "SVEAVAGEN_112",
+        "Sveav 112"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_61",
+      "Address": "Sveavägen 61",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_61",
+      "ExactFallbacks": [
+        "SVEAVAGEN_61",
+        "Sveav 61"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_93",
+      "Address": "Sveavägen 93",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_93",
+      "ExactFallbacks": [
+        "SVEAVAGEN_93",
+        "Sveav 93"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_139",
+      "Address": "Sveavägen 139",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_139",
+      "ExactFallbacks": [
+        "SVEAVAGEN_139",
+        "Sveav 139"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_135",
+      "Address": "Sveavägen 135",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_135",
+      "ExactFallbacks": [
+        "SVEAVAGEN_135",
+        "Sveav 135"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_130",
+      "Address": "Sveavägen 130",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_130",
+      "ExactFallbacks": [
+        "SVEAVAGEN_130",
+        "Sveav 130"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_97",
+      "Address": "Sveavägen 97",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_97",
+      "ExactFallbacks": [
+        "SVEAVAGEN_97",
+        "Sveav 97"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_137",
+      "Address": "Sveavägen 137",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_137",
+      "ExactFallbacks": [
+        "SVEAVAGEN_137",
+        "Sveav 137"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_129",
+      "Address": "Sveavägen 129",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_129",
+      "ExactFallbacks": [
+        "SVEAVAGEN_129",
+        "Sveav 129"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_117_B",
+      "Address": "Sveavägen 117B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_SVEAVAGEN_117_B",
+      "ExactFallbacks": [
+        "SVEAVAGEN_117_B",
+        "Sveav 117 B"
+      ]
+    },
+    {
+      "AddressId": "APELBERGSGATAN_36",
+      "Address": "Apelbergsgatan 36",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_APELBERGSGATAN_36",
+      "ExactFallbacks": [
+        "APELBERGSGATAN_36",
+        "Apelbergsg 36"
+      ]
+    },
+    {
+      "AddressId": "APELBERGSGATAN_60",
+      "Address": "Apelbergsgatan 60",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_APELBERGSGATAN_60",
+      "ExactFallbacks": [
+        "APELBERGSGATAN_60",
+        "Apelbergsg 60"
+      ]
+    },
+    {
+      "AddressId": "APELBERGSGATAN_42",
+      "Address": "Apelbergsgatan 42",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_APELBERGSGATAN_42",
+      "ExactFallbacks": [
+        "APELBERGSGATAN_42",
+        "Apelbergsg 42"
+      ]
+    },
+    {
+      "AddressId": "APELBERGSGATAN_54",
+      "Address": "Apelbergsgatan 54",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_APELBERGSGATAN_54",
+      "ExactFallbacks": [
+        "APELBERGSGATAN_54",
+        "Apelbergsg 54"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_12",
+      "Address": "Kammakargatan 12",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_12",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_12",
+        "Kammakarg 12"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_6",
+      "Address": "Kammakargatan 6",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_6",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_6",
+        "Kammakarg 6"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_6_A",
+      "Address": "Kammakargatan 6A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_6_A",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_6_A",
+        "Kammakarg 6 A"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_20",
+      "Address": "Kammakargatan 20",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_20",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_20",
+        "Kammakarg 20"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_8",
+      "Address": "Kammakargatan 8",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_8",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_8",
+        "Kammakarg 8"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_14",
+      "Address": "Kammakargatan 14",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_14",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_14",
+        "Kammakarg 14"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_19",
+      "Address": "Kammakargatan 19",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_19",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_19",
+        "Kammakarg 19"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_4",
+      "Address": "Kammakargatan 4",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_4",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_4",
+        "Kammakarg 4"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_10",
+      "Address": "Kammakargatan 10",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_10",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_10",
+        "Kammakarg 10"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_40",
+      "Address": "Kammakargatan 40",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_40",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_40",
+        "Kammakarg 40"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_18",
+      "Address": "Kammakargatan 18",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_18",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_18",
+        "Kammakarg 18"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_30",
+      "Address": "Kammakargatan 30",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_30",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_30",
+        "Kammakarg 30"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_11",
+      "Address": "Kammakargatan 11",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_11",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_11",
+        "Kammakarg 11"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_8_B",
+      "Address": "Kammakargatan 8B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_8_B",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_8_B",
+        "Kammakarg 8 B"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_13",
+      "Address": "Kammakargatan 13",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_13",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_13",
+        "Kammakarg 13"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_6_B",
+      "Address": "Kammakargatan 6B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_6_B",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_6_B",
+        "Kammakarg 6 B"
+      ]
+    },
+    {
+      "AddressId": "KAMMAKARGATAN_8_A",
+      "Address": "Kammakargatan 8A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_KAMMAKARGATAN_8_A",
+      "ExactFallbacks": [
+        "KAMMAKARGATAN_8_A",
+        "Kammakarg 8 A"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_43",
+      "Address": "Malmskillnadsgatan 43",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_43",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_43",
+        "Malmskillnadsg 43"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_41",
+      "Address": "Malmskillnadsgatan 41",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_41",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_41",
+        "Malmskillnadsg 41"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_47",
+      "Address": "Malmskillnadsgatan 47",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_47",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_47",
+        "Malmskillnadsg 47"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_45",
+      "Address": "Malmskillnadsgatan 45",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_45",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_45",
+        "Malmskillnadsg 45"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_60",
+      "Address": "Malmskillnadsgatan 60",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_60",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_60",
+        "Malmskillnadsg 60"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_47_A",
+      "Address": "Malmskillnadsgatan 47A",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_47_A",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_47_A",
+        "Malmskillnadsg 47 A"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_47_B",
+      "Address": "Malmskillnadsgatan 47B",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_47_B",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_47_B",
+        "Malmskillnadsg 47 B"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_64",
+      "Address": "Malmskillnadsgatan 64",
+      "PreferredMatch": "doorbell_tag",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": "DOORBELL_MALMSKILLNADSGATAN_64",
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_64",
+        "Malmskillnadsg 64"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_4",
+      "Address": "Kungsgatan 4",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_4",
+        "Kungsgatan 4"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_5",
+      "Address": "Kungsgatan 5",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_5",
+        "Kungsgatan 5"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_26",
+      "Address": "Kungsgatan 26",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_26",
+        "Kungsgatan 26"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_40",
+      "Address": "Kungsgatan 40",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_40",
+        "Kungsgatan 40"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_43",
+      "Address": "Kungsgatan 43",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_43",
+        "Kungsgatan 43"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_44",
+      "Address": "Kungsgatan 44",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_44",
+        "Kungsgatan 44"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_45_49",
+      "Address": "Kungsgatan 45-49",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_45_49",
+        "Kungsgatan 45-49"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_50",
+      "Address": "Kungsgatan 50",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_50",
+        "Kungsgatan 50"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_19",
+      "Address": "Kungsgatan 19",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_19",
+        "Kungsgatan 19"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_71",
+      "Address": "Sveavägen 71",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_71",
+        "Sveavägen 71"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_55",
+      "Address": "Regeringsgatan 55",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "REGERINGSGATAN_55",
+        "Regeringsgatan 55"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_27",
+      "Address": "Birger Jarlsgatan 27",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_27",
+        "Birger Jarlsgatan 27"
+      ]
+    },
+    {
+      "AddressId": "LUNTMAKARGATAN_50",
+      "Address": "Luntmakargatan 50",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "LUNTMAKARGATAN_50",
+        "Luntmakargatan 50"
+      ]
+    },
+    {
+      "AddressId": "TEGNERGATAN_20_B",
+      "Address": "Tegnérgatan 20B",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "TEGNERGATAN_20_B",
+        "Tegnérgatan 20B"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_44",
+      "Address": "Sveavägen 44",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_44",
+        "Sveavägen 44"
+      ]
+    },
+    {
+      "AddressId": "DAVID_BAGARES_GATA_19",
+      "Address": "David Bagares gata 19",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "DAVID_BAGARES_GATA_19",
+        "David Bagares gata 19"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_41",
+      "Address": "Sveavägen 41",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_41",
+        "Sveavägen 41"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_42",
+      "Address": "Sveavägen 42",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_42",
+        "Sveavägen 42"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_48",
+      "Address": "Sveavägen 48",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_48",
+        "Sveavägen 48"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_68",
+      "Address": "Sveavägen 68",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_68",
+        "Sveavägen 68"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_70",
+      "Address": "Sveavägen 70",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_70",
+        "Sveavägen 70"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_53",
+      "Address": "Sveavägen 53",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_53",
+        "Sveavägen 53"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_4_B",
+      "Address": "Kungsgatan 4B",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_4_B",
+        "Kungsgatan 4B"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_29",
+      "Address": "Kungsgatan 29",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_29",
+        "Kungsgatan 29"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_43",
+      "Address": "Birger Jarlsgatan 43",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_43",
+        "Birger Jarlsgatan 43"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_35",
+      "Address": "Birger Jarlsgatan 35",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_35",
+        "Birger Jarlsgatan 35"
+      ]
+    },
+    {
+      "AddressId": "SNICKARBACKEN_10",
+      "Address": "Snickarbacken 10",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SNICKARBACKEN_10",
+        "Snickarbacken 10"
+      ]
+    },
+    {
+      "AddressId": "SNICKARBACKEN_4",
+      "Address": "Snickarbacken 4",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SNICKARBACKEN_4",
+        "Snickarbacken 4"
+      ]
+    },
+    {
+      "AddressId": "APELBERGSGATAN_47",
+      "Address": "Apelbergsgatan 47",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "APELBERGSGATAN_47",
+        "Apelbergsgatan 47"
+      ]
+    },
+    {
+      "AddressId": "MALMSKILLNADSGATAN_46",
+      "Address": "Malmskillnadsgatan 46",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "MALMSKILLNADSGATAN_46",
+        "Malmskillnadsgatan 46"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_32",
+      "Address": "Holländargatan 32",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_32",
+        "Holländargatan 32"
+      ]
+    },
+    {
+      "AddressId": "REGERINGSGATAN_86",
+      "Address": "Regeringsgatan 86",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "REGERINGSGATAN_86",
+        "Regeringsgatan 86"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_15",
+      "Address": "Kungsgatan 15",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_15",
+        "Kungsgatan 15"
+      ]
+    },
+    {
+      "AddressId": "HOLLANDARGATAN_2",
+      "Address": "Holländargatan 2",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "HOLLANDARGATAN_2",
+        "Holländargatan 2"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_23",
+      "Address": "Sveavägen 23",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_23",
+        "Sveavägen 23"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_41",
+      "Address": "Birger Jarlsgatan 41",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_41",
+        "Birger Jarlsgatan 41"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_37",
+      "Address": "Kungsgatan 37",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_37",
+        "Kungsgatan 37"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_16",
+      "Address": "Kungsgatan 16",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_16",
+        "Kungsgatan 16"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_28_30",
+      "Address": "Birger Jarlsgatan 28-30",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_28_30",
+        "Birger Jarlsgatan 28-30"
+      ]
+    },
+    {
+      "AddressId": "KUNGSGATAN_18",
+      "Address": "Kungsgatan 18",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "KUNGSGATAN_18",
+        "Kungsgatan 18"
+      ]
+    },
+    {
+      "AddressId": "BIRGER_JARLSGATAN_24",
+      "Address": "Birger Jarlsgatan 24",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "BIRGER_JARLSGATAN_24",
+        "Birger Jarlsgatan 24"
+      ]
+    },
+    {
+      "AddressId": "SVEAVAGEN_34_36",
+      "Address": "Sveavägen 34-36",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SVEAVAGEN_34_36",
+        "Sveavägen 34-36"
+      ]
+    },
+    {
+      "AddressId": "ADOLF_FREDRIKS_KYRKOGATA_10",
+      "Address": "Adolf Fredriks kyrkogata 10",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "ADOLF_FREDRIKS_KYRKOGATA_10",
+        "Adolf Fredriks Kyrkog 10"
+      ]
+    },
+    {
+      "AddressId": "DROTTNINGGATAN_88",
+      "Address": "Drottninggatan 88",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "DROTTNINGGATAN_88",
+        "Drottninggatan 88"
+      ]
+    },
+    {
+      "AddressId": "SNICKARBACKEN_8",
+      "Address": "Snickarbacken 8",
+      "PreferredMatch": "exact_address",
+      "ExplicitAnchorId": null,
+      "DoorbellActorTag": null,
+      "ExactFallbacks": [
+        "SNICKARBACKEN_8",
+        "Snickarbacken 8"
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@
 #include "TMOPMainMenuIntroDirector.generated.h"
 
 class ACameraActor;
+class APlayerController;
 class ATMOPConfiguredVehicle;
 class ATMOPHistoricalAgent;
 class ATMOPPlayerCharacter;
@@ -88,6 +89,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Intro|Presentation") TObjectPtr<UDataTable> IntroCardsTable;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Intro|Presentation")
     FTMOPIntroTextPresentationSettings IntroTextSettings;
+    /** Safety limit so a blocked or broken traffic route cannot trap the start flow. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Intro|Finish",
+        meta=(ClampMin="10.0", Units="s"))
+    float IntroTimeoutSeconds = 120.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Intro|Finish") FTMOPTime GameStartTime = FTMOPTime(23, 0, 0);
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Main Menu") void StartNewGame();
@@ -118,6 +123,7 @@ private:
     FName ActiveCardId = NAME_None;
     bool bInitialized = false;
     bool bMenuInputApplied = false;
+    TSet<TWeakObjectPtr<APlayerController>> MenuInputControllers;
     bool bNewGameRequested = false;
     bool bIntroActive = false;
     bool bWaitingForSettingsClose = false;

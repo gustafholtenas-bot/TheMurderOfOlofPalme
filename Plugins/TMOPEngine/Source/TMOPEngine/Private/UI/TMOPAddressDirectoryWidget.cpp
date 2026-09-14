@@ -1,6 +1,6 @@
 #include "UI/TMOPAddressDirectoryWidget.h"
-#include "UI/TMOPControlUIHelpers.h"
 #include "UI/TMOPLocalPanel.h"
+#include "UI/TMOPControlUIHelpers.h"
 
 #include "InputCoreTypes.h"
 #include "Player/TMOPPlayerCharacter.h"
@@ -93,10 +93,8 @@ TSharedRef<SWidget> UTMOPAddressDirectoryWidget::RebuildWidget()
               + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 16.0f, 0.0f, 0.0f)
               [ SNew(STextBlock)
                 .Text_Lambda([this]() { return FText::Format(
-                    NSLOCTEXT("TMOP", "AddressCloseHint", "{0} / {1} — Stäng"),
-                    Player.IsValid() ? Player->GetInteractKeyDisplayText() : FText::FromString(TEXT("E")),
-                    TMOPControlDisplayText(this, ETMOPControlAction::MenuBack,
-                        FText::FromString(TEXT("Esc")))); })
+                    NSLOCTEXT("TMOP", "AddressCloseHint", "{0} / Esc — Stäng"),
+                    Player.IsValid() ? Player->GetInteractKeyDisplayText() : FText::FromString(TEXT("E"))); })
                 .Font(FCoreStyle::GetDefaultFontStyle("Regular", 14))
                 .ColorAndOpacity(FLinearColor(0.7f, 0.73f, 0.76f)) ] ] ] ]);
 }
@@ -115,26 +113,27 @@ FReply UTMOPAddressDirectoryWidget::NativeOnPreviewKeyDown(const FGeometry& Geom
     if (ScrollBox.IsValid())
     {
         float ScrollDelta = 0.0f;
-        const bool bProfiles = TMOPHasControlProfiles(this);
-        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuDown)) ||
-            (!bProfiles && Key == EKeys::Gamepad_DPad_Down)) ScrollDelta = 64.0f;
-        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuUp)) ||
-            (!bProfiles && Key == EKeys::Gamepad_DPad_Up)) ScrollDelta = -64.0f;
-        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuZoomIn)) ||
-            (!bProfiles && Key == EKeys::Gamepad_RightShoulder)) ScrollDelta = 360.0f;
-        if ((bProfiles && TMOPMatchesControl(this, Key, ETMOPControlAction::MenuZoomOut)) ||
-            (!bProfiles && Key == EKeys::Gamepad_LeftShoulder)) ScrollDelta = -360.0f;
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuDown) ||
+            (!TMOPHasControlProfiles(this) && Key == EKeys::Gamepad_DPad_Down)) ScrollDelta = 64.0f;
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuUp) ||
+            (!TMOPHasControlProfiles(this) && Key == EKeys::Gamepad_DPad_Up)) ScrollDelta = -64.0f;
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuNextPage) ||
+            (!TMOPHasControlProfiles(this) && Key == EKeys::Gamepad_RightShoulder)) ScrollDelta = 360.0f;
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuPreviousPage) ||
+            (!TMOPHasControlProfiles(this) && Key == EKeys::Gamepad_LeftShoulder)) ScrollDelta = -360.0f;
         if (ScrollDelta != 0.0f)
         {
             ScrollBox->SetScrollOffset(FMath::Max(0.0f, ScrollBox->GetScrollOffset() + ScrollDelta));
             return FReply::Handled();
         }
     }
-    const bool bProfiles = TMOPHasControlProfiles(this);
-    if ((bProfiles && (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack) ||
-                       TMOPMatchesControl(this, Key, ETMOPControlAction::Interact))) ||
-        (!bProfiles && (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right ||
-            (Player.IsValid() && Key == Player->InteractFallbackKey))))
+    const bool bProfileClose = TMOPMatchesControl(this, Key, ETMOPControlAction::Cancel) ||
+        TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack) ||
+        TMOPMatchesControl(this, Key, ETMOPControlAction::Interact);
+    const bool bLegacyClose = !TMOPHasControlProfiles(this) &&
+        (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right ||
+         (Player.IsValid() && Key == Player->InteractFallbackKey));
+    if (bProfileClose || bLegacyClose)
     {
         if (!KeyEvent.IsRepeat()) return HandleClose();
         return FReply::Handled();

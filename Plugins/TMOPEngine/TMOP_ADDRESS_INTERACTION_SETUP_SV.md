@@ -17,15 +17,22 @@ Simuleringens klocka fortsätter gå.
 3. Öppna spelbanan med de befintliga adressankarna. Stoppa Play och ladda de
    sublevels/World Partition-regioner som ska kopplas. Spelaren ska vara
    `BP_TMOPPlayerCharacter`, med `TMOPPlayerCharacter` som C++-förälder.
-4. Kör **Tools → Execute Python Script** och välj
-   `Scripts/tmop_install_address_components.py`. Aktivera **Python Editor
-   Script Plugin** om Python-menyn saknas.
-5. Läs sammanfattningen i Output Log och välj **Save All** för att spara både
-   adressregistret och banans ändrade actors. Kör därefter Play.
+4. Kontrollera att den fullständiga filen finns i
+   `DataTables/09_13/DT_TMOP_AddressRegistry.json` och kör sedan
+   **Tools → Execute Python Script → `Scripts/tmop_install_address_components.py`**.
+   Aktivera **Python Editor Script Plugin** om Python-menyn saknas.
+5. Scriptet uppdaterar den befintliga DataTable-asseten, kopplar alla säkra
+   träffar och sparar tabellen och den aktuella banan. Läs sammanfattningen i
+   Output Log och rapporten i `Saved/TMOP/Reports/`. Om automatisk sparning
+   rapporteras som ofullständig, välj **Save All**.
 
-Scriptet använder `/Game/TMOP/Data/DT_TMOP_AddressRegistry`. Om den importerade
-tabellen har ett annat namn ändrar du `REGISTRY_PATH` överst i scriptet.
-Tabellen måste ha radtypen `TMOPAddressRegistryRow`.
+Scriptet använder `/Game/TMOP/Data/DT_TMOP_AddressRegistry` och den medföljande
+JSON-filen med 334 adressrader. Tabellen måste ha radtypen
+`TMOPAddressRegistryRow`. Asseten ersätts inte: raderna uppdateras i samma
+DataTable så att befintliga komponentreferenser fortsätter fungera. Manuellt
+skapade `EntranceAnchorId`, `BuildingAnchorId` och `DoorbellActorTag` bevaras
+när motsvarande värde är tomt i JSON-filen. Rader som bara finns i DataTable
+bevaras också. En JSON-backup av tabellen skrivs före varje körning.
 
 ## Vad scriptet kopplar
 
@@ -35,8 +42,10 @@ banan. Det skapar eller flyttar inga ankare. Matchningsordningen är:
 1. Explicit `EntranceAnchorId`, annars `BuildingAnchorId`.
 2. En redan kopplad adresskomponent för samma tabellrad.
 3. Adressradens `DoorbellActorTag` på ankaret.
-4. Exakt adress/AddressId/radnamn mot ankarets ID, label eller display name,
-   normaliserat för mellanslag, understreck och svenska bokstäver.
+4. Exakt adress, `RegistrySearchText`, AddressId eller radnamn mot ankarets ID,
+   label, display name eller tags, normaliserat för mellanslag, understreck och
+   svenska bokstäver. Tekniska prefix som `ADDRESS_`, `DOORBELL_` och `ANCHOR_`
+   får tas bort, men resten måste fortfarande vara en exakt adress.
 
 `5–7` hålls skilt från `57`, och `12A` hålls skilt från `12` och `12B`.
 Scriptet gissar inte utifrån närmaste position eller delar av ett namn.
@@ -51,9 +60,10 @@ Scriptet kan köras igen utan att skapa extra komponenter; handjusterad
 
 Rapporten sparas i `Saved/TMOP/Reports/address_components_<tid>.json` och
 redovisar varje adress: kopplad, redan kopplad, saknad, tvetydig eller konflikt.
-Den räknar bara laddade ankare. Ladda fler delar av banan och kör igen vid behov.
-Kopplingarna kan ångras med Ctrl+Z innan du lämnar editorsessionen.
-För en ren förhandskontroll, sätt `DRY_RUN = True` i scriptet.
+Den visar också registermergen och om allt sparades. Backupen heter
+`address_registry_before_<tid>.json`. Scriptet räknar bara laddade ankare.
+Ladda fler delar av banan och kör igen vid behov. För en ren förhandskontroll,
+sätt `DRY_RUN = True`; sätt `AUTO_SAVE = False` om du vill granska innan du sparar.
 
 ## Höjd, placering och namn
 
@@ -77,7 +87,8 @@ familj. Födelsedata visas inte.
 
 ## Kontroller
 
-Lokalt godkända: 11 tester av adressmatchningen, Python-syntax och diffkontroll.
+Lokalt godkända tester täcker adressmatchning, registermerge, Python-syntax och
+diffkontroll.
 Testerna täcker bland annat portbokstäver, nummerintervall, tvetydiga ankare,
 prioritet för explicita länkar, bevarade befintliga kopplingar och att flera
 adresser inte tilldelas samma ankare.
@@ -86,6 +97,11 @@ Unreal Editor/UE 5.8 finns inte i byggmiljön här. C++-koden är därför inte
 kompilerad eller speltestad här, och scriptet har inte körts mot din öppna bana.
 Automationstesterna `TMOP.Address.Display` och `TMOP.Address.Component` finns
 för körning i Unreal efter kompilering.
+
+Efter körningen ska summan av `connected` och `already_connected` motsvara alla
+adressrader vars ankare är laddade. `missing` betyder att något säkert matchande
+ankare inte fanns i de laddade nivådelarna; scriptet skapar ingen position genom
+gissning. Rätta ankarnamnet eller koppla raden manuellt i TMOP Address Editor.
 
 Prova i Play: sikta på en adress, gå inom tre meter, öppna och scrolla listan,
 stäng med E/Esc/knappen, öppna en annan adress, och kontrollera att personer och

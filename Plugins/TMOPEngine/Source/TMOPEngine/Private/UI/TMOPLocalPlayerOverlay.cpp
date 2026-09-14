@@ -13,6 +13,7 @@
 #include "Time/TMOPClockSubsystem.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "World/TMOPFindingActor.h"
+#include "World/TMOPInspectableComponent.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/Text/STextBlock.h"
@@ -34,7 +35,7 @@ TSharedRef<SWidget> UTMOPLocalPlayerOverlay::RebuildWidget()
         {
             const auto* Player = Cast<ATMOPPlayerCharacter>(GetOwningPlayerPawn());
             return Player && UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) &&
-                (Player->IsGameplayHUDVisible() || Player->bPauseMenuOpen || Player->bLoopEndMenuOpen)
+                Player->IsGameplayHUDVisible()
                 ? EVisibility::HitTestInvisible : EVisibility::Collapsed;
         })
         + SOverlay::Slot().HAlign(HAlign_Left).VAlign(VAlign_Top).Padding(12)
@@ -59,11 +60,17 @@ void UTMOPLocalPlayerOverlay::NativeTick(const FGeometry& Geometry, float DeltaT
 {
     Super::NativeTick(Geometry, DeltaTime);
     const auto* Player = Cast<ATMOPPlayerCharacter>(GetOwningPlayerPawn());
-    if (!Player || !UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this)) { NearbyLabels.Reset(); return; }
+    if (!Player || !UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
+    {
+        NearbyLabels.Reset();
+        NearbyInspectables.Reset();
+        return;
+    }
     RefreshElapsed += DeltaTime;
     if (RefreshElapsed < 0.25f) return;
     RefreshElapsed = 0;
     NearbyLabels.Reset();
+    NearbyInspectables.Reset();
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
         if (!It->IsHidden() && FindLabel(*It) &&
             FVector::DistSquared(It->GetActorLocation(), Player->GetActorLocation()) < FMath::Square(2000.0f))
@@ -72,6 +79,22 @@ void UTMOPLocalPlayerOverlay::NativeTick(const FGeometry& Geometry, float DeltaT
     { return FVector::DistSquared(A->GetActorLocation(), Player->GetActorLocation()) <
         FVector::DistSquared(B->GetActorLocation(), Player->GetActorLocation()); });
     if (NearbyLabels.Num() > 24) NearbyLabels.SetNum(24);
+
+    TArray<UTMOPInspectableComponent*> Inspectables;
+    UTMOPInspectableComponent::GetActiveInWorld(GetWorld(), Inspectables);
+    const FVector ViewLocation = Player->GetPawnViewLocation();
+    for (UTMOPInspectableComponent* Inspection : Inspectables)
+        if (IsValid(Inspection) && Inspection->ShouldShowWorldIndicatorAt(ViewLocation) &&
+            Inspection->IsVisibleFrom(ViewLocation, Player))
+            NearbyInspectables.Add(Inspection);
+    NearbyInspectables.Sort([ViewLocation](
+        const TWeakObjectPtr<UTMOPInspectableComponent>& A,
+        const TWeakObjectPtr<UTMOPInspectableComponent>& B)
+    {
+        return FVector::DistSquared(A->GetWorldIndicatorLocation(), ViewLocation) <
+            FVector::DistSquared(B->GetWorldIndicatorLocation(), ViewLocation);
+    });
+    if (NearbyInspectables.Num() > 48) NearbyInspectables.SetNum(48);
 }
 
 int32 UTMOPLocalPlayerOverlay::NativePaint(const FPaintArgs& Args, const FGeometry& Geometry,
@@ -80,7 +103,7 @@ int32 UTMOPLocalPlayerOverlay::NativePaint(const FPaintArgs& Args, const FGeomet
 {
     const auto* Player = Cast<ATMOPPlayerCharacter>(GetOwningPlayerPawn());
     if (!Player || !UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ||
-        (!Player->IsGameplayHUDVisible() && !Player->bPauseMenuOpen && !Player->bLoopEndMenuOpen)) return LayerId;
+        !Player->IsGameplayHUDVisible()) return LayerId;
     const int32 Result = Super::NativePaint(Args, Geometry, CullingRect, Elements, LayerId, Style, bParentEnabled);
     if (!Player->IsGameplayHUDVisible()) return Result;
     const float Scale = FMath::Max(0.01f, UWidgetLayoutLibrary::GetViewportScale(this));
@@ -99,5 +122,25 @@ int32 UTMOPLocalPlayerOverlay::NativePaint(const FPaintArgs& Args, const FGeomet
             Label->Text, FCoreStyle::GetDefaultFontStyle("Regular", 10),
             ESlateDrawEffect::None, FLinearColor(Label->TextRenderColor));
     }
-    return Result + 1;
+    for (const auto& WeakInspection : NearbyInspectables)
+    {
+        const UTMOPInspectableComponent* Inspection = WeakInspection.Get();
+        if (!IsValid(Inspection) || !Inspection->ShouldShowWorldIndicatorAt(
+            Player->GetPawnViewLocation())) continue;
+        FVector2D Position;
+        if (!GetOwningPlayer()->ProjectWorldLocationToScreen(
+            Inspection->GetWorldIndicatorLocation(), Position, true)) continue;
+        Position /= Scale;
+        if (Position.X < 12 || Position.Y < 60 ||
+            Position.X > Geometry.GetLocalSize().X - 36 ||
+            Position.Y > Geometry.GetLocalSize().Y - 36) continue;
+        FSlateDrawElement::MakeText(Elements, Result + 2,
+            Geometry.ToPaintGeometry(FVector2D(36, 36),
+                FSlateLayoutTransform(Position - FVector2D(18, 18))),
+            Inspection->WorldIndicatorText,
+            FCoreStyle::GetDefaultFontStyle("Bold", 22),
+            ESlateDrawEffect::None,
+            FLinearColor(Inspection->WorldIndicatorColor));
+    }
+    return Result + 2;
 }

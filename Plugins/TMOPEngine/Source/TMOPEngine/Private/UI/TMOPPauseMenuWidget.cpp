@@ -1,5 +1,7 @@
 #include "UI/TMOPPauseMenuWidget.h"
 #include "UI/TMOPLocalPanel.h"
+#include "UI/TMOPControlsPanel.h"
+#include "UI/TMOPControlUIHelpers.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Components/TextRenderComponent.h"
@@ -39,8 +41,6 @@
 #include "Widgets/SLeafWidget.h"
 #include "Widgets/Text/STextBlock.h"
 #include "UI/TMOPTypographyDirector.h"
-#include "UI/TMOPControlsPanel.h"
-#include "UI/TMOPControlUIHelpers.h"
 
 namespace
 {
@@ -324,10 +324,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
     NavigationPanel->AddSlot().AutoHeight().Padding(3.0f)
     [ SNew(SButton).ButtonColorAndOpacity(MenuColors.ButtonBackground)
       .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked)
-      [ SNew(STextBlock).Text_Lambda([this]()
-        { return FText::Format(FText::FromString(TEXT("FORTSÄTT ({0} / {1})")),
-            TMOPControlDisplayText(this, ETMOPControlAction::Pause, FText::FromString(TEXT("Enter"))),
-            TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, FText::FromString(TEXT("Esc")))); })
+      [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT (ENTER / ESC)"))
         .Font(ATMOPTypographyDirector::ResolveFont(this,
             TEXT("PauseMenuNavigation"),
             FCoreStyle::GetDefaultFontStyle("Regular", 16)))
@@ -1445,11 +1442,13 @@ FReply UTMOPPauseMenuWidget::HandleResumeClicked()
 FReply UTMOPPauseMenuWidget::NativeOnKeyDown(const FGeometry& Geometry,const FKeyEvent& Event)
 {
     const FKey Key=Event.GetKey();
-    const bool bProfiles = TMOPHasControlProfiles(this);
-    if ((bProfiles && (TMOPMatchesControl(this, Key, ETMOPControlAction::Pause) ||
-                       TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack))) ||
-        (!bProfiles && (Key==EKeys::Enter || Key==EKeys::Escape ||
-            Key==EKeys::Gamepad_Special_Right || Key==EKeys::Gamepad_FaceButton_Right)))
+    const bool bProfileClose = TMOPMatchesControl(this, Key, ETMOPControlAction::Pause) ||
+        TMOPMatchesControl(this, Key, ETMOPControlAction::Cancel) ||
+        TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack);
+    const bool bLegacyClose = !TMOPHasControlProfiles(this) &&
+        (Key==EKeys::Enter || Key==EKeys::Escape ||
+         Key==EKeys::Gamepad_Special_Right || Key==EKeys::Gamepad_FaceButton_Right);
+    if (bProfileClose || bLegacyClose)
         return HandleResumeClicked();
     return Super::NativeOnKeyDown(Geometry,Event);
 }

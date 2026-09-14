@@ -68,6 +68,9 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Player|Camera")
     UCameraComponent* GetGameplayCamera() const;
 
+    /** Current reticle target point used by focused look zoom. */
+    bool GetLookZoomFocusPoint(FVector& OutWorldPoint) const;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<UTMOPAnimationStateComponent> AnimationState;
 
@@ -193,6 +196,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Agent Info")
     bool bCreateAgentInfoChartWidget = true;
+
+    /** Prevents an older Blueprint class from silently replacing the structured native chart. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|UI|Agent Info")
+    bool bForceNativeAgentInfoChartWidget = true;
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|UI|Agent Info")
     TObjectPtr<UTMOPAgentInfoChartWidget> AgentInfoChartWidget;
@@ -432,6 +439,15 @@ public:
         meta=(ClampMin="1.0"))
     float DialogCameraTrackingSpeed = 8.0f;
 
+    /** Keeps an inspected NPC in the left-hand part of the composed frame. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Agent Info",
+        meta=(ClampMin="0.0", ClampMax="180.0", Units="cm"))
+    float AgentInfoCameraCompositionOffsetCm = 72.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Camera|Agent Info",
+        meta=(ClampMin="20.0", ClampMax="90.0"))
+    float AgentInfoCameraFieldOfView = 46.0f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
     float InteractionDistance = 300.0f;
 
@@ -597,7 +613,8 @@ private:
     void UpdateInteractionPrompt();
     AActor* FindInteractionTargetForInformation(AActor* InformationTarget) const;
     void SetSprinting(bool bEnabled, bool bExtraSprint = false);
-    void BeginDialogCloseUp(ATMOPHistoricalAgent* HistoricalAgent);
+    void BeginDialogCloseUp(ATMOPHistoricalAgent* HistoricalAgent,
+        bool bFrameSubjectOnLeft = false);
     void UpdateDialogCloseUp(float DeltaSeconds);
     void EndDialogCloseUp();
 
@@ -628,7 +645,9 @@ private:
     TWeakObjectPtr<UTMOPInspectableComponent> ActiveInspection;
     TSet<FName> GameplayHUDHiddenReasons;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
+    TWeakObjectPtr<ATMOPHistoricalAgent> ActiveCloseUpAgent;
     UPROPERTY(Transient)
     TObjectPtr<ACameraActor> DialogCameraActor;
     TWeakObjectPtr<AActor> PreDialogViewTarget;
+    bool bCloseUpFramesSubjectOnLeft = false;
 };

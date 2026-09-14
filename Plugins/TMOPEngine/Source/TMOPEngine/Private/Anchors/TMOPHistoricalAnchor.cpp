@@ -5,6 +5,7 @@
 #include "Components/TextRenderComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "NavigationSystem.h"
+#include "Transit/TMOPMetroEntranceBoardComponent.h"
 
 ATMOPHistoricalAnchor::ATMOPHistoricalAnchor()
 {
@@ -29,6 +30,37 @@ ATMOPHistoricalAnchor::ATMOPHistoricalAnchor()
     DebugLabel->SetWorldSize(24.0f);
     DebugLabel->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
     DebugLabel->SetHiddenInGame(true);
+}
+
+void ATMOPHistoricalAnchor::BeginPlay()
+{
+    Super::BeginPlay();
+    if (FindComponentByClass<UTMOPMetroEntranceBoardComponent>()) return;
+
+    const FString Id = GetAnchorId().ToString();
+    // Interior/path targets must not receive a street-level arrival display.
+    if (Id.Contains(TEXT("inside"), ESearchCase::IgnoreCase)) return;
+    FName StationId = NAME_None;
+    FText StationName;
+    if (Id.StartsWith(TEXT("MetroHotorget"), ESearchCase::IgnoreCase))
+    {
+        StationId = TEXT("HOTORGET");
+        StationName = NSLOCTEXT("TMOP", "MetroStationHotorget", "Hötorget");
+    }
+    else if (Id.StartsWith(TEXT("MetroRadmansgatan"), ESearchCase::IgnoreCase))
+    {
+        StationId = TEXT("RADMANS_GATAN");
+        StationName = NSLOCTEXT("TMOP", "MetroStationRadmansgatan", "Rådmansgatan");
+    }
+    if (StationId.IsNone()) return;
+
+    UTMOPMetroEntranceBoardComponent* Board =
+        NewObject<UTMOPMetroEntranceBoardComponent>(this,
+            TEXT("MetroEntranceBoard"), RF_Transient);
+    if (!IsValid(Board)) return;
+    Board->ConfigureForStation(StationId, StationName);
+    AddInstanceComponent(Board);
+    Board->RegisterComponent();
 }
 
 void ATMOPHistoricalAnchor::OnConstruction(const FTransform& Transform)

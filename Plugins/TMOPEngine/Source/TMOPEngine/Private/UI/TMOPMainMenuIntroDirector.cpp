@@ -105,6 +105,7 @@ void ATMOPMainMenuIntroDirector::BeginPlay()
 
 void ATMOPMainMenuIntroDirector::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    SetMenuInput(false);
     if (ATMOPPlayerCharacter* Player = GetPlayerCharacter())
     {
         Player->SetGameplayHUDHidden(TEXT("MainMenu"), false);
@@ -160,24 +161,52 @@ void ATMOPMainMenuIntroDirector::TryInitializeMenu()
 
 void ATMOPMainMenuIntroDirector::SetMenuInput(const bool bMenuInput)
 {
-    APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
-    if (!IsValid(Controller)) return;
-    Controller->bShowMouseCursor = bMenuInput;
-    // Ignore-input uses a counter; repeated intro/menu refreshes must not stack it.
-    if (bMenuInputApplied != bMenuInput)
+    UGameInstance* GameInstance = GetGameInstance();
+    if (!GameInstance) return;
+    APlayerController* PrimaryController = UGameplayStatics::GetPlayerController(this, 0);
+    if (!IsValid(PrimaryController)) return;
+
+    // Ignore-input uses a counter. Track each controller because players 2–4
+    // may be created while player 1 already owns the menu input lock.
+    if (bMenuInput)
     {
-        Controller->SetIgnoreMoveInput(bMenuInput);
-        Controller->SetIgnoreLookInput(bMenuInput);
-        bMenuInputApplied = bMenuInput;
+        for (ULocalPlayer* LocalPlayer : GameInstance->GetLocalPlayers())
+            if (APlayerController* Controller = LocalPlayer
+                ? LocalPlayer->GetPlayerController(GetWorld()) : nullptr)
+            {
+                if (!MenuInputControllers.Contains(Controller))
+                {
+                    Controller->SetIgnoreMoveInput(true);
+                    Controller->SetIgnoreLookInput(true);
+                    MenuInputControllers.Add(Controller);
+                }
+                Controller->bShowMouseCursor = Controller == PrimaryController;
+                if (Controller != PrimaryController)
+                    Controller->SetInputMode(FInputModeGameOnly());
+            }
     }
+    else
+    {
+        for (const TWeakObjectPtr<APlayerController>& Entry : MenuInputControllers)
+            if (APlayerController* Controller = Entry.Get())
+            {
+                Controller->SetIgnoreMoveInput(false);
+                Controller->SetIgnoreLookInput(false);
+                Controller->bShowMouseCursor = false;
+                Controller->SetInputMode(FInputModeGameOnly());
+            }
+        MenuInputControllers.Reset();
+    }
+    bMenuInputApplied = bMenuInput;
+
     if (bMenuInput && IsValid(MainMenuWidget))
     {
         FInputModeUIOnly Mode;
         Mode.SetWidgetToFocus(MainMenuWidget->TakeWidget());
         Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-        Controller->SetInputMode(Mode);
+        PrimaryController->SetInputMode(Mode);
     }
-    else Controller->SetInputMode(FInputModeGameOnly());
+    else PrimaryController->SetInputMode(FInputModeGameOnly());
 }
 
 void ATMOPMainMenuIntroDirector::StartNewGame()
@@ -186,8 +215,20 @@ void ATMOPMainMenuIntroDirector::StartNewGame()
     bNewGameRequested = true;
     StartupStatus = FText::GetEmpty();
     ActiveIntroDestinationAnchorId = IntroDestinationAnchorId;
-    GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->ConfigureSession(
+    UTMOPLocalMultiplayerSubsystem* LocalSession =
+        GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
+    LocalSession->ConfigureSession(
         LocalPlayerCount, bKeyboardForPlayerOne, bSharedKeyboardForPlayerTwo);
+    // Create every selected local player before hiding the menu. Previously
+    // this happened only when the optional driving intro ended, so a stalled
+    // route looked like a frozen menu and the world contained only player 1.
+    if (!LocalSession->EnsurePlayerCount(LocalPlayerCount, StartupStatus))
+    {
+        bNewGameRequested = false;
+        UE_LOG(LogTemp, Error, TEXT("TMOP main menu could not create %d local players: %s"),
+            LocalPlayerCount, *StartupStatus.ToString());
+        return;
+    }
     if (IsValid(MainMenuWidget))
     {
         MainMenuWidget->SetMenuMode(false);
@@ -376,6 +417,14 @@ bool ATMOPMainMenuIntroDirector::SpawnAndStartIntro()
 void ATMOPMainMenuIntroDirector::UpdateIntro(const float DeltaSeconds)
 {
     IntroElapsedSeconds += DeltaSeconds;
+    if (IntroElapsedSeconds >= FMath::Max(10.0f, IntroTimeoutSeconds))
+    {
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP intro exceeded %.1f seconds; completing start flow."),
+            IntroTimeoutSeconds);
+        FinishIntro();
+        return;
+    }
     for (int32 Index = CameraShots.Num() - 1; Index >= 0; --Index)
         if (IntroElapsedSeconds >= CameraShots[Index].StartSeconds)
         { if (Index != ActiveCameraShotIndex) ApplyCameraShot(Index); break; }

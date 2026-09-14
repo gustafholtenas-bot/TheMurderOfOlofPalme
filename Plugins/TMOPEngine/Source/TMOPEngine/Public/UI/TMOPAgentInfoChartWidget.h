@@ -3,10 +3,12 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "People/TMOPPersonProfileTypes.h"
+#include "Styling/SlateBrush.h"
 #include "TMOPAgentInfoChartWidget.generated.h"
 
 class ATMOPPlayerCharacter;
 class SBorder;
+class SImage;
 class STextBlock;
 class SScrollBox;
 
@@ -39,6 +41,10 @@ private:
     TSharedPtr<STextBlock> InterviewStatusText;
     TSharedPtr<STextBlock> TimelineText;
     TSharedPtr<STextBlock> ObservationText;
+    TSharedPtr<STextBlock> PostMurderEventsText;
     TSharedPtr<STextBlock> SourceText;
+    TSharedPtr<SImage> PortraitImage;
+    TSharedPtr<STextBlock> PortraitPlaceholder;
+    FSlateBrush PortraitBrush;
     bool bChartVisible = false;
 };

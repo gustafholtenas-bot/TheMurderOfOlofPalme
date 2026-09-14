@@ -53,8 +53,20 @@ class LocalMultiplayerContracts(unittest.TestCase):
         self.assertIn("KeyboardModeClicked", menu)
         intro = source("Private/UI/TMOPMainMenuIntroDirector.cpp")
         self.assertIn("StartParty", intro)
+        self.assertLess(intro.index("EnsurePlayerCount(LocalPlayerCount"),
+                        intro.index("SetMenuMode(false)"))
+        self.assertIn("MenuInputControllers", intro)
+        self.assertIn("IntroTimeoutSeconds", intro)
         self.assertIn("bNewGameRequested", intro)
-        self.assertIn("bMenuInputApplied != bMenuInput", intro)
+        self.assertIn("SetIsFocusable(true)", menu)
+
+    def test_party_placement_failure_does_not_delete_selected_players(self):
+        session = source("Private/Player/TMOPLocalMultiplayerSubsystem.cpp")
+        start_party = session[session.index("bool UTMOPLocalMultiplayerSubsystem::StartParty"):]
+        start_party = start_party[:start_party.index("void UTMOPLocalMultiplayerSubsystem::RefreshAppearances")]
+        self.assertNotIn("EnsurePlayerCount(1", start_party)
+        self.assertIn("using fallback transform", session)
+        self.assertIn("FVector(0,0,1000)", session)
 
     def test_gamepad_reading_and_map_controls(self):
         map_source = source("Private/UI/TMOPMapWidget.cpp")
@@ -99,6 +111,45 @@ class LocalMultiplayerContracts(unittest.TestCase):
     def test_prior_killer_fix_preserved(self):
         self.assertIn("TUniquePtr<FTMOPKillerBranchRuntime, FTMOPKillerBranchRuntimeDeleter>",
                       source("Public/Killer/TMOPKillerBranchDirector.h"))
+
+    def test_information_anchors_are_targetable_and_visible_per_player(self):
+        inspection = source("Private/World/TMOPInspectableComponent.cpp")
+        player = source("Private/Player/TMOPPlayerCharacter.cpp")
+        overlay = source("Private/UI/TMOPLocalPlayerOverlay.cpp")
+        self.assertIn("SetCollisionResponseToAllChannels(ECR_Overlap)", inspection)
+        self.assertIn("ActiveInspectableComponents.AddUnique(this)", inspection)
+        self.assertIn("GetActiveInWorld(GetWorld(), InspectableComponents)", player)
+        self.assertIn("GetWorldIndicatorLocation", inspection)
+        self.assertIn("NearbyInspectables", overlay)
+        self.assertIn("ProjectWorldLocationToScreen", overlay)
+
+    def test_every_player_menu_hides_the_gameplay_hud(self):
+        player = source("Private/Player/TMOPPlayerCharacter.cpp")
+        for reason in ("WorldMap", "Newspaper", "AddressDirectory",
+                       "PersonDialog", "AgentInfo", "QuickInventory"):
+            self.assertIn(f'SetGameplayHUDHidden(TEXT("{reason}"), true)', player)
+            self.assertIn(f'SetGameplayHUDHidden(TEXT("{reason}"), false)', player)
+        self.assertIn('SetGameplayHUDHidden(TEXT("PauseMenu"), bOpen)', player)
+        self.assertIn('SetGameplayHUDHidden(TEXT("LoopEnd"), true)', player)
+        self.assertIn('SetGameplayHUDHidden(TEXT("LoopEnd"), false)', player)
+        overlay = source("Private/UI/TMOPLocalPlayerOverlay.cpp")
+        self.assertNotIn("Player->bPauseMenuOpen || Player->bLoopEndMenuOpen", overlay)
+        self.assertIn("InteractionPromptWidget->SetVisibility(bGameplayHUDVisible", player)
+
+    def test_agent_info_uses_left_subject_camera_and_post_murder_section(self):
+        player = source("Private/Player/TMOPPlayerCharacter.cpp")
+        widget = source("Private/UI/TMOPAgentInfoChartWidget.cpp")
+        profile = source("Public/People/TMOPPersonProfileTypes.h")
+        self.assertIn("BeginDialogCloseUp(HistoricalAgent, true)", player)
+        self.assertIn("AgentInfoCameraCompositionOffsetCm", player)
+        self.assertIn("bForceNativeAgentInfoChartWidget", player)
+        self.assertIn("PostMurderEventsSummary", profile)
+        self.assertIn("HÄNDELSER EFTER MORDET", widget)
+        self.assertIn("Profile.ReferenceImage.LoadSynchronous()", widget)
+        self.assertLess(widget.index("AgentInfoObservationHeader"),
+                        widget.index("AgentInfoPostMurderHeader"))
+        self.assertLess(widget.index("AgentInfoPostMurderHeader"),
+                        widget.index("AgentInfoTimelineHeader"))
 
     def test_generated_headers_last(self):
         for path in SOURCE.glob("Public/**/*.h"):

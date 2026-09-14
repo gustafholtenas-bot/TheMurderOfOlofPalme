@@ -11,6 +11,7 @@
 #include "Audio/TMOPPlayerMovementAudioComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Camera/CameraActor.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -304,6 +305,8 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
     {
         TSubclassOf<UTMOPAgentInfoChartWidget> WidgetClass =
             AgentInfoChartWidgetClass;
+        if (bForceNativeAgentInfoChartWidget)
+            WidgetClass = UTMOPAgentInfoChartWidget::StaticClass();
         if (!WidgetClass) WidgetClass = UTMOPAgentInfoChartWidget::StaticClass();
         AgentInfoChartWidget = CreateWidget<UTMOPAgentInfoChartWidget>(
             PlayerController, WidgetClass);
@@ -518,7 +521,7 @@ void ATMOPPlayerCharacter::InputInteract()
 {
     // A UI key can also reach the direct-key fallback during this frame.
     if (AddressDirectoryClosedFrame == GFrameCounter || bPauseMenuOpen ||
-        bWorldMapOpen || !bGameplayHUDVisible) return;
+        bWorldMapOpen) return;
     if (bAddressDirectoryOpen)
     {
         CloseAddressDirectory();
@@ -539,6 +542,7 @@ void ATMOPPlayerCharacter::InputInteract()
         CloseAgentInfoChart();
         return;
     }
+    if (!bGameplayHUDVisible) return;
     if (IsSessionGameplayBlocked()) return;
     if (InventoryInput->bRadialMenuOpen) return;
     if (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle())
@@ -986,7 +990,12 @@ void ATMOPPlayerCharacter::UpdateGameplayHUDVisibility()
     const bool bVisibilityChanged = bGameplayHUDVisible != bShouldBeVisible;
     bGameplayHUDVisible = bShouldBeVisible;
     if (!bGameplayHUDVisible && IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
-    if (!bGameplayHUDVisible && bAddressDirectoryOpen) CloseAddressDirectory();
+    // The address panel hides the HUD itself. Only an unrelated higher-level
+    // state (cinematic/main menu/etc.) should force that panel closed.
+    if (!bGameplayHUDVisible && bAddressDirectoryOpen &&
+        (GameplayHUDHiddenReasons.Num() > 1 ||
+         !GameplayHUDHiddenReasons.Contains(FName(TEXT("AddressDirectory")))))
+        CloseAddressDirectory();
 
     if (IsValid(MinimapWidget.Get()))
     {
@@ -994,6 +1003,9 @@ void ATMOPPlayerCharacter::UpdateGameplayHUDVisibility()
             IsValid(MapComponent.Get()) && MapComponent->bShowMinimap;
         MinimapWidget->SetMapVisible(bShowMinimap);
     }
+    if (IsValid(InteractionPromptWidget.Get()))
+        InteractionPromptWidget->SetVisibility(bGameplayHUDVisible
+            ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
 
     if (APlayerController* PC = Cast<APlayerController>(Controller))
     {
@@ -1035,6 +1047,7 @@ bool ATMOPPlayerCharacter::OpenWorldMap()
     WorldMapWidget->ResetViewToPlayer();
     WorldMapWidget->SetMapVisible(true);
     bWorldMapOpen = true;
+    SetGameplayHUDHidden(TEXT("WorldMap"), true);
 
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
@@ -1054,7 +1067,7 @@ void ATMOPPlayerCharacter::CloseWorldMap()
     if (!bWorldMapOpen) return;
     bWorldMapOpen = false;
     if (IsValid(WorldMapWidget.Get())) WorldMapWidget->SetMapVisible(false);
-    UpdateGameplayHUDVisibility();
+    SetGameplayHUDHidden(TEXT("WorldMap"), false);
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (APlayerController* PC = Cast<APlayerController>(Controller))
@@ -1101,6 +1114,7 @@ bool ATMOPPlayerCharacter::OpenNewspaper(
     }
 
     bNewspaperOpen = true;
+    SetGameplayHUDHidden(TEXT("Newspaper"), true);
     bNewspaperPausedSimulation = Newspaper->bPauseSimulationWhileReading;
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
@@ -1145,6 +1159,7 @@ void ATMOPPlayerCharacter::CloseNewspaper()
     bClockWasRunningBeforeNewspaper = false;
     bNewspaperPausedSimulation = false;
     bNewspaperOpen = false;
+    SetGameplayHUDHidden(TEXT("Newspaper"), false);
 }
 
 void ATMOPPlayerCharacter::ProcessControlProfileInput(const float DeltaSeconds)
@@ -1343,6 +1358,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     Super::Tick(DeltaSeconds);
     if (!IsLocallyControlled()) return;
     if (bDialogOpen && !ActiveDialogAgent.IsValid()) ClosePersonDialog();
+    if (bAgentInfoChartOpen && !ActiveCloseUpAgent.IsValid()) CloseAgentInfoChart();
     if (bUseControlProfiles) ProcessControlProfileInput(DeltaSeconds);
     if (UGameplayStatics::IsGamePaused(this))
     {
@@ -1355,7 +1371,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
         FVector::DistSquared(GetActorLocation(), ActiveInspection->GetInteractionLocation()) >
             FMath::Square(InteractionDistance + 100.0f)))
         CloseAddressDirectory();
-    if (bDialogOpen) UpdateDialogCloseUp(DeltaSeconds);
+    if (bDialogOpen || bAgentInfoChartOpen) UpdateDialogCloseUp(DeltaSeconds);
     if (!bPlayerInterfaceInitialized) InitializePlayerInterface();
     if (bDialogOpen)
     {
@@ -1398,7 +1414,6 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
         }
     }
     if (!bUseControlProfiles && !bNewspaperOpen && bUseDirectPauseKeyFallback)
-    if (!bUseControlProfiles)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) &&
@@ -1418,6 +1433,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             }
         }
     }
+    if (!bUseControlProfiles)
     {
         const APlayerController* PC = Cast<APlayerController>(Controller);
         const bool bKeyHeld = IsValid(PC) && (PC->IsInputKeyDown(WorldMapFallbackKey) ||
@@ -1624,6 +1640,7 @@ bool ATMOPPlayerCharacter::OpenInformation(UTMOPInspectableComponent* Inspection
     if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
     ActiveInspection = Inspection;
     bAddressDirectoryOpen = true;
+    SetGameplayHUDHidden(TEXT("AddressDirectory"), true);
     if (IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
     AddressDirectoryWidget->ShowInformation(Inspection->GetInspectionTitle(), Inspection->GetInspectionText(),
         Inspection->GetInspectionCategory(), Inspection->GetInspectionSource());
@@ -1641,6 +1658,7 @@ void ATMOPPlayerCharacter::CloseAddressDirectory()
 {
     if (!bAddressDirectoryOpen) return;
     bAddressDirectoryOpen = false;
+    SetGameplayHUDHidden(TEXT("AddressDirectory"), false);
     ActiveInspection.Reset();
     AddressDirectoryClosedFrame = GFrameCounter;
     if (IsValid(AddressDirectoryWidget.Get())) AddressDirectoryWidget->HideDirectory();
@@ -1691,6 +1709,7 @@ bool ATMOPPlayerCharacter::OpenPersonDialog(
 
     ActiveDialogAgent = HistoricalAgent;
     bDialogOpen = true;
+    SetGameplayHUDHidden(TEXT("PersonDialog"), true);
     HistoricalAgent->BeginDialogueFocus(this);
     BeginDialogCloseUp(HistoricalAgent);
     DialogWidget->ShowDialog(Speaker, Dialog);
@@ -1706,17 +1725,29 @@ bool ATMOPPlayerCharacter::OpenPersonDialog(
         PC->SetIgnoreLookInput(true);
         ApplyLocalInputMode(DialogWidget);
     }
+
+    // Reading a person may stop the whole simulation in single-player. In a
+    // local multiplayer session one player's information panel must never
+    // freeze the shared clock or the other players.
+    if (!UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
+        if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+            ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+            Clock->RequestPause(this, TEXT("PersonDialog"));
     return true;
 }
 
 void ATMOPPlayerCharacter::ClosePersonDialog()
 {
     if (!bDialogOpen) return;
+    if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+        Clock->ReleasePause(this, TEXT("PersonDialog"));
     if (ATMOPHistoricalAgent* Agent = ActiveDialogAgent.Get())
         Agent->EndDialogueFocus();
     ActiveDialogAgent.Reset();
     bDialogOpen = false;
     EndDialogCloseUp();
+    SetGameplayHUDHidden(TEXT("PersonDialog"), false);
     if (IsValid(DialogWidget.Get())) DialogWidget->HideDialog();
 
     if (APlayerController* PC = Cast<APlayerController>(Controller))
@@ -1807,6 +1838,8 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
     AgentInfoChartWidget->ShowAgentInfo(
         Profile, TimelineSummary, bPoliceInterviewed);
     bAgentInfoChartOpen = true;
+    SetGameplayHUDHidden(TEXT("AgentInfo"), true);
+    BeginDialogCloseUp(HistoricalAgent, true);
     GetCharacterMovement()->StopMovementImmediately();
     SetSprinting(false, false);
     if (IsValid(InteractionPromptWidget.Get()))
@@ -1819,13 +1852,23 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
         PC->SetIgnoreLookInput(true);
         ApplyLocalInputMode(AgentInfoChartWidget);
     }
+
+    if (!UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
+        if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+            ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+            Clock->RequestPause(this, TEXT("AgentInfo"));
     return true;
 }
 
 void ATMOPPlayerCharacter::CloseAgentInfoChart()
 {
     if (!bAgentInfoChartOpen) return;
+    if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+        Clock->ReleasePause(this, TEXT("AgentInfo"));
     bAgentInfoChartOpen = false;
+    EndDialogCloseUp();
+    SetGameplayHUDHidden(TEXT("AgentInfo"), false);
     if (IsValid(AgentInfoChartWidget.Get()))
         AgentInfoChartWidget->HideAgentInfo();
     if (APlayerController* PC = Cast<APlayerController>(Controller))
@@ -1838,11 +1881,12 @@ void ATMOPPlayerCharacter::CloseAgentInfoChart()
 }
 
 void ATMOPPlayerCharacter::BeginDialogCloseUp(
-    ATMOPHistoricalAgent* HistoricalAgent)
+    ATMOPHistoricalAgent* HistoricalAgent, const bool bFrameSubjectOnLeft)
 {
-    if (!bEnableDialogCloseUp || !IsValid(HistoricalAgent) ||
-        GetWorld() == nullptr)
-        return;
+    if (!IsValid(HistoricalAgent)) return;
+    ActiveCloseUpAgent = HistoricalAgent;
+    bCloseUpFramesSubjectOnLeft = bFrameSubjectOnLeft;
+    if (!bEnableDialogCloseUp || GetWorld() == nullptr) return;
     APlayerController* PC = Cast<APlayerController>(Controller);
     if (!IsValid(PC)) return;
 
@@ -1851,7 +1895,7 @@ void ATMOPPlayerCharacter::BeginDialogCloseUp(
         ACameraActor::StaticClass(), FTransform::Identity);
     if (!IsValid(DialogCameraActor)) return;
     DialogCameraActor->GetCameraComponent()->SetFieldOfView(
-        DialogCameraFieldOfView);
+        bFrameSubjectOnLeft ? AgentInfoCameraFieldOfView : DialogCameraFieldOfView);
     UpdateDialogCloseUp(0.0f);
     PC->SetViewTargetWithBlend(DialogCameraActor,
         DialogCameraBlendSeconds, EViewTargetBlendFunction::VTBlend_Cubic);
@@ -1859,7 +1903,7 @@ void ATMOPPlayerCharacter::BeginDialogCloseUp(
 
 void ATMOPPlayerCharacter::UpdateDialogCloseUp(const float DeltaSeconds)
 {
-    ATMOPHistoricalAgent* Agent = ActiveDialogAgent.Get();
+    ATMOPHistoricalAgent* Agent = ActiveCloseUpAgent.Get();
     if (!IsValid(DialogCameraActor) || !IsValid(Agent)) return;
 
     const FVector Focus = Agent->GetActorLocation() +
@@ -1882,7 +1926,10 @@ void ATMOPPlayerCharacter::UpdateDialogCloseUp(const float DeltaSeconds)
         StaticOnly, Query))
         DesiredLocation = Hit.Location + Hit.Normal * 12.0f;
 
-    const FRotator DesiredRotation = (Focus - DesiredLocation).Rotation();
+    const FVector CompositionTarget = Focus +
+        (bCloseUpFramesSubjectOnLeft ? Side * AgentInfoCameraCompositionOffsetCm
+                                    : FVector::ZeroVector);
+    const FRotator DesiredRotation = (CompositionTarget - DesiredLocation).Rotation();
     if (DeltaSeconds <= 0.0f)
     {
         DialogCameraActor->SetActorLocationAndRotation(
@@ -1909,6 +1956,8 @@ void ATMOPPlayerCharacter::EndDialogCloseUp()
     }
     DialogCameraActor = nullptr;
     PreDialogViewTarget.Reset();
+    ActiveCloseUpAgent.Reset();
+    bCloseUpFramesSubjectOnLeft = false;
 }
 
 void ATMOPPlayerCharacter::InputQuickInventoryStarted()
@@ -1916,6 +1965,7 @@ void ATMOPPlayerCharacter::InputQuickInventoryStarted()
     if (IsSessionGameplayBlocked()) return;
     if (bAddressDirectoryOpen) return;
     if (bPauseMenuOpen || !InventoryInput->OpenRadialMenu()) return;
+    SetGameplayHUDHidden(TEXT("QuickInventory"), true);
     SetSprinting(false, false);
     GetCharacterMovement()->StopMovementImmediately();
     if (APlayerController* PC = Cast<APlayerController>(Controller))
@@ -1940,6 +1990,7 @@ void ATMOPPlayerCharacter::FinishQuickInventory(const bool bConfirm)
     if (!InventoryInput->bRadialMenuOpen) return;
     if (bConfirm) InventoryInput->ConfirmRadialSelection();
     else InventoryInput->CancelRadialMenu();
+    SetGameplayHUDHidden(TEXT("QuickInventory"), false);
     if (APlayerController* PC = Cast<APlayerController>(Controller))
     {
         if (!bPauseMenuOpen)
@@ -1995,6 +2046,38 @@ UCameraComponent* ATMOPPlayerCharacter::GetGameplayCamera() const
 {
     if (IsValid(CameraPerspective.Get())) return CameraPerspective->GetActivePerspectiveCamera();
     return IsValid(FollowCamera.Get()) && FollowCamera->IsActive() ? FollowCamera.Get() : nullptr;
+}
+
+bool ATMOPPlayerCharacter::GetLookZoomFocusPoint(FVector& OutWorldPoint) const
+{
+    AActor* Target = CurrentInformationTarget.Get();
+    if (!IsValid(Target) || Target == this) return false;
+
+    if (const ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(Target))
+    {
+        if (const USkeletalMeshComponent* AgentMesh = Agent->GetMesh())
+            if (AgentMesh->DoesSocketExist(TEXT("head")))
+            {
+                OutWorldPoint = AgentMesh->GetSocketLocation(TEXT("head"));
+                return true;
+            }
+    }
+    if (const UTMOPInspectableComponent* Inspection =
+        Target->FindComponentByClass<UTMOPInspectableComponent>())
+    {
+        OutWorldPoint = Inspection->GetInteractionLocation();
+        return true;
+    }
+
+    FVector Origin = Target->GetActorLocation();
+    FVector Extent = FVector::ZeroVector;
+    Target->GetActorBounds(false, Origin, Extent, true);
+    OutWorldPoint = Origin;
+    // For a person whose skeleton has no conventional head socket, aim near
+    // the upper part of the bounds instead of the torso centre.
+    if (Target->IsA<ATMOPHistoricalAgent>())
+        OutWorldPoint.Z = Origin.Z + Extent.Z * 0.72f;
+    return true;
 }
 
 AActor* ATMOPPlayerCharacter::FindInteractionTarget() const
@@ -2132,6 +2215,17 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
                 if (IsValid(Seat) && IsValid(Seat->GetOccupantCharacter()))
                     Candidates.AddUnique(Seat->GetOccupantCharacter());
     }
+
+    // Address/information anchors are logical points and may deliberately have
+    // no authored collision. Their shared registry makes targeting independent
+    // of the owning actor's collision setup.
+    TArray<UTMOPInspectableComponent*> InspectableComponents;
+    UTMOPInspectableComponent::GetActiveInWorld(GetWorld(), InspectableComponents);
+    for (const UTMOPInspectableComponent* Inspection : InspectableComponents)
+        if (IsValid(Inspection) && IsValid(Inspection->GetOwner()) &&
+            FVector::DistSquared(CharacterLocation, Inspection->GetInteractionLocation()) <=
+            FMath::Square(TargetInformationDistance))
+            Candidates.AddUnique(Inspection->GetOwner());
 
     AActor* BestDirectTarget = nullptr;
     AActor* BestFallbackTarget = nullptr;

@@ -16,6 +16,7 @@ class TMOPENGINE_API UTMOPMainMenuWidget : public UUserWidget
 {
     GENERATED_BODY()
 public:
+    UTMOPMainMenuWidget(const FObjectInitializer& ObjectInitializer);
     void InitializeMainMenu(ATMOPMainMenuIntroDirector* InDirector,
         UTexture2D* InLogo);
     void ConfigureIntroText(const FTMOPIntroTextPresentationSettings& InSettings);

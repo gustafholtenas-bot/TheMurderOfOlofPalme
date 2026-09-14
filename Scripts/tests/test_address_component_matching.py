@@ -11,7 +11,8 @@ REGISTRY = "/Game/Test.Registry"
 
 def row(number=12, suffix="", **fields):
     return dict(Name="SVEAVAGEN_" + str(number) + suffix, AddressId="SVEAVAGEN_" + str(number) + suffix,
-                StreetName="Sveavägen", StreetNumber=number, EntranceSuffix=suffix, **fields)
+                StreetName="Sveavägen", StreetNumber=number, EntranceSuffix=suffix,
+                RegistrySearchText="Sveavägen {}{}".format(number, suffix), **fields)
 
 
 def anchor(identity="Sveavagen12", path="level.actor", **fields):
@@ -25,6 +26,19 @@ class AddressMatchingTests(unittest.TestCase):
     def test_swedish_names_and_spaces_match(self):
         result = self.plan([row()], [anchor("Sveavägen 12")])[0]
         self.assertEqual(result["status"], "candidate")
+
+    def test_registry_search_text_matches_historical_abbreviation(self):
+        address = row()
+        address["StreetName"] = "Adolf Fredriks kyrkogata"
+        address["RegistrySearchText"] = "Adolf Fredriks Kyrkog 12"
+        result = self.plan([address], [anchor("Adolf Fredriks Kyrkog 12")])[0]
+        self.assertEqual(result["status"], "candidate")
+
+    def test_known_technical_prefix_does_not_block_exact_address(self):
+        for identity in ("ADDRESS_SVEAVAGEN_12", "DOORBELL_SVEAVAGEN_12",
+                         "ANCHOR_SVEAVAGEN_12"):
+            with self.subTest(identity=identity):
+                self.assertEqual(self.plan([row()], [anchor(identity)])[0]["status"], "candidate")
 
     def test_house_number_ranges_do_not_collapse(self):
         self.assertEqual(INSTALL.address_key("Gatan_5_7"), INSTALL.address_key("Gatan 5–7"))
@@ -75,6 +89,29 @@ class AddressMatchingTests(unittest.TestCase):
         self.assertEqual(first, self.plan(rows, anchors))
         self.assertNotIn("EntranceAnchorId", rows[0])
         self.assertNotIn("registry", anchors[0])
+
+    def test_registry_merge_preserves_existing_links(self):
+        current = [row(EntranceAnchorId="OLD_ENTRANCE", BuildingAnchorId="OLD_BUILDING",
+                       DoorbellActorTag="OLD_TAG", Notes="old")]
+        incoming = [row(EntranceAnchorId="None", BuildingAnchorId="None",
+                        DoorbellActorTag="NEW_TAG", Notes="new")]
+        merged, summary = INSTALL.merge_registry_rows(current, incoming)
+        self.assertEqual(merged[0]["EntranceAnchorId"], "OLD_ENTRANCE")
+        self.assertEqual(merged[0]["BuildingAnchorId"], "OLD_BUILDING")
+        self.assertEqual(merged[0]["DoorbellActorTag"], "NEW_TAG")
+        self.assertEqual(merged[0]["Notes"], "new")
+        self.assertEqual(summary["preserved_link_fields"], 2)
+
+    def test_registry_merge_keeps_table_only_rows(self):
+        merged, summary = INSTALL.merge_registry_rows([row(12), row(13)], [row(12)])
+        self.assertEqual([item["Name"] for item in merged], ["SVEAVAGEN_12", "SVEAVAGEN_13"])
+        self.assertEqual(summary["preserved_table_only_rows"], ["SVEAVAGEN_13"])
+
+    def test_registry_merge_rejects_duplicate_address_ids(self):
+        duplicate = row(13)
+        duplicate["AddressId"] = "SVEAVAGEN_12"
+        with self.assertRaises(ValueError):
+            INSTALL.merge_registry_rows([row(12)], [row(12), duplicate])
 
 
 if __name__ == "__main__":
