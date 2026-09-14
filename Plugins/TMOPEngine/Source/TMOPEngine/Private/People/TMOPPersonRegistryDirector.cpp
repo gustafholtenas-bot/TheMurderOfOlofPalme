@@ -2265,6 +2265,25 @@ bool ATMOPPersonRegistryDirector::ValidateAppearanceAssetTable(
         OutErrors.Add(TEXT(
             "UNKNOWN_OUTERWEAR_OBSCURED needs a loadable Manny/Quinn-compatible "
             "Skeletal Mesh so NPCs without clothing evidence receive a jacket."));
+    const FName RequiredStandardFaces[] = {
+        TEXT("FACE_STANDARD_MALE_18"), TEXT("FACE_STANDARD_MALE_30"),
+        TEXT("FACE_STANDARD_MALE_45"), TEXT("FACE_STANDARD_MALE_65"),
+        TEXT("FACE_STANDARD_FEMALE_18"), TEXT("FACE_STANDARD_FEMALE_30"),
+        TEXT("FACE_STANDARD_FEMALE_45"), TEXT("FACE_STANDARD_FEMALE_65") };
+    for (const FName FaceId : RequiredStandardFaces)
+    {
+        const FTMOPAppearanceAssetRow* Face =
+            AppearanceAssetTable->FindRow<FTMOPAppearanceAssetRow>(
+                FaceId, TEXT("ValidateStandardFaces"), false);
+        if (Face == nullptr)
+            OutErrors.Add(FString::Printf(TEXT(
+                "Required standard-head row '%s' is missing."),
+                *FaceId.ToString()));
+        else if (Face->PartType != ETMOPAppearancePartType::Face)
+            OutErrors.Add(FString::Printf(TEXT(
+                "Required standard-head row '%s' is not PartType Face."),
+                *FaceId.ToString()));
+    }
     return OutErrors.IsEmpty();
 }
 

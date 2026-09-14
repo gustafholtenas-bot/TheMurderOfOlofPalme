@@ -29,6 +29,30 @@ bool FTMOPAppearanceDefaultsTest::RunTest(const FString& Parameters)
         FString(TEXT(
             "/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple.SKM_Quinn_Simple")));
 
+    TestEqual(TEXT("Male age 18 selects the 18-year standard head"),
+        UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+            ETMOPPersonGender::Male, 18),
+        FName(TEXT("FACE_STANDARD_MALE_18")));
+    TestEqual(TEXT("Age 25 selects the 30-year standard head"),
+        UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+            ETMOPPersonGender::Female, 25),
+        FName(TEXT("FACE_STANDARD_FEMALE_30")));
+    TestEqual(TEXT("Age 38 selects the 45-year standard head"),
+        UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+            ETMOPPersonGender::Male, 38),
+        FName(TEXT("FACE_STANDARD_MALE_45")));
+    TestEqual(TEXT("Age 55 selects the 65-year standard head"),
+        UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+            ETMOPPersonGender::Female, 55),
+        FName(TEXT("FACE_STANDARD_FEMALE_65")));
+    TestEqual(TEXT("Unknown age uses the 30-year standard head"),
+        UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+            ETMOPPersonGender::Male, 0),
+        FName(TEXT("FACE_STANDARD_MALE_30")));
+    TestTrue(TEXT("Unknown gender does not invent a standard head"),
+        UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+            ETMOPPersonGender::Unknown, 30).IsNone());
+
     FTMOPPersonProfileRow Male;
     Male.EntityId = TEXT("TEST_MALE");
     Male.Gender = ETMOPPersonGender::Male;
@@ -48,10 +72,14 @@ bool FTMOPAppearanceDefaultsTest::RunTest(const FString& Parameters)
     UTMOPAppearanceResolver::ResolveAppearance(Male, nullptr, First);
     UTMOPAppearanceResolver::ResolveAppearance(Male, nullptr, Second);
     TestEqual(TEXT("Appearance seed is stable"), First.ResolvedSeed, Second.ResolvedSeed);
-    TestTrue(TEXT("Unknown face uses obscured fallback"),
+    TestEqual(TEXT("Male without bespoke face uses the standard age-30 head"),
+        First.Face.CatalogId, FName(TEXT("FACE_STANDARD_MALE_30")));
+    TestFalse(TEXT("Standard head is not an obscured fallback"),
         First.Face.bUsesObscuredFallback);
-    TestEqual(TEXT("Unknown face is fully obscured"),
-        First.Face.ObscurityAmount, 1.0f);
+    TestEqual(TEXT("Standard head is rendered clearly"),
+        First.Face.ObscurityAmount, 0.0f);
+    TestEqual(TEXT("Standard head basis is not aged twice"),
+        First.FaceMorphs.Age, 0.0f);
     TestFalse(TEXT("Unknown body type is not obscured"),
         First.Body.bUsesObscuredFallback);
     TestEqual(TEXT("Unknown trousers have the reserved ID"),
@@ -111,6 +139,36 @@ bool FTMOPAppearanceDefaultsTest::RunTest(const FString& Parameters)
     UTMOPAppearanceResolver::ResolveAppearance(HiddenUnknown, nullptr, HiddenResult);
     TestTrue(TEXT("Hidden unknown face is intentionally empty"),
         HiddenResult.Face.bIntentionallyEmpty);
+
+    FTMOPPersonProfileRow HiddenMaleStandard;
+    HiddenMaleStandard.EntityId = TEXT("TEST_HIDDEN_MALE_STANDARD");
+    HiddenMaleStandard.Gender = ETMOPPersonGender::Male;
+    HiddenMaleStandard.AgeAtEvent = 65;
+    HiddenMaleStandard.AppearanceProfile.UnknownPartStyle =
+        ETMOPUnknownAppearanceStyle::Hidden;
+    FTMOPResolvedAppearance HiddenMaleStandardResult;
+    UTMOPAppearanceResolver::ResolveAppearance(
+        HiddenMaleStandard, nullptr, HiddenMaleStandardResult);
+    TestFalse(TEXT("Hidden policy does not suppress automatic standard heads"),
+        HiddenMaleStandardResult.Face.bIntentionallyEmpty);
+    TestEqual(TEXT("Hidden male age 65 still receives the age-65 standard head"),
+        HiddenMaleStandardResult.Face.CatalogId,
+        FName(TEXT("FACE_STANDARD_MALE_65")));
+
+    FTMOPPersonProfileRow ExplicitHiddenFace;
+    ExplicitHiddenFace.EntityId = TEXT("TEST_EXPLICIT_HIDDEN_FACE");
+    ExplicitHiddenFace.AppearanceProfile.UnknownPartStyle =
+        ETMOPUnknownAppearanceStyle::Hidden;
+    ExplicitHiddenFace.AppearanceProfile.Face.CatalogId =
+        TEXT("FACE_PERSON_SPECIFIC_TEST");
+    FTMOPResolvedAppearance ExplicitHiddenResult;
+    UTMOPAppearanceResolver::ResolveAppearance(
+        ExplicitHiddenFace, nullptr, ExplicitHiddenResult);
+    TestFalse(TEXT("Explicit face is not hidden by unknown-part policy"),
+        ExplicitHiddenResult.Face.bIntentionallyEmpty);
+    TestEqual(TEXT("Explicit person-specific face keeps priority"),
+        ExplicitHiddenResult.Face.CatalogId,
+        FName(TEXT("FACE_PERSON_SPECIFIC_TEST")));
 
     FTMOPPersonProfileRow DescribedFace;
     DescribedFace.EntityId = TEXT("TEST_DESCRIBED_FACE");

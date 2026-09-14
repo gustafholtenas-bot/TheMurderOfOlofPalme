@@ -4379,6 +4379,37 @@ TArray<FString> STMOPPeopleEditor::ValidateAppearanceRow(
 
     FTMOPResolvedAppearance Resolved;
     UTMOPAppearanceResolver::ResolveAppearance(Row, Catalog, Resolved);
+    const FTMOPAppearancePartChoice& FaceChoice = Row.AppearanceProfile.Face;
+    const bool bHasExplicitFace = !FaceChoice.CatalogId.IsNone() ||
+        !FaceChoice.MeshOverride.IsNull() || !FaceChoice.StaticMeshOverride.IsNull();
+    const bool bUsesBespokeHeadFlow =
+        Row.AppearanceProfile.GenerationMode ==
+            ETMOPAppearanceGenerationMode::MetaHuman ||
+        Row.AppearanceProfile.bUseMetaHumanHybridHead;
+    if (bHasExplicitFace && !FaceChoice.CatalogId.IsNone() &&
+        Resolved.Face.CatalogId != FaceChoice.CatalogId)
+        Warnings.Add(FString::Printf(TEXT(
+            "Explicit face '%s' did not resolve; check its Face catalog row and mesh."),
+            *FaceChoice.CatalogId.ToString()));
+    if (!bHasExplicitFace && !bUsesBespokeHeadFlow)
+    {
+        const FName ExpectedStandardFace =
+            UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+                Row.Gender, Row.AgeAtEvent);
+        if (!ExpectedStandardFace.IsNone())
+        {
+            const FTMOPAppearanceAssetRow* StandardFace =
+                Catalog->FindRow<FTMOPAppearanceAssetRow>(
+                    ExpectedStandardFace,
+                    TEXT("TMOP validate standard head"), false);
+            if (StandardFace == nullptr ||
+                StandardFace->PartType != ETMOPAppearancePartType::Face ||
+                StandardFace->Mesh.IsNull())
+                Warnings.Add(FString::Printf(TEXT(
+                    "Automatic standard head '%s' is missing, has the wrong type, or has no mesh."),
+                    *ExpectedStandardFace.ToString()));
+        }
+    }
     struct FNamedPart
     {
         const TCHAR* Label;

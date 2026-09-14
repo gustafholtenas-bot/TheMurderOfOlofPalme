@@ -26,6 +26,13 @@ public:
     static TArray<FName> GetNormalizedEvidenceTags(
         const FTMOPAppearanceSlot& Slot);
 
+    /** Standard modular head used when no bespoke Face choice is assigned.
+     *  The nearest of 18/30/45/65 is selected for male/female profiles.
+     *  Unknown or unspecified gender returns NAME_None. */
+    UFUNCTION(BlueprintPure, Category="TMOP|Appearance|Face")
+    static FName GetStandardFaceCatalogId(
+        ETMOPPersonGender Gender, int32 AgeAtEvent);
+
 private:
     static FTMOPResolvedAppearancePart ResolvePart(
         const FTMOPPersonProfileRow& Profile,

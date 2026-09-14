@@ -303,6 +303,31 @@ TArray<FName> UTMOPAppearanceResolver::GetNormalizedEvidenceTags(
     return Result;
 }
 
+FName UTMOPAppearanceResolver::GetStandardFaceCatalogId(
+    const ETMOPPersonGender Gender, const int32 AgeAtEvent)
+{
+    const TCHAR* GenderName = nullptr;
+    if (Gender == ETMOPPersonGender::Male)
+        GenderName = TEXT("MALE");
+    else if (Gender == ETMOPPersonGender::Female)
+        GenderName = TEXT("FEMALE");
+    else
+        return NAME_None;
+
+    // Midpoints between the four authored base ages produce stable, exhaustive
+    // adult ranges: 18 (<=24), 30 (25-37), 45 (38-54), 65 (55+).
+    int32 StandardAge = 30;
+    if (AgeAtEvent > 0)
+    {
+        if (AgeAtEvent <= 24) StandardAge = 18;
+        else if (AgeAtEvent <= 37) StandardAge = 30;
+        else if (AgeAtEvent <= 54) StandardAge = 45;
+        else StandardAge = 65;
+    }
+    return FName(*FString::Printf(
+        TEXT("FACE_STANDARD_%s_%d"), GenderName, StandardAge));
+}
+
 FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
     const FTMOPPersonProfileRow& Profile, UDataTable* AssetCatalog,
     const ETMOPAppearancePartType PartType,
@@ -332,7 +357,10 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
     }
     Result.bSourceWasUnknown = !bKnown;
     Result.ObscurityAmount = bKnown ? EvidenceObscurity : 1.0f;
-    if (!bKnown && PartType != ETMOPAppearancePartType::Body &&
+    const bool bHasExplicitOverride = !Override.CatalogId.IsNone() ||
+        !Override.MeshOverride.IsNull() || !Override.StaticMeshOverride.IsNull();
+    if (!bKnown && !bHasExplicitOverride &&
+        PartType != ETMOPAppearancePartType::Body &&
         Profile.AppearanceProfile.UnknownPartStyle ==
             ETMOPUnknownAppearanceStyle::Hidden)
     {
@@ -341,8 +369,7 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
         return Result;
     }
 
-    if (!Override.CatalogId.IsNone() || !Override.MeshOverride.IsNull() ||
-        !Override.StaticMeshOverride.IsNull())
+    if (bHasExplicitOverride)
     {
         Result.CatalogId = Override.CatalogId;
         Result.Mesh = Override.MeshOverride;
@@ -361,11 +388,23 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
         bNeedsCatalogLookup)
     {
         if (!Result.CatalogId.IsNone())
-            if (const FTMOPAppearanceAssetRow* Exact =
+        {
+            const FName RequestedCatalogId = Result.CatalogId;
+            const FTMOPAppearanceAssetRow* Exact =
                 AssetCatalog->FindRow<FTMOPAppearanceAssetRow>(
-                    Result.CatalogId, TEXT("TMOP exact appearance lookup"), false))
-                if (Exact->PartType == PartType)
-                    CopyAsset(*Exact, Result);
+                    RequestedCatalogId, TEXT("TMOP exact appearance lookup"), false);
+            if (Exact != nullptr && Exact->PartType == PartType &&
+                (!Exact->Mesh.IsNull() || !Exact->StaticMesh.IsNull()))
+                CopyAsset(*Exact, Result);
+            else
+            {
+                Diagnostics.Add(FString::Printf(TEXT(
+                    "Requested %s catalog row '%s' is missing, empty, or has the wrong part type."),
+                    *UEnum::GetValueAsString(PartType),
+                    *RequestedCatalogId.ToString()));
+                Result.CatalogId = NAME_None;
+            }
+        }
 
         if (Result.CatalogId.IsNone() && bKnown)
         {
@@ -471,10 +510,30 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
         Random, OutAppearance.Diagnostics);
     // Missing build evidence means a normal average body, not an anonymised body.
     OutAppearance.Body.bUsesObscuredFallback = false;
+    FTMOPAppearancePartChoice FaceChoice = A.Face;
+    const bool bHasExplicitFace = !FaceChoice.CatalogId.IsNone() ||
+        !FaceChoice.MeshOverride.IsNull() || !FaceChoice.StaticMeshOverride.IsNull();
+    const bool bUsesBespokeHeadFlow =
+        A.GenerationMode == ETMOPAppearanceGenerationMode::MetaHuman ||
+        A.bUseMetaHumanHybridHead;
+    const FName StandardFaceCatalogId = bHasExplicitFace || bUsesBespokeHeadFlow
+        ? NAME_None
+        : GetStandardFaceCatalogId(Profile.Gender, Profile.AgeAtEvent);
+    if (!StandardFaceCatalogId.IsNone())
+    {
+        FaceChoice.CatalogId = StandardFaceCatalogId;
+        OutAppearance.Diagnostics.Add(FString::Printf(TEXT(
+            "No bespoke face assigned; using standard head '%s'."),
+            *StandardFaceCatalogId.ToString()));
+    }
     OutAppearance.Face = ResolvePart(Profile, AssetCatalog,
-        ETMOPAppearancePartType::Face, A.Face,
+        ETMOPAppearancePartType::Face, FaceChoice,
         { Profile.FaceShape, Profile.Nose }, A.UnknownFaceCatalogId, false,
         Random, OutAppearance.Diagnostics);
+    if (!StandardFaceCatalogId.IsNone() &&
+        OutAppearance.Face.CatalogId == StandardFaceCatalogId &&
+        !OutAppearance.Face.bUsesObscuredFallback)
+        OutAppearance.Face.ObscurityAmount = 0.0f;
     OutAppearance.Hair = ResolvePart(Profile, AssetCatalog,
         ETMOPAppearancePartType::Hair, A.Hair, { HairEvidence },
         TEXT("UNKNOWN_HAIR_OBSCURED"), Profile.HairColorCategory == ETMOPHairColor::Bald,
@@ -517,6 +576,10 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
         Random, OutAppearance.Diagnostics);
     OutAppearance.FaceMorphs = GenerateFaceMorphs(
         Profile, OutAppearance.ResolvedSeed);
+    // The standard meshes already contain their authored age in the Basis.
+    // Applying the legacy generic TMOP_Age morph here would age them twice.
+    if (!StandardFaceCatalogId.IsNone())
+        OutAppearance.FaceMorphs.Age = 0.0f;
     if (A.GenerationMode == ETMOPAppearanceGenerationMode::MetaHuman &&
         !A.bUseMetaHumanHybridHead)
     {

@@ -321,17 +321,23 @@ void UTMOPCharacterAppearanceComponent::ApplyBodyRegionMask(
 {
     if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return;
     // Rebuild from zero each appearance application. A failed/hidden garment
-    // must not remove skin. Face only masks regions explicitly set in its row.
+    // must not remove skin. A visible modular Face is a complete replacement
+    // head in TMOP and therefore always hides the body's Head region.
     int32 Mask = bHybridHeadActive ? TMOPBodyRegionMask(ETMOPBodyRegion::Head) : 0;
     auto IncludeVisibleSkeletalPart = [&Mask](
-        USkeletalMeshComponent* Component, const FTMOPResolvedAppearancePart& Part)
+        USkeletalMeshComponent* Component, const FTMOPResolvedAppearancePart& Part) -> bool
     {
         if (!Part.bIntentionallyEmpty && IsValid(Component) &&
             Component->IsVisible() && !Component->bHiddenInGame &&
             Component->GetSkeletalMeshAsset() != nullptr)
+        {
             Mask |= Part.HiddenBodyRegions;
+            return true;
+        }
+        return false;
     };
-    IncludeVisibleSkeletalPart(Agent->FaceMesh.Get(), ResolvedAppearance.Face);
+    if (IncludeVisibleSkeletalPart(Agent->FaceMesh.Get(), ResolvedAppearance.Face))
+        Mask |= TMOPBodyRegionMask(ETMOPBodyRegion::Head);
     IncludeVisibleSkeletalPart(Agent->OuterwearMesh.Get(), ResolvedAppearance.Outerwear);
     IncludeVisibleSkeletalPart(Agent->UpperBodyMesh.Get(), ResolvedAppearance.UpperBody);
     IncludeVisibleSkeletalPart(Agent->TrousersMesh.Get(), ResolvedAppearance.Trousers);

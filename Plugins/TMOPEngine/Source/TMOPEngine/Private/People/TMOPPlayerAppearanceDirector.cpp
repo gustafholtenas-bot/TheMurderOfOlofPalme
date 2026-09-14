@@ -346,18 +346,22 @@ void ATMOPPlayerAppearanceDirector::ApplyBodyRegionMask(
     if (!IsValid(Body)) return;
     int32 Mask = 0;
     auto IncludeVisibleSkeletalPart = [this, &Mask](
-        const FName ComponentName, const FTMOPResolvedAppearancePart& Part)
+        const FName ComponentName, const FTMOPResolvedAppearancePart& Part) -> bool
     {
-        if (Part.bIntentionallyEmpty) return;
+        if (Part.bIntentionallyEmpty) return false;
         for (USkeletalMeshComponent* Component : ManagedPartComponents)
             if (IsValid(Component) && Component->GetFName() == ComponentName &&
                 Component->IsVisible() && !Component->bHiddenInGame &&
                 Component->GetSkeletalMeshAsset() != nullptr)
             {
                 Mask |= Part.HiddenBodyRegions;
-                return;
+                return true;
             }
+        return false;
     };
+    if (IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Face"),
+        ResolvedAppearance.Face))
+        Mask |= TMOPBodyRegionMask(ETMOPBodyRegion::Head);
     IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Outerwear"),
         ResolvedAppearance.Outerwear);
     IncludeVisibleSkeletalPart(TEXT("TMOP_Player_UpperBody"),
