@@ -5,6 +5,7 @@
 UTMOPAddressComponent::UTMOPAddressComponent()
 {
     InteractionOffset = FVector(0.0f, 0.0f, 140.0f);
+    WorldIndicatorMaxDistanceCm = 5000.0f;
 }
 FText UTMOPAddressComponent::GetResidentDirectory() const
 {
@@ -59,4 +60,35 @@ FText UTMOPAddressComponent::GetInspectionCategory() const
 FText UTMOPAddressComponent::GetInspectionAction() const
 {
     return NSLOCTEXT("TMOP", "ReadAddressDirectory", "Läs boendeförteckning");
+}
+
+
+FText UTMOPAddressComponent::GetWorldIndicatorTextAt(const FVector& ViewLocation) const
+{
+    const auto* Row = FindAddress();
+    if (!Row || FVector::DistSquared(ViewLocation, GetWorldIndicatorLocation()) >
+        FMath::Square(FMath::Max(100.0f, SummaryDistanceCm))) return WorldIndicatorText;
+    TArray<FString> Lines;
+    if (!Row->ShortSummary.TrimStartAndEnd().IsEmpty()) Row->ShortSummary.ParseIntoArrayLines(Lines, true);
+    else
+    {
+        for (const auto& Business : Row->Businesses)
+            if (!Business.Name.TrimStartAndEnd().IsEmpty()) Lines.AddUnique(Business.Name);
+        if (Row->bHasPrivateResidences || !Row->Households.IsEmpty()) Lines.Add(TEXT("Privata bostäder"));
+    }
+    const int32 Limit = FMath::Clamp(MaximumSummaryLines, 1, 8);
+    if (Lines.Num() > Limit)
+    {
+        Lines.SetNum(Limit);
+        Lines.Add(TEXT("Fler uppgifter finns att läsa"));
+    }
+    FString Text = GetAddressTitle().ToString();
+    if (!Lines.IsEmpty()) Text += TEXT("\n") + FString::Join(Lines, TEXT("\n"));
+    return FText::FromString(Text);
+}
+
+float UTMOPAddressComponent::GetWorldIndicatorSizeAt(const FVector& ViewLocation) const
+{
+    return FVector::DistSquared(ViewLocation, GetWorldIndicatorLocation()) <=
+        FMath::Square(FMath::Max(100.0f, SummaryDistanceCm)) ? 12.0f : WorldIndicatorSize;
 }

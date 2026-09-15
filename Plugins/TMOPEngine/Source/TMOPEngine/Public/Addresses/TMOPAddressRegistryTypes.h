@@ -55,12 +55,42 @@ struct TMOPENGINE_API FTMOPAddressHousehold
     FString FamilySurname;
 };
 
+/** Authored business information; historical and present-day text are separate. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPAddressBusiness
+{
+    GENERATED_BODY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
+    FString Name;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
+    FString FloorLabel;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
+    FString Description1986;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
+    FString History;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
+    FString PresentDayNote;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
+    FString PresentDayVerifiedDate;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
+    FString SourceReference;
+};
+
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPAddressRegistryRow : public FTableRowBase
 {
     GENERATED_BODY()
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
     FName AddressId = NAME_None;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address|Information")
+    TArray<FTMOPAddressBusiness> Businesses;
+    /** Optional manually authored short list; empty uses business names + households. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address|Information")
+    FString ShortSummary;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address|Information")
+    FString BuildingDescription;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address|Information")
+    bool bHasPrivateResidences = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
     FString StreetName;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
@@ -97,4 +127,5 @@ namespace TMOPAddressDisplay
     TMOPENGINE_API FString Household(const FTMOPAddressHousehold& Home);
     TMOPENGINE_API FString Directory(const FTMOPAddressRegistryRow& Row);
 }
+
 

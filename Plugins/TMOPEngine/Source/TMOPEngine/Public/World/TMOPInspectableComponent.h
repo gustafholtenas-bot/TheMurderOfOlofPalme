@@ -56,6 +56,9 @@ public:
     UFUNCTION(BlueprintPure, Category="Inspection")
     virtual FText GetInspectionTitle() const;
 
+    virtual FText GetWorldIndicatorTextAt(const FVector& ViewLocation) const;
+    virtual float GetWorldIndicatorSizeAt(const FVector& ViewLocation) const;
+
     UFUNCTION(BlueprintPure, Category="Inspection")
     virtual FText GetInspectionText() const;
 
@@ -96,3 +99,4 @@ private:
     UPROPERTY(Transient)
     TObjectPtr<UTextRenderComponent> WorldIndicator;
 };
+

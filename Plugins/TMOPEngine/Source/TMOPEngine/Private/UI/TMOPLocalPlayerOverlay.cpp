@@ -134,13 +134,19 @@ int32 UTMOPLocalPlayerOverlay::NativePaint(const FPaintArgs& Args, const FGeomet
         if (Position.X < 12 || Position.Y < 60 ||
             Position.X > Geometry.GetLocalSize().X - 36 ||
             Position.Y > Geometry.GetLocalSize().Y - 36) continue;
-        FSlateDrawElement::MakeText(Elements, Result + 2,
-            Geometry.ToPaintGeometry(FVector2D(36, 36),
-                FSlateLayoutTransform(Position - FVector2D(18, 18))),
-            Inspection->WorldIndicatorText,
-            FCoreStyle::GetDefaultFontStyle("Bold", 22),
-            ESlateDrawEffect::None,
-            FLinearColor(Inspection->WorldIndicatorColor));
+        TArray<FString> Lines;
+        Inspection->GetWorldIndicatorTextAt(Player->GetPawnViewLocation()).ToString().ParseIntoArrayLines(Lines, true);
+        const bool bSummary = Lines.Num() > 1 || Inspection->GetWorldIndicatorTextAt(Player->GetPawnViewLocation()).ToString() != Inspection->WorldIndicatorText.ToString();
+        for (int32 I = 0; I < Lines.Num(); ++I)
+        {
+            FSlateDrawElement::MakeText(Elements, Result + 2,
+                Geometry.ToPaintGeometry(FVector2D(bSummary ? 340 : 36, 24),
+                    FSlateLayoutTransform(Position + FVector2D(bSummary ? -120 : -18, I * 20 - 18))),
+                FText::FromString(Lines[I]),
+                FCoreStyle::GetDefaultFontStyle(I == 0 ? "Bold" : "Regular", bSummary ? 12 : 22),
+                ESlateDrawEffect::None, FLinearColor(Inspection->WorldIndicatorColor));
+        }
     }
     return Result + 2;
 }
+

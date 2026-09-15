@@ -19,4 +19,6 @@ protected:
 
 private:
     TSharedPtr<class STextBlock> SpeechText;
+    FText PendingSpeechText;
 };
+

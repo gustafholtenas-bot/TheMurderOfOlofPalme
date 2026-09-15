@@ -25,6 +25,25 @@ FString TMOPAddressDisplay::Household(const FTMOPAddressHousehold& Home)
 FString TMOPAddressDisplay::Directory(const FTMOPAddressRegistryRow& Row)
 {
     FString Out = FString::Printf(TEXT("%s %d%s\n"), *Row.StreetName, Row.StreetNumber, *Row.EntranceSuffix);
+    if (!Row.BuildingDescription.IsEmpty()) Out += Row.BuildingDescription + TEXT("\n\n");
+    if (!Row.Businesses.IsEmpty()) Out += TEXT("VERKSAMHETER\n");
+    for (const auto& Business : Row.Businesses)
+    {
+        Out += Business.Name;
+        if (!Business.FloorLabel.IsEmpty()) Out += TEXT(" — ") + Business.FloorLabel;
+        Out += TEXT("\n");
+        for (const FString* Text : { &Business.Description1986, &Business.History })
+            if (!Text->IsEmpty()) Out += *Text + TEXT("\n");
+        if (!Business.PresentDayNote.IsEmpty())
+        {
+            Out += TEXT("Senare uppgifter");
+            if (!Business.PresentDayVerifiedDate.IsEmpty()) Out += TEXT(" (") + Business.PresentDayVerifiedDate + TEXT(")");
+            Out += TEXT(": ") + Business.PresentDayNote + TEXT("\n");
+        }
+        if (!Business.SourceReference.IsEmpty()) Out += TEXT("Källa: ") + Business.SourceReference + TEXT("\n");
+        Out += TEXT("\n");
+    }
+    if (!Row.Households.IsEmpty()) Out += TEXT("BOENDE\n");
     TArray<int32> Order;
     for (int32 I = 0; I < Row.Households.Num(); ++I) Order.Add(I);
     Order.StableSort([&](int32 A, int32 B) {
@@ -42,3 +61,4 @@ FString TMOPAddressDisplay::Directory(const FTMOPAddressRegistryRow& Row)
     }
     return Out;
 }
+

@@ -11,6 +11,12 @@ class TMOPENGINE_API UTMOPAddressComponent : public UTMOPInspectableComponent
     GENERATED_BODY()
 public:
     UTMOPAddressComponent();
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address|Display", meta=(ClampMin="100.0"))
+    float SummaryDistanceCm = 2500.0f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address|Display", meta=(ClampMin="1"))
+    int32 MaximumSummaryLines = 3;
+    virtual FText GetWorldIndicatorTextAt(const FVector& ViewLocation) const override;
+    virtual float GetWorldIndicatorSizeAt(const FVector& ViewLocation) const override;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
     TObjectPtr<UDataTable> Registry;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Address")
@@ -35,3 +41,4 @@ public:
 private:
     const FTMOPAddressRegistryRow* FindAddress() const;
 };
+

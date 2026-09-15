@@ -19,6 +19,10 @@ UTMOPInspectableComponent::UTMOPInspectableComponent()
     PrimaryComponentTick.TickInterval = 0.1f;
 }
 
+FText UTMOPInspectableComponent::GetWorldIndicatorTextAt(const FVector& ViewLocation) const
+{ return WorldIndicatorText; }
+float UTMOPInspectableComponent::GetWorldIndicatorSizeAt(const FVector& ViewLocation) const
+{ return WorldIndicatorSize; }
 bool UTMOPInspectableComponent::HasReadableContent() const { return false; }
 FText UTMOPInspectableComponent::GetInspectionTitle() const { return FText::GetEmpty(); }
 FText UTMOPInspectableComponent::GetInspectionText() const { return FText::GetEmpty(); }
@@ -146,9 +150,9 @@ void UTMOPInspectableComponent::TickComponent(const float DeltaTime,
     if (!bVisible) return;
 
     WorldIndicator->SetWorldLocation(GetWorldIndicatorLocation());
-    WorldIndicator->SetWorldSize(WorldIndicatorSize);
+    WorldIndicator->SetWorldSize(GetWorldIndicatorSizeAt(Camera->GetCameraLocation()));
     WorldIndicator->SetTextRenderColor(WorldIndicatorColor);
-    WorldIndicator->SetText(WorldIndicatorText);
+    WorldIndicator->SetText(FText::FromString(GetWorldIndicatorTextAt(Camera->GetCameraLocation()).ToString().Replace(TEXT("\n"), TEXT("<br>"))));
     const FVector ToCamera = Camera->GetCameraLocation() -
         WorldIndicator->GetComponentLocation();
     if (!ToCamera.IsNearlyZero()) WorldIndicator->SetWorldRotation(ToCamera.Rotation());
@@ -166,3 +170,4 @@ void UTMOPInspectableComponent::EndPlay(const EEndPlayReason::Type EndPlayReason
     WorldIndicator = nullptr;
     Super::EndPlay(EndPlayReason);
 }
+

@@ -8,6 +8,7 @@
 
 void UTMOPSpeechBubbleWidget::SetSpeechText(const FText& NewText)
 {
+    PendingSpeechText = NewText;
     if (SpeechText.IsValid()) SpeechText->SetText(NewText);
 }
 
@@ -22,6 +23,7 @@ TSharedRef<SWidget> UTMOPSpeechBubbleWidget::RebuildWidget()
             .Padding(FMargin(18.0f, 12.0f))
             [
                 SAssignNew(SpeechText, STextBlock)
+                .Text(PendingSpeechText)
                 .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeechBubble"),
                     FCoreStyle::GetDefaultFontStyle("Regular", 20)))
                 .AutoWrapText(true)
@@ -31,3 +33,4 @@ TSharedRef<SWidget> UTMOPSpeechBubbleWidget::RebuildWidget()
             ]
         ];
 }
+
