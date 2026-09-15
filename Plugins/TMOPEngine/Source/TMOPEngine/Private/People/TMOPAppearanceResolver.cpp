@@ -306,24 +306,24 @@ TArray<FName> UTMOPAppearanceResolver::GetNormalizedEvidenceTags(
 FName UTMOPAppearanceResolver::GetStandardFaceCatalogId(
     const ETMOPPersonGender Gender, const int32 AgeAtEvent)
 {
-    const TCHAR* GenderName = nullptr;
-    if (Gender == ETMOPPersonGender::Male)
-        GenderName = TEXT("MALE");
-    else if (Gender == ETMOPPersonGender::Female)
-        GenderName = TEXT("FEMALE");
-    else
-        return NAME_None;
+    // Authored likenesses are selected before this fallback function.
+    // Unknown gender uses the user's male-30 presentation default.
+    if (Gender != ETMOPPersonGender::Male &&
+        Gender != ETMOPPersonGender::Female)
+        return TEXT("FACE_STANDARD_MALE_30");
 
-    // Midpoints between the four authored base ages produce stable, exhaustive
-    // adult ranges: 18 (<=24), 30 (25-37), 45 (38-54), 65 (55+).
+    const TCHAR* GenderName = Gender == ETMOPPersonGender::Female
+        ? TEXT("FEMALE") : TEXT("MALE");
+    // Unknown age: 30. Known age: nearest of the other three authored
+    // ages (18, 45, 65), with midpoint ties going to the older variant.
     int32 StandardAge = 30;
     if (AgeAtEvent > 0)
     {
-        if (AgeAtEvent <= 24) StandardAge = 18;
-        else if (AgeAtEvent <= 37) StandardAge = 30;
+        if (AgeAtEvent <= 31) StandardAge = 18;
         else if (AgeAtEvent <= 54) StandardAge = 45;
         else StandardAge = 65;
     }
+
     return FName(*FString::Printf(
         TEXT("FACE_STANDARD_%s_%d"), GenderName, StandardAge));
 }
@@ -518,7 +518,8 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
         A.bUseMetaHumanHybridHead;
     const FName StandardFaceCatalogId = bHasExplicitFace || bUsesBespokeHeadFlow
         ? NAME_None
-        : GetStandardFaceCatalogId(Profile.Gender, Profile.AgeAtEvent);
+        : GetStandardFaceCatalogId(Profile.Gender, Profile.AgeAtEvent > 0
+            ? Profile.AgeAtEvent : (Profile.BirthYear > 0 ? FMath::Max(0, 1986 - Profile.BirthYear) : 0));
     if (!StandardFaceCatalogId.IsNone())
     {
         FaceChoice.CatalogId = StandardFaceCatalogId;
@@ -533,6 +534,11 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
     if (!StandardFaceCatalogId.IsNone() &&
         OutAppearance.Face.CatalogId == StandardFaceCatalogId &&
         !OutAppearance.Face.bUsesObscuredFallback)
+        OutAppearance.Face.ObscurityAmount = 0.0f;
+    // An explicitly assigned face is an authored likeness, independent of
+    // whether the historical face-description evidence fields are populated.
+    if (bHasExplicitFace && !OutAppearance.Face.bUsesObscuredFallback &&
+        (!OutAppearance.Face.Mesh.IsNull() || !OutAppearance.Face.StaticMesh.IsNull()))
         OutAppearance.Face.ObscurityAmount = 0.0f;
     OutAppearance.Hair = ResolvePart(Profile, AssetCatalog,
         ETMOPAppearancePartType::Hair, A.Hair, { HairEvidence },
@@ -600,3 +606,4 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
     }
     return true;
 }
+

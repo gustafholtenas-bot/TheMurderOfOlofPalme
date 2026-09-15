@@ -322,7 +322,7 @@ void UTMOPCharacterAppearanceComponent::ApplyBodyRegionMask(
     if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return;
     // Rebuild from zero each appearance application. A failed/hidden garment
     // must not remove skin. A visible modular Face is a complete replacement
-    // head in TMOP and therefore always hides the body's Head region.
+    // head in TMOP and therefore hides the body's Head and Neck regions.
     int32 Mask = bHybridHeadActive ? TMOPBodyRegionMask(ETMOPBodyRegion::Head) : 0;
     auto IncludeVisibleSkeletalPart = [&Mask](
         USkeletalMeshComponent* Component, const FTMOPResolvedAppearancePart& Part) -> bool
@@ -337,7 +337,8 @@ void UTMOPCharacterAppearanceComponent::ApplyBodyRegionMask(
         return false;
     };
     if (IncludeVisibleSkeletalPart(Agent->FaceMesh.Get(), ResolvedAppearance.Face))
-        Mask |= TMOPBodyRegionMask(ETMOPBodyRegion::Head);
+        Mask |= TMOPBodyRegionMask(ETMOPBodyRegion::Head) |
+            TMOPBodyRegionMask(ETMOPBodyRegion::Neck);
     IncludeVisibleSkeletalPart(Agent->OuterwearMesh.Get(), ResolvedAppearance.Outerwear);
     IncludeVisibleSkeletalPart(Agent->UpperBodyMesh.Get(), ResolvedAppearance.UpperBody);
     IncludeVisibleSkeletalPart(Agent->TrousersMesh.Get(), ResolvedAppearance.Trousers);
@@ -396,6 +397,9 @@ bool UTMOPCharacterAppearanceComponent::ApplyPart(
             ResolvedAppearance.Diagnostics.Add(FString::Printf(
                 TEXT("Asset '%s' has an incompatible skeleton."),
                 *Part.CatalogId.ToString()));
+            UE_LOG(LogTemp, Error, TEXT("TMOP appearance: %s rejected mesh %s: body skeleton %s, part skeleton %s"),
+                *GetNameSafe(GetOwner()), *Mesh->GetPathName(),
+                *GetNameSafe(BodyAsset->GetSkeleton()), *GetNameSafe(Mesh->GetSkeleton()));
             Component->SetVisibility(false, true);
             return false;
         }
@@ -419,6 +423,9 @@ bool UTMOPCharacterAppearanceComponent::ApplyPart(
         return false;
     }
     Component->SetVisibility(true, true);
+    Component->SetHiddenInGame(false, false);
+    // Reset previous material overrides when switching an appearance asset.
+    Component->EmptyOverrideMaterials();
     UMaterialInterface* Material = Part.Material.LoadSynchronous();
     if (Part.bUsesObscuredFallback && Material == nullptr)
         Material = ObscuredMaterialOverride.LoadSynchronous();
@@ -794,3 +801,4 @@ void UTMOPCharacterAppearanceComponent::ApplyHybridHead(ATMOPHistoricalAgent* Ag
     bHybridHeadActive = true;
     ResolvedAppearance.Diagnostics.Add(TEXT("MetaHuman hybrid active. Verify neck seam, retargeting and groom LODs in play."));
 }
+

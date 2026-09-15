@@ -4,6 +4,8 @@
 #include "Components/SceneComponent.h"
 #include "TMOPBusStopComponent.generated.h"
 
+class UTMOPBusArrivalBoardComponent;
+
 UCLASS(ClassGroup=(TMOP), BlueprintType, Blueprintable,
     meta=(BlueprintSpawnableComponent))
 class TMOPENGINE_API UTMOPBusStopComponent : public USceneComponent
@@ -12,6 +14,15 @@ class TMOPENGINE_API UTMOPBusStopComponent : public USceneComponent
 
 public:
     UTMOPBusStopComponent();
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Stop|Arrival Board")
+    bool bShowArrivalBoard = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Stop|Arrival Board")
+    FVector ArrivalBoardOffset = FVector(0.0f, 0.0f, 285.0f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Bus Stop|Arrival Board", meta=(ClampMin="100.0"))
+    float ArrivalBoardVisibleDistanceCm = 2500.0f;
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -65,4 +76,8 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Bus Stop")
     bool ValidateStop(TArray<FString>& OutErrors) const;
+private:
+    UPROPERTY(Transient)
+    TObjectPtr<UTMOPBusArrivalBoardComponent> ArrivalBoard;
 };
+

@@ -1,6 +1,8 @@
 #include "Transit/TMOPBusStopComponent.h"
 
 #include "Engine/GameInstance.h"
+#include "GameFramework/Actor.h"
+#include "Transit/TMOPBusArrivalBoardComponent.h"
 #include "Transit/TMOPBusStopSubsystem.h"
 
 UTMOPBusStopComponent::UTMOPBusStopComponent()
@@ -14,6 +16,17 @@ void UTMOPBusStopComponent::BeginPlay()
     UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     if (UTMOPBusStopSubsystem* Stops = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPBusStopSubsystem>() : nullptr) Stops->RegisterStop(this);
+    if (bShowArrivalBoard && !StopId.IsNone() && IsValid(GetOwner()))
+    {
+        auto* Board = NewObject<UTMOPBusArrivalBoardComponent>(GetOwner(), NAME_None, RF_Transient);
+        ArrivalBoard = Board;
+        Board->Stop = this;
+        Board->ConfigureForStation(StopId, StopName);
+        Board->BoardOffset = ArrivalBoardOffset;
+        Board->MaximumVisibleDistanceCm = ArrivalBoardVisibleDistanceCm;
+        GetOwner()->AddInstanceComponent(Board);
+        Board->RegisterComponent();
+    }
 }
 
 void UTMOPBusStopComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -21,6 +34,8 @@ void UTMOPBusStopComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
     UGameInstance* GameInstance = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     if (UTMOPBusStopSubsystem* Stops = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPBusStopSubsystem>() : nullptr) Stops->UnregisterStop(this);
+    if (IsValid(ArrivalBoard)) ArrivalBoard->DestroyComponent();
+    ArrivalBoard = nullptr;
     Super::EndPlay(EndPlayReason);
 }
 
@@ -49,3 +64,4 @@ bool UTMOPBusStopComponent::ValidateStop(TArray<FString>& OutErrors) const
         OutErrors.Add(TEXT("MaximumDwellSeconds is below MinimumDwellSeconds."));
     return OutErrors.IsEmpty();
 }
+
