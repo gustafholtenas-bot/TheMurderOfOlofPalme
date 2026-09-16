@@ -1,0 +1,93 @@
+[
+  {
+    "Name": "AKE_MALMSTROM_TENNSTOPET_SCANNER_2333",
+    "RecordingId": "AKE_MALMSTROM_TENNSTOPET_SCANNER_2333",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_RecordedCalls\", \"AKE_MALMSTROM_TENNSTOPET_SCANNER_2333_DisplayName\", \"Åke Malmström – radiosamtal efter Tennstopet\")",
+    "CallType": "Other",
+    "Availability": "TranscriptOnly",
+    "AudioFile": "None",
+    "RecordingDateISO": "1986-02-28",
+    "bHistoricalStartTimeKnown": false,
+    "HistoricalStartTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "bHistoricalEndTimeKnown": false,
+    "HistoricalEndTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 13
+    },
+    "EarliestHistoricalStartTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "LatestHistoricalStartTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 0
+    },
+    "AudioClipStartOffsetSeconds": 0,
+    "AudioClipEndOffsetSeconds": 0,
+    "ParticipantEntityIds": [],
+    "HistoricalEventId": "None",
+    "UppslagIds": [],
+    "ArchiveRecordingId": "",
+    "ChannelOrLine": "Automatisk radiosökare i DN:s reportagebil; oidentifierad sändning",
+    "SpeechSegments": [
+      {
+        "SegmentId": "MALMSTROM_RADIO_01",
+        "AudioStartOffsetSeconds": 0,
+        "AudioEndOffsetSeconds": 3.8,
+        "SpeakerEntityId": "None",
+        "ListenerEntityIds": [],
+        "Transcript": "Hallå där uppe, hur har ni det?",
+        "bVerbatimTranscript": false,
+        "Confidence": "Inferred",
+        "SourceReference": "PALME-nytt 2/1996 s. 3",
+        "Notes": "Okänd röst 1. Citerad senare minnesåtergivning, inte ljudbandsverifierad."
+      },
+      {
+        "SegmentId": "MALMSTROM_RADIO_02",
+        "AudioStartOffsetSeconds": 4.2,
+        "AudioEndOffsetSeconds": 7.2,
+        "SpeakerEntityId": "None",
+        "ListenerEntityIds": [],
+        "Transcript": "Bra, men djävligt kallt.",
+        "bVerbatimTranscript": false,
+        "Confidence": "Inferred",
+        "SourceReference": "PALME-nytt 2/1996 s. 3",
+        "Notes": "Okänd röst 2. Citerad senare minnesåtergivning, inte ljudbandsverifierad."
+      },
+      {
+        "SegmentId": "MALMSTROM_RADIO_03",
+        "AudioStartOffsetSeconds": 8.1,
+        "AudioEndOffsetSeconds": 11,
+        "SpeakerEntityId": "None",
+        "ListenerEntityIds": [],
+        "Transcript": "Statsministern är skjuten.",
+        "bVerbatimTranscript": false,
+        "Confidence": "Inferred",
+        "SourceReference": "PALME-nytt 2/1996 s. 3",
+        "Notes": "Okänd röst 1. Citerad senare minnesåtergivning, inte ljudbandsverifierad."
+      },
+      {
+        "SegmentId": "MALMSTROM_RADIO_SOURCE_NOTE",
+        "AudioStartOffsetSeconds": 11.2,
+        "AudioEndOffsetSeconds": 13,
+        "SpeakerEntityId": "None",
+        "ListenerEntityIds": [],
+        "Transcript": "Åke Malmströms senare återgivning – inte verifierad ljudbandsutskrift.",
+        "bVerbatimTranscript": false,
+        "Confidence": "Reconstructed",
+        "SourceReference": "PALME-nytt 2/1996 s. 3; PALME-nytt 2/1998 s. 3",
+        "Notes": "Källreservation som visas i textningen."
+      }
+    ],
+    "SourceReference": "PALME-nytt 2/1996 s. 3; PALME-nytt 2/1998 s. 3; https://runeberg.org/palmenytt/1996/0029.html",
+    "Confidence": "Inferred",
+    "Notes": "DN-fotografen Åke Malmström uppges ha lämnat Tennstopet cirka 23.30–23.35 och satt sig i reportagebilen vid Eastmaninstitutet. 23.33 är ett visningsvärde mitt i intervallet, inte en känd exakt starttid. Rösterna och sändarna är oidentifierade. Replikerna är Malmströms citerade minnesåtergivning, inte en tekniskt verifierad inspelning. RecordedCallDirector kan visa SpeechSegments som radio-undertexter; lägg raden i DT_TMOP_RecordedCalls."
+  }
+]

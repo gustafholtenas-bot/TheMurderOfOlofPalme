@@ -117,6 +117,9 @@ struct FTMOPPersonGeneralEditorData
     ETMOPPersonGender Gender = ETMOPPersonGender::Unknown;
 
     UPROPERTY(EditAnywhere, Category="Identity")
+    ETMOPPersonSpecies Species = ETMOPPersonSpecies::Human;
+
+    UPROPERTY(EditAnywhere, Category="Identity")
     FString Nationality;
 
     UPROPERTY(EditAnywhere, Category="Identity")
@@ -131,6 +134,14 @@ struct FTMOPPersonGeneralEditorData
     UPROPERTY(EditAnywhere, Category="Source")
     FString GeneralSourceReference;
 
+    UPROPERTY(EditAnywhere, Category="Reference",
+        meta=(DisplayName="Reference Image"))
+    TSoftObjectPtr<UTexture2D> ReferenceImage;
+
+    UPROPERTY(EditAnywhere, Category="Reference",
+        meta=(TitleProperty="Caption", DisplayName="Evidence Images"))
+    TArray<FTMOPEvidenceImage> EvidenceImages;
+
     UPROPERTY(EditAnywhere, Category="Source",
         meta=(DisplayName="Uppslag"))
     FString Uppslag;
@@ -144,6 +155,10 @@ struct FTMOPPersonGeneralEditorData
     UPROPERTY(EditAnywhere, Category="Simulation",
         meta=(DisplayName="Main Character"))
     bool bMainCharacter = false;
+
+    UPROPERTY(EditAnywhere, Category="Simulation|Animal",
+        meta=(EditCondition="Species==ETMOPPersonSpecies::Dog"))
+    FTMOPAnimalPresentation AnimalPresentation;
 
     UPROPERTY(EditAnywhere, Category="Simulation")
     FTMOPMovementProfile MovementProfile;

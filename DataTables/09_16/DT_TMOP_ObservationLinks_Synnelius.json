@@ -1,0 +1,38 @@
+[
+  {
+    "ObservationId": "OBS_SYNNELIUS_ALEXANDRA_POLICE_PATROL",
+    "ObserverEntityId": "MASKED_TIPSTER_EAD1817",
+    "TargetType": "Vehicle",
+    "TargetEntityId": "VEHICLE_EAD1817_POLICE_PATROL",
+    "StartTime": "23:00:00",
+    "EndTime": "23:02:30",
+    "LocationAnchorId": "BirgerJarlsgatan_31",
+    "Confidence": "Probable",
+    "SourceReference": "EAD1817-06; PALME-nytt 2/1996 s. 2–3; beställning 971 (Anders Synnelius och tre kamrater)",
+    "ObservationText": "Vid första Alexandra-besöket såg sällskapet polisfordon. Antalet varierar i uppgifterna."
+  },
+  {
+    "ObservationId": "OBS_SYNNELIUS_SNICKARBACKEN_PERSON_UNDER_CAR",
+    "ObserverEntityId": "MASKED_TIPSTER_EAD1817",
+    "TargetType": "UnresolvedPerson",
+    "TargetEntityId": "UNRESOLVED_PARKING_ATTENDANT_LIKE_PERSON_SNICKARBACKEN",
+    "StartTime": "23:03:00",
+    "EndTime": "23:08:00",
+    "LocationAnchorId": "Snickarebacken",
+    "Confidence": "Approximate",
+    "SourceReference": "EAD1817-06; PALME-nytt 2/1996 s. 2–3; beställning 971 (Anders Synnelius och tre kamrater)",
+    "ObservationText": "En parkeringsvaktsliknande person tycktes arbeta eller ligga under en bil. Personen identifieras inte."
+  },
+  {
+    "ObservationId": "OBS_SYNNELIUS_POLICE_BUS_SNICKARBACKEN_2320",
+    "ObserverEntityId": "MASKED_TIPSTER_EAD1817",
+    "TargetType": "Vehicle",
+    "TargetEntityId": "VEHICLE_POLICE_PIKET_1220",
+    "StartTime": "23:19:00",
+    "EndTime": "23:21:30",
+    "LocationAnchorId": "Snickarebacken",
+    "Confidence": "Approximate",
+    "SourceReference": "EAD1817-06; PALME-nytt 2/1996 s. 2–3; beställning 971 (Anders Synnelius och tre kamrater)",
+    "ObservationText": "Omkring 23.20 stod ett polis-/piketfordon på Snickarbacken med front mot Birger Jarlsgatan, släckta lampor och avstängd motor. Fordonsidentiteten 1220 är en försiktig kandidatlänk, inte säker identifiering."
+  }
+]

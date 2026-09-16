@@ -1352,6 +1352,42 @@ bool ATMOPObservationDirector::TryGetObservationDefinition(
     return false;
 }
 
+TArray<FName> ATMOPObservationDirector::GetObserverEntityIdsForTarget(
+    const FName ObservedEntityId) const
+{
+    TSet<FName> UniqueObservers;
+    if (ObservedEntityId.IsNone()) return {};
+
+    const auto AddObservers = [&UniqueObservers](
+        const FTMOPObservationDefinition& Observation)
+    {
+        for (const FName ObserverId : Observation.ObserverEntityIds)
+            if (!ObserverId.IsNone()) UniqueObservers.Add(ObserverId);
+        for (const FTMOPObservationWitnessSignalement& Signalement :
+            Observation.WitnessSignalements)
+            if (!Signalement.ObserverEntityId.IsNone())
+                UniqueObservers.Add(Signalement.ObserverEntityId);
+    };
+
+    for (const TPair<FName, FTMOPObservationDefinition>& Pair : LoadedObservations)
+        if (Pair.Value.ObservedEntityId == ObservedEntityId)
+            AddObservers(Pair.Value);
+
+    for (const TPair<FName, FTMOPObservationLinkDefinition>& Pair : LoadedLinks)
+    {
+        const FTMOPObservationLinkDefinition& Link = Pair.Value;
+        if (Link.LinkedEntityId != ObservedEntityId) continue;
+        for (const FName ObservationId : GetLinkObservationIds(Link))
+            if (const FTMOPObservationDefinition* Observation =
+                LoadedObservations.Find(ObservationId))
+                AddObservers(*Observation);
+    }
+
+    TArray<FName> Result = UniqueObservers.Array();
+    Result.Sort(FNameLexicalLess());
+    return Result;
+}
+
 bool ATMOPObservationDirector::TryGetObservationRuntime(
     const FName ObservationId,
     FTMOPObservationRuntime& OutRuntime) const

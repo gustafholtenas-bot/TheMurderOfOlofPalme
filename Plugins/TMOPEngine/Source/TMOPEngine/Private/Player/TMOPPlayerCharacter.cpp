@@ -1836,7 +1836,8 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
     const bool bPoliceInterviewed = Profile.bPoliceInterviewed ||
         Profile.EvidenceIcon == ETMOPEntityEvidenceIcon::PoliceInterview;
     AgentInfoChartWidget->ShowAgentInfo(
-        Profile, TimelineSummary, bPoliceInterviewed);
+        Profile, TimelineSummary, bPoliceInterviewed,
+        ProfileComponent->ResolvedEntityId);
     bAgentInfoChartOpen = true;
     SetGameplayHUDHidden(TEXT("AgentInfo"), true);
     BeginDialogCloseUp(HistoricalAgent, true);

@@ -129,6 +129,10 @@ public:
         FName ObservationId,
         FTMOPObservationDefinition& OutDefinition) const;
 
+    /** All sourced people who observe this known or linked observed entity. */
+    UFUNCTION(BlueprintPure, Category="TMOP|Observations")
+    TArray<FName> GetObserverEntityIdsForTarget(FName ObservedEntityId) const;
+
     UFUNCTION(BlueprintPure, Category="TMOP|Observations")
     bool TryGetObservationRuntime(
         FName ObservationId,

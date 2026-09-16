@@ -1106,15 +1106,20 @@ void STMOPPeopleEditor::RefreshPersonDetailViews()
     General->FirstName = WorkingRow.FirstName;
     General->LastName = WorkingRow.LastName;
     General->Gender = WorkingRow.Gender;
+    General->Species = WorkingRow.IsDogProfile()
+        ? ETMOPPersonSpecies::Dog : WorkingRow.Species;
     General->Nationality = WorkingRow.Nationality;
     General->Occupation = WorkingRow.Occupation;
     General->HistoricalAddress = WorkingRow.HistoricalAddress;
     General->BirthYear = WorkingRow.BirthYear;
     General->GeneralSourceReference = WorkingRow.GeneralSourceReference;
+    General->ReferenceImage = WorkingRow.ReferenceImage;
+    General->EvidenceImages = WorkingRow.EvidenceImages;
     General->Uppslag = WorkingRow.Uppslag;
     General->AgentClass = WorkingRow.AgentClass;
     General->bSpawnInSimulation = WorkingRow.bSpawnInSimulation;
     General->bMainCharacter = WorkingRow.bMainCharacter;
+    General->AnimalPresentation = WorkingRow.AnimalPresentation;
     General->MovementProfile = WorkingRow.MovementProfile;
     General->AssociatedVehicleIds = WorkingRow.AssociatedVehicleIds;
     General->SocialGroupId = WorkingRow.SocialGroupId;
@@ -1214,16 +1219,20 @@ void STMOPPeopleEditor::CommitPersonDetailEdits()
         WorkingRow.FirstName = General->FirstName;
         WorkingRow.LastName = General->LastName;
         WorkingRow.Gender = General->Gender;
+        WorkingRow.Species = General->Species;
         WorkingRow.Nationality = General->Nationality;
         WorkingRow.Occupation = General->Occupation;
         WorkingRow.HistoricalAddress = General->HistoricalAddress;
         WorkingRow.BirthYear = General->BirthYear;
         WorkingRow.GeneralSourceReference =
             General->GeneralSourceReference;
+        WorkingRow.ReferenceImage = General->ReferenceImage;
+        WorkingRow.EvidenceImages = General->EvidenceImages;
         WorkingRow.Uppslag = General->Uppslag;
         WorkingRow.AgentClass = General->AgentClass;
         WorkingRow.bSpawnInSimulation = General->bSpawnInSimulation;
         WorkingRow.bMainCharacter = General->bMainCharacter;
+        WorkingRow.AnimalPresentation = General->AnimalPresentation;
         WorkingRow.MovementProfile = General->MovementProfile;
         WorkingRow.AssociatedVehicleIds =
             General->AssociatedVehicleIds;
@@ -3094,6 +3103,17 @@ FReply STMOPPeopleEditor::ResolveCurrentAppearance()
     }
     CommitEntryEdits();
     CommitPersonDetailEdits();
+    if (WorkingRow.IsDogProfile())
+    {
+        const bool bHasMesh = !WorkingRow.AnimalPresentation.SkeletalMesh.IsNull();
+        const bool bHasAnim = !WorkingRow.AnimalPresentation.AnimInstanceClass.IsNull();
+        SetStatus(FText::FromString(FString::Printf(TEXT(
+            "Dog presentation: row mesh %s | row AnimBP %s. Empty values use the shared CharacterAppearance defaults."),
+            bHasMesh ? TEXT("set") : TEXT("default"),
+            bHasAnim ? TEXT("set") : TEXT("default"))),
+            FLinearColor(0.4f, 1.0f, 0.4f));
+        return FReply::Handled();
+    }
     if (!AppearanceTable.IsValid())
         AppearanceTable = LoadObject<UDataTable>(
             nullptr, DefaultAppearanceTablePath);
@@ -4363,6 +4383,7 @@ TArray<FString> STMOPPeopleEditor::ValidateAppearanceRow(
 {
     TArray<FString> Warnings;
     if (OutUnknownPartCount != nullptr) *OutUnknownPartCount = 0;
+    if (Row.IsDogProfile()) return Warnings;
     if (!IsValid(Catalog) || Catalog->GetRowStruct() !=
         FTMOPAppearanceAssetRow::StaticStruct())
     {

@@ -2,8 +2,11 @@
 #include "UI/TMOPLocalPanel.h"
 #include "UI/TMOPControlUIHelpers.h"
 #include "People/TMOPPersonNameLibrary.h"
+#include "People/TMOPPersonRegistrySubsystem.h"
+#include "Observations/TMOPObservationDirector.h"
 #include "InputCoreTypes.h"
 #include "Engine/Texture2D.h"
+#include "EngineUtils.h"
 
 #include "Player/TMOPPlayerCharacter.h"
 #include "Styling/CoreStyle.h"
@@ -27,14 +30,16 @@ void UTMOPAgentInfoChartWidget::InitializeAgentInfo(
 
 void UTMOPAgentInfoChartWidget::ShowAgentInfo(
     const FTMOPPersonProfileRow& Profile, const FText& TimelineSummary,
-    const bool bPoliceInterviewed)
+    const bool bPoliceInterviewed, const FName InspectedEntityId)
 {
     const FText Name = UTMOPPersonNameLibrary::FormatPersonName(Profile.FullName, Profile.FirstName, Profile.LastName);
     if (NameText.IsValid()) NameText->SetText(Name.IsEmpty()
         ? NSLOCTEXT("TMOP", "UnnamedPersonDisplay", "Okänd person") : Name);
 
     TArray<FString> IdentityParts;
-    switch (Profile.Gender)
+    if (Profile.IsDogProfile())
+        IdentityParts.Add(TEXT("Hund"));
+    else switch (Profile.Gender)
     {
     case ETMOPPersonGender::Female: IdentityParts.Add(TEXT("Kvinna")); break;
     case ETMOPPersonGender::Male: IdentityParts.Add(TEXT("Man")); break;
@@ -65,26 +70,14 @@ void UTMOPAgentInfoChartWidget::ShowAgentInfo(
             ? NSLOCTEXT("TMOP", "AgentInfoNoObservations",
                 "Inga egna observationer är sammanfattade ännu.")
             : Profile.ObservationSummary);
+    if (ObserversText.IsValid())
+        ObserversText->SetText(BuildObserverSummary(InspectedEntityId));
     if (PostMurderEventsText.IsValid()) PostMurderEventsText->SetText(
         Profile.PostMurderEventsSummary.IsEmpty()
             ? NSLOCTEXT("TMOP", "AgentInfoNoPostMurderEvents",
                 "Inga källbelagda händelser efter mordet är registrerade ännu.")
             : Profile.PostMurderEventsSummary);
-    UTexture2D* Portrait = Profile.ReferenceImage.IsNull()
-        ? nullptr : Profile.ReferenceImage.LoadSynchronous();
-    PortraitBrush = FSlateBrush();
-    PortraitBrush.DrawAs = ESlateBrushDrawType::Image;
-    PortraitBrush.ImageSize = FVector2D(180.0f, 230.0f);
-    PortraitBrush.SetResourceObject(Portrait);
-    if (PortraitImage.IsValid())
-    {
-        PortraitImage->SetImage(&PortraitBrush);
-        PortraitImage->SetVisibility(Portrait
-            ? EVisibility::Visible : EVisibility::Collapsed);
-    }
-    if (PortraitPlaceholder.IsValid())
-        PortraitPlaceholder->SetVisibility(Portrait
-            ? EVisibility::Collapsed : EVisibility::Visible);
+    RefreshEvidenceGallery(Profile);
     FString Sources = Profile.AgentInfoSourceReference;
     if (Sources.IsEmpty()) Sources = Profile.GeneralSourceReference;
     if (SourceText.IsValid()) SourceText->SetText(Sources.IsEmpty()
@@ -93,6 +86,128 @@ void UTMOPAgentInfoChartWidget::ShowAgentInfo(
     bChartVisible = true;
     if (ScrollBox.IsValid()) ScrollBox->ScrollToStart();
     RefreshVisibility();
+}
+
+FText UTMOPAgentInfoChartWidget::BuildObserverSummary(
+    const FName InspectedEntityId) const
+{
+    ATMOPObservationDirector* ObservationDirector = nullptr;
+    if (UWorld* World = GetWorld())
+        for (TActorIterator<ATMOPObservationDirector> It(World); It; ++It)
+        {
+            ObservationDirector = *It;
+            break;
+        }
+    if (!IsValid(ObservationDirector) || InspectedEntityId.IsNone())
+        return NSLOCTEXT("TMOP", "AgentInfoNoObserverData",
+            "Inga registrerade observatörer.");
+
+    const TArray<FName> ObserverIds =
+        ObservationDirector->GetObserverEntityIdsForTarget(InspectedEntityId);
+    if (ObserverIds.IsEmpty())
+        return NSLOCTEXT("TMOP", "AgentInfoNoObservers",
+            "Ingen namngiven person är kopplad som observatör ännu.");
+
+    UTMOPPersonRegistrySubsystem* Registry = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>() : nullptr;
+    TArray<FString> Lines;
+    for (const FName ObserverId : ObserverIds)
+    {
+        FText DisplayName;
+        FTMOPPersonProfileRow ObserverProfile;
+        if (IsValid(Registry) &&
+            Registry->GetPersonProfile(ObserverId, ObserverProfile))
+            DisplayName = UTMOPPersonNameLibrary::FormatPersonName(
+                ObserverProfile.FullName, ObserverProfile.FirstName,
+                ObserverProfile.LastName);
+        if (DisplayName.IsEmpty())
+            DisplayName = FText::FromString(
+                ObserverId.ToString().Replace(TEXT("_"), TEXT(" ")));
+        Lines.Add(FString::Printf(TEXT("• %s"), *DisplayName.ToString()));
+    }
+    return FText::FromString(FString::Join(Lines, TEXT("\n")));
+}
+
+void UTMOPAgentInfoChartWidget::RefreshEvidenceGallery(
+    const FTMOPPersonProfileRow& Profile)
+{
+    EvidenceImageBrushes.Reset();
+    if (!EvidenceGallery.IsValid()) return;
+    EvidenceGallery->ClearChildren();
+
+    TArray<FTMOPEvidenceImage> Images = Profile.EvidenceImages;
+    if (!Profile.ReferenceImage.IsNull())
+    {
+        FTMOPEvidenceImage Reference;
+        Reference.Image = Profile.ReferenceImage;
+        Reference.Type = ETMOPEvidenceImageType::Photograph;
+        Reference.Caption = NSLOCTEXT("TMOP", "AgentInfoReferencePhoto",
+            "Referensbild");
+        Images.Insert(Reference, 0);
+    }
+
+    for (const FTMOPEvidenceImage& Evidence : Images)
+    {
+        UTexture2D* Texture = Evidence.Image.IsNull()
+            ? nullptr : Evidence.Image.LoadSynchronous();
+        if (!IsValid(Texture)) continue;
+
+        TSharedPtr<FSlateBrush> Brush = MakeShared<FSlateBrush>();
+        Brush->DrawAs = ESlateBrushDrawType::Image;
+        Brush->ImageSize = FVector2D(180.0f, 210.0f);
+        Brush->SetResourceObject(Texture);
+        EvidenceImageBrushes.Add(Brush);
+
+        FText Caption = Evidence.Caption;
+        if (Caption.IsEmpty())
+        {
+            switch (Evidence.Type)
+            {
+            case ETMOPEvidenceImageType::PhantomImage:
+                Caption = NSLOCTEXT("TMOP", "EvidencePhantomImage", "Fantombild"); break;
+            case ETMOPEvidenceImageType::Sketch:
+                Caption = NSLOCTEXT("TMOP", "EvidenceSketch", "Skiss"); break;
+            case ETMOPEvidenceImageType::Reconstruction:
+                Caption = NSLOCTEXT("TMOP", "EvidenceReconstruction", "Rekonstruktion"); break;
+            case ETMOPEvidenceImageType::Photograph:
+                Caption = NSLOCTEXT("TMOP", "EvidencePhotograph", "Fotografi"); break;
+            case ETMOPEvidenceImageType::Document:
+                Caption = NSLOCTEXT("TMOP", "EvidenceDocument", "Dokumentbild"); break;
+            default:
+                Caption = NSLOCTEXT("TMOP", "EvidenceOtherImage", "Bild"); break;
+            }
+        }
+
+        EvidenceGallery->AddSlot()
+        .Padding(FMargin(0.0f, 0.0f, 12.0f, 0.0f))
+        [
+            SNew(SBox).WidthOverride(180.0f)
+            [
+                SNew(SVerticalBox)
+                + SVerticalBox::Slot().AutoHeight()
+                [
+                    SNew(SBox).WidthOverride(180.0f).HeightOverride(210.0f)
+                    [ SNew(SImage).Image(Brush.Get()) ]
+                ]
+                + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f, 0.0f, 0.0f)
+                [
+                    SNew(STextBlock).Text(Caption)
+                    .Font(ATMOPTypographyDirector::ResolveFont(this,
+                        TEXT("AgentInfoCaption"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 12)))
+                    .ColorAndOpacity(FLinearColor(0.78f, 0.80f, 0.83f))
+                    .AutoWrapText(true).WrapTextAt(180.0f)
+                ]
+            ]
+        ];
+    }
+
+    const bool bHasImages = !EvidenceImageBrushes.IsEmpty();
+    EvidenceGallery->SetVisibility(bHasImages
+        ? EVisibility::Visible : EVisibility::Collapsed);
+    if (EvidenceGalleryPlaceholder.IsValid())
+        EvidenceGalleryPlaceholder->SetVisibility(bHasImages
+            ? EVisibility::Collapsed : EVisibility::Visible);
 }
 
 void UTMOPAgentInfoChartWidget::HideAgentInfo()
@@ -145,17 +260,18 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoStatus"),
                           FCoreStyle::GetDefaultFontStyle("Bold", 15))) ] ]
                   + SHorizontalBox::Slot().AutoWidth().Padding(18, 0)
-                  [ SNew(SBox).WidthOverride(180).HeightOverride(230)
+                  [ SNew(SBox).WidthOverride(380).HeightOverride(250)
                     [ SNew(SOverlay)
                       + SOverlay::Slot()
                       [ SNew(SBorder)
                         .BorderBackgroundColor(FLinearColor(0.92f, 0.92f, 0.90f, 1))
-                        [ SAssignNew(PortraitPlaceholder, STextBlock)
-                          .Text(NSLOCTEXT("TMOP", "AgentInfoPortraitPlaceholder", "BILD"))
+                        [ SAssignNew(EvidenceGalleryPlaceholder, STextBlock)
+                          .Text(NSLOCTEXT("TMOP", "AgentInfoPortraitPlaceholder", "INGA BILDER REGISTRERADE"))
                           .Justification(ETextJustify::Center)
                           .ColorAndOpacity(FLinearColor(0.08f, 0.08f, 0.08f, 1)) ] ]
                       + SOverlay::Slot()
-                      [ SAssignNew(PortraitImage, SImage).Image(&PortraitBrush) ] ] ]
+                      [ SAssignNew(EvidenceGallery, SScrollBox)
+                        .Orientation(Orient_Horizontal) ] ] ]
                   + SHorizontalBox::Slot().AutoWidth()
                   [ SNew(SButton)
                     .Text(NSLOCTEXT("TMOP", "CloseAgentInfo", "Stäng"))
@@ -171,6 +287,15 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.94f, 0.96f))
+                    .AutoWrapText(true).WrapTextAt(820.0f) ]
+                  + SScrollBox::Slot().Padding(0, 4, 12, 5)
+                  [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoObserversHeader",
+                      "OBSERVERAD AV")) ]
+                  + SScrollBox::Slot().Padding(0, 0, 12, 20)
+                  [ SAssignNew(ObserversText, STextBlock)
+                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
+                        FCoreStyle::GetDefaultFontStyle("Regular", 16)))
+                    .ColorAndOpacity(FLinearColor(0.55f, 0.92f, 0.63f))
                     .AutoWrapText(true).WrapTextAt(820.0f) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoPostMurderHeader",
@@ -239,11 +364,12 @@ void UTMOPAgentInfoChartWidget::ReleaseSlateResources(bool bReleaseChildren)
     InterviewStatusText.Reset();
     TimelineText.Reset();
     ObservationText.Reset();
+    ObserversText.Reset();
     PostMurderEventsText.Reset();
     SourceText.Reset();
-    PortraitImage.Reset();
-    PortraitPlaceholder.Reset();
-    PortraitBrush.SetResourceObject(nullptr);
+    EvidenceGallery.Reset();
+    EvidenceGalleryPlaceholder.Reset();
+    EvidenceImageBrushes.Reset();
 }
 
 FReply UTMOPAgentInfoChartWidget::HandleCloseClicked()

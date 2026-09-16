@@ -7,6 +7,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/TextRenderComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Engine/DataTable.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/StaticMesh.h"
@@ -66,6 +68,9 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
 
     ClearHybridHead();
     CacheBaseBodyTransform(Agent);
+    if (ProfileComponent->Profile.IsDogProfile())
+        return ApplyDogAppearance(Agent, ProfileComponent->Profile);
+
     FTMOPPersonProfileRow ProfileForAppearance = ProfileComponent->Profile;
     if (bOuterwearOnlyPilotMode && bForceOuterwearOnEveryoneInPilotMode &&
         !ProfileComponent->Profile.AppearanceProfile.bUseMetaHumanHybridHead)
@@ -147,6 +152,101 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
         bMetaHuman && bPreserveMetaHumanBodyPlacement);
     ApplyPerformanceSettings(Agent);
     bHasAppliedAppearance = true;
+    return true;
+}
+
+void UTMOPCharacterAppearanceComponent::HideHumanPresentation(
+    ATMOPHistoricalAgent* Agent)
+{
+    if (!IsValid(Agent)) return;
+    const TArray<USkeletalMeshComponent*> HumanParts = {
+        Agent->FaceMesh.Get(), Agent->HairMesh.Get(),
+        Agent->FacialHairMesh.Get(), Agent->OuterwearMesh.Get(),
+        Agent->UpperBodyMesh.Get(), Agent->TrousersMesh.Get(),
+        Agent->FootwearMesh.Get(), Agent->GlovesMesh.Get(),
+        Agent->HeadwearMesh.Get(), Agent->ScarfMesh.Get(),
+        Agent->GlassesMesh.Get()
+    };
+    for (USkeletalMeshComponent* Part : HumanParts)
+        if (IsValid(Part))
+        {
+            Part->SetSkeletalMesh(nullptr);
+            Part->SetVisibility(false, true);
+        }
+    if (IsValid(Agent->HeadwearStaticMesh))
+    {
+        Agent->HeadwearStaticMesh->SetStaticMesh(nullptr);
+        Agent->HeadwearStaticMesh->SetVisibility(false, true);
+    }
+}
+
+bool UTMOPCharacterAppearanceComponent::ApplyDogAppearance(
+    ATMOPHistoricalAgent* Agent, const FTMOPPersonProfileRow& Profile)
+{
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return false;
+
+    HideHumanPresentation(Agent);
+    const FTMOPAnimalPresentation& Animal = Profile.AnimalPresentation;
+    const TSoftObjectPtr<USkeletalMesh>& MeshSource =
+        Animal.SkeletalMesh.IsNull() ? DefaultDogSkeletalMesh : Animal.SkeletalMesh;
+    USkeletalMesh* DogMesh = MeshSource.LoadSynchronous();
+    if (!IsValid(DogMesh))
+    {
+        const FString Message = FString::Printf(TEXT(
+            "Dog '%s' has no valid dog Skeletal Mesh. Set the row override or "
+            "CharacterAppearance.DefaultDogSkeletalMesh."),
+            *Profile.EntityId.ToString());
+        ResolvedAppearance.Diagnostics.Add(Message);
+        UE_LOG(LogTemp, Error, TEXT("TMOP animal appearance: %s"), *Message);
+        Agent->BodyMesh->SetVisibility(false, true);
+        bHasAppliedAppearance = false;
+        return false;
+    }
+
+    Agent->BodyMesh->SetSkeletalMesh(DogMesh);
+    Agent->BodyMesh->SetVisibility(true, true);
+    if (Animal.bOverrideMeshRelativeTransform)
+        Agent->BodyMesh->SetRelativeTransform(Animal.MeshRelativeTransform);
+
+    const TSoftClassPtr<UAnimInstance>& AnimSource =
+        Animal.AnimInstanceClass.IsNull()
+            ? DefaultDogAnimInstanceClass : Animal.AnimInstanceClass;
+    if (UClass* DogAnimClass = AnimSource.LoadSynchronous())
+    {
+        Agent->BodyMesh->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+        Agent->BodyMesh->SetAnimInstanceClass(DogAnimClass);
+    }
+    else
+    {
+        const FString Message = FString::Printf(TEXT(
+            "Dog '%s' has no valid Animation Blueprint. Set the row override "
+            "or CharacterAppearance.DefaultDogAnimInstanceClass."),
+            *Profile.EntityId.ToString());
+        ResolvedAppearance.Diagnostics.Add(Message);
+        UE_LOG(LogTemp, Warning, TEXT("TMOP animal appearance: %s"), *Message);
+    }
+
+    if (UCapsuleComponent* Capsule = Agent->GetCapsuleComponent())
+        Capsule->SetCapsuleSize(
+            FMath::Max(5.0f, Animal.CapsuleRadiusCm),
+            FMath::Max(Animal.CapsuleRadiusCm, Animal.CapsuleHalfHeightCm),
+            true);
+    Agent->NameLabelHeightCm = Animal.NameLabelHeightCm;
+    Agent->SpeechBubbleHeightCm = Animal.SpeechBubbleHeightCm;
+    if (IsValid(Agent->NameLabel))
+        Agent->NameLabel->SetRelativeLocation(
+            FVector(0.0f, 0.0f, Animal.NameLabelHeightCm));
+    if (IsValid(Agent->SpeechBubble))
+        Agent->SpeechBubble->SetRelativeLocation(
+            FVector(0.0f, 0.0f, Animal.SpeechBubbleHeightCm));
+
+    ApplyPerformanceSettings(Agent);
+    bHasAppliedAppearance = true;
+    UE_LOG(LogTemp, Display, TEXT(
+        "TMOP animal appearance: '%s' uses dog mesh '%s'%s."),
+        *Profile.EntityId.ToString(), *DogMesh->GetName(),
+        Agent->BodyMesh->GetAnimInstance() != nullptr
+            ? TEXT(" with dog AnimBP") : TEXT(" without dog AnimBP"));
     return true;
 }
 
@@ -659,6 +759,10 @@ bool UTMOPCharacterAppearanceComponent::ValidateAppearance(
     TArray<FString>& OutWarnings) const
 {
     OutWarnings = ResolvedAppearance.Diagnostics;
+    const ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
+    if (IsValid(Agent) && IsValid(Agent->PersonProfile) &&
+        Agent->PersonProfile->Profile.IsDogProfile())
+        return OutWarnings.IsEmpty();
     if (!IsValid(ResolveAssetCatalog()))
         OutWarnings.Add(TEXT("No DT_TMOP_AppearanceAssets table is configured."));
     return OutWarnings.IsEmpty();
@@ -801,4 +905,3 @@ void UTMOPCharacterAppearanceComponent::ApplyHybridHead(ATMOPHistoricalAgent* Ag
     bHybridHeadActive = true;
     ResolvedAppearance.Diagnostics.Add(TEXT("MetaHuman hybrid active. Verify neck seam, retargeting and groom LODs in play."));
 }
-

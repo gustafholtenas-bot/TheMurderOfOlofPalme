@@ -196,7 +196,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Debug")
     FColor PoliceNameLabelColor = FColor(64, 128, 255);
 
-    /** Name-free speech bubble for timed historical quotes. */
+    /** Code-built named speech bubble for timed historical quotes. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent|Speech")
     TObjectPtr<UWidgetComponent> SpeechBubble;
 

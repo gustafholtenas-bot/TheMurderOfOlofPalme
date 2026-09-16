@@ -20,6 +20,36 @@ class UMaterialInterface;
 class UStaticMesh;
 
 UENUM(BlueprintType)
+enum class ETMOPEvidenceImageType : uint8
+{
+    Photograph UMETA(DisplayName="Photograph"),
+    PhantomImage UMETA(DisplayName="Phantom image"),
+    Sketch UMETA(DisplayName="Sketch"),
+    Reconstruction UMETA(DisplayName="Reconstruction"),
+    Document UMETA(DisplayName="Document"),
+    Other UMETA(DisplayName="Other")
+};
+
+/** One source image that can be shown in the in-game person evidence gallery. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPEvidenceImage
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Reference")
+    TSoftObjectPtr<UTexture2D> Image;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Reference")
+    ETMOPEvidenceImageType Type = ETMOPEvidenceImageType::Other;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Reference")
+    FText Caption;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Reference")
+    FString SourceReference;
+};
+
+UENUM(BlueprintType)
 enum class ETMOPPersonLocationType : uint8
 {
     Unknown,
@@ -546,6 +576,52 @@ enum class ETMOPPersonGender : uint8
     OtherOrUnspecified
 };
 
+/** Biological presentation used by the shared People-table simulation path. */
+UENUM(BlueprintType)
+enum class ETMOPPersonSpecies : uint8
+{
+    Human UMETA(DisplayName="Human"),
+    Dog UMETA(DisplayName="Dog")
+};
+
+/** Optional per-row overrides for non-human characters such as dogs. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPAnimalPresentation
+{
+    GENERATED_BODY()
+
+    /** Empty uses the matching default on TMOPCharacterAppearanceComponent. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal")
+    TSoftObjectPtr<USkeletalMesh> SkeletalMesh;
+
+    /** Animation Blueprint generated class. Empty uses the component default. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal")
+    TSoftClassPtr<UAnimInstance> AnimInstanceClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal")
+    bool bOverrideMeshRelativeTransform = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal",
+        meta=(EditCondition="bOverrideMeshRelativeTransform"))
+    FTransform MeshRelativeTransform = FTransform::Identity;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal|Collision",
+        meta=(ClampMin="5.0", Units="cm"))
+    float CapsuleRadiusCm = 34.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal|Collision",
+        meta=(ClampMin="10.0", Units="cm"))
+    float CapsuleHalfHeightCm = 48.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal|UI",
+        meta=(ClampMin="10.0", Units="cm"))
+    float NameLabelHeightCm = 75.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Animal|UI",
+        meta=(ClampMin="20.0", Units="cm"))
+    float SpeechBubbleHeightCm = 135.0f;
+};
+
 UENUM(BlueprintType)
 enum class ETMOPHairColor : uint8
 {
@@ -860,6 +936,10 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
     ETMOPPersonGender Gender = ETMOPPersonGender::Unknown;
 
+    /** Dogs stay in DT_TMOP_People but use the animal presentation path. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
+    ETMOPPersonSpecies Species = ETMOPPersonSpecies::Human;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
     FString Nationality;
 
@@ -910,6 +990,11 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
         meta=(DisplayName="Reference Image"))
     TSoftObjectPtr<UTexture2D> ReferenceImage;
 
+    /** Multiple photographs, phantom images, sketches and reconstructions. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Reference",
+        meta=(TitleProperty="Caption", DisplayName="Evidence Images"))
+    TArray<FTMOPEvidenceImage> EvidenceImages;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Source")
     FString GeneralSourceReference;
 
@@ -958,6 +1043,21 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation",
         meta=(DisplayName="Main Character"))
     bool bMainCharacter = false;
+
+    /** Used for dog mesh, AnimBP, collision and label placement. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Simulation",
+        meta=(EditCondition="Species==ETMOPPersonSpecies::Dog"))
+    FTMOPAnimalPresentation AnimalPresentation;
+
+    /** Supports existing dog rows until Species has been saved explicitly. */
+    bool IsDogProfile() const
+    {
+        if (Species == ETMOPPersonSpecies::Dog) return true;
+        const FString SearchText = FString::Printf(TEXT("%s %s %s"),
+            *EntityId.ToString(), *CategoryId.ToString(), *Occupation);
+        return SearchText.Contains(TEXT("HUND"), ESearchCase::IgnoreCase) ||
+            SearchText.Contains(TEXT("DOG"), ESearchCase::IgnoreCase);
+    }
 
     /** Opt-in: pass other road users so they cannot obstruct this authored timeline. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Simulation|Priority",

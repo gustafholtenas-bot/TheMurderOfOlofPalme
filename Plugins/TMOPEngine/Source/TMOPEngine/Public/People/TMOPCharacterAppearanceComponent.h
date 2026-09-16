@@ -11,6 +11,7 @@ class UDataTable;
 class UMaterialInterface;
 class USkeletalMesh;
 class USkeletalMeshComponent;
+class UAnimInstance;
 
 /** Builds one historical agent from their evidence-backed appearance profile. */
 UCLASS(ClassGroup=(TMOP), BlueprintType, Blueprintable,
@@ -63,6 +64,14 @@ public:
         meta=(EditCondition="bAutomaticallySelectMannyOrQuinnByGender"))
     TSoftObjectPtr<USkeletalMesh> FemaleBaseBodyMesh;
 
+    /** Shared fallback used by every People-table dog row. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Animal|Dog")
+    TSoftObjectPtr<USkeletalMesh> DefaultDogSkeletalMesh;
+
+    /** Shared dog Animation Blueprint; an individual row can override it. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Animal|Dog")
+    TSoftClassPtr<UAnimInstance> DefaultDogAnimInstanceClass;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|MetaHuman")
     bool bPreserveMetaHumanBodyPlacement = true;
 
@@ -108,6 +117,9 @@ public:
     bool ValidateAppearance(TArray<FString>& OutWarnings) const;
 
 private:
+    bool ApplyDogAppearance(ATMOPHistoricalAgent* Agent,
+        const FTMOPPersonProfileRow& Profile);
+    void HideHumanPresentation(ATMOPHistoricalAgent* Agent);
     void ApplyHybridHead(ATMOPHistoricalAgent* Agent);
     void ClearHybridHead();
 

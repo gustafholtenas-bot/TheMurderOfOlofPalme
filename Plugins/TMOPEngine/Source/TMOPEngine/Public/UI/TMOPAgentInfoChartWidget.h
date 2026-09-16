@@ -21,7 +21,8 @@ class TMOPENGINE_API UTMOPAgentInfoChartWidget : public UUserWidget
 public:
     void InitializeAgentInfo(ATMOPPlayerCharacter* InPlayerCharacter);
     void ShowAgentInfo(const FTMOPPersonProfileRow& Profile,
-        const FText& TimelineSummary, bool bPoliceInterviewed);
+        const FText& TimelineSummary, bool bPoliceInterviewed,
+        FName InspectedEntityId);
     void HideAgentInfo();
 
 protected:
@@ -32,6 +33,8 @@ protected:
 private:
     FReply HandleCloseClicked();
     void RefreshVisibility();
+    void RefreshEvidenceGallery(const FTMOPPersonProfileRow& Profile);
+    FText BuildObserverSummary(FName InspectedEntityId) const;
 
     TWeakObjectPtr<ATMOPPlayerCharacter> PlayerCharacter;
     TSharedPtr<SBorder> MainPanel;
@@ -41,10 +44,11 @@ private:
     TSharedPtr<STextBlock> InterviewStatusText;
     TSharedPtr<STextBlock> TimelineText;
     TSharedPtr<STextBlock> ObservationText;
+    TSharedPtr<STextBlock> ObserversText;
     TSharedPtr<STextBlock> PostMurderEventsText;
     TSharedPtr<STextBlock> SourceText;
-    TSharedPtr<SImage> PortraitImage;
-    TSharedPtr<STextBlock> PortraitPlaceholder;
-    FSlateBrush PortraitBrush;
+    TSharedPtr<SScrollBox> EvidenceGallery;
+    TSharedPtr<STextBlock> EvidenceGalleryPlaceholder;
+    TArray<TSharedPtr<FSlateBrush>> EvidenceImageBrushes;
     bool bChartVisible = false;
 };

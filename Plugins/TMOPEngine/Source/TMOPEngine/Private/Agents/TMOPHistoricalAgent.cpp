@@ -551,7 +551,10 @@ float ATMOPHistoricalAgent::ShowAutomaticSpeech(
     SpeechBubble->InitWidget();
     if (UTMOPSpeechBubbleWidget* Bubble =
         Cast<UTMOPSpeechBubbleWidget>(SpeechBubble->GetUserWidgetObject()))
+    {
+        Bubble->SetSpeakerName(GetInGameDisplayName());
         Bubble->SetSpeechText(Text);
+    }
     SpeechBubble->SetVisibility(true);
 
     const float ReadDuration = FMath::Clamp(
