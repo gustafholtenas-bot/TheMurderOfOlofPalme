@@ -1388,6 +1388,29 @@ TArray<FName> ATMOPObservationDirector::GetObserverEntityIdsForTarget(
     return Result;
 }
 
+TArray<FTMOPObservationDefinition> ATMOPObservationDirector::GetObservationDefinitionsForTarget(
+    const FName ObservedEntityId) const
+{
+    TArray<FTMOPObservationDefinition> Result;
+    TSet<FName> Added;
+    if (ObservedEntityId.IsNone()) return Result;
+    const auto Add = [&Result, &Added](const FTMOPObservationDefinition& Definition)
+    {
+        if (!Definition.bEnabled || Added.Contains(Definition.ObservationId)) return;
+        Added.Add(Definition.ObservationId);
+        Result.Add(Definition);
+    };
+    for (const auto& Pair : LoadedObservations)
+        if (Pair.Value.ObservedEntityId == ObservedEntityId) Add(Pair.Value);
+    for (const auto& Pair : LoadedLinks)
+    {
+        if (Pair.Value.LinkedEntityId != ObservedEntityId) continue;
+        for (const FName Id : GetLinkObservationIds(Pair.Value))
+            if (const auto* Definition = LoadedObservations.Find(Id)) Add(*Definition);
+    }
+    return Result;
+}
+
 bool ATMOPObservationDirector::TryGetObservationRuntime(
     const FName ObservationId,
     FTMOPObservationRuntime& OutRuntime) const

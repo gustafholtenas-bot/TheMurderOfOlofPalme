@@ -12,5 +12,7 @@ public class TMOPEngine : ModuleRules
             "DeveloperSettings", "Json", "JsonUtilities", "Niagara", "MediaAssets",
             "AudioMixer", "EngineSettings"
         });
+        // One-shot notebook render-target readback; no editor-only preview module.
+        PrivateDependencyModuleNames.AddRange(new string[] { "RenderCore", "RHI" });
     }
 }

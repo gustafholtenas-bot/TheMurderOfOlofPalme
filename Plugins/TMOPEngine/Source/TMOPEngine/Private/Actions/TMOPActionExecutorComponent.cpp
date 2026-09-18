@@ -151,6 +151,9 @@ void UTMOPActionExecutorComponent::TickComponent(
             CurrentSimulationSecond <
                 static_cast<double>(ActiveExpectedArrivalSecond))
         {
+            if (ActivePhysicalArrivalSecond == INDEX_NONE)
+                ActivePhysicalArrivalSecond =
+                    FMath::FloorToInt(CurrentSimulationSecond);
             if (AController* Controller = GetHistoricalAgent()->GetController())
                 Controller->StopMovement();
             if (UCharacterMovementComponent* Movement =
@@ -443,6 +446,7 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
     PendingMaximumSpeedCmPerSecond = 0.0f;
     TimedSpeedUpdateAccumulator = 0.0f;
     bHoldingForTimedArrival = false;
+    ActivePhysicalArrivalSecond = INDEX_NONE;
     Agent->SetActivityState(Entry.ActivityState);
 
     if (!Agent->CanMove())
@@ -627,6 +631,7 @@ void UTMOPActionExecutorComponent::RestoreMovementSpeed()
     ActiveRequiredSpeedCmPerSecond = 0.0f;
     bActiveMovePhysicallyPossible = true;
     bHoldingForTimedArrival = false;
+    ActivePhysicalArrivalSecond = INDEX_NONE;
 }
 
 void UTMOPActionExecutorComponent::CompleteCurrentAction(

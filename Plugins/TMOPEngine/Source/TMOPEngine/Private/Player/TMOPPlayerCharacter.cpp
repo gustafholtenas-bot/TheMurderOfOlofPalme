@@ -51,6 +51,9 @@
 #include "World/TMOPInspectableComponent.h"
 #include "EngineGlobals.h"
 #include "UI/TMOPAgentInfoChartWidget.h"
+#include "UI/TMOPNotebookToastWidget.h"
+#include "World/TMOPVehicleInspectionComponent.h"
+#include "Observations/TMOPNotebookPresentation.h"
 #include "UI/TMOPNewspaperReaderWidget.h"
 #include "UI/TMOPMapComponent.h"
 #include "UI/TMOPMapWidget.h"
@@ -139,7 +142,9 @@ void ATMOPPlayerCharacter::PossessedBy(AController* NewController)
 
 void ATMOPPlayerCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    PendingNotebookObservation = FTMOPNotebookObservation();
     CloseSessionMenus();
+    if (IsValid(NotebookToast)) NotebookToast->RemoveFromParent();
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
     {
@@ -520,7 +525,8 @@ void ATMOPPlayerCharacter::SetSprinting(const bool bEnabled, const bool bExtraSp
 void ATMOPPlayerCharacter::InputInteract()
 {
     // A UI key can also reach the direct-key fallback during this frame.
-    if (AddressDirectoryClosedFrame == GFrameCounter || bPauseMenuOpen ||
+    if (AgentInfoClosedFrame == GFrameCounter ||
+        AddressDirectoryClosedFrame == GFrameCounter || bPauseMenuOpen ||
         bWorldMapOpen) return;
     if (bAddressDirectoryOpen)
     {
@@ -552,6 +558,24 @@ void ATMOPPlayerCharacter::InputInteract()
     }
     AActor* InformationTarget = FindInformationTarget();
     AActor* Target = FindInteractionTargetForInformation(InformationTarget);
+    // Green observed vehicles have the same collect-on-close interaction as
+    // observed people. Ordinary vehicles keep their existing boarding action.
+    ATMOPVehicleBase* ObservedVehicle = Cast<ATMOPVehicleBase>(InformationTarget);
+    if (!ObservedVehicle) ObservedVehicle = Cast<ATMOPVehicleBase>(Target);
+    if (ObservedVehicle && !ObservedVehicle->VehicleId.IsNone() &&
+        TMOPNotebook::IsVehicleEligible(ObservedVehicle->VehicleId.ToString(),
+            ObservedVehicle->VehicleCategoryId.ToString()))
+    {
+        auto* Inspection = ObservedVehicle->FindComponentByClass<UTMOPInspectableComponent>();
+        if (!Inspection)
+        {
+            Inspection = NewObject<UTMOPVehicleInspectionComponent>(ObservedVehicle);
+            ObservedVehicle->AddInstanceComponent(Inspection);
+            Inspection->RegisterComponent();
+        }
+        OpenInformation(Inspection);
+        return;
+    }
     // Use the same readable point as the hover marker, even when another target is nearby.
     if (UTMOPInspectableComponent* Inspection = IsValid(InformationTarget)
         ? InformationTarget->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
@@ -1593,8 +1617,10 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             Prompt = FText::Format(
                 NSLOCTEXT("TMOP", "InspectPerson", "Visa personakt: {0}"), Name);
         }
-        else if (Cast<ATMOPVehicleBase>(Target))
-            Prompt = NSLOCTEXT("TMOP", "EnterTargetVehicle", "Hoppa in");
+        else if (const auto* Vehicle = Cast<ATMOPVehicleBase>(Target))
+            Prompt = TMOPNotebook::IsVehicleEligible(Vehicle->VehicleId.ToString(), Vehicle->VehicleCategoryId.ToString())
+                ? NSLOCTEXT("TMOP", "InspectObservedCar", "Visa fordonsakt")
+                : NSLOCTEXT("TMOP", "EnterTargetVehicle", "Hoppa in");
         else if (const auto* Inspection = IsValid(Target)
             ? Target->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
             Prompt = Inspection->GetInspectionAction();
@@ -1639,6 +1665,22 @@ bool ATMOPPlayerCharacter::OpenInformation(UTMOPInspectableComponent* Inspection
     }
     if (IsValid(InventoryInput.Get())) InventoryInput->CancelRadialMenu();
     ActiveInspection = Inspection;
+    PendingNotebookObservation = FTMOPNotebookObservation();
+    if (const auto* Vehicle = Cast<ATMOPVehicleBase>(Inspection->GetOwner()))
+        if (!Vehicle->VehicleId.IsNone() && TMOPNotebook::IsVehicleEligible(
+            Vehicle->VehicleId.ToString(), Vehicle->VehicleCategoryId.ToString()))
+        {
+            PendingNotebookObservation.EntityId = Vehicle->VehicleId;
+            PendingNotebookObservation.Kind = ETMOPNotebookEntityKind::Vehicle;
+            PendingNotebookObservation.DisplayName = Inspection->GetInspectionTitle();
+            PendingNotebookObservation.Summary = Inspection->GetInspectionText();
+            if (const auto* Clock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>())
+                PendingNotebookObservation.DiscoveredSecond = Clock->GetCurrentTime().ToSecondsFromMidnight();
+            if (const auto* Existing = NotebookObservations.FindByPredicate([Vehicle](const auto& E)
+                { return E.Kind == ETMOPNotebookEntityKind::Vehicle && E.EntityId == Vehicle->VehicleId; }))
+                PendingNotebookObservation = *Existing;
+            FTMOPNotebookPresentation::Populate(PendingNotebookObservation, GetWorld(), Inspection->GetOwner());
+        }
     bAddressDirectoryOpen = true;
     SetGameplayHUDHidden(TEXT("AddressDirectory"), true);
     if (IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
@@ -1658,6 +1700,7 @@ void ATMOPPlayerCharacter::CloseAddressDirectory()
 {
     if (!bAddressDirectoryOpen) return;
     bAddressDirectoryOpen = false;
+    CommitNotebookObservation();
     SetGameplayHUDHidden(TEXT("AddressDirectory"), false);
     ActiveInspection.Reset();
     AddressDirectoryClosedFrame = GFrameCounter;
@@ -1835,6 +1878,35 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
 
     const bool bPoliceInterviewed = Profile.bPoliceInterviewed ||
         Profile.EvidenceIcon == ETMOPEntityEvidenceIcon::PoliceInterview;
+    PendingNotebookObservation = FTMOPNotebookObservation();
+    const FName InspectedId = !ProfileComponent->ResolvedEntityId.IsNone()
+        ? ProfileComponent->ResolvedEntityId : Profile.EntityId;
+    if (TMOPNotebook::IsEligible(InspectedId.ToString(),
+        HistoricalAgent->PersonCategoryId.ToString()))
+    {
+        auto HasRadio = [](const FTMOPHeldItemDefinition& Item)
+        {
+            return Item.GripPose == ETMOPHeldItemPose::WalkieTalkie;
+        };
+        const bool bRadio = HasRadio(Profile.LeftHandItem) ||
+            HasRadio(Profile.RightHandItem) ||
+            Profile.AdditionalCarriedItems.ContainsByPredicate(HasRadio);
+        PendingNotebookObservation.EntityId = InspectedId;
+        PendingNotebookObservation.DisplayName = HistoricalAgent->GetInGameDisplayName();
+        if (PendingNotebookObservation.DisplayName.IsEmpty())
+            PendingNotebookObservation.DisplayName = NSLOCTEXT("TMOP", "NotebookUnknown", "Okänd person");
+        PendingNotebookObservation.Summary = Profile.ObservationSummary;
+        PendingNotebookObservation.Category = TMOPNotebook::ResolveCategory(
+            Profile.NotebookCategory, InspectedId == FName(TEXT("THE_KILLER")),
+            HistoricalAgent->ActivityState == ETMOPAgentActivityState::Fleeing, bRadio);
+        if (const UTMOPClockSubsystem* Clock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>())
+            PendingNotebookObservation.DiscoveredSecond =
+                Clock->GetCurrentTime().ToSecondsFromMidnight();
+        if (const auto* Existing = NotebookObservations.FindByPredicate([InspectedId](const auto& E)
+            { return E.Kind == ETMOPNotebookEntityKind::Person && E.EntityId == InspectedId; }))
+            PendingNotebookObservation = *Existing;
+        FTMOPNotebookPresentation::Populate(PendingNotebookObservation, GetWorld(), HistoricalAgent, &Profile);
+    }
     AgentInfoChartWidget->ShowAgentInfo(
         Profile, TimelineSummary, bPoliceInterviewed,
         ProfileComponent->ResolvedEntityId);
@@ -1864,10 +1936,12 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
 void ATMOPPlayerCharacter::CloseAgentInfoChart()
 {
     if (!bAgentInfoChartOpen) return;
+    AgentInfoClosedFrame = GFrameCounter;
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
         Clock->ReleasePause(this, TEXT("AgentInfo"));
     bAgentInfoChartOpen = false;
+    CommitNotebookObservation();
     EndDialogCloseUp();
     SetGameplayHUDHidden(TEXT("AgentInfo"), false);
     if (IsValid(AgentInfoChartWidget.Get()))
@@ -1879,6 +1953,52 @@ void ATMOPPlayerCharacter::CloseAgentInfoChart()
         PC->SetIgnoreLookInput(false);
         ApplyLocalInputMode();
     }
+}
+
+void ATMOPPlayerCharacter::RestoreNotebook(
+    const TArray<FTMOPNotebookObservation>& Entries)
+{
+    PendingNotebookObservation = FTMOPNotebookObservation();
+    NotebookObservations.Reset();
+    for (const auto& Entry : Entries) TMOPNotebook::AddUnique(NotebookObservations, Entry);
+    SynchronizeTheoryShooters();
+    if (IsValid(NotebookToast)) NotebookToast->SetVisibility(ESlateVisibility::Collapsed);
+}
+
+void ATMOPPlayerCharacter::CommitNotebookObservation()
+{
+    const FTMOPNotebookObservation Entry = PendingNotebookObservation;
+    PendingNotebookObservation = FTMOPNotebookObservation();
+    if (!TMOPNotebook::AddUnique(NotebookObservations, Entry))
+    {
+        // Revisiting may supply the model image missing in a pre-update save.
+        if (auto* Existing = NotebookObservations.FindByPredicate([&Entry](const auto& E)
+            { return E.EntityId == Entry.EntityId && E.Kind == Entry.Kind; }))
+            *Existing = Entry;
+        return;
+    }
+    SynchronizeTheoryShooters();
+    if (!IsValid(NotebookToast))
+        if (APlayerController* PC = Cast<APlayerController>(Controller))
+        {
+            NotebookToast = CreateWidget<UTMOPNotebookToastWidget>(PC);
+            if (IsValid(NotebookToast)) NotebookToast->AddToPlayerScreen(100);
+        }
+    if (IsValid(NotebookToast)) NotebookToast->ShowObservation(Entry.DisplayName);
+}
+
+void ATMOPPlayerCharacter::SynchronizeTheoryShooters()
+{
+    for (auto& Tree : TheoryTrees) TMOPTheory::SynchronizeShooter(Tree, NotebookObservations);
+}
+
+void ATMOPPlayerCharacter::RestoreTheories(const TArray<FTMOPTheoryTree>& Trees, FGuid ActiveId)
+{
+    TheoryTrees = Trees;
+    ActiveTheoryTreeId = ActiveId;
+    if (!TheoryTrees.ContainsByPredicate([ActiveId](const auto& T) { return T.Id == ActiveId; }))
+        ActiveTheoryTreeId = TheoryTrees.IsEmpty() ? FGuid() : TheoryTrees[0].Id;
+    SynchronizeTheoryShooters();
 }
 
 void ATMOPPlayerCharacter::BeginDialogCloseUp(

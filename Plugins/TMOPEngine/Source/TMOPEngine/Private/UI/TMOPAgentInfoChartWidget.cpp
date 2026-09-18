@@ -331,11 +331,15 @@ FReply UTMOPAgentInfoChartWidget::NativeOnPreviewKeyDown(const FGeometry& Geomet
     if (bChartVisible)
     {
         const FKey Key = Event.GetKey();
-        if (TMOPMatchesControl(this, Key, ETMOPControlAction::Cancel) ||
+        if (TMOPMatchesControl(this, Key, ETMOPControlAction::Interact) ||
+            TMOPMatchesControl(this, Key, ETMOPControlAction::Cancel) ||
             TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack) ||
             (!TMOPHasControlProfiles(this) &&
-             (Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right)))
+             (Key == EKeys::E || Key == EKeys::Escape || Key == EKeys::Gamepad_FaceButton_Right)))
+        {
+            if (Event.IsRepeat()) return FReply::Handled();
             return HandleCloseClicked();
+        }
         float Delta = 0.0f;
         if (TMOPMatchesControl(this, Key, ETMOPControlAction::MenuUp) ||
             (!TMOPHasControlProfiles(this) && Key == EKeys::Gamepad_DPad_Up)) Delta = -64.0f;

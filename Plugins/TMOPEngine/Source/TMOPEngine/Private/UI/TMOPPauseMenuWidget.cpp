@@ -1,4 +1,7 @@
 #include "UI/TMOPPauseMenuWidget.h"
+#include "UI/STMOPTheoryBuilder.h"
+#include "UI/STMOPNotebookPanel.h"
+#include "Observations/TMOPNotebookPresentation.h"
 #include "UI/TMOPLocalPanel.h"
 #include "UI/TMOPControlsPanel.h"
 #include "UI/TMOPControlUIHelpers.h"
@@ -34,6 +37,7 @@
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Layout/SScrollBox.h"
+#include "Widgets/Layout/SExpandableArea.h"
 #include "Widgets/Layout/SSpacer.h"
 #include "Widgets/Layout/SUniformGridPanel.h"
 #include "Widgets/Layout/SWrapBox.h"
@@ -248,16 +252,24 @@ FText SectionTitle(const ETMOPPauseHubSection Section)
 {
     switch (Section)
     {
-    case ETMOPPauseHubSection::Inventory: return NSLOCTEXT("TMOP", "HubInventory", "INVENTORY");
-    case ETMOPPauseHubSection::Evidence: return NSLOCTEXT("TMOP", "HubEvidence", "NOTEBOOK / EVIDENCE");
+    case ETMOPPauseHubSection::Inventory: return NSLOCTEXT("TMOP", "HubInventory", "INVENTARIE");
+    case ETMOPPauseHubSection::Evidence: return NSLOCTEXT("TMOP", "HubEvidence", "ANTECKNINGSBOK / FYND");
     case ETMOPPauseHubSection::Sources: return NSLOCTEXT("TMOP", "HubSources", "KÄLLOR / UPPSLAG");
-    case ETMOPPauseHubSection::Publications: return NSLOCTEXT("TMOP", "HubPublications", "NEWSPAPERS / BOOKS");
+    case ETMOPPauseHubSection::MyObservations: return NSLOCTEXT("TMOP", "HubMyObservations", "MINA OBSERVATIONER");
+    case ETMOPPauseHubSection::MurderKnowledge: return NSLOCTEXT("TMOP", "HubMurderKnowledge", "VETSKAPER OM MORDET");
+    case ETMOPPauseHubSection::Publications: return NSLOCTEXT("TMOP", "HubPublications", "TIDNINGAR");
     case ETMOPPauseHubSection::Map: return NSLOCTEXT("TMOP", "HubMap", "KARTA");
-    case ETMOPPauseHubSection::Settings: return NSLOCTEXT("TMOP", "HubSettings", "SETTINGS");
-    case ETMOPPauseHubSection::Controls: return NSLOCTEXT("TMOP", "HubControls", "CONTROLS");
-    case ETMOPPauseHubSection::SaveLoad: return NSLOCTEXT("TMOP", "HubSaveLoad", "SAVE / LOAD");
-    case ETMOPPauseHubSection::Quit: return NSLOCTEXT("TMOP", "HubQuit", "QUIT");
-    case ETMOPPauseHubSection::MoveInTime: return NSLOCTEXT("TMOP", "HubMoveTime", "MOVE IN TIME");
+    case ETMOPPauseHubSection::Settings: return NSLOCTEXT("TMOP", "HubSettings", "INSTÄLLNINGAR");
+    case ETMOPPauseHubSection::Controls: return NSLOCTEXT("TMOP", "HubControls", "KONTROLLINSTÄLLNINGAR");
+    case ETMOPPauseHubSection::SaveLoad: return NSLOCTEXT("TMOP", "HubSaveLoad", "SPARA/LADDA");
+    case ETMOPPauseHubSection::Quit: return NSLOCTEXT("TMOP", "HubQuit", "AVSLUTA SPELET");
+    case ETMOPPauseHubSection::MoveInTime: return NSLOCTEXT("TMOP", "HubMoveTime", "FÖRFLYTTA I TID");
+    case ETMOPPauseHubSection::Theories: return NSLOCTEXT("TMOP", "HubTheories", "MINA TEORIER");
+    case ETMOPPauseHubSection::TheoryBuilder: return NSLOCTEXT("TMOP", "HubTheoryBuilder", "TEORIBYGGE");
+    case ETMOPPauseHubSection::MurderDayMysteries: return NSLOCTEXT("TMOP", "HubMysteries", "MYSTERIER PÅ MORDDAGEN");
+    case ETMOPPauseHubSection::AfterMurderEvents: return NSLOCTEXT("TMOP", "HubAfterMurder", "HÄNDELSER EFTER MORDET");
+    case ETMOPPauseHubSection::WorldGroups: return NSLOCTEXT("TMOP", "HubWorldGroups", "GRUPPERINGAR I VÄRLDEN");
+    case ETMOPPauseHubSection::SwedenGroups: return NSLOCTEXT("TMOP", "HubSwedenGroups", "GRUPPERINGAR I SVERIGE");
     default: return FText::GetEmpty();
     }
 }
@@ -289,6 +301,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
         const ETMOPPauseHubSection Section)
     {
         return SNew(SButton)
+            .HAlign(HAlign_Left)
             .ButtonColorAndOpacity(MenuColors.ButtonBackground)
             .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleSectionClicked, Section)
             [ SNew(STextBlock).Text(Label)
@@ -306,25 +319,42 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
         NavigationPanel->AddSlot().AutoHeight().Padding(3.0f)
         [ MakeNavigationButton(SectionTitle(Section), Section) ];
     };
+    auto AddNavigationGap = [&NavigationPanel](float Height)
+    {
+        NavigationPanel->AddSlot().AutoHeight()
+        [ SNew(SSpacer).Size(FVector2D(1.0f, Height)) ];
+    };
     AddNavigationEntry(ETMOPPauseHubSection::Inventory);
-    AddNavigationEntry(ETMOPPauseHubSection::Evidence);
-    AddNavigationEntry(ETMOPPauseHubSection::Sources);
     AddNavigationEntry(ETMOPPauseHubSection::Publications);
     AddNavigationEntry(ETMOPPauseHubSection::Map);
+    AddNavigationGap(20.0f);
+    AddNavigationEntry(ETMOPPauseHubSection::MyObservations);
+    AddNavigationEntry(ETMOPPauseHubSection::Theories);
+    AddNavigationEntry(ETMOPPauseHubSection::TheoryBuilder);
+    AddNavigationGap(20.0f);
+    AddNavigationEntry(ETMOPPauseHubSection::MurderDayMysteries);
+    AddNavigationEntry(ETMOPPauseHubSection::MurderKnowledge);
+    AddNavigationEntry(ETMOPPauseHubSection::AfterMurderEvents);
+    AddNavigationGap(20.0f);
+    AddNavigationEntry(ETMOPPauseHubSection::WorldGroups);
+    AddNavigationEntry(ETMOPPauseHubSection::SwedenGroups);
+    AddNavigationGap(64.0f);
+    AddNavigationEntry(ETMOPPauseHubSection::Sources);
     AddNavigationEntry(ETMOPPauseHubSection::Settings);
     AddNavigationEntry(ETMOPPauseHubSection::Controls);
     AddNavigationEntry(ETMOPPauseHubSection::SaveLoad);
     AddNavigationEntry(ETMOPPauseHubSection::Quit);
-    // Keep the time controls directly beneath Quit. A FillHeight spacer used
-    // to pin them to the bottom of the viewport where they overlapped the HUD
-    // clock/countdown on common 16:9 resolutions.
+    // Scrollable navigation keeps these larger reference-image gaps usable
+    // in small windows and local multiplayer viewports.
+    AddNavigationGap(76.0f);
     NavigationPanel->AddSlot().AutoHeight().Padding(3.0f, 12.0f, 3.0f, 3.0f)
     [ MakeNavigationButton(SectionTitle(ETMOPPauseHubSection::MoveInTime),
         ETMOPPauseHubSection::MoveInTime) ];
+    AddNavigationGap(32.0f);
     NavigationPanel->AddSlot().AutoHeight().Padding(3.0f)
-    [ SNew(SButton).ButtonColorAndOpacity(MenuColors.ButtonBackground)
+    [ SNew(SButton).HAlign(HAlign_Left).ButtonColorAndOpacity(MenuColors.ButtonBackground)
       .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked)
-      [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT (ENTER / ESC)"))
+      [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT SPELA"))
         .Font(ATMOPTypographyDirector::ResolveFont(this,
             TEXT("PauseMenuNavigation"),
             FCoreStyle::GetDefaultFontStyle("Regular", 16)))
@@ -338,7 +368,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
           .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
               TEXT("PauseMenuSectionTitle"), MenuColors.AccentText)) ]
         + SVerticalBox::Slot().FillHeight(1.0f)
-        [ SNew(SScrollBox) + SScrollBox::Slot()[SAssignNew(ContentBox, SVerticalBox)] ]
+        [ SAssignNew(PageContentHost, SBox) ]
         + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 14.0f, 0.0f, 0.0f)
         [ SAssignNew(StatusText, STextBlock)
           .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuStatus"),
@@ -358,7 +388,8 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
           + SVerticalBox::Slot().FillHeight(1.0f)
           [ SNew(SHorizontalBox)
             + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 24.0f, 0.0f)
-            [ SNew(SBox).WidthOverride(255.0f)[NavigationPanel] ]
+            [ SNew(SBox).WidthOverride(340.0f)
+              [ SNew(SScrollBox) + SScrollBox::Slot()[NavigationPanel] ] ]
             + SHorizontalBox::Slot().FillWidth(1.0f)
             [ SNew(SBorder).BorderBackgroundColor(MenuColors.PanelBackground)
               .Padding(24.0f)[PagePanel] ] ] ];
@@ -417,8 +448,11 @@ FReply UTMOPPauseMenuWidget::HandleSourceBackClicked()
 void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
 {
     CurrentSection = Section;
-    if (!ContentBox.IsValid()) return;
-    ContentBox->ClearChildren();
+    if (!PageContentHost.IsValid()) return;
+    ContentBox = SNew(SVerticalBox);
+    PageContentHost->SetContent(SNew(SScrollBox) + SScrollBox::Slot()[ContentBox.ToSharedRef()]);
+    if (SectionTitleText.IsValid()) SectionTitleText->SetVisibility(
+        Section == ETMOPPauseHubSection::MyObservations ? EVisibility::Collapsed : EVisibility::Visible);
     if (SectionTitleText.IsValid()) SectionTitleText->SetText(SectionTitle(Section));
     SetStatus(FText::GetEmpty());
     switch (Section)
@@ -432,6 +466,18 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::SaveLoad: BuildSaveLoadPage(); break;
     case ETMOPPauseHubSection::Quit: BuildQuitPage(); break;
     case ETMOPPauseHubSection::MoveInTime: BuildMoveInTimePage(); break;
+    case ETMOPPauseHubSection::MyObservations:
+        BuildNotebookPage();
+        break;
+    case ETMOPPauseHubSection::TheoryBuilder: BuildTheoryBuilderPage(); break;
+    case ETMOPPauseHubSection::Theories:
+    case ETMOPPauseHubSection::MurderDayMysteries:
+    case ETMOPPauseHubSection::MurderKnowledge:
+    case ETMOPPauseHubSection::AfterMurderEvents:
+    case ETMOPPauseHubSection::WorldGroups:
+    case ETMOPPauseHubSection::SwedenGroups:
+        // Independent pages reserved for content specified later.
+        break;
     }
 }
 
@@ -484,6 +530,58 @@ void UTMOPPauseMenuWidget::BuildEvidencePage()
     }
     for (const FName Id : PlayerCharacter->DiscoveredEvidenceIds)
         AddBody(FText::FromName(Id));
+}
+
+void UTMOPPauseMenuWidget::BuildNotebookPage()
+{
+    // Upgrade only already collected entries; the notebook never grants new discoveries.
+    if (IsValid(PlayerCharacter))
+        for (auto& Entry : PlayerCharacter->NotebookObservations)
+            if (Entry.PresentationVersion == 0)
+            {
+                AActor* Actor = nullptr;
+                if (Entry.Kind == ETMOPNotebookEntityKind::Vehicle)
+                    for (TActorIterator<ATMOPVehicleBase> It(GetWorld()); It; ++It)
+                        if (It->VehicleId == Entry.EntityId) { Actor = *It; break; }
+                FTMOPNotebookPresentation::Populate(Entry, GetWorld(), Actor, nullptr, false);
+            }
+    if (PageContentHost.IsValid())
+        PageContentHost->SetContent(SNew(STMOPNotebookPanel).Player(PlayerCharacter.Get()));
+}
+
+void UTMOPPauseMenuWidget::BuildTheoryBuilderPage()
+{
+    ContentBox->AddSlot().AutoHeight()
+    [SNew(STMOPTheoryBuilder).Player(PlayerCharacter.Get())
+        .OnSave(FOnClicked::CreateUObject(this, &UTMOPPauseMenuWidget::HandleCreateNewSaveClicked))];
+    AddHeading(NSLOCTEXT("TMOP", "TheoryInformation", "INFORMATION"));
+    TArray<FTMOPTheoryInformationRow*> Rows;
+    if (IsValid(TheoryInformationTable) && TheoryInformationTable->GetRowStruct() == FTMOPTheoryInformationRow::StaticStruct())
+        TheoryInformationTable->GetAllRows(TEXT("Theory information"), Rows);
+    else for (auto& Entry : TheoryInformationEntries) Rows.Add(&Entry);
+    Rows.Sort([](const FTMOPTheoryInformationRow& A, const FTMOPTheoryInformationRow& B)
+    { return A.SortOrder == B.SortOrder ? A.Title.ToString() < B.Title.ToString() : A.SortOrder < B.SortOrder; });
+    for (int32 Track = 0; Track < 2; ++Track)
+    {
+        AddHeading(Track == 0 ? NSLOCTEXT("TMOP", "TheoryLoneGunman", "ENSAM GÄRNINGSMAN")
+            : NSLOCTEXT("TMOP", "TheoryConspiracy", "KONSPIRATION"));
+        bool bAny = false;
+        for (const auto* Row : Rows)
+        {
+            if (static_cast<int32>(Row->Track) != Track || Row->Title.IsEmpty()) continue;
+            bAny = true;
+            const FText Body = Row->Body.IsEmpty() ? NSLOCTEXT("TMOP", "TheoryMissingText", "Texten är inte inlagd ännu.") : Row->Body;
+            ContentBox->AddSlot().AutoHeight().Padding(0, 3)
+            [SNew(SExpandableArea).InitiallyCollapsed(true)
+                .HeaderContent()[SNew(STextBlock).Text(Row->Title).AutoWrapText(true)]
+                .BodyContent()[SNew(SVerticalBox)
+                    + SVerticalBox::Slot().AutoHeight().Padding(12, 8)[SNew(STextBlock).Text(Body).AutoWrapText(true)]
+                    + SVerticalBox::Slot().AutoHeight().Padding(12, 0, 12, 8)
+                    [SNew(STextBlock).Text(Row->Source).AutoWrapText(true)
+                        .Visibility(Row->Source.IsEmpty() ? EVisibility::Collapsed : EVisibility::Visible)]]];
+        }
+        if (!bAny) AddBody(NSLOCTEXT("TMOP", "TheoryNoInformation", "Inga uppgifter tillagda ännu."));
+    }
 }
 
 void UTMOPPauseMenuWidget::BuildSourcesPage()
@@ -1357,7 +1455,8 @@ FReply UTMOPPauseMenuWidget::HandleCreateNewSaveClicked()
         FString::Printf(TEXT("Manuell sparning %d"), SlotIndex),
         ETMOPMenuSaveKind::Manual, Status);
     PendingDeleteSaveSlot.Reset();
-    if (ContentBox.IsValid()) { ContentBox->ClearChildren(); BuildSaveLoadPage(); }
+    if (CurrentSection == ETMOPPauseHubSection::SaveLoad && ContentBox.IsValid())
+        { ContentBox->ClearChildren(); BuildSaveLoadPage(); }
     SetStatus(Status);
     if (bSaved) OnSaveRequested.Broadcast();
     return FReply::Handled();

@@ -75,4 +75,8 @@ struct TMOPENGINE_API FTMOPGroupSnapshot
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Groups")
     float AcceptanceRadius = 100.0f;
+
+    /** First second when the complete formation reached the final target. */
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Groups")
+    int32 PhysicalArrivalSecond = INDEX_NONE;
 };

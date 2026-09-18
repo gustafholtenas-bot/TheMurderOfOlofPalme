@@ -206,7 +206,8 @@ bool TMOPRuntimeValidation::BuildArrivalBadge(
         else
         {
             OutText = FText::FromString(FString::Printf(
-                TEXT("ANKOM %d s TIDIGT"), FMath::Abs(RoundedDeviation)));
+                TEXT("ANKOM FÖR TIDIGT – %d s"),
+                FMath::Abs(RoundedDeviation)));
             OutColor = Result->Severity == TEXT("Error")
                 ? FLinearColor(0.75f, 0.05f, 0.03f)
                 : FLinearColor(0.78f, 0.38f, 0.03f);

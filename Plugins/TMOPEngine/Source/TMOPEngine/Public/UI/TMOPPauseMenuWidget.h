@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Research/TMOPTheoryTypes.h"
 #include "TMOPPauseMenuWidget.generated.h"
 
 class APlayerController;
@@ -12,6 +13,7 @@ class UTMOPNewspaperItemDefinition;
 class SEditableTextBox;
 class STextBlock;
 class SVerticalBox;
+class SBox;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTMOPPauseMenuRequestSignature);
 
@@ -19,7 +21,9 @@ UENUM()
 enum class ETMOPPauseHubSection : uint8
 {
     Inventory, Evidence, Sources, Publications, Map, Settings, Controls, SaveLoad, Quit,
-    MoveInTime
+    MoveInTime,
+    Theories, MurderDayMysteries, AfterMurderEvents, WorldGroups, SwedenGroups,
+    MyObservations, MurderKnowledge, TheoryBuilder
 };
 
 /** Paused main hub for inventory, research, publications and game management. */
@@ -52,6 +56,14 @@ public:
     /** DT_TMOP_Uppslag_REGISTER. Assign the latest register in the HUD widget defaults. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Sources")
     TObjectPtr<UDataTable> UppslagTable;
+    /** Optional sourced information, row type FTMOPTheoryInformationRow. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Theories",
+        meta=(RequiredAssetDataTags="RowStructure=/Script/TMOPEngine.TMOPTheoryInformationRow"))
+    TObjectPtr<UDataTable> TheoryInformationTable;
+    /** Used when no table is assigned. Starter headings come from the mockups. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Theories",
+        meta=(TitleProperty="Title"))
+    TArray<FTMOPTheoryInformationRow> TheoryInformationEntries = TMOPTheory::DefaultInformation();
 
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
@@ -84,6 +96,8 @@ private:
     void ShowSection(ETMOPPauseHubSection Section);
     void BuildInventoryPage();
     void BuildEvidencePage();
+    void BuildNotebookPage();
+    void BuildTheoryBuilderPage();
     void BuildSourcesPage();
     void BuildPublicationsPage();
     void BuildSettingsPage();
@@ -98,6 +112,7 @@ private:
     UPROPERTY(Transient) TObjectPtr<APlayerController> PlayerController;
     UPROPERTY(Transient) TObjectPtr<ATMOPPlayerCharacter> PlayerCharacter;
     TSharedPtr<SVerticalBox> ContentBox;
+    TSharedPtr<SBox> PageContentHost;
     TSharedPtr<STextBlock> SectionTitleText;
     TSharedPtr<STextBlock> StatusText;
     TSharedPtr<SEditableTextBox> TimeEntryBox;

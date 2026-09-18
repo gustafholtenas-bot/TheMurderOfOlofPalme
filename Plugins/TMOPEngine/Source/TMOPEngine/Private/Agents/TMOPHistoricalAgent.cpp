@@ -1,4 +1,5 @@
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Observations/TMOPNotebookTypes.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "People/TMOPPersonNameLibrary.h"
 
@@ -1253,8 +1254,7 @@ FColor ATMOPHistoricalAgent::ResolveNameLabelColor() const
 
     const FString Category = PersonCategoryId.ToString().ToUpper();
 
-    if (Category.StartsWith(TEXT("OBSERVED_")) ||
-        EntityId.StartsWith(TEXT("OBSERVED_")))
+    if (TMOPNotebook::IsEligible(EntityId, Category))
     {
         return SuspectNameLabelColor;
     }

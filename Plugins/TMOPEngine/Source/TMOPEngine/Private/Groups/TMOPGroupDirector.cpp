@@ -303,6 +303,7 @@ bool ATMOPGroupDirector::MoveGroupToLocation(const FName GroupId,
     Group->TargetLocation = TargetLocation;
     Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
     Group->ExpectedArrivalSecond = INDEX_NONE;
+    Group->PhysicalArrivalSecond = INDEX_NONE;
     SetState(*Group, ETMOPGroupState::Moving);
     UpdateMovement(*Group);
     return true;
@@ -319,6 +320,7 @@ bool ATMOPGroupDirector::MoveGroupThroughLocations(const FName GroupId,
     Group->TargetLocation = Group->RouteLocations[0];
     Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
     Group->ExpectedArrivalSecond = INDEX_NONE;
+    Group->PhysicalArrivalSecond = INDEX_NONE;
     SetState(*Group, ETMOPGroupState::Moving);
     UpdateMovement(*Group);
     return true;
@@ -340,6 +342,7 @@ bool ATMOPGroupDirector::MoveGroupThroughLocationsTimed(const FName GroupId,
     Group->TargetLocation = Group->RouteLocations[0];
     Group->AcceptanceRadius = FMath::Max(20.0f, AcceptanceRadius);
     Group->ExpectedArrivalSecond = ExpectedArrivalSecond;
+    Group->PhysicalArrivalSecond = INDEX_NONE;
     Group->TimedMinimumSpeedCmPerSecond =
         FMath::Max(1.0f, MinimumSpeedCmPerSecond);
     Group->TimedMaximumSpeedCmPerSecond = FMath::Max(
@@ -670,6 +673,8 @@ void ATMOPGroupDirector::UpdateMovement(FRuntimeGroup& Group)
         if (Group.ExpectedArrivalSecond != INDEX_NONE &&
             Now < static_cast<double>(Group.ExpectedArrivalSecond))
         {
+            if (Group.PhysicalArrivalSecond == INDEX_NONE)
+                Group.PhysicalArrivalSecond = FMath::FloorToInt(Now);
             for (TWeakObjectPtr<ATMOPHistoricalAgent>& Member : Group.Members)
                 if (ATMOPHistoricalAgent* Agent = Member.Get())
                     if (AAIController* Controller =
@@ -759,6 +764,7 @@ FTMOPGroupSnapshot ATMOPGroupDirector::MakeSnapshot(const FRuntimeGroup& Group) 
     Result.bConversationHasNoAutomaticEnd = Group.bConversationHasNoAutomaticEnd;
     Result.TargetLocation = Group.TargetLocation;
     Result.AcceptanceRadius = Group.AcceptanceRadius;
+    Result.PhysicalArrivalSecond = Group.PhysicalArrivalSecond;
     return Result;
 }
 

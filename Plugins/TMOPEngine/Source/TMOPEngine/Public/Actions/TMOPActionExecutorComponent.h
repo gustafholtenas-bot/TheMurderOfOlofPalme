@@ -138,6 +138,12 @@ public:
         float& OutRequiredSpeedCmPerSecond,
         bool& bOutPhysicallyPossible) const;
 
+    /** First simulation second when the final timed-arrival radius was reached. */
+    int32 GetActivePhysicalArrivalSecond() const
+    {
+        return ActivePhysicalArrivalSecond;
+    }
+
 private:
     UFUNCTION()
     void HandleScheduleEntryReady(
@@ -190,6 +196,7 @@ private:
     float ActiveRequiredSpeedCmPerSecond = 0.0f;
     bool bActiveMovePhysicallyPossible = true;
     bool bHoldingForTimedArrival = false;
+    int32 ActivePhysicalArrivalSecond = INDEX_NONE;
     float TimedSpeedUpdateAccumulator = 0.0f;
 
     /** Entries whose scheduled time passed while an earlier action was active. */

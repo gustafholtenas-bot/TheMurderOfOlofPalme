@@ -1,6 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Observations/TMOPNotebookTypes.h"
+#include "Research/TMOPTheoryTypes.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "InputCoreTypes.h"
@@ -22,6 +24,7 @@ class UTMOPPauseMenuWidget;
 class UTMOPLoopEndWidget;
 class UTMOPLocalPlayerOverlay;
 class UUserWidget;
+class UTMOPNotebookToastWidget;
 class ATMOPWorldItem;
 class UTMOPInteractionPromptWidget;
 class UTMOPDialogWidget;
@@ -247,6 +250,26 @@ public:
     /** Stable IDs shown in Notebook/Evidence and persisted by the pause-menu save. */
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Evidence")
     TArray<FName> DiscoveredEvidenceIds;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Notebook")
+    TArray<FTMOPNotebookObservation> NotebookObservations;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Theories")
+    TArray<FTMOPTheoryTree> TheoryTrees;
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Player|Theories")
+    FGuid ActiveTheoryTreeId;
+    void SynchronizeTheoryShooters();
+    void RestoreTheories(const TArray<FTMOPTheoryTree>& Trees, FGuid ActiveId);
+
+    /** Restore the player's collection without collecting an open inspector. */
+    void RestoreNotebook(const TArray<FTMOPNotebookObservation>& Entries);
+
+private:
+    UPROPERTY(Transient) FTMOPNotebookObservation PendingNotebookObservation;
+    uint64 AgentInfoClosedFrame = MAX_uint64;
+    UPROPERTY(Transient) TObjectPtr<UTMOPNotebookToastWidget> NotebookToast;
+    void CommitNotebookObservation();
+public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|Evidence")
     bool DiscoverEvidence(FName EvidenceId);

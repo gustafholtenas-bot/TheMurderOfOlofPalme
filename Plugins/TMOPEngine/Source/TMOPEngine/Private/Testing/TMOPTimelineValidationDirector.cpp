@@ -912,7 +912,10 @@ void ATMOPTimelineValidationDirector::SampleAgents(const float DeltaSeconds)
                     Arrival.Action = TEXT("Move To Anchor");
                     Arrival.TargetAnchorId = Tracked.ActiveTargetAnchorId;
                     Arrival.PlannedSecond = Tracked.ActivePlannedSecond;
-                    Arrival.ActualSecond = GetSimulationSecond();
+                    Arrival.ActualSecond =
+                        Group.PhysicalArrivalSecond != INDEX_NONE
+                        ? Group.PhysicalArrivalSecond
+                        : GetSimulationSecond();
                     Arrival.TimeDeviationSeconds =
                         Arrival.ActualSecond - Arrival.PlannedSecond;
                     Arrival.bScheduledAsArrival = true;
@@ -1314,8 +1317,13 @@ void ATMOPTimelineValidationDirector::HandleActionValidation(
             State == ETMOPActionExecutionState::Failed)
         {
             Record.PlannedSecond = TimedExpectedArrival;
+            const int32 PhysicalArrivalSecond =
+                Executor->GetActivePhysicalArrivalSecond();
+            if (State == ETMOPActionExecutionState::Completed &&
+                PhysicalArrivalSecond != INDEX_NONE)
+                Record.ActualSecond = PhysicalArrivalSecond;
             Record.TimeDeviationSeconds =
-                Record.ActualSecond - TimedExpectedArrival;
+                Record.ActualSecond - Record.PlannedSecond;
         }
     }
 
@@ -1672,6 +1680,10 @@ void ATMOPTimelineValidationDirector::HandleGroupStateChanged(
         return;
 
     const int32 ActualSecond = GetSimulationSecond();
+    bool bFoundSnapshot = false;
+    const FTMOPGroupSnapshot Snapshot = GroupDirector.IsValid()
+        ? GroupDirector->GetGroupSnapshot(GroupId, bFoundSnapshot)
+        : FTMOPGroupSnapshot();
     for (TPair<FName, FTrackedAgent>& Pair : TrackedAgents)
     {
         FTrackedAgent& Tracked = Pair.Value;
@@ -1689,7 +1701,9 @@ void ATMOPTimelineValidationDirector::HandleGroupStateChanged(
         Arrival.Action = TEXT("Move To Anchor");
         Arrival.TargetAnchorId = Tracked.ActiveTargetAnchorId;
         Arrival.PlannedSecond = Tracked.ActivePlannedSecond;
-        Arrival.ActualSecond = ActualSecond;
+        Arrival.ActualSecond = bFoundSnapshot &&
+            Snapshot.PhysicalArrivalSecond != INDEX_NONE
+            ? Snapshot.PhysicalArrivalSecond : ActualSecond;
         Arrival.TimeDeviationSeconds =
             Arrival.ActualSecond - Arrival.PlannedSecond;
         Arrival.bScheduledAsArrival = true;

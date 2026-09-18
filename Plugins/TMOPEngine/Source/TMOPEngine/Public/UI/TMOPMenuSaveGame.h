@@ -1,6 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Observations/TMOPNotebookTypes.h"
+#include "Research/TMOPTheoryTypes.h"
 #include "GameFramework/SaveGame.h"
 #include "Time/TMOPTime.h"
 #include "TMOPMenuSaveGame.generated.h"
@@ -23,6 +25,9 @@ struct FTMOPLocalPlayerSave
     UPROPERTY(SaveGame) TArray<int32> InventoryQuantities;
     UPROPERTY(SaveGame) FSoftObjectPath EquippedItemPath;
     UPROPERTY(SaveGame) TArray<FName> DiscoveredEvidenceIds;
+    UPROPERTY(SaveGame) TArray<FTMOPNotebookObservation> NotebookObservations;
+    UPROPERTY(SaveGame) TArray<FTMOPTheoryTree> TheoryTrees;
+    UPROPERTY(SaveGame) FGuid ActiveTheoryTreeId;
     UPROPERTY(SaveGame) FName RadioChannelId;
     UPROPERTY(SaveGame) bool bRadioOn = false;
 };
@@ -50,4 +55,7 @@ public:
     UPROPERTY(SaveGame) TArray<int32> InventoryQuantities;
     UPROPERTY(SaveGame) FSoftObjectPath EquippedItemPath;
     UPROPERTY(SaveGame) TArray<FName> DiscoveredEvidenceIds;
+    UPROPERTY(SaveGame) TArray<FTMOPNotebookObservation> NotebookObservations;
+    UPROPERTY(SaveGame) TArray<FTMOPTheoryTree> TheoryTrees;
+    UPROPERTY(SaveGame) FGuid ActiveTheoryTreeId;
 };

@@ -149,6 +149,9 @@ bool FTMOPSaveGameService::SavePlayer(UWorld* World,
         if (const auto* PC = Cast<APlayerController>(Member->GetController()))
             State.ViewRotation = PC->GetControlRotation();
         State.DiscoveredEvidenceIds = Member->DiscoveredEvidenceIds;
+        State.NotebookObservations = Member->NotebookObservations;
+        State.TheoryTrees = Member->TheoryTrees;
+        State.ActiveTheoryTreeId = Member->ActiveTheoryTreeId;
         if (Member->Inventory)
         {
             for (const FTMOPInventoryEntry& Entry : Member->Inventory->Items)
@@ -188,6 +191,9 @@ bool FTMOPSaveGameService::SavePlayer(UWorld* World,
                 FSoftObjectPath(Player->Inventory->EquippedItem->GetPathName());
     }
     Save->DiscoveredEvidenceIds = Player->DiscoveredEvidenceIds;
+    Save->NotebookObservations = Player->NotebookObservations;
+    Save->TheoryTrees = Player->TheoryTrees;
+    Save->ActiveTheoryTreeId = Player->ActiveTheoryTreeId;
     const bool bSaved = UGameplayStatics::SaveGameToSlot(Save, SlotName, 0);
     OutStatus = bSaved
         ? NSLOCTEXT("TMOP", "SaveSuccess", "Spelet sparades.")
@@ -279,6 +285,8 @@ bool FTMOPSaveGameService::LoadPlayer(UWorld* World,
                 PC->SetViewTarget(Member);
             }
             Member->DiscoveredEvidenceIds = State.DiscoveredEvidenceIds;
+            Member->RestoreNotebook(State.NotebookObservations);
+            Member->RestoreTheories(State.TheoryTrees, State.ActiveTheoryTreeId);
             if (Member->Inventory)
             {
                 const auto Existing = Member->Inventory->Items;
@@ -328,6 +336,8 @@ bool FTMOPSaveGameService::LoadPlayer(UWorld* World,
             Player->Inventory->EquipItem(Equipped);
     }
     Player->DiscoveredEvidenceIds = Save->DiscoveredEvidenceIds;
+    Player->RestoreNotebook(Save->NotebookObservations);
+    Player->RestoreTheories(Save->TheoryTrees, Save->ActiveTheoryTreeId);
     Session->AdoptLoadedSession();
     Clock->ReleasePause(Session, TEXT("LoadGame"));
     Clock->StartClock();

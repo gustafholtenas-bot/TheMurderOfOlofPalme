@@ -195,4 +195,6 @@ struct FTMOPPersonGeneralEditorData
 
     UPROPERTY(EditAnywhere, Category="Notes", meta=(MultiLine="true"))
     FString Notes;
+    UPROPERTY(EditAnywhere, Category="Agent Info", meta=(DisplayName="Kategori i Mina observationer"))
+    ETMOPNotebookCategory NotebookCategory = ETMOPNotebookCategory::Automatic;
 };

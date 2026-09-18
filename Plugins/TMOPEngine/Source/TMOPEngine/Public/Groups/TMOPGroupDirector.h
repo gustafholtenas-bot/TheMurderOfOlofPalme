@@ -164,6 +164,7 @@ private:
         int32 ActiveSpeakerIndex = INDEX_NONE;
         bool bWaitingCircleInitialized = false;
         int32 ExpectedArrivalSecond = INDEX_NONE;
+        int32 PhysicalArrivalSecond = INDEX_NONE;
         float TimedMinimumSpeedCmPerSecond = 1.0f;
         float TimedMaximumSpeedCmPerSecond = 600.0f;
     };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Observations/TMOPNotebookTypes.h"
 #include "People/TMOPHeldItemTypes.h"
 #include "Engine/DataTable.h"
 #include "UI/TMOPEntityLabelTypes.h"
@@ -140,14 +141,14 @@ enum class ETMOPAnchorReferenceMode : uint8
     PlannedFuture UMETA(DisplayName="Planned / Future Anchor")
 };
 
-/** Exact point on a vehicle timeline row used as a person's time reference. */
+/** Point on a vehicle timeline used to resolve a person's action time. */
 UENUM(BlueprintType)
 enum class ETMOPVehicleTimelineReferencePoint : uint8
 {
-    RouteDeparture UMETA(DisplayName="Route Departure"),
-    RouteArrival UMETA(DisplayName="Route Arrival"),
-    EntryTime UMETA(DisplayName="Entry Time"),
-    EntryCompletion UMETA(DisplayName="Entry Completion / Stop End")
+    EntryTime = 0 UMETA(DisplayName="Entry Time"),
+    RouteDeparture = 1 UMETA(DisplayName="Route Departure"),
+    RouteArrival = 2 UMETA(DisplayName="Route Arrival"),
+    EntryCompletion = 3 UMETA(DisplayName="Entry Completion")
 };
 
 /** One chronological, source-backed state or action for a person. */
@@ -188,35 +189,27 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
             DisplayName="Offset Seconds"))
     int32 EventOffsetSeconds = 0;
 
-    /** Resolve this person's time directly from one vehicle timeline row. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Person|Timeline|Vehicle Time Reference",
+    /** Resolve this action relative to a vehicle row instead of its ordinary timing. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
         meta=(DisplayName="Use Vehicle Timeline Reference"))
     bool bUseVehicleTimelineReference = false;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Person|Timeline|Vehicle Time Reference",
-        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
-            DisplayName="Vehicle ID"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(EditCondition="bUseVehicleTimelineReference", DisplayName="Reference Vehicle ID"))
     FName VehicleReferenceEntityId = NAME_None;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Person|Timeline|Vehicle Time Reference",
-        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
-            DisplayName="Vehicle Timeline Entry ID"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(EditCondition="bUseVehicleTimelineReference", DisplayName="Reference Vehicle Entry ID"))
     FName VehicleReferenceEntryId = NAME_None;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Person|Timeline|Vehicle Time Reference",
-        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
-            DisplayName="Reference Point"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(EditCondition="bUseVehicleTimelineReference", DisplayName="Vehicle Reference Point"))
     ETMOPVehicleTimelineReferencePoint VehicleReferencePoint =
-        ETMOPVehicleTimelineReferencePoint::RouteDeparture;
+        ETMOPVehicleTimelineReferencePoint::EntryTime;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite,
-        Category="TMOP|Person|Timeline|Vehicle Time Reference",
-        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
-            DisplayName="Vehicle Reference Offset Seconds"))
+    /** Negative values are before the reference point; positive values are after it. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",
+        meta=(EditCondition="bUseVehicleTimelineReference", DisplayName="Vehicle Reference Offset Seconds"))
     int32 VehicleReferenceOffsetSeconds = 0;
 
     /** For MoveToAnchor, calculate departure backwards so arrival matches the resolved time. */
@@ -964,6 +957,10 @@ struct TMOPENGINE_API FTMOPPersonProfileRow : public FTableRowBase
     /** Stable sorting category, normally derived from the person's Blender collection. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
     FName CategoryId = NAME_None;
+
+    /** Only collectible suspect characters use this notebook classification. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Agent Info")
+    ETMOPNotebookCategory NotebookCategory = ETMOPNotebookCategory::Automatic;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Identity")
     FText FullName;

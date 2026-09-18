@@ -133,6 +133,9 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Observations")
     TArray<FName> GetObserverEntityIdsForTarget(FName ObservedEntityId) const;
 
+    /** Direct and linked source observations, deduplicated; caller decides time cutoff. */
+    TArray<FTMOPObservationDefinition> GetObservationDefinitionsForTarget(FName ObservedEntityId) const;
+
     UFUNCTION(BlueprintPure, Category="TMOP|Observations")
     bool TryGetObservationRuntime(
         FName ObservationId,

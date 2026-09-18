@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Observations/TMOPNotebookTypes.h"
 #include "GameFramework/Pawn.h"
 #include "Vehicles/TMOPVehicleCatalogTypes.h"
 #include "UI/TMOPEntityLabelTypes.h"
@@ -45,6 +46,14 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Identity")
     FText DisplayName;
+
+    /** Classification in Mina observationer; green-label eligibility is separate. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Notebook")
+    ETMOPNotebookVehicleSuspicion NotebookSuspicion = ETMOPNotebookVehicleSuspicion::LessSuspicious;
+
+    /** Source-backed visual description, e.g. a damaged light or known occupants. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Vehicle|Notebook", meta=(MultiLine="true"))
+    FText NotebookSignalement;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Identity")
     FName VehicleCategoryId = NAME_None;
