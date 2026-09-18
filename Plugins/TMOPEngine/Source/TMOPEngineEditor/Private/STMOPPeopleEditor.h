@@ -106,6 +106,10 @@ private:
         FTimelineItem Item, ESelectInfo::Type SelectInfo);
     TSharedPtr<SWidget> BuildComparisonTimelineContextMenu();
     void ApplyReferenceTimeToNearestTimelineEntry();
+    TSharedRef<SWidget> BuildVehicleRouteReferenceMenu();
+    FText GetVehicleRouteReferenceText() const;
+    FReply ApplyVehicleRouteReference(
+        ETMOPVehicleTimelineReferencePoint Point, int32 OffsetSeconds);
     int32 FindClosestWorkingTimelineIndex(
         int32 ReferenceIndex,
         int32* OutDeltaSeconds = nullptr) const;

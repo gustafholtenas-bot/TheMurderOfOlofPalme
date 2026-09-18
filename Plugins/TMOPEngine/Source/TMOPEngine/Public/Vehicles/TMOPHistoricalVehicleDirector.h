@@ -8,6 +8,7 @@
 
 class ATMOPVehicleBase;
 class UDataTable;
+enum class ETMOPVehicleTimelineReferencePoint : uint8;
 
 DECLARE_MULTICAST_DELEGATE_FiveParams(
     FTMOPVehicleTimelineArrivalEvent,
@@ -144,6 +145,9 @@ public:
 
     bool ResolveDrivingWindow(const FTMOPHistoricalVehicleRow& Profile,
         int32 Index, int32& Departure, int32& Arrival) const;
+    /** Resolves a stable person-timeline reference against a vehicle row. */
+    bool ResolvePersonTimelineReference(FName VehicleId, FName EntryId,
+        ETMOPVehicleTimelineReferencePoint Point, int32& OutSecond) const;
     FString GetTimelineFingerprint(FName VehicleId, FName EntryId) const;
 
     /** Returns the most recent detailed reason BeginDrivingVehicle rejected

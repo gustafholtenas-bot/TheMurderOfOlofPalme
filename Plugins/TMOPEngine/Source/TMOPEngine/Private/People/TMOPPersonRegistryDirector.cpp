@@ -1550,7 +1550,21 @@ bool ATMOPPersonRegistryDirector::ResolveEntrySecond(FPersonRuntime& Runtime,
     }
 
     int32 BaseSecond = Entry.Time.ToSecondsFromMidnight();
-    if (Entry.TimingMode == ETMOPEventTimingMode::Relative)
+    if (Entry.bUseVehicleTimelineReference)
+    {
+        ATMOPHistoricalVehicleDirector* VehicleDirector = nullptr;
+        for (TActorIterator<ATMOPHistoricalVehicleDirector> It(GetWorld()); It; ++It)
+        { VehicleDirector = *It; break; }
+        if (!IsValid(VehicleDirector) || Entry.VehicleReferenceEntityId.IsNone() ||
+            Entry.VehicleReferenceEntryId.IsNone() ||
+            !VehicleDirector->ResolvePersonTimelineReference(
+                Entry.VehicleReferenceEntityId,
+                Entry.VehicleReferenceEntryId,
+                Entry.VehicleReferencePoint, BaseSecond))
+            return false;
+        BaseSecond += Entry.VehicleReferenceOffsetSeconds;
+    }
+    else if (Entry.TimingMode == ETMOPEventTimingMode::Relative)
     {
         UTMOPHistoricalEventSubsystem* Events = GetGameInstance() != nullptr
             ? GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>() : nullptr;

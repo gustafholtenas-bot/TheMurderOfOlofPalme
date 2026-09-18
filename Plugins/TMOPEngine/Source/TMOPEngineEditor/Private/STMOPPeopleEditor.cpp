@@ -23,11 +23,13 @@
 #include "UObject/StructOnScope.h"
 #include "UObject/UObjectGlobals.h"
 #include "Vehicles/TMOPHistoricalVehicleTypes.h"
+#include "Vehicles/TMOPVehicleTimeline.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
 #include "Widgets/Images/SImage.h"
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Input/SCheckBox.h"
+#include "Widgets/Input/SComboButton.h"
 #include "Widgets/Input/SSearchBox.h"
 #include "Widgets/Input/SSearchableComboBox.h"
 #include "Widgets/Input/SEditableTextBox.h"
@@ -36,6 +38,7 @@
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Layout/SScaleBox.h"
 #include "Widgets/Layout/SSplitter.h"
+#include "Widgets/Layout/SUniformGridPanel.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/Views/SListView.h"
@@ -620,6 +623,51 @@ void STMOPPeopleEditor::Construct(const FArguments& Args)
                                         EReferenceField::SharedEvent)
                                 ]
                             ]
+                        ]
+                    ]
+                    + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 7)
+                    [
+                        SNew(SBorder).Padding(7.0f)
+                        .BorderImage(FAppStyle::GetBrush("Brushes.Panel"))
+                        [
+                            SNew(SVerticalBox)
+                            + SVerticalBox::Slot().AutoHeight()
+                            [ SNew(STextBlock)
+                              .Text(LOCTEXT("VehicleRouteTimeTitle", "BILRUTTENS TID"))
+                              .Font(FAppStyle::GetFontStyle("HeadingExtraSmall")) ]
+                            + SVerticalBox::Slot().AutoHeight().Padding(0, 4, 0, 4)
+                            [ SNew(SComboButton)
+                              .OnGetMenuContent(this,
+                                  &STMOPPeopleEditor::BuildVehicleRouteReferenceMenu)
+                              .ButtonContent()
+                              [ SNew(STextBlock).Text(this,
+                                  &STMOPPeopleEditor::GetVehicleRouteReferenceText) ] ]
+                            + SVerticalBox::Slot().AutoHeight()
+                            [ SNew(SUniformGridPanel).SlotPadding(FMargin(2.0f))
+                              + SUniformGridPanel::Slot(0, 0)
+                              [ SNew(SButton).Text(LOCTEXT("BeforeVehicleDeparture", "2 s före avgång"))
+                                .OnClicked(this, &STMOPPeopleEditor::ApplyVehicleRouteReference,
+                                    ETMOPVehicleTimelineReferencePoint::RouteDeparture, -2) ]
+                              + SUniformGridPanel::Slot(1, 0)
+                              [ SNew(SButton).Text(LOCTEXT("AtVehicleDeparture", "Vid avgång"))
+                                .OnClicked(this, &STMOPPeopleEditor::ApplyVehicleRouteReference,
+                                    ETMOPVehicleTimelineReferencePoint::RouteDeparture, 0) ]
+                              + SUniformGridPanel::Slot(0, 1)
+                              [ SNew(SButton).Text(LOCTEXT("AtVehicleArrival", "Vid ankomst"))
+                                .OnClicked(this, &STMOPPeopleEditor::ApplyVehicleRouteReference,
+                                    ETMOPVehicleTimelineReferencePoint::RouteArrival, 0) ]
+                              + SUniformGridPanel::Slot(1, 1)
+                              [ SNew(SButton).Text(LOCTEXT("AfterVehicleArrival", "2 s efter ankomst"))
+                                .OnClicked(this, &STMOPPeopleEditor::ApplyVehicleRouteReference,
+                                    ETMOPVehicleTimelineReferencePoint::RouteArrival, 2) ]
+                              + SUniformGridPanel::Slot(0, 2)
+                              [ SNew(SButton).Text(LOCTEXT("AtVehicleEntryTime", "Vid vald rad"))
+                                .OnClicked(this, &STMOPPeopleEditor::ApplyVehicleRouteReference,
+                                    ETMOPVehicleTimelineReferencePoint::EntryTime, 0) ]
+                              + SUniformGridPanel::Slot(1, 2)
+                              [ SNew(SButton).Text(LOCTEXT("AfterVehicleStop", "Efter stopp"))
+                                .OnClicked(this, &STMOPPeopleEditor::ApplyVehicleRouteReference,
+                                    ETMOPVehicleTimelineReferencePoint::EntryCompletion, 0) ] ]
                         ]
                     ]
                     + SVerticalBox::Slot()
@@ -1885,6 +1933,126 @@ void STMOPPeopleEditor::ApplyReferenceTimeToNearestTimelineEntry()
         TargetIndex, *ReferenceTime,
         *ComparisonRow.EntityId.ToString())),
         FLinearColor(0.4f, 1.0f, 0.4f));
+}
+
+TSharedRef<SWidget> STMOPPeopleEditor::BuildVehicleRouteReferenceMenu()
+{
+    CommitEntryEdits();
+    FMenuBuilder Menu(true, nullptr);
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
+    {
+        Menu.AddMenuEntry(LOCTEXT("NoPersonTimelineRow", "Select a person timeline row first"),
+            FText::GetEmpty(), FSlateIcon(), FUIAction());
+        return Menu.MakeWidget();
+    }
+    FTMOPPersonTimelineEntry& PersonEntry =
+        WorkingRow.Timeline[SelectedTimelineIndex];
+    FName VehicleId = !PersonEntry.VehicleReferenceEntityId.IsNone()
+        ? PersonEntry.VehicleReferenceEntityId : PersonEntry.TargetEntityId;
+    if (VehicleId.IsNone() && WorkingRow.AssociatedVehicleIds.Num() == 1)
+        VehicleId = WorkingRow.AssociatedVehicleIds[0];
+
+    const UDataTable* Vehicles = VehicleTable.Get();
+    const FTMOPHistoricalVehicleRow* Vehicle = IsValid(Vehicles)
+        ? Vehicles->FindRow<FTMOPHistoricalVehicleRow>(
+            VehicleId, TEXT("PeopleEditorVehicleRouteMenu"), false) : nullptr;
+    if (Vehicle == nullptr && IsValid(Vehicles))
+        for (const TPair<FName, uint8*>& Pair : Vehicles->GetRowMap())
+        {
+            const FTMOPHistoricalVehicleRow* Candidate =
+                reinterpret_cast<const FTMOPHistoricalVehicleRow*>(Pair.Value);
+            if (Candidate != nullptr && Candidate->VehicleId == VehicleId)
+            { Vehicle = Candidate; break; }
+        }
+    if (Vehicle == nullptr)
+    {
+        Menu.AddMenuEntry(LOCTEXT("ChooseTargetVehicleFirst",
+            "Choose Target Person / Vehicle first"), FText::GetEmpty(),
+            FSlateIcon(), FUIAction());
+        return Menu.MakeWidget();
+    }
+
+    const FName StableVehicleId = Vehicle->VehicleId.IsNone()
+        ? VehicleId : Vehicle->VehicleId;
+    for (const FTMOPHistoricalVehicleTimelineEntry& VehicleEntry : Vehicle->Timeline)
+    {
+        if (VehicleEntry.EntryId.IsNone()) continue;
+        const bool bDriving = TMOPVehicleRoute::IsDriving(VehicleEntry.Action);
+        const FString Label = FString::Printf(TEXT("%s  •  %s  •  %s"),
+            *VehicleEntry.EntryId.ToString(),
+            bDriving ? TEXT("ROUTE") : TEXT("ROW"),
+            *VehicleEntry.Time.ToDisplayString());
+        const FName StableEntryId = VehicleEntry.EntryId;
+        Menu.AddMenuEntry(FText::FromString(Label), FText::GetEmpty(),
+            FSlateIcon(), FUIAction(FExecuteAction::CreateLambda(
+                [this, StableVehicleId, StableEntryId]()
+                {
+                    CommitEntryEdits();
+                    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex)) return;
+                    FTMOPPersonTimelineEntry& Entry =
+                        WorkingRow.Timeline[SelectedTimelineIndex];
+                    Entry.VehicleReferenceEntityId = StableVehicleId;
+                    Entry.VehicleReferenceEntryId = StableEntryId;
+                    if (EntryStructData.IsValid())
+                    {
+                        *reinterpret_cast<FTMOPPersonTimelineEntry*>(
+                            EntryStructData->GetStructMemory()) = Entry;
+                        EntryDetailsView->SetStructureData(EntryStructData);
+                    }
+                    RefreshTimeline();
+                })));
+    }
+    return Menu.MakeWidget();
+}
+
+FText STMOPPeopleEditor::GetVehicleRouteReferenceText() const
+{
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
+        return LOCTEXT("NoVehicleRouteSelected", "Select vehicle route / stop…");
+    const FTMOPPersonTimelineEntry& Entry =
+        WorkingRow.Timeline[SelectedTimelineIndex];
+    if (Entry.VehicleReferenceEntryId.IsNone())
+        return LOCTEXT("ChooseVehicleRoute", "Select vehicle route / stop…");
+    return FText::FromString(FString::Printf(TEXT("%s • %s"),
+        *Entry.VehicleReferenceEntityId.ToString(),
+        *Entry.VehicleReferenceEntryId.ToString()));
+}
+
+FReply STMOPPeopleEditor::ApplyVehicleRouteReference(
+    const ETMOPVehicleTimelineReferencePoint Point, const int32 OffsetSeconds)
+{
+    CommitEntryEdits();
+    if (!WorkingRow.Timeline.IsValidIndex(SelectedTimelineIndex))
+        return FReply::Handled();
+    FTMOPPersonTimelineEntry& Entry = WorkingRow.Timeline[SelectedTimelineIndex];
+    if (Entry.VehicleReferenceEntryId.IsNone())
+    {
+        SetStatus(LOCTEXT("ChooseVehicleRouteBeforeBinding",
+            "Choose a vehicle route or stop before pressing a time button."),
+            FLinearColor::Red);
+        return FReply::Handled();
+    }
+    Entry.bUseVehicleTimelineReference = true;
+    Entry.VehicleReferencePoint = Point;
+    Entry.VehicleReferenceOffsetSeconds = OffsetSeconds;
+    if (EntryStructData.IsValid())
+    {
+        *reinterpret_cast<FTMOPPersonTimelineEntry*>(
+            EntryStructData->GetStructMemory()) = Entry;
+        EntryDetailsView->SetStructureData(EntryStructData);
+    }
+    RefreshTimeline();
+    int32 ResolvedSecond = 0;
+    FString Failure;
+    if (ResolveTimelineDisplaySecond(SelectedTimelineIndex, ResolvedSecond, &Failure))
+        SetStatus(FText::FromString(FString::Printf(
+            TEXT("Vehicle reference applied: %02d:%02d:%02d. It will follow future vehicle timeline changes."),
+            ResolvedSecond / 3600, (ResolvedSecond / 60) % 60,
+            ResolvedSecond % 60)), FLinearColor(0.4f, 1.0f, 0.4f));
+    else
+        SetStatus(FText::FromString(TEXT("Vehicle reference saved, but cannot resolve yet: ") + Failure),
+            FLinearColor(1.0f, 0.65f, 0.15f));
+    return FReply::Handled();
 }
 
 void STMOPPeopleEditor::HandlePersonSearchChanged(
@@ -3278,6 +3446,22 @@ FText STMOPPeopleEditor::GetTimelineSummary(const int32 Index) const
 FText STMOPPeopleEditor::GetTimelineTimingText(
     const FTMOPPersonTimelineEntry& Entry) const
 {
+    if (Entry.bUseVehicleTimelineReference)
+    {
+        const UEnum* PointEnum = StaticEnum<ETMOPVehicleTimelineReferencePoint>();
+        FString Result = FString::Printf(TEXT("%s • %s • %s"),
+            *Entry.VehicleReferenceEntityId.ToString(),
+            *Entry.VehicleReferenceEntryId.ToString(),
+            PointEnum != nullptr
+                ? *PointEnum->GetDisplayNameTextByValue(
+                    static_cast<int64>(Entry.VehicleReferencePoint)).ToString()
+                : TEXT("Vehicle time"));
+        if (Entry.VehicleReferenceOffsetSeconds != 0)
+            Result += FString::Printf(TEXT(" %s%d s"),
+                Entry.VehicleReferenceOffsetSeconds > 0 ? TEXT("+") : TEXT(""),
+                Entry.VehicleReferenceOffsetSeconds);
+        return FText::FromString(Result);
+    }
     if (Entry.TimingMode == ETMOPEventTimingMode::Relative)
     {
         FString Result = TEXT("@ ") + Entry.SharedEventId.ToString();
@@ -3427,7 +3611,66 @@ bool STMOPPeopleEditor::ResolveTimelineDisplaySecondForRow(
         const FTMOPPersonTimelineEntry& Entry =
             Row.Timeline[EntryIndex];
         bool bResolved = true;
-        switch (Entry.TimingMode)
+        if (Entry.bUseVehicleTimelineReference)
+        {
+            const UDataTable* Vehicles = VehicleTable.Get();
+            const FTMOPHistoricalVehicleRow* Vehicle = IsValid(Vehicles)
+                ? Vehicles->FindRow<FTMOPHistoricalVehicleRow>(
+                    Entry.VehicleReferenceEntityId,
+                    TEXT("PeopleEditorVehicleTimeReference"), false) : nullptr;
+            if (Vehicle == nullptr && IsValid(Vehicles))
+                for (const TPair<FName, uint8*>& Pair : Vehicles->GetRowMap())
+                {
+                    const FTMOPHistoricalVehicleRow* Candidate =
+                        reinterpret_cast<const FTMOPHistoricalVehicleRow*>(Pair.Value);
+                    if (Candidate != nullptr && Candidate->VehicleId ==
+                        Entry.VehicleReferenceEntityId)
+                    { Vehicle = Candidate; break; }
+                }
+            const int32 VehicleIndex = Vehicle != nullptr
+                ? Vehicle->Timeline.IndexOfByPredicate(
+                    [&Entry](const FTMOPHistoricalVehicleTimelineEntry& Candidate)
+                    { return Candidate.EntryId == Entry.VehicleReferenceEntryId; })
+                : INDEX_NONE;
+            if (Vehicle == nullptr || VehicleIndex == INDEX_NONE)
+                bResolved = Fail(TEXT("The selected vehicle timeline reference was not found."));
+            else
+            {
+                auto EventResolver = [&ResolveEventSecond](FName Id, int32& Second)
+                { return ResolveEventSecond(Id, Second); };
+                switch (Entry.VehicleReferencePoint)
+                {
+                case ETMOPVehicleTimelineReferencePoint::RouteDeparture:
+                    bResolved = TMOPVehicleTimeline::ResolveDeparture(
+                        *Vehicle, VehicleIndex, EventResolver, EntrySecond);
+                    break;
+                case ETMOPVehicleTimelineReferencePoint::RouteArrival:
+                {
+                    int32 Departure = 0;
+                    bResolved = TMOPVehicleTimeline::ResolveWindow(
+                        *Vehicle, VehicleIndex, EventResolver,
+                        Departure, EntrySecond);
+                    break;
+                }
+                case ETMOPVehicleTimelineReferencePoint::EntryCompletion:
+                    bResolved = TMOPVehicleTimeline::ResolveEntry(
+                        *Vehicle, VehicleIndex, EventResolver, EntrySecond);
+                    if (bResolved) EntrySecond +=
+                        TMOPVehicleRoute::CompletionDelay(Vehicle->Timeline[VehicleIndex]);
+                    break;
+                case ETMOPVehicleTimelineReferencePoint::EntryTime:
+                default:
+                    bResolved = TMOPVehicleTimeline::ResolveEntry(
+                        *Vehicle, VehicleIndex, EventResolver, EntrySecond);
+                    break;
+                }
+                if (bResolved)
+                    EntrySecond += Entry.VehicleReferenceOffsetSeconds;
+                else
+                    Fail(TEXT("The selected vehicle route time could not be resolved."));
+            }
+        }
+        else switch (Entry.TimingMode)
         {
         case ETMOPEventTimingMode::Absolute:
         case ETMOPEventTimingMode::Window:
@@ -4139,14 +4382,20 @@ bool STMOPPeopleEditor::EntryHasError(
             Entry.Action != ETMOPPersonTimelineAction::Spawn)
             return Fail(TEXT("First simulation entry must be Initial Placement or Spawn"));
     }
-    if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
+    if (Entry.bUseVehicleTimelineReference &&
+        (Entry.VehicleReferenceEntityId.IsNone() ||
+         Entry.VehicleReferenceEntryId.IsNone()))
+        return Fail(TEXT("Vehicle timing requires Vehicle ID and Vehicle Timeline Entry ID"));
+    if (!Entry.bUseVehicleTimelineReference &&
+        Entry.TimingMode == ETMOPEventTimingMode::Relative &&
         Entry.SharedEventId.IsNone())
         return Fail(TEXT("Relative timing requires Shared Event ID"));
-    if (Entry.TimingMode ==
+    if (!Entry.bUseVehicleTimelineReference && Entry.TimingMode ==
             ETMOPEventTimingMode::RelativeToPreviousEntry &&
         Index == 0)
         return Fail(TEXT("First entry cannot be relative to previous entry"));
-    if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
+    if (!Entry.bUseVehicleTimelineReference &&
+        Entry.TimingMode == ETMOPEventTimingMode::Relative &&
         !Entry.SharedEventId.IsNone() && EventTable.IsValid())
     {
         bool bEventExists = EventTable->GetRowMap().Contains(
@@ -4251,7 +4500,7 @@ bool STMOPPeopleEditor::EntryHasError(
             ETMOPConversationTargetMode::Anchor &&
         Entry.TargetAnchorId.IsNone())
         return Fail(TEXT("Anchor conversation requires Target Anchor ID"));
-    if (Index > 0 &&
+    if (!Entry.bUseVehicleTimelineReference && Index > 0 &&
         Entry.TimingMode == ETMOPEventTimingMode::Absolute)
     {
         for (int32 Previous = Index - 1; Previous >= 0; --Previous)

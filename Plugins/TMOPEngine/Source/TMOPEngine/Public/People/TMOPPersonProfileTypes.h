@@ -140,6 +140,16 @@ enum class ETMOPAnchorReferenceMode : uint8
     PlannedFuture UMETA(DisplayName="Planned / Future Anchor")
 };
 
+/** Exact point on a vehicle timeline row used as a person's time reference. */
+UENUM(BlueprintType)
+enum class ETMOPVehicleTimelineReferencePoint : uint8
+{
+    RouteDeparture UMETA(DisplayName="Route Departure"),
+    RouteArrival UMETA(DisplayName="Route Arrival"),
+    EntryTime UMETA(DisplayName="Entry Time"),
+    EntryCompletion UMETA(DisplayName="Entry Completion / Stop End")
+};
+
 /** One chronological, source-backed state or action for a person. */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPPersonTimelineEntry
@@ -177,6 +187,37 @@ struct TMOPENGINE_API FTMOPPersonTimelineEntry
         meta=(EditCondition="TimingMode==ETMOPEventTimingMode::Relative || TimingMode==ETMOPEventTimingMode::RelativeToPreviousEntry",
             DisplayName="Offset Seconds"))
     int32 EventOffsetSeconds = 0;
+
+    /** Resolve this person's time directly from one vehicle timeline row. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Vehicle Time Reference",
+        meta=(DisplayName="Use Vehicle Timeline Reference"))
+    bool bUseVehicleTimelineReference = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Vehicle Time Reference",
+        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
+            DisplayName="Vehicle ID"))
+    FName VehicleReferenceEntityId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Vehicle Time Reference",
+        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
+            DisplayName="Vehicle Timeline Entry ID"))
+    FName VehicleReferenceEntryId = NAME_None;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Vehicle Time Reference",
+        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
+            DisplayName="Reference Point"))
+    ETMOPVehicleTimelineReferencePoint VehicleReferencePoint =
+        ETMOPVehicleTimelineReferencePoint::RouteDeparture;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Person|Timeline|Vehicle Time Reference",
+        meta=(EditCondition="bUseVehicleTimelineReference", EditConditionHides,
+            DisplayName="Vehicle Reference Offset Seconds"))
+    int32 VehicleReferenceOffsetSeconds = 0;
 
     /** For MoveToAnchor, calculate departure backwards so arrival matches the resolved time. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Timeline|Time",

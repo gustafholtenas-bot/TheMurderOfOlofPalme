@@ -9,6 +9,7 @@
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
+#include "People/TMOPPersonProfileTypes.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Anchors/TMOPAnchorSubsystem.h"
 #include "Anchors/TMOPHistoricalAnchor.h"
@@ -1625,6 +1626,49 @@ bool ATMOPHistoricalVehicleDirector::ResolveDrivingWindow(
             return ResolveTimelineEntrySecond(Profile, Next, Arrival) && Arrival > Departure;
     }
     return false;
+}
+
+bool ATMOPHistoricalVehicleDirector::ResolvePersonTimelineReference(
+    const FName VehicleId, const FName EntryId,
+    const ETMOPVehicleTimelineReferencePoint Point, int32& OutSecond) const
+{
+    const FTMOPHistoricalVehicleRow* Profile = nullptr;
+    if (const FHistoricalVehicleRuntime* Runtime = RuntimeVehicles.Find(VehicleId))
+        Profile = &Runtime->Profile;
+    if (Profile == nullptr && IsValid(HistoricalVehicleTable))
+    {
+        Profile = HistoricalVehicleTable->FindRow<FTMOPHistoricalVehicleRow>(
+            VehicleId, TEXT("PersonVehicleTimelineReference"), false);
+        if (Profile == nullptr)
+            for (const TPair<FName, uint8*>& Pair : HistoricalVehicleTable->GetRowMap())
+            {
+                const FTMOPHistoricalVehicleRow* Candidate =
+                    reinterpret_cast<const FTMOPHistoricalVehicleRow*>(Pair.Value);
+                if (Candidate != nullptr && Candidate->VehicleId == VehicleId)
+                { Profile = Candidate; break; }
+            }
+    }
+    if (Profile == nullptr) return false;
+    const int32 Index = Profile->Timeline.IndexOfByPredicate(
+        [EntryId](const FTMOPHistoricalVehicleTimelineEntry& Entry)
+        { return Entry.EntryId == EntryId; });
+    if (Index == INDEX_NONE) return false;
+
+    switch (Point)
+    {
+    case ETMOPVehicleTimelineReferencePoint::RouteDeparture:
+        return ResolveDrivingDepartureSecond(*Profile, Index, OutSecond);
+    case ETMOPVehicleTimelineReferencePoint::RouteArrival:
+    {
+        int32 Departure = 0;
+        return ResolveDrivingWindow(*Profile, Index, Departure, OutSecond);
+    }
+    case ETMOPVehicleTimelineReferencePoint::EntryCompletion:
+        return ResolveTimelineEntryCompletionSecond(*Profile, Index, OutSecond);
+    case ETMOPVehicleTimelineReferencePoint::EntryTime:
+    default:
+        return ResolveTimelineEntrySecond(*Profile, Index, OutSecond);
+    }
 }
 
 FString ATMOPHistoricalVehicleDirector::GetTimelineFingerprint(FName VehicleId, FName EntryId) const
