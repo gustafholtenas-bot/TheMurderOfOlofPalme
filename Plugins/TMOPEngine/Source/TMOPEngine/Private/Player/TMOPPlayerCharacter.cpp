@@ -56,6 +56,7 @@
 #include "Observations/TMOPNotebookPresentation.h"
 #include "UI/TMOPNewspaperReaderWidget.h"
 #include "UI/TMOPMapComponent.h"
+#include "People/TMOPPersonRegistrySubsystem.h"
 #include "UI/TMOPMapWidget.h"
 #include "Vehicles/TMOPVehicleBase.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
@@ -86,6 +87,20 @@ bool IsMappedActionHeld(const APlayerController* PC, const UInputMappingContext*
 
 ATMOPPlayerCharacter::ATMOPPlayerCharacter()
 {
+    const auto AddHUDMarker = [this](const TCHAR* Label, const TCHAR* Id)
+    {
+        FTMOPHUDTimelineMarker Marker;
+        Marker.Label = FText::FromString(Label);
+        Marker.SharedEventId = FName(Id);
+        HUDTimelineMarkers.Add(Marker);
+    };
+    AddHUDMarker(TEXT("Mozart slutar"), TEXT("GRAND_1_FILM_END_NO_CREDITS"));
+    AddHUDMarker(TEXT("Skiljs från Mårten"), TEXT("PALME_MEETING_SANDINS_END"));
+    AddHUDMarker(TEXT("Skotten"), TEXT("PALME_SHOT_1"));
+    AddHUDMarker(TEXT("Första polis"), TEXT("POLICE_SODERSTROM_ARRIVES_CRIME_SCENE"));
+    AddHUDMarker(TEXT("Första ambulans"), TEXT("AMBULANCE_951_ARRIVES_CRIME_SCENE"));
+    AddHUDMarker(TEXT("Avspärrning"), TEXT("POLICE_1230_FIRST_CORDON_STARTS"));
+
     PrimaryActorTick.bCanEverTick = true;
     PrimaryActorTick.bTickEvenWhenPaused = true;
     bUseControllerRotationPitch = false;
@@ -145,6 +160,7 @@ void ATMOPPlayerCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     PendingNotebookObservation = FTMOPNotebookObservation();
     CloseSessionMenus();
+    if (IsValid(HUDTimelineWidget)) HUDTimelineWidget->RemoveFromParent();
     if (IsValid(NotebookToast)) NotebookToast->RemoveFromParent();
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
@@ -343,7 +359,19 @@ void ATMOPPlayerCharacter::InitializePlayerInterface()
         }
     }
 
+    if (!IsValid(HUDTimelineWidget.Get()))
+    {
+        HUDTimelineWidget = CreateWidget<UTMOPHUDTimelineWidget>(PlayerController,
+            UTMOPHUDTimelineWidget::StaticClass());
+        if (IsValid(HUDTimelineWidget.Get()))
+        {
+            HUDTimelineWidget->Markers = HUDTimelineMarkers;
+            HUDTimelineWidget->AddToPlayerScreen(15);
+        }
+    }
+
     bPlayerInterfaceInitialized =
+        IsValid(HUDTimelineWidget.Get()) &&
         (bUseControlProfiles || bInputMappingContextAdded) &&
         (!bCreateQuickInventoryWidget || IsValid(QuickInventoryWidget.Get())) &&
         (!bCreatePauseMenuWidget || IsValid(PauseMenuWidget.Get())) &&
@@ -692,6 +720,7 @@ void ATMOPPlayerCharacter::InputSecondaryActionEnded()
 
 void ATMOPPlayerCharacter::InputCancel()
 {
+    if (bAgentInfoFromNotebook) { CloseAgentInfoChart(); return; }
     if (bAddressDirectoryOpen)
     {
         CloseAddressDirectory();
@@ -796,6 +825,7 @@ void ATMOPPlayerCharacter::InputVehicleHandbrakeEnded()
 
 void ATMOPPlayerCharacter::TogglePauseMenu()
 {
+    if (bAgentInfoFromNotebook) { CloseAgentInfoChart(); return; }
     if (bLoopEndMenuOpen) return;
     SetPauseMenuOpen(!bPauseMenuOpen);
 }
@@ -884,6 +914,7 @@ void ATMOPPlayerCharacter::RefreshLoopEndMenu()
 
 void ATMOPPlayerCharacter::SetPauseMenuOpen(const bool bOpen)
 {
+    if (!bOpen && bAgentInfoFromNotebook) CloseAgentInfoChart();
     if (bOpen && bLoopEndMenuOpen) return;
     if (bPauseMenuOpen == bOpen || !IsValid(PauseMenuWidget.Get())) return;
     if (bOpen && bWorldMapOpen) CloseWorldMap();
@@ -1010,6 +1041,9 @@ void ATMOPPlayerCharacter::UpdateGameplayHUDVisibility()
     const bool bShouldBeVisible = GameplayHUDHiddenReasons.IsEmpty();
     const bool bVisibilityChanged = bGameplayHUDVisible != bShouldBeVisible;
     bGameplayHUDVisible = bShouldBeVisible;
+    if (IsValid(HUDTimelineWidget))
+        HUDTimelineWidget->SetVisibility(bGameplayHUDVisible && bShowHUDTimeline
+            ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
     if (!bGameplayHUDVisible && IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
     // The address panel hides the HUD itself. Only an unrelated higher-level
     // state (cinematic/main menu/etc.) should force that panel closed.
@@ -1430,7 +1464,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     Super::Tick(DeltaSeconds);
     if (!IsLocallyControlled()) return;
     if (bDialogOpen && !ActiveDialogAgent.IsValid()) ClosePersonDialog();
-    if (bAgentInfoChartOpen && !ActiveCloseUpAgent.IsValid()) CloseAgentInfoChart();
+    if (bAgentInfoChartOpen && !bAgentInfoFromNotebook && !ActiveCloseUpAgent.IsValid()) CloseAgentInfoChart();
     if (bUseControlProfiles) ProcessControlProfileInput(DeltaSeconds);
     else if (APlayerController* PC = Cast<APlayerController>(Controller))
         if (PC->WasInputKeyJustPressed(VehicleTakeoverFallbackKey)) InputVehicleTakeover();
@@ -1446,6 +1480,18 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
             FMath::Square(GetInspectionDistance(ActiveInspection.Get()) + 100.0f)))
         CloseAddressDirectory();
     if (bDialogOpen || bAgentInfoChartOpen) UpdateDialogCloseUp(DeltaSeconds);
+    if (bAgentInfoChartOpen && AgentInfoPauseDelay >= 0.0f)
+    {
+        AgentInfoPauseDelay -= DeltaSeconds;
+        if (AgentInfoPauseDelay <= 0.0f)
+        {
+            AgentInfoPauseDelay = -1.0f;
+            if (!UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
+                if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
+                    ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
+                    Clock->RequestPause(this, TEXT("AgentInfo"));
+        }
+    }
     if (!bPlayerInterfaceInitialized) InitializePlayerInterface();
     if (bDialogOpen)
     {
@@ -1851,6 +1897,89 @@ void ATMOPPlayerCharacter::ClosePersonDialog()
     }
 }
 
+static FText TMOPInspectionTimeline(const FTMOPPersonProfileRow& Profile)
+{
+    FText TimelineSummary = Profile.AgentTimelineSummary;
+    if (!Profile.Timeline.IsEmpty())
+    {
+        TArray<FString> Lines;
+        for (const FTMOPPersonTimelineEntry& Entry : Profile.Timeline)
+        {
+            FString Place = !Entry.PlannedAnchorDisplayName.IsEmpty()
+                ? Entry.PlannedAnchorDisplayName.ToString()
+                : Entry.TargetAnchorId.ToString().Replace(TEXT("_"), TEXT(" "));
+            if ((Place.IsEmpty() || Place == TEXT("None")) &&
+                !Entry.TargetEntityId.IsNone())
+                Place = Entry.TargetEntityId.ToString().Replace(TEXT("_"), TEXT(" "));
+            if (Place == TEXT("None")) Place.Reset();
+            FString Description;
+            switch (Entry.Action)
+            {
+            case ETMOPPersonTimelineAction::InitialPlacement:
+            case ETMOPPersonTimelineAction::Spawn:
+                Description = Place.IsEmpty() ? TEXT("Personen kommer in i händelseförloppet.")
+                    : FString::Printf(TEXT("Personen befinner sig vid %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::MoveToAnchor:
+                Description = Place.IsEmpty() ? TEXT("Personen går vidare.")
+                    : FString::Printf(TEXT("Personen går mot %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::Wait:
+                Description = Place.IsEmpty() ? TEXT("Personen väntar en stund.")
+                    : FString::Printf(TEXT("Personen väntar vid %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::SitDown:
+                Description = TEXT("Personen sätter sig ned."); break;
+            case ETMOPPersonTimelineAction::StandUp:
+                Description = TEXT("Personen reser sig upp."); break;
+            case ETMOPPersonTimelineAction::EnterVehicle:
+                Description = Place.IsEmpty() ? TEXT("Personen stiger in i ett fordon.")
+                    : FString::Printf(TEXT("Personen stiger in i %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::ExitVehicle:
+                Description = TEXT("Personen stiger ur fordonet."); break;
+            case ETMOPPersonTimelineAction::BeginDriving:
+                Description = Place.IsEmpty() ? TEXT("Personen börjar köra.")
+                    : FString::Printf(TEXT("Personen kör mot %s."), *Place);
+                break;
+            case ETMOPPersonTimelineAction::Despawn:
+                Description = TEXT("Personen lämnar det simulerade området."); break;
+            default:
+                Description = !Entry.Notes.IsEmpty() ? Entry.Notes
+                    : TEXT("Nästa dokumenterade händelse inträffar.");
+                break;
+            }
+            Lines.Add(FString::Printf(TEXT("%s - %s"),
+                *Entry.Time.ToDisplayString(), *Description));
+        }
+        TimelineSummary = Lines.IsEmpty() ? FText::GetEmpty()
+            : FText::FromString(FString::Join(Lines, TEXT("  ")));
+    }
+
+    return TimelineSummary;
+}
+
+bool ATMOPPlayerCharacter::InspectNotebookPerson(FName EntityId)
+{
+    if (!bPauseMenuOpen || bAgentInfoChartOpen || !IsValid(AgentInfoChartWidget)) return false;
+    auto* Saved = NotebookObservations.FindByPredicate([EntityId](const auto& O)
+        { return O.EntityId == EntityId && O.Kind == ETMOPNotebookEntityKind::Person; });
+    auto* Registry = GetGameInstance() ? GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>() : nullptr;
+    FTMOPPersonProfileRow Profile;
+    if (!Saved || !Registry || !Registry->GetPersonProfile(EntityId, Profile)) return false;
+    FTMOPNotebookPresentation::CollectLocations(*Saved, GetWorld());
+    PendingNotebookObservation = FTMOPNotebookObservation();
+    bAgentInfoFromNotebook = true;
+    bAgentInfoChartOpen = true;
+    AgentInfoPauseDelay = -1.0f;
+    PauseMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
+    AgentInfoChartWidget->ShowAgentInfo(Profile, TMOPInspectionTimeline(Profile),
+        Profile.bPoliceInterviewed || Profile.EvidenceIcon == ETMOPEntityEvidenceIcon::PoliceInterview, EntityId);
+    AgentInfoChartWidget->SetObservationLocations(Saved->Locations);
+    ApplyLocalInputMode(AgentInfoChartWidget);
+    return true;
+}
+
 bool ATMOPPlayerCharacter::OpenAgentInfoChart(
     ATMOPHistoricalAgent* HistoricalAgent)
 {
@@ -1868,62 +1997,7 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
         return false;
 
     const FTMOPPersonProfileRow& Profile = ProfileComponent->Profile;
-    FText TimelineSummary = Profile.AgentTimelineSummary;
-    if (TimelineSummary.IsEmpty())
-    {
-        TArray<FString> Lines;
-        for (const FTMOPPersonTimelineEntry& Entry : Profile.Timeline)
-        {
-            FString Place = !Entry.PlannedAnchorDisplayName.IsEmpty()
-                ? Entry.PlannedAnchorDisplayName.ToString()
-                : Entry.TargetAnchorId.ToString().Replace(TEXT("_"), TEXT(" "));
-            if ((Place.IsEmpty() || Place == TEXT("None")) &&
-                !Entry.TargetEntityId.IsNone())
-                Place = Entry.TargetEntityId.ToString().Replace(TEXT("_"), TEXT(" "));
-            if (Place == TEXT("None")) Place.Reset();
-            FString Description;
-            switch (Entry.Action)
-            {
-            case ETMOPPersonTimelineAction::InitialPlacement:
-            case ETMOPPersonTimelineAction::Spawn:
-                Description = Place.IsEmpty() ? TEXT("Jag kommer in i händelseförloppet.")
-                    : FString::Printf(TEXT("Jag befinner mig vid %s."), *Place);
-                break;
-            case ETMOPPersonTimelineAction::MoveToAnchor:
-                Description = Place.IsEmpty() ? TEXT("Jag går vidare.")
-                    : FString::Printf(TEXT("Jag går mot %s."), *Place);
-                break;
-            case ETMOPPersonTimelineAction::Wait:
-                Description = Place.IsEmpty() ? TEXT("Jag väntar en stund.")
-                    : FString::Printf(TEXT("Jag väntar vid %s."), *Place);
-                break;
-            case ETMOPPersonTimelineAction::SitDown:
-                Description = TEXT("Jag sätter mig ned."); break;
-            case ETMOPPersonTimelineAction::StandUp:
-                Description = TEXT("Jag reser mig upp."); break;
-            case ETMOPPersonTimelineAction::EnterVehicle:
-                Description = Place.IsEmpty() ? TEXT("Jag stiger in i ett fordon.")
-                    : FString::Printf(TEXT("Jag stiger in i %s."), *Place);
-                break;
-            case ETMOPPersonTimelineAction::ExitVehicle:
-                Description = TEXT("Jag stiger ur fordonet."); break;
-            case ETMOPPersonTimelineAction::BeginDriving:
-                Description = Place.IsEmpty() ? TEXT("Jag börjar köra.")
-                    : FString::Printf(TEXT("Jag kör mot %s."), *Place);
-                break;
-            case ETMOPPersonTimelineAction::Despawn:
-                Description = TEXT("Jag lämnar det simulerade området."); break;
-            default:
-                Description = !Entry.Notes.IsEmpty() ? Entry.Notes
-                    : TEXT("Nästa dokumenterade händelse inträffar.");
-                break;
-            }
-            Lines.Add(FString::Printf(TEXT("%s - %s"),
-                *Entry.Time.ToDisplayString(), *Description));
-        }
-        TimelineSummary = Lines.IsEmpty() ? FText::GetEmpty()
-            : FText::FromString(FString::Join(Lines, TEXT("\n\n")));
-    }
+    const FText TimelineSummary = TMOPInspectionTimeline(Profile);
 
     const bool bPoliceInterviewed = Profile.bPoliceInterviewed ||
         Profile.EvidenceIcon == ETMOPEntityEvidenceIcon::PoliceInterview;
@@ -1954,11 +2028,24 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
         if (const auto* Existing = NotebookObservations.FindByPredicate([InspectedId](const auto& E)
             { return E.Kind == ETMOPNotebookEntityKind::Person && E.EntityId == InspectedId; }))
             PendingNotebookObservation = *Existing;
+        if (const auto* Clock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>())
+            PendingNotebookObservation.LastObservedSecond = FMath::Max(PendingNotebookObservation.LastObservedSecond,
+                Clock->GetCurrentTime().ToSecondsFromMidnight());
         FTMOPNotebookPresentation::Populate(PendingNotebookObservation, GetWorld(), HistoricalAgent, &Profile);
     }
     AgentInfoChartWidget->ShowAgentInfo(
         Profile, TimelineSummary, bPoliceInterviewed,
         ProfileComponent->ResolvedEntityId);
+    FTMOPNotebookObservation MapObservation = PendingNotebookObservation;
+    MapObservation.EntityId = InspectedId;
+    if (const auto* Clock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>())
+        MapObservation.DiscoveredSecond = Clock->GetCurrentTime().ToSecondsFromMidnight();
+    FTMOPNotebookPresentation::CollectLocations(MapObservation, GetWorld());
+    FTMOPNotebookPresentation::RecordPlayerSighting(MapObservation, GetWorld(),
+        HistoricalAgent->GetActorLocation(), MapObservation.DiscoveredSecond);
+    if (!PendingNotebookObservation.EntityId.IsNone())
+        PendingNotebookObservation.Locations = MapObservation.Locations;
+    AgentInfoChartWidget->SetObservationLocations(MapObservation.Locations);
     bAgentInfoChartOpen = true;
     SetGameplayHUDHidden(TEXT("AgentInfo"), true);
     BeginDialogCloseUp(HistoricalAgent, true);
@@ -1975,16 +2062,28 @@ bool ATMOPPlayerCharacter::OpenAgentInfoChart(
         ApplyLocalInputMode(AgentInfoChartWidget);
     }
 
-    if (!UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))
-        if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
-            ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
-            Clock->RequestPause(this, TEXT("AgentInfo"));
+    // Let the player camera manager finish its view-target blend before pausing.
+    // A short margin also covers the character/controller tick ordering.
+    AgentInfoPauseDelay = UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this)
+        ? -1.0f : (IsValid(DialogCameraActor)
+            ? FMath::Max(0.0f, DialogCameraBlendSeconds) + 0.1f : 0.0f);
     return true;
 }
 
 void ATMOPPlayerCharacter::CloseAgentInfoChart()
 {
     if (!bAgentInfoChartOpen) return;
+    if (bAgentInfoFromNotebook)
+    {
+        bAgentInfoFromNotebook = false;
+        bAgentInfoChartOpen = false;
+        AgentInfoClosedFrame = GFrameCounter;
+        AgentInfoChartWidget->HideAgentInfo();
+        PauseMenuWidget->SetVisibility(ESlateVisibility::Visible);
+        ApplyLocalInputMode(PauseMenuWidget);
+        return;
+    }
+    AgentInfoPauseDelay = -1.0f;
     AgentInfoClosedFrame = GFrameCounter;
     if (UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr)
@@ -2273,8 +2372,11 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
     UCameraComponent* Camera = GetGameplayCamera();
     if (!IsValid(Camera) || GetWorld() == nullptr) return nullptr;
 
-    const FVector CameraLocation = Camera->GetComponentLocation();
-    const FVector CameraForward = Camera->GetForwardVector();
+    FVector CameraLocation = Camera->GetComponentLocation();
+    FRotator ViewRotation = Camera->GetComponentRotation();
+    if (const auto* PC = Cast<APlayerController>(Controller))
+        PC->GetPlayerViewPoint(CameraLocation, ViewRotation);
+    const FVector CameraForward = ViewRotation.Vector().GetSafeNormal();
     const FVector CharacterLocation = GetActorLocation();
     FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInformationTarget),
         false, this);
@@ -2320,6 +2422,7 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
 
     AActor* BestDirectTarget = nullptr;
     float BestDirectScore = TNumericLimits<float>::Max();
+    float BestDirectDistance = TNumericLimits<float>::Max();
     for (AActor* Candidate : Candidates)
     {
         if (!IsValid(Candidate) || Candidate == this || Candidate->IsHidden()) continue;
@@ -2333,48 +2436,78 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
         FVector BoundsOrigin;
         FVector BoundsExtent;
         Candidate->GetActorBounds(false, BoundsOrigin, BoundsExtent, true);
-        FVector AimPoint = BoundsOrigin;
+        TArray<FVector, TInlineAllocator<12>> AimPoints;
         if (const auto* Agent = Cast<ATMOPHistoricalAgent>(Candidate))
-            if (IsValid(Agent->BodyMesh) && Agent->BodyMesh->DoesSocketExist(TEXT("head")))
-                AimPoint = Agent->BodyMesh->GetSocketLocation(TEXT("head"));
-        if (Candidate->IsA<ATMOPVehicleBase>())
-            AimPoint = UTMOPVehicleInspectionComponent::GetVehicleAimPoint(Candidate);
-        if (Inspection) AimPoint = Inspection->GetInteractionLocation();
-
-        const FVector CameraToTarget = AimPoint - CameraLocation;
-        const float CameraDistance = CameraToTarget.Size();
-        if (CameraDistance <= 1.0f || CameraDistance > TargetInformationDistance)
-            continue;
-
-        const FVector CameraDirection = CameraToTarget / CameraDistance;
-        const float CameraDot = FVector::DotProduct(CameraForward, CameraDirection);
-        const float CameraAngle = FMath::RadiansToDegrees(
-            FMath::Acos(FMath::Clamp(CameraDot, -1.0f, 1.0f)));
-        if (CameraAngle > DirectTargetConeDegrees) continue;
-
-        FHitResult VisibilityHit;
-        FCollisionQueryParams VisibilityParams(
-            SCENE_QUERY_STAT(TMOPPlayerInformationTargetVisibility), false, this);
-        const bool bBlocked = !Inspection && GetWorld()->LineTraceSingleByChannel(
-            VisibilityHit, CameraLocation, AimPoint, ECC_Visibility, VisibilityParams);
-        bool bVisible = Inspection ? Inspection->IsVisibleFrom(CameraLocation, this)
-            : (!bBlocked || VisibilityHit.GetActor() == Candidate);
-        if (!bVisible && Candidate->IsA<ATMOPHistoricalAgent>() &&
-            IsValid(VisibilityHit.GetActor()) &&
-            VisibilityHit.GetActor()->IsA<ATMOPVehicleBase>())
-            bVisible = Candidate->GetAttachParentActor() == VisibilityHit.GetActor();
-        if (!bVisible) continue;
-
-        if (CameraAngle <= DirectTargetConeDegrees)
         {
-            const float Score = CameraAngle; // Distance must not override camera aim.
-            if (Score < BestDirectScore)
+            const auto* TargetBodyMesh = Agent->BodyMesh.Get();
+            const FVector Head = IsValid(TargetBodyMesh) && TargetBodyMesh->DoesSocketExist(TEXT("head"))
+                ? TargetBodyMesh->GetSocketLocation(TEXT("head")) : BoundsOrigin + FVector(0,0,BoundsExtent.Z * 0.8);
+            const FVector Pelvis = IsValid(TargetBodyMesh) && TargetBodyMesh->DoesSocketExist(TEXT("pelvis"))
+                ? TargetBodyMesh->GetSocketLocation(TEXT("pelvis")) : BoundsOrigin;
+            const FVector Feet = IsValid(TargetBodyMesh) && TargetBodyMesh->DoesSocketExist(TEXT("foot_l")) && TargetBodyMesh->DoesSocketExist(TEXT("foot_r"))
+                ? (TargetBodyMesh->GetSocketLocation(TEXT("foot_l")) + TargetBodyMesh->GetSocketLocation(TEXT("foot_r"))) * 0.5
+                : BoundsOrigin - FVector(0,0,BoundsExtent.Z * 0.8);
+            // Closest point on each body segment to the camera ray. This works at
+            // any pitch and follows the bones of seated as well as standing people.
+            const auto AddSegment = [&](const FVector& A, const FVector& B)
             {
-                BestDirectScore = Score;
-                BestDirectTarget = Candidate;
+                const FVector Segment = B - A;
+                const FVector Offset = A - CameraLocation;
+                const double Along = FVector::DotProduct(Segment, CameraForward);
+                const double Denominator = Segment.SizeSquared() - Along * Along;
+                const double Fraction = Denominator > 0.001 ? FMath::Clamp(
+                    (Along * FVector::DotProduct(Offset, CameraForward) - FVector::DotProduct(Segment, Offset)) / Denominator,
+                    0.0, 1.0) : 0.5;
+                AimPoints.Add(A + Segment * Fraction);
+            };
+            AddSegment(Head, Pelvis);
+            AddSegment(Pelvis, Feet);
+            AimPoints.Add(Head);
+            AimPoints.Add(Pelvis);
+        }
+        else if (Inspection) AimPoints.Add(Inspection->GetInteractionLocation());
+        else if (Candidate->IsA<ATMOPVehicleBase>())
+            AimPoints.Add(UTMOPVehicleInspectionComponent::GetVehicleAimPoint(Candidate));
+        else AimPoints.Add(BoundsOrigin);
+
+        for (const FVector& AimPoint : AimPoints)
+        {
+            const FVector CameraToTarget = AimPoint - CameraLocation;
+            const float CameraDistance = CameraToTarget.Size();
+            if (CameraDistance <= 1.0f || CameraDistance > TargetInformationDistance)
+                continue;
+
+            const FVector CameraDirection = CameraToTarget / CameraDistance;
+            const float CameraDot = FVector::DotProduct(CameraForward, CameraDirection);
+            const float CameraAngle = FMath::RadiansToDegrees(
+                FMath::Acos(FMath::Clamp(CameraDot, -1.0f, 1.0f)));
+            if (CameraAngle > DirectTargetConeDegrees) continue;
+
+            FHitResult VisibilityHit;
+            FCollisionQueryParams VisibilityParams(
+                SCENE_QUERY_STAT(TMOPPlayerInformationTargetVisibility), false, this);
+            const bool bBlocked = !Inspection && GetWorld()->LineTraceSingleByChannel(
+                VisibilityHit, CameraLocation, AimPoint, ECC_Visibility, VisibilityParams);
+            bool bVisible = Inspection ? Inspection->IsVisibleFrom(CameraLocation, this)
+                : (!bBlocked || VisibilityHit.GetActor() == Candidate);
+            if (!bVisible && Candidate->IsA<ATMOPHistoricalAgent>() &&
+                IsValid(VisibilityHit.GetActor()) &&
+                VisibilityHit.GetActor()->IsA<ATMOPVehicleBase>())
+                bVisible = Candidate->GetAttachParentActor() == VisibilityHit.GetActor();
+            if (!bVisible) continue;
+
+            if (CameraAngle <= DirectTargetConeDegrees)
+            {
+                const float Score = CameraAngle; // Distance must not override camera aim.
+                if (Score < BestDirectScore ||
+                    (FMath::IsNearlyEqual(Score, BestDirectScore, 0.01f) && CameraDistance < BestDirectDistance))
+                {
+                    BestDirectScore = Score;
+                    BestDirectDistance = CameraDistance;
+                    BestDirectTarget = Candidate;
+                }
             }
         }
-
     }
 
     return BestDirectTarget;

@@ -43,6 +43,7 @@ namespace
     public:
         SLATE_BEGIN_ARGS(SNotebookCard) {}
             SLATE_ARGUMENT(FTMOPNotebookObservation, Entry)
+            SLATE_EVENT(FOnClicked, OnInspect)
         SLATE_END_ARGS()
         void Construct(const FArguments& Args)
         {
@@ -52,7 +53,14 @@ namespace
             SetBrush(ModelBrush, ModelTexture);
             ShowEvidence(0);
             TSharedRef<SVerticalBox> Body = SNew(SVerticalBox);
-            Body->AddSlot().AutoHeight()[Text(Entry.DisplayName, 13, true)];
+            Body->AddSlot().AutoHeight()[SNew(SButton).OnClicked(Args._OnInspect)
+                .IsEnabled(Entry.Kind == ETMOPNotebookEntityKind::Person)
+                [Text(Entry.DisplayName, 13, true)]];
+            TArray<FString> Places;
+            for (const auto& Point : Entry.Locations)
+                Places.AddUnique(FTMOPTime::FromSecondsFromMidnight(Point.Second).ToDisplayString() + TEXT(" — ") + Point.Address.ToString() + (Point.bPlayerObservation ? TEXT(" (egen observation)") : TEXT("")));
+            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FText::FromString(
+                Places.IsEmpty() ? TEXT("Observerad vid: plats ej fastställd") : TEXT("Observerad vid: ") + FString::Join(Places, TEXT("; "))))];
             Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(Entry.Summary.IsEmpty()
                 ? NSLOCTEXT("TMOP", "NotebookNoEventSummary", "Ingen händelsebeskrivning registrerad.") : Entry.Summary)];
             Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FText::Format(
@@ -72,10 +80,12 @@ namespace
                 + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Top)
                 [SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight()
-                    [Frame(SNew(SBox).WidthOverride(76).HeightOverride(104)
+                    [SNew(SButton).OnClicked(Args._OnInspect).ContentPadding(0)
+                        .IsEnabled(Entry.Kind == ETMOPNotebookEntityKind::Person)
+                        [Frame(SNew(SBox).WidthOverride(76).HeightOverride(104)
                         [SNew(SScaleBox).Stretch(EStretch::ScaleToFit)
                             [ModelTexture ? StaticCastSharedRef<SWidget>(SNew(SImage).Image(&ModelBrush))
-                                : StaticCastSharedRef<SWidget>(Text(NSLOCTEXT("TMOP", "NotebookMissingModel", "Modellbild\nsaknas"), 10))]], ColumnGray, 2)]
+                                : StaticCastSharedRef<SWidget>(Text(NSLOCTEXT("TMOP", "NotebookMissingModel", "Modellbild\nsaknas"), 10))]], ColumnGray, 2)]]
                     + SVerticalBox::Slot().AutoHeight().Padding(0, 3)
                     [Text(NSLOCTEXT("TMOP", "NotebookModelImage", "3D-modell"), 10)]]
                 + SHorizontalBox::Slot().FillWidth(1).Padding(8, 0)[Body];
@@ -207,7 +217,7 @@ TSharedRef<ITableRow> STMOPNotebookPanel::MakeRow(FItemPtr Item, const TSharedRe
     if (Item->EntryIndex != INDEX_NONE && Player.IsValid() && Player->NotebookObservations.IsValidIndex(Item->EntryIndex))
     {
         auto& Entry = Player->NotebookObservations[Item->EntryIndex];
-        if (Entry.ModelPreviewPng.IsEmpty() && !PreviewAttempted.Contains(Item->EntryIndex))
+        if ((Entry.ModelPreviewPng.IsEmpty() || Entry.ModelPreviewVersion < 2) && !PreviewAttempted.Contains(Item->EntryIndex))
         {
             PreviewAttempted.Add(Item->EntryIndex);
             AActor* Source = nullptr;
@@ -221,8 +231,15 @@ TSharedRef<ITableRow> STMOPNotebookPanel::MakeRow(FItemPtr Item, const TSharedRe
                 if (It->VehicleId == Entry.EntityId) { Source = *It; break; }
             if (Source) FTMOPNotebookPresentation::Populate(Entry, Player->GetWorld(), Source);
         }
+        FTMOPNotebookPresentation::CollectLocations(Entry, Player->GetWorld());
+        const FName EntityId = Entry.EntityId;
+        const TWeakObjectPtr<ATMOPPlayerCharacter> OwnerPlayer = Player;
         Content->AddSlot().AutoHeight().Padding(0, 3, 0, 9)
-            [SNew(SNotebookCard).Entry(Player->NotebookObservations[Item->EntryIndex])];
+            [SNew(SNotebookCard).Entry(Entry).OnInspect(FOnClicked::CreateLambda([OwnerPlayer, EntityId]()
+            {
+                if (OwnerPlayer.IsValid()) OwnerPlayer->InspectNotebookPerson(EntityId);
+                return FReply::Handled();
+            }))];
     }
     else if (Item->bEmpty)
         Content->AddSlot().AutoHeight().Padding(8, 4, 8, 14)

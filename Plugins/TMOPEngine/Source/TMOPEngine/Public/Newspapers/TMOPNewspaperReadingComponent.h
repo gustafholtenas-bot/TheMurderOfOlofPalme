@@ -181,8 +181,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Newspaper|3D")
     void Zoom(float Direction);
 
+    void DragReadingView(FVector2D PixelDelta, FVector2D ViewSize, bool bRotate);
+    void ResetReadingView();
+
 private:
     void CreateReadingComponents();
+    void RefreshReadingView();
     UMaterialInstanceDynamic* CreatePageMaterial(FName SlotName, int32 FallbackIndex);
     void ApplyNewspaperTransform(UStaticMesh* Mesh);
     void ActivateReadingCamera();
@@ -205,6 +209,8 @@ private:
     UPROPERTY(Transient)
     TArray<FTMOPNewspaperCameraActiveState> PreviousCameraStates;
     FTransform CurrentNewspaperTransform;
+    FTransform DefaultPageTransform;
+    FRotator ReadingTilt = FRotator::ZeroRotator;
     bool bUsingExistingPlayerMesh = false;
     bool bShowingFoldedMesh = false;
 };

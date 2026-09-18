@@ -404,9 +404,9 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
             [ SNew(SBorder).BorderBackgroundColor(MenuColors.PanelBackground)
               .Padding(24.0f)[PagePanel] ] ] ];
     ShowSection(CurrentSection);
-    // Constrain the desired size in singleplayer too: source cards must never
-    // push the navigation outside the viewport.
-    return TMOPFitLocalPanel(this, RootWidget, true);
+    // Expand to the local viewport instead of leaving a fixed-size panel at the top left.
+    // Keep the content bounded so wide source cards cannot push navigation off-screen.
+    return TMOPFillLocalPanel(this, RootWidget);
 }
 
 FReply UTMOPPauseMenuWidget::HandleSectionClicked(const ETMOPPauseHubSection Section)
@@ -475,7 +475,7 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::Theories: BuildTheoryBuilderPage(); break;
     case ETMOPPauseHubSection::MurderKnowledge: BuildChronologyPage(MurderKnowledgeTable, true); break;
     case ETMOPPauseHubSection::AfterMurderEvents: BuildChronologyPage(AfterMurderEventsTable, false); break;
-    case ETMOPPauseHubSection::MurderDayMysteries:
+    case ETMOPPauseHubSection::MurderDayMysteries: BuildChronologyPage(MurderDayMysteriesTable, false, true); break;
     case ETMOPPauseHubSection::WorldGroups:
     case ETMOPPauseHubSection::SwedenGroups:
         // Independent pages reserved for content specified later.
@@ -558,8 +558,19 @@ void UTMOPPauseMenuWidget::BuildTheoryBuilderPage()
         .OnSave(FOnClicked::CreateUObject(this, &UTMOPPauseMenuWidget::HandleCreateNewSaveClicked))];
     AddHeading(NSLOCTEXT("TMOP", "TheoryInformation", "INFORMATION"));
     TArray<FTMOPTheoryInformationRow*> Rows;
-    if (IsValid(TheoryInformationTable) && TheoryInformationTable->GetRowStruct() == FTMOPTheoryInformationRow::StaticStruct())
-        TheoryInformationTable->GetAllRows(TEXT("Theory information"), Rows);
+    UDataTable* Table = TheoryInformationTable;
+    if (!IsValid(Table))
+        Table = LoadObject<UDataTable>(nullptr,
+            TEXT("/Game/TMOP/Data/DT_TMOP_TheoryInformation.DT_TMOP_TheoryInformation"));
+    if (IsValid(Table))
+    {
+        if (Table->GetRowStruct() != FTMOPTheoryInformationRow::StaticStruct())
+        {
+            AddBody(FText::FromString(TEXT("Teorilistan har fel radtyp. Importera den som TMOPTheoryInformationRow.")));
+            return;
+        }
+        Table->GetAllRows(TEXT("Theory information"), Rows);
+    }
     else for (auto& Entry : TheoryInformationEntries) Rows.Add(&Entry);
     Rows.Sort([](const FTMOPTheoryInformationRow& A, const FTMOPTheoryInformationRow& B)
     { return A.SortOrder == B.SortOrder ? A.Title.ToString() < B.Title.ToString() : A.SortOrder < B.SortOrder; });
@@ -586,11 +597,13 @@ void UTMOPPauseMenuWidget::BuildTheoryBuilderPage()
     }
 }
 
-void UTMOPPauseMenuWidget::BuildChronologyPage(UDataTable* Table, bool bKnowledge)
+void UTMOPPauseMenuWidget::BuildChronologyPage(UDataTable* Table, bool bKnowledge, bool bMysteries)
 {
     // Optional conventional paths let the native menu work without a widget Blueprint.
     if (!IsValid(Table))
-        Table = LoadObject<UDataTable>(nullptr, bKnowledge
+        Table = LoadObject<UDataTable>(nullptr, bMysteries
+            ? TEXT("/Game/TMOP/Data/DT_TMOP_MurderDayMysteries.DT_TMOP_MurderDayMysteries")
+            : bKnowledge
             ? TEXT("/Game/TMOP/Data/DT_TMOP_MurderKnowledge.DT_TMOP_MurderKnowledge")
             : TEXT("/Game/TMOP/Data/DT_TMOP_AfterMurderEvents.DT_TMOP_AfterMurderEvents"));
     if (!IsValid(Table) || Table->GetRowStruct() != FTMOPChronologyRow::StaticStruct())

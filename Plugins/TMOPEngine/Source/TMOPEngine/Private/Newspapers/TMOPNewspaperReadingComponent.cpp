@@ -45,6 +45,11 @@ void UTMOPNewspaperReadingComponent::CreateReadingComponents()
     ReadingCamera->SetupAttachment(Owner->GetRootComponent());
     ReadingCamera->RegisterComponent();
     ReadingCamera->bUsePawnControlRotation = false;
+    ReadingCamera->PostProcessBlendWeight = 1.0f;
+    ReadingCamera->PostProcessSettings.bOverride_MotionBlurAmount = true;
+    ReadingCamera->PostProcessSettings.MotionBlurAmount = 0.0f;
+    ReadingCamera->PostProcessSettings.bOverride_MotionBlurMax = true;
+    ReadingCamera->PostProcessSettings.MotionBlurMax = 0.0f;
     ReadingCamera->SetActive(false);
     ReadingArms->PrimaryComponentTick.bTickEvenWhenPaused = true;
     ReadingArms->SetOnlyOwnerSee(true);
@@ -98,6 +103,8 @@ void UTMOPNewspaperReadingComponent::ActivateReadingCamera()
                         FAttachmentTransformRules::KeepWorldTransform);
                     ReadingCameraActor->GetCameraComponent()->SetFieldOfView(
                         ReadingCamera->FieldOfView);
+                    ReadingCameraActor->GetCameraComponent()->PostProcessSettings = ReadingCamera->PostProcessSettings;
+                    ReadingCameraActor->GetCameraComponent()->PostProcessBlendWeight = 1.0f;
                 }
             }
             PC->SetViewTarget(IsValid(ReadingCameraActor)
@@ -105,7 +112,10 @@ void UTMOPNewspaperReadingComponent::ActivateReadingCamera()
             // Opening may pause the world in this same frame. Force the camera
             // manager to consume the new active camera before that happens.
             if (IsValid(PC->PlayerCameraManager))
+            {
+                PC->PlayerCameraManager->bGameCameraCutThisFrame = true;
                 PC->PlayerCameraManager->UpdateCamera(0.0f);
+            }
         }
     }
 }
@@ -126,7 +136,10 @@ void UTMOPNewspaperReadingComponent::RestorePreviousCameras()
             PC->SetViewTarget(IsValid(PreviousViewTarget)
                 ? PreviousViewTarget.Get() : Owner);
             if (IsValid(PC->PlayerCameraManager))
+            {
+                PC->PlayerCameraManager->bGameCameraCutThisFrame = true;
                 PC->PlayerCameraManager->UpdateCamera(0.0f);
+            }
         }
     }
     PreviousViewTarget = nullptr;
@@ -383,7 +396,10 @@ bool UTMOPNewspaperReadingComponent::ShowPage(
         Rotation += FoldedBackRotationOffset;
         CurrentNewspaperTransform.SetRotation(Rotation.Quaternion());
     }
+    DefaultPageTransform = CurrentNewspaperTransform;
+    ReadingTilt = FRotator::ZeroRotator;
     ApplyNewspaperTransform(DesiredMesh);
+    RefreshReadingView();
 
     if (bUseFoldedMesh) return true;
 
@@ -401,6 +417,7 @@ void UTMOPNewspaperReadingComponent::ApplyNewspaperTransform(UStaticMesh* Mesh)
 {
     if (!IsValid(ReadingNewspaper)) return;
     FTransform Applied = CurrentNewspaperTransform;
+    Applied.SetRotation(ReadingTilt.Quaternion() * Applied.GetRotation());
     if (!bUsingExistingPlayerMesh && bCenterMeshBoundsOnFloatingTransform &&
         IsValid(Mesh))
     {
@@ -413,6 +430,7 @@ void UTMOPNewspaperReadingComponent::ApplyNewspaperTransform(UStaticMesh* Mesh)
             -Applied.GetRotation().RotateVector(ScaledBoundsOrigin));
     }
     ReadingNewspaper->SetRelativeTransform(Applied);
+    RefreshReadingView();
 }
 
 void UTMOPNewspaperReadingComponent::Pan(
@@ -473,4 +491,47 @@ void UTMOPNewspaperReadingComponent::EndReading()
     EndPageMID = nullptr;
     bUsingExistingPlayerMesh = false;
     SetComponentTickEnabled(false);
+}
+
+void UTMOPNewspaperReadingComponent::RefreshReadingView()
+{
+    if (!IsValid(ActiveNewspaper)) return;
+    if (const auto* Pawn = Cast<APawn>(GetOwner()))
+        if (auto* PC = Cast<APlayerController>(Pawn->GetController()))
+            if (IsValid(PC->PlayerCameraManager))
+            {
+                // Discard velocity/history from the street camera and paused mesh moves.
+                PC->PlayerCameraManager->bGameCameraCutThisFrame = true;
+                PC->PlayerCameraManager->UpdateCamera(0.0f);
+            }
+}
+
+void UTMOPNewspaperReadingComponent::DragReadingView(FVector2D PixelDelta, FVector2D ViewSize, bool bRotate)
+{
+    if (!IsValid(ActiveNewspaper) || !IsValid(ReadingNewspaper)) return;
+    if (bRotate)
+    {
+        ReadingTilt.Yaw = FMath::Clamp(ReadingTilt.Yaw + PixelDelta.X * 0.15, -25.0, 25.0);
+        ReadingTilt.Pitch = FMath::Clamp(ReadingTilt.Pitch - PixelDelta.Y * 0.15, -25.0, 25.0);
+    }
+    else
+    {
+        // Pixel-to-world pan follows perspective zoom and the player's own viewport.
+        FVector Location = CurrentNewspaperTransform.GetLocation();
+        const double UnitsPerPixel = 2.0 * FMath::Max(1.0, Location.X) *
+            FMath::Tan(FMath::DegreesToRadians(FirstPersonFieldOfView * 0.5)) / FMath::Max(1.0, ViewSize.X);
+        Location.Y += PixelDelta.X * UnitsPerPixel;
+        Location.Z -= PixelDelta.Y * UnitsPerPixel;
+        CurrentNewspaperTransform.SetLocation(Location);
+    }
+    ApplyNewspaperTransform(ReadingNewspaper->GetStaticMesh());
+}
+
+void UTMOPNewspaperReadingComponent::ResetReadingView()
+{
+    if (!IsValid(ActiveNewspaper)) return;
+    CurrentNewspaperTransform = DefaultPageTransform;
+    ReadingTilt = FRotator::ZeroRotator;
+    if (IsValid(ReadingNewspaper)) ApplyNewspaperTransform(ReadingNewspaper->GetStaticMesh());
+    if (!bUsingExistingPlayerMesh && IsValid(ReadingArms)) ReadingArms->SetRelativeTransform(ArmsRelativeTransform);
 }

@@ -4,10 +4,12 @@
 #include "Blueprint/UserWidget.h"
 #include "People/TMOPPersonProfileTypes.h"
 #include "Styling/SlateBrush.h"
+#include "Observations/TMOPNotebookTypes.h"
 #include "TMOPAgentInfoChartWidget.generated.h"
 
 class ATMOPPlayerCharacter;
 class SBorder;
+class SBox;
 class SImage;
 class STextBlock;
 class SScrollBox;
@@ -24,6 +26,7 @@ public:
         const FText& TimelineSummary, bool bPoliceInterviewed,
         FName InspectedEntityId);
     void HideAgentInfo();
+    void SetObservationLocations(const TArray<FTMOPNotebookLocation>& Points);
 
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
@@ -38,6 +41,8 @@ private:
 
     TWeakObjectPtr<ATMOPPlayerCharacter> PlayerCharacter;
     TSharedPtr<SBorder> MainPanel;
+    TSharedPtr<SBox> ObservationMapHost;
+    TSharedPtr<STextBlock> ObservationPlacesText;
     TSharedPtr<SScrollBox> ScrollBox;
     TSharedPtr<STextBlock> NameText;
     TSharedPtr<STextBlock> IdentityText;

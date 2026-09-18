@@ -11,6 +11,8 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "ImageUtils.h"
+#include "Anchors/TMOPHistoricalAnchor.h"
+#include "Addresses/TMOPAddressComponent.h"
 #include "TextureResource.h"
 
 namespace
@@ -85,7 +87,7 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
                 else if (Definition.TimingMode == ETMOPObservationTimingMode::Absolute)
                     Second = Definition.CanonicalTime.ToSecondsFromMidnight();
                 // The card must not reveal a person's future route when opened early.
-                if (Second == INDEX_NONE || Second > Entry.DiscoveredSecond) continue;
+                if (Second == INDEX_NONE || Second > FMath::Max(Entry.DiscoveredSecond, Entry.LastObservedSecond)) continue;
                 Definitions.Add({Second, Definition});
             }
         }
@@ -130,7 +132,9 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
         // A legacy vehicle needs its live actor to recover authored classification.
         Entry.PresentationVersion = Entry.Kind == ETMOPNotebookEntityKind::Vehicle && !IsValid(Actor) ? 0 : 1;
     }
-    if (bCaptureModel && Entry.ModelPreviewPng.IsEmpty() && IsValid(Actor)) CaptureModel(Actor, Entry.Kind, Entry.ModelPreviewPng);
+    CollectLocations(Entry, World);
+    if (bCaptureModel && (Entry.ModelPreviewPng.IsEmpty() || Entry.ModelPreviewVersion < 2) && IsValid(Actor))
+        if (CaptureModel(Actor, Entry.Kind, Entry.ModelPreviewPng)) Entry.ModelPreviewVersion = 2;
 }
 
 bool FTMOPNotebookPresentation::CaptureModel(AActor* Actor, ETMOPNotebookEntityKind Kind, TArray<uint8>& OutPng)
@@ -167,10 +171,22 @@ bool FTMOPNotebookPresentation::CaptureModel(AActor* Actor, ETMOPNotebookEntityK
     Capture->FOVAngle = 35.0f;
     const double HalfHorizontal = FMath::DegreesToRadians(17.5);
     const double HalfVertical = FMath::Atan(FMath::Tan(HalfHorizontal) * Height / Width);
-    const double Distance = Bounds.GetExtent().Size() * 1.12 / FMath::Sin(FMath::Min(HalfHorizontal, HalfVertical));
     const FVector Center = Bounds.GetCenter();
     const FVector Direction = Actor->GetActorQuat().RotateVector(Kind == ETMOPNotebookEntityKind::Vehicle
         ? FVector(1, 0.8, 0.35).GetSafeNormal() : FVector(1, 0.12, 0.03).GetSafeNormal());
+    const FRotationMatrix Basis((-Direction).Rotation());
+    const FVector Right = Basis.GetUnitAxis(EAxis::Y), Up = Basis.GetUnitAxis(EAxis::Z);
+    double Distance = 1.0;
+    // Fit projected bounds rather than a sphere; a tall person now fills the portrait.
+    for (int32 X = 0; X < 2; ++X) for (int32 Y = 0; Y < 2; ++Y) for (int32 Z = 0; Z < 2; ++Z)
+    {
+        const FVector Corner(X ? Bounds.Max.X : Bounds.Min.X,
+            Y ? Bounds.Max.Y : Bounds.Min.Y, Z ? Bounds.Max.Z : Bounds.Min.Z);
+        const FVector Offset = Corner - Center;
+        Distance = FMath::Max(Distance, FVector::DotProduct(Offset, Direction) + 1.06 * FMath::Max(
+            FMath::Abs(FVector::DotProduct(Offset, Right)) / FMath::Tan(HalfHorizontal),
+            FMath::Abs(FVector::DotProduct(Offset, Up)) / FMath::Tan(HalfVertical)));
+    }
     const FVector Location = Center + Direction * Distance;
     Capture->RegisterComponent(); Capture->SetWorldLocationAndRotation(Location, (Center - Location).Rotation());
     Capture->CaptureScene();
@@ -191,4 +207,70 @@ bool FTMOPNotebookPresentation::CaptureModel(AActor* Actor, ETMOPNotebookEntityK
     Capture->DestroyComponent(); CaptureActor->Destroy();
     if (bSuccess) OutPng = MoveTemp(Bytes);
     return bSuccess;
+}
+
+void FTMOPNotebookPresentation::CollectLocations(FTMOPNotebookObservation& Entry, UWorld* World)
+{
+    if (!World) return;
+    TMap<FName, ATMOPHistoricalAnchor*> Anchors;
+    TArray<ATMOPHistoricalAnchor*> Addresses;
+    for (TActorIterator<ATMOPHistoricalAnchor> It(World); It; ++It)
+    {
+        Anchors.Add(It->GetAnchorId(), *It);
+        const auto* Address = It->FindComponentByClass<UTMOPAddressComponent>();
+        if (Address && Address->HasValidAddress()) Addresses.Add(*It);
+    }
+    for (TActorIterator<ATMOPObservationDirector> It(World); It; ++It)
+        for (const auto& D : It->GetObservationDefinitionsForTarget(Entry.EntityId))
+        {
+            FTMOPObservationRuntime Runtime;
+            int32 Second = INDEX_NONE;
+            if (It->TryGetObservationRuntime(D.ObservationId, Runtime) && Runtime.bHasResolvedCanonicalTime)
+                Second = Runtime.ResolvedCanonicalStartTime.ToSecondsFromMidnight();
+            else if (D.TimingMode == ETMOPObservationTimingMode::Absolute)
+                Second = D.CanonicalTime.ToSecondsFromMidnight();
+            if (Second == INDEX_NONE || Second > FMath::Max(Entry.DiscoveredSecond, Entry.LastObservedSecond)) continue;
+            auto* const* Anchor = Anchors.Find(D.ObservationAnchorId);
+            if (!Anchor) continue; // Never substitute the actor's current position for a historical sighting.
+            FTMOPNotebookLocation Point;
+            Point.ObservationId = D.ObservationId; Point.Second = Second;
+            Point.WorldLocation = (*Anchor)->GetActorLocation();
+            double Nearest = TNumericLimits<double>::Max();
+            for (auto* AddressAnchor : Addresses)
+            {
+                const double Distance = FVector::DistSquared2D(Point.WorldLocation, AddressAnchor->GetActorLocation());
+                if (Distance < Nearest)
+                {
+                    Nearest = Distance;
+                    Point.Address = AddressAnchor->FindComponentByClass<UTMOPAddressComponent>()->GetAddressTitle();
+                }
+            }
+            if (Point.Address.IsEmpty()) Point.Address = (*Anchor)->DisplayName;
+            if (Point.Address.IsEmpty()) Point.Address = FText::FromName(D.ObservationAnchorId);
+            if (auto* Existing = Entry.Locations.FindByPredicate([&](const auto& P) { return P.ObservationId == Point.ObservationId; }))
+                *Existing = Point;
+            else Entry.Locations.Add(Point);
+        }
+    Entry.Locations.Sort([](const auto& A, const auto& B) { return A.Second < B.Second; });
+}
+
+void FTMOPNotebookPresentation::RecordPlayerSighting(FTMOPNotebookObservation& Entry, UWorld* World,
+    FVector Position, int32 Second)
+{
+    if (!World) return;
+    FTMOPNotebookLocation Point;
+    Point.ObservationId = FName(*FString::Printf(TEXT("PLAYER_SEEN_%d"), Second));
+    Point.bPlayerObservation = true; Point.Second = Second; Point.WorldLocation = Position;
+    double Nearest = TNumericLimits<double>::Max();
+    for (TActorIterator<ATMOPHistoricalAnchor> It(World); It; ++It)
+    {
+        const auto* Address = It->FindComponentByClass<UTMOPAddressComponent>();
+        if (!Address || !Address->HasValidAddress()) continue;
+        const double Distance = FVector::DistSquared2D(Position, It->GetActorLocation());
+        if (Distance < Nearest) { Nearest = Distance; Point.Address = Address->GetAddressTitle(); }
+    }
+    if (Point.Address.IsEmpty()) Point.Address = FText::FromString(TEXT("Adress saknas"));
+    if (!Entry.Locations.ContainsByPredicate([&](const auto& P) { return P.ObservationId == Point.ObservationId; }))
+        Entry.Locations.Add(Point);
+    Entry.Locations.Sort([](const auto& A, const auto& B) { return A.Second < B.Second; });
 }

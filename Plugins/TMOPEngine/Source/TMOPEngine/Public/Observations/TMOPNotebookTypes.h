@@ -39,6 +39,17 @@ struct TMOPENGINE_API FTMOPNotebookEvidenceImage
 };
 
 USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPNotebookLocation
+{
+    GENERATED_BODY()
+    UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") FName ObservationId;
+    UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") bool bPlayerObservation = false;
+    UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") FVector WorldLocation = FVector::ZeroVector;
+    UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") int32 Second = 0;
+    UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") FText Address;
+};
+
+USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPNotebookObservation
 {
     GENERATED_BODY()
@@ -55,6 +66,9 @@ struct TMOPENGINE_API FTMOPNotebookObservation
     UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") TArray<uint8> ModelPreviewPng;
     UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") ETMOPNotebookVehicleSuspicion VehicleSuspicion = ETMOPNotebookVehicleSuspicion::LessSuspicious;
     UPROPERTY(SaveGame) int32 PresentationVersion = 0;
+    UPROPERTY(SaveGame) int32 ModelPreviewVersion = 0;
+    UPROPERTY(SaveGame) int32 LastObservedSecond = 0;
+    UPROPERTY(SaveGame, BlueprintReadOnly, Category="Notebook") TArray<FTMOPNotebookLocation> Locations;
 };
 
 namespace TMOPNotebook

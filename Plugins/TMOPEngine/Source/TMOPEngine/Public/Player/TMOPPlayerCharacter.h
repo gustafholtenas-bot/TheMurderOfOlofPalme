@@ -11,6 +11,7 @@
 #include "Items/TMOPPlayerItemUseComponent.h"
 #include "Radio/TMOPPlayerRadioComponent.h"
 #include "Time/TMOPTime.h"
+#include "UI/TMOPHUDTimelineWidget.h"
 #include "TMOPPlayerCharacter.generated.h"
 
 class UCameraComponent;
@@ -54,6 +55,17 @@ class TMOPENGINE_API ATMOPPlayerCharacter : public ACharacter
 
 public:
     ATMOPPlayerCharacter();
+
+    /** Six HUD milestones. Times are read from Shared Events, never copied here. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|HUD|Timeline")
+    TArray<FTMOPHUDTimelineMarker> HUDTimelineMarkers;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|HUD|Timeline")
+    bool bShowHUDTimeline = true;
+
+    UPROPERTY(Transient)
+    TObjectPtr<UTMOPHUDTimelineWidget> HUDTimelineWidget;
+
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void PossessedBy(AController* NewController) override;
@@ -267,6 +279,10 @@ public:
 private:
     UPROPERTY(Transient) FTMOPNotebookObservation PendingNotebookObservation;
     uint64 AgentInfoClosedFrame = MAX_uint64;
+
+    // Negative means no deferred inspection pause is pending.
+    float AgentInfoPauseDelay = -1.0f;
+    bool bAgentInfoFromNotebook = false;
     UPROPERTY(Transient) TObjectPtr<UTMOPNotebookToastWidget> NotebookToast;
     void CommitNotebookObservation();
 public:
@@ -595,6 +611,8 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Agent Info")
     void CloseAgentInfoChart();
+
+    bool InspectNotebookPerson(FName EntityId);
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Newspaper")
     bool OpenNewspaper(UTMOPNewspaperItemDefinition* Newspaper);

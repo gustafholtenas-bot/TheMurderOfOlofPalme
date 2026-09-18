@@ -75,6 +75,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Chronology",
         meta=(RequiredAssetDataTags="RowStructure=/Script/TMOPEngine.TMOPChronologyRow"))
     TObjectPtr<UDataTable> AfterMurderEventsTable;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Chronology",
+        meta=(RequiredAssetDataTags="RowStructure=/Script/TMOPEngine.TMOPChronologyRow"))
+    TObjectPtr<UDataTable> MurderDayMysteriesTable;
+
 
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
@@ -85,7 +89,7 @@ private:
     UPROPERTY(Transient)
     TObjectPtr<UTMOPMapWidget> EmbeddedMapWidget;
     void BuildMapPage();
-    void BuildChronologyPage(UDataTable* Table, bool bKnowledge);
+    void BuildChronologyPage(UDataTable* Table, bool bKnowledge, bool bMysteries = false);
     FReply HandleResumeClicked();
     FReply HandleSectionClicked(ETMOPPauseHubSection Section);
     FReply HandleSourceMainSectionClicked(FName MainSectionId);

@@ -1,5 +1,6 @@
 #include "UI/TMOPAgentInfoChartWidget.h"
 #include "UI/TMOPLocalPanel.h"
+#include "UI/STMOPObservationMap.h"
 #include "UI/TMOPControlUIHelpers.h"
 #include "People/TMOPPersonNameLibrary.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
@@ -62,9 +63,11 @@ void UTMOPAgentInfoChartWidget::ShowAgentInfo(
     if (InterviewStatusText.IsValid()) InterviewStatusText->SetColorAndOpacity(
         bPoliceInterviewed ? FLinearColor(0.40f, 0.85f, 0.58f)
                            : FLinearColor(0.95f, 0.12f, 0.10f));
-    if (TimelineText.IsValid()) TimelineText->SetText(TimelineSummary.IsEmpty()
+    TArray<FString> TimelineWords;
+    TimelineSummary.ToString().ParseIntoArrayWS(TimelineWords);
+    if (TimelineText.IsValid()) TimelineText->SetText(TimelineWords.IsEmpty()
         ? NSLOCTEXT("TMOP", "AgentInfoNoTimeline", "Ingen läsbar tidslinje är registrerad.")
-        : TimelineSummary);
+        : FText::FromString(FString::Join(TimelineWords, TEXT(" "))));
     if (ObservationText.IsValid()) ObservationText->SetText(
         Profile.ObservationSummary.IsEmpty()
             ? NSLOCTEXT("TMOP", "AgentInfoNoObservations",
@@ -233,12 +236,13 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
           .BorderBackgroundColor(FLinearColor::Transparent)
           .Padding(0.0f)
           [ SNew(SHorizontalBox)
-            + SHorizontalBox::Slot().FillWidth(0.62f)
+            + SHorizontalBox::Slot().FillWidth(0.45f)
             [ SNullWidget::NullWidget ]
             + SHorizontalBox::Slot().FillWidth(1.0f)
               .Padding(10.0f, 28.0f, 28.0f, 28.0f)
             [ SNew(SBorder)
-              .BorderBackgroundColor(FLinearColor(0.005f, 0.007f, 0.010f, 0.97f))
+              .BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
+              .BorderBackgroundColor(FLinearColor::Black)
               .Padding(FMargin(26.0f, 20.0f))
               [ SNew(SVerticalBox)
                 + SVerticalBox::Slot().AutoHeight()
@@ -247,16 +251,19 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                   [ SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight()
                     [ SAssignNew(NameText, STextBlock)
+                      .AutoWrapText(true)
                       .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoName"),
                           FCoreStyle::GetDefaultFontStyle("Bold", 30)))
                       .ColorAndOpacity(FLinearColor::White) ]
                     + SVerticalBox::Slot().AutoHeight().Padding(0, 5, 0, 8)
                     [ SAssignNew(IdentityText, STextBlock)
+                      .AutoWrapText(true)
                       .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoIdentity"),
                           FCoreStyle::GetDefaultFontStyle("Regular", 15)))
                       .ColorAndOpacity(FLinearColor(0.78f, 0.80f, 0.83f)) ]
                     + SVerticalBox::Slot().AutoHeight()
                     [ SAssignNew(InterviewStatusText, STextBlock)
+                      .AutoWrapText(true)
                       .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoStatus"),
                           FCoreStyle::GetDefaultFontStyle("Bold", 15))) ] ]
                   + SHorizontalBox::Slot().AutoWidth().Padding(18, 0)
@@ -272,8 +279,9 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       + SOverlay::Slot()
                       [ SAssignNew(EvidenceGallery, SScrollBox)
                         .Orientation(Orient_Horizontal) ] ] ]
-                  + SHorizontalBox::Slot().AutoWidth()
+                  + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Top)
                   [ SNew(SButton)
+                    .ContentPadding(FMargin(14.0f, 7.0f))
                     .Text(NSLOCTEXT("TMOP", "CloseAgentInfo", "Stäng"))
                     .OnClicked_UObject(this,
                         &UTMOPAgentInfoChartWidget::HandleCloseClicked) ] ]
@@ -306,6 +314,14 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                         FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.94f, 0.96f))
                     .AutoWrapText(true).WrapTextAt(820.0f) ]
+                  + SScrollBox::Slot().Padding(0, 4, 12, 5)
+                  [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoMapHeader", "OBSERVATIONSPLATSER")) ]
+                  + SScrollBox::Slot().Padding(0, 0, 12, 8)
+                  [ SAssignNew(ObservationMapHost, SBox).HeightOverride(270) ]
+                  + SScrollBox::Slot().Padding(0, 0, 12, 20)
+                  [ SAssignNew(ObservationPlacesText, STextBlock).AutoWrapText(true)
+                    .Font(FCoreStyle::GetDefaultFontStyle("Regular", 14))
+                    .ColorAndOpacity(FLinearColor::White) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoTimelineHeader",
                       "PERSONENS TIDSLINJE")) ]
@@ -363,6 +379,8 @@ void UTMOPAgentInfoChartWidget::ReleaseSlateResources(bool bReleaseChildren)
     Super::ReleaseSlateResources(bReleaseChildren);
     ScrollBox.Reset();
     MainPanel.Reset();
+    ObservationMapHost.Reset();
+    ObservationPlacesText.Reset();
     NameText.Reset();
     IdentityText.Reset();
     InterviewStatusText.Reset();
@@ -389,4 +407,17 @@ void UTMOPAgentInfoChartWidget::RefreshVisibility()
         ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
     if (MainPanel.IsValid()) MainPanel->SetVisibility(bChartVisible
         ? EVisibility::Visible : EVisibility::Collapsed);
+}
+
+void UTMOPAgentInfoChartWidget::SetObservationLocations(const TArray<FTMOPNotebookLocation>& Points)
+{
+    if (ObservationMapHost.IsValid())
+        ObservationMapHost->SetContent(SNew(STMOPObservationMap)
+            .Map(PlayerCharacter.IsValid() ? PlayerCharacter->FindComponentByClass<UTMOPMapComponent>() : nullptr)
+            .Points(Points));
+    TArray<FString> Lines;
+    for (const auto& P : Points)
+        Lines.AddUnique(FTMOPTime::FromSecondsFromMidnight(P.Second).ToDisplayString() + TEXT(" — ") + P.Address.ToString() + (P.bPlayerObservation ? TEXT(" (egen observation)") : TEXT("")));
+    if (ObservationPlacesText.IsValid()) ObservationPlacesText->SetText(FText::FromString(
+        Lines.IsEmpty() ? TEXT("Ingen fastställd observationsplats registrerad.") : FString::Join(Lines, TEXT("\n"))));
 }

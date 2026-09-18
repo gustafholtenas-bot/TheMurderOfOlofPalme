@@ -9,9 +9,62 @@
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SSpacer.h"
+#include "Widgets/Layout/SScaleBox.h"
+#include "Widgets/SOverlay.h"
+#include "Widgets/SLeafWidget.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Text/STextBlock.h"
 #include "UI/TMOPTypographyDirector.h"
+
+namespace
+{
+class SNewspaperMouseSurface : public SLeafWidget
+{
+public:
+    SLATE_BEGIN_ARGS(SNewspaperMouseSurface) {}
+        SLATE_ARGUMENT(UTMOPNewspaperReaderWidget*, Reader)
+        SLATE_ATTRIBUTE(ATMOPPlayerCharacter*, Player)
+    SLATE_END_ARGS()
+    void Construct(const FArguments& Args) { Reader = Args._Reader; Player = Args._Player; }
+    virtual FVector2D ComputeDesiredSize(float) const override { return FVector2D::ZeroVector; }
+    virtual int32 OnPaint(const FPaintArgs&, const FGeometry&, const FSlateRect&,
+        FSlateWindowElementList&, int32 LayerId, const FWidgetStyle&, bool) const override
+    {
+        // Input-only overlay: the newspaper is rendered as a world-space mesh.
+        return LayerId;
+    }
+    virtual FReply OnMouseButtonDown(const FGeometry& G, const FPointerEvent& Event) override
+    {
+        if (Event.GetEffectingButton() != EKeys::LeftMouseButton && Event.GetEffectingButton() != EKeys::RightMouseButton)
+            return FReply::Unhandled();
+        Button = Event.GetEffectingButton(); Last = G.AbsoluteToLocal(Event.GetScreenSpacePosition());
+        return FReply::Handled().CaptureMouse(SharedThis(this));
+    }
+    virtual FReply OnMouseMove(const FGeometry& G, const FPointerEvent& Event) override
+    {
+        if (!HasMouseCapture()) return FReply::Unhandled();
+        const FVector2D Now = G.AbsoluteToLocal(Event.GetScreenSpacePosition());
+        if (ATMOPPlayerCharacter* Owner = Player.Get())
+            if (IsValid(Owner) && IsValid(Owner->NewspaperReading))
+                Owner->NewspaperReading->DragReadingView(Now - Last, G.GetLocalSize(), Button == EKeys::RightMouseButton);
+        Last = Now;
+        return FReply::Handled();
+    }
+    virtual FReply OnMouseButtonUp(const FGeometry&, const FPointerEvent& Event) override
+    {
+        if (HasMouseCapture() && Event.GetEffectingButton() == Button)
+        { Button = FKey(); return FReply::Handled().ReleaseMouseCapture(); }
+        return FReply::Unhandled();
+    }
+    virtual void OnMouseCaptureLost(const FCaptureLostEvent& Event) override
+    { Button = FKey(); SLeafWidget::OnMouseCaptureLost(Event); }
+private:
+    TWeakObjectPtr<UTMOPNewspaperReaderWidget> Reader;
+    TAttribute<ATMOPPlayerCharacter*> Player;
+    FVector2D Last = FVector2D::ZeroVector;
+    FKey Button;
+};
+}
 
 void UTMOPNewspaperReaderWidget::InitializeReader(
     ATMOPPlayerCharacter* InPlayerCharacter)
@@ -109,80 +162,49 @@ void UTMOPNewspaperReaderWidget::SetZoom(const float NewZoom)
 
 TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
 {
-    return SNew(SBorder)
-        .BorderBackgroundColor(FLinearColor::Transparent)
-        .Padding(18.0f)
-        [
-            SNew(SVerticalBox)
-            + SVerticalBox::Slot().AutoHeight().Padding(8.0f, 4.0f, 8.0f, 12.0f)
-            [
-                SNew(SHorizontalBox)
-                + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
-                [
-                    SAssignNew(TitleText, STextBlock)
-                    .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperTitle"),
-                        FCoreStyle::GetDefaultFontStyle("Bold", 23)))
-                    .ColorAndOpacity(FLinearColor(0.92f, 0.90f, 0.82f))
-                ]
-                + SHorizontalBox::Slot().AutoWidth().Padding(8.0f, 0.0f)
+    return SNew(SOverlay)
+        + SOverlay::Slot()
+        [ SNew(SNewspaperMouseSurface).Reader(this).Player_Lambda([this]() { return PlayerCharacter.Get(); }) ]
+        + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Bottom).Padding(18)
+        [ SNew(SScaleBox).Stretch(EStretch::ScaleToFit).StretchDirection(EStretchDirection::DownOnly)
+          [ SNew(SBorder).BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
+            .BorderBackgroundColor(FLinearColor(0,0,0,0.88f)).Padding(14)
+            [ SNew(SVerticalBox)
+              + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+              [ SAssignNew(TitleText, STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Bold", 18))
+                .ColorAndOpacity(FLinearColor::White) ]
+              + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0,4)
+              [ SAssignNew(PageNumberText, STextBlock).ColorAndOpacity(FLinearColor::White) ]
+              + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+              [ SAssignNew(PageLabelText, STextBlock).ColorAndOpacity(FLinearColor::White) ]
+              + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0,8)
+              [ SNew(SHorizontalBox)
+                + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
+                [ SNew(SButton).Text(NSLOCTEXT("TMOP","ReaderPrevBottom","Föregående sida"))
+                  .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandlePreviousClicked) ]
+                + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
                 [ SNew(SButton).Text(FText::FromString(TEXT("−")))
-                    .ToolTipText(NSLOCTEXT("TMOP", "NewspaperZoomOut", "Zooma ut"))
-                    .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleZoomOutClicked) ]
-                + SHorizontalBox::Slot().AutoWidth().Padding(8.0f, 0.0f)
+                  .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleZoomOutClicked) ]
+                + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
                 [ SNew(SButton).Text(FText::FromString(TEXT("+")))
-                    .ToolTipText(NSLOCTEXT("TMOP", "NewspaperZoomIn", "Zooma in"))
-                    .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleZoomInClicked) ]
-                + SHorizontalBox::Slot().AutoWidth().Padding(16.0f, 0.0f, 0.0f, 0.0f)
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "CloseNewspaper", "Stäng"))
-                    .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleCloseClicked) ]
-            ]
-            + SVerticalBox::Slot().FillHeight(1.0f)[ SNew(SSpacer) ]
-            + SVerticalBox::Slot().AutoHeight().Padding(8.0f, 12.0f, 8.0f, 2.0f)
-            [
-                SNew(SHorizontalBox)
-                + SHorizontalBox::Slot().AutoWidth()
-                [ SNew(SButton).Text_Lambda([this]() { return FText::Format(
-                    FText::FromString(TEXT("{0}  Föregående sida")),
-                    TMOPControlDisplayText(this, ETMOPControlAction::MenuPreviousPage,
-                        FText::FromString(TEXT("Q")))); })
-                    .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandlePreviousClicked) ]
-                + SHorizontalBox::Slot().FillWidth(1.0f).HAlign(HAlign_Center).VAlign(VAlign_Center)
-                [
-                    SNew(SVerticalBox)
-                    + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
-                    [ SAssignNew(PageNumberText, STextBlock)
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperPageNumber"),
-                            FCoreStyle::GetDefaultFontStyle("Bold", 17))) ]
-                    + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
-                    [ SAssignNew(PageLabelText, STextBlock)
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperHint"),
-                            FCoreStyle::GetDefaultFontStyle("Regular", 12)))
-                        .ColorAndOpacity(FLinearColor(0.7f, 0.7f, 0.7f)) ]
-                    + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 3.0f)
-                    [ SNew(STextBlock)
-                        .Text_Lambda([this]() { return FText::Format(FText::FromString(
-                            TEXT("{0}/{1}/{2}/{3}: flytta  •  {4}/{5}: zoom  •  {6}/{7}: vänd blad  •  {8}: stäng")),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuUp, FText::FromString(TEXT("Upp"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuDown, FText::FromString(TEXT("Ned"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuLeft, FText::FromString(TEXT("Vänster"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuRight, FText::FromString(TEXT("Höger"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomOut, FText::FromString(TEXT("−"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomIn, FText::FromString(TEXT("+"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuPreviousPage, FText::FromString(TEXT("Q"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuNextPage, FText::FromString(TEXT("E"))),
-                            TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, FText::FromString(TEXT("Esc")))); })
-                        .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("NewspaperHint"),
-                            FCoreStyle::GetDefaultFontStyle("Regular", 12)))
-                        .ColorAndOpacity(FLinearColor(0.58f, 0.58f, 0.58f)) ]
-                ]
-                + SHorizontalBox::Slot().AutoWidth()
-                [ SNew(SButton).Text_Lambda([this]() { return FText::Format(
-                    FText::FromString(TEXT("Nästa sida  {0}")),
-                    TMOPControlDisplayText(this, ETMOPControlAction::MenuNextPage,
-                        FText::FromString(TEXT("E")))); })
-                    .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleNextClicked) ]
-            ]
-        ];
+                  .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleZoomInClicked) ]
+                + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
+                [ SNew(SButton).Text(NSLOCTEXT("TMOP","ReaderResetBottom","Återställ vy"))
+                  .OnClicked_Lambda([this]() {
+                      if (IsValid(PlayerCharacter) && IsValid(PlayerCharacter->NewspaperReading))
+                          PlayerCharacter->NewspaperReading->ResetReadingView();
+                      return FReply::Handled(); }) ]
+                + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
+                [ SNew(SButton).Text(NSLOCTEXT("TMOP","ReaderNextBottom","Nästa sida"))
+                  .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleNextClicked) ]
+                + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
+                [ SNew(SButton).Text(NSLOCTEXT("TMOP","CloseNewspaper","Stäng"))
+                  .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleCloseClicked) ] ]
+              + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+              [ SNew(STextBlock).Text(NSLOCTEXT("TMOP","ReaderMouseHelp",
+                  "Mushjul: zoom • Vänsterdrag: flytta • Högerdrag: rotera"))
+                .Font(FCoreStyle::GetDefaultFontStyle("Regular",12)).ColorAndOpacity(FLinearColor::White) ]
+            ] ] ];
 }
 
 FReply UTMOPNewspaperReaderWidget::PanPage(
