@@ -93,6 +93,7 @@ void UTMOPNewspaperReadingComponent::ActivateReadingCamera()
                     ACameraActor::StaticClass(), ReadingCamera->GetComponentTransform());
                 if (IsValid(ReadingCameraActor))
                 {
+                    ReadingCameraActor->SetOwner(Owner);
                     ReadingCameraActor->AttachToActor(Owner,
                         FAttachmentTransformRules::KeepWorldTransform);
                     ReadingCameraActor->GetCameraComponent()->SetFieldOfView(
@@ -224,6 +225,15 @@ bool UTMOPNewspaperReadingComponent::BeginReading(
         !IsValid(ReadingNewspaper) ||
         !IsValid(NewspaperMesh) || !IsValid(NewspaperMaterial)) return false;
 
+    // A dedicated reading camera is a different view actor. Do not filter the
+    // singleplayer paper/arms out using owner-only visibility.
+    const bool bOwnerOnly = UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this);
+    ReadingNewspaper->SetOnlyOwnerSee(bOwnerOnly);
+    ReadingNewspaper->SetOwnerNoSee(false);
+    ReadingNewspaper->SetHiddenInGame(false);
+    ReadingArms->SetOnlyOwnerSee(bOwnerOnly);
+    ReadingArms->SetOwnerNoSee(false);
+    ReadingArms->SetHiddenInGame(false);
     ActiveNewspaper = Newspaper;
     // Hide every mesh owned by the player, including modular clothes and
     // Blueprint-added parts. The reading paper and optional reading arms are

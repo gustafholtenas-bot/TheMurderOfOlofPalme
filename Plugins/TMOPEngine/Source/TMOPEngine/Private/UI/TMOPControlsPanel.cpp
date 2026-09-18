@@ -11,6 +11,7 @@
 #include "Widgets/Layout/SUniformGridPanel.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Text/STextBlock.h"
+#include "Styling/CoreStyle.h"
 
 void STMOPControlsPanel::Construct(const FArguments& Arguments)
 {
@@ -19,7 +20,9 @@ void STMOPControlsPanel::Construct(const FArguments& Arguments)
         Controls = PlayerCharacter->GetGameInstance()->GetSubsystem<UTMOPControlSettingsSubsystem>();
     const int32 OwnerSlot = UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(PlayerCharacter.Get());
     SelectedPlayer = OwnerSlot == INDEX_NONE ? 0 : OwnerSlot;
-    ChildSlot[SAssignNew(Body, SVerticalBox)];
+    ChildSlot[SNew(SBorder).BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
+        .BorderBackgroundColor(FLinearColor(0.035f, 0.035f, 0.045f, 0.96f)).Padding(12.0f)
+        [SAssignNew(Body, SVerticalBox)]];
     Rebuild();
 }
 
@@ -33,10 +36,10 @@ void STMOPControlsPanel::Rebuild()
     if (!Body.IsValid()) return;
     Body->ClearChildren();
     Body->AddSlot().AutoHeight().Padding(2.0f, 4.0f)
-    [ SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(
+    [ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).AutoWrapText(true).Text(FText::FromString(
         TEXT("Välj spelare och klicka på en bindning. Nästa tangent eller handkontrollsknapp sparas automatiskt. Samma tangent kan aldrig styra två tangentbordsspelare."))) ];
     Body->AddSlot().AutoHeight().Padding(2.0f, 4.0f)
-    [SNew(STextBlock).AutoWrapText(true).Text(FText::FromString(TEXT(
+    [SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).AutoWrapText(true).Text(FText::FromString(TEXT(
         "Handkontroll: extra sprint och separat tittzoom är från början obundna för att undvika dubbla handlingar. Frigör en knapp med × och bind den här. Vanlig sprint och föremålets sekundärhandling finns kvar.")))];
 
     TSharedRef<SUniformGridPanel> Players = SNew(SUniformGridPanel).SlotPadding(FMargin(4.0f));
@@ -56,12 +59,12 @@ void STMOPControlsPanel::Rebuild()
         ? Controls->GetProfile(SelectedPlayer) : FTMOPPlayerControlProfile();
     Body->AddSlot().AutoHeight().Padding(2.0f, 9.0f)
     [ SNew(SVerticalBox)
-      + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).Text(FText::FromString(TEXT("Kamera X-känslighet")))]
+      + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).Text(FText::FromString(TEXT("Kamera X-känslighet")))]
       + SVerticalBox::Slot().AutoHeight()[SNew(SSlider)
         .Value((P.LookSensitivityX - 0.1f) / 2.9f)
         .OnValueChanged_Lambda([this](float V) { UpdateCamera(TOptional<float>(0.1f + V * 2.9f),
             TOptional<float>(), TOptional<bool>(), TOptional<float>()); })]
-      + SVerticalBox::Slot().AutoHeight().Padding(0,5)[SNew(STextBlock).Text(FText::FromString(TEXT("Kamera Y-känslighet")))]
+      + SVerticalBox::Slot().AutoHeight().Padding(0,5)[SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).Text(FText::FromString(TEXT("Kamera Y-känslighet")))]
       + SVerticalBox::Slot().AutoHeight()[SNew(SSlider)
         .Value((P.LookSensitivityY - 0.1f) / 2.9f)
         .OnValueChanged_Lambda([this](float V) { UpdateCamera(TOptional<float>(),
@@ -71,8 +74,8 @@ void STMOPControlsPanel::Rebuild()
          .OnCheckStateChanged_Lambda([this](ECheckBoxState State)
             { UpdateCamera(TOptional<float>(), TOptional<float>(),
                 TOptional<bool>(State == ECheckBoxState::Checked), TOptional<float>()); })
-         [SNew(STextBlock).Text(FText::FromString(TEXT("Invertera kamera Y")))]]
-      + SVerticalBox::Slot().AutoHeight().Padding(0,5)[SNew(STextBlock).Text(FText::FromString(TEXT("Zoom-FOV (20–80°)")))]
+         [SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).Text(FText::FromString(TEXT("Invertera kamera Y")))]]
+      + SVerticalBox::Slot().AutoHeight().Padding(0,5)[SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).Text(FText::FromString(TEXT("Zoom-FOV (20–80°)")))]
       + SVerticalBox::Slot().AutoHeight()[SNew(SSlider)
         .Value((P.CameraZoomFov - 20.0f) / 60.0f)
         .OnValueChanged_Lambda([this](float V) { UpdateCamera(TOptional<float>(),
@@ -93,7 +96,8 @@ void STMOPControlsPanel::Rebuild()
         ETMOPControlAction::VehicleAccelerate, ETMOPControlAction::VehicleReverse,
         ETMOPControlAction::VehicleLeft, ETMOPControlAction::VehicleRight,
         ETMOPControlAction::VehicleBrake, ETMOPControlAction::VehicleHandbrake,
-        ETMOPControlAction::VehicleExit, ETMOPControlAction::VehicleHighSpeed });
+        ETMOPControlAction::VehicleExit, ETMOPControlAction::VehicleHighSpeed,
+        ETMOPControlAction::VehicleTakeover });
     AddActionSection(FText::FromString(TEXT("MENY / KARTA / INVENTARIE")), {
         ETMOPControlAction::Pause, ETMOPControlAction::WorldMap,
         ETMOPControlAction::QuickInventory, ETMOPControlAction::InventoryPrevious,
@@ -116,18 +120,18 @@ void STMOPControlsPanel::AddActionSection(const FText& Heading,
     std::initializer_list<ETMOPControlAction> Actions)
 {
     Body->AddSlot().AutoHeight().Padding(2.0f, 14.0f, 2.0f, 5.0f)
-    [ SNew(STextBlock).Text(Heading) ];
+    [ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).Text(Heading) ];
     for (const ETMOPControlAction Action : Actions)
         Body->AddSlot().AutoHeight().Padding(2.0f)
         [ SNew(SHorizontalBox)
-          + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
-            [SNew(STextBlock).Text(UTMOPControlSettingsSubsystem::GetActionDisplayName(Action))]
-          + SHorizontalBox::Slot().AutoWidth().Padding(3.0f)
-            [SNew(SBox).WidthOverride(180.0f)[SNew(SButton)
+          + SHorizontalBox::Slot().FillWidth(0.36f).VAlign(VAlign_Center)
+            [SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 14)).ColorAndOpacity(FLinearColor::White).AutoWrapText(true).Text(UTMOPControlSettingsSubsystem::GetActionDisplayName(Action))]
+          + SHorizontalBox::Slot().FillWidth(0.27f).Padding(3.0f)
+            [SNew(SBox).MinDesiredHeight(32.0f)[SNew(SButton)
               .Text_Lambda([this, Action]() { return BindingText(Action, false); })
               .OnClicked(this, &STMOPControlsPanel::BeginBinding, Action, false)]]
-          + SHorizontalBox::Slot().AutoWidth().Padding(3.0f)
-            [SNew(SBox).WidthOverride(180.0f)[SNew(SButton)
+          + SHorizontalBox::Slot().FillWidth(0.27f).Padding(3.0f)
+            [SNew(SBox).MinDesiredHeight(32.0f)[SNew(SButton)
               .Text_Lambda([this, Action]() { return BindingText(Action, true); })
               .OnClicked(this, &STMOPControlsPanel::BeginBinding, Action, true)]]
           + SHorizontalBox::Slot().AutoWidth()

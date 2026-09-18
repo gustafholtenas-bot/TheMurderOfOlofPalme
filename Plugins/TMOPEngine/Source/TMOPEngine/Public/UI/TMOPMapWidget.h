@@ -27,6 +27,8 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|UI|Map")
     UTMOPMapComponent* GetMapComponent() const { return MapComponent; }
 
+    void SetEmbeddedInMenu(bool bEmbedded) { bEmbeddedInMenu = bEmbedded; }
+
     bool IsMinimap() const { return bMinimap; }
     float GetZoom() const;
     FVector2D GetViewCenterUV() const;
@@ -50,6 +52,7 @@ private:
     TObjectPtr<ATMOPPlayerCharacter> PlayerCharacter;
 
     bool bMinimap = false;
+    bool bEmbeddedInMenu = false;
     bool bShowPlaces = true;
     bool bShowObservations = true;
     bool bShowPolice = true;

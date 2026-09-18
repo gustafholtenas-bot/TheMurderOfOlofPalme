@@ -174,6 +174,10 @@ FTMOPPlayerControlProfile UTMOPControlSettingsSubsystem::MakeDefaultProfile(
     FTMOPPlayerControlProfile P;
     P.PlayerIndex = FMath::Clamp(PlayerIndex, 0, 3);
     P.Device = Device;
+    // A distinct on-foot action. Gamepads and keyboard player 2 can bind it
+    // explicitly without stealing an existing gameplay button.
+    AddBinding(P, ETMOPControlAction::VehicleTakeover,
+        Device == ETMOPControlDevice::KeyboardMouse && PlayerIndex == 0 ? EKeys::H : FKey());
     if (Device == ETMOPControlDevice::Gamepad)
     {
         AddBinding(P, ETMOPControlAction::MoveForward, EKeys::Gamepad_LeftY);
@@ -684,7 +688,14 @@ bool UTMOPControlSettingsSubsystem::LoadSettings()
         const auto Defaults = MakeDefaultProfile(P.PlayerIndex, P.Device);
         for (const auto& B : Defaults.Bindings)
             if (!P.Bindings.ContainsByPredicate([&B](const auto& Existing) { return Existing.Action == B.Action; }))
-                P.Bindings.Add(B);
+            {
+                auto Added = B;
+                if (B.Action == ETMOPControlAction::VehicleTakeover &&
+                    P.Bindings.ContainsByPredicate([&B](const auto& Existing) {
+                        return Existing.PrimaryKey == B.PrimaryKey || Existing.SecondaryKey == B.PrimaryKey; }))
+                    Added.PrimaryKey = FKey();
+                P.Bindings.Add(Added);
+            }
     };
     for (auto& P : Profiles) AddMissingActions(P);
     for (auto& P : DeviceProfiles) AddMissingActions(P);

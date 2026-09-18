@@ -11,6 +11,8 @@ class TMOPENGINE_API UTMOPVehicleInspectionComponent : public UTMOPInspectableCo
     GENERATED_BODY()
 public:
     UTMOPVehicleInspectionComponent();
+    static FVector GetVehicleAimPoint(const AActor* Vehicle);
+    virtual FVector GetInteractionLocation() const override;
     virtual bool HasReadableContent() const override;
     virtual FText GetInspectionTitle() const override;
     virtual FText GetInspectionText() const override;

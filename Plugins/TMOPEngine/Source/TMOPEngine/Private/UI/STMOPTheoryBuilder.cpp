@@ -240,6 +240,12 @@ void STMOPTheoryBuilder::Construct(const FArguments& Args)
     Player = Args._Player; Save = Args._OnSave;
     if (auto* P = Player.Get())
     {
+        if (P->TheoryTrees.IsEmpty())
+        {
+            auto Initial = TMOPTheory::CreateTemplate(0);
+            P->ActiveTheoryTreeId = Initial.Id;
+            P->TheoryTrees.Add(MoveTemp(Initial));
+        }
         P->SynchronizeTheoryShooters();
         if (!Tree() && !P->TheoryTrees.IsEmpty()) P->ActiveTheoryTreeId = P->TheoryTrees[0].Id;
     }
@@ -302,7 +308,7 @@ void STMOPTheoryBuilder::Construct(const FArguments& Args)
                 RememberField(TEXT("tree_title")); T->Title = Value; } })]
         + SVerticalBox::Slot().AutoHeight()[Toolbar]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 5)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("Dra rutor med vänster musknapp. Panorera med höger/mittknapp. Zooma med mushjulet. Klicka på en linje för att namnge eller ta bort den."))).AutoWrapText(true)]
+        [SNew(STextBlock).Text(FText::FromString(TEXT("Klicka på en ruta och välj en insamlad observation under trädet. Dra rutor med vänster musknapp. Panorera med höger/mittknapp. Zooma med mushjulet. Klicka på en linje för att namnge eller ta bort den."))).AutoWrapText(true)]
         + SVerticalBox::Slot().AutoHeight()
         [SNew(SBox).HeightOverride(510)[SAssignNew(Canvas, STMOPTheoryCanvas).Editor(SharedThis(this))]]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 6)

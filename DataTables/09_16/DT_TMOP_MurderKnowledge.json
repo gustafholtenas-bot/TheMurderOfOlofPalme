@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "KNOWLEDGE_LARSSON",
+    "Title": "Anders Larsson – uppgift om varning före mordet",
+    "Body": "WPU:s sammanställning uppger att Anders Larsson varnade Regeringskansliet för att Olof Palmes liv var i fara före mordet. Detta är en uppgift om en varning, inte ett fastställande av att Larsson kände till den faktiska mordplanen. Exakt datum och brevets ordalydelse behöver kontrolleras mot originalhandlingarna i avsnitt D4582.",
+    "Year": 0,
+    "Month": 0,
+    "Day": 0,
+    "bBeforeMurder": true,
+    "SortOrder": 10,
+    "DateNote": "Före mordet; exakt händelsedatum inte fastställt här.",
+    "EvidenceStatus": "Påstådd förhandskunskap – behöver primärkällkontroll",
+    "Source": "WPU, Anders Larsson; hänvisning till D4582.",
+    "SourceUrl": "https://wpu.nu/wiki/Anders_Larsson",
+    "bPublished": true
+  },
+  {
+    "Name": "KNOWLEDGE_STAHL",
+    "Title": "Bo Ragnar Ståhl – uppgiven informationskälla till Larsson",
+    "Body": "Enligt WPU:s sammanställning ska Larsson ha fått uppgiften om ett planerat attentat från Bo Ragnar Ståhl. Påståendet återges som en uppgiftskedja. Vem som ursprungligen sade vad, när det sades och om uppgiften hade verklig anknytning till mordet är inte fastställt i denna startpost.",
+    "Year": 0,
+    "Month": 0,
+    "Day": 0,
+    "bBeforeMurder": true,
+    "SortOrder": 20,
+    "DateNote": "Datum okänt. Listordningen anger inte vem som talade först.",
+    "EvidenceStatus": "Återgivet påstående – inte styrkt förhandskunskap",
+    "Source": "WPU, Anders Larsson; Bo Ragnar Ståhl anges som uppgiven källa.",
+    "SourceUrl": "https://wpu.nu/wiki/Anders_Larsson",
+    "bPublished": true
+  }
+]

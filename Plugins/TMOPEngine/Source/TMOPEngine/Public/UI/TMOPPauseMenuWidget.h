@@ -3,11 +3,13 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Research/TMOPTheoryTypes.h"
+#include "Research/TMOPChronologyTypes.h"
 #include "TMOPPauseMenuWidget.generated.h"
 
 class APlayerController;
 class ATMOPPlayerCharacter;
 class UDataTable;
+class UTMOPMapWidget;
 class UTMOPItemDefinition;
 class UTMOPNewspaperItemDefinition;
 class SEditableTextBox;
@@ -53,6 +55,8 @@ public:
     bool LoadQuickSave(const FString& SlotName);
     UFUNCTION(BlueprintCallable, Category="TMOP|UI|Pause")
     void OpenSettingsPage();
+    void OpenMapPage();
+    bool IsMapPage() const { return CurrentSection == ETMOPPauseHubSection::Map; }
     /** DT_TMOP_Uppslag_REGISTER. Assign the latest register in the HUD widget defaults. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Sources")
     TObjectPtr<UDataTable> UppslagTable;
@@ -65,12 +69,23 @@ public:
         meta=(TitleProperty="Title"))
     TArray<FTMOPTheoryInformationRow> TheoryInformationEntries = TMOPTheory::DefaultInformation();
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Chronology",
+        meta=(RequiredAssetDataTags="RowStructure=/Script/TMOPEngine.TMOPChronologyRow"))
+    TObjectPtr<UDataTable> MurderKnowledgeTable;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|Chronology",
+        meta=(RequiredAssetDataTags="RowStructure=/Script/TMOPEngine.TMOPChronologyRow"))
+    TObjectPtr<UDataTable> AfterMurderEventsTable;
+
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
     virtual FReply NativeOnKeyDown(const FGeometry& InGeometry,
         const FKeyEvent& InKeyEvent) override;
 
 private:
+    UPROPERTY(Transient)
+    TObjectPtr<UTMOPMapWidget> EmbeddedMapWidget;
+    void BuildMapPage();
+    void BuildChronologyPage(UDataTable* Table, bool bKnowledge);
     FReply HandleResumeClicked();
     FReply HandleSectionClicked(ETMOPPauseHubSection Section);
     FReply HandleSourceMainSectionClicked(FName MainSectionId);

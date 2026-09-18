@@ -72,7 +72,7 @@ public:
     virtual FText GetInspectionAction() const;
 
     UFUNCTION(BlueprintPure, Category="Inspection")
-    FVector GetInteractionLocation() const;
+    virtual FVector GetInteractionLocation() const;
 
     UFUNCTION(BlueprintPure, Category="Inspection|Indicator")
     FVector GetWorldIndicatorLocation() const;

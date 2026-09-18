@@ -1,16 +1,31 @@
 #include "World/TMOPVehicleInspectionComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Components/MeshComponent.h"
 #include "Observations/TMOPNotebookTypes.h"
 
 UTMOPVehicleInspectionComponent::UTMOPVehicleInspectionComponent()
 {
     bShowWorldIndicator = false;
 }
+FVector UTMOPVehicleInspectionComponent::GetVehicleAimPoint(const AActor* Vehicle)
+{
+    if (!IsValid(Vehicle)) return FVector::ZeroVector;
+    FBox Bounds(ForceInit);
+    TArray<UMeshComponent*> Meshes;
+    Vehicle->GetComponents<UMeshComponent>(Meshes);
+    for (const UMeshComponent* Mesh : Meshes)
+        if (IsValid(Mesh) && Mesh->IsRegistered() && Mesh->IsVisible())
+            Bounds += Mesh->Bounds.GetBox();
+    return Bounds.IsValid ? Bounds.GetCenter() : Vehicle->GetActorLocation();
+}
+FVector UTMOPVehicleInspectionComponent::GetInteractionLocation() const
+{
+    return GetVehicleAimPoint(GetOwner());
+}
 bool UTMOPVehicleInspectionComponent::HasReadableContent() const
 {
     const auto* Vehicle = Cast<ATMOPVehicleBase>(GetOwner());
-    return bInteractionEnabled && Vehicle && !Vehicle->VehicleId.IsNone() &&
-        TMOPNotebook::IsVehicleEligible(Vehicle->VehicleId.ToString(), Vehicle->VehicleCategoryId.ToString());
+    return bInteractionEnabled && IsValid(Vehicle);
 }
 FText UTMOPVehicleInspectionComponent::GetInspectionTitle() const
 {

@@ -247,6 +247,7 @@ void CopyAsset(const FTMOPAppearanceAssetRow& Asset,
     Out.StaticMesh = Asset.StaticMesh;
     Out.AttachmentSocket = Asset.AttachmentSocket;
     Out.AttachmentTransform = Asset.AttachmentTransform;
+    Out.HeadAccessoryFit = Asset.HeadAccessoryFit;
     Out.Material = Asset.Material;
     Out.PrimaryColor = Asset.DefaultPrimaryColor;
     Out.SecondaryColor = Asset.DefaultSecondaryColor;

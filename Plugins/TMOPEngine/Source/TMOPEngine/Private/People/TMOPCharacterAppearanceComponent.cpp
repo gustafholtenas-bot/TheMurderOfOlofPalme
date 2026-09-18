@@ -20,7 +20,9 @@
 
 UTMOPCharacterAppearanceComponent::UTMOPCharacterAppearanceComponent()
 {
-    PrimaryComponentTick.bCanEverTick = false;
+    PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.bStartWithTickEnabled = false;
+    PrimaryComponentTick.TickGroup = TG_PostPhysics;
     MaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
         "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple")));
     FemaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
@@ -32,6 +34,70 @@ void UTMOPCharacterAppearanceComponent::BeginPlay()
     Super::BeginPlay();
     if (ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner()))
         CacheBaseBodyTransform(Agent);
+}
+
+void UTMOPCharacterAppearanceComponent::ResetHeadAccessoryFit()
+{
+    SetComponentTickEnabled(false);
+    for (const FHeadFitBinding& Binding : HeadFitBindings)
+        if (USkeletalMeshComponent* Component = Binding.Component.Get())
+            Component->SetRelativeTransform(Binding.BaseTransform);
+    HeadFitBindings.Reset();
+}
+
+void UTMOPCharacterAppearanceComponent::ConfigureHeadAccessoryFit(
+    ATMOPHistoricalAgent* Agent)
+{
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return;
+    const FTMOPHeadAccessoryFit& Fit = ResolvedAppearance.Face.HeadAccessoryFit;
+    const auto Bind = [this, Agent](USkeletalMeshComponent* Component,
+        const FTransform& Correction)
+    {
+        if (!IsValid(Component) || !Component->IsVisible() || Correction.Equals(FTransform::Identity))
+            return;
+        // Leader-pose parts remain attached to the body root. Socket-attaching
+        // an already skinned mesh would apply the head animation twice.
+        if (Component->GetAttachParent() != Agent->BodyMesh ||
+            !Component->GetAttachSocketName().IsNone()) return;
+        FHeadFitBinding Binding;
+        Binding.Component = Component;
+        Binding.BaseTransform = Component->GetRelativeTransform();
+        Binding.Correction = Correction;
+        HeadFitBindings.Add(Binding);
+    };
+    Bind(Agent->HairMesh, Fit.HairOffset);
+    Bind(Agent->FacialHairMesh, Fit.FacialHairOffset);
+    Bind(Agent->HeadwearMesh, Fit.HeadwearOffset);
+    if (!HeadFitBindings.IsEmpty())
+    {
+        AddTickPrerequisiteComponent(Agent->BodyMesh);
+        SetComponentTickEnabled(true);
+        UpdateHeadAccessoryFit();
+    }
+}
+
+void UTMOPCharacterAppearanceComponent::UpdateHeadAccessoryFit()
+{
+    const ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return;
+    const FName Requested = ResolvedAppearance.Face.HeadAccessoryFit.HeadSocket;
+    const FName Pivot = Agent->BodyMesh->DoesSocketExist(Requested)
+        ? Requested : HeadwearFallbackBone;
+    if (!Agent->BodyMesh->DoesSocketExist(Pivot)) return;
+    const FTransform Head = Agent->BodyMesh->GetSocketTransform(Pivot, RTS_Component);
+    for (const FHeadFitBinding& Binding : HeadFitBindings)
+        if (USkeletalMeshComponent* Component = Binding.Component.Get())
+            // Convert the local fitting adjustment around the animated head
+            // back into body space. Always start at the original transform.
+            Component->SetRelativeTransform(Binding.BaseTransform * Head.Inverse() *
+                Binding.Correction * Head);
+}
+
+void UTMOPCharacterAppearanceComponent::TickComponent(float DeltaTime,
+    ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+    Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    UpdateHeadAccessoryFit();
 }
 
 UDataTable* UTMOPCharacterAppearanceComponent::ResolveAssetCatalog() const
@@ -66,6 +132,7 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
         if (bHasAppliedAppearance) return true;
     }
 
+    ResetHeadAccessoryFit();
     ClearHybridHead();
     CacheBaseBodyTransform(Agent);
     if (ProfileComponent->Profile.IsDogProfile())
@@ -147,6 +214,8 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     if (!bMetaHuman)
         ApplyFaceMorphs(Agent->FaceMesh, ResolvedAppearance.FaceMorphs);
     ApplyHybridHead(Agent);
+    if (!bMetaHuman && !bHybridHeadActive)
+        ConfigureHeadAccessoryFit(Agent);
     ApplyBodyRegionMask(Agent);
     ApplyCollisionAndPresentation(Agent,
         bMetaHuman && bPreserveMetaHumanBodyPlacement);
@@ -638,7 +707,8 @@ bool UTMOPCharacterAppearanceComponent::ApplyHeadwear(
     }
     Component->AttachToComponent(Agent->BodyMesh,
         FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
-    Component->SetRelativeTransform(Part.AttachmentTransform);
+    Component->SetRelativeTransform(Part.AttachmentTransform *
+        ResolvedAppearance.Face.HeadAccessoryFit.HeadwearOffset);
     Component->SetVisibility(true, true);
 
     if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
@@ -721,6 +791,7 @@ void UTMOPCharacterAppearanceComponent::ApplyPerformanceSettings(
 
 void UTMOPCharacterAppearanceComponent::ResetAppearance()
 {
+    ResetHeadAccessoryFit();
     ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
     if (!IsValid(Agent)) return;
     ClearHybridHead();

@@ -32,7 +32,8 @@ enum class ETMOPControlAction : uint8
     VehicleAccelerate, VehicleReverse, VehicleLeft, VehicleRight,
     VehicleBrake, VehicleHandbrake, VehicleExit, VehicleHighSpeed,
     MenuUp, MenuDown, MenuLeft, MenuRight, MenuConfirm,
-    MenuZoomIn, MenuZoomOut, MenuReset, MenuPreviousPage, MenuNextPage, MenuBack
+    MenuZoomIn, MenuZoomOut, MenuReset, MenuPreviousPage, MenuNextPage, MenuBack,
+    VehicleTakeover UMETA(DisplayName="Ta över fordon")
 };
 
 USTRUCT(BlueprintType)

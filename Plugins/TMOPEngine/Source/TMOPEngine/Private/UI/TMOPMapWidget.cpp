@@ -624,7 +624,7 @@ TSharedRef<SWidget> UTMOPMapWidget::RebuildWidget()
             [ SNew(SBox)
                 .WidthOverride_Lambda([this]() { return UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ? 165.0f : 290.0f; })
                 .HeightOverride_Lambda([this]() { return UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ? 165.0f : 290.0f; })[ Canvas ] ];
-    return TMOPFitLocalPanel(this, SNew(SOverlay)
+    TSharedRef<SWidget> FullMap = SNew(SOverlay)
         + SOverlay::Slot()[ Canvas ]
         + SOverlay::Slot().HAlign(HAlign_Right).VAlign(VAlign_Top).Padding(24.0f)
         [ SNew(STextBlock)
@@ -639,7 +639,9 @@ TSharedRef<SWidget> UTMOPMapWidget::RebuildWidget()
                 TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, FText::FromString(TEXT("Esc")))); })
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MapHint"),
                 FCoreStyle::GetDefaultFontStyle("Regular", 14)))
-            .ColorAndOpacity(FLinearColor::White) ]);
+            .AutoWrapText(true)
+            .ColorAndOpacity(FLinearColor::White) ];
+    return bEmbeddedInMenu ? FullMap : TMOPFitLocalPanel(this, FullMap);
 }
 
 void UTMOPMapWidget::SetMapVisible(const bool bVisible)
@@ -688,7 +690,11 @@ void UTMOPMapWidget::PanByPixels(const FVector2D PixelDelta, const FVector2D Vie
 
 void UTMOPMapWidget::RequestClose()
 {
-    if (IsValid(PlayerCharacter)) PlayerCharacter->CloseWorldMap();
+    if (IsValid(PlayerCharacter))
+    {
+        if (bEmbeddedInMenu) PlayerCharacter->SetPauseMenuOpen(false);
+        else PlayerCharacter->CloseWorldMap();
+    }
 }
 
 void UTMOPMapWidget::ToggleMapFilter(const int32 FilterIndex)

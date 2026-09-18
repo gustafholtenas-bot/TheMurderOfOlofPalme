@@ -60,6 +60,7 @@
 #include "Vehicles/TMOPVehicleBase.h"
 #include "Vehicles/TMOPVehicleSeatComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -558,13 +559,11 @@ void ATMOPPlayerCharacter::InputInteract()
     }
     AActor* InformationTarget = FindInformationTarget();
     AActor* Target = FindInteractionTargetForInformation(InformationTarget);
-    // Green observed vehicles have the same collect-on-close interaction as
-    // observed people. Ordinary vehicles keep their existing boarding action.
+    // E always opens the aimed vehicle dossier; only eligible observed cars
+    // are collected on close. Boarding has its own control action.
     ATMOPVehicleBase* ObservedVehicle = Cast<ATMOPVehicleBase>(InformationTarget);
     if (!ObservedVehicle) ObservedVehicle = Cast<ATMOPVehicleBase>(Target);
-    if (ObservedVehicle && !ObservedVehicle->VehicleId.IsNone() &&
-        TMOPNotebook::IsVehicleEligible(ObservedVehicle->VehicleId.ToString(),
-            ObservedVehicle->VehicleCategoryId.ToString()))
+    if (ObservedVehicle)
     {
         auto* Inspection = ObservedVehicle->FindComponentByClass<UTMOPInspectableComponent>();
         if (!Inspection)
@@ -605,24 +604,22 @@ void ATMOPPlayerCharacter::InputInteract()
         ITMOPInteractable::Execute_Interact(Target, this);
         return;
     }
-    if (ATMOPVehicleBase* Vehicle = Cast<ATMOPVehicleBase>(Target))
-    {
-        if (IsValid(VehicleSession.Get()))
-        {
-            const ETMOPVehicleTakeoverResult Result =
-                VehicleSession->EnterVehicle(Vehicle, true);
-            if (Result == ETMOPVehicleTakeoverResult::SuccessEmptySeat ||
-                Result == ETMOPVehicleTakeoverResult::SuccessDriverRemoved) return;
-        }
-        return;
-    }
-    if (IsValid(VehicleSession.Get()))
-    {
-        const ETMOPVehicleTakeoverResult Result = VehicleSession->EnterNearestVehicle(true);
-        if (Result == ETMOPVehicleTakeoverResult::SuccessEmptySeat ||
-            Result == ETMOPVehicleTakeoverResult::SuccessDriverRemoved) return;
-    }
     PlayerActions->StartAction(ETMOPPlayerAction::Interact, Target, 0.35f, false);
+}
+
+float ATMOPPlayerCharacter::GetInspectionDistance(const UTMOPInspectableComponent* Inspection) const
+{
+    return IsValid(Inspection) && Inspection->GetOwner()->IsA<ATMOPVehicleBase>()
+        ? TargetInformationDistance : InteractionDistance;
+}
+
+void ATMOPPlayerCharacter::InputVehicleTakeover()
+{
+    if (!bGameplayHUDVisible || IsSessionGameplayBlocked() || bPauseMenuOpen ||
+        InventoryInput->bRadialMenuOpen || !IsValid(VehicleSession) || VehicleSession->IsInVehicle()) return;
+    if (auto* Vehicle = Cast<ATMOPVehicleBase>(FindInformationTarget()))
+        if (FVector::DistSquared(GetActorLocation(), Vehicle->GetActorLocation()) <= FMath::Square(InteractionDistance))
+            VehicleSession->EnterVehicle(Vehicle, true);
 }
 
 void ATMOPPlayerCharacter::InputDropEquippedItem()
@@ -1040,6 +1037,43 @@ void ATMOPPlayerCharacter::UpdateGameplayHUDVisibility()
         }
     }
 
+    // AHUD::ShowHUD does not hide UMG widgets added separately by Blueprint.
+    // WBP_TMOPHUD is the project's watch/clock HUD (including subclasses).
+    if (!bGameplayHUDVisible)
+    {
+        TArray<UUserWidget*> Widgets;
+        UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, Widgets,
+            UUserWidget::StaticClass(), true);
+        APlayerController* OwnerPC = Cast<APlayerController>(Controller);
+        for (UUserWidget* Widget : Widgets)
+        {
+            if (!IsValid(Widget) || !IsValid(OwnerPC)) continue;
+            if (Widget->GetOwningPlayer() != OwnerPC &&
+                (Widget->GetOwningPlayer() != nullptr ||
+                 UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this))) continue;
+            bool bIsGameplayHUD = false;
+            for (UClass* Class = Widget->GetClass(); Class; Class = Class->GetSuperClass())
+                if (Class->GetFName() == FName(TEXT("WBP_TMOPHUD_C")))
+                {
+                    bIsGameplayHUD = true;
+                    break;
+                }
+            if (!bIsGameplayHUD) continue;
+            const TWeakObjectPtr<UUserWidget> Key(Widget);
+            if (!HiddenGameplayWidgetVisibilities.Contains(Key))
+                HiddenGameplayWidgetVisibilities.Add(Key,
+                    static_cast<uint8>(Widget->GetVisibility()));
+            Widget->SetVisibility(ESlateVisibility::Collapsed);
+        }
+    }
+    else
+    {
+        for (const auto& Entry : HiddenGameplayWidgetVisibilities)
+            if (UUserWidget* Widget = Entry.Key.Get())
+                Widget->SetVisibility(static_cast<ESlateVisibility>(Entry.Value));
+        HiddenGameplayWidgetVisibilities.Reset();
+    }
+
     if (bVisibilityChanged)
         OnGameplayHUDVisibilityChanged(bGameplayHUDVisible);
 }
@@ -1061,6 +1095,14 @@ void ATMOPPlayerCharacter::HandleItemMenuRequested(
 
 bool ATMOPPlayerCharacter::OpenWorldMap()
 {
+    if (IsValid(PauseMenuWidget) && !bLoopEndMenuOpen && !bNewspaperOpen &&
+        (bGameplayHUDVisible || bPauseMenuOpen))
+    {
+        SetPauseMenuOpen(true);
+        if (!bPauseMenuOpen) return false;
+        PauseMenuWidget->OpenMapPage();
+        return true;
+    }
     if (bLoopEndMenuOpen || !bGameplayHUDVisible || bWorldMapOpen || bPauseMenuOpen || bNewspaperOpen ||
         !IsValid(WorldMapWidget.Get())) return false;
     if (bDialogOpen) ClosePersonDialog();
@@ -1088,6 +1130,11 @@ bool ATMOPPlayerCharacter::OpenWorldMap()
 
 void ATMOPPlayerCharacter::CloseWorldMap()
 {
+    if (bPauseMenuOpen && IsValid(PauseMenuWidget) && PauseMenuWidget->IsMapPage())
+    {
+        SetPauseMenuOpen(false);
+        return;
+    }
     if (!bWorldMapOpen) return;
     bWorldMapOpen = false;
     if (IsValid(WorldMapWidget.Get())) WorldMapWidget->SetMapVisible(false);
@@ -1107,7 +1154,7 @@ void ATMOPPlayerCharacter::CloseWorldMap()
 
 void ATMOPPlayerCharacter::ToggleWorldMap()
 {
-    if (bWorldMapOpen) CloseWorldMap();
+    if (bWorldMapOpen || (bPauseMenuOpen && IsValid(PauseMenuWidget) && PauseMenuWidget->IsMapPage())) CloseWorldMap();
     else OpenWorldMap();
 }
 
@@ -1323,6 +1370,7 @@ void ATMOPPlayerCharacter::ProcessControlProfileInput(const float DeltaSeconds)
         if (Pressed(ETMOPControlAction::Jump)) InputJumpStarted();
         if (Released(ETMOPControlAction::Jump)) InputJumpEnded();
         if (Pressed(ETMOPControlAction::Interact)) InputInteract();
+        if (Pressed(ETMOPControlAction::VehicleTakeover)) InputVehicleTakeover();
         if (Pressed(ETMOPControlAction::PrimaryAction)) InputPrimaryAction();
         if (Pressed(ETMOPControlAction::SecondaryAction)) InputSecondaryActionStarted();
         if (Released(ETMOPControlAction::SecondaryAction)) InputSecondaryActionEnded();
@@ -1384,6 +1432,8 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     if (bDialogOpen && !ActiveDialogAgent.IsValid()) ClosePersonDialog();
     if (bAgentInfoChartOpen && !ActiveCloseUpAgent.IsValid()) CloseAgentInfoChart();
     if (bUseControlProfiles) ProcessControlProfileInput(DeltaSeconds);
+    else if (APlayerController* PC = Cast<APlayerController>(Controller))
+        if (PC->WasInputKeyJustPressed(VehicleTakeoverFallbackKey)) InputVehicleTakeover();
     if (UGameplayStatics::IsGamePaused(this))
     {
         GetCharacterMovement()->StopMovementImmediately();
@@ -1393,7 +1443,7 @@ void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
     if (bAddressDirectoryOpen && (!ActiveInspection.IsValid() ||
         !ActiveInspection->HasReadableContent() ||
         FVector::DistSquared(GetActorLocation(), ActiveInspection->GetInteractionLocation()) >
-            FMath::Square(InteractionDistance + 100.0f)))
+            FMath::Square(GetInspectionDistance(ActiveInspection.Get()) + 100.0f)))
         CloseAddressDirectory();
     if (bDialogOpen || bAgentInfoChartOpen) UpdateDialogCloseUp(DeltaSeconds);
     if (!bPlayerInterfaceInitialized) InitializePlayerInterface();
@@ -1559,12 +1609,13 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             FVector BoundsExtent;
             InformationTarget->GetActorBounds(
                 false, BoundsOrigin, BoundsExtent, true);
-            FVector MarkerWorldLocation = BoundsOrigin;
+            FVector MarkerWorldLocation = InformationTarget->IsA<ATMOPVehicleBase>()
+                ? UTMOPVehicleInspectionComponent::GetVehicleAimPoint(InformationTarget) : BoundsOrigin;
             if (const auto* Inspection = InformationTarget->FindComponentByClass<UTMOPInspectableComponent>())
                 MarkerWorldLocation = Inspection->GetInteractionLocation();
-            if (InformationTarget->IsA<ATMOPHistoricalAgent>())
-                MarkerWorldLocation.Z += BoundsExtent.Z *
-                    PersonTargetMarkerHeightFraction;
+            if (const auto* Agent = Cast<ATMOPHistoricalAgent>(InformationTarget))
+                if (IsValid(Agent->BodyMesh) && Agent->BodyMesh->DoesSocketExist(TEXT("head")))
+                    MarkerWorldLocation = Agent->BodyMesh->GetSocketLocation(TEXT("head"));
 
             APlayerController* PlayerController =
                 Cast<APlayerController>(Controller);
@@ -1605,7 +1656,7 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             ? InformationTarget->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
         {
             Target = Inspection->HasReadableContent() && FVector::DistSquared(
-                GetActorLocation(), Inspection->GetInteractionLocation()) <= FMath::Square(InteractionDistance)
+                GetActorLocation(), Inspection->GetInteractionLocation()) <= FMath::Square(GetInspectionDistance(Inspection))
                 ? InformationTarget : nullptr;
             if (!Target) TargetDetails = NSLOCTEXT("TMOP", "AddressTooFar", "Gå närmare för att läsa");
         }
@@ -1618,9 +1669,7 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
                 NSLOCTEXT("TMOP", "InspectPerson", "Visa personakt: {0}"), Name);
         }
         else if (const auto* Vehicle = Cast<ATMOPVehicleBase>(Target))
-            Prompt = TMOPNotebook::IsVehicleEligible(Vehicle->VehicleId.ToString(), Vehicle->VehicleCategoryId.ToString())
-                ? NSLOCTEXT("TMOP", "InspectObservedCar", "Visa fordonsakt")
-                : NSLOCTEXT("TMOP", "EnterTargetVehicle", "Hoppa in");
+            Prompt = NSLOCTEXT("TMOP", "InspectObservedCar", "Visa fordonsakt");
         else if (const auto* Inspection = IsValid(Target)
             ? Target->FindComponentByClass<UTMOPInspectableComponent>() : nullptr)
             Prompt = Inspection->GetInspectionAction();
@@ -1652,7 +1701,7 @@ bool ATMOPPlayerCharacter::OpenInformation(UTMOPInspectableComponent* Inspection
         bDialogOpen || bAgentInfoChartOpen || !bGameplayHUDVisible ||
         (IsValid(VehicleSession.Get()) && VehicleSession->IsInVehicle()) ||
         FVector::DistSquared(GetActorLocation(), Inspection->GetInteractionLocation()) >
-            FMath::Square(InteractionDistance) ||
+            FMath::Square(GetInspectionDistance(Inspection)) ||
         !Inspection->IsVisibleFrom(Camera->GetComponentLocation(), this)) return false;
 
     if (!IsValid(AddressDirectoryWidget.Get()))
@@ -2208,100 +2257,15 @@ AActor* ATMOPPlayerCharacter::FindInteractionTarget() const
 
 AActor* ATMOPPlayerCharacter::FindInteractionTargetForInformation(AActor* InformationTarget) const
 {
-    UCameraComponent* Camera = GetGameplayCamera();
-    if (!IsValid(Camera) || GetWorld() == nullptr) return nullptr;
-    // Readable-point interaction range is measured from the player, not the trailing camera.
-    if (AActor* Hovered = InformationTarget)
-        if (const auto* Inspection = Hovered->FindComponentByClass<UTMOPInspectableComponent>())
-            return Inspection->HasReadableContent() && FVector::DistSquared(GetActorLocation(),
-                Inspection->GetInteractionLocation()) <= FMath::Square(InteractionDistance)
-                ? Hovered : nullptr;
-    const FVector Start = Camera->GetComponentLocation();
-    const FVector Forward = Camera->GetForwardVector();
-    FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInteraction), false, this);
-    FCollisionObjectQueryParams ObjectTypes;
-    ObjectTypes.AddObjectTypesToQuery(ECC_Pawn);
-    ObjectTypes.AddObjectTypesToQuery(ECC_WorldDynamic);
-    ObjectTypes.AddObjectTypesToQuery(ECC_PhysicsBody);
-
-    TArray<FOverlapResult> Overlaps;
-    GetWorld()->OverlapMultiByObjectType(Overlaps, Start, FQuat::Identity,
-        ObjectTypes, FCollisionShape::MakeSphere(InteractionDistance), Params);
-
-    TArray<AActor*> Candidates;
-    for (const FOverlapResult& Overlap : Overlaps)
-    {
-        AActor* OverlapActor = Overlap.GetActor();
-        if (!IsValid(OverlapActor)) continue;
-        Candidates.Add(OverlapActor);
-        if (const ATMOPVehicleBase* Vehicle = Cast<ATMOPVehicleBase>(OverlapActor))
-            for (const UTMOPVehicleSeatComponent* Seat : Vehicle->GetVehicleSeats())
-                if (IsValid(Seat) && IsValid(Seat->GetOccupantCharacter()))
-                    Candidates.Add(Seat->GetOccupantCharacter());
-    }
-
-    AActor* BestTarget = nullptr;
-    float BestScore = TNumericLimits<float>::Max();
-    TSet<AActor*> TestedActors;
-    for (AActor* Candidate : Candidates)
-    {
-        if (!IsValid(Candidate) || Candidate == this || TestedActors.Contains(Candidate))
-            continue;
-        TestedActors.Add(Candidate);
-
-        const bool bAgent = Candidate->IsA<ATMOPHistoricalAgent>();
-        const bool bVehicle = Candidate->IsA<ATMOPVehicleBase>();
-        const bool bInteractable = Candidate->GetClass()->ImplementsInterface(
-            UTMOPInteractable::StaticClass());
-        if (!bAgent && !bVehicle && !bInteractable) continue;
-
-        FVector BoundsOrigin;
-        FVector BoundsExtent;
-        Candidate->GetActorBounds(false, BoundsOrigin, BoundsExtent, true);
-        FVector AimPoint = BoundsOrigin;
-        if (bAgent) AimPoint.Z += BoundsExtent.Z * 0.35f;
-
-        const FVector ToTarget = AimPoint - Start;
-        const float ForwardDistance = FVector::DotProduct(ToTarget, Forward);
-        if (ForwardDistance <= 1.0f || ForwardDistance > InteractionDistance) continue;
-        const float PerpendicularDistance =
-            (ToTarget - Forward * ForwardDistance).Size();
-        const float AngleDegrees = FMath::RadiansToDegrees(
-            FMath::Atan2(PerpendicularDistance, ForwardDistance));
-        const float AllowedAngle = bVehicle
-            ? VehicleTargetConeDegrees : InteractionTargetConeDegrees;
-        if (AngleDegrees > AllowedAngle) continue;
-
-        FHitResult VisibilityHit;
-        FCollisionQueryParams VisibilityParams(
-            SCENE_QUERY_STAT(TMOPPlayerInteractionVisibility), false, this);
-        const bool bBlocked = GetWorld()->LineTraceSingleByChannel(
-            VisibilityHit, Start, AimPoint, ECC_Visibility, VisibilityParams);
-        bool bVisible = !bBlocked || VisibilityHit.GetActor() == Candidate;
-        if (!bVisible && bAgent && IsValid(VisibilityHit.GetActor()) &&
-            VisibilityHit.GetActor()->IsA<ATMOPVehicleBase>())
-        {
-            FVector VehicleOrigin;
-            FVector VehicleExtent;
-            VisibilityHit.GetActor()->GetActorBounds(
-                false, VehicleOrigin, VehicleExtent, true);
-            const FBox ExpandedVehicleBounds(
-                VehicleOrigin - VehicleExtent * 1.25f,
-                VehicleOrigin + VehicleExtent * 1.25f);
-            bVisible = Candidate->GetAttachParentActor() == VisibilityHit.GetActor() ||
-                ExpandedVehicleBounds.IsInsideOrOn(AimPoint);
-        }
-        if (!bVisible) continue;
-
-        const float Score = AngleDegrees / FMath::Max(AllowedAngle, 0.1f) +
-            ForwardDistance / FMath::Max(InteractionDistance, 1.0f) * 0.04f;
-        if (Score < BestScore)
-        {
-            BestScore = Score;
-            BestTarget = Candidate;
-        }
-    }
-    return BestTarget;
+    if (!IsValid(InformationTarget)) return nullptr;
+    const bool bDossier = InformationTarget->IsA<ATMOPHistoricalAgent>() ||
+        InformationTarget->IsA<ATMOPVehicleBase>();
+    const float Range = bDossier ? TargetInformationDistance : InteractionDistance;
+    FVector Point = InformationTarget->GetActorLocation();
+    if (const auto* Inspection = InformationTarget->FindComponentByClass<UTMOPInspectableComponent>())
+        Point = Inspection->GetInteractionLocation();
+    return FVector::DistSquared(GetActorLocation(), Point) <= FMath::Square(Range)
+        ? InformationTarget : nullptr;
 }
 
 AActor* ATMOPPlayerCharacter::FindInformationTarget() const
@@ -2312,7 +2276,6 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
     const FVector CameraLocation = Camera->GetComponentLocation();
     const FVector CameraForward = Camera->GetForwardVector();
     const FVector CharacterLocation = GetActorLocation();
-    const FVector CharacterForward = GetActorForwardVector();
     FCollisionQueryParams Params(SCENE_QUERY_STAT(TMOPPlayerInformationTarget),
         false, this);
     FCollisionObjectQueryParams ObjectTypes;
@@ -2337,6 +2300,13 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
                     Candidates.AddUnique(Seat->GetOccupantCharacter());
     }
 
+    for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
+        if (!It->IsHidden() && FVector::DistSquared(CharacterLocation, It->GetActorLocation()) <= FMath::Square(TargetInformationDistance))
+            Candidates.AddUnique(*It);
+    for (TActorIterator<ATMOPVehicleBase> It(GetWorld()); It; ++It)
+        if (!It->IsHidden() && FVector::DistSquared(CharacterLocation, It->GetActorLocation()) <= FMath::Square(TargetInformationDistance))
+            Candidates.AddUnique(*It);
+
     // Address/information anchors are logical points and may deliberately have
     // no authored collision. Their shared registry makes targeting independent
     // of the owning actor's collision setup.
@@ -2349,12 +2319,10 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
             Candidates.AddUnique(Inspection->GetOwner());
 
     AActor* BestDirectTarget = nullptr;
-    AActor* BestFallbackTarget = nullptr;
     float BestDirectScore = TNumericLimits<float>::Max();
-    float BestFallbackDistanceSquared = TNumericLimits<float>::Max();
     for (AActor* Candidate : Candidates)
     {
-        if (!IsValid(Candidate) || Candidate == this) continue;
+        if (!IsValid(Candidate) || Candidate == this || Candidate->IsHidden()) continue;
         const bool bSupportedTarget = Candidate->IsA<ATMOPHistoricalAgent>() ||
             Candidate->IsA<ATMOPVehicleBase>() || Candidate->IsA<ATMOPWorldItem>() ||
             Candidate->FindComponentByClass<UTMOPInspectableComponent>();
@@ -2366,14 +2334,23 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
         FVector BoundsExtent;
         Candidate->GetActorBounds(false, BoundsOrigin, BoundsExtent, true);
         FVector AimPoint = BoundsOrigin;
-        if (Candidate->IsA<ATMOPHistoricalAgent>())
-            AimPoint.Z += BoundsExtent.Z * 0.35f;
+        if (const auto* Agent = Cast<ATMOPHistoricalAgent>(Candidate))
+            if (IsValid(Agent->BodyMesh) && Agent->BodyMesh->DoesSocketExist(TEXT("head")))
+                AimPoint = Agent->BodyMesh->GetSocketLocation(TEXT("head"));
+        if (Candidate->IsA<ATMOPVehicleBase>())
+            AimPoint = UTMOPVehicleInspectionComponent::GetVehicleAimPoint(Candidate);
         if (Inspection) AimPoint = Inspection->GetInteractionLocation();
 
         const FVector CameraToTarget = AimPoint - CameraLocation;
         const float CameraDistance = CameraToTarget.Size();
         if (CameraDistance <= 1.0f || CameraDistance > TargetInformationDistance)
             continue;
+
+        const FVector CameraDirection = CameraToTarget / CameraDistance;
+        const float CameraDot = FVector::DotProduct(CameraForward, CameraDirection);
+        const float CameraAngle = FMath::RadiansToDegrees(
+            FMath::Acos(FMath::Clamp(CameraDot, -1.0f, 1.0f)));
+        if (CameraAngle > DirectTargetConeDegrees) continue;
 
         FHitResult VisibilityHit;
         FCollisionQueryParams VisibilityParams(
@@ -2388,15 +2365,9 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
             bVisible = Candidate->GetAttachParentActor() == VisibilityHit.GetActor();
         if (!bVisible) continue;
 
-        const FVector CameraDirection = CameraToTarget / CameraDistance;
-        const float CameraDot = FVector::DotProduct(CameraForward, CameraDirection);
-        const float CameraAngle = FMath::RadiansToDegrees(
-            FMath::Acos(FMath::Clamp(CameraDot, -1.0f, 1.0f)));
         if (CameraAngle <= DirectTargetConeDegrees)
         {
-            const float Score = CameraAngle /
-                FMath::Max(DirectTargetConeDegrees, 0.1f) +
-                CameraDistance / FMath::Max(TargetInformationDistance, 1.0f) * 0.05f;
+            const float Score = CameraAngle; // Distance must not override camera aim.
             if (Score < BestDirectScore)
             {
                 BestDirectScore = Score;
@@ -2404,22 +2375,9 @@ AActor* ATMOPPlayerCharacter::FindInformationTarget() const
             }
         }
 
-        if (!Inspection && bUseFrontHemisphereTargetFallback)
-        {
-            const FVector CharacterToTarget = AimPoint - CharacterLocation;
-            const float DistanceSquared = CharacterToTarget.SizeSquared();
-            if (DistanceSquared > 1.0f &&
-                FVector::DotProduct(CharacterForward,
-                    CharacterToTarget.GetSafeNormal()) >= 0.0f &&
-                DistanceSquared < BestFallbackDistanceSquared)
-            {
-                BestFallbackDistanceSquared = DistanceSquared;
-                BestFallbackTarget = Candidate;
-            }
-        }
     }
 
-    return IsValid(BestDirectTarget) ? BestDirectTarget : BestFallbackTarget;
+    return BestDirectTarget;
 }
 
 FText ATMOPPlayerCharacter::GetInteractKeyDisplayText() const

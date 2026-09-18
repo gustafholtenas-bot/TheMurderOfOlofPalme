@@ -46,6 +46,27 @@ enum class ETMOPAppearancePartType : uint8
     Glasses
 };
 
+/** Extra fitting stored on the FACE catalog row, in head/socket local space. */
+USTRUCT(BlueprintType)
+struct TMOPENGINE_API FTMOPHeadAccessoryFit
+{
+    GENERATED_BODY()
+
+    /** Pivot for skinned hair/beard corrections. This does not modify the skeleton. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Head Fit")
+    FName HeadSocket = TEXT("head");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Head Fit")
+    FTransform HairOffset = FTransform::Identity;
+
+    /** Additional adjustment in the hat's attachment socket space. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Head Fit")
+    FTransform HeadwearOffset = FTransform::Identity;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Head Fit")
+    FTransform FacialHairOffset = FTransform::Identity;
+};
+
 /** One selectable body, face or modular clothing asset. */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPAppearanceAssetRow : public FTableRowBase
@@ -74,6 +95,12 @@ struct TMOPENGINE_API FTMOPAppearanceAssetRow : public FTableRowBase
     /** Per-asset adjustment after snapping the static mesh to AttachmentSocket. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Attachment")
     FTransform AttachmentTransform = FTransform::Identity;
+
+    /** Edit on a Face row. Applied to every character using that resolved face. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Head Fit",
+        meta=(EditCondition="PartType==ETMOPAppearancePartType::Face", EditConditionHides))
+    FTMOPHeadAccessoryFit HeadAccessoryFit;
+
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<UMaterialInterface> Material;
@@ -145,6 +172,10 @@ struct TMOPENGINE_API FTMOPResolvedAppearancePart
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     FTransform AttachmentTransform = FTransform::Identity;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance|Head Fit")
+    FTMOPHeadAccessoryFit HeadAccessoryFit;
+
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     TSoftObjectPtr<UMaterialInterface> Material;

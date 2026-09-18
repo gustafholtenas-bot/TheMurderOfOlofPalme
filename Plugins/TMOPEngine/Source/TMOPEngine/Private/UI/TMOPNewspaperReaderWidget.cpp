@@ -1,6 +1,5 @@
 #include "UI/TMOPNewspaperReaderWidget.h"
 #include "UI/TMOPControlUIHelpers.h"
-#include "UI/TMOPLocalPanel.h"
 
 #include "InputCoreTypes.h"
 #include "Newspapers/TMOPNewspaperItemDefinition.h"
@@ -19,6 +18,10 @@ void UTMOPNewspaperReaderWidget::InitializeReader(
 {
     PlayerCharacter = InPlayerCharacter;
     SetIsFocusable(true);
+    SetAnchorsInViewport(FAnchors(0.0f, 0.0f, 1.0f, 1.0f));
+    SetAlignmentInViewport(FVector2D::ZeroVector);
+    SetPositionInViewport(FVector2D::ZeroVector, false);
+    SetDesiredSizeInViewport(FVector2D::ZeroVector);
 }
 
 bool UTMOPNewspaperReaderWidget::OpenNewspaper(
@@ -106,7 +109,7 @@ void UTMOPNewspaperReaderWidget::SetZoom(const float NewZoom)
 
 TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
 {
-    return TMOPFitLocalPanel(this, SNew(SBorder)
+    return SNew(SBorder)
         .BorderBackgroundColor(FLinearColor::Transparent)
         .Padding(18.0f)
         [
@@ -179,7 +182,7 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
                         FText::FromString(TEXT("E")))); })
                     .OnClicked_UObject(this, &UTMOPNewspaperReaderWidget::HandleNextClicked) ]
             ]
-        ]);
+        ];
 }
 
 FReply UTMOPNewspaperReaderWidget::PanPage(

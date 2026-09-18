@@ -281,6 +281,11 @@ void UTMOPPauseMenuWidget::InitializePauseMenu(APlayerController* InController,
     PlayerController = InController;
     PlayerCharacter = InCharacter;
     SetIsFocusable(true);
+    // Use the owning player's full viewport, not a centered desired-size slot.
+    SetAnchorsInViewport(FAnchors(0.0f, 0.0f, 1.0f, 1.0f));
+    SetAlignmentInViewport(FVector2D::ZeroVector);
+    SetPositionInViewport(FVector2D::ZeroVector, false);
+    SetDesiredSizeInViewport(FVector2D::ZeroVector);
 }
 
 void UTMOPPauseMenuWidget::SetMenuVisible(const bool bVisible)
@@ -368,7 +373,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
           .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
               TEXT("PauseMenuSectionTitle"), MenuColors.AccentText)) ]
         + SVerticalBox::Slot().FillHeight(1.0f)
-        [ SAssignNew(PageContentHost, SBox) ]
+        [ SAssignNew(PageContentHost, SBox).Clipping(EWidgetClipping::ClipToBounds) ]
         + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 14.0f, 0.0f, 0.0f)
         [ SAssignNew(StatusText, STextBlock)
           .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuStatus"),
@@ -389,27 +394,23 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
           [ SNew(SHorizontalBox)
             + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 24.0f, 0.0f)
             [ SNew(SBox).WidthOverride(340.0f)
-              [ SNew(SScrollBox) + SScrollBox::Slot()[NavigationPanel] ] ]
+              [ SNew(SVerticalBox)
+                + SVerticalBox::Slot().AutoHeight().Padding(3.0f, 0.0f, 3.0f, 12.0f)
+                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "PinnedResume", "FORTSÄTT SPELA / STÄNG"))
+                  .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked) ]
+                + SVerticalBox::Slot().FillHeight(1.0f)
+                [ SNew(SScrollBox) + SScrollBox::Slot()[NavigationPanel] ] ] ]
             + SHorizontalBox::Slot().FillWidth(1.0f)
             [ SNew(SBorder).BorderBackgroundColor(MenuColors.PanelBackground)
               .Padding(24.0f)[PagePanel] ] ] ];
     ShowSection(CurrentSection);
-    return TMOPFitLocalPanel(this, RootWidget);
+    // Constrain the desired size in singleplayer too: source cards must never
+    // push the navigation outside the viewport.
+    return TMOPFitLocalPanel(this, RootWidget, true);
 }
 
 FReply UTMOPPauseMenuWidget::HandleSectionClicked(const ETMOPPauseHubSection Section)
 {
-    if (Section == ETMOPPauseHubSection::Map)
-    {
-        // Open the exact same full-screen map as the M key. Close the pause
-        // hub first because OpenWorldMap intentionally rejects stacked menus.
-        if (IsValid(PlayerCharacter))
-        {
-            PlayerCharacter->SetPauseMenuOpen(false);
-            PlayerCharacter->OpenWorldMap();
-        }
-        return FReply::Handled();
-    }
     if (Section == ETMOPPauseHubSection::Sources)
     {
         SelectedSourceMainSection = NAME_None;
@@ -457,6 +458,7 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
     SetStatus(FText::GetEmpty());
     switch (Section)
     {
+    case ETMOPPauseHubSection::Map: BuildMapPage(); break;
     case ETMOPPauseHubSection::Inventory: BuildInventoryPage(); break;
     case ETMOPPauseHubSection::Evidence: BuildEvidencePage(); break;
     case ETMOPPauseHubSection::Sources: BuildSourcesPage(); break;
@@ -469,11 +471,11 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::MyObservations:
         BuildNotebookPage();
         break;
-    case ETMOPPauseHubSection::TheoryBuilder: BuildTheoryBuilderPage(); break;
-    case ETMOPPauseHubSection::Theories:
+    case ETMOPPauseHubSection::TheoryBuilder:
+    case ETMOPPauseHubSection::Theories: BuildTheoryBuilderPage(); break;
+    case ETMOPPauseHubSection::MurderKnowledge: BuildChronologyPage(MurderKnowledgeTable, true); break;
+    case ETMOPPauseHubSection::AfterMurderEvents: BuildChronologyPage(AfterMurderEventsTable, false); break;
     case ETMOPPauseHubSection::MurderDayMysteries:
-    case ETMOPPauseHubSection::MurderKnowledge:
-    case ETMOPPauseHubSection::AfterMurderEvents:
     case ETMOPPauseHubSection::WorldGroups:
     case ETMOPPauseHubSection::SwedenGroups:
         // Independent pages reserved for content specified later.
@@ -582,6 +584,64 @@ void UTMOPPauseMenuWidget::BuildTheoryBuilderPage()
         }
         if (!bAny) AddBody(NSLOCTEXT("TMOP", "TheoryNoInformation", "Inga uppgifter tillagda ännu."));
     }
+}
+
+void UTMOPPauseMenuWidget::BuildChronologyPage(UDataTable* Table, bool bKnowledge)
+{
+    // Optional conventional paths let the native menu work without a widget Blueprint.
+    if (!IsValid(Table))
+        Table = LoadObject<UDataTable>(nullptr, bKnowledge
+            ? TEXT("/Game/TMOP/Data/DT_TMOP_MurderKnowledge.DT_TMOP_MurderKnowledge")
+            : TEXT("/Game/TMOP/Data/DT_TMOP_AfterMurderEvents.DT_TMOP_AfterMurderEvents"));
+    if (!IsValid(Table) || Table->GetRowStruct() != FTMOPChronologyRow::StaticStruct())
+    {
+        AddBody(FText::FromString(TEXT("Ingen kronologilista är vald. Importera JSON som TMOPChronologyRow och välj tabellen under Pause → Chronology.")));
+        return;
+    }
+    TArray<FTMOPChronologyRow*> Rows;
+    Table->GetAllRows(TEXT("Menu chronology"), Rows);
+    Rows.RemoveAll([](const auto* R) { return !R || !R->bPublished || R->Title.IsEmpty(); });
+    const auto DateKey = [](const FTMOPChronologyRow& R) -> int64
+    {
+        const int64 Y = R.Year > 0 ? R.Year : 999999;
+        return Y * 10000 + (R.Month > 0 ? R.Month : 13) * 100 + (R.Day > 0 ? R.Day : 32);
+    };
+    Rows.StableSort([bKnowledge, &DateKey](const FTMOPChronologyRow& A, const FTMOPChronologyRow& B)
+    {
+        if (bKnowledge && A.bBeforeMurder != B.bBeforeMurder) return A.bBeforeMurder;
+        if (DateKey(A) != DateKey(B)) return DateKey(A) < DateKey(B);
+        if (A.SortOrder != B.SortOrder) return A.SortOrder < B.SortOrder;
+        return A.Title.ToString() < B.Title.ToString();
+    });
+    FString PreviousGroup;
+    for (const auto* R : Rows)
+    {
+        const FString Period = bKnowledge ? (R->bBeforeMurder ? TEXT("INNAN MORDET") : TEXT("EFTER MORDET")) : TEXT("");
+        const FString Year = R->Year > 0 ? FString::FromInt(R->Year) : TEXT("DATUM EJ FASTSTÄLLT");
+        const FString Group = Period + TEXT(" ") + Year;
+        if (Group != PreviousGroup)
+        {
+            AddHeading(FText::FromString(Group.TrimStartAndEnd()));
+            PreviousGroup = Group;
+        }
+        FString Date = R->Year > 0 ? FString::FromInt(R->Year) : TEXT("Datum ej fastställt");
+        if (R->Year > 0 && R->Month > 0) Date += FString::Printf(TEXT("-%02d"), R->Month);
+        if (R->Year > 0 && R->Month > 0 && R->Day > 0) Date += FString::Printf(TEXT("-%02d"), R->Day);
+        FString Details = Date;
+        if (!R->DateNote.IsEmpty()) Details += TEXT(" — ") + R->DateNote.ToString();
+        if (!R->EvidenceStatus.IsEmpty()) Details += TEXT("\n") + R->EvidenceStatus.ToString();
+        Details += TEXT("\n\n") + R->Body.ToString();
+        if (!R->Source.IsEmpty()) Details += TEXT("\n\nKälla: ") + R->Source.ToString();
+        if (!R->SourceUrl.IsEmpty()) Details += TEXT("\n") + R->SourceUrl;
+        ContentBox->AddSlot().AutoHeight().Padding(0, 5)
+        [ SNew(SExpandableArea).InitiallyCollapsed(true)
+            .HeaderContent()[SNew(STextBlock).Text(R->Title).AutoWrapText(true)
+                .Font(FCoreStyle::GetDefaultFontStyle("Regular", 18)).ColorAndOpacity(FLinearColor::White)]
+            .BodyContent()[SNew(STextBlock).Text(FText::FromString(Details)).AutoWrapText(true)
+                .Margin(FMargin(14, 10)).Font(FCoreStyle::GetDefaultFontStyle("Regular", 16))
+                .ColorAndOpacity(FLinearColor::White)] ];
+    }
+    if (Rows.IsEmpty()) AddBody(FText::FromString(TEXT("Inga publicerade poster ännu.")));
 }
 
 void UTMOPPauseMenuWidget::BuildSourcesPage()
@@ -743,12 +803,12 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             [ SNew(STextBlock).Text(FText::FromString(StatisticsForCoverage(Coverage)))
               .AutoWrapText(true) ];
         if (Card.bMainSection)
-            return SNew(SBox).MinDesiredWidth(230.0f).HeightOverride(220.0f)
+            return SNew(SBox).HeightOverride(220.0f)
                 [ SNew(SButton).ContentPadding(FMargin(14.0f))
                   .OnClicked_UObject(this,
                       &UTMOPPauseMenuWidget::HandleSourceMainSectionClicked, Card.Id)
                   [ CardContent ] ];
-        return SNew(SBox).MinDesiredWidth(230.0f).HeightOverride(220.0f)
+        return SNew(SBox).HeightOverride(220.0f)
             [ SNew(SButton).ContentPadding(FMargin(14.0f))
               .OnClicked_UObject(this,
                   &UTMOPPauseMenuWidget::HandleSourceSeriesClicked, Card.Id)
@@ -1337,10 +1397,34 @@ FReply UTMOPPauseMenuWidget::HandleToggleVSync()
     return FReply::Handled();
 }
 
+void UTMOPPauseMenuWidget::OpenMapPage()
+{
+    ShowSection(ETMOPPauseHubSection::Map);
+}
+
+void UTMOPPauseMenuWidget::BuildMapPage()
+{
+    if (!IsValid(PlayerCharacter) || !IsValid(PlayerCharacter->MapComponent))
+    {
+        AddBody(FText::FromString(TEXT("Kartkomponenten saknas.")));
+        return;
+    }
+    if (!IsValid(EmbeddedMapWidget))
+    {
+        EmbeddedMapWidget = CreateWidget<UTMOPMapWidget>(GetOwningPlayer());
+        if (!IsValid(EmbeddedMapWidget)) return;
+        EmbeddedMapWidget->InitializeMap(PlayerCharacter->MapComponent, PlayerCharacter, false);
+        EmbeddedMapWidget->SetEmbeddedInMenu(true);
+    }
+    EmbeddedMapWidget->SetMapVisible(true);
+    PageContentHost->SetContent(EmbeddedMapWidget->TakeWidget());
+}
+
 void UTMOPPauseMenuWidget::BuildControlsPage()
 {
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 8.0f)
-    [ SNew(STMOPControlsPanel).PlayerCharacter(PlayerCharacter) ];
+    PageContentHost->SetContent(SNew(SScrollBox)
+        + SScrollBox::Slot().Padding(2.0f, 8.0f)
+        [ SNew(STMOPControlsPanel).PlayerCharacter(PlayerCharacter) ]);
 }
 
 void UTMOPPauseMenuWidget::BuildSaveLoadPage()
@@ -1541,7 +1625,9 @@ FReply UTMOPPauseMenuWidget::HandleResumeClicked()
 FReply UTMOPPauseMenuWidget::NativeOnKeyDown(const FGeometry& Geometry,const FKeyEvent& Event)
 {
     const FKey Key=Event.GetKey();
-    const bool bProfileClose = TMOPMatchesControl(this, Key, ETMOPControlAction::Pause) ||
+    const bool bProfileClose = (IsMapPage() &&
+        TMOPMatchesControl(this, Key, ETMOPControlAction::WorldMap)) ||
+        TMOPMatchesControl(this, Key, ETMOPControlAction::Pause) ||
         TMOPMatchesControl(this, Key, ETMOPControlAction::Cancel) ||
         TMOPMatchesControl(this, Key, ETMOPControlAction::MenuBack);
     const bool bLegacyClose = !TMOPHasControlProfiles(this) &&

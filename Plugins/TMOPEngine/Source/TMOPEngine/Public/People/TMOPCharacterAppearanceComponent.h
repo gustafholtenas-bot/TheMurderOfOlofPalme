@@ -23,6 +23,8 @@ class TMOPENGINE_API UTMOPCharacterAppearanceComponent : public UActorComponent
 public:
     UTMOPCharacterAppearanceComponent();
     virtual void BeginPlay() override;
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+        FActorComponentTickFunction* ThisTickFunction) override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
     /** Optional per-agent catalog. Empty uses the registry's central table. */
@@ -117,6 +119,17 @@ public:
     bool ValidateAppearance(TArray<FString>& OutWarnings) const;
 
 private:
+    struct FHeadFitBinding
+    {
+        TWeakObjectPtr<USkeletalMeshComponent> Component;
+        FTransform BaseTransform;
+        FTransform Correction;
+    };
+    TArray<FHeadFitBinding> HeadFitBindings;
+    void ConfigureHeadAccessoryFit(ATMOPHistoricalAgent* Agent);
+    void UpdateHeadAccessoryFit();
+    void ResetHeadAccessoryFit();
+
     bool ApplyDogAppearance(ATMOPHistoricalAgent* Agent,
         const FTMOPPersonProfileRow& Profile);
     void HideHumanPresentation(ATMOPHistoricalAgent* Agent);

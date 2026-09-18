@@ -311,6 +311,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Input")
     FKey InteractFallbackKey = EKeys::E;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
+    FKey VehicleTakeoverFallbackKey = EKeys::H;
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> PrimaryAction;
 
@@ -484,9 +487,9 @@ public:
         meta=(ClampMin="1.0", ClampMax="45.0", Units="deg"))
     float DirectTargetConeDegrees = 10.0f;
 
-    /** If no direct target exists, use the nearest target in the character's front 180 degrees. */
+    /** Legacy setting retained for asset compatibility; camera-only targeting ignores it. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target")
-    bool bUseFrontHemisphereTargetFallback = true;
+    bool bUseFrontHemisphereTargetFallback = false;
 
     /** Vertical point inside a person's bounds used for the on-screen marker. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Target",
@@ -614,6 +617,8 @@ private:
     void InputSprintStarted();
     void InputSprintEnded();
     void InputInteract();
+    void InputVehicleTakeover();
+    float GetInspectionDistance(const UTMOPInspectableComponent* Inspection) const;
     void InputPrimaryAction();
     void InputSecondaryActionStarted();
     void InputSecondaryActionEnded();
@@ -667,6 +672,8 @@ private:
     uint64 AddressDirectoryClosedFrame = MAX_uint64;
     TWeakObjectPtr<UTMOPInspectableComponent> ActiveInspection;
     TSet<FName> GameplayHUDHiddenReasons;
+    // Weak references: do not keep removed Blueprint HUD widgets alive.
+    TMap<TWeakObjectPtr<UUserWidget>, uint8> HiddenGameplayWidgetVisibilities;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveDialogAgent;
     TWeakObjectPtr<ATMOPHistoricalAgent> ActiveCloseUpAgent;
     UPROPERTY(Transient)
