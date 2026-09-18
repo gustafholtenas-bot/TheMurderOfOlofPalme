@@ -612,7 +612,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Agent Info")
     void CloseAgentInfoChart();
 
-    bool InspectNotebookPerson(FName EntityId);
+    bool InspectNotebookPerson(FName EntityId, bool bFromMap = false);
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Player|UI|Newspaper")
     bool OpenNewspaper(UTMOPNewspaperItemDefinition* Newspaper);

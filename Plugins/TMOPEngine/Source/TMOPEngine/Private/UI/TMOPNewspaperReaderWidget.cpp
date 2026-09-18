@@ -1,5 +1,6 @@
 #include "UI/TMOPNewspaperReaderWidget.h"
 #include "UI/TMOPControlUIHelpers.h"
+#include "UI/TMOPLocalPanel.h"
 
 #include "InputCoreTypes.h"
 #include "Newspapers/TMOPNewspaperItemDefinition.h"
@@ -32,6 +33,16 @@ public:
     {
         // Input-only overlay: the newspaper is rendered as a world-space mesh.
         return LayerId;
+    }
+    virtual FReply OnMouseWheel(const FGeometry&, const FPointerEvent& Event) override
+    {
+        if (ATMOPPlayerCharacter* Owner = Player.Get())
+            if (IsValid(Owner) && IsValid(Owner->NewspaperReading))
+            {
+                Owner->NewspaperReading->Zoom(Event.GetWheelDelta());
+                return FReply::Handled();
+            }
+        return FReply::Unhandled();
     }
     virtual FReply OnMouseButtonDown(const FGeometry& G, const FPointerEvent& Event) override
     {
@@ -162,9 +173,9 @@ void UTMOPNewspaperReaderWidget::SetZoom(const float NewZoom)
 
 TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
 {
-    return SNew(SOverlay)
-        + SOverlay::Slot()
-        [ SNew(SNewspaperMouseSurface).Reader(this).Player_Lambda([this]() { return PlayerCharacter.Get(); }) ]
+    return TMOPFillLocalPanel(this, SNew(SOverlay)
+        + SOverlay::Slot().HAlign(HAlign_Fill).VAlign(VAlign_Fill)
+        [ SNew(SNewspaperMouseSurface).Visibility(EVisibility::Visible).Reader(this).Player_Lambda([this]() { return PlayerCharacter.Get(); }) ]
         + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Bottom).Padding(18)
         [ SNew(SScaleBox).Stretch(EStretch::ScaleToFit).StretchDirection(EStretchDirection::DownOnly)
           [ SNew(SBorder).BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
@@ -204,7 +215,7 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
               [ SNew(STextBlock).Text(NSLOCTEXT("TMOP","ReaderMouseHelp",
                   "Mushjul: zoom • Vänsterdrag: flytta • Högerdrag: rotera"))
                 .Font(FCoreStyle::GetDefaultFontStyle("Regular",12)).ColorAndOpacity(FLinearColor::White) ]
-            ] ] ];
+            ] ] ]);
 }
 
 FReply UTMOPNewspaperReaderWidget::PanPage(

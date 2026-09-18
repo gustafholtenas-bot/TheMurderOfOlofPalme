@@ -1959,14 +1959,26 @@ static FText TMOPInspectionTimeline(const FTMOPPersonProfileRow& Profile)
     return TimelineSummary;
 }
 
-bool ATMOPPlayerCharacter::InspectNotebookPerson(FName EntityId)
+bool ATMOPPlayerCharacter::InspectNotebookPerson(FName EntityId, bool bFromMap)
 {
     if (!bPauseMenuOpen || bAgentInfoChartOpen || !IsValid(AgentInfoChartWidget)) return false;
     auto* Saved = NotebookObservations.FindByPredicate([EntityId](const auto& O)
         { return O.EntityId == EntityId && O.Kind == ETMOPNotebookEntityKind::Person; });
     auto* Registry = GetGameInstance() ? GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>() : nullptr;
     FTMOPPersonProfileRow Profile;
-    if (!Saved || !Registry || !Registry->GetPersonProfile(EntityId, Profile)) return false;
+    if ((!Saved && !bFromMap) || !Registry || !Registry->GetPersonProfile(EntityId, Profile)) return false;
+    FTMOPNotebookObservation MapOnlyObservation;
+    if (!Saved)
+    {
+        MapOnlyObservation.EntityId = EntityId;
+        MapOnlyObservation.Kind = ETMOPNotebookEntityKind::Person;
+        if (const auto* Clock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>())
+        {
+            MapOnlyObservation.DiscoveredSecond = Clock->GetCurrentTime().ToSecondsFromMidnight();
+            MapOnlyObservation.LastObservedSecond = MapOnlyObservation.DiscoveredSecond;
+        }
+        Saved = &MapOnlyObservation;
+    }
     FTMOPNotebookPresentation::CollectLocations(*Saved, GetWorld());
     PendingNotebookObservation = FTMOPNotebookObservation();
     bAgentInfoFromNotebook = true;

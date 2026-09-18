@@ -223,13 +223,13 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
 {
     const auto SectionHeader = [this](const FText& Text)
     {
-        return SNew(STextBlock).Text(Text)
+        return SNew(STextBlock).Text(Text).AutoWrapText(true)
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoHeading"),
                 FCoreStyle::GetDefaultFontStyle("Bold", 17)))
             .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
                 TEXT("AgentInfoHeading"), FLinearColor(0.95f, 0.70f, 0.20f)));
     };
-    return TMOPFitLocalPanel(this, SNew(SOverlay)
+    return TMOPFillLocalPanel(this, SNew(SOverlay)
         + SOverlay::Slot().HAlign(HAlign_Fill).VAlign(VAlign_Fill)
         [ SAssignNew(MainPanel, SBorder)
           .Visibility(EVisibility::Collapsed)
@@ -287,6 +287,8 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                         &UTMOPAgentInfoChartWidget::HandleCloseClicked) ] ]
                 + SVerticalBox::Slot().FillHeight(1.0f)
                 [ SAssignNew(ScrollBox, SScrollBox)
+                  .ScrollBarAlwaysVisible(true)
+                  .Clipping(EWidgetClipping::ClipToBounds)
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoObservationHeader",
                       "OBSERVATIONER OCH FÖRHÖRSUPPGIFTER")) ]
@@ -295,7 +297,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.94f, 0.96f))
-                    .AutoWrapText(true).WrapTextAt(820.0f) ]
+                    .AutoWrapText(true) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoObserversHeader",
                       "OBSERVERAD AV")) ]
@@ -304,7 +306,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.55f, 0.92f, 0.63f))
-                    .AutoWrapText(true).WrapTextAt(820.0f) ]
+                    .AutoWrapText(true) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoPostMurderHeader",
                       "HÄNDELSER EFTER MORDET")) ]
@@ -313,7 +315,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.94f, 0.96f))
-                    .AutoWrapText(true).WrapTextAt(820.0f) ]
+                    .AutoWrapText(true) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoMapHeader", "OBSERVATIONSPLATSER")) ]
                   + SScrollBox::Slot().Padding(0, 0, 12, 8)
@@ -330,7 +332,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoBody"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 16)))
                     .ColorAndOpacity(FLinearColor(0.92f, 0.94f, 0.96f))
-                    .AutoWrapText(true).WrapTextAt(820.0f) ]
+                    .AutoWrapText(true) ]
                   + SScrollBox::Slot().Padding(0, 4, 12, 5)
                   [ SectionHeader(NSLOCTEXT("TMOP", "AgentInfoSourcesHeader",
                       "KÄLLOR")) ]
@@ -339,7 +341,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoSources"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 13)))
                     .ColorAndOpacity(FLinearColor(0.62f, 0.69f, 0.74f))
-                    .AutoWrapText(true).WrapTextAt(820.0f) ] ] ] ] ] ]);
+                    .AutoWrapText(true) ] ] ] ] ] ]);
 }
 
 FReply UTMOPAgentInfoChartWidget::NativeOnPreviewKeyDown(const FGeometry& Geometry, const FKeyEvent& Event)

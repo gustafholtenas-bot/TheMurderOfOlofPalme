@@ -164,6 +164,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
     FLinearColor PoliceMarkerColor = FLinearColor(0.15f, 0.45f, 1.0f, 1.0f);
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    bool bTrackWitnesses = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    TObjectPtr<UTexture2D> WitnessIcon;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking")
+    FLinearColor WitnessMarkerColor = FLinearColor(1.0f, 0.8f, 0.25f, 1.0f);
+
+    // 0 Olof, 1 observed, 2 police, 3 witnesses. Classification independent of filters.
+    struct FTrackedPerson { TWeakObjectPtr<ATMOPHistoricalAgent> Agent; int32 Group = 3; };
+    const TArray<FTrackedPerson>& GetTrackedPeople() const { return TrackedPeople; }
+    void GetWitnessMapLocations(TArray<FVector>& OutLocations) const;
+
     /** Agent classification is refreshed at this interval, not every frame. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Map|Live Tracking",
         meta=(ClampMin="1.0", ClampMax="30.0", Units="s"))
@@ -205,6 +219,7 @@ public:
     FVector2D GetTrackedMapDirection() const;
 
 private:
+    TArray<FTrackedPerson> TrackedPeople;
     void RefreshLiveTrackingCache();
     float LiveTrackingRefreshRemaining = 0.0f;
     bool bCachedOlofPalmeLocationValid = false;

@@ -4,6 +4,7 @@
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "EngineUtils.h"
+#include "People/TMOPPersonProfileComponent.h"
 
 namespace
 {
@@ -19,6 +20,12 @@ bool ClassifyVenue(const ATMOPHistoricalAnchor* Anchor,
 {
     if (!IsValid(Anchor)) return false;
     const FString AnchorId = Anchor->GetAnchorId().ToString();
+    FString CompactId = AnchorId.ToLower();
+    CompactId.ReplaceInline(TEXT("_"), TEXT(""));
+    CompactId.ReplaceInline(TEXT(" "), TEXT(""));
+    // A street address is not a church, even when a legacy category says Church.
+    if (CompactId.Contains(TEXT("adolfredrikskyrkogat")) ||
+        CompactId.Contains(TEXT("adolffredrikskyrkogat"))) return false;
     // Explicit special-place names win over broad legacy categories. This
     // keeps e.g. Hotel Karelia a hotel even if an older asset says Restaurant.
     if (ContainsAny(AnchorId, {TEXT("Bankomat"), TEXT("ATM")}))
@@ -29,7 +36,7 @@ bool ClassifyVenue(const ATMOPHistoricalAnchor* Anchor,
         TEXT("Busshållplats")}))
     { OutCategory = ETMOPMapMarkerCategory::BusStop; return true; }
     if (ContainsAny(AnchorId, {TEXT("Kyrka"), TEXT("Church"),
-        TEXT("AdolfFredrik"), TEXT("JohannesKyrka")}))
+        TEXT("AdolfFredriksKyrka"), TEXT("JohannesKyrka")}))
     { OutCategory = ETMOPMapMarkerCategory::Church; return true; }
     switch (Anchor->AnchorCategory)
     {
@@ -182,26 +189,38 @@ void UTMOPMapComponent::RefreshLiveTrackingCache()
     bCachedOlofPalmeLocationValid = false;
     CachedObservedPeopleLocations.Reset();
     CachedPoliceLocations.Reset();
-    if (GetWorld() == nullptr) return;
+    TrackedPeople.Reset();
+    if (!GetWorld()) return;
     for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
     {
         ATMOPHistoricalAgent* Agent = *It;
-        if (!IsValid(Agent) || !IsValid(Agent->EntityIdentity)) continue;
-        const FString EntityId = Agent->EntityIdentity->GetEntityId().ToString().ToUpper();
+        if (!IsValid(Agent) || !IsValid(Agent->EntityIdentity) || Agent->IsHidden()) continue;
+        if (IsValid(Agent->PersonProfile) && Agent->PersonProfile->bHasLoadedProfile &&
+            Agent->PersonProfile->Profile.IsDogProfile()) continue;
+        const FString Id = Agent->EntityIdentity->GetEntityId().ToString().ToUpper();
         const FString Category = Agent->PersonCategoryId.ToString().ToUpper();
-        if (Agent->EntityIdentity->GetEntityId() == OlofPalmeEntityId)
-        {
-            CachedOlofPalmeLocation = Agent->GetActorLocation();
-            bCachedOlofPalmeLocationValid = true;
-        }
-        if (Category.StartsWith(TEXT("OBSERVED_")) ||
-            EntityId.StartsWith(TEXT("OBSERVED_")))
-            CachedObservedPeopleLocations.Add(Agent->GetActorLocation());
-        if (Category == TEXT("POLICE") || Category == TEXT("POLIS") ||
-            Category.StartsWith(TEXT("POLICE_")) ||
-            Category.StartsWith(TEXT("POLIS_")))
-            CachedPoliceLocations.Add(Agent->GetActorLocation());
+        if (Category.Contains(TEXT("DOG")) || Category.Contains(TEXT("HUND"))) continue;
+        FTrackedPerson Person;
+        Person.Agent = Agent;
+        if (Agent->EntityIdentity->GetEntityId() == OlofPalmeEntityId) Person.Group = 0;
+        else if (Category == TEXT("POLICE") || Category == TEXT("POLIS") ||
+            Category.StartsWith(TEXT("POLICE_")) || Category.StartsWith(TEXT("POLIS_"))) Person.Group = 2;
+        else if (Category.StartsWith(TEXT("OBSERVED_")) || Id.StartsWith(TEXT("OBSERVED_"))) Person.Group = 1;
+        else Person.Group = 3;
+        TrackedPeople.Add(Person);
+        if (Person.Group == 0) { CachedOlofPalmeLocation = Agent->GetActorLocation(); bCachedOlofPalmeLocationValid = true; }
+        else if (Person.Group == 1) CachedObservedPeopleLocations.Add(Agent->GetActorLocation());
+        else if (Person.Group == 2) CachedPoliceLocations.Add(Agent->GetActorLocation());
     }
+}
+
+void UTMOPMapComponent::GetWitnessMapLocations(TArray<FVector>& OutLocations) const
+{
+    OutLocations.Reset();
+    if (!bTrackWitnesses) return;
+    for (const auto& Person : TrackedPeople)
+        if (Person.Group == 3 && Person.Agent.IsValid() && !Person.Agent->IsHidden())
+            OutLocations.Add(Person.Agent->GetActorLocation());
 }
 
 FVector2D UTMOPMapComponent::WorldToMapUV(const FVector WorldLocation) const
@@ -258,6 +277,15 @@ int32 UTMOPMapComponent::DiscoverVenueMarkers()
         ETMOPMapMarkerCategory Category = ETMOPMapMarkerCategory::Custom;
         int32 Priority = -1;
     };
+    // Remove only old auto-generated false church markers; preserve manual markers.
+    Markers.RemoveAll([](const FTMOPMapMarker& Marker)
+    {
+        FString Id = Marker.MarkerId.ToString().ToLower();
+        Id.ReplaceInline(TEXT("_"), TEXT(""));
+        Id.ReplaceInline(TEXT(" "), TEXT(""));
+        return Id.StartsWith(TEXT("venue")) && Marker.Category == ETMOPMapMarkerCategory::Church &&
+            (Id.Contains(TEXT("adolfredrikskyrkogat")) || Id.Contains(TEXT("adolffredrikskyrkogat")));
+    });
     TMap<FString, FCandidate> Venues;
     for (TActorIterator<ATMOPHistoricalAnchor> It(World); It; ++It)
     {
@@ -334,8 +362,10 @@ bool UTMOPMapComponent::GetOlofPalmeMapLocation(FVector& OutWorldLocation) const
 {
     if (!bTrackOlofPalme || !bCachedOlofPalmeLocationValid)
         return false;
-    OutWorldLocation = CachedOlofPalmeLocation;
-    return true;
+    for (const auto& P : TrackedPeople)
+        if (P.Group == 0 && P.Agent.IsValid() && !P.Agent->IsHidden())
+        { OutWorldLocation = P.Agent->GetActorLocation(); return true; }
+    return false;
 }
 
 void UTMOPMapComponent::GetObservedPersonMapLocations(
@@ -343,14 +373,16 @@ void UTMOPMapComponent::GetObservedPersonMapLocations(
 {
     OutLocations.Reset();
     if (!bTrackObservedPeople) return;
-    OutLocations = CachedObservedPeopleLocations;
+    for (const auto& P : TrackedPeople)
+        if (P.Group == 1 && P.Agent.IsValid() && !P.Agent->IsHidden()) OutLocations.Add(P.Agent->GetActorLocation());
 }
 
 void UTMOPMapComponent::GetPoliceMapLocations(TArray<FVector>& OutLocations) const
 {
     OutLocations.Reset();
     if (!bTrackPolice) return;
-    OutLocations = CachedPoliceLocations;
+    for (const auto& P : TrackedPeople)
+        if (P.Group == 2 && P.Agent.IsValid() && !P.Agent->IsHidden()) OutLocations.Add(P.Agent->GetActorLocation());
 }
 
 FVector UTMOPMapComponent::GetTrackedWorldLocation() const

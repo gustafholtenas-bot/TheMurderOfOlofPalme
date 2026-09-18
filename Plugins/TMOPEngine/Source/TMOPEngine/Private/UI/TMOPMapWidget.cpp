@@ -1,3 +1,5 @@
+#include "Agents/TMOPHistoricalAgent.h"
+#include "Entities/TMOPWorldEntityComponent.h"
 #include "UI/TMOPMapWidget.h"
 #include "UI/TMOPLocalPanel.h"
 
@@ -60,6 +62,7 @@ public:
         const FVector2D ViewSize = Geometry.GetLocalSize();
         const FSlateBrush* White = FCoreStyle::Get().GetBrush("WhiteBrush");
         const bool bFullMap = !Widget->IsMinimap();
+        PersonHits.Reset();
         const FVector2D ContentOrigin = bFullMap
             ? FVector2D(220.0f, 58.0f) : FVector2D::ZeroVector;
         const FVector2D ContentSize = bFullMap
@@ -262,6 +265,26 @@ public:
             }
             Layer += 2;
         };
+        if (!bFullMap || Widget->ShouldShowWitnesses())
+        {
+            TArray<FVector> WitnessLocations;
+            Map->GetWitnessMapLocations(WitnessLocations);
+            DrawTrackedAgents(WitnessLocations, Map->WitnessIcon,
+                Map->WitnessMarkerColor, FText::FromString(TEXT("V")), false);
+        }
+        for (const auto& Person : Map->GetTrackedPeople())
+        {
+            auto* Agent = Person.Agent.Get();
+            if (!IsValid(Agent) || Agent->IsHidden() || !IsValid(Agent->EntityIdentity)) continue;
+            const bool bShown = Person.Group == 0 ? Map->bTrackOlofPalme :
+                Person.Group == 1 ? Map->bTrackObservedPeople && (!bFullMap || Widget->ShouldShowObservations()) :
+                Person.Group == 2 ? Map->bTrackPolice && (!bFullMap || Widget->ShouldShowPolice()) :
+                Map->bTrackWitnesses && (!bFullMap || Widget->ShouldShowWitnesses());
+            if (!bShown) continue;
+            const FVector2D P = MapOrigin + ToDisplayUV(Map->WorldToMapUV(Agent->GetActorLocation())) * MapSize;
+            if (P.X < 0 || P.Y < 0 || P.X > ViewSize.X || P.Y > ViewSize.Y) continue;
+            PersonHits.Add({P, Agent->EntityIdentity->GetEntityId(), Agent->GetInGameDisplayName()});
+        }
         if (!bFullMap || Widget->ShouldShowObservations())
         {
             TArray<FVector> ObservedLocations;
@@ -339,6 +362,8 @@ public:
             Legend.Add({NSLOCTEXT("TMOP", "MapLegendPolice", "Polis"),
                 Map->PoliceTrackingIcon, Map->PoliceMarkerColor,
                 FText::FromString(TEXT("P"))});
+            Legend.Add({NSLOCTEXT("TMOP", "MapLegendWitness", "Vittnen"),
+                Map->WitnessIcon, Map->WitnessMarkerColor, FText::FromString(TEXT("V"))});
             Legend.Add({NSLOCTEXT("TMOP", "MapLegendPlayer", "Du – live"),
                 nullptr, FLinearColor(0.12f, 0.72f, 1.0f),
                 FText::FromString(TEXT("▲"))});
@@ -390,6 +415,7 @@ public:
             }
 
             LegendY += 16.0f;
+            FilterTop = LegendY;
             struct FFilterEntry
             {
                 FText Label;
@@ -401,7 +427,9 @@ public:
                 {NSLOCTEXT("TMOP", "MapFilterObservations", "Visa observationer"),
                     Widget->ShouldShowObservations()},
                 {NSLOCTEXT("TMOP", "MapFilterPolice", "Visa poliser"),
-                    Widget->ShouldShowPolice()}
+                    Widget->ShouldShowPolice()},
+                {NSLOCTEXT("TMOP", "MapFilterWitnesses", "Visa vittnen"),
+                    Widget->ShouldShowWitnesses()}
             };
             for (const FFilterEntry& Filter : Filters)
             {
@@ -483,18 +511,20 @@ public:
             const FVector2D WidgetPosition = Geometry.AbsoluteToLocal(
                 Event.GetScreenSpacePosition());
             constexpr float FilterX = 24.0f;
-            constexpr float FilterY = 472.0f;
+            const float FilterY = FilterTop;
             constexpr float FilterWidth = 190.0f;
             constexpr float FilterRowHeight = 28.0f;
             if (WidgetPosition.X >= FilterX && WidgetPosition.X <= FilterX + FilterWidth &&
                 WidgetPosition.Y >= FilterY &&
-                WidgetPosition.Y < FilterY + FilterRowHeight * 3.0f)
+                WidgetPosition.Y < FilterY + FilterRowHeight * 4.0f)
             {
                 const int32 FilterIndex = FMath::FloorToInt(
                     (WidgetPosition.Y - FilterY) / FilterRowHeight);
                 OwnerWidget->ToggleMapFilter(FilterIndex);
                 return FReply::Handled();
             }
+            PressPosition = Event.GetScreenSpacePosition();
+            bMovedSincePress = false;
             bDragging = true;
             LastMousePosition = Event.GetScreenSpacePosition();
             return FReply::Handled().CaptureMouse(SharedThis(this));
@@ -504,18 +534,25 @@ public:
 
     virtual FReply OnMouseMove(const FGeometry& Geometry, const FPointerEvent& Event) override
     {
-        if (!bDragging || !OwnerWidget.IsValid()) return FReply::Unhandled();
+        if (!OwnerWidget.IsValid() || OwnerWidget->IsMinimap()) return FReply::Unhandled();
+        const auto* Hit = FindPerson(Geometry.AbsoluteToLocal(Event.GetScreenSpacePosition()));
+        SetToolTipText(Hit ? Hit->Name : FText::GetEmpty());
+        if (!bDragging) return FReply::Unhandled();
+        if ((Event.GetScreenSpacePosition()-PressPosition).SizeSquared() > 25.0) bMovedSincePress = true;
         const FVector2D Position = Event.GetScreenSpacePosition();
         OwnerWidget->PanByPixels(Position - LastMousePosition, Geometry.GetLocalSize());
         LastMousePosition = Position;
         return FReply::Handled();
     }
 
-    virtual FReply OnMouseButtonUp(const FGeometry&, const FPointerEvent& Event) override
+    virtual FReply OnMouseButtonUp(const FGeometry& Geometry, const FPointerEvent& Event) override
     {
         if (Event.GetEffectingButton() == EKeys::LeftMouseButton && bDragging)
         {
             bDragging = false;
+            if (!bMovedSincePress && OwnerWidget.IsValid())
+                if (const auto* Hit = FindPerson(Geometry.AbsoluteToLocal(Event.GetScreenSpacePosition())))
+                    OwnerWidget->InspectMapPerson(Hit->Id);
             return FReply::Handled().ReleaseMouseCapture();
         }
         return FReply::Unhandled();
@@ -592,6 +629,23 @@ public:
     }
 
 private:
+    struct FPersonHit { FVector2D Position; FName Id; FText Name; };
+    mutable TArray<FPersonHit> PersonHits;
+    mutable float FilterTop = 499.0f;
+    FVector2D PressPosition = FVector2D::ZeroVector;
+    bool bMovedSincePress = false;
+    const FPersonHit* FindPerson(FVector2D P) const
+    {
+        if (P.X >= 24 && P.X <= 260 && P.Y >= 65 && P.Y <= FilterTop+112) return nullptr;
+        const FPersonHit* Best = nullptr;
+        double Distance = 144.0;
+        for (const auto& Hit : PersonHits)
+        {
+            const double D = (Hit.Position-P).SizeSquared();
+            if (D < Distance) { Distance = D; Best = &Hit; }
+        }
+        return Best;
+    }
     TWeakObjectPtr<UTMOPMapWidget> OwnerWidget;
     FSlateBrush* MapBrush = nullptr;
     bool bDragging = false;
@@ -704,7 +758,19 @@ void UTMOPMapWidget::ToggleMapFilter(const int32 FilterIndex)
     case 0: bShowPlaces = !bShowPlaces; break;
     case 1: bShowObservations = !bShowObservations; break;
     case 2: bShowPolice = !bShowPolice; break;
+    case 3: bShowWitnesses = !bShowWitnesses; break;
     default: return;
     }
     InvalidateLayoutAndVolatility();
+}
+
+bool UTMOPMapWidget::InspectMapPerson(FName EntityId)
+{
+    if (!IsValid(PlayerCharacter)) return false;
+    if (!PlayerCharacter->bPauseMenuOpen)
+    {
+        PlayerCharacter->CloseWorldMap();
+        PlayerCharacter->SetPauseMenuOpen(true);
+    }
+    return PlayerCharacter->InspectNotebookPerson(EntityId, true);
 }

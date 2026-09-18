@@ -38,6 +38,8 @@ public:
 
     bool ShouldShowPlaces() const { return bShowPlaces; }
     bool ShouldShowObservations() const { return bShowObservations; }
+    bool ShouldShowWitnesses() const { return bShowWitnesses; }
+    bool InspectMapPerson(FName EntityId);
     bool ShouldShowPolice() const { return bShowPolice; }
     void ToggleMapFilter(int32 FilterIndex);
 
@@ -56,6 +58,7 @@ private:
     bool bShowPlaces = true;
     bool bShowObservations = true;
     bool bShowPolice = true;
+    bool bShowWitnesses = true;
     float FullMapZoom = 1.0f;
     FVector2D FullMapCenterUV = FVector2D(0.5f, 0.5f);
     FSlateBrush MapBrush;
