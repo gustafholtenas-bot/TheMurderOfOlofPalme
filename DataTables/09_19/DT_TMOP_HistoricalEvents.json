@@ -1,0 +1,3402 @@
+[
+  {
+    "Name": "GRAND_3_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_3_PROGRAM_END_WITH_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"C64CB5F24BE69F2F558455A8C02CE337\", \"Reklamen efter Gå och see slutar\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_3_FILM_END_NO_CREDITS",
+    "MinimumDelaySeconds": 2,
+    "PreferredDelaySeconds": 2,
+    "MaximumDelaySeconds": 2,
+    "SourceId": "",
+    "Notes": "no credits"
+  },
+  {
+    "Name": "GRAND_3_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_3_FILM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"5D5F4E684DEADF039E5BF4969FD66403\", \"Gå och see slutar\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 25
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 4,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 5,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_1_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_1_FILM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"9A11D06E4156AF12F9A11CA18E98FF3F\", \"Bröderna mozart slutar \")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 4,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 6,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 9,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_1_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_1_PROGRAM_END_WITH_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"96C929C24BEEE33730DC6C85A447B7B0\", \"reklamen efter Bröderna mozart slutar \")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_1_FILM_END_NO_CREDITS",
+    "MinimumDelaySeconds": 130,
+    "PreferredDelaySeconds": 135,
+    "MaximumDelaySeconds": 150,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "PALME_ANNAE_AT_GRAND",
+    "EventId": "PALME_ANNAE_AT_GRAND",
+    "DisplayName": "",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_1_PROGRAM_END_WITH_CREDITS",
+    "MinimumDelaySeconds": 60,
+    "PreferredDelaySeconds": 65,
+    "MaximumDelaySeconds": 75,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "PALME_MARTEN_MEET_UP",
+    "EventId": "PALME_MARTEN_MEET_UP",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"PALME_MARTEN_MEET_UP_DisplayName\", \"Palmefamiljen möter Mårten och Ingrid utanför Grand\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "PALME_ANNAE_AT_GRAND",
+    "MinimumDelaySeconds": 35,
+    "PreferredDelaySeconds": 45,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "PALME_GRAND_TIMELINE",
+    "Notes": "Tillagt efter validering 23:25: eventet refererades av flera personer men saknades i eventtabellen."
+  },
+  {
+    "Name": "PALME_MEETING_SANDINS",
+    "EventId": "PALME_MEETING_SANDINS",
+    "DisplayName": "",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 10,
+      "Second": 45
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "PALME_MARTEN_MEET_UP",
+    "MinimumDelaySeconds": 25,
+    "PreferredDelaySeconds": 25,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": "Rechained after PALME_MARTEN_MEET_UP; total preferred offset from Anna remains 70 seconds."
+  },
+  {
+    "Name": "PALME_MEETING_SANDINS_END",
+    "EventId": "PALME_MEETING_SANDINS_END",
+    "DisplayName": "",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "PALME_MEETING_SANDINS",
+    "MinimumDelaySeconds": 300,
+    "PreferredDelaySeconds": 300,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "PALME_AT_KIOSK",
+    "EventId": "PALME_AT_KIOSK",
+    "DisplayName": "",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "PALME_MEETING_SANDINS_END",
+    "MinimumDelaySeconds": 60,
+    "PreferredDelaySeconds": 100,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "SUSANNE_GUNILLA_KIOSK_MEETING_START",
+    "EventId": "SUSANNE_GUNILLA_KIOSK_MEETING_START",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"D7D9D8CA496B52939D9B119342B0A475\", \"Susanne och Gunilla möts vid korvkiosken\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 14,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 15,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "E1096",
+    "Notes": "Rekonstruerad gemensam mötestid vid korvkiosken"
+  },
+  {
+    "Name": "SUSANNE_GUNILLA_KIOSK_MEETING_END",
+    "EventId": "SUSANNE_GUNILLA_KIOSK_MEETING_END",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"E4D0819F4585D1225E7796B5ABBC537F\", \"Sällskapen lämnar korvkiosken\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 20
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 40
+    },
+    "TriggerEventId": "SUSANNE_GUNILLA_KIOSK_MEETING_START",
+    "MinimumDelaySeconds": 240,
+    "PreferredDelaySeconds": 270,
+    "MaximumDelaySeconds": 300,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "Palme_shot_1",
+    "EventId": "Palme_shot_1",
+    "DisplayName": "",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "Palme_shot_2",
+    "EventId": "Palme_shot_2",
+    "DisplayName": "",
+    "TimingMode": "RelativeToPreviousEntry",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 20
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "TriggerEventId": "Palme_shot_1",
+    "MinimumDelaySeconds": 1,
+    "PreferredDelaySeconds": 1,
+    "MaximumDelaySeconds": 2,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "POLICE_SODERSTROM_ARRIVES_CRIME_SCENE",
+    "EventId": "POLICE_SODERSTROM_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"1C52955B400BAE1245738C9A6D873466\", \"RB 2520\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "HardLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 20
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 20
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 20
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 20
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": "Reconstructed gameplay time agreed 2026-09-19 to make the police sequence at Tunnelgatan consistent with Yvonne Nieminen and Ahmed Zahir."
+  },
+  {
+    "Name": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "EventId": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"D4D25C2E420AC515652667900333416F\", \"RB 1230\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 15
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "POLICE_PIKET_3230_ARRIVES_CRIME_SCENE",
+    "EventId": "POLICE_PIKET_3230_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"714BA83B4BF48F975BB2D7BA64DE3D42\", \"RB 3230\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "HardLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 50
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 50
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 50
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 50
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 2,
+    "PreferredDelaySeconds": 5,
+    "MaximumDelaySeconds": 15,
+    "SourceId": "",
+    "Notes": "Reconstructed gameplay time agreed 2026-09-19 to make the police sequence at Tunnelgatan consistent with Yvonne Nieminen and Ahmed Zahir."
+  },
+  {
+    "Name": "AMBULANCE_951_ARRIVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_951_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"00602F8249100AC65CFB22A91BA66AC5\", \"Ambulans 951 Först på plats\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 30,
+    "PreferredDelaySeconds": 45,
+    "MaximumDelaySeconds": 60,
+    "SourceId": "",
+    "Notes": "Sollentunaambulansen som råkade passera och vinkades in"
+  },
+  {
+    "Name": "AMBULANCE_912_ARRIVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_912_ARRIVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"BE40AC604F8043B57F72D587B093EDE3\", \"Ambulans 912 andra på plats\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 45
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "AMBULANCE_951_LEAVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_951_LEAVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"61A11E2F4B458F03F37A5999CB296B9B\", \"Ambulans 951\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 45
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 45
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 45
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 45
+    },
+    "TriggerEventId": "AMBULANCE_951_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 60,
+    "PreferredDelaySeconds": 60,
+    "MaximumDelaySeconds": 60,
+    "SourceId": "",
+    "Notes": "AutomaticSpeech78 2026-09-12: Avfärd 60 s efter A951:s ankomst ger utrymme för vård, lastning och ombordstigning. Rekonstruerad varaktighet, inte källbelagd minut."
+  },
+  {
+    "Name": "AMBULANCE_912_LEAVES_CRIME_SCENE",
+    "EventId": "AMBULANCE_912_LEAVES_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"79B806C6440607DC29B6CEB3D132020B\", \"Ambulans 912\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 15
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 15
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 15
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 29,
+      "Second": 15
+    },
+    "TriggerEventId": "AMBULANCE_951_LEAVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 30,
+    "PreferredDelaySeconds": 30,
+    "MaximumDelaySeconds": 30,
+    "SourceId": "",
+    "Notes": "\"Maria Degerman ingen passagerare när hon någon minut efter Sollentuna-ambulansen återvände till Sabbatsbergs-akuten.\" AutomaticSpeech78 2026-09-12: A912:s efterföljande avfärd följer A951 +30 s när lastningen flyttas. Rekonstruerad samordning."
+  },
+  {
+    "Name": "LARS_MEET_YVONNE_AHMED",
+    "EventId": "LARS_MEET_YVONNE_AHMED",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"176F4A8B4F31E0CD99A6C8B0385A5F22\", \"LARS_MEET_YVONNE_AHMED\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "HardLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 27
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 45
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 50
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "LARS_MEET_POLICE",
+    "EventId": "LARS_MEET_POLICE",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"FC54E8D54092D266F2DC4C9EAA742718\", \"LARS_MEET_POLICE first time\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "SoftLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "LARS_MEET_YVONNE_AHMED",
+    "MinimumDelaySeconds": 40,
+    "PreferredDelaySeconds": 50,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_4_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_4_PROGRAM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"1FCE8B5142ED0FD1C41700ACC12001A9\", \"Ran slutar\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 41,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_4_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_4_PROGRAM_END_WITH_ADS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"AFBD210047CB967154252A92BF6AF788\", \"Reklamen efter Ran slutar\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_4_FILM_END_NO_ADS",
+    "MinimumDelaySeconds": 130,
+    "PreferredDelaySeconds": 130,
+    "MaximumDelaySeconds": 130,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_2_FILM_END_NO_CREDITS",
+    "EventId": "GRAND_2_FILM_END_NO_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"06E8B75C4B7FE638A6E7318C12F7C1D0\", \"Amadeus slutar\")",
+    "TimingMode": "Window",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 41,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 43,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "GRAND_2_PROGRAM_END_WITH_CREDITS",
+    "EventId": "GRAND_2_PROGRAM_END_WITH_CREDITS",
+    "DisplayName": "NSLOCTEXT(\"[401F90FA25F2CFDA159E51694F360673]\", \"D8EA92A24974A8C7C1BFC4A166B4C777\", \"reklamen efter Amadeus slutar\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 13,
+      "Second": 0
+    },
+    "TriggerEventId": "GRAND_2_FILM_END_NO_CREDITS",
+    "MinimumDelaySeconds": 120,
+    "PreferredDelaySeconds": 180,
+    "MaximumDelaySeconds": 200,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "BINO_BUMPS_OLOF_AT_GRAND",
+    "EventId": "BINO_BUMPS_OLOF_AT_GRAND",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"BINO_BUMPS_OLOF_AT_GRAND_DisplayName\", \"Bino Bumps Olof At Grand\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 8,
+      "Second": 10
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 8,
+      "Second": 10
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 8,
+      "Second": 10
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 8,
+      "Second": 10
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD10245_OVE_AT_SODERLEDEN_2321",
+    "EventId": "EAD10245_OVE_AT_SODERLEDEN_2321",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD10245_OVE_AT_SODERLEDEN_2321_DisplayName\", \"Ead10245 Ove At Soderleden 2321\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD10245_OVE_STOPS_AT_VIRVELN",
+    "EventId": "EAD10245_OVE_STOPS_AT_VIRVELN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD10245_OVE_STOPS_AT_VIRVELN_DisplayName\", \"Ead10245 Ove Stops At Virveln\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD13783_WOMAN_HEARS_ONE_BANG_AT_KUNGSGATAN",
+    "EventId": "EAD13783_WOMAN_HEARS_ONE_BANG_AT_KUNGSGATAN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD13783_WOMAN_HEARS_ONE_BANG_AT_KUNGSGATAN_DisplayName\", \"Ead13783 Woman Hears One Bang At Kungsgatan\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD13783_WOMAN_SEES_PAIR_AND_FOLLOWER",
+    "EventId": "EAD13783_WOMAN_SEES_PAIR_AND_FOLLOWER",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD13783_WOMAN_SEES_PAIR_AND_FOLLOWER_DisplayName\", \"Ead13783 Woman Sees Pair And Follower\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 50
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 50
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 50
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 19,
+      "Second": 50
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD13783_WOMAN_SEES_PEOPLE_OUTSIDE_TAXI_APELBERG",
+    "EventId": "EAD13783_WOMAN_SEES_PEOPLE_OUTSIDE_TAXI_APELBERG",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD13783_WOMAN_SEES_PEOPLE_OUTSIDE_TAXI_APELBERG_DisplayName\", \"Ead13783 Woman Sees People Outside Taxi Apelberg\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 45
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 45
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 45
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 45
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD19127_GROUP_MEETS_FESTIVE_PAIR_FIRE_STATION",
+    "EventId": "EAD19127_GROUP_MEETS_FESTIVE_PAIR_FIRE_STATION",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD19127_GROUP_MEETS_FESTIVE_PAIR_FIRE_STATION_DisplayName\", \"Ead19127 Group Meets Festive Pair Fire Station\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD67_POLICE_ENTER_TRE_BACKAR",
+    "EventId": "EAD67_POLICE_ENTER_TRE_BACKAR",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD67_POLICE_ENTER_TRE_BACKAR_DisplayName\", \"Ead67 Police Enter Tre Backar\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD9976_05_WOMEN_SEPARATE_AT_TUNNELGATAN",
+    "EventId": "EAD9976_05_WOMEN_SEPARATE_AT_TUNNELGATAN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD9976_05_WOMEN_SEPARATE_AT_TUNNELGATAN_DisplayName\", \"Ead9976 05 Women Separate At Tunnelgatan\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAD9976_MASKED_WOMAN_STOPS_AT_DECORIMA",
+    "EventId": "EAD9976_MASKED_WOMAN_STOPS_AT_DECORIMA",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAD9976_MASKED_WOMAN_STOPS_AT_DECORIMA_DisplayName\", \"Ead9976 Masked Woman Stops At Decorima\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 22,
+      "Minute": 50,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 22,
+      "Minute": 50,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 22,
+      "Minute": 50,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 22,
+      "Minute": 50,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "EAF6995_PAIR_LEAVES_RESTAURANT",
+    "EventId": "EAF6995_PAIR_LEAVES_RESTAURANT",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"EAF6995_PAIR_LEAVES_RESTAURANT_DisplayName\", \"Eaf6995 Pair Leaves Restaurant\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "JOHANNES_CHURCH_ORGAN_RECORDING_L2489",
+    "EventId": "JOHANNES_CHURCH_ORGAN_RECORDING_L2489",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"JOHANNES_CHURCH_ORGAN_RECORDING_L2489_DisplayName\", \"Johannes Church Organ Recording L2489\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "L2489_MEETS_TWO_POLICE_JOHANNESGATAN",
+    "EventId": "L2489_MEETS_TWO_POLICE_JOHANNESGATAN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"L2489_MEETS_TWO_POLICE_JOHANNESGATAN_DisplayName\", \"L2489 Meets Two Police Johannesgatan\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "L825_GROUP_CROSSES_SVEAVAGEN_2312",
+    "EventId": "L825_GROUP_CROSSES_SVEAVAGEN_2312",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"L825_GROUP_CROSSES_SVEAVAGEN_2312_DisplayName\", \"L825 Group Crosses Sveavagen 2312\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 12,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "LA14676_CALLER_PASSES_CRIME_SCENE_BEFORE_MURDER",
+    "EventId": "LA14676_CALLER_PASSES_CRIME_SCENE_BEFORE_MURDER",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"LA14676_CALLER_PASSES_CRIME_SCENE_BEFORE_MURDER_DisplayName\", \"La14676 Caller Passes Crime Scene Before Murder\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 22,
+      "Minute": 26,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 22,
+      "Minute": 26,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 22,
+      "Minute": 26,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 22,
+      "Minute": 26,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "LARS_MEETS_POLICE_FIRST_PASS",
+    "EventId": "LARS_MEETS_POLICE_FIRST_PASS",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"LARS_MEETS_POLICE_FIRST_PASS_DisplayName\", \"Lars Meets Police First Pass\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "LARS_MEETS_POLICE_RETURN_TO_CRIME_SCENE",
+    "EventId": "LARS_MEETS_POLICE_RETURN_TO_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"LARS_MEETS_POLICE_RETURN_TO_CRIME_SCENE_DisplayName\", \"Lars Meets Police Return To Crime Scene\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "MARC_DE_DARDEL",
+    "EventId": "MARC_DE_DARDEL",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"MARC_DE_DARDEL_DisplayName\", \"Marc De Dardel\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 9,
+      "Second": 5
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 8,
+      "Second": 15
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 8,
+      "Second": 15
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 8,
+      "Second": 15
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "OLOF_CARL_SEES_BLACK_FORD_ESCORT",
+    "EventId": "OLOF_CARL_SEES_BLACK_FORD_ESCORT",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"OLOF_CARL_SEES_BLACK_FORD_ESCORT_DisplayName\", \"Olof Carl Sees Black Ford Escort\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "PETER_GIVES_ROGER_BANDAGE",
+    "EventId": "PETER_GIVES_ROGER_BANDAGE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"PETER_GIVES_ROGER_BANDAGE_DisplayName\", \"Peter Gives Roger Bandage\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "PETER_JONAS_LEAVE_GRAND",
+    "EventId": "PETER_JONAS_LEAVE_GRAND",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"PETER_JONAS_LEAVE_GRAND_DisplayName\", \"Peter Jonas Leave Grand\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 44,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 44,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 44,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 44,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "PETER_JONAS_MEET_AFTER_GA_OCH_SE",
+    "EventId": "PETER_JONAS_MEET_AFTER_GA_OCH_SE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"PETER_JONAS_MEET_AFTER_GA_OCH_SE_DisplayName\", \"Peter Jonas Meet After Ga Och Se\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 6,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 6,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 6,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 6,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_1230_CORDON_EXTENDED_TO_LUNTMAKARGATAN",
+    "EventId": "POLICE_1230_CORDON_EXTENDED_TO_LUNTMAKARGATAN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_1230_CORDON_EXTENDED_TO_LUNTMAKARGATAN_DisplayName\", \"Police 1230 Cordon Extended To Luntmakargatan\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_1230_FIRST_CORDON_COMPLETE",
+    "EventId": "POLICE_1230_FIRST_CORDON_COMPLETE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_1230_FIRST_CORDON_COMPLETE_DisplayName\", \"Police 1230 First Cordon Complete\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_1230_FIRST_CORDON_STARTS",
+    "EventId": "POLICE_1230_FIRST_CORDON_STARTS",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_1230_FIRST_CORDON_STARTS_DisplayName\", \"Police 1230 First Cordon Starts\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 12,
+      "Minute": 30,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
+    "EventId": "POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_3230_DRIVES_TOWARD_NIGHT_FIKA_DisplayName\", \"Police 3230 Drives Toward Night Fika\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 35
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 35
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
+    "EventId": "POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_3230_ENTERS_GAME_AREA_BEFORE_MURDER_DisplayName\", \"Police 3230 Enters Game Area Before Murder\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_3230_STOPS_REGERINGSGATAN_103",
+    "EventId": "POLICE_3230_STOPS_REGERINGSGATAN_103",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_3230_STOPS_REGERINGSGATAN_103_DisplayName\", \"Police 3230 Stops Regeringsgatan 103\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 16,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 16,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 16,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 16,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_CLAES_MOVES_PRIVATE_CAR",
+    "EventId": "POLICE_CLAES_MOVES_PRIVATE_CAR",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_CLAES_MOVES_PRIVATE_CAR_DisplayName\", \"Police Claes Moves Private Car\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 17,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 17,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 17,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 17,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_CLAES_REJOINS_PIKET_3230",
+    "EventId": "POLICE_CLAES_REJOINS_PIKET_3230",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_CLAES_REJOINS_PIKET_3230_DisplayName\", \"Police Claes Rejoins Piket 3230\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 15
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 15
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 15
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 15
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_DJURFELDT_ASCENDS_ESCALATOR_BACKWARDS_A14205_02_C",
+    "EventId": "POLICE_DJURFELDT_ASCENDS_ESCALATOR_BACKWARDS_A14205_02_C",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_DJURFELDT_ASCENDS_ESCALATOR_BACKWARDS_A14205_02_C_DisplayName\", \"Police Djurfeldt Ascends Escalator Backwards A14205 02 C\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_DJURFELDT_REACHES_MALMSKILLNAD_A14205_02_C",
+    "EventId": "POLICE_DJURFELDT_REACHES_MALMSKILLNAD_A14205_02_C",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_DJURFELDT_REACHES_MALMSKILLNAD_A14205_02_C_DisplayName\", \"Police Djurfeldt Reaches Malmskillnad A14205 02 C\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_DJURFELDT_SEARCHES_TUNNELGATAN_ELEVATOR_A14205_02_C",
+    "EventId": "POLICE_DJURFELDT_SEARCHES_TUNNELGATAN_ELEVATOR_A14205_02_C",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_DJURFELDT_SEARCHES_TUNNELGATAN_ELEVATOR_A14205_02_C_DisplayName\", \"Police Djurfeldt Searches Tunnelgatan Elevator A14205 02 C\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 35
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_DJURFELDT_VOMITS_MALMSKILLNAD_A14205_02_D",
+    "EventId": "POLICE_DJURFELDT_VOMITS_MALMSKILLNAD_A14205_02_D",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_DJURFELDT_VOMITS_MALMSKILLNAD_A14205_02_D_DisplayName\", \"Police Djurfeldt Vomits Malmskillnad A14205 02 D\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 5
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 5
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 5
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 5
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_JOHANNES_CEMETERY_SEARCH_AROUND_2340",
+    "EventId": "POLICE_JOHANNES_CEMETERY_SEARCH_AROUND_2340",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_JOHANNES_CEMETERY_SEARCH_AROUND_2340_DisplayName\", \"Police Johannes Cemetery Search Around 2340\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_KENT_BACKLUND_ASSISTS_STEFAN_GLANTZ",
+    "EventId": "POLICE_KENT_BACKLUND_ASSISTS_STEFAN_GLANTZ",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_KENT_BACKLUND_ASSISTS_STEFAN_GLANTZ_DisplayName\", \"Police Kent Backlund Assists Stefan Glantz\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 45
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_LENA_LOHR_ALERTED_BY_LEIF_LJUNGQVIST",
+    "EventId": "POLICE_LENA_LOHR_ALERTED_BY_LEIF_LJUNGQVIST",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_LENA_LOHR_ALERTED_BY_LEIF_LJUNGQVIST_DisplayName\", \"Police Lena Lohr Alerted By Leif Ljungqvist\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 15
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 15
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 15
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 15
+    },
+    "TriggerEventId": "POLICE_PIKET_1230_ARRIVES_CRIME_SCENE",
+    "MinimumDelaySeconds": 15,
+    "PreferredDelaySeconds": 15,
+    "MaximumDelaySeconds": 15,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits. AutomaticSpeech78 2026-09-12: Tipset följer Lenas ankomst och befintliga rörelser: 1230 +15 s. Det tidigare absoluta eventet låg före hennes spawn."
+  },
+  {
+    "Name": "POLICE_LENA_LOHR_INTERVIEWS_ANDERS_BJORKMAN",
+    "EventId": "POLICE_LENA_LOHR_INTERVIEWS_ANDERS_BJORKMAN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_LENA_LOHR_INTERVIEWS_ANDERS_BJORKMAN_DisplayName\", \"Police Lena Lohr Interviews Anders Bjorkman\")",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 35
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 35
+    },
+    "TriggerEventId": "POLICE_LENA_LOHR_ALERTED_BY_LEIF_LJUNGQVIST",
+    "MinimumDelaySeconds": 20,
+    "PreferredDelaySeconds": 20,
+    "MaximumDelaySeconds": 20,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits. AutomaticSpeech78 2026-09-12: Björkmankontakten följer tipset med 20 s; tiderna är rekonstruktion."
+  },
+  {
+    "Name": "POLICE_LIFEGUARDS_ARRIVE_CRIME_SCENE",
+    "EventId": "POLICE_LIFEGUARDS_ARRIVE_CRIME_SCENE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_LIFEGUARDS_ARRIVE_CRIME_SCENE_DisplayName\", \"Police Lifeguards Arrive Crime Scene\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 42,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_LIFEGUARDS_ENTER_GAME_AREA",
+    "EventId": "POLICE_LIFEGUARDS_ENTER_GAME_AREA",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_LIFEGUARDS_ENTER_GAME_AREA_DisplayName\", \"Police Lifeguards Enter Game Area\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_RB1170_ARRIVES_SNICKARBACKEN",
+    "EventId": "POLICE_RB1170_ARRIVES_SNICKARBACKEN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_RB1170_ARRIVES_SNICKARBACKEN_DisplayName\", \"Police Rb1170 Arrives Snickarbacken\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_RB1170_CHECKS_INTOXICATED_MAN_SNICKARBACKEN",
+    "EventId": "POLICE_RB1170_CHECKS_INTOXICATED_MAN_SNICKARBACKEN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_RB1170_CHECKS_INTOXICATED_MAN_SNICKARBACKEN_DisplayName\", \"Police Rb1170 Checks Intoxicated Man Snickarbacken\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_RB1170_MEETS_GEDDA_WIKSTROM_SNICKARBACKEN",
+    "EventId": "POLICE_RB1170_MEETS_GEDDA_WIKSTROM_SNICKARBACKEN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_RB1170_MEETS_GEDDA_WIKSTROM_SNICKARBACKEN_DisplayName\", \"Police Rb1170 Meets Gedda Wikstrom Snickarbacken\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 33,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_RB2520_ALERTED_ON_KUNGSGATAN",
+    "EventId": "POLICE_RB2520_ALERTED_ON_KUNGSGATAN",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_RB2520_ALERTED_ON_KUNGSGATAN_DisplayName\", \"Police Rb2520 Alerted On Kungsgatan\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_RB2550_ARRIVES_CRIME_SCENE_A14215_00",
+    "EventId": "POLICE_RB2550_ARRIVES_CRIME_SCENE_A14215_00",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_RB2550_ARRIVES_CRIME_SCENE_A14215_00_DisplayName\", \"Police Rb2550 Arrives Crime Scene A14215 00\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_SODERSTROM_LISBETH_IDENTIFIES_OLOF",
+    "EventId": "POLICE_SODERSTROM_LISBETH_IDENTIFIES_OLOF",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_SODERSTROM_LISBETH_IDENTIFIES_OLOF_DisplayName\", \"Police Soderstrom Lisbeth Identifies Olof\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 55
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_SODERSTROM_ORDERS_3230_PURSUIT",
+    "EventId": "POLICE_SODERSTROM_ORDERS_3230_PURSUIT",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_SODERSTROM_ORDERS_3230_PURSUIT_DisplayName\", \"Police Soderstrom Orders 3230 Pursuit\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 24,
+      "Second": 20
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_SODERSTROM_REPORTS_PALME_IDENTITY",
+    "EventId": "POLICE_SODERSTROM_REPORTS_PALME_IDENTITY",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_SODERSTROM_REPORTS_PALME_IDENTITY_DisplayName\", \"Police Soderstrom Reports Palme Identity\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_WIDEN_GETS_TAXI_WITNESS_DESCRIPTION",
+    "EventId": "POLICE_WIDEN_GETS_TAXI_WITNESS_DESCRIPTION",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_WIDEN_GETS_TAXI_WITNESS_DESCRIPTION_DisplayName\", \"Police Widen Gets Taxi Witness Description\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 10
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "POLICE_WIDEN_RELAYS_DESCRIPTION_TO_SODERSTROM",
+    "EventId": "POLICE_WIDEN_RELAYS_DESCRIPTION_TO_SODERSTROM",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"POLICE_WIDEN_RELAYS_DESCRIPTION_TO_SODERSTROM_DisplayName\", \"Police Widen Relays Description To Soderstrom\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "ROGER_CALLS_SIGGE_FROM_GRAND",
+    "EventId": "ROGER_CALLS_SIGGE_FROM_GRAND",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"ROGER_CALLS_SIGGE_FROM_GRAND_DisplayName\", \"Roger Calls Sigge From Grand\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 30,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "ROGER_CALL_TO_SIGGE_ENDS",
+    "EventId": "ROGER_CALL_TO_SIGGE_ENDS",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"ROGER_CALL_TO_SIGGE_ENDS_DisplayName\", \"Roger Call To Sigge Ends\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 36,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 36,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 36,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 36,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "ROGER_LEAVES_GRAND_AFTER_BANDAGE",
+    "EventId": "ROGER_LEAVES_GRAND_AFTER_BANDAGE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"ROGER_LEAVES_GRAND_AFTER_BANDAGE_DisplayName\", \"Roger Leaves Grand After Bandage\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 43,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 43,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 43,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 43,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "ROGER_MEETS_PIA_ENGSTROM",
+    "EventId": "ROGER_MEETS_PIA_ENGSTROM",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"ROGER_MEETS_PIA_ENGSTROM_DisplayName\", \"Roger Meets Pia Engstrom\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "ROGER_PETER_JONAS_MEET_IN_GRAND_FOYER",
+    "EventId": "ROGER_PETER_JONAS_MEET_IN_GRAND_FOYER",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"ROGER_PETER_JONAS_MEET_IN_GRAND_FOYER_DisplayName\", \"Roger Peter Jonas Meet In Grand Foyer\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 40,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "ROGER_RETURNS_TO_BUS_STOP",
+    "EventId": "ROGER_RETURNS_TO_BUS_STOP",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"ROGER_RETURNS_TO_BUS_STOP_DisplayName\", \"Roger Returns To Bus Stop\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "ROGER_THREATENS_YOUTHS_WITH_KNIFE",
+    "EventId": "ROGER_THREATENS_YOUTHS_WITH_KNIFE",
+    "DisplayName": "NSLOCTEXT(\"DT_TMOP_HistoricalEvents [401F90FA25F2CFDA159E51694F360673]\", \"ROGER_THREATENS_YOUTHS_WITH_KNIFE_DisplayName\", \"Roger Threatens Youths With Knife\")",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "AUTO_VALIDATION_EVENT_RECOVERY",
+    "Notes": "Recovered from dangling DT_TMOP_People SharedEvent references after validation 23:25. Review historical precision when source research permits."
+  },
+  {
+    "Name": "Yvonne_meets_killer",
+    "EventId": "Yvonne_meets_killer",
+    "DisplayName": "",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "HardLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 25
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 25
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "Samson_robrandt_meets_killer",
+    "EventId": "Samson_robrandt_meets_killer",
+    "DisplayName": "",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "HardLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 50
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 23,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "MAN_IN_CAR_SNICKAREBACKEN",
+    "EventId": "MAN_IN_CAR_SNICKAREBACKEN",
+    "DisplayName": "",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Documented",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 28,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "NICOLA_FAUZZI_PASS_PALME",
+    "EventId": "NICOLA_FAUZZI_PASS_PALME",
+    "DisplayName": "",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "HardLocked",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 15
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 0,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "",
+    "Notes": ""
+  },
+  {
+    "Name": "DIALOGUE_LARSSON_CAR_REACTION",
+    "EventId": "DIALOGUE_LARSSON_CAR_REACTION",
+    "DisplayName": "Första reaktionerna i Åke Larssons bil",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 32
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 32
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 32
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 32
+    },
+    "TriggerEventId": "Palme_shot_1",
+    "MinimumDelaySeconds": 2,
+    "PreferredDelaySeconds": 2,
+    "MaximumDelaySeconds": 2,
+    "SourceId": "E20-00-A",
+    "Notes": "AutomaticSpeech78 2026-09-12: TD027/TD001/TD028: första reaktionen i bilen vid skott +2 s. Anne och Karins urstigningar är synkroniserade efter ordväxlingen. Rekonstruerade sekunder."
+  },
+  {
+    "Name": "DIALOGUE_STIG_LISBET_FIRST_CONTACT",
+    "EventId": "DIALOGUE_STIG_LISBET_FIRST_CONTACT",
+    "DisplayName": "Engströms uppgivna frågor till Lisbet",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 50
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 50
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 50
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 50
+    },
+    "TriggerEventId": "Palme_shot_1",
+    "MinimumDelaySeconds": 20,
+    "PreferredDelaySeconds": 20,
+    "MaximumDelaySeconds": 20,
+    "SourceId": "E63-00",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD177 TD196 TD178 TD179. Källor: E63-00; E63-00-A; E63-00-B; E63-00-C. Efter Engströms modellerade ankomst +9 s. Samtalet bygger på hans versioner; sekunderna och den muntliga svarsversionen är ett spelval. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_MONTE_CARLO_REACTION",
+    "EventId": "DIALOGUE_MONTE_CARLO_REACTION",
+    "DisplayName": "Egon och Annikas reaktioner efter smällarna",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 35
+    },
+    "TriggerEventId": "Palme_shot_1",
+    "MinimumDelaySeconds": 5,
+    "PreferredDelaySeconds": 5,
+    "MaximumDelaySeconds": 5,
+    "SourceId": "E638-00",
+    "Notes": "AutomaticSpeech78 2026-09-12: TD142/TD143/TD144/TD141: tidiga reaktioner efter smällarna. Båda personernas Monte Carlo-ankomst är synkroniserad till skottfasen; ordning över olika förhör är ett spelval."
+  },
+  {
+    "Name": "DIALOGUE_SKANDIA_DEPARTURE_CONVERSATION",
+    "EventId": "DIALOGUE_SKANDIA_DEPARTURE_CONVERSATION",
+    "DisplayName": "Samtalet i receptionen före Engströms utgång",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 30
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 30
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 30
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 20,
+      "Second": 30
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "EA9982-02",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD172 TD173 TD174 TD175. Källor: EA9982-02; EDE9980-00-A. Valt inom befintlig receptionsvistelse före utgång 23:20:56. Henrys fråga till Annette placeras 40 s före frågan till Engström. Inga källbelagda repliksekunder. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_LAC_CALL_1",
+    "EventId": "DIALOGUE_LAC_CALL_1",
+    "DisplayName": "Ljungqvists LAC-samtal 1",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 10
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 10
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 10
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 22,
+      "Second": 10
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A4456-02",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD125 TD126 TD127. Källor: A4456-02; LAC_BANDET. Förslag till samtalsscen, inte avläst samtalsstart. Källsignalerna 23:22:20 och 23:23:40 kalibrerar inte dessa replikstarter. Kontrollera inspelningen före slutlig synk. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_LAC_CALL_6",
+    "EventId": "DIALOGUE_LAC_CALL_6",
+    "DisplayName": "Lavrells svar i LAC-samtal 6",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 25
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 25
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 25
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 26,
+      "Second": 25
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A4456-02",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD128 TD129. Källor: A4456-02; LAC_BANDET. Förslag till samtalsscen under framkörningen. Källsignalerna 23:26:30 och 23:26:50 är inte replikstarter. Återgivningarna är utskrifter av samma inspelning. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_RB1170_ESCAPE_DISCUSSION",
+    "EventId": "DIALOGUE_RB1170_ESCAPE_DISCUSSION",
+    "DisplayName": "RB1170 diskuterar möjlig flyktväg under utryckning",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 27,
+      "Second": 0
+    },
+    "TriggerEventId": "POLICE_RB1170_ARRIVES_SNICKARBACKEN",
+    "MinimumDelaySeconds": -60,
+    "PreferredDelaySeconds": -60,
+    "MaximumDelaySeconds": -60,
+    "SourceId": "A14211-00",
+    "Notes": "AutomaticSpeech78 2026-09-12: TD078/TD079: återgiven diskussion under utryckning. För uppspelning flyttad till RB1170:s modellerade infart, 60 s före Snickarbacken-eventet. Källans tidigare Grand Hôtel-position ligger utanför spelområdet; replikerna och tidpunkten är rekonstruktioner. Källor: A14211-00"
+  },
+  {
+    "Name": "DIALOGUE_TRAFFIC_WARDENS_FIRST_STOP",
+    "EventId": "DIALOGUE_TRAFFIC_WARDENS_FIRST_STOP",
+    "DisplayName": "Trafikövervakarnas första polisstopp",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 34,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "EAE46-00-C",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD099 TD101. Källor: EAE46-00-C; EAE46-00-D. Spegel av Birgit Dahlströms absoluta POLICE_STOP-post vid Regeringsgatan–David Bagares gata. Källan ger ordningen, projektet den valda minuten. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_NILSSON_FIRST_PASS",
+    "EventId": "DIALOGUE_NILSSON_FIRST_PASS",
+    "DisplayName": "Jan Nilssons första passage",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 40
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 40
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 40
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 21,
+      "Second": 40
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "E21-00-A",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD164. Källor: E21-00-A. Vald vid limousinens första modellerade stopp: ankomst 23:21:37 +3 s. Källans uppskattning av korsningspassagen är bredare. Fordonsrutten uppdateras inte automatiskt av detta event. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_NILSSON_RETURN",
+    "EventId": "DIALOGUE_NILSSON_RETURN",
+    "DisplayName": "Jan Nilssons återkomst efter King Creole",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 25
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 25
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 25
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 25,
+      "Second": 25
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "E21-00-A",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD165. Källor: E21-00-A. Spegel av fordonets ENTRY_002, upplöst från föregående poster: 23:22:15 +140 +5 +45 s. Det vilande Time-fältet 23:24:10 används inte. Ingen källbelagd sekund. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_DALSGAARD_AT_CRIME_SCENE",
+    "EventId": "DIALOGUE_DALSGAARD_AT_CRIME_SCENE",
+    "DisplayName": "Dalsgaards modellerade ankomst till mordplatsen",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 55
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 55
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 55
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 35,
+      "Second": 55
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "A14206-00-A",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD075. Källor: A14206-00-A. Spegel av Dalsgaards och Söderströms MoveToAnchor-poster 23:35:55. Dalsgaard är kopplad till RB1520, inte piket 1230. Tidpunkten måste jämföras med hela hans förlopp före import. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "DIALOGUE_SODERSTROM_ODL_CONTROL_QUERY",
+    "EventId": "DIALOGUE_SODERSTROM_ODL_CONTROL_QUERY",
+    "DisplayName": "Söderströms kontrollfråga till ODL enligt Dalsgaard",
+    "TimingMode": "Relative",
+    "HistoricalLock": "Free",
+    "Confidence": "Reconstructed",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 25
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 25
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 25
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 37,
+      "Second": 25
+    },
+    "TriggerEventId": "DIALOGUE_DALSGAARD_AT_CRIME_SCENE",
+    "MinimumDelaySeconds": 90,
+    "PreferredDelaySeconds": 90,
+    "MaximumDelaySeconds": 90,
+    "SourceId": "A14203-00",
+    "Notes": "Tidsförslag 2026-09-12; infört som AutomaticSpeech i People. Kandidater: TD053. Källor: A14203-00; A14206-00-A; A14207-02. Ett preliminärt separat, senare anrop efter Dalsgaard-kontakten och ambulansbeskedet. +90 s är ett spelval; kontrollen vid Mäster Samuelsgatan är ännu inte synkroniserad. Ska inte automatiskt likställas med identitetsrapporten 23:26:30. Fasta fördröjningar är spelval, inte källans precision."
+  },
+  {
+    "Name": "SYSTEM_TEST_GRAND_TIMED_DIALOGUE",
+    "EventId": "SYSTEM_TEST_GRAND_TIMED_DIALOGUE",
+    "DisplayName": "SYSTEMTEST – tidsdialog vid Grand",
+    "TimingMode": "Absolute",
+    "HistoricalLock": "Free",
+    "Confidence": "FictionalGameplay",
+    "AbsoluteTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 0
+    },
+    "EarliestTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 0
+    },
+    "PreferredTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 0
+    },
+    "LatestTime": {
+      "Hour": 23,
+      "Minute": 3,
+      "Second": 0
+    },
+    "TriggerEventId": "None",
+    "MinimumDelaySeconds": 0,
+    "PreferredDelaySeconds": 0,
+    "MaximumDelaySeconds": 0,
+    "SourceId": "SYSTEM_TEST",
+    "Notes": "Fiktiv teknisk händelse som driver den synliga testdialogen."
+  }
+]

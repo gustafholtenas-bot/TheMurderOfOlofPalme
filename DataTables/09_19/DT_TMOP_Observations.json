@@ -13261,13 +13261,13 @@
     "ObservedEntityType": "Unknown",
     "ObservedPersonIdentityStatus": "Unclassified",
     "ObservationAnchorId": "JOHANNES_FIRE_STATION_ENTRANCE_OPPOSITE",
-    "TimingMode": "RelativeToSharedEvent",
+    "TimingMode": "Absolute",
     "CanonicalTime": {
       "Hour": 23,
-      "Minute": 20,
-      "Second": 0
+      "Minute": 16,
+      "Second": 25
     },
-    "ReferenceSharedEventId": "EAD19127_GROUP_MEETS_FESTIVE_PAIR_FIRE_STATION",
+    "ReferenceSharedEventId": "None",
     "ReferenceOffsetSeconds": 0,
     "ObservationDurationSeconds": 15,
     "ObservationRadiusCm": 3000,
@@ -13281,7 +13281,7 @@
     "WitnessSignalements": [],
     "bSignalementSourceReviewed": false,
     "bNoFurtherSignalementInSource": false,
-    "Notes": "Exakt tid, kön, klädsel och identitet anges inte."
+    "Notes": "Exakt tid, kön, klädsel och identitet anges inte. [Johannes route timing] 23:16:25 är en spelrekonstruktion beräknad från cirka 103,5 m ankardistans och 1,3 m/s efter utgång 23:15:05."
   },
   {
     "Name": "OBS_EAF6995_WITNESS_SEES_MARKED_POLICE_CAR",
