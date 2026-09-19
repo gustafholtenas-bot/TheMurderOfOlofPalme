@@ -1,6 +1,6 @@
+#include "UI/TMOPMapWidget.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
-#include "UI/TMOPMapWidget.h"
 #include "UI/TMOPLocalPanel.h"
 
 #include "Engine/Texture2D.h"
