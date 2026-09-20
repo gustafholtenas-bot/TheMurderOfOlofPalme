@@ -23,6 +23,16 @@ UTMOPCharacterAppearanceComponent::UTMOPCharacterAppearanceComponent()
     PrimaryComponentTick.bCanEverTick = true;
     PrimaryComponentTick.bStartWithTickEnabled = false;
     PrimaryComponentTick.TickGroup = TG_PostPhysics;
+    for (const FName Key : { FName(TEXT("Blond")), FName(TEXT("DarkBlond")),
+        FName(TEXT("Cendre")), FName(TEXT("Brown")), FName(TEXT("Dark")),
+        FName(TEXT("Black")), FName(TEXT("BlueBlack")), FName(TEXT("Red")),
+        FName(TEXT("Grey")), FName(TEXT("White")), FName(TEXT("SaltAndPepper")),
+        FName(TEXT("Unknown")) })
+        HairMaterials.Add(Key, TSoftObjectPtr<UMaterialInterface>());
+    HairMaterials[TEXT("Blond")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Blond.MI_TMOP_Hair_Blond")));
+    HairMaterials[TEXT("Brown")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown")));
+    HairMaterials[TEXT("Dark")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark")));
+    HairMaterials[TEXT("Grey")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey")));
     MaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
         "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple")));
     FemaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
@@ -132,6 +142,7 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
         if (bHasAppliedAppearance) return true;
     }
 
+    ClearSocketHair();
     ResetHeadAccessoryFit();
     ClearHybridHead();
     CacheBaseBodyTransform(Agent);
@@ -151,6 +162,8 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     }
     UTMOPAppearanceResolver::ResolveAppearance(
         ProfileForAppearance, ResolveAssetCatalog(), ResolvedAppearance);
+
+    SelectHairMaterials(ProfileForAppearance);
 
     // Hybrid has a normal modular TMOP body even if the old MetaHuman mode was selected.
     if (ProfileComponent->Profile.AppearanceProfile.bUseMetaHumanHybridHead)
@@ -198,7 +211,7 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     {
         ApplyBodyAndProportions(Agent);
         ApplyPart(Agent->FaceMesh, ResolvedAppearance.Face, false);
-        ApplyPart(Agent->HairMesh, ResolvedAppearance.Hair, false);
+        ApplySocketHair(Agent, ResolvedAppearance.Hair);
         ApplyPart(Agent->FacialHairMesh, ResolvedAppearance.FacialHair, false);
     }
     ApplyPart(Agent->OuterwearMesh, ResolvedAppearance.Outerwear, false);
@@ -604,14 +617,118 @@ bool UTMOPCharacterAppearanceComponent::ApplyPart(
             UMaterialInstanceDynamic* Dynamic =
                 Component->CreateDynamicMaterialInstance(Index, Material);
             if (Dynamic == nullptr) continue;
-            Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
-            Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            if (Part.PartType != ETMOPAppearancePartType::Hair &&
+                Part.PartType != ETMOPAppearancePartType::FacialHair)
+            {
+                Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
+                Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            }
             Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"),
                 Part.bUsesObscuredFallback ? 1.0f : 0.0f);
             Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"),
                 Part.ObscurityAmount);
         }
     return Component->GetSkeletalMeshAsset() != nullptr;
+}
+
+
+void UTMOPCharacterAppearanceComponent::ClearSocketHair()
+{
+    if (IsValid(SocketHairMesh))
+    {
+        SocketHairMesh->SetStaticMesh(nullptr);
+        SocketHairMesh->EmptyOverrideMaterials();
+        SocketHairMesh->SetVisibility(false, true);
+    }
+}
+
+void UTMOPCharacterAppearanceComponent::SelectHairMaterials(const FTMOPPersonProfileRow& Profile)
+{
+    const FName HairKey = UTMOPAppearanceResolver::GetHairMaterialKey(
+        Profile.Hair, Profile.HairColorCategory);
+    FName BeardKey = UTMOPAppearanceResolver::GetHairMaterialKey(
+        Profile.BeardOrMustache, ETMOPHairColor::Unknown);
+    if (BeardKey == TEXT("Unknown")) BeardKey = HairKey;
+    const auto Select = [this](FTMOPResolvedAppearancePart& Part,
+        const FTMOPAppearancePartChoice& Choice, const FName Key)
+    {
+        if (Part.bIntentionallyEmpty || !Choice.MaterialOverride.IsNull()) return;
+        // Preserve deliberate anonymisation instead of painting a guessed colour.
+        if (Part.bUsesObscuredFallback) return;
+        const TSoftObjectPtr<UMaterialInterface>* Material = HairMaterials.Find(Key);
+        if (Material && !Material->IsNull()) Part.Material = *Material;
+        else if (Key != TEXT("Unknown"))
+            ResolvedAppearance.Diagnostics.Add(FString::Printf(
+                TEXT("HairMaterials has no material for '%s'; keeping the asset material."), *Key.ToString()));
+    };
+    Select(ResolvedAppearance.Hair, Profile.AppearanceProfile.Hair, HairKey);
+    Select(ResolvedAppearance.FacialHair, Profile.AppearanceProfile.FacialHair, BeardKey);
+}
+
+bool UTMOPCharacterAppearanceComponent::ApplySocketHair(
+    ATMOPHistoricalAgent* Agent, const FTMOPResolvedAppearancePart& Part)
+{
+    ClearSocketHair();
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return false;
+    if (IsValid(Agent->HairMesh))
+    {
+        Agent->HairMesh->SetSkeletalMesh(nullptr);
+        Agent->HairMesh->SetVisibility(false, true);
+    }
+    if (Part.bIntentionallyEmpty) return true;
+    if (Part.StaticMesh.IsNull())
+    {
+        if (!Part.Mesh.IsNull())
+        {
+            ResolvedAppearance.Diagnostics.Add(TEXT("Hair uses legacy Skeletal Mesh; assign StaticMesh to migrate to socket hair."));
+            return ApplyPart(Agent->HairMesh, Part, false);
+        }
+        return false;
+    }
+    UStaticMesh* Mesh = Part.StaticMesh.LoadSynchronous();
+    if (!Mesh)
+    {
+        ResolvedAppearance.Diagnostics.Add(FString::Printf(
+            TEXT("Hair StaticMesh failed to load: %s"), *Part.StaticMesh.ToString()));
+        return false;
+    }
+    FName Socket = Part.AttachmentSocket.IsNone() ? FName(TEXT("HairSocket")) : Part.AttachmentSocket;
+    if (!Agent->BodyMesh->DoesSocketExist(Socket)) Socket = HeadwearFallbackBone;
+    if (!Agent->BodyMesh->DoesSocketExist(Socket))
+    {
+        ResolvedAppearance.Diagnostics.Add(TEXT("Hair socket and head fallback bone are missing."));
+        return false;
+    }
+    if (!IsValid(SocketHairMesh))
+    {
+        SocketHairMesh = NewObject<UStaticMeshComponent>(Agent, TEXT("HairStaticMesh"));
+        Agent->AddInstanceComponent(SocketHairMesh);
+        SocketHairMesh->SetMobility(EComponentMobility::Movable);
+        SocketHairMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        SocketHairMesh->SetGenerateOverlapEvents(false);
+        SocketHairMesh->SetupAttachment(Agent->BodyMesh);
+        SocketHairMesh->RegisterComponent();
+    }
+    SocketHairMesh->SetStaticMesh(Mesh);
+    SocketHairMesh->AttachToComponent(Agent->BodyMesh,
+        FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
+    SocketHairMesh->SetRelativeTransform(Part.AttachmentTransform *
+        ResolvedAppearance.Face.HeadAccessoryFit.HairOffset);
+    SocketHairMesh->SetCullDistance(CullDistanceCentimeters);
+    SocketHairMesh->SetVisibility(true, true);
+    SocketHairMesh->SetHiddenInGame(false);
+    UMaterialInterface* Material = Part.Material.LoadSynchronous();
+    if (!Material && Part.bUsesObscuredFallback) Material = ObscuredMaterialOverride.LoadSynchronous();
+    if (Material)
+        for (int32 Index = 0; Index < SocketHairMesh->GetNumMaterials(); ++Index)
+        {
+            UMaterialInstanceDynamic* Dynamic = SocketHairMesh->CreateDynamicMaterialInstance(Index, Material);
+            if (!Dynamic) continue;
+            // The chosen material owns its colours. Only evidence effects vary.
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"), Part.bUsesObscuredFallback ? 1.0f : 0.0f);
+            Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"), Part.ObscurityAmount);
+        }
+    return true;
 }
 
 bool UTMOPCharacterAppearanceComponent::ApplyHeadwear(
@@ -717,8 +834,12 @@ bool UTMOPCharacterAppearanceComponent::ApplyHeadwear(
             UMaterialInstanceDynamic* Dynamic =
                 Component->CreateDynamicMaterialInstance(Index, Material);
             if (Dynamic == nullptr) continue;
-            Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
-            Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            if (Part.PartType != ETMOPAppearancePartType::Hair &&
+                Part.PartType != ETMOPAppearancePartType::FacialHair)
+            {
+                Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
+                Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            }
             Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"),
                 Part.bUsesObscuredFallback ? 1.0f : 0.0f);
             Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"),
@@ -791,6 +912,7 @@ void UTMOPCharacterAppearanceComponent::ApplyPerformanceSettings(
 
 void UTMOPCharacterAppearanceComponent::ResetAppearance()
 {
+    ClearSocketHair();
     ResetHeadAccessoryFit();
     ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
     if (!IsValid(Agent)) return;
@@ -842,6 +964,7 @@ bool UTMOPCharacterAppearanceComponent::ValidateAppearance(
 
 void UTMOPCharacterAppearanceComponent::EndPlay(const EEndPlayReason::Type Reason)
 {
+    ClearSocketHair();
     ClearHybridHead();
     Super::EndPlay(Reason);
 }
@@ -973,6 +1096,8 @@ void UTMOPCharacterAppearanceComponent::ApplyHybridHead(ATMOPHistoricalAgent* Ag
     for (USkeletalMeshComponent* Part : { Agent->FaceMesh.Get(), Agent->HairMesh.Get(),
         Agent->FacialHairMesh.Get() })
         if (IsValid(Part)) Part->SetVisibility(false, true);
+    ClearSocketHair();
     bHybridHeadActive = true;
     ResolvedAppearance.Diagnostics.Add(TEXT("MetaHuman hybrid active. Verify neck seam, retargeting and groom LODs in play."));
 }
+

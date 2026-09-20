@@ -12,6 +12,7 @@ class UMaterialInterface;
 class USkeletalMesh;
 class USkeletalMeshComponent;
 class UAnimInstance;
+class UStaticMeshComponent;
 
 /** Builds one historical agent from their evidence-backed appearance profile. */
 UCLASS(ClassGroup=(TMOP), BlueprintType, Blueprintable,
@@ -118,7 +119,21 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Appearance")
     bool ValidateAppearance(TArray<FString>& OutWarnings) const;
 
+    /** Material colours are authored in these assets, independently of hairstyle.
+     * Keys: Blond, DarkBlond, Cendre, Brown, Dark, Black, BlueBlack,
+     * Red, Grey, White, SaltAndPepper, Unknown. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Hair")
+    TMap<FName, TSoftObjectPtr<UMaterialInterface>> HairMaterials;
+
 private:
+    UPROPERTY(Transient)
+    TObjectPtr<UStaticMeshComponent> SocketHairMesh;
+
+    void ClearSocketHair();
+    bool ApplySocketHair(ATMOPHistoricalAgent* Agent,
+        const FTMOPResolvedAppearancePart& Part);
+    void SelectHairMaterials(const FTMOPPersonProfileRow& Profile);
+
     struct FHeadFitBinding
     {
         TWeakObjectPtr<USkeletalMeshComponent> Component;
@@ -171,3 +186,4 @@ private:
     FVector BaseBodyRelativeLocation = FVector::ZeroVector;
     FVector BaseBodyRelativeScale = FVector::OneVector;
 };
+

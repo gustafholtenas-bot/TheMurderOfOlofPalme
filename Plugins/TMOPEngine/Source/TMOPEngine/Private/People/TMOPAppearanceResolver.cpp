@@ -261,12 +261,13 @@ const FTMOPAppearanceAssetRow* PickWeighted(
 {
     float Total = 0.0f;
     for (const FTMOPAppearanceAssetRow* Candidate : Candidates)
-        if (Candidate != nullptr) Total += FMath::Max(0.01f, Candidate->SelectionWeight);
-    float Choice = Random.FRandRange(0.0f, FMath::Max(0.01f, Total));
+        if (Candidate != nullptr) Total += FMath::Max(0.0f, Candidate->SelectionWeight);
+    if (Total <= 0.0f) return nullptr;
+    float Choice = Random.FRandRange(0.0f, Total);
     for (const FTMOPAppearanceAssetRow* Candidate : Candidates)
-        if (Candidate != nullptr)
+        if (Candidate != nullptr && Candidate->SelectionWeight > 0.0f)
         {
-            Choice -= FMath::Max(0.01f, Candidate->SelectionWeight);
+            Choice -= Candidate->SelectionWeight;
             if (Choice <= 0.0f) return Candidate;
         }
     return Candidates.IsEmpty() ? nullptr : Candidates.Last();
@@ -417,15 +418,25 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
                     AssetCatalog->FindRow<FTMOPAppearanceAssetRow>(
                         RowName, TEXT("TMOP appearance matching"), false);
                 if (Asset == nullptr || Asset->PartType != PartType ||
+                    Asset->SelectionWeight <= 0.0f ||
+                    Asset->Tags.Contains(TEXT("PendingAsset")) ||
+                    (Asset->Mesh.IsNull() && Asset->StaticMesh.IsNull()) ||
                     Asset->bObscuredFallback ||
                     !IsCompatible(*Asset, Profile, Profile.GetResolvedBodyBuild())) continue;
                 int32 Score = 0;
+                static const TSet<FName> HairColours = { TEXT("Blond"), TEXT("DarkBlond"),
+                    TEXT("Cendre"), TEXT("Brown"), TEXT("DarkBrown"), TEXT("Dark"),
+                    TEXT("Black"), TEXT("BlueBlack"), TEXT("Red"), TEXT("Grey"),
+                    TEXT("White"), TEXT("SaltAndPepper") };
                 for (const FName Tag : Asset->Tags)
-                    if (EvidenceTags.Contains(Tag)) ++Score;
+                    if (EvidenceTags.Contains(Tag) &&
+                        !((PartType == ETMOPAppearancePartType::Hair ||
+                           PartType == ETMOPAppearancePartType::FacialHair) &&
+                          HairColours.Contains(Tag))) ++Score;
                 if (Score > BestScore) { BestScore = Score; Best.Reset(); Best.Add(Asset); }
                 else if (Score == BestScore) Best.Add(Asset);
             }
-            if (!Best.IsEmpty() && BestScore > 0)
+            if (!Best.IsEmpty() && (BestScore > 0 || PartType == ETMOPAppearancePartType::Hair))
                 if (const FTMOPAppearanceAssetRow* Picked = PickWeighted(Best, Random))
                     CopyAsset(*Picked, Result);
         }
@@ -453,7 +464,37 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
         Result.bUsesObscuredFallback = false;
         Result.ObscurityAmount = 0.0f;
     }
+    // Catalog geometry must not erase an explicit per-person material.
+    if (!Override.MaterialOverride.IsNull())
+    {
+        Result.Material = Override.MaterialOverride;
+        Result.PrimaryColor = Override.PrimaryColor;
+        Result.SecondaryColor = Override.SecondaryColor;
+    }
     return Result;
+}
+
+FName UTMOPAppearanceResolver::GetHairMaterialKey(
+    const FTMOPAppearanceSlot& Evidence, const ETMOPHairColor Category)
+{
+    const FString Text = Evidence.OriginalText.ToLower();
+    const TArray<FName> Tags = GetNormalizedEvidenceTags(Evidence);
+    // Specific descriptions refine broad enum categories, but are not guesses.
+    if (Tags.Contains(TEXT("SaltAndPepper")) || Text.Contains(TEXT("gråspräng")) ||
+        Text.Contains(TEXT("grått inslag"))) return TEXT("SaltAndPepper");
+    if (Tags.Contains(TEXT("BlueBlack")) || Text.Contains(TEXT("blåsvart"))) return TEXT("BlueBlack");
+    if (Tags.Contains(TEXT("Cendre")) || Text.Contains(TEXT("cendré")) ||
+        Text.Contains(TEXT("cendre")) || Text.Contains(TEXT("askblon"))) return TEXT("Cendre");
+    if (Tags.Contains(TEXT("DarkBlond")) || Text.Contains(TEXT("mörkblon"))) return TEXT("DarkBlond");
+    if (Category != ETMOPHairColor::Unknown && Category != ETMOPHairColor::Bald)
+        return EnumLeafTag(UEnum::GetValueAsString(Category));
+    for (const FName Key : { FName(TEXT("Black")), FName(TEXT("White")),
+        FName(TEXT("Grey")), FName(TEXT("Red")), FName(TEXT("Brown")),
+        FName(TEXT("Blond")), FName(TEXT("Dark")) })
+        if (Tags.Contains(Key)) return Key;
+    if (Text.Contains(TEXT("blond")) || Text.Contains(TEXT("blont")) ||
+        Text.Contains(TEXT("ljus"))) return TEXT("Blond");
+    return TEXT("Unknown");
 }
 
 bool UTMOPAppearanceResolver::ResolveAppearance(
@@ -607,4 +648,5 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
     }
     return true;
 }
+
 

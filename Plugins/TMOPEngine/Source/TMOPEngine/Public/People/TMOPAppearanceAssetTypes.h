@@ -133,7 +133,7 @@ struct TMOPENGINE_API FTMOPAppearanceAssetRow : public FTableRowBase
     TArray<FName> Tags;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Matching",
-        meta=(ClampMin="0.01"))
+        meta=(ClampMin="0"))
     float SelectionWeight = 1.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Fit",
@@ -274,3 +274,4 @@ struct TMOPENGINE_API FTMOPResolvedAppearance
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     TArray<FString> Diagnostics;
 };
+

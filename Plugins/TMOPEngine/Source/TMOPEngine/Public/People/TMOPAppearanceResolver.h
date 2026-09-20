@@ -33,6 +33,10 @@ public:
     static FName GetStandardFaceCatalogId(
         ETMOPPersonGender Gender, int32 AgeAtEvent);
 
+    UFUNCTION(BlueprintPure, Category="TMOP|Appearance|Hair")
+    static FName GetHairMaterialKey(const FTMOPAppearanceSlot& Evidence,
+        ETMOPHairColor Category);
+
 private:
     static FTMOPResolvedAppearancePart ResolvePart(
         const FTMOPPersonProfileRow& Profile,
@@ -45,3 +49,4 @@ private:
         FRandomStream& Random,
         TArray<FString>& Diagnostics);
 };
+
