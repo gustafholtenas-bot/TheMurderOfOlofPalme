@@ -56,6 +56,15 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
     FName DefaultFacialHairSocket = TEXT("FacialHairSocket");
 
+    /** Corrects imported accessories whose pivot is still near the character's
+     * feet/world origin. Assets already authored around their pivot are untouched. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
+    bool bAutoCorrectWorldSpaceAccessoryPivots = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear",
+        meta=(EditCondition="bAutoCorrectWorldSpaceAccessoryPivots", ClampMin="1.0", Units="cm"))
+    float AccessoryPivotCorrectionThresholdCentimeters = 75.0f;
+
     /** Used while a Skeleton asset has not yet received DefaultHeadwearSocket. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
     FName HeadwearFallbackBone = TEXT("head");
@@ -146,6 +155,8 @@ private:
 
     void ClearSocketHair();
     void ClearSocketFaceAccessories();
+    FTransform BuildSocketAccessoryTransform(UStaticMesh* Mesh,
+        const FTransform& AuthoredTransform, const TCHAR* AccessoryLabel);
     bool ApplySocketHair(ATMOPHistoricalAgent* Agent,
         const FTMOPResolvedAppearancePart& Part);
     bool ApplySocketFaceAccessory(ATMOPHistoricalAgent* Agent,

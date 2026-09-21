@@ -25,6 +25,14 @@ bool FTMOPHairMaterialKeysTest::RunTest(const FString& Parameters)
     Evidence.OriginalText = TEXT("blåsvart hår");
     TestEqual(TEXT("Blue black stays distinct"),
         UTMOPAppearanceResolver::GetHairMaterialKey(Evidence, ETMOPHairColor::Black), FName(TEXT("BlueBlack")));
+    const FName UnknownA = UTMOPAppearanceResolver::GetDeterministicUnknownHairMaterialKey(19860228, 30);
+    const FName UnknownB = UTMOPAppearanceResolver::GetDeterministicUnknownHairMaterialKey(19860228, 30);
+    TestEqual(TEXT("Unknown colour is deterministic"), UnknownA, UnknownB);
+    TestTrue(TEXT("Unknown colour resolves to a real material key"),
+        UnknownA == TEXT("Blond") || UnknownA == TEXT("Brown") ||
+        UnknownA == TEXT("Dark") || UnknownA == TEXT("Black") ||
+        UnknownA == TEXT("Red") || UnknownA == TEXT("Grey") ||
+        UnknownA == TEXT("White"));
     return true;
 }
 

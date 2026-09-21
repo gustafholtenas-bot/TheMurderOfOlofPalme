@@ -37,6 +37,12 @@ public:
     static FName GetHairMaterialKey(const FTMOPAppearanceSlot& Evidence,
         ETMOPHairColor Category);
 
+    /** Stable fallback for people whose sources do not state a hair colour.
+     *  The same appearance seed and age always produce the same material key. */
+    UFUNCTION(BlueprintPure, Category="TMOP|Appearance|Hair")
+    static FName GetDeterministicUnknownHairMaterialKey(
+        int32 AppearanceSeed, int32 AgeAtEvent);
+
 private:
     static FTMOPResolvedAppearancePart ResolvePart(
         const FTMOPPersonProfileRow& Profile,
@@ -49,4 +55,3 @@ private:
         FRandomStream& Random,
         TArray<FString>& Diagnostics);
 };
-

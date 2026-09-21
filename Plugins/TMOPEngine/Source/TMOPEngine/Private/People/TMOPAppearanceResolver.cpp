@@ -497,6 +497,45 @@ FName UTMOPAppearanceResolver::GetHairMaterialKey(
     return TEXT("Unknown");
 }
 
+FName UTMOPAppearanceResolver::GetDeterministicUnknownHairMaterialKey(
+    const int32 AppearanceSeed, const int32 AgeAtEvent)
+{
+    // Use a separate stream so choosing a colour never changes hairstyle or
+    // clothing selection elsewhere in the appearance resolver.
+    FRandomStream Random(FMath::Max(1, AppearanceSeed ^ 0x48414952));
+    const int32 Roll = Random.RandRange(0, 99);
+
+    // Approximate, deliberately broad 1980s population distributions. Age is
+    // used only when known; it must never overwrite explicit source evidence.
+    if (AgeAtEvent >= 65)
+    {
+        if (Roll < 42) return TEXT("Grey");
+        if (Roll < 57) return TEXT("White");
+        if (Roll < 72) return TEXT("Dark");
+        if (Roll < 84) return TEXT("Brown");
+        if (Roll < 94) return TEXT("Blond");
+        if (Roll < 98) return TEXT("Black");
+        return TEXT("Red");
+    }
+    if (AgeAtEvent >= 50)
+    {
+        if (Roll < 28) return TEXT("Grey");
+        if (Roll < 53) return TEXT("Dark");
+        if (Roll < 73) return TEXT("Brown");
+        if (Roll < 84) return TEXT("Blond");
+        if (Roll < 94) return TEXT("Black");
+        if (Roll < 97) return TEXT("White");
+        return TEXT("Red");
+    }
+
+    if (Roll < 30) return TEXT("Dark");
+    if (Roll < 55) return TEXT("Brown");
+    if (Roll < 76) return TEXT("Blond");
+    if (Roll < 94) return TEXT("Black");
+    if (Roll < 98) return TEXT("Red");
+    return TEXT("Grey");
+}
+
 bool UTMOPAppearanceResolver::ResolveAppearance(
     const FTMOPPersonProfileRow& Profile, UDataTable* AssetCatalog,
     FTMOPResolvedAppearance& OutAppearance)
@@ -648,5 +687,4 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
     }
     return true;
 }
-
 

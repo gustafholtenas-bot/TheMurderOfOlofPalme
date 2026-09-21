@@ -18,6 +18,49 @@
 #include "People/TMOPPersonProfileComponent.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
 
+namespace
+{
+TSoftObjectPtr<UMaterialInterface> GetBuiltInHairMaterial(const FName Key)
+{
+    const TCHAR* Path = nullptr;
+    if (Key == TEXT("Blond") || Key == TEXT("Cendre"))
+        Path = TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Blond.MI_TMOP_Hair_Blond");
+    else if (Key == TEXT("Brown") || Key == TEXT("DarkBlond"))
+        Path = TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown");
+    else if (Key == TEXT("Dark"))
+        Path = TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark");
+    else if (Key == TEXT("Black") || Key == TEXT("BlueBlack"))
+        Path = TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Black.MI_TMOP_Hair_Black");
+    else if (Key == TEXT("Red"))
+        Path = TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Red.MI_TMOP_Hair_Red");
+    else if (Key == TEXT("Grey") || Key == TEXT("SaltAndPepper"))
+        Path = TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey");
+    else if (Key == TEXT("White"))
+        Path = TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_White.MI_TMOP_Hair_White");
+    return Path ? TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(Path))
+                : TSoftObjectPtr<UMaterialInterface>();
+}
+
+void ApplyHairMaterial(UStaticMeshComponent* Component,
+    UMaterialInterface* Material, const float ObscurityAmount)
+{
+    if (!IsValid(Component) || !IsValid(Material)) return;
+    // Some imported Blender accessories have no authored material slots. An
+    // override at index zero still gives them a valid runtime material.
+    const int32 SlotCount = FMath::Max(1, Component->GetNumMaterials());
+    for (int32 Index = 0; Index < SlotCount; ++Index)
+    {
+        UMaterialInstanceDynamic* Dynamic =
+            UMaterialInstanceDynamic::Create(Material, Component);
+        Component->SetMaterial(Index, Dynamic ? Dynamic : Material);
+        if (!Dynamic) continue;
+        // Unknown evidence changes confidence, not the visible hair colour.
+        Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"), 0.0f);
+        Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"), ObscurityAmount);
+    }
+}
+}
+
 UTMOPCharacterAppearanceComponent::UTMOPCharacterAppearanceComponent()
 {
     PrimaryComponentTick.bCanEverTick = true;
@@ -30,9 +73,16 @@ UTMOPCharacterAppearanceComponent::UTMOPCharacterAppearanceComponent()
         FName(TEXT("Unknown")) })
         HairMaterials.Add(Key, TSoftObjectPtr<UMaterialInterface>());
     HairMaterials[TEXT("Blond")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Blond.MI_TMOP_Hair_Blond")));
+    HairMaterials[TEXT("DarkBlond")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown")));
+    HairMaterials[TEXT("Cendre")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Blond.MI_TMOP_Hair_Blond")));
     HairMaterials[TEXT("Brown")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Brown.MI_TMOP_Hair_Brown")));
     HairMaterials[TEXT("Dark")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Dark.MI_TMOP_Hair_Dark")));
+    HairMaterials[TEXT("Black")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Black.MI_TMOP_Hair_Black")));
+    HairMaterials[TEXT("BlueBlack")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Black.MI_TMOP_Hair_Black")));
+    HairMaterials[TEXT("Red")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Red.MI_TMOP_Hair_Red")));
     HairMaterials[TEXT("Grey")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey")));
+    HairMaterials[TEXT("White")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_White.MI_TMOP_Hair_White")));
+    HairMaterials[TEXT("SaltAndPepper")] = TSoftObjectPtr<UMaterialInterface>(FSoftObjectPath(TEXT("/Game/TMOP/Characters/Appearance/Materials/Hair1986/MI_TMOP_Hair_Grey.MI_TMOP_Hair_Grey")));
     MaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
         "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple")));
     FemaleBaseBodyMesh = TSoftObjectPtr<USkeletalMesh>(FSoftObjectPath(TEXT(
@@ -665,8 +715,11 @@ void UTMOPCharacterAppearanceComponent::ClearSocketFaceAccessories()
 
 void UTMOPCharacterAppearanceComponent::SelectHairMaterials(const FTMOPPersonProfileRow& Profile)
 {
-    const FName HairKey = UTMOPAppearanceResolver::GetHairMaterialKey(
+    FName HairKey = UTMOPAppearanceResolver::GetHairMaterialKey(
         Profile.Hair, Profile.HairColorCategory);
+    if (HairKey == TEXT("Unknown"))
+        HairKey = UTMOPAppearanceResolver::GetDeterministicUnknownHairMaterialKey(
+            ResolvedAppearance.ResolvedSeed, Profile.AgeAtEvent);
     FName BeardKey = UTMOPAppearanceResolver::GetHairMaterialKey(
         Profile.BeardOrMustache, ETMOPHairColor::Unknown);
     if (BeardKey == TEXT("Unknown")) BeardKey = HairKey;
@@ -674,11 +727,18 @@ void UTMOPCharacterAppearanceComponent::SelectHairMaterials(const FTMOPPersonPro
         const FTMOPAppearancePartChoice& Choice, const FName Key)
     {
         if (Part.bIntentionallyEmpty || !Choice.MaterialOverride.IsNull()) return;
-        // Preserve deliberate anonymisation instead of painting a guessed colour.
-        if (Part.bUsesObscuredFallback) return;
         const TSoftObjectPtr<UMaterialInterface>* Material = HairMaterials.Find(Key);
         if (Material && !Material->IsNull()) Part.Material = *Material;
-        else if (Key != TEXT("Unknown"))
+        else
+        {
+            // A Blueprint may have serialized the older empty map. Always keep
+            // a native fallback so that those Blueprint defaults cannot remove
+            // every hair material after a C++ update.
+            const TSoftObjectPtr<UMaterialInterface> BuiltIn =
+                GetBuiltInHairMaterial(Key);
+            if (!BuiltIn.IsNull()) Part.Material = BuiltIn;
+        }
+        if (Part.Material.IsNull() && Key != TEXT("Unknown"))
             ResolvedAppearance.Diagnostics.Add(FString::Printf(
                 TEXT("HairMaterials has no material for '%s'; keeping the asset material."), *Key.ToString()));
     };
@@ -737,23 +797,37 @@ bool UTMOPCharacterAppearanceComponent::ApplySocketHair(
     SocketHairMesh->SetStaticMesh(Mesh);
     SocketHairMesh->AttachToComponent(Agent->BodyMesh,
         FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
-    SocketHairMesh->SetRelativeTransform(Part.AttachmentTransform *
-        ResolvedAppearance.Face.HeadAccessoryFit.HairOffset);
+    SocketHairMesh->SetRelativeTransform(BuildSocketAccessoryTransform(Mesh,
+        Part.AttachmentTransform *
+            ResolvedAppearance.Face.HeadAccessoryFit.HairOffset,
+        TEXT("Hair")));
     SocketHairMesh->SetCullDistance(CullDistanceCentimeters);
     SocketHairMesh->SetVisibility(true, true);
     SocketHairMesh->SetHiddenInGame(false);
     UMaterialInterface* Material = Part.Material.LoadSynchronous();
     if (!Material && Part.bUsesObscuredFallback) Material = ObscuredMaterialOverride.LoadSynchronous();
-    if (Material)
-        for (int32 Index = 0; Index < SocketHairMesh->GetNumMaterials(); ++Index)
-        {
-            UMaterialInstanceDynamic* Dynamic = SocketHairMesh->CreateDynamicMaterialInstance(Index, Material);
-            if (!Dynamic) continue;
-            // The chosen material owns its colours. Only evidence effects vary.
-            Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"), Part.bUsesObscuredFallback ? 1.0f : 0.0f);
-            Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"), Part.ObscurityAmount);
-        }
+    ApplyHairMaterial(SocketHairMesh, Material, Part.ObscurityAmount);
     return true;
+}
+
+FTransform UTMOPCharacterAppearanceComponent::BuildSocketAccessoryTransform(
+    UStaticMesh* Mesh, const FTransform& AuthoredTransform,
+    const TCHAR* AccessoryLabel)
+{
+    FTransform Result = AuthoredTransform;
+    if (!bAutoCorrectWorldSpaceAccessoryPivots || !IsValid(Mesh)) return Result;
+
+    const FVector BoundsOrigin = Mesh->GetBounds().Origin;
+    if (BoundsOrigin.Size() <= AccessoryPivotCorrectionThresholdCentimeters)
+        return Result;
+
+    // Put the centre of world-space-authored geometry on the socket while
+    // retaining the explicit per-asset and per-face offsets.
+    Result.AddToTranslation(-Result.TransformVector(BoundsOrigin));
+    ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+        "%s mesh had an off-centre pivot at %s cm; socket placement auto-corrected."),
+        AccessoryLabel, *BoundsOrigin.ToCompactString()));
+    return Result;
 }
 
 bool UTMOPCharacterAppearanceComponent::ApplySocketFaceAccessory(
@@ -825,14 +899,20 @@ bool UTMOPCharacterAppearanceComponent::ApplySocketFaceAccessory(
             ? HeadwearFallbackBone : NAME_None;
     StaticComponent->AttachToComponent(Agent->BodyMesh,
         FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
-    StaticComponent->SetRelativeTransform(Part.AttachmentTransform * FaceOffset);
+    StaticComponent->SetRelativeTransform(BuildSocketAccessoryTransform(Mesh,
+        Part.AttachmentTransform * FaceOffset, AccessoryLabel));
     StaticComponent->SetCullDistance(CullDistanceCentimeters);
     StaticComponent->SetVisibility(true, true);
     StaticComponent->SetHiddenInGame(false);
 
     if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
-        for (int32 Index = 0; Index < StaticComponent->GetNumMaterials(); ++Index)
-            StaticComponent->CreateDynamicMaterialInstance(Index, Material);
+    {
+        if (Part.PartType == ETMOPAppearancePartType::FacialHair)
+            ApplyHairMaterial(StaticComponent, Material, Part.ObscurityAmount);
+        else
+            for (int32 Index = 0; Index < FMath::Max(1, StaticComponent->GetNumMaterials()); ++Index)
+                StaticComponent->SetMaterial(Index, Material);
+    }
     return true;
 }
 
@@ -929,8 +1009,10 @@ bool UTMOPCharacterAppearanceComponent::ApplyHeadwear(
     }
     Component->AttachToComponent(Agent->BodyMesh,
         FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
-    Component->SetRelativeTransform(Part.AttachmentTransform *
-        ResolvedAppearance.Face.HeadAccessoryFit.HeadwearOffset);
+    Component->SetRelativeTransform(BuildSocketAccessoryTransform(Mesh,
+        Part.AttachmentTransform *
+            ResolvedAppearance.Face.HeadAccessoryFit.HeadwearOffset,
+        TEXT("Headwear")));
     Component->SetVisibility(true, true);
 
     if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
