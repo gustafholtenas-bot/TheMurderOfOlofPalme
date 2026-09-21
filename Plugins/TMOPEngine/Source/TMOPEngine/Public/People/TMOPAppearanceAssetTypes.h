@@ -65,6 +65,9 @@ struct TMOPENGINE_API FTMOPHeadAccessoryFit
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Head Fit")
     FTransform FacialHairOffset = FTransform::Identity;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Head Fit")
+    FTransform GlassesOffset = FTransform::Identity;
 };
 
 /** One selectable body, face or modular clothing asset. */
@@ -82,13 +85,13 @@ struct TMOPENGINE_API FTMOPAppearanceAssetRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<USkeletalMesh> Mesh;
 
-    /** Static accessory used by Headwear. Static hats avoid skinning, leader-pose
-     *  evaluation and clothing morphs. Mesh remains as a legacy fallback while
-     *  existing catalog rows are migrated. */
+    /** Static accessory used by hair, hats, glasses and facial hair. Rigid head
+     *  accessories avoid skinning and leader-pose evaluation. Mesh remains as
+     *  a legacy fallback while existing catalog rows are migrated. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<UStaticMesh> StaticMesh;
 
-    /** Socket used by static headwear. Missing sockets safely fall back to head. */
+    /** Socket used by a static accessory. Missing sockets safely fall back to head. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Attachment")
     FName AttachmentSocket = TEXT("HeadwearSocket");
 
@@ -274,4 +277,3 @@ struct TMOPENGINE_API FTMOPResolvedAppearance
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     TArray<FString> Diagnostics;
 };
-

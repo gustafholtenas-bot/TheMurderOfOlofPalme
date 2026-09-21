@@ -143,6 +143,7 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     }
 
     ClearSocketHair();
+    ClearSocketFaceAccessories();
     ResetHeadAccessoryFit();
     ClearHybridHead();
     CacheBaseBodyTransform(Agent);
@@ -212,7 +213,11 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
         ApplyBodyAndProportions(Agent);
         ApplyPart(Agent->FaceMesh, ResolvedAppearance.Face, false);
         ApplySocketHair(Agent, ResolvedAppearance.Hair);
-        ApplyPart(Agent->FacialHairMesh, ResolvedAppearance.FacialHair, false);
+        ApplySocketFaceAccessory(Agent, ResolvedAppearance.FacialHair,
+            SocketFacialHairMesh, Agent->FacialHairMesh,
+            DefaultFacialHairSocket,
+            ResolvedAppearance.Face.HeadAccessoryFit.FacialHairOffset,
+            TEXT("FacialHairStaticMesh"), TEXT("Facial hair"));
     }
     ApplyPart(Agent->OuterwearMesh, ResolvedAppearance.Outerwear, false);
     ApplyPart(Agent->UpperBodyMesh, ResolvedAppearance.UpperBody, false);
@@ -221,7 +226,10 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     ApplyPart(Agent->GlovesMesh, ResolvedAppearance.Gloves, false);
     ApplyHeadwear(Agent, ResolvedAppearance.Headwear);
     ApplyPart(Agent->ScarfMesh, ResolvedAppearance.Scarf, false);
-    ApplyPart(Agent->GlassesMesh, ResolvedAppearance.Glasses, false);
+    ApplySocketFaceAccessory(Agent, ResolvedAppearance.Glasses,
+        SocketGlassesMesh, Agent->GlassesMesh, DefaultGlassesSocket,
+        ResolvedAppearance.Face.HeadAccessoryFit.GlassesOffset,
+        TEXT("GlassesStaticMesh"), TEXT("Glasses"));
     ApplyModularMorphs(Agent, ProfileComponent->Profile.AppearanceProfile,
         ResolvedAppearance.BodyBuild, !bMetaHuman);
     if (!bMetaHuman)
@@ -642,6 +650,19 @@ void UTMOPCharacterAppearanceComponent::ClearSocketHair()
     }
 }
 
+void UTMOPCharacterAppearanceComponent::ClearSocketFaceAccessories()
+{
+    const auto Clear = [](UStaticMeshComponent* Component)
+    {
+        if (!IsValid(Component)) return;
+        Component->SetStaticMesh(nullptr);
+        Component->EmptyOverrideMaterials();
+        Component->SetVisibility(false, true);
+    };
+    Clear(SocketFacialHairMesh);
+    Clear(SocketGlassesMesh);
+}
+
 void UTMOPCharacterAppearanceComponent::SelectHairMaterials(const FTMOPPersonProfileRow& Profile)
 {
     const FName HairKey = UTMOPAppearanceResolver::GetHairMaterialKey(
@@ -692,7 +713,11 @@ bool UTMOPCharacterAppearanceComponent::ApplySocketHair(
             TEXT("Hair StaticMesh failed to load: %s"), *Part.StaticMesh.ToString()));
         return false;
     }
-    FName Socket = Part.AttachmentSocket.IsNone() ? FName(TEXT("HairSocket")) : Part.AttachmentSocket;
+    // Old catalog rows used HeadwearSocket for every head accessory. Hair has
+    // its own authored pivot now, so migrate that legacy default in place.
+    FName Socket = Part.AttachmentSocket.IsNone() ||
+        Part.AttachmentSocket == DefaultHeadwearSocket
+        ? DefaultHairSocket : Part.AttachmentSocket;
     if (!Agent->BodyMesh->DoesSocketExist(Socket)) Socket = HeadwearFallbackBone;
     if (!Agent->BodyMesh->DoesSocketExist(Socket))
     {
@@ -728,6 +753,86 @@ bool UTMOPCharacterAppearanceComponent::ApplySocketHair(
             Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"), Part.bUsesObscuredFallback ? 1.0f : 0.0f);
             Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"), Part.ObscurityAmount);
         }
+    return true;
+}
+
+bool UTMOPCharacterAppearanceComponent::ApplySocketFaceAccessory(
+    ATMOPHistoricalAgent* Agent, const FTMOPResolvedAppearancePart& Part,
+    TObjectPtr<UStaticMeshComponent>& StaticComponent,
+    USkeletalMeshComponent* LegacyComponent, const FName DefaultSocket,
+    const FTransform& FaceOffset, const FName ComponentName,
+    const TCHAR* AccessoryLabel)
+{
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return false;
+    if (IsValid(LegacyComponent))
+    {
+        LegacyComponent->SetSkeletalMesh(nullptr);
+        LegacyComponent->SetVisibility(false, true);
+    }
+    if (Part.bIntentionallyEmpty)
+    {
+        if (IsValid(StaticComponent))
+        {
+            StaticComponent->SetStaticMesh(nullptr);
+            StaticComponent->SetVisibility(false, true);
+        }
+        return true;
+    }
+
+    UStaticMesh* Mesh = Part.StaticMesh.LoadSynchronous();
+    if (!Mesh)
+    {
+        if (IsValid(StaticComponent))
+        {
+            StaticComponent->SetStaticMesh(nullptr);
+            StaticComponent->SetVisibility(false, true);
+        }
+        if (!Part.StaticMesh.IsNull())
+        {
+            ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+                "%s '%s' could not load Static Mesh '%s'."),
+                AccessoryLabel, *Part.CatalogId.ToString(),
+                *Part.StaticMesh.ToSoftObjectPath().ToString()));
+            return false;
+        }
+        if (!Part.Mesh.IsNull())
+        {
+            ResolvedAppearance.Diagnostics.Add(FString::Printf(TEXT(
+                "%s '%s' still uses legacy Skeletal Mesh; migrate it to StaticMesh."),
+                AccessoryLabel, *Part.CatalogId.ToString()));
+            return ApplyPart(LegacyComponent, Part, false);
+        }
+        return false;
+    }
+
+    if (!IsValid(StaticComponent))
+    {
+        StaticComponent = NewObject<UStaticMeshComponent>(Agent, ComponentName);
+        if (!IsValid(StaticComponent)) return false;
+        Agent->AddInstanceComponent(StaticComponent);
+        StaticComponent->SetupAttachment(Agent->BodyMesh);
+        StaticComponent->SetMobility(EComponentMobility::Movable);
+        StaticComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        StaticComponent->SetGenerateOverlapEvents(false);
+        StaticComponent->RegisterComponent();
+    }
+    StaticComponent->SetStaticMesh(Mesh);
+    FName Socket = Part.AttachmentSocket.IsNone() ||
+        Part.AttachmentSocket == DefaultHeadwearSocket
+        ? DefaultSocket : Part.AttachmentSocket;
+    if (!Agent->BodyMesh->DoesSocketExist(Socket))
+        Socket = Agent->BodyMesh->DoesSocketExist(HeadwearFallbackBone)
+            ? HeadwearFallbackBone : NAME_None;
+    StaticComponent->AttachToComponent(Agent->BodyMesh,
+        FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
+    StaticComponent->SetRelativeTransform(Part.AttachmentTransform * FaceOffset);
+    StaticComponent->SetCullDistance(CullDistanceCentimeters);
+    StaticComponent->SetVisibility(true, true);
+    StaticComponent->SetHiddenInGame(false);
+
+    if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
+        for (int32 Index = 0; Index < StaticComponent->GetNumMaterials(); ++Index)
+            StaticComponent->CreateDynamicMaterialInstance(Index, Material);
     return true;
 }
 
@@ -913,6 +1018,7 @@ void UTMOPCharacterAppearanceComponent::ApplyPerformanceSettings(
 void UTMOPCharacterAppearanceComponent::ResetAppearance()
 {
     ClearSocketHair();
+    ClearSocketFaceAccessories();
     ResetHeadAccessoryFit();
     ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
     if (!IsValid(Agent)) return;
@@ -965,6 +1071,7 @@ bool UTMOPCharacterAppearanceComponent::ValidateAppearance(
 void UTMOPCharacterAppearanceComponent::EndPlay(const EEndPlayReason::Type Reason)
 {
     ClearSocketHair();
+    ClearSocketFaceAccessories();
     ClearHybridHead();
     Super::EndPlay(Reason);
 }
@@ -1100,4 +1207,3 @@ void UTMOPCharacterAppearanceComponent::ApplyHybridHead(ATMOPHistoricalAgent* Ag
     bHybridHeadActive = true;
     ResolvedAppearance.Diagnostics.Add(TEXT("MetaHuman hybrid active. Verify neck seam, retargeting and groom LODs in play."));
 }
-

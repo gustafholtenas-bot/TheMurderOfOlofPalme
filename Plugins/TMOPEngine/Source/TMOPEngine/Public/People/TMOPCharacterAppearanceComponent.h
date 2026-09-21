@@ -47,6 +47,15 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
     FName DefaultHeadwearSocket = TEXT("HeadwearSocket");
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
+    FName DefaultHairSocket = TEXT("HairSocket");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
+    FName DefaultGlassesSocket = TEXT("GlassesSocket");
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
+    FName DefaultFacialHairSocket = TEXT("FacialHairSocket");
+
     /** Used while a Skeleton asset has not yet received DefaultHeadwearSocket. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
     FName HeadwearFallbackBone = TEXT("head");
@@ -129,9 +138,22 @@ private:
     UPROPERTY(Transient)
     TObjectPtr<UStaticMeshComponent> SocketHairMesh;
 
+    UPROPERTY(Transient)
+    TObjectPtr<UStaticMeshComponent> SocketFacialHairMesh;
+
+    UPROPERTY(Transient)
+    TObjectPtr<UStaticMeshComponent> SocketGlassesMesh;
+
     void ClearSocketHair();
+    void ClearSocketFaceAccessories();
     bool ApplySocketHair(ATMOPHistoricalAgent* Agent,
         const FTMOPResolvedAppearancePart& Part);
+    bool ApplySocketFaceAccessory(ATMOPHistoricalAgent* Agent,
+        const FTMOPResolvedAppearancePart& Part,
+        TObjectPtr<UStaticMeshComponent>& StaticComponent,
+        USkeletalMeshComponent* LegacyComponent, FName DefaultSocket,
+        const FTransform& FaceOffset, FName ComponentName,
+        const TCHAR* AccessoryLabel);
     void SelectHairMaterials(const FTMOPPersonProfileRow& Profile);
 
     struct FHeadFitBinding
@@ -186,4 +208,3 @@ private:
     FVector BaseBodyRelativeLocation = FVector::ZeroVector;
     FVector BaseBodyRelativeScale = FVector::OneVector;
 };
-
