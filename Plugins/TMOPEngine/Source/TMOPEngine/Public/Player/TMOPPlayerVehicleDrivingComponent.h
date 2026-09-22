@@ -80,7 +80,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Collision")
     bool bSweepMovement = true;
 
-    /** Kinematic road contact. Do not enable Simulate Physics on the body mesh. */
+    /** Legacy fallback only. Vehicles with Grounding use that component's shared settings instead. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player Driving|Ground")
     bool bFollowGround = true;
 

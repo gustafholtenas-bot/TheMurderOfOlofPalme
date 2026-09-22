@@ -14,6 +14,9 @@
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Layout/SScrollBox.h"
 #include "Widgets/Layout/SConstraintCanvas.h"
+#include "Widgets/Layout/SScaleBox.h"
+#include "Widgets/Layout/SBorder.h"
+#include "Styling/CoreStyle.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/Text/STextBlock.h"
 
@@ -82,7 +85,7 @@ void STMOPPlayerAppearancePanel::Construct(const FArguments& Args)
         .Text_Lambda([this] { return FText::FromString(Status); })];
 
     TSharedRef<SConstraintCanvas> Canvas = SNew(SConstraintCanvas);
-    Canvas->AddSlot().Offset(FMargin(110, 0, 320, 580))[SNew(SImage).Image(&PreviewBrush)];
+    Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(110, 0, 320, 580))[SNew(SImage).Image(&PreviewBrush)];
     struct FPosition { ETMOPAppearancePartType Type; const TCHAR* Label; float Y; };
     const FPosition Positions[] = {
         {ETMOPAppearancePartType::Headwear, TEXT("Hatt/mössa"), 8},
@@ -95,17 +98,22 @@ void STMOPPlayerAppearancePanel::Construct(const FArguments& Args)
     };
     for (const auto& P : Positions)
     {
-        Canvas->AddSlot().Offset(FMargin(10, P.Y, 90, 40))[SNew(SButton).Text(FText::FromString(FString(TEXT("◀ ")) + P.Label))
+        Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(10, P.Y, 90, 40))[SNew(SButton).Text(FText::FromString(FString(TEXT("◀ ")) + P.Label))
             .OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, P.Type, -1)];
-        Canvas->AddSlot().Offset(FMargin(440, P.Y, 40, 40))[SNew(SButton).Text(FText::FromString(TEXT("▶")))
+        Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(440, P.Y, 40, 40))[SNew(SButton).Text(FText::FromString(TEXT("▶")))
             .OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, P.Type, 1)];
-        Canvas->AddSlot().Offset(FMargin(485, P.Y, 160, 44))[SNew(STextBlock).AutoWrapText(true)
+        Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(485, P.Y, 160, 44))[SNew(STextBlock).AutoWrapText(true)
             .Text_Lambda([this, Type=P.Type] { return PartLabel(Type); })];
     }
-    ChildSlot[SNew(SScrollBox) + SScrollBox::Slot()[SNew(SScrollBox).Orientation(Orient_Horizontal)
-        + SScrollBox::Slot()[SNew(SHorizontalBox)
-        + SHorizontalBox::Slot().AutoWidth()[SNew(SBox).WidthOverride(260)[Controls]]
-        + SHorizontalBox::Slot().AutoWidth()[SNew(SBox).WidthOverride(650).HeightOverride(590)[Canvas]]]]];
+    ChildSlot[SNew(SBorder).BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
+        .BorderBackgroundColor(FLinearColor(0.025f,0.025f,0.03f,1)).Padding(12)
+        [SNew(SScaleBox).Stretch(EStretch::ScaleToFit).StretchDirection(EStretchDirection::DownOnly)
+        [SNew(SBox).WidthOverride(930).HeightOverride(680)
+        [SNew(SHorizontalBox)
+        + SHorizontalBox::Slot().AutoWidth().Padding(0,0,16,0)[SNew(SBox).WidthOverride(260)
+            [SNew(SScrollBox) + SScrollBox::Slot()[Controls]]]
+        + SHorizontalBox::Slot().FillWidth(1).VAlign(VAlign_Center)
+            [SNew(SBox).HeightOverride(590)[Canvas]]]]]];
     RefreshPreview();
 }
 
@@ -199,6 +207,7 @@ FReply STMOPPlayerAppearancePanel::ChangeColor()
 STMOPPlayerAppearancePanel::~STMOPPlayerAppearancePanel() { DestroyPreview(); }
 void STMOPPlayerAppearancePanel::DestroyPreview()
 {
+    PendingCapture.Reset();
     if (PreviewActor.IsValid()) PreviewActor->Destroy();
     PreviewActor.Reset();
 }
@@ -228,7 +237,7 @@ void STMOPPlayerAppearancePanel::RefreshPreview()
     PreviewActor->AddInstanceComponent(Root);
     PreviewActor->SetRootComponent(Root);
     Root->RegisterComponent();
-    PreviewActor->SetActorLocation(FVector(0, 0, -100000));
+    PreviewActor->SetActorLocation(Player->GetActorLocation() + FVector(0, 0, 10000));
     PreviewActor->SetActorRotation(FRotator(0, PreviewYaw, 0));
     auto* Capture = NewObject<USceneCaptureComponent2D>(PreviewActor.Get());
     PreviewActor->AddInstanceComponent(Capture);
@@ -238,8 +247,8 @@ void STMOPPlayerAppearancePanel::RefreshPreview()
     Capture->bCaptureOnMovement = false;
     Capture->PrimitiveRenderMode = ESceneCapturePrimitiveRenderMode::PRM_UseShowOnlyList;
     Capture->CaptureSource = ESceneCaptureSource::SCS_FinalColorLDR;
-    Capture->ProjectionType = ECameraProjectionMode::Orthographic;
-    Capture->OrthoWidth = 125;
+    Capture->ProjectionType = ECameraProjectionMode::Perspective;
+    Capture->FOVAngle = 30;
     Capture->ShowFlags.SetLighting(false);
     Capture->ShowFlags.SetAtmosphere(false);
     Capture->ShowFlags.SetFog(false);
@@ -248,6 +257,7 @@ void STMOPPlayerAppearancePanel::RefreshPreview()
     Capture->SetWorldLocation(PreviewActor->GetActorLocation() + FVector(400, 0, 0));
     Capture->SetWorldRotation(FRotator(0, 180, 0));
     TArray<UMeshComponent*> Sources;
+    FBox PreviewBounds(ForceInit);
     Player->GetComponents<UMeshComponent>(Sources);
     for (UMeshComponent* Source : Sources)
     {
@@ -259,8 +269,8 @@ void STMOPPlayerAppearancePanel::RefreshPreview()
             if (!Skeletal->GetSkeletalMeshAsset()) continue;
             auto* NewMesh = NewObject<USkeletalMeshComponent>(PreviewActor.Get());
             NewMesh->SetSkeletalMesh(Skeletal->GetSkeletalMeshAsset());
-            NewMesh->SetLeaderPoseComponent(Skeletal->LeaderPoseComponent.IsValid()
-                ? Skeletal->LeaderPoseComponent.Get() : Skeletal, true);
+            // Independent reference pose: never depend on a hidden/paused in-world leader.
+            NewMesh->SetAnimationMode(EAnimationMode::AnimationSingleNode);
             for (UMorphTarget* Morph : Skeletal->GetSkeletalMeshAsset()->GetMorphTargets())
                 if (Morph) NewMesh->SetMorphTarget(Morph->GetFName(), Skeletal->GetMorphTarget(Morph->GetFName()));
             Copy = NewMesh;
@@ -279,10 +289,36 @@ void STMOPPlayerAppearancePanel::RefreshPreview()
         for (int32 I=0; I<Source->GetNumMaterials(); ++I) Copy->SetMaterial(I, Source->GetMaterial(I));
         Copy->SetCollisionEnabled(ECollisionEnabled::NoCollision);
         Copy->SetCastShadow(false);
+        Copy->SetOnlyOwnerSee(false);
+        Copy->SetOwnerNoSee(false);
+        Copy->SetVisibleInSceneCaptureOnly(true);
         Copy->RegisterComponent();
         if (auto* SkinnedCopy = Cast<USkeletalMeshComponent>(Copy))
             SkinnedCopy->RefreshBoneTransforms();
         Capture->ShowOnlyComponent(Copy);
+        Copy->UpdateBounds();
+        PreviewBounds += Copy->Bounds.GetBox();
     }
-    Capture->CaptureScene();
+    if (PreviewBounds.IsValid)
+    {
+        const FVector Extent = PreviewBounds.GetExtent();
+        const double Aspect = 512.0/928.0;
+        const double Distance = Extent.X + 1.2 * FMath::Max(Extent.Y, Extent.Z * Aspect) / FMath::Tan(FMath::DegreesToRadians(15.0));
+        Capture->SetWorldLocation(PreviewBounds.GetCenter() + FVector(FMath::Max(100.0, Distance),0,0));
+    }
+    else Status = TEXT("Ingen synlig karaktärsmesh hittades. Kontrollera spelarens appearance-assets.");
+    PendingCapture = Capture;
+    CaptureDelayFrames = 2;
+}
+
+void STMOPPlayerAppearancePanel::Tick(const FGeometry& Geometry, double CurrentTime, float DeltaTime)
+{
+    SCompoundWidget::Tick(Geometry, CurrentTime, DeltaTime);
+    // Slate continues while the world is paused. Let new mesh render states finish first.
+    if (PendingCapture.IsValid() && --CaptureDelayFrames <= 0)
+    {
+        if (UWorld* World = PendingCapture->GetWorld()) World->SendAllEndOfFrameUpdates();
+        PendingCapture->CaptureScene();
+        PendingCapture.Reset();
+    }
 }

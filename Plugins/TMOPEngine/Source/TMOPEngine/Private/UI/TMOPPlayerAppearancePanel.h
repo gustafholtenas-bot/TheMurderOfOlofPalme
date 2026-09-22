@@ -24,6 +24,7 @@ public:
     SLATE_END_ARGS()
     void Construct(const FArguments& Args);
     virtual ~STMOPPlayerAppearancePanel() override;
+    virtual void Tick(const FGeometry& Geometry, double CurrentTime, float DeltaTime) override;
 private:
     void RebuildOptions(bool bRepair);
     void RefreshPreview();
@@ -45,6 +46,8 @@ private:
     TStrongObjectPtr<AActor> PreviewActor;
     TStrongObjectPtr<UTextureRenderTarget2D> Target;
     FSlateBrush PreviewBrush;
+    TWeakObjectPtr<USceneCaptureComponent2D> PendingCapture;
+    int32 CaptureDelayFrames = 0;
     float PreviewYaw = 0;
     bool bStartup = false;
     TAttribute<bool> Ready;

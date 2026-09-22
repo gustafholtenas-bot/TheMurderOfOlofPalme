@@ -2,6 +2,7 @@
 
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Vehicles/TMOPVehicleGroundingComponent.h"
 #include "Audio/TMOPVehicleAudioComponent.h"
 #include "Components/BoxComponent.h"
 
@@ -14,10 +15,16 @@ UTMOPPlayerVehicleDrivingComponent::UTMOPPlayerVehicleDrivingComponent()
 bool UTMOPPlayerVehicleDrivingComponent::BeginDriving(ATMOPVehicleBase* Vehicle)
 {
     if (!IsValid(Vehicle)) return false;
+    if (Vehicle->ActorHasTag(TEXT("TMOP_AuthoritativeHistory"))) return false;
     if (DrivenVehicle == Vehicle) return true;
     if (IsDriving()) EndDriving();
 
     DrivenVehicle = Vehicle;
+    if (Vehicle->Grounding)
+    {
+        Vehicle->Grounding->InvalidateGroundCache();
+        Vehicle->Grounding->UpdateGroundContact(0);
+    }
     SuspendedTrafficMovement = Vehicle->FindComponentByClass<UTMOPTrafficVehicleMovementComponent>();
     if (SuspendedTrafficMovement.IsValid())
     {
@@ -34,7 +41,7 @@ bool UTMOPPlayerVehicleDrivingComponent::BeginDriving(ATMOPVehicleBase* Vehicle)
     bHandbrakeInput = false;
     bHighSpeedMode = false;
     CurrentYawRateDegreesPerSecond = 0.0f;
-    bHasGroundContact = false;
+    bHasGroundContact = Vehicle->Grounding && Vehicle->Grounding->bGroundValid;
     SetComponentTickEnabled(true);
     OnPlayerDrivingStateChanged.Broadcast(DrivenVehicle, true);
     return true;
@@ -122,9 +129,10 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
 
     FRotator Rotation = DrivenVehicle->GetActorRotation();
     Rotation.Yaw += CurrentYawRateDegreesPerSecond * DeltaTime;
-    const FVector DeltaLocation = Rotation.Vector() * CurrentSpeedCmPerSecond * DeltaTime;
+    const FVector DeltaLocation = FRotator(0, Rotation.Yaw, 0).Vector() * CurrentSpeedCmPerSecond * DeltaTime;
     FVector DesiredLocation = DrivenVehicle->GetActorLocation() + DeltaLocation;
-    if (bFollowGround && GetWorld() != nullptr)
+    UTMOPVehicleGroundingComponent* Ground = DrivenVehicle->Grounding;
+    if (bFollowGround && GetWorld() != nullptr && !Ground)
     {
         float RootHalfLength = MinimumProbeLongitudinalOffsetCm;
         float RootHalfWidth = MinimumProbeLateralOffsetCm;
@@ -221,6 +229,30 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
         }
     }
 
+    FTMOPGroundSolution SupportedPose;
+    bool bHaveSupportedPose = false;
+    if (Ground && Ground->bEnabled)
+    {
+        FTMOPGroundSolution Solution;
+        const FTransform Candidate(Rotation, DesiredLocation, DrivenVehicle->GetActorScale3D());
+        const bool bSupported = Ground->Solve(Candidate, Solution, DeltaTime);
+        // A continuous slope can rise over the distance driven; a discontinuous kerb is capped.
+        const double AllowedRise = MaximumStepUpHeightCm + DeltaLocation.Size2D() *
+            FMath::Tan(FMath::DegreesToRadians(Ground->MaxSlopeDegrees));
+        if (bSupported && (!bHasGroundContact || FMath::Abs(Solution.Pose.GetLocation().Z - DrivenVehicle->GetActorLocation().Z) <= AllowedRise))
+        {
+            DesiredLocation = Solution.Pose.GetLocation(); Rotation = Solution.Pose.Rotator();
+            bHasGroundContact = true;
+            SupportedPose = Solution; bHaveSupportedPose = true;
+        }
+        else
+        {
+            // No road below the candidate: do not drive off the supported surface or snap to a roof.
+            DesiredLocation = DrivenVehicle->GetActorLocation(); Rotation = DrivenVehicle->GetActorRotation();
+            CurrentSpeedCmPerSecond = 0; CurrentYawRateDegreesPerSecond = 0;
+        }
+    }
+
     const FVector MovementStart = DrivenVehicle->GetActorLocation();
     const FRotator RotationStart = DrivenVehicle->GetActorRotation();
     const float ImpactSpeedCmPerSecond = FMath::Abs(CurrentSpeedCmPerSecond);
@@ -278,6 +310,7 @@ void UTMOPPlayerVehicleDrivingComponent::TickComponent(const float DeltaTime,
         }
     }
 
+    if (Ground && bHaveSupportedPose) Ground->AcceptSupportedPose(SupportedPose);
     const float WheelRollDegrees = FMath::RadiansToDegrees(
         CurrentSpeedCmPerSecond * DeltaTime / FMath::Max(1.0f, VisualWheelRadiusCm));
     VisualWheelRotationDegrees = FMath::Fmod(VisualWheelRotationDegrees + WheelRollDegrees, 360.0f);

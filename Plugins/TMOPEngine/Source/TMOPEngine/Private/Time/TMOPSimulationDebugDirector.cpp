@@ -629,7 +629,7 @@ FString ATMOPSimulationDebugDirector::GetResolvedBakePath() const
 
 FString ATMOPSimulationDebugDirector::BuildSourceSignature() const
 {
-    FString Source = FString::Printf(TEXT("TMOP_AUTHORITY_V3_20260922_20HZ:scene%d"), PlaybackSceneRevision);
+    FString Source = FString::Printf(TEXT("TMOP_AUTHORITY_V3_GROUND1_20HZ:scene%d"), PlaybackSceneRevision);
     if (GetWorld() != nullptr)
     {
         Source += GetWorld()->GetOutermost()->GetName()

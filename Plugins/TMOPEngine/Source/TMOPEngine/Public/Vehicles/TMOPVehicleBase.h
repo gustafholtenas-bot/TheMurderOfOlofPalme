@@ -13,6 +13,7 @@ class USceneComponent;
 class UTextRenderComponent;
 class UTMOPVehicleSeatComponent;
 class UMaterialInterface;
+class UTMOPVehicleGroundingComponent;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPVehicleBase : public APawn
@@ -24,6 +25,9 @@ public:
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
     void UpdatePlaybackNameLabel();
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Ground")
+    TObjectPtr<UTMOPVehicleGroundingComponent> Grounding;
 
     /** Root collision used by swept player driving. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Collision")

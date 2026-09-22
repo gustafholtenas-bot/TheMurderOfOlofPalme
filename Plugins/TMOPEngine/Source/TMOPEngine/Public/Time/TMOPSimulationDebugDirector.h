@@ -33,6 +33,10 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|World Bake")
     TObjectPtr<UTMOPWorldPlaybackComponent> WorldPlayback;
 
+    /** Editor Play may run live while authoring. Seeking still requires a valid bake. Packaged play remains strict. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|World Bake")
+    bool bAllowLiveEditorPreviewWithoutBake = true;
+
     /** Read-only fingerprint for the authoritative playback tape. */
     FString GetPlaybackSourceSignature() const { return BuildSourceSignature(); }
 

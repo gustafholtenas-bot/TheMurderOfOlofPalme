@@ -1,4 +1,5 @@
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
+#include "Vehicles/TMOPVehicleGroundingComponent.h"
 
 #include "Engine/GameInstance.h"
 #include "Engine/DamageEvents.h"
@@ -718,8 +719,13 @@ bool UTMOPTrafficVehicleMovementComponent::StartRoutePlan(
     float CatchUpKmh, bool bSeek, bool bStopAtVia)
 {
     if (!GetOwner() || Plan.Samples.Num() < 2 || Arrival <= Departure) return false;
+    const auto* Ground = GetOwner()->FindComponentByClass<UTMOPVehicleGroundingComponent>();
+    const bool bGroundedRoute = Ground && Ground->bEnabled;
+    const double StartDistance = bGroundedRoute
+        ? FVector::Dist2D(GetOwner()->GetActorLocation(), Plan.Samples[0].GetLocation())
+        : FVector::Distance(GetOwner()->GetActorLocation(), Plan.Samples[0].GetLocation());
     // Reject a remote start before destroying the currently executing plan.
-    if (!bSeek && FVector::Distance(GetOwner()->GetActorLocation(), Plan.Samples[0].GetLocation()) > 300.0)
+    if (!bSeek && StartDistance > 300.0)
         return false;
     StopDriving();
     ActiveRoutePlan = Plan;
@@ -746,7 +752,7 @@ bool UTMOPTrafficVehicleMovementComponent::StartRoutePlan(
         else
         {
             // Do not silently teleport a normally starting car onto a remote anchor.
-            if (FVector::Distance(GetOwner()->GetActorLocation(), Plan.Samples[0].GetLocation()) > 300.0)
+            if (StartDistance > 300.0)
             { StopDriving(); return false; }
             if (!ApplyManeuverPose(Plan.Samples[0])) { StopDriving(); return false; }
         }
@@ -799,8 +805,22 @@ bool UTMOPTrafficVehicleMovementComponent::ApplyManeuverPose(const FTransform& P
 {
     AActor* VehicleActor = GetOwner();
     if (!VehicleActor) return false;
+    auto* Ground = VehicleActor->FindComponentByClass<UTMOPVehicleGroundingComponent>();
+    FTMOPGroundSolution Supported;
+    FTransform RequestedPose = Pose;
+    RequestedPose.SetScale3D(VehicleActor->GetActorScale3D());
+    if (Ground && Ground->bEnabled)
+    {
+        if (!Ground->Solve(RequestedPose, Supported))
+        {
+            bLastArrivalBlocked = true; LastArrivalBlocker = Supported.Error;
+            CurrentSpeedCmPerSecond = 0;
+            return false;
+        }
+        RequestedPose = Supported.Pose;
+    }
     FTMOPVehicleRoutePlan Step;
-    Step.AddSample(VehicleActor->GetActorTransform()); Step.AddSample(Pose);
+    Step.AddSample(VehicleActor->GetActorTransform()); Step.AddSample(RequestedPose);
     FHitResult Hit;
     if (!bPrioritizeTimeline && TMOPVehicleRoute::FindObstacle(GetWorld(), Step,
         FVector(VehicleLengthCm * 0.45f, ObstacleSensorHalfWidthCm, 50.0f), Hit, VehicleActor,
@@ -811,7 +831,7 @@ bool UTMOPTrafficVehicleMovementComponent::ApplyManeuverPose(const FTransform& P
         CurrentSpeedCmPerSecond = 0.0f;
         return false;
     }
-    FTransform ScaledPose = Pose;
+    FTransform ScaledPose = RequestedPose;
     ScaledPose.SetScale3D(VehicleActor->GetActorScale3D());
     // The filtered sweep above checks other road users. An additional unfiltered
     // root sweep would reintroduce static scenery as a blocker.
@@ -827,6 +847,7 @@ bool UTMOPTrafficVehicleMovementComponent::ApplyManeuverPose(const FTransform& P
     }
     bLastArrivalBlocked = false;
     LastArrivalBlocker.Reset();
+    if (Ground && Ground->bEnabled) Ground->AcceptSupportedPose(Supported);
     return true;
 }
 
@@ -899,7 +920,15 @@ bool UTMOPTrafficVehicleMovementComponent::ForceCompleteTimedArrival()
     if (bAnchorManeuverInProgress && !ActiveRoutePlan.Samples.IsEmpty()) Target = ActiveRoutePlan.Destination;
     else if (bHasFinalApproach) Target = FinalApproachTargetTransform;
     else if (auto* Lane = GetCurrentLane()) Target = Lane->GetLaneTransformAtDistance(Lane->GetSplineLength());
-    LastArrivalCorrectionCm = FVector::Distance(GetOwner()->GetActorLocation(), Target.GetLocation());
+    FTransform SupportedTarget = Target;
+    if (auto* Ground = GetOwner()->FindComponentByClass<UTMOPVehicleGroundingComponent>())
+        if (Ground->bEnabled)
+        {
+            FTMOPGroundSolution Solution;
+            Target.SetScale3D(GetOwner()->GetActorScale3D());
+            if (Ground->Solve(Target, Solution)) SupportedTarget = Solution.Pose;
+        }
+    LastArrivalCorrectionCm = FVector::Distance(GetOwner()->GetActorLocation(), SupportedTarget.GetLocation());
     bool bApplied = true;
     if (bAnchorManeuverInProgress)
     {

@@ -316,7 +316,7 @@ void STMOPTheoryBuilder::Construct(const FArguments& Args)
             .ColorAndOpacity(FLinearColor(1, 0.8, 0.35))]
         + SVerticalBox::Slot().AutoHeight()[SAssignNew(Details, SVerticalBox)]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 8)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("Träden följer med när du sparar spelet. Knappen ovan skapar en ny manuell sparning. Ångra/gör om gäller under detta besök i Teoribygge."))).AutoWrapText(true)]
+        [SNew(STextBlock).Text(FText::FromString(TEXT("Träden följer med när du sparar spelet. Knappen ovan skapar en ny manuell sparning. Ångra/gör om gäller under detta besök i Mina teorier."))).AutoWrapText(true)]
     ];
     RefreshDetails();
 }

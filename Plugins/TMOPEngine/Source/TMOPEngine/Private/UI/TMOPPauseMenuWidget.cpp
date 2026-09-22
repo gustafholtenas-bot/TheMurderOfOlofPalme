@@ -265,8 +265,8 @@ FText SectionTitle(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::SaveLoad: return NSLOCTEXT("TMOP", "HubSaveLoad", "SPARA/LADDA");
     case ETMOPPauseHubSection::Quit: return NSLOCTEXT("TMOP", "HubQuit", "AVSLUTA SPELET");
     case ETMOPPauseHubSection::MoveInTime: return NSLOCTEXT("TMOP", "HubMoveTime", "FÖRFLYTTA I TID");
+    case ETMOPPauseHubSection::TheoryBuilder:
     case ETMOPPauseHubSection::Theories: return NSLOCTEXT("TMOP", "HubTheories", "MINA TEORIER");
-    case ETMOPPauseHubSection::TheoryBuilder: return NSLOCTEXT("TMOP", "HubTheoryBuilder", "TEORIBYGGE");
     case ETMOPPauseHubSection::MurderDayMysteries: return NSLOCTEXT("TMOP", "HubMysteries", "MYSTERIER PÅ MORDDAGEN");
     case ETMOPPauseHubSection::AfterMurderEvents: return NSLOCTEXT("TMOP", "HubAfterMurder", "HÄNDELSER EFTER MORDET");
     case ETMOPPauseHubSection::WorldGroups: return NSLOCTEXT("TMOP", "HubWorldGroups", "GRUPPERINGAR I VÄRLDEN");
@@ -336,7 +336,6 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
     AddNavigationGap(20.0f);
     AddNavigationEntry(ETMOPPauseHubSection::MyObservations);
     AddNavigationEntry(ETMOPPauseHubSection::Theories);
-    AddNavigationEntry(ETMOPPauseHubSection::TheoryBuilder);
     AddNavigationGap(20.0f);
     AddNavigationEntry(ETMOPPauseHubSection::MurderDayMysteries);
     AddNavigationEntry(ETMOPPauseHubSection::MurderKnowledge);

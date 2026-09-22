@@ -1,4 +1,5 @@
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Vehicles/TMOPVehicleGroundingComponent.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
@@ -35,6 +36,7 @@ ATMOPVehicleBase::ATMOPVehicleBase()
 {
     PrimaryActorTick.bCanEverTick = true;
     PrimaryActorTick.TickInterval = 0.05f;
+    Grounding = CreateDefaultSubobject<UTMOPVehicleGroundingComponent>(TEXT("Grounding"));
     VehicleCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("VehicleCollision"));
     SetRootComponent(VehicleCollision);
     VehicleCollision->SetBoxExtent(FVector(225.0f, 90.0f, 60.0f));

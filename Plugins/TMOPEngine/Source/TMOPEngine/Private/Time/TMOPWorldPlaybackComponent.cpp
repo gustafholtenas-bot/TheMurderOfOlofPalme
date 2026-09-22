@@ -1,4 +1,5 @@
 #include "Time/TMOPWorldPlaybackComponent.h"
+#include "Vehicles/TMOPVehicleGroundingComponent.h"
 #include "Engine/GameInstance.h"
 #include "Serialization/JsonWriter.h"
 #include "HAL/PlatformTime.h"
@@ -376,7 +377,19 @@ void UTMOPWorldPlaybackComponent::Capture(double Time)
         const FString Id = ActorId(Actor);
         FName Entity;
         if (auto* Agent = Cast<ATMOPHistoricalAgent>(Actor)) Entity = Agent->EntityIdentity->EntityId;
-        if (auto* Vehicle = Cast<ATMOPVehicleBase>(Actor)) Entity = Vehicle->VehicleId;
+        if (auto* Vehicle = Cast<ATMOPVehicleBase>(Actor))
+        {
+            Entity = Vehicle->VehicleId;
+            // Initial capture and late spawns may precede the first grounding tick.
+            if (Vehicle->Grounding) Vehicle->Grounding->UpdateGroundContact(0);
+            if (Vehicle->Grounding && Vehicle->Grounding->bEnabled && !Vehicle->IsHidden() && !Vehicle->Grounding->bGroundValid)
+            {
+                Status = FString::Printf(TEXT("Bake rejected: ground contact for %s: %s"), *Vehicle->VehicleId.ToString(), *Vehicle->Grounding->GroundStatus);
+                UE_LOG(LogTemp, Error, TEXT("%s"), *Status);
+                FinishRecording(false);
+                return;
+            }
+        }
         const bool bPlaced = !bPerson && !bVehicle && !HasHistoricalOwner(Actor);
         CaptureObject(Actor, Id, Id, Entity, bPlaced, Time, Seen);
         TArray<UActorComponent*> Components;
@@ -446,6 +459,7 @@ bool UTMOPWorldPlaybackComponent::StartRecording(const FString& Signature)
     }
     bRecording = true;
     Capture(Tape.StartSecond);
+    if (!bRecording) return false;
     Status = TEXT("Spelar in historiskt förlopp (20 Hz).");
     return true;
 }
@@ -726,7 +740,19 @@ bool UTMOPWorldPlaybackComponent::LoadAndPrepare(const FString& Signature)
     auto* Clock = GetWorld()->GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
     Clock->RequestPause(this, MissingTapePause);
     Clock->bAuthoritativePlayback = true;
-    if (!ValidateFile(Signature)) return false;
+    if (!ValidateFile(Signature))
+    {
+        // Nothing has been spawned, quiesced or restored yet. Safe editor authoring fallback only.
+        if (GetWorld()->WorldType == EWorldType::PIE && Director() && Director()->bAllowLiveEditorPreviewWithoutBake)
+        {
+            const FString Reason = Status;
+            Clock->bAuthoritativePlayback = false;
+            Clock->ReleasePause(this, MissingTapePause);
+            Status = TEXT("Liveförhandsvisning utan giltig bake – tidsförflyttning avstängd.");
+            UE_LOG(LogTemp, Warning, TEXT("TMOP: %s %s"), *Status, *Reason);
+        }
+        return false;
+    }
     if (Tape.StartSecond != Clock->GetLoopStartTime().ToSecondsFromMidnight() || Tape.EndSecond != Clock->GetLoopEndTime().ToSecondsFromMidnight())
     { Status = TEXT("Bake och scenarioklocka har olika tidsintervall."); return false; }
     bPreparationAttempted = true;

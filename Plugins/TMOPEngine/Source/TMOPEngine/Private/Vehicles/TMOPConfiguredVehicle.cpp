@@ -1,4 +1,5 @@
 #include "Vehicles/TMOPConfiguredVehicle.h"
+#include "Vehicles/TMOPVehicleGroundingComponent.h"
 
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
@@ -183,6 +184,7 @@ bool ATMOPConfiguredVehicle::ApplyConfiguration()
         BodyTransform.SetTranslation(Translation);
     }
     BodyMesh->SetRelativeTransform(BodyTransform);
+    if (Grounding) Grounding->InvalidateGroundCache();
 
     FTransform RoofMount = Model->RoofMountTransform;
     if (Model->bAutoPlaceRoofMountFromBodyBounds &&
@@ -625,6 +627,7 @@ void ATMOPConfiguredVehicle::UpdateWheelAnimation(const float DeltaSeconds)
         Animated.SetRotation(Index < 2
             ? Steering * AnimatedRotation
             : AnimatedRotation);
-        Wheels[Index]->SetRelativeTransform(Animated);
+        // Grounding owns wheel translation. Animation only owns steering and roll.
+        Wheels[Index]->SetRelativeRotation(Animated.GetRotation());
     }
 }
