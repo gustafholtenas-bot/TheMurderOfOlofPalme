@@ -128,6 +128,8 @@ public:
     UFUNCTION(BlueprintCallable, Category = "TMOP|Seat")
     bool StandAgent(ATMOPHistoricalAgent* Agent);
 
+    void RestoreHistoricalOccupant(ATMOPHistoricalAgent* Agent) { OccupyingAgent = Agent; }
+
 private:
     UPROPERTY(Transient)
     TObjectPtr<ATMOPHistoricalAgent> OccupyingAgent;

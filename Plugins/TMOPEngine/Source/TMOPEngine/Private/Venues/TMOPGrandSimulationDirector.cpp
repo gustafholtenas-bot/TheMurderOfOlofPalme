@@ -77,7 +77,7 @@ bool ATMOPGrandSimulationDirector::ResolveTimeline(const int32 LoopNumber)
             const int32 Earliest = Action.EarliestTime.ToSecondsFromMidnight();
             const int32 Latest = Action.LatestTime.ToSecondsFromMidnight();
             if (Latest < Earliest) return false;
-            FRandomStream Random(SimulationSeed + LoopNumber * 1009 + Index * 97);
+            FRandomStream Random(SimulationSeed + 1009 + Index * 97);
             Seconds = Random.RandRange(Earliest, Latest);
         }
         FTMOPGrandResolvedTimelineAction Resolved;
@@ -135,7 +135,7 @@ bool ATMOPGrandSimulationDirector::ExecuteAction(const FTMOPGrandTimelineAction&
             Action.LeaderEntityId, Action.Formation, Action.FormationSpacing);
     case ETMOPGrandTimelineActionType::StartConversation:
         return Groups->StartConversation(Action.GroupId, Action.MinimumConversationSeconds,
-            Action.MaximumConversationSeconds, SimulationSeed + CurrentLoopNumber * 1009 + ActionIndex);
+            Action.MaximumConversationSeconds, SimulationSeed + 1009 + ActionIndex);
     case ETMOPGrandTimelineActionType::EndConversation:
         return Groups->EndConversation(Action.GroupId);
     case ETMOPGrandTimelineActionType::MoveGroup:

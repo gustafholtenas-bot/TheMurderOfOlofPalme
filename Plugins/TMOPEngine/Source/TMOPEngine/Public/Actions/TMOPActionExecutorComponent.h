@@ -20,6 +20,24 @@ enum class ETMOPActionExecutionState : uint8
     Failed
 };
 
+USTRUCT()
+struct FTMOPPlaybackActionState
+{
+    GENERATED_BODY()
+    UPROPERTY() FTMOPScheduleEntry Entry;
+    UPROPERTY() ETMOPActionExecutionState State = ETMOPActionExecutionState::Idle;
+    UPROPERTY() bool bHasEntry = false;
+    UPROPERTY() FVector Target = FVector::ZeroVector;
+    UPROPERTY() TArray<FName> Route;
+    UPROPERTY() int32 RouteIndex = INDEX_NONE;
+    UPROPERTY() FTMOPTime ScheduledTime;
+    UPROPERTY() int32 ArrivalSecond = INDEX_NONE;
+    UPROPERTY() int32 PhysicalArrivalSecond = INDEX_NONE;
+    UPROPERTY() float RemainingPath = 0;
+    UPROPERTY() float RequiredSpeed = 0;
+    UPROPERTY() bool bPossible = true;
+};
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(
     FTMOPActionExecutionSignature,
     FName,
@@ -143,6 +161,11 @@ public:
     {
         return ActivePhysicalArrivalSecond;
     }
+
+    FTMOPPlaybackActionState CapturePlaybackAction() const;
+    void RestorePlaybackAction(const FTMOPPlaybackActionState& State);
+    void RestorePlaybackMoveDiagnostics(float RemainingPath, float RequiredSpeed)
+    { ActiveRemainingPathCm = RemainingPath; ActiveRequiredSpeedCmPerSecond = RequiredSpeed; }
 
 private:
     UFUNCTION()

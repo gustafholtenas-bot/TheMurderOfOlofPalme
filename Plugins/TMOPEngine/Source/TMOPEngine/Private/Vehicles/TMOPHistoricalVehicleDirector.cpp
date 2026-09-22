@@ -684,6 +684,7 @@ void ATMOPHistoricalVehicleDirector::DespawnDueVehicles(
 
 int32 ATMOPHistoricalVehicleDirector::InitializeHistoricalVehicles()
 {
+    if (GetGameInstance() && GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->bAuthoritativePlayback) return 0;
     for (TPair<FName, FHistoricalVehicleRuntime>& Pair : RuntimeVehicles)
     {
         FHistoricalVehicleRuntime& Runtime = Pair.Value;
@@ -1587,7 +1588,10 @@ ATMOPVehicleBase* ATMOPHistoricalVehicleDirector::FindHistoricalVehicle(
     const FName VehicleId) const
 {
     const FHistoricalVehicleRuntime* Runtime = RuntimeVehicles.Find(VehicleId);
-    return Runtime != nullptr ? Runtime->Vehicle.Get() : nullptr;
+    if (Runtime && Runtime->Vehicle.IsValid() && !Runtime->Vehicle->Tags.Contains(TEXT("TMOP_HistoryAbsent"))) return Runtime->Vehicle.Get();
+    if (GetGameInstance()) if (auto* Registry = GetGameInstance()->GetSubsystem<UTMOPWorldSubsystem>())
+        return Cast<ATMOPVehicleBase>(Registry->FindWorldObject(VehicleId));
+    return nullptr;
 }
 
 const FTMOPHistoricalVehicleTimelineEntry*

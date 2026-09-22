@@ -84,3 +84,19 @@ bool ATMOPTrafficSignalController::ValidateController(TArray<FString>& OutErrors
     }
     return OutErrors.IsEmpty();
 }
+
+TArray<FTMOPSignalGroupState> ATMOPTrafficSignalController::CapturePlaybackSignals() const
+{
+    TArray<FTMOPSignalGroupState> Result;
+    for (const auto& Pair : RuntimeStates)
+    {
+        FTMOPSignalGroupState S; S.SignalGroupId = Pair.Key; S.State = Pair.Value; Result.Add(S);
+    }
+    Result.Sort([](const auto& A, const auto& B) { return A.SignalGroupId.LexicalLess(B.SignalGroupId); });
+    return Result;
+}
+void ATMOPTrafficSignalController::RestorePlaybackSignals(const TArray<FTMOPSignalGroupState>& States)
+{
+    RuntimeStates.Reset();
+    for (const auto& State : States) ForceGroupState(State.SignalGroupId, State.State);
+}

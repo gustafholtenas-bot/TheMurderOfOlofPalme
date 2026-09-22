@@ -24,6 +24,9 @@ public:
     void SetLoadMenuMode(bool bShowLoadMenu);
     void SetLoadStatus(const FText& Status);
     void SetIntroControlsVisible(bool bVisible);
+    void ShowPlayerCountPage();
+    void ShowAppearanceSetup(int32 Count);
+    void HideAppearanceSetup();
     void SetIntroCard(const FText& Heading, const FText& Body,
         UTexture2D* Image, bool bVisible);
 protected:
@@ -46,6 +49,9 @@ private:
     FSlateBrush LogoBrush;
     FSlateBrush CardImageBrush;
     TSharedPtr<class SVerticalBox> MenuPanel;
+    TSharedPtr<class SBox> AppearanceHost;
+    TSharedPtr<class SWidgetSwitcher> AppearanceSwitcher;
+    bool bChoosingPlayerCount = false;
     TSharedPtr<class SVerticalBox> LoadPanel;
     TSharedPtr<class SVerticalBox> LoadListBox;
     TSharedPtr<STextBlock> LoadStatusText;

@@ -262,7 +262,7 @@ bool UTMOPCharacterAppearanceComponent::ApplyAppearance()
     {
         ApplyBodyAndProportions(Agent);
         ApplyPart(Agent->FaceMesh, ResolvedAppearance.Face, false);
-        ApplySocketHair(Agent, ResolvedAppearance.Hair);
+        ApplySkeletalHair(Agent, ResolvedAppearance.Hair);
         ApplySocketFaceAccessory(Agent, ResolvedAppearance.FacialHair,
             SocketFacialHairMesh, Agent->FacialHairMesh,
             DefaultFacialHairSocket,
@@ -746,67 +746,41 @@ void UTMOPCharacterAppearanceComponent::SelectHairMaterials(const FTMOPPersonPro
     Select(ResolvedAppearance.FacialHair, Profile.AppearanceProfile.FacialHair, BeardKey);
 }
 
-bool UTMOPCharacterAppearanceComponent::ApplySocketHair(
+bool UTMOPCharacterAppearanceComponent::ApplySkeletalHair(
     ATMOPHistoricalAgent* Agent, const FTMOPResolvedAppearancePart& Part)
 {
     ClearSocketHair();
-    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh)) return false;
-    if (IsValid(Agent->HairMesh))
-    {
-        Agent->HairMesh->SetSkeletalMesh(nullptr);
-        Agent->HairMesh->SetVisibility(false, true);
-    }
+    if (!IsValid(Agent) || !IsValid(Agent->BodyMesh) || !IsValid(Agent->HairMesh)) return false;
+    USkeletalMeshComponent* Hair = Agent->HairMesh;
+    Hair->SetLeaderPoseComponent(nullptr);
+    Hair->SetSkeletalMesh(nullptr);
+    Hair->EmptyOverrideMaterials();
+    Hair->SetVisibility(false, true);
+    // Skinning already applies the animated head transform. Never attach this
+    // component to a bone/socket or reuse static hair's pivot/rotation correction.
+    Hair->SetAbsolute(false, false, false);
+    Hair->AttachToComponent(Agent->BodyMesh,
+        FAttachmentTransformRules::SnapToTargetIncludingScale, NAME_None);
+    Hair->SetRelativeTransform(FTransform::Identity);
+    Hair->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    Hair->SetGenerateOverlapEvents(false);
     if (Part.bIntentionallyEmpty) return true;
-    if (Part.StaticMesh.IsNull())
-    {
-        if (!Part.Mesh.IsNull())
-        {
-            ResolvedAppearance.Diagnostics.Add(TEXT("Hair uses legacy Skeletal Mesh; assign StaticMesh to migrate to socket hair."));
-            return ApplyPart(Agent->HairMesh, Part, false);
-        }
-        return false;
-    }
-    UStaticMesh* Mesh = Part.StaticMesh.LoadSynchronous();
-    if (!Mesh)
+    if (Part.Mesh.IsNull())
     {
         ResolvedAppearance.Diagnostics.Add(FString::Printf(
-            TEXT("Hair StaticMesh failed to load: %s"), *Part.StaticMesh.ToString()));
+            TEXT("Hair '%s' needs a Manny/Quinn-compatible Skeletal Mesh in Mesh (or MeshOverride). Re-export/import hair as skeletal; StaticMesh/HairSocket are not used."),
+            *Part.CatalogId.ToString()));
         return false;
     }
-    // Old catalog rows used HeadwearSocket for every head accessory. Hair has
-    // its own authored pivot now, so migrate that legacy default in place.
-    FName Socket = Part.AttachmentSocket.IsNone() ||
-        Part.AttachmentSocket == DefaultHeadwearSocket
-        ? DefaultHairSocket : Part.AttachmentSocket;
-    if (!Agent->BodyMesh->DoesSocketExist(Socket)) Socket = HeadwearFallbackBone;
-    if (!Agent->BodyMesh->DoesSocketExist(Socket))
+    if (!Part.AttachmentTransform.Equals(FTransform::Identity))
     {
-        ResolvedAppearance.Diagnostics.Add(TEXT("Hair socket and head fallback bone are missing."));
-        return false;
+        ResolvedAppearance.Diagnostics.Add(TEXT("Skeletal hair ignores AttachmentTransform. Use the face row's HeadAccessoryFit.HairOffset for fitting."));
     }
-    if (!IsValid(SocketHairMesh))
-    {
-        SocketHairMesh = NewObject<UStaticMeshComponent>(Agent, TEXT("HairStaticMesh"));
-        Agent->AddInstanceComponent(SocketHairMesh);
-        SocketHairMesh->SetMobility(EComponentMobility::Movable);
-        SocketHairMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-        SocketHairMesh->SetGenerateOverlapEvents(false);
-        SocketHairMesh->SetupAttachment(Agent->BodyMesh);
-        SocketHairMesh->RegisterComponent();
-    }
-    SocketHairMesh->SetStaticMesh(Mesh);
-    SocketHairMesh->AttachToComponent(Agent->BodyMesh,
-        FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
-    SocketHairMesh->SetRelativeTransform(BuildSocketAccessoryTransform(Mesh,
-        Part.AttachmentTransform *
-            ResolvedAppearance.Face.HeadAccessoryFit.HairOffset,
-        TEXT("Hair")));
-    SocketHairMesh->SetCullDistance(CullDistanceCentimeters);
-    SocketHairMesh->SetVisibility(true, true);
-    SocketHairMesh->SetHiddenInGame(false);
-    UMaterialInterface* Material = Part.Material.LoadSynchronous();
-    if (!Material && Part.bUsesObscuredFallback) Material = ObscuredMaterialOverride.LoadSynchronous();
-    ApplyHairMaterial(SocketHairMesh, Material, Part.ObscurityAmount);
+    // ApplyPart checks the skeleton and applies the material selected by
+    // SelectHairMaterials without overwriting its authored colour parameters.
+    if (!ApplyPart(Hair, Part, false)) return false;
+    Hair->SetLeaderPoseComponent(Agent->BodyMesh, true);
+    Hair->SetCullDistance(CullDistanceCentimeters);
     return true;
 }
 

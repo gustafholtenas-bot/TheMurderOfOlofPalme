@@ -1,4 +1,5 @@
 #include "World/TMOPWorldSubsystem.h"
+#include "GameFramework/Actor.h"
 
 #include "Engine/GameInstance.h"
 #include "Time/TMOPClockSubsystem.h"
@@ -93,7 +94,9 @@ UObject* UTMOPWorldSubsystem::FindWorldObject(const FName ObjectId) const
 {
     if (const FRegisteredObject* Existing = RegisteredObjects.Find(ObjectId))
     {
-        return Existing->Object.Get();
+        UObject* Object = Existing->Object.Get();
+        const auto* Actor = Cast<AActor>(Object);
+        return Actor && Actor->Tags.Contains(TEXT("TMOP_HistoryAbsent")) ? nullptr : Object;
     }
 
     return nullptr;
@@ -102,7 +105,7 @@ UObject* UTMOPWorldSubsystem::FindWorldObject(const FName ObjectId) const
 bool UTMOPWorldSubsystem::IsWorldObjectRegistered(const FName ObjectId) const
 {
     const FRegisteredObject* Existing = RegisteredObjects.Find(ObjectId);
-    return Existing != nullptr && Existing->Object.IsValid();
+    return Existing != nullptr && FindWorldObject(ObjectId) != nullptr;
 }
 
 TArray<FTMOPWorldObjectInfo> UTMOPWorldSubsystem::GetWorldObjectsByType(
@@ -112,7 +115,7 @@ TArray<FTMOPWorldObjectInfo> UTMOPWorldSubsystem::GetWorldObjectsByType(
 
     for (const TPair<FName, FRegisteredObject>& Pair : RegisteredObjects)
     {
-        if (Pair.Value.ObjectType != ObjectType || !Pair.Value.Object.IsValid())
+        if (Pair.Value.ObjectType != ObjectType || !FindWorldObject(Pair.Key))
         {
             continue;
         }
@@ -141,7 +144,7 @@ TArray<FName> UTMOPWorldSubsystem::GetRegisteredObjectIds() const
 
     for (const TPair<FName, FRegisteredObject>& Pair : RegisteredObjects)
     {
-        if (Pair.Value.Object.IsValid())
+        if (FindWorldObject(Pair.Key))
         {
             Results.Add(Pair.Key);
         }
@@ -294,4 +297,11 @@ void UTMOPWorldSubsystem::HandleLoopRestarted(
     const FTMOPTime RestartTime)
 {
     ResetRuntimeWorldState(NewLoopNumber);
+}
+
+void UTMOPWorldSubsystem::RestoreHistoricalState(const TMap<FName, FTMOPWorldStateValue>& Values, const TSet<FName>& OwnedKeys)
+{
+    // Deliberately no event delegates: restoring state must not execute history twice.
+    for (FName Key : OwnedKeys) RuntimeWorldState.Remove(Key);
+    for (const auto& Pair : Values) RuntimeWorldState.Add(Pair.Key, Pair.Value);
 }

@@ -50,6 +50,8 @@ ETMOPVehicleTakeoverResult UTMOPVehicleTakeoverComponent::TryEnterVehicle(
     ACharacter* Player = Cast<ACharacter>(GetOwner());
     if (!IsValid(Player) || !IsValid(Vehicle) || IsInsideVehicle())
         return ResolveAndBroadcast(ETMOPVehicleTakeoverResult::FailedNoVehicle, Vehicle, nullptr);
+    if (Vehicle->Tags.Contains(TEXT("TMOP_AuthoritativeHistory")) && bPreferDriverSeat)
+        return ResolveAndBroadcast(ETMOPVehicleTakeoverResult::FailedDriverCannotBeRemoved, Vehicle, nullptr);
     UTMOPVehicleSeatComponent* Seat = SelectSeat(Vehicle, bPreferDriverSeat);
     if (!IsValid(Seat))
         return ResolveAndBroadcast(ETMOPVehicleTakeoverResult::FailedNoSeat, Vehicle, nullptr);

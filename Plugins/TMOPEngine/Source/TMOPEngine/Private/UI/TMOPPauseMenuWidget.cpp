@@ -4,6 +4,7 @@
 #include "Observations/TMOPNotebookPresentation.h"
 #include "UI/TMOPLocalPanel.h"
 #include "UI/TMOPControlsPanel.h"
+#include "UI/TMOPPlayerAppearancePanel.h"
 #include "UI/TMOPControlUIHelpers.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
@@ -1286,6 +1287,17 @@ FReply UTMOPPauseMenuWidget::HandleOpenPublication(UTMOPNewspaperItemDefinition*
 
 void UTMOPPauseMenuWidget::BuildSettingsPage()
 {
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 8.0f)
+    [SNew(SButton).Text(FText::FromString(TEXT("Player appearance")))
+        .OnClicked_Lambda([this] {
+            if (PageContentHost.IsValid())
+                PageContentHost->SetContent(SNew(SVerticalBox)
+                    + SVerticalBox::Slot().AutoHeight()[SNew(SButton)
+                        .Text(FText::FromString(TEXT("◀ Inställningar")))
+                        .OnClicked_Lambda([this] { ShowSection(ETMOPPauseHubSection::Settings); return FReply::Handled(); })]
+                    + SVerticalBox::Slot().FillHeight(1)[SNew(STMOPPlayerAppearancePanel).Player(PlayerCharacter.Get())]);
+            return FReply::Handled();
+        })];
     AddHeading(NSLOCTEXT("TMOP", "GraphicsQuality", "Grafikkvalitet"));
     TSharedRef<SHorizontalBox> Quality = SNew(SHorizontalBox);
     const TArray<FText> Labels = { FText::FromString(TEXT("Low")), FText::FromString(TEXT("Medium")), FText::FromString(TEXT("High")), FText::FromString(TEXT("Epic")) };
@@ -1612,7 +1624,7 @@ FReply UTMOPPauseMenuWidget::HandleQuitClicked()
 
 void UTMOPPauseMenuWidget::BuildMoveInTimePage()
 {
-    AddBody(NSLOCTEXT("TMOP", "MoveTimeInstructions", "Skriv HH:MM eller HH:MM:SS. Endast 23:00:00–23:45:00 godtas. Världen byggs om till det valda klockslaget."));
+    AddBody(NSLOCTEXT("TMOP", "MoveTimeInstructions", "Skriv HH:MM eller HH:MM:SS. Endast 23:00:00–23:45:00 godtas. Tiden avrundas till närmaste femsekunderssteg. En giltig historisk bake krävs."));
     FString Current = TEXT("23:00:00");
     if (IsValid(PlayerCharacter)) if (UTMOPClockSubsystem* Clock = PlayerCharacter->GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()) Current = Clock->GetCurrentTime().ToDisplayString();
     ContentBox->AddSlot().AutoHeight().Padding(2.0f,8.0f)[ SAssignNew(TimeEntryBox,SEditableTextBox).Text(FText::FromString(Current)).HintText(FText::FromString(TEXT("23:21:30"))) ];
@@ -1628,7 +1640,7 @@ FReply UTMOPPauseMenuWidget::HandleMoveInTimeClicked()
     const bool bRange = bParsed && H==23 && M>=0 && M<=45 && S>=0 && S<=59 && !(M==45 && S>0);
     if (!bRange) { SetStatus(NSLOCTEXT("TMOP", "InvalidMoveTime", "Ogiltig tid. Använd exempelvis 23:21:30 inom intervallet 23:00–23:45.")); return FReply::Handled(); }
     bool bMoved=false; for (TActorIterator<ATMOPSimulationDebugDirector> It(GetWorld()); It; ++It) { bMoved=It->JumpToSimulationTime(FTMOPTime(H,M,S)); break; }
-    SetStatus(bMoved ? NSLOCTEXT("TMOP", "MoveTimeSuccess", "Världen flyttades till det nya klockslaget.") : NSLOCTEXT("TMOP", "MoveTimeFailed", "Ingen TMOPSimulationDebugDirector hittades, eller tiden avvisades."));
+    SetStatus(bMoved ? NSLOCTEXT("TMOP", "MoveTimeSuccess", "Tidsförflyttningen förbereds. Spelet behåller menypausen när den är klar.") : NSLOCTEXT("TMOP", "MoveTimeFailed", "Tidsförflyttning kunde inte starta. Kontrollera att en giltig historisk bake är laddad."));
     return FReply::Handled();
 }
 

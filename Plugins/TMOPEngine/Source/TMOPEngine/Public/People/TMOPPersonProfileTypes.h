@@ -776,6 +776,10 @@ struct TMOPENGINE_API FTMOPAppearancePartChoice
 {
     GENERATED_BODY()
 
+    /** Explicit user choice: do not generate a replacement for this slot. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
+    bool bHidden = false;
+
     /** Stable catalog ID, e.g. COAT_WOOL_1986_03 or UNKNOWN_TROUSERS_OBSCURED. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Person|Visual Appearance")
     FName CatalogId = NAME_None;

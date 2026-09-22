@@ -3,6 +3,10 @@
 #include "Engine/Texture2D.h"
 #include "Styling/CoreStyle.h"
 #include "UI/TMOPMainMenuIntroDirector.h"
+#include "UI/TMOPPlayerAppearancePanel.h"
+#include "Player/TMOPPlayerCharacter.h"
+#include "Kismet/GameplayStatics.h"
+#include "Widgets/Layout/SWidgetSwitcher.h"
 #include "UI/TMOPSaveGameService.h"
 #include "UI/TMOPTypographyDirector.h"
 #include "Widgets/Images/SImage.h"
@@ -12,6 +16,7 @@
 #include "Widgets/Layout/SScrollBox.h"
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SOverlay.h"
+#include "Widgets/SNullWidget.h"
 #include "Widgets/Text/STextBlock.h"
 
 UTMOPMainMenuWidget::UTMOPMainMenuWidget(const FObjectInitializer& ObjectInitializer)
@@ -106,7 +111,7 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           [ SNew(SBox).WidthOverride(760.0f).HeightOverride(260.0f)
             [ SNew(SImage).Image(&LogoBrush) ] ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
-          [ SNew(SHorizontalBox)
+          [ SNew(SHorizontalBox).Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; })
             + SHorizontalBox::Slot().AutoWidth()
             [ MenuButton(FText::FromString(TEXT("1 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 1)) ]
             + SHorizontalBox::Slot().AutoWidth()
@@ -116,10 +121,10 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
             + SHorizontalBox::Slot().AutoWidth()
             [ MenuButton(FText::FromString(TEXT("4 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 4)) ] ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
-          [ SNew(STextBlock).Text_Lambda([this]()
+          [ SNew(STextBlock).Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; }).Text_Lambda([this]()
             { return FText::FromString(FString::Printf(TEXT("Valt: %d spelare · lokal delad skärm"), Director.IsValid() ? Director->LocalPlayerCount : 1)); }) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 8)
-          [ SNew(SButton).OnClicked_UObject(this, &UTMOPMainMenuWidget::KeyboardModeClicked)
+          [ SNew(SButton).Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; }).OnClicked_UObject(this, &UTMOPMainMenuWidget::KeyboardModeClicked)
             [ SNew(STextBlock).Text_Lambda([this]()
               {
                   if (!Director.IsValid() || !Director->bKeyboardForPlayerOne)
@@ -132,8 +137,12 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           [ SNew(STextBlock).AutoWrapText(true).ColorAndOpacity(FLinearColor(1,0.4f,0.2f))
             .Text_Lambda([this]() { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); }) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 28, 0, 0)
-          [ MenuButton(NSLOCTEXT("TMOP", "MainMenuNewGame", "STARTA NYTT SPEL"),
-              FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::StartClicked)) ]
+          [ SNew(SButton).Text_Lambda([this] { return FText::FromString(bChoosingPlayerCount ? TEXT("NÄSTA: VÄLJ UTSEENDE") : TEXT("STARTA NYTT SPEL")); })
+              .OnClicked_UObject(this, &UTMOPMainMenuWidget::StartClicked) ]
+          + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+          [ SNew(SButton).Text(FText::FromString(TEXT("TILLBAKA")))
+              .Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; })
+              .OnClicked_Lambda([this] { bChoosingPlayerCount = false; return FReply::Handled(); }) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
           [ MenuButton(NSLOCTEXT("TMOP", "MainMenuLoad", "LADDA SPEL"),
               FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::LoadClicked)) ]
@@ -143,6 +152,8 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
           [ MenuButton(NSLOCTEXT("TMOP", "MainMenuQuit", "STÄNG AV"),
               FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::QuitClicked)) ] ]
+        + SOverlay::Slot().Padding(20)
+        [SAssignNew(AppearanceHost, SBox).Visibility(EVisibility::Collapsed)]
         + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center)
         [ SAssignNew(LoadPanel, SVerticalBox).Visibility(EVisibility::Collapsed)
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 0.0f, 0.0f, 18.0f)
@@ -275,8 +286,61 @@ void UTMOPMainMenuWidget::ResetTypewriter()
         FullIntroBody.Left(RevealedBodyCharacters)));
 }
 
+void UTMOPMainMenuWidget::HideAppearanceSetup()
+{
+    if (AppearanceHost.IsValid())
+    {
+        AppearanceHost->SetVisibility(EVisibility::Collapsed);
+        AppearanceHost->SetContent(SNullWidget::NullWidget);
+    }
+    AppearanceSwitcher.Reset();
+}
+
+void UTMOPMainMenuWidget::ShowPlayerCountPage()
+{
+    SetMenuMode(true);
+    bChoosingPlayerCount = true;
+}
+
+void UTMOPMainMenuWidget::ShowAppearanceSetup(int32 Count)
+{
+    if (!AppearanceHost.IsValid() || !Director.IsValid()) return;
+    SetMenuMode(false);
+    SetIntroControlsVisible(false);
+    if (LoadPanel.IsValid()) LoadPanel->SetVisibility(EVisibility::Collapsed);
+    TSharedRef<SVerticalBox> Body = SNew(SVerticalBox);
+    TSharedRef<SHorizontalBox> Tabs = SNew(SHorizontalBox);
+    SAssignNew(AppearanceSwitcher, SWidgetSwitcher);
+    for (int32 PlayerIndex=0; PlayerIndex<FMath::Clamp(Count, 1, 4); ++PlayerIndex)
+    {
+        const TWeakObjectPtr<ATMOPMainMenuIntroDirector> Owner = Director;
+        Tabs->AddSlot().FillWidth(1).Padding(4)[SNew(SButton)
+            .Text_Lambda([Owner, PlayerIndex] { return FText::FromString(FString::Printf(TEXT("SPELARE %d — %s"),
+                PlayerIndex+1, Owner.IsValid() && Owner->IsAppearanceReady(PlayerIndex) ? TEXT("KLAR ✓") : TEXT("VÄLJ UTSEENDE"))); })
+            .OnClicked_Lambda([this, PlayerIndex] {
+                if (AppearanceSwitcher.IsValid()) AppearanceSwitcher->SetActiveWidgetIndex(PlayerIndex);
+                return FReply::Handled();
+            })];
+        auto* Player = Cast<ATMOPPlayerCharacter>(UGameplayStatics::GetPlayerCharacter(this, PlayerIndex));
+        AppearanceSwitcher->AddSlot()[SNew(STMOPPlayerAppearancePanel).Player(Player).Startup(true)
+            .Ready_Lambda([Owner, PlayerIndex] { return Owner.IsValid() && Owner->IsAppearanceReady(PlayerIndex); })
+            .OnEdited_Lambda([Owner, PlayerIndex] { if (Owner.IsValid()) Owner->AppearanceEdited(PlayerIndex); })
+            .OnReady_Lambda([Owner, PlayerIndex] { if (Owner.IsValid()) Owner->ConfirmPlayerAppearance(PlayerIndex); })];
+    }
+    Body->AddSlot().AutoHeight()[Tabs];
+    Body->AddSlot().FillHeight(1)[AppearanceSwitcher.ToSharedRef()];
+    Body->AddSlot().AutoHeight().Padding(6)[SNew(STextBlock).AutoWrapText(true)
+        .Text_Lambda([this] { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); })];
+    Body->AddSlot().AutoHeight().Padding(6)[SNew(SButton).Text(FText::FromString(TEXT("Tillbaka till antal spelare")))
+        .OnClicked_Lambda([this] { if (Director.IsValid()) Director->CancelAppearanceSetup(); return FReply::Handled(); })];
+    AppearanceHost->SetContent(SNew(SBorder).Padding(12).BorderBackgroundColor(FLinearColor(0.025f,0.025f,0.03f,1))[Body]);
+    AppearanceHost->SetVisibility(EVisibility::Visible);
+    AppearanceSwitcher->SetActiveWidgetIndex(0);
+}
+
 void UTMOPMainMenuWidget::SetMenuMode(const bool bShowMenu)
 {
+    if (bShowMenu) { HideAppearanceSetup(); bChoosingPlayerCount = false; }
     if (MenuPanel.IsValid()) MenuPanel->SetVisibility(
         bShowMenu ? EVisibility::Visible : EVisibility::Collapsed);
     if (IntroPanel.IsValid() && bShowMenu)
@@ -379,7 +443,11 @@ void UTMOPMainMenuWidget::SetIntroCard(const FText& Heading,
 }
 
 FReply UTMOPMainMenuWidget::StartClicked()
-{ if (Director.IsValid()) Director->StartNewGame(); return FReply::Handled(); }
+{
+    if (!bChoosingPlayerCount) ShowPlayerCountPage();
+    else if (Director.IsValid()) Director->BeginAppearanceSetup(Director->LocalPlayerCount);
+    return FReply::Handled();
+}
 FReply UTMOPMainMenuWidget::LoadClicked()
 { if (Director.IsValid()) Director->LoadGame(); return FReply::Handled(); }
 FReply UTMOPMainMenuWidget::LoadSlotClicked(FString SlotName)

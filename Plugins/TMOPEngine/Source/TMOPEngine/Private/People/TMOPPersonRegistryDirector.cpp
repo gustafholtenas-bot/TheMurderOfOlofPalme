@@ -202,6 +202,7 @@ int32 ATMOPPersonRegistryDirector::RefreshAllActiveProfiles()
 
 int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
 {
+    if (GetGameInstance() && GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->bAuthoritativePlayback) return 0;
     for (TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
         if (Pair.Value.bSpawnedByDirector && Pair.Value.Agent.IsValid())
             Pair.Value.Agent->Destroy();
@@ -1193,10 +1194,19 @@ bool ATMOPPersonRegistryDirector::ApplyTimelineEntry(FPersonRuntime& Runtime,
             FMath::Max(0.0f, Entry.AnimationBlendOutSeconds),
             FMath::Max(0.01f, Entry.AnimationPlayRate),
             LoopCount) != nullptr;
-        if (bPlaying) ApplyConversationFocus(Agent, Entry);
+        if (bPlaying)
+        {
+            Agent->PlaybackUniqueAnimationAsset = Animation->GetPathName();
+            Agent->PlaybackUniqueAnimationSlot = Entry.AnimationSlotName.IsNone() ? FName(TEXT("DefaultSlot")) : Entry.AnimationSlotName;
+            Agent->PlaybackUniqueAnimationStart = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->GetCurrentTimeSecondsExact();
+            Agent->PlaybackUniqueAnimationRate = FMath::Max(0.01f, Entry.AnimationPlayRate);
+            Agent->PlaybackUniqueAnimationLoops = Entry.AnimationLoopCount;
+            ApplyConversationFocus(Agent, Entry);
+        }
         return bPlaying;
     }
     case ETMOPPersonTimelineAction::StopUniqueAnimation:
+        Agent->PlaybackUniqueAnimationAsset.Empty();
         if (UAnimInstance* AnimInstance = IsValid(Agent->GetMesh())
             ? Agent->GetMesh()->GetAnimInstance() : nullptr)
         {
@@ -1860,7 +1870,11 @@ ATMOPVehicleBase* ATMOPPersonRegistryDirector::FindVehicle(const FName VehicleId
 ATMOPHistoricalAgent* ATMOPPersonRegistryDirector::FindSpawnedPerson(const FName EntityId) const
 {
     const FPersonRuntime* Runtime = RuntimePeople.Find(EntityId);
-    return Runtime != nullptr ? Runtime->Agent.Get() : nullptr;
+    if (Runtime && Runtime->Agent.IsValid() && !Runtime->Agent->Tags.Contains(TEXT("TMOP_HistoryAbsent"))) return Runtime->Agent.Get();
+    if (GetGameInstance())
+        if (auto* Registry = GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>())
+            return Registry->FindActiveAgent(EntityId);
+    return nullptr;
 }
 
 FText ATMOPPersonRegistryDirector::GetPersonDialog(

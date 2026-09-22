@@ -53,6 +53,25 @@ class TMOPENGINE_API ATMOPHistoricalAgent : public ACharacter
 public:
     ATMOPHistoricalAgent();
 
+    FString CapturePlaybackSpeech() const;
+    void RestorePlaybackSpeech(const FString& State, double Time, bool bSeeking, bool bAllowAudio = true);
+    void UpdatePlaybackPresentation(double Time, bool bSeeking);
+    void UpdatePlaybackNameLabel();
+    float GetPlaybackFade() const { return CurrentVisibilityFadeAlpha; }
+    void SetPlaybackFade(float Alpha);
+
+    // Persistent animation intent is recorded alongside the timeline output.
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|World Bake")
+    FString PlaybackUniqueAnimationAsset;
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|World Bake")
+    FName PlaybackUniqueAnimationSlot = TEXT("DefaultSlot");
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|World Bake")
+    double PlaybackUniqueAnimationStart = 0;
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|World Bake")
+    float PlaybackUniqueAnimationRate = 1;
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|World Bake")
+    int32 PlaybackUniqueAnimationLoops = 1;
+
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
 
@@ -512,6 +531,13 @@ protected:
         ETMOPAgentActivityState NewActivity);
 
 private:
+    FString RecordedSpeechText;
+    FString RecordedSpeechSound;
+    double RecordedSpeechStart = 0;
+    double RecordedSpeechEnd = 0;
+    FString AppliedPlaybackSpeech;
+    FString AppliedPlaybackAnimation;
+    TWeakObjectPtr<class UAnimMontage> PlaybackMontage;
     void UpdateTimelinePriority();
     bool bTimelinePriorityApplied = false;
     TEnumAsByte<ECollisionResponse> PrioritySavedPawnResponse = ECR_Block;

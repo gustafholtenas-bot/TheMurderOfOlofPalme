@@ -79,6 +79,8 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Radio")
     FText GetCurrentProgramName() const;
 
+    void RestoreAfterTimeSeek();
+
 private:
     UFUNCTION()
     void HandleItemInput(UTMOPItemDefinition* Item, ETMOPItemInput Input,

@@ -19,6 +19,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|UI|Speech")
     void SetSpeakerName(const FText& NewName);
 
+    /** Absolute typewriter position, independent of previous visits to this line. */
+    void SetPlaybackElapsed(float Seconds);
+
     /** A deliberately brisk typewriter speed for short world-space dialogue. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Speech",
         meta=(ClampMin="1.0", ClampMax="180.0"))
@@ -35,4 +38,5 @@ private:
     FString FullSpeechString;
     float RevealedCharacterAccumulator = 0.0f;
     int32 RevealedCharacterCount = 0;
+    bool bHistoricalPlayback = false;
 };

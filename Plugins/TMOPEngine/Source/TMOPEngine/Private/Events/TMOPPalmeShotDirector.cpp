@@ -1,4 +1,6 @@
 #include "Events/TMOPPalmeShotDirector.h"
+#include "Components/AudioComponent.h"
+#include "Time/TMOPTimeTravelPolicy.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "Player/TMOPPlayerCharacter.h"
 
@@ -147,6 +149,7 @@ void ATMOPPalmeShotDirector::TryActivateProximitySlowMotion(
     const FVector MurderLocation = ResolveAnchorLocation(OlofStartAnchorId,
         OlofAgent.IsValid() ? OlofAgent->GetActorLocation() : GetActorLocation());
     const float RadiusCm = SlowMotionActivationRadiusMeters * 100.0f;
+    if (const auto* C = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()) if (C->bRecordingAuthoritativeBake || C->bAuthoritativePlayback) return;
     bool bAnyPlayerNear = false;
     for (const ATMOPPlayerCharacter* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
         bAnyPlayerNear |= FVector::DistSquared2D(Player->GetActorLocation(), MurderLocation) <= FMath::Square(RadiusCm);
@@ -258,9 +261,10 @@ void ATMOPPalmeShotDirector::SpawnEffect(UNiagaraSystem* Effect,
     const FVector& Location, const FVector& Direction)
 {
     if (!IsValid(Effect) || GetWorld() == nullptr) return;
-    UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), Effect, Location,
+    HistoricalEffects.RemoveAll([](const auto& C) { return !C.IsValid(); });
+    HistoricalEffects.Add(UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), Effect, Location,
         Direction.Rotation(), FVector::OneVector, true, true,
-        ENCPoolMethod::AutoRelease, true);
+        ENCPoolMethod::None, true));
 }
 
 void ATMOPPalmeShotDirector::SpawnTrail(const FVector& Start, const FVector& End)
@@ -268,9 +272,11 @@ void ATMOPPalmeShotDirector::SpawnTrail(const FVector& Start, const FVector& End
     if (!IsValid(BulletLightTrailEffect) || GetWorld() == nullptr) return;
     UNiagaraComponent* Trail = UNiagaraFunctionLibrary::SpawnSystemAtLocation(
         GetWorld(), BulletLightTrailEffect, Start, (End - Start).Rotation(),
-        FVector::OneVector, true, false, ENCPoolMethod::AutoRelease, true);
+        FVector::OneVector, true, false, ENCPoolMethod::None, true);
     if (IsValid(Trail))
     {
+        HistoricalEffects.RemoveAll([](const auto& C) { return !C.IsValid(); });
+        HistoricalEffects.Add(Trail);
         Trail->SetVariableVec3(TEXT("User.Start"), Start);
         Trail->SetVariableVec3(TEXT("User.End"), End);
         Trail->Activate(true);
@@ -280,6 +286,7 @@ void ATMOPPalmeShotDirector::SpawnTrail(const FVector& Start, const FVector& End
 void ATMOPPalmeShotDirector::FireFirstShot()
 {
     bFirstShotFired = true;
+    PlaybackFirstShotSecond = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->GetCurrentTimeSecondsExact();
     if (bFirstShotUsesWallRoute) FireWallRound(FirstShotSound);
     else FireSnowRound(FirstShotSound);
 }
@@ -287,6 +294,7 @@ void ATMOPPalmeShotDirector::FireFirstShot()
 void ATMOPPalmeShotDirector::FireSecondShot()
 {
     bSecondShotFired = true;
+    PlaybackSecondShotSecond = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->GetCurrentTimeSecondsExact();
     if (bFirstShotUsesWallRoute) FireSnowRound(SecondShotSound);
     else FireWallRound(SecondShotSound);
 }
@@ -301,7 +309,11 @@ void ATMOPPalmeShotDirector::FireWallRound(USoundBase* Sound)
     SpawnEffect(WallImpactEffect, Wall, Start - Wall);
     const FVector RicochetEnd = ResolveAnchorLocation(FirstShotRicochetEndAnchorId, Wall);
     if (!RicochetEnd.Equals(Wall, 1.0f)) SpawnTrail(Wall, RicochetEnd);
-    if (IsValid(Sound)) UGameplayStatics::PlaySoundAtLocation(this, Sound, Start);
+    if (IsValid(Sound))
+    {
+        HistoricalShotAudio.RemoveAll([](const auto& A) { return !A.IsValid(); });
+        HistoricalShotAudio.Add(UGameplayStatics::SpawnSoundAtLocation(this, Sound, Start));
+    }
 }
 
 void ATMOPPalmeShotDirector::FireSnowRound(USoundBase* Sound)
@@ -312,7 +324,11 @@ void ATMOPPalmeShotDirector::FireSnowRound(USoundBase* Sound)
     SpawnTrail(Start, Snow);
     SpawnEffect(MuzzleSmokeEffect, Start, Snow - Start);
     SpawnEffect(SnowImpactEffect, Snow, Start - Snow);
-    if (IsValid(Sound)) UGameplayStatics::PlaySoundAtLocation(this, Sound, Start);
+    if (IsValid(Sound))
+    {
+        HistoricalShotAudio.RemoveAll([](const auto& A) { return !A.IsValid(); });
+        HistoricalShotAudio.Add(UGameplayStatics::SpawnSoundAtLocation(this, Sound, Start));
+    }
 }
 
 void ATMOPPalmeShotDirector::FinishSequence()
@@ -356,6 +372,7 @@ void ATMOPPalmeShotDirector::ShowBloodPool()
 
 void ATMOPPalmeShotDirector::ResetSequence()
 {
+    PlaybackFirstShotSecond = -1; PlaybackSecondShotSecond = -1;
     RestoreSlowMotion();
     const auto RestoreAgent = [](ATMOPHistoricalAgent* Agent)
     {
@@ -380,4 +397,28 @@ void ATMOPPalmeShotDirector::ResetSequence()
     }
     OlofAgent.Reset();
     KillerAgent.Reset();
+}
+
+void ATMOPPalmeShotDirector::EvaluatePlaybackAudio(double Previous, double Current, bool bSeeking)
+{
+    if (bSeeking)
+    {
+        for (const auto& Effect : HistoricalEffects) if (Effect.IsValid()) Effect->DestroyComponent();
+        HistoricalEffects.Reset();
+        for (const auto& Sound : HistoricalShotAudio) if (Sound.IsValid()) Sound->Stop();
+        HistoricalShotAudio.Reset();
+        RestoreSlowMotion();
+    }
+    OlofAgent = FindAgent(OlofEntityId);
+    KillerAgent = FindAgent(KillerEntityId);
+    if (!KillerAgent.IsValid()) return;
+    if (bSeeking) return;
+    if (PlaybackFirstShotSecond >= 0 && TMOPTimeTravel::Crossed(Previous, Current, PlaybackFirstShotSecond, false))
+    {
+        if (bFirstShotUsesWallRoute) FireWallRound(FirstShotSound); else FireSnowRound(FirstShotSound);
+    }
+    if (PlaybackSecondShotSecond >= 0 && TMOPTimeTravel::Crossed(Previous, Current, PlaybackSecondShotSecond, false))
+    {
+        if (bFirstShotUsesWallRoute) FireSnowRound(SecondShotSound); else FireWallRound(SecondShotSound);
+    }
 }

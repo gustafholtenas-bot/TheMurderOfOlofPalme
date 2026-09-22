@@ -4,6 +4,8 @@
 #include "GameFramework/Actor.h"
 #include "Time/TMOPTime.h"
 #include "UI/TMOPMainMenuIntroTypes.h"
+#include "UI/TMOPAppearanceLobbyState.h"
+#include "Engine/EngineBaseTypes.h"
 #include "TMOPMainMenuIntroDirector.generated.h"
 
 class ACameraActor;
@@ -15,6 +17,7 @@ class UDataTable;
 class UTMOPMainMenuWidget;
 class UTMOPVehicleModelData;
 class UTexture2D;
+class UWorld;
 
 UCLASS(Blueprintable)
 class TMOPENGINE_API ATMOPMainMenuIntroDirector : public AActor
@@ -96,6 +99,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Intro|Finish") FTMOPTime GameStartTime = FTMOPTime(23, 0, 0);
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Main Menu") void StartNewGame();
+    bool BeginAppearanceSetup(int32 Count);
+    void CancelAppearanceSetup();
+    void AppearanceEdited(int32 Slot);
+    void ConfirmPlayerAppearance(int32 Slot);
+    bool IsAppearanceReady(int32 Slot) const { return AppearanceLobby.IsReady(Slot); }
+    /** Optional separate gameplay map. Empty keeps the existing same-map intro. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Main Menu")
+    TSoftObjectPtr<UWorld> GameplayLevel;
     UFUNCTION(BlueprintCallable, Category="TMOP|Main Menu") void LoadGame();
     bool LoadGameSlot(const FString& SlotName);
     void CloseLoadGameMenu();
@@ -104,6 +115,17 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Intro") void SkipIntro();
 
 private:
+    FTMOPAppearanceLobbyState AppearanceLobby;
+    bool bAppearanceSetupActive = false;
+    bool bStartQueued = false;
+    unsigned QueuedAppearanceGeneration = 0;
+    bool bOwnsAppearanceWorldPause = false;
+    bool PauseAppearanceWorld();
+    bool ReleaseAppearanceWorldPause();
+    bool bArrivedFromAppearanceTravel = false;
+    bool bAppearanceTravelPending = false;
+    FDelegateHandle TravelFailureHandle;
+    void HandleAppearanceTravelFailure(UWorld* World, ETravelFailure::Type Type, const FString& Message);
     void TryInitializeMenu();
     bool SpawnAndStartIntro();
     void UpdateIntro(float DeltaSeconds);

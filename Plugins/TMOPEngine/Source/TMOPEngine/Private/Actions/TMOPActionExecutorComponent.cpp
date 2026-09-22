@@ -169,6 +169,7 @@ void UTMOPActionExecutorComponent::TickComponent(
 bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
     const FTMOPScheduleEntry& Entry)
 {
+    if (GetOwner()->Tags.Contains(TEXT("TMOP_AuthoritativeHistory"))) return false;
     if (IsExecutingAction())
     {
         return false;
@@ -757,4 +758,25 @@ ATMOPHistoricalAgent*
 UTMOPActionExecutorComponent::GetHistoricalAgent() const
 {
     return Cast<ATMOPHistoricalAgent>(GetOwner());
+}
+
+FTMOPPlaybackActionState UTMOPActionExecutorComponent::CapturePlaybackAction() const
+{
+    FTMOPPlaybackActionState S;
+    S.Entry = CurrentEntry; S.State = ExecutionState; S.bHasEntry = bHasCurrentEntry;
+    S.Target = CurrentTargetLocation; S.Route = CurrentRouteAnchorIds; S.RouteIndex = CurrentRouteAnchorIndex;
+    S.ScheduledTime = CurrentScheduledTime; S.ArrivalSecond = ActiveExpectedArrivalSecond;
+    S.PhysicalArrivalSecond = ActivePhysicalArrivalSecond; S.RemainingPath = ActiveRemainingPathCm;
+    S.RequiredSpeed = ActiveRequiredSpeedCmPerSecond; S.bPossible = bActiveMovePhysicallyPossible;
+    return S;
+}
+void UTMOPActionExecutorComponent::RestorePlaybackAction(const FTMOPPlaybackActionState& S)
+{
+    CurrentEntry = S.Entry; ExecutionState = S.State; bHasCurrentEntry = S.bHasEntry;
+    CurrentTargetLocation = S.Target; CurrentRouteAnchorIds = S.Route; CurrentRouteAnchorIndex = S.RouteIndex;
+    CurrentScheduledTime = S.ScheduledTime; ActiveExpectedArrivalSecond = S.ArrivalSecond;
+    ActivePhysicalArrivalSecond = S.PhysicalArrivalSecond; ActiveRemainingPathCm = S.RemainingPath;
+    ActiveRequiredSpeedCmPerSecond = S.RequiredSpeed; bActiveMovePhysicallyPossible = S.bPossible;
+    QueuedEntries.Reset(); QueuedTriggerTimes.Reset(); ActiveVerticalTransport = nullptr;
+    SetComponentTickEnabled(false);
 }

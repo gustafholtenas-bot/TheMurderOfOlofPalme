@@ -1,4 +1,9 @@
 #include "Agents/TMOPHistoricalAgent.h"
+#include "Dom/JsonObject.h"
+#include "Serialization/JsonSerializer.h"
+#include "Animation/AnimMontage.h"
+#include "Animation/AnimSequenceBase.h"
+#include "Animation/AnimInstance.h"
 #include "Observations/TMOPNotebookTypes.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "People/TMOPPersonNameLibrary.h"
@@ -406,6 +411,11 @@ void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
     UpdateSocialFocus(DeltaSeconds);
     UpdateAutomaticSpeech(DeltaSeconds);
 
+    UpdatePlaybackNameLabel();
+}
+
+void ATMOPHistoricalAgent::UpdatePlaybackNameLabel()
+{
     if (NameLabel) NameLabel->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
     if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ||
         !bShowNameLabel || !IsValid(NameLabel) || GetWorld() == nullptr)
@@ -577,6 +587,12 @@ float ATMOPHistoricalAgent::ShowAutomaticSpeech(
             EAttachLocation::KeepRelativeOffset, true);
     }
     AutomaticSpeechSecondsRemaining = FMath::Clamp(Duration, 1.5f, 300.0f);
+    RecordedSpeechText = Text.ToString();
+    RecordedSpeechSound = GetPathNameSafe(VoiceOver);
+    const auto* SpeechClock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
+    RecordedSpeechStart = SpeechClock->GetCurrentTimeSecondsExact();
+    RecordedSpeechEnd = RecordedSpeechStart + AutomaticSpeechSecondsRemaining;
+
 
     if (UTMOPAnimationStateComponent* Animation =
         FindComponentByClass<UTMOPAnimationStateComponent>())
@@ -592,6 +608,9 @@ float ATMOPHistoricalAgent::ShowAutomaticSpeech(
 void ATMOPHistoricalAgent::HideAutomaticSpeech()
 {
     AutomaticSpeechSecondsRemaining = 0.0f;
+    RecordedSpeechText.Empty();
+    AppliedPlaybackSpeech.Empty();
+    if (IsValid(ActiveSpeechAudio)) { ActiveSpeechAudio->Stop(); ActiveSpeechAudio->DestroyComponent(); }
     if (IsValid(SpeechBubble)) SpeechBubble->SetVisibility(false);
     ActiveSpeechAudio = nullptr;
     if (bAutomaticSpeechUsesTalkingOverlay && !bDialogueFocusLocked)
@@ -651,6 +670,7 @@ void ATMOPHistoricalAgent::ClearSocialFocus()
 
 void ATMOPHistoricalAgent::BeginDialogueFocus(AActor* Target)
 {
+    if (GetGameInstance() && GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->bAuthoritativePlayback) return;
     if (!IsValid(Target) || Target == this) return;
 
     const bool bSeated = IsSeatedForDialogue();
@@ -724,6 +744,7 @@ bool ATMOPHistoricalAgent::IsSeatedForDialogue() const
 
 void ATMOPHistoricalAgent::EndDialogueFocus()
 {
+    if (GetGameInstance() && GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->bAuthoritativePlayback) return;
     if (!bDialogueFocusLocked) return;
     bDialogueFocusLocked = false;
     ClearSocialFocus();
@@ -1356,6 +1377,7 @@ bool ATMOPHistoricalAgent::ApplyInitialSeatAssignment()
 bool ATMOPHistoricalAgent::SetLifeState(
     const ETMOPAgentLifeState NewState)
 {
+    if (GetGameInstance() && GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->bAuthoritativePlayback) return false;
     if (LifeState == NewState)
     {
         return false;
@@ -1372,6 +1394,7 @@ bool ATMOPHistoricalAgent::SetLifeState(
 bool ATMOPHistoricalAgent::SetActivityState(
     const ETMOPAgentActivityState NewActivity)
 {
+    if (GetGameInstance() && GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->bAuthoritativePlayback) return false;
     if (ActivityState == NewActivity)
     {
         return false;
@@ -1468,4 +1491,99 @@ void ATMOPHistoricalAgent::HandleActivityStateChanged(
     const ETMOPAgentActivityState OldActivity,
     const ETMOPAgentActivityState NewActivity)
 {
+}
+
+FString ATMOPHistoricalAgent::CapturePlaybackSpeech() const
+{
+    TSharedRef<FJsonObject> Data = MakeShared<FJsonObject>();
+    Data->SetStringField(TEXT("text"), RecordedSpeechText);
+    Data->SetStringField(TEXT("sound"), RecordedSpeechSound);
+    Data->SetNumberField(TEXT("start"), RecordedSpeechStart);
+    Data->SetNumberField(TEXT("end"), RecordedSpeechEnd);
+    FString Json;
+    FJsonSerializer::Serialize(Data, TJsonWriterFactory<>::Create(&Json));
+    return Json;
+}
+
+void ATMOPHistoricalAgent::RestorePlaybackSpeech(const FString& State, double Time, bool bSeeking, bool bAllowAudio)
+{
+    TSharedPtr<FJsonObject> Data;
+    if (!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(State), Data) || !Data.IsValid()) return;
+    const bool bChanged = AppliedPlaybackSpeech != State;
+    AppliedPlaybackSpeech = State;
+    RecordedSpeechText = Data->GetStringField(TEXT("text"));
+    RecordedSpeechSound = Data->GetStringField(TEXT("sound"));
+    RecordedSpeechStart = Data->GetNumberField(TEXT("start"));
+    RecordedSpeechEnd = Data->GetNumberField(TEXT("end"));
+    if (bChanged || bSeeking)
+    {
+        if (ActiveSpeechAudio) ActiveSpeechAudio->Stop();
+        if (bAllowAudio && Time >= RecordedSpeechStart && Time < RecordedSpeechEnd && !RecordedSpeechText.IsEmpty() && !RecordedSpeechSound.IsEmpty() && RecordedSpeechSound != TEXT("None"))
+            if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, *RecordedSpeechSound))
+            {
+                if (!IsValid(ActiveSpeechAudio))
+                {
+                    ActiveSpeechAudio = NewObject<UAudioComponent>(this);
+                    ActiveSpeechAudio->SetupAttachment(GetRootComponent());
+                    ActiveSpeechAudio->RegisterComponent();
+                }
+                ActiveSpeechAudio->SetSound(Sound);
+                ActiveSpeechAudio->Play(float(Time - RecordedSpeechStart));
+            }
+        if (SpeechBubble)
+        {
+            SpeechBubble->InitWidget();
+            if (auto* Bubble = Cast<UTMOPSpeechBubbleWidget>(SpeechBubble->GetUserWidgetObject()))
+            {
+                Bubble->SetSpeakerName(GetInGameDisplayName());
+                Bubble->SetSpeechText(FText::FromString(RecordedSpeechText));
+            }
+        }
+    }
+}
+
+void ATMOPHistoricalAgent::SetPlaybackFade(float Alpha)
+{
+    bVisibilityFadeActive = false;
+    bDestroyAfterVisibilityFade = false;
+    RefreshVisibilityFadeMeshes(false);
+    ApplyVisibilityFade(Alpha);
+}
+
+void ATMOPHistoricalAgent::UpdatePlaybackPresentation(double Time, bool bSeeking)
+{
+    const bool bSpeech = !RecordedSpeechText.IsEmpty() && Time >= RecordedSpeechStart && Time < RecordedSpeechEnd;
+    AutomaticSpeechSecondsRemaining = bSpeech ? float(RecordedSpeechEnd - Time) : 0;
+    if (SpeechBubble)
+    {
+        SpeechBubble->SetVisibility(bSpeech);
+        if (auto* Bubble = Cast<UTMOPSpeechBubbleWidget>(SpeechBubble->GetUserWidgetObject()))
+            Bubble->SetPlaybackElapsed(float(Time - RecordedSpeechStart));
+    }
+    if (!bSpeech && ActiveSpeechAudio) ActiveSpeechAudio->Stop();
+    UAnimInstance* Anim = GetMesh() ? GetMesh()->GetAnimInstance() : nullptr;
+    if (!Anim) return;
+    if (bSeeking || AppliedPlaybackAnimation != PlaybackUniqueAnimationAsset)
+    {
+        if (PlaybackMontage.IsValid()) Anim->Montage_Stop(0, PlaybackMontage.Get());
+        PlaybackMontage.Reset();
+        AppliedPlaybackAnimation = PlaybackUniqueAnimationAsset;
+    }
+    if (PlaybackUniqueAnimationAsset.IsEmpty()) return;
+    auto* Sequence = LoadObject<UAnimSequenceBase>(nullptr, *PlaybackUniqueAnimationAsset);
+    if (!Sequence || Sequence->GetPlayLength() <= 0) return;
+    const double Elapsed = FMath::Max(0.0, Time - PlaybackUniqueAnimationStart) * PlaybackUniqueAnimationRate;
+    if (PlaybackUniqueAnimationLoops > 0 && Elapsed >= Sequence->GetPlayLength() * PlaybackUniqueAnimationLoops)
+    {
+        if (PlaybackMontage.IsValid()) Anim->Montage_Stop(0, PlaybackMontage.Get());
+        PlaybackMontage.Reset();
+        return;
+    }
+    if (!PlaybackMontage.IsValid())
+        PlaybackMontage = Anim->PlaySlotAnimationAsDynamicMontage(Sequence, PlaybackUniqueAnimationSlot, 0, 0, 1, 1);
+    if (PlaybackMontage.IsValid())
+    {
+        Anim->Montage_Pause(PlaybackMontage.Get());
+        Anim->Montage_SetPosition(PlaybackMontage.Get(), float(FMath::Fmod(Elapsed, double(Sequence->GetPlayLength()))));
+    }
 }

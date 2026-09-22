@@ -4,6 +4,13 @@
 
 namespace
 {
+bool HasUsableGeometry(const FTMOPAppearanceAssetRow& Asset)
+{
+    return Asset.PartType == ETMOPAppearancePartType::Hair
+        ? !Asset.Mesh.IsNull()
+        : (!Asset.Mesh.IsNull() || !Asset.StaticMesh.IsNull());
+}
+
 void AddTagIfContains(const FString& Text, const TCHAR* Needle,
     const FName Tag, TSet<FName>& OutTags)
 {
@@ -340,7 +347,9 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
 {
     FTMOPResolvedAppearancePart Result;
     Result.PartType = PartType;
-    if (bKnownAbsent)
+    const bool bExplicitAsset = !Override.CatalogId.IsNone() ||
+        !Override.MeshOverride.IsNull() || !Override.StaticMeshOverride.IsNull();
+    if (Override.bHidden || (bKnownAbsent && !bExplicitAsset))
     {
         Result.bIntentionallyEmpty = true;
         return Result;
@@ -383,6 +392,12 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
         Result.SecondaryColor = Override.SecondaryColor;
     }
 
+    if (PartType == ETMOPAppearancePartType::Hair && !Result.StaticMesh.IsNull())
+    {
+        Diagnostics.Add(TEXT("Hair StaticMeshOverride is ignored; use a skeletal MeshOverride or a hair catalog row with Mesh."));
+        Result.StaticMesh.Reset();
+    }
+
     const bool bNeedsCatalogLookup = Result.Mesh.IsNull() &&
         Result.StaticMesh.IsNull();
     if (IsValid(AssetCatalog) &&
@@ -396,7 +411,7 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
                 AssetCatalog->FindRow<FTMOPAppearanceAssetRow>(
                     RequestedCatalogId, TEXT("TMOP exact appearance lookup"), false);
             if (Exact != nullptr && Exact->PartType == PartType &&
-                (!Exact->Mesh.IsNull() || !Exact->StaticMesh.IsNull()))
+                HasUsableGeometry(*Exact))
                 CopyAsset(*Exact, Result);
             else
             {
@@ -420,7 +435,7 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
                 if (Asset == nullptr || Asset->PartType != PartType ||
                     Asset->SelectionWeight <= 0.0f ||
                     Asset->Tags.Contains(TEXT("PendingAsset")) ||
-                    (Asset->Mesh.IsNull() && Asset->StaticMesh.IsNull()) ||
+                    !HasUsableGeometry(*Asset) ||
                     Asset->bObscuredFallback ||
                     !IsCompatible(*Asset, Profile, Profile.GetResolvedBodyBuild())) continue;
                 int32 Score = 0;
@@ -451,7 +466,8 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
             if (const FTMOPAppearanceAssetRow* Unknown =
                 AssetCatalog->FindRow<FTMOPAppearanceAssetRow>(
                     UnknownCatalogId, TEXT("TMOP unknown appearance lookup"), false))
-                CopyAsset(*Unknown, Result);
+                if (Unknown->PartType == PartType && HasUsableGeometry(*Unknown))
+                    CopyAsset(*Unknown, Result);
         Diagnostics.Add(FString::Printf(TEXT("%s uses fallback '%s'."),
             *UEnum::GetValueAsString(PartType), *UnknownCatalogId.ToString()));
     }
@@ -687,4 +703,3 @@ bool UTMOPAppearanceResolver::ResolveAppearance(
     }
     return true;
 }
-

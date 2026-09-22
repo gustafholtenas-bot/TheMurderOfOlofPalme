@@ -821,3 +821,31 @@ bool ATMOPGroupDirector::ValidateDefinitions(const TArray<FTMOPGroupDefinition>&
     }
     return OutErrors.IsEmpty();
 }
+
+void ATMOPGroupDirector::RestorePlaybackGroups(const TArray<FTMOPGroupSnapshot>& Snapshots, double Time)
+{
+    RuntimeGroups.Reset();
+    for (const auto& Snapshot : Snapshots)
+    {
+        FRuntimeGroup Group;
+        Group.Definition.GroupId = Snapshot.GroupId;
+        Group.Definition.MemberEntityIds = Snapshot.MemberEntityIds;
+        Group.Definition.LeaderEntityId = Snapshot.LeaderEntityId;
+        Group.Definition.Formation = Snapshot.Formation;
+        Group.State = Snapshot.State;
+        Group.TargetLocation = Snapshot.TargetLocation;
+        Group.AcceptanceRadius = Snapshot.AcceptanceRadius;
+        Group.PlaybackConversationEnd = Snapshot.RemainingConversationSeconds;
+        Group.RemainingConversationSeconds = Snapshot.bConversationHasNoAutomaticEnd ? -1.0f : float(FMath::Max(0.0, Group.PlaybackConversationEnd - Time));
+        Group.bConversationHasNoAutomaticEnd = Snapshot.bConversationHasNoAutomaticEnd;
+        Group.PhysicalArrivalSecond = Snapshot.PhysicalArrivalSecond;
+        for (FName Id : Snapshot.MemberEntityIds) if (auto* Agent = FindAgent(Id)) Group.Members.Add(Agent);
+        RuntimeGroups.Add(MoveTemp(Group));
+    }
+}
+
+void ATMOPGroupDirector::UpdatePlaybackTime(double Time)
+{
+    for (auto& Group : RuntimeGroups)
+        Group.RemainingConversationSeconds = Group.bConversationHasNoAutomaticEnd ? -1.0f : float(FMath::Max(0.0, Group.PlaybackConversationEnd - Time));
+}

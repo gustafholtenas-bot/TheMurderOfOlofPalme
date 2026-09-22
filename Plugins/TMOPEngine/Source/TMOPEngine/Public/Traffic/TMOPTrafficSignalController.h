@@ -42,6 +42,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Traffic Signal")
     bool ValidateController(TArray<FString>& OutErrors) const;
 
+    TArray<FTMOPSignalGroupState> CapturePlaybackSignals() const;
+    void RestorePlaybackSignals(const TArray<FTMOPSignalGroupState>& States);
+
 private:
     void ApplyCurrentPhase();
     float RemainingPhaseSeconds = 0.0f;

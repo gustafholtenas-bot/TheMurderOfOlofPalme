@@ -95,6 +95,9 @@ public:
     UFUNCTION(BlueprintCallable, Category = "TMOP|World|Registry")
     int32 RemoveInvalidWorldObjects();
 
+    const TMap<FName, FTMOPWorldStateValue>& CaptureHistoricalState() const { return RuntimeWorldState; }
+    void RestoreHistoricalState(const TMap<FName, FTMOPWorldStateValue>& Values, const TSet<FName>& OwnedKeys);
+
 private:
     struct FRegisteredObject
     {

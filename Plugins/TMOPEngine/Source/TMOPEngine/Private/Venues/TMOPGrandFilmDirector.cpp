@@ -190,7 +190,7 @@ bool ATMOPGrandFilmDirector::ResolveFilmTimes(const int32 LoopNumber)
         UE_LOG(LogTemp, Error, TEXT("TMOP Grand film end window is invalid."));
         return false;
     }
-    FRandomStream Random(SimulationSeed + FMath::Max(1, LoopNumber));
+    FRandomStream Random(SimulationSeed + 1);
     const int32 EndSeconds = Random.RandRange(Earliest, Latest);
     ResolvedFilmEnd = FTMOPTime::FromSecondsFromMidnight(EndSeconds);
     ResolvedCreditsStart = FTMOPTime::FromSecondsFromMidnight(
@@ -221,7 +221,7 @@ void ATMOPGrandFilmDirector::EvaluateAtTime(const FTMOPTime CurrentTime)
 
 void ATMOPGrandFilmDirector::HandleSecondChanged(const FTMOPTime NewTime)
 {
-    EvaluateAtTime(NewTime);
+    if (!Clock || !Clock->bAuthoritativePlayback) EvaluateAtTime(NewTime);
     SynchronizeFilmToClock();
 }
 

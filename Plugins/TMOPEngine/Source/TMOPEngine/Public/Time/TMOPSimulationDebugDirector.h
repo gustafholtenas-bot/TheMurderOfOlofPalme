@@ -10,6 +10,7 @@ class ATMOPHistoricalVehicleDirector;
 class ATMOPObservationDirector;
 class ATMOPPersonRegistryDirector;
 class UTMOPClockSubsystem;
+class UTMOPWorldPlaybackComponent;
 
 /**
  * Place one instance in the test level.
@@ -28,6 +29,12 @@ public:
     ATMOPSimulationDebugDirector();
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|World Bake")
+    TObjectPtr<UTMOPWorldPlaybackComponent> WorldPlayback;
+
+    /** Read-only fingerprint for the authoritative playback tape. */
+    FString GetPlaybackSourceSignature() const { return BuildSourceSignature(); }
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Debug")
     bool bEnableTimeShortcutKeys = true;
@@ -77,6 +84,14 @@ public:
     UFUNCTION(CallInEditor, BlueprintCallable, Category="TMOP|World Bake",
         meta=(DisplayName="Validate World Bake"))
     void ValidateWorldBake();
+
+    /** PIE: compares A -> B -> A and continuation at every five-second stop. */
+    UFUNCTION(CallInEditor, BlueprintCallable, Category="TMOP|World Bake")
+    void VerifyHistoricalPlayback();
+
+    /** Increment after changing custom Blueprint behaviour or navigation setup. */
+    UPROPERTY(EditAnywhere, Category="TMOP|World Bake")
+    int32 PlaybackSceneRevision = 1;
 
     UFUNCTION(CallInEditor, BlueprintCallable, Category="TMOP|World Bake",
         meta=(DisplayName="Load World Bake"))
@@ -138,4 +153,5 @@ private:
 
     bool bRecordingBake = false;
     int32 LastRecordedSecond = INDEX_NONE;
+    bool bInitializePlaybackNextTick = false;
 };

@@ -1,4 +1,5 @@
 #include "Player/TMOPPlayerCharacter.h"
+#include "Time/TMOPWorldPlaybackComponent.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "Player/TMOPControlSettingsSubsystem.h"
 #include "Engine/LocalPlayer.h"
@@ -832,7 +833,8 @@ void ATMOPPlayerCharacter::TogglePauseMenu()
 
 bool ATMOPPlayerCharacter::IsSessionGameplayBlocked() const
 {
-    return !IsLocallyControlled() || !bGameplayHUDVisible || bLoopEndMenuOpen ||
+    const auto* HistoryClock = GetGameInstance() ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    return (HistoryClock && HistoryClock->bRecordingAuthoritativeBake) || !IsLocallyControlled() || !bGameplayHUDVisible || bLoopEndMenuOpen ||
         bPauseMenuOpen || bWorldMapOpen || bNewspaperOpen || bDialogOpen ||
         bAgentInfoChartOpen || bAddressDirectoryOpen ||
         UGameplayStatics::IsGamePaused(this);
@@ -1043,7 +1045,7 @@ void ATMOPPlayerCharacter::UpdateGameplayHUDVisibility()
     bGameplayHUDVisible = bShouldBeVisible;
     if (IsValid(HUDTimelineWidget))
         HUDTimelineWidget->SetVisibility(bGameplayHUDVisible && bShowHUDTimeline
-            ? ESlateVisibility::HitTestInvisible : ESlateVisibility::Collapsed);
+            ? ESlateVisibility::SelfHitTestInvisible : ESlateVisibility::Collapsed);
     if (!bGameplayHUDVisible && IsValid(CameraPerspective.Get())) CameraPerspective->CancelLookZoom();
     // The address panel hides the HUD itself. Only an unrelated higher-level
     // state (cinematic/main menu/etc.) should force that panel closed.
@@ -1306,6 +1308,22 @@ void ATMOPPlayerCharacter::ProcessControlProfileInput(const float DeltaSeconds)
         return !bNow && bWas;
     };
 
+    const bool bTimelinePressed = Pressed(ETMOPControlAction::TimelineCursor);
+    ProfileActionStates.Add(static_cast<uint8>(ETMOPControlAction::TimelineCursor), Down(ETMOPControlAction::TimelineCursor));
+    if (bTimelinePressed && bGameplayHUDVisible && HUDTimelineWidget)
+    {
+        bTimelineCursorOpen = !bTimelineCursorOpen;
+        HUDTimelineWidget->SetTimelineInputEnabled(bTimelineCursorOpen);
+        if (bTimelineCursorOpen) ApplyLocalInputMode(HUDTimelineWidget);
+        else ApplyLocalInputMode(nullptr);
+    }
+    if (bTimelineCursorOpen && (!bGameplayHUDVisible || Pressed(ETMOPControlAction::Cancel)))
+    {
+        bTimelineCursorOpen = false;
+        if (HUDTimelineWidget) HUDTimelineWidget->SetTimelineInputEnabled(false);
+        if (bGameplayHUDVisible) ApplyLocalInputMode(nullptr);
+        ProfileActionStates.Add(static_cast<uint8>(ETMOPControlAction::Cancel), Down(ETMOPControlAction::Cancel));
+    }
     const bool bPausePressed = Pressed(ETMOPControlAction::Pause);
     const bool bCancelPressed = Pressed(ETMOPControlAction::Cancel);
     const bool bMapPressed = Pressed(ETMOPControlAction::WorldMap);
@@ -1325,7 +1343,7 @@ void ATMOPPlayerCharacter::ProcessControlProfileInput(const float DeltaSeconds)
         ToggleWorldMap();
     }
 
-    const bool bBlocked = IsSessionGameplayBlocked() || bAddressDirectoryOpen ||
+    const bool bBlocked = bTimelineCursorOpen || IsSessionGameplayBlocked() || bAddressDirectoryOpen ||
         bPauseMenuOpen || bWorldMapOpen || bNewspaperOpen || bDialogOpen ||
         bAgentInfoChartOpen;
     if (bBlocked)
@@ -1462,6 +1480,8 @@ void ATMOPPlayerCharacter::ProcessControlProfileInput(const float DeltaSeconds)
 void ATMOPPlayerCharacter::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if (const auto* HistoryClock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>())
+        if (HistoryClock->bRecordingAuthoritativeBake) { GetCharacterMovement()->StopMovementImmediately(); return; }
     if (!IsLocallyControlled()) return;
     if (bDialogOpen && !ActiveDialogAgent.IsValid()) ClosePersonDialog();
     if (bAgentInfoChartOpen && !bAgentInfoFromNotebook && !ActiveCloseUpAgent.IsValid()) CloseAgentInfoChart();

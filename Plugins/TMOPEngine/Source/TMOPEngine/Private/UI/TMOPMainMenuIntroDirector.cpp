@@ -1,4 +1,9 @@
 #include "UI/TMOPMainMenuIntroDirector.h"
+#include "Time/TMOPSimulationDebugDirector.h"
+#include "HAL/FileManager.h"
+#include "People/TMOPPlayerAppearanceDirector.h"
+#include "Misc/PackageName.h"
+#include "Engine/Engine.h"
 
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Anchors/TMOPAnchorSubsystem.h"
@@ -85,6 +90,7 @@ float DistanceOnLane(UTMOPTrafficLaneComponent* Lane, const FVector& Location)
 ATMOPMainMenuIntroDirector::ATMOPMainMenuIntroDirector()
 {
     PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bTickEvenWhenPaused = true;
     IntroVehicleClass = ATMOPConfiguredVehicle::StaticClass();
     IntroDriverClass = ATMOPHistoricalAgent::StaticClass();
     MainMenuWidgetClass = UTMOPMainMenuWidget::StaticClass();
@@ -93,7 +99,31 @@ ATMOPMainMenuIntroDirector::ATMOPMainMenuIntroDirector()
 void ATMOPMainMenuIntroDirector::BeginPlay()
 {
     Super::BeginPlay();
-    if (!bEnableMainMenu)
+    // Offline bake authoring must not wait for the new-game/appearance flow.
+    for (TActorIterator<ATMOPSimulationDebugDirector> It(GetWorld()); It; ++It)
+        if (It->bBakeOnNextBeginPlay || IFileManager::Get().FileExists(*(It->GetResolvedBakePath() + TEXT(".request"))))
+        {
+            bInitialized = true;
+            SetActorTickEnabled(false);
+            return;
+        }
+    if (GEngine)
+        TravelFailureHandle = GEngine->OnTravelFailure().AddUObject(this, &ATMOPMainMenuIntroDirector::HandleAppearanceTravelFailure);
+    if (GetGameInstance())
+    {
+        auto* Session = GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
+        bArrivedFromAppearanceTravel = Session->ConsumeAppearanceTravel(GetWorld());
+        if (bArrivedFromAppearanceTravel)
+        {
+            LocalPlayerCount = Session->GetSelectedPlayerCount();
+            bKeyboardForPlayerOne = Session->UsesKeyboardForPlayerOne();
+            bSharedKeyboardForPlayerTwo = Session->UsesSharedKeyboardForPlayerTwo();
+            AppearanceLobby.Begin(LocalPlayerCount);
+            for (int32 Slot=0; Slot<LocalPlayerCount; ++Slot)
+                AppearanceLobby.Confirm(Slot, AppearanceLobby.GetRevision(Slot));
+        }
+    }
+    if (!bEnableMainMenu && !bArrivedFromAppearanceTravel)
     {
         bInitialized = true;
         return;
@@ -105,6 +135,8 @@ void ATMOPMainMenuIntroDirector::BeginPlay()
 
 void ATMOPMainMenuIntroDirector::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    if (GEngine) GEngine->OnTravelFailure().Remove(TravelFailureHandle);
+    ReleaseAppearanceWorldPause();
     SetMenuInput(false);
     if (ATMOPPlayerCharacter* Player = GetPlayerCharacter())
     {
@@ -120,6 +152,14 @@ void ATMOPMainMenuIntroDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!bInitialized) TryInitializeMenu();
+    // World timers do not advance during a real pause. This actor's paused
+    // tick drains the ready request after the Slate callback has returned.
+    if (bAppearanceSetupActive && bStartQueued &&
+        AppearanceLobby.GetGeneration() == QueuedAppearanceGeneration && AppearanceLobby.AllReady())
+    {
+        bStartQueued = false;
+        StartNewGame();
+    }
     if (bWaitingForSettingsClose)
     {
         if (ATMOPPlayerCharacter* Player = GetPlayerCharacter())
@@ -142,7 +182,7 @@ void ATMOPMainMenuIntroDirector::TryInitializeMenu()
 {
     APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0);
     if (!IsValid(Controller) || !IsValid(GetPlayerCharacter())) return;
-    if (GetGameInstance())
+    if (GetGameInstance() && !bArrivedFromAppearanceTravel)
         GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->PrepareMainMenu();
     TSubclassOf<UTMOPMainMenuWidget> WidgetClass = MainMenuWidgetClass;
     if (!WidgetClass) WidgetClass = UTMOPMainMenuWidget::StaticClass();
@@ -157,6 +197,8 @@ void ATMOPMainMenuIntroDirector::TryInitializeMenu()
         Controller->SetViewTarget(MainMenuBackgroundCamera);
     SetMenuInput(true);
     bInitialized = true;
+    if (bArrivedFromAppearanceTravel)
+        GetWorldTimerManager().SetTimerForNextTick(this, &ATMOPMainMenuIntroDirector::StartNewGame);
 }
 
 void ATMOPMainMenuIntroDirector::SetMenuInput(const bool bMenuInput)
@@ -181,8 +223,13 @@ void ATMOPMainMenuIntroDirector::SetMenuInput(const bool bMenuInput)
                     MenuInputControllers.Add(Controller);
                 }
                 Controller->bShowMouseCursor = Controller == PrimaryController;
-                if (Controller != PrimaryController)
-                    Controller->SetInputMode(FInputModeGameOnly());
+                if (Controller != PrimaryController && IsValid(MainMenuWidget))
+                {
+                    FInputModeUIOnly Mode;
+                    Mode.SetWidgetToFocus(MainMenuWidget->TakeWidget());
+                    Controller->SetInputMode(Mode);
+                    MainMenuWidget->SetUserFocus(Controller);
+                }
             }
     }
     else
@@ -209,9 +256,128 @@ void ATMOPMainMenuIntroDirector::SetMenuInput(const bool bMenuInput)
     else PrimaryController->SetInputMode(FInputModeGameOnly());
 }
 
+bool ATMOPMainMenuIntroDirector::PauseAppearanceWorld()
+{
+    if (UGameplayStatics::IsGamePaused(this)) return true;
+    bOwnsAppearanceWorldPause = UGameplayStatics::SetGamePaused(this, true);
+    if (!bOwnsAppearanceWorldPause)
+        StartupStatus = FText::FromString(TEXT("Kunde inte pausa spelvärlden. Kontrollera att GameMode tillåter paus."));
+    return bOwnsAppearanceWorldPause;
+}
+
+bool ATMOPMainMenuIntroDirector::ReleaseAppearanceWorldPause()
+{
+    if (!bOwnsAppearanceWorldPause) return true;
+    if (!UGameplayStatics::SetGamePaused(this, false))
+    {
+        StartupStatus = FText::FromString(TEXT("Kunde inte återuppta spelvärlden."));
+        return false;
+    }
+    bOwnsAppearanceWorldPause = false;
+    return true;
+}
+
+void ATMOPMainMenuIntroDirector::HandleAppearanceTravelFailure(UWorld* World, ETravelFailure::Type Type, const FString& Message)
+{
+    if (World != GetWorld() || !bAppearanceTravelPending) return;
+    bAppearanceTravelPending = false;
+    bNewGameRequested = false;
+    bStartQueued = false;
+    bAppearanceSetupActive = true;
+    GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->QueueAppearanceTravel(NAME_None);
+    AppearanceLobby.Begin(LocalPlayerCount);
+    PauseAppearanceWorld();
+    StartupStatus = FText::FromString(TEXT("Kunde inte ladda spelnivån: ") + Message);
+    if (MainMenuWidget) MainMenuWidget->ShowAppearanceSetup(LocalPlayerCount);
+    SetMenuInput(true);
+}
+
+bool ATMOPMainMenuIntroDirector::BeginAppearanceSetup(int32 Count)
+{
+    if (bNewGameRequested || !GetGameInstance() || Count < 1 || Count > 4) return false;
+    auto* Session = GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
+    LocalPlayerCount = Count;
+    AppearanceLobby.Begin(Count);
+    bStartQueued = false;
+    Session->ConfigureSession(Count, bKeyboardForPlayerOne, bSharedKeyboardForPlayerTwo);
+    if (!Session->EnsurePlayerCount(Count, StartupStatus)) return false;
+    Session->SetSplitScreenEnabled(false);
+    Session->RefreshAppearances();
+    if (auto* Clock = GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()) Clock->PauseClock();
+    if (!PauseAppearanceWorld()) return false;
+    for (auto* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
+        Player->SetGameplayHUDHidden(TEXT("MainMenu"), true);
+    bAppearanceSetupActive = true;
+    StartupStatus = FText::FromString(TEXT("Välj utseende på varje spelares flik. Alla måste trycka Klar."));
+    if (MainMenuWidget) MainMenuWidget->ShowAppearanceSetup(Count);
+    SetMenuInput(true);
+    return true;
+}
+
+void ATMOPMainMenuIntroDirector::CancelAppearanceSetup()
+{
+    if (bNewGameRequested) return;
+    AppearanceLobby.Cancel();
+    bAppearanceSetupActive = false;
+    bStartQueued = false;
+    SetMenuInput(false);
+    ReleaseAppearanceWorldPause();
+    if (MainMenuWidget) MainMenuWidget->HideAppearanceSetup();
+    if (GetGameInstance())
+    {
+        auto* Session = GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>();
+        Session->QueueAppearanceTravel(NAME_None);
+        Session->PrepareMainMenu();
+    }
+    StartupStatus = FText::GetEmpty();
+    if (MainMenuWidget) MainMenuWidget->ShowPlayerCountPage();
+    SetMenuInput(true);
+}
+
+void ATMOPMainMenuIntroDirector::AppearanceEdited(int32 Slot)
+{
+    if (!bAppearanceSetupActive || bNewGameRequested) return;
+    if (AppearanceLobby.Edit(Slot))
+    {
+        bStartQueued = false;
+        StartupStatus = FText::FromString(TEXT("Ändrat utseende behöver bekräftas med Klar."));
+    }
+}
+
+void ATMOPMainMenuIntroDirector::ConfirmPlayerAppearance(int32 Slot)
+{
+    if (!bAppearanceSetupActive || bNewGameRequested || !AppearanceLobby.Contains(Slot)) return;
+    const unsigned Revision = AppearanceLobby.GetRevision(Slot);
+    auto* Player = Cast<ATMOPPlayerCharacter>(UGameplayStatics::GetPlayerCharacter(this, Slot));
+    auto* Appearance = ATMOPPlayerAppearanceDirector::ForCharacter(Player);
+    FTMOPPersonProfileRow Profile;
+    FString Error;
+    if (!Appearance || !Appearance->GetEditableProfile(Profile) ||
+        !Appearance->PreviewProfile(Profile, Error) || !Appearance->SaveEditedProfile(Error))
+    {
+        AppearanceLobby.Edit(Slot);
+        StartupStatus = FText::FromString(Error.IsEmpty() ? TEXT("Kunde inte validera eller spara spelarens utseende.") : Error);
+        return;
+    }
+    if (!AppearanceLobby.Confirm(Slot, Revision)) return;
+    StartupStatus = FText::FromString(TEXT("Klar. Väntar tills alla spelare har bekräftat."));
+    if (AppearanceLobby.AllReady() && !bStartQueued)
+    {
+        bStartQueued = true;
+        QueuedAppearanceGeneration = AppearanceLobby.GetGeneration();
+    }
+}
+
 void ATMOPMainMenuIntroDirector::StartNewGame()
 {
     if (bNewGameRequested || !GetGameInstance()) return;
+    if ((bEnableMainMenu || bArrivedFromAppearanceTravel) &&
+        (!AppearanceLobby.AllReady() || AppearanceLobby.GetCount() != LocalPlayerCount))
+    {
+        StartupStatus = FText::FromString(TEXT("Alla spelare måste välja utseende och trycka Klar."));
+        if (!bAppearanceSetupActive && MainMenuWidget) MainMenuWidget->ShowPlayerCountPage();
+        return;
+    }
     bNewGameRequested = true;
     StartupStatus = FText::GetEmpty();
     ActiveIntroDestinationAnchorId = IntroDestinationAnchorId;
@@ -229,8 +395,52 @@ void ATMOPMainMenuIntroDirector::StartNewGame()
             LocalPlayerCount, *StartupStatus.ToString());
         return;
     }
+    // Revalidate all selected players immediately before intro/travel, not just
+    // the last player's UI button. Never permit a missing/disconnected pawn.
+    if (bArrivedFromAppearanceTravel) LocalSession->RefreshAppearances();
+    for (int32 Slot=0; Slot<LocalPlayerCount; ++Slot)
+    {
+        auto* Player = Cast<ATMOPPlayerCharacter>(UGameplayStatics::GetPlayerCharacter(this, Slot));
+        auto* Appearance = ATMOPPlayerAppearanceDirector::ForCharacter(Player);
+        FTMOPPersonProfileRow Profile;
+        FString Error;
+        if (!Appearance || !Appearance->GetEditableProfile(Profile) || !Appearance->PreviewProfile(Profile, Error))
+        {
+            bNewGameRequested = false;
+            bStartQueued = false;
+            AppearanceLobby.Edit(Slot);
+            StartupStatus = FText::FromString(Error.IsEmpty() ? TEXT("En spelares utseende kunde inte valideras.") : Error);
+            if (MainMenuWidget) { bAppearanceSetupActive = true; MainMenuWidget->ShowAppearanceSetup(LocalPlayerCount); }
+            PauseAppearanceWorld();
+            SetMenuInput(true);
+            return;
+        }
+    }
+    if (!bArrivedFromAppearanceTravel && !GameplayLevel.IsNull() &&
+        UGameplayStatics::GetCurrentLevelName(this, true) != FPackageName::GetShortName(GameplayLevel.ToSoftObjectPath().GetLongPackageName()))
+    {
+        const FString Package = GameplayLevel.ToSoftObjectPath().GetLongPackageName();
+        if (!FPackageName::DoesPackageExist(Package))
+        {
+            bNewGameRequested = false;
+            bStartQueued = false;
+            StartupStatus = FText::FromString(TEXT("Spelnivån saknas. Kontrollera Gameplay Level och att kartan är paketerad."));
+            return;
+        }
+        LocalSession->QueueAppearanceTravel(FName(*Package));
+        if (!ReleaseAppearanceWorldPause()) { bNewGameRequested = false; return; }
+        bAppearanceTravelPending = true;
+        // This is the only new map-load path, strictly behind the ready barrier.
+        if (MainMenuWidget) MainMenuWidget->HideAppearanceSetup();
+        UGameplayStatics::OpenLevelBySoftObjectPtr(this, GameplayLevel);
+        return;
+    }
+    if (!ReleaseAppearanceWorldPause()) { bNewGameRequested = false; return; }
+    bAppearanceSetupActive = false;
+    bStartQueued = false;
     if (IsValid(MainMenuWidget))
     {
+        MainMenuWidget->HideAppearanceSetup();
         MainMenuWidget->SetMenuMode(false);
         MainMenuWidget->SetIntroControlsVisible(bEnableIntro);
     }
@@ -537,6 +747,7 @@ void ATMOPMainMenuIntroDirector::UpdateIntroCard()
 
 void ATMOPMainMenuIntroDirector::FinishIntro()
 {
+    if ((bEnableMainMenu || bArrivedFromAppearanceTravel) && !AppearanceLobby.AllReady()) return;
     bIntroActive = false;
     if (IsValid(MainMenuWidget)) MainMenuWidget->SetIntroControlsVisible(false);
     ATMOPPlayerCharacter* Player = GetPlayerCharacter();

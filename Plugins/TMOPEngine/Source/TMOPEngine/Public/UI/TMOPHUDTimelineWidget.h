@@ -19,6 +19,11 @@ class TMOPENGINE_API UTMOPHUDTimelineWidget : public UUserWidget
     GENERATED_BODY()
 public:
     TArray<FTMOPHUDTimelineMarker> Markers;
+    void SetTimelineInputEnabled(bool bEnabled);
+    bool IsTimelineInputEnabled() const { return bTimelineInputEnabled; }
+    bool bTimelineInputEnabled = false;
+    TSharedPtr<SWidget> TimelineSlate;
+    virtual void NativeDestruct() override;
 protected:
     virtual TSharedRef<SWidget> RebuildWidget() override;
 };

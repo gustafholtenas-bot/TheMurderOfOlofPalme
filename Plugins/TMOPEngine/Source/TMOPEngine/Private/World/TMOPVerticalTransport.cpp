@@ -33,7 +33,7 @@ ATMOPVerticalTransport* ATMOPVerticalTransport::FindTransport(
 bool ATMOPVerticalTransport::RequestTransport(
     AActor* Passenger, const FName From, const FName To)
 {
-    if (!IsValid(Passenger) || bTransporting || !Connects(From, To)) return false;
+    if (Tags.Contains(TEXT("TMOP_AuthoritativeHistory")) || !IsValid(Passenger) || bTransporting || !Connects(From, To)) return false;
     UGameInstance* GI = GetWorld() != nullptr ? GetWorld()->GetGameInstance() : nullptr;
     UTMOPAnchorSubsystem* Anchors = GI != nullptr ? GI->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
     ATMOPHistoricalAnchor* FromAnchor = Anchors != nullptr ? Anchors->FindAnchor(From) : nullptr;

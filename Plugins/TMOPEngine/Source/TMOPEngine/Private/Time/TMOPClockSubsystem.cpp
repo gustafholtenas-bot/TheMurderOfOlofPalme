@@ -1,4 +1,6 @@
 #include "Time/TMOPClockSubsystem.h"
+#include "Time/TMOPWorldPlaybackComponent.h"
+#include "Time/TMOPTimeTravelPolicy.h"
 #include "Time/TMOPSimulationSettings.h"
 #include "Time/TMOPLoopEndPolicy.h"
 #include "Player/TMOPLocalSessionPolicy.h"
@@ -76,6 +78,13 @@ void UTMOPClockSubsystem::PauseClock()
 
 void UTMOPClockSubsystem::RestartLoop()
 {
+    if (bRecordingAuthoritativeBake) return;
+    if (bAuthoritativePlayback)
+    {
+        if (auto* Playback = UTMOPWorldPlaybackComponent::Find(this))
+            Playback->RequestSeek(LoopStartSeconds);
+        return;
+    }
     if (bRestartInProgress) return;
     TGuardValue<bool> RestartGuard(bRestartInProgress, true);
     // Every restart path, including debug time jumps and Blueprint callers,
@@ -98,6 +107,13 @@ void UTMOPClockSubsystem::RestartLoop()
 
 void UTMOPClockSubsystem::SetCurrentTime(const FTMOPTime NewTime)
 {
+    if (bRecordingAuthoritativeBake) return;
+    if (bAuthoritativePlayback)
+    {
+        if (auto* Playback = UTMOPWorldPlaybackComponent::Find(this))
+            Playback->RequestSeek(NewTime.ToSecondsFromMidnight());
+        return;
+    }
     CurrentTimeSeconds = NewTime.ToSecondsFromMidnight();
     FractionalSeconds = 0.0;
     if (TMOPLoopEndPolicy::HasReachedEnd(CurrentTimeSeconds, LoopEndSeconds))
@@ -114,6 +130,7 @@ bool UTMOPClockSubsystem::SetLoopRange(
     const FTMOPTime NewStartTime,
     const FTMOPTime NewEndTime)
 {
+    if (bAuthoritativePlayback || bRecordingAuthoritativeBake) return false;
     const int32 NewStartSeconds = NewStartTime.ToSecondsFromMidnight();
     const int32 NewEndSeconds = NewEndTime.ToSecondsFromMidnight();
 
@@ -136,7 +153,7 @@ bool UTMOPClockSubsystem::SetLoopRange(
 
 void UTMOPClockSubsystem::SetTimeScale(const float NewTimeScale)
 {
-    TimeScale = FMath::Clamp(NewTimeScale, 0.0f, 100.0f);
+    TimeScale = bRecordingAuthoritativeBake ? 1.0f : FMath::Clamp(NewTimeScale, 0.0f, 100.0f);
 }
 
 bool UTMOPClockSubsystem::TickClock(const float DeltaSeconds)
@@ -147,11 +164,12 @@ bool UTMOPClockSubsystem::TickClock(const float DeltaSeconds)
         return true;
     }
 
-    FractionalSeconds += static_cast<double>(DeltaSeconds) * TimeScale;
+    FractionalSeconds += bRecordingAuthoritativeBake
+        ? TMOPTimeTravel::RecordingStepSeconds : static_cast<double>(DeltaSeconds) * TimeScale;
 
-    while (IsClockRunning() && FractionalSeconds >= 1.0)
+    while (IsClockRunning() && FractionalSeconds >= 1.0 - 1.e-9)
     {
-        FractionalSeconds -= 1.0;
+        FractionalSeconds = FMath::Max(0.0, FractionalSeconds - 1.0);
         AdvanceOneSecond();
     }
 
@@ -168,13 +186,15 @@ void UTMOPClockSubsystem::AdvanceOneSecond()
         return;
     }
 
-    OnSecondChanged.Broadcast(GetCurrentTime());
+    if (!bAuthoritativePlayback) OnSecondChanged.Broadcast(GetCurrentTime());
 }
 
 void UTMOPClockSubsystem::ReachLoopEnd()
 {
     CurrentTimeSeconds = LoopEndSeconds;
     FractionalSeconds = 0.0;
+    // Playback commits the final historical frame before the end menu opens.
+    if (bAuthoritativePlayback) return;
     bClockRunning = false;
     if (bAwaitingLoopDecision) return;
     bAwaitingLoopDecision = true;
@@ -183,6 +203,32 @@ void UTMOPClockSubsystem::ReachLoopEnd()
     const FTMOPTime EndTime = GetCurrentTime();
     OnSecondChanged.Broadcast(EndTime);
     OnLoopEnded.Broadcast(LoopNumber, EndTime);
+}
+
+void UTMOPClockSubsystem::CommitHistoricalTime(const FTMOPTime Time)
+{
+    const bool bLeavingEnd = bAwaitingLoopDecision;
+    CurrentTimeSeconds = FMath::Clamp(Time.ToSecondsFromMidnight(), LoopStartSeconds, LoopEndSeconds);
+    FractionalSeconds = 0;
+    bAwaitingLoopDecision = false;
+    ReleasePause(this, TEXT("LoopEnd"));
+    if (bLeavingEnd && CurrentTimeSeconds < LoopEndSeconds) bClockRunning = true;
+    LastPublishedHistoricalSecond = INDEX_NONE;
+    PublishHistoricalTime();
+}
+
+void UTMOPClockSubsystem::PublishHistoricalTime()
+{
+    if (LastPublishedHistoricalSecond == CurrentTimeSeconds) return;
+    LastPublishedHistoricalSecond = CurrentTimeSeconds;
+    OnSecondChanged.Broadcast(GetCurrentTime());
+    if (CurrentTimeSeconds >= LoopEndSeconds && !bAwaitingLoopDecision)
+    {
+        bClockRunning = false;
+        bAwaitingLoopDecision = true;
+        RequestPause(this, TEXT("LoopEnd"));
+        OnLoopEnded.Broadcast(LoopNumber, GetCurrentTime());
+    }
 }
 
 bool UTMOPClockSubsystem::HasPauseRequests() const

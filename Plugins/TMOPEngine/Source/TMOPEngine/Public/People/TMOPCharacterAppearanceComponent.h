@@ -22,6 +22,9 @@ class TMOPENGINE_API UTMOPCharacterAppearanceComponent : public UActorComponent
     GENERATED_BODY()
 
 public:
+    /** Shared body/garment morph policy for historical agents and local players. */
+    static void ApplyMorphs(USkeletalMeshComponent* Body,
+        const FTMOPAppearanceProfile& Profile, ETMOPBodyBuild BodyBuild);
     UTMOPCharacterAppearanceComponent();
     virtual void BeginPlay() override;
     virtual void TickComponent(float DeltaTime, ELevelTick TickType,
@@ -47,7 +50,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
     FName DefaultHeadwearSocket = TEXT("HeadwearSocket");
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
+    /** Retained for serialized Blueprint compatibility; skeletal hair ignores sockets. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear",
+        meta=(DeprecatedProperty, DeprecationMessage="Hair uses skeletal Mesh and Leader Pose; HairSocket is no longer used."))
     FName DefaultHairSocket = TEXT("HairSocket");
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Headwear")
@@ -144,6 +149,8 @@ public:
     TMap<FName, TSoftObjectPtr<UMaterialInterface>> HairMaterials;
 
 private:
+    friend class FTMOPSkeletalHairAssemblyTest;
+
     UPROPERTY(Transient)
     TObjectPtr<UStaticMeshComponent> SocketHairMesh;
 
@@ -157,7 +164,7 @@ private:
     void ClearSocketFaceAccessories();
     FTransform BuildSocketAccessoryTransform(UStaticMesh* Mesh,
         const FTransform& AuthoredTransform, const TCHAR* AccessoryLabel);
-    bool ApplySocketHair(ATMOPHistoricalAgent* Agent,
+    bool ApplySkeletalHair(ATMOPHistoricalAgent* Agent,
         const FTMOPResolvedAppearancePart& Part);
     bool ApplySocketFaceAccessory(ATMOPHistoricalAgent* Agent,
         const FTMOPResolvedAppearancePart& Part,
@@ -204,8 +211,6 @@ private:
     void ApplyCollisionAndPresentation(ATMOPHistoricalAgent* Agent,
         bool bPreserveBespokeBodyPlacement);
     void ApplyPerformanceSettings(ATMOPHistoricalAgent* Agent);
-    void ApplyMorphs(USkeletalMeshComponent* Body,
-        const FTMOPAppearanceProfile& Profile, ETMOPBodyBuild BodyBuild);
     void ApplyModularMorphs(ATMOPHistoricalAgent* Agent,
         const FTMOPAppearanceProfile& Profile, ETMOPBodyBuild BodyBuild,
         bool bIncludeBespokeHeadParts);

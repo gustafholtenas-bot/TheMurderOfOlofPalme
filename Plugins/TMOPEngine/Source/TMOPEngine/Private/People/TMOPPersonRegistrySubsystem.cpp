@@ -92,7 +92,8 @@ bool UTMOPPersonRegistrySubsystem::UnregisterActiveAgent(const FName EntityId,
 ATMOPHistoricalAgent* UTMOPPersonRegistrySubsystem::FindActiveAgent(const FName EntityId) const
 {
     const TWeakObjectPtr<ATMOPHistoricalAgent>* Found = ActiveAgents.Find(EntityId);
-    return Found != nullptr ? Found->Get() : nullptr;
+    ATMOPHistoricalAgent* Agent = Found != nullptr ? Found->Get() : nullptr;
+    return Agent && !Agent->Tags.Contains(TEXT("TMOP_HistoryAbsent")) ? Agent : nullptr;
 }
 
 bool UTMOPPersonRegistrySubsystem::ValidateRegistry(TArray<FString>& OutErrors) const

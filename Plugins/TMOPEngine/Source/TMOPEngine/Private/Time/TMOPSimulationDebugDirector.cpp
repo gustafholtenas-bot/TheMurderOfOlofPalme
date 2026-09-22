@@ -1,4 +1,8 @@
 #include "Time/TMOPSimulationDebugDirector.h"
+#include "Items/TMOPItemMeshSubsystem.h"
+#include "Testing/TMOPTimelineValidationDirector.h"
+#include "Time/TMOPWorldPlaybackComponent.h"
+#include "Time/TMOPTimeTravelPolicy.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "Player/TMOPPlayerCharacter.h"
 
@@ -41,6 +45,8 @@
 ATMOPSimulationDebugDirector::ATMOPSimulationDebugDirector()
 {
     PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bTickEvenWhenPaused = true;
+    WorldPlayback = CreateDefaultSubobject<UTMOPWorldPlaybackComponent>(TEXT("WorldPlayback"));
 }
 
 void ATMOPSimulationDebugDirector::BeginPlay()
@@ -48,7 +54,7 @@ void ATMOPSimulationDebugDirector::BeginPlay()
     Super::BeginPlay();
 
     const UTMOPSimulationSettings* Settings = GetDefault<UTMOPSimulationSettings>();
-    BakeSampleIntervalSeconds = FMath::Max(1, Settings->PersonBakeIntervalSeconds);
+    BakeSampleIntervalSeconds = TMOPTimeTravel::SeekStepSeconds;
     if (BakeFileName.IsEmpty()) BakeFileName = Settings->DefaultPersonBakeName;
     bEnableTimeShortcutKeys = bEnableTimeShortcutKeys && Settings->bEnableDebugTimeKeys;
 
@@ -66,7 +72,7 @@ void ATMOPSimulationDebugDirector::BeginPlay()
             InputComponent->BindKey(EKeys::Seven, IE_Pressed, this, &ATMOPSimulationDebugDirector::DebugKey7);
             InputComponent->BindKey(EKeys::Eight, IE_Pressed, this, &ATMOPSimulationDebugDirector::DebugKey8);
             InputComponent->BindKey(EKeys::Nine, IE_Pressed, this, &ATMOPSimulationDebugDirector::DebugKey9);
-            InputComponent->BindKey(EKeys::B, IE_Pressed, this, &ATMOPSimulationDebugDirector::DebugBakeKey);
+            InputComponent->BindKey(EKeys::B, IE_Pressed, this, &ATMOPSimulationDebugDirector::DebugBakeKey).bExecuteWhenPaused = true;
         }
     }
 
@@ -75,54 +81,27 @@ void ATMOPSimulationDebugDirector::BeginPlay()
     if ((bBakeOnNextBeginPlay || bHasBakeRequest) && GetWorld() != nullptr &&
         GetWorld()->IsGameWorld())
     {
-        StartPersonBakeRecording();
+        bBakeOnNextBeginPlay = true;
     }
-    else if (bLoadExistingBakeOnBeginPlay)
-    {
-        LoadPersonBake();
-    }
+    bInitializePlaybackNextTick = true;
 }
 
 void ATMOPSimulationDebugDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if (!bRecordingBake) return;
-
-    UTMOPClockSubsystem* Clock = GetClock();
-    if (Clock == nullptr) return;
-    const FTMOPTime Time = Clock->GetCurrentTime();
-    const int32 Second = Time.ToSecondsFromMidnight();
-    if (LastRecordedSecond != INDEX_NONE && Second < LastRecordedSecond)
+    if (bInitializePlaybackNextTick)
     {
-        FinishBakeAfterLoop();
+        bInitializePlaybackNextTick = false;
+        if (bBakeOnNextBeginPlay) StartPersonBakeRecording();
+        else if (WorldPlayback) WorldPlayback->LoadAndPrepare(BuildSourceSignature());
+    }
+    if (!bRecordingBake) return;
+    if (WorldPlayback && !WorldPlayback->IsRecording())
+    {
+        bRecordingBake = false;
         return;
     }
-    bool bExactEventBoundary = false;
-    if (GetGameInstance() != nullptr)
-    {
-        if (const UTMOPHistoricalEventSubsystem* Events =
-            GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>())
-        {
-            for (const FName EventId : Events->GetRegisteredEventIds())
-            {
-                FTMOPHistoricalEventRuntime Runtime;
-                if (Events->TryGetEventRuntime(EventId, Runtime) &&
-                    Runtime.bHasResolvedTime &&
-                    Runtime.ResolvedTime.ToSecondsFromMidnight() == Second)
-                {
-                    bExactEventBoundary = true;
-                    break;
-                }
-            }
-        }
-    }
-    if (LastRecordedSecond == INDEX_NONE ||
-        Second - LastRecordedSecond >= BakeSampleIntervalSeconds ||
-        (bExactEventBoundary && Second != LastRecordedSecond))
-    {
-        CaptureBakeFrame(Time);
-        LastRecordedSecond = Second;
-    }
+
 }
 
 bool ATMOPSimulationDebugDirector::JumpToSimulationTime(const FTMOPTime TargetTime)
@@ -140,48 +119,8 @@ bool ATMOPSimulationDebugDirector::JumpToSimulationTime(const FTMOPTime TargetTi
         return false;
     }
 
-    const bool bWasRunning = Clock->IsClockRunRequested();
-    Clock->PauseClock();
-    Clock->RestartLoop();
+    return WorldPlayback && WorldPlayback->RequestSeek(TargetSecond);
 
-    TArray<FString> BakeErrors;
-    const bool bUseBake = bApplyBakeAfterTimeJump &&
-        !BakeData.Frames.IsEmpty() &&
-        ValidateLoadedBake(BakeErrors);
-    if (bUseBake)
-    {
-        if (UTMOPHistoricalEventSubsystem* Events =
-            GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>())
-        {
-            TArray<FTMOPHistoricalEventRuntime> Runtime;
-            Runtime.Reserve(BakeData.SharedEvents.Num());
-            for (const FTMOPBakedEventState& Event : BakeData.SharedEvents)
-            {
-                Runtime.Add(Event.Runtime);
-            }
-            Events->ApplyBakedEventRuntime(Runtime, TargetTime);
-        }
-    }
-    Clock->SetCurrentTime(TargetTime);
-
-    if (ATMOPPersonRegistryDirector* People = FindPersonDirector())
-    {
-        if (bUseBake) People->InitializePersonSimulationForWorldBake();
-        else People->InitializePersonSimulation();
-    }
-    if (ATMOPHistoricalVehicleDirector* Vehicles = FindVehicleDirector())
-        Vehicles->InitializeHistoricalVehicles();
-
-    RestoreDerivedScheduledSystems();
-    if (bUseBake)
-        ApplyPersonBakeAtTime(TargetTime);
-    else if (bApplyBakeAfterTimeJump && !BakeData.Frames.IsEmpty())
-        UE_LOG(LogTemp, Warning,
-            TEXT("TMOP World Bake is stale/invalid; timeline catch-up was used."));
-
-    if (bWasRunning) Clock->StartClock();
-    UE_LOG(LogTemp, Display, TEXT("TMOP debug seek: %s."), *TargetTime.ToDisplayString());
-    return true;
 }
 
 void ATMOPSimulationDebugDirector::SetSimulationTimeScale(const float NewTimeScale)
@@ -212,6 +151,7 @@ void ATMOPSimulationDebugDirector::CancelWorldBake()
     if (bRecordingBake)
     {
         bRecordingBake = false;
+        if (WorldPlayback) WorldPlayback->FinishRecording(false);
         if (UTMOPClockSubsystem* Clock = GetClock())
         {
             Clock->PauseClock();
@@ -232,6 +172,7 @@ void ATMOPSimulationDebugDirector::ClearWorldBake()
         return;
     }
     BakeData = FTMOPWorldBakeData();
+    if (WorldPlayback) IFileManager::Get().Delete(*WorldPlayback->GetTapePath(), false, true);
     const FString Path = GetResolvedBakePath();
     IFileManager::Get().Delete(*(Path + TEXT(".request")), false, true);
     if (!IFileManager::Get().FileExists(*Path))
@@ -253,33 +194,29 @@ void ATMOPSimulationDebugDirector::ClearWorldBake()
 
 void ATMOPSimulationDebugDirector::ValidateWorldBake()
 {
-    if (BakeData.Frames.IsEmpty())
-    {
-        LoadPersonBake();
-    }
-    TArray<FString> Errors;
-    if (ValidateLoadedBake(Errors))
-    {
-        UE_LOG(LogTemp, Display,
-            TEXT("TMOP World Bake valid: %d frames, %d Shared Events."),
-            BakeData.Frames.Num(), BakeData.SharedEvents.Num());
-        return;
-    }
-    for (const FString& Error : Errors)
-    {
-        UE_LOG(LogTemp, Error, TEXT("TMOP World Bake validation: %s"), *Error);
-    }
+    if (!WorldPlayback) return;
+    const bool Valid = WorldPlayback->ValidateFile(BuildSourceSignature());
+    UE_LOG(LogTemp, Display, TEXT("TMOP bake %s: %s"), Valid ? TEXT("VALID") : TEXT("INVALID"), *WorldPlayback->GetStatus());
 }
-
+void ATMOPSimulationDebugDirector::VerifyHistoricalPlayback()
+{
+    if (WorldPlayback) WorldPlayback->VerifyRepeatability();
+}
 void ATMOPSimulationDebugDirector::LoadWorldBakeFromDisk()
 {
-    LoadPersonBake();
+    if (WorldPlayback && GetWorld() && GetWorld()->IsGameWorld()) WorldPlayback->LoadAndPrepare(BuildSourceSignature());
+    else ValidateWorldBake();
 }
 
 bool ATMOPSimulationDebugDirector::StartPersonBakeRecording()
 {
     UTMOPClockSubsystem* Clock = GetClock();
     if (Clock == nullptr || bRecordingBake) return false;
+    if (WorldPlayback && WorldPlayback->IsReady())
+    {
+        UE_LOG(LogTemp, Error, TEXT("Stop Play, choose Bake Entire Simulation, then start a new Play session to author a new history."));
+        return false;
+    }
 
     if (GetWorld() == nullptr || !GetWorld()->IsGameWorld())
     {
@@ -292,6 +229,18 @@ bool ATMOPSimulationDebugDirector::StartPersonBakeRecording()
         return true;
     }
 
+    TArray<FString> InputErrors;
+    if (auto* People = FindPersonDirector())
+        if (!People->ValidatePeopleTable(InputErrors) || (People->GroupDefinitionTable && !People->ValidateGroupTable(InputErrors)))
+        { for (const auto& Error : InputErrors) UE_LOG(LogTemp, Error, TEXT("TMOP bake: %s"), *Error); return false; }
+    if (auto* Vehicles = FindVehicleDirector())
+        if (!Vehicles->ValidateHistoricalVehicleTable(InputErrors))
+        { for (const auto& Error : InputErrors) UE_LOG(LogTemp, Error, TEXT("TMOP bake: %s"), *Error); return false; }
+    ATMOPTimelineValidationDirector* Validator = nullptr;
+    for (TActorIterator<ATMOPTimelineValidationDirector> It(GetWorld()); It; ++It) { Validator = *It; break; }
+    if (!Validator) Validator = GetWorld()->SpawnActor<ATMOPTimelineValidationDirector>();
+    if (!Validator) return false;
+    if (WorldPlayback) WorldPlayback->AddTickPrerequisiteActor(Validator);
     IFileManager::Get().Delete(
         *(GetResolvedBakePath() + TEXT(".request")), false, true);
     BakeData = FTMOPWorldBakeData();
@@ -305,14 +254,20 @@ bool ATMOPSimulationDebugDirector::StartPersonBakeRecording()
     LastRecordedSecond = INDEX_NONE;
     bRecordingBake = true;
 
-    const bool bOldApplyBake = bApplyBakeAfterTimeJump;
-    bApplyBakeAfterTimeJump = false;
-    JumpToSimulationTime(BakeData.ScenarioStartTime);
-    bApplyBakeAfterTimeJump = bOldApplyBake;
-    CaptureResolvedSharedEvents();
-    Clock->SetTimeScale(FMath::Max(1.0f, BakeTimeScale));
+    Clock->PauseClock();
+    Clock->bAuthoritativePlayback = false;
+    Clock->RestartLoop();
+    if (auto* Vehicles = FindVehicleDirector()) Vehicles->InitializeHistoricalVehicles();
+    if (auto* People = FindPersonDirector()) People->InitializePersonSimulation();
+    RestoreDerivedScheduledSystems();
+    Validator->StartValidation();
+    if (!WorldPlayback || !WorldPlayback->StartRecording(BuildSourceSignature()))
+    {
+        bRecordingBake = false;
+        return false;
+    }
+    Clock->SetTimeScale(1.0f);
     Clock->StartClock();
-    CaptureBakeFrame(Clock->GetCurrentTime());
     LastRecordedSecond = Clock->GetCurrentTime().ToSecondsFromMidnight();
     UE_LOG(LogTemp, Display,
         TEXT("TMOP World Bake started at %gx. Authoritative bakes should use 1x."),
@@ -325,7 +280,8 @@ bool ATMOPSimulationDebugDirector::StopPersonBakeRecordingAndSave()
     if (!bRecordingBake) return false;
     bRecordingBake = false;
     CaptureResolvedSharedEvents();
-    return SavePersonBake();
+    const bool bTapeSaved = WorldPlayback && WorldPlayback->FinishRecording(true);
+    return bTapeSaved;
 }
 
 void ATMOPSimulationDebugDirector::FinishBakeAfterLoop()
@@ -469,106 +425,7 @@ void ATMOPSimulationDebugDirector::CaptureBakeFrame(const FTMOPTime& Time)
 
 bool ATMOPSimulationDebugDirector::ApplyPersonBakeAtTime(const FTMOPTime TargetTime)
 {
-    const FTMOPPersonBakeFrame* Frame = FindNearestBakeFrame(TargetTime);
-    if (Frame == nullptr) return false;
-    ATMOPPersonRegistryDirector* People = FindPersonDirector();
-    if (!IsValid(People)) return false;
-
-    TSet<FName> DesiredPeople;
-    for (const FTMOPBakedPersonState& State : Frame->People)
-        DesiredPeople.Add(State.EntityId);
-    for (TActorIterator<ATMOPHistoricalAgent> It(GetWorld()); It; ++It)
-    {
-        ATMOPHistoricalAgent* Agent = *It;
-        if (!IsValid(Agent) || !IsValid(Agent->EntityIdentity)) continue;
-        const FName EntityId = Agent->EntityIdentity->EntityId;
-        if (!EntityId.IsNone() && !DesiredPeople.Contains(EntityId))
-            Agent->Destroy();
-    }
-
-    TSet<FName> GroupMembers;
-    for (const FTMOPBakedGroupState& Group : Frame->Groups)
-        for (const FName MemberId : Group.MemberEntityIds)
-            GroupMembers.Add(MemberId);
-
-    for (const FTMOPBakedPersonState& State : Frame->People)
-    {
-        ATMOPHistoricalAgent* Agent = People->FindSpawnedPerson(State.EntityId);
-        if (!IsValid(Agent)) continue;
-        if (AAIController* AI = Cast<AAIController>(Agent->GetController())) AI->StopMovement();
-        if (IsValid(Agent->ActionExecutor)) Agent->ActionExecutor->CancelCurrentAction();
-        Agent->SetActorTransform(State.WorldTransform, false, nullptr, ETeleportType::TeleportPhysics);
-        Agent->SetLifeState(State.LifeState);
-        Agent->SetActivityState(State.ActivityState);
-        if (UCharacterMovementComponent* Movement = Agent->GetCharacterMovement())
-            Movement->Velocity = State.Velocity;
-        if (State.bHasMoveTarget && !GroupMembers.Contains(State.EntityId) &&
-            IsValid(Agent->ActionExecutor))
-            Agent->ActionExecutor->RestoreBakedMoveToLocation(
-                State.MoveTarget, State.ActivityState);
-    }
-
-    if (ATMOPGroupDirector* Groups = FindGroupDirector())
-    {
-        TSet<FName> DesiredGroupIds;
-        for (const FTMOPBakedGroupState& State : Frame->Groups)
-            DesiredGroupIds.Add(State.GroupId);
-        for (const FTMOPGroupSnapshot& Existing :
-            Groups->GetAllGroupSnapshots())
-            if (!DesiredGroupIds.Contains(Existing.GroupId))
-                Groups->DissolveGroup(Existing.GroupId);
-
-        for (const FTMOPBakedGroupState& State : Frame->Groups)
-        {
-            bool bFound = false;
-            FTMOPGroupSnapshot Existing =
-                Groups->GetGroupSnapshot(State.GroupId, bFound);
-            if (!bFound)
-            {
-                FTMOPGroupDefinition Definition;
-                Definition.GroupId = State.GroupId;
-                Definition.MemberEntityIds = State.MemberEntityIds;
-                Definition.LeaderEntityId = State.LeaderEntityId;
-                Definition.Formation = State.Formation;
-                Groups->CreateGroup(Definition);
-            }
-            else
-            {
-                for (const FName Member : Existing.MemberEntityIds)
-                    if (!State.MemberEntityIds.Contains(Member))
-                        Groups->RemoveMember(State.GroupId, Member);
-                for (const FName Member : State.MemberEntityIds)
-                    if (!Existing.MemberEntityIds.Contains(Member))
-                        Groups->AddMember(State.GroupId, Member);
-                Groups->SetGroupLeader(
-                    State.GroupId, State.LeaderEntityId);
-            }
-            if (State.State == ETMOPGroupState::Moving)
-                Groups->MoveGroupToLocation(
-                    State.GroupId, State.TargetLocation,
-                    State.AcceptanceRadius);
-            else if (State.State == ETMOPGroupState::Conversing)
-                Groups->StartConversation(
-                    State.GroupId,
-                    State.RemainingConversationSeconds,
-                    State.bConversationHasNoAutomaticEnd
-                        ? -1.0f : State.RemainingConversationSeconds,
-                    0);
-            else
-                Groups->StopGroup(State.GroupId);
-        }
-    }
-
-    ApplyBakedVehicles(*Frame);
-    if (ATMOPObservationDirector* Observations = FindObservationDirector())
-    {
-        Observations->ApplyBakedObservationRuntime(Frame->Observations);
-    }
-    ApplyBakedLights(*Frame);
-
-    UE_LOG(LogTemp, Display, TEXT("TMOP World Bake frame %s applied for seek to %s."),
-        *Frame->Time.ToDisplayString(), *TargetTime.ToDisplayString());
-    return true;
+    return JumpToSimulationTime(TargetTime);
 }
 
 void ATMOPSimulationDebugDirector::ApplyBakedVehicles(
@@ -702,8 +559,7 @@ const FTMOPPersonBakeFrame* ATMOPSimulationDebugDirector::FindNearestBakeFrame(
 
 bool ATMOPSimulationDebugDirector::SavePersonBake() const
 {
-    if (BakeData.Frames.IsEmpty()) return false;
-    return SaveWorldBakeAtomically();
+    return WorldPlayback && WorldPlayback->FinishRecording(true);
 }
 
 bool ATMOPSimulationDebugDirector::SaveWorldBakeAtomically() const
@@ -760,29 +616,7 @@ bool ATMOPSimulationDebugDirector::SaveWorldBakeAtomically() const
 
 bool ATMOPSimulationDebugDirector::LoadPersonBake()
 {
-    FString Json;
-    const FString Path = GetResolvedBakePath();
-    if (!FFileHelper::LoadFileToString(Json, *Path)) return false;
-    FTMOPWorldBakeData Loaded;
-    if (!FJsonObjectConverter::JsonObjectStringToUStruct(
-        Json, &Loaded, 0, 0)) return false;
-    BakeData = MoveTemp(Loaded);
-    BakeSampleIntervalSeconds = FMath::Max(1, BakeData.SampleIntervalSeconds);
-    TArray<FString> Errors;
-    const bool bValid = ValidateLoadedBake(Errors);
-    if (bValid)
-    {
-        UE_LOG(LogTemp, Display,
-            TEXT("TMOP World Bake loaded: %d frames from %s."),
-            BakeData.Frames.Num(), *Path);
-    }
-    else
-    {
-        for (const FString& Error : Errors)
-            UE_LOG(LogTemp, Warning,
-                TEXT("TMOP World Bake loaded but invalid: %s"), *Error);
-    }
-    return bValid;
+    return WorldPlayback && WorldPlayback->LoadAndPrepare(BuildSourceSignature());
 }
 
 FString ATMOPSimulationDebugDirector::GetResolvedBakePath() const
@@ -795,7 +629,7 @@ FString ATMOPSimulationDebugDirector::GetResolvedBakePath() const
 
 FString ATMOPSimulationDebugDirector::BuildSourceSignature() const
 {
-    FString Source;
+    FString Source = FString::Printf(TEXT("TMOP_AUTHORITY_V3_20260922_20HZ:scene%d"), PlaybackSceneRevision);
     if (GetWorld() != nullptr)
     {
         Source += GetWorld()->GetOutermost()->GetName()
@@ -825,9 +659,11 @@ FString ATMOPSimulationDebugDirector::BuildSourceSignature() const
             }
         }
     };
+    AddTable(TEXT("ItemMeshes"), GetDefault<UTMOPItemMeshSubsystem>()->ItemMeshTable);
     if (const ATMOPPersonRegistryDirector* People = FindPersonDirector())
     {
         AddTable(TEXT("People"), People->PersonProfileTable);
+        AddTable(TEXT("Appearance"), People->AppearanceAssetTable);
         AddTable(TEXT("Groups"), People->GroupDefinitionTable);
     }
     if (const ATMOPHistoricalVehicleDirector* Vehicles = FindVehicleDirector())
@@ -894,6 +730,14 @@ FString ATMOPSimulationDebugDirector::BuildSourceSignature() const
                     WorldParts.Add(FString::Printf(TEXT("|Lane=%s:%s"),
                         *Lane->LaneId.ToString(),
                         *Lane->GetComponentTransform().ToHumanReadableString()));
+            for (const auto* Lane : Lanes) if (Lane)
+            {
+                for (int32 Point=0; Point<Lane->GetNumberOfSplinePoints(); ++Point)
+                    WorldParts.Add(FString::Printf(TEXT("|LanePoint=%s:%d:%s:%s"), *Lane->LaneId.ToString(), Point,
+                        *Lane->GetTransformAtSplinePoint(Point, ESplineCoordinateSpace::World, true).ToString(),
+                        *Lane->GetTangentAtSplinePoint(Point, ESplineCoordinateSpace::World).ToString()));
+                WorldParts.Add(FString::Printf(TEXT("|LaneClosed=%s:%d"), *Lane->LaneId.ToString(), Lane->IsClosedLoop()));
+            }
         }
         WorldParts.Sort();
         for (const FString& Part : WorldParts) Source += Part;

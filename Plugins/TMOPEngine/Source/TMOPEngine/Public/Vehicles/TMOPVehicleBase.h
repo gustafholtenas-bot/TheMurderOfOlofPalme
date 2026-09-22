@@ -23,6 +23,7 @@ public:
     ATMOPVehicleBase();
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
+    void UpdatePlaybackNameLabel();
 
     /** Root collision used by swept player driving. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Vehicle|Collision")

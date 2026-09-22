@@ -72,6 +72,7 @@ public:
     virtual void OnRep_Controller() override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+    bool bTimelineCursorOpen = false;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TMOP|Player")
     TObjectPtr<USpringArmComponent> CameraBoom;
@@ -328,7 +329,7 @@ public:
     FKey InteractFallbackKey = EKeys::E;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Player|Interaction")
-    FKey VehicleTakeoverFallbackKey = EKeys::H;
+    FKey VehicleTakeoverFallbackKey = EKeys::F8;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="TMOP|Player|Input")
     TObjectPtr<UInputAction> PrimaryAction;

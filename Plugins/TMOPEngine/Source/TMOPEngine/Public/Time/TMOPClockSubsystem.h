@@ -34,6 +34,13 @@ class TMOPENGINE_API UTMOPClockSubsystem final : public UGameInstanceSubsystem
 public:
     UTMOPClockSubsystem();
 
+    // Set only by the historical playback owner. Ordinary clock setters route
+    // through its transaction; listeners see a completed world, never half a seek.
+    bool bAuthoritativePlayback = false;
+    bool bRecordingAuthoritativeBake = false;
+    void CommitHistoricalTime(FTMOPTime Time);
+    void PublishHistoricalTime();
+
     virtual void Initialize(FSubsystemCollectionBase& Collection) override;
     virtual void Deinitialize() override;
 
@@ -135,4 +142,5 @@ private:
     bool bClockRunning = true;
     bool bAwaitingLoopDecision = false;
     bool bRestartInProgress = false;
+    int32 LastPublishedHistoricalSecond = INDEX_NONE;
 };

@@ -89,23 +89,30 @@ class ControlProfileContracts(unittest.TestCase):
         cpp = read("Private/Player/TMOPControlSettingsSubsystem.cpp")
         function = cpp.split("FTMOPPlayerControlProfile UTMOPControlSettingsSubsystem::MakeDefaultProfile", 1)[1]
         function = function.split("void UTMOPControlSettingsSubsystem::ResetAllToDefaults", 1)[0]
-        blocks = function.split("return P;", 1)
+        common, branches = function.split("    if (Device == ETMOPControlDevice::Gamepad)", 1)
+        blocks = branches.split("return P;", 1)
         keyboard = blocks[1].split("    else\n    {", 1)
-        profiles = [blocks[0], keyboard[0], keyboard[1]]
+        profiles = [common + block for block in (blocks[0], keyboard[0], keyboard[1])]
         def context(action):
-            if action in ("Pause", "WorldMap"): return {"foot", "vehicle", "menu"}
+            if action in ("Pause", "WorldMap", "TimelineCursor"): return {"foot", "vehicle", "menu"}
             if action.startswith("Menu"): return {"menu"}
+            if action == "VehicleTakeover": return {"foot"}
             if action.startswith("Vehicle"): return {"vehicle"}
             if action.startswith("Look") or action == "TogglePerspective": return {"foot", "vehicle"}
             return {"foot"}
         keyboard_keys = []
         expected = set(re.findall(r"ETMOPControlAction::(\w+)", function))
         for index, block in enumerate(profiles):
-            entries = re.findall(r"AddBinding\(P, ETMOPControlAction::(\w+), ([^;]+)\);", block)
+            entries = re.findall(r"AddBinding\(P, ETMOPControlAction::(\w+),\s*([^;]+)\);", block)
             self.assertEqual(len(entries), len(expected), f"profile {index}: duplicate or missing action")
             self.assertEqual({a for a, _ in entries}, expected)
             used = []
             for action, keys in entries:
+                # Shared defaults can be intentionally unbound for gamepad/P2.
+                if "?" in keys:
+                    conditional = re.search(r"\?\s*(EKeys::\w+)\s*:\s*FKey\(\)", keys)
+                    self.assertIsNotNone(conditional, "Unknown conditional default; extend the contract evaluator")
+                    keys = conditional.group(1) if index == 1 else "FKey()"
                 for key in re.findall(r"EKeys::(\w+)", keys):
                     for other, other_key in used:
                         if key != other_key or not context(action) & context(other): continue

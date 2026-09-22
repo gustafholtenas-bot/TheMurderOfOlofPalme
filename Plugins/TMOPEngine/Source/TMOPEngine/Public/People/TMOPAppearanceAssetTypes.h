@@ -82,12 +82,12 @@ struct TMOPENGINE_API FTMOPAppearanceAssetRow : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Identity")
     ETMOPAppearancePartType PartType = ETMOPAppearancePartType::Body;
 
+    /** Skinned geometry, including Hair. Hair must share the body's Skeleton asset. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<USkeletalMesh> Mesh;
 
-    /** Static accessory used by hair, hats, glasses and facial hair. Rigid head
-     *  accessories avoid skinning and leader-pose evaluation. Mesh remains as
-     *  a legacy fallback while existing catalog rows are migrated. */
+    /** Socket geometry for hats, glasses and facial hair. Hair uses Mesh instead.
+     *  These rigid accessories retain Mesh as a legacy fallback. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<UStaticMesh> StaticMesh;
 

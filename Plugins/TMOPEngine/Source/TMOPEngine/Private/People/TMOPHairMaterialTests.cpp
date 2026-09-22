@@ -2,6 +2,7 @@
 #include "Misc/AutomationTest.h"
 #include "Engine/DataTable.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/SkeletalMesh.h"
 #include "Materials/Material.h"
 #include "People/TMOPAppearanceResolver.h"
 
@@ -47,7 +48,7 @@ bool FTMOPHairCatalogSelectionTest::RunTest(const FString& Parameters)
     Valid.CatalogId = TEXT("CUT");
     Valid.PartType = ETMOPAppearancePartType::Hair;
     Valid.Gender = ETMOPPersonGender::Male;
-    Valid.StaticMesh = NewObject<UStaticMesh>();
+    Valid.Mesh = NewObject<USkeletalMesh>();
     Valid.Tags = { FName(TEXT("Short")) };
     Valid.SelectionWeight = 1.0f;
     Table->AddRow(Valid.CatalogId, Valid);
@@ -65,7 +66,14 @@ bool FTMOPHairCatalogSelectionTest::RunTest(const FString& Parameters)
     Empty.CatalogId = TEXT("EMPTY");
     Empty.SelectionWeight = 100.0f;
     Empty.StaticMesh.Reset();
+    Empty.Mesh.Reset();
     Table->AddRow(Empty.CatalogId, Empty);
+    FTMOPAppearanceAssetRow StaticOnly = Disabled;
+    StaticOnly.CatalogId = TEXT("STATIC_ONLY");
+    StaticOnly.Mesh.Reset();
+    StaticOnly.StaticMesh = NewObject<UStaticMesh>();
+    StaticOnly.SelectionWeight = 100.0f;
+    Table->AddRow(StaticOnly.CatalogId, StaticOnly);
     FTMOPPersonProfileRow Profile;
     Profile.Gender = ETMOPPersonGender::Male;
     Profile.Hair.Tags = { FName(TEXT("Short")), FName(TEXT("Curly")) };
@@ -81,6 +89,15 @@ bool FTMOPHairCatalogSelectionTest::RunTest(const FString& Parameters)
     Profile.AppearanceProfile.Hair.MaterialOverride = ExplicitMaterial;
     UTMOPAppearanceResolver::ResolveAppearance(Profile, Table, Result);
     TestTrue(TEXT("Catalog lookup preserves explicit material"), Result.Hair.Material.Get() == ExplicitMaterial);
+    Profile.AppearanceProfile.Hair.StaticMeshOverride = StaticOnly.StaticMesh;
+    UTMOPAppearanceResolver::ResolveAppearance(Profile, Table, Result);
+    TestTrue(TEXT("Old static override cannot block the skeletal catalog mesh"),
+        Result.Hair.Mesh.Get() == Valid.Mesh.Get());
+    Profile.AppearanceProfile.Hair.StaticMeshOverride.Reset();
+    Profile.AppearanceProfile.Hair.CatalogId = StaticOnly.CatalogId;
+    UTMOPAppearanceResolver::ResolveAppearance(Profile, Table, Result);
+    TestEqual(TEXT("Static-only hair row falls back to a skinned hairstyle"),
+        Result.Hair.CatalogId, Valid.CatalogId);
     Profile.HairColorCategory = ETMOPHairColor::Bald;
     UTMOPAppearanceResolver::ResolveAppearance(Profile, Table, Result);
     TestTrue(TEXT("Bald remains intentionally empty"), Result.Hair.bIntentionallyEmpty);

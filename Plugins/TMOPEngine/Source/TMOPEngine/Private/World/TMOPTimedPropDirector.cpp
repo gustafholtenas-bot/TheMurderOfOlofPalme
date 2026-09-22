@@ -215,6 +215,7 @@ bool ATMOPTimedPropDirector::ApplyEntry(
     }
 
     if (!IsValid(Spawned)) return false;
+    if (Spawned) { Spawned->SetOwner(this); Spawned->Tags.Add(FName(*(TEXT("TMOP_HistoryId=prop:") + GetName() + TEXT(":") + Entry.InstanceId.ToString()))); }
     SpawnedInstances.Add(Entry.InstanceId, Spawned);
     return true;
 }

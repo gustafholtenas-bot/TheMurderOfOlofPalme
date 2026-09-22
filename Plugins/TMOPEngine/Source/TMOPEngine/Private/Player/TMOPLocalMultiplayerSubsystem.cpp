@@ -20,6 +20,22 @@
 #include "Player/TMOPPlayerVehicleSessionComponent.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "UI/TMOPMainMenuIntroDirector.h"
+#include "Misc/PackageName.h"
+
+void UTMOPLocalMultiplayerSubsystem::QueueAppearanceTravel(FName LevelPackage)
+{
+    PendingAppearanceLevel = LevelPackage;
+    if (!LevelPackage.IsNone())
+        AppearanceMainMenuLevel = FName(*UGameplayStatics::GetCurrentLevelName(this, true));
+}
+
+bool UTMOPLocalMultiplayerSubsystem::ConsumeAppearanceTravel(UWorld* World)
+{
+    if (!World || PendingAppearanceLevel.IsNone() ||
+        UGameplayStatics::GetCurrentLevelName(World, true) != FPackageName::GetShortName(PendingAppearanceLevel.ToString())) return false;
+    PendingAppearanceLevel = NAME_None;
+    return true;
+}
 
 void UTMOPLocalMultiplayerSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -393,7 +409,8 @@ void UTMOPLocalMultiplayerSubsystem::ReturnToMainMenu()
 {
     if (bChangingSession || !GetWorld()) return;
     bChangingSession = true;
-    const FName Level(*UGameplayStatics::GetCurrentLevelName(this, true));
+    const FName Level = AppearanceMainMenuLevel.IsNone()
+        ? FName(*UGameplayStatics::GetCurrentLevelName(this, true)) : AppearanceMainMenuLevel;
     PrepareMainMenu();
     UGameplayStatics::OpenLevel(this, Level);
     bChangingSession = false;

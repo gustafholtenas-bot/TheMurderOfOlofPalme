@@ -1,4 +1,5 @@
 #include "Events/TMOPHistoricalEventSubsystem.h"
+#include "Misc/Crc.h"
 
 #include "Engine/GameInstance.h"
 #include "Time/TMOPClockSubsystem.h"
@@ -202,7 +203,7 @@ int32 UTMOPHistoricalEventSubsystem::ApplyBakedEventRuntime(
             ++Applied;
         }
     }
-    UE_LOG(LogTemp, Display,
+    UE_LOG(LogTemp, VeryVerbose,
         TEXT("TMOP World Bake: applied %d baked Shared Event runtime state(s)."),
         Applied);
     return Applied;
@@ -374,8 +375,8 @@ int32 UTMOPHistoricalEventSubsystem::ChooseWindowSecond(
     }
 
     const uint32 Seed =
-        GetTypeHash(EventId) ^
-        static_cast<uint32>(CurrentLoopNumber * 2654435761u);
+        FCrc::StrCrc32(*EventId.ToString()) ^
+        static_cast<uint32>(2654435761u);
 
     FRandomStream RandomStream(static_cast<int32>(Seed));
 

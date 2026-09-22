@@ -140,6 +140,10 @@ public:
     UFUNCTION(BlueprintPure, Category="TMOP|Groups")
     TArray<FTMOPGroupSnapshot> GetAllGroupSnapshots() const;
 
+    /** Pure state restoration: does not start navigation or emit conversation events. */
+    void RestorePlaybackGroups(const TArray<FTMOPGroupSnapshot>& Snapshots, double Time);
+    void UpdatePlaybackTime(double Time);
+
     UFUNCTION(BlueprintPure, Category="TMOP|Groups")
     bool AreAllMembersWithinRadius(FName GroupId, FVector Location, float Radius) const;
 
@@ -158,6 +162,7 @@ private:
         int32 RouteLocationIndex = INDEX_NONE;
         float AcceptanceRadius = 100.0f;
         float RemainingConversationSeconds = 0.0f;
+        double PlaybackConversationEnd = 0;
         bool bConversationHasNoAutomaticEnd = false;
         float SocialElapsedSeconds = 0.0f;
         float NextSpeakerChangeSeconds = 0.0f;

@@ -82,6 +82,11 @@ void ATMOPVehicleBase::BeginPlay()
 void ATMOPVehicleBase::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    UpdatePlaybackNameLabel();
+}
+
+void ATMOPVehicleBase::UpdatePlaybackNameLabel()
+{
     if (NameLabel) NameLabel->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
     if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) || !bShowNameLabel || !IsValid(NameLabel) ||
         GetWorld() == nullptr)
@@ -147,7 +152,7 @@ void ATMOPVehicleBase::RefreshNameLabel()
     NameLabel->SetVisibility(bDisplayLabel, true);
     // Vehicle subclasses use Actor Tick for wheels and lights even when the
     // optional debug label is hidden.
-    SetActorTickEnabled(true);
+    SetActorTickEnabled(!Tags.Contains(TEXT("TMOP_AuthoritativeHistory")));
 }
 
 bool ATMOPVehicleBase::ShouldDisplayNameLabel() const

@@ -46,6 +46,7 @@ ETMOPBindingContext ContextFor(const ETMOPControlAction Action)
     case ETMOPControlAction::LookZoom:
     case ETMOPControlAction::TogglePerspective: return ETMOPBindingContext::SharedGameplay;
     case ETMOPControlAction::WorldMap:
+    case ETMOPControlAction::TimelineCursor:
     case ETMOPControlAction::Pause: return ETMOPBindingContext::Global;
     default: return ETMOPBindingContext::OnFoot;
     }
@@ -177,7 +178,9 @@ FTMOPPlayerControlProfile UTMOPControlSettingsSubsystem::MakeDefaultProfile(
     // A distinct on-foot action. Gamepads and keyboard player 2 can bind it
     // explicitly without stealing an existing gameplay button.
     AddBinding(P, ETMOPControlAction::VehicleTakeover,
-        Device == ETMOPControlDevice::KeyboardMouse && PlayerIndex == 0 ? EKeys::H : FKey());
+        Device == ETMOPControlDevice::KeyboardMouse && PlayerIndex == 0 ? EKeys::F8 : FKey());
+    AddBinding(P, ETMOPControlAction::TimelineCursor,
+        Device == ETMOPControlDevice::KeyboardMouse && PlayerIndex == 0 ? EKeys::LeftAlt : FKey());
     if (Device == ETMOPControlDevice::Gamepad)
     {
         AddBinding(P, ETMOPControlAction::MoveForward, EKeys::Gamepad_LeftY);
@@ -408,6 +411,8 @@ FKey UTMOPControlSettingsSubsystem::GetKey(const int32 PlayerIndex,
     const ETMOPControlAction Action, const bool bSecondary) const
 {
     const FTMOPControlBinding* Binding = FindBinding(PlayerIndex, Action);
+    if (!Binding && !bSecondary && Action == ETMOPControlAction::TimelineCursor && PlayerIndex == 0 &&
+        GetProfile(PlayerIndex).Device == ETMOPControlDevice::KeyboardMouse) return EKeys::LeftAlt;
     return Binding ? (bSecondary ? Binding->SecondaryKey : Binding->PrimaryKey) : FKey();
 }
 
@@ -690,7 +695,7 @@ bool UTMOPControlSettingsSubsystem::LoadSettings()
             if (!P.Bindings.ContainsByPredicate([&B](const auto& Existing) { return Existing.Action == B.Action; }))
             {
                 auto Added = B;
-                if (B.Action == ETMOPControlAction::VehicleTakeover &&
+                if ((B.Action == ETMOPControlAction::VehicleTakeover || B.Action == ETMOPControlAction::TimelineCursor) &&
                     P.Bindings.ContainsByPredicate([&B](const auto& Existing) {
                         return Existing.PrimaryKey == B.PrimaryKey || Existing.SecondaryKey == B.PrimaryKey; }))
                     Added.PrimaryKey = FKey();

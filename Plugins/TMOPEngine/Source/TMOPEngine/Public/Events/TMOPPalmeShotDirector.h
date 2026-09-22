@@ -7,6 +7,7 @@
 
 class ATMOPHistoricalAgent;
 class UAnimSequence;
+class UAudioComponent;
 class UNiagaraComponent;
 class UNiagaraSystem;
 class USoundBase;
@@ -24,6 +25,14 @@ public:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void Tick(float DeltaSeconds) override;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Palme Shot|Playback")
+    double PlaybackFirstShotSecond = -1;
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Palme Shot|Playback")
+    double PlaybackSecondShotSecond = -1;
+
+    /** Shot audio/FX cross their recorded boundaries during forward playback only. */
+    void EvaluatePlaybackAudio(double Previous, double Current, bool bSeeking);
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Palme Shot|Identity")
     FName ShotEventId = TEXT("PALME_SHOT_1");
@@ -127,6 +136,8 @@ private:
     void RestoreSlowMotion();
     void ShowBloodPool();
 
+    TArray<TWeakObjectPtr<UNiagaraComponent>> HistoricalEffects;
+    TArray<TWeakObjectPtr<UAudioComponent>> HistoricalShotAudio;
     TWeakObjectPtr<ATMOPHistoricalAgent> OlofAgent;
     TWeakObjectPtr<ATMOPHistoricalAgent> KillerAgent;
     float SequenceTime = 0.0f;

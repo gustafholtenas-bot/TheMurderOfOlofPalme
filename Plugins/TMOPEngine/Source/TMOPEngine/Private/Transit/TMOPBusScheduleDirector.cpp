@@ -86,7 +86,7 @@ bool ATMOPBusScheduleDirector::ResolveSchedule(const int32 LoopNumber)
             const int32 Earliest = Run.EarliestStartTime.ToSecondsFromMidnight();
             const int32 Latest = Run.LatestStartTime.ToSecondsFromMidnight();
             if (Latest < Earliest) return false;
-            FRandomStream Random(ScheduleSeed + LoopNumber * 1013 + Index * 89);
+            FRandomStream Random(ScheduleSeed + 1013 + Index * 89);
             Seconds = Random.RandRange(Earliest, Latest);
         }
         FTMOPBusRunRuntime Runtime;
@@ -213,7 +213,7 @@ bool ATMOPBusScheduleDirector::SpawnRun(FTMOPBusRunRuntime& Runtime)
     Movement->SpeedLimitMultiplier = Run.SpeedLimitMultiplier;
     Service->RouteData = Run.RouteData;
     Service->ServiceRunId = Run.RunId;
-    Service->DwellRandomSeed = ScheduleSeed + CurrentLoopNumber * 1013 + Runtime.SourceIndex * 89;
+    Service->DwellRandomSeed = ScheduleSeed + 1013 + Runtime.SourceIndex * 89;
     if (UTMOPBusPassengerComponent* Passengers =
         Bus->FindComponentByClass<UTMOPBusPassengerComponent>())
     {

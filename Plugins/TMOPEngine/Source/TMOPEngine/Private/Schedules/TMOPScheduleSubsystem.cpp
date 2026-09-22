@@ -1,4 +1,5 @@
 #include "Schedules/TMOPScheduleSubsystem.h"
+#include "Misc/Crc.h"
 
 #include "Engine/GameInstance.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
@@ -414,9 +415,9 @@ int32 UTMOPScheduleSubsystem::ChooseWindowSecond(
     }
 
     const uint32 Seed =
-        GetTypeHash(AgentId) ^
-        GetTypeHash(EntryId) ^
-        static_cast<uint32>(CurrentLoopNumber * 2654435761u);
+        FCrc::StrCrc32(*AgentId.ToString()) ^
+        FCrc::StrCrc32(*EntryId.ToString()) ^
+        static_cast<uint32>(2654435761u);
 
     FRandomStream RandomStream(static_cast<int32>(Seed));
     return RandomStream.RandRange(EarliestSecond, LatestSecond);

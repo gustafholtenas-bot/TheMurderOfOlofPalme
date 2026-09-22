@@ -35,6 +35,14 @@ class TMOPENGINE_API ATMOPPlayerAppearanceDirector : public AActor
 
 public:
     ATMOPPlayerAppearanceDirector();
+    static ATMOPPlayerAppearanceDirector* ForCharacter(ACharacter* Character);
+    static FTMOPAppearancePartChoice& Choice(FTMOPPersonProfileRow& Profile, ETMOPAppearancePartType Type);
+    bool GetEditableProfile(FTMOPPersonProfileRow& Out) const { return BuildPlayerProfile(Out); }
+    UDataTable* GetAppearanceCatalog() const { return ResolveAssetCatalog(); }
+    bool PreviewProfile(const FTMOPPersonProfileRow& Profile, FString& Error);
+    bool SaveEditedProfile(FString& Error);
+    void GetSelectableAssets(const FTMOPPersonProfileRow& Profile,
+        ETMOPAppearancePartType Type, TArray<FName>& Out) const;
     virtual void BeginPlay() override;
 
     /** Optional placed character. Empty resolves GetPlayerCharacter(PlayerIndex). */
@@ -134,6 +142,12 @@ public:
     void ValidatePlayerAppearance();
 
 private:
+    UPROPERTY(Transient) FTMOPPersonProfileRow EditedProfile;
+    bool bHasEditedProfile = false;
+    TWeakObjectPtr<ACharacter> HeightTarget;
+    FVector InitialActorScale = FVector::OneVector;
+    bool ValidateEditableProfile(const FTMOPPersonProfileRow& Profile, FString& Error) const;
+    void LoadEditedProfile();
     ACharacter* ResolveTargetCharacter() const;
     USkeletalMeshComponent* ResolveBodyMesh(ACharacter* Character) const;
     UDataTable* ResolveAssetCatalog() const;
@@ -146,6 +160,9 @@ private:
         USkeletalMeshComponent* Body);
     bool ApplyResolvedHeadwear(ACharacter* Character,
         USkeletalMeshComponent* Body, const FTMOPResolvedAppearancePart& Part);
+    bool ApplyResolvedFaceAccessory(ACharacter* Character, USkeletalMeshComponent* Body,
+        FName LegacyName, FName StaticName, FName DefaultSocket,
+        const FTransform& FaceOffset, const FTMOPResolvedAppearancePart& Part);
     bool ApplyResolvedBody(USkeletalMeshComponent* Body,
         const FTMOPPersonProfileRow& Profile);
     void ApplyBodyRegionMask(USkeletalMeshComponent* Body);
@@ -156,6 +173,9 @@ private:
 
     UPROPERTY(Transient)
     TObjectPtr<UStaticMeshComponent> ManagedHeadwearComponent;
+
+    UPROPERTY(Transient)
+    TArray<TObjectPtr<UStaticMeshComponent>> ManagedFaceAccessories;
 
     FTimerHandle StartupRetryTimer;
     int32 RemainingStartupRetries = 0;

@@ -93,6 +93,7 @@ public:
 
 void UTMOPSpeechBubbleWidget::SetSpeechText(const FText& NewText)
 {
+    bHistoricalPlayback = false;
     PendingSpeechText = NewText;
     FullSpeechString = NewText.ToString();
     RevealedCharacterAccumulator = 0.0f;
@@ -110,6 +111,7 @@ void UTMOPSpeechBubbleWidget::NativeTick(
     const FGeometry& MyGeometry, const float InDeltaTime)
 {
     Super::NativeTick(MyGeometry, InDeltaTime);
+    if (bHistoricalPlayback) return;
     if (!SpeechText.IsValid() || RevealedCharacterCount >= FullSpeechString.Len()) return;
 
     RevealedCharacterAccumulator += InDeltaTime *
@@ -154,4 +156,11 @@ TSharedRef<SWidget> UTMOPSpeechBubbleWidget::RebuildWidget()
                 .ColorAndOpacity(FLinearColor::White)
             ]
         ];
+}
+
+void UTMOPSpeechBubbleWidget::SetPlaybackElapsed(float Seconds)
+{
+    bHistoricalPlayback = true;
+    RevealedCharacterCount = FMath::Clamp(FMath::FloorToInt(FMath::Max(0.0f, Seconds) * TypewriterCharactersPerSecond), 0, FullSpeechString.Len());
+    if (SpeechText.IsValid()) SpeechText->SetText(FText::FromString(FullSpeechString.Left(RevealedCharacterCount)));
 }

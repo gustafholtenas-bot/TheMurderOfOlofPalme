@@ -1,4 +1,6 @@
 #include "Radio/TMOPPlayerRadioComponent.h"
+#include "Time/TMOPClockSubsystem.h"
+#include "Engine/GameInstance.h"
 
 #include "Components/AudioComponent.h"
 #include "Inventory/TMOPInventoryComponent.h"
@@ -203,4 +205,11 @@ void UTMOPPlayerRadioComponent::HandleEquippedItemChanged(
     if (bRequireRadioItemEquipped &&
         (!IsValid(NewItem) || NewItem->ItemType != ETMOPItemType::Radio))
         SetRadioOn(false);
+}
+
+void UTMOPPlayerRadioComponent::RestoreAfterTimeSeek()
+{
+    if (GetWorld() && GetWorld()->GetGameInstance())
+        CurrentSecondOfDay = GetWorld()->GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()->GetCurrentTime().ToSecondsFromMidnight();
+    RefreshBroadcast(true);
 }

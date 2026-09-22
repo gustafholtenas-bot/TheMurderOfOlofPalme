@@ -9,6 +9,7 @@
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
 #include "People/TMOPAppearanceResolver.h"
+#include "People/TMOPCharacterAppearanceComponent.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
 #include "TimerManager.h"
 
@@ -24,6 +25,7 @@ ATMOPPlayerAppearanceDirector::ATMOPPlayerAppearanceDirector()
 void ATMOPPlayerAppearanceDirector::BeginPlay()
 {
     Super::BeginPlay();
+    LoadEditedProfile();
     if (!bApplyOnBeginPlay) return;
 
     RemainingStartupRetries = MaximumStartupRetries;
@@ -63,6 +65,7 @@ UDataTable* ATMOPPlayerAppearanceDirector::ResolveAssetCatalog() const
 bool ATMOPPlayerAppearanceDirector::BuildPlayerProfile(
     FTMOPPersonProfileRow& OutProfile) const
 {
+    if (bHasEditedProfile) { OutProfile = EditedProfile; return true; }
     if (bUsePersonProfileRow)
     {
         const UDataTable* Table = PlayerProfileRow.DataTable;
@@ -130,6 +133,16 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedPart(
         Character, Body, ComponentName);
     if (!IsValid(Component)) return false;
 
+    if (Part.PartType == ETMOPAppearancePartType::Hair)
+    {
+        Component->SetLeaderPoseComponent(nullptr);
+        Component->SetSkeletalMesh(nullptr);
+        Component->SetAbsolute(false, false, false);
+        Component->AttachToComponent(Body,
+            FAttachmentTransformRules::SnapToTargetIncludingScale, NAME_None);
+        Component->SetRelativeTransform(FTransform::Identity);
+    }
+    Component->EmptyOverrideMaterials();
     if (Part.bIntentionallyEmpty)
     {
         Component->SetVisibility(false, true);
@@ -158,8 +171,9 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedPart(
     }
 
     Component->SetSkeletalMesh(Mesh);
-    Component->SetLeaderPoseComponent(Body);
+    Component->SetLeaderPoseComponent(Body, true);
     Component->SetVisibility(true, true);
+    Component->SetHiddenInGame(false);
 
     if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
     {
@@ -168,14 +182,95 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedPart(
             UMaterialInstanceDynamic* Dynamic =
                 Component->CreateDynamicMaterialInstance(Index, Material);
             if (Dynamic == nullptr) continue;
-            Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
-            Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            if (Part.PartType != ETMOPAppearancePartType::Hair &&
+                Part.PartType != ETMOPAppearancePartType::FacialHair)
+            {
+                Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
+                Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+            }
             Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"),
                 Part.bUsesObscuredFallback ? 1.0f : 0.0f);
             Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"),
                 Part.ObscurityAmount);
         }
     }
+    return true;
+}
+
+bool ATMOPPlayerAppearanceDirector::ApplyResolvedFaceAccessory(
+    ACharacter* Character, USkeletalMeshComponent* Body,
+    const FName LegacyName, const FName StaticName, const FName DefaultSocket,
+    const FTransform& FaceOffset, const FTMOPResolvedAppearancePart& Part)
+{
+    TArray<USkeletalMeshComponent*> OldParts;
+    Character->GetComponents<USkeletalMeshComponent>(OldParts);
+    for (USkeletalMeshComponent* Old : OldParts)
+        if (IsValid(Old) && Old->GetFName() == LegacyName)
+        {
+            Old->SetSkeletalMesh(nullptr);
+            Old->SetVisibility(false, true);
+        }
+    TArray<UStaticMeshComponent*> Existing;
+    Character->GetComponents<UStaticMeshComponent>(Existing);
+    UStaticMeshComponent* Component = nullptr;
+    for (UStaticMeshComponent* Candidate : Existing)
+        if (IsValid(Candidate) && Candidate->GetFName() == StaticName)
+            Component = Candidate;
+    if (Component)
+    {
+        Component->SetStaticMesh(nullptr);
+        Component->EmptyOverrideMaterials();
+        Component->SetVisibility(false, true);
+        ManagedFaceAccessories.AddUnique(Component);
+    }
+    if (Part.bIntentionallyEmpty) return true;
+    if (Part.StaticMesh.IsNull())
+        return Part.Mesh.IsNull() || ApplyResolvedPart(Character, Body, LegacyName, Part);
+    UStaticMesh* Mesh = Part.StaticMesh.LoadSynchronous();
+    if (!Mesh)
+    {
+        ResolvedAppearance.Diagnostics.Add(FString::Printf(
+            TEXT("Player accessory '%s' could not load StaticMesh."), *Part.CatalogId.ToString()));
+        return false;
+    }
+    if (!Component)
+    {
+        Component = NewObject<UStaticMeshComponent>(Character, StaticName);
+        Character->AddInstanceComponent(Component);
+        Component->SetupAttachment(Body);
+        Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        Component->SetGenerateOverlapEvents(false);
+        Component->RegisterComponent();
+        ManagedFaceAccessories.AddUnique(Component);
+    }
+    Component->SetOwnerNoSee(Body->bOwnerNoSee);
+    Component->SetOnlyOwnerSee(Body->bOnlyOwnerSee);
+    Component->SetCastShadow(Body->CastShadow);
+    FName Socket = Part.AttachmentSocket.IsNone() || Part.AttachmentSocket == DefaultHeadwearSocket
+        ? DefaultSocket : Part.AttachmentSocket;
+    if (!Body->DoesSocketExist(Socket)) Socket = HeadwearFallbackBone;
+    if (!Body->DoesSocketExist(Socket))
+    {
+        ResolvedAppearance.Diagnostics.Add(TEXT("Player face accessory socket and fallback bone are missing."));
+        return false;
+    }
+    Component->SetStaticMesh(Mesh);
+    Component->AttachToComponent(Body, FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
+    Component->SetRelativeTransform(Part.AttachmentTransform * FaceOffset);
+    Component->SetVisibility(true, true);
+    Component->SetHiddenInGame(false);
+    if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
+        for (int32 Index = 0; Index < Component->GetNumMaterials(); ++Index)
+            if (UMaterialInstanceDynamic* Dynamic = Component->CreateDynamicMaterialInstance(Index, Material))
+            {
+                if (Part.PartType != ETMOPAppearancePartType::FacialHair)
+                {
+                    Dynamic->SetVectorParameterValue(TEXT("PrimaryColor"), Part.PrimaryColor);
+                    Dynamic->SetVectorParameterValue(TEXT("SecondaryColor"), Part.SecondaryColor);
+                }
+                Dynamic->SetScalarParameterValue(TEXT("TMOP_IsUnknown"), Part.bUsesObscuredFallback ? 1.0f : 0.0f);
+                Dynamic->SetScalarParameterValue(TEXT("TMOP_ObscurityAmount"), Part.ObscurityAmount);
+            }
     return true;
 }
 
@@ -218,6 +313,13 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedHeadwear(
 {
     UStaticMeshComponent* Component = EnsureHeadwearComponent(Character, Body);
     if (!IsValid(Component)) return false;
+    Component->EmptyOverrideMaterials();
+    for (USkeletalMeshComponent* Legacy : ManagedPartComponents)
+        if (IsValid(Legacy) && Legacy->GetFName() == FName(TEXT("TMOP_Player_Headwear_Legacy")))
+        {
+            Legacy->SetSkeletalMesh(nullptr);
+            Legacy->SetVisibility(false, true);
+        }
     if (Part.bIntentionallyEmpty)
     {
         Component->SetStaticMesh(nullptr);
@@ -271,7 +373,7 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedHeadwear(
     }
     Component->AttachToComponent(Body,
         FAttachmentTransformRules::SnapToTargetNotIncludingScale, Socket);
-    Component->SetRelativeTransform(Part.AttachmentTransform);
+    Component->SetRelativeTransform(Part.AttachmentTransform * ResolvedAppearance.Face.HeadAccessoryFit.HeadwearOffset);
     Component->SetVisibility(true, true);
 
     if (UMaterialInterface* Material = Part.Material.LoadSynchronous())
@@ -311,6 +413,7 @@ bool ATMOPPlayerAppearanceDirector::ApplyResolvedBody(
         }
     }
 
+    Body->EmptyOverrideMaterials();
     if (DesiredBody != nullptr)
         Body->SetSkeletalMesh(DesiredBody);
     Body->SetVisibility(Body->GetSkeletalMeshAsset() != nullptr, true);
@@ -361,7 +464,7 @@ void ATMOPPlayerAppearanceDirector::ApplyBodyRegionMask(
     };
     if (IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Face"),
         ResolvedAppearance.Face))
-        Mask |= TMOPBodyRegionMask(ETMOPBodyRegion::Head);
+        Mask |= TMOPBodyRegionMask(ETMOPBodyRegion::Head) | TMOPBodyRegionMask(ETMOPBodyRegion::Neck);
     IncludeVisibleSkeletalPart(TEXT("TMOP_Player_Outerwear"),
         ResolvedAppearance.Outerwear);
     IncludeVisibleSkeletalPart(TEXT("TMOP_Player_UpperBody"),
@@ -421,8 +524,45 @@ bool ATMOPPlayerAppearanceDirector::ApplyPlayerAppearance()
 
     UTMOPAppearanceResolver::ResolveAppearance(Profile, Catalog,
         ResolvedAppearance);
+    // Share the native colour mapping with NPCs. Explicit per-player materials win.
+    const auto& HairDefaults = GetDefault<UTMOPCharacterAppearanceComponent>()->HairMaterials;
+    FName HairKey = UTMOPAppearanceResolver::GetHairMaterialKey(Profile.Hair, Profile.HairColorCategory);
+    if (HairKey == TEXT("Unknown"))
+        HairKey = UTMOPAppearanceResolver::GetDeterministicUnknownHairMaterialKey(
+            ResolvedAppearance.ResolvedSeed, Profile.AgeAtEvent);
+    FName BeardKey = UTMOPAppearanceResolver::GetHairMaterialKey(Profile.BeardOrMustache, ETMOPHairColor::Unknown);
+    if (BeardKey == TEXT("Unknown")) BeardKey = HairKey;
+    const auto ChooseMaterial = [&HairDefaults](FTMOPResolvedAppearancePart& Part,
+        const FTMOPAppearancePartChoice& Choice, const FName Key)
+    {
+        if (Part.bIntentionallyEmpty || !Choice.MaterialOverride.IsNull()) return;
+        if (const auto* Material = HairDefaults.Find(Key))
+            if (!Material->IsNull()) Part.Material = *Material;
+    };
+    ChooseMaterial(ResolvedAppearance.Hair, Profile.AppearanceProfile.Hair, HairKey);
+    ChooseMaterial(ResolvedAppearance.FacialHair, Profile.AppearanceProfile.FacialHair, BeardKey);
+    for (UStaticMeshComponent* Accessory : ManagedFaceAccessories)
+        if (IsValid(Accessory))
+        {
+            Accessory->SetStaticMesh(nullptr);
+            Accessory->SetVisibility(false, true);
+        }
     if (!ResolvedAppearance.bUsesBespokeMetaHuman)
         ApplyResolvedBody(Body, Profile);
+
+    // Visual height only: keep feet at the original mesh origin and leave the
+    // gameplay capsule/camera untouched. Never multiply the previous scale.
+    if (HeightTarget.Get() != Character)
+    {
+        HeightTarget = Character;
+        InitialActorScale = Body->GetRelativeScale3D();
+    }
+    if (USkeletalMesh* Asset = Body->GetSkeletalMeshAsset())
+    {
+        const float ReferenceHeight = Asset->GetBounds().BoxExtent.Z * 2.0f;
+        if (ReferenceHeight > 1.0f)
+            Body->SetRelativeScale3D(InitialActorScale * (Profile.GetResolvedHeightCentimeters() / ReferenceHeight));
+    }
 
     bool bSuccess = Body->GetSkeletalMeshAsset() != nullptr;
     if (!ResolvedAppearance.bUsesBespokeMetaHuman)
@@ -431,7 +571,9 @@ bool ATMOPPlayerAppearanceDirector::ApplyPlayerAppearance()
             ResolvedAppearance.Face);
         bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_Hair"),
             ResolvedAppearance.Hair);
-        bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_FacialHair"),
+        bSuccess &= ApplyResolvedFaceAccessory(Character, Body,
+            TEXT("TMOP_Player_FacialHair"), TEXT("TMOP_Player_FacialHair_Static"),
+            TEXT("FacialHairSocket"), ResolvedAppearance.Face.HeadAccessoryFit.FacialHairOffset,
             ResolvedAppearance.FacialHair);
     }
     bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_Outerwear"),
@@ -448,9 +590,24 @@ bool ATMOPPlayerAppearanceDirector::ApplyPlayerAppearance()
         ResolvedAppearance.Headwear);
     bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_Scarf"),
         ResolvedAppearance.Scarf);
-    bSuccess &= ApplyResolvedPart(Character, Body, TEXT("TMOP_Player_Glasses"),
-        ResolvedAppearance.Glasses);
+    bSuccess &= ApplyResolvedFaceAccessory(Character, Body,
+        TEXT("TMOP_Player_Glasses"), TEXT("TMOP_Player_Glasses_Static"), TEXT("GlassesSocket"),
+        ResolvedAppearance.Face.HeadAccessoryFit.GlassesOffset, ResolvedAppearance.Glasses);
 
+    // Leader Pose shares bone transforms, not the authored clothing shapes.
+    // Apply the same policy as NPCs explicitly to each visible skeletal piece.
+    const ETMOPBodyBuild BodyBuild = Profile.GetResolvedBodyBuild();
+    if (!ResolvedAppearance.bUsesBespokeMetaHuman)
+        UTMOPCharacterAppearanceComponent::ApplyMorphs(Body, Profile.AppearanceProfile, BodyBuild);
+    for (USkeletalMeshComponent* Part : ManagedPartComponents)
+    {
+        if (!IsValid(Part) || !Part->IsVisible()) continue;
+        if (ResolvedAppearance.bUsesBespokeMetaHuman &&
+            (Part->GetFName() == TEXT("TMOP_Player_Face") ||
+             Part->GetFName() == TEXT("TMOP_Player_Hair") ||
+             Part->GetFName() == TEXT("TMOP_Player_FacialHair"))) continue;
+        UTMOPCharacterAppearanceComponent::ApplyMorphs(Part, Profile.AppearanceProfile, BodyBuild);
+    }
     ApplyBodyRegionMask(Body);
     bHasAppliedAppearance = bSuccess;
     if (bSuccess)
@@ -469,6 +626,14 @@ void ATMOPPlayerAppearanceDirector::ClearPlayerAppearance()
         Component->SetVisibility(false, true);
     }
     ManagedPartComponents.Reset();
+    for (UStaticMeshComponent* Accessory : ManagedFaceAccessories)
+        if (IsValid(Accessory))
+        {
+            Accessory->SetStaticMesh(nullptr);
+            Accessory->EmptyOverrideMaterials();
+            Accessory->SetVisibility(false, true);
+        }
+    ManagedFaceAccessories.Reset();
     if (IsValid(ManagedHeadwearComponent))
     {
         ManagedHeadwearComponent->SetStaticMesh(nullptr);
@@ -506,6 +671,7 @@ void ATMOPPlayerAppearanceDirector::ConfigureForLocalPlayer(
         PlayerGender = Preset.PlayerGender;
         InlineAppearanceProfile = Preset.Appearance;
     }
+    LoadEditedProfile();
 }
 
 bool ATMOPPlayerAppearanceDirector::RefreshPlayerAppearance()
@@ -516,6 +682,7 @@ bool ATMOPPlayerAppearanceDirector::RefreshPlayerAppearance()
 
 void ATMOPPlayerAppearanceDirector::TryStartupApply()
 {
+    if (!bHasEditedProfile) LoadEditedProfile();
     if (ApplyPlayerAppearance())
     {
         GetWorldTimerManager().ClearTimer(StartupRetryTimer);

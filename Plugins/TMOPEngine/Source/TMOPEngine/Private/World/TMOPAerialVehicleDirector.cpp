@@ -231,6 +231,8 @@ bool ATMOPAerialVehicleDirector::SpawnFlight(
     }
     Flight.Aircraft = Aircraft;
 
+    Aircraft->SetOwner(this);
+    Aircraft->Tags.Add(FName(*(TEXT("TMOP_HistoryId=air:") + GetName() + TEXT(":") + Entry.InstanceId.ToString())));
     ActiveFlights.Add(Entry.InstanceId, Flight);
     FActiveFlight& AddedFlight = ActiveFlights.FindChecked(Entry.InstanceId);
     if (!ApplyFlightTransform(AddedFlight))

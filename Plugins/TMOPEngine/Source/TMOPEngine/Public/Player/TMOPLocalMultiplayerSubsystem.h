@@ -38,6 +38,8 @@ public:
     void CloseAllPlayerMenus();
     void SetSplitScreenEnabled(bool bEnabled);
     void UpdateControlLayoutFromProfiles();
+    void QueueAppearanceTravel(FName LevelPackage);
+    bool ConsumeAppearanceTravel(UWorld* World);
 
     static TArray<ATMOPPlayerCharacter*> GetPlayers(const UObject* Context);
     static bool IsMultiplayer(const UObject* Context);
@@ -46,6 +48,8 @@ public:
     static void GetPlayerViewRect(APlayerController* PC, FVector2D& Origin, FVector2D& Size);
 
 private:
+    FName PendingAppearanceLevel;
+    FName AppearanceMainMenuLevel;
     int32 SelectedPlayerCount = 1;
     bool bUseKeyboardForPlayerOne = true;
     bool bUseSharedKeyboardForPlayerTwo = false;

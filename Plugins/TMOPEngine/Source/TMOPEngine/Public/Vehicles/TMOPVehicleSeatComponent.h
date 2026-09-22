@@ -61,6 +61,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="TMOP|Vehicle Seat")
     bool ExitCharacterSeat(ACharacter* Character);
 
+    /** Restore occupancy metadata only; the playback graph restores transforms. */
+    void RestoreHistoricalOccupant(ACharacter* Character) { CharacterOccupant = Character; }
+
 private:
     UPROPERTY(Transient)
     TObjectPtr<ACharacter> CharacterOccupant;
