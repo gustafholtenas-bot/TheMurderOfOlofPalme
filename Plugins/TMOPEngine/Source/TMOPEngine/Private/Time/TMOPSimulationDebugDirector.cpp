@@ -1,4 +1,5 @@
 #include "Time/TMOPSimulationDebugDirector.h"
+#include "Traffic/TMOPTrafficSignalDirector.h"
 #include "Items/TMOPItemMeshSubsystem.h"
 #include "Testing/TMOPTimelineValidationDirector.h"
 #include "Time/TMOPWorldPlaybackComponent.h"
@@ -629,7 +630,8 @@ FString ATMOPSimulationDebugDirector::GetResolvedBakePath() const
 
 FString ATMOPSimulationDebugDirector::BuildSourceSignature() const
 {
-    FString Source = FString::Printf(TEXT("TMOP_AUTHORITY_V3_GROUND1_20HZ:scene%d"), PlaybackSceneRevision);
+    FString Source = FString::Printf(TEXT("TMOP_AUTHORITY_V3_GROUND1_SIGNALS2_20HZ:scene%d"), PlaybackSceneRevision);
+    Source += ATMOPTrafficSignalDirector::ConfigurationSignature(GetWorld());
     if (GetWorld() != nullptr)
     {
         Source += GetWorld()->GetOutermost()->GetName()

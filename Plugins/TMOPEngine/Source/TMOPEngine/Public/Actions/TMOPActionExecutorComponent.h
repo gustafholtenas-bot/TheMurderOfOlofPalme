@@ -8,6 +8,7 @@
 class ATMOPHistoricalAgent;
 class UTMOPActionExecutorComponent;
 class ATMOPVerticalTransport;
+class ATMOPTrafficSignalDirector;
 
 UENUM(BlueprintType)
 enum class ETMOPActionExecutionState : uint8
@@ -85,6 +86,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions")
     float ArrivalRadius = 75.0f;
+
+    /** Disable only for an explicitly authored red-light crossing. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Actions|Traffic")
+    bool bObeyTrafficSignals = true;
 
     /** Arrival-timed moves wait until their yellow timeline time before completing. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions|Timeline Precision")
@@ -168,6 +173,13 @@ public:
     { ActiveRemainingPathCm = RemainingPath; ActiveRequiredSpeedCmPerSecond = RequiredSpeed; }
 
 private:
+    bool UpdateTrafficSignalWait(float DeltaTime);
+    bool bWaitingAtTrafficSignal = false;
+    bool bMoveDelayedByTrafficSignal = false;
+    FVector TrafficSignalLookAhead = FVector::ZeroVector;
+    TWeakObjectPtr<ATMOPTrafficSignalDirector> CachedSignalDirector;
+    float SignalDirectorLookupAccumulator = 1.0f;
+
     UFUNCTION()
     void HandleScheduleEntryReady(
         FName AgentId,

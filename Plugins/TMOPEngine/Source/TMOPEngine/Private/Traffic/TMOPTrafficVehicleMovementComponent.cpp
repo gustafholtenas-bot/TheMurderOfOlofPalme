@@ -1,4 +1,5 @@
 #include "Traffic/TMOPTrafficVehicleMovementComponent.h"
+#include "Traffic/TMOPTrafficSignalDirector.h"
 #include "Vehicles/TMOPVehicleGroundingComponent.h"
 
 #include "Engine/GameInstance.h"
@@ -99,8 +100,7 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
         GetCurrentSimulationSecondExact() >=
             static_cast<double>(TimedArrivalSecond))
     {
-        ForceCompleteTimedArrival();
-        return;
+        if (ForceCompleteTimedArrival()) return;
     }
 
     if (bAnchorManeuverInProgress)
@@ -164,6 +164,19 @@ void UTMOPTrafficVehicleMovementComponent::TickComponent(const float DeltaTime,
         TimedRouteProgressCm += TravelCm;
     }
     DistanceAlongLane += float(TravelCm);
+
+    // Clamp before final-approach handling, and account for actual rather than requested travel.
+    if (ActiveStopDistance >= 0.0f &&
+        PreviousDistanceAlongLane <= ActiveStopDistance &&
+        DistanceAlongLane >= ActiveStopDistance)
+    {
+        if (TimedDepartureSecond != INDEX_NONE)
+            TimedRouteProgressCm = FMath::Max(0.0, TimedRouteProgressCm -
+                double(DistanceAlongLane - ActiveStopDistance));
+        DistanceAlongLane = ActiveStopDistance;
+        CurrentSpeedCmPerSecond = 0.0f;
+        TrafficState = ETMOPTrafficVehicleState::Stopped;
+    }
 
     if (bHasFinalApproach && CurrentLaneId == FinalApproachLaneId &&
         PreviousDistanceAlongLane <= FinalApproachLaneDistanceCm &&
@@ -430,7 +443,7 @@ float UTMOPTrafficVehicleMovementComponent::CalculateTargetSpeed(UTMOPTrafficLan
     UTMOPTrafficVehicleSubsystem* Traffic = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPTrafficVehicleSubsystem>() : nullptr;
     float CenterDistance = 0.0f;
-    UTMOPTrafficVehicleMovementComponent* Lead = !bPrioritizeTimeline && !bObstacleBypassActive && Traffic != nullptr
+    UTMOPTrafficVehicleMovementComponent* Lead = !bObstacleBypassActive && Traffic != nullptr
         ? Traffic->FindLeadVehicle(this, CenterDistance) : nullptr;
     if (IsValid(Lead))
     {
@@ -916,6 +929,16 @@ float UTMOPTrafficVehicleMovementComponent::CalculateRemainingRouteDistanceCm() 
 bool UTMOPTrafficVehicleMovementComponent::ForceCompleteTimedArrival()
 {
     if (TimedArrivalSecond == INDEX_NONE || !GetOwner()) return false;
+    if (!bRunRedLights && !bAnchorManeuverInProgress &&
+        ATMOPTrafficSignalDirector::IsRouteSignalControlled(GetWorld(), PlannedLaneIds) &&
+        (GetNearestActiveStopDistance() >= 0.0f ||
+            (!bFinalApproachInProgress && CalculateRemainingRouteDistanceCm() > 1.0f)))
+    {
+        // Retain the route and drive it physically, even after its authored deadline.
+        bLastArrivalBlocked = true;
+        LastArrivalBlocker = TEXT("Signal-controlled route is late; no deadline teleport.");
+        return false;
+    }
     FTransform Target = GetOwner()->GetActorTransform();
     if (bAnchorManeuverInProgress && !ActiveRoutePlan.Samples.IsEmpty()) Target = ActiveRoutePlan.Destination;
     else if (bHasFinalApproach) Target = FinalApproachTargetTransform;

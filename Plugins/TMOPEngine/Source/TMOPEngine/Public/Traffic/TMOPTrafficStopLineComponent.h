@@ -15,6 +15,17 @@ public:
     UTMOPTrafficStopLineComponent();
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Stop Line")
+    FName IntersectionId = NAME_None;
+
+    /** StopBufferCm is bumper clearance when true. False preserves legacy center offsets. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Stop Line")
+    bool bAccountForVehicleLength = true;
+
+    /** Set LaneId, place this component at the painted line, then project to its spline. */
+    UFUNCTION(CallInEditor, BlueprintCallable, Category="TMOP|Traffic Stop Line")
+    void ProjectPositionOntoLane();
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Stop Line")
     FName StopLineId = NAME_None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Traffic Stop Line")

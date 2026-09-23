@@ -19,6 +19,8 @@ struct FTMOPPlaybackAuxiliaryState
     UPROPERTY() TArray<FTMOPGroupSnapshot> Groups;
     UPROPERTY() TArray<FTMOPObservationRuntime> Observations;
     UPROPERTY() TArray<FTMOPSignalGroupState> Signals;
+    UPROPERTY() int32 SignalPhaseIndex = INDEX_NONE;
+    UPROPERTY() double SignalPhaseEndSecond = 0.0;
 };
 
 USTRUCT()

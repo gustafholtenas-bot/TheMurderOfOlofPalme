@@ -11,6 +11,8 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "NavigationSystem.h"
+#include "Navigation/PathFollowingComponent.h"
+#include "Traffic/TMOPTrafficSignalDirector.h"
 #include "Schedules/TMOPScheduleSubsystem.h"
 #include "Time/TMOPClockSubsystem.h"
 #include "Venues/TMOPCinemaSeatComponent.h"
@@ -92,6 +94,8 @@ void UTMOPActionExecutorComponent::TickComponent(
         return;
     }
 
+    if (UpdateTrafficSignalWait(DeltaTime)) return;
+
     TimedSpeedUpdateAccumulator += DeltaTime;
     if (TimedSpeedUpdateAccumulator >=
         FMath::Max(0.02f, TimedSpeedUpdateIntervalSeconds))
@@ -113,8 +117,16 @@ void UTMOPActionExecutorComponent::TickComponent(
         CurrentSimulationSecond >=
             static_cast<double>(ActiveExpectedArrivalSecond))
     {
-        CompleteTimedArrivalAtDeadline();
-        return;
+        // Signals may delay a timeline. Report lateness; never teleport across a crossing.
+        if (!bMoveDelayedByTrafficSignal &&
+            (!bObeyTrafficSignals || !ATMOPTrafficSignalDirector::IsPedestrianPathBlocked(
+                GetWorld(), OwnerActor->GetActorLocation(), CurrentTargetLocation)))
+        {
+            CompleteTimedArrivalAtDeadline();
+            return;
+        }
+        bMoveDelayedByTrafficSignal = true;
+        bActiveMovePhysicallyPossible = false;
     }
 
     const float DistanceSquared = FVector::DistSquared2D(
@@ -166,6 +178,58 @@ void UTMOPActionExecutorComponent::TickComponent(
     }
 }
 
+bool UTMOPActionExecutorComponent::UpdateTrafficSignalWait(float DeltaTime)
+{
+    ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
+    AController* Controller = Agent ? Agent->GetController() : nullptr;
+    if (!Agent || !Controller || Agent->Tags.Contains(TEXT("TMOP_AuthoritativeHistory"))) return false;
+    SignalDirectorLookupAccumulator += DeltaTime;
+    if (!CachedSignalDirector.IsValid() && SignalDirectorLookupAccumulator >= 1.0f)
+    {
+        SignalDirectorLookupAccumulator = 0;
+        for (TActorIterator<ATMOPTrafficSignalDirector> It(GetWorld()); It; ++It)
+        {
+            CachedSignalDirector = *It;
+            AddTickPrerequisiteActor(*It);
+            break;
+        }
+    }
+    const FVector Start = Agent->GetActorLocation();
+    if (!bWaitingAtTrafficSignal)
+    {
+        FVector Next = CurrentTargetLocation;
+        if (auto* Path = Controller->FindComponentByClass<UPathFollowingComponent>())
+            if (Path->GetStatus() == EPathFollowingStatus::Moving) Next = Path->GetCurrentTargetLocation();
+        const float Distance = FMath::Min(float(FVector::Dist2D(Start, Next)),
+            FMath::Max(100.0f, float(Agent->GetVelocity().Size2D()) * (DeltaTime + 0.15f)));
+        TrafficSignalLookAhead = Start + (Next - Start).GetSafeNormal2D() * Distance;
+    }
+    const bool Blocked = bObeyTrafficSignals && CachedSignalDirector.IsValid() &&
+        CachedSignalDirector->IsPedestrianPathBlocked(Start, TrafficSignalLookAhead);
+    if (Blocked)
+    {
+        if (!bWaitingAtTrafficSignal)
+        {
+            Controller->StopMovement();
+            ActiveRemainingPathCm = CalculateRemainingPathLengthCm();
+        }
+        if (auto* Movement = Agent->GetCharacterMovement()) Movement->StopMovementImmediately();
+        bWaitingAtTrafficSignal = true;
+        bMoveDelayedByTrafficSignal = true;
+        if (ActiveExpectedArrivalSecond != INDEX_NONE &&
+            GetCurrentSimulationSecondExact() >= ActiveExpectedArrivalSecond) bActiveMovePhysicallyPossible = false;
+        return true;
+    }
+    if (bWaitingAtTrafficSignal)
+    {
+        bWaitingAtTrafficSignal = false;
+        Agent->ApplyMovementSpeedForActivity();
+        UpdateTimedMovementSpeed(true);
+        UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
+    }
+    return false;
+}
+
 bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
     const FTMOPScheduleEntry& Entry)
 {
@@ -175,6 +239,8 @@ bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
         return false;
     }
 
+    bWaitingAtTrafficSignal = false;
+    bMoveDelayedByTrafficSignal = false;
     CurrentEntry = Entry;
     bHasCurrentEntry = true;
     bRestoredFromBake = false;
@@ -192,6 +258,8 @@ bool UTMOPActionExecutorComponent::ExecuteScheduleEntry(
 
 void UTMOPActionExecutorComponent::CancelCurrentAction()
 {
+    bWaitingAtTrafficSignal = false;
+    bMoveDelayedByTrafficSignal = false;
     if (!bHasCurrentEntry)
     {
         ExecutionState = ETMOPActionExecutionState::Idle;
@@ -623,6 +691,8 @@ void UTMOPActionExecutorComponent::CompleteTimedArrivalAtDeadline()
 
 void UTMOPActionExecutorComponent::RestoreMovementSpeed()
 {
+    bWaitingAtTrafficSignal = false;
+    bMoveDelayedByTrafficSignal = false;
     if (ATMOPHistoricalAgent* Agent = GetHistoricalAgent())
         Agent->ApplyMovementSpeedForActivity();
     ActiveExpectedArrivalSecond = INDEX_NONE;

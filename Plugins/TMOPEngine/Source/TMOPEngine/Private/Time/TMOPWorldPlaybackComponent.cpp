@@ -10,6 +10,7 @@
 #include "World/TMOPWorldSubsystem.h"
 #include "World/TMOPVerticalTransport.h"
 #include "Traffic/TMOPTrafficSignalController.h"
+#include "Traffic/TMOPTrafficSignalDirector.h"
 #include "Components/TextRenderComponent.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
@@ -235,7 +236,13 @@ void UTMOPWorldPlaybackComponent::CaptureObject(UObject* Object, const FString& 
                     G.RemainingConversationSeconds = std::round((Time + G.RemainingConversationSeconds) * 10) / 10;
         }
         if (auto* Observations = Cast<ATMOPObservationDirector>(Actor)) Aux.Observations = Observations->GetAllObservationRuntime();
-        if (auto* Signals = Cast<ATMOPTrafficSignalController>(Actor)) Aux.Signals = Signals->CapturePlaybackSignals();
+        if (auto* Signals = Cast<ATMOPTrafficSignalController>(Actor))
+        {
+            Signals->EvaluateAtTime(Time);
+            Aux.Signals = Signals->CapturePlaybackSignals();
+            Aux.SignalPhaseIndex = Signals->CurrentPhaseIndex;
+            Aux.SignalPhaseEndSecond = std::round(Signals->PhaseEndSecond * 1000000.0) / 1000000.0;
+        }
         if (Actor->IsA<ATMOPGroupDirector>() || Actor->IsA<ATMOPObservationDirector>() || Actor->IsA<ATMOPTrafficSignalController>())
         {
             FString Json;
@@ -429,6 +436,36 @@ bool UTMOPWorldPlaybackComponent::StartRecording(const FString& Signature)
     if (bRecording || bReady || !GetWorld())
     {
         Status = TEXT("Starta en ny Play-session med Bake Entire Simulation för att skapa en ny bake.");
+        return false;
+    }
+    int32 SignalDirectors = 0;
+    for (TActorIterator<ATMOPTrafficSignalDirector> It(GetWorld()); It; ++It)
+    {
+        ++SignalDirectors;
+        It->DiscoverSignalSystem();
+        TArray<FString> Errors;
+        if (!It->ValidateSignalSystem(Errors))
+        {
+            Status = TEXT("Trafikljusvalideringen stoppar bake: ") + FString::Join(Errors, TEXT("; "));
+            UE_LOG(LogTemp, Error, TEXT("%s"), *Status);
+            return false;
+        }
+    }
+    bool HasControllers = false;
+    for (TActorIterator<ATMOPTrafficSignalController> It(GetWorld()); It; ++It)
+    {
+        HasControllers = true;
+        TArray<FString> Errors;
+        if (!It->ValidateController(Errors))
+        {
+            Status = TEXT("Ogiltigt signalprogram: ") + FString::Join(Errors, TEXT("; "));
+            return false;
+        }
+        It->bProgramValid = true;
+    }
+    if (SignalDirectors > 1 || (HasControllers && SignalDirectors != 1))
+    {
+        Status = TEXT("Signalstyrda korsningar kräver exakt en TrafficSignalDirector.");
         return false;
     }
     auto* Clock = GetWorld()->GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>();
@@ -863,7 +900,11 @@ bool UTMOPWorldPlaybackComponent::ApplyValue(UObject* Object, FName Name,
         if (!FJsonObjectConverter::JsonObjectStringToUStruct(Value, &Aux)) return false;
         if (auto* Groups = Cast<ATMOPGroupDirector>(Object)) Groups->RestorePlaybackGroups(Aux.Groups, Time);
         if (auto* Observations = Cast<ATMOPObservationDirector>(Object)) Observations->ApplyBakedObservationRuntime(Aux.Observations);
-        if (auto* Signals = Cast<ATMOPTrafficSignalController>(Object)) Signals->RestorePlaybackSignals(Aux.Signals);
+        if (auto* Signals = Cast<ATMOPTrafficSignalController>(Object))
+        {
+            Signals->RestorePlaybackPhase(Aux.SignalPhaseIndex, Aux.SignalPhaseEndSecond);
+            Signals->RestorePlaybackSignals(Aux.Signals);
+        }
         return true;
     }
     if (N == TEXT("$speech"))
