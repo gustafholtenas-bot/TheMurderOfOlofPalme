@@ -11,6 +11,7 @@ class TMOPENGINE_API UTMOPPedestrianCrossingComponent : public UBoxComponent
     GENERATED_BODY()
 public:
     UTMOPPedestrianCrossingComponent();
+    virtual void OnRegister() override;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Crossing") FName CrossingId = NAME_None;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Crossing") FName IntersectionId = NAME_None;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Crossing") FName SignalGroupId = NAME_None;

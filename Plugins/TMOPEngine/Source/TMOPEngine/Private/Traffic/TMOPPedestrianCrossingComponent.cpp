@@ -2,11 +2,19 @@
 
 UTMOPPedestrianCrossingComponent::UTMOPPedestrianCrossingComponent()
 {
-    SetBoxExtent(FVector(750, 200, 200));
+    // Constructor: initialize dimensions without creating/updating a physics BodySetup.
+    InitBoxExtent(FVector(750, 200, 200));
+    PrimaryComponentTick.bCanEverTick = false;
+}
+void UTMOPPedestrianCrossingComponent::OnRegister()
+{
+    // Runtime setters can create a BodySetup UObject. Never call them from the
+    // constructor/CDO creation path. OnRegister runs after object construction.
+    // Set flags before base registration to avoid enabling collision/navigation.
     SetCollisionEnabled(ECollisionEnabled::NoCollision);
     SetGenerateOverlapEvents(false);
     SetCanEverAffectNavigation(false);
-    PrimaryComponentTick.bCanEverTick = false;
+    Super::OnRegister();
 }
 bool UTMOPPedestrianCrossingComponent::ContainsPedestrian(const FVector& Position) const
 {
