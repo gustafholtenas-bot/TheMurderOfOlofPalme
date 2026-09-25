@@ -1,4 +1,5 @@
 #include "UI/TMOPPlayerAppearancePanel.h"
+#include "Localization/TMOPLocalization.h"
 #include "People/TMOPPlayerAppearanceDirector.h"
 #include "Player/TMOPPlayerCharacter.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -30,7 +31,7 @@ void STMOPPlayerAppearancePanel::Construct(const FArguments& Args)
     Director = ATMOPPlayerAppearanceDirector::ForCharacter(Player.Get());
     if (!Director.IsValid() || !Director->GetEditableProfile(Draft))
     {
-        ChildSlot[SNew(STextBlock).Text(FText::FromString(TEXT("Starta spelet först för att ändra din spelare.")))];
+        ChildSlot[SNew(STextBlock).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.d6871bfa183a1b9f", "Starta spelet först för att ändra din spelare.")))];
         return;
     }
     Opening = Accepted = Draft;
@@ -39,31 +40,31 @@ void STMOPPlayerAppearancePanel::Construct(const FArguments& Args)
     PreviewBrush.DrawAs = ESlateBrushDrawType::Image;
     TSharedRef<SVerticalBox> Controls = SNew(SVerticalBox);
     Controls->AddSlot().AutoHeight().Padding(4)[SNew(STextBlock)
-        .Text(FText::FromString(FString::Printf(TEXT("Player appearance — spelare %d"), Director->PlayerIndex + 1)))];
-    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text_Lambda([this] {
-        return FText::FromString(Draft.Gender == ETMOPPersonGender::Female ? TEXT("Kön: kvinna / Quinn") : TEXT("Kön: man / Manny"));
-    }).OnClicked(this, &STMOPPlayerAppearancePanel::ChangeGender)];
-    Controls->AddSlot().AutoHeight().Padding(4)[SNew(STextBlock).Text(FText::FromString(TEXT("Längd (cm)")))];
+        .Text(FTMOPLocalization::Text(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.779a0a01fd87dfda", "Player appearance — spelare {0}"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Director->PlayerIndex + 1)))))];
+    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FTMOPLocalization::Bind([this] {
+        return FText::FromString(Draft.Gender == ETMOPPersonGender::Female ? NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.2d3006ee4dca6da2", "Kön: kvinna / Quinn").ToString() : NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.9d1b9a3849eecfc7", "Kön: man / Manny").ToString());
+    })).OnClicked(this, &STMOPPlayerAppearancePanel::ChangeGender)];
+    Controls->AddSlot().AutoHeight().Padding(4)[SNew(STextBlock).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.7ae7a35ff52d6103", "Längd (cm)")))];
     Controls->AddSlot().AutoHeight().Padding(4)[SNew(SSpinBox<float>).MinValue(120).MaxValue(205).Delta(1)
         .Value_Lambda([this] { return Draft.GetResolvedHeightCentimeters(); })
         .OnValueCommitted_Lambda([this](float V, ETextCommit::Type) {
             Draft.AppearanceProfile.HeightOverrideCentimeters = FMath::Clamp(V, 120.f, 205.f); Apply();
         })];
-    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text_Lambda([this] {
-        return FText::FromString(TEXT("Kroppstyp: ") + StaticEnum<ETMOPBodyBuild>()->GetNameStringByValue(static_cast<int64>(Draft.GetResolvedBodyBuild())));
-    }).OnClicked(this, &STMOPPlayerAppearancePanel::ChangeBuild)];
-    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text_Lambda([this] {
-        return FText::FromString(TEXT("Hårfärg: ") + StaticEnum<ETMOPHairColor>()->GetNameStringByValue(static_cast<int64>(Draft.HairColorCategory)));
-    }).OnClicked(this, &STMOPPlayerAppearancePanel::ChangeColor)];
-    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::UpperBody, TEXT("Tröja"))];
-    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::Glasses, TEXT("Glasögon"))];
-    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::FacialHair, TEXT("Skägg/mustasch"))];
-    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::Scarf, TEXT("Halsduk"))];
-    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FText::FromString(TEXT("Rotera förhandsvisning 45°")))
+    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FTMOPLocalization::Bind([this] {
+        return FText::FromString(NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.b704ca5ff0017d63", "Kroppstyp: ").ToString() + StaticEnum<ETMOPBodyBuild>()->GetNameStringByValue(static_cast<int64>(Draft.GetResolvedBodyBuild())));
+    })).OnClicked(this, &STMOPPlayerAppearancePanel::ChangeBuild)];
+    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FTMOPLocalization::Bind([this] {
+        return FText::FromString(NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.b9d6062ead253e51", "Hårfärg: ").ToString() + StaticEnum<ETMOPHairColor>()->GetNameStringByValue(static_cast<int64>(Draft.HairColorCategory)));
+    })).OnClicked(this, &STMOPPlayerAppearancePanel::ChangeColor)];
+    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::UpperBody, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.7092e5f57ef437bf", "Tröja"))];
+    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::Glasses, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.49345c1872c246e0", "Glasögon"))];
+    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::FacialHair, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.056c6a86b897adaf", "Skägg/mustasch"))];
+    Controls->AddSlot().AutoHeight().Padding(4)[PartRow(ETMOPAppearancePartType::Scarf, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.0d474ad3c36de3d1", "Halsduk"))];
+    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.a25564d5ff9d9f9e", "Rotera förhandsvisning 45°")))
         .OnClicked_Lambda([this] { PreviewYaw += 45; RefreshPreview(); return FReply::Handled(); })];
-    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text_Lambda([this] {
-        return FText::FromString(bStartup ? (Ready.Get(false) ? TEXT("Klar ✓ – väntar på övriga") : TEXT("Klar")) : TEXT("Spara mitt utseende"));
-    })
+    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FTMOPLocalization::Bind([this] {
+        return FText::FromString(bStartup ? (Ready.Get(false) ? NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.8176674684dcb640", "Klar ✓ – väntar på övriga").ToString() : NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.adb8011c80b7ccd0", "Klar").ToString()) : NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.1c23ea2e9c2161f4", "Spara mitt utseende").ToString());
+    }))
         .OnClicked_Lambda([this] {
             if (bStartup)
             {
@@ -71,39 +72,39 @@ void STMOPPlayerAppearancePanel::Construct(const FArguments& Args)
                 return FReply::Handled();
             }
             if (Apply() && Director.IsValid() && Director->SaveEditedProfile(Status)) {
-                Opening = Draft; Status = TEXT("Sparat för denna lokalspelare.");
+                Opening = Draft; Status = NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.b780234f28185295", "Sparat för denna lokalspelare.").ToString();
             }
             return FReply::Handled();
         })];
-    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FText::FromString(TEXT("Återställ till när menyn öppnades")))
+    Controls->AddSlot().AutoHeight().Padding(4)[SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.25b8be7bdf9175e6", "Återställ till när menyn öppnades")))
         .OnClicked_Lambda([this] { Draft = Opening; RebuildOptions(false); Apply(); return FReply::Handled(); })];
     Controls->AddSlot().AutoHeight().Padding(4)[SNew(STextBlock).AutoWrapText(true)
-        .Text(FText::FromString(bStartup
-            ? TEXT("Tryck Klar när du är nöjd. Spelet startar först när alla är klara. Ändringar efter Klar kräver ny bekräftelse.")
-            : TEXT("Ändringar visas direkt. Spara för nästa spelstart. Längd ändrar utseendet, inte spelkollisionen. Strong och Athletic delar grundform.")))];
+        .Text(FTMOPLocalization::Text(FText::FromString(bStartup
+            ? NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.631c2f59ce338425", "Tryck Klar när du är nöjd. Spelet startar först när alla är klara. Ändringar efter Klar kräver ny bekräftelse.").ToString()
+            : NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.1fd017ad05248ca2", "Ändringar visas direkt. Spara för nästa spelstart. Längd ändrar utseendet, inte spelkollisionen. Strong och Athletic delar grundform.").ToString())))];
     Controls->AddSlot().AutoHeight().Padding(4)[SNew(STextBlock).AutoWrapText(true)
-        .Text_Lambda([this] { return FText::FromString(Status); })];
+        .Text(FTMOPLocalization::Bind([this] { return FText::FromString(Status); }))];
 
     TSharedRef<SConstraintCanvas> Canvas = SNew(SConstraintCanvas);
     Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(110, 0, 320, 580))[SNew(SImage).Image(&PreviewBrush)];
-    struct FPosition { ETMOPAppearancePartType Type; const TCHAR* Label; float Y; };
+    struct FPosition { ETMOPAppearancePartType Type; FText Label; float Y; };
     const FPosition Positions[] = {
-        {ETMOPAppearancePartType::Headwear, TEXT("Hatt/mössa"), 8},
-        {ETMOPAppearancePartType::Hair, TEXT("Hår"), 54},
-        {ETMOPAppearancePartType::Face, TEXT("Ansikte"), 100},
-        {ETMOPAppearancePartType::Outerwear, TEXT("Jacka"), 235},
-        {ETMOPAppearancePartType::Gloves, TEXT("Handskar"), 320},
-        {ETMOPAppearancePartType::Trousers, TEXT("Byxor"), 415},
-        {ETMOPAppearancePartType::Footwear, TEXT("Skor"), 532}
+        {ETMOPAppearancePartType::Headwear, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.982bde2ea354fe6e", "Hatt/mössa"), 8},
+        {ETMOPAppearancePartType::Hair, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.512b02ac8fdf5977", "Hår"), 54},
+        {ETMOPAppearancePartType::Face, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.24b285d6f4a63b48", "Ansikte"), 100},
+        {ETMOPAppearancePartType::Outerwear, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.4bcb97a3ca987946", "Jacka"), 235},
+        {ETMOPAppearancePartType::Gloves, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.8b1c33292fa14955", "Handskar"), 320},
+        {ETMOPAppearancePartType::Trousers, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.95d1a82001682ef5", "Byxor"), 415},
+        {ETMOPAppearancePartType::Footwear, NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.1aa3387983b1f870", "Skor"), 532}
     };
     for (const auto& P : Positions)
     {
-        Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(10, P.Y, 90, 40))[SNew(SButton).Text(FText::FromString(FString(TEXT("◀ ")) + P.Label))
+        Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(10, P.Y, 90, 40))[SNew(SButton).Text(FTMOPLocalization::Text(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "AppearancePreviousPart", "◀ {0}"), P.Label)))
             .OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, P.Type, -1)];
-        Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(440, P.Y, 40, 40))[SNew(SButton).Text(FText::FromString(TEXT("▶")))
+        Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(440, P.Y, 40, 40))[SNew(SButton).Text(FTMOPLocalization::Text(FText::FromString(TEXT("▶"))))
             .OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, P.Type, 1)];
         Canvas->AddSlot().Alignment(FVector2D::ZeroVector).Offset(FMargin(485, P.Y, 160, 44))[SNew(STextBlock).AutoWrapText(true)
-            .Text_Lambda([this, Type=P.Type] { return PartLabel(Type); })];
+            .Text(FTMOPLocalization::Bind([this, Type=P.Type] { return PartLabel(Type); }))];
     }
     ChildSlot[SNew(SBorder).BorderImage(FCoreStyle::Get().GetBrush("WhiteBrush"))
         .BorderBackgroundColor(FLinearColor(0.025f,0.025f,0.03f,1)).Padding(12)
@@ -117,21 +118,21 @@ void STMOPPlayerAppearancePanel::Construct(const FArguments& Args)
     RefreshPreview();
 }
 
-TSharedRef<SWidget> STMOPPlayerAppearancePanel::PartRow(ETMOPAppearancePartType Type, const FString& Label)
+TSharedRef<SWidget> STMOPPlayerAppearancePanel::PartRow(ETMOPAppearancePartType Type, const FText& Label)
 {
     return SNew(SVerticalBox)
-        + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).Text(FText::FromString(Label))]
+        + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).Text(FTMOPLocalization::Text(Label))]
         + SVerticalBox::Slot().AutoHeight()[SNew(SHorizontalBox)
-            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FText::FromString(TEXT("◀"))).OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, Type, -1)]
-            + SHorizontalBox::Slot().FillWidth(1)[SNew(STextBlock).AutoWrapText(true).Text_Lambda([this, Type] { return PartLabel(Type); })]
-            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FText::FromString(TEXT("▶"))).OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, Type, 1)]];
+            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FTMOPLocalization::Text(FText::FromString(TEXT("◀")))).OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, Type, -1)]
+            + SHorizontalBox::Slot().FillWidth(1)[SNew(STextBlock).AutoWrapText(true).Text(FTMOPLocalization::Bind([this, Type] { return PartLabel(Type); }))]
+            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FTMOPLocalization::Text(FText::FromString(TEXT("▶")))).OnClicked(this, &STMOPPlayerAppearancePanel::Cycle, Type, 1)]];
 }
 
 FText STMOPPlayerAppearancePanel::PartLabel(ETMOPAppearancePartType Type) const
 {
     auto Copy = Draft;
     const auto& Part = ATMOPPlayerAppearanceDirector::Choice(Copy, Type);
-    return FText::FromString(Part.bHidden ? TEXT("Inget") : Part.CatalogId.IsNone() ? TEXT("Automatiskt") : Part.CatalogId.ToString());
+    return FText::FromString(Part.bHidden ? NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.5255869d3a92ab2d", "Inget").ToString() : Part.CatalogId.IsNone() ? NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.3f19051c2214a332", "Automatiskt").ToString() : Part.CatalogId.ToString());
 }
 
 void STMOPPlayerAppearancePanel::RebuildOptions(bool bRepair)
@@ -162,7 +163,7 @@ bool STMOPPlayerAppearancePanel::Apply()
     { Draft = Accepted; RebuildOptions(false); return false; }
     Accepted = Draft;
     OnEdited.ExecuteIfBound();
-    if (Status.IsEmpty()) Status = TEXT("Förhandsvisning uppdaterad — tryck Spara för att behålla efter omstart.");
+    if (Status.IsEmpty()) Status = NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.aff251c9d533b592", "Förhandsvisning uppdaterad — tryck Spara för att behålla efter omstart.").ToString();
     RefreshPreview();
     return true;
 }
@@ -306,7 +307,7 @@ void STMOPPlayerAppearancePanel::RefreshPreview()
         const double Distance = Extent.X + 1.2 * FMath::Max(Extent.Y, Extent.Z * Aspect) / FMath::Tan(FMath::DegreesToRadians(15.0));
         Capture->SetWorldLocation(PreviewBounds.GetCenter() + FVector(FMath::Max(100.0, Distance),0,0));
     }
-    else Status = TEXT("Ingen synlig karaktärsmesh hittades. Kontrollera spelarens appearance-assets.");
+    else Status = NSLOCTEXT("TMOP", "TMOPPlayerAppearancePanel.78cad915e75a282f", "Ingen synlig karaktärsmesh hittades. Kontrollera spelarens appearance-assets.").ToString();
     PendingCapture = Capture;
     CaptureDelayFrames = 2;
 }

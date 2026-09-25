@@ -1,4 +1,6 @@
 #include "UI/TMOPMainMenuWidget.h"
+#include "Localization/TMOPLocalization.h"
+#include "UI/TMOPLanguageSelector.h"
 
 #include "Engine/Texture2D.h"
 #include "Styling/CoreStyle.h"
@@ -60,6 +62,13 @@ void UTMOPMainMenuWidget::NativeTick(
     const FGeometry& MyGeometry, const float InDeltaTime)
 {
     Super::NativeTick(MyGeometry, InDeltaTime);
+    if (bIntroCardVisible && IntroLanguageRevision != FTMOPLocalization::GetRevision())
+    {
+        IntroLanguageRevision = FTMOPLocalization::GetRevision();
+        FullIntroHeading = FTMOPLocalization::String(IntroHeadingSource);
+        FullIntroBody = FTMOPLocalization::String(IntroBodySource);
+        ResetTypewriter();
+    }
     if (!bIntroCardVisible || !IntroTextSettings.bUseTypewriter) return;
 
     TypewriterCharacterAccumulator += InDeltaTime *
@@ -75,15 +84,15 @@ void UTMOPMainMenuWidget::NativeTick(
         const int32 Added = FMath::Min(Remaining, CharactersToReveal);
         RevealedHeadingCharacters += Added;
         CharactersToReveal -= Added;
-        if (IntroHeading.IsValid()) IntroHeading->SetText(FText::FromString(
-            FullIntroHeading.Left(RevealedHeadingCharacters)));
+        if (IntroHeading.IsValid()) IntroHeading->SetText(FTMOPLocalization::Text(FText::FromString(
+            FullIntroHeading.Left(RevealedHeadingCharacters))));
     }
     if (CharactersToReveal > 0 && RevealedBodyCharacters < FullIntroBody.Len())
     {
         RevealedBodyCharacters = FMath::Min(FullIntroBody.Len(),
             RevealedBodyCharacters + CharactersToReveal);
-        if (IntroBody.IsValid()) IntroBody->SetText(FText::FromString(
-            FullIntroBody.Left(RevealedBodyCharacters)));
+        if (IntroBody.IsValid()) IntroBody->SetText(FTMOPLocalization::Text(FText::FromString(
+            FullIntroBody.Left(RevealedBodyCharacters))));
     }
 }
 
@@ -100,7 +109,7 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
     {
         return SNew(SButton).ButtonStyle(FCoreStyle::Get(), "NoBorder")
             .ContentPadding(FMargin(20.0f, 8.0f)).OnClicked(Clicked)
-            [ SNew(STextBlock).Text(Label).Font(ButtonFont)
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(Label)).Font(ButtonFont)
               .ColorAndOpacity(ButtonTextColor) ];
     };
 
@@ -113,34 +122,34 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
           [ SNew(SHorizontalBox).Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; })
             + SHorizontalBox::Slot().AutoWidth()
-            [ MenuButton(FText::FromString(TEXT("1 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 1)) ]
+            [ MenuButton(NSLOCTEXT("TMOP", "MainMenuPlayers1", "1 SPELARE"), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 1)) ]
             + SHorizontalBox::Slot().AutoWidth()
-            [ MenuButton(FText::FromString(TEXT("2 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 2)) ]
+            [ MenuButton(NSLOCTEXT("TMOP", "MainMenuPlayers2", "2 SPELARE"), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 2)) ]
             + SHorizontalBox::Slot().AutoWidth()
-            [ MenuButton(FText::FromString(TEXT("3 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 3)) ]
+            [ MenuButton(NSLOCTEXT("TMOP", "MainMenuPlayers3", "3 SPELARE"), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 3)) ]
             + SHorizontalBox::Slot().AutoWidth()
-            [ MenuButton(FText::FromString(TEXT("4 SPELARE")), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 4)) ] ]
+            [ MenuButton(NSLOCTEXT("TMOP", "MainMenuPlayers4", "4 SPELARE"), FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::PlayerCountClicked, 4)) ] ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
-          [ SNew(STextBlock).Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; }).Text_Lambda([this]()
-            { return FText::FromString(FString::Printf(TEXT("Valt: %d spelare · lokal delad skärm"), Director.IsValid() ? Director->LocalPlayerCount : 1)); }) ]
+          [ SNew(STextBlock).Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; }).Text(FTMOPLocalization::Bind([this]()
+            { return FTMOPLocalization::Format(NSLOCTEXT("TMOP", "MainMenuPlayerCount", "Valt: {0} spelare · lokal delad skärm"), FText::AsNumber(Director.IsValid() ? Director->LocalPlayerCount : 1)); })) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 8)
           [ SNew(SButton).Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; }).OnClicked_UObject(this, &UTMOPMainMenuWidget::KeyboardModeClicked)
-            [ SNew(STextBlock).Text_Lambda([this]()
+            [ SNew(STextBlock).Text(FTMOPLocalization::Bind([this]()
               {
                   if (!Director.IsValid() || !Director->bKeyboardForPlayerOne)
-                      return FText::FromString(TEXT("Styrning: en handkontroll per spelare"));
+                      return NSLOCTEXT("TMOP", "MainMenuControllerMode", "Styrning: en handkontroll per spelare");
                   if (Director->LocalPlayerCount == 2 && Director->bSharedKeyboardForPlayerTwo)
-                      return FText::FromString(TEXT("Styrning: P1 + P2 delar tangentbordet"));
-                  return FText::FromString(TEXT("Styrning: P1 tangentbord/mus · övriga handkontroller"));
-              }) ] ]
+                      return NSLOCTEXT("TMOP", "MainMenuSharedKeyboard", "Styrning: P1 + P2 delar tangentbordet");
+                  return NSLOCTEXT("TMOP", "MainMenuKeyboardMode", "Styrning: P1 tangentbord/mus · övriga handkontroller");
+              })) ] ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
           [ SNew(STextBlock).AutoWrapText(true).ColorAndOpacity(FLinearColor(1,0.4f,0.2f))
-            .Text_Lambda([this]() { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); }) ]
+            .Text(FTMOPLocalization::Bind([this]() { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); })) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 28, 0, 0)
-          [ SNew(SButton).Text_Lambda([this] { return FText::FromString(bChoosingPlayerCount ? TEXT("NÄSTA: VÄLJ UTSEENDE") : TEXT("STARTA NYTT SPEL")); })
+          [ SNew(SButton).Text(FTMOPLocalization::Bind([this] { return bChoosingPlayerCount ? NSLOCTEXT("TMOP", "MainMenuNextAppearance", "NÄSTA: VÄLJ UTSEENDE") : NSLOCTEXT("TMOP", "MainMenuStartNew", "STARTA NYTT SPEL"); }))
               .OnClicked_UObject(this, &UTMOPMainMenuWidget::StartClicked) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
-          [ SNew(SButton).Text(FText::FromString(TEXT("TILLBAKA")))
+          [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "MainMenuBack", "TILLBAKA")))
               .Visibility_Lambda([this] { return bChoosingPlayerCount ? EVisibility::Visible : EVisibility::Collapsed; })
               .OnClicked_Lambda([this] { bChoosingPlayerCount = false; return FReply::Handled(); }) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
@@ -150,6 +159,8 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           [ MenuButton(NSLOCTEXT("TMOP", "MainMenuSettings", "INSTÄLLNINGAR"),
               FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::SettingsClicked)) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+          [ MakeTMOPLanguageSelector(GetGameInstance()) ]
+          + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
           [ MenuButton(NSLOCTEXT("TMOP", "MainMenuQuit", "STÄNG AV"),
               FOnClicked::CreateUObject(this, &UTMOPMainMenuWidget::QuitClicked)) ] ]
         + SOverlay::Slot().Padding(20)
@@ -157,7 +168,7 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
         + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center)
         [ SAssignNew(LoadPanel, SVerticalBox).Visibility(EVisibility::Collapsed)
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 0.0f, 0.0f, 18.0f)
-          [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "MainMenuLoadHeading", "LADDA SPEL"))
+          [ SNew(STextBlock).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "MainMenuLoadHeading", "LADDA SPEL")))
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MainMenuLoadHeading"),
                 FCoreStyle::GetDefaultFontStyle("Bold", 28)))
             .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -174,7 +185,7 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
             .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
                 TEXT("MainMenuLoadStatus"), MenuColors.StatusText)) ]
           + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0.0f, 18.0f, 0.0f, 0.0f)
-          [ SNew(SButton).Text(NSLOCTEXT("TMOP", "MainMenuLoadBack", "TILLBAKA"))
+          [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "MainMenuLoadBack", "TILLBAKA")))
             .OnClicked_UObject(this, &UTMOPMainMenuWidget::LoadBackClicked) ] ]
         + SOverlay::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center)
         [ SAssignNew(IntroPanel, SBorder).Visibility(EVisibility::Collapsed)
@@ -206,7 +217,7 @@ TSharedRef<SWidget> UTMOPMainMenuWidget::RebuildWidget()
           .ContentPadding(FMargin(16.0f, 7.0f))
           .OnClicked_UObject(this, &UTMOPMainMenuWidget::SkipIntroClicked)
           [ SNew(STextBlock)
-            .Text(NSLOCTEXT("TMOP", "IntroSkip", "SKIP"))
+            .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "IntroSkip", "SKIP")))
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("IntroSkipButton"),
                 FCoreStyle::GetDefaultFontStyle("Regular", 14)))
             .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -280,10 +291,10 @@ void UTMOPMainMenuWidget::ResetTypewriter()
         IntroTextSettings.bTypewriterHeading ? 0 : FullIntroHeading.Len();
     RevealedBodyCharacters = IntroTextSettings.bUseTypewriter
         ? 0 : FullIntroBody.Len();
-    if (IntroHeading.IsValid()) IntroHeading->SetText(FText::FromString(
-        FullIntroHeading.Left(RevealedHeadingCharacters)));
-    if (IntroBody.IsValid()) IntroBody->SetText(FText::FromString(
-        FullIntroBody.Left(RevealedBodyCharacters)));
+    if (IntroHeading.IsValid()) IntroHeading->SetText(FTMOPLocalization::Text(FText::FromString(
+        FullIntroHeading.Left(RevealedHeadingCharacters))));
+    if (IntroBody.IsValid()) IntroBody->SetText(FTMOPLocalization::Text(FText::FromString(
+        FullIntroBody.Left(RevealedBodyCharacters))));
 }
 
 void UTMOPMainMenuWidget::HideAppearanceSetup()
@@ -315,8 +326,7 @@ void UTMOPMainMenuWidget::ShowAppearanceSetup(int32 Count)
     {
         const TWeakObjectPtr<ATMOPMainMenuIntroDirector> Owner = Director;
         Tabs->AddSlot().FillWidth(1).Padding(4)[SNew(SButton)
-            .Text_Lambda([Owner, PlayerIndex] { return FText::FromString(FString::Printf(TEXT("SPELARE %d — %s"),
-                PlayerIndex+1, Owner.IsValid() && Owner->IsAppearanceReady(PlayerIndex) ? TEXT("KLAR ✓") : TEXT("VÄLJ UTSEENDE"))); })
+            .Text(FTMOPLocalization::Bind([Owner, PlayerIndex] { return FTMOPLocalization::Format(NSLOCTEXT("TMOP", "MainMenuAppearancePlayer", "SPELARE {0} — {1}"), FText::AsNumber(PlayerIndex + 1), Owner.IsValid() && Owner->IsAppearanceReady(PlayerIndex) ? NSLOCTEXT("TMOP", "MainMenuAppearanceReady", "KLAR ✓") : NSLOCTEXT("TMOP", "MainMenuChooseAppearance", "VÄLJ UTSEENDE")); }))
             .OnClicked_Lambda([this, PlayerIndex] {
                 if (AppearanceSwitcher.IsValid()) AppearanceSwitcher->SetActiveWidgetIndex(PlayerIndex);
                 return FReply::Handled();
@@ -330,8 +340,8 @@ void UTMOPMainMenuWidget::ShowAppearanceSetup(int32 Count)
     Body->AddSlot().AutoHeight()[Tabs];
     Body->AddSlot().FillHeight(1)[AppearanceSwitcher.ToSharedRef()];
     Body->AddSlot().AutoHeight().Padding(6)[SNew(STextBlock).AutoWrapText(true)
-        .Text_Lambda([this] { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); })];
-    Body->AddSlot().AutoHeight().Padding(6)[SNew(SButton).Text(FText::FromString(TEXT("Tillbaka till antal spelare")))
+        .Text(FTMOPLocalization::Bind([this] { return Director.IsValid() ? Director->StartupStatus : FText::GetEmpty(); }))];
+    Body->AddSlot().AutoHeight().Padding(6)[SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "MainMenuBackPlayerCount", "Tillbaka till antal spelare")))
         .OnClicked_Lambda([this] { if (Director.IsValid()) Director->CancelAppearanceSetup(); return FReply::Handled(); })];
     AppearanceHost->SetContent(SNew(SBorder).Padding(12).BorderBackgroundColor(FLinearColor(0.025f,0.025f,0.03f,1))[Body]);
     AppearanceHost->SetVisibility(EVisibility::Visible);
@@ -366,14 +376,14 @@ void UTMOPMainMenuWidget::SetLoadMenuMode(const bool bShowLoadMenu)
         bShowLoadMenu ? EVisibility::Visible : EVisibility::Collapsed);
     if (bShowLoadMenu)
     {
-        if (LoadStatusText.IsValid()) LoadStatusText->SetText(FText::GetEmpty());
+        if (LoadStatusText.IsValid()) LoadStatusText->SetText(FTMOPLocalization::Text(FText::GetEmpty()));
         RebuildLoadList();
     }
 }
 
 void UTMOPMainMenuWidget::SetLoadStatus(const FText& Status)
 {
-    if (LoadStatusText.IsValid()) LoadStatusText->SetText(Status);
+    if (LoadStatusText.IsValid()) LoadStatusText->SetText(FTMOPLocalization::Text(Status));
 }
 
 void UTMOPMainMenuWidget::RebuildLoadList()
@@ -386,8 +396,8 @@ void UTMOPMainMenuWidget::RebuildLoadList()
     if (Slots.IsEmpty())
     {
         LoadListBox->AddSlot().AutoHeight().HAlign(HAlign_Center).Padding(8.0f)
-        [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "MainMenuNoSaves",
-            "Det finns inga sparade spel ännu."))
+        [ SNew(STextBlock).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "MainMenuNoSaves",
+            "Det finns inga sparade spel ännu.")))
           .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MainMenuSaveDetails"),
               FCoreStyle::GetDefaultFontStyle("Regular", 15)))
           .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -396,24 +406,21 @@ void UTMOPMainMenuWidget::RebuildLoadList()
     }
     for (const FTMOPSaveSlotInfo& Info : Slots)
     {
-        const FString Detail = FString::Printf(TEXT("Plats: %s   •   Nivå: %s   •   Sparad: %s"),
-            *Info.LocationName,
-            Info.MapName.IsEmpty() ? TEXT("Okänd") : *Info.MapName,
-            Info.SavedAtText.IsEmpty() ? TEXT("Äldre sparfil") : *Info.SavedAtText);
+        const FString Detail = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPMainMenuWidget.01e8a8aeac3fa85a", "Plats: {0}   •   Nivå: {1}   •   Sparad: {2}"), FTMOPLocalization::Text(FString(Info.LocationName)), FTMOPLocalization::Text(FString(Info.MapName.IsEmpty() ? TEXT("Okänd") : *Info.MapName)), FTMOPLocalization::Text(FString(Info.SavedAtText.IsEmpty() ? TEXT("Äldre sparfil") : *Info.SavedAtText))).ToString();
         LoadListBox->AddSlot().AutoHeight().Padding(4.0f)
         [ SNew(SButton)
           .OnClicked_UObject(this, &UTMOPMainMenuWidget::LoadSlotClicked, Info.SlotName)
           [ SNew(SVerticalBox)
             + SVerticalBox::Slot().AutoHeight()
             [ SNew(STextBlock)
-              .Text(FText::FromString(FString::Printf(TEXT("%s   —   %s"),
-                  *Info.DisplayName, *Info.GameTime.ToDisplayString())))
+              .Text(FTMOPLocalization::Text(FText::FromString(FString::Printf(TEXT("%s   —   %s"),
+                  *Info.DisplayName, *Info.GameTime.ToDisplayString()))))
               .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MainMenuSaveTitle"),
                   FCoreStyle::GetDefaultFontStyle("Bold", 18)))
               .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
                   TEXT("MainMenuSaveTitle"), FLinearColor::White)) ]
             + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f, 0.0f, 0.0f)
-            [ SNew(STextBlock).Text(FText::FromString(Detail))
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(Detail)))
               .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MainMenuSaveDetails"),
                   FCoreStyle::GetDefaultFontStyle("Regular", 14)))
               .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -428,8 +435,11 @@ void UTMOPMainMenuWidget::SetIntroCard(const FText& Heading,
     if (IntroPanel.IsValid()) IntroPanel->SetVisibility(
         bVisible ? EVisibility::Visible : EVisibility::Collapsed);
     bIntroCardVisible = bVisible;
-    FullIntroHeading = Heading.ToString();
-    FullIntroBody = Body.ToString();
+    IntroHeadingSource = Heading;
+    FullIntroHeading = FTMOPLocalization::String(Heading);
+    IntroBodySource = Body;
+    FullIntroBody = FTMOPLocalization::String(Body);
+    IntroLanguageRevision = FTMOPLocalization::GetRevision();
     ResetTypewriter();
     CardTexture = Image;
     CardImageBrush.SetResourceObject(CardTexture);

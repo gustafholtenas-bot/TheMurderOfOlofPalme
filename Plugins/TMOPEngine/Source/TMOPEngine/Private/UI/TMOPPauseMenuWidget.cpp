@@ -1,4 +1,10 @@
 #include "UI/TMOPPauseMenuWidget.h"
+#include "WorldAtlas/STMOPWorldAtlas.h"
+#include "Engine/StaticMesh.h"
+#include "UObject/ConstructorHelpers.h"
+#include "Widgets/SNullWidget.h"
+#include "Localization/TMOPLocalization.h"
+#include "UI/TMOPLanguageSelector.h"
 #include "UI/STMOPTheoryBuilder.h"
 #include "UI/STMOPNotebookPanel.h"
 #include "Observations/TMOPNotebookPresentation.h"
@@ -276,6 +282,19 @@ FText SectionTitle(const ETMOPPauseHubSection Section)
 }
 }
 
+UTMOPPauseMenuWidget::UTMOPPauseMenuWidget(const FObjectInitializer& ObjectInitializer)
+    : Super(ObjectInitializer)
+{
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> Sphere(TEXT("/Engine/BasicShapes/Sphere.Sphere"));
+    WorldGlobeMesh = Sphere.Object;
+}
+
+void UTMOPPauseMenuWidget::ReleaseSlateResources(bool bReleaseChildren)
+{
+    Super::ReleaseSlateResources(bReleaseChildren);
+    ContentBox.Reset(); PageContentHost.Reset(); SectionTitleText.Reset(); StatusText.Reset(); TimeEntryBox.Reset();
+}
+
 void UTMOPPauseMenuWidget::InitializePauseMenu(APlayerController* InController,
     ATMOPPlayerCharacter* InCharacter)
 {
@@ -297,6 +316,11 @@ void UTMOPPauseMenuWidget::SetMenuVisible(const bool bVisible)
         SetStatus(FText::GetEmpty());
         ShowSection(CurrentSection);
     }
+    else if (CurrentSection == ETMOPPauseHubSection::WorldGroups && PageContentHost.IsValid())
+    {
+        PageContentHost->SetContent(SNullWidget::NullWidget);
+        ContentBox.Reset(); // release the preview scene and its render target on close
+    }
 }
 
 TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
@@ -310,7 +334,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
             .HAlign(HAlign_Left)
             .ButtonColorAndOpacity(MenuColors.ButtonBackground)
             .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleSectionClicked, Section)
-            [ SNew(STextBlock).Text(Label)
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(Label))
               .Font(ATMOPTypographyDirector::ResolveFont(this,
                   TEXT("PauseMenuNavigation"),
                   FCoreStyle::GetDefaultFontStyle("Regular", 16)))
@@ -359,7 +383,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
     NavigationPanel->AddSlot().AutoHeight().Padding(3.0f)
     [ SNew(SButton).HAlign(HAlign_Left).ButtonColorAndOpacity(MenuColors.ButtonBackground)
       .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked)
-      [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT SPELA"))
+      [ SNew(STextBlock).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "HubResume", "FORTSÄTT SPELA")))
         .Font(ATMOPTypographyDirector::ResolveFont(this,
             TEXT("PauseMenuNavigation"),
             FCoreStyle::GetDefaultFontStyle("Regular", 16)))
@@ -385,7 +409,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
         .BorderBackgroundColor(MenuColors.MenuBackground).Padding(34.0f)
         [ SNew(SVerticalBox)
           + SVerticalBox::Slot().AutoHeight().Padding(8.0f, 4.0f, 8.0f, 20.0f)
-          [ SNew(STextBlock).Text(NSLOCTEXT("TMOP", "PauseHubTitle", "THE MURDER OF OLOF PALME"))
+          [ SNew(STextBlock).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "PauseHubTitle", "THE MURDER OF OLOF PALME")))
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuMainTitle"),
                 FCoreStyle::GetDefaultFontStyle("Bold", 25)))
             .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -396,7 +420,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
             [ SNew(SBox).WidthOverride(340.0f)
               [ SNew(SVerticalBox)
                 + SVerticalBox::Slot().AutoHeight().Padding(3.0f, 0.0f, 3.0f, 12.0f)
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "PinnedResume", "FORTSÄTT SPELA / STÄNG"))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "PinnedResume", "FORTSÄTT SPELA / STÄNG")))
                   .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleResumeClicked) ]
                 + SVerticalBox::Slot().FillHeight(1.0f)
                 [ SNew(SScrollBox) + SScrollBox::Slot()[NavigationPanel] ] ] ]
@@ -454,7 +478,7 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
     PageContentHost->SetContent(SNew(SScrollBox) + SScrollBox::Slot()[ContentBox.ToSharedRef()]);
     if (SectionTitleText.IsValid()) SectionTitleText->SetVisibility(
         Section == ETMOPPauseHubSection::MyObservations ? EVisibility::Collapsed : EVisibility::Visible);
-    if (SectionTitleText.IsValid()) SectionTitleText->SetText(SectionTitle(Section));
+    if (SectionTitleText.IsValid()) SectionTitleText->SetText(FTMOPLocalization::Text(SectionTitle(Section)));
     SetStatus(FText::GetEmpty());
     switch (Section)
     {
@@ -477,6 +501,10 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::AfterMurderEvents: BuildChronologyPage(AfterMurderEventsTable, false); break;
     case ETMOPPauseHubSection::MurderDayMysteries: BuildChronologyPage(MurderDayMysteriesTable, false, true); break;
     case ETMOPPauseHubSection::WorldGroups:
+        // This page manages its own scrolling. Fill the available local-player panel.
+        PageContentHost->SetContent(MakeTMOPWorldAtlas(WorldGlobeMesh, WorldGlobeMaterial,
+            WorldGlobeAlignment, bWorldGlobeCoastlines));
+        break;
     case ETMOPPauseHubSection::SwedenGroups:
         // Independent pages reserved for content specified later.
         break;
@@ -484,13 +512,13 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
 }
 
 void UTMOPPauseMenuWidget::AddHeading(const FText& Text)
-{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 10.0f)[ SNew(STextBlock).Text(Text).Font(
+{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 10.0f)[ SNew(STextBlock).Text(FTMOPLocalization::Text(Text)).Font(
     ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSectionHeading"),
         FCoreStyle::GetDefaultFontStyle("Bold", 17)))
     .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
         TEXT("PauseMenuSectionHeading"), FLinearColor::White)) ]; }
 void UTMOPPauseMenuWidget::AddBody(const FText& Text)
-{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 5.0f)[ SNew(STextBlock).Text(Text)
+{ ContentBox->AddSlot().AutoHeight().Padding(2.0f, 5.0f)[ SNew(STextBlock).Text(FTMOPLocalization::Text(Text))
     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuBody"),
         FCoreStyle::GetDefaultFontStyle("Regular", 16)))
     .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -506,10 +534,10 @@ void UTMOPPauseMenuWidget::BuildInventoryPage()
     {
         UTMOPItemDefinition* Item = Entry.Item.Get();
         if (!IsValid(Item)) continue;
-        const FText Label = FText::Format(NSLOCTEXT("TMOP", "InventoryLine", "{0}  ×{1}"),
+        const FText Label = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "InventoryLine", "{0}  ×{1}"),
             Item->DisplayName, FText::AsNumber(Entry.Quantity));
         ContentBox->AddSlot().AutoHeight().Padding(2.0f, 4.0f)
-        [ SNew(SButton).Text(Label).IsEnabled(Item->bCanEquip)
+        [ SNew(SButton).Text(FTMOPLocalization::Text(Label)).IsEnabled(Item->bCanEquip)
           .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleEquipItem, Item) ];
     }
 }
@@ -518,7 +546,7 @@ FReply UTMOPPauseMenuWidget::HandleEquipItem(UTMOPItemDefinition* Item)
 {
     if (IsValid(PlayerCharacter) && IsValid(PlayerCharacter->Inventory) &&
         PlayerCharacter->Inventory->EquipItem(Item))
-        SetStatus(FText::Format(NSLOCTEXT("TMOP", "EquippedItem", "Vald: {0}"), Item->DisplayName));
+        SetStatus(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "EquippedItem", "Vald: {0}"), Item->DisplayName));
     return FReply::Handled();
 }
 
@@ -557,6 +585,7 @@ void UTMOPPauseMenuWidget::BuildTheoryBuilderPage()
     [SNew(STMOPTheoryBuilder).Player(PlayerCharacter.Get())
         .OnSave(FOnClicked::CreateUObject(this, &UTMOPPauseMenuWidget::HandleCreateNewSaveClicked))];
     AddHeading(NSLOCTEXT("TMOP", "TheoryInformation", "INFORMATION"));
+    TArray<FTMOPTheoryInformationRow> ViewStorage;
     TArray<FTMOPTheoryInformationRow*> Rows;
     UDataTable* Table = TheoryInformationTable;
     if (!IsValid(Table))
@@ -566,14 +595,14 @@ void UTMOPPauseMenuWidget::BuildTheoryBuilderPage()
     {
         if (Table->GetRowStruct() != FTMOPTheoryInformationRow::StaticStruct())
         {
-            AddBody(FText::FromString(TEXT("Teorilistan har fel radtyp. Importera den som TMOPTheoryInformationRow.")));
+            AddBody(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.e31d800a1621d2b9", "Teorilistan har fel radtyp. Importera den som TMOPTheoryInformationRow."));
             return;
         }
-        Table->GetAllRows(TEXT("Theory information"), Rows);
+        FTMOPLocalization::TableViews(Table, ViewStorage, Rows);
     }
     else for (auto& Entry : TheoryInformationEntries) Rows.Add(&Entry);
     Rows.Sort([](const FTMOPTheoryInformationRow& A, const FTMOPTheoryInformationRow& B)
-    { return A.SortOrder == B.SortOrder ? A.Title.ToString() < B.Title.ToString() : A.SortOrder < B.SortOrder; });
+    { return A.SortOrder == B.SortOrder ? FTMOPLocalization::String(A.Title) < FTMOPLocalization::String(B.Title) : A.SortOrder < B.SortOrder; });
     for (int32 Track = 0; Track < 2; ++Track)
     {
         AddHeading(Track == 0 ? NSLOCTEXT("TMOP", "TheoryLoneGunman", "ENSAM GÄRNINGSMAN")
@@ -586,11 +615,11 @@ void UTMOPPauseMenuWidget::BuildTheoryBuilderPage()
             const FText Body = Row->Body.IsEmpty() ? NSLOCTEXT("TMOP", "TheoryMissingText", "Texten är inte inlagd ännu.") : Row->Body;
             ContentBox->AddSlot().AutoHeight().Padding(0, 3)
             [SNew(SExpandableArea).InitiallyCollapsed(true)
-                .HeaderContent()[SNew(STextBlock).Text(Row->Title).AutoWrapText(true)]
+                .HeaderContent()[SNew(STextBlock).Text(FTMOPLocalization::Text(Row->Title)).AutoWrapText(true)]
                 .BodyContent()[SNew(SVerticalBox)
-                    + SVerticalBox::Slot().AutoHeight().Padding(12, 8)[SNew(STextBlock).Text(Body).AutoWrapText(true)]
+                    + SVerticalBox::Slot().AutoHeight().Padding(12, 8)[SNew(STextBlock).Text(FTMOPLocalization::Text(Body)).AutoWrapText(true)]
                     + SVerticalBox::Slot().AutoHeight().Padding(12, 0, 12, 8)
-                    [SNew(STextBlock).Text(Row->Source).AutoWrapText(true)
+                    [SNew(STextBlock).Text(FTMOPLocalization::Text(Row->Source)).AutoWrapText(true)
                         .Visibility(Row->Source.IsEmpty() ? EVisibility::Collapsed : EVisibility::Visible)]]];
         }
         if (!bAny) AddBody(NSLOCTEXT("TMOP", "TheoryNoInformation", "Inga uppgifter tillagda ännu."));
@@ -608,11 +637,12 @@ void UTMOPPauseMenuWidget::BuildChronologyPage(UDataTable* Table, bool bKnowledg
             : TEXT("/Game/TMOP/Data/DT_TMOP_AfterMurderEvents.DT_TMOP_AfterMurderEvents"));
     if (!IsValid(Table) || Table->GetRowStruct() != FTMOPChronologyRow::StaticStruct())
     {
-        AddBody(FText::FromString(TEXT("Ingen kronologilista är vald. Importera JSON som TMOPChronologyRow och välj tabellen under Pause → Chronology.")));
+        AddBody(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.c8e627fe249280ba", "Ingen kronologilista är vald. Importera JSON som TMOPChronologyRow och välj tabellen under Pause → Chronology."));
         return;
     }
+    TArray<FTMOPChronologyRow> ViewStorage;
     TArray<FTMOPChronologyRow*> Rows;
-    Table->GetAllRows(TEXT("Menu chronology"), Rows);
+    FTMOPLocalization::TableViews(Table, ViewStorage, Rows);
     Rows.RemoveAll([](const auto* R) { return !R || !R->bPublished || R->Title.IsEmpty(); });
     const auto DateKey = [](const FTMOPChronologyRow& R) -> int64
     {
@@ -624,37 +654,37 @@ void UTMOPPauseMenuWidget::BuildChronologyPage(UDataTable* Table, bool bKnowledg
         if (bKnowledge && A.bBeforeMurder != B.bBeforeMurder) return A.bBeforeMurder;
         if (DateKey(A) != DateKey(B)) return DateKey(A) < DateKey(B);
         if (A.SortOrder != B.SortOrder) return A.SortOrder < B.SortOrder;
-        return A.Title.ToString() < B.Title.ToString();
+        return FTMOPLocalization::String(A.Title) < FTMOPLocalization::String(B.Title);
     });
     FString PreviousGroup;
     for (const auto* R : Rows)
     {
-        const FString Period = bKnowledge ? (R->bBeforeMurder ? TEXT("INNAN MORDET") : TEXT("EFTER MORDET")) : TEXT("");
-        const FString Year = R->Year > 0 ? FString::FromInt(R->Year) : TEXT("DATUM EJ FASTSTÄLLT");
+        const FString Period = bKnowledge ? (R->bBeforeMurder ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.a28d788facf2998a", "INNAN MORDET").ToString() : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.e518cc84531cc8aa", "EFTER MORDET").ToString()) : TEXT("");
+        const FString Year = R->Year > 0 ? FString::FromInt(R->Year) : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.568fca539d6395d1", "DATUM EJ FASTSTÄLLT").ToString();
         const FString Group = Period + TEXT(" ") + Year;
         if (Group != PreviousGroup)
         {
             AddHeading(FText::FromString(Group.TrimStartAndEnd()));
             PreviousGroup = Group;
         }
-        FString Date = R->Year > 0 ? FString::FromInt(R->Year) : TEXT("Datum ej fastställt");
+        FString Date = R->Year > 0 ? FString::FromInt(R->Year) : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.fa7a332763e21821", "Datum ej fastställt").ToString();
         if (R->Year > 0 && R->Month > 0) Date += FString::Printf(TEXT("-%02d"), R->Month);
         if (R->Year > 0 && R->Month > 0 && R->Day > 0) Date += FString::Printf(TEXT("-%02d"), R->Day);
         FString Details = Date;
-        if (!R->DateNote.IsEmpty()) Details += TEXT(" — ") + R->DateNote.ToString();
-        if (!R->EvidenceStatus.IsEmpty()) Details += TEXT("\n") + R->EvidenceStatus.ToString();
-        Details += TEXT("\n\n") + R->Body.ToString();
-        if (!R->Source.IsEmpty()) Details += TEXT("\n\nKälla: ") + R->Source.ToString();
+        if (!R->DateNote.IsEmpty()) Details += TEXT(" — ") + FTMOPLocalization::String(R->DateNote);
+        if (!R->EvidenceStatus.IsEmpty()) Details += TEXT("\n") + FTMOPLocalization::String(R->EvidenceStatus);
+        Details += TEXT("\n\n") + FTMOPLocalization::String(R->Body);
+        if (!R->Source.IsEmpty()) Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.287df351360d3405", "\n\nKälla: ").ToString() + FTMOPLocalization::String(R->Source);
         if (!R->SourceUrl.IsEmpty()) Details += TEXT("\n") + R->SourceUrl;
         ContentBox->AddSlot().AutoHeight().Padding(0, 5)
         [ SNew(SExpandableArea).InitiallyCollapsed(true)
-            .HeaderContent()[SNew(STextBlock).Text(R->Title).AutoWrapText(true)
+            .HeaderContent()[SNew(STextBlock).Text(FTMOPLocalization::Text(R->Title)).AutoWrapText(true)
                 .Font(FCoreStyle::GetDefaultFontStyle("Regular", 18)).ColorAndOpacity(FLinearColor::White)]
-            .BodyContent()[SNew(STextBlock).Text(FText::FromString(Details)).AutoWrapText(true)
+            .BodyContent()[SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(Details))).AutoWrapText(true)
                 .Margin(FMargin(14, 10)).Font(FCoreStyle::GetDefaultFontStyle("Regular", 16))
                 .ColorAndOpacity(FLinearColor::White)] ];
     }
-    if (Rows.IsEmpty()) AddBody(FText::FromString(TEXT("Inga publicerade poster ännu.")));
+    if (Rows.IsEmpty()) AddBody(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.02bb4b16ea1039d0", "Inga publicerade poster ännu."));
 }
 
 void UTMOPPauseMenuWidget::BuildSourcesPage()
@@ -666,8 +696,9 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         return;
     }
 
+    TArray<FTMOPUppslagRow> ViewStorage;
     TArray<FTMOPUppslagRow*> Rows;
-    UppslagTable->GetAllRows(TEXT("Pause menu sources"), Rows);
+    FTMOPLocalization::TableViews(UppslagTable, ViewStorage, Rows);
     Rows.Sort([](const FTMOPUppslagRow& A, const FTMOPUppslagRow& B)
     {
         return UppslagIdNaturalLess(A.UppslagId, B.UppslagId);
@@ -685,7 +716,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
               [ SNew(SBox).WidthOverride(18.0f).HeightOverride(12.0f) ] ]
             + SHorizontalBox::Slot().AutoWidth().Padding(6.0f, 0.0f, 18.0f, 0.0f)
               .VAlign(VAlign_Center)
-            [ SNew(STextBlock).Text(Label) ];
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(Label)) ];
     };
     ContentBox->AddSlot().AutoHeight().Padding(2.0f, 7.0f, 2.0f, 12.0f)
     [ SNew(SWrapBox).UseAllottedSize(true)
@@ -712,8 +743,8 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             if (Row->bIsSectionDefinition)
             {
                 SectionDescriptions.FindOrAdd(Row->SeriesId) =
-                    Row->SectionDescription.IsEmpty()
-                    ? Row->Title.ToString() : Row->SectionDescription;
+                    FTMOPLocalization::String(Row->SectionDescription).IsEmpty()
+                    ? FTMOPLocalization::String(Row->Title) : FTMOPLocalization::String(Row->SectionDescription);
                 RowsBySeries.FindOrAdd(Row->SeriesId);
             }
             else RowsBySeries.FindOrAdd(Row->SeriesId).Add(Row);
@@ -749,14 +780,9 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     };
     const auto StatisticsForCoverage = [](const FTMOPCoverageCounts& Coverage)
     {
-        FString Result = FString::Printf(
-            TEXT("%d uppslag inlagda\n%d tillgängliga online men ej inlagda\n")
-            TEXT("%d ej utlämnade från polisen\n")
-            TEXT("%d ej utlämnade men av stort intresse\n%d procent inlagt"),
-            Coverage.Added, Coverage.OnlineNotAdded, Coverage.PoliceOnly,
-            Coverage.PoliceHighPriority, Coverage.AddedPercent());
+        FString Result = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.c67f135591e01ece", "{0} uppslag inlagda\n{1} tillgängliga online men ej inlagda\n{2} ej utlämnade från polisen\n{3} ej utlämnade men av stort intresse\n{4} procent inlagt"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.Added)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.OnlineNotAdded)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.PoliceOnly)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.PoliceHighPriority)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.AddedPercent()))).ToString();
         if (Coverage.Unknown > 0)
-            Result += FString::Printf(TEXT("\n%d ej klassificerade"), Coverage.Unknown);
+            Result += FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1e83c03507ba0f63", "\n{0} ej klassificerade"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.Unknown))).ToString();
         return Result;
     };
     const auto ResolveSectionDescription = [&SectionDescriptions](const FName SeriesId)
@@ -770,8 +796,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             const FString ParentDescription = SectionDescriptions.FindRef(FName(*ParentId));
             if (!ParentDescription.TrimStartAndEnd().IsEmpty()) return ParentDescription;
         }
-        return FString::Printf(TEXT("Avsnitt %s – beskrivning saknas i registret."),
-            *SeriesId.ToString());
+        return FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.d6dd356100946f09", "Avsnitt {0} – beskrivning saknas i registret."), FTMOPLocalization::Text(FString(SeriesId.ToString()))).ToString();
     };
 
     struct FSectionCardData
@@ -805,15 +830,15 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         const FText ButtonLabel = Card.Label;
         TSharedRef<SVerticalBox> CardContent = SNew(SVerticalBox)
             + SVerticalBox::Slot().AutoHeight()
-            [ SNew(STextBlock).Text(ButtonLabel)
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(ButtonLabel))
               .Font(FCoreStyle::GetDefaultFontStyle("Bold", Card.bMainSection ? 30 : 24)) ]
             + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 3.0f, 0.0f, 8.0f)
-            [ SNew(STextBlock).Text(FText::FromString(Card.Description))
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(Card.Description)))
               .AutoWrapText(true).ColorAndOpacity(FLinearColor(0.78f, 0.80f, 0.84f, 1.0f)) ]
             + SVerticalBox::Slot().AutoHeight()
             [ SNew(STMOPUppslagCoverageBar).EntryStates(States).DesiredWidth(420.0f) ]
             + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 8.0f, 0.0f, 0.0f)
-            [ SNew(STextBlock).Text(FText::FromString(StatisticsForCoverage(Coverage)))
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(StatisticsForCoverage(Coverage))))
               .AutoWrapText(true) ];
         if (Card.bMainSection)
             return SNew(SBox).HeightOverride(220.0f)
@@ -901,10 +926,10 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             for (const FTMOPUppslagRow* SourceRow : CategoryRows)
             {
                 const FString DisplayTitle = SourceRow->Title.IsEmpty()
-                    ? SourceRow->UppslagId.ToString() : SourceRow->Title.ToString();
-                FString Details = SourceRow->bAddedToProject ? TEXT("Inlagt i projektet")
-                    : SourceRow->bPartiallyAdded ? TEXT("Delvis inlagt")
-                    : SourceRow->bRetrieved ? TEXT("Genomgången") : TEXT("Inte genomgången");
+                    ? SourceRow->UppslagId.ToString() : FTMOPLocalization::String(SourceRow->Title);
+                FString Details = SourceRow->bAddedToProject ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.6265ce0096115cb3", "Inlagt i projektet").ToString()
+                    : SourceRow->bPartiallyAdded ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.8b0c5f8dcfc057b5", "Delvis inlagt").ToString()
+                    : SourceRow->bRetrieved ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1cdd033700dd1dd7", "Genomgången").ToString() : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1c53a8da7f5916ca", "Inte genomgången").ToString();
                 if (!SourceRow->SourceUrl.IsEmpty()) Details += TEXT("\n") + SourceRow->SourceUrl;
                 AddHeading(FText::FromString(DisplayTitle));
                 AddBody(FText::FromString(Details));
@@ -920,15 +945,15 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     }
 
     ContentBox->AddSlot().AutoHeight().Padding(2.0f, 2.0f, 2.0f, 10.0f)
-    [ SNew(SButton).Text(SelectedSourceSeries.IsNone()
+    [ SNew(SButton).Text(FTMOPLocalization::Text(SelectedSourceSeries.IsNone()
         ? NSLOCTEXT("TMOP", "BackToMainSections", "← Alla huvudavsnitt")
-        : FText::Format(NSLOCTEXT("TMOP", "BackToMainSection", "← Tillbaka till {0}"),
-            FText::FromName(SelectedSourceMainSection)))
+        : FTMOPLocalization::Format(NSLOCTEXT("TMOP", "BackToMainSection", "← Tillbaka till {0}"),
+            FText::FromName(SelectedSourceMainSection))))
       .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleSourceBackClicked) ];
 
     if (SelectedSourceSeries.IsNone())
     {
-        AddHeading(FText::Format(NSLOCTEXT("TMOP", "MainSectionHeading", "{0} – {1}"),
+        AddHeading(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "MainSectionHeading", "{0} – {1}"),
             FText::FromName(SelectedSourceMainSection),
             FText::FromString(ResolveSectionDescription(SelectedSourceMainSection))));
         const TArray<FTMOPUppslagRow*>& MainRows =
@@ -940,7 +965,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
           [ SNew(STMOPUppslagCoverageBar).EntryStates(StatesForRows(MainRows))
             .DesiredWidth(760.0f) ]
           + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 7.0f)
-          [ SNew(STextBlock).Text(FText::FromString(StatisticsForCoverage(MainCoverage))) ] ];
+          [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(StatisticsForCoverage(MainCoverage)))) ] ];
 
         TArray<FName> ChildSeries;
         for (const TPair<FName, TArray<FTMOPUppslagRow*>>& Pair : RowsBySeries)
@@ -953,7 +978,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             FSectionCardData& Card = Cards.AddDefaulted_GetRef();
             Card.Id = SeriesId;
             Card.Label = SeriesId == SelectedSourceMainSection
-                ? FText::Format(NSLOCTEXT("TMOP", "MainSectionOther", "{0} – ÖVRIGA"),
+                ? FTMOPLocalization::Format(NSLOCTEXT("TMOP", "MainSectionOther", "{0} – ÖVRIGA"),
                     FText::FromName(SeriesId))
                 : FText::FromName(SeriesId);
             Card.Description = ResolveSectionDescription(SeriesId);
@@ -970,7 +995,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         AddBody(NSLOCTEXT("TMOP", "MissingSelectedSeries", "Underavsnittet saknas i registret."));
         return;
     }
-    AddHeading(FText::Format(NSLOCTEXT("TMOP", "SelectedSeriesHeading", "AVSNITT {0}"),
+    AddHeading(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "SelectedSeriesHeading", "AVSNITT {0}"),
         FText::FromName(SelectedSourceSeries)));
     AddBody(FText::FromString(ResolveSectionDescription(SelectedSourceSeries)));
     ContentBox->AddSlot().AutoHeight().Padding(2.0f, 4.0f, 2.0f, 12.0f)
@@ -985,7 +1010,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     for (const FTMOPUppslagRow* Row : DetailRows)
     {
         if (Row == nullptr) continue;
-        const FString Title = Row->Title.IsEmpty() ? TEXT("Utan titel") : Row->Title.ToString();
+        const FString Title = Row->Title.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.318cee16bf3d25ac", "Utan titel").ToString() : FTMOPLocalization::String(Row->Title);
         const FLinearColor RowColor = ClassifyUppslagCoverage(*Row) ==
             ETMOPCoverageState::Unknown
             ? FLinearColor(0.78f, 0.80f, 0.84f, 1.0f)
@@ -993,7 +1018,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         const FText RowHeading = FText::FromString(FString::Printf(TEXT("%s — %s"),
             *Row->UppslagId.ToString(), *Title));
         FString Details = Row->bAddedToProject ? TEXT("Inlagt")
-            : Row->bPartiallyAdded ? TEXT("Delvis inlagt") : TEXT("Ej inlagt");
+            : Row->bPartiallyAdded ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.8b0c5f8dcfc057b5", "Delvis inlagt").ToString() : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.e00f2a51a946330f", "Ej inlagt").ToString();
         if (!Row->DocumentDate.IsEmpty()) Details += TEXT(" • ") + Row->DocumentDate;
         if (!Row->SourceUrl.IsEmpty()) Details += TEXT("\n") + Row->SourceUrl;
         // One source is one color block: title, state, date and URL all use the
@@ -1001,11 +1026,11 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         ContentBox->AddSlot().AutoHeight().Padding(2.0f, 8.0f, 2.0f, 5.0f)
         [ SNew(SVerticalBox)
           + SVerticalBox::Slot().AutoHeight()
-          [ SNew(STextBlock).Text(RowHeading).ColorAndOpacity(RowColor)
+          [ SNew(STextBlock).Text(FTMOPLocalization::Text(RowHeading)).ColorAndOpacity(RowColor)
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSourceHeading"),
                 FCoreStyle::GetDefaultFontStyle("Bold", 17))) ]
           + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f, 0.0f, 0.0f)
-          [ SNew(STextBlock).Text(FText::FromString(Details))
+          [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(Details)))
             .ColorAndOpacity(RowColor).AutoWrapText(true)
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSourceDetails"),
                 FCoreStyle::GetDefaultFontStyle("Regular", 16))) ] ];
@@ -1027,22 +1052,13 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             if (Row != nullptr) TotalCoverage.Add(ClassifyUppslagCoverage(*Row));
     }
 
-    FString TotalStatistics = FString::Printf(
-        TEXT("TOTALT: %d uppslag\n%d uppslag inlagda\n")
-        TEXT("%d tillgängliga online men ej inlagda\n")
-        TEXT("%d ej utlämnade från polisen\n")
-        TEXT("%d ej utlämnade från polisen men av stort intresse för spelet\n")
-        TEXT("%d procent inlagt"),
-        TotalCoverage.Total, TotalCoverage.Added, TotalCoverage.OnlineNotAdded,
-        TotalCoverage.PoliceOnly, TotalCoverage.PoliceHighPriority,
-        TotalCoverage.AddedPercent());
+    FString TotalStatistics = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.c0e187fb172a654a", "TOTALT: {0} uppslag\n{1} uppslag inlagda\n{2} tillgängliga online men ej inlagda\n{3} ej utlämnade från polisen\n{4} ej utlämnade från polisen men av stort intresse för spelet\n{5} procent inlagt"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), TotalCoverage.Total)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), TotalCoverage.Added)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), TotalCoverage.OnlineNotAdded)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), TotalCoverage.PoliceOnly)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), TotalCoverage.PoliceHighPriority)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), TotalCoverage.AddedPercent()))).ToString();
     if (TotalCoverage.Unknown > 0)
-        TotalStatistics += FString::Printf(TEXT("\n%d med ännu ej fastställd status"),
-            TotalCoverage.Unknown);
+        TotalStatistics += FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1830e563a39ed943", "\n{0} med ännu ej fastställd status"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), TotalCoverage.Unknown))).ToString();
     ContentBox->AddSlot().AutoHeight().Padding(2.0f, 4.0f, 2.0f, 14.0f)
     [ SNew(SBorder).BorderBackgroundColor(FLinearColor(0.055f, 0.07f, 0.095f, 1.0f))
       .Padding(12.0f)
-      [ SNew(STextBlock).Text(FText::FromString(TotalStatistics))
+      [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(TotalStatistics)))
         .Font(FCoreStyle::GetDefaultFontStyle("Bold", 15)).AutoWrapText(true) ] ];
 
     const auto ResolveSectionDescriptionLegacy = [&SectionDescriptions](const FName SeriesId)
@@ -1056,11 +1072,9 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             ParentId.LeftChopInline(1);
             const FString ParentDescription = SectionDescriptions.FindRef(FName(*ParentId));
             if (!ParentDescription.TrimStartAndEnd().IsEmpty())
-                return FString::Printf(TEXT("Delavsnitt inom %s: %s"),
-                    *ParentId, *ParentDescription);
+                return FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.803e3793d0222799", "Delavsnitt inom {0}: {1}"), FTMOPLocalization::Text(FString(ParentId)), FTMOPLocalization::Text(FString(ParentDescription))).ToString();
         }
-        return FString::Printf(TEXT("Avsnitt %s – detaljerad beskrivning saknas i registret."),
-            *SeriesId.ToString());
+        return FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.627078f31fa8db6a", "Avsnitt {0} – detaljerad beskrivning saknas i registret."), FTMOPLocalization::Text(FString(SeriesId.ToString()))).ToString();
     };
 
     for (const FName SeriesId : SeriesIds)
@@ -1081,17 +1095,9 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             EntryStates.Add(static_cast<uint8>(State));
             Coverage.Add(State);
         }
-        FString StatisticsString = FString::Printf(
-            TEXT("%d uppslag inlagda\n")
-            TEXT("%d tillgängliga online men ej inlagda\n")
-            TEXT("%d ej utlämnade från polisen\n")
-            TEXT("%d ej utlämnade från polisen men av stort intresse för spelet\n")
-            TEXT("%d procent inlagt"),
-            Coverage.Added, Coverage.OnlineNotAdded, Coverage.PoliceOnly,
-            Coverage.PoliceHighPriority, Coverage.AddedPercent());
+        FString StatisticsString = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.b1df6fd737d3e146", "{0} uppslag inlagda\n{1} tillgängliga online men ej inlagda\n{2} ej utlämnade från polisen\n{3} ej utlämnade från polisen men av stort intresse för spelet\n{4} procent inlagt"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.Added)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.OnlineNotAdded)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.PoliceOnly)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.PoliceHighPriority)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.AddedPercent()))).ToString();
         if (Coverage.Unknown > 0)
-            StatisticsString += FString::Printf(TEXT("\n%d ej klassificerade"),
-                Coverage.Unknown);
+            StatisticsString += FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1e83c03507ba0f63", "\n{0} ej klassificerade"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Coverage.Unknown))).ToString();
         const FText Statistics = FText::FromString(StatisticsString);
         constexpr float MinimumBarWidth = 24.0f;
         constexpr float MaximumBarWidth = 620.0f;
@@ -1106,11 +1112,11 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
           [ SNew(SHorizontalBox)
             + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
             [ SNew(SBox).WidthOverride(105.0f)
-              [ SNew(STextBlock).Text(FText::FromName(SeriesId))
+              [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromName(SeriesId)))
                 .Font(FCoreStyle::GetDefaultFontStyle("Bold", 28)) ] ]
             + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
-            [ SNew(STextBlock).Text(FText::FromString(
-                ResolveSectionDescriptionLegacy(SeriesId))).AutoWrapText(true) ] ]
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(
+                ResolveSectionDescriptionLegacy(SeriesId)))).AutoWrapText(true) ] ]
           + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 7.0f, 0.0f, 0.0f)
           [ SNew(SHorizontalBox)
             + SHorizontalBox::Slot().AutoWidth().Padding(105.0f, 0.0f, 18.0f, 0.0f)
@@ -1120,7 +1126,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             + SHorizontalBox::Slot().FillWidth(1.0f)[ SNew(SSpacer) ]
             + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
             [ SNew(SBox).WidthOverride(360.0f)
-              [ SNew(STextBlock).Text(Statistics).AutoWrapText(false) ] ] ] ];
+              [ SNew(STextBlock).Text(FTMOPLocalization::Text(Statistics)).AutoWrapText(false) ] ] ] ];
     }
 
     AddHeading(NSLOCTEXT("TMOP", "SourcesDetails", "Polisuppslag – detaljer"));
@@ -1131,9 +1137,9 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     {
         if (Row == nullptr || Row->SourceCategory != ETMOPSourceCategory::PoliceUppslag ||
             Row->bIsSectionDefinition || !Row->bRelevantToGame) continue;
-        const FString SourceDisplayTitle = Row->Title.IsEmpty() ? TEXT("Utan titel") : Row->Title.ToString();
+        const FString SourceDisplayTitle = Row->Title.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.318cee16bf3d25ac", "Utan titel").ToString() : FTMOPLocalization::String(Row->Title);
         const FString ProcessingStateText = Row->bAddedToProject ? TEXT("Inlagt")
-            : Row->bPartiallyAdded ? TEXT("Delvis inlagt") : TEXT("Ej inlagt");
+            : Row->bPartiallyAdded ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.8b0c5f8dcfc057b5", "Delvis inlagt").ToString() : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.e00f2a51a946330f", "Ej inlagt").ToString();
         AddHeading(FText::FromString(FString::Printf(TEXT("%s — %s"),
             *Row->UppslagId.ToString(), *SourceDisplayTitle)));
         FString Details = ProcessingStateText;
@@ -1161,11 +1167,11 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
     {
         switch (Value)
         {
-        case ETMOPSourceReliability::PrimarySource: return TEXT("Primärkälla");
-        case ETMOPSourceReliability::SecondarySource: return TEXT("Sekundärkälla");
-        case ETMOPSourceReliability::Corroborated: return TEXT("Bekräftad av flera källor");
-        case ETMOPSourceReliability::Disputed: return TEXT("Motsagd / omtvistad");
-        default: return TEXT("Obekräftad");
+        case ETMOPSourceReliability::PrimarySource: return NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.fab9c43d25ae6319", "Primärkälla").ToString();
+        case ETMOPSourceReliability::SecondarySource: return NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1e32e036671eb37a", "Sekundärkälla").ToString();
+        case ETMOPSourceReliability::Corroborated: return NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.52513cb9da26fb0c", "Bekräftad av flera källor").ToString();
+        case ETMOPSourceReliability::Disputed: return NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.0cbedb9ba091aaff", "Motsagd / omtvistad").ToString();
+        default: return NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.275c1a860623393b", "Obekräftad").ToString();
         }
     };
     const auto BuildSourceCategory = [this, &Rows, &NameArrayText, &ReliabilityText](
@@ -1196,9 +1202,7 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
             FullyAddedCount += SourceRow->bAddedToProject ? 1 : 0;
             PartiallyAddedCount += SourceRow->bPartiallyAdded ? 1 : 0;
         }
-        AddBody(FText::FromString(FString::Printf(
-            TEXT("%d källor • %d helt inlagda • %d delvis inlagda"),
-            CategoryRows.Num(), FullyAddedCount, PartiallyAddedCount)));
+        AddBody(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1da50de0e22697e4", "{0} källor • {1} helt inlagda • {2} delvis inlagda"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), CategoryRows.Num())), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), FullyAddedCount)), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), PartiallyAddedCount))));
         ContentBox->AddSlot().AutoHeight().Padding(2.0f, 3.0f, 2.0f, 12.0f)
         [ SNew(STMOPUppslagCoverageBar).EntryStates(EntryStates)
           .DesiredWidth(620.0f) ];
@@ -1206,29 +1210,29 @@ void UTMOPPauseMenuWidget::BuildSourcesPage()
         for (const FTMOPUppslagRow* SourceRow : CategoryRows)
         {
             const FString SourceDisplayTitle = SourceRow->Title.IsEmpty()
-                ? SourceRow->UppslagId.ToString() : SourceRow->Title.ToString();
+                ? SourceRow->UppslagId.ToString() : FTMOPLocalization::String(SourceRow->Title);
             AddHeading(FText::FromString(SourceDisplayTitle));
 
-            FString Details = SourceRow->bAddedToProject ? TEXT("Inlagt i projektet")
-                : SourceRow->bPartiallyAdded ? TEXT("Delvis inlagt")
-                : SourceRow->bRetrieved ? TEXT("Genomgången") : TEXT("Inte genomgången");
+            FString Details = SourceRow->bAddedToProject ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.6265ce0096115cb3", "Inlagt i projektet").ToString()
+                : SourceRow->bPartiallyAdded ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.8b0c5f8dcfc057b5", "Delvis inlagt").ToString()
+                : SourceRow->bRetrieved ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1cdd033700dd1dd7", "Genomgången").ToString() : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.1c53a8da7f5916ca", "Inte genomgången").ToString();
             Details += TEXT(" • ") + ReliabilityText(SourceRow->Reliability);
             if (!SourceRow->AuthorOrCreator.IsEmpty())
-                Details += TEXT("\nFörfattare/uppgiftslämnare: ") + SourceRow->AuthorOrCreator;
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.ce04a7a085ef312b", "\nFörfattare/uppgiftslämnare: ").ToString() + SourceRow->AuthorOrCreator;
             if (!SourceRow->PublicationOrPlatform.IsEmpty())
-                Details += TEXT("\nPublikation/plattform: ") + SourceRow->PublicationOrPlatform;
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.a41bccbaafdeefa7", "\nPublikation/plattform: ").ToString() + SourceRow->PublicationOrPlatform;
             if (!SourceRow->DocumentDate.IsEmpty())
-                Details += TEXT("\nDatum: ") + SourceRow->DocumentDate;
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.3b7ad75f7651297c", "\nDatum: ").ToString() + SourceRow->DocumentDate;
             if (!SourceRow->ISBNOrArchiveId.IsEmpty())
-                Details += TEXT("\nISBN/arkiv-ID: ") + SourceRow->ISBNOrArchiveId;
-            if (!SourceRow->PageOrLocation.IsEmpty())
-                Details += TEXT("\nSida/plats: ") + SourceRow->PageOrLocation;
-            if (!SourceRow->CitationText.IsEmpty())
-                Details += TEXT("\nKällhänvisning: ") + SourceRow->CitationText;
-            if (!SourceRow->ImplementedSummary.IsEmpty())
-                Details += TEXT("\nInlagt innehåll: ") + SourceRow->ImplementedSummary;
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.791b324cac7d6d10", "\nISBN/arkiv-ID: ").ToString() + SourceRow->ISBNOrArchiveId;
+            if (!FTMOPLocalization::String(SourceRow->PageOrLocation).IsEmpty())
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.95a31b40ffd7aa9d", "\nSida/plats: ").ToString() + FTMOPLocalization::String(SourceRow->PageOrLocation);
+            if (!FTMOPLocalization::String(SourceRow->CitationText).IsEmpty())
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.60e15a1c15302da1", "\nKällhänvisning: ").ToString() + FTMOPLocalization::String(SourceRow->CitationText);
+            if (!FTMOPLocalization::String(SourceRow->ImplementedSummary).IsEmpty())
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.c34936283d5ffe34", "\nInlagt innehåll: ").ToString() + FTMOPLocalization::String(SourceRow->ImplementedSummary);
             if (!SourceRow->SourceUrl.IsEmpty())
-                Details += TEXT("\nLänk: ") + SourceRow->SourceUrl;
+                Details += NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.e28473035d31f059", "\nLänk: ").ToString() + SourceRow->SourceUrl;
 
             const FString People = NameArrayText(SourceRow->PersonEntityIds);
             const FString Vehicles = NameArrayText(SourceRow->VehicleEntityIds);
@@ -1268,7 +1272,7 @@ void UTMOPPauseMenuWidget::BuildPublicationsPage()
             {
                 ++Count;
                 ContentBox->AddSlot().AutoHeight().Padding(2.0f, 4.0f)
-                [ SNew(SButton).Text(Newspaper->DisplayName)
+                [ SNew(SButton).Text(FTMOPLocalization::Text(Newspaper->DisplayName))
                   .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleOpenPublication, Newspaper) ];
             }
     if (Count == 0) AddBody(NSLOCTEXT("TMOP", "NoPublications", "Du har inte hittat några tidningar eller böcker ännu."));
@@ -1286,25 +1290,28 @@ FReply UTMOPPauseMenuWidget::HandleOpenPublication(UTMOPNewspaperItemDefinition*
 
 void UTMOPPauseMenuWidget::BuildSettingsPage()
 {
+    AddHeading(NSLOCTEXT("TMOP", "LanguageHeading", "Språk / Language"));
     ContentBox->AddSlot().AutoHeight().Padding(2.0f, 8.0f)
-    [SNew(SButton).Text(FText::FromString(TEXT("Player appearance")))
+    [ MakeTMOPLanguageSelector(GetGameInstance()) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f, 8.0f)
+    [SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "SettingsAppearance", "Spelarens utseende")))
         .OnClicked_Lambda([this] {
             if (PageContentHost.IsValid())
                 PageContentHost->SetContent(SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight()[SNew(SButton)
-                        .Text(FText::FromString(TEXT("◀ Inställningar")))
+                        .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "SettingsBack", "◀ Inställningar")))
                         .OnClicked_Lambda([this] { ShowSection(ETMOPPauseHubSection::Settings); return FReply::Handled(); })]
                     + SVerticalBox::Slot().FillHeight(1)[SNew(STMOPPlayerAppearancePanel).Player(PlayerCharacter.Get())]);
             return FReply::Handled();
         })];
     AddHeading(NSLOCTEXT("TMOP", "GraphicsQuality", "Grafikkvalitet"));
     TSharedRef<SHorizontalBox> Quality = SNew(SHorizontalBox);
-    const TArray<FText> Labels = { FText::FromString(TEXT("Low")), FText::FromString(TEXT("Medium")), FText::FromString(TEXT("High")), FText::FromString(TEXT("Epic")) };
+    const TArray<FText> Labels = { NSLOCTEXT("TMOP", "QualityLow", "Låg"), NSLOCTEXT("TMOP", "QualityMedium", "Medel"), NSLOCTEXT("TMOP", "QualityHigh", "Hög"), NSLOCTEXT("TMOP", "QualityEpic", "Episk") };
     for (int32 I = 0; I < Labels.Num(); ++I)
-        Quality->AddSlot().AutoWidth().Padding(3.0f)[ SNew(SButton).Text(Labels[I]).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleGraphicsQuality, I) ];
+        Quality->AddSlot().AutoWidth().Padding(3.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(Labels[I])).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleGraphicsQuality, I) ];
     ContentBox->AddSlot().AutoHeight()[Quality];
     AddHeading(NSLOCTEXT("TMOP", "InterfaceSettings", "Gränssnitt"));
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleLabels", "Visa/dölj namn och ikoner i världen")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleWorldLabels) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "ToggleLabels", "Visa/dölj namn och ikoner i världen"))).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleWorldLabels) ];
     AddBody(NSLOCTEXT("TMOP", "PersonLabelTextSizeHeading",
         "Textstorlek ovanför personer"));
     TSharedRef<SHorizontalBox> PersonTextSize = SNew(SHorizontalBox);
@@ -1314,15 +1321,15 @@ void UTMOPPauseMenuWidget::BuildSettingsPage()
         NSLOCTEXT("TMOP", "PersonLabelLarge", "Stor") };
     for (int32 I = 0; I < PersonTextSizeLabels.Num(); ++I)
         PersonTextSize->AddSlot().AutoWidth().Padding(3.0f)
-        [ SNew(SButton).Text(PersonTextSizeLabels[I])
+        [ SNew(SButton).Text(FTMOPLocalization::Text(PersonTextSizeLabels[I]))
           .OnClicked_UObject(this,
               &UTMOPPauseMenuWidget::HandlePersonLabelTextSize, I) ];
     ContentBox->AddSlot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 4.0f)
     [ PersonTextSize ];
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleMinimap", "Visa/dölj minimap")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleMinimap) ];
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleOlofLocationLine", "Visa/dölj röd positionslinje över Olof Palme")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleOlofLocationLine) ];
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleObservationLines", "Visa/dölj aktiva observationslinjer")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleObservationLines) ];
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ToggleVSync", "Växla VSync")).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleVSync) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "ToggleMinimap", "Visa/dölj minimap"))).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleMinimap) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "ToggleOlofLocationLine", "Visa/dölj röd positionslinje över Olof Palme"))).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleOlofLocationLine) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "ToggleObservationLines", "Visa/dölj aktiva observationslinjer"))).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleObservationLines) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "ToggleVSync", "Växla VSync"))).OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleToggleVSync) ];
 }
 
 FReply UTMOPPauseMenuWidget::HandleGraphicsQuality(const int32 Quality)
@@ -1361,7 +1368,7 @@ FReply UTMOPPauseMenuWidget::HandlePersonLabelTextSize(const int32 SizeIndex)
         : Size == ETMOPPersonLabelTextSize::Medium
             ? NSLOCTEXT("TMOP", "PersonLabelMediumApplied", "medium")
             : NSLOCTEXT("TMOP", "PersonLabelLargeApplied", "stor");
-    SetStatus(FText::Format(
+    SetStatus(FTMOPLocalization::Format(
         NSLOCTEXT("TMOP", "PersonLabelSizeApplied",
             "Textstorlek ovanför personer: {0}."),
         SizeName));
@@ -1417,7 +1424,7 @@ FReply UTMOPPauseMenuWidget::HandleToggleObservationLines()
 FReply UTMOPPauseMenuWidget::HandleToggleVSync()
 {
     if (UGameUserSettings* Settings = UGameUserSettings::GetGameUserSettings())
-    { Settings->SetVSyncEnabled(!Settings->IsVSyncEnabled()); Settings->ApplySettings(false); Settings->SaveSettings(); SetStatus(Settings->IsVSyncEnabled() ? FText::FromString(TEXT("VSync: On")) : FText::FromString(TEXT("VSync: Off"))); }
+    { Settings->SetVSyncEnabled(!Settings->IsVSyncEnabled()); Settings->ApplySettings(false); Settings->SaveSettings(); SetStatus(Settings->IsVSyncEnabled() ? NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.0dc4842eea1ab3f1", "VSync: On") : NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.3913f5eb6c5a99a0", "VSync: Off")); }
     return FReply::Handled();
 }
 
@@ -1430,7 +1437,7 @@ void UTMOPPauseMenuWidget::BuildMapPage()
 {
     if (!IsValid(PlayerCharacter) || !IsValid(PlayerCharacter->MapComponent))
     {
-        AddBody(FText::FromString(TEXT("Kartkomponenten saknas.")));
+        AddBody(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.e46b75f9f7c8d932", "Kartkomponenten saknas."));
         return;
     }
     if (!IsValid(EmbeddedMapWidget))
@@ -1459,9 +1466,9 @@ void UTMOPPauseMenuWidget::BuildSaveLoadPage()
         ManualSaveSlotPrefix, ManualSaveSlotCount);
     ContentBox->AddSlot().AutoHeight().Padding(2.0f, 7.0f, 2.0f, 14.0f)
     [ SNew(SButton)
-      .Text(FreeSlot.IsEmpty()
+      .Text(FTMOPLocalization::Text(FreeSlot.IsEmpty()
           ? NSLOCTEXT("TMOP", "SaveSlotsFull", "ALLA SPARPLATSER ÄR UPPTAGNA")
-          : NSLOCTEXT("TMOP", "CreateNewSave", "+ SKAPA NY SPARNING"))
+          : NSLOCTEXT("TMOP", "CreateNewSave", "+ SKAPA NY SPARNING")))
       .IsEnabled(!FreeSlot.IsEmpty())
       .OnClicked_UObject(this, &UTMOPPauseMenuWidget::HandleCreateNewSaveClicked) ];
 
@@ -1474,23 +1481,20 @@ void UTMOPPauseMenuWidget::BuildSaveLoadPage()
     }
     for (const FTMOPSaveSlotInfo& Info : Slots)
     {
-        const FString Detail = FString::Printf(TEXT("Plats: %s   •   Nivå: %s   •   Sparad: %s"),
-            *Info.LocationName,
-            Info.MapName.IsEmpty() ? TEXT("Okänd") : *Info.MapName,
-            Info.SavedAtText.IsEmpty() ? TEXT("Äldre sparfil") : *Info.SavedAtText);
+        const FString Detail = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.01e8a8aeac3fa85a", "Plats: {0}   •   Nivå: {1}   •   Sparad: {2}"), FTMOPLocalization::Text(FString(Info.LocationName)), FTMOPLocalization::Text(FString(Info.MapName.IsEmpty() ? TEXT("Okänd") : *Info.MapName)), FTMOPLocalization::Text(FString(Info.SavedAtText.IsEmpty() ? TEXT("Äldre sparfil") : *Info.SavedAtText))).ToString();
         const FText Title = FText::FromString(FString::Printf(TEXT("%s   —   %s"),
             *Info.DisplayName, *Info.GameTime.ToDisplayString()));
         ContentBox->AddSlot().AutoHeight().Padding(2.0f, 5.0f)
         [ SNew(SBorder).Padding(12.0f)
           [ SNew(SVerticalBox)
             + SVerticalBox::Slot().AutoHeight()
-            [ SNew(STextBlock).Text(Title).Font(
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(Title)).Font(
                 ATMOPTypographyDirector::ResolveFont(this, TEXT("PauseMenuSaveTitle"),
                     FCoreStyle::GetDefaultFontStyle("Bold", 17)))
               .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
                   TEXT("PauseMenuSaveTitle"), FLinearColor::White)) ]
             + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 4.0f, 0.0f, 8.0f)
-            [ SNew(STextBlock).Text(FText::FromString(Detail))
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(FText::FromString(Detail)))
               .Font(ATMOPTypographyDirector::ResolveFont(this,
                   TEXT("PauseMenuSaveDetails"),
                   FCoreStyle::GetDefaultFontStyle("Regular", 14)))
@@ -1500,18 +1504,18 @@ void UTMOPPauseMenuWidget::BuildSaveLoadPage()
             + SVerticalBox::Slot().AutoHeight()
             [ SNew(SHorizontalBox)
               + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
-              [ SNew(SButton).Text(NSLOCTEXT("TMOP", "LoadSelectedSave", "LADDA"))
+              [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "LoadSelectedSave", "LADDA")))
                 .OnClicked_UObject(this,
                     &UTMOPPauseMenuWidget::HandleLoadSaveSlotClicked, Info.SlotName) ]
               + SHorizontalBox::Slot().AutoWidth().Padding(0.0f, 0.0f, 8.0f, 0.0f)
-              [ SNew(SButton).Text(NSLOCTEXT("TMOP", "OverwriteSelectedSave", "SKRIV ÖVER"))
+              [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "OverwriteSelectedSave", "SKRIV ÖVER")))
                 .OnClicked_UObject(this,
                     &UTMOPPauseMenuWidget::HandleOverwriteSaveClicked, Info.SlotName) ]
               + SHorizontalBox::Slot().AutoWidth()
               [ SNew(SButton)
-                .Text(PendingDeleteSaveSlot == Info.SlotName
+                .Text(FTMOPLocalization::Text(PendingDeleteSaveSlot == Info.SlotName
                     ? NSLOCTEXT("TMOP", "ConfirmDeleteSave", "BEKRÄFTA RADERING")
-                    : NSLOCTEXT("TMOP", "DeleteSelectedSave", "RADERA"))
+                    : NSLOCTEXT("TMOP", "DeleteSelectedSave", "RADERA")))
                 .OnClicked_UObject(this,
                     &UTMOPPauseMenuWidget::HandleDeleteSaveSlotClicked, Info.SlotName) ] ] ] ];
     }
@@ -1560,7 +1564,7 @@ FReply UTMOPPauseMenuWidget::HandleCreateNewSaveClicked()
     FText Status;
     const bool bSaved = FTMOPSaveGameService::SavePlayer(GetWorld(),
         PlayerCharacter, NewSaveSlot,
-        FString::Printf(TEXT("Manuell sparning %d"), SlotIndex),
+        FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPPauseMenuWidget.d32d4c66ce8ae8fc", "Manuell sparning {0}"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), SlotIndex))).ToString(),
         ETMOPMenuSaveKind::Manual, Status);
     PendingDeleteSaveSlot.Reset();
     if (CurrentSection == ETMOPPauseHubSection::SaveLoad && ContentBox.IsValid())
@@ -1615,7 +1619,7 @@ FReply UTMOPPauseMenuWidget::HandleDeleteSaveSlotClicked(FString SlotName)
 void UTMOPPauseMenuWidget::BuildQuitPage()
 {
     AddBody(NSLOCTEXT("TMOP", "QuitWarning", "Vill du avsluta spelet? Osparade framsteg försvinner."));
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f,8.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ConfirmQuit", "AVSLUTA SPELET")).OnClicked_UObject(this,&UTMOPPauseMenuWidget::HandleQuitClicked) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f,8.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "ConfirmQuit", "AVSLUTA SPELET"))).OnClicked_UObject(this,&UTMOPPauseMenuWidget::HandleQuitClicked) ];
 }
 
 FReply UTMOPPauseMenuWidget::HandleQuitClicked()
@@ -1626,8 +1630,8 @@ void UTMOPPauseMenuWidget::BuildMoveInTimePage()
     AddBody(NSLOCTEXT("TMOP", "MoveTimeInstructions", "Skriv HH:MM eller HH:MM:SS. Endast 23:00:00–23:45:00 godtas. Tiden avrundas till närmaste femsekunderssteg. En giltig historisk bake krävs."));
     FString Current = TEXT("23:00:00");
     if (IsValid(PlayerCharacter)) if (UTMOPClockSubsystem* Clock = PlayerCharacter->GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>()) Current = Clock->GetCurrentTime().ToDisplayString();
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f,8.0f)[ SAssignNew(TimeEntryBox,SEditableTextBox).Text(FText::FromString(Current)).HintText(FText::FromString(TEXT("23:21:30"))) ];
-    ContentBox->AddSlot().AutoHeight().Padding(2.0f,5.0f)[ SNew(SButton).Text(NSLOCTEXT("TMOP", "ApplyMoveTime", "FLYTTA TILL KLOCKSLAGET")).OnClicked_UObject(this,&UTMOPPauseMenuWidget::HandleMoveInTimeClicked) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f,8.0f)[ SAssignNew(TimeEntryBox,SEditableTextBox).Text(FTMOPLocalization::Text(FText::FromString(Current))).HintText(FText::FromString(TEXT("23:21:30"))) ];
+    ContentBox->AddSlot().AutoHeight().Padding(2.0f,5.0f)[ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "ApplyMoveTime", "FLYTTA TILL KLOCKSLAGET"))).OnClicked_UObject(this,&UTMOPPauseMenuWidget::HandleMoveInTimeClicked) ];
 }
 
 FReply UTMOPPauseMenuWidget::HandleMoveInTimeClicked()
@@ -1663,4 +1667,4 @@ FReply UTMOPPauseMenuWidget::NativeOnKeyDown(const FGeometry& Geometry,const FKe
 }
 
 void UTMOPPauseMenuWidget::SetStatus(const FText& Text)
-{ if (StatusText.IsValid()) StatusText->SetText(Text); }
+{ if (StatusText.IsValid()) StatusText->SetText(FTMOPLocalization::Text(Text)); }

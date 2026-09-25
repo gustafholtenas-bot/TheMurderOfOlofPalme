@@ -1,4 +1,5 @@
 #include "UI/TMOPAgentInfoChartWidget.h"
+#include "Localization/TMOPLocalization.h"
 #include "UI/TMOPLocalPanel.h"
 #include "UI/STMOPObservationMap.h"
 #include "UI/TMOPControlUIHelpers.h"
@@ -30,62 +31,62 @@ void UTMOPAgentInfoChartWidget::InitializeAgentInfo(
 }
 
 void UTMOPAgentInfoChartWidget::ShowAgentInfo(
-    const FTMOPPersonProfileRow& Profile, const FText& TimelineSummary,
+    const FTMOPPersonProfileRow& SourceProfile, const FText& TimelineSummary,
     const bool bPoliceInterviewed, const FName InspectedEntityId)
 {
+    const FTMOPPersonProfileRow Profile = FTMOPLocalization::RowView(
+        TEXT("DT_TMOP_People"), InspectedEntityId.ToString(), SourceProfile);
     const FText Name = UTMOPPersonNameLibrary::FormatPersonName(Profile.FullName, Profile.FirstName, Profile.LastName);
-    if (NameText.IsValid()) NameText->SetText(Name.IsEmpty()
-        ? NSLOCTEXT("TMOP", "UnnamedPersonDisplay", "Okänd person") : Name);
+    if (NameText.IsValid()) NameText->SetText(FTMOPLocalization::Text(Name.IsEmpty()
+        ? NSLOCTEXT("TMOP", "UnnamedPersonDisplay", "Okänd person") : Name));
 
     TArray<FString> IdentityParts;
     if (Profile.IsDogProfile())
-        IdentityParts.Add(TEXT("Hund"));
+        IdentityParts.Add(NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.0e80fd31dfbcb743", "Hund").ToString());
     else switch (Profile.Gender)
     {
-    case ETMOPPersonGender::Female: IdentityParts.Add(TEXT("Kvinna")); break;
-    case ETMOPPersonGender::Male: IdentityParts.Add(TEXT("Man")); break;
+    case ETMOPPersonGender::Female: IdentityParts.Add(NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.7f3e681856b576f0", "Kvinna").ToString()); break;
+    case ETMOPPersonGender::Male: IdentityParts.Add(NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.8b70bb3a4d458cf2", "Man").ToString()); break;
     case ETMOPPersonGender::OtherOrUnspecified:
-        IdentityParts.Add(TEXT("Annat / ej angivet")); break;
-    default: IdentityParts.Add(TEXT("Kön ej angivet")); break;
+        IdentityParts.Add(NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.ba49620fda091110", "Annat / ej angivet").ToString()); break;
+    default: IdentityParts.Add(NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.fcae4b26307c86a1", "Kön ej angivet").ToString()); break;
     }
     if (Profile.AgeAtEvent > 0)
-        IdentityParts.Add(FString::Printf(TEXT("%d år 1986"), Profile.AgeAtEvent));
-    if (!Profile.Occupation.IsEmpty()) IdentityParts.Add(Profile.Occupation);
+        IdentityParts.Add(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.c0780ef220aac770", "{0} år 1986"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Profile.AgeAtEvent))).ToString());
+    if (!Profile.Occupation.IsEmpty()) IdentityParts.Add(FTMOPLocalization::String(Profile.Occupation));
     if (!Profile.Uppslag.IsEmpty())
-        IdentityParts.Add(FString::Printf(TEXT("Uppslag %s"), *Profile.Uppslag));
-    if (IdentityText.IsValid()) IdentityText->SetText(FText::FromString(
-        IdentityParts.IsEmpty() ? TEXT("Historisk person")
-            : FString::Join(IdentityParts, TEXT("  •  "))));
-    if (InterviewStatusText.IsValid()) InterviewStatusText->SetText(
+        IdentityParts.Add(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.86069abb0a6683c6", "Uppslag {0}"), FTMOPLocalization::Text(FString(Profile.Uppslag))).ToString());
+    if (IdentityText.IsValid()) IdentityText->SetText(FTMOPLocalization::Text(FText::FromString(IdentityParts.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.d59ed2e9b98bc827", "Historisk person").ToString()
+            : FString::Join(IdentityParts, TEXT("  •  ")))));
+    if (InterviewStatusText.IsValid()) InterviewStatusText->SetText(FTMOPLocalization::Text(
         bPoliceInterviewed
             ? NSLOCTEXT("TMOP", "AgentInfoInterviewedYes", "FÖRHÖRD AV POLIS: JA")
-            : NSLOCTEXT("TMOP", "AgentInfoInterviewedNo", "FÖRHÖRD AV POLIS: EJ FÖRHÖRD / EJ BELAGT"));
+            : NSLOCTEXT("TMOP", "AgentInfoInterviewedNo", "FÖRHÖRD AV POLIS: EJ FÖRHÖRD / EJ BELAGT")));
     if (InterviewStatusText.IsValid()) InterviewStatusText->SetColorAndOpacity(
         bPoliceInterviewed ? FLinearColor(0.40f, 0.85f, 0.58f)
                            : FLinearColor(0.95f, 0.12f, 0.10f));
-    TArray<FString> TimelineWords;
-    TimelineSummary.ToString().ParseIntoArrayWS(TimelineWords);
-    if (TimelineText.IsValid()) TimelineText->SetText(TimelineWords.IsEmpty()
+    // Resolve before any whitespace changes so long table texts retain their identity.
+    if (TimelineText.IsValid()) TimelineText->SetText(TimelineSummary.IsEmpty()
         ? NSLOCTEXT("TMOP", "AgentInfoNoTimeline", "Ingen läsbar tidslinje är registrerad.")
-        : FText::FromString(FString::Join(TimelineWords, TEXT(" "))));
-    if (ObservationText.IsValid()) ObservationText->SetText(
+        : FTMOPLocalization::Text(TimelineSummary));
+    if (ObservationText.IsValid()) ObservationText->SetText(FTMOPLocalization::Text(
         Profile.ObservationSummary.IsEmpty()
             ? NSLOCTEXT("TMOP", "AgentInfoNoObservations",
                 "Inga egna observationer är sammanfattade ännu.")
-            : Profile.ObservationSummary);
+            : Profile.ObservationSummary));
     if (ObserversText.IsValid())
-        ObserversText->SetText(BuildObserverSummary(InspectedEntityId));
-    if (PostMurderEventsText.IsValid()) PostMurderEventsText->SetText(
+        ObserversText->SetText(FTMOPLocalization::Text(BuildObserverSummary(InspectedEntityId)));
+    if (PostMurderEventsText.IsValid()) PostMurderEventsText->SetText(FTMOPLocalization::Text(
         Profile.PostMurderEventsSummary.IsEmpty()
             ? NSLOCTEXT("TMOP", "AgentInfoNoPostMurderEvents",
                 "Inga källbelagda händelser efter mordet är registrerade ännu.")
-            : Profile.PostMurderEventsSummary);
+            : Profile.PostMurderEventsSummary));
     RefreshEvidenceGallery(Profile);
     FString Sources = Profile.AgentInfoSourceReference;
     if (Sources.IsEmpty()) Sources = Profile.GeneralSourceReference;
-    if (SourceText.IsValid()) SourceText->SetText(Sources.IsEmpty()
+    if (SourceText.IsValid()) SourceText->SetText(FTMOPLocalization::Text(Sources.IsEmpty()
         ? NSLOCTEXT("TMOP", "AgentInfoNoSources", "Källhänvisning saknas.")
-        : FText::FromString(Sources));
+        : FText::FromString(Sources)));
     bChartVisible = true;
     if (ScrollBox.IsValid()) ScrollBox->ScrollToStart();
     RefreshVisibility();
@@ -126,7 +127,7 @@ FText UTMOPAgentInfoChartWidget::BuildObserverSummary(
         if (DisplayName.IsEmpty())
             DisplayName = FText::FromString(
                 ObserverId.ToString().Replace(TEXT("_"), TEXT(" ")));
-        Lines.Add(FString::Printf(TEXT("• %s"), *DisplayName.ToString()));
+        Lines.Add(FString::Printf(TEXT("• %s"), *FTMOPLocalization::String(DisplayName)));
     }
     return FText::FromString(FString::Join(Lines, TEXT("\n")));
 }
@@ -194,7 +195,7 @@ void UTMOPAgentInfoChartWidget::RefreshEvidenceGallery(
                 ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f, 0.0f, 0.0f)
                 [
-                    SNew(STextBlock).Text(Caption)
+                    SNew(STextBlock).Text(FTMOPLocalization::Text(Caption))
                     .Font(ATMOPTypographyDirector::ResolveFont(this,
                         TEXT("AgentInfoCaption"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 12)))
@@ -223,7 +224,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
 {
     const auto SectionHeader = [this](const FText& Text)
     {
-        return SNew(STextBlock).Text(Text).AutoWrapText(true)
+        return SNew(STextBlock).Text(FTMOPLocalization::Text(Text)).AutoWrapText(true)
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AgentInfoHeading"),
                 FCoreStyle::GetDefaultFontStyle("Bold", 17)))
             .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -273,7 +274,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                       [ SNew(SBorder)
                         .BorderBackgroundColor(FLinearColor(0.92f, 0.92f, 0.90f, 1))
                         [ SAssignNew(EvidenceGalleryPlaceholder, STextBlock)
-                          .Text(NSLOCTEXT("TMOP", "AgentInfoPortraitPlaceholder", "INGA BILDER REGISTRERADE"))
+                          .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "AgentInfoPortraitPlaceholder", "INGA BILDER REGISTRERADE")))
                           .Justification(ETextJustify::Center)
                           .ColorAndOpacity(FLinearColor(0.08f, 0.08f, 0.08f, 1)) ] ]
                       + SOverlay::Slot()
@@ -282,7 +283,7 @@ TSharedRef<SWidget> UTMOPAgentInfoChartWidget::RebuildWidget()
                   + SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Top)
                   [ SNew(SButton)
                     .ContentPadding(FMargin(14.0f, 7.0f))
-                    .Text(NSLOCTEXT("TMOP", "CloseAgentInfo", "Stäng"))
+                    .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "CloseAgentInfo", "Stäng")))
                     .OnClicked_UObject(this,
                         &UTMOPAgentInfoChartWidget::HandleCloseClicked) ] ]
                 + SVerticalBox::Slot().FillHeight(1.0f)
@@ -419,7 +420,6 @@ void UTMOPAgentInfoChartWidget::SetObservationLocations(const TArray<FTMOPNotebo
             .Points(Points));
     TArray<FString> Lines;
     for (const auto& P : Points)
-        Lines.AddUnique(FTMOPTime::FromSecondsFromMidnight(P.Second).ToDisplayString() + TEXT(" — ") + P.Address.ToString() + (P.bPlayerObservation ? TEXT(" (egen observation)") : TEXT("")));
-    if (ObservationPlacesText.IsValid()) ObservationPlacesText->SetText(FText::FromString(
-        Lines.IsEmpty() ? TEXT("Ingen fastställd observationsplats registrerad.") : FString::Join(Lines, TEXT("\n"))));
+        Lines.AddUnique(FTMOPTime::FromSecondsFromMidnight(P.Second).ToDisplayString() + TEXT(" — ") + P.Address.ToString() + (P.bPlayerObservation ? NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.b2aa15e0ed32de6d", " (egen observation)").ToString() : TEXT("")));
+    if (ObservationPlacesText.IsValid()) ObservationPlacesText->SetText(FTMOPLocalization::Text(FText::FromString(Lines.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPAgentInfoChartWidget.37e66f08b14ac98c", "Ingen fastställd observationsplats registrerad.").ToString() : FString::Join(Lines, TEXT("\n")))));
 }

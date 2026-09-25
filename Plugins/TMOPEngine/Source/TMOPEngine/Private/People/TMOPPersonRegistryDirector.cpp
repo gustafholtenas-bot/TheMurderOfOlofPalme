@@ -1,4 +1,5 @@
 #include "People/TMOPPersonRegistryDirector.h"
+#include "Localization/TMOPLocalization.h"
 #include "TMOPAutomaticSpeechScheduler.h"
 
 #include "Animation/AnimInstance.h"
@@ -338,8 +339,11 @@ void ATMOPPersonRegistryDirector::EvaluateAutomaticSpeech(
         const FTMOPTimedSpeechLine& DueLine = Runtime.Profile.AutomaticSpeech[DueIndex];
         USoundBase* VoiceOver = DueLine.VoiceOver.IsNull()
             ? nullptr : DueLine.VoiceOver.LoadSynchronous();
+        const FText Speech = FTMOPLocalization::TableText(
+            IsValid(PersonProfileTable) ? PersonProfileTable->GetName() : TEXT("DT_TMOP_People"),
+            Runtime.RowName.ToString(), FString::Printf(TEXT("AutomaticSpeech[%d].Text"), DueIndex), DueLine.Text);
         Agent->ShowAutomaticSpeech(
-            DueLine.Text, VoiceOver, DueLine.DisplayDurationOverrideSeconds);
+            Speech, VoiceOver, DueLine.DisplayDurationOverrideSeconds);
     }
 }
 
@@ -1880,19 +1884,19 @@ ATMOPHistoricalAgent* ATMOPPersonRegistryDirector::FindSpawnedPerson(const FName
 FText ATMOPPersonRegistryDirector::GetPersonDialog(
     const FName EntityId, const bool bAfterShot) const
 {
+    const FString Table = IsValid(PersonProfileTable) ? PersonProfileTable->GetName() : TEXT("DT_TMOP_People");
+    const FString Field = bAfterShot ? TEXT("Dialog.AfterShot") : TEXT("Dialog.BeforeShot");
     if (const FPersonRuntime* Runtime = RuntimePeople.Find(EntityId))
-        return bAfterShot
-            ? Runtime->Profile.Dialog.AfterShot
-            : Runtime->Profile.Dialog.BeforeShot;
+        return FTMOPLocalization::TableText(Table, Runtime->RowName.ToString(), Field,
+            bAfterShot ? Runtime->Profile.Dialog.AfterShot : Runtime->Profile.Dialog.BeforeShot);
     if (IsValid(PersonProfileTable))
         for (const FName RowName : PersonProfileTable->GetRowNames())
             if (const FTMOPPersonProfileRow* Row =
                 PersonProfileTable->FindRow<FTMOPPersonProfileRow>(
                     RowName, TEXT("TMOPPersonDialog"), false))
                 if (Row->EntityId == EntityId)
-                    return bAfterShot
-                        ? Row->Dialog.AfterShot
-                        : Row->Dialog.BeforeShot;
+                    return FTMOPLocalization::TableText(Table, RowName.ToString(), Field,
+                        bAfterShot ? Row->Dialog.AfterShot : Row->Dialog.BeforeShot);
     return FText::GetEmpty();
 }
 

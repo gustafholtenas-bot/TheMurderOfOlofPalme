@@ -1,0 +1,18 @@
+[
+  "DataTables/09_21/DT_TMOP_People.json",
+  "DataTables/09_21/DT_TMOP_HistoricalVehicles.json",
+  "DataTables/09_19/DT_TMOP_Observations.json",
+  "DataTables/09_19/DT_TMOP_Groups.json",
+  "DataTables/09_21/DT_TMOP_HistoricalEvents.json",
+  "DataTables/09_19/DT_TMOP_ObservationLinks.json",
+  "DataTables/09_19/DT_TMOP_Uppslag_REGISTER.json",
+  "DataTables/09_14/DT_TMOP_AddressRegistry.json",
+  "DataTables/09_16/DT_TMOP_AfterMurderEvents.json",
+  "DataTables/09_25/DT_TMOP_MurderKnowledge.json",
+  "DataTables/09_16/DT_TMOP_MurderDayMysteries.json",
+  "DataTables/09_07/DT_TMOP_RecordedCalls.json",
+  "DataTables/09_13/DT_TMOP_MetroArrivals_Northbound.json",
+  "DataTables/09_07/DT_TMOP_introcards.json",
+  "DataTables/09_21/DT_TMOP_ItemMeshes.json",
+  "DataTables/09_21/DT_TMOP_AppearanceAssets.json"
+]

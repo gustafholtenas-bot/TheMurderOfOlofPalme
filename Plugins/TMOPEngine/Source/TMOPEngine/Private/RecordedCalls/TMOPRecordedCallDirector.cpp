@@ -1,4 +1,5 @@
 #include "RecordedCalls/TMOPRecordedCallDirector.h"
+#include "Localization/TMOPLocalization.h"
 
 #include "Components/AudioComponent.h"
 #include "Engine/DataTable.h"
@@ -362,6 +363,9 @@ bool ATMOPRecordedCallDirector::GetActiveSubtitle(const FName RecordingId,
         [RecordingId](const FTMOPRecordedCallRow& Candidate)
         { return Candidate.RecordingId == RecordingId; });
     if (Row == nullptr) return false;
+    const FTMOPRecordedCallRow SubtitleView = FTMOPLocalization::RowView(
+        IsValid(RecordedCallTable) ? RecordedCallTable->GetName() : TEXT("DT_TMOP_RecordedCalls"), RecordingId.ToString(), *Row);
+    Row = &SubtitleView;
     const float AudioSecond = CalculateAudioOffset(*Row,
         Clock->GetCurrentTime().ToSecondsFromMidnight());
     const FTMOPRecordedCallSpeechSegment* ActiveSegment = nullptr;

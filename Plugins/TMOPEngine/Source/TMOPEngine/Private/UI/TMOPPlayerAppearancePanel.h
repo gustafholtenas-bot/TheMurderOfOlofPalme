@@ -35,7 +35,7 @@ private:
     FReply ChangeBuild();
     FReply ChangeColor();
     FText PartLabel(ETMOPAppearancePartType Type) const;
-    TSharedRef<SWidget> PartRow(ETMOPAppearancePartType Type, const FString& Label);
+    TSharedRef<SWidget> PartRow(ETMOPAppearancePartType Type, const FText& Label);
     TWeakObjectPtr<ATMOPPlayerCharacter> Player;
     TWeakObjectPtr<ATMOPPlayerAppearanceDirector> Director;
     FTMOPPersonProfileRow Draft;

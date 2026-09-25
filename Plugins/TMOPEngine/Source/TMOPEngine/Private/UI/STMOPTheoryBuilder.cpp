@@ -249,9 +249,9 @@ void STMOPTheoryBuilder::Construct(const FArguments& Args)
         P->SynchronizeTheoryShooters();
         if (!Tree() && !P->TheoryTrees.IsEmpty()) P->ActiveTheoryTreeId = P->TheoryTrees[0].Id;
     }
-    auto Button = [](const TCHAR* Label, TFunction<FReply()> Action)
+    auto Button = [](const FText& Label, TFunction<FReply()> Action)
     {
-        return SNew(SButton).Text(FText::FromString(Label)).OnClicked_Lambda(MoveTemp(Action));
+        return SNew(SButton).Text(Label).OnClicked_Lambda(MoveTemp(Action));
     };
     TSharedRef<SVerticalBox> Templates = SNew(SVerticalBox);
     for (int32 I = 0; I < 4; ++I)
@@ -260,47 +260,47 @@ void STMOPTheoryBuilder::Construct(const FArguments& Args)
             (Tree() && Tree()->TemplateIndex == I ? TEXT("●  ") : TEXT("○  ")) + TMOPTheory::TemplateName(I)); })
          .OnClicked_Lambda([this, I]() { NewTree(I); return FReply::Handled(); })];
     TSharedRef<SWrapBox> Toolbar = SNew(SWrapBox).UseAllottedSize(true);
-    Toolbar->AddSlot().Padding(2)[Button(TEXT("+ Person"), [this]() { AddNode(ETMOPTheoryNodeKind::Person); return FReply::Handled(); })];
-    Toolbar->AddSlot().Padding(2)[Button(TEXT("+ Fordon"), [this]() { AddNode(ETMOPTheoryNodeKind::Vehicle); return FReply::Handled(); })];
-    Toolbar->AddSlot().Padding(2)[Button(TEXT("+ Anteckning"), [this]() { AddNode(ETMOPTheoryNodeKind::Note); return FReply::Handled(); })];
+    Toolbar->AddSlot().Padding(2)[Button(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.485c1dd561e7db54", "+ Person"), [this]() { AddNode(ETMOPTheoryNodeKind::Person); return FReply::Handled(); })];
+    Toolbar->AddSlot().Padding(2)[Button(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.468f5208fa0ca42b", "+ Fordon"), [this]() { AddNode(ETMOPTheoryNodeKind::Vehicle); return FReply::Handled(); })];
+    Toolbar->AddSlot().Padding(2)[Button(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.d5ab26d9a19c8f76", "+ Anteckning"), [this]() { AddNode(ETMOPTheoryNodeKind::Note); return FReply::Handled(); })];
     Toolbar->AddSlot().Padding(2)[SNew(SButton)
-        .Text_Lambda([this]() { return FText::FromString(bLinkMode ? TEXT("Avsluta linjer") : TEXT("Dra linjer")); })
+        .Text_Lambda([this]() { return FText::FromString(bLinkMode ? NSLOCTEXT("TMOP", "STMOPTheoryBuilder.60f80f97e84cb6a4", "Avsluta linjer").ToString() : NSLOCTEXT("TMOP", "STMOPTheoryBuilder.6dadf155ba79d8eb", "Dra linjer").ToString()); })
         .OnClicked_Lambda([this]() { bLinkMode = !bLinkMode; LinkStart.Invalidate(); Status = bLinkMode
-            ? TEXT("Klicka på två rutor för att koppla ihop dem.") : TEXT(""); return FReply::Handled(); })];
-    Toolbar->AddSlot().Padding(2)[Button(TEXT("Ta bort markerad"), [this]() { DeleteSelection(); return FReply::Handled(); })];
-    Toolbar->AddSlot().Padding(2)[SNew(SButton).Text(FText::FromString(TEXT("Ångra")))
+            ? NSLOCTEXT("TMOP", "TheorySelectTwoNodes", "Klicka på två rutor för att koppla ihop dem.").ToString() : TEXT(""); return FReply::Handled(); })];
+    Toolbar->AddSlot().Padding(2)[Button(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.facd3929ad01c9f5", "Ta bort markerad"), [this]() { DeleteSelection(); return FReply::Handled(); })];
+    Toolbar->AddSlot().Padding(2)[SNew(SButton).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.42564357b89b190b", "Ångra"))
         .IsEnabled_Lambda([this]() { return !UndoStack.IsEmpty(); })
         .OnClicked_Lambda([this]() { Undo(false); return FReply::Handled(); })];
-    Toolbar->AddSlot().Padding(2)[SNew(SButton).Text(FText::FromString(TEXT("Gör om")))
+    Toolbar->AddSlot().Padding(2)[SNew(SButton).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.af106b6c1ae7d020", "Gör om"))
         .IsEnabled_Lambda([this]() { return !RedoStack.IsEmpty(); })
         .OnClicked_Lambda([this]() { Undo(true); return FReply::Handled(); })];
-    Toolbar->AddSlot().Padding(2)[Button(TEXT("Visa hela trädet"), [this]() { if (Canvas) Canvas->Fit(); return FReply::Handled(); })];
+    Toolbar->AddSlot().Padding(2)[Button(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.ce5874f50b9c7da8", "Visa hela trädet"), [this]() { if (Canvas) Canvas->Fit(); return FReply::Handled(); })];
 
     ChildSlot[SNew(SVerticalBox)
         + SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 8)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("Börja med en mall. Varje klick skapar ett nytt träd. Mallarna är arbetsstrukturer, inte slutsatser om mordet."))).AutoWrapText(true)]
+        [SNew(STextBlock).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.17ab7b2b7672695e", "Börja med en mall. Varje klick skapar ett nytt träd. Mallarna är arbetsstrukturer, inte slutsatser om mordet.")).AutoWrapText(true)]
         + SVerticalBox::Slot().AutoHeight()[Templates]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 6)
         [SNew(SWrapBox).UseAllottedSize(true)
             + SWrapBox::Slot().Padding(2)[SNew(SComboButton).OnGetMenuContent(this, &STMOPTheoryBuilder::TreeMenu)
-                .ButtonContent()[SNew(STextBlock).Text_Lambda([this]() { return FText::FromString(Tree() ? Tree()->Title : TEXT("Välj ett träd")); })]]
-            + SWrapBox::Slot().Padding(2)[Button(TEXT("Duplicera träd"), [this]() {
+                .ButtonContent()[SNew(STextBlock).Text_Lambda([this]() { return FText::FromString(Tree() ? Tree()->Title : NSLOCTEXT("TMOP", "STMOPTheoryBuilder.3b16a68dd56a6c7d", "Välj ett träd").ToString()); })]]
+            + SWrapBox::Slot().Padding(2)[Button(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.e9a91ec596c9614c", "Duplicera träd"), [this]() {
                 if (auto* T = Tree()) { Remember(); auto Copy = *T; Copy.Id = FGuid::NewGuid(); Copy.Title += TEXT(" — kopia");
                     Player->TheoryTrees.Add(Copy); Player->ActiveTheoryTreeId = Copy.Id; ClearSelection(); }
                 return FReply::Handled(); })]
             + SWrapBox::Slot().Padding(2)[SNew(SButton)
-                .Text_Lambda([this]() { return FText::FromString(bConfirmDeleteTree ? TEXT("Bekräfta radering av träd") : TEXT("Radera träd")); })
+                .Text_Lambda([this]() { return FText::FromString(bConfirmDeleteTree ? NSLOCTEXT("TMOP", "STMOPTheoryBuilder.cc97b00077b562dc", "Bekräfta radering av träd").ToString() : NSLOCTEXT("TMOP", "STMOPTheoryBuilder.9bef578d2c8fdfed", "Radera träd").ToString()); })
                 .OnClicked_Lambda([this]() {
                     if (!Tree()) return FReply::Handled();
-                    if (!bConfirmDeleteTree) { bConfirmDeleteTree = true; Status = TEXT("Klicka igen för att radera det valda trädet. Ångra kan återställa det."); return FReply::Handled(); }
+                    if (!bConfirmDeleteTree) { bConfirmDeleteTree = true; Status = NSLOCTEXT("TMOP", "STMOPTheoryBuilder.f06a054bad79ee98", "Klicka igen för att radera det valda trädet. Ångra kan återställa det.").ToString(); return FReply::Handled(); }
                     Remember(); const FGuid Id = Player->ActiveTheoryTreeId;
                     Player->TheoryTrees.RemoveAll([Id](const auto& T) { return T.Id == Id; });
                     Player->ActiveTheoryTreeId = Player->TheoryTrees.IsEmpty() ? FGuid() : Player->TheoryTrees[0].Id;
                     ClearSelection(); return FReply::Handled(); })]
-            + SWrapBox::Slot().Padding(2)[SNew(SButton).Text(FText::FromString(TEXT("Spara träd och spel")))
+            + SWrapBox::Slot().Padding(2)[SNew(SButton).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.a9f876dcf3c8b7be", "Spara träd och spel"))
                 .OnClicked_Lambda([this]() { return Save.IsBound() ? Save.Execute() : FReply::Handled(); })]]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 4)
-        [SNew(SEditableTextBox).HintText(FText::FromString(TEXT("Trädets namn")))
+        [SNew(SEditableTextBox).HintText(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.e7234cefb5c77b43", "Trädets namn"))
             .Text_Lambda([this]() { return FText::FromString(Tree() ? Tree()->Title : TEXT("")); })
             .IsEnabled_Lambda([this]() { return Tree() != nullptr; })
             .OnTextChanged_Lambda([this](const FText& Text) { if (auto* T = Tree()) {
@@ -308,7 +308,7 @@ void STMOPTheoryBuilder::Construct(const FArguments& Args)
                 RememberField(TEXT("tree_title")); T->Title = Value; } })]
         + SVerticalBox::Slot().AutoHeight()[Toolbar]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 5)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("Klicka på en ruta och välj en insamlad observation under trädet. Dra rutor med vänster musknapp. Panorera med höger/mittknapp. Zooma med mushjulet. Klicka på en linje för att namnge eller ta bort den."))).AutoWrapText(true)]
+        [SNew(STextBlock).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.af0b4d50d1666c5c", "Klicka på en ruta och välj en insamlad observation under trädet. Dra rutor med vänster musknapp. Panorera med höger/mittknapp. Zooma med mushjulet. Klicka på en linje för att namnge eller ta bort den.")).AutoWrapText(true)]
         + SVerticalBox::Slot().AutoHeight()
         [SNew(SBox).HeightOverride(510)[SAssignNew(Canvas, STMOPTheoryCanvas).Editor(SharedThis(this))]]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 6)
@@ -316,7 +316,7 @@ void STMOPTheoryBuilder::Construct(const FArguments& Args)
             .ColorAndOpacity(FLinearColor(1, 0.8, 0.35))]
         + SVerticalBox::Slot().AutoHeight()[SAssignNew(Details, SVerticalBox)]
         + SVerticalBox::Slot().AutoHeight().Padding(0, 8)
-        [SNew(STextBlock).Text(FText::FromString(TEXT("Träden följer med när du sparar spelet. Knappen ovan skapar en ny manuell sparning. Ångra/gör om gäller under detta besök i Mina teorier."))).AutoWrapText(true)]
+        [SNew(STextBlock).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.ca9f986215c20593", "Träden följer med när du sparar spelet. Knappen ovan skapar en ny manuell sparning. Ångra/gör om gäller under detta besök i Mina teorier.")).AutoWrapText(true)]
     ];
     RefreshDetails();
 }
@@ -342,7 +342,7 @@ void STMOPTheoryBuilder::Undo(bool bRedo)
     Destination.Add({Player->TheoryTrees, Player->ActiveTheoryTreeId});
     const auto State = Source.Pop();
     Player->RestoreTheories(State.Trees, State.Active);
-    ClearSelection(); Status = bRedo ? TEXT("Gjorde om ändringen.") : TEXT("Ångrade ändringen.");
+    ClearSelection(); Status = bRedo ? NSLOCTEXT("TMOP", "STMOPTheoryBuilder.46c8f3304d2a634e", "Gjorde om ändringen.").ToString() : NSLOCTEXT("TMOP", "STMOPTheoryBuilder.01a3b811054cbc02", "Ångrade ändringen.").ToString();
 }
 void STMOPTheoryBuilder::NewTree(int32 TemplateIndex)
 {
@@ -351,11 +351,11 @@ void STMOPTheoryBuilder::NewTree(int32 TemplateIndex)
     TMOPTheory::SynchronizeShooter(New, Player->NotebookObservations);
     Player->TheoryTrees.Add(New); Player->ActiveTheoryTreeId = New.Id;
     ClearSelection(); if (Canvas) Canvas->Fit();
-    Status = TEXT("Nytt träd skapat. Välj en ruta och fyll den med en observation.");
+    Status = NSLOCTEXT("TMOP", "STMOPTheoryBuilder.8e4335da61c9a8b2", "Nytt träd skapat. Välj en ruta och fyll den med en observation.").ToString();
 }
 void STMOPTheoryBuilder::AddNode(ETMOPTheoryNodeKind Kind)
 {
-    auto* T = Tree(); if (!T) { Status = TEXT("Välj en av de fyra mallarna först."); return; }
+    auto* T = Tree(); if (!T) { Status = NSLOCTEXT("TMOP", "STMOPTheoryBuilder.9555cbc42cade81f", "Välj en av de fyra mallarna först.").ToString(); return; }
     Remember();
     const FVector2D View = Canvas->GetCachedGeometry().GetLocalSize();
     const FVector2D Pos = (View * 0.5 - T->Pan) / T->Zoom - FVector2D(40, 52);
@@ -374,11 +374,11 @@ void STMOPTheoryBuilder::SelectNode(FGuid Id)
     SelectedNode = Id; SelectedLink.Invalidate();
     if (bLinkMode)
     {
-        if (!LinkStart.IsValid()) { LinkStart = Id; Status = TEXT("Välj rutan i andra änden av linjen."); }
+        if (!LinkStart.IsValid()) { LinkStart = Id; Status = NSLOCTEXT("TMOP", "STMOPTheoryBuilder.95cbf391f2866fa9", "Välj rutan i andra änden av linjen.").ToString(); }
         else if (auto* T = Tree())
         {
             Remember(); const bool bAdded = TMOPTheory::AddLink(*T, LinkStart, Id); LinkStart.Invalidate();
-            Status = bAdded ? TEXT("Linje tillagd. Välj två nya rutor eller avsluta linjeläget.") : TEXT("Välj två olika rutor utan befintlig linje.");
+            Status = bAdded ? NSLOCTEXT("TMOP", "STMOPTheoryBuilder.38f5c5f3a50ab4be", "Linje tillagd. Välj två nya rutor eller avsluta linjeläget.").ToString() : NSLOCTEXT("TMOP", "STMOPTheoryBuilder.400797cd732b2442", "Välj två olika rutor utan befintlig linje.").ToString();
         }
     }
     RefreshDetails();
@@ -391,7 +391,7 @@ void STMOPTheoryBuilder::SelectLink(FGuid Id)
 void STMOPTheoryBuilder::DeleteSelection()
 {
     auto* T = Tree(); if (!T) return;
-    if (Node() && Node()->bShooter) { Status = TEXT("Skyttens plats är gemensam för alla mallar och kan inte tas bort."); return; }
+    if (Node() && Node()->bShooter) { Status = NSLOCTEXT("TMOP", "STMOPTheoryBuilder.d2f00b73afdf0334", "Skyttens plats är gemensam för alla mallar och kan inte tas bort.").ToString(); return; }
     if (!Node() && !Link()) return;
     Remember();
     if (Node()) TMOPTheory::RemoveNode(*T, SelectedNode);
@@ -409,7 +409,7 @@ TSharedRef<SWidget> STMOPTheoryBuilder::TreeMenu()
                 Player->ActiveTheoryTreeId = Id; ClearSelection(); })));
     }
     if (!Player.IsValid() || Player->TheoryTrees.IsEmpty())
-        Menu.AddWidget(SNew(STextBlock).Text(FText::FromString(TEXT("Skapa ett träd med en mall ovan."))), FText::GetEmpty());
+        Menu.AddWidget(SNew(STextBlock).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.688134d7ab984128", "Skapa ett träd med en mall ovan.")), FText::GetEmpty());
     return Menu.MakeWidget();
 }
 TSharedRef<SWidget> STMOPTheoryBuilder::ObservationMenu()
@@ -428,11 +428,11 @@ TSharedRef<SWidget> STMOPTheoryBuilder::ObservationMenu()
             ++Count; const FName EntityId = O.EntityId;
             Menu.AddMenuEntry(O.DisplayName, O.Summary, FSlateIcon(), FUIAction(FExecuteAction::CreateSPLambda(this,
                 [this, NodeId, EntityId]() { if (auto* T = Tree()) { Remember();
-                    if (TMOPTheory::AssignObservation(*T, NodeId, EntityId, Player->NotebookObservations)) Status = TEXT("Observation tillagd i trädet.");
+                    if (TMOPTheory::AssignObservation(*T, NodeId, EntityId, Player->NotebookObservations)) Status = NSLOCTEXT("TMOP", "STMOPTheoryBuilder.45b214b2eddcc382", "Observation tillagd i trädet.").ToString();
                     RefreshDetails(); } })));
         }
     }
-    if (!Count) Menu.AddWidget(SNew(STextBlock).Text(FText::FromString(TEXT("Inga fler insamlade observationer av denna typ."))), FText::GetEmpty());
+    if (!Count) Menu.AddWidget(SNew(STextBlock).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.8cfe65a4e2f1c970", "Inga fler insamlade observationer av denna typ.")), FText::GetEmpty());
     return Menu.MakeWidget();
 }
 void STMOPTheoryBuilder::RefreshDetails()
@@ -443,41 +443,41 @@ void STMOPTheoryBuilder::RefreshDetails()
     {
         const FGuid Id = N->Id;
         Details->AddSlot().AutoHeight().Padding(0, 4)[SNew(STextBlock)
-            .Text(FText::FromString(N->bShooter ? TEXT("SKYTTEN — fylls automatiskt när personen har hittats") : TEXT("MARKERAD RUTA")))];
+            .Text(FText::FromString(N->bShooter ? NSLOCTEXT("TMOP", "STMOPTheoryBuilder.cdcf76a29bd80da7", "SKYTTEN — fylls automatiskt när personen har hittats").ToString() : NSLOCTEXT("TMOP", "STMOPTheoryBuilder.50a258183e1a70fd", "MARKERAD RUTA").ToString()))];
         if (!N->bShooter && N->Kind != ETMOPTheoryNodeKind::Note)
             Details->AddSlot().AutoHeight()[SNew(SHorizontalBox)
                 + SHorizontalBox::Slot().AutoWidth()[SNew(SComboButton)
                     .OnGetMenuContent(this, &STMOPTheoryBuilder::ObservationMenu)
-                    .ButtonContent()[SNew(STextBlock).Text(FText::FromString(TEXT("Välj från Mina observationer")))]]
-                + SHorizontalBox::Slot().AutoWidth().Padding(8, 0)[SNew(SButton).Text(FText::FromString(TEXT("Töm rutan")))
+                    .ButtonContent()[SNew(STextBlock).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.10d36d0ecbe3aa29", "Välj från Mina observationer"))]]
+                + SHorizontalBox::Slot().AutoWidth().Padding(8, 0)[SNew(SButton).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.2620769e2acb5509", "Töm rutan"))
                     .OnClicked_Lambda([this]() { if (auto* Selected = Node()) { Remember(); Selected->EntityId = NAME_None;
                         Selected->Title = Selected->Kind == ETMOPTheoryNodeKind::Vehicle ? TEXT("Välj fordon") : TEXT("Välj person"); RefreshDetails(); }
                         return FReply::Handled(); })]];
         if (!N->bShooter && !N->bHeading)
             Details->AddSlot().AutoHeight().Padding(0, 4)[SNew(SEditableTextBox)
-                .Text(FText::FromString(N->Role)).HintText(FText::FromString(TEXT("Roll i teorin")))
+                .Text(FText::FromString(N->Role)).HintText(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.e701f54c45fcbe2a", "Roll i teorin"))
                 .OnTextChanged_Lambda([this, Id](const FText& Text) { if (auto* Selected = Node()) if (Selected->Id == Id) {
                     RememberField(TEXT("node_role")); Selected->Role = Text.ToString().Left(60); } })];
         Details->AddSlot().AutoHeight().Padding(0, 4)[SNew(SEditableTextBox)
             .Text(FText::FromString(N->Title)).IsReadOnly(N->bShooter || !N->EntityId.IsNone())
-            .HintText(FText::FromString(TEXT("Rubrik / roll")))
+            .HintText(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.78f6332c61b6e96f", "Rubrik / roll"))
             .OnTextChanged_Lambda([this, Id](const FText& Text) { if (auto* Selected = Node()) if (Selected->Id == Id) {
                 RememberField(TEXT("node_title")); Selected->Title = Text.ToString().Left(120); } })];
         Details->AddSlot().AutoHeight()[SNew(SBox).HeightOverride(100)
             [SNew(SMultiLineEditableTextBox).Text(FText::FromString(N->Notes)).AutoWrapText(true)
-                .HintText(FText::FromString(TEXT("Egna anteckningar om denna ruta…")))
+                .HintText(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.fc3a3203fdc50906", "Egna anteckningar om denna ruta…"))
                 .OnTextChanged_Lambda([this, Id](const FText& Text) { if (auto* Selected = Node()) if (Selected->Id == Id) {
                     RememberField(TEXT("node_notes")); Selected->Notes = Text.ToString().Left(4000); } })]];
     }
     else if (const auto* L = Link())
     {
         const FGuid Id = L->Id;
-        Details->AddSlot().AutoHeight().Padding(0, 4)[SNew(STextBlock).Text(FText::FromString(TEXT("MARKERAD LINJE — beskriv sambandet")))];
+        Details->AddSlot().AutoHeight().Padding(0, 4)[SNew(STextBlock).Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.34378eb1bbdf38ec", "MARKERAD LINJE — beskriv sambandet"))];
         Details->AddSlot().AutoHeight()[SNew(SEditableTextBox).Text(FText::FromString(L->Label))
-            .HintText(FText::FromString(TEXT("Till exempel: möjlig förare")))
+            .HintText(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.b0583bb43ab24f9c", "Till exempel: möjlig förare"))
             .OnTextChanged_Lambda([this, Id](const FText& Text) { if (auto* Selected = Link()) if (Selected->Id == Id) {
                 RememberField(TEXT("link_label")); Selected->Label = Text.ToString().Left(120); } })];
     }
     else Details->AddSlot().AutoHeight()[SNew(STextBlock)
-        .Text(FText::FromString(TEXT("Välj en ruta för att lägga in en observation eller skriva anteckningar."))).AutoWrapText(true)];
+        .Text(NSLOCTEXT("TMOP", "STMOPTheoryBuilder.87cb1938d6246499", "Välj en ruta för att lägga in en observation eller skriva anteckningar.")).AutoWrapText(true)];
 }

@@ -1,4 +1,5 @@
 #include "UI/TMOPLoopEndWidget.h"
+#include "Localization/TMOPLocalization.h"
 #include "UI/TMOPLocalPanel.h"
 
 #include "Framework/Application/SlateApplication.h"
@@ -41,7 +42,7 @@ TSharedRef<SWidget> UTMOPLoopEndWidget::RebuildWidget()
             .ContentPadding(FMargin(28.0f, 12.0f))
             .HAlign(HAlign_Center)
             .OnClicked(Clicked)
-            [ SNew(STextBlock).Text(Label).Font(ButtonFont)
+            [ SNew(STextBlock).Text(FTMOPLocalization::Text(Label)).Font(ButtonFont)
               .ColorAndOpacity(ButtonText) ];
     };
 
@@ -54,7 +55,7 @@ TSharedRef<SWidget> UTMOPLoopEndWidget::RebuildWidget()
             [ SNew(SVerticalBox)
               + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
               [ SNew(STextBlock)
-                .Text(NSLOCTEXT("TMOP", "LoopEndTitle", "LOOPEN ÄR SLUT"))
+                .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "LoopEndTitle", "LOOPEN ÄR SLUT")))
                 .Font(ATMOPTypographyDirector::ResolveFont(this,
                     TEXT("LoopEndTitle"), FCoreStyle::GetDefaultFontStyle("Bold", 31)))
                 .ColorAndOpacity(ATMOPTypographyDirector::ResolveColor(this,
@@ -62,8 +63,8 @@ TSharedRef<SWidget> UTMOPLoopEndWidget::RebuildWidget()
               + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
                 .Padding(0.0f, 12.0f, 0.0f, 28.0f)
               [ SNew(STextBlock)
-                .Text(NSLOCTEXT("TMOP", "LoopEndQuestion",
-                    "Klockan är 23:45. Vad vill du göra?"))
+                .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "LoopEndQuestion",
+                    "Klockan är 23:45. Vad vill du göra?")))
                 .Font(ATMOPTypographyDirector::ResolveFont(this,
                     TEXT("LoopEndBody"), FCoreStyle::GetDefaultFontStyle("Regular", 18)))
                 .ColorAndOpacity(FLinearColor::White) ]
@@ -74,7 +75,7 @@ TSharedRef<SWidget> UTMOPLoopEndWidget::RebuildWidget()
                 .HAlign(HAlign_Center)
                 .OnClicked_UObject(this, &UTMOPLoopEndWidget::HandleReplayClicked)
                 [ SNew(STextBlock)
-                  .Text(NSLOCTEXT("TMOP", "LoopEndReplay", "SPELA OM FRÅN BÖRJAN"))
+                  .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "LoopEndReplay", "SPELA OM FRÅN BÖRJAN")))
                   .Font(ButtonFont).ColorAndOpacity(ButtonText) ] ]
               + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f)
               [ MakeButton(NSLOCTEXT("TMOP", "LoopEndMainMenu", "GÅ TILL HUVUDMENYN"),

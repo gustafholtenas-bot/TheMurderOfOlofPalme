@@ -1,4 +1,5 @@
 #include "Transit/TMOPBusArrivalBoardComponent.h"
+#include "Localization/TMOPLocalization.h"
 
 #include "Components/WidgetComponent.h"
 #include "Camera/PlayerCameraManager.h"
@@ -165,21 +166,21 @@ void UTMOPBusArrivalBoardComponent::RefreshBoard(const int32 CurrentSecond)
             if (Run.bUseForcedDespawnTime && Now + Seconds > Run.ForcedDespawnTime.ToSecondsFromMidnight()) continue;
             if (Now + Seconds > 23 * 3600 + 45 * 60) continue;
             Arrivals.Add({Seconds, Route->PublicLineNumber.IsEmpty() ? Route->RouteId.ToString() : Route->PublicLineNumber.ToString(),
-                Route->DestinationDisplay.IsEmpty() ? TEXT("Destination saknas") : Route->DestinationDisplay.ToString(), bHere});
+                Route->DestinationDisplay.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPBusArrivalBoardComponent.32e677136ad1666a", "Destination saknas").ToString() : Route->DestinationDisplay.ToString(), bHere});
         }
     }
     Arrivals.Sort([](const FArrival& A, const FArrival& B) { return A.Seconds < B.Seconds; });
     TArray<FString> Lines;
     for (const FArrival& A : Arrivals)
     {
-        const FString Countdown = A.Here ? TEXT("NU") :
-            (A.Seconds < 60 ? TEXT("<1 min") : FString::Printf(TEXT("ca %d min"), FMath::CeilToInt(A.Seconds / 60.0f)));
+        const FString Countdown = A.Here ? NSLOCTEXT("TMOP", "TMOPBusArrivalBoardComponent.fde432f9941c92f8", "NU").ToString() :
+            (A.Seconds < 60 ? TEXT("<1 min") : FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPBusArrivalBoardComponent.259b807bdcb5c581", "ca {0} min"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), FMath::CeilToInt(A.Seconds / 60.0f)))).ToString());
         Lines.Add(FString::Printf(TEXT("%s   %-18s %s"), *A.Line, *A.Destination, *Countdown));
         if (Lines.Num() >= FMath::Clamp(UpcomingRows, 1, 5)) break;
     }
-    if (Lines.IsEmpty()) Lines.Add(bIncomplete ? TEXT("Ankomsttid saknas") : TEXT("Inga fler bussar i spelperioden"));
-    const FText Header = FText::FromString((StationName.IsEmpty() ? StationId.ToString() : StationName.ToString()) + TEXT("  •  BUSS"));
-    const FText Note = bShowEstimateNote ? FText::FromString(TEXT("Beräknade tider – trafiken kan påverka ankomsten.")) : FText::GetEmpty();
+    if (Lines.IsEmpty()) Lines.Add(bIncomplete ? NSLOCTEXT("TMOP", "TMOPBusArrivalBoardComponent.7b01292798c94ecf", "Ankomsttid saknas").ToString() : NSLOCTEXT("TMOP", "TMOPBusArrivalBoardComponent.55f32b0ee14c45ce", "Inga fler bussar i spelperioden").ToString());
+    const FText Header = FText::FromString((StationName.IsEmpty() ? StationId.ToString() : StationName.ToString()) + NSLOCTEXT("TMOP", "TMOPBusArrivalBoardComponent.6d08886363d330ad", "  •  BUSS").ToString());
+    const FText Note = bShowEstimateNote ? FText::FromString(NSLOCTEXT("TMOP", "TMOPBusArrivalBoardComponent.0c700eb820604064", "Beräknade tider – trafiken kan påverka ankomsten.").ToString()) : FText::GetEmpty();
     for (UTMOPMetroBoardWidget* Widget : BoardWidgets)
         if (IsValid(Widget)) Widget->SetBoard(Header, FText::FromString(FString::Join(Lines, TEXT("\n"))), Note);
 }

@@ -1,4 +1,5 @@
 #include "UI/TMOPQuickInventoryWidget.h"
+#include "Localization/TMOPLocalization.h"
 
 #include "Inventory/TMOPItemDefinition.h"
 #include "Styling/CoreStyle.h"
@@ -28,7 +29,7 @@ TSharedRef<SWidget> UTMOPQuickInventoryWidget::RebuildWidget()
                     SNew(SBorder).Padding(FMargin(28.0f, 18.0f))
                     .BorderBackgroundColor(FLinearColor(0.02f, 0.025f, 0.04f, 0.96f))
                     [ SAssignNew(CenterLabel, STextBlock)
-                        .Text(NSLOCTEXT("TMOP", "InventoryCenter", "INVENTORY"))
+                        .Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "InventoryCenter", "INVENTORY")))
                         .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("QuickInventoryHeading"),
                             FCoreStyle::GetDefaultFontStyle("Bold", 22)))
                         .Justification(ETextJustify::Center) ]
@@ -134,7 +135,7 @@ void UTMOPQuickInventoryWidget::RebuildEntries()
                 [ SNew(SBox).WidthOverride(72.0f).HeightOverride(72.0f)
                     [ SNew(SImage).Image(Brush.Get()) ] ]
                 + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(3.0f)
-                [ SNew(STextBlock).Text(GetEntryName(Index))
+                [ SNew(STextBlock).Text(FTMOPLocalization::Text(GetEntryName(Index)))
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("QuickInventoryItem"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 13)))
                     .ColorAndOpacity(bSelected ? SelectedColor : NormalColor)
@@ -146,9 +147,9 @@ void UTMOPQuickInventoryWidget::RebuildEntries()
     if (CenterLabel.IsValid())
     {
         const int32 Selected = InventoryInput->SelectedRadialIndex;
-        CenterLabel->SetText(Selected == INDEX_NONE
+        CenterLabel->SetText(FTMOPLocalization::Text(Selected == INDEX_NONE
             ? NSLOCTEXT("TMOP", "InventoryChoose", "Välj föremål")
-            : GetEntryName(Selected));
+            : GetEntryName(Selected)));
         CenterLabel->SetColorAndOpacity(FSlateColor(SelectedColor));
     }
 }

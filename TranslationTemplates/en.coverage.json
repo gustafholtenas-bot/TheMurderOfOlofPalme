@@ -1,0 +1,228 @@
+{
+  "date": "2026-09-25",
+  "schema_version": 2,
+  "status": "first_pass_not_release_complete",
+  "entries_without_candidate": 1,
+  "counts": {
+    "reviewed": 3093,
+    "draft": 45757,
+    "needs_review": 2351
+  },
+  "by_table": {
+    "C++ UI (TMOP)": {
+      "reviewed": 544
+    },
+    "DT_TMOP_AddressRegistry": {
+      "reviewed": 2125
+    },
+    "DT_TMOP_AfterMurderEvents": {
+      "reviewed": 143
+    },
+    "DT_TMOP_Groups": {
+      "draft": 233,
+      "needs_review": 1
+    },
+    "DT_TMOP_HistoricalEvents": {
+      "reviewed": 95
+    },
+    "DT_TMOP_HistoricalVehicles": {
+      "draft": 259,
+      "reviewed": 4
+    },
+    "DT_TMOP_IntroCards": {
+      "reviewed": 12
+    },
+    "DT_TMOP_ItemMeshes": {
+      "reviewed": 35
+    },
+    "DT_TMOP_MetroArrivals_Northbound": {
+      "reviewed": 14
+    },
+    "DT_TMOP_MurderDayMysteries": {
+      "reviewed": 26
+    },
+    "DT_TMOP_MurderKnowledge": {
+      "reviewed": 50
+    },
+    "DT_TMOP_ObservationLinks": {
+      "draft": 23
+    },
+    "DT_TMOP_Observations": {
+      "draft": 1811,
+      "needs_review": 24
+    },
+    "DT_TMOP_People": {
+      "draft": 4356,
+      "needs_review": 537,
+      "reviewed": 17
+    },
+    "DT_TMOP_RecordedCalls": {
+      "reviewed": 28
+    },
+    "DT_TMOP_Uppslag_REGISTER": {
+      "draft": 39075,
+      "needs_review": 1789
+    }
+  },
+  "runtime_bytes": 20970178,
+  "tables": [
+    {
+      "path": "DataTables/09_21/DT_TMOP_People.json",
+      "rows": 3733,
+      "selected_rows": 796
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_HistoricalVehicles.json",
+      "rows": 409,
+      "selected_rows": 130
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_Observations.json",
+      "rows": 914,
+      "selected_rows": 914
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_Groups.json",
+      "rows": 235,
+      "selected_rows": 235
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_HistoricalEvents.json",
+      "rows": 105,
+      "selected_rows": 105
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_ObservationLinks.json",
+      "rows": 7,
+      "selected_rows": 7
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_Uppslag_REGISTER.json",
+      "rows": 26440,
+      "selected_rows": 26440
+    },
+    {
+      "path": "DataTables/09_14/DT_TMOP_AddressRegistry.json",
+      "rows": 334,
+      "selected_rows": 334
+    },
+    {
+      "path": "DataTables/09_16/DT_TMOP_AfterMurderEvents.json",
+      "rows": 30,
+      "selected_rows": 30
+    },
+    {
+      "path": "DataTables/09_25/DT_TMOP_MurderKnowledge.json",
+      "rows": 10,
+      "selected_rows": 10
+    },
+    {
+      "path": "DataTables/09_16/DT_TMOP_MurderDayMysteries.json",
+      "rows": 6,
+      "selected_rows": 6
+    },
+    {
+      "path": "DataTables/09_07/DT_TMOP_RecordedCalls.json",
+      "rows": 20,
+      "selected_rows": 20
+    },
+    {
+      "path": "DataTables/09_13/DT_TMOP_MetroArrivals_Northbound.json",
+      "rows": 14,
+      "selected_rows": 14
+    },
+    {
+      "path": "DataTables/09_07/DT_TMOP_introcards.json",
+      "rows": 12,
+      "selected_rows": 12
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_ItemMeshes.json",
+      "rows": 35,
+      "selected_rows": 35
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_AppearanceAssets.json",
+      "rows": 305,
+      "selected_rows": 305
+    }
+  ],
+  "source_words_including_repeated_contexts": 692864,
+  "unique_source_words": 300334,
+  "issue_counts": {
+    "protected_token_mismatch": 686,
+    "unresolved_placeholder": 516,
+    "suspected_ocr": 1422,
+    "decoding_limit": 52,
+    "format_arguments": 109,
+    "empty_translation": 2,
+    "repetition": 453
+  },
+  "reviewed_ui_entries": 544,
+  "source_files": [
+    {
+      "path": "DataTables/09_21/DT_TMOP_People.json",
+      "sha256": "e569564e0c5e2317635e5fc9bce4fca90eb41a3c5d6727347400f731dff92f1c"
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_HistoricalVehicles.json",
+      "sha256": "32fd75ab2feaa4e420de7d7987a6ead6c4b670bfb3179b75c899b0d43f58da01"
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_Observations.json",
+      "sha256": "4949a74f2816bcd289d82806a49be95a5b06aa155c17ead45903b6e2a2c05a42"
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_Groups.json",
+      "sha256": "e13d6c1cdf38968daded89154a443b2e7ab02beed4115431a2d3158d70f13b01"
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_HistoricalEvents.json",
+      "sha256": "ca43f14451db27c4f8f08fe81ae4f5fbb51fedfe7043aa8c87ac0f7724d3213e"
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_ObservationLinks.json",
+      "sha256": "4d4baa1d1559f46cee2cdf85145494d30a823c945fbedf522040b6429b6524d4"
+    },
+    {
+      "path": "DataTables/09_19/DT_TMOP_Uppslag_REGISTER.json",
+      "sha256": "019681f68d636f18a1a217e2a31abe9ec0743e0056c26e29b9c48dfb874008f3"
+    },
+    {
+      "path": "DataTables/09_14/DT_TMOP_AddressRegistry.json",
+      "sha256": "106f6f59bf1e0e818aaa84313a8dfa47e2bfaaa9b37797581af9a19e77c4eb62"
+    },
+    {
+      "path": "DataTables/09_16/DT_TMOP_AfterMurderEvents.json",
+      "sha256": "cbbfe3bf852eac4b79da117320d5ad011b26daf7a1c5773a84ad231e7a7653b2"
+    },
+    {
+      "path": "DataTables/09_25/DT_TMOP_MurderKnowledge.json",
+      "sha256": "23aa4f8411becfae26c3ebe148f879afb034b021855850ea51d6c2902c1e979c"
+    },
+    {
+      "path": "DataTables/09_16/DT_TMOP_MurderDayMysteries.json",
+      "sha256": "9bb694e649c2cd96578e9c8073cbbbceb386ffa11751a17db252734a48f97cbe"
+    },
+    {
+      "path": "DataTables/09_07/DT_TMOP_RecordedCalls.json",
+      "sha256": "26df9e3bfe178a486089e6009ec34627033220771e302db359312c24d6d24024"
+    },
+    {
+      "path": "DataTables/09_13/DT_TMOP_MetroArrivals_Northbound.json",
+      "sha256": "3ccbd524bb57c0428437fb9ca60db60a6b1b07b0b6feb5274096bdd2a2a61391"
+    },
+    {
+      "path": "DataTables/09_07/DT_TMOP_introcards.json",
+      "sha256": "0e60559bd1b8abe71f095b3db4c412aae2e65514798ad51ac710c91013b548f8"
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_ItemMeshes.json",
+      "sha256": "311b471a2e0cf09b23633955b07dd9d372734ecff0a790bd0839343ea6629eeb"
+    },
+    {
+      "path": "DataTables/09_21/DT_TMOP_AppearanceAssets.json",
+      "sha256": "8484e4b1116e5ff13361015d7098072cb8cb1aa8f787d9d399a9fd165d5885a6"
+    }
+  ]
+}

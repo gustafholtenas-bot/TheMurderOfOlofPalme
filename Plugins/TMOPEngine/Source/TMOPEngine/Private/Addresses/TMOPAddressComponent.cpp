@@ -1,4 +1,5 @@
 #include "Addresses/TMOPAddressComponent.h"
+#include "Localization/TMOPLocalization.h"
 #include "Addresses/TMOPAddressRegistryTypes.h"
 #include "Engine/DataTable.h"
 
@@ -10,7 +11,7 @@ UTMOPAddressComponent::UTMOPAddressComponent()
 FText UTMOPAddressComponent::GetResidentDirectory() const
 {
     const auto* Row = FindAddress();
-    return Row ? FText::FromString(TMOPAddressDisplay::Directory(*Row)) : FText::GetEmpty();
+    return Row ? FText::FromString(TMOPAddressDisplay::Directory(FTMOPLocalization::RowView(Registry->GetName(), RowName.ToString(), *Row))) : FText::GetEmpty();
 }
 
 const FTMOPAddressRegistryRow* UTMOPAddressComponent::FindAddress() const
@@ -69,18 +70,18 @@ FText UTMOPAddressComponent::GetWorldIndicatorTextAt(const FVector& ViewLocation
     if (!Row || FVector::DistSquared(ViewLocation, GetWorldIndicatorLocation()) >
         FMath::Square(FMath::Max(100.0f, SummaryDistanceCm))) return WorldIndicatorText;
     TArray<FString> Lines;
-    if (!Row->ShortSummary.TrimStartAndEnd().IsEmpty()) Row->ShortSummary.ParseIntoArrayLines(Lines, true);
+    if (!Row->ShortSummary.TrimStartAndEnd().IsEmpty()) FTMOPLocalization::TableText(Registry->GetName(), RowName.ToString(), TEXT("ShortSummary"), Row->ShortSummary).ToString().ParseIntoArrayLines(Lines, true);
     else
     {
         for (const auto& Business : Row->Businesses)
             if (!Business.Name.TrimStartAndEnd().IsEmpty()) Lines.AddUnique(Business.Name);
-        if (Row->bHasPrivateResidences || !Row->Households.IsEmpty()) Lines.Add(TEXT("Privata bostäder"));
+        if (Row->bHasPrivateResidences || !Row->Households.IsEmpty()) Lines.Add(NSLOCTEXT("TMOP", "TMOPAddressComponent.60b5c3e2a98a1bc5", "Privata bostäder").ToString());
     }
     const int32 Limit = FMath::Clamp(MaximumSummaryLines, 1, 8);
     if (Lines.Num() > Limit)
     {
         Lines.SetNum(Limit);
-        Lines.Add(TEXT("Fler uppgifter finns att läsa"));
+        Lines.Add(NSLOCTEXT("TMOP", "TMOPAddressComponent.67816a2d48c798c6", "Fler uppgifter finns att läsa").ToString());
     }
     FString Text = GetAddressTitle().ToString();
     if (!Lines.IsEmpty()) Text += TEXT("\n") + FString::Join(Lines, TEXT("\n"));

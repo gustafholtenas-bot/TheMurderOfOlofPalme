@@ -1,4 +1,5 @@
 #include "UI/TMOPLocalPlayerOverlay.h"
+#include "Localization/TMOPLocalization.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Components/TextRenderComponent.h"
@@ -50,10 +51,7 @@ FText UTMOPLocalPlayerOverlay::GetStatus() const
     const auto* Player = Cast<ATMOPPlayerCharacter>(GetOwningPlayerPawn());
     const auto* Clock = GetGameInstance() ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (!Player || !Clock) return FText::GetEmpty();
-    return FText::FromString(FString::Printf(TEXT("SPELARE %d   %s%s"),
-        UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(Player) + 1,
-        *Clock->GetCurrentTime().ToDisplayString(),
-        UGameplayStatics::IsGamePaused(this) ? TEXT("\nPAUSAT FÖR ALLA") : TEXT("")));
+    return FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPLocalPlayerOverlay.d93dc2bc7092bbdc", "SPELARE {0}   {1}{2}"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), UTMOPLocalMultiplayerSubsystem::GetPlayerSlot(Player) + 1)), FTMOPLocalization::Text(FString(Clock->GetCurrentTime().ToDisplayString())), FTMOPLocalization::Text(FString(UGameplayStatics::IsGamePaused(this) ? TEXT("\nPAUSAT FÖR ALLA") : TEXT(""))));
 }
 
 void UTMOPLocalPlayerOverlay::NativeTick(const FGeometry& Geometry, float DeltaTime)

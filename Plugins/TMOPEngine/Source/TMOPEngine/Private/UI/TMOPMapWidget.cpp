@@ -1,4 +1,8 @@
 #include "UI/TMOPMapWidget.h"
+#include "Anchors/TMOPHistoricalAnchor.h"
+#include "Anchors/TMOPAnchorSubsystem.h"
+#include "Engine/GameInstance.h"
+#include "Localization/TMOPLocalization.h"
 #include "Agents/TMOPHistoricalAgent.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "UI/TMOPLocalPanel.h"
@@ -63,6 +67,7 @@ public:
         const FSlateBrush* White = FCoreStyle::Get().GetBrush("WhiteBrush");
         const bool bFullMap = !Widget->IsMinimap();
         PersonHits.Reset();
+        PlaceHits.Reset();
         const FVector2D ContentOrigin = bFullMap
             ? FVector2D(220.0f, 58.0f) : FVector2D::ZeroVector;
         const FVector2D ContentSize = bFullMap
@@ -157,15 +162,15 @@ public:
                 FText Symbol = FText::FromString(TEXT("•"));
                 switch (Marker.Category)
                 {
-                case ETMOPMapMarkerCategory::Restaurant: Symbol = FText::FromString(TEXT("R")); break;
-                case ETMOPMapMarkerCategory::Cinema: Symbol = FText::FromString(TEXT("B")); break;
-                case ETMOPMapMarkerCategory::Metro: Symbol = FText::FromString(TEXT("T")); break;
-                case ETMOPMapMarkerCategory::Club: Symbol = FText::FromString(TEXT("K")); break;
-                case ETMOPMapMarkerCategory::Pub: Symbol = FText::FromString(TEXT("P")); break;
+                case ETMOPMapMarkerCategory::Restaurant: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.06576556d1ad802f", "R"); break;
+                case ETMOPMapMarkerCategory::Cinema: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.ae4f281df5a5d0ff", "B"); break;
+                case ETMOPMapMarkerCategory::Metro: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.c2c53d6694821425", "T"); break;
+                case ETMOPMapMarkerCategory::Club: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.a7ee38bb7be4fc44", "K"); break;
+                case ETMOPMapMarkerCategory::Pub: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.511993d3c99719e3", "P"); break;
                 case ETMOPMapMarkerCategory::Church: Symbol = FText::FromString(TEXT("†")); break;
-                case ETMOPMapMarkerCategory::ATM: Symbol = FText::FromString(TEXT("A")); break;
-                case ETMOPMapMarkerCategory::Hotel: Symbol = FText::FromString(TEXT("H")); break;
-                case ETMOPMapMarkerCategory::BusStop: Symbol = FText::FromString(TEXT("B")); break;
+                case ETMOPMapMarkerCategory::ATM: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.6dcd4ce23d88e2ee", "A"); break;
+                case ETMOPMapMarkerCategory::Hotel: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.7cf184f4c67ad582", "H"); break;
+                case ETMOPMapMarkerCategory::BusStop: Symbol = NSLOCTEXT("TMOP", "TMOPMapWidget.ae4f281df5a5d0ff", "B"); break;
                 default: break;
                 }
                 if (!Widget->IsMinimap())
@@ -176,15 +181,8 @@ public:
             }
 
             if (!Widget->IsMinimap() && !Marker.DisplayName.IsEmpty())
-            {
-                const FGeometry LabelGeometry = Geometry.MakeChild(FVector2D(150.0f, 24.0f),
-                    FSlateLayoutTransform(P + FVector2D(-75.0f, IconSize * 0.6f + 2.0f)));
-                FSlateDrawElement::MakeText(Out, Layer + 1, LabelGeometry.ToPaintGeometry(),
-                    Marker.DisplayName, ATMOPTypographyDirector::ResolveFont(Widget,
-                        TEXT("MapMarkerLabel"),
-                        FCoreStyle::GetDefaultFontStyle("Bold", 12)),
-                    ESlateDrawEffect::None, FLinearColor::White);
-            }
+                PlaceHits.Add({P, NAME_None, Marker.DisplayName});
+
         }
         Layer += 2;
 
@@ -213,7 +211,7 @@ public:
                 FSlateDrawElement::MakeBox(Out, Layer, OlofGeometry.ToPaintGeometry(),
                     White, ESlateDrawEffect::None, Map->OlofPalmeMarkerColor);
                 FSlateDrawElement::MakeText(Out, Layer + 1,
-                    OlofGeometry.ToPaintGeometry(), FText::FromString(TEXT("OP")),
+                    OlofGeometry.ToPaintGeometry(), NSLOCTEXT("TMOP", "TMOPMapWidget.f9aca9fb84cee1f1", "OP"),
                     FCoreStyle::GetDefaultFontStyle("Bold", Widget->IsMinimap() ? 7 : 10),
                     ESlateDrawEffect::None, FLinearColor::White);
             }
@@ -270,7 +268,7 @@ public:
             TArray<FVector> WitnessLocations;
             Map->GetWitnessMapLocations(WitnessLocations);
             DrawTrackedAgents(WitnessLocations, Map->WitnessIcon,
-                Map->WitnessMarkerColor, FText::FromString(TEXT("V")), false);
+                Map->WitnessMarkerColor, NSLOCTEXT("TMOP", "TMOPMapWidget.c9ee5681d3c59f75", "V"), false);
         }
         for (const auto& Person : Map->GetTrackedPeople())
         {
@@ -290,14 +288,14 @@ public:
             TArray<FVector> ObservedLocations;
             Map->GetObservedPersonMapLocations(ObservedLocations);
             DrawTrackedAgents(ObservedLocations, Map->ObservedPersonIcon,
-                Map->ObservedPersonMarkerColor, FText::FromString(TEXT("O")), true);
+                Map->ObservedPersonMarkerColor, NSLOCTEXT("TMOP", "TMOPMapWidget.08a914cde0503969", "O"), true);
         }
         if (!bFullMap || Widget->ShouldShowPolice())
         {
             TArray<FVector> PoliceLocations;
             Map->GetPoliceMapLocations(PoliceLocations);
             DrawTrackedAgents(PoliceLocations, Map->PoliceTrackingIcon,
-                Map->PoliceMarkerColor, FText::FromString(TEXT("P")), false);
+                Map->PoliceMarkerColor, NSLOCTEXT("TMOP", "TMOPMapWidget.511993d3c99719e3", "P"), false);
         }
 
         const FVector2D PlayerP = MapOrigin + ToDisplayUV(
@@ -326,50 +324,50 @@ public:
                 FText Symbol;
             };
             TArray<FLegendEntry> Legend;
-            auto AddCategory = [&](const TCHAR* Label,
+            auto AddCategory = [&](const FText& Label,
                 const ETMOPMapMarkerCategory Category, const FLinearColor Color,
                 const TCHAR* Symbol)
             {
                 FLegendEntry Entry;
-                Entry.Label = FText::FromString(FString(Label));
+                Entry.Label = Label;
                 Entry.Icon = Map->GetCategoryIcon(Category);
                 Entry.Color = Color;
                 Entry.Symbol = FText::FromString(Symbol);
                 Legend.Add(Entry);
             };
-            AddCategory(TEXT("Restaurang"), ETMOPMapMarkerCategory::Restaurant,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.a229d6c5f69c57fc", "Restaurang"), ETMOPMapMarkerCategory::Restaurant,
                 FLinearColor(1.0f, 0.65f, 0.12f), TEXT("R"));
-            AddCategory(TEXT("Biograf"), ETMOPMapMarkerCategory::Cinema,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.996c2af9e1a97836", "Biograf"), ETMOPMapMarkerCategory::Cinema,
                 FLinearColor(0.95f, 0.3f, 0.25f), TEXT("B"));
-            AddCategory(TEXT("Tunnelbana"), ETMOPMapMarkerCategory::Metro,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.62d4b1c6d2e722cf", "Tunnelbana"), ETMOPMapMarkerCategory::Metro,
                 FLinearColor(0.15f, 0.65f, 1.0f), TEXT("T"));
-            AddCategory(TEXT("Klubb"), ETMOPMapMarkerCategory::Club,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.bb7d50b95eccd15c", "Klubb"), ETMOPMapMarkerCategory::Club,
                 FLinearColor(0.75f, 0.25f, 1.0f), TEXT("K"));
-            AddCategory(TEXT("Pub"), ETMOPMapMarkerCategory::Pub,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.6b4946e00d30de81", "Pub"), ETMOPMapMarkerCategory::Pub,
                 FLinearColor(0.25f, 0.85f, 0.45f), TEXT("P"));
-            AddCategory(TEXT("Kyrka"), ETMOPMapMarkerCategory::Church,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.a38e407d4b083bf6", "Kyrka"), ETMOPMapMarkerCategory::Church,
                 FLinearColor(0.88f, 0.88f, 0.72f), TEXT("†"));
-            AddCategory(TEXT("Bankomat"), ETMOPMapMarkerCategory::ATM,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.7ee76e49ea7eb6d8", "Bankomat"), ETMOPMapMarkerCategory::ATM,
                 FLinearColor(0.3f, 0.95f, 0.6f), TEXT("A"));
-            AddCategory(TEXT("Hotell"), ETMOPMapMarkerCategory::Hotel,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.bb6b9a060366e46f", "Hotell"), ETMOPMapMarkerCategory::Hotel,
                 FLinearColor(0.45f, 0.7f, 1.0f), TEXT("H"));
-            AddCategory(TEXT("Busshållplats"), ETMOPMapMarkerCategory::BusStop,
+            AddCategory(NSLOCTEXT("TMOP", "TMOPMapWidget.08ee34c1d485087a", "Busshållplats"), ETMOPMapMarkerCategory::BusStop,
                 FLinearColor(0.95f, 0.78f, 0.18f), TEXT("B"));
 
             Legend.Add({NSLOCTEXT("TMOP", "MapLegendObserved", "Observerade personer/bilar"),
                 Map->ObservedPersonIcon, Map->ObservedPersonMarkerColor,
-                FText::FromString(TEXT("O"))});
+                NSLOCTEXT("TMOP", "TMOPMapWidget.08a914cde0503969", "O")});
             Legend.Add({NSLOCTEXT("TMOP", "MapLegendPolice", "Polis"),
                 Map->PoliceTrackingIcon, Map->PoliceMarkerColor,
-                FText::FromString(TEXT("P"))});
+                NSLOCTEXT("TMOP", "TMOPMapWidget.511993d3c99719e3", "P")});
             Legend.Add({NSLOCTEXT("TMOP", "MapLegendWitness", "Vittnen"),
-                Map->WitnessIcon, Map->WitnessMarkerColor, FText::FromString(TEXT("V"))});
+                Map->WitnessIcon, Map->WitnessMarkerColor, NSLOCTEXT("TMOP", "TMOPMapWidget.c9ee5681d3c59f75", "V")});
             Legend.Add({NSLOCTEXT("TMOP", "MapLegendPlayer", "Du – live"),
                 nullptr, FLinearColor(0.12f, 0.72f, 1.0f),
                 FText::FromString(TEXT("▲"))});
             Legend.Add({NSLOCTEXT("TMOP", "MapLegendOlof", "Olof Palme – live"),
                 Map->OlofPalmeIcon, Map->OlofPalmeMarkerColor,
-                FText::FromString(TEXT("OP"))});
+                NSLOCTEXT("TMOP", "TMOPMapWidget.f9aca9fb84cee1f1", "OP")});
 
             const float LegendX = 24.0f;
             float LegendY = 105.0f;
@@ -490,6 +488,46 @@ public:
                 ESlateDrawEffect::None, Map->OlofPalmeMarkerColor);
         }
 
+        // Fixed historical location, independent of live agents and layer filters.
+        if (bFullMap && Widget->GetGameInstance())
+        {
+            const UTMOPAnchorSubsystem* Anchors =
+                Widget->GetGameInstance()->GetSubsystem<UTMOPAnchorSubsystem>();
+            const ATMOPHistoricalAnchor* CrimeScene = Anchors
+                ? Anchors->FindAnchor(TEXT("Mordplatsen")) : nullptr;
+            if (IsValid(CrimeScene))
+            {
+                const FVector2D P = MapOrigin +
+                    ToDisplayUV(Map->WorldToMapUV(CrimeScene->GetAnchorLocation())) * MapSize;
+                if (P.X >= 8 && P.Y >= 8 && P.X <= ViewSize.X - 8 && P.Y <= ViewSize.Y - 8)
+                {
+                    const FLinearColor Red(1.f, .12f, .08f, 1.f);
+                    // A filled circular dot made from horizontal chords.
+                    for (int32 Y = -6; Y <= 6; ++Y)
+                    {
+                        const float HalfWidth = FMath::Sqrt(float(36 - Y * Y));
+                        FSlateDrawElement::MakeLines(Out, Layer, Geometry.ToPaintGeometry(),
+                            {P + FVector2D(-HalfWidth, Y), P + FVector2D(HalfWidth, Y)},
+                            ESlateDrawEffect::None, Red, true, 2.f);
+                    }
+                    ++Layer;
+                    const FVector2D LabelPosition(
+                        FMath::Clamp(P.X - 65.0, 2.0, FMath::Max(2.0, ViewSize.X - 132.0)),
+                        FMath::Max(2.0, P.Y - 34.0));
+                    const FGeometry Back = Geometry.MakeChild(FVector2D(130, 24),
+                        FSlateLayoutTransform(LabelPosition));
+                    FSlateDrawElement::MakeBox(Out, Layer++, Back.ToPaintGeometry(),
+                        White, ESlateDrawEffect::None, FLinearColor(0, 0, 0, .9f));
+                    const FGeometry Label = Geometry.MakeChild(FVector2D(122, 22),
+                        FSlateLayoutTransform(LabelPosition + FVector2D(4, 2)));
+                    FSlateDrawElement::MakeText(Out, Layer++, Label.ToPaintGeometry(),
+                        FTMOPLocalization::Text(NSLOCTEXT("TMOP", "MapCrimeScene", "Mordplatsen")),
+                        FCoreStyle::GetDefaultFontStyle("Bold", 13),
+                        ESlateDrawEffect::None, FLinearColor::White);
+                }
+            }
+        }
+
         return Layer;
     }
 
@@ -526,6 +564,7 @@ public:
             PressPosition = Event.GetScreenSpacePosition();
             bMovedSincePress = false;
             bDragging = true;
+            UpdateHoverText(FText::GetEmpty());
             LastMousePosition = Event.GetScreenSpacePosition();
             return FReply::Handled().CaptureMouse(SharedThis(this));
         }
@@ -535,8 +574,10 @@ public:
     virtual FReply OnMouseMove(const FGeometry& Geometry, const FPointerEvent& Event) override
     {
         if (!OwnerWidget.IsValid() || OwnerWidget->IsMinimap()) return FReply::Unhandled();
-        const auto* Hit = FindPerson(Geometry.AbsoluteToLocal(Event.GetScreenSpacePosition()));
-        SetToolTipText(Hit ? Hit->Name : FText::GetEmpty());
+        const FVector2D LocalPosition = Geometry.AbsoluteToLocal(Event.GetScreenSpacePosition());
+        const auto* Hit = FindPerson(LocalPosition);
+        if (!Hit) Hit = FindPlace(LocalPosition);
+        UpdateHoverText(!bDragging && Hit ? Hit->Name : FText::GetEmpty());
         if (!bDragging) return FReply::Unhandled();
         if ((Event.GetScreenSpacePosition()-PressPosition).SizeSquared() > 25.0) bMovedSincePress = true;
         const FVector2D Position = Event.GetScreenSpacePosition();
@@ -619,18 +660,35 @@ public:
         return FReply::Unhandled();
     }
 
+    virtual void OnMouseLeave(const FPointerEvent& Event) override
+    {
+        UpdateHoverText(FText::GetEmpty());
+        SLeafWidget::OnMouseLeave(Event);
+    }
+
     virtual bool SupportsKeyboardFocus() const override { return !OwnerWidget.IsValid() || !OwnerWidget->IsMinimap(); }
 
     virtual void OnFocusLost(const FFocusEvent& Event) override
     {
         PanAxis = FVector2D::ZeroVector;
         bDragging = false;
+        UpdateHoverText(FText::GetEmpty());
         SLeafWidget::OnFocusLost(Event);
     }
 
 private:
+    FText CurrentHoverText;
+    void UpdateHoverText(const FText& Text)
+    {
+        // Replacing a Slate tooltip restarts its display lifecycle. Keep it
+        // alive while the same visible name remains under the pointer.
+        if (CurrentHoverText.ToString() == Text.ToString()) return;
+        CurrentHoverText = Text;
+        SetToolTipText(CurrentHoverText);
+    }
     struct FPersonHit { FVector2D Position; FName Id; FText Name; };
     mutable TArray<FPersonHit> PersonHits;
+    mutable TArray<FPersonHit> PlaceHits;
     mutable float FilterTop = 499.0f;
     FVector2D PressPosition = FVector2D::ZeroVector;
     bool bMovedSincePress = false;
@@ -640,6 +698,18 @@ private:
         const FPersonHit* Best = nullptr;
         double Distance = 144.0;
         for (const auto& Hit : PersonHits)
+        {
+            const double D = (Hit.Position-P).SizeSquared();
+            if (D < Distance) { Distance = D; Best = &Hit; }
+        }
+        return Best;
+    }
+    const FPersonHit* FindPlace(FVector2D P) const
+    {
+        if (P.X >= 24 && P.X <= 260 && P.Y >= 65 && P.Y <= FilterTop+112) return nullptr;
+        const FPersonHit* Best = nullptr;
+        double Distance = 144.0;
+        for (const auto& Hit : PlaceHits)
         {
             const double D = (Hit.Position-P).SizeSquared();
             if (D < Distance) { Distance = D; Best = &Hit; }
@@ -682,15 +752,14 @@ TSharedRef<SWidget> UTMOPMapWidget::RebuildWidget()
         + SOverlay::Slot()[ Canvas ]
         + SOverlay::Slot().HAlign(HAlign_Right).VAlign(VAlign_Top).Padding(24.0f)
         [ SNew(STextBlock)
-            .Text_Lambda([this]() { return FText::Format(FText::FromString(
-                TEXT("KARTA  •  {0}/{1}: zoom  •  {2}/{3}/{4}/{5}: panorera  •  {6}: stäng")),
+            .Text(FTMOPLocalization::Bind([this]() { return FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPMapWidget.5d8454993a455170", "KARTA  •  {0}/{1}: zoom  •  {2}/{3}/{4}/{5}: panorera  •  {6}: stäng"),
                 TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomOut, FText::FromString(TEXT("−"))),
                 TMOPControlDisplayText(this, ETMOPControlAction::MenuZoomIn, FText::FromString(TEXT("+"))),
-                TMOPControlDisplayText(this, ETMOPControlAction::MenuUp, FText::FromString(TEXT("Upp"))),
-                TMOPControlDisplayText(this, ETMOPControlAction::MenuDown, FText::FromString(TEXT("Ned"))),
-                TMOPControlDisplayText(this, ETMOPControlAction::MenuLeft, FText::FromString(TEXT("Vänster"))),
-                TMOPControlDisplayText(this, ETMOPControlAction::MenuRight, FText::FromString(TEXT("Höger"))),
-                TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, FText::FromString(TEXT("Esc")))); })
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuUp, NSLOCTEXT("TMOP", "TMOPMapWidget.7ace8cc1851c3edc", "Upp")),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuDown, NSLOCTEXT("TMOP", "TMOPMapWidget.1f4a56733a7f9f55", "Ned")),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuLeft, NSLOCTEXT("TMOP", "TMOPMapWidget.dce6ebfebe019688", "Vänster")),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuRight, NSLOCTEXT("TMOP", "TMOPMapWidget.762a4927f05f354f", "Höger")),
+                TMOPControlDisplayText(this, ETMOPControlAction::MenuBack, NSLOCTEXT("TMOP", "TMOPMapWidget.1f7a4f9e2f70d0b8", "Esc"))); }))
             .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("MapHint"),
                 FCoreStyle::GetDefaultFontStyle("Regular", 14)))
             .AutoWrapText(true)
@@ -700,13 +769,14 @@ TSharedRef<SWidget> UTMOPMapWidget::RebuildWidget()
 
 void UTMOPMapWidget::SetMapVisible(const bool bVisible)
 {
+    if (bVisible && !bMinimap) ResetViewToPlayer();
     SetVisibility(bVisible ? (bMinimap ? ESlateVisibility::HitTestInvisible
         : ESlateVisibility::Visible) : ESlateVisibility::Collapsed);
 }
 
 void UTMOPMapWidget::ResetViewToPlayer()
 {
-    FullMapZoom = 1.0f;
+    FullMapZoom = 2.0f;
     // The large map always opens centred. The minimap still follows the player
     // through GetViewCenterUV().
     FullMapCenterUV = FVector2D(0.5f, 0.5f);

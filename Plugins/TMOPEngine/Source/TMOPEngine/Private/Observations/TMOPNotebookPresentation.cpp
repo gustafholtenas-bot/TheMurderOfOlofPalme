@@ -1,4 +1,6 @@
 #include "Observations/TMOPNotebookPresentation.h"
+#include "Localization/TMOPLocalization.h"
+#include "Agents/TMOPHistoricalAgent.h"
 #include "Observations/TMOPObservationDirector.h"
 #include "People/TMOPPersonRegistrySubsystem.h"
 #include "People/TMOPPersonNameLibrary.h"
@@ -25,7 +27,7 @@ namespace
 }
 
 void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld* World,
-    AActor* Actor, const FTMOPPersonProfileRow* SuppliedProfile, bool bCaptureModel)
+    AActor* Actor, const FTMOPPersonProfileRow* SuppliedProfile, bool bCaptureModel, bool bLocalizeView)
 {
     if (!World || Entry.EntityId.IsNone()) return;
     auto* Registry = World->GetGameInstance()
@@ -35,10 +37,19 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
     if (!Profile && Entry.Kind == ETMOPNotebookEntityKind::Person && Registry &&
         Registry->GetPersonProfile(Entry.EntityId, StoredProfile)) Profile = &StoredProfile;
 
-    if (Entry.PresentationVersion == 0)
+    FTMOPPersonProfileRow ProfileView;
+    if (bLocalizeView && Profile)
+    {
+        ProfileView = FTMOPLocalization::RowView(TEXT("DT_TMOP_People"), Entry.EntityId.ToString(), *Profile);
+        Profile = &ProfileView;
+    }
+
+    const auto Display = [bLocalizeView](const FString& Text)
+    { return bLocalizeView ? FTMOPLocalization::String(Text) : Text; };
+    if (Entry.PresentationVersion == 0 || bLocalizeView)
     {
         Entry.ObserverNames.Reset();
-        Entry.EvidenceImages.Reset();
+        if (!bLocalizeView || Profile) Entry.EvidenceImages.Reset();
         TArray<FString> Description, Signalement;
         TSet<FName> ObserverIds;
         if (Profile)
@@ -47,7 +58,7 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
             const FTMOPAppearanceSlot* Slots[] = {&Profile->Hair, &Profile->Headwear,
                 &Profile->BeardOrMustache, &Profile->FaceShape, &Profile->BodyBuild, &Profile->JacketOrCoat,
                 &Profile->ShirtOrSweater, &Profile->Trousers, &Profile->Shoes, &Profile->Scarf};
-            for (const auto* Slot : Slots) AddText(Signalement, Slot->OriginalText);
+            for (const auto* Slot : Slots) AddText(Signalement, Display(Slot->OriginalText));
             for (const auto& Image : Profile->EvidenceImages)
             {
                 if (Image.Image.IsNull()) continue;
@@ -69,7 +80,7 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
         if (const auto* Vehicle = Cast<ATMOPVehicleBase>(Actor))
         {
             Entry.VehicleSuspicion = Vehicle->NotebookSuspicion;
-            AddText(Signalement, Vehicle->NotebookSignalement.ToString());
+            AddText(Signalement, Display(Vehicle->NotebookSignalement.ToString()));
             if (!Vehicle->RegistrationNumber.IsEmpty()) AddText(Signalement,
                 FString::Printf(TEXT("Registreringsnummer: %s"), *Vehicle->RegistrationNumber));
         }
@@ -95,23 +106,25 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
         { return A.Second == B.Second ? A.Definition.ObservationId.LexicalLess(B.Definition.ObservationId) : A.Second < B.Second; });
         for (const auto& Timed : Definitions)
         {
-            const auto& D = Timed.Definition;
+            const auto D = bLocalizeView
+                ? FTMOPLocalization::RowView(TEXT("DT_TMOP_Observations"), Timed.Definition.ObservationId.ToString(), Timed.Definition)
+                : Timed.Definition;
             if (!D.ObservedDescription.IsEmpty()) AddText(Description,
-                FTMOPTime::FromSecondsFromMidnight(Timed.Second).ToDisplayString() + TEXT(" — ") + D.ObservedDescription);
+                FTMOPTime::FromSecondsFromMidnight(Timed.Second).ToDisplayString() + TEXT(" — ") + Display(D.ObservedDescription));
             for (const FName Id : D.ObserverEntityIds) if (!Id.IsNone()) ObserverIds.Add(Id);
             for (const auto& Witness : D.WitnessSignalements)
             {
                 if (!Witness.ObserverEntityId.IsNone()) ObserverIds.Add(Witness.ObserverEntityId);
                 TArray<FString> WitnessDetails;
-                AddText(WitnessDetails, Witness.OriginalSummary);
+                AddText(WitnessDetails, Display(Witness.OriginalSummary));
                 if (WitnessDetails.IsEmpty())
-                    for (const auto& Trait : Witness.Traits) AddText(WitnessDetails, Trait.OriginalText);
+                    for (const auto& Trait : Witness.Traits) AddText(WitnessDetails, Display(Trait.OriginalText));
                 if (!WitnessDetails.IsEmpty())
                 {
                     FTMOPPersonProfileRow Observer;
                     const FString Name = Registry && Registry->GetPersonProfile(Witness.ObserverEntityId, Observer)
                         ? UTMOPPersonNameLibrary::FormatPersonName(Observer.FullName, Observer.FirstName, Observer.LastName).ToString()
-                        : TEXT("Okänt vittne");
+                        : NSLOCTEXT("TMOP", "NotebookUnknownWitness", "Okänt vittne").ToString();
                     // Conflicting accounts retain their witness attribution.
                     AddText(Signalement, Name + TEXT(": ") + FString::Join(WitnessDetails, TEXT("; ")));
                 }
@@ -119,7 +132,7 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
         }
         // Preserve the earlier collected summary when no timed source text exists.
         if (!Description.IsEmpty()) Entry.Summary = FText::FromString(FString::Join(Description, TEXT("\n\n")));
-        Entry.Signalement = FText::FromString(FString::Join(Signalement, TEXT("; ")));
+        if (!Signalement.IsEmpty()) Entry.Signalement = FText::FromString(FString::Join(Signalement, TEXT("; ")));
         TArray<FName> SortedObservers = ObserverIds.Array(); SortedObservers.Sort(FNameLexicalLess());
         for (const FName Id : SortedObservers)
         {
@@ -135,6 +148,25 @@ void FTMOPNotebookPresentation::Populate(FTMOPNotebookObservation& Entry, UWorld
     CollectLocations(Entry, World);
     if (bCaptureModel && (Entry.ModelPreviewPng.IsEmpty() || Entry.ModelPreviewVersion < 2) && IsValid(Actor))
         if (CaptureModel(Actor, Entry.Kind, Entry.ModelPreviewPng)) Entry.ModelPreviewVersion = 2;
+}
+
+FTMOPNotebookObservation FTMOPNotebookPresentation::LocalizedView(
+    const FTMOPNotebookObservation& Source, UWorld* World)
+{
+    FTMOPNotebookObservation View = Source;
+    if (!World) return View;
+    AActor* Actor = nullptr;
+    if (Source.Kind == ETMOPNotebookEntityKind::Person && World->GetGameInstance())
+    {
+        if (auto* Registry = World->GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>())
+            Actor = Registry->FindActiveAgent(Source.EntityId);
+    }
+    else if (Source.Kind == ETMOPNotebookEntityKind::Vehicle)
+        for (TActorIterator<ATMOPVehicleBase> It(World); It; ++It)
+            if (It->VehicleId == Source.EntityId) { Actor = *It; break; }
+    // Existing discovery/last-observed cutoffs still apply inside Populate.
+    Populate(View, World, Actor, nullptr, false, true);
+    return View;
 }
 
 bool FTMOPNotebookPresentation::CaptureModel(AActor* Actor, ETMOPNotebookEntityKind Kind, TArray<uint8>& OutPng)

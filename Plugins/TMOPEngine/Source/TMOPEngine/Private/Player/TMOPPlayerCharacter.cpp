@@ -1,4 +1,5 @@
 #include "Player/TMOPPlayerCharacter.h"
+#include "Localization/TMOPLocalization.h"
 #include "Time/TMOPWorldPlaybackComponent.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 #include "Player/TMOPControlSettingsSubsystem.h"
@@ -1917,8 +1918,10 @@ void ATMOPPlayerCharacter::ClosePersonDialog()
     }
 }
 
-static FText TMOPInspectionTimeline(const FTMOPPersonProfileRow& Profile)
+static FText TMOPInspectionTimeline(const FTMOPPersonProfileRow& Source)
 {
+    const FTMOPPersonProfileRow Profile = FTMOPLocalization::RowView(
+        TEXT("DT_TMOP_People"), Source.EntityId.ToString(), Source);
     FText TimelineSummary = Profile.AgentTimelineSummary;
     if (!Profile.Timeline.IsEmpty())
     {
@@ -1937,36 +1940,36 @@ static FText TMOPInspectionTimeline(const FTMOPPersonProfileRow& Profile)
             {
             case ETMOPPersonTimelineAction::InitialPlacement:
             case ETMOPPersonTimelineAction::Spawn:
-                Description = Place.IsEmpty() ? TEXT("Personen kommer in i händelseförloppet.")
-                    : FString::Printf(TEXT("Personen befinner sig vid %s."), *Place);
+                Description = Place.IsEmpty() ? NSLOCTEXT("TMOP", "InspectionTimeline0", "Personen kommer in i händelseförloppet.").ToString()
+                    : FText::Format(NSLOCTEXT("TMOP", "InspectionTimeline1", "Personen befinner sig vid {0}."), FText::AsCultureInvariant(Place)).ToString();
                 break;
             case ETMOPPersonTimelineAction::MoveToAnchor:
-                Description = Place.IsEmpty() ? TEXT("Personen går vidare.")
-                    : FString::Printf(TEXT("Personen går mot %s."), *Place);
+                Description = Place.IsEmpty() ? NSLOCTEXT("TMOP", "InspectionTimeline2", "Personen går vidare.").ToString()
+                    : FText::Format(NSLOCTEXT("TMOP", "InspectionTimeline3", "Personen går mot {0}."), FText::AsCultureInvariant(Place)).ToString();
                 break;
             case ETMOPPersonTimelineAction::Wait:
-                Description = Place.IsEmpty() ? TEXT("Personen väntar en stund.")
-                    : FString::Printf(TEXT("Personen väntar vid %s."), *Place);
+                Description = Place.IsEmpty() ? NSLOCTEXT("TMOP", "InspectionTimeline4", "Personen väntar en stund.").ToString()
+                    : FText::Format(NSLOCTEXT("TMOP", "InspectionTimeline5", "Personen väntar vid {0}."), FText::AsCultureInvariant(Place)).ToString();
                 break;
             case ETMOPPersonTimelineAction::SitDown:
-                Description = TEXT("Personen sätter sig ned."); break;
+                Description = NSLOCTEXT("TMOP", "InspectionTimeline6", "Personen sätter sig ned.").ToString(); break;
             case ETMOPPersonTimelineAction::StandUp:
-                Description = TEXT("Personen reser sig upp."); break;
+                Description = NSLOCTEXT("TMOP", "InspectionTimeline7", "Personen reser sig upp.").ToString(); break;
             case ETMOPPersonTimelineAction::EnterVehicle:
-                Description = Place.IsEmpty() ? TEXT("Personen stiger in i ett fordon.")
-                    : FString::Printf(TEXT("Personen stiger in i %s."), *Place);
+                Description = Place.IsEmpty() ? NSLOCTEXT("TMOP", "InspectionTimeline8", "Personen stiger in i ett fordon.").ToString()
+                    : FText::Format(NSLOCTEXT("TMOP", "InspectionTimeline9", "Personen stiger in i {0}."), FText::AsCultureInvariant(Place)).ToString();
                 break;
             case ETMOPPersonTimelineAction::ExitVehicle:
-                Description = TEXT("Personen stiger ur fordonet."); break;
+                Description = NSLOCTEXT("TMOP", "InspectionTimeline10", "Personen stiger ur fordonet.").ToString(); break;
             case ETMOPPersonTimelineAction::BeginDriving:
-                Description = Place.IsEmpty() ? TEXT("Personen börjar köra.")
-                    : FString::Printf(TEXT("Personen kör mot %s."), *Place);
+                Description = Place.IsEmpty() ? NSLOCTEXT("TMOP", "InspectionTimeline11", "Personen börjar köra.").ToString()
+                    : FText::Format(NSLOCTEXT("TMOP", "InspectionTimeline12", "Personen kör mot {0}."), FText::AsCultureInvariant(Place)).ToString();
                 break;
             case ETMOPPersonTimelineAction::Despawn:
-                Description = TEXT("Personen lämnar det simulerade området."); break;
+                Description = NSLOCTEXT("TMOP", "InspectionTimeline13", "Personen lämnar det simulerade området.").ToString(); break;
             default:
                 Description = !Entry.Notes.IsEmpty() ? Entry.Notes
-                    : TEXT("Nästa dokumenterade händelse inträffar.");
+                    : NSLOCTEXT("TMOP", "InspectionTimeline14", "Nästa dokumenterade händelse inträffar.").ToString();
                 break;
             }
             Lines.Add(FString::Printf(TEXT("%s - %s"),

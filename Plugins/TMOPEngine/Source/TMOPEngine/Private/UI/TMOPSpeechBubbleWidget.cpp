@@ -1,4 +1,5 @@
 #include "UI/TMOPSpeechBubbleWidget.h"
+#include "Localization/TMOPLocalization.h"
 
 #include "Styling/CoreStyle.h"
 #include "Rendering/DrawElements.h"
@@ -95,22 +96,30 @@ void UTMOPSpeechBubbleWidget::SetSpeechText(const FText& NewText)
 {
     bHistoricalPlayback = false;
     PendingSpeechText = NewText;
-    FullSpeechString = NewText.ToString();
+    FullSpeechString = FTMOPLocalization::String(NewText);
+    LanguageRevision = FTMOPLocalization::GetRevision();
     RevealedCharacterAccumulator = 0.0f;
     RevealedCharacterCount = 0;
-    if (SpeechText.IsValid()) SpeechText->SetText(FText::GetEmpty());
+    if (SpeechText.IsValid()) SpeechText->SetText(FTMOPLocalization::Text(FText::GetEmpty()));
 }
 
 void UTMOPSpeechBubbleWidget::SetSpeakerName(const FText& NewName)
 {
     PendingSpeakerName = NewName;
-    if (SpeakerNameText.IsValid()) SpeakerNameText->SetText(NewName);
+    if (SpeakerNameText.IsValid()) SpeakerNameText->SetText(FTMOPLocalization::Text(NewName));
 }
 
 void UTMOPSpeechBubbleWidget::NativeTick(
     const FGeometry& MyGeometry, const float InDeltaTime)
 {
     Super::NativeTick(MyGeometry, InDeltaTime);
+    if (LanguageRevision != FTMOPLocalization::GetRevision())
+    {
+        LanguageRevision = FTMOPLocalization::GetRevision();
+        FullSpeechString = FTMOPLocalization::String(PendingSpeechText);
+        RevealedCharacterCount = FMath::Min(RevealedCharacterCount, FullSpeechString.Len());
+        if (SpeechText.IsValid()) SpeechText->SetText(FText::AsCultureInvariant(FullSpeechString.Left(RevealedCharacterCount)));
+    }
     if (bHistoricalPlayback) return;
     if (!SpeechText.IsValid() || RevealedCharacterCount >= FullSpeechString.Len()) return;
 
@@ -121,8 +130,8 @@ void UTMOPSpeechBubbleWidget::NativeTick(
     RevealedCharacterAccumulator -= static_cast<float>(CharactersToReveal);
     RevealedCharacterCount = FMath::Min(
         FullSpeechString.Len(), RevealedCharacterCount + CharactersToReveal);
-    SpeechText->SetText(FText::FromString(
-        FullSpeechString.Left(RevealedCharacterCount)));
+    SpeechText->SetText(FTMOPLocalization::Text(FText::FromString(
+        FullSpeechString.Left(RevealedCharacterCount))));
 }
 
 TSharedRef<SWidget> UTMOPSpeechBubbleWidget::RebuildWidget()
@@ -135,7 +144,7 @@ TSharedRef<SWidget> UTMOPSpeechBubbleWidget::RebuildWidget()
             .Padding(FMargin(12.0f, 7.0f, 12.0f, 1.0f))
             [
                 SAssignNew(SpeakerNameText, STextBlock)
-                .Text(PendingSpeakerName)
+                .Text(FTMOPLocalization::Text(PendingSpeakerName))
                 .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeechBubble"),
                     FCoreStyle::GetDefaultFontStyle("Bold", 16)))
                 .Justification(ETextJustify::Left)
@@ -147,7 +156,7 @@ TSharedRef<SWidget> UTMOPSpeechBubbleWidget::RebuildWidget()
             .Padding(FMargin(18.0f, 1.0f, 18.0f, 8.0f))
             [
                 SAssignNew(SpeechText, STextBlock)
-                .Text(FText::GetEmpty())
+                .Text(FTMOPLocalization::Text(FText::GetEmpty()))
                 .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("SpeechBubble"),
                     FCoreStyle::GetDefaultFontStyle("Regular", 18)))
                 .AutoWrapText(true)
@@ -162,5 +171,5 @@ void UTMOPSpeechBubbleWidget::SetPlaybackElapsed(float Seconds)
 {
     bHistoricalPlayback = true;
     RevealedCharacterCount = FMath::Clamp(FMath::FloorToInt(FMath::Max(0.0f, Seconds) * TypewriterCharactersPerSecond), 0, FullSpeechString.Len());
-    if (SpeechText.IsValid()) SpeechText->SetText(FText::FromString(FullSpeechString.Left(RevealedCharacterCount)));
+    if (SpeechText.IsValid()) SpeechText->SetText(FTMOPLocalization::Text(FText::FromString(FullSpeechString.Left(RevealedCharacterCount))));
 }

@@ -55,6 +55,9 @@ private:
     TSharedPtr<class STextBlock> RadioSubtitleText;
     FSlateBrush RadioIconBrush;
     TWeakObjectPtr<ATMOPRecordedCallDirector> RecordedCallDirector;
+    FText DialogSource;
+    uint32 DialogLanguageRevision = 0;
+    uint32 RadioLanguageRevision = 0;
     FString FullDialogString;
     FString FullRadioString;
     FName ActiveRadioRecordingId = NAME_None;

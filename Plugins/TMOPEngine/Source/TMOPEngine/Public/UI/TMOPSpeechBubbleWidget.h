@@ -35,6 +35,7 @@ private:
     TSharedPtr<class STextBlock> SpeakerNameText;
     FText PendingSpeechText;
     FText PendingSpeakerName;
+    uint32 LanguageRevision = 0;
     FString FullSpeechString;
     float RevealedCharacterAccumulator = 0.0f;
     int32 RevealedCharacterCount = 0;

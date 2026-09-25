@@ -1,4 +1,5 @@
 #include "UI/STMOPNotebookPanel.h"
+#include "Localization/TMOPLocalization.h"
 #include "Observations/TMOPNotebookTypes.h"
 #include "Observations/TMOPNotebookPresentation.h"
 #include "Agents/TMOPHistoricalAgent.h"
@@ -34,7 +35,7 @@ namespace
     TSharedRef<STextBlock> Text(const FText& Value, int32 Size = 12, bool bBold = false,
         FLinearColor Color = FLinearColor::White)
     {
-        return SNew(STextBlock).Text(Value).AutoWrapText(true).ColorAndOpacity(Color)
+        return SNew(STextBlock).Text(FTMOPLocalization::Text(Value)).AutoWrapText(true).ColorAndOpacity(Color)
             .Font(FCoreStyle::GetDefaultFontStyle(bBold ? "Bold" : "Regular", Size));
     }
 
@@ -58,21 +59,20 @@ namespace
                 [Text(Entry.DisplayName, 13, true)]];
             TArray<FString> Places;
             for (const auto& Point : Entry.Locations)
-                Places.AddUnique(FTMOPTime::FromSecondsFromMidnight(Point.Second).ToDisplayString() + TEXT(" — ") + Point.Address.ToString() + (Point.bPlayerObservation ? TEXT(" (egen observation)") : TEXT("")));
-            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FText::FromString(
-                Places.IsEmpty() ? TEXT("Observerad vid: plats ej fastställd") : TEXT("Observerad vid: ") + FString::Join(Places, TEXT("; "))))];
+                Places.AddUnique(FTMOPTime::FromSecondsFromMidnight(Point.Second).ToDisplayString() + TEXT(" — ") + Point.Address.ToString() + (Point.bPlayerObservation ? NSLOCTEXT("TMOP", "STMOPNotebookPanel.b2aa15e0ed32de6d", " (egen observation)").ToString() : TEXT("")));
+            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FText::FromString(Places.IsEmpty() ? NSLOCTEXT("TMOP", "STMOPNotebookPanel.a31bbcb8a7b0dc04", "Observerad vid: plats ej fastställd").ToString() : NSLOCTEXT("TMOP", "STMOPNotebookPanel.75d746ff9d70c08c", "Observerad vid: ").ToString() + FString::Join(Places, TEXT("; "))))];
             Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(Entry.Summary.IsEmpty()
                 ? NSLOCTEXT("TMOP", "NotebookNoEventSummary", "Ingen händelsebeskrivning registrerad.") : Entry.Summary)];
-            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FText::Format(
+            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FTMOPLocalization::Format(
                 NSLOCTEXT("TMOP", "NotebookSignalement", "Signalement: {0}"), Entry.Signalement.IsEmpty()
                     ? NSLOCTEXT("TMOP", "NotebookUnspecified", "ej angivet") : Entry.Signalement))];
             TArray<FString> Names;
             for (const auto& Name : Entry.ObserverNames) Names.Add(Name.ToString());
-            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FText::Format(
+            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FTMOPLocalization::Format(
                 NSLOCTEXT("TMOP", "NotebookSeenBy", "Sedd av: {0}"), Names.IsEmpty()
                     ? NSLOCTEXT("TMOP", "NotebookNoWitnesses", "inget namngivet vittne registrerat")
                     : FText::FromString(FString::Join(Names, TEXT(", ")))))];
-            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FText::Format(
+            Body->AddSlot().AutoHeight().Padding(0, 6, 0, 0)[Text(FTMOPLocalization::Format(
                 NSLOCTEXT("TMOP", "NotebookCollectedTime", "Insamlad {0}"),
                 FText::FromString(FTMOPTime::FromSecondsFromMidnight(Entry.DiscoveredSecond).ToDisplayString())), 10)];
 
@@ -98,17 +98,17 @@ namespace
                                 [SNew(SImage).Image(&EvidenceBrush)
                                     .Visibility_Lambda([this]() { return EvidenceTexture ? EVisibility::Visible : EVisibility::Collapsed; })]], ColumnGray, 2)]
                         + SVerticalBox::Slot().AutoHeight().Padding(0, 3)
-                        [SNew(STextBlock).Text_Lambda([this]() { return EvidenceCaption(); }).AutoWrapText(true)
+                        [SNew(STextBlock).Text(FTMOPLocalization::Bind([this]() { return EvidenceCaption(); })).AutoWrapText(true)
                             .Font(FCoreStyle::GetDefaultFontStyle("Regular", 10)).ColorAndOpacity(FLinearColor::White)]
                         + SVerticalBox::Slot().AutoHeight()
                         [SNew(SHorizontalBox)
                             .Visibility(Entry.EvidenceImages.Num() > 1 ? EVisibility::Visible : EVisibility::Collapsed)
-                            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FText::FromString(TEXT("‹")))
+                            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FTMOPLocalization::Text(FText::FromString(TEXT("‹"))))
                                 .OnClicked_Lambda([this]() { ShowEvidence(EvidenceIndex - 1); return FReply::Handled(); })]
                             + SHorizontalBox::Slot().FillWidth(1).HAlign(HAlign_Center).VAlign(VAlign_Center)
-                            [SNew(STextBlock).Text_Lambda([this]() { return FText::FromString(FString::Printf(TEXT("%d/%d"),
-                                EvidenceIndex + 1, Entry.EvidenceImages.Num())); }).Font(FCoreStyle::GetDefaultFontStyle("Regular", 10))]
-                            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FText::FromString(TEXT("›")))
+                            [SNew(STextBlock).Text(FTMOPLocalization::Bind([this]() { return FText::FromString(FString::Printf(TEXT("%d/%d"),
+                                EvidenceIndex + 1, Entry.EvidenceImages.Num())); })).Font(FCoreStyle::GetDefaultFontStyle("Regular", 10))]
+                            + SHorizontalBox::Slot().AutoWidth()[SNew(SButton).Text(FTMOPLocalization::Text(FText::FromString(TEXT("›"))))
                                 .OnClicked_Lambda([this]() { ShowEvidence(EvidenceIndex + 1); return FReply::Handled(); })]]]];
             ChildSlot[Frame(Row, CardGray, 8)];
         }
@@ -146,8 +146,8 @@ namespace
             if (Entry.EvidenceImages.IsEmpty()) return NSLOCTEXT("TMOP", "NotebookNoSketch", "Ingen fantombild/skiss");
             if (!EvidenceTexture) return NSLOCTEXT("TMOP", "NotebookMissingSketchAsset", "Bilden kunde inte läsas");
             const auto& Image = Entry.EvidenceImages[EvidenceIndex];
-            FString Caption = Image.Caption.IsEmpty() ? TEXT("Fantombild/skiss") : Image.Caption.ToString();
-            if (!Image.Source.IsEmpty()) Caption += TEXT("\n") + Image.Source.ToString();
+            FString Caption = Image.Caption.IsEmpty() ? NSLOCTEXT("TMOP", "STMOPNotebookPanel.815c692e8001b8c9", "Fantombild/skiss").ToString() : FTMOPLocalization::String(Image.Caption);
+            if (!Image.Source.IsEmpty()) Caption += TEXT("\n") + FTMOPLocalization::String(Image.Source);
             return FText::FromString(Caption);
         }
     };
@@ -235,7 +235,7 @@ TSharedRef<ITableRow> STMOPNotebookPanel::MakeRow(FItemPtr Item, const TSharedRe
         const FName EntityId = Entry.EntityId;
         const TWeakObjectPtr<ATMOPPlayerCharacter> OwnerPlayer = Player;
         Content->AddSlot().AutoHeight().Padding(0, 3, 0, 9)
-            [SNew(SNotebookCard).Entry(Entry).OnInspect(FOnClicked::CreateLambda([OwnerPlayer, EntityId]()
+            [SNew(SNotebookCard).Entry(FTMOPNotebookPresentation::LocalizedView(Entry, Player->GetWorld())).OnInspect(FOnClicked::CreateLambda([OwnerPlayer, EntityId]()
             {
                 if (OwnerPlayer.IsValid()) OwnerPlayer->InspectNotebookPerson(EntityId);
                 return FReply::Handled();

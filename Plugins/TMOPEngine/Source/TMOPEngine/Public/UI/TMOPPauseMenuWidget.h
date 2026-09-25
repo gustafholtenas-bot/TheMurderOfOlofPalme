@@ -12,6 +12,8 @@ class UDataTable;
 class UTMOPMapWidget;
 class UTMOPItemDefinition;
 class UTMOPNewspaperItemDefinition;
+class UStaticMesh;
+class UMaterialInterface;
 class SEditableTextBox;
 class STextBlock;
 class SVerticalBox;
@@ -34,6 +36,7 @@ class TMOPENGINE_API UTMOPPauseMenuWidget : public UUserWidget
 {
     GENERATED_BODY()
 public:
+    UTMOPPauseMenuWidget(const FObjectInitializer& ObjectInitializer);
     void InitializePauseMenu(APlayerController* InPlayerController,
         ATMOPPlayerCharacter* InPlayerCharacter);
     UFUNCTION(BlueprintCallable, Category="TMOP|UI|Pause")
@@ -79,8 +82,20 @@ public:
         meta=(RequiredAssetDataTags="RowStructure=/Script/TMOPEngine.TMOPChronologyRow"))
     TObjectPtr<UDataTable> MurderDayMysteriesTable;
 
+    /** A spherical mesh. The engine sphere is a cooked fallback; assign your textured globe here. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|World Atlas")
+    TObjectPtr<UStaticMesh> WorldGlobeMesh;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|World Atlas")
+    TObjectPtr<UMaterialInterface> WorldGlobeMaterial;
+    /** Correct the asset's meridian/pole orientation without changing geographic coordinates. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|World Atlas")
+    FRotator WorldGlobeAlignment = FRotator::ZeroRotator;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|UI|Pause|World Atlas")
+    bool bWorldGlobeCoastlines = true;
+
 
 protected:
+    virtual void ReleaseSlateResources(bool bReleaseChildren) override;
     virtual TSharedRef<SWidget> RebuildWidget() override;
     virtual FReply NativeOnKeyDown(const FGeometry& InGeometry,
         const FKeyEvent& InKeyEvent) override;

@@ -1,4 +1,5 @@
 #include "UI/TMOPAddressDirectoryWidget.h"
+#include "Localization/TMOPLocalization.h"
 #include "UI/TMOPLocalPanel.h"
 #include "UI/TMOPControlUIHelpers.h"
 
@@ -26,7 +27,7 @@ void UTMOPAddressDirectoryWidget::ShowDirectory(const FText& Address, const FTex
     FString Body = Residents.ToString();
     const FString Heading = Address.ToString() + TEXT("\n");
     if (Body.StartsWith(Heading)) Body.RightChopInline(Heading.Len());
-    if (Body.TrimStartAndEnd().IsEmpty()) Body = TEXT("Inga registrerade boende.");
+    if (Body.TrimStartAndEnd().IsEmpty()) Body = NSLOCTEXT("TMOP", "TMOPAddressDirectoryWidget.2a81acfc6747c41e", "Inga registrerade boende.").ToString();
     ShowInformation(Address, FText::FromString(Body),
         NSLOCTEXT("TMOP", "AddressResidents", "Boende"), FText::GetEmpty());
 }
@@ -37,12 +38,12 @@ void UTMOPAddressDirectoryWidget::ShowInformation(const FText& Title, const FTex
     AddressText = Title;
     ResidentsText = Body;
     ReadingCategory = Category;
-    ReadingSource = Source.ToString().TrimStartAndEnd().IsEmpty() ? FText::GetEmpty()
-        : FText::Format(NSLOCTEXT("TMOP", "InformationSource", "Källa: {0}"), Source);
-    if (TitleText.IsValid()) TitleText->SetText(AddressText);
-    if (DirectoryText.IsValid()) DirectoryText->SetText(ResidentsText);
-    if (CategoryText.IsValid()) CategoryText->SetText(ReadingCategory);
-    if (SourceText.IsValid()) SourceText->SetText(ReadingSource);
+    ReadingSource = FTMOPLocalization::String(Source).TrimStartAndEnd().IsEmpty() ? FText::GetEmpty()
+        : FTMOPLocalization::Format(NSLOCTEXT("TMOP", "InformationSource", "Källa: {0}"), Source);
+    if (TitleText.IsValid()) TitleText->SetText(FTMOPLocalization::Text(AddressText));
+    if (DirectoryText.IsValid()) DirectoryText->SetText(FTMOPLocalization::Text(ResidentsText));
+    if (CategoryText.IsValid()) CategoryText->SetText(FTMOPLocalization::Text(ReadingCategory));
+    if (SourceText.IsValid()) SourceText->SetText(FTMOPLocalization::Text(ReadingSource));
     if (ScrollBox.IsValid()) ScrollBox->ScrollToStart();
     SetVisibility(ESlateVisibility::Visible);
 }
@@ -63,28 +64,28 @@ TSharedRef<SWidget> UTMOPAddressDirectoryWidget::RebuildWidget()
               + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 16.0f)
               [ SNew(SHorizontalBox)
                 + SHorizontalBox::Slot().FillWidth(1.0f).VAlign(VAlign_Center)
-                [ SAssignNew(TitleText, STextBlock).Text(AddressText).AutoWrapText(true)
+                [ SAssignNew(TitleText, STextBlock).Text(FTMOPLocalization::Text(AddressText)).AutoWrapText(true)
                   .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AddressTitle"),
                       FCoreStyle::GetDefaultFontStyle("Bold", 24)))
                   .ColorAndOpacity(FLinearColor(0.95f, 0.79f, 0.48f)) ]
                 + SHorizontalBox::Slot().AutoWidth().Padding(16.0f, 0.0f)
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP", "CloseAddressDirectory", "Stäng"))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "CloseAddressDirectory", "Stäng")))
                   .OnClicked_UObject(this, &UTMOPAddressDirectoryWidget::HandleClose) ] ]
               + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 0.0f, 0.0f, 12.0f)
-              [ SAssignNew(CategoryText, STextBlock).Text(ReadingCategory).AutoWrapText(true)
+              [ SAssignNew(CategoryText, STextBlock).Text(FTMOPLocalization::Text(ReadingCategory)).AutoWrapText(true)
                 .Font(FCoreStyle::GetDefaultFontStyle("Bold", 18)) ]
               + SVerticalBox::Slot().FillHeight(1.0f)
               [ SAssignNew(ScrollBox, SScrollBox)
                 + SScrollBox::Slot().Padding(0.0f, 0.0f, 14.0f, 0.0f)
                 [ SNew(SVerticalBox)
                   + SVerticalBox::Slot().AutoHeight()
-                  [ SAssignNew(DirectoryText, STextBlock).Text(ResidentsText)
+                  [ SAssignNew(DirectoryText, STextBlock).Text(FTMOPLocalization::Text(ResidentsText))
                     .AutoWrapText(true).WrapTextAt(710.0f).LineHeightPercentage(1.35f)
                     .Font(ATMOPTypographyDirector::ResolveFont(this, TEXT("AddressResidents"),
                         FCoreStyle::GetDefaultFontStyle("Regular", 18)))
                     .ColorAndOpacity(FLinearColor::White) ]
                   + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 20.0f, 0.0f, 0.0f)
-                  [ SAssignNew(SourceText, STextBlock).Text(ReadingSource)
+                  [ SAssignNew(SourceText, STextBlock).Text(FTMOPLocalization::Text(ReadingSource))
                     .Visibility_Lambda([this]() { return ReadingSource.IsEmpty()
                         ? EVisibility::Collapsed : EVisibility::Visible; })
                     .AutoWrapText(true).WrapTextAt(710.0f)
@@ -92,9 +93,9 @@ TSharedRef<SWidget> UTMOPAddressDirectoryWidget::RebuildWidget()
                     .ColorAndOpacity(FLinearColor(0.72f, 0.76f, 0.8f)) ] ] ]
               + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 16.0f, 0.0f, 0.0f)
               [ SNew(STextBlock)
-                .Text_Lambda([this]() { return FText::Format(
+                .Text(FTMOPLocalization::Bind([this]() { return FTMOPLocalization::Format(
                     NSLOCTEXT("TMOP", "AddressCloseHint", "{0} / Esc — Stäng"),
-                    Player.IsValid() ? Player->GetInteractKeyDisplayText() : FText::FromString(TEXT("E"))); })
+                    Player.IsValid() ? Player->GetInteractKeyDisplayText() : NSLOCTEXT("TMOP", "TMOPAddressDirectoryWidget.e0184adedf913b07", "E")); }))
                 .Font(FCoreStyle::GetDefaultFontStyle("Regular", 14))
                 .ColorAndOpacity(FLinearColor(0.7f, 0.73f, 0.76f)) ] ] ] ]);
 }

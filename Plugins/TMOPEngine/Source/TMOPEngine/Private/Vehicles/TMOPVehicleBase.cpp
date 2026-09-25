@@ -1,4 +1,5 @@
 #include "Vehicles/TMOPVehicleBase.h"
+#include "Localization/TMOPLocalization.h"
 #include "Vehicles/TMOPVehicleGroundingComponent.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 
@@ -89,6 +90,7 @@ void ATMOPVehicleBase::Tick(const float DeltaSeconds)
 
 void ATMOPVehicleBase::UpdatePlaybackNameLabel()
 {
+    if (NameLabelLanguageRevision != FTMOPLocalization::GetRevision()) RefreshNameLabel();
     if (NameLabel) NameLabel->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
     if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) || !bShowNameLabel || !IsValid(NameLabel) ||
         GetWorld() == nullptr)
@@ -111,8 +113,10 @@ void ATMOPVehicleBase::RefreshNameLabel()
 {
     if (!IsValid(NameLabel))
         return;
+    NameLabelLanguageRevision = FTMOPLocalization::GetRevision();
     FString Label = DisplayName.IsEmpty()
-        ? VehicleId.ToString() : DisplayName.ToString();
+        ? VehicleId.ToString() : FTMOPLocalization::TableText(TEXT("DT_TMOP_HistoricalVehicles"),
+            VehicleId.ToString(), TEXT("DisplayName"), DisplayName).ToString();
     if (RegistrationStatus == ETMOPVehicleRegistrationStatus::Known &&
         !RegistrationNumber.IsEmpty())
     {

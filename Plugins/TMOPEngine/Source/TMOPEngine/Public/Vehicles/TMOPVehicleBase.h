@@ -149,4 +149,5 @@ public:
 private:
     FColor ResolveNameLabelColor() const;
     bool ShouldDisplayNameLabel() const;
+    uint32 NameLabelLanguageRevision = 0;
 };

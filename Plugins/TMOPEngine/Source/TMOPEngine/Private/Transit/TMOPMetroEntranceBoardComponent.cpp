@@ -1,4 +1,5 @@
 #include "Transit/TMOPMetroEntranceBoardComponent.h"
+#include "Localization/TMOPLocalization.h"
 
 #include "Components/WidgetComponent.h"
 #include "Camera/PlayerCameraManager.h"
@@ -162,17 +163,16 @@ void UTMOPMetroEntranceBoardComponent::RefreshBoard(const int32 CurrentSecond)
         const int32 Remaining = Arrival - Now;
         if (Remaining < -15) continue;
         FString Countdown;
-        if (Remaining <= 15) Countdown = TEXT("NU");
-        else if (Remaining < 60) Countdown = FString::Printf(TEXT("%d sek"), Remaining);
-        else Countdown = FString::Printf(TEXT("%d min"), FMath::CeilToInt(Remaining / 60.0f));
+        if (Remaining <= 15) Countdown = NSLOCTEXT("TMOP", "TMOPMetroEntranceBoardComponent.fde432f9941c92f8", "NU").ToString();
+        else if (Remaining < 60) Countdown = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPMetroEntranceBoardComponent.0ad729c95cca6347", "{0} sek"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), Remaining))).ToString();
+        else Countdown = FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPMetroEntranceBoardComponent.e802d4342b15cf61", "{0} min"), FText::AsCultureInvariant(FString::Printf(TEXT("%d"), FMath::CeilToInt(Remaining / 60.0f)))).ToString();
         Lines.Add(FString::Printf(TEXT("%d   %-18s %s"), Row.Line,
             *Row.Destination.ToString(), *Countdown));
         if (Lines.Num() >= FMath::Clamp(UpcomingRows, 1, 5)) break;
     }
-    if (Lines.IsEmpty()) Lines.Add(TEXT("Inga fler norrgående tåg i spelperioden"));
+    if (Lines.IsEmpty()) Lines.Add(NSLOCTEXT("TMOP", "TMOPMetroEntranceBoardComponent.d3b693cb76d728e1", "Inga fler norrgående tåg i spelperioden").ToString());
 
-    const FText Header = FText::FromString(FString::Printf(TEXT("%s  •  NORRUT"),
-        *StationName.ToString()));
+    const FText Header = FText::FromString(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "TMOPMetroEntranceBoardComponent.d02049977f39647c", "{0}  •  NORRUT"), FTMOPLocalization::Text(FString(StationName.ToString()))).ToString());
     const FText Disclaimer = bShowSouthboundDisclaimer
         ? NSLOCTEXT("TMOP", "MetroSouthboundMissing",
             "Södergående tidtabell saknas och visas därför inte.")

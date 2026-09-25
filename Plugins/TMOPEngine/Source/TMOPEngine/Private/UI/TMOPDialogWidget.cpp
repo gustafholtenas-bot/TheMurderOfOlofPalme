@@ -1,4 +1,5 @@
 #include "UI/TMOPDialogWidget.h"
+#include "Localization/TMOPLocalization.h"
 #include "UI/TMOPLocalPanel.h"
 #include "UI/TMOPControlUIHelpers.h"
 
@@ -32,10 +33,12 @@ void UTMOPDialogWidget::InitializeDialog(ATMOPPlayerCharacter* InPlayerCharacter
 
 void UTMOPDialogWidget::ShowDialog(const FText& Speaker, const FText& Dialog)
 {
-    if (SpeakerText.IsValid()) SpeakerText->SetText(Speaker);
-    FullDialogString = Dialog.ToString();
+    if (SpeakerText.IsValid()) SpeakerText->SetText(FTMOPLocalization::Text(Speaker));
+    DialogSource = Dialog;
+    FullDialogString = FTMOPLocalization::String(Dialog);
+    DialogLanguageRevision = FTMOPLocalization::GetRevision();
     DialogRevealCharacters = 0.0f;
-    if (DialogText.IsValid()) DialogText->SetText(FText::GetEmpty());
+    if (DialogText.IsValid()) DialogText->SetText(FTMOPLocalization::Text(FText::GetEmpty()));
     bDialogVisible = true;
     RefreshVisibility();
 }
@@ -71,7 +74,7 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
                         FCoreStyle::GetDefaultFontStyle("Bold", 19)))
                     .ColorAndOpacity(FLinearColor(0.95f, 0.72f, 0.22f)) ]
                   + SHorizontalBox::Slot().AutoWidth()
-                  [ SNew(SButton).Text(NSLOCTEXT("TMOP", "CloseDialog", "Stäng"))
+                  [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "CloseDialog", "Stäng")))
                     .OnClicked_UObject(this, &UTMOPDialogWidget::HandleCloseClicked) ] ]
                 + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 9.0f, 0.0f, 2.0f)
                 [ SAssignNew(DialogText, STextBlock)
@@ -113,6 +116,12 @@ TSharedRef<SWidget> UTMOPDialogWidget::RebuildWidget()
 void UTMOPDialogWidget::NativeTick(const FGeometry& MyGeometry, const float InDeltaTime)
 {
     Super::NativeTick(MyGeometry, InDeltaTime);
+    if (DialogLanguageRevision != FTMOPLocalization::GetRevision())
+    {
+        DialogLanguageRevision = FTMOPLocalization::GetRevision();
+        FullDialogString = FTMOPLocalization::String(DialogSource);
+        DialogRevealCharacters = FMath::Min(DialogRevealCharacters, float(FullDialogString.Len()));
+    }
     RefreshRadioSubtitle();
     AdvanceTypewriter(InDeltaTime);
 }
@@ -141,16 +150,18 @@ void UTMOPDialogWidget::RefreshRadioSubtitle()
         RefreshVisibility();
         return;
     }
-    if (RecordingId != ActiveRadioRecordingId || SegmentId != ActiveRadioSegmentId)
+    if (RecordingId != ActiveRadioRecordingId || SegmentId != ActiveRadioSegmentId ||
+        RadioLanguageRevision != FTMOPLocalization::GetRevision())
     {
         ActiveRadioRecordingId = RecordingId;
         ActiveRadioSegmentId = SegmentId;
-        FullRadioString = Transcript.ToString();
+        FullRadioString = FTMOPLocalization::String(Transcript);
+        RadioLanguageRevision = FTMOPLocalization::GetRevision();
         RadioRevealCharacters = 0.0f;
-        if (RadioSubtitleText.IsValid()) RadioSubtitleText->SetText(FText::GetEmpty());
+        if (RadioSubtitleText.IsValid()) RadioSubtitleText->SetText(FTMOPLocalization::Text(FText::GetEmpty()));
     }
-    if (RadioLeftSpeakerText.IsValid()) RadioLeftSpeakerText->SetText(LeftSpeaker);
-    if (RadioRightSpeakerText.IsValid()) RadioRightSpeakerText->SetText(RightSpeaker);
+    if (RadioLeftSpeakerText.IsValid()) RadioLeftSpeakerText->SetText(FTMOPLocalization::Text(LeftSpeaker));
+    if (RadioRightSpeakerText.IsValid()) RadioRightSpeakerText->SetText(FTMOPLocalization::Text(RightSpeaker));
     bRadioVisible = true;
     RefreshVisibility();
 }
@@ -163,15 +174,15 @@ void UTMOPDialogWidget::AdvanceTypewriter(const float DeltaTime)
     {
         DialogRevealCharacters = FMath::Min(float(FullDialogString.Len()),
             DialogRevealCharacters + Advance);
-        DialogText->SetText(FText::FromString(
-            FullDialogString.Left(FMath::FloorToInt(DialogRevealCharacters))));
+        DialogText->SetText(FTMOPLocalization::Text(FText::FromString(
+            FullDialogString.Left(FMath::FloorToInt(DialogRevealCharacters)))));
     }
     if (bRadioVisible && RadioSubtitleText.IsValid())
     {
         RadioRevealCharacters = FMath::Min(float(FullRadioString.Len()),
             RadioRevealCharacters + Advance);
-        RadioSubtitleText->SetText(FText::FromString(
-            FullRadioString.Left(FMath::FloorToInt(RadioRevealCharacters))));
+        RadioSubtitleText->SetText(FTMOPLocalization::Text(FText::FromString(
+            FullRadioString.Left(FMath::FloorToInt(RadioRevealCharacters)))));
     }
 }
 

@@ -261,7 +261,7 @@ bool ATMOPMainMenuIntroDirector::PauseAppearanceWorld()
     if (UGameplayStatics::IsGamePaused(this)) return true;
     bOwnsAppearanceWorldPause = UGameplayStatics::SetGamePaused(this, true);
     if (!bOwnsAppearanceWorldPause)
-        StartupStatus = FText::FromString(TEXT("Kunde inte pausa spelvärlden. Kontrollera att GameMode tillåter paus."));
+        StartupStatus = NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.23d328ee4f15a5f1", "Kunde inte pausa spelvärlden. Kontrollera att GameMode tillåter paus.");
     return bOwnsAppearanceWorldPause;
 }
 
@@ -270,7 +270,7 @@ bool ATMOPMainMenuIntroDirector::ReleaseAppearanceWorldPause()
     if (!bOwnsAppearanceWorldPause) return true;
     if (!UGameplayStatics::SetGamePaused(this, false))
     {
-        StartupStatus = FText::FromString(TEXT("Kunde inte återuppta spelvärlden."));
+        StartupStatus = NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.d3c0c4d3c4758a9d", "Kunde inte återuppta spelvärlden.");
         return false;
     }
     bOwnsAppearanceWorldPause = false;
@@ -287,7 +287,7 @@ void ATMOPMainMenuIntroDirector::HandleAppearanceTravelFailure(UWorld* World, ET
     GetGameInstance()->GetSubsystem<UTMOPLocalMultiplayerSubsystem>()->QueueAppearanceTravel(NAME_None);
     AppearanceLobby.Begin(LocalPlayerCount);
     PauseAppearanceWorld();
-    StartupStatus = FText::FromString(TEXT("Kunde inte ladda spelnivån: ") + Message);
+    StartupStatus = FText::FromString(NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.7d828baff604bdf2", "Kunde inte ladda spelnivån: ").ToString() + Message);
     if (MainMenuWidget) MainMenuWidget->ShowAppearanceSetup(LocalPlayerCount);
     SetMenuInput(true);
 }
@@ -308,7 +308,7 @@ bool ATMOPMainMenuIntroDirector::BeginAppearanceSetup(int32 Count)
     for (auto* Player : UTMOPLocalMultiplayerSubsystem::GetPlayers(this))
         Player->SetGameplayHUDHidden(TEXT("MainMenu"), true);
     bAppearanceSetupActive = true;
-    StartupStatus = FText::FromString(TEXT("Välj utseende på varje spelares flik. Alla måste trycka Klar."));
+    StartupStatus = NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.ef36d93c47b479cf", "Välj utseende på varje spelares flik. Alla måste trycka Klar.");
     if (MainMenuWidget) MainMenuWidget->ShowAppearanceSetup(Count);
     SetMenuInput(true);
     return true;
@@ -340,7 +340,7 @@ void ATMOPMainMenuIntroDirector::AppearanceEdited(int32 Slot)
     if (AppearanceLobby.Edit(Slot))
     {
         bStartQueued = false;
-        StartupStatus = FText::FromString(TEXT("Ändrat utseende behöver bekräftas med Klar."));
+        StartupStatus = NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.63df187dd3162920", "Ändrat utseende behöver bekräftas med Klar.");
     }
 }
 
@@ -356,11 +356,11 @@ void ATMOPMainMenuIntroDirector::ConfirmPlayerAppearance(int32 Slot)
         !Appearance->PreviewProfile(Profile, Error) || !Appearance->SaveEditedProfile(Error))
     {
         AppearanceLobby.Edit(Slot);
-        StartupStatus = FText::FromString(Error.IsEmpty() ? TEXT("Kunde inte validera eller spara spelarens utseende.") : Error);
+        StartupStatus = FText::FromString(Error.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.6d464fa74c671fcf", "Kunde inte validera eller spara spelarens utseende.").ToString() : Error);
         return;
     }
     if (!AppearanceLobby.Confirm(Slot, Revision)) return;
-    StartupStatus = FText::FromString(TEXT("Klar. Väntar tills alla spelare har bekräftat."));
+    StartupStatus = NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.0b622fbe9fc16ba3", "Klar. Väntar tills alla spelare har bekräftat.");
     if (AppearanceLobby.AllReady() && !bStartQueued)
     {
         bStartQueued = true;
@@ -374,7 +374,7 @@ void ATMOPMainMenuIntroDirector::StartNewGame()
     if ((bEnableMainMenu || bArrivedFromAppearanceTravel) &&
         (!AppearanceLobby.AllReady() || AppearanceLobby.GetCount() != LocalPlayerCount))
     {
-        StartupStatus = FText::FromString(TEXT("Alla spelare måste välja utseende och trycka Klar."));
+        StartupStatus = NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.c45fd0f88f874868", "Alla spelare måste välja utseende och trycka Klar.");
         if (!bAppearanceSetupActive && MainMenuWidget) MainMenuWidget->ShowPlayerCountPage();
         return;
     }
@@ -409,7 +409,7 @@ void ATMOPMainMenuIntroDirector::StartNewGame()
             bNewGameRequested = false;
             bStartQueued = false;
             AppearanceLobby.Edit(Slot);
-            StartupStatus = FText::FromString(Error.IsEmpty() ? TEXT("En spelares utseende kunde inte valideras.") : Error);
+            StartupStatus = FText::FromString(Error.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.a4f21055d6ca4b1a", "En spelares utseende kunde inte valideras.").ToString() : Error);
             if (MainMenuWidget) { bAppearanceSetupActive = true; MainMenuWidget->ShowAppearanceSetup(LocalPlayerCount); }
             PauseAppearanceWorld();
             SetMenuInput(true);
@@ -424,7 +424,7 @@ void ATMOPMainMenuIntroDirector::StartNewGame()
         {
             bNewGameRequested = false;
             bStartQueued = false;
-            StartupStatus = FText::FromString(TEXT("Spelnivån saknas. Kontrollera Gameplay Level och att kartan är paketerad."));
+            StartupStatus = NSLOCTEXT("TMOP", "TMOPMainMenuIntroDirector.8ee4fd2b8560d19a", "Spelnivån saknas. Kontrollera Gameplay Level och att kartan är paketerad.");
             return;
         }
         LocalSession->QueueAppearanceTravel(FName(*Package));

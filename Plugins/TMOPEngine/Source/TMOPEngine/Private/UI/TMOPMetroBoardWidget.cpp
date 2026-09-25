@@ -1,4 +1,5 @@
 #include "UI/TMOPMetroBoardWidget.h"
+#include "Localization/TMOPLocalization.h"
 
 #include "Styling/CoreStyle.h"
 #include "Widgets/Layout/SBorder.h"
@@ -12,9 +13,9 @@ void UTMOPMetroBoardWidget::SetBoard(const FText& Station,
     PendingStation = Station;
     PendingArrivals = Arrivals;
     PendingDisclaimer = Disclaimer;
-    if (StationText.IsValid()) StationText->SetText(PendingStation);
-    if (ArrivalText.IsValid()) ArrivalText->SetText(PendingArrivals);
-    if (DisclaimerText.IsValid()) DisclaimerText->SetText(PendingDisclaimer);
+    if (StationText.IsValid()) StationText->SetText(FTMOPLocalization::Text(PendingStation));
+    if (ArrivalText.IsValid()) ArrivalText->SetText(FTMOPLocalization::Text(PendingArrivals));
+    if (DisclaimerText.IsValid()) DisclaimerText->SetText(FTMOPLocalization::Text(PendingDisclaimer));
 }
 
 TSharedRef<SWidget> UTMOPMetroBoardWidget::RebuildWidget()
@@ -26,17 +27,17 @@ TSharedRef<SWidget> UTMOPMetroBoardWidget::RebuildWidget()
           [ SNew(SVerticalBox)
             + SVerticalBox::Slot().AutoHeight()
             [ SAssignNew(StationText, STextBlock)
-              .Text(PendingStation)
+              .Text(FTMOPLocalization::Text(PendingStation))
               .Font(FCoreStyle::GetDefaultFontStyle("Bold", 17))
               .ColorAndOpacity(FLinearColor(0.42f, 0.86f, 0.46f)) ]
             + SVerticalBox::Slot().AutoHeight().Padding(0.0f, 5.0f, 0.0f, 5.0f)
             [ SAssignNew(ArrivalText, STextBlock)
-              .Text(PendingArrivals)
+              .Text(FTMOPLocalization::Text(PendingArrivals))
               .Font(FCoreStyle::GetDefaultFontStyle("Regular", 15))
               .ColorAndOpacity(FLinearColor::White) ]
             + SVerticalBox::Slot().AutoHeight()
             [ SAssignNew(DisclaimerText, STextBlock)
-              .Text(PendingDisclaimer)
+              .Text(FTMOPLocalization::Text(PendingDisclaimer))
               .Font(FCoreStyle::GetDefaultFontStyle("Italic", 10))
               .AutoWrapText(true).WrapTextAt(360.0f)
               .ColorAndOpacity(FLinearColor(0.95f, 0.67f, 0.24f)) ] ] ];

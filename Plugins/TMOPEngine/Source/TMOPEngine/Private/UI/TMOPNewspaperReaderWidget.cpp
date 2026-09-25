@@ -1,4 +1,5 @@
 #include "UI/TMOPNewspaperReaderWidget.h"
+#include "Localization/TMOPLocalization.h"
 #include "UI/TMOPControlUIHelpers.h"
 #include "UI/TMOPLocalPanel.h"
 
@@ -191,29 +192,29 @@ TSharedRef<SWidget> UTMOPNewspaperReaderWidget::RebuildWidget()
               + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0,8)
               [ SNew(SHorizontalBox)
                 + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP","ReaderPrevBottom","Föregående sida"))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP","ReaderPrevBottom","Föregående sida")))
                   .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandlePreviousClicked) ]
                 + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
-                [ SNew(SButton).Text(FText::FromString(TEXT("−")))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(FText::FromString(TEXT("−"))))
                   .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleZoomOutClicked) ]
                 + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
-                [ SNew(SButton).Text(FText::FromString(TEXT("+")))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(FText::FromString(TEXT("+"))))
                   .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleZoomInClicked) ]
                 + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP","ReaderResetBottom","Återställ vy"))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP","ReaderResetBottom","Återställ vy")))
                   .OnClicked_Lambda([this]() {
                       if (IsValid(PlayerCharacter) && IsValid(PlayerCharacter->NewspaperReading))
                           PlayerCharacter->NewspaperReading->ResetReadingView();
                       return FReply::Handled(); }) ]
                 + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP","ReaderNextBottom","Nästa sida"))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP","ReaderNextBottom","Nästa sida")))
                   .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleNextClicked) ]
                 + SHorizontalBox::Slot().AutoWidth().Padding(4,0)
-                [ SNew(SButton).Text(NSLOCTEXT("TMOP","CloseNewspaper","Stäng"))
+                [ SNew(SButton).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP","CloseNewspaper","Stäng")))
                   .OnClicked_UObject(this,&UTMOPNewspaperReaderWidget::HandleCloseClicked) ] ]
               + SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
-              [ SNew(STextBlock).Text(NSLOCTEXT("TMOP","ReaderMouseHelp",
-                  "Mushjul: zoom • Vänsterdrag: flytta • Högerdrag: rotera"))
+              [ SNew(STextBlock).Text(FTMOPLocalization::Text(NSLOCTEXT("TMOP","ReaderMouseHelp",
+                  "Mushjul: zoom • Vänsterdrag: flytta • Högerdrag: rotera")))
                 .Font(FCoreStyle::GetDefaultFontStyle("Regular",12)).ColorAndOpacity(FLinearColor::White) ]
             ] ] ]);
 }
@@ -238,8 +239,8 @@ void UTMOPNewspaperReaderWidget::RefreshPage()
     {
         const FString DateSuffix = Newspaper->PublicationDate.IsEmpty()
             ? FString() : TEXT(" — ") + Newspaper->PublicationDate;
-        TitleText->SetText(FText::FromString(
-            Newspaper->DisplayName.ToString() + DateSuffix));
+        TitleText->SetText(FTMOPLocalization::Text(FText::FromString(
+            FTMOPLocalization::String(Newspaper->DisplayName) + DateSuffix)));
     }
     const bool bIsFront = CurrentPageIndex == 0;
     const bool bIsBack = CurrentPageIndex == Newspaper->Pages.Num() - 1 &&
@@ -247,25 +248,25 @@ void UTMOPNewspaperReaderWidget::RefreshPage()
     if (PageNumberText.IsValid())
     {
         if (bIsFront)
-            PageNumberText->SetText(NSLOCTEXT("TMOP", "NewspaperFrontCover", "Framsida"));
+            PageNumberText->SetText(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "NewspaperFrontCover", "Framsida")));
         else if (bIsBack)
-            PageNumberText->SetText(NSLOCTEXT("TMOP", "NewspaperBackCover", "Baksida"));
+            PageNumberText->SetText(FTMOPLocalization::Text(NSLOCTEXT("TMOP", "NewspaperBackCover", "Baksida")));
         else
-            PageNumberText->SetText(FText::Format(
+            PageNumberText->SetText(FTMOPLocalization::Text(FTMOPLocalization::Format(
                 NSLOCTEXT("TMOP", "NewspaperPageCounter", "Uppslag {0}–{1} av {2} sidor"),
                 FText::AsNumber(CurrentPageIndex + 1),
                 FText::AsNumber(FMath::Min(CurrentPageIndex + 2, Newspaper->Pages.Num() - 1)),
-                FText::AsNumber(Newspaper->Pages.Num())));
+                FText::AsNumber(Newspaper->Pages.Num()))));
     }
     if (PageLabelText.IsValid())
     {
         const int32 ResolvedPrintedPageNumber = Newspaper->bAutomaticallyNumberPages
             ? CurrentPageIndex + 1 : FMath::Max(1, Page.PrintedPageNumber);
         const FText Label = Page.PageLabel.IsEmpty() && !bIsFront && !bIsBack
-            ? FText::Format(NSLOCTEXT("TMOP", "PrintedNewspaperPage", "Tryckt sida {0}"),
+            ? FTMOPLocalization::Format(NSLOCTEXT("TMOP", "PrintedNewspaperPage", "Tryckt sida {0}"),
                 FText::AsNumber(ResolvedPrintedPageNumber))
             : Page.PageLabel;
-        PageLabelText->SetText(Label);
+        PageLabelText->SetText(FTMOPLocalization::Text(Label));
     }
 }
 

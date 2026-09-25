@@ -126,14 +126,14 @@ FText VenueDisplayName(const FString& Key)
     if (Name.StartsWith(TEXT("MetroHotorget"), ESearchCase::IgnoreCase))
     {
         const FString Number = Name.Mid(FString(TEXT("MetroHotorget")).Len());
-        return FText::FromString(Number.IsEmpty() ? TEXT("Hötorget T-bana")
-            : FString::Printf(TEXT("Hötorget T-bana – entré %s"), *Number));
+        return FText::FromString(Number.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPMapComponent.0eb919d914a61981", "Hötorget T-bana").ToString()
+            : FText::Format(NSLOCTEXT("TMOP", "MetroEntranceHotorget", "Hötorget T-bana – entré {0}"), FText::AsCultureInvariant(Number)).ToString());
     }
     if (Name.StartsWith(TEXT("MetroRadmansgatan"), ESearchCase::IgnoreCase))
     {
         const FString Number = Name.Mid(FString(TEXT("MetroRadmansgatan")).Len());
-        return FText::FromString(Number.IsEmpty() ? TEXT("Rådmansgatan T-bana")
-            : FString::Printf(TEXT("Rådmansgatan T-bana – entré %s"), *Number));
+        return FText::FromString(Number.IsEmpty() ? NSLOCTEXT("TMOP", "TMOPMapComponent.f4c588d7bbb8c423", "Rådmansgatan T-bana").ToString()
+            : FText::Format(NSLOCTEXT("TMOP", "MetroEntranceRadmansgatan", "Rådmansgatan T-bana – entré {0}"), FText::AsCultureInvariant(Number)).ToString());
     }
     const TArray<FString> Prefixes = {TEXT("Restaurang"), TEXT("Resturang"),
         TEXT("Biograf"), TEXT("Nattklubb")};

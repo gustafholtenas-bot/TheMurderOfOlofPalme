@@ -806,6 +806,56 @@ void UTMOPControlSettingsSubsystem::SetMenuNavigation(const int32 PlayerIndex, c
 
 FText UTMOPControlSettingsSubsystem::GetActionDisplayName(const ETMOPControlAction Action)
 {
-    const UEnum* Enum = StaticEnum<ETMOPControlAction>();
-    return Enum ? Enum->GetDisplayNameTextByValue(static_cast<int64>(Action)) : FText::GetEmpty();
+    // Runtime labels must not depend on editor-only enum display metadata.
+    switch (Action)
+    {
+    case ETMOPControlAction::MoveForward: return NSLOCTEXT("TMOP", "ControlAction.MoveForward", "Gå framåt");
+    case ETMOPControlAction::MoveBackward: return NSLOCTEXT("TMOP", "ControlAction.MoveBackward", "Gå bakåt");
+    case ETMOPControlAction::MoveLeft: return NSLOCTEXT("TMOP", "ControlAction.MoveLeft", "Gå åt vänster");
+    case ETMOPControlAction::MoveRight: return NSLOCTEXT("TMOP", "ControlAction.MoveRight", "Gå åt höger");
+    case ETMOPControlAction::LookUp: return NSLOCTEXT("TMOP", "ControlAction.LookUp", "Titta upp");
+    case ETMOPControlAction::LookDown: return NSLOCTEXT("TMOP", "ControlAction.LookDown", "Titta ned");
+    case ETMOPControlAction::LookLeft: return NSLOCTEXT("TMOP", "ControlAction.LookLeft", "Titta åt vänster");
+    case ETMOPControlAction::LookRight: return NSLOCTEXT("TMOP", "ControlAction.LookRight", "Titta åt höger");
+    case ETMOPControlAction::Jump: return NSLOCTEXT("TMOP", "ControlAction.Jump", "Hoppa");
+    case ETMOPControlAction::Sprint: return NSLOCTEXT("TMOP", "ControlAction.Sprint", "Spring");
+    case ETMOPControlAction::ExtraSprint: return NSLOCTEXT("TMOP", "ControlAction.ExtraSprint", "Extra sprint");
+    case ETMOPControlAction::Interact: return NSLOCTEXT("TMOP", "ControlAction.Interact", "Interagera");
+    case ETMOPControlAction::PrimaryAction: return NSLOCTEXT("TMOP", "ControlAction.PrimaryAction", "Primär handling");
+    case ETMOPControlAction::SecondaryAction: return NSLOCTEXT("TMOP", "ControlAction.SecondaryAction", "Sekundär handling");
+    case ETMOPControlAction::Cancel: return NSLOCTEXT("TMOP", "ControlAction.Cancel", "Avbryt");
+    case ETMOPControlAction::Crouch: return NSLOCTEXT("TMOP", "ControlAction.Crouch", "Huka");
+    case ETMOPControlAction::Kick: return NSLOCTEXT("TMOP", "ControlAction.Kick", "Sparka");
+    case ETMOPControlAction::ShoulderSwap: return NSLOCTEXT("TMOP", "ControlAction.ShoulderSwap", "Byt kameraaxel");
+    case ETMOPControlAction::Pause: return NSLOCTEXT("TMOP", "ControlAction.Pause", "Pausa");
+    case ETMOPControlAction::WorldMap: return NSLOCTEXT("TMOP", "ControlAction.WorldMap", "Karta");
+    case ETMOPControlAction::QuickInventory: return NSLOCTEXT("TMOP", "ControlAction.QuickInventory", "Snabbinventarie");
+    case ETMOPControlAction::InventoryPrevious: return NSLOCTEXT("TMOP", "ControlAction.InventoryPrevious", "Föregående föremål");
+    case ETMOPControlAction::InventoryNext: return NSLOCTEXT("TMOP", "ControlAction.InventoryNext", "Nästa föremål");
+    case ETMOPControlAction::DropItem: return NSLOCTEXT("TMOP", "ControlAction.DropItem", "Släpp föremål");
+    case ETMOPControlAction::LookZoom: return NSLOCTEXT("TMOP", "ControlAction.LookZoom", "Tittzoom");
+    case ETMOPControlAction::TogglePerspective: return NSLOCTEXT("TMOP", "ControlAction.TogglePerspective", "Byt perspektiv");
+    case ETMOPControlAction::VehicleAccelerate: return NSLOCTEXT("TMOP", "ControlAction.VehicleAccelerate", "Gasa");
+    case ETMOPControlAction::VehicleReverse: return NSLOCTEXT("TMOP", "ControlAction.VehicleReverse", "Backa");
+    case ETMOPControlAction::VehicleLeft: return NSLOCTEXT("TMOP", "ControlAction.VehicleLeft", "Styr åt vänster");
+    case ETMOPControlAction::VehicleRight: return NSLOCTEXT("TMOP", "ControlAction.VehicleRight", "Styr åt höger");
+    case ETMOPControlAction::VehicleBrake: return NSLOCTEXT("TMOP", "ControlAction.VehicleBrake", "Bromsa");
+    case ETMOPControlAction::VehicleHandbrake: return NSLOCTEXT("TMOP", "ControlAction.VehicleHandbrake", "Handbroms");
+    case ETMOPControlAction::VehicleExit: return NSLOCTEXT("TMOP", "ControlAction.VehicleExit", "Lämna fordon");
+    case ETMOPControlAction::VehicleHighSpeed: return NSLOCTEXT("TMOP", "ControlAction.VehicleHighSpeed", "Fordon: hög hastighet");
+    case ETMOPControlAction::MenuUp: return NSLOCTEXT("TMOP", "ControlAction.MenuUp", "Meny: upp");
+    case ETMOPControlAction::MenuDown: return NSLOCTEXT("TMOP", "ControlAction.MenuDown", "Meny: ned");
+    case ETMOPControlAction::MenuLeft: return NSLOCTEXT("TMOP", "ControlAction.MenuLeft", "Meny: vänster");
+    case ETMOPControlAction::MenuRight: return NSLOCTEXT("TMOP", "ControlAction.MenuRight", "Meny: höger");
+    case ETMOPControlAction::MenuConfirm: return NSLOCTEXT("TMOP", "ControlAction.MenuConfirm", "Meny: bekräfta");
+    case ETMOPControlAction::MenuZoomIn: return NSLOCTEXT("TMOP", "ControlAction.MenuZoomIn", "Meny: zooma in");
+    case ETMOPControlAction::MenuZoomOut: return NSLOCTEXT("TMOP", "ControlAction.MenuZoomOut", "Meny: zooma ut");
+    case ETMOPControlAction::MenuReset: return NSLOCTEXT("TMOP", "ControlAction.MenuReset", "Meny: återställ");
+    case ETMOPControlAction::MenuPreviousPage: return NSLOCTEXT("TMOP", "ControlAction.MenuPreviousPage", "Meny: föregående sida");
+    case ETMOPControlAction::MenuNextPage: return NSLOCTEXT("TMOP", "ControlAction.MenuNextPage", "Meny: nästa sida");
+    case ETMOPControlAction::MenuBack: return NSLOCTEXT("TMOP", "ControlAction.MenuBack", "Meny: tillbaka");
+    case ETMOPControlAction::VehicleTakeover: return NSLOCTEXT("TMOP", "ControlAction.VehicleTakeover", "Ta över fordon");
+    case ETMOPControlAction::TimelineCursor: return NSLOCTEXT("TMOP", "ControlAction.TimelineCursor", "Visa markör för tidslinjen");
+    default: return FText::GetEmpty();
+    }
 }

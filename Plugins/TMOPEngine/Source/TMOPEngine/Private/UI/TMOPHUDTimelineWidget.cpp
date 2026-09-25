@@ -1,4 +1,5 @@
 #include "UI/TMOPHUDTimelineWidget.h"
+#include "Localization/TMOPLocalization.h"
 #include "Time/TMOPWorldPlaybackComponent.h"
 #include "Time/TMOPTimeTravelPolicy.h"
 #include "Widgets/Layout/SConstraintCanvas.h"
@@ -127,7 +128,7 @@ public:
                 Runtime.State == ETMOPEventRuntimeState::Cancelled) continue;
             const int32 Second = Runtime.ResolvedTime.ToSecondsFromMidnight();
             if (Second < Start || Second > End) continue;
-            const FString Caption = M.Label.ToString();
+            const FString Caption = FTMOPLocalization::String(M.Label);
             const double Width = Measure->Measure(Caption,Font).X;
             const double Point = X(Second);
             const double LabelLeft = FMath::Clamp(Point-Width*0.5, Left+6,
@@ -167,7 +168,7 @@ public:
         const double P=X(Now);
         Box(FVector2D(P-1,Y-13),FVector2D(3,22),FLinearColor(0.15f,1,0.85f),Layer+3);
         if (bHoverHandle && !bDragging)
-            Text(TEXT("dra för tidsförflyttning"), FVector2D(FMath::Clamp(P-90, X0, FMath::Max(X0, X1-180)), Y-65), FLinearColor::White);
+            Text(NSLOCTEXT("TMOP", "TMOPHUDTimelineWidget.180a9b64fddf1cfb", "dra för tidsförflyttning").ToString(), FVector2D(FMath::Clamp(P-90, X0, FMath::Max(X0, X1-180)), Y-65), FLinearColor::White);
         if (bDragging)
         {
             Box(FVector2D(X(Target)-2,Y-17), FVector2D(4,29), FLinearColor::White, Layer+5);
@@ -178,7 +179,7 @@ public:
             if (!Replay->GetStatus().IsEmpty())
                 Text(Replay->GetStatus(), FVector2D(X0,12), FLinearColor::White);
             else if (Replay->IsScrubbing() && !bDragging)
-                Text(TEXT("En spelare väljer tid…"), FVector2D(X0,12), FLinearColor::White);
+                Text(NSLOCTEXT("TMOP", "TMOPHUDTimelineWidget.747f422566e43e80", "En spelare väljer tid…").ToString(), FVector2D(X0,12), FLinearColor::White);
             if (Replay->IsBusy())
             {
                 const double Angle = FSlateApplication::Get().GetCurrentTime() * 6;

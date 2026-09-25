@@ -62,6 +62,9 @@ private:
     TSharedPtr<STextBlock> IntroBody;
     TSharedPtr<SImage> IntroImage;
     FTMOPIntroTextPresentationSettings IntroTextSettings;
+    FText IntroHeadingSource;
+    FText IntroBodySource;
+    uint32 IntroLanguageRevision = 0;
     FString FullIntroHeading;
     FString FullIntroBody;
     float TypewriterCharacterAccumulator = 0.0f;

@@ -1,4 +1,5 @@
 #include "UI/TMOPNotebookToastWidget.h"
+#include "Localization/TMOPLocalization.h"
 #include "HAL/PlatformTime.h"
 #include "Styling/CoreStyle.h"
 #include "Widgets/SOverlay.h"
@@ -21,8 +22,8 @@ TSharedRef<SWidget> UTMOPNotebookToastWidget::RebuildWidget()
 void UTMOPNotebookToastWidget::ShowObservation(const FText& Name)
 {
     TakeWidget();
-    Message->SetText(FText::Format(NSLOCTEXT("TMOP", "NotebookAdded",
-        "”{0}” tillagd i anteckningsboken."), Name));
+    Message->SetText(FTMOPLocalization::Text(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "NotebookAdded",
+        "”{0}” tillagd i anteckningsboken."), Name)));
     HideAt = FPlatformTime::Seconds() + 4.0;
     SetVisibility(ESlateVisibility::HitTestInvisible);
 }

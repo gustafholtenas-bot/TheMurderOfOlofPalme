@@ -59,7 +59,7 @@ private:
     bool bShowObservations = true;
     bool bShowPolice = true;
     bool bShowWitnesses = true;
-    float FullMapZoom = 1.0f;
+    float FullMapZoom = 2.0f;
     FVector2D FullMapCenterUV = FVector2D(0.5f, 0.5f);
     FSlateBrush MapBrush;
 };
