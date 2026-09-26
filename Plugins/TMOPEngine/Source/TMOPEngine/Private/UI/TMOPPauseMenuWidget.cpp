@@ -1,5 +1,6 @@
 #include "UI/TMOPPauseMenuWidget.h"
 #include "WorldAtlas/STMOPWorldAtlas.h"
+#include "StockMarket/STMOPStockMarket.h"
 #include "Engine/StaticMesh.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Widgets/SNullWidget.h"
@@ -276,6 +277,7 @@ FText SectionTitle(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::MurderDayMysteries: return NSLOCTEXT("TMOP", "HubMysteries", "MYSTERIER PÅ MORDDAGEN");
     case ETMOPPauseHubSection::AfterMurderEvents: return NSLOCTEXT("TMOP", "HubAfterMurder", "HÄNDELSER EFTER MORDET");
     case ETMOPPauseHubSection::WorldGroups: return NSLOCTEXT("TMOP", "HubWorldGroups", "GRUPPERINGAR I VÄRLDEN");
+    case ETMOPPauseHubSection::StockMarket: return NSLOCTEXT("TMOP", "HubStockMarket", "BÖRSEN FÖRE OCH EFTER");
     case ETMOPPauseHubSection::SwedenGroups: return NSLOCTEXT("TMOP", "HubSwedenGroups", "GRUPPERINGAR I SVERIGE");
     default: return FText::GetEmpty();
     }
@@ -367,6 +369,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
     AddNavigationGap(20.0f);
     AddNavigationEntry(ETMOPPauseHubSection::WorldGroups);
     AddNavigationEntry(ETMOPPauseHubSection::SwedenGroups);
+    AddNavigationEntry(ETMOPPauseHubSection::StockMarket);
     AddNavigationGap(64.0f);
     AddNavigationEntry(ETMOPPauseHubSection::Sources);
     AddNavigationEntry(ETMOPPauseHubSection::Settings);
@@ -507,6 +510,9 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
         break;
     case ETMOPPauseHubSection::SwedenGroups:
         // Independent pages reserved for content specified later.
+        break;
+    case ETMOPPauseHubSection::StockMarket:
+        PageContentHost->SetContent(MakeTMOPStockMarket());
         break;
     }
 }

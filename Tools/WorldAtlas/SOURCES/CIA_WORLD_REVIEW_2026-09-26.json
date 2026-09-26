@@ -1,0 +1,23 @@
+{
+  "updated": "2026-09-26",
+  "baseline_entries": 193,
+  "current_entries": 202,
+  "new_entry_ids": [
+    "cia-fuller-world-19860227",
+    "cia-fuller-spillover-19860227",
+    "cia-afghanistan-outlook-19860228",
+    "cia-gulf-outlook-19860228",
+    "cia-south-yemen-19860228",
+    "cia-mcmahon-map-plan-19860125",
+    "us-contra-request-19860225",
+    "us-aquino-recognition-19860225",
+    "press-unita-aid-debate-19860228"
+  ],
+  "source_count": 6,
+  "source_access_limitations": {
+    "CIA_RDP88T00988R000200160023_9": "Indexed archive OCR read; PDF redirects to CIA homepage.",
+    "CIA_RDP87T01145R000300390010_2": "Indexed archive OCR read; PDF redirects to CIA homepage.",
+    "CIA_RDP05S02029R000300760001_0": "Only incomplete indexed material. No content conclusions added.",
+    "CIA_RDP87T00289R000200780001_2": "Alternative NESA candidate redirects to homepage; not treated as verified full text."
+  }
+}

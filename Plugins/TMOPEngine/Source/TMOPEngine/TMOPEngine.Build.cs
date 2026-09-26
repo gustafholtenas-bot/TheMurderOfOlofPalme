@@ -21,5 +21,8 @@ public class TMOPEngine : ModuleRules
         RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/alignments_1986.json", StagedFileType.UFS);
         RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/flags_1986.json", StagedFileType.UFS);
         RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/flags_1986.png", StagedFileType.UFS);
+        RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/Portraits/...", StagedFileType.UFS);
+        RuntimeDependencies.Add("$(PluginDir)/Content/StockMarket/markets.json", StagedFileType.UFS);
+        RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/Flights/flights.json", StagedFileType.UFS);
     }
 }

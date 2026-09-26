@@ -4,6 +4,7 @@
 #include "WorldAtlas/TMOPGlobeScene.h"
 #include "WorldAtlas/TMOPAtlasAppearance.h"
 #include "WorldAtlas/STMOPAtlasHierarchy.h"
+#include "WorldAtlas/Flights/STMOPFlightWidgets.h"
 #include "Localization/TMOPLocalization.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/SLeafWidget.h"
@@ -63,13 +64,15 @@ bool LinkPoint(const FTMOPAtlasParticipant& A, const FTMOPAtlasParticipant& B, d
 class STMOPGlobe final : public SLeafWidget
 {
 public:
-    SLATE_BEGIN_ARGS(STMOPGlobe) {}
+    SLATE_BEGIN_ARGS(STMOPGlobe) : _DrawCoastlines(true) {}
         SLATE_ARGUMENT(TFunction<void(const FString&)>, OnSelect)
+        SLATE_ARGUMENT(bool, DrawCoastlines)
+        SLATE_ARGUMENT(TSharedPtr<FTMOPFlightState>, Flights)
     SLATE_END_ARGS()
     void Construct(const FArguments& Args, TSharedRef<FTMOPWorldAtlasData> InData, TSharedRef<FTMOPAtlasAppearance> InAppearance,
-        UStaticMesh* Mesh, UMaterialInterface* Material, FRotator Alignment, bool bInCoasts)
+        UStaticMesh* Mesh, UMaterialInterface* Material, FRotator Alignment)
     {
-        Data = InData; Appearance = InAppearance; OnSelect = Args._OnSelect; bCoasts = bInCoasts;
+        Data = InData; Appearance = InAppearance; OnSelect = Args._OnSelect; bCoasts = Args._DrawCoastlines; Flights = Args._Flights;
         Scene = MakeUnique<FTMOPGlobeScene>(Mesh, Material, Alignment);
         SetClipping(EWidgetClipping::ClipToBounds);
     }
@@ -86,6 +89,15 @@ public:
         Latitude = FMath::Clamp(Latitude + Lat, -89.0, 89.0);
         bDirty = true; Invalidate(EInvalidateWidgetReason::Paint);
     }
+    void FocusFlight(int32 Index)
+    {
+        if (!Flights || !Flights->Data || !Flights->Data->Legs.IsValidIndex(Index)) return;
+        const auto& F = Flights->Data->Legs[Index];
+        const FVector P = TMOPGlobe::Arc(Flights->Data->Airports[F.Origin].Unit, Flights->Data->Airports[F.Destination].Unit, .5);
+        Latitude = FMath::RadiansToDegrees(FMath::Asin(FMath::Clamp(P.Z, -1.0, 1.0)));
+        Longitude = FMath::RadiansToDegrees(FMath::Atan2(-P.Y, P.X));
+        bDirty = true; Invalidate(EInvalidateWidgetReason::Paint);
+    }
     void ZoomBy(double Amount)
     {
         Zoom = FMath::Clamp(Zoom * FMath::Pow(2.0, Amount * 2.0), .55, 4.0);
@@ -98,10 +110,12 @@ public:
     virtual void Tick(const FGeometry& G, double Time, float Delta) override
     {
         SLeafWidget::Tick(G, Time, Delta);
+        if (Flights && Flights->bEnabled) { Flights->Advance(Delta); Invalidate(EInvalidateWidgetReason::Paint); }
         if (bDirty && Scene) { Scene->Render(TMOPGlobe::View(Latitude, Longitude)); bDirty = false; }
     }
     bool DrawEntry(const FTMOPAtlasEntry& E) const
     {
+        if (Flights && Flights->bEnabled) return bCountries && (E.Kind == TEXT("country") || E.Kind == TEXT("region"));
         if (!E.Visible(bLater, bNearby)) return false;
         if (E.Kind == TEXT("country") || E.Kind == TEXT("region")) return bCountries;
         if (E.Kind == TEXT("actor")) return bActors;
@@ -273,7 +287,8 @@ public:
                     E.Text(TEXT("title")), FCoreStyle::GetDefaultFontStyle("Bold", 12), ESlateDrawEffect::None, Color);
             }
         }
-        return Layer + 15;
+        if (Flights) PaintTMOPFlights(*Flights, G, Out, Layer + 16, Rotation, Center, Radius);
+        return Layer + 18;
     }
     virtual FReply OnMouseButtonDown(const FGeometry& G, const FPointerEvent& E) override
     {
@@ -290,6 +305,12 @@ public:
             if (bMoved) Turn(-(P.X - Previous.X) * .35 / Zoom, (P.Y - Previous.Y) * .35 / Zoom);
             Previous = P; return FReply::Handled();
         }
+        const int32 Flight = HitFlight(G, P);
+        if (Flight != INDEX_NONE)
+        {
+            Hovered.Reset(); SetToolTipText(Flights->Label(Flight));
+            return FReply::Unhandled();
+        }
         Hovered = Hit(G, P);
         FText ParticipantLabel;
         HitParticipant(G, P, &ParticipantLabel);
@@ -300,6 +321,8 @@ public:
     virtual FReply OnMouseButtonUp(const FGeometry& G, const FPointerEvent& E) override
     {
         if (E.GetEffectingButton() != EKeys::LeftMouseButton || !HasMouseCapture()) return FReply::Unhandled();
+        const int32 Flight = bMoved ? INDEX_NONE : HitFlight(G, G.AbsoluteToLocal(E.GetScreenSpacePosition()));
+        if (Flight != INDEX_NONE) { Flights->Select(Flight); return FReply::Handled().ReleaseMouseCapture(); }
         const FString Id = bMoved ? FString() : Hit(G, G.AbsoluteToLocal(E.GetScreenSpacePosition()));
         if (!Id.IsEmpty()) OnSelect(Id);
         return FReply::Handled().ReleaseMouseCapture();
@@ -323,6 +346,12 @@ public:
         return FReply::Handled();
     }
 private:
+    int32 HitFlight(const FGeometry& G, const FVector2D& P) const
+    {
+        if (!Flights) return INDEX_NONE;
+        const FVector2D Size = G.GetLocalSize();
+        return HitTMOPFlight(*Flights, TMOPGlobe::View(Latitude, Longitude), Size * .5, FMath::Min(Size.X, Size.Y) * (100.0 / 240.0) * Zoom, P);
+    }
     const FSlateBrush* CountryFlag(const FTMOPAtlasEntry& E) const
     { return bFlags && Appearance && E.Kind == TEXT("country") ? Appearance->Flag(E.Id) : nullptr; }
 
@@ -557,6 +586,7 @@ private:
     TSharedPtr<FTMOPWorldAtlasData> Data;
     TSharedPtr<FTMOPAtlasAppearance> Appearance;
     TUniquePtr<FTMOPGlobeScene> Scene;
+    TSharedPtr<FTMOPFlightState> Flights;
     TFunction<void(const FString&)> OnSelect;
     double Latitude = 25, Longitude = 15, Zoom = 1;
     bool bCoasts = true, bDirty = true, bMoved = false;
@@ -579,16 +609,25 @@ public:
         Revision = FTMOPLocalization::GetRevision();
         Appearance = MakeShared<FTMOPAtlasAppearance>();
         Appearance->Load();
-        SAssignNew(Globe, STMOPGlobe, Data.ToSharedRef(), Appearance.ToSharedRef(), Mesh, Material, Alignment, bCoasts)
+        Flights = MakeShared<FTMOPFlightState>();
+        Flights->Data = MakeShared<FTMOPFlightData>();
+        Flights->Data->Load(); // Optional layer: a broken flight dataset must not break the atlas.
+        Flights->Refilter();
+        // Slate accepts at most five required arguments; keep options in FArguments.
+        SAssignNew(Globe, STMOPGlobe, Data.ToSharedRef(), Appearance.ToSharedRef(), Mesh, Material, Alignment)
+            .DrawCoastlines(bCoasts)
+            .Flights(Flights)
             .OnSelect(TFunction<void(const FString&)>([this](const FString& Id) { Select(Id); }));
-        TSharedRef<SHorizontalBox> Tabs = SNew(SHorizontalBox);
+        TSharedRef<SWrapBox> Tabs = SNew(SWrapBox).UseAllottedSize(true);
         auto Tab = [&](const FString& Kind, const FText& Name)
         {
-            Tabs->AddSlot().FillWidth(1).Padding(2)[SNew(SButton).Text(FTMOPLocalization::Bind([Name] { return Name; }))
+            Tabs->AddSlot().Padding(2)[SNew(SButton).Text(FTMOPLocalization::Bind([Name] { return Name; }))
                 .ButtonColorAndOpacity_Lambda([this, Kind] { return Mode == Kind ? FLinearColor(.24f, .36f, .45f) : FLinearColor(.08f, .11f, .15f); })
                 .OnClicked_Lambda([this, Kind]
                 {
                     Mode = Kind; Search.Reset(); SearchBox->SetText(FText::GetEmpty());
+                    Flights->bEnabled = Mode == TEXT("flight"); Flights->bPlaying = false;
+                    if (Flights->bEnabled) { RebuildList(); RebuildDetails(); return FReply::Handled(); }
                     for (const auto& E : Data->Entries)
                     {
                         const bool bKind = Mode == TEXT("flow") ? E.Kind == TEXT("arms") || E.Kind == TEXT("funds") : Mode == TEXT("group") ? (E.Kind == TEXT("group") || E.Kind == TEXT("actor") || E.Kind == TEXT("event")) : Mode == TEXT("country") ? (E.Kind == TEXT("country") || E.Kind == TEXT("region")) : E.Kind == Mode;
@@ -601,10 +640,12 @@ public:
         Tab(TEXT("group"), NSLOCTEXT("TMOP", "AtlasGroups", "Grupper och aktörer"));
         Tab(TEXT("conflict"), NSLOCTEXT("TMOP", "AtlasConflicts", "Konflikter"));
         Tab(TEXT("flow"), NSLOCTEXT("TMOP", "AtlasFlows", "Vapen och finansiering"));
+        Tab(TEXT("flight"), NSLOCTEXT("TMOP", "FlightTraffic", "Flygtrafik ±24 h"));
         TSharedRef<SWrapBox> Layers = SNew(SWrapBox).UseAllottedSize(true);
         auto Check = [&](const FText& Label, bool* Flag)
         {
             Layers->AddSlot().Padding(6, 4)[SNew(SCheckBox)
+                .Visibility_Lambda([this, Flag] { return Mode != TEXT("flight") || Flag == &Globe->bCountries || Flag == &Globe->bFlags || Flag == &Globe->bBlocs ? EVisibility::Visible : EVisibility::Collapsed; })
                 .IsChecked_Lambda([Flag] { return *Flag ? ECheckBoxState::Checked : ECheckBoxState::Unchecked; })
                 .OnCheckStateChanged_Lambda([this, Flag](ECheckBoxState S) { *Flag = S == ECheckBoxState::Checked; Globe->Invalidate(EInvalidateWidgetReason::Paint); })
                 [SNew(STextBlock).Text(FTMOPLocalization::Bind([Label] { return Label; }))]];
@@ -632,7 +673,7 @@ public:
             [SNew(SVerticalBox)
             + SVerticalBox::Slot().AutoHeight()[Tabs]
             + SVerticalBox::Slot().AutoHeight().Padding(4)[SNew(STextBlock).Text(FTMOPLocalization::Bind([this]
-                { return Globe->bLater ? NSLOCTEXT("TMOP", "AtlasLaterDate", "28 februari 1986 • även senare händelser 1986") : NSLOCTEXT("TMOP", "AtlasDate", "28 februari 1986"); }))]
+                { return Mode == TEXT("flight") ? NSLOCTEXT("TMOP", "FlightWindow", "27 feb 23.21.30–1 mars 23.21.30, 1986 • svensk tid (CET)") : Globe->bLater ? NSLOCTEXT("TMOP", "AtlasLaterDate", "28 februari 1986 • även senare händelser 1986") : NSLOCTEXT("TMOP", "AtlasDate", "28 februari 1986"); }))]
             + SVerticalBox::Slot().AutoHeight()[Layers]
             + SVerticalBox::Slot().AutoHeight().Padding(6, 2)[SNew(STextBlock).AutoWrapText(true)
                 .Visibility_Lambda([this] { return Globe->bBlocs ? EVisibility::Visible : EVisibility::Collapsed; })
@@ -642,6 +683,7 @@ public:
                 .ColorAndOpacity(FLinearColor(1.f, .75f, .25f))
                 .Text(L(NSLOCTEXT("TMOP", "AtlasAppearanceWarning", "Flaggor eller blockfärger kunde inte läsas. Kartans övriga innehåll är tillgängligt.")))]
             + SVerticalBox::Slot().AutoHeight().Padding(6)[SNew(SCheckBox)
+                .Visibility_Lambda([this] { return Mode == TEXT("flight") ? EVisibility::Collapsed : EVisibility::Visible; })
                 .IsChecked_Lambda([this] { return Globe->bLater ? ECheckBoxState::Checked : ECheckBoxState::Unchecked; })
                 .OnCheckStateChanged_Lambda([this](ECheckBoxState S)
                 {
@@ -651,6 +693,7 @@ public:
                     RebuildList(); Globe->Invalidate(EInvalidateWidgetReason::Paint);
                 })[SNew(STextBlock).Text(FTMOPLocalization::Bind([] { return NSLOCTEXT("TMOP", "AtlasLater", "Visa även senare 1986 (efter morddatumet)"); }))]]
             + SVerticalBox::Slot().AutoHeight().Padding(6)[SNew(SCheckBox)
+                .Visibility_Lambda([this] { return Mode == TEXT("flight") ? EVisibility::Collapsed : EVisibility::Visible; })
                 .IsChecked_Lambda([this] { return Globe->bNearby ? ECheckBoxState::Checked : ECheckBoxState::Unchecked; })
                 .OnCheckStateChanged_Lambda([this](ECheckBoxState State)
                 {
@@ -662,16 +705,20 @@ public:
             + SVerticalBox::Slot().FillHeight(1)[SNew(SHorizontalBox)
                 + SHorizontalBox::Slot().FillWidth(.20f).Padding(3)[SNew(SVerticalBox)
                     + SVerticalBox::Slot().AutoHeight()[SAssignNew(SearchBox, SSearchBox)
+                        .Visibility_Lambda([this] { return Mode == TEXT("flight") ? EVisibility::Collapsed : EVisibility::Visible; })
                         .HintText(FTMOPLocalization::Bind([] { return NSLOCTEXT("TMOP", "AtlasSearch", "Sök i listan"); }))
                         .OnTextChanged_Lambda([this](const FText& T) { Search = T.ToString(); RebuildList(); })]
-                    + SVerticalBox::Slot().FillHeight(1)[SNew(SScrollBox) + SScrollBox::Slot()[SAssignNew(List, SVerticalBox)]]]
+                    + SVerticalBox::Slot().FillHeight(1)[SAssignNew(ListHost, SBox)]]
                 + SHorizontalBox::Slot().FillWidth(.40f).Padding(3)[SNew(SVerticalBox)
                     + SVerticalBox::Slot().FillHeight(1)[Globe.ToSharedRef()]
                     + SVerticalBox::Slot().AutoHeight()[Controls]
-                    + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).AutoWrapText(true).Text(FTMOPLocalization::Bind([]
-                        { return NSLOCTEXT("TMOP", "AtlasControls", "Dra för att rotera • hjul för zoom • klicka på punkt eller linje. Pilar och knappar fungerar också."); }))]]
+                    + SVerticalBox::Slot().AutoHeight()[MakeTMOPFlightControls(Flights.ToSharedRef())]
+                    + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).AutoWrapText(true).Text(FTMOPLocalization::Bind([this]
+                        { return Mode == TEXT("flight") ? NSLOCTEXT("TMOP", "FlightControls", "Dra för att rotera • hjul för zoom • välj ett flyg i listan eller klicka på en flygsymbol.") : NSLOCTEXT("TMOP", "AtlasControls", "Dra för att rotera • hjul för zoom • klicka på punkt eller linje. Pilar och knappar fungerar också."); }))]]
                 + SHorizontalBox::Slot().FillWidth(.40f).Padding(6)[SAssignNew(DetailHost, SBox)]]
-            + SVerticalBox::Slot().AutoHeight().Padding(4)[SNew(STextBlock).AutoWrapText(true).Text(FTMOPLocalization::Bind([]
+            + SVerticalBox::Slot().AutoHeight().Padding(4)[SNew(STextBlock).AutoWrapText(true)
+                .Visibility_Lambda([this] { return Mode == TEXT("flight") ? EVisibility::Collapsed : EVisibility::Visible; })
+                .Text(FTMOPLocalization::Bind([]
                 { return NSLOCTEXT("TMOP", "AtlasLegend", "Kryssad romb: konflikt • röd: pågående period • orange: avslutad • lila: börjar senare. Dubbelpil: motsättning • blå enkelpil: stöd • röd enkelpil: våld mot civila. Gult: vapen • streckat grönt: pengar. Punkter och pilar är schematiska, inte fronter eller färdvägar. Pågående period betyder inte strid varje dag. Historisk kontext belägger inte delaktighet i mordet."); }))]]];
         RebuildList(); Select(TEXT("il"));
     }
@@ -685,8 +732,13 @@ public:
 private:
     void RebuildList()
     {
-        if (!List) return;
-        List->ClearChildren();
+        if (!ListHost) return;
+        if (Mode == TEXT("flight"))
+        {
+            ListHost->SetContent(MakeTMOPFlightBrowser(Flights.ToSharedRef(), TFunction<void(int32)>([this](int32 Index) { Globe->FocusFlight(Index); })));
+            return;
+        }
+        ListHost->SetContent(SNew(SScrollBox) + SScrollBox::Slot()[SAssignNew(List, SVerticalBox)]);
         int32 Count = 0;
         for (const FTMOPAtlasEntry& E : Data->Entries)
         {
@@ -712,6 +764,7 @@ private:
     {
         const FTMOPAtlasEntry* E = Data->Find(Id);
         if (!E || !E->Visible(Globe->bLater, Globe->bNearby)) return;
+        Flights->bEnabled = false; Flights->bPlaying = false;
         if (!Search.IsEmpty() && !E->Text(TEXT("title")).ToString().Contains(Search))
         { Search.Reset(); SearchBox->SetText(FText::GetEmpty()); }
         Mode = E->Kind == TEXT("region") ? TEXT("country") : E->Kind == TEXT("arms") || E->Kind == TEXT("funds") ? TEXT("flow") : (E->Kind == TEXT("event") || E->Kind == TEXT("actor")) ? TEXT("group") : E->Kind;
@@ -724,6 +777,7 @@ private:
     }
     void RebuildDetails()
     {
+        if (Mode == TEXT("flight")) { DetailHost->SetContent(MakeTMOPFlightDetails(Flights.ToSharedRef())); return; }
         DetailHost->SetContent(SNullWidget::NullWidget);
         const FTMOPAtlasEntry* E = Data->Find(Globe->Selected);
         if (!E) return;
@@ -843,8 +897,9 @@ private:
     TSharedPtr<FTMOPWorldAtlasData> Data;
     TSharedPtr<FTMOPAtlasAppearance> Appearance;
     TSharedPtr<STMOPGlobe> Globe;
+    TSharedPtr<FTMOPFlightState> Flights;
     TSharedPtr<SVerticalBox> List, Details;
-    TSharedPtr<SBox> DetailHost;
+    TSharedPtr<SBox> DetailHost, ListHost;
     TSharedPtr<SSearchBox> SearchBox;
     FString Mode = TEXT("country"), Search;
     uint32 Revision = 0;

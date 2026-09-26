@@ -1,0 +1,1108 @@
+{
+  "schema": 1,
+  "before_date": "1986-02-28",
+  "after_date": "1986-03-03",
+  "method": {
+    "sv": "Indexnivåer fredag 28 februari och måndag 3 mars 1986. Förändring = (efter − före) / före × 100. Indexen har olika baser och ska inte summeras. Plus och minus anger riktning. Saknas betyder inte noll. Japan hade även lördagshandel. Källavvikelser måste läsas tillsammans med anmärkningarna. Två observationer visar en prisrörelse, men fastställer varken en statistisk avvikelse, orsaken eller vem som handlade.",
+    "en": "Index levels on Friday, 28 February and Monday, 3 March 1986. Change = (after − before) / before × 100. Indices have different bases and must not be added together. Plus and minus indicate direction. Missing does not mean zero. Japan also traded on Saturday. Read source discrepancies together with their notes. Two observations show a price movement but do not establish a statistical anomaly, its cause or who traded.",
+    "en_source": "Indexnivåer fredag 28 februari och måndag 3 mars 1986. Förändring = (efter − före) / före × 100. Indexen har olika baser och ska inte summeras. Plus och minus anger riktning. Saknas betyder inte noll. Japan hade även lördagshandel. Källavvikelser måste läsas tillsammans med anmärkningarna. Två observationer visar en prisrörelse, men fastställer varken en statistisk avvikelse, orsaken eller vem som handlade."
+  },
+  "sources": [
+    {
+      "id": "ft-1986-03-04",
+      "title": "Financial Times",
+      "published": "1986-03-04",
+      "url": "https://archive.org/details/FinancialTimes1986UKEnglish/Mar%2004%201986%2C%20Financial%20Times%2C%20%2329870%2C%20UK%20%28en%29/page/n45/mode/2up"
+    },
+    {
+      "id": "ft-1986-03-05",
+      "title": "Financial Times",
+      "published": "1986-03-05",
+      "url": "https://archive.org/details/FinancialTimes1986UKEnglish/Mar%2005%201986%2C%20Financial%20Times%2C%20%2329871%2C%20UK%20%28en%29/page/n45/mode/2up"
+    }
+  ],
+  "entries": [
+    {
+      "id": "se-jp-stockholm",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Sverige",
+        "en": "Sweden",
+        "en_source": "Sverige"
+      },
+      "name": {
+        "sv": "J&P Stockholm",
+        "en": "J&P Stockholm",
+        "en_source": "J&P Stockholm"
+      },
+      "before": 1838.53,
+      "after": 1851.68,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "Omsättning 254 → 197 Mkr. FT beskriver försiktighet och en tyst minut för Palme.",
+        "en": "Turnover fell from SEK 254m to SEK 197m. FT describes investor caution and a minute of silence for Palme.",
+        "en_source": "Omsättning 254 → 197 Mkr. FT beskriver försiktighet och en tyst minut för Palme."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "no-oslo",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Norge",
+        "en": "Norway",
+        "en_source": "Norge"
+      },
+      "name": {
+        "sv": "Oslo SE",
+        "en": "Oslo SE",
+        "en_source": "Oslo SE"
+      },
+      "before": 352.05,
+      "after": 357.76,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "",
+        "en": "",
+        "en_source": ""
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "dk-copenhagen",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Danmark",
+        "en": "Denmark",
+        "en_source": "Danmark"
+      },
+      "name": {
+        "sv": "Copenhagen SE",
+        "en": "Copenhagen SE",
+        "en_source": "Copenhagen SE"
+      },
+      "before": 234.69,
+      "after": 234.31,
+      "decimals": 2,
+      "status": "source_conflict",
+      "notes": {
+        "sv": "Fredag 234,69 hämtas från den datumangivna tabellen på s. 43. S. 46 anger 232,06 som ”Previous”.",
+        "en": "Friday’s 234.69 is taken from the dated table on p. 43. Page 46 gives 232.06 as “Previous”.",
+        "en_source": "Fredag 234,69 hämtas från den datumangivna tabellen på s. 43. S. 46 anger 232,06 som ”Previous”."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "gb-ft-ordinary",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Storbritannien",
+        "en": "United Kingdom",
+        "en_source": "Storbritannien"
+      },
+      "name": {
+        "sv": "FT Ordinary",
+        "en": "FT Ordinary",
+        "en_source": "FT Ordinary"
+      },
+      "before": 1277.4,
+      "after": 1266.5,
+      "decimals": 1,
+      "status": "close",
+      "notes": {
+        "sv": "FT beskriver svagare pund, lägre oljepris och vinsthemtagningar.",
+        "en": "FT describes a weaker pound, lower oil prices and profit-taking.",
+        "en_source": "FT beskriver svagare pund, lägre oljepris och vinsthemtagningar."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "42, 46"
+        }
+      ]
+    },
+    {
+      "id": "gb-ftse-100",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Storbritannien",
+        "en": "United Kingdom",
+        "en_source": "Storbritannien"
+      },
+      "name": {
+        "sv": "FT-SE 100",
+        "en": "FT-SE 100",
+        "en_source": "FT-SE 100"
+      },
+      "before": 1543.9,
+      "after": 1534.9,
+      "decimals": 1,
+      "status": "close",
+      "notes": {
+        "sv": "Slutkurs 1 534,9 i rapport och tabell på s. 42. Översikten s. 46 visar 1 545,2, öppningsvärdet enligt s. 42.",
+        "en": "The closing value is 1,534.9 in the report and table on p. 42. The overview on p. 46 gives 1,545.2, identified on p. 42 as the opening value.",
+        "en_source": "Slutkurs 1 534,9 i rapport och tabell på s. 42. Översikten s. 46 visar 1 545,2, öppningsvärdet enligt s. 42."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "42, 46"
+        }
+      ]
+    },
+    {
+      "id": "gb-ft-all-share",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Storbritannien",
+        "en": "United Kingdom",
+        "en_source": "Storbritannien"
+      },
+      "name": {
+        "sv": "FT-A All-Share",
+        "en": "FT-A All-Share",
+        "en_source": "FT-A All-Share"
+      },
+      "before": 750.83,
+      "after": 747.39,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "",
+        "en": "",
+        "en_source": ""
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "42, 46"
+        }
+      ]
+    },
+    {
+      "id": "gb-ft-500",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Storbritannien",
+        "en": "United Kingdom",
+        "en_source": "Storbritannien"
+      },
+      "name": {
+        "sv": "FT-A 500",
+        "en": "FT-A 500",
+        "en_source": "FT-A 500"
+      },
+      "before": 827.94,
+      "after": 822.51,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "",
+        "en": "",
+        "en_source": ""
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "gb-ft-gold",
+      "region": "europe",
+      "kind": "sector",
+      "market": {
+        "sv": "Storbritannien",
+        "en": "United Kingdom",
+        "en_source": "Storbritannien"
+      },
+      "name": {
+        "sv": "FT Gold Mines",
+        "en": "FT Gold Mines",
+        "en_source": "FT Gold Mines"
+      },
+      "before": 336.2,
+      "after": 342.7,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "Branschindex för guldgruveaktier, inte ett brett brittiskt marknadsindex.",
+        "en": "An index of gold-mining shares, not a broad UK market index.",
+        "en_source": "Branschindex för guldgruveaktier, inte ett brett brittiskt marknadsindex."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "42, 46"
+        }
+      ]
+    },
+    {
+      "id": "fr-cac-general",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Frankrike",
+        "en": "France",
+        "en_source": "Frankrike"
+      },
+      "name": {
+        "sv": "CAC General",
+        "en": "CAC General",
+        "en_source": "CAC General"
+      },
+      "before": 312.9,
+      "after": 303.0,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver den femte raka sessionen av konsolidering i Paris. Detta är dåtidens CAC General, inte CAC 40.",
+        "en": "FT describes a fifth consecutive consolidation session in Paris. This is the historical CAC General, not the CAC 40.",
+        "en_source": "FT beskriver den femte raka sessionen av konsolidering i Paris. Detta är dåtidens CAC General, inte CAC 40."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "fr-tendance",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Frankrike",
+        "en": "France",
+        "en_source": "Frankrike"
+      },
+      "name": {
+        "sv": "Indicateur de tendance",
+        "en": "Indicateur de tendance",
+        "en_source": "Indicateur de tendance"
+      },
+      "before": 116.5,
+      "after": 113.3,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "",
+        "en": "",
+        "en_source": ""
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "de-faz",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Västtyskland",
+        "en": "West Germany",
+        "en_source": "Västtyskland"
+      },
+      "name": {
+        "sv": "FAZ-Aktien",
+        "en": "FAZ-Aktien",
+        "en_source": "FAZ-Aktien"
+      },
+      "before": 636.86,
+      "after": 636.55,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "Olika tyska index rör sig olika. Jämför med Commerzbank nedan.",
+        "en": "The German indices moved in different directions. Compare with Commerzbank.",
+        "en_source": "Olika tyska index rör sig olika. Jämför med Commerzbank nedan."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "de-commerzbank",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Västtyskland",
+        "en": "West Germany",
+        "en_source": "Västtyskland"
+      },
+      "name": {
+        "sv": "Commerzbank",
+        "en": "Commerzbank",
+        "en_source": "Commerzbank"
+      },
+      "before": 1913.7,
+      "after": 1921.4,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver räntesänkningsförväntningar och stöd för kemiaktier från lägre oljepris.",
+        "en": "FT describes hopes for interest-rate cuts and support for chemical shares from lower oil prices.",
+        "en_source": "FT beskriver räntesänkningsförväntningar och stöd för kemiaktier från lägre oljepris."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "be-brussels",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Belgien",
+        "en": "Belgium",
+        "en_source": "Belgien"
+      },
+      "name": {
+        "sv": "Brussels SE",
+        "en": "Brussels SE",
+        "en_source": "Brussels SE"
+      },
+      "before": 3257.19,
+      "after": 3289.32,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver kemiaktier, investmentbolag och kraftbolag som starka.",
+        "en": "FT describes strength in chemicals, holding companies and utilities.",
+        "en_source": "FT beskriver kemiaktier, investmentbolag och kraftbolag som starka."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "nl-anp-general",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Nederländerna",
+        "en": "Netherlands",
+        "en_source": "Nederländerna"
+      },
+      "name": {
+        "sv": "ANP-CBS General",
+        "en": "ANP-CBS General",
+        "en_source": "ANP-CBS General"
+      },
+      "before": 242.1,
+      "after": 240.4,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver ett kursfall mitt under sessionen.",
+        "en": "FT describes a fall during the middle of the session.",
+        "en_source": "FT beskriver ett kursfall mitt under sessionen."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "nl-anp-industrial",
+      "region": "europe",
+      "kind": "sector",
+      "market": {
+        "sv": "Nederländerna",
+        "en": "Netherlands",
+        "en_source": "Nederländerna"
+      },
+      "name": {
+        "sv": "ANP-CBS Industrial",
+        "en": "ANP-CBS Industrial",
+        "en_source": "ANP-CBS Industrial"
+      },
+      "before": 235.1,
+      "after": 234.0,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "",
+        "en": "",
+        "en_source": ""
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "ch-swiss-bank",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Schweiz",
+        "en": "Switzerland",
+        "en_source": "Schweiz"
+      },
+      "name": {
+        "sv": "Swiss Bank index",
+        "en": "Swiss Bank index",
+        "en_source": "Swiss Bank index"
+      },
+      "before": 554.7,
+      "after": 557.8,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver förväntningar på högre resultat för vissa banker.",
+        "en": "FT describes expectations of higher earnings at some banks.",
+        "en_source": "FT beskriver förväntningar på högre resultat för vissa banker."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "at-credit-aktien",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Österrike",
+        "en": "Austria",
+        "en_source": "Österrike"
+      },
+      "name": {
+        "sv": "Credit Aktien",
+        "en": "Credit Aktien",
+        "en_source": "Credit Aktien"
+      },
+      "before": 112.29,
+      "after": 111.39,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "",
+        "en": "",
+        "en_source": ""
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "it-bci",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Italien",
+        "en": "Italy",
+        "en_source": "Italien"
+      },
+      "name": {
+        "sv": "Banca Commerciale Italiana",
+        "en": "Banca Commerciale Italiana",
+        "en_source": "Banca Commerciale Italiana"
+      },
+      "before": 567.35,
+      "after": 571.11,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver stark efterfrågan på Fiat.",
+        "en": "FT describes strong demand for Fiat shares.",
+        "en_source": "FT beskriver stark efterfrågan på Fiat."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "es-madrid",
+      "region": "europe",
+      "kind": "market",
+      "market": {
+        "sv": "Spanien",
+        "en": "Spain",
+        "en_source": "Spanien"
+      },
+      "name": {
+        "sv": "Madrid SE",
+        "en": "Madrid SE",
+        "en_source": "Madrid SE"
+      },
+      "before": 129.52,
+      "after": 135.04,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver fortsatt uppgång från föregående vecka, lägre oljepris och väntade investeringsstimulanser.",
+        "en": "FT describes a rally continuing from the previous week, lower oil prices and expected investment incentives.",
+        "en_source": "FT beskriver fortsatt uppgång från föregående vecka, lägre oljepris och väntade investeringsstimulanser."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "us-dow-industrials",
+      "region": "north_america",
+      "kind": "market",
+      "market": {
+        "sv": "USA",
+        "en": "USA",
+        "en_source": "USA"
+      },
+      "name": {
+        "sv": "Dow Jones Industrials",
+        "en": "Dow Jones Industrials",
+        "en_source": "Dow Jones Industrials"
+      },
+      "before": 1709.06,
+      "after": 1696.67,
+      "decimals": 2,
+      "status": "close",
+      "notes": {
+        "sv": "FT 5 mars, s. 46: måndagens slutvärde i Previous. Ersätter 1 698,05, som var måndagens notering kl. 15.",
+        "en": "FT, 5 March, p. 46: Monday’s closing value in the Previous column. Replaces 1,698.05, Monday’s 3pm reading.",
+        "en_source": "FT 5 mars, s. 46: måndagens slutvärde i Previous. Ersätter 1 698,05, som var måndagens notering kl. 15."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "us-dow-transport",
+      "region": "north_america",
+      "kind": "sector",
+      "market": {
+        "sv": "USA",
+        "en": "USA",
+        "en_source": "USA"
+      },
+      "name": {
+        "sv": "Dow Jones Transport",
+        "en": "Dow Jones Transport",
+        "en_source": "Dow Jones Transport"
+      },
+      "before": 792.28,
+      "after": 789.62,
+      "decimals": 2,
+      "status": "close",
+      "notes": {
+        "sv": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 790,24 i numret från 4 mars.",
+        "en": "FT, 5 March, p. 46: Monday’s closing value. Replaces the preliminary 790.24 in the 4 March issue.",
+        "en_source": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 790,24 i numret från 4 mars."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "us-dow-utilities",
+      "region": "north_america",
+      "kind": "sector",
+      "market": {
+        "sv": "USA",
+        "en": "USA",
+        "en_source": "USA"
+      },
+      "name": {
+        "sv": "Dow Jones Utilities",
+        "en": "Dow Jones Utilities",
+        "en_source": "Dow Jones Utilities"
+      },
+      "before": 185.83,
+      "after": 184.29,
+      "decimals": 2,
+      "status": "close",
+      "notes": {
+        "sv": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 184,14 i numret från 4 mars.",
+        "en": "FT, 5 March, p. 46: Monday’s closing value. Replaces the preliminary 184.14 in the 4 March issue.",
+        "en_source": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 184,14 i numret från 4 mars."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "us-sp500",
+      "region": "north_america",
+      "kind": "market",
+      "market": {
+        "sv": "USA",
+        "en": "USA",
+        "en_source": "USA"
+      },
+      "name": {
+        "sv": "S&P 500 Composite",
+        "en": "S&P 500 Composite",
+        "en_source": "S&P 500 Composite"
+      },
+      "before": 226.92,
+      "after": 225.42,
+      "decimals": 2,
+      "status": "close",
+      "notes": {
+        "sv": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 225,19 i numret från 4 mars.",
+        "en": "FT, 5 March, p. 46: Monday’s closing value. Replaces the preliminary 225.19 in the 4 March issue.",
+        "en_source": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 225,19 i numret från 4 mars."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "ca-toronto-composite",
+      "region": "north_america",
+      "kind": "market",
+      "market": {
+        "sv": "Kanada",
+        "en": "Canada",
+        "en_source": "Kanada"
+      },
+      "name": {
+        "sv": "Toronto Composite",
+        "en": "Toronto Composite",
+        "en_source": "Toronto Composite"
+      },
+      "before": 2855.8,
+      "after": 2866.5,
+      "decimals": 1,
+      "status": "close",
+      "notes": {
+        "sv": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 2 865,0 i numret från 4 mars.",
+        "en": "FT, 5 March, p. 46: Monday’s closing value. Replaces the preliminary 2,865.0 in the 4 March issue.",
+        "en_source": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 2 865,0 i numret från 4 mars."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "ca-toronto-mining",
+      "region": "north_america",
+      "kind": "sector",
+      "market": {
+        "sv": "Kanada",
+        "en": "Canada",
+        "en_source": "Kanada"
+      },
+      "name": {
+        "sv": "Toronto Metals & Mining",
+        "en": "Toronto Metals & Mining",
+        "en_source": "Toronto Metals & Mining"
+      },
+      "before": 2227.3,
+      "after": 2241.3,
+      "decimals": 1,
+      "status": "close",
+      "notes": {
+        "sv": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 2 247,9 i numret från 4 mars. Branschindex.",
+        "en": "FT, 5 March, p. 46: Monday’s closing value. Replaces the preliminary 2,247.9 in the 4 March issue. Sector index.",
+        "en_source": "FT 5 mars, s. 46: måndagens slutvärde. Ersätter preliminära 2 247,9 i numret från 4 mars. Branschindex."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "ca-montreal-portfolio",
+      "region": "north_america",
+      "kind": "market",
+      "market": {
+        "sv": "Kanada",
+        "en": "Canada",
+        "en_source": "Kanada"
+      },
+      "name": {
+        "sv": "Montréal Portfolio",
+        "en": "Montréal Portfolio",
+        "en_source": "Montréal Portfolio"
+      },
+      "before": 137.92,
+      "after": null,
+      "decimals": 2,
+      "status": "source_conflict",
+      "notes": {
+        "sv": "S. 46 trycker 1 456,57 för måndagen mot 137,92 föregående dag. Skalan avviker kraftigt. Ingen helgförändring beräknas.",
+        "en": "Page 46 prints 1,456.57 for Monday against 137.92 previously. The scale differs substantially. No weekend change is calculated.",
+        "en_source": "S. 46 trycker 1 456,57 för måndagen mot 137,92 föregående dag. Skalan avviker kraftigt. Ingen helgförändring beräknas."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "jp-nikkei",
+      "region": "asia_pacific",
+      "kind": "market",
+      "market": {
+        "sv": "Japan",
+        "en": "Japan",
+        "en_source": "Japan"
+      },
+      "name": {
+        "sv": "Nikkei",
+        "en": "Nikkei",
+        "en_source": "Nikkei"
+      },
+      "before": 13640.83,
+      "after": 13757.63,
+      "decimals": 2,
+      "status": "close",
+      "notes": {
+        "sv": "Lördag 1 mars: 13 727,86. Fredag–måndag omfattar även lördagshandel. Måndagen steg 29,77 från lördagen.",
+        "en": "Saturday, 1 March: 13,727.86. The Friday–Monday comparison includes Saturday trading. Monday gained 29.77 from Saturday.",
+        "en_source": "Lördag 1 mars: 13 727,86. Fredag–måndag omfattar även lördagshandel. Måndagen steg 29,77 från lördagen."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "jp-tokyo-se",
+      "region": "asia_pacific",
+      "kind": "market",
+      "market": {
+        "sv": "Japan",
+        "en": "Japan",
+        "en_source": "Japan"
+      },
+      "name": {
+        "sv": "Tokyo SE",
+        "en": "Tokyo SE",
+        "en_source": "Tokyo SE"
+      },
+      "before": 1090.7,
+      "after": 1099.6,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "Samma fredag–måndag-period som Nikkei. Värden med en decimal enligt översiktstabellen på s. 46.",
+        "en": "The same Friday–Monday period as Nikkei. Values use one decimal place as in the overview on p. 46.",
+        "en_source": "Samma fredag–måndag-period som Nikkei. Värden med en decimal enligt översiktstabellen på s. 46."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "46"
+        }
+      ]
+    },
+    {
+      "id": "hk-hang-seng",
+      "region": "asia_pacific",
+      "kind": "market",
+      "market": {
+        "sv": "Hongkong",
+        "en": "Hong Kong",
+        "en_source": "Hongkong"
+      },
+      "name": {
+        "sv": "Hang Seng",
+        "en": "Hang Seng",
+        "en_source": "Hang Seng"
+      },
+      "before": 1695.3,
+      "after": 1685.06,
+      "decimals": 2,
+      "status": "close",
+      "notes": {
+        "sv": "FT beskriver försäljningar från europeiska fondförvaltare och viss återhämtning genom fyndköp.",
+        "en": "FT describes sales by European fund managers and some recovery through bargain-hunting.",
+        "en_source": "FT beskriver försäljningar från europeiska fondförvaltare och viss återhämtning genom fyndköp."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "sg-straits-times",
+      "region": "asia_pacific",
+      "kind": "market",
+      "market": {
+        "sv": "Singapore",
+        "en": "Singapore",
+        "en_source": "Singapore"
+      },
+      "name": {
+        "sv": "Straits Times",
+        "en": "Straits Times",
+        "en_source": "Straits Times"
+      },
+      "before": 623.27,
+      "after": 624.57,
+      "decimals": 2,
+      "status": "daily",
+      "notes": {
+        "sv": "Rapportens uppgång 1,30 stämmer med tabellvärdena.",
+        "en": "The reported gain of 1.30 agrees with the table values.",
+        "en_source": "Rapportens uppgång 1,30 stämmer med tabellvärdena."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "au-all-ordinaries",
+      "region": "asia_pacific",
+      "kind": "market",
+      "market": {
+        "sv": "Australien",
+        "en": "Australia",
+        "en_source": "Australien"
+      },
+      "name": {
+        "sv": "All Ordinaries",
+        "en": "All Ordinaries",
+        "en_source": "All Ordinaries"
+      },
+      "before": 1050.1,
+      "after": 1053.3,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "FT beskriver förhoppningar om lägre inhemska räntor samt starkare banker och BHP.",
+        "en": "FT describes hopes for lower domestic interest rates and stronger banks and BHP.",
+        "en_source": "FT beskriver förhoppningar om lägre inhemska räntor samt starkare banker och BHP."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "au-mining",
+      "region": "asia_pacific",
+      "kind": "sector",
+      "market": {
+        "sv": "Australien",
+        "en": "Australia",
+        "en_source": "Australien"
+      },
+      "name": {
+        "sv": "Metals & Mining",
+        "en": "Metals & Mining",
+        "en_source": "Metals & Mining"
+      },
+      "before": 512.7,
+      "after": 513.0,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "Branschindex.",
+        "en": "Sector index.",
+        "en_source": "Branschindex."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "za-jse-gold",
+      "region": "africa",
+      "kind": "sector",
+      "market": {
+        "sv": "Sydafrika",
+        "en": "South Africa",
+        "en_source": "Sydafrika"
+      },
+      "name": {
+        "sv": "JSE Gold",
+        "en": "JSE Gold",
+        "en_source": "JSE Gold"
+      },
+      "before": 1197.0,
+      "after": 1203.3,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "Måndagsvärdet återfinns i FT 5 mars, s. 43 och 46. Fredagsvärde 1 197,0. Branschindex för guldgruveaktier.",
+        "en": "Monday’s value appears in FT, 5 March, pp. 43 and 46. Friday was 1,197.0. Gold-mining sector index.",
+        "en_source": "Måndagsvärdet återfinns i FT 5 mars, s. 43 och 46. Fredagsvärde 1 197,0. Branschindex för guldgruveaktier."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "za-jse-industrials",
+      "region": "africa",
+      "kind": "sector",
+      "market": {
+        "sv": "Sydafrika",
+        "en": "South Africa",
+        "en_source": "Sydafrika"
+      },
+      "name": {
+        "sv": "JSE Industrials",
+        "en": "JSE Industrials",
+        "en_source": "JSE Industrials"
+      },
+      "before": 1156.6,
+      "after": 1146.5,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "Måndagsvärdet återfinns i FT 5 mars, s. 43 och 46. Fredagsvärde 1 156,6.",
+        "en": "Monday’s value appears in FT, 5 March, pp. 43 and 46. Friday was 1,156.6.",
+        "en_source": "Måndagsvärdet återfinns i FT 5 mars, s. 43 och 46. Fredagsvärde 1 156,6."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-04",
+          "pages": "43, 46"
+        },
+        {
+          "source": "ft-1986-03-05",
+          "pages": "43, 46"
+        }
+      ]
+    },
+    {
+      "id": "world-ms-capital",
+      "region": "world",
+      "kind": "world",
+      "market": {
+        "sv": "Världen",
+        "en": "World",
+        "en_source": "Världen"
+      },
+      "name": {
+        "sv": "MS Capital International",
+        "en": "MS Capital International",
+        "en_source": "MS Capital International"
+      },
+      "before": 282.6,
+      "after": 281.4,
+      "decimals": 1,
+      "status": "daily",
+      "notes": {
+        "sv": "Båda datumen enligt FT 5 mars, s. 43 och 46. Fredag 282,6 ersätter tidigare avläsning 282,5. Indexets valutabas anges inte här.",
+        "en": "Both dates follow FT, 5 March, pp. 43 and 46. Friday’s 282.6 replaces the earlier reading of 282.5. The currency basis is not stated here.",
+        "en_source": "Båda datumen enligt FT 5 mars, s. 43 och 46. Fredag 282,6 ersätter tidigare avläsning 282,5. Indexets valutabas anges inte här."
+      },
+      "citations": [
+        {
+          "source": "ft-1986-03-05",
+          "pages": "43, 46"
+        }
+      ]
+    }
+  ]
+}

@@ -188,7 +188,8 @@
         "bofors-bulgaria-romania",
         "bofors-india-contract",
         "bofors-rbs70-bh-route",
-        "bofors-rbs70-dubai-route"
+        "bofors-rbs70-dubai-route",
+        "uk-palme-mediation-19860205"
       ],
       "route": [],
       "sources": [
@@ -605,7 +606,25 @@
         "nsdd214-revision-19860228",
         "nsc-bilateral-19860228",
         "nsc-afghanistan-speech-19860228",
-        "bofors-cia-review-1988"
+        "bofors-cia-review-1988",
+        "cia-fuller-world-19860227",
+        "cia-fuller-spillover-19860227",
+        "cia-afghanistan-outlook-19860228",
+        "cia-gulf-outlook-19860228",
+        "cia-south-yemen-19860228",
+        "cia-mcmahon-map-plan-19860125",
+        "us-contra-request-19860225",
+        "us-aquino-recognition-19860225",
+        "press-unita-aid-debate-19860228",
+        "operation-recovery-198602",
+        "operation-attain-document-ii",
+        "marcos-evacuation-19860226",
+        "ryan-assessment-19860224",
+        "uk-staunch-brief-19860211",
+        "uk-iran-draft-19861003",
+        "ukusa-press-19860214",
+        "global86-planning-19860221",
+        "gchq-south-africa-press-19860801"
       ],
       "route": [],
       "sources": [
@@ -1059,7 +1078,12 @@
         "north-palme-talking-points-19860821",
         "nsdd214-revision-19860228",
         "nsc-bilateral-19860228",
-        "nsc-afghanistan-speech-19860228"
+        "nsc-afghanistan-speech-19860228",
+        "cia-afghanistan-outlook-19860228",
+        "cia-gulf-outlook-19860228",
+        "cia-south-yemen-19860228",
+        "operation-zhawar-19860228",
+        "ryan-assessment-19860224"
       ],
       "route": [],
       "sources": [
@@ -1396,7 +1420,9 @@
         "iran-tow-19860227",
         "iran-frankfurt-19860225",
         "peres-reagan-letter-19860228",
-        "sat-tow-flights-198602"
+        "sat-tow-flights-198602",
+        "operation-recovery-198602",
+        "israel-lebanon-search-19860217"
       ],
       "route": [],
       "sources": [
@@ -1728,7 +1754,16 @@
         "bofors-fdsp",
         "bofors-pakistan-denied",
         "bofors-iran-samples",
-        "bofors-iran-nitrocellulose"
+        "bofors-iran-nitrocellulose",
+        "cia-gulf-outlook-19860228",
+        "cia-mcmahon-map-plan-19860125",
+        "conflict-dawn-nine",
+        "operation-recovery-198602",
+        "armilla-patrol-snapshot-19860228",
+        "uk-palme-mediation-19860205",
+        "uk-staunch-brief-19860211",
+        "uk-iran-draft-19861003",
+        "uk-gulf-reports-19860224"
       ],
       "route": [],
       "sources": [
@@ -2007,7 +2042,13 @@
         "noricum-council-19860228",
         "palme-iraq-meeting-19860228",
         "voest-oil-contract-news-19860228",
-        "bofors-iraq-training-ship"
+        "bofors-iraq-training-ship",
+        "cia-gulf-outlook-19860228",
+        "cia-mcmahon-map-plan-19860125",
+        "conflict-dawn-nine",
+        "armilla-patrol-snapshot-19860228",
+        "uk-palme-mediation-19860205",
+        "uk-gulf-reports-19860224"
       ],
       "route": [],
       "sources": [
@@ -2510,7 +2551,12 @@
         "un-apartheid-resolution-19860228",
         "research-brookes",
         "bofors-fdsp",
-        "sadf-third-force-19860228"
+        "sadf-third-force-19860228",
+        "cia-fuller-world-19860227",
+        "cia-fuller-spillover-19860227",
+        "press-unita-aid-debate-19860228",
+        "operation-marion-planning-198602",
+        "gchq-south-africa-press-19860801"
       ],
       "route": [],
       "sources": [
@@ -3518,7 +3564,9 @@
         "north-dc6-warning-19850809",
         "north-palmerola-planning-19860227",
         "north-bueso-rosa-email-19860917",
-        "honduras-airstrip-news-19860227"
+        "honduras-airstrip-news-19860227",
+        "cia-fuller-spillover-19860227",
+        "enterprise-ilopango-198602"
       ],
       "route": [],
       "sources": [
@@ -3737,7 +3785,9 @@
         "enterprise",
         "ni-fsln",
         "ni-contras",
-        "north-noriega-proposal-19860823"
+        "north-noriega-proposal-19860823",
+        "cia-fuller-spillover-19860227",
+        "us-contra-request-19860225"
       ],
       "route": [],
       "sources": [
@@ -3969,7 +4019,10 @@
       },
       "related": [
         "conflict-elsalvador",
-        "north-palmerola-planning-19860227"
+        "north-palmerola-planning-19860227",
+        "cia-fuller-spillover-19860227",
+        "enterprise-ilopango-198602",
+        "operation-fenix-198602"
       ],
       "route": [],
       "sources": [
@@ -4670,7 +4723,20 @@
         "bofors-other-reexports",
         "bofors-super-lepus-oman",
         "bofors-super-lepus-dubai",
-        "bofors-oman-naval-gun"
+        "bofors-oman-naval-gun",
+        "cia-mcmahon-map-plan-19860125",
+        "armilla-patrol-snapshot-19860228",
+        "ryan-assessment-19860224",
+        "uk-palme-mediation-19860205",
+        "uk-staunch-brief-19860211",
+        "uk-iran-draft-19861003",
+        "uk-gulf-reports-19860224",
+        "ukusa-press-19860214",
+        "kincora-press-19860228",
+        "mi5-computer-press-19860307",
+        "uk-spy-shuffle-19860404",
+        "global86-planning-19860221",
+        "gchq-south-africa-press-19860801"
       ],
       "route": [],
       "sources": [
@@ -4969,7 +5035,10 @@
       },
       "related": [
         "conflict-afghanistan",
-        "nsc-afghanistan-speech-19860228"
+        "nsc-afghanistan-speech-19860228",
+        "cia-fuller-spillover-19860227",
+        "cia-afghanistan-outlook-19860228",
+        "operation-zhawar-19860228"
       ],
       "route": [],
       "sources": [
@@ -5167,7 +5236,9 @@
       },
       "related": [
         "conflict-angola",
-        "conflict-namibia"
+        "conflict-namibia",
+        "cia-fuller-spillover-19860227",
+        "press-unita-aid-debate-19860228"
       ],
       "route": [],
       "sources": [
@@ -5786,7 +5857,9 @@
         "conflict-south-lebanon",
         "conflict-camps",
         "shultz-poindexter-19860228",
-        "reagan-diary-19860228"
+        "reagan-diary-19860228",
+        "operation-recovery-198602",
+        "israel-lebanon-search-19860217"
       ],
       "route": [],
       "sources": [
@@ -6013,7 +6086,8 @@
       },
       "related": [
         "nato",
-        "sat-tow-flights-198602"
+        "sat-tow-flights-198602",
+        "ukusa-press-19860214"
       ],
       "route": [],
       "sources": [
@@ -6280,7 +6354,9 @@
         "nato",
         "conflict-chad",
         "north-sidra-planning-19860225",
-        "bofors-snpe"
+        "bofors-snpe",
+        "operation-epervier-198602",
+        "operation-trionyx-19860216"
       ],
       "route": [],
       "sources": [
@@ -8728,7 +8804,11 @@
         "iran-mcfarlane-planning-19860227",
         "iran-financing-198602",
         "contra-defex-payments-1986",
-        "sat-tow-flights-198602"
+        "sat-tow-flights-198602",
+        "cia-mcmahon-map-plan-19860125",
+        "us-contra-request-19860225",
+        "operation-recovery-198602",
+        "enterprise-ilopango-198602"
       ],
       "route": [],
       "sources": [
@@ -8792,7 +8872,8 @@
         "tr",
         "es",
         "research-acc-sops",
-        "nsdd214-revision-19860228"
+        "nsdd214-revision-19860228",
+        "global86-planning-19860221"
       ],
       "route": [],
       "sources": [
@@ -8991,7 +9072,11 @@
         "conflict-al-faw",
         "conflict-dawn-nine",
         "un-abadan-inspection-19860228",
-        "un-ahvaz-pilot-19860228"
+        "un-ahvaz-pilot-19860228",
+        "armilla-patrol-snapshot-19860228",
+        "uk-palme-mediation-19860205",
+        "uk-staunch-brief-19860211",
+        "uk-gulf-reports-19860224"
       ],
       "route": [],
       "sources": [
@@ -9109,7 +9194,10 @@
         "ni",
         "ni-fsln",
         "ni-contras",
-        "honduras-airstrip-news-19860227"
+        "honduras-airstrip-news-19860227",
+        "cia-fuller-spillover-19860227",
+        "us-contra-request-19860225",
+        "enterprise-ilopango-198602"
       ],
       "route": [],
       "sources": [
@@ -9223,7 +9311,8 @@
         }
       },
       "related": [
-        "sv"
+        "sv",
+        "operation-fenix-198602"
       ],
       "route": [],
       "sources": [
@@ -9437,7 +9526,8 @@
       },
       "related": [
         "af",
-        "su"
+        "su",
+        "operation-zhawar-19860228"
       ],
       "route": [],
       "sources": [
@@ -9668,7 +9758,9 @@
         }
       },
       "related": [
-        "ao"
+        "ao",
+        "cia-fuller-spillover-19860227",
+        "press-unita-aid-debate-19860228"
       ],
       "route": [],
       "sources": [
@@ -10071,7 +10163,9 @@
           "en_source": "Forskningspost. Ingen källbelagd rutt eller rättslig klassificering har lagts in."
         }
       },
-      "related": [],
+      "related": [
+        "cia-gulf-outlook-19860228"
+      ],
       "route": [],
       "sources": [],
       "later_only": false
@@ -10435,7 +10529,9 @@
         "north-noriega-proposal-19860823",
         "north-bueso-rosa-email-19860917",
         "contra-defex-payments-1986",
-        "honduras-airstrip-news-19860227"
+        "honduras-airstrip-news-19860227",
+        "us-contra-request-19860225",
+        "enterprise-ilopango-198602"
       ],
       "route": [],
       "sources": [
@@ -10625,7 +10721,8 @@
       "related": [
         "il",
         "lb",
-        "conflict-lebanon"
+        "conflict-lebanon",
+        "israel-lebanon-search-19860217"
       ],
       "route": [],
       "sources": [
@@ -11682,7 +11779,9 @@
         }
       },
       "related": [
-        "fr"
+        "fr",
+        "operation-epervier-198602",
+        "operation-trionyx-19860216"
       ],
       "route": [],
       "sources": [
@@ -11917,7 +12016,8 @@
       "related": [
         "za",
         "ao",
-        "conflict-angola"
+        "conflict-angola",
+        "operation-marion-planning-198602"
       ],
       "route": [],
       "sources": [
@@ -13657,7 +13757,8 @@
         }
       },
       "related": [
-        "gb"
+        "gb",
+        "kincora-press-19860228"
       ],
       "route": [],
       "sources": [
@@ -13969,7 +14070,9 @@
           "en_source": "Ali Nasir Muhammads fraktion • Abdul Fattah Ismails fraktion"
         }
       },
-      "related": [],
+      "related": [
+        "cia-south-yemen-19860228"
+      ],
       "route": [],
       "sources": [
         {
@@ -14343,7 +14446,11 @@
           "en_source": "28 februari — Fångfrågan och bankoro efter maktskiftet\nThe Times rapporterar att Corazon Aquino beordrade frigivning av politiska fångar, däribland kommunistledaren Jose Maria Sison. Försvarsminister Juan Ponce Enrile sade sig följa ordern men motsättningarna om frigivningarna kvarstod. Artikeln bekräftar inte att samtliga redan hade frigivits. Samma dag tog oroliga kunder ut pengar från Philippine National Bank och regeringen manade till lugn.\nKälla: The Times, 1 mars, s. 6; frigivningsfrågan behandlas även i La Stampa, s. 4."
         }
       },
-      "related": [],
+      "related": [
+        "cia-fuller-world-19860227",
+        "us-aquino-recognition-19860225",
+        "marcos-evacuation-19860226"
+      ],
       "route": [],
       "sources": [
         {
@@ -14446,7 +14553,8 @@
       },
       "related": [
         "us",
-        "north-sidra-planning-19860225"
+        "north-sidra-planning-19860225",
+        "operation-attain-document-ii"
       ],
       "route": [],
       "sources": [
@@ -14637,7 +14745,9 @@
       },
       "related": [
         "za",
-        "un-apartheid-resolution-19860228"
+        "un-apartheid-resolution-19860228",
+        "operation-marion-planning-198602",
+        "gchq-south-africa-press-19860801"
       ],
       "route": [],
       "sources": [
@@ -15016,12 +15126,20 @@
           "sv": "Iranska styrkor • Irakiska styrkor",
           "en": "Iranian forces • Iraqi forces",
           "en_source": "Iranska styrkor • Irakiska styrkor"
+        },
+        "news_day": {
+          "sv": "28 februari kväll: enligt en UPI-artikel den 1 mars uppgav Iran att dess styrkor intagit Kuwanhöjderna nära Sulaymaniyya. Detta är en iransk stridsuppgift, inte oberoende verifierad kontroll över området.",
+          "en": "Evening of 28 February: a UPI article on 1 March reported Iran’s claim that its forces had captured the Kuwan Heights near Sulaymaniyya. This is an Iranian battlefield claim, not independently verified territorial control.",
+          "en_source": "28 februari kväll: enligt en UPI-artikel den 1 mars uppgav Iran att dess styrkor intagit Kuwanhöjderna nära Sulaymaniyya. Detta är en iransk stridsuppgift, inte oberoende verifierad kontroll över området."
         }
       },
       "related": [
         "conflict-iraq-kurds",
         "conflict-iraniraq",
-        "palme-iraq-meeting-19860228"
+        "palme-iraq-meeting-19860228",
+        "ir",
+        "iq",
+        "kurdistan"
       ],
       "route": [],
       "sources": [
@@ -15030,6 +15148,14 @@
           "url": "https://en.wikipedia.org/wiki/Operation_Dawn_9",
           "published": "",
           "checked": "2026-09-25"
+        },
+        {
+          "title": "UPI: Iran claims to capture northern Iraqi heights",
+          "url": "https://www.upi.com/Archives/1986/03/01/Iran-claims-to-capture-northern-Iraqi-heights/9378510037200/",
+          "published": "1986-03-01",
+          "checked": "2026-09-26",
+          "access": "indexed_press_text",
+          "section": ""
         }
       ],
       "from": "1986-02-24",
@@ -15086,7 +15212,8 @@
         "conflict-turkey-pkk",
         "conflict-iraq-kurds",
         "conflict-iran-kurds",
-        "palme-iraq-meeting-19860228"
+        "palme-iraq-meeting-19860228",
+        "conflict-dawn-nine"
       ],
       "text": {
         "title": {
@@ -15503,7 +15630,8 @@
         "gb",
         "fr",
         "it",
-        "conflict-sidra"
+        "conflict-sidra",
+        "operation-attain-document-ii"
       ],
       "route": [],
       "sources": [
@@ -16190,7 +16318,9 @@
         "ir",
         "enterprise",
         "iran-us",
-        "sat-tow-flights-198602"
+        "sat-tow-flights-198602",
+        "cia-mcmahon-map-plan-19860125",
+        "operation-recovery-198602"
       ],
       "route": [
         "us",
@@ -16251,7 +16381,9 @@
         "ir",
         "enterprise",
         "iran-us",
-        "sat-tow-flights-198602"
+        "sat-tow-flights-198602",
+        "cia-mcmahon-map-plan-19860125",
+        "operation-recovery-198602"
       ],
       "route": [
         "us",
@@ -16312,7 +16444,8 @@
         "il",
         "ir",
         "enterprise",
-        "peres-reagan-letter-19860228"
+        "peres-reagan-letter-19860228",
+        "operation-recovery-198602"
       ],
       "route": [],
       "sources": [
@@ -16366,7 +16499,8 @@
       "related": [
         "us",
         "ir",
-        "enterprise"
+        "enterprise",
+        "operation-recovery-198602"
       ],
       "route": [],
       "sources": [
@@ -16646,7 +16780,8 @@
         "ir",
         "lb",
         "iran-mcfarlane-planning-19860227",
-        "reagan-diary-19860228"
+        "reagan-diary-19860228",
+        "operation-recovery-198602"
       ],
       "route": [],
       "sources": [
@@ -18133,7 +18268,8 @@
         "bofors-other-reexports",
         "bofors-super-lepus-oman",
         "bofors-oman-naval-gun",
-        "bofors-oman-ammunition-1985"
+        "bofors-oman-ammunition-1985",
+        "armilla-patrol-snapshot-19860228"
       ],
       "route": [],
       "sources": [
@@ -18176,7 +18312,8 @@
       "later_only": false,
       "related": [
         "sweden-arms",
-        "bofors-india-contract"
+        "bofors-india-contract",
+        "cia-fuller-spillover-19860227"
       ],
       "route": [],
       "sources": [
@@ -18262,7 +18399,9 @@
       "later_only": false,
       "related": [
         "sweden-arms",
-        "bofors-pakistan-denied"
+        "bofors-pakistan-denied",
+        "cia-fuller-spillover-19860227",
+        "operation-zhawar-19860228"
       ],
       "route": [],
       "sources": [
@@ -18305,7 +18444,10 @@
       "later_only": false,
       "related": [
         "sweden-arms",
-        "bofors-libya-bofi-plan"
+        "bofors-libya-bofi-plan",
+        "operation-epervier-198602",
+        "operation-trionyx-19860216",
+        "operation-attain-document-ii"
       ],
       "route": [],
       "sources": [
@@ -21422,7 +21564,8 @@
       "related": [
         "us",
         "af",
-        "su"
+        "su",
+        "cia-afghanistan-outlook-19860228"
       ],
       "route": [],
       "sources": [
@@ -21486,7 +21629,8 @@
       "date_status": "reported_document_date",
       "evidence_status": "later_submission_citing_document",
       "related": [
-        "za"
+        "za",
+        "operation-marion-planning-198602"
       ],
       "route": [],
       "sources": [
@@ -21750,6 +21894,2045 @@
           "sv": "Pilen visar denna destinationsgren. Den är inte en ytterligare leverans utöver samlingsposten.",
           "en": "The arrow shows this destination branch. It is not an additional shipment beyond the parent entry.",
           "en_source": "Pilen visar denna destinationsgren. Den är inte en ytterligare leverans utöver samlingsposten."
+        }
+      }
+    },
+    {
+      "id": "cia-fuller-world-19860227",
+      "kind": "event",
+      "lat": 38,
+      "lon": -98,
+      "marker": false,
+      "from": "1986-02-27",
+      "to": "1986-02-27",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "contemporary_assessment",
+      "evidence_status": "contemporary_assessment",
+      "related": [
+        "us",
+        "za",
+        "conflict-people-power"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Graham E. Fuller, NIC 01017-86: New Fluidity on the International Scene?",
+          "url": "https://www.cia.gov/readingroom/document/cia-rdp88t00988r000200160023-9",
+          "published": "1986-02-27",
+          "checked": "2026-09-26",
+          "access": "indexed_archive_ocr_original_pdf_unavailable",
+          "section": "6–8"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "27 februari · CIA:s bild av instabiliteten",
+          "en": "27 February · CIA’s view of instability",
+          "en_source": "27 februari · CIA:s bild av instabiliteten"
+        },
+        "period": {
+          "sv": "1986-02-27 · dokumentdatum, klockslag okänt",
+          "en": "1986-02-27 · document date, time unknown",
+          "en_source": "1986-02-27 · dokumentdatum, klockslag okänt"
+        },
+        "body": {
+          "sv": "Fuller pekade på oljeprisfall, skuldkris och politisk oro i Sydafrika och Filippinerna. Han varnade för otillräcklig amerikansk krisberedskap.",
+          "en": "Fuller highlighted falling oil prices, debt and political turmoil in South Africa and the Philippines, warning that US crisis preparation was inadequate.",
+          "en_source": "Fuller pekade på oljeprisfall, skuldkris och politisk oro i Sydafrika och Filippinerna. Han varnade för otillräcklig amerikansk krisberedskap."
+        },
+        "evidence": {
+          "sv": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas.",
+          "en": "Contemporary intelligence assessment. Judgements and forecasts express the author’s view at the document date. The archive’s indexed text transcription was reviewed; the original scan could not be retrieved.",
+          "en_source": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "cia-fuller-spillover-19860227",
+      "kind": "event",
+      "lat": 13,
+      "lon": -85,
+      "marker": false,
+      "from": "1986-02-27",
+      "to": "1986-02-27",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "contemporary_assessment",
+      "evidence_status": "contemporary_assessment",
+      "related": [
+        "us",
+        "af",
+        "export-place-pk",
+        "export-place-in",
+        "ao",
+        "za",
+        "ni",
+        "hn",
+        "sv",
+        "conflict-nicaragua",
+        "conflict-angola"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Graham E. Fuller, NIC 01017-86: New Fluidity on the International Scene?",
+          "url": "https://www.cia.gov/readingroom/document/cia-rdp88t00988r000200160023-9",
+          "published": "1986-02-27",
+          "checked": "2026-09-26",
+          "access": "indexed_archive_ocr_original_pdf_unavailable",
+          "section": "6–8"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "27 februari · konflikter över gränserna",
+          "en": "27 February · conflicts spilling across borders",
+          "en_source": "27 februari · konflikter över gränserna"
+        },
+        "period": {
+          "sv": "1986-02-27 · dokumentdatum, klockslag okänt",
+          "en": "1986-02-27 · document date, time unknown",
+          "en_source": "1986-02-27 · dokumentdatum, klockslag okänt"
+        },
+        "body": {
+          "sv": "Fuller beskrev hur Afghanistan påverkade Pakistan och Indien, Angola Sydafrika och Nicaragua Honduras och El Salvador. Detta var en regional riskbedömning.",
+          "en": "Fuller described Afghanistan affecting Pakistan and India, Angola affecting South Africa, and Nicaragua affecting Honduras and El Salvador. This was a regional risk assessment.",
+          "en_source": "Fuller beskrev hur Afghanistan påverkade Pakistan och Indien, Angola Sydafrika och Nicaragua Honduras och El Salvador. Detta var en regional riskbedömning."
+        },
+        "evidence": {
+          "sv": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas.",
+          "en": "Contemporary intelligence assessment. Judgements and forecasts express the author’s view at the document date. The archive’s indexed text transcription was reviewed; the original scan could not be retrieved.",
+          "en_source": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "cia-afghanistan-outlook-19860228",
+      "kind": "event",
+      "lat": 34,
+      "lon": 66,
+      "marker": false,
+      "from": "1986-02-28",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "contemporary_assessment",
+      "evidence_status": "contemporary_assessment",
+      "related": [
+        "su",
+        "af",
+        "us",
+        "nsc-afghanistan-speech-19860228"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Fritz W. Ermarth, NIC 01027-86: Monthly Forecast and Warning Report — USSR",
+          "url": "https://www.cia.gov/readingroom/document/cia-rdp87t01145r000300390010-2",
+          "published": "1986-02-28",
+          "checked": "2026-09-26",
+          "access": "indexed_archive_ocr_original_pdf_unavailable",
+          "section": "1–3"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "28 februari · möjliga sovjetiska reträttsignaler",
+          "en": "28 February · possible Soviet withdrawal signals",
+          "en_source": "28 februari · möjliga sovjetiska reträttsignaler"
+        },
+        "period": {
+          "sv": "1986-02-28 · dokumentdatum, klockslag okänt",
+          "en": "1986-02-28 · document date, time unknown",
+          "en_source": "1986-02-28 · dokumentdatum, klockslag okänt"
+        },
+        "body": {
+          "sv": "Rapporten förutsåg möjliga symboliska reträttsignaler i Afghanistan. Den noterade intern oenighet och kopplade Moskvas hållning till Kabulregeringens överlevnad.",
+          "en": "The report anticipated possible symbolic withdrawal signals in Afghanistan, acknowledged internal disagreement and linked Moscow’s position to the Kabul government’s survival.",
+          "en_source": "Rapporten förutsåg möjliga symboliska reträttsignaler i Afghanistan. Den noterade intern oenighet och kopplade Moskvas hållning till Kabulregeringens överlevnad."
+        },
+        "evidence": {
+          "sv": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas.",
+          "en": "Contemporary intelligence assessment. Judgements and forecasts express the author’s view at the document date. The archive’s indexed text transcription was reviewed; the original scan could not be retrieved.",
+          "en_source": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "cia-gulf-outlook-19860228",
+      "kind": "event",
+      "lat": 33,
+      "lon": 44,
+      "marker": false,
+      "from": "1986-02-28",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "contemporary_assessment",
+      "evidence_status": "contemporary_assessment",
+      "related": [
+        "su",
+        "ir",
+        "iq",
+        "us",
+        "iraq-supply"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Fritz W. Ermarth, NIC 01027-86: Monthly Forecast and Warning Report — USSR",
+          "url": "https://www.cia.gov/readingroom/document/cia-rdp87t01145r000300390010-2",
+          "published": "1986-02-28",
+          "checked": "2026-09-26",
+          "access": "indexed_archive_ocr_original_pdf_unavailable",
+          "section": "1–3"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "28 februari · sovjetiskt handlingsutrymme i Gulfkriget",
+          "en": "28 February · Soviet options in the Gulf war",
+          "en_source": "28 februari · sovjetiskt handlingsutrymme i Gulfkriget"
+        },
+        "period": {
+          "sv": "1986-02-28 · dokumentdatum, klockslag okänt",
+          "en": "1986-02-28 · document date, time unknown",
+          "en_source": "1986-02-28 · dokumentdatum, klockslag okänt"
+        },
+        "body": {
+          "sv": "Vid stora iranska framgångar bedömde rapporten ökat sovjetiskt stöd till Irak som troligt. Detta var ett villkorat scenario, ingen rapporterad ny leverans.",
+          "en": "If Iran made major gains, the report considered increased Soviet support for Iraq likely. This was a conditional scenario, not a reported new shipment.",
+          "en_source": "Vid stora iranska framgångar bedömde rapporten ökat sovjetiskt stöd till Irak som troligt. Detta var ett villkorat scenario, ingen rapporterad ny leverans."
+        },
+        "evidence": {
+          "sv": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas.",
+          "en": "Contemporary intelligence assessment. Judgements and forecasts express the author’s view at the document date. The archive’s indexed text transcription was reviewed; the original scan could not be retrieved.",
+          "en_source": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "cia-south-yemen-19860228",
+      "kind": "event",
+      "lat": 12.8,
+      "lon": 45,
+      "marker": false,
+      "from": "1986-02-28",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "contemporary_assessment",
+      "evidence_status": "contemporary_assessment",
+      "related": [
+        "su",
+        "conflict-south-yemen",
+        "us"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Fritz W. Ermarth, NIC 01027-86: Monthly Forecast and Warning Report — USSR",
+          "url": "https://www.cia.gov/readingroom/document/cia-rdp87t01145r000300390010-2",
+          "published": "1986-02-28",
+          "checked": "2026-09-26",
+          "access": "indexed_archive_ocr_original_pdf_unavailable",
+          "section": "1–3"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "28 februari · Sydjemen efter januaristriderna",
+          "en": "28 February · South Yemen after January’s fighting",
+          "en_source": "28 februari · Sydjemen efter januaristriderna"
+        },
+        "period": {
+          "sv": "1986-02-28 · dokumentdatum, klockslag okänt",
+          "en": "1986-02-28 · document date, time unknown",
+          "en_source": "1986-02-28 · dokumentdatum, klockslag okänt"
+        },
+        "body": {
+          "sv": "Rapporten bedömde att Moskva kunde fortsätta använda militära anläggningar efter januaristriderna. Utökad tillgång beskrevs som en möjlighet; återuppbyggnaden av militären var osäker.",
+          "en": "The report assessed that Moscow could continue using military facilities after January’s fighting. Expanded access was a possibility; military reconstruction remained uncertain.",
+          "en_source": "Rapporten bedömde att Moskva kunde fortsätta använda militära anläggningar efter januaristriderna. Utökad tillgång beskrevs som en möjlighet; återuppbyggnaden av militären var osäker."
+        },
+        "evidence": {
+          "sv": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas.",
+          "en": "Contemporary intelligence assessment. Judgements and forecasts express the author’s view at the document date. The archive’s indexed text transcription was reviewed; the original scan could not be retrieved.",
+          "en_source": "Samtida underrättelsebedömning. Bedömningar och prognoser visar författarens syn vid dokumentdatumet. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "cia-mcmahon-map-plan-19860125",
+      "kind": "event",
+      "lat": 38,
+      "lon": -98,
+      "marker": false,
+      "from": "1986-01-25",
+      "to": "1986-01-25",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "operational_planning",
+      "evidence_status": "operational_planning",
+      "related": [
+        "us",
+        "gb",
+        "ir",
+        "iq",
+        "enterprise",
+        "iran-tow-19860218",
+        "iran-tow-19860227"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "John McMahon to William Casey: Present Status in Saga Regarding the Movement of TOW Missiles",
+          "url": "https://nsarchive.gwu.edu/sites/default/files/documents/4463970/Document-03-CIA-cable-from-Deputy-Director-John.pdf",
+          "published": "1986-01-25",
+          "checked": "2026-09-26",
+          "access": "original_scan_visually_checked",
+          "section": "PDF 1–2, paragraphs 1–6"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "25 januari · CIA:s kartplan för Iran",
+          "en": "25 January · CIA’s map plan for Iran",
+          "en_source": "25 januari · CIA:s kartplan för Iran"
+        },
+        "period": {
+          "sv": "1986-01-25 · dokumentdatum, klockslag okänt",
+          "en": "1986-01-25 · document date, time unknown",
+          "en_source": "1986-01-25 · dokumentdatum, klockslag okänt"
+        },
+        "body": {
+          "sv": "Efter ett Londonmöte mellan North och Ghorbanifar begärdes en karta över förband vid Iran–Irakgränsen. McMahon invände men skrev att kartan förbereddes för North. Planen nämnde 1 000 TOW den 9 februari inom ett åtagande om 4 000. Detta är planerade antal och datum; dokumentet bekräftar inte leverans till Iran.",
+          "en": "Following a London meeting between North and Ghorbanifar, a map of forces along the Iran–Iraq border was requested. McMahon objected but wrote that the map was being prepared for North. The plan mentioned 1,000 TOWs on 9 February within a 4,000 commitment. These are planned quantities and dates; the document does not confirm delivery to Iran.",
+          "en_source": "Efter ett Londonmöte mellan North och Ghorbanifar begärdes en karta över förband vid Iran–Irakgränsen. McMahon invände men skrev att kartan förbereddes för North. Planen nämnde 1 000 TOW den 9 februari inom ett åtagande om 4 000. Detta är planerade antal och datum; dokumentet bekräftar inte leverans till Iran."
+        },
+        "evidence": {
+          "sv": "Samtida intern planering; genomförandet måste beläggas separat.",
+          "en": "Contemporary internal planning; execution requires separate evidence.",
+          "en_source": "Samtida intern planering; genomförandet måste beläggas separat."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "us-contra-request-19860225",
+      "kind": "event",
+      "lat": 13,
+      "lon": -85,
+      "marker": false,
+      "from": "1986-02-25",
+      "to": "1986-02-25",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "official_action",
+      "evidence_status": "official_action",
+      "related": [
+        "us",
+        "ni",
+        "ni-contras",
+        "conflict-nicaragua",
+        "enterprise"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Ronald Reagan: Message to the Congress Transmitting a Request for Assistance for the Nicaraguan Democratic Resistance",
+          "url": "https://www.reaganlibrary.gov/archives/speech/message-congress-transmitting-request-assistance-nicaraguan-democratic-resistance",
+          "published": "1986-02-25",
+          "checked": "2026-09-26",
+          "access": "official_public_transcript",
+          "section": "Description of Request"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "25 februari · begäran om 100 miljoner till Contras",
+          "en": "25 February · $100 million request for Contras",
+          "en_source": "25 februari · begäran om 100 miljoner till Contras"
+        },
+        "period": {
+          "sv": "1986-02-25 · dokumentdatum, klockslag okänt",
+          "en": "1986-02-25 · document date, time unknown",
+          "en_source": "1986-02-25 · dokumentdatum, klockslag okänt"
+        },
+        "body": {
+          "sv": "Reagan begärde kongressens godkännande att överföra 100 miljoner dollar från försvarsanslag till den nicaraguanska motståndsrörelsen; 30 miljoner avsåg humanitärt stöd. Framställningen medgav användning av underrättelseorgan om den godkändes. Begäran är inte en utbetalning eller vapentransport.",
+          "en": "Reagan requested congressional approval to transfer $100 million from defence appropriations to the Nicaraguan resistance; $30 million was designated for humanitarian assistance. The request allowed intelligence-agency participation if approved. A request is not a disbursement or arms shipment.",
+          "en_source": "Reagan begärde kongressens godkännande att överföra 100 miljoner dollar från försvarsanslag till den nicaraguanska motståndsrörelsen; 30 miljoner avsåg humanitärt stöd. Framställningen medgav användning av underrättelseorgan om den godkändes. Begäran är inte en utbetalning eller vapentransport."
+        },
+        "evidence": {
+          "sv": "Samtida officiellt uttalande eller framställning. Politiska motiveringar tillskrivs avsändaren.",
+          "en": "Contemporary official statement or request. Political justifications are attributed to the issuer.",
+          "en_source": "Samtida officiellt uttalande eller framställning. Politiska motiveringar tillskrivs avsändaren."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "us-aquino-recognition-19860225",
+      "kind": "event",
+      "lat": 14.6,
+      "lon": 121,
+      "marker": false,
+      "from": "1986-02-25",
+      "to": "1986-02-25",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "official_action",
+      "evidence_status": "official_action",
+      "related": [
+        "us",
+        "conflict-people-power",
+        "marcos-evacuation-19860226"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "George Shultz: US Recognition of the Philippine Government of President Corazon C. Aquino",
+          "url": "https://www.reaganlibrary.gov/archives/speech/statement-secretary-state-shultz-announcing-united-states-recognition-philippine",
+          "published": "1986-02-25",
+          "checked": "2026-09-26",
+          "access": "official_public_transcript",
+          "section": "Statement and reading-time note"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "25 februari · USA erkänner Aquino",
+          "en": "25 February · US recognises Aquino",
+          "en_source": "25 februari · USA erkänner Aquino"
+        },
+        "period": {
+          "sv": "25 februari 1986 · uttalande kl. 09.45, Washington",
+          "en": "25 February 1986 · statement at 9:45 a.m., Washington",
+          "en_source": "25 februari 1986 · uttalande kl. 09.45, Washington"
+        },
+        "body": {
+          "sv": "Shultz tillkännagav USA:s erkännande av Corazon Aquinos regering och beredskap till fortsatt samarbete. Uttalandet lästes kl. 09.45 i Vita huset, lokal tid. Detta placerar den diplomatiska förändringen tre dagar före morddagen.",
+          "en": "Shultz announced US recognition of Corazon Aquino’s government and readiness for continued cooperation. The statement was read at 9:45 a.m. local time at the White House, placing this diplomatic change three days before the assassination date.",
+          "en_source": "Shultz tillkännagav USA:s erkännande av Corazon Aquinos regering och beredskap till fortsatt samarbete. Uttalandet lästes kl. 09.45 i Vita huset, lokal tid. Detta placerar den diplomatiska förändringen tre dagar före morddagen."
+        },
+        "evidence": {
+          "sv": "Samtida officiellt uttalande eller framställning. Politiska motiveringar tillskrivs avsändaren.",
+          "en": "Contemporary official statement or request. Political justifications are attributed to the issuer.",
+          "en_source": "Samtida officiellt uttalande eller framställning. Politiska motiveringar tillskrivs avsändaren."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "press-unita-aid-debate-19860228",
+      "kind": "event",
+      "lat": -12,
+      "lon": 18,
+      "marker": false,
+      "from": "1986-02-28",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "publication_date",
+      "record_type": "press_report",
+      "evidence_status": "press_report",
+      "related": [
+        "us",
+        "ao",
+        "conflict-angola",
+        "za"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "The Washington Post: House Bill Would Block Covert Aid to UNITA; press clipping held by CIA",
+          "url": "https://www.cia.gov/readingroom/document/cia-rdp90-00965r000706870031-3",
+          "published": "1986-02-28",
+          "checked": "2026-09-26",
+          "access": "indexed_press_clipping_ocr",
+          "section": "Article"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "28 februari · strid om hemligt stöd till UNITA",
+          "en": "28 February · dispute over covert aid to UNITA",
+          "en_source": "28 februari · strid om hemligt stöd till UNITA"
+        },
+        "period": {
+          "sv": "28 februari 1986 · artikelns publiceringsdatum",
+          "en": "28 February 1986 · article publication date",
+          "en_source": "28 februari 1986 · artikelns publiceringsdatum"
+        },
+        "body": {
+          "sv": "Washington Post rapporterade ett lagförslag av Lee Hamilton som skulle kräva öppet deklarerat amerikanskt stöd och kongressgodkännande för hjälp till Savimbi. Artikeln beskrev en pågående politisk strid. Den visar inte att förslaget blivit lag eller att någon leverans stoppats.",
+          "en": "The Washington Post reported a Lee Hamilton bill requiring publicly acknowledged US support and congressional approval for aid to Savimbi. It described an ongoing political dispute, not an enacted law or a shipment being stopped.",
+          "en_source": "Washington Post rapporterade ett lagförslag av Lee Hamilton som skulle kräva öppet deklarerat amerikanskt stöd och kongressgodkännande för hjälp till Savimbi. Artikeln beskrev en pågående politisk strid. Den visar inte att förslaget blivit lag eller att någon leverans stoppats."
+        },
+        "evidence": {
+          "sv": "Samtida tidningsuppgift arkiverad hos CIA. Artikeln är inte en CIA-analys. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas.",
+          "en": "Contemporary newspaper report held by CIA. The article is not CIA analysis. The archive’s indexed text transcription was reviewed; the original scan could not be retrieved.",
+          "en_source": "Samtida tidningsuppgift arkiverad hos CIA. Artikeln är inte en CIA-analys. Arkivets indexerade textåtergivning har granskats; originalskanningen kunde inte hämtas."
+        },
+        "map_note": {
+          "sv": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar.",
+          "en": "Geographic anchor for the subject. Assessments and planned actions are shown without transport arrows.",
+          "en_source": "Geografiskt ankare för ämnet. Bedömningar och planerade åtgärder visas utan transportpilar."
+        },
+        "investigation": {
+          "sv": "Denna källa belägger inte ett samband med Palmemordet.",
+          "en": "This source does not establish a connection to Palme’s assassination.",
+          "en_source": "Denna källa belägger inte ett samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "operation-recovery-198602",
+      "kind": "event",
+      "lat": 27.18,
+      "lon": 56.27,
+      "marker": true,
+      "from": "1986-02-18",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "ir",
+        "us",
+        "il",
+        "enterprise",
+        "lb",
+        "iran-tow-19860218",
+        "iran-tow-19860227",
+        "iran-frankfurt-19860225",
+        "iran-cia-meeting-19860227",
+        "shultz-poindexter-19860228",
+        "uk-iran-draft-19861003"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Tower Commission Report: Operation Recovery",
+          "url": "https://www.presidency.ucsb.edu/documents/excerpts-from-the-tower-commission-report",
+          "published": "1987-02-26",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "Operation Recovery · Iraninitiativet",
+          "en": "Operation Recovery · Iran initiative",
+          "en_source": "Operation Recovery · Iraninitiativet"
+        },
+        "period": {
+          "sv": "1986-02-18 – 1986-02-28",
+          "en": "1986-02-18 – 1986-02-28",
+          "en_source": "1986-02-18 – 1986-02-28"
+        },
+        "body": {
+          "sv": "Towerkommissionen beskriver februariaffären som Operation Recovery. Två TOW-leveranser följdes av fortsatta gisslanförhandlingar och förberedelser för en högnivåkontakt. De enskilda leveranserna och mötena finns i relaterade poster.",
+          "en": "The Tower Commission describes the February initiative as Operation Recovery. Two TOW shipments were followed by continued hostage negotiations and preparations for high-level contact. Individual shipments and meetings appear in related entries.",
+          "en_source": "Towerkommissionen beskriver februariaffären som Operation Recovery. Två TOW-leveranser följdes av fortsatta gisslanförhandlingar och förberedelser för en högnivåkontakt. De enskilda leveranserna och mötena finns i relaterade poster."
+        },
+        "evidence": {
+          "sv": "Senare officiell utredning. Intervallet sammanfattar de dokumenterade februariposterna, inte operationens fullständiga livslängd.",
+          "en": "Later official investigation. The interval groups the documented February entries, not the operation’s entire lifespan.",
+          "en_source": "Senare officiell utredning. Intervallet sammanfattar de dokumenterade februariposterna, inte operationens fullständiga livslängd."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "operation-zhawar-19860228",
+      "kind": "event",
+      "lat": 33.1,
+      "lon": 69.9,
+      "marker": true,
+      "from": "1986-02-28",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "af",
+        "su",
+        "export-place-pk",
+        "conflict-afghanistan"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "AUSA Landpower Essay: Zhawar analysis",
+          "url": "https://www.ausa.org/file/44378/download?token=PJjv5Fql",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "PDF pp. 2–3"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "28 februari · framryckningen mot Zhawar",
+          "en": "28 February · advance towards Zhawar",
+          "en_source": "28 februari · framryckningen mot Zhawar"
+        },
+        "period": {
+          "sv": "1986-02-28",
+          "en": "1986-02-28",
+          "en_source": "1986-02-28"
+        },
+        "body": {
+          "sv": "En senare militärhistorisk studie daterar de afghanska regeringsstyrkornas avmarsch mot Zhawar till den 28 februari. Operationen hade sovjetiskt stöd och skulle slå mot en gerillabas och försörjningsvägar från Pakistan. Huvudanfallen i april ska inte flyttas till februari.",
+          "en": "A later military-history study dates the Afghan government forces’ departure towards Zhawar to 28 February. The Soviet-supported operation targeted a guerrilla base and supply routes from Pakistan. The main April assaults must not be dated to February.",
+          "en_source": "En senare militärhistorisk studie daterar de afghanska regeringsstyrkornas avmarsch mot Zhawar till den 28 februari. Operationen hade sovjetiskt stöd och skulle slå mot en gerillabas och försörjningsvägar från Pakistan. Huvudanfallen i april ska inte flyttas till februari."
+        },
+        "evidence": {
+          "sv": "Senare militärhistorisk studie, inte en order eller lägesrapport från morddagen.",
+          "en": "Later military-history study, not an order or situation report from the assassination day.",
+          "en_source": "Senare militärhistorisk studie, inte en order eller lägesrapport från morddagen."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "enterprise-ilopango-198602",
+      "kind": "event",
+      "lat": 13.7,
+      "lon": -89.12,
+      "marker": true,
+      "from": "1986-02-01",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "month",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "sv",
+        "ni-contras",
+        "enterprise",
+        "hn",
+        "conflict-nicaragua"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Walsh Report, chapter 26: Edwin G. Corr",
+          "url": "https://irp.fas.org/offdocs/walsh/chap_26.htm",
+          "published": "1993-08-04",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Background; notes 9–13"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "Februari · Enterprises flygförsörjning",
+          "en": "February · Enterprise air resupply",
+          "en_source": "Februari · Enterprises flygförsörjning"
+        },
+        "period": {
+          "sv": "1986-02-01 – 1986-02-28",
+          "en": "1986-02-01 – 1986-02-28",
+          "en_source": "1986-02-01 – 1986-02-28"
+        },
+        "body": {
+          "sv": "Ilopango fungerade som omlastnings- och lagerbas för North–Secord-nätverket. Walshutredningen beskriver hur officiell humanitär hjälp och privata vapenleveranser använde samma bas. Anteckningar den 5, 8 och 9 februari visar ambassadör Corrs försök att reda ut ansvar och kontakter.",
+          "en": "Ilopango served as a transshipment and storage base for the North–Secord network. The Walsh investigation describes official humanitarian aid and private arms supplies using the same base. Notes of 5, 8 and 9 February document Ambassador Corr’s efforts to clarify responsibilities and contacts.",
+          "en_source": "Ilopango fungerade som omlastnings- och lagerbas för North–Secord-nätverket. Walshutredningen beskriver hur officiell humanitär hjälp och privata vapenleveranser använde samma bas. Anteckningar den 5, 8 och 9 februari visar ambassadör Corrs försök att reda ut ansvar och kontakter."
+        },
+        "evidence": {
+          "sv": "Senare utredning med hänvisningar till samtida anteckningar. Månadsintervallet anger verksamhetsperiod, inte en verifierad flygning varje dag.",
+          "en": "Later investigation citing contemporary notes. The monthly interval indicates a period of activity, not a verified flight every day.",
+          "en_source": "Senare utredning med hänvisningar till samtida anteckningar. Månadsintervallet anger verksamhetsperiod, inte en verifierad flygning varje dag."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "operation-fenix-198602",
+      "kind": "event",
+      "lat": 13.9,
+      "lon": -89.12,
+      "marker": true,
+      "from": "1986-02-01",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "month",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "sv",
+        "conflict-elsalvador"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "IACHR Annual Report 1985–1986: El Salvador",
+          "url": "https://cidh.oas.org/annualrep/85.86eng/chap4.a.htm",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Operation Fénix; statement of 23 February"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "Februari · Operation Fénix",
+          "en": "February · Operation Fénix",
+          "en_source": "Februari · Operation Fénix"
+        },
+        "period": {
+          "sv": "1986-02-01 – 1986-02-28",
+          "en": "1986-02-01 – 1986-02-28",
+          "en_source": "1986-02-01 – 1986-02-28"
+        },
+        "body": {
+          "sv": "Enligt IACHR inledde omkring 4 000 regeringssoldater med flygunderstöd Operation Fénix kring Guazapa i februari. Civila drabbades av strider och fördrivning. Rapporten återger både anklagelser mot militären och kyrkliga uppgifter om att FMLN pressat bönder att återvända till stridsområdet.",
+          "en": "According to the IACHR, about 4,000 government troops with air support launched Operation Fénix around Guazapa in February. Civilians suffered from fighting and displacement. The report records allegations against the military and church accounts of FMLN pressure on farmers to return to the combat area.",
+          "en_source": "Enligt IACHR inledde omkring 4 000 regeringssoldater med flygunderstöd Operation Fénix kring Guazapa i februari. Civila drabbades av strider och fördrivning. Rapporten återger både anklagelser mot militären och kyrkliga uppgifter om att FMLN pressat bönder att återvända till stridsområdet."
+        },
+        "evidence": {
+          "sv": "Kommissionens årsrapport. Exakt start- och slutdag är inte fastställda här; februari används som tekniskt månadsintervall.",
+          "en": "Commission annual report. Exact start and end days are not established here; February is a technical month interval.",
+          "en_source": "Kommissionens årsrapport. Exakt start- och slutdag är inte fastställda här; februari används som tekniskt månadsintervall."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "operation-epervier-198602",
+      "kind": "event",
+      "lat": 12.13,
+      "lon": 15.05,
+      "marker": true,
+      "from": "1986-02-16",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "conflict-chad",
+        "fr",
+        "export-place-ly",
+        "operation-trionyx-19860216"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "French Ministry of Defence: 1963–2011, 50 ans d’OPEX",
+          "url": "https://www.defense.gouv.fr/chemins-memoire/histoire-memoires/ressources-historiques/operations-exterieures/memoire-opex/1963-2011-50-ans",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        },
+        {
+          "title": "French Ministry of Defence: Épervier (1986–2014)",
+          "url": "https://www.defense.gouv.fr/operations/operations-achevees-afrique/operation-epervier-1986-2014",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "Februari · Operation Épervier i Tchad",
+          "en": "February · Operation Épervier in Chad",
+          "en_source": "Februari · Operation Épervier i Tchad"
+        },
+        "period": {
+          "sv": "1986-02-16 – 1986-02-28",
+          "en": "1986-02-16 – 1986-02-28",
+          "en_source": "1986-02-16 – 1986-02-28"
+        },
+        "body": {
+          "sv": "Frankrike satte in Épervier efter en förnyad libyskstödd offensiv. Insatsen omfattade flyg- och luftvärnsförband och pågick vid morddagen. Relaterad Tchadpost innehåller även den tidigare tidningsuppgiften om förstärkningar den 28 februari.",
+          "en": "France deployed Épervier following a renewed Libyan-supported offensive. It included air and air-defence forces and was ongoing on the assassination day. The related Chad entry also contains the previously recorded press report of reinforcements on 28 February.",
+          "en_source": "Frankrike satte in Épervier efter en förnyad libyskstödd offensiv. Insatsen omfattade flyg- och luftvärnsförband och pågick vid morddagen. Relaterad Tchadpost innehåller även den tidigare tidningsuppgiften om förstärkningar den 28 februari."
+        },
+        "evidence": {
+          "sv": "Officiell historik, granskad via indexerad text. Slutdatumet är kartans brytdatum; operationen fortsatte långt efter februari.",
+          "en": "Official history reviewed through indexed text. The end date is the map’s snapshot cutoff; the operation continued well beyond February.",
+          "en_source": "Officiell historik, granskad via indexerad text. Slutdatumet är kartans brytdatum; operationen fortsatte långt efter februari."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "operation-trionyx-19860216",
+      "kind": "event",
+      "lat": 18.45,
+      "lon": 20.85,
+      "marker": true,
+      "from": "1986-02-16",
+      "to": "1986-02-16",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "conflict-chad",
+        "fr",
+        "export-place-ly",
+        "operation-epervier-198602"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "SHD: interview with General Jean-Jacques Brun",
+          "url": "https://www.servicehistorique.sga.defense.gouv.fr/en/node/629306",
+          "published": "2003-04-01",
+          "checked": "2026-09-26",
+          "access": "catalogue_description_only",
+          "section": ""
+        },
+        {
+          "title": "11e Escadre: mission Trionyx, participant account",
+          "url": "https://www.pilote-chasse-11ec.com/3d/",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_participant_account",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "16 februari · Operation Trionyx",
+          "en": "16 February · Operation Trionyx",
+          "en_source": "16 februari · Operation Trionyx"
+        },
+        "period": {
+          "sv": "1986-02-16",
+          "en": "1986-02-16",
+          "en_source": "1986-02-16"
+        },
+        "body": {
+          "sv": "Franska Jaguarflygplan angrep landningsbanan vid Ouadi Doum. Försvarshistoriska arkivet katalogiserar en senare intervju med befälhavaren Jean-Jacques Brun om Trionyx den 15–16 februari; en deltagarberättelse daterar själva anfallet till den 16 februari.",
+          "en": "French Jaguar aircraft attacked the runway at Ouadi Doum. The defence historical archive catalogues a later interview with commander Jean-Jacques Brun about Trionyx on 15–16 February; a participant account dates the attack itself to 16 February.",
+          "en_source": "Franska Jaguarflygplan angrep landningsbanan vid Ouadi Doum. Försvarshistoriska arkivet katalogiserar en senare intervju med befälhavaren Jean-Jacques Brun om Trionyx den 15–16 februari; en deltagarberättelse daterar själva anfallet till den 16 februari."
+        },
+        "evidence": {
+          "sv": "Arkivbeskrivning och senare deltagarberättelse. Den arkiverade ljudintervjun har inte avlyssnats.",
+          "en": "Archive description and later participant account. The archived audio interview has not been listened to.",
+          "en_source": "Arkivbeskrivning och senare deltagarberättelse. Den arkiverade ljudintervjun har inte avlyssnats."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "operation-attain-document-ii",
+      "kind": "event",
+      "lat": 32.5,
+      "lon": 18,
+      "marker": true,
+      "from": "1986-02-12",
+      "to": "1986-02-15",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "us",
+        "export-place-ly",
+        "conflict-sidra",
+        "north-sidra-planning-19860225"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "US Navy: Use of Naval Forces in the Post-War Era",
+          "url": "https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/u/use-naval-forces-post-war-era.html",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "Februari · Attain Document II",
+          "en": "February · Attain Document II",
+          "en_source": "Februari · Attain Document II"
+        },
+        "period": {
+          "sv": "1986-02-12 – 1986-02-15",
+          "en": "1986-02-12 – 1986-02-15",
+          "en_source": "1986-02-12 – 1986-02-15"
+        },
+        "body": {
+          "sv": "USA genomförde flottövningar och maktdemonstrationer utanför Libyen. Marinens översikt anger 12–15 februari för den andra fasen. Vissa fartygshistoriker omfattar fler förberedelsedagar. Striderna i mars tillhör Attain Document III.",
+          "en": "The US conducted naval exercises and demonstrations of force off Libya. The Navy overview dates the second phase to 12–15 February. Some ship histories include additional preparation days. The March fighting belongs to Attain Document III.",
+          "en_source": "USA genomförde flottövningar och maktdemonstrationer utanför Libyen. Marinens översikt anger 12–15 februari för den andra fasen. Vissa fartygshistoriker omfattar fler förberedelsedagar. Striderna i mars tillhör Attain Document III."
+        },
+        "evidence": {
+          "sv": "Officiell efterhandshistorik. Februariövningen var avslutad före morddagen.",
+          "en": "Official retrospective history. The February exercise had ended before the assassination day.",
+          "en_source": "Officiell efterhandshistorik. Februariövningen var avslutad före morddagen."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "armilla-patrol-snapshot-19860228",
+      "kind": "event",
+      "lat": 24.8,
+      "lon": 58.3,
+      "marker": true,
+      "from": "1986-02-28",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "reference_snapshot",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "ir",
+        "iq",
+        "export-place-om",
+        "conflict-iraniraq"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "House of Commons Library, CBP 8628: Armilla Patrol",
+          "url": "https://researchbriefings.files.parliament.uk/documents/CBP-8628/CBP-8628.pdf",
+          "published": "2020-01-06",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "p. 1"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "28 februari · Armilla Patrol",
+          "en": "28 February · Armilla Patrol",
+          "en_source": "28 februari · Armilla Patrol"
+        },
+        "period": {
+          "sv": "1986-02-28",
+          "en": "1986-02-28",
+          "en_source": "1986-02-28"
+        },
+        "body": {
+          "sv": "Storbritannien hade sedan 1980 en marin närvaro för att skydda handelssjöfarten under Iran–Irakkriget, inledningsvis i Omanviken. Den utvidgade verksamheten med att följa handelsfartyg genom Hormuz och inne i Persiska viken började först i oktober 1986.",
+          "en": "Britain had maintained a naval presence since 1980 to protect merchant shipping during the Iran–Iraq War, initially in the Gulf of Oman. Expanded accompaniment of merchant ships through Hormuz and inside the Persian Gulf began only in October 1986.",
+          "en_source": "Storbritannien hade sedan 1980 en marin närvaro för att skydda handelssjöfarten under Iran–Irakkriget, inledningsvis i Omanviken. Den utvidgade verksamheten med att följa handelsfartyg genom Hormuz och inne i Persiska viken började först i oktober 1986."
+        },
+        "evidence": {
+          "sv": "Historisk bakgrund till läget den 28 februari. Inga exakta fartygslägen eller förflyttningar den dagen är belagda här.",
+          "en": "Historical background to the 28 February snapshot. Exact ship positions or movements that day are not established here.",
+          "en_source": "Historisk bakgrund till läget den 28 februari. Inga exakta fartygslägen eller förflyttningar den dagen är belagda här."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "israel-lebanon-search-19860217",
+      "kind": "event",
+      "lat": 33.12,
+      "lon": 35.43,
+      "marker": true,
+      "from": "1986-02-17",
+      "to": "1986-02-22",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "il",
+        "lb",
+        "conflict-south-lebanon"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "UN Repertory, Article 98, Supplement 7",
+          "url": "https://legal.un.org/repertory/art98/english/rep_supp7_vol6_art98.pdf",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": "UNIFIL, February 1986"
+        },
+        {
+          "title": "UN Yearbook 1986: Lebanon",
+          "url": "https://www.un.org/unispal/document/auto-insert-196370/",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "17–22 februari · sökoperation i södra Libanon",
+          "en": "17–22 February · search operation in southern Lebanon",
+          "en_source": "17–22 februari · sökoperation i södra Libanon"
+        },
+        "period": {
+          "sv": "1986-02-17 – 1986-02-22",
+          "en": "1986-02-17 – 1986-02-22",
+          "en_source": "1986-02-17 – 1986-02-22"
+        },
+        "body": {
+          "sv": "En israelisk insats följde på tillfångatagandet av två soldater. FN:s redogörelse beskriver reträtt från UNIFIL-området den 22 februari, med undantag för ett pansarkompani vid Kunin. Israel beskrev insatsen som en sökning; Libanon protesterade mot intrång och angrepp.",
+          "en": "An Israeli operation followed the capture of two soldiers. The UN account describes withdrawal from the UNIFIL area on 22 February except for an armoured company at Kunin. Israel described a search operation; Lebanon protested incursions and attacks.",
+          "en_source": "En israelisk insats följde på tillfångatagandet av två soldater. FN:s redogörelse beskriver reträtt från UNIFIL-området den 22 februari, med undantag för ett pansarkompani vid Kunin. Israel beskrev insatsen som en sökning; Libanon protesterade mot intrång och angrepp."
+        },
+        "evidence": {
+          "sv": "FN:s senare sammanställning. Detta är februarifasen, inte ett nytt israeliskt anfall den 28 februari.",
+          "en": "Later UN compilation. This is the February phase, not a new Israeli attack on 28 February.",
+          "en_source": "FN:s senare sammanställning. Detta är februarifasen, inte ett nytt israeliskt anfall den 28 februari."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "marcos-evacuation-19860226",
+      "kind": "event",
+      "lat": 15.19,
+      "lon": 120.56,
+      "marker": true,
+      "from": "1986-02-26",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "conflict-people-power",
+        "us",
+        "us-aquino-recognition-19860225"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "US Air Mobility Command: 1986 chronology",
+          "url": "https://www.amc.af.mil/Portals/12/documents/AFD-150827-032.pdf",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": "1986, 26–28 February"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "26–28 februari · Marcos flygs i exil",
+          "en": "26–28 February · Marcos flown into exile",
+          "en_source": "26–28 februari · Marcos flygs i exil"
+        },
+        "period": {
+          "sv": "1986-02-26 – 1986-02-28",
+          "en": "1986-02-26 – 1986-02-28",
+          "en_source": "1986-02-26 – 1986-02-28"
+        },
+        "body": {
+          "sv": "USA:s militära transportflyg förde Ferdinand Marcos och hans följe från Filippinerna via Guam till Hawaii. Air Mobility Commands historik daterar transportförloppet till den 26–28 februari och anger C-9 och C-141.",
+          "en": "US military transport aircraft carried Ferdinand Marcos and his entourage from the Philippines via Guam to Hawaii. Air Mobility Command’s history dates the transport sequence to 26–28 February and identifies C-9 and C-141 aircraft.",
+          "en_source": "USA:s militära transportflyg förde Ferdinand Marcos och hans följe från Filippinerna via Guam till Hawaii. Air Mobility Commands historik daterar transportförloppet till den 26–28 februari och anger C-9 och C-141."
+        },
+        "evidence": {
+          "sv": "Senare officiell historik via indexerad text. Inget särskilt operationsnamn eller exakt flygläge den 28 februari har verifierats.",
+          "en": "Later official history via indexed text. No particular operation name or exact aircraft position on 28 February has been verified.",
+          "en_source": "Senare officiell historik via indexerad text. Inget särskilt operationsnamn eller exakt flygläge den 28 februari har verifierats."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "ryan-assessment-19860224",
+      "kind": "event",
+      "lat": 56,
+      "lon": 65,
+      "marker": true,
+      "from": "1986-02-24",
+      "to": "1986-02-24",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "su",
+        "us",
+        "gb"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "FRUS 1981–1988, vol. V, document 198: Gordievskiy interview notes",
+          "url": "https://history.state.gov/historicaldocuments/frus1981-88v05/d198",
+          "published": "1986-02-24",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Project RYaN; footnote 1"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "24 februari · CIA granskar projekt RYaN",
+          "en": "24 February · CIA examines Project RYaN",
+          "en_source": "24 februari · CIA granskar projekt RYaN"
+        },
+        "period": {
+          "sv": "1986-02-24",
+          "en": "1986-02-24",
+          "en_source": "1986-02-24"
+        },
+        "body": {
+          "sv": "CIA:s intervjuanteckningar återger Gordievskijs bedömning av Sovjets projekt för att upptäcka ett kärnvapenanfall. Han ansåg att projektet främst byggde på verklig krigsoro, snarare än en avsiktlig desinformationskampanj.",
+          "en": "CIA interview notes record Gordievskiy’s assessment of the Soviet project to detect a nuclear attack. He considered it mainly driven by genuine fear of war rather than a deliberate disinformation campaign.",
+          "en_source": "CIA:s intervjuanteckningar återger Gordievskijs bedömning av Sovjets projekt för att upptäcka ett kärnvapenanfall. Han ansåg att projektet främst byggde på verklig krigsoro, snarare än en avsiktlig desinformationskampanj."
+        },
+        "evidence": {
+          "sv": "24 februari är dokumentdatum. Intervjuns exakta februaridatum är maskerat. Detta belägger inte en RYaN-order eller operation i Stockholm på morddagen.",
+          "en": "24 February is the document date. The interview’s precise February date is redacted. This does not establish a RYaN order or operation in Stockholm on the assassination day.",
+          "en_source": "24 februari är dokumentdatum. Intervjuns exakta februaridatum är maskerat. Detta belägger inte en RYaN-order eller operation i Stockholm på morddagen."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "operation-marion-planning-198602",
+      "kind": "event",
+      "lat": -29,
+      "lon": 25,
+      "marker": true,
+      "from": "1986-02-03",
+      "to": "1986-02-11",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "za",
+        "conflict-south-africa",
+        "conflict-namibia",
+        "sadf-third-force-19860228"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "TRC Caprivi hearing, day 3",
+          "url": "https://www.justice.gov.za/trc/special/caprivi/caprivi3.htm",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Varney evidence and cross-examination"
+        },
+        {
+          "title": "TRC final report, volume 3, chapter 3, paragraph 182",
+          "url": "https://sabctrc.saha.org.za/reports/volume3/chapter3/subsection26.htm",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "Februari · förberedelser för Operation Marion",
+          "en": "February · preparations for Operation Marion",
+          "en_source": "Februari · förberedelser för Operation Marion"
+        },
+        "period": {
+          "sv": "1986-02-03 – 1986-02-11",
+          "en": "1986-02-03 – 1986-02-11",
+          "en_source": "1986-02-03 – 1986-02-11"
+        },
+        "body": {
+          "sv": "TRC-förhören behandlar ett säkerhetsrådsmöte den 3 februari och ett möte mellan Groenewald och Buthelezi den 11 februari om stöd till Inkatha. De tidiga beslutens innebörd var omstridd. Slutrapporten konstaterade senare en hemlig offensiv paramilitär verksamhet.",
+          "en": "TRC hearings discuss a security council meeting on 3 February and a Groenewald–Buthelezi meeting on 11 February concerning support for Inkatha. The meaning of the early decisions was disputed. The final report subsequently found a covert offensive paramilitary operation.",
+          "en_source": "TRC-förhören behandlar ett säkerhetsrådsmöte den 3 februari och ett möte mellan Groenewald och Buthelezi den 11 februari om stöd till Inkatha. De tidiga beslutens innebörd var omstridd. Slutrapporten konstaterade senare en hemlig offensiv paramilitär verksamhet."
+        },
+        "evidence": {
+          "sv": "Förberedelser i februari. Den senare Capriviutbildade enheten ska inte visas som redan operativ. TRC:s slutsatser får inte bakdateras till alla tidiga beslut.",
+          "en": "Preparations in February. The later Caprivi-trained unit must not be shown as already operational. TRC findings must not be backdated to every early decision.",
+          "en_source": "Förberedelser i februari. Den senare Capriviutbildade enheten ska inte visas som redan operativ. TRC:s slutsatser får inte bakdateras till alla tidiga beslut."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "uk-palme-mediation-19860205",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-02-05",
+      "to": "1986-02-05",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "se",
+        "ir",
+        "iq",
+        "conflict-iraniraq"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Hansard: Iran-Iraq War, HC vol. 91 cc272–274",
+          "url": "https://api.parliament.uk/historic-hansard/commons/1986/feb/05/iran-iraq-war",
+          "published": "1986-02-05",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "5 februari · Howe stöder Palmes medling",
+          "en": "5 February · Howe supports Palme’s mediation",
+          "en_source": "5 februari · Howe stöder Palmes medling"
+        },
+        "period": {
+          "sv": "1986-02-05",
+          "en": "1986-02-05",
+          "en_source": "1986-02-05"
+        },
+        "body": {
+          "sv": "Geoffrey Howe sade i parlamentet att regeringen stöder realistiska fredsinitiativ genom FN:s generalsekreterare och dennes särskilda representant Olof Palme. Debatten behandlade även vapenexport och kemiska vapen.",
+          "en": "Geoffrey Howe told Parliament that the government supported realistic peace initiatives through the UN Secretary-General and his special representative Olof Palme. The debate also addressed arms exports and chemical weapons.",
+          "en_source": "Geoffrey Howe sade i parlamentet att regeringen stöder realistiska fredsinitiativ genom FN:s generalsekreterare och dennes särskilda representant Olof Palme. Debatten behandlade även vapenexport och kemiska vapen."
+        },
+        "evidence": {
+          "sv": "Samtida offentligt uttalande. Det visar uttalad politik, inte att alla faktiska leveranser följde den.",
+          "en": "Contemporary public statement. It establishes declared policy, not that every actual shipment complied.",
+          "en_source": "Samtida offentligt uttalande. Det visar uttalad politik, inte att alla faktiska leveranser följde den."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "uk-staunch-brief-19860211",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-02-11",
+      "to": "1986-02-11",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "us",
+        "ir",
+        "conflict-iraniraq",
+        "uk-iran-draft-19861003"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "PREM19/1759: enclosure dated 11 February",
+          "url": "https://archive.margaretthatcher.org/doc06/861003%20FCO%20to%20No.10%20DRAFT%20MSG%20FOR%20RGN%20PREM19-1759%20tna%20f186.pdf",
+          "published": "1986-02-11",
+          "checked": "2026-09-26",
+          "access": "original_scan_reviewed",
+          "section": "PDF p. 8"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "11 februari · brittiskt underlag om Operation Staunch",
+          "en": "11 February · British brief on Operation Staunch",
+          "en_source": "11 februari · brittiskt underlag om Operation Staunch"
+        },
+        "period": {
+          "sv": "1986-02-11",
+          "en": "1986-02-11",
+          "en_source": "1986-02-11"
+        },
+        "body": {
+          "sv": "En hemligstämplad bilaga beskriver USA:s försök att begränsa vapenflödet till Iran genom Operation Staunch. Britterna redovisar egna exportrestriktioner och bedömer utrymmet för ytterligare åtgärder.",
+          "en": "A classified enclosure describes US efforts to restrict arms flows to Iran through Operation Staunch. British officials set out their own export restrictions and assess the scope for further measures.",
+          "en_source": "En hemligstämplad bilaga beskriver USA:s försök att begränsa vapenflödet till Iran genom Operation Staunch. Britterna redovisar egna exportrestriktioner och bedömer utrymmet för ytterligare åtgärder."
+        },
+        "evidence": {
+          "sv": "Bilaga från februari i en akt med huvudhandling från oktober. Dokumentdatumet är inte operationens startdatum.",
+          "en": "February enclosure in a file with an October covering document. The document date is not the operation’s start date.",
+          "en_source": "Bilaga från februari i en akt med huvudhandling från oktober. Dokumentdatumet är inte operationens startdatum."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "uk-iran-draft-19861003",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-10-03",
+      "to": "1986-10-03",
+      "later_only": true,
+      "date_precision": "day",
+      "date_status": "document_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "us",
+        "ir",
+        "uk-staunch-brief-19860211",
+        "operation-recovery-198602"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "PREM19/1759: FCO to No.10, draft message for Reagan",
+          "url": "https://archive.margaretthatcher.org/doc06/861003%20FCO%20to%20No.10%20DRAFT%20MSG%20FOR%20RGN%20PREM19-1759%20tna%20f186.pdf",
+          "published": "1986-10-03",
+          "checked": "2026-09-26",
+          "access": "original_scan_reviewed",
+          "section": "PDF pp. 1–3, 7"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "3 oktober · brittiskt utkast om USA:s Iranleveranser",
+          "en": "3 October · British draft on US supplies to Iran",
+          "en_source": "3 oktober · brittiskt utkast om USA:s Iranleveranser"
+        },
+        "period": {
+          "sv": "1986-10-03",
+          "en": "1986-10-03",
+          "en_source": "1986-10-03"
+        },
+        "body": {
+          "sv": "FCO diskuterar uppgifter om amerikanska leveranser till Iran via tredje land. Ett bifogat brevutkast föreslår frågor från Thatcher till Reagan om förhållandet till den uttalade politiken.",
+          "en": "The FCO discusses reports of US supplies to Iran through third countries. An enclosed draft letter proposes questions from Thatcher to Reagan about their consistency with declared policy.",
+          "en_source": "FCO diskuterar uppgifter om amerikanska leveranser till Iran via tredje land. Ett bifogat brevutkast föreslår frågor från Thatcher till Reagan om förhållandet till den uttalade politiken."
+        },
+        "evidence": {
+          "sv": "Senare information: oktober 1986. Utkastet belägger inte att brevet skickades och uppgifterna får inte göras till brittisk kunskap i februari.",
+          "en": "Later information: October 1986. The draft does not establish that the letter was sent; its contents must not be treated as British knowledge in February.",
+          "en_source": "Senare information: oktober 1986. Utkastet belägger inte att brevet skickades och uppgifterna får inte göras till brittisk kunskap i februari."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "uk-gulf-reports-19860224",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-02-24",
+      "to": "1986-02-24",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "documented",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "iq",
+        "ir",
+        "conflict-iraniraq"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "Hansard: Iran-Iraq War, HC vol. 92 c446W",
+          "url": "https://api.parliament.uk/historic-hansard/written-answers/1986/feb/24/iran-lraq-war",
+          "published": "1986-02-24",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "24 februari · rapporter från Bagdad och Teheran",
+          "en": "24 February · reports from Baghdad and Tehran",
+          "en_source": "24 februari · rapporter från Bagdad och Teheran"
+        },
+        "period": {
+          "sv": "1986-02-24",
+          "en": "1986-02-24",
+          "en_source": "1986-02-24"
+        },
+        "body": {
+          "sv": "Tim Renton bekräftade regelbunden rapportering från den brittiske ambassadören i Bagdad och intressesektionen i Teheran. Han uttryckte oro för den senaste upptrappningen och stödde FN:s vädjan om vapenvila.",
+          "en": "Tim Renton confirmed regular reporting from the British ambassador in Baghdad and the interests section in Tehran. He expressed concern about the latest escalation and supported the UN appeal for a ceasefire.",
+          "en_source": "Tim Renton bekräftade regelbunden rapportering från den brittiske ambassadören i Bagdad och intressesektionen i Teheran. Han uttryckte oro för den senaste upptrappningen och stödde FN:s vädjan om vapenvila."
+        },
+        "evidence": {
+          "sv": "Parlamentssvaret identifierar rapporteringskanaler; det återger inte de underliggande diplomatiska rapporterna.",
+          "en": "The parliamentary answer identifies reporting channels; it does not reproduce the underlying diplomatic reports.",
+          "en_source": "Parlamentssvaret identifierar rapporteringskanaler; det återger inte de underliggande diplomatiska rapporterna."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "ukusa-press-19860214",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-02-14",
+      "to": "1986-02-14",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "publication_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "us",
+        "ca"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "New Statesman: 14 februari · press om underrättelsenätverk",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/Global%20spy%20network%20exposed.pdf",
+          "published": "1986-02-14",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "14 februari · press om underrättelsenätverk"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "14 februari · press om underrättelsenätverk",
+          "en": "14 February · press on intelligence networks",
+          "en_source": "14 februari · press om underrättelsenätverk"
+        },
+        "period": {
+          "sv": "1986-02-14",
+          "en": "1986-02-14",
+          "en_source": "1986-02-14"
+        },
+        "body": {
+          "sv": "New Statesman presenterar boken The Ties that Bind och dess kartläggning av underrättelsesamarbete mellan engelskspråkiga länder. På samma sida diskuteras utvidgade D Notices för rapportering om underrättelsepersonal, kärnvapen och beredskapsplanering.",
+          "en": "New Statesman reviews The Ties that Bind and its mapping of intelligence cooperation among English-speaking countries. The same page discusses expanded D Notices concerning intelligence personnel, nuclear weapons and contingency planning.",
+          "en_source": "New Statesman presenterar boken The Ties that Bind och dess kartläggning av underrättelsesamarbete mellan engelskspråkiga länder. På samma sida diskuteras utvidgade D Notices för rapportering om underrättelsepersonal, kärnvapen och beredskapsplanering."
+        },
+        "evidence": {
+          "sv": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum.",
+          "en": "Contemporary journalism, not an internal intelligence report. Publication date is not automatically event date.",
+          "en_source": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "kincora-press-19860228",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-02-28",
+      "to": "1986-02-28",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "publication_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "conflict-northern-ireland"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "New Statesman: 28 februari · Kincora och underrättelsetjänsterna",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/gov%20must%20answer%20kincora%20questions.pdf",
+          "published": "1986-02-28",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "28 februari · Kincora och underrättelsetjänsterna"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "28 februari · Kincora och underrättelsetjänsterna",
+          "en": "28 February · Kincora and the intelligence services",
+          "en_source": "28 februari · Kincora och underrättelsetjänsterna"
+        },
+        "period": {
+          "sv": "1986-02-28",
+          "en": "1986-02-28",
+          "en_source": "1986-02-28"
+        },
+        "body": {
+          "sv": "Artikeln Government must answer Kincora questions behandlar anklagelser om brittiska underrättelsetjänsters kännedom om övergrepp och kritik mot tidigare utredningars begränsningar. Den redovisar även att ett centralt dokuments äkthet inte fastställts.",
+          "en": "Government must answer Kincora questions discusses allegations of British intelligence knowledge of abuse and criticism of earlier inquiries’ limited scope. It also records that the authenticity of a key document had not been established.",
+          "en_source": "Artikeln Government must answer Kincora questions behandlar anklagelser om brittiska underrättelsetjänsters kännedom om övergrepp och kritik mot tidigare utredningars begränsningar. Den redovisar även att ett centralt dokuments äkthet inte fastställts."
+        },
+        "evidence": {
+          "sv": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum.",
+          "en": "Contemporary journalism, not an internal intelligence report. Publication date is not automatically event date.",
+          "en_source": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "mi5-computer-press-19860307",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-03-07",
+      "to": "1986-03-07",
+      "later_only": true,
+      "date_precision": "day",
+      "date_status": "publication_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "New Statesman: 7 mars · pressuppgift om MI5-dator",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/New%20computer%20for%20MI5.pdf",
+          "published": "1986-03-07",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "7 mars · pressuppgift om MI5-dator"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "7 mars · pressuppgift om MI5-dator",
+          "en": "7 March · press report on an MI5 computer",
+          "en_source": "7 mars · pressuppgift om MI5-dator"
+        },
+        "period": {
+          "sv": "1986-03-07",
+          "en": "1986-03-07",
+          "en_source": "1986-03-07"
+        },
+        "body": {
+          "sv": "New Statesman diskuterar ett hemligt underrättelsedatorsystem i centrala London och dess möjliga anknytning till MI5. Rubriken är formulerad som en fråga.",
+          "en": "New Statesman discusses a secret intelligence computer system in central London and its possible association with MI5. The headline is phrased as a question.",
+          "en_source": "New Statesman diskuterar ett hemligt underrättelsedatorsystem i centrala London och dess möjliga anknytning till MI5. Rubriken är formulerad som en fråga."
+        },
+        "evidence": {
+          "sv": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Senare information, inte belagd kunskap på morddagen.",
+          "en": "Contemporary journalism, not an internal intelligence report. Publication date is not automatically event date. Later information, not established knowledge on the assassination day.",
+          "en_source": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Senare information, inte belagd kunskap på morddagen."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "uk-spy-shuffle-19860404",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-04-04",
+      "to": "1986-04-04",
+      "later_only": true,
+      "date_precision": "day",
+      "date_status": "publication_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "New Statesman: 4 april · press om underrättelseledningen",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/Spy%20shuffle.pdf",
+          "published": "1986-04-04",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "4 april · press om underrättelseledningen"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "4 april · press om underrättelseledningen",
+          "en": "4 April · press on intelligence leadership",
+          "en_source": "4 april · press om underrättelseledningen"
+        },
+        "period": {
+          "sv": "1986-04-04",
+          "en": "1986-04-04",
+          "en_source": "1986-04-04"
+        },
+        "body": {
+          "sv": "Spy shuffle beskriver Colin Figures som underrättelsesamordnare, Antony Duff vid MI5, Christopher Curwen vid MI6, Derek Boorman vid försvarsunderrättelsetjänsten och Peter Marychurch vid GCHQ.",
+          "en": "Spy shuffle describes Colin Figures as intelligence coordinator, Antony Duff at MI5, Christopher Curwen at MI6, Derek Boorman in defence intelligence and Peter Marychurch at GCHQ.",
+          "en_source": "Spy shuffle beskriver Colin Figures som underrättelsesamordnare, Antony Duff vid MI5, Christopher Curwen vid MI6, Derek Boorman vid försvarsunderrättelsetjänsten och Peter Marychurch vid GCHQ."
+        },
+        "evidence": {
+          "sv": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Senare information, inte belagd kunskap på morddagen.",
+          "en": "Contemporary journalism, not an internal intelligence report. Publication date is not automatically event date. Later information, not established knowledge on the assassination day.",
+          "en_source": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Senare information, inte belagd kunskap på morddagen."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "global86-planning-19860221",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-02-21",
+      "to": "1986-02-21",
+      "later_only": false,
+      "date_precision": "day",
+      "date_status": "publication_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "us",
+        "nato"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "New Statesman: 21 februari · planerna för Global 86",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/what%27s%20the%20royal%20navy%20doing%20in%20the%20pacific.pdf",
+          "published": "1986-02-21",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "21 februari · planerna för Global 86"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "21 februari · planerna för Global 86",
+          "en": "21 February · plans for Global 86",
+          "en_source": "21 februari · planerna för Global 86"
+        },
+        "period": {
+          "sv": "1986-02-21",
+          "en": "1986-02-21",
+          "en_source": "1986-02-21"
+        },
+        "body": {
+          "sv": "New Statesman rapporterar om den planerade brittiska flottinsatsen Global 86, med deltagande i RIMPAC och besök i Stilla havet och Indiska oceanen. Artikeln diskuterar även motsättningen kring Nya Zeelands kärnvapenpolitik.",
+          "en": "New Statesman reports on the planned British naval deployment Global 86, including RIMPAC participation and visits in the Pacific and Indian oceans. It also discusses tensions over New Zealand’s nuclear policy.",
+          "en_source": "New Statesman rapporterar om den planerade brittiska flottinsatsen Global 86, med deltagande i RIMPAC och besök i Stilla havet och Indiska oceanen. Artikeln diskuterar även motsättningen kring Nya Zeelands kärnvapenpolitik."
+        },
+        "evidence": {
+          "sv": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Insatsen var planerad till senare under året, inte pågående den 28 februari.",
+          "en": "Contemporary journalism, not an internal intelligence report. Publication date is not automatically event date. The deployment was planned for later in the year, not underway on 28 February.",
+          "en_source": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Insatsen var planerad till senare under året, inte pågående den 28 februari."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
+        }
+      }
+    },
+    {
+      "id": "gchq-south-africa-press-19860801",
+      "kind": "event",
+      "lat": 54,
+      "lon": -2,
+      "marker": true,
+      "from": "1986-08-01",
+      "to": "1986-08-01",
+      "later_only": true,
+      "date_precision": "day",
+      "date_status": "publication_date",
+      "record_type": "historical_research",
+      "evidence_status": "source_attributed",
+      "related": [
+        "gb",
+        "us",
+        "za",
+        "conflict-south-africa"
+      ],
+      "route": [],
+      "sources": [
+        {
+          "title": "New Statesman: 1 augusti · uppgifter om GCHQ och Sydafrika",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/uk%20listening%20link%20with%20apartheid.pdf",
+          "published": "1986-08-01",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "1 augusti · uppgifter om GCHQ och Sydafrika"
+        }
+      ],
+      "text": {
+        "title": {
+          "sv": "1 augusti · uppgifter om GCHQ och Sydafrika",
+          "en": "1 August · reports on GCHQ and South Africa",
+          "en_source": "1 augusti · uppgifter om GCHQ och Sydafrika"
+        },
+        "period": {
+          "sv": "1986-08-01",
+          "en": "1986-08-01",
+          "en_source": "1986-08-01"
+        },
+        "body": {
+          "sv": "Campbell och Forbes rapporterar om påstått samarbete mellan GCHQ, NSA och Sydafrika kring ANC:s kommunikationer och Oliver Tambos resor. Artikeln bygger delvis på anonyma källor och tidigare amerikansk rapportering.",
+          "en": "Campbell and Forbes report alleged cooperation between GCHQ, NSA and South Africa concerning ANC communications and Oliver Tambo’s travel. The article relies partly on anonymous sources and earlier US reporting.",
+          "en_source": "Campbell och Forbes rapporterar om påstått samarbete mellan GCHQ, NSA och Sydafrika kring ANC:s kommunikationer och Oliver Tambos resor. Artikeln bygger delvis på anonyma källor och tidigare amerikansk rapportering."
+        },
+        "evidence": {
+          "sv": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Senare information, inte belagd kunskap på morddagen.",
+          "en": "Contemporary journalism, not an internal intelligence report. Publication date is not automatically event date. Later information, not established knowledge on the assassination day.",
+          "en_source": "Samtida journalistik, inte en intern underrättelserapport. Publiceringsdatumet är inte automatiskt händelsedatum. Senare information, inte belagd kunskap på morddagen."
+        },
+        "map_note": {
+          "sv": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget.",
+          "en": "Overview marker for the subject, not an exact unit position or verified travel route. Open related entries for context.",
+          "en_source": "Översiktspunkt för ämnet, inte ett exakt förbandsläge eller en verifierad färdväg. Öppna relaterade poster för sammanhanget."
+        },
+        "investigation": {
+          "sv": "Källorna belägger inte något samband med Palmemordet.",
+          "en": "The sources do not establish a connection to Palme’s assassination.",
+          "en_source": "Källorna belägger inte något samband med Palmemordet."
         }
       }
     }

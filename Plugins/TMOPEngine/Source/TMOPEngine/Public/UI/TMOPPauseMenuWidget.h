@@ -27,7 +27,8 @@ enum class ETMOPPauseHubSection : uint8
     Inventory, Evidence, Sources, Publications, Map, Settings, Controls, SaveLoad, Quit,
     MoveInTime,
     Theories, MurderDayMysteries, AfterMurderEvents, WorldGroups, SwedenGroups,
-    MyObservations, MurderKnowledge, TheoryBuilder
+    MyObservations, MurderKnowledge, TheoryBuilder,
+    StockMarket // Append: preserve existing Blueprint/serialized enum values.
 };
 
 /** Paused main hub for inventory, research, publications and game management. */

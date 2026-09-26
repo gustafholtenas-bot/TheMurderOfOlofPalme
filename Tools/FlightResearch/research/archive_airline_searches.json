@@ -1,0 +1,2681 @@
+{
+  "schema": 1,
+  "coverage_complete": false,
+  "searches": [
+    {
+      "airline": "golden-air",
+      "countries": [
+        "se"
+      ],
+      "query": "(\"Golden Air\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Golden+Air%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:33+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "sas",
+      "countries": [
+        "se",
+        "no",
+        "dk"
+      ],
+      "query": "(\"SAS Scandinavian Airlines\" OR \"SAS\" OR \"Scandinavian Airlines System\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22SAS+Scandinavian+Airlines%22+OR+%22SAS%22+OR+%22Scandinavian+Airlines+System%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:33+00:00",
+      "status": "searched",
+      "total": 32,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp92b00181r001701610011-3",
+          "title": "CIA Reading Room cia-rdp92b00181r001701610011-3: COORDINATION OF REPORT ON ELV COMMERCIALIZATION",
+          "date": "1983-03-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp92b00181r001701610011-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91-00280r000300350004-9",
+          "title": "CIA Reading Room cia-rdp91-00280r000300350004-9: OFFICE OF LOGISTICS STAFF MEETING NOTES - 28 OCTOBER 1987",
+          "date": "1987-10-30T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91-00280r000300350004-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00998r000100140002-1",
+          "title": "CIA Reading Room cia-rdp90-00998r000100140002-1: WEEKLY REPORT",
+          "date": "1988-03-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00998r000100140002-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91-00587r000100710024-9",
+          "title": "CIA Reading Room cia-rdp91-00587r000100710024-9: AMERICA AT THE BARRICADES",
+          "date": "1986-08-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91-00587r000100710024-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000400030039-2",
+          "title": "CIA Reading Room cia-rdp82-00850r000400030039-2: JPRS ID: 9858 NEAR EAST/NORTH AFRICA REPORT",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000400030039-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89-00087r000200200001-7",
+          "title": "CIA Reading Room cia-rdp89-00087r000200200001-7: OL PLANNING CONFERENCE, 7-8 OCTOBER 1986",
+          "date": "1986-10-08T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89-00087r000200200001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01332r001001300007-0",
+          "title": "CIA Reading Room cia-rdp88g01332r001001300007-0: THE OFFICE OF TRAINING AND EDUCATION FY 1986 FIRST QUARTERLY REVIEW",
+          "date": "1986-03-19T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01332r001001300007-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89-00063r000300250001-7",
+          "title": "CIA Reading Room cia-rdp89-00063r000300250001-7: WEEKLY REPORT FOR PROCUREMENT DIVISON FOR PERIOD ENDING 28 JANUARY 1987",
+          "date": "1987-01-28T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89-00063r000300250001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89-00063r000200230002-9",
+          "title": "CIA Reading Room cia-rdp89-00063r000200230002-9: REPORT OF SIGNIFICANT LOGISTICS ACTIVITIES FOR THE PERIOD ENDING 25 NOVEMBER 1986",
+          "date": "1986-11-26T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89-00063r000200230002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89-00063r000200230040-7",
+          "title": "CIA Reading Room cia-rdp89-00063r000200230040-7: WEEKLY REPORT PROCUREMENT DIVISION FOR PERIOD ENDING 05 NOVEMBER 1986",
+          "date": "2011-06-16T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89-00063r000200230040-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91-00280r000300350020-1",
+          "title": "CIA Reading Room cia-rdp91-00280r000300350020-1: OL STAFF NOTES - 8 JULY 1987",
+          "date": "1987-07-13T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91-00280r000300350020-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01332r000700740036-5",
+          "title": "CIA Reading Room cia-rdp88g01332r000700740036-5: APPLIED SYSTEMS INSTITUTE CAPABILITIES BRIEFING",
+          "date": "1985-12-05T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01332r000700740036-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01332r000100080006-7",
+          "title": "CIA Reading Room cia-rdp88g01332r000100080006-7: EXCELLENCE UPDATE",
+          "date": "1986-04-28T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01332r000100080006-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp96-00787r000300230001-5",
+          "title": "CIA Reading Room cia-rdp96-00787r000300230001-5: PHENOMENOLOGICAL RESEARCH AND ANALYSIS",
+          "date": "1993-02-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp96-00787r000300230001-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000400080054-0",
+          "title": "CIA Reading Room cia-rdp82-00850r000400080054-0: JPRS ID: 10198 USSR REPORT ENERGY",
+          "date": "1981-12-16T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000400080054-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00643r000600020040-5",
+          "title": "CIA Reading Room cia-rdp89g00643r000600020040-5: I. INTRODUCTION",
+          "date": "2011-10-12T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00643r000600020040-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89b01356r000200350008-2",
+          "title": "CIA Reading Room cia-rdp89b01356r000200350008-2: MINUTES OF THE NATIONAL INDUSTRIAL SECURITY ADVISORY COMMITTEE (NISAC) MEETING SEPTEMBER 16, 1987 AND AGENDA FOR THE DECEMBER 2, 1987 MEETING",
+          "date": "1987-11-12T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89b01356r000200350008-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g00186r000300340031-2",
+          "title": "CIA Reading Room cia-rdp88g00186r000300340031-2: SEPTEMBER 1985 CT CLASS",
+          "date": "1985-07-19T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g00186r000300340031-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g00186r001101440002-3",
+          "title": "CIA Reading Room cia-rdp88g00186r001101440002-3: OBJECTIVE: CALIBRATE FSI/CIA ORAL PROFICIENCY SCORING PROCEDURES IN FRENCH",
+          "date": "2011-06-21T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g00186r001101440002-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01332r001001300006-1",
+          "title": "CIA Reading Room cia-rdp88g01332r001001300006-1: OFFICE OF TRAINING AND EDUCATION LONG RANGE PLAN",
+          "date": "1985-12-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01332r001001300006-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00065r000100140013-4",
+          "title": "CIA Reading Room cia-rdp90-00065r000100140013-4: SOVIET SPACE MISSIONS PLANNED THROUGH THE YEAR 2000",
+          "date": "1987-04-08T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00065r000100140013-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90m00004r001000150018-2",
+          "title": "CIA Reading Room cia-rdp90m00004r001000150018-2: STATUTORY INSPECTOR GENERAL",
+          "date": "1987-11-02T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90m00004r001000150018-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp93t01142r000100100001-1",
+          "title": "CIA Reading Room cia-rdp93t01142r000100100001-1: DOLLAR FALL CONTINUES DESPITE INTERNATIONAL EFFORST TO HALT SLIDE",
+          "date": "1987-01-20T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp93t01142r000100100001-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00530r000701790004-9",
+          "title": "CIA Reading Room cia-rdp90-00530r000701790004-9: PERSONNEL MANAGEMENT ACTIVITES AND ACCOMPLISHMENTS FY 1987",
+          "date": "2013-03-07T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00530r000701790004-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430050-9: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp95-00972r000100120009-9",
+          "title": "CIA Reading Room cia-rdp95-00972r000100120009-9: A. D. LITTLE, INC. SAFE EVALUATION PRESENTATION",
+          "date": "1984-06-28T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp95-00972r000100120009-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87m00539r000800990025-6",
+          "title": "CIA Reading Room cia-rdp87m00539r000800990025-6: SOUTHERN AFRICA",
+          "date": "1985-06-17T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87m00539r000800990025-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g00186r000100090011-4",
+          "title": "CIA Reading Room cia-rdp88g00186r000100090011-4: FY 85 ACCOMPLISHMENTS",
+          "date": "1985-12-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g00186r000100090011-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90m00004r000700160027-5",
+          "title": "CIA Reading Room cia-rdp90m00004r000700160027-5: PROPOSED STAFF REPORT OF SENATE INTELLIGENCE COMMITTEE",
+          "date": "1987-01-12T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90m00004r000700160027-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91-00280r000300350009-4",
+          "title": "CIA Reading Room cia-rdp91-00280r000300350009-4: OL STAFF NOTES - 23 SEPTEMBER 1987",
+          "date": "1987-09-25T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91-00280r000300350009-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "ERIC_ED265245",
+          "title": "ERIC ED265245: Youth Employment and Training Programs. The YEDPA Years.",
+          "date": "1985-01-01T00:00:00Z",
+          "url": "https://archive.org/details/ERIC_ED265245",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "ERIC_ED301605",
+          "title": "ERIC ED301605: High School and Beyond 1980 Sophomore Cohort Third Follow-Up (1986). Data File User's Manual, Volumes I and II.",
+          "date": "1987-10-01T00:00:00Z",
+          "url": "https://archive.org/details/ERIC_ED301605",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "linjeflyg",
+      "countries": [
+        "se"
+      ],
+      "query": "(\"Linjeflyg\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Linjeflyg%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:33+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "swedair",
+      "countries": [
+        "se"
+      ],
+      "query": "(\"Swedair\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Swedair%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:42+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "braathens",
+      "countries": [
+        "no"
+      ],
+      "query": "(\"Braathens SAFE\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Braathens+SAFE%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:42+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "wideroe",
+      "countries": [
+        "no"
+      ],
+      "query": "(\"Widerøe\" OR \"Wideroe\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Wider%C3%B8e%22+OR+%22Wideroe%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:42+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "finnair",
+      "countries": [
+        "fi"
+      ],
+      "query": "(\"Finnair\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Finnair%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:48+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000600670004-8",
+          "title": "CIA Reading Room cia-rdp89g00720r000600670004-8: LETTER TO DR. GATES FROM CAROL VELANDER",
+          "date": "1986-04-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000600670004-8",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "icelandair",
+      "countries": [
+        "is"
+      ],
+      "query": "(\"Icelandair\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Icelandair%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:49+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "british-airways",
+      "countries": [
+        "gb"
+      ],
+      "query": "(\"British Airways\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22British+Airways%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:49+00:00",
+      "status": "searched",
+      "total": 10,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00798r000400070004-9",
+          "title": "CIA Reading Room cia-rdp88-00798r000400070004-9: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-07-11T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00798r000400070004-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00733r000100150005-3",
+          "title": "CIA Reading Room cia-rdp88-00733r000100150005-3: SCIENCE AND TECHNOLOGY PERSPECTIVES",
+          "date": "1986-10-30T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00733r000100150005-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000200070040-8",
+          "title": "CIA Reading Room cia-rdp82-00850r000200070040-8: JPRS ID: 9209 WORLDWIDE REPORT NUCLEAR DEVELOPMENT AND PROLIFERATION",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000200070040-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88t01079r000200160026-4",
+          "title": "CIA Reading Room cia-rdp88t01079r000200160026-4: NATIONAL INTELLIGENCE DAILY",
+          "date": "1987-08-19T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88t01079r000200160026-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "title": "CIA Reading Room cia-rdp05s02029r000300750001-1: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "title": "CIA Reading Room cia-rdp87t00685r000200390003-3: TERRORISM REVIEW",
+          "date": "1986-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "title": "CIA Reading Room cia-rdp87t00685r000200360003-6: TERRORISM REVIEW",
+          "date": "1986-06-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "VOA_Africa_20190718_170000",
+          "title": "VOA [Voice of America] Africa : July 18, 2019 01:00PM-02:00PM EDT",
+          "date": "2019-07-18T00:00:00Z",
+          "url": "https://archive.org/details/VOA_Africa_20190718_170000",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "british-caledonian",
+      "countries": [
+        "gb"
+      ],
+      "query": "(\"British Caledonian\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22British+Caledonian%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:55+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000200020045-8",
+          "title": "CIA Reading Room cia-rdp82-00850r000200020045-8: JPRS ID: 8781 NEAR EAST/NORTH AFRICA REPORT",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000200020045-8",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "aer-lingus",
+      "countries": [
+        "ie"
+      ],
+      "query": "(\"Aer Lingus\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Aer+Lingus%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:55+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "air-france",
+      "countries": [
+        "fr"
+      ],
+      "query": "(\"Air France\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+France%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:56:56+00:00",
+      "status": "searched",
+      "total": 19,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430050-9: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00289r000200740001-6",
+          "title": "CIA Reading Room cia-rdp87t00289r000200740001-6: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00289r000200740001-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r000903660004-7",
+          "title": "CIA Reading Room cia-rdp88b00443r000903660004-7: REMARKS OF WILLIAM J. CASEY DIRECTOR OF CENTRAL INTELLIGENCE BEFORE THE 14TH ANNUAL CONFERENCE OF THE FLETCHER SCHOOL OF LAW AND DIPLOMACY'S NATIONAL SECURITY STUDIES PROGRAM TUFTS UNIVERSITY 17 APRIL 1985 ROYAL SONESTA HOTEL CAMBRIDGE, MAS",
+          "date": "1985-04-17T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r000903660004-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430052-7: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "drew-mike-2013",
+          "title": "The Drew & Mike Show Collection 2013",
+          "date": "2026-01-30T00:00:00Z",
+          "url": "https://archive.org/details/drew-mike-2013",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97-00770r000100320001-7",
+          "title": "CIA Reading Room cia-rdp97-00770r000100320001-7: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-05-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97-00770r000100320001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87-01104r000100160011-3",
+          "title": "CIA Reading Room cia-rdp87-01104r000100160011-3: MONTHLY REPORT -- TEL AVIV BUREAU -- FEBRUARY",
+          "date": "1986-03-04T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87-01104r000100160011-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "title": "CIA Reading Room cia-rdp05s02029r000300750001-1: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90r00038r000300340001-5",
+          "title": "CIA Reading Room cia-rdp90r00038r000300340001-5: PROSPECTS FOR COUNTERTERRORIST COOPERATION AMONG DEVELOPED COUNTRIES",
+          "date": "1986-05-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90r00038r000300340001-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp80t00246a073300490001-4",
+          "title": "CIA Reading Room cia-rdp80t00246a073300490001-4: SUMMARY REPORT ON TRANSPORTATION IN EAST GERMANY/USSR/POLAND/CZECHOSLOVAKIA",
+          "date": "1984-05-21T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp80t00246a073300490001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00798r000400130005-1",
+          "title": "CIA Reading Room cia-rdp88-00798r000400130005-1: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-08-22T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00798r000400130005-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "title": "CIA Reading Room cia-rdp87t00685r000200360003-6: TERRORISM REVIEW",
+          "date": "1986-06-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00798r000400010004-5",
+          "title": "CIA Reading Room cia-rdp88-00798r000400010004-5: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-05-30T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00798r000400010004-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000200070040-8",
+          "title": "CIA Reading Room cia-rdp82-00850r000200070040-8: JPRS ID: 9209 WORLDWIDE REPORT NUCLEAR DEVELOPMENT AND PROLIFERATION",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000200070040-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "title": "CIA Reading Room cia-rdp87t00685r000200390003-3: TERRORISM REVIEW",
+          "date": "1986-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "title": "CIA Reading Room cia-rdp82-00850r000500070005-4: JPRS ID: 10559 WEST EUROPE REPORT SCIENCE AND TECHNOLOGY",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000100040040-2",
+          "title": "CIA Reading Room cia-rdp82-00850r000100040040-2: JPRS ID: 8404 TRANSLATIONS ON WESTERN EUROPE",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000100040040-2",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "uta",
+      "countries": [
+        "fr"
+      ],
+      "query": "(\"UTA\" OR \"Union de Transports Aeriens\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22UTA%22+OR+%22Union+de+Transports+Aeriens%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:02+00:00",
+      "status": "searched",
+      "total": 16,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01116r000300380001-7",
+          "title": "CIA Reading Room cia-rdp88g01116r000300380001-7: SENIOR INTERAGENCY GROUP MEETING ON AFGHANISTAN",
+          "date": "1986-02-20T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01116r000300380001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01332r000700720003-3",
+          "title": "CIA Reading Room cia-rdp88g01332r000700720003-3: TRAVEL TASK FORCE ON MINIMIZING RISK TO AGENCY TRAVELERS",
+          "date": "1986-05-29T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01332r000700720003-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000700920003-0",
+          "title": "CIA Reading Room cia-rdp89g00720r000700920003-0: E-SYSTEM VISIT",
+          "date": "1988-01-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000700920003-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000403310020-2",
+          "title": "CIA Reading Room cia-rdp90-00965r000403310020-2: MILITARY STUDIES ALTERNATIVES TO SHUTTLE",
+          "date": "1986-01-30T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000403310020-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89-00063r000300340005-3",
+          "title": "CIA Reading Room cia-rdp89-00063r000300340005-3: WEEKLY REPORT FOR PERIOD ENDING 8 OCTOBER 1987",
+          "date": "1987-10-08T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89-00063r000300340005-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87m01007r000400940006-5",
+          "title": "CIA Reading Room cia-rdp87m01007r000400940006-5: INTELLIGENCE AUTHORIZATION ACT FOR FISCAL YEAR 1986",
+          "date": "1985-07-18T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87m01007r000400940006-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-01192r000100020001-1",
+          "title": "CIA Reading Room cia-rdp88-01192r000100020001-1: SSCI HEARING- 23 JULY 1986",
+          "date": "1986-07-23T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-01192r000100020001-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "ERIC_ED260667",
+          "title": "ERIC ED260667: Part Time Alternative Program, Graduate Social Work Education in Texas: Nibblers at the Feast of Learning.",
+          "date": "1985-01-01T00:00:00Z",
+          "url": "https://archive.org/details/ERIC_ED260667",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "osf-registrations-fs6p4-v1",
+          "title": "Exploring the Impact of Bilingualism on Theory of Mind and Executive Functioning in Autistic Adults: A Registered Report",
+          "date": "2025-03-04T00:00:00Z",
+          "url": "https://archive.org/details/osf-registrations-fs6p4-v1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87m00539r000700950006-2",
+          "title": "CIA Reading Room cia-rdp87m00539r000700950006-2: LETTER TO JOHN N. MCMAHON FROM MARTIN HURWITZ",
+          "date": "1985-11-29T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87m00539r000700950006-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00530r000902150007-3",
+          "title": "CIA Reading Room cia-rdp90-00530r000902150007-3: PERSONNEL REPORT",
+          "date": "1986-12-29T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00530r000902150007-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00643r001100180016-9",
+          "title": "CIA Reading Room cia-rdp89g00643r001100180016-9: SUPPORT FOR THE ANALYST'S FILE ENVIRONMENT (SAFE)",
+          "date": "1987-12-10T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00643r001100180016-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "openpublica-draper-utah-e4974500-9197-438a-95dd-d4b9d7658c68",
+          "title": "Draper City Council Meeting July 15, 2025: Station Area Plans, Capital Improvements, Public Hearings",
+          "date": "2025-07-15T00:00:00Z",
+          "url": "https://archive.org/details/openpublica-draper-utah-e4974500-9197-438a-95dd-d4b9d7658c68",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87m01152r001101400023-5",
+          "title": "CIA Reading Room cia-rdp87m01152r001101400023-5: SENATE FLOOR ACTION ON & PASSAGE OF HOUSE REPORT 99-373 - INTELLIGENCE AUTHORIZATION ACT FOR FISCAL YEAR 1986FY",
+          "date": "1985-11-22T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87m01152r001101400023-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000100040040-2",
+          "title": "CIA Reading Room cia-rdp82-00850r000100040040-2: JPRS ID: 8404 TRANSLATIONS ON WESTERN EUROPE",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000100040040-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00530r000300480001-1",
+          "title": "CIA Reading Room cia-rdp90-00530r000300480001-1: REPORT TO THE CONGRESS",
+          "date": "1987-01-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00530r000300480001-1",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "lufthansa",
+      "countries": [
+        "de-west"
+      ],
+      "query": "(\"Lufthansa\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Lufthansa%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:02+00:00",
+      "status": "searched",
+      "total": 9,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000100040018-7",
+          "title": "CIA Reading Room cia-rdp82-00850r000100040018-7: JPRS ID: 8382 FRANCE: NUCLEAR, MISSILE, AND SPACE DEVELOPMENTS",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000100040018-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430050-9: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp85-01097r000400030006-1",
+          "title": "CIA Reading Room cia-rdp85-01097r000400030006-1: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1984-12-07T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp85-01097r000400030006-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430052-7: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "drew-mike-2013",
+          "title": "The Drew & Mike Show Collection 2013",
+          "date": "2026-01-30T00:00:00Z",
+          "url": "https://archive.org/details/drew-mike-2013",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp80t00246a069000010001-4",
+          "title": "CIA Reading Room cia-rdp80t00246a069000010001-4: SUMMARY TRANSPORTATION REPORT",
+          "date": "1963-08-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp80t00246a069000010001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "title": "CIA Reading Room cia-rdp82-00850r000500070005-4: JPRS ID: 10559 WEST EUROPE REPORT SCIENCE AND TECHNOLOGY",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "interflug",
+      "countries": [
+        "de-east"
+      ],
+      "query": "(\"Interflug\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Interflug%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:02+00:00",
+      "status": "searched",
+      "total": 5,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp08s01350r000601980002-2",
+          "title": "CIA Reading Room cia-rdp08s01350r000601980002-2: EAST GERMANY'S ECONOMIC TIES TO THE USSR",
+          "date": "1986-03-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp08s01350r000601980002-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp80t00246a069000010001-4",
+          "title": "CIA Reading Room cia-rdp80t00246a069000010001-4: SUMMARY TRANSPORTATION REPORT",
+          "date": "1963-08-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp80t00246a069000010001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp08-00534r000100070001-5",
+          "title": "CIA Reading Room cia-rdp08-00534r000100070001-5: THE WORLDFACT BOOK 1986",
+          "date": "1986-06-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp08-00534r000100070001-5",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "klm",
+      "countries": [
+        "nl"
+      ],
+      "query": "(\"KLM\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22KLM%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:09+00:00",
+      "status": "searched",
+      "total": 7,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "wolv2",
+          "title": "World of Languages vol. II (USD031)",
+          "date": "1996-01-01T00:00:00Z",
+          "url": "https://archive.org/details/wolv2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "ck62ciq1cjosqkzfxafrututo7vgkxp4ftgmg3mz",
+          "title": "773 North American Rockwell OV-10 Bronco",
+          "date": "2023-11-08T00:00:00Z",
+          "url": "https://archive.org/details/ck62ciq1cjosqkzfxafrututo7vgkxp4ftgmg3mz",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp99-01448r000401640031-0",
+          "title": "CIA Reading Room cia-rdp99-01448r000401640031-0: STROBE TALBOTT, TIME MAGAZINE, HAS REQUESTED AGENCY PARTICIPATION IN A TIME NEWSTOUR THE COMPANY HAS ARRANGED FOR CEOS OF MAJOR CORPORATIONS FOR THE PAST TWENTY-FIVE YEARS.",
+          "date": "1989-01-18T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp99-01448r000401640031-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "title": "CIA Reading Room cia-rdp82-00850r000500070005-4: JPRS ID: 10559 WEST EUROPE REPORT SCIENCE AND TECHNOLOGY",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "Anchorage_Unitarian_Universalist_Fellowship_Forum_Podcasts-17719213_how_alaska_p",
+          "title": "How Alaska Public Lands Became Private and Our Cabin Will Become Yours - Judith Anderegg and David Pelto",
+          "date": "2025-08-17T17:00:00Z",
+          "url": "https://archive.org/details/Anchorage_Unitarian_Universalist_Fellowship_Forum_Podcasts-17719213_how_alaska_p",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "sabena",
+      "countries": [
+        "be"
+      ],
+      "query": "(\"Sabena\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Sabena%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:10+00:00",
+      "status": "searched",
+      "total": 3,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430050-9: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430052-7: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "title": "CIA Reading Room cia-rdp82-00850r000500070005-4: JPRS ID: 10559 WEST EUROPE REPORT SCIENCE AND TECHNOLOGY",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "swissair",
+      "countries": [
+        "ch"
+      ],
+      "query": "(\"Swissair\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Swissair%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:10+00:00",
+      "status": "searched",
+      "total": 4,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000300040057-2",
+          "title": "CIA Reading Room cia-rdp82-00850r000300040057-2: JPRS ID: 9377 SUB-SAHARAN AFRICA REPORT",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000300040057-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "title": "CIA Reading Room cia-rdp82-00850r000500070005-4: JPRS ID: 10559 WEST EUROPE REPORT SCIENCE AND TECHNOLOGY",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000500070005-4",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "austrian",
+      "countries": [
+        "at"
+      ],
+      "query": "(\"Austrian Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Austrian+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:16+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "alitalia",
+      "countries": [
+        "it"
+      ],
+      "query": "(\"Alitalia\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Alitalia%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:17+00:00",
+      "status": "searched",
+      "total": 3,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-05743475",
+          "title": "CIA Reading Room 05743475: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1987-02-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-05743475",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "iberia",
+      "countries": [
+        "es"
+      ],
+      "query": "(\"Iberia\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Iberia%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:17+00:00",
+      "status": "searched",
+      "total": 2,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00289r000301100001-4",
+          "title": "CIA Reading Room cia-rdp87t00289r000301100001-4: EUROPEAN REVIEW",
+          "date": "1986-06-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00289r000301100001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp84s00895r000200090004-6",
+          "title": "CIA Reading Room cia-rdp84s00895r000200090004-6: SPAIN-NATO: COMING TO GRIPS WITH MEMBERSHIP",
+          "date": "1984-02-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp84s00895r000200090004-6",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "tap",
+      "countries": [
+        "pt"
+      ],
+      "query": "(\"TAP Air Portugal\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22TAP+Air+Portugal%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:23+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "olympic",
+      "countries": [
+        "gr"
+      ],
+      "query": "(\"Olympic Airways\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Olympic+Airways%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:23+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "lot",
+      "countries": [
+        "pl"
+      ],
+      "query": "(\"LOT Polish Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22LOT+Polish+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:24+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "csa",
+      "countries": [
+        "cz"
+      ],
+      "query": "(\"CSA Czechoslovak Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22CSA+Czechoslovak+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:30+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "malev",
+      "countries": [
+        "hu"
+      ],
+      "query": "(\"Malév\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Mal%C3%A9v%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:30+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "tarom",
+      "countries": [
+        "ro"
+      ],
+      "query": "(\"Tarom\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Tarom%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:31+00:00",
+      "status": "searched",
+      "total": 2,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00289r000200740001-6",
+          "title": "CIA Reading Room cia-rdp87t00289r000200740001-6: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00289r000200740001-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "title": "CIA Reading Room cia-rdp05s02029r000300750001-1: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "aeroflot",
+      "countries": [
+        "su"
+      ],
+      "query": "(\"Aeroflot\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Aeroflot%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:38+00:00",
+      "status": "searched",
+      "total": 21,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90t00114r000700270001-2",
+          "title": "CIA Reading Room cia-rdp90t00114r000700270001-2: AFGHANISTAN SITUATION REPORT",
+          "date": "1987-05-19T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90t00114r000700270001-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88t00768r000100030001-2",
+          "title": "CIA Reading Room cia-rdp88t00768r000100030001-2: ZAIRE: CHALLENGES AHEAD FOR MOBUTU",
+          "date": "1986-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88t00768r000100030001-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000403450003-6",
+          "title": "CIA Reading Room cia-rdp90-00965r000403450003-6: SUNDAY IN IRKUTSK IS NOT AS BAD AS IT SOUNDS...",
+          "date": "1985-02-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000403450003-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp86t01017r000505250001-3",
+          "title": "CIA Reading Room cia-rdp86t01017r000505250001-3: US-SOVIET BILATERAL EXCHANGES",
+          "date": "1986-09-17T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp86t01017r000505250001-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp86t00586r000400490007-7",
+          "title": "CIA Reading Room cia-rdp86t00586r000400490007-7: THE SOVIETS IN INDIA: MOSCOW'S MAJOR PENETRATION PROGRAM",
+          "date": "1985-12-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp86t00586r000400490007-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp07s01968r000200450001-2",
+          "title": "CIA Reading Room cia-rdp07s01968r000200450001-2: SOVIET MILITARY POLICY IN THE THIRD WORLD",
+          "date": "1976-10-21T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp07s01968r000200450001-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88t01422r000100220001-3",
+          "title": "CIA Reading Room cia-rdp88t01422r000100220001-3: NATIONAL INTELLIGENCE DAILY SATURDAY 28 NOVEMBER 1987",
+          "date": "1987-11-28T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88t01422r000100220001-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-01203r000200060002-2",
+          "title": "CIA Reading Room cia-rdp88-01203r000200060002-2: TERRORISM REVIEW",
+          "date": "1988-03-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-01203r000200060002-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00798r000400080005-7",
+          "title": "CIA Reading Room cia-rdp88-00798r000400080005-7: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-07-18T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00798r000400080005-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp80t00246a069000010001-4",
+          "title": "CIA Reading Room cia-rdp80t00246a069000010001-4: SUMMARY TRANSPORTATION REPORT",
+          "date": "1963-08-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp80t00246a069000010001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000302630047-0",
+          "title": "CIA Reading Room cia-rdp90-00965r000302630047-0: U.S. IS HOPEFUL SUMMIT PLANS WILL GO AHEAD",
+          "date": "1986-03-09T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000302630047-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88t00096r000300410001-4",
+          "title": "CIA Reading Room cia-rdp88t00096r000300410001-4: INDIA-USSR: STRAINS IN RELATIONS",
+          "date": "1986-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88t00096r000300410001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000504850025-6",
+          "title": "CIA Reading Room cia-rdp90-00965r000504850025-6: SUPERPOWER RELATIONSHIP LANGUISHING",
+          "date": "1986-03-23T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000504850025-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00289r000200940001-4",
+          "title": "CIA Reading Room cia-rdp87t00289r000200940001-4: LATIN AMERICA REVIEW",
+          "date": "1985-11-22T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00289r000200940001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90b01390r000400540048-5",
+          "title": "CIA Reading Room cia-rdp90b01390r000400540048-5: ARMED FORCES JOURNAL ARTICLE RE SOVIET BUILDUP IN PERSIAN GULF",
+          "date": "1986-09-04T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90b01390r000400540048-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00573r001001310001-7",
+          "title": "CIA Reading Room cia-rdp87t00573r001001310001-7: PERU: PROSPECTS FOR INCREASED SOVIET BLOC INFLUENCE",
+          "date": "1985-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00573r001001310001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89t01451r000200230001-8",
+          "title": "CIA Reading Room cia-rdp89t01451r000200230001-8: SOVIET EXPLOITATION OF RELIGIOUS LEADERS AND ORGANIZATIONS FOR PROPAGANDA AND INTELLIGENCE PURPOSES",
+          "date": "1988-05-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89t01451r000200230001-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp96b01172r000700060001-8",
+          "title": "CIA Reading Room cia-rdp96b01172r000700060001-8: SOVIET ACQUISITION OF MILITARILY SIGNIFICANT WESTERN TECHNOLOGY: AN UPDATE",
+          "date": "1985-09-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp96b01172r000700060001-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05t00280r000300380002-3",
+          "title": "CIA Reading Room cia-rdp05t00280r000300380002-3: RESOLUTION ON CREATION OF SCIENTIFIC-TECHNICAL COMPLEXES",
+          "date": "1986-02-07T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05t00280r000300380002-3",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "panam",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Pan American World Airways\" OR \"Pan Am\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Pan+American+World+Airways%22+OR+%22Pan+Am%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:38+00:00",
+      "status": "searched",
+      "total": 16,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000600670004-8",
+          "title": "CIA Reading Room cia-rdp89g00720r000600670004-8: LETTER TO DR. GATES FROM CAROL VELANDER",
+          "date": "1986-04-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000600670004-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01116r001202410003-9",
+          "title": "CIA Reading Room cia-rdp88g01116r001202410003-9: LETTER TO EDWARD EISELE FROM ROBERT M. GATES",
+          "date": "1986-05-09T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01116r001202410003-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp86t01017r000505250001-3",
+          "title": "CIA Reading Room cia-rdp86t01017r000505250001-3: US-SOVIET BILATERAL EXCHANGES",
+          "date": "1986-09-17T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp86t01017r000505250001-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "Community_Protestant_UCC-2078558424_catholicmilitarylife_meet_auxiliary_bishop_g",
+          "title": "Meet Auxiliary Bishop Gregg Caggianelli",
+          "date": "2025-04-14T19:10:37Z",
+          "url": "https://archive.org/details/Community_Protestant_UCC-2078558424_catholicmilitarylife_meet_auxiliary_bishop_g",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-01203r000200060002-2",
+          "title": "CIA Reading Room cia-rdp88-01203r000200060002-2: TERRORISM REVIEW",
+          "date": "1988-03-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-01203r000200060002-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b01306r000400110008-8",
+          "title": "CIA Reading Room cia-rdp91b01306r000400110008-8: RECENT SPEECHES BY THE DCI",
+          "date": "1989-07-05T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b01306r000400110008-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp92m00732r001000070025-3",
+          "title": "CIA Reading Room cia-rdp92m00732r001000070025-3: LETTER TO JAMES C. MURR FROM E. NORBERT GARRETT",
+          "date": "1989-06-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp92m00732r001000070025-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000504850025-6",
+          "title": "CIA Reading Room cia-rdp90-00965r000504850025-6: SUPERPOWER RELATIONSHIP LANGUISHING",
+          "date": "1986-03-23T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000504850025-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000100070027-4",
+          "title": "CIA Reading Room cia-rdp89g00720r000100070027-4: LETTER TO EDWARD EISELE FROM ROBERT M. GATES",
+          "date": "1986-04-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000100070027-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp92m00732r001100030012-0",
+          "title": "CIA Reading Room cia-rdp92m00732r001100030012-0: MULTILATERAL ANTI-NARCOTICS STRIKE FORCE",
+          "date": "1989-09-27T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp92m00732r001100030012-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "title": "CIA Reading Room cia-rdp87t00685r000200390003-3: TERRORISM REVIEW",
+          "date": "1986-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-06741378",
+          "title": "CIA Reading Room 06741378: CY 2008 CASE LOG",
+          "date": "2020-10-08T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-06741378",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "title": "CIA Reading Room cia-rdp87t00685r000200360003-6: TERRORISM REVIEW",
+          "date": "1986-06-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp96b01172r000700060001-8",
+          "title": "CIA Reading Room cia-rdp96b01172r000700060001-8: SOVIET ACQUISITION OF MILITARILY SIGNIFICANT WESTERN TECHNOLOGY: AN UPDATE",
+          "date": "1985-09-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp96b01172r000700060001-8",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "delta",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Delta Air Lines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Delta+Air+Lines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:38+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "american",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"American Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22American+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:45+00:00",
+      "status": "searched",
+      "total": 9,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "FATWAA_DR_SHEIKH_MUSSAA_SU_AALAA-christian_talk_that_rocks_with_richie_l_ep_2_6_",
+          "title": "Christian Talk That Rocks with Richie L. Ep. 2/6/2023",
+          "date": "2023-02-06T19:06:23Z",
+          "url": "https://archive.org/details/FATWAA_DR_SHEIKH_MUSSAA_SU_AALAA-christian_talk_that_rocks_with_richie_l_ep_2_6_",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000700920003-0",
+          "title": "CIA Reading Room cia-rdp89g00720r000700920003-0: E-SYSTEM VISIT",
+          "date": "1988-01-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000700920003-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g00152r001102380026-7",
+          "title": "CIA Reading Room cia-rdp90g00152r001102380026-7: SPEAKING INVITATION MID-AMERICA COMMITTEE CHICAGO, ILLINOIS CONVENIENT DATE, SEPTEMBER - NOVEMBER 1987",
+          "date": "1987-08-10T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g00152r001102380026-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "1986-american-airlines-timetable",
+          "title": "1986 American Airlines Timetable Cover",
+          "date": "1986-07-02T00:00:00Z",
+          "url": "https://archive.org/details/1986-american-airlines-timetable",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000700960005-4",
+          "title": "CIA Reading Room cia-rdp89g00720r000700960005-4: TRIP TO DALLAS",
+          "date": "1988-02-11T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000700960005-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "title": "CIA Reading Room cia-rdp87t00685r000200360003-6: TERRORISM REVIEW",
+          "date": "1986-06-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01332r000901050022-3",
+          "title": "CIA Reading Room cia-rdp88g01332r000901050022-3: TENTATIVE AGENDA ITEMS",
+          "date": "1986-04-10T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01332r000901050022-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "1986-american-airlines-timetable-cover-12171986",
+          "title": "1986 American Airlines Timetable Cover",
+          "date": "1986-12-17T00:00:00Z",
+          "url": "https://archive.org/details/1986-american-airlines-timetable-cover-12171986",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "1985-american-airlines-timetable-cover-12141985",
+          "title": "1985 American Airlines Timetable Cover 12141985",
+          "date": "1985-12-14T00:00:00Z",
+          "url": "https://archive.org/details/1985-american-airlines-timetable-cover-12141985",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "united",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"United Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22United+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:45+00:00",
+      "status": "searched",
+      "total": 7,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g00152r001102380026-7",
+          "title": "CIA Reading Room cia-rdp90g00152r001102380026-7: SPEAKING INVITATION MID-AMERICA COMMITTEE CHICAGO, ILLINOIS CONVENIENT DATE, SEPTEMBER - NOVEMBER 1987",
+          "date": "1987-08-10T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g00152r001102380026-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87-01104r000100140011-5",
+          "title": "CIA Reading Room cia-rdp87-01104r000100140011-5: MONTHLY REPORT - SEOUL BUREAU - FEBRUARY 1986",
+          "date": "1986-03-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87-01104r000100140011-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g01353r002000010021-0",
+          "title": "CIA Reading Room cia-rdp90g01353r002000010021-0: TRIP TO SAN FRANCISCO, CALIFORNIA TO ADDRESS WORLD AFFAIRS COUNCIL OF NORTHERN CALIFORNIA",
+          "date": "1988-09-13T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g01353r002000010021-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000600750006-7",
+          "title": "CIA Reading Room cia-rdp89g00720r000600750006-7: HOOVER INSTITUTION - VISIT OF ROBERT M. GATES, DDCI, NOVEMBER 24, 1986",
+          "date": "2011-08-11T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000600750006-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89t01156r000100130003-6",
+          "title": "CIA Reading Room cia-rdp89t01156r000100130003-6: LETTER (SANITIZED) FROM ROBERT M. GATES",
+          "date": "1986-01-28T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89t01156r000100130003-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "1986-united-airlines-timetable-9-3-1986",
+          "title": "1986 United Airlines Timetable Cover",
+          "date": "1986-09-03T00:00:00Z",
+          "url": "https://archive.org/details/1986-united-airlines-timetable-9-3-1986",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "DTIC_ADA209139",
+          "title": "DTIC ADA209139: Airline Delay: 1976 - 1986: Based upon the Standardized Delay Reporting System",
+          "date": "1989-03-01T00:00:00Z",
+          "url": "https://archive.org/details/DTIC_ADA209139",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "twa",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Trans World Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Trans+World+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:46+00:00",
+      "status": "searched",
+      "total": 4,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g01353r001900090024-1",
+          "title": "CIA Reading Room cia-rdp90g01353r001900090024-1: ARRANGEMENTS FOR YOUR ADDRESS OF THE REGIONAL COMMERCE AND GROWTH ASSOCIATION",
+          "date": "1988-04-11T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g01353r001900090024-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000402920038-7",
+          "title": "CIA Reading Room cia-rdp90-00965r000402920038-7: U.S. HAS REACHED 'LIMITS' ON TERRORISM, REAGAN SAYS",
+          "date": "1985-06-21T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000402920038-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90m00005r000200020002-1",
+          "title": "CIA Reading Room cia-rdp90m00005r000200020002-1: PROPOSED FEDERAL EMPLOYEE DISCRIMINATION COMPLAINT PROCEDURES ACT OF 1988",
+          "date": "1988-09-21T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90m00005r000200020002-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b00390r000500470020-2",
+          "title": "CIA Reading Room cia-rdp91b00390r000500470020-2: FEDERAL AVIATION REGULATIONS PART 108 AIRPLANE OPERATOR SECURITY",
+          "date": "1981-09-11T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b00390r000500470020-2",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "eastern",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Eastern Air Lines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Eastern+Air+Lines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:52+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "northwest",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Northwest Orient Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Northwest+Orient+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:52+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87-01104r000100140011-5",
+          "title": "CIA Reading Room cia-rdp87-01104r000100140011-5: MONTHLY REPORT - SEOUL BUREAU - FEBRUARY 1986",
+          "date": "1986-03-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87-01104r000100140011-5",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "continental",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Continental Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Continental+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:52+00:00",
+      "status": "searched",
+      "total": 3,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "1985-continental-airlines-timetable",
+          "title": "1985 Continental Airlines Timetable",
+          "date": "1985-06-06T00:00:00Z",
+          "url": "https://archive.org/details/1985-continental-airlines-timetable",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "new-york-air-timetable-inside1986",
+          "title": "1986 New York Air Timetable",
+          "date": "1986-01-01T00:00:00Z",
+          "url": "https://archive.org/details/new-york-air-timetable-inside1986",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89-00244r001403330009-4",
+          "title": "CIA Reading Room cia-rdp89-00244r001403330009-4: TENTATIVE AGENDA ITEMS",
+          "date": "1986-11-12T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89-00244r001403330009-4",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "air-wisconsin",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Air Wisconsin\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+Wisconsin%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:57:59+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "midstate",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Midstate Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Midstate+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:00+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "air-midwest",
+      "countries": [
+        "us"
+      ],
+      "query": "(\"Air Midwest\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+Midwest%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:00+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g00152r001202410026-2",
+          "title": "CIA Reading Room cia-rdp90g00152r001202410026-2: LETTER TO ROBERT GATES FROM JAN MEYERS",
+          "date": "1987-02-13T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g00152r001202410026-2",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "norcanair",
+      "countries": [
+        "ca"
+      ],
+      "query": "(\"Norcanair\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Norcanair%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:06+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "air-canada",
+      "countries": [
+        "ca"
+      ],
+      "query": "(\"Air Canada\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+Canada%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:06+00:00",
+      "status": "searched",
+      "total": 3,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "wolv2",
+          "title": "World of Languages vol. II (USD031)",
+          "date": "1996-01-01T00:00:00Z",
+          "url": "https://archive.org/details/wolv2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "Anchorage_Unitarian_Universalist_Fellowship_Forum_Podcasts-12331872_how_plans_fo",
+          "title": "How Plans for Ted Stevens International Will Affect Our Community and State - Craig Campbell (slides available)",
+          "date": "2023-02-26T18:00:00Z",
+          "url": "https://archive.org/details/Anchorage_Unitarian_Universalist_Fellowship_Forum_Podcasts-12331872_how_plans_fo",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "Newsline_2078",
+          "title": "Amateur Radio Newsline 2078",
+          "date": "2017-08-25T00:00:00Z",
+          "url": "https://archive.org/details/Newsline_2078",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "cp-air",
+      "countries": [
+        "ca"
+      ],
+      "query": "(\"CP Air\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22CP+Air%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:07+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "el-al",
+      "countries": [
+        "il"
+      ],
+      "query": "(\"El Al\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22El+Al%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:13+00:00",
+      "status": "searched",
+      "total": 15,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b00874r000100170015-8",
+          "title": "CIA Reading Room cia-rdp91b00874r000100170015-8: INTERNATIONAL TERRORISM: BEFORE AND AFTER THE US AIRSTRIKE",
+          "date": "2011-08-30T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b00874r000100170015-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "title": "CIA Reading Room cia-rdp87t01127r001201120002-9: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t01127r001201120002-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430050-9: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430050-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89g00720r000300030001-4",
+          "title": "CIA Reading Room cia-rdp89g00720r000300030001-4: PAYMENT FOR CHARGES INCURRED BY THE DDCI FOR REPRESENTATIONAL PURPOSES",
+          "date": "1988-01-04T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89g00720r000300030001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97-00770r000100710001-4",
+          "title": "CIA Reading Room cia-rdp97-00770r000100710001-4: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-12-19T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97-00770r000100710001-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05s02029r000300950002-8",
+          "title": "CIA Reading Room cia-rdp05s02029r000300950002-8: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1987-08-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05s02029r000300950002-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "title": "CIA Reading Room cia-rdp88b00443r001904430052-7: POLICY REVIEW ARTICLE BY REPRESENTATIVE JIM COURTER",
+          "date": "1986-04-15T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88b00443r001904430052-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-01203r000200060002-2",
+          "title": "CIA Reading Room cia-rdp88-01203r000200060002-2: TERRORISM REVIEW",
+          "date": "1988-03-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-01203r000200060002-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b00874r000200070006-8",
+          "title": "CIA Reading Room cia-rdp91b00874r000200070006-8: CPPG MEETING",
+          "date": "1986-01-12T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b00874r000200070006-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05s02029r000300850001-0",
+          "title": "CIA Reading Room cia-rdp05s02029r000300850001-0: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-11-21T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05s02029r000300850001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "title": "CIA Reading Room cia-rdp05s02029r000300750001-1: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "title": "CIA Reading Room cia-rdp97r00694r000700030001-0: BEIRUT AS A TERRORIST CENTER",
+          "date": "1987-01-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97r00694r000700030001-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "title": "CIA Reading Room cia-rdp87t00685r000200360003-6: TERRORISM REVIEW",
+          "date": "1986-06-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200360003-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "title": "CIA Reading Room cia-rdp87t00685r000200390003-3: TERRORISM REVIEW",
+          "date": "1986-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-05743460",
+          "title": "CIA Reading Room 05743460: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-12-19T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-05743460",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "iran-air",
+      "countries": [
+        "ir"
+      ],
+      "query": "(\"Iran Air\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Iran+Air%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:13+00:00",
+      "status": "searched",
+      "total": 3,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90m00005r000500010004-7",
+          "title": "CIA Reading Room cia-rdp90m00005r000500010004-7: ADDITIONAL ITEM FOR YOUR BREAKFAST WITH THE HOUSE FOREIGN AFFAIRS COMMITTEE",
+          "date": "1988-07-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90m00005r000500010004-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90m00005r001500010008-2",
+          "title": "CIA Reading Room cia-rdp90m00005r001500010008-2: ADDITIONAL ITEM FOR YOUR BREAKFAST WITH THE HOUSE FOREIGN AFFAIRS COMMITTEE",
+          "date": "1988-07-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90m00005r001500010008-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90m00005r000400070010-5",
+          "title": "CIA Reading Room cia-rdp90m00005r000400070010-5: ADDITIONAL ITEMS FOR YOUR BREAKFST WITH THE HOUSE FOREIGN AFFAIRS COMMITTEE",
+          "date": "1988-07-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90m00005r000400070010-5",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "iraqi-airways",
+      "countries": [
+        "iq"
+      ],
+      "query": "(\"Iraqi Airways\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Iraqi+Airways%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:13+00:00",
+      "status": "searched",
+      "total": 2,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "title": "CIA Reading Room cia-rdp87t00685r000200390003-3: TERRORISM REVIEW",
+          "date": "1986-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00685r000200390003-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp82-00850r000400030044-6",
+          "title": "CIA Reading Room cia-rdp82-00850r000400030044-6: JPRS ID: 9863 WORLDWIDE REPORT NUCLEAR DEVELOPMENT AND PROLIFERATION",
+          "date": "2016-11-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000400030044-6",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "libyan-arab",
+      "countries": [
+        "ly"
+      ],
+      "query": "(\"Libyan Arab Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Libyan+Arab+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:20+00:00",
+      "status": "searched",
+      "total": 4,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87b00858r000600910009-1",
+          "title": "CIA Reading Room cia-rdp87b00858r000600910009-1: QADHAFI, TERRORISM, AND THE STINGER",
+          "date": "1986-04-17T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87b00858r000600910009-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00289r000200740001-6",
+          "title": "CIA Reading Room cia-rdp87t00289r000200740001-6: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00289r000200740001-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b00874r000200070006-8",
+          "title": "CIA Reading Room cia-rdp91b00874r000200070006-8: CPPG MEETING",
+          "date": "1986-01-12T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b00874r000200070006-8",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "title": "CIA Reading Room cia-rdp05s02029r000300750001-1: NEAR EAST AND SOUTH ASIA REVIEW",
+          "date": "1986-01-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp05s02029r000300750001-1",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "saa",
+      "countries": [
+        "za"
+      ],
+      "query": "(\"South African Airways\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22South+African+Airways%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:20+00:00",
+      "status": "searched",
+      "total": 2,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97-00770r000100630001-3",
+          "title": "CIA Reading Room cia-rdp97-00770r000100630001-3: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-10-31T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97-00770r000100630001-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89s01449r000300220001-2",
+          "title": "CIA Reading Room cia-rdp89s01449r000300220001-2: SOUTHERN AFRICA: WRESTLING WITH SOUTH AFRICAN ECONOMIC TIES",
+          "date": "1988-05-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89s01449r000300220001-2",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "air-zimbabwe",
+      "countries": [
+        "zw"
+      ],
+      "query": "(\"Air Zimbabwe\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+Zimbabwe%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:20+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "pia",
+      "countries": [
+        "pk"
+      ],
+      "query": "(\"Pakistan International Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Pakistan+International+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:30+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "caac",
+      "countries": [
+        "cn"
+      ],
+      "query": "(\"CAAC\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22CAAC%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:30+00:00",
+      "status": "searched",
+      "total": 6,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97-00770r000100640001-2",
+          "title": "CIA Reading Room cia-rdp97-00770r000100640001-2: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-11-07T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97-00770r000100640001-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp04t00794r000100600001-2",
+          "title": "CIA Reading Room cia-rdp04t00794r000100600001-2: PUTTING COMPUTERS TO WORK IN CHINA: PRIORITIES, PROBLEMS, AND PROSPECTS",
+          "date": "1986-02-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp04t00794r000100600001-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88g01117r000501330002-7",
+          "title": "CIA Reading Room cia-rdp88g01117r000501330002-7: MEETING WITH UNDER SECRETARY ARMACOST AND AMBASSADOR ABRAMOWITZ, 23 MAY 1986",
+          "date": "1986-05-22T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01117r000501330002-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87-01104r000100030005-4",
+          "title": "CIA Reading Room cia-rdp87-01104r000100030005-4: MONTHLY REPORT -- BANGKOK BUREAU -- AUGUST 1986",
+          "date": "1986-08-04T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87-01104r000100030005-4",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00798r000400110005-3",
+          "title": "CIA Reading Room cia-rdp88-00798r000400110005-3: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-08-08T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00798r000400110005-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp96-00789r003800460001-0",
+          "title": "CIA Reading Room cia-rdp96-00789r003800460001-0: AN EXPERIMENT TO TEST APPARENT REMOTE ACTION (RA) EFFECTS ON ELECTRODERMAL ACTIVITY",
+          "date": "1986-12-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp96-00789r003800460001-0",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "jal",
+      "countries": [
+        "jp"
+      ],
+      "query": "(\"Japan Air Lines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Japan+Air+Lines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:30+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp86t01017r000201600001-1",
+          "title": "CIA Reading Room cia-rdp86t01017r000201600001-1: INTERNATIONAL FINANCIAL SITUATION REPORT #57",
+          "date": "1986-10-23T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp86t01017r000201600001-1",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "thai",
+      "countries": [
+        "th"
+      ],
+      "query": "(\"Thai International\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Thai+International%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:37+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "singapore",
+      "countries": [
+        "sg"
+      ],
+      "query": "(\"Singapore Airlines\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Singapore+Airlines%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:37+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "malaysian",
+      "countries": [
+        "my"
+      ],
+      "query": "(\"Malaysian Airline System\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Malaysian+Airline+System%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:37+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90t01298r000200200001-0",
+          "title": "CIA Reading Room cia-rdp90t01298r000200200001-0: MALAYSIA'S UNFULFILLED PROMISE: THE NEW ECONOMIC POLICY IN ARREARS",
+          "date": "1985-10-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90t01298r000200200001-0",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "qantas",
+      "countries": [
+        "au"
+      ],
+      "query": "(\"Qantas\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Qantas%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:44+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "air-new-zealand",
+      "countries": [
+        "nz"
+      ],
+      "query": "(\"Air New Zealand\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+New+Zealand%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:44+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "air-nauru",
+      "countries": [
+        "nr"
+      ],
+      "query": "(\"Air Nauru\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+Nauru%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:44+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "lap",
+      "countries": [
+        "py"
+      ],
+      "query": "(\"Líneas Aéreas Paraguayas\" OR \"LAP\" OR \"Air Paraguay\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22L%C3%ADneas+A%C3%A9reas+Paraguayas%22+OR+%22LAP%22+OR+%22Air+Paraguay%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:51+00:00",
+      "status": "searched",
+      "total": 26,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-05495022",
+          "title": "CIA Reading Room 05495022: SOVIET PROGRAM FOR DEVELOPMENT OG NEW BCW AGENTS",
+          "date": "1985-09-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-05495022",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "VOA_Africa_20170822_160000",
+          "title": "VOA [Voice of America] Africa : August 22, 2017 12:00PM-01:00PM EDT",
+          "date": "2017-08-22T00:00:00Z",
+          "url": "https://archive.org/details/VOA_Africa_20170822_160000",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000504760002-1",
+          "title": "CIA Reading Room cia-rdp90-00965r000504760002-1: OLLIE NORTH'S SECRET NETWORK",
+          "date": "1987-03-09T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000504760002-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "os2_94",
+          "title": "IBM Presents OS/2 Software Hits - First Edition 1994",
+          "date": "1994-08-01T00:00:00Z",
+          "url": "https://archive.org/details/os2_94",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "the-drew-mike-show-collection-2010",
+          "title": "The Drew & Mike Show Collection 2010",
+          "date": "2026-02-03T00:00:00Z",
+          "url": "https://archive.org/details/the-drew-mike-show-collection-2010",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "VOA_Africa_20190402_030000",
+          "title": "VOA [Voice of America] Africa : April 01, 2019 11:00PM-12:00AM EDT",
+          "date": "2019-04-02T00:00:00Z",
+          "url": "https://archive.org/details/VOA_Africa_20190402_030000",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000605300023-6",
+          "title": "CIA Reading Room cia-rdp90-00965r000605300023-6: THE DOCUMENTS THAT WEREN'T THERE",
+          "date": "1985-07-20T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000605300023-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87b00858r000600910007-3",
+          "title": "CIA Reading Room cia-rdp87b00858r000600910007-3: LET'S NOT GIVE DEADLY STINGER WEAPONS TO TERRORISTS",
+          "date": "1986-04-22T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87b00858r000600910007-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g01353r001900090026-9",
+          "title": "CIA Reading Room cia-rdp90g01353r001900090026-9: ARRANGEMENTS TO ADDRESS THE AMERICAN SOCIETY OF NEWSPAPER EDITORS BOARD OF DIRECTORS",
+          "date": "1988-04-07T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g01353r001900090026-9",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "VOA_Africa_20170822_180000",
+          "title": "VOA [Voice of America] Africa : August 22, 2017 02:00PM-03:00PM EDT",
+          "date": "2017-08-22T00:00:00Z",
+          "url": "https://archive.org/details/VOA_Africa_20170822_180000",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "drew-mike-2013",
+          "title": "The Drew & Mike Show Collection 2013",
+          "date": "2026-01-30T00:00:00Z",
+          "url": "https://archive.org/details/drew-mike-2013",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b00390r000200160024-5",
+          "title": "CIA Reading Room cia-rdp91b00390r000200160024-5: HPSCI REPORT ON COUNTERINTELLIGENCE AND SECURITY RESULTING FROM AGENCY TESTIMONY IN JUNE",
+          "date": "1988-10-20T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b00390r000200160024-5",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp96-00789r003200180001-7",
+          "title": "CIA Reading Room cia-rdp96-00789r003200180001-7: DECISION AUGMENTATION THEORY: TOWARD A MODEL OF ANOMALOUS MENTAL PHENOMENA",
+          "date": "1994-04-22T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp96-00789r003200180001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g01353r002000010006-7",
+          "title": "CIA Reading Room cia-rdp90g01353r002000010006-7: LETTER TO JOHN E. MORRISON, JR. FROM WILLIAM H. WEBSTER",
+          "date": "1988-10-23T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g01353r002000010006-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g01353r000200180023-0",
+          "title": "CIA Reading Room cia-rdp90g01353r000200180023-0: ISB FIELD TRIP MINUTES - 10-11 DECEMBER 1987",
+          "date": "1988-02-24T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g01353r000200180023-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp86t01017r000404240001-6",
+          "title": "CIA Reading Room cia-rdp86t01017r000404240001-6: FRANCE AND THE NEW TRADE ROUND: BELLING THE GATT",
+          "date": "1986-08-28T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp86t01017r000404240001-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "iuma-koch_fred",
+          "title": "IUMA: Koch, Fred",
+          "date": null,
+          "url": "https://archive.org/details/iuma-koch_fred",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b00874r000100040001-7",
+          "title": "CIA Reading Room cia-rdp91b00874r000100040001-7: HPSCI BRIEFING -- 19 NOVEMBER 1985",
+          "date": "1985-11-19T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b00874r000100040001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "Mennonite_GIrls_in_a_Modern_World-TPP_13_7_23",
+          "title": "The “It Ain’t the Heat, It’s the Fluidity” Edition",
+          "date": "2023-07-13T13:22:00Z",
+          "url": "https://archive.org/details/Mennonite_GIrls_in_a_Modern_World-TPP_13_7_23",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000100380002-1",
+          "title": "CIA Reading Room cia-rdp90-00965r000100380002-1: OLLIE NORTH'S SECRET NETWORK",
+          "date": "1987-03-09T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000100380002-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91b00390r000200190002-6",
+          "title": "CIA Reading Room cia-rdp91b00390r000200190002-6: INTELLIGENCE AUTHORIZATION ACT-FY 1989",
+          "date": "1988-06-10T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91b00390r000200190002-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g01353r000300330001-6",
+          "title": "CIA Reading Room cia-rdp90g01353r000300330001-6: LETTER TO WILLIAM H. WEBSTER FROM LOUIS STOKES",
+          "date": "1988-05-26T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g01353r000300330001-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90g01353r002000030037-1",
+          "title": "CIA Reading Room cia-rdp90g01353r002000030037-1: RAYMOND L. LEE PUBLIC AFFAIRS FORUM INDIANA UNIVERSITY OF PENNSYLVANIA INDIANA, PENNSYLVANIA",
+          "date": "1988-04-11T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90g01353r002000030037-1",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp92b00181r000300270036-0",
+          "title": "CIA Reading Room cia-rdp92b00181r000300270036-0: SUMMARY OF SOVIET DIGITAL SWITCHING",
+          "date": "1986-06-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp92b00181r000300270036-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp90-00965r000605790008-0",
+          "title": "CIA Reading Room cia-rdp90-00965r000605790008-0: OLLIE NORTH'S SECRET NETWORK",
+          "date": "1987-03-09T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000605790008-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "Anchorage_Unitarian_Universalist_Fellowship_Forum_Podcasts-12714698_the_child_ca",
+          "title": "The Child Care Crisis Affects Our Whole Community - Christina Eubanks-Ohana",
+          "date": "2023-04-23T18:00:00Z",
+          "url": "https://archive.org/details/Anchorage_Unitarian_Universalist_Fellowship_Forum_Podcasts-12714698_the_child_ca",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "ladeco",
+      "countries": [
+        "cl"
+      ],
+      "query": "(\"Ladeco\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Ladeco%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:51+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "lanchile",
+      "countries": [
+        "cl"
+      ],
+      "query": "(\"LANChile\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22LANChile%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:51+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "varig",
+      "countries": [
+        "br"
+      ],
+      "query": "(\"Varig\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Varig%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:57+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp89t00234r000100140011-0",
+          "title": "CIA Reading Room cia-rdp89t00234r000100140011-0: STATEMENT OF ROBERT WILLMORE, DEPUTY ASSISTANT ATTORNEY GENERAL CIVIL DIVISION DEPARTMENT OF JUSTICE BEFORE THE SUBCOMMITTEE ON ADMINISTRATIVE LAW AND GOVERNMENTAL RELATIONS COMMITTEE ON THE JUDICIARY HOUSE OF REPRESENTATIVES CONCERNING H.R",
+          "date": "1988-04-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp89t00234r000100140011-0",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "aerolineas",
+      "countries": [
+        "ar"
+      ],
+      "query": "(\"Aerolíneas Argentinas\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Aerol%C3%ADneas+Argentinas%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:58+00:00",
+      "status": "searched",
+      "total": 2,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00798r000300030006-2",
+          "title": "CIA Reading Room cia-rdp88-00798r000300030006-2: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-02-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00798r000300030006-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97-00770r000100090001-3",
+          "title": "CIA Reading Room cia-rdp97-00770r000100090001-3: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-02-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97-00770r000100090001-3",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "aeromexico",
+      "countries": [
+        "mx"
+      ],
+      "query": "(\"Aeromexico\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Aeromexico%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:58:58+00:00",
+      "status": "searched",
+      "total": 1,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-05743475",
+          "title": "CIA Reading Room 05743475: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1987-02-06T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-05743475",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "cubana",
+      "countries": [
+        "cu"
+      ],
+      "query": "(\"Cubana\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Cubana%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:59:05+00:00",
+      "status": "searched",
+      "total": 9,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87-01104r000100070012-2",
+          "title": "CIA Reading Room cia-rdp87-01104r000100070012-2: MONTHLY REPORT--KEY WEST BUREAU--FEBRUARY 1986",
+          "date": "1986-03-10T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87-01104r000100070012-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87-01104r000100070008-7",
+          "title": "CIA Reading Room cia-rdp87-01104r000100070008-7: MONTHLY REPORT--KEY WEST BUREAU--APRIL 1986",
+          "date": "1986-05-07T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87-01104r000100070008-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp88-00798r000300030006-2",
+          "title": "CIA Reading Room cia-rdp88-00798r000300030006-2: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-02-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp88-00798r000300030006-2",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp91-01355r000400070009-0",
+          "title": "CIA Reading Room cia-rdp91-01355r000400070009-0: MONTHLY REPORT--KEY WEST BUREAU--APRIL 1988",
+          "date": "1988-05-03T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp91-01355r000400070009-0",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-05632922",
+          "title": "CIA Reading Room 05632922: AFRICA REVIEW",
+          "date": "1985-10-18T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-05632922",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87-01104r000100070009-6",
+          "title": "CIA Reading Room cia-rdp87-01104r000100070009-6: MONTHLY REPORT--KEY WEST BUREAU--MARCH 1986",
+          "date": "1986-04-05T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87-01104r000100070009-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00289r000200910001-7",
+          "title": "CIA Reading Room cia-rdp87t00289r000200910001-7: LATIN AMERICA REVIEW",
+          "date": "1985-10-11T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00289r000200910001-7",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp97-00770r000100090001-3",
+          "title": "CIA Reading Room cia-rdp97-00770r000100090001-3: INTERNATIONAL ECONOMIC & ENERGY WEEKLY",
+          "date": "1986-02-14T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp97-00770r000100090001-3",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp87t00289r000100440001-0",
+          "title": "CIA Reading Room cia-rdp87t00289r000100440001-0: AFRICA REVIEW",
+          "date": "1985-10-18T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp87t00289r000100440001-0",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "aeronica",
+      "countries": [
+        "ni"
+      ],
+      "query": "(\"Aeronica\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Aeronica%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:59:05+00:00",
+      "status": "searched",
+      "total": 2,
+      "truncated": false,
+      "candidates": [
+        {
+          "identifier": "cia-readingroom-document-cia-rdp04t00447r000100340001-6",
+          "title": "CIA Reading Room cia-rdp04t00447r000100340001-6: NICARAGUA: INITIAL REACTION TO US SANCTIONS",
+          "date": "1985-05-23T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp04t00447r000100340001-6",
+          "review_status": "unreviewed"
+        },
+        {
+          "identifier": "cia-readingroom-document-cia-rdp04t00907r000100150001-6",
+          "title": "CIA Reading Room cia-rdp04t00907r000100150001-6: NICARAGUA: COPING WITH US SANCTIONS",
+          "date": "1987-04-01T00:00:00Z",
+          "url": "https://archive.org/details/cia-readingroom-document-cia-rdp04t00907r000100150001-6",
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "airline": "taca",
+      "countries": [
+        "sv"
+      ],
+      "query": "(\"TACA\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22TACA%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T13:59:05+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    }
+  ]
+}

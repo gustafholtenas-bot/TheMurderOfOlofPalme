@@ -1,0 +1,440 @@
+{
+  "reference_date": "1986-02-28",
+  "reviewed": "2026-09-26",
+  "added": [
+    "operation-recovery-198602",
+    "operation-zhawar-19860228",
+    "enterprise-ilopango-198602",
+    "operation-fenix-198602",
+    "operation-epervier-198602",
+    "operation-trionyx-19860216",
+    "operation-attain-document-ii",
+    "armilla-patrol-snapshot-19860228",
+    "israel-lebanon-search-19860217",
+    "marcos-evacuation-19860226",
+    "ryan-assessment-19860224",
+    "operation-marion-planning-198602",
+    "uk-palme-mediation-19860205",
+    "uk-staunch-brief-19860211",
+    "uk-iran-draft-19861003",
+    "uk-gulf-reports-19860224",
+    "ukusa-press-19860214",
+    "kincora-press-19860228",
+    "mi5-computer-press-19860307",
+    "uk-spy-shuffle-19860404",
+    "global86-planning-19860221",
+    "gchq-south-africa-press-19860801"
+  ],
+  "updated_existing": [
+    "af",
+    "ca",
+    "conflict-afghanistan",
+    "conflict-chad",
+    "conflict-dawn-nine",
+    "conflict-elsalvador",
+    "conflict-iraniraq",
+    "conflict-namibia",
+    "conflict-nicaragua",
+    "conflict-northern-ireland",
+    "conflict-people-power",
+    "conflict-sidra",
+    "conflict-south-africa",
+    "conflict-south-lebanon",
+    "enterprise",
+    "export-place-ly",
+    "export-place-om",
+    "export-place-pk",
+    "fr",
+    "gb",
+    "hn",
+    "il",
+    "iq",
+    "ir",
+    "iran-cia-meeting-19860227",
+    "iran-frankfurt-19860225",
+    "iran-tow-19860218",
+    "iran-tow-19860227",
+    "kurdistan",
+    "lb",
+    "nato",
+    "ni-contras",
+    "north-sidra-planning-19860225",
+    "sadf-third-force-19860228",
+    "se",
+    "shultz-poindexter-19860228",
+    "su",
+    "sv",
+    "us",
+    "us-aquino-recognition-19860225",
+    "za"
+  ],
+  "total_entries": 224,
+  "entries": [
+    {
+      "id": "operation-recovery-198602",
+      "sources": [
+        {
+          "title": "Tower Commission Report: Operation Recovery",
+          "url": "https://www.presidency.ucsb.edu/documents/excerpts-from-the-tower-commission-report",
+          "published": "1987-02-26",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "operation-zhawar-19860228",
+      "sources": [
+        {
+          "title": "AUSA Landpower Essay: Zhawar analysis",
+          "url": "https://www.ausa.org/file/44378/download?token=PJjv5Fql",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "PDF pp. 2–3"
+        }
+      ]
+    },
+    {
+      "id": "enterprise-ilopango-198602",
+      "sources": [
+        {
+          "title": "Walsh Report, chapter 26: Edwin G. Corr",
+          "url": "https://irp.fas.org/offdocs/walsh/chap_26.htm",
+          "published": "1993-08-04",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Background; notes 9–13"
+        }
+      ]
+    },
+    {
+      "id": "operation-fenix-198602",
+      "sources": [
+        {
+          "title": "IACHR Annual Report 1985–1986: El Salvador",
+          "url": "https://cidh.oas.org/annualrep/85.86eng/chap4.a.htm",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Operation Fénix; statement of 23 February"
+        }
+      ]
+    },
+    {
+      "id": "operation-epervier-198602",
+      "sources": [
+        {
+          "title": "French Ministry of Defence: 1963–2011, 50 ans d’OPEX",
+          "url": "https://www.defense.gouv.fr/chemins-memoire/histoire-memoires/ressources-historiques/operations-exterieures/memoire-opex/1963-2011-50-ans",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        },
+        {
+          "title": "French Ministry of Defence: Épervier (1986–2014)",
+          "url": "https://www.defense.gouv.fr/operations/operations-achevees-afrique/operation-epervier-1986-2014",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "operation-trionyx-19860216",
+      "sources": [
+        {
+          "title": "SHD: interview with General Jean-Jacques Brun",
+          "url": "https://www.servicehistorique.sga.defense.gouv.fr/en/node/629306",
+          "published": "2003-04-01",
+          "checked": "2026-09-26",
+          "access": "catalogue_description_only",
+          "section": ""
+        },
+        {
+          "title": "11e Escadre: mission Trionyx, participant account",
+          "url": "https://www.pilote-chasse-11ec.com/3d/",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_participant_account",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "operation-attain-document-ii",
+      "sources": [
+        {
+          "title": "US Navy: Use of Naval Forces in the Post-War Era",
+          "url": "https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/u/use-naval-forces-post-war-era.html",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "armilla-patrol-snapshot-19860228",
+      "sources": [
+        {
+          "title": "House of Commons Library, CBP 8628: Armilla Patrol",
+          "url": "https://researchbriefings.files.parliament.uk/documents/CBP-8628/CBP-8628.pdf",
+          "published": "2020-01-06",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "p. 1"
+        }
+      ]
+    },
+    {
+      "id": "israel-lebanon-search-19860217",
+      "sources": [
+        {
+          "title": "UN Repertory, Article 98, Supplement 7",
+          "url": "https://legal.un.org/repertory/art98/english/rep_supp7_vol6_art98.pdf",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": "UNIFIL, February 1986"
+        },
+        {
+          "title": "UN Yearbook 1986: Lebanon",
+          "url": "https://www.un.org/unispal/document/auto-insert-196370/",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "marcos-evacuation-19860226",
+      "sources": [
+        {
+          "title": "US Air Mobility Command: 1986 chronology",
+          "url": "https://www.amc.af.mil/Portals/12/documents/AFD-150827-032.pdf",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "indexed_official_text",
+          "section": "1986, 26–28 February"
+        }
+      ]
+    },
+    {
+      "id": "ryan-assessment-19860224",
+      "sources": [
+        {
+          "title": "FRUS 1981–1988, vol. V, document 198: Gordievskiy interview notes",
+          "url": "https://history.state.gov/historicaldocuments/frus1981-88v05/d198",
+          "published": "1986-02-24",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Project RYaN; footnote 1"
+        }
+      ]
+    },
+    {
+      "id": "operation-marion-planning-198602",
+      "sources": [
+        {
+          "title": "TRC Caprivi hearing, day 3",
+          "url": "https://www.justice.gov.za/trc/special/caprivi/caprivi3.htm",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "Varney evidence and cross-examination"
+        },
+        {
+          "title": "TRC final report, volume 3, chapter 3, paragraph 182",
+          "url": "https://sabctrc.saha.org.za/reports/volume3/chapter3/subsection26.htm",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "uk-palme-mediation-19860205",
+      "sources": [
+        {
+          "title": "Hansard: Iran-Iraq War, HC vol. 91 cc272–274",
+          "url": "https://api.parliament.uk/historic-hansard/commons/1986/feb/05/iran-iraq-war",
+          "published": "1986-02-05",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "uk-staunch-brief-19860211",
+      "sources": [
+        {
+          "title": "PREM19/1759: enclosure dated 11 February",
+          "url": "https://archive.margaretthatcher.org/doc06/861003%20FCO%20to%20No.10%20DRAFT%20MSG%20FOR%20RGN%20PREM19-1759%20tna%20f186.pdf",
+          "published": "1986-02-11",
+          "checked": "2026-09-26",
+          "access": "original_scan_reviewed",
+          "section": "PDF p. 8"
+        }
+      ]
+    },
+    {
+      "id": "uk-iran-draft-19861003",
+      "sources": [
+        {
+          "title": "PREM19/1759: FCO to No.10, draft message for Reagan",
+          "url": "https://archive.margaretthatcher.org/doc06/861003%20FCO%20to%20No.10%20DRAFT%20MSG%20FOR%20RGN%20PREM19-1759%20tna%20f186.pdf",
+          "published": "1986-10-03",
+          "checked": "2026-09-26",
+          "access": "original_scan_reviewed",
+          "section": "PDF pp. 1–3, 7"
+        }
+      ]
+    },
+    {
+      "id": "uk-gulf-reports-19860224",
+      "sources": [
+        {
+          "title": "Hansard: Iran-Iraq War, HC vol. 92 c446W",
+          "url": "https://api.parliament.uk/historic-hansard/written-answers/1986/feb/24/iran-lraq-war",
+          "published": "1986-02-24",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": ""
+        }
+      ]
+    },
+    {
+      "id": "ukusa-press-19860214",
+      "sources": [
+        {
+          "title": "New Statesman: 14 februari · press om underrättelsenätverk",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/Global%20spy%20network%20exposed.pdf",
+          "published": "1986-02-14",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "14 februari · press om underrättelsenätverk"
+        }
+      ]
+    },
+    {
+      "id": "kincora-press-19860228",
+      "sources": [
+        {
+          "title": "New Statesman: 28 februari · Kincora och underrättelsetjänsterna",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/gov%20must%20answer%20kincora%20questions.pdf",
+          "published": "1986-02-28",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "28 februari · Kincora och underrättelsetjänsterna"
+        }
+      ]
+    },
+    {
+      "id": "mi5-computer-press-19860307",
+      "sources": [
+        {
+          "title": "New Statesman: 7 mars · pressuppgift om MI5-dator",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/New%20computer%20for%20MI5.pdf",
+          "published": "1986-03-07",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "7 mars · pressuppgift om MI5-dator"
+        }
+      ]
+    },
+    {
+      "id": "uk-spy-shuffle-19860404",
+      "sources": [
+        {
+          "title": "New Statesman: 4 april · press om underrättelseledningen",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/Spy%20shuffle.pdf",
+          "published": "1986-04-04",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "4 april · press om underrättelseledningen"
+        }
+      ]
+    },
+    {
+      "id": "global86-planning-19860221",
+      "sources": [
+        {
+          "title": "New Statesman: 21 februari · planerna för Global 86",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/what%27s%20the%20royal%20navy%20doing%20in%20the%20pacific.pdf",
+          "published": "1986-02-21",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "21 februari · planerna för Global 86"
+        }
+      ]
+    },
+    {
+      "id": "gchq-south-africa-press-19860801",
+      "sources": [
+        {
+          "title": "New Statesman: 1 augusti · uppgifter om GCHQ och Sydafrika",
+          "url": "https://www.duncancampbell.org/menu/journalism/newstatesman/newstatesman-1986/uk%20listening%20link%20with%20apartheid.pdf",
+          "published": "1986-08-01",
+          "checked": "2026-09-26",
+          "access": "scanned_article_text_reviewed",
+          "section": ""
+        },
+        {
+          "title": "Duncan Campbell: 1986 article date index",
+          "url": "https://www.duncancampbell.org/content/new-statesman-1986",
+          "published": "",
+          "checked": "2026-09-26",
+          "access": "web_text_reviewed",
+          "section": "1 augusti · uppgifter om GCHQ och Sydafrika"
+        }
+      ]
+    }
+  ]
+}
