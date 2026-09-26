@@ -10,13 +10,19 @@ struct FTMOPAtlasSource
 
 struct FTMOPAtlasParticipant
 {
-    FString Id, Label;
+    FString Id, Label, Flag; // Explicit national flag ID; empty for non-state actors.
     double Latitude = 0, Longitude = 0;
     FVector2D Offset = FVector2D::ZeroVector;
 };
 struct FTMOPAtlasLink
 {
     FString From, To, Kind; // opposition, support, violence
+};
+
+struct FTMOPAtlasOffice
+{
+    FString Id, Parent, Label, Note, Relation; // group or reports_to; a forest is allowed.
+    TArray<FString> Sources;
 };
 
 struct FTMOPAtlasEntry
@@ -32,6 +38,7 @@ struct FTMOPAtlasEntry
     TArray<FTMOPAtlasSource> Sources;
     TArray<FTMOPAtlasParticipant> Participants;
     TArray<FTMOPAtlasLink> Links;
+    TArray<FTMOPAtlasOffice> Hierarchy;
 
     FText Text(const FString& Field) const;
     bool Visible(bool bLater, bool bNearby = false) const;

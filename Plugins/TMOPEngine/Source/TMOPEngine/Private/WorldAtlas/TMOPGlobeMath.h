@@ -43,4 +43,39 @@ namespace TMOPGlobe
         const double Angle = FMath::Acos(Dot);
         return (A * FMath::Sin((1.0 - T) * Angle) + B * FMath::Sin(T * Angle)) / FMath::Sin(Angle);
     }
+
+    /** Clip a view-space triangle against the visible hemisphere, preserving
+     * winding. A crossing triangle becomes three or four vertices, never a
+     * full triangle flashing across the far side of the sphere. */
+    inline int32 ClipFrontTriangle(const FVector& A, const FVector& B, const FVector& C, FVector (&Out)[4])
+    {
+        const FVector Input[3] = {A, B, C};
+        int32 Count = 0;
+        FVector Previous = C;
+        for (const FVector& Current : Input)
+        {
+            const bool bCurrentInside = Current.X >= 0, bPreviousInside = Previous.X >= 0;
+            if (bCurrentInside != bPreviousInside)
+            {
+                const double T = Previous.X / (Previous.X - Current.X);
+                Out[Count++] = FMath::Lerp(Previous, Current, T);
+                Out[Count - 1].X = 0;
+            }
+            if (bCurrentInside) Out[Count++] = Current;
+            Previous = Current;
+        }
+        return Count;
+    }
+
+    inline bool ClipFrontSegment(FVector& A, FVector& B)
+    {
+        if (A.X < 0 && B.X < 0) return false;
+        if ((A.X >= 0) != (B.X >= 0))
+        {
+            FVector Limb = FMath::Lerp(A, B, A.X / (A.X - B.X));
+            Limb.X = 0;
+            if (A.X < 0) A = Limb; else B = Limb;
+        }
+        return true;
+    }
 }

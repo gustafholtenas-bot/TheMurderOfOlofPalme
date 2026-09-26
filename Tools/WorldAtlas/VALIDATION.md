@@ -19,3 +19,11 @@
 - Alla nya textfält har svenska, engelska och aktuell `en_source`. Aktörspunkter och relationer valideras; civila i Gukurahundi har inte dubbelriktad stridspil.
 - Ritning och träfftest delar `LinkPoint`, samma sfärprojektion, skärmförskjutning och bortklippning av baksidan. Kodgranskad; **inte visuellt verifierad i Unreal**.
 - Källor/avgränsning och kategoriinventering: `CONFLICT_COVERAGE.md`. Detta är ett redaktionellt urval, inte verifierad fullständighet för alla globala våldshändelser.
+
+## Forskningsleverans 26 september 2026
+
+- Totalt 134 poster; 22 nytillagda. Alla textfält har svenska, engelska och aktuell en_source.
+- 12 atlasdatatester och 23 lokaliseringstester godkända (35 totalt).
+- Nya referenser, datum, källfält och tvåvägslänkar validerade; senare-1986-posterna omfattar Defex-periodöversikten och provhanteringen den 1 mars.
+- Ingen atlas-C++ har ändrats i just denna forskningsuppdatering. Paketet inkluderar tidigare kodfixar.
+- git diff --check: godkänd. Unreal-kompilering, visuell körning och paketering har inte utförts här.

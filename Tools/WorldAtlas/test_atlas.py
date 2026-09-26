@@ -23,7 +23,7 @@ class AtlasDataTests(unittest.TestCase):
         self.assertEqual(len(self.entries), len(self.by_id))
         for e in self.entries:
             self.assertRegex(e['id'], r'^[a-z][a-z0-9-]*$')
-            self.assertIn(e['kind'], {'country', 'actor', 'group', 'conflict', 'arms', 'funds', 'event'})
+            self.assertIn(e['kind'], {'country', 'region', 'actor', 'group', 'conflict', 'arms', 'funds', 'event'})
             self.assertTrue(-90 <= e['lat'] <= 90)
             self.assertTrue(-180 <= e['lon'] <= 180)
             for date in ('from', 'to'):
@@ -38,7 +38,9 @@ class AtlasDataTests(unittest.TestCase):
                 self.assertIn(e['kind'], {'arms', 'funds'})
                 self.assertGreaterEqual(len(e['route']), 2)
                 self.assertTrue(e['sources'])
-                for target in e['route']: self.assertIn(self.by_id[target]['kind'], {'country', 'actor'})
+                # Routes may use a geographic region without inventing an actor
+                # or requiring a full country government/leadership profile.
+                for target in e['route']: self.assertIn(self.by_id[target]['kind'], {'country', 'region', 'actor'})
             if e['kind'] == 'group': self.assertFalse(e['marker'], 'Networks have no invented geographic HQ')
 
     def test_translations_are_complete_and_current(self):
@@ -48,14 +50,15 @@ class AtlasDataTests(unittest.TestCase):
                 self.assertTrue(value['sv'], (e['id'], key))
                 self.assertTrue(value['en'], (e['id'], key))
                 self.assertEqual(value['sv'], value['en_source'], (e['id'], key, 'stale translation'))
-        code = (PRIVATE / 'WorldAtlas/STMOPWorldAtlas.cpp').read_text(encoding='utf-8')
+        code = '\n'.join(p.read_text(encoding='utf-8') for p in (PRIVATE / 'WorldAtlas').glob('*.cpp'))
         builtins = (PRIVATE / 'Localization/TMOPMenuTranslations.inl').read_text(encoding='utf-8')
         keys = dict(re.findall(r'NSLOCTEXT\("TMOP",\s*"(Atlas\w+)",\s*"([^"]*)"\)', code))
         for key, source in keys.items():
             self.assertIn(f'Add(TEXT("{key}"), TEXT("{source}"), TEXT("', builtins)
 
     def test_historical_boundaries_and_labels(self):
-        nato = self.by_id['nato']['related']
+        # Related research records are cross-references, not alliance members.
+        nato = [id for id in self.by_id['nato']['related'] if self.by_id[id]['kind'] == 'country']
         self.assertEqual(len(nato), 16)
         self.assertNotIn('se', nato)
         self.assertEqual(self.by_id['de']['text']['title']['en'], 'West Germany')
@@ -70,7 +73,7 @@ class AtlasDataTests(unittest.TestCase):
         for e in self.entries:
             if e['kind'] in {'country', 'actor', 'group', 'conflict', 'event'}: self.assertTrue(e['sources'])
             for s in e['sources']:
-                self.assertTrue(s['url'].startswith('https://'))
+                self.assertTrue(s['url'].startswith('https://') if s['url'] else s.get('document'))
                 self.assertTrue(s['title'])
                 self.assertIn('published', s)
 

@@ -17,5 +17,9 @@ public class TMOPEngine : ModuleRules
         // Runtime atlas JSON must be staged into packaged builds, not just available in the editor.
         RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/world.json", StagedFileType.UFS);
         RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/coastlines.json", StagedFileType.UFS);
+        RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/land_1986.json", StagedFileType.UFS);
+        RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/alignments_1986.json", StagedFileType.UFS);
+        RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/flags_1986.json", StagedFileType.UFS);
+        RuntimeDependencies.Add("$(PluginDir)/Content/WorldAtlas/flags_1986.png", StagedFileType.UFS);
     }
 }

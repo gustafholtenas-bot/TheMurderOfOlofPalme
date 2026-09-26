@@ -1,4 +1,12 @@
 // Swedish source and English translations. Keys must match the NSLOCTEXT identity.
+Add(TEXT("AtlasHierarchy"), TEXT("Befattningar och ledning • 28 februari 1986"), TEXT("Offices and leadership • 28 February 1986"));
+Add(TEXT("AtlasTreeLegend"), TEXT("Hel linje: rapporteringsväg. Streckad: gruppering, inte fastställd chefslinje. Klicka på +/− för att öppna eller stänga en gren."), TEXT("Solid line: reporting relationship. Dashed: grouping, not an established reporting line. Click +/− to expand or collapse a branch."));
+Add(TEXT("AtlasExpandTree"), TEXT("Öppna alla"), TEXT("Expand all"));
+Add(TEXT("AtlasCollapseTree"), TEXT("Stäng grenar"), TEXT("Collapse branches"));
+Add(TEXT("AtlasReportsTo"), TEXT("Rapporteringsväg till överordnad befattning"), TEXT("Reporting relationship to the parent office"));
+Add(TEXT("AtlasGroupedOffice"), TEXT("Grupperad befattning; ingen chefslinje fastställs"), TEXT("Grouped office; no reporting relationship established"));
+Add(TEXT("AtlasProfileNotes"), TEXT("Regering, tjänster och källanmärkningar"), TEXT("Government, services and source notes"));
+Add(TEXT("AtlasEventsPane"), TEXT("Händelser kring mordet och sammanhang"), TEXT("Events around the assassination and context"));
 Add(TEXT("MainMenuPlayers1"), TEXT("1 SPELARE"), TEXT("1 PLAYER"));
 Add(TEXT("MainMenuPlayers2"), TEXT("2 SPELARE"), TEXT("2 PLAYERS"));
 Add(TEXT("MainMenuPlayers3"), TEXT("3 SPELARE"), TEXT("3 PLAYERS"));
@@ -132,3 +140,9 @@ Add(TEXT("AtlasNewsDay"), TEXT("Nyheter den 28 februari 1986"), TEXT("News on 28
 Add(TEXT("AtlasNewsAfter"), TEXT("Uppföljning efter den 28 februari"), TEXT("Follow-up after 28 February"));
 
 Add(TEXT("MapCrimeScene"), TEXT("Mordplatsen"), TEXT("Crime scene"));
+
+Add(TEXT("AtlasFlags"), TEXT("Flaggor på globen"), TEXT("Flags on globe"));
+Add(TEXT("AtlasBlocs"), TEXT("Blockfärger 1986"), TEXT("Bloc colours 1986"));
+Add(TEXT("AtlasBlocLegend"), TEXT("Blått: västanknutet • rött: östanknutet • grått: neutralt/alliansfritt/övrigt. Förenklad indelning och generaliserade gränser för 28 feb 1986."), TEXT("Blue: Western-aligned • red: Eastern-aligned • grey: neutral/non-aligned/other. Simplified alignment and generalised borders for 28 Feb 1986."));
+Add(TEXT("AtlasAppearanceWarning"), TEXT("Flaggor eller blockfärger kunde inte läsas. Kartans övriga innehåll är tillgängligt."), TEXT("Flags or bloc colours could not be loaded. The rest of the atlas remains available."));
+Add(TEXT("AtlasAlignment"), TEXT("Blocktillhörighet • 28 februari 1986"), TEXT("Bloc alignment • 28 February 1986"));

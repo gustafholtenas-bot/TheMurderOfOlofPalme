@@ -1,0 +1,1966 @@
+{
+  "schema": 1,
+  "reference_date": "1986-02-28",
+  "classification": "Editorial simplification: alliance members plus selected aligned governments. Other does not mean neutral.",
+  "sources": [
+    "https://www.nato.int/en/about-us/organization/nato-member-countries",
+    "https://history.state.gov/milestones/1953-1960/warsaw-treaty",
+    "https://history.state.gov/milestones/1945-1952/anzus",
+    "https://www.cia.gov/readingroom/document/cia-rdp85t00287r000901590001-9"
+  ],
+  "countries": [
+    {
+      "id": "ad",
+      "name": "Andorra",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ae",
+      "name": "United Arab Emirates",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "af",
+      "name": "Afghanistan",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "ag",
+      "name": "Antigua and Barb.",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ai",
+      "name": "Anguilla",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "al",
+      "name": "Albania",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Utanför blocken: Albanien hade lämnat Warszawapakten 1968.",
+      "en": "Outside the blocs: Albania left the Warsaw Pact in 1968.",
+      "en_source": "Utanför blocken: Albanien hade lämnat Warszawapakten 1968."
+    },
+    {
+      "id": "ao",
+      "name": "Angola",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "aq",
+      "name": "Antarctica",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Antarktis: ingen blockklassning.",
+      "en": "Antarctica: no bloc classification.",
+      "en_source": "Antarktis: ingen blockklassning."
+    },
+    {
+      "id": "ar",
+      "name": "Argentina",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "as",
+      "name": "American Samoa",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "at",
+      "name": "Austria",
+      "bloc": "other",
+      "basis": "neutral_or_militarily_non_aligned",
+      "sv": "Neutralt/militärt alliansfritt den 28 februari 1986.",
+      "en": "Neutral/militarily non-aligned on 28 February 1986.",
+      "en_source": "Neutralt/militärt alliansfritt den 28 februari 1986."
+    },
+    {
+      "id": "au",
+      "name": "Ashmore and Cartier Is.",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "aw",
+      "name": "Aruba",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "ax",
+      "name": "Åland",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bb",
+      "name": "Barbados",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bd",
+      "name": "Bangladesh",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "be",
+      "name": "Belgium",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "bf",
+      "name": "Burkina Faso",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bg",
+      "name": "Bulgaria",
+      "bloc": "east",
+      "basis": "warsaw_member",
+      "sv": "Östblocket: medlem av Warszawapakten den 28 februari 1986.",
+      "en": "Eastern bloc: Warsaw Pact member on 28 February 1986.",
+      "en_source": "Östblocket: medlem av Warszawapakten den 28 februari 1986."
+    },
+    {
+      "id": "bh",
+      "name": "Bahrain",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bi",
+      "name": "Burundi",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bj",
+      "name": "Benin",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bl",
+      "name": "St-Barthélemy",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "bm",
+      "name": "Bermuda",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "bn",
+      "name": "Brunei",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bo",
+      "name": "Bolivia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "br",
+      "name": "Brazil",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bs",
+      "name": "Bahamas",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bt",
+      "name": "Bhutan",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bw",
+      "name": "Botswana",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "bz",
+      "name": "Belize",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ca",
+      "name": "Canada",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "cd",
+      "name": "Zaire",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cf",
+      "name": "Central African Rep.",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cg",
+      "name": "Congo",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ch",
+      "name": "Switzerland",
+      "bloc": "other",
+      "basis": "neutral_or_militarily_non_aligned",
+      "sv": "Neutralt/militärt alliansfritt den 28 februari 1986.",
+      "en": "Neutral/militarily non-aligned on 28 February 1986.",
+      "en_source": "Neutralt/militärt alliansfritt den 28 februari 1986."
+    },
+    {
+      "id": "ci",
+      "name": "Côte d'Ivoire",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ck",
+      "name": "Cook Is.",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cl",
+      "name": "Chile",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cm",
+      "name": "Cameroon",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cn",
+      "name": "China",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Utanför de två blocken: egen kommunistisk stormakt efter brytningen med Sovjetunionen.",
+      "en": "Outside the two blocs: an independent communist power after the Sino-Soviet split.",
+      "en_source": "Utanför de två blocken: egen kommunistisk stormakt efter brytningen med Sovjetunionen."
+    },
+    {
+      "id": "co",
+      "name": "Colombia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cr",
+      "name": "Costa Rica",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cs",
+      "name": "Czechoslovakia",
+      "bloc": "east",
+      "basis": "warsaw_member",
+      "sv": "Östblocket: medlem av Warszawapakten den 28 februari 1986.",
+      "en": "Eastern bloc: Warsaw Pact member on 28 February 1986.",
+      "en_source": "Östblocket: medlem av Warszawapakten den 28 februari 1986."
+    },
+    {
+      "id": "cu",
+      "name": "Cuba",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "cv",
+      "name": "Cabo Verde",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "cw",
+      "name": "Curaçao",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "cy",
+      "name": "Cyprus",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "dd",
+      "name": "East Germany",
+      "bloc": "east",
+      "basis": "warsaw_member",
+      "sv": "Östblocket: medlem av Warszawapakten den 28 februari 1986.",
+      "en": "Eastern bloc: Warsaw Pact member on 28 February 1986.",
+      "en_source": "Östblocket: medlem av Warszawapakten den 28 februari 1986."
+    },
+    {
+      "id": "de",
+      "name": "West Germany",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "dj",
+      "name": "Djibouti",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "dk",
+      "name": "Denmark",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "dm",
+      "name": "Dominica",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "do",
+      "name": "Dominican Rep.",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "dz",
+      "name": "Algeria",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ec",
+      "name": "Ecuador",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "eg",
+      "name": "Egypt",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "eh",
+      "name": "W. Sahara",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "es",
+      "name": "Spain",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "et",
+      "name": "Ethiopia",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "fi",
+      "name": "Finland",
+      "bloc": "other",
+      "basis": "neutral_or_militarily_non_aligned",
+      "sv": "Neutralt/militärt alliansfritt den 28 februari 1986.",
+      "en": "Neutral/militarily non-aligned on 28 February 1986.",
+      "en_source": "Neutralt/militärt alliansfritt den 28 februari 1986."
+    },
+    {
+      "id": "fj",
+      "name": "Fiji",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "fk",
+      "name": "Falkland Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "fm",
+      "name": "Micronesia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "fo",
+      "name": "Faeroe Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "fr",
+      "name": "France",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "ga",
+      "name": "Gabon",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "gb",
+      "name": "United Kingdom",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "gd",
+      "name": "Grenada",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "gg",
+      "name": "Guernsey",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "gh",
+      "name": "Ghana",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "gl",
+      "name": "Greenland",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "gm",
+      "name": "Gambia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "gn",
+      "name": "Guinea",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "gq",
+      "name": "Eq. Guinea",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "gr",
+      "name": "Greece",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "gs",
+      "name": "S. Geo. and the Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "gt",
+      "name": "Guatemala",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "gu",
+      "name": "Guam",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "gw",
+      "name": "Guinea-Bissau",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "gy",
+      "name": "Guyana",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "hk",
+      "name": "Hong Kong",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "hm",
+      "name": "Heard I. and McDonald Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "hn",
+      "name": "Honduras",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "ht",
+      "name": "Haiti",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "hu",
+      "name": "Hungary",
+      "bloc": "east",
+      "basis": "warsaw_member",
+      "sv": "Östblocket: medlem av Warszawapakten den 28 februari 1986.",
+      "en": "Eastern bloc: Warsaw Pact member on 28 February 1986.",
+      "en_source": "Östblocket: medlem av Warszawapakten den 28 februari 1986."
+    },
+    {
+      "id": "id",
+      "name": "Indonesia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ie",
+      "name": "Ireland",
+      "bloc": "other",
+      "basis": "neutral_or_militarily_non_aligned",
+      "sv": "Neutralt/militärt alliansfritt den 28 februari 1986.",
+      "en": "Neutral/militarily non-aligned on 28 February 1986.",
+      "en_source": "Neutralt/militärt alliansfritt den 28 februari 1986."
+    },
+    {
+      "id": "il",
+      "name": "Israel",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "im",
+      "name": "Isle of Man",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "in",
+      "name": "India",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "io",
+      "name": "Br. Indian Ocean Ter.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "iq",
+      "name": "Iraq",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Alliansfritt; både sovjetiska och västliga förbindelser. Ingen entydig blockklassning.",
+      "en": "Non-aligned; both Soviet and Western relationships. No unambiguous bloc classification.",
+      "en_source": "Alliansfritt; både sovjetiska och västliga förbindelser. Ingen entydig blockklassning."
+    },
+    {
+      "id": "ir",
+      "name": "Iran",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Alliansfritt; krig med Irak och kontakter i flera riktningar innebär inte blockmedlemskap.",
+      "en": "Non-aligned; war with Iraq and dealings across blocs do not imply bloc membership.",
+      "en_source": "Alliansfritt; krig med Irak och kontakter i flera riktningar innebär inte blockmedlemskap."
+    },
+    {
+      "id": "is",
+      "name": "Iceland",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "it",
+      "name": "Italy",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "je",
+      "name": "Jersey",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "jm",
+      "name": "Jamaica",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "jo",
+      "name": "Jordan",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "jp",
+      "name": "Japan",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "kashmir",
+      "name": "Siachen Glacier",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ke",
+      "name": "Kenya",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "kh",
+      "name": "Cambodia",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "ki",
+      "name": "Kiribati",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "km",
+      "name": "Comoros",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "kn",
+      "name": "St. Kitts and Nevis",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "kp",
+      "name": "North Korea",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "kr",
+      "name": "South Korea",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "kw",
+      "name": "Kuwait",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ky",
+      "name": "Cayman Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "la",
+      "name": "Laos",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "lb",
+      "name": "Lebanon",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "lc",
+      "name": "Saint Lucia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "li",
+      "name": "Liechtenstein",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "lk",
+      "name": "Sri Lanka",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "lr",
+      "name": "Liberia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ls",
+      "name": "Lesotho",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "lu",
+      "name": "Luxembourg",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "ly",
+      "name": "Libya",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ma",
+      "name": "Morocco",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mc",
+      "name": "Monaco",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mf",
+      "name": "St-Martin",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "mg",
+      "name": "Madagascar",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mh",
+      "name": "Marshall Is.",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ml",
+      "name": "Mali",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mm",
+      "name": "Burma",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mn",
+      "name": "Mongolia",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "mo",
+      "name": "Macao",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mp",
+      "name": "N. Mariana Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "mr",
+      "name": "Mauritania",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ms",
+      "name": "Montserrat",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "mt",
+      "name": "Malta",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mu",
+      "name": "Mauritius",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mv",
+      "name": "Maldives",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mw",
+      "name": "Malawi",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mx",
+      "name": "Mexico",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "my",
+      "name": "Malaysia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "mz",
+      "name": "Mozambique",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "na",
+      "name": "South West Africa (Namibia)",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Sydvästafrika under sydafrikansk administration, med omstridd och internationellt förkastad kontroll.",
+      "en": "South West Africa under South African administration, whose control was contested and internationally rejected.",
+      "en_source": "Sydvästafrika under sydafrikansk administration, med omstridd och internationellt förkastad kontroll."
+    },
+    {
+      "id": "nc",
+      "name": "New Caledonia",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "ne",
+      "name": "Niger",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "nf",
+      "name": "Norfolk Island",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "ng",
+      "name": "Nigeria",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ni",
+      "name": "Nicaragua",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetiskt/kubanskt stöd till sandinistregeringen. Färgen gäller regeringen, inte Contras eller hela befolkningen.",
+      "en": "Soviet/Cuban support for the Sandinista government. Colour describes the government, not the Contras or the population.",
+      "en_source": "Sovjetiskt/kubanskt stöd till sandinistregeringen. Färgen gäller regeringen, inte Contras eller hela befolkningen."
+    },
+    {
+      "id": "nl",
+      "name": "Netherlands",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "no",
+      "name": "Norway",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "np",
+      "name": "Nepal",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "nr",
+      "name": "Nauru",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "nu",
+      "name": "Niue",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "nz",
+      "name": "New Zealand",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: ANZUS, men pågående kärnvapentvist med USA; USA:s formella suspendering kom senare 1986.",
+      "en": "Western alignment: ANZUS, with an ongoing nuclear-policy dispute; formal US suspension followed later in 1986.",
+      "en_source": "Västanknutet: ANZUS, men pågående kärnvapentvist med USA; USA:s formella suspendering kom senare 1986."
+    },
+    {
+      "id": "om",
+      "name": "Oman",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "pa",
+      "name": "Panama",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "pe",
+      "name": "Peru",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "pf",
+      "name": "Fr. Polynesia",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "pg",
+      "name": "Papua New Guinea",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ph",
+      "name": "Philippines",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "pk",
+      "name": "Pakistan",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "pl",
+      "name": "Poland",
+      "bloc": "east",
+      "basis": "warsaw_member",
+      "sv": "Östblocket: medlem av Warszawapakten den 28 februari 1986.",
+      "en": "Eastern bloc: Warsaw Pact member on 28 February 1986.",
+      "en_source": "Östblocket: medlem av Warszawapakten den 28 februari 1986."
+    },
+    {
+      "id": "pm",
+      "name": "St. Pierre and Miquelon",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "pn",
+      "name": "Pitcairn Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "pr",
+      "name": "Puerto Rico",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "ps",
+      "name": "Palestinian territories",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Palestinska områden under israelisk ockupation; färgen anger ingen suveränitet eller neutralitet.",
+      "en": "Palestinian territories under Israeli occupation; colour implies neither sovereignty nor neutrality.",
+      "en_source": "Palestinska områden under israelisk ockupation; färgen anger ingen suveränitet eller neutralitet."
+    },
+    {
+      "id": "pt",
+      "name": "Portugal",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "pw",
+      "name": "Palau",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "py",
+      "name": "Paraguay",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "qa",
+      "name": "Qatar",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ro",
+      "name": "Romania",
+      "bloc": "east",
+      "basis": "warsaw_member",
+      "sv": "Östblocket: medlem av Warszawapakten den 28 februari 1986.",
+      "en": "Eastern bloc: Warsaw Pact member on 28 February 1986.",
+      "en_source": "Östblocket: medlem av Warszawapakten den 28 februari 1986."
+    },
+    {
+      "id": "rw",
+      "name": "Rwanda",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sa",
+      "name": "Saudi Arabia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sb",
+      "name": "Solomon Is.",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sc",
+      "name": "Seychelles",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sd",
+      "name": "Sudan",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "se",
+      "name": "Sweden",
+      "bloc": "other",
+      "basis": "neutral_or_militarily_non_aligned",
+      "sv": "Neutralt/militärt alliansfritt den 28 februari 1986.",
+      "en": "Neutral/militarily non-aligned on 28 February 1986.",
+      "en_source": "Neutralt/militärt alliansfritt den 28 februari 1986."
+    },
+    {
+      "id": "sg",
+      "name": "Singapore",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sh",
+      "name": "Saint Helena",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "sl",
+      "name": "Sierra Leone",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sm",
+      "name": "San Marino",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sn",
+      "name": "Senegal",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "so",
+      "name": "Somaliland",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "sr",
+      "name": "Suriname",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "st",
+      "name": "São Tomé and Principe",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "su",
+      "name": "Soviet Union",
+      "bloc": "east",
+      "basis": "warsaw_member",
+      "sv": "Östblocket: medlem av Warszawapakten den 28 februari 1986.",
+      "en": "Eastern bloc: Warsaw Pact member on 28 February 1986.",
+      "en_source": "Östblocket: medlem av Warszawapakten den 28 februari 1986."
+    },
+    {
+      "id": "sv",
+      "name": "El Salvador",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "sx",
+      "name": "Sint Maarten",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "sy",
+      "name": "Syria",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Alliansfritt med omfattande sovjetiskt militärt stöd; inte klassat som formell östblocksmedlem.",
+      "en": "Non-aligned with substantial Soviet military support; not classified as a formal Eastern-bloc member.",
+      "en_source": "Alliansfritt med omfattande sovjetiskt militärt stöd; inte klassat som formell östblocksmedlem."
+    },
+    {
+      "id": "sz",
+      "name": "eSwatini",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "tc",
+      "name": "Turks and Caicos Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "td",
+      "name": "Chad",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "tf",
+      "name": "Fr. S. Antarctic Lands",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "tg",
+      "name": "Togo",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "th",
+      "name": "Thailand",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "tl",
+      "name": "East Timor (occupied)",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Östtimor under indonesisk ockupation; färgen anger ingen suveränitet eller neutralitet.",
+      "en": "East Timor under Indonesian occupation; colour implies neither sovereignty nor neutrality.",
+      "en_source": "Östtimor under indonesisk ockupation; färgen anger ingen suveränitet eller neutralitet."
+    },
+    {
+      "id": "tn",
+      "name": "Tunisia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "to",
+      "name": "Tonga",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "tr",
+      "name": "Turkey",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "tt",
+      "name": "Trinidad and Tobago",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "tv",
+      "name": "Tuvalu",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "tw",
+      "name": "Taiwan",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap.",
+      "en": "Western-aligned: simplified political/security alignment, not NATO membership.",
+      "en_source": "Västanknutet: förenklad politisk/säkerhetspolitisk orientering, inte NATO-medlemskap."
+    },
+    {
+      "id": "tz",
+      "name": "Tanzania",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ug",
+      "name": "Uganda",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "us",
+      "name": "United States of America",
+      "bloc": "west",
+      "basis": "nato_member",
+      "sv": "Västblocket: NATO-medlem den 28 februari 1986.",
+      "en": "Western bloc: NATO member on 28 February 1986.",
+      "en_source": "Västblocket: NATO-medlem den 28 februari 1986."
+    },
+    {
+      "id": "uy",
+      "name": "Uruguay",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "va",
+      "name": "Vatican",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "vc",
+      "name": "St. Vin. and Gren.",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "ve",
+      "name": "Venezuela",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "vg",
+      "name": "British Virgin Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "vi",
+      "name": "U.S. Virgin Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "vn",
+      "name": "Vietnam",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "vu",
+      "name": "Vanuatu",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "wf",
+      "name": "Wallis and Futuna Is.",
+      "bloc": "west",
+      "basis": "administered_territory",
+      "sv": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap.",
+      "en": "Territory administered by a Western-aligned state; not separate bloc membership.",
+      "en_source": "Territorium administrerat av en västanknuten stat; inte eget blockmedlemskap."
+    },
+    {
+      "id": "ws",
+      "name": "Samoa",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "yd",
+      "name": "South Yemen",
+      "bloc": "east",
+      "basis": "soviet_alignment",
+      "sv": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten.",
+      "en": "Soviet-aligned: simplified political/security alignment, not Warsaw Pact membership.",
+      "en_source": "Sovjetanknutet: förenklad politisk/säkerhetspolitisk orientering, inte medlemskap i Warszawapakten."
+    },
+    {
+      "id": "ye",
+      "name": "North Yemen",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "yu",
+      "name": "Yugoslavia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Alliansfritt socialistiskt land; inte medlem av Warszawapakten.",
+      "en": "Non-aligned socialist state; not a Warsaw Pact member.",
+      "en_source": "Alliansfritt socialistiskt land; inte medlem av Warszawapakten."
+    },
+    {
+      "id": "za",
+      "name": "South Africa",
+      "bloc": "west",
+      "basis": "western_alignment",
+      "sv": "Västorienterad antikommunism under apartheid; internationellt isolerat, inte NATO-medlem.",
+      "en": "Western-oriented anti-communism under apartheid; internationally isolated, not a NATO member.",
+      "en_source": "Västorienterad antikommunism under apartheid; internationellt isolerat, inte NATO-medlem."
+    },
+    {
+      "id": "zm",
+      "name": "Zambia",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    },
+    {
+      "id": "zw",
+      "name": "Zimbabwe",
+      "bloc": "other",
+      "basis": "outside_or_unclassified",
+      "sv": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt.",
+      "en": "Other/non-aligned: no unambiguous bloc classification in this overview.",
+      "en_source": "Övrigt/alliansfritt: ingen entydig blockklassning i denna översikt."
+    }
+  ]
+}

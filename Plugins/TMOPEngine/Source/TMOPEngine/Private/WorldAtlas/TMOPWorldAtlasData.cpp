@@ -66,7 +66,7 @@ bool FTMOPWorldAtlasData::Load()
     const TArray<TSharedPtr<FJsonValue>>* Rows = nullptr;
     if (!Root->TryGetArrayField(TEXT("entries"), Rows) || Rows->Num() > 2048) return Fail(TEXT("Invalid entries"));
     TSet<FString> Ids;
-    const TSet<FString> Kinds = {TEXT("country"), TEXT("actor"), TEXT("group"), TEXT("conflict"), TEXT("arms"), TEXT("funds"), TEXT("event")};
+    const TSet<FString> Kinds = {TEXT("region"), TEXT("country"), TEXT("actor"), TEXT("group"), TEXT("conflict"), TEXT("arms"), TEXT("funds"), TEXT("event")};
     auto DateOK = [](const FString& Date)
     {
         if (Date.IsEmpty()) return true;
@@ -148,6 +148,10 @@ bool FTMOPWorldAtlasData::Load()
                     !FMath::IsFinite(X) || !FMath::IsFinite(Y) || FMath::Abs(X) > 80 || FMath::Abs(Y) > 80)
                     return Fail(TEXT("Invalid participant: ") + E.Id);
                 Item.Offset = FVector2D(X, Y);
+                if ((*P)->HasField(TEXT("flag")) &&
+                    (!(*P)->TryGetStringField(TEXT("flag"), Item.Flag) || Item.Flag.Len() != 2 ||
+                     Item.Flag[0] < 'a' || Item.Flag[0] > 'z' || Item.Flag[1] < 'a' || Item.Flag[1] > 'z'))
+                    return Fail(TEXT("Invalid participant flag: ") + E.Id);
                 ParticipantIds.Add(Item.Id); E.Participants.Add(MoveTemp(Item));
             }
         }
@@ -172,6 +176,51 @@ bool FTMOPWorldAtlasData::Load()
         }
         if (E.Kind == TEXT("conflict") && (E.From.IsEmpty() || E.To.IsEmpty() || E.Participants.Num() < 2 || E.Links.IsEmpty() || E.Sources.IsEmpty()))
             return Fail(TEXT("Incomplete dated conflict: ") + E.Id);
+        if ((*Obj)->HasField(TEXT("hierarchy")))
+        {
+            const TSharedPtr<FJsonObject>* H = nullptr;
+            const TArray<TSharedPtr<FJsonValue>>* Nodes = nullptr;
+            FString AsOf;
+            if (!(*Obj)->TryGetObjectField(TEXT("hierarchy"), H) ||
+                !(*H)->TryGetStringField(TEXT("as_of"), AsOf) || AsOf != TEXT("1986-02-28") ||
+                !(*H)->TryGetArrayField(TEXT("nodes"), Nodes) || Nodes->IsEmpty() || Nodes->Num() > 512)
+                return Fail(TEXT("Invalid hierarchy: ") + E.Id);
+            TSet<FString> OfficeIds;
+            for (const auto& V : *Nodes)
+            {
+                const TSharedPtr<FJsonObject>* N = nullptr;
+                FTMOPAtlasOffice Item;
+                if (!V->TryGetObject(N) || !(*N)->TryGetStringField(TEXT("id"), Item.Id) || Item.Id.IsEmpty() || OfficeIds.Contains(Item.Id) ||
+                    !(*N)->TryGetStringField(TEXT("parent"), Item.Parent) || !(*N)->TryGetStringField(TEXT("label"), Item.Label) || !E.Texts.Contains(Item.Label) ||
+                    !(*N)->TryGetStringField(TEXT("relation"), Item.Relation) || (Item.Relation != TEXT("group") && Item.Relation != TEXT("reports_to")))
+                    return Fail(TEXT("Invalid hierarchy node: ") + E.Id);
+                if ((*N)->HasField(TEXT("note")) && (!(*N)->TryGetStringField(TEXT("note"), Item.Note) || !E.Texts.Contains(Item.Note)))
+                    return Fail(TEXT("Invalid hierarchy note: ") + E.Id);
+                if ((*N)->HasField(TEXT("sources")) && !(*N)->TryGetStringArrayField(TEXT("sources"), Item.Sources))
+                    return Fail(TEXT("Invalid hierarchy sources: ") + E.Id);
+                for (const FString& Url : Item.Sources) if (!Url.StartsWith(TEXT("https://")))
+                    return Fail(TEXT("Invalid hierarchy source URL: ") + E.Id);
+                if (Item.Relation == TEXT("reports_to") && (Item.Parent.IsEmpty() || Item.Sources.IsEmpty()))
+                    return Fail(TEXT("Reporting relationship requires parent and source: ") + E.Id);
+                OfficeIds.Add(Item.Id); E.Hierarchy.Add(MoveTemp(Item));
+            }
+            // Validate every ancestry chain before the recursive Slate tree is built.
+            for (const auto& Node : E.Hierarchy)
+            {
+                TSet<FString> Seen;
+                const FTMOPAtlasOffice* Current = &Node;
+                while (Current)
+                {
+                    if (Seen.Contains(Current->Id) || Seen.Num() >= 32)
+                        return Fail(TEXT("Cyclic or excessively deep hierarchy: ") + E.Id);
+                    Seen.Add(Current->Id);
+                    if (Current->Parent.IsEmpty()) break;
+                    const FString Parent = Current->Parent;
+                    Current = E.Hierarchy.FindByPredicate([&Parent](const auto& Candidate) { return Candidate.Id == Parent; });
+                    if (!Current) return Fail(TEXT("Unknown hierarchy parent: ") + E.Id + TEXT(".") + Parent);
+                }
+            }
+        }
         Ids.Add(E.Id); Entries.Add(MoveTemp(E));
     }
     for (const FTMOPAtlasEntry& E : Entries)

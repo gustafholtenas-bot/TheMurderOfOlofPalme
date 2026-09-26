@@ -1,5 +1,6 @@
 #include "WorldAtlas/TMOPGlobeMath.h"
 #include "WorldAtlas/TMOPWorldAtlasData.h"
+#include "WorldAtlas/TMOPAtlasAppearance.h"
 #include "Misc/AutomationTest.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -27,6 +28,33 @@ bool FTMOPGlobeProjectionTest::RunTest(const FString&)
     return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTMOPGlobeLandClipTest, "TMOP.WorldAtlas.LandClipping",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FTMOPGlobeLandClipTest::RunTest(const FString&)
+{
+    FVector Polygon[4];
+    TestEqual(TEXT("Far-side land is invisible"), TMOPGlobe::ClipFrontTriangle(FVector(-1,0,0), FVector(-.5,.4,0), FVector(-.5,0,.4), Polygon), 0);
+    TestEqual(TEXT("Visible land triangle is retained"), TMOPGlobe::ClipFrontTriangle(FVector(1,0,0), FVector(.5,.4,0), FVector(.5,0,.4), Polygon), 3);
+    TestEqual(TEXT("One vertex behind the horizon yields a quadrilateral"), TMOPGlobe::ClipFrontTriangle(FVector(-.5,0,0), FVector(.5,.4,0), FVector(.5,0,.4), Polygon), 4);
+    for (const FVector& P : Polygon) TestTrue(TEXT("All clipped vertices are finite and in front"), !P.ContainsNaN() && P.X >= 0);
+    TestEqual(TEXT("Two vertices behind the horizon yield one triangle"), TMOPGlobe::ClipFrontTriangle(FVector(.5,0,0), FVector(-.5,.4,0), FVector(-.5,0,.4), Polygon), 3);
+    FVector A(-.5, .4, 0), B(.5, 0, .4);
+    TestTrue(TEXT("Crossing border is kept"), TMOPGlobe::ClipFrontSegment(A, B));
+    TestTrue(TEXT("Border terminates on the limb"), FMath::IsNearlyZero(A.X));
+    A = FVector(-.2,0,0); B = FVector(-.8,.2,0);
+    TestFalse(TEXT("Hidden border is removed"), TMOPGlobe::ClipFrontSegment(A,B));
+    FTMOPAtlasAppearance Appearance;
+    if (!TestTrue(TEXT("Staged land, alignments and flags load"), Appearance.Load()))
+    { AddError(Appearance.Error); return false; }
+    TestTrue(TEXT("Global land coverage loaded"), Appearance.Lands.Num() > 180);
+    TestNotNull(TEXT("Soviet flag exists"), Appearance.Flag(TEXT("su")));
+    TestNotNull(TEXT("Historical Afghan flag exists"), Appearance.Flag(TEXT("af")));
+    TestNotNull(TEXT("Chinese participant flag exists"), Appearance.Flag(TEXT("cn")));
+    TestNotNull(TEXT("Vietnamese participant flag exists"), Appearance.Flag(TEXT("vn")));
+    TestNull(TEXT("A region is not given a national flag"), Appearance.Flag(TEXT("kurdistan")));
+    return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTMOPAtlasDatesTest, "TMOP.WorldAtlas.DatesAndData",
     EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 bool FTMOPAtlasDatesTest::RunTest(const FString&)
@@ -34,6 +62,18 @@ bool FTMOPAtlasDatesTest::RunTest(const FString&)
     FTMOPWorldAtlasData Data;
     if (!TestTrue(TEXT("Packaged atlas data loads and validates"), Data.Load()))
     { AddError(Data.Error); return false; }
+    for (const auto& Country : Data.Entries) if (Country.Kind == TEXT("country"))
+        TestFalse(TEXT("Country hierarchy is loaded: ") + Country.Id, Country.Hierarchy.IsEmpty());
+    const auto* USA = Data.Find(TEXT("us"));
+    if (!TestNotNull(TEXT("USA profile exists"), USA)) return false;
+    const auto* FBI = USA->Hierarchy.FindByPredicate([](const auto& Office) { return Office.Id == TEXT("fbi"); });
+    if (!TestNotNull(TEXT("FBI office is parsed"), FBI)) return false;
+    TestEqual(TEXT("FBI reports to Attorney General"), FBI->Parent, FString(TEXT("minister-3")));
+    TestFalse(TEXT("Localized office label is resolved"), USA->Text(FBI->Label).IsEmpty());
+    const auto* Border = Data.Find(TEXT("conflict-china-vietnam"));
+    if (!TestNotNull(TEXT("China/Vietnam conflict exists"), Border) || Border->Participants.Num() != 2) return false;
+    TestEqual(TEXT("Chinese flag reference is parsed"), Border->Participants[0].Flag, FString(TEXT("cn")));
+    TestEqual(TEXT("Vietnamese flag reference is parsed"), Border->Participants[1].Flag, FString(TEXT("vn")));
     const auto* Meeting = Data.Find(TEXT("bilderberg-1986"));
     const auto* Funds = Data.Find(TEXT("iran-money"));
     const auto* PriorShipment = Data.Find(TEXT("contra-portugal"));

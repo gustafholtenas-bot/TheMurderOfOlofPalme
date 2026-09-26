@@ -4,7 +4,11 @@ Implementerad i TMOPEngine för den befintliga C++-pausmenyn. Grunddatum är **2
 
 ## Installera och öppna
 
-1. Stäng Unreal Editor. Kopiera paketets `Plugins` och `Tools` till projektroten och slå ihop mapparna. Paketet innehåller pluginens kompletta källkod från denna arbetsgren, inklusive det tidigare lokaliseringsramverket (`cbdf13d`) och den nya atlasen. Övriga spelassets och tabellöversättningar ingår inte. Jämför och slå ihop eventuella egna nyare ändringar innan du ersätter filer.
+**Senaste visuella uppdateringen:** [Befattningsträd och konfliktflaggor](HIERARCHY.md). Kräver uppdaterad C++-kod, `world.json` och flaggatlasen. [Flaggor och blockfärger 1986](APPEARANCE_1986.md) ingår också.
+
+Den senaste forskningsuppdateringen beskrivs i `INSTALLATION_2026-09-26.md`. Den kan installeras genom att ersätta enbart `world.json` om atlasen redan fungerar. Nedanstående steg gäller grundinstallation av atlasens kod.
+
+1. Stäng Unreal Editor. Kopiera paketets `Plugins` och `Tools` till projektroten och slå ihop mapparna. Forskningspaketet innehåller atlasens kod och integrationsfiler och förutsätter ett befintligt TMOP-projekt med lokaliseringsramverket. Övriga spelassets och tabellöversättningar ingår inte. Jämför och slå ihop eventuella egna nyare ändringar innan du ersätter filer.
 2. Generera projektfiler vid behov och bygg projektets **Development Editor**-mål. Gör en full ombyggnad, inte enbart Live Coding, eftersom widgetens UPROPERTY-fält och konstruktor har ändrats.
 3. Öppna spelet, pausa och välj **Grupperingar i världen**. Ingen ny Blueprint-widget, aktör i spelkartan eller editorimport av tabeller krävs.
 4. Standardgloben använder Unreals sfär med kustlinjer. I pauswidgetens Blueprint, under **Class Defaults → TMOP → UI → Pause → World Atlas**, kan du tilldela **World Globe Mesh**, **World Globe Material**, **World Globe Alignment** och **World Globe Coastlines**. Använder projektet C++-klassen direkt fungerar standardgloben utan detta steg. Skapa vid behov en Blueprint-underklass och använd den där projektet väljer pauswidgetklass.
@@ -28,14 +32,14 @@ Implementerad i TMOPEngine för den befintliga C++-pausmenyn. Grunddatum är **2
 
 `Plugins/TMOPEngine/Content/WorldAtlas/world.json` är innehållsfilen. JSON-filerna följer med paketerade byggen genom Build.cs/UFS. Starta om menyn efter filändringar i editorkörning; efter paketering krävs ett nytt paket.
 
-99 poster: 33 länder, 2 konfliktaktörer i Nicaragua, 3 nätverk, 53 konflikt-/krisposter, 2 möten och 6 vapen-/finansieringsposter. Se `CONFLICT_COVERAGE.md` för urvalet, tidsgränser och överlappande delstrider. Alla länder har nu regering/styrande parti, ett urval centrala ministrar och avsnitt för underrättelseverksamhet. 27 landsposter har namngivna tjänstechefer eller politiskt ansvariga säkerhetsministrar; sex har uttryckligen markerade luckor. Detta är urval, inte kompletta ministerier eller personalregister. Se `COUNTRY_COVERAGE.md`. Ofärdiga allians-/relationsfält är fortfarande märkta som forskningsposter. Detta är inte en fullständig geopolitisk databas eller en förteckning över misstänkta. Poster kan redigeras utan C++-ändring.
+134 poster: 33 länder, 1 region, 3 aktörer, 3 nätverk, 53 konflikt-/krisposter, 30 händelser, 8 vapenposter och 3 finansieringsposter. Se `CONFLICT_COVERAGE.md` för urvalet, tidsgränser och överlappande delstrider. Alla länder har nu regering/styrande parti, ett urval centrala ministrar och avsnitt för underrättelseverksamhet. 27 landsposter har namngivna tjänstechefer eller politiskt ansvariga säkerhetsministrar; sex har uttryckligen markerade luckor. Detta är urval, inte kompletta ministerier eller personalregister. Se `COUNTRY_COVERAGE.md`. Ofärdiga allians-/relationsfält är fortfarande märkta som forskningsposter. Detta är inte en fullständig geopolitisk databas eller en förteckning över misstänkta. Poster kan redigeras utan C++-ändring.
 
 En post har:
 
 | Fält | Betydelse |
 |---|---|
 | `id` | Stabilt unikt ID. Byt inte ID när texten ändras. |
-| `kind` | `country`, `actor`, `group`, `conflict`, `arms`, `funds` eller `event`. |
+| `kind` | `country`, `region`, `actor`, `group`, `conflict`, `arms`, `funds` eller `event`. |
 | `lat`, `lon` | Representativ punkt. Inte en gräns eller ett territorium. |
 | `country` | För `actor`: befintligt land-ID, exempelvis `ni`. |
 | `marker_offset` | Valfri `[x,y]` i Slate-enheter, högst ±80. Förskjutning med ledarlinje, inte ändrad geografi. Samma förskjutning används för ritning och träfftest. |
@@ -126,3 +130,39 @@ För denna utökning: prova båda Nicaraguapunkterna vid minsta/största zoom, l
 7. Testa minsta/största zoom, språkbyte, överlappande markörer via listan och paketerad körning. Numren ersätter långa etiketter på globen; namnen finns i detaljpanelen.
 
 JSON-valideringen avvisar okända relationstyper, saknade ändpunkter, självlänkar, dubletter, ogiltiga koordinater/offsets och ofullständiga daterade konflikter. Utbyggnaden är bakåtkompatibel för övriga posttyper; äldre konfliktposter måste få datum, aktörer och relationer.
+
+
+## Newspaper updates and reactions
+
+Entry text fields `news_day`, `news_after`, and `reactions` appear in the detail
+panel in Swedish or English using the existing localization fallback. Reactions
+are grouped under speaker names and roles, immediately after the leadership
+snapshot. They are explicitly labelled as post-assassination material and do not
+change the country's `profile_as_of` or the globe's conflict date filter.
+Dates, publication dates, page references, attribution, and distinctions between
+quotation fragments and paraphrases are included in each localized field. The
+Quoted newspaper wording is preserved alongside labelled translations. A quote
+printed in Italian is not presented as the speaker's original spoken language.
+
+Sources may have an empty `url` only when a nonempty `document` identifies a
+supplied scan. Such references render as text, not a nonfunctional button. PDFs
+are not bundled by this change. The dated imports cover country and conflict
+news, plus post-assassination reactions. See the reading logs
+[February 28](NEWSPAPER_REVIEW_1986-02-28.md) and
+[March 1–2](NEWSPAPER_REVIEW_1986-03-01_02.md) for exact coverage, source conflicts,
+and material not imported. Publication date alone never places an event in
+`news_day`; reports without an established event date remain in `body`.
+
+The Brazil Cruzado Plan is a dated `event`, available under the groups tab. Its
+Brasília marker appears when the event is selected, using the existing event
+behaviour. This does not add an incomplete country leadership profile.
+
+Validation: Python atlas/localization checks can run without Unreal. This change
+still requires compilation and an in-editor UI check in Unreal Engine.
+
+Regioner (`kind: region`) visas tillsammans med länder i listan och följer kartans landsfilter. De är geografiska översikter, inte statsanspråk. Kurdistan och PKK har separata, ömsesidigt länkade poster; PKK-markören är schematisk.
+## Befattningsträd och konfliktflaggor (26 september 2026)
+
+Se [HIERARCHY.md](HIERARCHY.md) för JSON-formatet, utfällbara träd, separata
+paneler, flaggor på konfliktdeltagare och källstatus för rapporteringsvägarna.
+Kör `python Tools/WorldAtlas/validate_hierarchy.py` efter egna dataändringar.
