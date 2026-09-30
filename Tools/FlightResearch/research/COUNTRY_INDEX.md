@@ -32,7 +32,7 @@ Samtliga länder har ofullständig operatörsinventering. Listan över saknade b
 | Tjeckoslovakien | ✓ CSA Czechoslovak Airlines (1) | — | Ofullständig |
 | Ungern | ✓ Malév (7) | — | Ofullständig |
 | Rumänien | ✓ Tarom (2) | — | Ofullständig |
-| USA | ✓ Pan American World Airways (328)<br>✓ Delta Air Lines (910)<br>✓ Northwest Orient Airlines (116)<br>✓ Air Wisconsin (442)<br>✓ US Marine Corps (1)<br>✓ Southwest Airlines (1219)<br>✓ COMAIR (182) | ○ American Airlines (Manuell granskning återstår)<br>○ United Airlines (Manuell granskning återstår)<br>○ Trans World Airlines (Manuell granskning återstår)<br>○ Eastern Air Lines (Manuell granskning återstår)<br>○ Continental Airlines (Manuell granskning återstår)<br>○ Midstate Airlines (Katalogpost, ej inläst)<br>○ Air Midwest (Katalogpost, ej inläst) | Ofullständig |
+| USA | ✓ Pan American World Airways (328)<br>✓ Delta Air Lines (922)<br>✓ Northwest Orient Airlines (116)<br>✓ Air Wisconsin (442)<br>✓ US Marine Corps (1)<br>✓ Southwest Airlines (1219)<br>✓ COMAIR (234) | ○ American Airlines (Manuell granskning återstår)<br>○ United Airlines (Manuell granskning återstår)<br>○ Trans World Airlines (Manuell granskning återstår)<br>○ Eastern Air Lines (Manuell granskning återstår)<br>○ Continental Airlines (Manuell granskning återstår)<br>○ Midstate Airlines (Katalogpost, ej inläst)<br>○ Air Midwest (Katalogpost, ej inläst) | Ofullständig |
 | Kanada | ✓ Norcanair (17) | ○ Air Canada (Manuell granskning återstår)<br>○ CP Air (Manuell granskning återstår) | Ofullständig |
 | Israel | — | ○ El Al (Katalogpost, ej inläst) | Ofullständig |
 | Iran | — | ○ Iran Air (Manuell granskning återstår) | Ofullständig |
@@ -91,7 +91,7 @@ Samtliga länder har ofullständig operatörsinventering. Listan över saknade b
 | Albanien | — | — | Ofullständig |
 | Cypern | — | ○ Cyprus Airways (Katalogpost, ej inläst) | Ofullständig |
 
-**Totalt:** 81 länder/territorier, 95 registrerade operatörer, 4818 tidtabellslagda och 1 dokumenterat genomförda flygsträckor.
+**Totalt:** 81 länder/territorier, 95 registrerade operatörer, 4882 tidtabellslagda och 1 dokumenterat genomförda flygsträckor.
 
 ## Trafik till och från landets flygplatser
 
@@ -124,7 +124,7 @@ Noll betyder att inga rörelser importerats, inte att landet saknade flygtrafik.
 | Tjeckoslovakien | 2 | Air France (1); CSA Czechoslovak Airlines (1) |
 | Ungern | 22 | Aeroflot (11); Air France (2); Malév (7); Pan American World Airways (2) |
 | Rumänien | 3 | Air France (1); Tarom (2) |
-| USA | 3003 | Air Wisconsin (442); British Airways (12); COMAIR (182); Delta Air Lines (910); Japan Air Lines (27); Norcanair (1); Northwest Orient Airlines (83); Pan American World Airways (126); Southwest Airlines (1219); US Marine Corps (1) |
+| USA | 3067 | Air Wisconsin (442); British Airways (12); COMAIR (234); Delta Air Lines (922); Japan Air Lines (27); Norcanair (1); Northwest Orient Airlines (83); Pan American World Airways (126); Southwest Airlines (1219); US Marine Corps (1) |
 | Kanada | 30 | COMAIR (9); Japan Air Lines (4); Norcanair (17) |
 | Israel | 4 | Pan American World Airways (4) |
 | Iran | 0 | — |

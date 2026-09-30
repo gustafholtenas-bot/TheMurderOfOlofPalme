@@ -1,0 +1,63 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	comair-1681-CVG-CMH-0802-b76		new_schedule	comair	1681	CVG	CMH	08:02	08:44	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+2	comair-1558-CVG-CMH-0925-b76		new_schedule	comair	1558	CVG	CMH	09:25	10:05	0	X7	123456	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+3	comair-1576-CVG-CMH-1245-b76		new_schedule	comair	1576	CVG	CMH	12:45	13:30	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+4	comair-1542-CVG-CMH-1500-b76		new_schedule	comair	1542	CVG	CMH	15:00	15:40	0	X7	123456	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+5			excluded_no_operating_date	comair	1542	CVG	CMH	15:01	15:40	0	7	7	0	50		delta-19860201	1986-02-01				Sunday-only row has no departure in the reviewed Thursday-Saturday date range.
+6	comair-1577-CVG-CMH-1825-b76		new_schedule	comair	1577	CVG	CMH	18:25	19:05	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+7	comair-1734-CVG-CMH-1946-b76		new_schedule	comair	1734	CVG	CMH	19:46	20:26	0	X56	12347	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+8	delta-381-CVG-CMH-2044-b76		new_schedule	delta	381	CVG	CMH	20:44	21:15	0	D	1234567	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+9	delta-210-CVG-CMH-2322-b76		new_schedule	delta	210	CVG	CMH	23:22	23:53	0	D	1234567	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+10	comair-1530-CMH-CVG-0700-b76		new_schedule	comair	1530	CMH	CVG	07:00	07:37	0	X7	123456	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+11	delta-471-CMH-CVG-0815-b76		new_schedule	delta	471	CMH	CVG	08:15	08:50	0	D	1234567	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+12	comair-1726-CMH-CVG-1100-b76		new_schedule	comair	1726	CMH	CVG	11:00	11:45	0	X67	12345	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+13	comair-1628-CMH-CVG-1345-b76		new_schedule	comair	1628	CMH	CVG	13:45	14:30	0	X7	123456	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+14	comair-1651-CMH-CVG-1550-b76		new_schedule	comair	1651	CMH	CVG	15:50	16:30	0	D	1234567	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+15	comair-1561-CMH-CVG-1700-b76		new_schedule	comair	1561	CMH	CVG	17:00	17:45	0	X67	12345	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+16	comair-1589-CMH-CVG-1710-b76		new_schedule	comair	1589	CMH	CVG	17:10	17:50	0	X67	12345	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+17	comair-1743-CMH-CVG-1915-b76		new_schedule	comair	1743	CMH	CVG	19:15	19:55	0	X6	123457	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+18	delta-261-CMH-CVG-1950-b76		new_schedule	delta	261	CMH	CVG	19:50	20:25	0	D	1234567	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+19	delta-1140-CVG-IND-0035-b76		new_schedule	delta	1140	CVG	IND	00:35	01:05	0	D	1234567	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+20	comair-1527-CVG-IND-0922-b76		new_schedule	comair	1527	CVG	IND	09:22	10:05	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+21	comair-1567-CVG-IND-1245-b76		new_schedule	comair	1567	CVG	IND	12:45	13:30	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+22	comair-1654-CVG-IND-1501-b76		new_schedule	comair	1654	CVG	IND	15:01	15:40	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+23			excluded_no_operating_date	comair	1568	CVG	IND	16:00	16:40	0	7	7	0	50		delta-19860201	1986-02-01				Sunday-only row has no departure in the reviewed Thursday-Saturday date range.
+24	comair-1691-CVG-IND-1725-b76		new_schedule	comair	1691	CVG	IND	17:25	18:05	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+25	comair-1560-CVG-IND-1830-b76		new_schedule	comair	1560	CVG	IND	18:30	19:10	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+26	delta-1112-IND-CVG-0705-b76		new_schedule	delta	1112	IND	CVG	07:05	07:35	0	D	1234567	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+27	comair-1673-IND-CVG-0810-b76		new_schedule	comair	1673	IND	CVG	08:10	08:50	0	X67	12345	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+28	comair-1566-IND-CVG-1100-b76		new_schedule	comair	1566	IND	CVG	11:00	11:40	0	X67	12345	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+29	comair-1528-IND-CVG-1350-b76		new_schedule	comair	1528	IND	CVG	13:50	14:35	0	X67	12345	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+30	comair-1655-IND-CVG-1600-b76		new_schedule	comair	1655	IND	CVG	16:00	16:40	0	X6	123457	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+31	comair-1545-IND-CVG-1715-b76		new_schedule	comair	1545	IND	CVG	17:15	17:55	0	X67	12345	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+32	comair-1734-IND-CVG-1820-b76		new_schedule	comair	1734	IND	CVG	18:20	19:00	0	X6	123457	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+33	comair-1547-IND-CVG-2000-b76		new_schedule	comair	1547	IND	CVG	20:00	20:40	0	5	5	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+34	comair-1574-IND-CVG-2010-b76		new_schedule	comair	1574	IND	CVG	20:10	20:50	0	5	5	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+35	comair-1699-IND-CVG-2215-b76		new_schedule	comair	1699	IND	CVG	22:15	22:50	0	5	5	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+36	comair-1563-IND-MKE-0800-b76		new_schedule	comair	1563	IND	MKE	08:00	08:15	0	X67	12345	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+37	comair-1536-IND-MKE-1020-b76		new_schedule	comair	1536	IND	MKE	10:20	10:50	0	X67	12345	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+38	comair-1567-IND-MKE-1355-b76		new_schedule	comair	1567	IND	MKE	13:55	14:10	0	X6	123457	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+39	comair-1568-IND-MKE-1700-b76		new_schedule	comair	1568	IND	MKE	17:00	17:15	0	X6	123457	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+40			excluded_connection	comair	1545/1578	IND	MKE	17:15	18:50	0	X67	12345	CVG	111		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+41			excluded_connection	comair	1544/1527	MKE	IND	06:25	10:05	0	X67	12345	CVG	154		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+42	comair-1566-MKE-IND-0830-b76		new_schedule	comair	1566	MKE	IND	08:30	10:45	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+43			excluded_connection	comair	1576/1567	MKE	IND	09:00	13:30	0	X67	12345	CVG	154		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+44	comair-1589-MKE-IND-1325-b76		new_schedule	comair	1589	MKE	IND	13:25	15:40	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+45	comair-1568-MKE-IND-1430-b76		new_schedule	comair	1568	MKE	IND	14:30	16:45	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+46	comair-1574-MKE-IND-1734-b76		new_schedule	comair	1574	MKE	IND	17:34	19:45	0	X6	123457	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+47			excluded_connection	mixed_delta_comair_connection	471/1527	CMH	IND	08:15	10:05	0	X67	12345	CVG	62		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+48	comair-1528-CMH-IND-1230-b76		new_schedule	comair	1528	CMH	IND	12:30	13:30	0	X67	12345	0	62		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+49			excluded_connection	comair	1628/1654	CMH	IND	13:45	15:40	0	X67	12345	CVG	62		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+50			excluded_connection	comair	1651/1691	CMH	IND	15:50	18:05	0	X6	123457	CVG	62		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+51			excluded_connection	comair	1589/1560	CMH	IND	17:10	19:10	0	X67	12345	CVG	62		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+52			excluded_connection	mixed_delta_comair_connection	1112/1681	IND	CMH	07:05	08:44	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+53			excluded_connection	mixed_delta_comair_connection	1112/1558	IND	CMH	07:05	10:05	0	X7	123456	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+54			excluded_connection	comair	1673/1558	IND	CMH	08:10	10:05	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+55			excluded_connection	comair	1566/1576	IND	CMH	11:00	13:30	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+56			excluded_connection	comair	1528/1542	IND	CMH	13:50	15:40	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+57	comair-1589-IND-CMH-1600-b76		new_schedule	comair	1589	IND	CMH	16:00	16:59	0	X67	12345	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+58			excluded_connection	comair	1655/1577	IND	CMH	16:00	19:05	0	X6	123457	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+59			excluded_connection	comair	1545/1577	IND	CMH	17:15	19:05	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+60			excluded_through_service	comair	1734	IND	CMH	18:20	20:26	0	X56	12347	1	110		delta-19860201	1986-02-01				One intermediate stop; separately sourced IND-CVG and CVG-CMH segments are used, without inferring a direct flight.
+61			excluded_connection	mixed_delta_comair_connection	1734/381	IND	CMH	18:20	21:15	0	X6	123457	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.
+62			excluded_connection	mixed_delta_comair_connection	1699/210	IND	CMH	22:15	23:53	0	5	5	CVG	110		delta-19860201	1986-02-01				Printed connection via CVG; not a nonstop segment.

@@ -1,0 +1,68 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    50,
+    61,
+    62,
+    110,
+    111,
+    154
+  ],
+  "legend_printed_page": 4,
+  "airport_codes_page": 260,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "50": 28,
+    "61": 33,
+    "62": 34,
+    "110": 58,
+    "111": 58,
+    "154": 80,
+    "260": 133
+  },
+  "new_airports": [
+    {
+      "id": "IND",
+      "name": "Indianapolis International (1986)",
+      "country": "us",
+      "timezone": "America/Indiana/Indianapolis",
+      "lat": 39.7173,
+      "lon": -86.294403,
+      "coordinate_source": "https://ourairports.com/airports/KIND/",
+      "historical_location_reviewed": true
+    },
+    {
+      "id": "CMH",
+      "name": "Columbus / Port Columbus International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 39.998001,
+      "lon": -82.891899,
+      "coordinate_source": "https://ourairports.com/airports/KCMH/",
+      "historical_location_reviewed": true
+    }
+  ],
+  "airport_location_scope": "Schematic airport sites, not 1986 terminal/gate positions. Historical airport names and codes read from printed p.260. CMH retains Port Columbus name, not its 2016 John Glenn name.",
+  "coordinate_sources": [
+    "https://ourairports.com/airports/KIND/",
+    "https://ourairports.com/airports/KCMH/"
+  ],
+  "history_sources": [
+    "https://flycolumbus.com/business/history/"
+  ],
+  "notes": [
+    "Visual scans used for transcription; OCR used only for navigation.",
+    "CVG-IND 1567 is 12:45–13:30; enlarged numeral checked against IND-MKE 1567 at 13:55–14:10.",
+    "IND-CVG 1547,1574,1699 are Friday-only (5), not a footnote 5.",
+    "IND-CVG 1734 is X6; onward CVG-CMH 1734 is X56. Both independently read, no Friday CMH continuation invented.",
+    "CVG-IND Delta1140 departs 00:35, not 12:35. All accepted arrivals same local day.",
+    "IND-MKE 1568 departs before the UTC window start on 27 February but overlaps it; whole flight preserved.",
+    "Edition end date and later amendments unverified; planned service does not establish actual operation."
+  ],
+  "original_scans_redistributed": false
+}

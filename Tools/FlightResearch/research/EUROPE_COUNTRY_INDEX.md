@@ -1,6 +1,6 @@
 # Europa – landvis flyggenomgång
 
-Uppdaterat 2026-09-29 för v76. Paketet innehåller 4 819 rörelser.
+Uppdaterat 2026-09-30 för v79. Paketet innehåller 4 883 rörelser.
 
 Arbetsordningen gäller en ny granskning land för land. Äldre importer följer med, men räknas inte som en färdig landsinventering. Granskade urval i denna följd: Sverige, Norge, Danmark, Finland, Island, Storbritannien, Jersey, Guernsey, Isle of Man, Irland, Frankrike, Monaco, Andorra, Spanien, Gibraltar, Portugal, Nederländerna, Belgien, Luxemburg, Västtyskland, Östtyskland, Västberlin, Schweiz, Liechtenstein, Österrike, Italien, San Marino, Vatikanstaten, Malta, Polen, Tjeckoslovakien, Ungern, Rumänien, Bulgarien, Jugoslavien, Albanien, Grekland, Cypern, Turkiet, Sovjetunionen. **Cypern är nästa fördjupning**.
 

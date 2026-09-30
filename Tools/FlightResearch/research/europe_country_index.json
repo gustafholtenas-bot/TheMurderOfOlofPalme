@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "checked_on": "2026-09-29",
-  "package": "v76",
-  "total_movements": 4819,
+  "checked_on": "2026-09-30",
+  "package": "v79",
+  "total_movements": 4883,
   "next_country_id": "cy",
   "coverage_complete": false,
   "counting": "Fysiska rörelser med start eller mål i kataloglandet, oavsett operatörens hemland. Inrikes räknas en gång. Landrader överlappar. Noll betyder inga inlagda rörelser. Sovjetunionen och Turkiet räknas som hela katalogländer, inklusive asiatiska ändpunkter.",

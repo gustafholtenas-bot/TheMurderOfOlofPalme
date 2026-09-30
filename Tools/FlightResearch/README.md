@@ -33,7 +33,9 @@ Flygklockan är separat per öppnad lokal spelares världsmeny. Den ändrar inte
 
 ## Vad som ingår nu
 
-Senaste paketet **v76**: 33 nya planerade COMAIR-rörelser: Dayton–Detroit, Cleveland–Milwaukee och Cleveland–Fort Wayne med retur, samt Detroit–Cleveland. 26 nya scheman från 60 granskade rader. Totalt 4 819 rörelser. Alla 4 786 tidigare rörelseposter, scheman och flygplatser är oförändrade. Se `research/COMAIR_OHIO_LINKS_BATCH75.md`.
+Senaste paketet **v79**: 64 nya planerade flygrörelser: 52 COMAIR och 12 Delta. 43 nya nonstop-scheman från 62 granskade rader. Totalt 4 883 rörelser. Indianapolis och Port Columbus tillkommer som flygplatser. Alla 4 819 tidigare rörelseposter och kodrättelserna från v77/v78 bevaras. Se `research/COMAIR_INDIANAPOLIS_COLUMBUS_BATCH76.md`. V77 och v78 var kodrättelser; nästa forskningsomgång är därför 76.
+
+Föregående forskningspaket **v76**: 33 nya planerade COMAIR-rörelser: Dayton–Detroit, Cleveland–Milwaukee och Cleveland–Fort Wayne med retur, samt Detroit–Cleveland. 26 nya scheman från 60 granskade rader. Totalt 4 819 rörelser. Alla 4 786 tidigare rörelseposter, scheman och flygplatser är oförändrade. Se `research/COMAIR_OHIO_LINKS_BATCH75.md`.
 
 Föregående paket **v75**: 73 nya planerade flygrörelser mellan Cincinnati, Cleveland och Dayton i båda riktningarna: 60 COMAIR och 13 Delta. 47 nya scheman från 58 granskade rader. Totalt 4 786 rörelser. Alla 4 713 tidigare rörelseposter och scheman är oförändrade. Cleveland Hopkins (CLE) och Dayton International (DAY) tillkommer; tidigare flygplatser bevaras. Se `research/OHIO_TRIANGLE_BATCH74.md`.
 
@@ -141,8 +143,8 @@ Föregående paket **v25** tillför **90 planerade rörelser** från 62 granskad
 |---|---|---:|
 | Golden Air | Direktsträckor Karlskoga–Bromma och gamla Karlstad–Fornebu | 12 |
 | Pan Am | Tidigare nät samt Aten–Frankfurt i båda riktningarna | 328 |
-| COMAIR | Cincinnati-nätet och Chicago–Milwaukee; fler Cleveland/Dayton-förbindelser med Detroit, Milwaukee och Fort Wayne; partiellt | 182 |
-| Delta Air Lines | Atlanta–Europa med retur och utökad inrikestrafik, nu även Cincinnati–Cleveland med retur; fortsatt partiellt | 910 |
+| COMAIR | Tidigare nät samt Cincinnati–Columbus/Indianapolis, Indianapolis–Milwaukee/Columbus med retur; partiellt | 234 |
+| Delta Air Lines | Tidigare nät samt Cincinnati–Columbus och Cincinnati–Indianapolis med retur; partiellt | 922 |
 | Norcanair | Urval ur PDF-sidor 3–4 | 17 |
 | Líneas Aéreas Paraguayas | Europeiska förbindelser via Recife, fysiska delsträckor | 10 |
 | Ladeco | Urval av norra Chile | 18 |
@@ -188,9 +190,9 @@ Föregående paket **v25** tillför **90 planerade rörelser** från 62 granskad
 | Air Inter | Tidigare Parislinjer samt nya regionala direktflyg och Paris–Strasbourg | 238 |
 | TAP Air Portugal | Lissabon–Orly/retur, Lissabon–Lyon/retur samt Orly–Porto | 7 |
 | Southwest Airlines | Röda N/S-rader: stadsavsnitt genomgångna; fortsatt partiell bolagstäckning | 1219 |
-| **Totalt** | **3 014 godkända tidtabellsrader samt en separat rörelsehandling** | **4 819** |
+| **Totalt** | **3 057 godkända tidtabellsrader samt en separat rörelsehandling** | **4 883** |
 
-4 818 har status `scheduled`; en har status `confirmed`. Underlaget omfattar 1000 olika riktade platspar och 239 registrerade flygplatser/platser. Helikopterresans två ändpunkter är ungefärliga platsmarkörer. Tjugosju tidtabellsutgåvor bidrar med godkända schemarader. Därutöver finns bland annat 22 forskningsrader från Interflugs förhandsutgåva och sex från Cyprus Airways förhandsutgåva utan animation. Air Zimbabwes utgåva bidrar även med SA-, BA- och BP-kodade förbindelser. Bolagstillhörigheten följer källans flygkod och belägger inte faktisk operatör vid eventuell inhyrning av flygplan. AFBA919 räknas en gång under första koden AF; faktisk operatör är inte fastställd.
+4 882 har status `scheduled`; en har status `confirmed`. Underlaget omfattar 1008 olika riktade platspar och 241 registrerade flygplatser/platser. Helikopterresans två ändpunkter är ungefärliga platsmarkörer. Tjugosju tidtabellsutgåvor bidrar med godkända schemarader. Därutöver finns bland annat 22 forskningsrader från Interflugs förhandsutgåva och sex från Cyprus Airways förhandsutgåva utan animation. Air Zimbabwes utgåva bidrar även med SA-, BA- och BP-kodade förbindelser. Bolagstillhörigheten följer källans flygkod och belägger inte faktisk operatör vid eventuell inhyrning av flygplan. AFBA919 räknas en gång under första koden AF; faktisk operatör är inte fastställd.
 
 Omgång 2 tillförde **174 avgångar och 53 riktade flygplatspar**. Air Wisconsin 2740 Muskegon–Battle Creek är sparat som `candidate`: s. 2 anger ankomst 16.06 och s. 10 anger 16.05. Posten animeras inte. Anslutningar och motstridiga rader räknas inte som ytterligare direktflyg. Detaljer finns i `research/batch_02.json`.
 

@@ -28,7 +28,8 @@
 #include "InputCoreTypes.h"
 #include "HAL/PlatformProcess.h"
 
-namespace
+// Unity builds combine .cpp files; isolate these helpers from other UI files.
+namespace TMOPWorldAtlasUI
 {
 FText L(const FText& Source) { return FTMOPLocalization::Text(Source); }
 FLinearColor Ink(const FString& Kind)
@@ -916,5 +917,5 @@ private:
 TSharedRef<SWidget> MakeTMOPWorldAtlas(UStaticMesh* Mesh, UMaterialInterface* Material,
     const FRotator& MeshAlignment, bool bCoastlineOverlay, bool bFlightPage)
 {
-    return SNew(STMOPWorldAtlas, Mesh, Material, MeshAlignment, bCoastlineOverlay, bFlightPage);
+    return SNew(TMOPWorldAtlasUI::STMOPWorldAtlas, Mesh, Material, MeshAlignment, bCoastlineOverlay, bFlightPage);
 }

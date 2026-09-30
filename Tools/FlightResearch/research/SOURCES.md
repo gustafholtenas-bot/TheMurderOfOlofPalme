@@ -556,3 +556,7 @@ Två Pan Am-rörelser Aten–Frankfurt tillagda. Albanien och Grekland återgran
 ## V76 / omgång 75
 
 33 nya planerade COMAIR-rörelser: Dayton–Detroit, Cleveland–Milwaukee och Cleveland–Fort Wayne med retur, samt Detroit–Cleveland. 26 nya scheman från 60 granskade rader. Totalt 4 819 rörelser. Alla 4 786 tidigare rörelseposter, scheman och flygplatser är oförändrade. Norden oförändrat. Se COMAIR_OHIO_LINKS_BATCH75.md, comair_ohio_links_batch75.tsv och validation_batch75.json.
+
+## V79 / omgång 76
+
+64 nya planerade flygrörelser: 52 COMAIR och 12 Delta. 43 nya nonstop-scheman från 62 granskade rader. Totalt 4 883 rörelser. Indianapolis och Port Columbus tillkommer som flygplatser. Alla 4 819 tidigare rörelseposter och kodrättelserna från v77/v78 bevaras. Se COMAIR_INDIANAPOLIS_COLUMBUS_BATCH76.md, comair_indianapolis_columbus_batch76.tsv och validation_batch76.json.

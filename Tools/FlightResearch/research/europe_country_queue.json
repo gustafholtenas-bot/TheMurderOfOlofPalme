@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "package": "v76",
-  "checked_on": "2026-09-29",
+  "package": "v79",
+  "checked_on": "2026-09-30",
   "requested_workflow": "Land för land i Europa; börja Sverige, fortsätt Norge och övriga Norden, därefter övriga europeiska länder och utvalda territorier.",
   "next_country_id": "cy",
   "coverage_complete": false,

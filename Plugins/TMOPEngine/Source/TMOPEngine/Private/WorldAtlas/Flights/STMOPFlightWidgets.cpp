@@ -56,7 +56,9 @@ void PaintAirplane(const FGeometry& G, FSlateWindowElementList& Out, int32 Layer
         Vertices.Add(FSlateVertex::Make<ESlateVertexRounding::Disabled>(G.GetAccumulatedRenderTransform(),
             XY, FVector2f(.5f,.5f), Fill, FColor::White));
     }
-    Outline.Add(Outline[0]);
+    // TArray::Add rejects references into itself, even when capacity is reserved.
+    const FVector2f FirstOutlinePoint = Outline[0];
+    Outline.Add(FirstOutlinePoint);
     FSlateDrawElement::MakeLines(Out, Layer, G.ToPaintGeometry(), Outline,
         ESlateDrawEffect::None, FLinearColor(.01f,.02f,.03f), true, 2.5f);
     FSlateDrawElement::MakeCustomVerts(Out, Layer + 1, Resource, Vertices, Indices,
