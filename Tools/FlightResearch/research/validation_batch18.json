@@ -1,0 +1,307 @@
+{
+  "checked_on": "2026-09-28",
+  "package": "v19",
+  "new_movements": 65,
+  "unchanged_previous_movements": 1182,
+  "total_movements": 1247,
+  "new_schedules": 32,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_file_count": 22,
+  "nordic_endpoint_movements": 44,
+  "nordic_movements_added": 0,
+  "actual_overflights_added": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_physical_duplicate_count": 0,
+  "reviewed_ground_connections": [
+    {
+      "journey": "panam/panam-457@1986-02-27",
+      "origin": "JFK",
+      "stop": "IAD",
+      "destination": "MEX",
+      "ground_minutes": 26.0
+    },
+    {
+      "journey": "panam/panam-202@1986-02-27",
+      "origin": "EZE",
+      "stop": "GIG",
+      "destination": "JFK",
+      "ground_minutes": 60.0
+    },
+    {
+      "journey": "panam/panam-217@1986-02-27",
+      "origin": "JFK",
+      "stop": "CCS",
+      "destination": "POS",
+      "ground_minutes": 30.0
+    },
+    {
+      "journey": "panam/panam-441@1986-02-27",
+      "origin": "LAX",
+      "stop": "MIA",
+      "destination": "GIG",
+      "ground_minutes": 95.0
+    },
+    {
+      "journey": "panam/panam-440@1986-02-27",
+      "origin": "GIG",
+      "stop": "MIA",
+      "destination": "LAX",
+      "ground_minutes": 165.0
+    },
+    {
+      "journey": "panam/panam-201@1986-02-27",
+      "origin": "JFK",
+      "stop": "GIG",
+      "destination": "EZE",
+      "ground_minutes": 90.0
+    },
+    {
+      "journey": "panam/panam-453@1986-02-27",
+      "origin": "MIA",
+      "stop": "EZE",
+      "destination": "SCL",
+      "ground_minutes": 55.0
+    },
+    {
+      "journey": "panam/panam-218@1986-02-28",
+      "origin": "POS",
+      "stop": "CCS",
+      "destination": "JFK",
+      "ground_minutes": 50.0
+    },
+    {
+      "journey": "panam/panam-467@1986-02-28",
+      "origin": "MIA",
+      "stop": "TPA",
+      "destination": "MEX",
+      "ground_minutes": 30.0
+    },
+    {
+      "journey": "panam/panam-456@1986-02-28",
+      "origin": "MEX",
+      "stop": "IAD",
+      "destination": "JFK",
+      "ground_minutes": 60.0
+    },
+    {
+      "journey": "panam/panam-499@1986-02-28",
+      "origin": "DCA",
+      "stop": "MIA",
+      "destination": "MEX",
+      "ground_minutes": 130.0
+    },
+    {
+      "journey": "panam/panam-457@1986-02-28",
+      "origin": "JFK",
+      "stop": "IAD",
+      "destination": "MEX",
+      "ground_minutes": 26.0
+    },
+    {
+      "journey": "panam/panam-202@1986-02-28",
+      "origin": "EZE",
+      "stop": "GIG",
+      "destination": "JFK",
+      "ground_minutes": 60.0
+    },
+    {
+      "journey": "panam/panam-217@1986-02-28",
+      "origin": "JFK",
+      "stop": "CCS",
+      "destination": "POS",
+      "ground_minutes": 30.0
+    },
+    {
+      "journey": "panam/panam-441@1986-02-28",
+      "origin": "LAX",
+      "stop": "MIA",
+      "destination": "GIG",
+      "ground_minutes": 95.0
+    },
+    {
+      "journey": "panam/panam-454@1986-02-28",
+      "origin": "SCL",
+      "stop": "EZE",
+      "destination": "MIA",
+      "ground_minutes": 90.0
+    },
+    {
+      "journey": "panam/panam-440@1986-02-28",
+      "origin": "GIG",
+      "stop": "MIA",
+      "destination": "LAX",
+      "ground_minutes": 165.0
+    },
+    {
+      "journey": "panam/panam-201@1986-02-28",
+      "origin": "JFK",
+      "stop": "GIG",
+      "destination": "EZE",
+      "ground_minutes": 90.0
+    },
+    {
+      "journey": "panam/panam-453@1986-02-28",
+      "origin": "MIA",
+      "stop": "EZE",
+      "destination": "SCL",
+      "ground_minutes": 55.0
+    },
+    {
+      "journey": "panam/panam-218@1986-03-01",
+      "origin": "POS",
+      "stop": "CCS",
+      "destination": "JFK",
+      "ground_minutes": 50.0
+    },
+    {
+      "journey": "panam/panam-467@1986-03-01",
+      "origin": "MIA",
+      "stop": "TPA",
+      "destination": "MEX",
+      "ground_minutes": 30.0
+    },
+    {
+      "journey": "panam/panam-456@1986-03-01",
+      "origin": "MEX",
+      "stop": "IAD",
+      "destination": "JFK",
+      "ground_minutes": 60.0
+    }
+  ],
+  "departure_table_vs_routing_chart_differences": [
+    {
+      "schedule": "panam-440-GIG-MIA-2359",
+      "departure_table_minutes": 496.0,
+      "routing_chart_minutes": 495,
+      "difference_minutes": 1.0,
+      "decision": "Exact departure-table times retained; routing chart supplies only an elapsed duration."
+    },
+    {
+      "schedule": "panam-456-MEX-IAD-0945",
+      "departure_table_minutes": 255.0,
+      "routing_chart_minutes": 240,
+      "difference_minutes": 15.0,
+      "decision": "Exact departure-table times retained; routing chart supplies only an elapsed duration."
+    },
+    {
+      "schedule": "panam-456-IAD-JFK-1600",
+      "departure_table_minutes": 78.0,
+      "routing_chart_minutes": 63,
+      "difference_minutes": 15.0,
+      "decision": "Exact departure-table times retained; routing chart supplies only an elapsed duration."
+    },
+    {
+      "schedule": "panam-457-JFK-IAD-1615",
+      "departure_table_minutes": 89.0,
+      "routing_chart_minutes": 74,
+      "difference_minutes": 15.0,
+      "decision": "Exact departure-table times retained; routing chart supplies only an elapsed duration."
+    },
+    {
+      "schedule": "panam-457-IAD-MEX-1810",
+      "departure_table_minutes": 270.0,
+      "routing_chart_minutes": 255,
+      "difference_minutes": 15.0,
+      "decision": "Exact departure-table times retained; routing chart supplies only an elapsed duration."
+    }
+  ],
+  "new_movements_by_flight": {
+    "201": 4,
+    "202": 5,
+    "217": 4,
+    "218": 4,
+    "409": 2,
+    "410": 2,
+    "440": 4,
+    "441": 5,
+    "442": 2,
+    "445": 2,
+    "453": 4,
+    "454": 2,
+    "456": 4,
+    "457": 5,
+    "463": 2,
+    "464": 2,
+    "467": 4,
+    "468": 2,
+    "498": 2,
+    "499": 4
+  },
+  "timezone_offsets_19860228": {
+    "America/Sao_Paulo": "-1 day, 22:00:00",
+    "America/Argentina/Buenos_Aires": "-1 day, 21:00:00",
+    "America/Santiago": "-1 day, 21:00:00",
+    "America/Caracas": "-1 day, 20:00:00",
+    "America/Port_of_Spain": "-1 day, 20:00:00",
+    "America/Mexico_City": "-1 day, 18:00:00"
+  },
+  "candidate_schedules_retained": 8,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "name": "unit_tests",
+      "exit_code": 0,
+      "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 1.512s\n\nOK\n"
+    },
+    {
+      "name": "generated_flights",
+      "exit_code": 0,
+      "output": "{\"registered_airlines\": 79, \"registered_countries\": 69, \"reviewed_schedules\": 821, \"animated_airlines\": 29, \"scheduled_movements\": 1246, \"confirmed_movements\": 1}\n"
+    },
+    {
+      "name": "country_index",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "stock_market",
+      "exit_code": 0,
+      "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+    }
+  ],
+  "package_file_changes": {
+    "changed": [
+      "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+      "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json",
+      "Tools/FlightResearch/README.md",
+      "Tools/FlightResearch/research/SOURCES.md",
+      "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+      "Tools/FlightResearch/research/nordic_priority.json"
+    ],
+    "added": [
+      "LAS_MIG_v19.txt",
+      "Tools/FlightResearch/research/validation_batch18.json",
+      "Tools/FlightResearch/research/panam_batch18.tsv",
+      "Tools/FlightResearch/research/airport_locations_batch18.json",
+      "Tools/FlightResearch/research/PANAM_AMERICAS_BATCH18.md",
+      "Tools/FlightResearch/research/batch_18.json"
+    ],
+    "removed": [
+      "LAS_MIG_v18.txt"
+    ]
+  }
+}

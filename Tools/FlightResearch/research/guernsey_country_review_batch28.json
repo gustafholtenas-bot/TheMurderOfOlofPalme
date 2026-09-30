@@ -1,0 +1,75 @@
+{
+  "batch": 28,
+  "package": "v29",
+  "country": "gg",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i landkön; inte en fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 34,
+  "domestic_movements": 0,
+  "international_movements": 34,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {
+    "air-uk": 34
+  },
+  "endpoint_leg_ids": [
+    "air-uk-130-GCI-LHR-0715@1986-02-28",
+    "air-uk-180-GCI-SOU-0725@1986-02-28",
+    "air-uk-181-SOU-GCI-0840@1986-02-28",
+    "air-uk-131-LHR-GCI-0850@1986-02-28",
+    "air-uk-182-GCI-SOU-0950@1986-02-28",
+    "air-uk-132-GCI-LHR-1100@1986-02-28",
+    "air-uk-133-LHR-GCI-1235@1986-02-28",
+    "air-uk-371-JER-GCI-1255@1986-02-28",
+    "air-uk-371-GCI-EXT-1320@1986-02-28",
+    "air-uk-134-GCI-LHR-1410@1986-02-28",
+    "air-uk-372-EXT-GCI-1425@1986-02-28",
+    "air-uk-372-GCI-JER-1515@1986-02-28",
+    "air-uk-135-LHR-GCI-1545@1986-02-28",
+    "air-uk-183-SOU-GCI-1640@1986-02-28",
+    "air-uk-136-GCI-LHR-1720@1986-02-28",
+    "air-uk-186-GCI-SOU-1750@1986-02-28",
+    "air-uk-137-LHR-GCI-1900@1986-02-28",
+    "air-uk-187-SOU-GCI-1930@1986-02-28",
+    "air-uk-130-GCI-LHR-0715@1986-03-01",
+    "air-uk-131-LHR-GCI-0850@1986-03-01",
+    "air-uk-182-GCI-SOU-0950@1986-03-01",
+    "air-uk-132-GCI-LHR-1100@1986-03-01",
+    "air-uk-185-SOU-GCI-1130@1986-03-01",
+    "air-uk-133-LHR-GCI-1235@1986-03-01",
+    "air-uk-184-GCI-SOU-1240@1986-03-01",
+    "air-uk-371-JER-GCI-1255@1986-03-01",
+    "air-uk-371-GCI-EXT-1320@1986-03-01",
+    "air-uk-189-SOU-GCI-1350@1986-03-01",
+    "air-uk-134-GCI-LHR-1410@1986-03-01",
+    "air-uk-372-EXT-GCI-1425@1986-03-01",
+    "air-uk-188-GCI-SOU-1500@1986-03-01",
+    "air-uk-372-GCI-JER-1515@1986-03-01",
+    "air-uk-135-LHR-GCI-1545@1986-03-01",
+    "air-uk-183-SOU-GCI-1640@1986-03-01"
+  ],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/uk/aurigny.htm",
+      "type": "index_checked",
+      "result": "Registret listar Aurigny 1 april–31 oktober 1985 och därefter april 1987; ingen importklar avgångssida för rätt vinter hittades."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/uk/guernsey.htm",
+      "type": "index_checked",
+      "result": "Guernsey Airlines-indexet har äldre utgåvor och 25 oktober 1987–31 mars 1988, men ingen läsbar 1985/86-avgångssida hittades."
+    },
+    {
+      "url": "https://www.ebay.com/itm/168703204467",
+      "type": "listing_photos_checked",
+      "result": "Alternativt Air UK-exemplar hittat. De två bilderna visar omslaget samt baksidan med försäljningsadresser, inte de saknade avgångssidorna. Ingen ny tidtabellsrad."
+    }
+  ],
+  "unresolved": [
+    "Aurigny och Guernsey Airlines: egna vintertabeller 1985/86, inklusive öförbindelser.",
+    "Air UK och andra bolag: resterande avgångssidor och säsongsändringar.",
+    "Ingen slutsats om total trafik kan dras från befintliga 34 ändpunktsrörelser."
+  ]
+}

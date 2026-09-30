@@ -1,0 +1,23 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "AAR",
+      "name": "Aarhus–Tirstrup",
+      "country": "dk",
+      "timezone": "Europe/Copenhagen",
+      "lat": 56.303331,
+      "lon": 10.618286,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EKAH",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.aar.dk/aarhus-airports-historie/",
+        "https://www.aar.dk/en/pilots-and-airlines/airport-data/",
+        "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf"
+      ],
+      "location_note": "Tirstrup airfield identity checked against airport authority history, including the 1981 civilian terminal and 1984 director. Approximate airfield coordinates, not a 1986 gate or aircraft position."
+    }
+  ],
+  "coordinate_dataset_sha256": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec"
+}

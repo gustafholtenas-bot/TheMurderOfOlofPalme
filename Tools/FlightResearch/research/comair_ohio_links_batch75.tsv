@@ -1,0 +1,61 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	comair-1629-DAY-DTW-0700-b75		new_schedule	comair	1629	DAY	DTW	07:00	08:00	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+2			excluded_connection	comair	1600/1592	DAY	DTW	08:25	10:41	0	X7	123456	CVG	67		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+3	comair-1712-DAY-DTW-0940-b75		new_schedule	comair	1712	DAY	DTW	09:40	10:40	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+4	comair-1572-DAY-DTW-1040-b75		new_schedule	comair	1572	DAY	DTW	10:40	11:35	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+5	comair-1643-DAY-DTW-1330-b75		new_schedule	comair	1643	DAY	DTW	13:30	14:25	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+6			excluded_connection	comair	1559/1564	DAY	DTW	14:00	16:25	0	X67	12345	CVG	67		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+7	comair-1721-DAY-DTW-1600-b75		new_schedule	comair	1721	DAY	DTW	16:00	16:55	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+8			excluded_connection	comair	1578/1594	DAY	DTW	17:25	19:35	0	X56	12347	CVG	67		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+9			excluded_connection	mixed_delta_comair_connection	1729/254	DAY	DTW	18:35	20:30	0	X6	123457	CVG	67		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+10	comair-1621-DTW-DAY-0700-b75		new_schedule	comair	1621	DTW	DAY	07:00	07:59	0	X7	123456	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+11			excluded_connection	mixed_delta_comair_connection	581/1572	DTW	DAY	08:00	09:59	0	X7	123456	CVG	73		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+12	comair-1712-DTW-DAY-0825-b75		new_schedule	comair	1712	DTW	DAY	08:25	09:25	0	X67	12345	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+13	comair-1714-DTW-DAY-1150-b75		new_schedule	comair	1714	DTW	DAY	11:50	12:50	0	X67	12345	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+14	comair-1559-DTW-DAY-1245-b75		new_schedule	comair	1559	DTW	DAY	12:45	13:45	0	X67	12345	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+15	comair-1721-DTW-DAY-1445-b75		new_schedule	comair	1721	DTW	DAY	14:45	15:40	0	X67	12345	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+16	comair-1631-DTW-DAY-1715-b75		new_schedule	comair	1631	DTW	DAY	17:15	18:19	0	X6	123457	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+17			excluded_connection	comair	1623/1677	DTW	DAY	18:10	20:42	0	X6	123457	CVG	73		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+18	comair-1603-DTW-CLE-2005-b75		new_schedule	comair	1603	DTW	CLE	20:05	20:40	0	X6	123457	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+19			excluded_connection	mixed_delta_comair_connection	271/1630	CLE	FWA	08:00	09:59	0	X67	12345	CVG	53		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+20	comair-1663-CLE-FWA-1020-b75		new_schedule	comair	1663	CLE	FWA	10:20	11:20	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+21	comair-1664-CLE-FWA-1440-b75		new_schedule	comair	1664	CLE	FWA	14:40	15:40	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+22			excluded_connection	mixed_delta_comair_connection	479/1606	CLE	FWA	17:00	19:20	0	X6	123457	CVG	53		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+23	comair-1688-CLE-FWA-1710-b75		new_schedule	comair	1688	CLE	FWA	17:10	18:10	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+24			excluded_connection	comair	1649/1587	CLE	FWA	18:05	20:45	0	X6	123457	CVG	53		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+25			excluded_connection	mixed_delta_comair_connection	1555/1112	FWA	CLE	06:55	08:50	0	X7	123456	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+26	comair-1662-FWA-CLE-0905-b75		new_schedule	comair	1662	FWA	CLE	09:05	09:59	0	X67	12345	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+27	comair-1685-FWA-CLE-1325-b75		new_schedule	comair	1685	FWA	CLE	13:25	14:25	0	X67	12345	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+28			excluded_connection	mixed_delta_comair_connection	1579/334	FWA	CLE	13:50	16:10	0	X7	123456	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+29	comair-1664-FWA-CLE-1555-b75		new_schedule	comair	1664	FWA	CLE	15:55	16:55	0	X67	12345	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+30			excluded_connection	comair	1675/1716	FWA	CLE	17:00	19:35	0	X6	123457	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+31			excluded_connection	mixed_delta_comair_connection	1688/1164	FWA	CLE	18:25	20:30	0	X67	12345	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+32	comair-1575-CLE-MKE-0815-b75		new_schedule	comair	1575	CLE	MKE	08:15	08:45	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+33	comair-1687-CLE-MKE-0950-b75		new_schedule	comair	1687	CLE	MKE	09:50	10:15	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+34			excluded_connection	comair	1609/1567	CLE	MKE	10:50	14:10	0	X67	12345	CVG	53		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+35	comair-1583-CLE-MKE-1600-b75		new_schedule	comair	1583	CLE	MKE	16:00	16:25	0	X6	123457	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+36	comair-1693-CLE-MKE-1730-b75		new_schedule	comair	1693	CLE	MKE	17:30	17:55	0	X6	123457	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+37	comair-1683-MKE-CLE-0715-b75		new_schedule	comair	1683	MKE	CLE	07:15	09:35	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+38	comair-1724-MKE-CLE-0900-b75		new_schedule	comair	1724	MKE	CLE	09:00	11:25	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+39	comair-1687-MKE-CLE-1100-b75		new_schedule	comair	1687	MKE	CLE	11:00	13:25	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+40			excluded_connection	mixed_delta_comair_connection	1579/334	MKE	CLE	11:30	16:10	0	6	6	CVG	154		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+41			excluded_connection	comair	1589/1655	MKE	CLE	13:25	18:05	0	X67	12345	IND	154		delta-19860201	1986-02-01				Printed connection via IND; component legs are not inferred.
+42	comair-1584-MKE-CLE-1650-b75		new_schedule	comair	1584	MKE	CLE	16:50	19:15	0	X6	123457	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+43			excluded_connection	comair	1600/1630	DAY	FWA	08:25	09:59	0	X67	12345	CVG	68		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+44			excluded_connection	comair	1559/1674	DAY	FWA	14:00	16:05	0	X67	12345	CVG	68		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+45			excluded_connection	comair	1578/1606	DAY	FWA	17:25	19:20	0	X6	123457	CVG	68		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+46			excluded_connection	comair	1729/1587	DAY	FWA	18:35	20:45	0	X6	123457	CVG	68		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+47			excluded_connection	comair	1555/1572	FWA	DAY	06:55	09:59	0	X7	123456	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+48			excluded_connection	comair	1579/1642	FWA	DAY	13:50	15:49	0	X67	12345	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+49			excluded_connection	comair	1675/1543	FWA	DAY	17:00	18:55	0	X6	123457	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+50			excluded_connection	comair	1688/1677	FWA	DAY	18:25	20:42	0	X67	12345	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+51			excluded_through_service	comair	1575	DAY	MKE	07:00	08:45	0	X67	12345	1	68		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+52			excluded_connection	comair	1697/1687	DAY	MKE	08:10	10:15	0	X67	12345	CLE	68		delta-19860201	1986-02-01				Printed connection via CLE; component legs are not inferred.
+53			excluded_connection	comair	1559/1619	DAY	MKE	14:00	15:33	0	X67	12345	CVG	68		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+54			excluded_through_service	comair	1583	DAY	MKE	14:35	16:25	0	X6	123457	1	68		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+55			excluded_connection	comair	1642/1693	DAY	MKE	16:00	17:55	0	X6	123457	CLE	68		delta-19860201	1986-02-01				Printed connection via CLE; component legs are not inferred.
+56			excluded_through_service	comair	1578	DAY	MKE	17:25	18:50	0	X6	123457	1	68		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+57			excluded_connection	comair	1544/1572	MKE	DAY	06:25	09:59	0	X67	12345	CVG	154		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+58			excluded_connection	comair	1724/1596	MKE	DAY	09:00	12:45	0	X67	12345	CLE	154		delta-19860201	1986-02-01				Printed connection via CLE; component legs are not inferred.
+59			excluded_connection	comair	1687/1578	MKE	DAY	11:00	16:35	0	X67	12345	CLE	154		delta-19860201	1986-02-01				Printed connection via CLE; component legs are not inferred.
+60			excluded_through_service	comair	1584	MKE	DAY	16:50	20:30	0	X6	123457	1	154		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.

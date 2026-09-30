@@ -1,0 +1,827 @@
+{
+  "package": "v35",
+  "batch": 34,
+  "checked_on": "2026-09-28",
+  "new_reviewed_schedules": 56,
+  "new_candidate_schedules": 0,
+  "new_movements": 89,
+  "total_movements": 2121,
+  "unchanged_previous_movements": 2032,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "CGN"
+  ],
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_movements_by_source_airline": {
+    "air-france": 45,
+    "lufthansa": 44
+  },
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "unchanged_plugin_files": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs"
+  ],
+  "calendar_and_utc_checks": [
+    {
+      "schedule": "lufthansa-124-CGN-CDG-0810-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH124",
+      "printed_days": "123456-",
+      "local_departure": "08:10",
+      "local_arrival": "09:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-751-CGN-CDG-1945-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF751",
+      "printed_days": "12345-7",
+      "local_departure": "19:45",
+      "local_arrival": "20:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-125-CDG-CGN-1030-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH125",
+      "printed_days": "123456-",
+      "local_departure": "10:30",
+      "local_arrival": "11:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-750-CDG-CGN-1800-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF750",
+      "printed_days": "12345-7",
+      "local_departure": "18:00",
+      "local_arrival": "19:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-130-DUS-CDG-0745-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH130",
+      "printed_days": "123456-",
+      "local_departure": "07:45",
+      "local_arrival": "08:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-763-DUS-CDG-0910-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF763",
+      "printed_days": "1234567",
+      "local_departure": "09:10",
+      "local_arrival": "10:15",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-765-DUS-CDG-1300-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF765",
+      "printed_days": "123456-",
+      "local_departure": "13:00",
+      "local_arrival": "14:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-134-DUS-CDG-1730-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH134",
+      "printed_days": "1234567",
+      "local_departure": "17:30",
+      "local_arrival": "18:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-767-DUS-CDG-2015-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF767",
+      "printed_days": "12345-7",
+      "local_departure": "20:15",
+      "local_arrival": "21:20",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-762-CDG-DUS-0740-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF762",
+      "printed_days": "123456-",
+      "local_departure": "07:40",
+      "local_arrival": "08:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-131-CDG-DUS-0950-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH131",
+      "printed_days": "1234567",
+      "local_departure": "09:50",
+      "local_arrival": "10:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-764-CDG-DUS-1455-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF764",
+      "printed_days": "12345-7",
+      "local_departure": "14:55",
+      "local_arrival": "16:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-766-CDG-DUS-1815-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF766",
+      "printed_days": "1234567",
+      "local_departure": "18:15",
+      "local_arrival": "19:20",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-135-CDG-DUS-1910-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH135",
+      "printed_days": "12345-7",
+      "local_departure": "19:10",
+      "local_arrival": "20:15",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-741-FRA-CDG-0800-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF741",
+      "printed_days": "123456-",
+      "local_departure": "08:00",
+      "local_arrival": "09:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-110-FRA-CDG-0855-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH110",
+      "printed_days": "1234567",
+      "local_departure": "08:55",
+      "local_arrival": "10:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-743-FRA-CDG-0945-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF743",
+      "printed_days": "1234567",
+      "local_departure": "09:45",
+      "local_arrival": "10:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-112-FRA-CDG-1250-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH112",
+      "printed_days": "1234567",
+      "local_departure": "12:50",
+      "local_arrival": "14:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-747-FRA-CDG-1615-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF747",
+      "printed_days": "1234567",
+      "local_departure": "16:15",
+      "local_arrival": "17:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-114-FRA-CDG-1650-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH114",
+      "printed_days": "1234567",
+      "local_departure": "16:50",
+      "local_arrival": "18:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-749-FRA-CDG-2035-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF749",
+      "printed_days": "12345-7",
+      "local_departure": "20:35",
+      "local_arrival": "21:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-116-FRA-CDG-2120-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH116",
+      "printed_days": "1234567",
+      "local_departure": "21:20",
+      "local_arrival": "22:30",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-111-CDG-FRA-0725-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH111",
+      "printed_days": "1234567",
+      "local_departure": "07:25",
+      "local_arrival": "08:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-740-CDG-FRA-0735-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF740",
+      "printed_days": "1234567",
+      "local_departure": "07:35",
+      "local_arrival": "08:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-113-CDG-FRA-1055-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH113",
+      "printed_days": "1234567",
+      "local_departure": "10:55",
+      "local_arrival": "12:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-744-CDG-FRA-1420-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF744",
+      "printed_days": "1234567",
+      "local_departure": "14:20",
+      "local_arrival": "15:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-115-CDG-FRA-1445-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH115",
+      "printed_days": "1234567",
+      "local_departure": "14:45",
+      "local_arrival": "15:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-746-CDG-FRA-1820-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF746",
+      "printed_days": "12345-7",
+      "local_departure": "18:20",
+      "local_arrival": "19:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-117-CDG-FRA-1855-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH117",
+      "printed_days": "1234567",
+      "local_departure": "18:55",
+      "local_arrival": "20:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-748-CDG-FRA-1925-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF748",
+      "printed_days": "12345-7",
+      "local_departure": "19:25",
+      "local_arrival": "20:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-771-HAM-CDG-0800-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF771",
+      "printed_days": "123456-",
+      "local_departure": "08:00",
+      "local_arrival": "09:30",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-773-HAM-CDG-1435-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF773",
+      "printed_days": "1234567",
+      "local_departure": "14:35",
+      "local_arrival": "16:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-122-HAM-CDG-1950-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH122",
+      "printed_days": "12345-7",
+      "local_departure": "19:50",
+      "local_arrival": "21:20",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-121-CDG-HAM-0810-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH121",
+      "printed_days": "123456-",
+      "local_departure": "08:10",
+      "local_arrival": "09:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-772-CDG-HAM-1220-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF772",
+      "printed_days": "1234567",
+      "local_departure": "12:20",
+      "local_arrival": "13:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-770-CDG-HAM-2010-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF770",
+      "printed_days": "12345-7",
+      "local_departure": "20:10",
+      "local_arrival": "21:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-140-MUC-RIEM-CDG-0825-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH140",
+      "printed_days": "123456-",
+      "local_departure": "08:25",
+      "local_arrival": "09:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-731-MUC-RIEM-CDG-0955-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF731",
+      "printed_days": "1234567",
+      "local_departure": "09:55",
+      "local_arrival": "11:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-142-MUC-RIEM-CDG-1310-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH142",
+      "printed_days": "12345-7",
+      "local_departure": "13:10",
+      "local_arrival": "14:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-733-MUC-RIEM-CDG-1950-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF733",
+      "printed_days": "12345-7",
+      "local_departure": "19:50",
+      "local_arrival": "21:20",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-730-CDG-MUC-RIEM-0745-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF730",
+      "printed_days": "123456-",
+      "local_departure": "07:45",
+      "local_arrival": "09:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-143-CDG-MUC-RIEM-0925-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH143",
+      "printed_days": "123456-",
+      "local_departure": "09:25",
+      "local_arrival": "10:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-145-CDG-MUC-RIEM-1515-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH145",
+      "printed_days": "12345-7",
+      "local_departure": "15:15",
+      "local_arrival": "16:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-732-CDG-MUC-RIEM-1740-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF732",
+      "printed_days": "1234567",
+      "local_departure": "17:40",
+      "local_arrival": "19:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-565-FRA-LYS-1005-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF565",
+      "printed_days": "12345--",
+      "local_departure": "10:05",
+      "local_arrival": "11:20",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-158-FRA-LYS-1655-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH158",
+      "printed_days": "12345-7",
+      "local_departure": "16:55",
+      "local_arrival": "18:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-1780-LYS-FRA-0715-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF1780",
+      "printed_days": "12345--",
+      "local_departure": "07:15",
+      "local_arrival": "08:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-159-LYS-FRA-1910-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH159",
+      "printed_days": "12345-7",
+      "local_departure": "19:10",
+      "local_arrival": "20:30",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-150-FRA-NCE-1615-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH150",
+      "printed_days": "-2-4567",
+      "local_departure": "16:15",
+      "local_arrival": "17:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-151-NCE-FRA-1840-d56-b34",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "LH151",
+      "printed_days": "-2-4567",
+      "local_departure": "18:40",
+      "local_arrival": "20:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-1735-MUC-RIEM-NCE-1840-d6-b34",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF1735",
+      "printed_days": "---4-67",
+      "local_departure": "18:40",
+      "local_arrival": "20:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-1734-NCE-MUC-RIEM-1650-d6-b34",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF1734",
+      "printed_days": "---4-67",
+      "local_departure": "16:50",
+      "local_arrival": "18:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-757-STR-CDG-0910-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF757",
+      "printed_days": "12345--",
+      "local_departure": "09:10",
+      "local_arrival": "10:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-136-STR-CDG-1855-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH136",
+      "printed_days": "12345-7",
+      "local_departure": "18:55",
+      "local_arrival": "20:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-756-CDG-STR-0720-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF756",
+      "printed_days": "12345--",
+      "local_departure": "07:20",
+      "local_arrival": "08:30",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "lufthansa-137-CDG-STR-2045-d5-b34",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "LH137",
+      "printed_days": "12345-7",
+      "local_departure": "20:45",
+      "local_arrival": "21:55",
+      "utc_offset": "+01:00"
+    }
+  ],
+  "source_files_sha256": {
+    "/tmp/batch23/af851027-1a.pdf": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+    "/tmp/batch34/luxair-cover.jpg": "3a5cb7881b3076c033a134f2ee3c1a49e9bd478abbb8188272e3f14fbd842c4c",
+    "/tmp/batch34/luxairport-cover.jpg": "37d91647bdc21a84a1c9eeefcdd97ed9c9d063d1fa78ef63b17c56049b5dda07",
+    "/tmp/batch34/lufthansa-cover.jpg": "30b3af883c7f2f3c0092267227f4658066df079c10b1c3dda164173f1d6d240f",
+    "/tmp/batch34/luxavia1.jpg": "2b00bcaf8eea03378dfe274c2eb7317da2c7a57ec34ff0ff4e5787f3604e72dd",
+    "/tmp/batch34/luxavia2.jpg": "33b2d728af15e6250f459ca1d24e1826cb356b44baf2ff34718f374977216899",
+    "/tmp/batch34/lufthansa-gallery.html": "743022bff7fba3b817ffb3b28cc0856f2714f215c51e67dae172b1f0198be38a"
+  },
+  "cover_only_sources_create_no_schedules": true,
+  "europe_country_rows_checked": 40,
+  "country_endpoint_totals": {
+    "lu": 0,
+    "de-west": 307
+  },
+  "nordic_endpoint_movements": 155,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "01e5f9",
+        "wall_time_seconds": 2.515460049,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.551s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "3f41f2",
+        "wall_time_seconds": 0.19841291,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 85, \"registered_countries\": 73, \"reviewed_schedules\": 1469, \"animated_airlines\": 39, \"scheduled_movements\": 2120, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "906c9e",
+        "wall_time_seconds": 0.032566802,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "65937d",
+        "wall_time_seconds": 0.055044021,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c968c1",
+        "wall_time_seconds": 1.7015e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d69dff",
+        "wall_time_seconds": 2.8062e-05,
+        "exit_code": 0,
+        "original_token_count": 98,
+        "output": "{'id': 'lu', 'endpoint_movements': 0, 'domestic_movements': 0, 'international_movements': 0, 'movements_by_source_airline': {}}\n{'id': 'de-west', 'endpoint_movements': 307, 'domestic_movements': 3, 'international_movements': 304, 'movements_by_source_airline': {'aeroflot': 2, 'air-france': 45, 'delta': 4, 'jal': 3, 'lap': 2, 'lufthansa': 60, 'northwest': 4, 'panam': 175, 'swissair': 12}}\n"
+      }
+    }
+  ]
+}

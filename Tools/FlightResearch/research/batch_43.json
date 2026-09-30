@@ -1,0 +1,118 @@
+{
+  "batch": 43,
+  "package": "v44",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2338,
+  "new_schedules": 11,
+  "new_schedule_ids": [
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d5-b43",
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d6-b43",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d5-b43",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d6-b43",
+    "olympic-202-ORY-ATH-ELLINIKON-1245-d6-b43",
+    "olympic-201-ATH-ELLINIKON-ORY-0915-d6-b43",
+    "olympic-216-MRS-ATH-ELLINIKON-1140-d6-b43",
+    "olympic-215-ATH-ELLINIKON-MRS-0910-d6-b43",
+    "air-france-624-NCE-ATH-ELLINIKON-1455-d6-b43",
+    "air-france-625-ATH-ELLINIKON-NCE-1900-d6-b43",
+    "air-france-164-CDG-LCA-2215-d6-b43"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 6,
+  "new_airports": [
+    "LCA"
+  ],
+  "new_country_ids": [
+    "cy"
+  ],
+  "new_airline_ids": [
+    "cyprus-airways"
+  ],
+  "new_source_ids": [
+    "olympic-19851027-covers",
+    "cyprus-airways-19851027-advance2-partial",
+    "cyprus-turkish-airlines-archive-index"
+  ],
+  "updated_source_ids": [
+    "air-france-19851027-no25"
+  ],
+  "unchanged_previous_movements": 2338,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "tr",
+  "reviewed_countries_this_batch": [
+    "gr",
+    "cy"
+  ],
+  "new_movements": 11,
+  "total_movements": 2349,
+  "new_leg_ids": [
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d5-b43@1986-02-28",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d5-b43@1986-02-28",
+    "olympic-215-ATH-ELLINIKON-MRS-0910-d6-b43@1986-03-01",
+    "olympic-201-ATH-ELLINIKON-ORY-0915-d6-b43@1986-03-01",
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d6-b43@1986-03-01",
+    "olympic-216-MRS-ATH-ELLINIKON-1140-d6-b43@1986-03-01",
+    "olympic-202-ORY-ATH-ELLINIKON-1245-d6-b43@1986-03-01",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d6-b43@1986-03-01",
+    "air-france-624-NCE-ATH-ELLINIKON-1455-d6-b43@1986-03-01",
+    "air-france-625-ATH-ELLINIKON-NCE-1900-d6-b43@1986-03-01",
+    "air-france-164-CDG-LCA-2215-d6-b43@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 7,
+    "olympic": 4
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "ATH-ELLINIKON",
+      "CDG"
+    ],
+    [
+      "ATH-ELLINIKON",
+      "MRS"
+    ],
+    [
+      "ATH-ELLINIKON",
+      "NCE"
+    ],
+    [
+      "ATH-ELLINIKON",
+      "ORY"
+    ],
+    [
+      "CDG",
+      "ATH-ELLINIKON"
+    ],
+    [
+      "CDG",
+      "LCA"
+    ],
+    [
+      "MRS",
+      "ATH-ELLINIKON"
+    ],
+    [
+      "NCE",
+      "ATH-ELLINIKON"
+    ],
+    [
+      "ORY",
+      "ATH-ELLINIKON"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 632,
+  "runtime_coverage": {
+    "registered_airlines": 92,
+    "registered_countries": 81,
+    "reviewed_schedules": 1627,
+    "animated_airlines": 46,
+    "scheduled_movements": 2348,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

@@ -1,0 +1,66 @@
+{
+  "batch": 48,
+  "package": "v49",
+  "checked_on": "2026-09-29",
+  "rows": [
+    {
+      "flight": "EI604/606/608",
+      "route": "DUB–AMS",
+      "source": "aer-lingus-19851027-winter",
+      "page": "8",
+      "reason": "Composite flight number 604/606/608 lacks a day-to-number mapping. Daily except Saturday 15:45–18:15 is not assigned an invented code.",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "flight": "SK542",
+      "route": "DUB–CPH via MAN",
+      "source": "aer-lingus-19851027-winter",
+      "page": "9",
+      "reason": "Wednesday/Friday/Sunday 15:20–19:20 via Manchester lacks separately timed intermediate legs.",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "flight": "EI777",
+      "route": "DUB–SNN–ORK",
+      "source": "aer-lingus-19851027-winter",
+      "page": "9,19",
+      "reason": "DUB–ORK 21:25–22:40 via Shannon and MAN–SNN 20:00–22:00 via Dublin lack a separately printed complete DUB–SNN or SNN–ORK row. Earlier MAN–DUB remains unchanged.",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "flight": "EI113",
+      "route": "DUB–BOS via SNN",
+      "source": "aer-lingus-19851027-winter",
+      "page": "8",
+      "reason": "Saturday Jan 11–Mar 2 11:30–14:35 via Shannon has no intermediate times. The same departure number in a through connection is not another physical flight.",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "flight": "EI457",
+      "route": "LGW–DUB",
+      "source": "dan-air-19851027-system",
+      "page": "12",
+      "reason": "Dan-Air says 19:55–21:10 daily; Aer Lingus winter page 18 agrees with the already imported Dublin guide: 19:45–21:00 daily except Saturday. No alternative or extra Saturday service imported.",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "flight": "EI456",
+      "route": "DUB–LGW",
+      "source": "dan-air-19851027-system",
+      "page": "9",
+      "reason": "Daily 17:55–19:10 is deferred for an own-timetable cross-check after the related EI457 discrepancy. This is a deferral, not evidence that EI456 itself conflicts.",
+      "review_status": "research_only",
+      "imported": false
+    }
+  ],
+  "additional_exclusions": [
+    "Sunday-only and Monday/Thursday-only rows are outside the two import days.",
+    "Expired variants and connections with incomplete physical legs are not imported.",
+    "No assumed reverse services, aircraft types or registrations."
+  ]
+}

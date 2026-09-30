@@ -1,0 +1,65 @@
+{
+  "batch": 41,
+  "package": "v42",
+  "country": "ro",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 3,
+  "domestic_movements": 0,
+  "international_movements": 3,
+  "new_movements": 3,
+  "endpoint_movements_by_source_airline": {
+    "air-france": 1,
+    "tarom": 2
+  },
+  "endpoint_leg_ids": [
+    "air-france-718-ORY-OTP-0900-d5-b41@1986-02-28",
+    "tarom-211-OTP-ORY-1215-d6-b41@1986-03-01",
+    "tarom-212-ORY-OTP-1430-d6-b41@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "air-france-718-ORY-OTP-0900-d5-b41@1986-02-28",
+    "tarom-211-OTP-ORY-1215-d6-b41@1986-03-01",
+    "tarom-212-ORY-OTP-1430-d6-b41@1986-03-01"
+  ],
+  "research_only_rows": 1,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Tryckta s. 21 och 63: AF718 Orly–Otopeni fredag, RO212 Orly–Otopeni lördag och RO211 Otopeni–Orly lördag. Samtliga tre har nonstop-pil. Orly UTC+1, Otopeni UTC+2."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "through_itinerary_excluded",
+      "result": "AF719 saknar nonstop-pil på s. 21. S. 10 anger Bucarest–Sofia–Paris. Hela OTP–ORY-raden importeras inte; tidssatta mellansegment saknas."
+    },
+    {
+      "url": "https://airtimes.com/cgat/ro/tarom.htm",
+      "type": "edition_index_with_date_typo",
+      "result": "Indexet skriver 10-27-75---03-29-86. Det registreras som misstänkt felskrift, inte som verifierad giltighet. Ingen läsbar vinterinlaga hittad."
+    },
+    {
+      "url": "https://airtimes.com/cgat/ro/tarom/gal/rogal1a80.htm",
+      "type": "gallery_missing_scan",
+      "result": "Posten 27 oktober ligger under 1985 men pekar på en bildplatshållare. Ingen läst omslagsbild. Länkad vinter-PDF från oktober 1986 avser nästa vinter och används inte."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/ro.htm",
+      "type": "edition_index",
+      "result": "1986 års sommaromslag och äldre kompletta tabeller tillför inga vintertider för observationsfönstret."
+    },
+    {
+      "url": "https://ourairports.com/airports/LROP/",
+      "type": "coordinate_reference",
+      "result": "OTP/LROP: 44.571792, 26.103285 ur den granskade OurAirports-filen. Ungefärlig modern platsmarkör för det samtida Otopeni, inte Băneasa eller en rekonstruerad terminalposition."
+    }
+  ],
+  "unresolved": [
+    "TAROM:s fullständiga internationella och inrikes vintertabeller med ändringar återstår. Indexets årtalsfelskrift får inte behandlas som verifierade utgåvedatum. Ett publiceringsindex eller sommaromslag belägger inga vinteravgångar.",
+    "Bukarest–Sofia behöver båda tider för en belagd fysisk delsträcka. AF719:s genomgående ankomst till Paris och AFLZ706:s ankomst till Sofia får inte korskopplas till en påhittad delsträcka.",
+    "Băneasa, regionala flygplatser, andra utrikes- och inrikeslinjer samt andra operatörer behöver inventeras i periodriktiga källor. Charter, frakt, stats-, privat-, militär-, arbets- och helikopterflyg är ofullständigt undersökta. Faktiska flygningar och överflygningar är inte belagda."
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "batch": 33,
+  "package": "v34",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2001,
+  "new_schedules": 24,
+  "new_schedule_ids": [
+    "sabena-1937-BRU-LYS-1005-d5-b33",
+    "sabena-1931-BRU-LYS-1055-d6-b33",
+    "sabena-1933-BRU-LYS-2115-d5-b33",
+    "sabena-669-BRU-NCE-1125-d6-b33",
+    "air-france-1927-BRU-NCE-1900-d5-b33",
+    "sabena-639-BRU-CDG-0801-d56-b33",
+    "sabena-643-BRU-CDG-1120-d56-b33",
+    "sabena-645-BRU-CDG-1500-d5-b33",
+    "sabena-647-BRU-CDG-1825-d56-b33",
+    "sabena-649-BRU-CDG-2000-d5-b33",
+    "air-france-1935-BRU-SXB-0835-d5-b33",
+    "air-france-1929-BRU-SXB-2000-d5-b33",
+    "air-france-638-CDG-BRU-0805-d56-b33",
+    "air-france-642-CDG-BRU-0930-d56-b33",
+    "air-france-644-CDG-BRU-1310-d56-b33",
+    "air-france-646-CDG-BRU-1630-d5-b33",
+    "air-france-648-CDG-BRU-2015-d56-b33",
+    "air-france-1932-LYS-BRU-0810-d5-b33",
+    "air-france-1938-LYS-BRU-0850-d6-b33",
+    "air-france-1936-LYS-BRU-1915-d5-b33",
+    "sabena-670-NCE-BRU-1400-d6-b33",
+    "air-france-1926-NCE-BRU-1640-d5-b33",
+    "air-france-1934-SXB-BRU-0710-d5-b33",
+    "air-france-1928-SXB-BRU-1820-d5-b33"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "SXB"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "sabena-19851027-world"
+  ],
+  "unchanged_previous_movements": 2001,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "lu",
+  "reviewed_countries_this_batch": [
+    "be"
+  ],
+  "new_movements": 31,
+  "total_movements": 2032,
+  "new_leg_ids": [
+    "air-france-1934-SXB-BRU-0710-d5-b33@1986-02-28",
+    "sabena-639-BRU-CDG-0801-d56-b33@1986-02-28",
+    "air-france-638-CDG-BRU-0805-d56-b33@1986-02-28",
+    "air-france-1932-LYS-BRU-0810-d5-b33@1986-02-28",
+    "air-france-1935-BRU-SXB-0835-d5-b33@1986-02-28",
+    "air-france-642-CDG-BRU-0930-d56-b33@1986-02-28",
+    "sabena-1937-BRU-LYS-1005-d5-b33@1986-02-28",
+    "sabena-643-BRU-CDG-1120-d56-b33@1986-02-28",
+    "air-france-644-CDG-BRU-1310-d56-b33@1986-02-28",
+    "sabena-645-BRU-CDG-1500-d5-b33@1986-02-28",
+    "air-france-646-CDG-BRU-1630-d5-b33@1986-02-28",
+    "air-france-1926-NCE-BRU-1640-d5-b33@1986-02-28",
+    "air-france-1928-SXB-BRU-1820-d5-b33@1986-02-28",
+    "sabena-647-BRU-CDG-1825-d56-b33@1986-02-28",
+    "air-france-1927-BRU-NCE-1900-d5-b33@1986-02-28",
+    "air-france-1936-LYS-BRU-1915-d5-b33@1986-02-28",
+    "air-france-1929-BRU-SXB-2000-d5-b33@1986-02-28",
+    "sabena-649-BRU-CDG-2000-d5-b33@1986-02-28",
+    "air-france-648-CDG-BRU-2015-d56-b33@1986-02-28",
+    "sabena-1933-BRU-LYS-2115-d5-b33@1986-02-28",
+    "sabena-639-BRU-CDG-0801-d56-b33@1986-03-01",
+    "air-france-638-CDG-BRU-0805-d56-b33@1986-03-01",
+    "air-france-1938-LYS-BRU-0850-d6-b33@1986-03-01",
+    "air-france-642-CDG-BRU-0930-d56-b33@1986-03-01",
+    "sabena-1931-BRU-LYS-1055-d6-b33@1986-03-01",
+    "sabena-643-BRU-CDG-1120-d56-b33@1986-03-01",
+    "sabena-669-BRU-NCE-1125-d6-b33@1986-03-01",
+    "air-france-644-CDG-BRU-1310-d56-b33@1986-03-01",
+    "sabena-670-NCE-BRU-1400-d6-b33@1986-03-01",
+    "sabena-647-BRU-CDG-1825-d56-b33@1986-03-01",
+    "air-france-648-CDG-BRU-2015-d56-b33@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 18,
+    "sabena": 13
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BRU",
+      "CDG"
+    ],
+    [
+      "BRU",
+      "LYS"
+    ],
+    [
+      "BRU",
+      "NCE"
+    ],
+    [
+      "BRU",
+      "SXB"
+    ],
+    [
+      "CDG",
+      "BRU"
+    ],
+    [
+      "LYS",
+      "BRU"
+    ],
+    [
+      "NCE",
+      "BRU"
+    ],
+    [
+      "SXB",
+      "BRU"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 540,
+  "runtime_coverage": {
+    "registered_airlines": 83,
+    "registered_countries": 72,
+    "reviewed_schedules": 1413,
+    "animated_airlines": 39,
+    "scheduled_movements": 2031,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

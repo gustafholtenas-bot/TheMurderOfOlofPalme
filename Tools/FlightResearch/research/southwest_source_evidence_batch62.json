@@ -1,0 +1,283 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://www.departedflights.com/WN011286intro.html",
+  "publication_index_url": "https://www.airtimes.com/cgat/usc/southwest.htm",
+  "next_catalogued_edition": "1986-03-18",
+  "reviewed_city_sections": [
+    {
+      "city": "Amarillo",
+      "pages": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "city": "Austin",
+      "pages": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "city": "Corpus Christi",
+      "pages": [
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "city": "Denver",
+      "pages": [
+        16,
+        17
+      ]
+    },
+    {
+      "city": "Houston Intercontinental",
+      "pages": [
+        24,
+        25
+      ]
+    },
+    {
+      "city": "Lubbock",
+      "pages": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "city": "Midland/Odessa",
+      "pages": [
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "city": "New Orleans",
+      "pages": [
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "city": "Oklahoma City",
+      "pages": [
+        40,
+        41,
+        42
+      ]
+    },
+    {
+      "city": "Harlingen",
+      "pages": [
+        46,
+        47,
+        48
+      ]
+    },
+    {
+      "city": "San Antonio",
+      "pages": [
+        48,
+        49,
+        50,
+        51
+      ]
+    }
+  ],
+  "additional_correction_pages": [
+    3,
+    20
+  ],
+  "scans": [
+    {
+      "printed_pages": [
+        3,
+        4
+      ],
+      "url": "https://www.departedflights.com/WN011286p3.jpg",
+      "sha256": "0908654dcbee789b8e8672c105e939c88d299181fac065e9b90ef66421536e35",
+      "size_bytes": 544229
+    },
+    {
+      "printed_pages": [
+        5,
+        6
+      ],
+      "url": "https://www.departedflights.com/WN011286p5.jpg",
+      "sha256": "0fe3c3cd9da53f7600e12c889415208eef937f5bea05139b83669cc12a6603f4",
+      "size_bytes": 549823
+    },
+    {
+      "printed_pages": [
+        7,
+        8
+      ],
+      "url": "https://www.departedflights.com/WN011286p7.jpg",
+      "sha256": "d1336df90fff2e1b1ab1896fd6e703d297ac9911286ca71955333b3e0a66d1f5",
+      "size_bytes": 576581
+    },
+    {
+      "printed_pages": [
+        9,
+        10
+      ],
+      "url": "https://www.departedflights.com/WN011286p9.jpg",
+      "sha256": "2c93a63dbeabe01cadcfa31e27660b112b20f0fd3b493f5278c87cafe3293297",
+      "size_bytes": 538236
+    },
+    {
+      "printed_pages": [
+        11,
+        12
+      ],
+      "url": "https://www.departedflights.com/WN011286p11.jpg",
+      "sha256": "cf8cce266da032b45f530625bdf34f8ca592915c331a98913dc9ff2fafb0d1df",
+      "size_bytes": 548320
+    },
+    {
+      "printed_pages": [
+        13,
+        14
+      ],
+      "url": "https://www.departedflights.com/WN011286p13.jpg",
+      "sha256": "e455b12ec7b8128bbc8efdfa4de78138f42fb566cdd328613b6fb146f6d65369",
+      "size_bytes": 562403
+    },
+    {
+      "printed_pages": [
+        15,
+        16
+      ],
+      "url": "https://www.departedflights.com/WN011286p15.jpg",
+      "sha256": "eed76f6e0bba4f2896caae14b38fa0476962a301ff28db8877c1fda9632d2b25",
+      "size_bytes": 564785
+    },
+    {
+      "printed_pages": [
+        17,
+        18
+      ],
+      "url": "https://www.departedflights.com/WN011286p17.jpg",
+      "sha256": "903a9591e21be0b34dfb76e5c6f35672622e0844e0b556bb727f2b002cc69b6b",
+      "size_bytes": 559232
+    },
+    {
+      "printed_pages": [
+        19,
+        20
+      ],
+      "url": "https://www.departedflights.com/WN011286p19.jpg",
+      "sha256": "ad0065c8d6b617444f902ee46549e7b0a848cb2dfe9db8f9fb6462500f4adeff",
+      "size_bytes": 550053
+    },
+    {
+      "printed_pages": [
+        23,
+        24
+      ],
+      "url": "https://www.departedflights.com/WN011286p23.jpg",
+      "sha256": "87d52bd261aa4bd89cea4e8953300fa85be851fc6b5c201a033cae30b43eb7ae",
+      "size_bytes": 566786
+    },
+    {
+      "printed_pages": [
+        25,
+        26
+      ],
+      "url": "https://www.departedflights.com/WN011286p25.jpg",
+      "sha256": "fc1ce48c93a422d2e1b5aa32c959ce8879ec94dab71e5822405241d78a2f6889",
+      "size_bytes": 563077
+    },
+    {
+      "printed_pages": [
+        32,
+        33
+      ],
+      "url": "https://www.departedflights.com/WN011286p32.jpg",
+      "sha256": "02edcad7a7193a8da0cef89c898d6ca46419cc46aab9d7fa758ac4a50f7b9601",
+      "size_bytes": 548207
+    },
+    {
+      "printed_pages": [
+        34,
+        35
+      ],
+      "url": "https://www.departedflights.com/WN011286p34.jpg",
+      "sha256": "7c3f88e165694ece03ff03176bab4de71f64b13e9bec573f3d4cd37022d5505a",
+      "size_bytes": 566435
+    },
+    {
+      "printed_pages": [
+        36,
+        37
+      ],
+      "url": "https://www.departedflights.com/WN011286p36.jpg",
+      "sha256": "0dd5457a23bff5e8e51ec7933408a33b7065b1c456a78843f9180582e44b3b82",
+      "size_bytes": 578643
+    },
+    {
+      "printed_pages": [
+        38,
+        39
+      ],
+      "url": "https://www.departedflights.com/WN011286p38.jpg",
+      "sha256": "766c6e0f050c8724dcc263d884ced53a4203a17e21f95f8dc789a9c9c198f48f",
+      "size_bytes": 567149
+    },
+    {
+      "printed_pages": [
+        40,
+        41
+      ],
+      "url": "https://www.departedflights.com/WN011286p40.jpg",
+      "sha256": "166283ade91e6baf9d54bcfa20b18bc7be8819a0e4b552f4ffaab1899f535323",
+      "size_bytes": 586931
+    },
+    {
+      "printed_pages": [
+        42,
+        43
+      ],
+      "url": "https://www.departedflights.com/WN011286p42.jpg",
+      "sha256": "0e13ea864ff77e765030b44ad205c0624f6b2b2bbe88f73247a584d607c339bc",
+      "size_bytes": 565581
+    },
+    {
+      "printed_pages": [
+        46,
+        47
+      ],
+      "url": "https://www.departedflights.com/WN011286p46.jpg",
+      "sha256": "154c4bd8f69c80610409923b5b81fc680e89d6bbc5818d20153e7e86839a5e2e",
+      "size_bytes": 559376
+    },
+    {
+      "printed_pages": [
+        48,
+        49
+      ],
+      "url": "https://www.departedflights.com/WN011286p48.jpg",
+      "sha256": "9a106a7257943f8d4698d8cc54c4283dd0cd882c685219f2b5e2910d7064efef",
+      "size_bytes": 572521
+    },
+    {
+      "printed_pages": [
+        50,
+        51
+      ],
+      "url": "https://www.departedflights.com/WN011286p50.jpg",
+      "sha256": "6adfe14ff90cf94f439c50efe065a379c79b66b3aa8c0ddd18d8af475ca651dd",
+      "size_bytes": 566523
+    }
+  ],
+  "original_scans_redistributed": false
+}

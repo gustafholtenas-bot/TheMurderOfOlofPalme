@@ -1,0 +1,38 @@
+{
+  "batch": 30,
+  "package": "v31",
+  "country": "ad",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i Europakön; inte en fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://govern.cat/gov/notes-premsa/88759/govern-adjudica-obres-reobrir-aerodrom-urgell",
+      "type": "indexed_lead_access_failed",
+      "result": "Sökindexets utdrag pekar på La Seus invigning 1982 och sista kommersiella flygning 1984. Fulltextförsök gav HTTP 403; artikeln räknas inte som fullständigt granskad primärkälla."
+    },
+    {
+      "url": "https://govern.cat/gov/notes-premsa/48270/dptop-adjudica-construccio-10-hangars-restaurant-aeroport-pirineus-urgell",
+      "type": "indexed_lead_access_failed",
+      "result": "Ytterligare sökspår om reguljär trafik till 1984; fulltext kunde inte öppnas. Inga tider importerade."
+    },
+    {
+      "url": "https://elperiodic.ad/opinion/per-un-heliport-nacional-1/",
+      "type": "retrospective_background",
+      "result": "Antoni Pol i Solé, 10 februari 2016, läst. Texten placerar Heliands bildande 1987 och beskriver La Seus trafik 1982–1984. Senare bakgrund, inte samtida tidtabell eller bevis för frånvaro av all trafik 1986."
+    }
+  ],
+  "unresolved": [
+    "Sök samtida andorranska heliport-, tillstånds- och rörelsehandlingar med exakta tider.",
+    "Verifiera möjliga privata, räddnings-, statliga och militära rörelser separat. Senare Heliand-historik bevisar inte att all trafik saknades 1986.",
+    "La Seu ligger i Spanien. Flygplatsen flyttas inte till Andorra och dagens namn eller heliport används inte som belägg för 1986."
+  ]
+}

@@ -1,0 +1,1491 @@
+{
+  "package": "v66",
+  "batch": 65,
+  "checked_on": "2026-09-29",
+  "new_movements": 123,
+  "removed_previous_movements": 0,
+  "net_movement_change": 123,
+  "total_movements": 4252,
+  "delta_total_movements": 525,
+  "preserved_previous_movement_ids": 4129,
+  "unchanged_previous_movement_times": 4129,
+  "unchanged_previous_movement_objects": 4129,
+  "corrected_previous_movement_times": 0,
+  "updated_previous_movement_notes": 0,
+  "source_rows": 56,
+  "source_row_actions": {
+    "new_schedule": 55,
+    "excluded_connection": 1
+  },
+  "new_reviewed_schedules": 55,
+  "reviewed_rows_producing_movements": 55,
+  "reviewed_rows_without_window_movements": [],
+  "new_candidate_schedules": 0,
+  "new_airports": [
+    "BWI",
+    "BDL",
+    "LGA",
+    "EWR",
+    "PIT"
+  ],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "delta-19860201"
+  ],
+  "source_changes": "Appended reviewed pages and bilingual notes, updated checked_on.",
+  "all_previous_schedule_objects_unchanged": true,
+  "all_previous_airport_objects_unchanged": true,
+  "all_previous_airline_objects_unchanged": true,
+  "all_other_source_objects_unchanged": true,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": 0,
+  "overlap_checks_include_previous_delta_movements": true,
+  "new_local_departures_by_date": {
+    "1986-02-27": 27,
+    "1986-02-28": 55,
+    "1986-03-01": 41
+  },
+  "independent_fixed_offset_and_zoneinfo_agree": true,
+  "calendar_and_utc_checks": [
+    {
+      "id": "delta-578-ATL-BWI-1028-b65@1986-02-28",
+      "departure_utc": "1986-02-28T15:28:00Z",
+      "arrival_utc": "1986-02-28T16:55:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-578-ATL-BWI-1028-b65@1986-03-01",
+      "departure_utc": "1986-03-01T15:28:00Z",
+      "arrival_utc": "1986-03-01T16:55:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-402-ATL-BWI-1343-b65@1986-02-28",
+      "departure_utc": "1986-02-28T18:43:00Z",
+      "arrival_utc": "1986-02-28T20:10:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-402-ATL-BWI-1343-b65@1986-03-01",
+      "departure_utc": "1986-03-01T18:43:00Z",
+      "arrival_utc": "1986-03-01T20:10:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-390-ATL-BWI-1708-b65@1986-02-27",
+      "departure_utc": "1986-02-27T22:08:00Z",
+      "arrival_utc": "1986-02-27T23:35:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-390-ATL-BWI-1708-b65@1986-02-28",
+      "departure_utc": "1986-02-28T22:08:00Z",
+      "arrival_utc": "1986-02-28T23:35:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-390-ATL-BWI-1708-b65@1986-03-01",
+      "departure_utc": "1986-03-01T22:08:00Z",
+      "arrival_utc": "1986-03-01T23:35:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-422-ATL-BWI-2028-b65@1986-02-27",
+      "departure_utc": "1986-02-28T01:28:00Z",
+      "arrival_utc": "1986-02-28T02:55:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-422-ATL-BWI-2028-b65@1986-02-28",
+      "departure_utc": "1986-03-01T01:28:00Z",
+      "arrival_utc": "1986-03-01T02:55:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 14,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1014-ATL-BWI-2258-b65@1986-02-27",
+      "departure_utc": "1986-02-28T03:58:00Z",
+      "arrival_utc": "1986-02-28T05:20:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "X6",
+      "printed_page": 14,
+      "duration_minutes": 82,
+      "arrival_day_offset": 1
+    },
+    {
+      "id": "delta-1014-ATL-BWI-2258-b65@1986-02-28",
+      "departure_utc": "1986-03-01T03:58:00Z",
+      "arrival_utc": "1986-03-01T05:20:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "X6",
+      "printed_page": 14,
+      "duration_minutes": 82,
+      "arrival_day_offset": 1
+    },
+    {
+      "id": "delta-440-ATL-BDL-1022-b65@1986-02-28",
+      "departure_utc": "1986-02-28T15:22:00Z",
+      "arrival_utc": "1986-02-28T17:20:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 118,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-440-ATL-BDL-1022-b65@1986-03-01",
+      "departure_utc": "1986-03-01T15:22:00Z",
+      "arrival_utc": "1986-03-01T17:20:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 118,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-772-ATL-BDL-1332-b65@1986-02-28",
+      "departure_utc": "1986-02-28T18:32:00Z",
+      "arrival_utc": "1986-02-28T20:30:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 118,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-772-ATL-BDL-1332-b65@1986-03-01",
+      "departure_utc": "1986-03-01T18:32:00Z",
+      "arrival_utc": "1986-03-01T20:30:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 118,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-752-ATL-BDL-1655-b65@1986-02-27",
+      "departure_utc": "1986-02-27T21:55:00Z",
+      "arrival_utc": "1986-02-27T23:55:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 120,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-752-ATL-BDL-1655-b65@1986-02-28",
+      "departure_utc": "1986-02-28T21:55:00Z",
+      "arrival_utc": "1986-02-28T23:55:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 120,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-752-ATL-BDL-1655-b65@1986-03-01",
+      "departure_utc": "1986-03-01T21:55:00Z",
+      "arrival_utc": "1986-03-01T23:55:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 120,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-679-ATL-BDL-2022-b65@1986-02-27",
+      "departure_utc": "1986-02-28T01:22:00Z",
+      "arrival_utc": "1986-02-28T03:20:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 118,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-679-ATL-BDL-2022-b65@1986-02-28",
+      "departure_utc": "1986-03-01T01:22:00Z",
+      "arrival_utc": "1986-03-01T03:20:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 15,
+      "duration_minutes": 118,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-106-ATL-LGA-0704-b65@1986-02-28",
+      "departure_utc": "1986-02-28T12:04:00Z",
+      "arrival_utc": "1986-02-28T13:59:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-106-ATL-LGA-0704-b65@1986-03-01",
+      "departure_utc": "1986-03-01T12:04:00Z",
+      "arrival_utc": "1986-03-01T13:59:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-712-ATL-LGA-0852-b65@1986-02-28",
+      "departure_utc": "1986-02-28T13:52:00Z",
+      "arrival_utc": "1986-02-28T15:45:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-712-ATL-LGA-0852-b65@1986-03-01",
+      "departure_utc": "1986-03-01T13:52:00Z",
+      "arrival_utc": "1986-03-01T15:45:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-742-ATL-LGA-1040-b65@1986-02-28",
+      "departure_utc": "1986-02-28T15:40:00Z",
+      "arrival_utc": "1986-02-28T17:35:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-742-ATL-LGA-1040-b65@1986-03-01",
+      "departure_utc": "1986-03-01T15:40:00Z",
+      "arrival_utc": "1986-03-01T17:35:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-118-ATL-LGA-1157-b65@1986-02-28",
+      "departure_utc": "1986-02-28T16:57:00Z",
+      "arrival_utc": "1986-02-28T18:50:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-118-ATL-LGA-1157-b65@1986-03-01",
+      "departure_utc": "1986-03-01T16:57:00Z",
+      "arrival_utc": "1986-03-01T18:50:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-708-ATL-LGA-1335-b65@1986-02-28",
+      "departure_utc": "1986-02-28T18:35:00Z",
+      "arrival_utc": "1986-02-28T20:30:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-708-ATL-LGA-1335-b65@1986-03-01",
+      "departure_utc": "1986-03-01T18:35:00Z",
+      "arrival_utc": "1986-03-01T20:30:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-804-ATL-LGA-1546-b65@1986-02-27",
+      "departure_utc": "1986-02-27T20:46:00Z",
+      "arrival_utc": "1986-02-27T22:39:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-804-ATL-LGA-1546-b65@1986-02-28",
+      "departure_utc": "1986-02-28T20:46:00Z",
+      "arrival_utc": "1986-02-28T22:39:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-804-ATL-LGA-1546-b65@1986-03-01",
+      "departure_utc": "1986-03-01T20:46:00Z",
+      "arrival_utc": "1986-03-01T22:39:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-94-ATL-LGA-1655-b65@1986-02-27",
+      "departure_utc": "1986-02-27T21:55:00Z",
+      "arrival_utc": "1986-02-27T23:50:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-94-ATL-LGA-1655-b65@1986-02-28",
+      "departure_utc": "1986-02-28T21:55:00Z",
+      "arrival_utc": "1986-02-28T23:50:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-94-ATL-LGA-1655-b65@1986-03-01",
+      "departure_utc": "1986-03-01T21:55:00Z",
+      "arrival_utc": "1986-03-01T23:50:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-154-ATL-LGA-1855-b65@1986-02-27",
+      "departure_utc": "1986-02-27T23:55:00Z",
+      "arrival_utc": "1986-02-28T01:50:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-154-ATL-LGA-1855-b65@1986-02-28",
+      "departure_utc": "1986-02-28T23:55:00Z",
+      "arrival_utc": "1986-03-01T01:50:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 115,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-710-ATL-LGA-2042-b65@1986-02-27",
+      "departure_utc": "1986-02-28T01:42:00Z",
+      "arrival_utc": "1986-02-28T03:35:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "X6",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-710-ATL-LGA-2042-b65@1986-02-28",
+      "departure_utc": "1986-03-01T01:42:00Z",
+      "arrival_utc": "1986-03-01T03:35:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "X6",
+      "printed_page": 16,
+      "duration_minutes": 113,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-194-ATL-EWR-1040-b65@1986-02-28",
+      "departure_utc": "1986-02-28T15:40:00Z",
+      "arrival_utc": "1986-02-28T17:30:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-194-ATL-EWR-1040-b65@1986-03-01",
+      "departure_utc": "1986-03-01T15:40:00Z",
+      "arrival_utc": "1986-03-01T17:30:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-766-ATL-EWR-1345-b65@1986-02-28",
+      "departure_utc": "1986-02-28T18:45:00Z",
+      "arrival_utc": "1986-02-28T20:35:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-766-ATL-EWR-1345-b65@1986-03-01",
+      "departure_utc": "1986-03-01T18:45:00Z",
+      "arrival_utc": "1986-03-01T20:35:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-862-ATL-EWR-1705-b65@1986-02-27",
+      "departure_utc": "1986-02-27T22:05:00Z",
+      "arrival_utc": "1986-02-27T23:55:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-862-ATL-EWR-1705-b65@1986-02-28",
+      "departure_utc": "1986-02-28T22:05:00Z",
+      "arrival_utc": "1986-02-28T23:55:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-862-ATL-EWR-1705-b65@1986-03-01",
+      "departure_utc": "1986-03-01T22:05:00Z",
+      "arrival_utc": "1986-03-01T23:55:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-478-ATL-EWR-1855-b65@1986-02-27",
+      "departure_utc": "1986-02-27T23:55:00Z",
+      "arrival_utc": "1986-02-28T01:45:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-478-ATL-EWR-1855-b65@1986-02-28",
+      "departure_utc": "1986-02-28T23:55:00Z",
+      "arrival_utc": "1986-03-01T01:45:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-798-ATL-EWR-2040-b65@1986-02-27",
+      "departure_utc": "1986-02-28T01:40:00Z",
+      "arrival_utc": "1986-02-28T03:30:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-798-ATL-EWR-2040-b65@1986-02-28",
+      "departure_utc": "1986-03-01T01:40:00Z",
+      "arrival_utc": "1986-03-01T03:30:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 16,
+      "duration_minutes": 110,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-696-ATL-PIT-1032-b65@1986-02-28",
+      "departure_utc": "1986-02-28T15:32:00Z",
+      "arrival_utc": "1986-02-28T16:59:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-696-ATL-PIT-1032-b65@1986-03-01",
+      "departure_utc": "1986-03-01T15:32:00Z",
+      "arrival_utc": "1986-03-01T16:59:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-672-ATL-PIT-1343-b65@1986-02-28",
+      "departure_utc": "1986-02-28T18:43:00Z",
+      "arrival_utc": "1986-02-28T20:10:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-672-ATL-PIT-1343-b65@1986-03-01",
+      "departure_utc": "1986-03-01T18:43:00Z",
+      "arrival_utc": "1986-03-01T20:10:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1030-ATL-PIT-1651-b65@1986-02-27",
+      "departure_utc": "1986-02-27T21:51:00Z",
+      "arrival_utc": "1986-02-27T23:15:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 84,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1030-ATL-PIT-1651-b65@1986-02-28",
+      "departure_utc": "1986-02-28T21:51:00Z",
+      "arrival_utc": "1986-02-28T23:15:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 84,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1030-ATL-PIT-1651-b65@1986-03-01",
+      "departure_utc": "1986-03-01T21:51:00Z",
+      "arrival_utc": "1986-03-01T23:15:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 84,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-908-ATL-PIT-2033-b65@1986-02-27",
+      "departure_utc": "1986-02-28T01:33:00Z",
+      "arrival_utc": "1986-02-28T03:00:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-908-ATL-PIT-2033-b65@1986-02-28",
+      "departure_utc": "1986-03-01T01:33:00Z",
+      "arrival_utc": "1986-03-01T03:00:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 87,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-660-ATL-PIT-2308-b65@1986-02-27",
+      "departure_utc": "1986-02-28T04:08:00Z",
+      "arrival_utc": "1986-02-28T05:30:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 82,
+      "arrival_day_offset": 1
+    },
+    {
+      "id": "delta-660-ATL-PIT-2308-b65@1986-02-28",
+      "departure_utc": "1986-03-01T04:08:00Z",
+      "arrival_utc": "1986-03-01T05:30:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 17,
+      "duration_minutes": 82,
+      "arrival_day_offset": 1
+    },
+    {
+      "id": "delta-399-BWI-ATL-0610-b65@1986-02-28",
+      "departure_utc": "1986-02-28T11:10:00Z",
+      "arrival_utc": "1986-02-28T12:46:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "X7",
+      "printed_page": 22,
+      "duration_minutes": 96,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-399-BWI-ATL-0610-b65@1986-03-01",
+      "departure_utc": "1986-03-01T11:10:00Z",
+      "arrival_utc": "1986-03-01T12:46:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "X7",
+      "printed_page": 22,
+      "duration_minutes": 96,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-397-BWI-ATL-0915-b65@1986-02-28",
+      "departure_utc": "1986-02-28T14:15:00Z",
+      "arrival_utc": "1986-02-28T15:54:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-397-BWI-ATL-0915-b65@1986-03-01",
+      "departure_utc": "1986-03-01T14:15:00Z",
+      "arrival_utc": "1986-03-01T15:54:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-557-BWI-ATL-1250-b65@1986-02-28",
+      "departure_utc": "1986-02-28T17:50:00Z",
+      "arrival_utc": "1986-02-28T19:29:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-557-BWI-ATL-1250-b65@1986-03-01",
+      "departure_utc": "1986-03-01T17:50:00Z",
+      "arrival_utc": "1986-03-01T19:29:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-595-BWI-ATL-1600-b65@1986-02-27",
+      "departure_utc": "1986-02-27T21:00:00Z",
+      "arrival_utc": "1986-02-27T22:39:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-595-BWI-ATL-1600-b65@1986-02-28",
+      "departure_utc": "1986-02-28T21:00:00Z",
+      "arrival_utc": "1986-02-28T22:39:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-595-BWI-ATL-1600-b65@1986-03-01",
+      "departure_utc": "1986-03-01T21:00:00Z",
+      "arrival_utc": "1986-03-01T22:39:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-585-BWI-ATL-1955-b65@1986-02-27",
+      "departure_utc": "1986-02-28T00:55:00Z",
+      "arrival_utc": "1986-02-28T02:34:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-585-BWI-ATL-1955-b65@1986-02-28",
+      "departure_utc": "1986-03-01T00:55:00Z",
+      "arrival_utc": "1986-03-01T02:34:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 22,
+      "duration_minutes": 99,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-301-BDL-ATL-0850-b65@1986-02-28",
+      "departure_utc": "1986-02-28T13:50:00Z",
+      "arrival_utc": "1986-02-28T16:07:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 137,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-301-BDL-ATL-0850-b65@1986-03-01",
+      "departure_utc": "1986-03-01T13:50:00Z",
+      "arrival_utc": "1986-03-01T16:07:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 137,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-365-BDL-ATL-1210-b65@1986-02-28",
+      "departure_utc": "1986-02-28T17:10:00Z",
+      "arrival_utc": "1986-02-28T19:27:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 137,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-365-BDL-ATL-1210-b65@1986-03-01",
+      "departure_utc": "1986-03-01T17:10:00Z",
+      "arrival_utc": "1986-03-01T19:27:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 137,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-453-BDL-ATL-1540-b65@1986-02-27",
+      "departure_utc": "1986-02-27T20:40:00Z",
+      "arrival_utc": "1986-02-27T22:57:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 137,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-453-BDL-ATL-1540-b65@1986-02-28",
+      "departure_utc": "1986-02-28T20:40:00Z",
+      "arrival_utc": "1986-02-28T22:57:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 137,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-453-BDL-ATL-1540-b65@1986-03-01",
+      "departure_utc": "1986-03-01T20:40:00Z",
+      "arrival_utc": "1986-03-01T22:57:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 137,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-807-BDL-ATL-1955-b65@1986-02-27",
+      "departure_utc": "1986-02-28T00:55:00Z",
+      "arrival_utc": "1986-02-28T03:17:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 142,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-807-BDL-ATL-1955-b65@1986-02-28",
+      "departure_utc": "1986-03-01T00:55:00Z",
+      "arrival_utc": "1986-03-01T03:17:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 100,
+      "duration_minutes": 142,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-371-LGA-ATL-0659-b65@1986-02-28",
+      "departure_utc": "1986-02-28T11:59:00Z",
+      "arrival_utc": "1986-02-28T14:13:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "X7",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-371-LGA-ATL-0659-b65@1986-03-01",
+      "departure_utc": "1986-03-01T11:59:00Z",
+      "arrival_utc": "1986-03-01T14:13:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "X7",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-803-LGA-ATL-0830-b65@1986-02-28",
+      "departure_utc": "1986-02-28T13:30:00Z",
+      "arrival_utc": "1986-02-28T15:44:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-803-LGA-ATL-0830-b65@1986-03-01",
+      "departure_utc": "1986-03-01T13:30:00Z",
+      "arrival_utc": "1986-03-01T15:44:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-107-LGA-ATL-1010-b65@1986-02-28",
+      "departure_utc": "1986-02-28T15:10:00Z",
+      "arrival_utc": "1986-02-28T17:24:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-107-LGA-ATL-1010-b65@1986-03-01",
+      "departure_utc": "1986-03-01T15:10:00Z",
+      "arrival_utc": "1986-03-01T17:24:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-477-LGA-ATL-1215-b65@1986-02-28",
+      "departure_utc": "1986-02-28T17:15:00Z",
+      "arrival_utc": "1986-02-28T19:29:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-477-LGA-ATL-1215-b65@1986-03-01",
+      "departure_utc": "1986-03-01T17:15:00Z",
+      "arrival_utc": "1986-03-01T19:29:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-707-LGA-ATL-1340-b65@1986-02-28",
+      "departure_utc": "1986-02-28T18:40:00Z",
+      "arrival_utc": "1986-02-28T20:54:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-707-LGA-ATL-1340-b65@1986-03-01",
+      "departure_utc": "1986-03-01T18:40:00Z",
+      "arrival_utc": "1986-03-01T20:54:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-99-LGA-ATL-1535-b65@1986-02-27",
+      "departure_utc": "1986-02-27T20:35:00Z",
+      "arrival_utc": "1986-02-27T22:49:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-99-LGA-ATL-1535-b65@1986-02-28",
+      "departure_utc": "1986-02-28T20:35:00Z",
+      "arrival_utc": "1986-02-28T22:49:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-99-LGA-ATL-1535-b65@1986-03-01",
+      "departure_utc": "1986-03-01T20:35:00Z",
+      "arrival_utc": "1986-03-01T22:49:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-577-LGA-ATL-1659-b65@1986-02-27",
+      "departure_utc": "1986-02-27T21:59:00Z",
+      "arrival_utc": "1986-02-28T00:13:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-577-LGA-ATL-1659-b65@1986-02-28",
+      "departure_utc": "1986-02-28T21:59:00Z",
+      "arrival_utc": "1986-03-01T00:13:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-577-LGA-ATL-1659-b65@1986-03-01",
+      "departure_utc": "1986-03-01T21:59:00Z",
+      "arrival_utc": "1986-03-02T00:13:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-141-LGA-ATL-1955-b65@1986-02-27",
+      "departure_utc": "1986-02-28T00:55:00Z",
+      "arrival_utc": "1986-02-28T03:09:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-141-LGA-ATL-1955-b65@1986-02-28",
+      "departure_utc": "1986-03-01T00:55:00Z",
+      "arrival_utc": "1986-03-01T03:09:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 134,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-799-EWR-ATL-0835-b65@1986-02-28",
+      "departure_utc": "1986-02-28T13:35:00Z",
+      "arrival_utc": "1986-02-28T15:45:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-799-EWR-ATL-0835-b65@1986-03-01",
+      "departure_utc": "1986-03-01T13:35:00Z",
+      "arrival_utc": "1986-03-01T15:45:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-315-EWR-ATL-1210-b65@1986-02-28",
+      "departure_utc": "1986-02-28T17:10:00Z",
+      "arrival_utc": "1986-02-28T19:20:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-315-EWR-ATL-1210-b65@1986-03-01",
+      "departure_utc": "1986-03-01T17:10:00Z",
+      "arrival_utc": "1986-03-01T19:20:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-173-EWR-ATL-1540-b65@1986-02-27",
+      "departure_utc": "1986-02-27T20:40:00Z",
+      "arrival_utc": "1986-02-27T22:50:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-173-EWR-ATL-1540-b65@1986-02-28",
+      "departure_utc": "1986-02-28T20:40:00Z",
+      "arrival_utc": "1986-02-28T22:50:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-173-EWR-ATL-1540-b65@1986-03-01",
+      "departure_utc": "1986-03-01T20:40:00Z",
+      "arrival_utc": "1986-03-01T22:50:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-765-EWR-ATL-1710-b65@1986-02-27",
+      "departure_utc": "1986-02-27T22:10:00Z",
+      "arrival_utc": "1986-02-28T00:20:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-765-EWR-ATL-1710-b65@1986-02-28",
+      "departure_utc": "1986-02-28T22:10:00Z",
+      "arrival_utc": "1986-03-01T00:20:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-765-EWR-ATL-1710-b65@1986-03-01",
+      "departure_utc": "1986-03-01T22:10:00Z",
+      "arrival_utc": "1986-03-02T00:20:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-889-EWR-ATL-1955-b65@1986-02-27",
+      "departure_utc": "1986-02-28T00:55:00Z",
+      "arrival_utc": "1986-02-28T03:05:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-889-EWR-ATL-1955-b65@1986-02-28",
+      "departure_utc": "1986-03-01T00:55:00Z",
+      "arrival_utc": "1986-03-01T03:05:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 173,
+      "duration_minutes": 130,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-673-PIT-ATL-0615-b65@1986-02-28",
+      "departure_utc": "1986-02-28T11:15:00Z",
+      "arrival_utc": "1986-02-28T12:44:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 89,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-673-PIT-ATL-0615-b65@1986-03-01",
+      "departure_utc": "1986-03-01T11:15:00Z",
+      "arrival_utc": "1986-03-01T12:44:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 89,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-697-PIT-ATL-0930-b65@1986-02-28",
+      "departure_utc": "1986-02-28T14:30:00Z",
+      "arrival_utc": "1986-02-28T16:02:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-697-PIT-ATL-0930-b65@1986-03-01",
+      "departure_utc": "1986-03-01T14:30:00Z",
+      "arrival_utc": "1986-03-01T16:02:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-631-PIT-ATL-1250-b65@1986-02-28",
+      "departure_utc": "1986-02-28T17:50:00Z",
+      "arrival_utc": "1986-02-28T19:22:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-631-PIT-ATL-1250-b65@1986-03-01",
+      "departure_utc": "1986-03-01T17:50:00Z",
+      "arrival_utc": "1986-03-01T19:22:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1131-PIT-ATL-1605-b65@1986-02-27",
+      "departure_utc": "1986-02-27T21:05:00Z",
+      "arrival_utc": "1986-02-27T22:37:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1131-PIT-ATL-1605-b65@1986-02-28",
+      "departure_utc": "1986-02-28T21:05:00Z",
+      "arrival_utc": "1986-02-28T22:37:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1131-PIT-ATL-1605-b65@1986-03-01",
+      "departure_utc": "1986-03-01T21:05:00Z",
+      "arrival_utc": "1986-03-01T22:37:00Z",
+      "local_weekday": 6,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1029-PIT-ATL-1955-b65@1986-02-27",
+      "departure_utc": "1986-02-28T00:55:00Z",
+      "arrival_utc": "1986-02-28T02:27:00Z",
+      "local_weekday": 4,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "delta-1029-PIT-ATL-1955-b65@1986-02-28",
+      "departure_utc": "1986-03-01T00:55:00Z",
+      "arrival_utc": "1986-03-01T02:27:00Z",
+      "local_weekday": 5,
+      "printed_frequency": "",
+      "printed_page": 195,
+      "duration_minutes": 92,
+      "arrival_day_offset": 0
+    }
+  ],
+  "duration_distribution_minutes": {
+    "87": 15,
+    "82": 4,
+    "118": 6,
+    "120": 3,
+    "115": 11,
+    "113": 9,
+    "110": 11,
+    "84": 3,
+    "96": 2,
+    "99": 9,
+    "137": 7,
+    "142": 2,
+    "134": 18,
+    "130": 12,
+    "89": 2,
+    "92": 9
+  },
+  "overlap_at_window_start": [
+    "delta-99-LGA-ATL-1535-b65@1986-02-27",
+    "delta-173-EWR-ATL-1540-b65@1986-02-27",
+    "delta-453-BDL-ATL-1540-b65@1986-02-27",
+    "delta-804-ATL-LGA-1546-b65@1986-02-27",
+    "delta-595-BWI-ATL-1600-b65@1986-02-27",
+    "delta-1131-PIT-ATL-1605-b65@1986-02-27",
+    "delta-1030-ATL-PIT-1651-b65@1986-02-27",
+    "delta-752-ATL-BDL-1655-b65@1986-02-27",
+    "delta-94-ATL-LGA-1655-b65@1986-02-27",
+    "delta-577-LGA-ATL-1659-b65@1986-02-27",
+    "delta-862-ATL-EWR-1705-b65@1986-02-27",
+    "delta-390-ATL-BWI-1708-b65@1986-02-27",
+    "delta-765-EWR-ATL-1710-b65@1986-02-27"
+  ],
+  "overlap_at_window_end": [
+    "delta-99-LGA-ATL-1535-b65@1986-03-01",
+    "delta-173-EWR-ATL-1540-b65@1986-03-01",
+    "delta-453-BDL-ATL-1540-b65@1986-03-01",
+    "delta-804-ATL-LGA-1546-b65@1986-03-01",
+    "delta-595-BWI-ATL-1600-b65@1986-03-01",
+    "delta-1131-PIT-ATL-1605-b65@1986-03-01",
+    "delta-1030-ATL-PIT-1651-b65@1986-03-01",
+    "delta-752-ATL-BDL-1655-b65@1986-03-01",
+    "delta-94-ATL-LGA-1655-b65@1986-03-01",
+    "delta-577-LGA-ATL-1659-b65@1986-03-01",
+    "delta-862-ATL-EWR-1705-b65@1986-03-01",
+    "delta-390-ATL-BWI-1708-b65@1986-03-01",
+    "delta-765-EWR-ATL-1710-b65@1986-03-01"
+  ],
+  "source_rows_visually_checked": true,
+  "all_return_rows_separately_sourced": true,
+  "excluded_rows": [
+    {
+      "source_row": 6,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "delta",
+      "flight": "106/1658",
+      "origin": "ATL",
+      "destination": "BDL",
+      "departure_local": "07:04",
+      "arrival_local": "10:55",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X7",
+      "decoded_days": "123456",
+      "printed_stops_or_via": "LGA",
+      "printed_page": "15",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed flight numbers 106/1658 and via LGA indicate a connection; not a physical nonstop ATL–BDL segment. DL106 ATL–LGA is independently accepted under its own destination heading."
+    }
+  ],
+  "time_basis": "local time interpretation; separate all-times-local wording not found in reviewed pages",
+  "source_evidence_file": "delta_source_evidence_batch65.json",
+  "airport_historical_codes_and_names_reviewed": true,
+  "airport_coordinates_approximate_airfield_locations": true,
+  "old_air_inter_conflict_candidates_unchanged": 10,
+  "total_candidates_unchanged": 21,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "unchanged_previous_files": 401,
+  "changed_previous_files": [
+    "LAS_MIG_v65.txt",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/europe_country_index.json",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/NORDIC_OVERFLIGHT_RESEARCH.md",
+    "Tools/FlightResearch/research/SOURCES.md",
+    "Tools/FlightResearch/research/europe_country_queue.json",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/nordic_priority.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json"
+  ],
+  "europe_country_rows_checked": 40,
+  "europe_country_queue_entries_unchanged": true,
+  "europe_resume_country": "cy",
+  "nordic_endpoint_movements": 161,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "0b6788",
+        "wall_time_seconds": 4.510931347,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 4.512s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "7d133a",
+        "wall_time_seconds": 0.432365463,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 94, \"registered_countries\": 81, \"reviewed_schedules\": 2707, \"animated_airlines\": 48, \"scheduled_movements\": 4251, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d418e7",
+        "wall_time_seconds": 0.148801956,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "78fd92",
+        "wall_time_seconds": 0.140814137,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "7fe47a",
+        "wall_time_seconds": 2.5969e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

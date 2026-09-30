@@ -1,0 +1,27 @@
+airline	flight	origin	destination	departure	arrival	arrival_day_offset	days	source	page	service_group	leg_index	service_day_offset
+northwest	37	ARN	GEN	12:20	13:20	0	6	northwest-19851218	138 / PDF 71	northwest-37	1	0
+northwest	37	GEN	JFK	14:20	16:25	0	6	northwest-19851218	138 / PDF 71	northwest-37	2	0
+northwest	44	MSP	LGW	17:30	07:00	1	1,4,5	northwest-19851218	138 / PDF 71	northwest-44	1	0
+northwest	44	LGW	ARN	08:05	11:20	0	5	northwest-19851218	138 / PDF 71	northwest-44	2	1
+northwest	44	LGW	FRA	07:55	10:15	0	2,6	northwest-19851218	138 / PDF 71	northwest-44	2	1
+northwest	45	FRA	LGW	12:00	12:30	0	5,7	northwest-19851218	138 / PDF 71	northwest-45	1	0
+northwest	45	LGW	MSP	13:20	15:50	0	2,5,7	northwest-19851218	138 / PDF 71	northwest-45	2	0
+northwest	48	BOS	LGW	19:45	06:50	1	4,5,6,7	northwest-19851218	138 / PDF 71	northwest-48	1	0
+northwest	48	LGW	FRA	07:55	10:15	0	1,5,7	northwest-19851218	138 / PDF 71	northwest-48	2	1
+northwest	48	LGW	GLA	08:05	09:15	0	6	northwest-19851218	138 / PDF 71	northwest-48	2	1
+northwest	49	FRA	LGW	12:00	12:30	0	1,2,6	northwest-19851218	138 / PDF 71	northwest-49	1	0
+northwest	49	LGW	BOS	13:55	16:05	0	1,2,6,7	northwest-19851218	138 / PDF 71	northwest-49	2	0
+northwest	30	JFK	CPH	18:30	07:55	1	7	northwest-19851218	138 / PDF 71	northwest-30	1	0
+northwest	30	CPH	ARN	08:50	10:00	0	1	northwest-19851218	138 / PDF 71	northwest-30	2	1
+northwest	31	ARN	CPH	11:50	13:00	0	7	northwest-19851218	138 / PDF 71	northwest-31	1	0
+northwest	31	CPH	JFK	14:00	16:25	0	7	northwest-19851218	138 / PDF 71	northwest-31	2	0
+gb-airways	100	LGW	GIB	09:15	13:00	0	1,3,5,7	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-100-LGW-GIB-0915	1	0
+gb-airways	101	GIB	LGW	14:00	15:45	0	1,3,5,7	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-101-GIB-LGW-1400	1	0
+gb-airways	102	LGW	GIB	13:45	17:30	0	1,5	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-102-LGW-GIB-1345	1	0
+gb-airways	103	GIB	LGW	18:30	20:15	0	1,5	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-103-GIB-LGW-1830	1	0
+british-airways	494	LGW	GIB	13:10	16:55	0	2,4,6	gbairways-19851027	PDF 2; airport on PDF 1	british-airways-494-LGW-GIB-1310	1	0
+british-airways	495	GIB	LGW	17:55	19:40	0	2,4,6	gbairways-19851027	PDF 2; airport on PDF 1	british-airways-495-GIB-LGW-1755	1	0
+gb-airways	204	GIB	TNG	10:00	09:20	0	2,3,4,5,6	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-204-GIB-TNG-1000	1	0
+gb-airways	205	TNG	GIB	09:45	11:05	0	2,3,4,5,6	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-205-TNG-GIB-0945	1	0
+gb-airways	206	GIB	TNG	17:15	16:35	0	2,3,4,5,6	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-206-GIB-TNG-1715	1	0
+gb-airways	207	TNG	GIB	17:00	18:20	0	2,3,4,5,6	gbairways-19851027	PDF 2; airport on PDF 1	gb-airways-207-TNG-GIB-1700	1	0

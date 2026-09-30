@@ -1,0 +1,999 @@
+{
+  "package": "v39",
+  "batch": 38,
+  "checked_on": "2026-09-28",
+  "new_reviewed_schedules": 65,
+  "new_candidate_schedules": 0,
+  "new_movements": 96,
+  "total_movements": 2314,
+  "unchanged_previous_movements": 2218,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "BLQ",
+    "GOA",
+    "LIN",
+    "NAP",
+    "PSA",
+    "TRN",
+    "VCE"
+  ],
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_movements_by_source_airline": {
+    "air-france": 48,
+    "alitalia": 48
+  },
+  "new_movements_by_date": {
+    "1986-02-28": 53,
+    "1986-03-01": 43
+  },
+  "historical_airport_identity_checked": true,
+  "linate_not_malpensa": true,
+  "pisa_train_connection_not_flight": true,
+  "az1351_two_physical_legs_and_45_minute_ground_interval_checked": true,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "unchanged_plugin_files": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs"
+  ],
+  "calendar_and_utc_checks": [
+    {
+      "schedule": "alitalia-318-BLQ-CDG-1715-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AZ318",
+      "printed_days": "1--45-7",
+      "local_departure": "17:15",
+      "local_arrival": "18:45",
+      "utc_offset": "+01:00",
+      "duration_minutes": 90
+    },
+    {
+      "schedule": "alitalia-318-BLQ-CDG-1715-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AZ318",
+      "printed_days": "-23--6-",
+      "local_departure": "17:15",
+      "local_arrival": "18:45",
+      "utc_offset": "+01:00",
+      "duration_minutes": 90
+    },
+    {
+      "schedule": "alitalia-319-CDG-BLQ-1450-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AZ319",
+      "printed_days": "1--45-7",
+      "local_departure": "14:50",
+      "local_arrival": "16:30",
+      "utc_offset": "+01:00",
+      "duration_minutes": 100
+    },
+    {
+      "schedule": "alitalia-319-CDG-BLQ-1450-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AZ319",
+      "printed_days": "-23--6-",
+      "local_departure": "14:50",
+      "local_arrival": "16:30",
+      "utc_offset": "+01:00",
+      "duration_minutes": 100
+    },
+    {
+      "schedule": "alitalia-1350-GOA-CDG-1240-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AZ1350",
+      "printed_days": "1--45-7",
+      "local_departure": "12:40",
+      "local_arrival": "14:05",
+      "utc_offset": "+01:00",
+      "duration_minutes": 85
+    },
+    {
+      "schedule": "alitalia-1350-GOA-CDG-1240-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AZ1350",
+      "printed_days": "-23--6-",
+      "local_departure": "12:40",
+      "local_arrival": "14:05",
+      "utc_offset": "+01:00",
+      "duration_minutes": 85
+    },
+    {
+      "schedule": "alitalia-1351-CDG-GOA-1020-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AZ1351",
+      "printed_days": "1--45-7",
+      "local_departure": "10:20",
+      "local_arrival": "11:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 90
+    },
+    {
+      "schedule": "alitalia-1351-CDG-GOA-1020-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AZ1351",
+      "printed_days": "-23--6-",
+      "local_departure": "10:20",
+      "local_arrival": "11:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 90
+    },
+    {
+      "schedule": "alitalia-1351-GOA-NAP-1235-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AZ1351",
+      "printed_days": "1--45-7",
+      "local_departure": "12:35",
+      "local_arrival": "13:40",
+      "utc_offset": "+01:00",
+      "duration_minutes": 65
+    },
+    {
+      "schedule": "alitalia-1351-GOA-NAP-1235-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AZ1351",
+      "printed_days": "-23--6-",
+      "local_departure": "12:35",
+      "local_arrival": "13:40",
+      "utc_offset": "+01:00",
+      "duration_minutes": 65
+    },
+    {
+      "schedule": "air-france-637-NAP-CDG-1940-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF637",
+      "printed_days": "-----6-",
+      "local_departure": "19:40",
+      "local_arrival": "22:05",
+      "utc_offset": "+01:00",
+      "duration_minutes": 145
+    },
+    {
+      "schedule": "air-france-636-CDG-NAP-1635-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF636",
+      "printed_days": "-----6-",
+      "local_departure": "16:35",
+      "local_arrival": "18:55",
+      "utc_offset": "+01:00",
+      "duration_minutes": 140
+    },
+    {
+      "schedule": "alitalia-336-LIN-CDG-0845-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ336",
+      "printed_days": "----567",
+      "local_departure": "08:45",
+      "local_arrival": "10:05",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "air-france-651-LIN-CDG-1005-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF651",
+      "printed_days": "1234567",
+      "local_departure": "10:05",
+      "local_arrival": "11:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "alitalia-330-LIN-CDG-1310-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ330",
+      "printed_days": "----567",
+      "local_departure": "13:10",
+      "local_arrival": "14:30",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "air-france-653-LIN-CDG-1450-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF653",
+      "printed_days": "1234567",
+      "local_departure": "14:50",
+      "local_arrival": "16:10",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "alitalia-326-LIN-CDG-1640-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ326",
+      "printed_days": "1234567",
+      "local_departure": "16:40",
+      "local_arrival": "18:00",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "air-france-655-LIN-CDG-1940-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF655",
+      "printed_days": "1234567",
+      "local_departure": "19:40",
+      "local_arrival": "21:00",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "air-france-650-CDG-LIN-0745-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF650",
+      "printed_days": "1234567",
+      "local_departure": "07:45",
+      "local_arrival": "09:05",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "alitalia-345-CDG-LIN-1110-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ345",
+      "printed_days": "----567",
+      "local_departure": "11:10",
+      "local_arrival": "12:35",
+      "utc_offset": "+01:00",
+      "duration_minutes": 85
+    },
+    {
+      "schedule": "air-france-652-CDG-LIN-1225-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF652",
+      "printed_days": "1234567",
+      "local_departure": "12:25",
+      "local_arrival": "13:45",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "alitalia-331-CDG-LIN-1520-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ331",
+      "printed_days": "----567",
+      "local_departure": "15:20",
+      "local_arrival": "16:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 90
+    },
+    {
+      "schedule": "air-france-654-CDG-LIN-1720-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF654",
+      "printed_days": "1234567",
+      "local_departure": "17:20",
+      "local_arrival": "18:40",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "alitalia-337-CDG-LIN-1900-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ337",
+      "printed_days": "1234567",
+      "local_departure": "19:00",
+      "local_arrival": "20:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 85
+    },
+    {
+      "schedule": "alitalia-346-LIN-LYS-2000-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ346",
+      "printed_days": "-23-56-",
+      "local_departure": "20:00",
+      "local_arrival": "21:00",
+      "utc_offset": "+01:00",
+      "duration_minutes": 60
+    },
+    {
+      "schedule": "air-france-347-LYS-LIN-0820-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AFAZ347",
+      "printed_days": "12--5--",
+      "local_departure": "08:20",
+      "local_arrival": "09:15",
+      "utc_offset": "+01:00",
+      "duration_minutes": 55
+    },
+    {
+      "schedule": "air-france-347-LYS-LIN-0820-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AFAZ347",
+      "printed_days": "--34-67",
+      "local_departure": "08:20",
+      "local_arrival": "09:15",
+      "utc_offset": "+01:00",
+      "duration_minutes": 55
+    },
+    {
+      "schedule": "air-france-2641-LIN-MRS-0930-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF2641",
+      "printed_days": "123456-",
+      "local_departure": "09:30",
+      "local_arrival": "10:35",
+      "utc_offset": "+01:00",
+      "duration_minutes": 65
+    },
+    {
+      "schedule": "air-france-2651-LIN-MRS-2020-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2651",
+      "printed_days": "12345--",
+      "local_departure": "20:20",
+      "local_arrival": "21:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 65
+    },
+    {
+      "schedule": "air-france-2640-MRS-LIN-0745-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF2640",
+      "printed_days": "123456-",
+      "local_departure": "07:45",
+      "local_arrival": "08:45",
+      "utc_offset": "+01:00",
+      "duration_minutes": 60
+    },
+    {
+      "schedule": "air-france-2650-MRS-LIN-1340-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2650",
+      "printed_days": "12345--",
+      "local_departure": "13:40",
+      "local_arrival": "14:40",
+      "utc_offset": "+01:00",
+      "duration_minutes": 60
+    },
+    {
+      "schedule": "air-france-2647-LIN-SXB-1520-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2647",
+      "printed_days": "12345--",
+      "local_departure": "15:20",
+      "local_arrival": "16:15",
+      "utc_offset": "+01:00",
+      "duration_minutes": 55
+    },
+    {
+      "schedule": "air-france-2646-SXB-LIN-1225-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2646",
+      "printed_days": "12345--",
+      "local_departure": "12:25",
+      "local_arrival": "13:20",
+      "utc_offset": "+01:00",
+      "duration_minutes": 55
+    },
+    {
+      "schedule": "air-france-2643-LIN-TLS-1400-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2643",
+      "printed_days": "1-3-5--",
+      "local_departure": "14:00",
+      "local_arrival": "15:30",
+      "utc_offset": "+01:00",
+      "duration_minutes": 90
+    },
+    {
+      "schedule": "air-france-2642-TLS-LIN-1725-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2642",
+      "printed_days": "1-3-5--",
+      "local_departure": "17:25",
+      "local_arrival": "18:55",
+      "utc_offset": "+01:00",
+      "duration_minutes": 90
+    },
+    {
+      "schedule": "air-france-1937-MRS-FCO-1330-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF1937",
+      "printed_days": "12345--",
+      "local_departure": "13:30",
+      "local_arrival": "14:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "air-france-1930-FCO-MRS-1535-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF1930",
+      "printed_days": "12345--",
+      "local_departure": "15:35",
+      "local_arrival": "16:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 75
+    },
+    {
+      "schedule": "air-france-2649-FCO-NCE-1145-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF2649",
+      "printed_days": "-----6-",
+      "local_departure": "11:45",
+      "local_arrival": "12:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 65
+    },
+    {
+      "schedule": "air-france-2639-FCO-NCE-1340-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2639",
+      "printed_days": "12345--",
+      "local_departure": "13:40",
+      "local_arrival": "14:40",
+      "utc_offset": "+01:00",
+      "duration_minutes": 60
+    },
+    {
+      "schedule": "alitalia-338-FCO-NCE-1445-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ338",
+      "printed_days": "1-3-567",
+      "local_departure": "14:45",
+      "local_arrival": "15:45",
+      "utc_offset": "+01:00",
+      "duration_minutes": 60
+    },
+    {
+      "schedule": "air-france-2648-NCE-FCO-0950-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF2648",
+      "printed_days": "-----6-",
+      "local_departure": "09:50",
+      "local_arrival": "10:55",
+      "utc_offset": "+01:00",
+      "duration_minutes": 65
+    },
+    {
+      "schedule": "air-france-2644-NCE-FCO-1145-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF2644",
+      "printed_days": "12345--",
+      "local_departure": "11:45",
+      "local_arrival": "12:45",
+      "utc_offset": "+01:00",
+      "duration_minutes": 60
+    },
+    {
+      "schedule": "alitalia-339-NCE-FCO-1635-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ339",
+      "printed_days": "1-3-567",
+      "local_departure": "16:35",
+      "local_arrival": "17:35",
+      "utc_offset": "+01:00",
+      "duration_minutes": 60
+    },
+    {
+      "schedule": "air-france-630-CDG-FCO-0840-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF630",
+      "printed_days": "1234567",
+      "local_departure": "08:40",
+      "local_arrival": "10:35",
+      "utc_offset": "+01:00",
+      "duration_minutes": 115
+    },
+    {
+      "schedule": "alitalia-335-CDG-FCO-1210-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ335",
+      "printed_days": "1234567",
+      "local_departure": "12:10",
+      "local_arrival": "14:10",
+      "utc_offset": "+01:00",
+      "duration_minutes": 120
+    },
+    {
+      "schedule": "air-france-634-CDG-FCO-1630-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF634",
+      "printed_days": "1234567",
+      "local_departure": "16:30",
+      "local_arrival": "18:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 115
+    },
+    {
+      "schedule": "alitalia-321-CDG-FCO-2000-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ321",
+      "printed_days": "----567",
+      "local_departure": "20:00",
+      "local_arrival": "22:00",
+      "utc_offset": "+01:00",
+      "duration_minutes": 120
+    },
+    {
+      "schedule": "alitalia-334-FCO-CDG-0910-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ334",
+      "printed_days": "1234567",
+      "local_departure": "09:10",
+      "local_arrival": "11:10",
+      "utc_offset": "+01:00",
+      "duration_minutes": 120
+    },
+    {
+      "schedule": "air-france-631-FCO-CDG-1140-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF631",
+      "printed_days": "1234567",
+      "local_departure": "11:40",
+      "local_arrival": "13:40",
+      "utc_offset": "+01:00",
+      "duration_minutes": 120
+    },
+    {
+      "schedule": "alitalia-320-FCO-CDG-1700-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ320",
+      "printed_days": "----567",
+      "local_departure": "17:00",
+      "local_arrival": "19:00",
+      "utc_offset": "+01:00",
+      "duration_minutes": 120
+    },
+    {
+      "schedule": "air-france-635-FCO-CDG-1930-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF635",
+      "printed_days": "1234567",
+      "local_departure": "19:30",
+      "local_arrival": "21:30",
+      "utc_offset": "+01:00",
+      "duration_minutes": 120
+    },
+    {
+      "schedule": "alitalia-328-PSA-CDG-1325-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AZ328",
+      "printed_days": "1--45-7",
+      "local_departure": "13:25",
+      "local_arrival": "15:00",
+      "utc_offset": "+01:00",
+      "duration_minutes": 95
+    },
+    {
+      "schedule": "alitalia-328-PSA-CDG-1325-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AZ328",
+      "printed_days": "-23--6-",
+      "local_departure": "13:25",
+      "local_arrival": "15:00",
+      "utc_offset": "+01:00",
+      "duration_minutes": 95
+    },
+    {
+      "schedule": "air-france-551-PSA-CDG-1500-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF551",
+      "printed_days": "1-3-5-7",
+      "local_departure": "15:00",
+      "local_arrival": "16:35",
+      "utc_offset": "+01:00",
+      "duration_minutes": 95
+    },
+    {
+      "schedule": "air-france-550-CDG-PSA-1235-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF550",
+      "printed_days": "1-3-5-7",
+      "local_departure": "12:35",
+      "local_arrival": "14:20",
+      "utc_offset": "+01:00",
+      "duration_minutes": 105
+    },
+    {
+      "schedule": "alitalia-329-CDG-PSA-1545-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AZ329",
+      "printed_days": "1--45-7",
+      "local_departure": "15:45",
+      "local_arrival": "17:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 100
+    },
+    {
+      "schedule": "alitalia-329-CDG-PSA-1545-d6-b38",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AZ329",
+      "printed_days": "-23--6-",
+      "local_departure": "15:45",
+      "local_arrival": "17:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 100
+    },
+    {
+      "schedule": "air-france-640-CDG-TRN-1745-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF640",
+      "printed_days": "12345-7",
+      "local_departure": "17:45",
+      "local_arrival": "19:10",
+      "utc_offset": "+01:00",
+      "duration_minutes": 85
+    },
+    {
+      "schedule": "alitalia-325-CDG-TRN-2030-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ325",
+      "printed_days": "123456-",
+      "local_departure": "20:30",
+      "local_arrival": "21:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "alitalia-324-TRN-CDG-0810-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ324",
+      "printed_days": "123456-",
+      "local_departure": "08:10",
+      "local_arrival": "09:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 75
+    },
+    {
+      "schedule": "air-france-641-TRN-CDG-1950-d5-b38",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF641",
+      "printed_days": "12345-7",
+      "local_departure": "19:50",
+      "local_arrival": "21:10",
+      "utc_offset": "+01:00",
+      "duration_minutes": 80
+    },
+    {
+      "schedule": "air-france-658-CDG-VCE-1120-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF658",
+      "printed_days": "12-4567",
+      "local_departure": "11:20",
+      "local_arrival": "12:55",
+      "utc_offset": "+01:00",
+      "duration_minutes": 95
+    },
+    {
+      "schedule": "alitalia-341-CDG-VCE-1710-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ341",
+      "printed_days": "1-3-567",
+      "local_departure": "17:10",
+      "local_arrival": "18:50",
+      "utc_offset": "+01:00",
+      "duration_minutes": 100
+    },
+    {
+      "schedule": "air-france-659-VCE-CDG-1345-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF659",
+      "printed_days": "12-4567",
+      "local_departure": "13:45",
+      "local_arrival": "15:25",
+      "utc_offset": "+01:00",
+      "duration_minutes": 100
+    },
+    {
+      "schedule": "alitalia-340-VCE-CDG-1440-d56-b38",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AZ340",
+      "printed_days": "1-3-567",
+      "local_departure": "14:40",
+      "local_arrival": "16:20",
+      "utc_offset": "+01:00",
+      "duration_minutes": 100
+    }
+  ],
+  "source_files_sha256": {
+    "/tmp/batch23/af851027-1a.pdf": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+    "/tmp/airports.csv": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec",
+    "/tmp/batch38/alitalia-gallery.html": "1ba24db653495c5842dc79255605cbce405dc57a70f4b9c3fda66c705806cbba",
+    "/tmp/batch38/alitalia-usa.html": "46f98b27230927d2432f7d92866ea9cdb3fe29612607eab23dd5b02fb5b78300",
+    "/tmp/batch38/az860101.jpg": "87918e610b63db6bfd89a8da8752932687e5d8ce63b0bb248343f81dc76ea14a",
+    "/tmp/batch38/az-usa-1.jpg": "f756f4681622a246dd52197a4ed22c333608ab31d250016cffe68660de91ab19",
+    "/tmp/batch38/az-usa-2.jpg": "f0a1aa78e4227b8f8f60c0ed3bb965ef4a259f3ea498e0b3552ded0f8b1b3230",
+    "/tmp/batch38/az-usa-3.jpg": "d369e2a051ac4bdeb2dcb654f27c4d295faeed8d70f709a243c66a9579ceb119",
+    "/tmp/batch38/az-usa-4.jpg": "8d4f858fd852e6784ba019987c6b7884d22e391ab8a28ba8dc38e7d5f6ad18e9",
+    "/tmp/batch38/az-usa-5.jpg": "90c073b61da67827c929b0efcef8e385db07cf81c955ca02e9ebf7debb67ea90",
+    "/tmp/batch38/az-usa-6.jpg": "5d8fa5210c14a059cef375100d6d4a50a03e9f997c3a6f5d79cf466555fa4ff4",
+    "/tmp/batch38/az-usa-7.jpg": "422195b715aa738a2ee3daa3857847fa47897bc3e98d036809795d1db7e71dcd",
+    "/tmp/batch38/az-usa-8.jpg": "5ba899948bb94163f1ff70e339e84fc83af59ce86a07f48330cc3dc7ab7b65bd",
+    "/tmp/batch38/az-usa-9.jpg": "37531b5639adf5171bc113b063dc72a3c1325440e9a64071a2697a5a36f457ef"
+  },
+  "new_sources_create_no_schedules": true,
+  "europe_country_rows_checked": 40,
+  "country_endpoint_totals": {
+    "it": 100
+  },
+  "nordic_endpoint_movements": 155,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "55ef8c",
+        "wall_time_seconds": 2.445275578,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.517s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "af1b7a",
+        "wall_time_seconds": 0.131057594,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 87, \"registered_countries\": 74, \"reviewed_schedules\": 1592, \"animated_airlines\": 41, \"scheduled_movements\": 2313, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "0b1d2e",
+        "wall_time_seconds": 0.043853074,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "58aeff",
+        "wall_time_seconds": 2.0942e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "897ac3",
+        "wall_time_seconds": 2.2804e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

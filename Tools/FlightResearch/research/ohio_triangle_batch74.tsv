@@ -1,0 +1,59 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1			excluded_through_service	comair	1575	CVG	CLE	06:20	08:00	0	X67	12345	1	49		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+2	delta-1112-CVG-CLE-0803-b74		new_schedule	delta	1112	CVG	CLE	08:03	08:50	0		1234567	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+3	comair-1614-CVG-CLE-0925-b74		new_schedule	comair	1614	CVG	CLE	09:25	10:35	0	X67	12345	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+4	comair-1611-CVG-CLE-1210-b74		new_schedule	comair	1611	CVG	CLE	12:10	13:15	0	X67	12345	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+5	comair-1652-CVG-CLE-1345-b74		new_schedule	comair	1652	CVG	CLE	13:45	14:55	0	X6	123457	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+6	delta-334-CVG-CLE-1523-b74		new_schedule	delta	334	CVG	CLE	15:23	16:10	0		1234567	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+7	comair-1655-CVG-CLE-1655-b74		new_schedule	comair	1655	CVG	CLE	16:55	18:05	0	X6	123457	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+8	comair-1716-CVG-CLE-1827-b74		new_schedule	comair	1716	CVG	CLE	18:27	19:35	0	X6	123457	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+9	delta-1164-CVG-CLE-1943-b74		new_schedule	delta	1164	CVG	CLE	19:43	20:30	0		1234567	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+10	comair-1629-CVG-DAY-0615-b74		new_schedule	comair	1629	CVG	DAY	06:15	06:45	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+11	comair-1575-CVG-DAY-0620-b74		new_schedule	comair	1575	CVG	DAY	06:20	06:50	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+12	comair-1572-CVG-DAY-0931-b74		new_schedule	comair	1572	CVG	DAY	09:31	09:59	0	X7	123456	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+13	comair-1643-CVG-DAY-1245-b74		new_schedule	comair	1643	CVG	DAY	12:45	13:15	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+14			outside_window_weekdays	comair	1657	CVG	DAY	12:45	13:15	0	7	7	0	50		delta-19860201	1986-02-01				Sunday-only service; no departure date in the Thursday–Saturday window. No schedule or movement imported.
+15	comair-1642-CVG-DAY-1519-b74		new_schedule	comair	1642	CVG	DAY	15:19	15:49	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+16	comair-1543-CVG-DAY-1825-b74		new_schedule	comair	1543	CVG	DAY	18:25	18:55	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+17	comair-1677-CVG-DAY-2012-b74		new_schedule	comair	1677	CVG	DAY	20:12	20:42	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+18	delta-1101-CLE-CVG-0655-b74		new_schedule	delta	1101	CLE	CVG	06:55	07:44	0		1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+19	delta-271-CLE-CVG-0800-b74		new_schedule	delta	271	CLE	CVG	08:00	08:49	0		1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+20			excluded_connection	comair	1602/1726	CLE	CVG	09:50	11:45	0	X67	12345	CMH	52		delta-19860201	1986-02-01				Printed connection via CMH; component legs are not inferred.
+21	comair-1640-CLE-CVG-1000-b74		new_schedule	comair	1640	CLE	CVG	10:00	11:10	0	6	6	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+22	comair-1609-CLE-CVG-1050-b74		new_schedule	comair	1609	CLE	CVG	10:50	12:00	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+23			excluded_connection	comair	1724/1628	CLE	CVG	11:40	14:30	0	X67	12345	CMH	52		delta-19860201	1986-02-01				Printed connection via CMH; component legs are not inferred.
+24			excluded_connection	comair	1596/1714	CLE	CVG	11:50	14:20	0	X67	12345	DAY	52		delta-19860201	1986-02-01				Printed connection via DAY; component legs are not inferred.
+25	comair-1571-CLE-CVG-1330-b74		new_schedule	comair	1571	CLE	CVG	13:30	14:40	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+26	comair-1550-CLE-CVG-1510-b74		new_schedule	comair	1550	CLE	CVG	15:10	16:20	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+27	delta-479-CLE-CVG-1700-b74		new_schedule	delta	479	CLE	CVG	17:00	17:49	0		1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+28			excluded_through_service	comair	1729	CLE	CVG	17:15	19:05	0	X6	123457	1	52		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+29	comair-1649-CLE-CVG-1805-b74		new_schedule	comair	1649	CLE	CVG	18:05	19:15	0	X6	123457	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+30			excluded_through_service	comair	1547	CLE	CVG	18:30	20:40	0	5	5	1	52		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+31			excluded_through_service	comair	1584	CLE	CVG	19:40	21:10	0	X6	123457	1	52		delta-19860201	1986-02-01				Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+32	comair-1598-CLE-CVG-1955-b74		new_schedule	comair	1598	CLE	CVG	19:55	21:05	0	X6	123457	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+33	comair-1603-CLE-CVG-2110-b74		new_schedule	comair	1603	CLE	CVG	21:10	22:20	0	X6	123457	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+34	comair-1600-CLE-DAY-0720-b74		new_schedule	comair	1600	CLE	DAY	07:20	08:15	0	X7	123456	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+35			excluded_connection	mixed_delta_comair_connection	271/1572	CLE	DAY	08:00	09:59	0	X7	123456	CVG	53		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+36	comair-1541-CLE-DAY-0915-b74		new_schedule	comair	1541	CLE	DAY	09:15	10:10	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+37	comair-1596-CLE-DAY-1150-b74		new_schedule	comair	1596	CLE	DAY	11:50	12:45	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+38	comair-1526-CLE-DAY-1320-b74		new_schedule	comair	1526	CLE	DAY	13:20	14:10	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+39			excluded_connection	comair	1571/1642	CLE	DAY	13:30	15:49	0	X67	12345	CVG	53		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+40	comair-1578-CLE-DAY-1540-b74		new_schedule	comair	1578	CLE	DAY	15:40	16:35	0	X6	123457	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+41	comair-1729-CLE-DAY-1715-b74		new_schedule	comair	1729	CLE	DAY	17:15	18:15	0	X6	123457	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+42	comair-1584-CLE-DAY-1940-b74		new_schedule	comair	1584	CLE	DAY	19:40	20:30	0	X6	123457	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+43	comair-1600-DAY-CVG-0825-b74		new_schedule	comair	1600	DAY	CVG	08:25	08:55	0	X7	123456	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+44	comair-1682-DAY-CVG-1110-b74		new_schedule	comair	1682	DAY	CVG	11:10	11:40	0	6	6	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+45	comair-1714-DAY-CVG-1350-b74		new_schedule	comair	1714	DAY	CVG	13:50	14:20	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+46	comair-1559-DAY-CVG-1400-b74		new_schedule	comair	1559	DAY	CVG	14:00	14:30	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+47	comair-1578-DAY-CVG-1725-b74		new_schedule	comair	1578	DAY	CVG	17:25	17:55	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+48	comair-1729-DAY-CVG-1835-b74		new_schedule	comair	1729	DAY	CVG	18:35	19:05	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+49	comair-1667-DAY-CVG-1905-b74		new_schedule	comair	1667	DAY	CVG	19:05	19:35	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+50	comair-1584-DAY-CVG-2045-b74		new_schedule	comair	1584	DAY	CVG	20:45	21:10	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+51	comair-1677-DAY-CVG-2055-b74		new_schedule	comair	1677	DAY	CVG	20:55	21:25	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+52	comair-1575-DAY-CLE-0700-b74		new_schedule	comair	1575	DAY	CLE	07:00	08:00	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+53	comair-1697-DAY-CLE-0810-b74		new_schedule	comair	1697	DAY	CLE	08:10	09:05	0	X7	123456	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+54			excluded_connection	comair	1600/1614	DAY	CLE	08:25	10:35	0	X67	12345	CVG	67		delta-19860201	1986-02-01				Printed connection via CVG; component legs are not inferred.
+55	comair-1596-DAY-CLE-1330-b74		new_schedule	comair	1596	DAY	CLE	13:30	14:30	0	X67	12345	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+56	comair-1583-DAY-CLE-1435-b74		new_schedule	comair	1583	DAY	CLE	14:35	15:25	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+57	comair-1642-DAY-CLE-1600-b74		new_schedule	comair	1642	DAY	CLE	16:00	17:00	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+58	comair-1698-DAY-CLE-1835-b74		new_schedule	comair	1698	DAY	CLE	18:35	19:30	0	X6	123457	0	67		delta-19860201	1986-02-01		1986-02-27	1986-03-01	

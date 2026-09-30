@@ -1,0 +1,63 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    31,
+    46,
+    64,
+    73,
+    150,
+    191,
+    229,
+    244
+  ],
+  "footnotes_printed_page": 65,
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "31": 18,
+    "46": 26,
+    "64": 35,
+    "73": 39,
+    "150": 78,
+    "191": 98,
+    "229": 117,
+    "244": 125,
+    "65": 35
+  },
+  "new_airports": [],
+  "existing_airport_ids": [
+    "ATL",
+    "BOS",
+    "BWI",
+    "DCA",
+    "DFW",
+    "DTW",
+    "FLL",
+    "MIA",
+    "ORD",
+    "PHL",
+    "TPA"
+  ],
+  "airport_records_modified": false,
+  "notes": [
+    "Visual scans determine accepted fields; OCR is not authoritative.",
+    "All return times are read under the source city headings, not inferred from outbound rows.",
+    "Chicago is explicitly O’Hare; Dallas is Dallas/Fort Worth International.",
+    "Miami table M/F suffixes distinguish MIA/FLL; Washington table N/I suffixes distinguish DCA/BWI.",
+    "Seven FLL and five BWI rows exactly match previously imported schedules; no new rows or movements are created for them.",
+    "Five one-stop through rows and two connections via CVG/DAY are not imported as nonstop.",
+    "DL138 DFW–ATL has frequency 6 and footnote 5, operates 1–8 March 1986; only 1 March is imported.",
+    "DL874 DFW–ATL and DL481 DTW–ATL are Saturday-only departures after the window; research rows only.",
+    "DL295 DTW–ATL X67 only produces the Friday movement within this window. DL476 MIA–ATL 67 only produces Saturday.",
+    "DL386 DFW–ATL 21:58–00:37 arrives on the next local calendar day.",
+    "ORD and DFW use CST UTC−6, other selected airports EST UTC−5.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

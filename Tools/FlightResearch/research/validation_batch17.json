@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "package": "v18",
+  "checked_on": "2026-09-28",
+  "checks": [
+    {
+      "name": "flight_tests",
+      "exit_code": 0,
+      "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 1.350s\n\nOK\n"
+    },
+    {
+      "name": "generated_flights",
+      "exit_code": 0,
+      "output": "{\"registered_airlines\": 79, \"registered_countries\": 67, \"reviewed_schedules\": 789, \"animated_airlines\": 29, \"scheduled_movements\": 1181, \"confirmed_movements\": 1}\n"
+    },
+    {
+      "name": "country_index",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "stock_market",
+      "exit_code": 0,
+      "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+    }
+  ],
+  "unreal_build_run": false,
+  "unreal_runtime_tested": false,
+  "data_audit": {
+    "total_movements": 1182,
+    "new_movements": 47,
+    "new_schedules": 29,
+    "new_directed_routes": 25,
+    "unchanged_previous_movements": 1135,
+    "nordic_endpoint_movements_unchanged": 44,
+    "same_journey_time_conflicts": 0,
+    "reviewed_cross_service_date_overlaps": [
+      {
+        "leg_ids": [
+          "northwest-1-NRT-TPE-1910@1986-02-28",
+          "northwest-1-TPA-LAX-0830@1986-02-28"
+        ],
+        "journeys": [
+          "northwest/northwest-1@1986-02-27",
+          "northwest/northwest-1@1986-02-28"
+        ],
+        "resolution": "Same flight number reused on different service dates; previous US-origin journey continues in Asia while the next US service begins. Not a duplicate physical leg or same aircraft."
+      },
+      {
+        "leg_ids": [
+          "northwest-7-ITM-OKA-1955@1986-02-28",
+          "northwest-7-PHL-DTW-0710@1986-02-28"
+        ],
+        "journeys": [
+          "northwest/northwest-7@1986-02-27",
+          "northwest/northwest-7@1986-02-28"
+        ],
+        "resolution": "Same flight number reused on different service dates; previous US-origin journey continues in Asia while the next US service begins. Not a duplicate physical leg or same aircraft."
+      },
+      {
+        "leg_ids": [
+          "northwest-1-ITM-TPE-1955@1986-03-01",
+          "northwest-1-TPA-LAX-0830@1986-03-01"
+        ],
+        "journeys": [
+          "northwest/northwest-1@1986-02-28",
+          "northwest/northwest-1@1986-03-01"
+        ],
+        "resolution": "Same flight number reused on different service dates; previous US-origin journey continues in Asia while the next US service begins. Not a duplicate physical leg or same aircraft."
+      }
+    ],
+    "new_flights_by_schedule": {
+      "northwest-1-ITM-TPE-1955": 1,
+      "northwest-1-NRT-ITM-1805": 1,
+      "northwest-1-NRT-TPE-1910": 1,
+      "northwest-10-GMP-NRT-1250": 2,
+      "northwest-15-HNL-ITM-1035": 3,
+      "northwest-16-ITM-HNL-1855": 2,
+      "northwest-17-NRT-HKG-KAITAK-1800": 2,
+      "northwest-18-HKG-KAITAK-NRT-1115": 2,
+      "northwest-19-GMP-MNL-2020": 1,
+      "northwest-19-LAX-SEA-0910": 2,
+      "northwest-19-SAN-LAX-0755": 2,
+      "northwest-19-SEA-GMP-1355": 3,
+      "northwest-2-TPE-NRT-1145": 2,
+      "northwest-20-GMP-SEA-1710": 2,
+      "northwest-20-LAX-SAN-1540": 2,
+      "northwest-20-SEA-LAX-1250": 3,
+      "northwest-23-LAX-GMP-1300": 1,
+      "northwest-24-GMP-LAX-1630": 1,
+      "northwest-27-NRT-MNL-1900": 1,
+      "northwest-27-NRT-TPE-1805": 1,
+      "northwest-28-KUL-SUBANG-NRT-1200": 1,
+      "northwest-28-MNL-NRT-1415": 1,
+      "northwest-3-NRT-MNL-1805": 2,
+      "northwest-4-MNL-NRT-1025": 2,
+      "northwest-7-ITM-OKA-1955": 1,
+      "northwest-7-NRT-ITM-1805": 1,
+      "northwest-8-ITM-NRT-1350": 1,
+      "northwest-8-OKA-ITM-1110": 1,
+      "northwest-9-NRT-GMP-1805": 2
+    }
+  },
+  "code_audit": {
+    "changed_cpp_files": [
+      "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+      "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp"
+    ],
+    "other_protected_code_and_stock_files_unchanged": 20,
+    "icon_vertices": 18,
+    "icon_triangles": 16,
+    "polygon_area": 93.82,
+    "triangle_area_sum": 93.82,
+    "selected_outline_fits_click_radius": true,
+    "globe_max_paint_layer": 20,
+    "preview_visually_reviewed": true,
+    "preview_is_unreal_screenshot": false,
+    "rendering_api_basis": "Same MakeCustomVerts/FSlateVertex/WhiteBrush API pattern already used by PaintLand in STMOPWorldAtlas.cpp."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "selected_itinerary_pages": [
+    262,
+    263,
+    264
+  ],
+  "itinerary_numbers_explicitly_cross_checked": [
+    "790",
+    "760"
+  ],
+  "ambiguous_departures": {
+    "475": {
+      "options": [
+        "18:46",
+        "18:48"
+      ],
+      "reason": "Departure minute digits are not sufficiently clear in the scan; visual/OCR readings differ. No movement imported."
+    },
+    "705": {
+      "options": [
+        "11:46",
+        "11:48"
+      ],
+      "reason": "Departure minute digits are not sufficiently clear in the scan; visual/OCR readings differ. No movement imported."
+    }
+  },
+  "notes": [
+    "OCR is used only to locate and cross-check rows; visual scans determine accepted fields.",
+    "DL137 footnote 3: 28 February through 7 March, frequency 5.",
+    "DL181 footnote 6: effective 2 March, excluded.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

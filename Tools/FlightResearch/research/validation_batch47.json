@@ -1,0 +1,624 @@
+{
+  "package": "v48",
+  "batch": 47,
+  "checked_on": "2026-09-29",
+  "new_reviewed_schedules": 47,
+  "new_candidate_schedules": 0,
+  "research_only_rows": 3,
+  "new_movements": 54,
+  "total_movements": 2430,
+  "unchanged_previous_movements": 2376,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "BRS",
+    "BOH",
+    "CWL",
+    "INV"
+  ],
+  "all_previous_airport_objects_unchanged": true,
+  "all_previous_schedules_unchanged": true,
+  "updated_source_ids": [
+    "dan-air-19851027-system"
+  ],
+  "all_other_previous_source_objects_unchanged": true,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": 0,
+  "new_movements_by_source_airline": {
+    "dan-air": 54
+  },
+  "new_movements_by_date": {
+    "1986-02-28": 38,
+    "1986-03-01": 16
+  },
+  "printed_zero_stops_checked": true,
+  "printed_legend_checked": true,
+  "calendar_and_utc_checks": [
+    {
+      "id": "dan-air-081-ABZ-LGW-0730-b47@1986-02-28",
+      "departure_utc": "1986-02-28T07:30:00Z",
+      "arrival_utc": "1986-02-28T09:00:00Z",
+      "duration_minutes": 90,
+      "printed_days": "123456-"
+    },
+    {
+      "id": "dan-air-081-ABZ-LGW-0730-b47@1986-03-01",
+      "departure_utc": "1986-03-01T07:30:00Z",
+      "arrival_utc": "1986-03-01T09:00:00Z",
+      "duration_minutes": 90,
+      "printed_days": "123456-"
+    },
+    {
+      "id": "dan-air-083-ABZ-LGW-1200-b47@1986-02-28",
+      "departure_utc": "1986-02-28T12:00:00Z",
+      "arrival_utc": "1986-02-28T13:25:00Z",
+      "duration_minutes": 85,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-085-ABZ-LGW-1700-b47@1986-02-28",
+      "departure_utc": "1986-02-28T17:00:00Z",
+      "arrival_utc": "1986-02-28T18:30:00Z",
+      "duration_minutes": 90,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-125-BFS-CWL-0925-b47@1986-02-28",
+      "departure_utc": "1986-02-28T09:25:00Z",
+      "arrival_utc": "1986-02-28T10:55:00Z",
+      "duration_minutes": 90,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-219-BFS-LGW-0715-b47@1986-02-28",
+      "departure_utc": "1986-02-28T07:15:00Z",
+      "arrival_utc": "1986-02-28T08:30:00Z",
+      "duration_minutes": 75,
+      "printed_days": "1234567"
+    },
+    {
+      "id": "dan-air-219-BFS-LGW-0715-b47@1986-03-01",
+      "departure_utc": "1986-03-01T07:15:00Z",
+      "arrival_utc": "1986-03-01T08:30:00Z",
+      "duration_minutes": 75,
+      "printed_days": "1234567"
+    },
+    {
+      "id": "dan-air-223-BFS-LGW-1115-b47@1986-02-28",
+      "departure_utc": "1986-02-28T11:15:00Z",
+      "arrival_utc": "1986-02-28T12:30:00Z",
+      "duration_minutes": 75,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-225-BFS-LGW-1200-b47@1986-03-01",
+      "departure_utc": "1986-03-01T12:00:00Z",
+      "arrival_utc": "1986-03-01T13:15:00Z",
+      "duration_minutes": 75,
+      "printed_days": "-----67"
+    },
+    {
+      "id": "dan-air-229-BFS-LGW-1710-b47@1986-02-28",
+      "departure_utc": "1986-02-28T17:10:00Z",
+      "arrival_utc": "1986-02-28T18:25:00Z",
+      "duration_minutes": 75,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-144-BFS-NCL-1425-b47@1986-02-28",
+      "departure_utc": "1986-02-28T14:25:00Z",
+      "arrival_utc": "1986-02-28T15:30:00Z",
+      "duration_minutes": 65,
+      "printed_days": "1-3-5--"
+    },
+    {
+      "id": "dan-air-303-BOH-GCI-1530-b47@1986-02-28",
+      "departure_utc": "1986-02-28T15:30:00Z",
+      "arrival_utc": "1986-02-28T16:10:00Z",
+      "duration_minutes": 40,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-283-BOH-JER-0800-b47@1986-02-28",
+      "departure_utc": "1986-02-28T08:00:00Z",
+      "arrival_utc": "1986-02-28T08:45:00Z",
+      "duration_minutes": 45,
+      "printed_days": "1-3-5--"
+    },
+    {
+      "id": "dan-air-287-BOH-JER-1100-b47@1986-03-01",
+      "departure_utc": "1986-03-01T11:00:00Z",
+      "arrival_utc": "1986-03-01T11:45:00Z",
+      "duration_minutes": 45,
+      "printed_days": "-----6-"
+    },
+    {
+      "id": "dan-air-125-BRS-BFS-1205-b47@1986-02-28",
+      "departure_utc": "1986-02-28T12:05:00Z",
+      "arrival_utc": "1986-02-28T13:35:00Z",
+      "duration_minutes": 90,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-263-CWL-GCI-1215-b47@1986-02-28",
+      "departure_utc": "1986-02-28T12:15:00Z",
+      "arrival_utc": "1986-02-28T13:00:00Z",
+      "duration_minutes": 45,
+      "printed_days": "1-3-5--"
+    },
+    {
+      "id": "dan-air-283-GCI-BOH-0950-b47@1986-02-28",
+      "departure_utc": "1986-02-28T09:50:00Z",
+      "arrival_utc": "1986-02-28T10:30:00Z",
+      "duration_minutes": 40,
+      "printed_days": "1-3-5--"
+    },
+    {
+      "id": "dan-air-287-GCI-BOH-1250-b47@1986-03-01",
+      "departure_utc": "1986-03-01T12:50:00Z",
+      "arrival_utc": "1986-03-01T13:30:00Z",
+      "duration_minutes": 40,
+      "printed_days": "-----6-"
+    },
+    {
+      "id": "dan-air-263-GCI-JER-1320-b47@1986-02-28",
+      "departure_utc": "1986-02-28T13:20:00Z",
+      "arrival_utc": "1986-02-28T13:45:00Z",
+      "duration_minutes": 25,
+      "printed_days": "1-3-5--"
+    },
+    {
+      "id": "dan-air-303-GCI-JER-1630-b47@1986-02-28",
+      "departure_utc": "1986-02-28T16:30:00Z",
+      "arrival_utc": "1986-02-28T16:50:00Z",
+      "duration_minutes": 20,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-151-INV-LHR-0650-b47@1986-02-28",
+      "departure_utc": "1986-02-28T06:50:00Z",
+      "arrival_utc": "1986-02-28T08:10:00Z",
+      "duration_minutes": 80,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-153-INV-LHR-0800-b47@1986-03-01",
+      "departure_utc": "1986-03-01T08:00:00Z",
+      "arrival_utc": "1986-03-01T09:20:00Z",
+      "duration_minutes": 80,
+      "printed_days": "-----6-"
+    },
+    {
+      "id": "dan-air-157-INV-LHR-1735-b47@1986-02-28",
+      "departure_utc": "1986-02-28T17:35:00Z",
+      "arrival_utc": "1986-02-28T19:00:00Z",
+      "duration_minutes": 85,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-303-JER-BOH-1715-b47@1986-02-28",
+      "departure_utc": "1986-02-28T17:15:00Z",
+      "arrival_utc": "1986-02-28T18:00:00Z",
+      "duration_minutes": 45,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-263-JER-CWL-1410-b47@1986-02-28",
+      "departure_utc": "1986-02-28T14:10:00Z",
+      "arrival_utc": "1986-02-28T14:55:00Z",
+      "duration_minutes": 45,
+      "printed_days": "1-3-5--"
+    },
+    {
+      "id": "dan-air-283-JER-GCI-0910-b47@1986-02-28",
+      "departure_utc": "1986-02-28T09:10:00Z",
+      "arrival_utc": "1986-02-28T09:30:00Z",
+      "duration_minutes": 20,
+      "printed_days": "1-3-5--"
+    },
+    {
+      "id": "dan-air-287-JER-GCI-1210-b47@1986-03-01",
+      "departure_utc": "1986-03-01T12:10:00Z",
+      "arrival_utc": "1986-03-01T12:30:00Z",
+      "duration_minutes": 20,
+      "printed_days": "-----6-"
+    },
+    {
+      "id": "dan-air-400-JER-LGW-0800-b47@1986-02-28",
+      "departure_utc": "1986-02-28T08:00:00Z",
+      "arrival_utc": "1986-02-28T09:10:00Z",
+      "duration_minutes": 70,
+      "printed_days": "123456-"
+    },
+    {
+      "id": "dan-air-400-JER-LGW-0800-b47@1986-03-01",
+      "departure_utc": "1986-03-01T08:00:00Z",
+      "arrival_utc": "1986-03-01T09:10:00Z",
+      "duration_minutes": 70,
+      "printed_days": "123456-"
+    },
+    {
+      "id": "dan-air-406-JER-LGW-1450-b47@1986-02-28",
+      "departure_utc": "1986-02-28T14:50:00Z",
+      "arrival_utc": "1986-02-28T16:00:00Z",
+      "duration_minutes": 70,
+      "printed_days": "1-3-567"
+    },
+    {
+      "id": "dan-air-406-JER-LGW-1450-b47@1986-03-01",
+      "departure_utc": "1986-03-01T14:50:00Z",
+      "arrival_utc": "1986-03-01T16:00:00Z",
+      "duration_minutes": 70,
+      "printed_days": "1-3-567"
+    },
+    {
+      "id": "dan-air-082-LGW-ABZ-0945-b47@1986-02-28",
+      "departure_utc": "1986-02-28T09:45:00Z",
+      "arrival_utc": "1986-02-28T11:15:00Z",
+      "duration_minutes": 90,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-086-LGW-ABZ-1915-b47@1986-02-28",
+      "departure_utc": "1986-02-28T19:15:00Z",
+      "arrival_utc": "1986-02-28T20:45:00Z",
+      "duration_minutes": 90,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-220-LGW-BFS-0915-b47@1986-02-28",
+      "departure_utc": "1986-02-28T09:15:00Z",
+      "arrival_utc": "1986-02-28T10:30:00Z",
+      "duration_minutes": 75,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-222-LGW-BFS-1000-b47@1986-03-01",
+      "departure_utc": "1986-03-01T10:00:00Z",
+      "arrival_utc": "1986-03-01T11:15:00Z",
+      "duration_minutes": 75,
+      "printed_days": "-----67"
+    },
+    {
+      "id": "dan-air-226-LGW-BFS-1315-b47@1986-02-28",
+      "departure_utc": "1986-02-28T13:15:00Z",
+      "arrival_utc": "1986-02-28T14:30:00Z",
+      "duration_minutes": 75,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-230-LGW-BFS-1915-b47@1986-02-28",
+      "departure_utc": "1986-02-28T19:15:00Z",
+      "arrival_utc": "1986-02-28T20:30:00Z",
+      "duration_minutes": 75,
+      "printed_days": "1234567"
+    },
+    {
+      "id": "dan-air-230-LGW-BFS-1915-b47@1986-03-01",
+      "departure_utc": "1986-03-01T19:15:00Z",
+      "arrival_utc": "1986-03-01T20:30:00Z",
+      "duration_minutes": 75,
+      "printed_days": "1234567"
+    },
+    {
+      "id": "dan-air-154-LHR-INV-0900-b47@1986-02-28",
+      "departure_utc": "1986-02-28T09:00:00Z",
+      "arrival_utc": "1986-02-28T10:20:00Z",
+      "duration_minutes": 80,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-156-LHR-INV-1000-b47@1986-03-01",
+      "departure_utc": "1986-03-01T10:00:00Z",
+      "arrival_utc": "1986-03-01T11:25:00Z",
+      "duration_minutes": 85,
+      "printed_days": "-----6-"
+    },
+    {
+      "id": "dan-air-158-LHR-INV-1935-b47@1986-02-28",
+      "departure_utc": "1986-02-28T19:35:00Z",
+      "arrival_utc": "1986-02-28T21:00:00Z",
+      "duration_minutes": 85,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-405-LGW-JER-1300-b47@1986-02-28",
+      "departure_utc": "1986-02-28T13:00:00Z",
+      "arrival_utc": "1986-02-28T14:10:00Z",
+      "duration_minutes": 70,
+      "printed_days": "1-3-567"
+    },
+    {
+      "id": "dan-air-405-LGW-JER-1300-b47@1986-03-01",
+      "departure_utc": "1986-03-01T13:00:00Z",
+      "arrival_utc": "1986-03-01T14:10:00Z",
+      "duration_minutes": 70,
+      "printed_days": "1-3-567"
+    },
+    {
+      "id": "dan-air-407-LGW-JER-1820-b47@1986-02-28",
+      "departure_utc": "1986-02-28T18:20:00Z",
+      "arrival_utc": "1986-02-28T19:30:00Z",
+      "duration_minutes": 70,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-196-LHR-MAN-1355-b47@1986-02-28",
+      "departure_utc": "1986-02-28T13:55:00Z",
+      "arrival_utc": "1986-02-28T14:40:00Z",
+      "duration_minutes": 45,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-164-LGW-NCL-1410-b47@1986-02-28",
+      "departure_utc": "1986-02-28T14:10:00Z",
+      "arrival_utc": "1986-02-28T15:15:00Z",
+      "duration_minutes": 65,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-108-LGW-NCL-1850-b47@1986-02-28",
+      "departure_utc": "1986-02-28T18:50:00Z",
+      "arrival_utc": "1986-02-28T20:00:00Z",
+      "duration_minutes": 70,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-168-LGW-NCL-1900-b47@1986-03-01",
+      "departure_utc": "1986-03-01T19:00:00Z",
+      "arrival_utc": "1986-03-01T20:05:00Z",
+      "duration_minutes": 65,
+      "printed_days": "-----6-"
+    },
+    {
+      "id": "dan-air-196-MAN-INV-1500-b47@1986-02-28",
+      "departure_utc": "1986-02-28T15:00:00Z",
+      "arrival_utc": "1986-02-28T16:00:00Z",
+      "duration_minutes": 60,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-193-MAN-LHR-1230-b47@1986-02-28",
+      "departure_utc": "1986-02-28T12:30:00Z",
+      "arrival_utc": "1986-02-28T13:20:00Z",
+      "duration_minutes": 50,
+      "printed_days": "12345-7"
+    },
+    {
+      "id": "dan-air-168-NCL-ABZ-2020-b47@1986-03-01",
+      "departure_utc": "1986-03-01T20:20:00Z",
+      "arrival_utc": "1986-03-01T21:00:00Z",
+      "duration_minutes": 40,
+      "printed_days": "-----6-"
+    },
+    {
+      "id": "dan-air-141-NCL-BFS-0745-b47@1986-02-28",
+      "departure_utc": "1986-02-28T07:45:00Z",
+      "arrival_utc": "1986-02-28T08:55:00Z",
+      "duration_minutes": 70,
+      "printed_days": "12345--"
+    },
+    {
+      "id": "dan-air-101-NCL-LGW-0700-b47@1986-02-28",
+      "departure_utc": "1986-02-28T07:00:00Z",
+      "arrival_utc": "1986-02-28T08:10:00Z",
+      "duration_minutes": 70,
+      "printed_days": "123456-"
+    },
+    {
+      "id": "dan-air-101-NCL-LGW-0700-b47@1986-03-01",
+      "departure_utc": "1986-03-01T07:00:00Z",
+      "arrival_utc": "1986-03-01T08:10:00Z",
+      "duration_minutes": 70,
+      "printed_days": "123456-"
+    }
+  ],
+  "ground_stops": [
+    {
+      "flight": "DA283",
+      "airport": "JER",
+      "minutes": 25,
+      "arrival_utc": "1986-02-28T08:45:00Z",
+      "departure_utc": "1986-02-28T09:10:00Z"
+    },
+    {
+      "flight": "DA283",
+      "airport": "GCI",
+      "minutes": 20,
+      "arrival_utc": "1986-02-28T09:30:00Z",
+      "departure_utc": "1986-02-28T09:50:00Z"
+    },
+    {
+      "flight": "DA287",
+      "airport": "JER",
+      "minutes": 25,
+      "arrival_utc": "1986-03-01T11:45:00Z",
+      "departure_utc": "1986-03-01T12:10:00Z"
+    },
+    {
+      "flight": "DA287",
+      "airport": "GCI",
+      "minutes": 20,
+      "arrival_utc": "1986-03-01T12:30:00Z",
+      "departure_utc": "1986-03-01T12:50:00Z"
+    },
+    {
+      "flight": "DA303",
+      "airport": "GCI",
+      "minutes": 20,
+      "arrival_utc": "1986-02-28T16:10:00Z",
+      "departure_utc": "1986-02-28T16:30:00Z"
+    },
+    {
+      "flight": "DA303",
+      "airport": "JER",
+      "minutes": 25,
+      "arrival_utc": "1986-02-28T16:50:00Z",
+      "departure_utc": "1986-02-28T17:15:00Z"
+    },
+    {
+      "flight": "DA263",
+      "airport": "GCI",
+      "minutes": 20,
+      "arrival_utc": "1986-02-28T13:00:00Z",
+      "departure_utc": "1986-02-28T13:20:00Z"
+    },
+    {
+      "flight": "DA263",
+      "airport": "JER",
+      "minutes": 25,
+      "arrival_utc": "1986-02-28T13:45:00Z",
+      "departure_utc": "1986-02-28T14:10:00Z"
+    },
+    {
+      "flight": "DA196",
+      "airport": "MAN",
+      "minutes": 20,
+      "arrival_utc": "1986-02-28T14:40:00Z",
+      "departure_utc": "1986-02-28T15:00:00Z"
+    },
+    {
+      "flight": "DA168",
+      "airport": "NCL",
+      "minutes": 15,
+      "arrival_utc": "1986-03-01T20:05:00Z",
+      "departure_utc": "1986-03-01T20:20:00Z"
+    }
+  ],
+  "through_itineraries_not_duplicated": true,
+  "inv_man_193_conflict_withheld": true,
+  "missing_cwl_brs_125_and_ncl_abz_164_withheld": true,
+  "teesside_alternatives_not_added": true,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "source_files_sha256": {
+    "/tmp/batch46/da851027-1a.pdf": "03b8ba70d7833dacd9329861a86395bb2185a014ba345bc989e3ec9d421c2071",
+    "/tmp/batch47/cardiff-1984.pdf": "12501450cdb50ee9b14b699f7dcd5f26cf7ee57cbcac58efd8847e275ecbe65c",
+    "/tmp/batch47/danair.htm.html": "f6a0117c590deab1b14a70cd934c4998c75401c03e895e10a5bc7a442d45a7fd",
+    "/tmp/batch47/icelandair.htm.html": "d829a7af12e0aa49966401a6f387f7e2f0ed517b26ecd748543a756c0a4da819",
+    "/tmp/batch47/maersk0.jpg": "1817300f12aa39458d3f82656f108eac051bc6e99cad66a6b1e04455c56cd0ec",
+    "/tmp/batch47/maersk1.jpg": "4c61e66529935600fccaaefdc4d0e4fd5c1e930049cade14fbbf5e5f0120a6d0",
+    "/tmp/batch47/maersk2.jpg": "46e60f52bd2134eadf726e86a319dfe4ce3f6bd1493dd06bf4e8cee2c103186c",
+    "/tmp/batch47/maersk3.jpg": "b0387ee1b6a7394bea5e55436c8b06aa1032ec43c829ce2c02250a6f65a7c9cc",
+    "/tmp/batch47/maersk4.jpg": "f4e9f54453cb100d5d95fe3a9d38370295d53a1e29af6a0724176d59648b4354"
+  },
+  "europe_country_rows_checked": 40,
+  "next_country": "im",
+  "country_endpoint_totals": {
+    "dk": 84,
+    "fi": 4,
+    "is": 0,
+    "gb": 510,
+    "je": 43,
+    "gg": 42
+  },
+  "nordic_endpoint_movements": 160,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "273836",
+        "wall_time_seconds": 2.581678509,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.626s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "4c6e6d",
+        "wall_time_seconds": 0.176945587,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 93, \"registered_countries\": 81, \"reviewed_schedules\": 1699, \"animated_airlines\": 47, \"scheduled_movements\": 2429, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "020a74",
+        "wall_time_seconds": 0.036512177,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "b44867",
+        "wall_time_seconds": 0.034614201,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "e474cf",
+        "wall_time_seconds": 1.959e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

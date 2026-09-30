@@ -1,0 +1,33 @@
+{
+  "package": "v46",
+  "checked_on": "2026-09-29",
+  "status": "research_only",
+  "rows": [
+    {
+      "source": "aeroflot-19851027-first",
+      "page": "printed 29",
+      "flight": "SU503",
+      "origin": "SVO",
+      "destination": "ANK (printed city)",
+      "departure_local": "10:05",
+      "arrival_local": "12:05",
+      "printed_days": "Friday",
+      "printed_date_restriction": "27 December 1985 and 3 January 1986 only",
+      "imported": false,
+      "reason": "Restricted dates do not include 28 February; no schedule or movement added."
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "page": "printed 29",
+      "flight": "SU509",
+      "origin": "SVO",
+      "destination": "BEY",
+      "departure_local": "11:45",
+      "arrival_local": "14:15",
+      "printed_days": "Wednesday",
+      "printed_date_restriction": null,
+      "imported": false,
+      "reason": "Wednesday flight does not overlap the Thursday-evening to Saturday-evening observation window."
+    }
+  ]
+}

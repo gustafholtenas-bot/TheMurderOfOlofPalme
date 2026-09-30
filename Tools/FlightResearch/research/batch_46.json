@@ -1,0 +1,96 @@
+{
+  "batch": 46,
+  "package": "v47",
+  "checked_on": "2026-09-29",
+  "kind": "nordic_followup_and_schedule_import",
+  "previous_movements": 2369,
+  "new_schedules": 7,
+  "new_schedule_ids": [
+    "dan-air-102-LGW-NCL-0850-d5-b46",
+    "dan-air-102-NCL-SVG-1040-d5-b46",
+    "dan-air-107-SVG-NCL-1510-d5-b46",
+    "dan-air-107-NCL-LGW-1700-d5-b46",
+    "dan-air-842-NCL-FBU-1045-d5-b46",
+    "dan-air-843-FBU-NCL-1520-d5-b46",
+    "sas-517-BGO-LGW-1745-d5-b46"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_connection_rows": 7,
+  "research_only_timing_comparisons": 2,
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "dan-air-19851027-system",
+    "sas-worldwide-19851115-ed4-cover",
+    "sas-timetable-reference-a6774-01"
+  ],
+  "updated_source_ids": [],
+  "unchanged_previous_movements": 2369,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "dk",
+  "reviewed_countries_this_batch": [
+    "se",
+    "no"
+  ],
+  "new_movements": 7,
+  "total_movements": 2376,
+  "new_leg_ids": [
+    "dan-air-102-LGW-NCL-0850-d5-b46@1986-02-28",
+    "dan-air-102-NCL-SVG-1040-d5-b46@1986-02-28",
+    "dan-air-842-NCL-FBU-1045-d5-b46@1986-02-28",
+    "dan-air-107-SVG-NCL-1510-d5-b46@1986-02-28",
+    "dan-air-843-FBU-NCL-1520-d5-b46@1986-02-28",
+    "sas-517-BGO-LGW-1745-d5-b46@1986-02-28",
+    "dan-air-107-NCL-LGW-1700-d5-b46@1986-02-28"
+  ],
+  "new_movements_by_source_airline": {
+    "dan-air": 6,
+    "sas": 1
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BGO",
+      "LGW"
+    ],
+    [
+      "FBU",
+      "NCL"
+    ],
+    [
+      "LGW",
+      "NCL"
+    ],
+    [
+      "NCL",
+      "FBU"
+    ],
+    [
+      "NCL",
+      "LGW"
+    ],
+    [
+      "NCL",
+      "SVG"
+    ],
+    [
+      "SVG",
+      "NCL"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 648,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1652,
+    "animated_airlines": 47,
+    "scheduled_movements": 2375,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 5,
+  "nordic_endpoint_movements": 160
+}

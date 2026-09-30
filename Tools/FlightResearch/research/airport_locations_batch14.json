@@ -1,0 +1,16 @@
+[
+  {
+    "id": "EBJ",
+    "name": "Esbjerg",
+    "country": "dk",
+    "timezone": "Europe/Copenhagen",
+    "lat": 55.525902,
+    "lon": 8.5534,
+    "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/198565828590"
+    ],
+    "location_note": "Approximate airfield location; not a reconstructed gate or aircraft position in 1986."
+  }
+]

@@ -1,0 +1,239 @@
+{
+  "batch": 54,
+  "package": "v55",
+  "checked_on": "2026-09-29",
+  "countries": [
+    {
+      "country": "sm",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 0,
+      "domestic_movements": 0,
+      "international_movements": 0,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {},
+      "endpoint_leg_ids": [],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://aeroclubsanmarino.com/chi-siamo/",
+          "result": "Official club history re-read;1985 foundation and1986 flight-school context, no dates/times for the target window."
+        }
+      ],
+      "unresolved": [
+        "Torraccias daterade klubb-, skol- och flygdagböcker för observationsfönstret saknas. Klubbhistorikens årtal1985/1986 ger inga individuella avgångar. Noll inlagda rörelser betyder en datalucka."
+      ]
+    },
+    {
+      "country": "va",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 0,
+      "domestic_movements": 0,
+      "international_movements": 0,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {},
+      "endpoint_leg_ids": [],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://www.vatican.va/content/john-paul-ii/it/speeches/1986/march.html",
+          "result": "Official1March1986 activity entries inspected; no flight log."
+        },
+        {
+          "url": "https://www.vatican.va/content/john-paul-ii/it/speeches/1986/march/documents/hf_jp-ii_spe_19860301_pro-vita.html",
+          "result": "Dated speech welcomes participants to the Vatican. Does not establish flight movements or their absence."
+        }
+      ],
+      "unresolved": [
+        "Tidsatta flyg-/helikopterjournaler för observationsfönstret saknas. Daterade tal och vistelselistor ger inga start- eller landningstider; inga pendelflyg antas."
+      ]
+    },
+    {
+      "country": "mt",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 0,
+      "domestic_movements": 0,
+      "international_movements": 0,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {},
+      "endpoint_leg_ids": [],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://www.airtimes.com/cgat/mt/airmalta.htm",
+          "result": "Matching winter edition remains indexed; no newly verified inner time pages."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/mt/airmalta/gal/kmgal1a80.htm",
+          "result": "October27,1985 entry without readable timing images. Other years not substituted."
+        },
+        {
+          "url": "https://mail.timetableimages.com/ttimages/km.htm",
+          "result": "March31,1985 and March30,1986 images do not supply a matching winter schedule."
+        }
+      ],
+      "unresolved": [
+        "Air Maltas fullständiga vinterinlaga27okt1985–29mars1986, teckenförklaring och ändringar behöver läsas. Index och andra säsongers tabeller används inte som avgångstider.",
+        "Luqa, eventuell helikoptertrafik, utländska operatörer, charter, frakt och stats-/militärflyg kräver daterade underlag."
+      ]
+    },
+    {
+      "country": "pl",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 6,
+      "domestic_movements": 0,
+      "international_movements": 6,
+      "new_movements": 1,
+      "endpoint_movements_by_source_airline": {
+        "panam": 2,
+        "aeroflot": 1,
+        "lot": 1,
+        "air-france": 1,
+        "malev": 1
+      },
+      "endpoint_leg_ids": [
+        "panam-72-FRA-WAW-1205@1986-02-28",
+        "aeroflot-618-BUD-WAW-1330@1986-02-28",
+        "lot-273-WAW-ORY-1430-d5-b39@1986-02-28",
+        "air-france-280-ORY-WAW-1810-d5-b39@1986-02-28",
+        "panam-67-WAW-FRA-0835-d6-b54@1986-03-01",
+        "malev-120-BUD-WAW-1200@1986-03-01"
+      ],
+      "new_leg_ids": [
+        "panam-67-WAW-FRA-0835-d6-b54@1986-03-01"
+      ],
+      "checks": [
+        {
+          "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+          "result": "Printed105 explicitly gives PA67 Warsaw08:35–Frankfurt10:15, MoThSa, Nonstop; Saturday1March imported. Existing onward FRA–JFK not duplicated."
+        },
+        {
+          "url": "https://www.ebay.co.uk/itm/198076798105",
+          "result": "Matching winter listing again found in search index but direct retrieval returned404. No unseen images imported."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/pl/lot.htm",
+          "result": "Edition index checked; missing direct-service pages remain unresolved."
+        }
+      ],
+      "unresolved": [
+        "LOT:s egna direktflygssidor4–7, transfernoter11, inrikestrafik och ändringar saknas fortfarande. Den äldre annonslänken gav åter404.",
+        "Fler polska flygplatser och operatörer, frakt, charter och faktisk drift återstår. PA67:s lördagsrad innebär inte full Polentäckning."
+      ]
+    },
+    {
+      "country": "cz",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 2,
+      "domestic_movements": 0,
+      "international_movements": 2,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {
+        "csa": 1,
+        "air-france": 1
+      },
+      "endpoint_leg_ids": [
+        "csa-766-PRG-ORY-1750-d5-b40@1986-02-28",
+        "air-france-712-ORY-PRG-2040-d5-b40@1986-02-28"
+      ],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+          "result": "Advertising spread says European expansion beginning27April; next page lists Prague among new cities. Printed83–84 pass from Port of Spain/Providenciales to Raleigh, without a Prague timing section for this edition. No Prague import."
+        },
+        {
+          "url": "https://www.timetableimages.com/ttimages/complete/complete.htm",
+          "result": "New winter-edition search did not produce verified matching CSA inner time pages; prior cover-only status retained."
+        }
+      ],
+      "unresolved": [
+        "ČSA:s kompletta vintertabell, inrikesinlaga och ändringsblad saknas fortfarande. Pan Ams nya Pragtrafik annonseras först från27april1986.",
+        "Slov-Air, fler flygplatser, charter, frakt, helikopter-, stats- och militärflyg kräver daterade tider."
+      ]
+    },
+    {
+      "country": "hu",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 22,
+      "domestic_movements": 0,
+      "international_movements": 22,
+      "new_movements": 2,
+      "endpoint_movements_by_source_airline": {
+        "aeroflot": 11,
+        "malev": 7,
+        "panam": 2,
+        "air-france": 2
+      },
+      "endpoint_leg_ids": [
+        "aeroflot-423-SVO-BUD-0315@1986-02-28",
+        "aeroflot-412-BUD-SVO-0355@1986-02-28",
+        "aeroflot-131-SVO-BUD-0825@1986-02-28",
+        "malev-100-BUD-SVO-0800@1986-02-28",
+        "aeroflot-132-BUD-SVO-1020-TU5@1986-02-28",
+        "malev-101-SVO-BUD-1340@1986-02-28",
+        "panam-76-BUD-DBV-1300-d5-b54@1986-02-28",
+        "aeroflot-618-BUD-WAW-1330@1986-02-28",
+        "malev-558-BUD-ORY-1705-d5-b40@1986-02-28",
+        "air-france-559-ORY-BUD-2015-d5-b40@1986-02-28",
+        "aeroflot-424-BUD-SVO-0150@1986-03-01",
+        "aeroflot-407-SVO-BUD-0705@1986-03-01",
+        "aeroflot-131-SVO-BUD-0820@1986-03-01",
+        "panam-77-DBV-BUD-0725-d6-b54@1986-03-01",
+        "malev-100-BUD-SVO-0800@1986-03-01",
+        "aeroflot-407-BUD-ALG-0840@1986-03-01",
+        "aeroflot-132-BUD-SVO-1020-TU3@1986-03-01",
+        "malev-101-SVO-BUD-1340@1986-03-01",
+        "malev-120-BUD-WAW-1200@1986-03-01",
+        "air-france-724-ORY-BUD-1400-d6-b40@1986-03-01",
+        "aeroflot-408-BUD-SVO-1640@1986-03-01",
+        "malev-725-BUD-ORY-1705-d6-b40@1986-03-01"
+      ],
+      "new_leg_ids": [
+        "panam-76-BUD-DBV-1300-d5-b54@1986-02-28",
+        "panam-77-DBV-BUD-0725-d6-b54@1986-03-01"
+      ],
+      "checks": [
+        {
+          "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+          "result": "Printed22: PA76 BUD13:00–DBV14:10 TuFr, Nonstop, No Local Traffic; printed38: PA77 DBV07:25–BUD08:35 WeSa, same restriction. Friday/Saturday imported. Printed67 MUC–BUD TuWe and printed22 BUD–MUC WeTh not broadened from through itineraries."
+        },
+        {
+          "url": "https://www.ebay.com/itm/158302035859",
+          "result": "Two public photographs read: matching27Oct1985–29Mar1986 cover and Pierre Cardin uniform advertisement. No timetable inner pages."
+        },
+        {
+          "url": "https://tehnika.lzmk.hr/zracna-luka-dubrovnik/",
+          "result": "Čilipi opened1962; older Gruda distinguished. Dubrovnik belongs to historical Yugoslavia in the catalog."
+        },
+        {
+          "url": "https://ourairports.com/airports/LDDU/",
+          "result": "Coordinates42.562247,18.265543 used only as approximate site marker; modern airport name not applied to1986."
+        }
+      ],
+      "unresolved": [
+        "Malévs egna vinteravgångssidor saknas; den nyfunna annonsen visar åter bara omslag och uniformreklam.",
+        "Pan Ams genomgående resor har fler trafikdagar än vissa direkta lokala rader. München–Budapest:s TuWe och Budapest–München:s WeTh utvidgas inte; saknade dagsspecifika delsträcketider behöver eget belägg. Övrig trafik och faktisk drift återstår."
+      ]
+    }
+  ],
+  "next_country": "ro",
+  "related_yugoslavia_note": "Two Dubrovnik endpoint movements added from Hungarian review. Full second-pass Yugoslavia review remains in queue."
+}

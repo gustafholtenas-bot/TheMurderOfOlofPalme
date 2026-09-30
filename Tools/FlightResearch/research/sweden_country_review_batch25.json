@@ -1,0 +1,181 @@
+{
+  "batch": 25,
+  "package": "v26",
+  "country": "se",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "coverage_complete": false,
+  "endpoint_movements": 87,
+  "domestic_movements": 6,
+  "endpoint_movements_by_source_airline": {
+    "golden-air": 12,
+    "sas": 61,
+    "northwest": 2,
+    "air-france": 12
+  },
+  "endpoint_leg_ids": [
+    "golden-air-502-KSK-BMA-0710@1986-02-28",
+    "sas-673-ARN-CPH-0730@1986-02-28",
+    "sas-400-CPH-ARN-0740@1986-02-28",
+    "sas-401-ARN-CPH-0750@1986-02-28",
+    "golden-air-503-BMA-KSK-0800@1986-02-28",
+    "sas-593-ARN-CPH-0800@1986-02-28",
+    "northwest-44-LGW-ARN-0805@1986-02-28",
+    "golden-air-513-KSD-OLD-FBU-0910@1986-02-28",
+    "sas-571-ARN-CDG-0910@1986-02-28",
+    "sas-402-CPH-ARN-0915@1986-02-28",
+    "sas-404-CPH-ARN-0920@1986-02-28",
+    "sas-403-ARN-CPH-0935@1986-02-28",
+    "sas-581-ARN-CPH-0945@1986-02-28",
+    "golden-air-514-FBU-KSD-OLD-1015@1986-02-28",
+    "sas-405-ARN-CPH-1015@1986-02-28",
+    "air-france-790-CDG-ARN-1040@1986-02-28",
+    "sas-730-CPH-ARN-1120@1986-02-28",
+    "sas-412-CPH-ARN-1125@1986-02-28",
+    "golden-air-504-KSK-BMA-1130@1986-02-28",
+    "sas-407-ARN-CPH-1245@1986-02-28",
+    "sas-572-CDG-ARN-1245@1986-02-28",
+    "golden-air-505-BMA-KSK-1300@1986-02-28",
+    "sas-411-ARN-CPH-1315@1986-02-28",
+    "air-france-796-FBU-GOT-1325@1986-02-28",
+    "air-france-790-ARN-HEL-1345@1986-02-28",
+    "golden-air-515-KSD-OLD-FBU-1415@1986-02-28",
+    "sas-674-CPH-ARN-1415@1986-02-28",
+    "sas-413-ARN-CPH-1425@1986-02-28",
+    "air-france-796-GOT-CDG-1445@1986-02-28",
+    "sas-684-CPH-ARN-1505@1986-02-28",
+    "sas-414-CPH-ARN-1510@1986-02-28",
+    "air-france-791-HEL-ARN-1625@1986-02-28",
+    "golden-air-516-FBU-KSD-OLD-1530@1986-02-28",
+    "sas-415-ARN-CPH-1555@1986-02-28",
+    "sas-573-ARN-CDG-1605@1986-02-28",
+    "sas-682-CPH-ARN-1615@1986-02-28",
+    "golden-air-506-KSK-BMA-1645@1986-02-28",
+    "sas-419-ARN-CPH-1650@1986-02-28",
+    "air-france-791-ARN-CDG-1705@1986-02-28",
+    "golden-air-507-BMA-KSK-1735@1986-02-28",
+    "sas-418-CPH-ARN-1800@1986-02-28",
+    "sas-417-ARN-CPH-1805@1986-02-28",
+    "sas-424-CPH-ARN-1805@1986-02-28",
+    "golden-air-517-KSD-OLD-FBU-1850@1986-02-28",
+    "sas-731-ARN-CPH-1850@1986-02-28",
+    "sas-426-CPH-ARN-1905@1986-02-28",
+    "sas-570-CDG-GOT-1905@1986-02-28",
+    "sas-574-CDG-ARN-1920@1986-02-28",
+    "golden-air-518-FBU-KSD-OLD-1945@1986-02-28",
+    "sas-423-ARN-CPH-1950@1986-02-28",
+    "sas-425-ARN-CPH-1955@1986-02-28",
+    "sas-582-CPH-ARN-2010@1986-02-28",
+    "sas-422-CPH-ARN-2015@1986-02-28",
+    "sas-420-CPH-ARN-2210@1986-02-28",
+    "sas-673-ARN-CPH-0730@1986-03-01",
+    "sas-400-CPH-ARN-0740@1986-03-01",
+    "sas-401-ARN-CPH-0750@1986-03-01",
+    "sas-593-ARN-CPH-0800@1986-03-01",
+    "sas-571-ARN-CDG-0910@1986-03-01",
+    "sas-404-CPH-ARN-0920@1986-03-01",
+    "sas-403-ARN-CPH-0935@1986-03-01",
+    "sas-581-ARN-CPH-0945@1986-03-01",
+    "sas-405-ARN-CPH-1015@1986-03-01",
+    "air-france-790-CDG-ARN-1040@1986-03-01",
+    "sas-406-CPH-ARN-1120@1986-03-01",
+    "sas-412-CPH-ARN-1125@1986-03-01",
+    "northwest-37-ARN-GEN-1220@1986-03-01",
+    "sas-409-ARN-CPH-1240@1986-03-01",
+    "sas-407-ARN-CPH-1245@1986-03-01",
+    "sas-572-CDG-ARN-1245@1986-03-01",
+    "sas-411-ARN-CPH-1315@1986-03-01",
+    "air-france-796-FBU-GOT-1325@1986-03-01",
+    "air-france-790-ARN-HEL-1345@1986-03-01",
+    "sas-674-CPH-ARN-1415@1986-03-01",
+    "air-france-796-GOT-CDG-1445@1986-03-01",
+    "sas-684-CPH-ARN-1505@1986-03-01",
+    "sas-414-CPH-ARN-1510@1986-03-01",
+    "air-france-791-HEL-ARN-1625@1986-03-01",
+    "sas-415-ARN-CPH-1555@1986-03-01",
+    "sas-682-CPH-ARN-1615@1986-03-01",
+    "sas-419-ARN-CPH-1650@1986-03-01",
+    "air-france-791-ARN-CDG-1705@1986-03-01",
+    "sas-596-CPH-ARN-1800@1986-03-01",
+    "sas-417-ARN-CPH-1805@1986-03-01",
+    "sas-426-CPH-ARN-1905@1986-03-01",
+    "sas-582-CPH-ARN-2010@1986-03-01",
+    "sas-420-CPH-ARN-2210@1986-03-01"
+  ],
+  "new_movements": 0,
+  "new_schedules": 0,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/se/sas/gal/skgal1a80.htm",
+      "result": "1985/86-utgåvor finns i indexet; inga PDF-länkar hittades i detta galleri.",
+      "type": "index_checked"
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/lf.htm",
+      "result": "Inga läsbara avgångssidor för vintern 1985/86 hittades på denna Linjeflyg-indexsida.",
+      "type": "index_checked"
+    },
+    {
+      "url": "https://www.ebay.com/itm/157857969262",
+      "result": "Tidigare känt SAS edition 4-spår gav HTTP 404 vid öppning; ingen ny tidtabell kunde läsas.",
+      "type": "unavailable_listing"
+    },
+    {
+      "url": "https://www.ebay.co.uk/itm/198453305668",
+      "result": "Tidigare granskade Malmöblad 14,15,22,23 kvarstår som reseförslag utan tillräcklig delsträcks- och flygnummerinformation.",
+      "type": "existing_evidence_carried_forward"
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "result": "Tryckta s. 87–88 återkontrollerade visuellt. Importerbara fredags-/lördagsrader finns redan; övriga resor/veckodagar blir inga nya avgångar.",
+      "type": "contemporary_pages_rechecked",
+      "printed_pages": [
+        87,
+        88
+      ]
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/de/lufthansa/gal/lhgal1b-scandinavia.htm",
+      "result": "Inga PDF-länkar hittades i detta Skandinaviengalleri.",
+      "type": "index_checked"
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/ch/swissair/gal/srgal1b-scan.htm",
+      "result": "Inga PDF-länkar hittades i detta Skandinaviengalleri.",
+      "type": "index_checked"
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/ch/swissair/gal/srgal1b-scan-ukie.htm",
+      "result": "Inga PDF-länkar hittades i detta regionala galleri.",
+      "type": "index_checked"
+    },
+    {
+      "url": "https://www.linjeflyg.info/linsidor.htm",
+      "result": "HTTP 404 vid hämtning av länksidan.",
+      "type": "unavailable_page"
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/indexse.htm",
+      "result": "Namnindex ger ytterligare forskningsspår men fastställer inte verksamhet eller avgångar den aktuella helgen.",
+      "type": "index_checked"
+    }
+  ],
+  "discovery_names_unverified_for_exact_window": [
+    "Scanair",
+    "Transwede",
+    "AMA Norving/Salair",
+    "Air Nordic/Arosflyg",
+    "övriga regional-, charter-, frakt- och militärflygoperatörer"
+  ],
+  "discovery_note": "Namn är sökmål, inte fastställd bolagsinventering eller belägg för någon avgång. Inga nya runtime-operatörer skapas från dem.",
+  "unresolved": [
+    "SAS/Linjeflyg: komplett vintertabell med tider per fysisk sträcka",
+    "Swedair: avgångssidor och operatörsförhållande till SAS/Linjeflyg",
+    "SK563 GOT–CPH: separat ankomsttid saknas",
+    "SK570 GOT–FBU: separat avgångstid saknas",
+    "SK594/410: samma tryckta tider som SK674 behöver utredas",
+    "Golden Air Karlskoga–Karlstad: separata mellantider saknas",
+    "Utländska Sverigeavgångar: komplettera giltiga vinterutgåvor",
+    "Faktiska överflygningar: daterade flyglednings-/positionsunderlag saknas"
+  ]
+}

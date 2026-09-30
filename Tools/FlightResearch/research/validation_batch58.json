@@ -1,0 +1,2575 @@
+{
+  "package": "v59",
+  "batch": 58,
+  "checked_on": "2026-09-29",
+  "new_movements": 220,
+  "total_movements": 3223,
+  "southwest_total_movements": 635,
+  "unchanged_previous_movements": 3003,
+  "new_reviewed_schedules": 116,
+  "reviewed_rows_producing_movements": 111,
+  "reviewed_rows_without_window_movements": [
+    "southwest-786-HOU-AUS-MUELLER-2010-b58",
+    "southwest-956-ELP-HOU-1210-b58",
+    "southwest-997-ELP-HOU-2145-b58",
+    "southwest-767-HOU-MSY-1900-b58",
+    "southwest-735-SAT-HOU-0930-b58"
+  ],
+  "new_candidate_schedules": 0,
+  "new_airports": [
+    "CRP",
+    "PHX",
+    "HRL",
+    "STL"
+  ],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "southwest-19860112"
+  ],
+  "source_changes": "Appended reviewed pages, image URLs and bilingual notes only.",
+  "all_previous_schedules_unchanged": true,
+  "all_previous_airport_objects_unchanged": true,
+  "all_previous_airline_objects_unchanged": true,
+  "all_other_source_objects_unchanged": true,
+  "already_imported_dallas_rows_not_duplicated": 45,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": 0,
+  "overlap_checks_include_previous_southwest_movements": true,
+  "consecutive_same_number_segments": [
+    {
+      "first_leg": "southwest-86-CRP-HOU-1600-b58@1986-02-27",
+      "next_leg": "southwest-86-HOU-DAL-1700-b57@1986-02-27",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-861-AUS-MUELLER-HOU-1630-b58@1986-02-27",
+      "next_leg": "southwest-861-HOU-MSY-1730-b58@1986-02-27",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-854-MSY-HOU-1645-b58@1986-02-27",
+      "next_leg": "southwest-854-HOU-AUS-MUELLER-1800-b58@1986-02-27",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-862-HRL-HOU-1715-b58@1986-02-27",
+      "next_leg": "southwest-862-HOU-SAT-1830-b58@1986-02-27",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-787-AUS-MUELLER-HOU-1745-b58@1986-02-27",
+      "next_leg": "southwest-787-HOU-HRL-1845-b58@1986-02-27",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-422-CRP-HOU-1800-b58@1986-02-27",
+      "next_leg": "southwest-422-HOU-TUL-1900-b58@1986-02-27",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-351-STL-HOU-1830-b58@1986-02-27",
+      "next_leg": "southwest-351-HOU-AUS-MUELLER-2050-b58@1986-02-27",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-754-MSY-HOU-1845-b58@1986-02-27",
+      "next_leg": "southwest-754-HOU-SAT-2000-b58@1986-02-27",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-114-CRP-HOU-2000-b58@1986-02-27",
+      "next_leg": "southwest-114-HOU-DAL-2100-b57@1986-02-27",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-855-AUS-MUELLER-HOU-2045-b58@1986-02-27",
+      "next_leg": "southwest-855-HOU-MSY-2145-b58@1986-02-27",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-761-AUS-MUELLER-HOU-0630-b58@1986-02-28",
+      "next_leg": "southwest-761-HOU-LIT-0740-b58@1986-02-28",
+      "ground_minutes": 25,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-10-CRP-HOU-0645-b58@1986-02-28",
+      "next_leg": "southwest-10-HOU-DAL-0745-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-14-HRL-HOU-0645-b58@1986-02-28",
+      "next_leg": "southwest-14-HOU-DAL-0800-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-838-MSY-HOU-0645-b58@1986-02-28",
+      "next_leg": "southwest-838-HOU-CRP-0800-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-30-CRP-HOU-0900-b58@1986-02-28",
+      "next_leg": "southwest-30-HOU-DAL-1000-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-799-HOU-SAT-0905-b58@1986-02-28",
+      "next_leg": "southwest-799-SAT-DAL-1005-b57@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-846-MSY-HOU-0915-b58@1986-02-28",
+      "next_leg": "southwest-846-HOU-HRL-1030-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-34-HRL-HOU-0945-b58@1986-02-28",
+      "next_leg": "southwest-34-HOU-DAL-1100-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-343-STL-HOU-1015-b58@1986-02-28",
+      "next_leg": "southwest-343-HOU-HRL-1235-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-42-CRP-HOU-1100-b58@1986-02-28",
+      "next_leg": "southwest-42-HOU-DAL-1200-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-50-HRL-HOU-1145-b58@1986-02-28",
+      "next_leg": "southwest-50-HOU-DAL-1300-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-852-MSY-HOU-1145-b58@1986-02-28",
+      "next_leg": "southwest-852-HOU-SAT-1300-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-58-CRP-HOU-1300-b58@1986-02-28",
+      "next_leg": "southwest-58-HOU-DAL-1400-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-859-PHX-HOU-1200-b58@1986-02-28",
+      "next_leg": "southwest-859-HOU-MSY-1530-b58@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-70-HRL-HOU-1350-b58@1986-02-28",
+      "next_leg": "southwest-70-HOU-DAL-1500-b57@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-74-CRP-HOU-1500-b58@1986-02-28",
+      "next_leg": "southwest-74-HOU-DAL-1600-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-82-HRL-HOU-1515-b58@1986-02-28",
+      "next_leg": "southwest-82-HOU-DAL-1645-b57@1986-02-28",
+      "ground_minutes": 30,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-86-CRP-HOU-1600-b58@1986-02-28",
+      "next_leg": "southwest-86-HOU-DAL-1700-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-861-AUS-MUELLER-HOU-1630-b58@1986-02-28",
+      "next_leg": "southwest-861-HOU-MSY-1730-b58@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-854-MSY-HOU-1645-b58@1986-02-28",
+      "next_leg": "southwest-854-HOU-AUS-MUELLER-1800-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-862-HRL-HOU-1715-b58@1986-02-28",
+      "next_leg": "southwest-862-HOU-SAT-1830-b58@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-787-AUS-MUELLER-HOU-1745-b58@1986-02-28",
+      "next_leg": "southwest-787-HOU-HRL-1845-b58@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-422-CRP-HOU-1800-b58@1986-02-28",
+      "next_leg": "southwest-422-HOU-TUL-1900-b58@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-351-STL-HOU-1830-b58@1986-02-28",
+      "next_leg": "southwest-351-HOU-AUS-MUELLER-2050-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-754-MSY-HOU-1845-b58@1986-02-28",
+      "next_leg": "southwest-754-HOU-SAT-2000-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-114-CRP-HOU-2000-b58@1986-02-28",
+      "next_leg": "southwest-114-HOU-DAL-2100-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-855-AUS-MUELLER-HOU-2045-b58@1986-02-28",
+      "next_leg": "southwest-855-HOU-MSY-2145-b58@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-755-SAT-HOU-2135-b58@1986-02-28",
+      "next_leg": "southwest-755-HOU-TUL-2235-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-761-AUS-MUELLER-HOU-0630-b58@1986-03-01",
+      "next_leg": "southwest-761-HOU-LIT-0740-b58@1986-03-01",
+      "ground_minutes": 25,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-10-CRP-HOU-0645-b58@1986-03-01",
+      "next_leg": "southwest-10-HOU-DAL-0745-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-14-HRL-HOU-0645-b58@1986-03-01",
+      "next_leg": "southwest-14-HOU-DAL-0800-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-838-MSY-HOU-0645-b58@1986-03-01",
+      "next_leg": "southwest-838-HOU-CRP-0800-b58@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-30-CRP-HOU-0900-b58@1986-03-01",
+      "next_leg": "southwest-30-HOU-DAL-1000-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-799-HOU-SAT-0905-b58@1986-03-01",
+      "next_leg": "southwest-799-SAT-DAL-1005-b57@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-846-MSY-HOU-0915-b58@1986-03-01",
+      "next_leg": "southwest-846-HOU-HRL-1030-b58@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-34-HRL-HOU-0945-b58@1986-03-01",
+      "next_leg": "southwest-34-HOU-DAL-1100-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-343-STL-HOU-1015-b58@1986-03-01",
+      "next_leg": "southwest-343-HOU-HRL-1235-b58@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-42-CRP-HOU-1100-b58@1986-03-01",
+      "next_leg": "southwest-42-HOU-DAL-1200-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-50-HRL-HOU-1145-b58@1986-03-01",
+      "next_leg": "southwest-50-HOU-DAL-1300-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-852-MSY-HOU-1145-b58@1986-03-01",
+      "next_leg": "southwest-852-HOU-SAT-1300-b58@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-58-CRP-HOU-1300-b58@1986-03-01",
+      "next_leg": "southwest-58-HOU-DAL-1400-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-859-PHX-HOU-1200-b58@1986-03-01",
+      "next_leg": "southwest-859-HOU-MSY-1530-b58@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-70-HRL-HOU-1350-b58@1986-03-01",
+      "next_leg": "southwest-70-HOU-DAL-1500-b57@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-74-CRP-HOU-1500-b58@1986-03-01",
+      "next_leg": "southwest-74-HOU-DAL-1600-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    }
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 48,
+    "1986-02-28": 111,
+    "1986-03-01": 61
+  },
+  "independent_fixed_offset_and_zoneinfo_agree": true,
+  "calendar_and_utc_checks": [
+    {
+      "id": "southwest-776-HOU-AUS-MUELLER-0715-b58@1986-02-28",
+      "departure_utc": "1986-02-28T13:15:00Z",
+      "arrival_utc": "1986-02-28T14:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "12345",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-778-HOU-AUS-MUELLER-0815-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:15:00Z",
+      "arrival_utc": "1986-02-28T15:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-778-HOU-AUS-MUELLER-0815-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:15:00Z",
+      "arrival_utc": "1986-03-01T15:00:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-780-HOU-AUS-MUELLER-1235-b58@1986-02-28",
+      "departure_utc": "1986-02-28T18:35:00Z",
+      "arrival_utc": "1986-02-28T19:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-780-HOU-AUS-MUELLER-1235-b58@1986-03-01",
+      "departure_utc": "1986-03-01T18:35:00Z",
+      "arrival_utc": "1986-03-01T19:20:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-782-HOU-AUS-MUELLER-1530-b58@1986-02-28",
+      "departure_utc": "1986-02-28T21:30:00Z",
+      "arrival_utc": "1986-02-28T22:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-782-HOU-AUS-MUELLER-1530-b58@1986-03-01",
+      "departure_utc": "1986-03-01T21:30:00Z",
+      "arrival_utc": "1986-03-01T22:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-784-HOU-AUS-MUELLER-1700-b58@1986-02-27",
+      "departure_utc": "1986-02-27T23:00:00Z",
+      "arrival_utc": "1986-02-27T23:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-784-HOU-AUS-MUELLER-1700-b58@1986-02-28",
+      "departure_utc": "1986-02-28T23:00:00Z",
+      "arrival_utc": "1986-02-28T23:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-854-HOU-AUS-MUELLER-1800-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:00:00Z",
+      "arrival_utc": "1986-02-28T00:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-854-HOU-AUS-MUELLER-1800-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:00:00Z",
+      "arrival_utc": "1986-03-01T00:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-351-HOU-AUS-MUELLER-2050-b58@1986-02-27",
+      "departure_utc": "1986-02-28T02:50:00Z",
+      "arrival_utc": "1986-02-28T03:35:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-351-HOU-AUS-MUELLER-2050-b58@1986-02-28",
+      "departure_utc": "1986-03-01T02:50:00Z",
+      "arrival_utc": "1986-03-01T03:35:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-761-AUS-MUELLER-HOU-0630-b58@1986-02-28",
+      "departure_utc": "1986-02-28T12:30:00Z",
+      "arrival_utc": "1986-02-28T13:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-761-AUS-MUELLER-HOU-0630-b58@1986-03-01",
+      "departure_utc": "1986-03-01T12:30:00Z",
+      "arrival_utc": "1986-03-01T13:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-763-AUS-MUELLER-HOU-0810-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:10:00Z",
+      "arrival_utc": "1986-02-28T14:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-763-AUS-MUELLER-HOU-0810-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:10:00Z",
+      "arrival_utc": "1986-03-01T14:55:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-765-AUS-MUELLER-HOU-1005-b58@1986-02-28",
+      "departure_utc": "1986-02-28T16:05:00Z",
+      "arrival_utc": "1986-02-28T16:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-765-AUS-MUELLER-HOU-1005-b58@1986-03-01",
+      "departure_utc": "1986-03-01T16:05:00Z",
+      "arrival_utc": "1986-03-01T16:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-861-AUS-MUELLER-HOU-1630-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:30:00Z",
+      "arrival_utc": "1986-02-27T23:15:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-861-AUS-MUELLER-HOU-1630-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:30:00Z",
+      "arrival_utc": "1986-02-28T23:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-787-AUS-MUELLER-HOU-1745-b58@1986-02-27",
+      "departure_utc": "1986-02-27T23:45:00Z",
+      "arrival_utc": "1986-02-28T00:30:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-787-AUS-MUELLER-HOU-1745-b58@1986-02-28",
+      "departure_utc": "1986-02-28T23:45:00Z",
+      "arrival_utc": "1986-03-01T00:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-789-AUS-MUELLER-HOU-1955-b58@1986-02-28",
+      "departure_utc": "1986-03-01T01:55:00Z",
+      "arrival_utc": "1986-03-01T02:40:00Z",
+      "local_weekday": 5,
+      "printed_days": "1567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-855-AUS-MUELLER-HOU-2045-b58@1986-02-27",
+      "departure_utc": "1986-02-28T02:45:00Z",
+      "arrival_utc": "1986-02-28T03:30:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-855-AUS-MUELLER-HOU-2045-b58@1986-02-28",
+      "departure_utc": "1986-03-01T02:45:00Z",
+      "arrival_utc": "1986-03-01T03:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-838-HOU-CRP-0800-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:00:00Z",
+      "arrival_utc": "1986-02-28T14:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-838-HOU-CRP-0800-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:00:00Z",
+      "arrival_utc": "1986-03-01T14:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-17-HOU-CRP-0930-b58@1986-02-28",
+      "departure_utc": "1986-02-28T15:30:00Z",
+      "arrival_utc": "1986-02-28T16:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-17-HOU-CRP-0930-b58@1986-03-01",
+      "departure_utc": "1986-03-01T15:30:00Z",
+      "arrival_utc": "1986-03-01T16:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-33-HOU-CRP-1205-b58@1986-02-28",
+      "departure_utc": "1986-02-28T18:05:00Z",
+      "arrival_utc": "1986-02-28T18:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-33-HOU-CRP-1205-b58@1986-03-01",
+      "departure_utc": "1986-03-01T18:05:00Z",
+      "arrival_utc": "1986-03-01T18:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-49-HOU-CRP-1310-b58@1986-02-28",
+      "departure_utc": "1986-02-28T19:10:00Z",
+      "arrival_utc": "1986-02-28T19:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-49-HOU-CRP-1310-b58@1986-03-01",
+      "departure_utc": "1986-03-01T19:10:00Z",
+      "arrival_utc": "1986-03-01T19:55:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-65-HOU-CRP-1505-b58@1986-02-28",
+      "departure_utc": "1986-02-28T21:05:00Z",
+      "arrival_utc": "1986-02-28T21:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-65-HOU-CRP-1505-b58@1986-03-01",
+      "departure_utc": "1986-03-01T21:05:00Z",
+      "arrival_utc": "1986-03-01T21:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-73-HOU-CRP-1705-b58@1986-02-27",
+      "departure_utc": "1986-02-27T23:05:00Z",
+      "arrival_utc": "1986-02-27T23:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-73-HOU-CRP-1705-b58@1986-02-28",
+      "departure_utc": "1986-02-28T23:05:00Z",
+      "arrival_utc": "1986-02-28T23:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-95-HOU-CRP-1905-b58@1986-02-27",
+      "departure_utc": "1986-02-28T01:05:00Z",
+      "arrival_utc": "1986-02-28T01:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-95-HOU-CRP-1905-b58@1986-02-28",
+      "departure_utc": "1986-03-01T01:05:00Z",
+      "arrival_utc": "1986-03-01T01:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-105-HOU-CRP-2105-b58@1986-02-27",
+      "departure_utc": "1986-02-28T03:05:00Z",
+      "arrival_utc": "1986-02-28T03:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-105-HOU-CRP-2105-b58@1986-02-28",
+      "departure_utc": "1986-03-01T03:05:00Z",
+      "arrival_utc": "1986-03-01T03:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-10-CRP-HOU-0645-b58@1986-02-28",
+      "departure_utc": "1986-02-28T12:45:00Z",
+      "arrival_utc": "1986-02-28T13:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-10-CRP-HOU-0645-b58@1986-03-01",
+      "departure_utc": "1986-03-01T12:45:00Z",
+      "arrival_utc": "1986-03-01T13:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-30-CRP-HOU-0900-b58@1986-02-28",
+      "departure_utc": "1986-02-28T15:00:00Z",
+      "arrival_utc": "1986-02-28T15:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-30-CRP-HOU-0900-b58@1986-03-01",
+      "departure_utc": "1986-03-01T15:00:00Z",
+      "arrival_utc": "1986-03-01T15:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-42-CRP-HOU-1100-b58@1986-02-28",
+      "departure_utc": "1986-02-28T17:00:00Z",
+      "arrival_utc": "1986-02-28T17:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-42-CRP-HOU-1100-b58@1986-03-01",
+      "departure_utc": "1986-03-01T17:00:00Z",
+      "arrival_utc": "1986-03-01T17:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-58-CRP-HOU-1300-b58@1986-02-28",
+      "departure_utc": "1986-02-28T19:00:00Z",
+      "arrival_utc": "1986-02-28T19:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-58-CRP-HOU-1300-b58@1986-03-01",
+      "departure_utc": "1986-03-01T19:00:00Z",
+      "arrival_utc": "1986-03-01T19:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-74-CRP-HOU-1500-b58@1986-02-28",
+      "departure_utc": "1986-02-28T21:00:00Z",
+      "arrival_utc": "1986-02-28T21:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-74-CRP-HOU-1500-b58@1986-03-01",
+      "departure_utc": "1986-03-01T21:00:00Z",
+      "arrival_utc": "1986-03-01T21:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-86-CRP-HOU-1600-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:00:00Z",
+      "arrival_utc": "1986-02-27T22:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-86-CRP-HOU-1600-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:00:00Z",
+      "arrival_utc": "1986-02-28T22:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-86-CRP-HOU-1600-b58@1986-03-01",
+      "departure_utc": "1986-03-01T22:00:00Z",
+      "arrival_utc": "1986-03-01T22:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-422-CRP-HOU-1800-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:00:00Z",
+      "arrival_utc": "1986-02-28T00:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-422-CRP-HOU-1800-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:00:00Z",
+      "arrival_utc": "1986-03-01T00:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-114-CRP-HOU-2000-b58@1986-02-27",
+      "departure_utc": "1986-02-28T02:00:00Z",
+      "arrival_utc": "1986-02-28T02:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-114-CRP-HOU-2000-b58@1986-02-28",
+      "departure_utc": "1986-03-01T02:00:00Z",
+      "arrival_utc": "1986-03-01T02:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 21,
+      "duration_minutes": 45
+    },
+    {
+      "id": "southwest-954-HOU-ELP-1605-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:05:00Z",
+      "arrival_utc": "1986-02-28T00:00:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 22,
+      "duration_minutes": 115
+    },
+    {
+      "id": "southwest-954-HOU-ELP-1605-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:05:00Z",
+      "arrival_utc": "1986-03-01T00:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 22,
+      "duration_minutes": 115
+    },
+    {
+      "id": "southwest-864-HOU-ELP-1910-b58@1986-02-27",
+      "departure_utc": "1986-02-28T01:10:00Z",
+      "arrival_utc": "1986-02-28T03:05:00Z",
+      "local_weekday": 4,
+      "printed_days": "4567",
+      "printed_page": 22,
+      "duration_minutes": 115
+    },
+    {
+      "id": "southwest-864-HOU-ELP-1910-b58@1986-02-28",
+      "departure_utc": "1986-03-01T01:10:00Z",
+      "arrival_utc": "1986-03-01T03:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "4567",
+      "printed_page": 22,
+      "duration_minutes": 115
+    },
+    {
+      "id": "southwest-955-ELP-HOU-1210-b58@1986-02-28",
+      "departure_utc": "1986-02-28T19:10:00Z",
+      "arrival_utc": "1986-02-28T20:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 22,
+      "duration_minutes": 100
+    },
+    {
+      "id": "southwest-955-ELP-HOU-1210-b58@1986-03-01",
+      "departure_utc": "1986-03-01T19:10:00Z",
+      "arrival_utc": "1986-03-01T20:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 22,
+      "duration_minutes": 100
+    },
+    {
+      "id": "southwest-797-ELP-HOU-2125-b58@1986-02-27",
+      "departure_utc": "1986-02-28T04:25:00Z",
+      "arrival_utc": "1986-02-28T06:25:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 22,
+      "duration_minutes": 120
+    },
+    {
+      "id": "southwest-797-ELP-HOU-2125-b58@1986-02-28",
+      "departure_utc": "1986-03-01T04:25:00Z",
+      "arrival_utc": "1986-03-01T06:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 22,
+      "duration_minutes": 120
+    },
+    {
+      "id": "southwest-761-HOU-LIT-0740-b58@1986-02-28",
+      "departure_utc": "1986-02-28T13:40:00Z",
+      "arrival_utc": "1986-02-28T14:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 22,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-761-HOU-LIT-0740-b58@1986-03-01",
+      "departure_utc": "1986-03-01T13:40:00Z",
+      "arrival_utc": "1986-03-01T14:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 22,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-339-LIT-HOU-0830-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:30:00Z",
+      "arrival_utc": "1986-02-28T15:35:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 22,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-339-LIT-HOU-0830-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:30:00Z",
+      "arrival_utc": "1986-03-01T15:35:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 22,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-952-HOU-MAF-0700-b58@1986-02-28",
+      "departure_utc": "1986-02-28T13:00:00Z",
+      "arrival_utc": "1986-02-28T14:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "12345",
+      "printed_page": 22,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-726-HOU-MAF-1040-b58@1986-02-28",
+      "departure_utc": "1986-02-28T16:40:00Z",
+      "arrival_utc": "1986-02-28T18:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 22,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-726-HOU-MAF-1040-b58@1986-03-01",
+      "departure_utc": "1986-03-01T16:40:00Z",
+      "arrival_utc": "1986-03-01T18:00:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 22,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-728-HOU-MAF-1830-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:30:00Z",
+      "arrival_utc": "1986-02-28T01:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 22,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-728-HOU-MAF-1830-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:30:00Z",
+      "arrival_utc": "1986-03-01T01:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 22,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-713-MAF-HOU-1435-b58@1986-02-28",
+      "departure_utc": "1986-02-28T20:35:00Z",
+      "arrival_utc": "1986-02-28T21:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 22,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-713-MAF-HOU-1435-b58@1986-03-01",
+      "departure_utc": "1986-03-01T20:35:00Z",
+      "arrival_utc": "1986-03-01T21:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 22,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-1-HOU-MSY-0805-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:05:00Z",
+      "arrival_utc": "1986-02-28T15:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-1-HOU-MSY-0805-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:05:00Z",
+      "arrival_utc": "1986-03-01T15:05:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-847-HOU-MSY-1030-b58@1986-02-28",
+      "departure_utc": "1986-02-28T16:30:00Z",
+      "arrival_utc": "1986-02-28T17:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-847-HOU-MSY-1030-b58@1986-03-01",
+      "departure_utc": "1986-03-01T16:30:00Z",
+      "arrival_utc": "1986-03-01T17:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-835-HOU-MSY-1420-b58@1986-02-28",
+      "departure_utc": "1986-02-28T20:20:00Z",
+      "arrival_utc": "1986-02-28T21:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-835-HOU-MSY-1420-b58@1986-03-01",
+      "departure_utc": "1986-03-01T20:20:00Z",
+      "arrival_utc": "1986-03-01T21:20:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-859-HOU-MSY-1530-b58@1986-02-27",
+      "departure_utc": "1986-02-27T21:30:00Z",
+      "arrival_utc": "1986-02-27T22:30:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-859-HOU-MSY-1530-b58@1986-02-28",
+      "departure_utc": "1986-02-28T21:30:00Z",
+      "arrival_utc": "1986-02-28T22:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-859-HOU-MSY-1530-b58@1986-03-01",
+      "departure_utc": "1986-03-01T21:30:00Z",
+      "arrival_utc": "1986-03-01T22:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-851-HOU-MSY-1635-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:35:00Z",
+      "arrival_utc": "1986-02-27T23:35:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-851-HOU-MSY-1635-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:35:00Z",
+      "arrival_utc": "1986-02-28T23:35:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-861-HOU-MSY-1730-b58@1986-02-27",
+      "departure_utc": "1986-02-27T23:30:00Z",
+      "arrival_utc": "1986-02-28T00:30:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-861-HOU-MSY-1730-b58@1986-02-28",
+      "departure_utc": "1986-02-28T23:30:00Z",
+      "arrival_utc": "1986-03-01T00:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-855-HOU-MSY-2145-b58@1986-02-27",
+      "departure_utc": "1986-02-28T03:45:00Z",
+      "arrival_utc": "1986-02-28T04:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-855-HOU-MSY-2145-b58@1986-02-28",
+      "departure_utc": "1986-03-01T03:45:00Z",
+      "arrival_utc": "1986-03-01T04:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-838-MSY-HOU-0645-b58@1986-02-28",
+      "departure_utc": "1986-02-28T12:45:00Z",
+      "arrival_utc": "1986-02-28T13:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-838-MSY-HOU-0645-b58@1986-03-01",
+      "departure_utc": "1986-03-01T12:45:00Z",
+      "arrival_utc": "1986-03-01T13:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-846-MSY-HOU-0915-b58@1986-02-28",
+      "departure_utc": "1986-02-28T15:15:00Z",
+      "arrival_utc": "1986-02-28T16:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-846-MSY-HOU-0915-b58@1986-03-01",
+      "departure_utc": "1986-03-01T15:15:00Z",
+      "arrival_utc": "1986-03-01T16:20:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-852-MSY-HOU-1145-b58@1986-02-28",
+      "departure_utc": "1986-02-28T17:45:00Z",
+      "arrival_utc": "1986-02-28T18:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-852-MSY-HOU-1145-b58@1986-03-01",
+      "departure_utc": "1986-03-01T17:45:00Z",
+      "arrival_utc": "1986-03-01T18:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-836-MSY-HOU-1245-b58@1986-02-28",
+      "departure_utc": "1986-02-28T18:45:00Z",
+      "arrival_utc": "1986-02-28T19:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-836-MSY-HOU-1245-b58@1986-03-01",
+      "departure_utc": "1986-03-01T18:45:00Z",
+      "arrival_utc": "1986-03-01T19:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-854-MSY-HOU-1645-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:45:00Z",
+      "arrival_utc": "1986-02-27T23:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-854-MSY-HOU-1645-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:45:00Z",
+      "arrival_utc": "1986-02-28T23:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-866-MSY-HOU-1745-b58@1986-02-27",
+      "departure_utc": "1986-02-27T23:45:00Z",
+      "arrival_utc": "1986-02-28T00:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-866-MSY-HOU-1745-b58@1986-02-28",
+      "departure_utc": "1986-02-28T23:45:00Z",
+      "arrival_utc": "1986-03-01T00:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-754-MSY-HOU-1845-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:45:00Z",
+      "arrival_utc": "1986-02-28T01:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-754-MSY-HOU-1845-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:45:00Z",
+      "arrival_utc": "1986-03-01T01:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 65
+    },
+    {
+      "id": "southwest-402-HOU-OKC-0630-b58@1986-02-28",
+      "departure_utc": "1986-02-28T12:30:00Z",
+      "arrival_utc": "1986-02-28T13:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-402-HOU-OKC-0630-b58@1986-03-01",
+      "departure_utc": "1986-03-01T12:30:00Z",
+      "arrival_utc": "1986-03-01T13:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-414-HOU-OKC-1215-b58@1986-02-28",
+      "departure_utc": "1986-02-28T18:15:00Z",
+      "arrival_utc": "1986-02-28T19:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-414-HOU-OKC-1215-b58@1986-03-01",
+      "departure_utc": "1986-03-01T18:15:00Z",
+      "arrival_utc": "1986-03-01T19:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-420-HOU-OKC-1905-b58@1986-02-27",
+      "departure_utc": "1986-02-28T01:05:00Z",
+      "arrival_utc": "1986-02-28T02:20:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-420-HOU-OKC-1905-b58@1986-02-28",
+      "departure_utc": "1986-03-01T01:05:00Z",
+      "arrival_utc": "1986-03-01T02:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-403-OKC-HOU-0810-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:10:00Z",
+      "arrival_utc": "1986-02-28T15:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-403-OKC-HOU-0810-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:10:00Z",
+      "arrival_utc": "1986-03-01T15:25:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-417-OKC-HOU-1255-b58@1986-02-28",
+      "departure_utc": "1986-02-28T18:55:00Z",
+      "arrival_utc": "1986-02-28T20:10:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-417-OKC-HOU-1255-b58@1986-03-01",
+      "departure_utc": "1986-03-01T18:55:00Z",
+      "arrival_utc": "1986-03-01T20:10:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-421-OKC-HOU-1845-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:45:00Z",
+      "arrival_utc": "1986-02-28T02:00:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-421-OKC-HOU-1845-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:45:00Z",
+      "arrival_utc": "1986-03-01T02:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 75
+    },
+    {
+      "id": "southwest-582-HOU-PHX-1000-b58@1986-02-28",
+      "departure_utc": "1986-02-28T16:00:00Z",
+      "arrival_utc": "1986-02-28T18:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 170
+    },
+    {
+      "id": "southwest-582-HOU-PHX-1000-b58@1986-03-01",
+      "departure_utc": "1986-03-01T16:00:00Z",
+      "arrival_utc": "1986-03-01T18:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 170
+    },
+    {
+      "id": "southwest-790-HOU-PHX-2100-b58@1986-02-28",
+      "departure_utc": "1986-03-01T03:00:00Z",
+      "arrival_utc": "1986-03-01T05:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "5",
+      "printed_page": 23,
+      "duration_minutes": 170
+    },
+    {
+      "id": "southwest-859-PHX-HOU-1200-b58@1986-02-28",
+      "departure_utc": "1986-02-28T19:00:00Z",
+      "arrival_utc": "1986-02-28T21:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 135
+    },
+    {
+      "id": "southwest-859-PHX-HOU-1200-b58@1986-03-01",
+      "departure_utc": "1986-03-01T19:00:00Z",
+      "arrival_utc": "1986-03-01T21:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 135
+    },
+    {
+      "id": "southwest-717-PHX-HOU-2135-b58@1986-02-27",
+      "departure_utc": "1986-02-28T04:35:00Z",
+      "arrival_utc": "1986-02-28T06:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "12345",
+      "printed_page": 23,
+      "duration_minutes": 135
+    },
+    {
+      "id": "southwest-717-PHX-HOU-2135-b58@1986-02-28",
+      "departure_utc": "1986-03-01T04:35:00Z",
+      "arrival_utc": "1986-03-01T06:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "12345",
+      "printed_page": 23,
+      "duration_minutes": 135
+    },
+    {
+      "id": "southwest-5-HOU-HRL-0820-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:20:00Z",
+      "arrival_utc": "1986-02-28T15:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-5-HOU-HRL-0820-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:20:00Z",
+      "arrival_utc": "1986-03-01T15:20:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-846-HOU-HRL-1030-b58@1986-02-28",
+      "departure_utc": "1986-02-28T16:30:00Z",
+      "arrival_utc": "1986-02-28T17:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-846-HOU-HRL-1030-b58@1986-03-01",
+      "departure_utc": "1986-03-01T16:30:00Z",
+      "arrival_utc": "1986-03-01T17:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-343-HOU-HRL-1235-b58@1986-02-28",
+      "departure_utc": "1986-02-28T18:35:00Z",
+      "arrival_utc": "1986-02-28T19:35:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-343-HOU-HRL-1235-b58@1986-03-01",
+      "departure_utc": "1986-03-01T18:35:00Z",
+      "arrival_utc": "1986-03-01T19:35:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-53-HOU-HRL-1405-b58@1986-02-28",
+      "departure_utc": "1986-02-28T20:05:00Z",
+      "arrival_utc": "1986-02-28T21:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-53-HOU-HRL-1405-b58@1986-03-01",
+      "departure_utc": "1986-03-01T20:05:00Z",
+      "arrival_utc": "1986-03-01T21:05:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-69-HOU-HRL-1605-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:05:00Z",
+      "arrival_utc": "1986-02-27T23:05:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-69-HOU-HRL-1605-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:05:00Z",
+      "arrival_utc": "1986-02-28T23:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-69-HOU-HRL-1605-b58@1986-03-01",
+      "departure_utc": "1986-03-01T22:05:00Z",
+      "arrival_utc": "1986-03-01T23:05:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-787-HOU-HRL-1845-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:45:00Z",
+      "arrival_utc": "1986-02-28T01:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-787-HOU-HRL-1845-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:45:00Z",
+      "arrival_utc": "1986-03-01T01:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-103-HOU-HRL-2005-b58@1986-02-27",
+      "departure_utc": "1986-02-28T02:05:00Z",
+      "arrival_utc": "1986-02-28T03:05:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-103-HOU-HRL-2005-b58@1986-02-28",
+      "departure_utc": "1986-03-01T02:05:00Z",
+      "arrival_utc": "1986-03-01T03:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-14-HRL-HOU-0645-b58@1986-02-28",
+      "departure_utc": "1986-02-28T12:45:00Z",
+      "arrival_utc": "1986-02-28T13:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-14-HRL-HOU-0645-b58@1986-03-01",
+      "departure_utc": "1986-03-01T12:45:00Z",
+      "arrival_utc": "1986-03-01T13:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-34-HRL-HOU-0945-b58@1986-02-28",
+      "departure_utc": "1986-02-28T15:45:00Z",
+      "arrival_utc": "1986-02-28T16:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-34-HRL-HOU-0945-b58@1986-03-01",
+      "departure_utc": "1986-03-01T15:45:00Z",
+      "arrival_utc": "1986-03-01T16:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-50-HRL-HOU-1145-b58@1986-02-28",
+      "departure_utc": "1986-02-28T17:45:00Z",
+      "arrival_utc": "1986-02-28T18:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-50-HRL-HOU-1145-b58@1986-03-01",
+      "departure_utc": "1986-03-01T17:45:00Z",
+      "arrival_utc": "1986-03-01T18:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-70-HRL-HOU-1350-b58@1986-02-28",
+      "departure_utc": "1986-02-28T19:50:00Z",
+      "arrival_utc": "1986-02-28T20:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-70-HRL-HOU-1350-b58@1986-03-01",
+      "departure_utc": "1986-03-01T19:50:00Z",
+      "arrival_utc": "1986-03-01T20:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-82-HRL-HOU-1515-b58@1986-02-28",
+      "departure_utc": "1986-02-28T21:15:00Z",
+      "arrival_utc": "1986-02-28T22:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-82-HRL-HOU-1515-b58@1986-03-01",
+      "departure_utc": "1986-03-01T21:15:00Z",
+      "arrival_utc": "1986-03-01T22:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-862-HRL-HOU-1715-b58@1986-02-27",
+      "departure_utc": "1986-02-27T23:15:00Z",
+      "arrival_utc": "1986-02-28T00:15:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-862-HRL-HOU-1715-b58@1986-02-28",
+      "departure_utc": "1986-02-28T23:15:00Z",
+      "arrival_utc": "1986-03-01T00:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-124-HRL-HOU-2115-b58@1986-02-27",
+      "departure_utc": "1986-02-28T03:15:00Z",
+      "arrival_utc": "1986-02-28T04:15:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-124-HRL-HOU-2115-b58@1986-02-28",
+      "departure_utc": "1986-03-01T03:15:00Z",
+      "arrival_utc": "1986-03-01T04:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 60
+    },
+    {
+      "id": "southwest-734-HOU-SAT-0800-b58@1986-02-28",
+      "departure_utc": "1986-02-28T14:00:00Z",
+      "arrival_utc": "1986-02-28T14:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-734-HOU-SAT-0800-b58@1986-03-01",
+      "departure_utc": "1986-03-01T14:00:00Z",
+      "arrival_utc": "1986-03-01T14:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-799-HOU-SAT-0905-b58@1986-02-28",
+      "departure_utc": "1986-02-28T15:05:00Z",
+      "arrival_utc": "1986-02-28T15:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-799-HOU-SAT-0905-b58@1986-03-01",
+      "departure_utc": "1986-03-01T15:05:00Z",
+      "arrival_utc": "1986-03-01T15:55:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-736-HOU-SAT-1105-b58@1986-02-28",
+      "departure_utc": "1986-02-28T17:05:00Z",
+      "arrival_utc": "1986-02-28T17:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-852-HOU-SAT-1300-b58@1986-02-28",
+      "departure_utc": "1986-02-28T19:00:00Z",
+      "arrival_utc": "1986-02-28T19:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-852-HOU-SAT-1300-b58@1986-03-01",
+      "departure_utc": "1986-03-01T19:00:00Z",
+      "arrival_utc": "1986-03-01T19:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-744-HOU-SAT-1500-b58@1986-02-28",
+      "departure_utc": "1986-02-28T21:00:00Z",
+      "arrival_utc": "1986-02-28T21:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-744-HOU-SAT-1500-b58@1986-03-01",
+      "departure_utc": "1986-03-01T21:00:00Z",
+      "arrival_utc": "1986-03-01T21:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-748-HOU-SAT-1750-b58@1986-02-27",
+      "departure_utc": "1986-02-27T23:50:00Z",
+      "arrival_utc": "1986-02-28T00:40:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-748-HOU-SAT-1750-b58@1986-02-28",
+      "departure_utc": "1986-02-28T23:50:00Z",
+      "arrival_utc": "1986-03-01T00:40:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-862-HOU-SAT-1830-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:30:00Z",
+      "arrival_utc": "1986-02-28T01:20:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-862-HOU-SAT-1830-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:30:00Z",
+      "arrival_utc": "1986-03-01T01:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-754-HOU-SAT-2000-b58@1986-02-27",
+      "departure_utc": "1986-02-28T02:00:00Z",
+      "arrival_utc": "1986-02-28T02:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-754-HOU-SAT-2000-b58@1986-02-28",
+      "departure_utc": "1986-03-01T02:00:00Z",
+      "arrival_utc": "1986-03-01T02:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-758-HOU-SAT-2205-b58@1986-02-27",
+      "departure_utc": "1986-02-28T04:05:00Z",
+      "arrival_utc": "1986-02-28T04:55:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-758-HOU-SAT-2205-b58@1986-02-28",
+      "departure_utc": "1986-03-01T04:05:00Z",
+      "arrival_utc": "1986-03-01T04:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-731-SAT-HOU-0700-b58@1986-02-28",
+      "departure_utc": "1986-02-28T13:00:00Z",
+      "arrival_utc": "1986-02-28T13:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "12345",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-853-SAT-HOU-1115-b58@1986-02-28",
+      "departure_utc": "1986-02-28T17:15:00Z",
+      "arrival_utc": "1986-02-28T18:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-853-SAT-HOU-1115-b58@1986-03-01",
+      "departure_utc": "1986-03-01T17:15:00Z",
+      "arrival_utc": "1986-03-01T18:05:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-863-SAT-HOU-1425-b58@1986-02-28",
+      "departure_utc": "1986-02-28T20:25:00Z",
+      "arrival_utc": "1986-02-28T21:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-863-SAT-HOU-1425-b58@1986-03-01",
+      "departure_utc": "1986-03-01T20:25:00Z",
+      "arrival_utc": "1986-03-01T21:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-865-SAT-HOU-1600-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:00:00Z",
+      "arrival_utc": "1986-02-27T22:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-865-SAT-HOU-1600-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:00:00Z",
+      "arrival_utc": "1986-02-28T22:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-865-SAT-HOU-1600-b58@1986-03-01",
+      "departure_utc": "1986-03-01T22:00:00Z",
+      "arrival_utc": "1986-03-01T22:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-867-SAT-HOU-1645-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:45:00Z",
+      "arrival_utc": "1986-02-27T23:35:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-867-SAT-HOU-1645-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:45:00Z",
+      "arrival_utc": "1986-02-28T23:35:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-715-SAT-HOU-1810-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:10:00Z",
+      "arrival_utc": "1986-02-28T01:00:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-715-SAT-HOU-1810-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:10:00Z",
+      "arrival_utc": "1986-03-01T01:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-849-SAT-HOU-1900-b58@1986-02-27",
+      "departure_utc": "1986-02-28T01:00:00Z",
+      "arrival_utc": "1986-02-28T01:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-849-SAT-HOU-1900-b58@1986-02-28",
+      "departure_utc": "1986-03-01T01:00:00Z",
+      "arrival_utc": "1986-03-01T01:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-755-SAT-HOU-2135-b58@1986-02-27",
+      "departure_utc": "1986-02-28T03:35:00Z",
+      "arrival_utc": "1986-02-28T04:25:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-755-SAT-HOU-2135-b58@1986-02-28",
+      "departure_utc": "1986-03-01T03:35:00Z",
+      "arrival_utc": "1986-03-01T04:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 23,
+      "duration_minutes": 50
+    },
+    {
+      "id": "southwest-733-HOU-STL-0940-b58@1986-02-28",
+      "departure_utc": "1986-02-28T15:40:00Z",
+      "arrival_utc": "1986-02-28T17:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-733-HOU-STL-0940-b58@1986-03-01",
+      "departure_utc": "1986-03-01T15:40:00Z",
+      "arrival_utc": "1986-03-01T17:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-348-HOU-STL-1150-b58@1986-02-28",
+      "departure_utc": "1986-02-28T17:50:00Z",
+      "arrival_utc": "1986-02-28T19:40:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-348-HOU-STL-1150-b58@1986-03-01",
+      "departure_utc": "1986-03-01T17:50:00Z",
+      "arrival_utc": "1986-03-01T19:40:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-747-HOU-STL-1810-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:10:00Z",
+      "arrival_utc": "1986-02-28T02:00:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-747-HOU-STL-1810-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:10:00Z",
+      "arrival_utc": "1986-03-01T02:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-358-HOU-STL-2010-b58@1986-02-27",
+      "departure_utc": "1986-02-28T02:10:00Z",
+      "arrival_utc": "1986-02-28T04:00:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-358-HOU-STL-2010-b58@1986-02-28",
+      "departure_utc": "1986-03-01T02:10:00Z",
+      "arrival_utc": "1986-03-01T04:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 110
+    },
+    {
+      "id": "southwest-343-STL-HOU-1015-b58@1986-02-28",
+      "departure_utc": "1986-02-28T16:15:00Z",
+      "arrival_utc": "1986-02-28T18:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-343-STL-HOU-1015-b58@1986-03-01",
+      "departure_utc": "1986-03-01T16:15:00Z",
+      "arrival_utc": "1986-03-01T18:25:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-746-STL-HOU-1415-b58@1986-02-27",
+      "departure_utc": "1986-02-27T20:15:00Z",
+      "arrival_utc": "1986-02-27T22:25:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-746-STL-HOU-1415-b58@1986-02-28",
+      "departure_utc": "1986-02-28T20:15:00Z",
+      "arrival_utc": "1986-02-28T22:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-746-STL-HOU-1415-b58@1986-03-01",
+      "departure_utc": "1986-03-01T20:15:00Z",
+      "arrival_utc": "1986-03-01T22:25:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-351-STL-HOU-1830-b58@1986-02-27",
+      "departure_utc": "1986-02-28T00:30:00Z",
+      "arrival_utc": "1986-02-28T02:40:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-351-STL-HOU-1830-b58@1986-02-28",
+      "departure_utc": "1986-03-01T00:30:00Z",
+      "arrival_utc": "1986-03-01T02:40:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-756-STL-HOU-2045-b58@1986-02-27",
+      "departure_utc": "1986-02-28T02:45:00Z",
+      "arrival_utc": "1986-02-28T04:55:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-756-STL-HOU-2045-b58@1986-02-28",
+      "departure_utc": "1986-03-01T02:45:00Z",
+      "arrival_utc": "1986-03-01T04:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 130
+    },
+    {
+      "id": "southwest-410-HOU-TUL-0910-b58@1986-02-28",
+      "departure_utc": "1986-02-28T15:10:00Z",
+      "arrival_utc": "1986-02-28T16:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-410-HOU-TUL-0910-b58@1986-03-01",
+      "departure_utc": "1986-03-01T15:10:00Z",
+      "arrival_utc": "1986-03-01T16:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-418-HOU-TUL-1500-b58@1986-02-28",
+      "departure_utc": "1986-02-28T21:00:00Z",
+      "arrival_utc": "1986-02-28T22:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-418-HOU-TUL-1500-b58@1986-03-01",
+      "departure_utc": "1986-03-01T21:00:00Z",
+      "arrival_utc": "1986-03-01T22:20:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-422-HOU-TUL-1900-b58@1986-02-27",
+      "departure_utc": "1986-02-28T01:00:00Z",
+      "arrival_utc": "1986-02-28T02:20:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-422-HOU-TUL-1900-b58@1986-02-28",
+      "departure_utc": "1986-03-01T01:00:00Z",
+      "arrival_utc": "1986-03-01T02:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-755-HOU-TUL-2235-b58@1986-02-28",
+      "departure_utc": "1986-03-01T04:35:00Z",
+      "arrival_utc": "1986-03-01T05:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "57",
+      "printed_page": 24,
+      "duration_minutes": 80
+    },
+    {
+      "id": "southwest-401-TUL-HOU-0640-b58@1986-02-28",
+      "departure_utc": "1986-02-28T12:40:00Z",
+      "arrival_utc": "1986-02-28T14:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "12345",
+      "printed_page": 24,
+      "duration_minutes": 85
+    },
+    {
+      "id": "southwest-409-TUL-HOU-1010-b58@1986-02-28",
+      "departure_utc": "1986-02-28T16:10:00Z",
+      "arrival_utc": "1986-02-28T17:35:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 85
+    },
+    {
+      "id": "southwest-409-TUL-HOU-1010-b58@1986-03-01",
+      "departure_utc": "1986-03-01T16:10:00Z",
+      "arrival_utc": "1986-03-01T17:35:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 85
+    },
+    {
+      "id": "southwest-419-TUL-HOU-1600-b58@1986-02-27",
+      "departure_utc": "1986-02-27T22:00:00Z",
+      "arrival_utc": "1986-02-27T23:25:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 85
+    },
+    {
+      "id": "southwest-419-TUL-HOU-1600-b58@1986-02-28",
+      "departure_utc": "1986-02-28T22:00:00Z",
+      "arrival_utc": "1986-02-28T23:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 85
+    },
+    {
+      "id": "southwest-419-TUL-HOU-1600-b58@1986-03-01",
+      "departure_utc": "1986-03-01T22:00:00Z",
+      "arrival_utc": "1986-03-01T23:25:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 24,
+      "duration_minutes": 85
+    },
+    {
+      "id": "southwest-431-TUL-HOU-2230-b58@1986-02-27",
+      "departure_utc": "1986-02-28T04:30:00Z",
+      "arrival_utc": "1986-02-28T05:55:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 85
+    },
+    {
+      "id": "southwest-431-TUL-HOU-2230-b58@1986-02-28",
+      "departure_utc": "1986-03-01T04:30:00Z",
+      "arrival_utc": "1986-03-01T05:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 24,
+      "duration_minutes": 85
+    }
+  ],
+  "duration_distribution_minutes": {
+    "45": 59,
+    "115": 4,
+    "100": 2,
+    "120": 2,
+    "65": 18,
+    "80": 12,
+    "75": 14,
+    "60": 44,
+    "170": 3,
+    "135": 4,
+    "50": 33,
+    "110": 8,
+    "130": 9,
+    "85": 8
+  },
+  "overlap_at_window_start": [
+    "southwest-746-STL-HOU-1415-b58@1986-02-27",
+    "southwest-859-HOU-MSY-1530-b58@1986-02-27",
+    "southwest-419-TUL-HOU-1600-b58@1986-02-27",
+    "southwest-86-CRP-HOU-1600-b58@1986-02-27",
+    "southwest-865-SAT-HOU-1600-b58@1986-02-27",
+    "southwest-69-HOU-HRL-1605-b58@1986-02-27",
+    "southwest-954-HOU-ELP-1605-b58@1986-02-27"
+  ],
+  "overlap_at_window_end": [
+    "southwest-746-STL-HOU-1415-b58@1986-03-01",
+    "southwest-859-HOU-MSY-1530-b58@1986-03-01",
+    "southwest-419-TUL-HOU-1600-b58@1986-03-01",
+    "southwest-86-CRP-HOU-1600-b58@1986-03-01",
+    "southwest-865-SAT-HOU-1600-b58@1986-03-01",
+    "southwest-69-HOU-HRL-1605-b58@1986-03-01"
+  ],
+  "source_rows_visually_checked": true,
+  "source_number_color": "red Southwest; blue Muse Air excluded",
+  "time_basis": "local time interpretation; separate all-times-local wording not found in reviewed pages",
+  "source_evidence_file": "southwest_source_evidence_batch58.json",
+  "old_air_inter_conflict_candidates_unchanged": 10,
+  "total_candidates_unchanged": 21,
+  "interflug_research_rows_unchanged": 22,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "unchanged_previous_files": 349,
+  "changed_previous_files": [
+    "LAS_MIG_v58.txt",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/europe_country_index.json",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/NORDIC_OVERFLIGHT_RESEARCH.md",
+    "Tools/FlightResearch/research/SOURCES.md",
+    "Tools/FlightResearch/research/europe_country_queue.json",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/nordic_priority.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json"
+  ],
+  "europe_country_rows_checked": 40,
+  "europe_country_queue_entries_unchanged": true,
+  "europe_resume_country": "cy",
+  "nordic_endpoint_movements": 161,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "883ed8",
+        "wall_time_seconds": 2.6789e-05,
+        "exit_code": 0,
+        "original_token_count": 28,
+        "output": "..........\n----------------------------------------------------------------------\nRan 20 tests in 3.458s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "2f878e",
+        "wall_time_seconds": 0.313049889,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 94, \"registered_countries\": 81, \"reviewed_schedules\": 2190, \"animated_airlines\": 48, \"scheduled_movements\": 3222, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "7e1c3d",
+        "wall_time_seconds": 0.140704165,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "70c0bb",
+        "wall_time_seconds": 0.032539547,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "92fe06",
+        "wall_time_seconds": 2.3676e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

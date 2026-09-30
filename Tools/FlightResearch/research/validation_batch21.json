@@ -1,0 +1,278 @@
+{
+  "checked_on": "2026-09-28",
+  "package": "v22",
+  "new_movements": 44,
+  "unchanged_previous_movements": 1326,
+  "total_movements": 1370,
+  "new_reviewed_schedules": 31,
+  "new_candidate_schedules": 2,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_file_count": 22,
+  "nordic_endpoint_movements": 47,
+  "nordic_movements_added": 1,
+  "actual_overflights_added": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_physical_duplicate_count": 0,
+  "new_movements_by_airline": {
+    "aeroflot": 24,
+    "interflug": 12,
+    "jal": 1,
+    "lufthansa": 2,
+    "malev": 5
+  },
+  "schedule_duration_sanity_checks": [
+    {
+      "schedule": "aeroflot-580-SVO-CPH-1850",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1540,
+      "block_average_kmh": 616
+    },
+    {
+      "schedule": "aeroflot-111-SVO-SXF-0855",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1596,
+      "block_average_kmh": 661
+    },
+    {
+      "schedule": "aeroflot-113-SVO-SXF-1510",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1596,
+      "block_average_kmh": 661
+    },
+    {
+      "schedule": "interflug-601-SVO-SXF-1400",
+      "elapsed_minutes": 140,
+      "great_circle_km": 1596,
+      "block_average_kmh": 684
+    },
+    {
+      "schedule": "interflug-603-SVO-SXF-1540",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1596,
+      "block_average_kmh": 639
+    },
+    {
+      "schedule": "interflug-607-SVO-SXF-2030",
+      "elapsed_minutes": 135,
+      "great_circle_km": 1596,
+      "block_average_kmh": 710
+    },
+    {
+      "schedule": "interflug-609-SVO-SXF-2105",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1596,
+      "block_average_kmh": 639
+    },
+    {
+      "schedule": "interflug-611-SVO-SXF-0950",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1596,
+      "block_average_kmh": 639
+    },
+    {
+      "schedule": "aeroflot-131-SVO-BUD-0825",
+      "elapsed_minutes": 155,
+      "great_circle_km": 1563,
+      "block_average_kmh": 605
+    },
+    {
+      "schedule": "aeroflot-131-SVO-BUD-0820",
+      "elapsed_minutes": 170,
+      "great_circle_km": 1563,
+      "block_average_kmh": 552
+    },
+    {
+      "schedule": "malev-101-SVO-BUD-1340",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1563,
+      "block_average_kmh": 625
+    },
+    {
+      "schedule": "aeroflot-407-SVO-BUD-0705",
+      "elapsed_minutes": 155,
+      "great_circle_km": 1563,
+      "block_average_kmh": 605
+    },
+    {
+      "schedule": "aeroflot-423-SVO-BUD-0315",
+      "elapsed_minutes": 155,
+      "great_circle_km": 1563,
+      "block_average_kmh": 605
+    },
+    {
+      "schedule": "aeroflot-231-SVO-BRU-0905",
+      "elapsed_minutes": 205,
+      "great_circle_km": 2229,
+      "block_average_kmh": 653
+    },
+    {
+      "schedule": "aeroflot-612-DRS-LED-0915",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1410,
+      "block_average_kmh": 584
+    },
+    {
+      "schedule": "aeroflot-120-DRS-SVO-1130",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1642,
+      "block_average_kmh": 680
+    },
+    {
+      "schedule": "interflug-662-DRS-SVO-0955",
+      "elapsed_minutes": 165,
+      "great_circle_km": 1642,
+      "block_average_kmh": 597
+    },
+    {
+      "schedule": "aeroflot-256-FRA-SVO-1230",
+      "elapsed_minutes": 185,
+      "great_circle_km": 2023,
+      "block_average_kmh": 656
+    },
+    {
+      "schedule": "lufthansa-342-FRA-SVO-1300",
+      "elapsed_minutes": 190,
+      "great_circle_km": 2023,
+      "block_average_kmh": 639
+    },
+    {
+      "schedule": "jal-446-FRA-SVO-1235",
+      "elapsed_minutes": 185,
+      "great_circle_km": 2023,
+      "block_average_kmh": 656
+    },
+    {
+      "schedule": "aeroflot-272-GVA-SVO-1155",
+      "elapsed_minutes": 205,
+      "great_circle_km": 2411,
+      "block_average_kmh": 706
+    },
+    {
+      "schedule": "aeroflot-232-BRU-SVO-1145",
+      "elapsed_minutes": 200,
+      "great_circle_km": 2229,
+      "block_average_kmh": 669
+    },
+    {
+      "schedule": "aeroflot-132-BUD-SVO-1020-TU5",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1563,
+      "block_average_kmh": 625
+    },
+    {
+      "schedule": "aeroflot-132-BUD-SVO-1020-TU3",
+      "elapsed_minutes": 155,
+      "great_circle_km": 1563,
+      "block_average_kmh": 605
+    },
+    {
+      "schedule": "malev-100-BUD-SVO-0800",
+      "elapsed_minutes": 155,
+      "great_circle_km": 1563,
+      "block_average_kmh": 605
+    },
+    {
+      "schedule": "aeroflot-424-BUD-SVO-0150",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1563,
+      "block_average_kmh": 647
+    },
+    {
+      "schedule": "aeroflot-412-BUD-SVO-0355",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1563,
+      "block_average_kmh": 625
+    },
+    {
+      "schedule": "aeroflot-408-BUD-SVO-1640",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1563,
+      "block_average_kmh": 647
+    },
+    {
+      "schedule": "aeroflot-407-BUD-ALG-0840",
+      "elapsed_minutes": 165,
+      "great_circle_km": 1777,
+      "block_average_kmh": 646
+    },
+    {
+      "schedule": "aeroflot-618-BUD-WAW-1330",
+      "elapsed_minutes": 75,
+      "great_circle_km": 541,
+      "block_average_kmh": 432
+    },
+    {
+      "schedule": "malev-120-BUD-WAW-1200",
+      "elapsed_minutes": 75,
+      "great_circle_km": 541,
+      "block_average_kmh": 432
+    }
+  ],
+  "new_candidates_excluded_with_printed_times": [
+    {
+      "schedule": "aeroflot-420-BUD-SVO-0220",
+      "elapsed_minutes": -5,
+      "great_circle_km": 1563
+    },
+    {
+      "schedule": "aeroflot-436-BUD-SVO-1925",
+      "elapsed_minutes": 30,
+      "great_circle_km": 1563
+    }
+  ],
+  "reviewed_ground_connections": [
+    {
+      "journey": "aeroflot/aeroflot-407@1986-03-01",
+      "stop": "BUD",
+      "ground_minutes": 60.0
+    }
+  ],
+  "candidate_schedules_total": 10,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "command": "python3 -m unittest discover -s Tools/FlightResearch -p 'test_*.py' -v",
+      "passed": true,
+      "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 2.046s\n\nOK"
+    },
+    {
+      "command": "python3 Tools/FlightResearch/build_flights.py --check",
+      "passed": true,
+      "output": "{\"registered_airlines\": 80, \"registered_countries\": 70, \"reviewed_schedules\": 906, \"animated_airlines\": 34, \"scheduled_movements\": 1369, \"confirmed_movements\": 1}"
+    },
+    {
+      "command": "python3 Tools/FlightResearch/build_country_index.py --check",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "command": "python3 Tools/StockMarket/validate_markets.py",
+      "passed": true,
+      "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings."
+    }
+  ]
+}

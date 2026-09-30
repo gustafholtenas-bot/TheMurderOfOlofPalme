@@ -1,0 +1,235 @@
+{
+  "batch": 53,
+  "package": "v54",
+  "checked_on": "2026-09-29",
+  "countries": [
+    {
+      "country": "li",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 0,
+      "domestic_movements": 0,
+      "international_movements": 0,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {},
+      "endpoint_leg_ids": [],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://lsxb.li/geschichte/",
+          "result": "Official history reviewed again: 1979 Rhein-Heli/hangar context, no individual departure times for the observation window."
+        },
+        {
+          "url": "https://www.alouettelama.com/msn/a3-1701/A3-1781.html",
+          "result": "HB-XOT/Malbun research lead concerns 2 March 1986, outside the observation window. No movement imported."
+        }
+      ],
+      "unresolved": [
+        "Daterade flyg- och helikopterloggar för Balzers samt exakta historiska landningsplatser återstår. Noll inlagda rörelser innebär inte belagd frånvaro av trafik.",
+        "Rhein-Heli/Rhein-Helicopter-namn och grundandeuppgifterna 1979/1983 behöver fortsatt kontroll. Inga tider skapas ur bolagshistorik eller olyckor utanför observationsfönstret."
+      ]
+    },
+    {
+      "country": "at",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 10,
+      "domestic_movements": 0,
+      "international_movements": 10,
+      "new_movements": 2,
+      "endpoint_movements_by_source_airline": {
+        "air-france": 4,
+        "austrian": 4,
+        "dan-air": 2
+      },
+      "endpoint_leg_ids": [
+        "air-france-782-CDG-VIE-1105-d56-b37@1986-02-28",
+        "air-france-781-VIE-CDG-1345-d56-b37@1986-02-28",
+        "austrian-231-VIE-ORY-1815-d56-b37@1986-02-28",
+        "austrian-232-ORY-VIE-2050-d56-b37@1986-02-28",
+        "dan-air-880-LGW-INN-0800-d6-b53@1986-03-01",
+        "air-france-782-CDG-VIE-1105-d56-b37@1986-03-01",
+        "dan-air-881-INN-LGW-1145-d6-b53@1986-03-01",
+        "air-france-781-VIE-CDG-1345-d56-b37@1986-03-01",
+        "austrian-231-VIE-ORY-1815-d56-b37@1986-03-01",
+        "austrian-232-ORY-VIE-2050-d56-b37@1986-03-01"
+      ],
+      "new_leg_ids": [
+        "dan-air-880-LGW-INN-0800-d6-b53@1986-03-01",
+        "dan-air-881-INN-LGW-1145-d6-b53@1986-03-01"
+      ],
+      "checks": [
+        {
+          "url": "https://www.airtimes.com/cgat/uk/danair/pdf/da851027-1a.pdf",
+          "result": "Printed pages10 and12 visually read: DA881 andDA880, Stops0, Saturday/Sunday from15Dec1985. Only Saturday1Mar overlaps the import dates. Thursday DA885/884 and connections excluded."
+        },
+        {
+          "url": "https://www.innsbruck-airport.com/en/company/news-facts/history/",
+          "result": "Official history identifies western airport opened1948 and Kranebitten name1955. Historical site mapping, not departure timing."
+        },
+        {
+          "url": "https://ourairports.com/airports/LOWI/",
+          "result": "LOWI coordinates47.260201,11.344 used only as an approximate airfield marker."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/at/austrian/1a/os851027.jpg",
+          "result": "Previously identified matching Austrian winter cover; no new inner time pages verified."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/at/tyrolean/gal/vogal1a80.htm",
+          "result": "Tyrolean edition search did not provide new verified winter1985/86 inner pages. Summer1986 timings not reused."
+        }
+      ],
+      "unresolved": [
+        "Austrian Airlines och Tyroleans fullständiga vintertabeller, ändringsblad, inrikestrafik och fler internationella linjer återstår.",
+        "Salzburg, Graz, Linz, Klagenfurt, andra operatörer, charter, frakt, helikopter- och stats-/militärflyg är ofullständigt granskade. Faktisk drift och färdväg kräver rörelsehandlingar."
+      ]
+    },
+    {
+      "country": "it",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 100,
+      "domestic_movements": 2,
+      "international_movements": 98,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {
+        "panam": 4,
+        "air-france": 48,
+        "alitalia": 48
+      },
+      "endpoint_leg_ids": [
+        "panam-110-JFK-FCO-1830@1986-02-27",
+        "air-france-2640-MRS-LIN-0745-d56-b38@1986-02-28",
+        "air-france-650-CDG-LIN-0745-d56-b38@1986-02-28",
+        "alitalia-324-TRN-CDG-0810-d56-b38@1986-02-28",
+        "air-france-347-LYS-LIN-0820-d5-b38@1986-02-28",
+        "air-france-630-CDG-FCO-0840-d56-b38@1986-02-28",
+        "alitalia-336-LIN-CDG-0845-d56-b38@1986-02-28",
+        "alitalia-334-FCO-CDG-0910-d56-b38@1986-02-28",
+        "air-france-2641-LIN-MRS-0930-d56-b38@1986-02-28",
+        "air-france-651-LIN-CDG-1005-d56-b38@1986-02-28",
+        "alitalia-1351-CDG-GOA-1020-d5-b38@1986-02-28",
+        "alitalia-345-CDG-LIN-1110-d56-b38@1986-02-28",
+        "panam-111-FCO-JFK-1115@1986-02-28",
+        "air-france-658-CDG-VCE-1120-d56-b38@1986-02-28",
+        "air-france-631-FCO-CDG-1140-d56-b38@1986-02-28",
+        "air-france-2644-NCE-FCO-1145-d5-b38@1986-02-28",
+        "alitalia-335-CDG-FCO-1210-d56-b38@1986-02-28",
+        "air-france-2646-SXB-LIN-1225-d5-b38@1986-02-28",
+        "air-france-652-CDG-LIN-1225-d56-b38@1986-02-28",
+        "air-france-550-CDG-PSA-1235-d5-b38@1986-02-28",
+        "alitalia-1351-GOA-NAP-1235-d5-b38@1986-02-28",
+        "alitalia-1350-GOA-CDG-1240-d5-b38@1986-02-28",
+        "alitalia-330-LIN-CDG-1310-d56-b38@1986-02-28",
+        "alitalia-328-PSA-CDG-1325-d5-b38@1986-02-28",
+        "air-france-1937-MRS-FCO-1330-d5-b38@1986-02-28",
+        "air-france-2639-FCO-NCE-1340-d5-b38@1986-02-28",
+        "air-france-2650-MRS-LIN-1340-d5-b38@1986-02-28",
+        "air-france-659-VCE-CDG-1345-d56-b38@1986-02-28",
+        "air-france-2643-LIN-TLS-1400-d5-b38@1986-02-28",
+        "alitalia-340-VCE-CDG-1440-d56-b38@1986-02-28",
+        "alitalia-338-FCO-NCE-1445-d56-b38@1986-02-28",
+        "air-france-653-LIN-CDG-1450-d56-b38@1986-02-28",
+        "alitalia-319-CDG-BLQ-1450-d5-b38@1986-02-28",
+        "air-france-551-PSA-CDG-1500-d5-b38@1986-02-28",
+        "air-france-2647-LIN-SXB-1520-d5-b38@1986-02-28",
+        "alitalia-331-CDG-LIN-1520-d56-b38@1986-02-28",
+        "air-france-1930-FCO-MRS-1535-d5-b38@1986-02-28",
+        "alitalia-329-CDG-PSA-1545-d5-b38@1986-02-28",
+        "air-france-634-CDG-FCO-1630-d56-b38@1986-02-28",
+        "alitalia-339-NCE-FCO-1635-d56-b38@1986-02-28",
+        "alitalia-326-LIN-CDG-1640-d56-b38@1986-02-28",
+        "alitalia-320-FCO-CDG-1700-d56-b38@1986-02-28",
+        "alitalia-341-CDG-VCE-1710-d56-b38@1986-02-28",
+        "alitalia-318-BLQ-CDG-1715-d5-b38@1986-02-28",
+        "air-france-654-CDG-LIN-1720-d56-b38@1986-02-28",
+        "air-france-2642-TLS-LIN-1725-d5-b38@1986-02-28",
+        "air-france-640-CDG-TRN-1745-d5-b38@1986-02-28",
+        "alitalia-337-CDG-LIN-1900-d56-b38@1986-02-28",
+        "air-france-635-FCO-CDG-1930-d56-b38@1986-02-28",
+        "air-france-655-LIN-CDG-1940-d56-b38@1986-02-28",
+        "air-france-641-TRN-CDG-1950-d5-b38@1986-02-28",
+        "alitalia-321-CDG-FCO-2000-d56-b38@1986-02-28",
+        "alitalia-346-LIN-LYS-2000-d56-b38@1986-02-28",
+        "air-france-2651-LIN-MRS-2020-d5-b38@1986-02-28",
+        "alitalia-325-CDG-TRN-2030-d56-b38@1986-02-28",
+        "panam-110-JFK-FCO-1830@1986-02-28",
+        "air-france-2640-MRS-LIN-0745-d56-b38@1986-03-01",
+        "air-france-650-CDG-LIN-0745-d56-b38@1986-03-01",
+        "alitalia-324-TRN-CDG-0810-d56-b38@1986-03-01",
+        "air-france-347-LYS-LIN-0820-d6-b38@1986-03-01",
+        "air-france-630-CDG-FCO-0840-d56-b38@1986-03-01",
+        "alitalia-336-LIN-CDG-0845-d56-b38@1986-03-01",
+        "alitalia-334-FCO-CDG-0910-d56-b38@1986-03-01",
+        "air-france-2641-LIN-MRS-0930-d56-b38@1986-03-01",
+        "air-france-2648-NCE-FCO-0950-d6-b38@1986-03-01",
+        "air-france-651-LIN-CDG-1005-d56-b38@1986-03-01",
+        "alitalia-1351-CDG-GOA-1020-d6-b38@1986-03-01",
+        "alitalia-345-CDG-LIN-1110-d56-b38@1986-03-01",
+        "panam-111-FCO-JFK-1115@1986-03-01",
+        "air-france-658-CDG-VCE-1120-d56-b38@1986-03-01",
+        "air-france-631-FCO-CDG-1140-d56-b38@1986-03-01",
+        "air-france-2649-FCO-NCE-1145-d6-b38@1986-03-01",
+        "alitalia-335-CDG-FCO-1210-d56-b38@1986-03-01",
+        "air-france-652-CDG-LIN-1225-d56-b38@1986-03-01",
+        "alitalia-1351-GOA-NAP-1235-d6-b38@1986-03-01",
+        "alitalia-1350-GOA-CDG-1240-d6-b38@1986-03-01",
+        "alitalia-330-LIN-CDG-1310-d56-b38@1986-03-01",
+        "alitalia-328-PSA-CDG-1325-d6-b38@1986-03-01",
+        "air-france-659-VCE-CDG-1345-d56-b38@1986-03-01",
+        "alitalia-340-VCE-CDG-1440-d56-b38@1986-03-01",
+        "alitalia-338-FCO-NCE-1445-d56-b38@1986-03-01",
+        "air-france-653-LIN-CDG-1450-d56-b38@1986-03-01",
+        "alitalia-319-CDG-BLQ-1450-d6-b38@1986-03-01",
+        "alitalia-331-CDG-LIN-1520-d56-b38@1986-03-01",
+        "alitalia-329-CDG-PSA-1545-d6-b38@1986-03-01",
+        "air-france-634-CDG-FCO-1630-d56-b38@1986-03-01",
+        "air-france-636-CDG-NAP-1635-d6-b38@1986-03-01",
+        "alitalia-339-NCE-FCO-1635-d56-b38@1986-03-01",
+        "alitalia-326-LIN-CDG-1640-d56-b38@1986-03-01",
+        "alitalia-320-FCO-CDG-1700-d56-b38@1986-03-01",
+        "alitalia-341-CDG-VCE-1710-d56-b38@1986-03-01",
+        "alitalia-318-BLQ-CDG-1715-d6-b38@1986-03-01",
+        "air-france-654-CDG-LIN-1720-d56-b38@1986-03-01",
+        "alitalia-337-CDG-LIN-1900-d56-b38@1986-03-01",
+        "air-france-635-FCO-CDG-1930-d56-b38@1986-03-01",
+        "air-france-637-NAP-CDG-1940-d6-b38@1986-03-01",
+        "air-france-655-LIN-CDG-1940-d56-b38@1986-03-01",
+        "alitalia-321-CDG-FCO-2000-d56-b38@1986-03-01",
+        "alitalia-346-LIN-LYS-2000-d56-b38@1986-03-01",
+        "alitalia-325-CDG-TRN-2030-d56-b38@1986-03-01"
+      ],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+          "result": "Printed87–88 Rome/Fiumicino reviewed: existing PA111 to JFK remains the only nonstop departure row there; other listed destinations are connections. New Milan service advertised effective13Mar1986, outside target dates."
+        },
+        {
+          "url": "https://www.ebay.com/itm/205950663693",
+          "result": "Previously obtained USA preliminary photographs4–6 re-read. Airport-mapping and later-edition questions remain unresolved; no row promoted."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/it/alitalia/gal/azgal1a80.htm",
+          "result": "January1986 edition index checked again without verified new inner time pages."
+        },
+        {
+          "url": "https://www.ebay.com/itm/205031747762",
+          "result": "Far East/Australasia edition27Oct1985 found, but only cover photograph accessible in the inspected image set. No departure timing imported."
+        }
+      ],
+      "unresolved": [
+        "Alitalias preliminära USA-tabell hålls fortsatt utanför importen: jämförelse med senare januariutgåva/ändringar och italiensk flygplatsmappning återstår.",
+        "ATI, Alisarda, regional-, inrikes-, charter-, frakt- och övrig trafik behöver daterade tider. Pan Ams Milano-start 13 mars får inte flyttas till februari."
+      ]
+    }
+  ],
+  "next_country": "sm"
+}

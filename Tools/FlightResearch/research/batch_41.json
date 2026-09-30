@@ -1,0 +1,94 @@
+{
+  "batch": 41,
+  "package": "v42",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2322,
+  "new_schedules": 8,
+  "new_schedule_ids": [
+    "air-france-718-ORY-OTP-0900-d5-b41",
+    "tarom-212-ORY-OTP-1430-d6-b41",
+    "tarom-211-OTP-ORY-1215-d6-b41",
+    "air-france-714-ORY-SOF-1755-d6-b41",
+    "balkan-129-SOF-ORY-1500-d6-b41",
+    "balkan-135-SOF-ORY-1525-d5-b41",
+    "balkan-2004-ORY-SOF-1610-d5-b41",
+    "balkan-2003-SOF-ORY-1000-d5-b41"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 2,
+  "new_airports": [
+    "OTP",
+    "SOF"
+  ],
+  "new_country_ids": [
+    "bg"
+  ],
+  "new_airline_ids": [
+    "balkan"
+  ],
+  "new_source_ids": [
+    "tarom-winter-1985-archive-index",
+    "balkan-19851027-cover"
+  ],
+  "updated_source_ids": [
+    "air-france-19851027-no25"
+  ],
+  "unchanged_previous_movements": 2322,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "yu",
+  "reviewed_countries_this_batch": [
+    "ro",
+    "bg"
+  ],
+  "new_movements": 8,
+  "total_movements": 2330,
+  "new_leg_ids": [
+    "air-france-718-ORY-OTP-0900-d5-b41@1986-02-28",
+    "balkan-2003-SOF-ORY-1000-d5-b41@1986-02-28",
+    "balkan-135-SOF-ORY-1525-d5-b41@1986-02-28",
+    "balkan-2004-ORY-SOF-1610-d5-b41@1986-02-28",
+    "tarom-211-OTP-ORY-1215-d6-b41@1986-03-01",
+    "balkan-129-SOF-ORY-1500-d6-b41@1986-03-01",
+    "tarom-212-ORY-OTP-1430-d6-b41@1986-03-01",
+    "air-france-714-ORY-SOF-1755-d6-b41@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 2,
+    "balkan": 4,
+    "tarom": 2
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "ORY",
+      "OTP"
+    ],
+    [
+      "ORY",
+      "SOF"
+    ],
+    [
+      "OTP",
+      "ORY"
+    ],
+    [
+      "SOF",
+      "ORY"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 619,
+  "runtime_coverage": {
+    "registered_airlines": 89,
+    "registered_countries": 78,
+    "reviewed_schedules": 1608,
+    "animated_airlines": 45,
+    "scheduled_movements": 2329,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "new_cargo_movements": 2
+}

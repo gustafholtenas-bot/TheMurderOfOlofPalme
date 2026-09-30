@@ -1,0 +1,30 @@
+flight	origin	destination	departure	arrival	arrival_day_offset	days	leg_index	service_day_offset	no_local_traffic	remark
+1	NRT	TPE	19:10	22:00	0	5	4	1	0	Friday branch
+1	NRT	ITM	18:05	19:10	0	46	4	1	1	Thursday/Saturday branch
+1	ITM	TPE	19:55	21:55	0	46	5	1	0	Thursday/Saturday branch
+2	TPE	NRT	11:45	15:30	0	2456	2	0	0	Direct Taipei-Tokyo branch
+3	NRT	MNL	18:05	21:40	0	13567	3	1	0	Except Tuesday/Thursday
+4	MNL	NRT	10:25	15:15	0	24567	2	0	0	Except Monday/Wednesday
+7	NRT	ITM	18:05	19:10	0	1235	5	1	1	Monday branch terminates at Osaka
+7	ITM	OKA	19:55	22:05	0	235	6	1	1	Tuesday/Wednesday/Friday continuation
+8	OKA	ITM	11:10	13:05	0	346	1	0	1	Wednesday/Thursday/Saturday origin
+8	ITM	NRT	13:50	14:55	0	2346	2	0	1	Tuesday origin or continuation from Okinawa
+9	NRT	GMP	18:05	20:30	0	1234567	2	1	0	Daily continuation from Honolulu
+10	GMP	NRT	12:50	14:45	0	1234567	1	0	0	Daily
+15	HNL	ITM	10:35	15:00	1	1234567	1	0	0	Date line; arrival next local day
+16	ITM	HNL	18:55	06:40	0	1234567	1	0	0	Date line; arrival same local day
+17	NRT	HKG-KAITAK	18:00	21:55	0	1234567	2	1	0	Daily continuation from JFK
+18	HKG-KAITAK	NRT	11:15	15:45	0	1234567	1	0	0	Daily
+19	SAN	LAX	07:55	08:35	0	12456	1	0	0	Except Wednesday/Sunday
+19	LAX	SEA	09:10	11:40	0	12456	2	0	0	Except Wednesday/Sunday
+19	SEA	GMP	13:55	18:20	1	12456	3	0	0	Date line; arrival next local day
+19	GMP	MNL	20:20	23:10	0	367	4	1	0	Wednesday/Saturday service effective 7 January 1986
+20	GMP	SEA	17:10	09:50	0	14567	2	0	0	Except Tuesday/Wednesday
+20	SEA	LAX	12:50	15:10	0	14567	3	0	0	Except Tuesday/Wednesday
+20	LAX	SAN	15:40	16:20	0	14567	4	0	0	Except Tuesday/Wednesday
+23	LAX	GMP	13:00	19:10	1	6	1	0	0	Saturday nonstop; arrival Sunday local
+24	GMP	LAX	16:30	10:05	0	6	1	0	0	Saturday; same local day
+27	NRT	MNL	19:00	22:35	0	5	3	1	0	Wednesday suspended from 7 January 1986; Friday remains
+27	NRT	TPE	18:05	20:55	0	6	3	1	0	Saturday branch
+28	KUL-SUBANG	NRT	12:00	19:15	0	25	1	0	0	Tuesday/Friday; historical Kuala Lumpur airport is Subang
+28	MNL	NRT	14:15	19:05	0	6	1	0	0	Thursday suspended from 7 January 1986; Saturday remains

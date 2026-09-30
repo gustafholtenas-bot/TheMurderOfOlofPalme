@@ -1,0 +1,611 @@
+{
+  "package": "v31",
+  "batch": 30,
+  "checked_on": "2026-09-28",
+  "new_reviewed_schedules": 42,
+  "new_candidate_schedules": 0,
+  "new_movements": 50,
+  "total_movements": 1951,
+  "unchanged_previous_movements": 1901,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "BIO",
+    "PMI",
+    "VLC"
+  ],
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_movements_by_source_airline": {
+    "air-france": 27,
+    "iberia": 23
+  },
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "unchanged_plugin_file_count": 17,
+  "unchanged_plugin_files": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs"
+  ],
+  "calendar_and_utc_checks": [
+    {
+      "schedule": "iberia-676-BIO-ORY-1115-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IBAF676",
+      "printed_days": "1-3-5--",
+      "local_departure": "11:15",
+      "local_arrival": "12:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-563-BOD-MAD-0850-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF563",
+      "printed_days": "-----67",
+      "local_departure": "08:50",
+      "local_arrival": "10:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-563-BOD-MAD-1730-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF563",
+      "printed_days": "1-3-5--",
+      "local_departure": "17:30",
+      "local_arrival": "18:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-562-MAD-BOD-1540-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF562",
+      "printed_days": "1-3-567",
+      "local_departure": "15:40",
+      "local_arrival": "16:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-696-MAD-MRS-1735-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "IB696",
+      "printed_days": "-2---6-",
+      "local_departure": "17:35",
+      "local_arrival": "19:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-566-MAD-MRS-1930-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF566",
+      "printed_days": "1-3-5--",
+      "local_departure": "19:30",
+      "local_arrival": "21:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-580-MAD-NCE-1040-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF580",
+      "printed_days": "1-3-5-7",
+      "local_departure": "10:40",
+      "local_arrival": "12:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-682-MAD-NCE-1245-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "IB682",
+      "printed_days": "-2---6-",
+      "local_departure": "12:45",
+      "local_arrival": "14:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-650-MAD-ORY-0915-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "IB650",
+      "printed_days": "123-567",
+      "local_departure": "09:15",
+      "local_arrival": "11:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-510-MAD-ORY-1115-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF510",
+      "printed_days": "1-3456-",
+      "local_departure": "11:15",
+      "local_arrival": "13:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-516-MAD-ORY-1530-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF516",
+      "printed_days": "12345--",
+      "local_departure": "15:30",
+      "local_arrival": "17:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-652-MAD-ORY-1725-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IB652",
+      "printed_days": "----5--",
+      "local_departure": "17:25",
+      "local_arrival": "19:15",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-654-MAD-ORY-1725-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "IB654",
+      "printed_days": "1----67",
+      "local_departure": "17:25",
+      "local_arrival": "19:15",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-514-MAD-ORY-2010-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF514",
+      "printed_days": "1-345--",
+      "local_departure": "20:10",
+      "local_arrival": "22:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-564-MAD-TLS-1545-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF564",
+      "printed_days": "12345--",
+      "local_departure": "15:45",
+      "local_arrival": "16:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-540-AGP-ORY-1210-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF540",
+      "printed_days": "-----6-",
+      "local_departure": "12:10",
+      "local_arrival": "14:30",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-658-AGP-ORY-1520-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IB658",
+      "printed_days": "----5--",
+      "local_departure": "15:20",
+      "local_arrival": "17:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-573-MRS-MAD-0825-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF573",
+      "printed_days": "1-3-5--",
+      "local_departure": "08:25",
+      "local_arrival": "10:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-697-MRS-MAD-1950-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "IB697",
+      "printed_days": "-2---6-",
+      "local_departure": "19:50",
+      "local_arrival": "21:20",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-699-MRS-PMI-1725-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IB699",
+      "printed_days": "----5-7",
+      "local_departure": "17:25",
+      "local_arrival": "18:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-685-NCE-BCN-1545-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IB685",
+      "printed_days": "1---5--",
+      "local_departure": "15:45",
+      "local_arrival": "16:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-581-NCE-MAD-1310-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF581",
+      "printed_days": "1-3-5-7",
+      "local_departure": "13:10",
+      "local_arrival": "15:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-683-NCE-MAD-1510-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "IB683",
+      "printed_days": "-2---6-",
+      "local_departure": "15:10",
+      "local_arrival": "16:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-698-PMI-MRS-1540-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IB698",
+      "printed_days": "----5-7",
+      "local_departure": "15:40",
+      "local_arrival": "16:40",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-530-PMI-ORY-1125-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF530",
+      "printed_days": "-----6-",
+      "local_departure": "11:25",
+      "local_arrival": "13:15",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-525-ORY-BCN-0800-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF525",
+      "printed_days": "1234567",
+      "local_departure": "08:00",
+      "local_arrival": "09:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-669-ORY-BCN-1135-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "IB669",
+      "printed_days": "1234567",
+      "local_departure": "11:35",
+      "local_arrival": "13:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-529-ORY-BCN-1815-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF529",
+      "printed_days": "12345-7",
+      "local_departure": "18:15",
+      "local_arrival": "19:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-667-ORY-BCN-1925-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "IB667",
+      "printed_days": "1234567",
+      "local_departure": "19:25",
+      "local_arrival": "20:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-677-ORY-BIO-1720-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AFIB677",
+      "printed_days": "1-3-5--",
+      "local_departure": "17:20",
+      "local_arrival": "18:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-511-ORY-MAD-0830-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF511",
+      "printed_days": "1-3456-",
+      "local_departure": "08:30",
+      "local_arrival": "10:20",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-651-ORY-MAD-1205-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IB651",
+      "printed_days": "-2--5-7",
+      "local_departure": "12:05",
+      "local_arrival": "13:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-655-ORY-MAD-1205-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "IB655",
+      "printed_days": "1-3--6-",
+      "local_departure": "12:05",
+      "local_arrival": "13:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-517-ORY-MAD-1245-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF517",
+      "printed_days": "12345--",
+      "local_departure": "12:45",
+      "local_arrival": "14:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-515-ORY-MAD-1720-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF515",
+      "printed_days": "1-345--",
+      "local_departure": "17:20",
+      "local_arrival": "19:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-653-ORY-MAD-2015-b30",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "IB653",
+      "printed_days": "1---567",
+      "local_departure": "20:15",
+      "local_arrival": "22:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-541-ORY-AGP-0845-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF541",
+      "printed_days": "-----6-",
+      "local_departure": "08:45",
+      "local_arrival": "11:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-659-ORY-AGP-1830-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "IB659",
+      "printed_days": "----5--",
+      "local_departure": "18:30",
+      "local_arrival": "20:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-531-ORY-PMI-0840-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AF531",
+      "printed_days": "-----6-",
+      "local_departure": "08:40",
+      "local_arrival": "10:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-695-ORY-VLC-1700-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "AFIB695",
+      "printed_days": "-2-4-6-",
+      "local_departure": "17:00",
+      "local_arrival": "18:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-565-TLS-MAD-1345-b30",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF565",
+      "printed_days": "12345--",
+      "local_departure": "13:45",
+      "local_arrival": "14:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "iberia-694-VLC-ORY-1420-b30",
+      "dates": [
+        "1986-03-01"
+      ],
+      "printed_code": "IBAF694",
+      "printed_days": "-2-4-6-",
+      "local_departure": "14:20",
+      "local_arrival": "16:10",
+      "utc_offset": "+01:00"
+    }
+  ],
+  "source_files_sha256": {
+    "/tmp/batch23/af851027-1a.pdf": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+    "/tmp/batch30/yo8510a.jpg": "ddf597cd98253a56eb5ce23f45bba1bf0043187d8639a271274db01d4a80cae1",
+    "/tmp/batch30/ib851027.jpg": "b1b01603003e97aa2943664ef8c06dd39ebc82d18eca159ba59bcb4442b81676"
+  },
+  "cover_only_sources_create_no_schedules": true,
+  "europe_country_rows_checked": 40,
+  "country_endpoint_totals": {
+    "mc": 0,
+    "ad": 0,
+    "es": 59
+  },
+  "nordic_endpoint_movements": 155,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c640a5",
+        "wall_time_seconds": 2.248470053,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.282s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "cb5af9",
+        "wall_time_seconds": 0.11735682,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 83, \"registered_countries\": 72, \"reviewed_schedules\": 1352, \"animated_airlines\": 38, \"scheduled_movements\": 1950, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "5115e6",
+        "wall_time_seconds": 0.002838082,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "a94610",
+        "wall_time_seconds": 0.005267908,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "81536d",
+        "wall_time_seconds": 2.2193e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

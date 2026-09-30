@@ -1,0 +1,43 @@
+{
+  "batch": 30,
+  "package": "v31",
+  "country": "mc",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i Europakön; inte en fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://www.timetableimages.com/ttimages/yo.htm",
+      "type": "edition_gallery",
+      "result": "Vinterutgåvan 28 oktober 1985 finns i galleriet; länken går till omslagsbilden."
+    },
+    {
+      "url": "https://www.timetableimages.com/i-uz/yo8510a.jpg",
+      "type": "contemporary_cover",
+      "result": "Nr 19, vinter 85/86, 28 oktober 1985–29 mars 1986, YO samt Héliport de Monaco står på fram-/baksidan. Ingen avgångstabell i bilden. Heli Air Monaco registreras som operatör att utreda, utan animerade rörelser."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_frequency_only",
+      "result": "Air France nr 25 s. 5 anger sju dagliga helikopterförbindelser Nice–Monaco och beställningsflyg. Inga klockslag eller fullständiga datumregler: frekvensuppgiften genererar inga avgångar."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/mc/heliairmonaco.htm",
+      "type": "edition_index",
+      "result": "Index granskat; inget importklart tidtabellsuppslag för observationsfönstret hittat."
+    }
+  ],
+  "unresolved": [
+    "Hitta innersidor och eventuella ändringsblad till Heli Air Monaco nr 19 med exakta Nice–Monaco-tider och trafikdagar.",
+    "Fastställ den historiska helikopterplatsens position innan en markör läggs till.",
+    "Beställningstrafik, rundflyg, räddning och andra operatörer kräver daterade handlingar; bolagsinventeringen är ofullständig."
+  ]
+}

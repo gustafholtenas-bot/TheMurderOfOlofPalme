@@ -1,0 +1,69 @@
+{
+  "batch": 6,
+  "checked_on": "2026-09-26",
+  "previous_movements": 665,
+  "new_schedules": 26,
+  "new_schedule_ids": [
+    "northwest-37-ARN-GEN-1220",
+    "northwest-37-GEN-JFK-1420",
+    "northwest-44-MSP-LGW-1730",
+    "northwest-44-LGW-ARN-0805",
+    "northwest-44-LGW-FRA-0755",
+    "northwest-45-FRA-LGW-1200",
+    "northwest-45-LGW-MSP-1320",
+    "northwest-48-BOS-LGW-1945",
+    "northwest-48-LGW-FRA-0755",
+    "northwest-48-LGW-GLA-0805",
+    "northwest-49-FRA-LGW-1200",
+    "northwest-49-LGW-BOS-1355",
+    "northwest-30-JFK-CPH-1830",
+    "northwest-30-CPH-ARN-0850",
+    "northwest-31-ARN-CPH-1150",
+    "northwest-31-CPH-JFK-1400",
+    "gb-airways-100-LGW-GIB-0915",
+    "gb-airways-101-GIB-LGW-1400",
+    "gb-airways-102-LGW-GIB-1345",
+    "gb-airways-103-GIB-LGW-1830",
+    "british-airways-494-LGW-GIB-1310",
+    "british-airways-495-GIB-LGW-1755",
+    "gb-airways-204-GIB-TNG-1000",
+    "gb-airways-205-TNG-GIB-0945",
+    "gb-airways-206-GIB-TNG-1715",
+    "gb-airways-207-TNG-GIB-1700"
+  ],
+  "source_file_sha256": {
+    "nw-19851218.pdf": "c30a120b617cd61892a50b620c7535620ad6d27302db302d0f50f8dcc48a6f48",
+    "gt85.pdf": "7b8aaa4bfe0d54c9d1357fd148363dbd6e71aff4c2442e2315a42ac2fe680a47"
+  },
+  "source_urls": {
+    "nw-19851218.pdf": "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+    "gt85.pdf": "https://www.timetableimages.com/ttimages/complete/gt85/gt85.pdf"
+  },
+  "notes": [
+    "Visually reviewed primary timetable charts; planned services, not evidence of actual operation.",
+    "Copenhagen services reviewed but outside the window; no invented Friday/Saturday departures.",
+    "NW 840–845 shared international segments deduplicated to NW44/45.",
+    "NW38/39 Saturday suspended in January–early March; no Prestwick/Shannon import.",
+    "NW48 Monday and NW49 Friday suspended; no Friday NW49 movement.",
+    "Northwest Oslo service uses Gardermoen (GEN), not Fornebu (FBU).",
+    "Local-traffic restrictions on NW44 LGW–ARN and NW48 LGW–GLA retained in notes.",
+    "Airport coordinates identify airfield areas, not exact 1986 stands or terminals.",
+    "No source scans redistributed."
+  ],
+  "movements": 693,
+  "new_scheduled_movements": 28,
+  "new_movement_records": 0,
+  "coverage": {
+    "registered_airlines": 72,
+    "registered_countries": 56,
+    "reviewed_schedules": 494,
+    "animated_airlines": 14,
+    "scheduled_movements": 692,
+    "confirmed_movements": 1
+  },
+  "new_movements_by_operator": {
+    "northwest": 14,
+    "gb-airways": 12,
+    "british-airways": 2
+  }
+}

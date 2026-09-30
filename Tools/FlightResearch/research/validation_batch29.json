@@ -1,0 +1,1959 @@
+{
+  "package": "v30",
+  "batch": 29,
+  "checked_on": "2026-09-28",
+  "new_reviewed_schedules": 150,
+  "new_candidate_schedules": 10,
+  "new_movements": 164,
+  "total_movements": 1901,
+  "unchanged_previous_movements": 1737,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "BOD",
+    "MRS",
+    "TLS"
+  ],
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_movements_by_source_airline": {
+    "air-inter": 164
+  },
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "unchanged_plugin_file_count": 17,
+  "unchanged_plugin_files": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs"
+  ],
+  "calendar_and_utc_checks": [
+    {
+      "schedule": "air-inter-6014-BOD-ORY-0645-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6014",
+      "local_departure": "06:45",
+      "local_arrival": "07:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5014-BOD-ORY-0645-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5014",
+      "local_departure": "06:45",
+      "local_arrival": "07:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5066-BOD-CDG-0840-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5066",
+      "local_departure": "08:40",
+      "local_arrival": "09:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5214-BOD-ORY-1110-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5214",
+      "local_departure": "11:10",
+      "local_arrival": "12:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6214-BOD-ORY-1110-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6214",
+      "local_departure": "11:10",
+      "local_arrival": "12:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6266-BOD-CDG-1425-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6266",
+      "local_departure": "14:25",
+      "local_arrival": "15:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5266-BOD-CDG-1425-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5266",
+      "local_departure": "14:25",
+      "local_arrival": "15:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5314-BOD-ORY-1515-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5314",
+      "local_departure": "15:15",
+      "local_arrival": "16:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6414-BOD-ORY-1540-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6414",
+      "local_departure": "15:40",
+      "local_arrival": "16:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-7514-BOD-ORY-1750-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7514",
+      "local_departure": "17:50",
+      "local_arrival": "18:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-6514-BOD-ORY-1750-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6514",
+      "local_departure": "17:50",
+      "local_arrival": "18:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-7614-BOD-ORY-1900-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7614",
+      "local_departure": "19:00",
+      "local_arrival": "20:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5714-BOD-ORY-2120-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5714",
+      "local_departure": "21:20",
+      "local_arrival": "22:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6020-LYS-ORY-0700-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6020",
+      "local_departure": "07:00",
+      "local_arrival": "07:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5020-LYS-ORY-0700-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5020",
+      "local_departure": "07:00",
+      "local_arrival": "07:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6884-LYS-CDG-0745-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6884",
+      "local_departure": "07:45",
+      "local_arrival": "08:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5984-LYS-CDG-0825-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5984",
+      "local_departure": "08:25",
+      "local_arrival": "09:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5162-LYS-CDG-1020-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5162",
+      "local_departure": "10:20",
+      "local_arrival": "11:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6620-LYS-ORY-1300-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6620",
+      "local_departure": "13:00",
+      "local_arrival": "14:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5362-LYS-CDG-1455-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5362",
+      "local_departure": "14:55",
+      "local_arrival": "15:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7320-LYS-ORY-1700-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7320",
+      "local_departure": "17:00",
+      "local_arrival": "17:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-6384-LYS-ORY-1745-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6384",
+      "local_departure": "17:45",
+      "local_arrival": "18:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6420-LYS-ORY-1840-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6420",
+      "local_departure": "18:40",
+      "local_arrival": "19:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6520-LYS-ORY-1910-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6520",
+      "local_departure": "19:10",
+      "local_arrival": "20:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5262-LYS-CDG-2000-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5262",
+      "local_departure": "20:00",
+      "local_arrival": "21:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7083-ORY-LYS-0655-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7083",
+      "local_departure": "06:55",
+      "local_arrival": "08:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-6119-ORY-LYS-0840-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6119",
+      "local_departure": "08:40",
+      "local_arrival": "09:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5119-ORY-LYS-0840-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5119",
+      "local_departure": "08:40",
+      "local_arrival": "09:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5983-CDG-LYS-1015-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5983",
+      "local_departure": "10:15",
+      "local_arrival": "11:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5061-CDG-LYS-1045-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5061",
+      "local_departure": "10:45",
+      "local_arrival": "11:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5283-ORY-LYS-1055-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5283",
+      "local_departure": "10:55",
+      "local_arrival": "12:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5219-ORY-LYS-1315-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5219",
+      "local_departure": "13:15",
+      "local_arrival": "14:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6219-ORY-LYS-1315-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6219",
+      "local_departure": "13:15",
+      "local_arrival": "14:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6161-CDG-LYS-1700-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6161",
+      "local_departure": "17:00",
+      "local_arrival": "18:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-7319-ORY-LYS-1745-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7319",
+      "local_departure": "17:45",
+      "local_arrival": "18:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5619-ORY-LYS-1830-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5619",
+      "local_departure": "18:30",
+      "local_arrival": "19:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7419-ORY-LYS-1945-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7419",
+      "local_departure": "19:45",
+      "local_arrival": "20:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5583-CDG-LYS-2055-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5583",
+      "local_departure": "20:55",
+      "local_arrival": "22:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7027-ORY-MRS-0720-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7027",
+      "local_departure": "07:20",
+      "local_arrival": "08:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5027-ORY-MRS-0720-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5027",
+      "local_departure": "07:20",
+      "local_arrival": "08:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5545-ORY-MRS-0800-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5545",
+      "local_departure": "08:00",
+      "local_arrival": "09:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5227-ORY-MRS-0850-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5227",
+      "local_departure": "08:50",
+      "local_arrival": "09:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6227-ORY-MRS-0850-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6227",
+      "local_departure": "08:50",
+      "local_arrival": "09:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6063-CDG-MRS-0955-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6063",
+      "local_departure": "09:55",
+      "local_arrival": "11:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5327-ORY-MRS-1135-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5327",
+      "local_departure": "11:35",
+      "local_arrival": "12:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5163-CDG-MRS-1235-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5163",
+      "local_departure": "12:35",
+      "local_arrival": "13:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5427-ORY-MRS-1315-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5427",
+      "local_departure": "13:15",
+      "local_arrival": "14:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6527-ORY-MRS-1435-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6527",
+      "local_departure": "14:35",
+      "local_arrival": "15:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6627-ORY-MRS-1545-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6627",
+      "local_departure": "15:45",
+      "local_arrival": "16:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5627-ORY-MRS-1545-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5627",
+      "local_departure": "15:45",
+      "local_arrival": "16:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7727-ORY-MRS-1705-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7727",
+      "local_departure": "17:05",
+      "local_arrival": "18:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5727-ORY-MRS-1705-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5727",
+      "local_departure": "17:05",
+      "local_arrival": "18:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7827-ORY-MRS-1800-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7827",
+      "local_departure": "18:00",
+      "local_arrival": "19:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-7363-CDG-MRS-1840-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7363",
+      "local_departure": "18:40",
+      "local_arrival": "20:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-7927-ORY-MRS-1935-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7927",
+      "local_departure": "19:35",
+      "local_arrival": "20:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5927-ORY-MRS-1935-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5927",
+      "local_departure": "19:35",
+      "local_arrival": "20:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6029-ORY-MRS-2115-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6029",
+      "local_departure": "21:15",
+      "local_arrival": "22:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6103-ORY-BSL-0840-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6103",
+      "local_departure": "08:40",
+      "local_arrival": "09:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5103-ORY-BSL-0840-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5103",
+      "local_departure": "08:40",
+      "local_arrival": "10:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6767-CDG-BSL-1330-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT6767",
+      "local_departure": "13:30",
+      "local_arrival": "14:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5203-ORY-BSL-1755-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5203",
+      "local_departure": "17:55",
+      "local_arrival": "18:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6303-ORY-BSL-2050-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6303",
+      "local_departure": "20:50",
+      "local_arrival": "21:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5033-ORY-NCE-0715-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5033",
+      "local_departure": "07:15",
+      "local_arrival": "08:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6733-ORY-NCE-0850-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6733",
+      "local_departure": "08:50",
+      "local_arrival": "10:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5133-ORY-NCE-1030-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5133",
+      "local_departure": "10:30",
+      "local_arrival": "11:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6133-ORY-NCE-1030-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6133",
+      "local_departure": "10:30",
+      "local_arrival": "11:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5233-ORY-NCE-1305-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5233",
+      "local_departure": "13:05",
+      "local_arrival": "14:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6233-ORY-NCE-1305-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6233",
+      "local_departure": "13:05",
+      "local_arrival": "14:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6333-ORY-NCE-1455-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6333",
+      "local_departure": "14:55",
+      "local_arrival": "16:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5333-ORY-NCE-1455-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5333",
+      "local_departure": "14:55",
+      "local_arrival": "16:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6433-ORY-NCE-1700-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6433",
+      "local_departure": "17:00",
+      "local_arrival": "18:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5433-ORY-NCE-1700-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5433",
+      "local_departure": "17:00",
+      "local_arrival": "18:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6533-ORY-NCE-1915-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6533",
+      "local_departure": "19:15",
+      "local_arrival": "20:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5633-ORY-NCE-2110-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5633",
+      "local_departure": "21:10",
+      "local_arrival": "22:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7028-MRS-ORY-0650-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7028",
+      "local_departure": "06:50",
+      "local_arrival": "08:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5028-MRS-ORY-0650-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5028",
+      "local_departure": "06:50",
+      "local_arrival": "08:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6164-MRS-CDG-0820-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT6164",
+      "local_departure": "08:20",
+      "local_arrival": "09:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5228-MRS-ORY-0915-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5228",
+      "local_departure": "09:15",
+      "local_arrival": "10:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6228-MRS-ORY-0915-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6228",
+      "local_departure": "09:15",
+      "local_arrival": "10:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5328-MRS-ORY-1055-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5328",
+      "local_departure": "10:55",
+      "local_arrival": "12:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5428-MRS-ORY-1330-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5428",
+      "local_departure": "13:30",
+      "local_arrival": "14:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5264-MRS-CDG-1435-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5264",
+      "local_departure": "14:35",
+      "local_arrival": "15:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5528-MRS-ORY-1510-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5528",
+      "local_departure": "15:10",
+      "local_arrival": "16:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6464-MRS-CDG-1630-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6464",
+      "local_departure": "16:30",
+      "local_arrival": "17:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-7628-MRS-ORY-1730-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7628",
+      "local_departure": "17:30",
+      "local_arrival": "18:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5628-MRS-ORY-1730-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5628",
+      "local_departure": "17:30",
+      "local_arrival": "18:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7728-MRS-ORY-1850-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7728",
+      "local_departure": "18:50",
+      "local_arrival": "20:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-6728-MRS-ORY-1850-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6728",
+      "local_departure": "18:50",
+      "local_arrival": "20:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6828-MRS-ORY-1945-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6828",
+      "local_departure": "19:45",
+      "local_arrival": "21:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5928-MRS-ORY-2120-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5928",
+      "local_departure": "21:20",
+      "local_arrival": "22:35",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5030-MRS-ORY-2140-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5030",
+      "local_departure": "21:40",
+      "local_arrival": "22:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6004-BSL-ORY-0710-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6004",
+      "local_departure": "07:10",
+      "local_arrival": "08:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5004-BSL-ORY-0710-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5004",
+      "local_departure": "07:10",
+      "local_arrival": "08:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5768-BSL-CDG-1025-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5768",
+      "local_departure": "10:25",
+      "local_arrival": "11:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5768-BSL-CDG-1025-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5768",
+      "local_departure": "10:25",
+      "local_arrival": "11:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7204-BSL-ORY-1520-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7204",
+      "local_departure": "15:20",
+      "local_arrival": "16:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-6204-BSL-ORY-1520-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6204",
+      "local_departure": "15:20",
+      "local_arrival": "16:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6304-BSL-ORY-1930-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6304",
+      "local_departure": "19:30",
+      "local_arrival": "20:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5034-NCE-ORY-0715-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5034",
+      "local_departure": "07:15",
+      "local_arrival": "08:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5134-NCE-ORY-0920-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5134",
+      "local_departure": "09:20",
+      "local_arrival": "10:35",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5734-NCE-ORY-1050-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5734",
+      "local_departure": "10:50",
+      "local_arrival": "12:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5234-NCE-ORY-1235-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5234",
+      "local_departure": "12:35",
+      "local_arrival": "13:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6334-NCE-ORY-1510-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT6334",
+      "local_departure": "15:10",
+      "local_arrival": "16:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6434-NCE-ORY-1700-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6434",
+      "local_departure": "17:00",
+      "local_arrival": "18:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5434-NCE-ORY-1700-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5434",
+      "local_departure": "17:00",
+      "local_arrival": "18:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6534-NCE-ORY-1905-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6534",
+      "local_departure": "19:05",
+      "local_arrival": "20:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5534-NCE-ORY-1905-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5534",
+      "local_departure": "19:05",
+      "local_arrival": "20:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5047-ORY-TLS-0710-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5047",
+      "local_departure": "07:10",
+      "local_arrival": "08:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5147-ORY-TLS-0910-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5147",
+      "local_departure": "09:10",
+      "local_arrival": "10:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6147-ORY-TLS-0910-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6147",
+      "local_departure": "09:10",
+      "local_arrival": "10:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5565-CDG-TLS-1050-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5565",
+      "local_departure": "10:50",
+      "local_arrival": "12:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6247-ORY-TLS-1350-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6247",
+      "local_departure": "13:50",
+      "local_arrival": "14:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5247-ORY-TLS-1350-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5247",
+      "local_departure": "13:50",
+      "local_arrival": "14:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6347-ORY-TLS-1525-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6347",
+      "local_departure": "15:25",
+      "local_arrival": "16:30",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-7447-ORY-TLS-1715-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7447",
+      "local_departure": "17:15",
+      "local_arrival": "18:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5447-ORY-TLS-1715-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5447",
+      "local_departure": "17:15",
+      "local_arrival": "18:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6865-CDG-TLS-1720-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6865",
+      "local_departure": "17:20",
+      "local_arrival": "18:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-7547-ORY-TLS-1910-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7547",
+      "local_departure": "19:10",
+      "local_arrival": "20:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-7647-ORY-TLS-1955-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7647",
+      "local_departure": "19:55",
+      "local_arrival": "21:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-6847-ORY-TLS-2135-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6847",
+      "local_departure": "21:35",
+      "local_arrival": "22:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6465-CDG-TLS-2140-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6465",
+      "local_departure": "21:40",
+      "local_arrival": "23:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6048-TLS-ORY-0705-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6048",
+      "local_departure": "07:05",
+      "local_arrival": "08:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5048-TLS-ORY-0705-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5048",
+      "local_departure": "07:05",
+      "local_arrival": "08:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5566-TLS-CDG-0745-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5566",
+      "local_departure": "07:45",
+      "local_arrival": "09:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5148-TLS-ORY-0855-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5148",
+      "local_departure": "08:55",
+      "local_arrival": "10:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6148-TLS-ORY-0855-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6148",
+      "local_departure": "08:55",
+      "local_arrival": "10:05",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5766-TLS-CDG-1000-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5766",
+      "local_departure": "10:00",
+      "local_arrival": "11:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6766-TLS-CDG-1000-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6766",
+      "local_departure": "10:00",
+      "local_arrival": "11:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5248-TLS-ORY-1115-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5248",
+      "local_departure": "11:15",
+      "local_arrival": "12:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5866-TLS-CDG-1400-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5866",
+      "local_departure": "14:00",
+      "local_arrival": "15:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6348-TLS-ORY-1545-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6348",
+      "local_departure": "15:45",
+      "local_arrival": "16:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5348-TLS-ORY-1545-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5348",
+      "local_departure": "15:45",
+      "local_arrival": "16:55",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-7448-TLS-ORY-1715-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7448",
+      "local_departure": "17:15",
+      "local_arrival": "18:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-7548-TLS-ORY-1900-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7548",
+      "local_departure": "19:00",
+      "local_arrival": "20:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-5548-TLS-ORY-1900-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5548",
+      "local_departure": "19:00",
+      "local_arrival": "20:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6748-TLS-ORY-2055-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6748",
+      "local_departure": "20:55",
+      "local_arrival": "22:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5648-TLS-ORY-2130-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5648",
+      "local_departure": "21:30",
+      "local_arrival": "22:45",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5848-TLS-ORY-2140-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5848",
+      "local_departure": "21:40",
+      "local_arrival": "22:50",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6013-ORY-BOD-0700-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6013",
+      "local_departure": "07:00",
+      "local_arrival": "08:00",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5113-ORY-BOD-0835-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5113",
+      "local_departure": "08:35",
+      "local_arrival": "09:35",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5165-CDG-BOD-1100-d56",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "flight": "IT5165",
+      "local_departure": "11:00",
+      "local_arrival": "12:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5485-CDG-BOD-1200-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5485",
+      "local_departure": "12:00",
+      "local_arrival": "13:15",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-5313-ORY-BOD-1325-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT5313",
+      "local_departure": "13:25",
+      "local_arrival": "14:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6313-ORY-BOD-1325-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6313",
+      "local_departure": "13:25",
+      "local_arrival": "14:25",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6413-ORY-BOD-1610-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6413",
+      "local_departure": "16:10",
+      "local_arrival": "17:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-5413-ORY-BOD-1610-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT5413",
+      "local_departure": "16:10",
+      "local_arrival": "17:10",
+      "utc_offset": "+01:00",
+      "number_prefix": "5",
+      "day_color": "blue"
+    },
+    {
+      "schedule": "air-inter-6365-CDG-BOD-1710-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6365",
+      "local_departure": "17:10",
+      "local_arrival": "18:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-7513-ORY-BOD-1940-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT7513",
+      "local_departure": "19:40",
+      "local_arrival": "20:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "7",
+      "day_color": "red"
+    },
+    {
+      "schedule": "air-inter-6513-ORY-BOD-1940-d6",
+      "dates": [
+        "1986-03-01"
+      ],
+      "flight": "IT6513",
+      "local_departure": "19:40",
+      "local_arrival": "20:40",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    },
+    {
+      "schedule": "air-inter-6713-ORY-BOD-2120-d5",
+      "dates": [
+        "1986-02-28"
+      ],
+      "flight": "IT6713",
+      "local_departure": "21:20",
+      "local_arrival": "22:20",
+      "utc_offset": "+01:00",
+      "number_prefix": "6",
+      "day_color": "black"
+    }
+  ],
+  "new_candidates_not_animated": [
+    "air-inter-5066-BOD-CDG-0840-d6",
+    "air-inter-5220-LYS-ORY-0830-d5",
+    "air-inter-5320-LYS-ORY-1700-d6",
+    "air-inter-7019-ORY-LYS-0700-d5",
+    "air-inter-5161-CDG-LYS-1700-d6",
+    "air-inter-6565-CDG-TLS-1050-d6",
+    "air-inter-5547-ORY-TLS-1910-d6",
+    "air-inter-5866-TLS-CDG-1400-d6",
+    "air-inter-5013-ORY-BOD-0700-d6",
+    "air-inter-6113-ORY-BOD-0835-d6"
+  ],
+  "original_air_inter_pdf_sha256": "37da26ae4ef6974d3bd4e04b16d27ec009218aabbd7355bd3d739105c794723e",
+  "europe_country_rows_checked": 40,
+  "country_endpoint_totals": {
+    "fr": 321
+  },
+  "nordic_endpoint_movements": 155,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "eed206",
+        "wall_time_seconds": 2.27934176,
+        "exit_code": 0,
+        "original_token_count": 551,
+        "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 2.308s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "2d1b91",
+        "wall_time_seconds": 0.130022607,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 82, \"registered_countries\": 71, \"reviewed_schedules\": 1310, \"animated_airlines\": 38, \"scheduled_movements\": 1900, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "7b5b1a",
+        "wall_time_seconds": 0.015554358,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "98c111",
+        "wall_time_seconds": 0.011539162,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "3d1d12",
+        "wall_time_seconds": 2.5859e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

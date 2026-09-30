@@ -1,0 +1,59 @@
+{
+  "batch": 39,
+  "package": "v40",
+  "country": "pl",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 5,
+  "domestic_movements": 0,
+  "international_movements": 5,
+  "new_movements": 2,
+  "endpoint_movements_by_source_airline": {
+    "panam": 1,
+    "aeroflot": 1,
+    "lot": 1,
+    "air-france": 1,
+    "malev": 1
+  },
+  "endpoint_leg_ids": [
+    "panam-72-FRA-WAW-1205@1986-02-28",
+    "aeroflot-618-BUD-WAW-1330@1986-02-28",
+    "lot-273-WAW-ORY-1430-d5-b39@1986-02-28",
+    "air-france-280-ORY-WAW-1810-d5-b39@1986-02-28",
+    "malev-120-BUD-WAW-1200@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "lot-273-WAW-ORY-1430-d5-b39@1986-02-28",
+    "air-france-280-ORY-WAW-1810-d5-b39@1986-02-28"
+  ],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Air France nr 25: tryckta s. 45, 77 och 93 visuellt granskade. AFLO280 Orly 18:10–Warszawa 20:15 och LOAF273 Warszawa 14:30–Orly 16:50 gäller måndag/fredag/söndag och är nonstop. Fredag 28 februari importeras; lördag har inga avgångar på dessa rader."
+    },
+    {
+      "url": "https://www.ebay.com/itm/198449943966",
+      "type": "existing_partial_scan_followup",
+      "result": "Tidigare granskade LOT-vinterfotografier ger fortfarande inte fullständiga direkt-/linjetabeller. Källan lot-19851027 behålls oförändrad och ger inga nya scheman i v40."
+    },
+    {
+      "url": "https://www.ebay.co.uk/itm/198076798105",
+      "type": "unavailable_search_lead",
+      "result": "Ytterligare annons hittades i sökindex men gav HTTP 404 vid hämtning. Inga bilder, tider eller giltighetsuppgifter godkänns från denna träff."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/pl/lot.htm",
+      "type": "edition_index",
+      "result": "LOT:s utgåveindex kontrollerat; det ersätter inte de saknade tidtabellssidorna."
+    }
+  ],
+  "unresolved": [
+    "LOT:s fullständiga vintertabell och ändringar saknas fortfarande. Det befintliga fotourvalet visar omslag, s. 2–3 och 8–9; de centrala direkt-/linjetabellerna s. 4–7 och noter s. 11 behöver läsas före fler importer. Anslutningsförslag till Norden är inte automatiskt nonstop.",
+    "LOT:s inrikestrafik, övriga polska flygplatser och utländska operatörer är ofullständigt inventerade. Fem inlagda ändpunktsrörelser betyder inte full Polentäckning.",
+    "AFLO/LOAF är samarbetskoder; faktisk operatör, genomförande, inställda flyg och flygplan är inte fastställda. Frakt-, charter-, privat-, stats-, militär- och helikoptertrafik samt faktiska överflygningar behöver egna handlingar."
+  ]
+}

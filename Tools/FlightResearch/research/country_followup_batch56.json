@@ -1,0 +1,108 @@
+{
+  "batch": 56,
+  "package": "v57",
+  "checked_on": "2026-09-29",
+  "countries": [
+    {
+      "country": "al",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 0,
+      "domestic_movements": 0,
+      "international_movements": 0,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {},
+      "endpoint_leg_ids": [],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://www.airticketshistory.com/WEB/OATT.htm",
+          "result": "Matching Olympic winter cover links checked; no Tirana inner timing pages verified."
+        },
+        {
+          "url": "https://www.timetableimages.com/ttimages/if.htm",
+          "result": "Interflug archive retrieval failed in this follow-up; prior research retained."
+        }
+      ],
+      "unresolved": [
+        "Fullständiga tider till/från Tirana–Rinas för vintern 1985/86 saknas fortfarande. Olympic- och Interflug-spåren gav inga nya importklara rader. Noll rörelser betyder källucka, inte frånvaro av trafik."
+      ]
+    },
+    {
+      "country": "gr",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 17,
+      "domestic_movements": 0,
+      "international_movements": 17,
+      "new_movements": 2,
+      "endpoint_movements_by_source_airline": {
+        "panam": 2,
+        "air-france": 6,
+        "swissair": 3,
+        "olympic": 6
+      },
+      "endpoint_leg_ids": [
+        "panam-61-ATH-ELLINIKON-FRA-0930-d5-b56@1986-02-28",
+        "air-france-600-CDG-ATH-ELLINIKON-0910-d5-b43@1986-02-28",
+        "swissair-314-GVA-ATH-ELLINIKON-1105@1986-02-28",
+        "air-france-601-ATH-ELLINIKON-CDG-1420-d5-b43@1986-02-28",
+        "olympic-136-GVA-ATH-ELLINIKON-1430@1986-02-28",
+        "olympic-215-ATH-ELLINIKON-MRS-0910-d6-b43@1986-03-01",
+        "olympic-201-ATH-ELLINIKON-ORY-0915-d6-b43@1986-03-01",
+        "air-france-600-CDG-ATH-ELLINIKON-0910-d6-b43@1986-03-01",
+        "swissair-314-GVA-ATH-ELLINIKON-1105@1986-03-01",
+        "olympic-216-MRS-ATH-ELLINIKON-1140-d6-b43@1986-03-01",
+        "panam-150-FRA-ATH-ELLINIKON-1215-d6-b56@1986-03-01",
+        "olympic-202-ORY-ATH-ELLINIKON-1245-d6-b43@1986-03-01",
+        "air-france-601-ATH-ELLINIKON-CDG-1420-d6-b43@1986-03-01",
+        "swissair-296-GVA-ATH-ELLINIKON-1400@1986-03-01",
+        "olympic-136-GVA-ATH-ELLINIKON-1430@1986-03-01",
+        "air-france-624-NCE-ATH-ELLINIKON-1455-d6-b43@1986-03-01",
+        "air-france-625-ATH-ELLINIKON-NCE-1900-d6-b43@1986-03-01"
+      ],
+      "new_leg_ids": [
+        "panam-61-ATH-ELLINIKON-FRA-0930-d5-b56@1986-02-28",
+        "panam-150-FRA-ATH-ELLINIKON-1215-d6-b56@1986-03-01"
+      ],
+      "checks": [
+        {
+          "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+          "result": "Printed 5: PA61 ATH 09:30–FRA 11:25 Friday, Nonstop, until 28 March. Printed 40: PA150 FRA 12:15–ATH 16:00 ThSa, Nonstop, until 29 March. Both carry No Local Traffic On Above Flight."
+        },
+        {
+          "url": "https://www.airticketshistory.com/WEB/OATT.htm",
+          "result": "English and Arabic 27 October 1985–29 March 1986 cover links opened. No inner flight times verified."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/gr/olympic/gal/oagal1a80.htm",
+          "result": "Matching winter cover still listed; no full winter PDF verified."
+        },
+        {
+          "url": "https://collection.sfomuseum.org/objects/1511954835/",
+          "result": "Search hit inspected: winter 1970–71, excluded."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/usc/twa/gal/twgal80.htm",
+          "result": "12 January 1986 edition listed with hard-spine marker, not full PDF."
+        },
+        {
+          "url": "https://www.ebay.com/itm/285016297315",
+          "result": "One public photograph; no verified Athens timing pages."
+        },
+        {
+          "url": "https://www.the-athenian.com/downloads/1986/02-February.pdf",
+          "result": "Contemporary magazine identified; full retrieval returned HTTP 406. Unread advertisements not imported."
+        }
+      ],
+      "unresolved": [
+        "Olympics fullständiga internationella och grekiska vinterinlagor saknas. TWA:s januariutgåva identifierad men inga Aten-innersidor verifierade. Inrikesnät, Thessaloniki, öflygplatser och fler operatörer samt charter, frakt och faktisk drift återstår."
+      ]
+    }
+  ],
+  "next_country": "cy"
+}

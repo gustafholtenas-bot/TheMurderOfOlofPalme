@@ -1,0 +1,204 @@
+{
+  "batch": 15,
+  "checked_on": "2026-09-26",
+  "coordinates_file_sha256": "36a924db3b17a6f8ee55c242ed7f6fa3048e529d37fee6b3c4ad9527ea395778",
+  "airports": [
+    {
+      "id": "DHA",
+      "name": "Dhahran (historical civil airport)",
+      "country": "sa",
+      "timezone": "Asia/Riyadh",
+      "lat": 26.2654,
+      "lon": 50.152,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "OEDR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/OEDR/",
+        "https://www.spa.gov.sa/1972230"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position. Uses the former Dhahran civil airport site (present OEDR), not King Fahd International."
+    },
+    {
+      "id": "DUB",
+      "name": "Dublin",
+      "country": "ie",
+      "timezone": "Europe/Dublin",
+      "lat": 53.428713,
+      "lon": -6.262121,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EIDW",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/EIDW/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "DUS",
+      "name": "Düsseldorf",
+      "country": "de-west",
+      "timezone": "Europe/Berlin",
+      "lat": 51.289501,
+      "lon": 6.76678,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EDDL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/EDDL/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "BSL",
+      "name": "Basel/Mulhouse",
+      "country": "fr",
+      "timezone": "Europe/Paris",
+      "lat": 47.60068,
+      "lon": 7.521117,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "LFSB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/LFSB/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position. The binational airport is geographically in France; country filtering follows location."
+    },
+    {
+      "id": "BCN",
+      "name": "Barcelona",
+      "country": "es",
+      "timezone": "Europe/Madrid",
+      "lat": 41.2971,
+      "lon": 2.07846,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "LEBL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/LEBL/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "ALG",
+      "name": "Algiers / Houari Boumediene",
+      "country": "dz",
+      "timezone": "Africa/Algiers",
+      "lat": 36.693886,
+      "lon": 3.214531,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "DAAG",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/DAAG/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "ABJ",
+      "name": "Abidjan / Port Bouet",
+      "country": "ci",
+      "timezone": "Africa/Abidjan",
+      "lat": 5.26139,
+      "lon": -3.92629,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "DIAP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/DIAP/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "ATH-ELLINIKON",
+      "name": "Athens Ellinikon (historical ATH)",
+      "country": "gr",
+      "timezone": "Europe/Athens",
+      "lat": 37.89162,
+      "lon": 23.730211,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "GR-0098",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/GR-0098/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position. Historical Ellinikon site, not the later Athens Spata airport."
+    },
+    {
+      "id": "LBA",
+      "name": "Leeds/Bradford",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 53.865898,
+      "lon": -1.66057,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGNM",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/EGNM/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "LPL",
+      "name": "Liverpool / Speke",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 53.334863,
+      "lon": -2.849637,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGGP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/EGGP/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "MAN",
+      "name": "Manchester",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 53.349375,
+      "lon": -2.279521,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGCC",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/EGCC/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "NCL",
+      "name": "Newcastle",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 55.037958,
+      "lon": -1.689577,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGNT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/EGNT/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "AGP",
+      "name": "Malaga",
+      "country": "es",
+      "timezone": "Europe/Madrid",
+      "lat": 36.6749,
+      "lon": -4.49911,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "LEMG",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/LEMG/"
+      ],
+      "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    }
+  ],
+  "note": "Current coordinates describe airfield locations; historical replacement sites explicitly distinguished. Not 1986 terminal positions."
+}

@@ -1,0 +1,238 @@
+{
+  "batch": 30,
+  "package": "v31",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 1901,
+  "new_schedules": 42,
+  "new_schedule_ids": [
+    "iberia-676-BIO-ORY-1115-b30",
+    "air-france-563-BOD-MAD-0850-b30",
+    "air-france-563-BOD-MAD-1730-b30",
+    "air-france-562-MAD-BOD-1540-b30",
+    "iberia-696-MAD-MRS-1735-b30",
+    "air-france-566-MAD-MRS-1930-b30",
+    "air-france-580-MAD-NCE-1040-b30",
+    "iberia-682-MAD-NCE-1245-b30",
+    "iberia-650-MAD-ORY-0915-b30",
+    "air-france-510-MAD-ORY-1115-b30",
+    "air-france-516-MAD-ORY-1530-b30",
+    "iberia-652-MAD-ORY-1725-b30",
+    "iberia-654-MAD-ORY-1725-b30",
+    "air-france-514-MAD-ORY-2010-b30",
+    "air-france-564-MAD-TLS-1545-b30",
+    "air-france-540-AGP-ORY-1210-b30",
+    "iberia-658-AGP-ORY-1520-b30",
+    "air-france-573-MRS-MAD-0825-b30",
+    "iberia-697-MRS-MAD-1950-b30",
+    "iberia-699-MRS-PMI-1725-b30",
+    "iberia-685-NCE-BCN-1545-b30",
+    "air-france-581-NCE-MAD-1310-b30",
+    "iberia-683-NCE-MAD-1510-b30",
+    "iberia-698-PMI-MRS-1540-b30",
+    "air-france-530-PMI-ORY-1125-b30",
+    "air-france-525-ORY-BCN-0800-b30",
+    "iberia-669-ORY-BCN-1135-b30",
+    "air-france-529-ORY-BCN-1815-b30",
+    "iberia-667-ORY-BCN-1925-b30",
+    "air-france-677-ORY-BIO-1720-b30",
+    "air-france-511-ORY-MAD-0830-b30",
+    "iberia-651-ORY-MAD-1205-b30",
+    "iberia-655-ORY-MAD-1205-b30",
+    "air-france-517-ORY-MAD-1245-b30",
+    "air-france-515-ORY-MAD-1720-b30",
+    "iberia-653-ORY-MAD-2015-b30",
+    "air-france-541-ORY-AGP-0845-b30",
+    "iberia-659-ORY-AGP-1830-b30",
+    "air-france-531-ORY-PMI-0840-b30",
+    "air-france-695-ORY-VLC-1700-b30",
+    "air-france-565-TLS-MAD-1345-b30",
+    "iberia-694-VLC-ORY-1420-b30"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "BIO",
+    "PMI",
+    "VLC"
+  ],
+  "new_country_ids": [
+    "mc"
+  ],
+  "new_airline_ids": [
+    "heli-air-monaco"
+  ],
+  "new_source_ids": [
+    "heli-air-monaco-19851028-no19",
+    "iberia-19851027-no2"
+  ],
+  "unchanged_previous_movements": 1901,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "gi",
+  "reviewed_countries_this_batch": [
+    "mc",
+    "ad",
+    "es"
+  ],
+  "new_movements": 50,
+  "total_movements": 1951,
+  "new_leg_ids": [
+    "air-france-525-ORY-BCN-0800-b30@1986-02-28",
+    "air-france-573-MRS-MAD-0825-b30@1986-02-28",
+    "air-france-511-ORY-MAD-0830-b30@1986-02-28",
+    "iberia-650-MAD-ORY-0915-b30@1986-02-28",
+    "air-france-580-MAD-NCE-1040-b30@1986-02-28",
+    "air-france-510-MAD-ORY-1115-b30@1986-02-28",
+    "iberia-676-BIO-ORY-1115-b30@1986-02-28",
+    "iberia-669-ORY-BCN-1135-b30@1986-02-28",
+    "iberia-651-ORY-MAD-1205-b30@1986-02-28",
+    "air-france-517-ORY-MAD-1245-b30@1986-02-28",
+    "air-france-581-NCE-MAD-1310-b30@1986-02-28",
+    "air-france-565-TLS-MAD-1345-b30@1986-02-28",
+    "iberia-658-AGP-ORY-1520-b30@1986-02-28",
+    "air-france-516-MAD-ORY-1530-b30@1986-02-28",
+    "air-france-562-MAD-BOD-1540-b30@1986-02-28",
+    "iberia-698-PMI-MRS-1540-b30@1986-02-28",
+    "air-france-564-MAD-TLS-1545-b30@1986-02-28",
+    "iberia-685-NCE-BCN-1545-b30@1986-02-28",
+    "air-france-515-ORY-MAD-1720-b30@1986-02-28",
+    "air-france-677-ORY-BIO-1720-b30@1986-02-28",
+    "iberia-652-MAD-ORY-1725-b30@1986-02-28",
+    "iberia-699-MRS-PMI-1725-b30@1986-02-28",
+    "air-france-563-BOD-MAD-1730-b30@1986-02-28",
+    "air-france-529-ORY-BCN-1815-b30@1986-02-28",
+    "iberia-659-ORY-AGP-1830-b30@1986-02-28",
+    "iberia-667-ORY-BCN-1925-b30@1986-02-28",
+    "air-france-566-MAD-MRS-1930-b30@1986-02-28",
+    "air-france-514-MAD-ORY-2010-b30@1986-02-28",
+    "iberia-653-ORY-MAD-2015-b30@1986-02-28",
+    "air-france-525-ORY-BCN-0800-b30@1986-03-01",
+    "air-france-511-ORY-MAD-0830-b30@1986-03-01",
+    "air-france-531-ORY-PMI-0840-b30@1986-03-01",
+    "air-france-541-ORY-AGP-0845-b30@1986-03-01",
+    "air-france-563-BOD-MAD-0850-b30@1986-03-01",
+    "iberia-650-MAD-ORY-0915-b30@1986-03-01",
+    "air-france-510-MAD-ORY-1115-b30@1986-03-01",
+    "air-france-530-PMI-ORY-1125-b30@1986-03-01",
+    "iberia-669-ORY-BCN-1135-b30@1986-03-01",
+    "iberia-655-ORY-MAD-1205-b30@1986-03-01",
+    "air-france-540-AGP-ORY-1210-b30@1986-03-01",
+    "iberia-682-MAD-NCE-1245-b30@1986-03-01",
+    "iberia-694-VLC-ORY-1420-b30@1986-03-01",
+    "iberia-683-NCE-MAD-1510-b30@1986-03-01",
+    "air-france-562-MAD-BOD-1540-b30@1986-03-01",
+    "air-france-695-ORY-VLC-1700-b30@1986-03-01",
+    "iberia-654-MAD-ORY-1725-b30@1986-03-01",
+    "iberia-696-MAD-MRS-1735-b30@1986-03-01",
+    "iberia-667-ORY-BCN-1925-b30@1986-03-01",
+    "iberia-697-MRS-MAD-1950-b30@1986-03-01",
+    "iberia-653-ORY-MAD-2015-b30@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 27,
+    "iberia": 23
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "AGP",
+      "ORY"
+    ],
+    [
+      "BIO",
+      "ORY"
+    ],
+    [
+      "BOD",
+      "MAD"
+    ],
+    [
+      "MAD",
+      "BOD"
+    ],
+    [
+      "MAD",
+      "MRS"
+    ],
+    [
+      "MAD",
+      "NCE"
+    ],
+    [
+      "MAD",
+      "ORY"
+    ],
+    [
+      "MAD",
+      "TLS"
+    ],
+    [
+      "MRS",
+      "MAD"
+    ],
+    [
+      "MRS",
+      "PMI"
+    ],
+    [
+      "NCE",
+      "BCN"
+    ],
+    [
+      "NCE",
+      "MAD"
+    ],
+    [
+      "ORY",
+      "AGP"
+    ],
+    [
+      "ORY",
+      "BCN"
+    ],
+    [
+      "ORY",
+      "BIO"
+    ],
+    [
+      "ORY",
+      "MAD"
+    ],
+    [
+      "ORY",
+      "PMI"
+    ],
+    [
+      "ORY",
+      "VLC"
+    ],
+    [
+      "PMI",
+      "MRS"
+    ],
+    [
+      "PMI",
+      "ORY"
+    ],
+    [
+      "TLS",
+      "MAD"
+    ],
+    [
+      "VLC",
+      "ORY"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 518,
+  "runtime_coverage": {
+    "registered_airlines": 83,
+    "registered_countries": 72,
+    "reviewed_schedules": 1352,
+    "animated_airlines": 38,
+    "scheduled_movements": 1950,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

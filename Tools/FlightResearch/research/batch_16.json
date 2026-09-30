@@ -1,0 +1,263 @@
+{
+  "batch": 16,
+  "package": "v17",
+  "checked_on": "2026-09-27",
+  "previous_movements": 1080,
+  "new_schedules": 23,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [
+    "northwest-1-TPA-LAX-0830",
+    "northwest-1-LAX-NRT-1235",
+    "northwest-2-NRT-LAX-1635",
+    "northwest-2-LAX-TPA-1340",
+    "northwest-3-DCA-ORD-1000",
+    "northwest-3-ORD-NRT-1150",
+    "northwest-4-NRT-ORD-1645",
+    "northwest-4-ORD-DCA-1540",
+    "northwest-7-PHL-DTW-0710",
+    "northwest-7-DTW-MSP-0940",
+    "northwest-7-MSP-SEA-1110",
+    "northwest-7-SEA-NRT-1340",
+    "northwest-8-NRT-SEA-1800",
+    "northwest-8-SEA-MSP-1130",
+    "northwest-8-MSP-PHL-1730",
+    "northwest-9-HNL-NRT-1105",
+    "northwest-10-NRT-HNL-2130",
+    "northwest-17-JFK-NRT-1100",
+    "northwest-18-NRT-JFK-1700",
+    "northwest-27-DFW-SFO-0900",
+    "northwest-27-SFO-NRT-1155",
+    "northwest-28-NRT-SFO-2055",
+    "northwest-28-SFO-DFW-1515"
+  ],
+  "new_airports": [
+    "PIK",
+    "DCA",
+    "DFW",
+    "DTW",
+    "PHL",
+    "TPA",
+    "HNL",
+    "NRT"
+  ],
+  "source_files": [
+    {
+      "source": "northwest-19851218",
+      "url": "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+      "sha256": "c30a120b617cd61892a50b620c7535620ad6d27302db302d0f50f8dcc48a6f48",
+      "reviewed_pages": [
+        "43 / PDF 23",
+        "138–139 / PDF 71",
+        "142 / PDF 74",
+        "150 / PDF 78"
+      ]
+    }
+  ],
+  "new_movements": 55,
+  "total_movements": 1135,
+  "new_leg_ids": [
+    "northwest-17-JFK-NRT-1100@1986-02-27",
+    "northwest-3-ORD-NRT-1150@1986-02-27",
+    "northwest-8-SEA-MSP-1130@1986-02-27",
+    "northwest-27-SFO-NRT-1155@1986-02-27",
+    "northwest-1-LAX-NRT-1235@1986-02-27",
+    "northwest-9-HNL-NRT-1105@1986-02-27",
+    "northwest-2-LAX-TPA-1340@1986-02-27",
+    "northwest-4-ORD-DCA-1540@1986-02-27",
+    "northwest-7-SEA-NRT-1340@1986-02-27",
+    "northwest-28-SFO-DFW-1515@1986-02-27",
+    "northwest-8-MSP-PHL-1730@1986-02-27",
+    "northwest-2-NRT-LAX-1635@1986-02-28",
+    "northwest-4-NRT-ORD-1645@1986-02-28",
+    "northwest-18-NRT-JFK-1700@1986-02-28",
+    "northwest-8-NRT-SEA-1800@1986-02-28",
+    "northwest-28-NRT-SFO-2055@1986-02-28",
+    "northwest-7-PHL-DTW-0710@1986-02-28",
+    "northwest-10-NRT-HNL-2130@1986-02-28",
+    "northwest-1-TPA-LAX-0830@1986-02-28",
+    "northwest-7-DTW-MSP-0940@1986-02-28",
+    "northwest-27-DFW-SFO-0900@1986-02-28",
+    "northwest-3-DCA-ORD-1000@1986-02-28",
+    "northwest-17-JFK-NRT-1100@1986-02-28",
+    "northwest-7-MSP-SEA-1110@1986-02-28",
+    "northwest-3-ORD-NRT-1150@1986-02-28",
+    "northwest-8-SEA-MSP-1130@1986-02-28",
+    "northwest-27-SFO-NRT-1155@1986-02-28",
+    "northwest-1-LAX-NRT-1235@1986-02-28",
+    "northwest-9-HNL-NRT-1105@1986-02-28",
+    "northwest-2-LAX-TPA-1340@1986-02-28",
+    "northwest-4-ORD-DCA-1540@1986-02-28",
+    "northwest-7-SEA-NRT-1340@1986-02-28",
+    "northwest-28-SFO-DFW-1515@1986-02-28",
+    "northwest-8-MSP-PHL-1730@1986-02-28",
+    "northwest-2-NRT-LAX-1635@1986-03-01",
+    "northwest-4-NRT-ORD-1645@1986-03-01",
+    "northwest-18-NRT-JFK-1700@1986-03-01",
+    "northwest-8-NRT-SEA-1800@1986-03-01",
+    "northwest-28-NRT-SFO-2055@1986-03-01",
+    "northwest-7-PHL-DTW-0710@1986-03-01",
+    "northwest-10-NRT-HNL-2130@1986-03-01",
+    "northwest-1-TPA-LAX-0830@1986-03-01",
+    "northwest-7-DTW-MSP-0940@1986-03-01",
+    "northwest-27-DFW-SFO-0900@1986-03-01",
+    "northwest-3-DCA-ORD-1000@1986-03-01",
+    "northwest-17-JFK-NRT-1100@1986-03-01",
+    "northwest-7-MSP-SEA-1110@1986-03-01",
+    "northwest-3-ORD-NRT-1150@1986-03-01",
+    "northwest-8-SEA-MSP-1130@1986-03-01",
+    "northwest-27-SFO-NRT-1155@1986-03-01",
+    "northwest-1-LAX-NRT-1235@1986-03-01",
+    "northwest-9-HNL-NRT-1105@1986-03-01",
+    "northwest-2-LAX-TPA-1340@1986-03-01",
+    "northwest-4-ORD-DCA-1540@1986-03-01",
+    "northwest-7-SEA-NRT-1340@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1079,
+  "corrected_previous_movements": 1,
+  "withheld_previous_movements": 0,
+  "corrections": [
+    {
+      "previous_schedule": "northwest-48-LGW-GLA-0805",
+      "new_schedule": "northwest-48-LGW-PIK-0805",
+      "previous_leg_id": "northwest-48-LGW-GLA-0805@1986-03-01",
+      "new_leg_id": "northwest-48-LGW-PIK-0805@1986-03-01",
+      "reason": "Northwest Glasgow airport is Prestwick (PIK), not Abbotsinch (GLA); original times retained.",
+      "source": "northwest-19851218",
+      "pages": [
+        "43",
+        "138",
+        "150"
+      ]
+    }
+  ],
+  "new_nordic_endpoint_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "new_endpoint_pairs_from_added_flights": [
+    [
+      "DCA",
+      "ORD"
+    ],
+    [
+      "DFW",
+      "SFO"
+    ],
+    [
+      "DTW",
+      "MSP"
+    ],
+    [
+      "HNL",
+      "NRT"
+    ],
+    [
+      "JFK",
+      "NRT"
+    ],
+    [
+      "LAX",
+      "NRT"
+    ],
+    [
+      "LAX",
+      "TPA"
+    ],
+    [
+      "MSP",
+      "PHL"
+    ],
+    [
+      "MSP",
+      "SEA"
+    ],
+    [
+      "NRT",
+      "HNL"
+    ],
+    [
+      "NRT",
+      "JFK"
+    ],
+    [
+      "NRT",
+      "LAX"
+    ],
+    [
+      "NRT",
+      "ORD"
+    ],
+    [
+      "NRT",
+      "SEA"
+    ],
+    [
+      "NRT",
+      "SFO"
+    ],
+    [
+      "ORD",
+      "DCA"
+    ],
+    [
+      "ORD",
+      "NRT"
+    ],
+    [
+      "PHL",
+      "DTW"
+    ],
+    [
+      "SEA",
+      "MSP"
+    ],
+    [
+      "SEA",
+      "NRT"
+    ],
+    [
+      "SFO",
+      "DFW"
+    ],
+    [
+      "SFO",
+      "NRT"
+    ],
+    [
+      "TPA",
+      "LAX"
+    ]
+  ],
+  "removed_endpoint_pairs": [
+    [
+      "LGW",
+      "GLA"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 303,
+  "runtime_coverage": {
+    "registered_airlines": 79,
+    "registered_countries": 63,
+    "reviewed_schedules": 760,
+    "animated_airlines": 29,
+    "scheduled_movements": 1134,
+    "confirmed_movements": 1
+  },
+  "archive_lead_files": [
+    {
+      "lead_id": "sas-palme-archive-a6774-01",
+      "sha256": "6890b4e99dc778780cd6e075c31bf4500c93b6b241a2c75e5adfe3346dbfe707",
+      "reviewed_pdf_pages": [
+        1
+      ],
+      "page_count": 1
+    },
+    {
+      "lead_id": "sas-palme-archive-a6774-00",
+      "sha256": "6e90706f33f48a46393cb3f2afd3e5780142a9e31c45ed663782c214b12fb917",
+      "reviewed_pdf_pages": [
+        1
+      ],
+      "page_count": 1
+    }
+  ]
+}

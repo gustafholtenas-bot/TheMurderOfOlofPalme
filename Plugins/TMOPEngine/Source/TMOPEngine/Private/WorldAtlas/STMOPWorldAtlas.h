@@ -7,4 +7,4 @@ class UStaticMesh;
 class UMaterialInterface;
 
 TSharedRef<SWidget> MakeTMOPWorldAtlas(UStaticMesh* Mesh, UMaterialInterface* Material,
-    const FRotator& MeshAlignment, bool bCoastlineOverlay);
+    const FRotator& MeshAlignment, bool bCoastlineOverlay, bool bFlightPage = false);

@@ -1,0 +1,297 @@
+{
+  "batch": 49,
+  "package": "v50",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2467,
+  "new_schedules": 69,
+  "new_schedule_ids": [
+    "air-inter-5458-BOD-LYS-0825-d5-b49",
+    "air-inter-7658-BOD-LYS-2010-d5-b49",
+    "air-inter-5677-BOD-MRS-0645-d56-b49",
+    "air-inter-7877-BOD-MRS-1800-d5-b49",
+    "air-inter-6679-BOD-NCE-0930-d5-b49",
+    "air-inter-5779-BOD-NCE-1125-d6-b49",
+    "air-inter-5595-BOD-TLS-1555-d5-b49",
+    "air-inter-5457-LYS-BOD-0650-d5-b49",
+    "air-inter-5557-LYS-BOD-0905-d6-b49",
+    "air-inter-7657-LYS-BOD-1840-d5-b49",
+    "air-inter-6091-LYS-MRS-0855-d5-b49",
+    "air-inter-5177-LYS-MRS-1000-d6-b49",
+    "air-inter-6391-LYS-MRS-1230-d5-b49",
+    "air-inter-7377-LYS-MRS-2010-d5-b49",
+    "air-inter-7791-LYS-MRS-2105-d5-b49",
+    "air-inter-5079-LYS-NCE-1005-d56-b49",
+    "air-inter-5297-LYS-NCE-1310-d6-b49",
+    "air-inter-7179-LYS-NCE-2110-d5-b49",
+    "air-inter-5072-LYS-SXB-0840-d5-b49",
+    "air-inter-6172-LYS-SXB-1820-d5-b49",
+    "air-inter-5573-LYS-TLS-0835-d6-b49",
+    "air-inter-5573-LYS-TLS-0835-d5-b49",
+    "air-inter-5893-LYS-TLS-1210-d5-b49",
+    "air-inter-6673-LYS-TLS-2005-d5-b49",
+    "air-inter-6678-MRS-BOD-0725-d5-b49",
+    "air-inter-5394-MRS-BOD-1105-d6-b49",
+    "air-inter-5778-MRS-BOD-1745-d6-b49",
+    "air-inter-6878-MRS-BOD-2040-d5-b49",
+    "air-inter-6092-MRS-LYS-0655-d5-b49",
+    "air-inter-6078-MRS-LYS-0700-d5-b49",
+    "air-inter-6192-MRS-LYS-1350-d5-b49",
+    "air-inter-7392-MRS-LYS-1705-d5-b49",
+    "air-inter-7992-MRS-LYS-1730-d5-b49",
+    "air-inter-6176-MRS-SXB-1615-d5-b49",
+    "air-inter-6880-NCE-BOD-1400-d5-b49",
+    "air-inter-5080-NCE-LYS-0705-d5-b49",
+    "air-inter-5180-NCE-LYS-0730-d6-b49",
+    "air-inter-7280-NCE-LYS-1705-d5-b49",
+    "air-inter-5094-NCE-SXB-1515-d5-b49",
+    "air-inter-6676-NCE-TLS-1730-d5-b49",
+    "air-inter-6001-ORY-SXB-0645-d5-b49",
+    "air-inter-5101-ORY-SXB-0845-d5-b49",
+    "air-inter-5201-ORY-SXB-0900-d6-b49",
+    "air-inter-6167-CDG-SXB-1250-d5-b49",
+    "air-inter-5167-CDG-SXB-1250-d6-b49",
+    "air-inter-5301-ORY-SXB-1630-d56-b49",
+    "air-inter-7501-ORY-SXB-1905-d5-b49",
+    "air-inter-6501-ORY-SXB-1905-d6-b49",
+    "air-inter-6701-ORY-SXB-2105-d5-b49",
+    "air-inter-5071-SXB-LYS-0650-d56-b49",
+    "air-inter-6271-SXB-LYS-1945-d5-b49",
+    "air-inter-6175-SXB-MRS-1835-d5-b49",
+    "air-inter-5193-SXB-NCE-0745-d6-b49",
+    "air-inter-6093-SXB-NCE-0950-d5-b49",
+    "air-inter-5002-SXB-ORY-0700-d56-b49",
+    "air-inter-5068-SXB-CDG-0810-d5-b49",
+    "air-inter-6168-SXB-CDG-1030-d6-b49",
+    "air-inter-5102-SXB-ORY-1100-d5-b49",
+    "air-inter-6202-SXB-ORY-1415-d5-b49",
+    "air-inter-5202-SXB-ORY-1415-d6-b49",
+    "air-inter-7302-SXB-ORY-1810-d5-b49",
+    "air-inter-5302-SXB-ORY-1810-d6-b49",
+    "air-inter-5502-SXB-ORY-2040-d5-b49",
+    "air-inter-5396-TLS-BOD-1610-d5-b49",
+    "air-inter-6574-TLS-LYS-0700-d5-b49",
+    "air-inter-6894-TLS-LYS-1730-d5-b49",
+    "air-inter-6674-TLS-LYS-1910-d5-b49",
+    "air-inter-5575-TLS-NCE-1040-d5-b49",
+    "air-inter-6575-TLS-NCE-1040-d6-b49"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 0,
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "air-inter-19851027-no52",
+    "air-france-19851027-no25"
+  ],
+  "unchanged_previous_movements": 2467,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "mc",
+  "reviewed_countries_this_batch": [
+    "fr"
+  ],
+  "new_movements": 74,
+  "total_movements": 2541,
+  "new_leg_ids": [
+    "air-inter-5677-BOD-MRS-0645-d56-b49@1986-02-28",
+    "air-inter-6001-ORY-SXB-0645-d5-b49@1986-02-28",
+    "air-inter-5071-SXB-LYS-0650-d56-b49@1986-02-28",
+    "air-inter-5457-LYS-BOD-0650-d5-b49@1986-02-28",
+    "air-inter-6092-MRS-LYS-0655-d5-b49@1986-02-28",
+    "air-inter-5002-SXB-ORY-0700-d56-b49@1986-02-28",
+    "air-inter-6078-MRS-LYS-0700-d5-b49@1986-02-28",
+    "air-inter-6574-TLS-LYS-0700-d5-b49@1986-02-28",
+    "air-inter-5080-NCE-LYS-0705-d5-b49@1986-02-28",
+    "air-inter-6678-MRS-BOD-0725-d5-b49@1986-02-28",
+    "air-inter-5068-SXB-CDG-0810-d5-b49@1986-02-28",
+    "air-inter-5458-BOD-LYS-0825-d5-b49@1986-02-28",
+    "air-inter-5573-LYS-TLS-0835-d5-b49@1986-02-28",
+    "air-inter-5072-LYS-SXB-0840-d5-b49@1986-02-28",
+    "air-inter-5101-ORY-SXB-0845-d5-b49@1986-02-28",
+    "air-inter-6091-LYS-MRS-0855-d5-b49@1986-02-28",
+    "air-inter-6679-BOD-NCE-0930-d5-b49@1986-02-28",
+    "air-inter-6093-SXB-NCE-0950-d5-b49@1986-02-28",
+    "air-inter-5079-LYS-NCE-1005-d56-b49@1986-02-28",
+    "air-inter-5575-TLS-NCE-1040-d5-b49@1986-02-28",
+    "air-inter-5102-SXB-ORY-1100-d5-b49@1986-02-28",
+    "air-inter-5893-LYS-TLS-1210-d5-b49@1986-02-28",
+    "air-inter-6391-LYS-MRS-1230-d5-b49@1986-02-28",
+    "air-inter-6167-CDG-SXB-1250-d5-b49@1986-02-28",
+    "air-inter-6192-MRS-LYS-1350-d5-b49@1986-02-28",
+    "air-inter-6880-NCE-BOD-1400-d5-b49@1986-02-28",
+    "air-inter-6202-SXB-ORY-1415-d5-b49@1986-02-28",
+    "air-inter-5094-NCE-SXB-1515-d5-b49@1986-02-28",
+    "air-inter-5595-BOD-TLS-1555-d5-b49@1986-02-28",
+    "air-inter-5396-TLS-BOD-1610-d5-b49@1986-02-28",
+    "air-inter-6176-MRS-SXB-1615-d5-b49@1986-02-28",
+    "air-inter-5301-ORY-SXB-1630-d56-b49@1986-02-28",
+    "air-inter-7280-NCE-LYS-1705-d5-b49@1986-02-28",
+    "air-inter-7392-MRS-LYS-1705-d5-b49@1986-02-28",
+    "air-inter-6676-NCE-TLS-1730-d5-b49@1986-02-28",
+    "air-inter-6894-TLS-LYS-1730-d5-b49@1986-02-28",
+    "air-inter-7992-MRS-LYS-1730-d5-b49@1986-02-28",
+    "air-inter-7877-BOD-MRS-1800-d5-b49@1986-02-28",
+    "air-inter-7302-SXB-ORY-1810-d5-b49@1986-02-28",
+    "air-inter-6172-LYS-SXB-1820-d5-b49@1986-02-28",
+    "air-inter-6175-SXB-MRS-1835-d5-b49@1986-02-28",
+    "air-inter-7657-LYS-BOD-1840-d5-b49@1986-02-28",
+    "air-inter-7501-ORY-SXB-1905-d5-b49@1986-02-28",
+    "air-inter-6674-TLS-LYS-1910-d5-b49@1986-02-28",
+    "air-inter-6271-SXB-LYS-1945-d5-b49@1986-02-28",
+    "air-inter-6673-LYS-TLS-2005-d5-b49@1986-02-28",
+    "air-inter-7377-LYS-MRS-2010-d5-b49@1986-02-28",
+    "air-inter-7658-BOD-LYS-2010-d5-b49@1986-02-28",
+    "air-inter-5502-SXB-ORY-2040-d5-b49@1986-02-28",
+    "air-inter-6878-MRS-BOD-2040-d5-b49@1986-02-28",
+    "air-inter-6701-ORY-SXB-2105-d5-b49@1986-02-28",
+    "air-inter-7791-LYS-MRS-2105-d5-b49@1986-02-28",
+    "air-inter-7179-LYS-NCE-2110-d5-b49@1986-02-28",
+    "air-inter-5677-BOD-MRS-0645-d56-b49@1986-03-01",
+    "air-inter-5071-SXB-LYS-0650-d56-b49@1986-03-01",
+    "air-inter-5002-SXB-ORY-0700-d56-b49@1986-03-01",
+    "air-inter-5180-NCE-LYS-0730-d6-b49@1986-03-01",
+    "air-inter-5193-SXB-NCE-0745-d6-b49@1986-03-01",
+    "air-inter-5573-LYS-TLS-0835-d6-b49@1986-03-01",
+    "air-inter-5201-ORY-SXB-0900-d6-b49@1986-03-01",
+    "air-inter-5557-LYS-BOD-0905-d6-b49@1986-03-01",
+    "air-inter-5177-LYS-MRS-1000-d6-b49@1986-03-01",
+    "air-inter-5079-LYS-NCE-1005-d56-b49@1986-03-01",
+    "air-inter-6168-SXB-CDG-1030-d6-b49@1986-03-01",
+    "air-inter-6575-TLS-NCE-1040-d6-b49@1986-03-01",
+    "air-inter-5394-MRS-BOD-1105-d6-b49@1986-03-01",
+    "air-inter-5779-BOD-NCE-1125-d6-b49@1986-03-01",
+    "air-inter-5167-CDG-SXB-1250-d6-b49@1986-03-01",
+    "air-inter-5297-LYS-NCE-1310-d6-b49@1986-03-01",
+    "air-inter-5202-SXB-ORY-1415-d6-b49@1986-03-01",
+    "air-inter-5301-ORY-SXB-1630-d56-b49@1986-03-01",
+    "air-inter-5778-MRS-BOD-1745-d6-b49@1986-03-01",
+    "air-inter-5302-SXB-ORY-1810-d6-b49@1986-03-01",
+    "air-inter-6501-ORY-SXB-1905-d6-b49@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-inter": 74
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BOD",
+      "LYS"
+    ],
+    [
+      "BOD",
+      "MRS"
+    ],
+    [
+      "BOD",
+      "NCE"
+    ],
+    [
+      "BOD",
+      "TLS"
+    ],
+    [
+      "CDG",
+      "SXB"
+    ],
+    [
+      "LYS",
+      "BOD"
+    ],
+    [
+      "LYS",
+      "MRS"
+    ],
+    [
+      "LYS",
+      "NCE"
+    ],
+    [
+      "LYS",
+      "SXB"
+    ],
+    [
+      "LYS",
+      "TLS"
+    ],
+    [
+      "MRS",
+      "BOD"
+    ],
+    [
+      "MRS",
+      "LYS"
+    ],
+    [
+      "MRS",
+      "SXB"
+    ],
+    [
+      "NCE",
+      "BOD"
+    ],
+    [
+      "NCE",
+      "LYS"
+    ],
+    [
+      "NCE",
+      "SXB"
+    ],
+    [
+      "NCE",
+      "TLS"
+    ],
+    [
+      "ORY",
+      "SXB"
+    ],
+    [
+      "SXB",
+      "CDG"
+    ],
+    [
+      "SXB",
+      "LYS"
+    ],
+    [
+      "SXB",
+      "MRS"
+    ],
+    [
+      "SXB",
+      "NCE"
+    ],
+    [
+      "SXB",
+      "ORY"
+    ],
+    [
+      "TLS",
+      "BOD"
+    ],
+    [
+      "TLS",
+      "LYS"
+    ],
+    [
+      "TLS",
+      "NCE"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 709,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1796,
+    "animated_airlines": 47,
+    "scheduled_movements": 2540,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161
+}

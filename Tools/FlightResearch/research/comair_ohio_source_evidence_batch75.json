@@ -1,0 +1,49 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    53,
+    67,
+    68,
+    73,
+    88,
+    154
+  ],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "53": 29,
+    "67": 36,
+    "68": 37,
+    "73": 39,
+    "88": 47,
+    "154": 80
+  },
+  "new_airports": [],
+  "existing_airport_ids": [
+    "CLE",
+    "DAY",
+    "DTW",
+    "FWA",
+    "MKE"
+  ],
+  "existing_airport_records_modified": false,
+  "notes": [
+    "Visual scans determine accepted fields; OCR only assists navigation.",
+    "Every accepted row is COMAIR (page-4 flight range 1525–1749), stops zero, no dated footnote.",
+    "Each return direction read independently; no CLE–DTW return inferred from DTW–CLE.",
+    "CLE/DAY/DTW/FWA UTC−5; MKE UTC−6. All arrivals same local day.",
+    "MKE–CLE 1683 is 07:15–09:35, not flight 1693; CLE–MKE 1693 is 17:30–17:55.",
+    "DTW–DAY 1631 is 17:15–18:19. DAY–DTW 1572 uses X67 even though the previous CVG–DAY leg uses X7.",
+    "DAY–MKE and DAY–FWA tables contain through itineraries or connections; no nonstop movement added from them.",
+    "Explicit new legs of flights 1629,1572,1643,1575,1714,1559,1662,1664,1688,1583,1584,1603 checked against previous or new same-number legs; service groups not merged.",
+    "Excluded batch72 row30 MKE–CVG 1589/1655 departure corrected by this erratum from 12:25 to 13:25; prior research file retained unchanged, no runtime impact.",
+    "MKE–CLE 1589/1655 also departs 13:25; this connection is excluded.",
+    "Edition end date and later amendments unverified; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

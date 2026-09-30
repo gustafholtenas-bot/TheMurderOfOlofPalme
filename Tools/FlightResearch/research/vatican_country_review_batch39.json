@@ -1,0 +1,33 @@
+{
+  "batch": 39,
+  "package": "v40",
+  "country": "va",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://villepontificie.va/en/hystory/papal-stays",
+      "type": "official_activity_list_not_flight_log",
+      "result": "Vistelselistan för 1986 omfattar januari, från 30 mars och senare perioder. Ingen post omfattar observationsfönstret; detta utesluter inte flygningar."
+    },
+    {
+      "url": "https://www.vatican.va/content/john-paul-ii/it/speeches/1986/february/documents/hf_jp-ii_spe_19860228_mondo-informazione.html",
+      "type": "official_dated_speech_not_flight_log",
+      "result": "Tal daterat fredag 28 februari 1986. Ingen tidsatt flygtransport dokumenteras."
+    }
+  ],
+  "unresolved": [
+    "Tidsatta flyg-/helikopterjournaler för observationsfönstret saknas. Vistelselistan och talet ger inte startplats, destination eller flygtider.",
+    "Stats-/militärtransportör och eventuell helikoptertrafik behöver daterade primärhandlingar. Inga schemalagda pendlingar, påhittade operatörer eller flygplatser registreras; Rom/Fiumicino ligger fortsatt i Italien."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "batch": 31,
+  "package": "v32",
+  "country": "gi",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i Europakön; inte fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 14,
+  "domestic_movements": 0,
+  "international_movements": 14,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {
+    "gb-airways": 12,
+    "british-airways": 2
+  },
+  "endpoint_leg_ids": [
+    "gb-airways-204-GIB-TNG-1000@1986-02-28",
+    "gb-airways-100-LGW-GIB-0915@1986-02-28",
+    "gb-airways-205-TNG-GIB-0945@1986-02-28",
+    "gb-airways-101-GIB-LGW-1400@1986-02-28",
+    "gb-airways-102-LGW-GIB-1345@1986-02-28",
+    "gb-airways-206-GIB-TNG-1715@1986-02-28",
+    "gb-airways-207-TNG-GIB-1700@1986-02-28",
+    "gb-airways-103-GIB-LGW-1830@1986-02-28",
+    "gb-airways-204-GIB-TNG-1000@1986-03-01",
+    "gb-airways-205-TNG-GIB-0945@1986-03-01",
+    "british-airways-494-LGW-GIB-1310@1986-03-01",
+    "gb-airways-206-GIB-TNG-1715@1986-03-01",
+    "british-airways-495-GIB-LGW-1755@1986-03-01",
+    "gb-airways-207-TNG-GIB-1700@1986-03-01"
+  ],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://www.timetableimages.com/ttimages/complete/gt85/gt85.pdf",
+      "type": "contemporary_timetable",
+      "result": "Båda PDF-sidorna visuellt återgranskade. Gatwick anges på s. 1; veckodagar och lokala tider på s. 2. Londontrafik gäller 27 oktober 1985–31 mars 1986, Tangertrafik 1 november 1985–31 mars 1986. De 14 befintliga rörelserna täcker tabellens tillämpliga fredag-/lördagsrader. De tryckta GT102/103-undantagen gäller tidigare måndagar, inte våra datum."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/uk/gb.htm",
+      "type": "edition_index",
+      "result": "GB Airways utgåveindex kontrollerat. Inget ytterligare importklart ändringsblad för observationsfönstret hittat."
+    },
+    {
+      "url": "https://api.parliament.uk/historic-hansard/commons/1986/feb/26/royal-air-force",
+      "type": "contemporary_parliamentary_record",
+      "result": "Hansard 26 februari 1986 nämner RAF-närvaro vid Gibraltar, men anger inga individuella avgångs- och ankomsttider i observationsfönstret. Inga rörelser skapas."
+    },
+    {
+      "url": "https://ukmamsoba.org/orb1986.html",
+      "type": "retrospective_operations_log",
+      "result": "Veteranföreningens 1986-översikt nämner Operation Clover UK–Gibraltar i april och Taceval Gibraltar i september. Fel månader och inga exakta flygtider för våra datum; inga rörelser importeras."
+    }
+  ],
+  "unresolved": [
+    "Verifiera eventuella ersättningsblad och andra civila operatörer, charter, frakt och privatflyg i samtida handlingar. Operatörsinventeringen är ofullständig.",
+    "Militära transport- och flygplatsjournaler med exakta tider återstår; allmän RAF-närvaro skapar inga flygposter.",
+    "GB/BA-tabellen visar planerad trafik, inte att avgångarna faktiskt genomfördes."
+  ]
+}

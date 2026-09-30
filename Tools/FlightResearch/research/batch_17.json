@@ -1,0 +1,235 @@
+{
+  "batch": 17,
+  "package": "v18",
+  "checked_on": "2026-09-28",
+  "previous_movements": 1135,
+  "new_schedules": 29,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [
+    "northwest-1-NRT-TPE-1910",
+    "northwest-1-NRT-ITM-1805",
+    "northwest-1-ITM-TPE-1955",
+    "northwest-2-TPE-NRT-1145",
+    "northwest-3-NRT-MNL-1805",
+    "northwest-4-MNL-NRT-1025",
+    "northwest-7-NRT-ITM-1805",
+    "northwest-7-ITM-OKA-1955",
+    "northwest-8-OKA-ITM-1110",
+    "northwest-8-ITM-NRT-1350",
+    "northwest-9-NRT-GMP-1805",
+    "northwest-10-GMP-NRT-1250",
+    "northwest-15-HNL-ITM-1035",
+    "northwest-16-ITM-HNL-1855",
+    "northwest-17-NRT-HKG-KAITAK-1800",
+    "northwest-18-HKG-KAITAK-NRT-1115",
+    "northwest-19-SAN-LAX-0755",
+    "northwest-19-LAX-SEA-0910",
+    "northwest-19-SEA-GMP-1355",
+    "northwest-19-GMP-MNL-2020",
+    "northwest-20-GMP-SEA-1710",
+    "northwest-20-SEA-LAX-1250",
+    "northwest-20-LAX-SAN-1540",
+    "northwest-23-LAX-GMP-1300",
+    "northwest-24-GMP-LAX-1630",
+    "northwest-27-NRT-MNL-1900",
+    "northwest-27-NRT-TPE-1805",
+    "northwest-28-KUL-SUBANG-NRT-1200",
+    "northwest-28-MNL-NRT-1415"
+  ],
+  "new_airports": [
+    "ITM",
+    "GMP",
+    "TPE",
+    "MNL",
+    "OKA",
+    "SAN",
+    "HKG-KAITAK",
+    "KUL-SUBANG"
+  ],
+  "new_country_ids": [
+    "kr",
+    "tw",
+    "ph",
+    "hk"
+  ],
+  "source_files": [
+    {
+      "source": "northwest-19851218",
+      "url": "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+      "sha256": "c30a120b617cd61892a50b620c7535620ad6d27302db302d0f50f8dcc48a6f48",
+      "reviewed_pages": [
+        "139 / PDF 71",
+        "142 / PDF 74",
+        "150 / PDF 78"
+      ]
+    }
+  ],
+  "new_movements": 47,
+  "total_movements": 1182,
+  "new_leg_ids": [
+    "northwest-15-HNL-ITM-1035@1986-02-27",
+    "northwest-20-SEA-LAX-1250@1986-02-27",
+    "northwest-19-SEA-GMP-1355@1986-02-27",
+    "northwest-20-LAX-SAN-1540@1986-02-27",
+    "northwest-4-MNL-NRT-1025@1986-02-28",
+    "northwest-18-HKG-KAITAK-NRT-1115@1986-02-28",
+    "northwest-2-TPE-NRT-1145@1986-02-28",
+    "northwest-10-GMP-NRT-1250@1986-02-28",
+    "northwest-28-KUL-SUBANG-NRT-1200@1986-02-28",
+    "northwest-20-GMP-SEA-1710@1986-02-28",
+    "northwest-17-NRT-HKG-KAITAK-1800@1986-02-28",
+    "northwest-3-NRT-MNL-1805@1986-02-28",
+    "northwest-7-NRT-ITM-1805@1986-02-28",
+    "northwest-9-NRT-GMP-1805@1986-02-28",
+    "northwest-16-ITM-HNL-1855@1986-02-28",
+    "northwest-27-NRT-MNL-1900@1986-02-28",
+    "northwest-1-NRT-TPE-1910@1986-02-28",
+    "northwest-7-ITM-OKA-1955@1986-02-28",
+    "northwest-19-SAN-LAX-0755@1986-02-28",
+    "northwest-19-LAX-SEA-0910@1986-02-28",
+    "northwest-15-HNL-ITM-1035@1986-02-28",
+    "northwest-20-SEA-LAX-1250@1986-02-28",
+    "northwest-19-SEA-GMP-1355@1986-02-28",
+    "northwest-20-LAX-SAN-1540@1986-02-28",
+    "northwest-8-OKA-ITM-1110@1986-03-01",
+    "northwest-4-MNL-NRT-1025@1986-03-01",
+    "northwest-18-HKG-KAITAK-NRT-1115@1986-03-01",
+    "northwest-2-TPE-NRT-1145@1986-03-01",
+    "northwest-10-GMP-NRT-1250@1986-03-01",
+    "northwest-8-ITM-NRT-1350@1986-03-01",
+    "northwest-28-MNL-NRT-1415@1986-03-01",
+    "northwest-24-GMP-LAX-1630@1986-03-01",
+    "northwest-20-GMP-SEA-1710@1986-03-01",
+    "northwest-17-NRT-HKG-KAITAK-1800@1986-03-01",
+    "northwest-1-NRT-ITM-1805@1986-03-01",
+    "northwest-27-NRT-TPE-1805@1986-03-01",
+    "northwest-3-NRT-MNL-1805@1986-03-01",
+    "northwest-9-NRT-GMP-1805@1986-03-01",
+    "northwest-16-ITM-HNL-1855@1986-03-01",
+    "northwest-1-ITM-TPE-1955@1986-03-01",
+    "northwest-19-GMP-MNL-2020@1986-03-01",
+    "northwest-19-SAN-LAX-0755@1986-03-01",
+    "northwest-19-LAX-SEA-0910@1986-03-01",
+    "northwest-15-HNL-ITM-1035@1986-03-01",
+    "northwest-20-SEA-LAX-1250@1986-03-01",
+    "northwest-23-LAX-GMP-1300@1986-03-01",
+    "northwest-19-SEA-GMP-1355@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1135,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_nordic_endpoint_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "new_endpoint_pairs": [
+    [
+      "GMP",
+      "LAX"
+    ],
+    [
+      "GMP",
+      "MNL"
+    ],
+    [
+      "GMP",
+      "NRT"
+    ],
+    [
+      "GMP",
+      "SEA"
+    ],
+    [
+      "HKG-KAITAK",
+      "NRT"
+    ],
+    [
+      "HNL",
+      "ITM"
+    ],
+    [
+      "ITM",
+      "HNL"
+    ],
+    [
+      "ITM",
+      "NRT"
+    ],
+    [
+      "ITM",
+      "OKA"
+    ],
+    [
+      "ITM",
+      "TPE"
+    ],
+    [
+      "KUL-SUBANG",
+      "NRT"
+    ],
+    [
+      "LAX",
+      "GMP"
+    ],
+    [
+      "LAX",
+      "SAN"
+    ],
+    [
+      "LAX",
+      "SEA"
+    ],
+    [
+      "MNL",
+      "NRT"
+    ],
+    [
+      "NRT",
+      "GMP"
+    ],
+    [
+      "NRT",
+      "HKG-KAITAK"
+    ],
+    [
+      "NRT",
+      "ITM"
+    ],
+    [
+      "NRT",
+      "MNL"
+    ],
+    [
+      "NRT",
+      "TPE"
+    ],
+    [
+      "OKA",
+      "ITM"
+    ],
+    [
+      "SAN",
+      "LAX"
+    ],
+    [
+      "SEA",
+      "GMP"
+    ],
+    [
+      "SEA",
+      "LAX"
+    ],
+    [
+      "TPE",
+      "NRT"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 328,
+  "runtime_coverage": {
+    "registered_airlines": 79,
+    "registered_countries": 67,
+    "reviewed_schedules": 789,
+    "animated_airlines": 29,
+    "scheduled_movements": 1181,
+    "confirmed_movements": 1
+  }
+}

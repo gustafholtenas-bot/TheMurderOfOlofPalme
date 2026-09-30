@@ -1,0 +1,130 @@
+{
+  "batch": 13,
+  "package": "v14",
+  "checked_on": "2026-09-27",
+  "previous_movements": 946,
+  "new_movements": 29,
+  "total_movements": 975,
+  "new_schedules": 25,
+  "new_schedule_ids": [
+    "british-midland-331-MME-LHR-0725",
+    "british-midland-333-MME-LHR-1020",
+    "british-midland-335-MME-LHR-1310",
+    "british-midland-345-MME-LHR-1400",
+    "british-midland-337-MME-LHR-1600",
+    "british-midland-339-MME-LHR-1850",
+    "british-midland-332-LHR-MME-0855",
+    "british-midland-334-LHR-MME-1145",
+    "british-midland-346-LHR-MME-1210",
+    "british-midland-336-LHR-MME-1435",
+    "british-midland-338-LHR-MME-1725",
+    "british-midland-340-LHR-MME-2020",
+    "casair-500-HUY-MME-0715",
+    "casair-500-MME-GLA-0750",
+    "casair-501-GLA-MME-0920",
+    "casair-501-MME-HUY-1030",
+    "casair-502-HUY-MME-1650",
+    "casair-502-MME-GLA-1730",
+    "casair-503-GLA-MME-1855",
+    "casair-503-MME-HUY-2000",
+    "jersey-european-105-MME-BLK-1540",
+    "jersey-european-102-BLK-MME-1055",
+    "dan-air-810-MME-AMS-0745",
+    "dan-air-811-AMS-MME-1015",
+    "air-uk-211-MME-NWI-2035"
+  ],
+  "new_airports": [
+    "ABZ",
+    "BLK",
+    "HUY",
+    "MME",
+    "NWI"
+  ],
+  "newly_animated_operators": [
+    "air-uk",
+    "british-midland",
+    "casair",
+    "dan-air",
+    "jersey-european"
+  ],
+  "source_files": [
+    {
+      "source": "teesside-winter-1985",
+      "url": "https://www.dtvmovements.co.uk/Info/History/Documents/Programmes/Timetable_1985W.pdf",
+      "reviewed_pages": [
+        "PDF 1",
+        "PDF 2"
+      ],
+      "sha256": "a27380d2363c6d17f069545b952f94a6a18074262616b3ab5c11853c65e501b0"
+    },
+    {
+      "source": "teesside-movements-198602",
+      "url": "https://www.dtvmovements.co.uk/Archivesmonths/1986/1986%20-%20Feb.pdf",
+      "reviewed_pages": [
+        "24",
+        "26",
+        "27"
+      ],
+      "sha256": "bb5d80e7198300fb1669efd73f7a4073a2ae9bd518772319225e505ef0d97ef7"
+    },
+    {
+      "source": "teesside-movements-198603",
+      "url": "https://www.dtvmovements.co.uk/Archivesmonths/1986/1986%20-%20Mar.pdf",
+      "reviewed_pages": [
+        "34",
+        "35"
+      ],
+      "sha256": "221a8e2e8c15ae04ea37a2d6fd0779f832779545a8066cdd25bcbc363993570f"
+    },
+    {
+      "source": "lot-19851027",
+      "url": "https://i.ebayimg.com/images/g/DOUAAOSwYwJmSlSv/s-l1600.jpg",
+      "reviewed_pages": [],
+      "sha256": "234853d71aabd147e9975521efb5058eeed3a065ab32383ab383524983327ede"
+    },
+    {
+      "source": "lot-19851027",
+      "url": "https://i.ebayimg.com/images/g/0WoAAOSwwQxmSlSw/s-l1600.jpg",
+      "reviewed_pages": [],
+      "sha256": "7756c8dd631c8db3b105ee90709c0a5b1482c728cff47e469a2b81d0e16fc83a"
+    },
+    {
+      "source": "lot-19851027",
+      "url": "https://i.ebayimg.com/images/g/q~sAAOSwGeVmSlSx/s-l1600.jpg",
+      "reviewed_pages": [],
+      "sha256": "ca31aa79457a4056182e74c3f97aa284d6c013e751f8c254744013f830be3acd"
+    },
+    {
+      "source": "finnair-19851027",
+      "url": "https://i.ebayimg.com/images/g/Ra0AAOSwufRnX0jW/s-l1600.jpg",
+      "reviewed_pages": [],
+      "sha256": "1b91cb5771b42ca8802934be36741aa55422637c113d3175880578e6e0f2e364"
+    },
+    {
+      "source": "finnair-19851027",
+      "url": "https://i.ebayimg.com/images/g/RVkAAOSw0-JnX0jY/s-l1600.jpg",
+      "reviewed_pages": [],
+      "sha256": "b46e4bb4aeb3f4bfa909576a7223fba66f68cf13230197e85288bee9e20712b4"
+    },
+    {
+      "source": "finnair-19851027",
+      "url": "https://i.ebayimg.com/images/g/5-kAAOSwI-JnX0jZ/s-l1600.jpg",
+      "reviewed_pages": [],
+      "sha256": "4c3b1d42832869c136ac1d7bbf7e12701374fbe1443df902142b1b7bcebadb4f"
+    }
+  ],
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 37,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "decisions": [
+    "All previous 946 runtime legs preserved unchanged.",
+    "25 timetable rows yield 21 Friday and 8 Saturday legs.",
+    "Excluded connection/stop itineraries without all physical leg times.",
+    "Air UK 204/205 withheld: February journal reports number change to 101/106, effective day not specified.",
+    "DA813/814 withdrawn according to February review; not imported.",
+    "Jersey European entries repeated on the two PDF pages counted once.",
+    "SE-FNZ journal sighting retained separately without invented endpoint times, UTC conversion, operator or cargo.",
+    "LOT missing direct/transfer-note pages; Finnair visible interior is summer; neither imported."
+  ]
+}

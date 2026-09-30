@@ -1,0 +1,83 @@
+{
+  "batch": 44,
+  "package": "v45",
+  "checked_on": "2026-09-29",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2349,
+  "new_schedules": 6,
+  "new_schedule_ids": [
+    "air-france-608-CDG-IST-ATATURK-0915-d56-b44",
+    "air-france-609-IST-ATATURK-CDG-1430-d56-b44",
+    "turkish-airlines-925-IST-ATATURK-ORY-1045-d6-b44",
+    "turkish-airlines-926-ORY-IST-ATATURK-1435-d6-b44",
+    "turkish-airlines-927-IST-ATATURK-ORY-1640-d5-b44",
+    "turkish-airlines-928-ORY-IST-ATATURK-2030-d5-b44"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 2,
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [
+    "turkish-airlines"
+  ],
+  "new_source_ids": [
+    "turkish-airlines-1985-1986-archive-index"
+  ],
+  "updated_source_ids": [
+    "air-france-19851027-no25"
+  ],
+  "unchanged_previous_movements": 2349,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "su",
+  "reviewed_countries_this_batch": [
+    "tr"
+  ],
+  "new_movements": 8,
+  "total_movements": 2357,
+  "new_leg_ids": [
+    "air-france-608-CDG-IST-ATATURK-0915-d56-b44@1986-02-28",
+    "air-france-609-IST-ATATURK-CDG-1430-d56-b44@1986-02-28",
+    "turkish-airlines-927-IST-ATATURK-ORY-1640-d5-b44@1986-02-28",
+    "turkish-airlines-928-ORY-IST-ATATURK-2030-d5-b44@1986-02-28",
+    "air-france-608-CDG-IST-ATATURK-0915-d56-b44@1986-03-01",
+    "turkish-airlines-925-IST-ATATURK-ORY-1045-d6-b44@1986-03-01",
+    "air-france-609-IST-ATATURK-CDG-1430-d56-b44@1986-03-01",
+    "turkish-airlines-926-ORY-IST-ATATURK-1435-d6-b44@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 4,
+    "turkish-airlines": 4
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "CDG",
+      "IST-ATATURK"
+    ],
+    [
+      "IST-ATATURK",
+      "CDG"
+    ],
+    [
+      "IST-ATATURK",
+      "ORY"
+    ],
+    [
+      "ORY",
+      "IST-ATATURK"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 636,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1633,
+    "animated_airlines": 47,
+    "scheduled_movements": 2356,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

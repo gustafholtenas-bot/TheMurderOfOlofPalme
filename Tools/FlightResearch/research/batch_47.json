@@ -1,0 +1,240 @@
+{
+  "batch": 47,
+  "package": "v48",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2376,
+  "new_schedules": 47,
+  "new_schedule_ids": [
+    "dan-air-081-ABZ-LGW-0730-b47",
+    "dan-air-083-ABZ-LGW-1200-b47",
+    "dan-air-085-ABZ-LGW-1700-b47",
+    "dan-air-125-BFS-CWL-0925-b47",
+    "dan-air-219-BFS-LGW-0715-b47",
+    "dan-air-223-BFS-LGW-1115-b47",
+    "dan-air-225-BFS-LGW-1200-b47",
+    "dan-air-229-BFS-LGW-1710-b47",
+    "dan-air-144-BFS-NCL-1425-b47",
+    "dan-air-303-BOH-GCI-1530-b47",
+    "dan-air-283-BOH-JER-0800-b47",
+    "dan-air-287-BOH-JER-1100-b47",
+    "dan-air-125-BRS-BFS-1205-b47",
+    "dan-air-263-CWL-GCI-1215-b47",
+    "dan-air-283-GCI-BOH-0950-b47",
+    "dan-air-287-GCI-BOH-1250-b47",
+    "dan-air-263-GCI-JER-1320-b47",
+    "dan-air-303-GCI-JER-1630-b47",
+    "dan-air-151-INV-LHR-0650-b47",
+    "dan-air-153-INV-LHR-0800-b47",
+    "dan-air-157-INV-LHR-1735-b47",
+    "dan-air-303-JER-BOH-1715-b47",
+    "dan-air-263-JER-CWL-1410-b47",
+    "dan-air-283-JER-GCI-0910-b47",
+    "dan-air-287-JER-GCI-1210-b47",
+    "dan-air-400-JER-LGW-0800-b47",
+    "dan-air-406-JER-LGW-1450-b47",
+    "dan-air-082-LGW-ABZ-0945-b47",
+    "dan-air-086-LGW-ABZ-1915-b47",
+    "dan-air-220-LGW-BFS-0915-b47",
+    "dan-air-222-LGW-BFS-1000-b47",
+    "dan-air-226-LGW-BFS-1315-b47",
+    "dan-air-230-LGW-BFS-1915-b47",
+    "dan-air-154-LHR-INV-0900-b47",
+    "dan-air-156-LHR-INV-1000-b47",
+    "dan-air-158-LHR-INV-1935-b47",
+    "dan-air-405-LGW-JER-1300-b47",
+    "dan-air-407-LGW-JER-1820-b47",
+    "dan-air-196-LHR-MAN-1355-b47",
+    "dan-air-164-LGW-NCL-1410-b47",
+    "dan-air-108-LGW-NCL-1850-b47",
+    "dan-air-168-LGW-NCL-1900-b47",
+    "dan-air-196-MAN-INV-1500-b47",
+    "dan-air-193-MAN-LHR-1230-b47",
+    "dan-air-168-NCL-ABZ-2020-b47",
+    "dan-air-141-NCL-BFS-0745-b47",
+    "dan-air-101-NCL-LGW-0700-b47"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 3,
+  "new_airports": [
+    "BRS",
+    "BOH",
+    "CWL",
+    "INV"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "dan-air-19851027-system"
+  ],
+  "unchanged_previous_movements": 2376,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "im",
+  "reviewed_countries_this_batch": [
+    "dk",
+    "fi",
+    "is",
+    "gb",
+    "je",
+    "gg"
+  ],
+  "new_movements": 54,
+  "total_movements": 2430,
+  "new_leg_ids": [
+    "dan-air-151-INV-LHR-0650-b47@1986-02-28",
+    "dan-air-101-NCL-LGW-0700-b47@1986-02-28",
+    "dan-air-219-BFS-LGW-0715-b47@1986-02-28",
+    "dan-air-081-ABZ-LGW-0730-b47@1986-02-28",
+    "dan-air-141-NCL-BFS-0745-b47@1986-02-28",
+    "dan-air-283-BOH-JER-0800-b47@1986-02-28",
+    "dan-air-400-JER-LGW-0800-b47@1986-02-28",
+    "dan-air-154-LHR-INV-0900-b47@1986-02-28",
+    "dan-air-283-JER-GCI-0910-b47@1986-02-28",
+    "dan-air-220-LGW-BFS-0915-b47@1986-02-28",
+    "dan-air-125-BFS-CWL-0925-b47@1986-02-28",
+    "dan-air-082-LGW-ABZ-0945-b47@1986-02-28",
+    "dan-air-283-GCI-BOH-0950-b47@1986-02-28",
+    "dan-air-223-BFS-LGW-1115-b47@1986-02-28",
+    "dan-air-083-ABZ-LGW-1200-b47@1986-02-28",
+    "dan-air-125-BRS-BFS-1205-b47@1986-02-28",
+    "dan-air-263-CWL-GCI-1215-b47@1986-02-28",
+    "dan-air-193-MAN-LHR-1230-b47@1986-02-28",
+    "dan-air-405-LGW-JER-1300-b47@1986-02-28",
+    "dan-air-226-LGW-BFS-1315-b47@1986-02-28",
+    "dan-air-263-GCI-JER-1320-b47@1986-02-28",
+    "dan-air-196-LHR-MAN-1355-b47@1986-02-28",
+    "dan-air-164-LGW-NCL-1410-b47@1986-02-28",
+    "dan-air-263-JER-CWL-1410-b47@1986-02-28",
+    "dan-air-144-BFS-NCL-1425-b47@1986-02-28",
+    "dan-air-406-JER-LGW-1450-b47@1986-02-28",
+    "dan-air-196-MAN-INV-1500-b47@1986-02-28",
+    "dan-air-303-BOH-GCI-1530-b47@1986-02-28",
+    "dan-air-303-GCI-JER-1630-b47@1986-02-28",
+    "dan-air-085-ABZ-LGW-1700-b47@1986-02-28",
+    "dan-air-229-BFS-LGW-1710-b47@1986-02-28",
+    "dan-air-303-JER-BOH-1715-b47@1986-02-28",
+    "dan-air-157-INV-LHR-1735-b47@1986-02-28",
+    "dan-air-407-LGW-JER-1820-b47@1986-02-28",
+    "dan-air-108-LGW-NCL-1850-b47@1986-02-28",
+    "dan-air-086-LGW-ABZ-1915-b47@1986-02-28",
+    "dan-air-230-LGW-BFS-1915-b47@1986-02-28",
+    "dan-air-158-LHR-INV-1935-b47@1986-02-28",
+    "dan-air-101-NCL-LGW-0700-b47@1986-03-01",
+    "dan-air-219-BFS-LGW-0715-b47@1986-03-01",
+    "dan-air-081-ABZ-LGW-0730-b47@1986-03-01",
+    "dan-air-153-INV-LHR-0800-b47@1986-03-01",
+    "dan-air-400-JER-LGW-0800-b47@1986-03-01",
+    "dan-air-156-LHR-INV-1000-b47@1986-03-01",
+    "dan-air-222-LGW-BFS-1000-b47@1986-03-01",
+    "dan-air-287-BOH-JER-1100-b47@1986-03-01",
+    "dan-air-225-BFS-LGW-1200-b47@1986-03-01",
+    "dan-air-287-JER-GCI-1210-b47@1986-03-01",
+    "dan-air-287-GCI-BOH-1250-b47@1986-03-01",
+    "dan-air-405-LGW-JER-1300-b47@1986-03-01",
+    "dan-air-406-JER-LGW-1450-b47@1986-03-01",
+    "dan-air-168-LGW-NCL-1900-b47@1986-03-01",
+    "dan-air-230-LGW-BFS-1915-b47@1986-03-01",
+    "dan-air-168-NCL-ABZ-2020-b47@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "dan-air": 54
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "ABZ",
+      "LGW"
+    ],
+    [
+      "BFS",
+      "CWL"
+    ],
+    [
+      "BFS",
+      "LGW"
+    ],
+    [
+      "BFS",
+      "NCL"
+    ],
+    [
+      "BOH",
+      "GCI"
+    ],
+    [
+      "BOH",
+      "JER"
+    ],
+    [
+      "BRS",
+      "BFS"
+    ],
+    [
+      "CWL",
+      "GCI"
+    ],
+    [
+      "GCI",
+      "BOH"
+    ],
+    [
+      "INV",
+      "LHR"
+    ],
+    [
+      "JER",
+      "BOH"
+    ],
+    [
+      "JER",
+      "CWL"
+    ],
+    [
+      "JER",
+      "LGW"
+    ],
+    [
+      "LGW",
+      "ABZ"
+    ],
+    [
+      "LGW",
+      "BFS"
+    ],
+    [
+      "LGW",
+      "JER"
+    ],
+    [
+      "LHR",
+      "INV"
+    ],
+    [
+      "MAN",
+      "INV"
+    ],
+    [
+      "MAN",
+      "LHR"
+    ],
+    [
+      "NCL",
+      "BFS"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 668,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1699,
+    "animated_airlines": 47,
+    "scheduled_movements": 2429,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 160
+}

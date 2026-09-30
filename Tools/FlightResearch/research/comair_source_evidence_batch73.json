@@ -1,0 +1,70 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    48,
+    51,
+    52,
+    88,
+    154,
+    206,
+    236
+  ],
+  "legend_printed_page": 4,
+  "airport_codes_printed_page": 261,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "48": 27,
+    "51": 28,
+    "52": 29,
+    "88": 47,
+    "154": 80,
+    "206": 106,
+    "236": 121,
+    "261": 133
+  },
+  "new_airports": [
+    "YYZ"
+  ],
+  "existing_airport_ids": [
+    "CVG",
+    "DTW",
+    "FWA",
+    "MKE",
+    "ORD",
+    "STL"
+  ],
+  "existing_airport_records_modified": false,
+  "new_airport_evidence": {
+    "YYZ": {
+      "historical_identity": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+      "historical_identity_printed_page": 261,
+      "historical_name": "Lester B. Pearson International",
+      "airport_history_url": "https://author.torontopearson.com/en/community/programs/history-of-the-airport",
+      "coordinate_url": "https://ourairports.com/airports/CYYZ/",
+      "lat": 43.675935,
+      "lon": -79.629421,
+      "timezone": "America/Toronto",
+      "coordinates_are_approximate_airfield_markers": true
+    }
+  },
+  "notes": [
+    "Visual scans determine accepted fields; OCR only assists navigation.",
+    "Page 4 assigns flights 1525–1749 to COMAIR; publisher Delta is not the operating carrier.",
+    "Return times sourced separately; no reverse service inferred for MKE–FWA or FWA–DTW.",
+    "No accepted row has a dated footnote; all accepted arrivals are same local day.",
+    "ORD/MKE/STL UTC−6; CVG/YYZ/FWA/DTW UTC−5.",
+    "CVG–YYZ 1704 08:08–09:50, 1700 15:19–16:59, 1702 19:35–21:20. YYZ–CVG 1705 is 10:15–12:05.",
+    "STL–CVG 1616 departs 12:00 noon, not midnight.",
+    "MKE–FWA 1579 operates Saturday only; FWA–DTW 1587 is 20:59–21:50 except Saturday.",
+    "Same-flight-number continuity checked against prior COMAIR 1592, 1579 and 1587 legs; service groups remain separately sourced.",
+    "Connection 1574/336 MKE–FWA via IND is excluded.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

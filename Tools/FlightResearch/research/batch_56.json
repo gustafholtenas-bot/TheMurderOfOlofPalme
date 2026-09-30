@@ -1,0 +1,61 @@
+{
+  "batch": 56,
+  "package": "v57",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2586,
+  "new_schedules": 2,
+  "new_schedule_ids": [
+    "panam-61-ATH-ELLINIKON-FRA-0930-d5-b56",
+    "panam-150-FRA-ATH-ELLINIKON-1215-d6-b56"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "panam-19860211"
+  ],
+  "unchanged_previous_movements": 2586,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "cy",
+  "reviewed_countries_this_batch": [
+    "al",
+    "gr"
+  ],
+  "new_movements": 2,
+  "total_movements": 2588,
+  "new_leg_ids": [
+    "panam-61-ATH-ELLINIKON-FRA-0930-d5-b56@1986-02-28",
+    "panam-150-FRA-ATH-ELLINIKON-1215-d6-b56@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "panam": 2
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "ATH-ELLINIKON",
+      "FRA"
+    ],
+    [
+      "FRA",
+      "ATH-ELLINIKON"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 736,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1839,
+    "animated_airlines": 47,
+    "scheduled_movements": 2587,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161
+}

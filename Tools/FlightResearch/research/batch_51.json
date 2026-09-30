@@ -1,0 +1,85 @@
+{
+  "batch": 51,
+  "package": "v52",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2556,
+  "new_schedules": 8,
+  "new_schedule_ids": [
+    "dan-air-782-SCN-TXL-0715-d56-b51",
+    "dan-air-783-TXL-SCN-0940-d5-b51",
+    "dan-air-784-SCN-TXL-1215-d5-b51",
+    "dan-air-785-TXL-SCN-1440-d56-b51",
+    "dan-air-786-SCN-TXL-1715-d5-b51",
+    "dan-air-787-TXL-SCN-1940-d5-b51",
+    "dan-air-792-LGW-MUC-RIEM-1030-d6-b51",
+    "dan-air-793-MUC-RIEM-LGW-1405-d6-b51"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "SCN"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "dan-air-19851027-system"
+  ],
+  "unchanged_previous_movements": 2556,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "de-east",
+  "reviewed_countries_this_batch": [
+    "lu",
+    "de-west"
+  ],
+  "new_movements": 10,
+  "total_movements": 2566,
+  "new_leg_ids": [
+    "dan-air-782-SCN-TXL-0715-d56-b51@1986-02-28",
+    "dan-air-783-TXL-SCN-0940-d5-b51@1986-02-28",
+    "dan-air-784-SCN-TXL-1215-d5-b51@1986-02-28",
+    "dan-air-785-TXL-SCN-1440-d56-b51@1986-02-28",
+    "dan-air-786-SCN-TXL-1715-d5-b51@1986-02-28",
+    "dan-air-787-TXL-SCN-1940-d5-b51@1986-02-28",
+    "dan-air-782-SCN-TXL-0715-d56-b51@1986-03-01",
+    "dan-air-792-LGW-MUC-RIEM-1030-d6-b51@1986-03-01",
+    "dan-air-793-MUC-RIEM-LGW-1405-d6-b51@1986-03-01",
+    "dan-air-785-TXL-SCN-1440-d56-b51@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "dan-air": 10
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "LGW",
+      "MUC-RIEM"
+    ],
+    [
+      "MUC-RIEM",
+      "LGW"
+    ],
+    [
+      "SCN",
+      "TXL"
+    ],
+    [
+      "TXL",
+      "SCN"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 721,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1819,
+    "animated_airlines": 47,
+    "scheduled_movements": 2565,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161
+}

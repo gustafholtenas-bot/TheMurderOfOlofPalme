@@ -2676,6 +2676,58 @@
       "total": 0,
       "truncated": false,
       "candidates": []
+    },
+    {
+      "airline": "air-botswana",
+      "countries": [
+        "bw"
+      ],
+      "query": "(\"Air Botswana\" OR \"Air Botswana BP\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Air+Botswana%22+OR+%22Air+Botswana+BP%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T17:20:10+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "norving",
+      "countries": [
+        "no"
+      ],
+      "query": "(\"Norving\" OR \"Norving\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Norving%22+OR+%22Norving%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T21:04:32+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "maersk-air",
+      "countries": [
+        "dk"
+      ],
+      "query": "(\"Maersk Air\" OR \"Maersk Air\" OR \"Danair\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Maersk+Air%22+OR+%22Maersk+Air%22+OR+%22Danair%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T21:04:32+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
+    },
+    {
+      "airline": "cimber-air",
+      "countries": [
+        "dk"
+      ],
+      "query": "(\"Cimber Air\" OR \"Cimber Air\" OR \"Danair\") AND (1985 OR 1986) AND (timetable OR timetables OR schedule OR schedules)",
+      "url": "https://archive.org/advancedsearch.php?q=%28%22Cimber+Air%22+OR+%22Cimber+Air%22+OR+%22Danair%22%29+AND+%281985+OR+1986%29+AND+%28timetable+OR+timetables+OR+schedule+OR+schedules%29&output=json&rows=200&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date",
+      "checked_at": "2026-09-26T21:04:32+00:00",
+      "status": "searched",
+      "total": 0,
+      "truncated": false,
+      "candidates": []
     }
   ]
 }

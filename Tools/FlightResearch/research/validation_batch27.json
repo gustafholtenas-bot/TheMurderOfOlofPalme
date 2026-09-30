@@ -1,0 +1,572 @@
+{
+  "package": "v28",
+  "batch": 27,
+  "checked_on": "2026-09-28",
+  "new_reviewed_schedules": 51,
+  "new_movements": 82,
+  "total_movements": 1731,
+  "unchanged_previous_movements": 1649,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": 0,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_movements_by_source_airline": {
+    "air-france": 40,
+    "british-airways": 41,
+    "air-uk": 1
+  },
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "unchanged_plugin_file_count": 17,
+  "unchanged_plugin_files": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs"
+  ],
+  "calendar_checks": [
+    {
+      "schedule_prefix": "air-france-809-LHR-CDG",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-814-CDG-LHR",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-812-CDG-LHR",
+      "expected_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-813-LHR-CDG",
+      "expected_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-815-LHR-CDG",
+      "expected_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-1824-LYS-LHR-0740",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-1824-LYS-LHR-1400",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-1825-LHR-LYS-0910",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-1825-LHR-LYS-0930",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "air-france-919-NCE-MAN",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "air-uk-857-AMS-SOU",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "british-airways-904-MAN-CDG",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "british-airways-905-CDG-MAN",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "schedule_prefix": "british-airways-907-CDG-MAN",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    }
+  ],
+  "duration_sanity_checks": [
+    {
+      "schedule": "air-france-1824-LYS-LHR-0740",
+      "duration_minutes": 90.0,
+      "great_circle_km": 758,
+      "block_average_kmh": 505
+    },
+    {
+      "schedule": "british-airways-302-LHR-CDG-0640",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-301-CDG-LHR-0755",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-807-LHR-CDG-0730",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-808-CDG-LHR-0830",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-963-MAN-CDG-0730",
+      "duration_minutes": 75.0,
+      "great_circle_km": 588,
+      "block_average_kmh": 471
+    },
+    {
+      "schedule": "air-france-806-CDG-LHR-0900",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-901-CDG-MAN-0900",
+      "duration_minutes": 75.0,
+      "great_circle_km": 588,
+      "block_average_kmh": 471
+    },
+    {
+      "schedule": "british-airways-303-CDG-LHR-0930",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-304-LHR-CDG-0830",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-1825-LHR-LYS-0910",
+      "duration_minutes": 90.0,
+      "great_circle_km": 758,
+      "block_average_kmh": 505
+    },
+    {
+      "schedule": "air-france-809-LHR-CDG-0930",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-810-CDG-LHR-1030",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-951-LHR-NCE-0955",
+      "duration_minutes": 105.0,
+      "great_circle_km": 1041,
+      "block_average_kmh": 595
+    },
+    {
+      "schedule": "british-airways-305-CDG-LHR-1130",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-306-LHR-CDG-1030",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-811-LHR-CDG-1130",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-812-CDG-LHR-1230",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-307-CDG-LHR-1330",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-308-LHR-CDG-1230",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-342-LHR-NCE-1230",
+      "duration_minutes": 110.0,
+      "great_circle_km": 1041,
+      "block_average_kmh": 568
+    },
+    {
+      "schedule": "air-france-813-LHR-CDG-1330",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-814-CDG-LHR-1430",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-309-CDG-LHR-1530",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-312-LHR-CDG-1430",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-343-NCE-LHR-1620",
+      "duration_minutes": 110.0,
+      "great_circle_km": 1041,
+      "block_average_kmh": 568
+    },
+    {
+      "schedule": "air-france-815-LHR-CDG-1530",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-816-CDG-LHR-1630",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-356-LHR-LYS-1615",
+      "duration_minutes": 90.0,
+      "great_circle_km": 758,
+      "block_average_kmh": 505
+    },
+    {
+      "schedule": "british-airways-313-CDG-LHR-1730",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-314-LHR-CDG-1630",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-906-MAN-CDG-1700",
+      "duration_minutes": 75.0,
+      "great_circle_km": 588,
+      "block_average_kmh": 471
+    },
+    {
+      "schedule": "air-france-817-LHR-CDG-1730",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-818-CDG-LHR-1830",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-952-NCE-LHR-1850",
+      "duration_minutes": 115.0,
+      "great_circle_km": 1041,
+      "block_average_kmh": 543
+    },
+    {
+      "schedule": "british-airways-357-LYS-LHR-1925",
+      "duration_minutes": 95.0,
+      "great_circle_km": 758,
+      "block_average_kmh": 478
+    },
+    {
+      "schedule": "british-airways-315-CDG-LHR-1930",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-316-LHR-CDG-1830",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-907-CDG-MAN-1955",
+      "duration_minutes": 75.0,
+      "great_circle_km": 588,
+      "block_average_kmh": 471
+    },
+    {
+      "schedule": "air-france-964-CDG-MAN-2020",
+      "duration_minutes": 80.0,
+      "great_circle_km": 588,
+      "block_average_kmh": 441
+    },
+    {
+      "schedule": "air-france-819-LHR-CDG-1930",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-820-CDG-LHR-2030",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-318-LHR-CDG-2000",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "british-airways-317-CDG-LHR-2130",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-821-LHR-CDG-2040",
+      "duration_minutes": 60.0,
+      "great_circle_km": 348,
+      "block_average_kmh": 348
+    },
+    {
+      "schedule": "air-france-1825-LHR-LYS-0930",
+      "duration_minutes": 85.0,
+      "great_circle_km": 758,
+      "block_average_kmh": 535
+    },
+    {
+      "schedule": "air-france-1824-LYS-LHR-1400",
+      "duration_minutes": 90.0,
+      "great_circle_km": 758,
+      "block_average_kmh": 505
+    },
+    {
+      "schedule": "british-airways-904-MAN-CDG-1500",
+      "duration_minutes": 75.0,
+      "great_circle_km": 588,
+      "block_average_kmh": 471
+    },
+    {
+      "schedule": "air-france-919-NCE-MAN-1710",
+      "duration_minutes": 130.0,
+      "great_circle_km": 1282,
+      "block_average_kmh": 592
+    },
+    {
+      "schedule": "british-airways-905-CDG-MAN-1755",
+      "duration_minutes": 75.0,
+      "great_circle_km": 588,
+      "block_average_kmh": 471
+    },
+    {
+      "schedule": "air-uk-857-AMS-SOU-1800",
+      "duration_minutes": 95.0,
+      "great_circle_km": 448,
+      "block_average_kmh": 283
+    }
+  ],
+  "europe_country_rows_checked": 40,
+  "country_endpoint_totals": {
+    "dk": 84,
+    "fi": 4,
+    "is": 0,
+    "gb": 453
+  },
+  "nordic_endpoint_movements": 155,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "bc5726",
+        "wall_time_seconds": 2.173727194,
+        "exit_code": 0,
+        "original_token_count": 551,
+        "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 2.156s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "db8777",
+        "wall_time_seconds": 0.100172881,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 81, \"registered_countries\": 71, \"reviewed_schedules\": 1156, \"animated_airlines\": 37, \"scheduled_movements\": 1730, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "50ae65",
+        "wall_time_seconds": 0.003218719,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "a4aff9",
+        "wall_time_seconds": 0.027836349,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d6b617",
+        "wall_time_seconds": 2.028e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

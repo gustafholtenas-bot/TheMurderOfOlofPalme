@@ -278,6 +278,7 @@ FText SectionTitle(const ETMOPPauseHubSection Section)
     case ETMOPPauseHubSection::AfterMurderEvents: return NSLOCTEXT("TMOP", "HubAfterMurder", "HÄNDELSER EFTER MORDET");
     case ETMOPPauseHubSection::WorldGroups: return NSLOCTEXT("TMOP", "HubWorldGroups", "GRUPPERINGAR I VÄRLDEN");
     case ETMOPPauseHubSection::StockMarket: return NSLOCTEXT("TMOP", "HubStockMarket", "BÖRSEN FÖRE OCH EFTER");
+    case ETMOPPauseHubSection::FlightTraffic: return NSLOCTEXT("TMOP", "HubFlightTraffic", "FLYGTRAFIK KRING MORDET");
     case ETMOPPauseHubSection::SwedenGroups: return NSLOCTEXT("TMOP", "HubSwedenGroups", "GRUPPERINGAR I SVERIGE");
     default: return FText::GetEmpty();
     }
@@ -318,7 +319,7 @@ void UTMOPPauseMenuWidget::SetMenuVisible(const bool bVisible)
         SetStatus(FText::GetEmpty());
         ShowSection(CurrentSection);
     }
-    else if (CurrentSection == ETMOPPauseHubSection::WorldGroups && PageContentHost.IsValid())
+    else if ((CurrentSection == ETMOPPauseHubSection::WorldGroups || CurrentSection == ETMOPPauseHubSection::FlightTraffic) && PageContentHost.IsValid())
     {
         PageContentHost->SetContent(SNullWidget::NullWidget);
         ContentBox.Reset(); // release the preview scene and its render target on close
@@ -368,6 +369,7 @@ TSharedRef<SWidget> UTMOPPauseMenuWidget::RebuildWidget()
     AddNavigationEntry(ETMOPPauseHubSection::AfterMurderEvents);
     AddNavigationGap(20.0f);
     AddNavigationEntry(ETMOPPauseHubSection::WorldGroups);
+    AddNavigationEntry(ETMOPPauseHubSection::FlightTraffic);
     AddNavigationEntry(ETMOPPauseHubSection::SwedenGroups);
     AddNavigationEntry(ETMOPPauseHubSection::StockMarket);
     AddNavigationGap(64.0f);
@@ -507,6 +509,10 @@ void UTMOPPauseMenuWidget::ShowSection(const ETMOPPauseHubSection Section)
         // This page manages its own scrolling. Fill the available local-player panel.
         PageContentHost->SetContent(MakeTMOPWorldAtlas(WorldGlobeMesh, WorldGlobeMaterial,
             WorldGlobeAlignment, bWorldGlobeCoastlines));
+        break;
+    case ETMOPPauseHubSection::FlightTraffic:
+        PageContentHost->SetContent(MakeTMOPWorldAtlas(WorldGlobeMesh, WorldGlobeMaterial,
+            WorldGlobeAlignment, bWorldGlobeCoastlines, true));
         break;
     case ETMOPPauseHubSection::SwedenGroups:
         // Independent pages reserved for content specified later.

@@ -1,0 +1,275 @@
+{
+  "batch": 34,
+  "package": "v35",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2032,
+  "new_schedules": 56,
+  "new_schedule_ids": [
+    "lufthansa-124-CGN-CDG-0810-d56-b34",
+    "air-france-751-CGN-CDG-1945-d5-b34",
+    "lufthansa-125-CDG-CGN-1030-d56-b34",
+    "air-france-750-CDG-CGN-1800-d5-b34",
+    "lufthansa-130-DUS-CDG-0745-d56-b34",
+    "air-france-763-DUS-CDG-0910-d56-b34",
+    "air-france-765-DUS-CDG-1300-d56-b34",
+    "lufthansa-134-DUS-CDG-1730-d56-b34",
+    "air-france-767-DUS-CDG-2015-d5-b34",
+    "air-france-762-CDG-DUS-0740-d56-b34",
+    "lufthansa-131-CDG-DUS-0950-d56-b34",
+    "air-france-764-CDG-DUS-1455-d5-b34",
+    "air-france-766-CDG-DUS-1815-d56-b34",
+    "lufthansa-135-CDG-DUS-1910-d5-b34",
+    "air-france-741-FRA-CDG-0800-d56-b34",
+    "lufthansa-110-FRA-CDG-0855-d56-b34",
+    "air-france-743-FRA-CDG-0945-d56-b34",
+    "lufthansa-112-FRA-CDG-1250-d56-b34",
+    "air-france-747-FRA-CDG-1615-d56-b34",
+    "lufthansa-114-FRA-CDG-1650-d56-b34",
+    "air-france-749-FRA-CDG-2035-d5-b34",
+    "lufthansa-116-FRA-CDG-2120-d56-b34",
+    "lufthansa-111-CDG-FRA-0725-d56-b34",
+    "air-france-740-CDG-FRA-0735-d56-b34",
+    "lufthansa-113-CDG-FRA-1055-d56-b34",
+    "air-france-744-CDG-FRA-1420-d56-b34",
+    "lufthansa-115-CDG-FRA-1445-d56-b34",
+    "air-france-746-CDG-FRA-1820-d5-b34",
+    "lufthansa-117-CDG-FRA-1855-d56-b34",
+    "air-france-748-CDG-FRA-1925-d5-b34",
+    "air-france-771-HAM-CDG-0800-d56-b34",
+    "air-france-773-HAM-CDG-1435-d56-b34",
+    "lufthansa-122-HAM-CDG-1950-d5-b34",
+    "lufthansa-121-CDG-HAM-0810-d56-b34",
+    "air-france-772-CDG-HAM-1220-d56-b34",
+    "air-france-770-CDG-HAM-2010-d5-b34",
+    "lufthansa-140-MUC-RIEM-CDG-0825-d56-b34",
+    "air-france-731-MUC-RIEM-CDG-0955-d56-b34",
+    "lufthansa-142-MUC-RIEM-CDG-1310-d5-b34",
+    "air-france-733-MUC-RIEM-CDG-1950-d5-b34",
+    "air-france-730-CDG-MUC-RIEM-0745-d56-b34",
+    "lufthansa-143-CDG-MUC-RIEM-0925-d56-b34",
+    "lufthansa-145-CDG-MUC-RIEM-1515-d5-b34",
+    "air-france-732-CDG-MUC-RIEM-1740-d56-b34",
+    "air-france-565-FRA-LYS-1005-d5-b34",
+    "lufthansa-158-FRA-LYS-1655-d5-b34",
+    "air-france-1780-LYS-FRA-0715-d5-b34",
+    "lufthansa-159-LYS-FRA-1910-d5-b34",
+    "lufthansa-150-FRA-NCE-1615-d56-b34",
+    "lufthansa-151-NCE-FRA-1840-d56-b34",
+    "air-france-1735-MUC-RIEM-NCE-1840-d6-b34",
+    "air-france-1734-NCE-MUC-RIEM-1650-d6-b34",
+    "air-france-757-STR-CDG-0910-d5-b34",
+    "lufthansa-136-STR-CDG-1855-d5-b34",
+    "air-france-756-CDG-STR-0720-d5-b34",
+    "lufthansa-137-CDG-STR-2045-d5-b34"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "CGN"
+  ],
+  "new_country_ids": [
+    "lu"
+  ],
+  "new_airline_ids": [
+    "luxair",
+    "cargolux"
+  ],
+  "new_source_ids": [
+    "luxair-19851027",
+    "luxembourg-airport-19851027",
+    "lufthansa-19851027-world",
+    "cargolux-official-1980s-history"
+  ],
+  "unchanged_previous_movements": 2032,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "de-east",
+  "reviewed_countries_this_batch": [
+    "lu",
+    "de-west"
+  ],
+  "new_movements": 89,
+  "total_movements": 2121,
+  "new_leg_ids": [
+    "air-france-1780-LYS-FRA-0715-d5-b34@1986-02-28",
+    "air-france-756-CDG-STR-0720-d5-b34@1986-02-28",
+    "lufthansa-111-CDG-FRA-0725-d56-b34@1986-02-28",
+    "air-france-740-CDG-FRA-0735-d56-b34@1986-02-28",
+    "air-france-762-CDG-DUS-0740-d56-b34@1986-02-28",
+    "air-france-730-CDG-MUC-RIEM-0745-d56-b34@1986-02-28",
+    "lufthansa-130-DUS-CDG-0745-d56-b34@1986-02-28",
+    "air-france-741-FRA-CDG-0800-d56-b34@1986-02-28",
+    "air-france-771-HAM-CDG-0800-d56-b34@1986-02-28",
+    "lufthansa-121-CDG-HAM-0810-d56-b34@1986-02-28",
+    "lufthansa-124-CGN-CDG-0810-d56-b34@1986-02-28",
+    "lufthansa-140-MUC-RIEM-CDG-0825-d56-b34@1986-02-28",
+    "lufthansa-110-FRA-CDG-0855-d56-b34@1986-02-28",
+    "air-france-757-STR-CDG-0910-d5-b34@1986-02-28",
+    "air-france-763-DUS-CDG-0910-d56-b34@1986-02-28",
+    "lufthansa-143-CDG-MUC-RIEM-0925-d56-b34@1986-02-28",
+    "air-france-743-FRA-CDG-0945-d56-b34@1986-02-28",
+    "lufthansa-131-CDG-DUS-0950-d56-b34@1986-02-28",
+    "air-france-731-MUC-RIEM-CDG-0955-d56-b34@1986-02-28",
+    "air-france-565-FRA-LYS-1005-d5-b34@1986-02-28",
+    "lufthansa-125-CDG-CGN-1030-d56-b34@1986-02-28",
+    "lufthansa-113-CDG-FRA-1055-d56-b34@1986-02-28",
+    "air-france-772-CDG-HAM-1220-d56-b34@1986-02-28",
+    "lufthansa-112-FRA-CDG-1250-d56-b34@1986-02-28",
+    "air-france-765-DUS-CDG-1300-d56-b34@1986-02-28",
+    "lufthansa-142-MUC-RIEM-CDG-1310-d5-b34@1986-02-28",
+    "air-france-744-CDG-FRA-1420-d56-b34@1986-02-28",
+    "air-france-773-HAM-CDG-1435-d56-b34@1986-02-28",
+    "lufthansa-115-CDG-FRA-1445-d56-b34@1986-02-28",
+    "air-france-764-CDG-DUS-1455-d5-b34@1986-02-28",
+    "lufthansa-145-CDG-MUC-RIEM-1515-d5-b34@1986-02-28",
+    "air-france-747-FRA-CDG-1615-d56-b34@1986-02-28",
+    "lufthansa-150-FRA-NCE-1615-d56-b34@1986-02-28",
+    "lufthansa-114-FRA-CDG-1650-d56-b34@1986-02-28",
+    "lufthansa-158-FRA-LYS-1655-d5-b34@1986-02-28",
+    "lufthansa-134-DUS-CDG-1730-d56-b34@1986-02-28",
+    "air-france-732-CDG-MUC-RIEM-1740-d56-b34@1986-02-28",
+    "air-france-750-CDG-CGN-1800-d5-b34@1986-02-28",
+    "air-france-766-CDG-DUS-1815-d56-b34@1986-02-28",
+    "air-france-746-CDG-FRA-1820-d5-b34@1986-02-28",
+    "lufthansa-151-NCE-FRA-1840-d56-b34@1986-02-28",
+    "lufthansa-117-CDG-FRA-1855-d56-b34@1986-02-28",
+    "lufthansa-136-STR-CDG-1855-d5-b34@1986-02-28",
+    "lufthansa-135-CDG-DUS-1910-d5-b34@1986-02-28",
+    "lufthansa-159-LYS-FRA-1910-d5-b34@1986-02-28",
+    "air-france-748-CDG-FRA-1925-d5-b34@1986-02-28",
+    "air-france-751-CGN-CDG-1945-d5-b34@1986-02-28",
+    "air-france-733-MUC-RIEM-CDG-1950-d5-b34@1986-02-28",
+    "lufthansa-122-HAM-CDG-1950-d5-b34@1986-02-28",
+    "air-france-770-CDG-HAM-2010-d5-b34@1986-02-28",
+    "air-france-767-DUS-CDG-2015-d5-b34@1986-02-28",
+    "air-france-749-FRA-CDG-2035-d5-b34@1986-02-28",
+    "lufthansa-137-CDG-STR-2045-d5-b34@1986-02-28",
+    "lufthansa-116-FRA-CDG-2120-d56-b34@1986-02-28",
+    "lufthansa-111-CDG-FRA-0725-d56-b34@1986-03-01",
+    "air-france-740-CDG-FRA-0735-d56-b34@1986-03-01",
+    "air-france-762-CDG-DUS-0740-d56-b34@1986-03-01",
+    "air-france-730-CDG-MUC-RIEM-0745-d56-b34@1986-03-01",
+    "lufthansa-130-DUS-CDG-0745-d56-b34@1986-03-01",
+    "air-france-741-FRA-CDG-0800-d56-b34@1986-03-01",
+    "air-france-771-HAM-CDG-0800-d56-b34@1986-03-01",
+    "lufthansa-121-CDG-HAM-0810-d56-b34@1986-03-01",
+    "lufthansa-124-CGN-CDG-0810-d56-b34@1986-03-01",
+    "lufthansa-140-MUC-RIEM-CDG-0825-d56-b34@1986-03-01",
+    "lufthansa-110-FRA-CDG-0855-d56-b34@1986-03-01",
+    "air-france-763-DUS-CDG-0910-d56-b34@1986-03-01",
+    "lufthansa-143-CDG-MUC-RIEM-0925-d56-b34@1986-03-01",
+    "air-france-743-FRA-CDG-0945-d56-b34@1986-03-01",
+    "lufthansa-131-CDG-DUS-0950-d56-b34@1986-03-01",
+    "air-france-731-MUC-RIEM-CDG-0955-d56-b34@1986-03-01",
+    "lufthansa-125-CDG-CGN-1030-d56-b34@1986-03-01",
+    "lufthansa-113-CDG-FRA-1055-d56-b34@1986-03-01",
+    "air-france-772-CDG-HAM-1220-d56-b34@1986-03-01",
+    "lufthansa-112-FRA-CDG-1250-d56-b34@1986-03-01",
+    "air-france-765-DUS-CDG-1300-d56-b34@1986-03-01",
+    "air-france-744-CDG-FRA-1420-d56-b34@1986-03-01",
+    "air-france-773-HAM-CDG-1435-d56-b34@1986-03-01",
+    "lufthansa-115-CDG-FRA-1445-d56-b34@1986-03-01",
+    "air-france-747-FRA-CDG-1615-d56-b34@1986-03-01",
+    "lufthansa-150-FRA-NCE-1615-d56-b34@1986-03-01",
+    "air-france-1734-NCE-MUC-RIEM-1650-d6-b34@1986-03-01",
+    "lufthansa-114-FRA-CDG-1650-d56-b34@1986-03-01",
+    "lufthansa-134-DUS-CDG-1730-d56-b34@1986-03-01",
+    "air-france-732-CDG-MUC-RIEM-1740-d56-b34@1986-03-01",
+    "air-france-766-CDG-DUS-1815-d56-b34@1986-03-01",
+    "air-france-1735-MUC-RIEM-NCE-1840-d6-b34@1986-03-01",
+    "lufthansa-151-NCE-FRA-1840-d56-b34@1986-03-01",
+    "lufthansa-117-CDG-FRA-1855-d56-b34@1986-03-01",
+    "lufthansa-116-FRA-CDG-2120-d56-b34@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 45,
+    "lufthansa": 44
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "CDG",
+      "CGN"
+    ],
+    [
+      "CDG",
+      "DUS"
+    ],
+    [
+      "CDG",
+      "FRA"
+    ],
+    [
+      "CDG",
+      "HAM"
+    ],
+    [
+      "CDG",
+      "MUC-RIEM"
+    ],
+    [
+      "CDG",
+      "STR"
+    ],
+    [
+      "CGN",
+      "CDG"
+    ],
+    [
+      "DUS",
+      "CDG"
+    ],
+    [
+      "FRA",
+      "CDG"
+    ],
+    [
+      "FRA",
+      "LYS"
+    ],
+    [
+      "FRA",
+      "NCE"
+    ],
+    [
+      "HAM",
+      "CDG"
+    ],
+    [
+      "LYS",
+      "FRA"
+    ],
+    [
+      "MUC-RIEM",
+      "CDG"
+    ],
+    [
+      "MUC-RIEM",
+      "NCE"
+    ],
+    [
+      "NCE",
+      "FRA"
+    ],
+    [
+      "NCE",
+      "MUC-RIEM"
+    ],
+    [
+      "STR",
+      "CDG"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 558,
+  "runtime_coverage": {
+    "registered_airlines": 85,
+    "registered_countries": 73,
+    "reviewed_schedules": 1469,
+    "animated_airlines": 39,
+    "scheduled_movements": 2120,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

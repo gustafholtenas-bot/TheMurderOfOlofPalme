@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "checked_on": "2026-09-27",
+  "entries": [
+    {
+      "schedule": "casair-500-HUY-MME-0715",
+      "status": "candidate",
+      "reason": "departure_and_arrival_conflict",
+      "source_a": "teesside-winter-1985",
+      "source_a_page": "PDF 2",
+      "departure_a": "07:15",
+      "arrival_a": "07:45",
+      "source_b": "humberside-19851027",
+      "source_b_page": "unnumbered Flight Departures panel (image 2)",
+      "departure_b": "06:45",
+      "arrival_b": "07:15",
+      "source_b_arrival_is_through_service_destination": false,
+      "next_action": "Determine applicable amended timetable or corroborate individual movement times; do not choose by publication-month guess."
+    },
+    {
+      "schedule": "casair-500-MME-GLA-0750",
+      "status": "candidate",
+      "reason": "destination_arrival_conflict",
+      "source_a": "teesside-winter-1985",
+      "source_a_page": "PDF 2",
+      "departure_a": "07:50",
+      "arrival_a": "08:50",
+      "source_b": "humberside-19851027",
+      "source_b_page": "unnumbered Flight Departures panel (image 2)",
+      "departure_b": null,
+      "arrival_b": "08:10",
+      "source_b_arrival_is_through_service_destination": true,
+      "next_action": "Determine applicable amended timetable or corroborate individual movement times; do not choose by publication-month guess."
+    },
+    {
+      "schedule": "casair-502-MME-GLA-1730",
+      "status": "candidate",
+      "reason": "destination_arrival_conflict",
+      "source_a": "teesside-winter-1985",
+      "source_a_page": "PDF 2",
+      "departure_a": "17:30",
+      "arrival_a": "18:20",
+      "source_b": "humberside-19851027",
+      "source_b_page": "unnumbered Flight Departures panel (image 2)",
+      "departure_b": null,
+      "arrival_b": "18:25",
+      "source_b_arrival_is_through_service_destination": true,
+      "next_action": "Determine applicable amended timetable or corroborate individual movement times; do not choose by publication-month guess."
+    }
+  ]
+}

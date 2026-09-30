@@ -1,0 +1,80 @@
+{
+  "batch": 42,
+  "package": "v43",
+  "country": "yu",
+  "checked_on": "2026-09-29",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte full trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 8,
+  "domestic_movements": 0,
+  "international_movements": 8,
+  "new_movements": 8,
+  "endpoint_movements_by_source_airline": {
+    "jat": 4,
+    "air-france": 4
+  },
+  "endpoint_leg_ids": [
+    "jat-242-ZAG-ORY-1130-d5-b42@1986-02-28",
+    "jat-243-ORY-ZAG-1420-d5-b42@1986-02-28",
+    "air-france-702-ORY-BEG-1500-d5-b42@1986-02-28",
+    "air-france-703-BEG-ORY-1805-d5-b42@1986-02-28",
+    "jat-240-BEG-ORY-1055-d6-b42@1986-03-01",
+    "jat-241-ORY-BEG-1420-d6-b42@1986-03-01",
+    "air-france-704-ORY-ZAG-1500-d6-b42@1986-03-01",
+    "air-france-705-ZAG-ORY-1740-d6-b42@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "jat-242-ZAG-ORY-1130-d5-b42@1986-02-28",
+    "jat-243-ORY-ZAG-1420-d5-b42@1986-02-28",
+    "air-france-702-ORY-BEG-1500-d5-b42@1986-02-28",
+    "air-france-703-BEG-ORY-1805-d5-b42@1986-02-28",
+    "jat-240-BEG-ORY-1055-d6-b42@1986-03-01",
+    "jat-241-ORY-BEG-1420-d6-b42@1986-03-01",
+    "air-france-704-ORY-ZAG-1500-d6-b42@1986-03-01",
+    "air-france-705-ZAG-ORY-1740-d6-b42@1986-03-01"
+  ],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Tryckta s. 18, 62, 78 och 94: åtta nonstoprader. Belgrad använder AF702/703 fredag och JU241/240 lördag; Zagreb JU243/242 fredag och AF704/705 lördag. Alla tider UTC+1, Paris Orly Sud, Surčin och Pleso namngivna."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/yu/jat/1a/ju851027.jpg",
+      "type": "contemporary_cover_only",
+      "result": "Litet blått JAT-vinteromslag läst. Giltighet 27 oktober 1985–29 mars 1986 jämförd med index; inga innersidor verifierade."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/yu/jat/gal/jugal1a80.htm",
+      "type": "edition_index",
+      "result": "Rätt vinterutgåva är länkad som omslagsbild. Ingen full vinter-PDF i det granskade galleriet."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/ju.htm",
+      "type": "wrong_period_full_timetable_excluded",
+      "result": "Kompletta äldre utgåvor, bland annat november 1983, samt omslag från mars 1986 finns listade. Dessa perioder ger inga vinteravgångar i fönstret."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/si/adria.htm",
+      "type": "edition_index",
+      "result": "Inex-Adria/Adria-indexet och galleriet visar sommar 1985 och vinter 1986/87. Vinter 1985/86 med innersidor återstår."
+    },
+    {
+      "url": "https://ourairports.com/airports/LYBE/",
+      "type": "coordinate_reference",
+      "result": "BEG/LYBE 44.818401, 20.309099; modern ungefärlig markör för Surčin."
+    },
+    {
+      "url": "https://ourairports.com/airports/LDZA/",
+      "type": "coordinate_reference",
+      "result": "ZAG/LDZA 45.742901, 16.0688; modern ungefärlig markör för Pleso. Historiskt land är Jugoslavien, inte dagens landindelning."
+    }
+  ],
+  "unresolved": [
+    "JAT:s fullständiga vintertabell och ändringar återstår; vinteromslaget innehåller inga tidssidor. Inex-Adrias vinterinlaga saknas. Äldre kompletta JAT-tabeller och sommarutgåvor används inte för observationsfönstret.",
+    "Inrikesnät och fler utländska linjer behöver beläggas. Ljubljana, Sarajevo, Skopje, Titograd, Dubrovnik, Split, Pula och övriga orter är forskningsområden, inte inlagda avgångar. Belgrad och Zagreb täcker bara ett litet urval.",
+    "Aviogenex och andra charter-, frakt-, arbets-, helikopter-, stats-, privat- och militäraktörer behöver daterade källor. JAT och Inex-Adria är ingen full operatörsinventering. Faktiskt genomförande och överflygningar är inte fastställda."
+  ]
+}

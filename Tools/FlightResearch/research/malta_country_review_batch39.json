@@ -1,0 +1,33 @@
+{
+  "batch": 39,
+  "package": "v40",
+  "country": "mt",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/mt/airmalta.htm",
+      "type": "edition_index",
+      "result": "Vinterutgåvan 27 oktober 1985–29 mars 1986 finns i utgåveindexet. Inga flygtider hämtas ur indexet."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/mt/airmalta/gal/kmgal1a80.htm",
+      "type": "gallery_without_schedule_pages",
+      "result": "October 27, 1985 listas utan läsbara avgångssidor. Sommarens 30 mars-utgåva faller utanför observationsfönstret."
+    }
+  ],
+  "unresolved": [
+    "Air Maltas fullständiga vinterinlaga 27 oktober 1985–29 mars 1986, teckenförklaring och ändringar behöver läsas. Indexdatum eller sommartabellen från 30 mars räcker inte för import.",
+    "Luqa, eventuell Gozo-/helikoptertrafik, utländska operatörer, charter, frakt, stats-, privat- och militärflyg behöver daterade underlag. Varken tider eller flygplatsmarkörer skapas från ett utgåveindex."
+  ]
+}

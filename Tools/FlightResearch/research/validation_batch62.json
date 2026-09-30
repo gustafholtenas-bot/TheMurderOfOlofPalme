@@ -1,0 +1,676 @@
+{
+  "package": "v63",
+  "batch": 62,
+  "checked_on": "2026-09-29",
+  "new_movements": 32,
+  "removed_previous_movements": 1,
+  "removed_previous_leg_ids": [
+    "southwest-736-SAT-ELP-1205-b60@1986-03-01"
+  ],
+  "net_movement_change": 31,
+  "total_movements": 3807,
+  "southwest_total_movements": 1219,
+  "preserved_previous_movement_ids": 3775,
+  "unchanged_previous_movement_times": 3775,
+  "unchanged_previous_movement_objects": 3772,
+  "corrected_previous_movement_times": 0,
+  "updated_previous_movement_notes": 3,
+  "corrected_previous_schedule_ids": [
+    "southwest-906-LBB-ABQ-1640-b60",
+    "southwest-736-SAT-ELP-1205-b60"
+  ],
+  "updated_previous_leg_ids": [
+    "southwest-736-SAT-ELP-1205-b60@1986-02-28",
+    "southwest-906-LBB-ABQ-1640-b60@1986-02-27",
+    "southwest-906-LBB-ABQ-1640-b60@1986-02-28"
+  ],
+  "correction_file": "corrections_batch62.json",
+  "source_rows": 358,
+  "source_row_actions": {
+    "already_imported": 324,
+    "new_schedule": 16,
+    "corrected_previous": 2,
+    "repeated_in_batch": 16
+  },
+  "new_reviewed_schedules": 16,
+  "reviewed_rows_producing_movements": 16,
+  "reviewed_rows_without_window_movements": [],
+  "new_candidate_schedules": 0,
+  "new_airports": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "southwest-19860112"
+  ],
+  "source_changes": "Appended reviewed pages, image URLs and bilingual notes only.",
+  "all_previous_schedules_except_documented_day_corrections_unchanged": true,
+  "all_previous_airport_objects_unchanged": true,
+  "all_previous_airline_objects_unchanged": true,
+  "all_other_source_objects_unchanged": true,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": 0,
+  "overlap_checks_include_previous_southwest_movements": true,
+  "consecutive_same_number_segments": [
+    {
+      "first_leg": "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-02-27",
+      "next_leg": "southwest-561-LBB-ELP-1655-b60@1986-02-27",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-855-MAF-AUS-MUELLER-1930-b62@1986-02-27",
+      "next_leg": "southwest-855-AUS-MUELLER-HOU-2045-b58@1986-02-27",
+      "ground_minutes": 20,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-198-HRL-SAT-2000-b62@1986-02-27",
+      "next_leg": "southwest-198-SAT-DAL-2100-b57@1986-02-27",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-760-AUS-MUELLER-MAF-0630-b62@1986-02-28",
+      "next_leg": "southwest-760-MAF-ELP-0740-b60@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-765-MAF-AUS-MUELLER-0900-b62@1986-02-28",
+      "next_leg": "southwest-765-AUS-MUELLER-HOU-1005-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-778-AUS-MUELLER-LBB-0915-b62@1986-02-28",
+      "next_leg": "southwest-778-LBB-ELP-1030-b60@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-156-HRL-SAT-1100-b62@1986-02-28",
+      "next_leg": "southwest-156-SAT-DAL-1200-b57@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-252-HRL-AUS-MUELLER-1320-b62@1986-02-28",
+      "next_leg": "southwest-252-AUS-MUELLER-DAL-1430-b57@1986-02-28",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-861-LBB-AUS-MUELLER-1520-b62@1986-02-28",
+      "next_leg": "southwest-861-AUS-MUELLER-HOU-1630-b58@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-02-28",
+      "next_leg": "southwest-561-LBB-ELP-1655-b60@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-855-MAF-AUS-MUELLER-1930-b62@1986-02-28",
+      "next_leg": "southwest-855-AUS-MUELLER-HOU-2045-b58@1986-02-28",
+      "ground_minutes": 20,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-198-HRL-SAT-2000-b62@1986-02-28",
+      "next_leg": "southwest-198-SAT-DAL-2100-b57@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-760-AUS-MUELLER-MAF-0630-b62@1986-03-01",
+      "next_leg": "southwest-760-MAF-ELP-0740-b60@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-765-MAF-AUS-MUELLER-0900-b62@1986-03-01",
+      "next_leg": "southwest-765-AUS-MUELLER-HOU-1005-b58@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-778-AUS-MUELLER-LBB-0915-b62@1986-03-01",
+      "next_leg": "southwest-778-LBB-ELP-1030-b60@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-156-HRL-SAT-1100-b62@1986-03-01",
+      "next_leg": "southwest-156-SAT-DAL-1200-b57@1986-03-01",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-252-HRL-AUS-MUELLER-1320-b62@1986-03-01",
+      "next_leg": "southwest-252-AUS-MUELLER-DAL-1430-b57@1986-03-01",
+      "ground_minutes": 15,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-736-SAT-ELP-1205-b60@1986-02-28",
+      "next_leg": "southwest-736-ELP-LAX-1240-b60@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-906-LBB-ABQ-1640-b60@1986-02-27",
+      "next_leg": "southwest-906-ABQ-PHX-1650-b59@1986-02-27",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    },
+    {
+      "first_leg": "southwest-906-LBB-ABQ-1640-b60@1986-02-28",
+      "next_leg": "southwest-906-ABQ-PHX-1650-b59@1986-02-28",
+      "ground_minutes": 10,
+      "same_flight_number": true,
+      "aircraft_identity_verified": false
+    }
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 5,
+    "1986-02-28": 16,
+    "1986-03-01": 11
+  },
+  "independent_fixed_offset_and_zoneinfo_agree": true,
+  "calendar_and_utc_checks": [
+    {
+      "id": "southwest-778-AUS-MUELLER-LBB-0915-b62@1986-02-28",
+      "departure_utc": "1986-02-28T15:15:00Z",
+      "arrival_utc": "1986-02-28T16:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-778-AUS-MUELLER-LBB-0915-b62@1986-03-01",
+      "departure_utc": "1986-03-01T15:15:00Z",
+      "arrival_utc": "1986-03-01T16:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-02-27",
+      "departure_utc": "1986-02-27T21:45:00Z",
+      "arrival_utc": "1986-02-27T22:45:00Z",
+      "local_weekday": 4,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-02-28",
+      "departure_utc": "1986-02-28T21:45:00Z",
+      "arrival_utc": "1986-02-28T22:45:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-03-01",
+      "departure_utc": "1986-03-01T21:45:00Z",
+      "arrival_utc": "1986-03-01T22:45:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-861-LBB-AUS-MUELLER-1520-b62@1986-02-28",
+      "departure_utc": "1986-02-28T21:20:00Z",
+      "arrival_utc": "1986-02-28T22:20:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-861-LBB-AUS-MUELLER-1520-b62@1986-03-01",
+      "departure_utc": "1986-03-01T21:20:00Z",
+      "arrival_utc": "1986-03-01T22:20:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-939-LBB-AUS-MUELLER-2300-b62@1986-02-28",
+      "departure_utc": "1986-03-01T05:00:00Z",
+      "arrival_utc": "1986-03-01T06:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "157",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 1
+    },
+    {
+      "id": "southwest-760-AUS-MUELLER-MAF-0630-b62@1986-02-28",
+      "departure_utc": "1986-02-28T12:30:00Z",
+      "arrival_utc": "1986-02-28T13:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-760-AUS-MUELLER-MAF-0630-b62@1986-03-01",
+      "departure_utc": "1986-03-01T12:30:00Z",
+      "arrival_utc": "1986-03-01T13:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-780-AUS-MUELLER-MAF-1330-b62@1986-02-28",
+      "departure_utc": "1986-02-28T19:30:00Z",
+      "arrival_utc": "1986-02-28T20:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-780-AUS-MUELLER-MAF-1330-b62@1986-03-01",
+      "departure_utc": "1986-03-01T19:30:00Z",
+      "arrival_utc": "1986-03-01T20:25:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-784-AUS-MUELLER-MAF-1800-b62@1986-02-27",
+      "departure_utc": "1986-02-28T00:00:00Z",
+      "arrival_utc": "1986-02-28T01:00:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-784-AUS-MUELLER-MAF-1800-b62@1986-02-28",
+      "departure_utc": "1986-03-01T00:00:00Z",
+      "arrival_utc": "1986-03-01T01:00:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 8,
+      "duration_minutes": 60,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-765-MAF-AUS-MUELLER-0900-b62@1986-02-28",
+      "departure_utc": "1986-02-28T15:00:00Z",
+      "arrival_utc": "1986-02-28T15:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-765-MAF-AUS-MUELLER-0900-b62@1986-03-01",
+      "departure_utc": "1986-03-01T15:00:00Z",
+      "arrival_utc": "1986-03-01T15:55:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-769-MAF-AUS-MUELLER-1435-b62@1986-02-28",
+      "departure_utc": "1986-02-28T20:35:00Z",
+      "arrival_utc": "1986-02-28T21:30:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-769-MAF-AUS-MUELLER-1435-b62@1986-03-01",
+      "departure_utc": "1986-03-01T20:35:00Z",
+      "arrival_utc": "1986-03-01T21:30:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-235-AUS-MUELLER-HRL-1215-b62@1986-02-28",
+      "departure_utc": "1986-02-28T18:15:00Z",
+      "arrival_utc": "1986-02-28T19:05:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 9,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-235-AUS-MUELLER-HRL-1215-b62@1986-03-01",
+      "departure_utc": "1986-03-01T18:15:00Z",
+      "arrival_utc": "1986-03-01T19:05:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 9,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-252-HRL-AUS-MUELLER-1320-b62@1986-02-28",
+      "departure_utc": "1986-02-28T19:20:00Z",
+      "arrival_utc": "1986-02-28T20:15:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 9,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-252-HRL-AUS-MUELLER-1320-b62@1986-03-01",
+      "departure_utc": "1986-03-01T19:20:00Z",
+      "arrival_utc": "1986-03-01T20:15:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 9,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-855-MAF-AUS-MUELLER-1930-b62@1986-02-27",
+      "departure_utc": "1986-02-28T01:30:00Z",
+      "arrival_utc": "1986-02-28T02:25:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-855-MAF-AUS-MUELLER-1930-b62@1986-02-28",
+      "departure_utc": "1986-03-01T01:30:00Z",
+      "arrival_utc": "1986-03-01T02:25:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 8,
+      "duration_minutes": 55,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-156-HRL-SAT-1100-b62@1986-02-28",
+      "departure_utc": "1986-02-28T17:00:00Z",
+      "arrival_utc": "1986-02-28T17:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "1234567",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-156-HRL-SAT-1100-b62@1986-03-01",
+      "departure_utc": "1986-03-01T17:00:00Z",
+      "arrival_utc": "1986-03-01T17:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "1234567",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-198-HRL-SAT-2000-b62@1986-02-27",
+      "departure_utc": "1986-02-28T02:00:00Z",
+      "arrival_utc": "1986-02-28T02:50:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-198-HRL-SAT-2000-b62@1986-02-28",
+      "departure_utc": "1986-03-01T02:00:00Z",
+      "arrival_utc": "1986-03-01T02:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-151-SAT-HRL-1000-b62@1986-02-28",
+      "departure_utc": "1986-02-28T16:00:00Z",
+      "arrival_utc": "1986-02-28T16:50:00Z",
+      "local_weekday": 5,
+      "printed_days": "123456",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-151-SAT-HRL-1000-b62@1986-03-01",
+      "departure_utc": "1986-03-01T16:00:00Z",
+      "arrival_utc": "1986-03-01T16:50:00Z",
+      "local_weekday": 6,
+      "printed_days": "123456",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-191-SAT-HRL-2005-b62@1986-02-27",
+      "departure_utc": "1986-02-28T02:05:00Z",
+      "arrival_utc": "1986-02-28T02:55:00Z",
+      "local_weekday": 4,
+      "printed_days": "123457",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    },
+    {
+      "id": "southwest-191-SAT-HRL-2005-b62@1986-02-28",
+      "departure_utc": "1986-03-01T02:05:00Z",
+      "arrival_utc": "1986-03-01T02:55:00Z",
+      "local_weekday": 5,
+      "printed_days": "123457",
+      "printed_page": 48,
+      "duration_minutes": 50,
+      "arrival_day_offset": 0
+    }
+  ],
+  "duration_distribution_minutes": {
+    "60": 12,
+    "55": 10,
+    "50": 10
+  },
+  "next_day_arrival_schedule": "southwest-939-LBB-AUS-MUELLER-2300-b62",
+  "overlap_at_window_start": [
+    "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-02-27"
+  ],
+  "overlap_at_window_end": [
+    "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-03-01"
+  ],
+  "source_rows_visually_checked": true,
+  "repeated_source_rows_by_airport_pair": {
+    "AUS-MUELLER-LBB": 4,
+    "AUS-MUELLER-MAF": 6,
+    "HRL-SAT": 4,
+    "AUS-MUELLER-HRL": 2
+  },
+  "previous_rows_matched": 324,
+  "source_number_color": "red Southwest; blue Muse Air excluded",
+  "time_basis": "local time interpretation; separate all-times-local wording not found in reviewed pages",
+  "source_evidence_file": "southwest_source_evidence_batch62.json",
+  "old_air_inter_conflict_candidates_unchanged": 10,
+  "total_candidates_unchanged": 21,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "unchanged_previous_files": 379,
+  "changed_previous_files": [
+    "LAS_MIG_v62.txt",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/europe_country_index.json",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/NORDIC_OVERFLIGHT_RESEARCH.md",
+    "Tools/FlightResearch/research/SOURCES.md",
+    "Tools/FlightResearch/research/europe_country_queue.json",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/nordic_priority.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json"
+  ],
+  "europe_country_rows_checked": 40,
+  "europe_country_queue_entries_unchanged": true,
+  "europe_resume_country": "cy",
+  "nordic_endpoint_movements": 161,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d431c5",
+        "wall_time_seconds": 4.063279412,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 4.090s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "cd6aea",
+        "wall_time_seconds": 0.388175672,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 94, \"registered_countries\": 81, \"reviewed_schedules\": 2498, \"animated_airlines\": 48, \"scheduled_movements\": 3806, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "5d4a63",
+        "wall_time_seconds": 0.117167836,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d2d544",
+        "wall_time_seconds": 0.080747833,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "aada3e",
+        "wall_time_seconds": 2.4938e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

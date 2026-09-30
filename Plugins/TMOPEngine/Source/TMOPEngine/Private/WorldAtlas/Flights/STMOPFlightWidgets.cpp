@@ -3,6 +3,9 @@
 #include "Localization/TMOPLocalization.h"
 #include "HAL/PlatformProcess.h"
 #include "Rendering/DrawElements.h"
+#include "Rendering/RenderingCommon.h"
+#include "Framework/Application/SlateApplication.h"
+#include "Rendering/SlateRenderer.h"
 #include "Styling/CoreStyle.h"
 #include "Widgets/SCompoundWidget.h"
 #include "Widgets/SBoxPanel.h"
@@ -20,6 +23,46 @@
 
 namespace TMOPFlightUI
 {
+// Local coordinates: X is across the wings and Y points toward the nose.
+// A filled silhouette keeps the marker independent of fonts and texture assets.
+static const FVector2f AirplaneOutline[] = {
+    {0.f,10.f}, {1.4f,7.5f}, {1.4f,2.5f}, {9.f,-2.5f}, {9.f,-4.f},
+    {1.4f,-1.2f}, {1.1f,-5.5f}, {4.f,-7.4f}, {4.f,-8.8f}, {0.f,-7.5f},
+    {-4.f,-8.8f}, {-4.f,-7.4f}, {-1.1f,-5.5f}, {-1.4f,-1.2f},
+    {-9.f,-4.f}, {-9.f,-2.5f}, {-1.4f,2.5f}, {-1.4f,7.5f}
+};
+static const SlateIndex AirplaneTriangles[] = {
+    17,0,1, 17,1,2, 2,3,4, 2,4,5, 17,2,5, 17,5,6,
+    6,7,8, 6,8,9, 17,6,9, 9,10,11, 9,11,12, 17,9,12,
+    13,14,15, 13,15,16, 12,13,16, 12,16,17
+};
+void PaintAirplane(const FGeometry& G, FSlateWindowElementList& Out, int32 Layer,
+    const FSlateResourceHandle& Resource, const FVector2D& P, const FVector2D& Direction,
+    const FLinearColor& Color, bool bSelected)
+{
+    const FVector2D Across(-Direction.Y, Direction.X);
+    const double Scale = bSelected ? 1.15 : 1.0;
+    TArray<FSlateVertex> Vertices;
+    TArray<FVector2f> Outline;
+    TArray<SlateIndex> Indices;
+    Vertices.Reserve(UE_ARRAY_COUNT(AirplaneOutline));
+    Outline.Reserve(UE_ARRAY_COUNT(AirplaneOutline) + 1);
+    Indices.Append(AirplaneTriangles, UE_ARRAY_COUNT(AirplaneTriangles));
+    const FColor Fill = Color.ToFColor(true);
+    for (const FVector2f& V : AirplaneOutline)
+    {
+        const FVector2f XY(P + (Across * V.X + Direction * V.Y) * Scale);
+        Outline.Add(XY);
+        Vertices.Add(FSlateVertex::Make<ESlateVertexRounding::Disabled>(G.GetAccumulatedRenderTransform(),
+            XY, FVector2f(.5f,.5f), Fill, FColor::White));
+    }
+    Outline.Add(Outline[0]);
+    FSlateDrawElement::MakeLines(Out, Layer, G.ToPaintGeometry(), Outline,
+        ESlateDrawEffect::None, FLinearColor(.01f,.02f,.03f), true, 2.5f);
+    FSlateDrawElement::MakeCustomVerts(Out, Layer + 1, Resource, Vertices, Indices,
+        nullptr, 0, 0, ESlateDrawEffect::None);
+}
+
 FText L(const FText& T) { return FTMOPLocalization::Text(T); }
 TSharedRef<STextBlock> Text(const FText& T, bool Heading = false)
 {
@@ -57,7 +100,7 @@ public:
         };
         auto AirlineName = [this](const FString& Id)
         {
-            if (Id.IsEmpty()) return L(NSLOCTEXT("TMOP", "FlightAllAirlines", "Alla flygbolag"));
+            if (Id.IsEmpty()) return L(NSLOCTEXT("TMOP", "FlightAllAirlines", "Alla operatörer"));
             for (const auto& A : State->Data->Airlines) if (A.Id == Id) return FText::FromString(A.Name);
             return FText::FromString(Id);
         };
@@ -71,7 +114,7 @@ public:
                 .OnSelectionChanged_Lambda([this](FOption V, ESelectInfo::Type) { if (V) { State->Airline = *V; State->Refilter(); Refresh(); } })
                 [SNew(STextBlock).AutoWrapText(true).Text_Lambda([this, AirlineName] { return AirlineName(State->Airline); })]]
             + SVerticalBox::Slot().AutoHeight().Padding(2)[SNew(SSearchBox).InitialText(FText::FromString(State->Search))
-                .HintText(FTMOPLocalization::Bind([] { return NSLOCTEXT("TMOP", "FlightSearch", "Flygnummer, flygplats eller bolag"); }))
+                .HintText(FTMOPLocalization::Bind([] { return NSLOCTEXT("TMOP", "FlightSearch", "Flygnummer, plats eller operatör"); }))
                 .OnTextChanged_Lambda([this](const FText& Value) { State->Search = Value.ToString(); State->Refilter(); Refresh(); })]
             + SVerticalBox::Slot().AutoHeight().Padding(2)[SNew(SCheckBox)
                 .IsChecked_Lambda([this] { return State->bOnlyAirborne ? ECheckBoxState::Checked : ECheckBoxState::Unchecked; })
@@ -160,20 +203,36 @@ private:
                 .OnClicked_Lambda([this] { State->bPlaying = false; if (State->Data->Legs.IsValidIndex(State->Selected)) State->SetTime(State->Data->Legs[State->Selected].Departure + 1); return FReply::Handled(); })];
             Source(State->Data->Sources[F.Source], F.Page);
         }
-        Add(L(NSLOCTEXT("TMOP", "FlightCoverage", "Insamling land för land • ofullständigt underlag")), true);
+        Add(L(NSLOCTEXT("TMOP", "FlightIndexTitle", "Innehållsförteckning • länder och operatörer")), true);
         Add(State->Data->Method.Resolve(TEXT("method"), TEXT("text")));
-        Add(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "FlightCoverageCount", "Register: {0} länder, {1} flygbolag, {2} källposter. Inläst: {3} avgångar."),
+        Add(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "FlightCoverageCount", "Register: {0} länder, {1} operatörer, {2} källposter. Inläst: {3} flygrörelser."),
             FText::AsNumber(State->Data->Countries.Num()),FText::AsNumber(State->Data->Airlines.Num()),FText::AsNumber(State->Data->Sources.Num()),FText::AsNumber(State->Data->Legs.Num())));
-        Add(L(NSLOCTEXT("TMOP", "FlightCountryFilter", "Landfiltret omfattar avgång, ankomst eller flygbolagets hemland. Registret nedan grupperar bolagen efter hemland.")));
+        Add(L(NSLOCTEXT("TMOP", "FlightCountryFilter", "Landfiltret omfattar avgång, ankomst eller operatörens hemland. Registret nedan grupperar operatörerna efter hemland.")));
+        Add(L(NSLOCTEXT("TMOP", "FlightIndexLegend", "✓ = uppgifter inlästa, men operatören är ännu delvis granskad. ○ = inga flygrutter inlästa. Inget land är färdiginventerat.")));
         for (const auto& Country : State->Data->Countries)
         {
             if (!State->Country.IsEmpty() && Country.Id != State->Country) continue;
-            bool bHeader = false;
-            for (const auto& Airline : State->Data->Airlines)
+            int32 Reviewed = 0, Pending = 0;
+            for (int32 AirlineIndex = 0; AirlineIndex < State->Data->Airlines.Num(); ++AirlineIndex)
             {
+                const auto& Airline = State->Data->Airlines[AirlineIndex];
+                if (!Airline.Countries.Contains(Country.Id)) continue;
+                const bool bImported = State->Data->Legs.ContainsByPredicate([AirlineIndex](const FTMOPFlightLeg& Leg) { return Leg.Airline == AirlineIndex; });
+                if (bImported) ++Reviewed; else ++Pending;
+            }
+            const FString CountryId = Country.Id;
+            Body->AddSlot().AutoHeight().Padding(4, 8)[SNew(SButton)
+                .Text(FTMOPLocalization::Format(NSLOCTEXT("TMOP", "FlightIndexCountry", "{0} • {1} delvis granskade • {2} utan inlästa rutter"),
+                    Country.Name.Resolve(Country.Id,TEXT("name")), FText::AsNumber(Reviewed), FText::AsNumber(Pending)))
+                .OnClicked_Lambda([this, CountryId] { State->Country = CountryId; State->Refilter(); return FReply::Handled(); })];
+            for (int32 AirlineIndex = 0; AirlineIndex < State->Data->Airlines.Num(); ++AirlineIndex)
+            {
+                const auto& Airline = State->Data->Airlines[AirlineIndex];
                 if (!Airline.Countries.Contains(Country.Id) || (!State->Airline.IsEmpty() && Airline.Id != State->Airline)) continue;
-                if (!bHeader) { Add(Country.Name.Resolve(Country.Id,TEXT("name")),true); bHeader = true; }
-                Add(FText::FromString(Airline.Name + TEXT(" — ") + ResearchStatus(Airline.Status).ToString()),true);
+                int32 Movements = 0;
+                for (const auto& Leg : State->Data->Legs) if (Leg.Airline == AirlineIndex) ++Movements;
+                Add(FText::FromString(FString(Movements ? TEXT("✓  ") : TEXT("○  ")) + Airline.Name + TEXT(" — ") + ResearchStatus(Airline.Status).ToString() +
+                    TEXT(" • ") + FText::AsNumber(Movements).ToString()), true);
                 for (const FString& Id : Airline.Sources)
                     for (const auto& S : State->Data->Sources) if (S.Id == Id) Source(S,FString());
             }
@@ -254,24 +313,32 @@ void PaintTMOPFlights(const FTMOPFlightState& State, const FGeometry& G, FSlateW
         }
     }
     if (D.Legs.IsValidIndex(State.Selected)) Path(State.Selected,FLinearColor(1,.85f,.3f),2.f);
+    const FSlateBrush* White = FCoreStyle::Get().GetBrush("WhiteBrush");
+    const FSlateResourceHandle IconResource = FSlateApplication::Get().GetRenderer()->GetResourceHandle(*White);
+    // Paint the selected aircraft last, on higher layers, so crowded routes cannot hide it.
+    for (int32 Pass = 0; Pass < 2; ++Pass)
     for (int32 I : State.Active)
     {
+        const bool bSelected = I == State.Selected;
+        if (bSelected != (Pass == 1)) continue;
         const auto& F=D.Legs[I];
         const FVector A=D.Airports[F.Origin].Unit, B=D.Airports[F.Destination].Unit;
-        const double T=F.Progress(State.Seconds); FVector2D P,Q;
+        const double T=F.Progress(State.Seconds); FVector2D P;
         if (!TMOPGlobe::Project(TMOPGlobe::Arc(A,B,T),Rotation,Center,Radius,P)) continue;
-        const bool Forward=T<.99;
-        TMOPGlobe::Project(TMOPGlobe::Arc(A,B,FMath::Clamp(T+(Forward?.005:-.005),0.0,1.0)),Rotation,Center,Radius,Q);
-        FVector2D Direction=(Forward?Q-P:P-Q).GetSafeNormal(); if (Direction.IsNearlyZero()) Direction=FVector2D(0,-1);
-        const FVector2D N(-Direction.Y,Direction.X);
-        const FLinearColor C=I==State.Selected?FLinearColor(1,.85f,.3f):F.Status==TEXT("confirmed")?FLinearColor(.35f,1,.55f):FLinearColor(.4f,.85f,1);
-        FSlateDrawElement::MakeLines(Out,Layer+1,G.ToPaintGeometry(),TArray<FVector2f>{FVector2f(P-Direction*5+N*4),FVector2f(P+Direction*6),FVector2f(P-Direction*5-N*4),FVector2f(P-Direction*2),FVector2f(P-Direction*5+N*4)},ESlateDrawEffect::None,C,true,1.5f);
+        // Project the tangent directly. A sample just behind the globe's limb must
+        // still contribute to heading, even though its marker would be culled.
+        const FVector Tangent = Rotation.RotateVector(
+            TMOPGlobe::Arc(A,B,FMath::Min(1.0,T+.001)) - TMOPGlobe::Arc(A,B,FMath::Max(0.0,T-.001)));
+        FVector2D Direction = FVector2D(-Tangent.Y,-Tangent.Z).GetSafeNormal();
+        if (Direction.IsNearlyZero()) Direction = FVector2D(0,-1);
+        const FLinearColor C=bSelected?FLinearColor(1,.85f,.3f):F.Status==TEXT("confirmed")?FLinearColor(.35f,1,.55f):FLinearColor(.4f,.85f,1);
+        TMOPFlightUI::PaintAirplane(G,Out,Layer+1+Pass*2,IconResource,P,Direction,C,bSelected);
     }
 }
 int32 HitTMOPFlight(const FTMOPFlightState& State, const FQuat& Rotation, const FVector2D& Center, double Radius, const FVector2D& Mouse)
 {
     if (!State.bEnabled || !State.Data) return INDEX_NONE;
-    int32 Best=INDEX_NONE; double Distance=100;
+    int32 Best=INDEX_NONE; double Distance=14.0*14.0;
     for (int32 I : State.Active)
     {
         const auto& F=State.Data->Legs[I]; FVector2D P;

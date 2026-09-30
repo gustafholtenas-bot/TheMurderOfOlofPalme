@@ -1,0 +1,73 @@
+{
+  "batch": 35,
+  "package": "v36",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2121,
+  "new_schedules": 6,
+  "new_schedule_ids": [
+    "air-france-763-TXL-DUS-0720-d56-b35",
+    "air-france-765-TXL-DUS-1115-d56-b35",
+    "air-france-767-TXL-DUS-1830-d5-b35",
+    "air-france-762-DUS-TXL-0925-d56-b35",
+    "air-france-764-DUS-TXL-1640-d5-b35",
+    "air-france-766-DUS-TXL-2000-d5-b35"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 22,
+  "research_only_file": "interflug_research_rows_batch35.tsv",
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "interflug-19851027-advance",
+    "interflug-19851027-main-cover"
+  ],
+  "unchanged_previous_movements": 2121,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "ch",
+  "reviewed_countries_this_batch": [
+    "de-east",
+    "berlin-west"
+  ],
+  "new_movements": 9,
+  "total_movements": 2130,
+  "new_leg_ids": [
+    "air-france-763-TXL-DUS-0720-d56-b35@1986-02-28",
+    "air-france-762-DUS-TXL-0925-d56-b35@1986-02-28",
+    "air-france-765-TXL-DUS-1115-d56-b35@1986-02-28",
+    "air-france-764-DUS-TXL-1640-d5-b35@1986-02-28",
+    "air-france-767-TXL-DUS-1830-d5-b35@1986-02-28",
+    "air-france-766-DUS-TXL-2000-d5-b35@1986-02-28",
+    "air-france-763-TXL-DUS-0720-d56-b35@1986-03-01",
+    "air-france-762-DUS-TXL-0925-d56-b35@1986-03-01",
+    "air-france-765-TXL-DUS-1115-d56-b35@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 9
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "DUS",
+      "TXL"
+    ],
+    [
+      "TXL",
+      "DUS"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 560,
+  "runtime_coverage": {
+    "registered_airlines": 85,
+    "registered_countries": 73,
+    "reviewed_schedules": 1475,
+    "animated_airlines": 39,
+    "scheduled_movements": 2129,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

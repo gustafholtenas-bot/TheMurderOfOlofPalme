@@ -1,0 +1,420 @@
+{
+  "package": "v33",
+  "batch": 32,
+  "checked_on": "2026-09-28",
+  "new_reviewed_schedules": 22,
+  "new_candidate_schedules": 0,
+  "new_movements": 35,
+  "total_movements": 2001,
+  "unchanged_previous_movements": 1966,
+  "unchanged_v31_movements": 1951,
+  "new_movements_since_v31": 50,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "RTM"
+  ],
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_movements_by_source_airline": {
+    "air-france": 14,
+    "klm": 21
+  },
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "unchanged_plugin_files": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs"
+  ],
+  "calendar_and_utc_checks": [
+    {
+      "schedule": "air-france-1917-AMS-LYS-1030-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AFKL1917",
+      "printed_days": "12345--",
+      "local_departure": "10:30",
+      "local_arrival": "12:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-335-AMS-NCE-0800-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL335",
+      "printed_days": "-2--56-",
+      "local_departure": "08:00",
+      "local_arrival": "09:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-323-AMS-CDG-0730-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL323",
+      "printed_days": "1234567",
+      "local_departure": "07:30",
+      "local_arrival": "08:30",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-325-AMS-CDG-0845-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL325",
+      "printed_days": "1234567",
+      "local_departure": "08:45",
+      "local_arrival": "09:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-911-AMS-CDG-0915-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF911",
+      "printed_days": "123456-",
+      "local_departure": "09:15",
+      "local_arrival": "10:15",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-327-AMS-CDG-1305-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL327",
+      "printed_days": "1234567",
+      "local_departure": "13:05",
+      "local_arrival": "14:05",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-913-AMS-CDG-1335-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF913",
+      "printed_days": "12345-7",
+      "local_departure": "13:35",
+      "local_arrival": "14:35",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-915-AMS-CDG-1710-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF915",
+      "printed_days": "1234567",
+      "local_departure": "17:10",
+      "local_arrival": "18:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-329-AMS-CDG-1725-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL329",
+      "printed_days": "1234567",
+      "local_departure": "17:25",
+      "local_arrival": "18:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-917-AMS-CDG-2045-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF917",
+      "printed_days": "12345-7",
+      "local_departure": "20:45",
+      "local_arrival": "21:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-1914-LYS-AMS-0815-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AFKL1914",
+      "printed_days": "12345--",
+      "local_departure": "08:15",
+      "local_arrival": "09:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-336-NCE-AMS-1025-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL336",
+      "printed_days": "-2--56-",
+      "local_departure": "10:25",
+      "local_arrival": "12:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-910-CDG-AMS-0730-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF910",
+      "printed_days": "123456-",
+      "local_departure": "07:30",
+      "local_arrival": "08:30",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-324-CDG-AMS-0910-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL324",
+      "printed_days": "1234567",
+      "local_departure": "09:10",
+      "local_arrival": "10:10",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-326-CDG-AMS-1045-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL326",
+      "printed_days": "1234567",
+      "local_departure": "10:45",
+      "local_arrival": "11:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-912-CDG-AMS-1155-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF912",
+      "printed_days": "12345-7",
+      "local_departure": "11:55",
+      "local_arrival": "12:55",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-328-CDG-AMS-1445-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "KL328",
+      "printed_days": "1234567",
+      "local_departure": "14:45",
+      "local_arrival": "15:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-914-CDG-AMS-1525-d56-b32",
+      "dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "printed_code": "AF914",
+      "printed_days": "123456-",
+      "local_departure": "15:25",
+      "local_arrival": "16:25",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "air-france-916-CDG-AMS-1900-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "AF916",
+      "printed_days": "12345-7",
+      "local_departure": "19:00",
+      "local_arrival": "20:00",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-330-CDG-AMS-1950-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "KL330",
+      "printed_days": "12345-7",
+      "local_departure": "19:50",
+      "local_arrival": "20:50",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-308-CDG-RTM-1950-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "KLAF308",
+      "printed_days": "12345--",
+      "local_departure": "19:50",
+      "local_arrival": "20:45",
+      "utc_offset": "+01:00"
+    },
+    {
+      "schedule": "klm-305-RTM-CDG-0740-d5-b32",
+      "dates": [
+        "1986-02-28"
+      ],
+      "printed_code": "KLAF305",
+      "printed_days": "12345--",
+      "local_departure": "07:40",
+      "local_arrival": "08:40",
+      "utc_offset": "+01:00"
+    }
+  ],
+  "source_files_sha256": {
+    "/tmp/batch23/af851027-1a.pdf": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+    "/tmp/batch32/klm-sfo.jpg": "8b1e2beea67ae96275a745e92257719e66349c82cb8496ebb0fe88653f24fedb",
+    "/tmp/batch32/nlm850929.jpg": "c352d758e989f4de47e8c777c3690b63b480ac3a0da71cd51b6a17b6c3b8de21"
+  },
+  "cover_only_sources_create_no_schedules": true,
+  "europe_country_rows_checked": 40,
+  "country_endpoint_totals": {
+    "nl": 105
+  },
+  "nordic_endpoint_movements": 155,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "3d491c",
+        "wall_time_seconds": 2.359652954,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.376s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "6ba11a",
+        "wall_time_seconds": 0.232645748,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 83, \"registered_countries\": 72, \"reviewed_schedules\": 1389, \"animated_airlines\": 39, \"scheduled_movements\": 2000, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c2a88a",
+        "wall_time_seconds": 0.043118046,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "03d676",
+        "wall_time_seconds": 0.023432293,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "510e84",
+        "wall_time_seconds": 2.5799e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

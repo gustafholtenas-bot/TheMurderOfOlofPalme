@@ -1,0 +1,69 @@
+{
+  "batch": 41,
+  "package": "v42",
+  "country": "bg",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 5,
+  "domestic_movements": 0,
+  "international_movements": 5,
+  "new_movements": 5,
+  "endpoint_movements_by_source_airline": {
+    "balkan": 4,
+    "air-france": 1
+  },
+  "endpoint_leg_ids": [
+    "balkan-2003-SOF-ORY-1000-d5-b41@1986-02-28",
+    "balkan-135-SOF-ORY-1525-d5-b41@1986-02-28",
+    "balkan-2004-ORY-SOF-1610-d5-b41@1986-02-28",
+    "balkan-129-SOF-ORY-1500-d6-b41@1986-03-01",
+    "air-france-714-ORY-SOF-1755-d6-b41@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "balkan-2003-SOF-ORY-1000-d5-b41@1986-02-28",
+    "balkan-135-SOF-ORY-1525-d5-b41@1986-02-28",
+    "balkan-2004-ORY-SOF-1610-d5-b41@1986-02-28",
+    "balkan-129-SOF-ORY-1500-d6-b41@1986-03-01",
+    "air-france-714-ORY-SOF-1755-d6-b41@1986-03-01"
+  ],
+  "research_only_rows": 1,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Tryckta s. 76 och 87: fem nonstoprader i fönstret. AFLZ714 och LZAF129 lördag; LZAF135, LZAF2003 och LZAF2004 fredag. 2003/2004 står under CARGOS; AN1 är Antonov 12 enligt s. 3. Orly UTC+1, Sofia UTC+2."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "through_itinerary_excluded",
+      "result": "AFLZ706 saknar nonstop-pil på s. 76. S. 10 anger Paris–(Bucarest)–Sofia; parentes betyder tekniskt stopp. Raden importeras inte som nonstop och ingen tid för vidare delsträcka gissas."
+    },
+    {
+      "url": "https://www.timetableimages.com/i-kl/lz851027.jpg",
+      "type": "contemporary_cover_only",
+      "result": "Omslaget visar 27.10.1985–29.03.1986. Inga innersidor lästa; omslaget skapar inga schemarader."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/bg/balkan.htm",
+      "type": "edition_index",
+      "result": "Publiceringsindexet bekräftar vinterutgåvans datum. Den granskade AirTimes-galleriposten saknar läsbar skanning."
+    },
+    {
+      "url": "https://airtimes.com/cgat/bg/balkan/gal/lzgal80.htm",
+      "type": "wrong_season_pdfs_excluded",
+      "result": "PDF-länkar från mars/juni 1985 och mars/juni 1986 gäller andra perioder. De används inte för fönstret."
+    },
+    {
+      "url": "https://ourairports.com/airports/LBSF/",
+      "type": "coordinate_reference",
+      "result": "SOF/LBSF: 42.696357, 23.417671 ur den granskade OurAirports-filen. Ungefärlig modern markör för fältet Vrazhdebna, tryckt VRAJDEBNA i den samtida tidtabellen."
+    }
+  ],
+  "unresolved": [
+    "Balkans lästa vinteromslag saknar innersidor. Fullständig internationell och inrikes vintertabell samt ändringar återstår. Sommar-PDF:erna 1985 och 1986 används inte för februari/mars 1986.",
+    "Sofia–Bukarest och eventuella fysiska segment i genomgående AFLZ706/AF719 behöver separata tidspunkter och nummerkoppling. Ingen mellanlandningstid eller retur gissas.",
+    "Varna, Burgas, Plovdiv och övriga flygplatser/operatörer behöver undersökas med daterade underlag. Namnen är forskningsområden, inte belagda avgångar i detta fönster. Två fraktflyg innebär inte komplett frakttäckning. Charter, stats-, privat-, militär-, arbets- och helikopterflyg samt överflygningar återstår."
+  ]
+}

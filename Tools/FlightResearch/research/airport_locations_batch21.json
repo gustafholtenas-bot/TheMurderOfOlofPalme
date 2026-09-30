@@ -1,0 +1,89 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "SVO",
+      "name": "Moscow–Sheremetyevo",
+      "country": "su",
+      "timezone": "Europe/Moscow",
+      "lat": 55.976858,
+      "lon": 37.41121,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "UUEE",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.svo.aero/bitrix/upload/sprint.editor/94d/94d8f7717089abdd5f9cf159049073f7.pdf",
+        "https://www.ebay.com/itm/136906585239"
+      ],
+      "location_note": "Historical airfield identity reviewed against the printed airport code and airport/transport authority history. Approximate airfield coordinates, not a reconstructed 1986 terminal, gate or aircraft position."
+    },
+    {
+      "id": "LED",
+      "name": "Leningrad–Pulkovo",
+      "country": "su",
+      "timezone": "Europe/Moscow",
+      "lat": 59.800301,
+      "lon": 30.262501,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "ULLI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://pulkovoairport.ru/about/about_pulkovo/history/",
+        "https://www.ebay.com/itm/136906585239"
+      ],
+      "location_note": "Historical airfield identity reviewed against the printed airport code and airport/transport authority history. Approximate airfield coordinates, not a reconstructed 1986 terminal, gate or aircraft position."
+    },
+    {
+      "id": "DRS",
+      "name": "Dresden–Klotzsche",
+      "country": "de-east",
+      "timezone": "Europe/Berlin",
+      "lat": 51.134123,
+      "lon": 13.767831,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EDDC",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://di5l0vjrkfc7a.cloudfront.net/flughafen-dresden-gmbh/geschichte/",
+        "https://www.ebay.com/itm/136906585239"
+      ],
+      "location_note": "Historical airfield identity reviewed against the printed airport code and airport/transport authority history. Approximate airfield coordinates, not a reconstructed 1986 terminal, gate or aircraft position."
+    },
+    {
+      "id": "BUD",
+      "name": "Budapest–Ferihegy",
+      "country": "hu",
+      "timezone": "Europe/Budapest",
+      "lat": 47.43018,
+      "lon": 19.262393,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "LHBP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.bud.hu/en/facts-about-the-airport/our-company/company-history",
+        "https://www.ebay.com/itm/136906585239"
+      ],
+      "location_note": "Historical airfield identity reviewed against the printed airport code and airport/transport authority history. Approximate airfield coordinates, not a reconstructed 1986 terminal, gate or aircraft position."
+    },
+    {
+      "id": "SXF",
+      "name": "Berlin–Schönefeld",
+      "country": "de-east",
+      "timezone": "Europe/Berlin",
+      "lat": 52.380001,
+      "lon": 13.5225,
+      "coordinate_source": "https://airportguide.com/airport/info/SXF",
+      "coordinate_record_id": "SXF / former Schönefeld location",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://corporate.berlin-airport.de/en/company-media/history/berlin-schoenefeld-airport.html",
+        "https://www.ebay.com/itm/136906585239"
+      ],
+      "location_note": "Uses the former SXF airfield marker, not the modern BER coordinate from the current airport CSV. The airport authority documents the 1976 terminal and 1985 extensions. Schönefeld was outside Berlin in East Germany. Approximate historical airfield location, not a 1986 gate or aircraft position."
+    }
+  ],
+  "existing_airport_identity_references": {
+    "WAW": "https://www.gov.pl/web/infrastruktura/90-lat-lotniska-chopina--historia-rozwoj-i-plany-na-przyszlosc"
+  },
+  "coordinate_dataset_sha256": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec"
+}

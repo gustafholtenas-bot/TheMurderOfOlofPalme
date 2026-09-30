@@ -1,0 +1,39 @@
+{
+  "package": "v43",
+  "checked_on": "2026-09-29",
+  "method": "Contemporary timetable identifies Surčin and Pleso; modern OurAirports coordinates are approximate field markers. Historical country Yugoslavia. Existing Orly unchanged.",
+  "airports": [
+    {
+      "id": "BEG",
+      "name": "Belgrad–Surčin",
+      "country": "yu",
+      "timezone": "Europe/Belgrade",
+      "lat": 44.818401,
+      "lon": 20.309099,
+      "coordinate_source": "https://ourairports.com/airports/LYBE/",
+      "coordinate_record_id": "LYBE",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LYBE/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 18 and 62 identifies SURCIN 20KM. Modern OurAirports coordinates mark the approximate airfield site, not a reconstructed 1986 terminal, gate or aircraft position. Both airports belong to historical Yugoslavia in this catalog; modern state boundaries are not applied."
+    },
+    {
+      "id": "ZAG",
+      "name": "Zagreb–Pleso",
+      "country": "yu",
+      "timezone": "Europe/Zagreb",
+      "lat": 45.742901,
+      "lon": 16.0688,
+      "coordinate_source": "https://ourairports.com/airports/LDZA/",
+      "coordinate_record_id": "LDZA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LDZA/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 78 and 94 identifies PLESO 16KM. Modern OurAirports coordinates mark the approximate airfield site, not a reconstructed 1986 terminal, gate or aircraft position. Both airports belong to historical Yugoslavia in this catalog; modern state boundaries are not applied."
+    }
+  ]
+}

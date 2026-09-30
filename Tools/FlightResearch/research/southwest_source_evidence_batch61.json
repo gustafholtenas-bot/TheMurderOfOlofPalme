@@ -1,0 +1,147 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://www.departedflights.com/WN011286intro.html",
+  "publication_index_url": "https://www.airtimes.com/cgat/usc/southwest.htm",
+  "next_catalogued_edition": "1986-03-18",
+  "scans": [
+    {
+      "printed_pages": [
+        9,
+        10
+      ],
+      "url": "https://www.departedflights.com/WN011286p9.jpg",
+      "sha256": "2c93a63dbeabe01cadcfa31e27660b112b20f0fd3b493f5278c87cafe3293297",
+      "size_bytes": 538236
+    },
+    {
+      "printed_pages": [
+        11,
+        12
+      ],
+      "url": "https://www.departedflights.com/WN011286p11.jpg",
+      "sha256": "cf8cce266da032b45f530625bdf34f8ca592915c331a98913dc9ff2fafb0d1df",
+      "size_bytes": 548320
+    },
+    {
+      "printed_pages": [
+        25,
+        26
+      ],
+      "url": "https://www.departedflights.com/WN011286p25.jpg",
+      "sha256": "fc1ce48c93a422d2e1b5aa32c959ce8879ec94dab71e5822405241d78a2f6889",
+      "size_bytes": 563077
+    },
+    {
+      "printed_pages": [
+        27,
+        28
+      ],
+      "url": "https://www.departedflights.com/WN011286p27.jpg",
+      "sha256": "39805ceaa88c78b8e2003a803197f5df2d8ccdef309d943d5bc3d895117c9a4a",
+      "size_bytes": 551730
+    },
+    {
+      "printed_pages": [
+        29,
+        30
+      ],
+      "url": "https://www.departedflights.com/WN011286p29.jpg",
+      "sha256": "535508b8ab2b0872ff8d3cc6668227f8c8abcb3914723c3e4ceb117712a1d1c7",
+      "size_bytes": 553472
+    },
+    {
+      "printed_pages": [
+        31
+      ],
+      "url": "https://www.departedflights.com/WN011286p31.jpg",
+      "sha256": "579b1151f7b16f97d7cccf10fe053feb3c23e99a149900efbc6f8b666fcc8cdd",
+      "size_bytes": 265584
+    },
+    {
+      "printed_pages": [
+        32,
+        33
+      ],
+      "url": "https://www.departedflights.com/WN011286p32.jpg",
+      "sha256": "02edcad7a7193a8da0cef89c898d6ca46419cc46aab9d7fa758ac4a50f7b9601",
+      "size_bytes": 548207
+    },
+    {
+      "printed_pages": [
+        42,
+        43
+      ],
+      "url": "https://www.departedflights.com/WN011286p42.jpg",
+      "sha256": "0e13ea864ff77e765030b44ad205c0624f6b2b2bbe88f73247a584d607c339bc",
+      "size_bytes": 565581
+    },
+    {
+      "printed_pages": [
+        44,
+        45
+      ],
+      "url": "https://www.departedflights.com/WN011286p44.jpg",
+      "sha256": "a3af86325a16ff60de837a48a9f98c69cad0ae5ee2d801221addf04741bc19af",
+      "size_bytes": 547499
+    },
+    {
+      "printed_pages": [
+        46,
+        47
+      ],
+      "url": "https://www.departedflights.com/WN011286p46.jpg",
+      "sha256": "154c4bd8f69c80610409923b5b81fc680e89d6bbc5818d20153e7e86839a5e2e",
+      "size_bytes": 559376
+    },
+    {
+      "printed_pages": [
+        50,
+        51
+      ],
+      "url": "https://www.departedflights.com/WN011286p50.jpg",
+      "sha256": "6adfe14ff90cf94f439c50efe065a379c79b66b3aa8c0ddd18d8af475ca651dd",
+      "size_bytes": 566523
+    },
+    {
+      "printed_pages": [
+        52,
+        53
+      ],
+      "url": "https://www.departedflights.com/WN011286p52.jpg",
+      "sha256": "5867c257a46cd1d077346fed23bef00631aba7fec18d9ae913a8b9658df3a62b",
+      "size_bytes": 542820
+    },
+    {
+      "printed_pages": [
+        54,
+        55
+      ],
+      "url": "https://www.departedflights.com/WN011286p54.jpg",
+      "sha256": "01a9849028bb02c7cca4c14c6bec8ffa9d9e9a2d811d94b69b9e51efdc0b7b50",
+      "size_bytes": 503141
+    },
+    {
+      "printed_pages": [
+        56,
+        57
+      ],
+      "url": "https://www.departedflights.com/WN011286p56.jpg",
+      "sha256": "6f5cfad1453f9c3ccab52feaa18c545a6abdbc4d67f9737cab4d10dfc9b0f549",
+      "size_bytes": 537041
+    },
+    {
+      "printed_pages": [
+        58
+      ],
+      "url": "https://www.departedflights.com/WN011286p58.jpg",
+      "sha256": "49ebe592911dfd7d6cfdac0ee5ffd77440c36b2e01a9a2323ea4bf451aca053a",
+      "size_bytes": 216224
+    }
+  ],
+  "airport_sources": [
+    "https://ourairports.com/airports/KMDW/",
+    "https://www.flychicago.com/business/cda/pages/midway.aspx",
+    "https://investors.southwest.com/news-events/press-releases/detail/1488/southwest-airlines-celebrates-25-years-of-luv-in-chicago"
+  ],
+  "original_scans_redistributed": false
+}

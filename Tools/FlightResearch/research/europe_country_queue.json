@@ -1,0 +1,430 @@
+{
+  "schema": 1,
+  "package": "v76",
+  "checked_on": "2026-09-29",
+  "requested_workflow": "Land för land i Europa; börja Sverige, fortsätt Norge och övriga Norden, därefter övriga europeiska länder och utvalda territorier.",
+  "next_country_id": "cy",
+  "coverage_complete": false,
+  "counting": "Fysiska rörelser med start eller mål i kataloglandet, oavsett operatörens hemland. Inrikes räknas en gång. Landrader överlappar. Noll betyder inga inlagda rörelser. Sovjetunionen och Turkiet räknas som hela katalogländer, inklusive asiatiska ändpunkter.",
+  "supplementary_areas": {
+    "fi": [
+      "Åland"
+    ],
+    "dk": [
+      "Färöarna",
+      "Grönland (nordisk utvidgning utanför Europa)"
+    ],
+    "no": [
+      "Svalbard",
+      "Jan Mayen"
+    ]
+  },
+  "countries": [
+    {
+      "id": "se",
+      "name": "Sverige",
+      "catalog_country_id": "se",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Andra riktade genomgången dokumenterad i SWEDEN_FOLLOWUP_BATCH46.md. SAS/Linjeflyg och Swedair saknar fortfarande kompletta granskade vinteravgångssidor för Sverige. Nya omslag och arkivhänvisningar räcker inte. A6774-01 pekar på en separat originaltidtabell; den behöver återfinnas med teckenförklaring, ändringar och fysiska delsträcksuppgifter. De tidigare 87 svenska ändpunktsrörelserna är oförändrade. Regional-, charter-, frakt-, privat-, stats-, militärtrafik och faktiska överflygningar är ofullständigt utredda.",
+      "review_pass": 2
+    },
+    {
+      "id": "no",
+      "name": "Norge",
+      "catalog_country_id": "no",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Andra riktade genomgången dokumenterad i NORWAY_FOLLOWUP_BATCH46.md. SAS515/516/518 har mellanlandning och saknar kompletta mellantider. SK517:s nonstoprad skapar ingen antagen retur. DA102/107:s Bergen–Stavanger-del och DA842/843:s Manchester–Newcastle-del saknar varsin mellantid. Sju anslutningsrader sparas som forskning. Övriga Braathens-, SAS-, Widerøe- och Norving-rutter, ändringsblad och driftbelägg återstår. Inga länder eller operatörsinventeringar markeras kompletta.",
+      "review_pass": 2
+    },
+    {
+      "id": "dk",
+      "name": "Danmark",
+      "catalog_country_id": "dk",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. Maersk behöver läsbara tider, veckodagar och undantag. Danair/Cimber/SAS inrikes och Air Business-anslutningar återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "fi",
+      "name": "Finland",
+      "catalog_country_id": "fi",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. Finnairs vinterutgåvas innersidor och regionala/finska inrikesflyg återstår; sommarbilder används inte.",
+      "review_pass": 2
+    },
+    {
+      "id": "is",
+      "name": "Island",
+      "catalog_country_id": "is",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. Icelandairs vinterinnersidor och daterade tidningssidor återstår. Keflavik och Reykjavik måste hållas isär.",
+      "review_pass": 2
+    },
+    {
+      "id": "gb",
+      "name": "Storbritannien",
+      "catalog_country_id": "gb",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. DA193 Inverness–Manchester, DA125 Cardiff–Bristol och DA164 Newcastle–Aberdeen hålls utanför. Övriga operatörer, senare ändringar och Dan-Airs kontinentnät återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "je",
+      "name": "Jersey",
+      "catalog_country_id": "je",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. British Caledonians BR-kodade Gatwickrader och andra operatörers vintertrafik återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "gg",
+      "name": "Guernsey",
+      "catalog_country_id": "gg",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. Andra operatörer, regionala kompletteringar och faktisk drift återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "im",
+      "name": "Isle of Man",
+      "catalog_country_id": null,
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se IRELAND_FOLLOWUP_BATCH48.md. Läsbara innersidor och ändringar till Manx Airlines vinterutgåva 28 oktober 1985 nr 2 återstår. Inga avgångar eller flygplatser läggs till från enbart katalogdatum.",
+      "review_pass": 2
+    },
+    {
+      "id": "ie",
+      "name": "Irland",
+      "catalog_country_id": "ie",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se IRELAND_FOLLOWUP_BATCH48.md. Aer Lingus återstående vinterinnersidor, ändringsblad och returflyg återstår. EI157/EI165 förblir olösta kandidater. Se sex forskningsrader i ireland_withheld_batch48.json. Regionalflyg, Ryanair, frakt, charter, militär trafik och faktisk drift är fortfarande ofullständigt undersökta.",
+      "review_pass": 2
+    },
+    {
+      "id": "fr",
+      "name": "Frankrike",
+      "catalog_country_id": "fr",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se FRANCE_FOLLOWUP_BATCH49.md. Air Inter: återstående Parislinjer, regionala flyg och andra kompletteringar återstår; detta urval är inte en fullständig linjeinventering. De tio tidigare Air Inter/Air France-konflikterna från omgång 29 kvarstår; inget avgörande daterat ändringsblad har tillkommit. Air France, UTA och regionalbolag såsom TAT, Air Littoral, Air Limousin, Brit Air, Air Vendée, Air Jet och Europe Aéro Service är fortsatt ofullständigt inventerade. Frakt, charter, militär trafik, helikoptertrafik, ändringar och faktiskt genomförande behöver ytterligare handlingar.",
+      "review_pass": 2
+    },
+    {
+      "id": "mc",
+      "name": "Monaco",
+      "catalog_country_id": "mc",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH50.md. Heli Air Monaco nr19:s innersidor och ändringsblad återstår, liksom daterad heliportposition och annan helikoptertrafik.",
+      "review_pass": 2
+    },
+    {
+      "id": "ad",
+      "name": "Andorra",
+      "catalog_country_id": null,
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH50.md. Samtida tillstånd, heliport- och rörelsejournaler med tider återstår. Heliands senare bildande bevisar inte att flygtrafik saknades 1986. La Seu förblir en spansk plats.",
+      "review_pass": 2
+    },
+    {
+      "id": "es",
+      "name": "Spanien",
+      "catalog_country_id": "es",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "V51 tillför SN403 BRU–BCN och BCN–ALG från Sabenas januariutgåva. AF:s saknade s.16–17 och Iberia/Aviacos inlagor återstår. Se BELGIUM_FOLLOWUP_BATCH50.md och EUROPE_FOLLOWUP_BATCH50.md.",
+      "review_pass": 2
+    },
+    {
+      "id": "gi",
+      "name": "Gibraltar",
+      "catalog_country_id": "gi",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH50.md. Andra operatörer, ändringsblad och militär-/privatflygets tidsatta journaler återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "pt",
+      "name": "Portugal",
+      "catalog_country_id": "pt",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH50.md. TAP/SATA-inlagor och ändringsblad återstår, liksom Porto TP412*-symbolen, inrikestrafik, Madeira, Azorerna, Faro och övriga linjer.",
+      "review_pass": 2
+    },
+    {
+      "id": "nl",
+      "name": "Nederländerna",
+      "catalog_country_id": "nl",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se EUROPE_FOLLOWUP_BATCH50.md. Dan-Airs Tees-side-tider/dagar måste jämföras mot senare vinterunderlag; inga parallella varianter läggs in. KLM, NLM, Martinair, Transavia, inrikestrafik, övriga flygplatser, charter/frakt och faktiskt genomförande återstår. Precis datering av Bristol-linjens senare nedläggning och eventuella ändringsblad återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "be",
+      "name": "Belgien",
+      "catalog_country_id": "be",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se BELGIUM_FOLLOWUP_BATCH50.md. Sabenas egen legend s.2–6 och resterande tidtabellssidor återstår. Övriga Nordafrika-kolumner, frakt/charter och andra belgiska operatörer återstår. BA-tabellens ytterligare SN-kodade Londonrader lämnas tills destinationens flygplats är tillräckligt belagd; inga Heathrow-tider antas enbart från BA:s transferkolumn.",
+      "review_pass": 2
+    },
+    {
+      "id": "lu",
+      "name": "Luxemburg",
+      "catalog_country_id": "lu",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se WEST_GERMANY_FOLLOWUP_BATCH51.md. Luxairs och Luxemburgflygplatsens vinterinnersidor 1985/86 och ändringsblad återstår. Cargolux och Luxavia/Trek samt utländska operatörer behöver tidsatta samtida underlag; tidigare Luxavia-bilder avser 1985. Noll importerade rörelser betyder inte att trafik saknades.",
+      "review_pass": 2
+    },
+    {
+      "id": "de-west",
+      "name": "Västtyskland",
+      "catalog_country_id": "de-west",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se WEST_GERMANY_FOLLOWUP_BATCH51.md. Lufthansas egen vintertabell, ändringsblad och andra operatörer såsom Condor, LTU, DLT och Nürnberger Flugdienst återstår. Bolagsinventeringen är ofullständig. Tidigare forskningsspår om AF:s Hannover- och Nürnbergrader, NS-kodens operatör och saknade AF565-mellantider återstår; de godkänns inte i denna omgång. Övriga inrikes- och utrikesrutter, charter, frakt, militär-/privat-/statsflyg samt faktisk drift är ofullständigt granskade.",
+      "review_pass": 2
+    },
+    {
+      "id": "de-east",
+      "name": "Östtyskland",
+      "catalog_country_id": "de-east",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se SWITZERLAND_FOLLOWUP_BATCH52.md. Ordinarie Interflug-vintertabell, fullständig teckenförklaring, ändringsblad och fysisk stoppkontroll återstår. De 22 äldre forskningsraderna är oförändrade utan animation. IF828:s Larnaca–Damascus-tider och IF920:s Gander-tider saknas. Returflyg, Leipzig, Erfurt och andra operatörer samt faktisk drift återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "berlin-west",
+      "name": "Västberlin",
+      "catalog_country_id": "berlin-west",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se SWITZERLAND_FOLLOWUP_BATCH52.md. British Airways och övriga operatörer behöver läsbara vinteravgångssidor för rätt period. Den funna BA Berlin-utgåvan 1986/87 är för sen. De 152 befintliga ändpunktsrörelserna är oförändrade; Pan Ams urval är ingen fullständig flygplatsinventering. Tempelhof, charter, frakt, militär-/statsflyg och faktiska luftkorridorer återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "ch",
+      "name": "Schweiz",
+      "catalog_country_id": "ch",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se SWITZERLAND_FOLLOWUP_BATCH52.md. Swissair, Crossair och andra schweiziska operatörers fullständiga vintertabeller, regional trafik och ändringsblad återstår. Bernrapporter och linjehistorik ger fler forskningsspår men ersätter inte daterade avgångstabeller. Senare ändringar, faktisk drift, charter, frakt, helikopter- och militär-/statsflyg är ofullständigt granskade.",
+      "review_pass": 2
+    },
+    {
+      "id": "li",
+      "name": "Liechtenstein",
+      "catalog_country_id": "li",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se AUSTRIA_FOLLOWUP_BATCH53.md. Daterade flyg- och helikopterloggar för Balzers samt exakta historiska landningsplatser återstår. Noll inlagda rörelser innebär inte belagd frånvaro av trafik. Rhein-Heli/Rhein-Helicopter-namn och grundandeuppgifterna 1979/1983 behöver fortsatt kontroll. Inga tider skapas ur bolagshistorik eller olyckor utanför observationsfönstret.",
+      "review_pass": 2
+    },
+    {
+      "id": "at",
+      "name": "Österrike",
+      "catalog_country_id": "at",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se AUSTRIA_FOLLOWUP_BATCH53.md. Austrian Airlines och Tyroleans fullständiga vintertabeller, ändringsblad, inrikestrafik och fler internationella linjer återstår. Salzburg, Graz, Linz, Klagenfurt, andra operatörer, charter, frakt, helikopter- och stats-/militärflyg är ofullständigt granskade. Faktisk drift och färdväg kräver rörelsehandlingar.",
+      "review_pass": 2
+    },
+    {
+      "id": "it",
+      "name": "Italien",
+      "catalog_country_id": "it",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se AUSTRIA_FOLLOWUP_BATCH53.md. Alitalias preliminära USA-tabell hålls fortsatt utanför importen: jämförelse med senare januariutgåva/ändringar och italiensk flygplatsmappning återstår. ATI, Alisarda, regional-, inrikes-, charter-, frakt- och övrig trafik behöver daterade tider. Pan Ams Milano-start 13 mars får inte flyttas till februari.",
+      "review_pass": 2
+    },
+    {
+      "id": "sm",
+      "name": "San Marino",
+      "catalog_country_id": "sm",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. Torraccias daterade klubb-, skol- och flygdagböcker för observationsfönstret saknas. Klubbhistorikens årtal1985/1986 ger inga individuella avgångar. Noll inlagda rörelser betyder en datalucka.",
+      "review_pass": 2
+    },
+    {
+      "id": "va",
+      "name": "Vatikanstaten",
+      "catalog_country_id": "va",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. Tidsatta flyg-/helikopterjournaler för observationsfönstret saknas. Daterade tal och vistelselistor ger inga start- eller landningstider; inga pendelflyg antas.",
+      "review_pass": 2
+    },
+    {
+      "id": "mt",
+      "name": "Malta",
+      "catalog_country_id": "mt",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. Air Maltas fullständiga vinterinlaga27okt1985–29mars1986, teckenförklaring och ändringar behöver läsas. Index och andra säsongers tabeller används inte som avgångstider. Luqa, eventuell helikoptertrafik, utländska operatörer, charter, frakt och stats-/militärflyg kräver daterade underlag.",
+      "review_pass": 2
+    },
+    {
+      "id": "pl",
+      "name": "Polen",
+      "catalog_country_id": "pl",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. LOT:s egna direktflygssidor4–7, transfernoter11, inrikestrafik och ändringar saknas fortfarande. Den äldre annonslänken gav åter404. Fler polska flygplatser och operatörer, frakt, charter och faktisk drift återstår. PA67:s lördagsrad innebär inte full Polentäckning.",
+      "review_pass": 2
+    },
+    {
+      "id": "cz",
+      "name": "Tjeckoslovakien",
+      "catalog_country_id": "cz",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. ČSA:s kompletta vintertabell, inrikesinlaga och ändringsblad saknas fortfarande. Pan Ams nya Pragtrafik annonseras först från27april1986. Slov-Air, fler flygplatser, charter, frakt, helikopter-, stats- och militärflyg kräver daterade tider.",
+      "review_pass": 2
+    },
+    {
+      "id": "hu",
+      "name": "Ungern",
+      "catalog_country_id": "hu",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. Malévs egna vinteravgångssidor saknas; den nyfunna annonsen visar åter bara omslag och uniformreklam. Pan Ams genomgående resor har fler trafikdagar än vissa direkta lokala rader. München–Budapest:s TuWe och Budapest–München:s WeTh utvidgas inte; saknade dagsspecifika delsträcketider behöver eget belägg. Övrig trafik och faktisk drift återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "ro",
+      "name": "Rumänien",
+      "catalog_country_id": "ro",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se BALKANS_FOLLOWUP_BATCH55.md. TAROM:s kompletta vinterinlaga 27 oktober 1985–29 mars 1986, inrikestrafik och ändringar saknas fortfarande. Indexets avvikande årtal för oktoberposten är inte en läst datering. Pan Ams Bukarest–München-rad visar MoTh och motsatt riktning WeSu med ett stopp. Inga nya fredags-/lördagsrader importeras. Övriga operatörer, charter, frakt och faktisk drift återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "bg",
+      "name": "Bulgarien",
+      "catalog_country_id": "bg",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se BALKANS_FOLLOWUP_BATCH55.md. Balkan Bulgarian Airlines vinteromslag är identifierat, men läsbara tidsrader för vintern 1985/86 saknas fortfarande. Nytt samlarspår ger inte i sig avgångstider. Fler flygplatser, inrikestrafik, utländska operatörer, charter, frakt och faktisk drift kräver daterade underlag.",
+      "review_pass": 2
+    },
+    {
+      "id": "yu",
+      "name": "Jugoslavien",
+      "catalog_country_id": "yu",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se BALKANS_FOLLOWUP_BATCH55.md. JAT:s vinteromslag är identifierat, men fullständiga avgångssidor, inrikesinlaga och ändringsblad saknas. Matchande vinterinlaga för Inex-Adria saknas också. Pan Am ger två tidsatta nonstoprader till/från Zagreb. Belgrads genomgående resor har ett stopp, men saknar här lästa mellanankomster för full uppdelning. Aviogenex, charter, frakt och faktisk drift återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "al",
+      "name": "Albanien",
+      "catalog_country_id": "al",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se GREECE_ALBANIA_FOLLOWUP_BATCH56.md. Fullständiga tider till/från Tirana–Rinas för vintern 1985/86 saknas fortfarande. Olympic- och Interflug-spåren gav inga nya importklara rader. Noll rörelser betyder källucka, inte frånvaro av trafik.",
+      "review_pass": 2
+    },
+    {
+      "id": "gr",
+      "name": "Grekland",
+      "catalog_country_id": "gr",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Se GREECE_ALBANIA_FOLLOWUP_BATCH56.md. Olympics fullständiga internationella och grekiska vinterinlagor saknas. TWA:s januariutgåva identifierad men inga Aten-innersidor verifierade. Inrikesnät, Thessaloniki, öflygplatser och fler operatörer samt charter, frakt och faktisk drift återstår.",
+      "review_pass": 2
+    },
+    {
+      "id": "cy",
+      "name": "Cypern",
+      "catalog_country_id": "cy",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-28",
+      "next_action": "En ny planerad CDG–Larnaca-rörelse, AF164 lördag kväll med nästa-dagsankomst. Cypern, Larnaca och Cyprus Airways registreras; inga CY-kodade avgångar animeras. Sex CY-tidtabellsrader sparas som forskning. Se CYPRUS_COUNTRY_REVIEW_BATCH43.md. Cyprus Airways förhandsutgåva har läsbara tider men saknar en uttrycklig tidsbasförklaring och hela högersidans anmärkningar. Sex vänsterrader sparas för fortsatt granskning, inte som animation. Standardutgåva nr 112 och ändringar återstår. London saknar flygplatsangivelse i fotot. Paris via Zürich och London via Paphos får inte importeras som nonstop. Kölns fotnot b tillåter november 1985 och mars 1986; fredagen 28 februari får inte användas. Münchens fotnot a gäller 1 november–3 januari samt mars; ingen fredag i observationsfönstret kvalificerar. KTHY/Cyprus Turkish Airlines kräver en egen tillämplig vinterkälla. Paphos, Ercan, Nicosia, militära baser, charter-, frakt-, privat-, stats- och helikoptertrafik är inte inventerade. En Larnaca-rörelse ger ingen full täckning av ön. Retur från Larnaca i Air France-tabellen har inte verifierats i det granskade underlaget. AF140:s fredagsrad CDG–LCA upphör 27 december 1985; AF148 måndag/torsdag och AF162 tisdag överlappar inte fönstret. Ingen returtid eller mellanlandningstid gissas."
+    },
+    {
+      "id": "tr",
+      "name": "Turkiet",
+      "catalog_country_id": "tr",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Åtta nya planerade Istanbul–Paris-rörelser: fyra AF mellan Atatürk och CDG, fyra TK mellan Atatürk och Orly. Turkish Airlines registreras och får sina första animerade avgångar. Alla befintliga flygplatsmarkörer är oförändrade. Se TURKEY_COUNTRY_REVIEW_BATCH44.md. THY:s fullständiga vinterutgåva 1985/86 och ändringar saknas i det granskade urvalet. Inga avgångar hämtas från sommar 1985, sommar 1986 eller vinter 1986/87. Inrikestrafik, Ankara–Esenboğa, Izmir, Antalya och andra orter samt fler utländska linjer återstår. Istanbul–Paris täcker bara en liten del av Turkiets trafik. Charter-, frakt-, helikopter-, stats-, privat- och militäraktörer kräver daterade källor. THY är ingen komplett operatörsinventering. Faktiskt genomförande och verkliga överflygningar är inte fastställda. Ankaras anslutningar via Istanbul saknar mellanliggande ankomsttid i de granskade raderna. De får inte bli Ankara–Paris nonstop eller en uppskattad inrikessträcka."
+    },
+    {
+      "id": "su",
+      "name": "Sovjetunionen",
+      "catalog_country_id": "su",
+      "review_status": "reviewed_with_gaps",
+      "coverage_complete": false,
+      "reviewed_on": "2026-09-29",
+      "next_action": "Tolv nya planerade rörelser: Paris–Moskva, Moskva–Narita, Paris–Borispol och Paris–Pulkovo. Totalt 53 rörelser med sovjetiska ändpunkter. Borispol tillkommer som fysisk markör; alla äldre rörelser och markörer är oförändrade. Se SOVIET_UNION_COUNTRY_REVIEW_BATCH45.md. Aeroflots fullständiga internationella och inrikes vintertabeller 1985/86, ändringar och driftbelägg återstår. Arkivindex och ett fåtal fotograferade uppslag är inte full täckning. Ytterligare europeiska och asiatiska sovjetiska flygplatser, inrikeslinjer och utländska bolag återstår. Borispol- och Pulkovo-returer har inte verifierats i det aktuella Air France-urvalet och skapas inte. Aeroflot-arkivets metadata anger 28 oktober–28 mars medan det fotograferade vinteromslaget anger 27 oktober–29 mars. Källposterna hålls separata; importerade rader följer den granskade utgåvan. Aeroflots egen tabell använder Moskvatid inom Sovjetunionen. Air France använder lokala tider; Moskva, Leningrad och Kiev ligger alla på UTC+3 under observationsdatumen. Andra sovjetiska orter kräver separat tidszonskontroll. Charter-, frakt-, stats-, privat-, helikopter- och militärtrafik samt faktisk operatör för samarbetskoder är ofullständigt utredda. Inga verkliga nordiska överflygningar har belagts."
+    }
+  ],
+  "first_pass_completed_on": "2026-09-29",
+  "review_pass": 2,
+  "followup_priority_reason": "Omgång 75 kompletterar COMAIR och tillför 33 rörelser. Nästa prioritet: fler COMAIR-sträckor från Cincinnati/Chicago och Deltas Dallas/Fort Worth. Europakön behåller Cypern.",
+  "active_priority_override": {
+    "request": "fortsätt med där du tror du kan hitta många nya flygrutter",
+    "scope": "worldwide",
+    "current": "CLE/DAY links to DTW/MKE/FWA reviewed. Next more COMAIR Cincinnati destinations, Indianapolis and Columbus, then Delta Dallas/Fort Worth.",
+    "europe_resume_country": "cy"
+  }
+}

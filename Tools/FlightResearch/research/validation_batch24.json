@@ -1,0 +1,659 @@
+{
+  "checked_on": "2026-09-28",
+  "package": "v25",
+  "new_movements": 90,
+  "unchanged_previous_movements": 1559,
+  "total_movements": 1649,
+  "new_reviewed_schedules": 62,
+  "new_candidate_schedules": 0,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_file_count": 22,
+  "nordic_endpoint_movements": 155,
+  "nordic_movements_added": 6,
+  "actual_overflights_added": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_physical_duplicate_count": 0,
+  "new_movements_by_airline": {
+    "air-france": 3,
+    "air-uk": 84,
+    "sas": 3
+  },
+  "schedule_duration_sanity_checks": [
+    {
+      "schedule": "sas-575-CPH-NCE-1210",
+      "elapsed_minutes": 140,
+      "great_circle_km": 1385,
+      "block_average_kmh": 594
+    },
+    {
+      "schedule": "air-france-576-NCE-CPH-1600",
+      "elapsed_minutes": 140,
+      "great_circle_km": 1385,
+      "block_average_kmh": 594
+    },
+    {
+      "schedule": "air-france-1790-LYS-CPH-1510",
+      "elapsed_minutes": 125,
+      "great_circle_km": 1221,
+      "block_average_kmh": 586
+    },
+    {
+      "schedule": "sas-1791-CPH-LYS-1820",
+      "elapsed_minutes": 125,
+      "great_circle_km": 1221,
+      "block_average_kmh": 586
+    },
+    {
+      "schedule": "air-uk-161-AMS-STN-0940",
+      "elapsed_minutes": 65,
+      "great_circle_km": 313,
+      "block_average_kmh": 289
+    },
+    {
+      "schedule": "air-uk-167-AMS-STN-1345",
+      "elapsed_minutes": 85,
+      "great_circle_km": 313,
+      "block_average_kmh": 221
+    },
+    {
+      "schedule": "air-uk-163-AMS-STN-1720",
+      "elapsed_minutes": 80,
+      "great_circle_km": 313,
+      "block_average_kmh": 235
+    },
+    {
+      "schedule": "air-uk-165-AMS-STN-2040",
+      "elapsed_minutes": 65,
+      "great_circle_km": 313,
+      "block_average_kmh": 289
+    },
+    {
+      "schedule": "air-uk-160-STN-AMS-0700",
+      "elapsed_minutes": 65,
+      "great_circle_km": 313,
+      "block_average_kmh": 289
+    },
+    {
+      "schedule": "air-uk-162-STN-AMS-1030",
+      "elapsed_minutes": 80,
+      "great_circle_km": 313,
+      "block_average_kmh": 235
+    },
+    {
+      "schedule": "air-uk-168-STN-AMS-1435",
+      "elapsed_minutes": 80,
+      "great_circle_km": 313,
+      "block_average_kmh": 235
+    },
+    {
+      "schedule": "air-uk-164-STN-AMS-1755",
+      "elapsed_minutes": 65,
+      "great_circle_km": 313,
+      "block_average_kmh": 289
+    },
+    {
+      "schedule": "air-uk-651-BRU-STN-0940",
+      "elapsed_minutes": 75,
+      "great_circle_km": 314,
+      "block_average_kmh": 252
+    },
+    {
+      "schedule": "air-uk-653-BRU-STN-2045",
+      "elapsed_minutes": 75,
+      "great_circle_km": 314,
+      "block_average_kmh": 252
+    },
+    {
+      "schedule": "air-uk-650-STN-BRU-0700",
+      "elapsed_minutes": 75,
+      "great_circle_km": 314,
+      "block_average_kmh": 252
+    },
+    {
+      "schedule": "air-uk-652-STN-BRU-1800",
+      "elapsed_minutes": 75,
+      "great_circle_km": 314,
+      "block_average_kmh": 252
+    },
+    {
+      "schedule": "air-uk-217-LBA-STN-2035",
+      "elapsed_minutes": 50,
+      "great_circle_km": 254,
+      "block_average_kmh": 305
+    },
+    {
+      "schedule": "air-uk-214-STN-LBA-0700",
+      "elapsed_minutes": 50,
+      "great_circle_km": 254,
+      "block_average_kmh": 305
+    },
+    {
+      "schedule": "air-uk-642-CDG-STN-1005",
+      "elapsed_minutes": 90,
+      "great_circle_km": 359,
+      "block_average_kmh": 240
+    },
+    {
+      "schedule": "air-uk-646-CDG-STN-1700",
+      "elapsed_minutes": 80,
+      "great_circle_km": 359,
+      "block_average_kmh": 270
+    },
+    {
+      "schedule": "air-uk-644-CDG-STN-2035",
+      "elapsed_minutes": 90,
+      "great_circle_km": 359,
+      "block_average_kmh": 240
+    },
+    {
+      "schedule": "air-uk-641-STN-CDG-0710",
+      "elapsed_minutes": 90,
+      "great_circle_km": 359,
+      "block_average_kmh": 240
+    },
+    {
+      "schedule": "air-uk-645-STN-CDG-1010",
+      "elapsed_minutes": 75,
+      "great_circle_km": 359,
+      "block_average_kmh": 288
+    },
+    {
+      "schedule": "air-uk-643-STN-CDG-1740",
+      "elapsed_minutes": 90,
+      "great_circle_km": 359,
+      "block_average_kmh": 240
+    },
+    {
+      "schedule": "air-uk-851-AMS-SOU-1050",
+      "elapsed_minutes": 95,
+      "great_circle_km": 448,
+      "block_average_kmh": 283
+    },
+    {
+      "schedule": "air-uk-859-AMS-SOU-2005",
+      "elapsed_minutes": 95,
+      "great_circle_km": 448,
+      "block_average_kmh": 283
+    },
+    {
+      "schedule": "air-uk-850-SOU-AMS-0750",
+      "elapsed_minutes": 95,
+      "great_circle_km": 448,
+      "block_average_kmh": 283
+    },
+    {
+      "schedule": "air-uk-856-SOU-AMS-1705",
+      "elapsed_minutes": 95,
+      "great_circle_km": 448,
+      "block_average_kmh": 283
+    },
+    {
+      "schedule": "air-uk-372-EXT-GCI-1425",
+      "elapsed_minutes": 40,
+      "great_circle_km": 156,
+      "block_average_kmh": 233
+    },
+    {
+      "schedule": "air-uk-372-GCI-JER-1515",
+      "elapsed_minutes": 15,
+      "great_circle_km": 39,
+      "block_average_kmh": 155
+    },
+    {
+      "schedule": "air-uk-372-JER-SOU-1550",
+      "elapsed_minutes": 45,
+      "great_circle_km": 203,
+      "block_average_kmh": 270
+    },
+    {
+      "schedule": "air-uk-371-SOU-JER-1155",
+      "elapsed_minutes": 45,
+      "great_circle_km": 203,
+      "block_average_kmh": 270
+    },
+    {
+      "schedule": "air-uk-371-JER-GCI-1255",
+      "elapsed_minutes": 15,
+      "great_circle_km": 39,
+      "block_average_kmh": 155
+    },
+    {
+      "schedule": "air-uk-371-GCI-EXT-1320",
+      "elapsed_minutes": 40,
+      "great_circle_km": 156,
+      "block_average_kmh": 233
+    },
+    {
+      "schedule": "air-uk-130-GCI-LHR-0715",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-131-LHR-GCI-0850",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-132-GCI-LHR-1100",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-133-LHR-GCI-1235",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-134-GCI-LHR-1410",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-135-LHR-GCI-1545",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-136-GCI-LHR-1720",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-137-LHR-GCI-1900",
+      "elapsed_minutes": 60,
+      "great_circle_km": 272,
+      "block_average_kmh": 272
+    },
+    {
+      "schedule": "air-uk-180-GCI-SOU-0725",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-181-SOU-GCI-0840",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-182-GCI-SOU-0950",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-183-SOU-GCI-1640",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-184-GCI-SOU-1240",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-185-SOU-GCI-1130",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-188-GCI-SOU-1500",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-189-SOU-GCI-1350",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-186-GCI-SOU-1750",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-187-SOU-GCI-1930",
+      "elapsed_minutes": 40,
+      "great_circle_km": 190,
+      "block_average_kmh": 286
+    },
+    {
+      "schedule": "air-uk-440-JER-SOU-0730",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-441-SOU-JER-0835",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-452-JER-SOU-0945",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-453-SOU-JER-1630",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-450-JER-SOU-1210",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-443-SOU-JER-1100",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-444-JER-SOU-1440",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-451-SOU-JER-1330",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-446-JER-SOU-1740",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    },
+    {
+      "schedule": "air-uk-447-SOU-JER-1850",
+      "elapsed_minutes": 40,
+      "great_circle_km": 203,
+      "block_average_kmh": 304
+    }
+  ],
+  "reviewed_ground_connections": [
+    {
+      "journey": "air-uk/air-uk-214@1986-02-28",
+      "stop": "LBA",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-371@1986-02-28",
+      "stop": "JER",
+      "ground_minutes": 15.0
+    },
+    {
+      "journey": "air-uk/air-uk-371@1986-02-28",
+      "stop": "GCI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-372@1986-02-28",
+      "stop": "GCI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-372@1986-02-28",
+      "stop": "JER",
+      "ground_minutes": 20.0
+    },
+    {
+      "journey": "air-uk/air-uk-217@1986-02-28",
+      "stop": "LBA",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-371@1986-03-01",
+      "stop": "JER",
+      "ground_minutes": 15.0
+    },
+    {
+      "journey": "air-uk/air-uk-371@1986-03-01",
+      "stop": "GCI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-372@1986-03-01",
+      "stop": "GCI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-372@1986-03-01",
+      "stop": "JER",
+      "ground_minutes": 20.0
+    }
+  ],
+  "intentional_journey_gaps": [
+    "AFSK1790: MRS–LYS before LYS–CPH",
+    "SKAF1791: LYS–MRS after CPH–LYS"
+  ],
+  "unimported_continuations": [
+    "AFSK1790 MRS–LYS",
+    "SKAF1791 LYS–MRS"
+  ],
+  "calendar_footnote_checks": [
+    {
+      "flight": "UK180",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "flight": "UK181",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "flight": "UK446",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "flight": "UK447",
+      "expected_dates": [
+        "1986-02-28"
+      ],
+      "actual_dates": [
+        "1986-02-28"
+      ]
+    },
+    {
+      "flight": "UK188",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK189",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK450",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK443",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK130",
+      "expected_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK131",
+      "expected_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK440",
+      "expected_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK441",
+      "expected_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-02-28",
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK184",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    },
+    {
+      "flight": "UK185",
+      "expected_dates": [
+        "1986-03-01"
+      ],
+      "actual_dates": [
+        "1986-03-01"
+      ]
+    }
+  ],
+  "candidate_schedules_total": 10,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d5d9eb",
+        "wall_time_seconds": 2.056188575,
+        "exit_code": 0,
+        "original_token_count": 551,
+        "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 2.097s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "217dbc",
+        "wall_time_seconds": 0.085734657,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 81, \"registered_countries\": 71, \"reviewed_schedules\": 1105, \"animated_airlines\": 37, \"scheduled_movements\": 1648, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "1e88e9",
+        "wall_time_seconds": 0.010239545,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "a09b28",
+        "wall_time_seconds": 2.643e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

@@ -288,7 +288,7 @@ public:
             }
         }
         if (Flights) PaintTMOPFlights(*Flights, G, Out, Layer + 16, Rotation, Center, Radius);
-        return Layer + 18;
+        return Layer + 20; // Includes the selected aircraft's outline and filled silhouette.
     }
     virtual FReply OnMouseButtonDown(const FGeometry& G, const FPointerEvent& E) override
     {
@@ -598,8 +598,9 @@ class STMOPWorldAtlas final : public SCompoundWidget
 {
 public:
     SLATE_BEGIN_ARGS(STMOPWorldAtlas) {} SLATE_END_ARGS()
-    void Construct(const FArguments&, UStaticMesh* Mesh, UMaterialInterface* Material, FRotator Alignment, bool bCoasts)
+    void Construct(const FArguments&, UStaticMesh* Mesh, UMaterialInterface* Material, FRotator Alignment, bool bCoasts, bool bFlightPage)
     {
+        bFlightOnly = bFlightPage;
         Data = MakeShared<FTMOPWorldAtlasData>();
         if (!Data->Load())
         {
@@ -640,7 +641,7 @@ public:
         Tab(TEXT("group"), NSLOCTEXT("TMOP", "AtlasGroups", "Grupper och aktörer"));
         Tab(TEXT("conflict"), NSLOCTEXT("TMOP", "AtlasConflicts", "Konflikter"));
         Tab(TEXT("flow"), NSLOCTEXT("TMOP", "AtlasFlows", "Vapen och finansiering"));
-        Tab(TEXT("flight"), NSLOCTEXT("TMOP", "FlightTraffic", "Flygtrafik ±24 h"));
+        Tabs->SetVisibility(bFlightOnly ? EVisibility::Collapsed : EVisibility::Visible);
         TSharedRef<SWrapBox> Layers = SNew(SWrapBox).UseAllottedSize(true);
         auto Check = [&](const FText& Label, bool* Flag)
         {
@@ -720,7 +721,12 @@ public:
                 .Visibility_Lambda([this] { return Mode == TEXT("flight") ? EVisibility::Collapsed : EVisibility::Visible; })
                 .Text(FTMOPLocalization::Bind([]
                 { return NSLOCTEXT("TMOP", "AtlasLegend", "Kryssad romb: konflikt • röd: pågående period • orange: avslutad • lila: börjar senare. Dubbelpil: motsättning • blå enkelpil: stöd • röd enkelpil: våld mot civila. Gult: vapen • streckat grönt: pengar. Punkter och pilar är schematiska, inte fronter eller färdvägar. Pågående period betyder inte strid varje dag. Historisk kontext belägger inte delaktighet i mordet."); }))]]];
-        RebuildList(); Select(TEXT("il"));
+        if (bFlightOnly)
+        {
+            Mode = TEXT("flight"); Flights->bEnabled = true;
+            RebuildList(); RebuildDetails();
+        }
+        else { RebuildList(); Select(TEXT("il")); }
     }
     virtual void Tick(const FGeometry& G, double Time, float Delta) override
     {
@@ -902,12 +908,13 @@ private:
     TSharedPtr<SBox> DetailHost, ListHost;
     TSharedPtr<SSearchBox> SearchBox;
     FString Mode = TEXT("country"), Search;
+    bool bFlightOnly = false;
     uint32 Revision = 0;
 };
 }
 
 TSharedRef<SWidget> MakeTMOPWorldAtlas(UStaticMesh* Mesh, UMaterialInterface* Material,
-    const FRotator& MeshAlignment, bool bCoastlineOverlay)
+    const FRotator& MeshAlignment, bool bCoastlineOverlay, bool bFlightPage)
 {
-    return SNew(STMOPWorldAtlas, Mesh, Material, MeshAlignment, bCoastlineOverlay);
+    return SNew(STMOPWorldAtlas, Mesh, Material, MeshAlignment, bCoastlineOverlay, bFlightPage);
 }

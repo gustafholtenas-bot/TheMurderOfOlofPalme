@@ -1,0 +1,119 @@
+{
+  "package": "v39",
+  "checked_on": "2026-09-28",
+  "method": "Contemporary timetable names identify the airfield; OurAirports provides approximate modern site coordinates only.",
+  "airports": [
+    {
+      "id": "BLQ",
+      "name": "Bologna–Borgo Panigale",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 44.5354,
+      "lon": 11.2887,
+      "coordinate_source": "https://ourairports.com/airports/LIPE/",
+      "coordinate_record_id": "LIPE",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LIPE/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 19, 62 explicitly identifies this historical airfield. Modern OurAirports coordinates are an approximate airport marker, not a reconstructed 1986 gate/runway position."
+    },
+    {
+      "id": "GOA",
+      "name": "Genova–Cristoforo Colombo",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 44.412039,
+      "lon": 8.840732,
+      "coordinate_source": "https://ourairports.com/airports/LIMJ/",
+      "coordinate_record_id": "LIMJ",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LIMJ/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 34–35, 67 explicitly identifies this historical airfield. Modern OurAirports coordinates are an approximate airport marker, not a reconstructed 1986 gate/runway position."
+    },
+    {
+      "id": "LIN",
+      "name": "Milano–Forlanini/Linate",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 45.445099,
+      "lon": 9.27674,
+      "coordinate_source": "https://ourairports.com/airports/LIML/",
+      "coordinate_record_id": "LIML",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LIML/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 44, 48, 51, 71, 88, 91 explicitly identifies this historical airfield. Modern OurAirports coordinates are an approximate airport marker, not a reconstructed 1986 gate/runway position. Forlanini/Linate is explicitly named; Malpensa is not substituted."
+    },
+    {
+      "id": "NAP",
+      "name": "Napoli–Capodichino",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 40.886002,
+      "lon": 14.2908,
+      "coordinate_source": "https://ourairports.com/airports/LIRN/",
+      "coordinate_record_id": "LIRN",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LIRN/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 34, 55, 72 explicitly identifies this historical airfield. Modern OurAirports coordinates are an approximate airport marker, not a reconstructed 1986 gate/runway position."
+    },
+    {
+      "id": "PSA",
+      "name": "Pisa–Galileo Galilei",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 43.683899,
+      "lon": 10.3927,
+      "coordinate_source": "https://ourairports.com/airports/LIRP/",
+      "coordinate_record_id": "LIRP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LIRP/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 73, 78 explicitly identifies this historical airfield. Modern OurAirports coordinates are an approximate airport marker, not a reconstructed 1986 gate/runway position. Pise/Florence means Pisa airport plus a train connection to Florence; no flight to Florence is inferred."
+    },
+    {
+      "id": "TRN",
+      "name": "Torino–Caselle",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 45.200802,
+      "lon": 7.64963,
+      "coordinate_source": "https://ourairports.com/airports/LIMF/",
+      "coordinate_record_id": "LIMF",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LIMF/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 77, 93 explicitly identifies this historical airfield. Modern OurAirports coordinates are an approximate airport marker, not a reconstructed 1986 gate/runway position."
+    },
+    {
+      "id": "VCE",
+      "name": "Venezia–Marco Polo/Tessera",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 45.505299,
+      "lon": 12.3519,
+      "coordinate_source": "https://ourairports.com/airports/LIPZ/",
+      "coordinate_record_id": "LIPZ",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LIPZ/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 77, 93 explicitly identifies this historical airfield. Modern OurAirports coordinates are an approximate airport marker, not a reconstructed 1986 gate/runway position."
+    }
+  ]
+}

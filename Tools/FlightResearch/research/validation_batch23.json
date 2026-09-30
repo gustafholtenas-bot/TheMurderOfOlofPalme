@@ -1,0 +1,461 @@
+{
+  "checked_on": "2026-09-28",
+  "package": "v24",
+  "new_movements": 92,
+  "unchanged_previous_movements": 1467,
+  "total_movements": 1559,
+  "new_reviewed_schedules": 54,
+  "new_candidate_schedules": 0,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_file_count": 22,
+  "nordic_endpoint_movements": 149,
+  "nordic_movements_added": 92,
+  "actual_overflights_added": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_physical_duplicate_count": 0,
+  "new_movements_by_airline": {
+    "air-france": 22,
+    "sas": 70
+  },
+  "schedule_duration_sanity_checks": [
+    {
+      "schedule": "sas-400-CPH-ARN-0740",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-402-CPH-ARN-0915",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-404-CPH-ARN-0920",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-730-CPH-ARN-1120",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-406-CPH-ARN-1120",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-412-CPH-ARN-1125",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-674-CPH-ARN-1415",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-684-CPH-ARN-1505",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-414-CPH-ARN-1510",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-682-CPH-ARN-1615",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-596-CPH-ARN-1800",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-418-CPH-ARN-1800",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-424-CPH-ARN-1805",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-426-CPH-ARN-1905",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-582-CPH-ARN-2010",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-422-CPH-ARN-2015",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-420-CPH-ARN-2210",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-673-ARN-CPH-0730",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-401-ARN-CPH-0750",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-593-ARN-CPH-0800",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-403-ARN-CPH-0935",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-581-ARN-CPH-0945",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-405-ARN-CPH-1015",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-409-ARN-CPH-1240",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-407-ARN-CPH-1245",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-411-ARN-CPH-1315",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-413-ARN-CPH-1425",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-415-ARN-CPH-1555",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-419-ARN-CPH-1650",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-417-ARN-CPH-1805",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-731-ARN-CPH-1850",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-423-ARN-CPH-1950",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-425-ARN-CPH-1955",
+      "elapsed_minutes": 70,
+      "great_circle_km": 547,
+      "block_average_kmh": 469
+    },
+    {
+      "schedule": "sas-563-CPH-CDG-0940",
+      "elapsed_minutes": 110,
+      "great_circle_km": 1004,
+      "block_average_kmh": 548
+    },
+    {
+      "schedule": "air-france-793-CPH-CDG-1140",
+      "elapsed_minutes": 110,
+      "great_circle_km": 1004,
+      "block_average_kmh": 548
+    },
+    {
+      "schedule": "sas-567-CPH-CDG-1620",
+      "elapsed_minutes": 110,
+      "great_circle_km": 1004,
+      "block_average_kmh": 548
+    },
+    {
+      "schedule": "air-france-799-CPH-CDG-2000",
+      "elapsed_minutes": 105,
+      "great_circle_km": 1004,
+      "block_average_kmh": 574
+    },
+    {
+      "schedule": "air-france-792-CDG-CPH-0855",
+      "elapsed_minutes": 115,
+      "great_circle_km": 1004,
+      "block_average_kmh": 524
+    },
+    {
+      "schedule": "sas-564-CDG-CPH-1220",
+      "elapsed_minutes": 105,
+      "great_circle_km": 1004,
+      "block_average_kmh": 574
+    },
+    {
+      "schedule": "air-france-798-CDG-CPH-1715",
+      "elapsed_minutes": 110,
+      "great_circle_km": 1004,
+      "block_average_kmh": 548
+    },
+    {
+      "schedule": "sas-568-CDG-CPH-1935",
+      "elapsed_minutes": 105,
+      "great_circle_km": 1004,
+      "block_average_kmh": 574
+    },
+    {
+      "schedule": "air-france-790-CDG-ARN-1040",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1539,
+      "block_average_kmh": 637
+    },
+    {
+      "schedule": "sas-572-CDG-ARN-1245",
+      "elapsed_minutes": 140,
+      "great_circle_km": 1539,
+      "block_average_kmh": 660
+    },
+    {
+      "schedule": "sas-574-CDG-ARN-1920",
+      "elapsed_minutes": 140,
+      "great_circle_km": 1539,
+      "block_average_kmh": 660
+    },
+    {
+      "schedule": "sas-571-ARN-CDG-0910",
+      "elapsed_minutes": 155,
+      "great_circle_km": 1539,
+      "block_average_kmh": 596
+    },
+    {
+      "schedule": "sas-573-ARN-CDG-1605",
+      "elapsed_minutes": 155,
+      "great_circle_km": 1539,
+      "block_average_kmh": 596
+    },
+    {
+      "schedule": "air-france-791-ARN-CDG-1705",
+      "elapsed_minutes": 145,
+      "great_circle_km": 1539,
+      "block_average_kmh": 637
+    },
+    {
+      "schedule": "air-france-790-ARN-HEL-1345",
+      "elapsed_minutes": 55,
+      "great_circle_km": 398,
+      "block_average_kmh": 434
+    },
+    {
+      "schedule": "air-france-791-HEL-ARN-1625",
+      "elapsed_minutes": 55,
+      "great_circle_km": 398,
+      "block_average_kmh": 434
+    },
+    {
+      "schedule": "air-france-796-CDG-FBU-1030",
+      "elapsed_minutes": 130,
+      "great_circle_km": 1316,
+      "block_average_kmh": 607
+    },
+    {
+      "schedule": "air-france-796-FBU-GOT-1325",
+      "elapsed_minutes": 45,
+      "great_circle_km": 266,
+      "block_average_kmh": 355
+    },
+    {
+      "schedule": "air-france-796-GOT-CDG-1445",
+      "elapsed_minutes": 120,
+      "great_circle_km": 1156,
+      "block_average_kmh": 578
+    },
+    {
+      "schedule": "sas-570-CDG-GOT-1905",
+      "elapsed_minutes": 115,
+      "great_circle_km": 1156,
+      "block_average_kmh": 603
+    },
+    {
+      "schedule": "sas-569-FBU-CDG-1610",
+      "elapsed_minutes": 130,
+      "great_circle_km": 1316,
+      "block_average_kmh": 607
+    }
+  ],
+  "reviewed_ground_connections": [
+    {
+      "journey": "air-france/air-france-796@1986-02-28",
+      "stop": "FBU",
+      "ground_minutes": 45.0
+    },
+    {
+      "journey": "air-france/air-france-796@1986-02-28",
+      "stop": "GOT",
+      "ground_minutes": 35.0
+    },
+    {
+      "journey": "air-france/air-france-790@1986-02-28",
+      "stop": "ARN",
+      "ground_minutes": 40.0
+    },
+    {
+      "journey": "air-france/air-france-791@1986-02-28",
+      "stop": "ARN",
+      "ground_minutes": 45.0
+    },
+    {
+      "journey": "air-france/air-france-796@1986-03-01",
+      "stop": "FBU",
+      "ground_minutes": 45.0
+    },
+    {
+      "journey": "air-france/air-france-796@1986-03-01",
+      "stop": "GOT",
+      "ground_minutes": 35.0
+    },
+    {
+      "journey": "air-france/air-france-790@1986-03-01",
+      "stop": "ARN",
+      "ground_minutes": 40.0
+    },
+    {
+      "journey": "air-france/air-france-791@1986-03-01",
+      "stop": "ARN",
+      "ground_minutes": 45.0
+    }
+  ],
+  "intentional_journey_gaps": [],
+  "unimported_continuations": [
+    "SK563 GOT–CPH",
+    "SK570 GOT–FBU"
+  ],
+  "candidate_schedules_total": 10,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "420f22",
+        "wall_time_seconds": 1.947934107,
+        "exit_code": 0,
+        "original_token_count": 551,
+        "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 1.967s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "10d66b",
+        "wall_time_seconds": 0.1659987,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 81, \"registered_countries\": 70, \"reviewed_schedules\": 1043, \"animated_airlines\": 37, \"scheduled_movements\": 1558, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "baaa9b",
+        "wall_time_seconds": 2.3416e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "9c48b8",
+        "wall_time_seconds": 2.9885e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

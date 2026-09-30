@@ -1,0 +1,24 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	comair-1530-ORD-MKE-1115-b73		new_schedule	comair	1530	ORD	MKE	11:15	11:50	0	X67	12345	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+2	comair-1537-ORD-MKE-1435-b73		new_schedule	comair	1537	ORD	MKE	14:35	15:10	0	X67	12345	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+3	comair-1538-ORD-MKE-1805-b73		new_schedule	comair	1538	ORD	MKE	18:05	18:40	0	X6	123457	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+4	comair-1539-ORD-MKE-2135-b73		new_schedule	comair	1539	ORD	MKE	21:35	22:10	0	X6	123457	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+5	comair-1531-MKE-ORD-0600-b73		new_schedule	comair	1531	MKE	ORD	06:00	06:35	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+6	comair-1536-MKE-ORD-1300-b73		new_schedule	comair	1536	MKE	ORD	13:00	13:35	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+7	comair-1537-MKE-ORD-1555-b73		new_schedule	comair	1537	MKE	ORD	15:55	16:30	0	X6	123457	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+8	comair-1538-MKE-ORD-1855-b73		new_schedule	comair	1538	MKE	ORD	18:55	19:30	0	X6	123457	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+9	comair-1610-CVG-STL-0935-b73		new_schedule	comair	1610	CVG	STL	09:35	10:10	0	X67	12345	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+10	comair-1612-CVG-STL-1515-b73		new_schedule	comair	1612	CVG	STL	15:15	15:40	0	X6	123457	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+11	comair-1658-CVG-STL-1823-b73		new_schedule	comair	1658	CVG	STL	18:23	18:55	0	X6	123457	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+12	comair-1592-STL-CVG-0625-b73		new_schedule	comair	1592	STL	CVG	06:25	08:55	0	X7	123456	0	206		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+13	comair-1616-STL-CVG-1200-b73		new_schedule	comair	1616	STL	CVG	12:00	14:35	0	X67	12345	0	206		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+14	comair-1634-STL-CVG-1600-b73		new_schedule	comair	1634	STL	CVG	16:00	18:30	0	X6	123457	0	206		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+15	comair-1704-CVG-YYZ-0808-b73		new_schedule	comair	1704	CVG	YYZ	08:08	09:50	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+16	comair-1700-CVG-YYZ-1519-b73		new_schedule	comair	1700	CVG	YYZ	15:19	16:59	0	X6	123457	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+17	comair-1702-CVG-YYZ-1935-b73		new_schedule	comair	1702	CVG	YYZ	19:35	21:20	0	X6	123457	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+18	comair-1703-YYZ-CVG-0700-b73		new_schedule	comair	1703	YYZ	CVG	07:00	08:50	0	X7	123456	0	236		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+19	comair-1705-YYZ-CVG-1015-b73		new_schedule	comair	1705	YYZ	CVG	10:15	12:05	0	X67	12345	0	236		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+20	comair-1701-YYZ-CVG-1725-b73		new_schedule	comair	1701	YYZ	CVG	17:25	19:10	0	X6	123457	0	236		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+21	comair-1579-MKE-FWA-1130-b73		new_schedule	comair	1579	MKE	FWA	11:30	13:30	0	6	6	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+22			excluded_connection	mixed_delta_comair_connection	1574/336	MKE	FWA	17:34	22:28	0	X6	123457	IND	154		delta-19860201	1986-02-01				Printed connection via IND; component legs are not inferred.
+23	comair-1587-FWA-DTW-2059-b73		new_schedule	comair	1587	FWA	DTW	20:59	21:50	0	X6	123457	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01	

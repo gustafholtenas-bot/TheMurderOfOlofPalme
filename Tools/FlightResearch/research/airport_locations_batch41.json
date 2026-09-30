@@ -1,0 +1,39 @@
+{
+  "package": "v42",
+  "checked_on": "2026-09-28",
+  "method": "Contemporary timetable identifies Otopeni and Vrajdebna. OurAirports supplies approximate modern site coordinates only. Existing Orly object is unchanged.",
+  "airports": [
+    {
+      "id": "OTP",
+      "name": "Bukarest–Otopeni",
+      "country": "ro",
+      "timezone": "Europe/Bucharest",
+      "lat": 44.571792,
+      "lon": 26.103285,
+      "coordinate_source": "https://ourairports.com/airports/LROP/",
+      "coordinate_record_id": "LROP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LROP/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 21 and 63 explicitly identifies OTOPENI 19KM. Modern OurAirports coordinates are an approximate marker for that airfield, not a reconstructed 1986 terminal, gate, runway or aircraft position."
+    },
+    {
+      "id": "SOF",
+      "name": "Sofia–Vrazhdebna",
+      "country": "bg",
+      "timezone": "Europe/Sofia",
+      "lat": 42.696357,
+      "lon": 23.417671,
+      "coordinate_source": "https://ourairports.com/airports/LBSF/",
+      "coordinate_record_id": "LBSF",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LBSF/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 76 and 87 explicitly identifies VRAJDEBNA 10KM. Modern OurAirports coordinates are an approximate marker for that airfield, not a reconstructed 1986 terminal, gate, runway or aircraft position."
+    }
+  ]
+}

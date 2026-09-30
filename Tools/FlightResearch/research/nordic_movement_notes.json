@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "checked_on": "2026-09-27",
+  "runtime_import": false,
+  "entries": [
+    {
+      "id": "se-fnz-teesside-halmstad-19860228",
+      "registration": "SE-FNZ",
+      "aircraft_type_as_printed": "Be55",
+      "evidence_type": "contemporary_enthusiast_movement_journal",
+      "status": "reported_station_movement_incomplete_leg",
+      "source": "teesside-movements-198602",
+      "source_url": "https://www.dtvmovements.co.uk/Archivesmonths/1986/1986%20-%20Feb.pdf",
+      "source_locator": "Printed page 26 / PDF 6, row under 27 February; departure explicitly marked 28/2",
+      "station": "Tees-side Airport",
+      "arrival_at_station": {
+        "date": "1986-02-27",
+        "clock": "13:56",
+        "reported_origin": "Billund",
+        "timezone": null
+      },
+      "departure_from_station": {
+        "date": "1986-02-28",
+        "clock": "15:02",
+        "reported_destination": "Halmstad",
+        "timezone": null
+      },
+      "origin_departure": null,
+      "destination_arrival": null,
+      "operator": null,
+      "flight_number": null,
+      "cargo": null,
+      "passengers": null,
+      "animate": false,
+      "unknown": [
+        "clock timezone",
+        "Halmstad arrival time and exact airfield confirmation",
+        "Billund departure time",
+        "operating party",
+        "flight plan and actual path"
+      ],
+      "notes": {
+        "sv": "Två stationstider vid Teesside; de är inte start och mål för samma flygning. Notisen har ingen uppgift om koppling till mordet. Avgången den 28 februari ligger på efterfrågad kalenderdag; ankomst till Halmstad återstår att belägga.",
+        "en": "Two station times at Teesside; they are not the start and end of the same flight. The notice provides no link to the assassination. The 28 February departure is on the requested calendar date; arrival at Halmstad remains to be corroborated.",
+        "en_source": "Två stationstider vid Teesside; de är inte start och mål för samma flygning. Notisen har ingen uppgift om koppling till mordet. Avgången den 28 februari ligger på efterfrågad kalenderdag; ankomst till Halmstad återstår att belägga."
+      },
+      "follow_up": {
+        "checked_on": "2026-09-27",
+        "result": "No Halmstad arrival record found; no change to animation status.",
+        "lead_url": "https://forum3.flyghistoria.org/viewtopic.php?t=13226",
+        "lead_status": "blocked_by_bot_challenge_not_read",
+        "note": "An aircraft-history search result is not evidence for an individual arrival. No operator, owner, cargo or arrival time inferred."
+      }
+    }
+  ]
+}

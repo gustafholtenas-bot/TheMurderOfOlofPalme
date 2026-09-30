@@ -1,0 +1,36 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "GOT",
+      "name": "Göteborg–Landvetter",
+      "country": "se",
+      "timezone": "Europe/Stockholm",
+      "lat": 57.6628,
+      "lon": 12.2798,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "ESGG",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Airport explicitly named in the contemporary Air France winter timetable, printed page 35. Approximate airfield coordinates; not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "HEL",
+      "name": "Helsinki–Vantaa",
+      "country": "fi",
+      "timezone": "Europe/Helsinki",
+      "lat": 60.318363,
+      "lon": 24.963341,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EFHK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Airport explicitly named in the contemporary Air France winter timetable, printed page 36. Approximate airfield coordinates; not a reconstructed 1986 gate or aircraft position."
+    }
+  ],
+  "coordinate_dataset_sha256": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec"
+}

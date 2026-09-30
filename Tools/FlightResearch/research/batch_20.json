@@ -1,0 +1,222 @@
+{
+  "batch": 20,
+  "package": "v21",
+  "checked_on": "2026-09-28",
+  "previous_movements": 1280,
+  "new_schedules": 30,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [
+    "british-airways-5610-LHR-ABZ-1130",
+    "british-airways-5618-LHR-ABZ-1745",
+    "british-airways-4572-LHR-BFS-1030",
+    "british-airways-4592-LHR-BFS-1230",
+    "british-airways-4612-LHR-BFS-1430",
+    "british-airways-4652-LHR-BFS-1830",
+    "british-airways-4672-LHR-BFS-2030",
+    "british-airways-4822-LHR-EDI-1810",
+    "british-airways-4832-LHR-EDI-2010",
+    "british-airways-4882-LHR-GLA-1015",
+    "british-airways-4902-LHR-GLA-1215",
+    "british-airways-4922-LHR-GLA-1415",
+    "british-airways-4962-LHR-GLA-1815",
+    "british-airways-4982-LHR-GLA-2015",
+    "british-airways-5132-LHR-JER-1245",
+    "british-airways-5146-LHR-JER-1830",
+    "british-airways-5150-LHR-JER-2010",
+    "british-airways-4442-LHR-MAN-1130",
+    "british-airways-4462-LHR-MAN-1330",
+    "british-airways-4512-LHR-MAN-1830",
+    "british-airways-5456-LHR-NCL-1740",
+    "british-airways-5458-LHR-NCL-2015",
+    "british-airways-921-BRU-MAN-2000",
+    "sabena-617-BRU-MAN-0755",
+    "british-airways-193-LHR-JFK-1030",
+    "british-airways-195-LHR-JFK-1900",
+    "british-airways-189-LHR-IAD-1300",
+    "british-airways-192-JFK-LHR-0930",
+    "british-airways-194-JFK-LHR-1345",
+    "british-airways-188-IAD-LHR-1300"
+  ],
+  "new_airports": [
+    "BFS",
+    "EDI",
+    "JER"
+  ],
+  "new_country_ids": [
+    "je"
+  ],
+  "source_files": [
+    {
+      "source": "british-airways-concorde-winter-1985",
+      "image_id": "1CIAAOSwUoFmIUcI",
+      "panel": "From UK to USA",
+      "url": "https://i.ebayimg.com/images/g/1CIAAOSwUoFmIUcI/s-l1600.webp",
+      "sha256": "dff1ec874c19cbb609c46a47cba24901cc57ffb4289f0c79aa8f181b41f19284",
+      "bytes": 236140,
+      "visually_reviewed": true
+    },
+    {
+      "source": "british-airways-concorde-winter-1985",
+      "image_id": "NioAAOSwOv1mIUcI",
+      "panel": "From USA to UK",
+      "url": "https://i.ebayimg.com/images/g/NioAAOSwOv1mIUcI/s-l1600.webp",
+      "sha256": "96edbb68658621724ec20f54a35eac114c54102543f1764ab68605c481dd9347",
+      "bytes": 262062,
+      "visually_reviewed": true
+    },
+    {
+      "source": "british-airways-19851027-partial",
+      "image_id": "fs8AAOSw-D1nxJlG",
+      "panel": "56–57 / Brussels",
+      "url": "https://i.ebayimg.com/images/g/fs8AAOSw-D1nxJlG/s-l1600.jpg",
+      "sha256": "67a4ab94a74fba35676deb359eaf782f8339d32e83cea127f82cd30d0766966d",
+      "bytes": 428544,
+      "visually_reviewed": true
+    },
+    {
+      "source": "sas-19851115",
+      "image_id": "MncAAOSwEEdnR9jM",
+      "panel": "Sweden 6 cover",
+      "url": "https://i.ebayimg.com/images/g/MncAAOSwEEdnR9jM/s-l1600.webp",
+      "sha256": "7bf8162c7a7136d5ab3738f7d31bd717615174511434a2f8434820b817e5a969",
+      "bytes": 44994,
+      "visually_reviewed": true
+    },
+    {
+      "source": "london-european-19851027-partial",
+      "image_id": "dLAAAeSwgIRp4Yzg",
+      "panel": "cover",
+      "url": "https://i.ebayimg.com/images/g/dLAAAeSwgIRp4Yzg/s-l1600.webp",
+      "sha256": "7250ba4e4adaef840f7764033fa3c25b9411e2fa690020034b3860881a46fda0",
+      "bytes": 243160,
+      "visually_reviewed": true
+    },
+    {
+      "source": "london-european-19851027-partial",
+      "image_id": "fYQAAeSwur5p4Yzg",
+      "panel": "inside / route and coach information",
+      "url": "https://i.ebayimg.com/images/g/fYQAAeSwur5p4Yzg/s-l1600.webp",
+      "sha256": "af3b281f58ba6db55f234ed11044661a8781a382d2f6f320f8b4f00c1d300950",
+      "bytes": 383254,
+      "visually_reviewed": true
+    },
+    {
+      "source": "london-european-19851027-partial",
+      "image_id": "dGAAAeSwrmRp4Yzg",
+      "panel": "outside / cropped flight timetable",
+      "url": "https://i.ebayimg.com/images/g/dGAAAeSwrmRp4Yzg/s-l1600.webp",
+      "sha256": "bac9ca937dd7017022fceece890db36a7229d55c02dd4067b052848a1550f91a",
+      "bytes": 388474,
+      "visually_reviewed": true
+    }
+  ],
+  "coverage_complete": false,
+  "new_movements": 46,
+  "total_movements": 1326,
+  "new_leg_ids": [
+    "british-airways-194-JFK-LHR-1345@1986-02-27",
+    "british-airways-195-LHR-JFK-1900@1986-02-27",
+    "sabena-617-BRU-MAN-0755@1986-02-28",
+    "british-airways-4882-LHR-GLA-1015@1986-02-28",
+    "british-airways-193-LHR-JFK-1030@1986-02-28",
+    "british-airways-4572-LHR-BFS-1030@1986-02-28",
+    "british-airways-4442-LHR-MAN-1130@1986-02-28",
+    "british-airways-5610-LHR-ABZ-1130@1986-02-28",
+    "british-airways-4902-LHR-GLA-1215@1986-02-28",
+    "british-airways-4592-LHR-BFS-1230@1986-02-28",
+    "british-airways-5132-LHR-JER-1245@1986-02-28",
+    "british-airways-4462-LHR-MAN-1330@1986-02-28",
+    "british-airways-4922-LHR-GLA-1415@1986-02-28",
+    "british-airways-192-JFK-LHR-0930@1986-02-28",
+    "british-airways-4612-LHR-BFS-1430@1986-02-28",
+    "british-airways-5456-LHR-NCL-1740@1986-02-28",
+    "british-airways-5618-LHR-ABZ-1745@1986-02-28",
+    "british-airways-188-IAD-LHR-1300@1986-02-28",
+    "british-airways-4822-LHR-EDI-1810@1986-02-28",
+    "british-airways-4962-LHR-GLA-1815@1986-02-28",
+    "british-airways-4512-LHR-MAN-1830@1986-02-28",
+    "british-airways-4652-LHR-BFS-1830@1986-02-28",
+    "british-airways-5146-LHR-JER-1830@1986-02-28",
+    "british-airways-194-JFK-LHR-1345@1986-02-28",
+    "british-airways-195-LHR-JFK-1900@1986-02-28",
+    "british-airways-921-BRU-MAN-2000@1986-02-28",
+    "british-airways-4832-LHR-EDI-2010@1986-02-28",
+    "british-airways-5150-LHR-JER-2010@1986-02-28",
+    "british-airways-4982-LHR-GLA-2015@1986-02-28",
+    "british-airways-5458-LHR-NCL-2015@1986-02-28",
+    "british-airways-4672-LHR-BFS-2030@1986-02-28",
+    "sabena-617-BRU-MAN-0755@1986-03-01",
+    "british-airways-4882-LHR-GLA-1015@1986-03-01",
+    "british-airways-193-LHR-JFK-1030@1986-03-01",
+    "british-airways-4572-LHR-BFS-1030@1986-03-01",
+    "british-airways-189-LHR-IAD-1300@1986-03-01",
+    "british-airways-4462-LHR-MAN-1330@1986-03-01",
+    "british-airways-4922-LHR-GLA-1415@1986-03-01",
+    "british-airways-192-JFK-LHR-0930@1986-03-01",
+    "british-airways-4612-LHR-BFS-1430@1986-03-01",
+    "british-airways-4962-LHR-GLA-1815@1986-03-01",
+    "british-airways-4512-LHR-MAN-1830@1986-03-01",
+    "british-airways-4652-LHR-BFS-1830@1986-03-01",
+    "british-airways-5146-LHR-JER-1830@1986-03-01",
+    "british-airways-194-JFK-LHR-1345@1986-03-01",
+    "british-airways-195-LHR-JFK-1900@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1280,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_nordic_endpoint_movements": 0,
+  "overflight_records_added": 0,
+  "new_endpoint_pairs": [
+    [
+      "BRU",
+      "MAN"
+    ],
+    [
+      "IAD",
+      "LHR"
+    ],
+    [
+      "LHR",
+      "ABZ"
+    ],
+    [
+      "LHR",
+      "BFS"
+    ],
+    [
+      "LHR",
+      "EDI"
+    ],
+    [
+      "LHR",
+      "GLA"
+    ],
+    [
+      "LHR",
+      "JER"
+    ],
+    [
+      "LHR",
+      "MAN"
+    ],
+    [
+      "LHR",
+      "NCL"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 377,
+  "runtime_coverage": {
+    "registered_airlines": 80,
+    "registered_countries": 70,
+    "reviewed_schedules": 875,
+    "animated_airlines": 31,
+    "scheduled_movements": 1325,
+    "confirmed_movements": 1
+  },
+  "airport_identity_references": {
+    "BFS": "https://publications.parliament.uk/pa/cm199798/cmselect/cmenvtra/589/8040211.htm",
+    "EDI": "https://corporate.edinburghairport.com/about-us/edinburgh-airport-history",
+    "JER": "https://www.jerseyairport.com/doing-business-with-us/history/",
+    "LHR_Concorde": "https://hotline.britishairways.com/content/information/about-ba/history-and-heritage/celebrating-concorde"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "batch": 31,
+  "package": "v32",
+  "country": "pt",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i Europakön; inte fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 15,
+  "domestic_movements": 0,
+  "international_movements": 15,
+  "new_movements": 15,
+  "endpoint_movements_by_source_airline": {
+    "air-france": 8,
+    "tap": 7
+  },
+  "endpoint_leg_ids": [
+    "air-france-501-ORY-LIS-0820-d5-b31@1986-02-28",
+    "air-france-500-LIS-ORY-1045-d5-b31@1986-02-28",
+    "tap-416-LIS-LYS-1315-d5-b31@1986-02-28",
+    "tap-415-ORY-OPO-1430-d5-b31@1986-02-28",
+    "tap-402-LIS-ORY-1345-d5-b31@1986-02-28",
+    "tap-419-LYS-LIS-1730-d5-b31@1986-02-28",
+    "tap-405-ORY-LIS-1800-d5-b31@1986-02-28",
+    "air-france-501-ORY-LIS-0820-d6-b31@1986-03-01",
+    "air-france-505-ORY-OPO-0845-d6-b31@1986-03-01",
+    "air-france-500-LIS-ORY-1045-d6-b31@1986-03-01",
+    "air-france-504-OPO-ORY-1055-d6-b31@1986-03-01",
+    "tap-402-LIS-ORY-1345-d6-b31@1986-03-01",
+    "air-france-503-ORY-LIS-1600-d6-b31@1986-03-01",
+    "tap-405-ORY-LIS-1800-d6-b31@1986-03-01",
+    "air-france-502-LIS-ORY-1810-d6-b31@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "air-france-501-ORY-LIS-0820-d5-b31@1986-02-28",
+    "air-france-500-LIS-ORY-1045-d5-b31@1986-02-28",
+    "tap-416-LIS-LYS-1315-d5-b31@1986-02-28",
+    "tap-415-ORY-OPO-1430-d5-b31@1986-02-28",
+    "tap-402-LIS-ORY-1345-d5-b31@1986-02-28",
+    "tap-419-LYS-LIS-1730-d5-b31@1986-02-28",
+    "tap-405-ORY-LIS-1800-d5-b31@1986-02-28",
+    "air-france-501-ORY-LIS-0820-d6-b31@1986-03-01",
+    "air-france-505-ORY-OPO-0845-d6-b31@1986-03-01",
+    "air-france-500-LIS-ORY-1045-d6-b31@1986-03-01",
+    "air-france-504-OPO-ORY-1055-d6-b31@1986-03-01",
+    "tap-402-LIS-ORY-1345-d6-b31@1986-03-01",
+    "air-france-503-ORY-LIS-1600-d6-b31@1986-03-01",
+    "tap-405-ORY-LIS-1800-d6-b31@1986-03-01",
+    "air-france-502-LIS-ORY-1810-d6-b31@1986-03-01"
+  ],
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Air France nr 25, 27 oktober 1985–29 mars 1986. Teckenförklaring s. 2–4 samt valda Portugal-rader s. 40–41, 44, 69, 74 och 81 lästa visuellt. 15 godkända rader ger 15 rörelser, 8 AF och 7 TP. TP412* sparas utan animation."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/pt/tap.htm",
+      "type": "edition_index",
+      "result": "TAP Winter 1, 27 oktober 1985–29 mars 1986 identifierad. En annan indexrad har motstridigt årtal och används inte för giltighet."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/pt/tap/gal/tpgal1a80.htm",
+      "type": "edition_gallery",
+      "result": "Galleriets länk till rätt vinteromslag följd. Ingen läsbar inlaga för vinterutgåvan verifierad."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/pt/tap/1a/tp851027-1.jpg",
+      "type": "contemporary_cover",
+      "result": "Litet omslag läst: Winter 1, October 27 to March 29. Årsintervallet stöds av utgåveindexet. Registrerat som omslagskälla, utan importerade avgångar från omslaget."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/tp.htm",
+      "type": "edition_gallery",
+      "result": "Inget användbart 1985/86-uppslag i det granskade galleriet; de närliggande listade åren är andra utgåvor."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/pt/sata.htm",
+      "type": "edition_index",
+      "result": "SATA-index granskat. Inga tidtabellssidor för rätt vinter verifierade."
+    },
+    {
+      "url": "https://sataholding.pt/pt-pt/historia",
+      "type": "official_operator_history",
+      "result": "Historiken skiljer SATA 1985 från namnet SATA Air Açores 1987 och SATA Internacional 1998. Azores Express och Atlântida Express nämns under 1985. Historiken ger inga exakta avgångstider; inga operatörer eller rörelser läggs in enbart från detta spår."
+    },
+    {
+      "url": "https://www.ebay.co.uk/itm/198568921278",
+      "type": "partial_contemporary_scan_lead",
+      "result": "Ett ytterligare foto av Swissairs vinterutgåva granskat; bilden visar linjekartor, inte avgångstider. Inga nya Portugal-rörelser hämtas från kartan."
+    },
+    {
+      "url": "https://www.ana.pt/pt/institucional/ambiente-e-sustentabilidade/os-nossos-aeroportos",
+      "type": "official_airfield_identity",
+      "result": "ANA identifierar Lissabons flygfält vid Portela de Sacavém och Portos flygfält vid Maia. De samtida tidtabellsrubrikerna anger Portela de Sacavém respektive Pedras Rubras. Historiska namn behålls."
+    },
+    {
+      "url": "https://ais.nav.pt/wp-content/uploads/AIS_Files/eAIP_Current/eAIP_Online/eAIP/html/eAIP/LP-AD-2.LPPT-en-PT.html",
+      "type": "official_coordinate_reference",
+      "result": "LIS/LPPT: ARP 384627N 0090803W = 38.77416667, -9.13416667. Aktuell NAV Portugal-referens används endast som ungefärlig flygfältsmarkör, inte som 1986 års gate eller position."
+    },
+    {
+      "url": "https://ais.nav.pt/wp-content/uploads/AIS_Files/eAIP_Current/eAIP_Online/eAIP/html/eAIP/LP-AD-2.LPPR-en-PT.html",
+      "type": "official_coordinate_reference",
+      "result": "OPO/LPPR: ARP 411408N 0084041W = 41.23555556, -8.67805556. Aktuell NAV Portugal-referens används endast som ungefärlig flygfältsmarkör, inte som 1986 års gate eller position."
+    }
+  ],
+  "unresolved": [
+    "TAP:s egna inlagor och ändringsblad vinter 1985/86 återstår. AF-tabellen är ett begränsat urval av Frankrikeförbindelser.",
+    "Förklara stjärnliknande tecknet efter TP412 på s. 81 eller verifiera samma rad i en annan samtida källa. Den preliminära Porto–Orly-raden är kandidat och animeras inte.",
+    "SATA:s dåtida interötrafik, TAP:s inrikestrafik, Madeira, Azorerna, Faro och andra internationella linjer återstår.",
+    "Inventera charter- och fraktbolag samt privata, statliga och militära rörelser med samtida daterade uppgifter. Historik och linjekartor räcker inte för tider.",
+    "AF1440/1441 mellan Lissabon och Lyon saknar nonstop-pil och återanvänds inte som direktflyg. Tidsatta fysiska delsträckor kräver egna belägg."
+  ]
+}

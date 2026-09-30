@@ -1,0 +1,45 @@
+{
+  "batch": 37,
+  "package": "v38",
+  "country": "li",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://lsxb.li/geschichte/",
+      "type": "heliport_history",
+      "result": "Heliportens egen historik beskriver Rhein-Heli AG och en hangar i Balzers 1979. Historiken saknar daterade avgångar för observationsfönstret."
+    },
+    {
+      "url": "https://historisches-lexikon.li/Transportwesen",
+      "type": "historical_lexicon",
+      "result": "Lexikonet daterar Rhein-Helicopter AG till 1983. Skillnaden gentemot heliportens 1979-uppgift dokumenteras; inget entydigt grundandeår eller bolagssamband fastställs här."
+    },
+    {
+      "url": "https://historisches-lexikon.li/Flugplatz",
+      "type": "historical_lexicon",
+      "result": "Schaanfältet stängdes efter 1950 och utbyggnad avstod man från 1952. Artikeln skiljer det tidigare flygfältet från helikopterverksamheten i Balzers. Inga moderna schweiziska flygplatser placeras i Liechtenstein."
+    },
+    {
+      "url": "https://www.alouettelama.com/msn/a3-1701/A3-1781.html",
+      "type": "outside_window_research_lead",
+      "result": "Sekundärt registerspår nämner HB-XOT vid Malbun den 2 mars 1986. Datumet ligger utanför fönstret. Ingen rörelse importeras; officiell undersökningsrapport återstår att läsa. Det används inte för att rekonstruera flyg 28 februari eller 1 mars."
+    }
+  ],
+  "unresolved": [
+    "Daterade flyg-, drift- och helikopterloggar för Balzers och andra eventuella landningsplatser 28 februari–1 mars 1986 återstår. Noll inlagda rörelser betyder inte att ingen trafik förekom.",
+    "Exakt historiskt läge och utformning för landningsytor behöver kart-/arkivkontroll innan platsmarkörer skapas.",
+    "Rhein-Heli/Rhein-Helicopter-namn, bolagskontinuitet och de skilda grundandeuppgifterna 1979/1983 återstår att reda ut. Den registrerade operatörslistan är ofullständig.",
+    "Privata transporter, räddnings-, arbets- och statsflyg samt faktiska överflygningar behöver egna daterade underlag."
+  ]
+}

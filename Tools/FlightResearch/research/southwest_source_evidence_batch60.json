@@ -1,0 +1,57 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://www.departedflights.com/WN011286intro.html",
+  "publication_index_url": "https://www.airtimes.com/cgat/usc/southwest.htm",
+  "next_catalogued_edition": "1986-03-18",
+  "scans": [
+    {
+      "printed_pages": [
+        2
+      ],
+      "url": "https://www.departedflights.com/WN011286p2.jpg",
+      "sha256": "e65fd73f8febe2ef9b97564dbe3d5c95459859857ad6ac01843e9cfbf0837a2f",
+      "size_bytes": 277716
+    },
+    {
+      "printed_pages": [
+        3,
+        4
+      ],
+      "url": "https://www.departedflights.com/WN011286p3.jpg",
+      "sha256": "0908654dcbee789b8e8672c105e939c88d299181fac065e9b90ef66421536e35",
+      "size_bytes": 544229
+    },
+    {
+      "printed_pages": [
+        17,
+        18
+      ],
+      "url": "https://www.departedflights.com/WN011286p17.jpg",
+      "sha256": "903a9591e21be0b34dfb76e5c6f35672622e0844e0b556bb727f2b002cc69b6b",
+      "size_bytes": 559232
+    },
+    {
+      "printed_pages": [
+        19,
+        20
+      ],
+      "url": "https://www.departedflights.com/WN011286p19.jpg",
+      "sha256": "ad0065c8d6b617444f902ee46549e7b0a848cb2dfe9db8f9fb6462500f4adeff",
+      "size_bytes": 550053
+    },
+    {
+      "printed_pages": [
+        21,
+        22
+      ],
+      "url": "https://www.departedflights.com/WN011286p21.jpg",
+      "sha256": "deeb0459c27f6c1fe3fd6aa92d82f33ca1d281459cfae39d1d85ced9e355e0af",
+      "size_bytes": 582156
+    }
+  ],
+  "airport_sources": [
+    "https://ourairports.com/airports/KMCI/",
+    "https://flykc.com/about-us"
+  ],
+  "original_scans_redistributed": false
+}

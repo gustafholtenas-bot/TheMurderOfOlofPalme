@@ -22,7 +22,8 @@ class FlightTests(unittest.TestCase):
         self.assertTrue(all(r['departure_local'].startswith('1986-02-28') for r in rows))
         karachi=[r for r in self.output['legs'] if r['airline']=='panam' and r['destination']=='KHI']
         self.assertEqual([r['departure_local'][:10] for r in karachi],['1986-02-28','1986-03-01'])
-        los_angeles=[r for r in self.output['legs'] if r['airline']=='panam' and r['destination']=='LAX']
+        # Check this Frankfurt service specifically; other LAX routes have different weekdays.
+        los_angeles=[r for r in self.output['legs'] if r['airline']=='panam' and r['origin']=='FRA' and r['destination']=='LAX']
         self.assertEqual([r['departure_local'][:10] for r in los_angeles],['1986-02-27','1986-03-01'])
         # Thursday's flight is still airborne when the window starts at 22:21:30 UTC.
         self.assertLess(los_angeles[0]['departure_seconds'],0)
@@ -118,6 +119,23 @@ class FlightTests(unittest.TestCase):
         self.assertLess(ba[0]['departure_seconds'],0)
         self.assertGreater(ba[-1]['arrival_seconds'],172800)
 
+    def test_batch04_weekdays_and_timed_stops(self):
+        # Air Zimbabwe PDF 2: RH161 is Friday/Sunday; the rightmost RH166
+        # and SA026 columns are Sunday, outside this Friday/Saturday window.
+        flights = self.output['legs']
+        self.assertEqual([f['departure_local'] for f in flights if f['airline']=='air-zimbabwe' and f['flight']=='161'], ['1986-02-28T08:30+02:00'])
+        self.assertFalse(any(f['airline']=='air-zimbabwe' and f['flight']=='166' for f in flights))
+        self.assertFalse(any(f['airline']=='saa' and f['flight']=='026' for f in flights))
+        # BP267 has a 40-minute stop, so HRE–GBE must not appear as one nonstop leg.
+        bp = [f for f in flights if f['airline']=='air-botswana' and f['flight']=='267']
+        self.assertEqual([(f['origin'],f['destination']) for f in bp], [('HRE','FRW'),('FRW','GBE')])
+        self.assertEqual(bp[1]['departure_seconds']-bp[0]['arrival_seconds'],40*60)
+        # Indiana is one hour ahead of Chicago on these dates.
+        fw = next(f for f in flights if f['airline']=='air-wisconsin' and f['flight']=='2647' and f['departure_local'].startswith('1986-02-28'))
+        self.assertEqual(fw['departure_local'], '1986-02-28T12:20-05:00')
+        self.assertEqual(fw['arrival_local'], '1986-02-28T12:17-06:00')
+        self.assertEqual(fw['arrival_seconds']-fw['departure_seconds'],57*60)
+
     def test_month_only_source_date(self):
         c=copy.deepcopy(self.catalog)
         source=next(s for s in c['sources'] if s['id']=='golden-19860327')
@@ -140,5 +158,45 @@ class FlightTests(unittest.TestCase):
             elif isinstance(value,list):
                 for v in value:walk(v)
         walk(self.catalog)
+
+    def test_military_movement_is_one_off_with_recorded_times(self):
+        rows=[r for r in self.output['legs'] if r['airline']=='usmc']
+        self.assertEqual(len(rows),1)
+        r=rows[0]
+        self.assertEqual(r['status'],'confirmed')
+        self.assertEqual(r['departure_local'],'1986-02-28T15:01-05:00')
+        self.assertEqual(r['arrival_local'],'1986-02-28T15:34-05:00')
+        self.assertEqual(r['departure_utc'],'1986-02-28T20:01:00Z')
+        self.assertEqual(r['arrival_seconds']-r['departure_seconds'],33*60)
+        self.assertFalse(any(s['airline']=='usmc' for s in self.catalog['schedules']))
+
+    def test_one_off_evidence_and_duplicate_gates(self):
+        for field,value in [('time_precision','day'),('nonstop',False),('destination','UNKNOWN'),('status','scheduled'),('source','panam-19860211')]:
+            with self.subTest(field=field):
+                c=copy.deepcopy(self.catalog);c['movements'][0][field]=value
+                with self.assertRaises(ValueError):compile_catalog(c)
+        c=copy.deepcopy(self.catalog);m=copy.deepcopy(c['movements'][0]);m['id']+='-copy';c['movements'].append(m)
+        with self.assertRaises(ValueError):compile_catalog(c)
+        c=copy.deepcopy(self.catalog);c['movements'][0]['review_status']='candidate'
+        self.assertFalse(any(r['airline']=='usmc' for r in compile_catalog(c)['legs']))
+
+    def test_one_off_overlap_boundaries(self):
+        c=copy.deepcopy(self.catalog);m=c['movements'][0];m['time_precision']='second'
+        m.update(departure_utc='1986-02-27T22:00:00Z',arrival_utc='1986-02-27T22:21:30Z')
+        self.assertFalse(any(r['airline']=='usmc' for r in compile_catalog(c)['legs']))
+        m['arrival_utc']='1986-02-27T22:21:31Z'
+        self.assertTrue(any(r['airline']=='usmc' for r in compile_catalog(c)['legs']))
+        m.update(departure_utc='1986-03-01T22:21:30Z',arrival_utc='1986-03-01T22:50:00Z')
+        self.assertFalse(any(r['airline']=='usmc' for r in compile_catalog(c)['legs']))
+
+    def test_panam_berlin_overnight_and_effective_dates(self):
+        rows=[r for r in self.output['legs'] if r['airline']=='panam' and r['flight']=='629']
+        self.assertEqual([r['departure_local'] for r in rows],['1986-02-27T23:30+01:00','1986-02-28T23:30+01:00'])
+        self.assertEqual([r['arrival_local'] for r in rows],['1986-02-28T00:30+01:00','1986-03-01T00:30+01:00'])
+        hamburg=[r for r in self.output['legs'] if r['airline']=='panam' and r['flight']=='607']
+        self.assertEqual([r['departure_local'][11:16] for r in hamburg],['10:35','10:35'])
+        airports={a['id']:a for a in self.output['airports']}
+        self.assertEqual(airports['TXL']['country'],'berlin-west')
+        self.assertAlmostEqual(airports['MUC-RIEM']['lat'],48.13778)
 
 if __name__=='__main__':unittest.main()

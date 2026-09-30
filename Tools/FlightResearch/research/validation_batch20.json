@@ -1,0 +1,331 @@
+{
+  "checked_on": "2026-09-28",
+  "package": "v21",
+  "new_movements": 46,
+  "unchanged_previous_movements": 1280,
+  "total_movements": 1326,
+  "new_schedules": 30,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_file_count": 22,
+  "nordic_endpoint_movements": 46,
+  "nordic_movements_added": 0,
+  "actual_overflights_added": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_physical_duplicate_count": 0,
+  "new_movements_by_flight": {
+    "british-airways/188": 1,
+    "british-airways/189": 1,
+    "british-airways/192": 2,
+    "british-airways/193": 2,
+    "british-airways/194": 3,
+    "british-airways/195": 3,
+    "british-airways/4442": 1,
+    "british-airways/4462": 2,
+    "british-airways/4512": 2,
+    "british-airways/4572": 2,
+    "british-airways/4592": 1,
+    "british-airways/4612": 2,
+    "british-airways/4652": 2,
+    "british-airways/4672": 1,
+    "british-airways/4822": 1,
+    "british-airways/4832": 1,
+    "british-airways/4882": 2,
+    "british-airways/4902": 1,
+    "british-airways/4922": 2,
+    "british-airways/4962": 2,
+    "british-airways/4982": 1,
+    "british-airways/5132": 1,
+    "british-airways/5146": 2,
+    "british-airways/5150": 1,
+    "british-airways/5456": 1,
+    "british-airways/5458": 1,
+    "british-airways/5610": 1,
+    "british-airways/5618": 1,
+    "british-airways/921": 1,
+    "sabena/617": 2
+  },
+  "schedule_duration_sanity_checks": [
+    {
+      "schedule": "british-airways-5610-LHR-ABZ-1130",
+      "elapsed_minutes": 85,
+      "great_circle_km": 647,
+      "block_average_kmh": 457,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-5618-LHR-ABZ-1745",
+      "elapsed_minutes": 85,
+      "great_circle_km": 647,
+      "block_average_kmh": 457,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4572-LHR-BFS-1030",
+      "elapsed_minutes": 70,
+      "great_circle_km": 523,
+      "block_average_kmh": 448,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4592-LHR-BFS-1230",
+      "elapsed_minutes": 70,
+      "great_circle_km": 523,
+      "block_average_kmh": 448,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4612-LHR-BFS-1430",
+      "elapsed_minutes": 70,
+      "great_circle_km": 523,
+      "block_average_kmh": 448,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4652-LHR-BFS-1830",
+      "elapsed_minutes": 70,
+      "great_circle_km": 523,
+      "block_average_kmh": 448,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4672-LHR-BFS-2030",
+      "elapsed_minutes": 70,
+      "great_circle_km": 523,
+      "block_average_kmh": 448,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4822-LHR-EDI-1810",
+      "elapsed_minutes": 70,
+      "great_circle_km": 534,
+      "block_average_kmh": 457,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4832-LHR-EDI-2010",
+      "elapsed_minutes": 70,
+      "great_circle_km": 534,
+      "block_average_kmh": 457,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4882-LHR-GLA-1015",
+      "elapsed_minutes": 70,
+      "great_circle_km": 555,
+      "block_average_kmh": 476,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4902-LHR-GLA-1215",
+      "elapsed_minutes": 70,
+      "great_circle_km": 555,
+      "block_average_kmh": 476,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4922-LHR-GLA-1415",
+      "elapsed_minutes": 70,
+      "great_circle_km": 555,
+      "block_average_kmh": 476,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4962-LHR-GLA-1815",
+      "elapsed_minutes": 70,
+      "great_circle_km": 555,
+      "block_average_kmh": 476,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4982-LHR-GLA-2015",
+      "elapsed_minutes": 70,
+      "great_circle_km": 555,
+      "block_average_kmh": 476,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-5132-LHR-JER-1245",
+      "elapsed_minutes": 50,
+      "great_circle_km": 280,
+      "block_average_kmh": 336,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-5146-LHR-JER-1830",
+      "elapsed_minutes": 50,
+      "great_circle_km": 280,
+      "block_average_kmh": 336,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-5150-LHR-JER-2010",
+      "elapsed_minutes": 50,
+      "great_circle_km": 280,
+      "block_average_kmh": 336,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4442-LHR-MAN-1130",
+      "elapsed_minutes": 50,
+      "great_circle_km": 243,
+      "block_average_kmh": 291,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4462-LHR-MAN-1330",
+      "elapsed_minutes": 50,
+      "great_circle_km": 243,
+      "block_average_kmh": 291,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-4512-LHR-MAN-1830",
+      "elapsed_minutes": 50,
+      "great_circle_km": 243,
+      "block_average_kmh": 291,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-5456-LHR-NCL-1740",
+      "elapsed_minutes": 60,
+      "great_circle_km": 405,
+      "block_average_kmh": 405,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-5458-LHR-NCL-2015",
+      "elapsed_minutes": 60,
+      "great_circle_km": 405,
+      "block_average_kmh": 405,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-921-BRU-MAN-2000",
+      "elapsed_minutes": 70,
+      "great_circle_km": 536,
+      "block_average_kmh": 459,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "sabena-617-BRU-MAN-0755",
+      "elapsed_minutes": 75,
+      "great_circle_km": 536,
+      "block_average_kmh": 429,
+      "aircraft": "not specified in audit"
+    },
+    {
+      "schedule": "british-airways-193-LHR-JFK-1030",
+      "elapsed_minutes": 230,
+      "great_circle_km": 5540,
+      "block_average_kmh": 1445,
+      "aircraft": "Concorde"
+    },
+    {
+      "schedule": "british-airways-195-LHR-JFK-1900",
+      "elapsed_minutes": 230,
+      "great_circle_km": 5540,
+      "block_average_kmh": 1445,
+      "aircraft": "Concorde"
+    },
+    {
+      "schedule": "british-airways-189-LHR-IAD-1300",
+      "elapsed_minutes": 255,
+      "great_circle_km": 5902,
+      "block_average_kmh": 1389,
+      "aircraft": "Concorde"
+    },
+    {
+      "schedule": "british-airways-192-JFK-LHR-0930",
+      "elapsed_minutes": 220,
+      "great_circle_km": 5540,
+      "block_average_kmh": 1511,
+      "aircraft": "Concorde"
+    },
+    {
+      "schedule": "british-airways-194-JFK-LHR-1345",
+      "elapsed_minutes": 220,
+      "great_circle_km": 5540,
+      "block_average_kmh": 1511,
+      "aircraft": "Concorde"
+    },
+    {
+      "schedule": "british-airways-188-IAD-LHR-1300",
+      "elapsed_minutes": 240,
+      "great_circle_km": 5902,
+      "block_average_kmh": 1475,
+      "aircraft": "Concorde"
+    }
+  ],
+  "candidate_schedules_retained": 8,
+  "window_boundary_checks": [
+    {
+      "leg_id": "british-airways-194-JFK-LHR-1345@1986-02-27",
+      "included": true,
+      "arrival_utc": "1986-02-27T22:25:00Z",
+      "reason": "Already airborne when the window starts at 22:21:30 UTC."
+    },
+    {
+      "leg_id": "british-airways-195-LHR-JFK-1900@1986-02-27",
+      "included": true,
+      "arrival_utc": "1986-02-27T22:50:00Z",
+      "reason": "Already airborne when the window starts at 22:21:30 UTC."
+    },
+    {
+      "leg_id": "british-airways-194-JFK-LHR-1345@1986-03-01",
+      "included": true,
+      "reason": "Saturday exception ends with February; 1 March is permitted."
+    },
+    {
+      "leg_id": "british-airways-195-LHR-JFK-1900@1986-03-01",
+      "included": true,
+      "reason": "Saturday exception ends with February; 1 March is permitted."
+    }
+  ],
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "command": "python3 -m unittest discover -s Tools/FlightResearch -p 'test_*.py' -v",
+      "passed": true,
+      "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 1.858s\n\nOK"
+    },
+    {
+      "command": "python3 Tools/FlightResearch/build_flights.py --check",
+      "passed": true,
+      "output": "{\"registered_airlines\": 80, \"registered_countries\": 70, \"reviewed_schedules\": 875, \"animated_airlines\": 31, \"scheduled_movements\": 1325, \"confirmed_movements\": 1}"
+    },
+    {
+      "command": "python3 Tools/FlightResearch/build_country_index.py --check",
+      "passed": true,
+      "output": ""
+    },
+    {
+      "command": "python3 Tools/StockMarket/validate_markets.py",
+      "passed": true,
+      "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings."
+    }
+  ]
+}

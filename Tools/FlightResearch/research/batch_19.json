@@ -1,0 +1,167 @@
+{
+  "batch": 19,
+  "package": "v20",
+  "checked_on": "2026-09-28",
+  "previous_movements": 1247,
+  "new_schedules": 24,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [
+    "jal-418-AMS-CPH-1230",
+    "jal-418-CPH-ANC-1505",
+    "jal-418-ANC-NRT-1455",
+    "jal-412-FCO-AMS-1220",
+    "jal-412-AMS-ANC-1600",
+    "jal-412-ANC-NRT-1610",
+    "jal-436-FRA-DUS-1250",
+    "jal-436-DUS-ANC-1500",
+    "jal-436-ANC-NRT-1515",
+    "jal-5-JFK-NRT-1230",
+    "jal-11-MEX-YVR-1015",
+    "jal-11-YVR-NRT-1500",
+    "jal-9-ORD-SEA-1100",
+    "jal-9-SEA-NRT-1425",
+    "jal-61-SFO-NRT-1000",
+    "jal-3-SFO-HNL-1000",
+    "jal-3-HNL-NRT-1440",
+    "jal-3-SFO-NRT-1220",
+    "jal-1-YVR-NRT-1345",
+    "jal-77-HNL-NRT-1000",
+    "jal-73-HNL-NRT-1130",
+    "jal-75-HNL-NRT-0930",
+    "jal-41-JFK-ANC-0245",
+    "jal-41-ANC-NRT-0710"
+  ],
+  "new_airports": [
+    "ANC",
+    "YVR"
+  ],
+  "new_country_ids": [],
+  "source_files": [
+    {
+      "source": "jal-19851101-advance",
+      "image_id": "OIEAAOSw4UpmxkVu",
+      "panel": "cover",
+      "url": "https://i.ebayimg.com/images/g/OIEAAOSw4UpmxkVu/s-l1600.jpg",
+      "sha256": "b6791d0e62fde897dbc9768f10d0be4625ace0ff02f8a72d6397e17f1a988d40",
+      "bytes": 928973,
+      "visually_reviewed": true
+    },
+    {
+      "source": "jal-19851101-advance",
+      "image_id": "5WoAAOSwe6JmxkVv",
+      "panel": "Europe (polar route / via Moscow)",
+      "url": "https://i.ebayimg.com/images/g/5WoAAOSwe6JmxkVv/s-l1600.jpg",
+      "sha256": "e537857716e8bca3423e74de4db4cb79bc943539d5f83c5d177f6a4e892598a6",
+      "bytes": 1085036,
+      "visually_reviewed": true
+    },
+    {
+      "source": "jal-19851101-advance",
+      "image_id": "42kAAOSwoQtmxkVx",
+      "panel": "Transpacific / Europe (southern route)",
+      "url": "https://i.ebayimg.com/images/g/42kAAOSwoQtmxkVx/s-l1600.jpg",
+      "sha256": "f607db53c327f5bca278d8d134d1c6d683acb41015bbc62f704a97a916e63f93",
+      "bytes": 980881,
+      "visually_reviewed": true
+    }
+  ],
+  "source_edition_status": "advance",
+  "coverage_complete": false,
+  "new_movements": 33,
+  "total_movements": 1280,
+  "new_leg_ids": [
+    "jal-412-AMS-ANC-1600@1986-02-27",
+    "jal-41-ANC-NRT-0710@1986-02-27",
+    "jal-5-JFK-NRT-1230@1986-02-27",
+    "jal-61-SFO-NRT-1000@1986-02-27",
+    "jal-77-HNL-NRT-1000@1986-02-27",
+    "jal-73-HNL-NRT-1130@1986-02-27",
+    "jal-1-YVR-NRT-1345@1986-02-27",
+    "jal-11-YVR-NRT-1500@1986-02-27",
+    "jal-412-ANC-NRT-1610@1986-02-27",
+    "jal-41-JFK-ANC-0245@1986-02-28",
+    "jal-436-FRA-DUS-1250@1986-02-28",
+    "jal-436-DUS-ANC-1500@1986-02-28",
+    "jal-41-ANC-NRT-0710@1986-02-28",
+    "jal-5-JFK-NRT-1230@1986-02-28",
+    "jal-3-SFO-HNL-1000@1986-02-28",
+    "jal-61-SFO-NRT-1000@1986-02-28",
+    "jal-75-HNL-NRT-0930@1986-02-28",
+    "jal-77-HNL-NRT-1000@1986-02-28",
+    "jal-73-HNL-NRT-1130@1986-02-28",
+    "jal-1-YVR-NRT-1345@1986-02-28",
+    "jal-436-ANC-NRT-1515@1986-02-28",
+    "jal-3-HNL-NRT-1440@1986-02-28",
+    "jal-41-JFK-ANC-0245@1986-03-01",
+    "jal-418-AMS-CPH-1230@1986-03-01",
+    "jal-418-CPH-ANC-1505@1986-03-01",
+    "jal-41-ANC-NRT-0710@1986-03-01",
+    "jal-9-ORD-SEA-1100@1986-03-01",
+    "jal-5-JFK-NRT-1230@1986-03-01",
+    "jal-61-SFO-NRT-1000@1986-03-01",
+    "jal-77-HNL-NRT-1000@1986-03-01",
+    "jal-3-SFO-NRT-1220@1986-03-01",
+    "jal-73-HNL-NRT-1130@1986-03-01",
+    "jal-1-YVR-NRT-1345@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1247,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_nordic_endpoint_movements": 2,
+  "overflight_records_added": 0,
+  "new_endpoint_pairs": [
+    [
+      "AMS",
+      "ANC"
+    ],
+    [
+      "AMS",
+      "CPH"
+    ],
+    [
+      "ANC",
+      "NRT"
+    ],
+    [
+      "CPH",
+      "ANC"
+    ],
+    [
+      "DUS",
+      "ANC"
+    ],
+    [
+      "FRA",
+      "DUS"
+    ],
+    [
+      "JFK",
+      "ANC"
+    ],
+    [
+      "ORD",
+      "SEA"
+    ],
+    [
+      "SFO",
+      "HNL"
+    ],
+    [
+      "YVR",
+      "NRT"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 368,
+  "runtime_coverage": {
+    "registered_airlines": 79,
+    "registered_countries": 69,
+    "reviewed_schedules": 845,
+    "animated_airlines": 30,
+    "scheduled_movements": 1279,
+    "confirmed_movements": 1
+  },
+  "airport_identity_references": {
+    "JFK": "https://press.jal.co.jp/en/release/201608/003886.html",
+    "ORD": "https://www.linkedin.com/posts/chicago-department-of-aviation_on-this-day-in-1983-japan-airlines-flew-activity-7048028581687398400-5zm9"
+  }
+}

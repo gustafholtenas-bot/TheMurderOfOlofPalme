@@ -1,0 +1,22 @@
+{
+  "batch": 34,
+  "airports": [
+    {
+      "id": "CGN",
+      "name": "Cologne/Bonn–Wahn",
+      "country": "de-west",
+      "timezone": "Europe/Berlin",
+      "lat": 50.865898,
+      "lon": 7.14274,
+      "coordinate_source": "https://ourairports.com/airports/EDDK/",
+      "coordinate_record_id": "EDDK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.cologne-bonn-airport.com/en/company/newsroom/press-releases/detail/airport-celebrates-75-years-of-civil-aviation.html"
+      ],
+      "location_note": "Contemporary timetable printed pages 25 and 64 identifies Wahn. Airport’s official historical account identifies the present Wahner Heide site, distinct from former Butzweilerhof. OurAirports coordinates are used as an approximate airfield marker, not a reconstructed 1986 terminal, gate or aircraft position.",
+      "checked_on": "2026-09-28"
+    }
+  ]
+}

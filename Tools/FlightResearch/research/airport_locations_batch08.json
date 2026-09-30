@@ -1,0 +1,106 @@
+{
+  "checked_on": "2026-09-26",
+  "notes": "Schematic airfield locations, not reconstructed 1986 stands or terminals. Dakar uses Yoff/GOOY, not the later Blaise Diagne/DSS airport. Monrovia uses Roberts, not Spriggs Payne. Modern coordinate data does not establish a flight in 1986.",
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "37b78b5514711a70fb50e0f4c60b809b30988a84e37b0d814e20ca5591177cc1",
+  "airports": [
+    {
+      "id": "AMS",
+      "name": "Amsterdam–Schiphol",
+      "country": "nl",
+      "timezone": "Europe/Amsterdam",
+      "lat": 52.308601,
+      "lon": 4.76389,
+      "coordinate_source": "https://ourairports.com/airports/EHAM/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.schiphol.nl/en/you-and-schiphol/airport-history/",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "MIA",
+      "name": "Miami International",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 25.796011,
+      "lon": -80.289751,
+      "coordinate_source": "https://ourairports.com/airports/KMIA/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.miami-airport.com/history_of_mia.asp",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "SEA",
+      "name": "Seattle–Tacoma",
+      "country": "us",
+      "timezone": "America/Los_Angeles",
+      "lat": 47.447943,
+      "lon": -122.310276,
+      "coordinate_source": "https://ourairports.com/airports/KSEA/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.portseattle.org/blog/1940-1949-birth-seattle-tacoma-international-airport",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "SFO",
+      "name": "San Francisco International",
+      "country": "us",
+      "timezone": "America/Los_Angeles",
+      "lat": 37.619806,
+      "lon": -122.374821,
+      "coordinate_source": "https://ourairports.com/airports/KSFO/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.sfomuseum.org/exhibitions/mills-field-and-san-francisco-airport",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "DKR",
+      "name": "Dakar–Yoff (1986)",
+      "country": "sn",
+      "timezone": "Africa/Dakar",
+      "lat": 14.742337,
+      "lon": -17.479222,
+      "coordinate_source": "https://ourairports.com/airports/GOOY/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://aim.asecna.aero/html/eAIP/FR-_13AD-2.GOOY-fr-FR.html",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "ROB",
+      "name": "Monrovia–Roberts International",
+      "country": "lr",
+      "timezone": "Africa/Monrovia",
+      "lat": 6.23379,
+      "lon": -10.3623,
+      "coordinate_source": "https://ourairports.com/airports/GLRB/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.lcaa.gov.lr/index.php/general/major-airport-developments",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "LOS",
+      "name": "Lagos–Murtala Muhammed",
+      "country": "ng",
+      "timezone": "Africa/Lagos",
+      "lat": 6.57737,
+      "lon": 3.32116,
+      "coordinate_source": "https://ourairports.com/airports/DNMM/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://faan.gov.ng/mmia-lagos/",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    }
+  ]
+}

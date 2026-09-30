@@ -1,0 +1,698 @@
+{
+  "checked_on": "2026-09-28",
+  "package": "v23",
+  "new_movements": 97,
+  "unchanged_previous_movements": 1370,
+  "total_movements": 1467,
+  "new_reviewed_schedules": 83,
+  "new_candidate_schedules": 0,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_file_count": 22,
+  "nordic_endpoint_movements": 57,
+  "nordic_movements_added": 10,
+  "actual_overflights_added": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_physical_duplicate_count": 0,
+  "new_movements_by_airline": {
+    "air-business": 1,
+    "air-uk": 90,
+    "klm": 2,
+    "sas": 4
+  },
+  "schedule_duration_sanity_checks": [
+    {
+      "schedule": "air-uk-602-ABZ-SVG-0850",
+      "elapsed_minutes": 90,
+      "great_circle_km": 497,
+      "block_average_kmh": 331
+    },
+    {
+      "schedule": "air-uk-601-SVG-ABZ-1650",
+      "elapsed_minutes": 90,
+      "great_circle_km": 497,
+      "block_average_kmh": 331
+    },
+    {
+      "schedule": "sas-532-ABZ-SVG-1315",
+      "elapsed_minutes": 60,
+      "great_circle_km": 497,
+      "block_average_kmh": 497
+    },
+    {
+      "schedule": "sas-534-ABZ-SVG-1315",
+      "elapsed_minutes": 60,
+      "great_circle_km": 497,
+      "block_average_kmh": 497
+    },
+    {
+      "schedule": "sas-531-SVG-ABZ-1225",
+      "elapsed_minutes": 60,
+      "great_circle_km": 497,
+      "block_average_kmh": 497
+    },
+    {
+      "schedule": "sas-533-SVG-ABZ-1225",
+      "elapsed_minutes": 60,
+      "great_circle_km": 497,
+      "block_average_kmh": 497
+    },
+    {
+      "schedule": "air-uk-621-EBJ-HUY-1510",
+      "elapsed_minutes": 120,
+      "great_circle_km": 613,
+      "block_average_kmh": 307
+    },
+    {
+      "schedule": "air-uk-660-NCL-CPH-1130",
+      "elapsed_minutes": 145,
+      "great_circle_km": 908,
+      "block_average_kmh": 376
+    },
+    {
+      "schedule": "air-uk-661-CPH-NCL-1525",
+      "elapsed_minutes": 155,
+      "great_circle_km": 908,
+      "block_average_kmh": 352
+    },
+    {
+      "schedule": "air-business-163-EBJ-AAR-1510",
+      "elapsed_minutes": 40,
+      "great_circle_km": 155,
+      "block_average_kmh": 233
+    },
+    {
+      "schedule": "air-uk-201-ABZ-EDI-0650",
+      "elapsed_minutes": 40,
+      "great_circle_km": 157,
+      "block_average_kmh": 235
+    },
+    {
+      "schedule": "air-uk-201-EDI-HUY-0740",
+      "elapsed_minutes": 65,
+      "great_circle_km": 327,
+      "block_average_kmh": 302
+    },
+    {
+      "schedule": "air-uk-201-HUY-NWI-0855",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-202-NWI-HUY-0705",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-202-HUY-EDI-0750",
+      "elapsed_minutes": 65,
+      "great_circle_km": 327,
+      "block_average_kmh": 302
+    },
+    {
+      "schedule": "air-uk-202-EDI-ABZ-0905",
+      "elapsed_minutes": 40,
+      "great_circle_km": 157,
+      "block_average_kmh": 235
+    },
+    {
+      "schedule": "air-uk-209-ABZ-EDI-1800",
+      "elapsed_minutes": 40,
+      "great_circle_km": 157,
+      "block_average_kmh": 235
+    },
+    {
+      "schedule": "air-uk-209-EDI-HUY-1850",
+      "elapsed_minutes": 65,
+      "great_circle_km": 327,
+      "block_average_kmh": 302
+    },
+    {
+      "schedule": "air-uk-209-HUY-NWI-2005",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-210-NWI-HUY-1820",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-210-HUY-EDI-1905",
+      "elapsed_minutes": 65,
+      "great_circle_km": 327,
+      "block_average_kmh": 302
+    },
+    {
+      "schedule": "air-uk-210-EDI-ABZ-2020",
+      "elapsed_minutes": 40,
+      "great_circle_km": 157,
+      "block_average_kmh": 235
+    },
+    {
+      "schedule": "air-uk-207-ABZ-NCL-1635",
+      "elapsed_minutes": 50,
+      "great_circle_km": 243,
+      "block_average_kmh": 291
+    },
+    {
+      "schedule": "air-uk-211-ABZ-NCL-1905",
+      "elapsed_minutes": 50,
+      "great_circle_km": 243,
+      "block_average_kmh": 291
+    },
+    {
+      "schedule": "air-uk-200-NCL-ABZ-0730",
+      "elapsed_minutes": 50,
+      "great_circle_km": 243,
+      "block_average_kmh": 291
+    },
+    {
+      "schedule": "air-uk-208-NCL-ABZ-1750",
+      "elapsed_minutes": 50,
+      "great_circle_km": 243,
+      "block_average_kmh": 291
+    },
+    {
+      "schedule": "air-uk-552-ABZ-NWI-1255",
+      "elapsed_minutes": 100,
+      "great_circle_km": 550,
+      "block_average_kmh": 330
+    },
+    {
+      "schedule": "air-uk-552-NWI-AMS-1500",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-553-AMS-NWI-1410",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-553-NWI-ABZ-1430",
+      "elapsed_minutes": 100,
+      "great_circle_km": 550,
+      "block_average_kmh": 330
+    },
+    {
+      "schedule": "air-uk-204-NWI-MME-0955",
+      "elapsed_minutes": 55,
+      "great_circle_km": 271,
+      "block_average_kmh": 296
+    },
+    {
+      "schedule": "air-uk-204-MME-ABZ-1100",
+      "elapsed_minutes": 60,
+      "great_circle_km": 303,
+      "block_average_kmh": 303
+    },
+    {
+      "schedule": "air-uk-205-ABZ-MME-1520",
+      "elapsed_minutes": 60,
+      "great_circle_km": 303,
+      "block_average_kmh": 303
+    },
+    {
+      "schedule": "air-uk-205-MME-NWI-1630",
+      "elapsed_minutes": 55,
+      "great_circle_km": 271,
+      "block_average_kmh": 296
+    },
+    {
+      "schedule": "air-uk-100-NWI-AMS-0710",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-102-NWI-AMS-1005",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-106-NWI-AMS-1805",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-101-AMS-NWI-0940",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-105-AMS-NWI-1740",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-107-AMS-NWI-2030",
+      "elapsed_minutes": 55,
+      "great_circle_km": 239,
+      "block_average_kmh": 261
+    },
+    {
+      "schedule": "air-uk-824-HUY-AMS-0740",
+      "elapsed_minutes": 70,
+      "great_circle_km": 370,
+      "block_average_kmh": 317
+    },
+    {
+      "schedule": "air-uk-825-AMS-HUY-1015",
+      "elapsed_minutes": 70,
+      "great_circle_km": 370,
+      "block_average_kmh": 317
+    },
+    {
+      "schedule": "air-uk-826-HUY-AMS-1315",
+      "elapsed_minutes": 70,
+      "great_circle_km": 370,
+      "block_average_kmh": 317
+    },
+    {
+      "schedule": "air-uk-827-AMS-HUY-1600",
+      "elapsed_minutes": 70,
+      "great_circle_km": 370,
+      "block_average_kmh": 317
+    },
+    {
+      "schedule": "air-uk-828-HUY-AMS-1755",
+      "elapsed_minutes": 70,
+      "great_circle_km": 370,
+      "block_average_kmh": 317
+    },
+    {
+      "schedule": "air-uk-829-AMS-HUY-2030",
+      "elapsed_minutes": 70,
+      "great_circle_km": 370,
+      "block_average_kmh": 317
+    },
+    {
+      "schedule": "air-uk-550-EDI-AMS-0750",
+      "elapsed_minutes": 80,
+      "great_circle_km": 666,
+      "block_average_kmh": 500
+    },
+    {
+      "schedule": "air-uk-551-AMS-EDI-1040",
+      "elapsed_minutes": 80,
+      "great_circle_km": 666,
+      "block_average_kmh": 500
+    },
+    {
+      "schedule": "air-uk-556-EDI-AMS-1720",
+      "elapsed_minutes": 80,
+      "great_circle_km": 666,
+      "block_average_kmh": 500
+    },
+    {
+      "schedule": "air-uk-557-AMS-EDI-2010",
+      "elapsed_minutes": 80,
+      "great_circle_km": 666,
+      "block_average_kmh": 500
+    },
+    {
+      "schedule": "air-uk-543-AMS-NCL-1030",
+      "elapsed_minutes": 65,
+      "great_circle_km": 522,
+      "block_average_kmh": 482
+    },
+    {
+      "schedule": "air-uk-545-AMS-NCL-1900",
+      "elapsed_minutes": 65,
+      "great_circle_km": 522,
+      "block_average_kmh": 482
+    },
+    {
+      "schedule": "air-uk-542-NCL-AMS-0755",
+      "elapsed_minutes": 65,
+      "great_circle_km": 522,
+      "block_average_kmh": 482
+    },
+    {
+      "schedule": "air-uk-544-NCL-AMS-1400",
+      "elapsed_minutes": 65,
+      "great_circle_km": 522,
+      "block_average_kmh": 482
+    },
+    {
+      "schedule": "klm-161-AMS-NCL-1310",
+      "elapsed_minutes": 70,
+      "great_circle_km": 522,
+      "block_average_kmh": 447
+    },
+    {
+      "schedule": "klm-162-NCL-AMS-1810",
+      "elapsed_minutes": 65,
+      "great_circle_km": 522,
+      "block_average_kmh": 482
+    },
+    {
+      "schedule": "air-uk-582-BFS-LBA-0835",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-584-BFS-LBA-0935",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-590-BFS-LBA-1300",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-586-BFS-LBA-1635",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-588-BFS-LBA-1950",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-581-LBA-BFS-0700",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-583-LBA-BFS-0800",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-589-LBA-BFS-1020",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-585-LBA-BFS-1450",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-587-LBA-BFS-1815",
+      "elapsed_minutes": 75,
+      "great_circle_km": 309,
+      "block_average_kmh": 247
+    },
+    {
+      "schedule": "air-uk-660-EDI-LBA-0930",
+      "elapsed_minutes": 55,
+      "great_circle_km": 256,
+      "block_average_kmh": 280
+    },
+    {
+      "schedule": "air-uk-217-EDI-LBA-1930",
+      "elapsed_minutes": 55,
+      "great_circle_km": 256,
+      "block_average_kmh": 280
+    },
+    {
+      "schedule": "air-uk-214-LBA-EDI-0800",
+      "elapsed_minutes": 55,
+      "great_circle_km": 256,
+      "block_average_kmh": 280
+    },
+    {
+      "schedule": "air-uk-212-LBA-EDI-1105",
+      "elapsed_minutes": 55,
+      "great_circle_km": 256,
+      "block_average_kmh": 280
+    },
+    {
+      "schedule": "air-uk-661-LBA-EDI-1810",
+      "elapsed_minutes": 55,
+      "great_circle_km": 256,
+      "block_average_kmh": 280
+    },
+    {
+      "schedule": "air-uk-052-HUY-NWI-0650",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-052-NWI-LHR-0735",
+      "elapsed_minutes": 50,
+      "great_circle_km": 179,
+      "block_average_kmh": 215
+    },
+    {
+      "schedule": "air-uk-053-LHR-NWI-0915",
+      "elapsed_minutes": 50,
+      "great_circle_km": 179,
+      "block_average_kmh": 215
+    },
+    {
+      "schedule": "air-uk-053-NWI-HUY-1015",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-056-HUY-NWI-1645",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-056-NWI-LHR-1730",
+      "elapsed_minutes": 50,
+      "great_circle_km": 179,
+      "block_average_kmh": 215
+    },
+    {
+      "schedule": "air-uk-057-LHR-NWI-1855",
+      "elapsed_minutes": 50,
+      "great_circle_km": 179,
+      "block_average_kmh": 215
+    },
+    {
+      "schedule": "air-uk-057-NWI-HUY-1955",
+      "elapsed_minutes": 35,
+      "great_circle_km": 148,
+      "block_average_kmh": 254
+    },
+    {
+      "schedule": "air-uk-791-LBA-CDG-0820",
+      "elapsed_minutes": 115,
+      "great_circle_km": 614,
+      "block_average_kmh": 320
+    },
+    {
+      "schedule": "air-uk-794-CDG-LBA-1925",
+      "elapsed_minutes": 120,
+      "great_circle_km": 614,
+      "block_average_kmh": 307
+    },
+    {
+      "schedule": "air-uk-723-NCL-CDG-1530",
+      "elapsed_minutes": 145,
+      "great_circle_km": 730,
+      "block_average_kmh": 302
+    },
+    {
+      "schedule": "air-uk-722-CDG-NCL-1150",
+      "elapsed_minutes": 145,
+      "great_circle_km": 730,
+      "block_average_kmh": 302
+    }
+  ],
+  "reviewed_ground_connections": [
+    {
+      "journey": "air-uk/air-uk-052@1986-02-28",
+      "stop": "NWI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-201@1986-02-28",
+      "stop": "EDI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-201@1986-02-28",
+      "stop": "HUY",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-202@1986-02-28",
+      "stop": "HUY",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-202@1986-02-28",
+      "stop": "EDI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-053@1986-02-28",
+      "stop": "NWI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-204@1986-02-28",
+      "stop": "MME",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-552@1986-02-28",
+      "stop": "NWI",
+      "ground_minutes": 25.0
+    },
+    {
+      "journey": "air-uk/air-uk-553@1986-02-28",
+      "stop": "NWI",
+      "ground_minutes": 25.0
+    },
+    {
+      "journey": "air-uk/air-uk-205@1986-02-28",
+      "stop": "MME",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-056@1986-02-28",
+      "stop": "NWI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-209@1986-02-28",
+      "stop": "EDI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-209@1986-02-28",
+      "stop": "HUY",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-210@1986-02-28",
+      "stop": "HUY",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-210@1986-02-28",
+      "stop": "EDI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-057@1986-02-28",
+      "stop": "NWI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-052@1986-03-01",
+      "stop": "NWI",
+      "ground_minutes": 10.0
+    },
+    {
+      "journey": "air-uk/air-uk-053@1986-03-01",
+      "stop": "NWI",
+      "ground_minutes": 10.0
+    }
+  ],
+  "intentional_journey_gaps": [
+    {
+      "journey": "air-uk/air-uk-660@1986-02-28",
+      "unimported_origin": "LBA",
+      "unimported_destination": "NCL"
+    },
+    {
+      "journey": "air-uk/air-uk-661@1986-02-28",
+      "unimported_origin": "NCL",
+      "unimported_destination": "LBA"
+    }
+  ],
+  "candidate_schedules_total": 10,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "check": "unittest",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "0e9d85",
+        "wall_time_seconds": 1.985669837,
+        "exit_code": 0,
+        "original_token_count": 551,
+        "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 2.025s\n\nOK\n"
+      }
+    },
+    {
+      "check": "flights_check",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "63dfb3",
+        "wall_time_seconds": 0.114781489,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 81, \"registered_countries\": 70, \"reviewed_schedules\": 989, \"animated_airlines\": 36, \"scheduled_movements\": 1466, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "check": "country_index_check",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "9e8297",
+        "wall_time_seconds": 6.1773e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "check": "stock_market",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "4c0ba6",
+        "wall_time_seconds": 2.3525e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

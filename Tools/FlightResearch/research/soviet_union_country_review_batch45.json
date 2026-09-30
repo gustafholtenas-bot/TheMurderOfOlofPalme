@@ -1,0 +1,140 @@
+{
+  "batch": 45,
+  "package": "v46",
+  "country": "su",
+  "checked_on": "2026-09-29",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte full trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 53,
+  "domestic_movements": 0,
+  "international_movements": 53,
+  "new_movements": 12,
+  "endpoint_movements_by_source_airline": {
+    "aeroflot": 27,
+    "interflug": 12,
+    "malev": 4,
+    "air-france": 7,
+    "lufthansa": 2,
+    "jal": 1
+  },
+  "endpoint_leg_ids": [
+    "aeroflot-423-SVO-BUD-0315@1986-02-28",
+    "aeroflot-412-BUD-SVO-0355@1986-02-28",
+    "aeroflot-131-SVO-BUD-0825@1986-02-28",
+    "aeroflot-111-SVO-SXF-0855@1986-02-28",
+    "aeroflot-251-SVO-CDG-0930-d5-b45@1986-02-28",
+    "interflug-611-SVO-SXF-0950@1986-02-28",
+    "malev-100-BUD-SVO-0800@1986-02-28",
+    "interflug-662-DRS-SVO-0955@1986-02-28",
+    "aeroflot-132-BUD-SVO-1020-TU5@1986-02-28",
+    "air-france-720-CDG-SVO-1025-d5-b45@1986-02-28",
+    "aeroflot-120-DRS-SVO-1130@1986-02-28",
+    "malev-101-SVO-BUD-1340@1986-02-28",
+    "interflug-601-SVO-SXF-1400@1986-02-28",
+    "aeroflot-252-CDG-SVO-1225-d5-b45@1986-02-28",
+    "aeroflot-256-FRA-SVO-1230@1986-02-28",
+    "lufthansa-342-FRA-SVO-1300@1986-02-28",
+    "aeroflot-113-SVO-SXF-1510@1986-02-28",
+    "interflug-603-SVO-SXF-1540@1986-02-28",
+    "air-france-721-SVO-CDG-1725-d5-b45@1986-02-28",
+    "aeroflot-580-SVO-CPH-1850@1986-02-28",
+    "interflug-607-SVO-SXF-2030@1986-02-28",
+    "interflug-609-SVO-SXF-2105@1986-02-28",
+    "aeroflot-424-BUD-SVO-0150@1986-03-01",
+    "aeroflot-407-SVO-BUD-0705@1986-03-01",
+    "aeroflot-131-SVO-BUD-0820@1986-03-01",
+    "aeroflot-251-SVO-CDG-0840-d6-b45@1986-03-01",
+    "aeroflot-111-SVO-SXF-0855@1986-03-01",
+    "aeroflot-231-SVO-BRU-0905@1986-03-01",
+    "interflug-611-SVO-SXF-0950@1986-03-01",
+    "malev-100-BUD-SVO-0800@1986-03-01",
+    "air-france-720-CDG-SVO-0900-d6-b45@1986-03-01",
+    "aeroflot-612-DRS-LED-0915@1986-03-01",
+    "interflug-662-DRS-SVO-0955@1986-03-01",
+    "aeroflot-132-BUD-SVO-1020-TU3@1986-03-01",
+    "aeroflot-120-DRS-SVO-1130@1986-03-01",
+    "air-france-270-CDG-SVO-1135-d6-b45@1986-03-01",
+    "malev-101-SVO-BUD-1340@1986-03-01",
+    "aeroflot-232-BRU-SVO-1145@1986-03-01",
+    "aeroflot-252-CDG-SVO-1150-d6-b45@1986-03-01",
+    "aeroflot-272-GVA-SVO-1155@1986-03-01",
+    "interflug-601-SVO-SXF-1400@1986-03-01",
+    "aeroflot-256-FRA-SVO-1230@1986-03-01",
+    "jal-446-FRA-SVO-1235@1986-03-01",
+    "lufthansa-342-FRA-SVO-1300@1986-03-01",
+    "aeroflot-113-SVO-SXF-1510@1986-03-01",
+    "interflug-603-SVO-SXF-1540@1986-03-01",
+    "air-france-700-CDG-KBP-1355-d6-b45@1986-03-01",
+    "air-france-721-SVO-CDG-1555-d6-b45@1986-03-01",
+    "aeroflot-644-CDG-LED-1450-d6-b45@1986-03-01",
+    "air-france-270-SVO-NRT-1825-d6-b45@1986-03-01",
+    "aeroflot-408-BUD-SVO-1640@1986-03-01",
+    "interflug-607-SVO-SXF-2030@1986-03-01",
+    "interflug-609-SVO-SXF-2105@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "aeroflot-251-SVO-CDG-0930-d5-b45@1986-02-28",
+    "air-france-720-CDG-SVO-1025-d5-b45@1986-02-28",
+    "aeroflot-252-CDG-SVO-1225-d5-b45@1986-02-28",
+    "air-france-721-SVO-CDG-1725-d5-b45@1986-02-28",
+    "aeroflot-251-SVO-CDG-0840-d6-b45@1986-03-01",
+    "air-france-720-CDG-SVO-0900-d6-b45@1986-03-01",
+    "air-france-270-CDG-SVO-1135-d6-b45@1986-03-01",
+    "aeroflot-252-CDG-SVO-1150-d6-b45@1986-03-01",
+    "air-france-700-CDG-KBP-1355-d6-b45@1986-03-01",
+    "air-france-721-SVO-CDG-1555-d6-b45@1986-03-01",
+    "aeroflot-644-CDG-LED-1450-d6-b45@1986-03-01",
+    "air-france-270-SVO-NRT-1825-d6-b45@1986-03-01"
+  ],
+  "research_only_excluded_rows": 2,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Tryckta s. 53, 68, 69 och 71 ger tolv tidsatta nonstopdelsträckor: Paris–Moskva i båda riktningar, Moskva–Narita, Paris–Borispol och Paris–Pulkovo. Alla riktningar läses separat."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "date_columns_and_next_day",
+      "result": "31/10 för SU251/252 står i från-kolumnen du. AF720/721:s fredagsvariant börjar 7/2; tidigare variant upphör 3/2. AF270:s 09:45a betyder nästa lokala dag."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "airport_identity",
+      "result": "KIEV IEV har uttryckligt flygplatsnamn BORISPOL 38 KM: fysisk markör KBP. Paris G och ATTN DEP.CDG1 anger CDG 1. Moskva är Sheremetievo, Leningrad Pulkovo och Tokyo Narita."
+    },
+    {
+      "url": "https://ourairports.com/airports/UKBB/",
+      "type": "coordinate_reference",
+      "result": "UKBB/KBP ger ungefärlig koordinat 50.345001, 30.894699. Identiteten kommer från samtidens Borispol-namn, inte från att överföra stadsrubrikens IEV till dagens flygplatskod."
+    },
+    {
+      "url": "https://www.ebay.com/itm/136906585239",
+      "type": "contemporary_timetable_photos_rechecked",
+      "result": "Vinterutgåvans omslag, nätkarta, kalender och tidigare tillgängliga uppslag återgranskade. Tryckt s. 29: SU503 fredag är begränsad till 27/12 och 3/1; SU509 är onsdag. Ingen av dem importeras. SU407 via Budapest är redan uppdelad i äldre underlag."
+    },
+    {
+      "url": "https://www.ebay.co.uk/itm/198282697677",
+      "type": "contemporary_timetable_photos",
+      "result": "Kompletterande fotograferade uppslag i samma vinterutgåva ger inte en fullständig systemtabell eller ytterligare verifierade nya fysiska sträckor i denna omgång."
+    },
+    {
+      "url": "https://aeroflotarchives.com/timetables.html",
+      "type": "international_archive_index",
+      "result": "Vinter 1985 återfunnen i katalogmetadata. Datum skiljer sig från fotograferat omslag; detta index ersätter inte inlagans dag- och tidskontroll."
+    },
+    {
+      "url": "https://aeroflotarchives.com/ussr-timetables.html",
+      "type": "domestic_archive_index",
+      "result": "Inrikesindex granskat utan verifierad tillämplig vinterinlaga 1985/86. Indexet registreras som källspår utan scheman; äldre eller senare år används inte som ersättning."
+    }
+  ],
+  "unresolved": [
+    "Aeroflots fullständiga internationella och inrikes vintertabeller 1985/86, ändringar och driftbelägg återstår. Arkivindex och ett fåtal fotograferade uppslag är inte full täckning.",
+    "Ytterligare europeiska och asiatiska sovjetiska flygplatser, inrikeslinjer och utländska bolag återstår. Borispol- och Pulkovo-returer har inte verifierats i det aktuella Air France-urvalet och skapas inte.",
+    "Aeroflot-arkivets metadata anger 28 oktober–28 mars medan det fotograferade vinteromslaget anger 27 oktober–29 mars. Källposterna hålls separata; importerade rader följer den granskade utgåvan.",
+    "Aeroflots egen tabell använder Moskvatid inom Sovjetunionen. Air France använder lokala tider; Moskva, Leningrad och Kiev ligger alla på UTC+3 under observationsdatumen. Andra sovjetiska orter kräver separat tidszonskontroll.",
+    "Charter-, frakt-, stats-, privat-, helikopter- och militärtrafik samt faktisk operatör för samarbetskoder är ofullständigt utredda. Inga verkliga nordiska överflygningar har belagts."
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "schema": 1,
+  "checked_on": "2026-09-26",
+  "scope": "Military aviation, military personnel travel and covert arms logistics near 28 February 1986; categories are distinct.",
+  "animation_policy": "Only reviewed movement records with departure/arrival instants and physical endpoints enter catalog.movements. Date-only entries below never enter flights.json.",
+  "entries": [
+    {
+      "id": "usmc-19860228",
+      "classification": "military_aircraft",
+      "status": "imported_confirmed",
+      "movement_id": "usmc-whitehouse-campdavid-19860228",
+      "date_from": "1986-02-28",
+      "date_to": "1986-02-28",
+      "time_precision": "minute",
+      "countries": [
+        "us"
+      ],
+      "source_url": "https://www.reaganlibrary.gov/public/digitallibrary/dailydiary/1986-02.pdf",
+      "source_locator": "PDF 63 / diary 28 February page 3",
+      "summary": {
+        "sv": "Marinkårshelikopter Vita huset–Camp David. Rörelse och källanmärkning finns i catalog.movements.",
+        "en": "Marine helicopter White House–Camp David. Movement and evidence notes are in catalog.movements.",
+        "en_source": "Marinkårshelikopter Vita huset–Camp David. Rörelse och källanmärkning finns i catalog.movements."
+      },
+      "animate": true
+    },
+    {
+      "id": "marcos-airlift-198602",
+      "classification": "military_aircraft",
+      "status": "date_range_only",
+      "date_from": "1986-02-26",
+      "date_to": "1986-02-28",
+      "time_precision": "date_range",
+      "countries": [
+        "ph",
+        "gu",
+        "us"
+      ],
+      "source_url": "https://www.govinfo.gov/content/pkg/GOVPUB-D301-PURL-gpo152434/pdf/GOVPUB-D301-PURL-gpo152434.pdf",
+      "source_title": "Toward the Air Mobility Command: A Chronology of Tanker and Airlift Events (1994 revised)",
+      "source_locator": "Printed page 47 / PDF 57; note 227",
+      "summary": {
+        "sv": "AMC:s historik daterar Marcos-evakueringen till 26–28 februari: C-9 och C-141 från Filippinerna via Guam; hela sällskapet vidare till Hawaii med C-141.",
+        "en": "AMC chronology dates the Marcos evacuation to 26–28 February: C-9 and C-141 from the Philippines via Guam; the party continued to Hawaii on the C-141.",
+        "en_source": "AMC:s historik daterar Marcos-evakueringen till 26–28 februari: C-9 och C-141 från Filippinerna via Guam; hela sällskapet vidare till Hawaii med C-141."
+      },
+      "unknown": [
+        "individual segment dates",
+        "departure and arrival times",
+        "airfields",
+        "aircraft serials"
+      ],
+      "window_relation": "Not established at individual-flight level. A multi-day operation heading cannot establish a departure inside the 48-hour window.",
+      "animate": false
+    },
+    {
+      "id": "iran-tow-19860227",
+      "classification": "covert_arms_transport_operator_unresolved",
+      "status": "delivery_date_only",
+      "date_from": "1986-02-27",
+      "date_to": "1986-02-27",
+      "time_precision": "day",
+      "countries": [
+        "il",
+        "ir"
+      ],
+      "source_url": "https://irp.fas.org/offdocs/walsh/part_i.htm",
+      "source_title": "Final Report of the Independent Counsel for Iran/Contra Matters, Part I",
+      "source_locator": "Passage following the Frankfurt meeting of February 25; preceding The Diversion",
+      "summary": {
+        "sv": "Walshrapporten anger leverans av ytterligare 500 TOW till Iran den 27 februari. Den tidigare leveransen beskrivs med Southern Air Transport och israelisk charter; det fastställer inte flygplan, operatör eller flygplatser för den 27:e.",
+        "en": "The Walsh report dates delivery of another 500 TOWs to Iran to 27 February. Its earlier shipment description names Southern Air Transport and Israeli charter; this does not establish the aircraft, operator or airfields on the 27th.",
+        "en_source": "Walshrapporten anger leverans av ytterligare 500 TOW till Iran den 27 februari. Den tidigare leveransen beskrivs med Southern Air Transport och israelisk charter; det fastställer inte flygplan, operatör eller flygplatser för den 27:e."
+      },
+      "unknown": [
+        "individual flights",
+        "departure and arrival times",
+        "date timezone",
+        "exact airfields",
+        "operator and aircraft serial",
+        "primary exhibit supporting the newly reported city pair"
+      ],
+      "window_relation": "Nearby context only. If the stated delivery date is Iran local time, delivery precedes the window. Date basis is not specified in the passage.",
+      "animate": false,
+      "supplementary_sources": [
+        {
+          "url": "https://ipisresearch.be/wp-content/uploads/2022/12/201102_The-Armsflyers.pdf",
+          "title": "The Arms Flyers, IPIS/TransArms (issued June 2011)",
+          "locator": "Printed/PDF pages 24–25, section 2.4 and footnote 102",
+          "evidence_type": "retrospective_secondary_compilation",
+          "review_status": "relevant_passages_read",
+          "summary": {
+            "sv": "IPIS/TransArms anger charterflyg Tel Aviv–Teheran med 500 TOW den 27 februari 1986. Fotnot 102 hänvisar samlat till kongressvittnesmål och National Security Archives kronologi; just denna rad har ännu inte spårats till originalbilagan.",
+            "en": "IPIS/TransArms lists a chartered Tel Aviv–Tehran flight carrying 500 TOWs on 27 February 1986. Footnote 102 collectively cites congressional testimony and the National Security Archive chronology; this specific row has not yet been traced to its original exhibit.",
+            "en_source": "IPIS/TransArms anger charterflyg Tel Aviv–Teheran med 500 TOW den 27 februari 1986. Fotnot 102 hänvisar samlat till kongressvittnesmål och National Security Archives kronologi; just denna rad har ännu inte spårats till originalbilagan."
+          }
+        }
+      ],
+      "route_places_reported": [
+        "Tel Aviv",
+        "Tehran"
+      ],
+      "route_evidence_status": "secondary_source_only_exact_airfields_unresolved"
+    },
+    {
+      "id": "gustav-return-19860228",
+      "classification": "military_personnel_travel_aircraft_unresolved",
+      "status": "retrospective_interview",
+      "date_from": "1986-02-28",
+      "date_to": "1986-02-28",
+      "time_precision": "day",
+      "countries": [
+        "se"
+      ],
+      "route_places": [
+        "Visby",
+        "Arlanda"
+      ],
+      "source_url": "https://wpu.nu/images/9/9b/Pol-1988-11-14_D9440-04_Lars-Nilsson-%C3%B6vningen-Gustav-Gotland.pdf",
+      "source_title": "Police interview D9440-04, 14 November 1988 (scan hosted by WPU)",
+      "source_locator": "Pages 1–2, visually reviewed scan; source names partly redacted",
+      "summary": {
+        "sv": "I förhöret uppges att övning GUSTAV avslutades på dagen 28 februari och att deltagarna flög Visby–Arlanda. Uppgiften belägger inte militärt flygplan eller militär operatör.",
+        "en": "The interview reports that exercise GUSTAV ended during 28 February and participants flew Visby–Arlanda. It does not establish a military aircraft or operator.",
+        "en_source": "I förhöret uppges att övning GUSTAV avslutades på dagen 28 februari och att deltagarna flög Visby–Arlanda. Uppgiften belägger inte militärt flygplan eller militär operatör."
+      },
+      "unknown": [
+        "flight number",
+        "operator",
+        "aircraft",
+        "departure and arrival times",
+        "independent movement log"
+      ],
+      "window_relation": "Reported date falls inside the window; exact flight unverified.",
+      "animate": false
+    },
+    {
+      "id": "anchor-express-1986",
+      "classification": "military_exercise_context",
+      "status": "exercise_period_only",
+      "date_from": "1986-02-15",
+      "date_to": "1986-03-06",
+      "planned_date_to": "1986-03-18",
+      "time_precision": "date_range",
+      "countries": [
+        "no"
+      ],
+      "source_url": "https://www.usni.org/magazines/proceedings/1987/may/u-s-naval-operations-1986",
+      "source_title": "U. S. Naval Operations in 1986, Proceedings, May 1987",
+      "source_locator": "Atlantic Command Exercises: Anchor Express; secondary retrospective overview",
+      "catalogue_lead": {
+        "reference": "POLADS(86)6",
+        "url": "https://archives.nato.int/communique-de-presse-et-politique-dinformation-du-public-proposes-pour-lexercice-anchor-express-86",
+        "review_status": "catalogue_only_document_not_read"
+      },
+      "summary": {
+        "sv": "USNI:s årsöversikt placerar Anchor Express i norra Norge 15 februari–18 mars (planerad slutdag), avbruten 6 mars. En NATO-katalogpost, POLADS(86)6, gäller informationsplaneringen. Det är ett arkivspår till militär verksamhet kring fönstret, inte belägg för en viss flygning den 28 februari.",
+        "en": "The USNI annual review places Anchor Express in northern Norway on 15 February–18 March (planned end), terminated on 6 March. NATO catalogue entry POLADS(86)6 concerns information planning. This is an archival lead for military activity near the window, not evidence for a particular flight on 28 February.",
+        "en_source": "USNI:s årsöversikt placerar Anchor Express i norra Norge 15 februari–18 mars (planerad slutdag), avbruten 6 mars. En NATO-katalogpost, POLADS(86)6, gäller informationsplaneringen. Det är ett arkivspår till militär verksamhet kring fönstret, inte belägg för en viss flygning den 28 februari."
+      },
+      "unknown": [
+        "individual flights",
+        "operators and aircraft identities",
+        "departure and arrival times",
+        "airfields"
+      ],
+      "window_relation": "Exercise-period overlap only; no individual flight established. The USMC landing phase is listed for 6–12 March, outside this window.",
+      "animate": false
+    }
+  ],
+  "follow_up_queue": [
+    {
+      "countries": [
+        "se"
+      ],
+      "target": "Exercise GUSTAV transport orders, tickets and airfield movement records for Visby and Arlanda, 28 February 1986",
+      "status": "specific_records_needed"
+    },
+    {
+      "countries": [
+        "us",
+        "ph",
+        "gu"
+      ],
+      "target": "MAC history source note 227 and mission/crew logs identifying each Marcos airlift segment",
+      "status": "specific_records_needed"
+    },
+    {
+      "countries": [
+        "us",
+        "il",
+        "ir"
+      ],
+      "target": "Iran/Contra logistics exhibits, manifests and aircraft logs for the shipment delivered 27 February",
+      "status": "specific_records_needed"
+    },
+    {
+      "countries": [
+        "gb"
+      ],
+      "target": "RAF squadron Operations Record Books and station movement logs, 27 February–1 March 1986",
+      "status": "specific_records_needed",
+      "additional_untranscribed_sources": [
+        "https://www.dtvmovements.co.uk/Archivesmonths/1986/1986%20-%20Feb.pdf",
+        "https://www.dtvmovements.co.uk/Archivesmonths/1986/1986%20-%20Mar.pdf"
+      ]
+    },
+    {
+      "countries": [
+        "za"
+      ],
+      "target": "SAAF unit diaries and transport squadron logs, 27 February–1 March 1986",
+      "status": "searched_no_timed_movement_found",
+      "checked_on": "2026-09-26",
+      "notes": "Search outcome in this batch, not a claim that no military flights occurred. SAAF movement logs remain required."
+    },
+    {
+      "countries": [
+        "su"
+      ],
+      "target": "Soviet unit flight logs and operational summaries for the same dates",
+      "status": "not_reviewed"
+    },
+    {
+      "countries": [
+        "no"
+      ],
+      "target": "Anchor Express 86 air movement orders, manifests and airfield journals for 27 February–1 March; start with NATO POLADS(86)6 for archival context",
+      "status": "specific_records_needed"
+    },
+    {
+      "countries": [
+        "dk"
+      ],
+      "target": "Danish military station movement journals and NATO transport orders for 27 February–1 March 1986; establish any actual flight before assigning a route",
+      "status": "specific_records_needed"
+    },
+    {
+      "countries": [
+        "il"
+      ],
+      "target": "Israeli military and Ben Gurion movement records, 27 February–1 March 1986; separately trace IPIS footnote 102 to the 27 February shipment exhibit",
+      "status": "specific_records_needed"
+    }
+  ]
+}

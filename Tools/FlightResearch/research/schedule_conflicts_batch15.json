@@ -1,0 +1,80 @@
+{
+  "batch": 15,
+  "conflicts": [
+    {
+      "schedule_id": "aer-lingus-157-LHR-DUB-1100",
+      "status": "unresolved",
+      "airport_timetable": {
+        "source": "dublin-winter-1985",
+        "page": "TO DUBLIN FROM Glasgow-Newcastle spread",
+        "departure": "11:00",
+        "arrival": "12:10",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "ba_timetable": {
+        "source": "british-airways-19851027-partial",
+        "page": "56",
+        "departure": "09:55",
+        "arrival": "11:05",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "action": "Candidate only; neither alternative animated. Find applicable Aer Lingus timetable or dated amendment."
+    },
+    {
+      "schedule_id": "aer-lingus-165-LHR-DUB-1445",
+      "status": "unresolved",
+      "airport_timetable": {
+        "source": "dublin-winter-1985",
+        "page": "TO DUBLIN FROM Glasgow-Newcastle spread",
+        "departure": "14:45",
+        "arrival": "15:55",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "ba_timetable": {
+        "source": "british-airways-19851027-partial",
+        "page": "56",
+        "departure": "13:45",
+        "arrival": "14:55",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "action": "Candidate only; neither alternative animated. Find applicable Aer Lingus timetable or dated amendment."
+    }
+  ],
+  "reviewed_non_conflict": {
+    "flight": "EI179",
+    "airport_friday": "21:20–22:30",
+    "ba_sunday": "19:45–20:55",
+    "decision": "Different operating days; Friday row retained, Sunday outside window."
+  }
+}

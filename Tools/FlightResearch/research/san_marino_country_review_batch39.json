@@ -1,0 +1,35 @@
+{
+  "batch": 39,
+  "package": "v40",
+  "country": "sm",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://aeroclubsanmarino.com/chi-siamo/",
+      "type": "operator_history_no_flight_log",
+      "result": "Aeroclub San Marinos egen historik daterar klubbens början till 1985 och skolaktivitet till 1986, utan månad/dag. Forskningsspår för Torraccia; inga tidsatta rörelser i observationsfönstret."
+    }
+  ],
+  "unresolved": [
+    "Torraccias flygdagböcker och klubb-/skolrörelser 28 februari–1 mars 1986 saknas. Årtalet för skolstart får inte tolkas som att skolan flög just dessa dagar.",
+    "Övrig privat-, stats-, helikopter- och militärtrafik samt faktiska överflygningar är inte inventerade. Ingen tid uppskattas och italienska Rimini flyttas inte till San Marino."
+  ],
+  "research_entities": [
+    {
+      "name": "Aeroclub San Marino",
+      "role": "flying club / school research lead, not a verified scheduled airline",
+      "source_id": "aeroclub-san-marino-history"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "batch": 47,
+  "package": "v48",
+  "checked_on": "2026-09-29",
+  "rows": [
+    {
+      "flight": "DA193",
+      "route": "INV–MAN",
+      "page": "10",
+      "direct_departure": "11:15",
+      "through_departure": "11:10",
+      "arrival": "12:10",
+      "reason": "Conflicting departures for the same service in the same spread. Neither INV–MAN time imported; separately timed MAN–LHR remains usable.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "flight": "DA125",
+      "route": "CWL–BRS",
+      "page": "4,7,8",
+      "reason": "Through BFS–BRS arrival 11:40 and CWL–BFS departure 11:20 are not a separately printed zero-stop row for CWL–BRS. Withheld pending direct-leg evidence.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "flight": "DA164",
+      "route": "NCL–ABZ",
+      "page": "12,13,18",
+      "reason": "LGW–NCL 14:10–15:15 is timed; through LGW–ABZ arrival 16:15 gives no NCL departure. No invented intermediate time.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    }
+  ],
+  "additional_exclusions": [
+    "Earlier Tees-side timing differences from batch46 remain; no October alternatives added.",
+    "Sunday-only and expired variants not imported. Christmas-only DA230 at 19:00 excluded; daily 19:15 row used.",
+    "BR-coded Gatwick–Jersey rows and continental European routes deferred to a later review; no assumed return flights."
+  ]
+}

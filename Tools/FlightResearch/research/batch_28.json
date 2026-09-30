@@ -1,0 +1,65 @@
+{
+  "batch": 28,
+  "package": "v29",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 1731,
+  "new_schedules": 4,
+  "new_schedule_ids": [
+    "aer-lingus-522-DUB-CDG-0805",
+    "air-france-969-DUB-CDG-1825",
+    "aer-lingus-523-CDG-DUB-1125",
+    "air-france-968-CDG-DUB-1700"
+  ],
+  "new_candidate_schedules": 0,
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "unchanged_previous_movements": 1731,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "fr",
+  "reviewed_countries_this_batch": [
+    "je",
+    "gg",
+    "im",
+    "ie"
+  ],
+  "new_movements": 6,
+  "total_movements": 1737,
+  "new_leg_ids": [
+    "aer-lingus-522-DUB-CDG-0805@1986-02-28",
+    "aer-lingus-523-CDG-DUB-1125@1986-02-28",
+    "air-france-968-CDG-DUB-1700@1986-02-28",
+    "air-france-969-DUB-CDG-1825@1986-02-28",
+    "aer-lingus-522-DUB-CDG-0805@1986-03-01",
+    "aer-lingus-523-CDG-DUB-1125@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "aer-lingus": 4,
+    "air-france": 2
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "CDG",
+      "DUB"
+    ],
+    [
+      "DUB",
+      "CDG"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 474,
+  "runtime_coverage": {
+    "registered_airlines": 81,
+    "registered_countries": 71,
+    "reviewed_schedules": 1160,
+    "animated_airlines": 37,
+    "scheduled_movements": 1736,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

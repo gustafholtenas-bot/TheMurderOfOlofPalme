@@ -1,0 +1,33 @@
+flight	origin	destination	departure	arrival	arrival_day_offset	days	page	image_id	leg_index	service_day_offset	routing_minutes	remark
+201	JFK	GIG	21:30	09:50	1	1234567	72	37307	1	0	560	Rio summer time UTC-2; next local day
+201	GIG	EZE	11:20	13:25	0	1234567	84	37319	2	1	185	Continuation of previous US service date
+202	EZE	GIG	18:45	22:35	0	1234567	23	37256	2	0	170	Rio summer time UTC-2
+202	GIG	JFK	23:35	06:05	1	1234567	85	37320	3	0	570	Before 29 March departure change
+440	GIG	MIA	23:59	05:15	1	1234567	85	37320	2	0	495	Printed 23:59 retained; one-minute difference from route chart
+440	MIA	LAX	08:00	10:30	0	1234567	63	37296	3	1	330	Continuation of previous Rio service date
+441	LAX	MIA	14:15	21:40	0	1234567	59	37292	1	0	265	Daily
+441	MIA	GIG	23:15	10:20	1	1234567	63	37296	2	0	485	Next local day in Rio
+453	MIA	EZE	23:30	10:05	1	2456	63	37296	2	0	515	Tuesday Thursday Friday Saturday
+453	EZE	SCL	11:00	13:05	0	3567	23	37256	3	1	125	Wednesday Friday Saturday Sunday; previous US service date
+454	SCL	EZE	19:45	21:25	0	3567	95	37330	1	0	100	Before 9 March departure change
+454	EZE	MIA	22:55	05:35	1	3567	23	37256	2	0	520	Next local day in Miami
+217	JFK	CCS	17:10	22:50	0	123457	71	37306	1	0	280	Except Saturday; valid through 28 February
+217	CCS	POS	23:20	00:30	1	123457	28	37261	2	0	70	Except Saturday; arrival following local day
+218	POS	CCS	08:00	09:10	0	123456	81	37316	1	0	70	Except Sunday before 3 March
+218	CCS	JFK	10:00	13:35	0	123456	28	37261	2	0	275	Except Sunday before 3 March
+442	CCS	MIA	08:15	10:25	0	1234567	28	37261	1	0	190	Daily
+445	MIA	CCS	14:00	18:00	0	1234567	63	37296	1	0	180	Daily
+409	MIA	MAR	18:10	21:55	0	457	63	37296	1	0	165	Thursday Friday Sunday
+410	MAR	MIA	09:40	11:30	0	156	60	37293	1	0	170	Monday Friday Saturday
+463	MIA	MEX	13:30	15:45	0	1234567	63	37296	2	0	195	Daily
+499	DCA	MIA	13:40	16:00	0	1234567	107	37342	1	0	140	Washington National N; not Dulles D
+499	MIA	MEX	18:10	20:25	0	1234567	63	37296	2	0	195	Daily
+464	MEX	MIA	07:50	11:30	0	1234567	62	37295	1	0	160	Daily
+498	MEX	MIA	12:55	16:35	0	1234567	62	37295	1	0	160	Daily
+456	MEX	IAD	09:45	15:00	0	1234567	62	37295	1	0	240	Dulles D; departure table is 15 minutes longer than route chart
+456	IAD	JFK	16:00	17:18	0	1234567	107	37342	2	0	63	Dulles D; departure table is 15 minutes longer than route chart
+457	JFK	IAD	16:15	17:44	0	1234567	72	37307	1	0	74	Dulles D; departure table is 15 minutes longer than route chart
+457	IAD	MEX	18:10	21:40	0	1234567	107	37342	2	0	255	Dulles D; departure table is 15 minutes longer than route chart
+467	MIA	TPA	09:00	09:45	0	1234567	64	37297	1	0	45	First physical leg of Miami-Tampa-Mexico City
+467	TPA	MEX	10:15	12:10	0	1234567	100	37335	2	0	175	Second physical leg
+468	MEX	TPA	16:30	20:05	0	1234567	62	37295	1	0	155	Onward Tampa-Miami time not imported from a connection

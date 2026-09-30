@@ -28,7 +28,7 @@ enum class ETMOPPauseHubSection : uint8
     MoveInTime,
     Theories, MurderDayMysteries, AfterMurderEvents, WorldGroups, SwedenGroups,
     MyObservations, MurderKnowledge, TheoryBuilder,
-    StockMarket // Append: preserve existing Blueprint/serialized enum values.
+    StockMarket, FlightTraffic // Append: preserve existing Blueprint/serialized enum values.
 };
 
 /** Paused main hub for inventory, research, publications and game management. */

@@ -1,0 +1,100 @@
+{
+  "batch": 52,
+  "package": "v53",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2566,
+  "new_schedules": 11,
+  "new_schedule_ids": [
+    "dan-air-852-LGW-BRN-0900-d6-b52",
+    "dan-air-854-LGW-BRN-1145-d5-b52",
+    "dan-air-853-BRN-LGW-1205-d6-b52",
+    "dan-air-857-BRN-LGW-1450-d5-b52",
+    "dan-air-862-LGW-ZRH-0900-d56-b52",
+    "dan-air-868-LGW-ZRH-1915-d5-b52",
+    "dan-air-876-MAN-ZRH-1430-d5-b52",
+    "dan-air-861-ZRH-LGW-0745-d56-b52",
+    "dan-air-863-ZRH-LGW-1345-d6-b52",
+    "dan-air-867-ZRH-LGW-1800-d5-b52",
+    "dan-air-875-ZRH-MAN-1245-d5-b52"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "BRN"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "dan-air-19851027-system"
+  ],
+  "unchanged_previous_movements": 2566,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "li",
+  "reviewed_countries_this_batch": [
+    "de-east",
+    "berlin-west",
+    "ch"
+  ],
+  "new_movements": 13,
+  "total_movements": 2579,
+  "new_leg_ids": [
+    "dan-air-861-ZRH-LGW-0745-d56-b52@1986-02-28",
+    "dan-air-862-LGW-ZRH-0900-d56-b52@1986-02-28",
+    "dan-air-854-LGW-BRN-1145-d5-b52@1986-02-28",
+    "dan-air-875-ZRH-MAN-1245-d5-b52@1986-02-28",
+    "dan-air-857-BRN-LGW-1450-d5-b52@1986-02-28",
+    "dan-air-876-MAN-ZRH-1430-d5-b52@1986-02-28",
+    "dan-air-867-ZRH-LGW-1800-d5-b52@1986-02-28",
+    "dan-air-868-LGW-ZRH-1915-d5-b52@1986-02-28",
+    "dan-air-861-ZRH-LGW-0745-d56-b52@1986-03-01",
+    "dan-air-852-LGW-BRN-0900-d6-b52@1986-03-01",
+    "dan-air-862-LGW-ZRH-0900-d56-b52@1986-03-01",
+    "dan-air-853-BRN-LGW-1205-d6-b52@1986-03-01",
+    "dan-air-863-ZRH-LGW-1345-d6-b52@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "dan-air": 13
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BRN",
+      "LGW"
+    ],
+    [
+      "LGW",
+      "BRN"
+    ],
+    [
+      "LGW",
+      "ZRH"
+    ],
+    [
+      "MAN",
+      "ZRH"
+    ],
+    [
+      "ZRH",
+      "LGW"
+    ],
+    [
+      "ZRH",
+      "MAN"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 727,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1830,
+    "animated_airlines": 47,
+    "scheduled_movements": 2578,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161
+}

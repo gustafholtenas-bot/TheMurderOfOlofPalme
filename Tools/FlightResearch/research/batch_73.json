@@ -1,0 +1,173 @@
+{
+  "batch": 73,
+  "package": "v74",
+  "checked_on": "2026-09-29",
+  "kind": "worldwide_schedule_gap_fill",
+  "previous_movements": 4680,
+  "new_schedules": 22,
+  "new_schedule_ids": [
+    "comair-1530-ORD-MKE-1115-b73",
+    "comair-1537-ORD-MKE-1435-b73",
+    "comair-1538-ORD-MKE-1805-b73",
+    "comair-1539-ORD-MKE-2135-b73",
+    "comair-1531-MKE-ORD-0600-b73",
+    "comair-1536-MKE-ORD-1300-b73",
+    "comair-1537-MKE-ORD-1555-b73",
+    "comair-1538-MKE-ORD-1855-b73",
+    "comair-1610-CVG-STL-0935-b73",
+    "comair-1612-CVG-STL-1515-b73",
+    "comair-1658-CVG-STL-1823-b73",
+    "comair-1592-STL-CVG-0625-b73",
+    "comair-1616-STL-CVG-1200-b73",
+    "comair-1634-STL-CVG-1600-b73",
+    "comair-1704-CVG-YYZ-0808-b73",
+    "comair-1700-CVG-YYZ-1519-b73",
+    "comair-1702-CVG-YYZ-1935-b73",
+    "comair-1703-YYZ-CVG-0700-b73",
+    "comair-1705-YYZ-CVG-1015-b73",
+    "comair-1701-YYZ-CVG-1725-b73",
+    "comair-1579-MKE-FWA-1130-b73",
+    "comair-1587-FWA-DTW-2059-b73"
+  ],
+  "source_rows": 23,
+  "source_row_actions": {
+    "new_schedule": 22,
+    "excluded_connection": 1
+  },
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "YYZ"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "delta-19860201"
+  ],
+  "preserved_previous_movement_ids": 4680,
+  "unchanged_previous_movement_times": 4680,
+  "unchanged_previous_movement_objects": 4680,
+  "corrected_previous_movement_times": 0,
+  "updated_previous_movement_notes": 0,
+  "removed_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_priority": "More COMAIR Cincinnati/Chicago routes; Delta Dallas/Fort Worth; unresolved batch63 DL475/705 minute digits",
+  "europe_resume_country": "cy",
+  "reviewed_countries_this_batch": [],
+  "new_movements": 33,
+  "net_movement_change": 33,
+  "total_movements": 4713,
+  "new_movements_by_source_airline": {
+    "comair": 33
+  },
+  "new_leg_ids": [
+    "comair-1537-MKE-ORD-1555-b73@1986-02-27",
+    "comair-1634-STL-CVG-1600-b73@1986-02-27",
+    "comair-1701-YYZ-CVG-1725-b73@1986-02-27",
+    "comair-1658-CVG-STL-1823-b73@1986-02-27",
+    "comair-1538-ORD-MKE-1805-b73@1986-02-27",
+    "comair-1702-CVG-YYZ-1935-b73@1986-02-27",
+    "comair-1538-MKE-ORD-1855-b73@1986-02-27",
+    "comair-1587-FWA-DTW-2059-b73@1986-02-27",
+    "comair-1539-ORD-MKE-2135-b73@1986-02-27",
+    "comair-1531-MKE-ORD-0600-b73@1986-02-28",
+    "comair-1703-YYZ-CVG-0700-b73@1986-02-28",
+    "comair-1592-STL-CVG-0625-b73@1986-02-28",
+    "comair-1704-CVG-YYZ-0808-b73@1986-02-28",
+    "comair-1610-CVG-STL-0935-b73@1986-02-28",
+    "comair-1705-YYZ-CVG-1015-b73@1986-02-28",
+    "comair-1530-ORD-MKE-1115-b73@1986-02-28",
+    "comair-1616-STL-CVG-1200-b73@1986-02-28",
+    "comair-1536-MKE-ORD-1300-b73@1986-02-28",
+    "comair-1612-CVG-STL-1515-b73@1986-02-28",
+    "comair-1700-CVG-YYZ-1519-b73@1986-02-28",
+    "comair-1537-ORD-MKE-1435-b73@1986-02-28",
+    "comair-1537-MKE-ORD-1555-b73@1986-02-28",
+    "comair-1634-STL-CVG-1600-b73@1986-02-28",
+    "comair-1701-YYZ-CVG-1725-b73@1986-02-28",
+    "comair-1658-CVG-STL-1823-b73@1986-02-28",
+    "comair-1538-ORD-MKE-1805-b73@1986-02-28",
+    "comair-1702-CVG-YYZ-1935-b73@1986-02-28",
+    "comair-1538-MKE-ORD-1855-b73@1986-02-28",
+    "comair-1587-FWA-DTW-2059-b73@1986-02-28",
+    "comair-1539-ORD-MKE-2135-b73@1986-02-28",
+    "comair-1703-YYZ-CVG-0700-b73@1986-03-01",
+    "comair-1592-STL-CVG-0625-b73@1986-03-01",
+    "comair-1579-MKE-FWA-1130-b73@1986-03-01"
+  ],
+  "new_directed_endpoint_pairs": [
+    [
+      "CVG",
+      "STL"
+    ],
+    [
+      "CVG",
+      "YYZ"
+    ],
+    [
+      "FWA",
+      "DTW"
+    ],
+    [
+      "MKE",
+      "FWA"
+    ],
+    [
+      "STL",
+      "CVG"
+    ],
+    [
+      "YYZ",
+      "CVG"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 987,
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161,
+  "runtime_coverage": {
+    "registered_airlines": 95,
+    "registered_countries": 81,
+    "reviewed_schedules": 2941,
+    "animated_airlines": 49,
+    "scheduled_movements": 4712,
+    "confirmed_movements": 1
+  },
+  "new_local_departures_by_date": {
+    "1986-02-27": 9,
+    "1986-02-28": 21,
+    "1986-03-01": 3
+  },
+  "reviewed_rows_without_window_movements": [],
+  "comair_total_movements": 89,
+  "delta_total_movements": 897,
+  "existing_source_rows": [],
+  "excluded_source_rows": [
+    {
+      "source_row": 22,
+      "schedule": "",
+      "existing_schedule": "",
+      "action": "excluded_connection",
+      "airline": "mixed_delta_comair_connection",
+      "flight": "1574/336",
+      "origin": "MKE",
+      "destination": "FWA",
+      "departure_local": "17:34",
+      "arrival_local": "22:28",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "IND",
+      "printed_page": "154",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connection via IND; component legs are not inferred."
+    }
+  ],
+  "research_transcription_corrections": []
+}

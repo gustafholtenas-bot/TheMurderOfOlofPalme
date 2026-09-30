@@ -1,0 +1,25 @@
+id	flight	origin	destination	departure	arrival	arrival_day_offset	days	valid_from	valid_to	service_group	leg_index	service_day_offset	page
+jal-418-AMS-CPH-1230	418	AMS	CPH	12:30	13:50	0	6	1986-02-26	1986-03-01	jal-418	1	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-418-CPH-ANC-1505	418	CPH	ANC	15:05	13:40	0	6	1986-02-26	1986-03-01	jal-418	2	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-418-ANC-NRT-1455	418	ANC	NRT	14:55	16:15	1	6	1986-02-26	1986-03-01	jal-418	3	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-412-FCO-AMS-1220	412	FCO	AMS	12:20	14:50	0	4	1986-02-26	1986-03-01	jal-412	1	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-412-AMS-ANC-1600	412	AMS	ANC	16:00	14:55	0	4	1986-02-26	1986-03-01	jal-412	2	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-412-ANC-NRT-1610	412	ANC	NRT	16:10	17:30	1	4	1986-02-26	1986-03-01	jal-412	3	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-436-FRA-DUS-1250	436	FRA	DUS	12:50	13:40	0	5	1986-02-26	1986-03-01	jal-436	1	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-436-DUS-ANC-1500	436	DUS	ANC	15:00	14:00	0	5	1986-02-26	1986-03-01	jal-436	2	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-436-ANC-NRT-1515	436	ANC	NRT	15:15	16:35	1	5	1986-02-26	1986-03-01	jal-436	3	0	Europe (polar route), inbound columns / image 5WoAAOSwe6JmxkVv
+jal-5-JFK-NRT-1230	5	JFK	NRT	12:30	16:30	1	1,2,3,4,5,6,7	1986-02-26	1986-03-01	jal-5	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-11-MEX-YVR-1015	11	MEX	YVR	10:15	13:40	0	2,4	1986-02-26	1986-03-01	jal-11	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-11-YVR-NRT-1500	11	YVR	NRT	15:00	17:55	1	2,4	1986-02-26	1986-03-01	jal-11	2	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-9-ORD-SEA-1100	9	ORD	SEA	11:00	13:05	0	1,3,6	1986-02-26	1986-03-01	jal-9	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-9-SEA-NRT-1425	9	SEA	NRT	14:25	17:30	1	1,3,6	1986-02-26	1986-03-01	jal-9	2	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-61-SFO-NRT-1000	61	SFO	NRT	10:00	13:55	1	1,2,3,4,5,6,7	1986-02-26	1986-03-01	jal-61	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-3-SFO-HNL-1000	3	SFO	HNL	10:00	13:25	0	5,7	1986-02-26	1986-03-01	jal-3-via-HNL	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-3-HNL-NRT-1440	3	HNL	NRT	14:40	18:35	1	5,7	1986-02-26	1986-03-01	jal-3-via-HNL	2	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-3-SFO-NRT-1220	3	SFO	NRT	12:20	16:15	1	6	1986-02-26	1986-03-01	jal-3-Saturday	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-1-YVR-NRT-1345	1	YVR	NRT	13:45	16:40	1	1,2,3,4,5,6,7	1986-02-26	1986-03-01	jal-1	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-77-HNL-NRT-1000	77	HNL	NRT	10:00	13:55	1	1,2,3,4,5,6,7	1986-02-26	1986-03-01	jal-77	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-73-HNL-NRT-1130	73	HNL	NRT	11:30	15:25	1	1,2,3,4,5,6,7	1986-02-26	1986-03-01	jal-73	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-75-HNL-NRT-0930	75	HNL	NRT	09:30	13:25	1	5	1986-02-26	1986-03-01	jal-75	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-41-JFK-ANC-0245	41	JFK	ANC	02:45	06:10	0	1,2,3,4,5,6,7	1986-02-26	1986-03-01	jal-41	1	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx
+jal-41-ANC-NRT-0710	41	ANC	NRT	07:10	08:30	1	1,2,3,4,5,6,7	1986-02-26	1986-03-01	jal-41	2	0	Transpacific, inbound columns / image 42kAAOSwoQtmxkVx

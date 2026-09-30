@@ -1,0 +1,22 @@
+{
+  "batch": 33,
+  "airports": [
+    {
+      "id": "SXB",
+      "name": "Strasbourg–Entzheim",
+      "country": "fr",
+      "timezone": "Europe/Paris",
+      "lat": 48.54194444,
+      "lon": 7.63444444,
+      "coordinate_source": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/pdf/FR-AD-2.LFST-fr-FR.pdf",
+      "coordinate_record_id": "LFST",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Contemporary timetable identifies Strasbourg Entzheim, 12 km from the city, on printed pages 21 and 88. Modern SIA ARP 483231N 0073804E is used only as an approximate airfield reference, not a reconstructed 1986 gate or aircraft position. Coordinate table was available in the official-source search extract; direct PDF retrieval returned 404.",
+      "arp_dms_as_published": "483231N 0073804E",
+      "checked_on": "2026-09-28"
+    }
+  ]
+}

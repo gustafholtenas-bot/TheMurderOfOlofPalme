@@ -1,0 +1,172 @@
+{
+  "batch": 27,
+  "package": "v28",
+  "country": "dk",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i landkön; inte en fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 84,
+  "domestic_movements": 1,
+  "international_movements": 83,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {
+    "sas": 65,
+    "air-france": 11,
+    "air-uk": 4,
+    "air-business": 1,
+    "aeroflot": 1,
+    "jal": 2
+  },
+  "endpoint_leg_ids": [
+    "sas-673-ARN-CPH-0730@1986-02-28",
+    "sas-400-CPH-ARN-0740@1986-02-28",
+    "sas-401-ARN-CPH-0750@1986-02-28",
+    "sas-593-ARN-CPH-0800@1986-02-28",
+    "air-france-792-CDG-CPH-0855@1986-02-28",
+    "sas-402-CPH-ARN-0915@1986-02-28",
+    "sas-404-CPH-ARN-0920@1986-02-28",
+    "sas-403-ARN-CPH-0935@1986-02-28",
+    "sas-563-CPH-CDG-0940@1986-02-28",
+    "sas-581-ARN-CPH-0945@1986-02-28",
+    "sas-405-ARN-CPH-1015@1986-02-28",
+    "sas-730-CPH-ARN-1120@1986-02-28",
+    "sas-412-CPH-ARN-1125@1986-02-28",
+    "air-france-793-CPH-CDG-1140@1986-02-28",
+    "sas-575-CPH-NCE-1210@1986-02-28",
+    "sas-564-CDG-CPH-1220@1986-02-28",
+    "air-uk-660-NCL-CPH-1130@1986-02-28",
+    "air-uk-620-HUY-EBJ-1140@1986-02-28",
+    "sas-407-ARN-CPH-1245@1986-02-28",
+    "sas-411-ARN-CPH-1315@1986-02-28",
+    "sas-674-CPH-ARN-1415@1986-02-28",
+    "sas-413-ARN-CPH-1425@1986-02-28",
+    "sas-684-CPH-ARN-1505@1986-02-28",
+    "air-business-163-EBJ-AAR-1510@1986-02-28",
+    "air-france-1790-LYS-CPH-1510@1986-02-28",
+    "air-uk-621-EBJ-HUY-1510@1986-02-28",
+    "sas-414-CPH-ARN-1510@1986-02-28",
+    "air-uk-661-CPH-NCL-1525@1986-02-28",
+    "sas-415-ARN-CPH-1555@1986-02-28",
+    "air-france-576-NCE-CPH-1600@1986-02-28",
+    "sas-682-CPH-ARN-1615@1986-02-28",
+    "sas-567-CPH-CDG-1620@1986-02-28",
+    "aeroflot-580-SVO-CPH-1850@1986-02-28",
+    "sas-419-ARN-CPH-1650@1986-02-28",
+    "air-france-798-CDG-CPH-1715@1986-02-28",
+    "sas-418-CPH-ARN-1800@1986-02-28",
+    "sas-417-ARN-CPH-1805@1986-02-28",
+    "sas-424-CPH-ARN-1805@1986-02-28",
+    "sas-1791-CPH-LYS-1820@1986-02-28",
+    "sas-731-ARN-CPH-1850@1986-02-28",
+    "sas-426-CPH-ARN-1905@1986-02-28",
+    "sas-568-CDG-CPH-1935@1986-02-28",
+    "sas-423-ARN-CPH-1950@1986-02-28",
+    "sas-425-ARN-CPH-1955@1986-02-28",
+    "air-france-799-CPH-CDG-2000@1986-02-28",
+    "sas-582-CPH-ARN-2010@1986-02-28",
+    "sas-422-CPH-ARN-2015@1986-02-28",
+    "sas-420-CPH-ARN-2210@1986-02-28",
+    "sas-673-ARN-CPH-0730@1986-03-01",
+    "sas-400-CPH-ARN-0740@1986-03-01",
+    "sas-401-ARN-CPH-0750@1986-03-01",
+    "sas-593-ARN-CPH-0800@1986-03-01",
+    "air-france-792-CDG-CPH-0855@1986-03-01",
+    "sas-404-CPH-ARN-0920@1986-03-01",
+    "sas-403-ARN-CPH-0935@1986-03-01",
+    "sas-563-CPH-CDG-0940@1986-03-01",
+    "sas-581-ARN-CPH-0945@1986-03-01",
+    "sas-405-ARN-CPH-1015@1986-03-01",
+    "sas-406-CPH-ARN-1120@1986-03-01",
+    "sas-412-CPH-ARN-1125@1986-03-01",
+    "air-france-793-CPH-CDG-1140@1986-03-01",
+    "sas-575-CPH-NCE-1210@1986-03-01",
+    "sas-564-CDG-CPH-1220@1986-03-01",
+    "jal-418-AMS-CPH-1230@1986-03-01",
+    "sas-409-ARN-CPH-1240@1986-03-01",
+    "sas-407-ARN-CPH-1245@1986-03-01",
+    "sas-411-ARN-CPH-1315@1986-03-01",
+    "sas-674-CPH-ARN-1415@1986-03-01",
+    "jal-418-CPH-ANC-1505@1986-03-01",
+    "sas-684-CPH-ARN-1505@1986-03-01",
+    "sas-414-CPH-ARN-1510@1986-03-01",
+    "sas-415-ARN-CPH-1555@1986-03-01",
+    "air-france-576-NCE-CPH-1600@1986-03-01",
+    "sas-682-CPH-ARN-1615@1986-03-01",
+    "sas-567-CPH-CDG-1620@1986-03-01",
+    "sas-419-ARN-CPH-1650@1986-03-01",
+    "air-france-798-CDG-CPH-1715@1986-03-01",
+    "sas-596-CPH-ARN-1800@1986-03-01",
+    "sas-417-ARN-CPH-1805@1986-03-01",
+    "sas-426-CPH-ARN-1905@1986-03-01",
+    "sas-568-CDG-CPH-1935@1986-03-01",
+    "air-france-799-CPH-CDG-2000@1986-03-01",
+    "sas-582-CPH-ARN-2010@1986-03-01",
+    "sas-420-CPH-ARN-2210@1986-03-01"
+  ],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://www.ebay.com/itm/233822845397",
+      "type": "contemporary_partial_photos",
+      "result": "Nytt Maersk-blad för Southend–Billund, 28 oktober 1985–27 mars 1986. Fem fotografier granskade; tider/dagkoder för små för säker import."
+    },
+    {
+      "url": "https://www.timetableimages.com/i-19/8a8510a.jpg",
+      "type": "contemporary_cover",
+      "result": "Air Business-omslag visuellt granskat: 27 oktober 1985–29 mars 1986, Esbjerg–Århus–Stavanger. Inga egna avgångssidor."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/8a1.htm",
+      "type": "index_checked",
+      "result": "Vinteromslag finns; komplett marsutgåva 1986 börjar efter observationsfönstret."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/dm.htm",
+      "type": "index_checked",
+      "result": "Läsbart äldre Southend–Billund-blad från 1984 är inte belägg för helgen 1986."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/qi.htm",
+      "type": "index_checked",
+      "result": "Ingen ny läsbar vinteravgångssida för rätt period hittad i Cimber-indexet."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/dx.htm",
+      "type": "index_checked",
+      "result": "Danair-indexets äldre utgåvor ersätter inte vinterutgåvan 1985/86."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/dk/danair.htm",
+      "type": "edition_index",
+      "result": "27 oktober 1985–29 mars 1986 registrerad i index; ingen läsbar avgångsskanning hittad där."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/dk/maersk.htm",
+      "type": "index_checked",
+      "result": "Ingen bättre läsbar vinterutgåva 1985/86 hittad."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/dk/cimber.htm",
+      "type": "index_checked",
+      "result": "Ingen läsbar rätt vinterutgåva hittad."
+    },
+    {
+      "url": "https://www.ebay.com/itm/126511284900",
+      "type": "listing_photos_checked",
+      "result": "Fotografier 2–4 visar senare tidtabeller; inga vinterrader 1985/86 importerade."
+    },
+    {
+      "url": "https://www.marinehist.dk/FLYV/1986-FLYV.pdf",
+      "type": "ocr_discovery_only",
+      "result": "Årsvolym nedladdad, textsökning i första 80 PDF-sidorna gav ingen importklar vintertidtabell. Ingen fullständig visuell genomgång gjord."
+    }
+  ],
+  "unresolved": [
+    "Maersk Southend–Billund: högre upplösning på tider, dagkoder och eventuella undantag.",
+    "Danair/Cimber och SAS: kompletta vinteravgångssidor, inklusive danska inrikeslinjer.",
+    "Air Business: egna avgångssidor och tidsatta delsträckor till/från Stavanger.",
+    "CPH–ARN:s parallella SAS-rader, SK524 Gatwick–Århus och ytterligare utländska Danmarkflyg.",
+    "Färöarna och Grönland återstår som särskilda områden; Grönland ligger utanför Europa."
+  ]
+}

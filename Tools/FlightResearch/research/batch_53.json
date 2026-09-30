@@ -1,0 +1,64 @@
+{
+  "batch": 53,
+  "package": "v54",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2579,
+  "new_schedules": 2,
+  "new_schedule_ids": [
+    "dan-air-880-LGW-INN-0800-d6-b53",
+    "dan-air-881-INN-LGW-1145-d6-b53"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "INN"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "dan-air-19851027-system"
+  ],
+  "unchanged_previous_movements": 2579,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "sm",
+  "reviewed_countries_this_batch": [
+    "li",
+    "at",
+    "it"
+  ],
+  "new_movements": 2,
+  "total_movements": 2581,
+  "new_leg_ids": [
+    "dan-air-880-LGW-INN-0800-d6-b53@1986-03-01",
+    "dan-air-881-INN-LGW-1145-d6-b53@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "dan-air": 2
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "INN",
+      "LGW"
+    ],
+    [
+      "LGW",
+      "INN"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 729,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1832,
+    "animated_airlines": 47,
+    "scheduled_movements": 2580,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161
+}

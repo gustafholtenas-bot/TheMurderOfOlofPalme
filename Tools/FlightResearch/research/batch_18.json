@@ -1,0 +1,412 @@
+{
+  "batch": 18,
+  "package": "v19",
+  "checked_on": "2026-09-28",
+  "previous_movements": 1182,
+  "new_schedules": 32,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [
+    "panam-201-JFK-GIG-2130",
+    "panam-201-GIG-EZE-1120",
+    "panam-202-EZE-GIG-1845",
+    "panam-202-GIG-JFK-2335",
+    "panam-440-GIG-MIA-2359",
+    "panam-440-MIA-LAX-0800",
+    "panam-441-LAX-MIA-1415",
+    "panam-441-MIA-GIG-2315",
+    "panam-453-MIA-EZE-2330",
+    "panam-453-EZE-SCL-1100",
+    "panam-454-SCL-EZE-1945",
+    "panam-454-EZE-MIA-2255",
+    "panam-217-JFK-CCS-1710",
+    "panam-217-CCS-POS-2320",
+    "panam-218-POS-CCS-0800",
+    "panam-218-CCS-JFK-1000",
+    "panam-442-CCS-MIA-0815",
+    "panam-445-MIA-CCS-1400",
+    "panam-409-MIA-MAR-1810",
+    "panam-410-MAR-MIA-0940",
+    "panam-463-MIA-MEX-1330",
+    "panam-499-DCA-MIA-1340",
+    "panam-499-MIA-MEX-1810",
+    "panam-464-MEX-MIA-0750",
+    "panam-498-MEX-MIA-1255",
+    "panam-456-MEX-IAD-0945",
+    "panam-456-IAD-JFK-1600",
+    "panam-457-JFK-IAD-1615",
+    "panam-457-IAD-MEX-1810",
+    "panam-467-MIA-TPA-0900",
+    "panam-467-TPA-MEX-1015",
+    "panam-468-MEX-TPA-1630"
+  ],
+  "new_airports": [
+    "EZE",
+    "GIG",
+    "CCS",
+    "MAR",
+    "POS",
+    "MEX"
+  ],
+  "new_country_ids": [
+    "ve",
+    "tt"
+  ],
+  "source_files": [
+    {
+      "source": "panam-19860211",
+      "image_id": "37256",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37256/full/2000,/0/default.jpg",
+      "sha256": "b493619bcbe16d84fc307bf7474cc5458e2eaeb7c8195e1116c5b5654082691a",
+      "bytes": 1627313,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37261",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37261/full/2000,/0/default.jpg",
+      "sha256": "d49cb9bc63d7a8c752c81ffdced8facd5108270f49c41fb53b034e6cb5302215",
+      "bytes": 1613055,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37292",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37292/full/2000,/0/default.jpg",
+      "sha256": "26d483acef7ce13505f02c68292e7cc9bfb5810aedda191969b6351242511cf8",
+      "bytes": 1532095,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37293",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37293/full/2000,/0/default.jpg",
+      "sha256": "1645df28d5f74fc235de7d600e2e0e14b5ccd6c80fbe7d486f2aacfd97899e44",
+      "bytes": 1544389,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37295",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37295/full/2000,/0/default.jpg",
+      "sha256": "aba5b53d3d2ef4d65e442c5c83a7119e2f5121060270c582d4c6d4debe898631",
+      "bytes": 1626515,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37296",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37296/full/2000,/0/default.jpg",
+      "sha256": "b81d9de01a09f2564871ae70b921dddd953456a30d09c9391bd83459fdcdd71c",
+      "bytes": 1547521,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37297",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37297/full/2000,/0/default.jpg",
+      "sha256": "8a5fb96362aca395645635132f42f420b80ecec8a76e2dcc1f9002cb7394f5c0",
+      "bytes": 665268,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37306",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37306/full/2000,/0/default.jpg",
+      "sha256": "99de77a0c86666a035719d5eaa65b0c2bb5dd6ff7dca6763a34ba6e8ca6e3658",
+      "bytes": 1540014,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37307",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37307/full/2000,/0/default.jpg",
+      "sha256": "c8c9907766f417dc708680f3b53ff30d968b6a49389c73e86ba0886bd24ade01",
+      "bytes": 1575535,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37316",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37316/full/2000,/0/default.jpg",
+      "sha256": "c202a5487c1a4e74d3d42eb9ecbf4642384e652d28ba07ff03a6807dd4cfdc08",
+      "bytes": 1513397,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37319",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37319/full/2000,/0/default.jpg",
+      "sha256": "81d59dae0f2a27a41caf7f38b2596487a51b370091d0a0d6ab8ca00dd2531600",
+      "bytes": 1523002,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37320",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37320/full/2000,/0/default.jpg",
+      "sha256": "b31af9c32420499f670ad9df870bcb61260a96578ec9bb6a73b4dcf3d9ea0906",
+      "bytes": 1462757,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37330",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37330/full/2000,/0/default.jpg",
+      "sha256": "329255c46da9c9d76d04ff5bb161d839659dfc68263f3f85c570983165603120",
+      "bytes": 1522224,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37335",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37335/full/2000,/0/default.jpg",
+      "sha256": "2ed33df05304873987d8a9b08dd05d10941f1f7045c3cefdb47ed89827c32fae",
+      "bytes": 1504143,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37342",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37342/full/2000,/0/default.jpg",
+      "sha256": "796eef1711dd7cc58d6ee88585fa204d43048f3ab025ede54e6652e133a021d3",
+      "bytes": 1506499,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37347",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37347/full/2000,/0/default.jpg",
+      "sha256": "84cbb3bfb006e32ee2a7ffb04fa5dfa9ac8d64252caff7856f5f4b0164118c83",
+      "bytes": 1497418,
+      "visually_reviewed": true
+    },
+    {
+      "source": "panam-19860211",
+      "image_id": "37348",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37348/full/2000,/0/default.jpg",
+      "sha256": "50371cdff6059050dff651a6c40fb1686103fee673695fe6987116e0acd6065f",
+      "bytes": 1474029,
+      "visually_reviewed": true
+    }
+  ],
+  "new_movements": 65,
+  "total_movements": 1247,
+  "new_leg_ids": [
+    "panam-457-JFK-IAD-1615@1986-02-27",
+    "panam-202-EZE-GIG-1845@1986-02-27",
+    "panam-217-JFK-CCS-1710@1986-02-27",
+    "panam-441-LAX-MIA-1415@1986-02-27",
+    "panam-468-MEX-TPA-1630@1986-02-27",
+    "panam-409-MIA-MAR-1810@1986-02-27",
+    "panam-457-IAD-MEX-1810@1986-02-27",
+    "panam-499-MIA-MEX-1810@1986-02-27",
+    "panam-202-GIG-JFK-2335@1986-02-27",
+    "panam-440-GIG-MIA-2359@1986-02-27",
+    "panam-201-JFK-GIG-2130@1986-02-27",
+    "panam-217-CCS-POS-2320@1986-02-27",
+    "panam-441-MIA-GIG-2315@1986-02-27",
+    "panam-453-MIA-EZE-2330@1986-02-27",
+    "panam-218-POS-CCS-0800@1986-02-28",
+    "panam-442-CCS-MIA-0815@1986-02-28",
+    "panam-440-MIA-LAX-0800@1986-02-28",
+    "panam-201-GIG-EZE-1120@1986-02-28",
+    "panam-410-MAR-MIA-0940@1986-02-28",
+    "panam-464-MEX-MIA-0750@1986-02-28",
+    "panam-218-CCS-JFK-1000@1986-02-28",
+    "panam-453-EZE-SCL-1100@1986-02-28",
+    "panam-467-MIA-TPA-0900@1986-02-28",
+    "panam-467-TPA-MEX-1015@1986-02-28",
+    "panam-456-MEX-IAD-0945@1986-02-28",
+    "panam-463-MIA-MEX-1330@1986-02-28",
+    "panam-499-DCA-MIA-1340@1986-02-28",
+    "panam-498-MEX-MIA-1255@1986-02-28",
+    "panam-445-MIA-CCS-1400@1986-02-28",
+    "panam-456-IAD-JFK-1600@1986-02-28",
+    "panam-457-JFK-IAD-1615@1986-02-28",
+    "panam-202-EZE-GIG-1845@1986-02-28",
+    "panam-217-JFK-CCS-1710@1986-02-28",
+    "panam-441-LAX-MIA-1415@1986-02-28",
+    "panam-468-MEX-TPA-1630@1986-02-28",
+    "panam-454-SCL-EZE-1945@1986-02-28",
+    "panam-409-MIA-MAR-1810@1986-02-28",
+    "panam-457-IAD-MEX-1810@1986-02-28",
+    "panam-499-MIA-MEX-1810@1986-02-28",
+    "panam-202-GIG-JFK-2335@1986-02-28",
+    "panam-454-EZE-MIA-2255@1986-02-28",
+    "panam-440-GIG-MIA-2359@1986-02-28",
+    "panam-201-JFK-GIG-2130@1986-02-28",
+    "panam-217-CCS-POS-2320@1986-02-28",
+    "panam-441-MIA-GIG-2315@1986-02-28",
+    "panam-453-MIA-EZE-2330@1986-02-28",
+    "panam-218-POS-CCS-0800@1986-03-01",
+    "panam-442-CCS-MIA-0815@1986-03-01",
+    "panam-440-MIA-LAX-0800@1986-03-01",
+    "panam-201-GIG-EZE-1120@1986-03-01",
+    "panam-410-MAR-MIA-0940@1986-03-01",
+    "panam-464-MEX-MIA-0750@1986-03-01",
+    "panam-218-CCS-JFK-1000@1986-03-01",
+    "panam-453-EZE-SCL-1100@1986-03-01",
+    "panam-467-MIA-TPA-0900@1986-03-01",
+    "panam-467-TPA-MEX-1015@1986-03-01",
+    "panam-456-MEX-IAD-0945@1986-03-01",
+    "panam-463-MIA-MEX-1330@1986-03-01",
+    "panam-499-DCA-MIA-1340@1986-03-01",
+    "panam-498-MEX-MIA-1255@1986-03-01",
+    "panam-445-MIA-CCS-1400@1986-03-01",
+    "panam-456-IAD-JFK-1600@1986-03-01",
+    "panam-457-JFK-IAD-1615@1986-03-01",
+    "panam-202-EZE-GIG-1845@1986-03-01",
+    "panam-441-LAX-MIA-1415@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1182,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_nordic_endpoint_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "new_endpoint_pairs": [
+    [
+      "CCS",
+      "JFK"
+    ],
+    [
+      "CCS",
+      "MIA"
+    ],
+    [
+      "CCS",
+      "POS"
+    ],
+    [
+      "DCA",
+      "MIA"
+    ],
+    [
+      "EZE",
+      "GIG"
+    ],
+    [
+      "EZE",
+      "MIA"
+    ],
+    [
+      "EZE",
+      "SCL"
+    ],
+    [
+      "GIG",
+      "EZE"
+    ],
+    [
+      "GIG",
+      "JFK"
+    ],
+    [
+      "GIG",
+      "MIA"
+    ],
+    [
+      "IAD",
+      "JFK"
+    ],
+    [
+      "IAD",
+      "MEX"
+    ],
+    [
+      "JFK",
+      "CCS"
+    ],
+    [
+      "JFK",
+      "GIG"
+    ],
+    [
+      "JFK",
+      "IAD"
+    ],
+    [
+      "LAX",
+      "MIA"
+    ],
+    [
+      "MAR",
+      "MIA"
+    ],
+    [
+      "MEX",
+      "IAD"
+    ],
+    [
+      "MEX",
+      "MIA"
+    ],
+    [
+      "MEX",
+      "TPA"
+    ],
+    [
+      "MIA",
+      "CCS"
+    ],
+    [
+      "MIA",
+      "EZE"
+    ],
+    [
+      "MIA",
+      "GIG"
+    ],
+    [
+      "MIA",
+      "LAX"
+    ],
+    [
+      "MIA",
+      "MAR"
+    ],
+    [
+      "MIA",
+      "MEX"
+    ],
+    [
+      "MIA",
+      "TPA"
+    ],
+    [
+      "POS",
+      "CCS"
+    ],
+    [
+      "SCL",
+      "EZE"
+    ],
+    [
+      "TPA",
+      "MEX"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 358,
+  "runtime_coverage": {
+    "registered_airlines": 79,
+    "registered_countries": 69,
+    "reviewed_schedules": 821,
+    "animated_airlines": 29,
+    "scheduled_movements": 1246,
+    "confirmed_movements": 1
+  },
+  "nordic_exclusion_sources": [
+    {
+      "image_id": "37231",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37231/full/2000,/0/default.jpg",
+      "sha256": "ff0a6f6e242d60f5ab6296e061ea9203dfef1e59deb40522596fbbd8544ac672",
+      "visually_reviewed": true
+    },
+    {
+      "image_id": "37232",
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37232/full/2000,/0/default.jpg",
+      "sha256": "8a6c7ea96ec0c13dc4467a2eecb40003ec5f63710dd628fc695f23e399ea90f1",
+      "visually_reviewed": true
+    }
+  ]
+}

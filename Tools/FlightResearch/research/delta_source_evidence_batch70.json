@@ -1,0 +1,63 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    49,
+    50,
+    51,
+    52
+  ],
+  "footnotes_printed_pages": [
+    49,
+    51,
+    53
+  ],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "49": 27,
+    "50": 28,
+    "51": 28,
+    "52": 29,
+    "53": 29
+  },
+  "new_airports": [],
+  "existing_airport_ids": [
+    "BOS",
+    "CVG",
+    "DFW",
+    "DTW",
+    "FLL",
+    "JFK",
+    "LAX",
+    "LGA",
+    "MCO",
+    "MIA",
+    "MSY",
+    "ONT",
+    "ORD",
+    "PHL",
+    "SFO",
+    "TPA"
+  ],
+  "existing_airport_records_modified": false,
+  "notes": [
+    "Visual scans determine accepted fields; OCR is not authoritative.",
+    "DL849 CVG–SFO 09:35–11:15 starts 1 March: one movement.",
+    "DL850 CVG–BOS 19:41–21:25 also starts 1 March but departs after the window: no imported schedule.",
+    "Footnote 4 on DL680 and DL277 means effective 12 February, not an end date.",
+    "CVG–LAX connecting itinerary 261/181 footnote 6 starts 2 March; remains excluded.",
+    "Footnote 1 marks scheduled equipment changes on the one-/two-stop MCO/FLL itineraries.",
+    "All accepted arrivals on same local calendar day.",
+    "CVG and eastern destinations UTC−5; ORD/DFW/MSY UTC−6; LAX/SFO UTC−8.",
+    "New York L means LaGuardia, J means Kennedy; Los Angeles L means LAX, O means Ontario; Florida M/F means Miami/Fort Lauderdale.",
+    "COMAIR flights 1525–1749 deferred; these are not Delta-operated flights.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

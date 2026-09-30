@@ -161,6 +161,44 @@ def compile_catalog(catalog):
                     legs.append(leg)
             day += dt.timedelta(days=1)
     require(set(observations).issubset(used_observations), 'Observation does not match an operating schedule date in this window')
+    # One-off movements (military, charter, private) need their own evidence;
+    # never manufacture a recurring timetable to fit a documented flight.
+    movements = indexed(catalog.get('movements', []), 'movements')
+    for key, m in movements.items():
+        require(m['review_status'] in {'candidate', 'reviewed', 'rejected'}, key + ': movement review status')
+        if m['review_status'] != 'reviewed':
+            continue
+        require(m['airline'] in airlines and m['origin'] in airports and m['destination'] in airports, key + ': movement reference')
+        require(m['origin'] != m['destination'], key + ': same endpoint')
+        require(m['source'] in sources and m['page'] and m['flight'], key + ': movement citation/label')
+        source = sources[m['source']]
+        require(source['kind'] == 'movement_record' and source['access'] in {'full_scan', 'partial_scan'}, key + ': actual movement requires readable movement-record evidence')
+        require(m['status'] == 'confirmed' and m['nonstop'] is True, key + ': actual status/physical leg')
+        require(m['time_precision'] in {'minute', 'second'}, key + ': exact recorded times required for animation')
+        require(m['movement_type'] in {'military', 'charter', 'private', 'commercial', 'state'}, key + ': movement type')
+        departure, arrival = instant(m['departure_utc']), instant(m['arrival_utc'])
+        require(0 < (arrival - departure).total_seconds() <= 72 * 3600, key + ': actual duration')
+        if m['time_precision'] == 'minute':
+            require(departure.second == arrival.second == departure.microsecond == arrival.microsecond == 0, key + ': minute precision')
+        if not (departure < end and arrival > start):
+            excluded.append({'movement': key, 'reason': 'outside_window', 'source': m['source'], 'page': m['page']})
+            continue
+        identity = m['airline'], m['flight'], m['origin'], m['destination'], iso(departure)
+        require(identity not in duplicates, key + ': duplicate physical movement')
+        duplicates.add(identity)
+        origin, destination = airports[m['origin']], airports[m['destination']]
+        record_id = 'movement:' + key
+        # `schedule` is the legacy runtime/localisation record key, not a claim
+        # that a timetable exists. No schedule row is created for this record.
+        legs.append(dict(id=record_id, schedule=record_id, record_type='movement',
+                         airline=m['airline'], flight=m['flight'], origin=m['origin'], destination=m['destination'],
+                         status='confirmed', movement_type=m['movement_type'], time_precision=m['time_precision'],
+                         departure_utc=iso(departure), arrival_utc=iso(arrival),
+                         departure_local=departure.astimezone(ZoneInfo(origin['timezone'])).isoformat(timespec='seconds' if m['time_precision']=='second' else 'minutes'),
+                         arrival_local=arrival.astimezone(ZoneInfo(destination['timezone'])).isoformat(timespec='seconds' if m['time_precision']=='second' else 'minutes'),
+                         departure_seconds=(departure-start).total_seconds(), arrival_seconds=(arrival-start).total_seconds(),
+                         source=m['source'], page=m['page'], notes=m['notes'],
+                         service_group=record_id, leg_index=1, journey=record_id))
     legs.sort(key=lambda x: (x['departure_seconds'], x['id']))
     journeys = {}
     for leg in legs:

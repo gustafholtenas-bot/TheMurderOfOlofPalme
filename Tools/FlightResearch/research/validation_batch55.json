@@ -1,0 +1,221 @@
+{
+  "package": "v56",
+  "batch": 55,
+  "checked_on": "2026-09-29",
+  "new_reviewed_schedules": 2,
+  "new_candidate_schedules": 0,
+  "new_movements": 2,
+  "total_movements": 2586,
+  "unchanged_previous_movements": 2584,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [],
+  "all_previous_airport_objects_unchanged": true,
+  "all_previous_schedules_unchanged": true,
+  "all_previous_airline_objects_unchanged": true,
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "panam-19860211"
+  ],
+  "source_changes": "Appended reviewed pages and notes only; all existing source fields preserved.",
+  "all_other_previous_source_objects_unchanged": true,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": 0,
+  "new_movements_by_source_airline": {
+    "panam": 2
+  },
+  "new_movements_by_date": {
+    "1986-02-28": 1,
+    "1986-03-01": 1
+  },
+  "source_rows_visually_checked": true,
+  "physical_leg_basis": "Two contemporary Pan Am rows explicitly marked Nonstop, one for each direction. Both are valid in the observation window and use historical Pleso and Riem airports.",
+  "calendar_and_utc_checks": [
+    {
+      "id": "panam-77-ZAG-MUC-RIEM-0930-d5-b55@1986-02-28",
+      "departure_utc": "1986-02-28T08:30:00Z",
+      "arrival_utc": "1986-02-28T09:25:00Z",
+      "duration_minutes": 55,
+      "printed_days": "FrSu",
+      "printed_stops": "Nonstop",
+      "printed_page": "109",
+      "printed_valid_to": "1986-03-28"
+    },
+    {
+      "id": "panam-76-MUC-RIEM-ZAG-1115-d6-b55@1986-03-01",
+      "departure_utc": "1986-03-01T10:15:00Z",
+      "arrival_utc": "1986-03-01T11:10:00Z",
+      "duration_minutes": 55,
+      "printed_days": "ThSa",
+      "printed_stops": "Nonstop",
+      "printed_page": "68",
+      "printed_valid_to": "1986-03-29"
+    }
+  ],
+  "old_air_inter_conflict_candidates_unchanged": 10,
+  "total_candidates_unchanged": 21,
+  "interflug_research_rows_unchanged": 22,
+  "excluded_departures": "One-stop Belgrade itineraries not imported as nonstop or split without missing intermediate timings. Zagreb–Frankfurt April Friday variant not backdated. Bucharest weekdays outside the import window excluded. No winter timings inferred from summer timetables or edition covers.",
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "source_files_sha256": {
+    "/tmp/batch55/pa-original-index14.jpg": "014f6653e365517ed307a0b7452c086de02c477c1b97e4b05c1c13f7e83ad486",
+    "/tmp/batch55/pa-original-index15.jpg": "67d44ca049ce453ee32cf29912f68ce1ead5a6e4445edd5df11491e4df1d6151",
+    "/tmp/batch55/pa-original-index75.jpg": "5852d1c8f51de37bbbe9cbd9ad17c8af91b3f49f02ca61bd67109c9d5f1f4287",
+    "/tmp/batch55/pa-original-index115.jpg": "d4d76ee8d0975f5c26bd8b08a2c13c8745672037279c20cd9fe57bcb8c27cdad",
+    "/tmp/batch55/pa-original-index116.jpg": "36eab365c546a262ac42e911f34ba7f9380ad00a88f4a00151bb8f5fd8dba2da",
+    "/tmp/batch54/pa-original-index26.jpg": "d15a2c7416f4e0d0b9d8096ddb9f4ba1bc6a065ec83ee47c4dc0ddf8025c1fe6",
+    "/tmp/batch37/pa-index74.jpg": "53919d133b1b4c989ed16ea66623748d286589d03187fd19bc574f61c57de242",
+    "/tmp/batch55/balkan-pinterest.html": "f0333885258510a8c8cdd65e5f1da1ecc4174ba45cdd1317fcb00dbd40908bf1",
+    "/tmp/batch55/balkan-pin.png": "be73f9f3c8f6a44343d14595b6689ed83a7e41cfa04b0e7223c90861060a2098"
+  },
+  "panam_evidence": [
+    {
+      "printed_page": 68,
+      "scan_index": 75,
+      "url": "https://cdm17191.contentdm.oclc.org/iiif/2/asm0341:37303/full/full/0/default.jpg",
+      "sha256": "5852d1c8f51de37bbbe9cbd9ad17c8af91b3f49f02ca61bd67109c9d5f1f4287"
+    },
+    {
+      "printed_page": 109,
+      "scan_index": 116,
+      "url": "https://cdm17191.contentdm.oclc.org/iiif/2/asm0341:37344/full/full/0/default.jpg",
+      "sha256": "36eab365c546a262ac42e911f34ba7f9380ad00a88f4a00151bb8f5fd8dba2da"
+    },
+    {
+      "printed_page": 108,
+      "scan_index": 115,
+      "url": "https://cdm17191.contentdm.oclc.org/iiif/2/asm0341:37343/full/full/0/default.jpg",
+      "sha256": "d4d76ee8d0975f5c26bd8b08a2c13c8745672037279c20cd9fe57bcb8c27cdad"
+    },
+    {
+      "printed_page": 9,
+      "scan_index": 14,
+      "url": "https://cdm17191.contentdm.oclc.org/iiif/2/asm0341:37242/full/full/0/default.jpg",
+      "sha256": "014f6653e365517ed307a0b7452c086de02c477c1b97e4b05c1c13f7e83ad486"
+    },
+    {
+      "printed_page": 10,
+      "scan_index": 15,
+      "url": "https://cdm17191.contentdm.oclc.org/iiif/2/asm0341:37243/full/full/0/default.jpg",
+      "sha256": "67d44ca049ce453ee32cf29912f68ce1ead5a6e4445edd5df11491e4df1d6151"
+    }
+  ],
+  "europe_country_rows_checked": 40,
+  "next_country": "al",
+  "country_endpoint_totals": {
+    "ro": 3,
+    "bg": 5,
+    "yu": 12,
+    "de-west": 330
+  },
+  "nordic_endpoint_movements": 161,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c3d8ea",
+        "wall_time_seconds": 1.8198e-05,
+        "exit_code": 0,
+        "original_token_count": 28,
+        "output": "..........\n----------------------------------------------------------------------\nRan 20 tests in 3.257s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "77f27d",
+        "wall_time_seconds": 0.226062373,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 93, \"registered_countries\": 81, \"reviewed_schedules\": 1837, \"animated_airlines\": 47, \"scheduled_movements\": 2585, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "acf9fc",
+        "wall_time_seconds": 0.069448321,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "b5911a",
+        "wall_time_seconds": 0.079243817,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "eb71d9",
+        "wall_time_seconds": 1.5784e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

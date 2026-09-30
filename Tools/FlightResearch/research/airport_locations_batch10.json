@@ -1,0 +1,36 @@
+{
+  "checked_on": "2026-09-26",
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "37b78b5514711a70fb50e0f4c60b809b30988a84e37b0d814e20ca5591177cc1",
+  "notes": "Schematic airfield coordinates, not 1986 terminals, runways or stands. Atlanta uses the historical Hartsfield name; Jackson was added in 2003. Delta Paris services explicitly use Orly, not Charles de Gaulle. London services use existing LGW, not LHR.",
+  "airports": [
+    {
+      "id": "ATL",
+      "name": "Atlanta–Hartsfield (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 33.6367,
+      "lon": -84.428101,
+      "coordinate_source": "https://ourairports.com/airports/KATL/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.atl.com/about-old/history-of-atl/",
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201"
+      ]
+    },
+    {
+      "id": "ORY",
+      "name": "Paris–Orly",
+      "country": "fr",
+      "timezone": "Europe/Paris",
+      "lat": 48.729499,
+      "lon": 2.358963,
+      "coordinate_source": "https://ourairports.com/airports/LFPO/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.iledefrance.fr/decouvrir-la-richesse-du-patrimoine/orly-aeroport-des-sixties-sixties-airport",
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201"
+      ]
+    }
+  ]
+}

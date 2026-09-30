@@ -1,0 +1,4 @@
+airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_days	page	source
+panam	114	JFK	CDG	18:45	07:40	1	Daily	72	panam-19860211
+panam	114	CDG	TLV	10:35	16:00	0	ExTuWe	79	panam-19860211
+panam	115	CDG	JFK	12:00	14:05	0	Daily	78	panam-19860211

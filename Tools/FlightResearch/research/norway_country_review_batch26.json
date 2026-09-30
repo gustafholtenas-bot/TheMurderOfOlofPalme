@@ -1,0 +1,313 @@
+{
+  "batch": 26,
+  "package": "v27",
+  "country": "no",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "coverage_complete": false,
+  "endpoint_movements": 47,
+  "domestic_movements": 28,
+  "international_movements": 19,
+  "endpoint_movements_by_source_airline": {
+    "air-france": 4,
+    "air-uk": 2,
+    "braathens": 28,
+    "golden-air": 6,
+    "northwest": 2,
+    "sas": 5
+  },
+  "endpoint_leg_ids": [
+    "braathens-221-SVG-BGO-0645@1986-02-28",
+    "braathens-223-SVG-BGO-0700@1986-02-28",
+    "braathens-070-KRS-FBU-0755@1986-02-28",
+    "braathens-211-TRF-SVG-0820@1986-02-28",
+    "braathens-271-KRS-SVG-0825@1986-02-28",
+    "golden-air-513-KSD-OLD-FBU-0910@1986-02-28",
+    "braathens-271-SVG-BGO-0920@1986-02-28",
+    "braathens-211-SVG-HAU-0935@1986-02-28",
+    "air-uk-602-ABZ-SVG-0850@1986-02-28",
+    "braathens-211-HAU-BGO-1010@1986-02-28",
+    "golden-air-514-FBU-KSD-OLD-1015@1986-02-28",
+    "braathens-202-KRS-FBU-1020@1986-02-28",
+    "air-france-796-CDG-FBU-1030@1986-02-28",
+    "braathens-233-SVG-BGO-1115@1986-02-28",
+    "braathens-135-RRS-FBU-1125@1986-02-28",
+    "braathens-273-KRS-SVG-1130@1986-02-28",
+    "braathens-238-HAU-SVG-1140@1986-02-28",
+    "sas-531-SVG-ABZ-1225@1986-02-28",
+    "braathens-272-KRS-FBU-1235@1986-02-28",
+    "braathens-136-RRS-TRD-1240@1986-02-28",
+    "air-france-796-FBU-GOT-1325@1986-02-28",
+    "golden-air-515-KSD-OLD-FBU-1415@1986-02-28",
+    "sas-532-ABZ-SVG-1315@1986-02-28",
+    "braathens-237-TRF-SVG-1430@1986-02-28",
+    "golden-air-516-FBU-KSD-OLD-1530@1986-02-28",
+    "braathens-237-SVG-HAU-1545@1986-02-28",
+    "sas-569-FBU-CDG-1610@1986-02-28",
+    "braathens-237-HAU-BGO-1620@1986-02-28",
+    "air-uk-601-SVG-ABZ-1650@1986-02-28",
+    "braathens-052-KRS-FBU-1650@1986-02-28",
+    "braathens-210-HAU-SVG-1825@1986-02-28",
+    "golden-air-517-KSD-OLD-FBU-1850@1986-02-28",
+    "golden-air-518-FBU-KSD-OLD-1945@1986-02-28",
+    "braathens-231-TRF-SVG-2020@1986-02-28",
+    "braathens-221-SVG-BGO-0645@1986-03-01",
+    "braathens-070-KRS-FBU-0755@1986-03-01",
+    "braathens-275-SVG-BGO-0920@1986-03-01",
+    "air-france-796-CDG-FBU-1030@1986-03-01",
+    "braathens-204-KRS-FBU-1150@1986-03-01",
+    "braathens-134-RRS-TRD-1155@1986-03-01",
+    "northwest-37-ARN-GEN-1220@1986-03-01",
+    "sas-533-SVG-ABZ-1225@1986-03-01",
+    "air-france-796-FBU-GOT-1325@1986-03-01",
+    "braathens-137-RRS-FBU-1325@1986-03-01",
+    "sas-534-ABZ-SVG-1315@1986-03-01",
+    "northwest-37-GEN-JFK-1420@1986-03-01",
+    "braathens-274-KRS-FBU-1505@1986-03-01"
+  ],
+  "registered_airport_ids": [
+    "FBU",
+    "GEN",
+    "BGO",
+    "KRS",
+    "HAU",
+    "RRS",
+    "TRF",
+    "TRD",
+    "SVG"
+  ],
+  "new_movements": 0,
+  "new_schedules": 0,
+  "new_runtime_candidates": 0,
+  "checks": [
+    {
+      "url": "https://www.ebay.co.uk/itm/206172029345",
+      "result": "Vinterutgåva 27 oktober 1985–29 mars 1986. Tryckta s. 10, 11 och 20 återlästa visuellt. Befintliga 26 importerade rader ger 28 rörelser; inga ytterligare importklara fysiska delsträckor.",
+      "kind": "contemporary_pages_rechecked",
+      "printed_pages": [
+        10,
+        11,
+        20
+      ]
+    },
+    {
+      "url": "https://www.ebay.com/itm/198572849980",
+      "result": "Annonsens HTML kunde hämtas. Samma tre fotografier som tidigare källa; inga nya returflygssidor.",
+      "kind": "duplicate_scan_listing"
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/no/braathens/detail/mpa-bu851027.jpg",
+      "result": "Linjekarta länkad som 27 oktober 1985, visuellt läst. Linjerna anger inte enskilda flygnummer, stopptider eller vilka mellanlandningar ett visst flyg gör.",
+      "kind": "route_map_checked"
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/no/braathens/gal/bugal-1a80.htm",
+      "result": "1980-talsgalleriet kontrollerat; inga ytterligare läsbara avgångssidor för vintern hittades.",
+      "kind": "index_checked"
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/no/norway.htm",
+      "result": "Index över gemensamma Braathens/SAS/Widerøe-tabeller. 1985-posten gäller 8 juli–26 oktober och täcker inte målhelgen.",
+      "kind": "wrong_period_index"
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/rt1.htm",
+      "result": "Norving: 27 oktober 1985 finns som omslag/index. Kompletta länkar för 31 mars 1985 och 30 mars 1986 är andra utgåvor; inga vintertider importerade.",
+      "kind": "index_checked"
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/wf.htm",
+      "result": "Widerøe-indexet gav ingen utgåva för vintern 1985/86. Inga tider hämtade från andra år.",
+      "kind": "index_checked"
+    },
+    {
+      "url": "https://www.danairremembered.com/timetables.php",
+      "result": "Tidtabellsgalleriets bildlänkar och beskrivningar kontrollerade. De närliggande 1985-sommar- och 1986/87-vinterbilderna gav inga avgångssidor för den sökta vintern.",
+      "kind": "index_checked"
+    },
+    {
+      "url": "https://forum.flyprat.no/threads/svg-hau.69988/",
+      "result": "Sökresultat med återgivna RT103/RT405-tider och hänvisning till Rutebok for Norge 1985. Originaltabell, exakt säsong och trafikdagar saknas i det granskade utdraget; endast ett sökspår.",
+      "kind": "secondary_search_lead_only"
+    },
+    {
+      "url": "https://api.nb.no/catalog/v1/items?q=%22Rutebok%20for%20Norge%22&size=10",
+      "result": "Offentliga katalogsökningar gav bibliografiska träffar och material från andra perioder. Ingen tillämplig originaltabell lästes. Sökutfallet bevisar inte att rätt utgåva saknas i arkivet.",
+      "kind": "public_metadata_search"
+    }
+  ],
+  "reviewed_asset_hashes": [
+    {
+      "pages_visually_reviewed": [
+        "20"
+      ],
+      "sha256": "d8125d97f14360e2bb4c21f3017d2e5d976423e5a25e2954f3a6ec311c31dfff",
+      "bytes": 1391685,
+      "redistributed": false
+    },
+    {
+      "pages_visually_reviewed": [
+        "10",
+        "11"
+      ],
+      "sha256": "be66f02863c60822593419da1b62882a831b17a3078425e3ed633c6eb59dac77",
+      "bytes": 1526334,
+      "redistributed": false
+    },
+    {
+      "pages_visually_reviewed": [
+        "route_map"
+      ],
+      "sha256": "871b60a16788e11cc0018b29bae9f994d75e6d56f87bf545af55f439b9adac46",
+      "bytes": 224970,
+      "redistributed": false
+    }
+  ],
+  "braathens_connection_rows_for_followup": [
+    {
+      "flight": "BU009",
+      "origin": "FBU",
+      "destination": "SVG",
+      "departure": "12:45",
+      "arrival": "13:30",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "page": "20",
+      "source": "braathens-19851027",
+      "status": "research_only",
+      "nonstop_verified": false,
+      "reason": "Tider i anslutningsförslag; separat avgångsrad eller motsvarande belägg för stoppmönstret behövs. Inte importerad eller animerad."
+    },
+    {
+      "flight": "BU013",
+      "origin": "FBU",
+      "destination": "SVG",
+      "departure": "16:15",
+      "arrival": "17:00",
+      "days": [
+        6
+      ],
+      "page": "20",
+      "source": "braathens-19851027",
+      "status": "research_only",
+      "nonstop_verified": false,
+      "reason": "Tider i anslutningsförslag; separat avgångsrad eller motsvarande belägg för stoppmönstret behövs. Inte importerad eller animerad."
+    },
+    {
+      "flight": "BU206",
+      "origin": "TRD",
+      "destination": "AES",
+      "departure": "15:50",
+      "arrival": "16:25",
+      "days": [
+        6
+      ],
+      "page": "20",
+      "source": "braathens-19851027",
+      "status": "research_only",
+      "nonstop_verified": false,
+      "reason": "Tider i anslutningsförslag; separat avgångsrad eller motsvarande belägg för stoppmönstret behövs. Inte importerad eller animerad."
+    },
+    {
+      "flight": "BU232",
+      "origin": "TRD",
+      "destination": "AES",
+      "departure": "13:35",
+      "arrival": "14:10",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "page": "20",
+      "source": "braathens-19851027",
+      "status": "research_only",
+      "nonstop_verified": false,
+      "reason": "Tider i anslutningsförslag; separat avgångsrad eller motsvarande belägg för stoppmönstret behövs. Inte importerad eller animerad."
+    },
+    {
+      "flight": "BU233",
+      "origin": "BGO",
+      "destination": "AES",
+      "departure": "12:05",
+      "arrival": "12:40",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "page": "10; compare 20",
+      "source": "braathens-19851027",
+      "status": "research_only",
+      "nonstop_verified": false,
+      "reason": "Tider i anslutningsförslag; separat avgångsrad eller motsvarande belägg för stoppmönstret behövs. Inte importerad eller animerad."
+    },
+    {
+      "flight": "BU277",
+      "origin": "BGO",
+      "destination": "AES",
+      "departure": "17:05",
+      "arrival": "17:40",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "page": "10; compare 20",
+      "source": "braathens-19851027",
+      "status": "research_only",
+      "nonstop_verified": false,
+      "reason": "Tider i anslutningsförslag; separat avgångsrad eller motsvarande belägg för stoppmönstret behövs. Inte importerad eller animerad."
+    },
+    {
+      "flight": "BU282",
+      "origin": "SVG",
+      "destination": "KRS",
+      "departure": "21:05",
+      "arrival": "21:35",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "page": "10",
+      "source": "braathens-19851027",
+      "status": "research_only",
+      "nonstop_verified": false,
+      "reason": "Tider i anslutningsförslag; separat avgångsrad eller motsvarande belägg för stoppmönstret behövs. Inte importerad eller animerad."
+    }
+  ],
+  "carried_forward_gaps": [
+    "SAS SK516 LGW–BGO i British Caledonians anslutningssidor: stoppmönster och eventuella separata mellantider behöver beläggas.",
+    "SAS SK570 GOT–FBU: separat avgångstid saknas i det tidigare Air France-underlaget.",
+    "Golden Air Karlskoga–Karlstad: separata tider behövs innan ytterligare delsträcka kan skapas.",
+    "Braathens: resterande avgångssidor, returer, teckenförklaring, ändringsblad och faktisk utförare.",
+    "SAS, Widerøe och Norving: kompletta vintertabeller giltiga för målhelgen.",
+    "Utländska Norgeflyg, regional-/charter-/frakt-/militärtrafik och offshoretrafik behöver mer samtida underlag.",
+    "Svalbard/Jan Mayen och faktiska överflygningar kvarstår som separata sökområden; inga nya tidsatta rörelser funna i detta urval."
+  ],
+  "discovery_names_unverified_for_exact_window": [
+    "Busy Bee",
+    "Partnair",
+    "Norsk Flytjeneste/Norsk Air",
+    "Coast Aero Center",
+    "Mørefly",
+    "Trønderfly",
+    "Fonnafly"
+  ],
+  "discovery_note": "Söknamn, inte verifierad operatörsförteckning för målhelgen. Inga nya runtime-operatörer eller flygplatser har skapats från dessa namn.",
+  "next_country": "dk"
+}

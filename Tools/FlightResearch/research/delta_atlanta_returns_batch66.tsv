@@ -1,0 +1,81 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	delta-225-BOS-ATL-0700-b66		new_schedule	delta	225	BOS	ATL	07:00	09:34	0		1234567	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+2	delta-125-BOS-ATL-0825-b66		new_schedule	delta	125	BOS	ATL	08:25	11:01	0		1234567	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+3	delta-841-BOS-ATL-1201-b66		new_schedule	delta	841	BOS	ATL	12:01	14:37	0		1234567	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+4			excluded_through_service	delta	429	BOS	ATL	12:15	15:56	0		1234567	1	31		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes a stop and is not a physical nonstop segment.
+5	delta-535-BOS-ATL-1515-b66		new_schedule	delta	535	BOS	ATL	15:15	17:48	0		1234567	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+6	delta-463-BOS-ATL-1700-b66		new_schedule	delta	463	BOS	ATL	17:00	19:36	0		1234567	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+7	delta-333-BOS-ATL-1945-b66		new_schedule	delta	333	BOS	ATL	19:45	22:18	0		1234567	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+8	delta-1162-ORD-ATL-0500-b66		new_schedule	delta	1162	ORD	ATL	05:00	07:36	0	X7	123456	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+9	delta-579-ORD-ATL-0700-b66		new_schedule	delta	579	ORD	ATL	07:00	09:39	0		1234567	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+10	delta-45-ORD-ATL-0810-b66		new_schedule	delta	45	ORD	ATL	08:10	10:50	0		1234567	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+11	delta-533-ORD-ATL-1010-b66		new_schedule	delta	533	ORD	ATL	10:10	12:49	0		1234567	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+12			excluded_through_service	delta	425	ORD	ATL	11:05	14:39	0		1234567	1	46		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes a stop and is not a physical nonstop segment.
+13	delta-575-ORD-ATL-1320-b66		new_schedule	delta	575	ORD	ATL	13:20	15:59	0		1234567	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+14	delta-81-ORD-ATL-1515-b66		new_schedule	delta	81	ORD	ATL	15:15	17:55	0		1234567	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+15	delta-465-ORD-ATL-1705-b66		new_schedule	delta	465	ORD	ATL	17:05	19:44	0		1234567	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+16	delta-177-ORD-ATL-1905-b66		new_schedule	delta	177	ORD	ATL	19:05	21:45	0		1234567	0	46		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+17	delta-132-DFW-ATL-0640-b66		new_schedule	delta	132	DFW	ATL	06:40	09:24	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+18	delta-118-DFW-ATL-0828-b66		new_schedule	delta	118	DFW	ATL	08:28	11:12	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+19	delta-790-DFW-ATL-1005-b66		new_schedule	delta	790	DFW	ATL	10:05	12:49	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+20	delta-280-DFW-ATL-1150-b66		new_schedule	delta	280	DFW	ATL	11:50	14:34	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+21	delta-14-DFW-ATL-1314-b66		new_schedule	delta	14	DFW	ATL	13:14	15:58	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+22	delta-888-DFW-ATL-1505-b66		new_schedule	delta	888	DFW	ATL	15:05	17:34	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+23	delta-138-DFW-ATL-1550-b66		new_schedule	delta	138	DFW	ATL	15:50	18:43	0	6	6	0	64	5	delta-19860201	1986-03-01	1986-03-08	1986-03-01	1986-03-01	
+24	delta-748-DFW-ATL-1648-b66		new_schedule	delta	748	DFW	ATL	16:48	19:32	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+25	delta-864-DFW-ATL-1925-b66		new_schedule	delta	864	DFW	ATL	19:25	22:09	0	X6	123457	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+26			outside_window	delta	874	DFW	ATL	19:28	22:12	0	6	6	0	64		delta-19860201	1986-02-01				Saturday-only departure on 1 March occurs after 1986-03-01T22:21:30Z. No overlapping movement; research row only, no catalog schedule.
+27	delta-386-DFW-ATL-2158-b66		new_schedule	delta	386	DFW	ATL	21:58	00:37	1		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+28	delta-295-DTW-ATL-0600-b66		new_schedule	delta	295	DTW	ATL	06:00	07:37	0	X67	12345	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+29			excluded_connection	delta	1650/805	DTW	ATL	06:20	09:19	0	X67	12345	CVG	73		delta-19860201	1986-02-01				Printed connection via CVG; not an uninterrupted DTW–ATL segment or an independently established commuter operation.
+30	delta-785-DTW-ATL-0910-b66		new_schedule	delta	785	DTW	ATL	09:10	10:50	0		1234567	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+31	delta-723-DTW-ATL-1259-b66		new_schedule	delta	723	DTW	ATL	12:59	14:39	0		1234567	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+32			excluded_connection	delta	1721/441	DTW	ATL	14:45	17:40	0	X67	12345	DAY	73		delta-19860201	1986-02-01				Printed connection via DAY; not an uninterrupted DTW–ATL segment or an independently established commuter operation.
+33	delta-157-DTW-ATL-1620-b66		new_schedule	delta	157	DTW	ATL	16:20	18:00	0		1234567	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+34			outside_window	delta	481	DTW	ATL	17:50	19:30	0	6	6	0	73		delta-19860201	1986-02-01				Saturday-only departure on 1 March occurs after 1986-03-01T22:21:30Z. No overlapping movement; research row only, no catalog schedule.
+35	delta-293-DTW-ATL-2010-b66		new_schedule	delta	293	DTW	ATL	20:10	21:50	0		1234567	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+36			excluded_through_service	delta	516	MIA	ATL	03:30	06:02	0		1234567	1	150		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes a stop and is not a physical nonstop segment.
+37			excluded_through_service	delta	596	FLL	ATL	03:40	06:02	0		1234567	1	150		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes a stop and is not a physical nonstop segment.
+38		delta-753-FLL-ATL-0605-b64	existing_schedule	delta	753	FLL	ATL	06:05	07:42	0		1234567	0	150		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+39	delta-53-MIA-ATL-0605-b66		new_schedule	delta	53	MIA	ATL	06:05	07:45	0		1234567	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+40		delta-84-FLL-ATL-0800-b64	existing_schedule	delta	84	FLL	ATL	08:00	09:40	0		1234567	0	150		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+41	delta-817-MIA-ATL-0920-b66		new_schedule	delta	817	MIA	ATL	09:20	11:03	0		1234567	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+42	delta-476-MIA-ATL-1100-b66		new_schedule	delta	476	MIA	ATL	11:00	12:43	0	67	67	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+43		delta-756-FLL-ATL-1110-b64	existing_schedule	delta	756	FLL	ATL	11:10	12:50	0		1234567	0	150		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+44		delta-43-FLL-ATL-1255-b64	existing_schedule	delta	43	FLL	ATL	12:55	14:35	0		1234567	0	150		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+45	delta-97-MIA-ATL-1255-b66		new_schedule	delta	97	MIA	ATL	12:55	14:39	0		1234567	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+46			excluded_through_service	delta	764	MIA	ATL	13:10	15:55	0	7	7	1	150		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes a stop and is not a physical nonstop segment. Sunday-only frequency 7 is also outside the local departure dates.
+47		delta-776-FLL-ATL-1425-b64	existing_schedule	delta	776	FLL	ATL	14:25	16:05	0		1234567	0	150		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+48	delta-738-MIA-ATL-1425-b66		new_schedule	delta	738	MIA	ATL	14:25	16:08	0		1234567	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+49		delta-264-FLL-ATL-1755-b64	existing_schedule	delta	264	FLL	ATL	17:55	19:35	0		1234567	0	150		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+50	delta-806-MIA-ATL-1800-b66		new_schedule	delta	806	MIA	ATL	18:00	19:43	0		1234567	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+51	delta-380-MIA-ATL-2000-b66		new_schedule	delta	380	MIA	ATL	20:00	21:40	0		1234567	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+52		delta-188-FLL-ATL-2040-b64	existing_schedule	delta	188	FLL	ATL	20:40	22:20	0		1234567	0	150		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+53	delta-551-PHL-ATL-0600-b66		new_schedule	delta	551	PHL	ATL	06:00	07:53	0		1234567	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+54	delta-473-PHL-ATL-0900-b66		new_schedule	delta	473	PHL	ATL	09:00	10:56	0		1234567	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+55	delta-237-PHL-ATL-1245-b66		new_schedule	delta	237	PHL	ATL	12:45	14:40	0		1234567	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+56	delta-429-PHL-ATL-1400-b66		new_schedule	delta	429	PHL	ATL	14:00	15:56	0		1234567	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+57	delta-523-PHL-ATL-1600-b66		new_schedule	delta	523	PHL	ATL	16:00	17:56	0		1234567	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+58	delta-779-PHL-ATL-1955-b66		new_schedule	delta	779	PHL	ATL	19:55	21:51	0		1234567	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+59	delta-516-TPA-ATL-0450-b66		new_schedule	delta	516	TPA	ATL	04:50	06:02	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+60	delta-86-TPA-ATL-0620-b66		new_schedule	delta	86	TPA	ATL	06:20	07:34	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+61	delta-828-TPA-ATL-0815-b66		new_schedule	delta	828	TPA	ATL	08:15	09:32	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+62	delta-484-TPA-ATL-0935-b66		new_schedule	delta	484	TPA	ATL	09:35	10:52	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+63	delta-78-TPA-ATL-1110-b66		new_schedule	delta	78	TPA	ATL	11:10	12:27	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+64	delta-752-TPA-ATL-1430-b66		new_schedule	delta	752	TPA	ATL	14:30	15:47	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+65	delta-184-TPA-ATL-1620-b66		new_schedule	delta	184	TPA	ATL	16:20	17:37	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+66	delta-336-TPA-ATL-1825-b66		new_schedule	delta	336	TPA	ATL	18:25	19:42	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+67	delta-714-TPA-ATL-2055-b66		new_schedule	delta	714	TPA	ATL	20:55	22:12	0		1234567	0	229		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+68		delta-399-BWI-ATL-0610-b65	existing_schedule	delta	399	BWI	ATL	06:10	07:46	0	X7	123456	0	244		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+69	delta-735-DCA-ATL-0730-b66		new_schedule	delta	735	DCA	ATL	07:30	09:10	0		1234567	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+70		delta-397-BWI-ATL-0915-b65	existing_schedule	delta	397	BWI	ATL	09:15	10:54	0		1234567	0	244		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+71	delta-705-DCA-ATL-0915-b66		new_schedule	delta	705	DCA	ATL	09:15	10:55	0		1234567	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+72	delta-737-DCA-ATL-1100-b66		new_schedule	delta	737	DCA	ATL	11:00	12:40	0		1234567	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+73		delta-557-BWI-ATL-1250-b65	existing_schedule	delta	557	BWI	ATL	12:50	14:29	0		1234567	0	244		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+74	delta-715-DCA-ATL-1250-b66		new_schedule	delta	715	DCA	ATL	12:50	14:30	0		1234567	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+75	delta-319-DCA-ATL-1420-b66		new_schedule	delta	319	DCA	ATL	14:20	16:00	0		1234567	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+76		delta-595-BWI-ATL-1600-b65	existing_schedule	delta	595	BWI	ATL	16:00	17:39	0		1234567	0	244		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+77	delta-725-DCA-ATL-1605-b66		new_schedule	delta	725	DCA	ATL	16:05	17:45	0		1234567	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+78	delta-701-DCA-ATL-1755-b66		new_schedule	delta	701	DCA	ATL	17:55	19:35	0		1234567	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+79		delta-585-BWI-ATL-1955-b65	existing_schedule	delta	585	BWI	ATL	19:55	21:34	0		1234567	0	244		delta-19860201	1986-02-01				Exact match to existing FLL/BWI schedule in v66, including arrival and frequency. Retained unchanged, no new movement.
+80	delta-719-DCA-ATL-2000-b66		new_schedule	delta	719	DCA	ATL	20:00	21:40	0	X6	123457	0	244		delta-19860201	1986-02-01		1986-02-27	1986-03-01	

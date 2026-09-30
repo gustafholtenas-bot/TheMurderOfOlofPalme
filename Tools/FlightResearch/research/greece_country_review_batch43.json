@@ -1,0 +1,80 @@
+{
+  "batch": 43,
+  "package": "v44",
+  "country": "gr",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte full trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 15,
+  "domestic_movements": 0,
+  "international_movements": 15,
+  "new_movements": 10,
+  "endpoint_movements_by_source_airline": {
+    "air-france": 6,
+    "swissair": 3,
+    "olympic": 6
+  },
+  "endpoint_leg_ids": [
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d5-b43@1986-02-28",
+    "swissair-314-GVA-ATH-ELLINIKON-1105@1986-02-28",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d5-b43@1986-02-28",
+    "olympic-136-GVA-ATH-ELLINIKON-1430@1986-02-28",
+    "olympic-215-ATH-ELLINIKON-MRS-0910-d6-b43@1986-03-01",
+    "olympic-201-ATH-ELLINIKON-ORY-0915-d6-b43@1986-03-01",
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d6-b43@1986-03-01",
+    "swissair-314-GVA-ATH-ELLINIKON-1105@1986-03-01",
+    "olympic-216-MRS-ATH-ELLINIKON-1140-d6-b43@1986-03-01",
+    "olympic-202-ORY-ATH-ELLINIKON-1245-d6-b43@1986-03-01",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d6-b43@1986-03-01",
+    "swissair-296-GVA-ATH-ELLINIKON-1400@1986-03-01",
+    "olympic-136-GVA-ATH-ELLINIKON-1430@1986-03-01",
+    "air-france-624-NCE-ATH-ELLINIKON-1455-d6-b43@1986-03-01",
+    "air-france-625-ATH-ELLINIKON-NCE-1900-d6-b43@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d5-b43@1986-02-28",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d5-b43@1986-02-28",
+    "olympic-215-ATH-ELLINIKON-MRS-0910-d6-b43@1986-03-01",
+    "olympic-201-ATH-ELLINIKON-ORY-0915-d6-b43@1986-03-01",
+    "air-france-600-CDG-ATH-ELLINIKON-0910-d6-b43@1986-03-01",
+    "olympic-216-MRS-ATH-ELLINIKON-1140-d6-b43@1986-03-01",
+    "olympic-202-ORY-ATH-ELLINIKON-1245-d6-b43@1986-03-01",
+    "air-france-601-ATH-ELLINIKON-CDG-1420-d6-b43@1986-03-01",
+    "air-france-624-NCE-ATH-ELLINIKON-1455-d6-b43@1986-03-01",
+    "air-france-625-ATH-ELLINIKON-NCE-1900-d6-b43@1986-03-01"
+  ],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Tryckta s. 15, 47, 56 och 61: tio nonstoprader. Paris A=CDG, S=Orly Sud; Athens HELLINIKON uttryckligen namngivet. Grekland UTC+2, Frankrike UTC+1. Fredag AFOA600/601, lördag AF600/601, OA201/202/215/216 och AF624/625. Datumgränser för november, februari och mars kontrollerade."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/gr/olympic/1a/oa851027.jpg",
+      "type": "contemporary_cover_only",
+      "result": "Engelskt vinteromslag 27 oktober 1985–29 mars 1986 visuellt granskat; inga tider på omslaget."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/gr/olympic/1c/oa851027.jpg",
+      "type": "contemporary_cover_only",
+      "result": "Grekiskt vinteromslag med samma datum visuellt granskat; ingen full inlaga verifierad."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/gr/olympic/gal/oagal1a80.htm",
+      "type": "edition_gallery",
+      "result": "Engelskt galleri länkar vinteromslag. Ingen full vinter-PDF hittad i granskad post."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/gr/olympic/gal/oagal1c80.htm",
+      "type": "edition_gallery",
+      "result": "Grekiskt galleri länkar vinteromslag. Inrikesnätets tidsrader återstår."
+    }
+  ],
+  "unresolved": [
+    "Olympics fullständiga internationella och grekiska vinterinlagor samt ändringar återstår. Omslagen styrker utgåvan, inte individuella avgångar.",
+    "Inrikesnätet, Thessaloniki, öflygplatser, utländska linjer samt charter-, frakt-, helikopter-, stats-, privat- och militärtrafik återstår. Olympic är ingen full operatörsinventering.",
+    "Faktiskt genomförande och flygbanor är inte fastställda. Cyprus Airways fotograferade Aten-rader hålls som forskning tills tidsbas och stoppkonvention är säkrade."
+  ]
+}

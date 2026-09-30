@@ -1,0 +1,37 @@
+{
+  "package": "v47",
+  "checked_on": "2026-09-29",
+  "status": "research_only",
+  "decision": "Do not import alternate October system-table timings as extra flights. Existing Tees-side November–March selection and February movement-note exclusions remain unchanged. Neither schedule proves actual operation; reconcile amendments before any future extension.",
+  "sources": [
+    "dan-air-19851027-system",
+    "teesside-winter-1985",
+    "teesside-movements-198602"
+  ],
+  "rows": [
+    {
+      "flight": "DA810",
+      "route": "MME–AMS",
+      "system_page": "20",
+      "system_days": "123456-",
+      "system_departure": "07:50",
+      "system_arrival": "09:55",
+      "retained_schedule": "dan-air-810-MME-AMS-0745",
+      "retained_departure": "07:45",
+      "retained_arrival": "09:45",
+      "retained_date": "1986-03-01"
+    },
+    {
+      "flight": "DA811",
+      "route": "AMS–MME",
+      "system_page": "4",
+      "system_days": "-----6-",
+      "system_departure": "10:35",
+      "system_arrival": "10:40",
+      "retained_schedule": "dan-air-811-AMS-MME-1015",
+      "retained_departure": "10:15",
+      "retained_arrival": "10:20",
+      "retained_date": "1986-03-01"
+    }
+  ]
+}

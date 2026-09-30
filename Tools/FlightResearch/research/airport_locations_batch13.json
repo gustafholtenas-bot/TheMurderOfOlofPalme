@@ -1,0 +1,72 @@
+[
+  {
+    "id": "BLK",
+    "name": "Blackpool",
+    "country": "gb",
+    "timezone": "Europe/London",
+    "lat": 53.771702,
+    "lon": -3.02861,
+    "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.dtvmovements.co.uk/Info/History/Documents/Programmes/Timetable_1985W.pdf"
+    ],
+    "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+  },
+  {
+    "id": "HUY",
+    "name": "Humberside",
+    "country": "gb",
+    "timezone": "Europe/London",
+    "lat": 53.576152,
+    "lon": -0.34954,
+    "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.dtvmovements.co.uk/Info/History/Documents/Programmes/Timetable_1985W.pdf"
+    ],
+    "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+  },
+  {
+    "id": "MME",
+    "name": "Tees-side Airport",
+    "country": "gb",
+    "timezone": "Europe/London",
+    "lat": 54.509201,
+    "lon": -1.42941,
+    "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.dtvmovements.co.uk/Info/History/Documents/Programmes/Timetable_1985W.pdf"
+    ],
+    "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+  },
+  {
+    "id": "ABZ",
+    "name": "Aberdeen–Dyce",
+    "country": "gb",
+    "timezone": "Europe/London",
+    "lat": 57.2019,
+    "lon": -2.19778,
+    "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.dtvmovements.co.uk/Info/History/Documents/Programmes/Timetable_1985W.pdf"
+    ],
+    "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+  },
+  {
+    "id": "NWI",
+    "name": "Norwich",
+    "country": "gb",
+    "timezone": "Europe/London",
+    "lat": 52.6758,
+    "lon": 1.28278,
+    "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.dtvmovements.co.uk/Info/History/Documents/Programmes/Timetable_1985W.pdf"
+    ],
+    "location_note": "Approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+  }
+]

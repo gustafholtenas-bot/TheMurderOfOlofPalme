@@ -1,0 +1,64 @@
+{
+  "checked_on": "2026-09-26",
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "37b78b5514711a70fb50e0f4c60b809b30988a84e37b0d814e20ca5591177cc1",
+  "notes": "Schematic airfield locations, not 1986 terminals or stands. Istanbul uses LTBA, whose current IATA code is ISL; the 1986 IST location is not the current IST/LTFM airport. Istanbul routes remain candidates because the printed GMT+3 header conflicts with Europe/Istanbul GMT+2 for February 1986. Nice terminal 2 was not open in February 1986.",
+  "airports": [
+    {
+      "id": "NCE",
+      "name": "Nice–Côte d’Azur",
+      "country": "fr",
+      "timezone": "Europe/Paris",
+      "lat": 43.658401,
+      "lon": 7.21587,
+      "coordinate_source": "https://ourairports.com/airports/LFMN/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://societe.nice.aeroport.fr/le-groupe/historique/1975-1992",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "FCO",
+      "name": "Rome–Fiumicino",
+      "country": "it",
+      "timezone": "Europe/Rome",
+      "lat": 41.804532,
+      "lon": 12.251998,
+      "coordinate_source": "https://ourairports.com/airports/LIRF/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.turismoroma.it/en/node/53203",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "GVA",
+      "name": "Genève–Cointrin",
+      "country": "ch",
+      "timezone": "Europe/Zurich",
+      "lat": 46.238098,
+      "lon": 6.10895,
+      "coordinate_source": "https://ourairports.com/airports/LSGG/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.gva.ch/en/airport/Introduction/Our-Story",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    },
+    {
+      "id": "IST-ATATURK",
+      "name": "Istanbul–Atatürk (IST, 1986)",
+      "country": "tr",
+      "timezone": "Europe/Istanbul",
+      "lat": 40.971913,
+      "lon": 28.823714,
+      "coordinate_source": "https://ourairports.com/airports/LTBA/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.dhmi.gov.tr/Sayfalar/Havalimani/Ataturk/SehirTarihcesi.aspx",
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ]
+    }
+  ]
+}

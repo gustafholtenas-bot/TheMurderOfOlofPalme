@@ -1,0 +1,38 @@
+{
+  "batch": 27,
+  "package": "v28",
+  "country": "is",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i landkön; inte en fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://www.timetableimages.com/ttimages/fi.htm",
+      "type": "index_checked",
+      "result": "Index för äldre Icelandair; länk till det sammanslagna bolagets index följd."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/fi1.htm",
+      "type": "index_checked",
+      "result": "Ingen läsbar vinteravgångssida 1985/86 hittad i indexet för Flugleiðir."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/is/icelandair/1a/fi851027.jpg",
+      "type": "previous_cover_review_carried_forward",
+      "result": "Tidigare visuellt verifierat vinteromslag gäller 27 oktober 1985–29 mars 1986. Avgångssidor och ändringar saknas fortfarande."
+    }
+  ],
+  "unresolved": [
+    "Icelandair: läsbara vinteravgångssidor och ändringar.",
+    "Inrikesoperatörer och avgångar måste inventeras separat; Keflavík och Reykjavík hålls isär.",
+    "Tidningsarkiv kan ge nya spår, men denna omgång hittade ingen importklar daterad tabell där."
+  ]
+}

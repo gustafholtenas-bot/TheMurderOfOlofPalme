@@ -1,0 +1,23 @@
+{
+  "package": "v46",
+  "checked_on": "2026-09-29",
+  "method": "Contemporary airport name BORISPOL controls physical location; printed IEV is the city heading. OurAirports supplies approximate airfield coordinates. All previous airport objects are unchanged.",
+  "airports": [
+    {
+      "id": "KBP",
+      "name": "Kiev–Borispol (1986)",
+      "country": "su",
+      "timezone": "Europe/Kyiv",
+      "lat": 50.345001,
+      "lon": 30.894699,
+      "coordinate_source": "https://ourairports.com/airports/UKBB/",
+      "coordinate_record_id": "UKBB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/UKBB/"
+      ],
+      "location_note": "Air France no. 25 printed page 68 gives city KIEV / IEV but explicitly names the physical airport BORISPOL 38 KM. This is KBP/Borispol, not IEV/Zhulyany. Classified in the historical USSR; Europe/Kyiv supplies UTC+3 for February/March 1986. Modern coordinates mark the approximate airfield, not a reconstructed 1986 terminal, gate or aircraft position."
+    }
+  ]
+}

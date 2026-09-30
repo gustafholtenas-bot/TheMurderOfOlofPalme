@@ -1,0 +1,126 @@
+{
+  "batch": 50,
+  "package": "v51",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2541,
+  "new_schedules": 15,
+  "new_schedule_ids": [
+    "dan-air-834-AMS-TXL-0945-d5-b50",
+    "dan-air-836-AMS-TXL-1215-d6-b50",
+    "dan-air-838-AMS-TXL-2030-d5-b50",
+    "dan-air-831-TXL-AMS-0745-d5-b50",
+    "dan-air-833-TXL-AMS-0940-d6-b50",
+    "dan-air-837-TXL-AMS-1830-d5-b50",
+    "dan-air-801-AMS-BRS-1035-d5-b50",
+    "dan-air-807-AMS-BRS-2000-d5-b50",
+    "dan-air-800-BRS-AMS-0730-d5-b50",
+    "dan-air-806-BRS-AMS-1630-d5-b50",
+    "air-algerie-2861-BRU-ALG-1115-d5-b50",
+    "air-algerie-2860-ALG-BRU-0800-d5-b50",
+    "sabena-403-BRU-BCN-1205-d6-b50",
+    "sabena-403-BCN-ALG-1455-d6-b50",
+    "sabena-404-ALG-BRU-1645-d6-b50"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 5,
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "sabena-19860101-no2-partial"
+  ],
+  "updated_source_ids": [
+    "dan-air-19851027-system",
+    "air-france-19851027-no25"
+  ],
+  "unchanged_previous_movements": 2541,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "lu",
+  "reviewed_countries_this_batch": [
+    "mc",
+    "ad",
+    "es",
+    "gi",
+    "pt",
+    "nl",
+    "be"
+  ],
+  "new_movements": 15,
+  "total_movements": 2556,
+  "new_leg_ids": [
+    "dan-air-831-TXL-AMS-0745-d5-b50@1986-02-28",
+    "air-algerie-2860-ALG-BRU-0800-d5-b50@1986-02-28",
+    "dan-air-800-BRS-AMS-0730-d5-b50@1986-02-28",
+    "dan-air-834-AMS-TXL-0945-d5-b50@1986-02-28",
+    "dan-air-801-AMS-BRS-1035-d5-b50@1986-02-28",
+    "air-algerie-2861-BRU-ALG-1115-d5-b50@1986-02-28",
+    "dan-air-806-BRS-AMS-1630-d5-b50@1986-02-28",
+    "dan-air-837-TXL-AMS-1830-d5-b50@1986-02-28",
+    "dan-air-807-AMS-BRS-2000-d5-b50@1986-02-28",
+    "dan-air-838-AMS-TXL-2030-d5-b50@1986-02-28",
+    "dan-air-833-TXL-AMS-0940-d6-b50@1986-03-01",
+    "sabena-403-BRU-BCN-1205-d6-b50@1986-03-01",
+    "dan-air-836-AMS-TXL-1215-d6-b50@1986-03-01",
+    "sabena-403-BCN-ALG-1455-d6-b50@1986-03-01",
+    "sabena-404-ALG-BRU-1645-d6-b50@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "dan-air": 10,
+    "air-algerie": 2,
+    "sabena": 3
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "ALG",
+      "BRU"
+    ],
+    [
+      "AMS",
+      "BRS"
+    ],
+    [
+      "AMS",
+      "TXL"
+    ],
+    [
+      "BCN",
+      "ALG"
+    ],
+    [
+      "BRS",
+      "AMS"
+    ],
+    [
+      "BRU",
+      "ALG"
+    ],
+    [
+      "BRU",
+      "BCN"
+    ],
+    [
+      "TXL",
+      "AMS"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 717,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1811,
+    "animated_airlines": 47,
+    "scheduled_movements": 2555,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161,
+  "updated_airline_source_ids": [
+    "sabena",
+    "air-algerie"
+  ]
+}

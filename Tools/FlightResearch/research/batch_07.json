@@ -1,0 +1,74 @@
+{
+  "batch": 7,
+  "package": "v08",
+  "checked_on": "2026-09-26",
+  "previous_movements": 693,
+  "new_schedules": 3,
+  "new_schedule_ids": [
+    "panam-114-JFK-CDG-1845",
+    "panam-114-CDG-TLV-1035",
+    "panam-115-CDG-JFK-1200"
+  ],
+  "updated_schedule_ids": [
+    "panam-115-TLV-CDG-0545"
+  ],
+  "source_urls": {
+    "pa-37307.jpg": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37307/full/2200,/0/default.jpg",
+    "pa-37313.jpg": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37313/full/2200,/0/default.jpg",
+    "pa-37314.jpg": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37314/full/2200,/0/default.jpg",
+    "elal-winter-cover.jpg": "https://www.timetableimages.com/i-kl/ly8510a.jpg",
+    "saa-winter-cover.jpg": "https://www.timetableimages.com/i-s/sa851027.jpg",
+    "um8511.pdf": "https://www.timetableimages.com/ttimages/um/um8511/um8511.pdf",
+    "arms-flyers.pdf": "https://ipisresearch.be/wp-content/uploads/2022/12/201102_The-Armsflyers.pdf",
+    "brazil-cover.jpg": "https://airline-memorabilia.blogspot.com/2012/07/brasil-guia-aeronautico-1986.html"
+  },
+  "source_file_sha256": {
+    "pa-37307.jpg": "4ce03e03eacb528302a335242fc6bcd28d7f4c3a07b8700e455c773790ea5c20",
+    "pa-37313.jpg": "7a0262630a047c45d918c333045e8717658044180782a013aa7ddc5c37e718f1",
+    "pa-37314.jpg": "191e6e7ba286e0361e494e6de2cbe4ffb4f8079aced1163fa7b934b1c8525756",
+    "elal-winter-cover.jpg": "25c88e993f8aeac345f15e94da8073469c4e7656e647528141675d42e2b8e1ae",
+    "saa-winter-cover.jpg": "803c6c81ccaecfb70f084efe4f0b3f3043ce2b93bc3c3c163311f64a00c6e9f5",
+    "um8511.pdf": "d3491aca9357b84937e55816c27c3eeff30072012fc3b4a31c53e1b394723002",
+    "arms-flyers.pdf": "16bd1e5bec7c92007f3b593dd63f3be6941ac33312ddc6f316793537a9ae7fbe",
+    "brazil-cover.jpg": "c554639a98efaf77a8f5d5d6d7e80c83b52396f577aa3004e6abf49e06c10d38"
+  },
+  "new_movement_records": 0,
+  "notes": [
+    "Three visually checked nonstop rows from Pan Am pages 72, 78 and 79.",
+    "The existing TLV–CDG row is linked to CDG–JFK; it is not duplicated.",
+    "Aircraft changes in Paris do not create a nonstop JFK–TLV flight.",
+    "SAA and EL AL winter covers are not timetable-row evidence.",
+    "South Africa: existing Air Zimbabwe/SAA Johannesburg rows rechecked; no new timed rows established.",
+    "Iran shipment is research context only; no exact times or verified airfields.",
+    "No source scans redistributed."
+  ],
+  "movements": 699,
+  "new_scheduled_movements": 6,
+  "coverage": {
+    "registered_airlines": 72,
+    "registered_countries": 56,
+    "reviewed_schedules": 497,
+    "animated_airlines": 14,
+    "scheduled_movements": 698,
+    "confirmed_movements": 1
+  },
+  "new_movements_by_operator": {
+    "panam": 6
+  },
+  "excluded_candidates": [
+    {
+      "title": "Guia Aeronáutico, JULHO/86, no. 475",
+      "status": "wrong_period",
+      "reason": "Cover visually reviewed: July 1986, after the 48-hour window."
+    }
+  ],
+  "validation": {
+    "python_tests_passed": 20,
+    "flight_generation_check": "passed",
+    "country_index_check": "passed",
+    "stock_market_validation": "passed",
+    "new_segments_and_paris_grouping": "passed",
+    "unreal_build": "not_available",
+    "visual_game_test": "not_run"
+  }
+}

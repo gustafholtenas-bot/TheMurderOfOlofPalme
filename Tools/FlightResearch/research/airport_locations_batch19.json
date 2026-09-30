@@ -1,0 +1,40 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "ANC",
+      "name": "Anchorage International",
+      "country": "us",
+      "timezone": "America/Anchorage",
+      "lat": 61.179004,
+      "lon": -149.992561,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "PANC",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/PANC/",
+        "https://dot.alaska.gov/anc/passengers-about.shtml",
+        "https://i.ebayimg.com/images/g/5WoAAOSwe6JmxkVv/s-l1600.jpg"
+      ],
+      "location_note": "Historical airport identity checked against the printed winter timetable and airport authority history. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "YVR",
+      "name": "Vancouver International",
+      "country": "ca",
+      "timezone": "America/Vancouver",
+      "lat": 49.193901,
+      "lon": -123.183998,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "CYVR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://ourairports.com/airports/CYVR/",
+        "https://news.yvr.ca/jal-celebrates-50-years-of-service-to-vancouver/",
+        "https://i.ebayimg.com/images/g/42kAAOSwoQtmxkVx/s-l1600.jpg"
+      ],
+      "location_note": "Historical airport identity checked against the printed winter timetable and airport authority history. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    }
+  ],
+  "coordinate_dataset_sha256": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec"
+}

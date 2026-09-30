@@ -1,0 +1,88 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	delta-849-BOS-CVG-0640-b71		new_schedule	delta	849	BOS	CVG	06:40	08:48	0		1234567	0	31	7	delta-19860201	1986-03-01		1986-03-01	1986-03-01	
+2			excluded_connection	delta	289/425	BOS	CVG	08:56	13:00	0		1234567	ORD	31		delta-19860201	1986-02-01				Printed connection via ORD; component legs are not inferred.
+3	delta-277-BOS-CVG-1545-b71		new_schedule	delta	277	BOS	CVG	15:45	17:53	0		1234567	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+4	delta-457-BOS-CVG-1942-b71		new_schedule	delta	457	BOS	CVG	19:42	21:50	0	X6	123457	0	31		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+5	delta-497-ORD-CVG-0700-b71		new_schedule	delta	497	ORD	CVG	07:00	08:55	0		1234567	0	47		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+6	delta-425-ORD-CVG-1105-b71		new_schedule	delta	425	ORD	CVG	11:05	13:00	0		1234567	0	47		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+7	delta-1121-ORD-CVG-1600-b71		new_schedule	delta	1121	ORD	CVG	16:00	17:55	0		1234567	0	47		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+8	delta-997-ORD-CVG-2030-b71		new_schedule	delta	997	ORD	CVG	20:30	22:25	0		1234567	0	47		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+9			excluded_connection	delta	132/1116	DFW	CVG	06:40	11:33	0		1234567	ATL	64		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+10			excluded_connection	delta	690/425	DFW	CVG	08:31	13:00	0		1234567	ORD	64		delta-19860201	1986-02-01				Printed connection via ORD; component legs are not inferred.
+11			excluded_connection	delta	992/1564	DFW	CVG	10:14	14:28	0	X67	12345	SDF	64		delta-19860201	1986-02-01				Printed connection via SDF; component legs are not inferred.
+12			excluded_connection	delta	1094/454	DFW	CVG	10:25	14:44	0		1234567	MSY	64		delta-19860201	1986-02-01				Printed connection via MSY; component legs are not inferred.
+13			excluded_connection	delta	508/334	DFW	CVG	10:37	14:35	0		1234567	MEM	64		delta-19860201	1986-02-01				Printed connection via MEM; component legs are not inferred.
+14	delta-498-DFW-CVG-1314-b71		new_schedule	delta	498	DFW	CVG	13:14	16:06	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+15			excluded_connection	delta	640/1646	DFW	CVG	16:43	21:25	0	X6	123457	BNA	64		delta-19860201	1986-02-01				Printed connection via BNA; component legs are not inferred.
+16			excluded_connection	delta	748/806	DFW	CVG	16:48	21:55	0		1234567	ATL	64		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+17			excluded_connection	delta	568/1170	DFW	CVG	17:10	21:44	0	X6	123457	MEM	64		delta-19860201	1986-02-01				Printed connection via MEM; component legs are not inferred.
+18			excluded_connection	delta	864/1140	DFW	CVG	19:25	00:10	1	X6	123457	ATL	64		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+19			excluded_connection	delta	874/1140	DFW	CVG	19:28	00:10	1	6	6	ATL	64		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+20	delta-210-DFW-CVG-2010-b71		new_schedule	delta	210	DFW	CVG	20:10	23:02	0		1234567	0	64		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+21			deferred_commuter_operator	comair	1650	DTW	CVG	06:20	07:37	0	X67	12345	0	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+22	delta-581-DTW-CVG-0800-b71		new_schedule	delta	581	DTW	CVG	08:00	08:51	0		1234567	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+23			deferred_commuter_operator	comair	1714	DTW	CVG	11:50	14:20	0	X67	12345	1	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+24			deferred_commuter_operator	comair	1617	DTW	CVG	13:25	14:35	0	X7	123456	0	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+25			deferred_commuter_operator	comair	1552	DTW	CVG	15:30	16:45	0	X67	12345	0	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+26	delta-619-DTW-CVG-1700-b71		new_schedule	delta	619	DTW	CVG	17:00	17:51	0		1234567	0	73	4	delta-19860201	1986-02-12		1986-02-27	1986-03-01	
+27			deferred_commuter_operator	comair	1623	DTW	CVG	18:10	19:24	0	X6	123457	0	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+28			deferred_commuter_operator	comair	1717	DTW	CVG	18:20	20:25	0	5	5	1	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+29			deferred_commuter_operator	comair	1603	DTW	CVG	20:05	22:20	0	X6	123457	1	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+30			deferred_commuter_operator	comair	1699	DTW	CVG	20:45	22:50	0	5	5	1	73		delta-19860201	1986-02-01				COMAIR-operated flight per page-4 legend. Deferred for a separate import under its actual operator; not imported as Delta mainline.
+31			excluded_connection	delta	762/1116	MSY	CVG	07:00	11:33	0		1234567	ATL	170		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+32			excluded_through_service	delta	1110	MSY	CVG	07:10	10:45	0	X7	123456	1	170		delta-19860201	1986-02-01				Printed stops column 1: end-to-end itinerary has intermediate stops; not a physical nonstop segment.
+33			excluded_connection	delta	692/334	MSY	CVG	10:55	14:35	0		1234567	MEM	170		delta-19860201	1986-02-01				Printed connection via MEM; component legs are not inferred.
+34	delta-454-MSY-CVG-1210-b71		new_schedule	delta	454	MSY	CVG	12:10	14:44	0		1234567	0	170		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+35			excluded_connection	delta	472/324	MSY	CVG	13:45	17:58	0		1234567	ATL	170		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+36			excluded_connection	delta	638/1170	MSY	CVG	17:27	21:44	0	X6	123457	MEM	170		delta-19860201	1986-02-01				Printed connection via MEM; component legs are not inferred.
+37			excluded_connection	delta	679/806	MSY	CVG	17:30	21:55	0		1234567	ATL	170		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+38			excluded_connection	delta	1014/1140	MSY	CVG	19:55	00:10	1		1234567	ATL	170		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+39			excluded_connection	delta	596/318	MCO	CVG	04:50	08:37	0		1234567	ATL	183		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+40			excluded_connection	delta	148/1116	MCO	CVG	08:10	11:33	0		1234567	ATL	183		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+41			excluded_connection	delta	80/354	MCO	CVG	11:00	14:35	0		1234567	ATL	183		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+42			excluded_connection	delta	94/324	MCO	CVG	14:30	17:58	0		1234567	ATL	183	14	delta-19860201	1986-02-01	1986-03-01			Printed connection via ATL; component legs are not inferred. Footnote 14: last operation 1 March; remains excluded as a connection.
+43			excluded_connection	delta	158/324	MCO	CVG	14:30	17:58	0		1234567	ATL	183	6	delta-19860201	1986-03-02				Printed connection via ATL; component legs are not inferred. Footnote 6 makes this itinerary effective 2 March, after the window.
+44	delta-1164-MCO-CVG-1710-b71		new_schedule	delta	1164	MCO	CVG	17:10	19:02	0		1234567	0	183		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+45			excluded_connection	delta	130/806	MCO	CVG	18:00	21:55	0		1234567	ATL	183		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+46			excluded_connection	delta	256/1140	MCO	CVG	20:55	00:10	1		1234567	ATL	183		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+47	delta-505-PHL-CVG-0725-b71		new_schedule	delta	505	PHL	CVG	07:25	08:55	0	X7	123456	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+48	delta-349-PHL-CVG-1620-b71		new_schedule	delta	349	PHL	CVG	16:20	17:51	0		1234567	0	191		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+49			excluded_connection	delta	538/498	LAX	CVG	07:45	16:06	0		1234567	DFW	135		delta-19860201	1986-02-01				Printed connection via DFW; component legs are not inferred.
+50			excluded_through_service	delta	498	ONT	CVG	08:00	16:06	0		1234567	1	135		delta-19860201	1986-02-01				Printed stops column 1: end-to-end itinerary has intermediate stops; not a physical nonstop segment.
+51			excluded_connection	delta	54/324	LAX	CVG	09:00	17:58	0		1234567	ATL	135		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+52			excluded_connection	delta	860/324	ONT	CVG	09:00	17:58	0		1234567	ATL	135		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+53	delta-810-LAX-CVG-1220-b71		new_schedule	delta	810	LAX	CVG	12:20	19:03	0		1234567	0	135		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+54			excluded_connection	delta	146/806	LAX	CVG	12:45	21:55	0		1234567	ATL	135		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+55			excluded_connection	delta	90/210	LAX	CVG	14:25	23:02	0		1234567	DFW	135		delta-19860201	1986-02-01				Printed connection via DFW; component legs are not inferred.
+56			excluded_connection	delta	242/210	ONT	CVG	14:30	23:02	0		1234567	DFW	135		delta-19860201	1986-02-01				Printed connection via DFW; component legs are not inferred.
+57			excluded_connection	delta	68/1140	LAX	CVG	15:00	00:10	1		1234567	ATL	135	6	delta-19860201	1986-03-02				Printed connection via ATL; component legs are not inferred. Footnote 6 makes this itinerary effective 2 March, after the window.
+58			excluded_connection	delta	40/318	LAX	CVG	23:20	08:37	1		1234567	ATL	135		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+59			excluded_connection	delta	44/498	SFO	CVG	07:20	16:06	0		1234567	DFW	215		delta-19860201	1986-02-01				Printed connection via DFW; component legs are not inferred.
+60			excluded_connection	delta	98/324	SFO	CVG	08:45	17:58	0		1234567	ATL	215		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+61	delta-850-SFO-CVG-1205-b71		new_schedule	delta	850	SFO	CVG	12:05	19:05	0		1234567	0	215	7	delta-19860201	1986-03-01		1986-03-01	1986-03-01	
+62			excluded_connection	delta	48/806	SFO	CVG	12:10	21:55	0		1234567	ATL	215		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+63			excluded_connection	delta	180/210	SFO	CVG	14:15	23:02	0		1234567	DFW	215		delta-19860201	1986-02-01				Printed connection via DFW; component legs are not inferred.
+64			excluded_connection	delta	52/318	SFO	CVG	23:00	08:37	1		1234567	ATL	215		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+65			excluded_connection	delta	516/318	TPA	CVG	04:50	08:37	0		1234567	ATL	230		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+66			excluded_connection	delta	828/1116	TPA	CVG	08:15	11:33	0		1234567	ATL	230		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+67	delta-680-TPA-CVG-0940-b71		new_schedule	delta	680	TPA	CVG	09:40	11:32	0		1234567	0	230	4	delta-19860201	1986-02-12		1986-02-27	1986-03-01	
+68			excluded_connection	delta	78/354	TPA	CVG	11:10	14:35	0		1234567	ATL	230		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+69			excluded_connection	delta	752/324	TPA	CVG	14:30	17:58	0		1234567	ATL	230		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+70	delta-558-TPA-CVG-1710-b71		new_schedule	delta	558	TPA	CVG	17:10	19:02	0		1234567	0	230		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+71			excluded_connection	delta	336/806	TPA	CVG	18:25	21:55	0		1234567	ATL	230		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+72			excluded_connection	delta	714/1140	TPA	CVG	20:55	00:10	1		1234567	ATL	230		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+73			excluded_connection	delta	516/318	MIA	CVG	03:30	08:37	0		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+74			excluded_connection	delta	596/318	FLL	CVG	03:40	08:37	0		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+75			excluded_connection	delta	84/1116	FLL	CVG	08:00	11:33	0		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+76			excluded_connection	delta	756/354	FLL	CVG	11:10	14:35	0		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+77	delta-418-MIA-CVG-1225-b71		new_schedule	delta	418	MIA	CVG	12:25	14:44	0		1234567	0	150		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+78			excluded_connection	delta	776/324	FLL	CVG	14:25	17:58	0		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+79			excluded_connection	delta	738/324	MIA	CVG	14:25	17:58	0		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+80			excluded_connection	delta	264/806	FLL	CVG	17:55	21:55	0		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+81			excluded_through_service	delta	806	MIA	CVG	18:00	21:55	0		1234567	1	150		delta-19860201	1986-02-01				Printed stops column 1: end-to-end itinerary has intermediate stops; not a physical nonstop segment.
+82			excluded_connection	delta	380/1140	MIA	CVG	20:00	00:10	1		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+83			excluded_connection	delta	188/1140	FLL	CVG	20:40	00:10	1		1234567	ATL	150		delta-19860201	1986-02-01				Printed connection via ATL; component legs are not inferred.
+84	delta-809-LGA-CVG-0700-b71		new_schedule	delta	809	LGA	CVG	07:00	08:50	0	X7	123456	0	173		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+85	delta-419-LGA-CVG-1030-b71		new_schedule	delta	419	LGA	CVG	10:30	12:18	0		1234567	0	173		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+86	delta-259-LGA-CVG-1559-b71		new_schedule	delta	259	LGA	CVG	15:59	17:47	0		1234567	0	173		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+87	delta-381-LGA-CVG-1829-b71		new_schedule	delta	381	LGA	CVG	18:29	20:17	0		1234567	0	173		delta-19860201	1986-02-01		1986-02-27	1986-03-01	

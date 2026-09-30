@@ -1,0 +1,148 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "ITM",
+      "name": "Osaka – Itami",
+      "country": "jp",
+      "timezone": "Asia/Tokyo",
+      "lat": 34.780853,
+      "lon": 135.440829,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "RJOO",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/RJOO/",
+        "https://www.kansai-airports.co.jp/en/business/airports-itm/"
+      ],
+      "timetable_code": "OSA",
+      "location_note": "Northwest p.150 uses OSA. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "GMP",
+      "name": "Seoul – Kimpo (Gimpo)",
+      "country": "kr",
+      "timezone": "Asia/Seoul",
+      "lat": 37.5583,
+      "lon": 126.791,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "RKSS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/RKSS/",
+        "https://www.airport.co.kr/wwweng/cms/frCon/index.do?MENU_ID=120"
+      ],
+      "timetable_code": "SEL",
+      "location_note": "Northwest p.150 uses SEL. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "TPE",
+      "name": "Taipei – Chiang Kai-shek",
+      "country": "tw",
+      "timezone": "Asia/Taipei",
+      "lat": 25.0777,
+      "lon": 121.233002,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "RCTP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/RCTP/",
+        "https://www.tsa.gov.tw/Content/Uploads/FileDownloadArea/fce9d32b-0671-4ab3-9fb2-457810450824.pdf"
+      ],
+      "timetable_code": "TPE",
+      "location_note": "Northwest p.150 uses TPE. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "MNL",
+      "name": "Manila International",
+      "country": "ph",
+      "timezone": "Asia/Manila",
+      "lat": 14.5086,
+      "lon": 121.019997,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "RPLL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/RPLL/"
+      ],
+      "timetable_code": "MNL",
+      "location_note": "Northwest p.150 uses MNL. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "OKA",
+      "name": "Okinawa – Naha",
+      "country": "jp",
+      "timezone": "Asia/Tokyo",
+      "lat": 26.192437,
+      "lon": 127.639804,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "ROAH",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/ROAH/"
+      ],
+      "timetable_code": "OKA",
+      "location_note": "Northwest p.150 uses OKA. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "SAN",
+      "name": "San Diego – Lindbergh Field",
+      "country": "us",
+      "timezone": "America/Los_Angeles",
+      "lat": 32.733601,
+      "lon": -117.190002,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "KSAN",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/KSAN/"
+      ],
+      "timetable_code": "SAN",
+      "location_note": "Northwest p.150 uses SAN. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "HKG-KAITAK",
+      "name": "Hongkong – Kai Tak",
+      "country": "hk",
+      "timezone": "Asia/Hong_Kong",
+      "lat": 22.320304,
+      "lon": 114.198074,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "HK-0099",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/HK-0099/",
+        "https://www.hongkongairport.com/en/about-us/?section=our-history",
+        "https://www.yearbook.gov.hk/1998/ewww/14/1413/middle-middle.htm"
+      ],
+      "timetable_code": "HKG",
+      "location_note": "Northwest p.150 uses HKG. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position. Coordinates use the closed Kai Tak record HK-0099, not modern HKG/Chek Lap Kok."
+    },
+    {
+      "id": "KUL-SUBANG",
+      "name": "Kuala Lumpur – Subang",
+      "country": "my",
+      "timezone": "Asia/Kuala_Lumpur",
+      "lat": 3.13058,
+      "lon": 101.549004,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "WMSA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/WMSA/",
+        "https://subangairport.com/en_US/about-airport/",
+        "https://corporate.malaysiaairports.com.my/en/about-us/corporate-profile/our-airports"
+      ],
+      "timetable_code": "KUL",
+      "location_note": "Northwest p.150 uses KUL. Historical airport identity reviewed; approximate airfield location, not a reconstructed 1986 gate or aircraft position. Coordinates use Subang/WMSA (modern SZB), not the airport at Sepang opened in 1998."
+    }
+  ]
+}

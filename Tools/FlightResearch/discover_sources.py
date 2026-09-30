@@ -35,14 +35,30 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--catalog',type=Path,default=CONTENT/'catalog.json')
     parser.add_argument('--country',help='Historical country ID; omit to process the whole registered queue')
+    parser.add_argument('--priority', choices=['nordic'], help='Use the Nordic research queue, including foreign operators to investigate')
+    parser.add_argument('--list', action='store_true', help='List selected operators and cache status without network requests or file writes')
     parser.add_argument('--output',type=Path,default=Path(__file__).parent/'research/archive_airline_searches.json')
     parser.add_argument('--refresh',action='store_true')
     args=parser.parse_args()
     catalog=json.loads(args.catalog.read_text(encoding='utf-8'))
     old=json.loads(args.output.read_text(encoding='utf-8')) if args.output.exists() else {'schema':1,'searches':[]}
     records={x['airline']:x for x in old['searches']}
-    queue=[x for x in catalog['airlines'] if (not args.country or args.country in x['countries'])
-           and (args.refresh or records.get(x['id'],{}).get('status')!='searched')]
+    selected=catalog['airlines']
+    if args.priority == 'nordic':
+        priority=json.loads((Path(__file__).parent/'research/nordic_priority.json').read_text(encoding='utf-8'))
+        operators={x['id']:x for x in selected}
+        requested=priority['operator_queue']
+        unknown=sorted({x['airline'] for x in requested}-operators.keys())
+        if unknown:
+            parser.error('Priority queue has unknown operator IDs: '+', '.join(unknown))
+        selected=[operators[x['airline']] for x in sorted(requested, key=lambda x:x['priority'])]
+    selected=[x for x in selected if not args.country or args.country in x['countries']]
+    if args.list:
+        for airline in selected:
+            print(airline['id'], '|', airline['name'], '|', records.get(airline['id'],{}).get('status','not_cached'))
+        print('Selected',len(selected),'operators; timetable search only, not evidence of Nordic service or overflight.')
+        return
+    queue=[x for x in selected if args.refresh or records.get(x['id'],{}).get('status')!='searched']
     args.output.parent.mkdir(parents=True,exist_ok=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
         for result in pool.map(discover,queue):

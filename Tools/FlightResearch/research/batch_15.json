@@ -1,0 +1,333 @@
+{
+  "batch": 15,
+  "package": "v16",
+  "checked_on": "2026-09-26",
+  "previous_movements": 979,
+  "new_schedules": 66,
+  "new_candidate_schedules": 2,
+  "new_schedule_ids": [
+    "swissair-385-DHA-ZRH-0155",
+    "swissair-851-DUB-ZRH-0815",
+    "aer-lingus-664-DUB-ZRH-0910",
+    "swissair-525-DUS-GVA-1630",
+    "lufthansa-232-DUS-ZRH-0735",
+    "swissair-511-DUS-ZRH-0935",
+    "lufthansa-230-DUS-ZRH-1800",
+    "swissair-517-DUS-ZRH-2020",
+    "lufthansa-246-FRA-GVA-0920",
+    "lufthansa-248-FRA-GVA-1640",
+    "swissair-545-FRA-GVA-2120",
+    "lufthansa-220-FRA-ZRH-0920",
+    "swissair-533-FRA-ZRH-1015",
+    "lufthansa-222-FRA-ZRH-1315",
+    "lufthansa-226-FRA-ZRH-1705",
+    "swissair-539-FRA-ZRH-1955",
+    "swissair-31-GVA-ABJ-1235",
+    "swissair-256-GVA-ABJ-1350",
+    "air-algerie-2631-GVA-ALG-1450",
+    "klm-320-GVA-AMS-1020",
+    "swissair-788-GVA-AMS-1345",
+    "klm-318-GVA-AMS-1415",
+    "swissair-794-GVA-AMS-1830",
+    "klm-322-GVA-AMS-1930",
+    "swissair-314-GVA-ATH-ELLINIKON-1105",
+    "swissair-296-GVA-ATH-ELLINIKON-1400",
+    "olympic-136-GVA-ATH-ELLINIKON-1430",
+    "swissair-666-GVA-BCN-1355",
+    "iberia-565-GVA-BCN-1825",
+    "iberia-561-GVA-BCN-1825",
+    "swissair-951-GVA-BSL-0850",
+    "crossair-975-GVA-BSL-1325",
+    "swissair-956-GVA-BSL-1850",
+    "crossair-979-GVA-BSL-2250",
+    "british-airways-371-BRU-LHR-0855",
+    "british-airways-375-BRU-LHR-1045",
+    "british-airways-377-BRU-LHR-1245",
+    "british-airways-379-BRU-LHR-1645",
+    "british-airways-385-BRU-LHR-1900",
+    "aer-lingus-223-GLA-DUB-1005",
+    "aer-lingus-229-GLA-DUB-1955",
+    "aer-lingus-335-LBA-DUB-1425",
+    "aer-lingus-193-LPL-DUB-0925",
+    "aer-lingus-199-LPL-DUB-2050",
+    "dan-air-771-LGW-DUB-0800",
+    "aer-lingus-457-LGW-DUB-1945",
+    "aer-lingus-151-LHR-DUB-0750",
+    "british-airways-804-LHR-DUB-0810",
+    "british-airways-804-LHR-DUB-0815",
+    "aer-lingus-153-LHR-DUB-0925",
+    "british-airways-810-LHR-DUB-1035",
+    "british-airways-814-LHR-DUB-1155",
+    "aer-lingus-159-LHR-DUB-1300",
+    "british-airways-816-LHR-DUB-1600",
+    "aer-lingus-169-LHR-DUB-1645",
+    "aer-lingus-173-LHR-DUB-1745",
+    "british-airways-820-LHR-DUB-1845",
+    "british-airways-830-LHR-DUB-1925",
+    "aer-lingus-175-LHR-DUB-2015",
+    "aer-lingus-179-LHR-DUB-2120",
+    "iberia-706-AGP-DUB-1400",
+    "british-airways-844-MAN-DUB-0800",
+    "british-airways-846-MAN-DUB-0950",
+    "aer-lingus-205-MAN-DUB-1005",
+    "aer-lingus-777-MAN-DUB-2000",
+    "dan-air-755-NCL-DUB-1600"
+  ],
+  "candidate_schedule_ids": [
+    "aer-lingus-157-LHR-DUB-1100",
+    "aer-lingus-165-LHR-DUB-1445"
+  ],
+  "new_airports": [
+    "DHA",
+    "DUB",
+    "DUS",
+    "BSL",
+    "BCN",
+    "ALG",
+    "ABJ",
+    "ATH-ELLINIKON",
+    "LBA",
+    "LPL",
+    "MAN",
+    "NCL",
+    "AGP"
+  ],
+  "source_files": [
+    {
+      "source": "swissair-benelux-19851027",
+      "url": "https://i.ebayimg.com/images/g/x-0AAeSwC1VpuHsN/s-l1600.jpg",
+      "reviewed_pages": [
+        "cover"
+      ],
+      "sha256": "eae2f13311028b3c165a93e6427beee7af9419e16a27d5dba1047e0d8899c27d"
+    },
+    {
+      "source": "swissair-benelux-19851027",
+      "url": "https://i.ebayimg.com/images/g/D3QAAeSwCONpuHsN/s-l1600.jpg",
+      "reviewed_pages": [
+        "seat maps"
+      ],
+      "sha256": "6d8fc46807bd16790f0cdd1bf87c0e44662a5c7c7440414d9d4fcf0d4a23d685"
+    },
+    {
+      "source": "swissair-benelux-19851027",
+      "url": "https://i.ebayimg.com/images/g/LukAAeSw8TRpuHsN/s-l1600.jpg",
+      "reviewed_pages": [
+        "route maps"
+      ],
+      "sha256": "b355d5f902353d5c56217a6dfc3ac01fc79f4899c0588d5348aafc6121515f64"
+    },
+    {
+      "source": "swissair-benelux-19851027",
+      "url": "https://i.ebayimg.com/images/g/1T8AAeSwCTFpuHsN/s-l1600.jpg",
+      "reviewed_pages": [
+        "24",
+        "25"
+      ],
+      "sha256": "be1d251296e1a4743dbd0dd8533e74ebeccbafa2c6dcec1c4fd714e566f18c19"
+    },
+    {
+      "source": "swissair-benelux-19851027",
+      "url": "https://i.ebayimg.com/images/g/IicAAeSw0e5puHsN/s-l1600.jpg",
+      "reviewed_pages": [
+        "back cover"
+      ],
+      "sha256": "955c777da42e65c34dab82a3a57d5a73db04401244e2e8e59610d128d96dd79b"
+    },
+    {
+      "source": "dublin-winter-1985",
+      "url": "https://i.ebayimg.com/images/g/w6kAAOSwUDVh9vFQ/s-l1600.jpg",
+      "reviewed_pages": [
+        "cover"
+      ],
+      "sha256": "fe459084d509c7c1ebca71b1c231b8b161da2527868fce0984a308d66e7c810a"
+    },
+    {
+      "source": "dublin-winter-1985",
+      "url": "https://i.ebayimg.com/images/g/qPgAAOSwjXZh9vFQ/s-l1600.jpg",
+      "reviewed_pages": [
+        "Ireland/UK map"
+      ],
+      "sha256": "25503e616504c61f33c698a2dcf6a1eb1b2a5171eebd4a3797806c4b768755be"
+    },
+    {
+      "source": "dublin-winter-1985",
+      "url": "https://i.ebayimg.com/images/g/TzEAAOSwNkBh9vFQ/s-l1600.jpg",
+      "reviewed_pages": [
+        "TO DUBLIN FROM Glasgow–Newcastle"
+      ],
+      "sha256": "3f3a264296d722f3bdd40f94294b0e763d6e774fb00cd8f88a771ba68ec297fd"
+    },
+    {
+      "source": "dublin-winter-1985",
+      "url": "https://i.ebayimg.com/images/g/yrgAAOSwjkJh9vFQ/s-l1600.jpg",
+      "reviewed_pages": [
+        "guide",
+        "Europe map"
+      ],
+      "sha256": "3c64318dbc0ece01081eb192d3526a11585c22cba56e5b20a5d047c2673dc2f4"
+    },
+    {
+      "source": "british-airways-19851027-partial",
+      "url": "https://i.ebayimg.com/images/g/mqsAAOSw1VZnxJlE/s-l1600.jpg",
+      "reviewed_pages": [
+        "cover"
+      ],
+      "sha256": "a298f5b067b66d851552265f88e9e521e12849cbb0a8ff88767c780e977e937a"
+    },
+    {
+      "source": "british-airways-19851027-partial",
+      "url": "https://i.ebayimg.com/images/g/mlQAAOSwdK9nxJlF/s-l1600.jpg",
+      "reviewed_pages": [
+        "292",
+        "293"
+      ],
+      "sha256": "fa078f3ba4a405b7626584e56319a676e3aacfc9739bc3f20963fabb9b481002"
+    },
+    {
+      "source": "british-airways-19851027-partial",
+      "url": "https://i.ebayimg.com/images/g/fs8AAOSw-D1nxJlG/s-l1600.jpg",
+      "reviewed_pages": [
+        "56",
+        "57"
+      ],
+      "sha256": "67a4ab94a74fba35676deb359eaf782f8339d32e83cea127f82cd30d0766966d"
+    },
+    {
+      "source": "british-airways-19851027-partial",
+      "url": "https://i.ebayimg.com/images/g/mBIAAOSwvK5nxJlH/s-l1600.jpg",
+      "reviewed_pages": [
+        "208",
+        "209"
+      ],
+      "sha256": "cbab3d218473586718056419303485e5be6c2189abb74883d746b5b61da83927"
+    }
+  ],
+  "new_nordic_endpoint_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "new_movements": 101,
+  "total_movements": 1080,
+  "withheld_previous_movements": 0,
+  "unchanged_previous_movements": 979,
+  "new_leg_ids": [
+    "crossair-979-GVA-BSL-2250@1986-02-27",
+    "swissair-385-DHA-ZRH-0155@1986-02-28",
+    "lufthansa-232-DUS-ZRH-0735@1986-02-28",
+    "aer-lingus-151-LHR-DUB-0750@1986-02-28",
+    "swissair-951-GVA-BSL-0850@1986-02-28",
+    "british-airways-371-BRU-LHR-0855@1986-02-28",
+    "british-airways-844-MAN-DUB-0800@1986-02-28",
+    "dan-air-771-LGW-DUB-0800@1986-02-28",
+    "british-airways-804-LHR-DUB-0815@1986-02-28",
+    "swissair-851-DUB-ZRH-0815@1986-02-28",
+    "lufthansa-220-FRA-ZRH-0920@1986-02-28",
+    "lufthansa-246-FRA-GVA-0920@1986-02-28",
+    "swissair-511-DUS-ZRH-0935@1986-02-28",
+    "swissair-533-FRA-ZRH-1015@1986-02-28",
+    "klm-320-GVA-AMS-1020@1986-02-28",
+    "aer-lingus-153-LHR-DUB-0925@1986-02-28",
+    "aer-lingus-193-LPL-DUB-0925@1986-02-28",
+    "british-airways-375-BRU-LHR-1045@1986-02-28",
+    "aer-lingus-205-MAN-DUB-1005@1986-02-28",
+    "aer-lingus-223-GLA-DUB-1005@1986-02-28",
+    "swissair-314-GVA-ATH-ELLINIKON-1105@1986-02-28",
+    "british-airways-810-LHR-DUB-1035@1986-02-28",
+    "swissair-31-GVA-ABJ-1235@1986-02-28",
+    "british-airways-377-BRU-LHR-1245@1986-02-28",
+    "british-airways-814-LHR-DUB-1155@1986-02-28",
+    "lufthansa-222-FRA-ZRH-1315@1986-02-28",
+    "crossair-975-GVA-BSL-1325@1986-02-28",
+    "swissair-788-GVA-AMS-1345@1986-02-28",
+    "swissair-666-GVA-BCN-1355@1986-02-28",
+    "aer-lingus-159-LHR-DUB-1300@1986-02-28",
+    "olympic-136-GVA-ATH-ELLINIKON-1430@1986-02-28",
+    "air-algerie-2631-GVA-ALG-1450@1986-02-28",
+    "aer-lingus-335-LBA-DUB-1425@1986-02-28",
+    "swissair-525-DUS-GVA-1630@1986-02-28",
+    "lufthansa-248-FRA-GVA-1640@1986-02-28",
+    "british-airways-379-BRU-LHR-1645@1986-02-28",
+    "british-airways-816-LHR-DUB-1600@1986-02-28",
+    "dan-air-755-NCL-DUB-1600@1986-02-28",
+    "lufthansa-226-FRA-ZRH-1705@1986-02-28",
+    "aer-lingus-169-LHR-DUB-1645@1986-02-28",
+    "lufthansa-230-DUS-ZRH-1800@1986-02-28",
+    "iberia-565-GVA-BCN-1825@1986-02-28",
+    "swissair-794-GVA-AMS-1830@1986-02-28",
+    "aer-lingus-173-LHR-DUB-1745@1986-02-28",
+    "swissair-956-GVA-BSL-1850@1986-02-28",
+    "british-airways-385-BRU-LHR-1900@1986-02-28",
+    "klm-322-GVA-AMS-1930@1986-02-28",
+    "british-airways-820-LHR-DUB-1845@1986-02-28",
+    "swissair-539-FRA-ZRH-1955@1986-02-28",
+    "swissair-517-DUS-ZRH-2020@1986-02-28",
+    "british-airways-830-LHR-DUB-1925@1986-02-28",
+    "aer-lingus-457-LGW-DUB-1945@1986-02-28",
+    "aer-lingus-229-GLA-DUB-1955@1986-02-28",
+    "aer-lingus-777-MAN-DUB-2000@1986-02-28",
+    "aer-lingus-175-LHR-DUB-2015@1986-02-28",
+    "swissair-545-FRA-GVA-2120@1986-02-28",
+    "aer-lingus-199-LPL-DUB-2050@1986-02-28",
+    "aer-lingus-179-LHR-DUB-2120@1986-02-28",
+    "crossair-979-GVA-BSL-2250@1986-02-28",
+    "lufthansa-232-DUS-ZRH-0735@1986-03-01",
+    "british-airways-371-BRU-LHR-0855@1986-03-01",
+    "british-airways-804-LHR-DUB-0810@1986-03-01",
+    "lufthansa-220-FRA-ZRH-0920@1986-03-01",
+    "lufthansa-246-FRA-GVA-0920@1986-03-01",
+    "swissair-511-DUS-ZRH-0935@1986-03-01",
+    "aer-lingus-664-DUB-ZRH-0910@1986-03-01",
+    "swissair-533-FRA-ZRH-1015@1986-03-01",
+    "klm-320-GVA-AMS-1020@1986-03-01",
+    "aer-lingus-153-LHR-DUB-0925@1986-03-01",
+    "british-airways-846-MAN-DUB-0950@1986-03-01",
+    "aer-lingus-205-MAN-DUB-1005@1986-03-01",
+    "aer-lingus-223-GLA-DUB-1005@1986-03-01",
+    "swissair-314-GVA-ATH-ELLINIKON-1105@1986-03-01",
+    "british-airways-810-LHR-DUB-1035@1986-03-01",
+    "british-airways-377-BRU-LHR-1245@1986-03-01",
+    "british-airways-814-LHR-DUB-1155@1986-03-01",
+    "lufthansa-222-FRA-ZRH-1315@1986-03-01",
+    "swissair-788-GVA-AMS-1345@1986-03-01",
+    "swissair-256-GVA-ABJ-1350@1986-03-01",
+    "swissair-666-GVA-BCN-1355@1986-03-01",
+    "aer-lingus-159-LHR-DUB-1300@1986-03-01",
+    "iberia-706-AGP-DUB-1400@1986-03-01",
+    "swissair-296-GVA-ATH-ELLINIKON-1400@1986-03-01",
+    "klm-318-GVA-AMS-1415@1986-03-01",
+    "olympic-136-GVA-ATH-ELLINIKON-1430@1986-03-01",
+    "air-algerie-2631-GVA-ALG-1450@1986-03-01",
+    "aer-lingus-335-LBA-DUB-1425@1986-03-01",
+    "swissair-525-DUS-GVA-1630@1986-03-01",
+    "lufthansa-248-FRA-GVA-1640@1986-03-01",
+    "british-airways-379-BRU-LHR-1645@1986-03-01",
+    "british-airways-816-LHR-DUB-1600@1986-03-01",
+    "lufthansa-226-FRA-ZRH-1705@1986-03-01",
+    "lufthansa-230-DUS-ZRH-1800@1986-03-01",
+    "iberia-561-GVA-BCN-1825@1986-03-01",
+    "aer-lingus-173-LHR-DUB-1745@1986-03-01",
+    "swissair-956-GVA-BSL-1850@1986-03-01",
+    "swissair-539-FRA-ZRH-1955@1986-03-01",
+    "swissair-517-DUS-ZRH-2020@1986-03-01",
+    "aer-lingus-175-LHR-DUB-2015@1986-03-01",
+    "swissair-545-FRA-GVA-2120@1986-03-01",
+    "aer-lingus-199-LPL-DUB-2050@1986-03-01"
+  ],
+  "new_movements_by_source": {
+    "swissair-benelux-19851027": 55,
+    "dublin-winter-1985": 38,
+    "british-airways-19851027-partial": 8
+  },
+  "nordic_endpoint_movements": 44,
+  "new_directed_pairs": 20,
+  "total_directed_pairs": 280,
+  "validation": {
+    "python_tests": 20,
+    "runtime_check": "passed",
+    "country_index_check": "passed",
+    "stock_market_validation": "passed",
+    "previous_leg_equality": "979 of 979 identical",
+    "new_simultaneous_same_airline_flight_records": 0,
+    "unreal_build": "not_run"
+  }
+}

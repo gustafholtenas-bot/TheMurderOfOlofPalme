@@ -1,0 +1,28 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://www.departedflights.com/WN011286intro.html",
+  "publication_index_url": "https://www.airtimes.com/cgat/usc/southwest.htm",
+  "next_catalogued_edition": "1986-03-18",
+  "scans": [
+    {
+      "printed_pages": [
+        13,
+        14
+      ],
+      "url": "https://www.departedflights.com/WN011286p13.jpg",
+      "sha256": "e455b12ec7b8128bbc8efdfa4de78138f42fb566cdd328613b6fb146f6d65369",
+      "size_bytes": 562403
+    },
+    {
+      "printed_pages": [
+        15,
+        16
+      ],
+      "url": "https://www.departedflights.com/WN011286p15.jpg",
+      "sha256": "eed76f6e0bba4f2896caae14b38fa0476962a301ff28db8877c1fda9632d2b25",
+      "size_bytes": 564785
+    }
+  ],
+  "coordinate_csv_sha256": "1accb6d210f937999818e44b313b5ec339618e60a735431abae498f2bec5ecc4",
+  "original_scans_redistributed": false
+}

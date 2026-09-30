@@ -1,0 +1,64 @@
+{
+  "batch": 34,
+  "package": "v35",
+  "country": "lu",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval; inte fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/lu/luxair.htm",
+      "type": "edition_index",
+      "result": "Indexet listar Luxairs vinterutgåva 27 oktober 1985–29 mars 1986. Flygplatsutgåvan är en separat publikation vid denna tid."
+    },
+    {
+      "url": "https://timetableimages.com/ttimages/lg85-90.htm",
+      "type": "edition_gallery",
+      "result": "Luxair-galleriet granskat. Rätt vinteromslag identifierat; inga avgångssidor för denna utgåva tillgängliga i granskad post."
+    },
+    {
+      "url": "https://timetableimages.com/i-kl/lg851027.jpg",
+      "type": "contemporary_cover",
+      "result": "Luxairs omslag visuellt granskat. Tryckt giltighet 27.10.85–29.03.86. Ingen avgång från omslaget."
+    },
+    {
+      "url": "https://timetableimages.com/ttimages/alux.htm",
+      "type": "airport_edition_gallery",
+      "result": "Flygplatsgalleriet har ett separat omslag för 27 oktober 1985; inga innersidor för utgåvan verifierade."
+    },
+    {
+      "url": "https://timetableimages.com/i-a/alux8510.jpg",
+      "type": "contemporary_cover",
+      "result": "Aéroport de Luxembourg, vinteromslag visuellt granskat: 27.10.85–29.03.86. Inga tider importerade."
+    },
+    {
+      "url": "https://anniversary.cargolux.com/article/the-lean-years",
+      "type": "official_company_history",
+      "result": "Bolagets egen återblick belägger verksamhet under 1980-talet. Cargolux registreras som forskningsspår utan animerade avgångar. Ingen tidtabell för observationsfönstret finns i artikeln."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/lu/cargolux.htm",
+      "type": "access_failed_search_lead",
+      "result": "Försök att läsa möjlig indexadress misslyckades. Ingen innersida eller avgång läst."
+    },
+    {
+      "url": "https://airline-memorabilia.blogspot.com/2012/02/luxavia-1985.html",
+      "type": "contemporary_scan_outside_window",
+      "result": "Båda skanningarna lästa. Luxavia/Luxair LG181/182, effective 1 January 1985, med daterade avgångar januari–december 1985. Dessa flygdatum gäller fel år och överförs inte till 1986. Busstiderna skapar inga flygrutter."
+    }
+  ],
+  "unresolved": [
+    "Luxairs och Luxemburgflygplatsens innersidor vinter 1985/86 samt ändringsblad återstår. Omslag visar giltighet men inga avgångstider.",
+    "Cargolux behöver en samtida tidtabell eller rörelsehandling med datum och lokala tider för observationsfönstret. Företagshistorik räcker inte.",
+    "Luxavia/Luxair–Trek-samarbetet, Icelandair och andra utländska operatörers trafik via Luxemburg återstår att granska med rätt utgåva.",
+    "Fullständig operatörslista, charter, frakt, privata/statliga/militära rörelser och faktisk trafik återstår. Noll importerade rörelser betyder inte att landet saknade flygtrafik."
+  ]
+}

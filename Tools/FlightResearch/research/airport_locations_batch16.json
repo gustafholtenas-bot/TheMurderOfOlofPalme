@@ -1,0 +1,136 @@
+{
+  "checked_on": "2026-09-27",
+  "airports": [
+    {
+      "id": "PIK",
+      "name": "Glasgow – Prestwick",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 55.501499,
+      "lon": -4.577182,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGPK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/EGPK/"
+      ],
+      "location_note": "Northwest p.43 explicitly says all Glasgow flights serve Prestwick; p.150 identifies PIK. Not Glasgow Abbotsinch (GLA). Approximate airfield location."
+    },
+    {
+      "id": "DCA",
+      "name": "Washington National",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 38.8521,
+      "lon": -77.037697,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "KDCA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/KDCA/",
+        "https://www.flyreagan.com/about-airport/history-reagan-national-airport"
+      ],
+      "location_note": "Contemporary Northwest airport code reviewed on p.150; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "DFW",
+      "name": "Dallas/Fort Worth",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 32.896801,
+      "lon": -97.038002,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "KDFW",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/KDFW/"
+      ],
+      "location_note": "Contemporary Northwest airport code reviewed on p.150; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "DTW",
+      "name": "Detroit Metropolitan",
+      "country": "us",
+      "timezone": "America/Detroit",
+      "lat": 42.21377,
+      "lon": -83.353786,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "KDTW",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/KDTW/"
+      ],
+      "location_note": "Contemporary Northwest airport code reviewed on p.150; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "PHL",
+      "name": "Philadelphia International",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 39.871899,
+      "lon": -75.241096,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "KPHL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/KPHL/"
+      ],
+      "location_note": "Contemporary Northwest airport code reviewed on p.150; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "TPA",
+      "name": "Tampa International",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 27.9755,
+      "lon": -82.533203,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "KTPA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/KTPA/"
+      ],
+      "location_note": "Contemporary Northwest airport code reviewed on p.150; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "HNL",
+      "name": "Honolulu International",
+      "country": "us",
+      "timezone": "Pacific/Honolulu",
+      "lat": 21.318387,
+      "lon": -157.92567,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "PHNL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/PHNL/",
+        "https://aviation.hawaii.gov/airfields-airports/oahu/hnl-1980s/"
+      ],
+      "location_note": "Contemporary Northwest airport code reviewed on p.150; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "NRT",
+      "name": "Tokyo – Narita (New Tokyo International)",
+      "country": "jp",
+      "timezone": "Asia/Tokyo",
+      "lat": 35.76858,
+      "lon": 140.388714,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "RJAA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+        "https://ourairports.com/airports/RJAA/",
+        "https://www.narita-airport.jp/en/discover/history/"
+      ],
+      "location_note": "Contemporary Northwest airport code reviewed on p.150; approximate airfield location, not a reconstructed 1986 gate or aircraft position."
+    }
+  ]
+}

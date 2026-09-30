@@ -1,0 +1,311 @@
+{
+  "batch": 24,
+  "package": "v25",
+  "checked_on": "2026-09-28",
+  "previous_movements": 1559,
+  "new_schedules": 62,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [
+    "sas-575-CPH-NCE-1210",
+    "air-france-576-NCE-CPH-1600",
+    "air-france-1790-LYS-CPH-1510",
+    "sas-1791-CPH-LYS-1820",
+    "air-uk-161-AMS-STN-0940",
+    "air-uk-167-AMS-STN-1345",
+    "air-uk-163-AMS-STN-1720",
+    "air-uk-165-AMS-STN-2040",
+    "air-uk-160-STN-AMS-0700",
+    "air-uk-162-STN-AMS-1030",
+    "air-uk-168-STN-AMS-1435",
+    "air-uk-164-STN-AMS-1755",
+    "air-uk-651-BRU-STN-0940",
+    "air-uk-653-BRU-STN-2045",
+    "air-uk-650-STN-BRU-0700",
+    "air-uk-652-STN-BRU-1800",
+    "air-uk-217-LBA-STN-2035",
+    "air-uk-214-STN-LBA-0700",
+    "air-uk-642-CDG-STN-1005",
+    "air-uk-646-CDG-STN-1700",
+    "air-uk-644-CDG-STN-2035",
+    "air-uk-641-STN-CDG-0710",
+    "air-uk-645-STN-CDG-1010",
+    "air-uk-643-STN-CDG-1740",
+    "air-uk-851-AMS-SOU-1050",
+    "air-uk-859-AMS-SOU-2005",
+    "air-uk-850-SOU-AMS-0750",
+    "air-uk-856-SOU-AMS-1705",
+    "air-uk-372-EXT-GCI-1425",
+    "air-uk-372-GCI-JER-1515",
+    "air-uk-372-JER-SOU-1550",
+    "air-uk-371-SOU-JER-1155",
+    "air-uk-371-JER-GCI-1255",
+    "air-uk-371-GCI-EXT-1320",
+    "air-uk-130-GCI-LHR-0715",
+    "air-uk-131-LHR-GCI-0850",
+    "air-uk-132-GCI-LHR-1100",
+    "air-uk-133-LHR-GCI-1235",
+    "air-uk-134-GCI-LHR-1410",
+    "air-uk-135-LHR-GCI-1545",
+    "air-uk-136-GCI-LHR-1720",
+    "air-uk-137-LHR-GCI-1900",
+    "air-uk-180-GCI-SOU-0725",
+    "air-uk-181-SOU-GCI-0840",
+    "air-uk-182-GCI-SOU-0950",
+    "air-uk-183-SOU-GCI-1640",
+    "air-uk-184-GCI-SOU-1240",
+    "air-uk-185-SOU-GCI-1130",
+    "air-uk-188-GCI-SOU-1500",
+    "air-uk-189-SOU-GCI-1350",
+    "air-uk-186-GCI-SOU-1750",
+    "air-uk-187-SOU-GCI-1930",
+    "air-uk-440-JER-SOU-0730",
+    "air-uk-441-SOU-JER-0835",
+    "air-uk-452-JER-SOU-0945",
+    "air-uk-453-SOU-JER-1630",
+    "air-uk-450-JER-SOU-1210",
+    "air-uk-443-SOU-JER-1100",
+    "air-uk-444-JER-SOU-1440",
+    "air-uk-451-SOU-JER-1330",
+    "air-uk-446-JER-SOU-1740",
+    "air-uk-447-SOU-JER-1850"
+  ],
+  "new_candidate_ids": [],
+  "new_airports": [
+    "LYS",
+    "STN",
+    "SOU",
+    "EXT",
+    "GCI"
+  ],
+  "new_country_ids": [
+    "gg"
+  ],
+  "new_airline_ids": [],
+  "source_files": [
+    {
+      "filename": "af851027-1a.pdf",
+      "source": "air-france-19851027-no25",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "sha256": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+      "bytes": 67992537,
+      "pdf_pages": 55,
+      "visually_reviewed": "printed 4, 26, 42–45, 56; selected pages, not entire document"
+    },
+    {
+      "filename": "uk851027-1a.pdf",
+      "source": "air-uk-19851027-issue1",
+      "url": "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf",
+      "sha256": "305299097359d7226979e506cc2f5f7ae4d390c80716052fb1ef5d804516b7f5",
+      "bytes": 12776886,
+      "pdf_pages": 13,
+      "visually_reviewed": "printed 6–15, 18–21; printed 16–17 and 24–25 absent"
+    }
+  ],
+  "coverage_complete": false,
+  "new_movements": 90,
+  "total_movements": 1649,
+  "new_leg_ids": [
+    "air-uk-160-STN-AMS-0700@1986-02-28",
+    "air-uk-214-STN-LBA-0700@1986-02-28",
+    "air-uk-650-STN-BRU-0700@1986-02-28",
+    "air-uk-641-STN-CDG-0710@1986-02-28",
+    "air-uk-130-GCI-LHR-0715@1986-02-28",
+    "air-uk-180-GCI-SOU-0725@1986-02-28",
+    "air-uk-440-JER-SOU-0730@1986-02-28",
+    "air-uk-850-SOU-AMS-0750@1986-02-28",
+    "air-uk-441-SOU-JER-0835@1986-02-28",
+    "air-uk-161-AMS-STN-0940@1986-02-28",
+    "air-uk-181-SOU-GCI-0840@1986-02-28",
+    "air-uk-651-BRU-STN-0940@1986-02-28",
+    "air-uk-131-LHR-GCI-0850@1986-02-28",
+    "air-uk-642-CDG-STN-1005@1986-02-28",
+    "air-uk-452-JER-SOU-0945@1986-02-28",
+    "air-uk-182-GCI-SOU-0950@1986-02-28",
+    "air-uk-851-AMS-SOU-1050@1986-02-28",
+    "air-uk-645-STN-CDG-1010@1986-02-28",
+    "air-uk-162-STN-AMS-1030@1986-02-28",
+    "air-uk-132-GCI-LHR-1100@1986-02-28",
+    "sas-575-CPH-NCE-1210@1986-02-28",
+    "air-uk-371-SOU-JER-1155@1986-02-28",
+    "air-uk-133-LHR-GCI-1235@1986-02-28",
+    "air-uk-167-AMS-STN-1345@1986-02-28",
+    "air-uk-371-JER-GCI-1255@1986-02-28",
+    "air-uk-371-GCI-EXT-1320@1986-02-28",
+    "air-uk-451-SOU-JER-1330@1986-02-28",
+    "air-france-1790-LYS-CPH-1510@1986-02-28",
+    "air-uk-134-GCI-LHR-1410@1986-02-28",
+    "air-uk-372-EXT-GCI-1425@1986-02-28",
+    "air-uk-168-STN-AMS-1435@1986-02-28",
+    "air-uk-444-JER-SOU-1440@1986-02-28",
+    "air-france-576-NCE-CPH-1600@1986-02-28",
+    "air-uk-372-GCI-JER-1515@1986-02-28",
+    "air-uk-135-LHR-GCI-1545@1986-02-28",
+    "air-uk-372-JER-SOU-1550@1986-02-28",
+    "air-uk-646-CDG-STN-1700@1986-02-28",
+    "air-uk-163-AMS-STN-1720@1986-02-28",
+    "air-uk-453-SOU-JER-1630@1986-02-28",
+    "air-uk-183-SOU-GCI-1640@1986-02-28",
+    "air-uk-856-SOU-AMS-1705@1986-02-28",
+    "air-uk-136-GCI-LHR-1720@1986-02-28",
+    "sas-1791-CPH-LYS-1820@1986-02-28",
+    "air-uk-446-JER-SOU-1740@1986-02-28",
+    "air-uk-643-STN-CDG-1740@1986-02-28",
+    "air-uk-186-GCI-SOU-1750@1986-02-28",
+    "air-uk-164-STN-AMS-1755@1986-02-28",
+    "air-uk-652-STN-BRU-1800@1986-02-28",
+    "air-uk-447-SOU-JER-1850@1986-02-28",
+    "air-uk-137-LHR-GCI-1900@1986-02-28",
+    "air-uk-859-AMS-SOU-2005@1986-02-28",
+    "air-uk-187-SOU-GCI-1930@1986-02-28",
+    "air-uk-644-CDG-STN-2035@1986-02-28",
+    "air-uk-165-AMS-STN-2040@1986-02-28",
+    "air-uk-653-BRU-STN-2045@1986-02-28",
+    "air-uk-217-LBA-STN-2035@1986-02-28",
+    "air-uk-160-STN-AMS-0700@1986-03-01",
+    "air-uk-641-STN-CDG-0710@1986-03-01",
+    "air-uk-130-GCI-LHR-0715@1986-03-01",
+    "air-uk-440-JER-SOU-0730@1986-03-01",
+    "air-uk-850-SOU-AMS-0750@1986-03-01",
+    "air-uk-441-SOU-JER-0835@1986-03-01",
+    "air-uk-161-AMS-STN-0940@1986-03-01",
+    "air-uk-131-LHR-GCI-0850@1986-03-01",
+    "air-uk-642-CDG-STN-1005@1986-03-01",
+    "air-uk-452-JER-SOU-0945@1986-03-01",
+    "air-uk-182-GCI-SOU-0950@1986-03-01",
+    "air-uk-851-AMS-SOU-1050@1986-03-01",
+    "air-uk-132-GCI-LHR-1100@1986-03-01",
+    "air-uk-443-SOU-JER-1100@1986-03-01",
+    "sas-575-CPH-NCE-1210@1986-03-01",
+    "air-uk-185-SOU-GCI-1130@1986-03-01",
+    "air-uk-371-SOU-JER-1155@1986-03-01",
+    "air-uk-450-JER-SOU-1210@1986-03-01",
+    "air-uk-133-LHR-GCI-1235@1986-03-01",
+    "air-uk-184-GCI-SOU-1240@1986-03-01",
+    "air-uk-371-JER-GCI-1255@1986-03-01",
+    "air-uk-371-GCI-EXT-1320@1986-03-01",
+    "air-uk-451-SOU-JER-1330@1986-03-01",
+    "air-uk-189-SOU-GCI-1350@1986-03-01",
+    "air-uk-134-GCI-LHR-1410@1986-03-01",
+    "air-uk-372-EXT-GCI-1425@1986-03-01",
+    "air-uk-444-JER-SOU-1440@1986-03-01",
+    "air-france-576-NCE-CPH-1600@1986-03-01",
+    "air-uk-188-GCI-SOU-1500@1986-03-01",
+    "air-uk-372-GCI-JER-1515@1986-03-01",
+    "air-uk-135-LHR-GCI-1545@1986-03-01",
+    "air-uk-372-JER-SOU-1550@1986-03-01",
+    "air-uk-453-SOU-JER-1630@1986-03-01",
+    "air-uk-183-SOU-GCI-1640@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1559,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_nordic_endpoint_movements": 6,
+  "overflight_records_added": 0,
+  "new_endpoint_pairs": [
+    [
+      "AMS",
+      "SOU"
+    ],
+    [
+      "AMS",
+      "STN"
+    ],
+    [
+      "BRU",
+      "STN"
+    ],
+    [
+      "CDG",
+      "STN"
+    ],
+    [
+      "CPH",
+      "LYS"
+    ],
+    [
+      "CPH",
+      "NCE"
+    ],
+    [
+      "EXT",
+      "GCI"
+    ],
+    [
+      "GCI",
+      "EXT"
+    ],
+    [
+      "GCI",
+      "JER"
+    ],
+    [
+      "GCI",
+      "LHR"
+    ],
+    [
+      "GCI",
+      "SOU"
+    ],
+    [
+      "JER",
+      "GCI"
+    ],
+    [
+      "JER",
+      "SOU"
+    ],
+    [
+      "LBA",
+      "STN"
+    ],
+    [
+      "LHR",
+      "GCI"
+    ],
+    [
+      "LYS",
+      "CPH"
+    ],
+    [
+      "NCE",
+      "CPH"
+    ],
+    [
+      "SOU",
+      "AMS"
+    ],
+    [
+      "SOU",
+      "GCI"
+    ],
+    [
+      "SOU",
+      "JER"
+    ],
+    [
+      "STN",
+      "AMS"
+    ],
+    [
+      "STN",
+      "BRU"
+    ],
+    [
+      "STN",
+      "CDG"
+    ],
+    [
+      "STN",
+      "LBA"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 463,
+  "runtime_coverage": {
+    "registered_airlines": 81,
+    "registered_countries": 71,
+    "reviewed_schedules": 1105,
+    "animated_airlines": 37,
+    "scheduled_movements": 1648,
+    "confirmed_movements": 1
+  }
+}

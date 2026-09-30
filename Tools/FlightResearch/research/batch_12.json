@@ -1,0 +1,106 @@
+{
+  "batch": 12,
+  "package": "v13",
+  "checked_on": "2026-09-27",
+  "previous_movements": 924,
+  "new_movements": 22,
+  "total_movements": 946,
+  "new_schedules": 20,
+  "new_schedule_ids": [
+    "braathens-135-RRS-FBU-1125",
+    "braathens-137-RRS-FBU-1325",
+    "braathens-134-RRS-TRD-1155",
+    "braathens-136-RRS-TRD-1240",
+    "braathens-211-TRF-SVG-0820",
+    "braathens-237-TRF-SVG-1430",
+    "braathens-231-TRF-SVG-2020",
+    "braathens-221-SVG-BGO-0645",
+    "braathens-223-SVG-BGO-0700",
+    "braathens-271-SVG-BGO-0920",
+    "braathens-275-SVG-BGO-0920",
+    "braathens-233-SVG-BGO-1115",
+    "braathens-238-HAU-SVG-1140",
+    "braathens-210-HAU-SVG-1825",
+    "braathens-070-KRS-FBU-0755",
+    "braathens-202-KRS-FBU-1020",
+    "braathens-204-KRS-FBU-1150",
+    "braathens-272-KRS-FBU-1235",
+    "braathens-274-KRS-FBU-1505",
+    "braathens-052-KRS-FBU-1650"
+  ],
+  "new_airports": [
+    "BGO",
+    "HAU",
+    "KRS",
+    "RRS",
+    "SVG",
+    "TRD",
+    "TRF"
+  ],
+  "newly_animated_operators": [
+    "braathens"
+  ],
+  "source_images": [
+    {
+      "source": "braathens-19851027",
+      "printed_pages": [
+        "cover"
+      ],
+      "url": "https://i.ebayimg.com/images/g/LOcAAOSwHPhis2Qh/s-l1600.jpg",
+      "sha256": "187b3eca9ff7247240aa2f5cc3815b29b106570689c42a93651b3aff93fb0efb"
+    },
+    {
+      "source": "braathens-19851027",
+      "printed_pages": [
+        "20"
+      ],
+      "url": "https://i.ebayimg.com/images/g/TjMAAOSwUaBis2Qh/s-l1600.jpg",
+      "sha256": "d8125d97f14360e2bb4c21f3017d2e5d976423e5a25e2954f3a6ec311c31dfff"
+    },
+    {
+      "source": "braathens-19851027",
+      "printed_pages": [
+        "10",
+        "11"
+      ],
+      "url": "https://i.ebayimg.com/images/g/SVIAAOSw6~Bis2Qh/s-l1600.jpg",
+      "sha256": "be66f02863c60822593419da1b62882a831b17a3078425e3ed633c6eb59dac77"
+    },
+    {
+      "source": "sas-linjeflyg-malmo-19860107",
+      "printed_pages": [
+        "cover"
+      ],
+      "url": "https://i.ebayimg.com/images/g/oSUAAOSw9phmgtZq/s-l1600.jpg",
+      "sha256": "3b6a7564a635ee930ca88873696b458fadbef12bc52353afb1fba521ec105756"
+    },
+    {
+      "source": "sas-linjeflyg-malmo-19860107",
+      "printed_pages": [
+        "14",
+        "15"
+      ],
+      "url": "https://i.ebayimg.com/images/g/~ZsAAOSwvFtmgtZr/s-l1600.jpg",
+      "sha256": "352da40fd20ba20a255ebb0e09c1281d617c76fbf690c2411dea23e8c6204008"
+    },
+    {
+      "source": "sas-linjeflyg-malmo-19860107",
+      "printed_pages": [
+        "22",
+        "23"
+      ],
+      "url": "https://i.ebayimg.com/images/g/vNMAAOSwpkpmgtZs/s-l1600.jpg",
+      "sha256": "1d4753df6cc9e86b896d23e27813e9b7ba2f0ee0bfb462632a34ee27219930c6"
+    }
+  ],
+  "decisions": [
+    "Only rows explicitly labelled NONSTOP imported.",
+    "Cabin-class splits merged for BU223, BU070 and BU052.",
+    "Source Oslo OSL mapped to FBU; airport context in Stortinget Document 18 (2000–2001), printed pp. 173–175.",
+    "Day codes follow 1=Monday through 7=Sunday; the legend page was not available.",
+    "Connections and stop flights excluded. Dan-Air route-map advertisement is not schedule evidence.",
+    "Malmö source retained for research only: missing physical leg breakdown and flight identities."
+  ],
+  "overflight_records_added": 0,
+  "coverage_complete": false
+}

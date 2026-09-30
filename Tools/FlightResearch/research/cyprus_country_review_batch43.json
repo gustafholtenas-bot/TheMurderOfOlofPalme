@@ -1,0 +1,61 @@
+{
+  "batch": 43,
+  "package": "v44",
+  "country": "cy",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte full trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 1,
+  "domestic_movements": 0,
+  "international_movements": 1,
+  "new_movements": 1,
+  "endpoint_movements_by_source_airline": {
+    "air-france": 1
+  },
+  "endpoint_leg_ids": [
+    "air-france-164-CDG-LCA-2215-d6-b43@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "air-france-164-CDG-LCA-2215-d6-b43@1986-03-01"
+  ],
+  "research_only_rows": 6,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Tryckt s. 68: AF164 lördag CDG22:15–LCA03:15a, VIA-pil nonstop, 74M. Paris UTC+1 och Larnaca UTC+2. Tidsintervallet 1 mars21:15–2 mars01:15 UTC överlappar fönstret. AF140:s fredag slutar 27/12 och importeras inte."
+    },
+    {
+      "url": "https://www.ebay.co.uk/itm/198667511415",
+      "type": "contemporary_partial_photograph",
+      "result": "Säljarens två publika foton visar förhandsutgåva 2 och en inlaga, båda 27 oktober 1985–29 mars 1986. Sex utvalda vänsterrader till Aten/Frankfurt/Manchester/Zürich transkriberas enbart som forskning. Ingen beställning eller kontakt har gjorts."
+    },
+    {
+      "url": "https://i.ebayimg.com/images/g/EccAAOSwjkJlrXnG/s-l1600.jpg",
+      "type": "incomplete_legend_and_remarks",
+      "result": "Dagnyckeln 1=måndag…7=söndag samt fotnot a/b/c är läsbara. Explicit tidsbasförklaring och rätt tabells anmärkningskolumn saknas i fotot. Blank anmärkningsruta räcker inte som verifierad nonstop-symbol."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/cy/cyprus.htm",
+      "type": "edition_index",
+      "result": "Standardutgåva nr112, 27 oktober 1985–29 mars 1986, listad. Den får inte sammanblandas med den fotograferade andra förhandsutgåvan."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/yk.htm",
+      "type": "other_operator_archive_lead",
+      "result": "Index visar 1983/1984 och 1987/1988, men ingen verifierad vinter1985/86-inlaga. Trafik i norra Cypern återstår som egen forskningsuppgift."
+    },
+    {
+      "url": "https://ourairports.com/airports/LCLK/",
+      "type": "coordinate_reference",
+      "result": "LCA/LCLK 34.875099,33.624901. Ungefärlig modern flygfältsmarkör för den samtida tabellens Larnaca."
+    }
+  ],
+  "unresolved": [
+    "Cyprus Airways förhandsutgåva har läsbara tider men saknar en uttrycklig tidsbasförklaring och hela högersidans anmärkningar. Sex vänsterrader sparas för fortsatt granskning, inte som animation. Standardutgåva nr 112 och ändringar återstår.",
+    "London saknar flygplatsangivelse i fotot. Paris via Zürich och London via Paphos får inte importeras som nonstop. Kölns fotnot b tillåter november 1985 och mars 1986; fredagen 28 februari får inte användas. Münchens fotnot a gäller 1 november–3 januari samt mars; ingen fredag i observationsfönstret kvalificerar.",
+    "KTHY/Cyprus Turkish Airlines kräver en egen tillämplig vinterkälla. Paphos, Ercan, Nicosia, militära baser, charter-, frakt-, privat-, stats- och helikoptertrafik är inte inventerade. En Larnaca-rörelse ger ingen full täckning av ön.",
+    "Retur från Larnaca i Air France-tabellen har inte verifierats i det granskade underlaget. AF140:s fredagsrad CDG–LCA upphör 27 december 1985; AF148 måndag/torsdag och AF162 tisdag överlappar inte fönstret. Ingen returtid eller mellanlandningstid gissas."
+  ]
+}

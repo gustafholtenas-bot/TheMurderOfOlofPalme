@@ -1,0 +1,71 @@
+{
+  "batch": 39,
+  "package": "v40",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2314,
+  "new_schedules": 2,
+  "new_schedule_ids": [
+    "air-france-280-ORY-WAW-1810-d5-b39",
+    "lot-273-WAW-ORY-1430-d5-b39"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 0,
+  "new_airports": [],
+  "new_country_ids": [
+    "sm",
+    "va",
+    "mt"
+  ],
+  "new_airline_ids": [
+    "air-malta"
+  ],
+  "new_source_ids": [
+    "aeroclub-san-marino-history",
+    "vatican-1986-activities-no-flight-log",
+    "air-malta-19851027-index"
+  ],
+  "unchanged_previous_movements": 2314,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "cz",
+  "reviewed_countries_this_batch": [
+    "sm",
+    "va",
+    "mt",
+    "pl"
+  ],
+  "new_movements": 2,
+  "total_movements": 2316,
+  "new_leg_ids": [
+    "lot-273-WAW-ORY-1430-d5-b39@1986-02-28",
+    "air-france-280-ORY-WAW-1810-d5-b39@1986-02-28"
+  ],
+  "new_movements_by_source_airline": {
+    "lot": 1,
+    "air-france": 1
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "ORY",
+      "WAW"
+    ],
+    [
+      "WAW",
+      "ORY"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 611,
+  "runtime_coverage": {
+    "registered_airlines": 88,
+    "registered_countries": 77,
+    "reviewed_schedules": 1594,
+    "animated_airlines": 42,
+    "scheduled_movements": 2315,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

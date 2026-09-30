@@ -1,0 +1,240 @@
+{
+  "batch": 36,
+  "package": "v37",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2130,
+  "new_schedules": 48,
+  "new_schedule_ids": [
+    "air-france-1679-GVA-BOD-1925-d5-b36",
+    "swissair-762-GVA-MRS-1405-d56-b36",
+    "air-france-1693-GVA-NCE-1125-d56-b36",
+    "swissair-758-GVA-NCE-1900-d56-b36",
+    "swissair-720-GVA-CDG-0715-d56-b36",
+    "swissair-722-GVA-CDG-0815-d56-b36",
+    "air-france-661-GVA-CDG-0915-d5-b36",
+    "air-france-663-GVA-CDG-1015-d56-b36",
+    "swissair-724-GVA-CDG-1215-d56-b36",
+    "air-france-665-GVA-CDG-1415-d56-b36",
+    "air-france-667-GVA-CDG-1800-d56-b36",
+    "swissair-728-GVA-CDG-1830-d56-b36",
+    "air-france-669-GVA-CDG-2015-d5-b36",
+    "swissair-764-GVA-TLS-1355-d5-b36",
+    "air-france-660-CDG-GVA-0715-d5-b36",
+    "air-france-662-CDG-GVA-0815-d56-b36",
+    "swissair-721-CDG-GVA-0915-d56-b36",
+    "swissair-723-CDG-GVA-1115-d56-b36",
+    "air-france-664-CDG-GVA-1215-d56-b36",
+    "swissair-725-CDG-GVA-1415-d56-b36",
+    "air-france-666-CDG-GVA-1615-d56-b36",
+    "air-france-668-CDG-GVA-1815-d5-b36",
+    "swissair-729-CDG-GVA-2015-d56-b36",
+    "air-france-680-CDG-ZRH-0725-d56-b36",
+    "swissair-701-CDG-ZRH-0950-d56-b36",
+    "air-france-682-CDG-ZRH-1210-d56-b36",
+    "swissair-705-CDG-ZRH-1355-d56-b36",
+    "air-france-684-CDG-ZRH-1700-d5-b36",
+    "swissair-709-CDG-ZRH-2125-d56-b36",
+    "air-france-1663-ZRH-LYS-1020-d5-b36",
+    "air-france-1665-ZRH-LYS-1940-d5-b36",
+    "air-france-1697-ZRH-NCE-1120-d6-b36",
+    "swissair-750-ZRH-NCE-1540-d56-b36",
+    "swissair-700-ZRH-CDG-0740-d56-b36",
+    "air-france-681-ZRH-CDG-0915-d56-b36",
+    "swissair-704-ZRH-CDG-1200-d56-b36",
+    "air-france-683-ZRH-CDG-1400-d56-b36",
+    "air-france-685-ZRH-CDG-1850-d5-b36",
+    "swissair-708-ZRH-CDG-1920-d56-b36",
+    "air-france-1678-BOD-GVA-1740-d5-b36",
+    "swissair-763-MRS-GVA-1600-d56-b36",
+    "air-france-1765-TLS-GVA-1550-d5-b36",
+    "air-france-1662-LYS-ZRH-0830-d5-b36",
+    "air-france-1664-LYS-ZRH-1755-d5-b36",
+    "air-france-1692-NCE-GVA-0950-d56-b36",
+    "swissair-759-NCE-GVA-2040-d56-b36",
+    "air-france-1696-NCE-ZRH-0925-d6-b36",
+    "swissair-751-NCE-ZRH-1730-d56-b36"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 0,
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "swissair-de-19851027-cover"
+  ],
+  "unchanged_previous_movements": 2130,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "li",
+  "reviewed_countries_this_batch": [
+    "ch"
+  ],
+  "new_movements": 80,
+  "total_movements": 2210,
+  "new_leg_ids": [
+    "air-france-660-CDG-GVA-0715-d5-b36@1986-02-28",
+    "swissair-720-GVA-CDG-0715-d56-b36@1986-02-28",
+    "air-france-680-CDG-ZRH-0725-d56-b36@1986-02-28",
+    "swissair-700-ZRH-CDG-0740-d56-b36@1986-02-28",
+    "air-france-662-CDG-GVA-0815-d56-b36@1986-02-28",
+    "swissair-722-GVA-CDG-0815-d56-b36@1986-02-28",
+    "air-france-1662-LYS-ZRH-0830-d5-b36@1986-02-28",
+    "air-france-661-GVA-CDG-0915-d5-b36@1986-02-28",
+    "air-france-681-ZRH-CDG-0915-d56-b36@1986-02-28",
+    "swissair-721-CDG-GVA-0915-d56-b36@1986-02-28",
+    "air-france-1692-NCE-GVA-0950-d56-b36@1986-02-28",
+    "swissair-701-CDG-ZRH-0950-d56-b36@1986-02-28",
+    "air-france-663-GVA-CDG-1015-d56-b36@1986-02-28",
+    "air-france-1663-ZRH-LYS-1020-d5-b36@1986-02-28",
+    "swissair-723-CDG-GVA-1115-d56-b36@1986-02-28",
+    "air-france-1693-GVA-NCE-1125-d56-b36@1986-02-28",
+    "swissair-704-ZRH-CDG-1200-d56-b36@1986-02-28",
+    "air-france-682-CDG-ZRH-1210-d56-b36@1986-02-28",
+    "air-france-664-CDG-GVA-1215-d56-b36@1986-02-28",
+    "swissair-724-GVA-CDG-1215-d56-b36@1986-02-28",
+    "swissair-705-CDG-ZRH-1355-d56-b36@1986-02-28",
+    "swissair-764-GVA-TLS-1355-d5-b36@1986-02-28",
+    "air-france-683-ZRH-CDG-1400-d56-b36@1986-02-28",
+    "swissair-762-GVA-MRS-1405-d56-b36@1986-02-28",
+    "air-france-665-GVA-CDG-1415-d56-b36@1986-02-28",
+    "swissair-725-CDG-GVA-1415-d56-b36@1986-02-28",
+    "swissair-750-ZRH-NCE-1540-d56-b36@1986-02-28",
+    "air-france-1765-TLS-GVA-1550-d5-b36@1986-02-28",
+    "swissair-763-MRS-GVA-1600-d56-b36@1986-02-28",
+    "air-france-666-CDG-GVA-1615-d56-b36@1986-02-28",
+    "air-france-684-CDG-ZRH-1700-d5-b36@1986-02-28",
+    "swissair-751-NCE-ZRH-1730-d56-b36@1986-02-28",
+    "air-france-1678-BOD-GVA-1740-d5-b36@1986-02-28",
+    "air-france-1664-LYS-ZRH-1755-d5-b36@1986-02-28",
+    "air-france-667-GVA-CDG-1800-d56-b36@1986-02-28",
+    "air-france-668-CDG-GVA-1815-d5-b36@1986-02-28",
+    "swissair-728-GVA-CDG-1830-d56-b36@1986-02-28",
+    "air-france-685-ZRH-CDG-1850-d5-b36@1986-02-28",
+    "swissair-758-GVA-NCE-1900-d56-b36@1986-02-28",
+    "swissair-708-ZRH-CDG-1920-d56-b36@1986-02-28",
+    "air-france-1679-GVA-BOD-1925-d5-b36@1986-02-28",
+    "air-france-1665-ZRH-LYS-1940-d5-b36@1986-02-28",
+    "air-france-669-GVA-CDG-2015-d5-b36@1986-02-28",
+    "swissair-729-CDG-GVA-2015-d56-b36@1986-02-28",
+    "swissair-759-NCE-GVA-2040-d56-b36@1986-02-28",
+    "swissair-709-CDG-ZRH-2125-d56-b36@1986-02-28",
+    "swissair-720-GVA-CDG-0715-d56-b36@1986-03-01",
+    "air-france-680-CDG-ZRH-0725-d56-b36@1986-03-01",
+    "swissair-700-ZRH-CDG-0740-d56-b36@1986-03-01",
+    "air-france-662-CDG-GVA-0815-d56-b36@1986-03-01",
+    "swissair-722-GVA-CDG-0815-d56-b36@1986-03-01",
+    "air-france-681-ZRH-CDG-0915-d56-b36@1986-03-01",
+    "swissair-721-CDG-GVA-0915-d56-b36@1986-03-01",
+    "air-france-1696-NCE-ZRH-0925-d6-b36@1986-03-01",
+    "air-france-1692-NCE-GVA-0950-d56-b36@1986-03-01",
+    "swissair-701-CDG-ZRH-0950-d56-b36@1986-03-01",
+    "air-france-663-GVA-CDG-1015-d56-b36@1986-03-01",
+    "swissair-723-CDG-GVA-1115-d56-b36@1986-03-01",
+    "air-france-1697-ZRH-NCE-1120-d6-b36@1986-03-01",
+    "air-france-1693-GVA-NCE-1125-d56-b36@1986-03-01",
+    "swissair-704-ZRH-CDG-1200-d56-b36@1986-03-01",
+    "air-france-682-CDG-ZRH-1210-d56-b36@1986-03-01",
+    "air-france-664-CDG-GVA-1215-d56-b36@1986-03-01",
+    "swissair-724-GVA-CDG-1215-d56-b36@1986-03-01",
+    "swissair-705-CDG-ZRH-1355-d56-b36@1986-03-01",
+    "air-france-683-ZRH-CDG-1400-d56-b36@1986-03-01",
+    "swissair-762-GVA-MRS-1405-d56-b36@1986-03-01",
+    "air-france-665-GVA-CDG-1415-d56-b36@1986-03-01",
+    "swissair-725-CDG-GVA-1415-d56-b36@1986-03-01",
+    "swissair-750-ZRH-NCE-1540-d56-b36@1986-03-01",
+    "swissair-763-MRS-GVA-1600-d56-b36@1986-03-01",
+    "air-france-666-CDG-GVA-1615-d56-b36@1986-03-01",
+    "swissair-751-NCE-ZRH-1730-d56-b36@1986-03-01",
+    "air-france-667-GVA-CDG-1800-d56-b36@1986-03-01",
+    "swissair-728-GVA-CDG-1830-d56-b36@1986-03-01",
+    "swissair-758-GVA-NCE-1900-d56-b36@1986-03-01",
+    "swissair-708-ZRH-CDG-1920-d56-b36@1986-03-01",
+    "swissair-729-CDG-GVA-2015-d56-b36@1986-03-01",
+    "swissair-759-NCE-GVA-2040-d56-b36@1986-03-01",
+    "swissair-709-CDG-ZRH-2125-d56-b36@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 39,
+    "swissair": 41
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BOD",
+      "GVA"
+    ],
+    [
+      "CDG",
+      "GVA"
+    ],
+    [
+      "CDG",
+      "ZRH"
+    ],
+    [
+      "GVA",
+      "BOD"
+    ],
+    [
+      "GVA",
+      "CDG"
+    ],
+    [
+      "GVA",
+      "MRS"
+    ],
+    [
+      "GVA",
+      "NCE"
+    ],
+    [
+      "GVA",
+      "TLS"
+    ],
+    [
+      "LYS",
+      "ZRH"
+    ],
+    [
+      "MRS",
+      "GVA"
+    ],
+    [
+      "NCE",
+      "GVA"
+    ],
+    [
+      "NCE",
+      "ZRH"
+    ],
+    [
+      "TLS",
+      "GVA"
+    ],
+    [
+      "ZRH",
+      "CDG"
+    ],
+    [
+      "ZRH",
+      "LYS"
+    ],
+    [
+      "ZRH",
+      "NCE"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 576,
+  "runtime_coverage": {
+    "registered_airlines": 85,
+    "registered_countries": 73,
+    "reviewed_schedules": 1523,
+    "animated_airlines": 39,
+    "scheduled_movements": 2209,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

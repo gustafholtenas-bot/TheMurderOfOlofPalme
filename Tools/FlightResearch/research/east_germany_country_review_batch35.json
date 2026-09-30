@@ -1,0 +1,85 @@
+{
+  "batch": 35,
+  "package": "v36",
+  "country": "de-east",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 19,
+  "domestic_movements": 0,
+  "international_movements": 19,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {
+    "aeroflot": 7,
+    "interflug": 12
+  },
+  "endpoint_leg_ids": [
+    "aeroflot-111-SVO-SXF-0855@1986-02-28",
+    "interflug-611-SVO-SXF-0950@1986-02-28",
+    "interflug-662-DRS-SVO-0955@1986-02-28",
+    "aeroflot-120-DRS-SVO-1130@1986-02-28",
+    "interflug-601-SVO-SXF-1400@1986-02-28",
+    "aeroflot-113-SVO-SXF-1510@1986-02-28",
+    "interflug-603-SVO-SXF-1540@1986-02-28",
+    "interflug-607-SVO-SXF-2030@1986-02-28",
+    "interflug-609-SVO-SXF-2105@1986-02-28",
+    "aeroflot-111-SVO-SXF-0855@1986-03-01",
+    "interflug-611-SVO-SXF-0950@1986-03-01",
+    "aeroflot-612-DRS-LED-0915@1986-03-01",
+    "interflug-662-DRS-SVO-0955@1986-03-01",
+    "aeroflot-120-DRS-SVO-1130@1986-03-01",
+    "interflug-601-SVO-SXF-1400@1986-03-01",
+    "aeroflot-113-SVO-SXF-1510@1986-03-01",
+    "interflug-603-SVO-SXF-1540@1986-03-01",
+    "interflug-607-SVO-SXF-2030@1986-03-01",
+    "interflug-609-SVO-SXF-2105@1986-03-01"
+  ],
+  "new_leg_ids": [],
+  "research_only_rows": 22,
+  "checks": [
+    {
+      "url": "https://www.ebay.de/itm/206269425393",
+      "type": "contemporary_partial_advance_timetable",
+      "result": "Rött förhandsomslag 27.10.1985–29.3.1986 och s. 4–5 visuellt lästa. 22 tryckta rader med fredag/lördag i den angivna giltigheten sparas endast som forskning. Ingen fullständig teckenförklaring; ingen import eller uppskattad stoppindelning."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/if1e2.htm",
+      "type": "edition_gallery",
+      "result": "Galleriet länkar ett separat ordinarie vinteromslag. Galleritexten säger 25 oktober 1985 men bilden anger 27 oktober; tryckt datum följs."
+    },
+    {
+      "url": "https://www.timetableimages.com/i-gj/if8510a.jpg",
+      "type": "contemporary_cover",
+      "result": "Ordinarie omslag visuellt läst: 27.10.1985–29.3.1986. Inga innersidor för denna utgåva verifierade."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/de/interflug.htm",
+      "type": "edition_index",
+      "result": "Indexet bekräftar en systemutgåva 27 oktober 1985–29 mars 1986. Detta är utgåvebelägg, inga avgångstider."
+    },
+    {
+      "url": "https://www.interflug.biz/streckenkarten.htm",
+      "type": "route_map_research_lead",
+      "result": "Sidans avsnitt märkt Europa Dezember 1985 och länkade kartbilder granskade översiktligt. Kartlinjer kopplar inte enskilda flygnummer till tidsatta mellanlandningar; ingen rörelse importeras från kartan."
+    },
+    {
+      "url": "https://www.ebay.ie/itm/127975765831",
+      "type": "contemporary_promotional_brochure",
+      "result": "Interflug Information, oktober 1985: omslag och uppslag med innehållsförteckning/text s. 2–5 lästa. Publikationen är en informationsbroschyr; dessa sidor ger inga avgångstider."
+    },
+    {
+      "url": "https://www.ebay.com/itm/136906585239",
+      "type": "existing_source_preserved",
+      "result": "Befintliga 19 Östtyskland-rörelser ur Aeroflots första vinterutgåva behålls oförändrade: 12 Interflug och 7 Aeroflot. Tillgängliga bildlänkar jämförda; inga nya sidor identifierade i dessa två tidigare granskade exemplar."
+    }
+  ],
+  "unresolved": [
+    "Interflugs kompletta ordinarie vintertabell, teckenförklaring och ändringsblad återstår. Förhandsraderna kan först godkännas efter fysisk stopp- och tidszonskontroll.",
+    "Köpenhamn och Helsingfors är prioriterade i det nya forskningsunderlaget. Stockholm-raderna på uppslaget gäller andra trafikdagar eller marsdatum; inga extra Sverigeavgångar skapas.",
+    "IF828 anges från samma avgångstid till både Larnaca och Damascus. Tider för Larnaca–Damascus saknas här. IF920 anger teknisk landning i Gander men saknar Gander-tider. Hela resor ritas inte som nonstop.",
+    "Handskrivna siffror saknar säker datering och används inte som trafikdagar eller korrigeringar.",
+    "Returflyg, Leipzig, Erfurt, övriga internationella operatörer, charter/frakt samt stats- och militärflyg återstår. Den registrerade operatörslistan är inte fullständig.",
+    "Faktiskt genomförande och verkliga överflygningar kräver rörelse- eller flygledningshandlingar."
+  ]
+}

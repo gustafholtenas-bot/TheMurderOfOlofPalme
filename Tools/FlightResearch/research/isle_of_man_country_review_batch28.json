@@ -1,0 +1,33 @@
+{
+  "batch": 28,
+  "package": "v29",
+  "country": "im",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i landkön; inte en fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/uk/manx.htm",
+      "type": "edition_index",
+      "result": "Manx Airlines-registret listar 28 oktober 1985, utgåva 2, utan slutdatum. Ingen länkad avgångsskanning hittades. Indexdatum ensamt belägger inte trafiken 28 februari–1 mars."
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/je1.htm",
+      "type": "index_checked",
+      "result": "Manx-indexet har bland annat april 1985 och sommaren 1986. Dessa utgåvor används inte som vinteravgångsbelägg."
+    }
+  ],
+  "unresolved": [
+    "Sök själva Manx Airlines-utgåvan 28 oktober 1985, nummer 2, dess teckenförklaring och senare ändringar.",
+    "Ronaldsway, övriga bolag och flygplatsens vinterguide behöver inventeras med samtida källor.",
+    "Inga avgångar eller flygplatser läggs till enbart från ett katalogdatum."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "batch": 25,
+  "package": "v26",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_research_queue",
+  "previous_movements": 1649,
+  "new_schedules": 0,
+  "new_movements": 0,
+  "total_movements": 1649,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [],
+  "new_leg_ids": [],
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "unchanged_previous_movements": 1649,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "next_country": "no",
+  "reviewed_countries_this_workflow": [
+    "se"
+  ],
+  "country_queue_entries": 40,
+  "coverage_complete": false
+}

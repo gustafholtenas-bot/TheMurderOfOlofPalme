@@ -1,0 +1,35 @@
+{
+  "package": "v42",
+  "batch": 41,
+  "source": "air-france-19851027-no25",
+  "rows": [
+    {
+      "printed_code": "AF719",
+      "origin": "OTP",
+      "destination": "ORY",
+      "departure_local": "13:35",
+      "arrival_local": "17:10",
+      "printed_days": "1-3-5--",
+      "printed_page": "21",
+      "route_page": "10",
+      "printed_itinerary": "Bucarest–Sofia–Paris",
+      "via_marker": "blank",
+      "reason": "Through itinerary via Sofia. No fully timed OTP–SOF physical segment has been verified. Do not infer intermediate arrival or equate AF719 with LZAF135 solely from matching Paris arrival."
+    },
+    {
+      "printed_code": "AFLZ706",
+      "origin": "ORY",
+      "destination": "SOF",
+      "departure_local": "09:00",
+      "arrival_local": "14:25",
+      "printed_days": "1-3-5--",
+      "printed_page": "76",
+      "route_page": "10",
+      "printed_itinerary": "Paris–(Bucarest)–Sofia",
+      "via_marker": "blank",
+      "reason": "Bucharest appears in parentheses, identified as a technical stop by the page 10 legend. No fully timed onward segment is available. Do not duplicate the independently read ORY–OTP AF718 row as a second physical movement."
+    }
+  ],
+  "animated": false,
+  "catalog_candidates_added": 0
+}

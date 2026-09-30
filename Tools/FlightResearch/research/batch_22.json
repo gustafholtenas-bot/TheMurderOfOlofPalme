@@ -1,0 +1,401 @@
+{
+  "batch": 22,
+  "package": "v23",
+  "checked_on": "2026-09-28",
+  "previous_movements": 1370,
+  "new_schedules": 83,
+  "new_candidate_schedules": 0,
+  "new_schedule_ids": [
+    "air-uk-602-ABZ-SVG-0850",
+    "air-uk-601-SVG-ABZ-1650",
+    "sas-532-ABZ-SVG-1315",
+    "sas-534-ABZ-SVG-1315",
+    "sas-531-SVG-ABZ-1225",
+    "sas-533-SVG-ABZ-1225",
+    "air-uk-621-EBJ-HUY-1510",
+    "air-uk-660-NCL-CPH-1130",
+    "air-uk-661-CPH-NCL-1525",
+    "air-business-163-EBJ-AAR-1510",
+    "air-uk-201-ABZ-EDI-0650",
+    "air-uk-201-EDI-HUY-0740",
+    "air-uk-201-HUY-NWI-0855",
+    "air-uk-202-NWI-HUY-0705",
+    "air-uk-202-HUY-EDI-0750",
+    "air-uk-202-EDI-ABZ-0905",
+    "air-uk-209-ABZ-EDI-1800",
+    "air-uk-209-EDI-HUY-1850",
+    "air-uk-209-HUY-NWI-2005",
+    "air-uk-210-NWI-HUY-1820",
+    "air-uk-210-HUY-EDI-1905",
+    "air-uk-210-EDI-ABZ-2020",
+    "air-uk-207-ABZ-NCL-1635",
+    "air-uk-211-ABZ-NCL-1905",
+    "air-uk-200-NCL-ABZ-0730",
+    "air-uk-208-NCL-ABZ-1750",
+    "air-uk-552-ABZ-NWI-1255",
+    "air-uk-552-NWI-AMS-1500",
+    "air-uk-553-AMS-NWI-1410",
+    "air-uk-553-NWI-ABZ-1430",
+    "air-uk-204-NWI-MME-0955",
+    "air-uk-204-MME-ABZ-1100",
+    "air-uk-205-ABZ-MME-1520",
+    "air-uk-205-MME-NWI-1630",
+    "air-uk-100-NWI-AMS-0710",
+    "air-uk-102-NWI-AMS-1005",
+    "air-uk-106-NWI-AMS-1805",
+    "air-uk-101-AMS-NWI-0940",
+    "air-uk-105-AMS-NWI-1740",
+    "air-uk-107-AMS-NWI-2030",
+    "air-uk-824-HUY-AMS-0740",
+    "air-uk-825-AMS-HUY-1015",
+    "air-uk-826-HUY-AMS-1315",
+    "air-uk-827-AMS-HUY-1600",
+    "air-uk-828-HUY-AMS-1755",
+    "air-uk-829-AMS-HUY-2030",
+    "air-uk-550-EDI-AMS-0750",
+    "air-uk-551-AMS-EDI-1040",
+    "air-uk-556-EDI-AMS-1720",
+    "air-uk-557-AMS-EDI-2010",
+    "air-uk-543-AMS-NCL-1030",
+    "air-uk-545-AMS-NCL-1900",
+    "air-uk-542-NCL-AMS-0755",
+    "air-uk-544-NCL-AMS-1400",
+    "klm-161-AMS-NCL-1310",
+    "klm-162-NCL-AMS-1810",
+    "air-uk-582-BFS-LBA-0835",
+    "air-uk-584-BFS-LBA-0935",
+    "air-uk-590-BFS-LBA-1300",
+    "air-uk-586-BFS-LBA-1635",
+    "air-uk-588-BFS-LBA-1950",
+    "air-uk-581-LBA-BFS-0700",
+    "air-uk-583-LBA-BFS-0800",
+    "air-uk-589-LBA-BFS-1020",
+    "air-uk-585-LBA-BFS-1450",
+    "air-uk-587-LBA-BFS-1815",
+    "air-uk-660-EDI-LBA-0930",
+    "air-uk-217-EDI-LBA-1930",
+    "air-uk-214-LBA-EDI-0800",
+    "air-uk-212-LBA-EDI-1105",
+    "air-uk-661-LBA-EDI-1810",
+    "air-uk-052-HUY-NWI-0650",
+    "air-uk-052-NWI-LHR-0735",
+    "air-uk-053-LHR-NWI-0915",
+    "air-uk-053-NWI-HUY-1015",
+    "air-uk-056-HUY-NWI-1645",
+    "air-uk-056-NWI-LHR-1730",
+    "air-uk-057-LHR-NWI-1855",
+    "air-uk-057-NWI-HUY-1955",
+    "air-uk-791-LBA-CDG-0820",
+    "air-uk-794-CDG-LBA-1925",
+    "air-uk-723-NCL-CDG-1530",
+    "air-uk-722-CDG-NCL-1150"
+  ],
+  "new_candidate_ids": [],
+  "new_airports": [
+    "AAR"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [
+    "air-business"
+  ],
+  "source_files": [
+    {
+      "filename": "uk851027-1a.pdf",
+      "source": "air-uk-19851027-issue1",
+      "url": "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf",
+      "sha256": "305299097359d7226979e506cc2f5f7ae4d390c80716052fb1ef5d804516b7f5",
+      "bytes": 12776886,
+      "visually_reviewed": true
+    },
+    {
+      "filename": "bcal_cover.webp",
+      "source": "bcal-north-midlands-19851027",
+      "url": "https://i.ebayimg.com/images/g/-Y4AAeSwI-5p1zX6/s-l1600.webp",
+      "sha256": "93a8a3c5026f2ccddb3c8582b73289bdec404e7ab69516a801ae8dbf3d4fd00a",
+      "bytes": 274480,
+      "visually_reviewed": true
+    },
+    {
+      "filename": "bcal2.webp",
+      "source": "bcal-north-midlands-19851027",
+      "url": "https://i.ebayimg.com/images/g/ckgAAeSwnKJp1zX6/s-l1600.webp",
+      "sha256": "667f2ddbe9e9aeb814646b5192a7601e6dac80ffd051893e0f54cd98a20a7c0c",
+      "bytes": 520516,
+      "visually_reviewed": true
+    },
+    {
+      "filename": "bcal3.webp",
+      "source": "bcal-north-midlands-19851027",
+      "url": "https://i.ebayimg.com/images/g/38QAAeSwzClp1zX6/s-l1600.webp",
+      "sha256": "6da5607aa65a5755a16b56245f2e635c8d1a01efda6f3f930b493e6a66c3a2e1",
+      "bytes": 448802,
+      "visually_reviewed": true
+    }
+  ],
+  "coverage_complete": false,
+  "new_movements": 97,
+  "total_movements": 1467,
+  "new_leg_ids": [
+    "air-uk-052-HUY-NWI-0650@1986-02-28",
+    "air-uk-201-ABZ-EDI-0650@1986-02-28",
+    "air-uk-581-LBA-BFS-0700@1986-02-28",
+    "air-uk-202-NWI-HUY-0705@1986-02-28",
+    "air-uk-100-NWI-AMS-0710@1986-02-28",
+    "air-uk-200-NCL-ABZ-0730@1986-02-28",
+    "air-uk-052-NWI-LHR-0735@1986-02-28",
+    "air-uk-201-EDI-HUY-0740@1986-02-28",
+    "air-uk-824-HUY-AMS-0740@1986-02-28",
+    "air-uk-202-HUY-EDI-0750@1986-02-28",
+    "air-uk-550-EDI-AMS-0750@1986-02-28",
+    "air-uk-542-NCL-AMS-0755@1986-02-28",
+    "air-uk-214-LBA-EDI-0800@1986-02-28",
+    "air-uk-791-LBA-CDG-0820@1986-02-28",
+    "air-uk-582-BFS-LBA-0835@1986-02-28",
+    "air-uk-101-AMS-NWI-0940@1986-02-28",
+    "air-uk-602-ABZ-SVG-0850@1986-02-28",
+    "air-uk-201-HUY-NWI-0855@1986-02-28",
+    "air-uk-202-EDI-ABZ-0905@1986-02-28",
+    "air-uk-053-LHR-NWI-0915@1986-02-28",
+    "air-uk-825-AMS-HUY-1015@1986-02-28",
+    "air-uk-543-AMS-NCL-1030@1986-02-28",
+    "air-uk-660-EDI-LBA-0930@1986-02-28",
+    "air-uk-551-AMS-EDI-1040@1986-02-28",
+    "air-uk-204-NWI-MME-0955@1986-02-28",
+    "air-uk-102-NWI-AMS-1005@1986-02-28",
+    "air-uk-053-NWI-HUY-1015@1986-02-28",
+    "air-uk-589-LBA-BFS-1020@1986-02-28",
+    "air-uk-722-CDG-NCL-1150@1986-02-28",
+    "air-uk-204-MME-ABZ-1100@1986-02-28",
+    "air-uk-212-LBA-EDI-1105@1986-02-28",
+    "sas-531-SVG-ABZ-1225@1986-02-28",
+    "air-uk-660-NCL-CPH-1130@1986-02-28",
+    "klm-161-AMS-NCL-1310@1986-02-28",
+    "air-uk-552-ABZ-NWI-1255@1986-02-28",
+    "air-uk-590-BFS-LBA-1300@1986-02-28",
+    "air-uk-553-AMS-NWI-1410@1986-02-28",
+    "air-uk-826-HUY-AMS-1315@1986-02-28",
+    "sas-532-ABZ-SVG-1315@1986-02-28",
+    "air-uk-544-NCL-AMS-1400@1986-02-28",
+    "air-business-163-EBJ-AAR-1510@1986-02-28",
+    "air-uk-621-EBJ-HUY-1510@1986-02-28",
+    "air-uk-661-CPH-NCL-1525@1986-02-28",
+    "air-uk-553-NWI-ABZ-1430@1986-02-28",
+    "air-uk-585-LBA-BFS-1450@1986-02-28",
+    "air-uk-552-NWI-AMS-1500@1986-02-28",
+    "air-uk-827-AMS-HUY-1600@1986-02-28",
+    "air-uk-205-ABZ-MME-1520@1986-02-28",
+    "air-uk-723-NCL-CDG-1530@1986-02-28",
+    "air-uk-601-SVG-ABZ-1650@1986-02-28",
+    "air-uk-205-MME-NWI-1630@1986-02-28",
+    "air-uk-207-ABZ-NCL-1635@1986-02-28",
+    "air-uk-586-BFS-LBA-1635@1986-02-28",
+    "air-uk-105-AMS-NWI-1740@1986-02-28",
+    "air-uk-056-HUY-NWI-1645@1986-02-28",
+    "air-uk-556-EDI-AMS-1720@1986-02-28",
+    "air-uk-056-NWI-LHR-1730@1986-02-28",
+    "air-uk-208-NCL-ABZ-1750@1986-02-28",
+    "air-uk-828-HUY-AMS-1755@1986-02-28",
+    "air-uk-209-ABZ-EDI-1800@1986-02-28",
+    "air-uk-545-AMS-NCL-1900@1986-02-28",
+    "air-uk-106-NWI-AMS-1805@1986-02-28",
+    "air-uk-661-LBA-EDI-1810@1986-02-28",
+    "klm-162-NCL-AMS-1810@1986-02-28",
+    "air-uk-587-LBA-BFS-1815@1986-02-28",
+    "air-uk-210-NWI-HUY-1820@1986-02-28",
+    "air-uk-794-CDG-LBA-1925@1986-02-28",
+    "air-uk-209-EDI-HUY-1850@1986-02-28",
+    "air-uk-057-LHR-NWI-1855@1986-02-28",
+    "air-uk-210-HUY-EDI-1905@1986-02-28",
+    "air-uk-211-ABZ-NCL-1905@1986-02-28",
+    "air-uk-557-AMS-EDI-2010@1986-02-28",
+    "air-uk-107-AMS-NWI-2030@1986-02-28",
+    "air-uk-217-EDI-LBA-1930@1986-02-28",
+    "air-uk-829-AMS-HUY-2030@1986-02-28",
+    "air-uk-588-BFS-LBA-1950@1986-02-28",
+    "air-uk-057-NWI-HUY-1955@1986-02-28",
+    "air-uk-209-HUY-NWI-2005@1986-02-28",
+    "air-uk-210-EDI-ABZ-2020@1986-02-28",
+    "air-uk-052-HUY-NWI-0650@1986-03-01",
+    "air-uk-100-NWI-AMS-0710@1986-03-01",
+    "air-uk-052-NWI-LHR-0735@1986-03-01",
+    "air-uk-824-HUY-AMS-0740@1986-03-01",
+    "air-uk-550-EDI-AMS-0750@1986-03-01",
+    "air-uk-542-NCL-AMS-0755@1986-03-01",
+    "air-uk-583-LBA-BFS-0800@1986-03-01",
+    "air-uk-101-AMS-NWI-0940@1986-03-01",
+    "air-uk-053-LHR-NWI-0915@1986-03-01",
+    "air-uk-825-AMS-HUY-1015@1986-03-01",
+    "air-uk-543-AMS-NCL-1030@1986-03-01",
+    "air-uk-584-BFS-LBA-0935@1986-03-01",
+    "air-uk-551-AMS-EDI-1040@1986-03-01",
+    "air-uk-053-NWI-HUY-1015@1986-03-01",
+    "sas-533-SVG-ABZ-1225@1986-03-01",
+    "sas-534-ABZ-SVG-1315@1986-03-01",
+    "air-uk-106-NWI-AMS-1805@1986-03-01",
+    "air-uk-107-AMS-NWI-2030@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1370,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_nordic_endpoint_movements": 10,
+  "overflight_records_added": 0,
+  "new_endpoint_pairs": [
+    [
+      "ABZ",
+      "EDI"
+    ],
+    [
+      "ABZ",
+      "MME"
+    ],
+    [
+      "ABZ",
+      "NCL"
+    ],
+    [
+      "ABZ",
+      "NWI"
+    ],
+    [
+      "ABZ",
+      "SVG"
+    ],
+    [
+      "AMS",
+      "EDI"
+    ],
+    [
+      "AMS",
+      "HUY"
+    ],
+    [
+      "AMS",
+      "NCL"
+    ],
+    [
+      "AMS",
+      "NWI"
+    ],
+    [
+      "BFS",
+      "LBA"
+    ],
+    [
+      "CDG",
+      "LBA"
+    ],
+    [
+      "CDG",
+      "NCL"
+    ],
+    [
+      "CPH",
+      "NCL"
+    ],
+    [
+      "EBJ",
+      "AAR"
+    ],
+    [
+      "EBJ",
+      "HUY"
+    ],
+    [
+      "EDI",
+      "ABZ"
+    ],
+    [
+      "EDI",
+      "AMS"
+    ],
+    [
+      "EDI",
+      "HUY"
+    ],
+    [
+      "EDI",
+      "LBA"
+    ],
+    [
+      "HUY",
+      "AMS"
+    ],
+    [
+      "HUY",
+      "EDI"
+    ],
+    [
+      "HUY",
+      "NWI"
+    ],
+    [
+      "LBA",
+      "BFS"
+    ],
+    [
+      "LBA",
+      "CDG"
+    ],
+    [
+      "LBA",
+      "EDI"
+    ],
+    [
+      "LHR",
+      "NWI"
+    ],
+    [
+      "MME",
+      "ABZ"
+    ],
+    [
+      "NCL",
+      "ABZ"
+    ],
+    [
+      "NCL",
+      "AMS"
+    ],
+    [
+      "NCL",
+      "CDG"
+    ],
+    [
+      "NCL",
+      "CPH"
+    ],
+    [
+      "NWI",
+      "ABZ"
+    ],
+    [
+      "NWI",
+      "AMS"
+    ],
+    [
+      "NWI",
+      "HUY"
+    ],
+    [
+      "NWI",
+      "LHR"
+    ],
+    [
+      "NWI",
+      "MME"
+    ],
+    [
+      "SVG",
+      "ABZ"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 426,
+  "runtime_coverage": {
+    "registered_airlines": 81,
+    "registered_countries": 70,
+    "reviewed_schedules": 989,
+    "animated_airlines": 36,
+    "scheduled_movements": 1466,
+    "confirmed_movements": 1
+  }
+}

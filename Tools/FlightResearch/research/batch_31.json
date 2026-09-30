@@ -1,0 +1,107 @@
+{
+  "batch": 31,
+  "package": "v32",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 1951,
+  "new_schedules": 15,
+  "new_schedule_ids": [
+    "tap-416-LIS-LYS-1315-d5-b31",
+    "tap-419-LYS-LIS-1730-d5-b31",
+    "air-france-500-LIS-ORY-1045-d5-b31",
+    "air-france-500-LIS-ORY-1045-d6-b31",
+    "tap-402-LIS-ORY-1345-d5-b31",
+    "tap-402-LIS-ORY-1345-d6-b31",
+    "air-france-502-LIS-ORY-1810-d6-b31",
+    "air-france-501-ORY-LIS-0820-d5-b31",
+    "air-france-501-ORY-LIS-0820-d6-b31",
+    "air-france-503-ORY-LIS-1600-d6-b31",
+    "tap-405-ORY-LIS-1800-d5-b31",
+    "tap-405-ORY-LIS-1800-d6-b31",
+    "air-france-505-ORY-OPO-0845-d6-b31",
+    "tap-415-ORY-OPO-1430-d5-b31",
+    "air-france-504-OPO-ORY-1055-d6-b31"
+  ],
+  "new_candidate_schedules": 1,
+  "new_candidate_ids": [
+    "tap-412-OPO-ORY-1030-d5-b31"
+  ],
+  "new_airports": [
+    "LIS",
+    "OPO"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "tap-19851027-no1"
+  ],
+  "unchanged_previous_movements": 1951,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "nl",
+  "reviewed_countries_this_batch": [
+    "gi",
+    "pt"
+  ],
+  "new_movements": 15,
+  "total_movements": 1966,
+  "new_leg_ids": [
+    "air-france-501-ORY-LIS-0820-d5-b31@1986-02-28",
+    "air-france-500-LIS-ORY-1045-d5-b31@1986-02-28",
+    "tap-416-LIS-LYS-1315-d5-b31@1986-02-28",
+    "tap-415-ORY-OPO-1430-d5-b31@1986-02-28",
+    "tap-402-LIS-ORY-1345-d5-b31@1986-02-28",
+    "tap-419-LYS-LIS-1730-d5-b31@1986-02-28",
+    "tap-405-ORY-LIS-1800-d5-b31@1986-02-28",
+    "air-france-501-ORY-LIS-0820-d6-b31@1986-03-01",
+    "air-france-505-ORY-OPO-0845-d6-b31@1986-03-01",
+    "air-france-500-LIS-ORY-1045-d6-b31@1986-03-01",
+    "air-france-504-OPO-ORY-1055-d6-b31@1986-03-01",
+    "tap-402-LIS-ORY-1345-d6-b31@1986-03-01",
+    "air-france-503-ORY-LIS-1600-d6-b31@1986-03-01",
+    "tap-405-ORY-LIS-1800-d6-b31@1986-03-01",
+    "air-france-502-LIS-ORY-1810-d6-b31@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 8,
+    "tap": 7
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "LIS",
+      "LYS"
+    ],
+    [
+      "LIS",
+      "ORY"
+    ],
+    [
+      "LYS",
+      "LIS"
+    ],
+    [
+      "OPO",
+      "ORY"
+    ],
+    [
+      "ORY",
+      "LIS"
+    ],
+    [
+      "ORY",
+      "OPO"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 524,
+  "runtime_coverage": {
+    "registered_airlines": 83,
+    "registered_countries": 72,
+    "reviewed_schedules": 1367,
+    "animated_airlines": 39,
+    "scheduled_movements": 1965,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

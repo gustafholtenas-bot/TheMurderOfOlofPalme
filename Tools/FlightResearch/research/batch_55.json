@@ -1,0 +1,62 @@
+{
+  "batch": 55,
+  "package": "v56",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2584,
+  "new_schedules": 2,
+  "new_schedule_ids": [
+    "panam-77-ZAG-MUC-RIEM-0930-d5-b55",
+    "panam-76-MUC-RIEM-ZAG-1115-d6-b55"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "panam-19860211"
+  ],
+  "unchanged_previous_movements": 2584,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "al",
+  "reviewed_countries_this_batch": [
+    "ro",
+    "bg",
+    "yu"
+  ],
+  "new_movements": 2,
+  "total_movements": 2586,
+  "new_leg_ids": [
+    "panam-77-ZAG-MUC-RIEM-0930-d5-b55@1986-02-28",
+    "panam-76-MUC-RIEM-ZAG-1115-d6-b55@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "panam": 2
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "MUC-RIEM",
+      "ZAG"
+    ],
+    [
+      "ZAG",
+      "MUC-RIEM"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 734,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1837,
+    "animated_airlines": 47,
+    "scheduled_movements": 2585,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161
+}

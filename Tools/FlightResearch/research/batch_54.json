@@ -1,0 +1,73 @@
+{
+  "batch": 54,
+  "package": "v55",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2581,
+  "new_schedules": 3,
+  "new_schedule_ids": [
+    "panam-67-WAW-FRA-0835-d6-b54",
+    "panam-76-BUD-DBV-1300-d5-b54",
+    "panam-77-DBV-BUD-0725-d6-b54"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "DBV"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "panam-19860211"
+  ],
+  "unchanged_previous_movements": 2581,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "ro",
+  "reviewed_countries_this_batch": [
+    "sm",
+    "va",
+    "mt",
+    "pl",
+    "cz",
+    "hu"
+  ],
+  "new_movements": 3,
+  "total_movements": 2584,
+  "new_leg_ids": [
+    "panam-76-BUD-DBV-1300-d5-b54@1986-02-28",
+    "panam-77-DBV-BUD-0725-d6-b54@1986-03-01",
+    "panam-67-WAW-FRA-0835-d6-b54@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "panam": 3
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BUD",
+      "DBV"
+    ],
+    [
+      "DBV",
+      "BUD"
+    ],
+    [
+      "WAW",
+      "FRA"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 732,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1835,
+    "animated_airlines": 47,
+    "scheduled_movements": 2583,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161
+}

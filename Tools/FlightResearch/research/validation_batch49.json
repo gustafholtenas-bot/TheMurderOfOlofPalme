@@ -1,0 +1,909 @@
+{
+  "package": "v50",
+  "batch": 49,
+  "checked_on": "2026-09-29",
+  "new_reviewed_schedules": 69,
+  "new_candidate_schedules": 0,
+  "research_only_rows": 0,
+  "new_movements": 74,
+  "total_movements": 2541,
+  "unchanged_previous_movements": 2467,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [],
+  "all_previous_airport_objects_unchanged": true,
+  "all_previous_schedules_unchanged": true,
+  "all_previous_airline_objects_unchanged": true,
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "air-france-19851027-no25",
+    "air-inter-19851027-no52"
+  ],
+  "source_changes": "Appended reviewed pages and notes only; all existing source fields preserved.",
+  "all_other_previous_source_objects_unchanged": true,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": 0,
+  "new_movements_by_source_airline": {
+    "air-inter": 74
+  },
+  "new_movements_by_date": {
+    "1986-02-28": 53,
+    "1986-03-01": 21
+  },
+  "source_day_colours_and_three_digit_numbers_visually_checked": true,
+  "boxed_days_not_treated_as_exclusions": true,
+  "number_prefix_rule": {
+    "red": 7,
+    "black_white": 6,
+    "blue": 5
+  },
+  "physical_leg_basis": "Separately timed single-flight rows without via/connection marks. Paris–Strasbourg also checked against Air France nonstop arrows.",
+  "air_france_compared_schedules": 18,
+  "air_france_compared_movements": 20,
+  "regional_movements_without_independent_second_timetable": 54,
+  "calendar_and_utc_checks": [
+    {
+      "id": "air-inter-5458-BOD-LYS-0825-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T07:25:00Z",
+      "arrival_utc": "1986-02-28T08:25:00Z",
+      "duration_minutes": 60,
+      "day_color": "blue",
+      "printed_number": "458",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7658-BOD-LYS-2010-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T19:10:00Z",
+      "arrival_utc": "1986-02-28T20:10:00Z",
+      "duration_minutes": 60,
+      "day_color": "red",
+      "printed_number": "658",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5677-BOD-MRS-0645-d56-b49@1986-02-28",
+      "departure_utc": "1986-02-28T05:45:00Z",
+      "arrival_utc": "1986-02-28T06:45:00Z",
+      "duration_minutes": 60,
+      "day_color": "blue",
+      "printed_number": "677",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5677-BOD-MRS-0645-d56-b49@1986-03-01",
+      "departure_utc": "1986-03-01T05:45:00Z",
+      "arrival_utc": "1986-03-01T06:45:00Z",
+      "duration_minutes": 60,
+      "day_color": "blue",
+      "printed_number": "677",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7877-BOD-MRS-1800-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T17:00:00Z",
+      "arrival_utc": "1986-02-28T18:30:00Z",
+      "duration_minutes": 90,
+      "day_color": "red",
+      "printed_number": "877",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6679-BOD-NCE-0930-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T08:30:00Z",
+      "arrival_utc": "1986-02-28T10:20:00Z",
+      "duration_minutes": 110,
+      "day_color": "black",
+      "printed_number": "679",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5779-BOD-NCE-1125-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T10:25:00Z",
+      "arrival_utc": "1986-03-01T11:35:00Z",
+      "duration_minutes": 70,
+      "day_color": "blue",
+      "printed_number": "779",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5595-BOD-TLS-1555-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T14:55:00Z",
+      "arrival_utc": "1986-02-28T15:40:00Z",
+      "duration_minutes": 45,
+      "day_color": "blue",
+      "printed_number": "595",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5457-LYS-BOD-0650-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T05:50:00Z",
+      "arrival_utc": "1986-02-28T06:50:00Z",
+      "duration_minutes": 60,
+      "day_color": "blue",
+      "printed_number": "457",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5557-LYS-BOD-0905-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T08:05:00Z",
+      "arrival_utc": "1986-03-01T09:05:00Z",
+      "duration_minutes": 60,
+      "day_color": "blue",
+      "printed_number": "557",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7657-LYS-BOD-1840-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T17:40:00Z",
+      "arrival_utc": "1986-02-28T18:40:00Z",
+      "duration_minutes": 60,
+      "day_color": "red",
+      "printed_number": "657",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6091-LYS-MRS-0855-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T07:55:00Z",
+      "arrival_utc": "1986-02-28T08:45:00Z",
+      "duration_minutes": 50,
+      "day_color": "black",
+      "printed_number": "091",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5177-LYS-MRS-1000-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T09:00:00Z",
+      "arrival_utc": "1986-03-01T09:40:00Z",
+      "duration_minutes": 40,
+      "day_color": "blue",
+      "printed_number": "177",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6391-LYS-MRS-1230-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T11:30:00Z",
+      "arrival_utc": "1986-02-28T12:15:00Z",
+      "duration_minutes": 45,
+      "day_color": "black",
+      "printed_number": "391",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7377-LYS-MRS-2010-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T19:10:00Z",
+      "arrival_utc": "1986-02-28T20:05:00Z",
+      "duration_minutes": 55,
+      "day_color": "red",
+      "printed_number": "377",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7791-LYS-MRS-2105-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T20:05:00Z",
+      "arrival_utc": "1986-02-28T20:50:00Z",
+      "duration_minutes": 45,
+      "day_color": "red",
+      "printed_number": "791",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5079-LYS-NCE-1005-d56-b49@1986-02-28",
+      "departure_utc": "1986-02-28T09:05:00Z",
+      "arrival_utc": "1986-02-28T09:55:00Z",
+      "duration_minutes": 50,
+      "day_color": "blue",
+      "printed_number": "079",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5079-LYS-NCE-1005-d56-b49@1986-03-01",
+      "departure_utc": "1986-03-01T09:05:00Z",
+      "arrival_utc": "1986-03-01T09:55:00Z",
+      "duration_minutes": 50,
+      "day_color": "blue",
+      "printed_number": "079",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5297-LYS-NCE-1310-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T12:10:00Z",
+      "arrival_utc": "1986-03-01T13:05:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "297",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7179-LYS-NCE-2110-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T20:10:00Z",
+      "arrival_utc": "1986-02-28T21:00:00Z",
+      "duration_minutes": 50,
+      "day_color": "red",
+      "printed_number": "179",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5072-LYS-SXB-0840-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T07:40:00Z",
+      "arrival_utc": "1986-02-28T08:55:00Z",
+      "duration_minutes": 75,
+      "day_color": "blue",
+      "printed_number": "072",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6172-LYS-SXB-1820-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T17:20:00Z",
+      "arrival_utc": "1986-02-28T18:15:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "172",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5573-LYS-TLS-0835-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T07:35:00Z",
+      "arrival_utc": "1986-03-01T08:30:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "573",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5573-LYS-TLS-0835-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T07:35:00Z",
+      "arrival_utc": "1986-02-28T08:55:00Z",
+      "duration_minutes": 80,
+      "day_color": "blue",
+      "printed_number": "573",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5893-LYS-TLS-1210-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T11:10:00Z",
+      "arrival_utc": "1986-02-28T12:10:00Z",
+      "duration_minutes": 60,
+      "day_color": "blue",
+      "printed_number": "893",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6673-LYS-TLS-2005-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T19:05:00Z",
+      "arrival_utc": "1986-02-28T20:00:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "673",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6678-MRS-BOD-0725-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T06:25:00Z",
+      "arrival_utc": "1986-02-28T08:00:00Z",
+      "duration_minutes": 95,
+      "day_color": "black",
+      "printed_number": "678",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5394-MRS-BOD-1105-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T10:05:00Z",
+      "arrival_utc": "1986-03-01T11:15:00Z",
+      "duration_minutes": 70,
+      "day_color": "blue",
+      "printed_number": "394",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5778-MRS-BOD-1745-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T16:45:00Z",
+      "arrival_utc": "1986-03-01T17:50:00Z",
+      "duration_minutes": 65,
+      "day_color": "blue",
+      "printed_number": "778",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6878-MRS-BOD-2040-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T19:40:00Z",
+      "arrival_utc": "1986-02-28T20:45:00Z",
+      "duration_minutes": 65,
+      "day_color": "black",
+      "printed_number": "878",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6092-MRS-LYS-0655-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T05:55:00Z",
+      "arrival_utc": "1986-02-28T06:40:00Z",
+      "duration_minutes": 45,
+      "day_color": "black",
+      "printed_number": "092",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6078-MRS-LYS-0700-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T06:00:00Z",
+      "arrival_utc": "1986-02-28T06:55:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "078",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6192-MRS-LYS-1350-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T12:50:00Z",
+      "arrival_utc": "1986-02-28T13:35:00Z",
+      "duration_minutes": 45,
+      "day_color": "black",
+      "printed_number": "192",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7392-MRS-LYS-1705-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T16:05:00Z",
+      "arrival_utc": "1986-02-28T16:55:00Z",
+      "duration_minutes": 50,
+      "day_color": "red",
+      "printed_number": "392",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7992-MRS-LYS-1730-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T16:30:00Z",
+      "arrival_utc": "1986-02-28T17:15:00Z",
+      "duration_minutes": 45,
+      "day_color": "red",
+      "printed_number": "992",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6176-MRS-SXB-1615-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T15:15:00Z",
+      "arrival_utc": "1986-02-28T17:10:00Z",
+      "duration_minutes": 115,
+      "day_color": "black",
+      "printed_number": "176",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6880-NCE-BOD-1400-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T13:00:00Z",
+      "arrival_utc": "1986-02-28T15:05:00Z",
+      "duration_minutes": 125,
+      "day_color": "black",
+      "printed_number": "880",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5080-NCE-LYS-0705-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T06:05:00Z",
+      "arrival_utc": "1986-02-28T06:50:00Z",
+      "duration_minutes": 45,
+      "day_color": "blue",
+      "printed_number": "080",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5180-NCE-LYS-0730-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T06:30:00Z",
+      "arrival_utc": "1986-03-01T07:15:00Z",
+      "duration_minutes": 45,
+      "day_color": "blue",
+      "printed_number": "180",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-7280-NCE-LYS-1705-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T16:05:00Z",
+      "arrival_utc": "1986-02-28T16:50:00Z",
+      "duration_minutes": 45,
+      "day_color": "red",
+      "printed_number": "280",
+      "prefix": "7",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5094-NCE-SXB-1515-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T14:15:00Z",
+      "arrival_utc": "1986-02-28T15:35:00Z",
+      "duration_minutes": 80,
+      "day_color": "blue",
+      "printed_number": "094",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6676-NCE-TLS-1730-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T16:30:00Z",
+      "arrival_utc": "1986-02-28T18:10:00Z",
+      "duration_minutes": 100,
+      "day_color": "black",
+      "printed_number": "676",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6001-ORY-SXB-0645-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T05:45:00Z",
+      "arrival_utc": "1986-02-28T06:40:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "001",
+      "prefix": "6",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-5101-ORY-SXB-0845-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T07:45:00Z",
+      "arrival_utc": "1986-02-28T08:40:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "101",
+      "prefix": "5",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-5201-ORY-SXB-0900-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T08:00:00Z",
+      "arrival_utc": "1986-03-01T08:55:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "201",
+      "prefix": "5",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-6167-CDG-SXB-1250-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T11:50:00Z",
+      "arrival_utc": "1986-02-28T12:45:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "167",
+      "prefix": "6",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-5167-CDG-SXB-1250-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T11:50:00Z",
+      "arrival_utc": "1986-03-01T12:45:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "167",
+      "prefix": "5",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-5301-ORY-SXB-1630-d56-b49@1986-02-28",
+      "departure_utc": "1986-02-28T15:30:00Z",
+      "arrival_utc": "1986-02-28T16:25:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "301",
+      "prefix": "5",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-5301-ORY-SXB-1630-d56-b49@1986-03-01",
+      "departure_utc": "1986-03-01T15:30:00Z",
+      "arrival_utc": "1986-03-01T16:25:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "301",
+      "prefix": "5",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-7501-ORY-SXB-1905-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T18:05:00Z",
+      "arrival_utc": "1986-02-28T19:00:00Z",
+      "duration_minutes": 55,
+      "day_color": "red",
+      "printed_number": "501",
+      "prefix": "7",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-6501-ORY-SXB-1905-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T18:05:00Z",
+      "arrival_utc": "1986-03-01T19:00:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "501",
+      "prefix": "6",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-6701-ORY-SXB-2105-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T20:05:00Z",
+      "arrival_utc": "1986-02-28T21:00:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "701",
+      "prefix": "6",
+      "comparison_page": "76"
+    },
+    {
+      "id": "air-inter-5071-SXB-LYS-0650-d56-b49@1986-02-28",
+      "departure_utc": "1986-02-28T05:50:00Z",
+      "arrival_utc": "1986-02-28T07:05:00Z",
+      "duration_minutes": 75,
+      "day_color": "blue",
+      "printed_number": "071",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5071-SXB-LYS-0650-d56-b49@1986-03-01",
+      "departure_utc": "1986-03-01T05:50:00Z",
+      "arrival_utc": "1986-03-01T07:05:00Z",
+      "duration_minutes": 75,
+      "day_color": "blue",
+      "printed_number": "071",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6271-SXB-LYS-1945-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T18:45:00Z",
+      "arrival_utc": "1986-02-28T19:35:00Z",
+      "duration_minutes": 50,
+      "day_color": "black",
+      "printed_number": "271",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6175-SXB-MRS-1835-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T17:35:00Z",
+      "arrival_utc": "1986-02-28T19:25:00Z",
+      "duration_minutes": 110,
+      "day_color": "black",
+      "printed_number": "175",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5193-SXB-NCE-0745-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T06:45:00Z",
+      "arrival_utc": "1986-03-01T08:00:00Z",
+      "duration_minutes": 75,
+      "day_color": "blue",
+      "printed_number": "193",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6093-SXB-NCE-0950-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T08:50:00Z",
+      "arrival_utc": "1986-02-28T10:05:00Z",
+      "duration_minutes": 75,
+      "day_color": "black",
+      "printed_number": "093",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5002-SXB-ORY-0700-d56-b49@1986-02-28",
+      "departure_utc": "1986-02-28T06:00:00Z",
+      "arrival_utc": "1986-02-28T06:55:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "002",
+      "prefix": "5",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-5002-SXB-ORY-0700-d56-b49@1986-03-01",
+      "departure_utc": "1986-03-01T06:00:00Z",
+      "arrival_utc": "1986-03-01T06:55:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "002",
+      "prefix": "5",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-5068-SXB-CDG-0810-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T07:10:00Z",
+      "arrival_utc": "1986-02-28T08:05:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "068",
+      "prefix": "5",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-6168-SXB-CDG-1030-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T09:30:00Z",
+      "arrival_utc": "1986-03-01T10:25:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "168",
+      "prefix": "6",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-5102-SXB-ORY-1100-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T10:00:00Z",
+      "arrival_utc": "1986-02-28T10:55:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "102",
+      "prefix": "5",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-6202-SXB-ORY-1415-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T13:15:00Z",
+      "arrival_utc": "1986-02-28T14:10:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "202",
+      "prefix": "6",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-5202-SXB-ORY-1415-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T13:15:00Z",
+      "arrival_utc": "1986-03-01T14:10:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "202",
+      "prefix": "5",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-7302-SXB-ORY-1810-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T17:10:00Z",
+      "arrival_utc": "1986-02-28T18:05:00Z",
+      "duration_minutes": 55,
+      "day_color": "red",
+      "printed_number": "302",
+      "prefix": "7",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-5302-SXB-ORY-1810-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T17:10:00Z",
+      "arrival_utc": "1986-03-01T18:05:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "302",
+      "prefix": "5",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-5502-SXB-ORY-2040-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T19:40:00Z",
+      "arrival_utc": "1986-02-28T20:35:00Z",
+      "duration_minutes": 55,
+      "day_color": "blue",
+      "printed_number": "502",
+      "prefix": "5",
+      "comparison_page": "88"
+    },
+    {
+      "id": "air-inter-5396-TLS-BOD-1610-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T15:10:00Z",
+      "arrival_utc": "1986-02-28T15:55:00Z",
+      "duration_minutes": 45,
+      "day_color": "blue",
+      "printed_number": "396",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6574-TLS-LYS-0700-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T06:00:00Z",
+      "arrival_utc": "1986-02-28T07:10:00Z",
+      "duration_minutes": 70,
+      "day_color": "black",
+      "printed_number": "574",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6894-TLS-LYS-1730-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T16:30:00Z",
+      "arrival_utc": "1986-02-28T17:25:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "894",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6674-TLS-LYS-1910-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T18:10:00Z",
+      "arrival_utc": "1986-02-28T19:05:00Z",
+      "duration_minutes": 55,
+      "day_color": "black",
+      "printed_number": "674",
+      "prefix": "6",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-5575-TLS-NCE-1040-d5-b49@1986-02-28",
+      "departure_utc": "1986-02-28T09:40:00Z",
+      "arrival_utc": "1986-02-28T11:05:00Z",
+      "duration_minutes": 85,
+      "day_color": "blue",
+      "printed_number": "575",
+      "prefix": "5",
+      "comparison_page": null
+    },
+    {
+      "id": "air-inter-6575-TLS-NCE-1040-d6-b49@1986-03-01",
+      "departure_utc": "1986-03-01T09:40:00Z",
+      "arrival_utc": "1986-03-01T11:05:00Z",
+      "duration_minutes": 85,
+      "day_color": "black",
+      "printed_number": "575",
+      "prefix": "6",
+      "comparison_page": null
+    }
+  ],
+  "old_air_inter_conflict_candidates_unchanged": 10,
+  "total_candidates_unchanged": 21,
+  "through_itineraries_not_duplicated": true,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "source_files_sha256": {
+    "/tmp/batch29/it851027-1a.pdf": "37da26ae4ef6974d3bd4e04b16d27ec009218aabbd7355bd3d739105c794723e",
+    "/tmp/batch23/af851027-1a.pdf": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4"
+  },
+  "europe_country_rows_checked": 40,
+  "next_country": "mc",
+  "country_endpoint_totals": {
+    "fr": 851
+  },
+  "nordic_endpoint_movements": 161,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "db867c",
+        "wall_time_seconds": 2.7374699270000002,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.769s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "2fed83",
+        "wall_time_seconds": 0.229837634,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 93, \"registered_countries\": 81, \"reviewed_schedules\": 1796, \"animated_airlines\": 47, \"scheduled_movements\": 2540, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "5c2438",
+        "wall_time_seconds": 0.034257957,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c09313",
+        "wall_time_seconds": 0.028154977,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "6f84cd",
+        "wall_time_seconds": 1.6695e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "batch": 30,
+  "airports": [
+    {
+      "id": "BIO",
+      "name": "Bilbao",
+      "country": "es",
+      "timezone": "Europe/Madrid",
+      "lat": 43.30111111,
+      "lon": -2.91055556,
+      "coordinate_source": "https://aip.enaire.es/AIP/contenido_AMDT/LE_Amdt_A_2026_10_AD_2_LEBB_en.html",
+      "coordinate_record_id": "LEBB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.aena.es/es/bilbao/conocenos/historia.html"
+      ],
+      "location_note": "Approximate airfield reference marker from the contemporary ENAIRE AIP consulted in 2026, not a reconstructed 1986 gate or aircraft position. Airfield identity checked against the 1985/86 timetable and Aena history. Palma uses Son Sant Joan, not Son Bonet.",
+      "arp_dms_as_published": "431804N 0025438W",
+      "checked_on": "2026-09-28"
+    },
+    {
+      "id": "PMI",
+      "name": "Palma de Mallorca–Son Sant Joan",
+      "country": "es",
+      "timezone": "Europe/Madrid",
+      "lat": 39.55166667,
+      "lon": 2.73888889,
+      "coordinate_source": "https://aip.enaire.es/AIP/contenido_AMDT/LE_Amdt_A_2026_10_AD_2_LEPA_LESJ_en.html",
+      "coordinate_record_id": "LEPA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.aena.es/es/palma-de-mallorca/conocenos/historia.html"
+      ],
+      "location_note": "Approximate airfield reference marker from the contemporary ENAIRE AIP consulted in 2026, not a reconstructed 1986 gate or aircraft position. Airfield identity checked against the 1985/86 timetable and Aena history. Palma uses Son Sant Joan, not Son Bonet.",
+      "arp_dms_as_published": "393306N 0024420E",
+      "checked_on": "2026-09-28"
+    },
+    {
+      "id": "VLC",
+      "name": "Valencia–Manises",
+      "country": "es",
+      "timezone": "Europe/Madrid",
+      "lat": 39.48944444,
+      "lon": -0.48166667,
+      "coordinate_source": "https://aip.enaire.es/AIP/contenido_AIP/AD/AD2/LEVC/LE_AD_2_LEVC_en.html",
+      "coordinate_record_id": "LEVC",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.aena.es/es/valencia/conocenos/historia.html"
+      ],
+      "location_note": "Approximate airfield reference marker from the contemporary ENAIRE AIP consulted in 2026, not a reconstructed 1986 gate or aircraft position. Airfield identity checked against the 1985/86 timetable and Aena history. Palma uses Son Sant Joan, not Son Bonet.",
+      "arp_dms_as_published": "392922N 0002854W",
+      "checked_on": "2026-09-28"
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "package": "v53",
+  "batch": 52,
+  "checked_on": "2026-09-29",
+  "new_reviewed_schedules": 11,
+  "new_candidate_schedules": 0,
+  "new_movements": 13,
+  "total_movements": 2579,
+  "unchanged_previous_movements": 2566,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "BRN"
+  ],
+  "all_previous_airport_objects_unchanged": true,
+  "all_previous_schedules_unchanged": true,
+  "all_previous_airline_objects_unchanged": true,
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "dan-air-19851027-system"
+  ],
+  "source_changes": "Appended reviewed pages and notes only; all existing source fields preserved.",
+  "all_other_previous_source_objects_unchanged": true,
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": 0,
+  "new_movements_by_source_airline": {
+    "dan-air": 13
+  },
+  "new_movements_by_date": {
+    "1986-02-28": 8,
+    "1986-03-01": 5
+  },
+  "source_rows_visually_checked": true,
+  "physical_leg_basis": "Eleven contemporary Dan-Air rows explicitly marked Stops 0; own printed legend identifies weekdays, local times and Gatwick.",
+  "bern_airport_mapping": "Bern Airport3/2012 printed24 identifies the Gatwick route with Bern–Belp. Timings use the contemporary Dan-Air winter timetable.",
+  "bern_position": "Modern LSZB AD2-1 ARP dated28Nov2024 used only as approximate airport-site marker, not exact1986 gate or ARP.",
+  "calendar_and_utc_checks": [
+    {
+      "id": "dan-air-852-LGW-BRN-0900-d6-b52@1986-03-01",
+      "departure_utc": "1986-03-01T09:00:00Z",
+      "arrival_utc": "1986-03-01T10:35:00Z",
+      "duration_minutes": 95,
+      "printed_day_pattern": ".....67",
+      "printed_stops": 0,
+      "printed_page": "12"
+    },
+    {
+      "id": "dan-air-854-LGW-BRN-1145-d5-b52@1986-02-28",
+      "departure_utc": "1986-02-28T11:45:00Z",
+      "arrival_utc": "1986-02-28T13:20:00Z",
+      "duration_minutes": 95,
+      "printed_day_pattern": "1.3.5..",
+      "printed_stops": 0,
+      "printed_page": "12"
+    },
+    {
+      "id": "dan-air-853-BRN-LGW-1205-d6-b52@1986-03-01",
+      "departure_utc": "1986-03-01T11:05:00Z",
+      "arrival_utc": "1986-03-01T12:45:00Z",
+      "duration_minutes": 100,
+      "printed_day_pattern": ".....67",
+      "printed_stops": 0,
+      "printed_page": "6"
+    },
+    {
+      "id": "dan-air-857-BRN-LGW-1450-d5-b52@1986-02-28",
+      "departure_utc": "1986-02-28T13:50:00Z",
+      "arrival_utc": "1986-02-28T15:30:00Z",
+      "duration_minutes": 100,
+      "printed_day_pattern": "1.3.5..",
+      "printed_stops": 0,
+      "printed_page": "6"
+    },
+    {
+      "id": "dan-air-862-LGW-ZRH-0900-d56-b52@1986-02-28",
+      "departure_utc": "1986-02-28T09:00:00Z",
+      "arrival_utc": "1986-02-28T10:35:00Z",
+      "duration_minutes": 95,
+      "printed_day_pattern": "1234567",
+      "printed_stops": 0,
+      "printed_page": "14"
+    },
+    {
+      "id": "dan-air-862-LGW-ZRH-0900-d56-b52@1986-03-01",
+      "departure_utc": "1986-03-01T09:00:00Z",
+      "arrival_utc": "1986-03-01T10:35:00Z",
+      "duration_minutes": 95,
+      "printed_day_pattern": "1234567",
+      "printed_stops": 0,
+      "printed_page": "14"
+    },
+    {
+      "id": "dan-air-868-LGW-ZRH-1915-d5-b52@1986-02-28",
+      "departure_utc": "1986-02-28T19:15:00Z",
+      "arrival_utc": "1986-02-28T20:50:00Z",
+      "duration_minutes": 95,
+      "printed_day_pattern": "...45.7",
+      "printed_stops": 0,
+      "printed_page": "14"
+    },
+    {
+      "id": "dan-air-876-MAN-ZRH-1430-d5-b52@1986-02-28",
+      "departure_utc": "1986-02-28T14:30:00Z",
+      "arrival_utc": "1986-02-28T16:15:00Z",
+      "duration_minutes": 105,
+      "printed_day_pattern": "1.3.5..",
+      "printed_stops": 0,
+      "printed_page": "15"
+    },
+    {
+      "id": "dan-air-861-ZRH-LGW-0745-d56-b52@1986-02-28",
+      "departure_utc": "1986-02-28T06:45:00Z",
+      "arrival_utc": "1986-02-28T08:15:00Z",
+      "duration_minutes": 90,
+      "printed_day_pattern": "1...56.",
+      "printed_stops": 0,
+      "printed_page": "22"
+    },
+    {
+      "id": "dan-air-861-ZRH-LGW-0745-d56-b52@1986-03-01",
+      "departure_utc": "1986-03-01T06:45:00Z",
+      "arrival_utc": "1986-03-01T08:15:00Z",
+      "duration_minutes": 90,
+      "printed_day_pattern": "1...56.",
+      "printed_stops": 0,
+      "printed_page": "22"
+    },
+    {
+      "id": "dan-air-863-ZRH-LGW-1345-d6-b52@1986-03-01",
+      "departure_utc": "1986-03-01T12:45:00Z",
+      "arrival_utc": "1986-03-01T14:15:00Z",
+      "duration_minutes": 90,
+      "printed_day_pattern": ".....67",
+      "printed_stops": 0,
+      "printed_page": "22"
+    },
+    {
+      "id": "dan-air-867-ZRH-LGW-1800-d5-b52@1986-02-28",
+      "departure_utc": "1986-02-28T17:00:00Z",
+      "arrival_utc": "1986-02-28T18:30:00Z",
+      "duration_minutes": 90,
+      "printed_day_pattern": "12345..",
+      "printed_stops": 0,
+      "printed_page": "22"
+    },
+    {
+      "id": "dan-air-875-ZRH-MAN-1245-d5-b52@1986-02-28",
+      "departure_utc": "1986-02-28T11:45:00Z",
+      "arrival_utc": "1986-02-28T13:35:00Z",
+      "duration_minutes": 110,
+      "printed_day_pattern": "1.3.5..",
+      "printed_stops": 0,
+      "printed_page": "22"
+    }
+  ],
+  "old_air_inter_conflict_candidates_unchanged": 10,
+  "total_candidates_unchanged": 21,
+  "interflug_research_rows_unchanged": 22,
+  "dan_air_861_day_pattern": "1...56. from printed22; only Friday/Saturday imported; Wednesday implied by printed21 connecting itineraries outside imported days.",
+  "through_itineraries_and_coaches_not_duplicated": true,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "source_files_sha256": {
+    "/tmp/batch46/da851027-1a.pdf": "03b8ba70d7833dacd9329861a86395bb2185a014ba345bc989e3ec9d421c2071",
+    "/tmp/batch52/bern-aip-2025.pdf": "546e1d291227d306ebb62a692f7581e6cdd6e7f2cb146e44e5d557d0ad050537",
+    "/tmp/batch52/bern-history.pdf": "34fceb6dcf3a4df84bd44051d26297d50232f637f7855c8ace65035a18256c26",
+    "/tmp/batch52/bern-annual-1986.pdf": "c186907943708615fbdf4cea8d71320e7439c7fe51fb538f73cacd90d87e97b9"
+  },
+  "europe_country_rows_checked": 40,
+  "next_country": "li",
+  "country_endpoint_totals": {
+    "de-east": 19,
+    "berlin-west": 152,
+    "ch": 165
+  },
+  "nordic_endpoint_movements": 161,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "7f231a",
+        "wall_time_seconds": 2.856663453,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.911s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "3b5da1",
+        "wall_time_seconds": 0.257355394,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 93, \"registered_countries\": 81, \"reviewed_schedules\": 1830, \"animated_airlines\": 47, \"scheduled_movements\": 2578, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "a00501",
+        "wall_time_seconds": 0.035517522,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "eab2a2",
+        "wall_time_seconds": 0.055742091,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "8f1a29",
+        "wall_time_seconds": 1.5754e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

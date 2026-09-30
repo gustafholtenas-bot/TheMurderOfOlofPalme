@@ -1,0 +1,148 @@
+{
+  "batch": 55,
+  "package": "v56",
+  "checked_on": "2026-09-29",
+  "countries": [
+    {
+      "country": "ro",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 3,
+      "domestic_movements": 0,
+      "international_movements": 3,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {
+        "air-france": 1,
+        "tarom": 2
+      },
+      "endpoint_leg_ids": [
+        "air-france-718-ORY-OTP-0900-d5-b41@1986-02-28",
+        "tarom-211-OTP-ORY-1215-d6-b41@1986-03-01",
+        "tarom-212-ORY-OTP-1430-d6-b41@1986-03-01"
+      ],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://airtimes.com/cgat/ro/tarom/gal/rogal1a80.htm",
+          "result": "Winter entry remains an index placeholder; other-season scans do not supply the missing winter timings."
+        },
+        {
+          "url": "https://www.timetableimages.com/ttimages/ro.htm",
+          "result": "Listed 1986 spring editions do not establish February departures."
+        },
+        {
+          "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+          "result": "Printed 21 OTP–MUC PA77 Nonstop MoTh 08:30–10:25 has no Friday/Saturday departure. Printed 67 MUC–OTP PA76 WeSu 11:15–15:05 has one stop and no Friday/Saturday departure. No import; printed Bucharest GMT+1 is not used to override Europe/Bucharest."
+        }
+      ],
+      "unresolved": [
+        "TAROM:s kompletta vinterinlaga 27 oktober 1985–29 mars 1986, inrikestrafik och ändringar saknas fortfarande. Indexets avvikande årtal för oktoberposten är inte en läst datering.",
+        "Pan Ams Bukarest–München-rad visar MoTh och motsatt riktning WeSu med ett stopp. Inga nya fredags-/lördagsrader importeras. Övriga operatörer, charter, frakt och faktisk drift återstår."
+      ]
+    },
+    {
+      "country": "bg",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 5,
+      "domestic_movements": 0,
+      "international_movements": 5,
+      "new_movements": 0,
+      "endpoint_movements_by_source_airline": {
+        "balkan": 4,
+        "air-france": 1
+      },
+      "endpoint_leg_ids": [
+        "balkan-2003-SOF-ORY-1000-d5-b41@1986-02-28",
+        "balkan-135-SOF-ORY-1525-d5-b41@1986-02-28",
+        "balkan-2004-ORY-SOF-1610-d5-b41@1986-02-28",
+        "balkan-129-SOF-ORY-1500-d6-b41@1986-03-01",
+        "air-france-714-ORY-SOF-1755-d6-b41@1986-03-01"
+      ],
+      "new_leg_ids": [],
+      "checks": [
+        {
+          "url": "https://airtimes.com/cgat/bg/balkan/gal/lzgal80.htm",
+          "result": "Matching October 1985 winter entry remains without newly verified inner timing pages. Summer editions excluded."
+        },
+        {
+          "url": "https://www.timetableimages.com/i-kl/lz851027.jpg",
+          "result": "Previously identified winter cover retained as edition evidence only."
+        },
+        {
+          "url": "https://at.pinterest.com/pin/balkan-bulgarian-airlines-timetable-winter-19856-tu154-tu134-an24-route-map--759208449703715479/",
+          "result": "Public pin photograph visually read: winter cover dated 27 October 1985–29 March 1986. Original eBay item 155347194237 resolved from public page, but direct retrieval returned HTTP 404. No inner timing pages verified and no schedules imported."
+        },
+        {
+          "url": "https://www.ebay.com/itm/155347194237",
+          "result": "Resolved collector source for the matching winter cover; HTTP 404 on direct retrieval. Missing inner timetable pages remain unresolved."
+        }
+      ],
+      "unresolved": [
+        "Balkan Bulgarian Airlines vinteromslag är identifierat, men läsbara tidsrader för vintern 1985/86 saknas fortfarande. Nytt samlarspår ger inte i sig avgångstider.",
+        "Fler flygplatser, inrikestrafik, utländska operatörer, charter, frakt och faktisk drift kräver daterade underlag."
+      ]
+    },
+    {
+      "country": "yu",
+      "status": "reviewed_with_gaps",
+      "review_pass": 2,
+      "checked_on": "2026-09-29",
+      "coverage_complete": false,
+      "endpoint_movements": 12,
+      "domestic_movements": 0,
+      "international_movements": 12,
+      "new_movements": 2,
+      "endpoint_movements_by_source_airline": {
+        "panam": 4,
+        "jat": 4,
+        "air-france": 4
+      },
+      "endpoint_leg_ids": [
+        "panam-77-ZAG-MUC-RIEM-0930-d5-b55@1986-02-28",
+        "jat-242-ZAG-ORY-1130-d5-b42@1986-02-28",
+        "panam-76-BUD-DBV-1300-d5-b54@1986-02-28",
+        "jat-243-ORY-ZAG-1420-d5-b42@1986-02-28",
+        "air-france-702-ORY-BEG-1500-d5-b42@1986-02-28",
+        "air-france-703-BEG-ORY-1805-d5-b42@1986-02-28",
+        "panam-77-DBV-BUD-0725-d6-b54@1986-03-01",
+        "jat-240-BEG-ORY-1055-d6-b42@1986-03-01",
+        "panam-76-MUC-RIEM-ZAG-1115-d6-b55@1986-03-01",
+        "jat-241-ORY-BEG-1420-d6-b42@1986-03-01",
+        "air-france-704-ORY-ZAG-1500-d6-b42@1986-03-01",
+        "air-france-705-ZAG-ORY-1740-d6-b42@1986-03-01"
+      ],
+      "new_leg_ids": [
+        "panam-77-ZAG-MUC-RIEM-0930-d5-b55@1986-02-28",
+        "panam-76-MUC-RIEM-ZAG-1115-d6-b55@1986-03-01"
+      ],
+      "checks": [
+        {
+          "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+          "result": "Printed 109: PA77 ZAG 09:30–MUC 10:25 FrSu Nonstop, discontinued after 28 March. Printed 68: PA76 MUC 11:15–ZAG 12:10 ThSa Nonstop, discontinued after 29 March. Friday/Saturday imported. Printed 9–10 and 67 show BEG–MUC and reverse with one stop; no invented intermediate arrival. Printed 108 ZAG–FRA TuWe is outside the target weekdays; its TuWeFrSu variant starts 1 April."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/yu/jat/gal/jugal1a80.htm",
+          "result": "Winter 27 October 1985 edition remains cover evidence; no matching full winter timing pages found."
+        },
+        {
+          "url": "https://www.airtimes.com/cgat/si/adria.htm",
+          "result": "May–October 1985 and October 1986–March 1987 editions do not cover the observation window."
+        },
+        {
+          "url": "https://www.dtvmovements.co.uk/Info/Timetable_Project/Part1B.htm",
+          "result": "Retrospective summer-holiday route history, not a winter February/March departure timetable. No import."
+        }
+      ],
+      "unresolved": [
+        "JAT:s vinteromslag är identifierat, men fullständiga avgångssidor, inrikesinlaga och ändringsblad saknas. Matchande vinterinlaga för Inex-Adria saknas också.",
+        "Pan Am ger två tidsatta nonstoprader till/från Zagreb. Belgrads genomgående resor har ett stopp, men saknar här lästa mellanankomster för full uppdelning. Aviogenex, charter, frakt och faktisk drift återstår."
+      ]
+    }
+  ],
+  "next_country": "al"
+}

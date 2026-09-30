@@ -1,0 +1,247 @@
+{
+  "batch": 62,
+  "package": "v63",
+  "checked_on": "2026-09-29",
+  "kind": "worldwide_schedule_gap_fill",
+  "previous_movements": 3776,
+  "new_schedules": 16,
+  "new_schedule_ids": [
+    "southwest-778-AUS-MUELLER-LBB-0915-b62",
+    "southwest-561-AUS-MUELLER-LBB-1545-b62",
+    "southwest-861-LBB-AUS-MUELLER-1520-b62",
+    "southwest-939-LBB-AUS-MUELLER-2300-b62",
+    "southwest-760-AUS-MUELLER-MAF-0630-b62",
+    "southwest-780-AUS-MUELLER-MAF-1330-b62",
+    "southwest-784-AUS-MUELLER-MAF-1800-b62",
+    "southwest-765-MAF-AUS-MUELLER-0900-b62",
+    "southwest-769-MAF-AUS-MUELLER-1435-b62",
+    "southwest-235-AUS-MUELLER-HRL-1215-b62",
+    "southwest-252-HRL-AUS-MUELLER-1320-b62",
+    "southwest-855-MAF-AUS-MUELLER-1930-b62",
+    "southwest-156-HRL-SAT-1100-b62",
+    "southwest-198-HRL-SAT-2000-b62",
+    "southwest-151-SAT-HRL-1000-b62",
+    "southwest-191-SAT-HRL-2005-b62"
+  ],
+  "source_rows": 358,
+  "source_row_actions": {
+    "already_imported": 324,
+    "new_schedule": 16,
+    "corrected_previous": 2,
+    "repeated_in_batch": 16
+  },
+  "reviewed_city_sections": [
+    {
+      "city": "Amarillo",
+      "pages": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "city": "Austin",
+      "pages": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "city": "Corpus Christi",
+      "pages": [
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "city": "Denver",
+      "pages": [
+        16,
+        17
+      ]
+    },
+    {
+      "city": "Houston Intercontinental",
+      "pages": [
+        24,
+        25
+      ]
+    },
+    {
+      "city": "Lubbock",
+      "pages": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "city": "Midland/Odessa",
+      "pages": [
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "city": "New Orleans",
+      "pages": [
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "city": "Oklahoma City",
+      "pages": [
+        40,
+        41,
+        42
+      ]
+    },
+    {
+      "city": "Harlingen",
+      "pages": [
+        46,
+        47,
+        48
+      ]
+    },
+    {
+      "city": "San Antonio",
+      "pages": [
+        48,
+        49,
+        50,
+        51
+      ]
+    }
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [],
+  "updated_source_ids": [
+    "southwest-19860112"
+  ],
+  "preserved_previous_movement_ids": 3775,
+  "unchanged_previous_movement_times": 3775,
+  "unchanged_previous_movement_objects": 3772,
+  "corrected_previous_movement_times": 0,
+  "updated_previous_movement_notes": 3,
+  "corrected_previous_schedule_ids": [
+    "southwest-906-LBB-ABQ-1640-b60",
+    "southwest-736-SAT-ELP-1205-b60"
+  ],
+  "updated_previous_leg_ids": [
+    "southwest-906-LBB-ABQ-1640-b60@1986-02-27",
+    "southwest-736-SAT-ELP-1205-b60@1986-02-28",
+    "southwest-906-LBB-ABQ-1640-b60@1986-02-28"
+  ],
+  "removed_previous_movements": 1,
+  "removed_previous_leg_ids": [
+    "southwest-736-SAT-ELP-1205-b60@1986-03-01"
+  ],
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_priority": "Delta 1 February 1986: Atlanta/Dallas/Fort Worth/Cincinnati mainline nonstop gaps; Southwest/Muse Air and amendments remain research leads",
+  "europe_resume_country": "cy",
+  "reviewed_countries_this_batch": [],
+  "new_movements": 32,
+  "net_movement_change": 31,
+  "total_movements": 3807,
+  "new_movements_by_source_airline": {
+    "southwest": 32
+  },
+  "new_leg_ids": [
+    "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-02-27",
+    "southwest-784-AUS-MUELLER-MAF-1800-b62@1986-02-27",
+    "southwest-855-MAF-AUS-MUELLER-1930-b62@1986-02-27",
+    "southwest-198-HRL-SAT-2000-b62@1986-02-27",
+    "southwest-191-SAT-HRL-2005-b62@1986-02-27",
+    "southwest-760-AUS-MUELLER-MAF-0630-b62@1986-02-28",
+    "southwest-765-MAF-AUS-MUELLER-0900-b62@1986-02-28",
+    "southwest-778-AUS-MUELLER-LBB-0915-b62@1986-02-28",
+    "southwest-151-SAT-HRL-1000-b62@1986-02-28",
+    "southwest-156-HRL-SAT-1100-b62@1986-02-28",
+    "southwest-235-AUS-MUELLER-HRL-1215-b62@1986-02-28",
+    "southwest-252-HRL-AUS-MUELLER-1320-b62@1986-02-28",
+    "southwest-780-AUS-MUELLER-MAF-1330-b62@1986-02-28",
+    "southwest-769-MAF-AUS-MUELLER-1435-b62@1986-02-28",
+    "southwest-861-LBB-AUS-MUELLER-1520-b62@1986-02-28",
+    "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-02-28",
+    "southwest-784-AUS-MUELLER-MAF-1800-b62@1986-02-28",
+    "southwest-855-MAF-AUS-MUELLER-1930-b62@1986-02-28",
+    "southwest-198-HRL-SAT-2000-b62@1986-02-28",
+    "southwest-191-SAT-HRL-2005-b62@1986-02-28",
+    "southwest-939-LBB-AUS-MUELLER-2300-b62@1986-02-28",
+    "southwest-760-AUS-MUELLER-MAF-0630-b62@1986-03-01",
+    "southwest-765-MAF-AUS-MUELLER-0900-b62@1986-03-01",
+    "southwest-778-AUS-MUELLER-LBB-0915-b62@1986-03-01",
+    "southwest-151-SAT-HRL-1000-b62@1986-03-01",
+    "southwest-156-HRL-SAT-1100-b62@1986-03-01",
+    "southwest-235-AUS-MUELLER-HRL-1215-b62@1986-03-01",
+    "southwest-252-HRL-AUS-MUELLER-1320-b62@1986-03-01",
+    "southwest-780-AUS-MUELLER-MAF-1330-b62@1986-03-01",
+    "southwest-769-MAF-AUS-MUELLER-1435-b62@1986-03-01",
+    "southwest-861-LBB-AUS-MUELLER-1520-b62@1986-03-01",
+    "southwest-561-AUS-MUELLER-LBB-1545-b62@1986-03-01"
+  ],
+  "new_directed_endpoint_pairs": [
+    [
+      "AUS-MUELLER",
+      "HRL"
+    ],
+    [
+      "AUS-MUELLER",
+      "LBB"
+    ],
+    [
+      "AUS-MUELLER",
+      "MAF"
+    ],
+    [
+      "HRL",
+      "AUS-MUELLER"
+    ],
+    [
+      "HRL",
+      "SAT"
+    ],
+    [
+      "LBB",
+      "AUS-MUELLER"
+    ],
+    [
+      "MAF",
+      "AUS-MUELLER"
+    ],
+    [
+      "SAT",
+      "HRL"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 876,
+  "new_nordic_endpoint_movements": 0,
+  "nordic_endpoint_movements": 161,
+  "runtime_coverage": {
+    "registered_airlines": 94,
+    "registered_countries": 81,
+    "reviewed_schedules": 2498,
+    "animated_airlines": 48,
+    "scheduled_movements": 3806,
+    "confirmed_movements": 1
+  },
+  "new_local_departures_by_date": {
+    "1986-02-27": 5,
+    "1986-02-28": 16,
+    "1986-03-01": 11
+  },
+  "reviewed_rows_without_window_movements": [],
+  "southwest_total_movements": 1219
+}

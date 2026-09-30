@@ -1,0 +1,54 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "BFS",
+      "name": "Belfast–Aldergrove (International)",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 54.6575012207,
+      "lon": -6.2158298492399995,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGAA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://publications.parliament.uk/pa/cm199798/cmselect/cmenvtra/589/8040211.htm",
+        "https://i.ebayimg.com/images/g/fs8AAOSw-D1nxJlG/s-l1600.jpg"
+      ],
+      "location_note": "Historical airfield identity reviewed against the timetable and airport history. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position. Belfast City Airport memorandum of 7 January 1998 states that its first London service began in 1991; BA Heathrow services in 1986 therefore map to Belfast International/Aldergrove."
+    },
+    {
+      "id": "EDI",
+      "name": "Edinburgh–Turnhouse",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 55.950145,
+      "lon": -3.372288,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGPH",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://corporate.edinburghairport.com/about-us/edinburgh-airport-history",
+        "https://i.ebayimg.com/images/g/fs8AAOSw-D1nxJlG/s-l1600.jpg"
+      ],
+      "location_note": "Historical airfield identity reviewed against the timetable and airport history. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "JER",
+      "name": "Jersey–St Peter",
+      "country": "je",
+      "timezone": "Europe/Jersey",
+      "lat": 49.207901,
+      "lon": -2.19551,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGJJ",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.jerseyairport.com/doing-business-with-us/history/",
+        "https://i.ebayimg.com/images/g/fs8AAOSw-D1nxJlG/s-l1600.jpg"
+      ],
+      "location_note": "Historical airfield identity reviewed against the timetable and airport history. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    }
+  ],
+  "coordinate_dataset_sha256": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec"
+}

@@ -1,0 +1,240 @@
+{
+  "batch": 21,
+  "package": "v22",
+  "checked_on": "2026-09-28",
+  "previous_movements": 1326,
+  "new_schedules": 31,
+  "new_candidate_schedules": 2,
+  "new_schedule_ids": [
+    "aeroflot-580-SVO-CPH-1850",
+    "aeroflot-111-SVO-SXF-0855",
+    "aeroflot-113-SVO-SXF-1510",
+    "interflug-601-SVO-SXF-1400",
+    "interflug-603-SVO-SXF-1540",
+    "interflug-607-SVO-SXF-2030",
+    "interflug-609-SVO-SXF-2105",
+    "interflug-611-SVO-SXF-0950",
+    "aeroflot-131-SVO-BUD-0825",
+    "aeroflot-131-SVO-BUD-0820",
+    "malev-101-SVO-BUD-1340",
+    "aeroflot-407-SVO-BUD-0705",
+    "aeroflot-423-SVO-BUD-0315",
+    "aeroflot-231-SVO-BRU-0905",
+    "aeroflot-612-DRS-LED-0915",
+    "aeroflot-120-DRS-SVO-1130",
+    "interflug-662-DRS-SVO-0955",
+    "aeroflot-256-FRA-SVO-1230",
+    "lufthansa-342-FRA-SVO-1300",
+    "jal-446-FRA-SVO-1235",
+    "aeroflot-272-GVA-SVO-1155",
+    "aeroflot-232-BRU-SVO-1145",
+    "aeroflot-132-BUD-SVO-1020-TU5",
+    "aeroflot-132-BUD-SVO-1020-TU3",
+    "malev-100-BUD-SVO-0800",
+    "aeroflot-424-BUD-SVO-0150",
+    "aeroflot-412-BUD-SVO-0355",
+    "aeroflot-408-BUD-SVO-1640",
+    "aeroflot-407-BUD-ALG-0840",
+    "aeroflot-618-BUD-WAW-1330",
+    "malev-120-BUD-WAW-1200"
+  ],
+  "new_candidate_ids": [
+    "aeroflot-420-BUD-SVO-0220",
+    "aeroflot-436-BUD-SVO-1925"
+  ],
+  "new_airports": [
+    "SVO",
+    "LED",
+    "DRS",
+    "BUD",
+    "SXF"
+  ],
+  "new_country_ids": [],
+  "source_files": [
+    {
+      "source": "aeroflot-19851027-first",
+      "image_id": "8ZwAAOSw281oESw2",
+      "panel": "cover",
+      "url": "https://i.ebayimg.com/images/g/8ZwAAOSw281oESw2/s-l1600.webp",
+      "sha256": "3c5aa4ee5e77352cd29dc8e8d8143562a74653316dc8c16fd398289c8d93be1a",
+      "bytes": 99328,
+      "visually_reviewed": true
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "image_id": "mjsAAOSwgERoESw3",
+      "panel": "2–3 / legend and time basis",
+      "url": "https://i.ebayimg.com/images/g/mjsAAOSwgERoESw3/s-l1600.webp",
+      "sha256": "4d6cbe632bc9ef1116a84e665b8e0f6ed3c740856bc9bf2189b0ea754802b037",
+      "bytes": 131558,
+      "visually_reviewed": true
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "image_id": "PasAAOSwhW1oESw2",
+      "panel": "14–15",
+      "url": "https://i.ebayimg.com/images/g/PasAAOSwhW1oESw2/s-l1600.webp",
+      "sha256": "eb54b93d5dc269399cca3446452fd7592c0b60e6c2d8219789dcad6b58119de0",
+      "bytes": 134948,
+      "visually_reviewed": true
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "image_id": "~sMAAOSwLJVoESw3",
+      "panel": "30–31",
+      "url": "https://i.ebayimg.com/images/g/~sMAAOSwLJVoESw3/s-l1600.webp",
+      "sha256": "15f60a5bd85e92f2bc88712598b1f727f9dc7e1ab78e1606d964450d491a18b9",
+      "bytes": 156574,
+      "visually_reviewed": true
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "image_id": "8nUAAOSwTJNoESw3",
+      "panel": "back cover / calendar",
+      "url": "https://i.ebayimg.com/images/g/8nUAAOSwTJNoESw3/s-l1600.webp",
+      "sha256": "73d7a33d92e114331a622906d0ffcd917c1bb4d8a476a82cfd8d0c5b359aa762",
+      "bytes": 92202,
+      "visually_reviewed": true
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "image_id": "yesAAeSws35pK0br",
+      "panel": "cover / earlier listing",
+      "url": "https://i.ebayimg.com/images/g/yesAAeSws35pK0br/s-l1600.jpg",
+      "sha256": "546a0ac6de5628ba775fdc32b328bf784376964aad8f65739946ccd4208c6941",
+      "bytes": 450267,
+      "visually_reviewed": true
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "image_id": "Q6oAAeSwKyFpK0br",
+      "panel": "10–11",
+      "url": "https://i.ebayimg.com/images/g/Q6oAAeSwKyFpK0br/s-l1600.jpg",
+      "sha256": "72dab76c7a7ecfa57d723d22f9c46e7cd795da9ba43f08dea5751c50083c2665",
+      "bytes": 665581,
+      "visually_reviewed": true
+    },
+    {
+      "source": "malev-19851027-cover",
+      "image_id": "DEIAAOSwV8JhaYlR",
+      "panel": "dated cover",
+      "url": "https://i.ebayimg.com/images/g/DEIAAOSwV8JhaYlR/s-l1600.webp",
+      "sha256": "5ec4952a6ed123c5f1d06f4ebd7f90437f0c6ac6843c8872ab91b287e92d6cb7",
+      "bytes": 237218,
+      "visually_reviewed": true
+    }
+  ],
+  "coverage_complete": false,
+  "new_movements": 44,
+  "total_movements": 1370,
+  "new_leg_ids": [
+    "aeroflot-423-SVO-BUD-0315@1986-02-28",
+    "aeroflot-412-BUD-SVO-0355@1986-02-28",
+    "aeroflot-131-SVO-BUD-0825@1986-02-28",
+    "aeroflot-111-SVO-SXF-0855@1986-02-28",
+    "interflug-611-SVO-SXF-0950@1986-02-28",
+    "malev-100-BUD-SVO-0800@1986-02-28",
+    "interflug-662-DRS-SVO-0955@1986-02-28",
+    "aeroflot-132-BUD-SVO-1020-TU5@1986-02-28",
+    "aeroflot-120-DRS-SVO-1130@1986-02-28",
+    "malev-101-SVO-BUD-1340@1986-02-28",
+    "interflug-601-SVO-SXF-1400@1986-02-28",
+    "aeroflot-256-FRA-SVO-1230@1986-02-28",
+    "lufthansa-342-FRA-SVO-1300@1986-02-28",
+    "aeroflot-113-SVO-SXF-1510@1986-02-28",
+    "aeroflot-618-BUD-WAW-1330@1986-02-28",
+    "interflug-603-SVO-SXF-1540@1986-02-28",
+    "aeroflot-580-SVO-CPH-1850@1986-02-28",
+    "interflug-607-SVO-SXF-2030@1986-02-28",
+    "interflug-609-SVO-SXF-2105@1986-02-28",
+    "aeroflot-424-BUD-SVO-0150@1986-03-01",
+    "aeroflot-407-SVO-BUD-0705@1986-03-01",
+    "aeroflot-131-SVO-BUD-0820@1986-03-01",
+    "aeroflot-111-SVO-SXF-0855@1986-03-01",
+    "aeroflot-231-SVO-BRU-0905@1986-03-01",
+    "interflug-611-SVO-SXF-0950@1986-03-01",
+    "malev-100-BUD-SVO-0800@1986-03-01",
+    "aeroflot-407-BUD-ALG-0840@1986-03-01",
+    "aeroflot-612-DRS-LED-0915@1986-03-01",
+    "interflug-662-DRS-SVO-0955@1986-03-01",
+    "aeroflot-132-BUD-SVO-1020-TU3@1986-03-01",
+    "aeroflot-120-DRS-SVO-1130@1986-03-01",
+    "malev-101-SVO-BUD-1340@1986-03-01",
+    "aeroflot-232-BRU-SVO-1145@1986-03-01",
+    "aeroflot-272-GVA-SVO-1155@1986-03-01",
+    "interflug-601-SVO-SXF-1400@1986-03-01",
+    "malev-120-BUD-WAW-1200@1986-03-01",
+    "aeroflot-256-FRA-SVO-1230@1986-03-01",
+    "jal-446-FRA-SVO-1235@1986-03-01",
+    "lufthansa-342-FRA-SVO-1300@1986-03-01",
+    "aeroflot-113-SVO-SXF-1510@1986-03-01",
+    "interflug-603-SVO-SXF-1540@1986-03-01",
+    "aeroflot-408-BUD-SVO-1640@1986-03-01",
+    "interflug-607-SVO-SXF-2030@1986-03-01",
+    "interflug-609-SVO-SXF-2105@1986-03-01"
+  ],
+  "unchanged_previous_movements": 1326,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_nordic_endpoint_movements": 1,
+  "overflight_records_added": 0,
+  "new_endpoint_pairs": [
+    [
+      "BRU",
+      "SVO"
+    ],
+    [
+      "BUD",
+      "ALG"
+    ],
+    [
+      "BUD",
+      "SVO"
+    ],
+    [
+      "BUD",
+      "WAW"
+    ],
+    [
+      "DRS",
+      "LED"
+    ],
+    [
+      "DRS",
+      "SVO"
+    ],
+    [
+      "FRA",
+      "SVO"
+    ],
+    [
+      "GVA",
+      "SVO"
+    ],
+    [
+      "SVO",
+      "BRU"
+    ],
+    [
+      "SVO",
+      "BUD"
+    ],
+    [
+      "SVO",
+      "CPH"
+    ],
+    [
+      "SVO",
+      "SXF"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 389,
+  "runtime_coverage": {
+    "registered_airlines": 80,
+    "registered_countries": 70,
+    "reviewed_schedules": 906,
+    "animated_airlines": 34,
+    "scheduled_movements": 1369,
+    "confirmed_movements": 1
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "batch": 37,
+  "package": "v38",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2210,
+  "new_schedules": 4,
+  "new_schedule_ids": [
+    "air-france-782-CDG-VIE-1105-d56-b37",
+    "austrian-232-ORY-VIE-2050-d56-b37",
+    "air-france-781-VIE-CDG-1345-d56-b37",
+    "austrian-231-VIE-ORY-1815-d56-b37"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 0,
+  "new_airports": [
+    "VIE"
+  ],
+  "new_country_ids": [
+    "li"
+  ],
+  "new_airline_ids": [
+    "tyrolean",
+    "rhein-helicopter"
+  ],
+  "new_source_ids": [
+    "austrian-19851027-cover",
+    "tyrolean-19851027-index",
+    "rhein-helicopter-balzers-history"
+  ],
+  "unchanged_previous_movements": 2210,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "it",
+  "reviewed_countries_this_batch": [
+    "li",
+    "at"
+  ],
+  "new_movements": 8,
+  "total_movements": 2218,
+  "new_leg_ids": [
+    "air-france-782-CDG-VIE-1105-d56-b37@1986-02-28",
+    "air-france-781-VIE-CDG-1345-d56-b37@1986-02-28",
+    "austrian-231-VIE-ORY-1815-d56-b37@1986-02-28",
+    "austrian-232-ORY-VIE-2050-d56-b37@1986-02-28",
+    "air-france-782-CDG-VIE-1105-d56-b37@1986-03-01",
+    "air-france-781-VIE-CDG-1345-d56-b37@1986-03-01",
+    "austrian-231-VIE-ORY-1815-d56-b37@1986-03-01",
+    "austrian-232-ORY-VIE-2050-d56-b37@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 4,
+    "austrian": 4
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "CDG",
+      "VIE"
+    ],
+    [
+      "ORY",
+      "VIE"
+    ],
+    [
+      "VIE",
+      "CDG"
+    ],
+    [
+      "VIE",
+      "ORY"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 580,
+  "runtime_coverage": {
+    "registered_airlines": 87,
+    "registered_countries": 74,
+    "reviewed_schedules": 1527,
+    "animated_airlines": 40,
+    "scheduled_movements": 2217,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

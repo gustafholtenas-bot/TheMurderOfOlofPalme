@@ -1,0 +1,137 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    14,
+    15,
+    16,
+    17,
+    22,
+    100,
+    173,
+    195
+  ],
+  "airport_codes_printed_pages": [
+    260,
+    261
+  ],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "14": 10,
+    "15": 10,
+    "16": 11,
+    "17": 11,
+    "22": 14,
+    "100": 53,
+    "173": 89,
+    "195": 100,
+    "260": 133,
+    "261": 133
+  },
+  "airport_records": [
+    {
+      "id": "BWI",
+      "name": "Baltimore–Washington International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 39.1754,
+      "lon": -76.668297,
+      "coordinate_source": "https://ourairports.com/airports/KBWI/",
+      "coordinate_record_id": "KBWI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.bwiairport.com/flying-with-us/about-bwi/press-media/november-6-2025-maryland-department-of-transportation-unveils-historical-marker-honoring-75-year-legacy-of-bwi-thurgood-marshall-airport/"
+      ],
+      "timetable_code": "BWI",
+      "location_note": "Contemporary Delta airport-code page 260 identifies Baltimore-Washington International/BWI. Separate Baltimore schedule heading used, not Washington National/DCA or Dulles/IAD. Airport authority history traces this airfield to Friendship Airport, dedicated in 1950; the later Thurgood Marshall name is not applied to 1986. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "BDL",
+      "name": "Hartford/Springfield–Bradley International",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 41.938555,
+      "lon": -72.688016,
+      "coordinate_source": "https://ourairports.com/airports/KBDL/",
+      "coordinate_record_id": "KBDL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://bradleyairport.com/about/about-us/"
+      ],
+      "timetable_code": "BDL",
+      "location_note": "Contemporary Delta airport-code page 260 identifies Hartford/Springfield Bradley International/BDL. Airport authority history identifies the Windsor Locks airfield, military from 1941 and commercial from 1947. Separate Hartford-Brainard/HFD is not used. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "LGA",
+      "name": "New York–LaGuardia",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 40.777199,
+      "lon": -73.872597,
+      "coordinate_source": "https://ourairports.com/airports/KLGA/",
+      "coordinate_record_id": "KLGA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://portfolio.panynj.gov/2016/06/17/laguardia-airport-flashback-to-the-past/"
+      ],
+      "timetable_code": "LGA",
+      "location_note": "Contemporary Delta airport-code page 261 and New York schedule suffix L identify LaGuardia/LGA, separate from JFK and Newark. Port Authority history identifies the Queens airport opened in 1939, with the Central Terminal Building replaced in 1964. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "EWR",
+      "name": "Newark International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 40.6894,
+      "lon": -74.170545,
+      "coordinate_source": "https://ourairports.com/airports/KEWR/",
+      "coordinate_record_id": "KEWR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.panynj.gov/content/dam/port-authority/aircraft-noise/EWR-Final-NEM-Report.pdf"
+      ],
+      "timetable_code": "EWR",
+      "location_note": "Contemporary Delta airport-code page 261 identifies Newark International/EWR; New York schedule suffix E denotes this airport. The search-indexed history in the Port Authority report identifies the Newark airfield opened in 1928 and its Central Terminal Area opened in 1973. Full history PDF was not downloaded; the later Liberty name is not applied to 1986. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "PIT",
+      "name": "Greater Pittsburgh International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 40.491501,
+      "lon": -80.232903,
+      "coordinate_source": "https://ourairports.com/airports/KPIT/",
+      "coordinate_record_id": "KPIT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://flypittsburgh.com/wp-content/uploads/2022/09/FEA_AGC_RSA_with_Appendices_220809.pdf"
+      ],
+      "timetable_code": "PIT",
+      "location_note": "Contemporary Delta airport-code page 261 identifies Greater Pittsburgh International/PIT. Search-indexed airport-authority history distinguishes PIT, constructed in 1952, from Allegheny County Airport/AGC, the earlier commercial airport. Full history PDF was not downloaded; terminal positions are not reconstructed. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    }
+  ],
+  "notes": [
+    "Visual scans determine accepted fields; OCR is not authoritative.",
+    "All ten directed airport pairs have separately read source rows; return times are not inferred.",
+    "New York suffix L identifies LaGuardia; E identifies Newark; J would denote JFK. No JFK segment is inferred.",
+    "DL106/1658 ATL–BDL via LGA is a connection, not an uninterrupted nonstop. DL106 ATL–LGA is separately documented.",
+    "DL1014 ATL–BWI and DL710 ATL–LGA have X6; DL399 BWI–ATL and DL371 LGA–ATL have X7.",
+    "DL1014 ATL–BWI and DL660 ATL–PIT arrive on the next local calendar day.",
+    "DL107 LGA–ATL is 10:10–12:24; the arrival minute digits were checked visually.",
+    "Historical airport codes and names retained even where current coordinate sources differ.",
+    "EWR and PIT history PDF full-text downloads were unavailable; only retrieved search-indexed passages are used for their historical identity alongside the contemporary Delta code table.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

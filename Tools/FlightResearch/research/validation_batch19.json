@@ -1,0 +1,320 @@
+{
+  "checked_on": "2026-09-28",
+  "package": "v20",
+  "new_movements": 33,
+  "unchanged_previous_movements": 1247,
+  "total_movements": 1280,
+  "new_schedules": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_file_count": 22,
+  "nordic_endpoint_movements": 46,
+  "nordic_movements_added": 2,
+  "actual_overflights_added": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_physical_duplicate_count": 0,
+  "reviewed_ground_connections": [
+    {
+      "journey": "jal/jal-412@1986-02-27",
+      "origin": "AMS",
+      "stop": "ANC",
+      "destination": "NRT",
+      "ground_minutes": 75.0
+    },
+    {
+      "journey": "jal/jal-41@1986-02-28",
+      "origin": "JFK",
+      "stop": "ANC",
+      "destination": "NRT",
+      "ground_minutes": 60.0
+    },
+    {
+      "journey": "jal/jal-436@1986-02-28",
+      "origin": "FRA",
+      "stop": "DUS",
+      "destination": "ANC",
+      "ground_minutes": 80.0
+    },
+    {
+      "journey": "jal/jal-436@1986-02-28",
+      "origin": "DUS",
+      "stop": "ANC",
+      "destination": "NRT",
+      "ground_minutes": 75.0
+    },
+    {
+      "journey": "jal/jal-3-via-HNL@1986-02-28",
+      "origin": "SFO",
+      "stop": "HNL",
+      "destination": "NRT",
+      "ground_minutes": 75.0
+    },
+    {
+      "journey": "jal/jal-41@1986-03-01",
+      "origin": "JFK",
+      "stop": "ANC",
+      "destination": "NRT",
+      "ground_minutes": 60.0
+    },
+    {
+      "journey": "jal/jal-418@1986-03-01",
+      "origin": "AMS",
+      "stop": "CPH",
+      "destination": "ANC",
+      "ground_minutes": 75.0
+    }
+  ],
+  "new_movements_by_flight": {
+    "1": 3,
+    "11": 1,
+    "3": 3,
+    "41": 5,
+    "412": 2,
+    "418": 2,
+    "436": 3,
+    "5": 3,
+    "61": 3,
+    "73": 3,
+    "75": 1,
+    "77": 3,
+    "9": 1
+  },
+  "source_edition_status": "advance",
+  "later_final_edition_verified": false,
+  "schedule_duration_sanity_checks": [
+    {
+      "schedule": "jal-418-AMS-CPH-1230",
+      "elapsed_minutes": 80,
+      "great_circle_km": 633,
+      "block_average_kmh": 475
+    },
+    {
+      "schedule": "jal-418-CPH-ANC-1505",
+      "elapsed_minutes": 515,
+      "great_circle_km": 6939,
+      "block_average_kmh": 808
+    },
+    {
+      "schedule": "jal-418-ANC-NRT-1455",
+      "elapsed_minutes": 440,
+      "great_circle_km": 5513,
+      "block_average_kmh": 752
+    },
+    {
+      "schedule": "jal-412-FCO-AMS-1220",
+      "elapsed_minutes": 150,
+      "great_circle_km": 1297,
+      "block_average_kmh": 519
+    },
+    {
+      "schedule": "jal-412-AMS-ANC-1600",
+      "elapsed_minutes": 535,
+      "great_circle_km": 7199,
+      "block_average_kmh": 807
+    },
+    {
+      "schedule": "jal-412-ANC-NRT-1610",
+      "elapsed_minutes": 440,
+      "great_circle_km": 5513,
+      "block_average_kmh": 752
+    },
+    {
+      "schedule": "jal-436-FRA-DUS-1250",
+      "elapsed_minutes": 50,
+      "great_circle_km": 189,
+      "block_average_kmh": 227
+    },
+    {
+      "schedule": "jal-436-DUS-ANC-1500",
+      "elapsed_minutes": 540,
+      "great_circle_km": 7340,
+      "block_average_kmh": 816
+    },
+    {
+      "schedule": "jal-436-ANC-NRT-1515",
+      "elapsed_minutes": 440,
+      "great_circle_km": 5513,
+      "block_average_kmh": 752
+    },
+    {
+      "schedule": "jal-5-JFK-NRT-1230",
+      "elapsed_minutes": 840,
+      "great_circle_km": 10830,
+      "block_average_kmh": 774
+    },
+    {
+      "schedule": "jal-11-MEX-YVR-1015",
+      "elapsed_minutes": 325,
+      "great_circle_km": 3945,
+      "block_average_kmh": 728
+    },
+    {
+      "schedule": "jal-11-YVR-NRT-1500",
+      "elapsed_minutes": 595,
+      "great_circle_km": 7503,
+      "block_average_kmh": 757
+    },
+    {
+      "schedule": "jal-9-ORD-SEA-1100",
+      "elapsed_minutes": 245,
+      "great_circle_km": 2762,
+      "block_average_kmh": 676
+    },
+    {
+      "schedule": "jal-9-SEA-NRT-1425",
+      "elapsed_minutes": 605,
+      "great_circle_km": 7655,
+      "block_average_kmh": 759
+    },
+    {
+      "schedule": "jal-61-SFO-NRT-1000",
+      "elapsed_minutes": 655,
+      "great_circle_km": 8227,
+      "block_average_kmh": 754
+    },
+    {
+      "schedule": "jal-3-SFO-HNL-1000",
+      "elapsed_minutes": 325,
+      "great_circle_km": 3857,
+      "block_average_kmh": 712
+    },
+    {
+      "schedule": "jal-3-HNL-NRT-1440",
+      "elapsed_minutes": 535,
+      "great_circle_km": 6136,
+      "block_average_kmh": 688
+    },
+    {
+      "schedule": "jal-3-SFO-NRT-1220",
+      "elapsed_minutes": 655,
+      "great_circle_km": 8227,
+      "block_average_kmh": 754
+    },
+    {
+      "schedule": "jal-1-YVR-NRT-1345",
+      "elapsed_minutes": 595,
+      "great_circle_km": 7503,
+      "block_average_kmh": 757
+    },
+    {
+      "schedule": "jal-77-HNL-NRT-1000",
+      "elapsed_minutes": 535,
+      "great_circle_km": 6136,
+      "block_average_kmh": 688
+    },
+    {
+      "schedule": "jal-73-HNL-NRT-1130",
+      "elapsed_minutes": 535,
+      "great_circle_km": 6136,
+      "block_average_kmh": 688
+    },
+    {
+      "schedule": "jal-75-HNL-NRT-0930",
+      "elapsed_minutes": 535,
+      "great_circle_km": 6136,
+      "block_average_kmh": 688
+    },
+    {
+      "schedule": "jal-41-JFK-ANC-0245",
+      "elapsed_minutes": 445,
+      "great_circle_km": 5434,
+      "block_average_kmh": 733
+    },
+    {
+      "schedule": "jal-41-ANC-NRT-0710",
+      "elapsed_minutes": 440,
+      "great_circle_km": 5513,
+      "block_average_kmh": 752
+    }
+  ],
+  "candidate_schedules_retained": 8,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "name": "unit_tests",
+      "exit_code": 0,
+      "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 1.520s\n\nOK\n"
+    },
+    {
+      "name": "generated_flights",
+      "exit_code": 0,
+      "output": "{\"registered_airlines\": 79, \"registered_countries\": 69, \"reviewed_schedules\": 845, \"animated_airlines\": 30, \"scheduled_movements\": 1279, \"confirmed_movements\": 1}\n"
+    },
+    {
+      "name": "country_index",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "stock_market",
+      "exit_code": 0,
+      "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+    }
+  ],
+  "window_boundary_checks": [
+    {
+      "schedule": "jal-9-SEA-NRT-1425",
+      "departure_utc": "1986-03-01T22:25:00Z",
+      "included": false,
+      "reason": "Departure is 3 minutes 30 seconds after the window ends."
+    },
+    {
+      "schedule": "jal-418-ANC-NRT-1455",
+      "departure_utc": "1986-03-01T23:55:00Z",
+      "included": false,
+      "reason": "Departure after the window ends."
+    },
+    {
+      "schedule": "jal-418-CPH-ANC-1505",
+      "departure_utc": "1986-03-01T14:05:00Z",
+      "arrival_utc": "1986-03-01T22:40:00Z",
+      "included": true,
+      "reason": "Interval overlaps the end of the window."
+    }
+  ],
+  "package_file_changes": {
+    "changed": [
+      "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+      "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json",
+      "Tools/FlightResearch/README.md",
+      "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+      "Tools/FlightResearch/research/NORDIC_OVERFLIGHT_RESEARCH.md",
+      "Tools/FlightResearch/research/SOURCES.md",
+      "Tools/FlightResearch/research/nordic_priority.json"
+    ],
+    "added": [
+      "LAS_MIG_v20.txt",
+      "Tools/FlightResearch/research/JAL_WINTER_BATCH19.md",
+      "Tools/FlightResearch/research/airport_locations_batch19.json",
+      "Tools/FlightResearch/research/batch_19.json",
+      "Tools/FlightResearch/research/jal_batch19.tsv",
+      "Tools/FlightResearch/research/validation_batch19.json"
+    ],
+    "removed": [
+      "LAS_MIG_v19.txt"
+    ]
+  }
+}

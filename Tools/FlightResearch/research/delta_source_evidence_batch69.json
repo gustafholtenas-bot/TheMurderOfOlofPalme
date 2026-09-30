@@ -1,0 +1,81 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    14,
+    21,
+    49,
+    88,
+    101,
+    130,
+    210,
+    234
+  ],
+  "screened_without_import_printed_pages": [
+    16,
+    154
+  ],
+  "airport_codes_printed_pages": [
+    260
+  ],
+  "footnotes_printed_pages": [],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "14": 10,
+    "21": 13,
+    "49": 27,
+    "88": 47,
+    "101": 53,
+    "130": 68,
+    "210": 108,
+    "234": 120,
+    "16": 11,
+    "154": 80,
+    "260": 133
+  },
+  "new_airports": [
+    {
+      "id": "CVG",
+      "name": "Cincinnati / Greater Cincinnati International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 39.048801,
+      "lon": -84.667801,
+      "coordinate_source": "https://ourairports.com/airports/KCVG/",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.cvgairport.com/business/about/"
+      ]
+    }
+  ],
+  "existing_airport_ids": [
+    "ATL",
+    "AUS-MUELLER",
+    "FWA",
+    "HNL",
+    "LIT",
+    "SAT",
+    "TOL"
+  ],
+  "existing_airport_records_modified": false,
+  "notes": [
+    "Visual scans determine accepted fields; OCR is not authoritative.",
+    "All return times independently read; not inferred from outbound flights.",
+    "HNL24 X15 excludes Monday and Friday. Only local departure 27 February overlaps this window. Arrival 09:04 next day.",
+    "CVG393 X7 excludes Sunday; all other accepted rows daily.",
+    "ATL1140 to CVG 23:07–00:10 arrives next local day.",
+    "HNL UTC−10, AUS/LIT/SAT UTC−6, all other selected airports UTC−5.",
+    "21 connecting itineraries via DFW/MEM/CVG and nine one-stop through rows are research only.",
+    "CVG identified as Greater Cincinnati International by printed page 260. Coordinates approximate the airfield, not the 1986 terminal/gate.",
+    "Milwaukee screened on printed pages 16 and 154: connecting itineraries only, no accepted nonstop row; individual commuter segments remain for further research.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

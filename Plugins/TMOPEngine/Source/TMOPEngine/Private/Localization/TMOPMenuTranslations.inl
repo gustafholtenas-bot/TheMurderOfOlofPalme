@@ -1,5 +1,6 @@
 // Swedish source and English translations. Keys must match the NSLOCTEXT identity.
 Add(TEXT("HubStockMarket"), TEXT("BÖRSEN FÖRE OCH EFTER"), TEXT("MARKETS BEFORE AND AFTER"));
+Add(TEXT("HubFlightTraffic"), TEXT("FLYGTRAFIK KRING MORDET"), TEXT("FLIGHT TRAFFIC AROUND THE MURDER"));
 Add(TEXT("MarketMissingValue"), TEXT("Saknas"), TEXT("Missing"));
 Add(TEXT("MarketClose"), TEXT("Slutnotering"), TEXT("Closing value"));
 Add(TEXT("MarketProvisional"), TEXT("Preliminär"), TEXT("Preliminary"));
@@ -192,8 +193,8 @@ Add(TEXT("FlightResearchCatalog"), TEXT("Katalogpost hittad"), TEXT("Catalog rec
 Add(TEXT("FlightResearchNoEdition"), TEXT("Rätt utgåva saknas i sökta källor"), TEXT("Applicable edition not found in searched sources"));
 Add(TEXT("FlightResearchTodo"), TEXT("Återstår att undersöka"), TEXT("Research pending"));
 Add(TEXT("FlightAllCountries"), TEXT("Alla länder"), TEXT("All countries"));
-Add(TEXT("FlightAllAirlines"), TEXT("Alla flygbolag"), TEXT("All airlines"));
-Add(TEXT("FlightSearch"), TEXT("Flygnummer, flygplats eller bolag"), TEXT("Flight number, airport or airline"));
+Add(TEXT("FlightAllAirlines"), TEXT("Alla operatörer"), TEXT("All operators"));
+Add(TEXT("FlightSearch"), TEXT("Flygnummer, plats eller operatör"), TEXT("Flight number, location or operator"));
 Add(TEXT("FlightOnlyAirborne"), TEXT("Lista bara flyg i luften vid vald tid"), TEXT("List only flights airborne at the selected time"));
 Add(TEXT("FlightListCount"), TEXT("{0} avgångar i urvalet • {1} i luften"), TEXT("{0} selected departures • {1} airborne"));
 Add(TEXT("FlightNoData"), TEXT("Inga inlästa avgångar matchar. Det betyder inte att flygtrafik saknades."), TEXT("No imported departures match. This does not mean there was no traffic."));
@@ -201,8 +202,11 @@ Add(TEXT("FlightLoadError"), TEXT("Flygdata kunde inte läsas: {0}"), TEXT("Flig
 Add(TEXT("FlightLocalTimes"), TEXT("Lokala tider (UTC-offset visas):\nAvgång: {0}\nAnkomst: {1}"), TEXT("Local times (UTC offset shown):\nDeparture: {0}\nArrival: {1}"));
 Add(TEXT("FlightJump"), TEXT("Visa vid avgång"), TEXT("Show at departure"));
 Add(TEXT("FlightCoverage"), TEXT("Insamling land för land • ofullständigt underlag"), TEXT("Country-by-country research • incomplete coverage"));
-Add(TEXT("FlightCoverageCount"), TEXT("Register: {0} länder, {1} flygbolag, {2} källposter. Inläst: {3} avgångar."), TEXT("Register: {0} countries, {1} airlines, {2} source records. Imported: {3} departures."));
-Add(TEXT("FlightCountryFilter"), TEXT("Landfiltret omfattar avgång, ankomst eller flygbolagets hemland. Registret nedan grupperar bolagen efter hemland."), TEXT("The country filter includes departures, arrivals or the airline's home country. The register below groups airlines by home country."));
+Add(TEXT("FlightIndexTitle"), TEXT("Innehållsförteckning • länder och operatörer"), TEXT("Contents • countries and operators"));
+Add(TEXT("FlightIndexLegend"), TEXT("✓ = uppgifter inlästa, men operatören är ännu delvis granskad. ○ = inga flygrutter inlästa. Inget land är färdiginventerat."), TEXT("✓ = records imported, but the operator is still partly reviewed. ○ = no routes imported. No country census is complete."));
+Add(TEXT("FlightIndexCountry"), TEXT("{0} • {1} delvis granskade • {2} utan inlästa rutter"), TEXT("{0} • {1} partly reviewed • {2} without imported routes"));
+Add(TEXT("FlightCoverageCount"), TEXT("Register: {0} länder, {1} operatörer, {2} källposter. Inläst: {3} flygrörelser."), TEXT("Register: {0} countries, {1} operators, {2} source records. Imported: {3} movements."));
+Add(TEXT("FlightCountryFilter"), TEXT("Landfiltret omfattar avgång, ankomst eller operatörens hemland. Registret nedan grupperar operatörerna efter hemland."), TEXT("The country filter includes departures, arrivals or the operator's home country. The register below groups operators by home country."));
 Add(TEXT("FlightPause"), TEXT("Pausa"), TEXT("Pause"));
 Add(TEXT("FlightPlay"), TEXT("Spela"), TEXT("Play"));
 Add(TEXT("FlightStart"), TEXT("−24 h"), TEXT("−24 h"));

@@ -1,0 +1,257 @@
+{
+  "batch": 9,
+  "package": "v10",
+  "checked_on": "2026-09-26",
+  "previous_movements": 759,
+  "new_schedules": 43,
+  "new_schedule_ids": [
+    "panam-600-HAM-TXL-0715",
+    "panam-602-HAM-TXL-0800",
+    "panam-606-HAM-TXL-1200",
+    "panam-604-HAM-TXL-1320",
+    "panam-608-HAM-TXL-1405",
+    "panam-610-HAM-TXL-1520",
+    "panam-612-HAM-TXL-1730",
+    "panam-614-HAM-TXL-1925",
+    "panam-616-HAM-TXL-2100",
+    "panam-680-MUC-RIEM-TXL-0835",
+    "panam-684-MUC-RIEM-TXL-1110",
+    "panam-686-MUC-RIEM-TXL-1335",
+    "panam-688-MUC-RIEM-TXL-1540",
+    "panam-690-MUC-RIEM-TXL-1725",
+    "panam-692-MUC-RIEM-TXL-2115",
+    "panam-670-NUE-TXL-1015",
+    "panam-102-NUE-TXL-1400",
+    "panam-674-NUE-TXL-1740",
+    "panam-676-NUE-TXL-2005",
+    "panam-125-NUE-BRU-0735",
+    "panam-660-STR-TXL-0840",
+    "panam-92-STR-TXL-1235",
+    "panam-664-STR-TXL-1525",
+    "panam-668-STR-TXL-2040",
+    "panam-93-STR-ZRH-0950",
+    "panam-624-ZRH-TXL-1800",
+    "panam-90-ZRH-GVA-1110",
+    "panam-91-ZRH-JFK-1145",
+    "panam-92-ZRH-STR-1120",
+    "panam-91-GVA-ZRH-0945",
+    "panam-111-FCO-JFK-1115",
+    "panam-110-JFK-FCO-1830",
+    "panam-83-NCE-JFK-1145",
+    "panam-82-JFK-NCE-1945",
+    "panam-124-SFO-LHR-1745",
+    "panam-150-SFO-LAX-1245",
+    "panam-264-SFO-JFK-0830",
+    "panam-84-SFO-JFK-0830",
+    "panam-122-SFO-SEA-1545",
+    "panam-122-SEA-LHR-1845",
+    "panam-125-SEA-SFO-1340",
+    "panam-265-JFK-SFO-1615",
+    "panam-85-JFK-SFO-1615"
+  ],
+  "new_candidate_schedules": 2,
+  "candidate_schedule_ids": [
+    "panam-90-GVA-IST-ATATURK-1240",
+    "panam-91-IST-ATATURK-GVA-0700"
+  ],
+  "updated_schedule_ids": [
+    "panam-90-LAX-JFK-1030",
+    "panam-90-JFK-ZRH-2015",
+    "panam-91-JFK-LAX-1600",
+    "panam-93-TXL-STR-0815",
+    "panam-125-TXL-NUE-0600",
+    "panam-125-LHR-SEA-1025",
+    "panam-150-LAX-FRA-1520",
+    "panam-122-LHR-FRA-1335",
+    "panam-124-LHR-FRA-1335"
+  ],
+  "new_airports": [
+    "NCE",
+    "FCO",
+    "GVA",
+    "IST-ATATURK"
+  ],
+  "new_countries": [
+    "tr"
+  ],
+  "source_images": [
+    {
+      "printed_page": "42",
+      "image_id": 37275,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37275/full/2400,/0/default.jpg",
+      "sha256": "52109c19e2a2cb19b021283366eafc21d257d48d9f3dcc93cf726bea8b122b05"
+    },
+    {
+      "printed_page": "43",
+      "image_id": 37276,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37276/full/2400,/0/default.jpg",
+      "sha256": "3294d4f1f1d59ec1a7f52436768b529ea4075074a9e1281aad1cf580d735815d"
+    },
+    {
+      "printed_page": "45",
+      "image_id": 37278,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37278/full/2400,/0/default.jpg",
+      "sha256": "e67c494f59caef0fcaacd6fae5927965c3885b7d507d07142b07d547ee5f52e6"
+    },
+    {
+      "printed_page": "51",
+      "image_id": 37284,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37284/full/2400,/0/default.jpg",
+      "sha256": "b33614f6911ede51a0c7ad4f15c3b3da6c774e35a8b6df7a83578c2e6a3f2f63"
+    },
+    {
+      "printed_page": "52",
+      "image_id": 37285,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37285/full/2400,/0/default.jpg",
+      "sha256": "1cc7792bd8369c5a5428dcd18573c5206be41b13613b89b756f4d9e3b7ef7c24"
+    },
+    {
+      "printed_page": "67",
+      "image_id": 37302,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37302/full/2400,/0/default.jpg",
+      "sha256": "88cafbad4369ab907459085007d27ccdbb73cebf9ddbc4f58aec58278e00b55a"
+    },
+    {
+      "printed_page": "72",
+      "image_id": 37307,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37307/full/2200,/0/default.jpg",
+      "sha256": "4ce03e03eacb528302a335242fc6bcd28d7f4c3a07b8700e455c773790ea5c20"
+    },
+    {
+      "printed_page": "73",
+      "image_id": 37308,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37308/full/2400,/0/default.jpg",
+      "sha256": "94aa04ae834778dd1847d8602a65c5e36ed6a69af28bce2a848f20375aea8eaa"
+    },
+    {
+      "printed_page": "74",
+      "image_id": 37309,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37309/full/2400,/0/default.jpg",
+      "sha256": "386e7bdf5c6e4566858485f1016868f740713c97b6ea8ebf45e2ea71cfeebf15"
+    },
+    {
+      "printed_page": "87",
+      "image_id": 37322,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37322/full/2400,/0/default.jpg",
+      "sha256": "65e5e8e8806cd6f57f78564498284e86c5f0bfaf3f6b05a80bb96f91cfab2177"
+    },
+    {
+      "printed_page": "94",
+      "image_id": 37329,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37329/full/2400,/0/default.jpg",
+      "sha256": "6383ffb2170ec3dfd03ba02398d69c1e82ed5d24e7d5cb3932a4e8ca81a3d0f3"
+    },
+    {
+      "printed_page": "97",
+      "image_id": 37332,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37332/full/2400,/0/default.jpg",
+      "sha256": "6a10deb2e585cea984192a55cbf798e5d010a50cb5bc02f588c0619c91273a93"
+    },
+    {
+      "printed_page": "98",
+      "image_id": 37333,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37333/full/2400,/0/default.jpg",
+      "sha256": "3fb72a3fc63fe9782964d78957132e12028a6c399f9db1cc845d849774ae3da8"
+    },
+    {
+      "printed_page": "109",
+      "image_id": 37344,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37344/full/2400,/0/default.jpg",
+      "sha256": "bbdb94b983b88abd2b34bebfd96d7d09d13f2871eb7bbedbbf2886898cd7cad6"
+    },
+    {
+      "printed_page": "110",
+      "image_id": 37345,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37345/full/2400,/0/default.jpg",
+      "sha256": "1d6d13e1a172d39f5866f033e4cb4c1a4c5ea4dcf964ccbfe926c4427d2eb0c2"
+    }
+  ],
+  "timezone_check": {
+    "url": "https://data.iana.org/time-zones/tzdb/europe",
+    "sha256": "0fef17177d871af93188f2985e6034029bfd83e43d2a1c3838e4320712dba7c1",
+    "printed_istanbul_offset": "+03:00",
+    "iana_19860228_offset": "+02:00",
+    "resolution": "unresolved; both Istanbul legs withheld from animation"
+  },
+  "notes": [
+    "43 new reviewed rows and two timezone-conflict candidates.",
+    "The 264/84 and 265/85 changes on 1 March are renumberings, not extra flights.",
+    "PA692 Munich–Berlin arrival was magnified and checked as 22:30, not 23:30.",
+    "Printed through-flight aliases are not imported as duplicate nonstop movements.",
+    "No new military movements or actual-operation claims. No scans redistributed."
+  ],
+  "movements": 832,
+  "new_scheduled_movements": 73,
+  "new_movement_records": 0,
+  "coverage": {
+    "registered_airlines": 72,
+    "registered_countries": 60,
+    "reviewed_schedules": 577,
+    "animated_airlines": 14,
+    "scheduled_movements": 831,
+    "confirmed_movements": 1
+  },
+  "new_movements_by_operator": {
+    "panam": 73
+  },
+  "new_directed_pairs": 22,
+  "new_movements_by_schedule": {
+    "panam-102-NUE-TXL-1400": 2,
+    "panam-110-JFK-FCO-1830": 2,
+    "panam-111-FCO-JFK-1115": 2,
+    "panam-122-SEA-LHR-1845": 2,
+    "panam-122-SFO-SEA-1545": 1,
+    "panam-124-SFO-LHR-1745": 1,
+    "panam-125-NUE-BRU-0735": 2,
+    "panam-125-SEA-SFO-1340": 1,
+    "panam-150-SFO-LAX-1245": 1,
+    "panam-264-SFO-JFK-0830": 1,
+    "panam-265-JFK-SFO-1615": 2,
+    "panam-600-HAM-TXL-0715": 2,
+    "panam-602-HAM-TXL-0800": 1,
+    "panam-604-HAM-TXL-1320": 2,
+    "panam-606-HAM-TXL-1200": 2,
+    "panam-608-HAM-TXL-1405": 2,
+    "panam-610-HAM-TXL-1520": 2,
+    "panam-612-HAM-TXL-1730": 1,
+    "panam-614-HAM-TXL-1925": 2,
+    "panam-616-HAM-TXL-2100": 1,
+    "panam-624-ZRH-TXL-1800": 2,
+    "panam-660-STR-TXL-0840": 2,
+    "panam-664-STR-TXL-1525": 2,
+    "panam-668-STR-TXL-2040": 2,
+    "panam-670-NUE-TXL-1015": 2,
+    "panam-674-NUE-TXL-1740": 1,
+    "panam-676-NUE-TXL-2005": 1,
+    "panam-680-MUC-RIEM-TXL-0835": 2,
+    "panam-684-MUC-RIEM-TXL-1110": 2,
+    "panam-686-MUC-RIEM-TXL-1335": 2,
+    "panam-688-MUC-RIEM-TXL-1540": 2,
+    "panam-690-MUC-RIEM-TXL-1725": 1,
+    "panam-692-MUC-RIEM-TXL-2115": 2,
+    "panam-82-JFK-NCE-1945": 2,
+    "panam-83-NCE-JFK-1145": 2,
+    "panam-84-SFO-JFK-0830": 1,
+    "panam-85-JFK-SFO-1615": 1,
+    "panam-90-ZRH-GVA-1110": 2,
+    "panam-91-GVA-ZRH-0945": 2,
+    "panam-91-ZRH-JFK-1145": 2,
+    "panam-92-STR-TXL-1235": 2,
+    "panam-92-ZRH-STR-1120": 2,
+    "panam-93-STR-ZRH-0950": 2
+  },
+  "validation": {
+    "python_tests_passed": 20,
+    "flight_generation_check": "passed",
+    "country_index_check": "passed",
+    "stock_market_validation": "passed",
+    "prior_759_times_and_statuses_preserved": "passed",
+    "march_renumberings_without_duplicates": "passed",
+    "istanbul_candidates_withheld": "passed",
+    "pa125_stopover": "passed",
+    "pa692_arrival_2230_cet": "passed",
+    "new_translation_source_texts": "passed",
+    "unreal_build": "not_available",
+    "visual_game_test": "not_run"
+  }
+}

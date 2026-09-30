@@ -1,0 +1,49 @@
+{
+  "batch": 42,
+  "package": "v43",
+  "country": "al",
+  "checked_on": "2026-09-29",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte full trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 0,
+  "domestic_movements": 0,
+  "international_movements": 0,
+  "new_movements": 0,
+  "endpoint_movements_by_source_airline": {},
+  "endpoint_leg_ids": [],
+  "new_leg_ids": [],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://www.tirana-airport.com/en/article/24/History-of-the-Airport",
+      "type": "airport_official_history",
+      "result": "Rinas och utveckling under 1980–1990 beskrivs. Uppräknade bolag hör till avsnittet fram till 1960. Inga exakta flygrörelser för februari 1986."
+    },
+    {
+      "url": "https://www.aac.gov.al/historiku/",
+      "type": "civil_aviation_official_history",
+      "result": "Albtransport beskrivs som en statlig institution från 1957. Detta fastställer varken egen flygverksamhet eller tider i observationsfönstret. Sidans motsägelsefulla tidiga kronologi används inte för nya påståenden."
+    },
+    {
+      "url": "https://www.bannedthought.net/Albania/ForeignSupport/Britain/AlbanianLife/AlbanianLife-34-1986-OCR-sm.pdf",
+      "type": "contemporary_travel_notices_outside_window",
+      "result": "Nr 34 / nr 1 1986: PDF-s. 14 annonserar senare resor via Titograd/Skopje; inga annonserade avresor 28 februari–1 mars. Flygnummer och fullständiga ankomsttider saknas. PDF-s. 17, tryckt s. 30, nämner en separat bussresa Titograd–albanska gränsen. Ingen resa räknas som Heathrow–Tirana."
+    },
+    {
+      "url": "https://airticketshistory.com/WEB/OATT.htm",
+      "type": "olympic_winter_edition_lead",
+      "result": "Index listar Olympic 27 oktober 1985–29 mars 1986, men inga Tirana-innersidor har verifierats. Motsvarande AirTimes-galleri länkar ett omslag, ingen vinter-PDF i den granskade posten. Återbesök vid Greklandsgenomgången."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/de/interflug.htm",
+      "type": "unresolved_foreign_carrier_timetable",
+      "result": "Tidigare källregister har Interflugs vinteromslag och begränsade förhandssidor. Ingen komplett Tirana-rad har verifierats i denna omgång. Tidigare kandidater och forskningsrader är oförändrade."
+    }
+  ],
+  "unresolved": [
+    "Fullständiga tidtabellsrader till/från Tirana–Rinas för vintern 1985/86 saknas. Utländska bolag behöver kontrolleras i giltiga tidtabeller med veckodagar, lokal tidszon och alla fysiska delsträckstider.",
+    "Flygplatsens bolagslista avser tiden fram till 1960; den får inte användas som en operatörslista för 1986. Albtransport är här ett historiskt institutionsspår, inte en verifierad flygoperatör.",
+    "Reseannonser via Titograd/Skopje avser andra datum och belägger inte flyg vidare till Tirana. Inrikes-, charter-, frakt-, stats-, privat-, militär- och helikoptertrafik samt verkliga överflygningar återstår att undersöka. Noll importerade rörelser betyder inte att ingen trafik förekom."
+  ]
+}

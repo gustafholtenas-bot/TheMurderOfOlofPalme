@@ -1,0 +1,79 @@
+{
+  "batch": 40,
+  "package": "v41",
+  "country": "hu",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 20,
+  "domestic_movements": 0,
+  "international_movements": 20,
+  "new_movements": 4,
+  "endpoint_movements_by_source_airline": {
+    "aeroflot": 11,
+    "malev": 7,
+    "air-france": 2
+  },
+  "endpoint_leg_ids": [
+    "aeroflot-423-SVO-BUD-0315@1986-02-28",
+    "aeroflot-412-BUD-SVO-0355@1986-02-28",
+    "aeroflot-131-SVO-BUD-0825@1986-02-28",
+    "malev-100-BUD-SVO-0800@1986-02-28",
+    "aeroflot-132-BUD-SVO-1020-TU5@1986-02-28",
+    "malev-101-SVO-BUD-1340@1986-02-28",
+    "aeroflot-618-BUD-WAW-1330@1986-02-28",
+    "malev-558-BUD-ORY-1705-d5-b40@1986-02-28",
+    "air-france-559-ORY-BUD-2015-d5-b40@1986-02-28",
+    "aeroflot-424-BUD-SVO-0150@1986-03-01",
+    "aeroflot-407-SVO-BUD-0705@1986-03-01",
+    "aeroflot-131-SVO-BUD-0820@1986-03-01",
+    "malev-100-BUD-SVO-0800@1986-03-01",
+    "aeroflot-407-BUD-ALG-0840@1986-03-01",
+    "aeroflot-132-BUD-SVO-1020-TU3@1986-03-01",
+    "malev-101-SVO-BUD-1340@1986-03-01",
+    "malev-120-BUD-WAW-1200@1986-03-01",
+    "air-france-724-ORY-BUD-1400-d6-b40@1986-03-01",
+    "aeroflot-408-BUD-SVO-1640@1986-03-01",
+    "malev-725-BUD-ORY-1705-d6-b40@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "malev-558-BUD-ORY-1705-d5-b40@1986-02-28",
+    "air-france-559-ORY-BUD-2015-d5-b40@1986-02-28",
+    "air-france-724-ORY-BUD-1400-d6-b40@1986-03-01",
+    "malev-725-BUD-ORY-1705-d6-b40@1986-03-01"
+  ],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Tryckta s. 21 och 63: fyra nonstoprader importeras, AFMA559/MAAF558 fredag samt AFMA724/MAAF725 lördag. AFMA559:s valda fredagsrad gäller 3 januari–28 februari; övriga giltighetsrader hålls isär."
+    },
+    {
+      "url": "https://www.ebay.com/itm/168537782275",
+      "type": "contemporary_cover_and_advertisement",
+      "result": "Två publika bilder visuellt granskade, utan köp. Vinteromslag 27 oktober 1985–29 mars 1986 och uniformreklam, inga avgångssidor. Befintlig omslagskälla kompletteras, utan ny dubblerad utgåvepost."
+    },
+    {
+      "url": "https://collection.sfomuseum.org/objects/1763195461/",
+      "type": "museum_catalog",
+      "result": "SFO Museum, objekt 2014.084.0815, beskriver en Malév-tidtabell från 27 oktober 1985 och anger en bild. Katalogtexten granskad; IIIF-manifestet gick inte att hämta (403). Inga avgångar importeras från museikatalogen."
+    },
+    {
+      "url": "https://www.antikvarium.hu/konyv/malev-menetrend-729785-0",
+      "type": "wrong_season_cover_excluded",
+      "result": "Bokposten nämner 1985, men det lästa omslagsfotot visar 28 oktober 1984–30 mars 1985. Fel vinter; inga tider eller scheman hämtas från posten."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/hu/malev/gal/magal1a80.htm",
+      "type": "edition_index",
+      "result": "Vinterns utgåvepost kontrollerad, utan läsbara innersidor."
+    }
+  ],
+  "unresolved": [
+    "Malévs fullständiga vinterinlaga och ändringar saknas fortfarande. Nya annonsbilder visar omslag och reklam; SFO Museums katalogpost tillför ingen läst tidssida.",
+    "Fler Malév- och utländska förbindelser, eventuellt inrikesflyg samt andra ungerska flygplatser och operatörer behöver inventeras. Tjugo ändpunktsrörelser är ett litet urval, inte full Ungerntäckning.",
+    "Charter, frakt, arbets-/helikopterflyg, privat-, stats- och militärtrafik samt verkliga överflygningar behöver egna daterade underlag. AFMA/MAAF belägger inte faktisk operatör eller genomförande."
+  ]
+}

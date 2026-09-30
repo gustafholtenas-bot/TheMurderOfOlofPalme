@@ -1,0 +1,21 @@
+flight	origin	destination	departure	arrival	days	page	note
+135	RRS	FBU	11:25	12:10	12345	20	NONSTOP; source Oslo code OSL maps to historical Fornebu
+137	RRS	FBU	13:25	14:10	6	20	NONSTOP; source Oslo code OSL maps to historical Fornebu
+134	RRS	TRD	11:55	12:20	6	20	NONSTOP
+136	RRS	TRD	12:40	13:05	12345	20	NONSTOP
+211	TRF	SVG	08:20	09:15	12345	20	NONSTOP; later stops towards Haugesund/Bergen are not this leg
+237	TRF	SVG	14:30	15:25	145	20	NONSTOP; operates Monday Thursday Friday
+231	TRF	SVG	20:20	21:15	12345	20	NONSTOP
+221	SVG	BGO	06:45	07:15	123456	20	NONSTOP
+223	SVG	BGO	07:00	07:30	12345	20	NONSTOP; same flight/time printed as Monday class C and Tuesday-Friday CMB
+271	SVG	BGO	09:20	09:50	12345	20	NONSTOP; weekday flight number differs from weekend
+275	SVG	BGO	09:20	09:50	67	20	NONSTOP; Saturday is in window but Sunday is outside
+233	SVG	BGO	11:15	11:45	12345	20	NONSTOP
+238	HAU	SVG	11:40	12:00	12345	10	NONSTOP
+210	HAU	SVG	18:25	18:45	12345	10	NONSTOP
+070	KRS	FBU	07:55	08:30	123456	11	NONSTOP; same flight/time printed as Monday-Tuesday C and Wednesday-Saturday CMB
+202	KRS	FBU	10:20	10:55	12345	11	NONSTOP
+204	KRS	FBU	11:50	12:25	6	11	NONSTOP
+272	KRS	FBU	12:35	13:10	12345	11	NONSTOP
+274	KRS	FBU	15:05	15:40	6	11	NONSTOP
+052	KRS	FBU	16:50	17:25	12345	11	NONSTOP; same flight/time printed as Monday-Wednesday CMB and Thursday-Friday C

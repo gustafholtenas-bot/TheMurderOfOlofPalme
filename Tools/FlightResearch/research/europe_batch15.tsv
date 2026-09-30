@@ -1,0 +1,69 @@
+source	page	airline	flight	origin	destination	departure	arrival	days	valid_from	valid_to	review_status
+swissair-benelux-19851027	24	swissair	385	DHA	ZRH	01:55	06:05	5	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	24	swissair	851	DUB	ZRH	08:15	11:25	25	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	24	aer-lingus	664	DUB	ZRH	09:10	12:15	36	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	24	swissair	525	DUS	GVA	16:30	17:40	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	24	lufthansa	232	DUS	ZRH	07:35	08:40	123456	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	24	swissair	511	DUS	ZRH	09:35	10:45	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	24	lufthansa	230	DUS	ZRH	18:00	19:05	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	24	swissair	517	DUS	ZRH	20:20	21:30	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	lufthansa	246	FRA	GVA	09:20	10:25	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	lufthansa	248	FRA	GVA	16:40	17:50	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	545	FRA	GVA	21:20	22:30	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	lufthansa	220	FRA	ZRH	09:20	10:15	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	533	FRA	ZRH	10:15	11:10	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	lufthansa	222	FRA	ZRH	13:15	14:10	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	lufthansa	226	FRA	ZRH	17:05	18:00	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	539	FRA	ZRH	19:55	20:50	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	31	GVA	ABJ	12:35	17:30	5	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	256	GVA	ABJ	13:50	18:50	6	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	air-algerie	2631	GVA	ALG	14:50	16:40	2456	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	klm	320	GVA	AMS	10:20	11:45	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	788	GVA	AMS	13:45	15:15	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	klm	318	GVA	AMS	14:15	15:40	6	1985-12-21	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	794	GVA	AMS	18:30	20:00	123457	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	klm	322	GVA	AMS	19:30	20:55	12345	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	314	GVA	ATH-ELLINIKON	11:05	14:50	12456	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	296	GVA	ATH-ELLINIKON	14:00	17:35	6	1986-02-01	1986-03-29	reviewed
+swissair-benelux-19851027	25	olympic	136	GVA	ATH-ELLINIKON	14:30	18:10	12356	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	666	GVA	BCN	13:55	15:15	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	iberia	565	GVA	BCN	18:25	19:40	1257	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	iberia	561	GVA	BCN	18:25	19:40	346	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	951	GVA	BSL	08:50	09:30	12345	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	crossair	975	GVA	BSL	13:25	14:10	123457	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	swissair	956	GVA	BSL	18:50	19:30	1234567	1985-10-27	1986-03-29	reviewed
+swissair-benelux-19851027	25	crossair	979	GVA	BSL	22:50	23:35	123457	1985-10-27	1986-03-29	reviewed
+british-airways-19851027-partial	56-57	british-airways	371	BRU	LHR	08:55	09:00	123456	1985-10-27	1986-03-29	reviewed
+british-airways-19851027-partial	56-57	british-airways	375	BRU	LHR	10:45	10:45	12345	1985-10-27	1986-03-29	reviewed
+british-airways-19851027-partial	56-57	british-airways	377	BRU	LHR	12:45	12:45	1234567	1985-10-27	1986-03-29	reviewed
+british-airways-19851027-partial	56-57	british-airways	379	BRU	LHR	16:45	16:45	123456	1985-10-27	1986-03-29	reviewed
+british-airways-19851027-partial	56-57	british-airways	385	BRU	LHR	19:00	19:00	123457	1985-10-27	1986-03-29	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	223	GLA	DUB	10:05	10:50	123456	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	229	GLA	DUB	19:55	20:40	123457	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	335	LBA	DUB	14:25	15:45	1234567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	193	LPL	DUB	09:25	10:25	12345	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	199	LPL	DUB	20:50	21:50	1234567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	dan-air	771	LGW	DUB	08:00	09:10	12345	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	457	LGW	DUB	19:45	21:00	123457	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	151	LHR	DUB	07:50	09:00	12345	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	804	LHR	DUB	08:10	09:20	36	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	804	LHR	DUB	08:15	09:20	1245	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	153	LHR	DUB	09:25	10:35	123456	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	810	LHR	DUB	10:35	11:45	14567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	157	LHR	DUB	11:00	12:10	1234567	1986-02-28	1986-03-01	candidate
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	814	LHR	DUB	11:55	13:05	1234567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	159	LHR	DUB	13:00	14:10	1234567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	165	LHR	DUB	14:45	15:55	1234567	1986-02-28	1986-03-01	candidate
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	816	LHR	DUB	16:00	17:10	1234567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	169	LHR	DUB	16:45	17:55	123457	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	173	LHR	DUB	17:45	18:55	1234567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	820	LHR	DUB	18:45	19:55	123457	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	830	LHR	DUB	19:25	20:35	123457	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	175	LHR	DUB	20:15	21:25	1234567	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	179	LHR	DUB	21:20	22:30	5	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	iberia	706	AGP	DUB	14:00	15:50	6	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	844	MAN	DUB	08:00	08:45	12345	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	british-airways	846	MAN	DUB	09:50	10:35	6	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	205	MAN	DUB	10:05	10:50	123456	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	aer-lingus	777	MAN	DUB	20:00	20:45	123457	1986-02-28	1986-03-01	reviewed
+dublin-winter-1985	TO DUBLIN FROM Glasgow-Newcastle spread	dan-air	755	NCL	DUB	16:00	17:15	135	1986-02-28	1986-03-01	reviewed

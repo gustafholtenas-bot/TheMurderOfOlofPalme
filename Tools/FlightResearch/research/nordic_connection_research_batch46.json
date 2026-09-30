@@ -1,0 +1,97 @@
+{
+  "package": "v47",
+  "checked_on": "2026-09-29",
+  "rows": [
+    {
+      "code": "SK515",
+      "route": "BGO–LGW",
+      "departure": "07:40",
+      "arrival": "09:25",
+      "days": "1234567",
+      "stops": 1,
+      "page": "5",
+      "reason": "Intermediate arrival/departure and airport not fully timed in reviewed row; not nonstop.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "code": "SK516",
+      "route": "LGW–BGO",
+      "departure": "10:30",
+      "arrival": "14:05",
+      "days": "1234567",
+      "stops": 1,
+      "page": "12",
+      "reason": "Intermediate arrival/departure and airport not fully timed in reviewed row; not nonstop.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "code": "SK518",
+      "route": "LGW–BGO",
+      "departure": "19:45",
+      "arrival": "23:20",
+      "days": "12345-7",
+      "stops": 1,
+      "page": "12",
+      "reason": "Valid to 28 March; one stop, no complete intermediate times. Not a direct return for SK517.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "code": "DA102",
+      "route": "NCL–BGO",
+      "departure": "10:40",
+      "arrival": "13:35",
+      "days": "12345--",
+      "stops": 1,
+      "page": "18",
+      "reason": "NCL–SVG separately timed and imported once. Missing SVG departure prevents SVG–BGO import.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "code": "DA107",
+      "route": "BGO–NCL",
+      "departure": "14:20",
+      "arrival": "15:25",
+      "days": "12345--",
+      "stops": 1,
+      "page": "5",
+      "reason": "SVG–NCL separately timed and imported once. Missing SVG arrival prevents BGO–SVG import.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "code": "DA842",
+      "route": "MAN–FBU",
+      "departure": "09:50",
+      "arrival": "13:30",
+      "days": "12345--",
+      "stops": 1,
+      "page": "15",
+      "reason": "NCL–FBU separately timed and imported once. Missing NCL arrival prevents MAN–NCL import.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    },
+    {
+      "code": "DA843",
+      "route": "FBU–MAN",
+      "departure": "15:20",
+      "arrival": "17:05",
+      "days": "12345--",
+      "stops": 1,
+      "page": "19",
+      "reason": "FBU–NCL separately timed and imported once. Missing NCL departure prevents NCL–MAN import.",
+      "source": "dan-air-19851027-system",
+      "review_status": "research_only",
+      "imported": false
+    }
+  ]
+}

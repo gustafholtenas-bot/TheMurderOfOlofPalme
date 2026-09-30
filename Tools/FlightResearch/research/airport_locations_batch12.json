@@ -1,0 +1,100 @@
+[
+  {
+    "id": "BGO",
+    "name": "Bergen–Flesland",
+    "country": "no",
+    "timezone": "Europe/Oslo",
+    "lat": 60.2934,
+    "lon": 5.21814,
+    "coordinate_source": "https://ourairports.com/airports/ENBR/",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/206172029345"
+    ],
+    "location_note": "Flygfältets ungefärliga kartpunkt; inte terminal, gate eller en belagd flygplansposition 1986."
+  },
+  {
+    "id": "KRS",
+    "name": "Kristiansand–Kjevik",
+    "country": "no",
+    "timezone": "Europe/Oslo",
+    "lat": 58.204201,
+    "lon": 8.08537,
+    "coordinate_source": "https://ourairports.com/airports/ENCN/",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/206172029345"
+    ],
+    "location_note": "Flygfältets ungefärliga kartpunkt; inte terminal, gate eller en belagd flygplansposition 1986."
+  },
+  {
+    "id": "HAU",
+    "name": "Haugesund–Karmøy",
+    "country": "no",
+    "timezone": "Europe/Oslo",
+    "lat": 59.345299,
+    "lon": 5.20836,
+    "coordinate_source": "https://ourairports.com/airports/ENHD/",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/206172029345"
+    ],
+    "location_note": "Flygfältets ungefärliga kartpunkt; inte terminal, gate eller en belagd flygplansposition 1986."
+  },
+  {
+    "id": "RRS",
+    "name": "Røros",
+    "country": "no",
+    "timezone": "Europe/Oslo",
+    "lat": 62.578399658203,
+    "lon": 11.342300415039,
+    "coordinate_source": "https://ourairports.com/airports/ENRO/",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/206172029345"
+    ],
+    "location_note": "Flygfältets ungefärliga kartpunkt; inte terminal, gate eller en belagd flygplansposition 1986."
+  },
+  {
+    "id": "TRF",
+    "name": "Sandefjord–Torp",
+    "country": "no",
+    "timezone": "Europe/Oslo",
+    "lat": 59.186699,
+    "lon": 10.2586,
+    "coordinate_source": "https://ourairports.com/airports/ENTO/",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/206172029345"
+    ],
+    "location_note": "Flygfältets ungefärliga kartpunkt; inte terminal, gate eller en belagd flygplansposition 1986."
+  },
+  {
+    "id": "TRD",
+    "name": "Trondheim–Værnes",
+    "country": "no",
+    "timezone": "Europe/Oslo",
+    "lat": 63.457802,
+    "lon": 10.924,
+    "coordinate_source": "https://ourairports.com/airports/ENVA/",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/206172029345"
+    ],
+    "location_note": "Flygfältets ungefärliga kartpunkt; inte terminal, gate eller en belagd flygplansposition 1986."
+  },
+  {
+    "id": "SVG",
+    "name": "Stavanger–Sola",
+    "country": "no",
+    "timezone": "Europe/Oslo",
+    "lat": 58.876701,
+    "lon": 5.63778,
+    "coordinate_source": "https://ourairports.com/airports/ENZV/",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.ebay.co.uk/itm/206172029345"
+    ],
+    "location_note": "Flygfältets ungefärliga kartpunkt; inte terminal, gate eller en belagd flygplansposition 1986."
+  }
+]

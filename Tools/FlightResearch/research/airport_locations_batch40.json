@@ -1,0 +1,23 @@
+{
+  "package": "v41",
+  "checked_on": "2026-09-28",
+  "method": "Contemporary timetable identifies Ruzyně; OurAirports supplies approximate modern site coordinates only. Existing Orly and Ferihegy objects are unchanged.",
+  "airports": [
+    {
+      "id": "PRG",
+      "name": "Prag–Ruzyně",
+      "country": "cz",
+      "timezone": "Europe/Prague",
+      "lat": 50.100874,
+      "lon": 14.259911,
+      "coordinate_source": "https://ourairports.com/airports/LKPR/",
+      "coordinate_record_id": "LKPR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LKPR/"
+      ],
+      "location_note": "Contemporary Air France timetable printed pages 74 and 81 explicitly identifies Ruzyně, 17 km from Prague. Modern OurAirports coordinates are an approximate marker for that airfield, not a reconstructed 1986 terminal, gate, runway or aircraft position. Czechoslovakia is the historical country; no split into modern Czech and Slovak states is made."
+    }
+  ]
+}

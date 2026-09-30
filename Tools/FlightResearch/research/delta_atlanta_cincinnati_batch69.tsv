@@ -1,0 +1,53 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	delta-1084-AUS-MUELLER-ATL-0635-b69		new_schedule	delta	1084	AUS-MUELLER	ATL	06:35	09:30	0		1234567	0	21		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+2			excluded_connection	delta	981/118	AUS-MUELLER	ATL	07:10	11:12	0		1234567	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+3			excluded_connection	delta	970/790	AUS-MUELLER	ATL	08:40	12:49	0	X7	123456	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+4			excluded_connection	delta	922/280	AUS-MUELLER	ATL	10:20	14:34	0		1234567	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+5	delta-1007-AUS-MUELLER-ATL-1305-b69		new_schedule	delta	1007	AUS-MUELLER	ATL	13:05	16:00	0		1234567	0	21		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+6			excluded_connection	delta	1085/888	AUS-MUELLER	ATL	13:40	17:49	0		1234567	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+7			excluded_connection	delta	1078/748	AUS-MUELLER	ATL	15:10	19:32	0		1234567	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+8			excluded_connection	delta	1036/864	AUS-MUELLER	ATL	16:35	22:09	0	X6	123457	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+9			excluded_connection	delta	1036/874	AUS-MUELLER	ATL	16:35	22:12	0	6	6	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+10			excluded_connection	delta	475/386	AUS-MUELLER	ATL	20:25	00:37	1		1234567	DFW	21		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+11			excluded_connection	delta	1555/805	FWA	ATL	06:55	09:19	0	X7	123456	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; not an uninterrupted segment. Component legs are not inferred.
+12			excluded_through_service	delta	543	FWA	ATL	08:58	11:05	0		1234567	1	88		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+13	delta-252-FWA-ATL-1305-b69		new_schedule	delta	252	FWA	ATL	13:05	14:29	0		1234567	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+14			excluded_through_service	delta	342	FWA	ATL	15:20	17:40	0		1234567	1	88		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+15			excluded_connection	delta	1688/261	FWA	ATL	18:25	22:04	0	X67	12345	CVG	88		delta-19860201	1986-02-01				Printed connection via CVG; not an uninterrupted segment. Component legs are not inferred.
+16			excluded_connection	delta	16/132	HNL	ATL	19:10	09:24	1		1234567	DFW	101		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+17	delta-24-HNL-ATL-2005-b69		new_schedule	delta	24	HNL	ATL	20:05	09:04	1	X15	23467	0	101		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+18	delta-628-LIT-ATL-0720-b69		new_schedule	delta	628	LIT	ATL	07:20	09:34	0		1234567	0	130		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+19			excluded_connection	delta	564/208	LIT	ATL	07:35	10:51	0	X7	123456	MEM	130		delta-19860201	1986-02-01				Printed connection via MEM; not an uninterrupted segment. Component legs are not inferred.
+20	delta-409-LIT-ATL-1030-b69		new_schedule	delta	409	LIT	ATL	10:30	12:44	0		1234567	0	130		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+21			excluded_through_service	delta	718	LIT	ATL	13:00	16:11	0		1234567	1	130		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+22			excluded_connection	delta	1168/305	LIT	ATL	14:21	17:56	0	X6	123457	MEM	130		delta-19860201	1986-02-01				Printed connection via MEM; not an uninterrupted segment. Component legs are not inferred.
+23	delta-1038-LIT-ATL-1715-b69		new_schedule	delta	1038	LIT	ATL	17:15	19:29	0		1234567	0	130		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+24			excluded_connection	delta	1156/1042	LIT	ATL	17:58	21:51	0		1234567	MEM	130		delta-19860201	1986-02-01				Printed connection via MEM; not an uninterrupted segment. Component legs are not inferred.
+25	delta-410-SAT-ATL-0630-b69		new_schedule	delta	410	SAT	ATL	06:30	09:27	0		1234567	0	210		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+26			excluded_connection	delta	389/118	SAT	ATL	07:00	11:12	0		1234567	DFW	210		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+27			excluded_connection	delta	842/790	SAT	ATL	08:35	12:49	0		1234567	DFW	210		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+28			excluded_connection	delta	377/280	SAT	ATL	10:20	14:34	0		1234567	DFW	210		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+29	delta-845-SAT-ATL-1310-b69		new_schedule	delta	845	SAT	ATL	13:10	16:07	0		1234567	0	210		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+30			excluded_connection	delta	939/888	SAT	ATL	13:40	17:49	0		1234567	DFW	210		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+31	delta-1050-SAT-ATL-1640-b69		new_schedule	delta	1050	SAT	ATL	16:40	19:39	0		1234567	0	210		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+32			excluded_connection	delta	902/386	SAT	ATL	20:20	00:37	1		1234567	DFW	210		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+33	delta-445-TOL-ATL-0630-b69		new_schedule	delta	445	TOL	ATL	06:30	07:57	0		1234567	0	234		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+34			excluded_connection	delta	1718/497	TOL	ATL	07:55	11:11	0	X7	123456	CVG	234		delta-19860201	1986-02-01				Printed connection via CVG; not an uninterrupted segment. Component legs are not inferred.
+35			excluded_through_service	delta	252	TOL	ATL	12:15	14:29	0		1234567	1	234		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+36	delta-342-TOL-ATL-1610-b69		new_schedule	delta	342	TOL	ATL	16:10	17:40	0		1234567	0	234		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+37			excluded_connection	delta	1653/261	TOL	ATL	19:35	22:04	0	X6	123457	CVG	234		delta-19860201	1986-02-01				Printed connection via CVG; not an uninterrupted segment. Component legs are not inferred.
+38			excluded_through_service	delta	318	ATL	CVG	06:46	08:37	0		1234567	1	14		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+39	delta-1116-ATL-CVG-1025-b69		new_schedule	delta	1116	ATL	CVG	10:25	11:33	0		1234567	0	14		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+40	delta-354-ATL-CVG-1327-b69		new_schedule	delta	354	ATL	CVG	13:27	14:35	0		1234567	0	14		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+41	delta-324-ATL-CVG-1650-b69		new_schedule	delta	324	ATL	CVG	16:50	17:58	0		1234567	0	14		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+42			excluded_through_service	delta	254	ATL	CVG	16:58	19:04	0		1234567	1	14		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+43			excluded_through_service	delta	288	ATL	CVG	17:09	19:04	0		1234567	1	14		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+44	delta-806-ATL-CVG-2047-b69		new_schedule	delta	806	ATL	CVG	20:47	21:55	0		1234567	0	14		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+45	delta-1140-ATL-CVG-2307-b69		new_schedule	delta	1140	ATL	CVG	23:07	00:10	1		1234567	0	14		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+46	delta-393-CVG-ATL-0645-b69		new_schedule	delta	393	CVG	ATL	06:45	07:51	0	X7	123456	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+47	delta-805-CVG-ATL-0810-b69		new_schedule	delta	805	CVG	ATL	08:10	09:19	0		1234567	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+48			excluded_through_service	delta	497	CVG	ATL	09:20	11:11	0		1234567	1	49		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+49	delta-425-CVG-ATL-1330-b69		new_schedule	delta	425	CVG	ATL	13:30	14:39	0		1234567	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+50			excluded_through_service	delta	475	CVG	ATL	15:45	17:41	0		1234567	1	49		delta-19860201	1986-02-01				Printed stops column 1: end-to-end service includes an intermediate stop and is not a physical nonstop segment.
+51	delta-498-CVG-ATL-1640-b69		new_schedule	delta	498	CVG	ATL	16:40	17:49	0		1234567	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+52	delta-261-CVG-ATL-2055-b69		new_schedule	delta	261	CVG	ATL	20:55	22:04	0		1234567	0	49		delta-19860201	1986-02-01		1986-02-27	1986-03-01	

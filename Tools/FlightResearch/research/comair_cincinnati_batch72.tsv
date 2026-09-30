@@ -1,0 +1,54 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	previous_deferred_batch	decision_note
+1			excluded_through_service	comair	1629	CVG	DTW	06:15	08:00	0	X67	12345	1	50		delta-19860201	1986-02-01				70	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 70.
+2	comair-1710-CVG-DTW-0810-b72		new_schedule	comair	1710	CVG	DTW	08:10	09:20	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	70	Re-reviewed from deferred COMAIR row in batch 70.
+3	comair-1592-CVG-DTW-0931-b72		new_schedule	comair	1592	CVG	DTW	09:31	10:41	0	X7	123456	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	70	Re-reviewed from deferred COMAIR row in batch 70.
+4			excluded_through_service	comair	1608	CVG	DTW	12:30	14:35	0	7	7	1	50		delta-19860201	1986-02-01				70	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 70.
+5			excluded_through_service	comair	1643	CVG	DTW	12:45	14:25	0	X67	12345	1	50		delta-19860201	1986-02-01				70	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 70.
+6	comair-1551-CVG-DTW-1340-b72		new_schedule	comair	1551	CVG	DTW	13:40	14:55	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	70	Re-reviewed from deferred COMAIR row in batch 70.
+7	comair-1564-CVG-DTW-1505-b72		new_schedule	comair	1564	CVG	DTW	15:05	16:25	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	70	Re-reviewed from deferred COMAIR row in batch 70.
+8	comair-1550-CVG-DTW-1645-b72		new_schedule	comair	1550	CVG	DTW	16:45	17:55	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	70	Re-reviewed from deferred COMAIR row in batch 70.
+9	comair-1594-CVG-DTW-1825-b72		new_schedule	comair	1594	CVG	DTW	18:25	19:35	0	X56	12347	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01	70	Re-reviewed from deferred COMAIR row in batch 70.
+10			excluded_through_service	comair	1587	CVG	DTW	19:55	21:50	0	X6	123457	1	50		delta-19860201	1986-02-01				70	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 70.
+11	comair-1650-DTW-CVG-0620-b72		new_schedule	comair	1650	DTW	CVG	06:20	07:37	0	X67	12345	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	71	Re-reviewed from deferred COMAIR row in batch 71.
+12			excluded_through_service	comair	1714	DTW	CVG	11:50	14:20	0	X67	12345	1	73		delta-19860201	1986-02-01				71	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 71.
+13	comair-1617-DTW-CVG-1325-b72		new_schedule	comair	1617	DTW	CVG	13:25	14:35	0	X7	123456	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	71	Re-reviewed from deferred COMAIR row in batch 71.
+14	comair-1552-DTW-CVG-1530-b72		new_schedule	comair	1552	DTW	CVG	15:30	16:45	0	X67	12345	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	71	Re-reviewed from deferred COMAIR row in batch 71.
+15	comair-1623-DTW-CVG-1810-b72		new_schedule	comair	1623	DTW	CVG	18:10	19:20	0	X6	123457	0	73		delta-19860201	1986-02-01		1986-02-27	1986-03-01	71	Re-reviewed from deferred COMAIR row in batch 71. Arrival corrected from deferred research transcription 19:24 to visually confirmed 19:20. No previous schedule or movement existed.
+16			excluded_through_service	comair	1717	DTW	CVG	18:20	20:25	0	5	5	1	73		delta-19860201	1986-02-01				71	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 71.
+17			excluded_through_service	comair	1603	DTW	CVG	20:05	22:20	0	X6	123457	1	73		delta-19860201	1986-02-01				71	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 71.
+18			excluded_through_service	comair	1699	DTW	CVG	20:45	22:50	0	5	5	1	73		delta-19860201	1986-02-01				71	Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred. Re-reviewed from deferred COMAIR row in batch 71.
+19	comair-1591-CVG-MKE-0805-b72		new_schedule	comair	1591	CVG	MKE	08:05	08:40	0	X67	12345	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+20			excluded_through_service	comair	1567	CVG	MKE	12:45	14:10	0	X6	123457	1	51		delta-19860201	1986-02-01					Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+21	comair-1619-CVG-MKE-1500-b72		new_schedule	comair	1619	CVG	MKE	15:00	15:33	0	X6	123457	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+22			excluded_connection	mixed_delta_comair_connection	334/1693	CVG	MKE	15:23	17:55	0	X6	123457	CLE	51		delta-19860201	1986-02-01					Printed connection via CLE; component legs are not inferred.
+23			excluded_through_service	comair	1568	CVG	MKE	16:00	17:15	0	7	7	1	51		delta-19860201	1986-02-01					Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+24	comair-1578-CVG-MKE-1823-b72		new_schedule	comair	1578	CVG	MKE	18:23	18:50	0	X6	123457	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+25			excluded_connection	mixed_delta_comair_connection	706/1539	CVG	MKE	19:30	22:10	0	X6	123457	ORD	51		delta-19860201	1986-02-01					Printed connection via ORD; component legs are not inferred.
+26	comair-1544-MKE-CVG-0625-b72		new_schedule	comair	1544	MKE	CVG	06:25	08:55	0	X67	12345	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+27	comair-1576-MKE-CVG-0900-b72		new_schedule	comair	1576	MKE	CVG	09:00	11:30	0	X7	123456	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+28			excluded_connection	comair	1687/1550	MKE	CVG	11:00	16:20	0	X67	12345	CLE	154		delta-19860201	1986-02-01					Printed connection via CLE; component legs are not inferred.
+29			excluded_through_service	comair	1579	MKE	CVG	11:30	14:30	0	6	6	1	154		delta-19860201	1986-02-01					Printed stops column 1; not an endpoint-to-endpoint nonstop. Intermediate legs are not inferred.
+30			excluded_connection	comair	1589/1655	MKE	CVG	12:25	16:40	0	X67	12345	IND	154		delta-19860201	1986-02-01					Printed connection via IND; component legs are not inferred.
+31			excluded_connection	comair	1568/1545	MKE	CVG	14:30	17:55	0	X67	12345	IND	154		delta-19860201	1986-02-01					Printed connection via IND; component legs are not inferred.
+32	comair-1618-MKE-CVG-1546-b72		new_schedule	comair	1618	MKE	CVG	15:46	18:10	0	X6	123457	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+33	comair-1695-MKE-CVG-1810-b72		new_schedule	comair	1695	MKE	CVG	18:10	20:30	0	X6	123457	0	154		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+34			excluded_connection	mixed_delta_comair_connection	1538/997	MKE	CVG	18:55	22:25	0	X6	123457	ORD	154		delta-19860201	1986-02-01					Printed connection via ORD; component legs are not inferred.
+35	comair-1662-CVG-FWA-0805-b72		new_schedule	comair	1662	CVG	FWA	08:05	08:55	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+36	comair-1630-CVG-FWA-0920-b72		new_schedule	comair	1630	CVG	FWA	09:20	09:59	0	X67	12345	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+37	comair-1674-CVG-FWA-1520-b72		new_schedule	comair	1674	CVG	FWA	15:20	16:05	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+38	comair-1606-CVG-FWA-1830-b72		new_schedule	comair	1606	CVG	FWA	18:30	19:20	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+39	comair-1587-CVG-FWA-1955-b72		new_schedule	comair	1587	CVG	FWA	19:55	20:45	0	X6	123457	0	50		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+40	comair-1555-FWA-CVG-0655-b72		new_schedule	comair	1555	FWA	CVG	06:55	07:37	0	X7	123456	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+41			excluded_connection	mixed_delta_comair_connection	543/1566	FWA	CVG	08:58	11:40	0	X67	12345	IND	88		delta-19860201	1986-02-01					Printed connection via IND; component legs are not inferred.
+42	comair-1579-FWA-CVG-1350-b72		new_schedule	comair	1579	FWA	CVG	13:50	14:30	0	X7	123456	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+43	comair-1675-FWA-CVG-1700-b72		new_schedule	comair	1675	FWA	CVG	17:00	17:50	0	X6	123457	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+44	comair-1688-FWA-CVG-1825-b72		new_schedule	comair	1688	FWA	CVG	18:25	19:10	0	X67	12345	0	88		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+45	comair-1554-CVG-TOL-0926-b72		new_schedule	comair	1554	CVG	TOL	09:26	10:25	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+46	comair-1726-CVG-TOL-1210-b72		new_schedule	comair	1726	CVG	TOL	12:10	13:10	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+47	comair-1713-CVG-TOL-1526-b72		new_schedule	comair	1713	CVG	TOL	15:26	16:26	0		1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+48	comair-1556-CVG-TOL-1825-b72		new_schedule	comair	1556	CVG	TOL	18:25	19:20	0	X6	123457	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+49	comair-1729-CVG-TOL-1959-b72		new_schedule	comair	1729	CVG	TOL	19:59	20:59	0	X6	123457	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+50	comair-1718-TOL-CVG-0755-b72		new_schedule	comair	1718	TOL	CVG	07:55	08:50	0	X7	123456	0	234		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+51	comair-1722-TOL-CVG-1330-b72		new_schedule	comair	1722	TOL	CVG	13:30	14:30	0	X67	12345	0	234		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+52	comair-1577-TOL-CVG-1650-b72		new_schedule	comair	1577	TOL	CVG	16:50	17:50	0		1234567	0	234		delta-19860201	1986-02-01		1986-02-27	1986-03-01		
+53	comair-1653-TOL-CVG-1935-b72		new_schedule	comair	1653	TOL	CVG	19:35	20:30	0	X6	123457	0	234		delta-19860201	1986-02-01		1986-02-27	1986-03-01		

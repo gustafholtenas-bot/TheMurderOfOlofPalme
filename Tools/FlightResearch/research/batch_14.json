@@ -1,0 +1,150 @@
+{
+  "batch": 14,
+  "package": "v15",
+  "checked_on": "2026-09-27",
+  "previous_movements": 975,
+  "new_movements": 7,
+  "withheld_previous_movements": 3,
+  "total_movements": 979,
+  "new_schedules": 7,
+  "new_schedule_ids": [
+    "braathens-211-SVG-HAU-0935",
+    "braathens-211-HAU-BGO-1010",
+    "braathens-237-SVG-HAU-1545",
+    "braathens-237-HAU-BGO-1620",
+    "braathens-271-KRS-SVG-0825",
+    "braathens-273-KRS-SVG-1130",
+    "air-uk-620-HUY-EBJ-1140"
+  ],
+  "withheld_leg_ids": [
+    "casair-500-HUY-MME-0715@1986-02-28",
+    "casair-500-MME-GLA-0750@1986-02-28",
+    "casair-502-MME-GLA-1730@1986-02-28"
+  ],
+  "metadata_only_changes": [
+    "braathens-271-SVG-BGO-0920@1986-02-28: leg_index 1 -> 2; timetable times unchanged"
+  ],
+  "new_airports": [
+    "EBJ"
+  ],
+  "source_files": [
+    {
+      "source": "humberside-19851027",
+      "url": "https://i.ebayimg.com/images/g/bN8AAeSwCxZptD1k/s-l1600.jpg",
+      "reviewed_pages": [
+        "cover"
+      ],
+      "sha256": "0d38c4203a2538f2dd8401f9f065784e62551ead07528e02758e05b8ff0bdb26"
+    },
+    {
+      "source": "humberside-19851027",
+      "url": "https://i.ebayimg.com/images/g/YOEAAeSwd0BptD1l/s-l1600.jpg",
+      "reviewed_pages": [
+        "Flight Departures"
+      ],
+      "sha256": "902de253fea47e0f075bf21b31f9d6d8c5f353315a0c18d7b75b146ed885ec50"
+    },
+    {
+      "source": "humberside-19851027",
+      "url": "https://i.ebayimg.com/images/g/CJkAAeSwcQFptD1k/s-l1600.jpg",
+      "reviewed_pages": [
+        "Airport Services"
+      ],
+      "sha256": "db2a63eebbdc115b4af6860d09cac5168d94a7391a43be8d6863b608f964a2e0"
+    },
+    {
+      "source": "braathens-19851027",
+      "url": "https://i.ebayimg.com/images/g/LOcAAOSwHPhis2Qh/s-l1600.jpg",
+      "reviewed_pages": [
+        "cover"
+      ],
+      "sha256": "187b3eca9ff7247240aa2f5cc3815b29b106570689c42a93651b3aff93fb0efb"
+    },
+    {
+      "source": "braathens-19851027",
+      "url": "https://i.ebayimg.com/images/g/TjMAAOSwUaBis2Qh/s-l1600.jpg",
+      "reviewed_pages": [
+        "20"
+      ],
+      "sha256": "d8125d97f14360e2bb4c21f3017d2e5d976423e5a25e2954f3a6ec311c31dfff"
+    },
+    {
+      "source": "braathens-19851027",
+      "url": "https://i.ebayimg.com/images/g/SVIAAOSw6~Bis2Qh/s-l1600.jpg",
+      "reviewed_pages": [
+        "10",
+        "11"
+      ],
+      "sha256": "be66f02863c60822593419da1b62882a831b17a3078425e3ed633c6eb59dac77"
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "url": "https://i.ebayimg.com/images/g/yesAAeSws35pK0br/s-l1600.jpg",
+      "reviewed_pages": [
+        "front cover"
+      ],
+      "sha256": "546a0ac6de5628ba775fdc32b328bf784376964aad8f65739946ccd4208c6941"
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "url": "https://i.ebayimg.com/images/g/Q6oAAeSwKyFpK0br/s-l1600.jpg",
+      "reviewed_pages": [
+        "10",
+        "11"
+      ],
+      "sha256": "72dab76c7a7ecfa57d723d22f9c46e7cd795da9ba43f08dea5751c50083c2665"
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "url": "https://i.ebayimg.com/images/g/vfMAAeSwD2BpK0br/s-l1600.jpg",
+      "reviewed_pages": [
+        "24"
+      ],
+      "sha256": "b049fd7f01c58ed03e65e2db1e219f9018d31d1e3acf511b2ce56964b11bdd87"
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "url": "https://i.ebayimg.com/images/g/SCIAAeSwcEtpK0bs/s-l1600.jpg",
+      "reviewed_pages": [
+        "network spread"
+      ],
+      "sha256": "718d7e04ec55f713318c002b7ad4ba3a10ef6bfd65fb5a06faef9e71d33b9d70"
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "url": "https://i.ebayimg.com/images/g/ydYAAeSwawlpK0br/s-l1600.jpg",
+      "reviewed_pages": [
+        "29"
+      ],
+      "sha256": "b63f3b7578bbe244324f9bb48f227388e4e1edffb2199c0c7b4a0078c97d83a2"
+    },
+    {
+      "source": "aeroflot-19851027-first",
+      "url": "https://i.ebayimg.com/images/g/z8gAAeSwUGVpK0br/s-l1600.jpg",
+      "reviewed_pages": [
+        "back cover"
+      ],
+      "sha256": "ce06542ce93c0a88cbcb277902384eba643e2e4bdff3038a2e438bc004c5eec4"
+    },
+    {
+      "source": "flyv-1986-june",
+      "url": "https://www.marinehist.dk/FLYV/1986-FLYV.pdf",
+      "reviewed_pages": [
+        "printed 133 / PDF 135"
+      ],
+      "sha256": "cfe5befbfb1984f4aa4a62909c731e3fd59ab1aa1b5d018de4c7bd259e61703c",
+      "note": "Only relevant page visually reviewed; entire yearly volume not read."
+    }
+  ],
+  "nordic_endpoint_movements": 44,
+  "new_nordic_endpoint_movements": 7,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "decisions": [
+    "No inferred stop clock times: every new Braathens endpoint time is printed in the matched columns.",
+    "Casair conflicts remain candidates; published winter cover dates do not resolve the competing clocks.",
+    "UK620 timetable code retained; Air Ecosse takeover dated to 1 April, not backdated.",
+    "Aeroflot network destinations do not create flights or overflight evidence.",
+    "SE-FNZ Halmstad arrival remains unresolved."
+  ]
+}

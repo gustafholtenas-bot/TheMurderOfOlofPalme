@@ -1,0 +1,50 @@
+{
+  "batch": 48,
+  "package": "v49",
+  "checked_on": "2026-09-29",
+  "rows": [
+    {
+      "flights": [
+        "EI157",
+        "EI165"
+      ],
+      "source": "aer-lingus-19851027-winter",
+      "page": "18",
+      "finding": "11:00–12:10 and 14:45–15:55 corroborate the Dublin winter guide, but the existing BA conflict is unresolved. Candidate objects are unchanged and do not animate."
+    },
+    {
+      "flights": [
+        "EI457",
+        "DA771",
+        "EI151",
+        "EI153",
+        "EI159",
+        "EI169",
+        "EI173",
+        "EI175",
+        "EI179",
+        "BA804",
+        "BA810",
+        "BA814",
+        "BA816",
+        "BA820",
+        "BA830",
+        "BA844",
+        "BA846",
+        "EI205",
+        "EI777"
+      ],
+      "source": "aer-lingus-19851027-winter",
+      "page": "18–19",
+      "finding": "Existing London/Manchester-to-Dublin rows checked against the new winter photographs; no duplicate movements added."
+    },
+    {
+      "flights": [
+        "EI644"
+      ],
+      "source": "aer-lingus-19851027-winter",
+      "page": "9",
+      "finding": "Enlarged visual review reads the Cairo connection as Friday 15:15–23:50, EI644–MS884. Its Dublin departure matches the direct Brussels row 15:15–17:45 and Antwerp connection. The provisional 15:35 reading was a transcription error, corrected before import; no source conflict remains for this row."
+    }
+  ]
+}

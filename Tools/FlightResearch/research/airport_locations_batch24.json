@@ -1,0 +1,85 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "LYS",
+      "name": "Lyon–Satolas",
+      "country": "fr",
+      "timezone": "Europe/Paris",
+      "lat": 45.725996,
+      "lon": 5.090139,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "LFLL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.ccomptes.fr/sites/default/files/EzPublish/RAR200802.pdf"
+      ],
+      "location_note": "The contemporary timetable explicitly names Satolas on printed pages 26/43. The court audit identifies Satolas as the same airport later renamed Saint-Exupéry; not Lyon–Bron. Approximate airfield coordinates, not reconstructed 1986 gate or aircraft positions."
+    },
+    {
+      "id": "STN",
+      "name": "London–Stansted",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 51.884998,
+      "lon": 0.235,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGSS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf",
+        "https://www.stanstedairport.com/about-us/london-stansted-airport-and-mag/airport-history/"
+      ],
+      "location_note": "Stansted is explicitly named in the winter timetable. Official airport history identifies the established airfield before the later terminal development. Approximate airfield coordinates, not reconstructed 1986 gate or aircraft positions."
+    },
+    {
+      "id": "SOU",
+      "name": "Southampton–Eastleigh",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 50.950298,
+      "lon": -1.3568,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGHI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf"
+      ],
+      "location_note": "The contemporary timetable explicitly names Eastleigh as Southampton airport on printed page 19. Approximate airfield coordinates, not reconstructed 1986 gate or aircraft positions."
+    },
+    {
+      "id": "EXT",
+      "name": "Exeter",
+      "country": "gb",
+      "timezone": "Europe/London",
+      "lat": 50.734261,
+      "lon": -3.413984,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGTE",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf",
+        "https://exeter-airport.co.uk/about-us/"
+      ],
+      "location_note": "The contemporary timetable names Exeter airport on printed page 10; official airport history corroborates the historic airfield. Approximate airfield coordinates, not reconstructed 1986 gate or aircraft positions."
+    },
+    {
+      "id": "GCI",
+      "name": "Guernsey",
+      "country": "gg",
+      "timezone": "Europe/Guernsey",
+      "lat": 49.435001,
+      "lon": -2.60197,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "EGJB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf",
+        "https://www.airport.gg/node/95"
+      ],
+      "location_note": "Guernsey is explicitly named in the contemporary timetable. Official airport history places the airport at La Villiaze in the Forest since 1939. Approximate airfield coordinates, not reconstructed 1986 gate or aircraft positions."
+    }
+  ],
+  "coordinate_dataset_sha256": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec"
+}

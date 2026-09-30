@@ -1,0 +1,311 @@
+{
+  "package": "v62",
+  "corrections": [
+    {
+      "schedule_id": "southwest-703-LAX-PHX-0730-b59",
+      "before_schedule": {
+        "id": "southwest-703-LAX-PHX-0730-b59",
+        "airline": "southwest",
+        "flight": "703",
+        "origin": "LAX",
+        "destination": "PHX",
+        "departure": "07:30",
+        "arrival": "09:40",
+        "arrival_day_offset": 0,
+        "days": [
+          5
+        ],
+        "valid_from": "1986-02-27",
+        "valid_to": "1986-03-01",
+        "nonstop": true,
+        "review_status": "reviewed",
+        "source": "southwest-19860112",
+        "page": "printed 45",
+        "service_group": "southwest-703-LAX-PHX-b59",
+        "leg_index": 1,
+        "service_day_offset": 0,
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 5, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade.",
+          "en": "Southwest 12 January 1986, printed page 45: red flight number 703, N/S, days 5, local time 07:30–09:40 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 5, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade."
+        }
+      },
+      "after_schedule": {
+        "id": "southwest-703-LAX-PHX-0730-b59",
+        "airline": "southwest",
+        "flight": "703",
+        "origin": "LAX",
+        "destination": "PHX",
+        "departure": "07:30",
+        "arrival": "09:40",
+        "arrival_day_offset": 0,
+        "days": [
+          1,
+          5
+        ],
+        "valid_from": "1986-02-27",
+        "valid_to": "1986-03-01",
+        "nonstop": true,
+        "review_status": "reviewed",
+        "source": "southwest-19860112",
+        "page": "printed 45",
+        "service_group": "southwest-703-LAX-PHX-b59",
+        "leg_index": 1,
+        "service_day_offset": 0,
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 15, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 5 till 15; s. 32 och 45 anger måndag och fredag.",
+          "en": "Southwest 12 January 1986, printed page 45: red flight number 703, N/S, days 15, local time 07:30–09:40 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified. V62: operating days corrected from 5 to 15; pages 32 and 45 show Monday and Friday.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 15, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 5 till 15; s. 32 och 45 anger måndag och fredag."
+        },
+        "corroborating_pages": [
+          "printed 32"
+        ]
+      },
+      "reason": "V62: operating days corrected from 5 to 15; pages 32 and 45 show Monday and Friday.",
+      "window_timing_or_count_changed": false
+    },
+    {
+      "schedule_id": "southwest-717-SAN-PHX-1925-b59",
+      "before_schedule": {
+        "id": "southwest-717-SAN-PHX-1925-b59",
+        "airline": "southwest",
+        "flight": "717",
+        "origin": "SAN",
+        "destination": "PHX",
+        "departure": "19:25",
+        "arrival": "21:25",
+        "arrival_day_offset": 0,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "valid_from": "1986-02-27",
+        "valid_to": "1986-03-01",
+        "nonstop": true,
+        "review_status": "reviewed",
+        "source": "southwest-19860112",
+        "page": "printed 46",
+        "service_group": "southwest-717-SAN-PHX-b59",
+        "leg_index": 1,
+        "service_day_offset": 0,
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 123457, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade.",
+          "en": "Southwest 12 January 1986, printed page 46: red flight number 717, N/S, days 123457, local time 19:25–21:25 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 123457, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade."
+        }
+      },
+      "after_schedule": {
+        "id": "southwest-717-SAN-PHX-1925-b59",
+        "airline": "southwest",
+        "flight": "717",
+        "origin": "SAN",
+        "destination": "PHX",
+        "departure": "19:25",
+        "arrival": "21:25",
+        "arrival_day_offset": 0,
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "valid_from": "1986-02-27",
+        "valid_to": "1986-03-01",
+        "nonstop": true,
+        "review_status": "reviewed",
+        "source": "southwest-19860112",
+        "page": "printed 46",
+        "service_group": "southwest-717-SAN-PHX-b59",
+        "leg_index": 1,
+        "service_day_offset": 0,
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 12345, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 123457 till 12345; s. 46 och 52 anger måndag–fredag.",
+          "en": "Southwest 12 January 1986, printed page 46: red flight number 717, N/S, days 12345, local time 19:25–21:25 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified. V62: operating days corrected from 123457 to 12345; pages 46 and 52 show Monday–Friday.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 12345, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 123457 till 12345; s. 46 och 52 anger måndag–fredag."
+        },
+        "corroborating_pages": [
+          "printed 52"
+        ]
+      },
+      "reason": "V62: operating days corrected from 123457 to 12345; pages 46 and 52 show Monday–Friday.",
+      "window_timing_or_count_changed": false
+    }
+  ],
+  "window_timing_or_count_changed": false,
+  "legs": [
+    {
+      "id": "southwest-717-SAN-PHX-1925-b59@1986-02-27",
+      "before": {
+        "id": "southwest-717-SAN-PHX-1925-b59@1986-02-27",
+        "schedule": "southwest-717-SAN-PHX-1925-b59",
+        "airline": "southwest",
+        "flight": "717",
+        "origin": "SAN",
+        "destination": "PHX",
+        "status": "scheduled",
+        "departure_utc": "1986-02-28T03:25:00Z",
+        "arrival_utc": "1986-02-28T04:25:00Z",
+        "departure_local": "1986-02-27T19:25-08:00",
+        "arrival_local": "1986-02-27T21:25-07:00",
+        "departure_seconds": 18210.0,
+        "arrival_seconds": 21810.0,
+        "source": "southwest-19860112",
+        "page": "printed 46",
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 123457, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade.",
+          "en": "Southwest 12 January 1986, printed page 46: red flight number 717, N/S, days 123457, local time 19:25–21:25 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 123457, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade."
+        },
+        "service_group": "southwest-717-SAN-PHX-b59",
+        "leg_index": 1,
+        "journey": "southwest/southwest-717-SAN-PHX-b59@1986-02-27"
+      },
+      "after": {
+        "id": "southwest-717-SAN-PHX-1925-b59@1986-02-27",
+        "schedule": "southwest-717-SAN-PHX-1925-b59",
+        "airline": "southwest",
+        "flight": "717",
+        "origin": "SAN",
+        "destination": "PHX",
+        "status": "scheduled",
+        "departure_utc": "1986-02-28T03:25:00Z",
+        "arrival_utc": "1986-02-28T04:25:00Z",
+        "departure_local": "1986-02-27T19:25-08:00",
+        "arrival_local": "1986-02-27T21:25-07:00",
+        "departure_seconds": 18210.0,
+        "arrival_seconds": 21810.0,
+        "source": "southwest-19860112",
+        "page": "printed 46",
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 12345, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 123457 till 12345; s. 46 och 52 anger måndag–fredag.",
+          "en": "Southwest 12 January 1986, printed page 46: red flight number 717, N/S, days 12345, local time 19:25–21:25 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified. V62: operating days corrected from 123457 to 12345; pages 46 and 52 show Monday–Friday.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 12345, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 123457 till 12345; s. 46 och 52 anger måndag–fredag."
+        },
+        "service_group": "southwest-717-SAN-PHX-b59",
+        "leg_index": 1,
+        "journey": "southwest/southwest-717-SAN-PHX-b59@1986-02-27"
+      },
+      "changed_fields": [
+        "notes"
+      ]
+    },
+    {
+      "id": "southwest-703-LAX-PHX-0730-b59@1986-02-28",
+      "before": {
+        "id": "southwest-703-LAX-PHX-0730-b59@1986-02-28",
+        "schedule": "southwest-703-LAX-PHX-0730-b59",
+        "airline": "southwest",
+        "flight": "703",
+        "origin": "LAX",
+        "destination": "PHX",
+        "status": "scheduled",
+        "departure_utc": "1986-02-28T15:30:00Z",
+        "arrival_utc": "1986-02-28T16:40:00Z",
+        "departure_local": "1986-02-28T07:30-08:00",
+        "arrival_local": "1986-02-28T09:40-07:00",
+        "departure_seconds": 61710.0,
+        "arrival_seconds": 65910.0,
+        "source": "southwest-19860112",
+        "page": "printed 45",
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 5, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade.",
+          "en": "Southwest 12 January 1986, printed page 45: red flight number 703, N/S, days 5, local time 07:30–09:40 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 5, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade."
+        },
+        "service_group": "southwest-703-LAX-PHX-b59",
+        "leg_index": 1,
+        "journey": "southwest/southwest-703-LAX-PHX-b59@1986-02-28"
+      },
+      "after": {
+        "id": "southwest-703-LAX-PHX-0730-b59@1986-02-28",
+        "schedule": "southwest-703-LAX-PHX-0730-b59",
+        "airline": "southwest",
+        "flight": "703",
+        "origin": "LAX",
+        "destination": "PHX",
+        "status": "scheduled",
+        "departure_utc": "1986-02-28T15:30:00Z",
+        "arrival_utc": "1986-02-28T16:40:00Z",
+        "departure_local": "1986-02-28T07:30-08:00",
+        "arrival_local": "1986-02-28T09:40-07:00",
+        "departure_seconds": 61710.0,
+        "arrival_seconds": 65910.0,
+        "source": "southwest-19860112",
+        "page": "printed 45",
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 15, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 5 till 15; s. 32 och 45 anger måndag och fredag.",
+          "en": "Southwest 12 January 1986, printed page 45: red flight number 703, N/S, days 15, local time 07:30–09:40 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified. V62: operating days corrected from 5 to 15; pages 32 and 45 show Monday and Friday.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 45: rött flygnummer 703, N/S, dagar 15, lokal tid 07:30–09:40 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 5 till 15; s. 32 och 45 anger måndag och fredag."
+        },
+        "service_group": "southwest-703-LAX-PHX-b59",
+        "leg_index": 1,
+        "journey": "southwest/southwest-703-LAX-PHX-b59@1986-02-28"
+      },
+      "changed_fields": [
+        "notes"
+      ]
+    },
+    {
+      "id": "southwest-717-SAN-PHX-1925-b59@1986-02-28",
+      "before": {
+        "id": "southwest-717-SAN-PHX-1925-b59@1986-02-28",
+        "schedule": "southwest-717-SAN-PHX-1925-b59",
+        "airline": "southwest",
+        "flight": "717",
+        "origin": "SAN",
+        "destination": "PHX",
+        "status": "scheduled",
+        "departure_utc": "1986-03-01T03:25:00Z",
+        "arrival_utc": "1986-03-01T04:25:00Z",
+        "departure_local": "1986-02-28T19:25-08:00",
+        "arrival_local": "1986-02-28T21:25-07:00",
+        "departure_seconds": 104610.0,
+        "arrival_seconds": 108210.0,
+        "source": "southwest-19860112",
+        "page": "printed 46",
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 123457, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade.",
+          "en": "Southwest 12 January 1986, printed page 46: red flight number 717, N/S, days 123457, local time 19:25–21:25 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 123457, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade."
+        },
+        "service_group": "southwest-717-SAN-PHX-b59",
+        "leg_index": 1,
+        "journey": "southwest/southwest-717-SAN-PHX-b59@1986-02-28"
+      },
+      "after": {
+        "id": "southwest-717-SAN-PHX-1925-b59@1986-02-28",
+        "schedule": "southwest-717-SAN-PHX-1925-b59",
+        "airline": "southwest",
+        "flight": "717",
+        "origin": "SAN",
+        "destination": "PHX",
+        "status": "scheduled",
+        "departure_utc": "1986-03-01T03:25:00Z",
+        "arrival_utc": "1986-03-01T04:25:00Z",
+        "departure_local": "1986-02-28T19:25-08:00",
+        "arrival_local": "1986-02-28T21:25-07:00",
+        "departure_seconds": 104610.0,
+        "arrival_seconds": 108210.0,
+        "source": "southwest-19860112",
+        "page": "printed 46",
+        "notes": {
+          "sv": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 12345, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 123457 till 12345; s. 46 och 52 anger måndag–fredag.",
+          "en": "Southwest 12 January 1986, printed page 46: red flight number 717, N/S, days 12345, local time 19:25–21:25 on the same calendar day. Page footers define Monday 1 through Sunday 7 and distinguish red Southwest numbers from blue Muse Air numbers. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 and Central Time UTC−6. Arrival-day offset is explicit; an earlier western destination clock does not imply the next day. Denver denotes Stapleton, Austin Mueller, Las Vegas McCarran. Scheduled service, not confirmed operation or actual flight path. Only explicit N/S rows; no connections or intermediate stops reinterpreted. Individual aircraft and later amendments are unverified. V62: operating days corrected from 123457 to 12345; pages 46 and 52 show Monday–Friday.",
+          "en_source": "Southwest 12 januari 1986, tryckt s. 46: rött flygnummer 717, N/S, dagar 12345, lokal tid 19:25–21:25 samma kalenderdag. Sidfoten anger 1=måndag–7=söndag och skiljer röda Southwest-nummer från blå Muse Air-nummer. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Arizona/Mountain Time UTC−7, Pacific Time UTC−8 och Central Time UTC−6. Datumförskjutning är explicit; en tidigare ankomstklocka i väst betyder inte nästa dag. Denver avser Stapleton, Austin Mueller, Las Vegas McCarran. Planerad trafik, inte belagt genomförande eller verklig flygbana. Endast uttryckliga N/S-rader; inga anslutningar eller mellanlandningar omtolkas. Individuella flygplan och senare ändringsblad är inte verifierade. V62: trafikdagar rättade från 123457 till 12345; s. 46 och 52 anger måndag–fredag."
+        },
+        "service_group": "southwest-717-SAN-PHX-b59",
+        "leg_index": 1,
+        "journey": "southwest/southwest-717-SAN-PHX-b59@1986-02-28"
+      },
+      "changed_fields": [
+        "notes"
+      ]
+    }
+  ],
+  "historical_research_snapshots_preserved": true
+}

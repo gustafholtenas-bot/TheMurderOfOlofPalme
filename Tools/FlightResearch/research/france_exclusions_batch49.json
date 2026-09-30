@@ -1,0 +1,30 @@
+{
+  "batch": 49,
+  "package": "v50",
+  "checked_on": "2026-09-29",
+  "new_candidate_schedules": 0,
+  "new_research_only_schedules": 0,
+  "examples": [
+    {
+      "route": "BOD–BSL",
+      "page": "11",
+      "reason": "Via Paris with two flight numbers; no additional nonstop Bordeaux–Basel movement is created."
+    },
+    {
+      "route": "NCE–SXB via LYS",
+      "page": "32",
+      "reason": "The 07:05 and 17:05 itineraries connect at Lyon. Their separately timed direct legs may exist, but the through itinerary is not a third flight."
+    },
+    {
+      "route": "SXB–MRS via LYS",
+      "page": "46–47",
+      "reason": "The 06:50 and 19:45 connecting itineraries do not create additional nonstop Strasbourg–Marseille movements. The separately timed 18:35 direct row is included."
+    },
+    {
+      "route": "other days / bus rows",
+      "page": "4–5,42,51",
+      "reason": "Days outside Friday/Saturday and aircraft-code N ground transfers are excluded. No colour or operating-day extrapolation beyond the import dates."
+    }
+  ],
+  "earlier_conflicts": "All ten Air Inter candidate schedules from batch29 remain unchanged; all 21 catalog candidates are preserved."
+}

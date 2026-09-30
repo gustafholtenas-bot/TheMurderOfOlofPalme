@@ -1,0 +1,98 @@
+{
+  "batch": 45,
+  "package": "v46",
+  "checked_on": "2026-09-29",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2357,
+  "new_schedules": 12,
+  "new_schedule_ids": [
+    "air-france-720-CDG-SVO-1025-d5-b45",
+    "air-france-720-CDG-SVO-0900-d6-b45",
+    "air-france-721-SVO-CDG-1725-d5-b45",
+    "air-france-721-SVO-CDG-1555-d6-b45",
+    "aeroflot-251-SVO-CDG-0930-d5-b45",
+    "aeroflot-251-SVO-CDG-0840-d6-b45",
+    "aeroflot-252-CDG-SVO-1225-d5-b45",
+    "aeroflot-252-CDG-SVO-1150-d6-b45",
+    "air-france-270-CDG-SVO-1135-d6-b45",
+    "air-france-270-SVO-NRT-1825-d6-b45",
+    "air-france-700-CDG-KBP-1355-d6-b45",
+    "aeroflot-644-CDG-LED-1450-d6-b45"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_excluded_rows": 2,
+  "new_airports": [
+    "KBP"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "aeroflot-domestic-archive-index"
+  ],
+  "updated_source_ids": [
+    "air-france-19851027-no25"
+  ],
+  "unchanged_previous_movements": 2357,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "se",
+  "reviewed_countries_this_batch": [
+    "su"
+  ],
+  "europe_first_pass_complete": true,
+  "new_movements": 12,
+  "total_movements": 2369,
+  "new_leg_ids": [
+    "aeroflot-251-SVO-CDG-0930-d5-b45@1986-02-28",
+    "air-france-720-CDG-SVO-1025-d5-b45@1986-02-28",
+    "aeroflot-252-CDG-SVO-1225-d5-b45@1986-02-28",
+    "air-france-721-SVO-CDG-1725-d5-b45@1986-02-28",
+    "aeroflot-251-SVO-CDG-0840-d6-b45@1986-03-01",
+    "air-france-720-CDG-SVO-0900-d6-b45@1986-03-01",
+    "air-france-270-CDG-SVO-1135-d6-b45@1986-03-01",
+    "aeroflot-252-CDG-SVO-1150-d6-b45@1986-03-01",
+    "air-france-700-CDG-KBP-1355-d6-b45@1986-03-01",
+    "air-france-721-SVO-CDG-1555-d6-b45@1986-03-01",
+    "aeroflot-644-CDG-LED-1450-d6-b45@1986-03-01",
+    "air-france-270-SVO-NRT-1825-d6-b45@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "aeroflot": 5,
+    "air-france": 7
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "CDG",
+      "KBP"
+    ],
+    [
+      "CDG",
+      "LED"
+    ],
+    [
+      "CDG",
+      "SVO"
+    ],
+    [
+      "SVO",
+      "CDG"
+    ],
+    [
+      "SVO",
+      "NRT"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 641,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1645,
+    "animated_airlines": 47,
+    "scheduled_movements": 2368,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

@@ -1,0 +1,197 @@
+{
+  "batch": 8,
+  "package": "v09",
+  "checked_on": "2026-09-26",
+  "previous_movements": 699,
+  "new_schedules": 37,
+  "new_schedule_ids": [
+    "panam-98-LHR-AMS-0955",
+    "panam-102-LHR-BRU-1000",
+    "panam-100-LHR-FRA-0830",
+    "panam-122-LHR-FRA-1335",
+    "panam-124-LHR-FRA-1335",
+    "panam-2-LHR-HAM-1010",
+    "panam-121-LHR-LAX-1000",
+    "panam-99-LHR-MIA-1130",
+    "panam-106-LHR-MUC-RIEM-0755",
+    "panam-101-LHR-JFK-1100",
+    "panam-1-LHR-JFK-1300",
+    "panam-103-LHR-JFK-1800",
+    "panam-125-LHR-SFO-1025",
+    "panam-125-LHR-SEA-1025",
+    "panam-107-LHR-IAD-1345",
+    "panam-61-MUC-RIEM-FRA-0805",
+    "panam-1-MUC-RIEM-LHR-1100",
+    "panam-77-MUC-RIEM-JFK-1135",
+    "panam-72-JFK-FRA-1830",
+    "panam-66-JFK-FRA-2100",
+    "panam-100-JFK-LHR-1000",
+    "panam-2-JFK-LHR-1900",
+    "panam-102-JFK-LHR-2100",
+    "panam-76-JFK-MUC-RIEM-1930",
+    "panam-90-JFK-ZRH-2015",
+    "panam-150-LAX-FRA-1520",
+    "panam-120-LAX-LHR-1830",
+    "panam-91-JFK-LAX-1600",
+    "panam-90-LAX-JFK-1030",
+    "panam-188-JFK-DKR-2145",
+    "panam-188-DKR-ROB-1100",
+    "panam-188-ROB-LOS-1405",
+    "panam-188-LOS-NBO-1830",
+    "panam-189-NBO-LOS-1715",
+    "panam-189-LOS-ROB-2120",
+    "panam-189-ROB-DKR-2350",
+    "panam-189-DKR-JFK-0245"
+  ],
+  "updated_schedule_ids": [
+    "panam-61-FRA-IAD-1400",
+    "panam-66-FRA-KHI-1155",
+    "panam-103-FRA-LHR-1700",
+    "panam-107-FRA-LHR-1230",
+    "panam-72-FRA-WAW-1205"
+  ],
+  "new_airports": [
+    "AMS",
+    "MIA",
+    "SEA",
+    "SFO",
+    "DKR",
+    "ROB",
+    "LOS"
+  ],
+  "new_countries": [
+    "sn",
+    "lr",
+    "ng"
+  ],
+  "source_images": [
+    {
+      "printed_page": "33",
+      "image_id": 37266,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37266/full/2400,/0/default.jpg",
+      "sha256": "51b583ea3a67ce26c7f0e5da37216d9f4d726442264918e54c153c96ee5b48bb"
+    },
+    {
+      "printed_page": "56",
+      "image_id": 37289,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37289/full/2400,/0/default.jpg",
+      "sha256": "1ceceb607196e0a4c27186cb3cf411e1ec879835e952637e799337e627076d33"
+    },
+    {
+      "printed_page": "57",
+      "image_id": 37290,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37290/full/2400,/0/default.jpg",
+      "sha256": "5ec49307c3245324227dc648c88ed4764b442952477915116de4e5da5e4a33d9"
+    },
+    {
+      "printed_page": "58",
+      "image_id": 37291,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37291/full/2400,/0/default.jpg",
+      "sha256": "3837b746525e9a8b6261d9a29a6ae0c43874b543bd94675222246f8945570cfe"
+    },
+    {
+      "printed_page": "59",
+      "image_id": 37292,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37292/full/2400,/0/default.jpg",
+      "sha256": "c865f5d640366dc93f112d2ab6496dd55a9d642c76098e377a472c38668384c2"
+    },
+    {
+      "printed_page": "66",
+      "image_id": 37301,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37301/full/2400,/0/default.jpg",
+      "sha256": "e2ae0a789f352c1df08f5779800de81677cfc9d67eff58826024ba4b34ae2705"
+    },
+    {
+      "printed_page": "68",
+      "image_id": 37303,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37303/full/2400,/0/default.jpg",
+      "sha256": "29362cc7673cac6da388363f69c3fe05a28a57f0c9aa919c8b11c6957e2b9ae8"
+    },
+    {
+      "printed_page": "71",
+      "image_id": 37306,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37306/full/2400,/0/default.jpg",
+      "sha256": "6701121b5bbaaddbc72242780055185a3c10fc9e4b7850a4b57fe74aeefbab9f"
+    },
+    {
+      "printed_page": "72",
+      "image_id": 37307,
+      "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37307/full/2200,/0/default.jpg",
+      "sha256": "4ce03e03eacb528302a335242fc6bcd28d7f4c3a07b8700e455c773790ea5c20"
+    }
+  ],
+  "notes": [
+    "Primary scans visually reviewed; OCR was only a search aid.",
+    "PA121 LHR–LAX gains Saturday from 1 March; PA120 LAX–LHR likewise gains Saturday, but that departure is outside the UTC window.",
+    "PA125 LHR–SFO is nonstop on Saturday; Friday is via Seattle, so the Friday row imported here is LHR–SEA only.",
+    "PA55 LHR–DTW starts 20 March and is not imported.",
+    "PA188 is split into four physical legs. PA189 is also transcribed as four; its last two do not overlap the window.",
+    "Grouped flight numbers describe journeys, not verified aircraft identities.",
+    "No source scans redistributed; no actual-operation claims added.",
+    "The existing calendar test now selects the FRA–LAX route explicitly; new LAX routes have their own operating days."
+  ],
+  "movements": 759,
+  "new_scheduled_movements": 60,
+  "new_movement_records": 0,
+  "coverage": {
+    "registered_airlines": 72,
+    "registered_countries": 59,
+    "reviewed_schedules": 534,
+    "animated_airlines": 14,
+    "scheduled_movements": 758,
+    "confirmed_movements": 1
+  },
+  "new_movements_by_operator": {
+    "panam": 60
+  },
+  "new_directed_pairs": 28,
+  "new_movements_by_schedule": {
+    "panam-1-LHR-JFK-1300": 2,
+    "panam-1-MUC-RIEM-LHR-1100": 2,
+    "panam-100-JFK-LHR-1000": 2,
+    "panam-100-LHR-FRA-0830": 2,
+    "panam-101-LHR-JFK-1100": 2,
+    "panam-102-JFK-LHR-2100": 2,
+    "panam-102-LHR-BRU-1000": 2,
+    "panam-103-LHR-JFK-1800": 3,
+    "panam-106-LHR-MUC-RIEM-0755": 2,
+    "panam-107-LHR-IAD-1345": 2,
+    "panam-120-LAX-LHR-1830": 1,
+    "panam-121-LHR-LAX-1000": 2,
+    "panam-122-LHR-FRA-1335": 1,
+    "panam-124-LHR-FRA-1335": 1,
+    "panam-125-LHR-SEA-1025": 1,
+    "panam-125-LHR-SFO-1025": 1,
+    "panam-150-LAX-FRA-1520": 1,
+    "panam-188-DKR-ROB-1100": 1,
+    "panam-188-JFK-DKR-2145": 1,
+    "panam-188-LOS-NBO-1830": 1,
+    "panam-188-ROB-LOS-1405": 1,
+    "panam-189-LOS-ROB-2120": 1,
+    "panam-189-NBO-LOS-1715": 1,
+    "panam-2-JFK-LHR-1900": 2,
+    "panam-2-LHR-HAM-1010": 2,
+    "panam-61-MUC-RIEM-FRA-0805": 1,
+    "panam-66-JFK-FRA-2100": 2,
+    "panam-72-JFK-FRA-1830": 2,
+    "panam-76-JFK-MUC-RIEM-1930": 2,
+    "panam-77-MUC-RIEM-JFK-1135": 2,
+    "panam-90-JFK-ZRH-2015": 2,
+    "panam-90-LAX-JFK-1030": 3,
+    "panam-91-JFK-LAX-1600": 3,
+    "panam-98-LHR-AMS-0955": 2,
+    "panam-99-LHR-MIA-1130": 2
+  },
+  "validation": {
+    "python_tests_passed": 20,
+    "flight_generation_check": "passed",
+    "country_index_check": "passed",
+    "stock_market_validation": "passed",
+    "prior_699_timings_and_statuses_preserved": "passed",
+    "month_boundary_exceptions": "passed",
+    "africa_stopovers_and_utc_overlap": "passed",
+    "new_translation_source_texts": "passed",
+    "unreal_build": "not_available",
+    "visual_game_test": "not_run"
+  }
+}

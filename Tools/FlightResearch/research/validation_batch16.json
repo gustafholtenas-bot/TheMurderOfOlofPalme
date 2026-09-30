@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "package": "v17",
+  "checked_on": "2026-09-27",
+  "checks": [
+    {
+      "name": "flight_tests",
+      "exit_code": 0,
+      "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 1.646s\n\nOK\n"
+    },
+    {
+      "name": "generated_flights",
+      "exit_code": 0,
+      "output": "{\"registered_airlines\": 79, \"registered_countries\": 63, \"reviewed_schedules\": 760, \"animated_airlines\": 29, \"scheduled_movements\": 1134, \"confirmed_movements\": 1}\n"
+    },
+    {
+      "name": "country_index",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "stock_market",
+      "exit_code": 0,
+      "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+    }
+  ],
+  "unreal_build_run": false,
+  "unreal_runtime_tested": false,
+  "data_audit": {
+    "total_movements": 1135,
+    "new_movements": 55,
+    "new_routes": 23,
+    "new_schedules": 23,
+    "total_reviewed_schedules": 760,
+    "unchanged_previous_movements": 1079,
+    "corrected_previous_movements": 1,
+    "same_flight_number_overlap_conflicts_involving_new_movements": [],
+    "nordic_movements_unchanged": 44,
+    "protected_code_and_stock_files_unchanged": 22,
+    "new_flights_by_schedule": {
+      "northwest-1-LAX-NRT-1235": 3,
+      "northwest-1-TPA-LAX-0830": 2,
+      "northwest-10-NRT-HNL-2130": 2,
+      "northwest-17-JFK-NRT-1100": 3,
+      "northwest-18-NRT-JFK-1700": 2,
+      "northwest-2-LAX-TPA-1340": 3,
+      "northwest-2-NRT-LAX-1635": 2,
+      "northwest-27-DFW-SFO-0900": 2,
+      "northwest-27-SFO-NRT-1155": 3,
+      "northwest-28-NRT-SFO-2055": 2,
+      "northwest-28-SFO-DFW-1515": 2,
+      "northwest-3-DCA-ORD-1000": 2,
+      "northwest-3-ORD-NRT-1150": 3,
+      "northwest-4-NRT-ORD-1645": 2,
+      "northwest-4-ORD-DCA-1540": 3,
+      "northwest-7-DTW-MSP-0940": 2,
+      "northwest-7-MSP-SEA-1110": 2,
+      "northwest-7-PHL-DTW-0710": 2,
+      "northwest-7-SEA-NRT-1340": 3,
+      "northwest-8-MSP-PHL-1730": 2,
+      "northwest-8-NRT-SEA-1800": 2,
+      "northwest-8-SEA-MSP-1130": 3,
+      "northwest-9-HNL-NRT-1105": 3
+    }
+  }
+}

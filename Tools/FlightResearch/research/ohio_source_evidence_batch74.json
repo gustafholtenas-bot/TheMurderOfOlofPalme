@@ -1,0 +1,72 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    49,
+    50,
+    52,
+    53,
+    67
+  ],
+  "legend_printed_page": 4,
+  "airport_codes_printed_page": 260,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "49": 27,
+    "50": 28,
+    "52": 29,
+    "53": 29,
+    "67": 36,
+    "260": 133
+  },
+  "new_airports": [
+    "CLE",
+    "DAY"
+  ],
+  "existing_airport_ids": [
+    "CVG"
+  ],
+  "existing_airport_records_modified": false,
+  "new_airport_evidence": {
+    "CLE": {
+      "historical_identity": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+      "historical_identity_printed_page": 260,
+      "historical_name": "Cleveland / Cleveland Hopkins International (1986)",
+      "airport_history_url": "https://www.clevelandairport.com/about-cle/cle-history",
+      "coordinate_url": "https://ourairports.com/airports/KCLE/",
+      "lat": 41.411701,
+      "lon": -81.8498,
+      "timezone": "America/New_York",
+      "coordinates_are_approximate_airfield_markers": true
+    },
+    "DAY": {
+      "historical_identity": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+      "historical_identity_printed_page": 260,
+      "historical_name": "Dayton International (1986)",
+      "airport_history_url": "https://flydayton.com/day-airport-facts/",
+      "coordinate_url": "https://ourairports.com/airports/KDAY/",
+      "lat": 39.902401,
+      "lon": -84.219398,
+      "timezone": "America/New_York",
+      "coordinates_are_approximate_airfield_markers": true
+    }
+  },
+  "notes": [
+    "Visual scans determine accepted fields; OCR only assists navigation.",
+    "COMAIR is assigned by the page-4 1525–1749 flight range. Mainline flights 1112,334,1164,1101,271,479 remain Delta.",
+    "Each direction read independently. No accepted row has a dated footnote. All arrivals same local day.",
+    "CVG/CLE/DAY UTC−5 in this window.",
+    "CVG–DAY 1657 operates Sunday only and contributes no movements.",
+    "CLE–CVG 1640 and DAY–CVG 1682 operate Saturday only; one movement each.",
+    "CVG–CLE 1112 is 08:03–08:50, nonstop; CVG–CLE 1655 is 16:55–18:05, nonstop.",
+    "CVG–DAY 1642 is 15:19–15:49; DAY–CLE 1596 is 13:30–14:30.",
+    "Source rows marked one stop are retained in research but not imported as nonstop. Explicit component legs are separately sourced where available.",
+    "Existing and new COMAIR/Delta movements checked for same-flight-number overlaps; service groups kept separate.",
+    "Edition end date and later amendments unverified; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

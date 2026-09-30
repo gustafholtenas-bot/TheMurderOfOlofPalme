@@ -1,0 +1,49 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    117,
+    155,
+    170,
+    179,
+    206,
+    238
+  ],
+  "footnotes_printed_pages": [],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "117": 61,
+    "155": 80,
+    "170": 88,
+    "179": 92,
+    "206": 106,
+    "238": 122
+  },
+  "new_airports": [],
+  "existing_airport_ids": [
+    "ATL",
+    "MCI",
+    "MSP",
+    "MSY",
+    "OKC",
+    "STL",
+    "TUL"
+  ],
+  "airport_records_modified": false,
+  "notes": [
+    "Visual scans determine accepted fields; OCR is not authoritative.",
+    "All return times independently read; not inferred from outbound flights.",
+    "MSP205 and STL1174 have frequency X7 (except Sunday); all other accepted rows are daily.",
+    "All accepted arrivals are on the same local calendar day.",
+    "All six origins CST UTC−6, Atlanta EST UTC−5.",
+    "12 connecting itineraries via DFW/MEM retained only as research rows.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

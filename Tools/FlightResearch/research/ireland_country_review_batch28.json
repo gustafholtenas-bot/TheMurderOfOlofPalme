@@ -1,0 +1,116 @@
+{
+  "batch": 28,
+  "package": "v29",
+  "country": "ie",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval i landkön; inte en fullständig operatörs- eller trafikinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 46,
+  "domestic_movements": 0,
+  "international_movements": 46,
+  "new_movements": 6,
+  "endpoint_movements_by_source_airline": {
+    "aer-lingus": 28,
+    "british-airways": 12,
+    "dan-air": 2,
+    "swissair": 1,
+    "air-france": 2,
+    "iberia": 1
+  },
+  "endpoint_leg_ids": [
+    "aer-lingus-151-LHR-DUB-0750@1986-02-28",
+    "british-airways-844-MAN-DUB-0800@1986-02-28",
+    "dan-air-771-LGW-DUB-0800@1986-02-28",
+    "aer-lingus-522-DUB-CDG-0805@1986-02-28",
+    "british-airways-804-LHR-DUB-0815@1986-02-28",
+    "swissair-851-DUB-ZRH-0815@1986-02-28",
+    "aer-lingus-153-LHR-DUB-0925@1986-02-28",
+    "aer-lingus-193-LPL-DUB-0925@1986-02-28",
+    "aer-lingus-205-MAN-DUB-1005@1986-02-28",
+    "aer-lingus-223-GLA-DUB-1005@1986-02-28",
+    "aer-lingus-523-CDG-DUB-1125@1986-02-28",
+    "british-airways-810-LHR-DUB-1035@1986-02-28",
+    "british-airways-814-LHR-DUB-1155@1986-02-28",
+    "aer-lingus-159-LHR-DUB-1300@1986-02-28",
+    "aer-lingus-335-LBA-DUB-1425@1986-02-28",
+    "air-france-968-CDG-DUB-1700@1986-02-28",
+    "british-airways-816-LHR-DUB-1600@1986-02-28",
+    "dan-air-755-NCL-DUB-1600@1986-02-28",
+    "aer-lingus-169-LHR-DUB-1645@1986-02-28",
+    "aer-lingus-173-LHR-DUB-1745@1986-02-28",
+    "air-france-969-DUB-CDG-1825@1986-02-28",
+    "british-airways-820-LHR-DUB-1845@1986-02-28",
+    "british-airways-830-LHR-DUB-1925@1986-02-28",
+    "aer-lingus-457-LGW-DUB-1945@1986-02-28",
+    "aer-lingus-229-GLA-DUB-1955@1986-02-28",
+    "aer-lingus-777-MAN-DUB-2000@1986-02-28",
+    "aer-lingus-175-LHR-DUB-2015@1986-02-28",
+    "aer-lingus-199-LPL-DUB-2050@1986-02-28",
+    "aer-lingus-179-LHR-DUB-2120@1986-02-28",
+    "aer-lingus-522-DUB-CDG-0805@1986-03-01",
+    "british-airways-804-LHR-DUB-0810@1986-03-01",
+    "aer-lingus-664-DUB-ZRH-0910@1986-03-01",
+    "aer-lingus-153-LHR-DUB-0925@1986-03-01",
+    "british-airways-846-MAN-DUB-0950@1986-03-01",
+    "aer-lingus-205-MAN-DUB-1005@1986-03-01",
+    "aer-lingus-223-GLA-DUB-1005@1986-03-01",
+    "aer-lingus-523-CDG-DUB-1125@1986-03-01",
+    "british-airways-810-LHR-DUB-1035@1986-03-01",
+    "british-airways-814-LHR-DUB-1155@1986-03-01",
+    "aer-lingus-159-LHR-DUB-1300@1986-03-01",
+    "iberia-706-AGP-DUB-1400@1986-03-01",
+    "aer-lingus-335-LBA-DUB-1425@1986-03-01",
+    "british-airways-816-LHR-DUB-1600@1986-03-01",
+    "aer-lingus-173-LHR-DUB-1745@1986-03-01",
+    "aer-lingus-175-LHR-DUB-2015@1986-03-01",
+    "aer-lingus-199-LPL-DUB-2050@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "aer-lingus-522-DUB-CDG-0805@1986-02-28",
+    "aer-lingus-523-CDG-DUB-1125@1986-02-28",
+    "air-france-968-CDG-DUB-1700@1986-02-28",
+    "air-france-969-DUB-CDG-1825@1986-02-28",
+    "aer-lingus-522-DUB-CDG-0805@1986-03-01",
+    "aer-lingus-523-CDG-DUB-1125@1986-03-01"
+  ],
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_rows_reviewed",
+      "result": "Tidigare nedladdad original-PDF läst visuellt: irländska uppslag s. 26, 32, 64, 66. Fyra nonstoprader på s. 32/66 ger sex rörelser. Utgåvans tidigare kontrollerade dag-, flygplats- och nonstopförklaringar på s. 2–4 återanvänds."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/ie/aerlingus.htm",
+      "type": "edition_index",
+      "result": "Aer Lingus-indexet följt till galleri. Registerposten 21 oktober 1985 har ingen läsbar originalavgångstabell här; datumet är inte verifierat mot omslag."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/ie/aerlingus/gal/eigal1a80.htm",
+      "type": "gallery_checked",
+      "result": "1980-talsgalleriet länkar vid 1985 till en platshållarbild (na100.gif), inte en skannad vintertidtabell."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/ie/aerlingus/gal/eigal1b-na.htm",
+      "type": "gallery_checked",
+      "result": "Nordamerikagalleriet slutar med 1976 på den tillgängliga sidan. Ingen vinterutgåva för 1985/86 hittades där."
+    },
+    {
+      "url": "https://www.ebay.co.uk/itm/198568921327",
+      "type": "previous_review_carried_forward",
+      "result": "Dublins vinterhäfte och de tidigare importerade sidorna är redan registrerade. EI157/EI165 förblir kandidater; ingen ny konfliktlösande källa hittades."
+    },
+    {
+      "url": "https://www.ebay.co.uk/shop/aer-lingus-timetables?_nkw=aer+lingus+timetables",
+      "type": "search_lead_unresolved",
+      "result": "Sökträff nämner Aer Lingus vinter 1985/86, men den öppnade samlingssidan gav ingen identifierad läsbar avgångsskanning för häftet. Kvarstår som sökspår, inte importunderlag."
+    }
+  ],
+  "unresolved": [
+    "Aer Lingus: egen komplett vintertabell, ändringar och saknade Dublinförbindelser.",
+    "Shannon, Cork, Waterford och regional-/öflyg behöver egna daterade tidtabeller och stoppuppgifter.",
+    "Ryanairs tidiga trafik behöver en tidtabell som gäller just observationsfönstret; senare 1986-utgåvor räcker inte.",
+    "EI157 och EI165 har fortsatt olösta källkonflikter och animeras inte.",
+    "Charter, frakt, militär trafik och faktiskt genomförande kräver separata handlingar."
+  ]
+}

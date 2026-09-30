@@ -1,0 +1,23 @@
+{
+  "package": "v44",
+  "checked_on": "2026-09-28",
+  "method": "Air France no. 25 printed page 68 identifies Larnaca/LCA/UTC+2; modern OurAirports field coordinates are approximate. Historical Ellinikon and all existing airport objects unchanged.",
+  "airports": [
+    {
+      "id": "LCA",
+      "name": "Larnaca",
+      "country": "cy",
+      "timezone": "Asia/Nicosia",
+      "lat": 34.875099,
+      "lon": 33.624901,
+      "coordinate_source": "https://ourairports.com/airports/LCLK/",
+      "coordinate_record_id": "LCLK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://ourairports.com/airports/LCLK/"
+      ],
+      "location_note": "Air France no. 25 printed page 68 identifies LARNACA 5 KM, LCA, UTC+2. Modern OurAirports coordinates mark the approximate airfield site, not a reconstructed 1986 terminal, gate or aircraft position. The marker does not imply traffic coverage for Paphos, Ercan, Nicosia or military bases."
+    }
+  ]
+}

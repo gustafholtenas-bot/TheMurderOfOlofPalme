@@ -1,0 +1,137 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    15,
+    17,
+    18,
+    81,
+    84,
+    115,
+    182,
+    247
+  ],
+  "footnotes_printed_page": 183,
+  "airport_codes_printed_pages": [
+    260,
+    261
+  ],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "15": 10,
+    "17": 11,
+    "18": 12,
+    "81": 43,
+    "84": 45,
+    "115": 60,
+    "182": 94,
+    "183": 94,
+    "247": 126,
+    "260": 133,
+    "261": 133
+  },
+  "airport_records": [
+    {
+      "id": "FLL",
+      "name": "Fort Lauderdale–Hollywood International",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 26.072599,
+      "lon": -80.152702,
+      "coordinate_source": "https://ourairports.com/airports/KFLL/",
+      "coordinate_record_id": "KFLL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://library.municode.com/fl/broward_county/codes/administrative_code?nodeId=CH26OPPOAV_PTISTPOAWCOCOSEPR_26.3DIBUENDB"
+      ],
+      "timetable_code": "FLL",
+      "location_note": "FLL, distinct from Miami/MIA. Contemporary Delta airport-code page 260 identifies Fort Lauderdale-Hollywood International. Broward County records document the existing airport terminal expansion during 1985–1987. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "RSW",
+      "name": "Fort Myers–Southwest Florida Regional (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 26.534685,
+      "lon": -81.752816,
+      "coordinate_source": "https://ourairports.com/airports/KRSW/",
+      "coordinate_record_id": "KRSW",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.flylcpa.com/about-rsw/"
+      ],
+      "timetable_code": "RSW",
+      "location_note": "The contemporary Delta code table on page 261 assigns RSW to Fort Myers Regional. This airfield opened in May 1983; Page Field/FMY is a different airport. Historical 1986 Regional name retained; the newer terminal opened in 2005. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "JAX",
+      "name": "Jacksonville International",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 30.492469,
+      "lon": -81.687813,
+      "coordinate_source": "https://ourairports.com/airports/KJAX/",
+      "coordinate_record_id": "KJAX",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.flyjacksonville.com/content.aspx?id=84"
+      ],
+      "timetable_code": "JAX",
+      "location_note": "The contemporary Delta code table on page 260 identifies Jacksonville International. Airport authority history establishes the current airport opened in 1968, replacing Imeson; Imeson is not used. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "MCO",
+      "name": "Orlando International",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 28.429399,
+      "lon": -81.308998,
+      "coordinate_source": "https://ourairports.com/airports/KMCO/",
+      "coordinate_record_id": "KMCO",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://flymco.com/airport-business/mcohistory/"
+      ],
+      "timetable_code": "MCO",
+      "location_note": "MCO identified as Orlando International on contemporary Delta page 261. Airport authority history describes international status/name in 1976 and the 1981 terminal complex; separate Orlando Executive/ORL is not used. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    },
+    {
+      "id": "PBI",
+      "name": "West Palm Beach–Palm Beach International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 26.683201,
+      "lon": -80.095596,
+      "coordinate_source": "https://ourairports.com/airports/KPBI/",
+      "coordinate_record_id": "KPBI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.pbia.org/about/history/"
+      ],
+      "timetable_code": "PBI",
+      "location_note": "PBI and International are printed for West Palm Beach on Delta page 261. Historical 1986 PBI code/name retained despite the current coordinate record using a later name/code. Airport history describes 1966 and 1974 terminals on this airfield; the 1988 terminal is not represented. Approximate airfield coordinates, not reconstructed 1986 gates, runway thresholds or aircraft positions."
+    }
+  ],
+  "notes": [
+    "Visual scans determine accepted fields; OCR is not authoritative.",
+    "All ten directed airport pairs have separately read source rows; return times are not inferred.",
+    "DL434 and DL435 share ATL–JAX times but operate on complementary weekdays.",
+    "DL764 JAX–ATL 14:55 is Sunday-only and excluded from Thursday–Saturday departure dates.",
+    "DL158 MCO–ATL effective 2 March, excluded; DL94 MCO–ATL last operation 1 March, accepted.",
+    "ATL–FLL DL261, ATL–PBI DL807 and FLL–ATL DL596 are one-stop end-to-end rows, not imported as nonstop.",
+    "Historical airport codes and names retained even where current coordinate sources differ.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

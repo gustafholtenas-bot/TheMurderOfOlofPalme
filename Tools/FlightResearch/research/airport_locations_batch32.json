@@ -1,0 +1,23 @@
+{
+  "batch": 32,
+  "airports": [
+    {
+      "id": "RTM",
+      "name": "Rotterdam–Zestienhoven",
+      "country": "nl",
+      "timezone": "Europe/Amsterdam",
+      "lat": 51.95694444,
+      "lon": 4.43722222,
+      "coordinate_source": "https://eaip.lvnl.nl/web/eaip/AIRAC%20AMDT%2008-2026_2026_08_06/eAIP/EH-AD%202%20EHRD%201-en-GB.html",
+      "coordinate_record_id": "EHRD",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.rotterdamthehagueairport.nl/en/organisation/about-us/"
+      ],
+      "location_note": "Approximate airfield reference marker from LVNL AIP consulted in 2026, not a reconstructed 1986 gate or aircraft position. Contemporary timetable identifies Rotterdam airport. Airport history identifies Zestienhoven, opened in 1956, distinct from former Waalhaven; the Rotterdam The Hague name dates from 2010.",
+      "arp_dms_as_published": "515725N 0042614E",
+      "checked_on": "2026-09-28"
+    }
+  ]
+}

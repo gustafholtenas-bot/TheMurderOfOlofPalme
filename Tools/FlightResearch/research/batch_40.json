@@ -1,0 +1,84 @@
+{
+  "batch": 40,
+  "package": "v41",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2316,
+  "new_schedules": 6,
+  "new_schedule_ids": [
+    "air-france-712-ORY-PRG-2040-d5-b40",
+    "csa-766-PRG-ORY-1750-d5-b40",
+    "air-france-559-ORY-BUD-2015-d5-b40",
+    "air-france-724-ORY-BUD-1400-d6-b40",
+    "malev-558-BUD-ORY-1705-d5-b40",
+    "malev-725-BUD-ORY-1705-d6-b40"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 0,
+  "new_airports": [
+    "PRG"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "csa-19851027-cover"
+  ],
+  "updated_source_ids": [
+    "air-france-19851027-no25",
+    "malev-19851027-cover"
+  ],
+  "unchanged_previous_movements": 2316,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "ro",
+  "reviewed_countries_this_batch": [
+    "cz",
+    "hu"
+  ],
+  "new_movements": 6,
+  "total_movements": 2322,
+  "new_leg_ids": [
+    "malev-558-BUD-ORY-1705-d5-b40@1986-02-28",
+    "csa-766-PRG-ORY-1750-d5-b40@1986-02-28",
+    "air-france-559-ORY-BUD-2015-d5-b40@1986-02-28",
+    "air-france-712-ORY-PRG-2040-d5-b40@1986-02-28",
+    "air-france-724-ORY-BUD-1400-d6-b40@1986-03-01",
+    "malev-725-BUD-ORY-1705-d6-b40@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "malev": 2,
+    "csa": 1,
+    "air-france": 3
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BUD",
+      "ORY"
+    ],
+    [
+      "ORY",
+      "BUD"
+    ],
+    [
+      "ORY",
+      "PRG"
+    ],
+    [
+      "PRG",
+      "ORY"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 615,
+  "runtime_coverage": {
+    "registered_airlines": 88,
+    "registered_countries": 77,
+    "reviewed_schedules": 1600,
+    "animated_airlines": 43,
+    "scheduled_movements": 2321,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

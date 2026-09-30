@@ -1,0 +1,7 @@
+flight	origin	destination	departure	arrival	offset	days	page	flags
+125	BRU	LHR	09:05	09:05	0	4567	19	no_local_rename_6mar
+102	BRU	NUE	12:30	13:30	0	1234567	20	before_march_changes
+98	AMS	HAM	12:35	13:35	0	4567	3	rename_6mar
+99	AMS	LHR	08:55	08:55	0	4567	3	no_local
+99	HAM	AMS	07:25	08:25	0	4567	44	before_march_changes
+101	HAM	LHR	08:30	09:00	0	1234567	46	until_2mar

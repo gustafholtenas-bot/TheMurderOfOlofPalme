@@ -1,0 +1,263 @@
+{
+  "package": "v41",
+  "batch": 40,
+  "checked_on": "2026-09-28",
+  "new_reviewed_schedules": 6,
+  "new_candidate_schedules": 0,
+  "new_movements": 6,
+  "total_movements": 2322,
+  "unchanged_previous_movements": 2316,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "new_airports": [
+    "PRG"
+  ],
+  "new_physical_duplicate_count": 0,
+  "new_same_flight_number_overlaps": [],
+  "new_movements_by_source_airline": {
+    "air-france": 3,
+    "malev": 2,
+    "csa": 1
+  },
+  "new_movements_by_date": {
+    "1986-02-28": 4,
+    "1986-03-01": 2
+  },
+  "historical_airport_identity_checked": true,
+  "paris_orly_not_cdg": true,
+  "prague_ruzyne_identified": true,
+  "budapest_ferihegy_reuses_existing_marker": true,
+  "combined_codes_counted_once": true,
+  "actual_operator_not_established": true,
+  "afma559_last_valid_friday_checked": true,
+  "protected_file_count": 24,
+  "protected_files_unchanged": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs",
+    "Tools/FlightResearch/build_country_index.py",
+    "Tools/FlightResearch/build_europe_index.py",
+    "Tools/FlightResearch/build_flights.py",
+    "Tools/FlightResearch/discover_sources.py",
+    "Tools/FlightResearch/test_flights.py",
+    "Tools/StockMarket/README.md",
+    "Tools/StockMarket/validate_markets.py"
+  ],
+  "protected_files_sha256": {
+    "Tools/FlightResearch/build_country_index.py": "da1bbf473c448948252bed99f6d2a3bcc6638371981692dbd37b37a2d8ca94be",
+    "Tools/FlightResearch/build_flights.py": "478ff519b714b510ee8a240c6f52a7f72cc010ea517235e4f8862dcf65e0fafa",
+    "Tools/FlightResearch/discover_sources.py": "7381ce2e1abf895d065ac783c9fd4e761119af1362abeefef3a37ba90a1744d8",
+    "Tools/FlightResearch/test_flights.py": "8d387231d727c69899eca4e4a19fc52dd947cf99841ce8c1fbceaeb8ccd9bf5a",
+    "Tools/FlightResearch/build_europe_index.py": "4a1e5ef80e626200b0ac2aa15c6b716157eb5f11230e7864ab1a6ef2d7b3a78a",
+    "Tools/StockMarket/README.md": "8773ea247bced705d8a19840065e00ad793db53e1ddd271c54f637d460bf0f07",
+    "Tools/StockMarket/validate_markets.py": "a7bab0f9deee7f3d081d077cdb5ad79e98108ecda7f52e7b0975e0ae1d2b2023",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs": "d5134c0f02db1cfdad9072edc6c8c130186f00167ea150e85a4e95c76b0e5f90",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h": "5470520af71fbd58a93ad65a68c906df71febafbb6f7ec97702a5f89eb6b66c4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl": "72511711ccdec29d6d72742adbc5f6bf047057fa6e1625966a765f010655f2f5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp": "3bea16579ce2e06b43be9fa0480e37c1884f2c6c004b5b571e666489defb7429",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h": "07187750d76db446cb784523bbd98bf800c8a4039b10cc51e8afebf8008b3f14",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp": "764cb53995b95456c3ace32268da28c5d29ef6c973a06851c73f54aefc53d284",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h": "bab38514fe42e4468b6844c9def706d60ec5cdc1477cebb7117021223fcd468a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp": "3c24b7b5381e1b053bb4f33afe2e3643dc1d324f125b228bba7ebc42d5a1486d",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp": "460d994313da69d82db7523f661772b780d316f2b359a5021e89d597c29da0f7",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h": "b6a1ff83f3970b3c7794c5bd44a0dad1af5b05d1e37a54a460ce73685e50ee2a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp": "d8ec3418f7518c41fae075a3d5e435eb8bd4436e2c5b70ff7e01f9f25a13d6e4",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp": "2bbf211d50e579b950746ecbce789e774c02f7631c974501b2a0d6dd8b9fdc5b",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h": "977423996f321352d946c2fc81dee991952420caeffa37235e83ab93bf80f2d5",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h": "7b6647b2f3a714e981de1795b2fdb7b1a67f8b465f1c295ac14e9e53d1a4508f",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp": "30ab87045f6e9b6a6806fdbe8ec1e0106a619c1e2017116329173ec53d3de93a",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp": "60a10b34f9c35f5535f59fe6bad711dad3a85a3c46808e93b807be345cff3772",
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json": "ca3a9585e26557171079bedd1eb51fbf80636408072fa6b579018df00449b20a"
+  },
+  "unchanged_plugin_file_count": 17,
+  "unchanged_plugin_files": [
+    "Plugins/TMOPEngine/Content/StockMarket/markets.json",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/Localization/TMOPMenuTranslations.inl",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/STMOPStockMarket.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/StockMarket/TMOPStockMarketTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/UI/TMOPPauseMenuWidget.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/STMOPFlightWidgets.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightData.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/Flights/TMOPFlightTests.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.cpp",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Private/WorldAtlas/STMOPWorldAtlas.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/Public/UI/TMOPPauseMenuWidget.h",
+    "Plugins/TMOPEngine/Source/TMOPEngine/TMOPEngine.Build.cs"
+  ],
+  "calendar_and_utc_checks": [
+    {
+      "schedule": "air-france-712-ORY-PRG-2040-d5-b40",
+      "printed_code": "AFOK712",
+      "printed_days": "----5-7",
+      "printed_valid_from": "1985-10-27",
+      "printed_valid_to": "1986-03-29",
+      "local_departure": "20:40",
+      "local_arrival": "22:25",
+      "utc_offset": "+01:00",
+      "departure_utc": "1986-02-28T19:40:00Z",
+      "arrival_utc": "1986-02-28T21:25:00Z",
+      "duration_minutes": 105
+    },
+    {
+      "schedule": "csa-766-PRG-ORY-1750-d5-b40",
+      "printed_code": "OKAF766",
+      "printed_days": "----5-7",
+      "printed_valid_from": "1985-10-27",
+      "printed_valid_to": "1986-03-29",
+      "local_departure": "17:50",
+      "local_arrival": "19:40",
+      "utc_offset": "+01:00",
+      "departure_utc": "1986-02-28T16:50:00Z",
+      "arrival_utc": "1986-02-28T18:40:00Z",
+      "duration_minutes": 110
+    },
+    {
+      "schedule": "air-france-559-ORY-BUD-2015-d5-b40",
+      "printed_code": "AFMA559",
+      "printed_days": "----5--",
+      "printed_valid_from": "1986-01-03",
+      "printed_valid_to": "1986-02-28",
+      "local_departure": "20:15",
+      "local_arrival": "22:15",
+      "utc_offset": "+01:00",
+      "departure_utc": "1986-02-28T19:15:00Z",
+      "arrival_utc": "1986-02-28T21:15:00Z",
+      "duration_minutes": 120
+    },
+    {
+      "schedule": "air-france-724-ORY-BUD-1400-d6-b40",
+      "printed_code": "AFMA724",
+      "printed_days": "-2---6-",
+      "printed_valid_from": "1985-10-27",
+      "printed_valid_to": "1986-03-29",
+      "local_departure": "14:00",
+      "local_arrival": "16:15",
+      "utc_offset": "+01:00",
+      "departure_utc": "1986-03-01T13:00:00Z",
+      "arrival_utc": "1986-03-01T15:15:00Z",
+      "duration_minutes": 135
+    },
+    {
+      "schedule": "malev-558-BUD-ORY-1705-d5-b40",
+      "printed_code": "MAAF558",
+      "printed_days": "----5-7",
+      "printed_valid_from": "1985-10-27",
+      "printed_valid_to": "1986-03-29",
+      "local_departure": "17:05",
+      "local_arrival": "19:15",
+      "utc_offset": "+01:00",
+      "departure_utc": "1986-02-28T16:05:00Z",
+      "arrival_utc": "1986-02-28T18:15:00Z",
+      "duration_minutes": 130
+    },
+    {
+      "schedule": "malev-725-BUD-ORY-1705-d6-b40",
+      "printed_code": "MAAF725",
+      "printed_days": "-2---6-",
+      "printed_valid_from": "1985-10-27",
+      "printed_valid_to": "1986-03-29",
+      "local_departure": "17:05",
+      "local_arrival": "19:25",
+      "utc_offset": "+01:00",
+      "departure_utc": "1986-03-01T16:05:00Z",
+      "arrival_utc": "1986-03-01T18:25:00Z",
+      "duration_minutes": 140
+    }
+  ],
+  "source_files_sha256": {
+    "/tmp/batch23/af851027-1a.pdf": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+    "/tmp/airports.csv": "f227a636fb1e9a166f53f923df5cf34937d9c753b29dcd77e7a30631726ef3ec",
+    "/tmp/batch40/csa-domestic-gallery.html": "15660d174f630b07508a0f0551e32800db9f1d0d7c53f8ca448c892a5a3f24ba",
+    "/tmp/batch40/csa-gallery.html": "f5c43229aa4d2a710e1c60a378360ccbc2bd28f07227d4372ae6f038f4e5ad5d",
+    "/tmp/batch40/csa-index.html": "ede1a278d82c49aa02c805edbb890bf45a531a41b08e748b96e40a41c1cbac1a",
+    "/tmp/batch40/malev-back.jpg": "bfc7ffa5948eef9f717da4f2a297c524aa670f0ad686109b44fad84164770611",
+    "/tmp/batch40/malev-book-cover.jpg": "744050529b6c69fad67aaafd5535571e558a1a204ae13af888f784cfb2d5d488",
+    "/tmp/batch40/malev-book.html": "53419ef28af904198bd68d8f78176655d41614cf3736a81926dff159d99ad36a",
+    "/tmp/batch40/malev-cover.jpg": "b3d9a19b0e24972e1496ff8e9e0f4f17b4323ce6918f4b97078722746543da2a",
+    "/tmp/batch40/malev-gallery.html": "b0e61eee7a479331dc5dd4bad57eb6018d343ed338d4e9ad64f459a39f5b5eec",
+    "/tmp/batch40/malev-new-ebay.html": "208778822f15d9762d5776227ba94396c0717e4c62ed9a7e3418e2780d70b540",
+    "/tmp/batch40/ok851027.jpg": "a4a3b1d81b80931d4ca5684373c8f17b174843411650c87fdc76437befcf77f8"
+  },
+  "new_sources_create_no_schedules": true,
+  "europe_country_rows_checked": 40,
+  "country_endpoint_totals": {
+    "cz": 2,
+    "hu": 20
+  },
+  "nordic_endpoint_movements": 155,
+  "new_nordic_endpoint_movements": 0,
+  "actual_overflights_added": 0,
+  "unreal_compilation_performed": false,
+  "unreal_runtime_performed": false,
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c2bc31",
+        "wall_time_seconds": 2.9334390299999997,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 2.929s\n\nOK\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "16a6bd",
+        "wall_time_seconds": 0.280806303,
+        "exit_code": 0,
+        "original_token_count": 41,
+        "output": "{\"registered_airlines\": 88, \"registered_countries\": 77, \"reviewed_schedules\": 1600, \"animated_airlines\": 43, \"scheduled_movements\": 2321, \"confirmed_movements\": 1}\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "04f6cf",
+        "wall_time_seconds": 0.064334668,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "1b4067",
+        "wall_time_seconds": 0.064294097,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "e529b2",
+        "wall_time_seconds": 2.2874e-05,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "OK: 35 indices, 34 calculable changes, 36 translated menu strings.\n"
+      }
+    }
+  ]
+}

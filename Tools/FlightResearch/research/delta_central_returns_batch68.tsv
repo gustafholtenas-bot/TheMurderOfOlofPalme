@@ -1,0 +1,36 @@
+source_row	schedule	existing_schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	delta-618-MCI-ATL-0700-b68		new_schedule	delta	618	MCI	ATL	07:00	09:40	0		1234567	0	117		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+2	delta-370-MCI-ATL-0940-b68		new_schedule	delta	370	MCI	ATL	09:40	12:20	0		1234567	0	117		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+3	delta-1104-MCI-ATL-1330-b68		new_schedule	delta	1104	MCI	ATL	13:30	16:10	0		1234567	0	117		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+4	delta-226-MCI-ATL-1655-b68		new_schedule	delta	226	MCI	ATL	16:55	19:35	0		1234567	0	117		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+5			excluded_connection	delta	1105/386	MCI	ATL	19:55	00:37	1		1234567	DFW	117		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+6	delta-205-MSP-ATL-0620-b68		new_schedule	delta	205	MSP	ATL	06:20	09:31	0	X7	123456	0	155		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+7	delta-689-MSP-ATL-1110-b68		new_schedule	delta	689	MSP	ATL	11:10	14:21	0		1234567	0	155		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+8	delta-545-MSP-ATL-1630-b68		new_schedule	delta	545	MSP	ATL	16:30	19:41	0		1234567	0	155		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+9	delta-762-MSY-ATL-0700-b68		new_schedule	delta	762	MSY	ATL	07:00	09:10	0		1234567	0	170		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+10	delta-838-MSY-ATL-1015-b68		new_schedule	delta	838	MSY	ATL	10:15	12:25	0		1234567	0	170		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+11	delta-472-MSY-ATL-1345-b68		new_schedule	delta	472	MSY	ATL	13:45	15:54	0		1234567	0	170		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+12	delta-796-MSY-ATL-1525-b68		new_schedule	delta	796	MSY	ATL	15:25	17:35	0		1234567	0	170		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+13	delta-679-MSY-ATL-1730-b68		new_schedule	delta	679	MSY	ATL	17:30	19:39	0		1234567	0	170		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+14	delta-1014-MSY-ATL-1955-b68		new_schedule	delta	1014	MSY	ATL	19:55	22:04	0		1234567	0	170		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+15	delta-932-OKC-ATL-0640-b68		new_schedule	delta	932	OKC	ATL	06:40	09:27	0		1234567	0	179		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+16			excluded_connection	delta	1021/118	OKC	ATL	07:10	11:12	0	X7	123456	DFW	179		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+17			excluded_connection	delta	1028/790	OKC	ATL	08:42	12:49	0		1234567	DFW	179		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+18			excluded_connection	delta	693/280	OKC	ATL	10:20	14:34	0		1234567	DFW	179		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+19	delta-1106-OKC-ATL-1305-b68		new_schedule	delta	1106	OKC	ATL	13:05	15:49	0		1234567	0	179		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+20			excluded_connection	delta	915/888	OKC	ATL	13:45	17:49	0		1234567	DFW	179		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+21	delta-940-OKC-ATL-1645-b68		new_schedule	delta	940	OKC	ATL	16:45	19:29	0		1234567	0	179		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+22			excluded_connection	delta	1081/386	OKC	ATL	20:25	00:37	1		1234567	DFW	179		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+23	delta-1174-STL-ATL-0700-b68		new_schedule	delta	1174	STL	ATL	07:00	09:22	0	X7	123456	0	206		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+24	delta-363-STL-ATL-1000-b68		new_schedule	delta	363	STL	ATL	10:00	12:22	0		1234567	0	206		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+25	delta-1176-STL-ATL-1305-b68		new_schedule	delta	1176	STL	ATL	13:05	15:27	0		1234567	0	206		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+26			excluded_connection	delta	663/305	STL	ATL	14:35	17:56	0		1234567	MEM	206		delta-19860201	1986-02-01				Printed connection via MEM; not an uninterrupted segment. Component legs are not inferred.
+27	delta-648-STL-ATL-1705-b68		new_schedule	delta	648	STL	ATL	17:05	19:27	0		1234567	0	206		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+28			excluded_connection	delta	1155/1042	STL	ATL	18:25	21:51	0	X6	123457	MEM	206		delta-19860201	1986-02-01				Printed connection via MEM; not an uninterrupted segment. Component legs are not inferred.
+29	delta-1024-TUL-ATL-0630-b68		new_schedule	delta	1024	TUL	ATL	06:30	09:05	0		1234567	0	238		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+30			excluded_connection	delta	677/280	TUL	ATL	10:00	14:34	0		1234567	DFW	238		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+31	delta-904-TUL-ATL-1325-b68		new_schedule	delta	904	TUL	ATL	13:25	16:00	0		1234567	0	238		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+32	delta-661-TUL-ATL-1625-b68		new_schedule	delta	661	TUL	ATL	16:25	19:00	0		1234567	0	238		delta-19860201	1986-02-01		1986-02-27	1986-03-01	
+33			excluded_connection	delta	1053/864	TUL	ATL	17:00	22:09	0	X6	123457	DFW	238		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+34			excluded_connection	delta	1053/874	TUL	ATL	17:00	22:12	0	6	6	DFW	238		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.
+35			excluded_connection	delta	1159/386	TUL	ATL	19:55	00:37	1		1234567	DFW	238		delta-19860201	1986-02-01				Printed connection via DFW; not an uninterrupted segment. Component legs are not inferred.

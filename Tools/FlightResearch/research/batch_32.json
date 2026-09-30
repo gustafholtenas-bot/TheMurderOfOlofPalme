@@ -1,0 +1,138 @@
+{
+  "batch": 32,
+  "package": "v33",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 1966,
+  "new_schedules": 22,
+  "new_schedule_ids": [
+    "air-france-1917-AMS-LYS-1030-d5-b32",
+    "klm-335-AMS-NCE-0800-d56-b32",
+    "klm-323-AMS-CDG-0730-d56-b32",
+    "klm-325-AMS-CDG-0845-d56-b32",
+    "air-france-911-AMS-CDG-0915-d56-b32",
+    "klm-327-AMS-CDG-1305-d56-b32",
+    "air-france-913-AMS-CDG-1335-d5-b32",
+    "air-france-915-AMS-CDG-1710-d56-b32",
+    "klm-329-AMS-CDG-1725-d56-b32",
+    "air-france-917-AMS-CDG-2045-d5-b32",
+    "air-france-1914-LYS-AMS-0815-d5-b32",
+    "klm-336-NCE-AMS-1025-d56-b32",
+    "air-france-910-CDG-AMS-0730-d56-b32",
+    "klm-324-CDG-AMS-0910-d56-b32",
+    "klm-326-CDG-AMS-1045-d56-b32",
+    "air-france-912-CDG-AMS-1155-d5-b32",
+    "klm-328-CDG-AMS-1445-d56-b32",
+    "air-france-914-CDG-AMS-1525-d56-b32",
+    "air-france-916-CDG-AMS-1900-d5-b32",
+    "klm-330-CDG-AMS-1950-d5-b32",
+    "klm-308-CDG-RTM-1950-d5-b32",
+    "klm-305-RTM-CDG-0740-d5-b32"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "new_airports": [
+    "RTM"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "klm-19851027-world"
+  ],
+  "unchanged_previous_movements": 1966,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "be",
+  "reviewed_countries_this_batch": [
+    "nl"
+  ],
+  "new_movements": 35,
+  "total_movements": 2001,
+  "new_leg_ids": [
+    "air-france-910-CDG-AMS-0730-d56-b32@1986-02-28",
+    "klm-323-AMS-CDG-0730-d56-b32@1986-02-28",
+    "klm-305-RTM-CDG-0740-d5-b32@1986-02-28",
+    "klm-335-AMS-NCE-0800-d56-b32@1986-02-28",
+    "air-france-1914-LYS-AMS-0815-d5-b32@1986-02-28",
+    "klm-325-AMS-CDG-0845-d56-b32@1986-02-28",
+    "klm-324-CDG-AMS-0910-d56-b32@1986-02-28",
+    "air-france-911-AMS-CDG-0915-d56-b32@1986-02-28",
+    "klm-336-NCE-AMS-1025-d56-b32@1986-02-28",
+    "air-france-1917-AMS-LYS-1030-d5-b32@1986-02-28",
+    "klm-326-CDG-AMS-1045-d56-b32@1986-02-28",
+    "air-france-912-CDG-AMS-1155-d5-b32@1986-02-28",
+    "klm-327-AMS-CDG-1305-d56-b32@1986-02-28",
+    "air-france-913-AMS-CDG-1335-d5-b32@1986-02-28",
+    "klm-328-CDG-AMS-1445-d56-b32@1986-02-28",
+    "air-france-914-CDG-AMS-1525-d56-b32@1986-02-28",
+    "air-france-915-AMS-CDG-1710-d56-b32@1986-02-28",
+    "klm-329-AMS-CDG-1725-d56-b32@1986-02-28",
+    "air-france-916-CDG-AMS-1900-d5-b32@1986-02-28",
+    "klm-308-CDG-RTM-1950-d5-b32@1986-02-28",
+    "klm-330-CDG-AMS-1950-d5-b32@1986-02-28",
+    "air-france-917-AMS-CDG-2045-d5-b32@1986-02-28",
+    "air-france-910-CDG-AMS-0730-d56-b32@1986-03-01",
+    "klm-323-AMS-CDG-0730-d56-b32@1986-03-01",
+    "klm-335-AMS-NCE-0800-d56-b32@1986-03-01",
+    "klm-325-AMS-CDG-0845-d56-b32@1986-03-01",
+    "klm-324-CDG-AMS-0910-d56-b32@1986-03-01",
+    "air-france-911-AMS-CDG-0915-d56-b32@1986-03-01",
+    "klm-336-NCE-AMS-1025-d56-b32@1986-03-01",
+    "klm-326-CDG-AMS-1045-d56-b32@1986-03-01",
+    "klm-327-AMS-CDG-1305-d56-b32@1986-03-01",
+    "klm-328-CDG-AMS-1445-d56-b32@1986-03-01",
+    "air-france-914-CDG-AMS-1525-d56-b32@1986-03-01",
+    "air-france-915-AMS-CDG-1710-d56-b32@1986-03-01",
+    "klm-329-AMS-CDG-1725-d56-b32@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 14,
+    "klm": 21
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "AMS",
+      "CDG"
+    ],
+    [
+      "AMS",
+      "LYS"
+    ],
+    [
+      "AMS",
+      "NCE"
+    ],
+    [
+      "CDG",
+      "AMS"
+    ],
+    [
+      "CDG",
+      "RTM"
+    ],
+    [
+      "LYS",
+      "AMS"
+    ],
+    [
+      "NCE",
+      "AMS"
+    ],
+    [
+      "RTM",
+      "CDG"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 532,
+  "runtime_coverage": {
+    "registered_airlines": 83,
+    "registered_countries": 72,
+    "reviewed_schedules": 1389,
+    "animated_airlines": 39,
+    "scheduled_movements": 2000,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

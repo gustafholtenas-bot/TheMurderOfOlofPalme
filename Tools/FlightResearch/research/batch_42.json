@@ -1,0 +1,96 @@
+{
+  "batch": 42,
+  "package": "v43",
+  "checked_on": "2026-09-29",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2330,
+  "new_schedules": 8,
+  "new_schedule_ids": [
+    "air-france-702-ORY-BEG-1500-d5-b42",
+    "air-france-703-BEG-ORY-1805-d5-b42",
+    "jat-241-ORY-BEG-1420-d6-b42",
+    "jat-240-BEG-ORY-1055-d6-b42",
+    "jat-243-ORY-ZAG-1420-d5-b42",
+    "jat-242-ZAG-ORY-1130-d5-b42",
+    "air-france-704-ORY-ZAG-1500-d6-b42",
+    "air-france-705-ZAG-ORY-1740-d6-b42"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 0,
+  "new_airports": [
+    "BEG",
+    "ZAG"
+  ],
+  "new_country_ids": [
+    "yu",
+    "al"
+  ],
+  "new_airline_ids": [
+    "jat",
+    "inex-adria"
+  ],
+  "new_source_ids": [
+    "jat-19851027-cover",
+    "inex-adria-1985-1986-archive-index",
+    "tirana-airport-historical-reference",
+    "albanian-life-34-1986-travel-notices"
+  ],
+  "updated_source_ids": [
+    "air-france-19851027-no25"
+  ],
+  "unchanged_previous_movements": 2330,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "gr",
+  "reviewed_countries_this_batch": [
+    "yu",
+    "al"
+  ],
+  "new_movements": 8,
+  "total_movements": 2338,
+  "new_leg_ids": [
+    "jat-242-ZAG-ORY-1130-d5-b42@1986-02-28",
+    "jat-243-ORY-ZAG-1420-d5-b42@1986-02-28",
+    "air-france-702-ORY-BEG-1500-d5-b42@1986-02-28",
+    "air-france-703-BEG-ORY-1805-d5-b42@1986-02-28",
+    "jat-240-BEG-ORY-1055-d6-b42@1986-03-01",
+    "jat-241-ORY-BEG-1420-d6-b42@1986-03-01",
+    "air-france-704-ORY-ZAG-1500-d6-b42@1986-03-01",
+    "air-france-705-ZAG-ORY-1740-d6-b42@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "jat": 4,
+    "air-france": 4
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BEG",
+      "ORY"
+    ],
+    [
+      "ORY",
+      "BEG"
+    ],
+    [
+      "ORY",
+      "ZAG"
+    ],
+    [
+      "ZAG",
+      "ORY"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 623,
+  "runtime_coverage": {
+    "registered_airlines": 91,
+    "registered_countries": 80,
+    "reviewed_schedules": 1616,
+    "animated_airlines": 46,
+    "scheduled_movements": 2337,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

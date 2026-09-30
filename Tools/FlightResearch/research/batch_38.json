@@ -1,0 +1,334 @@
+{
+  "batch": 38,
+  "package": "v39",
+  "checked_on": "2026-09-28",
+  "kind": "country_review_and_schedule_import",
+  "previous_movements": 2218,
+  "new_schedules": 65,
+  "new_schedule_ids": [
+    "alitalia-318-BLQ-CDG-1715-d5-b38",
+    "alitalia-318-BLQ-CDG-1715-d6-b38",
+    "alitalia-319-CDG-BLQ-1450-d5-b38",
+    "alitalia-319-CDG-BLQ-1450-d6-b38",
+    "alitalia-1350-GOA-CDG-1240-d5-b38",
+    "alitalia-1350-GOA-CDG-1240-d6-b38",
+    "alitalia-1351-CDG-GOA-1020-d5-b38",
+    "alitalia-1351-CDG-GOA-1020-d6-b38",
+    "alitalia-1351-GOA-NAP-1235-d5-b38",
+    "alitalia-1351-GOA-NAP-1235-d6-b38",
+    "air-france-637-NAP-CDG-1940-d6-b38",
+    "air-france-636-CDG-NAP-1635-d6-b38",
+    "alitalia-336-LIN-CDG-0845-d56-b38",
+    "air-france-651-LIN-CDG-1005-d56-b38",
+    "alitalia-330-LIN-CDG-1310-d56-b38",
+    "air-france-653-LIN-CDG-1450-d56-b38",
+    "alitalia-326-LIN-CDG-1640-d56-b38",
+    "air-france-655-LIN-CDG-1940-d56-b38",
+    "air-france-650-CDG-LIN-0745-d56-b38",
+    "alitalia-345-CDG-LIN-1110-d56-b38",
+    "air-france-652-CDG-LIN-1225-d56-b38",
+    "alitalia-331-CDG-LIN-1520-d56-b38",
+    "air-france-654-CDG-LIN-1720-d56-b38",
+    "alitalia-337-CDG-LIN-1900-d56-b38",
+    "alitalia-346-LIN-LYS-2000-d56-b38",
+    "air-france-347-LYS-LIN-0820-d5-b38",
+    "air-france-347-LYS-LIN-0820-d6-b38",
+    "air-france-2641-LIN-MRS-0930-d56-b38",
+    "air-france-2651-LIN-MRS-2020-d5-b38",
+    "air-france-2640-MRS-LIN-0745-d56-b38",
+    "air-france-2650-MRS-LIN-1340-d5-b38",
+    "air-france-2647-LIN-SXB-1520-d5-b38",
+    "air-france-2646-SXB-LIN-1225-d5-b38",
+    "air-france-2643-LIN-TLS-1400-d5-b38",
+    "air-france-2642-TLS-LIN-1725-d5-b38",
+    "air-france-1937-MRS-FCO-1330-d5-b38",
+    "air-france-1930-FCO-MRS-1535-d5-b38",
+    "air-france-2649-FCO-NCE-1145-d6-b38",
+    "air-france-2639-FCO-NCE-1340-d5-b38",
+    "alitalia-338-FCO-NCE-1445-d56-b38",
+    "air-france-2648-NCE-FCO-0950-d6-b38",
+    "air-france-2644-NCE-FCO-1145-d5-b38",
+    "alitalia-339-NCE-FCO-1635-d56-b38",
+    "air-france-630-CDG-FCO-0840-d56-b38",
+    "alitalia-335-CDG-FCO-1210-d56-b38",
+    "air-france-634-CDG-FCO-1630-d56-b38",
+    "alitalia-321-CDG-FCO-2000-d56-b38",
+    "alitalia-334-FCO-CDG-0910-d56-b38",
+    "air-france-631-FCO-CDG-1140-d56-b38",
+    "alitalia-320-FCO-CDG-1700-d56-b38",
+    "air-france-635-FCO-CDG-1930-d56-b38",
+    "alitalia-328-PSA-CDG-1325-d5-b38",
+    "alitalia-328-PSA-CDG-1325-d6-b38",
+    "air-france-551-PSA-CDG-1500-d5-b38",
+    "air-france-550-CDG-PSA-1235-d5-b38",
+    "alitalia-329-CDG-PSA-1545-d5-b38",
+    "alitalia-329-CDG-PSA-1545-d6-b38",
+    "air-france-640-CDG-TRN-1745-d5-b38",
+    "alitalia-325-CDG-TRN-2030-d56-b38",
+    "alitalia-324-TRN-CDG-0810-d56-b38",
+    "air-france-641-TRN-CDG-1950-d5-b38",
+    "air-france-658-CDG-VCE-1120-d56-b38",
+    "alitalia-341-CDG-VCE-1710-d56-b38",
+    "air-france-659-VCE-CDG-1345-d56-b38",
+    "alitalia-340-VCE-CDG-1440-d56-b38"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 0,
+  "new_airports": [
+    "BLQ",
+    "GOA",
+    "LIN",
+    "NAP",
+    "PSA",
+    "TRN",
+    "VCE"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "alitalia-19860101-cover",
+    "alitalia-19851027-usa-preliminary-photos"
+  ],
+  "unchanged_previous_movements": 2218,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "sm",
+  "reviewed_countries_this_batch": [
+    "it"
+  ],
+  "new_movements": 96,
+  "total_movements": 2314,
+  "new_leg_ids": [
+    "air-france-2640-MRS-LIN-0745-d56-b38@1986-02-28",
+    "air-france-650-CDG-LIN-0745-d56-b38@1986-02-28",
+    "alitalia-324-TRN-CDG-0810-d56-b38@1986-02-28",
+    "air-france-347-LYS-LIN-0820-d5-b38@1986-02-28",
+    "air-france-630-CDG-FCO-0840-d56-b38@1986-02-28",
+    "alitalia-336-LIN-CDG-0845-d56-b38@1986-02-28",
+    "alitalia-334-FCO-CDG-0910-d56-b38@1986-02-28",
+    "air-france-2641-LIN-MRS-0930-d56-b38@1986-02-28",
+    "air-france-651-LIN-CDG-1005-d56-b38@1986-02-28",
+    "alitalia-1351-CDG-GOA-1020-d5-b38@1986-02-28",
+    "alitalia-345-CDG-LIN-1110-d56-b38@1986-02-28",
+    "air-france-658-CDG-VCE-1120-d56-b38@1986-02-28",
+    "air-france-631-FCO-CDG-1140-d56-b38@1986-02-28",
+    "air-france-2644-NCE-FCO-1145-d5-b38@1986-02-28",
+    "alitalia-335-CDG-FCO-1210-d56-b38@1986-02-28",
+    "air-france-2646-SXB-LIN-1225-d5-b38@1986-02-28",
+    "air-france-652-CDG-LIN-1225-d56-b38@1986-02-28",
+    "air-france-550-CDG-PSA-1235-d5-b38@1986-02-28",
+    "alitalia-1351-GOA-NAP-1235-d5-b38@1986-02-28",
+    "alitalia-1350-GOA-CDG-1240-d5-b38@1986-02-28",
+    "alitalia-330-LIN-CDG-1310-d56-b38@1986-02-28",
+    "alitalia-328-PSA-CDG-1325-d5-b38@1986-02-28",
+    "air-france-1937-MRS-FCO-1330-d5-b38@1986-02-28",
+    "air-france-2639-FCO-NCE-1340-d5-b38@1986-02-28",
+    "air-france-2650-MRS-LIN-1340-d5-b38@1986-02-28",
+    "air-france-659-VCE-CDG-1345-d56-b38@1986-02-28",
+    "air-france-2643-LIN-TLS-1400-d5-b38@1986-02-28",
+    "alitalia-340-VCE-CDG-1440-d56-b38@1986-02-28",
+    "alitalia-338-FCO-NCE-1445-d56-b38@1986-02-28",
+    "air-france-653-LIN-CDG-1450-d56-b38@1986-02-28",
+    "alitalia-319-CDG-BLQ-1450-d5-b38@1986-02-28",
+    "air-france-551-PSA-CDG-1500-d5-b38@1986-02-28",
+    "air-france-2647-LIN-SXB-1520-d5-b38@1986-02-28",
+    "alitalia-331-CDG-LIN-1520-d56-b38@1986-02-28",
+    "air-france-1930-FCO-MRS-1535-d5-b38@1986-02-28",
+    "alitalia-329-CDG-PSA-1545-d5-b38@1986-02-28",
+    "air-france-634-CDG-FCO-1630-d56-b38@1986-02-28",
+    "alitalia-339-NCE-FCO-1635-d56-b38@1986-02-28",
+    "alitalia-326-LIN-CDG-1640-d56-b38@1986-02-28",
+    "alitalia-320-FCO-CDG-1700-d56-b38@1986-02-28",
+    "alitalia-341-CDG-VCE-1710-d56-b38@1986-02-28",
+    "alitalia-318-BLQ-CDG-1715-d5-b38@1986-02-28",
+    "air-france-654-CDG-LIN-1720-d56-b38@1986-02-28",
+    "air-france-2642-TLS-LIN-1725-d5-b38@1986-02-28",
+    "air-france-640-CDG-TRN-1745-d5-b38@1986-02-28",
+    "alitalia-337-CDG-LIN-1900-d56-b38@1986-02-28",
+    "air-france-635-FCO-CDG-1930-d56-b38@1986-02-28",
+    "air-france-655-LIN-CDG-1940-d56-b38@1986-02-28",
+    "air-france-641-TRN-CDG-1950-d5-b38@1986-02-28",
+    "alitalia-321-CDG-FCO-2000-d56-b38@1986-02-28",
+    "alitalia-346-LIN-LYS-2000-d56-b38@1986-02-28",
+    "air-france-2651-LIN-MRS-2020-d5-b38@1986-02-28",
+    "alitalia-325-CDG-TRN-2030-d56-b38@1986-02-28",
+    "air-france-2640-MRS-LIN-0745-d56-b38@1986-03-01",
+    "air-france-650-CDG-LIN-0745-d56-b38@1986-03-01",
+    "alitalia-324-TRN-CDG-0810-d56-b38@1986-03-01",
+    "air-france-347-LYS-LIN-0820-d6-b38@1986-03-01",
+    "air-france-630-CDG-FCO-0840-d56-b38@1986-03-01",
+    "alitalia-336-LIN-CDG-0845-d56-b38@1986-03-01",
+    "alitalia-334-FCO-CDG-0910-d56-b38@1986-03-01",
+    "air-france-2641-LIN-MRS-0930-d56-b38@1986-03-01",
+    "air-france-2648-NCE-FCO-0950-d6-b38@1986-03-01",
+    "air-france-651-LIN-CDG-1005-d56-b38@1986-03-01",
+    "alitalia-1351-CDG-GOA-1020-d6-b38@1986-03-01",
+    "alitalia-345-CDG-LIN-1110-d56-b38@1986-03-01",
+    "air-france-658-CDG-VCE-1120-d56-b38@1986-03-01",
+    "air-france-631-FCO-CDG-1140-d56-b38@1986-03-01",
+    "air-france-2649-FCO-NCE-1145-d6-b38@1986-03-01",
+    "alitalia-335-CDG-FCO-1210-d56-b38@1986-03-01",
+    "air-france-652-CDG-LIN-1225-d56-b38@1986-03-01",
+    "alitalia-1351-GOA-NAP-1235-d6-b38@1986-03-01",
+    "alitalia-1350-GOA-CDG-1240-d6-b38@1986-03-01",
+    "alitalia-330-LIN-CDG-1310-d56-b38@1986-03-01",
+    "alitalia-328-PSA-CDG-1325-d6-b38@1986-03-01",
+    "air-france-659-VCE-CDG-1345-d56-b38@1986-03-01",
+    "alitalia-340-VCE-CDG-1440-d56-b38@1986-03-01",
+    "alitalia-338-FCO-NCE-1445-d56-b38@1986-03-01",
+    "air-france-653-LIN-CDG-1450-d56-b38@1986-03-01",
+    "alitalia-319-CDG-BLQ-1450-d6-b38@1986-03-01",
+    "alitalia-331-CDG-LIN-1520-d56-b38@1986-03-01",
+    "alitalia-329-CDG-PSA-1545-d6-b38@1986-03-01",
+    "air-france-634-CDG-FCO-1630-d56-b38@1986-03-01",
+    "air-france-636-CDG-NAP-1635-d6-b38@1986-03-01",
+    "alitalia-339-NCE-FCO-1635-d56-b38@1986-03-01",
+    "alitalia-326-LIN-CDG-1640-d56-b38@1986-03-01",
+    "alitalia-320-FCO-CDG-1700-d56-b38@1986-03-01",
+    "alitalia-341-CDG-VCE-1710-d56-b38@1986-03-01",
+    "alitalia-318-BLQ-CDG-1715-d6-b38@1986-03-01",
+    "air-france-654-CDG-LIN-1720-d56-b38@1986-03-01",
+    "alitalia-337-CDG-LIN-1900-d56-b38@1986-03-01",
+    "air-france-635-FCO-CDG-1930-d56-b38@1986-03-01",
+    "air-france-637-NAP-CDG-1940-d6-b38@1986-03-01",
+    "air-france-655-LIN-CDG-1940-d56-b38@1986-03-01",
+    "alitalia-321-CDG-FCO-2000-d56-b38@1986-03-01",
+    "alitalia-346-LIN-LYS-2000-d56-b38@1986-03-01",
+    "alitalia-325-CDG-TRN-2030-d56-b38@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "air-france": 48,
+    "alitalia": 48
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "BLQ",
+      "CDG"
+    ],
+    [
+      "CDG",
+      "BLQ"
+    ],
+    [
+      "CDG",
+      "FCO"
+    ],
+    [
+      "CDG",
+      "GOA"
+    ],
+    [
+      "CDG",
+      "LIN"
+    ],
+    [
+      "CDG",
+      "NAP"
+    ],
+    [
+      "CDG",
+      "PSA"
+    ],
+    [
+      "CDG",
+      "TRN"
+    ],
+    [
+      "CDG",
+      "VCE"
+    ],
+    [
+      "FCO",
+      "CDG"
+    ],
+    [
+      "FCO",
+      "MRS"
+    ],
+    [
+      "FCO",
+      "NCE"
+    ],
+    [
+      "GOA",
+      "CDG"
+    ],
+    [
+      "GOA",
+      "NAP"
+    ],
+    [
+      "LIN",
+      "CDG"
+    ],
+    [
+      "LIN",
+      "LYS"
+    ],
+    [
+      "LIN",
+      "MRS"
+    ],
+    [
+      "LIN",
+      "SXB"
+    ],
+    [
+      "LIN",
+      "TLS"
+    ],
+    [
+      "LYS",
+      "LIN"
+    ],
+    [
+      "MRS",
+      "FCO"
+    ],
+    [
+      "MRS",
+      "LIN"
+    ],
+    [
+      "NAP",
+      "CDG"
+    ],
+    [
+      "NCE",
+      "FCO"
+    ],
+    [
+      "PSA",
+      "CDG"
+    ],
+    [
+      "SXB",
+      "LIN"
+    ],
+    [
+      "TLS",
+      "LIN"
+    ],
+    [
+      "TRN",
+      "CDG"
+    ],
+    [
+      "VCE",
+      "CDG"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 609,
+  "runtime_coverage": {
+    "registered_airlines": 87,
+    "registered_countries": 74,
+    "reviewed_schedules": 1592,
+    "animated_airlines": 41,
+    "scheduled_movements": 2313,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 0
+}

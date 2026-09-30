@@ -1,0 +1,52 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    50,
+    51,
+    52,
+    73,
+    88,
+    154,
+    234
+  ],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "50": 28,
+    "51": 28,
+    "52": 29,
+    "73": 39,
+    "88": 47,
+    "154": 80,
+    "234": 120
+  },
+  "new_airports": [],
+  "existing_airport_ids": [
+    "CVG",
+    "DTW",
+    "FWA",
+    "MKE",
+    "TOL"
+  ],
+  "existing_airport_records_modified": false,
+  "notes": [
+    "Visual scans determine accepted fields; OCR only assists navigation.",
+    "Page 4 assigns flights 1525–1749 to COMAIR; operator recorded separately from publisher Delta.",
+    "All return times read independently; not inferred from outbound flights.",
+    "No accepted row has a dated footnote. All accepted arrivals are on the same local calendar day.",
+    "CVG/DTW/FWA/TOL UTC−5; MKE UTC−6.",
+    "DTW–CVG 1623 arrival is 19:20. Earlier deferred research text 19:24 corrected before first import; old reports retained as historical records.",
+    "CVG–MKE 1619 15:00–15:33 and 1578 18:23–18:50; MKE–CVG 1618 15:46–18:10.",
+    "CVG–TOL 1713 15:26–16:26 and TOL–CVG 1577 16:50–17:50 have blank/daily frequencies. CVG–TOL 1729 is 19:59–20:59.",
+    "35 nonstop schedules accepted. Eleven through rows and seven connections are not treated as physical nonstop segments.",
+    "COMAIR1587 CVG–FWA is a documented physical leg; its CVG–DTW through row remains excluded.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

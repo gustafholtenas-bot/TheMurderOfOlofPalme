@@ -1,0 +1,87 @@
+{
+  "batch": 37,
+  "package": "v38",
+  "country": "at",
+  "checked_on": "2026-09-28",
+  "status": "reviewed_with_gaps",
+  "review_scope": "Riktat första källurval, inte en fullständig trafik- eller operatörsinventering.",
+  "coverage_complete": false,
+  "endpoint_movements": 8,
+  "domestic_movements": 0,
+  "international_movements": 8,
+  "new_movements": 8,
+  "endpoint_movements_by_source_airline": {
+    "air-france": 4,
+    "austrian": 4
+  },
+  "endpoint_leg_ids": [
+    "air-france-782-CDG-VIE-1105-d56-b37@1986-02-28",
+    "air-france-781-VIE-CDG-1345-d56-b37@1986-02-28",
+    "austrian-231-VIE-ORY-1815-d56-b37@1986-02-28",
+    "austrian-232-ORY-VIE-2050-d56-b37@1986-02-28",
+    "air-france-782-CDG-VIE-1105-d56-b37@1986-03-01",
+    "air-france-781-VIE-CDG-1345-d56-b37@1986-03-01",
+    "austrian-231-VIE-ORY-1815-d56-b37@1986-03-01",
+    "austrian-232-ORY-VIE-2050-d56-b37@1986-03-01"
+  ],
+  "new_leg_ids": [
+    "air-france-782-CDG-VIE-1105-d56-b37@1986-02-28",
+    "air-france-781-VIE-CDG-1345-d56-b37@1986-02-28",
+    "austrian-231-VIE-ORY-1815-d56-b37@1986-02-28",
+    "austrian-232-ORY-VIE-2050-d56-b37@1986-02-28",
+    "air-france-782-CDG-VIE-1105-d56-b37@1986-03-01",
+    "air-france-781-VIE-CDG-1345-d56-b37@1986-03-01",
+    "austrian-231-VIE-ORY-1815-d56-b37@1986-03-01",
+    "austrian-232-ORY-VIE-2050-d56-b37@1986-03-01"
+  ],
+  "research_only_rows": 0,
+  "checks": [
+    {
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "type": "contemporary_timetable",
+      "result": "Air France nr 25, s. 77 och 93: AF781/782 CDG–Wien och OS231/232 Orly–Wien har nonstop-pil och separata tider. Fyra rader ger åtta rörelser. S. 75/77 visar Salzburg-/genomgående alternativ torsdag eller söndag; de skapar inga rörelser fredag/lördag."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/at/austrian/1a/os851027.jpg",
+      "type": "contemporary_cover",
+      "result": "Austrian Airlines omslag visuellt läst: 27 Oct 1985–29 Mar 1986. Inga avgångssidor verifierade i den egna utgåvan; cover_only-källan skapar inga rörelser."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/at/tyrolean/gal/vogal1a80.htm",
+      "type": "edition_index",
+      "result": "27 oktober 1985 finns som indexpost med bild saknas-symbol. Ingen tidtabellstranskription från indexet."
+    },
+    {
+      "url": "https://innsbruck-erinnert.at/die-tyrolean-airways-erobern-den-mittelmeerraum-1986/",
+      "type": "municipal_historical_article",
+      "result": "Stadens historieportal beskriver Tyroleans verksamhet och 1986 års sommarprogram. Används endast som operatörsspår; sommarens charterlinjer ger inga vinteravgångar."
+    },
+    {
+      "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+      "type": "contemporary_timetable_review_no_import",
+      "result": "Pan Am 11 februari–26 april 1986: teckenförklaring, s. 103–105 (Wien), 111 (delsträckor), samt s. 42, 67–68 granskade. Inga nya PA-scheman godkänns: New York-resor har stopp/anslutningar och de granskade sidorna ger inte fullständiga lokala tider för alla enskilda Wiendelar. PA66 Wien–Delhi på s. 104 gäller onsdag. Tider för mellanlandningar räknas inte fram från restidstabellen."
+    },
+    {
+      "url": "https://viennaairport.com/70Jahre",
+      "type": "official_airport_history",
+      "result": "Flygplatsens historik identifierar Schwechat och andra banans öppning 1977. Den samtida tidtabellen namnger Schwechat, 18 km från staden. Wien-Aspern används inte."
+    },
+    {
+      "url": "https://ourairports.com/airports/LOWW/",
+      "type": "coordinate_reference",
+      "result": "LOWW/VIE 48.110298, 16.569700 används endast som ungefärlig flygplatsmarkör, inte rekonstruerad terminal-/gateposition från 1986."
+    },
+    {
+      "url": "https://www.bev.gv.at/en/Topics/Metrology-Service/Metrological-Subject-Fields/Time-Services/Information-on-Time.html",
+      "type": "official_time_reference",
+      "result": "Österrikes metrologimyndighet anger sommartidens start 30 mars 1986. Februari/mars-fönstret ligger i normaltid, i enlighet med UTC+1 i de samtida tabellerna."
+    }
+  ],
+  "unresolved": [
+    "Austrians kompletta vintertabell, ändringar och fler internationella förbindelser återstår. Fyra OS-rörelser är inte en fullständig inventering.",
+    "Tyroleans egna vinteravgångar, inrikeslinjer, Innsbruck, Salzburg, Graz, Linz och Klagenfurt behöver vidare kontroll. Inga nya markörer skapas utan historisk platskontroll och godkända rörelser.",
+    "Lauda Air, regionala operatörer, charter, frakt, räddnings-, stats- och militärflyg samt ytterligare utländska bolag återstår att inventera.",
+    "Pan Ams fullständigt tidsatta Wien–Frankfurt/München-delar och returer behöver ytterligare underlag. Hela enstoppsresor blir inte nonstopsträckor.",
+    "Faktiskt genomförande och verkliga överflygningar kräver rörelse- eller flygledningshandlingar. Storcirkelanimationen visar inte en belagd flygväg."
+  ]
+}

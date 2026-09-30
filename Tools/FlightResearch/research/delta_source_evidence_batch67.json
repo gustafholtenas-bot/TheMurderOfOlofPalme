@@ -1,0 +1,64 @@
+{
+  "checked_on": "2026-09-29",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_size_bytes": 30316872,
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    71,
+    103,
+    124,
+    134,
+    193,
+    213,
+    214,
+    222
+  ],
+  "footnotes_printed_pages": [
+    135,
+    193
+  ],
+  "legend_printed_page": 4,
+  "winter_time_zone_map_pdf_page": 2,
+  "printed_to_pdf_page": {
+    "71": 38,
+    "103": 54,
+    "124": 65,
+    "134": 70,
+    "193": 99,
+    "213": 109,
+    "214": 110,
+    "222": 114,
+    "135": 70
+  },
+  "new_airports": [],
+  "existing_airport_ids": [
+    "ATL",
+    "DEN-STAPLETON",
+    "HOU",
+    "IAH",
+    "LAS",
+    "LAX",
+    "ONT",
+    "PHX",
+    "SAN",
+    "SEA",
+    "SFO"
+  ],
+  "airport_records_modified": false,
+  "notes": [
+    "Visual scans determine accepted fields; OCR is not authoritative.",
+    "Every return time is independently read, not inferred from an outbound row.",
+    "Houston I/H distinguishes IAH/HOU; Los Angeles L/O distinguishes LAX/ONT.",
+    "Denver uses the existing historical Stapleton airport, not the later replacement airport.",
+    "DL68 LAX–ATL and the LAX 500/132 connection carry footnote 6: effective 2 March, outside the period.",
+    "PHX 1012/386 connection carries footnote 4, effective 12 February; remains excluded as a connection.",
+    "Ten connections and five one-stop through rows are not imported as nonstop.",
+    "DL40 LAX–ATL, DL52 SFO–ATL and DL866 SEA–ATL arrive next local calendar day; DL504 PHX–ATL 00:55–05:52 arrives the same local day.",
+    "MST UTC−7 at Denver and Phoenix; CST UTC−6 at Houston; PST UTC−8 at the other western airports; EST UTC−5 at Atlanta.",
+    "Source overall end date and later amendments not established.",
+    "Time-zone map and local-time convention used; separate all-times-local wording not located."
+  ],
+  "original_scans_redistributed": false
+}

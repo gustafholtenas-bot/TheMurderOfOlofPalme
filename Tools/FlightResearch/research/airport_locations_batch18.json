@@ -1,0 +1,108 @@
+{
+  "checked_on": "2026-09-28",
+  "airports": [
+    {
+      "id": "EZE",
+      "name": "Buenos Aires – Ezeiza",
+      "country": "ar",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "lat": -34.8222,
+      "lon": -58.5358,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "SAEZ",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://ourairports.com/airports/SAEZ/",
+        "https://centrodocumental.acumar.gob.ar/items/show/8854"
+      ],
+      "location_note": "Historical airport identity reviewed against the 1986 timetable and linked airport/history sources. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "GIG",
+      "name": "Rio de Janeiro – Galeão",
+      "country": "br",
+      "timezone": "America/Sao_Paulo",
+      "lat": -22.809999,
+      "lon": -43.250557,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "SBGL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://ourairports.com/airports/SBGL/",
+        "https://www.flickr.com/photos/arquivonacionalbrasil/52488276722/"
+      ],
+      "location_note": "Historical airport identity reviewed against the 1986 timetable and linked airport/history sources. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position. Rio International is Galeão, not Santos Dumont. Historical IANA daylight saving time is used (UTC-2 in the selected window)."
+    },
+    {
+      "id": "CCS",
+      "name": "Caracas – Maiquetía",
+      "country": "ve",
+      "timezone": "America/Caracas",
+      "lat": 10.602214,
+      "lon": -66.991174,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "SVMI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://ourairports.com/airports/SVMI/",
+        "https://inacvenezuela.wordpress.com/2016/02/05/historia-de-la-aviacion-en-venezuela/"
+      ],
+      "location_note": "Historical airport identity reviewed against the 1986 timetable and linked airport/history sources. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "MAR",
+      "name": "Maracaibo – La Chinita",
+      "country": "ve",
+      "timezone": "America/Caracas",
+      "lat": 10.557542,
+      "lon": -71.729307,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "SVMC",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://ourairports.com/airports/SVMC/",
+        "https://baer.gob.ve/aeropuerto-internacional-la-chinita/"
+      ],
+      "location_note": "Historical airport identity reviewed against the 1986 timetable and linked airport/history sources. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position. La Chinita opened in 1969; coordinates do not use the former Grano de Oro airport."
+    },
+    {
+      "id": "POS",
+      "name": "Port of Spain – Piarco",
+      "country": "tt",
+      "timezone": "America/Port_of_Spain",
+      "lat": 10.59535,
+      "lon": -61.337568,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "TTPP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://ourairports.com/airports/TTPP/",
+        "https://tntairports.com/piarco-international-airport/",
+        "https://en.wikipedia.org/wiki/Piarco_International_Airport"
+      ],
+      "location_note": "Historical airport identity reviewed against the 1986 timetable and linked airport/history sources. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    },
+    {
+      "id": "MEX",
+      "name": "Mexico City International",
+      "country": "mx",
+      "timezone": "America/Mexico_City",
+      "lat": 19.435822,
+      "lon": -99.07033,
+      "coordinate_source": "https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv",
+      "coordinate_record_id": "MMMX",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://ourairports.com/airports/MMMX/",
+        "https://www.aicm.com.mx/aicm-cumple-96-anos-de-operaciones/05-11-2024"
+      ],
+      "location_note": "Historical airport identity reviewed against the 1986 timetable and linked airport/history sources. Approximate airfield coordinates, not a reconstructed 1986 gate or aircraft position."
+    }
+  ]
+}

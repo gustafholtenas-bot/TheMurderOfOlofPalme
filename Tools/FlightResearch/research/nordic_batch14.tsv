@@ -1,0 +1,8 @@
+airline	flight	origin	destination	departure	arrival	days	source	page	service_group	leg_index
+braathens	211	SVG	HAU	09:35	09:55	12345	braathens-19851027	11; corroborated 10 and 20	braathens-211-TRF-SVG	2
+braathens	211	HAU	BGO	10:10	10:35	12345	braathens-19851027	10; corroborated 11 and 20	braathens-211-TRF-SVG	3
+braathens	237	SVG	HAU	15:45	16:05	12345	braathens-19851027	11; corroborated 10 and 20	braathens-237-TRF-SVG	2
+braathens	237	HAU	BGO	16:20	16:45	12345	braathens-19851027	10; corroborated 11 and 20	braathens-237-TRF-SVG	3
+braathens	271	KRS	SVG	08:25	08:55	12345	braathens-19851027	11; corroborated 10 and 20	braathens-271-SVG-BGO	1
+braathens	273	KRS	SVG	11:30	12:00	12345	braathens-19851027	11; corroborated 10	braathens-273-KRS-SVG	1
+air-uk	620	HUY	EBJ	11:40	14:40	12345	humberside-19851027	unnumbered Flight Departures panel (image 2)	air-uk-620-HUY-EBJ	1

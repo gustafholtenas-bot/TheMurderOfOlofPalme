@@ -1,0 +1,41 @@
+{
+  "batch": 31,
+  "airports": [
+    {
+      "id": "LIS",
+      "name": "Lisboa–Portela de Sacavém",
+      "country": "pt",
+      "timezone": "Europe/Lisbon",
+      "lat": 38.77416667,
+      "lon": -9.13416667,
+      "coordinate_source": "https://ais.nav.pt/wp-content/uploads/AIS_Files/eAIP_Current/eAIP_Online/eAIP/html/eAIP/LP-AD-2.LPPT-en-PT.html",
+      "coordinate_record_id": "LPPT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.ana.pt/pt/institucional/ambiente-e-sustentabilidade/os-nossos-aeroportos"
+      ],
+      "location_note": "Approximate airfield reference marker from NAV Portugal AIP consulted in 2026, not a reconstructed 1986 gate or aircraft position. Contemporary 1985/86 timetable names Portela de Sacavém and Pedras Rubras; ANA identifies the present fields. Historical field name retained.",
+      "arp_dms_as_published": "384627N 0090803W",
+      "checked_on": "2026-09-28"
+    },
+    {
+      "id": "OPO",
+      "name": "Porto–Pedras Rubras",
+      "country": "pt",
+      "timezone": "Europe/Lisbon",
+      "lat": 41.23555556,
+      "lon": -8.67805556,
+      "coordinate_source": "https://ais.nav.pt/wp-content/uploads/AIS_Files/eAIP_Current/eAIP_Online/eAIP/html/eAIP/LP-AD-2.LPPR-en-PT.html",
+      "coordinate_record_id": "LPPR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.ana.pt/pt/institucional/ambiente-e-sustentabilidade/os-nossos-aeroportos"
+      ],
+      "location_note": "Approximate airfield reference marker from NAV Portugal AIP consulted in 2026, not a reconstructed 1986 gate or aircraft position. Contemporary 1985/86 timetable names Portela de Sacavém and Pedras Rubras; ANA identifies the present fields. Historical field name retained.",
+      "arp_dms_as_published": "411408N 0084041W",
+      "checked_on": "2026-09-28"
+    }
+  ]
+}

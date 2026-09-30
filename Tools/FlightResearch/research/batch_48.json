@@ -1,0 +1,186 @@
+{
+  "batch": 48,
+  "package": "v49",
+  "checked_on": "2026-09-29",
+  "kind": "country_followup_and_schedule_import",
+  "previous_movements": 2430,
+  "new_schedules": 28,
+  "new_schedule_ids": [
+    "aer-lingus-602-DUB-AMS-0800-b48",
+    "british-airways-861-DUB-BHX-0925-b48",
+    "british-airways-863-DUB-BHX-1300-b48",
+    "aer-lingus-272-DUB-BHX-1800-b48",
+    "aer-lingus-282-DUB-BRS-0845-b48",
+    "aer-lingus-286-DUB-BRS-1515-b48",
+    "aer-lingus-642-DUB-BRU-1020-b48",
+    "aer-lingus-644-DUB-BRU-1515-b48",
+    "sabena-634-DUB-BRU-1955-b48",
+    "aer-lingus-624-DUB-CPH-0945-b48",
+    "aer-lingus-722-DUB-ORK-0815-b48",
+    "aer-lingus-724-DUB-ORK-1245-b48",
+    "aer-lingus-726-DUB-ORK-1520-b48",
+    "aer-lingus-800-DUB-ORK-1800-b48",
+    "aer-lingus-698-DUB-DUS-1615-b48",
+    "aer-lingus-322-DUB-EMA-0830-b48",
+    "aer-lingus-328-DUB-EMA-1725-b48",
+    "aer-lingus-254-DUB-EDI-1100-b48",
+    "aer-lingus-258-DUB-EDI-1815-b48",
+    "british-airways-838-LHR-ORK-1115-b48",
+    "aer-lingus-713-LHR-ORK-1550-b48",
+    "aer-lingus-717-LHR-ORK-1940-b48",
+    "british-airways-834-LHR-SNN-1025-b48",
+    "aer-lingus-143-LHR-SNN-1115-b48",
+    "dan-air-723-LGW-ORK-1500-b48",
+    "dan-air-724-ORK-LGW-1700-b48",
+    "dan-air-772-DUB-LGW-0950-b48",
+    "dan-air-756-DUB-NCL-1745-b48"
+  ],
+  "new_candidate_schedules": 0,
+  "new_candidate_ids": [],
+  "research_only_rows": 6,
+  "new_airports": [
+    "ORK",
+    "SNN",
+    "BHX",
+    "EMA"
+  ],
+  "new_country_ids": [],
+  "new_airline_ids": [],
+  "new_source_ids": [
+    "aer-lingus-19851027-winter",
+    "aer-lingus-19850331-notation-reference"
+  ],
+  "updated_source_ids": [
+    "dan-air-19851027-system"
+  ],
+  "unchanged_previous_movements": 2430,
+  "corrected_previous_movements": 0,
+  "withheld_previous_movements": 0,
+  "overflight_records_added": 0,
+  "coverage_complete": false,
+  "next_country": "fr",
+  "reviewed_countries_this_batch": [
+    "im",
+    "ie"
+  ],
+  "new_movements": 37,
+  "total_movements": 2467,
+  "new_leg_ids": [
+    "aer-lingus-602-DUB-AMS-0800-b48@1986-02-28",
+    "aer-lingus-722-DUB-ORK-0815-b48@1986-02-28",
+    "aer-lingus-322-DUB-EMA-0830-b48@1986-02-28",
+    "aer-lingus-282-DUB-BRS-0845-b48@1986-02-28",
+    "british-airways-861-DUB-BHX-0925-b48@1986-02-28",
+    "dan-air-772-DUB-LGW-0950-b48@1986-02-28",
+    "british-airways-834-LHR-SNN-1025-b48@1986-02-28",
+    "aer-lingus-254-DUB-EDI-1100-b48@1986-02-28",
+    "aer-lingus-143-LHR-SNN-1115-b48@1986-02-28",
+    "british-airways-838-LHR-ORK-1115-b48@1986-02-28",
+    "aer-lingus-724-DUB-ORK-1245-b48@1986-02-28",
+    "dan-air-723-LGW-ORK-1500-b48@1986-02-28",
+    "aer-lingus-286-DUB-BRS-1515-b48@1986-02-28",
+    "aer-lingus-644-DUB-BRU-1515-b48@1986-02-28",
+    "aer-lingus-726-DUB-ORK-1520-b48@1986-02-28",
+    "aer-lingus-713-LHR-ORK-1550-b48@1986-02-28",
+    "aer-lingus-698-DUB-DUS-1615-b48@1986-02-28",
+    "dan-air-724-ORK-LGW-1700-b48@1986-02-28",
+    "aer-lingus-328-DUB-EMA-1725-b48@1986-02-28",
+    "dan-air-756-DUB-NCL-1745-b48@1986-02-28",
+    "aer-lingus-272-DUB-BHX-1800-b48@1986-02-28",
+    "aer-lingus-800-DUB-ORK-1800-b48@1986-02-28",
+    "aer-lingus-258-DUB-EDI-1815-b48@1986-02-28",
+    "aer-lingus-717-LHR-ORK-1940-b48@1986-02-28",
+    "sabena-634-DUB-BRU-1955-b48@1986-02-28",
+    "aer-lingus-602-DUB-AMS-0800-b48@1986-03-01",
+    "aer-lingus-722-DUB-ORK-0815-b48@1986-03-01",
+    "aer-lingus-282-DUB-BRS-0845-b48@1986-03-01",
+    "aer-lingus-624-DUB-CPH-0945-b48@1986-03-01",
+    "aer-lingus-642-DUB-BRU-1020-b48@1986-03-01",
+    "british-airways-834-LHR-SNN-1025-b48@1986-03-01",
+    "aer-lingus-143-LHR-SNN-1115-b48@1986-03-01",
+    "british-airways-838-LHR-ORK-1115-b48@1986-03-01",
+    "british-airways-863-DUB-BHX-1300-b48@1986-03-01",
+    "aer-lingus-713-LHR-ORK-1550-b48@1986-03-01",
+    "aer-lingus-272-DUB-BHX-1800-b48@1986-03-01",
+    "aer-lingus-258-DUB-EDI-1815-b48@1986-03-01"
+  ],
+  "new_movements_by_source_airline": {
+    "aer-lingus": 26,
+    "british-airways": 6,
+    "dan-air": 4,
+    "sabena": 1
+  },
+  "new_directed_endpoint_pairs": [
+    [
+      "DUB",
+      "AMS"
+    ],
+    [
+      "DUB",
+      "BHX"
+    ],
+    [
+      "DUB",
+      "BRS"
+    ],
+    [
+      "DUB",
+      "BRU"
+    ],
+    [
+      "DUB",
+      "CPH"
+    ],
+    [
+      "DUB",
+      "DUS"
+    ],
+    [
+      "DUB",
+      "EDI"
+    ],
+    [
+      "DUB",
+      "EMA"
+    ],
+    [
+      "DUB",
+      "LGW"
+    ],
+    [
+      "DUB",
+      "NCL"
+    ],
+    [
+      "DUB",
+      "ORK"
+    ],
+    [
+      "LGW",
+      "ORK"
+    ],
+    [
+      "LHR",
+      "ORK"
+    ],
+    [
+      "LHR",
+      "SNN"
+    ],
+    [
+      "ORK",
+      "LGW"
+    ]
+  ],
+  "total_directed_endpoint_pairs": 683,
+  "runtime_coverage": {
+    "registered_airlines": 93,
+    "registered_countries": 81,
+    "reviewed_schedules": 1727,
+    "animated_airlines": 47,
+    "scheduled_movements": 2466,
+    "confirmed_movements": 1
+  },
+  "new_nordic_endpoint_movements": 1,
+  "nordic_endpoint_movements": 161
+}

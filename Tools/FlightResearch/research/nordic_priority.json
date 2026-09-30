@@ -1,0 +1,1301 @@
+{
+  "schema": 1,
+  "checked_on": "2026-09-29",
+  "runtime_import": false,
+  "purpose": "Prioriterad forskningskö, inte en lista över bevisade flyg eller fullständig nordisk trafik.",
+  "window": {
+    "start_utc": "1986-02-27T22:21:30Z",
+    "anchor_utc": "1986-02-28T22:21:30Z",
+    "end_utc": "1986-03-01T22:21:30Z",
+    "selection": "interval_overlap"
+  },
+  "scope": {
+    "country_ids": [
+      "se",
+      "no",
+      "dk",
+      "fi",
+      "is"
+    ],
+    "additional_regions": [
+      "Åland",
+      "Färöarna",
+      "Grönland"
+    ],
+    "categories": [
+      "scheduled",
+      "charter",
+      "cargo",
+      "business_private",
+      "military"
+    ],
+    "coverage_complete": false,
+    "definition": "Start eller mål i Norden samt flyg över nordiskt territorium. Nordiska FIR/UIR undersöks också men redovisas separat."
+  },
+  "baseline": {
+    "runtime_version": "v76",
+    "total_movements": 4819,
+    "nordic_endpoint_movements": 161,
+    "endpoint_movements_by_country": {
+      "se": 87,
+      "no": 52,
+      "dk": 85,
+      "fi": 4,
+      "is": 0
+    },
+    "nordic_leg_ids": [
+      "braathens-221-SVG-BGO-0645@1986-02-28",
+      "braathens-223-SVG-BGO-0700@1986-02-28",
+      "golden-air-502-KSK-BMA-0710@1986-02-28",
+      "sas-673-ARN-CPH-0730@1986-02-28",
+      "sas-400-CPH-ARN-0740@1986-02-28",
+      "sas-401-ARN-CPH-0750@1986-02-28",
+      "braathens-070-KRS-FBU-0755@1986-02-28",
+      "golden-air-503-BMA-KSK-0800@1986-02-28",
+      "sas-593-ARN-CPH-0800@1986-02-28",
+      "braathens-211-TRF-SVG-0820@1986-02-28",
+      "braathens-271-KRS-SVG-0825@1986-02-28",
+      "air-france-792-CDG-CPH-0855@1986-02-28",
+      "northwest-44-LGW-ARN-0805@1986-02-28",
+      "golden-air-513-KSD-OLD-FBU-0910@1986-02-28",
+      "sas-571-ARN-CDG-0910@1986-02-28",
+      "sas-402-CPH-ARN-0915@1986-02-28",
+      "braathens-271-SVG-BGO-0920@1986-02-28",
+      "sas-404-CPH-ARN-0920@1986-02-28",
+      "braathens-211-SVG-HAU-0935@1986-02-28",
+      "sas-403-ARN-CPH-0935@1986-02-28",
+      "sas-563-CPH-CDG-0940@1986-02-28",
+      "sas-581-ARN-CPH-0945@1986-02-28",
+      "air-uk-602-ABZ-SVG-0850@1986-02-28",
+      "braathens-211-HAU-BGO-1010@1986-02-28",
+      "golden-air-514-FBU-KSD-OLD-1015@1986-02-28",
+      "sas-405-ARN-CPH-1015@1986-02-28",
+      "braathens-202-KRS-FBU-1020@1986-02-28",
+      "air-france-796-CDG-FBU-1030@1986-02-28",
+      "air-france-790-CDG-ARN-1040@1986-02-28",
+      "braathens-233-SVG-BGO-1115@1986-02-28",
+      "sas-730-CPH-ARN-1120@1986-02-28",
+      "braathens-135-RRS-FBU-1125@1986-02-28",
+      "sas-412-CPH-ARN-1125@1986-02-28",
+      "braathens-273-KRS-SVG-1130@1986-02-28",
+      "golden-air-504-KSK-BMA-1130@1986-02-28",
+      "air-france-793-CPH-CDG-1140@1986-02-28",
+      "braathens-238-HAU-SVG-1140@1986-02-28",
+      "dan-air-102-NCL-SVG-1040-d5-b46@1986-02-28",
+      "dan-air-842-NCL-FBU-1045-d5-b46@1986-02-28",
+      "sas-575-CPH-NCE-1210@1986-02-28",
+      "sas-564-CDG-CPH-1220@1986-02-28",
+      "sas-531-SVG-ABZ-1225@1986-02-28",
+      "air-uk-660-NCL-CPH-1130@1986-02-28",
+      "braathens-272-KRS-FBU-1235@1986-02-28",
+      "air-uk-620-HUY-EBJ-1140@1986-02-28",
+      "braathens-136-RRS-TRD-1240@1986-02-28",
+      "sas-407-ARN-CPH-1245@1986-02-28",
+      "sas-572-CDG-ARN-1245@1986-02-28",
+      "golden-air-505-BMA-KSK-1300@1986-02-28",
+      "sas-411-ARN-CPH-1315@1986-02-28",
+      "air-france-796-FBU-GOT-1325@1986-02-28",
+      "air-france-790-ARN-HEL-1345@1986-02-28",
+      "golden-air-515-KSD-OLD-FBU-1415@1986-02-28",
+      "sas-532-ABZ-SVG-1315@1986-02-28",
+      "sas-674-CPH-ARN-1415@1986-02-28",
+      "sas-413-ARN-CPH-1425@1986-02-28",
+      "braathens-237-TRF-SVG-1430@1986-02-28",
+      "air-france-796-GOT-CDG-1445@1986-02-28",
+      "sas-684-CPH-ARN-1505@1986-02-28",
+      "air-business-163-EBJ-AAR-1510@1986-02-28",
+      "air-france-1790-LYS-CPH-1510@1986-02-28",
+      "air-uk-621-EBJ-HUY-1510@1986-02-28",
+      "dan-air-107-SVG-NCL-1510-d5-b46@1986-02-28",
+      "sas-414-CPH-ARN-1510@1986-02-28",
+      "dan-air-843-FBU-NCL-1520-d5-b46@1986-02-28",
+      "air-france-791-HEL-ARN-1625@1986-02-28",
+      "air-uk-661-CPH-NCL-1525@1986-02-28",
+      "golden-air-516-FBU-KSD-OLD-1530@1986-02-28",
+      "braathens-237-SVG-HAU-1545@1986-02-28",
+      "sas-415-ARN-CPH-1555@1986-02-28",
+      "air-france-576-NCE-CPH-1600@1986-02-28",
+      "sas-573-ARN-CDG-1605@1986-02-28",
+      "sas-569-FBU-CDG-1610@1986-02-28",
+      "sas-682-CPH-ARN-1615@1986-02-28",
+      "braathens-237-HAU-BGO-1620@1986-02-28",
+      "sas-567-CPH-CDG-1620@1986-02-28",
+      "golden-air-506-KSK-BMA-1645@1986-02-28",
+      "aeroflot-580-SVO-CPH-1850@1986-02-28",
+      "air-uk-601-SVG-ABZ-1650@1986-02-28",
+      "braathens-052-KRS-FBU-1650@1986-02-28",
+      "sas-419-ARN-CPH-1650@1986-02-28",
+      "air-france-791-ARN-CDG-1705@1986-02-28",
+      "air-france-798-CDG-CPH-1715@1986-02-28",
+      "golden-air-507-BMA-KSK-1735@1986-02-28",
+      "sas-517-BGO-LGW-1745-d5-b46@1986-02-28",
+      "sas-418-CPH-ARN-1800@1986-02-28",
+      "sas-417-ARN-CPH-1805@1986-02-28",
+      "sas-424-CPH-ARN-1805@1986-02-28",
+      "sas-1791-CPH-LYS-1820@1986-02-28",
+      "braathens-210-HAU-SVG-1825@1986-02-28",
+      "golden-air-517-KSD-OLD-FBU-1850@1986-02-28",
+      "sas-731-ARN-CPH-1850@1986-02-28",
+      "sas-426-CPH-ARN-1905@1986-02-28",
+      "sas-570-CDG-GOT-1905@1986-02-28",
+      "sas-574-CDG-ARN-1920@1986-02-28",
+      "sas-568-CDG-CPH-1935@1986-02-28",
+      "golden-air-518-FBU-KSD-OLD-1945@1986-02-28",
+      "sas-423-ARN-CPH-1950@1986-02-28",
+      "sas-425-ARN-CPH-1955@1986-02-28",
+      "air-france-799-CPH-CDG-2000@1986-02-28",
+      "sas-582-CPH-ARN-2010@1986-02-28",
+      "sas-422-CPH-ARN-2015@1986-02-28",
+      "braathens-231-TRF-SVG-2020@1986-02-28",
+      "sas-420-CPH-ARN-2210@1986-02-28",
+      "braathens-221-SVG-BGO-0645@1986-03-01",
+      "sas-673-ARN-CPH-0730@1986-03-01",
+      "sas-400-CPH-ARN-0740@1986-03-01",
+      "sas-401-ARN-CPH-0750@1986-03-01",
+      "braathens-070-KRS-FBU-0755@1986-03-01",
+      "sas-593-ARN-CPH-0800@1986-03-01",
+      "air-france-792-CDG-CPH-0855@1986-03-01",
+      "sas-571-ARN-CDG-0910@1986-03-01",
+      "braathens-275-SVG-BGO-0920@1986-03-01",
+      "sas-404-CPH-ARN-0920@1986-03-01",
+      "sas-403-ARN-CPH-0935@1986-03-01",
+      "sas-563-CPH-CDG-0940@1986-03-01",
+      "sas-581-ARN-CPH-0945@1986-03-01",
+      "sas-405-ARN-CPH-1015@1986-03-01",
+      "air-france-796-CDG-FBU-1030@1986-03-01",
+      "air-france-790-CDG-ARN-1040@1986-03-01",
+      "aer-lingus-624-DUB-CPH-0945-b48@1986-03-01",
+      "sas-406-CPH-ARN-1120@1986-03-01",
+      "sas-412-CPH-ARN-1125@1986-03-01",
+      "air-france-793-CPH-CDG-1140@1986-03-01",
+      "braathens-204-KRS-FBU-1150@1986-03-01",
+      "braathens-134-RRS-TRD-1155@1986-03-01",
+      "sas-575-CPH-NCE-1210@1986-03-01",
+      "northwest-37-ARN-GEN-1220@1986-03-01",
+      "sas-564-CDG-CPH-1220@1986-03-01",
+      "sas-533-SVG-ABZ-1225@1986-03-01",
+      "jal-418-AMS-CPH-1230@1986-03-01",
+      "sas-409-ARN-CPH-1240@1986-03-01",
+      "sas-407-ARN-CPH-1245@1986-03-01",
+      "sas-572-CDG-ARN-1245@1986-03-01",
+      "sas-411-ARN-CPH-1315@1986-03-01",
+      "air-france-796-FBU-GOT-1325@1986-03-01",
+      "braathens-137-RRS-FBU-1325@1986-03-01",
+      "air-france-790-ARN-HEL-1345@1986-03-01",
+      "sas-534-ABZ-SVG-1315@1986-03-01",
+      "sas-674-CPH-ARN-1415@1986-03-01",
+      "northwest-37-GEN-JFK-1420@1986-03-01",
+      "air-france-796-GOT-CDG-1445@1986-03-01",
+      "braathens-274-KRS-FBU-1505@1986-03-01",
+      "jal-418-CPH-ANC-1505@1986-03-01",
+      "sas-684-CPH-ARN-1505@1986-03-01",
+      "sas-414-CPH-ARN-1510@1986-03-01",
+      "air-france-791-HEL-ARN-1625@1986-03-01",
+      "sas-415-ARN-CPH-1555@1986-03-01",
+      "air-france-576-NCE-CPH-1600@1986-03-01",
+      "sas-682-CPH-ARN-1615@1986-03-01",
+      "sas-567-CPH-CDG-1620@1986-03-01",
+      "sas-419-ARN-CPH-1650@1986-03-01",
+      "air-france-791-ARN-CDG-1705@1986-03-01",
+      "air-france-798-CDG-CPH-1715@1986-03-01",
+      "sas-596-CPH-ARN-1800@1986-03-01",
+      "sas-417-ARN-CPH-1805@1986-03-01",
+      "sas-426-CPH-ARN-1905@1986-03-01",
+      "sas-568-CDG-CPH-1935@1986-03-01",
+      "air-france-799-CPH-CDG-2000@1986-03-01",
+      "sas-582-CPH-ARN-2010@1986-03-01",
+      "sas-420-CPH-ARN-2210@1986-03-01"
+    ],
+    "confirmed_overflights": 0,
+    "overflight_coverage_complete": false,
+    "note": "Landtalen överlappar. Noll bekräftade överflygningar betyder att belägg ännu saknas i projektet."
+  },
+  "operator_queue": [
+    {
+      "airline": "sas",
+      "priority": 1,
+      "task": "find_additional_winter_rows",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 77
+    },
+    {
+      "airline": "linjeflyg",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "swedair",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "golden-air",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 12
+    },
+    {
+      "airline": "braathens",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 28
+    },
+    {
+      "airline": "wideroe",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "norving",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "maersk-air",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "cimber-air",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "finnair",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "icelandair",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "northwest",
+      "priority": 1,
+      "task": "read_winter_departure_pages",
+      "basis": "imported_nordic_endpoint_legs",
+      "imported_nordic_endpoint_legs": 3
+    },
+    {
+      "airline": "british-airways",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "british-caledonian",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "lufthansa",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "interflug",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "air-france",
+      "priority": 2,
+      "task": "find_additional_winter_rows",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 25
+    },
+    {
+      "airline": "klm",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "lot",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "aeroflot",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 1
+    },
+    {
+      "airline": "panam",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "twa",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "air-canada",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "cp-air",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "jal",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 2
+    },
+    {
+      "airline": "caac",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "el-al",
+      "priority": 2,
+      "task": "check_nordic_service_and_route_sources",
+      "basis": "research_target_not_service_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "air-uk",
+      "priority": 2,
+      "task": "find_full_nordic_winter_legs_and_amendments",
+      "basis": "contemporary_connection_or_route_lead_not_overflight_evidence",
+      "imported_nordic_endpoint_legs": 6
+    },
+    {
+      "airline": "dan-air",
+      "priority": 2,
+      "task": "find_full_nordic_winter_legs_and_amendments",
+      "basis": "contemporary_connection_or_route_lead_not_overflight_evidence",
+      "imported_nordic_endpoint_legs": 0
+    },
+    {
+      "airline": "air-business",
+      "priority": 1,
+      "task": "find_additional_winter_rows",
+      "basis": "registered_nordic_home_country",
+      "imported_nordic_endpoint_legs": 1
+    }
+  ],
+  "source_leads": [
+    {
+      "id": "icelandair-winter",
+      "airline": "icelandair",
+      "status": "cover_reviewed",
+      "catalog_source_id": "icelandair-19851027",
+      "url": "https://www.airtimes.com/cgat/is/icelandair/1a/fi851027.jpg",
+      "finding": "Vinteromslaget har granskats visuellt: 27 oktober 1985–29 mars 1986. Avgångssidor och eventuella ersättningsutgåvor återstår att läsa; inga Icelandair-flyg importerade.",
+      "next_action": "Hitta avgångssidor, teckenförklaring och eventuella ändringsblad i rätt vinterutgåva."
+    },
+    {
+      "id": "sas-winter",
+      "airline": "sas",
+      "status": "cover_or_catalog_only",
+      "catalog_source_id": "sas-qrt-19851027",
+      "url": "https://oarnestadcollection.com/TT/SAS.asp",
+      "finding": "Rätt vinteromslag finns sedan tidigare. Förnyad indexgranskning gav inga läsbara avgångssidor.",
+      "next_action": "Sök hela SAS-tabellen och den gemensamma svenska inrikestabellen med Linjeflyg."
+    },
+    {
+      "id": "braathens-winter",
+      "airline": "braathens",
+      "status": "partial_scan_reviewed",
+      "catalog_source_id": "braathens-19851027",
+      "url": "https://www.ebay.co.uk/itm/206172029345",
+      "finding": "20 uttryckliga nonstoprader plus sex fullständigt tidsatta delsträckor matchade mellan s. 10, 11 och 20; 28 avgångar totalt.",
+      "next_action": "Hitta resterande tabellsidor, teckenförklaring, returflyg och eventuella ändringsblad."
+    },
+    {
+      "id": "finnair-winter",
+      "airline": "finnair",
+      "status": "catalog_only",
+      "catalog_source_id": "finnair-19851223",
+      "url": "https://www.finna.fi/Record/sim.M016-27847",
+      "finding": "Museiposten anger 53 sidor, 23 december 1985–29 mars 1986, andra vinterutgåvan. Full sidåtkomst saknas i denna granskning.",
+      "next_action": "Lokalisera läsbara tabellsidor till SIMPP690:1. Håll 1987-utgåvor utanför importen."
+    },
+    {
+      "id": "aeroflot-winter",
+      "airline": "aeroflot",
+      "status": "catalog_only",
+      "catalog_source_id": "aeroflot-winter-1985",
+      "url": "https://aeroflotarchives.com/timetables.html",
+      "finding": "Katalogen listar Winter 1985–86, 28 oktober–28 mars, 52 sidor. Ingen ny avgångssida granskad.",
+      "next_action": "Läs internationella vinterrutter och separat färdvägsunderlag; linjens ändpunkter belägger inte överflygning."
+    },
+    {
+      "id": "swedish-air-archives",
+      "status": "archive_finding_aid",
+      "url": "https://riksarkivet.se/utforska-och-bestall/bestall-kopior-och-undersokningsuppdrag/flyg",
+      "finding": "Riksarkivet beskriver handlingar från Luftfartsverket och svenska flygplatsarkiv. Bevarande av färdplaner, strippar eller radar för februari 1986 är inte fastställt.",
+      "next_action": "Identifiera arkivbildare, serier och bevarande/gallring för 27 februari–2 mars 1986. Inget beställningsmeddelande har skickats."
+    },
+    {
+      "id": "lfv-route-information",
+      "status": "method_reference_only",
+      "url": "https://www.lfv.se/tjanster/informationstjanster/ais-och-fardplanering",
+      "finding": "LFV beskriver AIP som informationskälla för bland annat luftrum, flygvägar och kartor. Dagens sida är inte en karta över 1986 års flygvägar.",
+      "next_action": "Sök en historisk AIP och ändringar/NOTAM giltiga vid mordhelgen; koppla sedan till daterade flyguppgifter."
+    },
+    {
+      "id": "sas-linjeflyg-malmo-winter",
+      "airline": "linjeflyg",
+      "status": "partial_scan_insufficient_leg_detail",
+      "catalog_source_id": "sas-linjeflyg-malmo-19860107",
+      "url": "https://www.ebay.co.uk/itm/198453305668",
+      "finding": "Omslag och s. 14, 15, 22, 23 lästa. Resornas delsträckor och flygnummer saknas; inga nya flyg importerade.",
+      "next_action": "Hitta hela utgåvan och systemtabeller som anger flygnummer, mellanlandningar och tider per sträcka."
+    },
+    {
+      "id": "teesside-winter-nordic",
+      "airline": "air-uk",
+      "status": "connection_itineraries_reviewed",
+      "url": "https://www.dtvmovements.co.uk/Info/History/Documents/Programmes/Timetable_1985W.pdf",
+      "catalog_source_id": "teesside-winter-1985",
+      "finding": "Esbjergs utgående delsträcka kompletterad från Humbersidetabellen. Tre Casair-rader undantagna efter tidskonflikt; Teessidekällan bidrar nu med 26 rörelser.",
+      "next_action": "Air UK:s första vinterutgåva har delvis importerats i v23/v25. Sök saknade delsträckor, SAS och Air Ecosse samt februariändringar."
+    },
+    {
+      "id": "lot-winter-nordic",
+      "airline": "lot",
+      "status": "partial_scan_insufficient_leg_detail",
+      "url": "https://www.ebay.com/itm/198449943966",
+      "catalog_source_id": "lot-19851027",
+      "finding": "LO362/351/371 hittade i transferförslag. Direktflygsidorna och transferfotnoter saknas.",
+      "next_action": "Hitta s. 4–7 och 11; kontrollera Copenhagen, Stockholm, Helsinki samt Helsinkis tryckta GMT-offset."
+    },
+    {
+      "id": "finnair-mixed-season-listing",
+      "airline": "finnair",
+      "status": "winter_cover_summer_interior_excluded",
+      "url": "https://www.ebay.com/itm/205166838524",
+      "catalog_source_id": "finnair-19851027",
+      "finding": "Vinteromslag men sommaruppslag i samma annons; inga importerade tider.",
+      "next_action": "Hitta faktiska vintersidor; prioritera den redan registrerade 23 december-utgåvan."
+    },
+    {
+      "id": "se-fnz-halmstad-19860228",
+      "status": "reported_movement_missing_arrival",
+      "url": "https://www.dtvmovements.co.uk/Archivesmonths/1986/1986%20-%20Feb.pdf",
+      "catalog_source_id": "teesside-movements-198602",
+      "finding": "Tryckt s. 26: SE-FNZ Be55 från Billund 27 feb 13.56; till Halmstad 28 feb 15.02. Tider avser Teesside. Tidszon ej angiven.",
+      "next_action": "Sök Halmstads ankomstjournal 28 februari, Billunds avgångslista 27 februari och flygplans-/operatörslogg. Ingen last eller anknytning till mordet belagd."
+    },
+    {
+      "id": "humberside-esbjerg-winter",
+      "airline": "air-uk",
+      "status": "partially_imported",
+      "url": "https://www.ebay.co.uk/itm/198565828590",
+      "catalog_source_id": "humberside-19851027",
+      "finding": "UK620 HUY–EBJ fredag 11.40–14.40 lokal tid importerad. Ingen lördagstrafik angiven.",
+      "next_action": "UK621-returen importerades från Air UK i v23. Hitta återstående Humbersidepaneler och senare Air UK-ändringar."
+    },
+    {
+      "id": "aeroflot-first-winter-nordic",
+      "airline": "aeroflot",
+      "status": "partially_imported",
+      "url": "https://www.ebay.com/itm/136906585239",
+      "catalog_source_id": "aeroflot-19851027-first",
+      "finding": "Nya fotografier av samma första vinterutgåva ger s. 2–3, 14–15 och 30–31. SU580 SVO–CPH fredag 18.50–19.20 lokal tid är fullt tidsatt nonstop och importerad. Övriga visade Köpenhamnsrader ligger på andra veckodagar eller går via Stockholm utan mellantider.",
+      "next_action": "Hitta CPH-returen och sidor för Stockholm, Oslo, Helsinki, Tampere och Longyear; kontrollera senare vinterändringar. Sök separat färdvägsbelägg för faktiska överflygningar."
+    },
+    {
+      "id": "sas-palme-archive-a6774-01",
+      "airline": "sas",
+      "status": "archival_note_reviewed_timetable_missing",
+      "url": "https://wpu.nu/wiki/Uppslag:A6774-01",
+      "document_url": "https://wpu.nu/images/c/cd/Pol-1987-10-12_A6774-01_Ang%C3%A5ende_passagerarlistor_SAS.pdf",
+      "finding": "Ensidig anteckning hänvisar till SAS-tidtabell med angiven period 1985-09-25–1986-03-29 och förvaring bland originalhandlingarna. Själva tabellen ingår inte i den granskade publicerade PDF:en. Perioden är anteckningens uppgift, inte kontrollerad mot ett tidtabellsomslag.",
+      "next_action": "Lokalisera tidtabellsbilagan till A6774-01 och kontrollera omslag, fullständiga delsträckor och februariändringar. Inget arkivmeddelande har skickats."
+    },
+    {
+      "id": "sas-palme-archive-a6774-00",
+      "airline": "sas",
+      "status": "archival_note_reviewed_passenger_lists_missing",
+      "url": "https://wpu.nu/wiki/Uppslag:A6774-00",
+      "document_url": "https://wpu.nu/images/3/3a/Pol-1986-05-06_A6774-00_Ang%C3%A5ende_passagerarlistor_SAS.pdf",
+      "finding": "PM 6 maj 1986 hänvisar till insamlade listor för avgångar från Arlanda 1–7 mars och charter 1–15 mars. PM beskriver uppgifter om avgångstid, flygnummer och destination; listorna finns inte i den granskade ensidiga PDF:en.",
+      "next_action": "Lokalisera bilagorna till A6774-00. Granska särskilt avgångarna 1 mars som överlappar spelfönstret; verifiera tidsprecision och ankomstkälla innan animation."
+    },
+    {
+      "id": "jal-winter-advance",
+      "airline": "jal",
+      "status": "partially_imported_advance_edition",
+      "catalog_source_id": "jal-19851101-advance",
+      "url": "https://www.ebay.co.uk/itm/198537995729",
+      "finding": "Förhandsutgåva 1 november 1985–31 mars 1986. JL418 lördag AMS–CPH och CPH–ANC överlappar fönstret; vidare ANC–NRT startar efter slutgränsen. JL416:s måndagskolumn ligger utanför fönstret. Två nordiska rörelser importerade.",
+      "next_action": "Hitta slutlig vinterutgåva, ändringsblad och den saknade utgående polarruttpanelen. Kontrollera eventuella schemaändringar innan status ändras."
+    },
+    {
+      "id": "sas-sweden6-winter-cover",
+      "airline": "sas",
+      "status": "cover_reviewed_departure_pages_missing",
+      "catalog_source_id": "sas-19851115",
+      "url": "https://www.ebay.com/itm/226470206404",
+      "finding": "Sweden 6-omslag, giltigt 15 november 1985–29 mars 1986, visuellt granskat. Stockholm–Bangkok nonstop från 18 januari annonseras, men flygnummer, veckodagar och tider saknas. Inga nya rörelser importerade.",
+      "next_action": "Hitta avgångssidorna och eventuella februariändringar; nätuppgiften ensam räcker inte för animation."
+    },
+    {
+      "id": "air-uk-winter-issue1-pdf",
+      "status": "partially_imported",
+      "url": "https://www.airtimes.com/cgat/uk/klmuk/pdf/uk851027-1a.pdf",
+      "finding": "Omgång 22 gav 97 rörelser hos fyra bolag; omgång 24 kompletterar med 84 Air UK-rörelser från 58 rader. Stansted- och Kanalöraderna är genomgångna. Tryckta s. 16–17 och 24–25 saknas.",
+      "next_action": "Hitta saknade uppslag och senare ändringar. Bergen–Stavanger, Newcastle–Leeds/Bradford och SAS fortsättningar till Oslo/Köpenhamn behöver separata mellantider.",
+      "v25_update": "Stansted- och Kanalörader genomgångna, 84 ytterligare Air UK-rörelser importerade. Sök saknade tryckta s. 16–17 och 24–25 samt senare ändringsutgåvor."
+    },
+    {
+      "id": "bcal-north-midlands-winter1985",
+      "status": "needs_itinerary_pages",
+      "url": "https://www.ebay.co.uk/itm/206234854200",
+      "finding": "Sidor 1 och 26–27 är läsbara. SK516 Gatwick–Bergen 10.30–14.05 dagligen och SK524 Gatwick–Århus 18.25–21.05 måndag–fredag/söndag visas som anslutningar.",
+      "next_action": "Kontrollera stopp via SAS-tabell eller flygplaner på s. 39. Inga animerade rörelser från dessa anslutningar ännu."
+    },
+    {
+      "id": "air-france-winter25-nordic",
+      "status": "partially_imported",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "finding": "v24 gav 92 nordiska rörelser; v25 lägger till sex Köpenhamn–Nice/Lyon-rörelser. Samarbetskoder räknas en gång, faktisk operatör ej fastställd.",
+      "next_action": "Kontrollera senare utgåvor, AY873/874, SK563 GOT–CPH, SK570 GOT–FBU och SK594/410:s förhållande till SK674. Marseille–Lyon/retur i AFSK1790/SKAF1791 saknar separata mellantider."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "nordic-operator-census",
+      "priority": 1,
+      "status": "open",
+      "scope": "se,no,dk,fi,is; Åland, Färöarna och Grönland som separata delområden vid behov",
+      "task": "Komplettera registret med samtida belägg för regionalflyg, charter, frakt, affärs-/privatflyg och militär trafik. De 11 nordiska bolagen är ingen fullständig bolagsförteckning."
+    },
+    {
+      "id": "swedish-flight-plans",
+      "priority": 1,
+      "status": "archive_series_not_verified",
+      "source_lead_ids": [
+        "swedish-air-archives"
+      ],
+      "task": "Lokalisera bevarade färdplaner, kontrollcentralernas trafikjournaler/strippar och eventuella radar- eller färdvägsuppgifter för exakta perioden. Flygplatsrörelser ensamma fångar inte överflygningar."
+    },
+    {
+      "id": "other-nordic-atc-archives",
+      "priority": 1,
+      "status": "repositories_to_identify",
+      "task": "Identifiera motsvarande arkiv och historiska kontrollområden för Norge, Danmark, Finland och Island samt relevanta områden kring Färöarna/Grönland. Bevarande av 1986 års rörelsedata måste kontrolleras."
+    },
+    {
+      "id": "historical-airspace",
+      "priority": 1,
+      "status": "historical_sources_needed",
+      "source_lead_ids": [
+        "lfv-route-information"
+      ],
+      "task": "Hämta AIP/kartor och relevanta ändringar från 1986. Registrera FIR/UIR separat från överflygning av territorium. Dagens luftrumsgränser räcker inte."
+    },
+    {
+      "id": "foreign-operator-screening",
+      "priority": 2,
+      "status": "open",
+      "task": "Undersök utländska bolag i kön och fortsätt inventeringen även utanför den. Nordatlantiska, öst–västliga och nord–sydliga linjer är sökspår, inte dokumenterade överflygningar."
+    },
+    {
+      "id": "military-nordic-records",
+      "priority": 1,
+      "status": "open",
+      "related_file": "military_research.json",
+      "task": "Följ upp rörelsejournaler, transportorder och förbandsloggar. Anchor Express 86 är övningskontext; det belägger inte ett visst flyg under mordhelgen."
+    }
+  ],
+  "route_evidence_policy": {
+    "candidate": "Sökspår eller geometriskt urval; inget belägg för flygning eller överflygning.",
+    "planned_route": "Daterad färdplan/clearance anger planerad färdväg; belägger inte faktiskt genomförande.",
+    "documented_actual": "Daterad rörelse-/flygledningshandling anger faktisk passage eller observerade positioner. Belägget gäller bara den tids- och geografiska upplösning som handlingen stödjer.",
+    "animation": "Ingen automatisk import. För tidsatt färdväg krävs granskade positioner och tider. Interpolation måste märkas som modell; en tidtabell eller storcirkel bekräftar aldrig en överflygning.",
+    "deduplication": "Länka belägget till befintligt leg_id när möjligt. En passage skapar inte en ny fysisk avgång."
+  },
+  "overflight_records": [],
+  "batch15_review": {
+    "result": "Inga nya tidsatta nordiska rader eller belagda överflygningar. Nya Europaavgångar importerade från tre vinterkällor.",
+    "details_file": "EUROPE_TIMETABLE_BATCH15.md",
+    "copenhagen_lead": "Dublins nätkarta visar Copenhagen; motsvarande tidsatta tabellsida saknas."
+  },
+  "batch16_review": {
+    "result": "Inga nya kompletta nordiska tidtabellsrader eller belagda överflygningar. Två granskade SAS-arkivhänvisningar sparade. Northwest Stillahavstrafik utökad och Glasgowflygplats rättad till Prestwick.",
+    "details_file": "NORTHWEST_PACIFIC_BATCH16.md"
+  },
+  "batch17_review": {
+    "result": "Förnyade SAS-, Finnair- och Air UK-sökningar gav inga nya läsbara nordiska avgångssidor. Tidigare arkivspår kvarstår. Northwest Asien/Stillahav kompletterat; nordiska rörelser och överflygningsbelägg oförändrade.",
+    "details_file": "NORTHWEST_ASIA_BATCH17.md"
+  },
+  "batch18_review": {
+    "result": "Pan Ams vinterutgåva anger att nya linjer till Helsingfors och Oslo börjar 27 april, utanför fönstret. Inga nya tidsatta nordiska rader eller faktiska överflygningar importerade. Air Canada 16 februari 1986 hittad i omslagskatalog utan avgångssidor; El Al och nordiska kommunikationstidtabeller gav inga nya kompletta flygposter.",
+    "details_file": "PANAM_AMERICAS_BATCH18.md",
+    "panam_expansion_pages": [
+      "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37231/",
+      "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37232/"
+    ]
+  },
+  "batch19_review": {
+    "result": "33 JAL-rörelser från förhandsutgåvan, varav två med Köpenhamn som ändpunkt. SAS-annonsen visar bara omslaget, Aeroflot-indexet saknar läsbara avgångssidor och Tímarit.is kunde inte hämtas. Inga faktiska överflygningar belagda.",
+    "details_file": "JAL_WINTER_BATCH19.md",
+    "source_edition_status": "advance",
+    "additional_source_leads": [
+      "https://www.ebay.com/itm/375823217337",
+      "https://www.aeroflotarchives.com/timetables.html",
+      "https://timarit.is/"
+    ]
+  },
+  "batch20_review": {
+    "result": "SAS Sweden 6-omslaget ger ett källspår till Stockholm–Bangkok men inga kompletta tidtabellsrader. Ingen ny nordisk rörelse eller faktisk överflygning importerad. British Airways och Sabena ger 46 nya planerade rörelser från granskade vintertabeller.",
+    "details_file": "BRITISH_ROUTES_BATCH20.md",
+    "source_lead_ids": [
+      "sas-sweden6-winter-cover"
+    ],
+    "unavailable_listing_urls": [
+      "https://www.ebay.com/itm/157857969262",
+      "https://www.ebay.com/itm/157879346500"
+    ]
+  },
+  "batch21_review": {
+    "result": "SU580 Moskva–Köpenhamn fredag ger en ny nordisk rörelse. Inga faktiska överflygningar belagda. Aeroflots första vinterutgåva ger totalt 44 planerade rörelser hos fem bolag. Två Budapest–Moskva-rader hålls som kandidater med orimliga tidsdifferenser.",
+    "details_file": "AEROFLOT_EUROPE_BATCH21.md",
+    "new_nordic_leg_ids": [
+      "aeroflot-580-SVO-CPH-1850@1986-02-28"
+    ],
+    "searches_without_new_departure_pages": [
+      "Widerøe: index saknar rätt vinterutgåva",
+      "Maersk Air/Danair: inga nya läsbara avgångssidor för fönstret",
+      "Icelandair: funna öppna annonser avser andra perioder",
+      "SAS: tidigare granskade omslag och otillgängliga edition 4-listningar",
+      "Malév: nytt granskat vinteromslag, utan avgångssidor"
+    ]
+  },
+  "batch22_review": {
+    "result": "97 nya planerade rörelser: Air UK 90, SAS 4, KLM 2 och Air Business 1. Tio berör Norden; inga faktiska överflygningar belagda. Flygplanets rutt är en illustration av tidtabellen.",
+    "details_file": "AIR_UK_NORDIC_BATCH22.md",
+    "new_nordic_leg_ids": [
+      "air-uk-602-ABZ-SVG-0850@1986-02-28",
+      "sas-531-SVG-ABZ-1225@1986-02-28",
+      "air-uk-660-NCL-CPH-1130@1986-02-28",
+      "sas-532-ABZ-SVG-1315@1986-02-28",
+      "air-business-163-EBJ-AAR-1510@1986-02-28",
+      "air-uk-621-EBJ-HUY-1510@1986-02-28",
+      "air-uk-661-CPH-NCL-1525@1986-02-28",
+      "air-uk-601-SVG-ABZ-1650@1986-02-28",
+      "sas-533-SVG-ABZ-1225@1986-03-01",
+      "sas-534-ABZ-SVG-1315@1986-03-01"
+    ],
+    "source_pagination_gaps": [
+      "Air UK printed 16–17",
+      "Air UK printed 24–25"
+    ],
+    "search_leads_without_added_departures": [
+      "Air UK vinterannons hos Astralines gav inget läsbart exemplar; AirTimes gav i stället PDF",
+      "SAS/Finnair-sökningar gav huvudsakligen tidigare omslag, kataloger eller fel period",
+      "British Caledonian: nordiska anslutningar utan verifierade mellanlandningar"
+    ]
+  },
+  "batch23_review": {
+    "result": "92 nya nordiska planerade rörelser från Air France utgåva 25, varav SAS 70 och AF 22. Sammanlagt 149 med nordisk ändpunkt. Inga faktiska överflygningar belagda.",
+    "details_file": "AIR_FRANCE_NORDIC_BATCH23.md",
+    "new_nordic_leg_ids": [
+      "sas-673-ARN-CPH-0730@1986-02-28",
+      "sas-400-CPH-ARN-0740@1986-02-28",
+      "sas-401-ARN-CPH-0750@1986-02-28",
+      "sas-593-ARN-CPH-0800@1986-02-28",
+      "air-france-792-CDG-CPH-0855@1986-02-28",
+      "sas-571-ARN-CDG-0910@1986-02-28",
+      "sas-402-CPH-ARN-0915@1986-02-28",
+      "sas-404-CPH-ARN-0920@1986-02-28",
+      "sas-403-ARN-CPH-0935@1986-02-28",
+      "sas-563-CPH-CDG-0940@1986-02-28",
+      "sas-581-ARN-CPH-0945@1986-02-28",
+      "sas-405-ARN-CPH-1015@1986-02-28",
+      "air-france-796-CDG-FBU-1030@1986-02-28",
+      "air-france-790-CDG-ARN-1040@1986-02-28",
+      "sas-730-CPH-ARN-1120@1986-02-28",
+      "sas-412-CPH-ARN-1125@1986-02-28",
+      "air-france-793-CPH-CDG-1140@1986-02-28",
+      "sas-564-CDG-CPH-1220@1986-02-28",
+      "sas-407-ARN-CPH-1245@1986-02-28",
+      "sas-572-CDG-ARN-1245@1986-02-28",
+      "sas-411-ARN-CPH-1315@1986-02-28",
+      "air-france-796-FBU-GOT-1325@1986-02-28",
+      "air-france-790-ARN-HEL-1345@1986-02-28",
+      "sas-674-CPH-ARN-1415@1986-02-28",
+      "sas-413-ARN-CPH-1425@1986-02-28",
+      "air-france-796-GOT-CDG-1445@1986-02-28",
+      "sas-684-CPH-ARN-1505@1986-02-28",
+      "sas-414-CPH-ARN-1510@1986-02-28",
+      "air-france-791-HEL-ARN-1625@1986-02-28",
+      "sas-415-ARN-CPH-1555@1986-02-28",
+      "sas-573-ARN-CDG-1605@1986-02-28",
+      "sas-569-FBU-CDG-1610@1986-02-28",
+      "sas-682-CPH-ARN-1615@1986-02-28",
+      "sas-567-CPH-CDG-1620@1986-02-28",
+      "sas-419-ARN-CPH-1650@1986-02-28",
+      "air-france-791-ARN-CDG-1705@1986-02-28",
+      "air-france-798-CDG-CPH-1715@1986-02-28",
+      "sas-418-CPH-ARN-1800@1986-02-28",
+      "sas-417-ARN-CPH-1805@1986-02-28",
+      "sas-424-CPH-ARN-1805@1986-02-28",
+      "sas-731-ARN-CPH-1850@1986-02-28",
+      "sas-426-CPH-ARN-1905@1986-02-28",
+      "sas-570-CDG-GOT-1905@1986-02-28",
+      "sas-574-CDG-ARN-1920@1986-02-28",
+      "sas-568-CDG-CPH-1935@1986-02-28",
+      "sas-423-ARN-CPH-1950@1986-02-28",
+      "sas-425-ARN-CPH-1955@1986-02-28",
+      "air-france-799-CPH-CDG-2000@1986-02-28",
+      "sas-582-CPH-ARN-2010@1986-02-28",
+      "sas-422-CPH-ARN-2015@1986-02-28",
+      "sas-420-CPH-ARN-2210@1986-02-28",
+      "sas-673-ARN-CPH-0730@1986-03-01",
+      "sas-400-CPH-ARN-0740@1986-03-01",
+      "sas-401-ARN-CPH-0750@1986-03-01",
+      "sas-593-ARN-CPH-0800@1986-03-01",
+      "air-france-792-CDG-CPH-0855@1986-03-01",
+      "sas-571-ARN-CDG-0910@1986-03-01",
+      "sas-404-CPH-ARN-0920@1986-03-01",
+      "sas-403-ARN-CPH-0935@1986-03-01",
+      "sas-563-CPH-CDG-0940@1986-03-01",
+      "sas-581-ARN-CPH-0945@1986-03-01",
+      "sas-405-ARN-CPH-1015@1986-03-01",
+      "air-france-796-CDG-FBU-1030@1986-03-01",
+      "air-france-790-CDG-ARN-1040@1986-03-01",
+      "sas-406-CPH-ARN-1120@1986-03-01",
+      "sas-412-CPH-ARN-1125@1986-03-01",
+      "air-france-793-CPH-CDG-1140@1986-03-01",
+      "sas-564-CDG-CPH-1220@1986-03-01",
+      "sas-409-ARN-CPH-1240@1986-03-01",
+      "sas-407-ARN-CPH-1245@1986-03-01",
+      "sas-572-CDG-ARN-1245@1986-03-01",
+      "sas-411-ARN-CPH-1315@1986-03-01",
+      "air-france-796-FBU-GOT-1325@1986-03-01",
+      "air-france-790-ARN-HEL-1345@1986-03-01",
+      "sas-674-CPH-ARN-1415@1986-03-01",
+      "air-france-796-GOT-CDG-1445@1986-03-01",
+      "sas-684-CPH-ARN-1505@1986-03-01",
+      "sas-414-CPH-ARN-1510@1986-03-01",
+      "air-france-791-HEL-ARN-1625@1986-03-01",
+      "sas-415-ARN-CPH-1555@1986-03-01",
+      "sas-682-CPH-ARN-1615@1986-03-01",
+      "sas-567-CPH-CDG-1620@1986-03-01",
+      "sas-419-ARN-CPH-1650@1986-03-01",
+      "air-france-791-ARN-CDG-1705@1986-03-01",
+      "air-france-798-CDG-CPH-1715@1986-03-01",
+      "sas-596-CPH-ARN-1800@1986-03-01",
+      "sas-417-ARN-CPH-1805@1986-03-01",
+      "sas-426-CPH-ARN-1905@1986-03-01",
+      "sas-568-CDG-CPH-1935@1986-03-01",
+      "air-france-799-CPH-CDG-2000@1986-03-01",
+      "sas-582-CPH-ARN-2010@1986-03-01",
+      "sas-420-CPH-ARN-2210@1986-03-01"
+    ],
+    "first_finland_endpoint": "HEL / Helsinki–Vantaa",
+    "remaining_leads": [
+      "Air UK: Stansted och Kanalörader kvarstår",
+      "AY873/874: saknar nonstopmarkering, inga mellantider här",
+      "SK594/410: samma tryckta tider som importerad SK674; separat avgång behöver kontrolleras",
+      "AFSK/SKAF-samarbetsflyg ej importerade denna omgång"
+    ]
+  },
+  "batch24_review": {
+    "result": "Sex nya nordiska planerade rörelser från AF/SK-samarbetsrader, samt 84 Air UK-rörelser. Sammanlagt 155 med nordisk ändpunkt. Inga faktiska överflygningar belagda.",
+    "details_file": "NORDIC_AIRUK_BATCH24.md",
+    "new_nordic_leg_ids": [
+      "sas-575-CPH-NCE-1210@1986-02-28",
+      "air-france-1790-LYS-CPH-1510@1986-02-28",
+      "air-france-576-NCE-CPH-1600@1986-02-28",
+      "sas-1791-CPH-LYS-1820@1986-02-28",
+      "sas-575-CPH-NCE-1210@1986-03-01",
+      "air-france-576-NCE-CPH-1600@1986-03-01"
+    ],
+    "remaining_leads": [
+      "SAS/Finnair: egna läsbara avgångssidor och saknade delsträckor",
+      "Air UK: saknade tryckta s. 16–17 och 24–25, senare ändringsutgåvor",
+      "AFSK1790/SKAF1791: Marseille–Lyon och retur saknar separata mellantider"
+    ],
+    "searches_without_import": [
+      "KLM:s AirTimes-galleri gav inga PDF-länkar",
+      "SAS/Finnair-sökningar gav inga nya kompletta importerbara avgångssidor"
+    ]
+  },
+  "workflow": "Användarens senaste prioritet: källor med många nya flygrutter worldwide. Norden och Europakön bevaras med luckor.",
+  "batch25_review": {
+    "result": "Sverige granskat utan nya importklara avgångar; 87 svenska och 155 nordiska ändpunktsrörelser oförändrade.",
+    "details_file": "SWEDEN_COUNTRY_REVIEW_BATCH25.md",
+    "next_country": "no",
+    "new_nordic_leg_ids": []
+  },
+  "batch26_review": {
+    "result": "Norge granskat utan nya importklara avgångar; 47 norska och 155 nordiska ändpunktsrörelser oförändrade.",
+    "details_file": "NORWAY_COUNTRY_REVIEW_BATCH26.md",
+    "next_country": "dk",
+    "new_nordic_leg_ids": []
+  },
+  "batch27_review": {
+    "result": "Danmark, Finland och Island gav inga nya importklara rörelser. Två danska källor registrerade. Storbritannien kompletterat med 82 planerade rörelser; 155 nordiska ändpunktsrörelser oförändrade.",
+    "details_files": [
+      "DENMARK_COUNTRY_REVIEW_BATCH27.md",
+      "FINLAND_COUNTRY_REVIEW_BATCH27.md",
+      "ICELAND_COUNTRY_REVIEW_BATCH27.md",
+      "GREAT_BRITAIN_COUNTRY_REVIEW_BATCH27.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "je"
+  },
+  "batch28_review": {
+    "result": "Jersey, Guernsey och Isle of Man gav inga nya importklara rader. Irland kompletterat med sex Dublin–Paris-rörelser. De 155 nordiska ändpunktsrörelserna är oförändrade.",
+    "details_files": [
+      "JERSEY_COUNTRY_REVIEW_BATCH28.md",
+      "GUERNSEY_COUNTRY_REVIEW_BATCH28.md",
+      "ISLE_OF_MAN_COUNTRY_REVIEW_BATCH28.md",
+      "IRELAND_COUNTRY_REVIEW_BATCH28.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "fr"
+  },
+  "batch29_review": {
+    "result": "Frankrike kompletterat med 164 Air Inter-rörelser. De 155 nordiska ändpunktsrörelserna är oförändrade. Tio nya tidskonflikter sparas som kandidater.",
+    "details_files": [
+      "FRANCE_COUNTRY_REVIEW_BATCH29.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "mc"
+  },
+  "batch30_review": {
+    "result": "Spanien kompletterat med 50 rörelser; Monaco och Andorra granskade utan importklara avgångar. De 155 nordiska ändpunktsrörelserna är oförändrade.",
+    "details_files": [
+      "MONACO_COUNTRY_REVIEW_BATCH30.md",
+      "ANDORRA_COUNTRY_REVIEW_BATCH30.md",
+      "SPAIN_COUNTRY_REVIEW_BATCH30.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "gi"
+  },
+  "batch31_review": {
+    "result": "Portugal kompletterat med 15 rörelser; Gibraltar återgranskat utan nya avgångar. De 155 nordiska ändpunktsrörelserna är oförändrade.",
+    "details_files": [
+      "GIBRALTAR_COUNTRY_REVIEW_BATCH31.md",
+      "PORTUGAL_COUNTRY_REVIEW_BATCH31.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "nl"
+  },
+  "batch32_review": {
+    "result": "Nederländerna kompletterat med 35 rörelser. De 155 nordiska ändpunktsrörelserna är oförändrade.",
+    "details_files": [
+      "NETHERLANDS_COUNTRY_REVIEW_BATCH32.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "be"
+  },
+  "batch33_review": {
+    "result": "Belgien kompletterat med 31 rörelser. De 155 nordiska ändpunktsrörelserna är oförändrade.",
+    "details_files": [
+      "BELGIUM_COUNTRY_REVIEW_BATCH33.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "lu"
+  },
+  "batch34_review": {
+    "result": "Luxemburg dokumenterat utan avgångar. Västtyskland kompletterat med 89 rörelser. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "LUXEMBOURG_COUNTRY_REVIEW_BATCH34.md",
+      "WEST_GERMANY_COUNTRY_REVIEW_BATCH34.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "de-east"
+  },
+  "batch35_review": {
+    "result": "Östtyskland: 22 forskningsrader utan animation. Västberlin: nio nya rörelser. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "EAST_GERMANY_COUNTRY_REVIEW_BATCH35.md",
+      "WEST_BERLIN_COUNTRY_REVIEW_BATCH35.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "ch"
+  },
+  "batch36_review": {
+    "result": "Schweiz: 80 nya planerade rörelser, totalt 152 schweiziska ändpunktsrörelser. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "SWITZERLAND_COUNTRY_REVIEW_BATCH36.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "li"
+  },
+  "batch37_review": {
+    "result": "Åtta nya Wien–Paris-rörelser. Liechtenstein och Rhein-Helicopter registrerade utan daterade avgångar. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "LIECHTENSTEIN_COUNTRY_REVIEW_BATCH37.md",
+      "AUSTRIA_COUNTRY_REVIEW_BATCH37.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "it"
+  },
+  "batch38_review": {
+    "result": "96 nya Italien-rörelser. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "ITALY_COUNTRY_REVIEW_BATCH38.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "sm"
+  },
+  "batch39_review": {
+    "result": "Två nya Orly–Warszawa-rörelser. San Marino, Vatikanstaten och Malta granskade utan nya avgångar. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "SAN_MARINO_COUNTRY_REVIEW_BATCH39.md",
+      "VATICAN_COUNTRY_REVIEW_BATCH39.md",
+      "MALTA_COUNTRY_REVIEW_BATCH39.md",
+      "POLAND_COUNTRY_REVIEW_BATCH39.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "cz"
+  },
+  "batch40_review": {
+    "result": "Sex nya Orly-rörelser: två med Prag och fyra med Budapest. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "CZECHOSLOVAKIA_COUNTRY_REVIEW_BATCH40.md",
+      "HUNGARY_COUNTRY_REVIEW_BATCH40.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "ro"
+  },
+  "batch41_review": {
+    "result": "Åtta nya Orly-rörelser: tre med Otopeni och fem med Sofia. Två fraktflyg. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "ROMANIA_COUNTRY_REVIEW_BATCH41.md",
+      "BULGARIA_COUNTRY_REVIEW_BATCH41.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "yu"
+  },
+  "batch42_review": {
+    "result": "Åtta nya Belgrad/Zagreb–Orly-rörelser. Albanien granskat utan importklara tider. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "YUGOSLAVIA_COUNTRY_REVIEW_BATCH42.md",
+      "ALBANIA_COUNTRY_REVIEW_BATCH42.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "gr"
+  },
+  "batch43_review": {
+    "result": "Elva nya rörelser: tio Aten–Frankrike och en CDG–Larnaca. Sex CY-rader forskning utan animation. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "GREECE_COUNTRY_REVIEW_BATCH43.md",
+      "CYPRUS_COUNTRY_REVIEW_BATCH43.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "tr"
+  },
+  "batch44_review": {
+    "result": "Åtta nya Istanbul–Paris-rörelser; två Ankara-anslutningsrader forskning utan animation. Nordiska ändpunktsrörelser fortsatt 155.",
+    "details_files": [
+      "TURKEY_COUNTRY_REVIEW_BATCH44.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "su"
+  },
+  "batch45_review": {
+    "result": "Tolv nya rörelser med sovjetiska ändpunkter. Nordiska ändpunktsrörelser fortsatt 155. Första Europavarvet granskat med luckor.",
+    "details_files": [
+      "SOVIET_UNION_COUNTRY_REVIEW_BATCH45.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "se"
+  },
+  "batch46_review": {
+    "result": "Sju nya rörelser från Dan-Airs vintertabell, varav fem med norsk ändpunkt. Sverige oförändrat 87, Norge 52, Norden 160.",
+    "details_files": [
+      "SWEDEN_FOLLOWUP_BATCH46.md",
+      "NORWAY_FOLLOWUP_BATCH46.md"
+    ],
+    "new_nordic_leg_ids": [
+      "dan-air-102-NCL-SVG-1040-d5-b46@1986-02-28",
+      "dan-air-842-NCL-FBU-1045-d5-b46@1986-02-28",
+      "dan-air-107-SVG-NCL-1510-d5-b46@1986-02-28",
+      "dan-air-843-FBU-NCL-1520-d5-b46@1986-02-28",
+      "sas-517-BGO-LGW-1745-d5-b46@1986-02-28"
+    ],
+    "next_country": "dk"
+  },
+  "batch47_review": {
+    "result": "54 brittiska/Kanalö-rörelser tillagda; nordiska ändpunktsrörelser oförändrat 160.",
+    "details_files": [
+      "EUROPE_FOLLOWUP_BATCH47.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "im"
+  },
+  "batch48_review": {
+    "result": "37 nya rörelser, varav EI624 Dublin–Köpenhamn lördag. 161 nordiska ändpunktsrörelser totalt.",
+    "details_files": [
+      "IRELAND_FOLLOWUP_BATCH48.md"
+    ],
+    "new_nordic_leg_ids": [
+      "aer-lingus-624-DUB-CPH-0945-b48@1986-03-01"
+    ],
+    "next_country": "fr"
+  },
+  "batch49_review": {
+    "result": "74 franska inrikesrörelser tillagda. Norden oförändrat 161 unika ändpunktsrörelser.",
+    "details_files": [
+      "FRANCE_FOLLOWUP_BATCH49.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "mc"
+  },
+  "batch50_review": {
+    "result": "Femton rörelser tillagda: tio Dan-Air och fem ben ur Sabenas januariutgåva. Norden oförändrat161.",
+    "details_files": [
+      "EUROPE_FOLLOWUP_BATCH50.md",
+      "BELGIUM_FOLLOWUP_BATCH50.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "lu"
+  },
+  "batch51_review": {
+    "result": "Tio västtyska ändpunktsrörelser tillagda. Norden oförändrat 161 unika ändpunktsrörelser.",
+    "details_files": [
+      "WEST_GERMANY_FOLLOWUP_BATCH51.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "de-east"
+  },
+  "batch52_review": {
+    "result": "Tretton schweiziska ändpunktsrörelser tillagda. Norden oförändrat 161 unika ändpunktsrörelser. Interflugs nordiska forskningsrader är inte godkända.",
+    "details_files": [
+      "SWITZERLAND_FOLLOWUP_BATCH52.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "li"
+  },
+  "batch53_review": {
+    "result": "Två österrikiska ändpunktsrörelser tillagda. Norden oförändrat 161 unika ändpunktsrörelser.",
+    "details_files": [
+      "AUSTRIA_FOLLOWUP_BATCH53.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "sm"
+  },
+  "batch54_review": {
+    "result": "Tre Pan Am-rörelser tillagda. Norden oförändrat161 unika ändpunktsrörelser.",
+    "details_files": [
+      "CENTRAL_EUROPE_FOLLOWUP_BATCH54.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "ro"
+  },
+  "batch55_review": {
+    "result": "Två Pan Am-rörelser tillagda. Norden oförändrat 161 unika ändpunktsrörelser.",
+    "details_files": [
+      "BALKANS_FOLLOWUP_BATCH55.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "al"
+  },
+  "batch56_review": {
+    "result": "Två Pan Am-rörelser tillagda; Norden oförändrat.",
+    "details_files": [
+      "GREECE_ALBANIA_FOLLOWUP_BATCH56.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "next_country": "cy"
+  },
+  "batch57_review": {
+    "result": "415 Southwest-rörelser tillagda i USA. Norden oförändrat.",
+    "details_files": [
+      "SOUTHWEST_DALLAS_BATCH57.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch58_review": {
+    "result": "220 Southwest-rörelser tillagda kring Houston Hobby. Norden oförändrat.",
+    "details_files": [
+      "SOUTHWEST_HOUSTON_BATCH58.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch59_review": {
+    "result": "248 Southwest-rörelser tillagda kring Phoenix och Las Vegas. Norden oförändrat.",
+    "details_files": [
+      "SOUTHWEST_WEST_BATCH59.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch60_review": {
+    "result": "175 Southwest-rörelser tillagda kring Albuquerque och El Paso. Två tidigare rörelser får rättad ankomsttid. Norden oförändrat.",
+    "details_files": [
+      "SOUTHWEST_ABQ_ELP_BATCH60.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch61_review": {
+    "result": "130 Southwest-rörelser tillagda. Två scheman får korrigerade trafikdagar, utan ändring av tidigare rörelsetider eller antal. Norden oförändrat.",
+    "details_files": [
+      "SOUTHWEST_CALIFORNIA_MIDWEST_BATCH61.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch62_review": {
+    "result": "32 Southwest-rörelser tillagda, en felaktig äldre lördagsrörelse borttagen. Två schemans trafikdagar rättade; tre kvarvarande rörelsers anteckningar uppdaterade. Norden oförändrat.",
+    "details_files": [
+      "SOUTHWEST_REMAINING_CITIES_BATCH62.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch63_review": {
+    "result": "185 Delta-rörelser tillagda. Alla 3 807 tidigare rörelser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_ATLANTA_BATCH63.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch64_review": {
+    "result": "137 Delta-rörelser Atlanta–Florida tillagda. Alla 3 992 tidigare rörelser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_FLORIDA_BATCH64.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch65_review": {
+    "result": "123 Delta-rörelser Atlanta–nordöstra USA tillagda. Alla 4 129 tidigare rörelser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_NORTHEAST_BATCH65.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch66_review": {
+    "result": "123 Delta-rörelser till Atlanta från åtta flygplatser tillagda. Alla 4 252 tidigare rörelser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_ATLANTA_RETURNS_BATCH66.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch67_review": {
+    "result": "57 Delta-rörelser till Atlanta från tio flygplatser tillagda. Alla 4 375 tidigare rörelser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_WESTERN_RETURNS_BATCH67.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch68_review": {
+    "result": "47 Delta-rörelser till Atlanta från sex flygplatser tillagda. Alla 4 432 tidigare rörelser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_CENTRAL_RETURNS_BATCH68.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch69_review": {
+    "result": "46 nya Delta-rörelser till/från Atlanta. Alla 4 479 tidigare rörelser oförändrade. CVG tillagd. Norden oförändrat.",
+    "details_files": [
+      "DELTA_ATLANTA_CINCINNATI_BATCH69.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch70_review": {
+    "result": "45 nya Delta-rörelser från Cincinnati. Alla 4 525 tidigare rörelser och flygplatser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_CINCINNATI_OUTBOUND_BATCH70.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch71_review": {
+    "result": "54 nya Delta-returrörelser till Cincinnati. Alla 4 570 tidigare rörelser och flygplatser oförändrade. Norden oförändrat.",
+    "details_files": [
+      "DELTA_CINCINNATI_RETURNS_BATCH71.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch72_review": {
+    "result": "56 nya planerade COMAIR-rörelser mellan Cincinnati och Detroit, Milwaukee, Fort Wayne samt Toledo, i båda riktningarna. 35 nya scheman från 53 granskade rader. Totalt 4 680 rörelser. Alla 4 624 tidigare rörelseposter, scheman och flygplatser är oförändrade. Norden oförändrat.",
+    "details_files": [
+      "COMAIR_CINCINNATI_BATCH72.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch73_review": {
+    "result": "33 nya planerade COMAIR-rörelser: Cincinnati–Toronto, Cincinnati–St. Louis och Chicago O’Hare–Milwaukee med retur, samt Milwaukee–Fort Wayne och Fort Wayne–Detroit. 22 nya scheman från 23 granskade rader. Totalt 4 713 rörelser. Alla 4 680 tidigare rörelseposter och scheman är oförändrade. Toronto Pearson (YYZ) tillkommer; övriga flygplatser bevaras. Norden oförändrat.",
+    "details_files": [
+      "COMAIR_TORONTO_STLOUIS_CHICAGO_BATCH73.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch74_review": {
+    "result": "73 nya planerade flygrörelser mellan Cincinnati, Cleveland och Dayton i båda riktningarna: 60 COMAIR och 13 Delta. 47 nya scheman från 58 granskade rader. Totalt 4 786 rörelser. Alla 4 713 tidigare rörelseposter och scheman är oförändrade. Cleveland Hopkins (CLE) och Dayton International (DAY) tillkommer; tidigare flygplatser bevaras. Norden oförändrat.",
+    "details_files": [
+      "OHIO_TRIANGLE_BATCH74.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  },
+  "batch75_review": {
+    "result": "33 nya planerade COMAIR-rörelser: Dayton–Detroit, Cleveland–Milwaukee och Cleveland–Fort Wayne med retur, samt Detroit–Cleveland. 26 nya scheman från 60 granskade rader. Totalt 4 819 rörelser. Alla 4 786 tidigare rörelseposter, scheman och flygplatser är oförändrade. Norden oförändrat.",
+    "details_files": [
+      "COMAIR_OHIO_LINKS_BATCH75.md"
+    ],
+    "new_nordic_leg_ids": [],
+    "europe_resume_country": "cy"
+  }
+}
