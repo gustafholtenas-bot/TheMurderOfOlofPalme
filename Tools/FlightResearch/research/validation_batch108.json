@@ -1,0 +1,885 @@
+{
+  "package": "v111",
+  "checked_on": "2026-10-01",
+  "baseline_archive_sha256": "33217ddefe1fb69efc6ec3449782fd7f40363571e47d5504767c6c3e71be66fe",
+  "previous_movements_unchanged": 7435,
+  "previous_schedules_unchanged": 4364,
+  "previous_airports_unchanged": 308,
+  "previous_countries_unchanged": 82,
+  "previous_airlines_unchanged": 97,
+  "unaffected_sources_unchanged": true,
+  "independent_manual_rows": 108,
+  "independent_utc_movements_verified": 158,
+  "independent_utc_expected": {
+    "ransome-airlines-1805-BOS-BTV-0725-b108@1986-02-28": [
+      "1986-02-28T12:25:00Z",
+      "1986-02-28T13:35:00Z"
+    ],
+    "ransome-airlines-1852-BOS-BTV-0905-b108@1986-02-28": [
+      "1986-02-28T14:05:00Z",
+      "1986-02-28T15:10:00Z"
+    ],
+    "ransome-airlines-1852-BOS-BTV-0905-b108@1986-03-01": [
+      "1986-03-01T14:05:00Z",
+      "1986-03-01T15:10:00Z"
+    ],
+    "ransome-airlines-1777-BOS-BTV-1213-b108@1986-02-28": [
+      "1986-02-28T17:13:00Z",
+      "1986-02-28T18:13:00Z"
+    ],
+    "ransome-airlines-1777-BOS-BTV-1213-b108@1986-03-01": [
+      "1986-03-01T17:13:00Z",
+      "1986-03-01T18:13:00Z"
+    ],
+    "ransome-airlines-1838-BOS-BTV-1405-b108@1986-02-28": [
+      "1986-02-28T19:05:00Z",
+      "1986-02-28T20:10:00Z"
+    ],
+    "ransome-airlines-1838-BOS-BTV-1405-b108@1986-03-01": [
+      "1986-03-01T19:05:00Z",
+      "1986-03-01T20:10:00Z"
+    ],
+    "ransome-airlines-1820-BOS-BTV-1700-b108@1986-02-27": [
+      "1986-02-27T22:00:00Z",
+      "1986-02-27T23:10:00Z"
+    ],
+    "ransome-airlines-1820-BOS-BTV-1700-b108@1986-02-28": [
+      "1986-02-28T22:00:00Z",
+      "1986-02-28T23:10:00Z"
+    ],
+    "ransome-airlines-1820-BOS-BTV-1700-b108@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T23:10:00Z"
+    ],
+    "ransome-airlines-1825-BOS-BTV-2035-b108@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "ransome-airlines-1825-BOS-BTV-2035-b108@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T02:45:00Z"
+    ],
+    "ransome-airlines-1855-BTV-BOS-0640-b108@1986-02-28": [
+      "1986-02-28T11:40:00Z",
+      "1986-02-28T12:45:00Z"
+    ],
+    "ransome-airlines-1855-BTV-BOS-0640-b108@1986-03-01": [
+      "1986-03-01T11:40:00Z",
+      "1986-03-01T12:45:00Z"
+    ],
+    "ransome-airlines-1807-BTV-BOS-0855-b108@1986-02-28": [
+      "1986-02-28T13:55:00Z",
+      "1986-02-28T14:55:00Z"
+    ],
+    "ransome-airlines-1801-BTV-BOS-1030-b108@1986-02-28": [
+      "1986-02-28T15:30:00Z",
+      "1986-02-28T16:35:00Z"
+    ],
+    "ransome-airlines-1801-BTV-BOS-1030-b108@1986-03-01": [
+      "1986-03-01T15:30:00Z",
+      "1986-03-01T16:35:00Z"
+    ],
+    "ransome-airlines-1755-BTV-BOS-1330-b108@1986-03-01": [
+      "1986-03-01T18:30:00Z",
+      "1986-03-01T19:30:00Z"
+    ],
+    "ransome-airlines-1831-BTV-BOS-1330-b108@1986-02-28": [
+      "1986-02-28T18:30:00Z",
+      "1986-02-28T19:30:00Z"
+    ],
+    "ransome-airlines-1819-BTV-BOS-1530-b108@1986-02-28": [
+      "1986-02-28T20:30:00Z",
+      "1986-02-28T21:35:00Z"
+    ],
+    "ransome-airlines-1819-BTV-BOS-1530-b108@1986-03-01": [
+      "1986-03-01T20:30:00Z",
+      "1986-03-01T21:35:00Z"
+    ],
+    "ransome-airlines-1829-BTV-BOS-1830-b108@1986-02-27": [
+      "1986-02-27T23:30:00Z",
+      "1986-02-28T00:40:00Z"
+    ],
+    "ransome-airlines-1829-BTV-BOS-1830-b108@1986-02-28": [
+      "1986-02-28T23:30:00Z",
+      "1986-03-01T00:40:00Z"
+    ],
+    "ransome-airlines-1835-BOS-ISP-0815-b108@1986-02-28": [
+      "1986-02-28T13:15:00Z",
+      "1986-02-28T14:10:00Z"
+    ],
+    "ransome-airlines-1783-BOS-ISP-1220-b108@1986-02-28": [
+      "1986-02-28T17:20:00Z",
+      "1986-02-28T18:20:00Z"
+    ],
+    "ransome-airlines-1783-BOS-ISP-1220-b108@1986-03-01": [
+      "1986-03-01T17:20:00Z",
+      "1986-03-01T18:20:00Z"
+    ],
+    "ransome-airlines-1831-BOS-ISP-1525-b108@1986-02-28": [
+      "1986-02-28T20:25:00Z",
+      "1986-02-28T21:20:00Z"
+    ],
+    "ransome-airlines-1831-BOS-ISP-1525-b108@1986-03-01": [
+      "1986-03-01T20:25:00Z",
+      "1986-03-01T21:20:00Z"
+    ],
+    "ransome-airlines-1830-BOS-ISP-1810-b108@1986-02-27": [
+      "1986-02-27T23:10:00Z",
+      "1986-02-28T00:05:00Z"
+    ],
+    "ransome-airlines-1830-BOS-ISP-1810-b108@1986-02-28": [
+      "1986-02-28T23:10:00Z",
+      "1986-03-01T00:05:00Z"
+    ],
+    "ransome-airlines-1833-BOS-ISP-2025-b108@1986-02-27": [
+      "1986-02-28T01:25:00Z",
+      "1986-02-28T02:25:00Z"
+    ],
+    "ransome-airlines-1833-BOS-ISP-2025-b108@1986-02-28": [
+      "1986-03-01T01:25:00Z",
+      "1986-03-01T02:25:00Z"
+    ],
+    "ransome-airlines-1834-ISP-BOS-0700-b108@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:55:00Z"
+    ],
+    "ransome-airlines-1852-ISP-BOS-0745-b108@1986-02-28": [
+      "1986-02-28T12:45:00Z",
+      "1986-02-28T13:45:00Z"
+    ],
+    "ransome-airlines-1852-ISP-BOS-0745-b108@1986-03-01": [
+      "1986-03-01T12:45:00Z",
+      "1986-03-01T13:45:00Z"
+    ],
+    "ransome-airlines-1854-ISP-BOS-0935-b108@1986-02-28": [
+      "1986-02-28T14:35:00Z",
+      "1986-02-28T15:30:00Z"
+    ],
+    "ransome-airlines-1751-ISP-BOS-1030-b108@1986-03-01": [
+      "1986-03-01T15:30:00Z",
+      "1986-03-01T16:25:00Z"
+    ],
+    "ransome-airlines-1761-ISP-BOS-1355-b108@1986-03-01": [
+      "1986-03-01T18:55:00Z",
+      "1986-03-01T19:55:00Z"
+    ],
+    "ransome-airlines-1832-ISP-BOS-1355-b108@1986-02-28": [
+      "1986-02-28T18:55:00Z",
+      "1986-02-28T19:55:00Z"
+    ],
+    "ransome-airlines-1869-ISP-BOS-1640-b108@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-27T22:35:00Z"
+    ],
+    "ransome-airlines-1869-ISP-BOS-1640-b108@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-02-28T22:35:00Z"
+    ],
+    "ransome-airlines-1788-ISP-BOS-1855-b108@1986-02-27": [
+      "1986-02-27T23:55:00Z",
+      "1986-02-28T00:50:00Z"
+    ],
+    "ransome-airlines-1788-ISP-BOS-1855-b108@1986-02-28": [
+      "1986-02-28T23:55:00Z",
+      "1986-03-01T00:50:00Z"
+    ],
+    "ransome-airlines-1874-BOS-PWM-0805-b108@1986-02-28": [
+      "1986-02-28T13:05:00Z",
+      "1986-02-28T13:55:00Z"
+    ],
+    "ransome-airlines-1874-BOS-PWM-0805-b108@1986-03-01": [
+      "1986-03-01T13:05:00Z",
+      "1986-03-01T13:55:00Z"
+    ],
+    "ransome-airlines-1756-BOS-PWM-1540-b108@1986-03-01": [
+      "1986-03-01T20:40:00Z",
+      "1986-03-01T21:25:00Z"
+    ],
+    "ransome-airlines-1832-BOS-PWM-1540-b108@1986-02-28": [
+      "1986-02-28T20:40:00Z",
+      "1986-02-28T21:25:00Z"
+    ],
+    "ransome-airlines-1817-BOS-PWM-1810-b108@1986-02-27": [
+      "1986-02-27T23:10:00Z",
+      "1986-02-27T23:55:00Z"
+    ],
+    "ransome-airlines-1817-BOS-PWM-1810-b108@1986-02-28": [
+      "1986-02-28T23:10:00Z",
+      "1986-02-28T23:55:00Z"
+    ],
+    "ransome-airlines-1787-PWM-BOS-0915-b108@1986-02-28": [
+      "1986-02-28T14:15:00Z",
+      "1986-02-28T15:00:00Z"
+    ],
+    "ransome-airlines-1787-PWM-BOS-0915-b108@1986-03-01": [
+      "1986-03-01T14:15:00Z",
+      "1986-03-01T15:00:00Z"
+    ],
+    "ransome-airlines-1818-PWM-BOS-1645-b108@1986-02-27": [
+      "1986-02-27T21:45:00Z",
+      "1986-02-27T22:30:00Z"
+    ],
+    "ransome-airlines-1818-PWM-BOS-1645-b108@1986-02-28": [
+      "1986-02-28T21:45:00Z",
+      "1986-02-28T22:30:00Z"
+    ],
+    "ransome-airlines-1818-PWM-BOS-1645-b108@1986-03-01": [
+      "1986-03-01T21:45:00Z",
+      "1986-03-01T22:30:00Z"
+    ],
+    "ransome-airlines-1833-PWM-BOS-1915-b108@1986-02-27": [
+      "1986-02-28T00:15:00Z",
+      "1986-02-28T01:00:00Z"
+    ],
+    "ransome-airlines-1833-PWM-BOS-1915-b108@1986-02-28": [
+      "1986-03-01T00:15:00Z",
+      "1986-03-01T01:00:00Z"
+    ],
+    "ransome-airlines-1807-BOS-PVD-1015-b108@1986-02-28": [
+      "1986-02-28T15:15:00Z",
+      "1986-02-28T15:45:00Z"
+    ],
+    "ransome-airlines-1757-BOS-PVD-1125-b108@1986-03-01": [
+      "1986-03-01T16:25:00Z",
+      "1986-03-01T16:55:00Z"
+    ],
+    "ransome-airlines-1815-BOS-PVD-1150-b108@1986-02-28": [
+      "1986-02-28T16:50:00Z",
+      "1986-02-28T17:20:00Z"
+    ],
+    "ransome-airlines-1801-BOS-PVD-1220-b108@1986-02-28": [
+      "1986-02-28T17:20:00Z",
+      "1986-02-28T17:50:00Z"
+    ],
+    "ransome-airlines-1827-BOS-PVD-1551-b108@1986-02-28": [
+      "1986-02-28T20:51:00Z",
+      "1986-02-28T21:20:00Z"
+    ],
+    "ransome-airlines-1827-BOS-PVD-1551-b108@1986-03-01": [
+      "1986-03-01T20:51:00Z",
+      "1986-03-01T21:20:00Z"
+    ],
+    "ransome-airlines-1849-BOS-PVD-1940-b108@1986-02-27": [
+      "1986-02-28T00:40:00Z",
+      "1986-02-28T01:10:00Z"
+    ],
+    "ransome-airlines-1849-BOS-PVD-1940-b108@1986-02-28": [
+      "1986-03-01T00:40:00Z",
+      "1986-03-01T01:10:00Z"
+    ],
+    "ransome-airlines-1805-PVD-BOS-0635-b108@1986-02-28": [
+      "1986-02-28T11:35:00Z",
+      "1986-02-28T12:05:00Z"
+    ],
+    "ransome-airlines-1790-PVD-BOS-0930-b108@1986-02-28": [
+      "1986-02-28T14:30:00Z",
+      "1986-02-28T15:00:00Z"
+    ],
+    "ransome-airlines-1841-PVD-BOS-1100-b108@1986-02-28": [
+      "1986-02-28T16:00:00Z",
+      "1986-02-28T16:30:00Z"
+    ],
+    "ransome-airlines-1838-PVD-BOS-1310-b108@1986-02-28": [
+      "1986-02-28T18:10:00Z",
+      "1986-02-28T18:40:00Z"
+    ],
+    "ransome-airlines-1838-PVD-BOS-1310-b108@1986-03-01": [
+      "1986-03-01T18:10:00Z",
+      "1986-03-01T18:40:00Z"
+    ],
+    "ransome-airlines-1793-PVD-BOS-1450-b108@1986-02-28": [
+      "1986-02-28T19:50:00Z",
+      "1986-02-28T20:20:00Z"
+    ],
+    "ransome-airlines-1758-PVD-BOS-1500-b108@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T20:30:00Z"
+    ],
+    "ransome-airlines-1804-PVD-BOS-1815-b108@1986-02-27": [
+      "1986-02-27T23:15:00Z",
+      "1986-02-27T23:45:00Z"
+    ],
+    "ransome-airlines-1804-PVD-BOS-1815-b108@1986-02-28": [
+      "1986-02-28T23:15:00Z",
+      "1986-02-28T23:45:00Z"
+    ],
+    "ransome-airlines-1862-LGA-ALB-0825-b108@1986-02-28": [
+      "1986-02-28T13:25:00Z",
+      "1986-02-28T14:20:00Z"
+    ],
+    "ransome-airlines-1865-LGA-ALB-1229-b108@1986-02-28": [
+      "1986-02-28T17:29:00Z",
+      "1986-02-28T18:25:00Z"
+    ],
+    "ransome-airlines-1798-LGA-ALB-1457-b108@1986-02-28": [
+      "1986-02-28T19:57:00Z",
+      "1986-02-28T20:55:00Z"
+    ],
+    "ransome-airlines-1798-LGA-ALB-1457-b108@1986-03-01": [
+      "1986-03-01T19:57:00Z",
+      "1986-03-01T20:55:00Z"
+    ],
+    "ransome-airlines-1866-LGA-ALB-1729-b108@1986-02-27": [
+      "1986-02-27T22:29:00Z",
+      "1986-02-27T23:25:00Z"
+    ],
+    "ransome-airlines-1866-LGA-ALB-1729-b108@1986-02-28": [
+      "1986-02-28T22:29:00Z",
+      "1986-02-28T23:25:00Z"
+    ],
+    "ransome-airlines-1868-LGA-ALB-2215-b108@1986-02-27": [
+      "1986-02-28T03:15:00Z",
+      "1986-02-28T04:10:00Z"
+    ],
+    "ransome-airlines-1868-LGA-ALB-2215-b108@1986-02-28": [
+      "1986-03-01T03:15:00Z",
+      "1986-03-01T04:10:00Z"
+    ],
+    "ransome-airlines-1861-ALB-LGA-0710-b108@1986-02-28": [
+      "1986-02-28T12:10:00Z",
+      "1986-02-28T12:59:00Z"
+    ],
+    "ransome-airlines-1750-ALB-LGA-0845-b108@1986-03-01": [
+      "1986-03-01T13:45:00Z",
+      "1986-03-01T14:40:00Z"
+    ],
+    "ransome-airlines-1822-ALB-LGA-1005-b108@1986-02-28": [
+      "1986-02-28T15:05:00Z",
+      "1986-02-28T16:00:00Z"
+    ],
+    "ransome-airlines-1863-ALB-LGA-1345-b108@1986-02-28": [
+      "1986-02-28T18:45:00Z",
+      "1986-02-28T19:40:00Z"
+    ],
+    "ransome-airlines-1799-ALB-LGA-1615-b108@1986-02-28": [
+      "1986-02-28T21:15:00Z",
+      "1986-02-28T22:10:00Z"
+    ],
+    "ransome-airlines-1867-ALB-LGA-1845-b108@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T00:29:00Z"
+    ],
+    "ransome-airlines-1867-ALB-LGA-1845-b108@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T00:29:00Z"
+    ],
+    "ransome-airlines-1800-LGA-BDL-0750-b108@1986-02-28": [
+      "1986-02-28T12:50:00Z",
+      "1986-02-28T13:35:00Z"
+    ],
+    "ransome-airlines-1858-LGA-BDL-1005-b108@1986-02-28": [
+      "1986-02-28T15:05:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "ransome-airlines-1858-LGA-BDL-1005-b108@1986-03-01": [
+      "1986-03-01T15:05:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "ransome-airlines-1809-LGA-BDL-1200-b108@1986-02-28": [
+      "1986-02-28T17:00:00Z",
+      "1986-02-28T17:50:00Z"
+    ],
+    "ransome-airlines-1795-LGA-BDL-1630-b108@1986-02-28": [
+      "1986-02-28T21:30:00Z",
+      "1986-02-28T22:20:00Z"
+    ],
+    "ransome-airlines-1784-LGA-BDL-1859-b108@1986-02-27": [
+      "1986-02-27T23:59:00Z",
+      "1986-02-28T00:50:00Z"
+    ],
+    "ransome-airlines-1784-LGA-BDL-1859-b108@1986-02-28": [
+      "1986-02-28T23:59:00Z",
+      "1986-03-01T00:50:00Z"
+    ],
+    "ransome-airlines-1857-BDL-LGA-0855-b108@1986-02-28": [
+      "1986-02-28T13:55:00Z",
+      "1986-02-28T14:40:00Z"
+    ],
+    "ransome-airlines-1781-BDL-LGA-1115-b108@1986-02-28": [
+      "1986-02-28T16:15:00Z",
+      "1986-02-28T17:05:00Z"
+    ],
+    "ransome-airlines-1781-BDL-LGA-1115-b108@1986-03-01": [
+      "1986-03-01T16:15:00Z",
+      "1986-03-01T17:05:00Z"
+    ],
+    "ransome-airlines-1844-BDL-LGA-1335-b108@1986-02-28": [
+      "1986-02-28T18:35:00Z",
+      "1986-02-28T19:25:00Z"
+    ],
+    "ransome-airlines-1779-BDL-LGA-1740-b108@1986-02-27": [
+      "1986-02-27T22:40:00Z",
+      "1986-02-27T23:29:00Z"
+    ],
+    "ransome-airlines-1779-BDL-LGA-1740-b108@1986-02-28": [
+      "1986-02-28T22:40:00Z",
+      "1986-02-28T23:29:00Z"
+    ],
+    "ransome-airlines-1785-BDL-LGA-2000-b108@1986-02-27": [
+      "1986-02-28T01:00:00Z",
+      "1986-02-28T01:50:00Z"
+    ],
+    "ransome-airlines-1785-BDL-LGA-2000-b108@1986-02-28": [
+      "1986-03-01T01:00:00Z",
+      "1986-03-01T01:50:00Z"
+    ],
+    "ransome-airlines-1792-LGA-PVD-0659-b108@1986-02-28": [
+      "1986-02-28T11:59:00Z",
+      "1986-02-28T12:55:00Z"
+    ],
+    "ransome-airlines-1790-LGA-PVD-0815-b108@1986-02-28": [
+      "1986-02-28T13:15:00Z",
+      "1986-02-28T14:10:00Z"
+    ],
+    "ransome-airlines-1811-EWR-PVD-0825-b108@1986-02-28": [
+      "1986-02-28T13:25:00Z",
+      "1986-02-28T14:30:00Z"
+    ],
+    "ransome-airlines-1842-LGA-PVD-0940-b108@1986-02-28": [
+      "1986-02-28T14:40:00Z",
+      "1986-02-28T15:45:00Z"
+    ],
+    "ransome-airlines-1789-LGA-PVD-1135-b108@1986-02-28": [
+      "1986-02-28T16:35:00Z",
+      "1986-02-28T17:30:00Z"
+    ],
+    "ransome-airlines-1789-LGA-PVD-1135-b108@1986-03-01": [
+      "1986-03-01T16:35:00Z",
+      "1986-03-01T17:30:00Z"
+    ],
+    "ransome-airlines-1786-EWR-PVD-1250-b108@1986-02-28": [
+      "1986-02-28T17:50:00Z",
+      "1986-02-28T18:55:00Z"
+    ],
+    "ransome-airlines-1758-JFK-PVD-1340-b108@1986-03-01": [
+      "1986-03-01T18:40:00Z",
+      "1986-03-01T19:40:00Z"
+    ],
+    "ransome-airlines-1826-JFK-PVD-1400-b108@1986-02-28": [
+      "1986-02-28T19:00:00Z",
+      "1986-02-28T19:55:00Z"
+    ],
+    "ransome-airlines-1860-LGA-PVD-1500-b108@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T20:50:00Z"
+    ],
+    "ransome-airlines-1860-LGA-PVD-1500-b108@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T20:50:00Z"
+    ],
+    "ransome-airlines-1850-LGA-PVD-1555-b108@1986-02-28": [
+      "1986-02-28T20:55:00Z",
+      "1986-02-28T21:45:00Z"
+    ],
+    "ransome-airlines-1804-JFK-PVD-1700-b108@1986-02-27": [
+      "1986-02-27T22:00:00Z",
+      "1986-02-27T22:55:00Z"
+    ],
+    "ransome-airlines-1804-JFK-PVD-1700-b108@1986-02-28": [
+      "1986-02-28T22:00:00Z",
+      "1986-02-28T22:55:00Z"
+    ],
+    "ransome-airlines-1804-JFK-PVD-1700-b108@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T22:55:00Z"
+    ],
+    "ransome-airlines-1848-EWR-PVD-1730-b108@1986-02-27": [
+      "1986-02-27T22:30:00Z",
+      "1986-02-27T23:35:00Z"
+    ],
+    "ransome-airlines-1848-EWR-PVD-1730-b108@1986-02-28": [
+      "1986-02-28T22:30:00Z",
+      "1986-02-28T23:35:00Z"
+    ],
+    "ransome-airlines-1846-LGA-PVD-1815-b108@1986-02-27": [
+      "1986-02-27T23:15:00Z",
+      "1986-02-28T00:10:00Z"
+    ],
+    "ransome-airlines-1846-LGA-PVD-1815-b108@1986-02-28": [
+      "1986-02-28T23:15:00Z",
+      "1986-03-01T00:10:00Z"
+    ],
+    "ransome-airlines-1828-JFK-PVD-2020-b108@1986-02-27": [
+      "1986-02-28T01:20:00Z",
+      "1986-02-28T02:20:00Z"
+    ],
+    "ransome-airlines-1828-JFK-PVD-2020-b108@1986-02-28": [
+      "1986-03-01T01:20:00Z",
+      "1986-03-01T02:20:00Z"
+    ],
+    "ransome-airlines-1806-EWR-PVD-2115-b108@1986-02-27": [
+      "1986-02-28T02:15:00Z",
+      "1986-02-28T03:20:00Z"
+    ],
+    "ransome-airlines-1806-EWR-PVD-2115-b108@1986-02-28": [
+      "1986-03-01T02:15:00Z",
+      "1986-03-01T03:20:00Z"
+    ],
+    "ransome-airlines-1796-LGA-PVD-2220-b108@1986-02-27": [
+      "1986-02-28T03:20:00Z",
+      "1986-02-28T04:15:00Z"
+    ],
+    "ransome-airlines-1796-LGA-PVD-2220-b108@1986-02-28": [
+      "1986-03-01T03:20:00Z",
+      "1986-03-01T04:15:00Z"
+    ],
+    "ransome-airlines-1780-PVD-LGA-0630-b108@1986-02-28": [
+      "1986-02-28T11:30:00Z",
+      "1986-02-28T12:30:00Z"
+    ],
+    "ransome-airlines-1791-PVD-LGA-0700-b108@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:55:00Z"
+    ],
+    "ransome-airlines-1808-PVD-EWR-0700-b108@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T13:05:00Z"
+    ],
+    "ransome-airlines-1843-PVD-EWR-0815-b108@1986-02-28": [
+      "1986-02-28T13:15:00Z",
+      "1986-02-28T14:20:00Z"
+    ],
+    "ransome-airlines-1794-PVD-LGA-0950-b108@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T15:45:00Z"
+    ],
+    "ransome-airlines-1794-PVD-LGA-0950-b108@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T15:45:00Z"
+    ],
+    "ransome-airlines-1816-PVD-EWR-1105-b108@1986-02-28": [
+      "1986-02-28T16:05:00Z",
+      "1986-02-28T17:10:00Z"
+    ],
+    "ransome-airlines-1757-PVD-JFK-1215-b108@1986-03-01": [
+      "1986-03-01T17:15:00Z",
+      "1986-03-01T18:15:00Z"
+    ],
+    "ransome-airlines-1815-PVD-JFK-1245-b108@1986-02-28": [
+      "1986-02-28T17:45:00Z",
+      "1986-02-28T18:40:00Z"
+    ],
+    "ransome-airlines-1864-PVD-LGA-1305-b108@1986-02-28": [
+      "1986-02-28T18:05:00Z",
+      "1986-02-28T19:00:00Z"
+    ],
+    "ransome-airlines-1864-PVD-LGA-1305-b108@1986-03-01": [
+      "1986-03-01T18:05:00Z",
+      "1986-03-01T19:00:00Z"
+    ],
+    "ransome-airlines-1840-PVD-LGA-1415-b108@1986-02-28": [
+      "1986-02-28T19:15:00Z",
+      "1986-02-28T20:10:00Z"
+    ],
+    "ransome-airlines-1856-PVD-LGA-1515-b108@1986-02-28": [
+      "1986-02-28T20:15:00Z",
+      "1986-02-28T21:10:00Z"
+    ],
+    "ransome-airlines-1847-PVD-EWR-1605-b108@1986-02-28": [
+      "1986-02-28T21:05:00Z",
+      "1986-02-28T22:10:00Z"
+    ],
+    "ransome-airlines-1827-PVD-JFK-1635-b108@1986-02-27": [
+      "1986-02-27T21:35:00Z",
+      "1986-02-27T22:35:00Z"
+    ],
+    "ransome-airlines-1827-PVD-JFK-1635-b108@1986-02-28": [
+      "1986-02-28T21:35:00Z",
+      "1986-02-28T22:35:00Z"
+    ],
+    "ransome-airlines-1827-PVD-JFK-1635-b108@1986-03-01": [
+      "1986-03-01T21:35:00Z",
+      "1986-03-01T22:35:00Z"
+    ],
+    "ransome-airlines-1845-PVD-LGA-1705-b108@1986-02-27": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-27T22:55:00Z"
+    ],
+    "ransome-airlines-1845-PVD-LGA-1705-b108@1986-02-28": [
+      "1986-02-28T22:05:00Z",
+      "1986-02-28T22:55:00Z"
+    ],
+    "ransome-airlines-1845-PVD-LGA-1705-b108@1986-03-01": [
+      "1986-03-01T22:05:00Z",
+      "1986-03-01T22:55:00Z"
+    ],
+    "ransome-airlines-1797-PVD-LGA-1855-b108@1986-02-27": [
+      "1986-02-27T23:55:00Z",
+      "1986-02-28T00:40:00Z"
+    ],
+    "ransome-airlines-1797-PVD-LGA-1855-b108@1986-02-28": [
+      "1986-02-28T23:55:00Z",
+      "1986-03-01T00:40:00Z"
+    ],
+    "ransome-airlines-1859-PVD-EWR-1930-b108@1986-02-27": [
+      "1986-02-28T00:30:00Z",
+      "1986-02-28T01:35:00Z"
+    ],
+    "ransome-airlines-1859-PVD-EWR-1930-b108@1986-02-28": [
+      "1986-03-01T00:30:00Z",
+      "1986-03-01T01:35:00Z"
+    ],
+    "ransome-airlines-1849-PVD-JFK-2030-b108@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T02:25:00Z"
+    ],
+    "ransome-airlines-1849-PVD-JFK-2030-b108@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T02:25:00Z"
+    ],
+    "ransome-airlines-1784-BDL-PVD-2010-b108@1986-02-27": [
+      "1986-02-28T01:10:00Z",
+      "1986-02-28T01:45:00Z"
+    ],
+    "ransome-airlines-1784-BDL-PVD-2010-b108@1986-02-28": [
+      "1986-03-01T01:10:00Z",
+      "1986-03-01T01:45:00Z"
+    ],
+    "ransome-airlines-1839-BOS-JFK-2045-b108@1986-02-27": [
+      "1986-02-28T01:45:00Z",
+      "1986-02-28T02:55:00Z"
+    ],
+    "ransome-airlines-1839-BOS-JFK-2045-b108@1986-02-28": [
+      "1986-03-01T01:45:00Z",
+      "1986-03-01T02:55:00Z"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "verified_independent_segment_ground_times": [
+    {
+      "incoming_schedule": "ransome-airlines-1852-ISP-BOS-0745-b108",
+      "outgoing_schedule": "ransome-airlines-1852-BOS-BTV-0905-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1831-BTV-BOS-1330-b108",
+      "outgoing_schedule": "ransome-airlines-1831-BOS-ISP-1525-b108",
+      "ground_minutes": 55,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1832-ISP-BOS-1355-b108",
+      "outgoing_schedule": "ransome-airlines-1832-BOS-PWM-1540-b108",
+      "ground_minutes": 45,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1833-PWM-BOS-1915-b108",
+      "outgoing_schedule": "ransome-airlines-1833-BOS-ISP-2025-b108",
+      "ground_minutes": 25,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1807-BTV-BOS-0855-b108",
+      "outgoing_schedule": "ransome-airlines-1807-BOS-PVD-1015-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1801-BTV-BOS-1030-b108",
+      "outgoing_schedule": "ransome-airlines-1801-BOS-PVD-1220-b108",
+      "ground_minutes": 45,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1805-PVD-BOS-0635-b108",
+      "outgoing_schedule": "ransome-airlines-1805-BOS-BTV-0725-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1777-PVD-BOS-1045-b108",
+      "outgoing_schedule": "ransome-airlines-1777-BOS-BTV-1213-b108",
+      "ground_minutes": 58,
+      "common_weekdays": [
+        7
+      ],
+      "matching_in_window_chains": 0
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1838-PVD-BOS-1310-b108",
+      "outgoing_schedule": "ransome-airlines-1838-BOS-BTV-1405-b108",
+      "ground_minutes": 25,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1757-BOS-PVD-1125-b108",
+      "outgoing_schedule": "ransome-airlines-1757-PVD-JFK-1215-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        6,
+        7
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1815-BOS-PVD-1150-b108",
+      "outgoing_schedule": "ransome-airlines-1815-PVD-JFK-1245-b108",
+      "ground_minutes": 25,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1827-BOS-PVD-1551-b108",
+      "outgoing_schedule": "ransome-airlines-1827-PVD-JFK-1635-b108",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1849-BOS-PVD-1940-b108",
+      "outgoing_schedule": "ransome-airlines-1849-PVD-JFK-2030-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1790-LGA-PVD-0815-b108",
+      "outgoing_schedule": "ransome-airlines-1790-PVD-BOS-0930-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1758-JFK-PVD-1340-b108",
+      "outgoing_schedule": "ransome-airlines-1758-PVD-BOS-1500-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        6,
+        7
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1804-JFK-PVD-1700-b108",
+      "outgoing_schedule": "ransome-airlines-1804-PVD-BOS-1815-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "ransome-airlines-1784-LGA-BDL-1859-b108",
+      "outgoing_schedule": "ransome-airlines-1784-BDL-PVD-2010-b108",
+      "ground_minutes": 20,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "matching_in_window_chains": 2
+    }
+  ],
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "passed_data_checks; unreal_runtime_not_run",
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

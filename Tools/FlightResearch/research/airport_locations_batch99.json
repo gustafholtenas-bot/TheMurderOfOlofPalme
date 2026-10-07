@@ -1,0 +1,69 @@
+{
+  "package": "v102",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "ANB",
+      "name": "Anniston–Calhoun County Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 33.5882,
+      "lon": -85.8581,
+      "coordinate_source": "https://ourairports.com/airports/KANB/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.airnav.com/airport/KANB",
+      "historical_location_note": "Delta directory p260 identifies ANB as Anniston Calhoun County. The FAA record reproduced by AirNav lists activation in March 1941 and the civil field southwest of Anniston. University of Alabama aerial-photo inventory lists Anniston Metropolitan Airport from 1957 onward. This is ANB, not ASN/Talladega or Fort McClellan. Modern coordinates are approximate airport-area markers, not reconstructed 1986 terminals or gates.",
+      "historical_additional_source": "https://alabamamaps.ua.edu/aerials/Counties/Calhoun/Calhoun.html"
+    },
+    {
+      "id": "GAD",
+      "name": "Gadsden Municipal Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 33.972599,
+      "lon": -86.088996,
+      "coordinate_source": "https://ourairports.com/airports/KGAD/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.airnav.com/airport/KGAD",
+      "historical_location_note": "Delta directory p260 identifies GAD as Gadsden Municipal. The FAA record reproduced by AirNav lists activation in January 1944 and the site southwest of Gadsden, now Northeast Alabama Regional. This is the postwar municipal field, not the earlier Gulf/Republic Steel airfield. Modern OurAirports coordinates mark the approximate airport area, not reconstructed historical gates or runways."
+    },
+    {
+      "id": "ROA",
+      "name": "Roanoke Regional–Woodrum Field (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 37.3255,
+      "lon": -79.975403,
+      "coordinate_source": "https://ourairports.com/airports/KROA/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyroa.com/airport-history",
+      "historical_location_note": "Delta directory p261 still calls ROA Municipal. The airport history confirms continuity at the Cannaday Farm site, the 1983 Regional/Woodrum name, and a new terminal completed only in 1989. The marker is the same airport area, not a reconstruction of that later terminal or the 1986 gates."
+    },
+    {
+      "id": "TRI",
+      "name": "Tri-City Regional Airport, Tennessee (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 36.475201,
+      "lon": -82.407401,
+      "coordinate_source": "https://ourairports.com/airports/KTRI/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://kingsportarchives.wordpress.com/2009/08/18/national-aviation-week/",
+      "historical_location_note": "Delta directory p261 identifies TRI as Tri-City Regional. City of Kingsport Archives documents McKellar Field opening in 1937 and historic aerials of the shared regional airport. This is the Blountville field serving northeast Tennessee and southwest Virginia, not Tri-Cities/Pasco PSC in Washington. Modern coordinates mark the approximate airport area, not reconstructed 1986 gates."
+    },
+    {
+      "id": "TLH",
+      "name": "Tallahassee Municipal Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 30.401209,
+      "lon": -84.35433,
+      "coordinate_source": "https://ourairports.com/airports/KTLH/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.talgov.com/Uploads/Public/documents/transparency/ig/fy16/1620.pdf",
+      "historical_location_note": "Delta directory p261 identifies TLH as Municipal. City audit #1620, printed p10/PDF p15, states the new airport site opened in 1961, replacing Dale Mabry Field, and a new adjacent airline terminal opened in 1989. The marker uses the airport area established in 1961, not Dale Mabry Field or a reconstructed 1986 terminal/gate. Tallahassee uses Eastern Time."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "ANB civil Anniston-Calhoun County, GAD postwar Municipal, ROA Regional/Woodrum, TRI Blountville TN/VA, and TLH 1961 Municipal site. No reconstructed gates, terminals or runway alignments."
+}

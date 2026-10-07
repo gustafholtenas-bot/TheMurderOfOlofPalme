@@ -1,0 +1,30 @@
+{
+  "package": "v128",
+  "changed_prior_files": [
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/europe_country_index.json",
+    "Tools/FlightResearch/research/europe_country_queue.json"
+  ],
+  "byte_identical_prior_file_count": 981,
+  "prior_code_byte_identical": true,
+  "prior_research_and_errata_byte_identical": true,
+  "all_prior_movement_objects_unchanged": true,
+  "all_prior_schedule_objects_unchanged": true,
+  "all_prior_airport_country_airline_objects_unchanged": true,
+  "modified_prior_source_ids": [
+    "liat-wt40-19851213"
+  ],
+  "modified_source_fields": [
+    "title",
+    "reviewed_pages",
+    "notes"
+  ],
+  "all_other_prior_source_objects_unchanged": true,
+  "missing_prior_files": [],
+  "data_only": true,
+  "original_baseline_archive_sha256": "022fa01a7d081dea45c248a605e49159edbe8b644fa89c769c792e5fbcde2197"
+}

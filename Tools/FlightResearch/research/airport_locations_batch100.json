@@ -1,0 +1,32 @@
+{
+  "package": "v103",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "MSL",
+      "name": "Muscle Shoals Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 34.745123,
+      "lon": -87.612981,
+      "coordinate_source": "https://ourairports.com/airports/KMSL/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.tva.com/the-powerhouse/stories/above-and-beyond",
+      "historical_location_note": "Delta directory p261 identifies MSL as Muscle Shoals. TVA's history documents its original 1937 hangar still within today's Northwest Alabama Regional Airport. Together these support continuity of the airport area. Modern coordinates are approximate site markers, not reconstructed 1986 terminals, gates or runway layouts."
+    },
+    {
+      "id": "RIC",
+      "name": "Richmond–Byrd International Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 37.505199,
+      "lon": -77.319702,
+      "coordinate_source": "https://ourairports.com/airports/KRIC/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyrichmond.com/ric-celebrates-95-years-of-service-to-virginias-capital-region/",
+      "historical_location_note": "Delta directory p261 identifies Richmond RIC as Byrd International. The airport's own history traces today's field to Richard E. Byrd Airport opened in October 1927. These sources support continuity of the airport area. Modern coordinates are approximate site markers, not reconstructed 1986 terminals, gates or runway layouts."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "Muscle Shoals MSL and Richmond Byrd International RIC. Historical airport-area continuity reviewed; no reconstructed gates, terminals or runway alignments."
+}

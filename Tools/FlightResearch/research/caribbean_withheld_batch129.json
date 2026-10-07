@@ -1,0 +1,233 @@
+{
+  "package": "v132",
+  "aggregate_examples_not_duplicated": [
+    {
+      "edition": "J",
+      "inside": 2,
+      "column": 1,
+      "flight": "1172",
+      "origin": "EYW",
+      "destination": "RSW",
+      "departure": "07:00",
+      "arrival": "08:45",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 2,
+      "column": 2,
+      "flight": "1024",
+      "origin": "EYW",
+      "destination": "TPA",
+      "departure": "08:45",
+      "arrival": "10:55",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 2,
+      "column": 2,
+      "flight": "1030",
+      "origin": "EYW",
+      "destination": "TPA",
+      "departure": "11:00",
+      "arrival": "12:55",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 2,
+      "column": 2,
+      "flight": "1036",
+      "origin": "EYW",
+      "destination": "TPA",
+      "departure": "15:45",
+      "arrival": "17:50",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 2,
+      "column": 2,
+      "flight": "1042",
+      "origin": "EYW",
+      "destination": "TPA",
+      "departure": "18:45",
+      "arrival": "21:35",
+      "printed_stops": 2,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 2,
+      "column": 3,
+      "flight": "1112",
+      "origin": "MIA",
+      "destination": "RSW",
+      "departure": "21:05",
+      "arrival": "22:20",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 1,
+      "flight": "961",
+      "origin": "RSW",
+      "destination": "EYW",
+      "departure": "08:00",
+      "arrival": "09:15",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 1,
+      "flight": "1179",
+      "origin": "RSW",
+      "destination": "EYW",
+      "departure": "16:15",
+      "arrival": "18:25",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 1,
+      "flight": "989",
+      "origin": "RSW",
+      "destination": "EYW",
+      "departure": "18:30",
+      "arrival": "19:45",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 4,
+      "flight": "1172",
+      "origin": "EYW",
+      "destination": "RSW",
+      "departure": "07:00",
+      "arrival": "08:45",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 4,
+      "flight": "984",
+      "origin": "EYW",
+      "destination": "RSW",
+      "departure": "10:00",
+      "arrival": "11:15",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 4,
+      "flight": "988",
+      "origin": "EYW",
+      "destination": "RSW",
+      "departure": "16:45",
+      "arrival": "18:00",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 2,
+      "column": 2,
+      "flight": "1112",
+      "origin": "MIA",
+      "destination": "RSW",
+      "departure": "21:05",
+      "arrival": "22:20",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    }
+  ],
+  "aggregate_list_exhaustive": false,
+  "connection_rows": "Slash flight numbers and intermediate-airport remarks are not imported as nonstop. Asterisk special connections and fare dots do not establish extra physical legs.",
+  "january_apf_rsw": "No independent January Naples–Fort Myers physical-leg clock block obtained. No times inferred by subtracting a through itinerary.",
+  "zero_movement_schedules": [
+    "pba-provincetown-boston-m-1042-APF-RSW-2010-b129",
+    "pba-provincetown-boston-m-1101-RSW-MIA-0700-b129",
+    "pba-provincetown-boston-m-1111-RSW-MIA-1815-b129",
+    "pba-provincetown-boston-m-1112-APF-RSW-2155-b129",
+    "pba-provincetown-boston-m-1112-MIA-APF-2105-b129",
+    "pba-provincetown-boston-m-1130-MTH-MIA-1815-b129",
+    "pba-provincetown-boston-m-1131-MIA-MTH-1955-b129",
+    "pba-provincetown-boston-m-1155-APF-MIA-0700-b129",
+    "pba-provincetown-boston-m-1156-MIA-APF-0835-b129",
+    "pba-provincetown-boston-m-1164-MIA-APF-1805-b129",
+    "pba-provincetown-boston-m-1165-APF-MIA-1905-b129",
+    "pba-provincetown-boston-m-1166-MIA-APF-2005-b129",
+    "pba-provincetown-boston-m-1172-MIA-RSW-0805-b129",
+    "pba-provincetown-boston-m-1179-MIA-EYW-1730-b129",
+    "pba-provincetown-boston-m-1180-EYW-MIA-1900-b129",
+    "pba-provincetown-boston-m-1181-MIA-EYW-2030-b129",
+    "pba-provincetown-boston-m-1192-EYW-MIA-1730-b129",
+    "pba-provincetown-boston-m-1193-MIA-EYW-1900-b129",
+    "pba-provincetown-boston-m-1194-EYW-MIA-2030-b129",
+    "pba-provincetown-boston-m-1195-MIA-EYW-2205-b129",
+    "pba-provincetown-boston-m-1213-RSW-APF-2105-b129",
+    "pba-provincetown-boston-m-1380-EYW-TPA-1800-b129",
+    "pba-provincetown-boston-m-974-EYW-MIA-2330-b129",
+    "pba-provincetown-boston-m-988-APF-RSW-1740-b129",
+    "pba-provincetown-boston-m-989-APF-EYW-1900-b129",
+    "pba-provincetown-boston-m-989-RSW-APF-1830-b129"
+  ],
+  "zero_movement_reason": "26 March-edition rows have no Saturday movement: explicit weekday exclusion and/or departure after 17:21:30 local. They remain reviewed schedules.",
+  "night_service": "March 974 23:30–00:25 next day is reviewed but outside the window. Early March 975/976/977/960 keep their printed a times; no February backdating.",
+  "new_source_leads_without_import": [
+    {
+      "name": "PBA Southern System December 1, 1985",
+      "urls": [
+        "https://www.sunshineskies.com/pba-tt-12-01-1985.html",
+        "https://flypba.com/timetable/s-1986-01-15/"
+      ],
+      "result": "Superseded by January 15 issue. December clocks not imported."
+    },
+    {
+      "name": "Gull Air February 15, 1986",
+      "urls": [
+        "https://airtimes.com/cgat/usb/gullair.htm",
+        "https://www.sunshineskies.com/gull.html"
+      ],
+      "result": "Correct-period cover/map found but no complete applicable clock table. July 1984 interior is not projected to 1986."
+    },
+    {
+      "name": "Bahamasair December 15, 1985",
+      "urls": [
+        "https://www.airtimes.com/cgat/bs/bahamasair.htm",
+        "https://www.airtimes.com/cgat/bs/bahamasair/gal/upgal.htm"
+      ],
+      "result": "Issue listed; complete interior not obtained. No new Bahamasair schedule imported."
+    },
+    {
+      "name": "Aeronica",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/rl3.htm"
+      ],
+      "result": "No newly obtained applicable complete 1986 interior. Nearby 1984/1987 material does not fill the Nicaragua window."
+    }
+  ],
+  "prior_holds_retained_from": "caribbean_withheld_batch128.json",
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_reports_preserved_as_history": true
+}

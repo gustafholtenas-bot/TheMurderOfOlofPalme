@@ -1,0 +1,20 @@
+{
+  "package": "v88",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "CHA",
+      "name": "Chattanooga–Lovell Field (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 35.035301,
+      "lon": -85.203796,
+      "coordinate_source": "https://ourairports.com/airports/KCHA/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flycha.com/history",
+      "historical_location_note": "The airport authority history identifies the present Lovell Field site as opened in 1930, distinct from earlier Marr Field. It also dates the earlier terminal to 1964 and the later passenger terminal to 1992. Modern OurAirports coordinates are an approximate airport-area marker, not a reconstruction of a 1986 terminal, gate, runway or aircraft position."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinate used as approximate airport-area marker, with historical site and terminal dates independently reviewed.",
+  "historical_scope": "Lovell Field present site opened 1930, not earlier Marr Field. Later 1992 terminal is not projected back to 1986."
+}

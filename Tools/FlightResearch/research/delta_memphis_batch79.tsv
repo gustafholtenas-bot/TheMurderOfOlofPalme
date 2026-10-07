@@ -1,0 +1,83 @@
+source_row	schedule	action	airline	flight	origin	destination	printed_departure	printed_arrival	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	delta-428-MEM-ATL-0600-b79	new_schedule	delta	428	MEM	ATL	600a	758a	06:00	07:58	0	X7	123456	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+2	delta-650-MEM-ATL-0720-b79	new_schedule	delta	650	MEM	ATL	720a	921a	07:20	09:21	0	D	1234567	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+3	delta-208-MEM-ATL-0850-b79	new_schedule	delta	208	MEM	ATL	850a	1051a	08:50	10:51	0	D	1234567	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+4	delta-212-MEM-ATL-1020-b79	new_schedule	delta	212	MEM	ATL	1020a	1221p	10:20	12:21	0	D	1234567	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+5	delta-718-MEM-ATL-1410-b79	new_schedule	delta	718	MEM	ATL	210p	411p	14:10	16:11	0	D	1234567	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+6	delta-305-MEM-ATL-1555-b79	new_schedule	delta	305	MEM	ATL	355p	556p	15:55	17:56	0	D	1234567	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+7	delta-754-MEM-ATL-1745-b79	new_schedule	delta	754	MEM	ATL	545p	745p	17:45	19:45	0	D	1234567	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+8	delta-1042-MEM-ATL-1950-b79	new_schedule	delta	1042	MEM	ATL	750p	951p	19:50	21:51	0	D	1234567	0	145		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+9		excluded_through_service	delta	1114	ATL	MEM	720a	809a	07:20	08:09	0	X7	123456	1	16		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+10	delta-409-ATL-MEM-0848-b79	new_schedule	delta	409	ATL	MEM	848a	855a	08:48	08:55	0	D	1234567	0	16		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+11	delta-273-ATL-MEM-1147-b79	new_schedule	delta	273	ATL	MEM	1147a	1154a	11:47	11:54	0	D	1234567	0	16		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+12	delta-305-ATL-MEM-1515-b79	new_schedule	delta	305	ATL	MEM	315p	322p	15:15	15:22	0	X6	123457	0	16		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+13	delta-704-ATL-MEM-1646-b79	new_schedule	delta	704	ATL	MEM	446p	455p	16:46	16:55	0	D	1234567	0	16		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+14	delta-427-ATL-MEM-1835-b79	new_schedule	delta	427	ATL	MEM	635p	642p	18:35	18:42	0	D	1234567	0	16		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+15	delta-331-ATL-MEM-2028-b79	new_schedule	delta	331	ATL	MEM	828p	835p	20:28	20:35	0	D	1234567	0	16		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+16	delta-651-ATL-MEM-2257-b79	new_schedule	delta	651	ATL	MEM	1057p	1100p	22:57	23:00	0	D	1234567	0	16		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+17	delta-733-MEM-DFW-0934-b79	new_schedule	delta	733	MEM	DFW	934a	1055a	09:34	10:55	0	D	1234567	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+18	delta-661-MEM-DFW-1310-b79	new_schedule	delta	661	MEM	DFW	110p	231p	13:10	14:31	0	D	1234567	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+19	delta-323-MEM-DFW-1559-b79	new_schedule	delta	323	MEM	DFW	359p	520p	15:59	17:20	0	D	1234567	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+20	delta-571-MEM-DFW-1949-b79	new_schedule	delta	571	MEM	DFW	749p	910p	19:49	21:10	0	D	1234567	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+21	delta-508-DFW-MEM-1037-b79	new_schedule	delta	508	DFW	MEM	1037a	1143a	10:37	11:43	0	D	1234567	0	65		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+22	delta-658-DFW-MEM-1334-b79	new_schedule	delta	658	DFW	MEM	134p	240p	13:34	14:40	0	D	1234567	0	65		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+23	delta-568-DFW-MEM-1710-b79	new_schedule	delta	568	DFW	MEM	510p	616p	17:10	18:16	0	D	1234567	0	65		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+24	delta-398-DFW-MEM-2039-b79	new_schedule	delta	398	DFW	MEM	839p	945p	20:39	21:45	0	X6	123457	0	65		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+25	delta-1114-MEM-ORD-0840-b79	new_schedule	delta	1114	MEM	ORD	840a	1005a	08:40	10:05	0	X7	123456	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+26	delta-273-MEM-ORD-1220-b79	new_schedule	delta	273	MEM	ORD	1220p	145p	12:20	13:45	0	D	1234567	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+27		excluded_connection	connection	334/1188	MEM	ORD	1230p	300p	12:30	15:00	0	D	1234567	CVG	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+28	delta-658-MEM-ORD-1518-b79	new_schedule	delta	658	MEM	ORD	318p	443p	15:18	16:43	0	D	1234567	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+29	delta-1156-MEM-ORD-1859-b79	new_schedule	delta	1156	MEM	ORD	659p	824p	18:59	20:24	0	X6	123457	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+30	delta-547-ORD-MEM-0735-b79	new_schedule	delta	547	ORD	MEM	735a	900a	07:35	09:00	0	X7	123456	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+31	delta-1189-ORD-MEM-1115-b79	new_schedule	delta	1189	ORD	MEM	1115a	1240p	11:15	12:40	0	D	1234567	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+32	delta-537-ORD-MEM-1400-b79	new_schedule	delta	537	ORD	MEM	200p	325p	14:00	15:25	0	D	1234567	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+33		excluded_connection	connection	1121/479	ORD	MEM	400p	646p	16:00	18:46	0	X6	123457	CVG	48		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+34	delta-977-ORD-MEM-1759-b79	new_schedule	delta	977	ORD	MEM	559p	724p	17:59	19:24	0	X6	123457	0	48		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+35		excluded_connection	connection	650/1116	MEM	CVG	720a	1133a	07:20	11:33	0	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+36	delta-1110-MEM-CVG-0840-b79	new_schedule	delta	1110	MEM	CVG	840a	1045a	08:40	10:45	0	X7	123456	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+37	delta-334-MEM-CVG-1230-b79	new_schedule	delta	334	MEM	CVG	1230p	235p	12:30	14:35	0	D	1234567	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+38		excluded_connection	connection	718/324	MEM	CVG	210p	553p	14:10	17:53	0	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+39		excluded_connection	connection	1124/1734	MEM	CVG	322p	700p	15:22	19:00	0	X6	123457	IND	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+40		excluded_connection	connection	754/806	MEM	CVG	545p	955p	17:45	21:55	0	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+41		excluded_through_service	delta	1170	MEM	CVG	658p	944p	18:58	21:44	0	X6	123457	1	146		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+42		excluded_connection	connection	427/1699	MEM	CVG	708p	1050p	19:08	22:50	0	5	5	IND	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+43		excluded_connection	connection	1042/1140	MEM	CVG	750p	1210a	19:50	00:10	1	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+44		excluded_connection	connection	393/409	CVG	MEM	645a	855a	06:45	08:55	0	X7	123456	ATL	51		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+45		excluded_through_service	delta	1101	CVG	MEM	810a	903a	08:10	09:03	0	D	1234567	1	51		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+46		excluded_connection	connection	497/273	CVG	MEM	920a	1154a	09:20	11:54	0	D	1234567	ATL	51		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+47	delta-679-CVG-MEM-1520-b79	new_schedule	delta	679	CVG	MEM	320p	330p	15:20	15:30	0	D	1234567	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+48		excluded_connection	connection	498/427	CVG	MEM	440p	642p	16:40	18:42	0	D	1234567	ATL	51		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+49	delta-479-CVG-MEM-1835-b79	new_schedule	delta	479	CVG	MEM	635p	646p	18:35	18:46	0	X6	123457	0	51		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+50		excluded_connection	connection	261/651	CVG	MEM	855p	1100p	20:55	23:00	0	D	1234567	ATL	51		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+51		excluded_connection	connection	650/782	MEM	DTW	720a	1159a	07:20	11:59	0	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+52	delta-1100-MEM-DTW-0843-b79	new_schedule	delta	1100	MEM	DTW	843a	1115a	08:43	11:15	0	X7	123456	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+53		excluded_connection	connection	212/790	MEM	DTW	1020a	320p	10:20	15:20	0	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+54		excluded_through_service	delta	692	MEM	DTW	1220p	335p	12:20	15:35	0	D	1234567	1	146		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+55		excluded_connection	connection	334/1564	MEM	DTW	1230p	425p	12:30	16:25	0	X6	123457	CVG	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+56	delta-1122-MEM-DTW-1518-b79	new_schedule	delta	1122	MEM	DTW	318p	550p	15:18	17:50	0	X6	123457	0	146		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+57		excluded_through_service	delta	1124	MEM	DTW	322p	633p	15:22	18:33	0	D	1234567	1	146		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+58		excluded_connection	connection	305/372	MEM	DTW	355p	941p	15:55	21:41	0	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+59		excluded_connection	connection	754/96	MEM	DTW	545p	1020p	17:45	22:20	0	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+60		excluded_through_service	delta	427	MEM	DTW	708p	1023p	19:08	22:23	0	X6	123457	1	146		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+61		excluded_connection	connection	1042/760	MEM	DTW	750p	1245a	19:50	00:45	1	D	1234567	ATL	146		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+62		excluded_connection	connection	295/409	DTW	MEM	600a	855a	06:00	08:55	0	X67	12345	ATL	74		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+63		excluded_through_service	delta	581	DTW	MEM	735a	900a	07:35	09:00	0	X7	123456	1	74		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+64		excluded_connection	connection	785/273	DTW	MEM	910a	1154a	09:10	11:54	0	D	1234567	ATL	74		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+65	delta-661-DTW-MEM-1200-b79	new_schedule	delta	661	DTW	MEM	1200n	1242p	12:00	12:42	0	D	1234567	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+66		excluded_through_service	delta	1123	DTW	MEM	210p	331p	14:10	15:31	0	D	1234567	1	74		delta-19860201	1986-02-01				One intermediate stop; not imported as a direct physical segment.
+67		excluded_connection	connection	157/427	DTW	MEM	420p	642p	16:20	18:42	0	D	1234567	ATL	74		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+68		excluded_connection	connection	619/479	DTW	MEM	500p	646p	17:00	18:46	0	X6	123457	CVG	74	4: effective February 12, 1986	delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+69		excluded_connection	connection	481/331	DTW	MEM	550p	835p	17:50	20:35	0	6	6	ATL	74		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+70	delta-647-DTW-MEM-1835-b79	new_schedule	delta	647	DTW	MEM	635p	717p	18:35	19:17	0	X6	123457	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+71		excluded_connection	connection	293/651	DTW	MEM	810p	1100p	20:10	23:00	0	D	1234567	ATL	74		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+72		excluded_connection	connection	1110/1567	MEM	IND	840a	130p	08:40	13:30	0	X67	12345	CVG	147		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+73	delta-692-MEM-IND-1220-b79	new_schedule	delta	692	MEM	IND	1220p	222p	12:20	14:22	0	D	1234567	0	147		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+74		excluded_connection	connection	334/1654	MEM	IND	1230p	340p	12:30	15:40	0	X6	123457	CVG	147		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+75	delta-1124-MEM-IND-1522-b79	new_schedule	delta	1124	MEM	IND	322p	525p	15:22	17:25	0	D	1234567	0	147		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+76	delta-427-MEM-IND-1908-b79	new_schedule	delta	427	MEM	IND	708p	910p	19:08	21:10	0	X6	123457	0	147		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+77		excluded_connection	connection	1112/1101	IND	MEM	705a	903a	07:05	09:03	0	D	1234567	CVG	111		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+78	delta-581-IND-MEM-0855-b79	new_schedule	delta	581	IND	MEM	855a	900a	08:55	09:00	0	X7	123456	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+79	delta-1123-IND-MEM-1526-b79	new_schedule	delta	1123	IND	MEM	326p	331p	15:26	15:31	0	D	1234567	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.
+80		excluded_connection	connection	1655/479	IND	MEM	400p	646p	16:00	18:46	0	X6	123457	CVG	111		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+81		excluded_connection	connection	1545/479	IND	MEM	515p	646p	17:15	18:46	0	X67	12345	CVG	111		delta-19860201	1986-02-01				Connecting itinerary; not a direct physical segment.
+82	delta-685-IND-MEM-1910-b79	new_schedule	delta	685	IND	MEM	710p	717p	19:10	19:17	0	X6	123457	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually printed nonstop row; no dated footnote.

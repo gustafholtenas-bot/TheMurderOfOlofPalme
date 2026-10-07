@@ -1,0 +1,152 @@
+{
+  "source": "northwest-19851218",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_nwa-tt_nwa-tt-19851218",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+  "pdf_sha256": "c30a120b617cd61892a50b620c7535620ad6d27302db302d0f50f8dcc48a6f48",
+  "effective_from": "1985-12-18",
+  "effective_to": null,
+  "next_archive_listed_edition": "1986-03-02",
+  "archive_index_url": "https://northwestairlineshistory.org/timetables-northwest/",
+  "intermediate_amendments_verified": false,
+  "visual_review": true,
+  "reviewed_printed_pages": [
+    21,
+    22,
+    29,
+    30,
+    74,
+    75,
+    77,
+    79,
+    142,
+    150
+  ],
+  "route_table_pdf_pages": [
+    12,
+    13,
+    16,
+    17,
+    39,
+    40,
+    41,
+    42
+  ],
+  "itinerary_pdf_page": 74,
+  "legend_pdf_page": 78,
+  "row_scope": "58 visually reviewed Northwest nonstop schedules on all 12 directed pairs among MSP, ORD, DTW and MKE.",
+  "accepted_nonstop_rows": 58,
+  "frequency_legend": {
+    "Daily": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "ExSu": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ExSa": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "ExSaSu": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "Sa": [
+      6
+    ],
+    "Su": [
+      7
+    ]
+  },
+  "airport_mapping": "O airport suffix and explicit FROM/TO O’HARE select ORD; M/MDW and Midway operator rows are excluded.",
+  "time_notation": "a=am, p=pm, n=noon; all selected arrivals on same local calendar day. Earlier Detroit westbound arrival clocks reflect CST/EST difference, not an overnight flight.",
+  "domestic_38_49_scope": "MKE–DTW38 is printed Saturday on p.74; DTW–MKE49 is daily on p.30. Both lack dated restrictions and are corroborated by their separate 727 domestic legs on p.142. The p.138 Atlantic chart restrictions were retained for the earlier international schedules, not generalized to domestic legs.",
+  "dated_rows": [
+    {
+      "source_row": 8,
+      "schedule": "northwest-707-ORD-MKE-1545-b114",
+      "action": "new_schedule",
+      "airline": "northwest",
+      "flight": "707",
+      "origin": "ORD",
+      "destination": "MKE",
+      "printed_page": "22",
+      "pdf_page": 13,
+      "printed_departure": "345pO",
+      "printed_arrival": "418p",
+      "departure_local": "15:45",
+      "arrival_local": "16:18",
+      "arrival_day_offset": 0,
+      "printed_frequency": "Daily",
+      "decoded_days": "1234567",
+      "printed_stops_or_via": "N/S",
+      "footnote": "Feb12",
+      "source": "northwest-19851218",
+      "row_effective_from": "1986-02-12",
+      "row_effective_to": "",
+      "import_valid_from": "1986-02-27",
+      "import_valid_to": "1986-03-01",
+      "decision_note": "Visually reviewed explicit Northwest nonstop row. O’Hare selected; Midway-operated rows and multi-stop/connecting itineraries excluded. Domestic frequencies are leg-specific."
+    },
+    {
+      "source_row": 10,
+      "schedule": "northwest-706-MKE-ORD-0720-b114",
+      "action": "new_schedule",
+      "airline": "northwest",
+      "flight": "706",
+      "origin": "MKE",
+      "destination": "ORD",
+      "printed_page": "74",
+      "pdf_page": 39,
+      "printed_departure": "720a",
+      "printed_arrival": "753aO",
+      "departure_local": "07:20",
+      "arrival_local": "07:53",
+      "arrival_day_offset": 0,
+      "printed_frequency": "Daily",
+      "decoded_days": "1234567",
+      "printed_stops_or_via": "N/S",
+      "footnote": "Feb12",
+      "source": "northwest-19851218",
+      "row_effective_from": "1986-02-12",
+      "row_effective_to": "",
+      "import_valid_from": "1986-02-27",
+      "import_valid_to": "1986-03-01",
+      "decision_note": "Visually reviewed explicit Northwest nonstop row. O’Hare selected; Midway-operated rows and multi-stop/connecting itineraries excluded. Domestic frequencies are leg-specific."
+    }
+  ],
+  "timezones_fixed_hours_for_import_dates": {
+    "MSP": -6,
+    "ORD": -6,
+    "MKE": -6,
+    "DTW": -5
+  },
+  "excluded_candidates": [
+    "Existing DTW–MSP7 09:40–10:18 retained unchanged, not duplicated.",
+    "ORD–MKE707 and MKE–ORD706 versions through Jan7 and Jan8–Feb11 excluded; only daily effective Feb12 retained.",
+    "Midway-operated MSP–MDW and MDW–MSP rows excluded from Northwest import.",
+    "MKE–MSP375 has one stop via MSN; MSP–MKE224 has one stop via MSN.",
+    "MSP–DTW458 is one-stop via ORD: only the separately timed MSP–ORD and ORD–DTW nonstop legs are imported.",
+    "DTW–MSP375 has two stops; 375/711 is a connection via MKE."
+  ],
+  "zero_window_row": "MKE–MSP711 Sunday: catalog only, no movement in Thursday-to-Saturday target window.",
+  "caveat": "OCR used only for discovery; selected fields visually reviewed against the original scan. Existing airports and coordinate records unchanged."
+}

@@ -1,0 +1,71 @@
+{
+  "package": "v135",
+  "checked_on": "2026-10-02",
+  "source_id": "pba-northern-19860112",
+  "edition_url": "https://flypba.com/timetable/n-1986-01-12/",
+  "publication_index_url": "https://flypba.com/timetables/",
+  "credit": "Gordon K. Werner collection / flyPBA.com",
+  "files": [
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/08/N-86-01-12-back.jpg",
+      "filename": "N-86-01-12-back.jpg",
+      "bytes": 1739469,
+      "sha256": "4ec062b52a8b69fa521c4d37e66b34ef262757c91c1b70ccf454ae0e2c336085"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/08/N-86-01-12-cover.jpg",
+      "filename": "N-86-01-12-cover.jpg",
+      "bytes": 2535441,
+      "sha256": "228bad1413b4a83fd2bd0a9f2a03fbd92a4cdc5037801d3d962d0d0e7f18a99c"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/08/N-86-01-12-front.jpg",
+      "filename": "N-86-01-12-front.jpg",
+      "bytes": 1357406,
+      "sha256": "9636f94c6efc67add46ada0466435ca37107e399400f91f6a5c89a4b0aecc45e"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/08/N-86-01-12-inside-1.jpg",
+      "filename": "N-86-01-12-inside-1.jpg",
+      "bytes": 2436425,
+      "sha256": "e08aff6fecf44037a101ec1aa8559ab1ad3073bd7e60a365907cc050ac08a231"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/08/N-86-01-12-inside-2.jpg",
+      "filename": "N-86-01-12-inside-2.jpg",
+      "bytes": 2143714,
+      "sha256": "f5077ce346a88a121e29922f75ae343b09931d3c05efb86ec3d639cff85a9df8"
+    }
+  ],
+  "source_images_distributed": false,
+  "accepted_source_rows_this_batch": 144,
+  "source_effective_date": "1986-01-12",
+  "printed_expiry": null,
+  "import_period": [
+    "1986-02-27",
+    "1986-03-01"
+  ],
+  "next_listed_northern_edition": "1986-04-24",
+  "amendments_exhaustively_checked": false,
+  "time_basis": "Local time inferred from convention; no explicit local-time legend found.",
+  "timezones_fixed_hours_for_import_dates": {
+    "MVY": -5,
+    "HYA": -5,
+    "EWB": -5,
+    "BOS": -5,
+    "ACK": -5,
+    "LGA": -5,
+    "PVC": -5,
+    "BTV": -5
+  },
+  "equipment_basis": "No per-row equipment specified; cover/interior illustrations not assigned to flights.",
+  "important_boundaries": [
+    "789 BOS–HYA17:00–17:40 and HYA–ACK17:30–18:10 conflict and both held.",
+    "792 ACK–HYA Ex.Tue/Wed/Sat retained separately from HYA–BOS Fri.only.",
+    "777 ACK–EWB blank daily retained separately from EWB–LGA Ex.Sat.",
+    "778 LGA–EWB Ex.Sat. retained separately from onward EWB–MVY/MVY–ACK Fri.only.",
+    "917 BOS–PVC daily retained separately from PVC–HYA Ex.Fri.",
+    "882 Sunday-only EWB–MVY/MVY–BOS rows and Monday-only880/881/781/782 rows give zero project-window movements.",
+    "Through-stop and connection itineraries excluded; no intermediate clocks inferred."
+  ]
+}

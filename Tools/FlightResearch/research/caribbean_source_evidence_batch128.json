@@ -1,0 +1,73 @@
+{
+  "package": "v131",
+  "checked_on": "2026-10-02",
+  "source": "republic-19860214-employee",
+  "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+  "pdf_sha256": "dbfa243a56d5b0ce387f4e7e4a11288615cfe6d720c919ba0a9c0a82c73f6cfa",
+  "pdf_bytes": 12018907,
+  "scan_pages": 7,
+  "images": [
+    {
+      "scan_page": 1,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=1",
+      "sha256": "48baef14884380a77a26edf8eaa558b767271f66c600ca496c61991e75f5b06d"
+    },
+    {
+      "scan_page": 2,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=2",
+      "sha256": "dc4655330a574db40c202c47125e42ad737d1d42188790c62d9f911f6e285e8c"
+    },
+    {
+      "scan_page": 3,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=3",
+      "sha256": "09eb264c6c1623375312a48a30d076da0c196f94b85641255ddb3416582c56b7"
+    },
+    {
+      "scan_page": 4,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=4",
+      "sha256": "df00b97e7ebb60cd95dab3ab0a0813679ef4bc50abf83d12a155965bd1876ba0"
+    },
+    {
+      "scan_page": 5,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=5",
+      "sha256": "e2620ec7dd137b151f4cb54e35cd733ede412414861e2808eb719b93a4481b76"
+    },
+    {
+      "scan_page": 6,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=6",
+      "sha256": "72c24a13a6a0871670e785a7d869a2e9484d812a31144d688ff6043d005db49c"
+    },
+    {
+      "scan_page": 7,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=7",
+      "sha256": "2f7eda88392bcf87c946998d3744849de206013599b9e5c859e3b6b6512652be"
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "GPT": -6,
+    "MEM": -6,
+    "MOB": -6,
+    "VPS": -6,
+    "MGM": -6,
+    "PFN": -6,
+    "PVR": -6,
+    "MSY": -6,
+    "IAH": -6,
+    "HOU": -6,
+    "DTW": -5
+  },
+  "frequency_policy": "Blank=daily; 6=Saturday; 67=Saturday/Sunday; X6=except Saturday; X7=except Sunday.",
+  "stop_policy": "Blank ST only. Aggregate one-stop rows are not imported; use independently printed physical segments only. EXP services excluded.",
+  "timezone_policy": "Local-time convention; no explicit all-times-local legend found. All newly used airports UTC−6 in target dates except Detroit UTC−5. Puerto Vallarta/Jalisco uses America/Mexico_City. PFN/VPS in western Florida use Central time.",
+  "important_boundaries": [
+    "RC637 MEM–HOU arrives 00:20 next local day.",
+    "RC767 MEM–HOU Saturday 19:45 is after the window; zero movements.",
+    "RC735 DTW–HOU and RC738 HOU–DTW take off shortly before the first window boundary; Thursday legs overlap and are retained.",
+    "Puerto Vallarta weekend rows contribute Saturday only; PVR–MEM Saturday arrives after the window but departs within it.",
+    "Eight daily rows overlap both boundaries, contributing three dates each."
+  ],
+  "previous_held_conflicts_unchanged": true
+}

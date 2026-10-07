@@ -1,0 +1,54 @@
+{
+  "package": "v115",
+  "checked_on": "2026-10-01",
+  "airport_records": [
+    {
+      "id": "PDX",
+      "name": "Portland International, Oregon (1986)",
+      "country": "us",
+      "timezone": "America/Los_Angeles",
+      "lat": 45.588699,
+      "lon": -122.598,
+      "coordinate_source": "https://ourairports.com/airports/KPDX/",
+      "coordinate_record_id": "KPDX",
+      "timetable_code": "PDX",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://cdn.portofportland.com/pdfs/Pub_Portside_Fall_15.pdf"
+      ],
+      "location_note": "Delta printed p.261 identifies PDX as Portland, Oregon, International; it is distinct from Portland, Maine (PWM). Port of Portland history documents the present airfield opening in 1940, the International name in 1951 and a terminal in 1958. Current OurAirports coordinates are an approximate marker of the same airfield, not a reconstructed 1986 reference point, gate, runway threshold or aircraft position."
+    },
+    {
+      "id": "SRQ",
+      "name": "Sarasota–Bradenton Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 27.394631,
+      "lon": -82.554359,
+      "coordinate_source": "https://ourairports.com/airports/KSRQ/",
+      "coordinate_record_id": "KSRQ",
+      "timetable_code": "SRQ",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://flysrq.com/history"
+      ],
+      "location_note": "Delta printed p.261 identifies SRQ as Sarasota/Bradenton. Airport authority history documents the airfield before 1986, the replacement terminal opening in 1989 and International being added to the name in 1992. The later name is not backdated. Current OurAirports coordinates are an approximate same-airfield marker, not a reconstructed 1986 terminal, gate, runway threshold, reference point or aircraft position."
+    }
+  ],
+  "coordinate_scope": "Modern approximate same-airfield markers only; not reconstructed historical coordinates or terminal/gate locations.",
+  "primary_history_sources": [
+    {
+      "airport": "PDX",
+      "url": "https://cdn.portofportland.com/pdfs/Pub_Portside_Fall_15.pdf",
+      "pdf_page": 3,
+      "claims": "Current site opened 1940; International name 1951; terminal 1958."
+    },
+    {
+      "airport": "SRQ",
+      "url": "https://flysrq.com/history",
+      "claims": "Airfield completed 1942; present terminal 1989; International name November 1992."
+    }
+  ]
+}

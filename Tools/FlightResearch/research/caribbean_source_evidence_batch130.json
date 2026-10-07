@@ -1,0 +1,131 @@
+{
+  "package": "v133",
+  "checked_on": "2026-10-02",
+  "editions": {
+    "J": {
+      "source": "pba-southern-19860115",
+      "effective": "1986-01-15",
+      "url": "https://flypba.com/timetable/s-1986-01-15/",
+      "first": "1986-02-27",
+      "last": "1986-02-28",
+      "image": "S-86-01-01"
+    },
+    "M": {
+      "source": "pba-southern-19860301",
+      "effective": "1986-03-01",
+      "url": "https://flypba.com/timetable/s-1986-03-01/",
+      "first": "1986-03-01",
+      "last": "1986-03-01",
+      "image": "S-86-03-01"
+    }
+  },
+  "files": [
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-01-01-back.jpg",
+      "filename": "S-86-01-01-back.jpg",
+      "bytes": 2942036,
+      "sha256": "bc8b653f5115f3da9e45b63bdea458ab1093977b43614576115eb016aa8a63da"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-01-01-cover.jpg",
+      "filename": "S-86-01-01-cover.jpg",
+      "bytes": 3412658,
+      "sha256": "bde496aa0e90e5c291e308d2f334c53e543e4699c5acbd98ddc43e1b0c9f5177"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-01-01-front.jpg",
+      "filename": "S-86-01-01-front.jpg",
+      "bytes": 1562442,
+      "sha256": "c9dfc248e2f702d2934d058277c93e563922ca49c5fb6b2d6a95ee1bf89e4726"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-01-01-inside-1.jpg",
+      "filename": "S-86-01-01-inside-1.jpg",
+      "bytes": 3529031,
+      "sha256": "06f5cad14847ab7c0ccd61280113eb55b35be98f8811e9245ef724c01fe87a3d"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-01-01-inside-2.jpg",
+      "filename": "S-86-01-01-inside-2.jpg",
+      "bytes": 3883971,
+      "sha256": "3e67b725e7477eb55a139df73ecaeabcfec7f9ee74bf6d9e82707be31322538b"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-01-01-inside-3.jpg",
+      "filename": "S-86-01-01-inside-3.jpg",
+      "bytes": 3793737,
+      "sha256": "4cf95bd64fa46256939dc3abd8778a42c09d16821075ceb98aa3cd59881a7a03"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-01-01-inside-4.jpg",
+      "filename": "S-86-01-01-inside-4.jpg",
+      "bytes": 2780480,
+      "sha256": "ab37973b60a2a2e969f01061eacd8f55154642946f3dcb6d4d2f9282145fecda"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-03-01-back.jpg",
+      "filename": "S-86-03-01-back.jpg",
+      "bytes": 1503689,
+      "sha256": "e6c1cff14c72a8f051629d7c4152270d362ca3f6d1d36d5459c1fc40b61262e9"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-03-01-cover.jpg",
+      "filename": "S-86-03-01-cover.jpg",
+      "bytes": 3612672,
+      "sha256": "5c58504e7726e39282d6c1304dad4d5126a5620dba51d5c1544b1c175addc387"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-03-01-front.jpg",
+      "filename": "S-86-03-01-front.jpg",
+      "bytes": 1728056,
+      "sha256": "9e98bb643b3bb6114f5aa1ba7faa6ecb15679860e97723f337751f42a736d787"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-03-01-inside-1.jpg",
+      "filename": "S-86-03-01-inside-1.jpg",
+      "bytes": 3868507,
+      "sha256": "de5b9d9ddc9d0e4ff22efa20488074b2f3ec8504223d75f62ad7f7c3e9374c21"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-03-01-inside-2.jpg",
+      "filename": "S-86-03-01-inside-2.jpg",
+      "bytes": 3121477,
+      "sha256": "43eda09618680a7a157c116796757ce502b58cbd994d682ecb8ca19bbb2c617b"
+    },
+    {
+      "url": "https://flypba.com/wp-content/uploads/2020/09/S-86-03-01-inside-3.jpg",
+      "filename": "S-86-03-01-inside-3.jpg",
+      "bytes": 2781161,
+      "sha256": "5d3215fc2feb7e11454c2b2146f1dcc4218fae318b734b13ef1f069056339c5f"
+    }
+  ],
+  "credit": "Original PBA timetables from the Gordon K. Werner collection, flyPBA.com; scans linked, not redistributed.",
+  "time_basis": "Local-time inference from convention; UTC-5 verified for all 10 airports used in this batch. No explicit all-times-local legend found.",
+  "amendment_coverage_complete": false,
+  "printed_equipment": null,
+  "accepted_rows": 176,
+  "source_images_redistributed": false,
+  "important_boundaries": [
+    "January rows only February 27/28; March rows only March 1.",
+    "No March-only night service is backdated to February.",
+    "JAX–MLB and MLB–JAX have reviewed March schedules but zero movements in the target window.",
+    "January SRQ–TPA1208 prints07:25–07:40, March07:15–07:40. Keep the edition distinction.",
+    "March TLH–JAX940 is excluded on Saturday.",
+    "No equipment or individual aircraft inferred; no through/connection itinerary imported as nonstop.",
+    "All additions are US domestic; regional31-area coverage remains unchanged."
+  ],
+  "accepted_source_rows_this_batch": 176,
+  "prior_source_ids_unchanged": true,
+  "timezones_fixed_hours_for_import_dates": {
+    "PBI": -5,
+    "TLH": -5,
+    "TPA": -5,
+    "DAB": -5,
+    "MLB": -5,
+    "JAX": -5,
+    "APF": -5,
+    "SRQ": -5,
+    "GNV": -5,
+    "RSW": -5
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "package": "v93",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "BTR",
+      "name": "Baton Rouge Metropolitan Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 30.533199,
+      "lon": -91.149597,
+      "coordinate_source": "https://ourairports.com/airports/KBTR/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flybtr.com/about-btr/our-history",
+      "historical_location_note": "The airport authority identifies the current site as former Harding Field, opened to civilian use in 1948. Delta directory p260 identifies BTR as Metropolitan. Current coordinates mark the approximate airport area, not a reconstructed 1986 terminal or runway."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as an approximate airport-area marker; historical site independently reviewed.",
+  "historical_scope": "Baton Rouge Metropolitan, former Harding Field site. No precise 1986 terminal/gate/runway reconstruction."
+}

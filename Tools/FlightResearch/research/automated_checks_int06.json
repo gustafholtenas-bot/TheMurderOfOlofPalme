@@ -1,0 +1,43 @@
+[
+  {
+    "command": [
+      "python",
+      "Tools/FlightResearch/build_flights.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": "{\"registered_airlines\": 113, \"registered_countries\": 122, \"reviewed_schedules\": 6837, \"animated_airlines\": 72, \"scheduled_movements\": 11505, \"confirmed_movements\": 1}\n"
+  },
+  {
+    "command": [
+      "python",
+      "Tools/FlightResearch/build_country_index.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "python",
+      "Tools/FlightResearch/build_europe_index.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "Tools/FlightResearch",
+      "-p",
+      "test_flights.py"
+    ],
+    "exit_code": 0,
+    "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 11.189s\n\nOK\n"
+  }
+]

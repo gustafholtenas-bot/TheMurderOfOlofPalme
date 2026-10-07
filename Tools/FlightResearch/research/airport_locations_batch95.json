@@ -1,0 +1,56 @@
+{
+  "package": "v98",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "FYV",
+      "name": "Fayetteville – Drake Field",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 36.0051,
+      "lon": -94.170097,
+      "coordinate_source": "https://ourairports.com/airports/KFYV/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.fayetteville-ar.gov/668/About",
+      "historical_location_note": "Delta directory p260 identifies Fayetteville, Arkansas (FYV) as Drake Field. City history places this field at its present site since 1936 and records decades of commercial service. This is not Fayetteville, North Carolina (FAY), nor the later Northwest Arkansas airport (XNA). Modern coordinates are approximate airport-area markers, not reconstructed 1986 terminals or gates."
+    },
+    {
+      "id": "ABY",
+      "name": "Albany – Dougherty County Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 31.532946,
+      "lon": -84.196215,
+      "coordinate_source": "https://ourairports.com/airports/KABY/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+      "historical_location_note": "Contemporary Delta directory p260 identifies ABY as Albany, Georgia, Dougherty County Airport. Current city airport page https://airport.albanyga.gov/Airport-Guide/About-ABY identifies KABY as Southwest Georgia Regional at Newton Road. The mapping to the modern field is an identity inference from these records, not a reconstructed 1986 terminal location. Modern coordinates mark the approximate airport area; the period directory name is retained. This is not Albany, New York (ALB)."
+    },
+    {
+      "id": "BQK",
+      "name": "Brunswick – Glynco Jet Port (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 31.258801,
+      "lon": -81.466499,
+      "coordinate_source": "https://ourairports.com/airports/KBQK/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flygcairports.com/glynn-county-airport-commission/history/",
+      "historical_location_note": "Delta directory p260 identifies BQK as Brunswick, Georgia, Glynco Jet Port. Airport commission history records civilian opening in 1975 and ASA service to Atlanta from 1981. The present Golden Isles name dates from 2003; the period name is retained. This is the mainland airport, not McKinnon Field on St Simons Island (SSI). Modern coordinates mark the airport area, not a reconstructed 1986 terminal or gate."
+    },
+    {
+      "id": "GNV",
+      "name": "Gainesville Regional Airport",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 29.6901,
+      "lon": -82.271797,
+      "coordinate_source": "https://ourairports.com/airports/KGNV/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://gra-gnv.com/flygainesville.com/airport-history/",
+      "historical_location_note": "Delta directory p260 identifies Gainesville, Florida (GNV), Regional Airport. Airport history records the field passing to the city in 1948 and adoption of the Regional name in 1977. This is Gainesville, Florida, not Gainesville, Georgia or Texas. Modern coordinates are approximate airport-area markers, not reconstructed 1986 terminals or gates."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "FYV Drake Field in Arkansas; ABY Albany, Georgia, Dougherty County with explicit identity inference; BQK mainland Glynco Jet Port; GNV Gainesville, Florida, Regional. No precise 1986 terminal, gate or runway reconstruction."
+}

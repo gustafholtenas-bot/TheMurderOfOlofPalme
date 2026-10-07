@@ -1,0 +1,93 @@
+{
+  "package": "v141_INT01",
+  "based_on": "v141",
+  "date": "2026-10-02",
+  "new_schedules": 17,
+  "new_movements": 22,
+  "new_foreign_domestic_movements": 0,
+  "total_movements": 11369,
+  "selected_international_and_swedish_domestic": 2131,
+  "excluded_foreign_domestic": 9238,
+  "sweden_endpoint_movements": 87,
+  "sweden_international_inbound": 41,
+  "sweden_international_outbound": 40,
+  "swedish_domestic": 6,
+  "new_sweden_movements": 0,
+  "all_11347_prior_movements_unchanged": true,
+  "all_6733_prior_schedules_unchanged": true,
+  "all_prior_airports_airlines_countries_unchanged": true,
+  "duplicate_movement_ids": 0,
+  "new_physical_duplicates": 0,
+  "manual_duration_comparison_passed": true,
+  "coverage_complete": false,
+  "new_airports": [
+    "LIL",
+    "NTE",
+    "LDE"
+  ],
+  "unreal_runtime_tested": false,
+  "interval_start_utc": "1986-02-27T22:21:30Z",
+  "interval_end_utc": "1986-03-01T22:21:30Z",
+  "counts_by_new_pair": [
+    {
+      "origin": "CDG",
+      "destination": "IAH",
+      "movements": 1
+    },
+    {
+      "origin": "CDG",
+      "destination": "JFK",
+      "movements": 6
+    },
+    {
+      "origin": "CDG",
+      "destination": "LAX",
+      "movements": 3
+    },
+    {
+      "origin": "CDG",
+      "destination": "ORD",
+      "movements": 1
+    },
+    {
+      "origin": "IAH",
+      "destination": "CDG",
+      "movements": 1
+    },
+    {
+      "origin": "LAX",
+      "destination": "CDG",
+      "movements": 2
+    },
+    {
+      "origin": "LGW",
+      "destination": "LDE",
+      "movements": 1
+    },
+    {
+      "origin": "LHR",
+      "destination": "LIL",
+      "movements": 2
+    },
+    {
+      "origin": "LHR",
+      "destination": "NTE",
+      "movements": 1
+    },
+    {
+      "origin": "LIL",
+      "destination": "LHR",
+      "movements": 2
+    },
+    {
+      "origin": "NTE",
+      "destination": "LHR",
+      "movements": 1
+    },
+    {
+      "origin": "ORD",
+      "destination": "CDG",
+      "movements": 1
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "package": "v122",
+  "held_rows": [
+    {
+      "route": "STT–MIA / STT–JFK / JFK–STX / MIA–STT",
+      "decision": "through_itinerary_not_imported",
+      "reason": "One-stop aggregates through STX or STT. Individually timed nonstop legs are imported; aggregate itineraries would create duplicates and incorrect nonstop paths."
+    },
+    {
+      "route": "SXM–UVF on1March",
+      "decision": "expired_day_variant",
+      "reason": "TuThSaSu ends27February. TuThSu begins2March. No Saturday service imported from the expired row."
+    },
+    {
+      "route": "SKB–SXM / UVF–SXM",
+      "decision": "date_variants_respected",
+      "reason": "SKB variant TuThSaSu begins1March. UVF old MoWeFrSu ends28February; replacement MoWeFr begins3March."
+    },
+    {
+      "route": "MIA–GUA / GUA–MIA",
+      "decision": "later_clock_change_not_applied",
+      "reason": "30March arrival/departure changes excluded. Accepted18:05–19:40 outbound and08:05–11:25 return."
+    },
+    {
+      "route": "JFK–ANU / other unimported region rows",
+      "decision": "future_review",
+      "reason": "This batch is a partial selection, not a complete transcription of all routes visible on the reviewed pages. Further airport, date and duplicate checks remain."
+    }
+  ],
+  "nicaragua_source_checks": [
+    {
+      "name": "Aeronica May1990 timetable listing",
+      "url": "https://www.timetableimages.com/ttimages/updold31.htm",
+      "decision": "wrong_period",
+      "note": "May1990 does not establish February1986 clocks."
+    },
+    {
+      "name": "Cuadernos del Tercer Mundo74–75 catalog",
+      "url": "https://rima.ufrrj.br/jspui/handle/20.500.14407/3914",
+      "decision": "wrong_period",
+      "note": "Catalog dates April–May1985; an Aeronica advertising search lead is too early to establish February1986 schedules. No import."
+    },
+    {
+      "name": "Cuadernos del Tercer Mundo83",
+      "url": "https://rima.ufrrj.br/jspui/bitstream/20.500.14407/2665/1/CTM_Edi%C3%A7%C3%A3oEspanhola_Ano_9_Numero_83_completa.pdf",
+      "sha256": "214d3688431aef04c3ba3a1e951fd3c03479d6870fee14e857025514943ab7bf",
+      "decision": "no_applicable_clock_rows_found_in_checks",
+      "note": "February1986 issue downloaded; extracted text searched and opening/closing pages visually inspected. No complete applicable Aeronica schedule verified. This is not a claim that every page was visually inspected."
+    },
+    {
+      "name": "TACA AirTimes1980s gallery",
+      "url": "https://www.airtimes.com/cgat/sv/taca/gal/tagal1a80.htm",
+      "decision": "no_1986_clock_pages",
+      "note": "Retrieved HTML exposes1980/1981 cover entries; no usable1985/86 schedule panel obtained."
+    },
+    {
+      "name": "Aeronica7June1986 event report",
+      "url": "https://www.upi.com/Archives/1986/06/07/Unsuccessful-hijacking-in-Nicaragua/9007518500800/",
+      "decision": "outside_window",
+      "note": "A June event cannot establish a February flight or recurring schedule. No import."
+    },
+    {
+      "name": "Executive Order12513 archival text",
+      "url": "https://www.reaganlibrary.gov/archives/speech/executive-order-12513-prohibiting-trade-and-certain-other-transactions-involving",
+      "decision": "historical_boundary_only",
+      "note": "1985 order concerning Nicaraguan carriers and US service makes earlier Miami advertising unsuitable for automatic extrapolation. It supplies no1986 flight clock. No conclusion that all Nicaraguan international flying ceased."
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_decisions_unchanged": true
+}

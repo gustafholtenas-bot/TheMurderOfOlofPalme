@@ -1,0 +1,60 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    48,
+    51,
+    62,
+    74,
+    128,
+    129,
+    138,
+    139
+  ],
+  "supporting_conflict_printed_pages": [
+    62,
+    63,
+    265
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264,
+    265
+  ],
+  "legend_printed_page": 4,
+  "excluded_connection_footnote_definition_page": 73,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "48": 27,
+    "51": 28,
+    "62": 34,
+    "63": 34,
+    "73": 39,
+    "74": 40,
+    "128": 67,
+    "129": 67,
+    "138": 72,
+    "139": 72,
+    "262": 134,
+    "263": 134,
+    "264": 135,
+    "265": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "62 rows in ten complete selected city-direction tables visually reviewed: 36 accepted nonstop schedules, 23 connecting itineraries excluded, two one-stop through itineraries excluded, one flight-number conflict held.",
+    "Blank frequency means daily. X6 excludes Saturday, X7 Sunday, X67 both, X56 Friday and Saturday. 6 means Saturday only.",
+    "All accepted rows are individually printed with stops0. COMAIR numbers are identified using page4, 1525–1749.",
+    "DTW–SDF connecting rows 619/1645 and 619/558 carry footnote4, effective 12 February 1986, defined on p73. No accepted nonstop row has a dated footnote.",
+    "ORD–SDF493 departure14:33, arrival16:30; DTW–SDF1680 arrival13:35; CVG–LEX1620 arrival10:59; LEX–SDF1051 arrival15:52 verified in magnified scan.",
+    "SDF–ORD292 and956 show just two minutes between local clocks but cross from UTC-5 to UTC-6: each lasts62minutes.",
+    "Saturday-only COMAIR1679 produces exactly one movement. Different physical legs retain independent frequencies, including COMAIR1717.",
+    "SDF–DTW1564 and254 are one-stop through itineraries; their CVG legs already exist and are not duplicated.",
+    "All v84 movement and schedule objects unchanged. Delta597 MEM–LIT remains held; CMH–SDF1871/1671 newly held.",
+    "Later amendments and timetable end date not verified. Scheduled service does not establish actual operation, aircraft identity or flown path."
+  ]
+}

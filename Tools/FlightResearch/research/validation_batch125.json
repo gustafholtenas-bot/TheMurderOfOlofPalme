@@ -1,0 +1,542 @@
+{
+  "package": "v128",
+  "baseline_archive_sha256": "022fa01a7d081dea45c248a605e49159edbe8b644fa89c769c792e5fbcde2197",
+  "previous_movements_unchanged": 8918,
+  "previous_schedules_unchanged": 5266,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 374,
+  "previous_countries_unchanged": 117,
+  "modified_airline_ids": [],
+  "modified_previous_source_ids": [
+    "liat-wt40-19851213"
+  ],
+  "independent_manual_rows": 69,
+  "independent_utc_movements_verified": 71,
+  "independent_utc_expected": {
+    "four-island-air-132-NEV-SKB-0745-c6_N1-b125@1986-03-01": [
+      "1986-03-01T11:45:00Z",
+      "1986-03-01T11:55:00Z"
+    ],
+    "four-island-air-152-ANU-BBQ-0900-c6_N2-b125@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T13:20:00Z"
+    ],
+    "four-island-air-152-ANU-BBQ-0900-c6_N2-b125@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T13:20:00Z"
+    ],
+    "four-island-air-162-ANU-NEV-1000-c6_N5-b125@1986-02-28": [
+      "1986-02-28T14:00:00Z",
+      "1986-02-28T14:30:00Z"
+    ],
+    "four-island-air-162-ANU-NEV-1000-c6_N5-b125@1986-03-01": [
+      "1986-03-01T14:00:00Z",
+      "1986-03-01T14:30:00Z"
+    ],
+    "four-island-air-162-NEV-SKB-1035-c6_N5-b125@1986-02-28": [
+      "1986-02-28T14:35:00Z",
+      "1986-02-28T14:45:00Z"
+    ],
+    "four-island-air-162-NEV-SKB-1035-c6_N5-b125@1986-03-01": [
+      "1986-03-01T14:35:00Z",
+      "1986-03-01T14:45:00Z"
+    ],
+    "four-island-air-142-SKB-AXA-1055-c6_N6-b125@1986-02-28": [
+      "1986-02-28T14:55:00Z",
+      "1986-02-28T15:30:00Z"
+    ],
+    "four-island-air-154-ANU-BBQ-1600-c6_N7-b125@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T20:20:00Z"
+    ],
+    "four-island-air-154-ANU-BBQ-1600-c6_N7-b125@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T20:20:00Z"
+    ],
+    "four-island-air-166-ANU-NEV-1655-c6_N11-b125@1986-02-28": [
+      "1986-02-28T20:55:00Z",
+      "1986-02-28T21:25:00Z"
+    ],
+    "four-island-air-166-ANU-NEV-1655-c6_N11-b125@1986-03-01": [
+      "1986-03-01T20:55:00Z",
+      "1986-03-01T21:25:00Z"
+    ],
+    "four-island-air-166-NEV-SKB-1730-c6_N11-b125@1986-02-28": [
+      "1986-02-28T21:30:00Z",
+      "1986-02-28T21:40:00Z"
+    ],
+    "four-island-air-166-NEV-SKB-1730-c6_N11-b125@1986-03-01": [
+      "1986-03-01T21:30:00Z",
+      "1986-03-01T21:40:00Z"
+    ],
+    "four-island-air-138-NEV-SKB-1800-c6_N17-b125@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T22:10:00Z"
+    ],
+    "four-island-air-131-SKB-NEV-0730-c6_S1-b125@1986-03-01": [
+      "1986-03-01T11:30:00Z",
+      "1986-03-01T11:40:00Z"
+    ],
+    "four-island-air-161-SKB-NEV-0800-c6_S2-b125@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:10:00Z"
+    ],
+    "four-island-air-161-SKB-NEV-0800-c6_S2-b125@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T12:10:00Z"
+    ],
+    "four-island-air-161-NEV-ANU-0815-c6_S2-b125@1986-02-28": [
+      "1986-02-28T12:15:00Z",
+      "1986-02-28T12:45:00Z"
+    ],
+    "four-island-air-161-NEV-ANU-0815-c6_S2-b125@1986-03-01": [
+      "1986-03-01T12:15:00Z",
+      "1986-03-01T12:45:00Z"
+    ],
+    "four-island-air-151-BBQ-ANU-0925-c6_S3-b125@1986-02-28": [
+      "1986-02-28T13:25:00Z",
+      "1986-02-28T13:45:00Z"
+    ],
+    "four-island-air-151-BBQ-ANU-0925-c6_S3-b125@1986-03-01": [
+      "1986-03-01T13:25:00Z",
+      "1986-03-01T13:45:00Z"
+    ],
+    "four-island-air-143-AXA-SKB-1135-c6_S4-b125@1986-02-28": [
+      "1986-02-28T15:35:00Z",
+      "1986-02-28T16:05:00Z"
+    ],
+    "four-island-air-163-SKB-NEV-1400-c6_S8-b125@1986-02-28": [
+      "1986-02-28T18:00:00Z",
+      "1986-02-28T18:10:00Z"
+    ],
+    "four-island-air-163-SKB-NEV-1400-c6_S8-b125@1986-03-01": [
+      "1986-03-01T18:00:00Z",
+      "1986-03-01T18:10:00Z"
+    ],
+    "four-island-air-163-NEV-ANU-1415-c6_S8-b125@1986-02-28": [
+      "1986-02-28T18:15:00Z",
+      "1986-02-28T18:45:00Z"
+    ],
+    "four-island-air-163-NEV-ANU-1415-c6_S8-b125@1986-03-01": [
+      "1986-03-01T18:15:00Z",
+      "1986-03-01T18:45:00Z"
+    ],
+    "four-island-air-153-BBQ-ANU-1625-c6_S9-b125@1986-02-28": [
+      "1986-02-28T20:25:00Z",
+      "1986-02-28T20:45:00Z"
+    ],
+    "four-island-air-153-BBQ-ANU-1625-c6_S9-b125@1986-03-01": [
+      "1986-03-01T20:25:00Z",
+      "1986-03-01T20:45:00Z"
+    ],
+    "four-island-air-137-SKB-NEV-1745-c6_S12-b125@1986-03-01": [
+      "1986-03-01T21:45:00Z",
+      "1986-03-01T21:55:00Z"
+    ],
+    "montserrat-air-services-590-ANU-MNI-0700-c8_N1-b125@1986-02-28": [
+      "1986-02-28T11:00:00Z",
+      "1986-02-28T11:20:00Z"
+    ],
+    "montserrat-air-services-590-ANU-MNI-0700-c8_N1-b125@1986-03-01": [
+      "1986-03-01T11:00:00Z",
+      "1986-03-01T11:20:00Z"
+    ],
+    "montserrat-air-services-1590-ANU-MNI-0740-c8_N2-b125@1986-02-28": [
+      "1986-02-28T11:40:00Z",
+      "1986-02-28T12:00:00Z"
+    ],
+    "montserrat-air-services-1590-ANU-MNI-0740-c8_N2-b125@1986-03-01": [
+      "1986-03-01T11:40:00Z",
+      "1986-03-01T12:00:00Z"
+    ],
+    "montserrat-air-services-581-PTP-MNI-0850-c8_N4-b125@1986-02-28": [
+      "1986-02-28T12:50:00Z",
+      "1986-02-28T13:20:00Z"
+    ],
+    "montserrat-air-services-584-MNI-SKB-0930-c8_N5-b125@1986-02-28": [
+      "1986-02-28T13:30:00Z",
+      "1986-02-28T14:00:00Z"
+    ],
+    "montserrat-air-services-592-ANU-MNI-1000-c8_N6-b125@1986-02-28": [
+      "1986-02-28T14:00:00Z",
+      "1986-02-28T14:20:00Z"
+    ],
+    "montserrat-air-services-592-ANU-MNI-1000-c8_N6-b125@1986-03-01": [
+      "1986-03-01T14:00:00Z",
+      "1986-03-01T14:20:00Z"
+    ],
+    "montserrat-air-services-1592-ANU-MNI-1100-c8_N7-b125@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:20:00Z"
+    ],
+    "montserrat-air-services-1592-ANU-MNI-1120-c8_N8-b125@1986-02-28": [
+      "1986-02-28T15:20:00Z",
+      "1986-02-28T15:40:00Z"
+    ],
+    "montserrat-air-services-594-ANU-MNI-1330-c8_N9-b125@1986-02-28": [
+      "1986-02-28T17:30:00Z",
+      "1986-02-28T17:50:00Z"
+    ],
+    "montserrat-air-services-594-ANU-MNI-1330-c8_N9-b125@1986-03-01": [
+      "1986-03-01T17:30:00Z",
+      "1986-03-01T17:50:00Z"
+    ],
+    "montserrat-air-services-588-MNI-SKB-1530-c8_N10-b125@1986-02-28": [
+      "1986-02-28T19:30:00Z",
+      "1986-02-28T20:00:00Z"
+    ],
+    "montserrat-air-services-596-ANU-MNI-1700-c8_N13-b125@1986-02-28": [
+      "1986-02-28T21:00:00Z",
+      "1986-02-28T21:20:00Z"
+    ],
+    "montserrat-air-services-596-ANU-MNI-1700-c8_N13-b125@1986-03-01": [
+      "1986-03-01T21:00:00Z",
+      "1986-03-01T21:20:00Z"
+    ],
+    "montserrat-air-services-583-PTP-MNI-1740-c8_N14-b125@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-02-28T22:10:00Z"
+    ],
+    "montserrat-air-services-598-ANU-MNI-1810-c8_N15-b125@1986-02-27": [
+      "1986-02-27T22:10:00Z",
+      "1986-02-27T22:30:00Z"
+    ],
+    "montserrat-air-services-598-ANU-MNI-1810-c8_N15-b125@1986-02-28": [
+      "1986-02-28T22:10:00Z",
+      "1986-02-28T22:30:00Z"
+    ],
+    "montserrat-air-services-598-ANU-MNI-1810-c8_N15-b125@1986-03-01": [
+      "1986-03-01T22:10:00Z",
+      "1986-03-01T22:30:00Z"
+    ],
+    "montserrat-air-services-1598-ANU-MNI-1945-c8_N16-b125@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T00:05:00Z"
+    ],
+    "montserrat-air-services-1598-ANU-MNI-1945-c8_N16-b125@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T00:05:00Z"
+    ],
+    "montserrat-air-services-1591-MNI-ANU-0700-c8_S1-b125@1986-02-28": [
+      "1986-02-28T11:00:00Z",
+      "1986-02-28T11:20:00Z"
+    ],
+    "montserrat-air-services-1591-MNI-ANU-0700-c8_S1-b125@1986-03-01": [
+      "1986-03-01T11:00:00Z",
+      "1986-03-01T11:20:00Z"
+    ],
+    "montserrat-air-services-591-MNI-ANU-0730-c8_S2-b125@1986-02-28": [
+      "1986-02-28T11:30:00Z",
+      "1986-02-28T11:50:00Z"
+    ],
+    "montserrat-air-services-591-MNI-ANU-0730-c8_S2-b125@1986-03-01": [
+      "1986-03-01T11:30:00Z",
+      "1986-03-01T11:50:00Z"
+    ],
+    "montserrat-air-services-580-MNI-PTP-0810-c8_S3-b125@1986-02-28": [
+      "1986-02-28T12:10:00Z",
+      "1986-02-28T12:40:00Z"
+    ],
+    "montserrat-air-services-1593-MNI-ANU-1010-c8_S5-b125@1986-03-01": [
+      "1986-03-01T14:10:00Z",
+      "1986-03-01T14:30:00Z"
+    ],
+    "montserrat-air-services-585-SKB-MNI-1010-c8_S6-b125@1986-02-28": [
+      "1986-02-28T14:10:00Z",
+      "1986-02-28T14:40:00Z"
+    ],
+    "montserrat-air-services-593-MNI-ANU-1030-c8_S7-b125@1986-02-28": [
+      "1986-02-28T14:30:00Z",
+      "1986-02-28T14:50:00Z"
+    ],
+    "montserrat-air-services-593-MNI-ANU-1030-c8_S7-b125@1986-03-01": [
+      "1986-03-01T14:30:00Z",
+      "1986-03-01T14:50:00Z"
+    ],
+    "montserrat-air-services-1593-MNI-ANU-1040-c8_S8-b125@1986-02-28": [
+      "1986-02-28T14:40:00Z",
+      "1986-02-28T15:00:00Z"
+    ],
+    "montserrat-air-services-595-MNI-ANU-1400-c8_S9-b125@1986-02-28": [
+      "1986-02-28T18:00:00Z",
+      "1986-02-28T18:20:00Z"
+    ],
+    "montserrat-air-services-595-MNI-ANU-1400-c8_S9-b125@1986-03-01": [
+      "1986-03-01T18:00:00Z",
+      "1986-03-01T18:20:00Z"
+    ],
+    "montserrat-air-services-589-SKB-MNI-1610-c8_S10-b125@1986-02-28": [
+      "1986-02-28T20:10:00Z",
+      "1986-02-28T20:40:00Z"
+    ],
+    "montserrat-air-services-582-MNI-PTP-1700-c8_S12-b125@1986-02-28": [
+      "1986-02-28T21:00:00Z",
+      "1986-02-28T21:30:00Z"
+    ],
+    "montserrat-air-services-597-MNI-ANU-1730-c8_S13-b125@1986-02-28": [
+      "1986-02-28T21:30:00Z",
+      "1986-02-28T21:50:00Z"
+    ],
+    "montserrat-air-services-597-MNI-ANU-1730-c8_S13-b125@1986-03-01": [
+      "1986-03-01T21:30:00Z",
+      "1986-03-01T21:50:00Z"
+    ],
+    "montserrat-air-services-599-MNI-ANU-1840-c8_S15-b125@1986-02-27": [
+      "1986-02-27T22:40:00Z",
+      "1986-02-27T23:00:00Z"
+    ],
+    "montserrat-air-services-599-MNI-ANU-1840-c8_S15-b125@1986-02-28": [
+      "1986-02-28T22:40:00Z",
+      "1986-02-28T23:00:00Z"
+    ],
+    "montserrat-air-services-1599-MNI-ANU-2015-c8_S16-b125@1986-02-27": [
+      "1986-02-28T00:15:00Z",
+      "1986-02-28T00:35:00Z"
+    ],
+    "montserrat-air-services-1599-MNI-ANU-2015-c8_S16-b125@1986-02-28": [
+      "1986-03-01T00:15:00Z",
+      "1986-03-01T00:35:00Z"
+    ]
+  },
+  "independent_local_source_dates": {
+    "four-island-air-132-NEV-SKB-0745-c6_N1-b125": [
+      "1986-03-01"
+    ],
+    "four-island-air-152-ANU-BBQ-0900-c6_N2-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-168-ANU-NEV-1000-c6_N3-b125": [],
+    "four-island-air-162-ANU-NEV-1000-c6_N5-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-162-NEV-SKB-1035-c6_N5-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-142-SKB-AXA-1055-c6_N6-b125": [
+      "1986-02-28"
+    ],
+    "four-island-air-154-ANU-BBQ-1600-c6_N7-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-166-ANU-NEV-1610-c6_N9-b125": [],
+    "four-island-air-166-NEV-SKB-1645-c6_N9-b125": [],
+    "four-island-air-166-ANU-NEV-1655-c6_N11-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-166-NEV-SKB-1730-c6_N11-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-140-ANU-AXA-1655-c6_N12-b125": [],
+    "four-island-air-144-SKB-AXA-1745-c6_N14-b125": [],
+    "four-island-air-164-ANU-NEV-1800-c6_N15-b125": [],
+    "four-island-air-164-NEV-SKB-1835-c6_N15-b125": [],
+    "four-island-air-138-NEV-SKB-1800-c6_N17-b125": [
+      "1986-03-01"
+    ],
+    "four-island-air-164-ANU-NEV-1830-c6_N19-b125": [],
+    "four-island-air-164-NEV-SKB-1905-c6_N19-b125": [],
+    "four-island-air-140-ANU-AXA-1830-c6_N20-b125": [],
+    "four-island-air-131-SKB-NEV-0730-c6_S1-b125": [
+      "1986-03-01"
+    ],
+    "four-island-air-161-SKB-NEV-0800-c6_S2-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-161-NEV-ANU-0815-c6_S2-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-151-BBQ-ANU-0925-c6_S3-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-143-AXA-SKB-1135-c6_S4-b125": [
+      "1986-02-28"
+    ],
+    "four-island-air-169-STX-NEV-1225-c6_S5-b125": [],
+    "four-island-air-169-NEV-ANU-1345-c6_S5-b125": [],
+    "four-island-air-163-SKB-NEV-1315-c6_S7-b125": [],
+    "four-island-air-163-NEV-ANU-1330-c6_S7-b125": [],
+    "four-island-air-163-SKB-NEV-1400-c6_S8-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-163-NEV-ANU-1415-c6_S8-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-153-BBQ-ANU-1625-c6_S9-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "four-island-air-165-SKB-NEV-1705-c6_S11-b125": [],
+    "four-island-air-165-NEV-ANU-1720-c6_S11-b125": [],
+    "four-island-air-137-SKB-NEV-1745-c6_S12-b125": [
+      "1986-03-01"
+    ],
+    "four-island-air-141-AXA-ANU-1805-c6_S14-b125": [],
+    "four-island-air-145-AXA-SKB-1825-c6_S15-b125": [],
+    "four-island-air-165-SKB-NEV-1920-c6_S16-b125": [],
+    "four-island-air-165-NEV-ANU-1935-c6_S16-b125": [],
+    "four-island-air-141-AXA-ANU-1935-c6_S18-b125": [],
+    "montserrat-air-services-590-ANU-MNI-0700-c8_N1-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-1590-ANU-MNI-0740-c8_N2-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-584-MNI-SKB-0810-c8_N3-b125": [],
+    "montserrat-air-services-581-PTP-MNI-0850-c8_N4-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-584-MNI-SKB-0930-c8_N5-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-592-ANU-MNI-1000-c8_N6-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-1592-ANU-MNI-1100-c8_N7-b125": [
+      "1986-03-01"
+    ],
+    "montserrat-air-services-1592-ANU-MNI-1120-c8_N8-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-594-ANU-MNI-1330-c8_N9-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-588-MNI-SKB-1530-c8_N10-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-588-MNI-SKB-1650-c8_N12-b125": [],
+    "montserrat-air-services-596-ANU-MNI-1700-c8_N13-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-583-PTP-MNI-1740-c8_N14-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-598-ANU-MNI-1810-c8_N15-b125": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-1598-ANU-MNI-1945-c8_N16-b125": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "montserrat-air-services-1591-MNI-ANU-0700-c8_S1-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-591-MNI-ANU-0730-c8_S2-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-580-MNI-PTP-0810-c8_S3-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-585-SKB-MNI-0850-c8_S4-b125": [],
+    "montserrat-air-services-1593-MNI-ANU-1010-c8_S5-b125": [
+      "1986-03-01"
+    ],
+    "montserrat-air-services-585-SKB-MNI-1010-c8_S6-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-593-MNI-ANU-1030-c8_S7-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-1593-MNI-ANU-1040-c8_S8-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-595-MNI-ANU-1400-c8_S9-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-589-SKB-MNI-1610-c8_S10-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-582-MNI-PTP-1700-c8_S12-b125": [
+      "1986-02-28"
+    ],
+    "montserrat-air-services-597-MNI-ANU-1730-c8_S13-b125": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "montserrat-air-services-589-SKB-MNI-1730-c8_S14-b125": [],
+    "montserrat-air-services-599-MNI-ANU-1840-c8_S15-b125": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "montserrat-air-services-1599-MNI-ANU-2015-c8_S16-b125": [
+      "1986-02-27",
+      "1986-02-28"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "same_source_cross_operator_duplicate_movements": 0,
+  "adjacent_source_leg_ground_times": [
+    [
+      "four-island-air-161-SKB-NEV-0800-c6_S2-b125@1986-02-28",
+      "four-island-air-161-NEV-ANU-0815-c6_S2-b125@1986-02-28",
+      5.0
+    ],
+    [
+      "four-island-air-161-SKB-NEV-0800-c6_S2-b125@1986-03-01",
+      "four-island-air-161-NEV-ANU-0815-c6_S2-b125@1986-03-01",
+      5.0
+    ],
+    [
+      "four-island-air-162-ANU-NEV-1000-c6_N5-b125@1986-02-28",
+      "four-island-air-162-NEV-SKB-1035-c6_N5-b125@1986-02-28",
+      5.0
+    ],
+    [
+      "four-island-air-162-ANU-NEV-1000-c6_N5-b125@1986-03-01",
+      "four-island-air-162-NEV-SKB-1035-c6_N5-b125@1986-03-01",
+      5.0
+    ],
+    [
+      "four-island-air-163-SKB-NEV-1400-c6_S8-b125@1986-02-28",
+      "four-island-air-163-NEV-ANU-1415-c6_S8-b125@1986-02-28",
+      5.0
+    ],
+    [
+      "four-island-air-163-SKB-NEV-1400-c6_S8-b125@1986-03-01",
+      "four-island-air-163-NEV-ANU-1415-c6_S8-b125@1986-03-01",
+      5.0
+    ],
+    [
+      "four-island-air-166-ANU-NEV-1655-c6_N11-b125@1986-02-28",
+      "four-island-air-166-NEV-SKB-1730-c6_N11-b125@1986-02-28",
+      5.0
+    ],
+    [
+      "four-island-air-166-ANU-NEV-1655-c6_N11-b125@1986-03-01",
+      "four-island-air-166-NEV-SKB-1730-c6_N11-b125@1986-03-01",
+      5.0
+    ]
+  ],
+  "ground_times_reviewed": true,
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "Data, independent UTC, seasonal variants, ground chains, cross-page duplicate and prior-object preservation checks passed; all automated checks passed; Unreal not run.",
+  "new_ground_transitions_reviewed": 8,
+  "new_ground_chain_patterns": 4,
+  "ground_time_review_note": "Eight dated transitions on four Four Island Air chains: each5minutes at Nevis, checked against original scan6. Same flight number does not establish a shared individual aircraft.",
+  "zero_movement_schedules_reviewed": true,
+  "seasonal_variants_reviewed": true,
+  "st_thomas_total_verified": 14
+}

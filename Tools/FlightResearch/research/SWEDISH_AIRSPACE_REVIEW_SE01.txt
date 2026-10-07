@@ -1,0 +1,88 @@
+TMOP v141_SE01 – flyg med anknytning till svenskt luftrum
+Granskat2026-10-02. Fortsättning på INT06.
+
+RESULTAT
+Inga nya fullständigt tidsatta flygrörelser kan importeras i denna omgång.
+Sverigeurvalet är87 befintliga planerade rörelser:41 internationella ankomster,
+40 internationella avgångar och6 inrikes.87 är inte ett mått på all trafik över
+Sverige. Antalet utländska överflygningar är fortfarande obestämt.
+Alla11 506 rörelser och hela katalogen från INT06 bevaras oförändrade.
+
+NY ARBETSINRIKTNING
+Nya undersökningar prioriterar svensk ändpunkt eller belagd passage genom
+svenskt luftrum. Övriga internationella rutter har inte längre egen prioritet.
+En rak linje eller storcirkel i globen är inte belägg för en verklig flygväg.
+Tidtabell, faktiskt genomförande och observerad flygväg är skilda uppgifter.
+Denna leverans uppdaterar forskningsurvalet och kön, inte spelets filterkod.
+
+NYA KÄLLSPÅR
+1. Visby28februari12:00
+Originalbrevet CFV210:60425 från13februari1986 har lästs visuellt på s.1.
+Där anges kursens slut28feb10:30 och ett lämpligt flyg från Visby12:00.
+Brevet anger inte flygnummer, operatör eller ankomsttid för detta flyg.
+Destinationen får inte fastställas enbart utifrån resans syfte. Ingen
+flygrörelse med gissad ankomst skapas. Avgångslistan/tidtabellen behövs.
+Källa: https://wpu.nu/images/6/66/FM-1986-02-13_Torsten_Sellin_handbrev_%C3%B6vning_Gustaf.pdf
+
+2. Separata avgångslistor i A6774-00
+Originalpromemorian6maj1986 har lästs visuellt. Den anger att listor med
+tid, flightnummer och destination för avgångar från Arlanda1–7mars hade
+inhämtats, liksom charterlistor1–15mars. Den publicerade PDF:en består av
+en sida och innehåller inte bilagorna.1mars är relevant för projektfönstret.
+Detta är ett konkret arkivspår, inte nytillkomna avgångsdata.
+Källa: https://wpu.nu/images/3/3a/Pol-1986-05-06_A6774-00_Ang%C3%A5ende_passagerarlistor_SAS.pdf
+
+3. Radarfilmer från morddygnet
+R130-filen har provlästs: vid videoposition60sekunder syns R130,86.02.28
+och17.56.24. Tidsbasen är inte fastställd. En enda bild identifierar inte
+ett flyg och ger ingen komplett bana. Hela filmen har inte spårgranskats.
+Källa: https://wpu.nu/images/a/a2/R130-19860228.mp4
+WPU länkar även R13419860228–19860302 samt två R106-filer. Dessa har inte
+bildgranskats här. WPU:s uppgift om R106-bortfall17:42–07:30 är en sekundär
+uppgift, inte självständigt verifierad. Inga slutsatser dras om flyg saknades.
+Index: https://wpu.nu/wiki/Flyg
+Arkivpost: https://sok.riksarkivet.se/nad/?postid=Arkis+fe735f89-5013-42a5-8211-9f3d444c49af (webbverktyget kunde inte öppna posten).
+
+Krigsarkivets bakgrunds-PDF har hämtats och PDF-s.1–6 lästs visuellt.
+Den är sammanställd av Ulf Hugo i oktober2019. Den beskriver tidskomprimerad
+PPI-filmning och identifierar R130 på Furillen som PS-65. Den är metodunderlag,
+inte bevis för ett visst flyg28februari. Klockstandard, kartskala/orientering,
+bildgeometri och sammanhängande ekospår behöver fastställas före positionsdata.
+Källa: https://arkis2dok.riksarkivet.se/kra/1297/Bakgrund%20PPI-film.pdf
+
+4. Kontroll av reseräkning
+D9440-01 PDF-s.4 är en reseorder/förskottsbeställning daterad17februari.
+Tjänstgörings- och resetider är inte flygplanets start-/landningstider.
+28feb10:30 avser tjänstgöringens slut och importeras inte som flygtid.
+Källa: https://wpu.nu/images/e/e5/Pol-1987-11-23_D9440-01_Lars-Nilsson-%C3%B6vningen-Gustav-Gotland.pdf
+
+TIDTABELLSSÖKNING
+Air France:s redan granskade Göteborg/Stockholm-sidor kontrollerades mot
+katalogen. De tydliga raderna finns redan; genomresor utan mellantider
+förblir öppna. Sökningar på SAS/Linjeflyg/Swedair/Finnair gav inga nya
+importklara Sverige-rader. CSA- och Balkan-galleriernas PDF-länkar avsåg
+andra säsonger. LOT-annons198076798105 gav404. Omslag och andra säsonger
+används inte för att fylla luckor i vintern1985/86.
+
+FILER OCH BEVARANDE
+swedish_endpoint_selection_se01.json:87 hela befintliga rörelseobjekt som
+forskningsurval. Filen ersätter inte runtime-flights.json.
+swedish_airspace_scope_se01.json:ny avgränsning och räkneregler.
+swedish_airspace_leads_se01.json:källspår med uppgift om vad som saknas.
+source_provenance_se01.json:URL, storlek och SHA-256 för lästa PDF:er.
+Originaldokument och filmer följer inte med paketet. Inga personlistor
+har importerats. Forskningsuppgifter med saknade tider ingår inte i antalet87.
+
+INSTALLATION
+Paketet är kumulativt. Plugins/ och Tools/ slås samman med projektroten
+bredvid .uproject. Runtime-data och kod är oförändrade från INT06.
+PaintAirplane-rättelsen f23b73a krävs fortsatt. Unreal har inte körts.
+Det finns ingen ny flyganimation att se från just denna granskningsomgång.
+
+ARKIVREGISTER SOM NÄSTA KONKRETA STEG
+Bakgrunds-PDF:ens tryckta s.15–17 (PDF16–18) har också granskats visuellt.
+S.17 hänvisar till Förteckning över radarfilmer/PPI-filmer: dygnsblanketter
+med station, täckt tidsperiod och filmnummer. Dessa behövs för att fastställa
+vilka sekvenser28feb–1mars1986 som finns, före systematisk spårtolkning.
+S.15 anger breda bevarade årsintervall för bland annat R130,R134 och R106.
+Årsintervall bevisar inte att varje dygn eller timme finns bevarad.

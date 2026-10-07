@@ -1,0 +1,20 @@
+{
+  "package": "v87",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "TYS",
+      "name": "Knoxville–McGhee Tyson Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 35.811001,
+      "lon": -83.994003,
+      "coordinate_source": "https://ourairports.com/airports/KTYS/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyknoxville.com/wp-content/uploads/2024/11/MasterPlanExec.pdf",
+      "historical_location_note": "The Metropolitan Knoxville Airport Authority master plan executive summary (2006), printed pages 2–3, identifies purchase of the present airport site in 1935, distinct from the earlier West Knoxville airport. Modern OurAirports coordinates are an approximate airport-area marker, not a reconstruction of a 1986 terminal, gate, runway or aircraft position."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinate used as approximate airport-area marker; historical site independently reviewed.",
+  "historical_scope": "Present McGhee Tyson site, not the former West Knoxville site or Downtown Island Airport. No precise 1986 terminal/gate/runway reconstruction."
+}

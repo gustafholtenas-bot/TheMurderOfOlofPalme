@@ -1,0 +1,135 @@
+[
+  {
+    "person_id": "john-poindexter",
+    "file": "us-john-poindexter.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Admiral_John_Poindexter,_official_Navy_photo,_1985.JPEG",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Admiral_John_Poindexter%2C_official_Navy_photo%2C_1985.JPEG/330px-Admiral_John_Poindexter%2C_official_Navy_photo%2C_1985.JPEG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "WHITE HOUSE",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:Admiral_John_Poindexter,_official_Navy_photo,_1985.JPEG",
+    "source_date": "1985-11-04",
+    "description": "John Poindexter, former Navy admiral and National Security Advisor.",
+    "sha256": "34d87c4dac34eb8d0c479ba769d623ab8e9469f554b2b196de3d0958e6b92ac0",
+    "modifications": "Wikimedia thumbnail only; no further edits.",
+    "checked": "2026-10-02",
+    "date_note": {
+      "sv": "Porträtt från 1985.",
+      "en": "Portrait from 1985.",
+      "en_source": "Porträtt från 1985."
+    }
+  },
+  {
+    "person_id": "charles-allen",
+    "file": "us-charles-allen.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Allen_2005.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Allen_2005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "author": "User:Jeanenawiki",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:Allen_2005.jpg",
+    "source_date": "2005",
+    "description": "Charles E. Allen",
+    "sha256": "05a6c38c13b5f99c30695ceabda1ed1bcc2b55b8449c8a0f9be67a792a7b9e73",
+    "modifications": "Wikimedia thumbnail only; no further edits.",
+    "checked": "2026-10-02",
+    "date_note": {
+      "sv": "Senare identifieringsbild från 2005; inte från 1986.",
+      "en": "Later identification image from 2005; not from 1986.",
+      "en_source": "Senare identifieringsbild från 2005; inte från 1986."
+    }
+  },
+  {
+    "person_id": "richard-secord",
+    "file": "us-richard-secord.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Richard_V_Secord.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Richard_V_Secord.jpg/330px-Richard_V_Secord.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "U.S. Air Force",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:Richard_V_Secord.jpg",
+    "source_date": "",
+    "description": "Major General Richard V. Secord",
+    "sha256": "7d2e99ad75749f3644ca0771342e41e92845882b3c2c95d50c6021abd628a4b1",
+    "modifications": "Wikimedia thumbnail only; no further edits.",
+    "checked": "2026-10-02",
+    "date_note": {
+      "sv": "Fotograferingsdatum inte fastställt; inte belagt som en bild från 1986.",
+      "en": "Capture date unresolved; not established as a 1986 image.",
+      "en_source": "Fotograferingsdatum inte fastställt; inte belagt som en bild från 1986."
+    }
+  },
+  {
+    "person_id": "robert-gates",
+    "file": "us-robert-gates.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Robert_Gates,_official_DoD_photo_portrait,_2006.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Robert_Gates%2C_official_DoD_photo_portrait%2C_2006.jpg/330px-Robert_Gates%2C_official_DoD_photo_portrait%2C_2006.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Monica King, United States Army",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:Robert_Gates,_official_DoD_photo_portrait,_2006.jpg",
+    "source_date": "2006-12-12",
+    "description": "Official portrait of United States Secretary of Defense Robert Gates",
+    "sha256": "7ddefb47108da0e0f7d15bef318395e9eefbadd11982bfbb5ce46166693050f5",
+    "modifications": "Wikimedia thumbnail only; no further edits.",
+    "checked": "2026-10-02",
+    "date_note": {
+      "sv": "Senare porträtt från 2006 som försvarsminister; inte från CIA-tjänsten 1986.",
+      "en": "Later portrait from 2006 as Secretary of Defense; not from CIA service in 1986.",
+      "en_source": "Senare porträtt från 2006 som försvarsminister; inte från CIA-tjänsten 1986."
+    }
+  },
+  {
+    "person_id": "william-casey",
+    "file": "us-william-casey.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:William_Casey,_Director_of_Central_Intelligence_Agency_ME298-1_(cropped)(2).jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/William_Casey%2C_Director_of_Central_Intelligence_Agency_ME298-1_%28cropped%29%282%29.jpg/330px-William_Casey%2C_Director_of_Central_Intelligence_Agency_ME298-1_%28cropped%29%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Michael Evans",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:William_Casey,_Director_of_Central_Intelligence_Agency_ME298-1_(cropped)(2).jpg",
+    "source_date": "1983-06-01",
+    "description": "6/1/1983 William Casey Director of Central Intelligence Agency(CIA).",
+    "sha256": "a50c50dbc651ca5af0c9f98eb4f696ead51b14f1dcbe347a5cbc8bc91a816f89",
+    "modifications": "Wikimedia thumbnail only; no further edits.",
+    "checked": "2026-10-02",
+    "date_note": {
+      "sv": "Porträtt från 1983.",
+      "en": "Portrait from 1983.",
+      "en_source": "Porträtt från 1983."
+    }
+  },
+  {
+    "person_id": "felix-rodriguez",
+    "file": "us-felix-rodriguez.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:F%C3%A9lix_Ismael_Rodr%C3%ADguez_Mendigutia_(cropped).jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/F%C3%A9lix_Ismael_Rodr%C3%ADguez_Mendigutia_%28cropped%29.jpg/330px-F%C3%A9lix_Ismael_Rodr%C3%ADguez_Mendigutia_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "Horacio Cambeiro",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "source_date": "2011-08-23",
+    "description": "Félix Ismael Rodríguez Mendigutia (born 31 May 1941) is a former Central Intelligence Agency officer known for his involvement in the Bay of Pigs Invasion, in the interrogation and execution of Marxist guerilla Che Guevara and his ties to George H. W. Bush during the Iran–Contra affair. He is Cuban of Spanish Basque ancestry.",
+    "sha256": "0eb6aa7ff27b7a7878c805e1e1c29fc0f936cc9d851297e7101891aa60724e88",
+    "modifications": "Wikimedia thumbnail only; no further edits.",
+    "checked": "2026-10-02",
+    "date_note": {
+      "sv": "Senare identifieringsbild från 2011; inte från 1986.",
+      "en": "Later identification image from 2011; not from 1986.",
+      "en_source": "Senare identifieringsbild från 2011; inte från 1986."
+    }
+  },
+  {
+    "person_id": "john-singlaub",
+    "file": "us-john-singlaub.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:John_K_Singlaub.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/John_K_Singlaub.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "author": "US Army",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:John_K_Singlaub.jpg",
+    "source_date": "",
+    "description": "Major General John K. Singlaub from [1] official U.S. Army portrait and therefore ineligible for copyright",
+    "sha256": "4bc073b017af7d51fad75613654aa56f26a2344b0e993be46da3ead4712dc9b3",
+    "modifications": "Wikimedia thumbnail only; no further edits.",
+    "checked": "2026-10-02",
+    "date_note": {
+      "sv": "Fotograferingsdatum inte fastställt. 2007 är uppladdningsår, inte ett belagt fotograferingsår.",
+      "en": "Capture date unresolved. 2007 is the upload year, not an established capture year.",
+      "en_source": "Fotograferingsdatum inte fastställt. 2007 är uppladdningsår, inte ett belagt fotograferingsår."
+    }
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "package": "v97",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "TCL",
+      "name": "Tuscaloosa Municipal Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 33.2206,
+      "lon": -87.611397,
+      "coordinate_source": "https://ourairports.com/airports/KTCL/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://airport.tuscaloosa.com/",
+      "historical_location_note": "Delta directory p261 identifies TCL as Tuscaloosa Municipal. The city airport history describes municipal acquisition at the end of World War II and continued use of the same airfield. Modern coordinates mark the approximate airport area; the present National name is not presented as the 1986 name. No precise 1986 terminal, gate or runway reconstruction."
+    },
+    {
+      "id": "VLD",
+      "name": "Valdosta Regional Airport",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 30.782499,
+      "lon": -83.276703,
+      "coordinate_source": "https://ourairports.com/airports/KVLD/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyvaldosta.com/about-us/",
+      "historical_location_note": "Delta directory p261 identifies VLD as Valdosta. Airport authority history places this public airport south of Valdosta, converted from a Moody auxiliary field in 1946, with Atlanta commuter service beginning in 1980. This is the civilian regional airfield, not Moody Air Force Base itself. Modern coordinates are approximate airport-area markers, not reconstructed 1986 gates or terminals."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "Tuscaloosa Municipal and civilian Valdosta Regional; not Moody Air Force Base. No precise 1986 terminal, gate or runway reconstruction."
+}

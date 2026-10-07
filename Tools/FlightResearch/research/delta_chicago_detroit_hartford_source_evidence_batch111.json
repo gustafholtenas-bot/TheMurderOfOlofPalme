@@ -1,0 +1,169 @@
+{
+  "source": "delta-19860201",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "effective_from": "1986-02-01",
+  "effective_to": null,
+  "later_amendments_verified": false,
+  "visual_review": true,
+  "reviewed_printed_pages": [
+    31,
+    46,
+    47,
+    48,
+    49,
+    73,
+    74,
+    75,
+    82,
+    83,
+    100,
+    101,
+    150,
+    151,
+    153,
+    155,
+    170,
+    172,
+    183,
+    184,
+    185,
+    193,
+    230,
+    231,
+    232,
+    248
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page_rule": "PDF page floor((printed page + 6) / 2); even printed page left, odd right. Scan widths vary; use the actual PDF page bounds.",
+  "row_scope": "75 explicit Delta nonstop rows in selected Chicago/Detroit/Hartford/Florida tables; one later ORD–MSP variant is separately excluded. Connecting/through rows excluded; each independently timed segment retains its own weekdays.",
+  "selected_source_rows_including_excluded": 76,
+  "accepted_nonstop_rows": 75,
+  "excluded_rows": [
+    {
+      "airline": "delta",
+      "flight": "391",
+      "origin": "ORD",
+      "destination": "MSP",
+      "printed_page": 48,
+      "printed_departure": "700a",
+      "printed_arrival": "806a",
+      "printed_frequency": "X7",
+      "stops": 0,
+      "footnote": "8",
+      "row_effective_from": "1986-03-03",
+      "action": "excluded_outside_window",
+      "reason": "Starts after the entire import period. The daily footnote-14 variant ending 1 March is imported instead."
+    }
+  ],
+  "operator_identification": "All accepted rows use Delta mainline flight numbers below the Delta Connection ranges.",
+  "frequency_legend": "D encodes blank/daily; X excludes weekdays, 1 Monday through 7 Sunday. Star denotes off-peak fare, not day rollover.",
+  "timezones_fixed_hours_for_import_dates": {
+    "BDL": -5,
+    "BOS": -5,
+    "DTW": -5,
+    "FLL": -5,
+    "JFK": -5,
+    "MCO": -5,
+    "MIA": -5,
+    "MSP": -6,
+    "MSY": -6,
+    "ORD": -6,
+    "PBI": -5,
+    "PHL": -5,
+    "TPA": -5
+  },
+  "dated_footnotes_on_selected_rows": [
+    {
+      "schedule": "delta-777-BDL-FLL-1310-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "100"
+    },
+    {
+      "schedule": "delta-609-BDL-PBI-1505-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "101"
+    },
+    {
+      "schedule": "delta-474-FLL-BDL-1140-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "82"
+    },
+    {
+      "schedule": "delta-608-PBI-BDL-1220-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "248"
+    },
+    {
+      "schedule": "delta-391-ORD-MSP-0700-b111",
+      "footnote": "14",
+      "effective_from": "1986-02-01",
+      "effective_to": "1986-03-01",
+      "printed_page": "48"
+    },
+    {
+      "schedule": "delta-367-DTW-MCO-1335-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "75"
+    },
+    {
+      "schedule": "delta-368-MCO-DTW-1635-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "183"
+    },
+    {
+      "schedule": "delta-607-DTW-TPA-1515-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "75"
+    },
+    {
+      "schedule": "delta-606-TPA-DTW-1205-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "230"
+    },
+    {
+      "schedule": "delta-611-DTW-PBI-0900-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "75"
+    },
+    {
+      "schedule": "delta-610-PBI-DTW-1835-b111",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "effective_to": "",
+      "printed_page": "248"
+    }
+  ],
+  "special_cases": {
+    "Airport suffixes": "Chicago is O’Hare/ORD. J=JFK; M=Miami/MIA and F=Fort Lauderdale/FLL. Repeated aggregate tables are not additional flights.",
+    "March transition": "ORD–MSP 391 at 07:00 is daily through 1 March (footnote 14). The second printed row is X7 from 3 March (footnote 8), so it creates no schedule or movement here. Definitions on printed p.49.",
+    "Weekdays": "ORD–BOS 598 excludes Saturday; 576 operates Saturday at a different time. DTW–MIA 501 is weekends, MIA–DTW 554 is Saturday only; no return weekday is inferred.",
+    "Footnote 4": "Ten accepted rows begin 12 February. Effective dates are preserved in row evidence and notes; import dates are inside their valid period.",
+    "Time zones": "DTW–ORD 563 departs 08:20 EST and arrives 08:18 CST, a 58-minute flight. The earlier local arrival is not a previous-day arrival.",
+    "After midnight": "MCO–FLL 261 departs 00:30 and TPA–MIA 141 departs 00:55 on their own local calendar dates. Adjacent late-night inbound segments belong to the preceding departure date when applicable.",
+    "Exact transcription": "TPA–ORD 480 is 11:05–12:31; TPA–DTW 206 is 18:50–21:07. These numbers were resolved in enlarged source rows, before import. MCO–ORD 80 has a stop and is not included.",
+    "Through rows": "Only explicit stops=0 rows are imported. FLL–MSY 91 via Tampa, PBI–MSP 204 via Chicago and comparable through entries create no extra nonstop flights.",
+    "Aircraft": "Generic equipment symbols do not establish an individual aircraft type, registration or same-aircraft continuity.",
+    "Airport locations": "No new airport markers, countries or operators. All existing records remain unchanged."
+  }
+}

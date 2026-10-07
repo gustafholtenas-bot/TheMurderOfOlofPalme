@@ -1,0 +1,573 @@
+{
+  "package": "v133",
+  "checked_on": "2026-10-02",
+  "user_request_sv": "jag är mycket intresserad sedan av alla plant runt niqaracua och st thomas or runt hela den regionen",
+  "priority": "active_user_priority",
+  "observation_window_utc": [
+    "1986-02-27T22:21:30Z",
+    "1986-03-01T22:21:30Z"
+  ],
+  "focus": [
+    {
+      "name": "Nicaragua",
+      "airport_ids": [],
+      "movements": 0,
+      "interpretation": "Unresolved database gap; no applicable exact clock rows accepted."
+    },
+    {
+      "name": "St. Thomas",
+      "airport_ids": [
+        "STT"
+      ],
+      "movements": 14,
+      "interpretation": "Partial Pan Am8 and LIAT6 timetable movements; other operators and traffic classes remain open."
+    }
+  ],
+  "research_areas": [
+    {
+      "research_area": "ni",
+      "name": "Nicaragua",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "bz",
+      "name": "Belize",
+      "current_database": {
+        "movements": 5,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "gt",
+      "name": "Guatemala",
+      "current_database": {
+        "movements": 4,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "hn",
+      "name": "Honduras",
+      "current_database": {
+        "movements": 5,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "sv",
+      "name": "El Salvador",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "cr",
+      "name": "Costa Rica",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "pa",
+      "name": "Panama",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "vi",
+      "name": "Amerikanska Jungfruöarna / St. Thomas, St. Croix",
+      "current_database": {
+        "movements": 31,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 6
+      },
+      "complete": false
+    },
+    {
+      "research_area": "vg",
+      "name": "Brittiska Jungfruöarna",
+      "current_database": {
+        "movements": 8,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "pr",
+      "name": "Puerto Rico",
+      "current_database": {
+        "movements": 26,
+        "directed_pairs": 10,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "cu",
+      "name": "Kuba",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "jm",
+      "name": "Jamaica",
+      "current_database": {
+        "movements": 12,
+        "directed_pairs": 7,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ht",
+      "name": "Haiti",
+      "current_database": {
+        "movements": 6,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "do",
+      "name": "Dominikanska republiken",
+      "current_database": {
+        "movements": 4,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "bs",
+      "name": "Bahamas",
+      "current_database": {
+        "movements": 27,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ky",
+      "name": "Caymanöarna",
+      "current_database": {
+        "movements": 38,
+        "directed_pairs": 11,
+        "airports": 3,
+        "domestic_movements": 12
+      },
+      "complete": false
+    },
+    {
+      "research_area": "tc",
+      "name": "Turks- och Caicosöarna",
+      "current_database": {
+        "movements": 4,
+        "directed_pairs": 4,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ag",
+      "name": "Antigua och Barbuda",
+      "current_database": {
+        "movements": 115,
+        "directed_pairs": 20,
+        "airports": 2,
+        "domestic_movements": 8
+      },
+      "complete": false
+    },
+    {
+      "research_area": "kn",
+      "name": "Saint Kitts och Nevis",
+      "current_database": {
+        "movements": 70,
+        "directed_pairs": 15,
+        "airports": 2,
+        "domestic_movements": 12
+      },
+      "complete": false
+    },
+    {
+      "research_area": "dm",
+      "name": "Dominica",
+      "current_database": {
+        "movements": 30,
+        "directed_pairs": 7,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "lc",
+      "name": "Saint Lucia",
+      "current_database": {
+        "movements": 69,
+        "directed_pairs": 16,
+        "airports": 2,
+        "domestic_movements": 4
+      },
+      "complete": false
+    },
+    {
+      "research_area": "vc",
+      "name": "Saint Vincent och Grenadinerna",
+      "current_database": {
+        "movements": 65,
+        "directed_pairs": 16,
+        "airports": 3,
+        "domestic_movements": 8
+      },
+      "complete": false
+    },
+    {
+      "research_area": "gd",
+      "name": "Grenada",
+      "current_database": {
+        "movements": 54,
+        "directed_pairs": 10,
+        "airports": 2,
+        "domestic_movements": 14
+      },
+      "complete": false
+    },
+    {
+      "research_area": "bb",
+      "name": "Barbados",
+      "current_database": {
+        "movements": 55,
+        "directed_pairs": 14,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "tt",
+      "name": "Trinidad och Tobago",
+      "current_database": {
+        "movements": 29,
+        "directed_pairs": 10,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "gp",
+      "name": "Guadeloupe och dåvarande franska karibiska områden",
+      "current_database": {
+        "movements": 48,
+        "directed_pairs": 14,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "mq",
+      "name": "Martinique",
+      "current_database": {
+        "movements": 58,
+        "directed_pairs": 18,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "aw",
+      "name": "Aruba",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "an",
+      "name": "Nederländska Antillerna (1986)",
+      "current_database": {
+        "movements": 55,
+        "directed_pairs": 16,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ai",
+      "name": "Anguilla",
+      "current_database": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ms",
+      "name": "Montserrat",
+      "current_database": {
+        "movements": 41,
+        "directed_pairs": 6,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    }
+  ],
+  "geographic_policy": "Working search scope, not new runtime geography. Verify territorial and airport names as of1986 before any import. St Thomas interpreted as US Virgin Islands. Include regional links to southern Mexico, Florida and northern South America.",
+  "traffic_scope": [
+    "scheduled passenger",
+    "regional and island flights",
+    "cargo and charter",
+    "private/government where documented",
+    "military and special flights where documented"
+  ],
+  "next_tasks": [
+    {
+      "priority": 1,
+      "task_sv": "Nicaragua: verifiera operatörer, historiska flygfält och datumgiltig vintertrafik. Sök belägg för regionala och internationella sträckor samt dokumenterade specialflygningar."
+    },
+    {
+      "priority": 2,
+      "task_sv": "St. Thomas: komplettera fler operatörer och regionaltrafik. Pan Am har åtta och LIAT sex rörelser. Genomgående resor via tidsatta mellanlandningar får inte dubbleras."
+    },
+    {
+      "priority": 3,
+      "task_sv": "Utvidga till grannländer, regionala nav och övriga Karibien, med både större bolag och regional-/frakt-/chartertrafik."
+    },
+    {
+      "priority": 4,
+      "task_sv": "Sök samtida flygloggar, rörelsehandlingar och arkiv för militära/särskilda flygningar. Dokumentera vad som saknar exakta datum/tider, registrering eller mellanlandningar."
+    }
+  ],
+  "available_primary_timetable_leads": [
+    {
+      "source": "panam-19860211",
+      "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+      "note": "V122/V123: partial Pan Am Caribbean import, now also Bahamas, Grand Turk, Providenciales and Antigua. More operators and date-valid clock panels remain to be reviewed."
+    },
+    {
+      "url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+      "note": "Existing Delta February1986 timetable; inventory accepted regional records before importing any duplicates."
+    },
+    {
+      "name": "Republic14February–1March1986 Employee System Timetable",
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+      "note": "V124:68 mainline jet schedules accepted,132 movements. Grand Cayman/Miami, Cancun/Memphis and five Florida airports; rest of network unreviewed. EXP operators require separate attribution."
+    },
+    {
+      "name": "Cayman Airways16December1985–26April1986 Winter Schedule",
+      "url": "https://www.timetableimages.com/ttimages/kx8512.htm",
+      "note": "V125:30regular nonstop schedules accepted;23active,30movements. Cayman Airways28movements, Air Jamaica2. Charter977xheld for time/airport conflicts; Tampa charter outsidewindow. Through aggregates not duplicated."
+    },
+    {
+      "name": "LIAT W.T.No.40 effective13December (archive1985)",
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+      "note": "V126:51northern physical-leg schedules accepted,75movements including6StThomas. Whole-issue expiry notprinted; internal seasonal variants reviewed forFeb1986. Remaining southern LIAT rows and separately attributed operators onscans6–8 are next leads."
+    },
+    {
+      "name": "LIAT W.T.No.40 southern review and partner pages",
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+      "note": "V127 adds 104 reviewed southern/central schedules and 146 movements; cumulative LIAT 155 schedules/221 movements. LI117/126 main-table rows conflict with IAS page7 and remain withheld. Separate operators on scans6–8 need individual attribution."
+    },
+    {
+      "name": "LIAT W.T.No.40 partner pages reviewed",
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+      "note": "V128 imports39 Four Island Air schedules/30movements and30 Montserrat Air Services schedules/41movements from explicit page headings. LI168 onward NEV–STX asterisk unresolved. IAS page7 remains for detailed review."
+    },
+    {
+      "name": "Inter-Island Air Services scan7 reviewed",
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+      "note": "V129 imports42 schedules and53 movements. LI117 earlier main-table misreading corrected; first3legs accepted, final CRU–GND clock inversion held. LI126 main/IAS conflict remains."
+    },
+    {
+      "name": "Challenge International20December1985 reviewed",
+      "url": "https://www.timetableimages.com/ttimages/3c8512.htm",
+      "note": "Ten zero-stop rows accepted,18 movements. Ten one-stop rows withheld. Open-ended edition; amendments incomplete."
+    },
+    {
+      "name": "Republic February14–March1,1986 extended review",
+      "url": "https://northwestairlineshistory.org/timetables-republic/",
+      "note": "V131 adds61 mainline schedules and126 movements, mostly US Gulf coast, plus2 Mexico movements. Same31-area Caribbean count remains532. Not a complete Republic network import."
+    },
+    {
+      "name": "PBA Southern System January 15 and March 1, 1986",
+      "urls": [
+        "https://flypba.com/timetable/s-1986-01-15/",
+        "https://flypba.com/timetable/s-1986-03-01/"
+      ],
+      "note": "V132 imports 147 edition-specific rows / 143 movements on 16 Florida directed pairs. Remaining southern network is partial; January and March are different networks. Northern January 12 edition is a later research lead, not imported."
+    },
+    {
+      "name": "PBA Southern System further review",
+      "urls": [
+        "https://flypba.com/timetable/s-1986-01-15/",
+        "https://flypba.com/timetable/s-1986-03-01/"
+      ],
+      "note": "V133 adds176 edition-specific schedules/159 movements around Tampa and north/east Florida. PBA now302 movements from323 schedules. Remaining Miami/PalmBeach/Melbourne/Daytona/Sarasota rows and January panhandle/NewOrleans still partial."
+    }
+  ],
+  "source_rules": [
+    "Use valid1986 source clocks and actual physical segments.",
+    "A published schedule does not identify an individual aircraft or confirm it flew.",
+    "Do not infer a clandestine or military flight from general history, ownership or a route map.",
+    "Retain uncertain records in research, not runtime.",
+    "Endpoint movements cannot establish all overflying aircraft or a complete regional census."
+  ],
+  "coverage_complete": false,
+  "all_aircraft_inventory_verified": false,
+  "new_runtime_rows_from_this_queue": 0,
+  "latest_review": "CENTRAL_AMERICA_CARIBBEAN_REVIEW_BATCH130.md",
+  "v123_followup": [
+    "Nicaragua remains unresolved: no accepted exact timetable clocks.",
+    "St. Thomas: expand beyond current Pan Am coverage (8 movements).",
+    "Air France: partial inbound French long-haul legs now imported (Orly/CDG/Marseille); remaining Caribbean rows and F27 operator attribution need review.",
+    "F27 Antilles services: printed AF code and actual operator attribution need review before import.",
+    "American31January1986/eastern1January1986 edition leads currently expose covers, not interior clocks.",
+    "Military, government, private, charter and special operations still require dated movement records."
+  ],
+  "new_regional_schedules": 0,
+  "new_adjoining_mexico_schedules": 0,
+  "new_florida_us_schedules": 176,
+  "v124_followup": [
+    "Nicaragua: no date-valid clock rows accepted; contemporary Corn Island report is only a research lead.",
+    "St. Thomas: still8movements; seek applicable Eastern/American/LIAT/local-operator interiors.",
+    "Air Jamaica26November1985: correct-period cover/index found, no interior clock rows obtained.",
+    "Arrow Air November14page:1985index/URL but1984intro heading; resolve original edition and operating-period evidence before import.",
+    "Republic: remaining network, amendments and separately attributed EXP services are still unreviewed.",
+    "Air France F27 regional operator attribution and prior held decisions remain open.",
+    "Military/government/private/charter/special operations still need dated movement records."
+  ],
+  "v125_followup": [
+    "Nicaragua: still no date-valid clock rows accepted; search timetable interiors and dated movement records.",
+    "St. Thomas: still8movements; seek applicable Eastern/American/LIAT/local-operator interiors.",
+    "Air Jamaica: four source schedules from Cayman sheet now reviewed, twoThursdaymovements accepted. Own26November1985interior still needed for wider network.",
+    "Cayman Express977x: charter times differ from Skin DiverDecember1985 report; exact US airports also unspecified. Do not guess or confuse with later commuter brand.",
+    "Bahamasair July1985 fullPDF superseded by15December1985edition; obtain winter interior before import.",
+    "KLM NWHistory timetable archive offered no1985/1986interior.",
+    "Republic remaining network and EXP attribution, Arrow Air date conflict, Air France F27 attribution and previous held cases remain unresolved.",
+    "Military/government/private/special operation coverage remains incomplete; require dated movement records."
+  ],
+  "v126_followup": [
+    "LIAT: southern and central island chains onscans2–5 remain unimported; date-specific columns and distinctionDominicaDOM/DCF require care.",
+    "Four Island Air onscan6, Inter-Island Air Services onscan7 and Montserrat Air Services onscan8 have separate operator headings. Do not import them asLIAT merely because flight numbers useLI.",
+    "St. Thomas now14movements:8PanAm+6LIAT. Still seek Eastern/American and local operators, dated non-scheduled flights.",
+    "Nicaragua still0: no applicable exact clock rows obtained. Flight-simulator summer1987plans labelled1986 and later1986news are not February1986evidence.",
+    "LIAT W.T.No.40 year is archival1985attribution; internal13January–26March and1Februaryvariants reviewed. Seek amendments/superseding editions before claiming complete service.",
+    "Cayman Express977x, Bahamasair winterinterior, Air Jamaica wider network, RepublicEXP, Arrowdate and AirFranceF27 questions retained."
+  ],
+  "v127_followup": [
+    "Four Island Air on scan6 and Montserrat Air Services on scan8 are separate operators, not LIAT. Verify period, weekday rows and historical airfields before import.",
+    "Montserrat MNI must refer to the old Blackburne airport in 1986; do not reuse modern John A. Osborne coordinates.",
+    "Inter-Island Air Services on scan7: resolve LI117/126 route/equipment inconsistencies against main scans3/5 before importing; inspect any impossible arrival/departure sequence.",
+    "St. Thomas remains14 movements:8 PanAm +6 LIAT. Seek other operators and documented non-scheduled flights.",
+    "Nicaragua remains0 accepted movements; continue seeking applicable exact source clocks, not simulation plans or later news.",
+    "LIAT year1985 is archival attribution. Southern and northern selected winter columns reviewed; amendments and complete network coverage remain unverified.",
+    "Earlier Cayman Express977x, Bahamasair winter interior, Air Jamaica wider network, RepublicEXP, Arrow date and AirFranceF27 issues remain open."
+  ],
+  "research_scope_change": "Same31 regional areas asv132; this batch is separately counted US domestic traffic.",
+  "v128_followup": [
+    "Inter-Island Air Services page7 remains: resolve LI117/126 discrepancies and any arrival/departure anomaly before accepting rows.",
+    "Four Island Air LI168 NEV–STX has an unexplained asterisk at StKitts; do not assume nonstop or invent SKB times.",
+    "Four Island Air exact legal identity/cessation chronology remains unverified. Primary page includes February1 variants; secondary fleet-directory snippet says December1985 cessation. Imported rows represent published schedule/page attribution, not actual legal operation.",
+    "Seek applicable amendments or superseding LIAT W.T.No.40 editions; no printed whole-issue expiry.",
+    "StThomas14 and Tortola8 unchanged; seek more operators, current-window primary schedules and dated special/cargo/private/military records.",
+    "Nicaragua remains a source gap; do not substitute summer1987 simulator plans or June1986 news for February clocks.",
+    "Cayman Express977x, Bahamasair winter interior, Air Jamaica wider network, RepublicEXP, Arrow dates and AirFranceF27 remain open."
+  ],
+  "v129_followup": [
+    "LI126 remains fully held: main MQS–FDF withBNI vs IAS POS–GND–CRU–UNI–MQS–SVD–BGI withDHT. Seek amendment or independently dated matching source.",
+    "LI117 final CRU17:30–GND17:15 held. Do not guess17:50 or next-day arrival; first3legs accepted and documented as partial.",
+    "Four Island Air LI168 NEV–STX unexplained StKitts asterisk remains held.",
+    "Four Island Air legal chronology, IAS legal operator identity and applicable amendments remain incomplete.",
+    "Nicaragua and more StThomas/Tortola operators remain priority; current totalsNI0 STT14 EIS8.",
+    "Cayman Express977x, Bahamasair winter interior, Air Jamaica wider network, RepublicEXP, Arrow dated flights, AirFranceF27 and special/cargo/private/military records remain open.",
+    "Union Island exact pre-extension runway alignment remains unverified; current coordinate is an approximate Clifton airfield marker only."
+  ],
+  "supersedes_prior_followup_claims": {
+    "v128_followup[0]": "IAS page reviewed. LI117 first-leg conflict was a research misreading; see errata_batch126.json. LI126 remains held."
+  },
+  "v130_followup": [
+    "Obtain Virgin Islands Seaplane Shuttle arrivals/durations and harbour identification for target dates.",
+    "Obtain Caribbean Express1February1986 interior; July1985 edition superseded.",
+    "Resolve Airways International15December1985 stop count before importing clocks.",
+    "Challenge internal stop clocks, amendment coverage and legal-name chronology remain open.",
+    "Arrow November issue definitely1985; scheduled passenger suspension inFebruary prevents projection. Seek independently dated movements; do not treat all cargo/privatecharter as suspended.",
+    "Nicaragua0, StThomas14, Tortola8 remain priority. Prior LI126/LI117-final/LI168 holds unchanged.",
+    "Continue Bahamasair winter interior, AirJamaica wider network, CaymanExpress977x and independently dated special-flight records."
+  ],
+  "new_us_domestic_schedules": 176,
+  "v131_followup": [
+    "Nicaragua0, StThomas14, Tortola8 remain priority; obtain correct-period full clock tables.",
+    "LACSA Jan1 and Mar1,1986 interiors required, accounting for the date switch.",
+    "American Jan31 and Eastern Jan1,1986 interiors, BWIA winter table and AirSouthMar1 interior remain leads.",
+    "Carry forward v130 seaplane, CaribbeanExpress, AirwaysInternational, Challenge, Arrow and LIAT holds.",
+    "Republic mainline network remains partial; EXP operator identity must be applied separately. No inferred 841 MOB–GPT segment."
+  ],
+  "v132_followup": [
+    "Priority remains Nicaragua and StThomas: applicable full clock tables required. Regional count remains 532; STT14, EIS8, NI0.",
+    "LACSA January1/March1,1986 interiors; CaribbeanExpress February1 interior; seaplane arrivals/harbours; American/Eastern/BWIA applicable interiors.",
+    "PBA remaining southern routes: Tampa, Sarasota, Jacksonville, Gainesville, West Palm Beach, Melbourne and January panhandle/New Orleans. Respect March1 edition change; do not assume entire network unchanged.",
+    "Gull Air February15 and Bahamasair December15 interiors still needed. Covers/maps alone insufficient.",
+    "Older Challenge, Arrow, Airways International, LIAT and special-flight evidence holds remain unchanged."
+  ],
+  "v133_followup": [
+    "Keep Nicaragua and StThomas first in source search: NI0,STT14,EIS8; applicable full clock tables or dated movement records needed.",
+    "LACSA January/March1986, CaribbeanExpress February1986, seaplane arrivals/harbours, American/Eastern/BWIA interiors remain open.",
+    "TACA/Aviateca indexes did not yield an applicable1986 interior; TAN SAHSA1986 MuseumofFlight finding-aid lead needs actual timetable images.",
+    "PBA: review remaining Miami–Daytona/Melbourne/Sarasota/PalmBeach and their inbound rows, MLB–PBI, plus January-only panhandle/NewOrleans physical legs. Respect supersedingMarch1 network.",
+    "All earlier Challenge, Arrow, AirwaysInternational, LIAT and special-flight evidence holds remain."
+  ]
+}

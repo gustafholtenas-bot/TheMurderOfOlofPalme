@@ -1,0 +1,53 @@
+{
+  "package": "v135",
+  "checked_on": "2026-10-02",
+  "searches": [
+    {
+      "topic": "LACSA Nicaragua / Central America",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/lr.htm",
+        "https://www.airtimes.com/cgat/cr/lacsa.htm"
+      ],
+      "result": "January1986 cover/index and laterMay issue do not supply the required Jan/Mar physical-leg clocks. No accepted row."
+    },
+    {
+      "topic": "Cubana / Aeroflot Managua–Havana",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/cu.htm",
+        "https://aeroflotarchives.com/timetables.html"
+      ],
+      "result": "Catalog leads including Soviet winter1985–86 and laterCubana April1986, no accepted window-valid physical clocks. Later edition not backdated."
+    },
+    {
+      "topic": "Caribbean Express / StThomas",
+      "urls": [],
+      "result": "Search did not produce the needed February1,1986 interior. LaterApril1987 listing not used."
+    },
+    {
+      "topic": "AirFrance F27 actual operator",
+      "urls": [
+        "https://www.departedflights.com/FDF85intro.html",
+        "https://www.departedflights.com/FDF85p1.html",
+        "https://temis.documentation.developpement-durable.gouv.fr/docs/Temis/0002/Temis-0002478/6980_3.pdf"
+      ],
+      "result": "Earlier OAG1985 and older report material do not settle operator attribution on target1986 dates. Existing primaryAF scan reread; hold unchanged."
+    },
+    {
+      "topic": "PanAm February11 regional gaps",
+      "urls": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ],
+      "result": "Selected existing regional CCS/MAR/MEX/STT records were already imported. This is not a whole-network completion claim."
+    },
+    {
+      "topic": "PBA Northern available original",
+      "urls": [
+        "https://flypba.com/timetables/",
+        "https://flypba.com/timetable/n-1986-01-12/"
+      ],
+      "result": "Five original image files read; dated cover, both interior spreads and maps.144 accepted physical schedules,2 contradictory rows held."
+    }
+  ],
+  "new_regional_movements": 0,
+  "negative_results_not_proof_of_historical_absence": true
+}

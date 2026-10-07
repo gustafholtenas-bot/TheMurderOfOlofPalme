@@ -1,0 +1,77 @@
+{
+  "package": "v135",
+  "airport_records": [
+    {
+      "id": "ACK",
+      "name": "Nantucket Memorial (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 41.2532992,
+      "lon": -70.0605114,
+      "coordinate_source": "https://www.airnav.com/airport/ACK",
+      "coordinate_record_id": "KACK",
+      "timetable_code": "ACK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://flypba.com/timetable/n-1986-01-12/",
+        "https://www.airnav.com/airport/ACK"
+      ],
+      "location_note": "PBA Northern January12,1986 original tables and airport maps establish the historical destination and code. Current AirNav FAA-derived metadata matches the airfield and gives activation 04/1940, before1986. Activation metadata is not an exact historical opening date. Current estimated FAA reference coordinates are approximate same-airfield markers, not1986 gates, thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "MVY",
+      "name": "Martha’s Vineyard (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 41.3934175,
+      "lon": -70.6138744,
+      "coordinate_source": "https://www.airnav.com/airport/MVY",
+      "coordinate_record_id": "KMVY",
+      "timetable_code": "MVY",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://flypba.com/timetable/n-1986-01-12/",
+        "https://www.airnav.com/airport/MVY"
+      ],
+      "location_note": "PBA Northern January12,1986 original tables and airport maps establish the historical destination and code. Current AirNav FAA-derived metadata matches the airfield and gives activation 07/1974, before1986. Activation metadata is not an exact historical opening date. Current estimated FAA reference coordinates are approximate same-airfield markers, not1986 gates, thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "PVC",
+      "name": "Provincetown Municipal (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 42.0722778,
+      "lon": -70.2207222,
+      "coordinate_source": "https://www.airnav.com/airport/PVC",
+      "coordinate_record_id": "KPVC",
+      "timetable_code": "PVC",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://flypba.com/timetable/n-1986-01-12/",
+        "https://www.airnav.com/airport/PVC"
+      ],
+      "location_note": "PBA Northern January12,1986 original tables and airport maps establish the historical destination and code. Current AirNav FAA-derived metadata matches the airfield and gives activation 04/1940, before1986. Activation metadata is not an exact historical opening date. Current estimated FAA reference coordinates are approximate same-airfield markers, not1986 gates, thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "EWB",
+      "name": "New Bedford Regional (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 41.6765661,
+      "lon": -70.9578361,
+      "coordinate_source": "https://www.airnav.com/airport/EWB",
+      "coordinate_record_id": "KEWB",
+      "timetable_code": "EWB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://flypba.com/timetable/n-1986-01-12/",
+        "https://www.airnav.com/airport/EWB"
+      ],
+      "location_note": "PBA Northern January12,1986 original tables and airport maps establish the historical destination and code. Current AirNav FAA-derived metadata matches the airfield and gives activation 04/1942, before1986. Activation metadata is not an exact historical opening date. Current estimated FAA reference coordinates are approximate same-airfield markers, not1986 gates, thresholds, layouts or aircraft positions."
+    }
+  ],
+  "new_country_records": [],
+  "existing_airports_unchanged": 388,
+  "checked_on": "2026-10-02",
+  "precision": "Current FAA-derived AirNav estimated airport reference points, matched to historical PBA airport codes/maps. Approximate same-airfield markers only. Activation metadata predates1986 but is not a precise historical opening date. Not reconstructed1986 gates, thresholds, runway layouts or aircraft positions."
+}

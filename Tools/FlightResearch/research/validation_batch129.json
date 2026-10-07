@@ -1,0 +1,1081 @@
+{
+  "package": "v132",
+  "baseline_archive_sha256": "3c6b7b91c5f4fba5cf364182b8560b4a651b04af3ff8a0f190f1506961a82c91",
+  "previous_movements_unchanged": 9186,
+  "previous_schedules_unchanged": 5448,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 385,
+  "previous_countries_unchanged": 121,
+  "modified_airline_ids": [],
+  "modified_previous_source_ids": [],
+  "manual_duration_date_rows": 87,
+  "source_rows_checked": 147,
+  "independent_utc_movements_verified": 143,
+  "independent_utc_expected": {
+    "pba-provincetown-boston-j-1172-EYW-MIA-0700-b129@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:44:00Z"
+    ],
+    "pba-provincetown-boston-j-1186-EYW-MIA-0830-b129@1986-02-28": [
+      "1986-02-28T13:30:00Z",
+      "1986-02-28T14:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1174-EYW-MIA-1000-b129@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1188-EYW-MIA-1130-b129@1986-02-28": [
+      "1986-02-28T16:30:00Z",
+      "1986-02-28T17:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1176-EYW-MIA-1300-b129@1986-02-28": [
+      "1986-02-28T18:00:00Z",
+      "1986-02-28T18:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1190-EYW-MIA-1430-b129@1986-02-28": [
+      "1986-02-28T19:30:00Z",
+      "1986-02-28T20:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1178-EYW-MIA-1600-b129@1986-02-28": [
+      "1986-02-28T21:00:00Z",
+      "1986-02-28T21:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1192-EYW-MIA-1730-b129@1986-02-27": [
+      "1986-02-27T22:30:00Z",
+      "1986-02-27T23:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1192-EYW-MIA-1730-b129@1986-02-28": [
+      "1986-02-28T22:30:00Z",
+      "1986-02-28T23:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1180-EYW-MIA-1900-b129@1986-02-27": [
+      "1986-02-28T00:00:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1180-EYW-MIA-1900-b129@1986-02-28": [
+      "1986-03-01T00:00:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1194-EYW-MIA-2030-b129@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T02:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1194-EYW-MIA-2030-b129@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T02:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1024-EYW-APF-0845-b129@1986-02-28": [
+      "1986-02-28T13:45:00Z",
+      "1986-02-28T14:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1030-EYW-APF-1100-b129@1986-02-28": [
+      "1986-02-28T16:00:00Z",
+      "1986-02-28T16:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1036-EYW-APF-1545-b129@1986-02-28": [
+      "1986-02-28T20:45:00Z",
+      "1986-02-28T21:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1042-EYW-APF-1845-b129@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T00:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1042-EYW-APF-1845-b129@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T00:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1376-EYW-TPA-0945-b129@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T15:59:00Z"
+    ],
+    "pba-provincetown-boston-j-1378-EYW-TPA-1420-b129@1986-02-28": [
+      "1986-02-28T19:20:00Z",
+      "1986-02-28T20:35:00Z"
+    ],
+    "pba-provincetown-boston-j-1380-EYW-TPA-1800-b129@1986-02-27": [
+      "1986-02-27T23:00:00Z",
+      "1986-02-28T00:15:00Z"
+    ],
+    "pba-provincetown-boston-j-1380-EYW-TPA-1800-b129@1986-02-28": [
+      "1986-02-28T23:00:00Z",
+      "1986-03-01T00:15:00Z"
+    ],
+    "pba-provincetown-boston-j-1120-MTH-MIA-0700-b129@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:40:00Z"
+    ],
+    "pba-provincetown-boston-j-1122-MTH-MIA-0915-b129@1986-02-28": [
+      "1986-02-28T14:15:00Z",
+      "1986-02-28T14:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1124-MTH-MIA-1115-b129@1986-02-28": [
+      "1986-02-28T16:15:00Z",
+      "1986-02-28T16:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1126-MTH-MIA-1415-b129@1986-02-28": [
+      "1986-02-28T19:15:00Z",
+      "1986-02-28T19:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1128-MTH-MIA-1615-b129@1986-02-28": [
+      "1986-02-28T21:15:00Z",
+      "1986-02-28T21:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1130-MTH-MIA-1815-b129@1986-02-27": [
+      "1986-02-27T23:15:00Z",
+      "1986-02-27T23:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1130-MTH-MIA-1815-b129@1986-02-28": [
+      "1986-02-28T23:15:00Z",
+      "1986-02-28T23:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1173-MIA-EYW-0830-b129@1986-02-28": [
+      "1986-02-28T13:30:00Z",
+      "1986-02-28T14:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1187-MIA-EYW-1000-b129@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1175-MIA-EYW-1145-b129@1986-02-28": [
+      "1986-02-28T16:45:00Z",
+      "1986-02-28T17:40:00Z"
+    ],
+    "pba-provincetown-boston-j-1189-MIA-EYW-1300-b129@1986-02-28": [
+      "1986-02-28T18:00:00Z",
+      "1986-02-28T18:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1177-MIA-EYW-1430-b129@1986-02-28": [
+      "1986-02-28T19:30:00Z",
+      "1986-02-28T20:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1191-MIA-EYW-1600-b129@1986-02-28": [
+      "1986-02-28T21:00:00Z",
+      "1986-02-28T21:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1179-MIA-EYW-1730-b129@1986-02-27": [
+      "1986-02-27T22:30:00Z",
+      "1986-02-27T23:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1179-MIA-EYW-1730-b129@1986-02-28": [
+      "1986-02-28T22:30:00Z",
+      "1986-02-28T23:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1193-MIA-EYW-1900-b129@1986-02-27": [
+      "1986-02-28T00:00:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1193-MIA-EYW-1900-b129@1986-02-28": [
+      "1986-03-01T00:00:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1181-MIA-EYW-2030-b129@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T02:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1181-MIA-EYW-2030-b129@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T02:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1195-MIA-EYW-2205-b129@1986-02-27": [
+      "1986-02-28T03:05:00Z",
+      "1986-02-28T03:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1195-MIA-EYW-2205-b129@1986-02-28": [
+      "1986-03-01T03:05:00Z",
+      "1986-03-01T03:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1121-MIA-MTH-0815-b129@1986-02-28": [
+      "1986-02-28T13:15:00Z",
+      "1986-02-28T13:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1123-MIA-MTH-1015-b129@1986-02-28": [
+      "1986-02-28T15:15:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1125-MIA-MTH-1315-b129@1986-02-28": [
+      "1986-02-28T18:15:00Z",
+      "1986-02-28T18:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1127-MIA-MTH-1515-b129@1986-02-28": [
+      "1986-02-28T20:15:00Z",
+      "1986-02-28T20:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1129-MIA-MTH-1715-b129@1986-02-27": [
+      "1986-02-27T22:15:00Z",
+      "1986-02-27T22:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1129-MIA-MTH-1715-b129@1986-02-28": [
+      "1986-02-28T22:15:00Z",
+      "1986-02-28T22:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1131-MIA-MTH-1955-b129@1986-02-27": [
+      "1986-02-28T00:55:00Z",
+      "1986-02-28T01:35:00Z"
+    ],
+    "pba-provincetown-boston-j-1131-MIA-MTH-1955-b129@1986-02-28": [
+      "1986-03-01T00:55:00Z",
+      "1986-03-01T01:35:00Z"
+    ],
+    "pba-provincetown-boston-j-1156-MIA-APF-0835-b129@1986-02-28": [
+      "1986-02-28T13:35:00Z",
+      "1986-02-28T14:20:00Z"
+    ],
+    "pba-provincetown-boston-j-1158-MIA-APF-1205-b129@1986-02-28": [
+      "1986-02-28T17:05:00Z",
+      "1986-02-28T17:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1160-MIA-APF-1405-b129@1986-02-28": [
+      "1986-02-28T19:05:00Z",
+      "1986-02-28T19:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1162-MIA-APF-1605-b129@1986-02-28": [
+      "1986-02-28T21:05:00Z",
+      "1986-02-28T21:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1164-MIA-APF-1805-b129@1986-02-27": [
+      "1986-02-27T23:05:00Z",
+      "1986-02-27T23:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1164-MIA-APF-1805-b129@1986-02-28": [
+      "1986-02-28T23:05:00Z",
+      "1986-02-28T23:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1166-MIA-APF-2005-b129@1986-02-27": [
+      "1986-02-28T01:05:00Z",
+      "1986-02-28T01:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1166-MIA-APF-2005-b129@1986-02-28": [
+      "1986-03-01T01:05:00Z",
+      "1986-03-01T01:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1112-MIA-APF-2105-b129@1986-02-27": [
+      "1986-02-28T02:05:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1112-MIA-APF-2105-b129@1986-02-28": [
+      "1986-03-01T02:05:00Z",
+      "1986-03-01T02:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1172-MIA-RSW-0805-b129@1986-02-28": [
+      "1986-02-28T13:05:00Z",
+      "1986-02-28T13:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1124-MIA-RSW-1245-b129@1986-02-28": [
+      "1986-02-28T17:45:00Z",
+      "1986-02-28T18:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1126-MIA-RSW-1510-b129@1986-02-28": [
+      "1986-02-28T20:10:00Z",
+      "1986-02-28T20:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1128-MIA-RSW-1720-b129@1986-02-27": [
+      "1986-02-27T22:20:00Z",
+      "1986-02-27T22:59:00Z"
+    ],
+    "pba-provincetown-boston-j-1128-MIA-RSW-1720-b129@1986-02-28": [
+      "1986-02-28T22:20:00Z",
+      "1986-02-28T22:59:00Z"
+    ],
+    "pba-provincetown-boston-j-1101-RSW-MIA-0700-b129@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:40:00Z"
+    ],
+    "pba-provincetown-boston-j-1103-RSW-MIA-0950-b129@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T15:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1107-RSW-MIA-1400-b129@1986-02-28": [
+      "1986-02-28T19:00:00Z",
+      "1986-02-28T19:40:00Z"
+    ],
+    "pba-provincetown-boston-j-1179-RSW-MIA-1615-b129@1986-02-28": [
+      "1986-02-28T21:15:00Z",
+      "1986-02-28T21:55:00Z"
+    ],
+    "pba-provincetown-boston-j-1111-RSW-MIA-1815-b129@1986-02-27": [
+      "1986-02-27T23:15:00Z",
+      "1986-02-27T23:59:00Z"
+    ],
+    "pba-provincetown-boston-j-1111-RSW-MIA-1815-b129@1986-02-28": [
+      "1986-02-28T23:15:00Z",
+      "1986-02-28T23:59:00Z"
+    ],
+    "pba-provincetown-boston-j-1155-APF-MIA-0700-b129@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:40:00Z"
+    ],
+    "pba-provincetown-boston-j-1157-APF-MIA-0940-b129@1986-02-28": [
+      "1986-02-28T14:40:00Z",
+      "1986-02-28T15:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1159-APF-MIA-1305-b129@1986-02-28": [
+      "1986-02-28T18:05:00Z",
+      "1986-02-28T18:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1161-APF-MIA-1505-b129@1986-02-28": [
+      "1986-02-28T20:05:00Z",
+      "1986-02-28T20:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1163-APF-MIA-1705-b129@1986-02-27": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-27T22:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1163-APF-MIA-1705-b129@1986-02-28": [
+      "1986-02-28T22:05:00Z",
+      "1986-02-28T22:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1165-APF-MIA-1905-b129@1986-02-27": [
+      "1986-02-28T00:05:00Z",
+      "1986-02-28T00:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1165-APF-MIA-1905-b129@1986-02-28": [
+      "1986-03-01T00:05:00Z",
+      "1986-03-01T00:45:00Z"
+    ],
+    "pba-provincetown-boston-j-1021-APF-EYW-0945-b129@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T15:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1029-APF-EYW-1430-b129@1986-02-28": [
+      "1986-02-28T19:30:00Z",
+      "1986-02-28T20:15:00Z"
+    ],
+    "pba-provincetown-boston-j-1033-APF-EYW-1650-b129@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-27T22:35:00Z"
+    ],
+    "pba-provincetown-boston-j-1033-APF-EYW-1650-b129@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-02-28T22:35:00Z"
+    ],
+    "pba-provincetown-boston-j-1037-APF-EYW-1945-b129@1986-02-27": [
+      "1986-02-28T00:45:00Z",
+      "1986-02-28T01:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1037-APF-EYW-1945-b129@1986-02-28": [
+      "1986-03-01T00:45:00Z",
+      "1986-03-01T01:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1375-TPA-EYW-0810-b129@1986-02-28": [
+      "1986-02-28T13:10:00Z",
+      "1986-02-28T14:25:00Z"
+    ],
+    "pba-provincetown-boston-j-1377-TPA-EYW-1245-b129@1986-02-28": [
+      "1986-02-28T17:45:00Z",
+      "1986-02-28T18:59:00Z"
+    ],
+    "pba-provincetown-boston-j-1379-TPA-EYW-1615-b129@1986-02-27": [
+      "1986-02-27T21:15:00Z",
+      "1986-02-27T22:30:00Z"
+    ],
+    "pba-provincetown-boston-j-1379-TPA-EYW-1615-b129@1986-02-28": [
+      "1986-02-28T21:15:00Z",
+      "1986-02-28T22:30:00Z"
+    ],
+    "pba-provincetown-boston-m-1172-EYW-MIA-0700-b129@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T12:44:00Z"
+    ],
+    "pba-provincetown-boston-m-1186-EYW-MIA-0830-b129@1986-03-01": [
+      "1986-03-01T13:30:00Z",
+      "1986-03-01T14:25:00Z"
+    ],
+    "pba-provincetown-boston-m-1174-EYW-MIA-1000-b129@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1188-EYW-MIA-1130-b129@1986-03-01": [
+      "1986-03-01T16:30:00Z",
+      "1986-03-01T17:25:00Z"
+    ],
+    "pba-provincetown-boston-m-1176-EYW-MIA-1300-b129@1986-03-01": [
+      "1986-03-01T18:00:00Z",
+      "1986-03-01T18:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1190-EYW-MIA-1430-b129@1986-03-01": [
+      "1986-03-01T19:30:00Z",
+      "1986-03-01T20:25:00Z"
+    ],
+    "pba-provincetown-boston-m-1178-EYW-MIA-1600-b129@1986-03-01": [
+      "1986-03-01T21:00:00Z",
+      "1986-03-01T21:55:00Z"
+    ],
+    "pba-provincetown-boston-m-984-EYW-APF-1000-b129@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:45:00Z"
+    ],
+    "pba-provincetown-boston-m-988-EYW-APF-1645-b129@1986-03-01": [
+      "1986-03-01T21:45:00Z",
+      "1986-03-01T22:30:00Z"
+    ],
+    "pba-provincetown-boston-m-1376-EYW-TPA-0945-b129@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T15:59:00Z"
+    ],
+    "pba-provincetown-boston-m-1378-EYW-TPA-1420-b129@1986-03-01": [
+      "1986-03-01T19:20:00Z",
+      "1986-03-01T20:35:00Z"
+    ],
+    "pba-provincetown-boston-m-1120-MTH-MIA-0700-b129@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T12:40:00Z"
+    ],
+    "pba-provincetown-boston-m-1122-MTH-MIA-0915-b129@1986-03-01": [
+      "1986-03-01T14:15:00Z",
+      "1986-03-01T14:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1124-MTH-MIA-1115-b129@1986-03-01": [
+      "1986-03-01T16:15:00Z",
+      "1986-03-01T16:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1126-MTH-MIA-1415-b129@1986-03-01": [
+      "1986-03-01T19:15:00Z",
+      "1986-03-01T19:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1128-MTH-MIA-1615-b129@1986-03-01": [
+      "1986-03-01T21:15:00Z",
+      "1986-03-01T21:55:00Z"
+    ],
+    "pba-provincetown-boston-m-975-MIA-EYW-0100-b129@1986-03-01": [
+      "1986-03-01T06:00:00Z",
+      "1986-03-01T06:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1173-MIA-EYW-0830-b129@1986-03-01": [
+      "1986-03-01T13:30:00Z",
+      "1986-03-01T14:25:00Z"
+    ],
+    "pba-provincetown-boston-m-1187-MIA-EYW-1000-b129@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1175-MIA-EYW-1145-b129@1986-03-01": [
+      "1986-03-01T16:45:00Z",
+      "1986-03-01T17:40:00Z"
+    ],
+    "pba-provincetown-boston-m-1189-MIA-EYW-1300-b129@1986-03-01": [
+      "1986-03-01T18:00:00Z",
+      "1986-03-01T18:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1177-MIA-EYW-1430-b129@1986-03-01": [
+      "1986-03-01T19:30:00Z",
+      "1986-03-01T20:25:00Z"
+    ],
+    "pba-provincetown-boston-m-1191-MIA-EYW-1600-b129@1986-03-01": [
+      "1986-03-01T21:00:00Z",
+      "1986-03-01T21:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1121-MIA-MTH-0815-b129@1986-03-01": [
+      "1986-03-01T13:15:00Z",
+      "1986-03-01T13:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1123-MIA-MTH-1015-b129@1986-03-01": [
+      "1986-03-01T15:15:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1125-MIA-MTH-1315-b129@1986-03-01": [
+      "1986-03-01T18:15:00Z",
+      "1986-03-01T18:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1127-MIA-MTH-1515-b129@1986-03-01": [
+      "1986-03-01T20:15:00Z",
+      "1986-03-01T20:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1129-MIA-MTH-1715-b129@1986-03-01": [
+      "1986-03-01T22:15:00Z",
+      "1986-03-01T22:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1158-MIA-APF-1205-b129@1986-03-01": [
+      "1986-03-01T17:05:00Z",
+      "1986-03-01T17:45:00Z"
+    ],
+    "pba-provincetown-boston-m-1160-MIA-APF-1405-b129@1986-03-01": [
+      "1986-03-01T19:05:00Z",
+      "1986-03-01T19:45:00Z"
+    ],
+    "pba-provincetown-boston-m-1162-MIA-APF-1605-b129@1986-03-01": [
+      "1986-03-01T21:05:00Z",
+      "1986-03-01T21:45:00Z"
+    ],
+    "pba-provincetown-boston-m-1124-MIA-RSW-1245-b129@1986-03-01": [
+      "1986-03-01T17:45:00Z",
+      "1986-03-01T18:30:00Z"
+    ],
+    "pba-provincetown-boston-m-1126-MIA-RSW-1510-b129@1986-03-01": [
+      "1986-03-01T20:10:00Z",
+      "1986-03-01T20:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1128-MIA-RSW-1720-b129@1986-03-01": [
+      "1986-03-01T22:20:00Z",
+      "1986-03-01T22:59:00Z"
+    ],
+    "pba-provincetown-boston-m-1103-RSW-MIA-0950-b129@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T15:30:00Z"
+    ],
+    "pba-provincetown-boston-m-1107-RSW-MIA-1400-b129@1986-03-01": [
+      "1986-03-01T19:00:00Z",
+      "1986-03-01T19:40:00Z"
+    ],
+    "pba-provincetown-boston-m-1179-RSW-MIA-1615-b129@1986-03-01": [
+      "1986-03-01T21:15:00Z",
+      "1986-03-01T21:55:00Z"
+    ],
+    "pba-provincetown-boston-m-1157-APF-MIA-0940-b129@1986-03-01": [
+      "1986-03-01T14:40:00Z",
+      "1986-03-01T15:25:00Z"
+    ],
+    "pba-provincetown-boston-m-1159-APF-MIA-1305-b129@1986-03-01": [
+      "1986-03-01T18:05:00Z",
+      "1986-03-01T18:45:00Z"
+    ],
+    "pba-provincetown-boston-m-1161-APF-MIA-1505-b129@1986-03-01": [
+      "1986-03-01T20:05:00Z",
+      "1986-03-01T20:45:00Z"
+    ],
+    "pba-provincetown-boston-m-1163-APF-MIA-1705-b129@1986-03-01": [
+      "1986-03-01T22:05:00Z",
+      "1986-03-01T22:45:00Z"
+    ],
+    "pba-provincetown-boston-m-961-APF-EYW-0830-b129@1986-03-01": [
+      "1986-03-01T13:30:00Z",
+      "1986-03-01T14:15:00Z"
+    ],
+    "pba-provincetown-boston-m-1375-TPA-EYW-0810-b129@1986-03-01": [
+      "1986-03-01T13:10:00Z",
+      "1986-03-01T14:25:00Z"
+    ],
+    "pba-provincetown-boston-m-1377-TPA-EYW-1245-b129@1986-03-01": [
+      "1986-03-01T17:45:00Z",
+      "1986-03-01T18:59:00Z"
+    ],
+    "pba-provincetown-boston-m-1379-TPA-EYW-1615-b129@1986-03-01": [
+      "1986-03-01T21:15:00Z",
+      "1986-03-01T22:30:00Z"
+    ],
+    "pba-provincetown-boston-m-976-EYW-RSW-0205-b129@1986-03-01": [
+      "1986-03-01T07:05:00Z",
+      "1986-03-01T07:55:00Z"
+    ],
+    "pba-provincetown-boston-m-960-EYW-RSW-0525-b129@1986-03-01": [
+      "1986-03-01T10:25:00Z",
+      "1986-03-01T11:15:00Z"
+    ],
+    "pba-provincetown-boston-m-986-EYW-RSW-1245-b129@1986-03-01": [
+      "1986-03-01T17:45:00Z",
+      "1986-03-01T18:50:00Z"
+    ],
+    "pba-provincetown-boston-m-977-RSW-EYW-0330-b129@1986-03-01": [
+      "1986-03-01T08:30:00Z",
+      "1986-03-01T09:25:00Z"
+    ],
+    "pba-provincetown-boston-m-985-RSW-EYW-1135-b129@1986-03-01": [
+      "1986-03-01T16:35:00Z",
+      "1986-03-01T17:25:00Z"
+    ],
+    "pba-provincetown-boston-m-987-RSW-EYW-1355-b129@1986-03-01": [
+      "1986-03-01T18:55:00Z",
+      "1986-03-01T19:45:00Z"
+    ],
+    "pba-provincetown-boston-m-961-RSW-APF-0800-b129@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T13:20:00Z"
+    ],
+    "pba-provincetown-boston-m-984-APF-RSW-1055-b129@1986-03-01": [
+      "1986-03-01T15:55:00Z",
+      "1986-03-01T16:15:00Z"
+    ]
+  },
+  "independent_local_source_dates": {
+    "pba-provincetown-boston-j-1172-EYW-MIA-0700-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1186-EYW-MIA-0830-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1174-EYW-MIA-1000-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1188-EYW-MIA-1130-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1176-EYW-MIA-1300-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1190-EYW-MIA-1430-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1178-EYW-MIA-1600-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1192-EYW-MIA-1730-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1180-EYW-MIA-1900-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1194-EYW-MIA-2030-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1024-EYW-APF-0845-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1030-EYW-APF-1100-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1036-EYW-APF-1545-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1042-EYW-APF-1845-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1376-EYW-TPA-0945-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1378-EYW-TPA-1420-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1380-EYW-TPA-1800-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1120-MTH-MIA-0700-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1122-MTH-MIA-0915-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1124-MTH-MIA-1115-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1126-MTH-MIA-1415-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1128-MTH-MIA-1615-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1130-MTH-MIA-1815-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1173-MIA-EYW-0830-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1187-MIA-EYW-1000-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1175-MIA-EYW-1145-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1189-MIA-EYW-1300-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1177-MIA-EYW-1430-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1191-MIA-EYW-1600-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1179-MIA-EYW-1730-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1193-MIA-EYW-1900-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1181-MIA-EYW-2030-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1195-MIA-EYW-2205-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1121-MIA-MTH-0815-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1123-MIA-MTH-1015-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1125-MIA-MTH-1315-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1127-MIA-MTH-1515-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1129-MIA-MTH-1715-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1131-MIA-MTH-1955-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1156-MIA-APF-0835-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1158-MIA-APF-1205-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1160-MIA-APF-1405-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1162-MIA-APF-1605-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1164-MIA-APF-1805-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1166-MIA-APF-2005-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1112-MIA-APF-2105-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1172-MIA-RSW-0805-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1124-MIA-RSW-1245-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1126-MIA-RSW-1510-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1128-MIA-RSW-1720-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1101-RSW-MIA-0700-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1103-RSW-MIA-0950-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1107-RSW-MIA-1400-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1179-RSW-MIA-1615-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1111-RSW-MIA-1815-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1155-APF-MIA-0700-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1157-APF-MIA-0940-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1159-APF-MIA-1305-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1161-APF-MIA-1505-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1163-APF-MIA-1705-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1165-APF-MIA-1905-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1021-APF-EYW-0945-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1029-APF-EYW-1430-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1033-APF-EYW-1650-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1037-APF-EYW-1945-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1375-TPA-EYW-0810-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1377-TPA-EYW-1245-b129": [
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-j-1379-TPA-EYW-1615-b129": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "pba-provincetown-boston-m-1172-EYW-MIA-0700-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1186-EYW-MIA-0830-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1174-EYW-MIA-1000-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1188-EYW-MIA-1130-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1176-EYW-MIA-1300-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1190-EYW-MIA-1430-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1178-EYW-MIA-1600-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1192-EYW-MIA-1730-b129": [],
+    "pba-provincetown-boston-m-1180-EYW-MIA-1900-b129": [],
+    "pba-provincetown-boston-m-1194-EYW-MIA-2030-b129": [],
+    "pba-provincetown-boston-m-974-EYW-MIA-2330-b129": [],
+    "pba-provincetown-boston-m-984-EYW-APF-1000-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-988-EYW-APF-1645-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1376-EYW-TPA-0945-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1378-EYW-TPA-1420-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1380-EYW-TPA-1800-b129": [],
+    "pba-provincetown-boston-m-1120-MTH-MIA-0700-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1122-MTH-MIA-0915-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1124-MTH-MIA-1115-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1126-MTH-MIA-1415-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1128-MTH-MIA-1615-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1130-MTH-MIA-1815-b129": [],
+    "pba-provincetown-boston-m-975-MIA-EYW-0100-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1173-MIA-EYW-0830-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1187-MIA-EYW-1000-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1175-MIA-EYW-1145-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1189-MIA-EYW-1300-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1177-MIA-EYW-1430-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1191-MIA-EYW-1600-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1179-MIA-EYW-1730-b129": [],
+    "pba-provincetown-boston-m-1193-MIA-EYW-1900-b129": [],
+    "pba-provincetown-boston-m-1181-MIA-EYW-2030-b129": [],
+    "pba-provincetown-boston-m-1195-MIA-EYW-2205-b129": [],
+    "pba-provincetown-boston-m-1121-MIA-MTH-0815-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1123-MIA-MTH-1015-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1125-MIA-MTH-1315-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1127-MIA-MTH-1515-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1129-MIA-MTH-1715-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1131-MIA-MTH-1955-b129": [],
+    "pba-provincetown-boston-m-1156-MIA-APF-0835-b129": [],
+    "pba-provincetown-boston-m-1158-MIA-APF-1205-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1160-MIA-APF-1405-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1162-MIA-APF-1605-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1164-MIA-APF-1805-b129": [],
+    "pba-provincetown-boston-m-1166-MIA-APF-2005-b129": [],
+    "pba-provincetown-boston-m-1112-MIA-APF-2105-b129": [],
+    "pba-provincetown-boston-m-1172-MIA-RSW-0805-b129": [],
+    "pba-provincetown-boston-m-1124-MIA-RSW-1245-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1126-MIA-RSW-1510-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1128-MIA-RSW-1720-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1101-RSW-MIA-0700-b129": [],
+    "pba-provincetown-boston-m-1103-RSW-MIA-0950-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1107-RSW-MIA-1400-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1179-RSW-MIA-1615-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1111-RSW-MIA-1815-b129": [],
+    "pba-provincetown-boston-m-1155-APF-MIA-0700-b129": [],
+    "pba-provincetown-boston-m-1157-APF-MIA-0940-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1159-APF-MIA-1305-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1161-APF-MIA-1505-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1163-APF-MIA-1705-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1165-APF-MIA-1905-b129": [],
+    "pba-provincetown-boston-m-961-APF-EYW-0830-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-989-APF-EYW-1900-b129": [],
+    "pba-provincetown-boston-m-1375-TPA-EYW-0810-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1377-TPA-EYW-1245-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-1379-TPA-EYW-1615-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-976-EYW-RSW-0205-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-960-EYW-RSW-0525-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-986-EYW-RSW-1245-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-977-RSW-EYW-0330-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-985-RSW-EYW-1135-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-987-RSW-EYW-1355-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-961-RSW-APF-0800-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-989-RSW-APF-1830-b129": [],
+    "pba-provincetown-boston-m-1213-RSW-APF-2105-b129": [],
+    "pba-provincetown-boston-m-984-APF-RSW-1055-b129": [
+      "1986-03-01"
+    ],
+    "pba-provincetown-boston-m-988-APF-RSW-1740-b129": [],
+    "pba-provincetown-boston-m-1042-APF-RSW-2010-b129": [],
+    "pba-provincetown-boston-m-1112-APF-RSW-2155-b129": []
+  },
+  "verification_method": "Original scan transcription checked visually; separate manually reviewed durations and expected dates. Fixed UTC-5 arithmetic cross-check against builder using zoneinfo; not an independent second source or second researcher.",
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "same_source_duplicate_movements": 0,
+  "adjacent_source_leg_ground_times": [
+    [
+      "pba-provincetown-boston-j-1172-EYW-MIA-0700-b129@1986-02-28",
+      "pba-provincetown-boston-j-1172-MIA-RSW-0805-b129@1986-02-28",
+      21.0
+    ],
+    [
+      "pba-provincetown-boston-j-1124-MTH-MIA-1115-b129@1986-02-28",
+      "pba-provincetown-boston-j-1124-MIA-RSW-1245-b129@1986-02-28",
+      50.0
+    ],
+    [
+      "pba-provincetown-boston-j-1126-MTH-MIA-1415-b129@1986-02-28",
+      "pba-provincetown-boston-j-1126-MIA-RSW-1510-b129@1986-02-28",
+      15.0
+    ],
+    [
+      "pba-provincetown-boston-j-1128-MTH-MIA-1615-b129@1986-02-28",
+      "pba-provincetown-boston-j-1128-MIA-RSW-1720-b129@1986-02-28",
+      25.0
+    ],
+    [
+      "pba-provincetown-boston-j-1179-RSW-MIA-1615-b129@1986-02-28",
+      "pba-provincetown-boston-j-1179-MIA-EYW-1730-b129@1986-02-28",
+      35.0
+    ],
+    [
+      "pba-provincetown-boston-m-961-RSW-APF-0800-b129@1986-03-01",
+      "pba-provincetown-boston-m-961-APF-EYW-0830-b129@1986-03-01",
+      10.0
+    ],
+    [
+      "pba-provincetown-boston-m-984-EYW-APF-1000-b129@1986-03-01",
+      "pba-provincetown-boston-m-984-APF-RSW-1055-b129@1986-03-01",
+      10.0
+    ],
+    [
+      "pba-provincetown-boston-m-1124-MTH-MIA-1115-b129@1986-03-01",
+      "pba-provincetown-boston-m-1124-MIA-RSW-1245-b129@1986-03-01",
+      50.0
+    ],
+    [
+      "pba-provincetown-boston-m-1126-MTH-MIA-1415-b129@1986-03-01",
+      "pba-provincetown-boston-m-1126-MIA-RSW-1510-b129@1986-03-01",
+      15.0
+    ],
+    [
+      "pba-provincetown-boston-m-1128-MTH-MIA-1615-b129@1986-03-01",
+      "pba-provincetown-boston-m-1128-MIA-RSW-1720-b129@1986-03-01",
+      25.0
+    ]
+  ],
+  "ground_times_reviewed": true,
+  "zero_movement_schedules_reviewed": true,
+  "edition_boundary_reviewed": true,
+  "offsets_verified_against_zoneinfo": {
+    "RSW": -5,
+    "MIA": -5,
+    "TPA": -5,
+    "MTH": -5,
+    "EYW": -5,
+    "APF": -5
+  },
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "All data, 143 fixed-offset UTC intervals, manually reviewed durations/dates, edition switch, weekday/night/window boundaries, duplicates, 10 dated ground chains and prior-object preservation checks passed. Twenty Python tests and three generator checks passed; Unreal not run.",
+  "ground_chain_review_note": "Ten dated chains, seven flight-number patterns. Manually reviewed waits: 1172=21min, 1124=50, 1126=15, 1128=25, 1179=35, 961/984=10. Source consistency only; individual aircraft not inferred.",
+  "specific_boundary_checks": [
+    "No January-edition movement on March 1.",
+    "No March-edition movement on February 27/28.",
+    "974 produces zero movements, not a backdated Friday overnight arrival.",
+    "975 produces one March 1 01:00 local departure.",
+    "1172 EYW–MIA operates Saturday; onward MIA–RSW is explicitly excluded Saturday.",
+    "1129 MIA–MTH, 1128 MIA–RSW, 1163 APF–MIA and 1379 TPA–EYW overlap both window boundaries; each has three dated movements across two editions.",
+    "988 EYW–APF overlaps final boundary; onward APF–RSW starts later and has zero window movements."
+  ]
+}

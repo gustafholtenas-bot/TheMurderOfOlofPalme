@@ -1,0 +1,188 @@
+{
+  "package": "v123",
+  "airport_records": [
+    {
+      "id": "FPO",
+      "name": "Freeport – Grand Bahama",
+      "country": "bs",
+      "timezone": "America/Nassau",
+      "lat": 26.557996,
+      "lon": -78.695583,
+      "coordinate_source": "https://ourairports.com/airports/MYGF/",
+      "coordinate_record_id": "MYGF",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ],
+      "location_note": "Contemporary Pan Am origin panel, printed p.42, identifies Freeport/Grand Bahama. No modern terminal reconstruction is implied. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    },
+    {
+      "id": "PLS",
+      "name": "Providenciales (1986)",
+      "country": "tc",
+      "timezone": "America/Grand_Turk",
+      "lat": 21.773697,
+      "lon": -72.268321,
+      "coordinate_source": "https://ourairports.com/airports/MBPV/",
+      "coordinate_record_id": "MBPV",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://tciairports.com/about-tciaa"
+      ],
+      "location_note": "Contemporary Pan Am panel printed p.83 identifies Providenciales. Later Howard Hamilton naming is not backdated. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    },
+    {
+      "id": "GDT",
+      "name": "Grand Turk",
+      "country": "tc",
+      "timezone": "America/Grand_Turk",
+      "lat": 21.4445,
+      "lon": -71.142303,
+      "coordinate_source": "https://ourairports.com/airports/MBGT/",
+      "coordinate_record_id": "MBGT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://tciairports.com/about-tciaa"
+      ],
+      "location_note": "Contemporary Pan Am panel printed p.43 identifies Grand Turk. Neutral geographical name retained; honorary renaming date is not asserted. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    },
+    {
+      "id": "ANU",
+      "name": "Antigua – V. C. Bird",
+      "country": "ag",
+      "timezone": "America/Antigua",
+      "lat": 17.1367,
+      "lon": -61.792702,
+      "coordinate_source": "https://ourairports.com/airports/TAPA/",
+      "coordinate_record_id": "TAPA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://vcbia.com/vcbia-history-info/"
+      ],
+      "location_note": "The airport authority dates the change from Coolidge to V. C. Bird to 1985. Subsequent terminals and apron changes are not reconstructed. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    },
+    {
+      "id": "FDF",
+      "name": "Fort-de-France – Le Lamentin",
+      "country": "mq",
+      "timezone": "America/Martinique",
+      "lat": 14.591,
+      "lon": -61.003201,
+      "coordinate_source": "https://ourairports.com/airports/TFFF/",
+      "coordinate_record_id": "TFFF",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France printed pp.32–34 explicitly identifies Le Lamentin. Later Aime Cesaire naming is not backdated. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    },
+    {
+      "id": "PTP",
+      "name": "Pointe-à-Pitre – Le Raizet",
+      "country": "gp",
+      "timezone": "America/Guadeloupe",
+      "lat": 16.265443,
+      "lon": -61.532754,
+      "coordinate_source": "https://ourairports.com/airports/TFFR/",
+      "coordinate_record_id": "TFFR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France printed pp.79–80 explicitly identifies Le Raizet. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    },
+    {
+      "id": "PAP",
+      "name": "Port-au-Prince (tidtabell: François Duvalier)",
+      "country": "ht",
+      "timezone": "America/Port-au-Prince",
+      "lat": 18.580023,
+      "lon": -72.292596,
+      "coordinate_source": "https://ourairports.com/airports/MTPP/",
+      "coordinate_record_id": "MTPP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "The winter timetable printed pp.80/85 calls this airport Francois Duvalier. This is a source alias, not an assertion about the official name after the February 1986 political change; later Toussaint Louverture naming is not backdated. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    },
+    {
+      "id": "CAY",
+      "name": "Cayenne – Rochambeau (1986)",
+      "country": "gf",
+      "timezone": "America/Cayenne",
+      "lat": 4.819964,
+      "lon": -52.361326,
+      "coordinate_source": "https://ourairports.com/airports/SOCA/",
+      "coordinate_record_id": "SOCA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France printed p.24 explicitly identifies Rochambeau. Later Felix Eboue naming is not backdated. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity has been checked separately."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "tc",
+      "name": {
+        "sv": "Turks- och Caicosöarna",
+        "en": "Turks and Caicos Islands",
+        "en_source": "Turks- och Caicosöarna"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "ag",
+      "name": {
+        "sv": "Antigua och Barbuda",
+        "en": "Antigua and Barbuda",
+        "en_source": "Antigua och Barbuda"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "mq",
+      "name": {
+        "sv": "Martinique",
+        "en": "Martinique",
+        "en_source": "Martinique"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "gp",
+      "name": {
+        "sv": "Guadeloupe",
+        "en": "Guadeloupe",
+        "en_source": "Guadeloupe"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "ht",
+      "name": {
+        "sv": "Haiti",
+        "en": "Haiti",
+        "en_source": "Haiti"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "gf",
+      "name": {
+        "sv": "Franska Guyana",
+        "en": "French Guiana",
+        "en_source": "Franska Guyana"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 354,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed 1986 terminal or runway coordinates. Period source names and sites reviewed separately."
+}

@@ -1,0 +1,55 @@
+{
+  "package": "v121",
+  "held_rows": [
+    {
+      "flight": "LY324",
+      "route": "ORY–TLV",
+      "reason": "Lördag22:50–04:05 nästa dag är redan importerad i batch117. Bekräftad mot egen utgåva; ingen dubblett.",
+      "decision": "corroborated_existing"
+    },
+    {
+      "flight": "LY358",
+      "route": "FRA–TLV",
+      "reason": "Lördag18:15–23:10 gäller bara till25januari.19:45–00:40 nästa dag från1februari är den accepterade varianten.",
+      "decision": "expired_variant_excluded"
+    },
+    {
+      "flight": "LY323",
+      "route": "TLV–ORY",
+      "reason": "Fredag09:30–14:40 går viaZRH. Endast den egna tidsatta raden TLV–ZRH09:30–12:40 importeras; tid för ZRH–ORY konstrueras inte.",
+      "decision": "through_itinerary_not_imported"
+    },
+    {
+      "flight": "LY005 / LY512",
+      "route": "TLV–ORD/LAX / JNB–TLV",
+      "reason": "Tryckt VIA anger AMS och eventuellt ORD, respektive NBO. En genomgående resa ersätter inte tidsatta fysiska ben. JNB–NBO saknar egen ankomsttid på dessa paneler.",
+      "decision": "missing_intermediate_times"
+    },
+    {
+      "flight": "LY008 / LY512",
+      "route": "JFK–TLV / NBO–TLV",
+      "reason": "Lördag22:45 i NewYork motsvarar söndag03:45UTC; söndag04:50 i Nairobi motsvarar01:50UTC. Båda börjar efter fönstret.",
+      "decision": "outside_window"
+    },
+    {
+      "flight": "LY443 / LY444",
+      "route": "TLV–CAI / CAI–TLV",
+      "reason": "Källans söndags-/måndags-/torsdags-/tisdagsrader har inga intervall som överlappar fönstret. Torsdagsreturen avslutas27februari21:20UTC, före starten22:21:30.",
+      "decision": "outside_window"
+    },
+    {
+      "flight": "Eilat schedules",
+      "route": "ETH-related",
+      "reason": "Foto2 klipper av kolumnerna till höger. Kompletta klockslag, flygnummer och VIA kan inte läsas. Ingen Eilat-avgång skapas.",
+      "decision": "cropped_source"
+    },
+    {
+      "flight": "LY571 / LY572",
+      "route": "TLV–OTP / OTP–TLV",
+      "reason": "Måndag och varannan vecka enligt not2; ingen överlappning med observationsfönstret.",
+      "decision": "outside_window"
+    }
+  ],
+  "old_runtime_records_changed": false,
+  "previous_held_decisions_file": "middle_east_withheld_batch117.json"
+}

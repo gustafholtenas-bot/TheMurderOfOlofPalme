@@ -1,0 +1,53 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    11,
+    14,
+    15,
+    17,
+    91,
+    204,
+    227,
+    236
+  ],
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "11": 8,
+    "14": 10,
+    "15": 10,
+    "17": 11,
+    "91": 48,
+    "204": 105,
+    "227": 116,
+    "236": 121,
+    "260": 133,
+    "261": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Eleven complete direction headings: 47 visually reviewed rows; 42 accepted nonstop schedules (8 Delta, 34 ASA), two through-stop rows and three connections excluded. The triangle and p4 number ranges identify ASA. All accepted rows have no dated footnotes.",
+    "Blank means daily; X6 excludes Saturday; X7 excludes Sunday; X67 is Monday through Friday. Each physical leg retains its own frequency. ATL–TRI 1496 is X67; TRI–ATL 1496 is X6. ATL–ROA 1509 is X7; ROA–ATL 1509 is daily.",
+    "Service 1210 is ATL–GAD–ANB–ATL in the p264 itinerary. Its separately printed legs are ATL–GAD 09:00–08:45 Central X7, GAD–ANB 08:50–09:10 X7, and ANB–ATL 09:25–11:10 Eastern daily. Five minutes at GAD and fifteen at ANB. Through ATL–ANB and GAD–ATL rows do not create extra nonstop legs.",
+    "ATL–ANB 1211 14:25–14:10 and 1212 21:25–21:10, plus ATL–GAD 1210 09:00–08:45 and 1472 20:50–20:35, arrive the same local day. The earlier wall clock is caused by Eastern-to-Central time; each flight lasts 45 minutes. Independent manual day offsets are zero.",
+    "ATL–ROA 1509 arrives 12:01, not 12:10: the magnified original confirms 10:30–12:01. The return departs 12:30, a 29-minute ground interval. ROA services 1510 and 1511 have 25-minute turns.",
+    "ATL–TRI 1497 is 11:47–13:07; return departs 13:20, a thirteen-minute turn. 1498 arrives 20:10 and returns 20:30. TRI is the Tennessee/Virginia regional airport near Blountville and uses Eastern time.",
+    "ATL–ROA 1512 22:55–00:25 and ATL–TRI 1499 23:00–00:20 are X6 and arrive the next local calendar day. The p264 itineraries terminate these services at ROA/TRI; no unprinted return is inferred.",
+    "Tallahassee is Eastern UTC−5 despite its Florida Panhandle location. ATL–TLH 1103 is X67; TLH–ATL 616 is X6. The noon token 1200n on ATL–TLH 311 is 12:00. Each ASA TLH turn is 15 or 20 minutes.",
+    "ATL/ROA/TRI/TLH use winter UTC−5; ANB/GAD use UTC−6. Explicit day offsets, independent 24-hour transcription, fixed winter offsets, weekdays and the exact 48-hour overlap match all generated movements. Thirteen same-number transitions have checked ground intervals of 5–29 minutes; these do not prove aircraft identity.",
+    "Directory p260 identifies Anniston Calhoun County and Gadsden Municipal; p261 identifies Roanoke Municipal, Tri-City Regional and Tallahassee Municipal. Airport/municipal histories and FAA site records distinguish these fields from similarly named airports and later terminals. Coordinates are approximate airport-area markers.",
+    "All prior movements, schedules, airlines and airports unchanged, including earlier corrections and three held conflicts. Timetable end date, later amendments and actual operation unverified. Original scans not redistributed."
+  ]
+}

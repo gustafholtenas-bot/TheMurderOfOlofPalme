@@ -1,0 +1,60 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    16,
+    17,
+    114,
+    156,
+    157,
+    158,
+    160,
+    188,
+    189,
+    190,
+    226
+  ],
+  "airport_directory_printed_page": 261,
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "16": 11,
+    "17": 11,
+    "114": 60,
+    "156": 81,
+    "157": 81,
+    "158": 82,
+    "160": 83,
+    "188": 97,
+    "189": 97,
+    "190": 98,
+    "226": 116,
+    "261": 133,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "55 rows in fifteen complete selected city-direction tables visually reviewed: 28 new nonstop schedules, 25 connections and two through-stop rows excluded.",
+    "All accepted rows are Delta mainline flights. Four accepted rows are X6: 1132 MOB–ATL, 911 ATL–MOB, 626 PNS–ATL and 653 ATL–PNS. All other accepted rows are daily. No accepted row has a dated footnote.",
+    "Under the legend p4, star means off-peak fare, not next-day arrival. All accepted flights arrive the same local calendar day; the two excluded 00:24 SHV connections arrive next day.",
+    "ATL–PNS local arrival is three minutes earlier than local departure, but UTC elapsed time is 57 minutes. ATL–MOB 675/911 have equal local clock times but last 60 minutes.",
+    "MOB, PNS, MLU, JAN, SHV use UTC−6; ATL UTC−5. Independent fixed-offset and weekday calculation matches every generated movement.",
+    "MOB–ATL 980 and PNS–ATL 928 each cross both window boundaries and produce three movements. ATL–MOB 911 would also cross both, but X6 excludes Saturday: only two.",
+    "SHV–PNS 584 is a through row via MLU; SHV–MOB 662 is a through row via MLU. Each physical leg is sourced separately without double counting the through row.",
+    "Fourteen same-flight-number segment transitions involving new legs have positive 20–27 minute ground intervals, verified against existing segments. This does not establish aircraft identity.",
+    "Mobile/Pascagoula is one airport area in the timetable, MOB Bates Field Municipal, not a second flight to Pascagoula or Brookley. The airport authority distinguishes relocated Bates Field from Brookley.",
+    "The p261 airport directory calls PNS Municipal; official airport history says Regional from 1972 and International from 2011. Current coordinates only mark the airport area.",
+    "PNS–MLU, PNS–JAN, PNS–SHV and MOB–MLU selected tables contain no nonstop return to invent. Other city tables remain outside this batch.",
+    "All prior movements, schedules, airlines and airports unchanged; prior corrections and held conflicts retained. Later amendments and timetable end date unverified."
+  ]
+}

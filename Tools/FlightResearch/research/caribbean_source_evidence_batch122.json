@@ -1,0 +1,44 @@
+{
+  "package": "v125",
+  "checked_on": "2026-10-01",
+  "source": "cayman-airways-19851216-winter",
+  "url": "https://www.timetableimages.com/ttimages/kx8512.htm",
+  "images": [
+    {
+      "role": "cover",
+      "url": "https://www.timetableimages.com/i-kl/kx8512a.jpg",
+      "bytes": 168538,
+      "sha256": "b0b0c3a759eeaa9cd78aee7df002a3a696e03c458b5d50e7b1eb9aa49e0baa8c"
+    },
+    {
+      "role": "inside_four_panels",
+      "url": "https://www.timetableimages.com/i-kl/kx8512i.jpg",
+      "bytes": 228363,
+      "sha256": "f17fedd97cbfe88f1d06e11b226cdaf030c58d45236dbe53e14663e9ecf59c50"
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "GCM": -5,
+    "CYB": -5,
+    "LYB": -5,
+    "MIA": -5,
+    "KIN": -5,
+    "MBJ": -5,
+    "IAH": -6
+  },
+  "frequency_policy": "Explicit English weekdays; Daily/ex means except. Normalized numeric1=Monday…7=Sunday.",
+  "stop_policy": "Only Stops=0 independently timed regular rows accepted. Stops=1 and slash-flight aggregates not added as nonstop; missing intermediate clocks not reconstructed.",
+  "timezone_policy": "All times local explicitly printed. Houston UTC−6; other endpoints UTC−5 for this window.",
+  "operator_policy": "JM is Air Jamaica; KX and unprefixed regular rows are published Cayman Airways. No inferred tail, subcontractor or unprinted inter-island aircraft type. Cayman Express charter marketing not confused with later commuter brand.",
+  "important_boundaries": [
+    "062GCM–IAH arrives17:05local, visually enlarged.170minutes after timezone conversion, not220.",
+    "KX050KIN–GCM arrives00:15next local day.",
+    "KX062GCM–IAH Thursday20:15–23:05UTC is already airborne at windowstart22:21:30; full interval retained.",
+    "KX044GCM–MIA and KX035CYB–GCM Saturday depart22:40UTC afterwindowend.",
+    "Seven weekday/late-Saturday schedules have zero movements."
+  ],
+  "previous_held_conflicts_unchanged": true
+}

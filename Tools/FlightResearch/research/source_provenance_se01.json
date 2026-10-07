@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sellin",
+    "url": "https://wpu.nu/images/6/66/FM-1986-02-13_Torsten_Sellin_handbrev_%C3%B6vning_Gustaf.pdf",
+    "bytes": 530292,
+    "sha256": "fdae22fdbfeeac2c838e5256eb47f109c10490a0116098ae417fff1f98b8df6d",
+    "original_distributed": false
+  },
+  {
+    "id": "a6774",
+    "url": "https://wpu.nu/images/3/3a/Pol-1986-05-06_A6774-00_Ang%C3%A5ende_passagerarlistor_SAS.pdf",
+    "bytes": 224054,
+    "sha256": "6e90706f33f48a46393cb3f2afd3e5780142a9e31c45ed663782c214b12fb917",
+    "original_distributed": false
+  },
+  {
+    "id": "d9440",
+    "url": "https://wpu.nu/images/e/e5/Pol-1987-11-23_D9440-01_Lars-Nilsson-%C3%B6vningen-Gustav-Gotland.pdf",
+    "bytes": 1358331,
+    "sha256": "220d5752e5471f640362fb5d987a97120c18f5177c9d3997d651b48f6dcbe40d",
+    "original_distributed": false
+  },
+  {
+    "id": "ppi",
+    "url": "https://arkis2dok.riksarkivet.se/kra/1297/Bakgrund%20PPI-film.pdf",
+    "bytes": 14915501,
+    "sha256": "bacc69ad48b19103f6e2cb2d26ad92d918c1089e1307691c07bcdac5db053f36",
+    "original_distributed": false
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "package": "v119",
+  "airport_records": [
+    {
+      "id": "MJZ",
+      "name": "Mirny (1986)",
+      "country": "su",
+      "timezone": "Asia/Yakutsk",
+      "lat": 62.534698,
+      "lon": 114.039001,
+      "coordinate_source": "https://ourairports.com/airports/UERR/",
+      "coordinate_record_id": "UERR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://map.alrosa.ru/useful/about/",
+        "https://aviaposter.ru/images/007/007000090.jpg"
+      ],
+      "location_note": "Official operator history records the Mirny unit in 1971 and 1979; the replacement airport is described as a future 2027 opening. The marker uses the existing UERR field, not that new site. Current coordinates are an approximate airfield marker, not reconstructed 1986 terminals, runway thresholds or a surveyed historical reference point. Modern IATA/ICAO codes are database locators; the Mirny source prints city names only."
+    },
+    {
+      "id": "YKS",
+      "name": "Yakutsk (1986)",
+      "country": "su",
+      "timezone": "Asia/Yakutsk",
+      "lat": 62.0933,
+      "lon": 129.770996,
+      "coordinate_source": "https://ourairports.com/airports/UEEE/",
+      "coordinate_record_id": "UEEE",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://yks.aero/about/history",
+        "https://aviaposter.ru/images/007/007000090.jpg"
+      ],
+      "location_note": "Official chronology records the 1962 runway, 1963 terminal and airport operations in 1983, 1985 and 1986. The modern honorary name is not applied to 1986. Current coordinates are an approximate airfield marker, not reconstructed 1986 terminals, runway thresholds or a surveyed historical reference point. Modern IATA/ICAO codes are database locators; the Mirny source prints city names only."
+    },
+    {
+      "id": "ULK",
+      "name": "Lensk (1986)",
+      "country": "su",
+      "timezone": "Asia/Yakutsk",
+      "lat": 60.723594,
+      "lon": 114.825319,
+      "coordinate_source": "https://ourairports.com/airports/UERL/",
+      "coordinate_record_id": "UERL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://sever.aero/lensk/about/history/",
+        "https://aviaposter.ru/images/007/007000090.jpg"
+      ],
+      "location_note": "Official operator history dates the move to the present airfield to 1964; the earlier settlement/ice airfields are not used. Current coordinates are an approximate airfield marker, not reconstructed 1986 terminals, runway thresholds or a surveyed historical reference point. Modern IATA/ICAO codes are database locators; the Mirny source prints city names only."
+    },
+    {
+      "id": "IKT",
+      "name": "Irkutsk (1986)",
+      "country": "su",
+      "timezone": "Asia/Irkutsk",
+      "lat": 52.266707,
+      "lon": 104.395563,
+      "coordinate_source": "https://ourairports.com/airports/UIII/",
+      "coordinate_record_id": "UIII",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://iktport.ru/ru/about/history",
+        "https://aviaposter.ru/images/007/007000090.jpg"
+      ],
+      "location_note": "Official airport history explicitly locates the 1929 construction at the present airport site; regular flights began in 1932 and the domestic terminal opened in 1976. Not the earlier Bokovo landing ground or river hydroport. Current coordinates are an approximate airfield marker, not reconstructed 1986 terminals, runway thresholds or a surveyed historical reference point. Modern IATA/ICAO codes are database locators; the Mirny source prints city names only."
+    },
+    {
+      "id": "NYR",
+      "name": "Nyurba (1986)",
+      "country": "su",
+      "timezone": "Asia/Yakutsk",
+      "lat": 63.296703,
+      "lon": 118.341953,
+      "coordinate_source": "https://ourairports.com/airports/UENN/",
+      "coordinate_record_id": "UENN",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://sever.aero/nyurba/about/history/",
+        "https://aviaposter.ru/images/007/007000090.jpg"
+      ],
+      "location_note": "Operator history records the Nyurba aviation base from 1956 and the airfield continuing today. Mapping the printed city to UENN is an airfield-level identification; exact 1986 reference-point continuity has not been independently surveyed. Current coordinates are an approximate airfield marker, not reconstructed 1986 terminals, runway thresholds or a surveyed historical reference point. Modern IATA/ICAO codes are database locators; the Mirny source prints city names only."
+    },
+    {
+      "id": "PYJ",
+      "name": "Polyarny / Udachny (1986)",
+      "country": "su",
+      "timezone": "Asia/Yakutsk",
+      "lat": 66.400398,
+      "lon": 112.029999,
+      "coordinate_source": "https://ourairports.com/airports/UERP/",
+      "coordinate_record_id": "UERP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://aerosever.com/2020/07/aeroportu-polyarnyj-ispolnilos-45-let/",
+        "https://aviaposter.ru/images/007/007000090.jpg"
+      ],
+      "location_note": "Official operator history dates the concrete field opening to 15 July 1975 and runway extension to August 1976, outside Udachny. The former temporary Daldyn field is not used. Current coordinates are an approximate airfield marker, not reconstructed 1986 terminals, runway thresholds or a surveyed historical reference point. Modern IATA/ICAO codes are database locators; the Mirny source prints city names only."
+    },
+    {
+      "id": "SUY",
+      "name": "Suntar (1986)",
+      "country": "su",
+      "timezone": "Asia/Yakutsk",
+      "lat": 62.185001,
+      "lon": 117.635002,
+      "coordinate_source": "https://ourairports.com/airports/UENS/",
+      "coordinate_record_id": "UENS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://sever.aero/без-категории/с-юбилеем-аэропорт-сунтар/",
+        "https://aviaposter.ru/images/007/007000090.jpg"
+      ],
+      "location_note": "Official operator anniversary history dates relocation to Chokhulakh, three kilometres outside Suntar, to 23 May 1973. The earlier village landing area is not used. Current coordinates are an approximate airfield marker, not reconstructed 1986 terminals, runway thresholds or a surveyed historical reference point. Modern IATA/ICAO codes are database locators; the Mirny source prints city names only."
+    }
+  ],
+  "existing_airports_unchanged": 322,
+  "new_country_records": [],
+  "precision": "Approximate airfield markers; no claim to surveyed historical airport reference points. Nyurba site continuity is less strongly documented than the explicit relocation dates for Lensk, Polyarny and Suntar."
+}

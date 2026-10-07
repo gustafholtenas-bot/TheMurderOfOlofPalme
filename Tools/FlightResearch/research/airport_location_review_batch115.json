@@ -1,0 +1,28 @@
+{
+  "package": "v118",
+  "airport_records": [
+    {
+      "id": "GRR",
+      "name": "Grand Rapids / Kent County International (1986)",
+      "country": "us",
+      "timezone": "America/Detroit",
+      "lat": 42.880798,
+      "lon": -85.522797,
+      "coordinate_source": "https://ourairports.com/airports/KGRR/",
+      "coordinate_record_id": "KGRR",
+      "timetable_code": "GRR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.grr.org/history",
+        "https://dlg.usg.edu/record/delta_nwa-tt_nwa-tt-19851218"
+      ],
+      "location_note": "The airport authority records transfer to the current Cascade Township site on 23 November 1963, the Kent County International name from 27 January 1977, and renaming to Gerald R. Ford in 1999. The 1986 label therefore retains Kent County International. Contemporary timetable rows explicitly identify Grand Rapids, Michigan, not Grand Rapids, Minnesota. Current OurAirports coordinates are an approximate marker of the same airfield, not reconstructed 1986 terminals, reference points or runway thresholds."
+    }
+  ],
+  "history_url": "https://www.grr.org/history",
+  "coordinate_url": "https://ourairports.com/airports/KGRR/",
+  "reviewed_on": "2026-10-01",
+  "historical_site_precision": "Official authority history confirms the current site from November1963 and Kent County International name from January1977 to1999. Coordinates mark the same airfield approximately; no historical gate, terminal or exact reference-point reconstruction.",
+  "existing_airports_unchanged": 321,
+  "new_country_records": []
+}

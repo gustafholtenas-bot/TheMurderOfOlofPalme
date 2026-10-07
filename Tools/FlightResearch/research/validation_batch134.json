@@ -1,0 +1,3778 @@
+{
+  "package": "v137",
+  "baseline_archive_sha256": "db0b723cada68dae5c17988f43cd6a682b6b84e47667a8f7710633775ca556ec",
+  "previous_movements_unchanged": 10042,
+  "previous_schedules_unchanged": 6101,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 392,
+  "previous_countries_unchanged": 121,
+  "modified_airline_ids": [],
+  "modified_previous_source_ids": [
+    "republic-19860214-employee"
+  ],
+  "source_metadata_before": {
+    "id": "republic-19860214-employee",
+    "title": "Republic Airlines • Employee System Timetable •14Feb–1Mar1986",
+    "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+    "kind": "timetable",
+    "access": "full_scan",
+    "valid_from": "1986-02-14",
+    "valid_to": "1986-03-01",
+    "window_reviewed": true,
+    "reviewed_pages": [
+      "Unnumbered cover(scan1): explicit validity14Feb–1Mar1986",
+      "Unnumbered schedule panels(scans2–6):68 selected blank-ST jet rows",
+      "Legend(scan6):day numbers, X, A/P, ST and EXP operator attribution",
+      "City-code index(scan7):CUN,GCM and US airport identities",
+      "V131: scans 2–6, 61 additional blank-ST mainline jet rows; scan 7 airport codes; scan 6 weekday, ST and EXP legend.",
+      "V136: scans2–6,110 new blank-ST mainline jet rows around Memphis; scan6 legend. TYS–CHA287 and CHA–MEM287 weekend rows give zero window movements."
+    ],
+    "checked_on": "2026-10-02",
+    "publication_index_url": "https://northwestairlineshistory.org/timetables-republic/",
+    "notes": {
+      "sv": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår. Tillägg v131: 61 separata jetben granskade på skanning 2–6 för Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City i Florida, New Orleans och Houston Hobby/Intercontinental samt Memphis/Detroit. Endast tom ST-kolumn accepteras. 60 scheman ger rörelser; RC767 lördag kväll ligger utanför tidsfönstret. Äldre 68 scheman och samtliga äldre rörelser är oförändrade. Källans uttryckliga giltighet 14 februari–1 mars 1986 täcker hela importen; ändringsblad är inte fullständigt inventerade. Tillägg v136:110 separata jetben på23riktade schemapar kring Memphis granskade i skanning2–6. Atlanta, Birmingham, Nashville, Baton Rouge, Chattanooga, Huntsville, Little Rock, Shreveport, Knoxville, Detroit och Minneapolis; även TYS–CHA. Två sena helgscheman ger noll utfall. Nätgranskningen är fortfarande partiell. Varje ben behåller egna veckodagar. Befintliga flygplatser och äldre scheman/rörelser bevaras. Publicerade planer, inte faktisk drift eller individflygplan.",
+      "en": "Republic Employee System Timetable, cover validity14February–1March1986. Scans2–6 reviewed for separately timed segments with blank ST (no intermediate stops). ST=stops, X=except and1=Monday…7=Sunday per scan6. Blank FRQ interpreted as daily. A/P means AM/PM; times interpreted as local by timetable convention and timezone consistency. No explicit all-times-local statement located. Only Republic mainline jet codes accepted; EXP services operated by other airlines excluded. Printed DC9/D9S/D95/72S codes retained without identifying individual aircraft. Partial coverage of Grand Cayman, Cancun and five Florida airports, plus Detroit/Memphis/Minneapolis links. 68 schedules; late Saturday departures filtered out of movements. Scheduled, not confirmed operation. Remaining network and amendments unreviewed. V131 addendum: 61 separately timed mainline jet rows on scans 2–6 reviewed for Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City Florida, New Orleans, Houston Hobby/Intercontinental and Memphis/Detroit. Blank ST only; 60 schedules contribute movements, RC767 Saturday evening is outside the window. Previous 68 schedules and all older movements preserved. Explicit cover validity 14 February–1 March 1986 covers the import; amendments not completely inventoried. V136 addendum:110 separately timed mainline jet rows on23directed schedule pairs around Memphis reviewed onscans2–6: Atlanta,Birmingham,Nashville,BatonRouge,Chattanooga,Huntsville,LittleRock,Shreveport,Knoxville,Detroit,Minneapolis and TYS–CHA. Two late weekend schedules have zero window movements. Partial network review; per-leg days preserved, existing airports and old schedule/movement objects unchanged. Published plans, not actual operation or aircraft identity.",
+      "en_source": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår. Tillägg v131: 61 separata jetben granskade på skanning 2–6 för Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City i Florida, New Orleans och Houston Hobby/Intercontinental samt Memphis/Detroit. Endast tom ST-kolumn accepteras. 60 scheman ger rörelser; RC767 lördag kväll ligger utanför tidsfönstret. Äldre 68 scheman och samtliga äldre rörelser är oförändrade. Källans uttryckliga giltighet 14 februari–1 mars 1986 täcker hela importen; ändringsblad är inte fullständigt inventerade. Tillägg v136:110 separata jetben på23riktade schemapar kring Memphis granskade i skanning2–6. Atlanta, Birmingham, Nashville, Baton Rouge, Chattanooga, Huntsville, Little Rock, Shreveport, Knoxville, Detroit och Minneapolis; även TYS–CHA. Två sena helgscheman ger noll utfall. Nätgranskningen är fortfarande partiell. Varje ben behåller egna veckodagar. Befintliga flygplatser och äldre scheman/rörelser bevaras. Publicerade planer, inte faktisk drift eller individflygplan."
+    }
+  },
+  "source_metadata_after": {
+    "id": "republic-19860214-employee",
+    "title": "Republic Airlines • Employee System Timetable •14Feb–1Mar1986",
+    "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+    "kind": "timetable",
+    "access": "full_scan",
+    "valid_from": "1986-02-14",
+    "valid_to": "1986-03-01",
+    "window_reviewed": true,
+    "reviewed_pages": [
+      "Unnumbered cover(scan1): explicit validity14Feb–1Mar1986",
+      "Unnumbered schedule panels(scans2–6):68 selected blank-ST jet rows",
+      "Legend(scan6):day numbers, X, A/P, ST and EXP operator attribution",
+      "City-code index(scan7):CUN,GCM and US airport identities",
+      "V131: scans 2–6, 61 additional blank-ST mainline jet rows; scan 7 airport codes; scan 6 weekday, ST and EXP legend.",
+      "V136: scans2–6,110 new blank-ST mainline jet rows around Memphis; scan6 legend. TYS–CHA287 and CHA–MEM287 weekend rows give zero window movements.",
+      "V137: scans2–6,135new blank-ST mainline jet rows on40selected to/from Memphis headings; scan6 legend. MEM–ORD481 arrival00:09+1 checked in enlarged original."
+    ],
+    "checked_on": "2026-10-02",
+    "publication_index_url": "https://northwestairlineshistory.org/timetables-republic/",
+    "notes": {
+      "sv": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår. Tillägg v131: 61 separata jetben granskade på skanning 2–6 för Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City i Florida, New Orleans och Houston Hobby/Intercontinental samt Memphis/Detroit. Endast tom ST-kolumn accepteras. 60 scheman ger rörelser; RC767 lördag kväll ligger utanför tidsfönstret. Äldre 68 scheman och samtliga äldre rörelser är oförändrade. Källans uttryckliga giltighet 14 februari–1 mars 1986 täcker hela importen; ändringsblad är inte fullständigt inventerade. Tillägg v136:110 separata jetben på23riktade schemapar kring Memphis granskade i skanning2–6. Atlanta, Birmingham, Nashville, Baton Rouge, Chattanooga, Huntsville, Little Rock, Shreveport, Knoxville, Detroit och Minneapolis; även TYS–CHA. Två sena helgscheman ger noll utfall. Nätgranskningen är fortfarande partiell. Varje ben behåller egna veckodagar. Befintliga flygplatser och äldre scheman/rörelser bevaras. Publicerade planer, inte faktisk drift eller individflygplan. Tillägg v137:135 separata jetben på40riktade schemapar till/från Memphis granskade i skanning2–6. Cincinnati, Washington National/Dulles, Denver Stapleton, Dallas/Fort Worth, Wichita, Indianapolis, Las Vegas, Los Angeles, New York LaGuardia, Kansas City, Milwaukee, Oklahoma City, Chicago O’Hare, Philadelphia, Phoenix, Louisville, San Francisco, StLouis och Tulsa. Wichita Mid-Continent tillförs med historiskt granskad identitet. Alla rader har tom ST. Tre nattankomstscheman. Nätgranskningen är fortsatt partiell; publicerade planer, inte faktisk drift eller individflygplan.",
+      "en": "Republic Employee System Timetable, cover validity14February–1March1986. Scans2–6 reviewed for separately timed segments with blank ST (no intermediate stops). ST=stops, X=except and1=Monday…7=Sunday per scan6. Blank FRQ interpreted as daily. A/P means AM/PM; times interpreted as local by timetable convention and timezone consistency. No explicit all-times-local statement located. Only Republic mainline jet codes accepted; EXP services operated by other airlines excluded. Printed DC9/D9S/D95/72S codes retained without identifying individual aircraft. Partial coverage of Grand Cayman, Cancun and five Florida airports, plus Detroit/Memphis/Minneapolis links. 68 schedules; late Saturday departures filtered out of movements. Scheduled, not confirmed operation. Remaining network and amendments unreviewed. V131 addendum: 61 separately timed mainline jet rows on scans 2–6 reviewed for Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City Florida, New Orleans, Houston Hobby/Intercontinental and Memphis/Detroit. Blank ST only; 60 schedules contribute movements, RC767 Saturday evening is outside the window. Previous 68 schedules and all older movements preserved. Explicit cover validity 14 February–1 March 1986 covers the import; amendments not completely inventoried. V136 addendum:110 separately timed mainline jet rows on23directed schedule pairs around Memphis reviewed onscans2–6: Atlanta,Birmingham,Nashville,BatonRouge,Chattanooga,Huntsville,LittleRock,Shreveport,Knoxville,Detroit,Minneapolis and TYS–CHA. Two late weekend schedules have zero window movements. Partial network review; per-leg days preserved, existing airports and old schedule/movement objects unchanged. Published plans, not actual operation or aircraft identity. V137 addendum:135 separately timed mainline jet rows on40directed schedule pairs to/from Memphis, visually reviewed onscans2–6. New Wichita Mid-Continent airport identity reviewed separately. All rows have blank ST; three next-day arrival schemas. Partial network review; scheduled plans, not actual operations or aircraft identities. All older schedules/movements unchanged.",
+      "en_source": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår. Tillägg v131: 61 separata jetben granskade på skanning 2–6 för Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City i Florida, New Orleans och Houston Hobby/Intercontinental samt Memphis/Detroit. Endast tom ST-kolumn accepteras. 60 scheman ger rörelser; RC767 lördag kväll ligger utanför tidsfönstret. Äldre 68 scheman och samtliga äldre rörelser är oförändrade. Källans uttryckliga giltighet 14 februari–1 mars 1986 täcker hela importen; ändringsblad är inte fullständigt inventerade. Tillägg v136:110 separata jetben på23riktade schemapar kring Memphis granskade i skanning2–6. Atlanta, Birmingham, Nashville, Baton Rouge, Chattanooga, Huntsville, Little Rock, Shreveport, Knoxville, Detroit och Minneapolis; även TYS–CHA. Två sena helgscheman ger noll utfall. Nätgranskningen är fortfarande partiell. Varje ben behåller egna veckodagar. Befintliga flygplatser och äldre scheman/rörelser bevaras. Publicerade planer, inte faktisk drift eller individflygplan. Tillägg v137:135 separata jetben på40riktade schemapar till/från Memphis granskade i skanning2–6. Cincinnati, Washington National/Dulles, Denver Stapleton, Dallas/Fort Worth, Wichita, Indianapolis, Las Vegas, Los Angeles, New York LaGuardia, Kansas City, Milwaukee, Oklahoma City, Chicago O’Hare, Philadelphia, Phoenix, Louisville, San Francisco, StLouis och Tulsa. Wichita Mid-Continent tillförs med historiskt granskad identitet. Alla rader har tom ST. Tre nattankomstscheman. Nätgranskningen är fortsatt partiell; publicerade planer, inte faktisk drift eller individflygplan."
+    }
+  },
+  "independent_manual_rows": 135,
+  "independent_utc_movements_verified": 291,
+  "independent_utc_expected": {
+    "republic-airlines-161-CVG-MEM-0745-b134@1986-02-28": [
+      "1986-02-28T12:45:00Z",
+      "1986-02-28T14:00:00Z"
+    ],
+    "republic-airlines-161-CVG-MEM-0745-b134@1986-03-01": [
+      "1986-03-01T12:45:00Z",
+      "1986-03-01T14:00:00Z"
+    ],
+    "republic-airlines-822-CVG-MEM-1120-b134@1986-02-28": [
+      "1986-02-28T16:20:00Z",
+      "1986-02-28T17:35:00Z"
+    ],
+    "republic-airlines-822-CVG-MEM-1120-b134@1986-03-01": [
+      "1986-03-01T16:20:00Z",
+      "1986-03-01T17:35:00Z"
+    ],
+    "republic-airlines-261-CVG-MEM-1830-b134@1986-02-27": [
+      "1986-02-27T23:30:00Z",
+      "1986-02-28T00:45:00Z"
+    ],
+    "republic-airlines-261-CVG-MEM-1830-b134@1986-02-28": [
+      "1986-02-28T23:30:00Z",
+      "1986-03-01T00:45:00Z"
+    ],
+    "republic-airlines-448-MEM-CVG-0845-b134@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "republic-airlines-448-MEM-CVG-0845-b134@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "republic-airlines-684-MEM-CVG-1550-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-27T23:00:00Z"
+    ],
+    "republic-airlines-684-MEM-CVG-1550-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-02-28T23:00:00Z"
+    ],
+    "republic-airlines-684-MEM-CVG-1550-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-01T23:00:00Z"
+    ],
+    "republic-airlines-844-MEM-CVG-1935-b134@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "republic-airlines-844-MEM-CVG-1935-b134@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T02:45:00Z"
+    ],
+    "republic-airlines-685-DCA-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T14:15:00Z"
+    ],
+    "republic-airlines-685-DCA-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T14:15:00Z"
+    ],
+    "republic-airlines-839-DCA-MEM-1750-b134@1986-02-27": [
+      "1986-02-27T22:50:00Z",
+      "1986-02-28T01:05:00Z"
+    ],
+    "republic-airlines-839-DCA-MEM-1750-b134@1986-02-28": [
+      "1986-02-28T22:50:00Z",
+      "1986-03-01T01:05:00Z"
+    ],
+    "republic-airlines-838-MEM-DCA-0915-b134@1986-02-28": [
+      "1986-02-28T15:15:00Z",
+      "1986-02-28T17:03:00Z"
+    ],
+    "republic-airlines-838-MEM-DCA-0915-b134@1986-03-01": [
+      "1986-03-01T15:15:00Z",
+      "1986-03-01T17:03:00Z"
+    ],
+    "republic-airlines-240-MEM-DCA-1925-b134@1986-02-27": [
+      "1986-02-28T01:25:00Z",
+      "1986-02-28T02:59:00Z"
+    ],
+    "republic-airlines-240-MEM-DCA-1925-b134@1986-02-28": [
+      "1986-03-01T01:25:00Z",
+      "1986-03-01T02:59:00Z"
+    ],
+    "republic-airlines-684-DEN-STAPLETON-MEM-1135-b134@1986-02-28": [
+      "1986-02-28T18:35:00Z",
+      "1986-02-28T20:37:00Z"
+    ],
+    "republic-airlines-684-DEN-STAPLETON-MEM-1135-b134@1986-03-01": [
+      "1986-03-01T18:35:00Z",
+      "1986-03-01T20:37:00Z"
+    ],
+    "republic-airlines-690-DEN-STAPLETON-MEM-1855-b134@1986-02-27": [
+      "1986-02-28T01:55:00Z",
+      "1986-02-28T03:57:00Z"
+    ],
+    "republic-airlines-690-DEN-STAPLETON-MEM-1855-b134@1986-02-28": [
+      "1986-03-01T01:55:00Z",
+      "1986-03-01T03:57:00Z"
+    ],
+    "republic-airlines-685-MEM-DEN-STAPLETON-0910-b134@1986-02-28": [
+      "1986-02-28T15:10:00Z",
+      "1986-02-28T17:40:00Z"
+    ],
+    "republic-airlines-685-MEM-DEN-STAPLETON-0910-b134@1986-03-01": [
+      "1986-03-01T15:10:00Z",
+      "1986-03-01T17:40:00Z"
+    ],
+    "republic-airlines-691-MEM-DEN-STAPLETON-1540-b134@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-28T00:10:00Z"
+    ],
+    "republic-airlines-691-MEM-DEN-STAPLETON-1540-b134@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-03-01T00:10:00Z"
+    ],
+    "republic-airlines-691-MEM-DEN-STAPLETON-1540-b134@1986-03-01": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-02T00:10:00Z"
+    ],
+    "republic-airlines-838-DFW-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:13:00Z"
+    ],
+    "republic-airlines-838-DFW-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:13:00Z"
+    ],
+    "republic-airlines-288-DFW-MEM-1040-b134@1986-02-28": [
+      "1986-02-28T16:40:00Z",
+      "1986-02-28T17:53:00Z"
+    ],
+    "republic-airlines-288-DFW-MEM-1040-b134@1986-03-01": [
+      "1986-03-01T16:40:00Z",
+      "1986-03-01T17:53:00Z"
+    ],
+    "republic-airlines-258-DFW-MEM-1740-b134@1986-02-27": [
+      "1986-02-27T23:40:00Z",
+      "1986-02-28T00:53:00Z"
+    ],
+    "republic-airlines-258-DFW-MEM-1740-b134@1986-02-28": [
+      "1986-02-28T23:40:00Z",
+      "1986-03-01T00:53:00Z"
+    ],
+    "republic-airlines-254-DFW-MEM-2030-b134@1986-02-27": [
+      "1986-02-28T02:30:00Z",
+      "1986-02-28T03:43:00Z"
+    ],
+    "republic-airlines-254-DFW-MEM-2030-b134@1986-02-28": [
+      "1986-03-01T02:30:00Z",
+      "1986-03-01T03:43:00Z"
+    ],
+    "republic-airlines-293-MEM-DFW-0845-b134@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T16:13:00Z"
+    ],
+    "republic-airlines-293-MEM-DFW-0845-b134@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T16:13:00Z"
+    ],
+    "republic-airlines-819-MEM-DFW-1540-b134@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-27T23:08:00Z"
+    ],
+    "republic-airlines-819-MEM-DFW-1540-b134@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-02-28T23:08:00Z"
+    ],
+    "republic-airlines-819-MEM-DFW-1540-b134@1986-03-01": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-01T23:08:00Z"
+    ],
+    "republic-airlines-839-MEM-DFW-2000-b134@1986-02-27": [
+      "1986-02-28T02:00:00Z",
+      "1986-02-28T03:28:00Z"
+    ],
+    "republic-airlines-839-MEM-DFW-2000-b134@1986-02-28": [
+      "1986-03-01T02:00:00Z",
+      "1986-03-01T03:28:00Z"
+    ],
+    "republic-airlines-732-MEM-DFW-2245-b134@1986-02-27": [
+      "1986-02-28T04:45:00Z",
+      "1986-02-28T06:13:00Z"
+    ],
+    "republic-airlines-732-MEM-DFW-2245-b134@1986-02-28": [
+      "1986-03-01T04:45:00Z",
+      "1986-03-01T06:13:00Z"
+    ],
+    "republic-airlines-811-IAD-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T14:12:00Z"
+    ],
+    "republic-airlines-811-IAD-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T14:12:00Z"
+    ],
+    "republic-airlines-529-IAD-MEM-1015-b134@1986-02-28": [
+      "1986-02-28T15:15:00Z",
+      "1986-02-28T17:27:00Z"
+    ],
+    "republic-airlines-529-IAD-MEM-1015-b134@1986-03-01": [
+      "1986-03-01T15:15:00Z",
+      "1986-03-01T17:27:00Z"
+    ],
+    "republic-airlines-819-IAD-MEM-1340-b134@1986-02-28": [
+      "1986-02-28T18:40:00Z",
+      "1986-02-28T20:52:00Z"
+    ],
+    "republic-airlines-819-IAD-MEM-1340-b134@1986-03-01": [
+      "1986-03-01T18:40:00Z",
+      "1986-03-01T20:52:00Z"
+    ],
+    "republic-airlines-408-IAD-MEM-1745-b134@1986-02-27": [
+      "1986-02-27T22:45:00Z",
+      "1986-02-28T00:57:00Z"
+    ],
+    "republic-airlines-408-IAD-MEM-1745-b134@1986-02-28": [
+      "1986-02-28T22:45:00Z",
+      "1986-03-01T00:57:00Z"
+    ],
+    "republic-airlines-810-MEM-IAD-0905-b134@1986-02-28": [
+      "1986-02-28T15:05:00Z",
+      "1986-02-28T16:47:00Z"
+    ],
+    "republic-airlines-810-MEM-IAD-0905-b134@1986-03-01": [
+      "1986-03-01T15:05:00Z",
+      "1986-03-01T16:47:00Z"
+    ],
+    "republic-airlines-244-MEM-IAD-1230-b134@1986-02-28": [
+      "1986-02-28T18:30:00Z",
+      "1986-02-28T20:10:00Z"
+    ],
+    "republic-airlines-244-MEM-IAD-1230-b134@1986-03-01": [
+      "1986-03-01T18:30:00Z",
+      "1986-03-01T20:10:00Z"
+    ],
+    "republic-airlines-812-MEM-IAD-1600-b134@1986-02-27": [
+      "1986-02-27T22:00:00Z",
+      "1986-02-27T23:42:00Z"
+    ],
+    "republic-airlines-812-MEM-IAD-1600-b134@1986-02-28": [
+      "1986-02-28T22:00:00Z",
+      "1986-02-28T23:42:00Z"
+    ],
+    "republic-airlines-812-MEM-IAD-1600-b134@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T23:42:00Z"
+    ],
+    "republic-airlines-407-MEM-IAD-1930-b134@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T03:12:00Z"
+    ],
+    "republic-airlines-407-MEM-IAD-1930-b134@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T03:12:00Z"
+    ],
+    "republic-airlines-670-ICT-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:10:00Z"
+    ],
+    "republic-airlines-670-ICT-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:10:00Z"
+    ],
+    "republic-airlines-842-ICT-MEM-1355-b134@1986-02-28": [
+      "1986-02-28T19:55:00Z",
+      "1986-02-28T21:05:00Z"
+    ],
+    "republic-airlines-842-ICT-MEM-1355-b134@1986-03-01": [
+      "1986-03-01T19:55:00Z",
+      "1986-03-01T21:05:00Z"
+    ],
+    "republic-airlines-840-ICT-MEM-1745-b134@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "republic-airlines-840-ICT-MEM-1745-b134@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "republic-airlines-829-MEM-ICT-1205-b134@1986-02-28": [
+      "1986-02-28T18:05:00Z",
+      "1986-02-28T19:30:00Z"
+    ],
+    "republic-airlines-829-MEM-ICT-1205-b134@1986-03-01": [
+      "1986-03-01T18:05:00Z",
+      "1986-03-01T19:30:00Z"
+    ],
+    "republic-airlines-803-MEM-ICT-1550-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-27T23:15:00Z"
+    ],
+    "republic-airlines-803-MEM-ICT-1550-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-02-28T23:15:00Z"
+    ],
+    "republic-airlines-803-MEM-ICT-1550-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-01T23:15:00Z"
+    ],
+    "republic-airlines-806-MEM-ICT-1935-b134@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T03:00:00Z"
+    ],
+    "republic-airlines-806-MEM-ICT-1935-b134@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T03:00:00Z"
+    ],
+    "republic-airlines-665-IND-MEM-0740-b134@1986-02-28": [
+      "1986-02-28T12:40:00Z",
+      "1986-02-28T13:52:00Z"
+    ],
+    "republic-airlines-665-IND-MEM-0740-b134@1986-03-01": [
+      "1986-03-01T12:40:00Z",
+      "1986-03-01T13:52:00Z"
+    ],
+    "republic-airlines-148-IND-MEM-1115-b134@1986-02-28": [
+      "1986-02-28T16:15:00Z",
+      "1986-02-28T17:27:00Z"
+    ],
+    "republic-airlines-148-IND-MEM-1115-b134@1986-03-01": [
+      "1986-03-01T16:15:00Z",
+      "1986-03-01T17:27:00Z"
+    ],
+    "republic-airlines-259-IND-MEM-1500-b134@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T21:10:00Z"
+    ],
+    "republic-airlines-259-IND-MEM-1500-b134@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T21:10:00Z"
+    ],
+    "republic-airlines-521-IND-MEM-1835-b134@1986-02-27": [
+      "1986-02-27T23:35:00Z",
+      "1986-02-28T00:47:00Z"
+    ],
+    "republic-airlines-521-IND-MEM-1835-b134@1986-02-28": [
+      "1986-02-28T23:35:00Z",
+      "1986-03-01T00:47:00Z"
+    ],
+    "republic-airlines-185-IND-MEM-2110-b134@1986-02-27": [
+      "1986-02-28T02:10:00Z",
+      "1986-02-28T03:22:00Z"
+    ],
+    "republic-airlines-185-IND-MEM-2110-b134@1986-02-28": [
+      "1986-03-01T02:10:00Z",
+      "1986-03-01T03:22:00Z"
+    ],
+    "republic-airlines-188-MEM-IND-0845-b134@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "republic-airlines-188-MEM-IND-0845-b134@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "republic-airlines-141-MEM-IND-1225-b134@1986-02-28": [
+      "1986-02-28T18:25:00Z",
+      "1986-02-28T19:35:00Z"
+    ],
+    "republic-airlines-141-MEM-IND-1225-b134@1986-03-01": [
+      "1986-03-01T18:25:00Z",
+      "1986-03-01T19:35:00Z"
+    ],
+    "republic-airlines-814-MEM-IND-1550-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-27T23:00:00Z"
+    ],
+    "republic-airlines-814-MEM-IND-1550-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-02-28T23:00:00Z"
+    ],
+    "republic-airlines-814-MEM-IND-1550-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-01T23:00:00Z"
+    ],
+    "republic-airlines-552-MEM-IND-1930-b134@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T02:40:00Z"
+    ],
+    "republic-airlines-552-MEM-IND-1930-b134@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T02:40:00Z"
+    ],
+    "republic-airlines-552-LAS-MEM-1350-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-28T00:50:00Z"
+    ],
+    "republic-airlines-552-LAS-MEM-1350-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-03-01T00:50:00Z"
+    ],
+    "republic-airlines-552-LAS-MEM-1350-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-02T00:50:00Z"
+    ],
+    "republic-airlines-550-LAS-MEM-1700-b134@1986-02-27": [
+      "1986-02-28T01:00:00Z",
+      "1986-02-28T04:00:00Z"
+    ],
+    "republic-airlines-550-LAS-MEM-1700-b134@1986-02-28": [
+      "1986-03-01T01:00:00Z",
+      "1986-03-01T04:00:00Z"
+    ],
+    "republic-airlines-551-MEM-LAS-0855-b134@1986-02-28": [
+      "1986-02-28T14:55:00Z",
+      "1986-02-28T18:30:00Z"
+    ],
+    "republic-airlines-551-MEM-LAS-0855-b134@1986-03-01": [
+      "1986-03-01T14:55:00Z",
+      "1986-03-01T18:30:00Z"
+    ],
+    "republic-airlines-553-MEM-LAS-1205-b134@1986-02-28": [
+      "1986-02-28T18:05:00Z",
+      "1986-02-28T21:40:00Z"
+    ],
+    "republic-airlines-553-MEM-LAS-1205-b134@1986-03-01": [
+      "1986-03-01T18:05:00Z",
+      "1986-03-01T21:40:00Z"
+    ],
+    "republic-airlines-708-LAX-MEM-0930-b134@1986-02-28": [
+      "1986-02-28T17:30:00Z",
+      "1986-02-28T20:50:00Z"
+    ],
+    "republic-airlines-708-LAX-MEM-0930-b134@1986-03-01": [
+      "1986-03-01T17:30:00Z",
+      "1986-03-01T20:50:00Z"
+    ],
+    "republic-airlines-556-LAX-MEM-1325-b134@1986-02-27": [
+      "1986-02-27T21:25:00Z",
+      "1986-02-28T00:45:00Z"
+    ],
+    "republic-airlines-556-LAX-MEM-1325-b134@1986-02-28": [
+      "1986-02-28T21:25:00Z",
+      "1986-03-01T00:45:00Z"
+    ],
+    "republic-airlines-556-LAX-MEM-1325-b134@1986-03-01": [
+      "1986-03-01T21:25:00Z",
+      "1986-03-02T00:45:00Z"
+    ],
+    "republic-airlines-558-LAX-MEM-1620-b134@1986-02-27": [
+      "1986-02-28T00:20:00Z",
+      "1986-02-28T03:40:00Z"
+    ],
+    "republic-airlines-558-LAX-MEM-1620-b134@1986-02-28": [
+      "1986-03-01T00:20:00Z",
+      "1986-03-01T03:40:00Z"
+    ],
+    "republic-airlines-555-MEM-LAX-0900-b134@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T18:50:00Z"
+    ],
+    "republic-airlines-555-MEM-LAX-0900-b134@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T18:50:00Z"
+    ],
+    "republic-airlines-569-MEM-LAX-1225-b134@1986-02-28": [
+      "1986-02-28T18:25:00Z",
+      "1986-02-28T22:15:00Z"
+    ],
+    "republic-airlines-569-MEM-LAX-1225-b134@1986-03-01": [
+      "1986-03-01T18:25:00Z",
+      "1986-03-01T22:15:00Z"
+    ],
+    "republic-airlines-573-MEM-LAX-1540-b134@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-28T01:30:00Z"
+    ],
+    "republic-airlines-573-MEM-LAX-1540-b134@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-03-01T01:30:00Z"
+    ],
+    "republic-airlines-573-MEM-LAX-1540-b134@1986-03-01": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-02T01:30:00Z"
+    ],
+    "republic-airlines-557-MEM-LAX-1955-b134@1986-02-27": [
+      "1986-02-28T01:55:00Z",
+      "1986-02-28T05:45:00Z"
+    ],
+    "republic-airlines-557-MEM-LAX-1955-b134@1986-02-28": [
+      "1986-03-01T01:55:00Z",
+      "1986-03-01T05:45:00Z"
+    ],
+    "republic-airlines-631-LGA-MEM-0930-b134@1986-02-28": [
+      "1986-02-28T14:30:00Z",
+      "1986-02-28T17:30:00Z"
+    ],
+    "republic-airlines-631-LGA-MEM-0930-b134@1986-03-01": [
+      "1986-03-01T14:30:00Z",
+      "1986-03-01T17:30:00Z"
+    ],
+    "republic-airlines-633-LGA-MEM-1255-b134@1986-02-28": [
+      "1986-02-28T17:55:00Z",
+      "1986-02-28T20:55:00Z"
+    ],
+    "republic-airlines-633-LGA-MEM-1255-b134@1986-03-01": [
+      "1986-03-01T17:55:00Z",
+      "1986-03-01T20:55:00Z"
+    ],
+    "republic-airlines-635-LGA-MEM-1650-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-28T00:50:00Z"
+    ],
+    "republic-airlines-635-LGA-MEM-1650-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-03-01T00:50:00Z"
+    ],
+    "republic-airlines-635-LGA-MEM-1650-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-02T00:50:00Z"
+    ],
+    "republic-airlines-637-LGA-MEM-1929-b134@1986-02-27": [
+      "1986-02-28T00:29:00Z",
+      "1986-02-28T03:29:00Z"
+    ],
+    "republic-airlines-637-LGA-MEM-1929-b134@1986-02-28": [
+      "1986-03-01T00:29:00Z",
+      "1986-03-01T03:29:00Z"
+    ],
+    "republic-airlines-630-MEM-LGA-0900-b134@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T17:16:00Z"
+    ],
+    "republic-airlines-630-MEM-LGA-0900-b134@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T17:16:00Z"
+    ],
+    "republic-airlines-632-MEM-LGA-1230-b134@1986-02-28": [
+      "1986-02-28T18:30:00Z",
+      "1986-02-28T20:40:00Z"
+    ],
+    "republic-airlines-632-MEM-LGA-1230-b134@1986-03-01": [
+      "1986-03-01T18:30:00Z",
+      "1986-03-01T20:40:00Z"
+    ],
+    "republic-airlines-634-MEM-LGA-1550-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-28T00:00:00Z"
+    ],
+    "republic-airlines-634-MEM-LGA-1550-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-03-01T00:00:00Z"
+    ],
+    "republic-airlines-634-MEM-LGA-1550-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-02T00:00:00Z"
+    ],
+    "republic-airlines-668-MEM-LGA-1930-b134@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T03:29:00Z"
+    ],
+    "republic-airlines-668-MEM-LGA-1930-b134@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T03:29:00Z"
+    ],
+    "republic-airlines-384-MCI-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:05:00Z"
+    ],
+    "republic-airlines-384-MCI-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:05:00Z"
+    ],
+    "republic-airlines-404-MCI-MEM-1035-b134@1986-02-28": [
+      "1986-02-28T16:35:00Z",
+      "1986-02-28T17:40:00Z"
+    ],
+    "republic-airlines-404-MCI-MEM-1035-b134@1986-03-01": [
+      "1986-03-01T16:35:00Z",
+      "1986-03-01T17:40:00Z"
+    ],
+    "republic-airlines-299-MCI-MEM-1355-b134@1986-02-28": [
+      "1986-02-28T19:55:00Z",
+      "1986-02-28T21:00:00Z"
+    ],
+    "republic-airlines-299-MCI-MEM-1355-b134@1986-03-01": [
+      "1986-03-01T19:55:00Z",
+      "1986-03-01T21:00:00Z"
+    ],
+    "republic-airlines-186-MCI-MEM-1740-b134@1986-02-27": [
+      "1986-02-27T23:40:00Z",
+      "1986-02-28T00:45:00Z"
+    ],
+    "republic-airlines-186-MCI-MEM-1740-b134@1986-02-28": [
+      "1986-02-28T23:40:00Z",
+      "1986-03-01T00:45:00Z"
+    ],
+    "republic-airlines-226-MCI-MEM-2035-b134@1986-02-27": [
+      "1986-02-28T02:35:00Z",
+      "1986-02-28T03:40:00Z"
+    ],
+    "republic-airlines-226-MCI-MEM-2035-b134@1986-02-28": [
+      "1986-03-01T02:35:00Z",
+      "1986-03-01T03:40:00Z"
+    ],
+    "republic-airlines-815-MEM-MCI-0850-b134@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T16:05:00Z"
+    ],
+    "republic-airlines-815-MEM-MCI-0850-b134@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T16:05:00Z"
+    ],
+    "republic-airlines-808-MEM-MCI-1215-b134@1986-02-28": [
+      "1986-02-28T18:15:00Z",
+      "1986-02-28T19:30:00Z"
+    ],
+    "republic-airlines-808-MEM-MCI-1215-b134@1986-03-01": [
+      "1986-03-01T18:15:00Z",
+      "1986-03-01T19:30:00Z"
+    ],
+    "republic-airlines-383-MEM-MCI-1555-b134@1986-02-27": [
+      "1986-02-27T21:55:00Z",
+      "1986-02-27T23:10:00Z"
+    ],
+    "republic-airlines-383-MEM-MCI-1555-b134@1986-02-28": [
+      "1986-02-28T21:55:00Z",
+      "1986-02-28T23:10:00Z"
+    ],
+    "republic-airlines-383-MEM-MCI-1555-b134@1986-03-01": [
+      "1986-03-01T21:55:00Z",
+      "1986-03-01T23:10:00Z"
+    ],
+    "republic-airlines-831-MEM-MCI-1945-b134@1986-02-27": [
+      "1986-02-28T01:45:00Z",
+      "1986-02-28T03:00:00Z"
+    ],
+    "republic-airlines-831-MEM-MCI-1945-b134@1986-02-28": [
+      "1986-03-01T01:45:00Z",
+      "1986-03-01T03:00:00Z"
+    ],
+    "republic-airlines-267-MEM-MCI-2245-b134@1986-02-27": [
+      "1986-02-28T04:45:00Z",
+      "1986-02-28T05:59:00Z"
+    ],
+    "republic-airlines-267-MEM-MCI-2245-b134@1986-02-28": [
+      "1986-03-01T04:45:00Z",
+      "1986-03-01T05:59:00Z"
+    ],
+    "republic-airlines-680-MKE-MEM-0615-b134@1986-02-28": [
+      "1986-02-28T12:15:00Z",
+      "1986-02-28T13:52:00Z"
+    ],
+    "republic-airlines-680-MKE-MEM-0615-b134@1986-03-01": [
+      "1986-03-01T12:15:00Z",
+      "1986-03-01T13:52:00Z"
+    ],
+    "republic-airlines-382-MKE-MEM-0955-b134@1986-02-28": [
+      "1986-02-28T15:55:00Z",
+      "1986-02-28T17:32:00Z"
+    ],
+    "republic-airlines-382-MKE-MEM-0955-b134@1986-03-01": [
+      "1986-03-01T15:55:00Z",
+      "1986-03-01T17:32:00Z"
+    ],
+    "republic-airlines-688-MKE-MEM-1335-b134@1986-02-28": [
+      "1986-02-28T19:35:00Z",
+      "1986-02-28T21:12:00Z"
+    ],
+    "republic-airlines-688-MKE-MEM-1335-b134@1986-03-01": [
+      "1986-03-01T19:35:00Z",
+      "1986-03-01T21:12:00Z"
+    ],
+    "republic-airlines-523-MKE-MEM-1730-b134@1986-02-27": [
+      "1986-02-27T23:30:00Z",
+      "1986-02-28T01:07:00Z"
+    ],
+    "republic-airlines-523-MKE-MEM-1730-b134@1986-02-28": [
+      "1986-02-28T23:30:00Z",
+      "1986-03-01T01:07:00Z"
+    ],
+    "republic-airlines-534-MKE-MEM-2010-b134@1986-02-27": [
+      "1986-02-28T02:10:00Z",
+      "1986-02-28T03:47:00Z"
+    ],
+    "republic-airlines-534-MKE-MEM-2010-b134@1986-02-28": [
+      "1986-03-01T02:10:00Z",
+      "1986-03-01T03:47:00Z"
+    ],
+    "republic-airlines-256-MEM-MKE-0850-b134@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T16:20:00Z"
+    ],
+    "republic-airlines-256-MEM-MKE-0850-b134@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T16:20:00Z"
+    ],
+    "republic-airlines-687-MEM-MKE-1535-b134@1986-02-27": [
+      "1986-02-27T21:35:00Z",
+      "1986-02-27T23:05:00Z"
+    ],
+    "republic-airlines-687-MEM-MKE-1535-b134@1986-02-28": [
+      "1986-02-28T21:35:00Z",
+      "1986-02-28T23:05:00Z"
+    ],
+    "republic-airlines-687-MEM-MKE-1535-b134@1986-03-01": [
+      "1986-03-01T21:35:00Z",
+      "1986-03-01T23:05:00Z"
+    ],
+    "republic-airlines-385-MEM-MKE-1925-b134@1986-02-27": [
+      "1986-02-28T01:25:00Z",
+      "1986-02-28T02:55:00Z"
+    ],
+    "republic-airlines-385-MEM-MKE-1925-b134@1986-02-28": [
+      "1986-03-01T01:25:00Z",
+      "1986-03-01T02:55:00Z"
+    ],
+    "republic-airlines-689-MEM-MKE-2240-b134@1986-02-27": [
+      "1986-02-28T04:40:00Z",
+      "1986-02-28T06:10:00Z"
+    ],
+    "republic-airlines-689-MEM-MKE-2240-b134@1986-02-28": [
+      "1986-03-01T04:40:00Z",
+      "1986-03-01T06:10:00Z"
+    ],
+    "republic-airlines-843-OKC-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:08:00Z"
+    ],
+    "republic-airlines-843-OKC-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:08:00Z"
+    ],
+    "republic-airlines-848-OKC-MEM-1355-b134@1986-02-28": [
+      "1986-02-28T19:55:00Z",
+      "1986-02-28T21:03:00Z"
+    ],
+    "republic-airlines-848-OKC-MEM-1355-b134@1986-03-01": [
+      "1986-03-01T19:55:00Z",
+      "1986-03-01T21:03:00Z"
+    ],
+    "republic-airlines-805-OKC-MEM-1745-b134@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T00:53:00Z"
+    ],
+    "republic-airlines-805-OKC-MEM-1745-b134@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T00:53:00Z"
+    ],
+    "republic-airlines-265-MEM-OKC-1205-b134@1986-02-28": [
+      "1986-02-28T18:05:00Z",
+      "1986-02-28T19:30:00Z"
+    ],
+    "republic-airlines-265-MEM-OKC-1205-b134@1986-03-01": [
+      "1986-03-01T18:05:00Z",
+      "1986-03-01T19:30:00Z"
+    ],
+    "republic-airlines-825-MEM-OKC-1550-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-27T23:15:00Z"
+    ],
+    "republic-airlines-825-MEM-OKC-1550-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-02-28T23:15:00Z"
+    ],
+    "republic-airlines-825-MEM-OKC-1550-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-01T23:15:00Z"
+    ],
+    "republic-airlines-855-MEM-OKC-2000-b134@1986-02-27": [
+      "1986-02-28T02:00:00Z",
+      "1986-02-28T03:25:00Z"
+    ],
+    "republic-airlines-855-MEM-OKC-2000-b134@1986-02-28": [
+      "1986-03-01T02:00:00Z",
+      "1986-03-01T03:25:00Z"
+    ],
+    "republic-airlines-470-ORD-MEM-0625-b134@1986-02-28": [
+      "1986-02-28T12:25:00Z",
+      "1986-02-28T13:53:00Z"
+    ],
+    "republic-airlines-470-ORD-MEM-0625-b134@1986-03-01": [
+      "1986-03-01T12:25:00Z",
+      "1986-03-01T13:53:00Z"
+    ],
+    "republic-airlines-472-ORD-MEM-0955-b134@1986-02-28": [
+      "1986-02-28T15:55:00Z",
+      "1986-02-28T17:23:00Z"
+    ],
+    "republic-airlines-472-ORD-MEM-0955-b134@1986-03-01": [
+      "1986-03-01T15:55:00Z",
+      "1986-03-01T17:23:00Z"
+    ],
+    "republic-airlines-474-ORD-MEM-1310-b134@1986-02-28": [
+      "1986-02-28T19:10:00Z",
+      "1986-02-28T20:38:00Z"
+    ],
+    "republic-airlines-474-ORD-MEM-1310-b134@1986-03-01": [
+      "1986-03-01T19:10:00Z",
+      "1986-03-01T20:38:00Z"
+    ],
+    "republic-airlines-52-ORD-MEM-1740-b134@1986-02-27": [
+      "1986-02-27T23:40:00Z",
+      "1986-02-28T01:05:00Z"
+    ],
+    "republic-airlines-52-ORD-MEM-1740-b134@1986-02-28": [
+      "1986-02-28T23:40:00Z",
+      "1986-03-01T01:05:00Z"
+    ],
+    "republic-airlines-729-ORD-MEM-2005-b134@1986-02-27": [
+      "1986-02-28T02:05:00Z",
+      "1986-02-28T03:33:00Z"
+    ],
+    "republic-airlines-729-ORD-MEM-2005-b134@1986-02-28": [
+      "1986-03-01T02:05:00Z",
+      "1986-03-01T03:33:00Z"
+    ],
+    "republic-airlines-471-MEM-ORD-0850-b134@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T16:24:00Z"
+    ],
+    "republic-airlines-471-MEM-ORD-0850-b134@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T16:24:00Z"
+    ],
+    "republic-airlines-465-MEM-ORD-1230-b134@1986-02-28": [
+      "1986-02-28T18:30:00Z",
+      "1986-02-28T20:04:00Z"
+    ],
+    "republic-airlines-465-MEM-ORD-1230-b134@1986-03-01": [
+      "1986-03-01T18:30:00Z",
+      "1986-03-01T20:04:00Z"
+    ],
+    "republic-airlines-57-MEM-ORD-1535-b134@1986-02-27": [
+      "1986-02-27T21:35:00Z",
+      "1986-02-27T23:09:00Z"
+    ],
+    "republic-airlines-57-MEM-ORD-1535-b134@1986-02-28": [
+      "1986-02-28T21:35:00Z",
+      "1986-02-28T23:09:00Z"
+    ],
+    "republic-airlines-57-MEM-ORD-1535-b134@1986-03-01": [
+      "1986-03-01T21:35:00Z",
+      "1986-03-01T23:09:00Z"
+    ],
+    "republic-airlines-479-MEM-ORD-1945-b134@1986-02-27": [
+      "1986-02-28T01:45:00Z",
+      "1986-02-28T03:14:00Z"
+    ],
+    "republic-airlines-479-MEM-ORD-1945-b134@1986-02-28": [
+      "1986-03-01T01:45:00Z",
+      "1986-03-01T03:14:00Z"
+    ],
+    "republic-airlines-481-MEM-ORD-2235-b134@1986-02-27": [
+      "1986-02-28T04:35:00Z",
+      "1986-02-28T06:09:00Z"
+    ],
+    "republic-airlines-481-MEM-ORD-2235-b134@1986-02-28": [
+      "1986-03-01T04:35:00Z",
+      "1986-03-01T06:09:00Z"
+    ],
+    "republic-airlines-809-PHL-MEM-0955-b134@1986-02-28": [
+      "1986-02-28T14:55:00Z",
+      "1986-02-28T17:20:00Z"
+    ],
+    "republic-airlines-809-PHL-MEM-0955-b134@1986-03-01": [
+      "1986-03-01T14:55:00Z",
+      "1986-03-01T17:20:00Z"
+    ],
+    "republic-airlines-831-PHL-MEM-1730-b134@1986-02-27": [
+      "1986-02-27T22:30:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "republic-airlines-831-PHL-MEM-1730-b134@1986-02-28": [
+      "1986-02-28T22:30:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "republic-airlines-404-MEM-PHL-1245-b134@1986-02-28": [
+      "1986-02-28T18:45:00Z",
+      "1986-02-28T20:45:00Z"
+    ],
+    "republic-airlines-404-MEM-PHL-1245-b134@1986-03-01": [
+      "1986-03-01T18:45:00Z",
+      "1986-03-01T20:45:00Z"
+    ],
+    "republic-airlines-826-MEM-PHL-1930-b134@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T03:30:00Z"
+    ],
+    "republic-airlines-826-MEM-PHL-1930-b134@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T03:30:00Z"
+    ],
+    "republic-airlines-664-PHX-MEM-1130-b134@1986-02-28": [
+      "1986-02-28T18:30:00Z",
+      "1986-02-28T21:15:00Z"
+    ],
+    "republic-airlines-664-PHX-MEM-1130-b134@1986-03-01": [
+      "1986-03-01T18:30:00Z",
+      "1986-03-01T21:15:00Z"
+    ],
+    "republic-airlines-668-PHX-MEM-1505-b134@1986-02-27": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-28T00:50:00Z"
+    ],
+    "republic-airlines-668-PHX-MEM-1505-b134@1986-02-28": [
+      "1986-02-28T22:05:00Z",
+      "1986-03-01T00:50:00Z"
+    ],
+    "republic-airlines-668-PHX-MEM-1505-b134@1986-03-01": [
+      "1986-03-01T22:05:00Z",
+      "1986-03-02T00:50:00Z"
+    ],
+    "republic-airlines-665-MEM-PHX-0845-b134@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T18:05:00Z"
+    ],
+    "republic-airlines-665-MEM-PHX-0845-b134@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T18:05:00Z"
+    ],
+    "republic-airlines-667-MEM-PHX-1540-b134@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-28T01:00:00Z"
+    ],
+    "republic-airlines-667-MEM-PHX-1540-b134@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-03-01T01:00:00Z"
+    ],
+    "republic-airlines-667-MEM-PHX-1540-b134@1986-03-01": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-02T01:00:00Z"
+    ],
+    "republic-airlines-484-SDF-MEM-0745-b134@1986-02-28": [
+      "1986-02-28T12:45:00Z",
+      "1986-02-28T13:47:00Z"
+    ],
+    "republic-airlines-484-SDF-MEM-0745-b134@1986-03-01": [
+      "1986-03-01T12:45:00Z",
+      "1986-03-01T13:47:00Z"
+    ],
+    "republic-airlines-519-SDF-MEM-1505-b134@1986-02-28": [
+      "1986-02-28T20:05:00Z",
+      "1986-02-28T21:05:00Z"
+    ],
+    "republic-airlines-519-SDF-MEM-1505-b134@1986-03-01": [
+      "1986-03-01T20:05:00Z",
+      "1986-03-01T21:05:00Z"
+    ],
+    "republic-airlines-847-SDF-MEM-1835-b134@1986-02-27": [
+      "1986-02-27T23:35:00Z",
+      "1986-02-28T00:37:00Z"
+    ],
+    "republic-airlines-847-SDF-MEM-1835-b134@1986-02-28": [
+      "1986-02-28T23:35:00Z",
+      "1986-03-01T00:37:00Z"
+    ],
+    "republic-airlines-288-MEM-SDF-1235-b134@1986-02-28": [
+      "1986-02-28T18:35:00Z",
+      "1986-02-28T19:40:00Z"
+    ],
+    "republic-airlines-288-MEM-SDF-1235-b134@1986-03-01": [
+      "1986-03-01T18:35:00Z",
+      "1986-03-01T19:40:00Z"
+    ],
+    "republic-airlines-396-MEM-SDF-1555-b134@1986-02-27": [
+      "1986-02-27T21:55:00Z",
+      "1986-02-27T23:00:00Z"
+    ],
+    "republic-airlines-396-MEM-SDF-1555-b134@1986-02-28": [
+      "1986-02-28T21:55:00Z",
+      "1986-02-28T23:00:00Z"
+    ],
+    "republic-airlines-396-MEM-SDF-1555-b134@1986-03-01": [
+      "1986-03-01T21:55:00Z",
+      "1986-03-01T23:00:00Z"
+    ],
+    "republic-airlines-846-MEM-SDF-1940-b134@1986-02-27": [
+      "1986-02-28T01:40:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "republic-airlines-846-MEM-SDF-1940-b134@1986-02-28": [
+      "1986-03-01T01:40:00Z",
+      "1986-03-01T02:45:00Z"
+    ],
+    "republic-airlines-660-SFO-MEM-0915-b134@1986-02-28": [
+      "1986-02-28T17:15:00Z",
+      "1986-02-28T20:45:00Z"
+    ],
+    "republic-airlines-660-SFO-MEM-0915-b134@1986-03-01": [
+      "1986-03-01T17:15:00Z",
+      "1986-03-01T20:45:00Z"
+    ],
+    "republic-airlines-706-SFO-MEM-1325-b134@1986-02-27": [
+      "1986-02-27T21:25:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "republic-airlines-706-SFO-MEM-1325-b134@1986-02-28": [
+      "1986-02-28T21:25:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "republic-airlines-706-SFO-MEM-1325-b134@1986-03-01": [
+      "1986-03-01T21:25:00Z",
+      "1986-03-02T00:55:00Z"
+    ],
+    "republic-airlines-705-MEM-SFO-0830-b134@1986-02-28": [
+      "1986-02-28T14:30:00Z",
+      "1986-02-28T18:40:00Z"
+    ],
+    "republic-airlines-705-MEM-SFO-0830-b134@1986-03-01": [
+      "1986-03-01T14:30:00Z",
+      "1986-03-01T18:40:00Z"
+    ],
+    "republic-airlines-663-MEM-SFO-1945-b134@1986-02-27": [
+      "1986-02-28T01:45:00Z",
+      "1986-02-28T05:55:00Z"
+    ],
+    "republic-airlines-663-MEM-SFO-1945-b134@1986-02-28": [
+      "1986-03-01T01:45:00Z",
+      "1986-03-01T05:55:00Z"
+    ],
+    "republic-airlines-476-STL-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T13:58:00Z"
+    ],
+    "republic-airlines-476-STL-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T13:58:00Z"
+    ],
+    "republic-airlines-151-STL-MEM-1035-b134@1986-02-28": [
+      "1986-02-28T16:35:00Z",
+      "1986-02-28T17:33:00Z"
+    ],
+    "republic-airlines-151-STL-MEM-1035-b134@1986-03-01": [
+      "1986-03-01T16:35:00Z",
+      "1986-03-01T17:33:00Z"
+    ],
+    "republic-airlines-436-STL-MEM-1400-b134@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T20:58:00Z"
+    ],
+    "republic-airlines-436-STL-MEM-1400-b134@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T20:58:00Z"
+    ],
+    "republic-airlines-725-STL-MEM-1800-b134@1986-02-27": [
+      "1986-02-28T00:00:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "republic-airlines-725-STL-MEM-1800-b134@1986-02-28": [
+      "1986-03-01T00:00:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "republic-airlines-712-STL-MEM-2045-b134@1986-02-27": [
+      "1986-02-28T02:45:00Z",
+      "1986-02-28T03:43:00Z"
+    ],
+    "republic-airlines-712-STL-MEM-2045-b134@1986-02-28": [
+      "1986-03-01T02:45:00Z",
+      "1986-03-01T03:43:00Z"
+    ],
+    "republic-airlines-401-MEM-STL-0845-b134@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T15:40:00Z"
+    ],
+    "republic-airlines-401-MEM-STL-0845-b134@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T15:40:00Z"
+    ],
+    "republic-airlines-403-MEM-STL-1230-b134@1986-02-28": [
+      "1986-02-28T18:30:00Z",
+      "1986-02-28T19:28:00Z"
+    ],
+    "republic-airlines-403-MEM-STL-1230-b134@1986-03-01": [
+      "1986-03-01T18:30:00Z",
+      "1986-03-01T19:28:00Z"
+    ],
+    "republic-airlines-405-MEM-STL-1550-b134@1986-02-27": [
+      "1986-02-27T21:50:00Z",
+      "1986-02-27T22:48:00Z"
+    ],
+    "republic-airlines-405-MEM-STL-1550-b134@1986-02-28": [
+      "1986-02-28T21:50:00Z",
+      "1986-02-28T22:48:00Z"
+    ],
+    "republic-airlines-405-MEM-STL-1550-b134@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-01T22:48:00Z"
+    ],
+    "republic-airlines-486-MEM-STL-1935-b134@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T02:33:00Z"
+    ],
+    "republic-airlines-486-MEM-STL-1935-b134@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T02:33:00Z"
+    ],
+    "republic-airlines-409-MEM-STL-2245-b134@1986-02-27": [
+      "1986-02-28T04:45:00Z",
+      "1986-02-28T05:43:00Z"
+    ],
+    "republic-airlines-409-MEM-STL-2245-b134@1986-02-28": [
+      "1986-03-01T04:45:00Z",
+      "1986-03-01T05:43:00Z"
+    ],
+    "republic-airlines-398-TUL-MEM-0700-b134@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:00:00Z"
+    ],
+    "republic-airlines-398-TUL-MEM-0700-b134@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:00:00Z"
+    ],
+    "republic-airlines-184-TUL-MEM-1040-b134@1986-02-28": [
+      "1986-02-28T16:40:00Z",
+      "1986-02-28T17:40:00Z"
+    ],
+    "republic-airlines-184-TUL-MEM-1040-b134@1986-03-01": [
+      "1986-03-01T16:40:00Z",
+      "1986-03-01T17:40:00Z"
+    ],
+    "republic-airlines-634-TUL-MEM-1355-b134@1986-02-28": [
+      "1986-02-28T19:55:00Z",
+      "1986-02-28T20:55:00Z"
+    ],
+    "republic-airlines-634-TUL-MEM-1355-b134@1986-03-01": [
+      "1986-03-01T19:55:00Z",
+      "1986-03-01T20:55:00Z"
+    ],
+    "republic-airlines-826-TUL-MEM-1745-b134@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T00:45:00Z"
+    ],
+    "republic-airlines-826-TUL-MEM-1745-b134@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T00:45:00Z"
+    ],
+    "republic-airlines-801-MEM-TUL-0900-b134@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T16:12:00Z"
+    ],
+    "republic-airlines-801-MEM-TUL-0900-b134@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T16:12:00Z"
+    ],
+    "republic-airlines-809-MEM-TUL-1215-b134@1986-02-28": [
+      "1986-02-28T18:15:00Z",
+      "1986-02-28T19:27:00Z"
+    ],
+    "republic-airlines-809-MEM-TUL-1215-b134@1986-03-01": [
+      "1986-03-01T18:15:00Z",
+      "1986-03-01T19:27:00Z"
+    ],
+    "republic-airlines-641-MEM-TUL-1605-b134@1986-02-27": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-27T23:17:00Z"
+    ],
+    "republic-airlines-641-MEM-TUL-1605-b134@1986-02-28": [
+      "1986-02-28T22:05:00Z",
+      "1986-02-28T23:17:00Z"
+    ],
+    "republic-airlines-641-MEM-TUL-1605-b134@1986-03-01": [
+      "1986-03-01T22:05:00Z",
+      "1986-03-01T23:17:00Z"
+    ],
+    "republic-airlines-827-MEM-TUL-1940-b134@1986-02-27": [
+      "1986-02-28T01:40:00Z",
+      "1986-02-28T02:52:00Z"
+    ],
+    "republic-airlines-827-MEM-TUL-1940-b134@1986-02-28": [
+      "1986-03-01T01:40:00Z",
+      "1986-03-01T02:52:00Z"
+    ]
+  },
+  "independent_local_source_dates": {
+    "republic-airlines-161-CVG-MEM-0745-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-822-CVG-MEM-1120-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-261-CVG-MEM-1830-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-448-MEM-CVG-0845-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-684-MEM-CVG-1550-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-844-MEM-CVG-1935-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-685-DCA-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-839-DCA-MEM-1750-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-838-MEM-DCA-0915-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-240-MEM-DCA-1925-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-684-DEN-STAPLETON-MEM-1135-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-690-DEN-STAPLETON-MEM-1855-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-685-MEM-DEN-STAPLETON-0910-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-691-MEM-DEN-STAPLETON-1540-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-838-DFW-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-288-DFW-MEM-1040-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-258-DFW-MEM-1740-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-254-DFW-MEM-2030-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-293-MEM-DFW-0845-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-819-MEM-DFW-1540-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-839-MEM-DFW-2000-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-732-MEM-DFW-2245-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-811-IAD-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-529-IAD-MEM-1015-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-819-IAD-MEM-1340-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-408-IAD-MEM-1745-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-810-MEM-IAD-0905-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-244-MEM-IAD-1230-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-812-MEM-IAD-1600-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-407-MEM-IAD-1930-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-670-ICT-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-842-ICT-MEM-1355-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-840-ICT-MEM-1745-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-829-MEM-ICT-1205-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-803-MEM-ICT-1550-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-806-MEM-ICT-1935-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-665-IND-MEM-0740-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-148-IND-MEM-1115-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-259-IND-MEM-1500-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-521-IND-MEM-1835-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-185-IND-MEM-2110-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-188-MEM-IND-0845-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-141-MEM-IND-1225-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-814-MEM-IND-1550-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-552-MEM-IND-1930-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-552-LAS-MEM-1350-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-550-LAS-MEM-1700-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-551-MEM-LAS-0855-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-553-MEM-LAS-1205-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-708-LAX-MEM-0930-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-556-LAX-MEM-1325-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-558-LAX-MEM-1620-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-555-MEM-LAX-0900-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-569-MEM-LAX-1225-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-573-MEM-LAX-1540-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-557-MEM-LAX-1955-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-631-LGA-MEM-0930-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-633-LGA-MEM-1255-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-635-LGA-MEM-1650-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-637-LGA-MEM-1929-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-630-MEM-LGA-0900-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-632-MEM-LGA-1230-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-634-MEM-LGA-1550-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-668-MEM-LGA-1930-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-384-MCI-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-404-MCI-MEM-1035-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-299-MCI-MEM-1355-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-186-MCI-MEM-1740-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-226-MCI-MEM-2035-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-815-MEM-MCI-0850-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-808-MEM-MCI-1215-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-383-MEM-MCI-1555-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-831-MEM-MCI-1945-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-267-MEM-MCI-2245-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-680-MKE-MEM-0615-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-382-MKE-MEM-0955-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-688-MKE-MEM-1335-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-523-MKE-MEM-1730-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-534-MKE-MEM-2010-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-256-MEM-MKE-0850-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-687-MEM-MKE-1535-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-385-MEM-MKE-1925-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-689-MEM-MKE-2240-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-843-OKC-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-848-OKC-MEM-1355-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-805-OKC-MEM-1745-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-265-MEM-OKC-1205-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-825-MEM-OKC-1550-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-855-MEM-OKC-2000-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-470-ORD-MEM-0625-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-472-ORD-MEM-0955-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-474-ORD-MEM-1310-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-52-ORD-MEM-1740-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-729-ORD-MEM-2005-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-471-MEM-ORD-0850-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-465-MEM-ORD-1230-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-57-MEM-ORD-1535-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-479-MEM-ORD-1945-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-481-MEM-ORD-2235-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-809-PHL-MEM-0955-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-831-PHL-MEM-1730-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-404-MEM-PHL-1245-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-826-MEM-PHL-1930-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-664-PHX-MEM-1130-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-668-PHX-MEM-1505-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-665-MEM-PHX-0845-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-667-MEM-PHX-1540-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-484-SDF-MEM-0745-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-519-SDF-MEM-1505-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-847-SDF-MEM-1835-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-288-MEM-SDF-1235-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-396-MEM-SDF-1555-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-846-MEM-SDF-1940-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-660-SFO-MEM-0915-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-706-SFO-MEM-1325-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-705-MEM-SFO-0830-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-663-MEM-SFO-1945-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-476-STL-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-151-STL-MEM-1035-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-436-STL-MEM-1400-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-725-STL-MEM-1800-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-712-STL-MEM-2045-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-401-MEM-STL-0845-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-403-MEM-STL-1230-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-405-MEM-STL-1550-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-486-MEM-STL-1935-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-409-MEM-STL-2245-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-398-TUL-MEM-0700-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-184-TUL-MEM-1040-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-634-TUL-MEM-1355-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-826-TUL-MEM-1745-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-801-MEM-TUL-0900-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-809-MEM-TUL-1215-b134": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-641-MEM-TUL-1605-b134": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-827-MEM-TUL-1940-b134": [
+      "1986-02-27",
+      "1986-02-28"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "adjacent_source_leg_ground_times": [
+    [
+      "republic-airlines-556-LAX-MEM-1325-b134@1986-02-27",
+      "republic-airlines-556-MEM-HSV-1950-b133@1986-02-27",
+      65.0
+    ],
+    [
+      "republic-airlines-556-LAX-MEM-1325-b134@1986-02-28",
+      "republic-airlines-556-MEM-HSV-1950-b133@1986-02-28",
+      65.0
+    ],
+    [
+      "republic-airlines-57-BNA-MEM-1405-b133@1986-02-28",
+      "republic-airlines-57-MEM-ORD-1535-b134@1986-02-28",
+      41.0
+    ],
+    [
+      "republic-airlines-57-BNA-MEM-1405-b133@1986-03-01",
+      "republic-airlines-57-MEM-ORD-1535-b134@1986-03-01",
+      41.0
+    ],
+    [
+      "republic-airlines-687-MIA-MEM-1330-b121@1986-02-28",
+      "republic-airlines-687-MEM-MKE-1535-b134@1986-02-28",
+      43.0
+    ],
+    [
+      "republic-airlines-687-MIA-MEM-1330-b121@1986-03-01",
+      "republic-airlines-687-MEM-MKE-1535-b134@1986-03-01",
+      43.0
+    ],
+    [
+      "republic-airlines-474-ORD-MEM-1310-b134@1986-02-28",
+      "republic-airlines-474-MEM-HOU-1540-b128@1986-02-28",
+      62.0
+    ],
+    [
+      "republic-airlines-474-ORD-MEM-1310-b134@1986-03-01",
+      "republic-airlines-474-MEM-HOU-1540-b128@1986-03-01",
+      62.0
+    ],
+    [
+      "republic-airlines-667-BHM-MEM-1400-b133@1986-02-28",
+      "republic-airlines-667-MEM-PHX-1540-b134@1986-02-28",
+      53.0
+    ],
+    [
+      "republic-airlines-667-BHM-MEM-1400-b133@1986-03-01",
+      "republic-airlines-667-MEM-PHX-1540-b134@1986-03-01",
+      53.0
+    ],
+    [
+      "republic-airlines-691-SHV-MEM-1350-b133@1986-02-28",
+      "republic-airlines-691-MEM-DEN-STAPLETON-1540-b134@1986-02-28",
+      56.0
+    ],
+    [
+      "republic-airlines-819-IAD-MEM-1340-b134@1986-02-28",
+      "republic-airlines-819-MEM-DFW-1540-b134@1986-02-28",
+      48.0
+    ],
+    [
+      "republic-airlines-819-IAD-MEM-1340-b134@1986-03-01",
+      "republic-airlines-819-MEM-DFW-1540-b134@1986-03-01",
+      48.0
+    ],
+    [
+      "republic-airlines-519-SDF-MEM-1505-b134@1986-02-28",
+      "republic-airlines-519-MEM-IAH-1545-b128@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-519-SDF-MEM-1505-b134@1986-03-01",
+      "republic-airlines-519-MEM-IAH-1545-b128@1986-03-01",
+      40.0
+    ],
+    [
+      "republic-airlines-405-TPA-MEM-1400-b121@1986-02-28",
+      "republic-airlines-405-MEM-STL-1550-b134@1986-02-28",
+      60.0
+    ],
+    [
+      "republic-airlines-405-TPA-MEM-1400-b121@1986-03-01",
+      "republic-airlines-405-MEM-STL-1550-b134@1986-03-01",
+      60.0
+    ],
+    [
+      "republic-airlines-552-LAS-MEM-1350-b134@1986-02-27",
+      "republic-airlines-552-MEM-IND-1930-b134@1986-02-27",
+      40.0
+    ],
+    [
+      "republic-airlines-552-LAS-MEM-1350-b134@1986-02-28",
+      "republic-airlines-552-MEM-IND-1930-b134@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-634-TUL-MEM-1355-b134@1986-02-28",
+      "republic-airlines-634-MEM-LGA-1550-b134@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-634-TUL-MEM-1355-b134@1986-03-01",
+      "republic-airlines-634-MEM-LGA-1550-b134@1986-03-01",
+      55.0
+    ],
+    [
+      "republic-airlines-635-LGA-MEM-1650-b134@1986-02-27",
+      "republic-airlines-635-MEM-LIT-1950-b133@1986-02-27",
+      60.0
+    ],
+    [
+      "republic-airlines-635-LGA-MEM-1650-b134@1986-02-28",
+      "republic-airlines-635-MEM-LIT-1950-b133@1986-02-28",
+      60.0
+    ],
+    [
+      "republic-airlines-684-DEN-STAPLETON-MEM-1135-b134@1986-02-28",
+      "republic-airlines-684-MEM-CVG-1550-b134@1986-02-28",
+      73.0
+    ],
+    [
+      "republic-airlines-684-DEN-STAPLETON-MEM-1135-b134@1986-03-01",
+      "republic-airlines-684-MEM-CVG-1550-b134@1986-03-01",
+      73.0
+    ],
+    [
+      "republic-airlines-803-ATL-MEM-1450-b133@1986-02-28",
+      "republic-airlines-803-MEM-ICT-1550-b134@1986-02-28",
+      47.0
+    ],
+    [
+      "republic-airlines-803-ATL-MEM-1450-b133@1986-03-01",
+      "republic-airlines-803-MEM-ICT-1550-b134@1986-03-01",
+      47.0
+    ],
+    [
+      "republic-airlines-814-VPS-MEM-1345-b128@1986-02-28",
+      "republic-airlines-814-MEM-IND-1550-b134@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-814-VPS-MEM-1345-b128@1986-03-01",
+      "republic-airlines-814-MEM-IND-1550-b134@1986-03-01",
+      50.0
+    ],
+    [
+      "republic-airlines-825-TYS-MEM-1455-b133@1986-02-28",
+      "republic-airlines-825-MEM-OKC-1550-b134@1986-02-28",
+      45.0
+    ],
+    [
+      "republic-airlines-825-TYS-MEM-1455-b133@1986-03-01",
+      "republic-airlines-825-MEM-OKC-1550-b134@1986-03-01",
+      45.0
+    ],
+    [
+      "republic-airlines-383-MCO-MEM-1345-b121@1986-02-28",
+      "republic-airlines-383-MEM-MCI-1555-b134@1986-02-28",
+      70.0
+    ],
+    [
+      "republic-airlines-383-MCO-MEM-1345-b121@1986-03-01",
+      "republic-airlines-383-MEM-MCI-1555-b134@1986-03-01",
+      70.0
+    ],
+    [
+      "republic-airlines-396-MGM-MEM-1350-b128@1986-02-28",
+      "republic-airlines-396-MEM-SDF-1555-b134@1986-02-28",
+      67.0
+    ],
+    [
+      "republic-airlines-396-MGM-MEM-1350-b128@1986-03-01",
+      "republic-airlines-396-MEM-SDF-1555-b134@1986-03-01",
+      67.0
+    ],
+    [
+      "republic-airlines-688-MKE-MEM-1335-b134@1986-02-28",
+      "republic-airlines-688-MEM-MIA-1555-b121@1986-02-28",
+      43.0
+    ],
+    [
+      "republic-airlines-688-MKE-MEM-1335-b134@1986-03-01",
+      "republic-airlines-688-MEM-MIA-1555-b121@1986-03-01",
+      43.0
+    ],
+    [
+      "republic-airlines-708-LAX-MEM-0930-b134@1986-02-28",
+      "republic-airlines-708-MEM-BNA-1555-b133@1986-02-28",
+      65.0
+    ],
+    [
+      "republic-airlines-708-LAX-MEM-0930-b134@1986-03-01",
+      "republic-airlines-708-MEM-BNA-1555-b133@1986-03-01",
+      65.0
+    ],
+    [
+      "republic-airlines-259-IND-MEM-1500-b134@1986-02-28",
+      "republic-airlines-259-MEM-VPS-1600-b128@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-259-IND-MEM-1500-b134@1986-03-01",
+      "republic-airlines-259-MEM-VPS-1600-b128@1986-03-01",
+      50.0
+    ],
+    [
+      "republic-airlines-299-MCI-MEM-1355-b134@1986-02-28",
+      "republic-airlines-299-MEM-MGM-1600-b128@1986-02-28",
+      60.0
+    ],
+    [
+      "republic-airlines-299-MCI-MEM-1355-b134@1986-03-01",
+      "republic-airlines-299-MEM-MGM-1600-b128@1986-03-01",
+      60.0
+    ],
+    [
+      "republic-airlines-436-STL-MEM-1400-b134@1986-02-28",
+      "republic-airlines-436-MEM-BTR-1600-b133@1986-02-28",
+      62.0
+    ],
+    [
+      "republic-airlines-436-STL-MEM-1400-b134@1986-03-01",
+      "republic-airlines-436-MEM-BTR-1600-b133@1986-03-01",
+      62.0
+    ],
+    [
+      "republic-airlines-812-HSV-MEM-1410-b133@1986-02-28",
+      "republic-airlines-812-MEM-IAD-1600-b134@1986-02-28",
+      66.0
+    ],
+    [
+      "republic-airlines-812-HSV-MEM-1410-b133@1986-03-01",
+      "republic-airlines-812-MEM-IAD-1600-b134@1986-03-01",
+      66.0
+    ],
+    [
+      "republic-airlines-848-OKC-MEM-1355-b134@1986-02-28",
+      "republic-airlines-848-MEM-SHV-1600-b133@1986-02-28",
+      57.0
+    ],
+    [
+      "republic-airlines-848-OKC-MEM-1355-b134@1986-03-01",
+      "republic-airlines-848-MEM-SHV-1600-b133@1986-03-01",
+      57.0
+    ],
+    [
+      "republic-airlines-633-LGA-MEM-1255-b134@1986-02-28",
+      "republic-airlines-633-MEM-LIT-1605-b133@1986-02-28",
+      70.0
+    ],
+    [
+      "republic-airlines-633-LGA-MEM-1255-b134@1986-03-01",
+      "republic-airlines-633-MEM-LIT-1605-b133@1986-03-01",
+      70.0
+    ],
+    [
+      "republic-airlines-641-BTR-MEM-1405-b133@1986-02-28",
+      "republic-airlines-641-MEM-TUL-1605-b134@1986-02-28",
+      62.0
+    ],
+    [
+      "republic-airlines-641-BTR-MEM-1405-b133@1986-03-01",
+      "republic-airlines-641-MEM-TUL-1605-b134@1986-03-01",
+      62.0
+    ],
+    [
+      "republic-airlines-664-PHX-MEM-1130-b134@1986-02-28",
+      "republic-airlines-664-MEM-HSV-1605-b133@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-664-PHX-MEM-1130-b134@1986-03-01",
+      "republic-airlines-664-MEM-HSV-1605-b133@1986-03-01",
+      50.0
+    ],
+    [
+      "republic-airlines-668-PHX-MEM-1505-b134@1986-02-27",
+      "republic-airlines-668-MEM-LGA-1930-b134@1986-02-27",
+      40.0
+    ],
+    [
+      "republic-airlines-668-PHX-MEM-1505-b134@1986-02-28",
+      "republic-airlines-668-MEM-LGA-1930-b134@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-842-ICT-MEM-1355-b134@1986-02-28",
+      "republic-airlines-842-MEM-CHA-1605-b133@1986-02-28",
+      60.0
+    ],
+    [
+      "republic-airlines-831-PHL-MEM-1730-b134@1986-02-27",
+      "republic-airlines-831-MEM-MCI-1945-b134@1986-02-27",
+      50.0
+    ],
+    [
+      "republic-airlines-831-PHL-MEM-1730-b134@1986-02-28",
+      "republic-airlines-831-MEM-MCI-1945-b134@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-385-MCO-MEM-1745-b121@1986-02-27",
+      "republic-airlines-385-MEM-MKE-1925-b134@1986-02-27",
+      40.0
+    ],
+    [
+      "republic-airlines-385-MCO-MEM-1745-b121@1986-02-28",
+      "republic-airlines-385-MEM-MKE-1925-b134@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-408-IAD-MEM-1745-b134@1986-02-27",
+      "republic-airlines-408-MEM-BTR-1945-b133@1986-02-27",
+      48.0
+    ],
+    [
+      "republic-airlines-408-IAD-MEM-1745-b134@1986-02-28",
+      "republic-airlines-408-MEM-BTR-1945-b133@1986-02-28",
+      48.0
+    ],
+    [
+      "republic-airlines-839-DCA-MEM-1750-b134@1986-02-27",
+      "republic-airlines-839-MEM-DFW-2000-b134@1986-02-27",
+      55.0
+    ],
+    [
+      "republic-airlines-839-DCA-MEM-1750-b134@1986-02-28",
+      "republic-airlines-839-MEM-DFW-2000-b134@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-827-ATL-MEM-1825-b133@1986-02-27",
+      "republic-airlines-827-MEM-TUL-1940-b134@1986-02-27",
+      62.0
+    ],
+    [
+      "republic-airlines-827-ATL-MEM-1825-b133@1986-02-28",
+      "republic-airlines-827-MEM-TUL-1940-b134@1986-02-28",
+      62.0
+    ],
+    [
+      "republic-airlines-261-CVG-MEM-1830-b134@1986-02-27",
+      "republic-airlines-261-MEM-IAH-1935-b128@1986-02-27",
+      50.0
+    ],
+    [
+      "republic-airlines-261-CVG-MEM-1830-b134@1986-02-28",
+      "republic-airlines-261-MEM-IAH-1935-b128@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-523-MKE-MEM-1730-b134@1986-02-27",
+      "republic-airlines-523-MEM-MCO-1950-b121@1986-02-27",
+      43.0
+    ],
+    [
+      "republic-airlines-523-MKE-MEM-1730-b134@1986-02-28",
+      "republic-airlines-523-MEM-MCO-1950-b121@1986-02-28",
+      43.0
+    ],
+    [
+      "republic-airlines-521-IND-MEM-1835-b134@1986-02-27",
+      "republic-airlines-521-MEM-SRQ-1955-b121@1986-02-27",
+      68.0
+    ],
+    [
+      "republic-airlines-521-IND-MEM-1835-b134@1986-02-28",
+      "republic-airlines-521-MEM-SRQ-1955-b121@1986-02-28",
+      68.0
+    ],
+    [
+      "republic-airlines-806-VPS-MEM-1735-b128@1986-02-27",
+      "republic-airlines-806-MEM-ICT-1935-b134@1986-02-27",
+      45.0
+    ],
+    [
+      "republic-airlines-806-VPS-MEM-1735-b128@1986-02-28",
+      "republic-airlines-806-MEM-ICT-1935-b134@1986-02-28",
+      45.0
+    ],
+    [
+      "republic-airlines-847-SDF-MEM-1835-b134@1986-02-27",
+      "republic-airlines-847-MEM-MOB-1935-b128@1986-02-27",
+      58.0
+    ],
+    [
+      "republic-airlines-847-SDF-MEM-1835-b134@1986-02-28",
+      "republic-airlines-847-MEM-MOB-1935-b128@1986-02-28",
+      58.0
+    ],
+    [
+      "republic-airlines-258-DFW-MEM-1740-b134@1986-02-27",
+      "republic-airlines-258-MEM-TYS-1940-b133@1986-02-27",
+      47.0
+    ],
+    [
+      "republic-airlines-258-DFW-MEM-1740-b134@1986-02-28",
+      "republic-airlines-258-MEM-TYS-1940-b133@1986-02-28",
+      47.0
+    ],
+    [
+      "republic-airlines-486-BTR-MEM-1740-b133@1986-02-27",
+      "republic-airlines-486-MEM-STL-1935-b134@1986-02-27",
+      57.0
+    ],
+    [
+      "republic-airlines-486-BTR-MEM-1740-b133@1986-02-28",
+      "republic-airlines-486-MEM-STL-1935-b134@1986-02-28",
+      57.0
+    ],
+    [
+      "republic-airlines-52-ORD-MEM-1740-b134@1986-02-27",
+      "republic-airlines-52-MEM-BNA-1945-b133@1986-02-27",
+      40.0
+    ],
+    [
+      "republic-airlines-52-ORD-MEM-1740-b134@1986-02-28",
+      "republic-airlines-52-MEM-BNA-1945-b133@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-846-SHV-MEM-1740-b133@1986-02-27",
+      "republic-airlines-846-MEM-SDF-1940-b134@1986-02-27",
+      66.0
+    ],
+    [
+      "republic-airlines-846-SHV-MEM-1740-b133@1986-02-28",
+      "republic-airlines-846-MEM-SDF-1940-b134@1986-02-28",
+      66.0
+    ],
+    [
+      "republic-airlines-805-OKC-MEM-1745-b134@1986-02-27",
+      "republic-airlines-805-MEM-CHA-1950-b133@1986-02-27",
+      57.0
+    ],
+    [
+      "republic-airlines-805-OKC-MEM-1745-b134@1986-02-28",
+      "republic-airlines-805-MEM-CHA-1950-b133@1986-02-28",
+      57.0
+    ],
+    [
+      "republic-airlines-826-TUL-MEM-1745-b134@1986-02-27",
+      "republic-airlines-826-MEM-PHL-1930-b134@1986-02-27",
+      45.0
+    ],
+    [
+      "republic-airlines-826-TUL-MEM-1745-b134@1986-02-28",
+      "republic-airlines-826-MEM-PHL-1930-b134@1986-02-28",
+      45.0
+    ],
+    [
+      "republic-airlines-840-ICT-MEM-1745-b134@1986-02-27",
+      "republic-airlines-840-MEM-SHV-1955-b133@1986-02-27",
+      60.0
+    ],
+    [
+      "republic-airlines-840-ICT-MEM-1745-b134@1986-02-28",
+      "republic-airlines-840-MEM-SHV-1955-b133@1986-02-28",
+      60.0
+    ],
+    [
+      "republic-airlines-844-IAH-MEM-1745-b128@1986-02-27",
+      "republic-airlines-844-MEM-CVG-1935-b134@1986-02-27",
+      40.0
+    ],
+    [
+      "republic-airlines-844-IAH-MEM-1745-b128@1986-02-28",
+      "republic-airlines-844-MEM-CVG-1935-b134@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-240-LIT-MEM-1755-b133@1986-02-27",
+      "republic-airlines-240-MEM-DCA-1925-b134@1986-02-27",
+      50.0
+    ],
+    [
+      "republic-airlines-240-LIT-MEM-1755-b133@1986-02-28",
+      "republic-airlines-240-MEM-DCA-1925-b134@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-557-HSV-MEM-1755-b133@1986-02-27",
+      "republic-airlines-557-MEM-LAX-1955-b134@1986-02-27",
+      76.0
+    ],
+    [
+      "republic-airlines-557-HSV-MEM-1755-b133@1986-02-28",
+      "republic-airlines-557-MEM-LAX-1955-b134@1986-02-28",
+      76.0
+    ],
+    [
+      "republic-airlines-407-BHM-MEM-1800-b133@1986-02-27",
+      "republic-airlines-407-MEM-IAD-1930-b134@1986-02-27",
+      43.0
+    ],
+    [
+      "republic-airlines-407-BHM-MEM-1800-b133@1986-02-28",
+      "republic-airlines-407-MEM-IAD-1930-b134@1986-02-28",
+      43.0
+    ],
+    [
+      "republic-airlines-725-STL-MEM-1800-b134@1986-02-27",
+      "republic-airlines-725-MEM-BHM-1950-b133@1986-02-27",
+      55.0
+    ],
+    [
+      "republic-airlines-725-STL-MEM-1800-b134@1986-02-28",
+      "republic-airlines-725-MEM-BHM-1950-b133@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-558-LAX-MEM-1620-b134@1986-02-27",
+      "republic-airlines-558-MEM-BNA-2235-b133@1986-02-27",
+      55.0
+    ],
+    [
+      "republic-airlines-558-LAX-MEM-1620-b134@1986-02-28",
+      "republic-airlines-558-MEM-BNA-2235-b133@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-637-LGA-MEM-1929-b134@1986-02-27",
+      "republic-airlines-637-MEM-HOU-2245-b128@1986-02-27",
+      76.0
+    ],
+    [
+      "republic-airlines-637-LGA-MEM-1929-b134@1986-02-28",
+      "republic-airlines-637-MEM-HOU-2245-b128@1986-02-28",
+      76.0
+    ],
+    [
+      "republic-airlines-689-MIA-MEM-2035-b121@1986-02-27",
+      "republic-airlines-689-MEM-MKE-2240-b134@1986-02-27",
+      43.0
+    ],
+    [
+      "republic-airlines-689-MIA-MEM-2035-b121@1986-02-28",
+      "republic-airlines-689-MEM-MKE-2240-b134@1986-02-28",
+      43.0
+    ],
+    [
+      "republic-airlines-732-DTW-MEM-2050-b133@1986-02-27",
+      "republic-airlines-732-MEM-DFW-2245-b134@1986-02-27",
+      60.0
+    ],
+    [
+      "republic-airlines-732-DTW-MEM-2050-b133@1986-02-28",
+      "republic-airlines-732-MEM-DFW-2245-b134@1986-02-28",
+      60.0
+    ],
+    [
+      "republic-airlines-690-DEN-STAPLETON-MEM-1855-b134@1986-02-27",
+      "republic-airlines-690-MEM-ATL-2245-b133@1986-02-27",
+      48.0
+    ],
+    [
+      "republic-airlines-690-DEN-STAPLETON-MEM-1855-b134@1986-02-28",
+      "republic-airlines-690-MEM-ATL-2245-b133@1986-02-28",
+      48.0
+    ],
+    [
+      "republic-airlines-185-IND-MEM-2110-b134@1986-02-27",
+      "republic-airlines-185-MEM-BHM-2235-b133@1986-02-27",
+      73.0
+    ],
+    [
+      "republic-airlines-185-IND-MEM-2110-b134@1986-02-28",
+      "republic-airlines-185-MEM-BHM-2235-b133@1986-02-28",
+      73.0
+    ],
+    [
+      "republic-airlines-534-MKE-MEM-2010-b134@1986-02-27",
+      "republic-airlines-534-MEM-MSY-2230-b128@1986-02-27",
+      43.0
+    ],
+    [
+      "republic-airlines-534-MKE-MEM-2010-b134@1986-02-28",
+      "republic-airlines-534-MEM-MSY-2230-b128@1986-02-28",
+      43.0
+    ],
+    [
+      "republic-airlines-226-MCI-MEM-2035-b134@1986-02-27",
+      "republic-airlines-226-MEM-HSV-2235-b133@1986-02-27",
+      55.0
+    ],
+    [
+      "republic-airlines-226-MCI-MEM-2035-b134@1986-02-28",
+      "republic-airlines-226-MEM-HSV-2235-b133@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-712-STL-MEM-2045-b134@1986-02-27",
+      "republic-airlines-712-MEM-MCO-2240-b121@1986-02-27",
+      57.0
+    ],
+    [
+      "republic-airlines-712-STL-MEM-2045-b134@1986-02-28",
+      "republic-airlines-712-MEM-MCO-2240-b121@1986-02-28",
+      57.0
+    ],
+    [
+      "republic-airlines-267-HSV-MEM-2100-b133@1986-02-27",
+      "republic-airlines-267-MEM-MCI-2245-b134@1986-02-27",
+      61.0
+    ],
+    [
+      "republic-airlines-267-HSV-MEM-2100-b133@1986-02-28",
+      "republic-airlines-267-MEM-MCI-2245-b134@1986-02-28",
+      61.0
+    ],
+    [
+      "republic-airlines-481-BHM-MEM-2100-b133@1986-02-27",
+      "republic-airlines-481-MEM-ORD-2235-b134@1986-02-27",
+      48.0
+    ],
+    [
+      "republic-airlines-481-BHM-MEM-2100-b133@1986-02-28",
+      "republic-airlines-481-MEM-ORD-2235-b134@1986-02-28",
+      48.0
+    ],
+    [
+      "republic-airlines-409-LIT-MEM-2110-b133@1986-02-27",
+      "republic-airlines-409-MEM-STL-2245-b134@1986-02-27",
+      55.0
+    ],
+    [
+      "republic-airlines-409-LIT-MEM-2110-b133@1986-02-28",
+      "republic-airlines-409-MEM-STL-2245-b134@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-448-TPA-MEM-0700-b121@1986-02-28",
+      "republic-airlines-448-MEM-CVG-0845-b134@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-448-TPA-MEM-0700-b121@1986-03-01",
+      "republic-airlines-448-MEM-CVG-0845-b134@1986-03-01",
+      55.0
+    ],
+    [
+      "republic-airlines-685-DCA-MEM-0700-b134@1986-02-28",
+      "republic-airlines-685-MEM-DEN-STAPLETON-0910-b134@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-685-DCA-MEM-0700-b134@1986-03-01",
+      "republic-airlines-685-MEM-DEN-STAPLETON-0910-b134@1986-03-01",
+      55.0
+    ],
+    [
+      "republic-airlines-705-DTW-MEM-0700-b133@1986-02-28",
+      "republic-airlines-705-MEM-SFO-0830-b134@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-705-DTW-MEM-0700-b133@1986-03-01",
+      "republic-airlines-705-MEM-SFO-0830-b134@1986-03-01",
+      40.0
+    ],
+    [
+      "republic-airlines-811-IAD-MEM-0700-b134@1986-02-28",
+      "republic-airlines-811-MEM-HSV-0905-b133@1986-02-28",
+      53.0
+    ],
+    [
+      "republic-airlines-815-MGM-MEM-0700-b128@1986-02-28",
+      "republic-airlines-815-MEM-MCI-0850-b134@1986-02-28",
+      52.0
+    ],
+    [
+      "republic-airlines-815-MGM-MEM-0700-b128@1986-03-01",
+      "republic-airlines-815-MEM-MCI-0850-b134@1986-03-01",
+      52.0
+    ],
+    [
+      "republic-airlines-680-MKE-MEM-0615-b134@1986-02-28",
+      "republic-airlines-680-MEM-MIA-0900-b121@1986-02-28",
+      68.0
+    ],
+    [
+      "republic-airlines-680-MKE-MEM-0615-b134@1986-03-01",
+      "republic-airlines-680-MEM-MIA-0900-b121@1986-03-01",
+      68.0
+    ],
+    [
+      "republic-airlines-470-ORD-MEM-0625-b134@1986-02-28",
+      "republic-airlines-470-MEM-HOU-0845-b128@1986-02-28",
+      52.0
+    ],
+    [
+      "republic-airlines-470-ORD-MEM-0625-b134@1986-03-01",
+      "republic-airlines-470-MEM-HOU-0845-b128@1986-03-01",
+      52.0
+    ],
+    [
+      "republic-airlines-293-TYS-MEM-0740-b133@1986-02-28",
+      "republic-airlines-293-MEM-DFW-0845-b134@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-293-TYS-MEM-0740-b133@1986-03-01",
+      "republic-airlines-293-MEM-DFW-0845-b134@1986-03-01",
+      55.0
+    ],
+    [
+      "republic-airlines-401-ATL-MEM-0740-b133@1986-02-28",
+      "republic-airlines-401-MEM-STL-0845-b134@1986-02-28",
+      52.0
+    ],
+    [
+      "republic-airlines-401-ATL-MEM-0740-b133@1986-03-01",
+      "republic-airlines-401-MEM-STL-0845-b134@1986-03-01",
+      52.0
+    ],
+    [
+      "republic-airlines-465-MIA-MEM-1000-b121@1986-02-28",
+      "republic-airlines-465-MEM-ORD-1230-b134@1986-02-28",
+      68.0
+    ],
+    [
+      "republic-airlines-465-MIA-MEM-1000-b121@1986-03-01",
+      "republic-airlines-465-MEM-ORD-1230-b134@1986-03-01",
+      68.0
+    ],
+    [
+      "republic-airlines-665-IND-MEM-0740-b134@1986-02-28",
+      "republic-airlines-665-MEM-PHX-0845-b134@1986-02-28",
+      53.0
+    ],
+    [
+      "republic-airlines-665-IND-MEM-0740-b134@1986-03-01",
+      "republic-airlines-665-MEM-PHX-0845-b134@1986-03-01",
+      53.0
+    ],
+    [
+      "republic-airlines-161-CVG-MEM-0745-b134@1986-02-28",
+      "republic-airlines-161-MEM-IAH-0850-b128@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-161-CVG-MEM-0745-b134@1986-03-01",
+      "republic-airlines-161-MEM-IAH-0850-b128@1986-03-01",
+      50.0
+    ],
+    [
+      "republic-airlines-484-SDF-MEM-0745-b134@1986-02-28",
+      "republic-airlines-484-MEM-MGM-0910-b128@1986-02-28",
+      83.0
+    ],
+    [
+      "republic-airlines-484-SDF-MEM-0745-b134@1986-03-01",
+      "republic-airlines-484-MEM-MGM-0910-b128@1986-03-01",
+      83.0
+    ],
+    [
+      "republic-airlines-188-SHV-MEM-0700-b133@1986-02-28",
+      "republic-airlines-188-MEM-IND-0845-b134@1986-02-28",
+      51.0
+    ],
+    [
+      "republic-airlines-188-SHV-MEM-0700-b133@1986-03-01",
+      "republic-airlines-188-MEM-IND-0845-b134@1986-03-01",
+      51.0
+    ],
+    [
+      "republic-airlines-384-MCI-MEM-0700-b134@1986-02-28",
+      "republic-airlines-384-MEM-MCO-0910-b121@1986-02-28",
+      65.0
+    ],
+    [
+      "republic-airlines-384-MCI-MEM-0700-b134@1986-03-01",
+      "republic-airlines-384-MEM-MCO-0910-b121@1986-03-01",
+      65.0
+    ],
+    [
+      "republic-airlines-398-TUL-MEM-0700-b134@1986-02-28",
+      "republic-airlines-398-MEM-BHM-0905-b133@1986-02-28",
+      65.0
+    ],
+    [
+      "republic-airlines-398-TUL-MEM-0700-b134@1986-03-01",
+      "republic-airlines-398-MEM-BHM-0905-b133@1986-03-01",
+      65.0
+    ],
+    [
+      "republic-airlines-471-BTR-MEM-0700-b133@1986-02-28",
+      "republic-airlines-471-MEM-ORD-0850-b134@1986-02-28",
+      52.0
+    ],
+    [
+      "republic-airlines-471-BTR-MEM-0700-b133@1986-03-01",
+      "republic-airlines-471-MEM-ORD-0850-b134@1986-03-01",
+      52.0
+    ],
+    [
+      "republic-airlines-476-STL-MEM-0700-b134@1986-02-28",
+      "republic-airlines-476-MEM-TPA-0900-b121@1986-02-28",
+      62.0
+    ],
+    [
+      "republic-airlines-476-STL-MEM-0700-b134@1986-03-01",
+      "republic-airlines-476-MEM-TPA-0900-b121@1986-03-01",
+      62.0
+    ],
+    [
+      "republic-airlines-555-BNA-MEM-0700-b133@1986-02-28",
+      "republic-airlines-555-MEM-LAX-0900-b134@1986-02-28",
+      71.0
+    ],
+    [
+      "republic-airlines-555-BNA-MEM-0700-b133@1986-03-01",
+      "republic-airlines-555-MEM-LAX-0900-b134@1986-03-01",
+      71.0
+    ],
+    [
+      "republic-airlines-630-LIT-MEM-0700-b133@1986-02-28",
+      "republic-airlines-630-MEM-LGA-0900-b134@1986-02-28",
+      80.0
+    ],
+    [
+      "republic-airlines-630-LIT-MEM-0700-b133@1986-03-01",
+      "republic-airlines-630-MEM-LGA-0900-b134@1986-03-01",
+      80.0
+    ],
+    [
+      "republic-airlines-670-ICT-MEM-0700-b134@1986-02-28",
+      "republic-airlines-670-MEM-ATL-0850-b133@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-670-ICT-MEM-0700-b134@1986-03-01",
+      "republic-airlines-670-MEM-ATL-0850-b133@1986-03-01",
+      40.0
+    ],
+    [
+      "republic-airlines-801-GPT-MEM-0700-b128@1986-02-28",
+      "republic-airlines-801-MEM-TUL-0900-b134@1986-02-28",
+      60.0
+    ],
+    [
+      "republic-airlines-801-GPT-MEM-0700-b128@1986-03-01",
+      "republic-airlines-801-MEM-TUL-0900-b134@1986-03-01",
+      60.0
+    ],
+    [
+      "republic-airlines-838-DFW-MEM-0700-b134@1986-02-28",
+      "republic-airlines-838-MEM-DCA-0915-b134@1986-02-28",
+      62.0
+    ],
+    [
+      "republic-airlines-838-DFW-MEM-0700-b134@1986-03-01",
+      "republic-airlines-838-MEM-DCA-0915-b134@1986-03-01",
+      62.0
+    ],
+    [
+      "republic-airlines-843-OKC-MEM-0700-b134@1986-02-28",
+      "republic-airlines-843-MEM-SHV-0905-b133@1986-02-28",
+      57.0
+    ],
+    [
+      "republic-airlines-843-OKC-MEM-0700-b134@1986-03-01",
+      "republic-airlines-843-MEM-SHV-0905-b133@1986-03-01",
+      57.0
+    ],
+    [
+      "republic-airlines-810-IAH-MEM-0705-b128@1986-02-28",
+      "republic-airlines-810-MEM-IAD-0905-b134@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-810-IAH-MEM-0705-b128@1986-03-01",
+      "republic-airlines-810-MEM-IAD-0905-b134@1986-03-01",
+      50.0
+    ],
+    [
+      "republic-airlines-265-TPA-MEM-1030-b121@1986-02-28",
+      "republic-airlines-265-MEM-OKC-1205-b134@1986-02-28",
+      45.0
+    ],
+    [
+      "republic-airlines-265-TPA-MEM-1030-b121@1986-03-01",
+      "republic-airlines-265-MEM-OKC-1205-b134@1986-03-01",
+      45.0
+    ],
+    [
+      "republic-airlines-631-LGA-MEM-0930-b134@1986-02-28",
+      "republic-airlines-631-MEM-HSV-1240-b133@1986-02-28",
+      70.0
+    ],
+    [
+      "republic-airlines-631-LGA-MEM-0930-b134@1986-03-01",
+      "republic-airlines-631-MEM-HSV-1240-b133@1986-03-01",
+      70.0
+    ],
+    [
+      "republic-airlines-809-PHL-MEM-0955-b134@1986-02-28",
+      "republic-airlines-809-MEM-TUL-1215-b134@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-809-PHL-MEM-0955-b134@1986-03-01",
+      "republic-airlines-809-MEM-TUL-1215-b134@1986-03-01",
+      55.0
+    ],
+    [
+      "republic-airlines-141-SRQ-MEM-1015-b121@1986-02-28",
+      "republic-airlines-141-MEM-IND-1225-b134@1986-02-28",
+      72.0
+    ],
+    [
+      "republic-airlines-141-SRQ-MEM-1015-b121@1986-03-01",
+      "republic-airlines-141-MEM-IND-1225-b134@1986-03-01",
+      72.0
+    ],
+    [
+      "republic-airlines-569-DTW-MEM-1040-b133@1986-02-28",
+      "republic-airlines-569-MEM-LAX-1225-b134@1986-02-28",
+      50.0
+    ],
+    [
+      "republic-airlines-569-DTW-MEM-1040-b133@1986-03-01",
+      "republic-airlines-569-MEM-LAX-1225-b134@1986-03-01",
+      50.0
+    ],
+    [
+      "republic-airlines-382-MKE-MEM-0955-b134@1986-02-28",
+      "republic-airlines-382-MEM-MCO-1235-b121@1986-02-28",
+      63.0
+    ],
+    [
+      "republic-airlines-382-MKE-MEM-0955-b134@1986-03-01",
+      "republic-airlines-382-MEM-MCO-1235-b121@1986-03-01",
+      63.0
+    ],
+    [
+      "republic-airlines-148-IND-MEM-1115-b134@1986-02-28",
+      "republic-airlines-148-MEM-MOB-1235-b128@1986-02-28",
+      68.0
+    ],
+    [
+      "republic-airlines-148-IND-MEM-1115-b134@1986-03-01",
+      "republic-airlines-148-MEM-MOB-1235-b128@1986-03-01",
+      68.0
+    ],
+    [
+      "republic-airlines-822-CVG-MEM-1120-b134@1986-02-28",
+      "republic-airlines-822-MEM-ATL-1220-b133@1986-02-28",
+      45.0
+    ],
+    [
+      "republic-airlines-822-CVG-MEM-1120-b134@1986-03-01",
+      "republic-airlines-822-MEM-ATL-1220-b133@1986-03-01",
+      45.0
+    ],
+    [
+      "republic-airlines-403-BHM-MEM-1030-b133@1986-02-28",
+      "republic-airlines-403-MEM-STL-1230-b134@1986-02-28",
+      73.0
+    ],
+    [
+      "republic-airlines-403-BHM-MEM-1030-b133@1986-03-01",
+      "republic-airlines-403-MEM-STL-1230-b134@1986-03-01",
+      73.0
+    ],
+    [
+      "republic-airlines-829-BTR-MEM-1030-b133@1986-02-28",
+      "republic-airlines-829-MEM-ICT-1205-b134@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-829-BTR-MEM-1030-b133@1986-03-01",
+      "republic-airlines-829-MEM-ICT-1205-b134@1986-03-01",
+      40.0
+    ],
+    [
+      "republic-airlines-404-MCI-MEM-1035-b134@1986-02-28",
+      "republic-airlines-404-MEM-PHL-1245-b134@1986-02-28",
+      65.0
+    ],
+    [
+      "republic-airlines-404-MCI-MEM-1035-b134@1986-03-01",
+      "republic-airlines-404-MEM-PHL-1245-b134@1986-03-01",
+      65.0
+    ],
+    [
+      "republic-airlines-184-TUL-MEM-1040-b134@1986-02-28",
+      "republic-airlines-184-MEM-BTR-1235-b133@1986-02-28",
+      55.0
+    ],
+    [
+      "republic-airlines-184-TUL-MEM-1040-b134@1986-03-01",
+      "republic-airlines-184-MEM-BTR-1235-b133@1986-03-01",
+      55.0
+    ],
+    [
+      "republic-airlines-288-DFW-MEM-1040-b134@1986-02-28",
+      "republic-airlines-288-MEM-SDF-1235-b134@1986-02-28",
+      42.0
+    ],
+    [
+      "republic-airlines-288-DFW-MEM-1040-b134@1986-03-01",
+      "republic-airlines-288-MEM-SDF-1235-b134@1986-03-01",
+      42.0
+    ],
+    [
+      "republic-airlines-808-HSV-MEM-1040-b133@1986-02-28",
+      "republic-airlines-808-MEM-MCI-1215-b134@1986-02-28",
+      51.0
+    ],
+    [
+      "republic-airlines-553-LIT-MEM-1045-b133@1986-02-28",
+      "republic-airlines-553-MEM-LAS-1205-b134@1986-02-28",
+      40.0
+    ],
+    [
+      "republic-airlines-553-LIT-MEM-1045-b133@1986-03-01",
+      "republic-airlines-553-MEM-LAS-1205-b134@1986-03-01",
+      40.0
+    ]
+  ],
+  "ground_times_reviewed": true,
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "135 visually reviewed source rows and separately reviewed durations/dates,291 fixed-offset UTC intervals,204 dated groundchains including176 old joins,768 Republic duplicate/number-overlap checks and all prior-object preservation passed.139 selected source rows=135 accepted+4 through exclusions.20 Python tests and three generator checks passed. Unreal not run.",
+  "ground_chain_review_note": "204 dated same-number adjoining chains,104 unique clock/path patterns,40–83minute gaps in Memphis.176 join older imported legs. Clock differences manually reviewed; timing consistency only, not individual aircraft or actual operation.",
+  "manual_ground_minutes_by_clock_pattern": [
+    {
+      "flight": "52",
+      "origin": "ORD",
+      "via": "MEM",
+      "destination": "BNA",
+      "previous_arrival": "19:05",
+      "next_departure": "19:45",
+      "minutes": 40
+    },
+    {
+      "flight": "57",
+      "origin": "BNA",
+      "via": "MEM",
+      "destination": "ORD",
+      "previous_arrival": "14:54",
+      "next_departure": "15:35",
+      "minutes": 41
+    },
+    {
+      "flight": "141",
+      "origin": "SRQ",
+      "via": "MEM",
+      "destination": "IND",
+      "previous_arrival": "11:13",
+      "next_departure": "12:25",
+      "minutes": 72
+    },
+    {
+      "flight": "148",
+      "origin": "IND",
+      "via": "MEM",
+      "destination": "MOB",
+      "previous_arrival": "11:27",
+      "next_departure": "12:35",
+      "minutes": 68
+    },
+    {
+      "flight": "161",
+      "origin": "CVG",
+      "via": "MEM",
+      "destination": "IAH",
+      "previous_arrival": "08:00",
+      "next_departure": "08:50",
+      "minutes": 50
+    },
+    {
+      "flight": "184",
+      "origin": "TUL",
+      "via": "MEM",
+      "destination": "BTR",
+      "previous_arrival": "11:40",
+      "next_departure": "12:35",
+      "minutes": 55
+    },
+    {
+      "flight": "185",
+      "origin": "IND",
+      "via": "MEM",
+      "destination": "BHM",
+      "previous_arrival": "21:22",
+      "next_departure": "22:35",
+      "minutes": 73
+    },
+    {
+      "flight": "188",
+      "origin": "SHV",
+      "via": "MEM",
+      "destination": "IND",
+      "previous_arrival": "07:54",
+      "next_departure": "08:45",
+      "minutes": 51
+    },
+    {
+      "flight": "226",
+      "origin": "MCI",
+      "via": "MEM",
+      "destination": "HSV",
+      "previous_arrival": "21:40",
+      "next_departure": "22:35",
+      "minutes": 55
+    },
+    {
+      "flight": "240",
+      "origin": "LIT",
+      "via": "MEM",
+      "destination": "DCA",
+      "previous_arrival": "18:35",
+      "next_departure": "19:25",
+      "minutes": 50
+    },
+    {
+      "flight": "258",
+      "origin": "DFW",
+      "via": "MEM",
+      "destination": "TYS",
+      "previous_arrival": "18:53",
+      "next_departure": "19:40",
+      "minutes": 47
+    },
+    {
+      "flight": "259",
+      "origin": "IND",
+      "via": "MEM",
+      "destination": "VPS",
+      "previous_arrival": "15:10",
+      "next_departure": "16:00",
+      "minutes": 50
+    },
+    {
+      "flight": "261",
+      "origin": "CVG",
+      "via": "MEM",
+      "destination": "IAH",
+      "previous_arrival": "18:45",
+      "next_departure": "19:35",
+      "minutes": 50
+    },
+    {
+      "flight": "265",
+      "origin": "TPA",
+      "via": "MEM",
+      "destination": "OKC",
+      "previous_arrival": "11:20",
+      "next_departure": "12:05",
+      "minutes": 45
+    },
+    {
+      "flight": "267",
+      "origin": "HSV",
+      "via": "MEM",
+      "destination": "MCI",
+      "previous_arrival": "21:44",
+      "next_departure": "22:45",
+      "minutes": 61
+    },
+    {
+      "flight": "288",
+      "origin": "DFW",
+      "via": "MEM",
+      "destination": "SDF",
+      "previous_arrival": "11:53",
+      "next_departure": "12:35",
+      "minutes": 42
+    },
+    {
+      "flight": "293",
+      "origin": "TYS",
+      "via": "MEM",
+      "destination": "DFW",
+      "previous_arrival": "07:50",
+      "next_departure": "08:45",
+      "minutes": 55
+    },
+    {
+      "flight": "299",
+      "origin": "MCI",
+      "via": "MEM",
+      "destination": "MGM",
+      "previous_arrival": "15:00",
+      "next_departure": "16:00",
+      "minutes": 60
+    },
+    {
+      "flight": "382",
+      "origin": "MKE",
+      "via": "MEM",
+      "destination": "MCO",
+      "previous_arrival": "11:32",
+      "next_departure": "12:35",
+      "minutes": 63
+    },
+    {
+      "flight": "383",
+      "origin": "MCO",
+      "via": "MEM",
+      "destination": "MCI",
+      "previous_arrival": "14:45",
+      "next_departure": "15:55",
+      "minutes": 70
+    },
+    {
+      "flight": "384",
+      "origin": "MCI",
+      "via": "MEM",
+      "destination": "MCO",
+      "previous_arrival": "08:05",
+      "next_departure": "09:10",
+      "minutes": 65
+    },
+    {
+      "flight": "385",
+      "origin": "MCO",
+      "via": "MEM",
+      "destination": "MKE",
+      "previous_arrival": "18:45",
+      "next_departure": "19:25",
+      "minutes": 40
+    },
+    {
+      "flight": "396",
+      "origin": "MGM",
+      "via": "MEM",
+      "destination": "SDF",
+      "previous_arrival": "14:48",
+      "next_departure": "15:55",
+      "minutes": 67
+    },
+    {
+      "flight": "398",
+      "origin": "TUL",
+      "via": "MEM",
+      "destination": "BHM",
+      "previous_arrival": "08:00",
+      "next_departure": "09:05",
+      "minutes": 65
+    },
+    {
+      "flight": "401",
+      "origin": "ATL",
+      "via": "MEM",
+      "destination": "STL",
+      "previous_arrival": "07:53",
+      "next_departure": "08:45",
+      "minutes": 52
+    },
+    {
+      "flight": "403",
+      "origin": "BHM",
+      "via": "MEM",
+      "destination": "STL",
+      "previous_arrival": "11:17",
+      "next_departure": "12:30",
+      "minutes": 73
+    },
+    {
+      "flight": "404",
+      "origin": "MCI",
+      "via": "MEM",
+      "destination": "PHL",
+      "previous_arrival": "11:40",
+      "next_departure": "12:45",
+      "minutes": 65
+    },
+    {
+      "flight": "405",
+      "origin": "TPA",
+      "via": "MEM",
+      "destination": "STL",
+      "previous_arrival": "14:50",
+      "next_departure": "15:50",
+      "minutes": 60
+    },
+    {
+      "flight": "407",
+      "origin": "BHM",
+      "via": "MEM",
+      "destination": "IAD",
+      "previous_arrival": "18:47",
+      "next_departure": "19:30",
+      "minutes": 43
+    },
+    {
+      "flight": "408",
+      "origin": "IAD",
+      "via": "MEM",
+      "destination": "BTR",
+      "previous_arrival": "18:57",
+      "next_departure": "19:45",
+      "minutes": 48
+    },
+    {
+      "flight": "409",
+      "origin": "LIT",
+      "via": "MEM",
+      "destination": "STL",
+      "previous_arrival": "21:50",
+      "next_departure": "22:45",
+      "minutes": 55
+    },
+    {
+      "flight": "436",
+      "origin": "STL",
+      "via": "MEM",
+      "destination": "BTR",
+      "previous_arrival": "14:58",
+      "next_departure": "16:00",
+      "minutes": 62
+    },
+    {
+      "flight": "448",
+      "origin": "TPA",
+      "via": "MEM",
+      "destination": "CVG",
+      "previous_arrival": "07:50",
+      "next_departure": "08:45",
+      "minutes": 55
+    },
+    {
+      "flight": "465",
+      "origin": "MIA",
+      "via": "MEM",
+      "destination": "ORD",
+      "previous_arrival": "11:22",
+      "next_departure": "12:30",
+      "minutes": 68
+    },
+    {
+      "flight": "470",
+      "origin": "ORD",
+      "via": "MEM",
+      "destination": "HOU",
+      "previous_arrival": "07:53",
+      "next_departure": "08:45",
+      "minutes": 52
+    },
+    {
+      "flight": "471",
+      "origin": "BTR",
+      "via": "MEM",
+      "destination": "ORD",
+      "previous_arrival": "07:58",
+      "next_departure": "08:50",
+      "minutes": 52
+    },
+    {
+      "flight": "474",
+      "origin": "ORD",
+      "via": "MEM",
+      "destination": "HOU",
+      "previous_arrival": "14:38",
+      "next_departure": "15:40",
+      "minutes": 62
+    },
+    {
+      "flight": "476",
+      "origin": "STL",
+      "via": "MEM",
+      "destination": "TPA",
+      "previous_arrival": "07:58",
+      "next_departure": "09:00",
+      "minutes": 62
+    },
+    {
+      "flight": "481",
+      "origin": "BHM",
+      "via": "MEM",
+      "destination": "ORD",
+      "previous_arrival": "21:47",
+      "next_departure": "22:35",
+      "minutes": 48
+    },
+    {
+      "flight": "484",
+      "origin": "SDF",
+      "via": "MEM",
+      "destination": "MGM",
+      "previous_arrival": "07:47",
+      "next_departure": "09:10",
+      "minutes": 83
+    },
+    {
+      "flight": "486",
+      "origin": "BTR",
+      "via": "MEM",
+      "destination": "STL",
+      "previous_arrival": "18:38",
+      "next_departure": "19:35",
+      "minutes": 57
+    },
+    {
+      "flight": "519",
+      "origin": "SDF",
+      "via": "MEM",
+      "destination": "IAH",
+      "previous_arrival": "15:05",
+      "next_departure": "15:45",
+      "minutes": 40
+    },
+    {
+      "flight": "521",
+      "origin": "IND",
+      "via": "MEM",
+      "destination": "SRQ",
+      "previous_arrival": "18:47",
+      "next_departure": "19:55",
+      "minutes": 68
+    },
+    {
+      "flight": "523",
+      "origin": "MKE",
+      "via": "MEM",
+      "destination": "MCO",
+      "previous_arrival": "19:07",
+      "next_departure": "19:50",
+      "minutes": 43
+    },
+    {
+      "flight": "534",
+      "origin": "MKE",
+      "via": "MEM",
+      "destination": "MSY",
+      "previous_arrival": "21:47",
+      "next_departure": "22:30",
+      "minutes": 43
+    },
+    {
+      "flight": "552",
+      "origin": "LAS",
+      "via": "MEM",
+      "destination": "IND",
+      "previous_arrival": "18:50",
+      "next_departure": "19:30",
+      "minutes": 40
+    },
+    {
+      "flight": "553",
+      "origin": "LIT",
+      "via": "MEM",
+      "destination": "LAS",
+      "previous_arrival": "11:25",
+      "next_departure": "12:05",
+      "minutes": 40
+    },
+    {
+      "flight": "555",
+      "origin": "BNA",
+      "via": "MEM",
+      "destination": "LAX",
+      "previous_arrival": "07:49",
+      "next_departure": "09:00",
+      "minutes": 71
+    },
+    {
+      "flight": "556",
+      "origin": "LAX",
+      "via": "MEM",
+      "destination": "HSV",
+      "previous_arrival": "18:45",
+      "next_departure": "19:50",
+      "minutes": 65
+    },
+    {
+      "flight": "557",
+      "origin": "HSV",
+      "via": "MEM",
+      "destination": "LAX",
+      "previous_arrival": "18:39",
+      "next_departure": "19:55",
+      "minutes": 76
+    },
+    {
+      "flight": "558",
+      "origin": "LAX",
+      "via": "MEM",
+      "destination": "BNA",
+      "previous_arrival": "21:40",
+      "next_departure": "22:35",
+      "minutes": 55
+    },
+    {
+      "flight": "569",
+      "origin": "DTW",
+      "via": "MEM",
+      "destination": "LAX",
+      "previous_arrival": "11:35",
+      "next_departure": "12:25",
+      "minutes": 50
+    },
+    {
+      "flight": "630",
+      "origin": "LIT",
+      "via": "MEM",
+      "destination": "LGA",
+      "previous_arrival": "07:40",
+      "next_departure": "09:00",
+      "minutes": 80
+    },
+    {
+      "flight": "631",
+      "origin": "LGA",
+      "via": "MEM",
+      "destination": "HSV",
+      "previous_arrival": "11:30",
+      "next_departure": "12:40",
+      "minutes": 70
+    },
+    {
+      "flight": "633",
+      "origin": "LGA",
+      "via": "MEM",
+      "destination": "LIT",
+      "previous_arrival": "14:55",
+      "next_departure": "16:05",
+      "minutes": 70
+    },
+    {
+      "flight": "634",
+      "origin": "TUL",
+      "via": "MEM",
+      "destination": "LGA",
+      "previous_arrival": "14:55",
+      "next_departure": "15:50",
+      "minutes": 55
+    },
+    {
+      "flight": "635",
+      "origin": "LGA",
+      "via": "MEM",
+      "destination": "LIT",
+      "previous_arrival": "18:50",
+      "next_departure": "19:50",
+      "minutes": 60
+    },
+    {
+      "flight": "637",
+      "origin": "LGA",
+      "via": "MEM",
+      "destination": "HOU",
+      "previous_arrival": "21:29",
+      "next_departure": "22:45",
+      "minutes": 76
+    },
+    {
+      "flight": "641",
+      "origin": "BTR",
+      "via": "MEM",
+      "destination": "TUL",
+      "previous_arrival": "15:03",
+      "next_departure": "16:05",
+      "minutes": 62
+    },
+    {
+      "flight": "664",
+      "origin": "PHX",
+      "via": "MEM",
+      "destination": "HSV",
+      "previous_arrival": "15:15",
+      "next_departure": "16:05",
+      "minutes": 50
+    },
+    {
+      "flight": "665",
+      "origin": "IND",
+      "via": "MEM",
+      "destination": "PHX",
+      "previous_arrival": "07:52",
+      "next_departure": "08:45",
+      "minutes": 53
+    },
+    {
+      "flight": "667",
+      "origin": "BHM",
+      "via": "MEM",
+      "destination": "PHX",
+      "previous_arrival": "14:47",
+      "next_departure": "15:40",
+      "minutes": 53
+    },
+    {
+      "flight": "668",
+      "origin": "PHX",
+      "via": "MEM",
+      "destination": "LGA",
+      "previous_arrival": "18:50",
+      "next_departure": "19:30",
+      "minutes": 40
+    },
+    {
+      "flight": "670",
+      "origin": "ICT",
+      "via": "MEM",
+      "destination": "ATL",
+      "previous_arrival": "08:10",
+      "next_departure": "08:50",
+      "minutes": 40
+    },
+    {
+      "flight": "680",
+      "origin": "MKE",
+      "via": "MEM",
+      "destination": "MIA",
+      "previous_arrival": "07:52",
+      "next_departure": "09:00",
+      "minutes": 68
+    },
+    {
+      "flight": "684",
+      "origin": "DEN-STAPLETON",
+      "via": "MEM",
+      "destination": "CVG",
+      "previous_arrival": "14:37",
+      "next_departure": "15:50",
+      "minutes": 73
+    },
+    {
+      "flight": "685",
+      "origin": "DCA",
+      "via": "MEM",
+      "destination": "DEN-STAPLETON",
+      "previous_arrival": "08:15",
+      "next_departure": "09:10",
+      "minutes": 55
+    },
+    {
+      "flight": "687",
+      "origin": "MIA",
+      "via": "MEM",
+      "destination": "MKE",
+      "previous_arrival": "14:52",
+      "next_departure": "15:35",
+      "minutes": 43
+    },
+    {
+      "flight": "688",
+      "origin": "MKE",
+      "via": "MEM",
+      "destination": "MIA",
+      "previous_arrival": "15:12",
+      "next_departure": "15:55",
+      "minutes": 43
+    },
+    {
+      "flight": "689",
+      "origin": "MIA",
+      "via": "MEM",
+      "destination": "MKE",
+      "previous_arrival": "21:57",
+      "next_departure": "22:40",
+      "minutes": 43
+    },
+    {
+      "flight": "690",
+      "origin": "DEN-STAPLETON",
+      "via": "MEM",
+      "destination": "ATL",
+      "previous_arrival": "21:57",
+      "next_departure": "22:45",
+      "minutes": 48
+    },
+    {
+      "flight": "691",
+      "origin": "SHV",
+      "via": "MEM",
+      "destination": "DEN-STAPLETON",
+      "previous_arrival": "14:44",
+      "next_departure": "15:40",
+      "minutes": 56
+    },
+    {
+      "flight": "705",
+      "origin": "DTW",
+      "via": "MEM",
+      "destination": "SFO",
+      "previous_arrival": "07:50",
+      "next_departure": "08:30",
+      "minutes": 40
+    },
+    {
+      "flight": "708",
+      "origin": "LAX",
+      "via": "MEM",
+      "destination": "BNA",
+      "previous_arrival": "14:50",
+      "next_departure": "15:55",
+      "minutes": 65
+    },
+    {
+      "flight": "712",
+      "origin": "STL",
+      "via": "MEM",
+      "destination": "MCO",
+      "previous_arrival": "21:43",
+      "next_departure": "22:40",
+      "minutes": 57
+    },
+    {
+      "flight": "725",
+      "origin": "STL",
+      "via": "MEM",
+      "destination": "BHM",
+      "previous_arrival": "18:55",
+      "next_departure": "19:50",
+      "minutes": 55
+    },
+    {
+      "flight": "732",
+      "origin": "DTW",
+      "via": "MEM",
+      "destination": "DFW",
+      "previous_arrival": "21:45",
+      "next_departure": "22:45",
+      "minutes": 60
+    },
+    {
+      "flight": "801",
+      "origin": "GPT",
+      "via": "MEM",
+      "destination": "TUL",
+      "previous_arrival": "08:00",
+      "next_departure": "09:00",
+      "minutes": 60
+    },
+    {
+      "flight": "803",
+      "origin": "ATL",
+      "via": "MEM",
+      "destination": "ICT",
+      "previous_arrival": "15:03",
+      "next_departure": "15:50",
+      "minutes": 47
+    },
+    {
+      "flight": "805",
+      "origin": "OKC",
+      "via": "MEM",
+      "destination": "CHA",
+      "previous_arrival": "18:53",
+      "next_departure": "19:50",
+      "minutes": 57
+    },
+    {
+      "flight": "806",
+      "origin": "VPS",
+      "via": "MEM",
+      "destination": "ICT",
+      "previous_arrival": "18:50",
+      "next_departure": "19:35",
+      "minutes": 45
+    },
+    {
+      "flight": "808",
+      "origin": "HSV",
+      "via": "MEM",
+      "destination": "MCI",
+      "previous_arrival": "11:24",
+      "next_departure": "12:15",
+      "minutes": 51
+    },
+    {
+      "flight": "809",
+      "origin": "PHL",
+      "via": "MEM",
+      "destination": "TUL",
+      "previous_arrival": "11:20",
+      "next_departure": "12:15",
+      "minutes": 55
+    },
+    {
+      "flight": "810",
+      "origin": "IAH",
+      "via": "MEM",
+      "destination": "IAD",
+      "previous_arrival": "08:15",
+      "next_departure": "09:05",
+      "minutes": 50
+    },
+    {
+      "flight": "811",
+      "origin": "IAD",
+      "via": "MEM",
+      "destination": "HSV",
+      "previous_arrival": "08:12",
+      "next_departure": "09:05",
+      "minutes": 53
+    },
+    {
+      "flight": "812",
+      "origin": "HSV",
+      "via": "MEM",
+      "destination": "IAD",
+      "previous_arrival": "14:54",
+      "next_departure": "16:00",
+      "minutes": 66
+    },
+    {
+      "flight": "814",
+      "origin": "VPS",
+      "via": "MEM",
+      "destination": "IND",
+      "previous_arrival": "15:00",
+      "next_departure": "15:50",
+      "minutes": 50
+    },
+    {
+      "flight": "815",
+      "origin": "MGM",
+      "via": "MEM",
+      "destination": "MCI",
+      "previous_arrival": "07:58",
+      "next_departure": "08:50",
+      "minutes": 52
+    },
+    {
+      "flight": "819",
+      "origin": "IAD",
+      "via": "MEM",
+      "destination": "DFW",
+      "previous_arrival": "14:52",
+      "next_departure": "15:40",
+      "minutes": 48
+    },
+    {
+      "flight": "822",
+      "origin": "CVG",
+      "via": "MEM",
+      "destination": "ATL",
+      "previous_arrival": "11:35",
+      "next_departure": "12:20",
+      "minutes": 45
+    },
+    {
+      "flight": "825",
+      "origin": "TYS",
+      "via": "MEM",
+      "destination": "OKC",
+      "previous_arrival": "15:05",
+      "next_departure": "15:50",
+      "minutes": 45
+    },
+    {
+      "flight": "826",
+      "origin": "TUL",
+      "via": "MEM",
+      "destination": "PHL",
+      "previous_arrival": "18:45",
+      "next_departure": "19:30",
+      "minutes": 45
+    },
+    {
+      "flight": "827",
+      "origin": "ATL",
+      "via": "MEM",
+      "destination": "TUL",
+      "previous_arrival": "18:38",
+      "next_departure": "19:40",
+      "minutes": 62
+    },
+    {
+      "flight": "829",
+      "origin": "BTR",
+      "via": "MEM",
+      "destination": "ICT",
+      "previous_arrival": "11:25",
+      "next_departure": "12:05",
+      "minutes": 40
+    },
+    {
+      "flight": "831",
+      "origin": "PHL",
+      "via": "MEM",
+      "destination": "MCI",
+      "previous_arrival": "18:55",
+      "next_departure": "19:45",
+      "minutes": 50
+    },
+    {
+      "flight": "838",
+      "origin": "DFW",
+      "via": "MEM",
+      "destination": "DCA",
+      "previous_arrival": "08:13",
+      "next_departure": "09:15",
+      "minutes": 62
+    },
+    {
+      "flight": "839",
+      "origin": "DCA",
+      "via": "MEM",
+      "destination": "DFW",
+      "previous_arrival": "19:05",
+      "next_departure": "20:00",
+      "minutes": 55
+    },
+    {
+      "flight": "840",
+      "origin": "ICT",
+      "via": "MEM",
+      "destination": "SHV",
+      "previous_arrival": "18:55",
+      "next_departure": "19:55",
+      "minutes": 60
+    },
+    {
+      "flight": "842",
+      "origin": "ICT",
+      "via": "MEM",
+      "destination": "CHA",
+      "previous_arrival": "15:05",
+      "next_departure": "16:05",
+      "minutes": 60
+    },
+    {
+      "flight": "843",
+      "origin": "OKC",
+      "via": "MEM",
+      "destination": "SHV",
+      "previous_arrival": "08:08",
+      "next_departure": "09:05",
+      "minutes": 57
+    },
+    {
+      "flight": "844",
+      "origin": "IAH",
+      "via": "MEM",
+      "destination": "CVG",
+      "previous_arrival": "18:55",
+      "next_departure": "19:35",
+      "minutes": 40
+    },
+    {
+      "flight": "846",
+      "origin": "SHV",
+      "via": "MEM",
+      "destination": "SDF",
+      "previous_arrival": "18:34",
+      "next_departure": "19:40",
+      "minutes": 66
+    },
+    {
+      "flight": "847",
+      "origin": "SDF",
+      "via": "MEM",
+      "destination": "MOB",
+      "previous_arrival": "18:37",
+      "next_departure": "19:35",
+      "minutes": 58
+    },
+    {
+      "flight": "848",
+      "origin": "OKC",
+      "via": "MEM",
+      "destination": "SHV",
+      "previous_arrival": "15:03",
+      "next_departure": "16:00",
+      "minutes": 57
+    }
+  ],
+  "prior_batch_ground_joins": 176,
+  "all_republic_movements_checked": 768,
+  "all_schedule_durations_checked": true,
+  "manual_duration_date_rows": 135,
+  "zero_movement_schedules_reviewed": true,
+  "same_source_duplicate_movements": 0,
+  "verification_method": "Visual source review and separate manually reviewed durations/dates/ground gaps. Fixed UTC offsets cross-check zoneinfo builder; same original source, not a second researcher/source.",
+  "specific_boundary_checks": [
+    "Three next-local-day arrival schemas; six movements.",
+    "MEM–ORD481 arrival1209A, not1229A. Correctly transcribed00:09before import.",
+    "SDF–MEM519 has equal local clocks15:05–15:05 but60minutes elapsed because Eastern/Central shift.",
+    "21new schemas span both boundary dates and contribute3movements each.",
+    "MEM–LAX56912:25–14:15 arrives22:15UTC,6min30sec before Thursday window start; Friday/Saturday only.",
+    "DEN mapped to existing historical Stapleton, not DIA; newICT airport identity/coordinates reviewed separately.",
+    "No EXP or one-stop summary imported. Four ST1rows excluded from the40selected headings."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "package": "v137",
+  "checked_on": "2026-10-02",
+  "searches": [
+    {
+      "topic": "AirTimes expanded full-PDF library",
+      "urls": [
+        "https://airtimes.com/cgat/update-2024.htm",
+        "https://airtimes.com/cgat/usa/aerovirginislands.htm"
+      ],
+      "result": "AeroVirginIslands December15,1985 edition is listed but no PDF link for it was present. Available PDFs found were1977,1979,1980,1982,1983,1987; not used for February1986 projection. No new STT times."
+    },
+    {
+      "topic": "Flamenco/Chalk regional archive",
+      "urls": [
+        "https://airtimes.com/cgat/usb/flamenco.htm",
+        "https://airtimes.com/cgat/usa/chalks.htm"
+      ],
+      "result": "Flamenco full PDFs found were1980; Chalks listedApril1985 thenApril1987, with no applicable interior obtained. No accepted new1986 clock rows."
+    },
+    {
+      "topic": "GullAir February15,1986",
+      "urls": [
+        "https://airtimes.com/cgat/usb/gullair.htm",
+        "https://www.sunshineskies.com/gull.html",
+        "https://www.timetableimages.com/ttimages/ji1.htm"
+      ],
+      "result": "Date-valid cover/route-map leads, but no applicable full1986 clock table obtained. SunshineSkies full schedule example isJuly1984; later1987 timetables not backdated. No purchase/contact."
+    },
+    {
+      "topic": "Republic source reuse",
+      "urls": [
+        "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf"
+      ],
+      "result": "Previously downloaded original visually reviewed onscans2–6;135new blank-ST schemas yield291dated US domestic movements.40selected headings=139rows,including4excluded one-stop summaries."
+    },
+    {
+      "topic": "Wichita historical identity and approximate marker",
+      "urls": [
+        "https://www.flywichita.com/history-of-the-airport/",
+        "https://www.flywichita.com/construction-projects/",
+        "https://ourairports.com/airports/KICT/"
+      ],
+      "result": "Airport authority distinguishes post-1954 Mid-Continent airfield from former Municipal/McConnell site, with2015 new terminal and2014 renaming. Use1986 Mid-Continent name and approximate current airfield marker, not terminal-level precision."
+    }
+  ],
+  "negative_results_not_proof_of_historical_absence": true,
+  "new_regional_movements": 0
+}

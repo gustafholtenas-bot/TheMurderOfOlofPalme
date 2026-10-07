@@ -1,0 +1,183 @@
+{
+  "package": "v119",
+  "baseline_archive_sha256": "68b2335be9fd8dd881cad957afdb12ff1bcae6d3c51a2798f559650171b27bc1",
+  "previous_movements_unchanged": 8343,
+  "previous_schedules_unchanged": 4861,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 322,
+  "previous_countries_unchanged": 84,
+  "modified_airline_ids": [
+    "aeroflot",
+    "british-caledonian"
+  ],
+  "modified_previous_source_ids": [
+    "dan-air-19851027-system",
+    "air-france-19851027-no25"
+  ],
+  "independent_manual_rows": 28,
+  "independent_utc_movements_verified": 36,
+  "independent_utc_expected": {
+    "aeroflot-Я-10-MJZ-YKS-0705-b116@1986-02-28": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-28T00:05:00Z"
+    ],
+    "aeroflot-Я-10-MJZ-YKS-0705-b116@1986-03-01": [
+      "1986-02-28T22:05:00Z",
+      "1986-03-01T00:05:00Z"
+    ],
+    "aeroflot-Я-10-MJZ-YKS-0705-b116@1986-03-02": [
+      "1986-03-01T22:05:00Z",
+      "1986-03-02T00:05:00Z"
+    ],
+    "aeroflot-Я-120-MJZ-YKS-1450-b116@1986-03-01": [
+      "1986-03-01T05:50:00Z",
+      "1986-03-01T07:50:00Z"
+    ],
+    "aeroflot-Я-147-MJZ-ULK-1450-b116@1986-02-28": [
+      "1986-02-28T05:50:00Z",
+      "1986-02-28T06:30:00Z"
+    ],
+    "aeroflot-Я-295-MJZ-IKT-2055-b116@1986-03-01": [
+      "1986-03-01T11:55:00Z",
+      "1986-03-01T15:05:00Z"
+    ],
+    "aeroflot-Я-296-MJZ-NYR-1735-b116@1986-03-01": [
+      "1986-03-01T08:35:00Z",
+      "1986-03-01T09:20:00Z"
+    ],
+    "aeroflot-Я-151-MJZ-PYJ-0800-b116@1986-02-28": [
+      "1986-02-27T23:00:00Z",
+      "1986-02-28T00:10:00Z"
+    ],
+    "aeroflot-Я-151-MJZ-PYJ-0800-b116@1986-03-01": [
+      "1986-02-28T23:00:00Z",
+      "1986-03-01T00:10:00Z"
+    ],
+    "aeroflot-Я-266-MJZ-SUY-0855-b116@1986-02-28": [
+      "1986-02-27T23:55:00Z",
+      "1986-02-28T00:35:00Z"
+    ],
+    "aeroflot-Я-266-MJZ-SUY-0855-b116@1986-03-01": [
+      "1986-02-28T23:55:00Z",
+      "1986-03-01T00:35:00Z"
+    ],
+    "aeroflot-Я-288-MJZ-NYR-1135-b116@1986-02-28": [
+      "1986-02-28T02:35:00Z",
+      "1986-02-28T03:20:00Z"
+    ],
+    "aeroflot-Я-299-MJZ-NYR-1655-b116@1986-03-01": [
+      "1986-03-01T07:55:00Z",
+      "1986-03-01T08:40:00Z"
+    ],
+    "british-caledonian-006-JER-LGW-1050-b116@1986-02-28": [
+      "1986-02-28T10:50:00Z",
+      "1986-02-28T11:40:00Z"
+    ],
+    "british-caledonian-006-JER-LGW-1050-b116@1986-03-01": [
+      "1986-03-01T10:50:00Z",
+      "1986-03-01T11:40:00Z"
+    ],
+    "british-caledonian-022-JER-LGW-1740-b116@1986-02-28": [
+      "1986-02-28T17:40:00Z",
+      "1986-02-28T18:35:00Z"
+    ],
+    "british-caledonian-022-JER-LGW-1740-b116@1986-03-01": [
+      "1986-03-01T17:40:00Z",
+      "1986-03-01T18:35:00Z"
+    ],
+    "british-caledonian-005-LGW-JER-0925-b116@1986-02-28": [
+      "1986-02-28T09:25:00Z",
+      "1986-02-28T10:15:00Z"
+    ],
+    "british-caledonian-005-LGW-JER-0925-b116@1986-03-01": [
+      "1986-03-01T09:25:00Z",
+      "1986-03-01T10:15:00Z"
+    ],
+    "british-caledonian-021-LGW-JER-1615-b116@1986-02-28": [
+      "1986-02-28T16:15:00Z",
+      "1986-02-28T17:05:00Z"
+    ],
+    "british-caledonian-021-LGW-JER-1615-b116@1986-03-01": [
+      "1986-03-01T16:15:00Z",
+      "1986-03-01T17:05:00Z"
+    ],
+    "dan-air-913-LGW-TLS-1630-b116@1986-02-28": [
+      "1986-02-28T16:30:00Z",
+      "1986-02-28T18:05:00Z"
+    ],
+    "dan-air-929-TLS-LGW-1405-b116@1986-03-01": [
+      "1986-03-01T13:05:00Z",
+      "1986-03-01T14:45:00Z"
+    ],
+    "dan-air-916-TLS-LGW-1950-b116@1986-02-28": [
+      "1986-02-28T18:50:00Z",
+      "1986-02-28T20:30:00Z"
+    ],
+    "british-airways-364-LHR-BOD-1055-b116@1986-03-01": [
+      "1986-03-01T10:55:00Z",
+      "1986-03-01T12:25:00Z"
+    ],
+    "air-france-1833-LHR-BOD-1250-b116@1986-02-28": [
+      "1986-02-28T12:50:00Z",
+      "1986-02-28T14:20:00Z"
+    ],
+    "air-france-1830-BOD-LHR-0720-b116@1986-02-28": [
+      "1986-02-28T06:20:00Z",
+      "1986-02-28T07:55:00Z"
+    ],
+    "british-airways-365-BOD-LHR-1405-b116@1986-03-01": [
+      "1986-03-01T13:05:00Z",
+      "1986-03-01T14:30:00Z"
+    ],
+    "air-france-1827-LHR-MRS-1025-b116@1986-02-28": [
+      "1986-02-28T10:25:00Z",
+      "1986-02-28T12:10:00Z"
+    ],
+    "british-airways-348-LHR-MRS-1155-b116@1986-02-28": [
+      "1986-02-28T11:55:00Z",
+      "1986-02-28T13:40:00Z"
+    ],
+    "british-airways-349-MRS-LHR-1525-b116@1986-02-28": [
+      "1986-02-28T14:25:00Z",
+      "1986-02-28T16:15:00Z"
+    ],
+    "air-france-1826-MRS-LHR-1820-b116@1986-02-28": [
+      "1986-02-28T17:20:00Z",
+      "1986-02-28T19:15:00Z"
+    ],
+    "air-france-1823-LHR-TLS-2000-b116@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T21:35:00Z"
+    ],
+    "air-france-1822-TLS-LHR-0845-b116@1986-02-28": [
+      "1986-02-28T07:45:00Z",
+      "1986-02-28T09:40:00Z"
+    ],
+    "air-france-961-BHX-CDG-1800-b116@1986-02-28": [
+      "1986-02-28T18:00:00Z",
+      "1986-02-28T19:10:00Z"
+    ],
+    "air-france-962-CDG-BHX-1710-b116@1986-02-28": [
+      "1986-02-28T16:10:00Z",
+      "1986-02-28T17:20:00Z"
+    ]
+  },
+  "moscow_time_direct_utc_crosscheck": true,
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "adjacent_source_leg_ground_times": [],
+  "ground_times_reviewed": true,
+  "ground_time_review_note": "No newly connected same-flight-number chains in the imported data. Return numbers are not inferred from Mirny round-trip columns.",
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "passed_data_checks; unreal_runtime_not_run",
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

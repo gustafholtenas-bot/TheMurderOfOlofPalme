@@ -1,0 +1,87 @@
+{
+  "package": "v127",
+  "held_rows": [
+    {
+      "route": "22 selected inactive LIAT schedules",
+      "decision": "reviewed_schedule_no_window_movement",
+      "schedules": [
+        "liat-317-BGI-SVD-1650-c5_11-b124",
+        "liat-317-SVD-GND-1745-c5_11-b124",
+        "liat-323-BGI-SVD-1130-c4_16-b124",
+        "liat-323-SVD-POS-1225-c4_16-b124",
+        "liat-324-POS-SVD-1355-c3_7-b124",
+        "liat-324-SVD-BGI-1505-c3_7-b124",
+        "liat-333-ANU-DOM-0730-c4_7-b124",
+        "liat-333-BGI-SVD-1035-c4_7-b124",
+        "liat-333-DOM-SLU-0825-c4_7-b124",
+        "liat-333-SLU-BGI-0920-c4_7-b124",
+        "liat-333-SVD-POS-1130-c4_7-b124",
+        "liat-336-POS-SVD-1945-c3_25-b124",
+        "liat-336-SVD-BGI-2055-c3_25-b124",
+        "liat-337-BGI-GND-1730-c5_14-b124",
+        "liat-337-GND-POS-1835-c5_14-b124",
+        "liat-350-BGI-SLU-0800-c2_3-b124",
+        "liat-350-DOM-ANU-0950-c2_3-b124",
+        "liat-350-GND-SVD-0605-c2_3-b124",
+        "liat-350-SLU-DOM-0855-c2_3-b124",
+        "liat-350-SVD-BGI-0645-c2_3-b124",
+        "liat-380-CCS-BGI-1430-c3_10-b124",
+        "liat-381-BGI-CCS-1115-c4_15-b124"
+      ],
+      "reason": "Weekday rules and exact window overlap yield no movement. Includes Caracas LI380/381: Thursday flights finish before window, Sunday outside. No invented movements."
+    },
+    {
+      "route": "LI350 holiday alternatives, LI398, LI320/354/352/397/321/351/353",
+      "decision": "wrong_effective_period_not_imported",
+      "reason": "Printed holiday and early-year periods exclude27February–1March1986. LI350 uses January13 onward columns, retaining separate Wednesday/non-Wednesday variants."
+    },
+    {
+      "route": "LI334/316/335/317/337",
+      "decision": "selected_feb17_mar26_variants_only",
+      "reason": "Other daily holiday/February6–16 columns are outside target dates."
+    },
+    {
+      "route": "LI336",
+      "decision": "selected_jan13_mar26_variant",
+      "reason": "Tuesday/Friday/Saturday column21 selected; alternative-period column22 excluded. Separate Sunday column25 reviewed without window movements."
+    },
+    {
+      "route": "LI117 and LI126 on main scans5/3 versus IAS scan7",
+      "decision": "route_equipment_operator_conflict_withheld",
+      "reason": "Main-table LI126 appears MQS–FDF with BNI; IAS LI126 has a different multi-stop chain ending BGI with DHT. Main-table LI117 appears SVD–GND whereas IAS LI117 starts BGI–MQS. Do not invent a correction or operator assignment."
+    },
+    {
+      "route": "Four Island Air / Inter-Island Air Services / Montserrat Air Services",
+      "decision": "separate_operator_pages_pending",
+      "reason": "Scans6–8 carry separate operator headings. No rows from these pages accepted as LIAT. LI prefix alone does not establish operator."
+    },
+    {
+      "route": "Canefield on southbound scan4",
+      "decision": "source_code_label_inconsistency_resolved_by_names",
+      "reason": "DOM repeated in code margin; full Canefield name and other timetable pages establish DCF. DOM/Melville Hall stays separate."
+    },
+    {
+      "route": "LI355 ground stay in Barbados",
+      "decision": "printed_140_minute_ground_interval_retained",
+      "reason": "BGI arrival18:30 and onward departure20:50 are printed; no inferred intervening flight."
+    },
+    {
+      "route": "Nicaragua",
+      "decision": "no_applicable_exact_clock_rows",
+      "reason": "Existing gaps retained; zero does not mean no historical traffic."
+    }
+  ],
+  "regional_source_checks": [
+    {
+      "name": "LIAT complete W.T.No.40 scan",
+      "url": "https://www.timetableimages.com/ttimages/li8512.htm",
+      "decision": "primary_scan_partial_import",
+      "note": "Northern and southern selections accepted; partner conflicts and amendment coverage remain open."
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_decisions_unchanged": true
+}

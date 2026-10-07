@@ -1,0 +1,39 @@
+{
+  "package": "v132",
+  "checked_on": "2026-10-02",
+  "leads": [
+    {
+      "name": "PBA Southern System December 1, 1985",
+      "urls": [
+        "https://www.sunshineskies.com/pba-tt-12-01-1985.html",
+        "https://flypba.com/timetable/s-1986-01-15/"
+      ],
+      "result": "Superseded by January 15 issue. December clocks not imported."
+    },
+    {
+      "name": "Gull Air February 15, 1986",
+      "urls": [
+        "https://airtimes.com/cgat/usb/gullair.htm",
+        "https://www.sunshineskies.com/gull.html"
+      ],
+      "result": "Correct-period cover/map found but no complete applicable clock table. July 1984 interior is not projected to 1986."
+    },
+    {
+      "name": "Bahamasair December 15, 1985",
+      "urls": [
+        "https://www.airtimes.com/cgat/bs/bahamasair.htm",
+        "https://www.airtimes.com/cgat/bs/bahamasair/gal/upgal.htm"
+      ],
+      "result": "Issue listed; complete interior not obtained. No new Bahamasair schedule imported."
+    },
+    {
+      "name": "Aeronica",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/rl3.htm"
+      ],
+      "result": "No newly obtained applicable complete 1986 interior. Nearby 1984/1987 material does not fill the Nicaragua window."
+    }
+  ],
+  "new_operational_rows_from_these_leads": 0,
+  "source_images_redistributed": false
+}

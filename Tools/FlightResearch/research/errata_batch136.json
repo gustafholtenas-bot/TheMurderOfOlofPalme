@@ -1,0 +1,55 @@
+{
+  "package": "v139",
+  "checked_on": "2026-10-02",
+  "source": "republic-19860214-employee",
+  "source_url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=3",
+  "scan_page": 3,
+  "column": 4,
+  "reason": "Enlarged original reads334 for LAX–DTW12:45–19:45,757,daily. Previously misread as347 in v138. Detected by overlap with correctly printed347MSP–SFO.",
+  "corrected_schedule_id": "republic-airlines-347-LAX-DTW-1245-b135",
+  "legacy_ids_retained": true,
+  "legacy_id_text_not_current_flight_number": true,
+  "previous_research_files_retained_as_historical_snapshots": true,
+  "changes": {
+    "flight": {
+      "before": "347",
+      "after": "334"
+    },
+    "notes": {
+      "before": {
+        "sv": "Republic, skanning 3 kolumn 4, 347 LAX–DTW, 12:45–19:45 lokal tid, dygnsförskjutning 0. Tom ST-kolumn: inga mellanstopp. FRQ=tom (daglig); utrustningskod 757. Omslaget gäller 14 februari–1 mars 1986; import 27 februari–1 mars med exakt intervallöverlapp. Separat fysiskt ben. Tidtabell, inte bekräftad drift, individflygplan eller verklig flygbana.",
+        "en": "Republic scan 3, column 4, 347 LAX–DTW, 12:45–19:45 local; arrival day offset 0. Blank ST=no intermediate stops. FRQ=blank (daily); printed equipment 757. Cover valid 14 February–1 March 1986; import 27 February–1 March with exact interval overlap. Separately timed physical segment. Scheduled, not confirmed operation, individual aircraft or actual flight path.",
+        "en_source": "Republic, skanning 3 kolumn 4, 347 LAX–DTW, 12:45–19:45 lokal tid, dygnsförskjutning 0. Tom ST-kolumn: inga mellanstopp. FRQ=tom (daglig); utrustningskod 757. Omslaget gäller 14 februari–1 mars 1986; import 27 februari–1 mars med exakt intervallöverlapp. Separat fysiskt ben. Tidtabell, inte bekräftad drift, individflygplan eller verklig flygbana."
+      },
+      "after": {
+        "sv": "Republic, skanning 3 kolumn 4, 334 LAX–DTW, 12:45–19:45 lokal tid, dygnsförskjutning 0. Tom ST-kolumn: inga mellanstopp. FRQ=tom (daglig); utrustningskod 757. Omslaget gäller 14 februari–1 mars 1986; import 27 februari–1 mars med exakt intervallöverlapp. Separat fysiskt ben. Tidtabell, inte bekräftad drift, individflygplan eller verklig flygbana. Rättad i v139: tryckt flygnummer334, tidigare felläst som347. Äldre ID behålls; tider/datum oförändrade. Se errata_batch136.json.",
+        "en": "Republic scan 3, column 4, 334 LAX–DTW, 12:45–19:45 local; arrival day offset 0. Blank ST=no intermediate stops. FRQ=blank (daily); printed equipment 757. Cover valid 14 February–1 March 1986; import 27 February–1 March with exact interval overlap. Separately timed physical segment. Scheduled, not confirmed operation, individual aircraft or actual flight path. Corrected in v139: printed flight334, previously misread as347. Legacy IDs retained; clocks/dates unchanged. See errata_batch136.json.",
+        "en_source": "Republic, skanning 3 kolumn 4, 334 LAX–DTW, 12:45–19:45 lokal tid, dygnsförskjutning 0. Tom ST-kolumn: inga mellanstopp. FRQ=tom (daglig); utrustningskod 757. Omslaget gäller 14 februari–1 mars 1986; import 27 februari–1 mars med exakt intervallöverlapp. Separat fysiskt ben. Tidtabell, inte bekräftad drift, individflygplan eller verklig flygbana. Rättad i v139: tryckt flygnummer334, tidigare felläst som347. Äldre ID behålls; tider/datum oförändrade. Se errata_batch136.json."
+      }
+    }
+  },
+  "corrected_movement_ids": [
+    "republic-airlines-347-LAX-DTW-1245-b135@1986-02-27",
+    "republic-airlines-347-LAX-DTW-1245-b135@1986-02-28",
+    "republic-airlines-347-LAX-DTW-1245-b135@1986-03-01"
+  ],
+  "clocks_dates_counts_unchanged": true,
+  "independent_source_expected_clocks": [
+    {
+      "date": "1986-02-27",
+      "departure_utc": "1986-02-27T20:45:00Z",
+      "arrival_utc": "1986-02-28T00:45:00Z"
+    },
+    {
+      "date": "1986-02-28",
+      "departure_utc": "1986-02-28T20:45:00Z",
+      "arrival_utc": "1986-03-01T00:45:00Z"
+    },
+    {
+      "date": "1986-03-01",
+      "departure_utc": "1986-03-01T20:45:00Z",
+      "arrival_utc": "1986-03-02T00:45:00Z"
+    }
+  ],
+  "new_transcription_clarification": "MKE–MSP10:45–11:45 is256, not265; corrected before new import, no older record modified."
+}

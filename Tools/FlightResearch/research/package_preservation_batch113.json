@@ -1,0 +1,50 @@
+{
+  "package": "v116",
+  "changed_prior_files": [
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/europe_country_index.json"
+  ],
+  "byte_identical_prior_file_count": 813,
+  "prior_code_byte_identical": true,
+  "prior_research_and_errata_byte_identical": true,
+  "all_prior_movement_ids_retained": true,
+  "corrected_prior_schedules": [
+    "delta-1041-ATL-DAB-1650-b103",
+    "delta-1065-DFW-LIT-1315-b106",
+    "delta-352-ATL-SDF-2252-b81",
+    "delta-388-DFW-LIT-1950-b106",
+    "delta-620-ATL-MCI-0833-b63",
+    "delta-704-ATL-MEM-1646-b79",
+    "delta-832-SEA-DFW-1220-b105",
+    "delta-874-SEA-DFW-1220-b105",
+    "delta-906-ATL-CLE-2310-b78"
+  ],
+  "corrected_prior_movements": [
+    "delta-1041-ATL-DAB-1650-b103@1986-02-27",
+    "delta-1041-ATL-DAB-1650-b103@1986-02-28",
+    "delta-1041-ATL-DAB-1650-b103@1986-03-01",
+    "delta-1065-DFW-LIT-1315-b106@1986-02-28",
+    "delta-1065-DFW-LIT-1315-b106@1986-03-01",
+    "delta-352-ATL-SDF-2252-b81@1986-02-27",
+    "delta-352-ATL-SDF-2252-b81@1986-02-28",
+    "delta-388-DFW-LIT-1950-b106@1986-02-27",
+    "delta-388-DFW-LIT-1950-b106@1986-02-28",
+    "delta-620-ATL-MCI-0833-b63@1986-02-28",
+    "delta-620-ATL-MCI-0833-b63@1986-03-01",
+    "delta-704-ATL-MEM-1646-b79@1986-02-27",
+    "delta-704-ATL-MEM-1646-b79@1986-02-28",
+    "delta-704-ATL-MEM-1646-b79@1986-03-01",
+    "delta-832-SEA-DFW-1220-b105@1986-02-27",
+    "delta-832-SEA-DFW-1220-b105@1986-02-28",
+    "delta-874-SEA-DFW-1220-b105@1986-03-01",
+    "delta-906-ATL-CLE-2310-b78@1986-02-27",
+    "delta-906-ATL-CLE-2310-b78@1986-02-28"
+  ],
+  "missing_prior_files": [],
+  "data_only": true,
+  "original_baseline_archive_sha256": "bc143ebcacba27eb14a989c2f219e83957a961808681d677b62ed70838c31bb3"
+}

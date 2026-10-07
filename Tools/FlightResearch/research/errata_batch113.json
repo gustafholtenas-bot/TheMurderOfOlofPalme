@@ -1,0 +1,305 @@
+{
+  "package": "v116",
+  "source": "delta-19860201",
+  "corrections": [
+    {
+      "schedule": "delta-620-ATL-MCI-0833-b63",
+      "source": "delta-19860201",
+      "printed_page": "15",
+      "printed_departure": "835a",
+      "printed_arrival": "930a",
+      "printed_flight": "620",
+      "changes": {
+        "departure": {
+          "before": "08:33",
+          "after": "08:35"
+        },
+        "notes": {
+          "before": {
+            "sv": "Delta, gäller från 1 februari 1986, tryckt s. 15: flyg 620, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 08:33, ankomst 09:30 samma lokala kalenderdag. Endast fysisk nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Atlanta använder Eastern Standard Time UTC−5; destinationens historiska vinterzon och explicit datumförskjutning används. Austin avser Mueller, Denver Stapleton, Washington DCA National; Houston IAH och HOU är skilda flygplatser. Planerad trafik, inte belagt genomförande eller verklig flygbana. Individflygplan och senare ändringar är inte verifierade.",
+            "en": "Delta, effective 1 February 1986, printed page 15: flight 620, stops column 0, frequency D (D=blank field/daily; X=except; Monday 1–Sunday 7). Local departure 08:33, arrival 09:30 on the same local calendar day. Physical nonstop segment only. Local departure dates 27 February–1 March are tested against the exact 48-hour window. Atlanta uses Eastern Standard Time UTC−5; historical destination winter zones and explicit arrival-day offsets apply. Austin denotes Mueller, Denver Stapleton, Washington DCA National; Houston IAH and HOU are separate airports. Scheduled service, not confirmed operation or actual flight path. Individual aircraft and later amendments are unverified.",
+            "en_source": "Delta, gäller från 1 februari 1986, tryckt s. 15: flyg 620, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 08:33, ankomst 09:30 samma lokala kalenderdag. Endast fysisk nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Atlanta använder Eastern Standard Time UTC−5; destinationens historiska vinterzon och explicit datumförskjutning används. Austin avser Mueller, Denver Stapleton, Washington DCA National; Houston IAH och HOU är skilda flygplatser. Planerad trafik, inte belagt genomförande eller verklig flygbana. Individflygplan och senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 15: Delta flyg 620, ATL–MCI, 0 stopp. Original 835a–930a; lokal tid 08:35–09:30, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.15: Delta flight 620, ATL–MCI, 0 stops. Printed 835a–930a; local 08:35–09:30, arrival 0 calendar days after departure. Weekdays 1234567 (Monday 1, Sunday 7). UTC offsets -5 at origin, -6 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 15: Delta flyg 620, ATL–MCI, 0 stopp. Original 835a–930a; lokal tid 08:35–09:30, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-906-ATL-CLE-2310-b78",
+      "source": "delta-19860201",
+      "printed_page": "14",
+      "printed_departure": "1101p",
+      "printed_arrival": "1225a",
+      "printed_flight": "906",
+      "changes": {
+        "departure": {
+          "before": "23:10",
+          "after": "23:01"
+        },
+        "notes": {
+          "before": {
+            "sv": "Delta Air Lines, tidtabell från 1 februari 1986. Tryckt s. 14: flyg 906, stoppkolumn 0 och tomt frekvensfält (dagligen). Originalets klockslag 1110p–1225a; lokal avgång 23:10, ankomst 00:25 nästa lokala kalenderdag. UTC−5 vid båda ändpunkterna. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta Air Lines timetable effective 1 February 1986. Printed page 14: flight 906, stops 0 and blank frequency field (daily). Original time tokens 1110p–1225a; local departure 23:10, arrival 00:25 on the next local calendar day. UTC−5 at both endpoints. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Delta Air Lines, tidtabell från 1 februari 1986. Tryckt s. 14: flyg 906, stoppkolumn 0 och tomt frekvensfält (dagligen). Originalets klockslag 1110p–1225a; lokal avgång 23:10, ankomst 00:25 nästa lokala kalenderdag. UTC−5 vid båda ändpunkterna. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 14: Delta flyg 906, ATL–CLE, 0 stopp. Original 1101p–1225a; lokal tid 23:01–00:25, ankomst 1 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -5 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.14: Delta flight 906, ATL–CLE, 0 stops. Printed 1101p–1225a; local 23:01–00:25, arrival 1 calendar days after departure. Weekdays 1234567 (Monday 1, Sunday 7). UTC offsets -5 at origin, -5 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 14: Delta flyg 906, ATL–CLE, 0 stopp. Original 1101p–1225a; lokal tid 23:01–00:25, ankomst 1 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -5 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-704-ATL-MEM-1646-b79",
+      "source": "delta-19860201",
+      "printed_page": "16",
+      "printed_departure": "446p",
+      "printed_arrival": "455p",
+      "printed_flight": "764",
+      "changes": {
+        "flight": {
+          "before": "704",
+          "after": "764"
+        },
+        "notes": {
+          "before": {
+            "sv": "Delta Air Lines, tidtabell från 1 februari 1986. Tryckt s. 16: flyg 704, stoppkolumn 0; tomt frekvensfält = dagligen. Originalets klockslag 446p–455p; lokal avgång 16:46, ankomst 16:55 samma lokala kalenderdag. UTC-5 vid avgång och UTC-6 vid ankomst. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta Air Lines timetable effective 1 February 1986. Printed page 16: flight 704, stops 0; blank frequency field = daily. Original time tokens 446p–455p; local departure 16:46, arrival 16:55 on the same local calendar day. UTC-5 at departure and UTC-6 at arrival. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Delta Air Lines, tidtabell från 1 februari 1986. Tryckt s. 16: flyg 704, stoppkolumn 0; tomt frekvensfält = dagligen. Originalets klockslag 446p–455p; lokal avgång 16:46, ankomst 16:55 samma lokala kalenderdag. UTC-5 vid avgång och UTC-6 vid ankomst. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 16: Delta flyg 764, ATL–MEM, 0 stopp. Original 446p–455p; lokal tid 16:46–16:55, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.16: Delta flight 764, ATL–MEM, 0 stops. Printed 446p–455p; local 16:46–16:55, arrival 0 calendar days after departure. Weekdays 1234567 (Monday 1, Sunday 7). UTC offsets -5 at origin, -6 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 16: Delta flyg 764, ATL–MEM, 0 stopp. Original 446p–455p; lokal tid 16:46–16:55, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-352-ATL-SDF-2252-b81",
+      "source": "delta-19860201",
+      "printed_page": "16",
+      "printed_departure": "1058p",
+      "printed_arrival": "1155p",
+      "printed_flight": "352",
+      "changes": {
+        "departure": {
+          "before": "22:52",
+          "after": "22:58"
+        },
+        "notes": {
+          "before": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 16: flyg 352, stoppkolumn 0, dagligen (tomt frekvensfält). Delta Air Lines. Originalets klockslag 1052p–1155p; lokal avgång 22:52, ankomst 23:55 samma lokala kalenderdag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta timetable effective 1 February 1986, printed page 16: flight 352, stops 0, daily (blank frequency field). Delta Air Lines. Original time tokens 1052p–1155p; local departure 22:52, arrival 23:55 on the same local calendar day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 16: flyg 352, stoppkolumn 0, dagligen (tomt frekvensfält). Delta Air Lines. Originalets klockslag 1052p–1155p; lokal avgång 22:52, ankomst 23:55 samma lokala kalenderdag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 16: Delta flyg 352, ATL–SDF, 0 stopp. Original 1058p–1155p; lokal tid 22:58–23:55, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -5 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.16: Delta flight 352, ATL–SDF, 0 stops. Printed 1058p–1155p; local 22:58–23:55, arrival 0 calendar days after departure. Weekdays 1234567 (Monday 1, Sunday 7). UTC offsets -5 at origin, -5 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 16: Delta flyg 352, ATL–SDF, 0 stopp. Original 1058p–1155p; lokal tid 22:58–23:55, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -5 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-1041-ATL-DAB-1650-b103",
+      "source": "delta-19860201",
+      "printed_page": "15",
+      "printed_departure": "447p",
+      "printed_arrival": "550p",
+      "printed_flight": "1041",
+      "changes": {
+        "departure": {
+          "before": "16:50",
+          "after": "16:47"
+        },
+        "notes": {
+          "before": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 15: flyg 1041, stoppkolumn 0, trafikdagar 1234567 (1=måndag, 7=söndag; tryckt frekvens D, D anger tomt fält/dagligen). Originalets klockslag 450p–550p; lokal tid 16:50–17:50 samma kalenderdag. Avgång UTC-5, ankomst UTC-5. Separat källgranskad nonstopsträcka med egna veckodagar. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta timetable effective 1 February 1986, printed page 15: flight 1041, stops 0, weekdays 1234567 (Monday 1, Sunday 7; printed frequency D, D encodes blank/daily). Original tokens 450p–550p; local time 16:50–17:50 on the same calendar day. Departure UTC-5, arrival UTC-5. Individually sourced nonstop segment with its own weekdays. Local departure dates 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 15: flyg 1041, stoppkolumn 0, trafikdagar 1234567 (1=måndag, 7=söndag; tryckt frekvens D, D anger tomt fält/dagligen). Originalets klockslag 450p–550p; lokal tid 16:50–17:50 samma kalenderdag. Avgång UTC-5, ankomst UTC-5. Separat källgranskad nonstopsträcka med egna veckodagar. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 15: Delta flyg 1041, ATL–DAB, 0 stopp. Original 447p–550p; lokal tid 16:47–17:50, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -5 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.15: Delta flight 1041, ATL–DAB, 0 stops. Printed 447p–550p; local 16:47–17:50, arrival 0 calendar days after departure. Weekdays 1234567 (Monday 1, Sunday 7). UTC offsets -5 at origin, -5 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 15: Delta flyg 1041, ATL–DAB, 0 stopp. Original 447p–550p; lokal tid 16:47–17:50, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -5 vid avgång, -5 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-832-SEA-DFW-1220-b105",
+      "source": "delta-19860201",
+      "printed_page": "223",
+      "printed_departure": "120p",
+      "printed_arrival": "647p",
+      "printed_flight": "832",
+      "changes": {
+        "departure": {
+          "before": "12:20",
+          "after": "13:20"
+        },
+        "arrival": {
+          "before": "17:47",
+          "after": "18:47"
+        },
+        "notes": {
+          "before": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: flyg 832, stoppkolumn 0, trafikdagar 123457 (1=måndag, 7=söndag; tryckt frekvens X6, D anger tomt fält/dagligen). Originalets klockslag 1220p–547p; lokal avgång 12:20, ankomst 17:47 samma lokala kalenderdag. Avgång UTC-8, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. Los Angeles L=LAX och O=Ontario/ONT; Dallas avser DFW, Kansas City MCI och Las Vegas McCarran. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta timetable effective 1 February 1986, printed page 223: flight 832, stops 0, weekdays 123457 (Monday 1, Sunday 7; printed frequency X6, D encodes blank/daily). Original tokens 1220p–547p; local departure 12:20, arrival 17:47 on the same local calendar day. Departure UTC-8, arrival UTC-6. Row effective from 1986-02-01; dated end not verified. Individually sourced nonstop segment with its own weekdays. Los Angeles L=LAX and O=Ontario/ONT; Dallas denotes DFW, Kansas City MCI and Las Vegas McCarran. Local departure dates 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: flyg 832, stoppkolumn 0, trafikdagar 123457 (1=måndag, 7=söndag; tryckt frekvens X6, D anger tomt fält/dagligen). Originalets klockslag 1220p–547p; lokal avgång 12:20, ankomst 17:47 samma lokala kalenderdag. Avgång UTC-8, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. Los Angeles L=LAX och O=Ontario/ONT; Dallas avser DFW, Kansas City MCI och Las Vegas McCarran. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: Delta flyg 832, SEA–DFW, 0 stopp. Original 120p–647p; lokal tid 13:20–18:47, ankomst 0 kalenderdygn efter avgång. Veckodagar 123457 (1=måndag, 7=söndag). UTC-förskjutning -8 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.223: Delta flight 832, SEA–DFW, 0 stops. Printed 120p–647p; local 13:20–18:47, arrival 0 calendar days after departure. Weekdays 123457 (Monday 1, Sunday 7). UTC offsets -8 at origin, -6 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: Delta flyg 832, SEA–DFW, 0 stopp. Original 120p–647p; lokal tid 13:20–18:47, ankomst 0 kalenderdygn efter avgång. Veckodagar 123457 (1=måndag, 7=söndag). UTC-förskjutning -8 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-874-SEA-DFW-1220-b105",
+      "source": "delta-19860201",
+      "printed_page": "223",
+      "printed_departure": "120p",
+      "printed_arrival": "647p",
+      "printed_flight": "874",
+      "changes": {
+        "departure": {
+          "before": "12:20",
+          "after": "13:20"
+        },
+        "arrival": {
+          "before": "17:47",
+          "after": "18:47"
+        },
+        "notes": {
+          "before": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: flyg 874, stoppkolumn 0, trafikdagar 6 (1=måndag, 7=söndag; tryckt frekvens 6, D anger tomt fält/dagligen). Originalets klockslag 1220p–547p; lokal avgång 12:20, ankomst 17:47 samma lokala kalenderdag. Avgång UTC-8, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. Los Angeles L=LAX och O=Ontario/ONT; Dallas avser DFW, Kansas City MCI och Las Vegas McCarran. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta timetable effective 1 February 1986, printed page 223: flight 874, stops 0, weekdays 6 (Monday 1, Sunday 7; printed frequency 6, D encodes blank/daily). Original tokens 1220p–547p; local departure 12:20, arrival 17:47 on the same local calendar day. Departure UTC-8, arrival UTC-6. Row effective from 1986-02-01; dated end not verified. Individually sourced nonstop segment with its own weekdays. Los Angeles L=LAX and O=Ontario/ONT; Dallas denotes DFW, Kansas City MCI and Las Vegas McCarran. Local departure dates 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: flyg 874, stoppkolumn 0, trafikdagar 6 (1=måndag, 7=söndag; tryckt frekvens 6, D anger tomt fält/dagligen). Originalets klockslag 1220p–547p; lokal avgång 12:20, ankomst 17:47 samma lokala kalenderdag. Avgång UTC-8, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. Los Angeles L=LAX och O=Ontario/ONT; Dallas avser DFW, Kansas City MCI och Las Vegas McCarran. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: Delta flyg 874, SEA–DFW, 0 stopp. Original 120p–647p; lokal tid 13:20–18:47, ankomst 0 kalenderdygn efter avgång. Veckodagar 6 (1=måndag, 7=söndag). UTC-förskjutning -8 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.223: Delta flight 874, SEA–DFW, 0 stops. Printed 120p–647p; local 13:20–18:47, arrival 0 calendar days after departure. Weekdays 6 (Monday 1, Sunday 7). UTC offsets -8 at origin, -6 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 223: Delta flyg 874, SEA–DFW, 0 stopp. Original 120p–647p; lokal tid 13:20–18:47, ankomst 0 kalenderdygn efter avgång. Veckodagar 6 (1=måndag, 7=söndag). UTC-förskjutning -8 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-1065-DFW-LIT-1315-b106",
+      "source": "delta-19860201",
+      "printed_page": "65",
+      "printed_departure": "315p",
+      "printed_arrival": "410p",
+      "printed_flight": "1085",
+      "changes": {
+        "flight": {
+          "before": "1065",
+          "after": "1085"
+        },
+        "departure": {
+          "before": "13:15",
+          "after": "15:15"
+        },
+        "arrival": {
+          "before": "14:10",
+          "after": "16:10"
+        },
+        "notes": {
+          "before": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: flyg 1065, stoppkolumn 0, trafikdagar 1234567 (1=måndag, 7=söndag; tryckt frekvens D, D anger tomt fält/dagligen). Originalets klockslag 115p–210p; lokal avgång 13:15, ankomst 14:10 samma lokala kalenderdag. Avgång UTC-6, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. New York L=LaGuardia/LGA, E=Newark/EWR och J=JFK; Dallas avser DFW. Nassau använder det historiska namnet Nassau International. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta timetable effective 1 February 1986, printed page 65: flight 1065, stops 0, weekdays 1234567 (Monday 1, Sunday 7; printed frequency D, D encodes blank/daily). Original tokens 115p–210p; local departure 13:15, arrival 14:10 on the same local calendar day. Departure UTC-6, arrival UTC-6. Row effective from 1986-02-01; dated end not verified. Individually sourced nonstop segment with its own weekdays. New York L=LaGuardia/LGA, E=Newark/EWR and J=JFK; Dallas denotes DFW. Nassau uses its historical Nassau International name. Local departure dates 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: flyg 1065, stoppkolumn 0, trafikdagar 1234567 (1=måndag, 7=söndag; tryckt frekvens D, D anger tomt fält/dagligen). Originalets klockslag 115p–210p; lokal avgång 13:15, ankomst 14:10 samma lokala kalenderdag. Avgång UTC-6, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. New York L=LaGuardia/LGA, E=Newark/EWR och J=JFK; Dallas avser DFW. Nassau använder det historiska namnet Nassau International. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: Delta flyg 1085, DFW–LIT, 0 stopp. Original 315p–410p; lokal tid 15:15–16:10, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -6 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.65: Delta flight 1085, DFW–LIT, 0 stops. Printed 315p–410p; local 15:15–16:10, arrival 0 calendar days after departure. Weekdays 1234567 (Monday 1, Sunday 7). UTC offsets -6 at origin, -6 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: Delta flyg 1085, DFW–LIT, 0 stopp. Original 315p–410p; lokal tid 15:15–16:10, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -6 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    },
+    {
+      "schedule": "delta-388-DFW-LIT-1950-b106",
+      "source": "delta-19860201",
+      "printed_page": "65",
+      "printed_departure": "755p",
+      "printed_arrival": "850p",
+      "printed_flight": "388",
+      "changes": {
+        "departure": {
+          "before": "19:50",
+          "after": "19:55"
+        },
+        "notes": {
+          "before": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: flyg 388, stoppkolumn 0, trafikdagar 1234567 (1=måndag, 7=söndag; tryckt frekvens D, D anger tomt fält/dagligen). Originalets klockslag 750p–850p; lokal avgång 19:50, ankomst 20:50 samma lokala kalenderdag. Avgång UTC-6, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. New York L=LaGuardia/LGA, E=Newark/EWR och J=JFK; Dallas avser DFW. Nassau använder det historiska namnet Nassau International. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta timetable effective 1 February 1986, printed page 65: flight 388, stops 0, weekdays 1234567 (Monday 1, Sunday 7; printed frequency D, D encodes blank/daily). Original tokens 750p–850p; local departure 19:50, arrival 20:50 on the same local calendar day. Departure UTC-6, arrival UTC-6. Row effective from 1986-02-01; dated end not verified. Individually sourced nonstop segment with its own weekdays. New York L=LaGuardia/LGA, E=Newark/EWR and J=JFK; Dallas denotes DFW. Nassau uses its historical Nassau International name. Local departure dates 27 February–1 March are tested against the exact 48-hour window; full times retained for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: flyg 388, stoppkolumn 0, trafikdagar 1234567 (1=måndag, 7=söndag; tryckt frekvens D, D anger tomt fält/dagligen). Originalets klockslag 750p–850p; lokal avgång 19:50, ankomst 20:50 samma lokala kalenderdag. Avgång UTC-6, ankomst UTC-6. Radens giltighet från 1986-02-01; ingen daterad slutgräns verifierad. Separat källgranskad nonstopsträcka med egna veckodagar. New York L=LaGuardia/LGA, E=Newark/EWR och J=JFK; Dallas avser DFW. Nassau använder det historiska namnet Nassau International. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret; hela tider bevaras vid överlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "after": {
+            "sv": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: Delta flyg 388, DFW–LIT, 0 stopp. Original 755p–850p; lokal tid 19:55–20:50, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -6 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json.",
+            "en": "Delta timetable effective 1 February 1986, printed p.65: Delta flight 388, DFW–LIT, 0 stops. Printed 755p–850p; local 19:55–20:50, arrival 0 calendar days after departure. Weekdays 1234567 (Monday 1, Sunday 7). UTC offsets -6 at origin, -6 at destination. No dated row footnote. Only independently timed nonstop legs are imported. Star denotes off-peak fare, not rollover. Full intervals overlapping the exact 48-hour window retained. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Edition end and later amendments unverified. Corrected in v116 after visual source re-review; legacy ID retained. See errata_batch113.json.",
+            "en_source": "Deltas tidtabell från 1 februari 1986, tryckt s. 65: Delta flyg 388, DFW–LIT, 0 stopp. Original 755p–850p; lokal tid 19:55–20:50, ankomst 0 kalenderdygn efter avgång. Veckodagar 1234567 (1=måndag, 7=söndag). UTC-förskjutning -6 vid avgång, -6 vid ankomst. Ingen daterad radfotnot. Endast separat tidsatta nonstop-ben importeras. Stjärna betyder lågtrafikpris, inte datumskifte. Hela intervall som överlappar det exakta 48-timmarsfönstret behålls. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Utgåvans slutdatum och senare ändringar är inte verifierade. Rättad i v116 enligt ny visuell originalgranskning; tidigare ID behålls. Se errata_batch113.json."
+          }
+        }
+      },
+      "legacy_ids_retained": true,
+      "previous_research_files_retained_as_historical_snapshots": true
+    }
+  ],
+  "corrected_previous_movement_ids": [
+    "delta-832-SEA-DFW-1220-b105@1986-02-27",
+    "delta-704-ATL-MEM-1646-b79@1986-02-27",
+    "delta-1041-ATL-DAB-1650-b103@1986-02-27",
+    "delta-388-DFW-LIT-1950-b106@1986-02-27",
+    "delta-352-ATL-SDF-2252-b81@1986-02-27",
+    "delta-906-ATL-CLE-2310-b78@1986-02-27",
+    "delta-620-ATL-MCI-0833-b63@1986-02-28",
+    "delta-1065-DFW-LIT-1315-b106@1986-02-28",
+    "delta-832-SEA-DFW-1220-b105@1986-02-28",
+    "delta-704-ATL-MEM-1646-b79@1986-02-28",
+    "delta-1041-ATL-DAB-1650-b103@1986-02-28",
+    "delta-388-DFW-LIT-1950-b106@1986-02-28",
+    "delta-352-ATL-SDF-2252-b81@1986-02-28",
+    "delta-906-ATL-CLE-2310-b78@1986-02-28",
+    "delta-620-ATL-MCI-0833-b63@1986-03-01",
+    "delta-1065-DFW-LIT-1315-b106@1986-03-01",
+    "delta-874-SEA-DFW-1220-b105@1986-03-01",
+    "delta-704-ATL-MEM-1646-b79@1986-03-01",
+    "delta-1041-ATL-DAB-1650-b103@1986-03-01"
+  ],
+  "historical_reports_not_rewritten": true,
+  "open_review": [
+    {
+      "schedule": "delta-125-ATL-NAS-1155-b106",
+      "field": "departure",
+      "existing_value": "11:55",
+      "printed_page": 16,
+      "status": "No correction made: enlargement and OCR disagree on the printed minute; needs clearer source evidence. Not a new imported row."
+    }
+  ]
+}

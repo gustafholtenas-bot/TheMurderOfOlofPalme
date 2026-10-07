@@ -1,0 +1,19 @@
+{
+  "package": "v109",
+  "checked_on": "2026-10-01",
+  "changed_prior_files": [
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/europe_country_index.json",
+    "Tools/FlightResearch/research/europe_country_queue.json"
+  ],
+  "byte_identical_prior_file_count": 735,
+  "prior_code_byte_identical": true,
+  "prior_research_and_errata_byte_identical": true,
+  "missing_prior_files": [],
+  "data_only": true,
+  "original_baseline_archive_sha256": "9ba39772a2f4351b463bf74bec8ff54c952817c57234b7e0484acf2800fd88ea"
+}

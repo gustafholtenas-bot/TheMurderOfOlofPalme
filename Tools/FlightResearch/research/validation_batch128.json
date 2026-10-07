@@ -1,0 +1,900 @@
+{
+  "package": "v131",
+  "baseline_archive_sha256": "bb1b77bd22987ba787aa175c946eafb1c6507fdde332665caaed169610c25861",
+  "previous_movements_unchanged": 9060,
+  "previous_schedules_unchanged": 5387,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 383,
+  "previous_countries_unchanged": 121,
+  "modified_airline_ids": [],
+  "modified_previous_source_ids": [
+    "republic-19860214-employee"
+  ],
+  "source_metadata_before": {
+    "id": "republic-19860214-employee",
+    "title": "Republic Airlines • Employee System Timetable •14Feb–1Mar1986",
+    "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+    "kind": "timetable",
+    "access": "full_scan",
+    "valid_from": "1986-02-14",
+    "valid_to": "1986-03-01",
+    "window_reviewed": true,
+    "reviewed_pages": [
+      "Unnumbered cover(scan1): explicit validity14Feb–1Mar1986",
+      "Unnumbered schedule panels(scans2–6):68 selected blank-ST jet rows",
+      "Legend(scan6):day numbers, X, A/P, ST and EXP operator attribution",
+      "City-code index(scan7):CUN,GCM and US airport identities"
+    ],
+    "checked_on": "2026-10-01",
+    "publication_index_url": "https://northwestairlineshistory.org/timetables-republic/",
+    "notes": {
+      "sv": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår.",
+      "en": "Republic Employee System Timetable, cover validity14February–1March1986. Scans2–6 reviewed for separately timed segments with blank ST (no intermediate stops). ST=stops, X=except and1=Monday…7=Sunday per scan6. Blank FRQ interpreted as daily. A/P means AM/PM; times interpreted as local by timetable convention and timezone consistency. No explicit all-times-local statement located. Only Republic mainline jet codes accepted; EXP services operated by other airlines excluded. Printed DC9/D9S/D95/72S codes retained without identifying individual aircraft. Partial coverage of Grand Cayman, Cancun and five Florida airports, plus Detroit/Memphis/Minneapolis links. 68 schedules; late Saturday departures filtered out of movements. Scheduled, not confirmed operation. Remaining network and amendments unreviewed.",
+      "en_source": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår."
+    }
+  },
+  "source_metadata_after": {
+    "id": "republic-19860214-employee",
+    "title": "Republic Airlines • Employee System Timetable •14Feb–1Mar1986",
+    "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+    "kind": "timetable",
+    "access": "full_scan",
+    "valid_from": "1986-02-14",
+    "valid_to": "1986-03-01",
+    "window_reviewed": true,
+    "reviewed_pages": [
+      "Unnumbered cover(scan1): explicit validity14Feb–1Mar1986",
+      "Unnumbered schedule panels(scans2–6):68 selected blank-ST jet rows",
+      "Legend(scan6):day numbers, X, A/P, ST and EXP operator attribution",
+      "City-code index(scan7):CUN,GCM and US airport identities",
+      "V131: scans 2–6, 61 additional blank-ST mainline jet rows; scan 7 airport codes; scan 6 weekday, ST and EXP legend."
+    ],
+    "checked_on": "2026-10-02",
+    "publication_index_url": "https://northwestairlineshistory.org/timetables-republic/",
+    "notes": {
+      "sv": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår. Tillägg v131: 61 separata jetben granskade på skanning 2–6 för Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City i Florida, New Orleans och Houston Hobby/Intercontinental samt Memphis/Detroit. Endast tom ST-kolumn accepteras. 60 scheman ger rörelser; RC767 lördag kväll ligger utanför tidsfönstret. Äldre 68 scheman och samtliga äldre rörelser är oförändrade. Källans uttryckliga giltighet 14 februari–1 mars 1986 täcker hela importen; ändringsblad är inte fullständigt inventerade.",
+      "en": "Republic Employee System Timetable, cover validity14February–1March1986. Scans2–6 reviewed for separately timed segments with blank ST (no intermediate stops). ST=stops, X=except and1=Monday…7=Sunday per scan6. Blank FRQ interpreted as daily. A/P means AM/PM; times interpreted as local by timetable convention and timezone consistency. No explicit all-times-local statement located. Only Republic mainline jet codes accepted; EXP services operated by other airlines excluded. Printed DC9/D9S/D95/72S codes retained without identifying individual aircraft. Partial coverage of Grand Cayman, Cancun and five Florida airports, plus Detroit/Memphis/Minneapolis links. 68 schedules; late Saturday departures filtered out of movements. Scheduled, not confirmed operation. Remaining network and amendments unreviewed. V131 addendum: 61 separately timed mainline jet rows on scans 2–6 reviewed for Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City Florida, New Orleans, Houston Hobby/Intercontinental and Memphis/Detroit. Blank ST only; 60 schedules contribute movements, RC767 Saturday evening is outside the window. Previous 68 schedules and all older movements preserved. Explicit cover validity 14 February–1 March 1986 covers the import; amendments not completely inventoried.",
+      "en_source": "Republics Employee System Timetable, omslagets giltighet14februari–1mars1986. Skanning2–6 granskad för separat tidsatta ben med tom ST-kolumn (inga mellanstopp). ST=stops, X=except och1=måndag…7=söndag enligt skanning6. Tom FRQ tolkas som daglig trafik. A/P anger AM/PM; tiderna tolkas som lokala enligt tidtabellskonvention och kontrolleras mot tidszoner. En uttrycklig all-times-local-text har inte återfunnits. Endast Republics egna jetkoder accepteras i detta urval; EXP-tjänster med andra operatörer utesluts. Koderna DC9/D9S/D95/72S bevaras utan att identifiera individflygplan. Urval: Grand Cayman, Cancún och fem Florida-flygplatser till/från Detroit, Memphis och Minneapolis, samt Orlando–Tampa. 68 scheman; sen lördagstrafik filtreras bort från rörelserna. Planerad trafik, inte bekräftat genomförande. Resten av nätet och eventuella ändringsblad återstår. Tillägg v131: 61 separata jetben granskade på skanning 2–6 för Puerto Vallarta, Gulfport, Mobile, Fort Walton Beach, Montgomery, Panama City i Florida, New Orleans och Houston Hobby/Intercontinental samt Memphis/Detroit. Endast tom ST-kolumn accepteras. 60 scheman ger rörelser; RC767 lördag kväll ligger utanför tidsfönstret. Äldre 68 scheman och samtliga äldre rörelser är oförändrade. Källans uttryckliga giltighet 14 februari–1 mars 1986 täcker hela importen; ändringsblad är inte fullständigt inventerade."
+    }
+  },
+  "independent_manual_rows": 61,
+  "independent_utc_movements_verified": 126,
+  "independent_utc_expected": {
+    "republic-airlines-801-GPT-MEM-0700-b128@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:00:00Z"
+    ],
+    "republic-airlines-801-GPT-MEM-0700-b128@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:00:00Z"
+    ],
+    "republic-airlines-758-GPT-MEM-1400-b128@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T21:02:00Z"
+    ],
+    "republic-airlines-758-GPT-MEM-1400-b128@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T21:02:00Z"
+    ],
+    "republic-airlines-818-GPT-MEM-1755-b128@1986-02-27": [
+      "1986-02-27T23:55:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "republic-airlines-818-GPT-MEM-1755-b128@1986-02-28": [
+      "1986-02-28T23:55:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "republic-airlines-251-MEM-GPT-1235-b128@1986-02-28": [
+      "1986-02-28T18:35:00Z",
+      "1986-02-28T19:35:00Z"
+    ],
+    "republic-airlines-251-MEM-GPT-1235-b128@1986-03-01": [
+      "1986-03-01T18:35:00Z",
+      "1986-03-01T19:35:00Z"
+    ],
+    "republic-airlines-818-MOB-GPT-1710-b128@1986-02-27": [
+      "1986-02-27T23:10:00Z",
+      "1986-02-27T23:33:00Z"
+    ],
+    "republic-airlines-818-MOB-GPT-1710-b128@1986-02-28": [
+      "1986-02-28T23:10:00Z",
+      "1986-02-28T23:33:00Z"
+    ],
+    "republic-airlines-847-MOB-GPT-2100-b128@1986-02-27": [
+      "1986-02-28T03:00:00Z",
+      "1986-02-28T03:23:00Z"
+    ],
+    "republic-airlines-847-MOB-GPT-2100-b128@1986-02-28": [
+      "1986-03-01T03:00:00Z",
+      "1986-03-01T03:23:00Z"
+    ],
+    "republic-airlines-393-MOB-MEM-0700-b128@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T13:58:00Z"
+    ],
+    "republic-airlines-393-MOB-MEM-0700-b128@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T13:58:00Z"
+    ],
+    "republic-airlines-802-MOB-MEM-1030-b128@1986-02-28": [
+      "1986-02-28T16:30:00Z",
+      "1986-02-28T17:28:00Z"
+    ],
+    "republic-airlines-802-MOB-MEM-1030-b128@1986-03-01": [
+      "1986-03-01T16:30:00Z",
+      "1986-03-01T17:28:00Z"
+    ],
+    "republic-airlines-414-MOB-MEM-1400-b128@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T20:58:00Z"
+    ],
+    "republic-airlines-414-MOB-MEM-1400-b128@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T20:58:00Z"
+    ],
+    "republic-airlines-655-MEM-MOB-0855-b128@1986-02-28": [
+      "1986-02-28T14:55:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "republic-airlines-655-MEM-MOB-0855-b128@1986-03-01": [
+      "1986-03-01T14:55:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "republic-airlines-148-MEM-MOB-1235-b128@1986-02-28": [
+      "1986-02-28T18:35:00Z",
+      "1986-02-28T19:35:00Z"
+    ],
+    "republic-airlines-148-MEM-MOB-1235-b128@1986-03-01": [
+      "1986-03-01T18:35:00Z",
+      "1986-03-01T19:35:00Z"
+    ],
+    "republic-airlines-841-MEM-MOB-1545-b128@1986-02-27": [
+      "1986-02-27T21:45:00Z",
+      "1986-02-27T22:45:00Z"
+    ],
+    "republic-airlines-841-MEM-MOB-1545-b128@1986-02-28": [
+      "1986-02-28T21:45:00Z",
+      "1986-02-28T22:45:00Z"
+    ],
+    "republic-airlines-841-MEM-MOB-1545-b128@1986-03-01": [
+      "1986-03-01T21:45:00Z",
+      "1986-03-01T22:45:00Z"
+    ],
+    "republic-airlines-847-MEM-MOB-1935-b128@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T02:35:00Z"
+    ],
+    "republic-airlines-847-MEM-MOB-1935-b128@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T02:35:00Z"
+    ],
+    "republic-airlines-458-MEM-MOB-2240-b128@1986-02-27": [
+      "1986-02-28T04:40:00Z",
+      "1986-02-28T05:40:00Z"
+    ],
+    "republic-airlines-458-MEM-MOB-2240-b128@1986-02-28": [
+      "1986-03-01T04:40:00Z",
+      "1986-03-01T05:40:00Z"
+    ],
+    "republic-airlines-247-MEM-VPS-1210-b128@1986-02-28": [
+      "1986-02-28T18:10:00Z",
+      "1986-02-28T19:18:00Z"
+    ],
+    "republic-airlines-247-MEM-VPS-1210-b128@1986-03-01": [
+      "1986-03-01T18:10:00Z",
+      "1986-03-01T19:18:00Z"
+    ],
+    "republic-airlines-259-MEM-VPS-1600-b128@1986-02-27": [
+      "1986-02-27T22:00:00Z",
+      "1986-02-27T23:08:00Z"
+    ],
+    "republic-airlines-259-MEM-VPS-1600-b128@1986-02-28": [
+      "1986-02-28T22:00:00Z",
+      "1986-02-28T23:08:00Z"
+    ],
+    "republic-airlines-259-MEM-VPS-1600-b128@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T23:08:00Z"
+    ],
+    "republic-airlines-835-MEM-VPS-1950-b128@1986-02-27": [
+      "1986-02-28T01:50:00Z",
+      "1986-02-28T02:58:00Z"
+    ],
+    "republic-airlines-835-MEM-VPS-1950-b128@1986-02-28": [
+      "1986-03-01T01:50:00Z",
+      "1986-03-01T02:58:00Z"
+    ],
+    "republic-airlines-845-VPS-MEM-0700-b128@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:15:00Z"
+    ],
+    "republic-airlines-845-VPS-MEM-0700-b128@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:15:00Z"
+    ],
+    "republic-airlines-814-VPS-MEM-1345-b128@1986-02-28": [
+      "1986-02-28T19:45:00Z",
+      "1986-02-28T21:00:00Z"
+    ],
+    "republic-airlines-814-VPS-MEM-1345-b128@1986-03-01": [
+      "1986-03-01T19:45:00Z",
+      "1986-03-01T21:00:00Z"
+    ],
+    "republic-airlines-806-VPS-MEM-1735-b128@1986-02-27": [
+      "1986-02-27T23:35:00Z",
+      "1986-02-28T00:50:00Z"
+    ],
+    "republic-airlines-806-VPS-MEM-1735-b128@1986-02-28": [
+      "1986-02-28T23:35:00Z",
+      "1986-03-01T00:50:00Z"
+    ],
+    "republic-airlines-815-MGM-MEM-0700-b128@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T13:58:00Z"
+    ],
+    "republic-airlines-815-MGM-MEM-0700-b128@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T13:58:00Z"
+    ],
+    "republic-airlines-396-MGM-MEM-1350-b128@1986-02-28": [
+      "1986-02-28T19:50:00Z",
+      "1986-02-28T20:48:00Z"
+    ],
+    "republic-airlines-396-MGM-MEM-1350-b128@1986-03-01": [
+      "1986-03-01T19:50:00Z",
+      "1986-03-01T20:48:00Z"
+    ],
+    "republic-airlines-171-MGM-MEM-1720-b128@1986-02-27": [
+      "1986-02-27T23:20:00Z",
+      "1986-02-28T00:18:00Z"
+    ],
+    "republic-airlines-171-MGM-MEM-1720-b128@1986-02-28": [
+      "1986-02-28T23:20:00Z",
+      "1986-03-01T00:18:00Z"
+    ],
+    "republic-airlines-484-MEM-MGM-0910-b128@1986-02-28": [
+      "1986-02-28T15:10:00Z",
+      "1986-02-28T16:03:00Z"
+    ],
+    "republic-airlines-484-MEM-MGM-0910-b128@1986-03-01": [
+      "1986-03-01T15:10:00Z",
+      "1986-03-01T16:03:00Z"
+    ],
+    "republic-airlines-299-MEM-MGM-1600-b128@1986-02-27": [
+      "1986-02-27T22:00:00Z",
+      "1986-02-27T22:53:00Z"
+    ],
+    "republic-airlines-299-MEM-MGM-1600-b128@1986-02-28": [
+      "1986-02-28T22:00:00Z",
+      "1986-02-28T22:53:00Z"
+    ],
+    "republic-airlines-299-MEM-MGM-1600-b128@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T22:53:00Z"
+    ],
+    "republic-airlines-834-MEM-MGM-2000-b128@1986-02-27": [
+      "1986-02-28T02:00:00Z",
+      "1986-02-28T02:53:00Z"
+    ],
+    "republic-airlines-834-MEM-MGM-2000-b128@1986-02-28": [
+      "1986-03-01T02:00:00Z",
+      "1986-03-01T02:53:00Z"
+    ],
+    "republic-airlines-484-MGM-PFN-1030-b128@1986-02-28": [
+      "1986-02-28T16:30:00Z",
+      "1986-02-28T17:10:00Z"
+    ],
+    "republic-airlines-484-MGM-PFN-1030-b128@1986-03-01": [
+      "1986-03-01T16:30:00Z",
+      "1986-03-01T17:10:00Z"
+    ],
+    "republic-airlines-834-MGM-PFN-2120-b128@1986-02-27": [
+      "1986-02-28T03:20:00Z",
+      "1986-02-28T04:00:00Z"
+    ],
+    "republic-airlines-834-MGM-PFN-2120-b128@1986-02-28": [
+      "1986-03-01T03:20:00Z",
+      "1986-03-01T04:00:00Z"
+    ],
+    "republic-airlines-815-PFN-MGM-0600-b128@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:40:00Z"
+    ],
+    "republic-airlines-815-PFN-MGM-0600-b128@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T12:40:00Z"
+    ],
+    "republic-airlines-396-PFN-MGM-1240-b128@1986-02-28": [
+      "1986-02-28T18:40:00Z",
+      "1986-02-28T19:20:00Z"
+    ],
+    "republic-airlines-396-PFN-MGM-1240-b128@1986-03-01": [
+      "1986-03-01T18:40:00Z",
+      "1986-03-01T19:20:00Z"
+    ],
+    "republic-airlines-3-MEM-PVR-0845-b128@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T18:05:00Z"
+    ],
+    "republic-airlines-4-PVR-MEM-1425-b128@1986-03-01": [
+      "1986-03-01T20:25:00Z",
+      "1986-03-01T23:45:00Z"
+    ],
+    "republic-airlines-450-MEM-MSY-0855-b128@1986-02-28": [
+      "1986-02-28T14:55:00Z",
+      "1986-02-28T15:58:00Z"
+    ],
+    "republic-airlines-450-MEM-MSY-0855-b128@1986-03-01": [
+      "1986-03-01T14:55:00Z",
+      "1986-03-01T15:58:00Z"
+    ],
+    "republic-airlines-581-MEM-MSY-1225-b128@1986-02-28": [
+      "1986-02-28T18:25:00Z",
+      "1986-02-28T19:28:00Z"
+    ],
+    "republic-airlines-581-MEM-MSY-1225-b128@1986-03-01": [
+      "1986-03-01T18:25:00Z",
+      "1986-03-01T19:28:00Z"
+    ],
+    "republic-airlines-297-MEM-MSY-1555-b128@1986-02-27": [
+      "1986-02-27T21:55:00Z",
+      "1986-02-27T22:54:00Z"
+    ],
+    "republic-airlines-297-MEM-MSY-1555-b128@1986-02-28": [
+      "1986-02-28T21:55:00Z",
+      "1986-02-28T22:54:00Z"
+    ],
+    "republic-airlines-297-MEM-MSY-1555-b128@1986-03-01": [
+      "1986-03-01T21:55:00Z",
+      "1986-03-01T22:54:00Z"
+    ],
+    "republic-airlines-54-MEM-MSY-1935-b128@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T02:35:00Z"
+    ],
+    "republic-airlines-54-MEM-MSY-1935-b128@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T02:35:00Z"
+    ],
+    "republic-airlines-534-MEM-MSY-2230-b128@1986-02-27": [
+      "1986-02-28T04:30:00Z",
+      "1986-02-28T05:33:00Z"
+    ],
+    "republic-airlines-534-MEM-MSY-2230-b128@1986-02-28": [
+      "1986-03-01T04:30:00Z",
+      "1986-03-01T05:33:00Z"
+    ],
+    "republic-airlines-451-MSY-MEM-0700-b128@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:00:00Z"
+    ],
+    "republic-airlines-451-MSY-MEM-0700-b128@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:00:00Z"
+    ],
+    "republic-airlines-774-MSY-MEM-1030-b128@1986-02-28": [
+      "1986-02-28T16:30:00Z",
+      "1986-02-28T17:32:00Z"
+    ],
+    "republic-airlines-774-MSY-MEM-1030-b128@1986-03-01": [
+      "1986-03-01T16:30:00Z",
+      "1986-03-01T17:32:00Z"
+    ],
+    "republic-airlines-714-MSY-MEM-1400-b128@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T21:02:00Z"
+    ],
+    "republic-airlines-714-MSY-MEM-1400-b128@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T21:02:00Z"
+    ],
+    "republic-airlines-296-MSY-MEM-1750-b128@1986-02-27": [
+      "1986-02-27T23:50:00Z",
+      "1986-02-28T00:52:00Z"
+    ],
+    "republic-airlines-296-MSY-MEM-1750-b128@1986-02-28": [
+      "1986-02-28T23:50:00Z",
+      "1986-03-01T00:52:00Z"
+    ],
+    "republic-airlines-647-MSY-MEM-2105-b128@1986-02-27": [
+      "1986-02-28T03:05:00Z",
+      "1986-02-28T04:05:00Z"
+    ],
+    "republic-airlines-647-MSY-MEM-2105-b128@1986-02-28": [
+      "1986-03-01T03:05:00Z",
+      "1986-03-01T04:05:00Z"
+    ],
+    "republic-airlines-161-MEM-IAH-0850-b128@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T16:20:00Z"
+    ],
+    "republic-airlines-161-MEM-IAH-0850-b128@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T16:20:00Z"
+    ],
+    "republic-airlines-519-MEM-IAH-1545-b128@1986-02-27": [
+      "1986-02-27T21:45:00Z",
+      "1986-02-27T23:15:00Z"
+    ],
+    "republic-airlines-519-MEM-IAH-1545-b128@1986-02-28": [
+      "1986-02-28T21:45:00Z",
+      "1986-02-28T23:15:00Z"
+    ],
+    "republic-airlines-519-MEM-IAH-1545-b128@1986-03-01": [
+      "1986-03-01T21:45:00Z",
+      "1986-03-01T23:15:00Z"
+    ],
+    "republic-airlines-261-MEM-IAH-1935-b128@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T03:05:00Z"
+    ],
+    "republic-airlines-261-MEM-IAH-1935-b128@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T03:05:00Z"
+    ],
+    "republic-airlines-810-IAH-MEM-0705-b128@1986-02-28": [
+      "1986-02-28T13:05:00Z",
+      "1986-02-28T14:15:00Z"
+    ],
+    "republic-airlines-810-IAH-MEM-0705-b128@1986-03-01": [
+      "1986-03-01T13:05:00Z",
+      "1986-03-01T14:15:00Z"
+    ],
+    "republic-airlines-520-IAH-MEM-1050-b128@1986-02-28": [
+      "1986-02-28T16:50:00Z",
+      "1986-02-28T18:00:00Z"
+    ],
+    "republic-airlines-520-IAH-MEM-1050-b128@1986-03-01": [
+      "1986-03-01T16:50:00Z",
+      "1986-03-01T18:00:00Z"
+    ],
+    "republic-airlines-844-IAH-MEM-1745-b128@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "republic-airlines-844-IAH-MEM-1745-b128@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "republic-airlines-470-MEM-HOU-0845-b128@1986-02-28": [
+      "1986-02-28T14:45:00Z",
+      "1986-02-28T16:20:00Z"
+    ],
+    "republic-airlines-470-MEM-HOU-0845-b128@1986-03-01": [
+      "1986-03-01T14:45:00Z",
+      "1986-03-01T16:20:00Z"
+    ],
+    "republic-airlines-474-MEM-HOU-1540-b128@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-27T23:15:00Z"
+    ],
+    "republic-airlines-474-MEM-HOU-1540-b128@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-02-28T23:15:00Z"
+    ],
+    "republic-airlines-474-MEM-HOU-1540-b128@1986-03-01": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-01T23:15:00Z"
+    ],
+    "republic-airlines-757-MEM-HOU-1945-b128@1986-02-27": [
+      "1986-02-28T01:45:00Z",
+      "1986-02-28T03:20:00Z"
+    ],
+    "republic-airlines-757-MEM-HOU-1945-b128@1986-02-28": [
+      "1986-03-01T01:45:00Z",
+      "1986-03-01T03:20:00Z"
+    ],
+    "republic-airlines-637-MEM-HOU-2245-b128@1986-02-27": [
+      "1986-02-28T04:45:00Z",
+      "1986-02-28T06:20:00Z"
+    ],
+    "republic-airlines-637-MEM-HOU-2245-b128@1986-02-28": [
+      "1986-03-01T04:45:00Z",
+      "1986-03-01T06:20:00Z"
+    ],
+    "republic-airlines-830-HOU-MEM-0700-b128@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:15:00Z"
+    ],
+    "republic-airlines-830-HOU-MEM-0700-b128@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:15:00Z"
+    ],
+    "republic-airlines-387-HOU-MEM-1045-b128@1986-02-28": [
+      "1986-02-28T16:45:00Z",
+      "1986-02-28T18:00:00Z"
+    ],
+    "republic-airlines-387-HOU-MEM-1045-b128@1986-03-01": [
+      "1986-03-01T16:45:00Z",
+      "1986-03-01T18:00:00Z"
+    ],
+    "republic-airlines-290-HOU-MEM-1740-b128@1986-02-27": [
+      "1986-02-27T23:40:00Z",
+      "1986-02-28T00:55:00Z"
+    ],
+    "republic-airlines-290-HOU-MEM-1740-b128@1986-02-28": [
+      "1986-02-28T23:40:00Z",
+      "1986-03-01T00:55:00Z"
+    ],
+    "republic-airlines-298-HOU-MEM-2025-b128@1986-02-27": [
+      "1986-02-28T02:25:00Z",
+      "1986-02-28T03:40:00Z"
+    ],
+    "republic-airlines-298-HOU-MEM-2025-b128@1986-02-28": [
+      "1986-03-01T02:25:00Z",
+      "1986-03-01T03:40:00Z"
+    ],
+    "republic-airlines-289-DTW-HOU-1310-b128@1986-02-28": [
+      "1986-02-28T18:10:00Z",
+      "1986-02-28T21:13:00Z"
+    ],
+    "republic-airlines-289-DTW-HOU-1310-b128@1986-03-01": [
+      "1986-03-01T18:10:00Z",
+      "1986-03-01T21:13:00Z"
+    ],
+    "republic-airlines-735-DTW-HOU-1715-b128@1986-02-27": [
+      "1986-02-27T22:15:00Z",
+      "1986-02-28T01:18:00Z"
+    ],
+    "republic-airlines-735-DTW-HOU-1715-b128@1986-02-28": [
+      "1986-02-28T22:15:00Z",
+      "1986-03-01T01:18:00Z"
+    ],
+    "republic-airlines-735-DTW-HOU-1715-b128@1986-03-01": [
+      "1986-03-01T22:15:00Z",
+      "1986-03-02T01:18:00Z"
+    ],
+    "republic-airlines-268-HOU-DTW-0755-b128@1986-02-28": [
+      "1986-02-28T13:55:00Z",
+      "1986-02-28T16:25:00Z"
+    ],
+    "republic-airlines-268-HOU-DTW-0755-b128@1986-03-01": [
+      "1986-03-01T13:55:00Z",
+      "1986-03-01T16:25:00Z"
+    ],
+    "republic-airlines-738-HOU-DTW-1610-b128@1986-02-27": [
+      "1986-02-27T22:10:00Z",
+      "1986-02-28T00:40:00Z"
+    ],
+    "republic-airlines-738-HOU-DTW-1610-b128@1986-02-28": [
+      "1986-02-28T22:10:00Z",
+      "1986-03-01T00:40:00Z"
+    ],
+    "republic-airlines-738-HOU-DTW-1610-b128@1986-03-01": [
+      "1986-03-01T22:10:00Z",
+      "1986-03-02T00:40:00Z"
+    ]
+  },
+  "independent_local_source_dates": {
+    "republic-airlines-801-GPT-MEM-0700-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-758-GPT-MEM-1400-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-818-GPT-MEM-1755-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-251-MEM-GPT-1235-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-818-MOB-GPT-1710-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-847-MOB-GPT-2100-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-393-MOB-MEM-0700-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-802-MOB-MEM-1030-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-414-MOB-MEM-1400-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-655-MEM-MOB-0855-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-148-MEM-MOB-1235-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-841-MEM-MOB-1545-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-847-MEM-MOB-1935-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-458-MEM-MOB-2240-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-247-MEM-VPS-1210-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-259-MEM-VPS-1600-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-835-MEM-VPS-1950-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-845-VPS-MEM-0700-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-814-VPS-MEM-1345-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-806-VPS-MEM-1735-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-815-MGM-MEM-0700-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-396-MGM-MEM-1350-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-171-MGM-MEM-1720-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-484-MEM-MGM-0910-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-299-MEM-MGM-1600-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-834-MEM-MGM-2000-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-484-MGM-PFN-1030-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-834-MGM-PFN-2120-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-815-PFN-MGM-0600-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-396-PFN-MGM-1240-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-3-MEM-PVR-0845-b128": [
+      "1986-03-01"
+    ],
+    "republic-airlines-4-PVR-MEM-1425-b128": [
+      "1986-03-01"
+    ],
+    "republic-airlines-450-MEM-MSY-0855-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-581-MEM-MSY-1225-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-297-MEM-MSY-1555-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-54-MEM-MSY-1935-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-534-MEM-MSY-2230-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-451-MSY-MEM-0700-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-774-MSY-MEM-1030-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-714-MSY-MEM-1400-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-296-MSY-MEM-1750-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-647-MSY-MEM-2105-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-161-MEM-IAH-0850-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-519-MEM-IAH-1545-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-261-MEM-IAH-1935-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-810-IAH-MEM-0705-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-520-IAH-MEM-1050-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-844-IAH-MEM-1745-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-470-MEM-HOU-0845-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-474-MEM-HOU-1540-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-767-MEM-HOU-1945-b128": [],
+    "republic-airlines-757-MEM-HOU-1945-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-637-MEM-HOU-2245-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-830-HOU-MEM-0700-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-387-HOU-MEM-1045-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-290-HOU-MEM-1740-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-298-HOU-MEM-2025-b128": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "republic-airlines-289-DTW-HOU-1310-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-735-DTW-HOU-1715-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-268-HOU-DTW-0755-b128": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "republic-airlines-738-HOU-DTW-1610-b128": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "adjacent_source_leg_ground_times": [
+    [
+      "republic-airlines-818-MOB-GPT-1710-b128@1986-02-27",
+      "republic-airlines-818-GPT-MEM-1755-b128@1986-02-27",
+      22.0
+    ],
+    [
+      "republic-airlines-818-MOB-GPT-1710-b128@1986-02-28",
+      "republic-airlines-818-GPT-MEM-1755-b128@1986-02-28",
+      22.0
+    ],
+    [
+      "republic-airlines-290-HOU-MEM-1740-b128@1986-02-27",
+      "republic-airlines-290-MEM-FLL-1940-b121@1986-02-27",
+      45.0
+    ],
+    [
+      "republic-airlines-290-HOU-MEM-1740-b128@1986-02-28",
+      "republic-airlines-290-MEM-FLL-1940-b121@1986-02-28",
+      45.0
+    ],
+    [
+      "republic-airlines-847-MEM-MOB-1935-b128@1986-02-27",
+      "republic-airlines-847-MOB-GPT-2100-b128@1986-02-27",
+      25.0
+    ],
+    [
+      "republic-airlines-847-MEM-MOB-1935-b128@1986-02-28",
+      "republic-airlines-847-MOB-GPT-2100-b128@1986-02-28",
+      25.0
+    ],
+    [
+      "republic-airlines-834-MEM-MGM-2000-b128@1986-02-27",
+      "republic-airlines-834-MGM-PFN-2120-b128@1986-02-27",
+      27.0
+    ],
+    [
+      "republic-airlines-834-MEM-MGM-2000-b128@1986-02-28",
+      "republic-airlines-834-MGM-PFN-2120-b128@1986-02-28",
+      27.0
+    ],
+    [
+      "republic-airlines-815-PFN-MGM-0600-b128@1986-02-28",
+      "republic-airlines-815-MGM-MEM-0700-b128@1986-02-28",
+      20.0
+    ],
+    [
+      "republic-airlines-815-PFN-MGM-0600-b128@1986-03-01",
+      "republic-airlines-815-MGM-MEM-0700-b128@1986-03-01",
+      20.0
+    ],
+    [
+      "republic-airlines-484-MEM-MGM-0910-b128@1986-02-28",
+      "republic-airlines-484-MGM-PFN-1030-b128@1986-02-28",
+      27.0
+    ],
+    [
+      "republic-airlines-484-MEM-MGM-0910-b128@1986-03-01",
+      "republic-airlines-484-MGM-PFN-1030-b128@1986-03-01",
+      27.0
+    ],
+    [
+      "republic-airlines-396-PFN-MGM-1240-b128@1986-02-28",
+      "republic-airlines-396-MGM-MEM-1350-b128@1986-02-28",
+      30.0
+    ],
+    [
+      "republic-airlines-396-PFN-MGM-1240-b128@1986-03-01",
+      "republic-airlines-396-MGM-MEM-1350-b128@1986-03-01",
+      30.0
+    ]
+  ],
+  "ground_times_reviewed": true,
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "Data, 126 independently transcribed UTC intervals, weekdays, midnight, window boundaries, duplicates, 14 dated ground chains and prior-object preservation passed; all automated checks passed; Unreal not run.",
+  "ground_chain_review_note": "Fourteen dated same-number adjacent pairs; seven patterns. RC290 joins an unchanged older MEM–FLL leg after 45 minutes. Other waits: RC818 22, RC847 25, RC834/484 27, RC815 20, RC396 30 minutes. Timetable consistency only, not proof of same individual aircraft.",
+  "all_republic_flight_number_overlap_check": {
+    "movements_checked": 258,
+    "overlaps": 0
+  }
+}

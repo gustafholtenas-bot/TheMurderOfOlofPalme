@@ -1,0 +1,204 @@
+{
+  "package": "v123",
+  "checked_on": "2026-10-01",
+  "sources": [
+    {
+      "id": "panam-19860211",
+      "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+      "accepted_rows": 9,
+      "images": [
+        {
+          "scan_page": 48,
+          "printed_pages": [
+            42
+          ],
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37275/full/2200,/0/default.jpg",
+          "sha256": "cef29d5845e3ec6239c6e72848c4f2e1692627f9c15877a140072f8db1fc6430",
+          "bytes": 1722621
+        },
+        {
+          "scan_page": 49,
+          "printed_pages": [
+            43
+          ],
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37276/full/2200,/0/default.jpg",
+          "sha256": "0f0534a3b0910f6ff62cd72e8969448a487329fe33b7146ee1fa5a9afe319533",
+          "bytes": 1748776
+        },
+        {
+          "scan_page": 69,
+          "printed_pages": [
+            63
+          ],
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37296/full/2200,/0/default.jpg",
+          "sha256": "1c3f39309cb9d768835324fbaef750ef6cfd3c3db530a5240243e20dbb95481e",
+          "bytes": 1787368
+        },
+        {
+          "scan_page": 78,
+          "printed_pages": [
+            70
+          ],
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37305/full/2200,/0/default.jpg",
+          "sha256": "3cb2bf2752f3fd920a2a19e9de617c8d7e50d2ca3c2ee60181fbe7294932e6d3",
+          "bytes": 1787522
+        },
+        {
+          "scan_page": 79,
+          "printed_pages": [
+            71
+          ],
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37306/full/2200,/0/default.jpg",
+          "sha256": "a4e5a1e3714b45641e5187291ebfe7513128bdee8535ca841df0bad14aa1cb8a",
+          "bytes": 1787786
+        },
+        {
+          "scan_page": 80,
+          "printed_pages": [
+            72
+          ],
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37307/full/2200,/0/default.jpg",
+          "sha256": "4ce03e03eacb528302a335242fc6bcd28d7f4c3a07b8700e455c773790ea5c20",
+          "bytes": 1825228
+        },
+        {
+          "scan_page": 91,
+          "printed_pages": [
+            83
+          ],
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37318/full/2200,/0/default.jpg",
+          "sha256": "dd213380843e6ec580a1624fb5b000d94dd645eed398dceb931b2f328643f521",
+          "bytes": 1770339
+        }
+      ]
+    },
+    {
+      "id": "air-france-19851027-no25",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "accepted_rows": 34,
+      "images": [
+        {
+          "scan_page": 13,
+          "printed_pages": [
+            24
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=13",
+          "sha256": "efa23e2e30bc41ff2be722aac552c6cab39d6fdf27cf9ade8b09975b91ddbd60",
+          "bytes": 1624988
+        },
+        {
+          "scan_page": 17,
+          "printed_pages": [
+            33
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=17",
+          "sha256": "3e86d06ebae62f3e0798963addfe5fba0429f19cd8129df3863cb2bdf6be0a31",
+          "bytes": 1756014
+        },
+        {
+          "scan_page": 18,
+          "printed_pages": [
+            34
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=18",
+          "sha256": "9f65a2cba161f0f9ef31d6239221e55a7591f613ff2d7610a417c6be3e00747f",
+          "bytes": 1695185
+        },
+        {
+          "scan_page": 24,
+          "printed_pages": [
+            48
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=24",
+          "sha256": "28800eb847017c6fc00b5090f4fbee39c2de0bc707a4d28b4f067a11e6a7535a",
+          "bytes": 1148480
+        },
+        {
+          "scan_page": 25,
+          "printed_pages": [
+            51
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=25",
+          "sha256": "94121d9aa28bea7535be344afe66c4082b64a499afde200c7475265c2c8c3d1b",
+          "bytes": 1550376
+        },
+        {
+          "scan_page": 35,
+          "printed_pages": [
+            66
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=35",
+          "sha256": "829c81e13886840d84704b57f04c0e0b9e82a45e48f71998fae3a757fceff049",
+          "bytes": 1540000
+        },
+        {
+          "scan_page": 39,
+          "printed_pages": [
+            74
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=39",
+          "sha256": "8ad900c21a3cdfcb974609a4cfb5650546b53d6c21b6de252dc666d222d41199",
+          "bytes": 1005420
+        },
+        {
+          "scan_page": 41,
+          "printed_pages": [
+            79
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=41",
+          "sha256": "c3dd3a46b1edf99f57d1498535cf80cb269c2591372e6768eeb429ba81f0f6a6",
+          "bytes": 1020515
+        },
+        {
+          "scan_page": 42,
+          "printed_pages": [
+            80
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=42",
+          "sha256": "44d5061c806ab6500c00cda9bfbf93c518e34de38d8077c186bbd952d3aa149a",
+          "bytes": 1043852
+        },
+        {
+          "scan_page": 44,
+          "printed_pages": [
+            85
+          ],
+          "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf#page=44",
+          "sha256": "75471552a032a9781e24a1debe5667f0295ebe16a7c7b2742ac4f1cafae67da2",
+          "bytes": 1624721
+        }
+      ]
+    }
+  ],
+  "air_france_pdf_sha256": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "MIA": -5,
+    "JFK": -5,
+    "NAS": -5,
+    "PLS": -5,
+    "GDT": -5,
+    "FPO": -5,
+    "PAP": -5,
+    "ANU": -4,
+    "FDF": -4,
+    "PTP": -4,
+    "SJU": -4,
+    "CAY": -3,
+    "CDG": 1,
+    "ORY": 1,
+    "MRS": 1,
+    "BOD": 1
+  },
+  "date_filter_policy": "Date columns read as from/to, not interchangeably. AF1349 ends31January; AF1114 ends28December; AF224 Thursday is2–9January only. Accepted AF1347 starts8February; AF235 Friday starts17January. PA227 Saturday ends1March.",
+  "airport_terminal_policy": "Air France arrival suffix A=CDG and S=Orly. AF235 Friday and AF1347 Saturday go to CDG.",
+  "important_boundaries": [
+    "AF206 FDF–CDG and AF255 FDF–BOD Thursday start before the window but overlap it.",
+    "AF1347 PTP–CDG Saturday starts21:45UTC and arrives after window end.",
+    "PA227 JFK–ANU Saturday starts22:10UTC,11m30s before window end.",
+    "AF365 PTP–FDF Saturday starts22:50UTC, outside; MIA–PTP remains included."
+  ],
+  "previous_held_conflicts_unchanged": true
+}

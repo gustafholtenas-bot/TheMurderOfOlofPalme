@@ -1,0 +1,1061 @@
+{
+  "package": "v110",
+  "checked_on": "2026-10-01",
+  "baseline_archive_sha256": "338f40d9cf208209da5c5c073f9a3f9c25ff5f068de14c2d9c616df2f68d6466",
+  "previous_movements_unchanged": 7265,
+  "previous_schedules_unchanged": 4272,
+  "previous_airports_unchanged": 299,
+  "previous_countries_unchanged": 82,
+  "previous_airlines_unchanged": 96,
+  "unaffected_sources_unchanged": true,
+  "independent_manual_rows": 92,
+  "independent_utc_movements_verified": 170,
+  "independent_utc_expected": {
+    "rio-airways-1889-DFW-ABI-0815-b107@1986-02-28": [
+      "1986-02-28T14:15:00Z",
+      "1986-02-28T15:05:00Z"
+    ],
+    "rio-airways-1889-DFW-ABI-0815-b107@1986-03-01": [
+      "1986-03-01T14:15:00Z",
+      "1986-03-01T15:05:00Z"
+    ],
+    "rio-airways-1906-DFW-ABI-1045-b107@1986-02-28": [
+      "1986-02-28T16:45:00Z",
+      "1986-02-28T17:35:00Z"
+    ],
+    "rio-airways-1914-DFW-ABI-1330-b107@1986-02-28": [
+      "1986-02-28T19:30:00Z",
+      "1986-02-28T20:20:00Z"
+    ],
+    "rio-airways-1914-DFW-ABI-1330-b107@1986-03-01": [
+      "1986-03-01T19:30:00Z",
+      "1986-03-01T20:20:00Z"
+    ],
+    "rio-airways-1939-DFW-ABI-2105-b107@1986-02-27": [
+      "1986-02-28T03:05:00Z",
+      "1986-02-28T03:55:00Z"
+    ],
+    "rio-airways-1939-DFW-ABI-2105-b107@1986-02-28": [
+      "1986-03-01T03:05:00Z",
+      "1986-03-01T03:55:00Z"
+    ],
+    "rio-airways-1898-DFW-CLL-1115-b107@1986-02-28": [
+      "1986-02-28T17:15:00Z",
+      "1986-02-28T18:10:00Z"
+    ],
+    "rio-airways-1898-DFW-CLL-1115-b107@1986-03-01": [
+      "1986-03-01T17:15:00Z",
+      "1986-03-01T18:10:00Z"
+    ],
+    "rio-airways-1909-DFW-CLL-1415-b107@1986-02-28": [
+      "1986-02-28T20:15:00Z",
+      "1986-02-28T21:10:00Z"
+    ],
+    "rio-airways-1909-DFW-CLL-1415-b107@1986-03-01": [
+      "1986-03-01T20:15:00Z",
+      "1986-03-01T21:10:00Z"
+    ],
+    "rio-airways-1937-DFW-CLL-2015-b107@1986-02-27": [
+      "1986-02-28T02:15:00Z",
+      "1986-02-28T03:10:00Z"
+    ],
+    "rio-airways-1937-DFW-CLL-2015-b107@1986-02-28": [
+      "1986-03-01T02:15:00Z",
+      "1986-03-01T03:10:00Z"
+    ],
+    "rio-airways-1895-DFW-ILE-0835-b107@1986-02-28": [
+      "1986-02-28T14:35:00Z",
+      "1986-02-28T15:25:00Z"
+    ],
+    "rio-airways-1895-DFW-ILE-0835-b107@1986-03-01": [
+      "1986-03-01T14:35:00Z",
+      "1986-03-01T15:25:00Z"
+    ],
+    "rio-airways-1901-DFW-ILE-1700-b107@1986-02-27": [
+      "1986-02-27T23:00:00Z",
+      "1986-02-27T23:50:00Z"
+    ],
+    "rio-airways-1901-DFW-ILE-1700-b107@1986-02-28": [
+      "1986-02-28T23:00:00Z",
+      "1986-02-28T23:50:00Z"
+    ],
+    "rio-airways-1887-DFW-LAW-0820-b107@1986-02-28": [
+      "1986-02-28T14:20:00Z",
+      "1986-02-28T15:05:00Z"
+    ],
+    "rio-airways-1900-DFW-LAW-1015-b107@1986-02-28": [
+      "1986-02-28T16:15:00Z",
+      "1986-02-28T17:00:00Z"
+    ],
+    "rio-airways-1900-DFW-LAW-1015-b107@1986-03-01": [
+      "1986-03-01T16:15:00Z",
+      "1986-03-01T17:00:00Z"
+    ],
+    "rio-airways-1918-DFW-LAW-1540-b107@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-27T22:25:00Z"
+    ],
+    "rio-airways-1918-DFW-LAW-1540-b107@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-02-28T22:25:00Z"
+    ],
+    "rio-airways-1918-DFW-LAW-1540-b107@1986-03-01": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-01T22:25:00Z"
+    ],
+    "rio-airways-1941-DFW-LAW-2130-b107@1986-02-27": [
+      "1986-02-28T03:30:00Z",
+      "1986-02-28T04:15:00Z"
+    ],
+    "rio-airways-1941-DFW-LAW-2130-b107@1986-02-28": [
+      "1986-03-01T03:30:00Z",
+      "1986-03-01T04:15:00Z"
+    ],
+    "rio-airways-1903-DFW-SJT-1015-b107@1986-02-28": [
+      "1986-02-28T16:15:00Z",
+      "1986-02-28T17:25:00Z"
+    ],
+    "rio-airways-1903-DFW-SJT-1015-b107@1986-03-01": [
+      "1986-03-01T16:15:00Z",
+      "1986-03-01T17:25:00Z"
+    ],
+    "rio-airways-1911-DFW-SJT-1330-b107@1986-02-28": [
+      "1986-02-28T19:30:00Z",
+      "1986-02-28T20:40:00Z"
+    ],
+    "rio-airways-1920-DFW-SJT-1650-b107@1986-02-27": [
+      "1986-02-27T22:50:00Z",
+      "1986-02-28T00:00:00Z"
+    ],
+    "rio-airways-1920-DFW-SJT-1650-b107@1986-02-28": [
+      "1986-02-28T22:50:00Z",
+      "1986-03-01T00:00:00Z"
+    ],
+    "rio-airways-1894-DFW-TPL-1150-b107@1986-02-28": [
+      "1986-02-28T17:50:00Z",
+      "1986-02-28T18:35:00Z"
+    ],
+    "rio-airways-1894-DFW-TPL-1150-b107@1986-03-01": [
+      "1986-03-01T17:50:00Z",
+      "1986-03-01T18:35:00Z"
+    ],
+    "rio-airways-1931-DFW-TPL-1850-b107@1986-02-27": [
+      "1986-02-28T00:50:00Z",
+      "1986-02-28T01:35:00Z"
+    ],
+    "rio-airways-1931-DFW-TPL-1850-b107@1986-02-28": [
+      "1986-03-01T00:50:00Z",
+      "1986-03-01T01:35:00Z"
+    ],
+    "rio-airways-1892-DFW-TXK-0843-b107@1986-02-28": [
+      "1986-02-28T14:43:00Z",
+      "1986-02-28T15:38:00Z"
+    ],
+    "rio-airways-1892-DFW-TXK-0843-b107@1986-03-01": [
+      "1986-03-01T14:43:00Z",
+      "1986-03-01T15:38:00Z"
+    ],
+    "rio-airways-1904-DFW-TXK-1155-b107@1986-02-28": [
+      "1986-02-28T17:55:00Z",
+      "1986-02-28T18:50:00Z"
+    ],
+    "rio-airways-1904-DFW-TXK-1155-b107@1986-03-01": [
+      "1986-03-01T17:55:00Z",
+      "1986-03-01T18:50:00Z"
+    ],
+    "rio-airways-1919-DFW-TXK-1540-b107@1986-02-27": [
+      "1986-02-27T21:40:00Z",
+      "1986-02-27T22:35:00Z"
+    ],
+    "rio-airways-1919-DFW-TXK-1540-b107@1986-02-28": [
+      "1986-02-28T21:40:00Z",
+      "1986-02-28T22:35:00Z"
+    ],
+    "rio-airways-1919-DFW-TXK-1540-b107@1986-03-01": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-01T22:35:00Z"
+    ],
+    "rio-airways-1928-DFW-TXK-1840-b107@1986-02-27": [
+      "1986-02-28T00:40:00Z",
+      "1986-02-28T01:35:00Z"
+    ],
+    "rio-airways-1928-DFW-TXK-1840-b107@1986-02-28": [
+      "1986-03-01T00:40:00Z",
+      "1986-03-01T01:35:00Z"
+    ],
+    "rio-airways-1942-DFW-TXK-2155-b107@1986-02-27": [
+      "1986-02-28T03:55:00Z",
+      "1986-02-28T04:50:00Z"
+    ],
+    "rio-airways-1942-DFW-TXK-2155-b107@1986-02-28": [
+      "1986-03-01T03:55:00Z",
+      "1986-03-01T04:50:00Z"
+    ],
+    "rio-airways-1893-DFW-ACT-0800-b107@1986-02-28": [
+      "1986-02-28T14:00:00Z",
+      "1986-02-28T14:40:00Z"
+    ],
+    "rio-airways-1893-DFW-ACT-0800-b107@1986-03-01": [
+      "1986-03-01T14:00:00Z",
+      "1986-03-01T14:40:00Z"
+    ],
+    "rio-airways-1912-DFW-ACT-1205-b107@1986-02-28": [
+      "1986-02-28T18:05:00Z",
+      "1986-02-28T18:45:00Z"
+    ],
+    "rio-airways-1912-DFW-ACT-1205-b107@1986-03-01": [
+      "1986-03-01T18:05:00Z",
+      "1986-03-01T18:45:00Z"
+    ],
+    "rio-airways-1917-DFW-ACT-1425-b107@1986-02-28": [
+      "1986-02-28T20:25:00Z",
+      "1986-02-28T21:05:00Z"
+    ],
+    "rio-airways-1917-DFW-ACT-1425-b107@1986-03-01": [
+      "1986-03-01T20:25:00Z",
+      "1986-03-01T21:05:00Z"
+    ],
+    "rio-airways-1929-DFW-ACT-1715-b107@1986-02-27": [
+      "1986-02-27T23:15:00Z",
+      "1986-02-27T23:55:00Z"
+    ],
+    "rio-airways-1929-DFW-ACT-1715-b107@1986-02-28": [
+      "1986-02-28T23:15:00Z",
+      "1986-02-28T23:55:00Z"
+    ],
+    "rio-airways-1930-DFW-ACT-1845-b107@1986-02-27": [
+      "1986-02-28T00:45:00Z",
+      "1986-02-28T01:25:00Z"
+    ],
+    "rio-airways-1930-DFW-ACT-1845-b107@1986-02-28": [
+      "1986-03-01T00:45:00Z",
+      "1986-03-01T01:25:00Z"
+    ],
+    "rio-airways-1944-DFW-ACT-2020-b107@1986-02-27": [
+      "1986-02-28T02:20:00Z",
+      "1986-02-28T03:00:00Z"
+    ],
+    "rio-airways-1944-DFW-ACT-2020-b107@1986-02-28": [
+      "1986-03-01T02:20:00Z",
+      "1986-03-01T03:00:00Z"
+    ],
+    "rio-airways-1888-DFW-SPS-0755-b107@1986-02-28": [
+      "1986-02-28T13:55:00Z",
+      "1986-02-28T14:35:00Z"
+    ],
+    "rio-airways-1888-DFW-SPS-0755-b107@1986-03-01": [
+      "1986-03-01T13:55:00Z",
+      "1986-03-01T14:35:00Z"
+    ],
+    "rio-airways-1908-DFW-SPS-1315-b107@1986-02-28": [
+      "1986-02-28T19:15:00Z",
+      "1986-02-28T19:55:00Z"
+    ],
+    "rio-airways-1908-DFW-SPS-1315-b107@1986-03-01": [
+      "1986-03-01T19:15:00Z",
+      "1986-03-01T19:55:00Z"
+    ],
+    "rio-airways-1921-DFW-SPS-1610-b107@1986-02-27": [
+      "1986-02-27T22:10:00Z",
+      "1986-02-27T22:50:00Z"
+    ],
+    "rio-airways-1921-DFW-SPS-1610-b107@1986-02-28": [
+      "1986-02-28T22:10:00Z",
+      "1986-02-28T22:50:00Z"
+    ],
+    "rio-airways-1921-DFW-SPS-1610-b107@1986-03-01": [
+      "1986-03-01T22:10:00Z",
+      "1986-03-01T22:50:00Z"
+    ],
+    "rio-airways-1932-DFW-SPS-1830-b107@1986-02-27": [
+      "1986-02-28T00:30:00Z",
+      "1986-02-28T01:10:00Z"
+    ],
+    "rio-airways-1932-DFW-SPS-1830-b107@1986-02-28": [
+      "1986-03-01T00:30:00Z",
+      "1986-03-01T01:10:00Z"
+    ],
+    "rio-airways-1969-ABI-DFW-0650-b107@1986-02-28": [
+      "1986-02-28T12:50:00Z",
+      "1986-02-28T13:40:00Z"
+    ],
+    "rio-airways-1969-ABI-DFW-0650-b107@1986-03-01": [
+      "1986-03-01T12:50:00Z",
+      "1986-03-01T13:40:00Z"
+    ],
+    "rio-airways-1971-ABI-DFW-1045-b107@1986-02-28": [
+      "1986-02-28T16:45:00Z",
+      "1986-02-28T17:35:00Z"
+    ],
+    "rio-airways-1971-ABI-DFW-1045-b107@1986-03-01": [
+      "1986-03-01T16:45:00Z",
+      "1986-03-01T17:35:00Z"
+    ],
+    "rio-airways-1877-ABI-DFW-1200-b107@1986-02-28": [
+      "1986-02-28T18:00:00Z",
+      "1986-02-28T18:50:00Z"
+    ],
+    "rio-airways-1878-ABI-DFW-1450-b107@1986-02-28": [
+      "1986-02-28T20:50:00Z",
+      "1986-02-28T21:40:00Z"
+    ],
+    "rio-airways-1974-ABI-DFW-1550-b107@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-01T22:40:00Z"
+    ],
+    "rio-airways-1881-CLL-DFW-0945-b107@1986-02-28": [
+      "1986-02-28T15:45:00Z",
+      "1986-02-28T16:40:00Z"
+    ],
+    "rio-airways-1881-CLL-DFW-0945-b107@1986-03-01": [
+      "1986-03-01T15:45:00Z",
+      "1986-03-01T16:40:00Z"
+    ],
+    "rio-airways-1882-CLL-DFW-1240-b107@1986-02-28": [
+      "1986-02-28T18:40:00Z",
+      "1986-02-28T19:35:00Z"
+    ],
+    "rio-airways-1882-CLL-DFW-1240-b107@1986-03-01": [
+      "1986-03-01T18:40:00Z",
+      "1986-03-01T19:35:00Z"
+    ],
+    "rio-airways-1883-CLL-DFW-1530-b107@1986-02-27": [
+      "1986-02-27T21:30:00Z",
+      "1986-02-27T22:25:00Z"
+    ],
+    "rio-airways-1883-CLL-DFW-1530-b107@1986-02-28": [
+      "1986-02-28T21:30:00Z",
+      "1986-02-28T22:25:00Z"
+    ],
+    "rio-airways-1883-CLL-DFW-1530-b107@1986-03-01": [
+      "1986-03-01T21:30:00Z",
+      "1986-03-01T22:25:00Z"
+    ],
+    "rio-airways-1885-CLL-DFW-1855-b107@1986-02-27": [
+      "1986-02-28T00:55:00Z",
+      "1986-02-28T01:50:00Z"
+    ],
+    "rio-airways-1885-CLL-DFW-1855-b107@1986-02-28": [
+      "1986-03-01T00:55:00Z",
+      "1986-03-01T01:50:00Z"
+    ],
+    "rio-airways-1953-ILE-DFW-0655-b107@1986-02-28": [
+      "1986-02-28T12:55:00Z",
+      "1986-02-28T13:45:00Z"
+    ],
+    "rio-airways-1953-ILE-DFW-0655-b107@1986-03-01": [
+      "1986-03-01T12:55:00Z",
+      "1986-03-01T13:45:00Z"
+    ],
+    "rio-airways-1957-ILE-DFW-1820-b107@1986-02-27": [
+      "1986-02-28T00:20:00Z",
+      "1986-02-28T01:10:00Z"
+    ],
+    "rio-airways-1957-ILE-DFW-1820-b107@1986-02-28": [
+      "1986-03-01T00:20:00Z",
+      "1986-03-01T01:10:00Z"
+    ],
+    "rio-airways-1977-LAW-DFW-0640-b107@1986-02-28": [
+      "1986-02-28T12:40:00Z",
+      "1986-02-28T13:25:00Z"
+    ],
+    "rio-airways-1977-LAW-DFW-0640-b107@1986-03-01": [
+      "1986-03-01T12:40:00Z",
+      "1986-03-01T13:25:00Z"
+    ],
+    "rio-airways-1962-LAW-DFW-0930-b107@1986-02-28": [
+      "1986-02-28T15:30:00Z",
+      "1986-02-28T16:15:00Z"
+    ],
+    "rio-airways-1908-LAW-DFW-1445-b107@1986-02-28": [
+      "1986-02-28T20:45:00Z",
+      "1986-02-28T21:30:00Z"
+    ],
+    "rio-airways-1908-LAW-DFW-1445-b107@1986-03-01": [
+      "1986-03-01T20:45:00Z",
+      "1986-03-01T21:30:00Z"
+    ],
+    "rio-airways-1965-LAW-DFW-1650-b107@1986-02-27": [
+      "1986-02-27T22:50:00Z",
+      "1986-02-27T23:35:00Z"
+    ],
+    "rio-airways-1965-LAW-DFW-1650-b107@1986-02-28": [
+      "1986-02-28T22:50:00Z",
+      "1986-02-28T23:35:00Z"
+    ],
+    "rio-airways-1932-LAW-DFW-2000-b107@1986-02-27": [
+      "1986-02-28T02:00:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "rio-airways-1932-LAW-DFW-2000-b107@1986-02-28": [
+      "1986-03-01T02:00:00Z",
+      "1986-03-01T02:45:00Z"
+    ],
+    "rio-airways-1972-SJT-DFW-1155-b107@1986-02-28": [
+      "1986-02-28T17:55:00Z",
+      "1986-02-28T19:00:00Z"
+    ],
+    "rio-airways-1972-SJT-DFW-1155-b107@1986-03-01": [
+      "1986-03-01T17:55:00Z",
+      "1986-03-01T19:00:00Z"
+    ],
+    "rio-airways-1973-SJT-DFW-1515-b107@1986-02-28": [
+      "1986-02-28T21:15:00Z",
+      "1986-02-28T22:20:00Z"
+    ],
+    "rio-airways-1975-SJT-DFW-1818-b107@1986-02-27": [
+      "1986-02-28T00:18:00Z",
+      "1986-02-28T01:23:00Z"
+    ],
+    "rio-airways-1975-SJT-DFW-1818-b107@1986-02-28": [
+      "1986-03-01T00:18:00Z",
+      "1986-03-01T01:23:00Z"
+    ],
+    "rio-airways-1987-TPL-DFW-0700-b107@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T13:45:00Z"
+    ],
+    "rio-airways-1989-TPL-DFW-1255-b107@1986-02-28": [
+      "1986-02-28T18:55:00Z",
+      "1986-02-28T19:40:00Z"
+    ],
+    "rio-airways-1989-TPL-DFW-1255-b107@1986-03-01": [
+      "1986-03-01T18:55:00Z",
+      "1986-03-01T19:40:00Z"
+    ],
+    "rio-airways-1992-TXK-DFW-0645-b107@1986-02-28": [
+      "1986-02-28T12:45:00Z",
+      "1986-02-28T13:40:00Z"
+    ],
+    "rio-airways-1992-TXK-DFW-0645-b107@1986-03-01": [
+      "1986-03-01T12:45:00Z",
+      "1986-03-01T13:40:00Z"
+    ],
+    "rio-airways-1993-TXK-DFW-1000-b107@1986-02-28": [
+      "1986-02-28T16:00:00Z",
+      "1986-02-28T16:55:00Z"
+    ],
+    "rio-airways-1993-TXK-DFW-1000-b107@1986-03-01": [
+      "1986-03-01T16:00:00Z",
+      "1986-03-01T16:55:00Z"
+    ],
+    "rio-airways-1994-TXK-DFW-1310-b107@1986-02-28": [
+      "1986-02-28T19:10:00Z",
+      "1986-02-28T20:05:00Z"
+    ],
+    "rio-airways-1994-TXK-DFW-1310-b107@1986-03-01": [
+      "1986-03-01T19:10:00Z",
+      "1986-03-01T20:05:00Z"
+    ],
+    "rio-airways-1995-TXK-DFW-1655-b107@1986-02-27": [
+      "1986-02-27T22:55:00Z",
+      "1986-02-27T23:50:00Z"
+    ],
+    "rio-airways-1995-TXK-DFW-1655-b107@1986-02-28": [
+      "1986-02-28T22:55:00Z",
+      "1986-02-28T23:50:00Z"
+    ],
+    "rio-airways-1996-TXK-DFW-1955-b107@1986-02-27": [
+      "1986-02-28T01:55:00Z",
+      "1986-02-28T02:50:00Z"
+    ],
+    "rio-airways-1996-TXK-DFW-1955-b107@1986-02-28": [
+      "1986-03-01T01:55:00Z",
+      "1986-03-01T02:50:00Z"
+    ],
+    "rio-airways-1880-ACT-DFW-0640-b107@1986-02-28": [
+      "1986-02-28T12:40:00Z",
+      "1986-02-28T13:20:00Z"
+    ],
+    "rio-airways-1880-ACT-DFW-0640-b107@1986-03-01": [
+      "1986-03-01T12:40:00Z",
+      "1986-03-01T13:20:00Z"
+    ],
+    "rio-airways-1954-ACT-DFW-0835-b107@1986-02-28": [
+      "1986-02-28T14:35:00Z",
+      "1986-02-28T15:20:00Z"
+    ],
+    "rio-airways-1954-ACT-DFW-0835-b107@1986-03-01": [
+      "1986-03-01T14:35:00Z",
+      "1986-03-01T15:20:00Z"
+    ],
+    "rio-airways-1955-ACT-DFW-1035-b107@1986-02-28": [
+      "1986-02-28T16:35:00Z",
+      "1986-02-28T17:15:00Z"
+    ],
+    "rio-airways-1955-ACT-DFW-1035-b107@1986-03-01": [
+      "1986-03-01T16:35:00Z",
+      "1986-03-01T17:15:00Z"
+    ],
+    "rio-airways-1958-ACT-DFW-1410-b107@1986-02-28": [
+      "1986-02-28T20:10:00Z",
+      "1986-02-28T20:50:00Z"
+    ],
+    "rio-airways-1958-ACT-DFW-1410-b107@1986-03-01": [
+      "1986-03-01T20:10:00Z",
+      "1986-03-01T20:50:00Z"
+    ],
+    "rio-airways-1960-ACT-DFW-1635-b107@1986-02-27": [
+      "1986-02-27T22:35:00Z",
+      "1986-02-27T23:15:00Z"
+    ],
+    "rio-airways-1960-ACT-DFW-1635-b107@1986-02-28": [
+      "1986-02-28T22:35:00Z",
+      "1986-02-28T23:15:00Z"
+    ],
+    "rio-airways-1978-SPS-DFW-0900-b107@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T15:40:00Z"
+    ],
+    "rio-airways-1978-SPS-DFW-0900-b107@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:40:00Z"
+    ],
+    "rio-airways-1900-SPS-DFW-1150-b107@1986-02-28": [
+      "1986-02-28T17:50:00Z",
+      "1986-02-28T18:30:00Z"
+    ],
+    "rio-airways-1900-SPS-DFW-1150-b107@1986-03-01": [
+      "1986-03-01T17:50:00Z",
+      "1986-03-01T18:30:00Z"
+    ],
+    "rio-airways-1984-SPS-DFW-1720-b107@1986-02-27": [
+      "1986-02-27T23:20:00Z",
+      "1986-02-28T00:00:00Z"
+    ],
+    "rio-airways-1984-SPS-DFW-1720-b107@1986-02-28": [
+      "1986-02-28T23:20:00Z",
+      "1986-03-01T00:00:00Z"
+    ],
+    "rio-airways-1889-ABI-SJT-0915-b107@1986-02-28": [
+      "1986-02-28T15:15:00Z",
+      "1986-02-28T15:40:00Z"
+    ],
+    "rio-airways-1889-ABI-SJT-0915-b107@1986-03-01": [
+      "1986-03-01T15:15:00Z",
+      "1986-03-01T15:40:00Z"
+    ],
+    "rio-airways-1914-ABI-SJT-1430-b107@1986-03-01": [
+      "1986-03-01T20:30:00Z",
+      "1986-03-01T20:55:00Z"
+    ],
+    "rio-airways-1939-ABI-SJT-2205-b107@1986-02-27": [
+      "1986-02-28T04:05:00Z",
+      "1986-02-28T04:30:00Z"
+    ],
+    "rio-airways-1939-ABI-SJT-2205-b107@1986-02-28": [
+      "1986-03-01T04:05:00Z",
+      "1986-03-01T04:30:00Z"
+    ],
+    "rio-airways-1969-SJT-ABI-0615-b107@1986-02-28": [
+      "1986-02-28T12:15:00Z",
+      "1986-02-28T12:40:00Z"
+    ],
+    "rio-airways-1969-SJT-ABI-0615-b107@1986-03-01": [
+      "1986-03-01T12:15:00Z",
+      "1986-03-01T12:40:00Z"
+    ],
+    "rio-airways-1971-SJT-ABI-1010-b107@1986-02-28": [
+      "1986-02-28T16:10:00Z",
+      "1986-02-28T16:35:00Z"
+    ],
+    "rio-airways-1971-SJT-ABI-1010-b107@1986-03-01": [
+      "1986-03-01T16:10:00Z",
+      "1986-03-01T16:35:00Z"
+    ],
+    "rio-airways-1974-SJT-ABI-1515-b107@1986-03-01": [
+      "1986-03-01T21:15:00Z",
+      "1986-03-01T21:40:00Z"
+    ],
+    "rio-airways-1880-CLL-ACT-0600-b107@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:30:00Z"
+    ],
+    "rio-airways-1880-CLL-ACT-0600-b107@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T12:30:00Z"
+    ],
+    "rio-airways-1893-ACT-CLL-0850-b107@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T15:15:00Z"
+    ],
+    "rio-airways-1893-ACT-CLL-0850-b107@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T15:15:00Z"
+    ],
+    "rio-airways-1954-ILE-ACT-0805-b107@1986-02-28": [
+      "1986-02-28T14:05:00Z",
+      "1986-02-28T14:25:00Z"
+    ],
+    "rio-airways-1954-ILE-ACT-0805-b107@1986-03-01": [
+      "1986-03-01T14:05:00Z",
+      "1986-03-01T14:25:00Z"
+    ],
+    "rio-airways-1955-ILE-ACT-1005-b107@1986-02-28": [
+      "1986-02-28T16:05:00Z",
+      "1986-02-28T16:25:00Z"
+    ],
+    "rio-airways-1955-ILE-ACT-1005-b107@1986-03-01": [
+      "1986-03-01T16:05:00Z",
+      "1986-03-01T16:25:00Z"
+    ],
+    "rio-airways-1958-ILE-ACT-1340-b107@1986-02-28": [
+      "1986-02-28T19:40:00Z",
+      "1986-02-28T20:00:00Z"
+    ],
+    "rio-airways-1958-ILE-ACT-1340-b107@1986-03-01": [
+      "1986-03-01T19:40:00Z",
+      "1986-03-01T20:00:00Z"
+    ],
+    "rio-airways-1960-ILE-ACT-1605-b107@1986-02-27": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-27T22:25:00Z"
+    ],
+    "rio-airways-1960-ILE-ACT-1605-b107@1986-02-28": [
+      "1986-02-28T22:05:00Z",
+      "1986-02-28T22:25:00Z"
+    ],
+    "rio-airways-1960-ILE-ACT-1605-b107@1986-03-01": [
+      "1986-03-01T22:05:00Z",
+      "1986-03-01T22:25:00Z"
+    ],
+    "rio-airways-1912-ACT-ILE-1255-b107@1986-02-28": [
+      "1986-02-28T18:55:00Z",
+      "1986-02-28T19:15:00Z"
+    ],
+    "rio-airways-1912-ACT-ILE-1255-b107@1986-03-01": [
+      "1986-03-01T18:55:00Z",
+      "1986-03-01T19:15:00Z"
+    ],
+    "rio-airways-1917-ACT-ILE-1515-b107@1986-02-28": [
+      "1986-02-28T21:15:00Z",
+      "1986-02-28T21:35:00Z"
+    ],
+    "rio-airways-1917-ACT-ILE-1515-b107@1986-03-01": [
+      "1986-03-01T21:15:00Z",
+      "1986-03-01T21:35:00Z"
+    ],
+    "rio-airways-1930-ACT-ILE-1935-b107@1986-02-27": [
+      "1986-02-28T01:35:00Z",
+      "1986-02-28T01:55:00Z"
+    ],
+    "rio-airways-1930-ACT-ILE-1935-b107@1986-02-28": [
+      "1986-03-01T01:35:00Z",
+      "1986-03-01T01:55:00Z"
+    ],
+    "rio-airways-1944-ACT-ILE-2110-b107@1986-02-27": [
+      "1986-02-28T03:10:00Z",
+      "1986-02-28T03:30:00Z"
+    ],
+    "rio-airways-1944-ACT-ILE-2110-b107@1986-02-28": [
+      "1986-03-01T03:10:00Z",
+      "1986-03-01T03:30:00Z"
+    ],
+    "rio-airways-1900-LAW-SPS-1115-b107@1986-02-28": [
+      "1986-02-28T17:15:00Z",
+      "1986-02-28T17:35:00Z"
+    ],
+    "rio-airways-1900-LAW-SPS-1115-b107@1986-03-01": [
+      "1986-03-01T17:15:00Z",
+      "1986-03-01T17:35:00Z"
+    ],
+    "rio-airways-1941-LAW-SPS-2225-b107@1986-02-27": [
+      "1986-02-28T04:25:00Z",
+      "1986-02-28T04:45:00Z"
+    ],
+    "rio-airways-1941-LAW-SPS-2225-b107@1986-02-28": [
+      "1986-03-01T04:25:00Z",
+      "1986-03-01T04:45:00Z"
+    ],
+    "rio-airways-1977-SPS-LAW-0605-b107@1986-02-28": [
+      "1986-02-28T12:05:00Z",
+      "1986-02-28T12:25:00Z"
+    ],
+    "rio-airways-1977-SPS-LAW-0605-b107@1986-03-01": [
+      "1986-03-01T12:05:00Z",
+      "1986-03-01T12:25:00Z"
+    ],
+    "rio-airways-1908-SPS-LAW-1410-b107@1986-02-28": [
+      "1986-02-28T20:10:00Z",
+      "1986-02-28T20:30:00Z"
+    ],
+    "rio-airways-1908-SPS-LAW-1410-b107@1986-03-01": [
+      "1986-03-01T20:10:00Z",
+      "1986-03-01T20:30:00Z"
+    ],
+    "rio-airways-1932-SPS-LAW-1925-b107@1986-02-27": [
+      "1986-02-28T01:25:00Z",
+      "1986-02-28T01:45:00Z"
+    ],
+    "rio-airways-1932-SPS-LAW-1925-b107@1986-02-28": [
+      "1986-03-01T01:25:00Z",
+      "1986-03-01T01:45:00Z"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "verified_independent_segment_ground_times": [
+    {
+      "incoming_schedule": "rio-airways-1889-DFW-ABI-0815-b107",
+      "outgoing_schedule": "rio-airways-1889-ABI-SJT-0915-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1914-DFW-ABI-1330-b107",
+      "outgoing_schedule": "rio-airways-1914-ABI-SJT-1430-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        6
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "rio-airways-1939-DFW-ABI-2105-b107",
+      "outgoing_schedule": "rio-airways-1939-ABI-SJT-2205-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1969-SJT-ABI-0615-b107",
+      "outgoing_schedule": "rio-airways-1969-ABI-DFW-0650-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1971-SJT-ABI-1010-b107",
+      "outgoing_schedule": "rio-airways-1971-ABI-DFW-1045-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1974-SJT-ABI-1515-b107",
+      "outgoing_schedule": "rio-airways-1974-ABI-DFW-1550-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        6
+      ],
+      "matching_in_window_chains": 1
+    },
+    {
+      "incoming_schedule": "rio-airways-1880-CLL-ACT-0600-b107",
+      "outgoing_schedule": "rio-airways-1880-ACT-DFW-0640-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1893-DFW-ACT-0800-b107",
+      "outgoing_schedule": "rio-airways-1893-ACT-CLL-0850-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1954-ILE-ACT-0805-b107",
+      "outgoing_schedule": "rio-airways-1954-ACT-DFW-0835-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1955-ILE-ACT-1005-b107",
+      "outgoing_schedule": "rio-airways-1955-ACT-DFW-1035-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1958-ILE-ACT-1340-b107",
+      "outgoing_schedule": "rio-airways-1958-ACT-DFW-1410-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1960-ILE-ACT-1605-b107",
+      "outgoing_schedule": "rio-airways-1960-ACT-DFW-1635-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1912-DFW-ACT-1205-b107",
+      "outgoing_schedule": "rio-airways-1912-ACT-ILE-1255-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1917-DFW-ACT-1425-b107",
+      "outgoing_schedule": "rio-airways-1917-ACT-ILE-1515-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1930-DFW-ACT-1845-b107",
+      "outgoing_schedule": "rio-airways-1930-ACT-ILE-1935-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1944-DFW-ACT-2020-b107",
+      "outgoing_schedule": "rio-airways-1944-ACT-ILE-2110-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1900-DFW-LAW-1015-b107",
+      "outgoing_schedule": "rio-airways-1900-LAW-SPS-1115-b107",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1900-LAW-SPS-1115-b107",
+      "outgoing_schedule": "rio-airways-1900-SPS-DFW-1150-b107",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1933-DFW-LAW-1830-b107",
+      "outgoing_schedule": "rio-airways-1933-LAW-SPS-1925-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        6
+      ],
+      "matching_in_window_chains": 0
+    },
+    {
+      "incoming_schedule": "rio-airways-1941-DFW-LAW-2130-b107",
+      "outgoing_schedule": "rio-airways-1941-LAW-SPS-2225-b107",
+      "ground_minutes": 10,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1977-SPS-LAW-0605-b107",
+      "outgoing_schedule": "rio-airways-1977-LAW-DFW-0640-b107",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1908-DFW-SPS-1315-b107",
+      "outgoing_schedule": "rio-airways-1908-SPS-LAW-1410-b107",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1908-SPS-LAW-1410-b107",
+      "outgoing_schedule": "rio-airways-1908-LAW-DFW-1445-b107",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1932-DFW-SPS-1830-b107",
+      "outgoing_schedule": "rio-airways-1932-SPS-LAW-1925-b107",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "matching_in_window_chains": 2
+    },
+    {
+      "incoming_schedule": "rio-airways-1932-SPS-LAW-1925-b107",
+      "outgoing_schedule": "rio-airways-1932-LAW-DFW-2000-b107",
+      "ground_minutes": 15,
+      "common_weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "matching_in_window_chains": 2
+    }
+  ],
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "passed_data_checks; unreal_runtime_not_run",
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

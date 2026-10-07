@@ -1,0 +1,67 @@
+{
+  "package": "v131",
+  "checked_on": "2026-10-02",
+  "leads": [
+    {
+      "name": "LACSA January 1, 1986",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/lr.htm",
+        "https://www.airtimes.com/cgat/cr/lacsa.htm"
+      ],
+      "result": "Cover/index only. January 1 edition followed by March 1 edition, so applicability changes inside the target window. Need both interiors and footnotes; no clocks imported."
+    },
+    {
+      "name": "Aeronica",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/rl3.htm"
+      ],
+      "result": "Nearby archival examples are 1984 and 1987; no applicable complete 1986 clock table found. No Nicaragua movements imported."
+    },
+    {
+      "name": "American January 31, 1986",
+      "urls": [
+        "https://www.airtimes.com/cgat/usa/american/gal/aagal80.htm"
+      ],
+      "result": "Gallery/cover identified, no full interior obtained. No new clocks imported."
+    },
+    {
+      "name": "Eastern January 1, 1986",
+      "urls": [
+        "https://www.airtimes.com/cgat/usb/eastern/gal/eagal80.htm",
+        "https://www.airtimes.com/cgat/usb/eastern/gal/eagalemp.htm"
+      ],
+      "result": "Cover gallery identifies Jan1 and next Mar2 issue; employee gallery did not supply target-window interior. No clocks imported."
+    },
+    {
+      "name": "BWIA",
+      "urls": [
+        "https://www.airtimes.com/cgat/tt/bwia.htm"
+      ],
+      "result": "Inspected index skips from 1983 to 1989 for relevant nearby holdings. Not proof no winter1985/86 timetable existed; no applicable interior obtained."
+    },
+    {
+      "name": "Air South, Homestead, March 1, 1986",
+      "urls": [
+        "https://www.airtimes.com/cgat/usa/airsouthhomestead.htm"
+      ],
+      "result": "Cover only; no full clock pages obtained. No imported flights."
+    },
+    {
+      "name": "Air France winter1985/86 secondary review",
+      "urls": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "result": "No additional rows imported. Reviewed copy jumps from printed36/37 to40/41; Havana origin pages38/39 not obtained in that sequence. Existing regional operator-attribution holds remain. Not a complete scan/page census."
+    }
+  ],
+  "new_operational_rows_from_these_leads": 0,
+  "source_images_redistributed": false,
+  "prior_holds": [
+    "Virgin Islands Seaplane Shuttle needs arrivals/durations and harbour identity.",
+    "Caribbean Express needs 1February1986 interior.",
+    "Airways International needs stop count.",
+    "Challenge internal stops/amendments and legal chronology incomplete.",
+    "Arrow scheduled passenger suspension still prevents old table projection; independently dated cargo/privatecharter research remains open.",
+    "LI126 route/equipment conflict, LI117 final inverted times, LI168 asterisk unresolved."
+  ]
+}

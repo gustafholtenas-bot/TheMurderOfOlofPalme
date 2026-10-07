@@ -1,0 +1,52 @@
+{
+  "package": "v124",
+  "airport_records": [
+    {
+      "id": "CUN",
+      "name": "Cancún International (1986)",
+      "country": "mx",
+      "timezone": "America/Cancun",
+      "lat": 21.040817,
+      "lon": -86.87347,
+      "coordinate_source": "https://ourairports.com/airports/MMUN/",
+      "coordinate_record_id": "MMUN",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+        "https://cgc.qroo.gob.mx/veda_electoral/efemeride-30-marzo/"
+      ],
+      "location_note": "Republic scan7 explicitly identifies CUN as Cancun. Quintana Roo government dates handover of the international airport installations to1975; the earlier city airstrip is not used. Later terminals/runways are not reconstructed. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity reviewed separately."
+    },
+    {
+      "id": "GCM",
+      "name": "Grand Cayman – Owen Roberts",
+      "country": "ky",
+      "timezone": "America/Cayman",
+      "lat": 19.292801,
+      "lon": -81.357697,
+      "coordinate_source": "https://ourairports.com/airports/MWCR/",
+      "coordinate_record_id": "MWCR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+        "https://www.caymanairports.com/overview-of-owen-roberts-international-airport"
+      ],
+      "location_note": "Republic scan7 explicitly identifies GCM as Grand Cayman BWI. The airport authority dates commercial operations at Owen Roberts to1952. No modern runway extension or terminal is reconstructed. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity reviewed separately."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "ky",
+      "name": {
+        "sv": "Caymanöarna",
+        "en": "Cayman Islands",
+        "en_source": "Caymanöarna"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 362,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed1986 terminal/runway coordinates. Source-era identities reviewed separately."
+}

@@ -1,0 +1,50 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    104,
+    114,
+    132,
+    146,
+    147,
+    148,
+    171,
+    226
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "104": 55,
+    "114": 60,
+    "132": 69,
+    "146": 76,
+    "147": 76,
+    "148": 77,
+    "171": 88,
+    "226": 116,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "43 rows in ten selected city-direction tables visually reviewed, including frequency, airport suffix, stops and date footnotes.",
+    "31 nonstop rows accepted; 11 connecting itineraries excluded; one contradictory nonstop row held outside the schedule catalog.",
+    "Blank frequency means daily; X6 excludes Saturday and X7 excludes Sunday. Accepted rows have no dated footnotes.",
+    "All new endpoints use UTC-6 during the import window; all accepted arrivals are on the same local date.",
+    "Houston I suffix identifies Intercontinental (IAH); H identifies Hobby (HOU). All accepted Houston rows use I.",
+    "Houston-Memphis 582 arrives at 18:21. Little Rock-Memphis 1156 departs at 17:58 and has a blank frequency field.",
+    "Memphis-Little Rock 597 actually prints 7:51p–6:25p. This row is held; no corrected time is guessed.",
+    "Printed flight itinerary pages confirm accepted flight numbers and segments; they do not resolve the 597 time conflict.",
+    "All v82 movement objects and previous schedule records unchanged; earlier errata retained.",
+    "Later amendments and timetable end date not verified; scheduled service is not proof of operation."
+  ]
+}

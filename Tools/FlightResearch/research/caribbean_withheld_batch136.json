@@ -1,0 +1,47 @@
+{
+  "package": "v139",
+  "prior_holds_retained_from": "caribbean_withheld_batch135.json",
+  "previous_held_reports_preserved_as_history": true,
+  "new_conflicting_accepted_rows": [],
+  "excluded_through_rows": [
+    {
+      "scan_page": 5,
+      "column": 4,
+      "flight": "75",
+      "origin": "MSP",
+      "destination": "SEA",
+      "departure": "09:30",
+      "arrival": "12:10",
+      "ST": 1,
+      "reason": "Through itinerary; no extra nonstop. MSP–PDX75 is separately timed, but PDX–SEA has printed76 only. Do not invent75PDX–SEA or assert same aircraft."
+    },
+    {
+      "scan_page": 6,
+      "column": 1,
+      "flight": "76",
+      "origin": "PDX",
+      "destination": "MSP",
+      "departure": "11:35",
+      "arrival": "17:45",
+      "ST": 1,
+      "reason": "Through itinerary; separately timed76PDX–SEA and76SEA–MSP imported, no extra nonstop."
+    }
+  ],
+  "zero_movement_schedules": [
+    "republic-airlines-124-LAS-MSP-1145-b136"
+  ],
+  "zero_movement_reason": "124LAS–MSP Sunday only; noSunday in project window.",
+  "EXP_policy": "Separate ExpressAirlinesI/Simmons operators explicitly identified in scan6. NoEXP rows selected.",
+  "new_regional_search_performed": false,
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "remaining_republic_gaps": [
+    "Remaining mainline network, including smallerDetroit/Minneapolis spokes; separately attributedEXP.",
+    "Separately printedSFO–SMF/SMF–SFO legs remain future work; no inferred nonstopMEM–SMF.",
+    "Unprinted75PDX–SEA physical row/number change unresolved; preserve printed76 without assuming aircraft continuity.",
+    "Amendments and actual-operation evidence.",
+    "Earlier withheld841MOB–GPT missing physical row remains unchanged."
+  ]
+}

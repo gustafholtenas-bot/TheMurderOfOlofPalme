@@ -1,0 +1,600 @@
+{
+  "package": "v136",
+  "checked_on": "2026-10-02",
+  "countries": [
+    {
+      "id": "ni",
+      "name": "Nicaragua",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "bz",
+      "name": "Belize",
+      "before": {
+        "movements": 5,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 5,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "gt",
+      "name": "Guatemala",
+      "before": {
+        "movements": 4,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 4,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "hn",
+      "name": "Honduras",
+      "before": {
+        "movements": 5,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 5,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "sv",
+      "name": "El Salvador",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "cr",
+      "name": "Costa Rica",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "pa",
+      "name": "Panama",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "vi",
+      "name": "Amerikanska Jungfruöarna / St. Thomas, St. Croix",
+      "before": {
+        "movements": 31,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 6
+      },
+      "after": {
+        "movements": 31,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 6
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "vg",
+      "name": "Brittiska Jungfruöarna",
+      "before": {
+        "movements": 8,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 8,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "pr",
+      "name": "Puerto Rico",
+      "before": {
+        "movements": 26,
+        "directed_pairs": 10,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 26,
+        "directed_pairs": 10,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "cu",
+      "name": "Kuba",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "jm",
+      "name": "Jamaica",
+      "before": {
+        "movements": 12,
+        "directed_pairs": 7,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 12,
+        "directed_pairs": 7,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ht",
+      "name": "Haiti",
+      "before": {
+        "movements": 6,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 6,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "do",
+      "name": "Dominikanska republiken",
+      "before": {
+        "movements": 4,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 4,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "bs",
+      "name": "Bahamas",
+      "before": {
+        "movements": 27,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 27,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ky",
+      "name": "Caymanöarna",
+      "before": {
+        "movements": 38,
+        "directed_pairs": 11,
+        "airports": 3,
+        "domestic_movements": 12
+      },
+      "after": {
+        "movements": 38,
+        "directed_pairs": 11,
+        "airports": 3,
+        "domestic_movements": 12
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "tc",
+      "name": "Turks- och Caicosöarna",
+      "before": {
+        "movements": 4,
+        "directed_pairs": 4,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 4,
+        "directed_pairs": 4,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ag",
+      "name": "Antigua och Barbuda",
+      "before": {
+        "movements": 115,
+        "directed_pairs": 20,
+        "airports": 2,
+        "domestic_movements": 8
+      },
+      "after": {
+        "movements": 115,
+        "directed_pairs": 20,
+        "airports": 2,
+        "domestic_movements": 8
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "kn",
+      "name": "Saint Kitts och Nevis",
+      "before": {
+        "movements": 70,
+        "directed_pairs": 15,
+        "airports": 2,
+        "domestic_movements": 12
+      },
+      "after": {
+        "movements": 70,
+        "directed_pairs": 15,
+        "airports": 2,
+        "domestic_movements": 12
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "dm",
+      "name": "Dominica",
+      "before": {
+        "movements": 30,
+        "directed_pairs": 7,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 30,
+        "directed_pairs": 7,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "lc",
+      "name": "Saint Lucia",
+      "before": {
+        "movements": 69,
+        "directed_pairs": 16,
+        "airports": 2,
+        "domestic_movements": 4
+      },
+      "after": {
+        "movements": 69,
+        "directed_pairs": 16,
+        "airports": 2,
+        "domestic_movements": 4
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "vc",
+      "name": "Saint Vincent och Grenadinerna",
+      "before": {
+        "movements": 65,
+        "directed_pairs": 16,
+        "airports": 3,
+        "domestic_movements": 8
+      },
+      "after": {
+        "movements": 65,
+        "directed_pairs": 16,
+        "airports": 3,
+        "domestic_movements": 8
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "gd",
+      "name": "Grenada",
+      "before": {
+        "movements": 54,
+        "directed_pairs": 10,
+        "airports": 2,
+        "domestic_movements": 14
+      },
+      "after": {
+        "movements": 54,
+        "directed_pairs": 10,
+        "airports": 2,
+        "domestic_movements": 14
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "bb",
+      "name": "Barbados",
+      "before": {
+        "movements": 55,
+        "directed_pairs": 14,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 55,
+        "directed_pairs": 14,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "tt",
+      "name": "Trinidad och Tobago",
+      "before": {
+        "movements": 29,
+        "directed_pairs": 10,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 29,
+        "directed_pairs": 10,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "gp",
+      "name": "Guadeloupe och dåvarande franska karibiska områden",
+      "before": {
+        "movements": 48,
+        "directed_pairs": 14,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 48,
+        "directed_pairs": 14,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "mq",
+      "name": "Martinique",
+      "before": {
+        "movements": 58,
+        "directed_pairs": 18,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 58,
+        "directed_pairs": 18,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "aw",
+      "name": "Aruba",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "an",
+      "name": "Nederländska Antillerna (1986)",
+      "before": {
+        "movements": 55,
+        "directed_pairs": 16,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 55,
+        "directed_pairs": 16,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ai",
+      "name": "Anguilla",
+      "before": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ms",
+      "name": "Montserrat",
+      "before": {
+        "movements": 41,
+        "directed_pairs": 6,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 41,
+        "directed_pairs": 6,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    }
+  ],
+  "before": {
+    "movements": 532,
+    "directed_pairs": 158,
+    "airports": 38,
+    "domestic_movements": 64
+  },
+  "after": {
+    "movements": 532,
+    "directed_pairs": 158,
+    "airports": 38,
+    "domestic_movements": 64
+  },
+  "unique_added_regional_movements": 0,
+  "new_st_thomas_movements": 0,
+  "st_thomas_movements_after": 14,
+  "new_tortola_movements": 0,
+  "tortola_movements_after": 8,
+  "adjoining_french_guiana": {
+    "movements": 3,
+    "directed_pairs": 2,
+    "airports": 1,
+    "domestic_movements": 0
+  },
+  "adjoining_mexico": {
+    "movements": 20,
+    "directed_pairs": 10,
+    "airports": 3,
+    "domestic_movements": 0
+  },
+  "new_mexico_movements": 0,
+  "new_us_domestic_movements": 219,
+  "coverage_complete": false,
+  "operator_census_complete": false,
+  "research_area_count": 31,
+  "added_research_areas": [],
+  "counting": "Same31-area scope, unchanged. All219 additions are US domestic; zero means a database gap, not historical absence."
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "LIL",
+    "name": "Lille–Lesquin",
+    "country": "fr",
+    "timezone": "Europe/Paris",
+    "lat": 50.56343,
+    "lon": 3.08682,
+    "coordinate_source": "https://piaf.stac.aviation-civile.gouv.fr/airports/table",
+    "coordinate_record_id": "LFQQ",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "https://www.lille.aeroport.fr/corporate/nous-connaitre/histoire-aeroport/"
+    ],
+    "location_note": "Airfield named in the contemporary Air France timetable, printed p.40. Current DGAC/STAC PIAF coordinates locate the airfield area, not a reconstructed 1986 gate or aircraft position. Nantes uses its contemporary Château-Bougon name; renamed Nantes-Atlantique in 1988."
+  },
+  {
+    "id": "NTE",
+    "name": "Nantes–Château-Bougon",
+    "country": "fr",
+    "timezone": "Europe/Paris",
+    "lat": 47.15702,
+    "lon": -1.60781,
+    "coordinate_source": "https://piaf.stac.aviation-civile.gouv.fr/airports/table",
+    "coordinate_record_id": "LFRS",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "https://patrimonia.nantes.fr/fiches-encyclopediques/aeroport/"
+    ],
+    "location_note": "Airfield named in the contemporary Air France timetable, printed p.54. Current DGAC/STAC PIAF coordinates locate the airfield area, not a reconstructed 1986 gate or aircraft position. Nantes uses its contemporary Château-Bougon name; renamed Nantes-Atlantique in 1988."
+  },
+  {
+    "id": "LDE",
+    "name": "Lourdes/Tarbes–Ossun",
+    "country": "fr",
+    "timezone": "Europe/Paris",
+    "lat": 43.18545,
+    "lon": -0.00289,
+    "coordinate_source": "https://piaf.stac.aviation-civile.gouv.fr/airports/table",
+    "coordinate_record_id": "LFBT",
+    "historical_location_reviewed": true,
+    "historical_location_sources": [
+      "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "https://www.tlp.aeroport.fr/page-en/location-access"
+    ],
+    "location_note": "Airfield named in the contemporary Air France timetable, printed p.42. Current DGAC/STAC PIAF coordinates locate the airfield area, not a reconstructed 1986 gate or aircraft position. Nantes uses its contemporary Château-Bougon name; renamed Nantes-Atlantique in 1988."
+  }
+]

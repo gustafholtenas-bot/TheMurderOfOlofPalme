@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "checked_on": "2026-09-30",
-  "package": "v79",
-  "total_movements": 4883,
-  "next_country_id": "cy",
+  "checked_on": "2026-10-02",
+  "package": "v141_SE01",
+  "total_movements": 11506,
+  "next_country_id": "se",
   "coverage_complete": false,
   "counting": "Fysiska rörelser med start eller mål i kataloglandet, oavsett operatörens hemland. Inrikes räknas en gång. Landrader överlappar. Noll betyder inga inlagda rörelser. Sovjetunionen och Turkiet räknas som hela katalogländer, inklusive asiatiska ändpunkter.",
   "countries": [
@@ -191,7 +191,7 @@
         "sas-582-CPH-ARN-2010@1986-03-01",
         "sas-420-CPH-ARN-2210@1986-03-01"
       ],
-      "next_action": "Andra riktade genomgången dokumenterad i SWEDEN_FOLLOWUP_BATCH46.md. SAS/Linjeflyg och Swedair saknar fortfarande kompletta granskade vinteravgångssidor för Sverige. Nya omslag och arkivhänvisningar räcker inte. A6774-01 pekar på en separat originaltidtabell; den behöver återfinnas med teckenförklaring, ändringar och fysiska delsträcksuppgifter. De tidigare 87 svenska ändpunktsrörelserna är oförändrade. Regional-, charter-, frakt-, privat-, stats-, militärtrafik och faktiska överflygningar är ofullständigt utredda."
+      "next_action": "Fortsätt SAS/Linjeflyg/Finnair-vintertabeller. Följ upp CFV210:60425 Visby28feb12:00 och A6774-00 bilagor1mars. Kalibrera R130/R134/radarunderlag innan överflygningar identifieras. Se swedish_airspace_leads_se01.json."
     },
     {
       "order": 2,
@@ -641,9 +641,9 @@
       "catalog_country_id": "gb",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 556,
+      "endpoint_movements": 600,
       "domestic_movements": 140,
-      "international_movements": 416,
+      "international_movements": 460,
       "directed_endpoint_pairs": [
         [
           "ABZ",
@@ -730,8 +730,16 @@
           "LGW"
         ],
         [
+          "BHX",
+          "CDG"
+        ],
+        [
           "BLK",
           "MME"
+        ],
+        [
+          "BOD",
+          "LHR"
         ],
         [
           "BOH",
@@ -768,6 +776,10 @@
         [
           "BRU",
           "STN"
+        ],
+        [
+          "CDG",
+          "BHX"
         ],
         [
           "CDG",
@@ -1023,6 +1035,14 @@
         ],
         [
           "LGW",
+          "LDE"
+        ],
+        [
+          "LGW",
+          "MLA"
+        ],
+        [
+          "LGW",
           "MSP"
         ],
         [
@@ -1043,6 +1063,10 @@
         ],
         [
           "LGW",
+          "TLS"
+        ],
+        [
+          "LGW",
           "ZRH"
         ],
         [
@@ -1056,6 +1080,10 @@
         [
           "LHR",
           "BFS"
+        ],
+        [
+          "LHR",
+          "BOD"
         ],
         [
           "LHR",
@@ -1115,6 +1143,10 @@
         ],
         [
           "LHR",
+          "LIL"
+        ],
+        [
+          "LHR",
           "LYS"
         ],
         [
@@ -1127,7 +1159,15 @@
         ],
         [
           "LHR",
+          "MLA"
+        ],
+        [
+          "LHR",
           "MME"
+        ],
+        [
+          "LHR",
+          "MRS"
         ],
         [
           "LHR",
@@ -1140,6 +1180,10 @@
         [
           "LHR",
           "NCL"
+        ],
+        [
+          "LHR",
+          "NTE"
         ],
         [
           "LHR",
@@ -1160,6 +1204,18 @@
         [
           "LHR",
           "SNN"
+        ],
+        [
+          "LHR",
+          "TLS"
+        ],
+        [
+          "LHR",
+          "TLV"
+        ],
+        [
+          "LIL",
+          "LHR"
         ],
         [
           "LPL",
@@ -1187,7 +1243,23 @@
         ],
         [
           "MAN",
+          "MLA"
+        ],
+        [
+          "MAN",
           "ZRH"
+        ],
+        [
+          "MLA",
+          "LGW"
+        ],
+        [
+          "MLA",
+          "LHR"
+        ],
+        [
+          "MLA",
+          "MAN"
         ],
         [
           "MME",
@@ -1212,6 +1284,10 @@
         [
           "MME",
           "NWI"
+        ],
+        [
+          "MRS",
+          "LHR"
         ],
         [
           "MSP",
@@ -1268,6 +1344,10 @@
         [
           "NCL",
           "SVG"
+        ],
+        [
+          "NTE",
+          "LHR"
         ],
         [
           "NWI",
@@ -1338,6 +1418,18 @@
           "NCL"
         ],
         [
+          "TLS",
+          "LGW"
+        ],
+        [
+          "TLS",
+          "LHR"
+        ],
+        [
+          "TLV",
+          "LHR"
+        ],
+        [
           "ZRH",
           "LGW"
         ],
@@ -1348,14 +1440,17 @@
       ],
       "movements_by_source_airline": {
         "aer-lingus": 38,
-        "air-france": 40,
+        "air-france": 54,
+        "air-malta": 8,
         "air-uk": 173,
         "air-zimbabwe": 3,
-        "british-airways": 116,
+        "british-airways": 124,
+        "british-caledonian": 8,
         "british-midland": 16,
         "casair": 5,
-        "dan-air": 85,
+        "dan-air": 89,
         "delta": 4,
+        "el-al": 2,
         "gb-airways": 4,
         "jersey-european": 2,
         "klm": 2,
@@ -1377,6 +1472,7 @@
       ],
       "imported_home_operator_ids": [
         "british-airways",
+        "british-caledonian",
         "gb-airways",
         "british-midland",
         "casair",
@@ -1423,6 +1519,7 @@
         "panam-102-JFK-LHR-2100@1986-02-27",
         "panam-120-LAX-LHR-1830@1986-02-27",
         "panam-122-SEA-LHR-1845@1986-02-27",
+        "air-france-1830-BOD-LHR-0720-b116@1986-02-28",
         "air-france-1824-LYS-LHR-0740@1986-02-28",
         "british-airways-302-LHR-CDG-0640@1986-02-28",
         "dan-air-861-ZRH-LGW-0745-d56-b52@1986-02-28",
@@ -1431,11 +1528,13 @@
         "dan-air-151-INV-LHR-0650-b47@1986-02-28",
         "british-airways-301-CDG-LHR-0755@1986-02-28",
         "sabena-617-BRU-MAN-0755@1986-02-28",
+        "air-france-1864-LIL-LHR-0800-int01@1986-02-28",
         "air-uk-160-STN-AMS-0700@1986-02-28",
         "air-uk-214-STN-LBA-0700@1986-02-28",
         "air-uk-581-LBA-BFS-0700@1986-02-28",
         "air-uk-650-STN-BRU-0700@1986-02-28",
         "dan-air-101-NCL-LGW-0700-b47@1986-02-28",
+        "air-malta-100-MLA-LHR-0805-int05@1986-02-28",
         "air-uk-202-NWI-HUY-0705@1986-02-28",
         "air-uk-100-NWI-AMS-0710@1986-02-28",
         "air-uk-641-STN-CDG-0710@1986-02-28",
@@ -1454,6 +1553,7 @@
         "air-uk-052-NWI-LHR-0735@1986-02-28",
         "air-uk-201-EDI-HUY-0740@1986-02-28",
         "air-uk-824-HUY-AMS-0740@1986-02-28",
+        "air-france-1822-TLS-LHR-0845-b116@1986-02-28",
         "dan-air-141-NCL-BFS-0745-b47@1986-02-28",
         "aer-lingus-151-LHR-DUB-0750@1986-02-28",
         "air-uk-202-HUY-EDI-0750@1986-02-28",
@@ -1475,10 +1575,12 @@
         "panam-125-BRU-LHR-0905@1986-02-28",
         "british-airways-804-LHR-DUB-0815@1986-02-28",
         "air-uk-791-LBA-CDG-0820@1986-02-28",
+        "el-al-315-TLV-LHR-1025-b118@1986-02-28",
         "aer-lingus-322-DUB-EMA-0830-b48@1986-02-28",
         "british-airways-303-CDG-LHR-0930@1986-02-28",
         "british-airways-304-LHR-CDG-0830@1986-02-28",
         "panam-100-LHR-FRA-0830@1986-02-28",
+        "air-france-2646-LHR-LIL-0835-int01@1986-02-28",
         "air-uk-441-SOU-JER-0835@1986-02-28",
         "air-uk-582-BFS-LBA-0835@1986-02-28",
         "air-uk-101-AMS-NWI-0940@1986-02-28",
@@ -1486,6 +1588,7 @@
         "air-uk-181-SOU-GCI-0840@1986-02-28",
         "air-uk-651-BRU-STN-0940@1986-02-28",
         "aer-lingus-282-DUB-BRS-0845-b48@1986-02-28",
+        "air-france-1863-LHR-NTE-0850-int01@1986-02-28",
         "air-uk-131-LHR-GCI-0850@1986-02-28",
         "air-uk-602-ABZ-SVG-0850@1986-02-28",
         "dan-air-102-LGW-NCL-0850-d5-b46@1986-02-28",
@@ -1504,6 +1607,7 @@
         "aer-lingus-153-LHR-DUB-0925@1986-02-28",
         "aer-lingus-193-LPL-DUB-0925@1986-02-28",
         "british-airways-861-DUB-BHX-0925-b48@1986-02-28",
+        "british-caledonian-005-LGW-JER-0925-b116@1986-02-28",
         "dan-air-125-BFS-CWL-0925-b47@1986-02-28",
         "air-france-809-LHR-CDG-0930@1986-02-28",
         "air-france-810-CDG-LHR-1030@1986-02-28",
@@ -1533,6 +1637,7 @@
         "british-airways-4882-LHR-GLA-1015@1986-02-28",
         "air-uk-589-LBA-BFS-1020@1986-02-28",
         "british-midland-333-MME-LHR-1020@1986-02-28",
+        "air-france-1827-LHR-MRS-1025-b116@1986-02-28",
         "british-airways-834-LHR-SNN-1025-b48@1986-02-28",
         "panam-125-LHR-SEA-1025@1986-02-28",
         "air-uk-162-STN-AMS-1030@1986-02-28",
@@ -1541,10 +1646,13 @@
         "british-airways-306-LHR-CDG-1030@1986-02-28",
         "british-airways-4572-LHR-BFS-1030@1986-02-28",
         "casair-501-MME-HUY-1030@1986-02-28",
+        "british-airways-552-LGW-MLA-1035-int05@1986-02-28",
         "british-airways-810-LHR-DUB-1035@1986-02-28",
         "dan-air-102-NCL-SVG-1040-d5-b46@1986-02-28",
         "dan-air-842-NCL-FBU-1045-d5-b46@1986-02-28",
+        "air-france-1862-NTE-LHR-1150-int01@1986-02-28",
         "air-uk-722-CDG-NCL-1150@1986-02-28",
+        "british-caledonian-006-JER-LGW-1050-b116@1986-02-28",
         "jersey-european-102-BLK-MME-1055@1986-02-28",
         "aer-lingus-254-DUB-EDI-1100-b48@1986-02-28",
         "air-uk-132-GCI-LHR-1100@1986-02-28",
@@ -1556,6 +1664,7 @@
         "aer-lingus-143-LHR-SNN-1115-b48@1986-02-28",
         "british-airways-838-LHR-ORK-1115-b48@1986-02-28",
         "dan-air-223-BFS-LGW-1115-b47@1986-02-28",
+        "air-malta-101-LHR-MLA-1125-int05@1986-02-28",
         "sas-531-SVG-ABZ-1225@1986-02-28",
         "air-france-811-LHR-CDG-1130@1986-02-28",
         "air-france-812-CDG-LHR-1230@1986-02-28",
@@ -1570,6 +1679,7 @@
         "dan-air-854-LGW-BRN-1145-d5-b52@1986-02-28",
         "dan-air-875-ZRH-MAN-1245-d5-b52@1986-02-28",
         "air-uk-371-SOU-JER-1155@1986-02-28",
+        "british-airways-348-LHR-MRS-1155-b116@1986-02-28",
         "british-airways-814-LHR-DUB-1155@1986-02-28",
         "dan-air-083-ABZ-LGW-1200-b47@1986-02-28",
         "dan-air-125-BRS-BFS-1205-b47@1986-02-28",
@@ -1584,6 +1694,7 @@
         "air-uk-133-LHR-GCI-1235@1986-02-28",
         "air-uk-167-AMS-STN-1345@1986-02-28",
         "british-airways-5132-LHR-JER-1245@1986-02-28",
+        "air-france-1833-LHR-BOD-1250-b116@1986-02-28",
         "air-uk-552-ABZ-NWI-1255@1986-02-28",
         "aer-lingus-159-LHR-DUB-1300@1986-02-28",
         "air-uk-590-BFS-LBA-1300@1986-02-28",
@@ -1617,6 +1728,7 @@
         "aer-lingus-335-LBA-DUB-1425@1986-02-28",
         "air-uk-372-EXT-GCI-1425@1986-02-28",
         "air-uk-661-CPH-NCL-1525@1986-02-28",
+        "british-airways-349-MRS-LHR-1525-b116@1986-02-28",
         "dan-air-144-BFS-NCL-1425-b47@1986-02-28",
         "air-uk-553-NWI-ABZ-1430@1986-02-28",
         "british-airways-192-JFK-LHR-0930@1986-02-28",
@@ -1627,6 +1739,7 @@
         "air-uk-168-STN-AMS-1435@1986-02-28",
         "british-midland-336-LHR-MME-1435@1986-02-28",
         "air-uk-444-JER-SOU-1440@1986-02-28",
+        "british-airways-553-MLA-LGW-1545-int05@1986-02-28",
         "air-uk-585-LBA-BFS-1450@1986-02-28",
         "dan-air-406-JER-LGW-1450-b47@1986-02-28",
         "air-uk-552-NWI-AMS-1500@1986-02-28",
@@ -1652,13 +1765,18 @@
         "british-midland-337-MME-LHR-1600@1986-02-28",
         "dan-air-755-NCL-DUB-1600@1986-02-28",
         "panam-103-FRA-LHR-1700@1986-02-28",
+        "air-malta-140-MLA-MAN-1705-int05@1986-02-28",
+        "air-france-962-CDG-BHX-1710-b116@1986-02-28",
         "british-airways-356-LHR-LYS-1615@1986-02-28",
+        "british-caledonian-021-LGW-JER-1615-b116@1986-02-28",
         "air-uk-163-AMS-STN-1720@1986-02-28",
+        "air-malta-130-MLA-LGW-1730-int05@1986-02-28",
         "air-uk-205-MME-NWI-1630@1986-02-28",
         "air-uk-453-SOU-JER-1630@1986-02-28",
         "british-airways-313-CDG-LHR-1730@1986-02-28",
         "british-airways-314-LHR-CDG-1630@1986-02-28",
         "dan-air-806-BRS-AMS-1630-d5-b50@1986-02-28",
+        "dan-air-913-LGW-TLS-1630-b116@1986-02-28",
         "air-uk-207-ABZ-NCL-1635@1986-02-28",
         "air-uk-586-BFS-LBA-1635@1986-02-28",
         "air-uk-105-AMS-NWI-1740@1986-02-28",
@@ -1675,10 +1793,12 @@
         "air-uk-856-SOU-AMS-1705@1986-02-28",
         "dan-air-229-BFS-LGW-1710-b47@1986-02-28",
         "dan-air-303-JER-BOH-1715-b47@1986-02-28",
+        "air-france-1826-MRS-LHR-1820-b116@1986-02-28",
         "air-uk-136-GCI-LHR-1720@1986-02-28",
         "air-uk-556-EDI-AMS-1720@1986-02-28",
         "aer-lingus-328-DUB-EMA-1725-b48@1986-02-28",
         "british-midland-338-LHR-MME-1725@1986-02-28",
+        "air-france-2647-LIL-LHR-1830-int01@1986-02-28",
         "air-france-817-LHR-CDG-1730@1986-02-28",
         "air-france-818-CDG-LHR-1830@1986-02-28",
         "air-uk-056-NWI-LHR-1730@1986-02-28",
@@ -1687,6 +1807,7 @@
         "air-uk-446-JER-SOU-1740@1986-02-28",
         "air-uk-643-STN-CDG-1740@1986-02-28",
         "british-airways-5456-LHR-NCL-1740@1986-02-28",
+        "british-caledonian-022-JER-LGW-1740-b116@1986-02-28",
         "aer-lingus-173-LHR-DUB-1745@1986-02-28",
         "british-airways-5618-LHR-ABZ-1745@1986-02-28",
         "dan-air-756-DUB-NCL-1745-b48@1986-02-28",
@@ -1697,6 +1818,7 @@
         "air-uk-164-STN-AMS-1755@1986-02-28",
         "air-uk-828-HUY-AMS-1755@1986-02-28",
         "aer-lingus-272-DUB-BHX-1800-b48@1986-02-28",
+        "air-france-961-BHX-CDG-1800-b116@1986-02-28",
         "air-uk-209-ABZ-EDI-1800@1986-02-28",
         "air-uk-545-AMS-NCL-1900@1986-02-28",
         "air-uk-652-STN-BRU-1800@1986-02-28",
@@ -1725,6 +1847,8 @@
         "air-uk-447-SOU-JER-1850@1986-02-28",
         "british-midland-339-MME-LHR-1850@1986-02-28",
         "dan-air-108-LGW-NCL-1850-b47@1986-02-28",
+        "dan-air-916-TLS-LGW-1950-b116@1986-02-28",
+        "air-france-1867-LHR-LIL-1855-int01@1986-02-28",
         "air-uk-057-LHR-NWI-1855@1986-02-28",
         "british-airways-907-CDG-MAN-1955@1986-02-28",
         "casair-503-GLA-MME-1855@1986-02-28",
@@ -1757,6 +1881,7 @@
         "aer-lingus-229-GLA-DUB-1955@1986-02-28",
         "air-uk-057-NWI-HUY-1955@1986-02-28",
         "aer-lingus-777-MAN-DUB-2000@1986-02-28",
+        "air-france-1823-LHR-TLS-2000-b116@1986-02-28",
         "british-airways-318-LHR-CDG-2000@1986-02-28",
         "casair-503-MME-HUY-2000@1986-02-28",
         "air-uk-209-HUY-NWI-2005@1986-02-28",
@@ -1773,7 +1898,9 @@
         "air-uk-211-MME-NWI-2035@1986-02-28",
         "air-uk-217-LBA-STN-2035@1986-02-28",
         "air-france-821-LHR-CDG-2040@1986-02-28",
+        "air-malta-141-MAN-MLA-2045-int05@1986-02-28",
         "aer-lingus-199-LPL-DUB-2050@1986-02-28",
+        "air-malta-131-LGW-MLA-2050-int05@1986-02-28",
         "aer-lingus-179-LHR-DUB-2120@1986-02-28",
         "northwest-44-MSP-LGW-1730@1986-02-28",
         "panam-2-JFK-LHR-1900@1986-02-28",
@@ -1811,6 +1938,7 @@
         "panam-106-LHR-MUC-RIEM-0755@1986-03-01",
         "panam-99-AMS-LHR-0855@1986-03-01",
         "air-france-806-CDG-LHR-0900@1986-03-01",
+        "air-malta-100-MLA-LHR-0900-int05@1986-03-01",
         "air-uk-583-LBA-BFS-0800@1986-03-01",
         "dan-air-153-INV-LHR-0800-b47@1986-03-01",
         "dan-air-400-JER-LGW-0800-b47@1986-03-01",
@@ -1834,12 +1962,14 @@
         "air-uk-825-AMS-HUY-1015@1986-03-01",
         "dan-air-811-AMS-MME-1015@1986-03-01",
         "aer-lingus-153-LHR-DUB-0925@1986-03-01",
+        "british-caledonian-005-LGW-JER-0925-b116@1986-03-01",
         "air-france-1825-LHR-LYS-0930@1986-03-01",
         "air-france-810-CDG-LHR-1030@1986-03-01",
         "air-uk-543-AMS-NCL-1030@1986-03-01",
         "air-uk-584-BFS-LBA-0935@1986-03-01",
         "air-uk-551-AMS-EDI-1040@1986-03-01",
         "air-uk-452-JER-SOU-0945@1986-03-01",
+        "dan-air-929-LGW-LDE-0945-int01@1986-03-01",
         "air-uk-182-GCI-SOU-0950@1986-03-01",
         "air-uk-851-AMS-SOU-1050@1986-03-01",
         "british-airways-846-MAN-DUB-0950@1986-03-01",
@@ -1862,8 +1992,11 @@
         "british-airways-306-LHR-CDG-1030@1986-03-01",
         "british-airways-4572-LHR-BFS-1030@1986-03-01",
         "dan-air-792-LGW-MUC-RIEM-1030-d6-b51@1986-03-01",
+        "british-airways-552-LGW-MLA-1035-int05@1986-03-01",
         "british-airways-810-LHR-DUB-1035@1986-03-01",
         "dan-air-881-INN-LGW-1145-d6-b53@1986-03-01",
+        "british-caledonian-006-JER-LGW-1050-b116@1986-03-01",
+        "british-airways-364-LHR-BOD-1055-b116@1986-03-01",
         "air-uk-132-GCI-LHR-1100@1986-03-01",
         "air-uk-443-SOU-JER-1100@1986-03-01",
         "dan-air-287-BOH-JER-1100-b47@1986-03-01",
@@ -1885,6 +2018,7 @@
         "dan-air-225-BFS-LGW-1200-b47@1986-03-01",
         "air-uk-450-JER-SOU-1210@1986-03-01",
         "british-midland-346-LHR-MME-1210@1986-03-01",
+        "air-malta-101-LHR-MLA-1220-int05@1986-03-01",
         "british-airways-307-CDG-LHR-1330@1986-03-01",
         "british-airways-308-LHR-CDG-1230@1986-03-01",
         "british-airways-342-LHR-NCE-1230@1986-03-01",
@@ -1898,7 +2032,9 @@
         "british-airways-863-DUB-BHX-1300-b48@1986-03-01",
         "dan-air-405-LGW-JER-1300-b47@1986-03-01",
         "panam-1-LHR-JFK-1300@1986-03-01",
+        "british-airways-365-BOD-LHR-1405-b116@1986-03-01",
         "dan-air-793-MUC-RIEM-LGW-1405-d6-b51@1986-03-01",
+        "dan-air-929-TLS-LGW-1405-b116@1986-03-01",
         "british-airways-494-LGW-GIB-1310@1986-03-01",
         "sas-534-ABZ-SVG-1315@1986-03-01",
         "air-uk-371-GCI-EXT-1320@1986-03-01",
@@ -1919,6 +2055,7 @@
         "british-airways-312-LHR-CDG-1430@1986-03-01",
         "british-airways-4612-LHR-BFS-1430@1986-03-01",
         "air-uk-444-JER-SOU-1440@1986-03-01",
+        "british-airways-553-MLA-LGW-1545-int05@1986-03-01",
         "dan-air-406-JER-LGW-1450-b47@1986-03-01",
         "air-uk-188-GCI-SOU-1500@1986-03-01",
         "british-airways-904-MAN-CDG-1500@1986-03-01",
@@ -1933,6 +2070,7 @@
         "british-airways-816-LHR-DUB-1600@1986-03-01",
         "panam-103-FRA-LHR-1700@1986-03-01",
         "air-france-919-NCE-MAN-1710@1986-03-01",
+        "british-caledonian-021-LGW-JER-1615-b116@1986-03-01",
         "air-uk-453-SOU-JER-1630@1986-03-01",
         "british-airways-313-CDG-LHR-1730@1986-03-01",
         "british-airways-314-LHR-CDG-1630@1986-03-01",
@@ -1942,6 +2080,7 @@
         "air-uk-857-AMS-SOU-1800@1986-03-01",
         "air-france-817-LHR-CDG-1730@1986-03-01",
         "air-france-818-CDG-LHR-1830@1986-03-01",
+        "british-caledonian-022-JER-LGW-1740-b116@1986-03-01",
         "aer-lingus-173-LHR-DUB-1745@1986-03-01",
         "air-france-952-NCE-LHR-1850@1986-03-01",
         "air-zimbabwe-121-LGW-HRE-1755@1986-03-01",
@@ -1966,9 +2105,10 @@
         "british-midland-340-LHR-MME-2020@1986-03-01",
         "dan-air-168-NCL-ABZ-2020-b47@1986-03-01",
         "british-airways-052-HRE-LHR-2230@1986-03-01",
-        "aer-lingus-199-LPL-DUB-2050@1986-03-01"
+        "aer-lingus-199-LPL-DUB-2050@1986-03-01",
+        "el-al-318-LHR-TLV-2200-b118@1986-03-01"
       ],
-      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. DA193 Inverness–Manchester, DA125 Cardiff–Bristol och DA164 Newcastle–Aberdeen hålls utanför. Övriga operatörer, senare ändringar och Dan-Airs kontinentnät återstår."
+      "next_action": "v119/batch116: 579 rörelser med brittisk ändpunkt; CAA februari1986 ger43 rapporteringsnamn, varav36 ännu utan rörelser. Kompletta BA/BCal-tabeller, saknade AirUK-sidor och regional-, charter-, frakt- och helikopterunderlag återstår. Se UK_USSR_REVIEW_BATCH116.md och uk_ussr_research_queue_batch116.json. Nätet är partiellt."
     },
     {
       "order": 7,
@@ -1977,9 +2117,9 @@
       "catalog_country_id": "je",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 43,
+      "endpoint_movements": 51,
       "domestic_movements": 0,
-      "international_movements": 43,
+      "international_movements": 51,
       "directed_endpoint_pairs": [
         [
           "BOH",
@@ -2025,6 +2165,7 @@
       "movements_by_source_airline": {
         "air-uk": 24,
         "british-airways": 4,
+        "british-caledonian": 8,
         "dan-air": 15
       },
       "home_operator_ids": [],
@@ -2038,7 +2179,9 @@
         "dan-air-400-JER-LGW-0800-b47@1986-02-28",
         "air-uk-441-SOU-JER-0835@1986-02-28",
         "dan-air-283-JER-GCI-0910-b47@1986-02-28",
+        "british-caledonian-005-LGW-JER-0925-b116@1986-02-28",
         "air-uk-452-JER-SOU-0945@1986-02-28",
+        "british-caledonian-006-JER-LGW-1050-b116@1986-02-28",
         "air-uk-371-SOU-JER-1155@1986-02-28",
         "british-airways-5132-LHR-JER-1245@1986-02-28",
         "air-uk-371-JER-GCI-1255@1986-02-28",
@@ -2050,10 +2193,12 @@
         "dan-air-406-JER-LGW-1450-b47@1986-02-28",
         "air-uk-372-GCI-JER-1515@1986-02-28",
         "air-uk-372-JER-SOU-1550@1986-02-28",
+        "british-caledonian-021-LGW-JER-1615-b116@1986-02-28",
         "air-uk-453-SOU-JER-1630@1986-02-28",
         "dan-air-303-GCI-JER-1630-b47@1986-02-28",
         "dan-air-303-JER-BOH-1715-b47@1986-02-28",
         "air-uk-446-JER-SOU-1740@1986-02-28",
+        "british-caledonian-022-JER-LGW-1740-b116@1986-02-28",
         "dan-air-407-LGW-JER-1820-b47@1986-02-28",
         "british-airways-5146-LHR-JER-1830@1986-02-28",
         "air-uk-447-SOU-JER-1850@1986-02-28",
@@ -2061,7 +2206,9 @@
         "air-uk-440-JER-SOU-0730@1986-03-01",
         "dan-air-400-JER-LGW-0800-b47@1986-03-01",
         "air-uk-441-SOU-JER-0835@1986-03-01",
+        "british-caledonian-005-LGW-JER-0925-b116@1986-03-01",
         "air-uk-452-JER-SOU-0945@1986-03-01",
+        "british-caledonian-006-JER-LGW-1050-b116@1986-03-01",
         "air-uk-443-SOU-JER-1100@1986-03-01",
         "dan-air-287-BOH-JER-1100-b47@1986-03-01",
         "air-uk-371-SOU-JER-1155@1986-03-01",
@@ -2074,7 +2221,9 @@
         "dan-air-406-JER-LGW-1450-b47@1986-03-01",
         "air-uk-372-GCI-JER-1515@1986-03-01",
         "air-uk-372-JER-SOU-1550@1986-03-01",
+        "british-caledonian-021-LGW-JER-1615-b116@1986-03-01",
         "air-uk-453-SOU-JER-1630@1986-03-01",
+        "british-caledonian-022-JER-LGW-1740-b116@1986-03-01",
         "british-airways-5146-LHR-JER-1830@1986-03-01"
       ],
       "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. British Caledonians BR-kodade Gatwickrader och andra operatörers vintertrafik återstår."
@@ -2438,12 +2587,40 @@
       "catalog_country_id": "fr",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 851,
+      "endpoint_movements": 1032,
       "domestic_movements": 238,
-      "international_movements": 613,
+      "international_movements": 794,
       "directed_endpoint_pairs": [
         [
           "AGP",
+          "ORY"
+        ],
+        [
+          "ALG",
+          "LIL"
+        ],
+        [
+          "ALG",
+          "LYS"
+        ],
+        [
+          "ALG",
+          "MRS"
+        ],
+        [
+          "ALG",
+          "NCE"
+        ],
+        [
+          "ALG",
+          "ORY"
+        ],
+        [
+          "ALG",
+          "TLS"
+        ],
+        [
+          "AMM",
           "ORY"
         ],
         [
@@ -2457,6 +2634,10 @@
         [
           "AMS",
           "NCE"
+        ],
+        [
+          "ANC",
+          "CDG"
         ],
         [
           "ARN",
@@ -2483,8 +2664,24 @@
           "ORY"
         ],
         [
+          "BAH",
+          "CDG"
+        ],
+        [
           "BEG",
           "ORY"
+        ],
+        [
+          "BEY",
+          "ORY"
+        ],
+        [
+          "BGW",
+          "CDG"
+        ],
+        [
+          "BHX",
+          "CDG"
         ],
         [
           "BIO",
@@ -2500,7 +2697,15 @@
         ],
         [
           "BOD",
+          "DKR"
+        ],
+        [
+          "BOD",
           "GVA"
+        ],
+        [
+          "BOD",
+          "LHR"
         ],
         [
           "BOD",
@@ -2551,12 +2756,24 @@
           "ORY"
         ],
         [
+          "BSL",
+          "TUN"
+        ],
+        [
           "BUD",
           "ORY"
         ],
         [
           "CDG",
+          "ABJ"
+        ],
+        [
+          "CDG",
           "AMS"
+        ],
+        [
+          "CDG",
+          "ANC"
         ],
         [
           "CDG",
@@ -2565,6 +2782,14 @@
         [
           "CDG",
           "ATH-ELLINIKON"
+        ],
+        [
+          "CDG",
+          "BEY"
+        ],
+        [
+          "CDG",
+          "BHX"
         ],
         [
           "CDG",
@@ -2589,6 +2814,18 @@
         [
           "CDG",
           "CPH"
+        ],
+        [
+          "CDG",
+          "DAM"
+        ],
+        [
+          "CDG",
+          "DHA"
+        ],
+        [
+          "CDG",
+          "DKR"
         ],
         [
           "CDG",
@@ -2628,7 +2865,15 @@
         ],
         [
           "CDG",
+          "IAH"
+        ],
+        [
+          "CDG",
           "IST-ATATURK"
+        ],
+        [
+          "CDG",
+          "JED"
         ],
         [
           "CDG",
@@ -2637,6 +2882,14 @@
         [
           "CDG",
           "KBP"
+        ],
+        [
+          "CDG",
+          "KWI"
+        ],
+        [
+          "CDG",
+          "LAX"
         ],
         [
           "CDG",
@@ -2668,6 +2921,10 @@
         ],
         [
           "CDG",
+          "MCT"
+        ],
+        [
+          "CDG",
           "MRS"
         ],
         [
@@ -2684,7 +2941,15 @@
         ],
         [
           "CDG",
+          "ORD"
+        ],
+        [
+          "CDG",
           "PSA"
+        ],
+        [
+          "CDG",
+          "PTP"
         ],
         [
           "CDG",
@@ -2728,6 +2993,10 @@
         ],
         [
           "CDG",
+          "YYZ"
+        ],
+        [
+          "CDG",
           "ZRH"
         ],
         [
@@ -2747,11 +3016,35 @@
           "NCE"
         ],
         [
+          "DHA",
+          "CDG"
+        ],
+        [
+          "DKR",
+          "BOD"
+        ],
+        [
+          "DKR",
+          "BSL"
+        ],
+        [
+          "DKR",
+          "CDG"
+        ],
+        [
+          "DKR",
+          "MRS"
+        ],
+        [
           "DUB",
           "CDG"
         ],
         [
           "DUS",
+          "CDG"
+        ],
+        [
+          "DXB",
           "CDG"
         ],
         [
@@ -2769,6 +3062,22 @@
         [
           "FCO",
           "NCE"
+        ],
+        [
+          "FDF",
+          "BOD"
+        ],
+        [
+          "FDF",
+          "CDG"
+        ],
+        [
+          "FDF",
+          "MRS"
+        ],
+        [
+          "FDF",
+          "ORY"
         ],
         [
           "FRA",
@@ -2819,6 +3128,10 @@
           "CDG"
         ],
         [
+          "IAH",
+          "CDG"
+        ],
+        [
           "IST-ATATURK",
           "CDG"
         ],
@@ -2827,6 +3140,14 @@
           "ORY"
         ],
         [
+          "JED",
+          "CDG"
+        ],
+        [
+          "JED",
+          "LYS"
+        ],
+        [
           "JFK",
           "CDG"
         ],
@@ -2835,12 +3156,36 @@
           "NCE"
         ],
         [
+          "KHI",
+          "CDG"
+        ],
+        [
+          "LAX",
+          "CDG"
+        ],
+        [
           "LBA",
           "CDG"
         ],
         [
+          "LGW",
+          "LDE"
+        ],
+        [
+          "LGW",
+          "TLS"
+        ],
+        [
+          "LHR",
+          "BOD"
+        ],
+        [
           "LHR",
           "CDG"
+        ],
+        [
+          "LHR",
+          "LIL"
         ],
         [
           "LHR",
@@ -2848,7 +3193,27 @@
         ],
         [
           "LHR",
+          "MRS"
+        ],
+        [
+          "LHR",
           "NCE"
+        ],
+        [
+          "LHR",
+          "NTE"
+        ],
+        [
+          "LHR",
+          "TLS"
+        ],
+        [
+          "LIL",
+          "ALG"
+        ],
+        [
+          "LIL",
+          "LHR"
         ],
         [
           "LIN",
@@ -2880,6 +3245,10 @@
         ],
         [
           "LYS",
+          "ALG"
+        ],
+        [
+          "LYS",
           "AMS"
         ],
         [
@@ -2889,6 +3258,10 @@
         [
           "LYS",
           "BRU"
+        ],
+        [
+          "LYS",
+          "CAI"
         ],
         [
           "LYS",
@@ -2936,6 +3309,10 @@
         ],
         [
           "LYS",
+          "TUN"
+        ],
+        [
+          "LYS",
           "ZRH"
         ],
         [
@@ -2963,6 +3340,14 @@
           "CDG"
         ],
         [
+          "MCT",
+          "CDG"
+        ],
+        [
+          "MRS",
+          "ALG"
+        ],
+        [
           "MRS",
           "ATH-ELLINIKON"
         ],
@@ -2972,7 +3357,15 @@
         ],
         [
           "MRS",
+          "CAI"
+        ],
+        [
+          "MRS",
           "CDG"
+        ],
+        [
+          "MRS",
+          "DKR"
         ],
         [
           "MRS",
@@ -2980,7 +3373,15 @@
         ],
         [
           "MRS",
+          "FDF"
+        ],
+        [
+          "MRS",
           "GVA"
+        ],
+        [
+          "MRS",
+          "LHR"
         ],
         [
           "MRS",
@@ -3007,6 +3408,10 @@
           "SXB"
         ],
         [
+          "MRS",
+          "TUN"
+        ],
+        [
           "MUC-RIEM",
           "CDG"
         ],
@@ -3017,6 +3422,10 @@
         [
           "NAP",
           "CDG"
+        ],
+        [
+          "NCE",
+          "ALG"
         ],
         [
           "NCE",
@@ -3040,6 +3449,10 @@
         ],
         [
           "NCE",
+          "CAI"
+        ],
+        [
+          "NCE",
           "CPH"
         ],
         [
@@ -3053,6 +3466,10 @@
         [
           "NCE",
           "GVA"
+        ],
+        [
+          "NCE",
+          "JED"
         ],
         [
           "NCE",
@@ -3092,6 +3509,10 @@
         ],
         [
           "NCE",
+          "TUN"
+        ],
+        [
+          "NCE",
           "ZRH"
         ],
         [
@@ -3099,12 +3520,28 @@
           "CDG"
         ],
         [
+          "NTE",
+          "LHR"
+        ],
+        [
           "OPO",
           "ORY"
         ],
         [
+          "ORD",
+          "CDG"
+        ],
+        [
           "ORY",
           "AGP"
+        ],
+        [
+          "ORY",
+          "ALG"
+        ],
+        [
+          "ORY",
+          "AMM"
         ],
         [
           "ORY",
@@ -3124,6 +3561,14 @@
         ],
         [
           "ORY",
+          "BEY"
+        ],
+        [
+          "ORY",
+          "BGW"
+        ],
+        [
+          "ORY",
           "BIO"
         ],
         [
@@ -3137,6 +3582,10 @@
         [
           "ORY",
           "BUD"
+        ],
+        [
+          "ORY",
+          "FDF"
         ],
         [
           "ORY",
@@ -3192,6 +3641,14 @@
         ],
         [
           "ORY",
+          "TLV"
+        ],
+        [
+          "ORY",
+          "TUN"
+        ],
+        [
+          "ORY",
           "VIE"
         ],
         [
@@ -3224,6 +3681,10 @@
         ],
         [
           "PSA",
+          "CDG"
+        ],
+        [
+          "PTP",
           "CDG"
         ],
         [
@@ -3276,6 +3737,10 @@
         ],
         [
           "TLS",
+          "ALG"
+        ],
+        [
+          "TLS",
           "BOD"
         ],
         [
@@ -3285,6 +3750,14 @@
         [
           "TLS",
           "GVA"
+        ],
+        [
+          "TLS",
+          "LGW"
+        ],
+        [
+          "TLS",
+          "LHR"
         ],
         [
           "TLS",
@@ -3307,12 +3780,44 @@
           "ORY"
         ],
         [
+          "TLS",
+          "TUN"
+        ],
+        [
           "TLV",
           "CDG"
         ],
         [
+          "TLV",
+          "NCE"
+        ],
+        [
           "TRN",
           "CDG"
+        ],
+        [
+          "TUN",
+          "BSL"
+        ],
+        [
+          "TUN",
+          "LYS"
+        ],
+        [
+          "TUN",
+          "MRS"
+        ],
+        [
+          "TUN",
+          "NCE"
+        ],
+        [
+          "TUN",
+          "ORY"
+        ],
+        [
+          "TUN",
+          "TLS"
         ],
         [
           "VCE",
@@ -3335,6 +3840,10 @@
           "ORY"
         ],
         [
+          "YYZ",
+          "CDG"
+        ],
+        [
           "ZAG",
           "ORY"
         ],
@@ -3354,30 +3863,40 @@
       "movements_by_source_airline": {
         "aer-lingus": 4,
         "aeroflot": 5,
-        "air-france": 291,
+        "air-afrique": 5,
+        "air-algerie": 29,
+        "air-canada": 2,
+        "air-france": 396,
         "air-inter": 238,
         "air-uk": 12,
+        "alia": 2,
         "alitalia": 46,
         "austrian": 4,
         "balkan": 4,
-        "british-airways": 41,
+        "british-airways": 45,
         "crossair": 3,
         "csa": 1,
+        "dan-air": 4,
         "delta": 2,
+        "el-al": 1,
         "iberia": 23,
         "jat": 4,
         "klm": 21,
         "lot": 1,
         "lufthansa": 44,
         "malev": 2,
+        "middle-east-airlines": 4,
         "olympic": 4,
         "panam": 12,
         "sabena": 13,
         "sas": 19,
+        "saudia": 1,
         "swissair": 44,
         "tap": 7,
         "tarom": 2,
-        "turkish-airlines": 4
+        "tunisair": 20,
+        "turkish-airlines": 4,
+        "uta": 4
       },
       "home_operator_ids": [
         "air-france",
@@ -3386,6 +3905,7 @@
       ],
       "imported_home_operator_ids": [
         "air-france",
+        "uta",
         "air-inter"
       ],
       "registered_airport_ids": [
@@ -3397,12 +3917,24 @@
         "BOD",
         "MRS",
         "TLS",
-        "SXB"
+        "SXB",
+        "LIL",
+        "NTE",
+        "LDE"
       ],
       "endpoint_leg_ids": [
+        "air-france-003-CDG-LAX-1700-int01@1986-02-27",
+        "air-france-175-KHI-CDG-0110-int02@1986-02-28",
+        "air-france-206-FDF-CDG-1635-b120@1986-02-27",
         "crossair-979-GVA-BSL-2250@1986-02-27",
+        "air-france-255-FDF-BOD-1805-b120@1986-02-27",
+        "air-france-147-BGW-CDG-0115-b117@1986-02-28",
+        "air-france-155-DHA-CDG-0135-b117@1986-02-28",
+        "air-afrique-017-CDG-DKR-2359-int06@1986-02-27",
+        "air-france-300-DKR-BSL-2345-int06@1986-02-27",
         "panam-114-JFK-CDG-1845@1986-02-27",
         "panam-82-JFK-NCE-1945@1986-02-27",
+        "air-france-242-FDF-ORY-2235-b120@1986-02-27",
         "panam-115-TLV-CDG-0545@1986-02-28",
         "air-inter-5677-BOD-MRS-0645-d56-b49@1986-02-28",
         "air-inter-6001-ORY-SXB-0645-d5-b49@1986-02-28",
@@ -3412,11 +3944,14 @@
         "air-inter-7028-MRS-ORY-0650-d5@1986-02-28",
         "air-inter-6092-MRS-LYS-0655-d5-b49@1986-02-28",
         "air-inter-7083-ORY-LYS-0655-d5@1986-02-28",
+        "air-france-068-IAH-CDG-2359-int01@1986-02-27",
+        "air-france-004-LAX-CDG-2200-int01@1986-02-27",
         "air-inter-5002-SXB-ORY-0700-d56-b49@1986-02-28",
         "air-inter-6013-ORY-BOD-0700-d5@1986-02-28",
         "air-inter-6020-LYS-ORY-0700-d5@1986-02-28",
         "air-inter-6078-MRS-LYS-0700-d5-b49@1986-02-28",
         "air-inter-6574-TLS-LYS-0700-d5-b49@1986-02-28",
+        "air-france-131-TLV-NCE-0805-b117@1986-02-28",
         "air-inter-5080-NCE-LYS-0705-d5-b49@1986-02-28",
         "air-inter-6048-TLS-ORY-0705-d5@1986-02-28",
         "air-france-1934-SXB-BRU-0710-d5-b33@1986-02-28",
@@ -3427,12 +3962,14 @@
         "air-inter-5033-ORY-NCE-0715-d5@1986-02-28",
         "air-inter-5034-NCE-ORY-0715-d5@1986-02-28",
         "swissair-720-GVA-CDG-0715-d56-b36@1986-02-28",
+        "air-france-1830-BOD-LHR-0720-b116@1986-02-28",
         "air-france-756-CDG-STR-0720-d5-b34@1986-02-28",
         "air-inter-7027-ORY-MRS-0720-d5@1986-02-28",
         "air-france-680-CDG-ZRH-0725-d56-b36@1986-02-28",
         "air-inter-6678-MRS-BOD-0725-d5-b49@1986-02-28",
         "lufthansa-111-CDG-FRA-0725-d56-b34@1986-02-28",
         "aeroflot-251-SVO-CDG-0930-d5-b45@1986-02-28",
+        "air-france-2320-ALG-ORY-0730-int03@1986-02-28",
         "air-france-910-CDG-AMS-0730-d56-b32@1986-02-28",
         "klm-323-AMS-CDG-0730-d56-b32@1986-02-28",
         "air-france-740-CDG-FRA-0735-d56-b34@1986-02-28",
@@ -3441,6 +3978,7 @@
         "british-airways-302-LHR-CDG-0640@1986-02-28",
         "klm-305-RTM-CDG-0740-d5-b32@1986-02-28",
         "swissair-700-ZRH-CDG-0740-d56-b36@1986-02-28",
+        "air-algerie-1820-ALG-MRS-0745-int03@1986-02-28",
         "air-france-2640-MRS-LIN-0745-d56-b38@1986-02-28",
         "air-france-650-CDG-LIN-0745-d56-b38@1986-02-28",
         "air-france-730-CDG-MUC-RIEM-0745-d56-b34@1986-02-28",
@@ -3448,6 +3986,7 @@
         "air-inter-6884-LYS-CDG-0745-d5@1986-02-28",
         "lufthansa-130-DUS-CDG-0745-d56-b34@1986-02-28",
         "british-airways-301-CDG-LHR-0755@1986-02-28",
+        "air-france-1864-LIL-LHR-0800-int01@1986-02-28",
         "air-france-525-ORY-BCN-0800-b30@1986-02-28",
         "air-france-741-FRA-CDG-0800-d56-b34@1986-02-28",
         "air-france-771-HAM-CDG-0800-d56-b34@1986-02-28",
@@ -3461,6 +4000,7 @@
         "lufthansa-121-CDG-HAM-0810-d56-b34@1986-02-28",
         "lufthansa-124-CGN-CDG-0810-d56-b34@1986-02-28",
         "air-france-1914-LYS-AMS-0815-d5-b32@1986-02-28",
+        "air-france-2321-ORY-ALG-0815-int03@1986-02-28",
         "air-france-662-CDG-GVA-0815-d56-b36@1986-02-28",
         "swissair-722-GVA-CDG-0815-d56-b36@1986-02-28",
         "air-france-347-LYS-LIN-0820-d5-b38@1986-02-28",
@@ -3469,6 +4009,7 @@
         "air-france-573-MRS-MAD-0825-b30@1986-02-28",
         "air-inter-5458-BOD-LYS-0825-d5-b49@1986-02-28",
         "lufthansa-140-MUC-RIEM-CDG-0825-d56-b34@1986-02-28",
+        "air-algerie-1422-ALG-ORY-0830-int03@1986-02-28",
         "air-france-1662-LYS-ZRH-0830-d5-b36@1986-02-28",
         "air-france-511-ORY-MAD-0830-b30@1986-02-28",
         "air-france-807-LHR-CDG-0730@1986-02-28",
@@ -3482,6 +4023,7 @@
         "air-inter-5072-LYS-SXB-0840-d5-b49@1986-02-28",
         "air-inter-6103-ORY-BSL-0840-d5@1986-02-28",
         "air-inter-6119-ORY-LYS-0840-d5@1986-02-28",
+        "air-france-1822-TLS-LHR-0845-b116@1986-02-28",
         "air-inter-5101-ORY-SXB-0845-d5-b49@1986-02-28",
         "alitalia-336-LIN-CDG-0845-d56-b38@1986-02-28",
         "klm-325-AMS-CDG-0845-d56-b32@1986-02-28",
@@ -3510,23 +4052,31 @@
         "air-inter-5228-MRS-ORY-0915-d5@1986-02-28",
         "iberia-650-MAD-ORY-0915-b30@1986-02-28",
         "swissair-721-CDG-GVA-0915-d56-b36@1986-02-28",
+        "tunisair-760-TUN-NCE-0915-int04@1986-02-28",
         "air-inter-5134-NCE-ORY-0920-d56@1986-02-28",
         "air-uk-791-LBA-CDG-0820@1986-02-28",
+        "air-france-2357-LYS-ALG-0925-int03@1986-02-28",
         "lufthansa-143-CDG-MUC-RIEM-0925-d56-b34@1986-02-28",
+        "air-france-144-CDG-BEY-0930-b117@1986-02-28",
         "air-france-2641-LIN-MRS-0930-d56-b38@1986-02-28",
         "air-france-642-CDG-BRU-0930-d56-b33@1986-02-28",
         "air-inter-6679-BOD-NCE-0930-d5-b49@1986-02-28",
         "british-airways-303-CDG-LHR-0930@1986-02-28",
         "british-airways-304-LHR-CDG-0830@1986-02-28",
+        "air-france-2646-LHR-LIL-0835-int01@1986-02-28",
         "sas-563-CPH-CDG-0940@1986-02-28",
         "air-france-743-FRA-CDG-0945-d56-b34@1986-02-28",
         "air-france-1692-NCE-GVA-0950-d56-b36@1986-02-28",
+        "air-france-1863-LHR-NTE-0850-int01@1986-02-28",
         "air-inter-6093-SXB-NCE-0950-d5-b49@1986-02-28",
         "lufthansa-131-CDG-DUS-0950-d56-b34@1986-02-28",
         "swissair-701-CDG-ZRH-0950-d56-b36@1986-02-28",
+        "air-algerie-1821-MRS-ALG-0955-int03@1986-02-28",
         "air-france-731-MUC-RIEM-CDG-0955-d56-b34@1986-02-28",
         "air-inter-6063-CDG-MRS-0955-d5@1986-02-28",
         "air-inter-5766-TLS-CDG-1000-d5@1986-02-28",
+        "middle-east-airlines-212-ORY-BEY-1000-b117@1986-02-28",
+        "tunisair-770-TUN-MRS-1000-int04@1986-02-28",
         "air-france-565-FRA-LYS-1005-d5-b34@1986-02-28",
         "air-france-651-LIN-CDG-1005-d56-b38@1986-02-28",
         "air-inter-5079-LYS-NCE-1005-d56-b49@1986-02-28",
@@ -3540,13 +4090,16 @@
         "air-france-720-CDG-SVO-1025-d5-b45@1986-02-28",
         "air-inter-5768-BSL-CDG-1025-d5@1986-02-28",
         "klm-336-NCE-AMS-1025-d56-b32@1986-02-28",
+        "air-france-015-CDG-JFK-1030-int01@1986-02-28",
         "air-france-1917-AMS-LYS-1030-d5-b32@1986-02-28",
         "air-france-796-CDG-FBU-1030@1986-02-28",
         "air-france-809-LHR-CDG-0930@1986-02-28",
         "air-france-810-CDG-LHR-1030@1986-02-28",
         "air-inter-5133-ORY-NCE-1030-d5@1986-02-28",
         "lufthansa-125-CDG-CGN-1030-d56-b34@1986-02-28",
+        "middle-east-airlines-211-BEY-ORY-1130-b117@1986-02-28",
         "panam-114-CDG-TLV-1035@1986-02-28",
+        "air-france-1352-CDG-DHA-1040-b117@1986-02-28",
         "air-france-580-MAD-NCE-1040-b30@1986-02-28",
         "air-france-790-CDG-ARN-1040@1986-02-28",
         "air-inter-5575-TLS-NCE-1040-d5-b49@1986-02-28",
@@ -3557,9 +4110,12 @@
         "air-inter-5283-ORY-LYS-1055-d5@1986-02-28",
         "air-inter-5328-MRS-ORY-1055-d56@1986-02-28",
         "lufthansa-113-CDG-FRA-1055-d56-b34@1986-02-28",
+        "air-afrique-018-DKR-CDG-1000-int06@1986-02-28",
+        "air-france-001-CDG-JFK-1100-int01@1986-02-28",
         "air-inter-5102-SXB-ORY-1100-d5-b49@1986-02-28",
         "air-inter-5165-CDG-BOD-1100-d56@1986-02-28",
         "air-france-782-CDG-VIE-1105-d56-b37@1986-02-28",
+        "air-france-2323-ORY-ALG-1110-int03@1986-02-28",
         "air-inter-5214-BOD-ORY-1110-d5@1986-02-28",
         "air-uk-645-STN-CDG-1010@1986-02-28",
         "alitalia-345-CDG-LIN-1110-d56-b38@1986-02-28",
@@ -3569,8 +4125,11 @@
         "swissair-723-CDG-GVA-1115-d56-b36@1986-02-28",
         "air-france-658-CDG-VCE-1120-d56-b38@1986-02-28",
         "sabena-643-BRU-CDG-1120-d56-b33@1986-02-28",
+        "tunisair-761-NCE-TUN-1120-int04@1986-02-28",
         "aer-lingus-523-CDG-DUB-1125@1986-02-28",
         "air-france-1693-GVA-NCE-1125-d56-b36@1986-02-28",
+        "air-france-1827-LHR-MRS-1025-b116@1986-02-28",
+        "air-france-2362-ALG-MRS-1130-int03@1986-02-28",
         "british-airways-305-CDG-LHR-1130@1986-02-28",
         "british-airways-306-LHR-CDG-1030@1986-02-28",
         "jat-242-ZAG-ORY-1130-d5-b42@1986-02-28",
@@ -3581,8 +4140,14 @@
         "air-france-2644-NCE-FCO-1145-d5-b38@1986-02-28",
         "air-france-500-LIS-ORY-1045-d5-b31@1986-02-28",
         "panam-83-NCE-JFK-1145@1986-02-28",
+        "saudia-062-CDG-JED-1145-b117@1986-02-28",
+        "air-france-1862-NTE-LHR-1150-int01@1986-02-28",
         "air-uk-722-CDG-NCL-1150@1986-02-28",
         "air-france-912-CDG-AMS-1155-d5-b32@1986-02-28",
+        "alia-104-ORY-AMM-1155-b117@1986-02-28",
+        "air-algerie-1423-ORY-ALG-1200-int03@1986-02-28",
+        "air-algerie-1424-ALG-ORY-1200-int03@1986-02-28",
+        "air-france-2356-ALG-LYS-1200-int03@1986-02-28",
         "air-inter-5485-CDG-BOD-1200-d5@1986-02-28",
         "panam-115-CDG-JFK-1200@1986-02-28",
         "swissair-704-ZRH-CDG-1200-d56-b36@1986-02-28",
@@ -3593,11 +4158,14 @@
         "sas-575-CPH-NCE-1210@1986-02-28",
         "air-france-664-CDG-GVA-1215-d56-b36@1986-02-28",
         "swissair-724-GVA-CDG-1215-d56-b36@1986-02-28",
+        "air-france-274-CDG-ANC-1220-int02@1986-02-28",
         "air-france-772-CDG-HAM-1220-d56-b34@1986-02-28",
         "sas-564-CDG-CPH-1220@1986-02-28",
+        "tunisair-771-MRS-TUN-1220-int04@1986-02-28",
         "aeroflot-252-CDG-SVO-1225-d5-b45@1986-02-28",
         "air-france-2646-SXB-LIN-1225-d5-b38@1986-02-28",
         "air-france-652-CDG-LIN-1225-d56-b38@1986-02-28",
+        "air-france-2741-LYS-TUN-1230-int04@1986-02-28",
         "air-france-811-LHR-CDG-1130@1986-02-28",
         "air-france-812-CDG-LHR-1230@1986-02-28",
         "air-inter-6391-LYS-MRS-1230-d5-b49@1986-02-28",
@@ -3605,12 +4173,16 @@
         "air-inter-5163-CDG-MRS-1235-d56@1986-02-28",
         "air-inter-5234-NCE-ORY-1235-d56@1986-02-28",
         "alitalia-1350-GOA-CDG-1240-d5-b38@1986-02-28",
+        "air-france-235-ORY-FDF-1245-b120@1986-02-28",
         "air-france-517-ORY-MAD-1245-b30@1986-02-28",
         "sas-572-CDG-ARN-1245@1986-02-28",
         "air-inter-6167-CDG-SXB-1250-d5-b49@1986-02-28",
         "lufthansa-112-FRA-CDG-1250-d56-b34@1986-02-28",
+        "british-airways-348-LHR-MRS-1155-b116@1986-02-28",
+        "air-france-077-CDG-JFK-1300-int01@1986-02-28",
         "air-france-765-DUS-CDG-1300-d56-b34@1986-02-28",
         "air-inter-6620-LYS-ORY-1300-d5@1986-02-28",
+        "tunisair-722-TUN-ORY-1300-int04@1986-02-28",
         "air-inter-5233-ORY-NCE-1305-d5@1986-02-28",
         "klm-327-AMS-CDG-1305-d56-b32@1986-02-28",
         "air-france-581-NCE-MAD-1310-b30@1986-02-28",
@@ -3623,6 +4195,7 @@
         "air-inter-5313-ORY-BOD-1325-d5@1986-02-28",
         "alitalia-328-PSA-CDG-1325-d5-b38@1986-02-28",
         "crossair-975-GVA-BSL-1325@1986-02-28",
+        "air-algerie-1822-ALG-MRS-1330-int03@1986-02-28",
         "air-france-1937-MRS-FCO-1330-d5-b38@1986-02-28",
         "air-france-609-IST-ATATURK-CDG-1430-d56-b44@1986-02-28",
         "air-inter-5428-MRS-ORY-1330-d56@1986-02-28",
@@ -3630,14 +4203,18 @@
         "british-airways-307-CDG-LHR-1330@1986-02-28",
         "british-airways-308-LHR-CDG-1230@1986-02-28",
         "british-airways-342-LHR-NCE-1230@1986-02-28",
+        "tunisair-750-TUN-LYS-1330-int04@1986-02-28",
         "air-france-913-AMS-CDG-1335-d5-b32@1986-02-28",
         "air-france-2639-FCO-NCE-1340-d5-b38@1986-02-28",
         "air-france-2650-MRS-LIN-1340-d5-b38@1986-02-28",
         "air-france-565-TLS-MAD-1345-b30@1986-02-28",
         "air-france-659-VCE-CDG-1345-d56-b38@1986-02-28",
         "air-france-781-VIE-CDG-1345-d56-b37@1986-02-28",
+        "air-france-1833-LHR-BOD-1250-b116@1986-02-28",
+        "air-france-2793-MRS-TUN-1350-int04@1986-02-28",
         "air-inter-6192-MRS-LYS-1350-d5-b49@1986-02-28",
         "air-inter-6247-ORY-TLS-1350-d5@1986-02-28",
+        "air-france-2701-ORY-TUN-1355-int04@1986-02-28",
         "swissair-705-CDG-ZRH-1355-d56-b36@1986-02-28",
         "swissair-764-GVA-TLS-1355-d5-b36@1986-02-28",
         "air-france-2643-LIN-TLS-1400-d5-b38@1986-02-28",
@@ -3651,8 +4228,11 @@
         "tap-416-LIS-LYS-1315-d5-b31@1986-02-28",
         "air-france-744-CDG-FRA-1420-d56-b34@1986-02-28",
         "jat-243-ORY-ZAG-1420-d5-b42@1986-02-28",
+        "air-france-2322-ALG-ORY-1425-int03@1986-02-28",
+        "air-france-2361-MRS-ALG-1425-int03@1986-02-28",
         "air-inter-6266-BOD-CDG-1425-d5@1986-02-28",
         "balkan-135-SOF-ORY-1525-d5-b41@1986-02-28",
+        "air-france-035-CDG-ORD-1430-int01@1986-02-28",
         "air-france-813-LHR-CDG-1330@1986-02-28",
         "air-france-814-CDG-LHR-1430@1986-02-28",
         "lot-273-WAW-ORY-1430-d5-b39@1986-02-28",
@@ -3670,12 +4250,15 @@
         "alitalia-319-CDG-BLQ-1450-d5-b38@1986-02-28",
         "air-france-764-CDG-DUS-1455-d5-b34@1986-02-28",
         "air-inter-6333-ORY-NCE-1455-d5@1986-02-28",
+        "air-france-1382-ORY-BGW-1500-b117@1986-02-28",
         "air-france-551-PSA-CDG-1500-d5-b38@1986-02-28",
         "air-france-702-ORY-BEG-1500-d5-b42@1986-02-28",
         "sabena-645-BRU-CDG-1500-d5-b33@1986-02-28",
+        "air-france-2740-TUN-LYS-1505-int04@1986-02-28",
         "air-france-1790-LYS-CPH-1510@1986-02-28",
         "air-inter-5528-MRS-ORY-1510-d56@1986-02-28",
         "air-inter-6334-NCE-ORY-1510-d56@1986-02-28",
+        "air-algerie-1425-ORY-ALG-1515-int03@1986-02-28",
         "air-inter-5094-NCE-SXB-1515-d5-b49@1986-02-28",
         "lufthansa-145-CDG-MUC-RIEM-1515-d5-b34@1986-02-28",
         "air-france-2647-LIN-SXB-1520-d5-b38@1986-02-28",
@@ -3685,10 +4268,13 @@
         "air-france-721-SVO-CDG-1725-d5-b45@1986-02-28",
         "air-france-914-CDG-AMS-1525-d56-b32@1986-02-28",
         "air-inter-6347-ORY-TLS-1525-d5@1986-02-28",
+        "british-airways-349-MRS-LHR-1525-b116@1986-02-28",
+        "air-algerie-1420-ALG-ORY-1530-int03@1986-02-28",
         "air-france-516-MAD-ORY-1530-b30@1986-02-28",
         "british-airways-309-CDG-LHR-1530@1986-02-28",
         "british-airways-312-LHR-CDG-1430@1986-02-28",
         "air-france-1930-FCO-MRS-1535-d5-b38@1986-02-28",
+        "air-algerie-1823-MRS-ALG-1540-int03@1986-02-28",
         "air-france-562-MAD-BOD-1540-b30@1986-02-28",
         "air-inter-6414-BOD-ORY-1540-d5@1986-02-28",
         "iberia-698-PMI-MRS-1540-b30@1986-02-28",
@@ -3700,20 +4286,25 @@
         "alitalia-329-CDG-PSA-1545-d5-b38@1986-02-28",
         "iberia-685-NCE-BCN-1545-b30@1986-02-28",
         "air-france-1765-TLS-GVA-1550-d5-b36@1986-02-28",
+        "air-france-2341-TLS-ALG-1555-int03@1986-02-28",
         "air-inter-5595-BOD-TLS-1555-d5-b49@1986-02-28",
         "air-france-576-NCE-CPH-1600@1986-02-28",
         "swissair-763-MRS-GVA-1600-d56-b36@1986-02-28",
+        "air-france-2792-TUN-MRS-1605-int04@1986-02-28",
         "sas-573-ARN-CDG-1605@1986-02-28",
+        "air-france-489-NCE-JED-1610-b117@1986-02-28",
         "air-inter-5396-TLS-BOD-1610-d5-b49@1986-02-28",
         "air-inter-6413-ORY-BOD-1610-d5@1986-02-28",
         "balkan-2004-ORY-SOF-1610-d5-b41@1986-02-28",
         "sas-569-FBU-CDG-1610@1986-02-28",
+        "tunisair-751-LYS-TUN-1610-int04@1986-02-28",
         "air-france-666-CDG-GVA-1615-d56-b36@1986-02-28",
         "air-france-747-FRA-CDG-1615-d56-b34@1986-02-28",
         "air-inter-6176-MRS-SXB-1615-d5-b49@1986-02-28",
         "lufthansa-150-FRA-NCE-1615-d56-b34@1986-02-28",
         "british-airways-343-NCE-LHR-1620@1986-02-28",
         "sas-567-CPH-CDG-1620@1986-02-28",
+        "tunisair-723-ORY-TUN-1620-int04@1986-02-28",
         "air-france-634-CDG-FCO-1630-d56-b38@1986-02-28",
         "air-france-646-CDG-BRU-1630-d5-b33@1986-02-28",
         "air-france-815-LHR-CDG-1530@1986-02-28",
@@ -3726,6 +4317,9 @@
         "alitalia-326-LIN-CDG-1640-d56-b38@1986-02-28",
         "lufthansa-114-FRA-CDG-1650-d56-b34@1986-02-28",
         "lufthansa-158-FRA-LYS-1655-d5-b34@1986-02-28",
+        "air-afrique-003-BOD-DKR-1700-int06@1986-02-28",
+        "air-france-003-CDG-LAX-1700-int01@1986-02-28",
+        "air-france-2324-ALG-ORY-1700-int03@1986-02-28",
         "air-france-684-CDG-ZRH-1700-d5-b36@1986-02-28",
         "air-france-968-CDG-DUB-1700@1986-02-28",
         "air-inter-6161-CDG-LYS-1700-d5@1986-02-28",
@@ -3740,6 +4334,7 @@
         "air-inter-7727-ORY-MRS-1705-d5@1986-02-28",
         "malev-558-BUD-ORY-1705-d5-b40@1986-02-28",
         "air-france-915-AMS-CDG-1710-d56-b32@1986-02-28",
+        "air-france-962-CDG-BHX-1710-b116@1986-02-28",
         "air-inter-6365-CDG-BOD-1710-d5@1986-02-28",
         "alitalia-341-CDG-VCE-1710-d56-b38@1986-02-28",
         "air-france-798-CDG-CPH-1715@1986-02-28",
@@ -3747,6 +4342,7 @@
         "air-inter-7448-TLS-ORY-1715-d5@1986-02-28",
         "alitalia-318-BLQ-CDG-1715-d5-b38@1986-02-28",
         "british-airways-356-LHR-LYS-1615@1986-02-28",
+        "air-france-2702-TUN-ORY-1720-int04@1986-02-28",
         "air-france-515-ORY-MAD-1720-b30@1986-02-28",
         "air-france-654-CDG-LIN-1720-d56-b38@1986-02-28",
         "air-france-677-ORY-BIO-1720-b30@1986-02-28",
@@ -3755,6 +4351,7 @@
         "iberia-652-MAD-ORY-1725-b30@1986-02-28",
         "iberia-699-MRS-PMI-1725-b30@1986-02-28",
         "klm-329-AMS-CDG-1725-d56-b32@1986-02-28",
+        "uta-568-CDG-MCT-1725-b117@1986-02-28",
         "air-france-563-BOD-MAD-1730-b30@1986-02-28",
         "air-inter-6676-NCE-TLS-1730-d5-b49@1986-02-28",
         "air-inter-6894-TLS-LYS-1730-d5-b49@1986-02-28",
@@ -3762,9 +4359,11 @@
         "air-inter-7992-MRS-LYS-1730-d5-b49@1986-02-28",
         "british-airways-313-CDG-LHR-1730@1986-02-28",
         "british-airways-314-LHR-CDG-1630@1986-02-28",
+        "dan-air-913-LGW-TLS-1630-b116@1986-02-28",
         "lufthansa-134-DUS-CDG-1730-d56-b34@1986-02-28",
         "swissair-751-NCE-ZRH-1730-d56-b36@1986-02-28",
         "tap-419-LYS-LIS-1730-d5-b31@1986-02-28",
+        "air-france-303-MRS-DKR-1735-int06@1986-02-28",
         "air-france-1678-BOD-GVA-1740-d5-b36@1986-02-28",
         "air-france-732-CDG-MUC-RIEM-1740-d56-b34@1986-02-28",
         "air-france-640-CDG-TRN-1745-d5-b38@1986-02-28",
@@ -3781,17 +4380,21 @@
         "british-airways-906-MAN-CDG-1700@1986-02-28",
         "tap-405-ORY-LIS-1800-d5-b31@1986-02-28",
         "air-france-703-BEG-ORY-1805-d5-b42@1986-02-28",
+        "air-france-2340-ALG-TLS-1810-int03@1986-02-28",
         "air-france-280-ORY-WAW-1810-d5-b39@1986-02-28",
         "air-inter-7302-SXB-ORY-1810-d5-b49@1986-02-28",
+        "air-france-2327-ORY-ALG-1815-int03@1986-02-28",
         "air-france-529-ORY-BCN-1815-b30@1986-02-28",
         "air-france-668-CDG-GVA-1815-d5-b36@1986-02-28",
         "air-france-766-CDG-DUS-1815-d56-b34@1986-02-28",
         "austrian-231-VIE-ORY-1815-d56-b37@1986-02-28",
+        "air-france-1826-MRS-LHR-1820-b116@1986-02-28",
         "air-france-1928-SXB-BRU-1820-d5-b33@1986-02-28",
         "air-france-746-CDG-FRA-1820-d5-b34@1986-02-28",
         "air-inter-6172-LYS-SXB-1820-d5-b49@1986-02-28",
         "sas-1791-CPH-LYS-1820@1986-02-28",
         "sabena-647-BRU-CDG-1825-d56-b33@1986-02-28",
+        "air-france-2647-LIL-LHR-1830-int01@1986-02-28",
         "air-france-817-LHR-CDG-1730@1986-02-28",
         "air-france-818-CDG-LHR-1830@1986-02-28",
         "air-inter-5619-ORY-LYS-1830-d5@1986-02-28",
@@ -3803,6 +4406,7 @@
         "air-inter-7657-LYS-BOD-1840-d5-b49@1986-02-28",
         "air-uk-643-STN-CDG-1740@1986-02-28",
         "lufthansa-151-NCE-FRA-1840-d56-b34@1986-02-28",
+        "air-algerie-1426-ALG-ORY-1845-int03@1986-02-28",
         "air-france-685-ZRH-CDG-1850-d5-b36@1986-02-28",
         "air-france-952-NCE-LHR-1850@1986-02-28",
         "air-inter-7728-MRS-ORY-1850-d5@1986-02-28",
@@ -3811,6 +4415,7 @@
         "lufthansa-136-STR-CDG-1855-d5-b34@1986-02-28",
         "air-france-1927-BRU-NCE-1900-d5-b33@1986-02-28",
         "air-france-916-CDG-AMS-1900-d5-b32@1986-02-28",
+        "air-france-961-BHX-CDG-1800-b116@1986-02-28",
         "air-inter-7548-TLS-ORY-1900-d5@1986-02-28",
         "air-inter-7614-BOD-ORY-1900-d5@1986-02-28",
         "alitalia-337-CDG-LIN-1900-d56-b38@1986-02-28",
@@ -3823,8 +4428,10 @@
         "air-inter-7547-ORY-TLS-1910-d5@1986-02-28",
         "lufthansa-135-CDG-DUS-1910-d5-b34@1986-02-28",
         "lufthansa-159-LYS-FRA-1910-d5-b34@1986-02-28",
+        "air-algerie-1421-ORY-ALG-1915-int03@1986-02-28",
         "air-france-1936-LYS-BRU-1915-d5-b33@1986-02-28",
         "air-inter-6533-ORY-NCE-1915-d5@1986-02-28",
+        "air-france-122-NCE-CAI-1920-b117@1986-02-28",
         "sas-574-CDG-ARN-1920@1986-02-28",
         "swissair-708-ZRH-CDG-1920-d56-b36@1986-02-28",
         "air-france-1679-GVA-BOD-1925-d5-b36@1986-02-28",
@@ -3849,9 +4456,12 @@
         "air-inter-7419-ORY-LYS-1945-d5@1986-02-28",
         "air-france-641-TRN-CDG-1950-d5-b38@1986-02-28",
         "air-france-733-MUC-RIEM-CDG-1950-d5-b34@1986-02-28",
+        "dan-air-916-TLS-LGW-1950-b116@1986-02-28",
         "klm-308-CDG-RTM-1950-d5-b32@1986-02-28",
         "klm-330-CDG-AMS-1950-d5-b32@1986-02-28",
         "lufthansa-122-HAM-CDG-1950-d5-b34@1986-02-28",
+        "air-france-160-CDG-KWI-1955-b117@1986-02-28",
+        "air-france-1867-LHR-LIL-1855-int01@1986-02-28",
         "air-inter-7647-ORY-TLS-1955-d5@1986-02-28",
         "british-airways-907-CDG-MAN-1955@1986-02-28",
         "air-france-1929-BRU-SXB-2000-d5-b33@1986-02-28",
@@ -3883,12 +4493,14 @@
         "air-inter-5502-SXB-ORY-2040-d5-b49@1986-02-28",
         "air-inter-6878-MRS-BOD-2040-d5-b49@1986-02-28",
         "swissair-759-NCE-GVA-2040-d56-b36@1986-02-28",
+        "air-france-273-ANC-CDG-1045-int03@1986-02-28",
         "air-france-917-AMS-CDG-2045-d5-b32@1986-02-28",
         "lufthansa-137-CDG-STR-2045-d5-b34@1986-02-28",
         "air-inter-6303-ORY-BSL-2050-d5@1986-02-28",
         "austrian-232-ORY-VIE-2050-d56-b37@1986-02-28",
         "air-inter-5583-CDG-LYS-2055-d5@1986-02-28",
         "air-inter-6748-TLS-ORY-2055-d5@1986-02-28",
+        "air-france-1823-LHR-TLS-2000-b116@1986-02-28",
         "british-airways-318-LHR-CDG-2000@1986-02-28",
         "air-inter-6701-ORY-SXB-2105-d5-b49@1986-02-28",
         "air-inter-7791-LYS-MRS-2105-d5-b49@1986-02-28",
@@ -3901,6 +4513,7 @@
         "air-inter-6713-ORY-BOD-2120-d5@1986-02-28",
         "lufthansa-116-FRA-CDG-2120-d56-b34@1986-02-28",
         "swissair-709-CDG-ZRH-2125-d56-b36@1986-02-28",
+        "air-france-189-KHI-CDG-0130-int02@1986-03-01",
         "air-inter-5648-TLS-ORY-2130-d5@1986-02-28",
         "british-airways-317-CDG-LHR-2130@1986-02-28",
         "air-inter-6847-ORY-TLS-2135-d5@1986-02-28",
@@ -3910,14 +4523,25 @@
         "air-inter-6465-CDG-TLS-2140-d5@1986-02-28",
         "crossair-979-GVA-BSL-2250@1986-02-28",
         "delta-20-ATL-ORY-1735@1986-02-28",
+        "air-france-462-JED-CDG-0155-b117@1986-03-01",
+        "air-afrique-004-DKR-BOD-2345-int06@1986-02-28",
+        "air-france-227-FDF-MRS-1945-b120@1986-02-28",
         "panam-114-JFK-CDG-1845@1986-02-28",
+        "air-france-235-PTP-CDG-1955-b120@1986-02-28",
+        "air-france-302-DKR-MRS-2359-int06@1986-02-28",
+        "air-canada-880-YYZ-CDG-1920-int02@1986-02-28",
+        "uta-561-BAH-CDG-0335-b117@1986-03-01",
         "panam-82-JFK-NCE-1945@1986-02-28",
+        "air-france-1382-JED-LYS-0400-b117@1986-03-01",
+        "air-france-034-ORD-CDG-1930-int01@1986-02-28",
         "panam-115-TLV-CDG-0545@1986-03-01",
+        "air-france-1351-DXB-CDG-0805-b117@1986-03-01",
         "aeroflot-251-SVO-CDG-0840-d6-b45@1986-03-01",
         "air-inter-5014-BOD-ORY-0645-d6@1986-03-01",
         "air-inter-5677-BOD-MRS-0645-d56-b49@1986-03-01",
         "air-inter-5028-MRS-ORY-0650-d6@1986-03-01",
         "air-inter-5071-SXB-LYS-0650-d56-b49@1986-03-01",
+        "air-france-004-LAX-CDG-2200-int01@1986-02-28",
         "air-inter-5002-SXB-ORY-0700-d56-b49@1986-03-01",
         "air-inter-5020-LYS-ORY-0700-d6@1986-03-01",
         "air-inter-5048-TLS-ORY-0705-d6@1986-03-01",
@@ -3927,6 +4551,7 @@
         "air-inter-5027-ORY-MRS-0720-d6@1986-03-01",
         "air-france-680-CDG-ZRH-0725-d56-b36@1986-03-01",
         "lufthansa-111-CDG-FRA-0725-d56-b34@1986-03-01",
+        "air-france-2320-ALG-ORY-0730-int03@1986-03-01",
         "air-france-910-CDG-AMS-0730-d56-b32@1986-03-01",
         "air-inter-5180-NCE-LYS-0730-d6-b49@1986-03-01",
         "klm-323-AMS-CDG-0730-d56-b32@1986-03-01",
@@ -3934,12 +4559,15 @@
         "air-france-762-CDG-DUS-0740-d56-b34@1986-03-01",
         "british-airways-302-LHR-CDG-0640@1986-03-01",
         "swissair-700-ZRH-CDG-0740-d56-b36@1986-03-01",
+        "air-algerie-1427-ORY-ALG-0745-int03@1986-03-01",
+        "air-algerie-1820-ALG-MRS-0745-int03@1986-03-01",
         "air-france-2640-MRS-LIN-0745-d56-b38@1986-03-01",
         "air-france-650-CDG-LIN-0745-d56-b38@1986-03-01",
         "air-france-730-CDG-MUC-RIEM-0745-d56-b34@1986-03-01",
         "air-inter-5193-SXB-NCE-0745-d6-b49@1986-03-01",
         "lufthansa-130-DUS-CDG-0745-d56-b34@1986-03-01",
         "british-airways-301-CDG-LHR-0755@1986-03-01",
+        "air-france-2795-MRS-TUN-0800-int04@1986-03-01",
         "air-france-525-ORY-BCN-0800-b30@1986-03-01",
         "air-france-741-FRA-CDG-0800-d56-b34@1986-03-01",
         "air-france-771-HAM-CDG-0800-d56-b34@1986-03-01",
@@ -3947,23 +4575,28 @@
         "klm-335-AMS-NCE-0800-d56-b32@1986-03-01",
         "sabena-639-BRU-CDG-0801-d56-b33@1986-03-01",
         "air-france-638-CDG-BRU-0805-d56-b33@1986-03-01",
+        "air-algerie-1438-ALG-LIL-0810-int03@1986-03-01",
         "air-uk-641-STN-CDG-0710@1986-03-01",
         "alitalia-324-TRN-CDG-0810-d56-b38@1986-03-01",
         "lufthansa-121-CDG-HAM-0810-d56-b34@1986-03-01",
         "lufthansa-124-CGN-CDG-0810-d56-b34@1986-03-01",
         "olympic-215-ATH-ELLINIKON-MRS-0910-d6-b43@1986-03-01",
+        "air-france-2321-ORY-ALG-0815-int03@1986-03-01",
         "air-france-662-CDG-GVA-0815-d56-b36@1986-03-01",
         "olympic-201-ATH-ELLINIKON-ORY-0915-d6-b43@1986-03-01",
         "swissair-722-GVA-CDG-0815-d56-b36@1986-03-01",
+        "air-algerie-1730-ALG-TLS-0820-int03@1986-03-01",
         "air-france-347-LYS-LIN-0820-d6-b38@1986-03-01",
         "air-france-501-ORY-LIS-0820-d6-b31@1986-03-01",
         "air-inter-6164-MRS-CDG-0820-d56@1986-03-01",
         "air-inter-5984-LYS-CDG-0825-d6@1986-03-01",
         "lufthansa-140-MUC-RIEM-CDG-0825-d56-b34@1986-03-01",
+        "air-algerie-1422-ALG-ORY-0830-int03@1986-03-01",
         "air-france-511-ORY-MAD-0830-b30@1986-03-01",
         "air-france-807-LHR-CDG-0730@1986-03-01",
         "air-france-808-CDG-LHR-0830@1986-03-01",
         "air-france-963-MAN-CDG-0730@1986-03-01",
+        "tunisair-720-TUN-ORY-0830-int04@1986-03-01",
         "air-inter-5573-LYS-TLS-0835-d6-b49@1986-03-01",
         "air-france-531-ORY-PMI-0840-b30@1986-03-01",
         "air-france-630-CDG-FCO-0840-d56-b38@1986-03-01",
@@ -3973,6 +4606,7 @@
         "air-france-541-ORY-AGP-0845-b30@1986-03-01",
         "alitalia-336-LIN-CDG-0845-d56-b38@1986-03-01",
         "klm-325-AMS-CDG-0845-d56-b32@1986-03-01",
+        "tunisair-770-TUN-MRS-0845-int04@1986-03-01",
         "air-france-1938-LYS-BRU-0850-d6-b33@1986-03-01",
         "air-france-563-BOD-MAD-0850-b30@1986-03-01",
         "air-inter-6227-ORY-MRS-0850-d6@1986-03-01",
@@ -3980,6 +4614,7 @@
         "air-france-792-CDG-CPH-0855@1986-03-01",
         "air-inter-6148-TLS-ORY-0855-d6@1986-03-01",
         "lufthansa-110-FRA-CDG-0855-d56-b34@1986-03-01",
+        "air-france-307-CDG-DKR-0900-int06@1986-03-01",
         "air-france-720-CDG-SVO-0900-d6-b45@1986-03-01",
         "air-france-806-CDG-LHR-0900@1986-03-01",
         "air-inter-5201-ORY-SXB-0900-d6-b49@1986-03-01",
@@ -3991,19 +4626,23 @@
         "alitalia-334-FCO-CDG-0910-d56-b38@1986-03-01",
         "klm-324-CDG-AMS-0910-d56-b32@1986-03-01",
         "sas-571-ARN-CDG-0910@1986-03-01",
+        "air-france-1347-ORY-FDF-0915-b120@1986-03-01",
         "air-france-608-CDG-IST-ATATURK-0915-d56-b44@1986-03-01",
         "air-france-681-ZRH-CDG-0915-d56-b36@1986-03-01",
         "air-france-911-AMS-CDG-0915-d56-b32@1986-03-01",
         "air-inter-6228-MRS-ORY-0915-d6@1986-03-01",
         "iberia-650-MAD-ORY-0915-b30@1986-03-01",
         "swissair-721-CDG-GVA-0915-d56-b36@1986-03-01",
+        "tunisair-760-TUN-NCE-0915-int04@1986-03-01",
         "air-inter-5134-NCE-ORY-0920-d56@1986-03-01",
         "air-france-1696-NCE-ZRH-0925-d6-b36@1986-03-01",
+        "air-france-2357-LYS-ALG-0925-int03@1986-03-01",
         "lufthansa-143-CDG-MUC-RIEM-0925-d56-b34@1986-03-01",
         "air-france-2641-LIN-MRS-0930-d56-b38@1986-03-01",
         "air-france-642-CDG-BRU-0930-d56-b33@1986-03-01",
         "british-airways-303-CDG-LHR-0930@1986-03-01",
         "british-airways-304-LHR-CDG-0830@1986-03-01",
+        "tunisair-766-TUN-LYS-0930-int04@1986-03-01",
         "sas-563-CPH-CDG-0940@1986-03-01",
         "air-france-743-FRA-CDG-0945-d56-b34@1986-03-01",
         "turkish-airlines-925-IST-ATATURK-ORY-1045-d6-b44@1986-03-01",
@@ -4011,26 +4650,35 @@
         "air-france-2648-NCE-FCO-0950-d6-b38@1986-03-01",
         "lufthansa-131-CDG-DUS-0950-d56-b34@1986-03-01",
         "swissair-701-CDG-ZRH-0950-d56-b36@1986-03-01",
+        "air-algerie-1821-MRS-ALG-0955-int03@1986-03-01",
         "air-france-731-MUC-RIEM-CDG-0955-d56-b34@1986-03-01",
         "air-inter-5177-LYS-MRS-1000-d6-b49@1986-03-01",
         "air-inter-6766-TLS-CDG-1000-d6@1986-03-01",
+        "middle-east-airlines-212-ORY-BEY-1000-b117@1986-03-01",
         "air-france-651-LIN-CDG-1005-d56-b38@1986-03-01",
         "air-inter-5079-LYS-NCE-1005-d56-b49@1986-03-01",
         "air-uk-642-CDG-STN-1005@1986-03-01",
+        "air-france-2744-TUN-BSL-1015-int04@1986-03-01",
         "air-france-663-GVA-CDG-1015-d56-b36@1986-03-01",
         "air-inter-5983-CDG-LYS-1015-d6@1986-03-01",
         "alitalia-1351-CDG-GOA-1020-d6-b38@1986-03-01",
         "air-inter-5768-BSL-CDG-1025-d6@1986-03-01",
         "klm-336-NCE-AMS-1025-d56-b32@1986-03-01",
+        "air-france-017-CDG-JFK-1030-int01@1986-03-01",
         "air-france-1825-LHR-LYS-0930@1986-03-01",
         "air-france-796-CDG-FBU-1030@1986-03-01",
         "air-france-810-CDG-LHR-1030@1986-03-01",
         "air-inter-6133-ORY-NCE-1030-d6@1986-03-01",
         "air-inter-6168-SXB-CDG-1030-d6-b49@1986-03-01",
         "lufthansa-125-CDG-CGN-1030-d56-b34@1986-03-01",
+        "middle-east-airlines-211-BEY-ORY-1130-b117@1986-03-01",
+        "air-algerie-1731-TLS-ALG-1035-int03@1986-03-01",
+        "air-france-114-MRS-CAI-1035-b117@1986-03-01",
+        "air-france-142-CDG-DAM-1035-b117@1986-03-01",
         "panam-114-CDG-TLV-1035@1986-03-01",
         "air-france-790-CDG-ARN-1040@1986-03-01",
         "air-inter-6575-TLS-NCE-1040-d6-b49@1986-03-01",
+        "dan-air-929-LGW-LDE-0945-int01@1986-03-01",
         "klm-326-CDG-AMS-1045-d56-b32@1986-03-01",
         "air-inter-5734-NCE-ORY-1050-d6@1986-03-01",
         "air-france-951-LHR-NCE-0955@1986-03-01",
@@ -4038,11 +4686,16 @@
         "jat-240-BEG-ORY-1055-d6-b42@1986-03-01",
         "lufthansa-113-CDG-FRA-1055-d56-b34@1986-03-01",
         "sabena-1931-BRU-LYS-1055-d6-b33@1986-03-01",
+        "air-france-001-CDG-JFK-1100-int01@1986-03-01",
         "air-inter-5165-CDG-BOD-1100-d56@1986-03-01",
+        "alia-103-AMM-ORY-1200-b117@1986-03-01",
         "air-france-782-CDG-VIE-1105-d56-b37@1986-03-01",
         "air-inter-5394-MRS-BOD-1105-d6-b49@1986-03-01",
+        "tunisair-771-MRS-TUN-1105-int04@1986-03-01",
+        "air-france-2323-ORY-ALG-1110-int03@1986-03-01",
         "air-inter-6214-BOD-ORY-1110-d6@1986-03-01",
         "alitalia-345-CDG-LIN-1110-d56-b38@1986-03-01",
+        "air-algerie-1439-LIL-ALG-1115-int03@1986-03-01",
         "air-france-510-MAD-ORY-1115-b30@1986-03-01",
         "air-inter-5248-TLS-ORY-1115-d56@1986-03-01",
         "swissair-723-CDG-GVA-1115-d56-b36@1986-03-01",
@@ -4050,11 +4703,13 @@
         "air-france-1697-ZRH-NCE-1120-d6-b36@1986-03-01",
         "air-france-658-CDG-VCE-1120-d56-b38@1986-03-01",
         "sabena-643-BRU-CDG-1120-d56-b33@1986-03-01",
+        "tunisair-761-NCE-TUN-1120-int04@1986-03-01",
         "aer-lingus-523-CDG-DUB-1125@1986-03-01",
         "air-france-1693-GVA-NCE-1125-d56-b36@1986-03-01",
         "air-france-530-PMI-ORY-1125-b30@1986-03-01",
         "air-inter-5779-BOD-NCE-1125-d6-b49@1986-03-01",
         "sabena-669-BRU-NCE-1125-d6-b33@1986-03-01",
+        "air-france-2362-ALG-MRS-1130-int03@1986-03-01",
         "british-airways-305-CDG-LHR-1130@1986-03-01",
         "british-airways-306-LHR-CDG-1030@1986-03-01",
         "delta-21-ORY-ATL-1130@1986-03-01",
@@ -4064,18 +4719,25 @@
         "air-france-631-FCO-CDG-1140-d56-b38@1986-03-01",
         "air-france-793-CPH-CDG-1140@1986-03-01",
         "olympic-216-MRS-ATH-ELLINIKON-1140-d6-b43@1986-03-01",
+        "tunisair-721-ORY-TUN-1140-int04@1986-03-01",
         "air-france-2649-FCO-NCE-1145-d6-b38@1986-03-01",
         "air-france-500-LIS-ORY-1045-d6-b31@1986-03-01",
         "panam-83-NCE-JFK-1145@1986-03-01",
         "aeroflot-252-CDG-SVO-1150-d6-b45@1986-03-01",
         "air-france-504-OPO-ORY-1055-d6-b31@1986-03-01",
+        "british-airways-364-LHR-BOD-1055-b116@1986-03-01",
+        "air-algerie-1423-ORY-ALG-1200-int03@1986-03-01",
+        "air-algerie-1424-ALG-ORY-1200-int03@1986-03-01",
+        "air-france-2310-ALG-LIL-1200-int03@1986-03-01",
         "panam-115-CDG-JFK-1200@1986-03-01",
         "swissair-704-ZRH-CDG-1200-d56-b36@1986-03-01",
         "iberia-655-ORY-MAD-1205-b30@1986-03-01",
+        "air-france-067-CDG-IAH-1210-int01@1986-03-01",
         "air-france-540-AGP-ORY-1210-b30@1986-03-01",
         "air-france-682-CDG-ZRH-1210-d56-b36@1986-03-01",
         "alitalia-335-CDG-FCO-1210-d56-b38@1986-03-01",
         "sas-575-CPH-NCE-1210@1986-03-01",
+        "air-france-180-CDG-DHA-1215-b117@1986-03-01",
         "air-france-664-CDG-GVA-1215-d56-b36@1986-03-01",
         "swissair-724-GVA-CDG-1215-d56-b36@1986-03-01",
         "air-france-772-CDG-HAM-1220-d56-b34@1986-03-01",
@@ -4086,12 +4748,16 @@
         "air-inter-5163-CDG-MRS-1235-d56@1986-03-01",
         "air-inter-5234-NCE-ORY-1235-d56@1986-03-01",
         "alitalia-1350-GOA-CDG-1240-d6-b38@1986-03-01",
+        "air-algerie-1636-ALG-NCE-1245-int03@1986-03-01",
         "iberia-682-MAD-NCE-1245-b30@1986-03-01",
         "olympic-202-ORY-ATH-ELLINIKON-1245-d6-b43@1986-03-01",
         "sas-572-CDG-ARN-1245@1986-03-01",
         "air-inter-5167-CDG-SXB-1250-d6-b49@1986-03-01",
         "lufthansa-112-FRA-CDG-1250-d56-b34@1986-03-01",
+        "air-france-077-CDG-JFK-1300-int01@1986-03-01",
+        "air-france-2749-NCE-TUN-1300-int04@1986-03-01",
         "air-france-765-DUS-CDG-1300-d56-b34@1986-03-01",
+        "tunisair-722-TUN-ORY-1300-int04@1986-03-01",
         "air-inter-6233-ORY-NCE-1305-d6@1986-03-01",
         "klm-327-AMS-CDG-1305-d56-b32@1986-03-01",
         "air-france-644-CDG-BRU-1310-d56-b33@1986-03-01",
@@ -4102,23 +4768,31 @@
         "air-france-601-ATH-ELLINIKON-CDG-1420-d6-b43@1986-03-01",
         "air-inter-6313-ORY-BOD-1325-d6@1986-03-01",
         "alitalia-328-PSA-CDG-1325-d6-b38@1986-03-01",
+        "air-algerie-1822-ALG-MRS-1330-int03@1986-03-01",
         "air-france-609-IST-ATATURK-CDG-1430-d56-b44@1986-03-01",
         "air-inter-5428-MRS-ORY-1330-d56@1986-03-01",
         "air-inter-6767-CDG-BSL-1330-d56@1986-03-01",
         "british-airways-307-CDG-LHR-1330@1986-03-01",
         "british-airways-308-LHR-CDG-1230@1986-03-01",
         "british-airways-342-LHR-NCE-1230@1986-03-01",
+        "tunisair-776-TUN-TLS-1335-int04@1986-03-01",
+        "air-afrique-015-MRS-DKR-1340-int06@1986-03-01",
+        "air-france-257-ORY-FDF-1340-b120@1986-03-01",
         "air-france-659-VCE-CDG-1345-d56-b38@1986-03-01",
         "air-france-781-VIE-CDG-1345-d56-b37@1986-03-01",
         "air-inter-5247-ORY-TLS-1350-d6@1986-03-01",
+        "air-france-2701-ORY-TUN-1355-int04@1986-03-01",
         "air-france-700-CDG-KBP-1355-d6-b45@1986-03-01",
         "air-france-721-SVO-CDG-1555-d6-b45@1986-03-01",
         "swissair-705-CDG-ZRH-1355-d56-b36@1986-03-01",
+        "air-france-136-CDG-TLV-1400-b117@1986-03-01",
         "air-france-1824-LYS-LHR-1400@1986-03-01",
         "air-france-683-ZRH-CDG-1400-d56-b36@1986-03-01",
         "air-france-724-ORY-BUD-1400-d6-b40@1986-03-01",
         "balkan-129-SOF-ORY-1500-d6-b41@1986-03-01",
         "sabena-670-NCE-BRU-1400-d6-b33@1986-03-01",
+        "british-airways-365-BOD-LHR-1405-b116@1986-03-01",
+        "dan-air-929-TLS-LGW-1405-b116@1986-03-01",
         "swissair-762-GVA-MRS-1405-d56-b36@1986-03-01",
         "air-france-665-GVA-CDG-1415-d56-b36@1986-03-01",
         "air-inter-5202-SXB-ORY-1415-d6-b49@1986-03-01",
@@ -4126,6 +4800,9 @@
         "air-france-744-CDG-FRA-1420-d56-b34@1986-03-01",
         "iberia-694-VLC-ORY-1420-b30@1986-03-01",
         "jat-241-ORY-BEG-1420-d6-b42@1986-03-01",
+        "air-canada-881-CDG-YYZ-1425-int02@1986-03-01",
+        "air-france-2322-ALG-ORY-1425-int03@1986-03-01",
+        "air-france-2361-MRS-ALG-1425-int03@1986-03-01",
         "air-inter-5266-BOD-CDG-1425-d6@1986-03-01",
         "air-france-813-LHR-CDG-1330@1986-03-01",
         "tarom-212-ORY-OTP-1430-d6-b41@1986-03-01",
@@ -4138,6 +4815,7 @@
         "lufthansa-115-CDG-FRA-1445-d56-b34@1986-03-01",
         "tap-402-LIS-ORY-1345-d6-b31@1986-03-01",
         "aeroflot-644-CDG-LED-1450-d6-b45@1986-03-01",
+        "air-algerie-1637-NCE-ALG-1450-int03@1986-03-01",
         "air-france-653-LIN-CDG-1450-d56-b38@1986-03-01",
         "alitalia-319-CDG-BLQ-1450-d6-b38@1986-03-01",
         "air-france-624-NCE-ATH-ELLINIKON-1455-d6-b43@1986-03-01",
@@ -4147,36 +4825,50 @@
         "air-inter-5528-MRS-ORY-1510-d56@1986-03-01",
         "air-inter-6334-NCE-ORY-1510-d56@1986-03-01",
         "iberia-683-NCE-MAD-1510-b30@1986-03-01",
+        "air-algerie-1425-ORY-ALG-1515-int03@1986-03-01",
+        "air-france-2752-TUN-NCE-1515-int04@1986-03-01",
         "air-inter-5314-BOD-ORY-1515-d6@1986-03-01",
         "air-inter-6204-BSL-ORY-1520-d6@1986-03-01",
         "alitalia-331-CDG-LIN-1520-d56-b38@1986-03-01",
         "air-france-914-CDG-AMS-1525-d56-b32@1986-03-01",
+        "air-algerie-1420-ALG-ORY-1530-int03@1986-03-01",
         "british-airways-309-CDG-LHR-1530@1986-03-01",
         "british-airways-312-LHR-CDG-1430@1986-03-01",
+        "uta-805-CDG-ABJ-1530-int06@1986-03-01",
+        "air-algerie-1823-MRS-ALG-1540-int03@1986-03-01",
         "air-france-562-MAD-BOD-1540-b30@1986-03-01",
         "swissair-750-ZRH-NCE-1540-d56-b36@1986-03-01",
         "air-inter-5348-TLS-ORY-1545-d6@1986-03-01",
         "air-inter-5627-ORY-MRS-1545-d6@1986-03-01",
         "alitalia-329-CDG-PSA-1545-d6-b38@1986-03-01",
+        "tunisair-767-LYS-TUN-1545-int04@1986-03-01",
+        "air-france-2311-LIL-ALG-1550-int03@1986-03-01",
         "air-france-503-ORY-LIS-1600-d6-b31@1986-03-01",
         "air-france-576-NCE-CPH-1600@1986-03-01",
         "british-airways-904-MAN-CDG-1500@1986-03-01",
         "swissair-763-MRS-GVA-1600-d56-b36@1986-03-01",
+        "air-france-306-DKR-CDG-1510-int06@1986-03-01",
         "air-inter-5413-ORY-BOD-1610-d6@1986-03-01",
         "air-france-666-CDG-GVA-1615-d56-b36@1986-03-01",
         "air-france-747-FRA-CDG-1615-d56-b34@1986-03-01",
         "lufthansa-150-FRA-NCE-1615-d56-b34@1986-03-01",
+        "air-france-251-MRS-FDF-1620-b120@1986-03-01",
         "british-airways-343-NCE-LHR-1620@1986-03-01",
         "sas-567-CPH-CDG-1620@1986-03-01",
+        "tunisair-723-ORY-TUN-1620-int04@1986-03-01",
         "air-france-634-CDG-FCO-1630-d56-b38@1986-03-01",
         "air-france-815-LHR-CDG-1530@1986-03-01",
         "air-france-816-CDG-LHR-1630@1986-03-01",
         "air-inter-5301-ORY-SXB-1630-d56-b49@1986-03-01",
+        "air-france-2745-BSL-TUN-1635-int04@1986-03-01",
         "air-france-636-CDG-NAP-1635-d6-b38@1986-03-01",
         "alitalia-339-NCE-FCO-1635-d56-b38@1986-03-01",
+        "air-france-225-CDG-PTP-1640-b120@1986-03-01",
         "alitalia-326-LIN-CDG-1640-d56-b38@1986-03-01",
         "air-france-1734-NCE-MUC-RIEM-1650-d6-b34@1986-03-01",
         "lufthansa-114-FRA-CDG-1650-d56-b34@1986-03-01",
+        "air-france-003-CDG-LAX-1700-int01@1986-03-01",
+        "air-france-2324-ALG-ORY-1700-int03@1986-03-01",
         "air-france-695-ORY-VLC-1700-b30@1986-03-01",
         "air-inter-5433-ORY-NCE-1700-d6@1986-03-01",
         "air-inter-5434-NCE-ORY-1700-d6@1986-03-01",
@@ -4190,6 +4882,7 @@
         "air-france-798-CDG-CPH-1715@1986-03-01",
         "air-inter-5447-ORY-TLS-1715-d6@1986-03-01",
         "alitalia-318-BLQ-CDG-1715-d6-b38@1986-03-01",
+        "air-france-2702-TUN-ORY-1720-int04@1986-03-01",
         "air-france-654-CDG-LIN-1720-d56-b38@1986-03-01",
         "iberia-654-MAD-ORY-1725-b30@1986-03-01",
         "klm-329-AMS-CDG-1725-d56-b32@1986-03-01",
@@ -4208,7 +4901,9 @@
         "air-france-625-ATH-ELLINIKON-NCE-1900-d6-b43@1986-03-01",
         "air-france-667-GVA-CDG-1800-d56-b36@1986-03-01",
         "tap-405-ORY-LIS-1800-d6-b31@1986-03-01",
+        "air-france-122-LYS-CAI-1810-b117@1986-03-01",
         "air-inter-5302-SXB-ORY-1810-d6-b49@1986-03-01",
+        "air-france-2327-ORY-ALG-1815-int03@1986-03-01",
         "air-france-766-CDG-DUS-1815-d56-b34@1986-03-01",
         "austrian-231-VIE-ORY-1815-d56-b37@1986-03-01",
         "sabena-647-BRU-CDG-1825-d56-b33@1986-03-01",
@@ -4217,17 +4912,22 @@
         "swissair-728-GVA-CDG-1830-d56-b36@1986-03-01",
         "air-france-1735-MUC-RIEM-NCE-1840-d6-b34@1986-03-01",
         "lufthansa-151-NCE-FRA-1840-d56-b34@1986-03-01",
+        "air-algerie-1426-ALG-ORY-1845-int03@1986-03-01",
         "air-france-952-NCE-LHR-1850@1986-03-01",
         "air-inter-6728-MRS-ORY-1850-d6@1986-03-01",
         "swissair-956-GVA-BSL-1850@1986-03-01",
         "lufthansa-117-CDG-FRA-1855-d56-b34@1986-03-01",
+        "air-france-2356-ALG-LYS-1900-int03@1986-03-01",
         "air-inter-5548-TLS-ORY-1900-d6@1986-03-01",
         "alitalia-337-CDG-LIN-1900-d56-b38@1986-03-01",
         "swissair-758-GVA-NCE-1900-d56-b36@1986-03-01",
         "air-inter-5534-NCE-ORY-1905-d6@1986-03-01",
         "air-inter-6501-ORY-SXB-1905-d6-b49@1986-03-01",
         "air-france-502-LIS-ORY-1810-d6-b31@1986-03-01",
+        "air-algerie-1421-ORY-ALG-1915-int03@1986-03-01",
+        "tunisair-777-TLS-TUN-1915-int04@1986-03-01",
         "swissair-708-ZRH-CDG-1920-d56-b36@1986-03-01",
+        "air-france-2794-TUN-MRS-1925-int04@1986-03-01",
         "iberia-667-ORY-BCN-1925-b30@1986-03-01",
         "air-france-635-FCO-CDG-1930-d56-b38@1986-03-01",
         "british-airways-315-CDG-LHR-1930@1986-03-01",
@@ -4247,10 +4947,14 @@
         "air-france-819-LHR-CDG-1930@1986-03-01",
         "alitalia-325-CDG-TRN-2030-d56-b38@1986-03-01",
         "swissair-759-NCE-GVA-2040-d56-b36@1986-03-01",
+        "air-france-273-ANC-CDG-1045-int03@1986-03-01",
         "austrian-232-ORY-VIE-2050-d56-b37@1986-03-01",
         "lufthansa-116-FRA-CDG-2120-d56-b34@1986-03-01",
         "swissair-709-CDG-ZRH-2125-d56-b36@1986-03-01",
-        "air-france-164-CDG-LCA-2215-d6-b43@1986-03-01"
+        "air-france-164-CDG-LCA-2215-d6-b43@1986-03-01",
+        "uta-567-MCT-CDG-0140-b117@1986-03-02",
+        "air-france-1347-PTP-CDG-1745-b120@1986-03-01",
+        "el-al-324-ORY-TLV-2250-b117@1986-03-01"
       ],
       "next_action": "Se FRANCE_FOLLOWUP_BATCH49.md. Air Inter: återstående Parislinjer, regionala flyg och andra kompletteringar återstår; detta urval är inte en fullständig linjeinventering. De tio tidigare Air Inter/Air France-konflikterna från omgång 29 kvarstår; inget avgörande daterat ändringsblad har tillkommit. Air France, UTA och regionalbolag såsom TAT, Air Littoral, Air Limousin, Brit Air, Air Vendée, Air Jet och Europe Aéro Service är fortsatt ofullständigt inventerade. Frakt, charter, militär trafik, helikoptertrafik, ändringar och faktiskt genomförande behöver ytterligare handlingar."
     },
@@ -4645,9 +5349,9 @@
       "catalog_country_id": "nl",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 117,
+      "endpoint_movements": 120,
       "domestic_movements": 0,
-      "international_movements": 117,
+      "international_movements": 120,
       "directed_endpoint_pairs": [
         [
           "AMS",
@@ -4684,6 +5388,10 @@
         [
           "AMS",
           "LYS"
+        ],
+        [
+          "AMS",
+          "MLA"
         ],
         [
           "AMS",
@@ -4754,6 +5462,10 @@
           "AMS"
         ],
         [
+          "MLA",
+          "AMS"
+        ],
+        [
           "MME",
           "AMS"
         ],
@@ -4782,6 +5494,10 @@
           "AMS"
         ],
         [
+          "TLV",
+          "AMS"
+        ],
+        [
           "TXL",
           "AMS"
         ]
@@ -4789,8 +5505,10 @@
       "movements_by_source_airline": {
         "aer-lingus": 2,
         "air-france": 14,
+        "air-malta": 2,
         "air-uk": 49,
         "dan-air": 12,
+        "el-al": 1,
         "jal": 2,
         "klm": 27,
         "panam": 8,
@@ -4889,6 +5607,7 @@
         "air-uk-160-STN-AMS-0700@1986-03-01",
         "klm-335-AMS-NCE-0800-d56-b32@1986-03-01",
         "air-uk-100-NWI-AMS-0710@1986-03-01",
+        "air-malta-024-MLA-AMS-0835-int05@1986-03-01",
         "air-uk-824-HUY-AMS-0740@1986-03-01",
         "dan-air-810-MME-AMS-0745@1986-03-01",
         "klm-325-AMS-CDG-0845-d56-b32@1986-03-01",
@@ -4921,9 +5640,11 @@
         "air-france-914-CDG-AMS-1525-d56-b32@1986-03-01",
         "air-france-915-AMS-CDG-1710-d56-b32@1986-03-01",
         "klm-329-AMS-CDG-1725-d56-b32@1986-03-01",
+        "air-malta-023-AMS-MLA-1730-int05@1986-03-01",
         "air-uk-857-AMS-SOU-1800@1986-03-01",
         "air-uk-106-NWI-AMS-1805@1986-03-01",
-        "air-uk-107-AMS-NWI-2030@1986-03-01"
+        "air-uk-107-AMS-NWI-2030@1986-03-01",
+        "el-al-005-TLV-AMS-2330-b118@1986-03-01"
       ],
       "next_action": "Se EUROPE_FOLLOWUP_BATCH50.md. Dan-Airs Tees-side-tider/dagar måste jämföras mot senare vinterunderlag; inga parallella varianter läggs in. KLM, NLM, Martinair, Transavia, inrikestrafik, övriga flygplatser, charter/frakt och faktiskt genomförande återstår. Precis datering av Bristol-linjens senare nedläggning och eventuella ändringsblad återstår."
     },
@@ -4934,9 +5655,9 @@
       "catalog_country_id": "be",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 69,
+      "endpoint_movements": 70,
       "domestic_movements": 0,
-      "international_movements": 69,
+      "international_movements": 70,
       "directed_endpoint_pairs": [
         [
           "ALG",
@@ -4999,6 +5720,10 @@
           "SXB"
         ],
         [
+          "BRU",
+          "TLV"
+        ],
+        [
           "CDG",
           "BRU"
         ],
@@ -5054,6 +5779,7 @@
         "air-france": 18,
         "air-uk": 4,
         "british-airways": 9,
+        "el-al": 1,
         "lap": 6,
         "panam": 8,
         "sabena": 18
@@ -5077,6 +5803,7 @@
         "sabena-639-BRU-CDG-0801-d56-b33@1986-02-28",
         "air-france-638-CDG-BRU-0805-d56-b33@1986-02-28",
         "air-france-1932-LYS-BRU-0810-d5-b33@1986-02-28",
+        "el-al-334-BRU-TLV-0830-b118@1986-02-28",
         "air-france-1935-BRU-SXB-0835-d5-b33@1986-02-28",
         "british-airways-371-BRU-LHR-0855@1986-02-28",
         "panam-125-BRU-LHR-0905@1986-02-28",
@@ -5168,9 +5895,9 @@
       "catalog_country_id": "de-west",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 332,
+      "endpoint_movements": 340,
       "domestic_movements": 3,
-      "international_movements": 329,
+      "international_movements": 337,
       "directed_endpoint_pairs": [
         [
           "AMS",
@@ -5221,6 +5948,10 @@
           "CDG"
         ],
         [
+          "DFW",
+          "FRA"
+        ],
+        [
           "DUB",
           "DUS"
         ],
@@ -5262,6 +5993,10 @@
         ],
         [
           "FRA",
+          "DFW"
+        ],
+        [
+          "FRA",
           "DUS"
         ],
         [
@@ -5298,6 +6033,10 @@
         ],
         [
           "FRA",
+          "MLA"
+        ],
+        [
+          "FRA",
           "MUC-RIEM"
         ],
         [
@@ -5307,6 +6046,10 @@
         [
           "FRA",
           "SVO"
+        ],
+        [
+          "FRA",
+          "TLV"
         ],
         [
           "FRA",
@@ -5370,6 +6113,10 @@
         ],
         [
           "LYS",
+          "FRA"
+        ],
+        [
+          "MLA",
           "FRA"
         ],
         [
@@ -5437,6 +6184,10 @@
           "ZRH"
         ],
         [
+          "TLV",
+          "FRA"
+        ],
+        [
           "TXL",
           "DUS"
         ],
@@ -5481,11 +6232,13 @@
         "aer-lingus": 1,
         "aeroflot": 2,
         "air-france": 54,
+        "air-malta": 2,
         "dan-air": 10,
-        "delta": 4,
+        "delta": 6,
+        "el-al": 2,
         "jal": 3,
         "lap": 2,
-        "lufthansa": 60,
+        "lufthansa": 62,
         "northwest": 4,
         "panam": 180,
         "swissair": 12
@@ -5554,6 +6307,7 @@
         "northwest-48-LGW-FRA-0755@1986-02-28",
         "panam-106-LHR-MUC-RIEM-0755@1986-02-28",
         "panam-634-FRA-TXL-0855@1986-02-28",
+        "el-al-357-TLV-FRA-1000-b118@1986-02-28",
         "air-france-757-STR-CDG-0910-d5-b34@1986-02-28",
         "air-france-763-DUS-CDG-0910-d56-b34@1986-02-28",
         "panam-685-TXL-MUC-RIEM-0910@1986-02-28",
@@ -5693,6 +6447,7 @@
         "panam-658-FRA-TXL-2150@1986-02-28",
         "delta-14-ATL-FRA-1725@1986-02-28",
         "panam-629-TXL-FRA-2330@1986-02-28",
+        "delta-22-DFW-FRA-1705-b113@1986-02-28",
         "panam-150-LAX-FRA-1520@1986-02-28",
         "panam-72-JFK-FRA-1830@1986-02-28",
         "panam-76-JFK-MUC-RIEM-1930@1986-02-28",
@@ -5733,6 +6488,7 @@
         "northwest-44-LGW-FRA-0755@1986-03-01",
         "panam-106-LHR-MUC-RIEM-0755@1986-03-01",
         "panam-634-FRA-TXL-0855@1986-03-01",
+        "lufthansa-308-FRA-MLA-0900-int05@1986-03-01",
         "air-france-763-DUS-CDG-0910-d56-b34@1986-03-01",
         "panam-685-TXL-MUC-RIEM-0910@1986-03-01",
         "lufthansa-220-FRA-ZRH-0920@1986-03-01",
@@ -5742,10 +6498,12 @@
         "panam-100-LHR-FRA-0830@1986-03-01",
         "swissair-511-DUS-ZRH-0935@1986-03-01",
         "air-france-743-FRA-CDG-0945-d56-b34@1986-03-01",
+        "air-malta-114-MLA-FRA-0945-int05@1986-03-01",
         "lufthansa-131-CDG-DUS-0950-d56-b34@1986-03-01",
         "panam-93-STR-ZRH-0950@1986-03-01",
         "air-france-731-MUC-RIEM-CDG-0955-d56-b34@1986-03-01",
         "panam-641-TXL-FRA-0955@1986-03-01",
+        "delta-23-FRA-DFW-1010-b113@1986-03-01",
         "panam-670-NUE-TXL-1015@1986-03-01",
         "swissair-533-FRA-ZRH-1015@1986-03-01",
         "lufthansa-125-CDG-CGN-1030-d56-b34@1986-03-01",
@@ -5771,6 +6529,7 @@
         "panam-606-HAM-TXL-1200@1986-03-01",
         "panam-150-FRA-ATH-ELLINIKON-1215-d6-b56@1986-03-01",
         "air-france-772-CDG-HAM-1220-d56-b34@1986-03-01",
+        "lufthansa-309-MLA-FRA-1220-int05@1986-03-01",
         "aeroflot-256-FRA-SVO-1230@1986-03-01",
         "panam-102-BRU-NUE-1230@1986-03-01",
         "panam-107-FRA-LHR-1230@1986-03-01",
@@ -5786,6 +6545,7 @@
         "lufthansa-222-FRA-ZRH-1315@1986-03-01",
         "panam-604-HAM-TXL-1320@1986-03-01",
         "panam-73-FRA-JFK-1320@1986-03-01",
+        "air-malta-115-FRA-MLA-1325-int05@1986-03-01",
         "panam-665-TXL-STR-1330@1986-03-01",
         "panam-686-MUC-RIEM-TXL-1335@1986-03-01",
         "panam-689-TXL-MUC-RIEM-1335@1986-03-01",
@@ -5830,6 +6590,7 @@
         "panam-693-TXL-MUC-RIEM-1910@1986-03-01",
         "panam-614-HAM-TXL-1925@1986-03-01",
         "panam-654-FRA-TXL-1935@1986-03-01",
+        "el-al-358-FRA-TLV-1945-b118@1986-03-01",
         "panam-617-TXL-HAM-1950@1986-03-01",
         "swissair-539-FRA-ZRH-1955@1986-03-01",
         "panam-659-TXL-FRA-2000@1986-03-01",
@@ -6160,9 +6921,9 @@
       "catalog_country_id": "ch",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 165,
+      "endpoint_movements": 167,
       "domestic_movements": 4,
-      "international_movements": 161,
+      "international_movements": 163,
       "directed_endpoint_pairs": [
         [
           "BOD",
@@ -6297,6 +7058,10 @@
           "GVA"
         ],
         [
+          "TLV",
+          "ZRH"
+        ],
+        [
           "TXL",
           "ZRH"
         ],
@@ -6334,6 +7099,10 @@
         ],
         [
           "ZRH",
+          "TLV"
+        ],
+        [
+          "ZRH",
           "TXL"
         ]
       ],
@@ -6344,6 +7113,7 @@
         "air-france": 39,
         "crossair": 3,
         "dan-air": 13,
+        "el-al": 2,
         "iberia": 2,
         "klm": 4,
         "lufthansa": 14,
@@ -6377,11 +7147,13 @@
         "air-france-662-CDG-GVA-0815-d56-b36@1986-02-28",
         "swissair-722-GVA-CDG-0815-d56-b36@1986-02-28",
         "air-france-1662-LYS-ZRH-0830-d5-b36@1986-02-28",
+        "el-al-323-TLV-ZRH-0930-b118@1986-02-28",
         "swissair-951-GVA-BSL-0850@1986-02-28",
         "air-france-661-GVA-CDG-0915-d5-b36@1986-02-28",
         "air-france-681-ZRH-CDG-0915-d56-b36@1986-02-28",
         "swissair-721-CDG-GVA-0915-d56-b36@1986-02-28",
         "swissair-851-DUB-ZRH-0815@1986-02-28",
+        "el-al-348-ZRH-TLV-0920-b118@1986-02-28",
         "lufthansa-220-FRA-ZRH-0920@1986-02-28",
         "lufthansa-246-FRA-GVA-0920@1986-02-28",
         "swissair-511-DUS-ZRH-0935@1986-02-28",
@@ -6560,9 +7332,9 @@
       "catalog_country_id": "at",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 10,
+      "endpoint_movements": 12,
       "domestic_movements": 0,
-      "international_movements": 10,
+      "international_movements": 12,
       "directed_endpoint_pairs": [
         [
           "CDG",
@@ -6581,18 +7353,27 @@
           "VIE"
         ],
         [
+          "TLV",
+          "VIE"
+        ],
+        [
           "VIE",
           "CDG"
         ],
         [
           "VIE",
           "ORY"
+        ],
+        [
+          "VIE",
+          "TLV"
         ]
       ],
       "movements_by_source_airline": {
         "air-france": 4,
         "austrian": 4,
-        "dan-air": 2
+        "dan-air": 2,
+        "el-al": 2
       },
       "home_operator_ids": [
         "austrian",
@@ -6606,6 +7387,8 @@
         "INN"
       ],
       "endpoint_leg_ids": [
+        "el-al-363-TLV-VIE-0650-b118@1986-02-28",
+        "el-al-364-VIE-TLV-1045-b118@1986-02-28",
         "air-france-782-CDG-VIE-1105-d56-b37@1986-02-28",
         "air-france-781-VIE-CDG-1345-d56-b37@1986-02-28",
         "austrian-231-VIE-ORY-1815-d56-b37@1986-02-28",
@@ -6626,9 +7409,9 @@
       "catalog_country_id": "it",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 100,
+      "endpoint_movements": 106,
       "domestic_movements": 2,
-      "international_movements": 98,
+      "international_movements": 104,
       "directed_endpoint_pairs": [
         [
           "BLQ",
@@ -6676,11 +7459,19 @@
         ],
         [
           "FCO",
+          "MLA"
+        ],
+        [
+          "FCO",
           "MRS"
         ],
         [
           "FCO",
           "NCE"
+        ],
+        [
+          "FCO",
+          "TLV"
         ],
         [
           "GOA",
@@ -6719,6 +7510,10 @@
           "LIN"
         ],
         [
+          "MLA",
+          "FCO"
+        ],
+        [
           "MRS",
           "FCO"
         ],
@@ -6747,6 +7542,10 @@
           "LIN"
         ],
         [
+          "TLV",
+          "FCO"
+        ],
+        [
           "TRN",
           "CDG"
         ],
@@ -6757,7 +7556,9 @@
       ],
       "movements_by_source_airline": {
         "air-france": 48,
-        "alitalia": 48,
+        "air-malta": 2,
+        "alitalia": 50,
+        "el-al": 2,
         "panam": 4
       },
       "home_operator_ids": [
@@ -6778,6 +7579,7 @@
       ],
       "endpoint_leg_ids": [
         "panam-110-JFK-FCO-1830@1986-02-27",
+        "el-al-385-TLV-FCO-0705-b118@1986-02-28",
         "air-france-2640-MRS-LIN-0745-d56-b38@1986-02-28",
         "air-france-650-CDG-LIN-0745-d56-b38@1986-02-28",
         "alitalia-324-TRN-CDG-0810-d56-b38@1986-02-28",
@@ -6791,6 +7593,7 @@
         "alitalia-345-CDG-LIN-1110-d56-b38@1986-02-28",
         "panam-111-FCO-JFK-1115@1986-02-28",
         "air-france-658-CDG-VCE-1120-d56-b38@1986-02-28",
+        "el-al-386-FCO-TLV-1125-b118@1986-02-28",
         "air-france-631-FCO-CDG-1140-d56-b38@1986-02-28",
         "air-france-2644-NCE-FCO-1145-d5-b38@1986-02-28",
         "alitalia-335-CDG-FCO-1210-d56-b38@1986-02-28",
@@ -6800,6 +7603,7 @@
         "alitalia-1351-GOA-NAP-1235-d5-b38@1986-02-28",
         "alitalia-1350-GOA-CDG-1240-d5-b38@1986-02-28",
         "alitalia-330-LIN-CDG-1310-d56-b38@1986-02-28",
+        "alitalia-490-FCO-MLA-1315-int05@1986-02-28",
         "alitalia-328-PSA-CDG-1325-d5-b38@1986-02-28",
         "air-france-1937-MRS-FCO-1330-d5-b38@1986-02-28",
         "air-france-2639-FCO-NCE-1340-d5-b38@1986-02-28",
@@ -6813,6 +7617,7 @@
         "air-france-551-PSA-CDG-1500-d5-b38@1986-02-28",
         "air-france-2647-LIN-SXB-1520-d5-b38@1986-02-28",
         "alitalia-331-CDG-LIN-1520-d56-b38@1986-02-28",
+        "alitalia-491-MLA-FCO-1525-int05@1986-02-28",
         "air-france-1930-FCO-MRS-1535-d5-b38@1986-02-28",
         "alitalia-329-CDG-PSA-1545-d5-b38@1986-02-28",
         "air-france-634-CDG-FCO-1630-d56-b38@1986-02-28",
@@ -6841,6 +7646,7 @@
         "alitalia-336-LIN-CDG-0845-d56-b38@1986-03-01",
         "alitalia-334-FCO-CDG-0910-d56-b38@1986-03-01",
         "air-france-2641-LIN-MRS-0930-d56-b38@1986-03-01",
+        "air-malta-108-MLA-FCO-0930-int05@1986-03-01",
         "air-france-2648-NCE-FCO-0950-d6-b38@1986-03-01",
         "air-france-651-LIN-CDG-1005-d56-b38@1986-03-01",
         "alitalia-1351-CDG-GOA-1020-d6-b38@1986-03-01",
@@ -6849,6 +7655,7 @@
         "air-france-658-CDG-VCE-1120-d56-b38@1986-03-01",
         "air-france-631-FCO-CDG-1140-d56-b38@1986-03-01",
         "air-france-2649-FCO-NCE-1145-d6-b38@1986-03-01",
+        "air-malta-109-FCO-MLA-1200-int05@1986-03-01",
         "alitalia-335-CDG-FCO-1210-d56-b38@1986-03-01",
         "air-france-652-CDG-LIN-1225-d56-b38@1986-03-01",
         "alitalia-1351-GOA-NAP-1235-d6-b38@1986-03-01",
@@ -6923,18 +7730,119 @@
       "catalog_country_id": "mt",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 0,
+      "endpoint_movements": 26,
       "domestic_movements": 0,
-      "international_movements": 0,
-      "directed_endpoint_pairs": [],
-      "movements_by_source_airline": {},
+      "international_movements": 26,
+      "directed_endpoint_pairs": [
+        [
+          "AMS",
+          "MLA"
+        ],
+        [
+          "CAI",
+          "MLA"
+        ],
+        [
+          "FCO",
+          "MLA"
+        ],
+        [
+          "FRA",
+          "MLA"
+        ],
+        [
+          "LGW",
+          "MLA"
+        ],
+        [
+          "LHR",
+          "MLA"
+        ],
+        [
+          "MAN",
+          "MLA"
+        ],
+        [
+          "MLA",
+          "AMS"
+        ],
+        [
+          "MLA",
+          "CAI"
+        ],
+        [
+          "MLA",
+          "FCO"
+        ],
+        [
+          "MLA",
+          "FRA"
+        ],
+        [
+          "MLA",
+          "LGW"
+        ],
+        [
+          "MLA",
+          "LHR"
+        ],
+        [
+          "MLA",
+          "MAN"
+        ],
+        [
+          "MLA",
+          "TIP"
+        ],
+        [
+          "TIP",
+          "MLA"
+        ]
+      ],
+      "movements_by_source_airline": {
+        "air-malta": 18,
+        "alitalia": 2,
+        "british-airways": 4,
+        "lufthansa": 2
+      },
       "home_operator_ids": [
         "air-malta"
       ],
-      "imported_home_operator_ids": [],
-      "registered_airport_ids": [],
-      "endpoint_leg_ids": [],
-      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. Air Maltas fullständiga vinterinlaga27okt1985–29mars1986, teckenförklaring och ändringar behöver läsas. Index och andra säsongers tabeller används inte som avgångstider. Luqa, eventuell helikoptertrafik, utländska operatörer, charter, frakt och stats-/militärflyg kräver daterade underlag."
+      "imported_home_operator_ids": [
+        "air-malta"
+      ],
+      "registered_airport_ids": [
+        "MLA"
+      ],
+      "endpoint_leg_ids": [
+        "air-malta-100-MLA-LHR-0805-int05@1986-02-28",
+        "air-malta-122-MLA-CAI-0845-int05@1986-02-28",
+        "british-airways-552-LGW-MLA-1035-int05@1986-02-28",
+        "air-malta-101-LHR-MLA-1125-int05@1986-02-28",
+        "air-malta-123-CAI-MLA-1325-int05@1986-02-28",
+        "alitalia-490-FCO-MLA-1315-int05@1986-02-28",
+        "alitalia-491-MLA-FCO-1525-int05@1986-02-28",
+        "british-airways-553-MLA-LGW-1545-int05@1986-02-28",
+        "air-malta-140-MLA-MAN-1705-int05@1986-02-28",
+        "air-malta-130-MLA-LGW-1730-int05@1986-02-28",
+        "air-malta-141-MAN-MLA-2045-int05@1986-02-28",
+        "air-malta-131-LGW-MLA-2050-int05@1986-02-28",
+        "air-malta-024-MLA-AMS-0835-int05@1986-03-01",
+        "air-malta-100-MLA-LHR-0900-int05@1986-03-01",
+        "lufthansa-308-FRA-MLA-0900-int05@1986-03-01",
+        "air-malta-108-MLA-FCO-0930-int05@1986-03-01",
+        "air-malta-114-MLA-FRA-0945-int05@1986-03-01",
+        "british-airways-552-LGW-MLA-1035-int05@1986-03-01",
+        "air-malta-109-FCO-MLA-1200-int05@1986-03-01",
+        "lufthansa-309-MLA-FRA-1220-int05@1986-03-01",
+        "air-malta-101-LHR-MLA-1220-int05@1986-03-01",
+        "air-malta-115-FRA-MLA-1325-int05@1986-03-01",
+        "british-airways-553-MLA-LGW-1545-int05@1986-03-01",
+        "air-malta-023-AMS-MLA-1730-int05@1986-03-01",
+        "air-malta-116-MLA-TIP-1800-int05@1986-03-01",
+        "air-malta-117-TIP-MLA-2000-int05@1986-03-01"
+      ],
+      "next_action": "INT05:Air Maltas originalutgåva27okt1985–29mars1986 läst i sin helhet.24 rader ger26 Malta-rörelser (18KM,4BA,2AZ,2LH). Luqa tillförd. Sök ändringsblad, charter/frakt och stats-/militärflyg. KM191F lördag22:30 ligger8min30s efter periodslut. Australienresor har otidsatta mellanben. Landtäckning fortsatt partiell."
     },
     {
       "order": 30,
@@ -7302,9 +8210,9 @@
       "catalog_country_id": "gr",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 17,
+      "endpoint_movements": 19,
       "domestic_movements": 0,
-      "international_movements": 17,
+      "international_movements": 19,
       "directed_endpoint_pairs": [
         [
           "ATH-ELLINIKON",
@@ -7325,6 +8233,10 @@
         [
           "ATH-ELLINIKON",
           "ORY"
+        ],
+        [
+          "ATH-ELLINIKON",
+          "TLV"
         ],
         [
           "CDG",
@@ -7349,10 +8261,15 @@
         [
           "ORY",
           "ATH-ELLINIKON"
+        ],
+        [
+          "TLV",
+          "ATH-ELLINIKON"
         ]
       ],
       "movements_by_source_airline": {
         "air-france": 6,
+        "el-al": 2,
         "olympic": 6,
         "panam": 2,
         "swissair": 3
@@ -7367,8 +8284,10 @@
         "ATH-ELLINIKON"
       ],
       "endpoint_leg_ids": [
+        "el-al-541-TLV-ATH-ELLINIKON-0740-b118@1986-02-28",
         "panam-61-ATH-ELLINIKON-FRA-0930-d5-b56@1986-02-28",
         "air-france-600-CDG-ATH-ELLINIKON-0910-d5-b43@1986-02-28",
+        "el-al-542-ATH-ELLINIKON-TLV-1045-b118@1986-02-28",
         "swissair-314-GVA-ATH-ELLINIKON-1105@1986-02-28",
         "air-france-601-ATH-ELLINIKON-CDG-1420-d5-b43@1986-02-28",
         "olympic-136-GVA-ATH-ELLINIKON-1430@1986-02-28",
@@ -7425,9 +8344,9 @@
       "catalog_country_id": "tr",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 8,
+      "endpoint_movements": 10,
       "domestic_movements": 0,
-      "international_movements": 8,
+      "international_movements": 10,
       "directed_endpoint_pairs": [
         [
           "CDG",
@@ -7442,12 +8361,21 @@
           "ORY"
         ],
         [
+          "IST-ATATURK",
+          "TLV"
+        ],
+        [
           "ORY",
+          "IST-ATATURK"
+        ],
+        [
+          "TLV",
           "IST-ATATURK"
         ]
       ],
       "movements_by_source_airline": {
         "air-france": 4,
+        "el-al": 2,
         "turkish-airlines": 4
       },
       "home_operator_ids": [
@@ -7460,7 +8388,9 @@
         "IST-ATATURK"
       ],
       "endpoint_leg_ids": [
+        "el-al-581-TLV-IST-ATATURK-0950-b118@1986-02-28",
         "air-france-608-CDG-IST-ATATURK-0915-d56-b44@1986-02-28",
+        "el-al-582-IST-ATATURK-TLV-1250-b118@1986-02-28",
         "air-france-609-IST-ATATURK-CDG-1430-d56-b44@1986-02-28",
         "turkish-airlines-927-IST-ATATURK-ORY-1640-d5-b44@1986-02-28",
         "turkish-airlines-928-ORY-IST-ATATURK-2030-d5-b44@1986-02-28",
@@ -7478,8 +8408,8 @@
       "catalog_country_id": "su",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "endpoint_movements": 53,
-      "domestic_movements": 0,
+      "endpoint_movements": 66,
+      "domestic_movements": 13,
       "international_movements": 53,
       "directed_endpoint_pairs": [
         [
@@ -7519,6 +8449,30 @@
           "SVO"
         ],
         [
+          "MJZ",
+          "IKT"
+        ],
+        [
+          "MJZ",
+          "NYR"
+        ],
+        [
+          "MJZ",
+          "PYJ"
+        ],
+        [
+          "MJZ",
+          "SUY"
+        ],
+        [
+          "MJZ",
+          "ULK"
+        ],
+        [
+          "MJZ",
+          "YKS"
+        ],
+        [
           "SVO",
           "BRU"
         ],
@@ -7544,7 +8498,7 @@
         ]
       ],
       "movements_by_source_airline": {
-        "aeroflot": 27,
+        "aeroflot": 40,
         "air-france": 7,
         "interflug": 12,
         "jal": 1,
@@ -7560,12 +8514,24 @@
       "registered_airport_ids": [
         "SVO",
         "LED",
-        "KBP"
+        "KBP",
+        "MJZ",
+        "YKS",
+        "ULK",
+        "IKT",
+        "NYR",
+        "PYJ",
+        "SUY"
       ],
       "endpoint_leg_ids": [
+        "aeroflot-Я-10-MJZ-YKS-0705-b116@1986-02-28",
+        "aeroflot-Я-151-MJZ-PYJ-0800-b116@1986-02-28",
+        "aeroflot-Я-266-MJZ-SUY-0855-b116@1986-02-28",
         "aeroflot-423-SVO-BUD-0315@1986-02-28",
+        "aeroflot-Я-288-MJZ-NYR-1135-b116@1986-02-28",
         "aeroflot-412-BUD-SVO-0355@1986-02-28",
         "aeroflot-131-SVO-BUD-0825@1986-02-28",
+        "aeroflot-Я-147-MJZ-ULK-1450-b116@1986-02-28",
         "aeroflot-111-SVO-SXF-0855@1986-02-28",
         "aeroflot-251-SVO-CDG-0930-d5-b45@1986-02-28",
         "interflug-611-SVO-SXF-0950@1986-02-28",
@@ -7585,16 +8551,22 @@
         "aeroflot-580-SVO-CPH-1850@1986-02-28",
         "interflug-607-SVO-SXF-2030@1986-02-28",
         "interflug-609-SVO-SXF-2105@1986-02-28",
+        "aeroflot-Я-10-MJZ-YKS-0705-b116@1986-03-01",
+        "aeroflot-Я-151-MJZ-PYJ-0800-b116@1986-03-01",
+        "aeroflot-Я-266-MJZ-SUY-0855-b116@1986-03-01",
         "aeroflot-424-BUD-SVO-0150@1986-03-01",
         "aeroflot-407-SVO-BUD-0705@1986-03-01",
         "aeroflot-131-SVO-BUD-0820@1986-03-01",
         "aeroflot-251-SVO-CDG-0840-d6-b45@1986-03-01",
+        "aeroflot-Я-120-MJZ-YKS-1450-b116@1986-03-01",
         "aeroflot-111-SVO-SXF-0855@1986-03-01",
         "aeroflot-231-SVO-BRU-0905@1986-03-01",
         "interflug-611-SVO-SXF-0950@1986-03-01",
         "malev-100-BUD-SVO-0800@1986-03-01",
+        "aeroflot-Я-299-MJZ-NYR-1655-b116@1986-03-01",
         "air-france-720-CDG-SVO-0900-d6-b45@1986-03-01",
         "aeroflot-612-DRS-LED-0915@1986-03-01",
+        "aeroflot-Я-296-MJZ-NYR-1735-b116@1986-03-01",
         "interflug-662-DRS-SVO-0955@1986-03-01",
         "aeroflot-132-BUD-SVO-1020-TU3@1986-03-01",
         "aeroflot-120-DRS-SVO-1130@1986-03-01",
@@ -7606,6 +8578,7 @@
         "interflug-601-SVO-SXF-1400@1986-03-01",
         "aeroflot-256-FRA-SVO-1230@1986-03-01",
         "jal-446-FRA-SVO-1235@1986-03-01",
+        "aeroflot-Я-295-MJZ-IKT-2055-b116@1986-03-01",
         "lufthansa-342-FRA-SVO-1300@1986-03-01",
         "aeroflot-113-SVO-SXF-1510@1986-03-01",
         "interflug-603-SVO-SXF-1540@1986-03-01",
@@ -7615,9 +8588,10 @@
         "air-france-270-SVO-NRT-1825-d6-b45@1986-03-01",
         "aeroflot-408-BUD-SVO-1640@1986-03-01",
         "interflug-607-SVO-SXF-2030@1986-03-01",
-        "interflug-609-SVO-SXF-2105@1986-03-01"
+        "interflug-609-SVO-SXF-2105@1986-03-01",
+        "aeroflot-Я-10-MJZ-YKS-0705-b116@1986-03-02"
       ],
-      "next_action": "Tolv nya planerade rörelser: Paris–Moskva, Moskva–Narita, Paris–Borispol och Paris–Pulkovo. Totalt 53 rörelser med sovjetiska ändpunkter. Borispol tillkommer som fysisk markör; alla äldre rörelser och markörer är oförändrade. Se SOVIET_UNION_COUNTRY_REVIEW_BATCH45.md. Aeroflots fullständiga internationella och inrikes vintertabeller 1985/86, ändringar och driftbelägg återstår. Arkivindex och ett fåtal fotograferade uppslag är inte full täckning. Ytterligare europeiska och asiatiska sovjetiska flygplatser, inrikeslinjer och utländska bolag återstår. Borispol- och Pulkovo-returer har inte verifierats i det aktuella Air France-urvalet och skapas inte. Aeroflot-arkivets metadata anger 28 oktober–28 mars medan det fotograferade vinteromslaget anger 27 oktober–29 mars. Källposterna hålls separata; importerade rader följer den granskade utgåvan. Aeroflots egen tabell använder Moskvatid inom Sovjetunionen. Air France använder lokala tider; Moskva, Leningrad och Kiev ligger alla på UTC+3 under observationsdatumen. Andra sovjetiska orter kräver separat tidszonskontroll. Charter-, frakt-, stats-, privat-, helikopter- och militärtrafik samt faktisk operatör för samarbetskoder är ofullständigt utredda. Inga verkliga nordiska överflygningar har belagts."
+      "next_action": "v119/batch116: 66 ändpunktsrörelser, inklusive13 första inrikesrörelser från Mirny. Åtta regionalblad hittade; sju hålls för tidskonvention, fysiska ben, flygplatser eller upplagekonflikt. Endast två av15 unionsrepubliker har flygplatser i urvalet. Komplett internationell Aeroflot-vintertabell och UK–USSR återstår. Se UK_USSR_REVIEW_BATCH116.md."
     }
   ]
 }

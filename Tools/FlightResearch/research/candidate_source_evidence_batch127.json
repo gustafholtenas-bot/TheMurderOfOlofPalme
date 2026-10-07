@@ -1,0 +1,122 @@
+{
+  "package": "v130",
+  "files": [
+    {
+      "filename": "3g8509-1.jpg",
+      "url": "https://www.timetableimages.com/ttimages/3g/3g8509/3g8509-1.jpg",
+      "bytes": 164405,
+      "sha256": "e8c2f9795f261fc40733cb319f35998cd54e5f396bc96261e0b1c279208c4e69"
+    },
+    {
+      "filename": "3g8509-2.jpg",
+      "url": "https://www.timetableimages.com/ttimages/3g/3g8509/3g8509-2.jpg",
+      "bytes": 153892,
+      "sha256": "07e2a9608037b692c25193ce9ff6519930fdbdc86e9dce89f0065fdb49e3efc4"
+    },
+    {
+      "filename": "wh8507-1.jpg",
+      "url": "https://www.timetableimages.com/ttimages/wh3/wh8507/wh8507-1.jpg",
+      "bytes": 174665,
+      "sha256": "28a3d242afa444556180c18ba7dfd5aa156dbd09eed92cba2facf15177d69e29"
+    },
+    {
+      "filename": "wh8507-2.jpg",
+      "url": "https://www.timetableimages.com/ttimages/wh3/wh8507/wh8507-2.jpg",
+      "bytes": 342770,
+      "sha256": "9d37a3a00d33cecbce0517cc6ef8d4a2b88109e9f620e09ffb2cae086c26c2de"
+    },
+    {
+      "filename": "caribbean_airtimes.html",
+      "url": "https://www.airtimes.com/cgat/usa/caribbeanexpress.htm",
+      "bytes": 5814,
+      "sha256": "9cef0987b468b7f635f227af96351d99f698478c0217353e678f4112bbb85af9"
+    },
+    {
+      "filename": "4a8512.pdf",
+      "url": "https://www.timetableimages.com/ttimages/4a/4a8512/4a8512.pdf",
+      "bytes": 827934,
+      "sha256": "09fb92d35a9f2e4aa8029c37d5647873a92c493edb3593bc4314696b33b5561d"
+    },
+    {
+      "filename": "jw8511-1.jpg",
+      "url": "https://www.timetableimages.com/ttimages/jw/jw8511/jw8511-1.jpg",
+      "bytes": 154859,
+      "sha256": "43427fa72313ca65c17b533937eece5cc3cabdfa330501fd303ce2fea127f768"
+    },
+    {
+      "filename": "jw8511-2.jpg",
+      "url": "https://www.timetableimages.com/ttimages/jw/jw8511/jw8511-2.jpg",
+      "bytes": 495024,
+      "sha256": "4d0e8939526d3d9cd1e8a216a0d8fd349f597034e42938d92bf3c7a8274aee67"
+    },
+    {
+      "filename": "jw8511-3.jpg",
+      "url": "https://www.timetableimages.com/ttimages/jw/jw8511/jw8511-3.jpg",
+      "bytes": 479021,
+      "sha256": "0b0cdb7123311df69b1945866845e2ebe34dad1141b1270422b0517d99b4b0a8"
+    },
+    {
+      "filename": "jw8511-4.jpg",
+      "url": "https://www.timetableimages.com/ttimages/jw/jw8511/jw8511-4.jpg",
+      "bytes": 463991,
+      "sha256": "11b60b8c52576e4ab5a88a3e43cc42e98c0321ab2a6644c653938d233f9f826e"
+    },
+    {
+      "filename": "arrow_news_19860212.pdf",
+      "url": "https://www.reaganlibrary.gov/sites/default/files/2025-03/40-399-5730359-386-018-2025.pdf",
+      "bytes": 583353,
+      "sha256": "dcaa54edcd6990b3fe7c5429d805b3d25c9aae125c2ac986b6eeb7fd05dbd0fe"
+    },
+    {
+      "filename": "la_gaceta_19640608.pdf",
+      "url": "https://tzibalnaah.unah.edu.hn/bitstream/handle/123456789/8158/19640608.pdf?isAllowed=y&sequence=2",
+      "bytes": 2017154,
+      "sha256": "b6df9a2fc96efa40aa213266b4b384ba99b3fb8bd3fa4bac0e30a7ad8ba614ff"
+    }
+  ],
+  "missing_downloads": [],
+  "source_images_redistributed": false,
+  "holds": [
+    {
+      "source": "Virgin Islands Seaplane Shuttle14September1985",
+      "url": "https://www.timetableimages.com/ttimages/3g8509.htm",
+      "decision": "withheld_all",
+      "reason": "Departure-only timetable: no arrival clocks or durations. Harbours must not be normalized to land airports STT/STX. No generic flight durations used."
+    },
+    {
+      "source": "Caribbean Express15July1985",
+      "url": "https://www.timetableimages.com/ttimages/wh8507.htm",
+      "publication_index": "https://www.airtimes.com/cgat/usa/caribbeanexpress.htm",
+      "decision": "withheld_all",
+      "reason": "Publication index lists superseding1February1986 edition. Its interior has not been obtained; July1985 rows not projected into target window."
+    },
+    {
+      "source": "Airways International15December1985",
+      "url": "https://www.timetableimages.com/ttimages/4a/4a8512/4a8512.pdf",
+      "decision": "withheld_pending_stop_verification",
+      "reason": "Daily departure/arrival clocks present but no explicit stop column/nonstop statement. General conditions allow added/omitted stops. Physical legs not established to import standard."
+    },
+    {
+      "source": "Arrow Air14November1985",
+      "url": "https://www.timetableimages.com/ttimages/jw8511.htm",
+      "decision": "withheld_due_contemporary_service_suspension",
+      "reason": "Printed cover/interiors confirm1985, resolving older date confusion. White House news summary12February1986 pB-6 reports scheduled passenger service suspended; cannot project old published schedule into target window. No independently dated cargo/private charter clocks found.",
+      "supporting_urls": [
+        "https://www.reaganlibrary.gov/sites/default/files/2025-03/40-399-5730359-386-018-2025.pdf#page=18",
+        "https://law.justia.com/cases/federal/district-courts/FSupp/649/993/1631302/"
+      ],
+      "scope_caution": "Court finding concerns MAC military contracts: suspension7February, cargo-only return10April. Do not infer that every private charter/cargo activity ceased. News summary is a contemporary report, not individual flight evidence."
+    },
+    {
+      "source": "Prior LIAT and partner holds",
+      "decision": "retained",
+      "reason": "LI126 conflicting route/equipment, LI117 final clock inversion, LI168 unexplained asterisk, legal chronology and amendments remain unresolved. All older files retained. LI117 research erratum126 remains authoritative for its earlier misreading."
+    },
+    {
+      "source": "Nicaragua and more StThomas services",
+      "decision": "still_open",
+      "reason": "No new complete applicable dated clocks for these locations. No military, private, state, covert, charter or cargo movements inferred."
+    }
+  ],
+  "optional_panam_check": "Existing saved OCR around SanFrancisco/Santiago pp93–96 did not yield SanJuan/SanJose rows; no new PanAm claim or schedule from this search. Not a complete service census."
+}

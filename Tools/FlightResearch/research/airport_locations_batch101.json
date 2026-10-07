@@ -1,0 +1,32 @@
+{
+  "package": "v104",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "RDU",
+      "name": "Raleigh–Durham Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 35.878659,
+      "lon": -78.7873,
+      "coordinate_source": "https://ourairports.com/airports/KRDU/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.rdu.com/saying-goodbye-to-terminal-1-north-and-south/",
+      "historical_location_note": "Delta directory p261 identifies RDU as Raleigh/Durham. RDU's official history traces the current airport terminal area to its 1955 building and adjacent 1982 terminal; the American hub opened only in 1987. This supports continuity of the airport site, not a reconstruction of 1986 gates or later terminals. Modern coordinates mark the approximate airport area."
+    },
+    {
+      "id": "CRW",
+      "name": "Charleston–Yeager Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 38.3731,
+      "lon": -81.593201,
+      "coordinate_source": "https://ourairports.com/airports/KCRW/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flycrw.com/about-the-airport/",
+      "historical_location_note": "Delta directory p260 identifies Charleston WV / CRW as Kanawha County. The airport's official history identifies the Coonskin Ridge field opened as Kanawha Airport in 1947 and renamed Yeager in 1985. This is Charleston West Virginia, not Charleston South Carolina CHS. Modern coordinates are approximate airport-area markers, not reconstructed 1986 gates, terminals or runway layouts."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "Raleigh/Durham RDU and Charleston WV Yeager/Kanawha CRW. Historical airport-area continuity reviewed; no reconstructed gates, terminals or runway alignments."
+}

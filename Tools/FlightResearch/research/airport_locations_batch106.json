@@ -1,0 +1,47 @@
+{
+  "checked_on": "2026-10-01",
+  "airports": [
+    {
+      "id": "SLC",
+      "name": "Salt Lake City International (1986)",
+      "country": "us",
+      "timezone": "America/Denver",
+      "lat": 40.7883933333,
+      "lon": -111.9777733333,
+      "coordinate_source": "https://www.faa.gov/air_traffic/publications/atpubs/aip_html/part3_ad_2.0_utah.html",
+      "coordinate_record_id": "KSLC",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://slcairport.com/about-the-airport/airport-overview/airport-history/",
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201"
+      ],
+      "timetable_code": "SLC",
+      "location_note": "The airport authority dates the International name to 1968 and records terminal/runway work before 1986. Timetable printed pp. 208 and 261 identify Salt Lake City/SLC. Current FAA reference coordinates provide an approximate marker at the same airfield; they do not reconstruct a 1986 terminal, stand, runway threshold or flight path."
+    },
+    {
+      "id": "NAS",
+      "name": "Nassau International–Windsor Field (1986)",
+      "country": "bs",
+      "timezone": "America/Nassau",
+      "lat": 25.0391144,
+      "lon": -77.4663677,
+      "coordinate_source": "https://airnav.com/airport/MYNN",
+      "coordinate_record_id": "MYNN",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.doabahamas.com/about",
+        "https://nassaulpia.com/news/nad-begins-demolition-of-old-domestic-intl-terminal-at-lpia/",
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201"
+      ],
+      "timetable_code": "NAS",
+      "location_note": "The Bahamas Department of Aviation identifies Windsor Field as Nassau International from 1957 and dates the Lynden Pindling renaming to 2006; that later name is not backdated. Delta printed pp. 168–169 and 261 identify Nassau/NAS. AirNav publishes estimated modern FAA coordinates; used only as an approximate same-airfield marker, not a reconstructed 1986 gate, runway or aircraft position."
+    }
+  ],
+  "new_country": {
+    "id": "bs",
+    "name": "Bahamas",
+    "independence_before_window": "1973-07-10",
+    "source": "https://www.doabahamas.com/about"
+  },
+  "marker_precision": "Approximate same-airfield positions; 1986 gates, runway thresholds and layouts not reconstructed."
+}

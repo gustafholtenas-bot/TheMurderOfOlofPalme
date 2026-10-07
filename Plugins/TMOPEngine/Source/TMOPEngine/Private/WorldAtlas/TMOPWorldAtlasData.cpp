@@ -196,6 +196,15 @@ bool FTMOPWorldAtlasData::Load()
                     return Fail(TEXT("Invalid hierarchy node: ") + E.Id);
                 if ((*N)->HasField(TEXT("note")) && (!(*N)->TryGetStringField(TEXT("note"), Item.Note) || !E.Texts.Contains(Item.Note)))
                     return Fail(TEXT("Invalid hierarchy note: ") + E.Id);
+                if ((*N)->HasField(TEXT("portrait")))
+                {
+                    if (!(*N)->TryGetStringField(TEXT("portrait"), Item.Portrait) || Item.Portrait.IsEmpty() ||
+                        Item.Portrait.Contains(TEXT("/")) || Item.Portrait.Contains(TEXT("\\")) ||
+                        Item.Portrait.Contains(TEXT("..")) || Item.Portrait.Contains(TEXT(":")) ||
+                        !(Item.Portrait.EndsWith(TEXT(".jpg")) || Item.Portrait.EndsWith(TEXT(".png"))) ||
+                        !(*N)->TryGetStringField(TEXT("portrait_caption"), Item.PortraitCaption) || !E.Texts.Contains(Item.PortraitCaption))
+                        return Fail(TEXT("Invalid hierarchy portrait: ") + E.Id);
+                }
                 if ((*N)->HasField(TEXT("sources")) && !(*N)->TryGetStringArrayField(TEXT("sources"), Item.Sources))
                     return Fail(TEXT("Invalid hierarchy sources: ") + E.Id);
                 for (const FString& Url : Item.Sources) if (!Url.StartsWith(TEXT("https://")))

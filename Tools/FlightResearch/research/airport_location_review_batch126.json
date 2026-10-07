@@ -1,0 +1,62 @@
+{
+  "package": "v129",
+  "airport_records": [
+    {
+      "id": "CRU",
+      "name": "Carriacou – Lauriston (1986)",
+      "country": "gd",
+      "timezone": "America/Grenada",
+      "lat": 12.4761,
+      "lon": -61.472801,
+      "coordinate_source": "https://ourairports.com/airports/TGPZ/",
+      "coordinate_record_id": "TGPZ",
+      "timetable_code": "CRU",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.carriacou1968.com/opening-lauriston-airstrip/grand-opening-of-lauriston-airstrip/"
+      ],
+      "location_note": "Contemporary timetable names Carriacou. Bill Cameron first-person photographs and original opening programme place Lauriston opening in March1968. Use historical geographic name; no later honorary name or terminal configuration backdated. Coordinates are approximate airfield markers, not surveyed1986 terminal or runway positions. Later expansions are not reconstructed."
+    },
+    {
+      "id": "UNI",
+      "name": "Union Island – Clifton (1986)",
+      "country": "vc",
+      "timezone": "America/St_Vincent",
+      "lat": 12.600135,
+      "lon": -61.411945,
+      "coordinate_source": "https://ourairports.com/airports/TVSU/",
+      "coordinate_record_id": "TVSU",
+      "timetable_code": "UNI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.ais.unwater.org/ais/aiscm/getprojectdoc.php?docid=546"
+      ],
+      "location_note": "Contemporary1985 timetable establishes earlier Union Island service. Scott and Horrocks1993 UNEP CEP Technical Report27 section3.1 describes an existing airstrip being lengthened. The modern SVG Airport site lists opening1994; this does not date the first strip. Approximate Clifton airfield marker from modern reference, not a claim that the current extended/reclaimed runway existed in1986. Exact old runway alignment remains unverified. Coordinates are approximate airfield markers, not surveyed1986 terminal or runway positions. Later expansions are not reconstructed."
+    },
+    {
+      "id": "MQS",
+      "name": "Mustique (1986)",
+      "country": "vc",
+      "timezone": "America/St_Vincent",
+      "lat": 12.8879,
+      "lon": -61.180199,
+      "coordinate_source": "https://ourairports.com/airports/TVSM/",
+      "coordinate_record_id": "TVSM",
+      "timetable_code": "MQS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.mustique-island.com/history"
+      ],
+      "location_note": "Mustique Company history places construction/opening of Bamboo Airport under its1968 development entry. LIAT scan5 usesMQS; scan3 printsMSQ in the Mustique margin. Explicit island name controls normalization; no movement to Minsk. Coordinates are approximate airfield markers, not surveyed1986 terminal or runway positions. Later expansions are not reconstructed."
+    }
+  ],
+  "new_country_records": [],
+  "existing_airports_unchanged": 378,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed1986 runway/terminal positions.",
+  "historical_alignment_caveat": "UNI modern Clifton coordinates are approximate; old runway alignment not reconstructed. Current SVG1994 opening statement is qualified by earlier timetable and1993 runway-extension account."
+}

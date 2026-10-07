@@ -1,0 +1,90 @@
+{
+  "package": "v126",
+  "held_rows": [
+    {
+      "route": "LIAT selected14inactive schedules",
+      "decision": "reviewed_schedule_no_window_movement",
+      "schedules": [
+        "liat-548-ANU-SXM-1115-b123",
+        "liat-548-SXM-EIS-1220-b123",
+        "liat-549-EIS-SXM-1345-b123",
+        "liat-549-SXM-ANU-1445-b123",
+        "liat-558-ANU-SKB-1930-b123",
+        "liat-559-SKB-ANU-2010-b123",
+        "liat-560-ANU-SKB-1645-b123",
+        "liat-560-ANU-SKB-1840-b123",
+        "liat-560-SKB-EIS-1725-b123",
+        "liat-560-SKB-EIS-1920-b123",
+        "liat-561-EIS-SKB-1835-b123",
+        "liat-561-EIS-SKB-2030-b123",
+        "liat-561-SKB-ANU-1940-b123",
+        "liat-561-SKB-ANU-2135-b123"
+      ],
+      "reason": "LI548/549MondayThursdayendbeforewindow; SundayLI558/559/560/561outside; FebruaryTuesdaySaturdayLI560/561Saturdayeveningafterwindow. Remain reviewed schedules without fabricated movements."
+    },
+    {
+      "route": "LI540/541 holiday/January1–12 alternatives",
+      "decision": "wrong_effective_period_not_imported",
+      "reason": "Selected13Januaryonwardcolumns; holiday alternatives cannot replace Februaryweekday rules."
+    },
+    {
+      "route": "LI552/553 alternative columns",
+      "decision": "wrong_effective_period_not_imported",
+      "reason": "Selected13January–26Marchcolumns. December/earlyJanuaryand27March–6Aprilvariants excluded, including WednesdayLI552notactiveinFeb."
+    },
+    {
+      "route": "LI560/561 TuesdayFriday",
+      "decision": "expired_january_variant_not_imported",
+      "reason": "TuesdayFridaycolumn is effective through31January; replacementfrom1FebruaryoperatesTuesdaySaturday. No inventedFridayFeb28departures."
+    },
+    {
+      "route": "LIAT southern network onscans2–5",
+      "decision": "outside_this_partial_northern_import",
+      "reason": "Only physical legs whose endpoints are both amongANU/SKB/SXM/EIS/STX/STT/SJU imported. No complete-airlineclaim."
+    },
+    {
+      "route": "Four Island Air / Inter-Island Air Services / Montserrat Air Services",
+      "decision": "separate_operator_pages_pending",
+      "reason": "Scans6,7,8 have separate headings; not accepted underLIAT. Date/frequency/equipment and airport histories need their own review."
+    },
+    {
+      "route": "LIAT through journeys",
+      "decision": "split_at_each_timed_landing",
+      "reason": "ANU–STTviaSKB/SXM and SJU–ANUviaEIS/SKB are not extra nonstoproutes; only adjacenttimedcalls."
+    },
+    {
+      "route": "Nicaragua/Aeronica flight-simulator plans and June1986news",
+      "decision": "not_applicable_primary_clock_evidence",
+      "reason": "Simulationflightplans advertisedas1986referSummer1987; June1986hijackreport isoutsidewindow anddoesnotestablishFebruaryclockrows. Nothingimported."
+    }
+  ],
+  "regional_source_checks": [
+    {
+      "name": "LIAT complete W.T.No.40 scan",
+      "url": "https://www.timetableimages.com/ttimages/li8512.htm",
+      "decision": "primary_scan_partial_import",
+      "note": "Year1985inarchive, printed13Decemberandinternalwinterperiods; no overall printedexpiry."
+    },
+    {
+      "name": "LIAT publication index",
+      "url": "https://www.airtimes.com/cgat/ag/liat.htm",
+      "decision": "incomplete_index_not_expiry_proof",
+      "note": "ListsJuly1985thenDecember1986anddoesnotlistWT40. Cannot inferexpiryfromitsgap."
+    },
+    {
+      "name": "Aeronica1986simulationlisting",
+      "url": "https://www.simlivery.com/AI/",
+      "decision": "nonprimary_later_schedule_not_imported"
+    },
+    {
+      "name": "Aeronica7June1986report",
+      "url": "https://www.upi.com/Archives/1986/06/07/Unsuccessful-hijacking-in-Nicaragua/9007518500800/",
+      "decision": "outside_target_dates_no_import"
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 6,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_decisions_unchanged": true
+}

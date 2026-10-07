@@ -1,0 +1,255 @@
+{
+  "package": "v119",
+  "checked_on": "2026-10-01",
+  "window_start_utc": "1986-02-27T22:21:30Z",
+  "window_end_utc": "1986-03-01T22:21:30Z",
+  "scope": "UK including Northern Ireland (gb); Soviet Union within 1986 borders (su), covering all 15 union republics. Crown Dependencies remain separate territory records; Soviet-bloc countries outside the USSR are not merged into su.",
+  "before": {
+    "gb": {
+      "endpoint_movements": 556,
+      "domestic_movements": 140,
+      "international_movements": 416,
+      "directed_pairs": 175,
+      "airports": [
+        "LHR",
+        "LGW",
+        "GLA",
+        "BLK",
+        "HUY",
+        "MME",
+        "ABZ",
+        "NWI",
+        "LBA",
+        "LPL",
+        "MAN",
+        "NCL",
+        "PIK",
+        "BFS",
+        "EDI",
+        "STN",
+        "SOU",
+        "EXT",
+        "BRS",
+        "BOH",
+        "CWL",
+        "INV",
+        "BHX",
+        "EMA"
+      ],
+      "registered_home_operators": [
+        "british-airways",
+        "british-caledonian",
+        "gb-airways",
+        "british-midland",
+        "casair",
+        "jersey-european",
+        "dan-air",
+        "air-uk",
+        "london-european"
+      ],
+      "home_operators_with_movements": [
+        "british-airways",
+        "gb-airways",
+        "british-midland",
+        "casair",
+        "jersey-european",
+        "dan-air",
+        "air-uk"
+      ],
+      "movements_by_operator": {
+        "aer-lingus": 38,
+        "air-france": 40,
+        "air-uk": 173,
+        "air-zimbabwe": 3,
+        "british-airways": 116,
+        "british-midland": 16,
+        "casair": 5,
+        "dan-air": 85,
+        "delta": 4,
+        "gb-airways": 4,
+        "jersey-european": 2,
+        "klm": 2,
+        "northwest": 12,
+        "panam": 49,
+        "sabena": 2,
+        "sas": 5
+      }
+    },
+    "su": {
+      "endpoint_movements": 53,
+      "domestic_movements": 0,
+      "international_movements": 53,
+      "directed_pairs": 15,
+      "airports": [
+        "SVO",
+        "LED",
+        "KBP"
+      ],
+      "registered_home_operators": [
+        "aeroflot"
+      ],
+      "home_operators_with_movements": [
+        "aeroflot"
+      ],
+      "movements_by_operator": {
+        "aeroflot": 27,
+        "air-france": 7,
+        "interflug": 12,
+        "jal": 1,
+        "lufthansa": 2,
+        "malev": 4
+      }
+    }
+  },
+  "after": {
+    "gb": {
+      "endpoint_movements": 579,
+      "domestic_movements": 140,
+      "international_movements": 439,
+      "directed_pairs": 185,
+      "airports": [
+        "LHR",
+        "LGW",
+        "GLA",
+        "BLK",
+        "HUY",
+        "MME",
+        "ABZ",
+        "NWI",
+        "LBA",
+        "LPL",
+        "MAN",
+        "NCL",
+        "PIK",
+        "BFS",
+        "EDI",
+        "STN",
+        "SOU",
+        "EXT",
+        "BRS",
+        "BOH",
+        "CWL",
+        "INV",
+        "BHX",
+        "EMA"
+      ],
+      "registered_home_operators": [
+        "british-airways",
+        "british-caledonian",
+        "gb-airways",
+        "british-midland",
+        "casair",
+        "jersey-european",
+        "dan-air",
+        "air-uk",
+        "london-european"
+      ],
+      "home_operators_with_movements": [
+        "british-airways",
+        "british-caledonian",
+        "gb-airways",
+        "british-midland",
+        "casair",
+        "jersey-european",
+        "dan-air",
+        "air-uk"
+      ],
+      "movements_by_operator": {
+        "aer-lingus": 38,
+        "air-france": 48,
+        "air-uk": 173,
+        "air-zimbabwe": 3,
+        "british-airways": 120,
+        "british-caledonian": 8,
+        "british-midland": 16,
+        "casair": 5,
+        "dan-air": 88,
+        "delta": 4,
+        "gb-airways": 4,
+        "jersey-european": 2,
+        "klm": 2,
+        "northwest": 12,
+        "panam": 49,
+        "sabena": 2,
+        "sas": 5
+      }
+    },
+    "su": {
+      "endpoint_movements": 66,
+      "domestic_movements": 13,
+      "international_movements": 53,
+      "directed_pairs": 21,
+      "airports": [
+        "SVO",
+        "LED",
+        "KBP",
+        "MJZ",
+        "YKS",
+        "ULK",
+        "IKT",
+        "NYR",
+        "PYJ",
+        "SUY"
+      ],
+      "registered_home_operators": [
+        "aeroflot"
+      ],
+      "home_operators_with_movements": [
+        "aeroflot"
+      ],
+      "movements_by_operator": {
+        "aeroflot": 40,
+        "air-france": 7,
+        "interflug": 12,
+        "jal": 1,
+        "lufthansa": 2,
+        "malev": 4
+      }
+    }
+  },
+  "coverage_complete": false,
+  "remaining_total_known": false,
+  "completion_percentage": null,
+  "uk_census_summary": {
+    "visually_reviewed": true,
+    "scheduled_passenger_reporting_names": 25,
+    "scheduled_cargo_reporting_names": 5,
+    "non_scheduled_reporting_names": 36,
+    "distinct_reporting_names": 43,
+    "reporting_names_mapped_to_catalog": 8,
+    "reporting_names_with_movements": 7,
+    "reporting_names_without_movements": 36,
+    "not_registered_reporting_names": 35,
+    "scheduled_passenger_names_without_movements": 18
+  },
+  "soviet_republic_coverage": {
+    "Russian SFSR": [
+      "SVO",
+      "LED",
+      "MJZ",
+      "YKS",
+      "ULK",
+      "IKT",
+      "NYR",
+      "PYJ",
+      "SUY"
+    ],
+    "Ukrainian SSR": [
+      "KBP"
+    ],
+    "Byelorussian SSR": [],
+    "Uzbek SSR": [],
+    "Kazakh SSR": [],
+    "Georgian SSR": [],
+    "Azerbaijan SSR": [],
+    "Lithuanian SSR": [],
+    "Moldavian SSR": [],
+    "Latvian SSR": [],
+    "Kirghiz SSR": [],
+    "Tajik SSR": [],
+    "Armenian SSR": [],
+    "Turkmen SSR": [],
+    "Estonian SSR": []
+  },
+  "uk_to_ussr_direct_movements": 0
+}

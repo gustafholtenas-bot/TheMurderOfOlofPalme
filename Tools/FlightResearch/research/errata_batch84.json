@@ -1,0 +1,27 @@
+{
+  "package": "v87",
+  "checked_on": "2026-09-30",
+  "corrections": [
+    {
+      "schedule": "comair-1592-CVG-DTW-0931-b72",
+      "changed_movement_ids": [
+        "comair-1592-CVG-DTW-0931-b72@1986-02-28",
+        "comair-1592-CVG-DTW-0931-b72@1986-03-01"
+      ],
+      "old_flight": "1592",
+      "correct_flight": "1582",
+      "origin": "CVG",
+      "destination": "DTW",
+      "unchanged_departure_local": "09:31",
+      "unchanged_arrival_local": "10:41",
+      "source": "delta-19860201",
+      "schedule_page": "50",
+      "itinerary_page": "264",
+      "explanation": "Magnified city table shows 1582; itinerary 1582 is RIC–ROA–CVG–DTW, while 1592 is STL–CVG–TYS. Only flight label and notes changed; stable IDs, service grouping and all times retained.",
+      "supersedes_research_rows": [
+        "comair_cincinnati_batch72.tsv: source_row 3, CVG–DTW 09:31 row and references to 1592 on that segment"
+      ]
+    }
+  ],
+  "historical_research_files_retained": true
+}

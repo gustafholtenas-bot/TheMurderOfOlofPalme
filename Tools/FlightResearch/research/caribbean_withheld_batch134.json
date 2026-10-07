@@ -1,0 +1,69 @@
+{
+  "package": "v137",
+  "prior_holds_retained_from": "caribbean_withheld_batch133.json",
+  "previous_held_reports_preserved_as_history": true,
+  "new_conflicting_accepted_rows": [],
+  "excluded_through_rows": [
+    {
+      "scan_page": 4,
+      "column": 2,
+      "flight": "465",
+      "origin": "MEM",
+      "destination": "MKE",
+      "departure": "12:30",
+      "arrival": "15:05",
+      "frequency": "D",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; not an extra nonstop movement."
+    },
+    {
+      "scan_page": 4,
+      "column": 2,
+      "flight": "393",
+      "origin": "MEM",
+      "destination": "ORD",
+      "departure": "09:05",
+      "arrival": "11:45",
+      "frequency": "X7",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; not an extra nonstop movement."
+    },
+    {
+      "scan_page": 5,
+      "column": 1,
+      "flight": "387",
+      "origin": "MEM",
+      "destination": "ORD",
+      "departure": "12:40",
+      "arrival": "15:13",
+      "frequency": "D",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; not an extra nonstop movement."
+    },
+    {
+      "scan_page": 5,
+      "column": 4,
+      "flight": "54",
+      "origin": "ORD",
+      "destination": "MEM",
+      "departure": "16:15",
+      "arrival": "18:49",
+      "frequency": "D",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; not an extra nonstop movement."
+    }
+  ],
+  "zero_movement_schedules": [],
+  "EXP_policy": "Separate Express AirlinesI/Simmons operators explicitly identified in scan6. No EXP rows selected in this mainline batch.",
+  "new_regional_search_performed": true,
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "remaining_republic_gaps": [
+    "Remaining mainline network and separately attributed EXP services.",
+    "Separately printed LAS–SAN/SAN–LAS and SFO–SMF/SMF–SFO legs are future work; do not import MEM–SAN or MEM–SMF ST1 summaries as nonstop.",
+    "Amendments and actual-operation evidence.",
+    "Earlier withheld841MOB–GPT missing physical row remains unchanged."
+  ]
+}

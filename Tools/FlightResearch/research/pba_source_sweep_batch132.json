@@ -1,0 +1,39 @@
+{
+  "package": "v135",
+  "checked_on": "2026-10-02",
+  "source": "pba-northern-19860112",
+  "scope": "Visible single-number/no-stop-remark physical rows in both Northern System January12 interiors. Includes two held contradictory789 rows in visual counts.",
+  "visible_by_origin": {
+    "BOS": 31,
+    "BTV": 8,
+    "HYA": 31,
+    "MVY": 17,
+    "ACK": 19,
+    "EWB": 20,
+    "LGA": 11,
+    "PVC": 9
+  },
+  "accepted_by_origin": {
+    "BOS": 30,
+    "BTV": 8,
+    "HYA": 30,
+    "MVY": 17,
+    "ACK": 19,
+    "EWB": 20,
+    "LGA": 11,
+    "PVC": 9
+  },
+  "held_by_origin": {
+    "BOS": 1,
+    "HYA": 1
+  },
+  "total_visible_rows": 146,
+  "accepted_rows": 144,
+  "held_rows": 2,
+  "cumulative_pba_schemas": 543,
+  "cumulative_pba_movements": 637,
+  "airline_network_complete": false,
+  "actual_operations_verified": false,
+  "amendments_complete": false,
+  "excluded": "Through-stop and connecting itineraries; inferred intermediate clocks; unexamined supplements and actual-operation evidence. Earlier Southern intermediate-clock gaps preserved."
+}

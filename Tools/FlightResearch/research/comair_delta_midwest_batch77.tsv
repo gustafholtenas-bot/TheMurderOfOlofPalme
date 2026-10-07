@@ -1,0 +1,65 @@
+source_row	schedule	action	airline	flight	origin	destination	departure_local	arrival_local	arrival_day_offset	printed_frequency	decoded_days	printed_stops_or_via	printed_page	footnote	source	source_effective_from	source_effective_to	import_valid_from	import_valid_to	decision_note
+1	comair-1602-CLE-CMH-0950-b77	new_schedule	comair	1602	CLE	CMH	09:50	10:30	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+2	comair-1724-CLE-CMH-1140-b77	new_schedule	comair	1724	CLE	CMH	11:40	12:22	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+3	comair-1561-CLE-CMH-1555-b77	new_schedule	comair	1561	CLE	CMH	15:55	16:35	0	X67	12345	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+4	comair-1562-CMH-CLE-0815-b77	new_schedule	comair	1562	CMH	CLE	08:15	08:55	0	X67	12345	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+5	comair-1627-CMH-CLE-1050-b77	new_schedule	comair	1627	CMH	CLE	10:50	11:30	0	X67	12345	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+6	comair-1672-CMH-CLE-1705-b77	new_schedule	comair	1672	CMH	CLE	17:05	17:45	0	X6	123457	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+7	comair-1581-CLE-IND-0730-b77	new_schedule	comair	1581	CLE	IND	07:30	08:45	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+8		excluded_connection	connection	271/1527	CLE	IND	08:00	10:05	0	X67	12345	CVG	53		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+9		excluded_connection	comair	1609/1567	CLE	IND	10:50	13:30	0	X67	12345	CVG	53		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+10	comair-1545-CLE-IND-1545-b77	new_schedule	comair	1545	CLE	IND	15:45	17:05	0	X67	12345	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+11		excluded_connection	connection	479/1560	CLE	IND	17:00	19:10	0	X6	123457	CVG	53		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+12	comair-1547-CLE-IND-1830-b77	new_schedule	comair	1547	CLE	IND	18:30	19:45	0	X6	123457	0	53		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+13		excluded_connection	connection	1603/1140	CLE	IND	21:10	01:05	1	X6	123457	CVG	53		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+14		excluded_through_service	delta	1112	IND	CLE	07:05	08:50	0	D	1234567	1	110		delta-19860201	1986-02-01				One intermediate stop; no direct physical segment inferred.
+15	comair-1588-IND-CLE-0900-b77	new_schedule	comair	1588	IND	CLE	09:00	10:15	0	X67	12345	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+16		excluded_connection	comair	1566/1611	IND	CLE	11:00	13:15	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+17	comair-1684-IND-CLE-1410-b77	new_schedule	comair	1684	IND	CLE	14:10	15:30	0	X67	12345	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+18		excluded_through_service	comair	1655	IND	CLE	16:00	18:05	0	X6	123457	1	110		delta-19860201	1986-02-01				One intermediate stop; no direct physical segment inferred.
+19		excluded_connection	comair	1545/1716	IND	CLE	17:15	19:35	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+20		excluded_connection	connection	1734/1164	IND	CLE	18:20	20:30	0	X6	123457	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+21	comair-1639-IND-CLE-2000-b77	new_schedule	comair	1639	IND	CLE	20:00	21:15	0	X56	12347	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+22		excluded_connection	connection	1112/1710	IND	DTW	07:05	09:20	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+23		excluded_connection	connection	1112/1582	IND	DTW	07:05	10:41	0	X7	123456	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+24		excluded_connection	comair	1673/1582	IND	DTW	08:10	10:41	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+25		excluded_connection	comair	1566/1643	IND	DTW	11:00	14:25	0	X67	12345	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+26	delta-692-IND-DTW-1447-b77	new_schedule	delta	692	IND	DTW	14:47	15:35	0	D	1234567	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+27	delta-1124-IND-DTW-1745-b77	new_schedule	delta	1124	IND	DTW	17:45	18:33	0	D	1234567	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+28		excluded_connection	connection	1734/254	IND	DTW	18:20	20:30	0	X6	123457	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+29	comair-1560-IND-DTW-1925-b77	new_schedule	comair	1560	IND	DTW	19:25	20:40	0	X6	123457	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+30	comair-1574-IND-DTW-2010-b77	new_schedule	comair	1574	IND	DTW	20:10	21:25	0	X56	12347	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+31	delta-427-IND-DTW-2135-b77	new_schedule	delta	427	IND	DTW	21:35	22:23	0	X6	123457	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+32	delta-581-DTW-IND-0735-b77	new_schedule	delta	581	DTW	IND	07:35	08:26	0	X7	123456	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+33		excluded_connection	connection	561/1527	DTW	IND	08:00	10:05	0	X67	12345	CVG	74		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+34	comair-1711-DTW-IND-1120-b77	new_schedule	comair	1711	DTW	IND	11:20	12:30	0	X67	12345	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+35	delta-1123-DTW-IND-1410-b77	new_schedule	delta	1123	DTW	IND	14:10	15:01	0	D	1234567	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+36		excluded_connection	comair	1552/1691	DTW	IND	15:30	18:05	0	X67	12345	CVG	74		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+37		excluded_connection	connection	619/1560	DTW	IND	17:00	19:10	0	X6	123457	CVG	74	4: Effective Feb. 12, 1986	delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+38	delta-1153-DTW-IND-1925-b77	new_schedule	delta	1153	DTW	IND	19:25	20:16	0	X6	123457	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+39	comair-1699-DTW-IND-2045-b77	new_schedule	comair	1699	DTW	IND	20:45	21:59	0	5	5	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+40	comair-1699-DTW-IND-2055-b77	new_schedule	comair	1699	DTW	IND	20:55	22:10	0	X56	12347	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+41	delta-560-CMH-DAY-1020-b77	new_schedule	delta	560	CMH	DAY	10:20	10:58	0	D	1234567	0	62		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+42	delta-336-IND-FWA-1000-b77	new_schedule	delta	336	IND	FWA	10:00	10:28	0	D	1234567	0	111		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+43	delta-543-FWA-IND-0858-b77	new_schedule	delta	543	FWA	IND	08:58	09:25	0	D	1234567	0	89		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+44	comair-1683-DTW-MKE-0645-b77	new_schedule	comair	1683	DTW	MKE	06:45	07:00	0	X67	12345	0	74		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+45		excluded_through_service	comair	1574	MKE	DTW	17:34	21:25	0	X56	12347	1	154		delta-19860201	1986-02-01				One intermediate stop; no direct physical segment inferred.
+46		excluded_connection	connection	1538/372	MKE	DTW	18:55	21:41	0	X6	123457	ORD	154		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+47	delta-345-CLE-ATL-0620-b77	new_schedule	delta	345	CLE	ATL	06:20	07:49	0	D	1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+48		excluded_connection	connection	1101/805	CLE	ATL	06:55	09:19	0	D	1234567	CVG	52		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+49		excluded_connection	connection	1600/741	CLE	ATL	07:20	10:45	0	X7	123456	DAY	52		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+50	delta-1171-CLE-ATL-0935-b77	new_schedule	delta	1171	CLE	ATL	09:35	11:07	0	D	1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+51	delta-485-CLE-ATL-1250-b77	new_schedule	delta	485	CLE	ATL	12:50	14:22	0	D	1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+52	delta-1135-CLE-ATL-1610-b77	new_schedule	delta	1135	CLE	ATL	16:10	17:42	0	D	1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+53	delta-373-CLE-ATL-1955-b77	new_schedule	delta	373	CLE	ATL	19:55	21:27	0	D	1234567	0	52		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+54	delta-455-CMH-ATL-0625-b77	new_schedule	delta	455	CMH	ATL	06:25	07:41	0	D	1234567	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+55		excluded_connection	connection	1530/805	CMH	ATL	07:00	09:19	0	X7	123456	CVG	61		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+56	delta-503-CMH-ATL-0935-b77	new_schedule	delta	503	CMH	ATL	09:35	10:55	0	D	1234567	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+57	delta-439-CMH-ATL-1300-b77	new_schedule	delta	439	CMH	ATL	13:00	14:20	0	D	1234567	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+58	delta-249-CMH-ATL-1625-b77	new_schedule	delta	249	CMH	ATL	16:25	17:44	0	D	1234567	0	61		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+59		excluded_through_service	delta	261	CMH	ATL	19:50	22:04	0	D	1234567	1	61		delta-19860201	1986-02-01				One intermediate stop; no direct physical segment inferred.
+60		excluded_connection	connection	1112/805	IND	ATL	07:05	09:19	0	D	1234567	CVG	110		delta-19860201	1986-02-01				Printed connecting itinerary; no direct physical segment imported.
+61	delta-543-IND-ATL-0950-b77	new_schedule	delta	543	IND	ATL	09:50	11:05	0	D	1234567	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+62	delta-781-IND-ATL-1125-b77	new_schedule	delta	781	IND	ATL	11:25	12:40	0	D	1234567	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+63	delta-909-IND-ATL-1625-b77	new_schedule	delta	909	IND	ATL	16:25	17:40	0	D	1234567	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.
+64	delta-1153-IND-ATL-2040-b77	new_schedule	delta	1153	IND	ATL	20:40	21:55	0	D	1234567	0	110		delta-19860201	1986-02-01		1986-02-27	1986-03-01	Individually sourced nonstop row; no dated footnote.

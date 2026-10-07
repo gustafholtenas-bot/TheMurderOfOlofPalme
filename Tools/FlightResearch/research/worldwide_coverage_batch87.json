@@ -1,0 +1,685 @@
+{
+  "package": "v90",
+  "checked_on": "2026-09-30",
+  "registered_airlines": 95,
+  "airlines_with_movements": 49,
+  "airlines_without_movements": 46,
+  "verified_complete_airlines": 0,
+  "global_1986_denominator_verified": false,
+  "global_coverage_percentage": null,
+  "total_movements": 5575,
+  "research_status_counts": {
+    "partial": 49,
+    "scan_found": 3,
+    "not_searched": 26,
+    "no_matching_edition": 2,
+    "catalog_found": 15
+  },
+  "airlines": [
+    {
+      "id": "golden-air",
+      "name": "Golden Air",
+      "movements": 12,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "sas",
+      "name": "SAS Scandinavian Airlines",
+      "movements": 78,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "linjeflyg",
+      "name": "Linjeflyg",
+      "movements": 0,
+      "research_status": "scan_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "swedair",
+      "name": "Swedair",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "braathens",
+      "name": "Braathens SAFE",
+      "movements": 28,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "wideroe",
+      "name": "Widerøe",
+      "movements": 0,
+      "research_status": "no_matching_edition",
+      "operator_census_verified": false
+    },
+    {
+      "id": "finnair",
+      "name": "Finnair",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "icelandair",
+      "name": "Icelandair",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "british-airways",
+      "name": "British Airways",
+      "movements": 116,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "british-caledonian",
+      "name": "British Caledonian",
+      "movements": 0,
+      "research_status": "scan_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "aer-lingus",
+      "name": "Aer Lingus",
+      "movements": 54,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-france",
+      "name": "Air France",
+      "movements": 307,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "uta",
+      "name": "UTA",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "lufthansa",
+      "name": "Lufthansa",
+      "movements": 60,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "interflug",
+      "name": "Interflug",
+      "movements": 12,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "klm",
+      "name": "KLM",
+      "movements": 27,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "sabena",
+      "name": "Sabena",
+      "movements": 19,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "swissair",
+      "name": "Swissair",
+      "movements": 68,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "austrian",
+      "name": "Austrian Airlines",
+      "movements": 4,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "alitalia",
+      "name": "Alitalia",
+      "movements": 48,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "iberia",
+      "name": "Iberia",
+      "movements": 26,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "tap",
+      "name": "TAP Air Portugal",
+      "movements": 7,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "olympic",
+      "name": "Olympic Airways",
+      "movements": 6,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "lot",
+      "name": "LOT Polish Airlines",
+      "movements": 1,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "csa",
+      "name": "CSA Czechoslovak Airlines",
+      "movements": 1,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "malev",
+      "name": "Malév",
+      "movements": 7,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "tarom",
+      "name": "Tarom",
+      "movements": 2,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "aeroflot",
+      "name": "Aeroflot",
+      "movements": 29,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "panam",
+      "name": "Pan American World Airways",
+      "movements": 328,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "delta",
+      "name": "Delta Air Lines",
+      "movements": 1467,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "american",
+      "name": "American Airlines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "united",
+      "name": "United Airlines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "twa",
+      "name": "Trans World Airlines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "eastern",
+      "name": "Eastern Air Lines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "northwest",
+      "name": "Northwest Orient Airlines",
+      "movements": 116,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "continental",
+      "name": "Continental Airlines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-wisconsin",
+      "name": "Air Wisconsin",
+      "movements": 442,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "midstate",
+      "name": "Midstate Airlines",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-midwest",
+      "name": "Air Midwest",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "norcanair",
+      "name": "Norcanair",
+      "movements": 17,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-canada",
+      "name": "Air Canada",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "cp-air",
+      "name": "CP Air",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "el-al",
+      "name": "El Al",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "iran-air",
+      "name": "Iran Air",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "iraqi-airways",
+      "name": "Iraqi Airways",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "libyan-arab",
+      "name": "Libyan Arab Airlines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "saa",
+      "name": "South African Airways",
+      "movements": 8,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-zimbabwe",
+      "name": "Air Zimbabwe",
+      "movements": 43,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "pia",
+      "name": "Pakistan International Airlines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "caac",
+      "name": "CAAC",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "jal",
+      "name": "Japan Air Lines",
+      "movements": 34,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "thai",
+      "name": "Thai International",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "singapore",
+      "name": "Singapore Airlines",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "malaysian",
+      "name": "Malaysian Airline System",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "qantas",
+      "name": "Qantas",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-new-zealand",
+      "name": "Air New Zealand",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-nauru",
+      "name": "Air Nauru",
+      "movements": 2,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "lap",
+      "name": "Líneas Aéreas Paraguayas",
+      "movements": 10,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "ladeco",
+      "name": "Ladeco",
+      "movements": 18,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "lanchile",
+      "name": "LANChile",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "varig",
+      "name": "Varig",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "aerolineas",
+      "name": "Aerolíneas Argentinas",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "aeromexico",
+      "name": "Aeromexico",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "cubana",
+      "name": "Cubana",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "aeronica",
+      "name": "Aeronica",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "taca",
+      "name": "TACA",
+      "movements": 0,
+      "research_status": "not_searched",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-botswana",
+      "name": "Air Botswana",
+      "movements": 4,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "usmc",
+      "name": "US Marine Corps",
+      "movements": 1,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "gb-airways",
+      "name": "GB Airways",
+      "movements": 12,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "norving",
+      "name": "Norving",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "maersk-air",
+      "name": "Maersk Air",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "cimber-air",
+      "name": "Cimber Air",
+      "movements": 0,
+      "research_status": "no_matching_edition",
+      "operator_census_verified": false
+    },
+    {
+      "id": "british-midland",
+      "name": "British Midland",
+      "movements": 16,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "casair",
+      "name": "Casair",
+      "movements": 5,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "jersey-european",
+      "name": "Jersey European Airways",
+      "movements": 2,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "dan-air",
+      "name": "Dan-Air",
+      "movements": 103,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-uk",
+      "name": "Air UK",
+      "movements": 177,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "crossair",
+      "name": "Crossair",
+      "movements": 3,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-algerie",
+      "name": "Air Algérie",
+      "movements": 4,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "london-european",
+      "name": "London European Airways",
+      "movements": 0,
+      "research_status": "scan_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-business",
+      "name": "Air Business A/S",
+      "movements": 1,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-inter",
+      "name": "Air Inter",
+      "movements": 238,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "heli-air-monaco",
+      "name": "Heli Air Monaco",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "luxair",
+      "name": "Luxair",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "cargolux",
+      "name": "Cargolux",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "tyrolean",
+      "name": "Tyrolean Airways",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "rhein-helicopter",
+      "name": "Rhein-Helicopter AG",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "air-malta",
+      "name": "Air Malta",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "balkan",
+      "name": "Balkan Bulgarian Airlines",
+      "movements": 4,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "jat",
+      "name": "JAT Yugoslav Airlines",
+      "movements": 4,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "inex-adria",
+      "name": "Inex-Adria / Adria Airways",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "cyprus-airways",
+      "name": "Cyprus Airways",
+      "movements": 0,
+      "research_status": "catalog_found",
+      "operator_census_verified": false
+    },
+    {
+      "id": "turkish-airlines",
+      "name": "THY Turkish Airlines",
+      "movements": 4,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "southwest",
+      "name": "Southwest Airlines",
+      "movements": 1219,
+      "research_status": "partial",
+      "operator_census_verified": false
+    },
+    {
+      "id": "comair",
+      "name": "COMAIR",
+      "movements": 381,
+      "research_status": "partial",
+      "operator_census_verified": false
+    }
+  ]
+}

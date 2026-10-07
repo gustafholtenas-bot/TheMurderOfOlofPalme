@@ -1,0 +1,19 @@
+{
+  "package": "v117",
+  "changed_prior_files": [
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/europe_country_index.json"
+  ],
+  "byte_identical_prior_file_count": 826,
+  "prior_code_byte_identical": true,
+  "prior_research_and_errata_byte_identical": true,
+  "all_prior_movement_objects_unchanged": true,
+  "all_prior_schedule_objects_unchanged": true,
+  "missing_prior_files": [],
+  "data_only": true,
+  "original_baseline_archive_sha256": "1d554d05d28f0708b1d4a2e14fc3f660860345f14b6f4e3e08dbe06db998a79c"
+}

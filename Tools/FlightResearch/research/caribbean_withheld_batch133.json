@@ -1,0 +1,57 @@
+{
+  "package": "v136",
+  "prior_holds_retained_from": "caribbean_withheld_batch132.json",
+  "previous_held_reports_preserved_as_history": true,
+  "new_conflicting_accepted_rows": [],
+  "excluded_through_rows": [
+    {
+      "scan_page": 4,
+      "column": 1,
+      "flight": "804",
+      "origin": "MEM",
+      "destination": "CHA",
+      "departure": "15:40",
+      "arrival": "18:35",
+      "frequency": "67",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; no extra nonstop."
+    },
+    {
+      "scan_page": 6,
+      "column": 2,
+      "flight": "287",
+      "origin": "TYS",
+      "destination": "MEM",
+      "departure": "18:05",
+      "arrival": "18:55",
+      "frequency": "67",
+      "ST": 1,
+      "reason": "Through itinerary; separately printed TYS–CHA and CHA–MEM physical rows catalogued but both outside Saturday window."
+    }
+  ],
+  "zero_movement_schedules": [
+    "republic-airlines-287-CHA-MEM-1900-b133",
+    "republic-airlines-287-TYS-CHA-1805-b133"
+  ],
+  "zero_movement_reviews": [
+    {
+      "schedule": "republic-airlines-287-CHA-MEM-1900-b133",
+      "reason": "Saturday/Sunday only; Saturday departure after17:21:30Eastern window end. Sunday not in window."
+    },
+    {
+      "schedule": "republic-airlines-287-TYS-CHA-1805-b133",
+      "reason": "Saturday/Sunday only; Saturday departure after17:21:30Eastern window end. Sunday not in window."
+    }
+  ],
+  "EXP_policy": "Separate Express AirlinesI/Simmons operators explicitly identified in scan6. No EXP rows selected in this mainline batch.",
+  "new_regional_search_performed": true,
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "remaining_republic_gaps": [
+    "Remaining mainline network and separately attributed EXP services.",
+    "Amendments and actual-operation evidence.",
+    "Earlier withheld841MOB–GPT missing physical row remains unchanged."
+  ]
+}

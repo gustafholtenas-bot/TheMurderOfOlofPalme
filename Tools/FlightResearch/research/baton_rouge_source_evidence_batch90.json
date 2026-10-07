@@ -1,0 +1,50 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    14,
+    25,
+    26,
+    64,
+    66,
+    189
+  ],
+  "airport_directory_printed_page": 260,
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "14": 10,
+    "25": 15,
+    "26": 16,
+    "64": 35,
+    "66": 36,
+    "189": 97,
+    "260": 133,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "38 rows in eight complete selected city-direction tables visually reviewed: 19 new nonstop schedules, seven connections and twelve through-stop rows excluded.",
+    "All accepted rows are Delta mainline flights. Two accepted rows are X6: 1192 BTR–ATL and 929 ATL–BTR. All other accepted rows are daily. No accepted row has a dated footnote.",
+    "Under the legend p4, star means off-peak fare, not next-day arrival. All accepted flights arrive the same local calendar day; the excluded PNS–DFW 20:20 connection arrives at 00:05 next day.",
+    "BTR, DFW, MOB and PNS use UTC−6; ATL UTC−5. Independent fixed-offset and weekday calculation matches every generated movement.",
+    "ATL–BTR 929 is Friday only in the window: Thursday is before the window and X6 excludes Saturday. Its times and weekdays are not replaced by a presumed daily pattern. Every other accepted schedule contributes two movements.",
+    "BTR–ATL 804 arrives at 15:09; BTR–DFW 923 and 211 arrive at 11:09 and 21:09. These minute digits were checked at enlarged resolution.",
+    "PNS–DFW 923 and 991 have one stop at BTR; both physical legs are sourced separately. ATL–BTR 923 and 991 stop at PNS, whose earlier ATL–PNS legs remain unchanged.",
+    "BTR–ATL 636 and 980 stop at MOB; new BTR–MOB legs connect with earlier MOB–ATL legs. DFW–PNS 584, 928 and 387 retain two, one and one stops respectively and are not imported as nonstop flights.",
+    "Eleven same-flight-number segment transitions involving new legs have positive ground intervals of 20–69 minutes, verified against existing segments. This does not establish aircraft identity.",
+    "BTR directory p260 identifies Metropolitan airport. The airport authority connects the current site to former Harding Field. The current coordinates are approximate airport-area markers.",
+    "No reverse nonstop services BTR–PNS or MOB–BTR are inferred from the opposite direction. Birmingham/Montgomery and other city tables remain for further research.",
+    "All prior movements, schedules, airlines and airports unchanged; prior corrections and held conflicts retained. Later amendments and timetable end date unverified."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "package": "v105",
+  "checked_on": "2026-10-01",
+  "airports": [
+    {
+      "id": "HTS",
+      "name": "Huntington/Ashland–Tri-State Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 38.366699,
+      "lon": -82.557999,
+      "coordinate_source": "https://ourairports.com/airports/KHTS/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.tristateairport.com/wp-content/uploads/2024/03/HTS-Master-Plan-Study-Final-Report-1.pdf",
+      "historical_location_note": "Delta directory p260 identifies HTS as Huntington/Ashland, Tri-State. Airport master plan March 2014, section 1.2.2 / p1-6, identifies the current field opened in 1952 and terminal dedicated in 1961, expanded in 1979. Earlier Kyle Field and Lawrence County Airpark are separate sites. Coordinates mark the approximate airport area, not 1986 gates or runway layouts."
+    },
+    {
+      "id": "FAY",
+      "name": "Fayetteville–Grannis Field (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 34.991199,
+      "lon": -78.880302,
+      "coordinate_source": "https://ourairports.com/airports/KFAY/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.fayettevillenc.gov/City-Departments/Airport",
+      "historical_location_note": "Delta directory p260 identifies Fayetteville/Fort Bragg NC as FAY, Grannis Field. City airport history distinguishes the old Raleigh Road field from the current site opened in 1949; Concourse B opened only in March 1987. This is not Fayetteville Arkansas FYV or military Pope Field. Coordinates mark the approximate airport area, not later terminal additions or 1986 gates."
+    },
+    {
+      "id": "ORF",
+      "name": "Norfolk International Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 36.895341,
+      "lon": -76.201,
+      "coordinate_source": "https://ourairports.com/airports/KORF/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.norfolkairport.com/wp-content/uploads/2021/10/ORF-History-Updated-27Oct21-2.pdf",
+      "historical_location_note": "Delta directory p261 identifies Norfolk/Virginia Beach/Williamsburg as ORF, International. Official airport history identifies the current site opened in 1938, new terminal operation from January 1974 and International renaming in January 1976. Not Norfolk naval airfield or Newport News. Coordinates are approximate site markers, not reconstructed historical gates."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "HTS Tri-State, FAY Grannis Field and ORF International. Current airport site continuity supported by official histories; no reconstructed historical gates, terminals or runways."
+}

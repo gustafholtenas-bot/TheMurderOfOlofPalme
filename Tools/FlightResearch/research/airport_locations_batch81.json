@@ -1,0 +1,20 @@
+{
+  "package": "v84",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "SDF",
+      "name": "Louisville–Standiford Field (1986)",
+      "country": "us",
+      "timezone": "America/Kentucky/Louisville",
+      "lat": 38.1706,
+      "lon": -85.735076,
+      "coordinate_source": "https://ourairports.com/airports/KSDF/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flylouisville.com/corporate/sdf-history/",
+      "historical_location_note": "Commercial flights moved from Bowman Field to Standiford Field in 1947. A new landside terminal opened in 1985; the airside terminal opened in 1989 and the International name dates to 1995. Modern coordinates provide an approximate airport-area marker only: later runway reconstruction means this is not a precise 1986 runway, gate or aircraft position."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinate used as approximate marker for the independently reviewed historical airport site.",
+  "historical_scope": "Standiford Field, not Bowman Field. Present-day runway arrangement and the later International/Muhammad Ali names are not projected back into 1986."
+}

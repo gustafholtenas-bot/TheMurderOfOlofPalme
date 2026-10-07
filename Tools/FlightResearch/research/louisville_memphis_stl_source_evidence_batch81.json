@@ -1,0 +1,60 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    16,
+    51,
+    137,
+    138,
+    139,
+    147,
+    148,
+    207
+  ],
+  "rechecked_existing_schedule_printed_pages": [
+    51,
+    206
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264,
+    265
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "16": 11,
+    "51": 28,
+    "137": 71,
+    "138": 72,
+    "139": 72,
+    "147": 76,
+    "148": 77,
+    "206": 106,
+    "207": 106,
+    "262": 134,
+    "263": 134,
+    "264": 135,
+    "265": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "58 rows in ten complete selected direction tables visually reviewed: 37 new nonstop schedules, six existing schedules rechecked, 15 connecting itineraries excluded.",
+    "Blank frequency means daily; X6 excludes Saturday; X67 excludes Saturday and Sunday. 5, 6 and 7 mean Friday only, Saturday only and Sunday only.",
+    "COMAIR is identified by the original page4 operator key: flight numbers 1525–1749. No new operators invented.",
+    "COMAIR CVG–SDF 1608 and 1693 are Sunday-only schedules and correctly produce no movements in the Thursday–Saturday window.",
+    "STL–MEM 639 operates Saturday only; the printed 6 is not an exception marker.",
+    "MEM–STL times verified in magnification: 670 12:25–13:20, 1166 15:20–16:15, 638 18:55–19:50.",
+    "SDF–MEM 1101 09:00–09:03 crosses from UTC-5 to UTC-6 and lasts 63 minutes, not three minutes.",
+    "All accepted arrivals are on the same local calendar day. Source page footnotes do not attach to any accepted row.",
+    "Printed flight itineraries cross-check accepted flight numbers and physical segment sequences. These do not prove a particular aircraft identity.",
+    "COMAIR 1733 has explicitly printed SDF–CVG–SDF routing; weekdays are taken from each leg separately.",
+    "Six St Louis–Cincinnati rows were already imported in batch73 and have identical times and weekdays; no duplicate schedules or movements are created.",
+    "All v83 movement objects and prior schedule records unchanged; prior held source conflict 597 remains held.",
+    "Later amendments and timetable end date not verified; scheduled service is not proof of operation."
+  ]
+}

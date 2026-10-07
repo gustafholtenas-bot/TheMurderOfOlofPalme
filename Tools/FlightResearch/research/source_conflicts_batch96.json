@@ -1,0 +1,47 @@
+{
+  "package": "v99",
+  "batch": 96,
+  "source": "delta-19860201",
+  "checked_on": "2026-09-30",
+  "conflicts": [
+    {
+      "id": "asa-1412-HSV-ATL-departure",
+      "status": "held_not_imported",
+      "airline": "atlantic-southeast",
+      "flight": "1412",
+      "origin": "HSV",
+      "destination": "ATL",
+      "printed_page": 107,
+      "pdf_page": 56,
+      "printed_departure": "800a",
+      "printed_arrival": "800a",
+      "printed_frequency": "X7",
+      "printed_stops": "0",
+      "literal_duration_minutes": -60,
+      "supporting_rows": [
+        {
+          "origin": "HSV",
+          "destination": "ABY",
+          "printed_departure": "600a",
+          "printed_arrival": "945a",
+          "flight": "1412/1201",
+          "via": "ATL",
+          "printed_frequency": "X7",
+          "printed_page": 107
+        },
+        {
+          "origin": "HSV",
+          "destination": "AGS",
+          "printed_departure": "600a",
+          "printed_arrival": "930a",
+          "flight": "1412/428",
+          "via": "ATL",
+          "printed_frequency": "X7",
+          "printed_page": 107
+        }
+      ],
+      "decision": "The nonstop row conflicts with the same-flight connecting rows. 06:00 is a plausible intended departure but is not imported without a reliable resolution. No next-day arrival or silent correction.",
+      "next_action": "Locate an amendment, clearer original, or independently reliable flight-specific timetable confirming the HSV–ATL departure."
+    }
+  ]
+}

@@ -23,6 +23,13 @@ def validate_entry(entry, flag_ids):
             raise ValueError(f"{entry['id']}: unknown relationship")
         if node['label'] not in entry['text'] or ('note' in node and node['note'] not in entry['text']):
             raise ValueError(f"{entry['id']}: missing localized office text")
+        if 'portrait' in node:
+            portrait = node['portrait']
+            if (not isinstance(portrait, str) or not portrait or
+                    any(s in portrait for s in ('/', '\\', '..', ':')) or
+                    not portrait.lower().endswith(('.jpg', '.png')) or
+                    node.get('portrait_caption') not in entry['text']):
+                raise ValueError(f"{entry['id']}: invalid portrait filename or missing attribution")
         if any(not url.startswith('https://') for url in node.get('sources', [])):
             raise ValueError(f"{entry['id']}: invalid source URL")
         if node['relation'] == 'reports_to' and (not node['parent'] or not node.get('sources')):

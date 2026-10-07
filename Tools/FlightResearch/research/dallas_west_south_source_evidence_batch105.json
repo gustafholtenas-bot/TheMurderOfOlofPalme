@@ -1,0 +1,82 @@
+{
+  "source": "delta-19860201",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "effective_from": "1986-02-01",
+  "effective_to": null,
+  "later_amendments_verified": false,
+  "visual_review": true,
+  "reviewed_printed_pages": [
+    65,
+    66,
+    67,
+    118,
+    124,
+    135,
+    140,
+    170,
+    194,
+    213,
+    215,
+    223,
+    230,
+    238
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page_rule": "PDF page floor((printed page + 6) / 2); even printed page left, odd right.",
+  "row_scope": "All explicit nonstop rows within the selected headings; connecting and through itineraries not transcribed or counted.",
+  "row_count": 91,
+  "city_direction_headings": 22,
+  "directed_airport_pairs": 24,
+  "frequency_legend": "D encodes blank/daily, X excludes listed weekdays; 1 Monday through 7 Sunday. Star denotes off-peak fare, not arrival-date rollover.",
+  "timezones_fixed_hours_for_import_dates": {
+    "DFW": -6,
+    "MCI": -6,
+    "LBB": -6,
+    "MSY": -6,
+    "TUL": -6,
+    "LAS": -8,
+    "LAX": -8,
+    "ONT": -8,
+    "SAN": -8,
+    "SFO": -8,
+    "SEA": -8,
+    "PHX": -7,
+    "TPA": -5
+  },
+  "dated_footnotes_on_selected_rows": [
+    {
+      "footnote": "6",
+      "effective_from": "1986-03-02",
+      "legends_printed_pages": [
+        65,
+        135
+      ],
+      "excluded": [
+        "DFW–LAX 589",
+        "LAX–DFW 500"
+      ]
+    },
+    {
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "legends_printed_pages": [
+        65,
+        193
+      ],
+      "accepted": [
+        "DFW–PHX 1019",
+        "PHX–DFW 1012"
+      ]
+    }
+  ],
+  "special_cases": {
+    "DFW–MSY 852": "23:21–00:30, next local day.",
+    "SEA–DFW": "832 except Saturday; 874 Saturday only. Saturday 874 overlaps the end of the window and is included.",
+    "Los Angeles/Ontario": "Printed L suffix denotes LAX, O denotes ONT; separate airport records retained.",
+    "exclusions": "DFW–LAX 589 and LAX–DFW 500 begin 2 March; retained in raw audit only, with no active schedule or movement.",
+    "stop_column": "Only explicit stops=0 rows selected; DFW–SAN 487, SAN–DFW 423, LBB–DFW 1098 and TUL–DFW 1028 have stops and are not imported as nonstop."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "package": "v85",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "LEX",
+      "name": "Lexington–Blue Grass Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 38.035066,
+      "lon": -84.606738,
+      "coordinate_source": "https://ourairports.com/airports/KLEX/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.bluegrassairport.com/wp-content/uploads/2025/08/MasterPlan_Chapter1_DIGITAL.pdf",
+      "historical_location_note": "The airport authority master plan, printed pp1-3 and 1-4, describes acquisition of the Versailles Road site in 1940, construction from 1941 and commercial service from 1946. Blue Grass Field was renamed Blue Grass Airport in 1984. The terminal opened in 1976. Modern coordinates are an approximate marker for that airport site, not a precise 1986 runway, gate or aircraft position."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinate used as approximate marker for the independently reviewed historical airport site.",
+  "historical_scope": "Airport authority master plan pp1-3–1-4 supports the site and pre-1986 name change. No current runway or gate geometry projected back to 1986."
+}

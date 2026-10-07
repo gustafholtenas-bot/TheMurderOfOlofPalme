@@ -1,0 +1,65 @@
+{
+  "package": "v121",
+  "checked_on": "2026-10-01",
+  "sources": [
+    {
+      "id": "el-al-19851027-cover",
+      "url": "https://www.ebay.co.uk/itm/198672080349",
+      "edition": "Winter1985/6 issue one",
+      "valid_from": "1985-10-27",
+      "valid_to": "1986-03-29",
+      "accepted_rows": 19,
+      "images": [
+        {
+          "url": "https://i.ebayimg.com/images/g/lRMAAOSwDJZlrXgQ/s-l1600.jpg",
+          "sha256": "def6b1194b8637107b42c908d9ae18d6883c8fb7d71966adb0d1b9af5d7e1422",
+          "bytes": 501316
+        },
+        {
+          "url": "https://i.ebayimg.com/images/g/eocAAOSwj7llrXgR/s-l1600.jpg",
+          "sha256": "3705844afc54e08d8946363d809ec0ad96d610343d3f1f2e61b9c76fd9953f87",
+          "bytes": 1426355
+        },
+        {
+          "url": "https://i.ebayimg.com/images/g/9PEAAOSw13tlrXgS/s-l1600.jpg",
+          "sha256": "e8c64e658c4eaa5be09fda244974b6aeaad2907607474ec1e4a745f308c2e266",
+          "bytes": 1163824
+        }
+      ],
+      "panels": [
+        "from tel-aviv",
+        "to tel-aviv"
+      ],
+      "legend": "Su,Mo,Tu,We,Th,Fr,Sa; star=747,circle=767,square=707,triangle=737; note1=next-day arrival; all times local"
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_import": false,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "TLV": 2,
+    "AMS": 1,
+    "ATH-ELLINIKON": 2,
+    "FRA": 1,
+    "IST-ATATURK": 2,
+    "LHR": 0,
+    "NBO": 3,
+    "JFK": -5,
+    "FCO": 1,
+    "VIE": 1,
+    "ZRH": 1,
+    "BRU": 1,
+    "ORY": 1
+  },
+  "source_id_policy": "Upgrade existing same-edition cover source; no duplicate source record created.",
+  "airport_identity_policy": "All existing historical-airfield markers retained, including Athens Ellinikon and Istanbul Atatürk; modern replacement fields not used.",
+  "important_boundaries": [
+    "LY511 TLV–NBO leaves27February20:00UTC, before the window, but remains airborne at its start.",
+    "LY001 TLV–JFK leaves28February01:00local=27February23:00UTC.",
+    "LY004 JFK–TLV leaves27February18:00local=27February23:00UTC.",
+    "LY005 TLV–AMS leaves1March21:30UTC and overlaps the final51m30s.",
+    "LY318 LHR–TLV leaves1March22:00UTC and overlaps the final21m30s."
+  ],
+  "previous_held_istanbul_rows_unchanged": true,
+  "istanbul_note": "This El Al source says local times and contains no UTC+3 heading. Historical ZoneInfo is UTC+2 and agrees with the independent calculation. Prior Pan Am timezone conflict remains held."
+}

@@ -1,0 +1,612 @@
+{
+  "source": "UK Civil Aviation Authority, UK Airlines monthly statistics, February 1986",
+  "archive_page": "https://www.caa.co.uk/data-and-analysis/uk-aviation-market/airlines/uk-airline-data/uk-airline-data-1983-1997/",
+  "download_url": "https://www.caa.co.uk/Documents/Download/3921/53f9c657-c091-4e8f-86c1-72ee76351893/2629",
+  "archive_sha256": "443d6c30ccece2870ef9312047d664994fe6b62e74d523bd5babc88a49ec1218",
+  "pdf_member": "198602 UK Airlines.pdf",
+  "pdf_sha256": "5bacebfcbdef20155b32043eb02d14b60a475bba296945e8dd7d6bad64bf4ee9",
+  "tables": [
+    "3.1 All Scheduled Services, PDF8 / printed3",
+    "4.1 All Non-Scheduled Services, PDF11 / printed6"
+  ],
+  "visually_reviewed": true,
+  "scheduled_passenger_reporting_names": 25,
+  "scheduled_cargo_reporting_names": 5,
+  "non_scheduled_reporting_names": 36,
+  "distinct_reporting_names": 43,
+  "reporting_names_mapped_to_catalog": 8,
+  "reporting_names_with_movements": 7,
+  "reporting_names_without_movements": 36,
+  "not_registered_reporting_names": 35,
+  "scheduled_passenger_names_without_movements": 18,
+  "geography_note": "CAA reporting population includes Crown Dependency operators; it is not identical to the catalog gb endpoint or domicile filter. GB Airways is outside this named-table crosswalk and is not evidence of an omitted UK operator.",
+  "limitations": [
+    "Reporting names are not independently verified distinct legal operating certificates; Goodman Air Taxis+Mam Intl is explicitly a combined label.",
+    "Table4.1 excludes air taxi operations. Table15 is aggregated by aircraft type, so this is not a complete census of every air-taxi operator.",
+    "Does not enumerate foreign airlines flying to the UK, military movements or all private flights.",
+    "Monthly activity cannot establish operation during the exact 48-hour window.",
+    "Table1 rolling year is not used as a February-active list; Tradewinds ceased in December1985.",
+    "No movements are synthesized from aggregate counts."
+  ],
+  "operators": [
+    {
+      "caa_reporting_name": "Air Bridge Carriers",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": true,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Air Ecosse",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Air Europe",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Air UK",
+      "catalog_airline_id": "air-uk",
+      "catalog_registered": true,
+      "movements_in_v119": 177,
+      "scheduled_passenger": true,
+      "scheduled_cargo": true,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Expand incomplete timetable coverage"
+    },
+    {
+      "caa_reporting_name": "Airways Intl Cymru",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Anglo Cargo",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Atlantic Air Transport",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Aurigny Air Services",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Birmingham Executive Airways",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": false,
+      "source_pdf_pages": [
+        8
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Bond Helicopters",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Bristow Helicopters",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Britannia Airways",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "British Air Ferries",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": true,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "British Airtours",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "British Airways",
+      "catalog_airline_id": "british-airways",
+      "catalog_registered": true,
+      "movements_in_v119": 120,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Expand incomplete timetable coverage"
+    },
+    {
+      "caa_reporting_name": "British Airways Helis",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "British Caledonian Airways",
+      "catalog_airline_id": "british-caledonian",
+      "catalog_registered": true,
+      "movements_in_v119": 8,
+      "scheduled_passenger": true,
+      "scheduled_cargo": true,
+      "non_scheduled": false,
+      "source_pdf_pages": [
+        8
+      ],
+      "next_action": "Expand incomplete timetable coverage"
+    },
+    {
+      "caa_reporting_name": "British Caledonian Helis",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "British Island Airways",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "British Midland",
+      "catalog_airline_id": "british-midland",
+      "catalog_registered": true,
+      "movements_in_v119": 16,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Expand incomplete timetable coverage"
+    },
+    {
+      "caa_reporting_name": "Brown Air Services",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": false,
+      "source_pdf_pages": [
+        8
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Brymon Airways",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Cal Air International",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Casair Aviation",
+      "catalog_airline_id": "casair",
+      "catalog_registered": true,
+      "movements_in_v119": 5,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": false,
+      "source_pdf_pages": [
+        8
+      ],
+      "next_action": "Expand incomplete timetable coverage"
+    },
+    {
+      "caa_reporting_name": "Channel Express (Air Svcs)",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": true,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Connectair",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Dan Air Services",
+      "catalog_airline_id": "dan-air",
+      "catalog_registered": true,
+      "movements_in_v119": 106,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Expand incomplete timetable coverage"
+    },
+    {
+      "caa_reporting_name": "Euroair Transport",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Goodman Air Taxis+Mam Intl",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Guernsey Airlines",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Heavylift Cargo Airlines",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Interflight Berrard Av",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Interlink Aviation",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": false,
+      "source_pdf_pages": [
+        8
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Jersey European Airways",
+      "catalog_airline_id": "jersey-european",
+      "catalog_registered": true,
+      "movements_in_v119": 2,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": false,
+      "source_pdf_pages": [
+        8
+      ],
+      "next_action": "Expand incomplete timetable coverage"
+    },
+    {
+      "caa_reporting_name": "Loganair",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "London European Airways",
+      "catalog_airline_id": "london-european",
+      "catalog_registered": true,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": false,
+      "source_pdf_pages": [
+        8
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Malinair",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Manx Airlines",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Monarch Airlines",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "North Scottish Helicopters",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Orion Airways",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Peregrine Air Services",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": false,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    },
+    {
+      "caa_reporting_name": "Virgin Atlantic Airways",
+      "catalog_airline_id": null,
+      "catalog_registered": false,
+      "movements_in_v119": 0,
+      "scheduled_passenger": true,
+      "scheduled_cargo": false,
+      "non_scheduled": true,
+      "source_pdf_pages": [
+        8,
+        11
+      ],
+      "next_action": "Find date-valid timetable or actual movement record; monthly totals do not provide individual routes/times"
+    }
+  ]
+}

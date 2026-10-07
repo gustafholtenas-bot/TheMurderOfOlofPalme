@@ -1,0 +1,82 @@
+{
+  "package": "v138",
+  "checked_on": "2026-10-02",
+  "source": "republic-19860214-employee",
+  "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+  "pdf_sha256": "dbfa243a56d5b0ce387f4e7e4a11288615cfe6d720c919ba0a9c0a82c73f6cfa",
+  "pdf_bytes": 12018907,
+  "scan_pages": 7,
+  "images": [
+    {
+      "scan_page": 1,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=1",
+      "sha256": "48baef14884380a77a26edf8eaa558b767271f66c600ca496c61991e75f5b06d"
+    },
+    {
+      "scan_page": 2,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=2",
+      "sha256": "dc4655330a574db40c202c47125e42ad737d1d42188790c62d9f911f6e285e8c"
+    },
+    {
+      "scan_page": 3,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=3",
+      "sha256": "09eb264c6c1623375312a48a30d076da0c196f94b85641255ddb3416582c56b7"
+    },
+    {
+      "scan_page": 4,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=4",
+      "sha256": "df00b97e7ebb60cd95dab3ab0a0813679ef4bc50abf83d12a155965bd1876ba0"
+    },
+    {
+      "scan_page": 5,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=5",
+      "sha256": "e2620ec7dd137b151f4cb54e35cd733ede412414861e2808eb719b93a4481b76"
+    },
+    {
+      "scan_page": 6,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=6",
+      "sha256": "72c24a13a6a0871670e785a7d869a2e9484d812a31144d688ff6043d005db49c"
+    },
+    {
+      "scan_page": 7,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=7",
+      "sha256": "2f7eda88392bcf87c946998d3744849de206013599b9e5c859e3b6b6512652be"
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "BOS": -5,
+    "DTW": -5,
+    "DCA": -5,
+    "IAD": -5,
+    "JFK": -5,
+    "LGA": -5,
+    "PHL": -5,
+    "DFW": -6,
+    "MCI": -6,
+    "MKE": -6,
+    "ORD": -6,
+    "STL": -6,
+    "PHX": -7,
+    "LAS": -8,
+    "LAX": -8,
+    "SAN": -8,
+    "SEA": -8,
+    "SFO": -8
+  },
+  "frequency_policy": "Blank=daily;6=Saturday;X6=except Saturday;X7=except Sunday;X67=Monday–Friday.",
+  "stop_policy": "Blank ST only. Separately printed legs retain own weekdays and flight numbers. No EXP or one-stop summary rows in the36selected headings.",
+  "timezone_policy": "Fixed offsets UTC-5/-6/-7/-8 verified against each airport timezone on all3import dates. Local-time convention; no explicit all-times-local legend found.",
+  "important_boundaries": [
+    "584PHX–DTW18:35–00:10 arrives next local day;338LAX–DTW00:25–07:30 arrives same local day.",
+    "Saturday531DTW–LAS19:30–20:35 is after17:21:30Eastern window end, yielding zero movements.",
+    "326DTW–DCA16:00–17:19 arrives2min30sec before Thursday start;773DTW–LGA15:55–17:25 arrives3min30sec after start.",
+    "720DFW–DTW16:20CST departs1min30sec before Saturday end; include Thursday/Friday/Saturday intervals.",
+    "JFK–DTW652 is X6 andDC9, verified in enlarged original before import. IAD–DTW713 and STL–DTW174 equipmentDC9.",
+    "MKE–DTW212/202 andDTW–MKE759/699 are distinct printed flight numbers with matching clock pairs; retain per-row equipment/frequency.",
+    "All146durations and dated UTC intervals checked against separate manually reviewed durations/dates; same original, not a second source/reviewer."
+  ],
+  "previous_held_conflicts_unchanged": true
+}

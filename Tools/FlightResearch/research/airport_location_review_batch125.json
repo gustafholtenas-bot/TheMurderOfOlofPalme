@@ -1,0 +1,101 @@
+{
+  "package": "v128",
+  "airport_records": [
+    {
+      "id": "BBQ",
+      "name": "Barbuda – Codrington (1986)",
+      "country": "ag",
+      "timezone": "America/Antigua",
+      "lat": 17.636067,
+      "lon": -61.827175,
+      "coordinate_source": "https://ourairports.com/airports/TAPH/",
+      "coordinate_record_id": "TAPH",
+      "timetable_code": "BBQ",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://caa.gov.tt/wp-content/uploads/2024/10/VALID-AIP-SUPS-2.pdf"
+      ],
+      "location_note": "Old Codrington site, not modern Burton-Nibbs. AIP Supplement20/24 explicitly closes TAPH on2October2024 and opens TAPB on3October2024. IATA BBQ has transferred; use the closed TAPH coordinate record, not AG-0001. Coordinates are approximate airfield markers, not surveyed1986 terminal or runway positions. Later expansions are not reconstructed."
+    },
+    {
+      "id": "NEV",
+      "name": "Nevis – Newcastle (1986)",
+      "country": "kn",
+      "timezone": "America/St_Kitts",
+      "lat": 17.2057,
+      "lon": -62.589901,
+      "coordinate_source": "https://ourairports.com/airports/TKPN/",
+      "coordinate_record_id": "TKPN",
+      "timetable_code": "NEV",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.naspakn.com/contact"
+      ],
+      "location_note": "Nevis airport at Newcastle; geographic name used without backdating the later Vance W. Amory name or current runway/terminal facilities. Coordinates are approximate airfield markers, not surveyed1986 terminal or runway positions. Later expansions are not reconstructed."
+    },
+    {
+      "id": "AXA",
+      "name": "Anguilla – Wallblake (1986)",
+      "country": "ai",
+      "timezone": "America/Anguilla",
+      "lat": 18.204773,
+      "lon": -63.05383,
+      "coordinate_source": "https://ourairports.com/airports/TQPF/",
+      "coordinate_record_id": "TQPF",
+      "timetable_code": "AXA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.prnewswire.com/news-releases/wallblake-airport-renamed-clayton-j-lloyd-international-airport-98956504.html"
+      ],
+      "location_note": "Anguilla Tourist Board press release dates the Clayton J. Lloyd renaming to4July2010. Use the old Wallblake name for1986. Coordinates are approximate airfield markers, not surveyed1986 terminal or runway positions. Later expansions are not reconstructed."
+    },
+    {
+      "id": "MNI",
+      "name": "Montserrat – Trants (1986)",
+      "country": "ms",
+      "timezone": "America/Montserrat",
+      "lat": 16.7589,
+      "lon": -62.156399,
+      "coordinate_source": "https://ourairports.com/airports/MS-0001/",
+      "coordinate_record_id": "MS-0001",
+      "timetable_code": "MNI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.gov.ms/wp-content/uploads/2020/07/Historic-Cultural-Sights.pdf"
+      ],
+      "location_note": "Old Blackburne/W.H.Bramble airport at Trants, historical ICAO TRPM. Montserrat government heritage booklet printedpage23 describes its replacement by the new airport at Geralds in2005. Do not use current TRPG/MNI coordinates. Neutral geographic name avoids assuming the date of the Bramble renaming. Coordinates are approximate airfield markers, not surveyed1986 terminal or runway positions. Later expansions are not reconstructed."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "ai",
+      "name": {
+        "sv": "Anguilla",
+        "en": "Anguilla",
+        "en_source": "Anguilla"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "ms",
+      "name": {
+        "sv": "Montserrat",
+        "en": "Montserrat",
+        "en_source": "Montserrat"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 374,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed1986 runway/terminal positions.",
+  "relocated_iata_codes": {
+    "BBQ": "TAPH old Codrington, not AG-0001 Burton-Nibbs/TAPB",
+    "MNI": "MS-0001 old Trants/TRPM, not TRPG Geralds/John A. Osborne"
+  }
+}

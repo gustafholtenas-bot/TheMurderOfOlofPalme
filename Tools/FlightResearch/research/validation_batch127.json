@@ -1,0 +1,143 @@
+{
+  "package": "v130",
+  "baseline_archive_sha256": "f0027ca6f94ef4e6368871d5ccbe2155b4ad1f90314a888b3d71f53fcd0a9708",
+  "previous_movements_unchanged": 9042,
+  "previous_schedules_unchanged": 5377,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 381,
+  "previous_countries_unchanged": 119,
+  "modified_airline_ids": [],
+  "modified_previous_source_ids": [],
+  "independent_manual_rows": 10,
+  "independent_utc_movements_verified": 18,
+  "independent_utc_expected": {
+    "challenge-international-105-MIA-BZE-1315-b127@1986-02-28": [
+      "1986-02-28T18:15:00Z",
+      "1986-02-28T20:15:00Z"
+    ],
+    "challenge-international-105-MIA-BZE-1315-b127@1986-03-01": [
+      "1986-03-01T18:15:00Z",
+      "1986-03-01T20:15:00Z"
+    ],
+    "challenge-international-106-BZE-MIA-1615-b127@1986-02-27": [
+      "1986-02-27T22:15:00Z",
+      "1986-02-28T00:10:00Z"
+    ],
+    "challenge-international-106-BZE-MIA-1615-b127@1986-02-28": [
+      "1986-02-28T22:15:00Z",
+      "1986-03-01T00:10:00Z"
+    ],
+    "challenge-international-106-BZE-MIA-1615-b127@1986-03-01": [
+      "1986-03-01T22:15:00Z",
+      "1986-03-02T00:10:00Z"
+    ],
+    "challenge-international-301-MIA-KIN-0745-b127@1986-02-28": [
+      "1986-02-28T12:45:00Z",
+      "1986-02-28T14:20:00Z"
+    ],
+    "challenge-international-301-MIA-KIN-0745-b127@1986-03-01": [
+      "1986-03-01T12:45:00Z",
+      "1986-03-01T14:20:00Z"
+    ],
+    "challenge-international-308-KIN-MIA-2240-b127@1986-02-27": [
+      "1986-02-28T03:40:00Z",
+      "1986-02-28T05:15:00Z"
+    ],
+    "challenge-international-308-KIN-MIA-2240-b127@1986-02-28": [
+      "1986-03-01T03:40:00Z",
+      "1986-03-01T05:15:00Z"
+    ],
+    "challenge-international-307-MIA-MBJ-2000-b127@1986-02-27": [
+      "1986-02-28T01:00:00Z",
+      "1986-02-28T02:30:00Z"
+    ],
+    "challenge-international-307-MIA-MBJ-2000-b127@1986-02-28": [
+      "1986-03-01T01:00:00Z",
+      "1986-03-01T02:30:00Z"
+    ],
+    "challenge-international-302-MBJ-MIA-1030-b127@1986-02-28": [
+      "1986-02-28T15:30:00Z",
+      "1986-02-28T17:00:00Z"
+    ],
+    "challenge-international-302-MBJ-MIA-1030-b127@1986-03-01": [
+      "1986-03-01T15:30:00Z",
+      "1986-03-01T17:00:00Z"
+    ],
+    "challenge-international-101-MIA-SAP-1255-b127@1986-02-28": [
+      "1986-02-28T17:55:00Z",
+      "1986-02-28T20:05:00Z"
+    ],
+    "challenge-international-101-MIA-SAP-1255-b127@1986-03-01": [
+      "1986-03-01T17:55:00Z",
+      "1986-03-01T20:05:00Z"
+    ],
+    "challenge-international-102-SAP-MIA-1610-b127@1986-02-27": [
+      "1986-02-27T22:10:00Z",
+      "1986-02-28T00:10:00Z"
+    ],
+    "challenge-international-102-SAP-MIA-1610-b127@1986-02-28": [
+      "1986-02-28T22:10:00Z",
+      "1986-03-01T00:10:00Z"
+    ],
+    "challenge-international-102-SAP-MIA-1610-b127@1986-03-01": [
+      "1986-03-01T22:10:00Z",
+      "1986-03-02T00:10:00Z"
+    ]
+  },
+  "independent_local_source_dates": {
+    "challenge-international-105-MIA-BZE-1315-b127": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "challenge-international-106-BZE-MIA-1615-b127": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "challenge-international-301-MIA-KIN-0745-b127": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "challenge-international-308-KIN-MIA-2240-b127": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "challenge-international-307-MIA-MBJ-2000-b127": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "challenge-international-302-MBJ-MIA-1030-b127": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "challenge-international-101-MIA-SAP-1255-b127": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "challenge-international-103-MIA-SAP-1255-b127": [],
+    "challenge-international-102-SAP-MIA-1610-b127": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "challenge-international-104-SAP-MIA-1610-b127": []
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "same_source_duplicate_movements": 0,
+  "ground_times_reviewed": true,
+  "ground_time_review_note": "No adjacent physical legs with same flight number imported; missing internal stop clocks remain held. No aircraft circulation inferred.",
+  "zero_movement_schedules_reviewed": true,
+  "wednesday_variant_separation_reviewed": true,
+  "midnight_arrivals_reviewed": true,
+  "offsets_verified_against_zoneinfo": {
+    "MIA": -5,
+    "BZE": -6,
+    "KIN": -5,
+    "MBJ": -5,
+    "SAP": -6
+  },
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "Data,18 independent UTC intervals,weekday variants,midnight arrivals,window boundaries,duplicates and prior-object preservation passed; all automated checks passed; Unreal not run."
+}

@@ -1,0 +1,32 @@
+{
+  "package": "v101",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "PFN",
+      "name": "Panama City–Bay County Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 30.212099,
+      "lon": -85.6828,
+      "coordinate_source": "https://ourairports.com/airports/US-9348/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.iflybeaches.com/documents/a-decade-of-growth-for-ecp-op-ed-written-by-del-lee-chairman-of-the-board",
+      "historical_location_note": "Delta directory p261 identifies PFN, Panama City Florida, as Bay County. The airport authority confirms that ECP replaced PFN on 23 May 2010 at a new site. The OurAirports closed-airport record US-9348 identifies the former PFN/KPFN site. These coordinates mark the approximate old airport area, not modern ECP or reconstructed 1986 gates/runways."
+    },
+    {
+      "id": "GSP",
+      "name": "Greenville–Spartanburg Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 34.895699,
+      "lon": -82.218903,
+      "coordinate_source": "https://ourairports.com/airports/KGSP/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://gspairport.com/our-history/",
+      "historical_location_note": "Delta directory p260 identifies GSP as Greenville/Spartanburg. The airport history records the shared airport opening at Flatwood in 1962, replacing separate city airports. This marker is GSP near Greer, not Greenville Downtown (GMU), Spartanburg Downtown (SPA), or Greenville Mississippi (GLH). Modern coordinates mark the approximate airport area, not a reconstructed 1986 gate or terminal."
+    }
+  ],
+  "coordinate_kind": "OurAirports coordinates mark the former PFN site and the current GSP airport area; historical sites separately reviewed.",
+  "historical_scope": "PFN is former Panama City–Bay County, not ECP. GSP is Greenville–Spartanburg near Greer, not GMU, SPA or GLH. Approximate airport areas, not reconstructed 1986 gates."
+}

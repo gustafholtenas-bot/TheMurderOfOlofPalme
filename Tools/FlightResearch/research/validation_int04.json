@@ -1,0 +1,112 @@
+{
+  "package": "v141_INT04",
+  "based_on": "v141_INT03",
+  "date": "2026-10-02",
+  "new_schedules": 28,
+  "new_movements": 34,
+  "new_foreign_domestic_movements": 0,
+  "total_movements": 11469,
+  "selected_international_and_swedish_domestic": 2231,
+  "excluded_foreign_domestic": 9238,
+  "sweden_endpoint_movements": 87,
+  "sweden_international_inbound": 41,
+  "sweden_international_outbound": 40,
+  "swedish_domestic": 6,
+  "new_sweden_movements": 0,
+  "all_11435_prior_movements_unchanged": true,
+  "all_6795_prior_schedules_unchanged": true,
+  "all_prior_airports_countries_airlines_observations_movements_unchanged": true,
+  "duplicate_movement_ids": 0,
+  "new_physical_duplicates": 0,
+  "new_endpoint_time_duplicates": 0,
+  "independent_fixed_offset_expansion_matches": true,
+  "coverage_complete": false,
+  "new_airports": [
+    "TUN"
+  ],
+  "new_countries": [
+    "tn"
+  ],
+  "new_airlines": [
+    "tunisair"
+  ],
+  "registered_airlines": 112,
+  "airlines_with_movements": 70,
+  "registered_airports": 397,
+  "registered_countries": 122,
+  "registered_sources": 95,
+  "total_schedules": 6823,
+  "unreal_runtime_tested": false,
+  "interval_start_utc": "1986-02-27T22:21:30Z",
+  "interval_end_utc": "1986-03-01T22:21:30Z",
+  "counts_by_airline": {
+    "tunisair": 20,
+    "air-france": 14
+  },
+  "counts_by_new_pair": [
+    {
+      "origin": "BSL",
+      "destination": "TUN",
+      "movements": 1
+    },
+    {
+      "origin": "LYS",
+      "destination": "TUN",
+      "movements": 3
+    },
+    {
+      "origin": "MRS",
+      "destination": "TUN",
+      "movements": 4
+    },
+    {
+      "origin": "NCE",
+      "destination": "TUN",
+      "movements": 3
+    },
+    {
+      "origin": "ORY",
+      "destination": "TUN",
+      "movements": 5
+    },
+    {
+      "origin": "TLS",
+      "destination": "TUN",
+      "movements": 1
+    },
+    {
+      "origin": "TUN",
+      "destination": "BSL",
+      "movements": 1
+    },
+    {
+      "origin": "TUN",
+      "destination": "LYS",
+      "movements": 3
+    },
+    {
+      "origin": "TUN",
+      "destination": "MRS",
+      "movements": 4
+    },
+    {
+      "origin": "TUN",
+      "destination": "NCE",
+      "movements": 3
+    },
+    {
+      "origin": "TUN",
+      "destination": "ORY",
+      "movements": 5
+    },
+    {
+      "origin": "TUN",
+      "destination": "TLS",
+      "movements": 1
+    }
+  ],
+  "python_tests_passed": 20,
+  "generator_checks_passed": 3,
+  "required_compiled_crash_fix": "f23b73a",
+  "data_only_delivery": true
+}

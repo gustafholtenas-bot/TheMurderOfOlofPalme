@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "package": "v79",
-  "checked_on": "2026-09-30",
-  "requested_workflow": "Land för land i Europa; börja Sverige, fortsätt Norge och övriga Norden, därefter övriga europeiska länder och utvalda territorier.",
-  "next_country_id": "cy",
+  "package": "v141_SE01",
+  "checked_on": "2026-10-02",
+  "requested_workflow": "Fortsätt med internationella flyg och svenskt inrikes, särskilt inkommande Sverige. Inga nya inrikesflyg utanför Sverige.",
+  "next_country_id": "se",
   "coverage_complete": false,
   "counting": "Fysiska rörelser med start eller mål i kataloglandet, oavsett operatörens hemland. Inrikes räknas en gång. Landrader överlappar. Noll betyder inga inlagda rörelser. Sovjetunionen och Turkiet räknas som hela katalogländer, inklusive asiatiska ändpunkter.",
   "supplementary_areas": {
@@ -26,8 +26,8 @@
       "catalog_country_id": "se",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "reviewed_on": "2026-09-29",
-      "next_action": "Andra riktade genomgången dokumenterad i SWEDEN_FOLLOWUP_BATCH46.md. SAS/Linjeflyg och Swedair saknar fortfarande kompletta granskade vinteravgångssidor för Sverige. Nya omslag och arkivhänvisningar räcker inte. A6774-01 pekar på en separat originaltidtabell; den behöver återfinnas med teckenförklaring, ändringar och fysiska delsträcksuppgifter. De tidigare 87 svenska ändpunktsrörelserna är oförändrade. Regional-, charter-, frakt-, privat-, stats-, militärtrafik och faktiska överflygningar är ofullständigt utredda.",
+      "reviewed_on": "2026-10-02",
+      "next_action": "Fortsätt SAS/Linjeflyg/Finnair-vintertabeller. Följ upp CFV210:60425 Visby28feb12:00 och A6774-00 bilagor1mars. Kalibrera R130/R134/radarunderlag innan överflygningar identifieras. Se swedish_airspace_leads_se01.json.",
       "review_pass": 2
     },
     {
@@ -76,8 +76,8 @@
       "catalog_country_id": "gb",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "reviewed_on": "2026-09-29",
-      "next_action": "Se EUROPE_FOLLOWUP_BATCH47.md. DA193 Inverness–Manchester, DA125 Cardiff–Bristol och DA164 Newcastle–Aberdeen hålls utanför. Övriga operatörer, senare ändringar och Dan-Airs kontinentnät återstår.",
+      "reviewed_on": "2026-10-01",
+      "next_action": "v119/batch116: 579 rörelser med brittisk ändpunkt; CAA februari1986 ger43 rapporteringsnamn, varav36 ännu utan rörelser. Kompletta BA/BCal-tabeller, saknade AirUK-sidor och regional-, charter-, frakt- och helikopterunderlag återstår. Se UK_USSR_REVIEW_BATCH116.md och uk_ussr_research_queue_batch116.json. Nätet är partiellt.",
       "review_pass": 2
     },
     {
@@ -306,9 +306,9 @@
       "catalog_country_id": "mt",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "reviewed_on": "2026-09-29",
-      "next_action": "Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. Air Maltas fullständiga vinterinlaga27okt1985–29mars1986, teckenförklaring och ändringar behöver läsas. Index och andra säsongers tabeller används inte som avgångstider. Luqa, eventuell helikoptertrafik, utländska operatörer, charter, frakt och stats-/militärflyg kräver daterade underlag.",
-      "review_pass": 2
+      "reviewed_on": "2026-10-02",
+      "next_action": "INT05:Air Maltas originalutgåva27okt1985–29mars1986 läst i sin helhet.24 rader ger26 Malta-rörelser (18KM,4BA,2AZ,2LH). Luqa tillförd. Sök ändringsblad, charter/frakt och stats-/militärflyg. KM191F lördag22:30 ligger8min30s efter periodslut. Australienresor har otidsatta mellanben. Landtäckning fortsatt partiell.",
+      "review_pass": 3
     },
     {
       "id": "pl",
@@ -414,17 +414,29 @@
       "catalog_country_id": "su",
       "review_status": "reviewed_with_gaps",
       "coverage_complete": false,
-      "reviewed_on": "2026-09-29",
-      "next_action": "Tolv nya planerade rörelser: Paris–Moskva, Moskva–Narita, Paris–Borispol och Paris–Pulkovo. Totalt 53 rörelser med sovjetiska ändpunkter. Borispol tillkommer som fysisk markör; alla äldre rörelser och markörer är oförändrade. Se SOVIET_UNION_COUNTRY_REVIEW_BATCH45.md. Aeroflots fullständiga internationella och inrikes vintertabeller 1985/86, ändringar och driftbelägg återstår. Arkivindex och ett fåtal fotograferade uppslag är inte full täckning. Ytterligare europeiska och asiatiska sovjetiska flygplatser, inrikeslinjer och utländska bolag återstår. Borispol- och Pulkovo-returer har inte verifierats i det aktuella Air France-urvalet och skapas inte. Aeroflot-arkivets metadata anger 28 oktober–28 mars medan det fotograferade vinteromslaget anger 27 oktober–29 mars. Källposterna hålls separata; importerade rader följer den granskade utgåvan. Aeroflots egen tabell använder Moskvatid inom Sovjetunionen. Air France använder lokala tider; Moskva, Leningrad och Kiev ligger alla på UTC+3 under observationsdatumen. Andra sovjetiska orter kräver separat tidszonskontroll. Charter-, frakt-, stats-, privat-, helikopter- och militärtrafik samt faktisk operatör för samarbetskoder är ofullständigt utredda. Inga verkliga nordiska överflygningar har belagts."
+      "reviewed_on": "2026-10-01",
+      "next_action": "v119/batch116: 66 ändpunktsrörelser, inklusive13 första inrikesrörelser från Mirny. Åtta regionalblad hittade; sju hålls för tidskonvention, fysiska ben, flygplatser eller upplagekonflikt. Endast två av15 unionsrepubliker har flygplatser i urvalet. Komplett internationell Aeroflot-vintertabell och UK–USSR återstår. Se UK_USSR_REVIEW_BATCH116.md."
     }
   ],
   "first_pass_completed_on": "2026-09-29",
   "review_pass": 2,
-  "followup_priority_reason": "Omgång 75 kompletterar COMAIR och tillför 33 rörelser. Nästa prioritet: fler COMAIR-sträckor från Cincinnati/Chicago och Deltas Dallas/Fort Worth. Europakön behåller Cypern.",
+  "followup_priority_reason": "Endast flyg relevanta för svenskt luftrum prioriteras nu.87 befintliga svenska ändpunktsrörelser. Överflygningar kräver flygvägsbelägg.",
   "active_priority_override": {
-    "request": "fortsätt med där du tror du kan hitta många nya flygrutter",
-    "scope": "worldwide",
-    "current": "CLE/DAY links to DTW/MKE/FWA reviewed. Next more COMAIR Cincinnati destinations, Indianapolis and Columbus, then Delta Dallas/Fort Worth.",
-    "europe_resume_country": "cy"
+    "request": "Fortsätt med flyg som rör svenskt luftrum: till/från Sverige, svenskt inrikes, belagda överflygningar.",
+    "scope": "Swedish-airspace relevance",
+    "current": "SE01:scope narrowed;87 existing endpoint movements;0 new runtime movements. New radar and Visby source leads require further evidence.",
+    "europe_resume_country": "se"
+  },
+  "research_scope_change": {
+    "date": "2026-10-02",
+    "requested": "Främst flyg som rör sig över svenskt luftrum",
+    "preserve_existing_data": true,
+    "new_foreign_to_foreign_rule": "Import only when Swedish-airspace relevance is supported; do not infer from great circles."
+  },
+  "previous_active_priority_override": {
+    "request": "Fortsätt med internationella flyg och svenskt inrikes, särskilt inkommande Sverige. Inga nya inrikesflyg utanför Sverige.",
+    "scope": "International flights and Swedish domestic; inbound Sweden first",
+    "current": "INT06:11 new international movements;0 new Sweden movements. See INTERNATIONAL_SWEDEN_REVIEW_INT06.md.",
+    "europe_resume_country": "se"
   }
 }

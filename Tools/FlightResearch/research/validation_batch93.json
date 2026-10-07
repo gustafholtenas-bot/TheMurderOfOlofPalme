@@ -1,0 +1,603 @@
+{
+  "batch": 93,
+  "package": "v96",
+  "based_on_package": "v95",
+  "checked_on": "2026-09-30",
+  "previous_movements": 5835,
+  "source_rows": 41,
+  "selected_city_direction_tables": 14,
+  "reviewed_airport_direction_pairs": 14,
+  "new_schedules": 37,
+  "new_schedule_ids": [
+    "atlantic-southeast-1241-GTR-MEM-1100-b93",
+    "atlantic-southeast-1242-MEM-GTR-0935-b93",
+    "atlantic-southeast-1243-MEM-GTR-1225-b93",
+    "atlantic-southeast-1244-GTR-MEM-1400-b93",
+    "atlantic-southeast-1246-GTR-MEM-1730-b93",
+    "atlantic-southeast-1247-MEM-GTR-1610-b93",
+    "atlantic-southeast-1249-GTR-MEM-0715-b93",
+    "atlantic-southeast-1250-MEM-GTR-2000-b93",
+    "atlantic-southeast-1278-FSM-MEM-0700-b93",
+    "atlantic-southeast-1280-FSM-MEM-1315-b93",
+    "atlantic-southeast-1280-MEM-FSM-0955-b93",
+    "atlantic-southeast-1282-FSM-MEM-1700-b93",
+    "atlantic-southeast-1282-MEM-FSM-1530-b93",
+    "atlantic-southeast-1283-MEM-FSM-2000-b93",
+    "atlantic-southeast-1298-GLH-MEM-0700-b93",
+    "atlantic-southeast-1298-PIB-GLH-0600-b93",
+    "atlantic-southeast-1299-GLH-MEM-1050-b93",
+    "atlantic-southeast-1299-MEM-GLH-0945-b93",
+    "atlantic-southeast-1400-GLH-MEM-1407-b93",
+    "atlantic-southeast-1400-MEM-GLH-1307-b93",
+    "atlantic-southeast-1401-GLH-MEM-1720-b93",
+    "atlantic-southeast-1401-MEM-GLH-1615-b93",
+    "atlantic-southeast-1402-GLH-PIB-2050-b93",
+    "atlantic-southeast-1402-MEM-GLH-1950-b93",
+    "atlantic-southeast-1424-MEM-PIB-1530-b93",
+    "atlantic-southeast-1424-PIB-MEM-1700-b93",
+    "atlantic-southeast-1445-PIB-MEI-0615-b93",
+    "atlantic-southeast-1446-PIB-MEI-1125-b93",
+    "atlantic-southeast-1447-MEI-MEM-1725-b93",
+    "atlantic-southeast-1448-MEM-MEI-1600-b93",
+    "atlantic-southeast-1449-MEI-PIB-2105-b93",
+    "atlantic-southeast-1450-MEI-MEM-0700-b93",
+    "atlantic-southeast-1451-MEI-MEM-1050-b93",
+    "atlantic-southeast-1451-MEM-MEI-0935-b93",
+    "atlantic-southeast-1452-MEI-MEM-1422-b93",
+    "atlantic-southeast-1452-MEM-MEI-1307-b93",
+    "atlantic-southeast-1453-MEM-MEI-1955-b93"
+  ],
+  "source_row_actions": {
+    "new_schedule": 37,
+    "excluded_through_stops": 2,
+    "excluded_connection": 2
+  },
+  "new_movements": 79,
+  "new_movements_by_source_airline": {
+    "atlantic-southeast": 79
+  },
+  "new_movements_by_directed_pair": {
+    "FSM–MEM": 6,
+    "GLH–MEM": 8,
+    "GLH–PIB": 2,
+    "GTR–MEM": 8,
+    "MEI–MEM": 8,
+    "MEI–PIB": 2,
+    "MEM–FSM": 7,
+    "MEM–GLH": 9,
+    "MEM–GTR": 9,
+    "MEM–MEI": 9,
+    "MEM–PIB": 3,
+    "PIB–GLH": 2,
+    "PIB–MEI": 4,
+    "PIB–MEM": 2
+  },
+  "new_leg_ids": [
+    "atlantic-southeast-1282-MEM-FSM-1530-b93@1986-02-27",
+    "atlantic-southeast-1424-MEM-PIB-1530-b93@1986-02-27",
+    "atlantic-southeast-1448-MEM-MEI-1600-b93@1986-02-27",
+    "atlantic-southeast-1247-MEM-GTR-1610-b93@1986-02-27",
+    "atlantic-southeast-1401-MEM-GLH-1615-b93@1986-02-27",
+    "atlantic-southeast-1282-FSM-MEM-1700-b93@1986-02-27",
+    "atlantic-southeast-1424-PIB-MEM-1700-b93@1986-02-27",
+    "atlantic-southeast-1401-GLH-MEM-1720-b93@1986-02-27",
+    "atlantic-southeast-1447-MEI-MEM-1725-b93@1986-02-27",
+    "atlantic-southeast-1246-GTR-MEM-1730-b93@1986-02-27",
+    "atlantic-southeast-1402-MEM-GLH-1950-b93@1986-02-27",
+    "atlantic-southeast-1453-MEM-MEI-1955-b93@1986-02-27",
+    "atlantic-southeast-1250-MEM-GTR-2000-b93@1986-02-27",
+    "atlantic-southeast-1283-MEM-FSM-2000-b93@1986-02-27",
+    "atlantic-southeast-1402-GLH-PIB-2050-b93@1986-02-27",
+    "atlantic-southeast-1449-MEI-PIB-2105-b93@1986-02-27",
+    "atlantic-southeast-1298-PIB-GLH-0600-b93@1986-02-28",
+    "atlantic-southeast-1445-PIB-MEI-0615-b93@1986-02-28",
+    "atlantic-southeast-1278-FSM-MEM-0700-b93@1986-02-28",
+    "atlantic-southeast-1298-GLH-MEM-0700-b93@1986-02-28",
+    "atlantic-southeast-1450-MEI-MEM-0700-b93@1986-02-28",
+    "atlantic-southeast-1249-GTR-MEM-0715-b93@1986-02-28",
+    "atlantic-southeast-1242-MEM-GTR-0935-b93@1986-02-28",
+    "atlantic-southeast-1451-MEM-MEI-0935-b93@1986-02-28",
+    "atlantic-southeast-1299-MEM-GLH-0945-b93@1986-02-28",
+    "atlantic-southeast-1280-MEM-FSM-0955-b93@1986-02-28",
+    "atlantic-southeast-1299-GLH-MEM-1050-b93@1986-02-28",
+    "atlantic-southeast-1451-MEI-MEM-1050-b93@1986-02-28",
+    "atlantic-southeast-1241-GTR-MEM-1100-b93@1986-02-28",
+    "atlantic-southeast-1446-PIB-MEI-1125-b93@1986-02-28",
+    "atlantic-southeast-1243-MEM-GTR-1225-b93@1986-02-28",
+    "atlantic-southeast-1400-MEM-GLH-1307-b93@1986-02-28",
+    "atlantic-southeast-1452-MEM-MEI-1307-b93@1986-02-28",
+    "atlantic-southeast-1280-FSM-MEM-1315-b93@1986-02-28",
+    "atlantic-southeast-1244-GTR-MEM-1400-b93@1986-02-28",
+    "atlantic-southeast-1400-GLH-MEM-1407-b93@1986-02-28",
+    "atlantic-southeast-1452-MEI-MEM-1422-b93@1986-02-28",
+    "atlantic-southeast-1282-MEM-FSM-1530-b93@1986-02-28",
+    "atlantic-southeast-1424-MEM-PIB-1530-b93@1986-02-28",
+    "atlantic-southeast-1448-MEM-MEI-1600-b93@1986-02-28",
+    "atlantic-southeast-1247-MEM-GTR-1610-b93@1986-02-28",
+    "atlantic-southeast-1401-MEM-GLH-1615-b93@1986-02-28",
+    "atlantic-southeast-1282-FSM-MEM-1700-b93@1986-02-28",
+    "atlantic-southeast-1424-PIB-MEM-1700-b93@1986-02-28",
+    "atlantic-southeast-1401-GLH-MEM-1720-b93@1986-02-28",
+    "atlantic-southeast-1447-MEI-MEM-1725-b93@1986-02-28",
+    "atlantic-southeast-1246-GTR-MEM-1730-b93@1986-02-28",
+    "atlantic-southeast-1402-MEM-GLH-1950-b93@1986-02-28",
+    "atlantic-southeast-1453-MEM-MEI-1955-b93@1986-02-28",
+    "atlantic-southeast-1250-MEM-GTR-2000-b93@1986-02-28",
+    "atlantic-southeast-1283-MEM-FSM-2000-b93@1986-02-28",
+    "atlantic-southeast-1402-GLH-PIB-2050-b93@1986-02-28",
+    "atlantic-southeast-1449-MEI-PIB-2105-b93@1986-02-28",
+    "atlantic-southeast-1298-PIB-GLH-0600-b93@1986-03-01",
+    "atlantic-southeast-1445-PIB-MEI-0615-b93@1986-03-01",
+    "atlantic-southeast-1278-FSM-MEM-0700-b93@1986-03-01",
+    "atlantic-southeast-1298-GLH-MEM-0700-b93@1986-03-01",
+    "atlantic-southeast-1450-MEI-MEM-0700-b93@1986-03-01",
+    "atlantic-southeast-1249-GTR-MEM-0715-b93@1986-03-01",
+    "atlantic-southeast-1242-MEM-GTR-0935-b93@1986-03-01",
+    "atlantic-southeast-1451-MEM-MEI-0935-b93@1986-03-01",
+    "atlantic-southeast-1299-MEM-GLH-0945-b93@1986-03-01",
+    "atlantic-southeast-1280-MEM-FSM-0955-b93@1986-03-01",
+    "atlantic-southeast-1299-GLH-MEM-1050-b93@1986-03-01",
+    "atlantic-southeast-1451-MEI-MEM-1050-b93@1986-03-01",
+    "atlantic-southeast-1241-GTR-MEM-1100-b93@1986-03-01",
+    "atlantic-southeast-1446-PIB-MEI-1125-b93@1986-03-01",
+    "atlantic-southeast-1243-MEM-GTR-1225-b93@1986-03-01",
+    "atlantic-southeast-1400-MEM-GLH-1307-b93@1986-03-01",
+    "atlantic-southeast-1452-MEM-MEI-1307-b93@1986-03-01",
+    "atlantic-southeast-1280-FSM-MEM-1315-b93@1986-03-01",
+    "atlantic-southeast-1244-GTR-MEM-1400-b93@1986-03-01",
+    "atlantic-southeast-1400-GLH-MEM-1407-b93@1986-03-01",
+    "atlantic-southeast-1452-MEI-MEM-1422-b93@1986-03-01",
+    "atlantic-southeast-1282-MEM-FSM-1530-b93@1986-03-01",
+    "atlantic-southeast-1424-MEM-PIB-1530-b93@1986-03-01",
+    "atlantic-southeast-1448-MEM-MEI-1600-b93@1986-03-01",
+    "atlantic-southeast-1247-MEM-GTR-1610-b93@1986-03-01",
+    "atlantic-southeast-1401-MEM-GLH-1615-b93@1986-03-01"
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 16,
+    "1986-02-28": 37,
+    "1986-03-01": 26
+  },
+  "total_movements": 5914,
+  "retained_previous_movement_ids": 5835,
+  "unchanged_previous_movements": 5835,
+  "unchanged_previous_schedules": 3565,
+  "corrected_previous_schedule_ids": [],
+  "corrected_previous_movement_ids": [],
+  "new_airports": [
+    "FSM",
+    "GTR",
+    "GLH",
+    "MEI",
+    "PIB"
+  ],
+  "new_airlines": [],
+  "total_airports": 264,
+  "total_directed_endpoint_pairs": 1168,
+  "runtime_coverage": {
+    "registered_airlines": 96,
+    "registered_countries": 81,
+    "reviewed_schedules": 3581,
+    "animated_airlines": 50,
+    "scheduled_movements": 5913,
+    "confirmed_movements": 1
+  },
+  "delta_total_movements": 1678,
+  "comair_total_movements": 381,
+  "asa_total_movements": 128,
+  "data_only_delivery": true,
+  "coverage_complete": false,
+  "reviewed_schedules_without_window_movements": [],
+  "schedules_with_three_overlapping_movements": [
+    "atlantic-southeast-1247-MEM-GTR-1610-b93",
+    "atlantic-southeast-1282-MEM-FSM-1530-b93",
+    "atlantic-southeast-1401-MEM-GLH-1615-b93",
+    "atlantic-southeast-1424-MEM-PIB-1530-b93",
+    "atlantic-southeast-1448-MEM-MEI-1600-b93"
+  ],
+  "schedules_with_one_overlapping_movement": [],
+  "previous_corrections_preserved": [
+    "v87: COMAIR 1582 CVG–DTW",
+    "v89: COMAIR 1580 ORD–MKE; stable IDs retained"
+  ],
+  "prior_held_source_conflicts_preserved": [
+    "batch80: Delta 597 MEM–LIT time conflict",
+    "batch82: CMH–SDF 1871/1671 number conflict"
+  ],
+  "next_priority": "ASA Atlanta to/from Columbus MS, Meridian and Pine Belt; verify nonstop physical legs, via Tuscaloosa where printed, weekdays and historical sites. Memphis–Fayetteville Drake Field is another candidate. Delta 582 LGA–BOS and 597 PWM–LGA remain candidates; MEM–LIT 597 remains held.",
+  "europe_resume_country": "cy",
+  "independent_fixed_offset_and_weekday_check": true,
+  "expected_movement_utc": {
+    "atlantic-southeast-1280-MEM-FSM-0955-b93@1986-02-28": [
+      "1986-02-28T15:55:00Z",
+      "1986-02-28T17:10:00Z"
+    ],
+    "atlantic-southeast-1280-MEM-FSM-0955-b93@1986-03-01": [
+      "1986-03-01T15:55:00Z",
+      "1986-03-01T17:10:00Z"
+    ],
+    "atlantic-southeast-1282-MEM-FSM-1530-b93@1986-02-27": [
+      "1986-02-27T21:30:00Z",
+      "1986-02-27T22:45:00Z"
+    ],
+    "atlantic-southeast-1282-MEM-FSM-1530-b93@1986-02-28": [
+      "1986-02-28T21:30:00Z",
+      "1986-02-28T22:45:00Z"
+    ],
+    "atlantic-southeast-1282-MEM-FSM-1530-b93@1986-03-01": [
+      "1986-03-01T21:30:00Z",
+      "1986-03-01T22:45:00Z"
+    ],
+    "atlantic-southeast-1283-MEM-FSM-2000-b93@1986-02-27": [
+      "1986-02-28T02:00:00Z",
+      "1986-02-28T03:15:00Z"
+    ],
+    "atlantic-southeast-1283-MEM-FSM-2000-b93@1986-02-28": [
+      "1986-03-01T02:00:00Z",
+      "1986-03-01T03:15:00Z"
+    ],
+    "atlantic-southeast-1278-FSM-MEM-0700-b93@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:15:00Z"
+    ],
+    "atlantic-southeast-1278-FSM-MEM-0700-b93@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:15:00Z"
+    ],
+    "atlantic-southeast-1280-FSM-MEM-1315-b93@1986-02-28": [
+      "1986-02-28T19:15:00Z",
+      "1986-02-28T20:30:00Z"
+    ],
+    "atlantic-southeast-1280-FSM-MEM-1315-b93@1986-03-01": [
+      "1986-03-01T19:15:00Z",
+      "1986-03-01T20:30:00Z"
+    ],
+    "atlantic-southeast-1282-FSM-MEM-1700-b93@1986-02-27": [
+      "1986-02-27T23:00:00Z",
+      "1986-02-28T00:15:00Z"
+    ],
+    "atlantic-southeast-1282-FSM-MEM-1700-b93@1986-02-28": [
+      "1986-02-28T23:00:00Z",
+      "1986-03-01T00:15:00Z"
+    ],
+    "atlantic-southeast-1242-MEM-GTR-0935-b93@1986-02-28": [
+      "1986-02-28T15:35:00Z",
+      "1986-02-28T16:20:00Z"
+    ],
+    "atlantic-southeast-1242-MEM-GTR-0935-b93@1986-03-01": [
+      "1986-03-01T15:35:00Z",
+      "1986-03-01T16:20:00Z"
+    ],
+    "atlantic-southeast-1243-MEM-GTR-1225-b93@1986-02-28": [
+      "1986-02-28T18:25:00Z",
+      "1986-02-28T19:15:00Z"
+    ],
+    "atlantic-southeast-1243-MEM-GTR-1225-b93@1986-03-01": [
+      "1986-03-01T18:25:00Z",
+      "1986-03-01T19:15:00Z"
+    ],
+    "atlantic-southeast-1247-MEM-GTR-1610-b93@1986-02-27": [
+      "1986-02-27T22:10:00Z",
+      "1986-02-27T23:00:00Z"
+    ],
+    "atlantic-southeast-1247-MEM-GTR-1610-b93@1986-02-28": [
+      "1986-02-28T22:10:00Z",
+      "1986-02-28T23:00:00Z"
+    ],
+    "atlantic-southeast-1247-MEM-GTR-1610-b93@1986-03-01": [
+      "1986-03-01T22:10:00Z",
+      "1986-03-01T23:00:00Z"
+    ],
+    "atlantic-southeast-1250-MEM-GTR-2000-b93@1986-02-27": [
+      "1986-02-28T02:00:00Z",
+      "1986-02-28T02:50:00Z"
+    ],
+    "atlantic-southeast-1250-MEM-GTR-2000-b93@1986-02-28": [
+      "1986-03-01T02:00:00Z",
+      "1986-03-01T02:50:00Z"
+    ],
+    "atlantic-southeast-1249-GTR-MEM-0715-b93@1986-02-28": [
+      "1986-02-28T13:15:00Z",
+      "1986-02-28T14:05:00Z"
+    ],
+    "atlantic-southeast-1249-GTR-MEM-0715-b93@1986-03-01": [
+      "1986-03-01T13:15:00Z",
+      "1986-03-01T14:05:00Z"
+    ],
+    "atlantic-southeast-1241-GTR-MEM-1100-b93@1986-02-28": [
+      "1986-02-28T17:00:00Z",
+      "1986-02-28T17:50:00Z"
+    ],
+    "atlantic-southeast-1241-GTR-MEM-1100-b93@1986-03-01": [
+      "1986-03-01T17:00:00Z",
+      "1986-03-01T17:50:00Z"
+    ],
+    "atlantic-southeast-1244-GTR-MEM-1400-b93@1986-02-28": [
+      "1986-02-28T20:00:00Z",
+      "1986-02-28T20:50:00Z"
+    ],
+    "atlantic-southeast-1244-GTR-MEM-1400-b93@1986-03-01": [
+      "1986-03-01T20:00:00Z",
+      "1986-03-01T20:50:00Z"
+    ],
+    "atlantic-southeast-1246-GTR-MEM-1730-b93@1986-02-27": [
+      "1986-02-27T23:30:00Z",
+      "1986-02-28T00:20:00Z"
+    ],
+    "atlantic-southeast-1246-GTR-MEM-1730-b93@1986-02-28": [
+      "1986-02-28T23:30:00Z",
+      "1986-03-01T00:20:00Z"
+    ],
+    "atlantic-southeast-1299-MEM-GLH-0945-b93@1986-02-28": [
+      "1986-02-28T15:45:00Z",
+      "1986-02-28T16:35:00Z"
+    ],
+    "atlantic-southeast-1299-MEM-GLH-0945-b93@1986-03-01": [
+      "1986-03-01T15:45:00Z",
+      "1986-03-01T16:35:00Z"
+    ],
+    "atlantic-southeast-1400-MEM-GLH-1307-b93@1986-02-28": [
+      "1986-02-28T19:07:00Z",
+      "1986-02-28T19:57:00Z"
+    ],
+    "atlantic-southeast-1400-MEM-GLH-1307-b93@1986-03-01": [
+      "1986-03-01T19:07:00Z",
+      "1986-03-01T19:57:00Z"
+    ],
+    "atlantic-southeast-1401-MEM-GLH-1615-b93@1986-02-27": [
+      "1986-02-27T22:15:00Z",
+      "1986-02-27T23:05:00Z"
+    ],
+    "atlantic-southeast-1401-MEM-GLH-1615-b93@1986-02-28": [
+      "1986-02-28T22:15:00Z",
+      "1986-02-28T23:05:00Z"
+    ],
+    "atlantic-southeast-1401-MEM-GLH-1615-b93@1986-03-01": [
+      "1986-03-01T22:15:00Z",
+      "1986-03-01T23:05:00Z"
+    ],
+    "atlantic-southeast-1402-MEM-GLH-1950-b93@1986-02-27": [
+      "1986-02-28T01:50:00Z",
+      "1986-02-28T02:40:00Z"
+    ],
+    "atlantic-southeast-1402-MEM-GLH-1950-b93@1986-02-28": [
+      "1986-03-01T01:50:00Z",
+      "1986-03-01T02:40:00Z"
+    ],
+    "atlantic-southeast-1298-GLH-MEM-0700-b93@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T13:50:00Z"
+    ],
+    "atlantic-southeast-1298-GLH-MEM-0700-b93@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T13:50:00Z"
+    ],
+    "atlantic-southeast-1299-GLH-MEM-1050-b93@1986-02-28": [
+      "1986-02-28T16:50:00Z",
+      "1986-02-28T17:40:00Z"
+    ],
+    "atlantic-southeast-1299-GLH-MEM-1050-b93@1986-03-01": [
+      "1986-03-01T16:50:00Z",
+      "1986-03-01T17:40:00Z"
+    ],
+    "atlantic-southeast-1400-GLH-MEM-1407-b93@1986-02-28": [
+      "1986-02-28T20:07:00Z",
+      "1986-02-28T20:53:00Z"
+    ],
+    "atlantic-southeast-1400-GLH-MEM-1407-b93@1986-03-01": [
+      "1986-03-01T20:07:00Z",
+      "1986-03-01T20:53:00Z"
+    ],
+    "atlantic-southeast-1401-GLH-MEM-1720-b93@1986-02-27": [
+      "1986-02-27T23:20:00Z",
+      "1986-02-28T00:10:00Z"
+    ],
+    "atlantic-southeast-1401-GLH-MEM-1720-b93@1986-02-28": [
+      "1986-02-28T23:20:00Z",
+      "1986-03-01T00:10:00Z"
+    ],
+    "atlantic-southeast-1451-MEM-MEI-0935-b93@1986-02-28": [
+      "1986-02-28T15:35:00Z",
+      "1986-02-28T16:40:00Z"
+    ],
+    "atlantic-southeast-1451-MEM-MEI-0935-b93@1986-03-01": [
+      "1986-03-01T15:35:00Z",
+      "1986-03-01T16:40:00Z"
+    ],
+    "atlantic-southeast-1452-MEM-MEI-1307-b93@1986-02-28": [
+      "1986-02-28T19:07:00Z",
+      "1986-02-28T20:12:00Z"
+    ],
+    "atlantic-southeast-1452-MEM-MEI-1307-b93@1986-03-01": [
+      "1986-03-01T19:07:00Z",
+      "1986-03-01T20:12:00Z"
+    ],
+    "atlantic-southeast-1448-MEM-MEI-1600-b93@1986-02-27": [
+      "1986-02-27T22:00:00Z",
+      "1986-02-27T23:05:00Z"
+    ],
+    "atlantic-southeast-1448-MEM-MEI-1600-b93@1986-02-28": [
+      "1986-02-28T22:00:00Z",
+      "1986-02-28T23:05:00Z"
+    ],
+    "atlantic-southeast-1448-MEM-MEI-1600-b93@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T23:05:00Z"
+    ],
+    "atlantic-southeast-1453-MEM-MEI-1955-b93@1986-02-27": [
+      "1986-02-28T01:55:00Z",
+      "1986-02-28T03:05:00Z"
+    ],
+    "atlantic-southeast-1453-MEM-MEI-1955-b93@1986-02-28": [
+      "1986-03-01T01:55:00Z",
+      "1986-03-01T03:05:00Z"
+    ],
+    "atlantic-southeast-1450-MEI-MEM-0700-b93@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T14:10:00Z"
+    ],
+    "atlantic-southeast-1450-MEI-MEM-0700-b93@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T14:10:00Z"
+    ],
+    "atlantic-southeast-1451-MEI-MEM-1050-b93@1986-02-28": [
+      "1986-02-28T16:50:00Z",
+      "1986-02-28T17:55:00Z"
+    ],
+    "atlantic-southeast-1451-MEI-MEM-1050-b93@1986-03-01": [
+      "1986-03-01T16:50:00Z",
+      "1986-03-01T17:55:00Z"
+    ],
+    "atlantic-southeast-1452-MEI-MEM-1422-b93@1986-02-28": [
+      "1986-02-28T20:22:00Z",
+      "1986-02-28T21:30:00Z"
+    ],
+    "atlantic-southeast-1452-MEI-MEM-1422-b93@1986-03-01": [
+      "1986-03-01T20:22:00Z",
+      "1986-03-01T21:30:00Z"
+    ],
+    "atlantic-southeast-1447-MEI-MEM-1725-b93@1986-02-27": [
+      "1986-02-27T23:25:00Z",
+      "1986-02-28T00:28:00Z"
+    ],
+    "atlantic-southeast-1447-MEI-MEM-1725-b93@1986-02-28": [
+      "1986-02-28T23:25:00Z",
+      "1986-03-01T00:28:00Z"
+    ],
+    "atlantic-southeast-1424-MEM-PIB-1530-b93@1986-02-27": [
+      "1986-02-27T21:30:00Z",
+      "1986-02-27T22:45:00Z"
+    ],
+    "atlantic-southeast-1424-MEM-PIB-1530-b93@1986-02-28": [
+      "1986-02-28T21:30:00Z",
+      "1986-02-28T22:45:00Z"
+    ],
+    "atlantic-southeast-1424-MEM-PIB-1530-b93@1986-03-01": [
+      "1986-03-01T21:30:00Z",
+      "1986-03-01T22:45:00Z"
+    ],
+    "atlantic-southeast-1424-PIB-MEM-1700-b93@1986-02-27": [
+      "1986-02-27T23:00:00Z",
+      "1986-02-28T00:15:00Z"
+    ],
+    "atlantic-southeast-1424-PIB-MEM-1700-b93@1986-02-28": [
+      "1986-02-28T23:00:00Z",
+      "1986-03-01T00:15:00Z"
+    ],
+    "atlantic-southeast-1402-GLH-PIB-2050-b93@1986-02-27": [
+      "1986-02-28T02:50:00Z",
+      "1986-02-28T03:40:00Z"
+    ],
+    "atlantic-southeast-1402-GLH-PIB-2050-b93@1986-02-28": [
+      "1986-03-01T02:50:00Z",
+      "1986-03-01T03:40:00Z"
+    ],
+    "atlantic-southeast-1298-PIB-GLH-0600-b93@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T12:50:00Z"
+    ],
+    "atlantic-southeast-1298-PIB-GLH-0600-b93@1986-03-01": [
+      "1986-03-01T12:00:00Z",
+      "1986-03-01T12:50:00Z"
+    ],
+    "atlantic-southeast-1445-PIB-MEI-0615-b93@1986-02-28": [
+      "1986-02-28T12:15:00Z",
+      "1986-02-28T12:45:00Z"
+    ],
+    "atlantic-southeast-1445-PIB-MEI-0615-b93@1986-03-01": [
+      "1986-03-01T12:15:00Z",
+      "1986-03-01T12:45:00Z"
+    ],
+    "atlantic-southeast-1446-PIB-MEI-1125-b93@1986-02-28": [
+      "1986-02-28T17:25:00Z",
+      "1986-02-28T17:55:00Z"
+    ],
+    "atlantic-southeast-1446-PIB-MEI-1125-b93@1986-03-01": [
+      "1986-03-01T17:25:00Z",
+      "1986-03-01T17:55:00Z"
+    ],
+    "atlantic-southeast-1449-MEI-PIB-2105-b93@1986-02-27": [
+      "1986-02-28T03:05:00Z",
+      "1986-02-28T03:35:00Z"
+    ],
+    "atlantic-southeast-1449-MEI-PIB-2105-b93@1986-02-28": [
+      "1986-03-01T03:05:00Z",
+      "1986-03-01T03:35:00Z"
+    ]
+  },
+  "no_affected_flight_number_time_overlaps": true,
+  "verified_independent_segment_ground_times": [
+    {
+      "incoming": "atlantic-southeast-1280-MEM-FSM-0955-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1280-FSM-MEM-1315-b93@1986-02-28",
+      "ground_minutes": 125,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1282-MEM-FSM-1530-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1282-FSM-MEM-1700-b93@1986-02-28",
+      "ground_minutes": 15,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1299-MEM-GLH-0945-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1299-GLH-MEM-1050-b93@1986-02-28",
+      "ground_minutes": 15,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1400-MEM-GLH-1307-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1400-GLH-MEM-1407-b93@1986-02-28",
+      "ground_minutes": 10,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1401-MEM-GLH-1615-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1401-GLH-MEM-1720-b93@1986-02-28",
+      "ground_minutes": 15,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1451-MEM-MEI-0935-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1451-MEI-MEM-1050-b93@1986-02-28",
+      "ground_minutes": 10,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1452-MEM-MEI-1307-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1452-MEI-MEM-1422-b93@1986-02-28",
+      "ground_minutes": 10,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1424-MEM-PIB-1530-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1424-PIB-MEM-1700-b93@1986-02-28",
+      "ground_minutes": 15,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1402-MEM-GLH-1950-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1402-GLH-PIB-2050-b93@1986-02-28",
+      "ground_minutes": 10,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "atlantic-southeast-1298-PIB-GLH-0600-b93@1986-02-28",
+      "outgoing": "atlantic-southeast-1298-GLH-MEM-0700-b93@1986-02-28",
+      "ground_minutes": 10,
+      "date": "1986-02-28"
+    }
+  ],
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  },
+  "validation_status": "passed_data_checks; unreal_runtime_not_run"
+}

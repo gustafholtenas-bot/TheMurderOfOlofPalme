@@ -1,0 +1,113 @@
+{
+  "source": "delta-19860201",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "effective_from": "1986-02-01",
+  "effective_to": null,
+  "later_amendments_verified": false,
+  "visual_review": true,
+  "reviewed_printed_pages": [
+    24,
+    31,
+    32,
+    33,
+    34,
+    81,
+    83,
+    148,
+    150,
+    151,
+    152,
+    163,
+    172,
+    174,
+    175,
+    176,
+    182,
+    184,
+    198,
+    230,
+    231,
+    246,
+    248,
+    249
+  ],
+  "legend_printed_page": 4,
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "printed_to_pdf_page_rule": "PDF page floor((printed page + 6) / 2); even printed page left, odd right. Scan widths vary; use the actual PDF page bounds.",
+  "row_scope": "94 explicit Delta nonstop rows in selected northeast/Florida/Canada tables. Connecting/through rows excluded; each independently timed segment retains its own weekdays.",
+  "row_count": 94,
+  "accepted_nonstop_rows": 94,
+  "operator_identification": "All accepted rows use Delta mainline flight numbers below the Delta Connection ranges.",
+  "frequency_legend": "D encodes blank/daily; X excludes weekdays, 1 Monday through 7 Sunday. Star denotes off-peak fare, not day rollover.",
+  "timezones_fixed_hours_for_import_dates": {
+    "BGR": -5,
+    "BOS": -5,
+    "DCA": -5,
+    "EWR": -5,
+    "FLL": -5,
+    "JFK": -5,
+    "LGA": -5,
+    "MCO": -5,
+    "MEM": -6,
+    "MIA": -5,
+    "MSY": -6,
+    "PBI": -5,
+    "PWM": -5,
+    "TPA": -5,
+    "YUL": -5
+  },
+  "dated_footnotes_on_selected_rows": [
+    {
+      "schedule": "delta-721-JFK-FLL-2100-b110",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "printed_page": "174"
+    },
+    {
+      "schedule": "delta-720-FLL-JFK-2120-b110",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "printed_page": "83"
+    },
+    {
+      "schedule": "delta-189-BOS-FLL-1955-b110",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "printed_page": "32"
+    },
+    {
+      "schedule": "delta-594-FLL-BOS-1610-b110",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "printed_page": "81"
+    },
+    {
+      "schedule": "delta-891-BOS-PBI-1559-b110",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "printed_page": "34"
+    },
+    {
+      "schedule": "delta-818-PBI-BOS-1855-b110",
+      "footnote": "4",
+      "effective_from": "1986-02-12",
+      "printed_page": "248"
+    }
+  ],
+  "special_cases": {
+    "Airport suffixes": "J=JFK, L=LGA, E=EWR. Washington N=National/DCA, Miami M=MIA/F=FLL. Repeated Miami/Fort Lauderdale aggregate tables are not separate flights.",
+    "Canada": "Montreal is Dorval/YUL, not Mirabel/YMX. YUL–MIA 215 uses 08:00–11:15 except Saturday and 08:30–11:45 Saturday. MIA–YUL 214 excludes Saturday; 468 operates Saturday.",
+    "Through rows": "YUL–FLL 215 and FLL–YUL 468 have a stop in Miami. Only separate YUL–MIA, MIA–FLL, FLL–MIA and MIA–YUL rows are imported. Other through itineraries excluded.",
+    "Footnotes": "Six accepted rows with footnote 4 start 12 February 1986: JFK–FLL 721, FLL–JFK 720, BOS–FLL 189, FLL–BOS 594, BOS–PBI 891 and PBI–BOS 818. All are effective before the import window.",
+    "Exact minutes": "BOS–FLL 189 arrives 22:56 (also repeated in YUL–FLL via BOS); FLL–BOS is 136, not 138. BOS–PBI is 891 (also in connecting itineraries). Exact minutes and printed footnotes retained.",
+    "Opposite directions": "Delta 494 has separately printed LGA–PBI and PBI–LGA services, with non-overlapping times. The shared number is not treated as a duplicate.",
+    "Aircraft": "No individual aircraft type or registration inferred from generic equipment symbols.",
+    "Airport locations": "Historical airport names/codes follow pp.260–261. Modern reference coordinates serve only as approximate same-airfield markers."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "package": "v130",
+  "checked_on": "2026-10-02",
+  "source": "challenge-international-19851220",
+  "issue_url": "https://www.timetableimages.com/ttimages/3c8512.htm",
+  "publication_index_url": "https://www.timetableimages.com/ttimages/3c.htm",
+  "files": [
+    {
+      "url": "https://www.timetableimages.com/ttimages/3c/3c8512/3c8512-1.jpg",
+      "bytes": 163657,
+      "sha256": "ab6b0005563c2288c980b0f11d98b4c2706ec199542764863ad56e3646e1afd6"
+    },
+    {
+      "url": "https://www.timetableimages.com/ttimages/3c/3c8512/3c8512-2.jpg",
+      "bytes": 254882,
+      "sha256": "670460a8eeafeec46c8ef6c138273675b5a1ee8de4f9cc7d610b3da2ee2218a0"
+    }
+  ],
+  "visual_reviewed_import_pages": [
+    1,
+    2
+  ],
+  "printed_valid_from": "1985-12-20",
+  "printed_valid_to": null,
+  "amendment_coverage_complete": false,
+  "time_basis": "Local-time inference from convention and timezone consistency; no explicit local-time legend.",
+  "timezones_fixed_hours_for_import_dates": {
+    "MIA": -5,
+    "BZE": -6,
+    "KIN": -5,
+    "MBJ": -5,
+    "SAP": -6
+  },
+  "accepted_zero_stop_rows": 10,
+  "held_one_stop_rows": 10,
+  "printed_prefix": "VV",
+  "archive_code": "3C",
+  "equipment": null,
+  "legal_operator_verified": false,
+  "important_boundaries": [
+    "VV308 arrival00:15 is next day, not same day.",
+    "VV30212:00noon is midday, not midnight.",
+    "VV106BZE andVV102SAP overlap both window boundaries, producing three dates each.",
+    "VV103/VV104 Wednesday variants produce no window movements.",
+    "No individual aircraft, payload or actual operation inferred."
+  ]
+}

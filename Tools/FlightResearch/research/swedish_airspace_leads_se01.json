@@ -1,0 +1,105 @@
+[
+  {
+    "id": "visby-19860228-1200",
+    "kind": "contemporary_planning_letter",
+    "url": "https://wpu.nu/images/6/66/FM-1986-02-13_Torsten_Sellin_handbrev_%C3%B6vning_Gustaf.pdf",
+    "printed_page": "1",
+    "document_date": "1986-02-13",
+    "document_reference": "CFV210:60425",
+    "visual_review": true,
+    "reported_departure_place": "Visby",
+    "reported_departure_date": "1986-02-28",
+    "reported_departure_clock": "12:00",
+    "time_basis": "local interpretation; no UTC offset printed",
+    "destination": null,
+    "flight_number": null,
+    "airline": null,
+    "arrival_clock": null,
+    "actual_operation_confirmed": false,
+    "runtime_imported": false,
+    "next_action": "Find applicable Visby timetable or departure journal; do not infer arrival time, destination or operator from travel purpose."
+  },
+  {
+    "id": "a6774-departure-list-attachments",
+    "kind": "primary_police_memo",
+    "url": "https://wpu.nu/images/3/3a/Pol-1986-05-06_A6774-00_Ang%C3%A5ende_passagerarlistor_SAS.pdf",
+    "document_date": "1986-05-06",
+    "visual_review": true,
+    "pdf_pages": 1,
+    "reported_attachment_scope": "Arlanda departures1–7March1986 and charter1–15March1986",
+    "attachments_present_in_download": false,
+    "runtime_imported": false,
+    "next_action": "Locate the separately held departure-list attachments, especially1March. Only flight number, destination and time needed; no passenger names required."
+  },
+  {
+    "id": "d9440-travel-order",
+    "kind": "primary_travel_order",
+    "url": "https://wpu.nu/images/e/e5/Pol-1987-11-23_D9440-01_Lars-Nilsson-%C3%B6vningen-Gustav-Gotland.pdf",
+    "pdf_page": 4,
+    "document_date": "1986-02-17",
+    "visual_review": true,
+    "runtime_imported": false,
+    "finding": "Travel and duty times are not aircraft departure/arrival times. The28February10:30 entry is end of duty at destination, not a flight departure. No new flight generated."
+  },
+  {
+    "id": "ppi-background",
+    "kind": "archive_background",
+    "url": "https://arkis2dok.riksarkivet.se/kra/1297/Bakgrund%20PPI-film.pdf",
+    "visual_reviewed_pdf_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      16,
+      17,
+      18
+    ],
+    "title": "Fakta kring, och hantering av, bevarade radarfilmer/PPI-filmer",
+    "author": "Ulf Hugo",
+    "document_date": "2019-10",
+    "finding": "Describes time-compressed filming of radar screens; identifies R130 Furillen as PS-65. Reference for interpreting film, not a flight list.",
+    "archive_inventory_note": "Printed p.17 identifies a daily film register listing station, covered time interval and reel number; use it to establish the exact28February–1March1986 surviving coverage. Printed p.15 gives broad retained year ranges, not proof that every day survives."
+  },
+  {
+    "id": "r130-19860228",
+    "kind": "radar_film_copy",
+    "url": "https://wpu.nu/images/a/a2/R130-19860228.mp4",
+    "file_page": "https://wpu.nu/wiki/Fil:R130-19860228.mp4",
+    "inspection": "One frame at video offset60seconds",
+    "visible_station": "R130",
+    "visible_date": "86.02.28",
+    "visible_clock": "17.56.24",
+    "clock_timezone": null,
+    "flight_identity": null,
+    "calibrated_positions": false,
+    "track_extracted": false,
+    "full_film_reviewed": false,
+    "runtime_imported": false,
+    "next_action": "Establish time standard, map scale/orientation and image geometry; review continuous sweeps to distinguish tracks from fixed marks; corroborate identities independently."
+  },
+  {
+    "id": "other-radar-copies",
+    "kind": "unreviewed_radar_files",
+    "index_url": "https://wpu.nu/wiki/Flyg",
+    "file_pages": [
+      "https://wpu.nu/wiki/Fil:R134-19860228-19860302.mp4",
+      "https://wpu.nu/wiki/Fil:R106-19860228.mp4",
+      "https://wpu.nu/wiki/Fil:R106-19860228-19860301.mp4"
+    ],
+    "full_film_reviewed": false,
+    "runtime_imported": false,
+    "secondary_source_claim": "WPU reports an R106 image gap17:42–07:30; not independently verified here. No missing-flight conclusion drawn."
+  },
+  {
+    "id": "csa-balkan-lot-recheck",
+    "kind": "timetable_availability",
+    "urls": [
+      "https://www.airtimes.com/cgat/cz/csa/gal/okgal1a80.htm",
+      "https://airtimes.com/cgat/bg/balkan/gal/lzgal80.htm",
+      "https://www.ebay.co.uk/itm/198076798105"
+    ],
+    "finding": "Gallery HTML checked: CSA PDFs1987/88, Balkan1985summer and1986summer plus other seasons; no applicable winter1985/86 PDF found. LOT listing returned404. No new Sweden rows."
+  }
+]

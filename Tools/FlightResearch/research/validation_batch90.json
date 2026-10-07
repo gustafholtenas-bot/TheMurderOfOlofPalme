@@ -1,0 +1,364 @@
+{
+  "batch": 90,
+  "package": "v93",
+  "based_on_package": "v92",
+  "checked_on": "2026-09-30",
+  "previous_movements": 5670,
+  "source_rows": 38,
+  "selected_city_direction_tables": 8,
+  "new_schedules": 19,
+  "new_schedule_ids": [
+    "delta-1050-BTR-DFW-1315-b90",
+    "delta-1089-ATL-BTR-1148-b90",
+    "delta-1192-BTR-ATL-1720-b90",
+    "delta-211-BTR-DFW-2000-b90",
+    "delta-578-BTR-ATL-0730-b90",
+    "delta-595-ATL-BTR-1848-b90",
+    "delta-636-BTR-MOB-0910-b90",
+    "delta-636-DFW-BTR-0725-b90",
+    "delta-804-BTR-ATL-1300-b90",
+    "delta-812-DFW-BTR-1953-b90",
+    "delta-851-BTR-DFW-0645-b90",
+    "delta-923-BTR-DFW-1000-b90",
+    "delta-923-PNS-BTR-0855-b90",
+    "delta-929-ATL-BTR-1525-b90",
+    "delta-976-DFW-BTR-1705-b90",
+    "delta-980-BTR-MOB-1445-b90",
+    "delta-980-DFW-BTR-1315-b90",
+    "delta-991-BTR-DFW-1640-b90",
+    "delta-991-PNS-BTR-1535-b90"
+  ],
+  "source_row_actions": {
+    "new_schedule": 19,
+    "excluded_through_stops": 12,
+    "excluded_connection": 7
+  },
+  "new_movements": 37,
+  "new_movements_by_source_airline": {
+    "delta": 37
+  },
+  "new_movements_by_directed_pair": {
+    "ATL–BTR": 5,
+    "BTR–ATL": 6,
+    "BTR–DFW": 10,
+    "BTR–MOB": 4,
+    "DFW–BTR": 8,
+    "PNS–BTR": 4
+  },
+  "new_leg_ids": [
+    "delta-991-BTR-DFW-1640-b90@1986-02-27",
+    "delta-976-DFW-BTR-1705-b90@1986-02-27",
+    "delta-1192-BTR-ATL-1720-b90@1986-02-27",
+    "delta-595-ATL-BTR-1848-b90@1986-02-27",
+    "delta-812-DFW-BTR-1953-b90@1986-02-27",
+    "delta-211-BTR-DFW-2000-b90@1986-02-27",
+    "delta-851-BTR-DFW-0645-b90@1986-02-28",
+    "delta-636-DFW-BTR-0725-b90@1986-02-28",
+    "delta-578-BTR-ATL-0730-b90@1986-02-28",
+    "delta-923-PNS-BTR-0855-b90@1986-02-28",
+    "delta-636-BTR-MOB-0910-b90@1986-02-28",
+    "delta-923-BTR-DFW-1000-b90@1986-02-28",
+    "delta-1089-ATL-BTR-1148-b90@1986-02-28",
+    "delta-804-BTR-ATL-1300-b90@1986-02-28",
+    "delta-1050-BTR-DFW-1315-b90@1986-02-28",
+    "delta-980-DFW-BTR-1315-b90@1986-02-28",
+    "delta-929-ATL-BTR-1525-b90@1986-02-28",
+    "delta-980-BTR-MOB-1445-b90@1986-02-28",
+    "delta-991-PNS-BTR-1535-b90@1986-02-28",
+    "delta-991-BTR-DFW-1640-b90@1986-02-28",
+    "delta-976-DFW-BTR-1705-b90@1986-02-28",
+    "delta-1192-BTR-ATL-1720-b90@1986-02-28",
+    "delta-595-ATL-BTR-1848-b90@1986-02-28",
+    "delta-812-DFW-BTR-1953-b90@1986-02-28",
+    "delta-211-BTR-DFW-2000-b90@1986-02-28",
+    "delta-851-BTR-DFW-0645-b90@1986-03-01",
+    "delta-636-DFW-BTR-0725-b90@1986-03-01",
+    "delta-578-BTR-ATL-0730-b90@1986-03-01",
+    "delta-923-PNS-BTR-0855-b90@1986-03-01",
+    "delta-636-BTR-MOB-0910-b90@1986-03-01",
+    "delta-923-BTR-DFW-1000-b90@1986-03-01",
+    "delta-1089-ATL-BTR-1148-b90@1986-03-01",
+    "delta-804-BTR-ATL-1300-b90@1986-03-01",
+    "delta-1050-BTR-DFW-1315-b90@1986-03-01",
+    "delta-980-DFW-BTR-1315-b90@1986-03-01",
+    "delta-980-BTR-MOB-1445-b90@1986-03-01",
+    "delta-991-PNS-BTR-1535-b90@1986-03-01"
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 6,
+    "1986-02-28": 19,
+    "1986-03-01": 12
+  },
+  "total_movements": 5707,
+  "retained_previous_movement_ids": 5670,
+  "unchanged_previous_movements": 5670,
+  "unchanged_previous_schedules": 3485,
+  "corrected_previous_schedule_ids": [],
+  "corrected_previous_movement_ids": [],
+  "new_airports": [
+    "BTR"
+  ],
+  "new_airlines": [],
+  "total_airports": 256,
+  "total_directed_endpoint_pairs": 1134,
+  "runtime_coverage": {
+    "registered_airlines": 96,
+    "registered_countries": 81,
+    "reviewed_schedules": 3483,
+    "animated_airlines": 50,
+    "scheduled_movements": 5706,
+    "confirmed_movements": 1
+  },
+  "delta_total_movements": 1587,
+  "comair_total_movements": 381,
+  "asa_total_movements": 12,
+  "data_only_delivery": true,
+  "coverage_complete": false,
+  "reviewed_schedules_without_window_movements": [],
+  "schedules_with_three_overlapping_movements": [],
+  "schedules_with_one_overlapping_movement": [
+    "delta-929-ATL-BTR-1525-b90"
+  ],
+  "previous_corrections_preserved": [
+    "v87: COMAIR 1582 CVG–DTW",
+    "v89: COMAIR 1580 ORD–MKE; stable IDs retained"
+  ],
+  "prior_held_source_conflicts_preserved": [
+    "batch80: Delta 597 MEM–LIT time conflict",
+    "batch82: CMH–SDF 1871/1671 number conflict"
+  ],
+  "next_priority": "Birmingham/Montgomery: missing Baton Rouge–Birmingham 976 and Birmingham–Baton Rouge 317; ASA Memphis regional network; Memphis–LaGuardia",
+  "europe_resume_country": "cy",
+  "independent_fixed_offset_and_weekday_check": true,
+  "expected_movement_utc": {
+    "delta-578-BTR-ATL-0730-b90@1986-02-28": [
+      "1986-02-28T13:30:00Z",
+      "1986-02-28T14:39:00Z"
+    ],
+    "delta-578-BTR-ATL-0730-b90@1986-03-01": [
+      "1986-03-01T13:30:00Z",
+      "1986-03-01T14:39:00Z"
+    ],
+    "delta-804-BTR-ATL-1300-b90@1986-02-28": [
+      "1986-02-28T19:00:00Z",
+      "1986-02-28T20:09:00Z"
+    ],
+    "delta-804-BTR-ATL-1300-b90@1986-03-01": [
+      "1986-03-01T19:00:00Z",
+      "1986-03-01T20:09:00Z"
+    ],
+    "delta-1192-BTR-ATL-1720-b90@1986-02-27": [
+      "1986-02-27T23:20:00Z",
+      "1986-02-28T00:30:00Z"
+    ],
+    "delta-1192-BTR-ATL-1720-b90@1986-02-28": [
+      "1986-02-28T23:20:00Z",
+      "1986-03-01T00:30:00Z"
+    ],
+    "delta-1089-ATL-BTR-1148-b90@1986-02-28": [
+      "1986-02-28T16:48:00Z",
+      "1986-02-28T18:10:00Z"
+    ],
+    "delta-1089-ATL-BTR-1148-b90@1986-03-01": [
+      "1986-03-01T16:48:00Z",
+      "1986-03-01T18:10:00Z"
+    ],
+    "delta-929-ATL-BTR-1525-b90@1986-02-28": [
+      "1986-02-28T20:25:00Z",
+      "1986-02-28T21:50:00Z"
+    ],
+    "delta-595-ATL-BTR-1848-b90@1986-02-27": [
+      "1986-02-27T23:48:00Z",
+      "1986-02-28T01:10:00Z"
+    ],
+    "delta-595-ATL-BTR-1848-b90@1986-02-28": [
+      "1986-02-28T23:48:00Z",
+      "1986-03-01T01:10:00Z"
+    ],
+    "delta-851-BTR-DFW-0645-b90@1986-02-28": [
+      "1986-02-28T12:45:00Z",
+      "1986-02-28T13:54:00Z"
+    ],
+    "delta-851-BTR-DFW-0645-b90@1986-03-01": [
+      "1986-03-01T12:45:00Z",
+      "1986-03-01T13:54:00Z"
+    ],
+    "delta-923-BTR-DFW-1000-b90@1986-02-28": [
+      "1986-02-28T16:00:00Z",
+      "1986-02-28T17:09:00Z"
+    ],
+    "delta-923-BTR-DFW-1000-b90@1986-03-01": [
+      "1986-03-01T16:00:00Z",
+      "1986-03-01T17:09:00Z"
+    ],
+    "delta-1050-BTR-DFW-1315-b90@1986-02-28": [
+      "1986-02-28T19:15:00Z",
+      "1986-02-28T20:24:00Z"
+    ],
+    "delta-1050-BTR-DFW-1315-b90@1986-03-01": [
+      "1986-03-01T19:15:00Z",
+      "1986-03-01T20:24:00Z"
+    ],
+    "delta-991-BTR-DFW-1640-b90@1986-02-27": [
+      "1986-02-27T22:40:00Z",
+      "1986-02-27T23:49:00Z"
+    ],
+    "delta-991-BTR-DFW-1640-b90@1986-02-28": [
+      "1986-02-28T22:40:00Z",
+      "1986-02-28T23:49:00Z"
+    ],
+    "delta-211-BTR-DFW-2000-b90@1986-02-27": [
+      "1986-02-28T02:00:00Z",
+      "1986-02-28T03:09:00Z"
+    ],
+    "delta-211-BTR-DFW-2000-b90@1986-02-28": [
+      "1986-03-01T02:00:00Z",
+      "1986-03-01T03:09:00Z"
+    ],
+    "delta-636-DFW-BTR-0725-b90@1986-02-28": [
+      "1986-02-28T13:25:00Z",
+      "1986-02-28T14:35:00Z"
+    ],
+    "delta-636-DFW-BTR-0725-b90@1986-03-01": [
+      "1986-03-01T13:25:00Z",
+      "1986-03-01T14:35:00Z"
+    ],
+    "delta-980-DFW-BTR-1315-b90@1986-02-28": [
+      "1986-02-28T19:15:00Z",
+      "1986-02-28T20:25:00Z"
+    ],
+    "delta-980-DFW-BTR-1315-b90@1986-03-01": [
+      "1986-03-01T19:15:00Z",
+      "1986-03-01T20:25:00Z"
+    ],
+    "delta-976-DFW-BTR-1705-b90@1986-02-27": [
+      "1986-02-27T23:05:00Z",
+      "1986-02-28T00:15:00Z"
+    ],
+    "delta-976-DFW-BTR-1705-b90@1986-02-28": [
+      "1986-02-28T23:05:00Z",
+      "1986-03-01T00:15:00Z"
+    ],
+    "delta-812-DFW-BTR-1953-b90@1986-02-27": [
+      "1986-02-28T01:53:00Z",
+      "1986-02-28T03:00:00Z"
+    ],
+    "delta-812-DFW-BTR-1953-b90@1986-02-28": [
+      "1986-03-01T01:53:00Z",
+      "1986-03-01T03:00:00Z"
+    ],
+    "delta-636-BTR-MOB-0910-b90@1986-02-28": [
+      "1986-02-28T15:10:00Z",
+      "1986-02-28T15:53:00Z"
+    ],
+    "delta-636-BTR-MOB-0910-b90@1986-03-01": [
+      "1986-03-01T15:10:00Z",
+      "1986-03-01T15:53:00Z"
+    ],
+    "delta-980-BTR-MOB-1445-b90@1986-02-28": [
+      "1986-02-28T20:45:00Z",
+      "1986-02-28T21:28:00Z"
+    ],
+    "delta-980-BTR-MOB-1445-b90@1986-03-01": [
+      "1986-03-01T20:45:00Z",
+      "1986-03-01T21:28:00Z"
+    ],
+    "delta-923-PNS-BTR-0855-b90@1986-02-28": [
+      "1986-02-28T14:55:00Z",
+      "1986-02-28T15:38:00Z"
+    ],
+    "delta-923-PNS-BTR-0855-b90@1986-03-01": [
+      "1986-03-01T14:55:00Z",
+      "1986-03-01T15:38:00Z"
+    ],
+    "delta-991-PNS-BTR-1535-b90@1986-02-28": [
+      "1986-02-28T21:35:00Z",
+      "1986-02-28T22:18:00Z"
+    ],
+    "delta-991-PNS-BTR-1535-b90@1986-03-01": [
+      "1986-03-01T21:35:00Z",
+      "1986-03-01T22:18:00Z"
+    ]
+  },
+  "no_affected_flight_number_time_overlaps": true,
+  "verified_independent_segment_ground_times": [
+    {
+      "incoming": "delta-636-DFW-BTR-0725-b90@1986-02-28",
+      "outgoing": "delta-636-BTR-MOB-0910-b90@1986-02-28",
+      "ground_minutes": 35,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-636-BTR-MOB-0910-b90@1986-02-28",
+      "outgoing": "delta-636-MOB-ATL-1025-b89@1986-02-28",
+      "ground_minutes": 32,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-980-DFW-BTR-1315-b90@1986-02-28",
+      "outgoing": "delta-980-BTR-MOB-1445-b90@1986-02-28",
+      "ground_minutes": 20,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-980-BTR-MOB-1445-b90@1986-02-28",
+      "outgoing": "delta-980-MOB-ATL-1550-b89@1986-02-28",
+      "ground_minutes": 22,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-980-MOB-ATL-1550-b89@1986-02-28",
+      "outgoing": "delta-980-ATL-MSP-1848@1986-02-28",
+      "ground_minutes": 63,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-923-ATL-PNS-0838-b89@1986-02-28",
+      "outgoing": "delta-923-PNS-BTR-0855-b90@1986-02-28",
+      "ground_minutes": 20,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-923-PNS-BTR-0855-b90@1986-02-28",
+      "outgoing": "delta-923-BTR-DFW-1000-b90@1986-02-28",
+      "ground_minutes": 22,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-991-ATL-PNS-1518-b89@1986-02-28",
+      "outgoing": "delta-991-PNS-BTR-1535-b90@1986-02-28",
+      "ground_minutes": 20,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-991-PNS-BTR-1535-b90@1986-02-28",
+      "outgoing": "delta-991-BTR-DFW-1640-b90@1986-02-28",
+      "ground_minutes": 22,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-804-BTR-ATL-1300-b90@1986-02-28",
+      "outgoing": "delta-804-ATL-LGA-1546-b65@1986-02-28",
+      "ground_minutes": 37,
+      "date": "1986-02-28"
+    },
+    {
+      "incoming": "delta-595-BWI-ATL-1600-b65@1986-02-28",
+      "outgoing": "delta-595-ATL-BTR-1848-b90@1986-02-28",
+      "ground_minutes": 69,
+      "date": "1986-02-28"
+    }
+  ],
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  },
+  "validation_status": "passed_data_checks; unreal_runtime_not_run"
+}

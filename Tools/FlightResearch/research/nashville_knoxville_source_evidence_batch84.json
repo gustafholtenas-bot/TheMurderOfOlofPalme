@@ -1,0 +1,48 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    16,
+    50,
+    51,
+    121,
+    123,
+    166,
+    167
+  ],
+  "itinerary_printed_pages": [
+    263,
+    264,
+    265
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "16": 11,
+    "50": 28,
+    "51": 28,
+    "121": 63,
+    "123": 64,
+    "166": 86,
+    "167": 86,
+    "263": 134,
+    "264": 135,
+    "265": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "67 rows in eight complete selected city-direction tables visually reviewed: 38 nonstop schedules accepted, 27 connections and two through-stop rows excluded.",
+    "All accepted Delta rows are daily. COMAIR uses blank daily, X6, X7, X67 and 6; no accepted dated footnote.",
+    "COMAIR 1619 TYS–CVG has independent Monday–Friday 13:25–14:35 and Saturday 13:25–14:38 rows. No Sunday service appears in this table.",
+    "Magnified scans verify BNA–CVG1646 19:10–21:25, CVG–BNA1628 15:05–15:15, TYS–CVG1725 arrival 07:36, CVG–TYS1571 15:20–16:30, ATL–TYS948 departure 08:49 and 758 departure 23:04.",
+    "Earlier CVG–DTW 09:31 is 1582, not 1592: p50 city table and p264 itinerary agree. Correction is recorded in errata_batch84.json; stable IDs and times retained.",
+    "Excluded Saturday connection 1679/615 on p51 prints arrival 12:29; separately sourced LEX–BNA 615 p129 prints 12:28. The connection is research only; no change to the physical leg is justified.",
+    "Two excluded connections arriving 00:10 have next-day arrival offset; neither creates runtime movements.",
+    "Nashville uses UTC−6; Knoxville, Cincinnati and Atlanta use UTC−5. All accepted arrivals are on the departure local calendar date.",
+    "Three daily schedules each produce three movements by overlap with both boundaries of the exact 48-hour window; full times retained.",
+    "Prior held conflicts from batches 80 and 82 remain unchanged and unimported. Later amendments and timetable end date unverified; scheduled service does not establish actual operation, aircraft identity or path."
+  ]
+}

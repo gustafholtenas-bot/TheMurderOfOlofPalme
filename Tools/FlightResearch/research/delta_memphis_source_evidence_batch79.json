@@ -1,0 +1,53 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    16,
+    48,
+    51,
+    65,
+    74,
+    111,
+    145,
+    146,
+    147
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "16": 11,
+    "48": 27,
+    "51": 28,
+    "65": 35,
+    "74": 40,
+    "111": 58,
+    "145": 75,
+    "146": 76,
+    "147": 76,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "All 82 rows in 12 selected direction tables visually reviewed, including frequency and stops columns.",
+    "45 nonstop rows accepted. 29 connections and eight one-stop rows excluded as direct physical segments.",
+    "Blank frequency means daily; X6 excludes Saturday and X7 excludes Sunday. Accepted rows have no dated footnotes.",
+    "MEM, DFW and ORD use UTC-6; ATL, CVG, DTW and IND use UTC-5 during the import window.",
+    "All accepted arrivals are on the same local date; excluded connecting itineraries can arrive after midnight.",
+    "ATL-MEM 305 is X6, MEM-ATL 305 is daily. Printed itinerary 305 explicitly lists ATL MEM ATL.",
+    "MEM-DTW 1124 and 427 have an intermediate IND stop; MEM-DTW 692 also has one stop. They are not direct segments.",
+    "CVG-MEM 1101 stops at SDF; DTW-MEM 581 and 1123 stop at IND. Through totals are not used as nonstop legs.",
+    "Independent printed itinerary pages confirm accepted flight numbers and segments.",
+    "All v81 movement objects and earlier schedule records unchanged; v81 errata retained.",
+    "Later amendments and timetable end date not verified; planned service is not proof of operation."
+  ]
+}

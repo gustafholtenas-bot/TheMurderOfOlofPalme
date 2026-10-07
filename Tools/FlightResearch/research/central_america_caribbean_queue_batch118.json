@@ -1,0 +1,392 @@
+{
+  "package": "v121",
+  "checked_on": "2026-10-01",
+  "user_request_sv": "jag är mycket intresserad sedan av alla plant runt niqaracua och st thomas or runt hela den regionen",
+  "priority": "next_region_after_v121_middle_east_batch",
+  "observation_window_utc": [
+    "1986-02-27T22:21:30Z",
+    "1986-03-01T22:21:30Z"
+  ],
+  "focus": [
+    {
+      "name": "Nicaragua",
+      "airport_ids": [],
+      "movements": 0,
+      "interpretation": "Database gap, not evidence of absent historical traffic."
+    },
+    {
+      "name": "St. Thomas",
+      "airport_ids": [],
+      "movements": 0,
+      "interpretation": "Database gap, not evidence of absent historical traffic."
+    }
+  ],
+  "research_areas": [
+    {
+      "research_area": "ni",
+      "name": "Nicaragua",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "bz",
+      "name": "Belize",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "gt",
+      "name": "Guatemala",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "hn",
+      "name": "Honduras",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "sv",
+      "name": "El Salvador",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "cr",
+      "name": "Costa Rica",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "pa",
+      "name": "Panama",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "vi",
+      "name": "Amerikanska Jungfruöarna / St. Thomas, St. Croix",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "vg",
+      "name": "Brittiska Jungfruöarna",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "pr",
+      "name": "Puerto Rico",
+      "current_database": {
+        "movements": 10,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "cu",
+      "name": "Kuba",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "jm",
+      "name": "Jamaica",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ht",
+      "name": "Haiti",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "do",
+      "name": "Dominikanska republiken",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "bs",
+      "name": "Bahamas",
+      "current_database": {
+        "movements": 19,
+        "directed_pairs": 8,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ky",
+      "name": "Caymanöarna",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "tc",
+      "name": "Turks- och Caicosöarna",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "ag",
+      "name": "Antigua och Barbuda",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "kn",
+      "name": "Saint Kitts och Nevis",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "dm",
+      "name": "Dominica",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "lc",
+      "name": "Saint Lucia",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "vc",
+      "name": "Saint Vincent och Grenadinerna",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "gd",
+      "name": "Grenada",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "bb",
+      "name": "Barbados",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "tt",
+      "name": "Trinidad och Tobago",
+      "current_database": {
+        "movements": 4,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "gp",
+      "name": "Guadeloupe och dåvarande franska karibiska områden",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "mq",
+      "name": "Martinique",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "aw",
+      "name": "Aruba",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    },
+    {
+      "research_area": "an",
+      "name": "Nederländska Antillerna (1986)",
+      "current_database": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "complete": false
+    }
+  ],
+  "geographic_policy": "Working search scope, not new runtime geography. Verify territorial and airport names as of1986 before any import. St Thomas interpreted as US Virgin Islands. Include regional links to southern Mexico, Florida and northern South America.",
+  "traffic_scope": [
+    "scheduled passenger",
+    "regional and island flights",
+    "cargo and charter",
+    "private/government where documented",
+    "military and special flights where documented"
+  ],
+  "next_tasks": [
+    {
+      "priority": 1,
+      "task_sv": "Nicaragua: verifiera operatörer, historiska flygfält och datumgiltig vintertrafik. Sök belägg för regionala och internationella sträckor samt dokumenterade specialflygningar."
+    },
+    {
+      "priority": 2,
+      "task_sv": "St. Thomas: granska Pan Am-bokens St. Thomas-, San Juan-, NewYork- och Miami-sidor. Kontrollera flygplatsnamnet som gällde1986 samt anslutningar inom Jungfruöarna."
+    },
+    {
+      "priority": 3,
+      "task_sv": "Utvidga till grannländer, regionala nav och övriga Karibien, med både större bolag och regional-/frakt-/chartertrafik."
+    },
+    {
+      "priority": 4,
+      "task_sv": "Sök samtida flygloggar, rörelsehandlingar och arkiv för militära/särskilda flygningar. Dokumentera vad som saknar exakta datum/tider, registrering eller mellanlandningar."
+    }
+  ],
+  "available_primary_timetable_leads": [
+    {
+      "source": "panam-19860211",
+      "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+      "note": "Existing full scan; regional panels still require original-image review. Connection rows are not nonstop evidence."
+    },
+    {
+      "url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+      "note": "Existing Delta February1986 timetable; inventory accepted regional records before importing any duplicates."
+    }
+  ],
+  "source_rules": [
+    "Use valid1986 source clocks and actual physical segments.",
+    "A published schedule does not identify an individual aircraft or confirm it flew.",
+    "Do not infer a clandestine or military flight from general history, ownership or a route map.",
+    "Retain uncertain records in research, not runtime.",
+    "Endpoint movements cannot establish all overflying aircraft or a complete regional census."
+  ],
+  "coverage_complete": false,
+  "all_aircraft_inventory_verified": false,
+  "new_runtime_rows_from_this_queue": 0
+}

@@ -1,0 +1,20 @@
+{
+  "package": "v86",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "BNA",
+      "name": "Nashville–Berry Field (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 36.1245,
+      "lon": -86.6782,
+      "coordinate_source": "https://ourairports.com/airports/KBNA/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://nashville.legistar.com/LegislationDetail.aspx?FullText=1&GUID=BB2D0654-87E7-46DA-B059-F5B0E951A0B9&ID=5667813&Options=&Search=",
+      "historical_location_note": "Nashville Metropolitan Council resolution RS2022-1582 describes Berry Field opening in 1937, the later terminal opening in 1987 and the Nashville International name adopted in 1988. The historical Berry Field name is retained. Modern OurAirports coordinates are an approximate airport-area marker, not a precise 1986 terminal, gate, runway or aircraft position."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinate used as approximate airport-area marker, with historical name and terminal dates independently reviewed.",
+  "historical_scope": "Berry Field name retained for 1986; the 1987 terminal and 1988 International name are not projected back."
+}

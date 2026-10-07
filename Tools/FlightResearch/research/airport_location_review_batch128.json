@@ -1,0 +1,42 @@
+{
+  "package": "v131",
+  "airport_records": [
+    {
+      "id": "PVR",
+      "name": "Puerto Vallarta International (1986)",
+      "country": "mx",
+      "timezone": "America/Mexico_City",
+      "lat": 20.679913,
+      "lon": -105.254391,
+      "coordinate_source": "https://ourairports.com/airports/MMPR/",
+      "coordinate_record_id": "MMPR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+        "https://www.aeropuertosgap.com.mx/es/puerto-vallarta.html"
+      ],
+      "location_note": "Republic scan 7 explicitly identifies PVR as Puerto Vallarta. GAP identifies the present PVR/MMPR airport in Puerto Vallarta, Jalisco. The contemporary code is mapped to this approximate airfield location; exact 1986 runway and terminal configuration is not established. No opening-date claim is based on the modern GAP page. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity reviewed separately."
+    },
+    {
+      "id": "GPT",
+      "name": "Gulfport–Biloxi (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 30.405582,
+      "lon": -89.069836,
+      "coordinate_source": "https://ourairports.com/airports/KGPT/",
+      "coordinate_record_id": "KGPT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+        "https://www.flygpt.com/about-gpt/history/"
+      ],
+      "location_note": "Republic scan 7 explicitly identifies GPT as Gulfport/Biloxi. Airport authority history establishes this field before 1986: built 1942, conveyed to the city in 1949, commercial service in the early 1950s. Later airport expansions are not reconstructed. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity reviewed separately."
+    }
+  ],
+  "new_country_records": [],
+  "existing_airports_unchanged": 383,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed1986 terminal/runway coordinates. Source-era identities reviewed separately."
+}

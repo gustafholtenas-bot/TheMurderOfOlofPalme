@@ -22,6 +22,7 @@ struct FTMOPAtlasLink
 struct FTMOPAtlasOffice
 {
     FString Id, Parent, Label, Note, Relation; // group or reports_to; a forest is allowed.
+    FString Portrait, PortraitCaption; // Local filename and localized attribution key.
     TArray<FString> Sources;
 };
 

@@ -1,8 +1,8 @@
 # Europa – landvis flyggenomgång
 
-Uppdaterat 2026-09-30 för v79. Paketet innehåller 4 883 rörelser.
+Uppdaterat 2026-10-02 för v141_SE01. Paketet innehåller 11 506 rörelser.
 
-Arbetsordningen gäller en ny granskning land för land. Äldre importer följer med, men räknas inte som en färdig landsinventering. Granskade urval i denna följd: Sverige, Norge, Danmark, Finland, Island, Storbritannien, Jersey, Guernsey, Isle of Man, Irland, Frankrike, Monaco, Andorra, Spanien, Gibraltar, Portugal, Nederländerna, Belgien, Luxemburg, Västtyskland, Östtyskland, Västberlin, Schweiz, Liechtenstein, Österrike, Italien, San Marino, Vatikanstaten, Malta, Polen, Tjeckoslovakien, Ungern, Rumänien, Bulgarien, Jugoslavien, Albanien, Grekland, Cypern, Turkiet, Sovjetunionen. **Cypern är nästa fördjupning**.
+Arbetsordningen gäller en ny granskning land för land. Äldre importer följer med, men räknas inte som en färdig landsinventering. Granskade urval i denna följd: Sverige, Norge, Danmark, Finland, Island, Storbritannien, Jersey, Guernsey, Isle of Man, Irland, Frankrike, Monaco, Andorra, Spanien, Gibraltar, Portugal, Nederländerna, Belgien, Luxemburg, Västtyskland, Östtyskland, Västberlin, Schweiz, Liechtenstein, Österrike, Italien, San Marino, Vatikanstaten, Malta, Polen, Tjeckoslovakien, Ungern, Rumänien, Bulgarien, Jugoslavien, Albanien, Grekland, Cypern, Turkiet, Sovjetunionen. **Sverige är nästa fördjupning**.
 
 **Rörelser räknas efter start- eller destinationsland, oavsett bolagets hemland.** Inrikesflyg räknas en gång i landraden. Ett gränsöverskridande flyg kan finnas i två landrader; landtalen ska inte summeras. Noll betyder inga inlagda rörelser, inte att flygtrafik saknades.
 
@@ -15,30 +15,30 @@ Historiska länder används för 1986. Väst- och Östtyskland hålls isär, Vä
 | 3 | Danmark | 85 | 1 | Granskat urval; luckor kvar |
 | 4 | Finland | 4 | 0 | Granskat urval; luckor kvar |
 | 5 | Island | 0 | 0 | Granskat urval; luckor kvar |
-| 6 | Storbritannien | 556 | 140 | Granskat urval; luckor kvar |
-| 7 | Jersey | 43 | 0 | Granskat urval; luckor kvar |
+| 6 | Storbritannien | 600 | 140 | Granskat urval; luckor kvar |
+| 7 | Jersey | 51 | 0 | Granskat urval; luckor kvar |
 | 8 | Guernsey | 42 | 0 | Granskat urval; luckor kvar |
 | 9 | Isle of Man | 0 | 0 | Granskat urval; luckor kvar |
 | 10 | Irland | 83 | 5 | Granskat urval; luckor kvar |
-| 11 | Frankrike | 851 | 238 | Granskat urval; luckor kvar |
+| 11 | Frankrike | 1032 | 238 | Granskat urval; luckor kvar |
 | 12 | Monaco | 0 | 0 | Granskat urval; luckor kvar |
 | 13 | Andorra | 0 | 0 | Granskat urval; luckor kvar |
 | 14 | Spanien | 61 | 0 | Granskat urval; luckor kvar |
 | 15 | Gibraltar | 14 | 0 | Granskat urval; luckor kvar |
 | 16 | Portugal | 15 | 0 | Granskat urval; luckor kvar |
-| 17 | Nederländerna | 117 | 0 | Granskat urval; luckor kvar |
-| 18 | Belgien | 69 | 0 | Granskat urval; luckor kvar |
+| 17 | Nederländerna | 120 | 0 | Granskat urval; luckor kvar |
+| 18 | Belgien | 70 | 0 | Granskat urval; luckor kvar |
 | 19 | Luxemburg | 0 | 0 | Granskat urval; luckor kvar |
-| 20 | Västtyskland | 332 | 3 | Granskat urval; luckor kvar |
+| 20 | Västtyskland | 340 | 3 | Granskat urval; luckor kvar |
 | 21 | Östtyskland | 19 | 0 | Granskat urval; luckor kvar |
 | 22 | Västberlin | 152 | 0 | Granskat urval; luckor kvar |
-| 23 | Schweiz | 165 | 4 | Granskat urval; luckor kvar |
+| 23 | Schweiz | 167 | 4 | Granskat urval; luckor kvar |
 | 24 | Liechtenstein | 0 | 0 | Granskat urval; luckor kvar |
-| 25 | Österrike | 10 | 0 | Granskat urval; luckor kvar |
-| 26 | Italien | 100 | 2 | Granskat urval; luckor kvar |
+| 25 | Österrike | 12 | 0 | Granskat urval; luckor kvar |
+| 26 | Italien | 106 | 2 | Granskat urval; luckor kvar |
 | 27 | San Marino | 0 | 0 | Granskat urval; luckor kvar |
 | 28 | Vatikanstaten | 0 | 0 | Granskat urval; luckor kvar |
-| 29 | Malta | 0 | 0 | Granskat urval; luckor kvar |
+| 29 | Malta | 26 | 0 | Granskat urval; luckor kvar |
 | 30 | Polen | 6 | 0 | Granskat urval; luckor kvar |
 | 31 | Tjeckoslovakien | 2 | 0 | Granskat urval; luckor kvar |
 | 32 | Ungern | 22 | 0 | Granskat urval; luckor kvar |
@@ -46,16 +46,16 @@ Historiska länder används för 1986. Väst- och Östtyskland hålls isär, Vä
 | 34 | Bulgarien | 5 | 0 | Granskat urval; luckor kvar |
 | 35 | Jugoslavien | 12 | 0 | Granskat urval; luckor kvar |
 | 36 | Albanien | 0 | 0 | Granskat urval; luckor kvar |
-| 37 | Grekland | 17 | 0 | Granskat urval; luckor kvar |
+| 37 | Grekland | 19 | 0 | Granskat urval; luckor kvar |
 | 38 | Cypern | 1 | 0 | Granskat urval; luckor kvar |
-| 39 | Turkiet | 8 | 0 | Granskat urval; luckor kvar |
-| 40 | Sovjetunionen | 53 | 0 | Granskat urval; luckor kvar |
+| 39 | Turkiet | 10 | 0 | Granskat urval; luckor kvar |
+| 40 | Sovjetunionen | 66 | 13 | Granskat urval; luckor kvar |
 
 ## Landvisa återstående uppgifter
 
 ### 1. Sverige
 
-Andra riktade genomgången dokumenterad i SWEDEN_FOLLOWUP_BATCH46.md. SAS/Linjeflyg och Swedair saknar fortfarande kompletta granskade vinteravgångssidor för Sverige. Nya omslag och arkivhänvisningar räcker inte. A6774-01 pekar på en separat originaltidtabell; den behöver återfinnas med teckenförklaring, ändringar och fysiska delsträcksuppgifter. De tidigare 87 svenska ändpunktsrörelserna är oförändrade. Regional-, charter-, frakt-, privat-, stats-, militärtrafik och faktiska överflygningar är ofullständigt utredda.
+Fortsätt SAS/Linjeflyg/Finnair-vintertabeller. Följ upp CFV210:60425 Visby28feb12:00 och A6774-00 bilagor1mars. Kalibrera R130/R134/radarunderlag innan överflygningar identifieras. Se swedish_airspace_leads_se01.json.
 
 Registrerade hemlandsoperatörer: Golden Air, SAS Scandinavian Airlines, Linjeflyg, Swedair. Detta är inte en fullständig bolagslista.
 
@@ -95,11 +95,11 @@ Bolagskoder i landets inlagda rörelser: Inga inlagda rörelser.
 
 ### 6. Storbritannien
 
-Se EUROPE_FOLLOWUP_BATCH47.md. DA193 Inverness–Manchester, DA125 Cardiff–Bristol och DA164 Newcastle–Aberdeen hålls utanför. Övriga operatörer, senare ändringar och Dan-Airs kontinentnät återstår.
+v119/batch116: 579 rörelser med brittisk ändpunkt; CAA februari1986 ger43 rapporteringsnamn, varav36 ännu utan rörelser. Kompletta BA/BCal-tabeller, saknade AirUK-sidor och regional-, charter-, frakt- och helikopterunderlag återstår. Se UK_USSR_REVIEW_BATCH116.md och uk_ussr_research_queue_batch116.json. Nätet är partiellt.
 
 Registrerade hemlandsoperatörer: British Airways, British Caledonian, GB Airways, British Midland, Casair, Jersey European Airways, Dan-Air, Air UK, London European Airways. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Aer Lingus 38, Air France 40, Air UK 173, Air Zimbabwe 3, British Airways 116, British Midland 16, Casair 5, Dan-Air 85, Delta Air Lines 4, GB Airways 4, Jersey European Airways 2, KLM 2, Northwest Orient Airlines 12, Pan American World Airways 49, Sabena 2, SAS Scandinavian Airlines 5.
+Bolagskoder i landets inlagda rörelser: Aer Lingus 38, Air France 54, Air Malta 8, Air UK 173, Air Zimbabwe 3, British Airways 124, British Caledonian 8, British Midland 16, Casair 5, Dan-Air 89, Delta Air Lines 4, El Al 2, GB Airways 4, Jersey European Airways 2, KLM 2, Northwest Orient Airlines 12, Pan American World Airways 49, Sabena 2, SAS Scandinavian Airlines 5.
 
 ### 7. Jersey
 
@@ -107,7 +107,7 @@ Se EUROPE_FOLLOWUP_BATCH47.md. British Caledonians BR-kodade Gatwickrader och an
 
 Registrerade hemlandsoperatörer: Inga ännu registrerade. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Air UK 24, British Airways 4, Dan-Air 15.
+Bolagskoder i landets inlagda rörelser: Air UK 24, British Airways 4, British Caledonian 8, Dan-Air 15.
 
 ### 8. Guernsey
 
@@ -139,7 +139,7 @@ Se FRANCE_FOLLOWUP_BATCH49.md. Air Inter: återstående Parislinjer, regionala f
 
 Registrerade hemlandsoperatörer: Air France, UTA, Air Inter. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Aer Lingus 4, Aeroflot 5, Air France 291, Air Inter 238, Air UK 12, Alitalia 46, Austrian Airlines 4, Balkan Bulgarian Airlines 4, British Airways 41, Crossair 3, CSA Czechoslovak Airlines 1, Delta Air Lines 2, Iberia 23, JAT Yugoslav Airlines 4, KLM 21, LOT Polish Airlines 1, Lufthansa 44, Malév 2, Olympic Airways 4, Pan American World Airways 12, Sabena 13, SAS Scandinavian Airlines 19, Swissair 44, TAP Air Portugal 7, Tarom 2, THY Turkish Airlines 4.
+Bolagskoder i landets inlagda rörelser: Aer Lingus 4, Aeroflot 5, Air Afrique 5, Air Algérie 29, Air Canada 2, Air France 396, Air Inter 238, Air UK 12, Alia – Royal Jordanian Airline 2, Alitalia 46, Austrian Airlines 4, Balkan Bulgarian Airlines 4, British Airways 45, Crossair 3, CSA Czechoslovak Airlines 1, Dan-Air 4, Delta Air Lines 2, El Al 1, Iberia 23, JAT Yugoslav Airlines 4, KLM 21, LOT Polish Airlines 1, Lufthansa 44, Malév 2, Middle East Airlines 4, Olympic Airways 4, Pan American World Airways 12, Sabena 13, SAS Scandinavian Airlines 19, Saudia 1, Swissair 44, TAP Air Portugal 7, Tarom 2, Tunisair 20, THY Turkish Airlines 4, UTA 4.
 
 ### 12. Monaco
 
@@ -187,7 +187,7 @@ Se EUROPE_FOLLOWUP_BATCH50.md. Dan-Airs Tees-side-tider/dagar måste jämföras 
 
 Registrerade hemlandsoperatörer: KLM. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Aer Lingus 2, Air France 14, Air UK 49, Dan-Air 12, Japan Air Lines 2, KLM 27, Pan American World Airways 8, Swissair 3.
+Bolagskoder i landets inlagda rörelser: Aer Lingus 2, Air France 14, Air Malta 2, Air UK 49, Dan-Air 12, El Al 1, Japan Air Lines 2, KLM 27, Pan American World Airways 8, Swissair 3.
 
 ### 18. Belgien
 
@@ -195,7 +195,7 @@ Se BELGIUM_FOLLOWUP_BATCH50.md. Sabenas egen legend s.2–6 och resterande tidta
 
 Registrerade hemlandsoperatörer: Sabena. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Aer Lingus 2, Aeroflot 2, Air Algérie 2, Air France 18, Air UK 4, British Airways 9, Líneas Aéreas Paraguayas 6, Pan American World Airways 8, Sabena 18.
+Bolagskoder i landets inlagda rörelser: Aer Lingus 2, Aeroflot 2, Air Algérie 2, Air France 18, Air UK 4, British Airways 9, El Al 1, Líneas Aéreas Paraguayas 6, Pan American World Airways 8, Sabena 18.
 
 ### 19. Luxemburg
 
@@ -211,7 +211,7 @@ Se WEST_GERMANY_FOLLOWUP_BATCH51.md. Lufthansas egen vintertabell, ändringsblad
 
 Registrerade hemlandsoperatörer: Lufthansa. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Aer Lingus 1, Aeroflot 2, Air France 54, Dan-Air 10, Delta Air Lines 4, Japan Air Lines 3, Líneas Aéreas Paraguayas 2, Lufthansa 60, Northwest Orient Airlines 4, Pan American World Airways 180, Swissair 12.
+Bolagskoder i landets inlagda rörelser: Aer Lingus 1, Aeroflot 2, Air France 54, Air Malta 2, Dan-Air 10, Delta Air Lines 6, El Al 2, Japan Air Lines 3, Líneas Aéreas Paraguayas 2, Lufthansa 62, Northwest Orient Airlines 4, Pan American World Airways 180, Swissair 12.
 
 ### 21. Östtyskland
 
@@ -235,7 +235,7 @@ Se SWITZERLAND_FOLLOWUP_BATCH52.md. Swissair, Crossair och andra schweiziska ope
 
 Registrerade hemlandsoperatörer: Swissair, Crossair. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Aer Lingus 1, Aeroflot 1, Air Algérie 2, Air France 39, Crossair 3, Dan-Air 13, Iberia 2, KLM 4, Lufthansa 14, Olympic Airways 2, Pan American World Airways 16, Swissair 68.
+Bolagskoder i landets inlagda rörelser: Aer Lingus 1, Aeroflot 1, Air Algérie 2, Air France 39, Crossair 3, Dan-Air 13, El Al 2, Iberia 2, KLM 4, Lufthansa 14, Olympic Airways 2, Pan American World Airways 16, Swissair 68.
 
 ### 24. Liechtenstein
 
@@ -251,7 +251,7 @@ Se AUSTRIA_FOLLOWUP_BATCH53.md. Austrian Airlines och Tyroleans fullständiga vi
 
 Registrerade hemlandsoperatörer: Austrian Airlines, Tyrolean Airways. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Air France 4, Austrian Airlines 4, Dan-Air 2.
+Bolagskoder i landets inlagda rörelser: Air France 4, Austrian Airlines 4, Dan-Air 2, El Al 2.
 
 ### 26. Italien
 
@@ -259,7 +259,7 @@ Se AUSTRIA_FOLLOWUP_BATCH53.md. Alitalias preliminära USA-tabell hålls fortsat
 
 Registrerade hemlandsoperatörer: Alitalia. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Air France 48, Alitalia 48, Pan American World Airways 4.
+Bolagskoder i landets inlagda rörelser: Air France 48, Air Malta 2, Alitalia 50, El Al 2, Pan American World Airways 4.
 
 ### 27. San Marino
 
@@ -279,11 +279,11 @@ Bolagskoder i landets inlagda rörelser: Inga inlagda rörelser.
 
 ### 29. Malta
 
-Se CENTRAL_EUROPE_FOLLOWUP_BATCH54.md. Air Maltas fullständiga vinterinlaga27okt1985–29mars1986, teckenförklaring och ändringar behöver läsas. Index och andra säsongers tabeller används inte som avgångstider. Luqa, eventuell helikoptertrafik, utländska operatörer, charter, frakt och stats-/militärflyg kräver daterade underlag.
+INT05:Air Maltas originalutgåva27okt1985–29mars1986 läst i sin helhet.24 rader ger26 Malta-rörelser (18KM,4BA,2AZ,2LH). Luqa tillförd. Sök ändringsblad, charter/frakt och stats-/militärflyg. KM191F lördag22:30 ligger8min30s efter periodslut. Australienresor har otidsatta mellanben. Landtäckning fortsatt partiell.
 
 Registrerade hemlandsoperatörer: Air Malta. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Inga inlagda rörelser.
+Bolagskoder i landets inlagda rörelser: Air Malta 18, Alitalia 2, British Airways 4, Lufthansa 2.
 
 ### 30. Polen
 
@@ -347,7 +347,7 @@ Se GREECE_ALBANIA_FOLLOWUP_BATCH56.md. Olympics fullständiga internationella oc
 
 Registrerade hemlandsoperatörer: Olympic Airways. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Air France 6, Olympic Airways 6, Pan American World Airways 2, Swissair 3.
+Bolagskoder i landets inlagda rörelser: Air France 6, El Al 2, Olympic Airways 6, Pan American World Airways 2, Swissair 3.
 
 ### 38. Cypern
 
@@ -363,15 +363,15 @@ Bolagskoder i landets inlagda rörelser: Air France 1.
 
 Registrerade hemlandsoperatörer: THY Turkish Airlines. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Air France 4, THY Turkish Airlines 4.
+Bolagskoder i landets inlagda rörelser: Air France 4, El Al 2, THY Turkish Airlines 4.
 
 ### 40. Sovjetunionen
 
-Tolv nya planerade rörelser: Paris–Moskva, Moskva–Narita, Paris–Borispol och Paris–Pulkovo. Totalt 53 rörelser med sovjetiska ändpunkter. Borispol tillkommer som fysisk markör; alla äldre rörelser och markörer är oförändrade. Se SOVIET_UNION_COUNTRY_REVIEW_BATCH45.md. Aeroflots fullständiga internationella och inrikes vintertabeller 1985/86, ändringar och driftbelägg återstår. Arkivindex och ett fåtal fotograferade uppslag är inte full täckning. Ytterligare europeiska och asiatiska sovjetiska flygplatser, inrikeslinjer och utländska bolag återstår. Borispol- och Pulkovo-returer har inte verifierats i det aktuella Air France-urvalet och skapas inte. Aeroflot-arkivets metadata anger 28 oktober–28 mars medan det fotograferade vinteromslaget anger 27 oktober–29 mars. Källposterna hålls separata; importerade rader följer den granskade utgåvan. Aeroflots egen tabell använder Moskvatid inom Sovjetunionen. Air France använder lokala tider; Moskva, Leningrad och Kiev ligger alla på UTC+3 under observationsdatumen. Andra sovjetiska orter kräver separat tidszonskontroll. Charter-, frakt-, stats-, privat-, helikopter- och militärtrafik samt faktisk operatör för samarbetskoder är ofullständigt utredda. Inga verkliga nordiska överflygningar har belagts.
+v119/batch116: 66 ändpunktsrörelser, inklusive13 första inrikesrörelser från Mirny. Åtta regionalblad hittade; sju hålls för tidskonvention, fysiska ben, flygplatser eller upplagekonflikt. Endast två av15 unionsrepubliker har flygplatser i urvalet. Komplett internationell Aeroflot-vintertabell och UK–USSR återstår. Se UK_USSR_REVIEW_BATCH116.md.
 
 Registrerade hemlandsoperatörer: Aeroflot. Detta är inte en fullständig bolagslista.
 
-Bolagskoder i landets inlagda rörelser: Aeroflot 27, Air France 7, Interflug 12, Japan Air Lines 1, Lufthansa 2, Malév 4.
+Bolagskoder i landets inlagda rörelser: Aeroflot 40, Air France 7, Interflug 12, Japan Air Lines 1, Lufthansa 2, Malév 4.
 
 ## Tillämpning
 

@@ -1,0 +1,43 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    14,
+    15,
+    67
+  ],
+  "correction_printed_pages": [
+    52,
+    62,
+    111
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "14": 10,
+    "15": 10,
+    "52": 29,
+    "62": 34,
+    "67": 36,
+    "111": 58,
+    "262": 134,
+    "263": 134
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "All accepted and excluded rows transcribed from original images.",
+    "Original a/p tokens are retained explicitly and converted to 24-hour times.",
+    "906 ATL-CLE arrives 00:25, not 00:22. 560 ATL-CMH arrives 00:15 the next day.",
+    "560 CMH-DAY departs 00:40; 336 IND-FWA departs 22:00; 1724 CLE-CMH arrives 12:20.",
+    "Blank frequency fields mean daily; no dated footnotes on accepted rows.",
+    "Sourced segments stay separate; no direct flight is invented for a through itinerary.",
+    "Later amendments and timetable end date not verified; planned service is not proof of operation."
+  ]
+}

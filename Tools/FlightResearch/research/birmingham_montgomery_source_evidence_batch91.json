@@ -1,0 +1,63 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    14,
+    16,
+    25,
+    28,
+    29,
+    30,
+    64,
+    66,
+    160,
+    161
+  ],
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "14": 10,
+    "16": 11,
+    "25": 15,
+    "28": 17,
+    "29": 17,
+    "30": 18,
+    "64": 35,
+    "66": 36,
+    "160": 83,
+    "161": 83,
+    "260": 133,
+    "261": 133,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "79 rows in twelve complete selected city-direction tables visually reviewed: 40 new nonstop schedules, 31 connections and eight through-stop rows excluded.",
+    "33 accepted schedules are Delta mainline and seven are Atlantic Southeast Airlines, identified by triangle and page 4 number ranges 1200–1299 and 1400–1524.",
+    "Accepted X7 rows: Delta 1114 ATL–BHM, Delta 274 BHM–ATL and ASA 1477 MGM–ATL. Accepted X6 row: ASA 1482 ATL–MGM. All other accepted rows are daily. No accepted row has a dated footnote.",
+    "Under legend p4, star means off-peak fare, not next-day arrival. All accepted flights arrive the same local calendar day. Excluded evening BHM/MGM–DFW connections at 19:50 arrive 00:05 next day.",
+    "BHM, MGM, BTR and DFW use UTC−6; ATL UTC−5. Earlier arrival clock times ATL–BHM/MGM are caused by the time-zone difference. Independent fixed-offset and weekday calculation matches every generated movement.",
+    "Delta 947 ATL–BHM, Delta 935 ATL–MGM, Delta 982 BHM–ATL and ASA 1463 MGM–ATL straddle the beginning of the window on Thursday and contribute three movements apiece. Other new schedules contribute two. ASA 1482 excludes Saturday but contributes Thursday and Friday evening.",
+    "Delta 933 ATL–MGM departs 10:27; ASA 1290 ATL–MGM arrives 20:35; Delta 990 DFW–BHM departs 19:56. Enlarged scan details resolve the minute digits.",
+    "Itinerary p262: 317 ATL–BHM–BTR. Itinerary p263: 905 ATL–MGM–BHM–DFW, 976 OKC–DFW–BTR–BHM–ATL, 990 DFW–BHM–MGM. Only separately printed physical legs are imported; 976 OKC–DFW remains outside this batch.",
+    "ASA 1462 and 1463 ATL–MGM–ATL rotations agree with p264. The onward MGM–VPS leg of ASA 1290 remains for later research, not an inferred nonstop ATL–VPS flight.",
+    "Sixteen same-flight-number segment transitions involving new legs have positive ground intervals of 15–66 minutes, independently verified. This does not establish aircraft identity.",
+    "BHM directory p260 identifies Municipal; the airport authority dates its International and Shuttlesworth names to 1993 and 2008. MGM directory p261 identifies Dannelly Field, whose airport history dates opening to 1943 and air service to 1946. Coordinates are approximate airport-area markers.",
+    "BHM–DFW 551/557/725 and DFW–BHM 500/982/976 retain one stop. MGM–DFW 905 and DFW–MGM 990 stop at Birmingham. Their through rows create no additional physical movements.",
+    "All prior movements, schedules, airlines and airports unchanged; prior corrections and held conflicts retained. Later amendments and timetable end date unverified."
+  ]
+}

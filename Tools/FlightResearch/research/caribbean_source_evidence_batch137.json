@@ -1,0 +1,77 @@
+{
+  "package": "v140",
+  "checked_on": "2026-10-02",
+  "source": "republic-19860214-employee",
+  "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+  "pdf_sha256": "dbfa243a56d5b0ce387f4e7e4a11288615cfe6d720c919ba0a9c0a82c73f6cfa",
+  "pdf_bytes": 12018907,
+  "scan_pages": 7,
+  "images": [
+    {
+      "scan_page": 1,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=1",
+      "sha256": "48baef14884380a77a26edf8eaa558b767271f66c600ca496c61991e75f5b06d"
+    },
+    {
+      "scan_page": 2,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=2",
+      "sha256": "dc4655330a574db40c202c47125e42ad737d1d42188790c62d9f911f6e285e8c"
+    },
+    {
+      "scan_page": 3,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=3",
+      "sha256": "09eb264c6c1623375312a48a30d076da0c196f94b85641255ddb3416582c56b7"
+    },
+    {
+      "scan_page": 4,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=4",
+      "sha256": "df00b97e7ebb60cd95dab3ab0a0813679ef4bc50abf83d12a155965bd1876ba0"
+    },
+    {
+      "scan_page": 5,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=5",
+      "sha256": "e2620ec7dd137b151f4cb54e35cd733ede412414861e2808eb719b93a4481b76"
+    },
+    {
+      "scan_page": 6,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=6",
+      "sha256": "72c24a13a6a0871670e785a7d869a2e9484d812a31144d688ff6043d005db49c"
+    },
+    {
+      "scan_page": 7,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=7",
+      "sha256": "2f7eda88392bcf87c946998d3744849de206013599b9e5c859e3b6b6512652be"
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "CMH": -5,
+    "CVG": -5,
+    "DTW": -5,
+    "GRR": -5,
+    "IND": -5,
+    "ATW": -6,
+    "CID": -6,
+    "CWA": -6,
+    "GRB": -6,
+    "LSE": -6,
+    "MSN": -6,
+    "MSP": -6
+  },
+  "frequency_policy": "Blank=daily;6=Saturday;X6=exceptSaturday;X7=exceptSunday. Saturday andX6 variants kept separately.",
+  "stop_policy": "BlankST and nonEXP only.103accepted,11ST1 through rows excluded,10EXP rows left for explicitSimmons operator import. Separate legs retain own clocks/days/numbers.",
+  "asterisk_policy": "Scan6 defines asterisk as new service; starredCID–MSP/MSP–CID/CWA–DTW/DTW–CWA rows accepted under February14–March1 issue validity, no separately printed later startdate.",
+  "timezone_policy": "FixedUTC-5/-6 verified against historical zoneinfo onall3dates. Local-time convention;no explicitall-times-local legend found.",
+  "important_boundaries": [
+    "Saturday545MSN–MSP19:50 after window end,zero movements.",
+    "CID–MSP885 arrives16:20CST,1min30sec beforeThursday start;onlyFriday/Saturday.",
+    "LSE–MSP896X6 arrives16:15CST,beforeThursday start;Fridayonly. MSP–LSE532X6 alsoFridayonly.",
+    "CWA–MSP462 uses15:40–16:30CVR Saturday and15:45–16:28D9S X6;MSP–CWA314 uses13:25–14:15CVR Saturday and13:25–14:08D9S X6. Do not merge clocks/days.",
+    "DTW–GRB37313:00–13:00 is60minutes due toEastern/Central time zones.",
+    "All103durations and expected dates transcribed and reviewed separately from generator; same original, not second source/reviewer.",
+    "All older objects,including corrected334LAX–DTW,unchanged."
+  ],
+  "previous_held_conflicts_unchanged": true
+}

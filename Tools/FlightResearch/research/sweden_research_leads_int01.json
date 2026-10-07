@@ -1,0 +1,54 @@
+{
+  "checked_on": "2026-10-02",
+  "coverage_complete": false,
+  "leads": [
+    {
+      "operator": "SAS / Linjeflyg",
+      "url": "https://www.ebay.co.uk/itm/198453305668",
+      "status": "reviewed_no_import",
+      "finding": "January–March1986 Malmö booklet: visible internal pages show connecting journey times without usable flight numbers and physical segment times."
+    },
+    {
+      "operator": "SAS",
+      "url": "https://www.ebay.com/itm/206290351979",
+      "status": "reviewed_no_import",
+      "finding": "29Sep1985–29Mar1986 edition and stop-press visible. Amendment changes SK931/932 weekdays from28Oct. No flight times available; research lead only."
+    },
+    {
+      "operator": "SAS",
+      "url": "https://www.ebay.com/itm/375823217337",
+      "status": "cover_only_no_import",
+      "finding": "Sweden edition5,29Sep1985–29Mar1986. Search/listing shows cover; no usable flight rows."
+    },
+    {
+      "operator": "Finnair",
+      "url": "https://www.finna.fi/Record/sim.M016-27847",
+      "status": "access_blocked_no_import",
+      "finding": "Catalog record identifies23Dec1985–29Mar1986 timetable. Image/page access failed; no original flight rows read."
+    },
+    {
+      "operator": "SAS",
+      "url": "https://www.airtimes.com/cgat/se/sas/gal/skgal1a80.htm",
+      "status": "cover_gallery_no_import",
+      "finding": "Correct winter editions found but no full schedule pages."
+    },
+    {
+      "operator": "Swedair",
+      "url": "https://www.timetableimages.com/ttimages/jg1.htm",
+      "status": "no_applicable_full_scan",
+      "finding": "No full applicable winter1985/86 flight pages found in reviewed gallery."
+    },
+    {
+      "operator": "AirUK",
+      "url": "https://www.ebay.co.uk/itm/198565828590",
+      "status": "held_conflict",
+      "finding": "Humberside winter leaflet shows additional UK8221050–1315 HUY–AMS; does not match reviewed AirUK system pages. No import without resolving edition/stops."
+    },
+    {
+      "operator": "Aer Lingus / Dan-Air",
+      "url": "https://www.airtimes.com/cgat/uk/danair/pdf/da851027-1a.pdf",
+      "status": "prior_holds_preserved",
+      "finding": "EI456 deferred, EI457 and Teesside conflicting rows remain held as in earlier batches. No new import from unresolved alternatives."
+    }
+  ]
+}

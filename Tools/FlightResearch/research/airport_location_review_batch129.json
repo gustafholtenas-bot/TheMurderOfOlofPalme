@@ -1,0 +1,64 @@
+{
+  "package": "v132",
+  "airport_records": [
+    {
+      "id": "EYW",
+      "name": "Key West International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 24.556119,
+      "lon": -81.759579,
+      "coordinate_source": "https://ourairports.com/airports/KEYW/",
+      "coordinate_record_id": "KEYW",
+      "timetable_code": "EYW",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://flypba.com/timetable/s-1986-01-15/",
+        "https://flypba.com/timetable/s-1986-03-01/",
+        "https://www.monroecounty-fl.gov/921/Key-West-International-Airport-Fire-Resc"
+      ],
+      "location_note": "County history identifies the southeastern Key West airfield, formerly Meacham Field, and its pre-1986 civilian identity. Distinct from Boca Chica/NQX and seaplane bases. IATA code is explicitly printed in both 1986 timetables. Modern coordinates are approximate airfield markers, not a reconstruction of 1986 runways or terminals."
+    },
+    {
+      "id": "MTH",
+      "name": "Marathon Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 24.726006,
+      "lon": -81.05138,
+      "coordinate_source": "https://ourairports.com/airports/KMTH/",
+      "coordinate_record_id": "KMTH",
+      "timetable_code": "MTH",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://flypba.com/timetable/s-1986-01-15/",
+        "https://flypba.com/timetable/s-1986-03-01/",
+        "https://www.monroecounty-fl.gov/109/Florida-Keys-Marathon-International-Airp"
+      ],
+      "location_note": "County history records opening in 1943, postwar transfer to civilian use and past scheduled passenger service. Neutral period name; later customs facilities are not projected back. IATA code is explicitly printed in both 1986 timetables. Modern coordinates are approximate airfield markers, not a reconstruction of 1986 runways or terminals."
+    },
+    {
+      "id": "APF",
+      "name": "Naples Municipal – Florida (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 26.1525993347,
+      "lon": -81.7752990723,
+      "coordinate_source": "https://ourairports.com/airports/KAPF/",
+      "coordinate_record_id": "KAPF",
+      "timetable_code": "APF",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://flypba.com/timetable/s-1986-01-15/",
+        "https://flypba.com/timetable/s-1986-03-01/",
+        "https://www.flynaples.com/about-naples-airport/"
+      ],
+      "location_note": "Airport authority history records the site from 1943 and the authority from 1969. This is Naples in Florida, not Naples/NAP in Italy. IATA code is explicitly printed in both 1986 timetables. Modern coordinates are approximate airfield markers, not a reconstruction of 1986 runways or terminals."
+    }
+  ],
+  "new_country_records": [],
+  "existing_airports_unchanged": 385,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers. Historical terminal/runway geometry not reconstructed. Contemporary airport codes explicitly printed. RSW retained rather than old Fort Myers/FMY."
+}

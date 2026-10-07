@@ -1,0 +1,233 @@
+{
+  "source": "delta-19860201",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "effective_from": "1986-02-01",
+  "effective_to": null,
+  "later_amendments_verified": false,
+  "visual_review": true,
+  "printed_to_pdf_page_rule": "PDF page floor((printed page + 6) / 2); even printed page left, odd right.",
+  "reviewed_printed_pages": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    37,
+    39,
+    41,
+    54,
+    55,
+    66,
+    69,
+    94,
+    144,
+    201,
+    220
+  ],
+  "legend_printed_page": 4,
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "frequency_legend": "D in TSV encodes blank/daily; X excludes listed weekdays; 1 Monday through 7 Sunday. Star denotes off-peak fare, not arrival date rollover.",
+  "row_footnotes": {
+    "CAE–ATL 696": "boxed 4 before departure: effective February 12, 1986, legend printed p55; within the import window."
+  },
+  "timezones": {
+    "DFW": "America/Chicago, UTC−6 for the import dates",
+    "other_new_endpoints": "America/New_York, UTC−5 for the import dates"
+  },
+  "calendar_note": "All accepted schedules arrive on the departure local calendar date. CHS–SAV 512 departs at 00:15, after the preceding local day ATL–CHS 512 arrival at 23:55. Connecting/through itinerary rows are never converted into nonstop movements.",
+  "row_count": 100,
+  "accepted_nonstop_schedules": 84,
+  "actions": {
+    "excluded_through_stops": 6,
+    "new_schedule": 84,
+    "excluded_connection": 10
+  },
+  "directional_tables": [
+    {
+      "origin": "AGS",
+      "destination": "CAE",
+      "source_rows": 1,
+      "accepted": 0,
+      "printed_pages": [
+        "18"
+      ]
+    },
+    {
+      "origin": "ATL",
+      "destination": "CAE",
+      "source_rows": 9,
+      "accepted": 8,
+      "printed_pages": [
+        "14"
+      ]
+    },
+    {
+      "origin": "ATL",
+      "destination": "CHS",
+      "source_rows": 8,
+      "accepted": 6,
+      "printed_pages": [
+        "14"
+      ]
+    },
+    {
+      "origin": "ATL",
+      "destination": "CLT",
+      "source_rows": 6,
+      "accepted": 6,
+      "printed_pages": [
+        "14"
+      ]
+    },
+    {
+      "origin": "ATL",
+      "destination": "DAB",
+      "source_rows": 3,
+      "accepted": 3,
+      "printed_pages": [
+        "15"
+      ]
+    },
+    {
+      "origin": "ATL",
+      "destination": "GSO",
+      "source_rows": 6,
+      "accepted": 6,
+      "printed_pages": [
+        "15"
+      ]
+    },
+    {
+      "origin": "ATL",
+      "destination": "MLB",
+      "source_rows": 2,
+      "accepted": 2,
+      "printed_pages": [
+        "16"
+      ]
+    },
+    {
+      "origin": "ATL",
+      "destination": "SAV",
+      "source_rows": 8,
+      "accepted": 7,
+      "printed_pages": [
+        "17"
+      ]
+    },
+    {
+      "origin": "CAE",
+      "destination": "ATL",
+      "source_rows": 8,
+      "accepted": 8,
+      "printed_pages": [
+        "54"
+      ]
+    },
+    {
+      "origin": "CAE",
+      "destination": "CHS",
+      "source_rows": 1,
+      "accepted": 1,
+      "printed_pages": [
+        "55"
+      ]
+    },
+    {
+      "origin": "CHS",
+      "destination": "ATL",
+      "source_rows": 7,
+      "accepted": 7,
+      "printed_pages": [
+        "37"
+      ]
+    },
+    {
+      "origin": "CHS",
+      "destination": "SAV",
+      "source_rows": 1,
+      "accepted": 1,
+      "printed_pages": [
+        "39"
+      ]
+    },
+    {
+      "origin": "CLT",
+      "destination": "ATL",
+      "source_rows": 6,
+      "accepted": 6,
+      "printed_pages": [
+        "41"
+      ]
+    },
+    {
+      "origin": "DAB",
+      "destination": "ATL",
+      "source_rows": 3,
+      "accepted": 3,
+      "printed_pages": [
+        "69"
+      ]
+    },
+    {
+      "origin": "DFW",
+      "destination": "RDU",
+      "source_rows": 6,
+      "accepted": 2,
+      "printed_pages": [
+        "66"
+      ]
+    },
+    {
+      "origin": "GSO",
+      "destination": "ATL",
+      "source_rows": 6,
+      "accepted": 6,
+      "printed_pages": [
+        "94"
+      ]
+    },
+    {
+      "origin": "MLB",
+      "destination": "ATL",
+      "source_rows": 2,
+      "accepted": 2,
+      "printed_pages": [
+        "144"
+      ]
+    },
+    {
+      "origin": "RDU",
+      "destination": "DFW",
+      "source_rows": 8,
+      "accepted": 2,
+      "printed_pages": [
+        "201"
+      ]
+    },
+    {
+      "origin": "SAV",
+      "destination": "ATL",
+      "source_rows": 8,
+      "accepted": 7,
+      "printed_pages": [
+        "220"
+      ]
+    },
+    {
+      "origin": "SAV",
+      "destination": "CHS",
+      "source_rows": 1,
+      "accepted": 1,
+      "printed_pages": [
+        "220"
+      ]
+    }
+  ]
+}

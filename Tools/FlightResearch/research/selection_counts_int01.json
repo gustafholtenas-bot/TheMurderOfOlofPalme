@@ -1,0 +1,9 @@
+{
+  "total_movements": 11369,
+  "selected_international_and_swedish_domestic": 2131,
+  "excluded_foreign_domestic": 9238,
+  "sweden_endpoint_movements": 87,
+  "sweden_international_inbound": 41,
+  "sweden_international_outbound": 40,
+  "swedish_domestic": 6
+}

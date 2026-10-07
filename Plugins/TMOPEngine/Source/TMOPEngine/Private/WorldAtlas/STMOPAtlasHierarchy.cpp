@@ -10,10 +10,43 @@
 #include "Widgets/Text/STextBlock.h"
 #include "Rendering/DrawElements.h"
 #include "Styling/CoreStyle.h"
+#include "Engine/Texture2D.h"
+#include "ImageUtils.h"
+#include "Interfaces/IPluginManager.h"
+#include "Misc/FileHelper.h"
+#include "UObject/StrongObjectPtr.h"
+#include "Widgets/Images/SImage.h"
+#include "Widgets/Layout/SScaleBox.h"
 
 namespace
 {
 FText L(const FText& Text) { return FTMOPLocalization::Text(Text); }
+
+// The image widget owns both brush and texture, including during tree rebuilds.
+class STMOPAtlasPortrait final : public SCompoundWidget
+{
+public:
+    SLATE_BEGIN_ARGS(STMOPAtlasPortrait) {} SLATE_END_ARGS()
+    void Construct(const FArguments&, const FString& Filename, const FText& Caption)
+    {
+        const auto Plugin = IPluginManager::Get().FindPlugin(TEXT("TMOPEngine"));
+        if (!Plugin || Filename.IsEmpty()) { SetVisibility(EVisibility::Collapsed); return; }
+        TArray<uint8> Bytes;
+        const FString Path = Plugin->GetContentDir() / TEXT("WorldAtlas/Portraits") / Filename;
+        if (!FFileHelper::LoadFileToArray(Bytes, *Path) || Bytes.Num() > 8 * 1024 * 1024)
+        { SetVisibility(EVisibility::Collapsed); return; }
+        Texture.Reset(FImageUtils::ImportBufferAsTexture2D(Bytes));
+        if (!Texture.IsValid()) { SetVisibility(EVisibility::Collapsed); return; }
+        Brush.SetResourceObject(Texture.Get());
+        Brush.ImageSize = FVector2D(Texture->GetSizeX(), Texture->GetSizeY());
+        Brush.DrawAs = ESlateBrushDrawType::Image;
+        ChildSlot[SNew(SBox).WidthOverride(64).HeightOverride(80).ToolTipText(Caption)
+            [SNew(SScaleBox).Stretch(EStretch::ScaleToFit)[SNew(SImage).Image(&Brush)]]];
+    }
+private:
+    TStrongObjectPtr<UTexture2D> Texture;
+    FSlateBrush Brush;
+};
 
 // An elbow alongside each subtree. A non-last sibling's vertical segment runs
 // past its descendants; the last sibling terminates at its own card.
@@ -112,11 +145,16 @@ private:
                 [SNew(SHorizontalBox)
                     + SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 6, 0)[SNew(STextBlock)
                         .Text_Lambda([this, Id, bChildren] { return FText::FromString(bChildren ? (Collapsed.Contains(Id) ? TEXT("+") : TEXT("−")) : TEXT("•")); })]
+                    + SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)
+                        [SNew(STMOPAtlasPortrait, Office.Portrait, Entry->Text(Office.PortraitCaption))]
                     + SHorizontalBox::Slot().FillWidth(1)[SNew(SVerticalBox)
                         + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).AutoWrapText(true).Text(Entry->Text(Office.Label))]
                         + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).AutoWrapText(true)
                             .Visibility(Office.Note.IsEmpty() ? EVisibility::Collapsed : EVisibility::Visible)
-                            .Font(FCoreStyle::GetDefaultFontStyle("Regular", 10)).Text(Entry->Text(Office.Note))]]]]];
+                            .Font(FCoreStyle::GetDefaultFontStyle("Regular", 10)).Text(Entry->Text(Office.Note))]
+                        + SVerticalBox::Slot().AutoHeight()[SNew(STextBlock).AutoWrapText(true)
+                            .Visibility(Office.Portrait.IsEmpty() ? EVisibility::Collapsed : EVisibility::Visible)
+                            .Font(FCoreStyle::GetDefaultFontStyle("Regular", 8)).Text(Entry->Text(Office.PortraitCaption))]]]]];
         TSharedRef<SVerticalBox> Branches = SNew(SVerticalBox)
             .Visibility_Lambda([this, Id] { return Collapsed.Contains(Id) ? EVisibility::Collapsed : EVisibility::Visible; });
         for (int32 I = 0; I < Children.Num(); ++I)

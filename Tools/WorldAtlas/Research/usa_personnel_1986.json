@@ -1,0 +1,935 @@
+{
+  "schema": 1,
+  "scope": "Publicly documented USA intelligence personnel and external networks active at some point during 1985–1986; dated roles retained as evidence, not simultaneous appointments.",
+  "reference_date": "1985–1986",
+  "checked": "2026-10-02",
+  "batch": "US02",
+  "people": [
+    {
+      "id": "william-casey",
+      "name": "William J. Casey",
+      "organization": "cia",
+      "role": {
+        "sv": "Director of Central Intelligence",
+        "en": "Director of Central Intelligence",
+        "en_source": "Director of Central Intelligence"
+      },
+      "note": {
+        "sv": "Walsh anger chefskap januari 1981–januari 1987. Februarirollen härleds ur perioden. Personen fanns redan i atlasens CIA-ledning.",
+        "en": "Walsh dates his directorship to January 1981–January 1987. His February role is inferred from this interval. Already present in the atlas CIA leadership.",
+        "en_source": "Walsh anger chefskap januari 1981–januari 1987. Februarirollen härleds ur perioden. Personen fanns redan i atlasens CIA-ledning."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_15.htm"
+      ],
+      "evidence_status": "primary_report_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "cia",
+      "existing_office_card": true,
+      "portrait": {
+        "person_id": "william-casey",
+        "file": "us-william-casey.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:William_Casey,_Director_of_Central_Intelligence_Agency_ME298-1_(cropped)(2).jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/William_Casey%2C_Director_of_Central_Intelligence_Agency_ME298-1_%28cropped%29%282%29.jpg/330px-William_Casey%2C_Director_of_Central_Intelligence_Agency_ME298-1_%28cropped%29%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Michael Evans",
+        "license": "Public domain",
+        "license_url": "https://commons.wikimedia.org/wiki/File:William_Casey,_Director_of_Central_Intelligence_Agency_ME298-1_(cropped)(2).jpg",
+        "source_date": "1983-06-01",
+        "description": "6/1/1983 William Casey Director of Central Intelligence Agency(CIA).",
+        "sha256": "a50c50dbc651ca5af0c9f98eb4f696ead51b14f1dcbe347a5cbc8bc91a816f89",
+        "modifications": "Wikimedia thumbnail only; no further edits.",
+        "checked": "2026-10-02",
+        "date_note": {
+          "sv": "Porträtt från 1983.",
+          "en": "Portrait from 1983.",
+          "en_source": "Porträtt från 1983."
+        }
+      },
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "john-mcmahon",
+      "name": "John N. McMahon",
+      "organization": "cia-deputy",
+      "role": {
+        "sv": "Deputy Director of Central Intelligence",
+        "en": "Deputy Director of Central Intelligence",
+        "en_source": "Deputy Director of Central Intelligence"
+      },
+      "note": {
+        "sv": "Caseys brev den 26 februari 1986 beskriver McMahons kommande avgång och föreslår Gates som efterträdare. McMahon behålls som biträdande chef för referensdagen.",
+        "en": "Casey’s letter of 26 February 1986 describes McMahon’s forthcoming retirement and proposes Gates as successor. McMahon remains deputy director for the reference date.",
+        "en_source": "Caseys brev den 26 februari 1986 beskriver McMahons kommande avgång och föreslår Gates som efterträdare. McMahon behålls som biträdande chef för referensdagen."
+      },
+      "sources": [
+        "https://www.cia.gov/readingroom/document/cia-rdp89g00720r000100060001-3",
+        "https://irp.fas.org/offdocs/walsh/chap_17.htm"
+      ],
+      "evidence_status": "primary_contemporaneous_letter_and_report_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "cia-deputy",
+      "existing_office_card": true,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "clair-george",
+      "name": "Clair E. George",
+      "organization": "cia-operations",
+      "role": {
+        "sv": "Deputy Director for Operations",
+        "en": "Deputy Director for Operations",
+        "en_source": "Deputy Director for Operations"
+      },
+      "note": {
+        "sv": "Walsh anger chefskap för Directorate of Operations juli 1984–december 1987. Februarirollen härleds ur perioden. Personen fanns redan i atlasen.",
+        "en": "Walsh dates his Directorate of Operations leadership to July 1984–December 1987. His February role is inferred from this interval. Already present in the atlas.",
+        "en_source": "Walsh anger chefskap för Directorate of Operations juli 1984–december 1987. Februarirollen härleds ur perioden. Personen fanns redan i atlasen."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_17.htm"
+      ],
+      "evidence_status": "primary_report_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "cia-operations",
+      "existing_office_card": true,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "robert-gates",
+      "name": "Robert M. Gates",
+      "organization": "cia-analysis",
+      "role": {
+        "sv": "Deputy Director for Intelligence",
+        "en": "Deputy Director for Intelligence",
+        "en_source": "Deputy Director for Intelligence"
+      },
+      "note": {
+        "sv": "Caseys brev den 26 februari 1986 identifierar Gates som analyschef och föreslår en senare befordran. Han visas inte som biträdande CIA-chef i februari.",
+        "en": "Casey’s letter of 26 February 1986 identifies Gates as intelligence director and proposes a later promotion. He is not shown as deputy CIA director in February.",
+        "en_source": "Caseys brev den 26 februari 1986 identifierar Gates som analyschef och föreslår en senare befordran. Han visas inte som biträdande CIA-chef i februari."
+      },
+      "sources": [
+        "https://www.cia.gov/readingroom/document/cia-rdp89g00720r000100060001-3",
+        "https://irp.fas.org/offdocs/walsh/chap_16.htm"
+      ],
+      "evidence_status": "primary_contemporaneous_letter_and_report_dated_role",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "cia-analysis",
+      "existing_office_card": true,
+      "portrait": {
+        "person_id": "robert-gates",
+        "file": "us-robert-gates.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Robert_Gates,_official_DoD_photo_portrait,_2006.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Robert_Gates%2C_official_DoD_photo_portrait%2C_2006.jpg/330px-Robert_Gates%2C_official_DoD_photo_portrait%2C_2006.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Monica King, United States Army",
+        "license": "Public domain",
+        "license_url": "https://commons.wikimedia.org/wiki/File:Robert_Gates,_official_DoD_photo_portrait,_2006.jpg",
+        "source_date": "2006-12-12",
+        "description": "Official portrait of United States Secretary of Defense Robert Gates",
+        "sha256": "7ddefb47108da0e0f7d15bef318395e9eefbadd11982bfbb5ce46166693050f5",
+        "modifications": "Wikimedia thumbnail only; no further edits.",
+        "checked": "2026-10-02",
+        "date_note": {
+          "sv": "Senare porträtt från 2006 som försvarsminister; inte från CIA-tjänsten 1986.",
+          "en": "Later portrait from 2006 as Secretary of Defense; not from CIA service in 1986.",
+          "en_source": "Senare porträtt från 2006 som försvarsminister; inte från CIA-tjänsten 1986."
+        }
+      },
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "alan-fiers",
+      "name": "Alan D. Fiers Jr.",
+      "organization": "cia-catf",
+      "role": {
+        "sv": "Chef för Central American Task Force",
+        "en": "Chief of the Central American Task Force",
+        "en_source": "Chef för Central American Task Force"
+      },
+      "note": {
+        "sv": "Walsh anger CATF-chefskap oktober 1984–1988. Februarirollen härleds ur perioden. Personen fanns redan i atlasen; ingen tidigare Clarridge-befattning tillskrivs honom.",
+        "en": "Walsh dates his CATF leadership to October 1984–1988. His February role is inferred from this interval. Already present in the atlas; no earlier Clarridge post is assigned to him.",
+        "en_source": "Walsh anger CATF-chefskap oktober 1984–1988. Februarirollen härleds ur perioden. Personen fanns redan i atlasen; ingen tidigare Clarridge-befattning tillskrivs honom."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_19.htm"
+      ],
+      "evidence_status": "primary_report_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "cia-catf",
+      "existing_office_card": true,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "duane-clarridge",
+      "name": "Duane R. Clarridge (Dewey)",
+      "organization": "cia-ctc",
+      "role": {
+        "sv": "Chef för Counterterrorist Center",
+        "en": "Chief of the Counterterrorist Center",
+        "en_source": "Chef för Counterterrorist Center"
+      },
+      "note": {
+        "sv": "FBI-materialet daterar Clarridges CTC-chefskap från februari 1986. Februarirollen härleds ur denna kronologi. Hans tidigare ledning av Latin American Division används inte för referensdagen.",
+        "en": "FBI material dates Clarridge’s CTC leadership from February 1986. His February role is inferred from this chronology. His earlier Latin American Division leadership is not assigned to the reference date.",
+        "en_source": "FBI-materialet daterar Clarridges CTC-chefskap från februari 1986. Februarirollen härleds ur denna kronologi. Hans tidigare ledning av Latin American Division används inte för referensdagen."
+      },
+      "sources": [
+        "https://vault.fbi.gov/duane-clarridge/Duane%20Clarridge%20Part%2001%20%28Final%29/at_download/file",
+        "https://irp.fas.org/congress/2002_hr/091802hill.html",
+        "https://irp.fas.org/offdocs/walsh/chap_18.htm"
+      ],
+      "evidence_status": "primary_fbi_career_account_and_congressional_establishment_month_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "duane-clarridge",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "joseph-fernandez",
+      "name": "Joseph F. Fernandez",
+      "organization": "cia-costa-rica",
+      "role": {
+        "sv": "CIA:s stationschef i Costa Rica",
+        "en": "CIA chief of station in Costa Rica",
+        "en_source": "CIA:s stationschef i Costa Rica"
+      },
+      "note": {
+        "sv": "Walsh dokumenterar stationschefens arbete med flygfält och Contra-försörjning från 1985 och under 1986. Februarianknytningen härleds ur kronologin.",
+        "en": "Walsh documents the station chief’s work on an airstrip and contra resupply from 1985 and during 1986. His February affiliation is inferred from this chronology.",
+        "en_source": "Walsh dokumenterar stationschefens arbete med flygfält och Contra-försörjning från 1985 och under 1986. Februarianknytningen härleds ur kronologin."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_20.htm"
+      ],
+      "evidence_status": "primary_report_dated_service_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "joseph-fernandez",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "charles-allen",
+      "name": "Charles E. Allen",
+      "organization": "cia-other-staff",
+      "role": {
+        "sv": "CIA — underrättelsearbete i Iraninitiativet",
+        "en": "CIA — intelligence work on the Iran initiative",
+        "en_source": "CIA — underrättelsearbete i Iraninitiativet"
+      },
+      "note": {
+        "sv": "Walsh beskriver Allens arbete med Iraninitiativet under januari–februari 1986. CIA-anknytningen är dokumenterad; exakt underenhet och fullständig titel för dagen lämnas öppna.",
+        "en": "Walsh describes Allen’s work on the Iran initiative in January–February 1986. His CIA affiliation is documented; his exact subunit and complete title that day remain open.",
+        "en_source": "Walsh beskriver Allens arbete med Iraninitiativet under januari–februari 1986. CIA-anknytningen är dokumenterad; exakt underenhet och fullständig titel för dagen lämnas öppna."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_15.htm"
+      ],
+      "evidence_status": "primary_report_dated_assignments_exact_subunit_unresolved",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "charles-allen",
+      "existing_office_card": false,
+      "portrait": {
+        "person_id": "charles-allen",
+        "file": "us-charles-allen.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Allen_2005.jpg",
+        "download_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Allen_2005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "User:Jeanenawiki",
+        "license": "Public domain",
+        "license_url": "https://commons.wikimedia.org/wiki/File:Allen_2005.jpg",
+        "source_date": "2005",
+        "description": "Charles E. Allen",
+        "sha256": "05a6c38c13b5f99c30695ceabda1ed1bcc2b55b8449c8a0f9be67a792a7b9e73",
+        "modifications": "Wikimedia thumbnail only; no further edits.",
+        "checked": "2026-10-02",
+        "date_note": {
+          "sv": "Senare identifieringsbild från 2005; inte från 1986.",
+          "en": "Later identification image from 2005; not from 1986.",
+          "en_source": "Senare identifieringsbild från 2005; inte från 1986."
+        }
+      },
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "thomas-twetten",
+      "name": "Thomas Twetten",
+      "organization": "cia-near-east",
+      "role": {
+        "sv": "Senior befattning, Near East Division",
+        "en": "Senior role, Near East Division",
+        "en_source": "Senior befattning, Near East Division"
+      },
+      "note": {
+        "sv": "Walsh identifierar Twetten som biträdande divisionschef i januari och dokumenterar uppdrag i februari 1986. Hans befordran under året dateras inte här; exakt februari-titel lämnas öppen.",
+        "en": "Walsh identifies Twetten as deputy division chief in January and documents assignments in February 1986. His promotion during the year is not dated here; his exact February title remains open.",
+        "en_source": "Walsh identifierar Twetten som biträdande divisionschef i januari och dokumenterar uppdrag i februari 1986. Hans befordran under året dateras inte här; exakt februari-titel lämnas öppen."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_15.htm",
+        "https://irp.fas.org/offdocs/walsh/part_i.htm"
+      ],
+      "evidence_status": "primary_report_dated_assignments_promotion_day_unresolved",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "thomas-twetten",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "oliver-north",
+      "name": "Oliver L. North",
+      "organization": "nsc-staff",
+      "role": {
+        "sv": "NSC — biträdande chef för politisk-militära frågor",
+        "en": "NSC — Deputy Director of Political-Military Affairs",
+        "en_source": "NSC — biträdande chef för politisk-militära frågor"
+      },
+      "note": {
+        "sv": "Walsh anger NSC-tjänst 1981–25 november 1986 och denna befattning. Februarirollen härleds ur perioden. North placeras som NSC-personal, även när han samordnar externa operationer.",
+        "en": "Walsh records NSC service in 1981–25 November 1986 and this post. His February role is inferred from the interval. North is placed as NSC staff while coordinating external operations.",
+        "en_source": "Walsh anger NSC-tjänst 1981–25 november 1986 och denna befattning. Februarirollen härleds ur perioden. North placeras som NSC-personal, även när han samordnar externa operationer."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_02.htm"
+      ],
+      "evidence_status": "primary_report_office_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "oliver-north",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "john-poindexter",
+      "name": "John M. Poindexter",
+      "organization": "nsc-staff",
+      "role": {
+        "sv": "Nationell säkerhetsrådgivare",
+        "en": "National Security Adviser",
+        "en_source": "Nationell säkerhetsrådgivare"
+      },
+      "note": {
+        "sv": "Reaganbiblioteket anger tjänst som nationell säkerhetsrådgivare december 1985–november 1986. Februarirollen härleds ur perioden; han placeras inte i CIA.",
+        "en": "The Reagan Library dates his National Security Adviser tenure to December 1985–November 1986. His February role is inferred from the interval; he is not placed in CIA.",
+        "en_source": "Reaganbiblioteket anger tjänst som nationell säkerhetsrådgivare december 1985–november 1986. Februarirollen härleds ur perioden; han placeras inte i CIA."
+      },
+      "sources": [
+        "https://www.reaganlibrary.gov/reagans/reagan-administration/key-administration-officials",
+        "https://irp.fas.org/offdocs/walsh/chap_03.htm"
+      ],
+      "evidence_status": "official_archival_office_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "john-poindexter",
+      "existing_office_card": false,
+      "portrait": {
+        "person_id": "john-poindexter",
+        "file": "us-john-poindexter.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Admiral_John_Poindexter,_official_Navy_photo,_1985.JPEG",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Admiral_John_Poindexter%2C_official_Navy_photo%2C_1985.JPEG/330px-Admiral_John_Poindexter%2C_official_Navy_photo%2C_1985.JPEG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "WHITE HOUSE",
+        "license": "Public domain",
+        "license_url": "https://commons.wikimedia.org/wiki/File:Admiral_John_Poindexter,_official_Navy_photo,_1985.JPEG",
+        "source_date": "1985-11-04",
+        "description": "John Poindexter, former Navy admiral and National Security Advisor.",
+        "sha256": "34d87c4dac34eb8d0c479ba769d623ab8e9469f554b2b196de3d0958e6b92ac0",
+        "modifications": "Wikimedia thumbnail only; no further edits.",
+        "checked": "2026-10-02",
+        "date_note": {
+          "sv": "Porträtt från 1985.",
+          "en": "Portrait from 1985.",
+          "en_source": "Porträtt från 1985."
+        }
+      },
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "vincent-cannistraro",
+      "name": "Vincent Cannistraro",
+      "organization": "nsc-staff",
+      "role": {
+        "sv": "NSC — Director for Intelligence Programs",
+        "en": "NSC — Director for Intelligence Programs",
+        "en_source": "NSC — Director for Intelligence Programs"
+      },
+      "note": {
+        "sv": "Reaganbibliotekets arkivbeskrivning anger NSC-befattningen 1985–1987. Februarirollen härleds ur perioden. Hans senare ledning inom CIA:s CTC används inte för 1986.",
+        "en": "The Reagan Library finding aid dates this NSC post to 1985–1987. His February role is inferred from the interval. His later CIA CTC leadership is not assigned to 1986.",
+        "en_source": "Reaganbibliotekets arkivbeskrivning anger NSC-befattningen 1985–1987. Februarirollen härleds ur perioden. Hans senare ledning inom CIA:s CTC används inte för 1986."
+      },
+      "sources": [
+        "https://www.reaganlibrary.gov/sites/default/files/finding_aids_pdfs/219838.pdf",
+        "https://irp.fas.org/offdocs/walsh/chap_16.htm"
+      ],
+      "evidence_status": "official_archival_office_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "vincent-cannistraro",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "richard-secord",
+      "name": "Richard V. Secord",
+      "organization": "enterprise",
+      "role": {
+        "sv": "The Enterprise — organisering och vapenaffärer",
+        "en": "The Enterprise — organization and arms deals",
+        "en_source": "The Enterprise — organisering och vapenaffärer"
+      },
+      "note": {
+        "sv": "Walsh beskriver Secords Enterprise-arbete 1985–1986 och genomförda vapenaffärer i februari. Februarianknytningen härleds ur kronologin. Han visas som extern aktör, inte tjänstgörande flygvapengeneral.",
+        "en": "Walsh describes Secord’s Enterprise work in 1985–1986 and arms deals completed in February. His February affiliation is inferred from the chronology. He is shown as an external actor, not a serving Air Force general.",
+        "en_source": "Walsh beskriver Secords Enterprise-arbete 1985–1986 och genomförda vapenaffärer i februari. Februarianknytningen härleds ur kronologin. Han visas som extern aktör, inte tjänstgörande flygvapengeneral."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_09.htm",
+        "https://irp.fas.org/offdocs/walsh/chap_08.htm"
+      ],
+      "evidence_status": "primary_report_dated_network_activities_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "richard-secord",
+      "existing_office_card": false,
+      "portrait": {
+        "person_id": "richard-secord",
+        "file": "us-richard-secord.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Richard_V_Secord.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Richard_V_Secord.jpg/330px-Richard_V_Secord.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "U.S. Air Force",
+        "license": "Public domain",
+        "license_url": "https://commons.wikimedia.org/wiki/File:Richard_V_Secord.jpg",
+        "source_date": "",
+        "description": "Major General Richard V. Secord",
+        "sha256": "7d2e99ad75749f3644ca0771342e41e92845882b3c2c95d50c6021abd628a4b1",
+        "modifications": "Wikimedia thumbnail only; no further edits.",
+        "checked": "2026-10-02",
+        "date_note": {
+          "sv": "Fotograferingsdatum inte fastställt; inte belagt som en bild från 1986.",
+          "en": "Capture date unresolved; not established as a 1986 image.",
+          "en_source": "Fotograferingsdatum inte fastställt; inte belagt som en bild från 1986."
+        }
+      },
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "albert-hakim",
+      "name": "Albert Hakim",
+      "organization": "enterprise",
+      "role": {
+        "sv": "The Enterprise — affärs- och finanspartner",
+        "en": "The Enterprise — business and financial partner",
+        "en_source": "The Enterprise — affärs- och finanspartner"
+      },
+      "note": {
+        "sv": "Walsh dokumenterar Hakims roll i Enterprise under 1985–1986. Kontoutbetalningar den 6–7 februari stöder februarianknytningen. Rollen är extern och innebär inte anställning i CIA.",
+        "en": "Walsh documents Hakim’s Enterprise role in 1985–1986. Account distributions on 6–7 February support his February affiliation. The role is external and does not imply CIA employment.",
+        "en_source": "Walsh dokumenterar Hakims roll i Enterprise under 1985–1986. Kontoutbetalningar den 6–7 februari stöder februarianknytningen. Rollen är extern och innebär inte anställning i CIA."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_10.htm",
+        "https://irp.fas.org/offdocs/walsh/chap_08.htm"
+      ],
+      "evidence_status": "primary_report_and_dated_financial_records_network_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "albert-hakim",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "thomas-clines",
+      "name": "Thomas G. Clines",
+      "organization": "enterprise",
+      "role": {
+        "sv": "The Enterprise — vapeninköp och logistik",
+        "en": "The Enterprise — arms procurement and logistics",
+        "en_source": "The Enterprise — vapeninköp och logistik"
+      },
+      "note": {
+        "sv": "Walsh anger avgång från CIA 1978 och Enterprise-inköp 1985–1986. Februarianknytningen härleds ur perioden och en daterad februariutbetalning. Han placeras inte som CIA-anställd 1986.",
+        "en": "Walsh dates his CIA departure to 1978 and Enterprise procurement to 1985–1986. His February affiliation is inferred from this interval and a dated February payment. He is not placed as CIA staff in 1986.",
+        "en_source": "Walsh anger avgång från CIA 1978 och Enterprise-inköp 1985–1986. Februarianknytningen härleds ur perioden och en daterad februariutbetalning. Han placeras inte som CIA-anställd 1986."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_11.htm"
+      ],
+      "evidence_status": "primary_report_service_transition_and_dated_network_activity_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "thomas-clines",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "richard-gadd",
+      "name": "Richard Gadd",
+      "organization": "enterprise",
+      "role": {
+        "sv": "The Enterprise — ledning av försörjningslogistik",
+        "en": "The Enterprise — resupply logistics management",
+        "en_source": "The Enterprise — ledning av försörjningslogistik"
+      },
+      "note": {
+        "sv": "Walsh beskriver Gadds försörjningsuppdrag och startfinansiering i december 1985. Februarianknytningen härleds ur kronologin före chefsbytet under våren 1986. Detta är den tidigare flygvapenofficeren, inte skådespelaren med samma namn.",
+        "en": "Walsh describes Gadd’s resupply assignment and start-up funding in December 1985. His February affiliation is inferred from the chronology before replacement in spring 1986. This is the former Air Force officer, not the actor of the same name.",
+        "en_source": "Walsh beskriver Gadds försörjningsuppdrag och startfinansiering i december 1985. Februarianknytningen härleds ur kronologin före chefsbytet under våren 1986. Detta är den tidigare flygvapenofficeren, inte skådespelaren med samma namn."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_08.htm"
+      ],
+      "evidence_status": "primary_report_assignment_transition_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "richard-gadd",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "rafael-quintero",
+      "name": "Rafael Quintero",
+      "organization": "enterprise",
+      "role": {
+        "sv": "The Enterprise — samordning i Centralamerika",
+        "en": "The Enterprise — Central American coordination",
+        "en_source": "The Enterprise — samordning i Centralamerika"
+      },
+      "note": {
+        "sv": "Walsh daterar Quinteros övertagande av flygfältsamordningen till januari 1986 och beskriver fortsatt arbete under följande månader. Februarianknytningen härleds ur perioden; tidigare CIA-kontakter innebär inte CIA-anställning då.",
+        "en": "Walsh dates Quintero’s assumption of airstrip coordination to January 1986 and describes continued work in the following months. His February affiliation is inferred from this interval; earlier CIA connections do not establish CIA employment then.",
+        "en_source": "Walsh daterar Quinteros övertagande av flygfältsamordningen till januari 1986 och beskriver fortsatt arbete under följande månader. Februarianknytningen härleds ur perioden; tidigare CIA-kontakter innebär inte CIA-anställning då."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_20.htm"
+      ],
+      "evidence_status": "primary_report_dated_assignment_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "rafael-quintero",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "james-adkins",
+      "name": "James L. Adkins",
+      "organization": "cia-field-central-america",
+      "role": {
+        "sv": "Chef för CIA-fältanläggning i Centralamerika",
+        "en": "Chief of a CIA field facility in Central America",
+        "en_source": "Chef för CIA-fältanläggning i Centralamerika"
+      },
+      "note": {
+        "sv": "Walsh daterar Adkins chefskap till januari 1986–maj 1987 och beskriver hans godkännande av Contra-försörjningsuppdrag. Februarirollen härleds ur perioden. Anläggningens namn och samtliga underställda är inte offentliga i kapitlet.",
+        "en": "Walsh dates Adkins’s leadership to January 1986–May 1987 and describes his approval of contra-resupply missions. His February role is inferred from the interval. The facility’s name and full subordinate roster are not public in this chapter.",
+        "en_source": "Walsh daterar Adkins chefskap till januari 1986–maj 1987 och beskriver hans godkännande av Contra-försörjningsuppdrag. Februarirollen härleds ur perioden. Anläggningens namn och samtliga underställda är inte offentliga i kapitlet."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_22.htm"
+      ],
+      "evidence_status": "primary_report_command_interval_inference_facility_name_withheld",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "james-adkins",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "richard-kerr",
+      "name": "Richard J. Kerr",
+      "organization": "cia-administration",
+      "role": {
+        "sv": "Deputy Director for Administration",
+        "en": "Deputy Director for Administration",
+        "en_source": "Deputy Director for Administration"
+      },
+      "note": {
+        "sv": "En CIA-rapport daterad 14 februari 1986 identifierar Kerr som Deputy Director for Administration. Februarirollen härleds från detta daterade dokument. Hans senare befattning som analyschef tillskrivs inte referensdagen.",
+        "en": "A CIA report dated 14 February 1986 identifies Kerr as Deputy Director for Administration. His February role is inferred from this dated document. His later intelligence-director post is not assigned to the reference date.",
+        "en_source": "En CIA-rapport daterad 14 februari 1986 identifierar Kerr som Deputy Director for Administration. Februarirollen härleds från detta daterade dokument. Hans senare befattning som analyschef tillskrivs inte referensdagen."
+      },
+      "sources": [
+        "https://www.cia.gov/readingroom/document/cia-rdp89-00063r000200140018-2"
+      ],
+      "evidence_status": "primary_contemporaneous_dated_office_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "richard-kerr",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "donald-gregg",
+      "name": "Donald P. Gregg",
+      "organization": "vp-security-staff",
+      "role": {
+        "sv": "Vice presidentens nationelle säkerhetsrådgivare",
+        "en": "National Security Adviser to the Vice President",
+        "en_source": "Vice presidentens nationelle säkerhetsrådgivare"
+      },
+      "note": {
+        "sv": "Walsh anger att Gregg lämnade CIA i augusti 1982 och därefter var vice presidentens säkerhetsrådgivare till Reaganadministrationens slut. Februarirollen härleds ur perioden; han registreras inte som CIA-anställd 1986.",
+        "en": "Walsh records Gregg’s CIA departure in August 1982, followed by service as the Vice President’s national security adviser until the Reagan Administration ended. His February role is inferred from this interval; he is not registered as CIA staff in 1986.",
+        "en_source": "Walsh anger att Gregg lämnade CIA i augusti 1982 och därefter var vice presidentens säkerhetsrådgivare till Reaganadministrationens slut. Februarirollen härleds ur perioden; han registreras inte som CIA-anställd 1986."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_29.htm"
+      ],
+      "evidence_status": "primary_report_service_transition_and_office_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "donald-gregg",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "samuel-watson",
+      "name": "Samuel J. Watson III",
+      "organization": "vp-security-staff",
+      "role": {
+        "sv": "Vice presidentens biträdande säkerhetsrådgivare",
+        "en": "Deputy National Security Adviser to the Vice President",
+        "en_source": "Vice presidentens biträdande säkerhetsrådgivare"
+      },
+      "note": {
+        "sv": "Walsh identifierar Watson som biträdande rådgivare under en resa i januari 1986 och hänvisar till hans rapport den 4 februari. Februarirollen härleds från dessa daterade uppgifter. Placeringen är i vice presidentens kansli.",
+        "en": "Walsh identifies Watson as deputy adviser during a January 1986 trip and references his report of 4 February. His February role is inferred from these dated records. He is placed in the Office of the Vice President.",
+        "en_source": "Walsh identifierar Watson som biträdande rådgivare under en resa i januari 1986 och hänvisar till hans rapport den 4 februari. Februarirollen härleds från dessa daterade uppgifter. Placeringen är i vice presidentens kansli."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_29.htm"
+      ],
+      "evidence_status": "primary_report_and_contemporaneous_document_dated_office_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "samuel-watson",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "felix-rodriguez",
+      "name": "Félix Rodríguez",
+      "organization": "enterprise",
+      "role": {
+        "sv": "Extern samordnare vid Ilopango",
+        "en": "External coordinator at Ilopango",
+        "en_source": "Extern samordnare vid Ilopango"
+      },
+      "note": {
+        "sv": "Walsh beskriver rekrytering till det externa försörjningsnätverket hösten 1985 och uppdrag vid Ilopango i februari 1986. Tillhörigheten för referensdagen härleds ur kronologin. Tidigare CIA-tjänst innebär inte CIA-anställning då; alias Max Gomez anges i källan.",
+        "en": "Walsh describes recruitment into the external resupply network in fall 1985 and assignments at Ilopango in February 1986. Reference-date affiliation is inferred from this chronology. Former CIA service does not imply CIA employment then; the source gives the alias Max Gomez.",
+        "en_source": "Walsh beskriver rekrytering till det externa försörjningsnätverket hösten 1985 och uppdrag vid Ilopango i februari 1986. Tillhörigheten för referensdagen härleds ur kronologin. Tidigare CIA-tjänst innebär inte CIA-anställning då; alias Max Gomez anges i källan."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_19.htm"
+      ],
+      "evidence_status": "primary_report_dated_external_assignment_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "felix-rodriguez",
+      "existing_office_card": false,
+      "portrait": {
+        "person_id": "felix-rodriguez",
+        "file": "us-felix-rodriguez.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:F%C3%A9lix_Ismael_Rodr%C3%ADguez_Mendigutia_(cropped).jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/F%C3%A9lix_Ismael_Rodr%C3%ADguez_Mendigutia_%28cropped%29.jpg/330px-F%C3%A9lix_Ismael_Rodr%C3%ADguez_Mendigutia_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Horacio Cambeiro",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0",
+        "source_date": "2011-08-23",
+        "description": "Félix Ismael Rodríguez Mendigutia (born 31 May 1941) is a former Central Intelligence Agency officer known for his involvement in the Bay of Pigs Invasion, in the interrogation and execution of Marxist guerilla Che Guevara and his ties to George H. W. Bush during the Iran–Contra affair. He is Cuban of Spanish Basque ancestry.",
+        "sha256": "0eb6aa7ff27b7a7878c805e1e1c29fc0f936cc9d851297e7101891aa60724e88",
+        "modifications": "Wikimedia thumbnail only; no further edits.",
+        "checked": "2026-10-02",
+        "date_note": {
+          "sv": "Senare identifieringsbild från 2011; inte från 1986.",
+          "en": "Later identification image from 2011; not from 1986.",
+          "en_source": "Senare identifieringsbild från 2011; inte från 1986."
+        }
+      },
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "james-steele",
+      "name": "James J. Steele",
+      "organization": "us-milgroup-el-salvador",
+      "role": {
+        "sv": "Chef för U.S. Military Group i El Salvador",
+        "en": "Commander of the U.S. Military Group in El Salvador",
+        "en_source": "Chef för U.S. Military Group i El Salvador"
+      },
+      "note": {
+        "sv": "Walsh identifierar Steele som militärgruppens chef i september 1985 och dokumenterar fortsatt arbete kring Ilopango under början av 1986. Februarirollen härleds ur kronologin. Han placeras i en militär organisation, inte i CIA.",
+        "en": "Walsh identifies Steele as military group commander in September 1985 and documents continued work around Ilopango in early 1986. His February role is inferred from this chronology. He is placed in a military organization, not CIA.",
+        "en_source": "Walsh identifierar Steele som militärgruppens chef i september 1985 och dokumenterar fortsatt arbete kring Ilopango under början av 1986. Februarirollen härleds ur kronologin. Han placeras i en militär organisation, inte i CIA."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_26.htm"
+      ],
+      "evidence_status": "primary_report_dated_command_and_service_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "james-steele",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "robert-owen",
+      "name": "Robert Owen",
+      "organization": "external-contra-support",
+      "role": {
+        "sv": "Extern kontaktperson och kurir för Oliver North",
+        "en": "External liaison and courier for Oliver North",
+        "en_source": "Extern kontaktperson och kurir för Oliver North"
+      },
+      "note": {
+        "sv": "Owens promemoria till North den 10 februari 1986 dokumenterar hans rapportering från Centralamerika. Februarianknytningen härleds från det daterade uppdraget. Rollen anges som extern; ingen formell CIA- eller NSC-anställning fastställs här.",
+        "en": "Owen’s memorandum to North of 10 February 1986 documents his reporting from Central America. His February affiliation is inferred from this dated assignment. The role is external; no formal CIA or NSC employment is established here.",
+        "en_source": "Owens promemoria till North den 10 februari 1986 dokumenterar hans rapportering från Centralamerika. Februarianknytningen härleds från det daterade uppdraget. Rollen anges som extern; ingen formell CIA- eller NSC-anställning fastställs här."
+      },
+      "sources": [
+        "https://nsarchive.gwu.edu/document/16592-document-04-memorandum-tc-robert-owen-bg",
+        "https://nsarchive.gwu.edu/sites/default/files/documents/4463971/Document-04-Memorandum-from-TC-Robert-Owen-to-BG.pdf"
+      ],
+      "evidence_status": "primary_contemporaneous_memorandum_dated_external_role_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "node_id": "robert-owen",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    },
+    {
+      "id": "john-singlaub",
+      "name": "John K. Singlaub",
+      "organization": "external-contra-support",
+      "role": {
+        "sv": "Extern stödaktör för Contra-nätverk",
+        "en": "External supporter of Contra networks",
+        "en_source": "Extern stödaktör för Contra-nätverk"
+      },
+      "note": {
+        "sv": "Walsh dokumenterar Singlaubs Costa Rica-resa och kontakt med Pastora i mars 1986. Han ingår därför i urvalet för 1985–1986. Posten avser extern stödverksamhet; den fastställer inte CIA-anställning eller en exakt befattning i februari.",
+        "en": "Walsh documents Singlaub’s Costa Rica trip and contact with Pastora in March 1986. He therefore meets the 1985–1986 inclusion criterion. This record concerns external support; it does not establish CIA employment or an exact February position.",
+        "en_source": "Walsh dokumenterar Singlaubs Costa Rica-resa och kontakt med Pastora i mars 1986. Han ingår därför i urvalet för 1985–1986. Posten avser extern stödverksamhet; den fastställer inte CIA-anställning eller en exakt befattning i februari."
+      },
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_19.htm"
+      ],
+      "evidence_status": "primary_report_dated_march_1986_activity",
+      "reference_date": "1986",
+      "checked": "2026-10-02",
+      "portrait": {
+        "person_id": "john-singlaub",
+        "file": "us-john-singlaub.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:John_K_Singlaub.jpg",
+        "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/John_K_Singlaub.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "US Army",
+        "license": "Public domain",
+        "license_url": "https://commons.wikimedia.org/wiki/File:John_K_Singlaub.jpg",
+        "source_date": "",
+        "description": "Major General John K. Singlaub from [1] official U.S. Army portrait and therefore ineligible for copyright",
+        "sha256": "4bc073b017af7d51fad75613654aa56f26a2344b0e993be46da3ead4712dc9b3",
+        "modifications": "Wikimedia thumbnail only; no further edits.",
+        "checked": "2026-10-02",
+        "date_note": {
+          "sv": "Fotograferingsdatum inte fastställt. 2007 är uppladdningsår, inte ett belagt fotograferingsår.",
+          "en": "Capture date unresolved. 2007 is the upload year, not an established capture year.",
+          "en_source": "Fotograferingsdatum inte fastställt. 2007 är uppladdningsår, inte ett belagt fotograferingsår."
+        }
+      },
+      "node_id": "john-singlaub",
+      "existing_office_card": false,
+      "inclusion_period": "1985–1986"
+    }
+  ],
+  "year_only_people": [],
+  "review_people": [],
+  "historical_context": [
+    {
+      "id": "zr-rifle",
+      "name": "ZR/RIFLE — Executive Action",
+      "period": "Early 1960s / tidigt 1960-tal",
+      "status": "historical_context_only_not_1986_staff",
+      "summary": {
+        "sv": "Churchkommittén beskriver en förberedd attentatskapacitet. Rapporten anger inte att denna kapacitet användes för ett genomfört attentat.",
+        "en": "The Church Committee describes a prepared assassination capability. The report does not establish its use in a completed assassination.",
+        "en_source": "Churchkommittén beskriver en förberedd attentatskapacitet. Rapporten anger inte att denna kapacitet användes för ett genomfört attentat."
+      },
+      "people": [
+        {
+          "name": "William K. Harvey",
+          "role": {
+            "sv": "Projektansvarig",
+            "en": "Project supervisor",
+            "en_source": "Projektansvarig"
+          }
+        },
+        {
+          "name": "Richard M. Bissell Jr.",
+          "role": {
+            "sv": "CIA:s operationsledning",
+            "en": "CIA operations leadership",
+            "en_source": "CIA:s operationsledning"
+          }
+        }
+      ],
+      "sources": [
+        "https://www.intelligence.senate.gov/wp-content/uploads/2024/08/sites-default-files-94465.pdf"
+      ],
+      "source_locator": "Printed pp. 181–188"
+    },
+    {
+      "id": "castro-plots",
+      "name": "CIA:s Castroplaner / CIA Castro plots",
+      "period": "1960–1965",
+      "status": "historical_context_only_not_1986_staff",
+      "summary": {
+        "sv": "Rapporten dokumenterar CIA-planer och kontakter med organiserad brottslighet. Personerna nedan hör till denna äldre historik.",
+        "en": "The report documents CIA plots and contacts with organized crime. The people below belong to this earlier history.",
+        "en_source": "Rapporten dokumenterar CIA-planer och kontakter med organiserad brottslighet. Personerna nedan hör till denna äldre historik."
+      },
+      "people": [
+        {
+          "name": "Robert A. Maheu",
+          "role": {
+            "sv": "Mellanhand",
+            "en": "Intermediary",
+            "en_source": "Mellanhand"
+          }
+        },
+        {
+          "name": "John Rosselli",
+          "role": {
+            "sv": "Kontakt inom organiserad brottslighet",
+            "en": "Underworld contact",
+            "en_source": "Kontakt inom organiserad brottslighet"
+          }
+        },
+        {
+          "name": "Sam Giancana",
+          "role": {
+            "sv": "Kontakt inom organiserad brottslighet",
+            "en": "Underworld contact",
+            "en_source": "Kontakt inom organiserad brottslighet"
+          }
+        },
+        {
+          "name": "Santo Trafficante Jr.",
+          "role": {
+            "sv": "Kontakt inom organiserad brottslighet",
+            "en": "Underworld contact",
+            "en_source": "Kontakt inom organiserad brottslighet"
+          }
+        }
+      ],
+      "sources": [
+        "https://www.intelligence.senate.gov/wp-content/uploads/2024/08/sites-default-files-94465.pdf"
+      ],
+      "source_locator": "Printed pp. 71–180; distinct from ZR/RIFLE personnel"
+    }
+  ],
+  "candidate_checks": [
+    {
+      "name": "CIA Special Activities / paramilitary components",
+      "status": "partly_resolved_adkins_added_US02_full_structure_unresolved",
+      "note_sv": "James L. Adkins har tillagts med belagd chefsperiod från januari 1986. Anläggningens namn och en fullständig paramilitär personallista är fortfarande inte offentliga i underlaget.",
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_22.htm"
+      ]
+    },
+    {
+      "name": "Civilian Military Assistance; anti-Castro exile networks",
+      "status": "follow_up_membership_and_1986_activity",
+      "note_sv": "Undersök separat. Uppgifter om tidigare CIA-kontakter räcker inte för att registrera anställning eller en aktiv attentatsgrupp under 1985–1986.",
+      "sources": [
+        "https://www.archives.gov/research/investigations/walsh.html"
+      ]
+    },
+    {
+      "name": "CIA Subject #1 / C/LA #2",
+      "status": "classified_identity_not_guessed",
+      "note_sv": "Walsh använder maskerade identiteter. De tilldelas inte namn genom gissning.",
+      "sources": [
+        "https://irp.fas.org/offdocs/walsh/chap_19.htm",
+        "https://irp.fas.org/offdocs/walsh/chap_21.htm"
+      ]
+    }
+  ],
+  "changes_from_SA02": {
+    "added_people": [
+      "duane-clarridge",
+      "joseph-fernandez",
+      "charles-allen",
+      "thomas-twetten",
+      "oliver-north",
+      "john-poindexter",
+      "vincent-cannistraro",
+      "richard-secord",
+      "albert-hakim",
+      "thomas-clines",
+      "richard-gadd",
+      "rafael-quintero"
+    ],
+    "existing_office_cards_enriched": [
+      "william-casey",
+      "john-mcmahon",
+      "clair-george",
+      "robert-gates",
+      "alan-fiers"
+    ],
+    "added_portraits": [
+      "john-poindexter",
+      "charles-allen",
+      "richard-secord",
+      "robert-gates",
+      "william-casey"
+    ],
+    "added_groups": [
+      "cia-ctc",
+      "cia-costa-rica",
+      "cia-near-east",
+      "cia-other-staff",
+      "nsc-staff",
+      "covert-networks",
+      "enterprise"
+    ]
+  },
+  "source_note_sv": "Urvalet omfattar personer med offentligt dokumenterad tjänstgöring eller aktivitet någon gång under 1985–1986. Daterade befattningar och uppdrag behålls som källinformation; alla personer och roller var inte aktiva samtidigt. CIA, NSC, militära och privata nätverk visas åtskilda. Organisatorisk anknytning innebär inte belagd delaktighet i attentat.",
+  "changes_from_US01": {
+    "added_people": [
+      "james-adkins",
+      "richard-kerr",
+      "donald-gregg",
+      "samuel-watson",
+      "felix-rodriguez",
+      "james-steele",
+      "robert-owen",
+      "john-singlaub"
+    ],
+    "added_year_only_people": [],
+    "added_portraits": [
+      "felix-rodriguez",
+      "john-singlaub"
+    ],
+    "added_groups": [
+      "cia-administration",
+      "cia-field-central-america",
+      "vp-security-staff",
+      "us-milgroup-el-salvador",
+      "external-contra-support"
+    ],
+    "scope_expanded_to": "1985–1986"
+  },
+  "inclusion_period": {
+    "start": "1985-01-01",
+    "end": "1986-12-31",
+    "criterion": "documented activity or service overlapping any part of the period"
+  }
+}

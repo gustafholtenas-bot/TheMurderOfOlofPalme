@@ -1,0 +1,39 @@
+{
+  "package": "v98",
+  "batch": 95,
+  "checked_on": "2026-09-30",
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s Tools/FlightResearch -p 'test_flights.py' -v",
+      "chunk_id": "a471a9",
+      "wall_time_seconds": 6.017675883,
+      "exit_code": 0,
+      "original_token_count": 551,
+      "output": "test_batch04_weekdays_and_timed_stops (test_flights.FlightTests.test_batch04_weekdays_and_timed_stops) ... ok\ntest_calendar_exceptions (test_flights.FlightTests.test_calendar_exceptions) ... ok\ntest_cancelled_and_confirmed_are_evidence_based (test_flights.FlightTests.test_cancelled_and_confirmed_are_evidence_based) ... ok\ntest_date_line_and_next_day (test_flights.FlightTests.test_date_line_and_next_day) ... ok\ntest_dst_gap_fold_and_half_hour_zone (test_flights.FlightTests.test_dst_gap_fold_and_half_hour_zone) ... ok\ntest_duplicate_and_missing_airports (test_flights.FlightTests.test_duplicate_and_missing_airports) ... ok\ntest_exact_window (test_flights.FlightTests.test_exact_window) ... ok\ntest_historical_airport_locations (test_flights.FlightTests.test_historical_airport_locations) ... ok\ntest_localized_content_is_current (test_flights.FlightTests.test_localized_content_is_current) ... ok\ntest_military_movement_is_one_off_with_recorded_times (test_flights.FlightTests.test_military_movement_is_one_off_with_recorded_times) ... ok\ntest_month_only_source_date (test_flights.FlightTests.test_month_only_source_date) ... ok\ntest_multistop_day_transition (test_flights.FlightTests.test_multistop_day_transition) ... ok\ntest_new_air_wisconsin_evidence_and_time_zones (test_flights.FlightTests.test_new_air_wisconsin_evidence_and_time_zones) ... ok\ntest_new_air_zimbabwe_overnight_services (test_flights.FlightTests.test_new_air_zimbabwe_overnight_services) ... ok\ntest_one_off_evidence_and_duplicate_gates (test_flights.FlightTests.test_one_off_evidence_and_duplicate_gates) ... ok\ntest_one_off_overlap_boundaries (test_flights.FlightTests.test_one_off_overlap_boundaries) ... ok\ntest_overlap_instead_of_departure_only (test_flights.FlightTests.test_overlap_instead_of_departure_only) ... ok\ntest_panam_berlin_overnight_and_effective_dates (test_flights.FlightTests.test_panam_berlin_overnight_and_effective_dates) ... ok\ntest_source_review_gates (test_flights.FlightTests.test_source_review_gates) ... ok\ntest_weekdays_and_calendar (test_flights.FlightTests.test_weekdays_and_calendar) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 6.042s\n\nOK\n"
+    },
+    {
+      "command": "python3 Tools/FlightResearch/build_flights.py --check",
+      "chunk_id": "65e26d",
+      "wall_time_seconds": 0.43268542,
+      "exit_code": 0,
+      "original_token_count": 41,
+      "output": "{\"registered_airlines\": 96, \"registered_countries\": 81, \"reviewed_schedules\": 3643, \"animated_airlines\": 50, \"scheduled_movements\": 6041, \"confirmed_movements\": 1}\n"
+    },
+    {
+      "command": "python3 Tools/FlightResearch/build_country_index.py --check",
+      "chunk_id": "beaff0",
+      "wall_time_seconds": 0.147471734,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "command": "python3 Tools/FlightResearch/build_europe_index.py --check",
+      "chunk_id": "7c426f",
+      "wall_time_seconds": 0.147437738,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    6,
+    36,
+    49,
+    50,
+    79
+  ],
+  "research_only_printed_pages": [
+    111
+  ],
+  "correction_printed_pages": [
+    48,
+    264
+  ],
+  "itinerary_printed_pages": [
+    264,
+    265
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "6": 6,
+    "36": 21,
+    "48": 27,
+    "49": 27,
+    "50": 28,
+    "79": 42,
+    "111": 58,
+    "264": 135,
+    "265": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "30 rows in eight complete selected city-direction tables visually reviewed:20 nonstop schedules accepted,9 connections and1 through-stop row excluded.",
+    "Accepted frequencies are X6,X7,X67 and X56; no accepted row has a dated footnote. Each physical leg retains its own weekdays.",
+    "BUF–CVG16:10 is1660; CVG–CAK1530 departs09:22. EVV–CVG1553 arrives19:09.",
+    "CVG–EVV1552 departs17:00 Eastern and arrives16:59 Central:59 minutes elapsed, not negative duration. EVV uses UTC−6; all other new endpoints UTC−5.",
+    "CVG–EVV1595 is X56, excluding both Friday and Saturday. Only Thursday27February contributes a movement to this window.",
+    "EVV–IND1527 has one stop at CVG; EVV–CVG and previously sourced CVG–IND supply its physical legs. No duplicate nonstop EVV–IND1527 is created.",
+    "Only EVV–IND1563 is a nonstop row. All six IND–EVV rows are connections and create no assumed nonstop return.",
+    "Earlier ORD–MKE11:15 is1580, not1530, confirmed in city table p48 and itinerary p264. See errata_batch86.json. Stable IDs and all times retained.",
+    "All other prior movement objects, schedules and airports remain unchanged, including the prior COMAIR1582 correction. Held conflicts from batches80 and82 remain unchanged and unimported.",
+    "Later amendments and timetable end date unverified; scheduled service does not establish actual operation, aircraft identity or path."
+  ]
+}

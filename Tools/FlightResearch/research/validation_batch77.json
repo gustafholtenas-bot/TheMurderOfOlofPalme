@@ -1,0 +1,1027 @@
+{
+  "batch": 77,
+  "package": "v80",
+  "based_on_package": "v79",
+  "base_git_commit": "f23b73a6574e466b8e08d410bb92ef86c401a9c2",
+  "checked_on": "2026-09-30",
+  "previous_movements": 4883,
+  "source_rows": 64,
+  "selected_direction_tables": 14,
+  "source_row_actions": {
+    "new_schedule": 40,
+    "excluded_connection": 20,
+    "excluded_through_service": 4
+  },
+  "new_schedules": 40,
+  "new_schedules_by_airline": {
+    "comair": 18,
+    "delta": 22
+  },
+  "new_schedule_ids": [
+    "comair-1602-CLE-CMH-0950-b77",
+    "comair-1724-CLE-CMH-1140-b77",
+    "comair-1561-CLE-CMH-1555-b77",
+    "comair-1562-CMH-CLE-0815-b77",
+    "comair-1627-CMH-CLE-1050-b77",
+    "comair-1672-CMH-CLE-1705-b77",
+    "comair-1581-CLE-IND-0730-b77",
+    "comair-1545-CLE-IND-1545-b77",
+    "comair-1547-CLE-IND-1830-b77",
+    "comair-1588-IND-CLE-0900-b77",
+    "comair-1684-IND-CLE-1410-b77",
+    "comair-1639-IND-CLE-2000-b77",
+    "delta-692-IND-DTW-1447-b77",
+    "delta-1124-IND-DTW-1745-b77",
+    "comair-1560-IND-DTW-1925-b77",
+    "comair-1574-IND-DTW-2010-b77",
+    "delta-427-IND-DTW-2135-b77",
+    "delta-581-DTW-IND-0735-b77",
+    "comair-1711-DTW-IND-1120-b77",
+    "delta-1123-DTW-IND-1410-b77",
+    "delta-1153-DTW-IND-1925-b77",
+    "comair-1699-DTW-IND-2045-b77",
+    "comair-1699-DTW-IND-2055-b77",
+    "delta-560-CMH-DAY-1020-b77",
+    "delta-336-IND-FWA-1000-b77",
+    "delta-543-FWA-IND-0858-b77",
+    "comair-1683-DTW-MKE-0645-b77",
+    "delta-345-CLE-ATL-0620-b77",
+    "delta-1171-CLE-ATL-0935-b77",
+    "delta-485-CLE-ATL-1250-b77",
+    "delta-1135-CLE-ATL-1610-b77",
+    "delta-373-CLE-ATL-1955-b77",
+    "delta-455-CMH-ATL-0625-b77",
+    "delta-503-CMH-ATL-0935-b77",
+    "delta-439-CMH-ATL-1300-b77",
+    "delta-249-CMH-ATL-1625-b77",
+    "delta-543-IND-ATL-0950-b77",
+    "delta-781-IND-ATL-1125-b77",
+    "delta-909-IND-ATL-1625-b77",
+    "delta-1153-IND-ATL-2040-b77"
+  ],
+  "new_movements": 68,
+  "total_movements": 4951,
+  "new_movements_by_source_airline": {
+    "delta": 47,
+    "comair": 21
+  },
+  "new_movements_by_directed_pair": {
+    "CLE–ATL": 11,
+    "CLE–CMH": 3,
+    "CLE–IND": 4,
+    "CMH–ATL": 9,
+    "CMH–CLE": 4,
+    "CMH–DAY": 2,
+    "DTW–IND": 9,
+    "DTW–MKE": 1,
+    "FWA–IND": 2,
+    "IND–ATL": 9,
+    "IND–CLE": 3,
+    "IND–DTW": 9,
+    "IND–FWA": 2
+  },
+  "new_leg_ids": [
+    "delta-1135-CLE-ATL-1610-b77@1986-02-27",
+    "delta-249-CMH-ATL-1625-b77@1986-02-27",
+    "delta-909-IND-ATL-1625-b77@1986-02-27",
+    "comair-1672-CMH-CLE-1705-b77@1986-02-27",
+    "delta-1124-IND-DTW-1745-b77@1986-02-27",
+    "comair-1547-CLE-IND-1830-b77@1986-02-27",
+    "comair-1560-IND-DTW-1925-b77@1986-02-27",
+    "delta-1153-DTW-IND-1925-b77@1986-02-27",
+    "delta-373-CLE-ATL-1955-b77@1986-02-27",
+    "comair-1639-IND-CLE-2000-b77@1986-02-27",
+    "comair-1574-IND-DTW-2010-b77@1986-02-27",
+    "delta-1153-IND-ATL-2040-b77@1986-02-27",
+    "comair-1699-DTW-IND-2055-b77@1986-02-27",
+    "delta-427-IND-DTW-2135-b77@1986-02-27",
+    "delta-345-CLE-ATL-0620-b77@1986-02-28",
+    "delta-455-CMH-ATL-0625-b77@1986-02-28",
+    "comair-1683-DTW-MKE-0645-b77@1986-02-28",
+    "comair-1581-CLE-IND-0730-b77@1986-02-28",
+    "delta-581-DTW-IND-0735-b77@1986-02-28",
+    "comair-1562-CMH-CLE-0815-b77@1986-02-28",
+    "delta-543-FWA-IND-0858-b77@1986-02-28",
+    "comair-1588-IND-CLE-0900-b77@1986-02-28",
+    "delta-1171-CLE-ATL-0935-b77@1986-02-28",
+    "delta-503-CMH-ATL-0935-b77@1986-02-28",
+    "comair-1602-CLE-CMH-0950-b77@1986-02-28",
+    "delta-543-IND-ATL-0950-b77@1986-02-28",
+    "delta-336-IND-FWA-1000-b77@1986-02-28",
+    "delta-560-CMH-DAY-1020-b77@1986-02-28",
+    "comair-1627-CMH-CLE-1050-b77@1986-02-28",
+    "comair-1711-DTW-IND-1120-b77@1986-02-28",
+    "delta-781-IND-ATL-1125-b77@1986-02-28",
+    "comair-1724-CLE-CMH-1140-b77@1986-02-28",
+    "delta-485-CLE-ATL-1250-b77@1986-02-28",
+    "delta-439-CMH-ATL-1300-b77@1986-02-28",
+    "comair-1684-IND-CLE-1410-b77@1986-02-28",
+    "delta-1123-DTW-IND-1410-b77@1986-02-28",
+    "delta-692-IND-DTW-1447-b77@1986-02-28",
+    "comair-1545-CLE-IND-1545-b77@1986-02-28",
+    "comair-1561-CLE-CMH-1555-b77@1986-02-28",
+    "delta-1135-CLE-ATL-1610-b77@1986-02-28",
+    "delta-249-CMH-ATL-1625-b77@1986-02-28",
+    "delta-909-IND-ATL-1625-b77@1986-02-28",
+    "comair-1672-CMH-CLE-1705-b77@1986-02-28",
+    "delta-1124-IND-DTW-1745-b77@1986-02-28",
+    "comair-1547-CLE-IND-1830-b77@1986-02-28",
+    "comair-1560-IND-DTW-1925-b77@1986-02-28",
+    "delta-1153-DTW-IND-1925-b77@1986-02-28",
+    "delta-373-CLE-ATL-1955-b77@1986-02-28",
+    "delta-1153-IND-ATL-2040-b77@1986-02-28",
+    "comair-1699-DTW-IND-2045-b77@1986-02-28",
+    "delta-427-IND-DTW-2135-b77@1986-02-28",
+    "delta-345-CLE-ATL-0620-b77@1986-03-01",
+    "delta-455-CMH-ATL-0625-b77@1986-03-01",
+    "delta-581-DTW-IND-0735-b77@1986-03-01",
+    "delta-543-FWA-IND-0858-b77@1986-03-01",
+    "delta-1171-CLE-ATL-0935-b77@1986-03-01",
+    "delta-503-CMH-ATL-0935-b77@1986-03-01",
+    "delta-543-IND-ATL-0950-b77@1986-03-01",
+    "delta-336-IND-FWA-1000-b77@1986-03-01",
+    "delta-560-CMH-DAY-1020-b77@1986-03-01",
+    "delta-781-IND-ATL-1125-b77@1986-03-01",
+    "delta-485-CLE-ATL-1250-b77@1986-03-01",
+    "delta-439-CMH-ATL-1300-b77@1986-03-01",
+    "delta-1123-DTW-IND-1410-b77@1986-03-01",
+    "delta-692-IND-DTW-1447-b77@1986-03-01",
+    "delta-1135-CLE-ATL-1610-b77@1986-03-01",
+    "delta-249-CMH-ATL-1625-b77@1986-03-01",
+    "delta-909-IND-ATL-1625-b77@1986-03-01"
+  ],
+  "new_airports": [],
+  "new_airlines": [],
+  "total_airports": 241,
+  "total_directed_endpoint_pairs": 1021,
+  "unchanged_previous_movements": 4881,
+  "corrected_previous_movement_ids": [
+    "delta-581-DTW-CVG-0800-b71@1986-02-28",
+    "delta-581-DTW-CVG-0800-b71@1986-03-01"
+  ],
+  "removed_previous_movements": 0,
+  "unchanged_previous_schedules": 3077,
+  "corrected_previous_schedule_ids": [
+    "delta-581-DTW-CVG-0800-b71"
+  ],
+  "data_only_delivery": true,
+  "coverage_complete": false,
+  "new_local_departures_by_date": {
+    "1986-02-27": 14,
+    "1986-02-28": 37,
+    "1986-03-01": 17
+  },
+  "runtime_coverage": {
+    "registered_airlines": 95,
+    "registered_countries": 81,
+    "reviewed_schedules": 3097,
+    "animated_airlines": 49,
+    "scheduled_movements": 4950,
+    "confirmed_movements": 1
+  },
+  "comair_total_movements": 255,
+  "delta_total_movements": 969,
+  "next_priority": "COMAIR Cincinnati–Louisville/Lexington; Delta Atlanta return directions to Cleveland/Columbus/Indianapolis; Dallas/Fort Worth",
+  "europe_resume_country": "cy",
+  "independent_fixed_offset_check": true,
+  "expected_movement_utc": {
+    "comair-1602-CLE-CMH-0950-b77@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T15:30:00Z"
+    ],
+    "comair-1724-CLE-CMH-1140-b77@1986-02-28": [
+      "1986-02-28T16:40:00Z",
+      "1986-02-28T17:22:00Z"
+    ],
+    "comair-1561-CLE-CMH-1555-b77@1986-02-28": [
+      "1986-02-28T20:55:00Z",
+      "1986-02-28T21:35:00Z"
+    ],
+    "comair-1562-CMH-CLE-0815-b77@1986-02-28": [
+      "1986-02-28T13:15:00Z",
+      "1986-02-28T13:55:00Z"
+    ],
+    "comair-1627-CMH-CLE-1050-b77@1986-02-28": [
+      "1986-02-28T15:50:00Z",
+      "1986-02-28T16:30:00Z"
+    ],
+    "comair-1672-CMH-CLE-1705-b77@1986-02-27": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-27T22:45:00Z"
+    ],
+    "comair-1672-CMH-CLE-1705-b77@1986-02-28": [
+      "1986-02-28T22:05:00Z",
+      "1986-02-28T22:45:00Z"
+    ],
+    "comair-1581-CLE-IND-0730-b77@1986-02-28": [
+      "1986-02-28T12:30:00Z",
+      "1986-02-28T13:45:00Z"
+    ],
+    "comair-1545-CLE-IND-1545-b77@1986-02-28": [
+      "1986-02-28T20:45:00Z",
+      "1986-02-28T22:05:00Z"
+    ],
+    "comair-1547-CLE-IND-1830-b77@1986-02-27": [
+      "1986-02-27T23:30:00Z",
+      "1986-02-28T00:45:00Z"
+    ],
+    "comair-1547-CLE-IND-1830-b77@1986-02-28": [
+      "1986-02-28T23:30:00Z",
+      "1986-03-01T00:45:00Z"
+    ],
+    "comair-1588-IND-CLE-0900-b77@1986-02-28": [
+      "1986-02-28T14:00:00Z",
+      "1986-02-28T15:15:00Z"
+    ],
+    "comair-1684-IND-CLE-1410-b77@1986-02-28": [
+      "1986-02-28T19:10:00Z",
+      "1986-02-28T20:30:00Z"
+    ],
+    "comair-1639-IND-CLE-2000-b77@1986-02-27": [
+      "1986-02-28T01:00:00Z",
+      "1986-02-28T02:15:00Z"
+    ],
+    "delta-692-IND-DTW-1447-b77@1986-02-28": [
+      "1986-02-28T19:47:00Z",
+      "1986-02-28T20:35:00Z"
+    ],
+    "delta-692-IND-DTW-1447-b77@1986-03-01": [
+      "1986-03-01T19:47:00Z",
+      "1986-03-01T20:35:00Z"
+    ],
+    "delta-1124-IND-DTW-1745-b77@1986-02-27": [
+      "1986-02-27T22:45:00Z",
+      "1986-02-27T23:33:00Z"
+    ],
+    "delta-1124-IND-DTW-1745-b77@1986-02-28": [
+      "1986-02-28T22:45:00Z",
+      "1986-02-28T23:33:00Z"
+    ],
+    "comair-1560-IND-DTW-1925-b77@1986-02-27": [
+      "1986-02-28T00:25:00Z",
+      "1986-02-28T01:40:00Z"
+    ],
+    "comair-1560-IND-DTW-1925-b77@1986-02-28": [
+      "1986-03-01T00:25:00Z",
+      "1986-03-01T01:40:00Z"
+    ],
+    "comair-1574-IND-DTW-2010-b77@1986-02-27": [
+      "1986-02-28T01:10:00Z",
+      "1986-02-28T02:25:00Z"
+    ],
+    "delta-427-IND-DTW-2135-b77@1986-02-27": [
+      "1986-02-28T02:35:00Z",
+      "1986-02-28T03:23:00Z"
+    ],
+    "delta-427-IND-DTW-2135-b77@1986-02-28": [
+      "1986-03-01T02:35:00Z",
+      "1986-03-01T03:23:00Z"
+    ],
+    "delta-581-DTW-IND-0735-b77@1986-02-28": [
+      "1986-02-28T12:35:00Z",
+      "1986-02-28T13:26:00Z"
+    ],
+    "delta-581-DTW-IND-0735-b77@1986-03-01": [
+      "1986-03-01T12:35:00Z",
+      "1986-03-01T13:26:00Z"
+    ],
+    "comair-1711-DTW-IND-1120-b77@1986-02-28": [
+      "1986-02-28T16:20:00Z",
+      "1986-02-28T17:30:00Z"
+    ],
+    "delta-1123-DTW-IND-1410-b77@1986-02-28": [
+      "1986-02-28T19:10:00Z",
+      "1986-02-28T20:01:00Z"
+    ],
+    "delta-1123-DTW-IND-1410-b77@1986-03-01": [
+      "1986-03-01T19:10:00Z",
+      "1986-03-01T20:01:00Z"
+    ],
+    "delta-1153-DTW-IND-1925-b77@1986-02-27": [
+      "1986-02-28T00:25:00Z",
+      "1986-02-28T01:16:00Z"
+    ],
+    "delta-1153-DTW-IND-1925-b77@1986-02-28": [
+      "1986-03-01T00:25:00Z",
+      "1986-03-01T01:16:00Z"
+    ],
+    "comair-1699-DTW-IND-2045-b77@1986-02-28": [
+      "1986-03-01T01:45:00Z",
+      "1986-03-01T02:59:00Z"
+    ],
+    "comair-1699-DTW-IND-2055-b77@1986-02-27": [
+      "1986-02-28T01:55:00Z",
+      "1986-02-28T03:10:00Z"
+    ],
+    "delta-560-CMH-DAY-1020-b77@1986-02-28": [
+      "1986-02-28T15:20:00Z",
+      "1986-02-28T15:58:00Z"
+    ],
+    "delta-560-CMH-DAY-1020-b77@1986-03-01": [
+      "1986-03-01T15:20:00Z",
+      "1986-03-01T15:58:00Z"
+    ],
+    "delta-336-IND-FWA-1000-b77@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T15:28:00Z"
+    ],
+    "delta-336-IND-FWA-1000-b77@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:28:00Z"
+    ],
+    "delta-543-FWA-IND-0858-b77@1986-02-28": [
+      "1986-02-28T13:58:00Z",
+      "1986-02-28T14:25:00Z"
+    ],
+    "delta-543-FWA-IND-0858-b77@1986-03-01": [
+      "1986-03-01T13:58:00Z",
+      "1986-03-01T14:25:00Z"
+    ],
+    "comair-1683-DTW-MKE-0645-b77@1986-02-28": [
+      "1986-02-28T11:45:00Z",
+      "1986-02-28T13:00:00Z"
+    ],
+    "delta-345-CLE-ATL-0620-b77@1986-02-28": [
+      "1986-02-28T11:20:00Z",
+      "1986-02-28T12:49:00Z"
+    ],
+    "delta-345-CLE-ATL-0620-b77@1986-03-01": [
+      "1986-03-01T11:20:00Z",
+      "1986-03-01T12:49:00Z"
+    ],
+    "delta-1171-CLE-ATL-0935-b77@1986-02-28": [
+      "1986-02-28T14:35:00Z",
+      "1986-02-28T16:07:00Z"
+    ],
+    "delta-1171-CLE-ATL-0935-b77@1986-03-01": [
+      "1986-03-01T14:35:00Z",
+      "1986-03-01T16:07:00Z"
+    ],
+    "delta-485-CLE-ATL-1250-b77@1986-02-28": [
+      "1986-02-28T17:50:00Z",
+      "1986-02-28T19:22:00Z"
+    ],
+    "delta-485-CLE-ATL-1250-b77@1986-03-01": [
+      "1986-03-01T17:50:00Z",
+      "1986-03-01T19:22:00Z"
+    ],
+    "delta-1135-CLE-ATL-1610-b77@1986-02-27": [
+      "1986-02-27T21:10:00Z",
+      "1986-02-27T22:42:00Z"
+    ],
+    "delta-1135-CLE-ATL-1610-b77@1986-02-28": [
+      "1986-02-28T21:10:00Z",
+      "1986-02-28T22:42:00Z"
+    ],
+    "delta-1135-CLE-ATL-1610-b77@1986-03-01": [
+      "1986-03-01T21:10:00Z",
+      "1986-03-01T22:42:00Z"
+    ],
+    "delta-373-CLE-ATL-1955-b77@1986-02-27": [
+      "1986-02-28T00:55:00Z",
+      "1986-02-28T02:27:00Z"
+    ],
+    "delta-373-CLE-ATL-1955-b77@1986-02-28": [
+      "1986-03-01T00:55:00Z",
+      "1986-03-01T02:27:00Z"
+    ],
+    "delta-455-CMH-ATL-0625-b77@1986-02-28": [
+      "1986-02-28T11:25:00Z",
+      "1986-02-28T12:41:00Z"
+    ],
+    "delta-455-CMH-ATL-0625-b77@1986-03-01": [
+      "1986-03-01T11:25:00Z",
+      "1986-03-01T12:41:00Z"
+    ],
+    "delta-503-CMH-ATL-0935-b77@1986-02-28": [
+      "1986-02-28T14:35:00Z",
+      "1986-02-28T15:55:00Z"
+    ],
+    "delta-503-CMH-ATL-0935-b77@1986-03-01": [
+      "1986-03-01T14:35:00Z",
+      "1986-03-01T15:55:00Z"
+    ],
+    "delta-439-CMH-ATL-1300-b77@1986-02-28": [
+      "1986-02-28T18:00:00Z",
+      "1986-02-28T19:20:00Z"
+    ],
+    "delta-439-CMH-ATL-1300-b77@1986-03-01": [
+      "1986-03-01T18:00:00Z",
+      "1986-03-01T19:20:00Z"
+    ],
+    "delta-249-CMH-ATL-1625-b77@1986-02-27": [
+      "1986-02-27T21:25:00Z",
+      "1986-02-27T22:44:00Z"
+    ],
+    "delta-249-CMH-ATL-1625-b77@1986-02-28": [
+      "1986-02-28T21:25:00Z",
+      "1986-02-28T22:44:00Z"
+    ],
+    "delta-249-CMH-ATL-1625-b77@1986-03-01": [
+      "1986-03-01T21:25:00Z",
+      "1986-03-01T22:44:00Z"
+    ],
+    "delta-543-IND-ATL-0950-b77@1986-02-28": [
+      "1986-02-28T14:50:00Z",
+      "1986-02-28T16:05:00Z"
+    ],
+    "delta-543-IND-ATL-0950-b77@1986-03-01": [
+      "1986-03-01T14:50:00Z",
+      "1986-03-01T16:05:00Z"
+    ],
+    "delta-781-IND-ATL-1125-b77@1986-02-28": [
+      "1986-02-28T16:25:00Z",
+      "1986-02-28T17:40:00Z"
+    ],
+    "delta-781-IND-ATL-1125-b77@1986-03-01": [
+      "1986-03-01T16:25:00Z",
+      "1986-03-01T17:40:00Z"
+    ],
+    "delta-909-IND-ATL-1625-b77@1986-02-27": [
+      "1986-02-27T21:25:00Z",
+      "1986-02-27T22:40:00Z"
+    ],
+    "delta-909-IND-ATL-1625-b77@1986-02-28": [
+      "1986-02-28T21:25:00Z",
+      "1986-02-28T22:40:00Z"
+    ],
+    "delta-909-IND-ATL-1625-b77@1986-03-01": [
+      "1986-03-01T21:25:00Z",
+      "1986-03-01T22:40:00Z"
+    ],
+    "delta-1153-IND-ATL-2040-b77@1986-02-27": [
+      "1986-02-28T01:40:00Z",
+      "1986-02-28T02:55:00Z"
+    ],
+    "delta-1153-IND-ATL-2040-b77@1986-02-28": [
+      "1986-03-01T01:40:00Z",
+      "1986-03-01T02:55:00Z"
+    ]
+  },
+  "no_new_flight_number_time_overlaps": true,
+  "excluded_rows": [
+    {
+      "source_row": 8,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "271/1527",
+      "origin": "CLE",
+      "destination": "IND",
+      "departure_local": "08:00",
+      "arrival_local": "10:05",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "53",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 9,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "comair",
+      "flight": "1609/1567",
+      "origin": "CLE",
+      "destination": "IND",
+      "departure_local": "10:50",
+      "arrival_local": "13:30",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "53",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 11,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "479/1560",
+      "origin": "CLE",
+      "destination": "IND",
+      "departure_local": "17:00",
+      "arrival_local": "19:10",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "53",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 13,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1603/1140",
+      "origin": "CLE",
+      "destination": "IND",
+      "departure_local": "21:10",
+      "arrival_local": "01:05",
+      "arrival_day_offset": 1,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "53",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 14,
+      "schedule": "",
+      "action": "excluded_through_service",
+      "airline": "delta",
+      "flight": "1112",
+      "origin": "IND",
+      "destination": "CLE",
+      "departure_local": "07:05",
+      "arrival_local": "08:50",
+      "arrival_day_offset": 0,
+      "printed_frequency": "D",
+      "decoded_days": "1234567",
+      "printed_stops_or_via": "1",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "One intermediate stop; no direct physical segment inferred."
+    },
+    {
+      "source_row": 16,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "comair",
+      "flight": "1566/1611",
+      "origin": "IND",
+      "destination": "CLE",
+      "departure_local": "11:00",
+      "arrival_local": "13:15",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 18,
+      "schedule": "",
+      "action": "excluded_through_service",
+      "airline": "comair",
+      "flight": "1655",
+      "origin": "IND",
+      "destination": "CLE",
+      "departure_local": "16:00",
+      "arrival_local": "18:05",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "1",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "One intermediate stop; no direct physical segment inferred."
+    },
+    {
+      "source_row": 19,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "comair",
+      "flight": "1545/1716",
+      "origin": "IND",
+      "destination": "CLE",
+      "departure_local": "17:15",
+      "arrival_local": "19:35",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 20,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1734/1164",
+      "origin": "IND",
+      "destination": "CLE",
+      "departure_local": "18:20",
+      "arrival_local": "20:30",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 22,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1112/1710",
+      "origin": "IND",
+      "destination": "DTW",
+      "departure_local": "07:05",
+      "arrival_local": "09:20",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 23,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1112/1582",
+      "origin": "IND",
+      "destination": "DTW",
+      "departure_local": "07:05",
+      "arrival_local": "10:41",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X7",
+      "decoded_days": "123456",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 24,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "comair",
+      "flight": "1673/1582",
+      "origin": "IND",
+      "destination": "DTW",
+      "departure_local": "08:10",
+      "arrival_local": "10:41",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 25,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "comair",
+      "flight": "1566/1643",
+      "origin": "IND",
+      "destination": "DTW",
+      "departure_local": "11:00",
+      "arrival_local": "14:25",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 28,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1734/254",
+      "origin": "IND",
+      "destination": "DTW",
+      "departure_local": "18:20",
+      "arrival_local": "20:30",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 33,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "561/1527",
+      "origin": "DTW",
+      "destination": "IND",
+      "departure_local": "08:00",
+      "arrival_local": "10:05",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "74",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 36,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "comair",
+      "flight": "1552/1691",
+      "origin": "DTW",
+      "destination": "IND",
+      "departure_local": "15:30",
+      "arrival_local": "18:05",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X67",
+      "decoded_days": "12345",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "74",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 37,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "619/1560",
+      "origin": "DTW",
+      "destination": "IND",
+      "departure_local": "17:00",
+      "arrival_local": "19:10",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "74",
+      "footnote": "4: Effective Feb. 12, 1986",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 45,
+      "schedule": "",
+      "action": "excluded_through_service",
+      "airline": "comair",
+      "flight": "1574",
+      "origin": "MKE",
+      "destination": "DTW",
+      "departure_local": "17:34",
+      "arrival_local": "21:25",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X56",
+      "decoded_days": "12347",
+      "printed_stops_or_via": "1",
+      "printed_page": "154",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "One intermediate stop; no direct physical segment inferred."
+    },
+    {
+      "source_row": 46,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1538/372",
+      "origin": "MKE",
+      "destination": "DTW",
+      "departure_local": "18:55",
+      "arrival_local": "21:41",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X6",
+      "decoded_days": "123457",
+      "printed_stops_or_via": "ORD",
+      "printed_page": "154",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 48,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1101/805",
+      "origin": "CLE",
+      "destination": "ATL",
+      "departure_local": "06:55",
+      "arrival_local": "09:19",
+      "arrival_day_offset": 0,
+      "printed_frequency": "D",
+      "decoded_days": "1234567",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "52",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 49,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1600/741",
+      "origin": "CLE",
+      "destination": "ATL",
+      "departure_local": "07:20",
+      "arrival_local": "10:45",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X7",
+      "decoded_days": "123456",
+      "printed_stops_or_via": "DAY",
+      "printed_page": "52",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 55,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1530/805",
+      "origin": "CMH",
+      "destination": "ATL",
+      "departure_local": "07:00",
+      "arrival_local": "09:19",
+      "arrival_day_offset": 0,
+      "printed_frequency": "X7",
+      "decoded_days": "123456",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "61",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    },
+    {
+      "source_row": 59,
+      "schedule": "",
+      "action": "excluded_through_service",
+      "airline": "delta",
+      "flight": "261",
+      "origin": "CMH",
+      "destination": "ATL",
+      "departure_local": "19:50",
+      "arrival_local": "22:04",
+      "arrival_day_offset": 0,
+      "printed_frequency": "D",
+      "decoded_days": "1234567",
+      "printed_stops_or_via": "1",
+      "printed_page": "61",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "One intermediate stop; no direct physical segment inferred."
+    },
+    {
+      "source_row": 60,
+      "schedule": "",
+      "action": "excluded_connection",
+      "airline": "connection",
+      "flight": "1112/805",
+      "origin": "IND",
+      "destination": "ATL",
+      "departure_local": "07:05",
+      "arrival_local": "09:19",
+      "arrival_day_offset": 0,
+      "printed_frequency": "D",
+      "decoded_days": "1234567",
+      "printed_stops_or_via": "CVG",
+      "printed_page": "110",
+      "footnote": "",
+      "source": "delta-19860201",
+      "source_effective_from": "1986-02-01",
+      "source_effective_to": "",
+      "import_valid_from": "",
+      "import_valid_to": "",
+      "decision_note": "Printed connecting itinerary; no direct physical segment imported."
+    }
+  ],
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "package": "v127",
+  "airport_records": [
+    {
+      "id": "GND",
+      "name": "Grenada – Point Salines (1986)",
+      "country": "gd",
+      "timezone": "America/Grenada",
+      "lat": 12.003996,
+      "lon": -61.785302,
+      "coordinate_source": "https://ourairports.com/airports/TGPY/",
+      "coordinate_record_id": "TGPY",
+      "timetable_code": "GND",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.grenadianconnection.com/Grenada/ViewNews.asp?CID=15008&Hl=Prime+Minister+speech+at+airport+renaming+ceremony+Grenada&NID=6835&Sch=&cat=0000&yr=2009"
+      ],
+      "location_note": "Contemporary GND interpreted as Point Salines, commissioned1984, not the older Pearls airfield. The2009PrimeMinisterrenaming speech describes the1984commissioning; laterMauriceBishopname notbackdated. Coordinates are approximate airfield markers, not surveyed1986 runway/terminalpositions. Modern expansion not reconstructed."
+    },
+    {
+      "id": "SVD",
+      "name": "St. Vincent – Arnos Vale (1986)",
+      "country": "vc",
+      "timezone": "America/St_Vincent",
+      "lat": 13.1443,
+      "lon": -61.210899,
+      "coordinate_source": "https://ourairports.com/airports/VC-0001/",
+      "coordinate_record_id": "VC-0001",
+      "timetable_code": "SVD",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://pmoffice.gov.vc/pmoffice/images/stories/Speeches/the%20international%20airport%20project%20at%20argyle.pdf"
+      ],
+      "location_note": "Use oldArnosVale/ETJoshuaairfield, historicalICAOTVSV. Source2005PrimeMinisteraddress distinguishesArnosValefromnewArgyle. ModernSVDairportTVSAopened2017andmustnotbeused. DatasetclosedrecordVC-0001locatesoldsite; neutralArnosValename avoidsassuming honoraryrenamingdate. Coordinates are approximate airfield markers, not surveyed1986 runway/terminalpositions. Modern expansion not reconstructed."
+    },
+    {
+      "id": "SLU",
+      "name": "St. Lucia – Vigie (1986)",
+      "country": "lc",
+      "timezone": "America/St_Lucia",
+      "lat": 14.0202,
+      "lon": -60.992901,
+      "coordinate_source": "https://ourairports.com/airports/TLPC/",
+      "coordinate_record_id": "TLPC",
+      "timetable_code": "SLU",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://archive.stlucia.gov.lc/pr1997/vigie_airport_renamed_george_f_l__charles.htm"
+      ],
+      "location_note": "OriginaltableexplicitlylabelsVigie. Governmentnotice datesGeorgeF.L.Charlesrenamingto4August1997; oldVigienameretained. DistinctfromHewanorraUVF. Coordinates are approximate airfield markers, not surveyed1986 runway/terminalpositions. Modern expansion not reconstructed."
+    },
+    {
+      "id": "DOM",
+      "name": "Dominica – Melville Hall (1986)",
+      "country": "dm",
+      "timezone": "America/Dominica",
+      "lat": 15.546673,
+      "lon": -61.301082,
+      "coordinate_source": "https://ourairports.com/airports/TDPD/",
+      "coordinate_record_id": "TDPD",
+      "timetable_code": "DOM",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.domports.daspa.dm/index.php/airports/douglas-charles-airport/"
+      ],
+      "location_note": "OriginaltablenamesMelvilleHall;DASPAidentifiesitasthepredecessornameofDouglasCharlesonthe northeast coast. Laternameandextensionsnotbackdated. DistinctfromCanefield. Coordinates are approximate airfield markers, not surveyed1986 runway/terminalpositions. Modern expansion not reconstructed."
+    },
+    {
+      "id": "DCF",
+      "name": "Dominica – Canefield",
+      "country": "dm",
+      "timezone": "America/Dominica",
+      "lat": 15.336693,
+      "lon": -61.392108,
+      "coordinate_source": "https://ourairports.com/airports/TDCF/",
+      "coordinate_record_id": "TDCF",
+      "timetable_code": "DCF",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://www.domports.daspa.dm/index.php/airports/canefield-airport/"
+      ],
+      "location_note": "OriginaltablenamesCanefield;DASPAplacesitnearRoseau. NorthboundpagesmapDCFcorrectly. Southboundscan4repeatsDOMincodecolumnbutfullairportnameandotherpagesidentifyCanefield; do not mergewithMelvilleHall. Coordinates are approximate airfield markers, not surveyed1986 runway/terminalpositions. Modern expansion not reconstructed."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "gd",
+      "name": {
+        "sv": "Grenada",
+        "en": "Grenada",
+        "en_source": "Grenada"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "vc",
+      "name": {
+        "sv": "Saint Vincent och Grenadinerna",
+        "en": "Saint Vincent and the Grenadines",
+        "en_source": "Saint Vincent och Grenadinerna"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "dm",
+      "name": {
+        "sv": "Dominica",
+        "en": "Dominica",
+        "en_source": "Dominica"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 369,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed1986 runway/terminal positions.",
+  "svd_identity": "SVD uses the old Arnos Vale site in OurAirports VC-0001, not modern TVSA/Argyle. Historical ICAO TVSV is not a current dataset identifier.",
+  "dominica_mapping": "Northbound pages correctly distinguish DOM/Melville Hall and DCF/Canefield. Southbound scan4 repeats DOM in the code margin; full airport names and other pages control the mapping."
+}

@@ -1,0 +1,328 @@
+{
+  "package": "v81",
+  "source": "delta-19860201",
+  "checked_on": "2026-09-30",
+  "corrections": [
+    {
+      "schedule": "comair-1724-CLE-CMH-1140-b77",
+      "origin": "CLE",
+      "destination": "CMH",
+      "flight": "1724",
+      "page": "52",
+      "printed_departure": "1140a",
+      "printed_arrival": "1220p",
+      "old_departure": "11:40",
+      "old_arrival": "12:22",
+      "departure": "11:40",
+      "arrival": "12:20",
+      "reason_sv": "Ankomstminuten är 20, inte 22.",
+      "reason_en": "Arrival minute is 20, not 22.",
+      "previous_movements": [
+        {
+          "id": "comair-1724-CLE-CMH-1140-b77@1986-02-28",
+          "schedule": "comair-1724-CLE-CMH-1140-b77",
+          "airline": "comair",
+          "flight": "1724",
+          "origin": "CLE",
+          "destination": "CMH",
+          "status": "scheduled",
+          "departure_utc": "1986-02-28T16:40:00Z",
+          "arrival_utc": "1986-02-28T17:22:00Z",
+          "departure_local": "1986-02-28T11:40-05:00",
+          "arrival_local": "1986-02-28T12:22-05:00",
+          "departure_seconds": 65910.0,
+          "arrival_seconds": 68430.0,
+          "source": "delta-19860201",
+          "page": "52",
+          "notes": {
+            "sv": "COMAIR enligt operatörslegend s. 4 (1525–1749), publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 52: flyg 1724, stoppkolumn 0, frekvens X67 (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 11:40, ankomst 12:22 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "COMAIR per operator legend p. 4 (1525–1749), published in Delta’s timetable effective 1 February 1986. Printed page 52: flight 1724, stops 0, frequency X67 (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 11:40, arrival 12:22 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "COMAIR enligt operatörslegend s. 4 (1525–1749), publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 52: flyg 1724, stoppkolumn 0, frekvens X67 (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 11:40, ankomst 12:22 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "service_group": "comair-1724-CLE-CMH-b77",
+          "leg_index": 1,
+          "journey": "comair/comair-1724-CLE-CMH-b77@1986-02-28"
+        }
+      ],
+      "corrected_movements": [
+        {
+          "id": "comair-1724-CLE-CMH-1140-b77@1986-02-28",
+          "schedule": "comair-1724-CLE-CMH-1140-b77",
+          "airline": "comair",
+          "flight": "1724",
+          "origin": "CLE",
+          "destination": "CMH",
+          "status": "scheduled",
+          "departure_utc": "1986-02-28T16:40:00Z",
+          "arrival_utc": "1986-02-28T17:20:00Z",
+          "departure_local": "1986-02-28T11:40-05:00",
+          "arrival_local": "1986-02-28T12:20-05:00",
+          "departure_seconds": 65910.0,
+          "arrival_seconds": 68310.0,
+          "source": "delta-19860201",
+          "page": "52",
+          "notes": {
+            "sv": "COMAIR enligt operatörslegend s. 4 (1525–1749), publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 52: flyg 1724, stoppkolumn 0, frekvens X67 (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 11:40, ankomst 12:20 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: Ankomstminuten är 20, inte 22. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift.",
+            "en": "COMAIR per operator legend p. 4 (1525–1749), published in Delta’s timetable effective 1 February 1986. Printed page 52: flight 1724, stops 0, frequency X67 (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 11:40, arrival 12:20 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified. V81 correction after magnified review of the original row: Arrival minute is 20, not 22. Historical technical ID retained; it is not a current time value.",
+            "en_source": "COMAIR enligt operatörslegend s. 4 (1525–1749), publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 52: flyg 1724, stoppkolumn 0, frekvens X67 (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 11:40, ankomst 12:20 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: Ankomstminuten är 20, inte 22. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift."
+          },
+          "service_group": "comair-1724-CLE-CMH-b77",
+          "leg_index": 1,
+          "journey": "comair/comair-1724-CLE-CMH-b77@1986-02-28"
+        }
+      ]
+    },
+    {
+      "schedule": "delta-560-CMH-DAY-1020-b77",
+      "origin": "CMH",
+      "destination": "DAY",
+      "flight": "560",
+      "page": "62",
+      "printed_departure": "1240a",
+      "printed_arrival": "105a",
+      "old_departure": "10:20",
+      "old_arrival": "10:58",
+      "departure": "00:40",
+      "arrival": "01:05",
+      "reason_sv": "12:40a betyder 00:40 och 1:05a betyder 01:05.",
+      "reason_en": "12:40a means 00:40 and 1:05a means 01:05.",
+      "previous_movements": [
+        {
+          "id": "delta-560-CMH-DAY-1020-b77@1986-02-28",
+          "schedule": "delta-560-CMH-DAY-1020-b77",
+          "airline": "delta",
+          "flight": "560",
+          "origin": "CMH",
+          "destination": "DAY",
+          "status": "scheduled",
+          "departure_utc": "1986-02-28T15:20:00Z",
+          "arrival_utc": "1986-02-28T15:58:00Z",
+          "departure_local": "1986-02-28T10:20-05:00",
+          "arrival_local": "1986-02-28T10:58-05:00",
+          "departure_seconds": 61110.0,
+          "arrival_seconds": 63390.0,
+          "source": "delta-19860201",
+          "page": "62",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:20, ankomst 10:58 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 62: flight 560, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 10:20, arrival 10:58 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:20, ankomst 10:58 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "service_group": "delta-560-CMH-DAY-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-560-CMH-DAY-b77@1986-02-28"
+        },
+        {
+          "id": "delta-560-CMH-DAY-1020-b77@1986-03-01",
+          "schedule": "delta-560-CMH-DAY-1020-b77",
+          "airline": "delta",
+          "flight": "560",
+          "origin": "CMH",
+          "destination": "DAY",
+          "status": "scheduled",
+          "departure_utc": "1986-03-01T15:20:00Z",
+          "arrival_utc": "1986-03-01T15:58:00Z",
+          "departure_local": "1986-03-01T10:20-05:00",
+          "arrival_local": "1986-03-01T10:58-05:00",
+          "departure_seconds": 147510.0,
+          "arrival_seconds": 149790.0,
+          "source": "delta-19860201",
+          "page": "62",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:20, ankomst 10:58 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 62: flight 560, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 10:20, arrival 10:58 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:20, ankomst 10:58 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "service_group": "delta-560-CMH-DAY-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-560-CMH-DAY-b77@1986-03-01"
+        }
+      ],
+      "corrected_movements": [
+        {
+          "id": "delta-560-CMH-DAY-1020-b77@1986-02-28",
+          "schedule": "delta-560-CMH-DAY-1020-b77",
+          "airline": "delta",
+          "flight": "560",
+          "origin": "CMH",
+          "destination": "DAY",
+          "status": "scheduled",
+          "departure_utc": "1986-02-28T05:40:00Z",
+          "arrival_utc": "1986-02-28T06:05:00Z",
+          "departure_local": "1986-02-28T00:40-05:00",
+          "arrival_local": "1986-02-28T01:05-05:00",
+          "departure_seconds": 26310.0,
+          "arrival_seconds": 27810.0,
+          "source": "delta-19860201",
+          "page": "62",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 00:40, ankomst 01:05 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: 12:40a betyder 00:40 och 1:05a betyder 01:05. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 62: flight 560, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 00:40, arrival 01:05 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified. V81 correction after magnified review of the original row: 12:40a means 00:40 and 1:05a means 01:05. Historical technical ID retained; it is not a current time value.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 00:40, ankomst 01:05 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: 12:40a betyder 00:40 och 1:05a betyder 01:05. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift."
+          },
+          "service_group": "delta-560-CMH-DAY-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-560-CMH-DAY-b77@1986-02-28"
+        },
+        {
+          "id": "delta-560-CMH-DAY-1020-b77@1986-03-01",
+          "schedule": "delta-560-CMH-DAY-1020-b77",
+          "airline": "delta",
+          "flight": "560",
+          "origin": "CMH",
+          "destination": "DAY",
+          "status": "scheduled",
+          "departure_utc": "1986-03-01T05:40:00Z",
+          "arrival_utc": "1986-03-01T06:05:00Z",
+          "departure_local": "1986-03-01T00:40-05:00",
+          "arrival_local": "1986-03-01T01:05-05:00",
+          "departure_seconds": 112710.0,
+          "arrival_seconds": 114210.0,
+          "source": "delta-19860201",
+          "page": "62",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 00:40, ankomst 01:05 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: 12:40a betyder 00:40 och 1:05a betyder 01:05. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 62: flight 560, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 00:40, arrival 01:05 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified. V81 correction after magnified review of the original row: 12:40a means 00:40 and 1:05a means 01:05. Historical technical ID retained; it is not a current time value.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 62: flyg 560, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 00:40, ankomst 01:05 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: 12:40a betyder 00:40 och 1:05a betyder 01:05. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift."
+          },
+          "service_group": "delta-560-CMH-DAY-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-560-CMH-DAY-b77@1986-03-01"
+        }
+      ]
+    },
+    {
+      "schedule": "delta-336-IND-FWA-1000-b77",
+      "origin": "IND",
+      "destination": "FWA",
+      "flight": "336",
+      "page": "111",
+      "printed_departure": "1000p",
+      "printed_arrival": "1028p",
+      "old_departure": "10:00",
+      "old_arrival": "10:28",
+      "departure": "22:00",
+      "arrival": "22:28",
+      "reason_sv": "Båda klockslagen är märkta p: kväll, inte förmiddag.",
+      "reason_en": "Both times are marked p: evening, not morning.",
+      "previous_movements": [
+        {
+          "id": "delta-336-IND-FWA-1000-b77@1986-02-28",
+          "schedule": "delta-336-IND-FWA-1000-b77",
+          "airline": "delta",
+          "flight": "336",
+          "origin": "IND",
+          "destination": "FWA",
+          "status": "scheduled",
+          "departure_utc": "1986-02-28T15:00:00Z",
+          "arrival_utc": "1986-02-28T15:28:00Z",
+          "departure_local": "1986-02-28T10:00-05:00",
+          "arrival_local": "1986-02-28T10:28-05:00",
+          "departure_seconds": 59910.0,
+          "arrival_seconds": 61590.0,
+          "source": "delta-19860201",
+          "page": "111",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:00, ankomst 10:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 111: flight 336, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 10:00, arrival 10:28 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:00, ankomst 10:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "service_group": "delta-336-IND-FWA-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-336-IND-FWA-b77@1986-02-28"
+        },
+        {
+          "id": "delta-336-IND-FWA-1000-b77@1986-03-01",
+          "schedule": "delta-336-IND-FWA-1000-b77",
+          "airline": "delta",
+          "flight": "336",
+          "origin": "IND",
+          "destination": "FWA",
+          "status": "scheduled",
+          "departure_utc": "1986-03-01T15:00:00Z",
+          "arrival_utc": "1986-03-01T15:28:00Z",
+          "departure_local": "1986-03-01T10:00-05:00",
+          "arrival_local": "1986-03-01T10:28-05:00",
+          "departure_seconds": 146310.0,
+          "arrival_seconds": 147990.0,
+          "source": "delta-19860201",
+          "page": "111",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:00, ankomst 10:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 111: flight 336, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 10:00, arrival 10:28 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 10:00, ankomst 10:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade."
+          },
+          "service_group": "delta-336-IND-FWA-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-336-IND-FWA-b77@1986-03-01"
+        }
+      ],
+      "corrected_movements": [
+        {
+          "id": "delta-336-IND-FWA-1000-b77@1986-02-27",
+          "schedule": "delta-336-IND-FWA-1000-b77",
+          "airline": "delta",
+          "flight": "336",
+          "origin": "IND",
+          "destination": "FWA",
+          "status": "scheduled",
+          "departure_utc": "1986-02-28T03:00:00Z",
+          "arrival_utc": "1986-02-28T03:28:00Z",
+          "departure_local": "1986-02-27T22:00-05:00",
+          "arrival_local": "1986-02-27T22:28-05:00",
+          "departure_seconds": 16710.0,
+          "arrival_seconds": 18390.0,
+          "source": "delta-19860201",
+          "page": "111",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 22:00, ankomst 22:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: Båda klockslagen är märkta p: kväll, inte förmiddag. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 111: flight 336, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 22:00, arrival 22:28 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified. V81 correction after magnified review of the original row: Both times are marked p: evening, not morning. Historical technical ID retained; it is not a current time value.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 22:00, ankomst 22:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: Båda klockslagen är märkta p: kväll, inte förmiddag. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift."
+          },
+          "service_group": "delta-336-IND-FWA-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-336-IND-FWA-b77@1986-02-27"
+        },
+        {
+          "id": "delta-336-IND-FWA-1000-b77@1986-02-28",
+          "schedule": "delta-336-IND-FWA-1000-b77",
+          "airline": "delta",
+          "flight": "336",
+          "origin": "IND",
+          "destination": "FWA",
+          "status": "scheduled",
+          "departure_utc": "1986-03-01T03:00:00Z",
+          "arrival_utc": "1986-03-01T03:28:00Z",
+          "departure_local": "1986-02-28T22:00-05:00",
+          "arrival_local": "1986-02-28T22:28-05:00",
+          "departure_seconds": 103110.0,
+          "arrival_seconds": 104790.0,
+          "source": "delta-19860201",
+          "page": "111",
+          "notes": {
+            "sv": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 22:00, ankomst 22:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: Båda klockslagen är märkta p: kväll, inte förmiddag. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift.",
+            "en": "Delta Air Lines, published in Delta’s timetable effective 1 February 1986. Printed page 111: flight 336, stops 0, frequency D (D=blank/daily; X=except; Monday 1–Sunday 7). Local departure 22:00, arrival 22:28 on the same local day. Departure UTC−5, arrival UTC−5. Individually sourced nonstop segment. Local departures 27 February–1 March are tested against the exact 48-hour window, retaining full times for overlapping flights. Scheduled service, not confirmed operation, individual aircraft or actual flight path. Later amendments unverified. V81 correction after magnified review of the original row: Both times are marked p: evening, not morning. Historical technical ID retained; it is not a current time value.",
+            "en_source": "Delta Air Lines, publicerad i Deltas tidtabell från 1 februari 1986. Tryckt s. 111: flyg 336, stoppkolumn 0, frekvens D (D=tomt fält/dagligen; X=utom; 1=måndag–7=söndag). Lokal avgång 22:00, ankomst 22:28 samma lokala dag. Avgång UTC−5, ankomst UTC−5. Separat källgranskad nonstopsträcka. Lokala avgångsdatum 27 februari–1 mars prövas mot det exakta 48-timmarsfönstret. Hela flygtider bevaras vid intervallöverlapp. Planerad trafik, inte belagt genomförande, individflygplan eller verklig flygbana. Senare ändringar är inte verifierade. Rättelse v81 efter förstoring av originalraden: Båda klockslagen är märkta p: kväll, inte förmiddag. Historiskt tekniskt ID behålls; det är inte en aktuell tidsuppgift."
+          },
+          "service_group": "delta-336-IND-FWA-b77",
+          "leg_index": 1,
+          "journey": "delta/delta-336-IND-FWA-b77@1986-02-28"
+        }
+      ]
+    }
+  ],
+  "changed_existing_ids": [
+    "delta-336-IND-FWA-1000-b77@1986-02-28",
+    "delta-560-CMH-DAY-1020-b77@1986-02-28",
+    "comair-1724-CLE-CMH-1140-b77@1986-02-28",
+    "delta-560-CMH-DAY-1020-b77@1986-03-01"
+  ],
+  "removed_outside_window_ids": [
+    "delta-336-IND-FWA-1000-b77@1986-03-01"
+  ],
+  "added_corrected_date_ids": [
+    "delta-336-IND-FWA-1000-b77@1986-02-27"
+  ],
+  "previous_research_files_retained": true,
+  "historical_ids_are_opaque": true
+}

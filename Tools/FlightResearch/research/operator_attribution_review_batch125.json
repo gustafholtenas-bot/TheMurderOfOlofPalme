@@ -1,0 +1,33 @@
+{
+  "package": "v128",
+  "primary_source": "liat-wt40-19851213",
+  "primary_scan_url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+  "accepted_attribution": [
+    {
+      "scan_page": 6,
+      "heading": "Four Island Air",
+      "airline_id": "four-island-air",
+      "movements": 30
+    },
+    {
+      "scan_page": 8,
+      "heading": "Montserrat Air Services",
+      "airline_id": "montserrat-air-services",
+      "movements": 41
+    }
+  ],
+  "printed_prefix": "LI",
+  "legal_operator_identity_verified": false,
+  "operator_census_complete": false,
+  "secondary_conflict": {
+    "url": "https://www.planespotters.net/airline/Four-Island-Air",
+    "evidence_level": "search-index snippet; direct page refresh wall",
+    "claim": "Ceased operations December1985",
+    "decision": "Unresolved secondary chronology; explicit contemporary schedule heading and February1 variants retained as published plans. Not evidence of actual operation or an independent legal company."
+  },
+  "not_imported": [
+    "General charter advertisement",
+    "LI168 uncertain NEV–STX segment",
+    "Inter-Island Air Services page7"
+  ]
+}

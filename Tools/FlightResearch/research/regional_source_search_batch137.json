@@ -1,0 +1,16 @@
+{
+  "package": "v140",
+  "checked_on": "2026-10-02",
+  "new_external_regional_search_performed": false,
+  "work_performed": "Reused complete primary Republic timetable to review103new nonEXP nonstop rows around Minneapolis/Detroit. No fresh Nicaragua/StThomas archive coverage claimed.",
+  "sources_reused": [
+    {
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+      "local_source_sha256": "dbfa243a56d5b0ce387f4e7e4a11288615cfe6d720c919ba0a9c0a82c73f6cfa",
+      "result": "103new schemas yield211dated US domestic movements;11ST1 and10EXP excluded."
+    }
+  ],
+  "regional_leads_carried_forward_from": "regional_source_search_batch134.json",
+  "new_regional_movements": 0,
+  "negative_results_not_proof_of_historical_absence": true
+}

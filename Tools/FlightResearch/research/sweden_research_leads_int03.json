@@ -1,0 +1,28 @@
+{
+  "checked_on": "2026-10-02",
+  "coverage_complete": false,
+  "prior_leads": "sweden_research_leads_int02.json",
+  "new_sweden_movements": 0,
+  "findings": [
+    {
+      "url": "https://www.finna.fi/Record/sim.M016-27845",
+      "status": "catalog_found_images_unavailable",
+      "finding": "Foldout timetable23Dec1985–29Mar1986 identified. No flight rows viewed or imported."
+    },
+    {
+      "url": "https://www.finna.fi/Record/sim.M016-27847",
+      "status": "images_unavailable_no_import",
+      "finding": "Previously known booklet record; direct page access returned403. No original flight rows viewed."
+    },
+    {
+      "url": "https://timetableimages.com/ttimages/sk/cp-mos86/cp-mos86.pdf",
+      "status": "reviewed_no_flight_times",
+      "finding": "Both PDF pages visually checked: cover/festival text and Leningrad city map. No schedule. Partial reproduction of city guide."
+    },
+    {
+      "url": "https://www.airtimes.com/cgat/se/sas/gal/skgal1a80.htm",
+      "status": "no_new_flight_pages",
+      "finding": "No new applicable schedule pages found in search; earlier gallery lead unchanged."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+  "sha256": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+  "bytes": 67992537,
+  "reviewed_on": "2026-10-02",
+  "original_scan_distributed": false,
+  "air_afrique_headquarters_reference": {
+    "url": "https://thedocs.worldbank.org/en/doc/416451434652908214-0190022009/original/AirTransportchallenges.pdf",
+    "pdf_page": 28,
+    "printed_box": "1.3 Air Afrique",
+    "scope": "Abidjan headquarters and multinational character only; no flight times or1986 shareholder census derived"
+  }
+}

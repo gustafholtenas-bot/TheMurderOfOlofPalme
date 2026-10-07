@@ -1,0 +1,44 @@
+{
+  "package": "v100",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "AGS",
+      "name": "Augusta – Bush Field (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 33.3699,
+      "lon": -81.9645,
+      "coordinate_source": "https://ourairports.com/airports/KAGS/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyags.com/business/about/history/",
+      "historical_location_note": "Delta directory p260 identifies Augusta, Georgia, AGS as Bush Field. Airport history links this site to service since 1941 and records the Augusta Regional name change in 2000. The period name is retained. This is Bush Field, not Daniel Field (DNL). Modern coordinates mark the approximate airport area, not reconstructed 1986 terminals, gates or runways."
+    },
+    {
+      "id": "CSG",
+      "name": "Columbus Metropolitan Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 32.516415,
+      "lon": -84.939602,
+      "coordinate_source": "https://ourairports.com/airports/KCSG/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flycolumbusga.com/about-csg/our-history-columbus-ga-airport/",
+      "historical_location_note": "Delta directory p260 identifies Columbus, Georgia, CSG as Columbus Metro. The airport commission history records Delta jet service from 1968 and a later terminal in 1991. The marker identifies this civil airport, not Columbus Ohio (CMH), Columbus Mississippi (GTR), or Lawson Field. Modern coordinates mark the approximate airport area, not a reconstructed 1986 terminal or gate."
+    },
+    {
+      "id": "MCN",
+      "name": "Macon Municipal Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 32.692799,
+      "lon": -83.6492,
+      "coordinate_source": "https://ourairports.com/airports/KMCN/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://iflymacon.com/about-us/",
+      "historical_location_note": "Delta directory p261 identifies MCN as Macon Municipal. Airport history links the present Middle Georgia Regional field south of Macon to Cochran Field and postwar municipal airline service. The period directory name is retained. This is MCN, not the separate downtown Smart Field/Macon Downtown airport (MAC). Modern coordinates mark the approximate airport area, not a reconstructed 1986 gate or terminal."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "Augusta Bush Field; Columbus Metropolitan in Georgia; Macon Municipal at the present Middle Georgia Regional field. Modern approximate airport-area markers, not reconstructed 1986 terminal or gate locations."
+}

@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "package": "v141_SE01",
+  "checked_on": "2026-10-02",
+  "priority": "Flights involving Swedish airspace",
+  "endpoint_selection_rule": "origin.country==se OR destination.country==se",
+  "endpoint_selection_count": 87,
+  "international_inbound": 41,
+  "international_outbound": 40,
+  "swedish_domestic": 6,
+  "new_runtime_movements": 0,
+  "new_verified_foreign_to_foreign_overflights": 0,
+  "overflight_coverage_complete": false,
+  "total_swedish_airspace_movements_known": false,
+  "existing_global_movements_preserved": 11506,
+  "limitations": [
+    "Endpoint selection establishes Sweden relevance of scheduled services, not actual operation or flight paths.",
+    "Foreign-to-foreign services require flight-path evidence before being counted as Swedish overflights.",
+    "Straight or great-circle display paths are not observed tracks.",
+    "No claim of complete Swedish-airspace coverage.",
+    "This file is research metadata; no new runtime UI filter is implemented."
+  ],
+  "research_statuses": [
+    "swedish_endpoint_scheduled",
+    "swedish_overflight_path_supported",
+    "possible_overflight_needs_path",
+    "reported_flight_missing_schedule_fields"
+  ]
+}

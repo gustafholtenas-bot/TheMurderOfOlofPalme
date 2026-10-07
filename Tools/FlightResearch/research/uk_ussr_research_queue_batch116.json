@@ -1,0 +1,150 @@
+{
+  "package": "v119",
+  "source_index": "https://aviaposter.ru/raspisaniya/",
+  "soviet_sheets": [
+    {
+      "airport": "Mirny",
+      "image_url": "https://aviaposter.ru/images/007/007000090.jpg",
+      "sha256": "803e9fcc5bdc2d0d0c89bd3392cbbb55f6b1806ef7eed36b230bdd424668769f",
+      "printed_valid_from": "1986-01-01",
+      "printed_valid_to": "1986-03-31",
+      "visual_triage": true,
+      "imported": true,
+      "remaining_blocker_sv": "Nio rader importerade. Returflygnummer saknas; nio andra utgående rader hålls för mellanlandningar eller oidentifierade flygfält."
+    },
+    {
+      "airport": "Kaliningrad",
+      "image_url": "https://aviaposter.ru/images/007/007000115.jpg",
+      "sha256": "ddb6cce58a7a80a0feca36457a9e1b2bca9bb000029a7f5a9fc137aea5e884b4",
+      "printed_valid_from": "1986-01-01",
+      "printed_valid_to": "1986-03-31",
+      "visual_triage": true,
+      "imported": false,
+      "remaining_blocker_sv": "Returflygnummer och båda riktningarnas tider finns. Tidskonvention, nonstopstatus och flygplatsval behöver verifieras innan import; samma flygnummer förekommer för flera destinationer."
+    },
+    {
+      "airport": "Chelyabinsk",
+      "image_url": "https://aviaposter.ru/images/007/007000131.jpg",
+      "sha256": "43eead35afa143c88f31015eb063f97c239f3d6d923fc6beabc20df1c2dbd24e",
+      "printed_valid_from": "1986-01-01",
+      "printed_valid_to": "1986-03-31",
+      "visual_triage": true,
+      "imported": false,
+      "remaining_blocker_sv": "Moskvatid uttryckligen angiven. Flera destinationsrader är genomgående resor. Verifiera fysiska ben och datumskiftet 28 februari/1 mars för Moskva 290. Returkolumn ger inte fullständiga avgångstider."
+    },
+    {
+      "airport": "Nalchik",
+      "image_url": "https://aviaposter.ru/images/007/007000190.jpg",
+      "sha256": "47765c3e09bbc1e24b6d8ad8b2a53686e8724e6538e5cda1fb9d001eb5182e33",
+      "printed_valid_from": "1986-01-01",
+      "printed_valid_to": "1986-03-31",
+      "visual_triage": true,
+      "imported": false,
+      "remaining_blocker_sv": "Kontrollera tidskonvention, Bykovo-identitet och stopp för varje flyg. Returankomster räcker inte för att skapa omvända ben."
+    },
+    {
+      "airport": "Stavropol",
+      "image_url": "https://aviaposter.ru/images/007/007000296.jpg",
+      "sha256": "6e74a038734243763ac58c0138dd0da6cf4d17572e47c649fdf47994c8719fcd",
+      "printed_valid_from": "1986-01-01",
+      "printed_valid_to": "1986-03-31",
+      "visual_triage": true,
+      "imported": false,
+      "remaining_blocker_sv": "Kontrollera tidskonvention och mellanlandningar. Moskva/Vnukovo1256 byter veckodagsmönster den 1 mars; inga antagna returtider."
+    },
+    {
+      "airport": "Yaroslavl",
+      "image_url": "https://aviaposter.ru/images/007/007000196.jpg",
+      "sha256": "0d44423d948c8e82bf0e8a1ea926f766ebf196c9947852be690871be2a64217b",
+      "printed_valid_from": "1986-02-14",
+      "printed_valid_to": null,
+      "visual_triage": true,
+      "imported": false,
+      "remaining_blocker_sv": "Kontrollera vilket flygfält som användes av lokala An-2-rader; Levtsovo får inte ersättas automatiskt med Tunoshna. Mellanliggande avgångstider och fältkoordinater saknas."
+    },
+    {
+      "airport": "Ivanovo, earlier sheet",
+      "image_url": "https://aviaposter.ru/images/007/007000361.jpg",
+      "sha256": "853bb13dfbf25186fef449addf3ffe1ca94f9264e53925a62d7b44525f338488",
+      "printed_valid_from": null,
+      "printed_valid_to": "1986-03-31",
+      "visual_triage": true,
+      "imported": false,
+      "remaining_blocker_sv": "Arkivindex anger 1 november1985. Tryckt slutdatum31mars1986; jämför med den andra upplagan. Tidskonvention, flygplats i Moskva och returflygnummer behöver verifieras."
+    },
+    {
+      "airport": "Ivanovo, later-looking sheet",
+      "image_url": "https://aviaposter.ru/images/007/007000362.jpg",
+      "sha256": "519956f7ba734a318302815407993f26fac1d265c4852183db6ff13526d4da71",
+      "printed_valid_from": null,
+      "printed_valid_to": "1986-05-31",
+      "visual_triage": true,
+      "imported": false,
+      "remaining_blocker_sv": "Arkivindex anger1januari1986 men bilden har bara slutdatum31maj och avvikande klockslag samt ändringar i april/maj. Startdatum för denna utgåva är därför inte säkerställt för februari. Import spärras tills upplagekonflikten är löst."
+    }
+  ],
+  "mirny_held_outbound": [
+    {
+      "flight": "102",
+      "destination": "Domodedovo",
+      "blocker": "Krasnoyarsk"
+    },
+    {
+      "flight": "4061",
+      "destination": "Novosibirsk",
+      "blocker": "Bratsk, Krasnoyarsk"
+    },
+    {
+      "flight": "Я-141",
+      "destination": "Irkutsk",
+      "blocker": "Ust-Kut"
+    },
+    {
+      "flight": "Я-143",
+      "destination": "Irkutsk",
+      "blocker": "Lensk, Kirensk"
+    },
+    {
+      "flight": "Я-153",
+      "destination": "Polyarny",
+      "blocker": "Aykhal"
+    },
+    {
+      "flight": "Я-105",
+      "destination": "Vilyuysk",
+      "blocker": "Nyurba, Verkhny Vilyuysk"
+    },
+    {
+      "flight": "Я-153",
+      "destination": "Vitim",
+      "blocker": "Lensk"
+    },
+    {
+      "flight": "Я-161",
+      "destination": "Tas-Yuryakh",
+      "blocker": "Unverified historical airfield identity/location"
+    },
+    {
+      "flight": "Я-163",
+      "destination": "Syuldyukar",
+      "blocker": "Unverified historical airfield identity/location"
+    }
+  ],
+  "mirny_return_scope": "All reverse columns held: printed outbound number is not silently reused as a reverse flight number.",
+  "soviet_international": [
+    "Obtain complete Aeroflot winter1985/86 first edition. SVO/LED/KBP international network still partial.",
+    "Resolve London–Moscow and other UK–USSR rows with full flight times, airports and stops. Zero imported direct movements does not mean no historical service.",
+    "Preserve SU420 Budapest–Moscow negative-duration and SU436 implausible-duration holds until source time interpretation is resolved."
+  ],
+  "uk": [
+    "Obtain full BA winter1985/86 and dated amendments; current BA domestic/international selection is small.",
+    "Obtain full British Caledonian winter1985/86 with itinerary pages. Current four Jersey rows do not establish main network completeness.",
+    "AirUK partial scan lacks printed16–17 and24–25; obtain these pages and date-valid amendments.",
+    "Use CAA February operator crosswalk to seek Loganair, Brymon, Manx, Aurigny, AirEcosse, BritishAirFerries, Connectair, BirminghamExecutive and others; all remain outside imported traffic unless timings are obtained.",
+    "France queue: AirFrance Lille/Nantes require new historically reviewed airport records; London–Strasbourg rows lack nonstop arrows and must be split at supported intermediate stops.",
+    "DanAir Lourdes/Tarbes requires historical airport mapping and separate timed legs. Montpellier aggregate via-Toulouse rows are not nonstop; Tuesday/Thursday/Sunday nonstop components outside this window do not add movements.",
+    "Keep DA193 Inverness–Manchester11:10/11:15 conflict and later-vs-October Teesside conflicts held.",
+    "Charter, cargo, offshore helicopter and air-taxi traffic require date-specific records or timetables; CAA monthly aggregates are not imported as individual movements."
+  ],
+  "total_remaining_routes_known": false
+}

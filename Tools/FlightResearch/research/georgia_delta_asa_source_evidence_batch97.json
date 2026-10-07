@@ -1,0 +1,50 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    14,
+    16,
+    18,
+    57,
+    58,
+    141,
+    142
+  ],
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "14": 10,
+    "16": 11,
+    "18": 12,
+    "57": 31,
+    "58": 32,
+    "141": 73,
+    "142": 74,
+    "260": 133,
+    "261": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Eight complete direction headings: 85 visually reviewed rows; 66 accepted nonstop schedules (25 Delta, 41 ASA), 17 connections and two through-stop rows excluded. The triangle and p4 number ranges identify ASA. All accepted rows have no dated footnotes.",
+    "Blank means daily; X6 excludes Saturday; X7 excludes Sunday; X67 is weekdays only; 6 is Saturday only and 7 is Sunday only. Each physical leg retains its own frequency.",
+    "MCN–ATL 1434 is Sunday only and yields no movement during this Thursday–Saturday window. Saturday-only AGS–ATL 1225 departs after the window ends, also yielding none. Its ATL–AGS outbound 1225 is included because it departs before the window ends.",
+    "ATL–MCN 1238 and MCN–ATL 1233 each have one stop at Columbus. Only the individually printed ATL–CSG/CSG–MCN and MCN–CSG/CSG–ATL rows create physical legs. Seventeen connecting rows do not create nonstop flights.",
+    "ATL–CSG 1238 is 22:56–23:36; CSG–MCN 1238 is 23:45–00:15 next day, a nine-minute ground interval. MCN–CSG 1233 is 04:45–05:15; CSG–ATL 1233 is 05:30–06:09, a fifteen-minute ground interval.",
+    "ATL–MCN 1436 is 15:16–15:56; return MCN–ATL 1436 departs 16:10, a fourteen-minute ground interval. Original crops confirm these non-round minutes.",
+    "ATL/AGS/CSG/MCN all use winter UTC−5. Printed noon token 1200n means 12:00. The star on ATL–AGS 312 indicates an off-peak fare, not arrival the next day. Only accepted CSG–MCN 1238 has next-local-day arrival.",
+    "Independent 24-hour transcription, fixed winter offsets, explicit arrival-day offsets, weekdays and exact overlap match generated movements. Fifteen same-number transitions in the window have separately checked ground intervals of 9–60 minutes; they do not establish aircraft identity.",
+    "Directory p260 identifies AGS Bush Field and CSG Columbus Metro; p261 identifies MCN Macon Municipal. Airport histories support pre-1986 operation at these fields. Modern coordinates are approximate airport-area markers, not reconstructed historical terminals or gates.",
+    "All prior movements, schedules, airlines and airports unchanged, including prior corrections and all three held conflicts. Timetable end date, later amendments and actual operation unverified. Original scans not redistributed."
+  ]
+}

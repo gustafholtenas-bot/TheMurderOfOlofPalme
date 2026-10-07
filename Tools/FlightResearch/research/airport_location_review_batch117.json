@@ -1,0 +1,400 @@
+{
+  "package": "v120",
+  "airport_records": [
+    {
+      "id": "SIN",
+      "name": "Singapore – Changi",
+      "country": "sg",
+      "timezone": "Asia/Singapore",
+      "lat": 1.35019,
+      "lon": 103.994003,
+      "coordinate_source": "https://ourairports.com/airports/WSSS/",
+      "coordinate_record_id": "WSSS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.87. The contemporary timetable explicitly names Changi Airport, 20 km away; not the earlier Paya Lebar airport. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "BGW",
+      "name": "Baghdad – Saddam International (1986)",
+      "country": "iq",
+      "timezone": "Asia/Baghdad",
+      "lat": 33.262501,
+      "lon": 44.2346,
+      "coordinate_source": "https://ourairports.com/airports/ORBI/",
+      "coordinate_record_id": "ORBI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.15,61. The contemporary timetable explicitly names Saddam International, 18 km from Baghdad. The marker identifies the western international field, not the older central Al-Muthanna or Al-Rasheed fields. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "AMM",
+      "name": "Amman – Queen Alia",
+      "country": "jo",
+      "timezone": "Asia/Amman",
+      "lat": 31.7226009369,
+      "lon": 35.9931983948,
+      "coordinate_source": "https://ourairports.com/airports/OJAI/",
+      "coordinate_record_id": "OJAI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.13,61. The timetable explicitly identifies Queen Alia, 39 km from Amman; not Marka. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "DAM",
+      "name": "Damascus International",
+      "country": "sy",
+      "timezone": "Asia/Damascus",
+      "lat": 33.4114990234375,
+      "lon": 36.51559829711914,
+      "coordinate_source": "https://ourairports.com/airports/OSDI/",
+      "coordinate_record_id": "OSDI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.27,65. The contemporary timetable identifies International, 23 km from Damascus; not Mezzeh. Its printed UTC+3 agrees with historical ZoneInfo on the imported dates. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "BEY",
+      "name": "Beirut International (1986)",
+      "country": "lb",
+      "timezone": "Asia/Beirut",
+      "lat": 33.819833,
+      "lon": 35.487443,
+      "coordinate_source": "https://ourairports.com/airports/OLBA/",
+      "coordinate_record_id": "OLBA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.18,62. The timetable identifies Beirut International, 16 km from the city. The current honorary airport name is not applied to 1986. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "DEL",
+      "name": "Delhi – Palam (1986)",
+      "country": "in",
+      "timezone": "Asia/Kolkata",
+      "lat": 28.55563,
+      "lon": 77.09519,
+      "coordinate_source": "https://ourairports.com/airports/VIDP/",
+      "coordinate_record_id": "VIDP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.28,65. The timetable explicitly names Palam, 15 km from Delhi; not Safdarjung. The marker is an approximate field position, not a modern terminal applied to 1986. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "JED",
+      "name": "Jeddah – King Abdul Aziz",
+      "country": "sa",
+      "timezone": "Asia/Riyadh",
+      "lat": 21.680241,
+      "lon": 39.157436,
+      "coordinate_source": "https://ourairports.com/airports/OEJN/",
+      "coordinate_record_id": "OEJN",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.kaia.sa/About-KAIA"
+      ],
+      "location_note": "Air France no.25 pp.28–30,65. The timetable names King Abdul Aziz, 35 km from Jeddah. The official airport history dates this airport to 1981; not the former Jeddah field. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "DAR",
+      "name": "Dar es Salaam International (1986)",
+      "country": "tz",
+      "timezone": "Africa/Dar_es_Salaam",
+      "lat": -6.873499,
+      "lon": 39.207288,
+      "coordinate_source": "https://ourairports.com/airports/HTDA/",
+      "coordinate_record_id": "HTDA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.28–29. The contemporary timetable identifies Dar es Salaam International, 13 km from the city. The current honorary name is not applied to 1986. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "SEZ",
+      "name": "Seychelles – Mahé",
+      "country": "sc",
+      "timezone": "Indian/Mahe",
+      "lat": -4.67434,
+      "lon": 55.521801,
+      "coordinate_source": "https://ourairports.com/airports/FSIA/",
+      "coordinate_record_id": "FSIA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://saa.sc/media-center/saa-press-releases/celebrating-seychelles-gateway-to-the-world"
+      ],
+      "location_note": "Air France no.25 pp.30,86. The timetable identifies Mahé, 9 km away. The airport authority identifies the Pointe Larue airport inaugurated in March 1972. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "DXB",
+      "name": "Dubai International",
+      "country": "ae",
+      "timezone": "Asia/Dubai",
+      "lat": 25.24979,
+      "lon": 55.370992,
+      "coordinate_source": "https://ourairports.com/airports/OMDB/",
+      "coordinate_record_id": "OMDB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://media.dubaiairports.ae/dxb---chronological-history/"
+      ],
+      "location_note": "Air France no.25 pp.31. The timetable names Dubai, 5 km away. Official history dates DXB to 1960; this is not the later DWC field. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "CMB",
+      "name": "Colombo – Katunayake (1986)",
+      "country": "lk",
+      "timezone": "Asia/Colombo",
+      "lat": 7.180759906768799,
+      "lon": 79.88410186767578,
+      "coordinate_source": "https://ourairports.com/airports/VCBI/",
+      "coordinate_record_id": "VCBI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.caa.lk/en/about-us/sri-lankan-aviation-history"
+      ],
+      "location_note": "Air France no.25 pp.25,49,64. The timetable explicitly names Katunayake, 36 km away, not Ratmalana. The civil aviation chronology identifies Katunayake and the later 1995 renaming. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "MCT",
+      "name": "Muscat – Seeb (1986)",
+      "country": "om",
+      "timezone": "Asia/Muscat",
+      "lat": 23.600218,
+      "lon": 58.285268,
+      "coordinate_source": "https://ourairports.com/airports/OOMS/",
+      "coordinate_record_id": "OOMS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.omanairports.co.om/en/content/oman-airports-history"
+      ],
+      "location_note": "Air France no.25 pp.49–50,70. The timetable explicitly names Seeb, 40 km from Muscat. Official operator history dates its opening to 1973 and name change to Muscat to 2008. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "BAH",
+      "name": "Bahrain – Muharraq",
+      "country": "bh",
+      "timezone": "Asia/Bahrain",
+      "lat": 26.267295,
+      "lon": 50.63764,
+      "coordinate_source": "https://ourairports.com/airports/OBBI/",
+      "coordinate_record_id": "OBBI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://culture.gov.bh/en/events/past_events/Name%2C20678%2Cen.php"
+      ],
+      "location_note": "Air France no.25 pp.15,62,87. The timetable explicitly names Muharraq, 6 km away. The cultural authority documents the pre-1986 terminal development. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "KWI",
+      "name": "Kuwait International",
+      "country": "kw",
+      "timezone": "Asia/Kuwait",
+      "lat": 29.224487,
+      "lon": 47.969813,
+      "coordinate_source": "https://ourairports.com/airports/OKKK/",
+      "coordinate_record_id": "OKKK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.dgca.gov.kw/History?menuid=9"
+      ],
+      "location_note": "Air France no.25 pp.68. The timetable identifies International, 16 km away. DGCA history identifies the new Mugwa airport operating from 1961; no new terminal location is reconstructed. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "CAI",
+      "name": "Cairo International",
+      "country": "eg",
+      "timezone": "Africa/Cairo",
+      "lat": 30.111534,
+      "lon": 31.396694,
+      "coordinate_source": "https://ourairports.com/airports/HECA/",
+      "coordinate_record_id": "HECA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+        "https://www.cairo-airport.com/en-us/Airport/Airport-Information"
+      ],
+      "location_note": "Air France no.25 pp.43,48,56,68. The timetable identifies Cairo Airport, 23 km away. Official history distinguishes the international airport from its Heliopolis predecessor; not Almaza. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "ADE",
+      "name": "Aden – Khormaksar",
+      "country": "ye-south",
+      "timezone": "Asia/Aden",
+      "lat": 12.829564,
+      "lon": 45.029976,
+      "coordinate_source": "https://ourairports.com/airports/OYAA/",
+      "coordinate_record_id": "OYAA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.11,30. The timetable explicitly names Khormaksar, 10 km away, and the Democratic Republic of Yemen. The country is South Yemen, separate from North Yemen in 1986. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    },
+    {
+      "id": "JIB",
+      "name": "Djibouti – Ambouli",
+      "country": "dj",
+      "timezone": "Africa/Djibouti",
+      "lat": 11.5473,
+      "lon": 43.1595,
+      "coordinate_source": "https://ourairports.com/airports/HDAM/",
+      "coordinate_record_id": "HDAM",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "location_note": "Air France no.25 pp.11,30. The contemporary timetable explicitly names Ambouli, 5 km away. This identifies the existing Djibouti airfield; no terminal reconstruction is claimed. Coordinates are a current approximate airfield marker, not a surveyed 1986 reference point, terminal or runway threshold. Modern identifiers locate the coordinate record; the period airport name/IATA code is checked against the timetable."
+    }
+  ],
+  "existing_airports_unchanged": 329,
+  "new_country_records": [
+    {
+      "id": "jo",
+      "name": {
+        "sv": "Jordanien",
+        "en": "Jordan",
+        "en_source": "Jordanien"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "sy",
+      "name": {
+        "sv": "Syrien",
+        "en": "Syria",
+        "en_source": "Syrien"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "lb",
+      "name": {
+        "sv": "Libanon",
+        "en": "Lebanon",
+        "en_source": "Libanon"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "in",
+      "name": {
+        "sv": "Indien",
+        "en": "India",
+        "en_source": "Indien"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "tz",
+      "name": {
+        "sv": "Tanzania",
+        "en": "Tanzania",
+        "en_source": "Tanzania"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "sc",
+      "name": {
+        "sv": "Seychellerna",
+        "en": "Seychelles",
+        "en_source": "Seychellerna"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "ae",
+      "name": {
+        "sv": "Förenade arabemiraten",
+        "en": "United Arab Emirates",
+        "en_source": "Förenade arabemiraten"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "lk",
+      "name": {
+        "sv": "Sri Lanka",
+        "en": "Sri Lanka",
+        "en_source": "Sri Lanka"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "om",
+      "name": {
+        "sv": "Oman",
+        "en": "Oman",
+        "en_source": "Oman"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "bh",
+      "name": {
+        "sv": "Bahrain",
+        "en": "Bahrain",
+        "en_source": "Bahrain"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "kw",
+      "name": {
+        "sv": "Kuwait",
+        "en": "Kuwait",
+        "en_source": "Kuwait"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "eg",
+      "name": {
+        "sv": "Egypten",
+        "en": "Egypt",
+        "en_source": "Egypten"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "ye-south",
+      "name": {
+        "sv": "Sydjemen",
+        "en": "South Yemen",
+        "en_source": "Sydjemen"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "dj",
+      "name": {
+        "sv": "Djibouti",
+        "en": "Djibouti",
+        "en_source": "Djibouti"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers; historical names and sites identified using the contemporary timetable and listed airport histories. No surveyed 1986 reference-point precision claimed. North and South Yemen are separate research areas."
+}

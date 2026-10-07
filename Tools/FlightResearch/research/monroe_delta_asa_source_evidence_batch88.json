@@ -1,0 +1,52 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    16,
+    66,
+    114,
+    147,
+    159,
+    160,
+    226
+  ],
+  "airport_directory_printed_page": 261,
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "16": 11,
+    "66": 36,
+    "114": 60,
+    "147": 76,
+    "159": 82,
+    "160": 83,
+    "226": 116,
+    "261": 133,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "34 rows in ten complete selected city-direction tables visually reviewed: 18 nonstop schedules accepted, nine through-stop rows and seven connections excluded.",
+    "Legend p4 assigns flights 1200–1299 and 1400–1524 to Atlantic Southeast Airlines. Its six accepted rows are assigned to the new atlantic-southeast operator, not Delta mainline or Alaska Airlines.",
+    "ASA 1456 MLU–MEM and 1457 MEM–MLU are X7; all other accepted rows are daily. No accepted row has a dated footnote.",
+    "ASA 1457 and 1458 each have separately printed MEM–MLU and MLU–MEM rows. Both have a ten-minute turn in Monroe. Each leg retains its own weekdays.",
+    "ATL–MLU 691 has stops 0, local 15:27 Eastern–15:50 Central. Its MLU–SHV continuation departs 16:10 Central; previously sourced SHV–DFW departs 17:00.",
+    "MLU–DFW 529 and 691 have one stop at SHV; DFW–MLU 584,471,662 have one stop at SHV. Their physical SHV legs are individually sourced; through rows never create duplicate nonstop movements.",
+    "ATL–MLU 941 and 583 have one stop at JAN; MLU–ATL 1036 has one stop at JAN. Newly sourced JAN/MLU segments fill the gaps, preserving previous ATL/JAN segments.",
+    "MLU, JAN, SHV, DFW and MEM use UTC−6, ATL UTC−5. All selected rows arrive on the same local calendar day.",
+    "MLU–SHV 691 at 16:10–16:38 Central overlaps both exact window boundaries and contributes three full movements; every other accepted schedule contributes two.",
+    "Monroe Regional is identified in the 1986 airport directory p261. The current airport authority history and OurAirports area coordinates are documented separately.",
+    "All prior movement objects, schedules, airlines and airports unchanged, including COMAIR 1582 and 1580 corrections. Held conflicts from batches 80 and 82 unchanged and unimported.",
+    "Later amendments and timetable end date unverified; scheduled service does not establish actual operation, aircraft identity or path."
+  ]
+}

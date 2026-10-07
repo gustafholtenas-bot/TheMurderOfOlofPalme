@@ -1,0 +1,165 @@
+{
+  "package": "v131",
+  "republic_aggregate_rows_not_duplicated": [
+    {
+      "scan_page": 4,
+      "column": 1,
+      "printed_flight": "841",
+      "origin": "MEM",
+      "destination": "GPT",
+      "departure": "15:45",
+      "arrival": "17:33",
+      "frequency": "D",
+      "printed_stops": 1,
+      "action": "not_imported_as_direct_or_duplicate",
+      "reason": "Aggregate through itinerary; only independently printed blank-ST physical legs are imported.",
+      "additional_note": "The 841 through row is not turned into an inferred MOB–GPT flight841. The independently printed MOB–GPT17:10 row is flight818; its number is retained. Whether this is a timetable through-number convention or printing discrepancy is unresolved."
+    },
+    {
+      "scan_page": 4,
+      "column": 1,
+      "printed_flight": "847",
+      "origin": "MEM",
+      "destination": "GPT",
+      "departure": "19:35",
+      "arrival": "21:23",
+      "frequency": "D",
+      "printed_stops": 1,
+      "action": "not_imported_as_direct_or_duplicate",
+      "reason": "Aggregate through itinerary; only independently printed blank-ST physical legs are imported."
+    },
+    {
+      "scan_page": 5,
+      "column": 1,
+      "printed_flight": "484",
+      "origin": "MEM",
+      "destination": "PFN",
+      "departure": "09:10",
+      "arrival": "11:10",
+      "frequency": "D",
+      "printed_stops": 1,
+      "action": "not_imported_as_direct_or_duplicate",
+      "reason": "Aggregate through itinerary; only independently printed blank-ST physical legs are imported."
+    },
+    {
+      "scan_page": 5,
+      "column": 1,
+      "printed_flight": "834",
+      "origin": "MEM",
+      "destination": "PFN",
+      "departure": "20:00",
+      "arrival": "22:00",
+      "frequency": "X6",
+      "printed_stops": 1,
+      "action": "not_imported_as_direct_or_duplicate",
+      "reason": "Aggregate through itinerary; only independently printed blank-ST physical legs are imported."
+    },
+    {
+      "scan_page": 6,
+      "column": 1,
+      "printed_flight": "815",
+      "origin": "PFN",
+      "destination": "MEM",
+      "departure": "06:00",
+      "arrival": "07:58",
+      "frequency": "X7",
+      "printed_stops": 1,
+      "action": "not_imported_as_direct_or_duplicate",
+      "reason": "Aggregate through itinerary; only independently printed blank-ST physical legs are imported."
+    },
+    {
+      "scan_page": 6,
+      "column": 1,
+      "printed_flight": "396",
+      "origin": "PFN",
+      "destination": "MEM",
+      "departure": "12:40",
+      "arrival": "14:48",
+      "frequency": "D",
+      "printed_stops": 1,
+      "action": "not_imported_as_direct_or_duplicate",
+      "reason": "Aggregate through itinerary; only independently printed blank-ST physical legs are imported."
+    },
+    {
+      "scan_page": 5,
+      "column": 2,
+      "printed_flight": "818",
+      "origin": "MOB",
+      "destination": "MEM",
+      "departure": "17:10",
+      "arrival": "18:55",
+      "frequency": "D",
+      "printed_stops": 1,
+      "action": "not_imported_as_direct_or_duplicate",
+      "reason": "Aggregate through itinerary; only independently printed blank-ST physical legs are imported."
+    }
+  ],
+  "republic_zero_movement_schedules": [
+    "republic-airlines-767-MEM-HOU-1945-b128"
+  ],
+  "zero_movement_reason": "RC767 MEM–HOU is Saturday-only at19:45 local, after the Saturday16:21:30 local window end.",
+  "excluded_express_services": "EXP denotes other operators per source legend; no EXP rows in this batch.",
+  "new_source_leads_without_import": [
+    {
+      "name": "LACSA January 1, 1986",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/lr.htm",
+        "https://www.airtimes.com/cgat/cr/lacsa.htm"
+      ],
+      "result": "Cover/index only. January 1 edition followed by March 1 edition, so applicability changes inside the target window. Need both interiors and footnotes; no clocks imported."
+    },
+    {
+      "name": "Aeronica",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/rl3.htm"
+      ],
+      "result": "Nearby archival examples are 1984 and 1987; no applicable complete 1986 clock table found. No Nicaragua movements imported."
+    },
+    {
+      "name": "American January 31, 1986",
+      "urls": [
+        "https://www.airtimes.com/cgat/usa/american/gal/aagal80.htm"
+      ],
+      "result": "Gallery/cover identified, no full interior obtained. No new clocks imported."
+    },
+    {
+      "name": "Eastern January 1, 1986",
+      "urls": [
+        "https://www.airtimes.com/cgat/usb/eastern/gal/eagal80.htm",
+        "https://www.airtimes.com/cgat/usb/eastern/gal/eagalemp.htm"
+      ],
+      "result": "Cover gallery identifies Jan1 and next Mar2 issue; employee gallery did not supply target-window interior. No clocks imported."
+    },
+    {
+      "name": "BWIA",
+      "urls": [
+        "https://www.airtimes.com/cgat/tt/bwia.htm"
+      ],
+      "result": "Inspected index skips from 1983 to 1989 for relevant nearby holdings. Not proof no winter1985/86 timetable existed; no applicable interior obtained."
+    },
+    {
+      "name": "Air South, Homestead, March 1, 1986",
+      "urls": [
+        "https://www.airtimes.com/cgat/usa/airsouthhomestead.htm"
+      ],
+      "result": "Cover only; no full clock pages obtained. No imported flights."
+    },
+    {
+      "name": "Air France winter1985/86 secondary review",
+      "urls": [
+        "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf"
+      ],
+      "result": "No additional rows imported. Reviewed copy jumps from printed36/37 to40/41; Havana origin pages38/39 not obtained in that sequence. Existing regional operator-attribution holds remain. Not a complete scan/page census."
+    }
+  ],
+  "prior_holds_retained_from": "caribbean_withheld_batch127.json",
+  "prior_errata_retained": [
+    "errata_batch126.json",
+    "errata_batch127.json"
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_reports_preserved_as_history": true
+}

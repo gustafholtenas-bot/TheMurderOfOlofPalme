@@ -1,0 +1,27 @@
+{
+  "package": "v83",
+  "source": "delta-19860201",
+  "checked_on": "2026-09-30",
+  "conflicts": [
+    {
+      "flight": "597",
+      "origin": "MEM",
+      "destination": "LIT",
+      "printed_page": 147,
+      "pdf_page": 76,
+      "printed_departure": "751p",
+      "printed_arrival": "625p",
+      "parsed_departure": "19:51",
+      "parsed_arrival": "18:25",
+      "printed_frequency": "X6",
+      "printed_stops": "0",
+      "both_endpoints_timezone": "America/Chicago",
+      "action": "held_time_conflict",
+      "imported_schedule": false,
+      "imported_movement": false,
+      "arrival_day_offset": null,
+      "reason": "Original row has arrival before departure in the same timezone. No date change, corrected time or duration is inferred.",
+      "next_action": "Seek a corrected dated Delta schedule or independent dated physical-leg timing before import."
+    }
+  ]
+}

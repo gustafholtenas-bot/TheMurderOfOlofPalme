@@ -1,0 +1,110 @@
+{
+  "package": "v121",
+  "baseline_archive_sha256": "cf11c9418dd25de32b6227a13065ef60ffaabacf1da2536d39c28e210c893d54",
+  "previous_movements_unchanged": 8418,
+  "previous_schedules_unchanged": 4926,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 346,
+  "previous_countries_unchanged": 98,
+  "modified_airline_ids": [],
+  "modified_previous_source_ids": [
+    "el-al-19851027-cover"
+  ],
+  "independent_manual_rows": 19,
+  "independent_utc_movements_verified": 19,
+  "independent_utc_expected": {
+    "el-al-005-TLV-AMS-2330-b118@1986-03-01": [
+      "1986-03-01T21:30:00Z",
+      "1986-03-02T02:25:00Z"
+    ],
+    "el-al-541-TLV-ATH-ELLINIKON-0740-b118@1986-02-28": [
+      "1986-02-28T05:40:00Z",
+      "1986-02-28T07:45:00Z"
+    ],
+    "el-al-357-TLV-FRA-1000-b118@1986-02-28": [
+      "1986-02-28T08:00:00Z",
+      "1986-02-28T12:25:00Z"
+    ],
+    "el-al-581-TLV-IST-ATATURK-0950-b118@1986-02-28": [
+      "1986-02-28T07:50:00Z",
+      "1986-02-28T09:50:00Z"
+    ],
+    "el-al-315-TLV-LHR-1025-b118@1986-02-28": [
+      "1986-02-28T08:25:00Z",
+      "1986-02-28T13:35:00Z"
+    ],
+    "el-al-511-TLV-NBO-2200-b118@1986-02-27": [
+      "1986-02-27T20:00:00Z",
+      "1986-02-28T01:00:00Z"
+    ],
+    "el-al-001-TLV-JFK-0100-b118@1986-02-28": [
+      "1986-02-27T23:00:00Z",
+      "1986-02-28T10:50:00Z"
+    ],
+    "el-al-385-TLV-FCO-0705-b118@1986-02-28": [
+      "1986-02-28T05:05:00Z",
+      "1986-02-28T08:45:00Z"
+    ],
+    "el-al-363-TLV-VIE-0650-b118@1986-02-28": [
+      "1986-02-28T04:50:00Z",
+      "1986-02-28T08:35:00Z"
+    ],
+    "el-al-323-TLV-ZRH-0930-b118@1986-02-28": [
+      "1986-02-28T07:30:00Z",
+      "1986-02-28T11:40:00Z"
+    ],
+    "el-al-542-ATH-ELLINIKON-TLV-1045-b118@1986-02-28": [
+      "1986-02-28T08:45:00Z",
+      "1986-02-28T10:35:00Z"
+    ],
+    "el-al-334-BRU-TLV-0830-b118@1986-02-28": [
+      "1986-02-28T07:30:00Z",
+      "1986-02-28T11:35:00Z"
+    ],
+    "el-al-358-FRA-TLV-1945-b118@1986-03-01": [
+      "1986-03-01T18:45:00Z",
+      "1986-03-01T22:40:00Z"
+    ],
+    "el-al-582-IST-ATATURK-TLV-1250-b118@1986-02-28": [
+      "1986-02-28T10:50:00Z",
+      "1986-02-28T12:45:00Z"
+    ],
+    "el-al-318-LHR-TLV-2200-b118@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-02T02:35:00Z"
+    ],
+    "el-al-004-JFK-TLV-1800-b118@1986-02-27": [
+      "1986-02-27T23:00:00Z",
+      "1986-02-28T09:10:00Z"
+    ],
+    "el-al-386-FCO-TLV-1125-b118@1986-02-28": [
+      "1986-02-28T10:25:00Z",
+      "1986-02-28T13:35:00Z"
+    ],
+    "el-al-364-VIE-TLV-1045-b118@1986-02-28": [
+      "1986-02-28T09:45:00Z",
+      "1986-02-28T13:00:00Z"
+    ],
+    "el-al-348-ZRH-TLV-0920-b118@1986-02-28": [
+      "1986-02-28T08:20:00Z",
+      "1986-02-28T12:05:00Z"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "adjacent_source_leg_ground_times": [],
+  "ground_times_reviewed": true,
+  "ground_time_review_note": "No adjacent same-number leg chain is introduced; no aircraft rotation is inferred from the opposite-direction numbers.",
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "passed_data_checks; unreal_runtime_not_run",
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

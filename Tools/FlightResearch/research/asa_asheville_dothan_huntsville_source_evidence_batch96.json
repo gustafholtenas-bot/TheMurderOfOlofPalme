@@ -1,0 +1,44 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    12,
+    14,
+    15,
+    75,
+    107
+  ],
+  "airport_directory_printed_pages": [
+    260
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "12": 9,
+    "14": 10,
+    "15": 10,
+    "75": 40,
+    "107": 56,
+    "260": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Six complete direction headings: 40 visually reviewed rows, 38 accepted individually printed nonstop schedules, one through-stop row excluded and one source conflict held. All accepted rows use the ASA triangle and operator ranges from p4; no dated footnotes.",
+    "Blank means daily; X6 excludes Saturday; X7 excludes Sunday; X67 excludes both Saturday and Sunday. Both ATL–DHN and DHN–ATL 1256 have X67. Own weekdays are preserved for each physical leg.",
+    "ATL–HSV westbound rows may print identical departure and arrival clock times; these are one-hour flights after winter timezone conversion. ATL–DHN 1254/1255/1256/1258 have a five-minute clock difference but are 65-minute flights.",
+    "HSV–ATL 1412 reads 800a–800a in the nonstop heading, implying minus 60 minutes after timezone conversion. The same-origin connecting rows 1412/1201 to Albany and 1412/428 to Augusta both print 600a on p107. This conflicting row is held, not silently changed to 0600 or the next day.",
+    "DHN–ATL 1481 at 19:05–22:10 has one stop. The itinerary key p264 gives ATL–DHN–PFN–ATL. Only its individually printed ATL–DHN 18:45–18:55 leg is added now; no DHN–ATL nonstop is created. Intermediate legs remain for later source review.",
+    "ATL–AVL 1219 departs 20:25, ATL–DHN 1256 runs 12:05–12:10, and DHN–ATL 1256 runs 12:25–14:30. Enlarged original rows confirm these readings.",
+    "ATL/AVL use winter UTC−5; DHN/HSV use UTC−6. All accepted arrivals are on the same local calendar day. Independent 24-hour transcription, fixed offsets and exact window overlap match all generated movements.",
+    "Sixteen same-number returns on 28 February have independently checked ground intervals of 15 or 20 minutes. This validates segment continuity, not aircraft identity.",
+    "Directory p260 identifies AVL Regional, DHN Dothan-Houston County and HSV Huntsville-Madison County. Airport authority histories confirm the respective current fields opened before 1986; older replaced airfields are not used. Modern coordinates mark approximate airport areas.",
+    "All previous movements, schedules, airlines and airports unchanged; prior COMAIR corrections and held conflicts preserved. Timetable end date, later amendments and actual operation remain unverified. Original scans are not redistributed."
+  ]
+}

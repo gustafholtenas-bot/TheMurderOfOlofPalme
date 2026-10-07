@@ -1,0 +1,90 @@
+{
+  "package": "v120",
+  "held_rows": [
+    {
+      "flight": "SV061",
+      "route": "JED–CDG",
+      "printed_pages": "29",
+      "reason": "VIA blank; 02:10–08:05 is a through itinerary, not accepted as nonstop. Superseded the provisional transcription before delivery."
+    },
+    {
+      "flight": "KU162",
+      "route": "ORY–KWI",
+      "printed_pages": "68",
+      "reason": "Friday09:55–20:00 has blank VIA; intermediate timings missing."
+    },
+    {
+      "flight": "IY748 / IY749",
+      "route": "Sana–Paris / Paris–Sana",
+      "printed_pages": "74,85",
+      "reason": "Blank VIA; no complete physical-leg timings."
+    },
+    {
+      "flight": "AF148",
+      "route": "CDG–BGW",
+      "printed_pages": "61",
+      "reason": "Through Larnaca; do not import the aggregate Paris–Baghdad interval."
+    },
+    {
+      "flight": "AF1382",
+      "route": "BGW–JED",
+      "printed_pages": "61,65,29",
+      "reason": "Separate ORY–BGW and JED–LYS rows accepted; Baghdad departure is missing, so the gap is not filled by inference."
+    },
+    {
+      "flight": "AF160",
+      "route": "KWI–DXB–AUH",
+      "printed_pages": "68,31",
+      "reason": "CDG–KWI accepted; missing Kuwait/Dubai intermediate times are not inferred from aggregate arrival times."
+    },
+    {
+      "flight": "AF1352",
+      "route": "DHA onward Gulf legs",
+      "printed_pages": "65–66",
+      "reason": "Accepted CDG–DHA variant starts7February. Intermediate Gulf leg timings remain missing."
+    },
+    {
+      "flight": "AF145",
+      "route": "BEY–CDG",
+      "printed_pages": "18",
+      "reason": "16:15–21:10 has blank VIA; do not turn the through itinerary into a nonstop return to AF144."
+    },
+    {
+      "flight": "SV067 / SV061 / SV062 / SV058",
+      "route": "Riyadh/Paris aggregate rows",
+      "printed_pages": "74,82",
+      "reason": "Blank VIA on relevant Friday/Saturday rows. Other nonstop weekday rows do not overlap the window."
+    },
+    {
+      "flight": "IR730 / IR731",
+      "route": "ORY–THR / THR–ORY",
+      "printed_pages": "76,89",
+      "reason": "Tuesday rows outside window. Sunday AF165 is also outside the window."
+    },
+    {
+      "flight": "AF140",
+      "route": "CDG–LCA",
+      "printed_pages": "68",
+      "reason": "Friday variant ended27December1985. Existing AF164 Saturday row remains unchanged and is not duplicated."
+    },
+    {
+      "flight": "AF132 / AF133",
+      "route": "Lyon–Tel Aviv / Tel Aviv–Lyon",
+      "printed_pages": "45,89",
+      "reason": "Monday rows outside window. Saturday service was not inferred from through Paris journeys."
+    },
+    {
+      "flight": "AF1351",
+      "route": "BKK–DXB",
+      "printed_pages": "missing printed16–17",
+      "reason": "Bangkok origin pages missing from scan. Tokyo–Bangkok and Dubai–Paris aggregate comparisons do not supply missing intermediate clocks."
+    },
+    {
+      "flight": "AF / other",
+      "route": "CAI/KWI/LCA outbound",
+      "printed_pages": "missing printed38–39",
+      "reason": "These origin pages are absent from the retrieved partial scan. No return clocks are manufactured."
+    }
+  ],
+  "old_runtime_records_changed": false
+}

@@ -1,0 +1,26 @@
+{
+  "package": "v141_SE01",
+  "based_on": "v141_INT06",
+  "new_runtime_movements": 0,
+  "new_verified_overflights": 0,
+  "swedish_endpoint_selection": 87,
+  "international_inbound": 41,
+  "international_outbound": 40,
+  "swedish_domestic": 6,
+  "global_movements_preserved": 11506,
+  "catalog_byte_identical": true,
+  "flights_byte_identical": true,
+  "all_original_paths_preserved": true,
+  "code_unchanged": true,
+  "changed_prior_files": [
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/europe_country_index.json",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/europe_country_queue.json"
+  ],
+  "generator_checks_passed": 3,
+  "python_tests_rerun": false,
+  "reason_tests_not_rerun": "Only research metadata/docs and derived Europe index changed; runtime and code byte-identical to tested INT06.",
+  "unreal_runtime_tested": false,
+  "coverage_complete": false
+}

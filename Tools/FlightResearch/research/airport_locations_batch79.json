@@ -1,0 +1,23 @@
+{
+  "package": "v82",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "MEM",
+      "name": "Memphis International",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 35.042411,
+      "lon": -89.976679,
+      "coordinate_source": "https://www.faa.gov/air_traffic/publications/atpubs/aip_html/part3_ad_2.0_tennessee.html",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flymemphis.com/airport-history/",
+      "historical_location_note": "1986 Memphis International Airport. Airport history establishes continuity of the 1963 terminal and subsequent concourse expansion. Modern FAA aerodrome reference point is used only as an approximate map position, not an exact 1986 runway, terminal or aircraft position.",
+      "coordinate_kind": "Modern FAA aerodrome reference point; approximate 1986 map location",
+      "original_reference_point": "35-02-32.681N / 89-58-36.045W",
+      "historical_name": "Memphis International Airport",
+      "historical_name_basis": "Official airport history: International name adopted in 1969; 1963 terminal expanded during the following decades.",
+      "historical_site_review": "Official history supports continuity of the airport site; exact 1986 aerodrome reference point and runway/terminal geometry are not reconstructed."
+    }
+  ]
+}

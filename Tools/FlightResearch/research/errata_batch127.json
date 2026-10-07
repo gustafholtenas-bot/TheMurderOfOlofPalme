@@ -1,0 +1,12 @@
+{
+  "package": "v130",
+  "checked_on": "2026-10-02",
+  "type": "research_date_clarification_no_runtime_changes",
+  "subject": "Arrow Air November timetable",
+  "primary_url": "https://www.timetableimages.com/ttimages/jw8511.htm",
+  "finding": "All four original scans carry14November1985. Earlier secondary-page date confusion1984/1985 no longer a reason for withholding.",
+  "runtime_decision": "Continue withholding: contemporary February1986 suspension evidence means the old scheduled passenger table cannot be assumed to apply.",
+  "previous_runtime_rows_modified": [],
+  "older_research_byte_preserved": true,
+  "latest_arrow_hold": "caribbean_withheld_batch127.json"
+}

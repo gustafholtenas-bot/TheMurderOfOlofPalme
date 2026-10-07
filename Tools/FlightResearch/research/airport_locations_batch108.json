@@ -1,0 +1,92 @@
+{
+  "checked_on": "2026-10-01",
+  "airports": [
+    {
+      "id": "ALB",
+      "name": "Albany County (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 42.7491161,
+      "lon": -73.80198,
+      "coordinate_source": "https://www.airnav.com/airport/ALB",
+      "coordinate_record_id": "KALB",
+      "timetable_code": "ALB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/ALB"
+      ],
+      "location_note": "Delta printed p.260 identifies ALB as Albany County; historical name retained. The AirNav FAA record matches the named airfield and predates 1986 in its activation field. Activation metadata is not treated as an exact historical opening date. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers, not 1986 terminal, stand, runway threshold, layout or aircraft positions."
+    },
+    {
+      "id": "BTV",
+      "name": "Burlington International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 44.471955,
+      "lon": -73.1532761,
+      "coordinate_source": "https://www.airnav.com/airport/BTV",
+      "coordinate_record_id": "KBTV",
+      "timetable_code": "BTV",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/BTV",
+        "https://btv.aero/about/"
+      ],
+      "location_note": "Delta printed p.260 identifies BTV as International; historical name retained. The AirNav FAA record matches the named airfield and predates 1986 in its activation field. Activation metadata is not treated as an exact historical opening date. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers, not 1986 terminal, stand, runway threshold, layout or aircraft positions. Official airport history confirms service from 1920 and development before 1986; the later Leahy name is not backdated."
+    },
+    {
+      "id": "ISP",
+      "name": "Long Island–MacArthur (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 40.7961357,
+      "lon": -73.1006651,
+      "coordinate_source": "https://www.airnav.com/airport/ISP",
+      "coordinate_record_id": "KISP",
+      "timetable_code": "ISP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/ISP"
+      ],
+      "location_note": "Delta printed p.260 identifies ISP as MacArthur; historical name retained. The AirNav FAA record matches the named airfield and predates 1986 in its activation field. Activation metadata is not treated as an exact historical opening date. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers, not 1986 terminal, stand, runway threshold, layout or aircraft positions."
+    },
+    {
+      "id": "PWM",
+      "name": "Portland International Jetport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 43.6456435,
+      "lon": -70.3086164,
+      "coordinate_source": "https://www.airnav.com/airport/PWM",
+      "coordinate_record_id": "KPWM",
+      "timetable_code": "PWM",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/PWM"
+      ],
+      "location_note": "Delta printed p.261 identifies PWM as International Jet Port; historical name retained. The AirNav FAA record matches the named airfield and predates 1986 in its activation field. Activation metadata is not treated as an exact historical opening date. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers, not 1986 terminal, stand, runway threshold, layout or aircraft positions."
+    },
+    {
+      "id": "PVD",
+      "name": "Providence–Theodore Francis Green (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 41.7223333,
+      "lon": -71.4277222,
+      "coordinate_source": "https://www.airnav.com/airport/PVD",
+      "coordinate_record_id": "KPVD",
+      "timetable_code": "PVD",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/PVD"
+      ],
+      "location_note": "Delta printed p.261 identifies PVD as Theodore Francis Green; historical name retained. The AirNav FAA record matches the named airfield and predates 1986 in its activation field. Activation metadata is not treated as an exact historical opening date. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers, not 1986 terminal, stand, runway threshold, layout or aircraft positions."
+    }
+  ],
+  "marker_precision": "Approximate same-airfield positions; 1986 gates, runway thresholds and layouts not reconstructed."
+}

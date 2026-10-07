@@ -1,0 +1,87 @@
+{
+  "package": "v125",
+  "held_rows": [
+    {
+      "route": "Seven regular schedules",
+      "decision": "reviewed_schedule_no_window_movement",
+      "schedules": [
+        "air-jamaica-068-GCM-KIN-1945-b122",
+        "air-jamaica-069-KIN-GCM-1800-b122",
+        "cayman-airways-043-MIA-GCM-0830-b122",
+        "cayman-airways-044-GCM-MIA-1740-b122",
+        "cayman-airways-054-MBJ-GCM-1700-b122",
+        "cayman-airways-055-GCM-KIN-1430-b122",
+        "cayman-airways-246-GCM-MIA-2150-b122"
+      ],
+      "reason": "FiveTuesday/Wednesday/Monday-only rows plus WednesdayMBJ–GCM, and Saturday17:40GCM–MIA outsidewindow. See explicit source dates in validation; no fabricated movements."
+    },
+    {
+      "route": "CYB–MIA / MIA–CYB / CYB–Houston / Houston–CYB / Houston–KIN",
+      "decision": "one_stop_aggregate_not_imported_as_nonstop",
+      "reason": "Stops=1 or slash-flight itinerary; separately timed accepted regular legs retained. Charter771 not reconstructed from endpoints."
+    },
+    {
+      "route": "JM068GCM–KINThursday / JM069MBJ–GCMTuesdayThursday / KX054KIN–GCMWednesday / KX055GCM–MBJWednesday",
+      "decision": "one_stop_aggregate_not_imported_as_nonstop",
+      "reason": "Stops=1. Do not infer missing MBJ–KIN or KIN–MBJ clocks. JM and KX remain distinct airlines."
+    },
+    {
+      "route": "Cayman Airways Holidays772GCM–TPA08:45–10:15 and771TPA–CYB12:00–13:30, MondayThursday",
+      "decision": "charter_nonstop_rows_outside_window_not_imported",
+      "reason": "Thursday arrivals occur before27Feb22:21:30UTC; noFriday/Saturdayservice. Source rows remain documented here rather than creating unused charter schedules."
+    },
+    {
+      "route": "Cayman Airways Holidays771TPA–GCM / 042/772CYB–TPA",
+      "decision": "charter_one_stop_aggregate_not_imported",
+      "reason": "ExplicitStops=1; do not infer a missing directCYB–GCM771clock."
+    },
+    {
+      "route": "Cayman Express9773/9774Detroit,9775/9776Chicago,9777/9778NewYork",
+      "decision": "charter_conflicting_clocks_and_unresolved_us_airports",
+      "reason": "Official sheet specifies20Dec1985–6Apr1986 but a contemporary Skin Diver report has different Detroit/Chicago clocks and later final dates. Exact US airport codes are not printed. Friday/Saturday rows held; Sunday rows outsidewindow. Charter marketer with Cayman Airways, not evidence of the later commuter subsidiary.",
+      "source_sheet_clocks": [
+        "GCM–NewYork9778Sunday06:45–10:00",
+        "NewYork–GCM9777Sunday11:00–14:15",
+        "GCM–Chicago9776Saturday06:45–09:30",
+        "Chicago–GCM9775Saturday10:30–15:15",
+        "GCM–Detroit9774Friday06:45–10:00",
+        "Detroit–GCM9773Friday11:00–14:15"
+      ],
+      "comparison_lead": "Skin Diver December1985 OCR pp80–81: Detroit08:00/12:30, Chicago07:00/10:30; needs original scan comparison. Not imported fromOCR."
+    }
+  ],
+  "regional_source_checks": [
+    {
+      "name": "Skin DiverDecember1985 Cayman Express charter report",
+      "url": "https://archive.org/stream/Skin_Diver_1985_Dec/Skin_Diver_1985_Dec_djvu.txt",
+      "decision": "ocr_conflict_lead_only",
+      "note": "Use for conflict discovery, not flight import. Original scan and amendments required."
+    },
+    {
+      "name": "Cayman Express advertisement, Grosse Pointe News30January1986 p11A",
+      "url": "https://digitize.gp.lib.mi.us/history/newspapers/grossePointeNews/year_ranges/1980s/1986/pdf/1986-01-30.pdf",
+      "decision": "visually_reviewed_ad_no_clocks",
+      "pdf_sha256": "0588af19f06c2f336bd74fee5dd3720e46a2d20e7c15d33bbdeac12dc7a221c8",
+      "pdf_page": 11,
+      "printed_page": "11A",
+      "note": "FridayDetroit/Cayman charter advertised20December–4April1986 with Cayman Airways logo. No clock or precise US airport, so does not resolve timing/airport conflict."
+    },
+    {
+      "name": "Bahamasair July1985 full scan",
+      "url": "https://www.airtimes.com/cgat/bs/bahamasair/pdf/up850701.pdf",
+      "publication_index": "https://www.airtimes.com/cgat/bs/bahamasair.htm",
+      "decision": "superseded_edition_not_imported",
+      "note": "Index lists15December1985nextedition; Julyinterior not applicable without further evidence."
+    },
+    {
+      "name": "KLM timetable archive",
+      "url": "https://northwestairlineshistory.org/timetables-klm/",
+      "decision": "no_1985_1986_interior_obtained"
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_decisions_unchanged": true
+}

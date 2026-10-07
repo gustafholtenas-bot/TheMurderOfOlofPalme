@@ -1,0 +1,70 @@
+{
+  "package": "v129",
+  "held_rows": [
+    {
+      "route": "16 Sunday schedules",
+      "decision": "reviewed_no_window_movement",
+      "schedules": [
+        "inter-island-air-services-120-GND-UNI-1100-c7_N4-b126",
+        "inter-island-air-services-120-MQS-SVD-1200-c7_N4-b126",
+        "inter-island-air-services-120-SVD-UVF-1300-c7_N4-b126",
+        "inter-island-air-services-120-UNI-MQS-1135-c7_N4-b126",
+        "inter-island-air-services-120-UVF-SLU-1340-c7_N4-b126",
+        "inter-island-air-services-121-CRU-GND-1655-c7_S5-b126",
+        "inter-island-air-services-121-MQS-UNI-1610-c7_S5-b126",
+        "inter-island-air-services-121-SLU-UVF-1430-c7_S5-b126",
+        "inter-island-air-services-121-SVD-MQS-1540-c7_S5-b126",
+        "inter-island-air-services-121-UNI-CRU-1635-c7_S5-b126",
+        "inter-island-air-services-121-UVF-SVD-1500-c7_S5-b126",
+        "inter-island-air-services-125-CRU-GND-0940-c7_S3-b126",
+        "inter-island-air-services-125-SLU-UVF-0740-c7_S3-b126",
+        "inter-island-air-services-125-SVD-UNI-0850-c7_S3-b126",
+        "inter-island-air-services-125-UNI-CRU-0920-c7_S3-b126",
+        "inter-island-air-services-125-UVF-SVD-0810-c7_S3-b126"
+      ],
+      "reason": "LI120 Sunday, LI125 Sunday and LI121 Sunday variants are reviewed; no Sunday lies in the target window."
+    },
+    {
+      "route": "LI126 main scan3 column9 and IAS scan7 N5",
+      "decision": "entire_flight_number_withheld",
+      "main_table": {
+        "route": "MQS–FDF",
+        "departure": "14:20",
+        "arrival": "15:15",
+        "equipment": "BNI",
+        "frequency": "DLY EX SU"
+      },
+      "ias_table": {
+        "route": "POS–GND–CRU–UNI–MQS–SVD–BGI",
+        "departure": "11:30",
+        "arrival": "15:15",
+        "equipment": "DHT",
+        "frequency": "DLY EX SU"
+      },
+      "reason": "Different route/equipment under same number. No presumed corrected route, equipment or legal operator."
+    },
+    {
+      "route": "LI117 CRU–GND scan7 S6",
+      "decision": "clock_inversion_withheld",
+      "departure": "17:30",
+      "arrival": "17:15",
+      "reason": "Arrival precedes departure at same timezone. No invented17:50 or overnight interpretation. Prior coherent3legs accepted, not a complete chain."
+    },
+    {
+      "route": "Four Island Air LI168 NEV–STX",
+      "decision": "prior_asterisk_hold_retained",
+      "reason": "No accepted explanation of source asterisk atStKitts. No nonstop assumption or fabricated stop clock."
+    },
+    {
+      "route": "Nicaragua, other StThomas operators and special flights",
+      "decision": "still_open",
+      "reason": "No new dated exact clocks in these pages."
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_reports_preserved_as_history": true,
+  "li117_prior_research_reading_superseded": "errata_batch126.json"
+}

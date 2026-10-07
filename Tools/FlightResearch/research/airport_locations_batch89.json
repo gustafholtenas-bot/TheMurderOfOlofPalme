@@ -1,0 +1,32 @@
+{
+  "package": "v92",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "MOB",
+      "name": "Mobile – Bates Field Municipal (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 30.6912,
+      "lon": -88.242798,
+      "coordinate_source": "https://ourairports.com/airports/KMOB/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.mobileairportauthority.com/aeroplex/history/",
+      "historical_location_note": "The airport authority distinguishes relocated Bates Field in West Mobile from Brookley. The 1986 Delta directory p261 labels MOB Bates Field Municipal. Current KMOB coordinates mark the approximate airport area, not a reconstructed 1986 terminal or runway."
+    },
+    {
+      "id": "PNS",
+      "name": "Pensacola Regional / Municipal Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 30.472718,
+      "lon": -87.186639,
+      "coordinate_source": "https://ourairports.com/airports/KPNS/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flypensacola.com/airport-history",
+      "historical_location_note": "The airport history names this site Pensacola Regional from 1972; the 1986 Delta directory p261 uses Municipal. International is a later name. Current KPNS coordinates are an approximate airport-area marker, not a reconstructed 1986 terminal or runway."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites independently reviewed.",
+  "historical_scope": "MOB relocated Bates Field in West Mobile, not Brookley. PNS Regional/Municipal. No precise 1986 terminal/gate/runway reconstruction."
+}

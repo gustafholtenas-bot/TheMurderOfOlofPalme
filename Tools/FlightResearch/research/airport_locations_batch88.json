@@ -1,0 +1,20 @@
+{
+  "package": "v91",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "MLU",
+      "name": "Monroe Regional Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 32.510899,
+      "lon": -92.037697,
+      "coordinate_source": "https://ourairports.com/airports/KMLU/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flymonroe.org/about/",
+      "historical_location_note": "The airport authority history connects the present airport with Selman Field and records transfer of the property to the City of Monroe in September 1949. The February 1986 Delta airport directory, printed p261, identifies MLU as Monroe Regional. Modern OurAirports coordinates are an approximate airport-area marker, not a reconstruction of a 1986 terminal, gate, runway or aircraft position."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as an approximate airport-area marker; historical site independently reviewed.",
+  "historical_scope": "Monroe Regional/Selman Field area in Louisiana. No precise 1986 terminal/gate/runway reconstruction."
+}

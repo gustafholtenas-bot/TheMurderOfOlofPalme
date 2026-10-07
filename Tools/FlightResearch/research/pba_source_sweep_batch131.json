@@ -1,0 +1,47 @@
+{
+  "package": "v134",
+  "checked_on": "2026-10-02",
+  "scope": "Visible rows with a single printed flight number and no stop/connection remark in the seven original Southern System interiors. Visual FROM-city section count compared with cumulative catalog.",
+  "expected_and_catalogued_by_source_origin": {
+    "pba-southern-19860115": {
+      "DAB": 4,
+      "RSW": 10,
+      "GNV": 3,
+      "JAX": 13,
+      "EYW": 17,
+      "MTH": 6,
+      "MLB": 4,
+      "MIA": 42,
+      "APF": 15,
+      "MSY": 3,
+      "PFN": 4,
+      "PNS": 7,
+      "SRQ": 11,
+      "TLH": 12,
+      "TPA": 39,
+      "PBI": 11
+    },
+    "pba-southern-19860301": {
+      "DAB": 5,
+      "RSW": 16,
+      "GNV": 5,
+      "JAX": 24,
+      "EYW": 19,
+      "MTH": 6,
+      "MLB": 5,
+      "MIA": 39,
+      "APF": 17,
+      "SRQ": 11,
+      "TLH": 8,
+      "TPA": 32,
+      "PBI": 11
+    }
+  },
+  "total_cumulative_schemas": 399,
+  "total_cumulative_movements": 385,
+  "sweep_count_matches_catalog": true,
+  "airline_network_complete": false,
+  "actual_operations_verified": false,
+  "amendments_complete": false,
+  "excluded": "Through/stop itineraries; inferred intermediate clocks; Northern System and any unexamined or supplemental editions. RSW–SRQ1208 not derived from RSW–TPA through timing. January APF–RSW not inferred from through itineraries."
+}

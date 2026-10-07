@@ -1,0 +1,117 @@
+{
+  "package": "v141_INT03",
+  "based_on": "v141_INT02",
+  "date": "2026-10-02",
+  "new_schedules": 34,
+  "new_movements": 55,
+  "new_foreign_domestic_movements": 0,
+  "total_movements": 11435,
+  "selected_international_and_swedish_domestic": 2197,
+  "excluded_foreign_domestic": 9238,
+  "sweden_endpoint_movements": 87,
+  "sweden_international_inbound": 41,
+  "sweden_international_outbound": 40,
+  "swedish_domestic": 6,
+  "new_sweden_movements": 0,
+  "all_11380_prior_movements_unchanged": true,
+  "all_6761_prior_schedules_unchanged": true,
+  "all_prior_airports_countries_observations_movements_unchanged": true,
+  "airline_metadata_updated": [
+    "air-algerie"
+  ],
+  "duplicate_movement_ids": 0,
+  "new_physical_duplicates": 0,
+  "independent_fixed_offset_expansion_matches": true,
+  "af273_connections": [
+    {
+      "first_leg": "air-france-273-NRT-ANC-2100-int02@1986-02-28",
+      "second_leg": "air-france-273-ANC-CDG-1045-int03@1986-02-28",
+      "ground_minutes": 70
+    },
+    {
+      "first_leg": "air-france-273-NRT-ANC-2100-int02@1986-03-01",
+      "second_leg": "air-france-273-ANC-CDG-1045-int03@1986-03-01",
+      "ground_minutes": 70
+    }
+  ],
+  "coverage_complete": false,
+  "new_airports": [],
+  "unreal_runtime_tested": false,
+  "interval_start_utc": "1986-02-27T22:21:30Z",
+  "interval_end_utc": "1986-03-01T22:21:30Z",
+  "counts_by_airline": {
+    "air-france": 26,
+    "air-algerie": 29
+  },
+  "counts_by_new_pair": [
+    {
+      "origin": "ALG",
+      "destination": "LIL",
+      "movements": 2
+    },
+    {
+      "origin": "ALG",
+      "destination": "LYS",
+      "movements": 2
+    },
+    {
+      "origin": "ALG",
+      "destination": "MRS",
+      "movements": 6
+    },
+    {
+      "origin": "ALG",
+      "destination": "NCE",
+      "movements": 1
+    },
+    {
+      "origin": "ALG",
+      "destination": "ORY",
+      "movements": 14
+    },
+    {
+      "origin": "ALG",
+      "destination": "TLS",
+      "movements": 2
+    },
+    {
+      "origin": "ANC",
+      "destination": "CDG",
+      "movements": 2
+    },
+    {
+      "origin": "LIL",
+      "destination": "ALG",
+      "movements": 2
+    },
+    {
+      "origin": "LYS",
+      "destination": "ALG",
+      "movements": 2
+    },
+    {
+      "origin": "MRS",
+      "destination": "ALG",
+      "movements": 6
+    },
+    {
+      "origin": "NCE",
+      "destination": "ALG",
+      "movements": 1
+    },
+    {
+      "origin": "ORY",
+      "destination": "ALG",
+      "movements": 13
+    },
+    {
+      "origin": "TLS",
+      "destination": "ALG",
+      "movements": 2
+    }
+  ],
+  "python_tests_passed": 20,
+  "generator_checks_passed": 3,
+  "required_compiled_crash_fix": "f23b73a",
+  "data_only_delivery": true
+}

@@ -1,0 +1,87 @@
+{
+  "package": "v123",
+  "held_rows": [
+    {
+      "route": "AF1349 PTP–FDF / FDF–Paris",
+      "decision": "expired",
+      "reason": "PTP–FDF valid through31January; FDF–CDG3–31January; earlier Orly variant ends27December. All outside window."
+    },
+    {
+      "route": "AF1114 PTP–JFK",
+      "decision": "expired",
+      "reason": "28December is in the TO column, not FROM. No March1 movement accepted."
+    },
+    {
+      "route": "AF224 PTP–ORY Thursday18:30",
+      "decision": "expired",
+      "reason": "FROM2January TO9January. No February27 movement accepted."
+    },
+    {
+      "route": "AF365 PTP–FDF Saturday / AF230 FDF–ORY Saturday / AF251 viaPTP Saturday",
+      "decision": "outside_window",
+      "reason": "Local Saturday departures18:50 /19:15 /21:45 correspond to22:50 /23:15 /01:45nextUTCday, all after window end. MIA–PTP AF365 remains included."
+    },
+    {
+      "route": "AF380–397 F27 regional rows",
+      "decision": "operator_review_pending",
+      "reason": "AF flight code is printed, but regional operating-carrier attribution remains to be reviewed. Not imported in this batch."
+    },
+    {
+      "route": "AF363 PAP–CAY / AF364 FDF–PAP / AF366 CAY–MIA / AF1105 MIA–PTP / AF1106 PTP–MIA / AF235 FDF–CDG / AF1347 FDF–CDG",
+      "decision": "through_itineraries_not_imported_as_nonstop",
+      "reason": "Separately timed physical legs imported where valid; aggregate endpoints would duplicate the legs and skip stops."
+    },
+    {
+      "route": "PA227 ANU onward / return",
+      "decision": "outside_or_unreviewed",
+      "reason": "JFK–ANU Saturday is included; no unverified return or onward clocks inferred."
+    }
+  ],
+  "regional_source_checks": [
+    {
+      "name": "American Airlines31January1986",
+      "url": "https://www.ebay.com/itm/116752972549",
+      "decision": "cover_only",
+      "note": "Six available listing images reviewed: covers/back cover, no interior clock rows. Back cover advertises May starts, outside window."
+    },
+    {
+      "name": "American1980s gallery",
+      "url": "https://www.airtimes.com/cgat/usa/american/gal/aagal80.htm",
+      "decision": "no_applicable_interior_scan_retrieved",
+      "note": "Applicable cover lead exists; no usable1986 interior clock panels obtained in this search."
+    },
+    {
+      "name": "Eastern1980s gallery",
+      "url": "https://www.airtimes.com/cgat/usb/eastern/gal/eagal80.htm",
+      "decision": "cover_leads_only",
+      "note": "1January1986 cover lead;2March edition starts after the game window. No applicable interior clocks accepted."
+    },
+    {
+      "name": "LACSA gallery",
+      "url": "https://www.airtimes.com/cgat/cr/lacsa.htm",
+      "decision": "no_applicable_interior_scan_retrieved",
+      "note": "May1986 cover is outside window; earlier1972/1976 PDFs do not establish1986 clocks."
+    },
+    {
+      "name": "LIAT timetable gallery",
+      "url": "https://www.timetableimages.com/ttimages/li.htm",
+      "decision": "wrong_period",
+      "note": "26October1986 working timetable is a later season. Not extrapolated backward."
+    },
+    {
+      "name": "LIAT AirTimes index",
+      "url": "https://www.airtimes.com/cgat/ag/liat.htm",
+      "decision": "lead_only",
+      "note": "July1985 index lead does not by itself establish winter1985/86 clock rows."
+    },
+    {
+      "name": "Nicaragua/Aeronica follow-up",
+      "decision": "no_new_applicable_clock_rows_accepted",
+      "note": "Previously documented1990 timetable/1985 advertising leads remain outside period. This batch adds no Nicaragua flights; search is not exhaustive."
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_decisions_unchanged": true
+}

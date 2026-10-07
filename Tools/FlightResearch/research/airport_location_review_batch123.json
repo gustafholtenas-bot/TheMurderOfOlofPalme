@@ -1,0 +1,37 @@
+{
+  "package": "v126",
+  "airport_records": [
+    {
+      "id": "EIS",
+      "name": "Tortola – Beef Island (1986)",
+      "country": "vg",
+      "timezone": "America/Tortola",
+      "lat": 18.445492,
+      "lon": -64.541707,
+      "coordinate_source": "https://ourairports.com/airports/TUPJ/",
+      "coordinate_record_id": "TUPJ",
+      "timetable_code": "EIS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+        "https://bvi.gov.vg/sites/default/files/resources/rfp_-_national_tourism_plan_23_april_2021.pdf"
+      ],
+      "location_note": "The contemporary timetable explicitly maps Tortola to EIS. BVI government geography places the main airport on Beef Island east of Tortola. Retain Beef Island label rather than the later Terrance B. Lettsome honorary name. Current coordinates are an approximate airfield marker, not surveyed1986 runway/terminal coordinates. Modern airport expansion is not reconstructed."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "vg",
+      "name": {
+        "sv": "Brittiska Jungfruöarna",
+        "en": "British Virgin Islands",
+        "en_source": "Brittiska Jungfruöarna"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 368,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Current approximate airfield marker; no surveyed1986 terminal/runway coordinates claimed. Contemporary printed EIS identity, Beef Island name retained. British Virgin Islands is a territory, not an independent state."
+}

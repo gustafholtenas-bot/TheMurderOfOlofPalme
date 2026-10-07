@@ -1,0 +1,85 @@
+{
+  "checked_on": "2026-10-01",
+  "sources": [
+    {
+      "id": "air-france-19851027-no25",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "sha256": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+      "valid_from": "1985-10-27",
+      "valid_to": "1986-03-29",
+      "accepted_rows": 37,
+      "printed_pages": [
+        11,
+        13,
+        15,
+        18,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        43,
+        48,
+        49,
+        50,
+        56,
+        61,
+        62,
+        65,
+        68,
+        70,
+        76,
+        86,
+        87,
+        89
+      ],
+      "legend_pages": [
+        2,
+        3,
+        4
+      ],
+      "itinerary_pages": [
+        8,
+        9,
+        10
+      ]
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "CDG": 1,
+    "ORY": 1,
+    "NCE": 1,
+    "LYS": 1,
+    "MRS": 1,
+    "BGW": 3,
+    "AMM": 2,
+    "DAM": 3,
+    "BEY": 2,
+    "DHA": 3,
+    "DEL": 5.5,
+    "JED": 3,
+    "DAR": 3,
+    "SEZ": 4,
+    "DXB": 4,
+    "CMB": 5.5,
+    "MCT": 4,
+    "SIN": 8,
+    "BAH": 3,
+    "KWI": 3,
+    "CAI": 2,
+    "TLV": 2,
+    "ADE": 3,
+    "JIB": 3
+  },
+  "important_boundaries": [
+    "BGW–CDG AF147 leaves 27 February 22:15 UTC, before the window opens; the flight still overlaps it.",
+    "JED–SEZ AF463 leaves 27 February 22:05 UTC, before the window opens; full flight retained.",
+    "MCT–CDG UT567 leaves 2 March 01:40 local = 1 March 21:40 UTC, overlapping the final 41m30s.",
+    "ORY–TLV LY324 leaves 1 March 21:50 UTC, overlapping the final 31m30s."
+  ],
+  "date_filter_policy": "Printed winter validity and individual row conditions checked; imported schedules restricted to local departure dates 27 February–2 March1986, then filtered by exact UTC interval."
+}

@@ -1,0 +1,33 @@
+{
+  "package": "v85",
+  "source": "delta-19860201",
+  "checked_on": "2026-09-30",
+  "conflicts": [
+    {
+      "flight_as_printed": "1871",
+      "suggested_but_unadopted_flight": "1671",
+      "origin": "CMH",
+      "destination": "SDF",
+      "printed_page": 62,
+      "pdf_page": 34,
+      "printed_departure": "250p",
+      "printed_arrival": "340p",
+      "printed_frequency": "X6",
+      "printed_stops": "0",
+      "action": "held_flight_number_conflict",
+      "imported_schedule": false,
+      "imported_movement": false,
+      "evidence": [
+        "Direct CMH–SDF row visibly prints 1871.",
+        "CMH–DFW p62 and CMH–SHV p63 depart 14:50 via SDF with 1671/1051.",
+        "Itinerary p265 lists COMAIR 1671 CMH–SDF and Ransome 1871 BOS–BTV.",
+        "Page4 assigns 1525–1749 to COMAIR and 1750–1874 to Ransome."
+      ],
+      "reason": "Internal evidence suggests a printing error, but the direct row is not silently changed and no operator is assigned.",
+      "next_action": "Seek a dated correction or independent leg timetable establishing CMH–SDF flight number and times."
+    }
+  ],
+  "prior_held_conflicts_preserved": [
+    "source_conflicts_batch80.json: Delta597 MEM–LIT"
+  ]
+}

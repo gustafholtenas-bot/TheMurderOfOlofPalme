@@ -1,0 +1,108 @@
+{
+  "batch": 127,
+  "package": "v130",
+  "based_on_package": "v129",
+  "checked_on": "2026-10-02",
+  "previous_movements": 9042,
+  "new_schedules": 10,
+  "new_schedule_ids": [
+    "challenge-international-101-MIA-SAP-1255-b127",
+    "challenge-international-102-SAP-MIA-1610-b127",
+    "challenge-international-103-MIA-SAP-1255-b127",
+    "challenge-international-104-SAP-MIA-1610-b127",
+    "challenge-international-105-MIA-BZE-1315-b127",
+    "challenge-international-106-BZE-MIA-1615-b127",
+    "challenge-international-301-MIA-KIN-0745-b127",
+    "challenge-international-302-MBJ-MIA-1030-b127",
+    "challenge-international-307-MIA-MBJ-2000-b127",
+    "challenge-international-308-KIN-MIA-2240-b127"
+  ],
+  "new_schedules_with_movements": 8,
+  "new_schedules_without_window_movements": [
+    "challenge-international-103-MIA-SAP-1255-b127",
+    "challenge-international-104-SAP-MIA-1610-b127"
+  ],
+  "new_schedules_by_airline": {
+    "challenge-international": 10
+  },
+  "new_movements": 18,
+  "new_movements_by_airline": {
+    "challenge-international": 18
+  },
+  "new_movements_by_directed_pair": {
+    "BZE–MIA": 3,
+    "KIN–MIA": 2,
+    "MBJ–MIA": 2,
+    "MIA–BZE": 2,
+    "MIA–KIN": 2,
+    "MIA–MBJ": 2,
+    "MIA–SAP": 2,
+    "SAP–MIA": 3
+  },
+  "new_leg_ids": [
+    "challenge-international-102-SAP-MIA-1610-b127@1986-02-27",
+    "challenge-international-106-BZE-MIA-1615-b127@1986-02-27",
+    "challenge-international-307-MIA-MBJ-2000-b127@1986-02-27",
+    "challenge-international-308-KIN-MIA-2240-b127@1986-02-27",
+    "challenge-international-301-MIA-KIN-0745-b127@1986-02-28",
+    "challenge-international-302-MBJ-MIA-1030-b127@1986-02-28",
+    "challenge-international-101-MIA-SAP-1255-b127@1986-02-28",
+    "challenge-international-105-MIA-BZE-1315-b127@1986-02-28",
+    "challenge-international-102-SAP-MIA-1610-b127@1986-02-28",
+    "challenge-international-106-BZE-MIA-1615-b127@1986-02-28",
+    "challenge-international-307-MIA-MBJ-2000-b127@1986-02-28",
+    "challenge-international-308-KIN-MIA-2240-b127@1986-02-28",
+    "challenge-international-301-MIA-KIN-0745-b127@1986-03-01",
+    "challenge-international-302-MBJ-MIA-1030-b127@1986-03-01",
+    "challenge-international-101-MIA-SAP-1255-b127@1986-03-01",
+    "challenge-international-105-MIA-BZE-1315-b127@1986-03-01",
+    "challenge-international-102-SAP-MIA-1610-b127@1986-03-01",
+    "challenge-international-106-BZE-MIA-1615-b127@1986-03-01"
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 4,
+    "1986-02-28": 8,
+    "1986-03-01": 6
+  },
+  "total_movements": 9060,
+  "unchanged_previous_movements": 9042,
+  "unchanged_previous_schedules": 5377,
+  "corrected_previous_schedule_ids": [],
+  "corrected_previous_movement_ids": [],
+  "new_airports": [
+    "BZE",
+    "SAP"
+  ],
+  "new_countries": [
+    "bz",
+    "hn"
+  ],
+  "new_airlines": [
+    "challenge-international"
+  ],
+  "first_movement_airlines": [
+    "challenge-international"
+  ],
+  "total_airports": 383,
+  "total_countries": 121,
+  "total_catalog_schedules": 5387,
+  "total_reviewed_schedules": 5366,
+  "total_directed_endpoint_pairs": 1780,
+  "new_directed_endpoint_pairs": 8,
+  "reviewed_directed_pairs": 8,
+  "total_registered_airlines": 110,
+  "total_airlines_with_movements": 67,
+  "total_source_records": 91,
+  "contributing_timetable_editions": 33,
+  "runtime_coverage": {
+    "registered_airlines": 110,
+    "registered_countries": 121,
+    "reviewed_schedules": 5366,
+    "animated_airlines": 67,
+    "scheduled_movements": 9059,
+    "confirmed_movements": 1
+  },
+  "data_only_delivery": true,
+  "coverage_complete": false,
+  "prior_errata_and_held_conflicts_preserved": true
+}

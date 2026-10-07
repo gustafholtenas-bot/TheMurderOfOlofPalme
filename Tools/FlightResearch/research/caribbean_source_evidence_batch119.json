@@ -1,0 +1,137 @@
+{
+  "package": "v122",
+  "checked_on": "2026-10-01",
+  "sources": [
+    {
+      "id": "panam-19860211",
+      "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+      "valid_from": "1986-02-11",
+      "valid_to": "1986-04-26",
+      "accepted_rows": 25,
+      "images": [
+        {
+          "digital_page": 15,
+          "printed_page": 9,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37242/full/2200,/0/default.jpg",
+          "sha256": "eae448a87fdd5613f6cd9888ae44e636a65fab0b74e48e5948773c87bb1737d3",
+          "bytes": 1855723
+        },
+        {
+          "digital_page": 50,
+          "printed_page": 44,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37277/full/2200,/0/default.jpg",
+          "sha256": "988fc87d69f677501d5c032232c1fb5a2c83293213ab9b2574d68f6a7584223f",
+          "bytes": 1727469
+        },
+        {
+          "digital_page": 68,
+          "printed_page": 62,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37295/full/2200,/0/default.jpg",
+          "sha256": "caf39b1ff3f806329de142eaa7e162e979cc6f667d99c5c0860a63d2ab50e698",
+          "bytes": 1878747
+        },
+        {
+          "digital_page": 69,
+          "printed_page": 63,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37296/full/2200,/0/default.jpg",
+          "sha256": "1c3f39309cb9d768835324fbaef750ef6cfd3c3db530a5240243e20dbb95481e",
+          "bytes": 1787368
+        },
+        {
+          "digital_page": 70,
+          "printed_page": 64,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37297/full/2200,/0/default.jpg",
+          "sha256": "610b5f4c930ab288a25ce786e85819775e2b4e51d3a2173d26bc0a098e63dba4",
+          "bytes": 798738
+        },
+        {
+          "digital_page": 79,
+          "printed_page": 71,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37306/full/2200,/0/default.jpg",
+          "sha256": "a4e5a1e3714b45641e5187291ebfe7513128bdee8535ca841df0bad14aa1cb8a",
+          "bytes": 1787786
+        },
+        {
+          "digital_page": 80,
+          "printed_page": 72,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37307/full/2200,/0/default.jpg",
+          "sha256": "4ce03e03eacb528302a335242fc6bcd28d7f4c3a07b8700e455c773790ea5c20",
+          "bytes": 1825228
+        },
+        {
+          "digital_page": 89,
+          "printed_page": 81,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37316/full/2200,/0/default.jpg",
+          "sha256": "0493049e94de427114b0f8b4941b369818404279ff8254a511f287a07c6bdcfc",
+          "bytes": 1756103
+        },
+        {
+          "digital_page": 96,
+          "printed_page": 88,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37323/full/2200,/0/default.jpg",
+          "sha256": "d59fc4bb9f307253faa0f71265b7ca0e6937b6148b688f8801447a83e572e9d7",
+          "bytes": 1745625
+        },
+        {
+          "digital_page": 97,
+          "printed_page": 89,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37324/full/2200,/0/default.jpg",
+          "sha256": "3a8bc7908dbab535fc29daaa0ff1ae99f064c667f621c90f3975cf8ce6c276e3",
+          "bytes": 1687070
+        },
+        {
+          "digital_page": 98,
+          "printed_page": 90,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37325/full/2200,/0/default.jpg",
+          "sha256": "5ed33bdee0cd4bcaf884261cda792ab7dcf8a9139eb1b20f8db7c2c2c9e01410",
+          "bytes": 1708579
+        },
+        {
+          "digital_page": 99,
+          "printed_page": 91,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37326/full/2200,/0/default.jpg",
+          "sha256": "a0b52fb420dc949ec8cde2a2260a7d59b5b22cc48557c6db2fc683ea239183d9",
+          "bytes": 1724838
+        },
+        {
+          "digital_page": 100,
+          "printed_page": 92,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37327/full/2200,/0/default.jpg",
+          "sha256": "d3a9e8ef8287c18124ace69b4ca13fe17e1bc6b0074524cf5e6dfa5500729d0b",
+          "bytes": 1716445
+        },
+        {
+          "digital_page": 104,
+          "printed_page": 96,
+          "url": "https://digitalcollections.library.miami.edu/iiif/2/asm0341:37331/full/2200,/0/default.jpg",
+          "sha256": "2d0c8fb775c2626e23d03c0e166ca72b13a621df2f5230f0c8b74d989a8a97c5",
+          "bytes": 1722474
+        }
+      ]
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "MIA": -5,
+    "JFK": -5,
+    "GUA": -6,
+    "STT": -4,
+    "STX": -4,
+    "SXM": -4,
+    "UVF": -4,
+    "SKB": -4,
+    "SDQ": -4,
+    "BGI": -4,
+    "POS": -4
+  },
+  "date_filter_policy": "Explicit discontinue/effective notes respected. SXM–SKB imports reviewed Friday and Saturday only, using the respective pattern before/after 1 March.",
+  "important_boundaries": [
+    "PA425 SXM–UVF on27February starts22:10UTC, before window but still overlaps. No Saturday flight under expired TuThSaSu row.",
+    "PA221 STX–JFK, PA225 SXM–JFK and PA220 BGI–JFK on27February start before window and end inside; each yields three movements.",
+    "PA435 BGI–POS on1March starts22:20UTC,90 seconds before window end; entire interval retained.",
+    "Saturday PA429 fromMIA starts22:30UTC and is outside the window."
+  ],
+  "previous_held_istanbul_rows_unchanged": true
+}

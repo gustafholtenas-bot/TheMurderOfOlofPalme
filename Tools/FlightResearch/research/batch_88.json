@@ -1,0 +1,137 @@
+{
+  "batch": 88,
+  "package": "v91",
+  "based_on_package": "v90",
+  "checked_on": "2026-09-30",
+  "previous_movements": 5575,
+  "source_rows": 34,
+  "selected_city_direction_tables": 10,
+  "new_schedules": 18,
+  "new_schedule_ids": [
+    "atlantic-southeast-1456-MLU-MEM-0700-b88",
+    "atlantic-southeast-1457-MEM-MLU-0935-b88",
+    "atlantic-southeast-1457-MLU-MEM-1050-b88",
+    "atlantic-southeast-1458-MEM-MLU-1307-b88",
+    "atlantic-southeast-1458-MLU-MEM-1422-b88",
+    "atlantic-southeast-1460-MEM-MLU-2005-b88",
+    "delta-1036-DFW-MLU-1751-b88",
+    "delta-1036-MLU-JAN-1905-b88",
+    "delta-471-MLU-ATL-1300-b88",
+    "delta-471-SHV-MLU-1207-b88",
+    "delta-529-MLU-SHV-0612-b88",
+    "delta-583-JAN-MLU-1912-b88",
+    "delta-584-SHV-MLU-0820-b88",
+    "delta-662-SHV-MLU-2100-b88",
+    "delta-691-ATL-MLU-1527-b88",
+    "delta-691-MLU-SHV-1610-b88",
+    "delta-941-JAN-MLU-1245-b88",
+    "delta-941-MLU-DFW-1335-b88"
+  ],
+  "source_row_actions": {
+    "excluded_connection": 7,
+    "excluded_through_stops": 9,
+    "new_schedule": 18
+  },
+  "new_movements": 37,
+  "new_movements_by_source_airline": {
+    "delta": 25,
+    "atlantic-southeast": 12
+  },
+  "new_movements_by_directed_pair": {
+    "ATL–MLU": 2,
+    "DFW–MLU": 2,
+    "JAN–MLU": 4,
+    "MEM–MLU": 6,
+    "MLU–ATL": 2,
+    "MLU–DFW": 2,
+    "MLU–JAN": 2,
+    "MLU–MEM": 6,
+    "MLU–SHV": 5,
+    "SHV–MLU": 6
+  },
+  "new_leg_ids": [
+    "delta-691-MLU-SHV-1610-b88@1986-02-27",
+    "delta-1036-DFW-MLU-1751-b88@1986-02-27",
+    "delta-1036-MLU-JAN-1905-b88@1986-02-27",
+    "delta-583-JAN-MLU-1912-b88@1986-02-27",
+    "atlantic-southeast-1460-MEM-MLU-2005-b88@1986-02-27",
+    "delta-662-SHV-MLU-2100-b88@1986-02-27",
+    "delta-529-MLU-SHV-0612-b88@1986-02-28",
+    "atlantic-southeast-1456-MLU-MEM-0700-b88@1986-02-28",
+    "delta-584-SHV-MLU-0820-b88@1986-02-28",
+    "atlantic-southeast-1457-MEM-MLU-0935-b88@1986-02-28",
+    "atlantic-southeast-1457-MLU-MEM-1050-b88@1986-02-28",
+    "delta-471-SHV-MLU-1207-b88@1986-02-28",
+    "delta-941-JAN-MLU-1245-b88@1986-02-28",
+    "delta-471-MLU-ATL-1300-b88@1986-02-28",
+    "atlantic-southeast-1458-MEM-MLU-1307-b88@1986-02-28",
+    "delta-941-MLU-DFW-1335-b88@1986-02-28",
+    "atlantic-southeast-1458-MLU-MEM-1422-b88@1986-02-28",
+    "delta-691-ATL-MLU-1527-b88@1986-02-28",
+    "delta-691-MLU-SHV-1610-b88@1986-02-28",
+    "delta-1036-DFW-MLU-1751-b88@1986-02-28",
+    "delta-1036-MLU-JAN-1905-b88@1986-02-28",
+    "delta-583-JAN-MLU-1912-b88@1986-02-28",
+    "atlantic-southeast-1460-MEM-MLU-2005-b88@1986-02-28",
+    "delta-662-SHV-MLU-2100-b88@1986-02-28",
+    "delta-529-MLU-SHV-0612-b88@1986-03-01",
+    "atlantic-southeast-1456-MLU-MEM-0700-b88@1986-03-01",
+    "delta-584-SHV-MLU-0820-b88@1986-03-01",
+    "atlantic-southeast-1457-MEM-MLU-0935-b88@1986-03-01",
+    "atlantic-southeast-1457-MLU-MEM-1050-b88@1986-03-01",
+    "delta-471-SHV-MLU-1207-b88@1986-03-01",
+    "delta-941-JAN-MLU-1245-b88@1986-03-01",
+    "delta-471-MLU-ATL-1300-b88@1986-03-01",
+    "atlantic-southeast-1458-MEM-MLU-1307-b88@1986-03-01",
+    "delta-941-MLU-DFW-1335-b88@1986-03-01",
+    "atlantic-southeast-1458-MLU-MEM-1422-b88@1986-03-01",
+    "delta-691-ATL-MLU-1527-b88@1986-03-01",
+    "delta-691-MLU-SHV-1610-b88@1986-03-01"
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 6,
+    "1986-02-28": 18,
+    "1986-03-01": 13
+  },
+  "total_movements": 5612,
+  "retained_previous_movement_ids": 5575,
+  "unchanged_previous_movements": 5575,
+  "unchanged_previous_schedules": 3439,
+  "corrected_previous_schedule_ids": [],
+  "corrected_previous_movement_ids": [],
+  "new_airports": [
+    "MLU"
+  ],
+  "new_airlines": [
+    "atlantic-southeast"
+  ],
+  "total_airports": 253,
+  "total_directed_endpoint_pairs": 1117,
+  "runtime_coverage": {
+    "registered_airlines": 96,
+    "registered_countries": 81,
+    "reviewed_schedules": 3436,
+    "animated_airlines": 50,
+    "scheduled_movements": 5611,
+    "confirmed_movements": 1
+  },
+  "delta_total_movements": 1492,
+  "comair_total_movements": 381,
+  "asa_total_movements": 12,
+  "data_only_delivery": true,
+  "coverage_complete": false,
+  "reviewed_schedules_without_window_movements": [],
+  "schedules_with_three_overlapping_movements": [
+    "delta-691-MLU-SHV-1610-b88"
+  ],
+  "previous_corrections_preserved": [
+    "v87: COMAIR 1582 CVG–DTW",
+    "v89: COMAIR 1580 ORD–MKE; stable IDs retained"
+  ],
+  "prior_held_source_conflicts_preserved": [
+    "batch80: Delta 597 MEM–LIT time conflict",
+    "batch82: CMH–SDF 1871/1671 number conflict"
+  ],
+  "next_priority": "Monroe–Pensacola 584 and Monroe–Mobile 662; missing Mobile/Birmingham physical legs; ASA Memphis regional network; Memphis–LaGuardia",
+  "europe_resume_country": "cy"
+}

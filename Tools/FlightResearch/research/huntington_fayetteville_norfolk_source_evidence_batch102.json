@@ -1,0 +1,59 @@
+{
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    15,
+    16,
+    40,
+    50,
+    80,
+    106,
+    177,
+    178,
+    202
+  ],
+  "additional_rechecked_printed_pages": [],
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "itinerary_printed_pages": [
+    263,
+    264,
+    265
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "15": 10,
+    "16": 11,
+    "40": 23,
+    "50": 28,
+    "80": 43,
+    "106": 56,
+    "177": 91,
+    "178": 92,
+    "202": 104,
+    "260": 133,
+    "261": 133,
+    "263": 134,
+    "264": 135,
+    "265": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Ten complete direction headings: 36 visually reviewed rows, 34 accepted nonstop schedules (14 Delta, 8 ASA, 12 COMAIR), two slash-number connections excluded. No accepted row has a dated footnote.",
+    "CVG–HTS 1540 runs X7; HTS–CRW 1540 runs Saturday only. CRW–HTS 1713 is Saturday only; HTS–CVG 1713 runs X7. These individually printed frequencies are preserved, not propagated from adjacent legs.",
+    "CVG–HTS 1528 runs daily although its earlier CMH–IND and IND–CVG legs run X67. HTS–CVG 1543 is daily although CVG–DAY 1543 is X6. Each physical leg has its own source row.",
+    "ASA 1272 ATL–FAY is X7 while FAY–ATL is daily; 1274 ATL–FAY is daily while FAY–ATL is X6. Return turns at FAY: 1272 20 minutes, 1273 40 minutes, 1274 15 minutes.",
+    "RDU–ORF 994 departs 23:40 and arrives 00:15 next local day. Its two movements run 04:40–05:15 UTC on February 28 and March 1. The star denotes off-peak fare, not next-day arrival.",
+    "ATL–ORF 570/994 and ORF–ATL 1067/325 are connecting itineraries via RDU; no nonstop physical leg is invented from them.",
+    "All seven endpoints in this batch use winter Eastern UTC−5. Independent 24-hour transcription and exact window overlap match all 69 new movements. Three schedules overlap on three dates; two Saturday-only schedules create one movement each.",
+    "Nineteen same-operator, same-number transitions between independently timed legs have checked ground intervals of 10–65 minutes. This does not establish aircraft identity.",
+    "Directory p260 identifies HTS Tri-State and FAY Grannis Field; p261 identifies ORF International. Official airport histories separately support continuity of the current airport sites. Modern coordinates are approximate site markers, not 1986 gate, terminal or runway reconstructions.",
+    "All prior schedules, movements, airlines and airports remain unchanged. Batch101's excluded-row RIC–ATL 1125 arrival correction and older corrections/held conflicts are preserved byte-for-byte in prior research files. Later amendments and actual operation remain unverified; no original scans redistributed."
+  ]
+}

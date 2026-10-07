@@ -1,0 +1,69 @@
+{
+  "checked_on": "2026-10-01",
+  "sources": [
+    {
+      "id": "aeroflot-mirny-19860101",
+      "image_url": "https://aviaposter.ru/images/007/007000090.jpg",
+      "archive_index": "https://aviaposter.ru/raspisaniya/",
+      "sha256": "803e9fcc5bdc2d0d0c89bd3392cbbb55f6b1806ef7eed36b230bdd424668769f",
+      "valid_from": "1986-01-01",
+      "valid_to": "1986-03-31",
+      "accepted_rows": 9,
+      "original_publication_name": null,
+      "publication_date": null
+    },
+    {
+      "id": "dan-air-19851027-system",
+      "url": "https://www.airtimes.com/cgat/uk/danair/pdf/da851027-1a.pdf",
+      "sha256": "03b8ba70d7833dacd9329861a86395bb2185a014ba345bc989e3ec9d421c2071",
+      "printed_pages": [
+        2,
+        11,
+        13,
+        14,
+        21
+      ],
+      "accepted_rows": 7
+    },
+    {
+      "id": "air-france-19851027-no25",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "sha256": "03fd8b6b1c659e8f7cc8811a4176b05cc946f820573994de1ce8be8ee239a0c4",
+      "printed_pages": [
+        2,
+        3,
+        4,
+        18,
+        20,
+        41,
+        42,
+        48,
+        62,
+        91
+      ],
+      "accepted_rows": 12
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "MJZ": 9,
+    "YKS": 9,
+    "ULK": 9,
+    "IKT": 8,
+    "NYR": 9,
+    "PYJ": 9,
+    "SUY": 9,
+    "LHR": 0,
+    "LGW": 0,
+    "JER": 0,
+    "BHX": 0,
+    "CDG": 1,
+    "BOD": 1,
+    "MRS": 1,
+    "TLS": 1
+  },
+  "moscow_time_utc_offset": 3,
+  "important_boundary": "Я-10 departs Mirny 2 March 07:05 local = 1 March 22:05 UTC; the complete leg overlaps the final 16m30s of the observation window."
+}

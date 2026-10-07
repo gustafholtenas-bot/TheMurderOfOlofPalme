@@ -1,0 +1,43 @@
+{
+  "package": "v133",
+  "checked_on": "2026-10-02",
+  "leads": [
+    {
+      "name": "TACA",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/ta.htm"
+      ],
+      "result": "Examined timetable-image index has 1981 and 1990 examples around the target period, not an obtained complete1986 clock table. No operational import."
+    },
+    {
+      "name": "Aviateca",
+      "urls": [
+        "https://www.airtimes.com/cgat/gt/aviateca.htm"
+      ],
+      "result": "Reviewed index lists1979 then1987 for nearby system holdings; no applicable1986 interior obtained. Not evidence that no such issue existed."
+    },
+    {
+      "name": "TAN SAHSA 1986 archival lead",
+      "urls": [
+        "https://archives.museumofflight.org/repositories/2/archival_objects/18066"
+      ],
+      "result": "Museum of Flight search result identifies a1986 holding in a finding aid. Direct page fetch timed out and no scanned timetable clocks were obtained. Research lead only; no import."
+    },
+    {
+      "name": "Eastern January1,1986 Canada card",
+      "urls": [
+        "https://www.ebay.com/itm/276151908290"
+      ],
+      "result": "Listing metadata for a Montreal/Toronto/Ottawa timetable card; not a StThomas or Nicaragua clock source. No purchase or import."
+    },
+    {
+      "name": "Nicaragua and StThomas",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/rl3.htm"
+      ],
+      "result": "Targeted searches yielded no new complete applicable clock table. Later1986 news,1987 simulation plans and1989 schedules are not substituted for February/March1986 evidence."
+    }
+  ],
+  "new_operational_rows_from_these_leads": 0,
+  "source_images_redistributed": false
+}

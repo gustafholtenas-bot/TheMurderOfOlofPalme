@@ -1,0 +1,49 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    15,
+    17,
+    77,
+    97,
+    185,
+    186
+  ],
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "15": 10,
+    "17": 11,
+    "77": 41,
+    "97": 51,
+    "185": 95,
+    "186": 96,
+    "260": 133,
+    "261": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Six complete direction headings: 31 visually reviewed rows; 28 accepted nonstop schedules (8 Delta, 20 ASA), three through-stop rows excluded. No connecting rows occur within these six headings. Triangle and p4 number ranges identify ASA. All accepted rows have no dated footnotes.",
+    "Blank means daily; X6 excludes Saturday; X7 excludes Sunday; 6 is Saturday only. Each physical leg retains its own frequency. ATL–GSP 1405 is X7 while GSP–ATL 1405 is daily; ATL–GSP 1408 is daily while GSP–ATL 1408 is X6.",
+    "ATL–PFN 1481 and 1260 have one stop at Dothan. PFN–ATL 1253 has one stop at Dothan. The old ATL–DHN / DHN–ATL legs remain unchanged; only separately printed missing segments are added, with their own dates and times.",
+    "ATL–PFN 1478 is 11:47–12:07 Central; return departs 12:20, giving thirteen minutes on the ground. ATL–PFN 1480 is 16:50–17:05 Central; return departs 17:20. Magnified original confirms 17:05, not 17:50.",
+    "ASA 1481: old ATL–DHN 18:45–18:55 Central; new DHN–PFN 19:05–19:35; new PFN–ATL 19:50–22:10 Eastern. Ten minutes at DHN and fifteen at PFN. All three legs are X6. No invented nonstop ATL–PFN or DHN–ATL leg.",
+    "ASA 1253 PFN–DHN 06:45–07:15 joins old DHN–ATL at 07:25. ASA 1260 old ATL–DHN arrives 20:35 Central and new DHN–PFN departs 20:45. Both have ten-minute ground intervals.",
+    "ATL–GSP 1410 is Saturday only, 11:47–12:52; GSP–ATL 1410 is also Saturday only, 13:05–14:10. Thirteen minutes on the ground. ATL–GSP 1409 is 22:55–23:55 on the same local date, though both UTC timestamps are the following date.",
+    "ATL/GSP use winter UTC−5; PFN/DHN use UTC−6. All 28 accepted schedules arrive on the same local calendar day. Exact-window overlap can retain flights partly outside the window; whole timestamps remain intact.",
+    "Independent 24-hour transcription, fixed winter offsets, arrival-day offsets, weekdays and exact overlap match generated movements. Eleven same-number transitions in the window have independently checked ground intervals of 10–15 minutes; they do not establish aircraft identity.",
+    "Directory p261 identifies PFN Bay County, p260 identifies GSP Greenville/Spartanburg. Official airport histories and current site records distinguish old PFN from modern ECP, and GSP from the separate city airports. Coordinates mark approximate airport areas, not historical gates or terminals.",
+    "All prior movements, schedules, airlines and airports unchanged, including earlier corrections and all three held conflicts. Timetable end date, later amendments and actual operation unverified. Original scans not redistributed."
+  ]
+}

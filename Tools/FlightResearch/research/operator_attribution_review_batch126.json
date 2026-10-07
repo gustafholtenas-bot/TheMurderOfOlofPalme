@@ -1,0 +1,29 @@
+{
+  "package": "v129",
+  "primary_source": "liat-wt40-19851213",
+  "primary_scan_url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+  "accepted_attribution": [
+    {
+      "scan_page": 7,
+      "heading": "Inter-Island Air Services",
+      "airline_id": "inter-island-air-services",
+      "movements": 53
+    }
+  ],
+  "printed_prefix": "LI",
+  "legal_operator_identity_verified": false,
+  "operator_census_complete": false,
+  "country_association": {
+    "country": "ag",
+    "url": "https://wightmagic.com/BNAPS_Images/BNAPS_News-July_2020.pdf",
+    "printed_page": 20,
+    "pdf_sha256": "50af30b5e3bdb883dce957245b058831e1ab18c66b914a545f9a93ad61f56641",
+    "basis": "BNAPS original aircraft history describes c/n1037 sold to Inter Island Air Services in Antigua asV2-LCI and with AirSaintBarth byApril1986.",
+    "limitation": "Supports country association only. Does not assign this aircraft to any imported schedule, or establish legalAOC/operational continuity for target dates."
+  },
+  "not_imported": [
+    "All LI126 variants",
+    "LI117 final CRU–GND leg",
+    "Any individual aircraft assignment"
+  ]
+}

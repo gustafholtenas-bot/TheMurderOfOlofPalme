@@ -1,0 +1,9 @@
+{
+  "package": "v134",
+  "airport_records": [],
+  "new_country_records": [],
+  "existing_airports_unchanged": 388,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "No new or modified airports. All selected airports retain their existing reviewed identities; MSY, PNS and historical Panama City PFN use Central time UTC-6; TLH and the other selected airports use Eastern time UTC-5. PFN is the old Panama City airport, not ECP opened in 2010. MLB is Melbourne in Florida, not Australia. Airport records remain unchanged."
+}

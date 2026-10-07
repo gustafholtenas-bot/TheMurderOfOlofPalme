@@ -1,0 +1,92 @@
+{
+  "package": "v125",
+  "airport_records": [
+    {
+      "id": "CYB",
+      "name": "Cayman Brac – Gerrard-Smith",
+      "country": "ky",
+      "timezone": "America/Cayman",
+      "lat": 19.687,
+      "lon": -79.882797,
+      "coordinate_source": "https://ourairports.com/airports/MWCB/",
+      "coordinate_record_id": "MWCB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/kx8512.htm",
+        "https://www.caymanairports.com/news/ciaa-announces-groundbreaking-for-expansion-and-renaming-of-brac-airport"
+      ],
+      "location_note": "The winter sheet names Cayman Brac. CIAA reports its Gerrard-Smith airport in West End was renamed in July2012; the modern Charles Kirkconnell name is not backdated. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; no modern terminal/runway layout is reconstructed."
+    },
+    {
+      "id": "LYB",
+      "name": "Little Cayman (flygfält)",
+      "country": "ky",
+      "timezone": "America/Cayman",
+      "lat": 19.660161,
+      "lon": -80.088826,
+      "coordinate_source": "https://ourairports.com/airports/MWCL/",
+      "coordinate_record_id": "MWCL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/kx8512.htm",
+        "https://www.caymanairways.com/our-beginnings-cayman-brac-airways"
+      ],
+      "location_note": "The winter sheet names Little Cayman. Cayman Airways history places the island grass airfield in the southwest since1962. Neutral island label avoids backdating a later honorary name. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; no modern terminal/runway layout is reconstructed."
+    },
+    {
+      "id": "KIN",
+      "name": "Kingston – Norman Manley",
+      "country": "jm",
+      "timezone": "America/Jamaica",
+      "lat": 17.935699462890625,
+      "lon": -76.7874984741211,
+      "coordinate_source": "https://ourairports.com/airports/MKJP/",
+      "coordinate_record_id": "MKJP",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/kx8512.htm",
+        "https://mtm.gov.jm/2015/01/21/bust-of-norman-manley-unveiled-at-nmia/"
+      ],
+      "location_note": "The sheet names Kingston under its international jet route. Mapped to Norman Manley/Palisadoes, not the Tinson Pen aerodrome. Jamaica transport ministry dates the new Palisadoes terminal to1961. Airport-code mapping is a historical interpretation; IATA codes are not printed on this sheet. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; no modern terminal/runway layout is reconstructed."
+    },
+    {
+      "id": "MBJ",
+      "name": "Montego Bay – Sangster",
+      "country": "jm",
+      "timezone": "America/Jamaica",
+      "lat": 18.50342,
+      "lon": -77.91323,
+      "coordinate_source": "https://ourairports.com/airports/MKJS/",
+      "coordinate_record_id": "MKJS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/kx8512.htm",
+        "https://www.mbjairport.com/airport-development"
+      ],
+      "location_note": "The sheet names Montego Bay under its international jet route. Mapped to the existing Sangster airfield. Airport-code mapping is a historical interpretation; IATA codes are not printed on this sheet. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; no modern terminal/runway layout is reconstructed."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "jm",
+      "name": {
+        "sv": "Jamaica",
+        "en": "Jamaica",
+        "en_source": "Jamaica"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 364,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "existing_airport_mapping_review": [
+    {
+      "printed_city": "Houston",
+      "mapped_airport": "IAH",
+      "basis": "Historical inference for regular international jet service. Houston Airports states Hobby international flights resumed in2015 after46years. No IATA code appears in the winter sheet.",
+      "url": "https://www.fly2houston.com/hou/redevelopment/west-concourse-expansion/"
+    }
+  ],
+  "precision": "Approximate airfield markers, not surveyed1986 terminal/runway coordinates. Source-era identities reviewed separately."
+}

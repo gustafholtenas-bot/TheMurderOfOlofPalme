@@ -1,0 +1,23 @@
+{
+  "checked_on": "2026-10-02",
+  "coverage_complete": false,
+  "prior_leads": "sweden_research_leads_int03.json",
+  "new_sweden_movements": 0,
+  "findings": [
+    {
+      "url": "https://www.ebay.co.uk/itm/198282697677",
+      "status": "reviewed_duplicate_pages_no_new_sweden_times",
+      "finding": "Six-photo listing; inner scans show pp.10/11,24,29 and network map, already reviewed in prior Aeroflot source. Back cover has winter1985/86 calendar. No new Stockholm schedule."
+    },
+    {
+      "local_research_file": "research_int02/aeroflot.html",
+      "status": "gallery_metadata_only",
+      "finding": "Winter1985/86 gallery describes52 pages, but media array is empty and only a cover thumbnail is accessible; no full timetable acquired."
+    },
+    {
+      "url": "https://www.ebay.co.uk/itm/198076798105",
+      "status": "search_lead_page_unavailable",
+      "finding": "LOT winter1985/86 listing found in search; direct page unavailable, no timetable rows viewed or imported."
+    }
+  ]
+}

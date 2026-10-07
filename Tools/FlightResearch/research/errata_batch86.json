@@ -1,0 +1,26 @@
+{
+  "package": "v89",
+  "checked_on": "2026-09-30",
+  "corrections": [
+    {
+      "schedule": "comair-1530-ORD-MKE-1115-b73",
+      "changed_movement_ids": [
+        "comair-1530-ORD-MKE-1115-b73@1986-02-28"
+      ],
+      "old_flight": "1530",
+      "correct_flight": "1580",
+      "origin": "ORD",
+      "destination": "MKE",
+      "unchanged_departure_local": "11:15",
+      "unchanged_arrival_local": "11:50",
+      "source": "delta-19860201",
+      "schedule_page": "48",
+      "itinerary_page": "264",
+      "explanation": "Magnified city table shows1580; itinerary1580 is ORD–MKE, while1530 is CMH–CVG–CAK. Only flight label and notes changed; stable IDs, service grouping, weekdays and all times retained.",
+      "supersedes_research_rows": [
+        "comair_toronto_stl_chicago_batch73.tsv: ORD–MKE11:15 row and references to1530 on that segment"
+      ]
+    }
+  ],
+  "historical_research_files_retained": true
+}

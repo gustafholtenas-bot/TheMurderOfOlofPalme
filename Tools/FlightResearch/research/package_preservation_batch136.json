@@ -1,0 +1,48 @@
+{
+  "package": "v139",
+  "changed_prior_files": [
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/catalog.json",
+    "Plugins/TMOPEngine/Content/WorldAtlas/Flights/flights.json",
+    "Tools/FlightResearch/README.md",
+    "Tools/FlightResearch/research/COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/EUROPE_COUNTRY_INDEX.md",
+    "Tools/FlightResearch/research/europe_country_index.json",
+    "Tools/FlightResearch/research/europe_country_queue.json"
+  ],
+  "byte_identical_prior_file_count": 1170,
+  "prior_code_byte_identical": true,
+  "prior_research_and_errata_byte_identical": true,
+  "all_prior_movement_objects_unchanged": false,
+  "all_prior_schedule_objects_unchanged": false,
+  "prior_movements_retained": 10632,
+  "prior_schedules_retained": 6382,
+  "unchanged_prior_movement_objects": 10629,
+  "unchanged_prior_schedule_objects": 6381,
+  "corrected_prior_schedule_ids": [
+    "republic-airlines-347-LAX-DTW-1245-b135"
+  ],
+  "corrected_prior_movement_ids": [
+    "republic-airlines-347-LAX-DTW-1245-b135@1986-02-27",
+    "republic-airlines-347-LAX-DTW-1245-b135@1986-02-28",
+    "republic-airlines-347-LAX-DTW-1245-b135@1986-03-01"
+  ],
+  "corrected_prior_fields": [
+    "flight",
+    "notes"
+  ],
+  "erratum": "errata_batch136.json",
+  "all_prior_ids_dates_clocks_and_other_fields_preserved": true,
+  "all_prior_airport_country_airline_objects_unchanged": true,
+  "modified_prior_airline_ids": [],
+  "modified_prior_source_ids": [
+    "republic-19860214-employee"
+  ],
+  "modified_prior_source_fields": [
+    "reviewed_pages appended",
+    "notes extended"
+  ],
+  "prior_source_notes_and_page_lists_preserved_as_prefix": true,
+  "missing_prior_files": [],
+  "data_only": true,
+  "original_baseline_archive_sha256": "1b2a70b260af2c8766693169805b5cce82ecf8e9a8475656ade209afea642ac0"
+}

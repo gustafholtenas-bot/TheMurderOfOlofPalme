@@ -1,0 +1,87 @@
+{
+  "package": "v139",
+  "checked_on": "2026-10-02",
+  "source": "republic-19860214-employee",
+  "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+  "pdf_sha256": "dbfa243a56d5b0ce387f4e7e4a11288615cfe6d720c919ba0a9c0a82c73f6cfa",
+  "pdf_bytes": 12018907,
+  "scan_pages": 7,
+  "images": [
+    {
+      "scan_page": 1,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=1",
+      "sha256": "48baef14884380a77a26edf8eaa558b767271f66c600ca496c61991e75f5b06d"
+    },
+    {
+      "scan_page": 2,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=2",
+      "sha256": "dc4655330a574db40c202c47125e42ad737d1d42188790c62d9f911f6e285e8c"
+    },
+    {
+      "scan_page": 3,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=3",
+      "sha256": "09eb264c6c1623375312a48a30d076da0c196f94b85641255ddb3416582c56b7"
+    },
+    {
+      "scan_page": 4,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=4",
+      "sha256": "df00b97e7ebb60cd95dab3ab0a0813679ef4bc50abf83d12a155965bd1876ba0"
+    },
+    {
+      "scan_page": 5,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=5",
+      "sha256": "e2620ec7dd137b151f4cb54e35cd733ede412414861e2808eb719b93a4481b76"
+    },
+    {
+      "scan_page": 6,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=6",
+      "sha256": "72c24a13a6a0871670e785a7d869a2e9484d812a31144d688ff6043d005db49c"
+    },
+    {
+      "scan_page": 7,
+      "url": "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf#page=7",
+      "sha256": "2f7eda88392bcf87c946998d3744849de206013599b9e5c859e3b6b6512652be"
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "ATL": -5,
+    "BOS": -5,
+    "DTW": -5,
+    "IAD": -5,
+    "JFK": -5,
+    "LGA": -5,
+    "PHL": -5,
+    "MSP": -6,
+    "DFW": -6,
+    "MCI": -6,
+    "MKE": -6,
+    "ORD": -6,
+    "STL": -6,
+    "DEN-STAPLETON": -7,
+    "PHX": -7,
+    "SLC": -7,
+    "LAS": -8,
+    "LAX": -8,
+    "PDX": -8,
+    "SAN": -8,
+    "SEA": -8,
+    "SFO": -8
+  },
+  "frequency_policy": "Blank=daily;7=Sunday;X6=except Saturday;X7=except Sunday;X67=Monday–Friday.",
+  "stop_policy": "Blank ST only. Two through(ST1) rows excluded. Separately printed legs retain own weekdays/numbers; no EXP rows.",
+  "timezone_policy": "Fixed offsets UTC-5/-6/-7/-8 verified against each airport timezone on all3import dates. Local-time convention; no explicit all-times-local legend found.",
+  "important_boundaries": [
+    "Sunday124LAS–MSP11:45–16:35 has no window movement; retain reviewed schema.",
+    "No new next-local-day arrival schemas; late UTC date changes still handled.",
+    "Prior LAX–DTW flight number347 corrected to334,scan3column4. New MKE–MSP10:45 flight256,not265. See errata_batch136.json.",
+    "728MSP–ORD15:15–16:17 arrives4min30sec beforeThursday start;55ORD–MSP16:14–17:30 departs7min30sec beforeSaturday end.",
+    "All DEN rows map to existing historical DEN-STAPLETON. Airports/locations unchanged.",
+    "Preserve parallel published flight numbers with matching clocks and their individual equipment/days.",
+    "MSP–SEA75 andPDX–MSP76 are ST1 through summaries. Only separately timed physical76PDX–SEA and76SEA–MSP imported; no invented75PDX–SEA.",
+    "All152durations and dated UTC intervals checked against separate manually reviewed durations/dates; same original, not a second source/reviewer."
+  ],
+  "previous_held_conflicts_unchanged": true
+}

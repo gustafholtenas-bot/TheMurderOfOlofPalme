@@ -1,0 +1,50 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    60,
+    86,
+    97,
+    126,
+    146,
+    147,
+    149
+  ],
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "60": 33,
+    "86": 46,
+    "97": 51,
+    "126": 66,
+    "146": 76,
+    "147": 76,
+    "149": 77,
+    "260": 133,
+    "261": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Fourteen complete direction headings: 41 rows, 37 individually printed nonstop schedules, two connecting itineraries and two through-stop rows. All accepted rows have triangle and ASA number range from p4; no dated footnotes.",
+    "Weekdays are decoded for each physical leg independently. Blank daily; X6 except Saturday; X7 except Sunday. MEM–GLH 1299, MEM–MEI 1451 are X7 while their return legs are daily; MEM–GLH 1401 daily while GLH–MEM 1401 is X6.",
+    "MEM–PIB 1402 and PIB–MEM 1298 through rows are excluded; separate MEM–GLH/GLH–PIB and PIB–GLH/GLH–MEM rows represent those services without a duplicate direct flight.",
+    "MEM–PIB 1424 is 15:30–16:45, not 15:34. MEM–GTR 1247 is 16:10–17:00, not 17:05. MEI–MEM 1447 is 17:25–18:28. Enlarged scans checked.",
+    "MEI–PIB 21:05–21:35 is 1449 from ATL via MEI. It is not an extension of MEM–MEI 1453; itinerary p264 confirms the distinction.",
+    "All six endpoint airports use Central winter UTC−6. Accepted arrivals are same local date. Independent manual 24-hour transcription, fixed offsets and weekday calculation match generated movements.",
+    "Ten independently printed same-number segment transitions on 28 February have checked ground intervals; this does not establish an individual aircraft identity.",
+    "Directory pp260–261 identifies FSM Municipal, GTR Golden Triangle, GLH Municipal, MEI Key Field and PIB Pine Belt Regional. Historical site sources and approximate modern coordinates recorded separately.",
+    "Greenville Municipal naming is disambiguated by Federal Register 30 October 1969 p17511: 33°29′05″N 90°59′20″W is the present Mid Delta airport area. The old southeast municipal site is not used.",
+    "No source scan redistributed. Timetable end date and subsequent amendments unverified. Planned service only; no completed-airline or global coverage claim. Earlier objects, corrections and held conflicts unchanged."
+  ]
+}

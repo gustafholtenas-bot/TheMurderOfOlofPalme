@@ -1,0 +1,66 @@
+{
+  "package": "v116",
+  "airport_records": [
+    {
+      "id": "BDA",
+      "name": "Bermuda – Kindley Field (1986)",
+      "country": "bm",
+      "timezone": "Atlantic/Bermuda",
+      "lat": 32.363802,
+      "lon": -64.67824,
+      "coordinate_source": "https://ourairports.com/airports/TXKF/",
+      "coordinate_record_id": "TXKF",
+      "timetable_code": "BDA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201"
+      ],
+      "location_note": "Delta printed p.260 identifies BDA as Kindley Field; this contemporary airport-code list is the historical name/identity evidence. Current OurAirports coordinates and identity metadata are used only as an approximate marker of the same airfield. No reconstruction of 1986 reference points, terminals, gates or runway thresholds is claimed. BDA retains the contemporary Kindley Field label rather than backdating its current L.F. Wade name; SJU is distinct from Isla Grande."
+    },
+    {
+      "id": "SJU",
+      "name": "San Juan – Luis Muñoz Marín International (1986)",
+      "country": "pr",
+      "timezone": "America/Puerto_Rico",
+      "lat": 18.4394,
+      "lon": -66.001801,
+      "coordinate_source": "https://ourairports.com/airports/TJSJ/",
+      "coordinate_record_id": "TJSJ",
+      "timetable_code": "SJU",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201"
+      ],
+      "location_note": "Delta printed p.261 identifies SJU as Luis Munoz Marin Int’l; this contemporary airport-code list is the historical name/identity evidence. Current OurAirports coordinates and identity metadata are used only as an approximate marker of the same airfield. No reconstruction of 1986 reference points, terminals, gates or runway thresholds is claimed. BDA retains the contemporary Kindley Field label rather than backdating its current L.F. Wade name; SJU is distinct from Isla Grande."
+    }
+  ],
+  "historical_name_identity_evidence": {
+    "url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+    "printed_pages": [
+      260,
+      261
+    ]
+  },
+  "coordinate_scope": "Current OurAirports approximate airfield markers; not independently reconstructed 1986 reference points or terminal locations.",
+  "historical_site_precision": "Contemporary airport-code/name identity checked. No exact historical terminal footprint, gate or runway-threshold claim.",
+  "new_country_records": [
+    {
+      "id": "bm",
+      "name": {
+        "sv": "Bermuda",
+        "en": "Bermuda",
+        "en_source": "Bermuda"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "pr",
+      "name": {
+        "sv": "Puerto Rico",
+        "en": "Puerto Rico",
+        "en_source": "Puerto Rico"
+      },
+      "operator_census_complete": false
+    }
+  ]
+}

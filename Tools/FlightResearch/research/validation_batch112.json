@@ -1,0 +1,847 @@
+{
+  "package": "v115",
+  "checked_on": "2026-10-01",
+  "baseline_archive_sha256": "1d20622fe2815fa1159975756d7ffc82aec7b06d763c24804d8dfaf5195fa840",
+  "previous_movements_unchanged": 8071,
+  "previous_schedules_unchanged": 4721,
+  "previous_airports_unchanged": 317,
+  "previous_countries_unchanged": 82,
+  "previous_airlines_unchanged": 98,
+  "unaffected_sources_unchanged": true,
+  "independent_manual_rows": 34,
+  "independent_utc_movements_verified": 71,
+  "independent_utc_expected": {
+    "delta-314-PDX-SLC-0730-b112@1986-02-28": [
+      "1986-02-28T15:30:00Z",
+      "1986-02-28T16:59:00Z"
+    ],
+    "delta-314-PDX-SLC-0730-b112@1986-03-01": [
+      "1986-03-01T15:30:00Z",
+      "1986-03-01T16:59:00Z"
+    ],
+    "delta-310-PDX-SLC-1255-b112@1986-02-27": [
+      "1986-02-27T20:55:00Z",
+      "1986-02-27T22:24:00Z"
+    ],
+    "delta-310-PDX-SLC-1255-b112@1986-02-28": [
+      "1986-02-28T20:55:00Z",
+      "1986-02-28T22:24:00Z"
+    ],
+    "delta-310-PDX-SLC-1255-b112@1986-03-01": [
+      "1986-03-01T20:55:00Z",
+      "1986-03-01T22:24:00Z"
+    ],
+    "delta-424-PDX-SEA-0610-b112@1986-02-28": [
+      "1986-02-28T14:10:00Z",
+      "1986-02-28T14:46:00Z"
+    ],
+    "delta-424-PDX-SEA-0610-b112@1986-03-01": [
+      "1986-03-01T14:10:00Z",
+      "1986-03-01T14:46:00Z"
+    ],
+    "delta-866-PDX-SEA-2140-b112@1986-02-27": [
+      "1986-02-28T05:40:00Z",
+      "1986-02-28T06:16:00Z"
+    ],
+    "delta-866-PDX-SEA-2140-b112@1986-02-28": [
+      "1986-03-01T05:40:00Z",
+      "1986-03-01T06:16:00Z"
+    ],
+    "delta-565-SLC-PDX-1128-b112@1986-02-28": [
+      "1986-02-28T18:28:00Z",
+      "1986-02-28T20:02:00Z"
+    ],
+    "delta-565-SLC-PDX-1128-b112@1986-03-01": [
+      "1986-03-01T18:28:00Z",
+      "1986-03-01T20:02:00Z"
+    ],
+    "delta-335-SLC-PDX-2120-b112@1986-02-27": [
+      "1986-02-28T04:20:00Z",
+      "1986-02-28T06:02:00Z"
+    ],
+    "delta-335-SLC-PDX-2120-b112@1986-02-28": [
+      "1986-03-01T04:20:00Z",
+      "1986-03-01T06:02:00Z"
+    ],
+    "delta-831-SEA-PDX-1435-b112@1986-02-27": [
+      "1986-02-27T22:35:00Z",
+      "1986-02-27T23:12:00Z"
+    ],
+    "delta-831-SEA-PDX-1435-b112@1986-02-28": [
+      "1986-02-28T22:35:00Z",
+      "1986-02-28T23:12:00Z"
+    ],
+    "delta-477-SEA-PDX-2110-b112@1986-02-27": [
+      "1986-02-28T05:10:00Z",
+      "1986-02-28T05:47:00Z"
+    ],
+    "delta-477-SEA-PDX-2110-b112@1986-02-28": [
+      "1986-03-01T05:10:00Z",
+      "1986-03-01T05:47:00Z"
+    ],
+    "delta-860-SAN-ONT-0740-b112@1986-02-28": [
+      "1986-02-28T15:40:00Z",
+      "1986-02-28T16:15:00Z"
+    ],
+    "delta-860-SAN-ONT-0740-b112@1986-03-01": [
+      "1986-03-01T15:40:00Z",
+      "1986-03-01T16:15:00Z"
+    ],
+    "delta-423-SAN-ONT-1035-b112@1986-02-28": [
+      "1986-02-28T18:35:00Z",
+      "1986-02-28T19:09:00Z"
+    ],
+    "delta-423-SAN-ONT-1035-b112@1986-03-01": [
+      "1986-03-01T18:35:00Z",
+      "1986-03-01T19:09:00Z"
+    ],
+    "delta-389-ONT-SAN-1015-b112@1986-02-28": [
+      "1986-02-28T18:15:00Z",
+      "1986-02-28T18:46:00Z"
+    ],
+    "delta-389-ONT-SAN-1015-b112@1986-03-01": [
+      "1986-03-01T18:15:00Z",
+      "1986-03-01T18:46:00Z"
+    ],
+    "delta-861-ONT-SAN-2115-b112@1986-02-27": [
+      "1986-02-28T05:15:00Z",
+      "1986-02-28T05:48:00Z"
+    ],
+    "delta-861-ONT-SAN-2115-b112@1986-02-28": [
+      "1986-03-01T05:15:00Z",
+      "1986-03-01T05:48:00Z"
+    ],
+    "delta-262-SAN-PHX-0700-b112@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T15:56:00Z"
+    ],
+    "delta-262-SAN-PHX-0700-b112@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:56:00Z"
+    ],
+    "delta-504-SAN-PHX-2225-b112@1986-02-27": [
+      "1986-02-28T06:25:00Z",
+      "1986-02-28T07:21:00Z"
+    ],
+    "delta-504-SAN-PHX-2225-b112@1986-02-28": [
+      "1986-03-01T06:25:00Z",
+      "1986-03-01T07:21:00Z"
+    ],
+    "delta-259-PHX-SAN-2035-b112@1986-02-27": [
+      "1986-02-28T03:35:00Z",
+      "1986-02-28T04:30:00Z"
+    ],
+    "delta-259-PHX-SAN-2035-b112@1986-02-28": [
+      "1986-03-01T03:35:00Z",
+      "1986-03-01T04:30:00Z"
+    ],
+    "delta-487-PHX-SAN-2345-b112@1986-02-27": [
+      "1986-02-28T06:45:00Z",
+      "1986-02-28T07:40:00Z"
+    ],
+    "delta-487-PHX-SAN-2345-b112@1986-02-28": [
+      "1986-03-01T06:45:00Z",
+      "1986-03-01T07:40:00Z"
+    ],
+    "delta-262-PHX-CVG-0930-b112@1986-02-28": [
+      "1986-02-28T16:30:00Z",
+      "1986-02-28T19:34:00Z"
+    ],
+    "delta-262-PHX-CVG-0930-b112@1986-03-01": [
+      "1986-03-01T16:30:00Z",
+      "1986-03-01T19:34:00Z"
+    ],
+    "delta-259-CVG-PHX-1825-b112@1986-02-27": [
+      "1986-02-27T23:25:00Z",
+      "1986-02-28T03:10:00Z"
+    ],
+    "delta-259-CVG-PHX-1825-b112@1986-02-28": [
+      "1986-02-28T23:25:00Z",
+      "1986-03-01T03:10:00Z"
+    ],
+    "delta-826-LAX-MSY-1025-b112@1986-02-28": [
+      "1986-02-28T18:25:00Z",
+      "1986-02-28T21:38:00Z"
+    ],
+    "delta-826-LAX-MSY-1025-b112@1986-03-01": [
+      "1986-03-01T18:25:00Z",
+      "1986-03-01T21:38:00Z"
+    ],
+    "delta-91-MSY-LAX-0945-b112@1986-02-28": [
+      "1986-02-28T15:45:00Z",
+      "1986-02-28T19:31:00Z"
+    ],
+    "delta-91-MSY-LAX-0945-b112@1986-03-01": [
+      "1986-03-01T15:45:00Z",
+      "1986-03-01T19:31:00Z"
+    ],
+    "delta-17-DFW-HNL-1201-b112@1986-02-27": [
+      "1986-02-27T18:01:00Z",
+      "1986-02-28T02:05:00Z"
+    ],
+    "delta-17-DFW-HNL-1201-b112@1986-02-28": [
+      "1986-02-28T18:01:00Z",
+      "1986-03-01T02:05:00Z"
+    ],
+    "delta-17-DFW-HNL-1201-b112@1986-03-01": [
+      "1986-03-01T18:01:00Z",
+      "1986-03-02T02:05:00Z"
+    ],
+    "delta-16-HNL-DFW-1910-b112@1986-02-27": [
+      "1986-02-28T05:10:00Z",
+      "1986-02-28T12:03:00Z"
+    ],
+    "delta-16-HNL-DFW-1910-b112@1986-02-28": [
+      "1986-03-01T05:10:00Z",
+      "1986-03-01T12:03:00Z"
+    ],
+    "delta-827-ATL-SRQ-0855-b112@1986-02-28": [
+      "1986-02-28T13:55:00Z",
+      "1986-02-28T15:10:00Z"
+    ],
+    "delta-827-ATL-SRQ-0855-b112@1986-03-01": [
+      "1986-03-01T13:55:00Z",
+      "1986-03-01T15:10:00Z"
+    ],
+    "delta-371-ATL-SRQ-1025-b112@1986-02-28": [
+      "1986-02-28T15:25:00Z",
+      "1986-02-28T16:40:00Z"
+    ],
+    "delta-371-ATL-SRQ-1025-b112@1986-03-01": [
+      "1986-03-01T15:25:00Z",
+      "1986-03-01T16:40:00Z"
+    ],
+    "delta-533-ATL-SRQ-1345-b112@1986-02-28": [
+      "1986-02-28T18:45:00Z",
+      "1986-02-28T20:00:00Z"
+    ],
+    "delta-533-ATL-SRQ-1345-b112@1986-03-01": [
+      "1986-03-01T18:45:00Z",
+      "1986-03-01T20:00:00Z"
+    ],
+    "delta-1119-ATL-SRQ-1530-b112@1986-02-28": [
+      "1986-02-28T20:30:00Z",
+      "1986-02-28T21:45:00Z"
+    ],
+    "delta-1119-ATL-SRQ-1530-b112@1986-03-01": [
+      "1986-03-01T20:30:00Z",
+      "1986-03-01T21:45:00Z"
+    ],
+    "delta-249-ATL-SRQ-1845-b112@1986-02-27": [
+      "1986-02-27T23:45:00Z",
+      "1986-02-28T01:00:00Z"
+    ],
+    "delta-249-ATL-SRQ-1845-b112@1986-02-28": [
+      "1986-02-28T23:45:00Z",
+      "1986-03-01T01:00:00Z"
+    ],
+    "delta-577-ATL-SRQ-2030-b112@1986-02-27": [
+      "1986-02-28T01:30:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "delta-577-ATL-SRQ-2030-b112@1986-02-28": [
+      "1986-03-01T01:30:00Z",
+      "1986-03-01T02:45:00Z"
+    ],
+    "delta-729-SRQ-ATL-0815-b112@1986-02-28": [
+      "1986-02-28T13:15:00Z",
+      "1986-02-28T14:38:00Z"
+    ],
+    "delta-729-SRQ-ATL-0815-b112@1986-03-01": [
+      "1986-03-01T13:15:00Z",
+      "1986-03-01T14:38:00Z"
+    ],
+    "delta-708-SRQ-ATL-1110-b112@1986-02-28": [
+      "1986-02-28T16:10:00Z",
+      "1986-02-28T17:33:00Z"
+    ],
+    "delta-708-SRQ-ATL-1110-b112@1986-03-01": [
+      "1986-03-01T16:10:00Z",
+      "1986-03-01T17:33:00Z"
+    ],
+    "delta-378-SRQ-ATL-1305-b112@1986-02-28": [
+      "1986-02-28T18:05:00Z",
+      "1986-02-28T19:28:00Z"
+    ],
+    "delta-378-SRQ-ATL-1305-b112@1986-03-01": [
+      "1986-03-01T18:05:00Z",
+      "1986-03-01T19:28:00Z"
+    ],
+    "delta-372-SRQ-ATL-1615-b112@1986-02-27": [
+      "1986-02-27T21:15:00Z",
+      "1986-02-27T22:38:00Z"
+    ],
+    "delta-372-SRQ-ATL-1615-b112@1986-02-28": [
+      "1986-02-28T21:15:00Z",
+      "1986-02-28T22:38:00Z"
+    ],
+    "delta-372-SRQ-ATL-1615-b112@1986-03-01": [
+      "1986-03-01T21:15:00Z",
+      "1986-03-01T22:38:00Z"
+    ],
+    "delta-396-SRQ-ATL-1755-b112@1986-02-27": [
+      "1986-02-27T22:55:00Z",
+      "1986-02-28T00:18:00Z"
+    ],
+    "delta-396-SRQ-ATL-1755-b112@1986-02-28": [
+      "1986-02-28T22:55:00Z",
+      "1986-03-01T00:18:00Z"
+    ],
+    "delta-560-SRQ-ATL-2050-b112@1986-02-27": [
+      "1986-02-28T01:50:00Z",
+      "1986-02-28T03:13:00Z"
+    ],
+    "delta-560-SRQ-ATL-2050-b112@1986-02-28": [
+      "1986-03-01T01:50:00Z",
+      "1986-03-01T03:13:00Z"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "overlap_scope": "All old and new runtime legs with an affected operator/flight number; each comparison includes at least one new leg.",
+  "adjacent_source_leg_ground_times": [
+    {
+      "incoming_schedule": "delta-16-HNL-DFW-1910-b112",
+      "outgoing_schedule": "delta-16-DFW-IAH-0700-b104",
+      "ground_minutes": 57.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-16-HNL-DFW-1910-b112@1986-02-27",
+          "delta-16-DFW-IAH-0700-b104@1986-02-28"
+        ],
+        [
+          "delta-16-HNL-DFW-1910-b112@1986-02-28",
+          "delta-16-DFW-IAH-0700-b104@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-17-IAH-DFW-1010-b104",
+      "outgoing_schedule": "delta-17-DFW-HNL-1201-b112",
+      "ground_minutes": 61.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-17-IAH-DFW-1010-b104@1986-02-28",
+          "delta-17-DFW-HNL-1201-b112@1986-02-28"
+        ],
+        [
+          "delta-17-IAH-DFW-1010-b104@1986-03-01",
+          "delta-17-DFW-HNL-1201-b112@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-249-CMH-ATL-1625-b77",
+      "outgoing_schedule": "delta-249-ATL-SRQ-1845-b112",
+      "ground_minutes": 61.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-249-CMH-ATL-1625-b77@1986-02-27",
+          "delta-249-ATL-SRQ-1845-b112@1986-02-27"
+        ],
+        [
+          "delta-249-CMH-ATL-1625-b77@1986-02-28",
+          "delta-249-ATL-SRQ-1845-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-259-CVG-PHX-1825-b112",
+      "outgoing_schedule": "delta-259-PHX-SAN-2035-b112",
+      "ground_minutes": 25.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-259-CVG-PHX-1825-b112@1986-02-27",
+          "delta-259-PHX-SAN-2035-b112@1986-02-27"
+        ],
+        [
+          "delta-259-CVG-PHX-1825-b112@1986-02-28",
+          "delta-259-PHX-SAN-2035-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-259-LGA-CVG-1559-b71",
+      "outgoing_schedule": "delta-259-CVG-PHX-1825-b112",
+      "ground_minutes": 38.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-259-LGA-CVG-1559-b71@1986-02-27",
+          "delta-259-CVG-PHX-1825-b112@1986-02-27"
+        ],
+        [
+          "delta-259-LGA-CVG-1559-b71@1986-02-28",
+          "delta-259-CVG-PHX-1825-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-262-PHX-CVG-0930-b112",
+      "outgoing_schedule": "delta-262-CVG-BOS-1510-b70",
+      "ground_minutes": 36.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-262-PHX-CVG-0930-b112@1986-02-28",
+          "delta-262-CVG-BOS-1510-b70@1986-02-28"
+        ],
+        [
+          "delta-262-PHX-CVG-0930-b112@1986-03-01",
+          "delta-262-CVG-BOS-1510-b70@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-262-SAN-PHX-0700-b112",
+      "outgoing_schedule": "delta-262-PHX-CVG-0930-b112",
+      "ground_minutes": 34.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-262-SAN-PHX-0700-b112@1986-02-28",
+          "delta-262-PHX-CVG-0930-b112@1986-02-28"
+        ],
+        [
+          "delta-262-SAN-PHX-0700-b112@1986-03-01",
+          "delta-262-PHX-CVG-0930-b112@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-310-PDX-SLC-1255-b112",
+      "outgoing_schedule": "delta-310-SLC-DFW-1555-b106",
+      "ground_minutes": 31.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-310-PDX-SLC-1255-b112@1986-02-27",
+          "delta-310-SLC-DFW-1555-b106@1986-02-27"
+        ],
+        [
+          "delta-310-PDX-SLC-1255-b112@1986-02-28",
+          "delta-310-SLC-DFW-1555-b106@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-314-PDX-SLC-0730-b112",
+      "outgoing_schedule": "delta-314-SLC-ATL-1030-b106",
+      "ground_minutes": 31.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-314-PDX-SLC-0730-b112@1986-02-28",
+          "delta-314-SLC-ATL-1030-b106@1986-02-28"
+        ],
+        [
+          "delta-314-PDX-SLC-0730-b112@1986-03-01",
+          "delta-314-SLC-ATL-1030-b106@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-335-ATL-SLC-1856-b106",
+      "outgoing_schedule": "delta-335-SLC-PDX-2120-b112",
+      "ground_minutes": 30.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-335-ATL-SLC-1856-b106@1986-02-27",
+          "delta-335-SLC-PDX-2120-b112@1986-02-27"
+        ],
+        [
+          "delta-335-ATL-SLC-1856-b106@1986-02-28",
+          "delta-335-SLC-PDX-2120-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-371-LGA-ATL-0659-b65",
+      "outgoing_schedule": "delta-371-ATL-SRQ-1025-b112",
+      "ground_minutes": 72.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-371-LGA-ATL-0659-b65@1986-02-28",
+          "delta-371-ATL-SRQ-1025-b112@1986-02-28"
+        ],
+        [
+          "delta-371-LGA-ATL-0659-b65@1986-03-01",
+          "delta-371-ATL-SRQ-1025-b112@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-372-SRQ-ATL-1615-b112",
+      "outgoing_schedule": "delta-372-ATL-ORD-1842",
+      "ground_minutes": 64.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-372-SRQ-ATL-1615-b112@1986-02-27",
+          "delta-372-ATL-ORD-1842@1986-02-27"
+        ],
+        [
+          "delta-372-SRQ-ATL-1615-b112@1986-02-28",
+          "delta-372-ATL-ORD-1842@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-378-SRQ-ATL-1305-b112",
+      "outgoing_schedule": "delta-378-ATL-DCA-1531-b63",
+      "ground_minutes": 63.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-378-SRQ-ATL-1305-b112@1986-02-28",
+          "delta-378-ATL-DCA-1531-b63@1986-02-28"
+        ],
+        [
+          "delta-378-SRQ-ATL-1305-b112@1986-03-01",
+          "delta-378-ATL-DCA-1531-b63@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-389-DFW-ONT-0848-b105",
+      "outgoing_schedule": "delta-389-ONT-SAN-1015-b112",
+      "ground_minutes": 30.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-389-DFW-ONT-0848-b105@1986-02-28",
+          "delta-389-ONT-SAN-1015-b112@1986-02-28"
+        ],
+        [
+          "delta-389-DFW-ONT-0848-b105@1986-03-01",
+          "delta-389-ONT-SAN-1015-b112@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-396-SRQ-ATL-1755-b112",
+      "outgoing_schedule": "delta-396-ATL-CLE-2024-b78",
+      "ground_minutes": 66.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-396-SRQ-ATL-1755-b112@1986-02-27",
+          "delta-396-ATL-CLE-2024-b78@1986-02-27"
+        ],
+        [
+          "delta-396-SRQ-ATL-1755-b112@1986-02-28",
+          "delta-396-ATL-CLE-2024-b78@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-423-ATL-SAN-0837-b63",
+      "outgoing_schedule": "delta-423-SAN-ONT-1035-b112",
+      "ground_minutes": 35.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-423-ATL-SAN-0837-b63@1986-02-28",
+          "delta-423-SAN-ONT-1035-b112@1986-02-28"
+        ],
+        [
+          "delta-423-ATL-SAN-0837-b63@1986-03-01",
+          "delta-423-SAN-ONT-1035-b112@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-423-SAN-ONT-1035-b112",
+      "outgoing_schedule": "delta-423-ONT-DFW-1135-b105",
+      "ground_minutes": 26.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-423-SAN-ONT-1035-b112@1986-02-28",
+          "delta-423-ONT-DFW-1135-b105@1986-02-28"
+        ],
+        [
+          "delta-423-SAN-ONT-1035-b112@1986-03-01",
+          "delta-423-ONT-DFW-1135-b105@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-424-PDX-SEA-0610-b112",
+      "outgoing_schedule": "delta-424-SEA-DFW-0715-b105",
+      "ground_minutes": 29.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-424-PDX-SEA-0610-b112@1986-02-28",
+          "delta-424-SEA-DFW-0715-b105@1986-02-28"
+        ],
+        [
+          "delta-424-PDX-SEA-0610-b112@1986-03-01",
+          "delta-424-SEA-DFW-0715-b105@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-477-DFW-SEA-1849-b105",
+      "outgoing_schedule": "delta-477-SEA-PDX-2110-b112",
+      "ground_minutes": 25.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-477-DFW-SEA-1849-b105@1986-02-27",
+          "delta-477-SEA-PDX-2110-b112@1986-02-27"
+        ],
+        [
+          "delta-477-DFW-SEA-1849-b105@1986-02-28",
+          "delta-477-SEA-PDX-2110-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-487-DFW-PHX-2158-b105",
+      "outgoing_schedule": "delta-487-PHX-SAN-2345-b112",
+      "ground_minutes": 25.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-487-DFW-PHX-2158-b105@1986-02-27",
+          "delta-487-PHX-SAN-2345-b112@1986-02-27"
+        ],
+        [
+          "delta-487-DFW-PHX-2158-b105@1986-02-28",
+          "delta-487-PHX-SAN-2345-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-504-SAN-PHX-2225-b112",
+      "outgoing_schedule": "delta-504-PHX-ATL-0055-b67",
+      "ground_minutes": 34.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-504-SAN-PHX-2225-b112@1986-02-27",
+          "delta-504-PHX-ATL-0055-b67@1986-02-28"
+        ],
+        [
+          "delta-504-SAN-PHX-2225-b112@1986-02-28",
+          "delta-504-PHX-ATL-0055-b67@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-533-ORD-ATL-1010-b66",
+      "outgoing_schedule": "delta-533-ATL-SRQ-1345-b112",
+      "ground_minutes": 56.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-533-ORD-ATL-1010-b66@1986-02-28",
+          "delta-533-ATL-SRQ-1345-b112@1986-02-28"
+        ],
+        [
+          "delta-533-ORD-ATL-1010-b66@1986-03-01",
+          "delta-533-ATL-SRQ-1345-b112@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-560-SRQ-ATL-2050-b112",
+      "outgoing_schedule": "delta-560-ATL-CMH-2303-b78",
+      "ground_minutes": 50.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-560-SRQ-ATL-2050-b112@1986-02-27",
+          "delta-560-ATL-CMH-2303-b78@1986-02-27"
+        ],
+        [
+          "delta-560-SRQ-ATL-2050-b112@1986-02-28",
+          "delta-560-ATL-CMH-2303-b78@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-565-ATL-SLC-0856-b106",
+      "outgoing_schedule": "delta-565-SLC-PDX-1128-b112",
+      "ground_minutes": 38.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-565-ATL-SLC-0856-b106@1986-02-28",
+          "delta-565-SLC-PDX-1128-b112@1986-02-28"
+        ],
+        [
+          "delta-565-ATL-SLC-0856-b106@1986-03-01",
+          "delta-565-SLC-PDX-1128-b112@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-577-LGA-ATL-1659-b65",
+      "outgoing_schedule": "delta-577-ATL-SRQ-2030-b112",
+      "ground_minutes": 77.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-577-LGA-ATL-1659-b65@1986-02-27",
+          "delta-577-ATL-SRQ-2030-b112@1986-02-27"
+        ],
+        [
+          "delta-577-LGA-ATL-1659-b65@1986-02-28",
+          "delta-577-ATL-SRQ-2030-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-708-SRQ-ATL-1110-b112",
+      "outgoing_schedule": "delta-708-ATL-LGA-1335-b65",
+      "ground_minutes": 62.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-708-SRQ-ATL-1110-b112@1986-02-28",
+          "delta-708-ATL-LGA-1335-b65@1986-02-28"
+        ],
+        [
+          "delta-708-SRQ-ATL-1110-b112@1986-03-01",
+          "delta-708-ATL-LGA-1335-b65@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-729-SRQ-ATL-0815-b112",
+      "outgoing_schedule": "delta-729-ATL-TYS-1024-b84",
+      "ground_minutes": 46.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-729-SRQ-ATL-0815-b112@1986-02-28",
+          "delta-729-ATL-TYS-1024-b84@1986-02-28"
+        ],
+        [
+          "delta-729-SRQ-ATL-0815-b112@1986-03-01",
+          "delta-729-ATL-TYS-1024-b84@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-826-LAX-MSY-1025-b112",
+      "outgoing_schedule": "delta-826-MSY-TPA-1607-b111",
+      "ground_minutes": 29.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-826-LAX-MSY-1025-b112@1986-02-28",
+          "delta-826-MSY-TPA-1607-b111@1986-02-28"
+        ],
+        [
+          "delta-826-LAX-MSY-1025-b112@1986-03-01",
+          "delta-826-MSY-TPA-1607-b111@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-831-DFW-SEA-1204-b105",
+      "outgoing_schedule": "delta-831-SEA-PDX-1435-b112",
+      "ground_minutes": 35.0,
+      "matching_in_window_chains": 1,
+      "movement_pairs": [
+        [
+          "delta-831-DFW-SEA-1204-b105@1986-02-28",
+          "delta-831-SEA-PDX-1435-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-860-SAN-ONT-0740-b112",
+      "outgoing_schedule": "delta-860-ONT-ATL-0900-b67",
+      "ground_minutes": 45.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-860-SAN-ONT-0740-b112@1986-02-28",
+          "delta-860-ONT-ATL-0900-b67@1986-02-28"
+        ],
+        [
+          "delta-860-SAN-ONT-0740-b112@1986-03-01",
+          "delta-860-ONT-ATL-0900-b67@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-861-ATL-ONT-1855-b63",
+      "outgoing_schedule": "delta-861-ONT-SAN-2115-b112",
+      "ground_minutes": 45.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-861-ATL-ONT-1855-b63@1986-02-27",
+          "delta-861-ONT-SAN-2115-b112@1986-02-27"
+        ],
+        [
+          "delta-861-ATL-ONT-1855-b63@1986-02-28",
+          "delta-861-ONT-SAN-2115-b112@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-866-PDX-SEA-2140-b112",
+      "outgoing_schedule": "delta-866-SEA-ATL-2250-b67",
+      "ground_minutes": 34.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-866-PDX-SEA-2140-b112@1986-02-27",
+          "delta-866-SEA-ATL-2250-b67@1986-02-27"
+        ],
+        [
+          "delta-866-PDX-SEA-2140-b112@1986-02-28",
+          "delta-866-SEA-ATL-2250-b67@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "delta-91-TPA-MSY-0830-b111",
+      "outgoing_schedule": "delta-91-MSY-LAX-0945-b112",
+      "ground_minutes": 47.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "delta-91-TPA-MSY-0830-b111@1986-02-28",
+          "delta-91-MSY-LAX-0945-b112@1986-02-28"
+        ],
+        [
+          "delta-91-TPA-MSY-0830-b111@1986-03-01",
+          "delta-91-MSY-LAX-0945-b112@1986-03-01"
+        ]
+      ]
+    }
+  ],
+  "ground_times_reviewed": true,
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "passed_data_checks; unreal_runtime_not_run",
+  "ground_time_review_note": "33 adjacent same-number source-leg pairs reviewed; 32 have two matching runtime transitions, while DFW–SEA–PDX 831 has one (28 February). On 27 February the inbound arrives at 22:00 UTC, before the window begins, but the outbound departs at 22:35 UTC inside it. On 1 March the inbound overlaps the window but the outbound departs after its end. Independent interval inclusion is intentional. HNL–DFW 16 has 57 minutes before DFW–IAH on the next local date; SAN–PHX 504 has 34 minutes before PHX–ATL on the next local date. No same-aircraft identity is inferred.",
+  "three_movement_schedule_review": [
+    "delta-310-PDX-SLC-1255-b112",
+    "delta-17-DFW-HNL-1201-b112",
+    "delta-372-SRQ-ATL-1615-b112"
+  ],
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

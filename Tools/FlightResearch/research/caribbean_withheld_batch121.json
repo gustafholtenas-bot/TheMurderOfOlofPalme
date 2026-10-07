@@ -1,0 +1,64 @@
+{
+  "package": "v124",
+  "held_rows": [
+    {
+      "route": "RC696 MEM–MCO / RC480 MEM–TPA / RC480 TPA–MCO",
+      "decision": "reviewed_schedule_no_window_movement",
+      "reason": "Saturday-only late departures occur after window end.68reviewed source schedules produce65active schedules."
+    },
+    {
+      "route": "RC680/688 MEM–GCM and RC465/457 GCM–MEM",
+      "decision": "one_stop_aggregate_not_imported_as_nonstop",
+      "reason": "Separately timed legs viaMiami accepted. Their aggregate rows have ST=1."
+    },
+    {
+      "route": "RC265 MCO–MEM / RC382 MEM–TPA / RC385 TPA–MEM / RC462/480 MEM–MCO / RC430 MSP–TPA / RC439 TPA–MSP",
+      "decision": "one_stop_aggregate_not_imported_as_nonstop",
+      "reason": "Physical legs throughOrlando/Tampa accepted separately; aggregate rows ST=1 do not become extra direct flights."
+    },
+    {
+      "route": "Republic EXP services",
+      "decision": "separate_operator_attribution_required",
+      "reason": "Legend attributes1400–1699toExpressAirlinesI and1700–1899toSimmons. No EXP services imported."
+    },
+    {
+      "route": "Republic remaining system including PVR and other Florida stations",
+      "decision": "outside_this_partial_import",
+      "reason": "This batch coversCUN/GCM andFLL/MIA/MCO/SRQ/TPA only, with their selected mainline physical jet legs. No complete-airline claim."
+    }
+  ],
+  "regional_source_checks": [
+    {
+      "name": "Air Jamaica26November1985–26April1986",
+      "urls": [
+        "https://www.airtimes.com/cgat/jm/airjamaica.htm",
+        "https://www.airtimes.com/cgat/jm/airjamaica/gal/jmgal1a80.htm",
+        "https://collection.sfomuseum.org/objects/1762686419/"
+      ],
+      "decision": "cover_and_index_only",
+      "note": "Applicable edition identified. No interior clock pages obtained; no inferred schedules."
+    },
+    {
+      "name": "Arrow Air November14",
+      "url": "https://www.departedflights.com/JW111485intro.html",
+      "decision": "date_conflict",
+      "note": "Index/URL uses1985; intro heading saysNovember14,1984. Transcribed table not accepted without resolving original date/period."
+    },
+    {
+      "name": "BWIA1980s gallery",
+      "url": "https://www.airtimes.com/cgat/tt/bwia/gal/bwgal1a80.htm",
+      "decision": "no_applicable_interior_scan_obtained"
+    },
+    {
+      "name": "Nicaragua/Aeronica contemporary report25January1986",
+      "url": "https://www.latimes.com/archives/la-xpm-1986-01-25-mn-32575-story.html",
+      "decision": "lead_only",
+      "note": "Contemporary report mentions Aeronica’s Corn Island service; no flight times or precise mainland endpoint. Research lead only."
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_decisions_unchanged": true
+}

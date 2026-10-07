@@ -1,0 +1,92 @@
+{
+  "source": "northwest-19851218",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_nwa-tt_nwa-tt-19851218",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/nwa-tt/pdfs/delta_nwa-tt_nwa-tt-19851218.pdf",
+  "pdf_sha256": "c30a120b617cd61892a50b620c7535620ad6d27302db302d0f50f8dcc48a6f48",
+  "effective_from": "1985-12-18",
+  "effective_to": null,
+  "next_archive_listed_edition": "1986-03-02",
+  "archive_index_url": "https://northwestairlineshistory.org/timetables-northwest/",
+  "intermediate_amendments_verified": false,
+  "visual_review": true,
+  "reviewed_printed_pages": [
+    22,
+    30,
+    47,
+    66,
+    67,
+    75,
+    78,
+    79
+  ],
+  "route_table_pdf_pages": [
+    13,
+    17,
+    25,
+    35,
+    39,
+    41
+  ],
+  "legend_reference": "p.150 / PDF78, reviewed in batch114",
+  "row_scope": "23 visually reviewed Northwest nonstop schedules on 10 directed pairs: Madison to/from ORD, MKE and MSP; Grand Rapids, Michigan to/from DTW and MSP.",
+  "accepted_nonstop_rows": 23,
+  "frequency_legend": {
+    "Daily": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "ExSu": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ExSa": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "ExSaSu": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "Sa": [
+      6
+    ],
+    "Su": [
+      7
+    ]
+  },
+  "airport_mapping": "O=Chicago O’Hare/ORD. Grand Rapids, Michigan=GRR; the separate Minnesota city is excluded. MSN and GRR have CST and EST respectively in this period.",
+  "time_notation": "All selected arrivals are on the same local calendar day. GRR–MSP takes 77 minutes despite 17-minute local-clock difference.",
+  "dated_rows": [],
+  "timezones_fixed_hours_for_import_dates": {
+    "MSP": -6,
+    "ORD": -6,
+    "MKE": -6,
+    "DTW": -5,
+    "MSN": -6,
+    "GRR": -5
+  },
+  "excluded_candidates": [
+    "MSP–MKE224 and DTW–MSP375 are aggregate multi-stop rows. Only separately timed legs are added.",
+    "MSP–GRR524/763 is a connection via DTW, not a nonstop.",
+    "MSN–DTW202/370,710/370,376/262,224/278 are connections via MKE.",
+    "Grand Rapids, Minnesota Airlink1052/1056 not attributed to GRR or Northwest mainline."
+  ],
+  "caveat": "OCR for discovery only; original images verify each accepted field. No evidence of actual operation or aircraft identity."
+}

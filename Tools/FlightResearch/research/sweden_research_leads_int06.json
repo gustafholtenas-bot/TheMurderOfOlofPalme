@@ -1,0 +1,7 @@
+{
+  "checked_on": "2026-10-02",
+  "prior_leads": "sweden_research_leads_int05.json",
+  "new_sweden_movements": 0,
+  "coverage_complete": false,
+  "note": "No new Sweden source inventory this pass. Previous priority and unresolved source leads retained. Dakar/Abidjan explicit nonstop rows now imported."
+}

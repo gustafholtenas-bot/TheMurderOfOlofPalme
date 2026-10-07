@@ -1,0 +1,33 @@
+{
+  "package": "v83",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "JAN",
+      "name": "Jackson–Allen C. Thompson Field (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 32.311199,
+      "lon": -90.075897,
+      "coordinate_source": "https://ourairports.com/airports/KJAN/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://jmaa.com/our-history/",
+      "historical_name_source": "https://da.mdah.ms.gov/series/deepsouth/detail/192285",
+      "historical_location_note": "Commercial airport opened in 1963, replacing Hawkins Field. Contemporary 1963 postcard identifies Allen C. Thompson Field/Jackson Municipal Airport. Modern coordinates are an approximate map location for the same airport site, not reconstructed 1986 runway, terminal or aircraft positions. The later Medgar Evers name is not used for 1986."
+    },
+    {
+      "id": "SHV",
+      "name": "Shreveport Regional",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 32.444747,
+      "lon": -93.826741,
+      "coordinate_source": "https://ourairports.com/airports/KSHV/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyshreveport.com/history/",
+      "historical_location_note": "Commercial service moved from Downtown to the present western airport site in 1952; Shreveport Regional name adopted with the 1971 terminal. Modern coordinates are an approximate map location for the same airport, not reconstructed 1986 runway, terminal or aircraft positions."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate map positions for independently reviewed historical airport sites.",
+  "historical_scope": "JAN is Allen C. Thompson Field, not Hawkins Field. SHV is Shreveport Regional, not Downtown. Exact 1986 terminal/runway geometry is not reconstructed."
+}

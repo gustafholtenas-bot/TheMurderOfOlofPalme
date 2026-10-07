@@ -1,0 +1,65 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    15,
+    29,
+    30,
+    31,
+    86,
+    112,
+    145,
+    147,
+    161,
+    175,
+    224
+  ],
+  "airport_directory_printed_pages": [
+    261
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "15": 10,
+    "29": 17,
+    "30": 18,
+    "31": 18,
+    "86": 46,
+    "112": 59,
+    "145": 75,
+    "147": 76,
+    "161": 83,
+    "175": 90,
+    "224": 115,
+    "261": 133,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "73 rows in eleven complete city-table headings visually reviewed, resolving to fourteen airport pairs. 21 new nonstop schedules, 51 connections and one through-stop row excluded.",
+    "Eleven accepted schedules are Delta mainline; ten are Atlantic Southeast Airlines. The triangle and page 4 number range 1200–1299 identify all ten ASA rows.",
+    "Accepted X7 rows: Delta 1114 BHM–MEM and 564 MEM–LGA. Accepted X6 rows: Delta 977 MEM–BHM, 582 MEM–LGA and 597 LGA–MEM. All other accepted rows are daily, including all ASA rows. No accepted row has a dated footnote.",
+    "New York heading uses J=Kennedy, L=LaGuardia, E=Newark. Actual airport suffixes are retained separately in the transcription. All accepted New York rows use LGA. MEM–JFK, MEM–EWR and EWR–MEM rows are connections only.",
+    "Under legend p4, star means off-peak fare, not next-day arrival. All accepted flights arrive the same local calendar day. Excluded BHM–SHV 19:50 connection arrives 00:24 next day.",
+    "BHM, MGM, VPS, JAN, SHV and MEM use UTC−6; ATL and LGA UTC−5. Independent fixed-offset and weekday calculation matches every generated movement.",
+    "ASA 1289 ATL–VPS (21:46–23:06 UTC) and ASA 1288 VPS–ATL (21:40–23:00 UTC) overlap the beginning of the window and each contributes three movements. Other new schedules contribute two.",
+    "ATL–VPS 1289 is 16:46–17:06 local; the final minute digits were checked in an enlarged scan. ATL–VPS 1286 is 09:48–10:08, 1287 11:47–12:07, 1288 15:16–15:30. Return 1287 is 12:20–14:40.",
+    "BHM–SHV 551 is nonstop, but every SHV–BHM row is a connection. No reverse nonstop is invented. JAN–BHM is printed p112, SHV–BHM p224; adjacent Jacksonville/South Bend tables are not substituted.",
+    "Previously sourced 500/551/557/725/982 chains are filled by individually printed Birmingham/Jackson/Shreveport legs. Through DFW–BHM or BHM–DFW rows remain excluded, not duplicate flights.",
+    "ASA 1286–1289 ATL–VPS–ATL rotations agree with itinerary p264; 1285 starts at VPS. ASA 1290 ATL–MGM–VPS is represented by earlier ATL–MGM plus new MGM–VPS; through ATL–VPS is excluded.",
+    "Twenty-one same-operator/flight-number transitions involving new legs have independently verified ground intervals of 10–35 minutes. This does not establish aircraft identity.",
+    "Delta 597 LGA–MEM is independently printed and accepted. The conflicting onward MEM–LIT time row from batch80 remains held, with no guessed arrival or interval. Later MEM–LIT evidence is still required.",
+    "Directory p261 identifies VPS as Okaloosa County. Airport authority history dates the State Road 85 terminal to 1975 on the Eglin airfield and the modern Destin-Fort Walton Beach name to 2015. Approximate airport-area coordinates are used, not Destin Executive or a reconstructed 1986 terminal.",
+    "All prior movements, schedules, airlines and airports unchanged; prior corrections and held conflicts retained. Later amendments and timetable end date unverified."
+  ]
+}

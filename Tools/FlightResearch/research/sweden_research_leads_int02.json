@@ -1,0 +1,30 @@
+{
+  "checked_on": "2026-10-02",
+  "coverage_complete": false,
+  "prior_leads": "sweden_research_leads_int01.json",
+  "new_sweden_movements": 0,
+  "findings": [
+    {
+      "source": "air-france-19851027-no25",
+      "pages": "26",
+      "status": "held_no_import",
+      "finding": "SK594/410 simultaneous with SK674 remain unresolved; SK428 at22:10 has a blank weekday field and simultaneous SK420. Clearly applicable other CPH–ARN rows already imported."
+    },
+    {
+      "source": "air-france-19851027-no25",
+      "pages": "36,67",
+      "status": "held_no_import",
+      "finding": "AY873/874 VIA column is blank, not a nonstop arrow. Physical intermediate segments remain unknown."
+    },
+    {
+      "url": "https://timetableimages.com/ttimages/cp-mos86.htm",
+      "status": "research_lead_only",
+      "finding": "SAS Moscow/Leningrad City Portrait 1986 booklet found and downloaded. No flight row imported; no text layer extracted. Applicable date and schedule content not established."
+    },
+    {
+      "url": "https://aeroflotarchives.com/timetables.html",
+      "status": "research_lead_only",
+      "finding": "Winter1985/86 edition identified in gallery. No usable flight row transcribed in this batch."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    6,
+    14,
+    15,
+    34,
+    79,
+    93,
+    146
+  ],
+  "airport_directory_printed_pages": [
+    260
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "6": 6,
+    "14": 10,
+    "15": 10,
+    "34": 20,
+    "79": 42,
+    "93": 49,
+    "146": 76,
+    "260": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Eight complete direction headings: 34 visually reviewed rows, all individually printed nonstop schedules with the ASA triangle. The number ranges on p4 identify ASA. No dated footnotes, connecting itineraries or through-stop rows occur in these selected headings.",
+    "Blank means daily, X6 except Saturday, X7 except Sunday. Weekdays belong to each segment. Daily ATL–ABY 1205 has an X6 return, as does daily ATL–GNV 1294. Return frequencies are not inferred from outbound rows.",
+    "MEM–FYV 1267 is 15:30–16:45 local and has three overlapping movements. FYV means Fayetteville, Arkansas; the source origin heading on p79 and directory p260 distinguish it from Fayetteville, North Carolina.",
+    "ATL–BQK 1230 is 15:16–16:30, and ATL–BQK 1231 is 20:30–21:50. Enlarged scans confirm the minute digits. ATL–BQK 1229 arrives 13:07 and BQK–ATL 1229 departs 13:20.",
+    "ATL/ABY/BQK/GNV use winter UTC−5; MEM/FYV use UTC−6. All accepted arrivals are on the same local day. Full times are retained where flights cross a window boundary.",
+    "Independent 24-hour manual transcription, fixed winter offsets, weekdays and exact window overlap match generated movements. Thirteen same-number segment transitions on 28 February have independently checked ground intervals of 10–130 minutes. This does not establish aircraft identity.",
+    "Directory p260 identifies FYV Drake Field, ABY Dougherty County, BQK Glynco Jet Port and GNV Regional. Municipal/airport histories and present code records support field identities. ABY modern-field mapping is explicitly an identity inference; modern coordinates are approximate airport-area markers.",
+    "All previous movements, schedules, airlines and airports unchanged. COMAIR corrections and held conflicts preserved. Timetable end date, later amendments and actual operation unverified; original scans not redistributed."
+  ]
+}

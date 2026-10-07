@@ -1,0 +1,59 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_printed_schedule_pages": [
+    52,
+    53,
+    61,
+    62,
+    73,
+    74,
+    89,
+    110,
+    111,
+    154
+  ],
+  "legend_printed_page": 4,
+  "reviewed_printed_itinerary_pages": [
+    262,
+    263,
+    264,
+    265
+  ],
+  "printed_to_pdf_page": {
+    "4": 5,
+    "52": 29,
+    "53": 29,
+    "61": 33,
+    "62": 34,
+    "73": 39,
+    "74": 40,
+    "89": 47,
+    "110": 58,
+    "111": 58,
+    "154": 80,
+    "262": 134,
+    "263": 134,
+    "264": 135,
+    "265": 135
+  },
+  "new_airports": [],
+  "airport_coordinates_unchanged": true,
+  "notes": [
+    "Source page images reviewed visually; OCR used only for navigation.",
+    "No dated footnotes on accepted nonstop rows. DTW-IND connection 619/1560 has footnote 4 (effective Feb 12); excluded as a connection.",
+    "CMH-ATL 455 arrives 07:41; 249 arrives 17:44. Both visually checked at increased resolution.",
+    "IND-DTW 1560 is 19:25-20:40 X6; 1574 is 20:10-21:25 X56. 1560 cross-checked against printed 264 (CVG IND DTW), distinguishing the blurred 6 from 8.",
+    "DTW-CVG 08:00-08:51 corrected from 581 to 561; see errata_batch77.json.",
+    "DTW-IND 1699 Friday-only is 20:45-21:59; X56 is 20:55-22:10.",
+    "MKE-DTW 1574 has one stop; separately sourced MKE-IND from v79 and IND-DTW from this batch are retained with individual operating days.",
+    "FWA-IND 543 and IND-ATL 543 independently sourced. DTW-MKE 1683 and existing MKE-CLE 1683 are separate physical segments.",
+    "CLE-IND connection 1603/1140 arrives the next day; excluded and not imported as nonstop.",
+    "All accepted arrivals are on the departure local date. DTW-MKE crosses Eastern to Central standard time.",
+    "No timetable end date or later amendments verified; scheduled service is not confirmed operation."
+  ],
+  "original_scans_redistributed": false
+}

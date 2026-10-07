@@ -1,0 +1,524 @@
+{
+  "package": "v129",
+  "baseline_archive_sha256": "f3c6388ac54e71d9d49938d1e4b104e68d1cd59cd448a8e195811f0685ffb7c7",
+  "previous_movements_unchanged": 8989,
+  "previous_schedules_unchanged": 5335,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 378,
+  "previous_countries_unchanged": 119,
+  "modified_airline_ids": [],
+  "modified_previous_source_ids": [
+    "liat-wt40-19851213"
+  ],
+  "independent_manual_rows": 42,
+  "independent_utc_movements_verified": 53,
+  "independent_utc_expected": {
+    "inter-island-air-services-112-GND-CRU-0630-c7_N1-b126@1986-02-28": [
+      "1986-02-28T10:30:00Z",
+      "1986-02-28T10:50:00Z"
+    ],
+    "inter-island-air-services-112-GND-CRU-0630-c7_N1-b126@1986-03-01": [
+      "1986-03-01T10:30:00Z",
+      "1986-03-01T10:50:00Z"
+    ],
+    "inter-island-air-services-110-SVD-SLU-0700-c7_N2-b126@1986-02-28": [
+      "1986-02-28T11:00:00Z",
+      "1986-02-28T11:30:00Z"
+    ],
+    "inter-island-air-services-110-SVD-SLU-0700-c7_N2-b126@1986-03-01": [
+      "1986-03-01T11:00:00Z",
+      "1986-03-01T11:30:00Z"
+    ],
+    "inter-island-air-services-114-GND-CRU-0735-c7_N3-b126@1986-02-28": [
+      "1986-02-28T11:35:00Z",
+      "1986-02-28T11:55:00Z"
+    ],
+    "inter-island-air-services-114-GND-CRU-0735-c7_N3-b126@1986-03-01": [
+      "1986-03-01T11:35:00Z",
+      "1986-03-01T11:55:00Z"
+    ],
+    "inter-island-air-services-114-CRU-UNI-0805-c7_N3-b126@1986-02-28": [
+      "1986-02-28T12:05:00Z",
+      "1986-02-28T12:15:00Z"
+    ],
+    "inter-island-air-services-114-CRU-UNI-0805-c7_N3-b126@1986-03-01": [
+      "1986-03-01T12:05:00Z",
+      "1986-03-01T12:15:00Z"
+    ],
+    "inter-island-air-services-114-UNI-SVD-0825-c7_N3-b126@1986-02-28": [
+      "1986-02-28T12:25:00Z",
+      "1986-02-28T12:45:00Z"
+    ],
+    "inter-island-air-services-114-UNI-SVD-0825-c7_N3-b126@1986-03-01": [
+      "1986-03-01T12:25:00Z",
+      "1986-03-01T12:45:00Z"
+    ],
+    "inter-island-air-services-114-SVD-SLU-0855-c7_N3-b126@1986-02-28": [
+      "1986-02-28T12:55:00Z",
+      "1986-02-28T13:25:00Z"
+    ],
+    "inter-island-air-services-114-SVD-SLU-0855-c7_N3-b126@1986-03-01": [
+      "1986-03-01T12:55:00Z",
+      "1986-03-01T13:25:00Z"
+    ],
+    "inter-island-air-services-124-GND-CRU-1640-c7_N6-b126@1986-02-28": [
+      "1986-02-28T20:40:00Z",
+      "1986-02-28T21:00:00Z"
+    ],
+    "inter-island-air-services-124-GND-CRU-1640-c7_N6-b126@1986-03-01": [
+      "1986-03-01T20:40:00Z",
+      "1986-03-01T21:00:00Z"
+    ],
+    "inter-island-air-services-118-GND-SVD-1820-c7_N7-b126@1986-02-27": [
+      "1986-02-27T22:20:00Z",
+      "1986-02-27T22:55:00Z"
+    ],
+    "inter-island-air-services-118-GND-SVD-1820-c7_N7-b126@1986-02-28": [
+      "1986-02-28T22:20:00Z",
+      "1986-02-28T22:55:00Z"
+    ],
+    "inter-island-air-services-118-GND-SVD-1820-c7_N7-b126@1986-03-01": [
+      "1986-03-01T22:20:00Z",
+      "1986-03-01T22:55:00Z"
+    ],
+    "inter-island-air-services-118-SVD-UVF-1905-c7_N7-b126@1986-02-27": [
+      "1986-02-27T23:05:00Z",
+      "1986-02-27T23:35:00Z"
+    ],
+    "inter-island-air-services-118-SVD-UVF-1905-c7_N7-b126@1986-02-28": [
+      "1986-02-28T23:05:00Z",
+      "1986-02-28T23:35:00Z"
+    ],
+    "inter-island-air-services-118-UVF-SLU-2015-c7_N7-b126@1986-02-27": [
+      "1986-02-28T00:15:00Z",
+      "1986-02-28T00:30:00Z"
+    ],
+    "inter-island-air-services-118-UVF-SLU-2015-c7_N7-b126@1986-02-28": [
+      "1986-03-01T00:15:00Z",
+      "1986-03-01T00:30:00Z"
+    ],
+    "inter-island-air-services-113-CRU-GND-0700-c7_S1-b126@1986-02-28": [
+      "1986-02-28T11:00:00Z",
+      "1986-02-28T11:20:00Z"
+    ],
+    "inter-island-air-services-113-CRU-GND-0700-c7_S1-b126@1986-03-01": [
+      "1986-03-01T11:00:00Z",
+      "1986-03-01T11:20:00Z"
+    ],
+    "inter-island-air-services-125-SLU-UVF-0740-c7_S2-b126@1986-02-28": [
+      "1986-02-28T11:40:00Z",
+      "1986-02-28T11:55:00Z"
+    ],
+    "inter-island-air-services-125-SLU-UVF-0740-c7_S2-b126@1986-03-01": [
+      "1986-03-01T11:40:00Z",
+      "1986-03-01T11:55:00Z"
+    ],
+    "inter-island-air-services-125-UVF-SVD-0810-c7_S2-b126@1986-02-28": [
+      "1986-02-28T12:10:00Z",
+      "1986-02-28T12:40:00Z"
+    ],
+    "inter-island-air-services-125-UVF-SVD-0810-c7_S2-b126@1986-03-01": [
+      "1986-03-01T12:10:00Z",
+      "1986-03-01T12:40:00Z"
+    ],
+    "inter-island-air-services-125-SVD-UNI-0850-c7_S2-b126@1986-02-28": [
+      "1986-02-28T12:50:00Z",
+      "1986-02-28T13:10:00Z"
+    ],
+    "inter-island-air-services-125-SVD-UNI-0850-c7_S2-b126@1986-03-01": [
+      "1986-03-01T12:50:00Z",
+      "1986-03-01T13:10:00Z"
+    ],
+    "inter-island-air-services-125-UNI-CRU-0920-c7_S2-b126@1986-02-28": [
+      "1986-02-28T13:20:00Z",
+      "1986-02-28T13:30:00Z"
+    ],
+    "inter-island-air-services-125-UNI-CRU-0920-c7_S2-b126@1986-03-01": [
+      "1986-03-01T13:20:00Z",
+      "1986-03-01T13:30:00Z"
+    ],
+    "inter-island-air-services-125-CRU-GND-0940-c7_S2-b126@1986-02-28": [
+      "1986-02-28T13:40:00Z",
+      "1986-02-28T14:00:00Z"
+    ],
+    "inter-island-air-services-125-CRU-GND-0940-c7_S2-b126@1986-03-01": [
+      "1986-03-01T13:40:00Z",
+      "1986-03-01T14:00:00Z"
+    ],
+    "inter-island-air-services-125-GND-POS-1010-c7_S2-b126@1986-02-28": [
+      "1986-02-28T14:10:00Z",
+      "1986-02-28T15:00:00Z"
+    ],
+    "inter-island-air-services-125-GND-POS-1010-c7_S2-b126@1986-03-01": [
+      "1986-03-01T14:10:00Z",
+      "1986-03-01T15:00:00Z"
+    ],
+    "inter-island-air-services-115-SLU-SVD-1100-c7_S4-b126@1986-02-28": [
+      "1986-02-28T15:00:00Z",
+      "1986-02-28T15:30:00Z"
+    ],
+    "inter-island-air-services-115-SLU-SVD-1100-c7_S4-b126@1986-03-01": [
+      "1986-03-01T15:00:00Z",
+      "1986-03-01T15:30:00Z"
+    ],
+    "inter-island-air-services-115-SVD-UNI-1140-c7_S4-b126@1986-02-28": [
+      "1986-02-28T15:40:00Z",
+      "1986-02-28T16:00:00Z"
+    ],
+    "inter-island-air-services-115-SVD-UNI-1140-c7_S4-b126@1986-03-01": [
+      "1986-03-01T15:40:00Z",
+      "1986-03-01T16:00:00Z"
+    ],
+    "inter-island-air-services-115-UNI-CRU-1210-c7_S4-b126@1986-02-28": [
+      "1986-02-28T16:10:00Z",
+      "1986-02-28T16:20:00Z"
+    ],
+    "inter-island-air-services-115-UNI-CRU-1210-c7_S4-b126@1986-03-01": [
+      "1986-03-01T16:10:00Z",
+      "1986-03-01T16:20:00Z"
+    ],
+    "inter-island-air-services-115-CRU-GND-1230-c7_S4-b126@1986-02-28": [
+      "1986-02-28T16:30:00Z",
+      "1986-02-28T16:50:00Z"
+    ],
+    "inter-island-air-services-115-CRU-GND-1230-c7_S4-b126@1986-03-01": [
+      "1986-03-01T16:30:00Z",
+      "1986-03-01T16:50:00Z"
+    ],
+    "inter-island-air-services-117-BGI-MQS-1540-c7_S6-b126@1986-02-28": [
+      "1986-02-28T19:40:00Z",
+      "1986-02-28T20:35:00Z"
+    ],
+    "inter-island-air-services-117-BGI-MQS-1540-c7_S6-b126@1986-03-01": [
+      "1986-03-01T19:40:00Z",
+      "1986-03-01T20:35:00Z"
+    ],
+    "inter-island-air-services-117-MQS-UNI-1645-c7_S6-b126@1986-02-28": [
+      "1986-02-28T20:45:00Z",
+      "1986-02-28T21:00:00Z"
+    ],
+    "inter-island-air-services-117-MQS-UNI-1645-c7_S6-b126@1986-03-01": [
+      "1986-03-01T20:45:00Z",
+      "1986-03-01T21:00:00Z"
+    ],
+    "inter-island-air-services-117-UNI-CRU-1710-c7_S6-b126@1986-02-28": [
+      "1986-02-28T21:10:00Z",
+      "1986-02-28T21:20:00Z"
+    ],
+    "inter-island-air-services-117-UNI-CRU-1710-c7_S6-b126@1986-03-01": [
+      "1986-03-01T21:10:00Z",
+      "1986-03-01T21:20:00Z"
+    ],
+    "inter-island-air-services-123-CRU-GND-1710-c7_S7-b126@1986-02-28": [
+      "1986-02-28T21:10:00Z",
+      "1986-02-28T21:30:00Z"
+    ],
+    "inter-island-air-services-123-CRU-GND-1710-c7_S7-b126@1986-03-01": [
+      "1986-03-01T21:10:00Z",
+      "1986-03-01T21:30:00Z"
+    ],
+    "inter-island-air-services-119-SLU-SVD-2040-c7_S8-b126@1986-02-27": [
+      "1986-02-28T00:40:00Z",
+      "1986-02-28T01:10:00Z"
+    ],
+    "inter-island-air-services-119-SLU-SVD-2040-c7_S8-b126@1986-02-28": [
+      "1986-03-01T00:40:00Z",
+      "1986-03-01T01:10:00Z"
+    ]
+  },
+  "independent_local_source_dates": {
+    "inter-island-air-services-112-GND-CRU-0630-c7_N1-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-110-SVD-SLU-0700-c7_N2-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-114-GND-CRU-0735-c7_N3-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-114-CRU-UNI-0805-c7_N3-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-114-UNI-SVD-0825-c7_N3-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-114-SVD-SLU-0855-c7_N3-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-120-GND-UNI-1100-c7_N4-b126": [],
+    "inter-island-air-services-120-UNI-MQS-1135-c7_N4-b126": [],
+    "inter-island-air-services-120-MQS-SVD-1200-c7_N4-b126": [],
+    "inter-island-air-services-120-SVD-UVF-1300-c7_N4-b126": [],
+    "inter-island-air-services-120-UVF-SLU-1340-c7_N4-b126": [],
+    "inter-island-air-services-124-GND-CRU-1640-c7_N6-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-118-GND-SVD-1820-c7_N7-b126": [
+      "1986-02-27",
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-118-SVD-UVF-1905-c7_N7-b126": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "inter-island-air-services-118-UVF-SLU-2015-c7_N7-b126": [
+      "1986-02-27",
+      "1986-02-28"
+    ],
+    "inter-island-air-services-113-CRU-GND-0700-c7_S1-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-125-SLU-UVF-0740-c7_S2-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-125-UVF-SVD-0810-c7_S2-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-125-SVD-UNI-0850-c7_S2-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-125-UNI-CRU-0920-c7_S2-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-125-CRU-GND-0940-c7_S2-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-125-GND-POS-1010-c7_S2-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-125-SLU-UVF-0740-c7_S3-b126": [],
+    "inter-island-air-services-125-UVF-SVD-0810-c7_S3-b126": [],
+    "inter-island-air-services-125-SVD-UNI-0850-c7_S3-b126": [],
+    "inter-island-air-services-125-UNI-CRU-0920-c7_S3-b126": [],
+    "inter-island-air-services-125-CRU-GND-0940-c7_S3-b126": [],
+    "inter-island-air-services-115-SLU-SVD-1100-c7_S4-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-115-SVD-UNI-1140-c7_S4-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-115-UNI-CRU-1210-c7_S4-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-115-CRU-GND-1230-c7_S4-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-121-SLU-UVF-1430-c7_S5-b126": [],
+    "inter-island-air-services-121-UVF-SVD-1500-c7_S5-b126": [],
+    "inter-island-air-services-121-SVD-MQS-1540-c7_S5-b126": [],
+    "inter-island-air-services-121-MQS-UNI-1610-c7_S5-b126": [],
+    "inter-island-air-services-121-UNI-CRU-1635-c7_S5-b126": [],
+    "inter-island-air-services-121-CRU-GND-1655-c7_S5-b126": [],
+    "inter-island-air-services-117-BGI-MQS-1540-c7_S6-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-117-MQS-UNI-1645-c7_S6-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-117-UNI-CRU-1710-c7_S6-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-123-CRU-GND-1710-c7_S7-b126": [
+      "1986-02-28",
+      "1986-03-01"
+    ],
+    "inter-island-air-services-119-SLU-SVD-2040-c7_S8-b126": [
+      "1986-02-27",
+      "1986-02-28"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "same_source_cross_operator_duplicate_movements": 0,
+  "adjacent_source_leg_ground_times": [
+    [
+      "inter-island-air-services-118-GND-SVD-1820-c7_N7-b126@1986-02-27",
+      "inter-island-air-services-118-SVD-UVF-1905-c7_N7-b126@1986-02-27",
+      10.0
+    ],
+    [
+      "inter-island-air-services-118-SVD-UVF-1905-c7_N7-b126@1986-02-27",
+      "inter-island-air-services-118-UVF-SLU-2015-c7_N7-b126@1986-02-27",
+      40.0
+    ],
+    [
+      "inter-island-air-services-118-GND-SVD-1820-c7_N7-b126@1986-02-28",
+      "inter-island-air-services-118-SVD-UVF-1905-c7_N7-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-118-SVD-UVF-1905-c7_N7-b126@1986-02-28",
+      "inter-island-air-services-118-UVF-SLU-2015-c7_N7-b126@1986-02-28",
+      40.0
+    ],
+    [
+      "inter-island-air-services-114-GND-CRU-0735-c7_N3-b126@1986-02-28",
+      "inter-island-air-services-114-CRU-UNI-0805-c7_N3-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-114-CRU-UNI-0805-c7_N3-b126@1986-02-28",
+      "inter-island-air-services-114-UNI-SVD-0825-c7_N3-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-114-UNI-SVD-0825-c7_N3-b126@1986-02-28",
+      "inter-island-air-services-114-SVD-SLU-0855-c7_N3-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-114-GND-CRU-0735-c7_N3-b126@1986-03-01",
+      "inter-island-air-services-114-CRU-UNI-0805-c7_N3-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-114-CRU-UNI-0805-c7_N3-b126@1986-03-01",
+      "inter-island-air-services-114-UNI-SVD-0825-c7_N3-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-114-UNI-SVD-0825-c7_N3-b126@1986-03-01",
+      "inter-island-air-services-114-SVD-SLU-0855-c7_N3-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-SLU-UVF-0740-c7_S2-b126@1986-02-28",
+      "inter-island-air-services-125-UVF-SVD-0810-c7_S2-b126@1986-02-28",
+      15.0
+    ],
+    [
+      "inter-island-air-services-125-UVF-SVD-0810-c7_S2-b126@1986-02-28",
+      "inter-island-air-services-125-SVD-UNI-0850-c7_S2-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-SVD-UNI-0850-c7_S2-b126@1986-02-28",
+      "inter-island-air-services-125-UNI-CRU-0920-c7_S2-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-UNI-CRU-0920-c7_S2-b126@1986-02-28",
+      "inter-island-air-services-125-CRU-GND-0940-c7_S2-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-CRU-GND-0940-c7_S2-b126@1986-02-28",
+      "inter-island-air-services-125-GND-POS-1010-c7_S2-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-SLU-UVF-0740-c7_S2-b126@1986-03-01",
+      "inter-island-air-services-125-UVF-SVD-0810-c7_S2-b126@1986-03-01",
+      15.0
+    ],
+    [
+      "inter-island-air-services-125-UVF-SVD-0810-c7_S2-b126@1986-03-01",
+      "inter-island-air-services-125-SVD-UNI-0850-c7_S2-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-SVD-UNI-0850-c7_S2-b126@1986-03-01",
+      "inter-island-air-services-125-UNI-CRU-0920-c7_S2-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-UNI-CRU-0920-c7_S2-b126@1986-03-01",
+      "inter-island-air-services-125-CRU-GND-0940-c7_S2-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-125-CRU-GND-0940-c7_S2-b126@1986-03-01",
+      "inter-island-air-services-125-GND-POS-1010-c7_S2-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-115-SLU-SVD-1100-c7_S4-b126@1986-02-28",
+      "inter-island-air-services-115-SVD-UNI-1140-c7_S4-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-115-SVD-UNI-1140-c7_S4-b126@1986-02-28",
+      "inter-island-air-services-115-UNI-CRU-1210-c7_S4-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-115-UNI-CRU-1210-c7_S4-b126@1986-02-28",
+      "inter-island-air-services-115-CRU-GND-1230-c7_S4-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-115-SLU-SVD-1100-c7_S4-b126@1986-03-01",
+      "inter-island-air-services-115-SVD-UNI-1140-c7_S4-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-115-SVD-UNI-1140-c7_S4-b126@1986-03-01",
+      "inter-island-air-services-115-UNI-CRU-1210-c7_S4-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-115-UNI-CRU-1210-c7_S4-b126@1986-03-01",
+      "inter-island-air-services-115-CRU-GND-1230-c7_S4-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-117-BGI-MQS-1540-c7_S6-b126@1986-02-28",
+      "inter-island-air-services-117-MQS-UNI-1645-c7_S6-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-117-MQS-UNI-1645-c7_S6-b126@1986-02-28",
+      "inter-island-air-services-117-UNI-CRU-1710-c7_S6-b126@1986-02-28",
+      10.0
+    ],
+    [
+      "inter-island-air-services-117-BGI-MQS-1540-c7_S6-b126@1986-03-01",
+      "inter-island-air-services-117-MQS-UNI-1645-c7_S6-b126@1986-03-01",
+      10.0
+    ],
+    [
+      "inter-island-air-services-117-MQS-UNI-1645-c7_S6-b126@1986-03-01",
+      "inter-island-air-services-117-UNI-CRU-1710-c7_S6-b126@1986-03-01",
+      10.0
+    ]
+  ],
+  "ground_times_reviewed": true,
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "Data,53 independent UTC intervals,Sunday variants,30 ground transitions,cross-page duplicates and prior-object preservation checks passed; all automated checks passed; Unreal not run.",
+  "new_ground_transitions_reviewed": 30,
+  "new_ground_chain_patterns": 15,
+  "ground_minutes_histogram": {
+    "10": 26,
+    "40": 2,
+    "15": 2
+  },
+  "ground_time_review_note": "30 dated transitions on15 chains visually checked against IAS scan7;10minutes26times,15minutes2times,40minutes2times. No individual aircraft identity inferred.",
+  "zero_movement_schedules_reviewed": true,
+  "sunday_variant_separation_reviewed": true,
+  "li117_partial_chain_reviewed": true,
+  "li117_erratum_reviewed": true,
+  "st_thomas_total_verified": 14
+}

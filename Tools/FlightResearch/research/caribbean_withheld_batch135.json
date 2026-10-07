@@ -1,0 +1,69 @@
+{
+  "package": "v138",
+  "prior_holds_retained_from": "caribbean_withheld_batch134.json",
+  "previous_held_reports_preserved_as_history": true,
+  "new_conflicting_accepted_rows": [],
+  "excluded_through_rows": [],
+  "linked_through_summaries_outside_selected_headings": [
+    {
+      "scan_page": 5,
+      "column": 1,
+      "flight": "551",
+      "origin": "MEM",
+      "destination": "SAN",
+      "departure": "08:55",
+      "arrival": "11:55",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; physical LAS legs represented separately. Not an extra nonstop movement; outside36selected headings."
+    },
+    {
+      "scan_page": 5,
+      "column": 1,
+      "flight": "553",
+      "origin": "MEM",
+      "destination": "SAN",
+      "departure": "12:05",
+      "arrival": "15:05",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; physical LAS legs represented separately. Not an extra nonstop movement; outside36selected headings."
+    },
+    {
+      "scan_page": 6,
+      "column": 1,
+      "flight": "552",
+      "origin": "SAN",
+      "destination": "MEM",
+      "departure": "12:25",
+      "arrival": "18:50",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; physical LAS legs represented separately. Not an extra nonstop movement; outside36selected headings."
+    },
+    {
+      "scan_page": 6,
+      "column": 1,
+      "flight": "550",
+      "origin": "SAN",
+      "destination": "MEM",
+      "departure": "15:35",
+      "arrival": "22:00",
+      "ST": 1,
+      "reason": "Through itinerary with intermediate stop; physical LAS legs represented separately. Not an extra nonstop movement; outside36selected headings."
+    }
+  ],
+  "zero_movement_schedules": [
+    "republic-airlines-531-DTW-LAS-1930-b135"
+  ],
+  "zero_movement_reason": "531DTW–LAS Saturday19:30EST afterSaturday17:21:30EST window end. Remains a reviewed catalog schedule.",
+  "EXP_policy": "Separate Express AirlinesI/Simmons operators explicitly identified in scan6. NoEXP rows selected.",
+  "new_regional_search_performed": false,
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "remaining_republic_gaps": [
+    "Remaining mainline network, including otherDetroit spokes andMinneapolis; separately attributedEXP.",
+    "Separately printed SFO–SMF/SMF–SFO legs remain future work; no inferred nonstopMEM–SMF.",
+    "Amendments and actual-operation evidence.",
+    "Earlier withheld841MOB–GPT missing physical row remains unchanged."
+  ]
+}

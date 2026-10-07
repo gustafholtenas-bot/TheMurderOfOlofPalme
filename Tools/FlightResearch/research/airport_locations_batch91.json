@@ -1,0 +1,32 @@
+{
+  "package": "v94",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "BHM",
+      "name": "Birmingham Municipal Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 33.562877,
+      "lon": -86.750712,
+      "coordinate_source": "https://ourairports.com/airports/KBHM/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flybirmingham.com/95thanniversary/",
+      "historical_location_note": "Delta directory p260 identifies Birmingham Municipal. The airport authority describes the airport opened in 1931 and renamed International in 1993, then Shuttlesworth in 2008. Current coordinates mark the approximate historical airport area, not a reconstructed 1986 terminal or runway."
+    },
+    {
+      "id": "MGM",
+      "name": "Montgomery Dannelly Field (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 32.300598,
+      "lon": -86.393997,
+      "coordinate_source": "https://ourairports.com/airports/KMGM/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flymgm.com/our-history/",
+      "historical_location_note": "Delta directory p261 identifies Dannelly Field. The airport authority records its opening in 1943 and air service from 1946, later renamed Montgomery Regional. Current coordinates mark the approximate airport area, not earlier Gunter/Maxwell fields or a reconstructed 1986 terminal/runway."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as an approximate airport-area marker; historical site independently reviewed.",
+  "historical_scope": "Birmingham Municipal and Montgomery Dannelly Field; approximate existing airport sites with period names. No precise 1986 terminal/gate/runway reconstruction."
+}

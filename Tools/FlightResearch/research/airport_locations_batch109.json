@@ -1,0 +1,40 @@
+{
+  "checked_on": "2026-10-01",
+  "airports": [
+    {
+      "id": "HYA",
+      "name": "Hyannis–Barnstable County (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 41.6693372,
+      "lon": -70.2803592,
+      "coordinate_source": "https://www.airnav.com/airport/HYA",
+      "coordinate_record_id": "KHYA",
+      "timetable_code": "HYA",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/HYA"
+      ],
+      "location_note": "Delta printed p.260 identifies this historical city, airport name and code. AirNav FAA metadata matches the named airfield and gives an activation date before 1986; this metadata is not used as an exact historical opening date. Current estimated FAA reference coordinates provide approximate same-airfield markers, not reconstructed 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "TTN",
+      "name": "Trenton–Mercer County (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 40.2766944,
+      "lon": -74.8134722,
+      "coordinate_source": "https://www.airnav.com/airport/TTN",
+      "coordinate_record_id": "KTTN",
+      "timetable_code": "TTN",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/TTN"
+      ],
+      "location_note": "Delta printed p.261 identifies this historical city, airport name and code. AirNav FAA metadata matches the named airfield and gives an activation date before 1986; this metadata is not used as an exact historical opening date. Current estimated FAA reference coordinates provide approximate same-airfield markers, not reconstructed 1986 gates, runway thresholds, layouts or aircraft positions."
+    }
+  ],
+  "marker_precision": "Approximate same-airfield positions; 1986 gates, runway thresholds and layouts not reconstructed."
+}

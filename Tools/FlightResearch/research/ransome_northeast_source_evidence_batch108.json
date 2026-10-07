@@ -1,0 +1,61 @@
+{
+  "source": "delta-19860201",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "effective_from": "1986-02-01",
+  "effective_to": null,
+  "later_amendments_verified": false,
+  "visual_review": true,
+  "reviewed_printed_pages": [
+    8,
+    31,
+    32,
+    33,
+    37,
+    101,
+    134,
+    173,
+    174,
+    176,
+    197,
+    199,
+    200
+  ],
+  "legend_printed_page": 4,
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "printed_to_pdf_page_rule": "PDF page floor((printed page + 6) / 2); even printed page left, odd right.",
+  "row_scope": "All explicit Ransome nonstop rows in 16 selected city-direction headings, resolving to 20 directed airport pairs. Delta mainline, connecting and through rows with stops excluded from this operator-specific selection.",
+  "row_count": 108,
+  "accepted_nonstop_rows": 108,
+  "city_direction_headings": 16,
+  "directed_airport_pairs": 20,
+  "operator_identification": "Printed p.4: 1750–1874 operated by Ransome Airlines, including 1874 BOS–PWM. The adjacent 1875–1999 Rio range is distinct.",
+  "frequency_legend": "D encodes blank/daily; X excludes weekdays, 1 Monday through 7 Sunday. Star is an off-peak fare symbol, not a date rollover.",
+  "timezones_fixed_hours_for_import_dates": {
+    "ALB": -5,
+    "BDL": -5,
+    "BOS": -5,
+    "BTV": -5,
+    "EWR": -5,
+    "ISP": -5,
+    "JFK": -5,
+    "LGA": -5,
+    "PVD": -5,
+    "PWM": -5
+  },
+  "dated_footnotes_on_selected_rows": [],
+  "special_cases": {
+    "New York": "L=LaGuardia, J=Kennedy, E=Newark. Printed suffixes retained in TSV and validated against decoded endpoints.",
+    "Weekend_only": "1754 BTV–BOS, 1760 BOS–ISP, 1759 ISP–BOS, 1753 PWM–BOS and 1777 PVD–BOS are Sunday-only and outside the Thursday–Saturday window. JFK–PVD 1752 operates weekends but Saturday departs after the window end.",
+    "Through_rows": "BOS–New York 1757/1815/1827/1849 have a stop at PVD, with separately printed BOS–PVD and PVD–JFK legs. LGA–PVD 1784 has one stop at BDL and is imported as LGA–BDL plus BDL–PVD. These through itineraries do not create extra nonstop movements.",
+    "Weekdays": "BTV–BOS 1831 excludes Saturday but BOS–ISP 1831 runs daily. BOS–PVD 1801 excludes Saturday/Sunday whereas BTV–BOS 1801 excludes Sunday only. Each leg keeps its own weekdays.",
+    "Odd_minutes": "BOS–BTV 1777 departs 12:13, LGA–ALB 1865 at 12:29 and 1798 at 14:57, BOS–PVD 1827 at 15:51; original minutes retained.",
+    "aircraft": "No flight-specific aircraft type or registration assigned from generic operator equipment legends.",
+    "airport_locations": "Five historical-airfield markers, using historical names and approximate current estimated FAA reference coordinates, not reconstructed 1986 positions."
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "package": "v133",
+  "aggregate_examples_not_duplicated": [
+    {
+      "edition": "J",
+      "inside": 1,
+      "column": 2,
+      "flight": "1208",
+      "origin": "RSW",
+      "destination": "TPA",
+      "departure": "06:40",
+      "arrival": "07:40",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 1,
+      "column": 4,
+      "flight": "1051",
+      "origin": "JAX",
+      "destination": "TPA",
+      "departure": "11:30",
+      "arrival": "12:59",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 3,
+      "column": 1,
+      "flight": "1042",
+      "origin": "APF",
+      "destination": "TPA",
+      "departure": "20:10",
+      "arrival": "21:35",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "J",
+      "inside": 4,
+      "column": 2,
+      "flight": "1213",
+      "origin": "TPA",
+      "destination": "APF",
+      "departure": "20:10",
+      "arrival": "21:25",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 2,
+      "flight": "1208",
+      "origin": "RSW",
+      "destination": "TPA",
+      "departure": "06:40",
+      "arrival": "07:40",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 3,
+      "flight": "1209",
+      "origin": "JAX",
+      "destination": "SRQ",
+      "departure": "09:30",
+      "arrival": "11:45",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 1,
+      "column": 3,
+      "flight": "1211",
+      "origin": "JAX",
+      "destination": "RSW",
+      "departure": "13:25",
+      "arrival": "15:30",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 2,
+      "column": 4,
+      "flight": "1042",
+      "origin": "APF",
+      "destination": "TPA",
+      "departure": "20:10",
+      "arrival": "21:35",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 2,
+      "column": 6,
+      "flight": "1213",
+      "origin": "TPA",
+      "destination": "APF",
+      "departure": "20:10",
+      "arrival": "21:25",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    },
+    {
+      "edition": "M",
+      "inside": 2,
+      "column": 6,
+      "flight": "801",
+      "origin": "TLH",
+      "destination": "PBI",
+      "departure": "06:45",
+      "arrival": "09:20",
+      "printed_stops": 1,
+      "action": "Not imported as nonstop or duplicated over physical legs"
+    }
+  ],
+  "aggregate_list_exhaustive": false,
+  "connection_rows": "Slash-number and airport-connection rows excluded. No flight inferred from route-map lines or difference between through-itinerary times.",
+  "zero_movement_schedules": [
+    "pba-provincetown-boston-m-1020-APF-TPA-0650-b130",
+    "pba-provincetown-boston-m-1021-TPA-APF-0815-b130",
+    "pba-provincetown-boston-m-1037-TPA-APF-1823-b130",
+    "pba-provincetown-boston-m-1042-RSW-TPA-2050-b130",
+    "pba-provincetown-boston-m-1043-TPA-APF-2225-b130",
+    "pba-provincetown-boston-m-1047-TPA-SRQ-0825-b130",
+    "pba-provincetown-boston-m-1048-SRQ-TPA-0900-b130",
+    "pba-provincetown-boston-m-1054-SRQ-TPA-1800-b130",
+    "pba-provincetown-boston-m-1076-RSW-TPA-1805-b130",
+    "pba-provincetown-boston-m-1076-TPA-JAX-1930-b130",
+    "pba-provincetown-boston-m-1091-TPA-SRQ-2005-b130",
+    "pba-provincetown-boston-m-1207-JAX-TPA-0645-b130",
+    "pba-provincetown-boston-m-1207-TPA-RSW-0800-b130",
+    "pba-provincetown-boston-m-1208-SRQ-TPA-0715-b130",
+    "pba-provincetown-boston-m-1208-TPA-JAX-0805-b130",
+    "pba-provincetown-boston-m-1213-JAX-TPA-1835-b130",
+    "pba-provincetown-boston-m-1213-TPA-RSW-2010-b130",
+    "pba-provincetown-boston-m-1265-JAX-PBI-0620-b130",
+    "pba-provincetown-boston-m-1266-PBI-JAX-0820-b130",
+    "pba-provincetown-boston-m-1271-JAX-PBI-1820-b130",
+    "pba-provincetown-boston-m-1272-PBI-JAX-2020-b130",
+    "pba-provincetown-boston-m-800-TPA-TLH-0755-b130",
+    "pba-provincetown-boston-m-801-TLH-TPA-0645-b130",
+    "pba-provincetown-boston-m-806-TPA-TLH-1805-b130",
+    "pba-provincetown-boston-m-807-TPA-PBI-1750-b130",
+    "pba-provincetown-boston-m-808-PBI-TPA-1915-b130",
+    "pba-provincetown-boston-m-940-TLH-JAX-0515-b130",
+    "pba-provincetown-boston-m-944-TLH-JAX-1835-b130",
+    "pba-provincetown-boston-m-945-JAX-TLH-2005-b130",
+    "pba-provincetown-boston-m-946-TLH-JAX-2200-b130",
+    "pba-provincetown-boston-m-956-DAB-JAX-1900-b130",
+    "pba-provincetown-boston-m-957-JAX-DAB-2005-b130",
+    "pba-provincetown-boston-m-958-DAB-JAX-2225-b130",
+    "pba-provincetown-boston-m-959-JAX-DAB-2335-b130",
+    "pba-provincetown-boston-m-968-GNV-JAX-1905-b130",
+    "pba-provincetown-boston-m-969-JAX-GNV-2010-b130",
+    "pba-provincetown-boston-m-970-GNV-JAX-2230-b130",
+    "pba-provincetown-boston-m-971-JAX-GNV-2340-b130",
+    "pba-provincetown-boston-m-972-MLB-JAX-2155-b130",
+    "pba-provincetown-boston-m-973-JAX-MLB-2335-b130"
+  ],
+  "zero_movement_reason": "40 March-edition rows: explicit Saturday exclusion and/or departure after17:21:30 local. No February backdating.",
+  "zero_movement_directed_pairs": [
+    [
+      "MLB",
+      "JAX"
+    ],
+    [
+      "JAX",
+      "MLB"
+    ]
+  ],
+  "new_source_leads_without_import": [
+    {
+      "name": "TACA",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/ta.htm"
+      ],
+      "result": "Examined timetable-image index has 1981 and 1990 examples around the target period, not an obtained complete1986 clock table. No operational import."
+    },
+    {
+      "name": "Aviateca",
+      "urls": [
+        "https://www.airtimes.com/cgat/gt/aviateca.htm"
+      ],
+      "result": "Reviewed index lists1979 then1987 for nearby system holdings; no applicable1986 interior obtained. Not evidence that no such issue existed."
+    },
+    {
+      "name": "TAN SAHSA 1986 archival lead",
+      "urls": [
+        "https://archives.museumofflight.org/repositories/2/archival_objects/18066"
+      ],
+      "result": "Museum of Flight search result identifies a1986 holding in a finding aid. Direct page fetch timed out and no scanned timetable clocks were obtained. Research lead only; no import."
+    },
+    {
+      "name": "Eastern January1,1986 Canada card",
+      "urls": [
+        "https://www.ebay.com/itm/276151908290"
+      ],
+      "result": "Listing metadata for a Montreal/Toronto/Ottawa timetable card; not a StThomas or Nicaragua clock source. No purchase or import."
+    },
+    {
+      "name": "Nicaragua and StThomas",
+      "urls": [
+        "https://www.timetableimages.com/ttimages/rl3.htm"
+      ],
+      "result": "Targeted searches yielded no new complete applicable clock table. Later1986 news,1987 simulation plans and1989 schedules are not substituted for February/March1986 evidence."
+    }
+  ],
+  "prior_holds_retained_from": "caribbean_withheld_batch129.json",
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_reports_preserved_as_history": true
+}

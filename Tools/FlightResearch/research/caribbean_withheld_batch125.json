@@ -1,0 +1,82 @@
+{
+  "package": "v128",
+  "held_rows": [
+    {
+      "route": "25 selected schedules without window movements",
+      "decision": "reviewed_no_window_movement",
+      "schedules": [
+        "four-island-air-140-ANU-AXA-1655-c6_N12-b125",
+        "four-island-air-140-ANU-AXA-1830-c6_N20-b125",
+        "four-island-air-141-AXA-ANU-1805-c6_S14-b125",
+        "four-island-air-141-AXA-ANU-1935-c6_S18-b125",
+        "four-island-air-144-SKB-AXA-1745-c6_N14-b125",
+        "four-island-air-145-AXA-SKB-1825-c6_S15-b125",
+        "four-island-air-163-NEV-ANU-1330-c6_S7-b125",
+        "four-island-air-163-SKB-NEV-1315-c6_S7-b125",
+        "four-island-air-164-ANU-NEV-1800-c6_N15-b125",
+        "four-island-air-164-ANU-NEV-1830-c6_N19-b125",
+        "four-island-air-164-NEV-SKB-1835-c6_N15-b125",
+        "four-island-air-164-NEV-SKB-1905-c6_N19-b125",
+        "four-island-air-165-NEV-ANU-1720-c6_S11-b125",
+        "four-island-air-165-NEV-ANU-1935-c6_S16-b125",
+        "four-island-air-165-SKB-NEV-1705-c6_S11-b125",
+        "four-island-air-165-SKB-NEV-1920-c6_S16-b125",
+        "four-island-air-166-ANU-NEV-1610-c6_N9-b125",
+        "four-island-air-166-NEV-SKB-1645-c6_N9-b125",
+        "four-island-air-168-ANU-NEV-1000-c6_N3-b125",
+        "four-island-air-169-NEV-ANU-1345-c6_S5-b125",
+        "four-island-air-169-STX-NEV-1225-c6_S5-b125",
+        "montserrat-air-services-584-MNI-SKB-0810-c8_N3-b125",
+        "montserrat-air-services-585-SKB-MNI-0850-c8_S4-b125",
+        "montserrat-air-services-588-MNI-SKB-1650-c8_N12-b125",
+        "montserrat-air-services-589-SKB-MNI-1730-c8_S14-b125"
+      ],
+      "reason": "Correct weekdays and exact interval overlap yield zero. Includes Sunday/Monday-only services, Thursday daytime flights, and Saturday evening after window."
+    },
+    {
+      "route": "FIA LI168 NEV–STX, scan6 northbound column3",
+      "decision": "unexplained_asterisk_no_runtime_import",
+      "reason": "Asterisk at StKitts row and STX arrival label; no accepted explanation of stop condition. Do not infer nonstop or invent intermediate clocks. Unambiguous ANU–NEV first leg reviewed but has zero movements."
+    },
+    {
+      "route": "FIA LI168/169 Saturday columns4N/6S",
+      "decision": "expired_jan25_not_imported",
+      "reason": "Saturday variants end25January; do not create1March flights."
+    },
+    {
+      "route": "FIA LI166/164/165 and LI140/141 January variants",
+      "decision": "expired_jan31_not_imported",
+      "reason": "Use explicit February1 replacement columns. LI140/141 TuesdayFriday becomesTuesdaySaturday, whose Saturday departure is after window; LI164/165 Saturday afternoon moves to evening after window."
+    },
+    {
+      "route": "MAS LI1594/1595",
+      "decision": "seasonal_period_excludes_target",
+      "reason": "15December–15January and27March–6April only. No February movements."
+    },
+    {
+      "route": "MAS LI1592/1593",
+      "decision": "friday_variants_kept_separate",
+      "reason": "Friday clocks differ from daily-except-Friday clocks. No double application on Friday."
+    },
+    {
+      "route": "IAS LI117/126",
+      "decision": "prior_route_equipment_operator_conflicts_retained",
+      "reason": "Main table and IAS page7 disagree; no IAS rows imported."
+    },
+    {
+      "route": "FIA charter advertisement",
+      "decision": "no_dated_movement_import",
+      "reason": "General availability for charter is not a dated flight record."
+    },
+    {
+      "route": "Nicaragua and StThomas other operators",
+      "decision": "still_open",
+      "reason": "No additional applicable exact clocks in these pages."
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_decisions_unchanged": true
+}

@@ -1,0 +1,21 @@
+{
+  "package": "v114",
+  "source": "delta-19860201",
+  "rows": [
+    {
+      "airline": "delta",
+      "flight": "391",
+      "origin": "ORD",
+      "destination": "MSP",
+      "printed_page": 48,
+      "printed_departure": "700a",
+      "printed_arrival": "806a",
+      "printed_frequency": "X7",
+      "stops": 0,
+      "footnote": "8",
+      "row_effective_from": "1986-03-03",
+      "action": "excluded_outside_window",
+      "reason": "Starts after the entire import period. The daily footnote-14 variant ending 1 March is imported instead."
+    }
+  ]
+}

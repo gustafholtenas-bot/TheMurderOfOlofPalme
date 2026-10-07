@@ -1,0 +1,44 @@
+{
+  "package": "v89",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "BUF",
+      "name": "Greater Buffalo International Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 42.940498,
+      "lon": -78.732201,
+      "coordinate_source": "https://ourairports.com/airports/KBUF/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.buffaloairport.com/airport-info/celebrating-100-years",
+      "historical_location_note": "The airport authority history identifies the Cheektowaga site, acquired in 1925 and opened in 1926, and the Greater Buffalo International name from 1959. The present terminal and Buffalo Niagara name date from 1997, after the imported period. Modern OurAirports coordinates are an approximate airport-area marker, not a reconstruction of a 1986 terminal, gate, runway or aircraft position."
+    },
+    {
+      "id": "CAK",
+      "name": "Akron–Canton Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 40.9161,
+      "lon": -81.4422,
+      "coordinate_source": "https://ourairports.com/airports/KCAK/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.akroncantonairport.com/home/business/about-cak/history/",
+      "historical_location_note": "The airport authority history identifies the Summit County site south of Greensburg–Greentown Road, dedicated in 1946; airlines moved here from the separate Akron Municipal airport in 1948. This marker represents CAK, not Akron Fulton/AKC. Modern OurAirports coordinates are an approximate airport-area marker, not a reconstruction of a 1986 terminal, gate, runway or aircraft position."
+    },
+    {
+      "id": "EVV",
+      "name": "Evansville Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 38.036999,
+      "lon": -87.532402,
+      "coordinate_source": "https://ourairports.com/airports/KEVV/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://s3.us-east-1.amazonaws.com/s3.flyevv.com/documents/master-plan/evv-airport-master-plan-Introduction.pdf",
+      "historical_location_note": "The airport authority draft master plan introduction (July 2023), printed pp1-4–1-5, identifies the airport built in 1928 along US41 in northern Vanderburgh County. Its later ten-gate terminal opened in 1988 and is not projected back to 1986. Modern OurAirports coordinates are an approximate airport-area marker, not a reconstruction of a 1986 terminal, gate, runway or aircraft position."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical site and terminal dates independently reviewed.",
+  "historical_scope": "Buffalo Cheektowaga site, Akron–Canton/CAK not Akron Fulton/AKC, Evansville airport site. No precise1986 terminal/gate/runway reconstruction."
+}

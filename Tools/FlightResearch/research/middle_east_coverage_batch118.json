@@ -1,0 +1,329 @@
+{
+  "package": "v121",
+  "scope": "Broad Middle East research scope including Egypt, Turkey and Cyprus; North/South Yemen separate in1986. External endpoints included only as counterpart airfields.",
+  "countries": [
+    {
+      "id": "eg",
+      "name": "Egypten",
+      "before": {
+        "movements": 3,
+        "directed_pairs": 3,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 3,
+        "directed_pairs": 3,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "il",
+      "name": "Israel",
+      "before": {
+        "movements": 7,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 26,
+        "directed_pairs": 23,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 19,
+      "coverage_complete": false
+    },
+    {
+      "id": "jo",
+      "name": "Jordanien",
+      "before": {
+        "movements": 3,
+        "directed_pairs": 3,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 3,
+        "directed_pairs": 3,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "lb",
+      "name": "Libanon",
+      "before": {
+        "movements": 5,
+        "directed_pairs": 3,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 5,
+        "directed_pairs": 3,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "sy",
+      "name": "Syrien",
+      "before": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "iq",
+      "name": "Irak",
+      "before": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ir",
+      "name": "Iran",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "sa",
+      "name": "Saudiarabien",
+      "before": {
+        "movements": 13,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 13,
+        "directed_pairs": 12,
+        "airports": 2,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "kw",
+      "name": "Kuwait",
+      "before": {
+        "movements": 1,
+        "directed_pairs": 1,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 1,
+        "directed_pairs": 1,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "bh",
+      "name": "Bahrain",
+      "before": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "qa",
+      "name": "Qatar",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ae",
+      "name": "Förenade arabemiraten",
+      "before": {
+        "movements": 1,
+        "directed_pairs": 1,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 1,
+        "directed_pairs": 1,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "om",
+      "name": "Oman",
+      "before": {
+        "movements": 4,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 4,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ye-north",
+      "name": "Nordjemen",
+      "before": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 0,
+        "directed_pairs": 0,
+        "airports": 0,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "ye-south",
+      "name": "Sydjemen",
+      "before": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 2,
+        "directed_pairs": 2,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    },
+    {
+      "id": "tr",
+      "name": "Turkiet",
+      "before": {
+        "movements": 8,
+        "directed_pairs": 4,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 10,
+        "directed_pairs": 6,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 2,
+      "coverage_complete": false
+    },
+    {
+      "id": "cy",
+      "name": "Cypern",
+      "before": {
+        "movements": 1,
+        "directed_pairs": 1,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "after": {
+        "movements": 1,
+        "directed_pairs": 1,
+        "airports": 1,
+        "domestic_movements": 0
+      },
+      "added_movements": 0,
+      "coverage_complete": false
+    }
+  ],
+  "before": {
+    "movements": 53,
+    "directed_pairs": 43,
+    "airports": 15,
+    "domestic_movements": 0
+  },
+  "after": {
+    "movements": 72,
+    "directed_pairs": 62,
+    "airports": 15,
+    "domestic_movements": 0
+  },
+  "unique_added_movements": 19,
+  "global_batch_movements": 19,
+  "coverage_complete": false,
+  "operator_census_complete": false,
+  "counting": "Physical endpoint movements, counted once for the whole area. Individual country rows overlap and must not be summed; no overflight inference. Zero is a database gap, not absence of historical traffic."
+}

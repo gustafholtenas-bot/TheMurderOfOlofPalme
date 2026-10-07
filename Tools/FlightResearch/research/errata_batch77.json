@@ -1,0 +1,28 @@
+{
+  "package": "v80",
+  "checked_on": "2026-09-30",
+  "corrections": [
+    {
+      "schedule": "delta-581-DTW-CVG-0800-b71",
+      "changed_movement_ids": [
+        "delta-581-DTW-CVG-0800-b71@1986-02-28",
+        "delta-581-DTW-CVG-0800-b71@1986-03-01"
+      ],
+      "old_flight": "581",
+      "correct_flight": "561",
+      "origin": "DTW",
+      "destination": "CVG",
+      "unchanged_departure_local": "08:00",
+      "unchanged_arrival_local": "08:51",
+      "source": "delta-19860201",
+      "schedule_page": "73",
+      "itinerary_page": "263",
+      "explanation": "The DTW-CVG-MIA itinerary is 561; 581 is DTW-IND-MEM-MSY. Only flight label and notes changed; IDs and all times retained.",
+      "supersedes_research_rows": [
+        "delta_cincinnati_returns_batch71.tsv: source_row 22",
+        "comair_ohio_links_batch75.tsv: source_row 11 (excluded connection: correct first flight 561/1572)"
+      ]
+    }
+  ],
+  "historical_research_files_retained": true
+}

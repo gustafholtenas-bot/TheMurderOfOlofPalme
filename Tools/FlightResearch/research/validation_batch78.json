@@ -1,0 +1,383 @@
+{
+  "batch": 78,
+  "package": "v81",
+  "based_on_package": "v80",
+  "checked_on": "2026-09-30",
+  "previous_movements": 4951,
+  "source_rows": 31,
+  "selected_direction_tables": 5,
+  "new_schedules": 23,
+  "new_schedule_ids": [
+    "delta-612-ATL-CLE-1030-b78",
+    "delta-447-ATL-CLE-1346-b78",
+    "delta-374-ATL-CLE-1701-b78",
+    "delta-396-ATL-CLE-2024-b78",
+    "delta-906-ATL-CLE-2310-b78",
+    "delta-438-ATL-CMH-1037-b78",
+    "delta-476-ATL-CMH-1343-b78",
+    "delta-572-ATL-CMH-1658-b78",
+    "delta-264-ATL-CMH-2027-b78",
+    "delta-560-ATL-CMH-2303-b78",
+    "delta-482-ATL-IND-0859-b78",
+    "delta-914-ATL-IND-1349-b78",
+    "delta-656-ATL-IND-1703-b78",
+    "delta-336-ATL-IND-2024-b78",
+    "delta-534-ATL-DAY-1038-b78",
+    "delta-298-ATL-DAY-1343-b78",
+    "delta-412-ATL-DAY-1842-b78",
+    "delta-822-ATL-DAY-2037-b78",
+    "delta-649-DAY-ATL-0630-b78",
+    "delta-741-DAY-ATL-0930-b78",
+    "delta-403-DAY-ATL-1310-b78",
+    "delta-441-DAY-ATL-1625-b78",
+    "delta-411-DAY-ATL-2050-b78"
+  ],
+  "source_row_actions": {
+    "new_schedule": 23,
+    "excluded_connection": 5,
+    "excluded_through_service": 3
+  },
+  "new_movements": 50,
+  "new_movements_by_source_airline": {
+    "delta": 50
+  },
+  "new_movements_by_directed_pair": {
+    "ATL–CLE": 11,
+    "ATL–CMH": 11,
+    "ATL–DAY": 8,
+    "ATL–IND": 9,
+    "DAY–ATL": 11
+  },
+  "new_leg_ids": [
+    "delta-441-DAY-ATL-1625-b78@1986-02-27",
+    "delta-572-ATL-CMH-1658-b78@1986-02-27",
+    "delta-374-ATL-CLE-1701-b78@1986-02-27",
+    "delta-656-ATL-IND-1703-b78@1986-02-27",
+    "delta-412-ATL-DAY-1842-b78@1986-02-27",
+    "delta-336-ATL-IND-2024-b78@1986-02-27",
+    "delta-396-ATL-CLE-2024-b78@1986-02-27",
+    "delta-264-ATL-CMH-2027-b78@1986-02-27",
+    "delta-822-ATL-DAY-2037-b78@1986-02-27",
+    "delta-411-DAY-ATL-2050-b78@1986-02-27",
+    "delta-560-ATL-CMH-2303-b78@1986-02-27",
+    "delta-906-ATL-CLE-2310-b78@1986-02-27",
+    "delta-649-DAY-ATL-0630-b78@1986-02-28",
+    "delta-482-ATL-IND-0859-b78@1986-02-28",
+    "delta-741-DAY-ATL-0930-b78@1986-02-28",
+    "delta-612-ATL-CLE-1030-b78@1986-02-28",
+    "delta-438-ATL-CMH-1037-b78@1986-02-28",
+    "delta-534-ATL-DAY-1038-b78@1986-02-28",
+    "delta-403-DAY-ATL-1310-b78@1986-02-28",
+    "delta-298-ATL-DAY-1343-b78@1986-02-28",
+    "delta-476-ATL-CMH-1343-b78@1986-02-28",
+    "delta-447-ATL-CLE-1346-b78@1986-02-28",
+    "delta-914-ATL-IND-1349-b78@1986-02-28",
+    "delta-441-DAY-ATL-1625-b78@1986-02-28",
+    "delta-572-ATL-CMH-1658-b78@1986-02-28",
+    "delta-374-ATL-CLE-1701-b78@1986-02-28",
+    "delta-656-ATL-IND-1703-b78@1986-02-28",
+    "delta-412-ATL-DAY-1842-b78@1986-02-28",
+    "delta-336-ATL-IND-2024-b78@1986-02-28",
+    "delta-396-ATL-CLE-2024-b78@1986-02-28",
+    "delta-264-ATL-CMH-2027-b78@1986-02-28",
+    "delta-822-ATL-DAY-2037-b78@1986-02-28",
+    "delta-411-DAY-ATL-2050-b78@1986-02-28",
+    "delta-560-ATL-CMH-2303-b78@1986-02-28",
+    "delta-906-ATL-CLE-2310-b78@1986-02-28",
+    "delta-649-DAY-ATL-0630-b78@1986-03-01",
+    "delta-482-ATL-IND-0859-b78@1986-03-01",
+    "delta-741-DAY-ATL-0930-b78@1986-03-01",
+    "delta-612-ATL-CLE-1030-b78@1986-03-01",
+    "delta-438-ATL-CMH-1037-b78@1986-03-01",
+    "delta-534-ATL-DAY-1038-b78@1986-03-01",
+    "delta-403-DAY-ATL-1310-b78@1986-03-01",
+    "delta-298-ATL-DAY-1343-b78@1986-03-01",
+    "delta-476-ATL-CMH-1343-b78@1986-03-01",
+    "delta-447-ATL-CLE-1346-b78@1986-03-01",
+    "delta-914-ATL-IND-1349-b78@1986-03-01",
+    "delta-441-DAY-ATL-1625-b78@1986-03-01",
+    "delta-572-ATL-CMH-1658-b78@1986-03-01",
+    "delta-374-ATL-CLE-1701-b78@1986-03-01",
+    "delta-656-ATL-IND-1703-b78@1986-03-01"
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 12,
+    "1986-02-28": 23,
+    "1986-03-01": 15
+  },
+  "total_movements": 5001,
+  "unchanged_previous_movements": 4946,
+  "corrected_previous_schedule_ids": [
+    "comair-1724-CLE-CMH-1140-b77",
+    "delta-336-IND-FWA-1000-b77",
+    "delta-560-CMH-DAY-1020-b77"
+  ],
+  "corrected_previous_movement_ids": [
+    "delta-336-IND-FWA-1000-b77@1986-02-28",
+    "delta-560-CMH-DAY-1020-b77@1986-02-28",
+    "comair-1724-CLE-CMH-1140-b77@1986-02-28",
+    "delta-560-CMH-DAY-1020-b77@1986-03-01"
+  ],
+  "removed_outside_window_movement_ids": [
+    "delta-336-IND-FWA-1000-b77@1986-03-01"
+  ],
+  "added_corrected_date_ids": [
+    "delta-336-IND-FWA-1000-b77@1986-02-27"
+  ],
+  "correction_net_movement_change": 0,
+  "unchanged_previous_schedules": 3115,
+  "new_airports": [],
+  "new_airlines": [],
+  "total_airports": 241,
+  "total_directed_endpoint_pairs": 1026,
+  "runtime_coverage": {
+    "registered_airlines": 95,
+    "registered_countries": 81,
+    "reviewed_schedules": 3120,
+    "animated_airlines": 49,
+    "scheduled_movements": 5000,
+    "confirmed_movements": 1
+  },
+  "delta_total_movements": 1019,
+  "data_only_delivery": true,
+  "coverage_complete": false,
+  "next_priority": "COMAIR Cincinnati–Louisville/Lexington; Delta Memphis links to Cleveland/Columbus/Indianapolis; Dallas/Fort Worth",
+  "europe_resume_country": "cy",
+  "independent_fixed_offset_check": true,
+  "expected_movement_utc": {
+    "delta-612-ATL-CLE-1030-b78@1986-02-28": [
+      "1986-02-28T15:30:00Z",
+      "1986-02-28T16:59:00Z"
+    ],
+    "delta-612-ATL-CLE-1030-b78@1986-03-01": [
+      "1986-03-01T15:30:00Z",
+      "1986-03-01T16:59:00Z"
+    ],
+    "delta-447-ATL-CLE-1346-b78@1986-02-28": [
+      "1986-02-28T18:46:00Z",
+      "1986-02-28T20:15:00Z"
+    ],
+    "delta-447-ATL-CLE-1346-b78@1986-03-01": [
+      "1986-03-01T18:46:00Z",
+      "1986-03-01T20:15:00Z"
+    ],
+    "delta-374-ATL-CLE-1701-b78@1986-02-27": [
+      "1986-02-27T22:01:00Z",
+      "1986-02-27T23:30:00Z"
+    ],
+    "delta-374-ATL-CLE-1701-b78@1986-02-28": [
+      "1986-02-28T22:01:00Z",
+      "1986-02-28T23:30:00Z"
+    ],
+    "delta-374-ATL-CLE-1701-b78@1986-03-01": [
+      "1986-03-01T22:01:00Z",
+      "1986-03-01T23:30:00Z"
+    ],
+    "delta-396-ATL-CLE-2024-b78@1986-02-27": [
+      "1986-02-28T01:24:00Z",
+      "1986-02-28T02:55:00Z"
+    ],
+    "delta-396-ATL-CLE-2024-b78@1986-02-28": [
+      "1986-03-01T01:24:00Z",
+      "1986-03-01T02:55:00Z"
+    ],
+    "delta-906-ATL-CLE-2310-b78@1986-02-27": [
+      "1986-02-28T04:10:00Z",
+      "1986-02-28T05:25:00Z"
+    ],
+    "delta-906-ATL-CLE-2310-b78@1986-02-28": [
+      "1986-03-01T04:10:00Z",
+      "1986-03-01T05:25:00Z"
+    ],
+    "delta-438-ATL-CMH-1037-b78@1986-02-28": [
+      "1986-02-28T15:37:00Z",
+      "1986-02-28T16:55:00Z"
+    ],
+    "delta-438-ATL-CMH-1037-b78@1986-03-01": [
+      "1986-03-01T15:37:00Z",
+      "1986-03-01T16:55:00Z"
+    ],
+    "delta-476-ATL-CMH-1343-b78@1986-02-28": [
+      "1986-02-28T18:43:00Z",
+      "1986-02-28T20:00:00Z"
+    ],
+    "delta-476-ATL-CMH-1343-b78@1986-03-01": [
+      "1986-03-01T18:43:00Z",
+      "1986-03-01T20:00:00Z"
+    ],
+    "delta-572-ATL-CMH-1658-b78@1986-02-27": [
+      "1986-02-27T21:58:00Z",
+      "1986-02-27T23:15:00Z"
+    ],
+    "delta-572-ATL-CMH-1658-b78@1986-02-28": [
+      "1986-02-28T21:58:00Z",
+      "1986-02-28T23:15:00Z"
+    ],
+    "delta-572-ATL-CMH-1658-b78@1986-03-01": [
+      "1986-03-01T21:58:00Z",
+      "1986-03-01T23:15:00Z"
+    ],
+    "delta-264-ATL-CMH-2027-b78@1986-02-27": [
+      "1986-02-28T01:27:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "delta-264-ATL-CMH-2027-b78@1986-02-28": [
+      "1986-03-01T01:27:00Z",
+      "1986-03-01T02:45:00Z"
+    ],
+    "delta-560-ATL-CMH-2303-b78@1986-02-27": [
+      "1986-02-28T04:03:00Z",
+      "1986-02-28T05:15:00Z"
+    ],
+    "delta-560-ATL-CMH-2303-b78@1986-02-28": [
+      "1986-03-01T04:03:00Z",
+      "1986-03-01T05:15:00Z"
+    ],
+    "delta-482-ATL-IND-0859-b78@1986-02-28": [
+      "1986-02-28T13:59:00Z",
+      "1986-02-28T15:15:00Z"
+    ],
+    "delta-482-ATL-IND-0859-b78@1986-03-01": [
+      "1986-03-01T13:59:00Z",
+      "1986-03-01T15:15:00Z"
+    ],
+    "delta-914-ATL-IND-1349-b78@1986-02-28": [
+      "1986-02-28T18:49:00Z",
+      "1986-02-28T20:05:00Z"
+    ],
+    "delta-914-ATL-IND-1349-b78@1986-03-01": [
+      "1986-03-01T18:49:00Z",
+      "1986-03-01T20:05:00Z"
+    ],
+    "delta-656-ATL-IND-1703-b78@1986-02-27": [
+      "1986-02-27T22:03:00Z",
+      "1986-02-27T23:20:00Z"
+    ],
+    "delta-656-ATL-IND-1703-b78@1986-02-28": [
+      "1986-02-28T22:03:00Z",
+      "1986-02-28T23:20:00Z"
+    ],
+    "delta-656-ATL-IND-1703-b78@1986-03-01": [
+      "1986-03-01T22:03:00Z",
+      "1986-03-01T23:20:00Z"
+    ],
+    "delta-336-ATL-IND-2024-b78@1986-02-27": [
+      "1986-02-28T01:24:00Z",
+      "1986-02-28T02:40:00Z"
+    ],
+    "delta-336-ATL-IND-2024-b78@1986-02-28": [
+      "1986-03-01T01:24:00Z",
+      "1986-03-01T02:40:00Z"
+    ],
+    "delta-534-ATL-DAY-1038-b78@1986-02-28": [
+      "1986-02-28T15:38:00Z",
+      "1986-02-28T16:55:00Z"
+    ],
+    "delta-534-ATL-DAY-1038-b78@1986-03-01": [
+      "1986-03-01T15:38:00Z",
+      "1986-03-01T16:55:00Z"
+    ],
+    "delta-298-ATL-DAY-1343-b78@1986-02-28": [
+      "1986-02-28T18:43:00Z",
+      "1986-02-28T20:00:00Z"
+    ],
+    "delta-298-ATL-DAY-1343-b78@1986-03-01": [
+      "1986-03-01T18:43:00Z",
+      "1986-03-01T20:00:00Z"
+    ],
+    "delta-412-ATL-DAY-1842-b78@1986-02-27": [
+      "1986-02-27T23:42:00Z",
+      "1986-02-28T00:59:00Z"
+    ],
+    "delta-412-ATL-DAY-1842-b78@1986-02-28": [
+      "1986-02-28T23:42:00Z",
+      "1986-03-01T00:59:00Z"
+    ],
+    "delta-822-ATL-DAY-2037-b78@1986-02-27": [
+      "1986-02-28T01:37:00Z",
+      "1986-02-28T02:55:00Z"
+    ],
+    "delta-822-ATL-DAY-2037-b78@1986-02-28": [
+      "1986-03-01T01:37:00Z",
+      "1986-03-01T02:55:00Z"
+    ],
+    "delta-649-DAY-ATL-0630-b78@1986-02-28": [
+      "1986-02-28T11:30:00Z",
+      "1986-02-28T12:42:00Z"
+    ],
+    "delta-649-DAY-ATL-0630-b78@1986-03-01": [
+      "1986-03-01T11:30:00Z",
+      "1986-03-01T12:42:00Z"
+    ],
+    "delta-741-DAY-ATL-0930-b78@1986-02-28": [
+      "1986-02-28T14:30:00Z",
+      "1986-02-28T15:45:00Z"
+    ],
+    "delta-741-DAY-ATL-0930-b78@1986-03-01": [
+      "1986-03-01T14:30:00Z",
+      "1986-03-01T15:45:00Z"
+    ],
+    "delta-403-DAY-ATL-1310-b78@1986-02-28": [
+      "1986-02-28T18:10:00Z",
+      "1986-02-28T19:25:00Z"
+    ],
+    "delta-403-DAY-ATL-1310-b78@1986-03-01": [
+      "1986-03-01T18:10:00Z",
+      "1986-03-01T19:25:00Z"
+    ],
+    "delta-441-DAY-ATL-1625-b78@1986-02-27": [
+      "1986-02-27T21:25:00Z",
+      "1986-02-27T22:40:00Z"
+    ],
+    "delta-441-DAY-ATL-1625-b78@1986-02-28": [
+      "1986-02-28T21:25:00Z",
+      "1986-02-28T22:40:00Z"
+    ],
+    "delta-441-DAY-ATL-1625-b78@1986-03-01": [
+      "1986-03-01T21:25:00Z",
+      "1986-03-01T22:40:00Z"
+    ],
+    "delta-411-DAY-ATL-2050-b78@1986-02-27": [
+      "1986-02-28T01:50:00Z",
+      "1986-02-28T03:05:00Z"
+    ],
+    "delta-411-DAY-ATL-2050-b78@1986-02-28": [
+      "1986-03-01T01:50:00Z",
+      "1986-03-01T03:05:00Z"
+    ]
+  },
+  "no_affected_flight_number_time_overlaps": true,
+  "verified_onward_ground_times": [
+    {
+      "incoming": "delta-560-ATL-CMH-2303-b78@1986-02-27",
+      "outgoing": "delta-560-CMH-DAY-1020-b77@1986-02-28",
+      "ground_minutes": 25
+    },
+    {
+      "incoming": "delta-560-ATL-CMH-2303-b78@1986-02-28",
+      "outgoing": "delta-560-CMH-DAY-1020-b77@1986-03-01",
+      "ground_minutes": 25
+    },
+    {
+      "incoming": "delta-336-ATL-IND-2024-b78@1986-02-27",
+      "outgoing": "delta-336-IND-FWA-1000-b77@1986-02-27",
+      "ground_minutes": 20
+    },
+    {
+      "incoming": "delta-336-ATL-IND-2024-b78@1986-02-28",
+      "outgoing": "delta-336-IND-FWA-1000-b77@1986-02-28",
+      "ground_minutes": 20
+    }
+  ],
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

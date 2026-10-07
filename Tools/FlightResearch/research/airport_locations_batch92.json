@@ -1,0 +1,20 @@
+{
+  "package": "v95",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "VPS",
+      "name": "Fort Walton Beach–Okaloosa County Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 30.481315,
+      "lon": -86.515839,
+      "coordinate_source": "https://ourairports.com/airports/KVPS/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyvps.com/history/",
+      "historical_location_note": "Delta directory p261 identifies Fort Walton Beach as Okaloosa County. The airport authority records the Okaloosa County Air Terminal on State Road 85 opening in 1975 on the Eglin airfield. Current coordinates mark the approximate shared airport area; not Destin Executive (DTS), nor a reconstructed 1986 terminal/gate/runway. The modern Destin-Fort Walton Beach name dates to 2015."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as an approximate airport-area marker; historical site independently reviewed.",
+  "historical_scope": "Fort Walton Beach–Okaloosa County, the commercial service at Eglin with its 1975 terminal. No precise 1986 terminal/gate/runway reconstruction."
+}

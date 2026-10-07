@@ -1,0 +1,62 @@
+{
+  "source": "delta-19860201",
+  "checked_on": "2026-10-01",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "effective_from": "1986-02-01",
+  "effective_to": null,
+  "later_amendments_verified": false,
+  "visual_review": true,
+  "reviewed_printed_pages": [
+    5,
+    35,
+    36,
+    63,
+    64,
+    65,
+    66,
+    67,
+    120,
+    127,
+    209,
+    232,
+    233,
+    243,
+    250
+  ],
+  "legend_printed_page": 4,
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "printed_to_pdf_page_rule": "PDF page floor((printed page + 6) / 2); even printed page left, odd right.",
+  "row_scope": "All explicit nonstop rows in 26 selected direction headings; through/connecting rows excluded from transcription and import. No independently timed ACT–CLL 1929 row found in the selected local heading.",
+  "row_count": 92,
+  "accepted_nonstop_rows": 92,
+  "city_direction_headings": 26,
+  "directed_airport_pairs": 26,
+  "operator_identification": "Printed p.4: flights 1875–1999 operated by Rio Airways; triangle denotes Delta Connection. Adjacent 1750–1874 range belongs to Ransome and is not assigned to Rio.",
+  "frequency_legend": "D encodes blank/daily; X excludes listed weekdays, 1 Monday through 7 Sunday. Star denotes off-peak fare, not a date rollover.",
+  "timezones_fixed_hours_for_import_dates": {
+    "DFW": -6,
+    "ABI": -6,
+    "CLL": -6,
+    "ILE": -6,
+    "LAW": -6,
+    "SJT": -6,
+    "TPL": -6,
+    "TXK": -6,
+    "ACT": -6,
+    "SPS": -6
+  },
+  "dated_footnotes_on_selected_rows": [],
+  "special_cases": {
+    "DFW–LAW": "1908 and 1932 are through rows, not nonstop. Nonstop 1918 is 15:40–16:25 daily; 1933 is 18:30–19:15 Saturdays only.",
+    "DFW–ILE": "1934 is Sunday only and produces no movement in this Thursday–Saturday window.",
+    "Saturday_only": "DFW–LAW 1933, LAW–SPS 1933 and DFW–SJT 1922 are after the Saturday window end; retained as reviewed schedules with zero movements.",
+    "ACT–CLL 1929": "No independently timed local row in printed p.243; DFW–CLL through arrival does not justify inventing its intermediate departure.",
+    "aircraft": "BE1 is listed for Rio in the legend; no flight-specific aircraft or registration assigned from that generic legend.",
+    "airport_locations": "Nine new historical-airfield markers; modern estimated reference coordinates approximate the same airfields, not 1986 aircraft positions."
+  }
+}

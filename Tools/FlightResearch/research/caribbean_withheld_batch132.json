@@ -1,0 +1,136 @@
+{
+  "package": "v135",
+  "prior_holds_retained_from": "caribbean_withheld_batch131.json",
+  "previous_held_reports_preserved_as_history": true,
+  "connection_and_stop_rows": "Not imported as nonstop; no intermediate clocks inferred.",
+  "new_held_original_rows": [
+    {
+      "flight": "789",
+      "origin": "BOS",
+      "destination": "HYA",
+      "departure": "17:00",
+      "arrival": "17:40",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "image": "N-86-01-12-inside-1.jpg",
+      "column": 1
+    },
+    {
+      "flight": "789",
+      "origin": "HYA",
+      "destination": "ACK",
+      "departure": "17:30",
+      "arrival": "18:10",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "image": "N-86-01-12-inside-1.jpg",
+      "column": 3
+    }
+  ],
+  "new_hold_reason": "789 onward departs Hyannis17:30 tenminutes before incoming arrival17:40. Both rows withheld; throughBOS–ACK17:00–18:10 does not resolve which physical clock is wrong. No17:50 or other correction invented.",
+  "zero_movement_schedules": [
+    "pba-provincetown-boston-n-772-EWB-ACK-0910-b132",
+    "pba-provincetown-boston-n-781-HYA-ACK-0600-b132",
+    "pba-provincetown-boston-n-782-ACK-HYA-0630-b132",
+    "pba-provincetown-boston-n-880-ACK-MVY-0700-b132",
+    "pba-provincetown-boston-n-880-EWB-ACK-0625-b132",
+    "pba-provincetown-boston-n-880-MVY-BOS-0730-b132",
+    "pba-provincetown-boston-n-881-BOS-MVY-0825-b132",
+    "pba-provincetown-boston-n-882-EWB-MVY-1040-b132",
+    "pba-provincetown-boston-n-882-MVY-BOS-1110-b132"
+  ],
+  "zero_movement_reviews": [
+    {
+      "schedule": "pba-provincetown-boston-n-881-BOS-MVY-0825-b132",
+      "days": [
+        1
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-781-HYA-ACK-0600-b132",
+      "days": [
+        1
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-880-MVY-BOS-0730-b132",
+      "days": [
+        1
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-882-MVY-BOS-1110-b132",
+      "days": [
+        7
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-782-ACK-HYA-0630-b132",
+      "days": [
+        1
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-880-ACK-MVY-0700-b132",
+      "days": [
+        1
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-882-EWB-MVY-1040-b132",
+      "days": [
+        7
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-880-EWB-ACK-0625-b132",
+      "days": [
+        1
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    },
+    {
+      "schedule": "pba-provincetown-boston-n-772-EWB-ACK-0910-b132",
+      "days": [
+        7
+      ],
+      "reason": "Printed Monday-only or Sunday-only; project dates are Thursday,Friday,Saturday."
+    }
+  ],
+  "new_regional_search_performed": true,
+  "new_source_leads_without_import": [
+    "LACSA January/March interiors still missing; winterCubana/Aeroflot Nicaragua clocks not obtained; CaribbeanExpress February interior unresolved.",
+    "Selected PanAm regional pairs already in catalog; no duplicate imports.",
+    "AirFrance F27 operator attribution not resolved; holds retained."
+  ],
+  "remaining_pba_gaps": [
+    "Resolve Northern789 using a dated correction or independently corroborating timetable.",
+    "Southern RSW–SRQ1208 and JanuaryAPF–RSW independent intermediate clocks absent.",
+    "Supplements, unlisted editions, aircraft identity and actual operation not established."
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false
+}

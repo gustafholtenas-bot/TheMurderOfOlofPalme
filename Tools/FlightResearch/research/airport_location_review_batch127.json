@@ -1,0 +1,63 @@
+{
+  "package": "v130",
+  "airport_records": [
+    {
+      "id": "BZE",
+      "name": "Belize City – Belize International (1986)",
+      "country": "bz",
+      "timezone": "America/Belize",
+      "lat": 17.539951,
+      "lon": -88.303556,
+      "coordinate_source": "https://ourairports.com/airports/MZBZ/",
+      "coordinate_record_id": "MZBZ",
+      "timetable_code": null,
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/3c8512.htm",
+        "https://www.pgiabelize.com/about-us/"
+      ],
+      "location_note": "Belize City international service normalized to Ladyville, distinct from municipal TZA. Airport operator history describes Ladyville site and terminal inauguration in1945. Historical geographic designation used, without backdating a later honorary name. Approximate airfield marker from modern reference, not surveyed1986 terminal/runway position. Timetable uses city names, not airport codes; normalization is a documented inference."
+    },
+    {
+      "id": "SAP",
+      "name": "San Pedro Sula – La Mesa (1986)",
+      "country": "hn",
+      "timezone": "America/Tegucigalpa",
+      "lat": 15.4526,
+      "lon": -87.923599,
+      "coordinate_source": "https://ourairports.com/airports/MHLM/",
+      "coordinate_record_id": "MHLM",
+      "timetable_code": null,
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://www.timetableimages.com/ttimages/3c8512.htm",
+        "https://tzibalnaah.unah.edu.hn/bitstream/handle/123456789/8158/19640608.pdf?isAllowed=y&sequence=2"
+      ],
+      "location_note": "La Gaceta8June1964, Decree81, pp1–2, identifies La Mesa airport construction financed for San Pedro Sula. Contemporary Challenge timetable establishes international service to San Pedro Sula. Geographic La Mesa designation used, without backdating a later terminal or honorary designation. Approximate airfield marker from modern reference, not surveyed1986 terminal/runway position. Timetable uses city names, not airport codes; normalization is a documented inference."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "bz",
+      "name": {
+        "sv": "Belize",
+        "en": "Belize",
+        "en_source": "Belize"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "hn",
+      "name": {
+        "sv": "Honduras",
+        "en": "Honduras",
+        "en_source": "Honduras"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 381,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers; historical runways and terminals not reconstructed. Source names cities; airport normalization is an inference."
+}

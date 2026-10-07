@@ -1,0 +1,59 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    14,
+    17,
+    40,
+    49,
+    200,
+    202,
+    204
+  ],
+  "additional_rechecked_printed_pages": [
+    203
+  ],
+  "airport_directory_printed_pages": [
+    260,
+    261
+  ],
+  "itinerary_printed_pages": [
+    263,
+    264,
+    265
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "14": 10,
+    "17": 11,
+    "40": 23,
+    "49": 27,
+    "200": 103,
+    "202": 104,
+    "203": 104,
+    "204": 105,
+    "260": 133,
+    "261": 133,
+    "263": 134,
+    "264": 135,
+    "265": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Eight complete direction headings: 32 visually reviewed rows, 29 accepted nonstop schedules (14 Delta, 8 ASA, 7 COMAIR), and three through-stop rows excluded. Accepted rows have no dated footnotes. Legend p4 distinguishes ASA and COMAIR by flight-number range and triangle.",
+    "Blank means daily; X6 excludes Saturday, X7 excludes Sunday and X67 is Monday through Friday. CVG–CRW 1616 is daily although the earlier STL–CVG leg is X67. CRW–CVG 1658 is daily although its earlier CVG–STL continuation is X6. Own leg frequencies are retained.",
+    "ATL–CRW 1515 is X7 while CRW–ATL 1515 is daily. ATL–CRW 1517 is daily while CRW–ATL 1517 is X6. No extra movements are inferred from another leg's weekday pattern.",
+    "Delta 960 ATL–RDU 06:52–07:59 continues RDU–RIC 08:15–08:54, with 16 minutes at RDU. Delta 1125 RIC–RDU 19:40–20:22 continues RDU–ATL 20:45–21:49 X6, with 23 minutes at RDU. Each leg is individually printed and itinerary p263/p264 confirms the route.",
+    "The enlarged original confirms RDU–ATL 1125 arrives at 9:49p, not 9:40p; the through RIC–ATL 1125 row on p203 also reads 9:49p. That previously excluded batch100 row had been transcribed as 940p/21:40 and is corrected in its TSV with errata_batch101.json. It remains excluded; no prior schedule, movement, ID or count changes.",
+    "CRW–CVG 1572 and 1713, and CVG–CRW 1540, have one stop via HTS. They are excluded as direct physical legs. Separately timed HTS legs are queued; no nonstop route is invented from a through row.",
+    "ATL–CRW 1518 22:55–00:25 X6 arrives on the next local day. Its two window movements run 03:55–05:25 UTC on 28 February and 1 March. The p264 itinerary ends at CRW; no unprinted return is added.",
+    "ATL–CRW 1515 arrives 11:59, giving 31 minutes before its 12:30 return. ASA 1516/1517 have twenty-minute turns. COMAIR 1633 has a fifty-minute turn at Cincinnati between its own separately printed directions.",
+    "All newly imported endpoints use winter Eastern UTC−5. Independent 24-hour transcription, fixed offsets, weekdays and exact 48-hour overlap match every generated movement. Seventeen same-number transitions including older legs have checked ground intervals of 16–66 minutes, without asserting aircraft identity.",
+    "Directory p260 still calls CRW Kanawha County. The airport's official history identifies the Coonskin Ridge field and its 1985 Yeager renaming. Directory p261 identifies RDU Raleigh/Durham; its official terminal history confirms continuity of the pre-1986 airport area. Coordinates are approximate site markers, not reconstructed historical gates or later terminal buildings.",
+    "All prior movements, schedules, airlines and airports are unchanged. Earlier corrections and three held source conflicts are preserved. Source validity end, later amendments and actual operation remain unverified. Original scans are not redistributed."
+  ]
+}

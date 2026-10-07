@@ -1,0 +1,133 @@
+{
+  "batch": 86,
+  "package": "v89",
+  "based_on_package": "v88",
+  "checked_on": "2026-09-30",
+  "previous_movements": 5473,
+  "source_rows": 30,
+  "selected_city_direction_tables": 8,
+  "new_schedules": 20,
+  "new_schedule_ids": [
+    "comair-1527-EVV-CVG-0540-b86",
+    "comair-1530-CVG-CAK-0922-b86",
+    "comair-1540-CAK-CVG-0740-b86",
+    "comair-1542-EVV-CVG-1230-b86",
+    "comair-1548-BUF-CVG-0705-b86",
+    "comair-1549-CAK-CVG-1650-b86",
+    "comair-1549-CVG-EVV-1842-b86",
+    "comair-1552-CVG-EVV-1700-b86",
+    "comair-1553-CVG-CAK-1940-b86",
+    "comair-1553-EVV-CVG-1710-b86",
+    "comair-1563-EVV-IND-0600-b86",
+    "comair-1566-CVG-BUF-1215-b86",
+    "comair-1570-CVG-BUF-1825-b86",
+    "comair-1594-EVV-CVG-1555-b86",
+    "comair-1595-CVG-EVV-1955-b86",
+    "comair-1625-CVG-CAK-1525-b86",
+    "comair-1660-BUF-CVG-1610-b86",
+    "comair-1718-CVG-EVV-0930-b86",
+    "comair-1720-CAK-CVG-1330-b86",
+    "comair-1720-CVG-EVV-1535-b86"
+  ],
+  "source_row_actions": {
+    "new_schedule": 20,
+    "excluded_connection": 9,
+    "excluded_through_stops": 1
+  },
+  "new_movements": 35,
+  "new_movements_by_source_airline": {
+    "comair": 35
+  },
+  "new_movements_by_directed_pair": {
+    "BUF–CVG": 4,
+    "CAK–CVG": 6,
+    "CVG–BUF": 3,
+    "CVG–CAK": 5,
+    "CVG–EVV": 8,
+    "EVV–CVG": 8,
+    "EVV–IND": 1
+  },
+  "new_leg_ids": [
+    "comair-1660-BUF-CVG-1610-b86@1986-02-27",
+    "comair-1549-CAK-CVG-1650-b86@1986-02-27",
+    "comair-1594-EVV-CVG-1555-b86@1986-02-27",
+    "comair-1552-CVG-EVV-1700-b86@1986-02-27",
+    "comair-1553-EVV-CVG-1710-b86@1986-02-27",
+    "comair-1570-CVG-BUF-1825-b86@1986-02-27",
+    "comair-1549-CVG-EVV-1842-b86@1986-02-27",
+    "comair-1553-CVG-CAK-1940-b86@1986-02-27",
+    "comair-1595-CVG-EVV-1955-b86@1986-02-27",
+    "comair-1527-EVV-CVG-0540-b86@1986-02-28",
+    "comair-1563-EVV-IND-0600-b86@1986-02-28",
+    "comair-1548-BUF-CVG-0705-b86@1986-02-28",
+    "comair-1540-CAK-CVG-0740-b86@1986-02-28",
+    "comair-1530-CVG-CAK-0922-b86@1986-02-28",
+    "comair-1718-CVG-EVV-0930-b86@1986-02-28",
+    "comair-1566-CVG-BUF-1215-b86@1986-02-28",
+    "comair-1542-EVV-CVG-1230-b86@1986-02-28",
+    "comair-1720-CAK-CVG-1330-b86@1986-02-28",
+    "comair-1625-CVG-CAK-1525-b86@1986-02-28",
+    "comair-1720-CVG-EVV-1535-b86@1986-02-28",
+    "comair-1660-BUF-CVG-1610-b86@1986-02-28",
+    "comair-1549-CAK-CVG-1650-b86@1986-02-28",
+    "comair-1594-EVV-CVG-1555-b86@1986-02-28",
+    "comair-1552-CVG-EVV-1700-b86@1986-02-28",
+    "comair-1553-EVV-CVG-1710-b86@1986-02-28",
+    "comair-1570-CVG-BUF-1825-b86@1986-02-28",
+    "comair-1549-CVG-EVV-1842-b86@1986-02-28",
+    "comair-1553-CVG-CAK-1940-b86@1986-02-28",
+    "comair-1527-EVV-CVG-0540-b86@1986-03-01",
+    "comair-1548-BUF-CVG-0705-b86@1986-03-01",
+    "comair-1540-CAK-CVG-0740-b86@1986-03-01",
+    "comair-1530-CVG-CAK-0922-b86@1986-03-01",
+    "comair-1718-CVG-EVV-0930-b86@1986-03-01",
+    "comair-1542-EVV-CVG-1230-b86@1986-03-01",
+    "comair-1720-CAK-CVG-1330-b86@1986-03-01"
+  ],
+  "new_local_departures_by_date": {
+    "1986-02-27": 9,
+    "1986-02-28": 19,
+    "1986-03-01": 7
+  },
+  "total_movements": 5508,
+  "retained_previous_movement_ids": 5473,
+  "unchanged_previous_movements": 5472,
+  "unchanged_previous_schedules": 3385,
+  "corrected_previous_schedule_ids": [
+    "comair-1530-ORD-MKE-1115-b73"
+  ],
+  "corrected_previous_movement_ids": [
+    "comair-1530-ORD-MKE-1115-b73@1986-02-28"
+  ],
+  "new_airports": [
+    "BUF",
+    "CAK",
+    "EVV"
+  ],
+  "new_airlines": [],
+  "total_airports": 252,
+  "total_directed_endpoint_pairs": 1097,
+  "runtime_coverage": {
+    "registered_airlines": 95,
+    "registered_countries": 81,
+    "reviewed_schedules": 3385,
+    "animated_airlines": 49,
+    "scheduled_movements": 5507,
+    "confirmed_movements": 1
+  },
+  "delta_total_movements": 1400,
+  "comair_total_movements": 381,
+  "data_only_delivery": true,
+  "coverage_complete": false,
+  "reviewed_schedules_without_window_movements": [],
+  "schedules_with_three_overlapping_movements": [],
+  "previous_corrections_preserved": [
+    "v87: COMAIR1582 CVG–DTW label correction, stable IDs retained"
+  ],
+  "prior_held_source_conflicts_preserved": [
+    "batch80: Delta597 MEM–LIT time conflict",
+    "batch82: CMH–SDF1871/1671 number conflict"
+  ],
+  "next_priority": "Remaining Buffalo/Akron/Evansville physical legs; missing Jackson/Shreveport legs; Memphis–LaGuardia; remaining Chattanooga/Atlanta through-flight legs",
+  "europe_resume_country": "cy"
+}

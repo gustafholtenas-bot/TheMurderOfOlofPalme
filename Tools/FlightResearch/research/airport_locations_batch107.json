@@ -1,0 +1,166 @@
+{
+  "checked_on": "2026-10-01",
+  "airports": [
+    {
+      "id": "ABI",
+      "name": "Abilene Municipal (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 32.4113333,
+      "lon": -99.6818889,
+      "coordinate_source": "https://www.airnav.com/airport/ABI",
+      "coordinate_record_id": "KABI",
+      "timetable_code": "ABI",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/ABI",
+        "https://abilene.airportplans.com/files/ABI_02_Inventory_Chapter.pdf"
+      ],
+      "location_note": "Printed p.260 names Municipal. Airport master plan chapter 2 p.2 dates the present airfield to November 1953, distinct from the earlier airport to its north. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "CLL",
+      "name": "Bryan/College Station–Easterwood (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 30.5880419,
+      "lon": -96.3625444,
+      "coordinate_source": "https://www.airnav.com/airport/CLL",
+      "coordinate_record_id": "KCLL",
+      "timetable_code": "CLL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/CLL",
+        "https://flyeasterwood.com/"
+      ],
+      "location_note": "Printed p.260 identifies Easterwood. AirNav FAA record gives activation May 1940. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "ILE",
+      "name": "Killeen Municipal (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 31.0858333,
+      "lon": -97.6865,
+      "coordinate_source": "https://airnav.com/airport/KILE",
+      "coordinate_record_id": "KILE",
+      "timetable_code": "ILE",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://airnav.com/airport/KILE",
+        "https://flygrk.com/our-history/"
+      ],
+      "location_note": "Printed p.260 identifies Killeen/ILE. Official history describes the municipal terminal in 1966 and its 2004 renaming to Skylark Field when commercial service moved to GRK. Use ILE, not Robert Gray/GRK. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "LAW",
+      "name": "Lawton Municipal (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 34.5677144,
+      "lon": -98.4166367,
+      "coordinate_source": "https://airnav.com/airport/LAW",
+      "coordinate_record_id": "KLAW",
+      "timetable_code": "LAW",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://airnav.com/airport/LAW",
+        "https://www.flylawton.org/"
+      ],
+      "location_note": "Printed p.260 names Municipal. AirNav FAA record dates activation to December 1948; current airport operator describes service since 1950. These concern different milestones; no precise opening date is asserted. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "SJT",
+      "name": "San Angelo–Mathis Field (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 31.3577483,
+      "lon": -100.4963042,
+      "coordinate_source": "https://www.airnav.com/airport/KSJT",
+      "coordinate_record_id": "KSJT",
+      "timetable_code": "SJT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/KSJT"
+      ],
+      "location_note": "Printed p.261 identifies Mathis Field. Current FAA record reproduced by AirNav identifies San Angelo/Mathis Field and activation September 1943. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "TPL",
+      "name": "Temple–Draughon-Miller (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 31.1519004,
+      "lon": -97.4076629,
+      "coordinate_source": "https://airnav.com/airport/TPL",
+      "coordinate_record_id": "KTPL",
+      "timetable_code": "TPL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://airnav.com/airport/TPL",
+        "https://flytemple.com/draughon-miller-central-texas-regional-airport/about-the-temple-airport/"
+      ],
+      "location_note": "Printed p.261 lists Temple/TPL as Municipal. Official history identifies the postwar Draughon–Miller airfield, distinct from the older prewar municipal site. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "TXK",
+      "name": "Texarkana Municipal (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 33.4537164,
+      "lon": -93.9910306,
+      "coordinate_source": "https://airnav.com/airport/TXK",
+      "coordinate_record_id": "KTXK",
+      "timetable_code": "TXK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://airnav.com/airport/TXK",
+        "https://fly.arkansas.gov/texarkana.html"
+      ],
+      "location_note": "Printed p.261 names Municipal. Arkansas Aeronautics identifies TXK as Regional-Webb Field northeast of Texarkana on the Arkansas side; AirNav FAA record gives activation April 1940. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "ACT",
+      "name": "Waco–Madison Cooper (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 31.6121944,
+      "lon": -97.2303056,
+      "coordinate_source": "https://airnav.com/airport/ACT",
+      "coordinate_record_id": "KACT",
+      "timetable_code": "ACT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://airnav.com/airport/ACT",
+        "https://www.flywaco.com/Airport/History"
+      ],
+      "location_note": "Printed p.260 identifies Waco/ACT as Madison Cooper. Official airport history links the present airport to the wartime field and postwar municipal service; no 1986 terminal layout reconstructed. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    },
+    {
+      "id": "SPS",
+      "name": "Wichita Falls Municipal–Sheppard (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 33.9888,
+      "lon": -98.4919056,
+      "coordinate_source": "https://www.airnav.com/airport/KSPS",
+      "coordinate_record_id": "KSPS",
+      "timetable_code": "SPS",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/KSPS"
+      ],
+      "location_note": "Printed p.261 identifies Wichita Falls/SPS as Municipal. The current FAA record reproduced by AirNav identifies SPS as the shared Sheppard AFB/Wichita Falls Municipal airfield; not Kickapoo/CWC. Current estimated FAA reference coordinates reproduced by AirNav provide approximate same-airfield markers only, not 1986 gates, runway thresholds, layouts or aircraft positions."
+    }
+  ],
+  "marker_precision": "Approximate same-airfield positions; 1986 gates, runway thresholds and layouts not reconstructed."
+}

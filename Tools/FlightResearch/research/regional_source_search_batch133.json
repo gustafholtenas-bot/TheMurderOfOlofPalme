@@ -1,0 +1,46 @@
+{
+  "package": "v136",
+  "checked_on": "2026-10-02",
+  "searches": [
+    {
+      "topic": "Nicaragua and regional timetable interiors",
+      "urls": [
+        "https://www.airtimes.com/cgat/cr/lacsa.htm",
+        "https://timetableworld.com/viewer.php?token=5752577a-32a7-457c-8530-51a186624e66"
+      ],
+      "result": "LACSA index listsJanuary1/March1,1986 but no usable interiors obtained. TimetableWorld result returned a generic viewer/catalog without an identifiable date-valid1986 clock table. No accepted new regional rows."
+    },
+    {
+      "topic": "Eastern January1,1986",
+      "urls": [
+        "https://www.ebay.com/itm/205496809936"
+      ],
+      "result": "Listing exposes a single picture/edition lead; no usable full clock tables for target region. No purchase or seller contact."
+    },
+    {
+      "topic": "CaribbeanExpress and BWIA",
+      "urls": [
+        "https://www.ebay.com/itm/206249932675",
+        "https://departedflights2.com/airline-route-maps-b-f/",
+        "https://www.timetableimages.com/ttimages/complete/complete.htm"
+      ],
+      "result": "LaterApril1987 CaribbeanExpress and route-map/index material do not establish February1986 physical clock rows. Needed CaribbeanExpress February1 interior and BWIA winter clocks remain open."
+    },
+    {
+      "topic": "PanAm existing OCR discovery",
+      "urls": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/"
+      ],
+      "result": "Local inspected OCR metadata gave office listings rather than accepted Managua/SanJose/Panama timetable clocks. No new regional import or claim of complete network."
+    },
+    {
+      "topic": "Republic source reuse",
+      "urls": [
+        "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf"
+      ],
+      "result": "Previously downloaded complete original reviewed visually. Public web reader hit size limit; local source retained.110new mainline schemas,219movements; source explicit validityFebruary14–March1,1986."
+    }
+  ],
+  "negative_results_not_proof_of_historical_absence": true,
+  "new_regional_movements": 0
+}

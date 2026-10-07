@@ -1,0 +1,251 @@
+{
+  "package": "v118",
+  "checked_on": "2026-10-01",
+  "baseline_archive_sha256": "1528b41a66c5b27a774a77c897b7bfe768c3c34c6edb53c9316e154914c9d58c",
+  "previous_movements_unchanged": 8303,
+  "previous_schedules_unchanged": 4838,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 321,
+  "previous_countries_unchanged": 84,
+  "previous_airlines_unchanged": 98,
+  "unaffected_sources_unchanged": true,
+  "independent_manual_rows": 23,
+  "independent_utc_movements_verified": 40,
+  "independent_utc_expected": {
+    "northwest-247-ORD-MSN-1140-b115@1986-02-28": [
+      "1986-02-28T17:40:00Z",
+      "1986-02-28T18:20:00Z"
+    ],
+    "northwest-751-ORD-MSN-1900-b115@1986-02-27": [
+      "1986-02-28T01:00:00Z",
+      "1986-02-28T01:41:00Z"
+    ],
+    "northwest-751-ORD-MSN-1900-b115@1986-02-28": [
+      "1986-03-01T01:00:00Z",
+      "1986-03-01T01:41:00Z"
+    ],
+    "northwest-750-MSN-ORD-0730-b115@1986-02-28": [
+      "1986-02-28T13:30:00Z",
+      "1986-02-28T14:07:00Z"
+    ],
+    "northwest-750-MSN-ORD-0730-b115@1986-03-01": [
+      "1986-03-01T13:30:00Z",
+      "1986-03-01T14:07:00Z"
+    ],
+    "northwest-348-MSN-ORD-1300-b115@1986-02-28": [
+      "1986-02-28T19:00:00Z",
+      "1986-02-28T19:37:00Z"
+    ],
+    "northwest-202-MSN-MKE-0710-b115@1986-02-28": [
+      "1986-02-28T13:10:00Z",
+      "1986-02-28T13:37:00Z"
+    ],
+    "northwest-710-MSN-MKE-0710-b115@1986-03-01": [
+      "1986-03-01T13:10:00Z",
+      "1986-03-01T13:37:00Z"
+    ],
+    "northwest-376-MSN-MKE-1225-b115@1986-02-28": [
+      "1986-02-28T18:25:00Z",
+      "1986-02-28T18:52:00Z"
+    ],
+    "northwest-224-MSN-MKE-1525-b115@1986-02-28": [
+      "1986-02-28T21:25:00Z",
+      "1986-02-28T21:52:00Z"
+    ],
+    "northwest-203-MKE-MSN-1005-b115@1986-02-28": [
+      "1986-02-28T16:05:00Z",
+      "1986-02-28T16:33:00Z"
+    ],
+    "northwest-375-MKE-MSN-1510-b115@1986-02-28": [
+      "1986-02-28T21:10:00Z",
+      "1986-02-28T21:38:00Z"
+    ],
+    "northwest-375-MKE-MSN-1510-b115@1986-03-01": [
+      "1986-03-01T21:10:00Z",
+      "1986-03-01T21:38:00Z"
+    ],
+    "northwest-379-MKE-MSN-2020-b115@1986-02-27": [
+      "1986-02-28T02:20:00Z",
+      "1986-02-28T02:48:00Z"
+    ],
+    "northwest-379-MKE-MSN-2020-b115@1986-02-28": [
+      "1986-03-01T02:20:00Z",
+      "1986-03-01T02:48:00Z"
+    ],
+    "northwest-105-MSN-MSP-0700-b115@1986-02-28": [
+      "1986-02-28T13:00:00Z",
+      "1986-02-28T13:54:00Z"
+    ],
+    "northwest-105-MSN-MSP-0700-b115@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T13:54:00Z"
+    ],
+    "northwest-375-MSN-MSP-1600-b115@1986-02-27": [
+      "1986-02-27T22:00:00Z",
+      "1986-02-27T22:50:00Z"
+    ],
+    "northwest-375-MSN-MSP-1600-b115@1986-02-28": [
+      "1986-02-28T22:00:00Z",
+      "1986-02-28T22:50:00Z"
+    ],
+    "northwest-375-MSN-MSP-1600-b115@1986-03-01": [
+      "1986-03-01T22:00:00Z",
+      "1986-03-01T22:50:00Z"
+    ],
+    "northwest-224-MSP-MSN-1410-b115@1986-02-28": [
+      "1986-02-28T20:10:00Z",
+      "1986-02-28T21:01:00Z"
+    ],
+    "northwest-426-MSP-MSN-1825-b115@1986-02-27": [
+      "1986-02-28T00:25:00Z",
+      "1986-02-28T01:17:00Z"
+    ],
+    "northwest-426-MSP-MSN-1825-b115@1986-02-28": [
+      "1986-03-01T00:25:00Z",
+      "1986-03-01T01:17:00Z"
+    ],
+    "northwest-502-MSP-GRR-1340-b115@1986-02-28": [
+      "1986-02-28T19:40:00Z",
+      "1986-02-28T20:52:00Z"
+    ],
+    "northwest-502-MSP-GRR-1340-b115@1986-03-01": [
+      "1986-03-01T19:40:00Z",
+      "1986-03-01T20:52:00Z"
+    ],
+    "northwest-346-MSP-GRR-1825-b115@1986-02-27": [
+      "1986-02-28T00:25:00Z",
+      "1986-02-28T01:37:00Z"
+    ],
+    "northwest-346-MSP-GRR-1825-b115@1986-02-28": [
+      "1986-03-01T00:25:00Z",
+      "1986-03-01T01:37:00Z"
+    ],
+    "northwest-501-GRR-MSP-0735-b115@1986-02-28": [
+      "1986-02-28T12:35:00Z",
+      "1986-02-28T13:52:00Z"
+    ],
+    "northwest-501-GRR-MSP-0735-b115@1986-03-01": [
+      "1986-03-01T12:35:00Z",
+      "1986-03-01T13:52:00Z"
+    ],
+    "northwest-167-GRR-MSP-1635-b115@1986-02-27": [
+      "1986-02-27T21:35:00Z",
+      "1986-02-27T22:52:00Z"
+    ],
+    "northwest-167-GRR-MSP-1635-b115@1986-02-28": [
+      "1986-02-28T21:35:00Z",
+      "1986-02-28T22:52:00Z"
+    ],
+    "northwest-167-GRR-MSP-1635-b115@1986-03-01": [
+      "1986-03-01T21:35:00Z",
+      "1986-03-01T22:52:00Z"
+    ],
+    "northwest-763-DTW-GRR-1215-b115@1986-02-28": [
+      "1986-02-28T17:15:00Z",
+      "1986-02-28T17:54:00Z"
+    ],
+    "northwest-763-DTW-GRR-1215-b115@1986-03-01": [
+      "1986-03-01T17:15:00Z",
+      "1986-03-01T17:54:00Z"
+    ],
+    "northwest-765-DTW-GRR-1935-b115@1986-02-27": [
+      "1986-02-28T00:35:00Z",
+      "1986-02-28T01:12:00Z"
+    ],
+    "northwest-765-DTW-GRR-1935-b115@1986-02-28": [
+      "1986-03-01T00:35:00Z",
+      "1986-03-01T01:12:00Z"
+    ],
+    "northwest-760-GRR-DTW-0830-b115@1986-02-28": [
+      "1986-02-28T13:30:00Z",
+      "1986-02-28T14:08:00Z"
+    ],
+    "northwest-760-GRR-DTW-0830-b115@1986-03-01": [
+      "1986-03-01T13:30:00Z",
+      "1986-03-01T14:08:00Z"
+    ],
+    "northwest-774-GRR-DTW-1345-b115@1986-02-28": [
+      "1986-02-28T18:45:00Z",
+      "1986-02-28T19:23:00Z"
+    ],
+    "northwest-774-GRR-DTW-1345-b115@1986-03-01": [
+      "1986-03-01T18:45:00Z",
+      "1986-03-01T19:23:00Z"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "overlap_scope": "All old/new runtime legs with affected operator/flight number; at least one added leg in each comparison.",
+  "adjacent_source_leg_ground_times": [
+    {
+      "incoming_schedule": "northwest-224-MSP-MSN-1410-b115",
+      "outgoing_schedule": "northwest-224-MSN-MKE-1525-b115",
+      "ground_minutes": 24.0,
+      "matching_in_window_chains": 1,
+      "movement_pairs": [
+        [
+          "northwest-224-MSP-MSN-1410-b115@1986-02-28",
+          "northwest-224-MSN-MKE-1525-b115@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "northwest-247-DTW-ORD-1110-b114",
+      "outgoing_schedule": "northwest-247-ORD-MSN-1140-b115",
+      "ground_minutes": 33.0,
+      "matching_in_window_chains": 1,
+      "movement_pairs": [
+        [
+          "northwest-247-DTW-ORD-1110-b114@1986-02-28",
+          "northwest-247-ORD-MSN-1140-b115@1986-02-28"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "northwest-375-DTW-MKE-1450-b114",
+      "outgoing_schedule": "northwest-375-MKE-MSN-1510-b115",
+      "ground_minutes": 25.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "northwest-375-DTW-MKE-1450-b114@1986-02-28",
+          "northwest-375-MKE-MSN-1510-b115@1986-02-28"
+        ],
+        [
+          "northwest-375-DTW-MKE-1450-b114@1986-03-01",
+          "northwest-375-MKE-MSN-1510-b115@1986-03-01"
+        ]
+      ]
+    },
+    {
+      "incoming_schedule": "northwest-375-MKE-MSN-1510-b115",
+      "outgoing_schedule": "northwest-375-MSN-MSP-1600-b115",
+      "ground_minutes": 22.0,
+      "matching_in_window_chains": 2,
+      "movement_pairs": [
+        [
+          "northwest-375-MKE-MSN-1510-b115@1986-02-28",
+          "northwest-375-MSN-MSP-1600-b115@1986-02-28"
+        ],
+        [
+          "northwest-375-MKE-MSN-1510-b115@1986-03-01",
+          "northwest-375-MSN-MSP-1600-b115@1986-03-01"
+        ]
+      ]
+    }
+  ],
+  "ground_times_reviewed": true,
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "passed_data_checks; unreal_runtime_not_run",
+  "ground_time_review_note": "Four adjacent same-number leg pairs: 224 MSP–MSN–MKE24min; 247 DTW–ORD–MSN33min; 375 DTW–MKE–MSN25min and MKE–MSN–MSP22min. Flights224/247 have one transition Feb28: Feb27 segments end before the window, Saturday service excluded. Both 375 transitions occur Feb28/Mar1. On Feb27 only the final MSN–MSP leg overlaps the window; earlier legs end before it. No individual-aircraft identity inferred.",
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

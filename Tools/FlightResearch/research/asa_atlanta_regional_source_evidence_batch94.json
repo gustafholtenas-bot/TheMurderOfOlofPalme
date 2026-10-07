@@ -1,0 +1,51 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    15,
+    16,
+    17,
+    59,
+    61,
+    125,
+    148,
+    240,
+    241
+  ],
+  "airport_directory_printed_pages": [
+    261
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "15": 10,
+    "16": 11,
+    "17": 11,
+    "59": 32,
+    "61": 33,
+    "125": 65,
+    "148": 77,
+    "240": 123,
+    "241": 123,
+    "261": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Twelve complete direction headings: 48 visually reviewed rows, 28 individually printed nonstop schedules, fourteen connecting itineraries and six through-stop rows. All accepted rows use ASA triangle and number ranges from p4; no dated footnotes.",
+    "Blank means daily, X6 except Saturday, X7 except Sunday. Weekdays remain specific to each printed segment, including daily returns for X7 outbound ATL–GTR 1241, ATL–VLD 1521 and ATL–PIB 1446.",
+    "ATL–GTR 1248 and GTR–ATL 1240 through rows are excluded; individually printed ATL–TCL/TCL–GTR and GTR–TCL/TCL–ATL are imported. Each ground interval at TCL is ten minutes.",
+    "ATL–MEI 1446 and both PIB–ATL rows are through services. Existing PIB–MEI 1445/1446 join the new MEI–ATL segments. ATL–PIB 1446 is nonstop; ATL–PIB 1449 is via MEI. No direct PIB–ATL schedule is invented.",
+    "ATL–GTR 1241 is 10:25–10:45 local. ATL–MEI 1447 is 16:46–17:15. ATL–PIB 1446 arrives 11:12. The three specific time readings were checked in enlarged original scans.",
+    "ATL/VLD use winter UTC−5; GTR/MEI/PIB/TCL/MEM use UTC−6. All accepted arrivals are same local calendar day. Apparent 10–30-minute westbound clock differences include the one-hour timezone difference, not implausibly short durations.",
+    "Independent manual 24-hour transcription, fixed winter offsets and calendar/window overlap match generated movements. Nineteen same-number segment transitions on 28 February have verified ground intervals of 10–15 minutes. This does not establish aircraft identity.",
+    "Directory p261 identifies TCL Tuscaloosa Municipal and VLD Valdosta. City airport history and Valdosta authority history confirm pre-1986 operation at these fields. Modern OurAirports coordinates are approximate airport-area markers.",
+    "All previous data objects, COMAIR corrections and held source conflicts unchanged. Timetable end date, later amendments and actual operation remain unverified. Original scans are not redistributed."
+  ]
+}

@@ -1,0 +1,611 @@
+{
+  "schema": 1,
+  "scope": "South Africa — publicly documented intelligence, security, special-forces personnel and overall leadership; selected people, not a staff roll",
+  "reference_date": "1986-02-28",
+  "checked": "2026-10-02",
+  "batch": "SA02",
+  "people": [
+    {
+      "id": "niel-barnard",
+      "name": "Niel Barnard",
+      "organization": "nis",
+      "role": {
+        "sv": "Chef för NIS",
+        "en": "Director of NIS",
+        "en_source": "Chef för NIS"
+      },
+      "note": {
+        "sv": "Biografin anger chefskap 1980–1992. Befattningen i februari 1986 härleds ur denna period. Han fanns redan i atlasen och får nu ett eget personkort under NIS.",
+        "en": "The biography dates his directorship to 1980–1992. His February 1986 post is inferred from this interval. Already present in the atlas, he now has a separate person card under NIS.",
+        "en_source": "Biografin anger chefskap 1980–1992. Befattningen i februari 1986 härleds ur denna period. Han fanns redan i atlasen och får nu ett eget personkort under NIS."
+      },
+      "sources": [
+        "https://en.wikipedia.org/wiki/Niel_Barnard",
+        "https://www.nongqai.org/dr-ld-niel-barnard-an-appreciation/"
+      ],
+      "evidence_status": "secondary_command_interval_inference_existing_person_normalized",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "mike-louw",
+      "name": "Mike Louw",
+      "organization": "nis",
+      "role": {
+        "sv": "Biträdande chef för NIS",
+        "en": "Deputy Director of NIS",
+        "en_source": "Biträdande chef för NIS"
+      },
+      "note": {
+        "sv": "Biografin anger befordran till biträdande chef 1985 och övertagande som generaldirektör 1992. Placeringen i februari 1986 härleds ur kronologin.",
+        "en": "The biography records promotion to deputy director in 1985 and succession as director-general in 1992. His February 1986 placement is inferred from this chronology.",
+        "en_source": "Biografin anger befordran till biträdande chef 1985 och övertagande som generaldirektör 1992. Placeringen i februari 1986 härleds ur kronologin."
+      },
+      "sources": [
+        "https://en.wikipedia.org/wiki/Mike_Louw"
+      ],
+      "evidence_status": "secondary_command_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "johan-coetzee",
+      "name": "Johan Coetzee (Petrus Johann)",
+      "organization": "sap",
+      "role": {
+        "sv": "Poliskommissarie — chef för SAP",
+        "en": "Commissioner of the SAP",
+        "en_source": "Poliskommissarie — chef för SAP"
+      },
+      "note": {
+        "sv": "Coetzee bekräftar i TRC-förhöret chefskap för SAP 1983–1987. Befattningen i februari 1986 härleds ur denna period.",
+        "en": "Coetzee confirms in TRC testimony that he led the SAP in 1983–1987. His February 1986 role is inferred from this interval.",
+        "en_source": "Coetzee bekräftar i TRC-förhöret chefskap för SAP 1983–1987. Befattningen i februari 1986 härleds ur denna period."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/special/forces/sap.htm"
+      ],
+      "evidence_status": "primary_self_reported_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "johan-van-der-merwe",
+      "name": "Johan van der Merwe",
+      "organization": "security-branch",
+      "role": {
+        "sv": "Chef för Security Branch",
+        "en": "Head of the Security Branch",
+        "en_source": "Chef för Security Branch"
+      },
+      "note": {
+        "sv": "Van der Merwe anger i TRC-förhöret tillträde den 1 januari 1986. Befattningen för referensdagen härleds ur hans angivna chefsperiod 1986–1988.",
+        "en": "Van der Merwe dates his appointment to 1 January 1986 in TRC testimony. His reference-date role is inferred from his stated command interval of 1986–1988.",
+        "en_source": "Van der Merwe anger i TRC-förhöret tillträde den 1 januari 1986. Befattningen för referensdagen härleds ur hans angivna chefsperiod 1986–1988."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/special/forces/sap.htm"
+      ],
+      "evidence_status": "primary_self_reported_dated_appointment_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "wilhelm-schoon",
+      "name": "Wilhelm Schoon",
+      "organization": "c-section",
+      "role": {
+        "sv": "Chef för C-sektionen",
+        "en": "Head of C Section",
+        "en_source": "Chef för C-sektionen"
+      },
+      "note": {
+        "sv": "Schoon bekräftar i TRC-förhöret ledning av C-sektionen 1980–1989. Befattningen den 28 februari 1986 härleds ur perioden.",
+        "en": "Schoon confirms in TRC testimony that he led C Section in 1980–1989. His post on 28 February 1986 is inferred from this interval.",
+        "en_source": "Schoon bekräftar i TRC-förhöret ledning av C-sektionen 1980–1989. Befattningen den 28 februari 1986 härleds ur perioden."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/special/forces/sap.htm"
+      ],
+      "evidence_status": "primary_self_reported_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "jack-cronje",
+      "name": "Jack Cronje (Jan Hattingh)",
+      "organization": "northern-transvaal",
+      "role": {
+        "sv": "Chef för Northern Transvaal Security Branch",
+        "en": "Head of Northern Transvaal Security Branch",
+        "en_source": "Chef för Northern Transvaal Security Branch"
+      },
+      "note": {
+        "sv": "Cronje anger att han lämnade Vlakplaas ledning 1985 och därefter ledde Northern Transvaal till juni 1987. Februarirollen härleds ur kronologin.",
+        "en": "Cronje states that he left Vlakplaas command in 1985 and then led Northern Transvaal until June 1987. His February role is inferred from this chronology.",
+        "en_source": "Cronje anger att han lämnade Vlakplaas ledning 1985 och därefter ledde Northern Transvaal till juni 1987. Februarirollen härleds ur kronologin."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/joburg/jhb.htm"
+      ],
+      "evidence_status": "primary_self_reported_command_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "jacques-hechter",
+      "name": "Jacques Hechter",
+      "organization": "northern-transvaal",
+      "role": {
+        "sv": "Operativ befattning, Northern Transvaal",
+        "en": "Operational role, Northern Transvaal",
+        "en_source": "Operativ befattning, Northern Transvaal"
+      },
+      "note": {
+        "sv": "Van Jaarsveld beskriver i TRC-förhöret Hechters operativa uppdrag efter ett möte den 12 februari 1986. Placeringen för referensdagen härleds ur denna daterade redogörelse; exakt grad anges inte.",
+        "en": "Van Jaarsveld describes Hechter’s operational assignment after a meeting on 12 February 1986 in TRC testimony. The reference-date placement is inferred from this dated account; no exact rank is assigned.",
+        "en_source": "Van Jaarsveld beskriver i TRC-förhöret Hechters operativa uppdrag efter ett möte den 12 februari 1986. Placeringen för referensdagen härleds ur denna daterade redogörelse; exakt grad anges inte."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/99050313_pre_990505pt.htm"
+      ],
+      "evidence_status": "primary_colleague_testimony_dated_assignment_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "eugene-de-kock",
+      "name": "Eugene de Kock",
+      "organization": "vlakplaas-c1",
+      "role": {
+        "sv": "Chef för C1/Vlakplaas",
+        "en": "Commander of C1/Vlakplaas",
+        "en_source": "Chef för C1/Vlakplaas"
+      },
+      "note": {
+        "sv": "De Kock daterar övertagandet av Vlakplaas ledning till den 1 juli 1985 i sitt TRC-förhör. Befattningen i februari 1986 härleds ur hans tjänstgöringskronologi.",
+        "en": "De Kock dates his assumption of Vlakplaas command to 1 July 1985 in TRC testimony. His February 1986 role is inferred from his service chronology.",
+        "en_source": "De Kock daterar övertagandet av Vlakplaas ledning till den 1 juli 1985 i sitt TRC-förhör. Befattningen i februari 1986 härleds ur hans tjänstgöringskronologi."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/9905240623_pre_990524pt.htm"
+      ],
+      "evidence_status": "primary_self_reported_dated_command_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02",
+      "portrait": {
+        "person_id": "eugene-de-kock",
+        "file": "za-eugene-de-kock.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Eugene_de_Kock_(cropped).jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Eugene_de_Kock_%28cropped%29.jpg/330px-Eugene_de_Kock_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "George Hallett",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source_date": "1997",
+        "description": "Eugene de Kock, TRC Headquarters, 1997",
+        "sha256": "e68145e065537b28eba913b1c9581f329bb13d1348af09a5630b7635d45f8de3",
+        "modifications": "Wikimedia-provided thumbnail of an existing cropped image; no additional edits.",
+        "checked": "2026-10-02",
+        "date_note": "The Commons description dates the photograph to 1997. The metadata timestamp 2013-05-10 is not used as the capture date."
+      }
+    },
+    {
+      "id": "willem-nortje",
+      "name": "Willem Nortje (Willie)",
+      "organization": "vlakplaas-c1",
+      "role": {
+        "sv": "Tjänstgörande inom C1/Vlakplaas",
+        "en": "Serving C1/Vlakplaas member",
+        "en_source": "Tjänstgörande inom C1/Vlakplaas"
+      },
+      "note": {
+        "sv": "Nortje anger i TRC-förhöret inträde vid Vlakplaas omkring augusti 1984. Tillhörigheten i februari 1986 härleds ur tjänstgöringskronologin; exakt befattning för dagen är inte fastställd.",
+        "en": "Nortje dates his entry into Vlakplaas to approximately August 1984 in TRC testimony. His February 1986 affiliation is inferred from the service chronology; his exact post that day is unresolved.",
+        "en_source": "Nortje anger i TRC-förhöret inträde vid Vlakplaas omkring augusti 1984. Tillhörigheten i februari 1986 härleds ur tjänstgöringskronologin; exakt befattning för dagen är inte fastställd."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/2000/201010ne.htm",
+        "https://www.justice.gov.za/trc/decisions/2001/ac21171.htm"
+      ],
+      "evidence_status": "primary_self_report_and_amnesty_decision_service_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "nicholas-vermeulen",
+      "name": "Nicholas Johannes Vermeulen",
+      "organization": "vlakplaas-c1",
+      "role": {
+        "sv": "Tjänstgörande inom C1/Vlakplaas",
+        "en": "Serving C1/Vlakplaas member",
+        "en_source": "Tjänstgörande inom C1/Vlakplaas"
+      },
+      "note": {
+        "sv": "Vermeulen anger inträde i oktober 1985 och bekräftar i TRC-förhöret medlemskap vid Vlakplaas 1985–1992. Februarianknytningen härleds ur perioden. Personen ska inte förväxlas med Koos Vermeulen.",
+        "en": "Vermeulen dates his entry to October 1985 and confirms Vlakplaas membership in 1985–1992 in TRC testimony. His February affiliation is inferred from the interval. He is distinct from Koos Vermeulen.",
+        "en_source": "Vermeulen anger inträde i oktober 1985 och bekräftar i TRC-förhöret medlemskap vid Vlakplaas 1985–1992. Februarianknytningen härleds ur perioden. Personen ska inte förväxlas med Koos Vermeulen."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/2000/200608pa.htm"
+      ],
+      "evidence_status": "primary_self_reported_dated_entry_service_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "almond-nofomela",
+      "name": "Almond Butana Nofomela",
+      "organization": "vlakplaas-c1",
+      "role": {
+        "sv": "Tjänstgörande inom C1/Vlakplaas",
+        "en": "Serving C1/Vlakplaas member",
+        "en_source": "Tjänstgörande inom C1/Vlakplaas"
+      },
+      "note": {
+        "sv": "Nofomela anger i TRC-förhöret inträde i december 1980 och beskriver fortsatt tjänst vid Vlakplaas under 1986. Februarianknytningen härleds ur kronologin; exakt befattning då är inte fastställd.",
+        "en": "Nofomela dates his entry to December 1980 and describes continued Vlakplaas service during 1986 in TRC testimony. His February affiliation is inferred from the chronology; his exact post then is unresolved.",
+        "en_source": "Nofomela anger i TRC-förhöret inträde i december 1980 och beskriver fortsatt tjänst vid Vlakplaas under 1986. Februarianknytningen härleds ur kronologin; exakt befattning då är inte fastställd."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/99090103_dbn_990901db.htm"
+      ],
+      "evidence_status": "primary_self_reported_service_chronology_inference_role_unresolved",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "craig-williamson",
+      "name": "Craig Michael Williamson",
+      "organization": "dcc",
+      "role": {
+        "sv": "Militär underrättelsetjänst — DCC",
+        "en": "Military Intelligence — DCC",
+        "en_source": "Militär underrättelsetjänst — DCC"
+      },
+      "note": {
+        "sv": "Williamson uppger i TRC-förhöret att han lämnade SAP den 31 december 1985 och gick till Directorate of Covert Collection inom SADF. Februarianknytningen härleds ur övergången; den nya befattningens exakta tillträdesdag anges inte.",
+        "en": "Williamson states in TRC testimony that he left the SAP on 31 December 1985 and joined the SADF’s Directorate of Covert Collection. His February affiliation is inferred from the transition; the exact start date of his new post is not given.",
+        "en_source": "Williamson uppger i TRC-förhöret att han lämnade SAP den 31 december 1985 och gick till Directorate of Covert Collection inom SADF. Februarianknytningen härleds ur övergången; den nya befattningens exakta tillträdesdag anges inte."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1998/98090829_pre_2pretor8.htm"
+      ],
+      "evidence_status": "primary_self_reported_organization_transition_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "pieter-van-der-westhuizen",
+      "name": "Pieter Willem van der Westhuizen",
+      "organization": "ssc-secretariat",
+      "role": {
+        "sv": "Sekreterare i State Security Council",
+        "en": "Secretary of the State Security Council",
+        "en_source": "Sekreterare i State Security Council"
+      },
+      "note": {
+        "sv": "Biografin anger avgång som militär underrättelsechef 1985 och tjänst som säkerhetsrådets sekreterare fram till 1988. Februarirollen härleds ur kronologin. Personen är skild från Christoffel ”Joffel” van der Westhuizen.",
+        "en": "The biography records departure as military intelligence chief in 1985 and service as the Security Council’s secretary until 1988. His February role is inferred from this chronology. He is distinct from Christoffel “Joffel” van der Westhuizen.",
+        "en_source": "Biografin anger avgång som militär underrättelsechef 1985 och tjänst som säkerhetsrådets sekreterare fram till 1988. Februarirollen härleds ur kronologin. Personen är skild från Christoffel ”Joffel” van der Westhuizen."
+      },
+      "sources": [
+        "https://en.wikipedia.org/wiki/Pieter_van_der_Westhuizen"
+      ],
+      "evidence_status": "secondary_command_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "andries-putter",
+      "name": "Andries Petrus Putter",
+      "organization": "military-intelligence",
+      "role": {
+        "sv": "Chef för militär underrättelsetjänst",
+        "en": "Chief of Defence Intelligence",
+        "en_source": "Chef för militär underrättelsetjänst"
+      },
+      "note": {
+        "sv": "Biografin anger tillträde som militär underrättelsechef 1985 och återgång till marinledningen 1989. Februarirollen härleds ur perioden.",
+        "en": "The biography records appointment as defence intelligence chief in 1985 and a return to naval command in 1989. His February role is inferred from this interval.",
+        "en_source": "Biografin anger tillträde som militär underrättelsechef 1985 och återgång till marinledningen 1989. Februarirollen härleds ur perioden."
+      },
+      "sources": [
+        "https://en.wikipedia.org/wiki/Andries_Putter"
+      ],
+      "evidence_status": "secondary_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "joep-joubert",
+      "name": "Joep Joubert (Abraham)",
+      "organization": "special-forces",
+      "role": {
+        "sv": "Chef för SADF Special Forces",
+        "en": "Commander of SADF Special Forces",
+        "en_source": "Chef för SADF Special Forces"
+      },
+      "note": {
+        "sv": "Joubert bekräftar i TRC-förhöret ledning av specialförbanden från 1985 till slutet av 1988. Februarirollen härleds ur perioden.",
+        "en": "Joubert confirms in TRC testimony that he led Special Forces from 1985 until late 1988. His February role is inferred from this interval.",
+        "en_source": "Joubert bekräftar i TRC-förhöret ledning av specialförbanden från 1985 till slutet av 1988. Februarirollen härleds ur perioden."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/special/forces/sadf.htm"
+      ],
+      "evidence_status": "primary_self_reported_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "jan-geldenhuys",
+      "name": "Jan Geldenhuys (Johannes Jacobus)",
+      "organization": "sadf",
+      "role": {
+        "sv": "Chef för SADF",
+        "en": "Chief of the SADF",
+        "en_source": "Chef för SADF"
+      },
+      "note": {
+        "sv": "TRC:s militärförhör anger Geldenhuys chefsperiod som 1985–1990. Befattningen den 28 februari 1986 härleds ur perioden.",
+        "en": "The TRC armed forces hearing dates Geldenhuys’ command to 1985–1990. His post on 28 February 1986 is inferred from this interval.",
+        "en_source": "TRC:s militärförhör anger Geldenhuys chefsperiod som 1985–1990. Befattningen den 28 februari 1986 härleds ur perioden."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/special/forces/sadf.htm"
+      ],
+      "evidence_status": "primary_hearing_command_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "roelf-venter",
+      "name": "Roelf Venter",
+      "organization": "c2",
+      "role": {
+        "sv": "Tjänstgörande inom C2",
+        "en": "Serving C2 member",
+        "en_source": "Tjänstgörande inom C2"
+      },
+      "note": {
+        "sv": "Venter anger i TRC-förhöret övergång från C1 till C2 i augusti 1985 och fortsatt tjänst där till 1990. Februarianknytningen härleds ur perioden.",
+        "en": "Venter dates his transfer from C1 to C2 to August 1985 and continued service there until 1990 in TRC testimony. His February affiliation is inferred from this interval.",
+        "en_source": "Venter anger i TRC-förhöret övergång från C1 till C2 i augusti 1985 och fortsatt tjänst där till 1990. Februarianknytningen härleds ur perioden."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/joburg/jhb.htm"
+      ],
+      "evidence_status": "primary_self_reported_named_unit_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "joe-mamasela",
+      "name": "Joe Mamasela",
+      "organization": "northern-transvaal",
+      "role": {
+        "sv": "Operativ medarbetare, Northern Transvaal",
+        "en": "Operational associate, Northern Transvaal",
+        "en_source": "Operativ medarbetare, Northern Transvaal"
+      },
+      "note": {
+        "sv": "Van Jaarsveld beskriver i TRC-förhöret Mamaselas samarbete med Hechter i det operativa upplägg som följde mötet den 12 februari 1986. Februarianknytningen härleds ur redogörelsen; ingen polisgrad anges.",
+        "en": "Van Jaarsveld describes Mamasela’s work with Hechter in the operational arrangement following the meeting of 12 February 1986 in TRC testimony. His February affiliation is inferred from this account; no police rank is assigned.",
+        "en_source": "Van Jaarsveld beskriver i TRC-förhöret Mamaselas samarbete med Hechter i det operativa upplägg som följde mötet den 12 februari 1986. Februarianknytningen härleds ur redogörelsen; ingen polisgrad anges."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/99050313_pre_990505pt.htm"
+      ],
+      "evidence_status": "primary_colleague_testimony_dated_operational_affiliation_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "paul-van-dyk",
+      "name": "Paul Jacobus van Dyk",
+      "organization": "vlakplaas-c1",
+      "role": {
+        "sv": "Tjänstgörande inom C1/Vlakplaas",
+        "en": "Serving C1/Vlakplaas member",
+        "en_source": "Tjänstgörande inom C1/Vlakplaas"
+      },
+      "note": {
+        "sv": "Van Dyk anger i TRC-förhöret tjänstgöring vid Vlakplaas 1981–1993. Februarianknytningen härleds ur perioden; exakt befattning och grad för dagen är inte fastställda.",
+        "en": "Van Dyk states in TRC testimony that he served at Vlakplaas in 1981–1993. His February affiliation is inferred from this interval; his exact post and rank that day are unresolved.",
+        "en_source": "Van Dyk anger i TRC-förhöret tjänstgöring vid Vlakplaas 1981–1993. Februarianknytningen härleds ur perioden; exakt befattning och grad för dagen är inte fastställda."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/99072630_dbn_990728db.htm"
+      ],
+      "evidence_status": "primary_self_reported_service_interval_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "michael-bellingan",
+      "name": "Michael Bellingan",
+      "organization": "security-branch",
+      "role": {
+        "sv": "Tjänstgörande inom Security Branch",
+        "en": "Serving Security Branch member",
+        "en_source": "Tjänstgörande inom Security Branch"
+      },
+      "note": {
+        "sv": "Bellingan anger Security Branch från 1981 och byte till högkvarterets Stratcom under 1986. Tillhörigheten i februari härleds ur kronologin; bytesdagen är okänd. Han är en annan person än Riaan Bellingan.",
+        "en": "Bellingan dates Security Branch service from 1981 and transfer to headquarters Stratcom during 1986. His February affiliation is inferred from this chronology; the transfer day is unknown. He is distinct from Riaan Bellingan.",
+        "en_source": "Bellingan anger Security Branch från 1981 och byte till högkvarterets Stratcom under 1986. Tillhörigheten i februari härleds ur kronologin; bytesdagen är okänd. Han är en annan person än Riaan Bellingan."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/99012529_pret_990125pt.htm"
+      ],
+      "evidence_status": "primary_self_reported_service_chronology_inference_subunit_unresolved",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "riaan-bellingan",
+      "name": "Wilhelm Riaan Bellingan",
+      "organization": "vlakplaas-c1",
+      "role": {
+        "sv": "C1/Vlakplaas — uppdrag i Kapstaden",
+        "en": "C1/Vlakplaas — Cape Town assignment",
+        "en_source": "C1/Vlakplaas — uppdrag i Kapstaden"
+      },
+      "note": {
+        "sv": "Bellingan bekräftar C1-tjänst i januari 1986 och uppdrag i Kapstaden från slutet av januari eller början av februari. Februarianknytningen härleds ur redogörelsen. Han är skild från Michael Bellingan.",
+        "en": "Bellingan confirms C1 service in January 1986 and a Cape Town assignment from late January or early February. His February affiliation is inferred from this account. He is distinct from Michael Bellingan.",
+        "en_source": "Bellingan bekräftar C1-tjänst i januari 1986 och uppdrag i Kapstaden från slutet av januari eller början av februari. Februarianknytningen härleds ur redogörelsen. Han är skild från Michael Bellingan."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/capetown/capetown_belling1.htm"
+      ],
+      "evidence_status": "primary_self_reported_dated_assignment_chronology_inference",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "jaap-van-jaarsveld",
+      "name": "Jaap van Jaarsveld",
+      "organization": "northern-transvaal",
+      "role": {
+        "sv": "Security Branch — Northern Transvaal",
+        "en": "Security Branch — Northern Transvaal",
+        "en_source": "Security Branch — Northern Transvaal"
+      },
+      "note": {
+        "sv": "Van Jaarsveld beskriver Northern Transvaal-tjänst 1985–1987 och ledning av Unit B från februari 1986. Februarianknytningen härleds ur perioden; chefskapets exakta startdag anges inte. Ingen separat chefsnod införs.",
+        "en": "Van Jaarsveld describes Northern Transvaal service in 1985–1987 and Unit B command from February 1986. His February affiliation is inferred from the interval; the exact command start day is not stated. No separate command node is created.",
+        "en_source": "Van Jaarsveld beskriver Northern Transvaal-tjänst 1985–1987 och ledning av Unit B från februari 1986. Februarianknytningen härleds ur perioden; chefskapets exakta startdag anges inte. Ingen separat chefsnod införs."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/99050313_pre_990505pt.htm"
+      ],
+      "evidence_status": "primary_self_reported_service_interval_inference_command_start_day_unresolved",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    },
+    {
+      "id": "marthinus-ras",
+      "name": "Marthinus Dawid Ras",
+      "organization": "vlakplaas-c1",
+      "role": {
+        "sv": "Tjänstgörande inom C1/Vlakplaas",
+        "en": "Serving C1/Vlakplaas member",
+        "en_source": "Tjänstgörande inom C1/Vlakplaas"
+      },
+      "note": {
+        "sv": "Ras bekräftar Koevoet-tjänst till september 1984, därefter Vlakplaas fram till avvecklingen. Februarianknytningen härleds ur kronologin. Han daterar övergången till dolda operationer endast till 1986, utan exakt dag.",
+        "en": "Ras confirms Koevoet service until September 1984, followed by Vlakplaas until its dissolution. His February affiliation is inferred from this chronology. He dates assignment to covert operations only to 1986, without an exact day.",
+        "en_source": "Ras bekräftar Koevoet-tjänst till september 1984, därefter Vlakplaas fram till avvecklingen. Februarianknytningen härleds ur kronologin. Han daterar övergången till dolda operationer endast till 1986, utan exakt dag."
+      },
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/pe/mother7.htm"
+      ],
+      "evidence_status": "primary_self_reported_service_chronology_inference_exact_duty_unresolved",
+      "reference_date": "1986-02-28",
+      "checked": "2026-10-02"
+    }
+  ],
+  "year_only_people": [],
+  "review_people": [],
+  "follow_up": [],
+  "candidate_checks": [
+    {
+      "name": "Civil Co-operation Bureau (CCB)",
+      "status": "not_added_to_february_hierarchy_later_organization",
+      "note_sv": "TRC-förhöret placerar omorganisationen av specialförbandens dolda verksamhet kring mitten av 1986. CCB införs inte som fastställd organisation den 28 februari. Föregångare behöver undersökas separat.",
+      "sources": [
+        "https://www.justice.gov.za/trc/special/forces/sadf.htm"
+      ],
+      "checked": "2026-10-02"
+    },
+    {
+      "name": "Tienie Groenewald",
+      "status": "follow_up_exact_february_post",
+      "note_sv": "TRC-materialet dokumenterar militärt underrättelsearbete under januari–februari 1986. Övergången mellan militär underrättelsetjänst och NIIB behöver dateras närmare för ett exakt personkort.",
+      "sources": [
+        "https://www.justice.gov.za/trc/special/caprivi/caprivi7.htm"
+      ],
+      "checked": "2026-10-02"
+    },
+    {
+      "name": "Dirk Coetzee",
+      "status": "follow_up_departure_date",
+      "note_sv": "Tidigare ledning av Vlakplaas ska inte tillskrivas 1986. Kontrollera den senare tjänstgöringens och avgångens datum innan en placering för februari.",
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/joburg/coetzee2.htm"
+      ],
+      "checked": "2026-10-02"
+    },
+    {
+      "name": "Michael Bellingan",
+      "status": "added_generic_security_branch_in_SA02_exact_stratcom_transfer_day_unresolved",
+      "note_sv": "Tillagd i SA02 under Security Branch. Bytet till Stratcom skedde under 1986, men exakt datum är fortfarande okänt. Ingen specifik Stratcom-post tillskrivs februari.",
+      "sources": [
+        "https://www.justice.gov.za/trc/amntrans/1999/99012529_pret_990125pt.htm"
+      ],
+      "checked": "2026-10-02"
+    },
+    {
+      "name": "BOSS / DONS",
+      "status": "not_used_as_1986_organization",
+      "note_sv": "BOSS och DONS är äldre organisationsnamn. För 1986 används NIS.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/National_Intelligence_Service_(South_Africa)"
+      ],
+      "checked": "2026-10-02"
+    }
+  ],
+  "changes_from_IL06": {
+    "added_people": [
+      "mike-louw",
+      "johan-coetzee",
+      "johan-van-der-merwe",
+      "wilhelm-schoon",
+      "jack-cronje",
+      "jacques-hechter",
+      "eugene-de-kock",
+      "willem-nortje",
+      "nicholas-vermeulen",
+      "almond-nofomela",
+      "craig-williamson",
+      "pieter-van-der-westhuizen",
+      "andries-putter",
+      "joep-joubert",
+      "jan-geldenhuys",
+      "roelf-venter",
+      "joe-mamasela"
+    ],
+    "existing_person_given_separate_card": [
+      "niel-barnard"
+    ],
+    "added_portraits": [
+      "eugene-de-kock"
+    ],
+    "added_groups": [
+      "sap",
+      "security-branch",
+      "c-section",
+      "vlakplaas-c1",
+      "c2",
+      "northern-transvaal",
+      "sadf",
+      "military-intelligence",
+      "dcc",
+      "special-forces",
+      "ssc-secretariat"
+    ]
+  },
+  "source_note_sv": "TRC-vittnesmål redovisas som vittnesuppgifter. Tillhörighet för referensdagen är ofta härledd ur datum eller perioder; det är inte en bekräftad daglig personallista. Övergripande polis- och militärledning samt säkerhetsrådets sekretariat är tydligt skilda från underrättelseförbanden.",
+  "changes_from_SA01": {
+    "added_people": [
+      "paul-van-dyk",
+      "michael-bellingan",
+      "riaan-bellingan",
+      "jaap-van-jaarsveld",
+      "marthinus-ras"
+    ],
+    "added_portraits": [],
+    "added_groups": []
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "package": "v121",
+  "checked_on": "2026-10-01",
+  "scope": [
+    {
+      "id": "eg",
+      "name": "Egypten"
+    },
+    {
+      "id": "il",
+      "name": "Israel"
+    },
+    {
+      "id": "jo",
+      "name": "Jordanien"
+    },
+    {
+      "id": "lb",
+      "name": "Libanon"
+    },
+    {
+      "id": "sy",
+      "name": "Syrien"
+    },
+    {
+      "id": "iq",
+      "name": "Irak"
+    },
+    {
+      "id": "ir",
+      "name": "Iran"
+    },
+    {
+      "id": "sa",
+      "name": "Saudiarabien"
+    },
+    {
+      "id": "kw",
+      "name": "Kuwait"
+    },
+    {
+      "id": "bh",
+      "name": "Bahrain"
+    },
+    {
+      "id": "qa",
+      "name": "Qatar"
+    },
+    {
+      "id": "ae",
+      "name": "Förenade arabemiraten"
+    },
+    {
+      "id": "om",
+      "name": "Oman"
+    },
+    {
+      "id": "ye-north",
+      "name": "Nordjemen"
+    },
+    {
+      "id": "ye-south",
+      "name": "Sydjemen"
+    },
+    {
+      "id": "tr",
+      "name": "Turkiet"
+    },
+    {
+      "id": "cy",
+      "name": "Cypern"
+    }
+  ],
+  "operators": [
+    {
+      "operator": "Saudia",
+      "research_areas": [
+        "sa"
+      ],
+      "status": "imported_partial",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "next_action_sv": "En SV062-avgång CDG–JED importeras. SV061 JED–Paris saknar nonstop-pil och hålls. Sommarboken 1 juni–26 oktober1985 gäller inte spelfönstret.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Alia",
+      "research_areas": [
+        "jo"
+      ],
+      "status": "imported_partial",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "next_action_sv": "RJ103/104 Amman–Orly i båda riktningar. Egen fullständig vinterbok och regionaltrafik återstår.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Middle East Airlines",
+      "research_areas": [
+        "lb"
+      ],
+      "status": "imported_partial",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "next_action_sv": "ME211/212 Beirut–Orly i båda riktningar. Nice-radernas mellanstopp och övrigt nät återstår.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "El Al",
+      "research_areas": [
+        "il"
+      ],
+      "status": "imported_partial_original_panels",
+      "url": "https://www.ebay.co.uk/itm/198672080349",
+      "next_action_sv": "V121: 19 nya rörelser från El Als egen vinter1985/86-utgåva1; LY324 bekräftad utan dubbelimport. Totalt20 LY-rörelser. Eilat-panelen är avskuren; övriga rader, rättelser samt Arkia/CAL återstår.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Kuwait Airways",
+      "research_areas": [
+        "kw"
+      ],
+      "status": "winter_catalog_found",
+      "url": "https://collection.sfomuseum.org/objects/1763195869/",
+      "next_action_sv": "Omslag daterat27oktober1985. Innersidor behövs. AF:s KU162 fredag saknar nonstop-pil; ingen KU-rörelse importeras.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Gulf Air",
+      "research_areas": [
+        "bh",
+        "qa",
+        "ae",
+        "om"
+      ],
+      "status": "winter_catalog_found",
+      "url": "https://www.airtimes.com/cgat/bh/gulfair.htm",
+      "next_action_sv": "Utgåva1januari–29mars1986 finns i index, men läsbara vinteravgångssidor har inte återfunnits. Gulf Air ska granskas för samtliga fyra Gulfstater utan att hemlandsfilter gissas.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "EgyptAir",
+      "research_areas": [
+        "eg"
+      ],
+      "status": "winter_cover_found",
+      "url": "https://collection.sfomuseum.org/objects/1763195237/",
+      "next_action_sv": "Vinteromslag27oktober1985 identifierat; inga kompletta avgångssidor importerade. Kairo får här tre AF-rörelser, inga EgyptAir-rörelser.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Iran Air",
+      "research_areas": [
+        "ir"
+      ],
+      "status": "missing_applicable_inner_pages",
+      "url": "https://www.timetableimages.com/ttimages/ir.htm",
+      "next_action_sv": "AF:s tryckta Iran Air-rader går på tisdagar och ger inga rörelser i fönstret. Egen vintertabell och inrikesnät återstår.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Iraqi Airways",
+      "research_areas": [
+        "iq"
+      ],
+      "status": "missing_applicable_inner_pages",
+      "url": "https://www.timetableimages.com/ttimages/ia.htm",
+      "next_action_sv": "Index gav inget importklart vinter1985/86-underlag. Bagdad får AF-rörelser; inga Iraqi Airways-tider konstrueras.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Syrian Arab Airlines",
+      "research_areas": [
+        "sy"
+      ],
+      "status": "missing_applicable_inner_pages",
+      "url": "https://www.timetableimages.com/ttimages/rb.htm",
+      "next_action_sv": "Ingen tillämplig vinter1985/86-tabell med fullständiga tider har hittats i granskat index. Damaskus får AF-rörelser.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Emirates",
+      "research_areas": [
+        "ae"
+      ],
+      "status": "wrong_period_material",
+      "url": "https://www.timetableimages.com/ttimages/ek.htm",
+      "next_action_sv": "1986-materialet som hittats gäller augusti/oktober. Det kan inte flyttas till februari. Officiell historik visar trafikstart1985 men saknar exakta tider för spelfönstret.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Yemenia",
+      "research_areas": [
+        "ye-north"
+      ],
+      "status": "winter_cover_found",
+      "url": "https://www.timetableimages.com/ttimages/iy.htm",
+      "next_action_sv": "Vinteromslag27oktober1985 finns. AF:s IY748/749 Sana–Paris saknar nonstop-pil; fullständiga bentider saknas.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Alyemda",
+      "research_areas": [
+        "ye-south"
+      ],
+      "status": "research_needed",
+      "url": null,
+      "next_action_sv": "Egen vintertidtabell och datumgiltiga ändringar återstår. Aden–Djibouti importeras endast från Air Djiboutis separat tidsatta rader.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Turkish Airlines",
+      "research_areas": [
+        "tr"
+      ],
+      "status": "existing_partial",
+      "url": "https://www.airtimes.com/cgat/tr/turkish.htm",
+      "next_action_sv": "Fyra befintliga TK-rörelser bevaras. Ankaraanslutningar saknar mellanliggande tider; ingen uppskattad inrikessträcka importeras.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Cyprus Airways / KTHY",
+      "research_areas": [
+        "cy"
+      ],
+      "status": "existing_held_sources",
+      "url": "https://www.timetableimages.com/ttimages/cy.htm",
+      "next_action_sv": "Cyprus Airways förhandsmaterial har kvarstående legend/fotnotsluckor enligt batch43. KTHY kräver egen källa. Ingen ny CY-rörelse i denna omgång.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "UTA",
+      "research_areas": [
+        "fr"
+      ],
+      "status": "imported_partial",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "next_action_sv": "Sex regionala ben via Bahrain och Muscat. Genomgående Singapore–Paris delas endast där båda ändpunkternas tider är tryckta.",
+      "coverage_complete": false
+    },
+    {
+      "operator": "Air Djibouti",
+      "research_areas": [
+        "dj"
+      ],
+      "status": "imported_partial",
+      "url": "https://www.airtimes.com/cgat/fr/airfrance/pdf/1a/af851027-1a.pdf",
+      "next_action_sv": "DJ071/072 Djibouti–Aden. Andra DJ-rader och dubbelkodade AFDJ-tjänster kräver separat operatörs- och delsträckskontroll.",
+      "coverage_complete": false
+    }
+  ],
+  "complete_census": false,
+  "census_limitation": "This is a source-search priority list, not a verified exhaustive1986 operator census. Charter, cargo, regional, helicopter, private, government and military operators remain incompletely inventoried.",
+  "additional_census_candidates": [
+    "Arkia",
+    "CAL Cargo Air Lines",
+    "Trans Mediterranean Airways",
+    "Iran Aseman",
+    "Air Sinai",
+    "Misr Overseas Airways",
+    "Abu Dhabi Aviation"
+  ],
+  "candidate_policy": "Candidate names identify research tasks only; no unverified candidate is added to the runtime catalog.",
+  "other_sources_checked": [
+    {
+      "url": "https://airline-memorabilia.blogspot.com/2014/07/saudia-saudi-arabian-airlines-1985.html",
+      "decision": "held_wrong_season",
+      "printed_validity": "1985-06-01 / 1985-10-26",
+      "cover_sha256": "84006351898970563dde465db4bf89dafacdb2e7302dbef7424bd83989ce6bf7"
+    },
+    {
+      "url": "https://www.emirates.com/english/about-us/timeline/",
+      "decision": "history_only_no_timed_import",
+      "note": "Annual route-launch year is insufficient to establish service by28February1986."
+    },
+    {
+      "url": "https://news.ncac.mn/uploads/bookSubject/2022-10/633a5850c6098.pdf",
+      "decision": "retrieval_failed_not_reviewed",
+      "note": "ICAOCircular221AT/89 identified by search; no readable full document retrieved. It is not evidence of a completed census."
+    },
+    {
+      "url": "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+      "decision": "discovery_only_no_new_import",
+      "note": "Partial early-page OCR discovery attempted. Prior imported Pan Am rows and held Istanbul timezone conflict unchanged; no new timings inferred from OCR."
+    },
+    {
+      "name": "Gulf Air monthly magazine",
+      "url": "https://humanities-collections.exeter.ac.uk/dame/files/original/ae347154bc0a10355e884d65c6af986fb041b61b.pdf",
+      "decision": "no_applicable_timed_import",
+      "note": "Omslaget visar issue7,1981. Ej giltig tidtabell för februari1986."
+    },
+    {
+      "name": "Gulf Air Al Khaleej newsletters",
+      "url": "https://humanities-collections.exeter.ac.uk/dame/files/original/b4e2f177ef0f546b0c69b73190d7a61605e1c34e.pdf",
+      "decision": "no_applicable_timed_import",
+      "note": "Kontrollerad öppningssida:8oktober1977. Ingen tillämplig vinter1985/86-tabell har verifierats i denna samling."
+    },
+    {
+      "name": "TWA winter1986",
+      "url": "https://www.airtimes.com/cgat/usc/twa/gal/twgal80.htm",
+      "decision": "no_applicable_timed_import",
+      "note": "Utgåva12januari1986 katalogiserad, men inga läsbara innerblad hämtade från index. Inga tider importerade."
+    }
+  ],
+  "next_region_user_request": {
+    "priority": "after_current_middle_east_batch",
+    "requested_sv": "Alla plan runt Nicaragua, St. Thomas och hela regionen",
+    "queue_file": "central_america_caribbean_queue_batch118.json"
+  }
+}

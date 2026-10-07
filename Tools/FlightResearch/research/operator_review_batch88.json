@@ -1,0 +1,39 @@
+{
+  "package": "v91",
+  "checked_on": "2026-09-30",
+  "operator": {
+    "id": "atlantic-southeast",
+    "name": "Atlantic Southeast Airlines",
+    "countries": [
+      "us"
+    ],
+    "source_ids": [
+      "delta-19860201"
+    ],
+    "research_status": "partial",
+    "search_aliases": [
+      "Atlantic Southeast Airlines",
+      "ASA",
+      "The Delta Connection"
+    ],
+    "operator_census_verified": false
+  },
+  "source": "delta-19860201",
+  "legend_page": 4,
+  "itinerary_page": 264,
+  "printed_number_ranges": [
+    "1200–1299",
+    "1400–1524"
+  ],
+  "new_schedules": 6,
+  "new_movements": 12,
+  "selected_pairs": [
+    "MEM–MLU",
+    "MLU–MEM"
+  ],
+  "previous_operator_count": 95,
+  "new_operator_count": 96,
+  "operator_census_verified": false,
+  "network_complete": false,
+  "scope": "First sourced ASA movements in this dataset. The operator already existed in the 1986 source; this is a dataset addition, not an airline founding claim."
+}

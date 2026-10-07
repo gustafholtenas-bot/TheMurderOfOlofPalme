@@ -1,0 +1,229 @@
+{
+  "package": "v120",
+  "baseline_archive_sha256": "3387b953748ec1bf8a14c6e1d32a74b2062e7c67903f66cdc6cc76e704039c64",
+  "previous_movements_unchanged": 8379,
+  "previous_schedules_unchanged": 4889,
+  "all_previous_ids_retained": true,
+  "previous_airports_unchanged": 329,
+  "previous_countries_unchanged": 84,
+  "modified_airline_ids": [
+    "uta",
+    "el-al"
+  ],
+  "modified_previous_source_ids": [
+    "air-france-19851027-no25"
+  ],
+  "independent_manual_rows": 37,
+  "independent_utc_movements_verified": 39,
+  "independent_utc_expected": {
+    "air-france-147-BGW-CDG-0115-b117@1986-02-28": [
+      "1986-02-27T22:15:00Z",
+      "1986-02-28T04:25:00Z"
+    ],
+    "air-france-1382-ORY-BGW-1500-b117@1986-02-28": [
+      "1986-02-28T14:00:00Z",
+      "1986-02-28T19:20:00Z"
+    ],
+    "alia-103-AMM-ORY-1200-b117@1986-03-01": [
+      "1986-03-01T10:00:00Z",
+      "1986-03-01T15:00:00Z"
+    ],
+    "alia-104-ORY-AMM-1155-b117@1986-02-28": [
+      "1986-02-28T10:55:00Z",
+      "1986-02-28T15:50:00Z"
+    ],
+    "air-france-142-CDG-DAM-1035-b117@1986-03-01": [
+      "1986-03-01T09:35:00Z",
+      "1986-03-01T14:20:00Z"
+    ],
+    "air-france-142-DAM-AMM-1820-b117@1986-03-01": [
+      "1986-03-01T15:20:00Z",
+      "1986-03-01T16:20:00Z"
+    ],
+    "middle-east-airlines-212-ORY-BEY-1000-b117@1986-02-28": [
+      "1986-02-28T09:00:00Z",
+      "1986-02-28T13:10:00Z"
+    ],
+    "middle-east-airlines-212-ORY-BEY-1000-b117@1986-03-01": [
+      "1986-03-01T09:00:00Z",
+      "1986-03-01T13:10:00Z"
+    ],
+    "middle-east-airlines-211-BEY-ORY-1130-b117@1986-02-28": [
+      "1986-02-28T09:30:00Z",
+      "1986-02-28T14:10:00Z"
+    ],
+    "middle-east-airlines-211-BEY-ORY-1130-b117@1986-03-01": [
+      "1986-03-01T09:30:00Z",
+      "1986-03-01T14:10:00Z"
+    ],
+    "air-france-144-CDG-BEY-0930-b117@1986-02-28": [
+      "1986-02-28T08:30:00Z",
+      "1986-02-28T12:45:00Z"
+    ],
+    "air-france-155-DHA-CDG-0135-b117@1986-02-28": [
+      "1986-02-27T22:35:00Z",
+      "1986-02-28T05:30:00Z"
+    ],
+    "air-france-180-CDG-DHA-1215-b117@1986-03-01": [
+      "1986-03-01T11:15:00Z",
+      "1986-03-01T17:10:00Z"
+    ],
+    "air-france-180-DHA-DEL-2115-b117@1986-03-01": [
+      "1986-03-01T18:15:00Z",
+      "1986-03-01T21:55:00Z"
+    ],
+    "air-france-1352-CDG-DHA-1040-b117@1986-02-28": [
+      "1986-02-28T09:40:00Z",
+      "1986-02-28T15:40:00Z"
+    ],
+    "saudia-062-CDG-JED-1145-b117@1986-02-28": [
+      "1986-02-28T10:45:00Z",
+      "1986-02-28T16:15:00Z"
+    ],
+    "air-france-462-JED-CDG-0155-b117@1986-03-01": [
+      "1986-02-28T22:55:00Z",
+      "1986-03-01T05:15:00Z"
+    ],
+    "air-france-1382-JED-LYS-0400-b117@1986-03-01": [
+      "1986-03-01T01:00:00Z",
+      "1986-03-01T06:35:00Z"
+    ],
+    "air-france-489-NCE-JED-1610-b117@1986-02-28": [
+      "1986-02-28T15:10:00Z",
+      "1986-02-28T20:00:00Z"
+    ],
+    "air-france-489-JED-DAR-2359-b117@1986-02-28": [
+      "1986-02-28T20:59:00Z",
+      "1986-03-01T01:20:00Z"
+    ],
+    "air-france-488-DAR-JED-2040-b117@1986-03-01": [
+      "1986-03-01T17:40:00Z",
+      "1986-03-01T21:50:00Z"
+    ],
+    "air-france-463-JED-SEZ-0105-b117@1986-02-28": [
+      "1986-02-27T22:05:00Z",
+      "1986-02-28T02:45:00Z"
+    ],
+    "air-france-462-SEZ-JED-2110-b117@1986-02-28": [
+      "1986-02-28T17:10:00Z",
+      "1986-02-28T21:45:00Z"
+    ],
+    "air-france-1351-DXB-CDG-0805-b117@1986-03-01": [
+      "1986-03-01T04:05:00Z",
+      "1986-03-01T11:30:00Z"
+    ],
+    "uta-567-CMB-MCT-2200-b117@1986-03-01": [
+      "1986-03-01T16:30:00Z",
+      "1986-03-01T20:30:00Z"
+    ],
+    "uta-567-MCT-CDG-0140-b117@1986-03-02": [
+      "1986-03-01T21:40:00Z",
+      "1986-03-02T05:30:00Z"
+    ],
+    "uta-568-CDG-MCT-1725-b117@1986-02-28": [
+      "1986-02-28T16:25:00Z",
+      "1986-02-28T23:15:00Z"
+    ],
+    "uta-568-MCT-CMB-0425-b117@1986-03-01": [
+      "1986-03-01T00:25:00Z",
+      "1986-03-01T04:10:00Z"
+    ],
+    "uta-561-SIN-BAH-2330-b117@1986-02-28": [
+      "1986-02-28T15:30:00Z",
+      "1986-02-28T23:20:00Z"
+    ],
+    "uta-561-BAH-CDG-0335-b117@1986-03-01": [
+      "1986-03-01T00:35:00Z",
+      "1986-03-01T07:20:00Z"
+    ],
+    "air-france-160-CDG-KWI-1955-b117@1986-02-28": [
+      "1986-02-28T18:55:00Z",
+      "1986-03-01T00:35:00Z"
+    ],
+    "air-france-122-NCE-CAI-1920-b117@1986-02-28": [
+      "1986-02-28T18:20:00Z",
+      "1986-02-28T21:55:00Z"
+    ],
+    "air-france-122-LYS-CAI-1810-b117@1986-03-01": [
+      "1986-03-01T17:10:00Z",
+      "1986-03-01T21:00:00Z"
+    ],
+    "air-france-114-MRS-CAI-1035-b117@1986-03-01": [
+      "1986-03-01T09:35:00Z",
+      "1986-03-01T13:25:00Z"
+    ],
+    "air-france-131-TLV-NCE-0805-b117@1986-02-28": [
+      "1986-02-28T06:05:00Z",
+      "1986-02-28T10:10:00Z"
+    ],
+    "air-france-136-CDG-TLV-1400-b117@1986-03-01": [
+      "1986-03-01T13:00:00Z",
+      "1986-03-01T17:20:00Z"
+    ],
+    "el-al-324-ORY-TLV-2250-b117@1986-03-01": [
+      "1986-03-01T21:50:00Z",
+      "1986-03-02T02:05:00Z"
+    ],
+    "air-djibouti-072-ADE-JIB-1635-b117@1986-02-28": [
+      "1986-02-28T13:35:00Z",
+      "1986-02-28T14:40:00Z"
+    ],
+    "air-djibouti-071-JIB-ADE-1500-b117@1986-02-28": [
+      "1986-02-28T12:00:00Z",
+      "1986-02-28T13:05:00Z"
+    ]
+  },
+  "exact_interval_overlap": true,
+  "affected_flight_number_time_overlaps": 0,
+  "adjacent_source_leg_ground_times": [
+    [
+      "air-france-489-NCE-JED-1610-b117@1986-02-28",
+      "air-france-489-JED-DAR-2359-b117@1986-02-28",
+      59.0
+    ],
+    [
+      "uta-561-SIN-BAH-2330-b117@1986-02-28",
+      "uta-561-BAH-CDG-0335-b117@1986-03-01",
+      75.0
+    ],
+    [
+      "uta-568-CDG-MCT-1725-b117@1986-02-28",
+      "uta-568-MCT-CMB-0425-b117@1986-03-01",
+      70.0
+    ],
+    [
+      "air-france-462-SEZ-JED-2110-b117@1986-02-28",
+      "air-france-462-JED-CDG-0155-b117@1986-03-01",
+      70.0
+    ],
+    [
+      "air-france-142-CDG-DAM-1035-b117@1986-03-01",
+      "air-france-142-DAM-AMM-1820-b117@1986-03-01",
+      60.0
+    ],
+    [
+      "air-france-180-CDG-DHA-1215-b117@1986-03-01",
+      "air-france-180-DHA-DEL-2115-b117@1986-03-01",
+      65.0
+    ],
+    [
+      "uta-567-CMB-MCT-2200-b117@1986-03-01",
+      "uta-567-MCT-CDG-0140-b117@1986-03-02",
+      70.0
+    ]
+  ],
+  "ground_times_reviewed": true,
+  "full_unreal_build_run": false,
+  "editor_run": false,
+  "validation_status": "passed_data_checks; unreal_runtime_not_run",
+  "ground_time_review_note": "Seven adjacent source-leg chains: AF489 Jeddah59min; UT561 Bahrain75; UT568 Muscat70; AF462 Jeddah70; AF142 Damascus60; AF180 Dhahran65; UT567 Muscat70. Airport, date, flight number and chronology checked. These are schedule chains, not identified individual aircraft.",
+  "automated_checks": {
+    "python_unittest": {
+      "passed": 20,
+      "failed": 0
+    },
+    "build_flights_check": true,
+    "country_index_check": true,
+    "europe_index_check": true
+  }
+}

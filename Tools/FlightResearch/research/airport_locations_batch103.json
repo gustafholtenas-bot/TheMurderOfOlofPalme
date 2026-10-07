@@ -1,0 +1,95 @@
+{
+  "package": "v106",
+  "checked_on": "2026-10-01",
+  "airports": [
+    {
+      "id": "CHS",
+      "name": "Charleston International Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 32.898639,
+      "lon": -80.040528,
+      "coordinate_source": "https://aeronautics.sc.gov/airports/charleston-afbintl-airport",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.jbcharleston.jb.mil/Portals/44/PCP3_CRS%20Final.pdf",
+      "historical_location_note": "Delta airport directory identifies Charleston, South Carolina, CHS, International. Joint Base Charleston's historical report describes the civilian airport authority taking over operation in 1979 and the new civilian terminal opening in April 1985 on this airfield. CHS is distinct from Charleston, West Virginia (CRW). Modern coordinates are an approximate airfield marker, not a reconstruction of the 1986 terminal or gates."
+    },
+    {
+      "id": "CLT",
+      "name": "Charlotte Douglas International Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 35.214001,
+      "lon": -80.9431,
+      "coordinate_source": "https://ourairports.com/airports/KCLT/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.cltairport.com/news/press-releases/item/concourse-a-renovations-begin-sept-10/",
+      "historical_location_note": "Delta airport directory identifies Charlotte as CLT, Douglas International. The airport's official history of its terminal states that the terminal opened in 1982, before this timetable. Modern coordinates are an approximate airfield marker, not a reconstruction of the 1986 terminal or gates."
+    },
+    {
+      "id": "CAE",
+      "name": "Columbia Metropolitan Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 33.938172,
+      "lon": -81.123022,
+      "coordinate_source": "https://ourairports.com/airports/KCAE/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flycae.com/about/our-history/",
+      "historical_location_note": "Delta airport directory identifies Columbia, South Carolina, CAE, Metropolitan. Official airport history describes the former Lexington County airport being rebuilt and dedicated as Columbia Metropolitan in 1965. This is not Columbia, Missouri. Modern coordinates are an approximate airfield marker, not a reconstruction of the 1986 terminal or gates."
+    },
+    {
+      "id": "GSO",
+      "name": "Greensboro/High Point/Winston-Salem Regional Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 36.09937,
+      "lon": -79.937262,
+      "coordinate_source": "https://ourairports.com/airports/KGSO/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyfrompti.com/about-pti/",
+      "historical_location_note": "Delta airport directory p260 identifies Greensboro/High Point/Winston-Salem as GSO, Regional. Official airport history dates the current terminal's opening to October 9, 1982. The timetable-era Regional designation is retained instead of projecting the modern name backward. Modern coordinates are an approximate airfield marker, not a reconstruction of the 1986 terminal or gates."
+    },
+    {
+      "id": "DAB",
+      "name": "Daytona Beach Regional Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 29.18255,
+      "lon": -81.059464,
+      "coordinate_source": "https://ourairports.com/airports/KDAB/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flydaytonafirst.com/about-dab/historical-information.stml",
+      "historical_location_note": "Delta airport directory identifies Daytona Beach, DAB, Regional. Official airport history describes the 1952 terminal, its 1958 modernization, the Regional designation from 1969, and the new terminal and International designation in 1992. The 1986 name is retained. Modern coordinates are an approximate airfield marker, not the 1992 terminal projected backward or reconstructed 1986 gates."
+    },
+    {
+      "id": "MLB",
+      "name": "Melbourne Regional Airport (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 28.102009,
+      "lon": -80.641088,
+      "coordinate_source": "https://ourairports.com/airports/KMLB/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.mlbair.com/home/showpublisheddocument/442/638737510339030000",
+      "historical_location_note": "Delta airport directory identifies Melbourne, Florida, MLB, Regional. Official airport master plan section 1.4.1 describes the 1933 municipal field, wartime naval use, return to city control in 1946, airline service from 1952, the airport authority from 1967, a new terminal in 1990 and International designation in 1993. This is not Melbourne, Australia. Modern coordinates are an approximate airfield marker, not a reconstruction of the 1986 terminal or gates."
+    },
+    {
+      "id": "SAV",
+      "name": "Savannah International Airport / Travis Field (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 32.126591,
+      "lon": -81.19998,
+      "coordinate_source": "https://ourairports.com/airports/KSAV/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://savannahairport.com/business/about/history/",
+      "historical_location_note": "Delta airport directory p261 identifies Savannah, SAV, Travis Field. Official airport history dates the move from Hunter Field to Travis Field to 1950, the previous terminal to 1960, International renaming to 1983, and the present terminal to 1994. The airport marker is Travis Field, not Hunter Field or the later terminal projected backward. Modern coordinates are an approximate airfield marker, not reconstructed 1986 gates."
+    }
+  ],
+  "interpretation": "Approximate airfield markers. Historical site/name continuity reviewed; no claim of precise 1986 gate or terminal coordinates.",
+  "additional_historical_sources": {
+    "DAB": "https://www.flydaytonafirst.com/file/8152/DAB-Master-Plan-Update.pdf",
+    "GSO": "https://flyfrompti.com/airport-history/"
+  }
+}

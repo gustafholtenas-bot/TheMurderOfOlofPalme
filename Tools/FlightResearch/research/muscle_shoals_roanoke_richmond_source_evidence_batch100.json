@@ -1,0 +1,52 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "reviewed_city_table_printed_pages": [
+    16,
+    17,
+    51,
+    92,
+    164,
+    203,
+    204,
+    205,
+    206
+  ],
+  "airport_directory_printed_pages": [
+    261
+  ],
+  "itinerary_printed_pages": [
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "16": 11,
+    "17": 11,
+    "51": 28,
+    "92": 49,
+    "164": 85,
+    "203": 104,
+    "204": 105,
+    "205": 105,
+    "206": 106,
+    "261": 133,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "Twelve complete direction headings: 37 visually reviewed rows; 26 accepted nonstop schedules (8 ASA, 10 COMAIR, 8 Delta), nine through-stop rows and two connections excluded. The triangle and p4 number ranges distinguish ASA (1200–1299, 1400–1524) and COMAIR (1525–1749). Accepted rows have no dated footnotes.",
+    "Blank frequency is daily, X6 excludes Saturday, X7 excludes Sunday. ATL–MSL 1468 is X7 but MSL–ATL 1468 is daily. CVG–ROA and ROA–RIC 1660 are X6, while the prior BUF–CVG leg is X67. Each physical leg retains its separately printed frequency.",
+    "ASA 1466 and 1469 are MSL–GAD–ATL; 1472 is ATL–GAD–MSL. MSL–GAD departures 07:00/17:15 arrive 07:35/17:50; existing onward departures 07:45/17:55 give ten/five minutes on the ground. Existing ATL–GAD 1472 arrives at 20:35 Central; GAD–MSL departs 20:45, arriving 21:20. Through MSL–ATL and ATL–MSL rows create no extra nonstop movements.",
+    "COMAIR 1582 is RIC–ROA–CVG–DTW, 1593 RIC–ROA–CVG, 1637 CVG–ROA–RIC, and 1660 BUF–CVG–ROA–RIC per itinerary p264. Individual city-pair rows supply all imported times. RIC–CVG and CVG–RIC are excluded through rows, not nonstop legs.",
+    "The magnified ROA–RIC row on p206 reads 7:55p–8:45p for 1660: 19:55–20:45, not 19:59. Its incoming leg arrives ROA at 19:45, giving a ten-minute interval. 1637 has fifteen minutes at ROA. 1582/1593 have ten/fifteen minutes there in the reverse direction.",
+    "RIC–ATL 1143 is 06:30–07:52; its star is an off-peak fare marker, not a day offset. ATL–RIC 960 and RIC–ATL 1125 have one stop and are excluded. Their RDU physical legs are queued for the next batch, without invented times or a direct animation.",
+    "MSL/GAD use Central UTC−6; ATL/CVG/ROA/RIC use Eastern UTC−5. All accepted rows arrive on the same local calendar day. Cross-zone ASA 1468/1470 round trips use 70-minute flying legs and 15-minute turns at MSL.",
+    "Independent 24-hour transcription, fixed winter offsets, weekdays and exact 48-hour overlap match every generated movement. Sixteen same-number transitions, including previously imported legs, have checked ground intervals of 5–67 minutes. These validate schedule continuity, not aircraft identity.",
+    "Directory p261 identifies MSL as Muscle Shoals and RIC as Byrd International. TVA documents its original 1937 hangar within today's MSL airport; Richmond's official history traces the current airport to the 1927 Byrd field. Combined with the directory, these support site continuity; current coordinates are approximate airport-area markers.",
+    "All prior movements, schedules, airlines and airports unchanged, including earlier corrections and three held conflicts. Timetable end date, later amendments and actual operation unverified. Original scans not redistributed."
+  ]
+}

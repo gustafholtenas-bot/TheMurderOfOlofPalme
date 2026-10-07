@@ -1,0 +1,9 @@
+{
+  "package": "v138",
+  "airport_records": [],
+  "new_country_records": [],
+  "existing_airports_unchanged": 393,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed1986 terminal/runway coordinates. Source-era identities reviewed separately."
+}

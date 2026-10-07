@@ -1,0 +1,56 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    14,
+    43,
+    44,
+    45,
+    49,
+    128
+  ],
+  "research_only_printed_pages": [
+    121,
+    122,
+    123,
+    124
+  ],
+  "itinerary_printed_pages": [
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "14": 10,
+    "43": 24,
+    "44": 25,
+    "45": 25,
+    "49": 27,
+    "121": 63,
+    "122": 64,
+    "123": 64,
+    "124": 65,
+    "128": 67,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "46 rows in seven complete selected city-direction tables visually reviewed: 22 nonstop schedules accepted, 21 connections and three one-stop through rows excluded.",
+    "Accepted frequencies are blank daily, X6 excluding Saturday and X7 excluding Sunday. No accepted row has a dated footnote.",
+    "CVG–CHA 1597 departs 09:23 and arrives 10:33, verified in magnified p49. CHA–CVG 1591 arrives 07:37. CHA–ATL 1103 arrives 07:38.",
+    "CHA–TYS 1619 is X7, serving Monday–Saturday. Its TYS–CVG physical continuation has separate weekday and Saturday rows from batch 84; each leg retains its own weekdays.",
+    "CHA–CVG 1619 has one stop and weekday arrival 14:35 / Saturday 14:38; these through rows are not duplicated as nonstop schedules.",
+    "CHA–CVG 1595 has one stop; CHA–TYS is added and the previously sourced TYS–CVG is retained. Both X6 exclude Saturday.",
+    "CHA–LEX contains only seven connecting itineraries. No TYS–CHA city-direction table was found in the complete Knoxville city section, pp121–124; no direct return is invented.",
+    "One excluded CHA–CVG 640/1140 connection arrives 00:10 the next day; it creates no runtime movement.",
+    "CHA, ATL, CVG, TYS and LEX all use UTC−5 in the imported window; accepted arrivals fall on the same local departure date.",
+    "Delta 893 CHA–ATL and COMAIR 1595 CHA–TYS on 27 February overlap the window opening and are retained; no Saturday departure is added to either X6 schedule.",
+    "All prior movement objects, schedules and airports remain unchanged, including the prior COMAIR 1582 correction. Held conflicts from batches 80 and 82 are unchanged and unimported.",
+    "Later amendments and timetable end date unverified; scheduled service does not establish actual operation, aircraft identity or path."
+  ]
+}

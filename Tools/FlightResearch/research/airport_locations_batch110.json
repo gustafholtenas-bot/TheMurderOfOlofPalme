@@ -1,0 +1,41 @@
+{
+  "checked_on": "2026-10-01",
+  "airports": [
+    {
+      "id": "BGR",
+      "name": "Bangor International (1986)",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 44.8074444,
+      "lon": -68.8281389,
+      "coordinate_source": "https://www.airnav.com/airport/BGR",
+      "coordinate_record_id": "KBGR",
+      "timetable_code": "BGR",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.airnav.com/airport/BGR"
+      ],
+      "location_note": "Printed p.260 identifies BGR as Bangor International. Current estimated FAA reference point reproduced by AirNav is an approximate marker of the same named airfield. FAA activation metadata predates 1986 and is not used as the exact historical opening date. No 1986 gate, runway threshold or aircraft position is reconstructed."
+    },
+    {
+      "id": "YUL",
+      "name": "Montréal–Dorval International (1986)",
+      "country": "ca",
+      "timezone": "America/Toronto",
+      "lat": 45.4680556,
+      "lon": -73.7413889,
+      "coordinate_source": "https://www.navcanada.ca/en/flight-planning/service-notices/2026-05-14-montreal.aspx",
+      "coordinate_record_id": "CYUL",
+      "timetable_code": "YUL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+        "https://www.navcanada.ca/en/flight-planning/service-notices/2026-05-14-montreal.aspx",
+        "https://ville.montreal.qc.ca/memoiresdesmontrealais/laeroport-montreal-trudeau"
+      ],
+      "location_note": "Printed p.261 identifies YUL as Montreal Dorval International; pp.163–164 also name Dorval. It is not Mirabel/YMX. Montreal municipal history documents the Dorval airport and terminal before 1986. The modern NAV CANADA aerodrome coordinate N45 28 05 W073 44 29 provides an approximate same-airfield marker, not a reconstructed 1986 reference point, terminal, gate, runway threshold or aircraft position. The later Trudeau name is not backdated. America/Toronto supplies the Eastern winter offset used here."
+    }
+  ],
+  "marker_precision": "Approximate same-airfield positions; 1986 gates, runway thresholds and layouts not reconstructed."
+}

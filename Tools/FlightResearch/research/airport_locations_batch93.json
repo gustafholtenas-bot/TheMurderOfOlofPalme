@@ -1,0 +1,77 @@
+{
+  "package": "v96",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "FSM",
+      "name": "Fort Smith Municipal Airport (1986)",
+      "lat": 35.336601,
+      "lon": -94.367401,
+      "historical_location_source": "https://flyfsm.com/history/",
+      "historical_location_note": "Delta directory p260 calls FSM Municipal. Airport history records the 1959 terminal, late-1970s expansion and a 1986 runway extension at this site; renamed Regional in 1992. Coordinates mark the approximate airport area, not the 2002 terminal or reconstructed 1986 gates.",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "coordinate_source": "https://ourairports.com/airports/KFSM/",
+      "historical_location_reviewed": true
+    },
+    {
+      "id": "GTR",
+      "name": "Columbus–Golden Triangle Regional Airport",
+      "lat": 33.450298,
+      "lon": -88.5914,
+      "historical_location_source": "https://www.gtra.com/history/",
+      "historical_location_note": "Delta directory p260 identifies Columbus, Mississippi as GTR / Golden Triangle. Airport authority history documents construction from 1969 and development before 1986. This is the regional commercial airfield, not Columbus Air Force Base or Columbus-Lowndes County airport. Modern coordinates are approximate airport-area markers.",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "coordinate_source": "https://ourairports.com/airports/KGTR/",
+      "historical_location_reviewed": true
+    },
+    {
+      "id": "GLH",
+      "name": "Greenville–Municipal / Mid Delta Airport (1986)",
+      "lat": 33.482899,
+      "lon": -90.985603,
+      "historical_location_source": "https://www.govinfo.gov/content/pkg/FR-1969-10-30/pdf/FR-1969-10-30.pdf",
+      "historical_location_note": "Delta directory p260 identifies GLH as Greenville Municipal. Federal Register 30 October 1969 p17511 locates Greenville Municipal at 33°29′05″N 90°59′20″W, the present Mid Delta airfield area. City history identifies the facility as former Greenville Air Force Base. Approximate modern airport coordinates are used; the former separate southeast municipal field is not substituted.",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "coordinate_source": "https://ourairports.com/airports/KGLH/",
+      "historical_location_reviewed": true
+    },
+    {
+      "id": "MEI",
+      "name": "Meridian–Key Field",
+      "lat": 32.3326,
+      "lon": -88.7519,
+      "historical_location_source": "https://www.nps.gov/articles/old-terminal-building-hangar-and-powerhouse-at-key-field.htm",
+      "historical_location_note": "Delta directory p261 identifies Meridian as MEI / Key Field. National Park Service documents the airport complex opening in 1930 and surviving buildings at Key Field. This is the civilian airfield, not Naval Air Station Meridian or Bonita Field. Modern coordinates mark the approximate airport area.",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "coordinate_source": "https://ourairports.com/airports/KMEI/",
+      "historical_location_reviewed": true
+    },
+    {
+      "id": "PIB",
+      "name": "Laurel/Hattiesburg–Pine Belt Regional Airport (1986)",
+      "lat": 31.4671,
+      "lon": -89.337097,
+      "historical_location_source": "https://www.hahsmuseum.org/gall_pb01.htm",
+      "historical_location_note": "Delta directory p261 explicitly names PIB Pine Belt Regional for Laurel/Hattiesburg. Historical society records service beginning in 1974 and renaming as Hattiesburg-Laurel in 1990. Coordinates mark the regional field at Moselle, not Laurel Hesler-Noble (LUL) or Hattiesburg Municipal (HBG); no exact 1986 terminal reconstruction.",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "coordinate_source": "https://ourairports.com/airports/KPIB/",
+      "historical_location_reviewed": true
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites independently reviewed.",
+  "historical_scope": "FSM Municipal; GTR Golden Triangle; GLH Municipal at the Mid Delta site; MEI Key Field; PIB Pine Belt Regional. No precise 1986 terminal/gate/runway reconstruction.",
+  "glh_historical_coordinate_evidence": {
+    "url": "https://www.govinfo.gov/content/pkg/FR-1969-10-30/pdf/FR-1969-10-30.pdf",
+    "printed_page": 17511,
+    "pdf_page": 7,
+    "pdf_sha256": "0e1eda31eff5ec1d4aa81a8172be39e348c1ec5e486568e0e59d1ebfc93895ea",
+    "latitude_dms": "33°29′05″N",
+    "longitude_dms": "90°59′20″W",
+    "additional_source": "https://greenvillems.org/airport/"
+  }
+}

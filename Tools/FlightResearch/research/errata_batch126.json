@@ -1,0 +1,19 @@
+{
+  "package": "v129",
+  "checked_on": "2026-10-02",
+  "type": "research_interpretation_correction_no_old_runtime_change",
+  "source": "liat-wt40-19851213",
+  "source_url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+  "affected_prior_reports": [
+    "caribbean_withheld_batch124.json",
+    "CENTRAL_AMERICA_CARIBBEAN_REVIEW_BATCH124.md",
+    "caribbean_withheld_batch125.json",
+    "CENTRAL_AMERICA_CARIBBEAN_REVIEW_BATCH125.md"
+  ],
+  "prior_reading": "Main-table LI117 appears SVD–GND; IAS starts BGI–MQS, apparently conflicting.",
+  "corrected_reading": "Scan5 LI117 is BGI15:40–MQS16:35 DLY EX SU DHT, matching scan7 S6. Main code row alignment was misread in earlier research.",
+  "decision": "Accept BGI–MQS once under explicit IAS page heading, plus MQS–UNI and UNI–CRU. Hold CRU–GND inverted times. Main-table LI126 route/equipment conflict remains.",
+  "old_schedules_modified": [],
+  "old_movements_modified": [],
+  "historical_reports_byte_preserved": true
+}

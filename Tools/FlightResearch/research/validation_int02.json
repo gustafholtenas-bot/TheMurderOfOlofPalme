@@ -1,0 +1,77 @@
+{
+  "package": "v141_INT02",
+  "based_on": "v141_INT01",
+  "date": "2026-10-02",
+  "new_schedules": 11,
+  "new_movements": 11,
+  "new_foreign_domestic_movements": 0,
+  "total_movements": 11380,
+  "selected_international_and_swedish_domestic": 2142,
+  "excluded_foreign_domestic": 9238,
+  "sweden_endpoint_movements": 87,
+  "sweden_international_inbound": 41,
+  "sweden_international_outbound": 40,
+  "swedish_domestic": 6,
+  "new_sweden_movements": 0,
+  "all_11369_prior_movements_unchanged": true,
+  "all_6750_prior_schedules_unchanged": true,
+  "all_prior_airports_countries_observations_movements_unchanged": true,
+  "airline_metadata_updated": [
+    "air-canada"
+  ],
+  "duplicate_movement_ids": 0,
+  "new_physical_duplicates": 0,
+  "independent_fixed_offset_expansion_matches": true,
+  "af274_anchorage_connection_minutes": 75,
+  "coverage_complete": false,
+  "new_airports": [],
+  "unreal_runtime_tested": false,
+  "interval_start_utc": "1986-02-27T22:21:30Z",
+  "interval_end_utc": "1986-03-01T22:21:30Z",
+  "counts_by_new_pair": [
+    {
+      "origin": "ANC",
+      "destination": "NRT",
+      "movements": 2
+    },
+    {
+      "origin": "CDG",
+      "destination": "ANC",
+      "movements": 1
+    },
+    {
+      "origin": "CDG",
+      "destination": "YYZ",
+      "movements": 1
+    },
+    {
+      "origin": "IAH",
+      "destination": "MEX",
+      "movements": 1
+    },
+    {
+      "origin": "KHI",
+      "destination": "CDG",
+      "movements": 2
+    },
+    {
+      "origin": "MEX",
+      "destination": "IAH",
+      "movements": 1
+    },
+    {
+      "origin": "NRT",
+      "destination": "ANC",
+      "movements": 2
+    },
+    {
+      "origin": "YYZ",
+      "destination": "CDG",
+      "movements": 1
+    }
+  ],
+  "python_tests_passed": 20,
+  "generator_checks_passed": 3,
+  "required_compiled_crash_fix": "f23b73a",
+  "data_only_delivery": true
+}

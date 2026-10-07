@@ -1,0 +1,53 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    15,
+    17,
+    65,
+    66,
+    112,
+    113,
+    115,
+    224,
+    225
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "printed_to_pdf_page": {
+    "4": 5,
+    "15": 10,
+    "17": 11,
+    "65": 35,
+    "66": 36,
+    "112": 59,
+    "113": 59,
+    "115": 60,
+    "224": 115,
+    "225": 115,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "51 rows in ten complete selected city-direction tables visually reviewed: 33 nonstop schedules accepted, 16 through-stop rows and two connections excluded.",
+    "Accepted frequencies are blank daily, X6 and X7; no accepted row has a dated footnote. JAN–ATL 844 and ATL–SHV 833 are X6; ATL–JAN 357 is X7. All other accepted rows are daily.",
+    "JAN–DFW 941 has stops 1, confirmed by the ATL–JAN–MLU–DFW–AUS itinerary; it is not imported as a nonstop leg. JAN–DFW 557 arrives 17:49.",
+    "SHV–ATL 537 has stops 0 and local times 17:25–19:45. Its ORD–MEM–SHV–ATL–AGS itinerary confirms the direct leg.",
+    "JAN–SHV 531 departs 23:40 and arrives 00:24 on the next local date; accepted arrival_day_offset is 1. Excluded ATL–SHV 531 and SHV–ATL 931/386 also have next-day arrivals in the worksheet.",
+    "ATL–JAN 531 arrives 23:15 Central, giving 25 minutes before JAN–SHV 531 at 23:40. Their separately sourced physical legs are imported; the through ATL–SHV row is not duplicated.",
+    "SHV–JAN 248 arrives 07:04 Central, followed by JAN–ATL at 07:30. ATL arrival is 09:29 Eastern, followed by the existing ATL–PHL 248 at 10:18.",
+    "JAN, SHV and DFW use UTC−6, while ATL uses UTC−5 in the imported window. Existing airport records remain unchanged.",
+    "ATL–JAN 1117 at 16:51 Eastern–17:00 Central overlaps both window boundaries, contributing three full movements on 27 February, 28 February and 1 March.",
+    "All prior movement objects, schedules and airports unchanged, including COMAIR 1582 and 1580 corrections. Held conflicts from batches 80 and 82 remain unchanged and unimported.",
+    "Later amendments and timetable end date unverified; scheduled service does not establish actual operation, aircraft identity or path."
+  ]
+}

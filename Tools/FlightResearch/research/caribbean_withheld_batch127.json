@@ -1,0 +1,177 @@
+{
+  "package": "v130",
+  "challenge_held_one_stop_rows": [
+    {
+      "printed_flight": "VV307",
+      "origin": "MIA",
+      "destination": "KIN",
+      "departure": "20:00",
+      "arrival": "22:20",
+      "normalized_frequency": "D",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "MBJ",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV301",
+      "origin": "MIA",
+      "destination": "MBJ",
+      "departure": "07:45",
+      "arrival": "10:10",
+      "normalized_frequency": "D",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "KIN",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV302",
+      "origin": "KIN",
+      "destination": "MIA",
+      "departure": "09:40",
+      "arrival": "12:00",
+      "normalized_frequency": "D",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "MBJ",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV308",
+      "origin": "MBJ",
+      "destination": "MIA",
+      "departure": "21:50",
+      "arrival": "00:15",
+      "normalized_frequency": "D",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "KIN",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV101",
+      "origin": "MIA",
+      "destination": "SAL",
+      "departure": "12:55",
+      "arrival": "14:55",
+      "normalized_frequency": "X3",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "SAP",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV102",
+      "origin": "SAL",
+      "destination": "MIA",
+      "departure": "15:20",
+      "arrival": "19:10",
+      "normalized_frequency": "X3",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "SAP",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV105",
+      "origin": "MIA",
+      "destination": "TGU",
+      "departure": "13:15",
+      "arrival": "15:05",
+      "normalized_frequency": "X3",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "BZE",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV103",
+      "origin": "MIA",
+      "destination": "TGU",
+      "departure": "12:55",
+      "arrival": "14:50",
+      "normalized_frequency": "3",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "SAP",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV106",
+      "origin": "TGU",
+      "destination": "MIA",
+      "departure": "15:25",
+      "arrival": "19:10",
+      "normalized_frequency": "X3",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "BZE",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    },
+    {
+      "printed_flight": "VV104",
+      "origin": "TGU",
+      "destination": "MIA",
+      "departure": "15:25",
+      "arrival": "19:10",
+      "normalized_frequency": "3",
+      "printed_stops": 1,
+      "inferred_intermediate_from_matching_rows": "SAP",
+      "decision": "withheld",
+      "reason": "Aggregate one-stop itinerary; one intermediate arrival/departure missing. Do not interpolate or add a direct flight."
+    }
+  ],
+  "challenge_reviewed_zero_movement_schedules": [
+    "challenge-international-103-MIA-SAP-1255-b127",
+    "challenge-international-104-SAP-MIA-1610-b127"
+  ],
+  "zero_movement_reason": "VV103/VV104 operateWednesday only; targetwindow includesThursday/Friday/Saturday.",
+  "held_sources": [
+    {
+      "source": "Virgin Islands Seaplane Shuttle14September1985",
+      "url": "https://www.timetableimages.com/ttimages/3g8509.htm",
+      "decision": "withheld_all",
+      "reason": "Departure-only timetable: no arrival clocks or durations. Harbours must not be normalized to land airports STT/STX. No generic flight durations used."
+    },
+    {
+      "source": "Caribbean Express15July1985",
+      "url": "https://www.timetableimages.com/ttimages/wh8507.htm",
+      "publication_index": "https://www.airtimes.com/cgat/usa/caribbeanexpress.htm",
+      "decision": "withheld_all",
+      "reason": "Publication index lists superseding1February1986 edition. Its interior has not been obtained; July1985 rows not projected into target window."
+    },
+    {
+      "source": "Airways International15December1985",
+      "url": "https://www.timetableimages.com/ttimages/4a/4a8512/4a8512.pdf",
+      "decision": "withheld_pending_stop_verification",
+      "reason": "Daily departure/arrival clocks present but no explicit stop column/nonstop statement. General conditions allow added/omitted stops. Physical legs not established to import standard."
+    },
+    {
+      "source": "Arrow Air14November1985",
+      "url": "https://www.timetableimages.com/ttimages/jw8511.htm",
+      "decision": "withheld_due_contemporary_service_suspension",
+      "reason": "Printed cover/interiors confirm1985, resolving older date confusion. White House news summary12February1986 pB-6 reports scheduled passenger service suspended; cannot project old published schedule into target window. No independently dated cargo/private charter clocks found.",
+      "supporting_urls": [
+        "https://www.reaganlibrary.gov/sites/default/files/2025-03/40-399-5730359-386-018-2025.pdf#page=18",
+        "https://law.justia.com/cases/federal/district-courts/FSupp/649/993/1631302/"
+      ],
+      "scope_caution": "Court finding concerns MAC military contracts: suspension7February, cargo-only return10April. Do not infer that every private charter/cargo activity ceased. News summary is a contemporary report, not individual flight evidence."
+    },
+    {
+      "source": "Prior LIAT and partner holds",
+      "decision": "retained",
+      "reason": "LI126 conflicting route/equipment, LI117 final clock inversion, LI168 unexplained asterisk, legal chronology and amendments remain unresolved. All older files retained. LI117 research erratum126 remains authoritative for its earlier misreading."
+    },
+    {
+      "source": "Nicaragua and more StThomas services",
+      "decision": "still_open",
+      "reason": "No new complete applicable dated clocks for these locations. No military, private, state, covert, charter or cargo movements inferred."
+    }
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false,
+  "previous_held_reports_preserved_as_history": true
+}

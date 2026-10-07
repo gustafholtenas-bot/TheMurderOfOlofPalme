@@ -1,0 +1,203 @@
+{
+  "package": "v122",
+  "airport_records": [
+    {
+      "id": "STT",
+      "name": "St. Thomas – Cyril E. King",
+      "country": "vi",
+      "timezone": "America/St_Thomas",
+      "lat": 18.337091,
+      "lon": -64.977251,
+      "coordinate_source": "https://ourairports.com/airports/TIST/",
+      "coordinate_record_id": "TIST",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://www.viport.com/cekastt"
+      ],
+      "location_note": "Official port history dates the Cyril E. King name to 3 October 1984. The 1990 terminal and 1992 runway extension are not reconstructed. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    },
+    {
+      "id": "STX",
+      "name": "St. Croix – Alexander Hamilton (1986)",
+      "country": "vi",
+      "timezone": "America/St_Thomas",
+      "lat": 17.701413,
+      "lon": -64.802608,
+      "coordinate_source": "https://ourairports.com/airports/TISX/",
+      "coordinate_record_id": "TISX",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://www.viport.com/herastx"
+      ],
+      "location_note": "Official port history dates the Henry E. Rohlsen renaming to 1996. The 1986 Alexander Hamilton name is retained. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    },
+    {
+      "id": "SXM",
+      "name": "St. Maarten – Princess Juliana",
+      "country": "an",
+      "timezone": "America/Lower_Princes",
+      "lat": 18.041,
+      "lon": -63.108898,
+      "coordinate_source": "https://ourairports.com/airports/TNCM/",
+      "coordinate_record_id": "TNCM",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://www.sxmairport.com/st-maarten-airport",
+        "https://verdragenbank.overheid.nl/en/Treaty/Details/009168_p.html"
+      ],
+      "location_note": "The airport history predates 1986. The Dutch part of St. Martin belonged to the Netherlands Antilles; the post-2010 country structure is not backdated. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    },
+    {
+      "id": "UVF",
+      "name": "Saint Lucia – Hewanorra",
+      "country": "lc",
+      "timezone": "America/St_Lucia",
+      "lat": 13.7332,
+      "lon": -60.952599,
+      "coordinate_source": "https://ourairports.com/airports/TLPL/",
+      "coordinate_record_id": "TLPL",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://storage.slaspa.com/contentPages/view/background"
+      ],
+      "location_note": "The contemporary timetable explicitly names Hewanorra, not the northern Castries airport. The authority history identifies its responsibility for Hewanorra since 1983. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    },
+    {
+      "id": "SKB",
+      "name": "St. Kitts – Golden Rock (1986)",
+      "country": "kn",
+      "timezone": "America/St_Kitts",
+      "lat": 17.310845,
+      "lon": -62.719117,
+      "coordinate_source": "https://ourairports.com/airports/TKPK/",
+      "coordinate_record_id": "TKPK",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://www.scaspa.com/airport-about.html"
+      ],
+      "location_note": "The official airport history identifies Golden Rock as the former name. The later Robert L. Bradshaw name is not used for 1986. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    },
+    {
+      "id": "SDQ",
+      "name": "Santo Domingo – Las Américas",
+      "country": "do",
+      "timezone": "America/Santo_Domingo",
+      "lat": 18.42970085144,
+      "lon": -69.668899536133,
+      "coordinate_source": "https://ourairports.com/airports/MDSD/",
+      "coordinate_record_id": "MDSD",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://www.vinci.com/en/newsroom/press-releases/vinci-airports-acquires-dominican-aerodom-company-which-operates-six"
+      ],
+      "location_note": "The airport operator identifies Las Américas as serving Santo Domingo since 1959. Later honorary naming and new terminal works are not backdated. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    },
+    {
+      "id": "GUA",
+      "name": "Guatemala City – La Aurora",
+      "country": "gt",
+      "timezone": "America/Guatemala",
+      "lat": 14.582896,
+      "lon": -90.527515,
+      "coordinate_source": "https://ourairports.com/airports/MGGT/",
+      "coordinate_record_id": "MGGT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://www.dgac.gob.gt/wp-content/uploads/rendicion/MEMORIA%20DE%20LABORES/2021/Memoria%20de%20labores%202021%20DGAC.pdf"
+      ],
+      "location_note": "DGAC airport history identifies the La Aurora jet airport and its 1968 terminal, predating the schedule. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    },
+    {
+      "id": "BGI",
+      "name": "Barbados – Grantley Adams",
+      "country": "bb",
+      "timezone": "America/Barbados",
+      "lat": 13.074667,
+      "lon": -59.491034,
+      "coordinate_source": "https://ourairports.com/airports/TBPB/",
+      "coordinate_record_id": "TBPB",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://digitalcollections.library.miami.edu/digital/collection/asm0341/id/37370/",
+        "https://staging.gaia.bb/general-information/history/"
+      ],
+      "location_note": "The airport history dates the Grantley Adams name to 1976 and new terminal opening to 1979. Coordinates are a current approximate airfield marker, not a surveyed 1986 terminal, runway threshold or reference point. Modern ICAO codes locate the coordinate record; period names are retained."
+    }
+  ],
+  "new_country_records": [
+    {
+      "id": "vi",
+      "name": {
+        "sv": "Amerikanska Jungfruöarna",
+        "en": "US Virgin Islands",
+        "en_source": "Amerikanska Jungfruöarna"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "an",
+      "name": {
+        "sv": "Nederländska Antillerna (1986)",
+        "en": "Netherlands Antilles (1986)",
+        "en_source": "Nederländska Antillerna (1986)"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "lc",
+      "name": {
+        "sv": "Saint Lucia",
+        "en": "Saint Lucia",
+        "en_source": "Saint Lucia"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "kn",
+      "name": {
+        "sv": "Saint Kitts och Nevis",
+        "en": "Saint Kitts and Nevis",
+        "en_source": "Saint Kitts och Nevis"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "do",
+      "name": {
+        "sv": "Dominikanska republiken",
+        "en": "Dominican Republic",
+        "en_source": "Dominikanska republiken"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "gt",
+      "name": {
+        "sv": "Guatemala",
+        "en": "Guatemala",
+        "en_source": "Guatemala"
+      },
+      "operator_census_complete": false
+    },
+    {
+      "id": "bb",
+      "name": {
+        "sv": "Barbados",
+        "en": "Barbados",
+        "en_source": "Barbados"
+      },
+      "operator_census_complete": false
+    }
+  ],
+  "existing_airports_unchanged": 346,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed 1986 terminal or runway coordinates. Historical names and sites reviewed separately."
+}

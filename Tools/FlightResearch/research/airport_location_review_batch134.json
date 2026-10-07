@@ -1,0 +1,26 @@
+{
+  "package": "v137",
+  "airport_records": [
+    {
+      "id": "ICT",
+      "name": "Wichita Mid-Continent (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 37.650314,
+      "lon": -97.428583,
+      "coordinate_source": "https://ourairports.com/airports/KICT/",
+      "coordinate_record_id": "KICT",
+      "historical_location_reviewed": true,
+      "historical_location_sources": [
+        "https://northwestairlineshistory.org/wp-content/uploads/2018/07/REP-employee-schedule-1986-02-14.pdf",
+        "https://www.flywichita.com/history-of-the-airport/"
+      ],
+      "location_note": "Wichita Mid-Continent used the post-1954 airport site. Airport-authority history distinguishes the former 1935 airport site, the1954–2015 terminal and2015 new terminal. Retain1986 name rather than2014 Eisenhower renaming; not McConnell or Jabara. Coordinates are a current approximate airfield marker, not a surveyed1986 terminal, runway threshold or reference point. Modern ICAO codes locate coordinate records; source-era airport identity reviewed separately."
+    }
+  ],
+  "new_country_records": [],
+  "existing_airports_unchanged": 392,
+  "coordinate_dataset_url": "https://ourairports.com/data/airports.csv",
+  "coordinate_dataset_sha256": "7a3fe6ee4a451469cb3197d43ad71838b587dc4bca8bef98728d779d2a475722",
+  "precision": "Approximate airfield markers, not surveyed1986 terminal/runway coordinates. Source-era identities reviewed separately."
+}

@@ -1,0 +1,44 @@
+{
+  "package": "v99",
+  "checked_on": "2026-09-30",
+  "airports": [
+    {
+      "id": "AVL",
+      "name": "Asheville Regional Airport",
+      "country": "us",
+      "timezone": "America/New_York",
+      "lat": 35.435488,
+      "lon": -82.541853,
+      "coordinate_source": "https://ourairports.com/airports/KAVL/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flyavl.com/airport-authority/history",
+      "historical_location_note": "Delta directory p260 identifies AVL as Asheville, North Carolina, Regional Airport. Airport authority history dates the new airport to 1961, replacing the separate Asheville-Hendersonville field. The 1986 marker uses this Regional airport site. Modern coordinates mark the approximate airport area, not a reconstructed 1986 terminal, gate or runway."
+    },
+    {
+      "id": "DHN",
+      "name": "Dothan–Houston County Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 31.321301,
+      "lon": -85.4496,
+      "coordinate_source": "https://ourairports.com/airports/KDHN/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://flydothan.com/history/",
+      "historical_location_note": "Delta directory p260 identifies DHN as Dothan-Houston County. The airport history records commercial relocation to former Napier Army Airfield in February 1965. This marker uses that field, not the earlier city airport at present Westgate Park. Modern coordinates mark the airport area, not a reconstructed 1986 terminal or gate."
+    },
+    {
+      "id": "HSV",
+      "name": "Huntsville–Madison County Airport (1986)",
+      "country": "us",
+      "timezone": "America/Chicago",
+      "lat": 34.636244,
+      "lon": -86.774378,
+      "coordinate_source": "https://ourairports.com/airports/KHSV/",
+      "historical_location_reviewed": true,
+      "historical_location_source": "https://www.flyhuntsville.com/about/history/",
+      "historical_location_note": "Delta directory p260 identifies HSV as Huntsville-Madison County. Port of Huntsville history dates the present airport site to October 1967. This is the airport west of the city, not an earlier Huntsville airfield. Modern coordinates are approximate airport-area markers, not reconstructed 1986 terminals, gates or runways."
+    }
+  ],
+  "coordinate_kind": "Modern OurAirports coordinates used as approximate airport-area markers; historical sites separately reviewed.",
+  "historical_scope": "Asheville Regional at its 1961 site; Dothan at former Napier Field used commercially since 1965; Huntsville at the 1967 airport site. Modern approximate airport-area markers, not reconstructed 1986 terminal or gate locations."
+}

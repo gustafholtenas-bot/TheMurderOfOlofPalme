@@ -1,0 +1,87 @@
+{
+  "package": "v128",
+  "checked_on": "2026-10-02",
+  "source": "liat-wt40-19851213",
+  "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf",
+  "issue_url": "https://www.timetableimages.com/ttimages/li8512.htm",
+  "pdf_sha256": "2a90c7d7cfaa2944f99998bb7d42d20da522e805a15c063dcb5d4a8edfcffe87",
+  "pdf_bytes": 1595316,
+  "scan_pages": 8,
+  "images": [
+    {
+      "scan_page": 1,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=1",
+      "sha256": "2fea7115c8004bcea52457b37392f5f9d0ec1643e337081a532fff1950bcca1f"
+    },
+    {
+      "scan_page": 2,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=2",
+      "sha256": "fe40a38b5b6b05034c99bcd7a9ec0838109fd84bc02aa95512736394dde1a4df"
+    },
+    {
+      "scan_page": 3,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=3",
+      "sha256": "bb2fdef0c78bf6c2a896f8728a7d587c8c906dff908b66549bf60e8181d1f443"
+    },
+    {
+      "scan_page": 4,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=4",
+      "sha256": "3f765ceb4fbbacc6931746c5f3b3158d697c332bb385e5a7513f58a979fc8192"
+    },
+    {
+      "scan_page": 5,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=5",
+      "sha256": "bb91dce7580299a7b14ce864f67195c075a21b28ad06b429c17f0bfdb2339049"
+    },
+    {
+      "scan_page": 6,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=6",
+      "sha256": "a83421def9a26f007fc9d7679a4fb3a143c7e04888cc7a3437f3fda40e7b1a66"
+    },
+    {
+      "scan_page": 7,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=7",
+      "sha256": "83306d7413dab8a7759ff91920c32d63bc29a7ecc69761313177d958a3999d90"
+    },
+    {
+      "scan_page": 8,
+      "url": "https://www.timetableimages.com/ttimages/li/li8512/li8512.pdf#page=8",
+      "sha256": "6312e4cb16f4c8246cf5328c51739a97470cdf8a5f1f87c6d6ab702d18e26152"
+    }
+  ],
+  "visual_review": true,
+  "ocr_for_discovery_only": true,
+  "original_scans_redistributed": false,
+  "timezones_fixed_hours_for_import_dates": {
+    "ANU": -4,
+    "BBQ": -4,
+    "NEV": -4,
+    "SKB": -4,
+    "AXA": -4,
+    "STX": -4,
+    "MNI": -4,
+    "PTP": -4
+  },
+  "source_date_caveat": "Effective13December printed. Year1985 is archival attribution, also handwritten85 onscan2. No whole-issue printedexpiry. Date-specific columns reviewed for February1986; coverage of amendments not complete.",
+  "frequency_policy": "English weekdays normalized1=Monday…7=Sunday, D=daily, X=except.",
+  "stop_policy": "Only consecutive timed calls in a single read-down flight column. Never join across an intermediate timed landing. Blank cells and through vertical lines do not create extra landings.",
+  "operator_policy": "Explicit page6 Four Island Air and page8 Montserrat Air Services headings, not LIAT merely because LI prefix. Publication identities, not verified legal AOC holders.",
+  "equipment_legend": {
+    "BNI": "Britten-Norman Islander,9seats",
+    "DHT": "deHavilland Twin Otter,19seats",
+    "HS7": "BAe Super748,44seats"
+  },
+  "important_boundaries": [
+    "FIA LI140/141 TuesdayFriday variant expires31January; February variantTuesdaySaturday starts after Saturdaywindowend. No false Friday movements.",
+    "FIA LI164/165 Saturday eveningfrom1February is outside window; January Saturdayafternoon variants excluded.",
+    "MAS LI1592/1593 Friday clocks differ from all-other-day clocks.",
+    "MAS LI1594/1595 operate15December–15January and27March–6April, excluded for February.",
+    "MAS LI59818:10–18:30 overlaps both Thursdaystart and Saturdayend. LaterLI59918:40 departure includesThursdayFriday only.",
+    "FIA LI168 NEV–STX asterisk at StKitts unresolved; do not infer a nonstop leg."
+  ],
+  "previous_held_conflicts_unchanged": true,
+  "visual_reviewed_import_pages": [
+    6,
+    8
+  ]
+}

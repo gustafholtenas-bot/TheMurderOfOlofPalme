@@ -1,0 +1,64 @@
+{
+  "checked_on": "2026-09-30",
+  "edition_url": "https://dlg.usg.edu/record/delta_dal-tt_dal-tt-19860201",
+  "pdf_url": "https://dlg.galileo.usg.edu/data/delta/dal-tt/pdfs/delta_dal-tt_dal-tt-19860201.pdf",
+  "pdf_sha256": "3aefa36e86dc1970af760d90385d2a887bcf5f0d7e0260e3a2764924db1835e4",
+  "pdf_pages": 136,
+  "new_schedule_printed_pages": [
+    16,
+    65,
+    66,
+    128,
+    129,
+    138,
+    165,
+    166,
+    167
+  ],
+  "research_only_printed_pages": [
+    74,
+    128
+  ],
+  "itinerary_printed_pages": [
+    262,
+    263,
+    264
+  ],
+  "legend_printed_page": 4,
+  "excluded_footnote_definition_pages": [
+    4,
+    65,
+    73
+  ],
+  "printed_to_pdf_page": {
+    "4": 5,
+    "16": 11,
+    "65": 35,
+    "66": 36,
+    "73": 39,
+    "74": 40,
+    "128": 67,
+    "129": 67,
+    "138": 72,
+    "165": 85,
+    "166": 86,
+    "167": 86,
+    "262": 134,
+    "263": 134,
+    "264": 135
+  },
+  "original_scans_redistributed": false,
+  "notes": [
+    "93 rows in twelve complete selected city-direction tables visually reviewed: 36 nonstop schedules accepted, 51 connections and six through-stop rows excluded.",
+    "All accepted Delta rows are daily; COMAIR 1623 LEX–BNA is X6, excluding Saturday. No accepted row has a dated footnote.",
+    "ATL–LEX1060 departure13:39, ATL–LEX288 departure17:09 and DFW–SDF992 arrival13:04 verified in magnified original scan.",
+    "DFW–SDF290 Saturday row has footnote 1 (equipment change), not footnote 6 (future effective date); both two-stop variants are excluded.",
+    "DTW–LEX619/1634 connection has footnote 4, effective 12 February, defined on p73. It is excluded as a direct segment.",
+    "LEX–BNA983/615/1623 and ATL–BNA rows arrive at an earlier local clock time due to UTC-5 to UTC-6 conversion; all accepted arrivals occur on the same local date.",
+    "Two excluded connecting itineraries arriving00:25 carry next-day arrival offset; they create no schedule or runtime movement.",
+    "LEX–DTW and DTW–LEX tables contain no nonstop row; all 15 rows remain research only.",
+    "Six daily schedules each produce three overlapping movements because flights cross both boundaries of the exact 48-hour window; full times are retained.",
+    "Previous movements, schedules and airports remain unchanged; held source conflicts from batches 80 and 82 are not resolved or imported.",
+    "Later amendments and timetable end date are unverified; scheduled service does not establish actual operation, aircraft identity or path."
+  ]
+}

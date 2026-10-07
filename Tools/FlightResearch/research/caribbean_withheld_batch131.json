@@ -1,0 +1,95 @@
+{
+  "package": "v134",
+  "prior_holds_retained_from": "caribbean_withheld_batch130.json",
+  "previous_held_reports_preserved_as_history": true,
+  "connection_and_stop_rows": "Not imported as nonstop. No physical intermediate leg clocks inferred by subtracting aggregate itinerary times.",
+  "zero_movement_schedules": [
+    "pba-provincetown-boston-m-1111-MIA-PBI-1920-b131",
+    "pba-provincetown-boston-m-1112-PBI-MIA-2010-b131",
+    "pba-provincetown-boston-m-1155-MIA-MLB-0820-b131",
+    "pba-provincetown-boston-m-1156-MLB-PBI-0645-b131",
+    "pba-provincetown-boston-m-1156-PBI-MIA-0735-b131",
+    "pba-provincetown-boston-m-1165-MIA-MLB-2015-b131",
+    "pba-provincetown-boston-m-1193-MLB-MIA-1745-b131",
+    "pba-provincetown-boston-m-1236-MIA-SRQ-1735-b131",
+    "pba-provincetown-boston-m-1239-SRQ-MIA-1855-b131",
+    "pba-provincetown-boston-m-1240-MIA-SRQ-2020-b131"
+  ],
+  "zero_movement_reviews": [
+    {
+      "schedule": "pba-provincetown-boston-m-1193-MLB-MIA-1745-b131",
+      "reasons": [
+        "Departure after Saturday17:21:30EST window end"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1155-MIA-MLB-0820-b131",
+      "reasons": [
+        "Explicit Saturday exclusion"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1165-MIA-MLB-2015-b131",
+      "reasons": [
+        "Departure after Saturday17:21:30EST window end"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1236-MIA-SRQ-1735-b131",
+      "reasons": [
+        "Departure after Saturday17:21:30EST window end"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1240-MIA-SRQ-2020-b131",
+      "reasons": [
+        "Explicit Saturday exclusion",
+        "Departure after Saturday17:21:30EST window end"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1239-SRQ-MIA-1855-b131",
+      "reasons": [
+        "Explicit Saturday exclusion",
+        "Departure after Saturday17:21:30EST window end"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1111-MIA-PBI-1920-b131",
+      "reasons": [
+        "Explicit Saturday exclusion",
+        "Departure after Saturday17:21:30EST window end"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1156-PBI-MIA-0735-b131",
+      "reasons": [
+        "Explicit Saturday exclusion"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1112-PBI-MIA-2010-b131",
+      "reasons": [
+        "Explicit Saturday exclusion",
+        "Departure after Saturday17:21:30EST window end"
+      ]
+    },
+    {
+      "schedule": "pba-provincetown-boston-m-1156-MLB-PBI-0645-b131",
+      "reasons": [
+        "Explicit Saturday exclusion"
+      ]
+    }
+  ],
+  "new_regional_search_performed": false,
+  "new_source_leads_without_import": [],
+  "remaining_pba_gaps": [
+    "RSW–SRQ1208 has no independently printed physical-leg timing in the inspected FROM FortMyers section; no deduction from its RSW–TPA one-stop itinerary.",
+    "January APF–RSW physical leg clocks not independently printed; do not derive them from APF–TPA or other through itineraries.",
+    "Northern System, supplements/amendments and actual operation remain outside this Southern System row sweep."
+  ],
+  "nicaragua_imported_movements": 0,
+  "st_thomas_new_movements": 0,
+  "military_special_flight_imported_movements": 0,
+  "military_special_review_complete": false
+}
