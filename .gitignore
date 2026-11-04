@@ -82,3 +82,11 @@ DerivedDataCache/*
 
 # Newspaper source images (kept locally, not in Git)
 /Content/Media/Newspapers/Images/
+DataTables/09_16/DT_TMOP_People.json
+DataTables/09_14/DT_TMOP_People.json
+Content/Characters/People/StigEngstrom/StigEnstromChar.uasset
+Content/Characters/People/StigEngstrom/StigEngstrom.uasset
+Content/Characters/People/StigEngstrom/StigE_CaptureData.uasset
+Content/Characters/People/StigEngstrom/SK_StigEngstrom.uasset
+Content/Characters/People/OlofPalme/SK_OlofPalme_DNA.uasset
+Content/Characters/People/OlofPalme/SK_OlofPalme.uasset
