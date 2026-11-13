@@ -1,0 +1,22 @@
+// Unreal Engine Material Custom expression
+// Output Type: Float3
+// Inputs (all Float1 except PositionWS, ObjectPositionWS, WindDirectionXY):
+// PositionWS (Float3): Absolute World Position (Excluding Material Shader Offsets)
+// ObjectPositionWS (Float3): Object Position WS
+// ObjectBottomZ (Float1): Object Bounds minimum Z, in world units (see guide)
+// TimeSeconds (Float1): Time
+// StartHeightCm (Float1): 200
+// FadeHeightCm (Float1): 250
+// WindStrengthCm (Float1): 6
+// WindSpeedHz (Float1): 0.22
+// WindDirectionXY (Float2): (1,0)
+// PhaseSeed (Float1): Object Position WS X * 0.013 + Y * 0.017 (built outside)
+// IMPORTANT: local height is relative to mesh bottom; ObjectBottomZ should be supplied
+// as ActorPositionWS.Z when mesh pivot is at its base, OR computed from ObjectBounds.
+float height = PositionWS.z - ObjectBottomZ;
+float fade = saturate((height - StartHeightCm) / max(FadeHeightCm, 1.0));
+fade = fade * fade * (3.0 - 2.0 * fade);
+float2 direction = normalize(WindDirectionXY + float2(0.0001, 0.0001));
+float phase = TimeSeconds * (6.2831853 * WindSpeedHz) + PhaseSeed;
+float sway = sin(phase) * 0.75 + sin(phase * 1.79 + 0.8) * 0.25;
+return float3(direction * (WindStrengthCm * fade * sway), 0.0);

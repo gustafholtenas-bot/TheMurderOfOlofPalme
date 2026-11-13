@@ -17,7 +17,7 @@ CONTENT_FOLDERS = [
     '/Game/enviorment/region9Johannes',
 ]  # Exact folder names from Content Browser; includes subfolders
 DRY_RUN = False                      # Set False only after reviewing the report
-SAVE_ASSETS = true                 # Set True to save after successful changes
+SAVE_ASSETS = True                 # Set True to save after successful changes
 SKIP_EXISTING_UV1 = True            # Preserve existing second UV channel
 MIN_LIGHTMAP_RESOLUTION = 64
 LIGHTMAP_RESOLUTION = None          # None = keep existing value; e.g. 128 for testing
