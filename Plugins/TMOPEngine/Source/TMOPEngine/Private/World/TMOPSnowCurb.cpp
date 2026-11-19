@@ -1,15 +1,43 @@
 #include "World/TMOPSnowCurb.h"
 
-#include "Components/SplineComponent.h"
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
+#include "Components/SplineComponent.h"
 #include "Engine/StaticMesh.h"
 
 ATMOPSnowCurb::ATMOPSnowCurb()
 {
     PrimaryActorTick.bCanEverTick = false;
+
     CurbSpline = CreateDefaultSubobject<USplineComponent>(TEXT("CurbSpline"));
     SetRootComponent(CurbSpline);
+    CurbSpline->SetMobility(EComponentMobility::Static);
     CurbSpline->SetClosedLoop(false);
+    CurbSpline->SetDrawDebug(true); // Also enable Viewport Show > Splines.
+
+    // A visible ten-metre spline by default. Its points remain editable.
+    CurbSpline->ClearSplinePoints(false);
+    CurbSpline->AddSplinePoint(FVector::ZeroVector, ESplineCoordinateSpace::Local, false);
+    CurbSpline->AddSplinePoint(FVector(1000.0f, 0.0f, 0.0f), ESplineCoordinateSpace::Local, true);
+    CurbSpline->SetSplinePointType(0, ESplinePointType::Linear, false);
+    CurbSpline->SetSplinePointType(1, ESplinePointType::Linear, true);
+
+    // Native subobjects survive reruns of construction and Blueprint reinstancing.
+    SnowHISMComponents.Reserve(MaxMeshTypes);
+    for (int32 Index = 0; Index < MaxMeshTypes; ++Index)
+    {
+        const FName SlotName(*FString::Printf(TEXT("SnowCurbNativeHISM_%02d"), Index));
+        UHierarchicalInstancedStaticMeshComponent* HISM =
+            CreateDefaultSubobject<UHierarchicalInstancedStaticMeshComponent>(SlotName);
+
+        HISM->SetupAttachment(CurbSpline);
+        HISM->SetMobility(EComponentMobility::Static);
+        HISM->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        HISM->SetGenerateOverlapEvents(false);
+        HISM->SetCanEverAffectNavigation(false);
+        HISM->SetCastShadow(false);
+        HISM->SetVisibility(false);
+        SnowHISMComponents.Add(HISM);
+    }
 }
 
 void ATMOPSnowCurb::OnConstruction(const FTransform& Transform)
@@ -19,79 +47,119 @@ void ATMOPSnowCurb::OnConstruction(const FTransform& Transform)
     {
         RebuildSnow();
     }
+    else
+    {
+        ClearSnow();
+    }
 }
 
 void ATMOPSnowCurb::ClearSnow()
 {
-    for (UHierarchicalInstancedStaticMeshComponent* Component : SnowHISMComponents)
+    GeneratedInstanceCount = 0;
+    for (UHierarchicalInstancedStaticMeshComponent* HISM : SnowHISMComponents)
     {
-        if (IsValid(Component))
+        if (IsValid(HISM))
         {
-            Component->ClearInstances();
+            HISM->ClearInstances();
         }
     }
 }
 
 void ATMOPSnowCurb::RebuildSnow()
 {
-    if (!CurbSpline) return;
-
-    // Reuse components across construction reruns; no separate actors per clump.
-    while (SnowHISMComponents.Num() < SnowMeshes.Num())
+    GeneratedInstanceCount = 0;
+    if (!IsValid(CurbSpline))
     {
-        const int32 Index = SnowHISMComponents.Num();
-        const FName ComponentName(*FString::Printf(TEXT("SnowHISM_%d"), Index));
-        UHierarchicalInstancedStaticMeshComponent* HISM = NewObject<UHierarchicalInstancedStaticMeshComponent>(this, ComponentName, RF_Transactional);
-        HISM->SetupAttachment(CurbSpline);
-        HISM->SetMobility(EComponentMobility::Static);
-        HISM->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-        HISM->SetCanEverAffectNavigation(false);
-        HISM->SetCastShadow(false);
-        HISM->SetCullDistances(0, FMath::Max(0, FMath::RoundToInt(EndCullDistanceCm)));
-        AddInstanceComponent(HISM);
-        HISM->RegisterComponent();
-        SnowHISMComponents.Add(HISM);
+        return;
     }
+
+    // Always clear instances and unused mesh slots before rebuilding.
+    const int32 SlotsToCheck = FMath::Min(SnowMeshes.Num(), MaxMeshTypes);
+    const int32 EndCullDistance = FMath::Max(0, FMath::RoundToInt(EndCullDistanceCm));
+    TArray<int32, TInlineAllocator<MaxMeshTypes>> ValidMeshSlots;
 
     for (int32 Index = 0; Index < SnowHISMComponents.Num(); ++Index)
     {
         UHierarchicalInstancedStaticMeshComponent* HISM = SnowHISMComponents[Index];
-        if (!IsValid(HISM)) continue;
+        if (!IsValid(HISM))
+        {
+            continue;
+        }
+
         HISM->ClearInstances();
-        const bool bValidMesh = SnowMeshes.IsValidIndex(Index) && IsValid(SnowMeshes[Index]);
-        HISM->SetStaticMesh(bValidMesh ? SnowMeshes[Index] : nullptr);
-        HISM->SetVisibility(bValidMesh);
-        HISM->SetCullDistances(0, FMath::Max(0, FMath::RoundToInt(EndCullDistanceCm)));
+        UStaticMesh* Mesh = Index < SlotsToCheck ? SnowMeshes[Index].Get() : nullptr;
+        const bool bHasMesh = IsValid(Mesh);
+        HISM->SetStaticMesh(bHasMesh ? Mesh : nullptr);
+        HISM->SetVisibility(bHasMesh);
+        HISM->SetCullDistances(0, EndCullDistance);
+
+        if (bHasMesh)
+        {
+            ValidMeshSlots.Add(Index);
+        }
     }
 
-    const float Length = CurbSpline->GetSplineLength();
-    const float Step = FMath::Max(10.0f, SpacingCm);
-    if (Length < 1.0f) return;
-
-    TArray<int32> ValidIndices;
-    for (int32 Index = 0; Index < SnowMeshes.Num(); ++Index)
+    if (SnowMeshes.Num() > MaxMeshTypes)
     {
-        if (IsValid(SnowMeshes[Index]) && SnowHISMComponents.IsValidIndex(Index) && IsValid(SnowHISMComponents[Index]))
-            ValidIndices.Add(Index);
+        UE_LOG(LogTemp, Warning, TEXT("TMOPSnowCurb '%s': only the first %d SnowMeshes are supported."),
+            *GetName(), MaxMeshTypes);
     }
-    if (ValidIndices.IsEmpty()) return;
 
-    FRandomStream Random(RandomSeed);
+    if (ValidMeshSlots.IsEmpty() || CurbSpline->GetNumberOfSplinePoints() < 2)
+    {
+        return;
+    }
+
+    CurbSpline->UpdateSpline();
+    const float SplineLength = CurbSpline->GetSplineLength();
+    if (SplineLength < 1.0f)
+    {
+        return;
+    }
+
+    const float Step = FMath::Max(10.0f, SpacingCm);
+    const int32 Count = FMath::Clamp(FMath::FloorToInt(SplineLength / Step) + 1, 1, FMath::Max(1, MaxInstances));
+    const float JitterAlong = FMath::Clamp(AlongJitterCm, 0.0f, Step * 0.45f);
+    const float JitterSide = FMath::Max(0.0f, SideJitterCm);
+    const float JitterYaw = FMath::Clamp(YawJitterDegrees, 0.0f, 180.0f);
     const float MinScale = FMath::Max(0.01f, FMath::Min(UniformScaleRange.X, UniformScaleRange.Y));
     const float MaxScale = FMath::Max(MinScale, FMath::Max(UniformScaleRange.X, UniformScaleRange.Y));
-    const int32 Count = FMath::FloorToInt(Length / Step) + 1;
+    FRandomStream Random(RandomSeed);
 
-    for (int32 I = 0; I < Count; ++I)
+    // Batch instance creation per mesh instead of triggering a HISM update
+    // for every individual snow clump while a spline point is being dragged.
+    TArray<TArray<FTransform>> InstanceBatches;
+    InstanceBatches.SetNum(MaxMeshTypes);
+
+    for (int32 Index = 0; Index < Count; ++Index)
     {
-        const float Distance = FMath::Clamp(I * Step + Random.FRandRange(-AlongJitterCm, AlongJitterCm), 0.0f, Length);
-        const FVector Position = CurbSpline->GetLocationAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::Local);
-        const FVector Tangent = CurbSpline->GetDirectionAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::Local);
+        const float Distance = FMath::Clamp(Index * Step + Random.FRandRange(-JitterAlong, JitterAlong),
+            0.0f, SplineLength);
+        // HISM and spline share a parent-local coordinate system.
+        const FVector Position = CurbSpline->GetLocationAtDistanceAlongSpline(
+            Distance, ESplineCoordinateSpace::Local);
+        const FVector Tangent = CurbSpline->GetDirectionAtDistanceAlongSpline(
+            Distance, ESplineCoordinateSpace::Local);
         const FVector Side = FVector::CrossProduct(FVector::UpVector, Tangent).GetSafeNormal();
-        const FVector Offset = Side * Random.FRandRange(-SideJitterCm, SideJitterCm) + FVector::UpVector * HeightOffsetCm;
-        const float Yaw = Tangent.Rotation().Yaw + MeshYawOffsetDegrees + Random.FRandRange(-YawJitterDegrees, YawJitterDegrees);
+
+        const FVector Offset = Side * Random.FRandRange(-JitterSide, JitterSide)
+            + FVector::UpVector * HeightOffsetCm;
+        const float Yaw = Tangent.Rotation().Yaw + MeshYawOffsetDegrees
+            + Random.FRandRange(-JitterYaw, JitterYaw);
         const float Scale = Random.FRandRange(MinScale, MaxScale);
-        const FTransform InstanceTransform(FRotator(0.0f, Yaw, 0.0f), Position + Offset, FVector(Scale));
-        const int32 MeshIndex = ValidIndices[Random.RandRange(0, ValidIndices.Num() - 1)];
-        SnowHISMComponents[MeshIndex]->AddInstance(InstanceTransform);
+        const int32 Slot = ValidMeshSlots[Random.RandRange(0, ValidMeshSlots.Num() - 1)];
+
+        InstanceBatches[Slot].Add(FTransform(FRotator(0.0f, Yaw, 0.0f),
+            Position + Offset, FVector(Scale)));
+        ++GeneratedInstanceCount;
+    }
+
+    for (int32 Slot : ValidMeshSlots)
+    {
+        if (!InstanceBatches[Slot].IsEmpty())
+        {
+            // Local-space transforms; collision/navmesh are disabled on all HISMs.
+            SnowHISMComponents[Slot]->AddInstances(InstanceBatches[Slot], false, false, false);
+        }
     }
 }
