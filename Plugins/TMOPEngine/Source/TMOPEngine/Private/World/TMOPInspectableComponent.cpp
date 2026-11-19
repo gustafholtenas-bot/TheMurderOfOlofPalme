@@ -6,6 +6,8 @@
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
+#include "Materials/MaterialInterface.h"
+#include "UObject/ConstructorHelpers.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 namespace
@@ -118,6 +120,11 @@ void UTMOPInspectableComponent::BeginPlay()
     WorldIndicator->SetVerticalAlignment(EVRTA_TextCenter);
     WorldIndicator->SetWorldSize(WorldIndicatorSize);
     WorldIndicator->SetTextRenderColor(WorldIndicatorColor);
+    // Opaque engine text material is unlit: brightness remains stable under lighting.
+    static ConstructorHelpers::FObjectFinder<UMaterialInterface> UnlitTextMaterial(
+        TEXT("/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque"));
+    if (UnlitTextMaterial.Succeeded())
+        WorldIndicator->SetTextMaterial(UnlitTextMaterial.Object);
     WorldIndicator->SetText(WorldIndicatorText);
     WorldIndicator->SetCastShadow(false);
     WorldIndicator->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -170,4 +177,3 @@ void UTMOPInspectableComponent::EndPlay(const EEndPlayReason::Type EndPlayReason
     WorldIndicator = nullptr;
     Super::EndPlay(EndPlayReason);
 }
-

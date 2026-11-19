@@ -639,6 +639,8 @@ void ATMOPPlayerCharacter::InputInteract()
 
 float ATMOPPlayerCharacter::GetInspectionDistance(const UTMOPInspectableComponent* Inspection) const
 {
+    if (IsValid(Inspection) && Inspection->IsA<UTMOPAddressComponent>())
+        return 500.0f; // Five metres for addresses only.
     return IsValid(Inspection) && Inspection->GetOwner()->IsA<ATMOPVehicleBase>()
         ? TargetInformationDistance : InteractionDistance;
 }
