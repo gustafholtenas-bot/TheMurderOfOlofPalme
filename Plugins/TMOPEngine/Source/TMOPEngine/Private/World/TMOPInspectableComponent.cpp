@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
 #include "Materials/MaterialInterface.h"
-#include "UObject/ConstructorHelpers.h"
+#include "UObject/UObjectGlobals.h"
 #include "Player/TMOPLocalMultiplayerSubsystem.h"
 
 namespace
@@ -121,10 +121,12 @@ void UTMOPInspectableComponent::BeginPlay()
     WorldIndicator->SetWorldSize(WorldIndicatorSize);
     WorldIndicator->SetTextRenderColor(WorldIndicatorColor);
     // Opaque engine text material is unlit: brightness remains stable under lighting.
-    static ConstructorHelpers::FObjectFinder<UMaterialInterface> UnlitTextMaterial(
+    // LoadObject is valid at runtime; ConstructorHelpers::FObjectFinder is constructor-only.
+    UMaterialInterface* UnlitTextMaterial = LoadObject<UMaterialInterface>(
+        nullptr,
         TEXT("/Engine/EngineMaterials/DefaultTextMaterialOpaque.DefaultTextMaterialOpaque"));
-    if (UnlitTextMaterial.Succeeded())
-        WorldIndicator->SetTextMaterial(UnlitTextMaterial.Object);
+    if (UnlitTextMaterial)
+        WorldIndicator->SetTextMaterial(UnlitTextMaterial);
     WorldIndicator->SetText(WorldIndicatorText);
     WorldIndicator->SetCastShadow(false);
     WorldIndicator->SetCollisionEnabled(ECollisionEnabled::NoCollision);
