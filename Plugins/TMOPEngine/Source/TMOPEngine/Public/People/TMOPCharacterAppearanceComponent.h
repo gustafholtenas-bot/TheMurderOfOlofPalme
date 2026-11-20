@@ -111,6 +111,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Performance")
     bool bEnableAnimationUpdateRateOptimizations = true;
 
+    /** Prio 3A: disabled by setting false for an A/B performance comparison. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Performance")
+    bool bDisableUnusedSkeletalPartTicks = true;
+
+    /** Prio 3B: independent switch for distance/action based visual throttling. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Performance")
+    bool bEnableDistanceBasedAnimationLOD = true;
+
     /**
      * First integration step for the modular wardrobe.  While enabled, the
      * component only applies Outerwear and leaves the actor's existing body,
@@ -135,6 +143,14 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Appearance")
     bool ApplyAppearance();
+
+    /**
+     * Prio 3: one animation policy for the body and all modular followers.
+     * A zero interval means normal per-frame ticking. The caller can stop
+     * nonessential animation work for unobserved, stationary agents; the
+     * historical schedule and actor movement are NOT affected.
+     */
+    void ApplyAnimationTickLOD(float TickIntervalSeconds, bool bAllowAnimationTick);
 
     UFUNCTION(BlueprintCallable, Category="TMOP|Appearance")
     void ResetAppearance();

@@ -1,4 +1,6 @@
 #include "Schedules/TMOPScheduleSubsystem.h"
+#include "Actions/TMOPActionExecutorComponent.h"
+#include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Misc/Crc.h"
 
 #include "Engine/GameInstance.h"
@@ -62,6 +64,11 @@ void UTMOPScheduleSubsystem::Deinitialize()
     Schedules.Reset();
     RuntimeEntries.Reset();
     TriggeredEventTimes.Reset();
+    DueEntries.Reset();
+    RelativeEventEntries.Reset();
+    RegisteredExecutors.Reset();
+    ExecutorsByAgentId.Reset();
+    MissingExecutorIds.Reset();
 
     Super::Deinitialize();
 }
@@ -87,6 +94,10 @@ bool UTMOPScheduleSubsystem::RegisterAgentSchedule(
         SeenEntryIds.Add(Entry.EntryId);
     }
 
+    // A replacement must discard old runtime rows and event dependencies.
+    if (Schedules.Contains(Schedule.AgentId))
+        RemoveAgentSchedule(Schedule.AgentId);
+
     Schedules.Add(Schedule.AgentId, Schedule);
 
     for (const FTMOPScheduleEntry& Entry : Schedule.Entries)
@@ -97,6 +108,9 @@ bool UTMOPScheduleSubsystem::RegisterAgentSchedule(
         RuntimeEntries.Add(
             MakeRuntimeKey(Schedule.AgentId, Entry.EntryId),
             Runtime);
+        if (Entry.TimingMode == ETMOPEventTimingMode::Relative)
+            RelativeEventEntries.FindOrAdd(Entry.TriggerEventId).Add(
+                FEntryRef{Schedule.AgentId, Entry.EntryId});
     }
 
     ResolveSchedule(Schedule.AgentId);
@@ -114,10 +128,24 @@ bool UTMOPScheduleSubsystem::RemoveAgentSchedule(
 
     for (const FTMOPScheduleEntry& Entry : Schedule->Entries)
     {
-        RuntimeEntries.Remove(
-            MakeRuntimeKey(AgentId, Entry.EntryId));
+        RuntimeEntries.Remove(MakeRuntimeKey(AgentId, Entry.EntryId));
+        if (Entry.TimingMode == ETMOPEventTimingMode::Relative)
+        {
+            const FName EntryId = Entry.EntryId;
+            if (TArray<FEntryRef>* References =
+                RelativeEventEntries.Find(Entry.TriggerEventId))
+            {
+                References->RemoveAll([AgentId, EntryId](const FEntryRef& Ref)
+                {
+                    return Ref.AgentId == AgentId && Ref.EntryId == EntryId;
+                });
+                if (References->IsEmpty())
+                    RelativeEventEntries.Remove(Entry.TriggerEventId);
+            }
+        }
     }
 
+    // Already queued references are safely discarded when their time arrives.
     return Schedules.Remove(AgentId) > 0;
 }
 
@@ -197,6 +225,7 @@ void UTMOPScheduleSubsystem::ResetSchedulesForLoop(
 {
     CurrentLoopNumber = LoopNumber;
     TriggeredEventTimes.Reset();
+    DueEntries.Reset();
 
     for (TPair<FString, FTMOPScheduleEntryRuntime>& Pair : RuntimeEntries)
     {
@@ -221,46 +250,135 @@ TArray<FName> UTMOPScheduleSubsystem::GetScheduledAgentIds() const
     return AgentIds;
 }
 
+void UTMOPScheduleSubsystem::RegisterActionExecutor(
+    UTMOPActionExecutorComponent* Executor)
+{
+    if (!IsValid(Executor)) return;
+    RegisteredExecutors.AddUnique(TWeakObjectPtr<UTMOPActionExecutorComponent>(Executor));
+    bExecutorIndexDirty = true;
+    MissingExecutorIds.Reset();
+}
+
+void UTMOPScheduleSubsystem::UnregisterActionExecutor(
+    UTMOPActionExecutorComponent* Executor)
+{
+    RegisteredExecutors.RemoveAll([Executor](
+        const TWeakObjectPtr<UTMOPActionExecutorComponent>& Candidate)
+    {
+        return !Candidate.IsValid() || Candidate.Get() == Executor;
+    });
+    bExecutorIndexDirty = true;
+    MissingExecutorIds.Reset();
+}
+
+void UTMOPScheduleSubsystem::RebuildExecutorIndex()
+{
+    ExecutorsByAgentId.Reset();
+    RegisteredExecutors.RemoveAll([](
+        const TWeakObjectPtr<UTMOPActionExecutorComponent>& Candidate)
+    {
+        return !Candidate.IsValid();
+    });
+    for (const TWeakObjectPtr<UTMOPActionExecutorComponent>& Weak : RegisteredExecutors)
+    {
+        UTMOPActionExecutorComponent* Executor = Weak.Get();
+        if (!IsValid(Executor)) continue;
+        const FName AgentId = Executor->GetOwnerEntityId();
+        if (!AgentId.IsNone())
+            ExecutorsByAgentId.FindOrAdd(AgentId).Add(Weak);
+    }
+    bExecutorIndexDirty = false;
+    MissingExecutorIds.Reset();
+}
+
+void UTMOPScheduleSubsystem::EnqueueResolvedEntry(
+    const FName AgentId,
+    const FName EntryId,
+    const FTMOPScheduleEntryRuntime& Runtime)
+{
+    if (Runtime.State != ETMOPScheduleEntryState::Pending ||
+        !Runtime.bHasResolvedTime)
+        return;
+
+    FDueEntry Due;
+    Due.Ref.AgentId = AgentId;
+    Due.Ref.EntryId = EntryId;
+    Due.Second = Runtime.ResolvedTime.ToSecondsFromMidnight();
+    DueEntries.HeapPush(Due);
+}
+
+void UTMOPScheduleSubsystem::DispatchReadyEntry(
+    const FName AgentId,
+    const FTMOPScheduleEntry& Entry,
+    const FTMOPTime TriggerTime)
+{
+    if (bExecutorIndexDirty) RebuildExecutorIndex();
+
+    // Entity IDs may be assigned after the component's BeginPlay.
+    if (!ExecutorsByAgentId.Contains(AgentId) &&
+        !MissingExecutorIds.Contains(AgentId))
+    {
+        RebuildExecutorIndex();
+        if (!ExecutorsByAgentId.Contains(AgentId))
+            MissingExecutorIds.Add(AgentId);
+    }
+
+    if (const TArray<TWeakObjectPtr<UTMOPActionExecutorComponent>>* Matches =
+        ExecutorsByAgentId.Find(AgentId))
+    {
+        const auto Recipients = *Matches;
+        for (const TWeakObjectPtr<UTMOPActionExecutorComponent>& Weak : Recipients)
+            if (UTMOPActionExecutorComponent* Executor = Weak.Get())
+                if (IsValid(Executor))
+                    Executor->HandleScheduleEntryReady(AgentId, Entry, TriggerTime);
+    }
+
+    // Preserve the public Blueprint event; native NPC receivers are targeted.
+    OnScheduleEntryReady.Broadcast(AgentId, Entry, TriggerTime);
+}
+
 void UTMOPScheduleSubsystem::HandleSecondChanged(
     const FTMOPTime NewTime)
 {
-    const int32 CurrentSecond =
-        NewTime.ToSecondsFromMidnight();
+    TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_ScheduleDispatch);
 
-    for (const TPair<FName, FTMOPAgentSchedule>& SchedulePair : Schedules)
+    // Recorded world playback owns the actor state. A seek must not replay
+    // all preceding live actions in the target frame.
+    if (const UGameInstance* GameInstance = GetGameInstance())
+        if (const UTMOPClockSubsystem* Clock =
+            GameInstance->GetSubsystem<UTMOPClockSubsystem>())
+            if (Clock->bAuthoritativePlayback) return;
+
+    const int32 CurrentSecond = NewTime.ToSecondsFromMidnight();
+
+    // Only wake events that have become due. No scan of every NPC's schedule.
+    while (!DueEntries.IsEmpty() &&
+        DueEntries.HeapTop().Second <= CurrentSecond)
     {
-        const FName AgentId = SchedulePair.Key;
+        FDueEntry Due;
+        DueEntries.HeapPop(Due, EAllowShrinking::No);
 
-        for (const FTMOPScheduleEntry& Entry :
-            SchedulePair.Value.Entries)
-        {
-            FTMOPScheduleEntryRuntime* Runtime =
-                RuntimeEntries.Find(
-                    MakeRuntimeKey(AgentId, Entry.EntryId));
+        FTMOPScheduleEntryRuntime* Runtime =
+            RuntimeEntries.Find(MakeRuntimeKey(Due.Ref.AgentId, Due.Ref.EntryId));
+        if (Runtime == nullptr ||
+            Runtime->State != ETMOPScheduleEntryState::Pending ||
+            !Runtime->bHasResolvedTime ||
+            Runtime->ResolvedTime.ToSecondsFromMidnight() != Due.Second)
+            continue; // Removed, replaced, cancelled or rescheduled entry.
 
-            if (Runtime == nullptr ||
-                Runtime->State != ETMOPScheduleEntryState::Pending)
+        const FTMOPAgentSchedule* Schedule = Schedules.Find(Due.Ref.AgentId);
+        if (Schedule == nullptr) continue;
+        const FTMOPScheduleEntry* Entry = Schedule->Entries.FindByPredicate(
+            [&Due](const FTMOPScheduleEntry& Candidate)
             {
-                continue;
-            }
+                return Candidate.EntryId == Due.Ref.EntryId;
+            });
+        if (Entry == nullptr) continue;
 
-            if (!Runtime->bHasResolvedTime)
-            {
-                ResolveEntryTime(AgentId, Entry, *Runtime);
-            }
-
-            if (Runtime->bHasResolvedTime &&
-                CurrentSecond >=
-                    Runtime->ResolvedTime.ToSecondsFromMidnight())
-            {
-                Runtime->State = ETMOPScheduleEntryState::Ready;
-
-                OnScheduleEntryReady.Broadcast(
-                    AgentId,
-                    Entry,
-                    NewTime);
-            }
-        }
+        // Set the state first, since callbacks can trigger more events.
+        Runtime->State = ETMOPScheduleEntryState::Ready;
+        const FTMOPScheduleEntry EntryCopy = *Entry;
+        DispatchReadyEntry(Due.Ref.AgentId, EntryCopy, NewTime);
     }
 }
 
@@ -270,24 +388,31 @@ void UTMOPScheduleSubsystem::HandleHistoricalEventTriggered(
 {
     TriggeredEventTimes.Add(EventId, TriggerTime);
 
-    for (const TPair<FName, FTMOPAgentSchedule>& SchedulePair : Schedules)
-    {
-        const FName AgentId = SchedulePair.Key;
+    // Only the entries referencing this event need their time resolved.
+    const TArray<FEntryRef>* Waiting = RelativeEventEntries.Find(EventId);
+    if (Waiting == nullptr) return;
+    const TArray<FEntryRef> References = *Waiting; // Safe if callbacks replace schedules.
 
-        for (const FTMOPScheduleEntry& Entry :
-            SchedulePair.Value.Entries)
-        {
-            if (Entry.TimingMode == ETMOPEventTimingMode::Relative &&
-                Entry.TriggerEventId == EventId)
+    for (const FEntryRef& Ref : References)
+    {
+        const FTMOPAgentSchedule* Schedule = Schedules.Find(Ref.AgentId);
+        if (Schedule == nullptr) continue;
+        const FTMOPScheduleEntry* Entry = Schedule->Entries.FindByPredicate(
+            [&Ref](const FTMOPScheduleEntry& Candidate)
             {
-                if (FTMOPScheduleEntryRuntime* Runtime =
-                    RuntimeEntries.Find(
-                        MakeRuntimeKey(AgentId, Entry.EntryId)))
-                {
-                    ResolveEntryTime(AgentId, Entry, *Runtime);
-                }
-            }
-        }
+                return Candidate.EntryId == Ref.EntryId;
+            });
+        if (Entry == nullptr ||
+            Entry->TimingMode != ETMOPEventTimingMode::Relative ||
+            Entry->TriggerEventId != EventId)
+            continue;
+
+        FTMOPScheduleEntryRuntime* Runtime =
+            RuntimeEntries.Find(MakeRuntimeKey(Ref.AgentId, Ref.EntryId));
+        if (Runtime != nullptr &&
+            Runtime->State == ETMOPScheduleEntryState::Pending &&
+            ResolveEntryTime(Ref.AgentId, *Entry, *Runtime))
+            EnqueueResolvedEntry(Ref.AgentId, Ref.EntryId, *Runtime);
     }
 }
 
@@ -315,7 +440,8 @@ void UTMOPScheduleSubsystem::ResolveSchedule(
             RuntimeEntries.Find(
                 MakeRuntimeKey(AgentId, Entry.EntryId)))
         {
-            ResolveEntryTime(AgentId, Entry, *Runtime);
+            if (ResolveEntryTime(AgentId, Entry, *Runtime))
+                EnqueueResolvedEntry(AgentId, Entry.EntryId, *Runtime);
         }
     }
 }

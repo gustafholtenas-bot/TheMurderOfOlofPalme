@@ -5,6 +5,8 @@
 #include "Schedules/TMOPScheduleTypes.h"
 #include "TMOPScheduleSubsystem.generated.h"
 
+class UTMOPActionExecutorComponent;
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(
     FTMOPScheduleEntryReadySignature,
     FName,
@@ -67,6 +69,10 @@ public:
     UFUNCTION(BlueprintPure, Category = "TMOP|Schedules")
     TArray<FName> GetScheduledAgentIds() const;
 
+    /** Register one action receiver; event dispatch no longer wakes every NPC. */
+    void RegisterActionExecutor(UTMOPActionExecutorComponent* Executor);
+    void UnregisterActionExecutor(UTMOPActionExecutorComponent* Executor);
+
 private:
     UFUNCTION()
     void HandleSecondChanged(FTMOPTime NewTime);
@@ -96,6 +102,44 @@ private:
         FName EntryId) const;
 
     FString MakeRuntimeKey(FName AgentId, FName EntryId) const;
+
+    struct FEntryRef
+    {
+        FName AgentId = NAME_None;
+        FName EntryId = NAME_None;
+    };
+
+    struct FDueEntry
+    {
+        FEntryRef Ref;
+        int32 Second = INDEX_NONE;
+
+        // TArray's heap uses operator< and keeps the earliest event on top.
+        bool operator<(const FDueEntry& Other) const
+        {
+            if (Second != Other.Second) return Second < Other.Second;
+            const FNameLexicalLess Less;
+            if (Ref.AgentId != Other.Ref.AgentId)
+                return Less(Ref.AgentId, Other.Ref.AgentId);
+            return Less(Ref.EntryId, Other.Ref.EntryId);
+        }
+    };
+
+    void EnqueueResolvedEntry(FName AgentId, FName EntryId,
+        const FTMOPScheduleEntryRuntime& Runtime);
+    void DispatchReadyEntry(FName AgentId, const FTMOPScheduleEntry& Entry,
+        FTMOPTime TriggerTime);
+    void RebuildExecutorIndex();
+
+    /** Heap of pending resolved entries; stale entries are checked when popped. */
+    TArray<FDueEntry> DueEntries;
+    /** Relative entries are indexed by their triggering historical event. */
+    TMap<FName, TArray<FEntryRef>> RelativeEventEntries;
+
+    TArray<TWeakObjectPtr<UTMOPActionExecutorComponent>> RegisteredExecutors;
+    TMap<FName, TArray<TWeakObjectPtr<UTMOPActionExecutorComponent>>> ExecutorsByAgentId;
+    TSet<FName> MissingExecutorIds;
+    bool bExecutorIndexDirty = true;
 
     UPROPERTY(Transient)
     TMap<FName, FTMOPAgentSchedule> Schedules;

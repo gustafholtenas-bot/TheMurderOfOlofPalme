@@ -11,6 +11,7 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "NavigationSystem.h"
+#include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Navigation/PathFollowingComponent.h"
 #include "Traffic/TMOPTrafficSignalDirector.h"
 #include "Schedules/TMOPScheduleSubsystem.h"
@@ -38,9 +39,7 @@ void UTMOPActionExecutorComponent::BeginPlay()
         if (UTMOPScheduleSubsystem* Schedules =
             GameInstance->GetSubsystem<UTMOPScheduleSubsystem>())
         {
-            Schedules->OnScheduleEntryReady.AddDynamic(
-                this,
-                &UTMOPActionExecutorComponent::HandleScheduleEntryReady);
+            Schedules->RegisterActionExecutor(this);
         }
     }
 }
@@ -57,9 +56,7 @@ void UTMOPActionExecutorComponent::EndPlay(
         if (UTMOPScheduleSubsystem* Schedules =
             GameInstance->GetSubsystem<UTMOPScheduleSubsystem>())
         {
-            Schedules->OnScheduleEntryReady.RemoveDynamic(
-                this,
-                &UTMOPActionExecutorComponent::HandleScheduleEntryReady);
+            Schedules->UnregisterActionExecutor(this);
         }
     }
 
@@ -91,6 +88,15 @@ void UTMOPActionExecutorComponent::TickComponent(
 
     if (ExecutionState != ETMOPActionExecutionState::WaitingForArrival)
     {
+        return;
+    }
+
+    // An early arrival has already stopped moving. Wait only for the deadline.
+    if (bHoldingForTimedArrival)
+    {
+        if (ActiveExpectedArrivalSecond != INDEX_NONE &&
+            GetCurrentSimulationSecondExact() >= ActiveExpectedArrivalSecond)
+            CompleteTimedArrivalAtDeadline();
         return;
     }
 
@@ -260,6 +266,9 @@ void UTMOPActionExecutorComponent::CancelCurrentAction()
 {
     bWaitingAtTrafficSignal = false;
     bMoveDelayedByTrafficSignal = false;
+    CachedTimedRouteLegsCm.Reset();
+    bTimedRouteCacheValid = false;
+    CurrentTimedLegRemainingCm = 0.0f;
     if (!bHasCurrentEntry)
     {
         ExecutionState = ETMOPActionExecutionState::Idle;
@@ -530,6 +539,8 @@ bool UTMOPActionExecutorComponent::BeginMoveToAnchor(
     }
 
     ExecutionState = ETMOPActionExecutionState::WaitingForArrival;
+    if (ActiveExpectedArrivalSecond != INDEX_NONE)
+        BuildTimedRouteLengthCache();
     SetComponentTickEnabled(true);
     UpdateTimedMovementSpeed(true);
 
@@ -568,27 +579,48 @@ bool UTMOPActionExecutorComponent::MoveToCurrentRouteAnchor()
                 CurrentEntry.TargetAnchorOffsetCm)
             : CurrentEntry.TargetAnchorOffsetCm;
     UAIBlueprintHelperLibrary::SimpleMoveToLocation(Controller, CurrentTargetLocation);
+    if (bTimedRouteCacheValid &&
+        CachedTimedRouteLegsCm.IsValidIndex(CurrentRouteAnchorIndex))
+    {
+        CurrentTimedLegRemainingCm =
+            CachedTimedRouteLegsCm[CurrentRouteAnchorIndex];
+        LastTimedRoutePosition = Agent->GetActorLocation();
+    }
     return true;
 }
 
-float UTMOPActionExecutorComponent::CalculateRemainingPathLengthCm() const
+void UTMOPActionExecutorComponent::BuildTimedRouteLengthCache()
 {
+    TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_BuildTimedRouteCache);
+    CachedTimedRouteLegsCm.Reset();
+    bTimedRouteCacheValid = false;
+    CurrentTimedLegRemainingCm = 0.0f;
+
     const ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
     UWorld* World = GetWorld();
     const UGameInstance* GameInstance =
         World != nullptr ? World->GetGameInstance() : nullptr;
     const UTMOPAnchorSubsystem* Anchors = GameInstance != nullptr
         ? GameInstance->GetSubsystem<UTMOPAnchorSubsystem>() : nullptr;
-    if (!IsValid(Agent) || World == nullptr || Anchors == nullptr) return 0.0f;
+    if (!IsValid(Agent) || !World || !Anchors ||
+        !CurrentRouteAnchorIds.IsValidIndex(CurrentRouteAnchorIndex))
+        return;
 
+    // One nav length query per segment when the action starts, not every 0.1 s.
+    // This cache belongs to this action; a new action/route creates a new one.
+    CachedTimedRouteLegsCm.SetNumZeroed(CurrentRouteAnchorIds.Num());
     FVector Start = Agent->GetActorLocation();
-    double Total = 0.0;
     for (int32 Index = CurrentRouteAnchorIndex;
-        Index < CurrentRouteAnchorIds.Num(); ++Index)
+         Index < CurrentRouteAnchorIds.Num(); ++Index)
     {
         const ATMOPHistoricalAnchor* Anchor =
             Anchors->FindAnchor(CurrentRouteAnchorIds[Index]);
-        if (!IsValid(Anchor)) return 0.0f;
+        if (!IsValid(Anchor))
+        {
+            CachedTimedRouteLegsCm.Reset();
+            return;
+        }
+
         FVector End = Index == CurrentRouteAnchorIndex
             ? CurrentTargetLocation : Anchor->GetAnchorLocation();
         if (Index == CurrentRouteAnchorIds.Num() - 1 &&
@@ -598,20 +630,59 @@ float UTMOPActionExecutorComponent::CalculateRemainingPathLengthCm() const
                 ? Anchor->GetActorQuat().RotateVector(
                     CurrentEntry.TargetAnchorOffsetCm)
                 : CurrentEntry.TargetAnchorOffsetCm;
-        double Segment = FVector::Dist2D(Start, End);
+
+        double LengthCm = FVector::Dist2D(Start, End);
         UNavigationSystemV1::GetPathLength(
-            World, Start, End, Segment, nullptr, nullptr);
-        Total += Segment;
+            World, Start, End, LengthCm, nullptr, nullptr);
+        CachedTimedRouteLegsCm[Index] = FMath::Max(0.0f,
+            static_cast<float>(LengthCm));
         Start = End;
     }
-    return static_cast<float>(Total);
+
+    CurrentTimedLegRemainingCm =
+        CachedTimedRouteLegsCm[CurrentRouteAnchorIndex];
+    LastTimedRoutePosition = Agent->GetActorLocation();
+    bTimedRouteCacheValid = true;
+}
+
+float UTMOPActionExecutorComponent::CalculateRemainingPathLengthCm()
+{
+    const ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
+    if (!IsValid(Agent)) return 0.0f;
+    const FVector CurrentPosition = Agent->GetActorLocation();
+
+    if (!bTimedRouteCacheValid)
+        BuildTimedRouteLengthCache();
+
+    // Moving a few centimetres does not require any new navigation request.
+    // Use actual walked distance on the current nav leg; Euclidean remaining
+    // distance acts as a lower bound (including after a forced relocation).
+    const float StraightRemainingCm =
+        FVector::Dist2D(CurrentPosition, CurrentTargetLocation);
+    if (bTimedRouteCacheValid)
+    {
+        CurrentTimedLegRemainingCm = FMath::Max(0.0f,
+            CurrentTimedLegRemainingCm -
+                FVector::Dist2D(CurrentPosition, LastTimedRoutePosition));
+        LastTimedRoutePosition = CurrentPosition;
+        double RemainingCm = FMath::Max(
+            CurrentTimedLegRemainingCm, StraightRemainingCm);
+        for (int32 Index = CurrentRouteAnchorIndex + 1;
+             Index < CachedTimedRouteLegsCm.Num(); ++Index)
+            RemainingCm += CachedTimedRouteLegsCm[Index];
+        return static_cast<float>(RemainingCm);
+    }
+
+    // A missing anchor should never trigger repeat NavMesh queries.
+    return StraightRemainingCm;
 }
 
 void UTMOPActionExecutorComponent::UpdateTimedMovementSpeed(
     const bool bForceUpdate)
 {
     ATMOPHistoricalAgent* Agent = GetHistoricalAgent();
-    if (!IsValid(Agent) || ActiveExpectedArrivalSecond == INDEX_NONE) return;
+    if (!IsValid(Agent) || ActiveExpectedArrivalSecond == INDEX_NONE ||
+        bHoldingForTimedArrival) return;
     UCharacterMovementComponent* Movement = Agent->GetCharacterMovement();
     const UGameInstance* GameInstance = GetWorld() != nullptr
         ? GetWorld()->GetGameInstance() : nullptr;
@@ -693,6 +764,9 @@ void UTMOPActionExecutorComponent::RestoreMovementSpeed()
 {
     bWaitingAtTrafficSignal = false;
     bMoveDelayedByTrafficSignal = false;
+    CachedTimedRouteLegsCm.Reset();
+    bTimedRouteCacheValid = false;
+    CurrentTimedLegRemainingCm = 0.0f;
     if (ATMOPHistoricalAgent* Agent = GetHistoricalAgent())
         Agent->ApplyMovementSpeedForActivity();
     ActiveExpectedArrivalSecond = INDEX_NONE;
@@ -848,5 +922,7 @@ void UTMOPActionExecutorComponent::RestorePlaybackAction(const FTMOPPlaybackActi
     ActivePhysicalArrivalSecond = S.PhysicalArrivalSecond; ActiveRemainingPathCm = S.RemainingPath;
     ActiveRequiredSpeedCmPerSecond = S.RequiredSpeed; bActiveMovePhysicallyPossible = S.bPossible;
     QueuedEntries.Reset(); QueuedTriggerTimes.Reset(); ActiveVerticalTransport = nullptr;
+    CachedTimedRouteLegsCm.Reset(); bTimedRouteCacheValid = false;
+    CurrentTimedLegRemainingCm = 0.0f;
     SetComponentTickEnabled(false);
 }

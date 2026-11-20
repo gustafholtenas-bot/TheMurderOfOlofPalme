@@ -33,6 +33,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Routes/TMOPRouteFollowerComponent.h"
 #include "People/TMOPCharacterAppearanceComponent.h"
+#include "People/TMOPAnimationLODSubsystem.h"
 #include "People/TMOPPersonProfileComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Items/TMOPItemMeshSubsystem.h"
@@ -285,6 +286,11 @@ void ATMOPHistoricalAgent::ApplyHeldItems(
         AdditionalCarriedItemComponents.Add(Component);
         ActiveAdditionalItems.Add(Item);
     }
+    UpdateHeldItemVisibility();
+    UpdateHeldItemClockSubscription();
+    // Newly attached props must inherit the fade alpha immediately, without
+    // waiting for the periodic fallback scan in Tick().
+    RefreshVisibilityFadeMeshes(false);
 }
 
 bool ATMOPHistoricalAgent::IsHeldItemVisibleNow(
@@ -311,13 +317,49 @@ void ATMOPHistoricalAgent::UpdateHeldItemVisibility()
         IsValid(LeftHandHeldItem->GetStaticMesh()) && IsHeldItemVisibleNow(ActiveLeftHandItem);
     const bool bRightVisible = IsValid(RightHandHeldItem) &&
         IsValid(RightHandHeldItem->GetStaticMesh()) && IsHeldItemVisibleNow(ActiveRightHandItem);
-    if (IsValid(LeftHandHeldItem)) LeftHandHeldItem->SetVisibility(bLeftVisible, true);
-    if (IsValid(RightHandHeldItem)) RightHandHeldItem->SetVisibility(bRightVisible, true);
+    if (IsValid(LeftHandHeldItem) && LeftHandHeldItem->IsVisible() != bLeftVisible)
+        LeftHandHeldItem->SetVisibility(bLeftVisible, true);
+    if (IsValid(RightHandHeldItem) && RightHandHeldItem->IsVisible() != bRightVisible)
+        RightHandHeldItem->SetVisibility(bRightVisible, true);
     for (int32 Index = 0; Index < AdditionalCarriedItemComponents.Num(); ++Index)
         if (IsValid(AdditionalCarriedItemComponents[Index]) && ActiveAdditionalItems.IsValidIndex(Index))
-            AdditionalCarriedItemComponents[Index]->SetVisibility(IsHeldItemVisibleNow(ActiveAdditionalItems[Index]), true);
+        {
+            UStaticMeshComponent* ItemMesh = AdditionalCarriedItemComponents[Index];
+            const bool bVisible = IsHeldItemVisibleNow(ActiveAdditionalItems[Index]);
+            if (ItemMesh->IsVisible() != bVisible)
+                ItemMesh->SetVisibility(bVisible, true);
+        }
     LeftHandGripPose = bLeftVisible ? ResolvedLeftHandGripPose : ETMOPHeldItemPose::None;
     RightHandGripPose = bRightVisible ? ResolvedRightHandGripPose : ETMOPHeldItemPose::None;
+}
+
+void ATMOPHistoricalAgent::UpdateHeldItemClockSubscription()
+{
+    // A timed prop changes only on historical seconds and seeks. Do not make
+    // every pedestrian poll the world clock 20 times per second.
+    bool bHasTimedItem =
+        (ActiveLeftHandItem.bVisible && ActiveLeftHandItem.bUseVisibilityWindow) ||
+        (ActiveRightHandItem.bVisible && ActiveRightHandItem.bUseVisibilityWindow);
+    for (const FTMOPHeldItemDefinition& Item : ActiveAdditionalItems)
+        bHasTimedItem |= Item.bVisible && Item.bUseVisibilityWindow;
+
+    UGameInstance* GameInstance = GetGameInstance();
+    UTMOPClockSubsystem* Clock = IsValid(GameInstance)
+        ? GameInstance->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
+    if (!IsValid(Clock)) return;
+    if (bHasTimedItem)
+        Clock->OnSecondChanged.AddUniqueDynamic(
+            this, &ATMOPHistoricalAgent::OnHistoricalSecondChanged);
+    else
+        Clock->OnSecondChanged.RemoveDynamic(
+            this, &ATMOPHistoricalAgent::OnHistoricalSecondChanged);
+}
+
+void ATMOPHistoricalAgent::OnHistoricalSecondChanged(FTMOPTime NewTime)
+{
+    // The same event is published after authoritative time-seek reconstruction.
+    (void)NewTime;
+    UpdateHeldItemVisibility();
 }
 
 FName ATMOPHistoricalAgent::GetDefaultItemSocket(
@@ -360,6 +402,25 @@ void ATMOPHistoricalAgent::BeginPlay()
     LastUnstuckLocation = GetActorLocation();
     bUnstuckInitialized = true;
     PlaySpawnFade();
+    UpdateHeldItemClockSubscription();
+    RefreshAgentTickInterval();
+    if (UTMOPAnimationLODSubsystem* LOD =
+        GetWorld()->GetSubsystem<UTMOPAnimationLODSubsystem>())
+        LOD->RegisterAgent(this);
+}
+
+void ATMOPHistoricalAgent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    if (UGameInstance* GameInstance = GetGameInstance())
+        if (UTMOPClockSubsystem* Clock =
+            GameInstance->GetSubsystem<UTMOPClockSubsystem>())
+            Clock->OnSecondChanged.RemoveDynamic(
+                this, &ATMOPHistoricalAgent::OnHistoricalSecondChanged);
+    if (UWorld* World = GetWorld())
+        if (UTMOPAnimationLODSubsystem* LOD =
+            World->GetSubsystem<UTMOPAnimationLODSubsystem>())
+            LOD->UnregisterAgent(this);
+    Super::EndPlay(EndPlayReason);
 }
 
 void ATMOPHistoricalAgent::UpdateTimelinePriority()
@@ -376,10 +437,10 @@ void ATMOPHistoricalAgent::UpdateTimelinePriority()
             PrioritySavedVehicleResponse = Capsule->GetCollisionResponseToChannel(ECC_Vehicle);
             bPrioritySavedRVO = Movement->bUseRVOAvoidance;
             bTimelinePriorityApplied = true;
+            // Do not disable the capsule: its WorldStatic collision supports the feet.
+            Capsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+            Capsule->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Ignore);
         }
-        // Do not disable the capsule: its WorldStatic collision supports the feet.
-        Capsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
-        Capsule->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Ignore);
         if (Movement->bUseRVOAvoidance) Movement->SetAvoidanceEnabled(false);
     }
     else if (bTimelinePriorityApplied)
@@ -400,24 +461,87 @@ void ATMOPHistoricalAgent::Tick(const float DeltaSeconds)
     if (!bVisibilityFadeActive)
     {
         VisibilityFadeMeshRefreshAccumulator += FMath::Max(0.0f, DeltaSeconds);
-        if (VisibilityFadeMeshRefreshAccumulator >= 0.5f)
+        // Clothing changes and held props initialize their mesh data directly.
+        // This is only a slow safety net for meshes spawned by external code.
+        if (VisibilityFadeMeshRefreshAccumulator >= 2.0f)
         {
             VisibilityFadeMeshRefreshAccumulator = 0.0f;
             RefreshVisibilityFadeMeshes(false);
         }
     }
-    UpdateHeldItemVisibility();
-    UpdateAutomaticUnstuck(DeltaSeconds);
-    UpdateSocialFocus(DeltaSeconds);
-    UpdateAutomaticSpeech(DeltaSeconds);
+    // Crowd checks need their full accumulated time for stall thresholds, but
+    // do not need to query the controller and NavMesh on every render tick.
+    if (bEnableAutomaticUnstuck && CanMove())
+    {
+        UnstuckCheckAccumulator += FMath::Max(0.0f, DeltaSeconds);
+        if (UnstuckCheckAccumulator >=
+            FMath::Max(0.05f, UnstuckCheckIntervalSeconds))
+        {
+            UpdateAutomaticUnstuck(UnstuckCheckAccumulator);
+            UnstuckCheckAccumulator = 0.0f;
+        }
+    }
+    else
+    {
+        UnstuckCheckAccumulator = 0.0f;
+        if (bCrowdPassThroughActive || bSqueezeActive ||
+            bReturningFromSideStep || StationarySeconds > 0.0f)
+        {
+            EndCrowdPassThrough();
+            ResetAutomaticUnstuck(true);
+        }
+    }
 
-    UpdatePlaybackNameLabel();
+    if (HasActiveSocialFocus()) UpdateSocialFocus(DeltaSeconds);
+    if (AutomaticSpeechSecondsRemaining > 0.0f)
+        UpdateAutomaticSpeech(DeltaSeconds);
+
+    NameLabelUpdateAccumulator += FMath::Max(0.0f, DeltaSeconds);
+    const float LabelInterval = CanMove() ? 0.10f : 0.25f;
+    if (NameLabelUpdateAccumulator >= LabelInterval)
+    {
+        NameLabelUpdateAccumulator = 0.0f;
+        UpdatePlaybackNameLabel();
+    }
+    RefreshAgentTickInterval();
+}
+
+bool ATMOPHistoricalAgent::HasActiveSocialFocus() const
+{
+    return SocialFocusTarget.IsValid() ||
+        FMath::Abs(SocialLookYaw) > 0.025f ||
+        FMath::Abs(SocialLookPitch) > 0.025f ||
+        SocialLookAlpha > 0.005f;
+}
+
+void ATMOPHistoricalAgent::RefreshAgentTickInterval()
+{
+    if (!bEnableAdaptiveAgentTick)
+    {
+        if (!FMath::IsNearlyEqual(GetActorTickInterval(), 0.05f))
+            SetActorTickInterval(0.05f);
+        return;
+    }
+    // Keep smooth updates for movement, look interpolation, spoken dialogue and
+    // fades. Everyone else performs only inexpensive periodic housekeeping.
+    const bool bActive = CanMove() || bVisibilityFadeActive ||
+        AutomaticSpeechSecondsRemaining > 0.0f || HasActiveSocialFocus() ||
+        bCrowdPassThroughActive || bReturningFromSideStep;
+    const float Interval = bActive ? 0.05f :
+        FMath::Clamp(IdleAgentTickIntervalSeconds, 0.05f, 1.0f);
+    if (!FMath::IsNearlyEqual(GetActorTickInterval(), Interval))
+        SetActorTickInterval(Interval);
 }
 
 void ATMOPHistoricalAgent::UpdatePlaybackNameLabel()
 {
-    if (NameLabel) NameLabel->SetHiddenInGame(UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this));
-    if (UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this) ||
+    const bool bMultiplayer = UTMOPLocalMultiplayerSubsystem::IsMultiplayer(this);
+    if (IsValid(NameLabel) && bCachedNameLabelMultiplayerHidden != bMultiplayer)
+    {
+        NameLabel->SetHiddenInGame(bMultiplayer);
+        bCachedNameLabelMultiplayerHidden = bMultiplayer;
+    }
+    if (bMultiplayer ||
         !bShowNameLabel || !IsValid(NameLabel) || GetWorld() == nullptr)
     {
         return;
@@ -436,7 +560,9 @@ void ATMOPHistoricalAgent::UpdatePlaybackNameLabel()
 
         if (!ToCamera.IsNearlyZero())
         {
-            NameLabel->SetWorldRotation(ToCamera.Rotation());
+            const FRotator Desired = ToCamera.Rotation();
+            if (!NameLabel->GetComponentRotation().Equals(Desired, 0.25f))
+                NameLabel->SetWorldRotation(Desired);
         }
     }
 }
@@ -485,6 +611,7 @@ void ATMOPHistoricalAgent::BeginVisibilityFade(const float TargetAlpha,
     bVisibilityFadeActive = true;
     bDestroyAfterVisibilityFade = bDestroyWhenFinished;
     SetActorTickEnabled(true);
+    RefreshAgentTickInterval();
     if (IsValid(NameLabel)) NameLabel->SetVisibility(false, true);
 }
 
@@ -602,6 +729,7 @@ float ATMOPHistoricalAgent::ShowAutomaticSpeech(
             Animation->SetOverlay(ETMOPAnimOverlay::Talking);
             bAutomaticSpeechUsesTalkingOverlay = true;
         }
+    RefreshAgentTickInterval();
     return AutomaticSpeechSecondsRemaining;
 }
 
@@ -620,6 +748,7 @@ void ATMOPHistoricalAgent::HideAutomaticSpeech()
                 AutomaticSpeechSecondsRemaining <= 0.0f)
                 Animation->SetOverlay(ETMOPAnimOverlay::None);
     bAutomaticSpeechUsesTalkingOverlay = false;
+    RefreshAgentTickInterval();
 }
 
 void ATMOPHistoricalAgent::UpdateAutomaticSpeech(const float DeltaSeconds)
@@ -651,6 +780,7 @@ void ATMOPHistoricalAgent::SetSocialFocus(AActor* Target,
             if (Animation->Overlay == ETMOPAnimOverlay::None ||
                 Animation->Overlay == ETMOPAnimOverlay::Talking)
                 Animation->SetOverlay(ETMOPAnimOverlay::Talking);
+    RefreshAgentTickInterval();
 }
 
 void ATMOPHistoricalAgent::ClearSocialFocus()
@@ -666,6 +796,7 @@ void ATMOPHistoricalAgent::ClearSocialFocus()
                 AutomaticSpeechSecondsRemaining <= 0.0f)
                 Animation->SetOverlay(ETMOPAnimOverlay::None);
     bSocialFocusUsesTalkingOverlay = false;
+    RefreshAgentTickInterval();
 }
 
 void ATMOPHistoricalAgent::BeginDialogueFocus(AActor* Target)
@@ -812,6 +943,15 @@ void ATMOPHistoricalAgent::UpdateSocialFocus(const float DeltaSeconds)
     SocialLookAlpha = FMath::FInterpTo(
         SocialLookAlpha, TargetAlpha, DeltaSeconds, SocialLookInterpolationSpeed);
 
+    if (!SocialFocusTarget.IsValid() && SocialLookAlpha <= 0.005f &&
+        FMath::Abs(SocialLookYaw) <= 0.025f &&
+        FMath::Abs(SocialLookPitch) <= 0.025f)
+    {
+        SocialLookYaw = 0.0f;
+        SocialLookPitch = 0.0f;
+        SocialLookAlpha = 0.0f;
+    }
+
     if (bUseSubtleMeshTurnForSocialLook && !IsSeatedForDialogue() &&
         IsValid(GetMesh()))
     {
@@ -819,7 +959,10 @@ void ATMOPHistoricalAgent::UpdateSocialFocus(const float DeltaSeconds)
             SocialLookYaw, -MaximumSocialMeshTurnYaw, MaximumSocialMeshTurnYaw)
             * SocialLookAlpha;
         const FQuat SocialTurn = FRotator(0.0f, MeshYaw, 0.0f).Quaternion();
-        GetMesh()->SetRelativeRotation(SocialTurn * BaseMeshRelativeRotation);
+        const FQuat DesiredMeshRotation = SocialTurn * BaseMeshRelativeRotation;
+        if (!GetMesh()->GetRelativeRotation().Quaternion().Equals(
+            DesiredMeshRotation, 0.0001f))
+            GetMesh()->SetRelativeRotation(DesiredMeshRotation);
     }
 }
 
@@ -1383,10 +1526,23 @@ bool ATMOPHistoricalAgent::SetLifeState(
         return false;
     }
 
+    const bool bWasMoving = CanMove();
     const ETMOPAgentLifeState OldState = LifeState;
     LifeState = NewState;
 
     HandleLifeStateChanged(OldState, NewState);
+    if (bWasMoving && !CanMove())
+    {
+        EndCrowdPassThrough();
+        ResetAutomaticUnstuck(true);
+        UnstuckCheckAccumulator = 0.0f;
+    }
+    else if (!bWasMoving && CanMove())
+    {
+        LastUnstuckLocation = GetActorLocation();
+        UnstuckCheckAccumulator = 0.0f;
+    }
+    RefreshAgentTickInterval();
     OnLifeStateChanged.Broadcast(OldState, NewState);
     return true;
 }
@@ -1400,11 +1556,24 @@ bool ATMOPHistoricalAgent::SetActivityState(
         return false;
     }
 
+    const bool bWasMoving = CanMove();
     const ETMOPAgentActivityState OldActivity = ActivityState;
     ActivityState = NewActivity;
 
     ApplyMovementSpeedForActivity();
     HandleActivityStateChanged(OldActivity, NewActivity);
+    if (bWasMoving && !CanMove())
+    {
+        EndCrowdPassThrough();
+        ResetAutomaticUnstuck(true);
+        UnstuckCheckAccumulator = 0.0f;
+    }
+    else if (!bWasMoving && CanMove())
+    {
+        LastUnstuckLocation = GetActorLocation();
+        UnstuckCheckAccumulator = 0.0f;
+    }
+    RefreshAgentTickInterval();
     OnActivityStateChanged.Broadcast(OldActivity, NewActivity);
     return true;
 }
@@ -1548,12 +1717,24 @@ void ATMOPHistoricalAgent::SetPlaybackFade(float Alpha)
     bDestroyAfterVisibilityFade = false;
     RefreshVisibilityFadeMeshes(false);
     ApplyVisibilityFade(Alpha);
+    RefreshAgentTickInterval();
 }
 
 void ATMOPHistoricalAgent::UpdatePlaybackPresentation(double Time, bool bSeeking)
 {
+    // Visibility/tick policy is reassessed after a direct timeline jump, even
+    // if this actor's normal Tick is disabled during authoritative playback.
+    // Pose evaluation remains owned by the existing montage/playback system.
+    if (bSeeking && GetWorld())
+        if (UTMOPAnimationLODSubsystem* LOD =
+            GetWorld()->GetSubsystem<UTMOPAnimationLODSubsystem>())
+            LOD->RefreshAgentAfterSeek(this);
     const bool bSpeech = !RecordedSpeechText.IsEmpty() && Time >= RecordedSpeechStart && Time < RecordedSpeechEnd;
     AutomaticSpeechSecondsRemaining = bSpeech ? float(RecordedSpeechEnd - Time) : 0;
+    // Seek reconstruction may set ActivityState and speech directly instead of
+    // passing through the ordinary live-action setters.
+    RefreshAgentTickInterval();
+    if (bSeeking) UpdatePlaybackNameLabel();
     if (SpeechBubble)
     {
         SpeechBubble->SetVisibility(bSpeech);

@@ -169,6 +169,8 @@ private:
     void HandleLoopRestarted(int32 NewLoopNumber, FTMOPTime RestartTime);
 
     bool ResolveCanonicalTime(FName ObservationId);
+    /** Clock path can reuse already resolved absolute observation windows. */
+    int32 ResolveCanonicalTimesInternal(bool bOnlyRefreshDynamicTimes);
     bool EvaluateGeometry(
         const FTMOPObservationDefinition& Definition,
         FTMOPObservationRuntime& Runtime) const;
@@ -248,4 +250,17 @@ private:
     TMap<FName, FResolvedTrack> ResolvedTracks;
     TMap<FName, FName> ObservationPlaybackEntities;
     mutable TMap<FName, TWeakObjectPtr<AActor>> EntityActorCache;
+
+    // Rebuild the set of active tracks only when the historical second changes
+    // (or time is scrubbed backwards). In-between frames visit active tracks
+    // instead of every linked observation in the data table.
+    TArray<FName> CachedActiveTrackIds;
+    TArray<FName> CachedBoundaryTrackIds;
+    int32 CachedTrackWindowSecond = INDEX_NONE;
+    double LastTrackSampleSecond = -1.0;
+
+    // Observation guide windows are integer-second intervals. Their members
+    // do not need to be rediscovered for every rendered frame.
+    mutable TArray<FName> CachedGuideObservationIds;
+    mutable int32 CachedGuideWindowSecond = INDEX_NONE;
 };

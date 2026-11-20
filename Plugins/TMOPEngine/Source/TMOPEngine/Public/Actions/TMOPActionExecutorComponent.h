@@ -95,10 +95,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions|Timeline Precision")
     bool bEnforceExactTimedArrival = true;
 
-    /** Recalculate catch-up speed this often in real seconds. */
+    /** Update speed only while moving; route navigation lengths are cached. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions|Timeline Precision",
-        meta=(ClampMin="0.02", ClampMax="1.0", Units="s"))
-    float TimedSpeedUpdateIntervalSeconds = 0.10f;
+        meta=(ClampMin="0.1", ClampMax="5.0", Units="s"))
+    float TimedSpeedUpdateIntervalSeconds = 1.0f;
 
     /** At the deadline, correct the last residual navigation error onto the anchor. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Actions|Timeline Precision")
@@ -173,6 +173,8 @@ public:
     { ActiveRemainingPathCm = RemainingPath; ActiveRequiredSpeedCmPerSecond = RequiredSpeed; }
 
 private:
+    friend class UTMOPScheduleSubsystem;
+
     bool UpdateTrafficSignalWait(float DeltaTime);
     bool bWaitingAtTrafficSignal = false;
     bool bMoveDelayedByTrafficSignal = false;
@@ -190,7 +192,8 @@ private:
     bool BeginMoveToAnchor(const FTMOPScheduleEntry& Entry);
     bool MoveToCurrentRouteAnchor();
     void UpdateTimedMovementSpeed(bool bForceUpdate = false);
-    float CalculateRemainingPathLengthCm() const;
+    void BuildTimedRouteLengthCache();
+    float CalculateRemainingPathLengthCm();
     double GetCurrentSimulationSecondExact() const;
     void CompleteTimedArrivalAtDeadline();
     void RestoreMovementSpeed();
@@ -233,6 +236,14 @@ private:
     bool bHoldingForTimedArrival = false;
     int32 ActivePhysicalArrivalSecond = INDEX_NONE;
     float TimedSpeedUpdateAccumulator = 0.0f;
+
+    // Built once when a timed walking action starts, or after a playback restore.
+    // For a moving person the remaining current leg is reduced by actual
+    // displacement; no synchronous NavMesh query is needed on each speed tick.
+    TArray<float> CachedTimedRouteLegsCm;
+    FVector LastTimedRoutePosition = FVector::ZeroVector;
+    float CurrentTimedLegRemainingCm = 0.0f;
+    bool bTimedRouteCacheValid = false;
 
     /** Entries whose scheduled time passed while an earlier action was active. */
     UPROPERTY(Transient)

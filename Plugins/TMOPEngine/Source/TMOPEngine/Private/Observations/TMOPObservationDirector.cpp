@@ -1,4 +1,5 @@
 #include "Observations/TMOPObservationDirector.h"
+#include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Observations/TMOPObservationSignalementLibrary.h"
 
 #include "Anchors/TMOPAnchorSubsystem.h"
@@ -107,7 +108,11 @@ void ATMOPObservationDirector::Tick(const float DeltaSeconds)
     const double CurrentSecond = Clock != nullptr
         ? Clock->GetCurrentTimeSecondsExact() : -1.0;
     if (bEnableLinkedTrackSimulation && CurrentSecond >= 0.0)
+    {
+        TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_UpdateTracks);
         UpdateObservationTracks(CurrentSecond);
+    }
+    TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_DrawGuides);
     DrawWorldGuideLines(CurrentSecond >= 0.0
         ? FMath::FloorToInt(CurrentSecond) : INDEX_NONE);
 }
@@ -141,6 +146,7 @@ void ATMOPObservationDirector::SetShowOlofLocationLine(const bool bShow)
 void ATMOPObservationDirector::SetShowActiveObservationLines(const bool bShow)
 {
     bShowActiveObservationLines = bShow;
+    CachedGuideWindowSecond = INDEX_NONE;
     SaveShowActiveObservationLines(bShow);
 }
 
@@ -164,29 +170,41 @@ void ATMOPObservationDirector::DrawWorldGuideLines(
     }
 
     if (!bShowActiveObservationLines || CurrentSecond == INDEX_NONE) return;
-    for (const TPair<FName, FTMOPObservationDefinition>& Pair :
-        LoadedObservations)
+    if (CachedGuideWindowSecond != CurrentSecond)
     {
-        const FTMOPObservationDefinition& Definition = Pair.Value;
-        const FTMOPObservationRuntime* Runtime =
-            RuntimeObservations.Find(Pair.Key);
-        if (!Definition.bEnabled || Runtime == nullptr ||
-            !Runtime->bHasResolvedCanonicalTime ||
-            Definition.ObservedEntityId.IsNone())
-            continue;
+        TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_RefreshGuideWindows);
+        CachedGuideObservationIds.Reset();
+        CachedGuideWindowSecond = CurrentSecond;
+        for (const TPair<FName, FTMOPObservationDefinition>& Pair :
+            LoadedObservations)
+        {
+            const FTMOPObservationDefinition& Definition = Pair.Value;
+            const FTMOPObservationRuntime* Runtime =
+                RuntimeObservations.Find(Pair.Key);
+            if (!Definition.bEnabled || Runtime == nullptr ||
+                !Runtime->bHasResolvedCanonicalTime ||
+                Definition.ObservedEntityId.IsNone())
+                continue;
+            const int32 StartSecond =
+                Runtime->ResolvedCanonicalStartTime.ToSecondsFromMidnight();
+            const int32 EndSecond =
+                Runtime->ResolvedCanonicalEndTime.ToSecondsFromMidnight();
+            if (CurrentSecond >= StartSecond && CurrentSecond <= EndSecond)
+                CachedGuideObservationIds.Add(Pair.Key);
+        }
+    }
 
-        const int32 StartSecond =
-            Runtime->ResolvedCanonicalStartTime.ToSecondsFromMidnight();
-        const int32 EndSecond =
-            Runtime->ResolvedCanonicalEndTime.ToSecondsFromMidnight();
-        if (CurrentSecond < StartSecond || CurrentSecond > EndSecond)
-            continue;
+    for (const FName ObservationId : CachedGuideObservationIds)
+    {
+        const FTMOPObservationDefinition* Definition =
+            LoadedObservations.Find(ObservationId);
+        if (Definition == nullptr) continue;
 
-        AActor* Observed = FindObservedActorForObservation(Definition);
+        AActor* Observed = FindObservedActorForObservation(*Definition);
         if (!IsValid(Observed)) continue;
         const FVector ObservedPoint =
             Observed->GetActorLocation() + FVector(0.0f, 0.0f, 70.0f);
-        for (const FName ObserverId : Definition.ObserverEntityIds)
+        for (const FName ObserverId : Definition->ObserverEntityIds)
         {
             AActor* Observer = FindEntityActor(ObserverId);
             if (!IsValid(Observer)) continue;
@@ -210,6 +228,12 @@ int32 ATMOPObservationDirector::ReloadObservationData()
     ResolvedTracks.Reset();
     ObservationPlaybackEntities.Reset();
     EntityActorCache.Reset();
+    CachedTrackWindowSecond = INDEX_NONE;
+    LastTrackSampleSecond = -1.0;
+    CachedActiveTrackIds.Reset();
+    CachedBoundaryTrackIds.Reset();
+    CachedGuideWindowSecond = INDEX_NONE;
+    CachedGuideObservationIds.Reset();
 
     if (IsValid(ObservationTable) &&
         ObservationTable->GetRowStruct() ==
@@ -276,8 +300,20 @@ int32 ATMOPObservationDirector::ReloadObservationData()
 
 int32 ATMOPObservationDirector::ResolveCanonicalTimes()
 {
+    return ResolveCanonicalTimesInternal(false);
+}
+
+int32 ATMOPObservationDirector::ResolveCanonicalTimesInternal(
+    const bool bOnlyRefreshDynamicTimes)
+{
+    CachedGuideWindowSecond = INDEX_NONE;
     int32 ResolvedCount = 0;
-    bool bTrackInputsChanged = RuntimeTracks.IsEmpty();
+    // An empty link table cannot produce a track. In that case repeatedly
+    // rebuilding every historical second was unnecessary work.
+    bool bTrackInputsChanged = RuntimeTracks.IsEmpty() && !LoadedLinks.IsEmpty();
+    const UTMOPHistoricalEventSubsystem* Events = GetGameInstance() != nullptr
+        ? GetGameInstance()->GetSubsystem<UTMOPHistoricalEventSubsystem>()
+        : nullptr;
     for (const TPair<FName, FTMOPObservationDefinition>& Pair :
         LoadedObservations)
     {
@@ -285,6 +321,32 @@ int32 ATMOPObservationDirector::ResolveCanonicalTimes()
             RuntimeObservations.Find(Pair.Key);
         const bool bWasResolved = Before != nullptr &&
             Before->bHasResolvedCanonicalTime;
+        if (bOnlyRefreshDynamicTimes && Pair.Value.bEnabled && bWasResolved &&
+            Pair.Value.TimingMode == ETMOPObservationTimingMode::Absolute)
+        {
+            // A clock tick cannot change an absolute timestamp. Explicit
+            // editor reloads and ResolveCanonicalTimes still do a full pass.
+            ++ResolvedCount;
+            continue;
+        }
+        if (bOnlyRefreshDynamicTimes && Pair.Value.bEnabled && bWasResolved &&
+            IsValid(Events) &&
+            Pair.Value.TimingMode != ETMOPObservationTimingMode::Absolute)
+        {
+            FTMOPHistoricalEventRuntime EventRuntime;
+            if (Events->TryGetEventRuntime(
+                    Pair.Value.ReferenceSharedEventId, EventRuntime) &&
+                EventRuntime.bHasResolvedTime &&
+                EventRuntime.ResolvedTime.ToSecondsFromMidnight() +
+                    Pair.Value.ReferenceOffsetSeconds ==
+                    Before->ResolvedCanonicalStartTime.ToSecondsFromMidnight())
+            {
+                // The shared event is unchanged, so avoid repeated FString
+                // diagnostics and redundant time assignment.
+                ++ResolvedCount;
+                continue;
+            }
+        }
         const int32 PreviousStart = bWasResolved
             ? Before->ResolvedCanonicalStartTime.ToSecondsFromMidnight()
             : INDEX_NONE;
@@ -309,6 +371,7 @@ int32 ATMOPObservationDirector::ResolveCanonicalTimes()
 
 void ATMOPObservationDirector::ResetObservationRuntime()
 {
+    CachedGuideWindowSecond = INDEX_NONE;
     RuntimeObservations.Reset();
     for (const TPair<FName, FTMOPObservationDefinition>& Pair :
         LoadedObservations)
@@ -328,6 +391,7 @@ void ATMOPObservationDirector::ResetObservationRuntime()
 int32 ATMOPObservationDirector::ApplyBakedObservationRuntime(
     const TArray<FTMOPObservationRuntime>& BakedRuntime)
 {
+    CachedGuideWindowSecond = INDEX_NONE;
     int32 Applied = 0;
     for (const FTMOPObservationRuntime& Baked : BakedRuntime)
     {
@@ -421,6 +485,10 @@ TArray<FName> ATMOPObservationDirector::GetLinkObservationIds(
 
 int32 ATMOPObservationDirector::RebuildObservationTracks()
 {
+    CachedTrackWindowSecond = INDEX_NONE;
+    LastTrackSampleSecond = -1.0;
+    CachedActiveTrackIds.Reset();
+    CachedBoundaryTrackIds.Reset();
     for (TPair<FName, FResolvedTrack>& Pair : ResolvedTracks)
         if (Pair.Value.bCollisionSuppressedByTrack &&
             Pair.Value.ControlledActor.IsValid())
@@ -725,6 +793,25 @@ bool ATMOPObservationDirector::ApplySegmentTransition(
     FTMOPObservationTrackRuntime& Runtime,
     const double CurrentSecond)
 {
+    const bool bBoardsAtEnd =
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::WalkToVehicleAndBoard ||
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard;
+    const bool bNeedsStart = !Segment.bStartTransitionApplied &&
+        CurrentSecond >= Segment.TravelStartSecond;
+    const bool bNeedsEnd = bBoardsAtEnd &&
+        !Segment.bEndTransitionApplied &&
+        CurrentSecond >= Segment.TravelEndSecond;
+    const bool bNeedsRoute =
+        Segment.MovementMode ==
+            ETMOPObservationSegmentMovementMode::VehicleLaneRoute &&
+        !Segment.bVehicleRouteStarted &&
+        CurrentSecond >= Segment.TravelStartSecond &&
+        CurrentSecond <= Segment.TravelEndSecond;
+    if (!bNeedsStart && !bNeedsEnd && !bNeedsRoute)
+        return true;
+
     AActor* PlaybackActor = FindEntityActor(Runtime.LinkedEntityId);
     ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(PlaybackActor);
     const FName VehicleId = !Segment.VehicleEntityId.IsNone()
@@ -904,11 +991,87 @@ bool ATMOPObservationDirector::ApplySegmentTransition(
 void ATMOPObservationDirector::UpdateObservationTracks(
     const double CurrentSecond)
 {
-    for (const TPair<FName, FTMOPObservationLinkDefinition>& Pair : LoadedLinks)
+    const int32 CurrentWholeSecond = FMath::FloorToInt(CurrentSecond);
+    const bool bRefreshTrackSet =
+        CachedTrackWindowSecond != CurrentWholeSecond ||
+        (LastTrackSampleSecond >= 0.0 &&
+            CurrentSecond < LastTrackSampleSecond);
+    if (bRefreshTrackSet)
     {
-        const FTMOPObservationLinkDefinition& Link = Pair.Value;
-        FTMOPObservationTrackRuntime* Runtime = RuntimeTracks.Find(Pair.Key);
-        FResolvedTrack* Track = ResolvedTracks.Find(Pair.Key);
+        TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_RefreshActiveTrackSet);
+        CachedActiveTrackIds.Reset();
+        CachedBoundaryTrackIds.Reset();
+        CachedTrackWindowSecond = CurrentWholeSecond;
+
+        for (const TPair<FName, FTMOPObservationLinkDefinition>& Pair : LoadedLinks)
+        {
+            const FResolvedTrack* Track = ResolvedTracks.Find(Pair.Key);
+            const FTMOPObservationTrackRuntime* Runtime = RuntimeTracks.Find(Pair.Key);
+            if (Track == nullptr || Runtime == nullptr ||
+                Runtime->State == ETMOPObservationTrackRuntimeState::Invalid ||
+                Track->Points.Num() < 2)
+                continue;
+
+            const double FirstSecond = Track->Points[0].StartSecond;
+            const double LastSecond = Track->Points.Last().EndSecond;
+            if (CurrentSecond >= FirstSecond && CurrentSecond <= LastSecond)
+            {
+                // Only tracks in their observation/movement window need
+                // smooth frame-by-frame interpolation.
+                CachedActiveTrackIds.Add(Pair.Key);
+                CachedBoundaryTrackIds.Add(Pair.Key);
+            }
+            else if (CurrentSecond < FirstSecond)
+            {
+                // Rewind/seek may change a previously completed track back
+                // into its initial waiting state. Do this once, not per frame.
+                if (Runtime->State !=
+                    ETMOPObservationTrackRuntimeState::WaitingForFirstObservation)
+                    CachedBoundaryTrackIds.Add(Pair.Key);
+            }
+            else
+            {
+                bool bNeedsEndTransition = false;
+                if (Pair.Value.SimulationMode ==
+                    ETMOPObservationTrackSimulationMode::InterpolateExistingActor)
+                    for (const FResolvedTrackSegment& Segment : Track->Segments)
+                    {
+                        const bool bBoardsAtEnd =
+                            Segment.MovementMode ==
+                                ETMOPObservationSegmentMovementMode::WalkToVehicleAndBoard ||
+                            Segment.MovementMode ==
+                                ETMOPObservationSegmentMovementMode::RunToVehicleAndBoard;
+                        if (!Segment.bStartTransitionApplied ||
+                            (bBoardsAtEnd && !Segment.bEndTransitionApplied))
+                        {
+                            bNeedsEndTransition = true;
+                            break;
+                        }
+                    }
+                if (Runtime->State !=
+                        ETMOPObservationTrackRuntimeState::Completed ||
+                    bNeedsEndTransition ||
+                    Track->bCollisionSuppressedByTrack)
+                    CachedBoundaryTrackIds.Add(Pair.Key);
+                // Preserve the original retry behavior when a vehicle or
+                // actor required for a transition is spawned late. Also
+                // restore collision if the actor detaches after the track.
+                if (bNeedsEndTransition || Track->bCollisionSuppressedByTrack)
+                    CachedActiveTrackIds.Add(Pair.Key);
+            }
+        }
+    }
+    LastTrackSampleSecond = CurrentSecond;
+
+    const TArray<FName>& LinksToUpdate = bRefreshTrackSet
+        ? CachedBoundaryTrackIds : CachedActiveTrackIds;
+    for (const FName LinkId : LinksToUpdate)
+    {
+        const FTMOPObservationLinkDefinition* LinkPtr = LoadedLinks.Find(LinkId);
+        if (LinkPtr == nullptr) continue;
+        const FTMOPObservationLinkDefinition& Link = *LinkPtr;
+        FTMOPObservationTrackRuntime* Runtime = RuntimeTracks.Find(LinkId);
+        FResolvedTrack* Track = ResolvedTracks.Find(LinkId);
         if (Runtime == nullptr || Track == nullptr ||
             Runtime->State == ETMOPObservationTrackRuntimeState::Invalid ||
             Track->Points.Num() < 2)
@@ -1112,15 +1275,23 @@ void ATMOPObservationDirector::UpdateObservationTracks(
                     : ETMOPAgentActivityState::Walking;
             Agent->SetActivityState(Activity);
         }
-        Actor->SetActorLocationAndRotation(
-            TargetLocation, TargetRotation, false, nullptr,
-            ETeleportType::TeleportPhysics);
+        // A standing observation can last minutes. Do not submit an actor
+        // transform to the engine every frame when nothing has moved.
+        if (!Actor->GetActorLocation().Equals(TargetLocation, 0.01f) ||
+            !Actor->GetActorRotation().Equals(TargetRotation, 0.01f))
+            Actor->SetActorLocationAndRotation(
+                TargetLocation, TargetRotation, false, nullptr,
+                ETeleportType::TeleportPhysics);
     }
 }
 
 void ATMOPObservationDirector::HandleSecondChanged(const FTMOPTime NewTime)
 {
-    ResolveCanonicalTimes();
+    {
+        TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_ResolveTimes);
+        ResolveCanonicalTimesInternal(true);
+    }
+    TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_CheckWindows);
     const int32 CurrentSecond = NewTime.ToSecondsFromMidnight();
 
     for (const TPair<FName, FTMOPObservationDefinition>& Pair :

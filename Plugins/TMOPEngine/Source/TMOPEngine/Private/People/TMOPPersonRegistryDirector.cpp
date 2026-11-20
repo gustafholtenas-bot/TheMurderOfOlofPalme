@@ -1,4 +1,5 @@
 #include "People/TMOPPersonRegistryDirector.h"
+#include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Localization/TMOPLocalization.h"
 #include "TMOPAutomaticSpeechScheduler.h"
 
@@ -13,11 +14,14 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/DataTable.h"
+#include "Engine/World.h"
 #include "EngineUtils.h"
+#include "HAL/PlatformTime.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/Pawn.h"
+#include "GameFramework/PlayerController.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
 #include "Groups/TMOPGroupDirector.h"
@@ -93,14 +97,33 @@ void ATMOPPersonRegistryDirector::BeginPlay()
 
     RefreshAllActiveProfiles();
     if (bSpawnPeopleAutomatically) InitializePersonSimulation();
+
+    // The first roster includes placed and initially spawned NPCs/players.
+    // Subsequent runtime spawns are appended without rescanning the world.
+    InitializeFallSafetyRoster();
+    if (UWorld* World = GetWorld())
+        FallSafetySpawnHandle = World->AddOnActorSpawnedHandler(
+            FOnActorSpawned::FDelegate::CreateUObject(
+                this, &ATMOPPersonRegistryDirector::RegisterFallSafetyPawn));
 }
 
 void ATMOPPersonRegistryDirector::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+    if (FallSafetySpawnHandle.IsValid() && GetWorld() != nullptr)
+        GetWorld()->RemoveOnActorSpawnedHandler(FallSafetySpawnHandle);
+    FallSafetySpawnHandle.Reset();
+    FallSafetyPawns.Reset();
+    LastSafePawnTransforms.Reset();
+    bFallSafetyRosterInitialized = false;
+    bFallSafetyCycleActive = false;
+    FallSafetyCursor = 0;
     for (TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
         if (Pair.Value.bSpawnedByDirector && Pair.Value.Agent.IsValid())
             Pair.Value.Agent->Destroy();
     RuntimePeople.Reset();
+    PersonWakeHeap.Reset();
+    UnresolvedPersonWakeIds.Reset();
+    PeopleWithAutomaticSpeech.Reset();
     RuntimeMeetingDialogues.Reset();
     DeliveredMeetingDialogueLines.Reset();
     Super::EndPlay(EndPlayReason);
@@ -109,7 +132,10 @@ void ATMOPPersonRegistryDirector::EndPlay(const EEndPlayReason::Type EndPlayReas
 void ATMOPPersonRegistryDirector::Tick(const float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    UpdateWorldFallSafety(DeltaSeconds);
+    {
+        TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_People_FallSafety);
+        UpdateWorldFallSafety(DeltaSeconds);
+    }
     UTMOPClockSubsystem* Clock = GetGameInstance() != nullptr
         ? GetGameInstance()->GetSubsystem<UTMOPClockSubsystem>() : nullptr;
     if (Clock == nullptr) return;
@@ -122,9 +148,18 @@ void ATMOPPersonRegistryDirector::Tick(const float DeltaSeconds)
     if (CurrentSecond != LastEvaluatedSecond)
     {
         const int32 PreviousSecond = LastEvaluatedSecond;
-        EvaluatePeople(CurrentSecond, false);
-        EvaluateAutomaticSpeech(CurrentSecond, PreviousSecond);
-        EvaluateMeetingDialogues(CurrentSecond, PreviousSecond);
+        {
+            TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_People_DueTimelineEvents);
+            EvaluateDuePeople(CurrentSecond);
+        }
+        {
+            TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_People_DueSpeech);
+            EvaluateAutomaticSpeech(CurrentSecond, PreviousSecond);
+        }
+        {
+            TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_People_DueMeetings);
+            EvaluateMeetingDialogues(CurrentSecond, PreviousSecond);
+        }
         LastEvaluatedSecond = CurrentSecond;
     }
 }
@@ -134,56 +169,147 @@ void ATMOPPersonRegistryDirector::UpdateWorldFallSafety(
 {
     if (!bEnableWorldFallSafety || GetWorld() == nullptr) return;
     FallSafetyAccumulator += DeltaSeconds;
-    if (FallSafetyAccumulator < FallSafetySampleIntervalSeconds) return;
-    FallSafetyAccumulator = 0.0f;
-
-    for (TActorIterator<APawn> It(GetWorld()); It; ++It)
+    if (!bBudgetWorldFallSafety)
     {
-        APawn* Pawn = *It;
-        if (!IsValid(Pawn)) continue;
+        // Retain the previous all-at-once behavior as an A/B test option.
+        if (FallSafetyAccumulator < FallSafetySampleIntervalSeconds) return;
+        FallSafetyAccumulator = 0.0f;
+        TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_People_FallSafetyLegacyScan);
+        for (TActorIterator<APawn> It(GetWorld()); It; ++It)
+            CheckAndRecoverPawn(*It);
+        return;
+    }
 
-        const FVector Location = Pawn->GetActorLocation();
-        const TWeakObjectPtr<APawn> PawnKey(Pawn);
-        FTransform* LastSafe = LastSafePawnTransforms.Find(PawnKey);
-        if (Location.Z < FallRecoveryTriggerZ)
+    if (!bFallSafetyRosterInitialized)
+        InitializeFallSafetyRoster();
+    if (!bFallSafetyCycleActive)
+    {
+        if (FallSafetyAccumulator < FallSafetySampleIntervalSeconds) return;
+        // Start one sweep. If the CPU budget cannot finish within an interval,
+        // finish this sweep before starting another rather than piling up work.
+        FallSafetyAccumulator = 0.0f;
+        FallSafetyCursor = 0;
+        bFallSafetyCycleActive = true;
+
+        // Players should never wait behind a long NPC roster if they fall.
+        // The common 1-4 player case remains a tiny, bounded check.
+        for (FConstPlayerControllerIterator It =
+                GetWorld()->GetPlayerControllerIterator(); It; ++It)
+            if (const APlayerController* Controller = It->Get())
+                CheckAndRecoverPawn(Controller->GetPawn<APawn>());
+    }
+
+    TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_People_FallSafetyBudgetedBatch);
+    const double StartSeconds = FPlatformTime::Seconds();
+    const double BudgetSeconds = FMath::Max(0.05f, FallSafetyBudgetMs) / 1000.0;
+    int32 Processed = 0;
+    while (FallSafetyCursor < FallSafetyPawns.Num())
+    {
+        const TWeakObjectPtr<APawn> PawnKey = FallSafetyPawns[FallSafetyCursor];
+        APawn* Pawn = PawnKey.Get();
+        if (!IsValid(Pawn))
         {
-            FTransform Recovery = LastSafe != nullptr
-                ? *LastSafe : Pawn->GetActorTransform();
-            FVector RecoveryLocation = Recovery.GetLocation();
-            if (LastSafe == nullptr)
-                RecoveryLocation.Z = FallRecoveryTriggerZ + 1000.0f;
-            else
-                RecoveryLocation.Z += FallRecoveryHeightOffsetCm;
-            Recovery.SetLocation(RecoveryLocation);
-
-            if (ACharacter* Character = Cast<ACharacter>(Pawn))
-                if (UCharacterMovementComponent* Movement =
-                    Character->GetCharacterMovement())
-                    Movement->StopMovementImmediately();
-            if (AController* Controller = Pawn->GetController())
-                Controller->StopMovement();
-            Pawn->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-            Pawn->SetActorTransform(
-                Recovery, false, nullptr, ETeleportType::TeleportPhysics);
-            LastSafePawnTransforms.Add(PawnKey, Recovery);
-            UE_LOG(LogTemp, Warning,
-                TEXT("TMOP fall safety recovered pawn '%s' from Z %.1f to %s."),
-                *Pawn->GetName(), Location.Z,
-                *RecoveryLocation.ToString());
+            LastSafePawnTransforms.Remove(PawnKey);
+            FallSafetyPawns.RemoveAtSwap(FallSafetyCursor, 1,
+                EAllowShrinking::No);
+            ++Processed;
+            // Thousands of actors may have been destroyed by a time seek.
+            // Cleaning their weak references must obey the same budget.
+            if (FPlatformTime::Seconds() - StartSeconds >= BudgetSeconds)
+                break;
             continue;
         }
 
-        bool bGrounded = true;
-        if (const ACharacter* Character = Cast<ACharacter>(Pawn))
-            if (const UCharacterMovementComponent* Movement =
-                Character->GetCharacterMovement())
-                bGrounded = Movement->IsMovingOnGround();
-        if (bGrounded)
-            LastSafePawnTransforms.Add(PawnKey, Pawn->GetActorTransform());
-        else if (LastSafe == nullptr &&
-            Location.Z > FallRecoveryTriggerZ + 500.0f)
-            LastSafePawnTransforms.Add(PawnKey, Pawn->GetActorTransform());
+        CheckAndRecoverPawn(Pawn);
+        ++FallSafetyCursor;
+        ++Processed;
+        // A single pawn's recovery must never be suspended halfway through.
+        if (Processed >= 1 &&
+            FPlatformTime::Seconds() - StartSeconds >= BudgetSeconds)
+            break;
     }
+
+    if (FallSafetyCursor >= FallSafetyPawns.Num())
+    {
+        FallSafetyCursor = 0;
+        bFallSafetyCycleActive = false;
+    }
+}
+
+void ATMOPPersonRegistryDirector::RegisterFallSafetyPawn(AActor* SpawnedActor)
+{
+    if (APawn* Pawn = Cast<APawn>(SpawnedActor))
+        FallSafetyPawns.Add(TWeakObjectPtr<APawn>(Pawn));
+}
+
+void ATMOPPersonRegistryDirector::InitializeFallSafetyRoster()
+{
+    TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_People_FallSafetyBuildRoster);
+    FallSafetyPawns.Reset();
+    LastSafePawnTransforms.Reset();
+    FallSafetyCursor = 0;
+    bFallSafetyCycleActive = false;
+    if (UWorld* World = GetWorld())
+        for (TActorIterator<APawn> It(World); It; ++It)
+            if (IsValid(*It))
+                FallSafetyPawns.Add(TWeakObjectPtr<APawn>(*It));
+    bFallSafetyRosterInitialized = true;
+}
+
+void ATMOPPersonRegistryDirector::CheckAndRecoverPawn(APawn* Pawn)
+{
+    if (!IsValid(Pawn)) return;
+
+    const FVector Location = Pawn->GetActorLocation();
+    const TWeakObjectPtr<APawn> PawnKey(Pawn);
+    FTransform* LastSafe = LastSafePawnTransforms.Find(PawnKey);
+    if (Location.Z < FallRecoveryTriggerZ)
+    {
+        FTransform Recovery = LastSafe != nullptr
+            ? *LastSafe : Pawn->GetActorTransform();
+        FVector RecoveryLocation = Recovery.GetLocation();
+        if (LastSafe == nullptr)
+            RecoveryLocation.Z = FallRecoveryTriggerZ + 1000.0f;
+        else
+            RecoveryLocation.Z += FallRecoveryHeightOffsetCm;
+        Recovery.SetLocation(RecoveryLocation);
+
+        if (ACharacter* Character = Cast<ACharacter>(Pawn))
+            if (UCharacterMovementComponent* Movement =
+                Character->GetCharacterMovement())
+                Movement->StopMovementImmediately();
+        if (AController* Controller = Pawn->GetController())
+            Controller->StopMovement();
+        Pawn->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+        Pawn->SetActorTransform(
+            Recovery, false, nullptr, ETeleportType::TeleportPhysics);
+        if (LastSafe != nullptr)
+            *LastSafe = Recovery;
+        else
+            LastSafePawnTransforms.Add(PawnKey, Recovery);
+        UE_LOG(LogTemp, Warning,
+            TEXT("TMOP fall safety recovered pawn '%s' from Z %.1f to %s."),
+            *Pawn->GetName(), Location.Z,
+            *RecoveryLocation.ToString());
+        return;
+    }
+
+    bool bGrounded = true;
+    if (const ACharacter* Character = Cast<ACharacter>(Pawn))
+        if (const UCharacterMovementComponent* Movement =
+            Character->GetCharacterMovement())
+            bGrounded = Movement->IsMovingOnGround();
+    if (bGrounded)
+    {
+        const FTransform CurrentTransform = Pawn->GetActorTransform();
+        if (LastSafe != nullptr)
+            *LastSafe = CurrentTransform;
+        else
+            LastSafePawnTransforms.Add(PawnKey, CurrentTransform);
+    }
+    else if (LastSafe == nullptr &&
+        Location.Z > FallRecoveryTriggerZ + 500.0f)
+        LastSafePawnTransforms.Add(PawnKey, Pawn->GetActorTransform());
 }
 
 int32 ATMOPPersonRegistryDirector::RefreshAllActiveProfiles()
@@ -208,6 +334,9 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
         if (Pair.Value.bSpawnedByDirector && Pair.Value.Agent.IsValid())
             Pair.Value.Agent->Destroy();
     RuntimePeople.Reset();
+    PersonWakeHeap.Reset();
+    UnresolvedPersonWakeIds.Reset();
+    PeopleWithAutomaticSpeech.Reset();
     RuntimeMeetingDialogues.Reset();
     DeliveredMeetingDialogueLines.Reset();
     if (!IsValid(PersonProfileTable) ||
@@ -247,6 +376,8 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
             GetGameInstance()->GetSubsystem<UTMOPPersonRegistrySubsystem>();
         if (Registry != nullptr)
             Runtime.Agent = Registry->FindActiveAgent(Row->EntityId);
+        if (!Runtime.Profile.AutomaticSpeech.IsEmpty())
+            PeopleWithAutomaticSpeech.Add(Row->EntityId);
         RuntimePeople.Add(Row->EntityId, MoveTemp(Runtime));
     }
 
@@ -298,6 +429,7 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulation()
         EvaluatePeople(CurrentSecond, bCatchUpToCurrentClockOnBeginPlay);
     EvaluateAutomaticSpeech(CurrentSecond, CurrentSecond - 1);
     EvaluateMeetingDialogues(CurrentSecond, CurrentSecond - 1);
+    RebuildPersonWakeQueue(CurrentSecond);
     LastEvaluatedSecond = CurrentSecond;
     UE_LOG(LogTemp, Display, TEXT("TMOP People: initialized %d timeline profile(s), %d active agent(s)."),
         RuntimePeople.Num(), RefreshAllActiveProfiles());
@@ -313,27 +445,71 @@ int32 ATMOPPersonRegistryDirector::InitializePersonSimulationForWorldBake()
 void ATMOPPersonRegistryDirector::EvaluateAutomaticSpeech(
     const int32 CurrentSecond, const int32 PreviousSecond)
 {
-    for (TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
+    for (const FName EntityId : PeopleWithAutomaticSpeech)
     {
-        FPersonRuntime& Runtime = Pair.Value;
-        if (Runtime.Profile.AutomaticSpeech.IsEmpty()) continue;
+        FPersonRuntime* RuntimePtr = RuntimePeople.Find(EntityId);
+        if (RuntimePtr == nullptr) continue;
+        FPersonRuntime& Runtime = *RuntimePtr;
 
-        TArray<int32> ResolvedSeconds;
-        ResolvedSeconds.Reserve(Runtime.Profile.AutomaticSpeech.Num());
-        int32 PreviousLineSecond = INDEX_NONE;
-        for (const FTMOPTimedSpeechLine& Line : Runtime.Profile.AutomaticSpeech)
+        // Static speech times are calculated once, not reconstructed and
+        // reallocated every second. A shared-event time can resolve later,
+        // so people using one retain the existing dynamic resolution logic.
+        if (!Runtime.bAutomaticSpeechCacheBuilt ||
+            Runtime.bAutomaticSpeechUsesSharedEvents)
         {
-            int32 LineSecond = INDEX_NONE;
-            ResolveAutomaticSpeechSecond(Line, PreviousLineSecond, LineSecond);
-            // Previous means the preceding source-array line's start time,
-            // regardless of whether it has already played or has empty text.
-            PreviousLineSecond = LineSecond;
-            ResolvedSeconds.Add(Line.Text.IsEmpty() ? INDEX_NONE : LineSecond);
+            Runtime.CachedAutomaticSpeechSeconds.Reset();
+            Runtime.CachedAutomaticSpeechSeconds.Reserve(
+                Runtime.Profile.AutomaticSpeech.Num());
+            int32 PreviousLineSecond = INDEX_NONE;
+            for (const FTMOPTimedSpeechLine& Line :
+                 Runtime.Profile.AutomaticSpeech)
+            {
+                if (Line.TimingMode ==
+                    ETMOPSpeechTimingMode::RelativeToSharedEvent)
+                    Runtime.bAutomaticSpeechUsesSharedEvents = true;
+                int32 LineSecond = INDEX_NONE;
+                ResolveAutomaticSpeechSecond(
+                    Line, PreviousLineSecond, LineSecond);
+                // Empty source lines still establish relative timing.
+                PreviousLineSecond = LineSecond;
+                Runtime.CachedAutomaticSpeechSeconds.Add(
+                    Line.Text.IsEmpty() ? INDEX_NONE : LineSecond);
+            }
+            Runtime.bAutomaticSpeechCacheBuilt = true;
         }
 
+        const auto UpdateNextStaticSpeechSecond = [&Runtime]()
+        {
+            Runtime.NextAutomaticSpeechSecond = INDEX_NONE;
+            for (int32 Index = 0;
+                Index < Runtime.CachedAutomaticSpeechSeconds.Num(); ++Index)
+            {
+                const int32 SpeechSecond =
+                    Runtime.CachedAutomaticSpeechSeconds[Index];
+                if (SpeechSecond != INDEX_NONE &&
+                    !Runtime.ConsumedAutomaticSpeechIndices.Contains(Index) &&
+                    (Runtime.NextAutomaticSpeechSecond == INDEX_NONE ||
+                     SpeechSecond < Runtime.NextAutomaticSpeechSecond))
+                    Runtime.NextAutomaticSpeechSecond = SpeechSecond;
+            }
+            Runtime.bAutomaticSpeechNextTimeInitialized = true;
+        };
+
+        if (!Runtime.bAutomaticSpeechUsesSharedEvents &&
+            !Runtime.bAutomaticSpeechNextTimeInitialized)
+            UpdateNextStaticSpeechSecond();
+        if (!Runtime.bAutomaticSpeechUsesSharedEvents &&
+            (Runtime.NextAutomaticSpeechSecond == INDEX_NONE ||
+             CurrentSecond < Runtime.NextAutomaticSpeechSecond))
+            continue;
+
         const int32 DueIndex = TMOPAutomaticSpeech::ConsumeDueLines(
-            ResolvedSeconds, Runtime.ConsumedAutomaticSpeechIndices,
+            Runtime.CachedAutomaticSpeechSeconds,
+            Runtime.ConsumedAutomaticSpeechIndices,
             CurrentSecond, PreviousSecond);
+
+        if (!Runtime.bAutomaticSpeechUsesSharedEvents)
+            UpdateNextStaticSpeechSecond();
         ATMOPHistoricalAgent* Agent = Runtime.Agent.Get();
         if (DueIndex == INDEX_NONE || !IsValid(Agent)) continue;
         const FTMOPTimedSpeechLine& DueLine = Runtime.Profile.AutomaticSpeech[DueIndex];
@@ -428,6 +604,9 @@ void ATMOPPersonRegistryDirector::PlayTestMeetingDialogue()
         Person->CachedResolvedSecond = INDEX_NONE;
         Person->CachedTimelineSecond = INDEX_NONE;
         Person->bCompleted = false;
+        // Invalidate the old scheduled entry; the inserted test meeting is
+        // now the next timeline action for this person.
+        QueueNextPersonEntry(Person->Profile.EntityId, *Person, Start);
     }
     UE_LOG(LogTemp, Display, TEXT("TMOP dialogue test: four alternating speech bubbles start in 3 simulation seconds. DataTables unchanged. Restart PIE after the test."));
 }
@@ -561,8 +740,12 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
     const bool bCatchUp)
 {
     for (TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
-    {
-        FPersonRuntime& Runtime = Pair.Value;
+        EvaluateOnePerson(Pair.Value, CurrentSecond, bCatchUp);
+}
+
+void ATMOPPersonRegistryDirector::EvaluateOnePerson(
+    FPersonRuntime& Runtime, const int32 CurrentSecond, const bool bCatchUp)
+{
         while (!Runtime.bCompleted && Runtime.Profile.Timeline.IsValidIndex(Runtime.NextTimelineIndex))
         {
             const FTMOPPersonTimelineEntry& Entry =
@@ -688,6 +871,99 @@ void ATMOPPersonRegistryDirector::EvaluatePeople(const int32 CurrentSecond,
             ConsumeTimelineTime();
             ++Runtime.NextTimelineIndex;
         }
+}
+
+void ATMOPPersonRegistryDirector::QueueNextPersonEntry(
+    const FName EntityId, FPersonRuntime& Runtime, const int32 EarliestSecond)
+{
+    ++Runtime.WakeGeneration;
+    UnresolvedPersonWakeIds.Remove(EntityId);
+    if (Runtime.bCompleted ||
+        !Runtime.Profile.Timeline.IsValidIndex(Runtime.NextTimelineIndex))
+        return;
+
+    int32 ResolvedSecond = INDEX_NONE;
+    if (!ResolveEntrySecond(Runtime,
+        Runtime.Profile.Timeline[Runtime.NextTimelineIndex], ResolvedSecond))
+    {
+        // An event, vehicle reference, or relative time may resolve later.
+        // Only these people need a once-per-historical-second retry.
+        UnresolvedPersonWakeIds.Add(EntityId);
+        return;
+    }
+
+    FPersonWake Wake;
+    Wake.DueSecond = FMath::Max(ResolvedSecond, EarliestSecond);
+    Wake.EntityId = EntityId;
+    Wake.Generation = Runtime.WakeGeneration;
+    Wake.EvaluationOrder = Runtime.EvaluationOrder;
+    const auto IsLater = [](const FPersonWake& A, const FPersonWake& B)
+    {
+        return A.DueSecond != B.DueSecond
+            ? A.DueSecond > B.DueSecond
+            : A.EvaluationOrder > B.EvaluationOrder;
+    };
+    PersonWakeHeap.HeapPush(Wake, IsLater);
+}
+
+void ATMOPPersonRegistryDirector::RebuildPersonWakeQueue(
+    const int32 CurrentSecond)
+{
+    PersonWakeHeap.Reset();
+    UnresolvedPersonWakeIds.Reset();
+    int32 Order = 0;
+    for (TPair<FName, FPersonRuntime>& Pair : RuntimePeople)
+    {
+        Pair.Value.EvaluationOrder = Order++;
+        QueueNextPersonEntry(Pair.Key, Pair.Value, CurrentSecond + 1);
+    }
+}
+
+void ATMOPPersonRegistryDirector::EvaluateDuePeople(const int32 CurrentSecond)
+{
+    // Retry only people waiting on an unresolved event or reference. We must
+    // do this before waking due entries so a newly resolved event is not late.
+    TArray<FName> UnresolvedIds;
+    UnresolvedIds.Reserve(UnresolvedPersonWakeIds.Num());
+    for (const FName EntityId : UnresolvedPersonWakeIds)
+        UnresolvedIds.Add(EntityId);
+    UnresolvedPersonWakeIds.Reset();
+    for (const FName EntityId : UnresolvedIds)
+        if (FPersonRuntime* Runtime = RuntimePeople.Find(EntityId))
+            QueueNextPersonEntry(EntityId, *Runtime, CurrentSecond);
+
+    const auto IsLater = [](const FPersonWake& A, const FPersonWake& B)
+    {
+        return A.DueSecond != B.DueSecond
+            ? A.DueSecond > B.DueSecond
+            : A.EvaluationOrder > B.EvaluationOrder;
+    };
+    TArray<FPersonWake> DueThisSecond;
+    while (!PersonWakeHeap.IsEmpty() &&
+        PersonWakeHeap.HeapTop().DueSecond <= CurrentSecond)
+    {
+        FPersonWake Wake;
+        PersonWakeHeap.HeapPop(Wake, IsLater, EAllowShrinking::No);
+        FPersonRuntime* Runtime = RuntimePeople.Find(Wake.EntityId);
+        if (Runtime == nullptr || Runtime->WakeGeneration != Wake.Generation)
+            continue;
+        DueThisSecond.Add(Wake);
+    }
+    // Preserve the original per-person evaluation order, even when several
+    // overdue entries have different scheduled seconds.
+    DueThisSecond.Sort([](const FPersonWake& A, const FPersonWake& B)
+    {
+        return A.EvaluationOrder < B.EvaluationOrder;
+    });
+    for (const FPersonWake& Wake : DueThisSecond)
+    {
+        FPersonRuntime* Runtime = RuntimePeople.Find(Wake.EntityId);
+        if (Runtime == nullptr || Runtime->WakeGeneration != Wake.Generation)
+            continue;
+        EvaluateOnePerson(*Runtime, CurrentSecond, false);
+        // A busy agent or a failed spawn is retried on the next simulation
+        // second. An idle agent is asleep until its next actual timeline event.
+        QueueNextPersonEntry(Wake.EntityId, *Runtime, CurrentSecond + 1);
     }
 }
 

@@ -9,6 +9,7 @@ class ATMOPHistoricalAgent;
 class ATMOPVehicleBase;
 class ATMOPGroupDirector;
 class ATMOPTimelineValidationDirector;
+class APawn;
 class UDataTable;
 class UCurveFloat;
 struct FTMOPGroupProfileRow;
@@ -148,6 +149,19 @@ public:
         meta=(ClampMin="0.05", Units="s"))
     float FallSafetySampleIntervalSeconds = 0.25f;
 
+    /** Distributes pawn fall checks across rendered frames instead of
+     * scanning every pawn at once at the end of each sample interval. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|World|Fall Safety|Performance")
+    bool bBudgetWorldFallSafety = true;
+
+    /** Soft per-frame budget; an individual recovery is always completed. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|World|Fall Safety|Performance",
+        meta=(ClampMin="0.05", ClampMax="5.0", Units="ms",
+              EditCondition="bBudgetWorldFallSafety"))
+    float FallSafetyBudgetMs = 0.5f;
+
     UFUNCTION(BlueprintCallable, Category="TMOP|People")
     int32 RefreshAllActiveProfiles();
 
@@ -207,6 +221,17 @@ private:
         int32 NextTimelineIndex = 0;
         /** Consumed independently: shared events can change chronological order. */
         TSet<int32> ConsumedAutomaticSpeechIndices;
+        /** Absolute/previous-line speech times are immutable within one simulation. */
+        TArray<int32> CachedAutomaticSpeechSeconds;
+        int32 NextAutomaticSpeechSecond = INDEX_NONE;
+        bool bAutomaticSpeechNextTimeInitialized = false;
+        bool bAutomaticSpeechCacheBuilt = false;
+        /** Shared-event speech times can resolve later or in a different order. */
+        bool bAutomaticSpeechUsesSharedEvents = false;
+        /** Invalidates obsolete wake-ups after a timeline change. */
+        int32 WakeGeneration = 0;
+        /** Preserve previous TMap iteration order for same-second events. */
+        int32 EvaluationOrder = INDEX_NONE;
         bool bSpawnedByDirector = false;
         bool bCompleted = false;
         FName ActiveMeetingDialogueId = NAME_None;
@@ -218,7 +243,19 @@ private:
         int32 LastResolvedTimelineSecond = INDEX_NONE;
     };
 
+    struct FPersonWake
+    {
+        int32 DueSecond = INDEX_NONE;
+        FName EntityId = NAME_None;
+        int32 Generation = 0;
+        int32 EvaluationOrder = INDEX_NONE;
+    };
+
     void EvaluatePeople(int32 CurrentSecond, bool bCatchUp);
+    void EvaluateOnePerson(FPersonRuntime& Runtime, int32 CurrentSecond, bool bCatchUp);
+    void RebuildPersonWakeQueue(int32 CurrentSecond);
+    void QueueNextPersonEntry(FName EntityId, FPersonRuntime& Runtime, int32 EarliestSecond);
+    void EvaluateDuePeople(int32 CurrentSecond);
     void EvaluateAutomaticSpeech(int32 CurrentSecond, int32 PreviousSecond);
     void EvaluateMeetingDialogues(int32 CurrentSecond, int32 PreviousSecond);
     bool ResolveAutomaticSpeechSecond(
@@ -253,15 +290,28 @@ private:
     void RebuildGroupsFromPeople();
     ATMOPVehicleBase* FindVehicle(FName VehicleId) const;
     void UpdateWorldFallSafety(float DeltaSeconds);
+    void RegisterFallSafetyPawn(AActor* SpawnedActor);
+    void InitializeFallSafetyRoster();
+    void CheckAndRecoverPawn(APawn* Pawn);
 
     bool bRestoringWorldBake = false;
 
     TMap<FName, FPersonRuntime> RuntimePeople;
+    /** Only people with a currently due action are evaluated during normal playback. */
+    TArray<FPersonWake> PersonWakeHeap;
+    /** Shared-event/actor dependencies not resolved yet; retried each historical second. */
+    TSet<FName> UnresolvedPersonWakeIds;
+    TArray<FName> PeopleWithAutomaticSpeech;
     /** Definitions are unique by DialogueId and loaded from their owner rows. */
     TMap<FName, FTMOPMeetingDialogueDefinition> RuntimeMeetingDialogues;
     /** Composite DialogueId/LineId keys already emitted in this clock pass. */
     TSet<FName> DeliveredMeetingDialogueLines;
     TMap<TWeakObjectPtr<class APawn>, FTransform> LastSafePawnTransforms;
     float FallSafetyAccumulator = 0.0f;
+    TArray<TWeakObjectPtr<APawn>> FallSafetyPawns;
+    FDelegateHandle FallSafetySpawnHandle;
+    int32 FallSafetyCursor = 0;
+    bool bFallSafetyCycleActive = false;
+    bool bFallSafetyRosterInitialized = false;
     int32 LastEvaluatedSecond = INDEX_NONE;
 };

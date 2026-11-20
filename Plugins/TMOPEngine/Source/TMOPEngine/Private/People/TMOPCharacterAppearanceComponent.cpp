@@ -1069,6 +1069,53 @@ void UTMOPCharacterAppearanceComponent::ApplyPerformanceSettings(
         Agent->HeadwearStaticMesh->SetCullDistance(CullDistanceCentimeters);
         Agent->HeadwearStaticMesh->bAllowCullDistanceVolume = true;
     }
+    // Newly assigned clothing must tick again immediately. The shared world
+    // animation LOD manager can lower its rate on the next budget pass.
+    ApplyAnimationTickLOD(0.0f, true);
+}
+
+void UTMOPCharacterAppearanceComponent::ApplyAnimationTickLOD(
+    const float TickIntervalSeconds, const bool bAllowAnimationTick)
+{
+    ATMOPHistoricalAgent* Agent = Cast<ATMOPHistoricalAgent>(GetOwner());
+    if (!IsValid(Agent)) return;
+
+    // The hybrid MetaHuman head runs a separate retarget and face graph. It
+    // deliberately needs a normally ticking source; leave its special setup
+    // untouched until the hybrid path has its own benchmark and LOD policy.
+    const bool bTickActiveMeshes = !bEnableDistanceBasedAnimationLOD ||
+        bAllowAnimationTick || bHybridHeadActive;
+    const float Interval = (!bEnableDistanceBasedAnimationLOD || bHybridHeadActive)
+        ? 0.0f : FMath::Max(0.0f, TickIntervalSeconds);
+
+    TArray<USkeletalMeshComponent*> Parts;
+    if (bApplyPerformanceSettingsToAdditionalSkeletalMeshes)
+        Agent->GetComponents<USkeletalMeshComponent>(Parts);
+    else
+        Parts = { Agent->BodyMesh.Get(), Agent->FaceMesh.Get(),
+            Agent->HairMesh.Get(), Agent->FacialHairMesh.Get(),
+            Agent->ScarfMesh.Get(), Agent->GlassesMesh.Get(),
+            Agent->OuterwearMesh.Get(), Agent->UpperBodyMesh.Get(),
+            Agent->TrousersMesh.Get(), Agent->FootwearMesh.Get(),
+            Agent->GlovesMesh.Get(), Agent->HeadwearMesh.Get() };
+
+    for (USkeletalMeshComponent* Part : Parts)
+    {
+        if (!IsValid(Part)) continue;
+        const bool bIsLeader = Part == Agent->BodyMesh;
+        // 3A: an empty/hidden wardrobe slot can never contribute visible
+        // animation. Keep the leader active if its mesh is intentionally
+        // invisible: it may still drive children, sockets and held items.
+        const bool bUsable = bIsLeader || !bDisableUnusedSkeletalPartTicks ||
+            (Part->GetSkeletalMeshAsset() != nullptr &&
+             Part->IsVisible() && !Part->bHiddenInGame);
+        const bool bEnable = bUsable && bTickActiveMeshes;
+        if (Part->IsComponentTickEnabled() != bEnable)
+            Part->SetComponentTickEnabled(bEnable);
+        if (bEnable && !FMath::IsNearlyEqual(
+                Part->PrimaryComponentTick.TickInterval, Interval, 0.001f))
+            Part->SetComponentTickInterval(Interval);
+    }
 }
 
 void UTMOPCharacterAppearanceComponent::ResetAppearance()
@@ -1105,6 +1152,7 @@ void UTMOPCharacterAppearanceComponent::ResetAppearance()
         Agent->HeadwearStaticMesh->SetVisibility(false, true);
     }
     ResolvedAppearance = FTMOPResolvedAppearance();
+    ApplyAnimationTickLOD(0.0f, true);
     ApplyBodyRegionMask(Agent);
     Agent->AppearanceMovementSpeedMultiplier = 1.0f;
     bHasAppliedAppearance = false;

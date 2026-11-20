@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Agents/TMOPAgentTypes.h"
 #include "People/TMOPHeldItemTypes.h"
+#include "Time/TMOPTime.h"
 #include "UI/TMOPEntityLabelTypes.h"
 #include "GameFramework/Character.h"
 #include "TMOPHistoricalAgent.generated.h"
@@ -73,6 +74,7 @@ public:
     int32 PlaybackUniqueAnimationLoops = 1;
 
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void Tick(float DeltaSeconds) override;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TMOP|Agent")
@@ -250,6 +252,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|State")
     ETMOPAgentActivityState ActivityState =
         ETMOPAgentActivityState::Idle;
+
+    /** Idle agents need only occasional housekeeping; movement, fades and social
+     *  interaction automatically return this actor to its normal 20 Hz tick. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Performance")
+    bool bEnableAdaptiveAgentTick = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Performance",
+        meta = (ClampMin = "0.05", ClampMax = "1.0", Units = "s"))
+    float IdleAgentTickIntervalSeconds = 0.25f;
+
+    /** Crowd recovery is unnecessary at the full animation/update rate. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Performance",
+        meta = (ClampMin = "0.05", ClampMax = "1.0", Units = "s"))
+    float UnstuckCheckIntervalSeconds = 0.20f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TMOP|Agent|Movement")
     ETMOPMovementPolicy MovementPolicy =
@@ -539,6 +555,14 @@ private:
     FString AppliedPlaybackAnimation;
     TWeakObjectPtr<class UAnimMontage> PlaybackMontage;
     void UpdateTimelinePriority();
+    void RefreshAgentTickInterval();
+    bool HasActiveSocialFocus() const;
+    void UpdateHeldItemClockSubscription();
+    UFUNCTION()
+    void OnHistoricalSecondChanged(FTMOPTime NewTime);
+    float UnstuckCheckAccumulator = 0.0f;
+    float NameLabelUpdateAccumulator = 0.25f;
+    bool bCachedNameLabelMultiplayerHidden = false;
     bool bTimelinePriorityApplied = false;
     TEnumAsByte<ECollisionResponse> PrioritySavedPawnResponse = ECR_Block;
     TEnumAsByte<ECollisionResponse> PrioritySavedVehicleResponse = ECR_Block;
