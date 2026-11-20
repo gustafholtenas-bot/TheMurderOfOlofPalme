@@ -46,6 +46,21 @@ enum class ETMOPAppearancePartType : uint8
     Glasses
 };
 
+/** Optional surface family for civilian garments. PreserveCatalog disables
+ * auto replacement even when an old generic 1986 colour material is used. */
+UENUM(BlueprintType)
+enum class ETMOPClothingSurfaceType : uint8
+{
+    Automatic,
+    Wool,
+    Leather,
+    Quilted,
+    Cotton,
+    Denim,
+    Synthetic,
+    PreserveCatalog
+};
+
 /** Extra fitting stored on the FACE catalog row, in head/socket local space. */
 USTRUCT(BlueprintType)
 struct TMOPENGINE_API FTMOPHeadAccessoryFit
@@ -107,6 +122,20 @@ struct TMOPENGINE_API FTMOPAppearanceAssetRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Asset")
     TSoftObjectPtr<UMaterialInterface> Material;
+
+    /** Automatic derives the type from description and Tags. An explicitly
+     * assigned police/guard material is never replaced automatically. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Appearance|Surface")
+    ETMOPClothingSurfaceType SurfaceType =
+        ETMOPClothingSurfaceType::Automatic;
+
+    /** Optional material slot names to receive the cloth material. When
+     * empty, automatic fabric uses slot 0 only; existing materials retain
+     * their legacy all-slot behaviour. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Appearance|Surface")
+    TArray<FName> SurfaceMaterialSlotNames;
 
     /** Unknown means unisex. */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Compatibility")
@@ -182,6 +211,16 @@ struct TMOPENGINE_API FTMOPResolvedAppearancePart
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     TSoftObjectPtr<UMaterialInterface> Material;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
+    ETMOPClothingSurfaceType SurfaceType =
+        ETMOPClothingSurfaceType::Automatic;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
+    TArray<FName> SurfaceMaterialSlotNames;
+
+    UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
+    bool bMaterialExplicitlyOverridden = false;
 
     UPROPERTY(BlueprintReadOnly, Category="TMOP|Appearance")
     FLinearColor PrimaryColor = FLinearColor::White;

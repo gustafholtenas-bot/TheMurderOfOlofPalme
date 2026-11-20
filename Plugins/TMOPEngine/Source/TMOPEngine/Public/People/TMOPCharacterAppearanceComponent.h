@@ -39,6 +39,11 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Unknown")
     TSoftObjectPtr<UMaterialInterface> ObscuredMaterialOverride;
 
+    /** Uses fabric material instances for generic civilian clothing. Existing
+     * police, guard and other bespoke material assets are never overwritten. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Fabric")
+    bool bEnableAutomaticCivilianFabricMaterials = true;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TMOP|Appearance|Body",
         meta=(ClampMin="100.0", Units="cm"))
     float BodyReferenceHeightCentimeters = 180.0f;

@@ -54,6 +54,10 @@ void AddFreeTextTags(const FString& Source, TSet<FName>& OutTags)
 
     // Garment types and common 1986 witness wording.
     AddTagIfContains(Text, TEXT("täckjack"), TEXT("Jacket"), OutTags);
+    AddTagIfContains(Text, TEXT("täckjack"), TEXT("Quilted"), OutTags);
+    AddTagIfContains(Text, TEXT("quilt"), TEXT("Quilted"), OutTags);
+    AddTagIfContains(Text, TEXT("vadderad"), TEXT("Quilted"), OutTags);
+    AddTagIfContains(Text, TEXT("dunjack"), TEXT("Quilted"), OutTags);
     AddTagIfContains(Text, TEXT("jack"), TEXT("Jacket"), OutTags);
     AddTagIfContains(Text, TEXT("jacket"), TEXT("Jacket"), OutTags);
     AddTagIfContains(Text, TEXT("skinnjack"), TEXT("LeatherJacket"), OutTags);
@@ -90,6 +94,10 @@ void AddFreeTextTags(const FString& Source, TSet<FName>& OutTags)
     AddTagIfContains(Text, TEXT("short"), TEXT("Short"), OutTags);
     AddTagIfContains(Text, TEXT("ylle"), TEXT("Wool"), OutTags);
     AddTagIfContains(Text, TEXT("ull"), TEXT("Wool"), OutTags);
+    AddTagIfContains(Text, TEXT("bomull"), TEXT("Cotton"), OutTags);
+    AddTagIfContains(Text, TEXT("denim"), TEXT("Denim"), OutTags);
+    AddTagIfContains(Text, TEXT("syntet"), TEXT("Synthetic"), OutTags);
+    AddTagIfContains(Text, TEXT("nylon"), TEXT("Synthetic"), OutTags);
     AddTagIfContains(Text, TEXT("skinn"), TEXT("Leather"), OutTags);
     AddTagIfContains(Text, TEXT("läder"), TEXT("Leather"), OutTags);
 
@@ -256,6 +264,8 @@ void CopyAsset(const FTMOPAppearanceAssetRow& Asset,
     Out.AttachmentTransform = Asset.AttachmentTransform;
     Out.HeadAccessoryFit = Asset.HeadAccessoryFit;
     Out.Material = Asset.Material;
+    Out.SurfaceType = Asset.SurfaceType;
+    Out.SurfaceMaterialSlotNames = Asset.SurfaceMaterialSlotNames;
     Out.PrimaryColor = Asset.DefaultPrimaryColor;
     Out.SecondaryColor = Asset.DefaultSecondaryColor;
     Out.bUsesObscuredFallback = Asset.bObscuredFallback;
@@ -278,6 +288,48 @@ const FTMOPAppearanceAssetRow* PickWeighted(
             if (Choice <= 0.0f) return Candidate;
         }
     return Candidates.IsEmpty() ? nullptr : Candidates.Last();
+}
+
+bool SupportsFabricSurface(const ETMOPAppearancePartType PartType)
+{
+    return PartType == ETMOPAppearancePartType::Outerwear ||
+        PartType == ETMOPAppearancePartType::UpperBody ||
+        PartType == ETMOPAppearancePartType::Trousers ||
+        PartType == ETMOPAppearancePartType::Footwear ||
+        PartType == ETMOPAppearancePartType::Gloves ||
+        PartType == ETMOPAppearancePartType::Scarf;
+}
+
+bool IsProtectedUniformTagSet(const TSet<FName>& Tags)
+{
+    return Tags.Contains(TEXT("Police")) || Tags.Contains(TEXT("Polis")) ||
+        Tags.Contains(TEXT("Guard")) || Tags.Contains(TEXT("Vakt")) ||
+        Tags.Contains(TEXT("Security")) || Tags.Contains(TEXT("Uniform")) ||
+        Tags.Contains(TEXT("Ordningsvakt"));
+}
+
+ETMOPClothingSurfaceType InferFabricSurface(const TSet<FName>& Tags,
+    const ETMOPAppearancePartType PartType)
+{
+    if (Tags.Contains(TEXT("Leather")) ||
+        Tags.Contains(TEXT("LeatherJacket")))
+        return ETMOPClothingSurfaceType::Leather;
+    if (Tags.Contains(TEXT("Quilted")))
+        return ETMOPClothingSurfaceType::Quilted;
+    if (Tags.Contains(TEXT("Denim")) || Tags.Contains(TEXT("Jeans")))
+        return ETMOPClothingSurfaceType::Denim;
+    if (Tags.Contains(TEXT("Wool")) || Tags.Contains(TEXT("KnitCap")))
+        return ETMOPClothingSurfaceType::Wool;
+    if (Tags.Contains(TEXT("Synthetic")) || Tags.Contains(TEXT("Parka")) ||
+        Tags.Contains(TEXT("SailingJacket")))
+        return ETMOPClothingSurfaceType::Synthetic;
+    if (Tags.Contains(TEXT("Cotton")) || Tags.Contains(TEXT("Shirt")))
+        return ETMOPClothingSurfaceType::Cotton;
+    if (PartType == ETMOPAppearancePartType::Footwear)
+        return ETMOPClothingSurfaceType::Leather;
+    if (Tags.Contains(TEXT("Coat")) || Tags.Contains(TEXT("Sweater")))
+        return ETMOPClothingSurfaceType::Wool;
+    return ETMOPClothingSurfaceType::Cotton;
 }
 
 FName BodyBuildTag(const ETMOPBodyBuild Build)
@@ -486,6 +538,25 @@ FTMOPResolvedAppearancePart UTMOPAppearanceResolver::ResolvePart(
         Result.Material = Override.MaterialOverride;
         Result.PrimaryColor = Override.PrimaryColor;
         Result.SecondaryColor = Override.SecondaryColor;
+    }
+    Result.bMaterialExplicitlyOverridden = !Override.MaterialOverride.IsNull();
+
+    // Only infer a surface family; whether to use the new surface material
+    // is decided later by AppearanceComponent. Bespoke police/guard material
+    // assets and explicit per-person overrides remain authoritative.
+    if (SupportsFabricSurface(PartType) && !Result.bUsesObscuredFallback)
+    {
+        TSet<FName> SurfaceTags = EvidenceTags;
+        if (IsValid(AssetCatalog) && !Result.CatalogId.IsNone())
+            if (const FTMOPAppearanceAssetRow* Asset =
+                AssetCatalog->FindRow<FTMOPAppearanceAssetRow>(
+                    Result.CatalogId, TEXT("TMOP surface classification"), false))
+                for (const FName Tag : Asset->Tags)
+                    SurfaceTags.Add(Tag);
+        if (IsProtectedUniformTagSet(SurfaceTags))
+            Result.SurfaceType = ETMOPClothingSurfaceType::PreserveCatalog;
+        else if (Result.SurfaceType == ETMOPClothingSurfaceType::Automatic)
+            Result.SurfaceType = InferFabricSurface(SurfaceTags, PartType);
     }
     return Result;
 }

@@ -12,6 +12,7 @@
 #include "EngineUtils.h"
 #include "Entities/TMOPWorldEntityComponent.h"
 #include "Events/TMOPHistoricalEventSubsystem.h"
+#include "HAL/PlatformTime.h"
 #include "Misc/ConfigCacheIni.h"
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
@@ -147,6 +148,8 @@ void ATMOPObservationDirector::SetShowActiveObservationLines(const bool bShow)
 {
     bShowActiveObservationLines = bShow;
     CachedGuideWindowSecond = INDEX_NONE;
+    LastObservationGuideDrawWallSeconds = -1.0;
+    LastObservationGuideDrawHistoricalSecond = INDEX_NONE;
     SaveShowActiveObservationLines(bShow);
 }
 
@@ -170,7 +173,9 @@ void ATMOPObservationDirector::DrawWorldGuideLines(
     }
 
     if (!bShowActiveObservationLines || CurrentSecond == INDEX_NONE) return;
-    if (CachedGuideWindowSecond != CurrentSecond)
+    const bool bGuideWindowWasRebuilt =
+        CachedGuideWindowSecond != CurrentSecond;
+    if (bGuideWindowWasRebuilt)
     {
         TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_RefreshGuideWindows);
         CachedGuideObservationIds.Reset();
@@ -194,6 +199,27 @@ void ATMOPObservationDirector::DrawWorldGuideLines(
         }
     }
 
+    // Historical-second changes (including scrubs) must refresh immediately.
+    // In-between frames the lines are purely visual and can be reused.
+    const double WallSeconds = FPlatformTime::Seconds();
+    const float UpdateInterval = FMath::Max(0.016f,
+        ObservationGuideUpdateIntervalSeconds);
+    const bool bGuideNeedsImmediateRefresh = bGuideWindowWasRebuilt ||
+        LastObservationGuideDrawHistoricalSecond != CurrentSecond;
+    if (bThrottleObservationGuideUpdates && !bGuideNeedsImmediateRefresh &&
+        LastObservationGuideDrawWallSeconds >= 0.0 &&
+        WallSeconds - LastObservationGuideDrawWallSeconds < UpdateInterval)
+        return;
+
+    LastObservationGuideDrawWallSeconds = WallSeconds;
+    LastObservationGuideDrawHistoricalSecond = CurrentSecond;
+    // Nonpersistent debug lines need a short lifetime to remain visible
+    // between 20 Hz refreshes. Never accumulate lines indefinitely.
+    const float GuideLineLifetime = bThrottleObservationGuideUpdates
+        ? UpdateInterval * 1.5f : 0.0f;
+
+    TRACE_CPUPROFILER_EVENT_SCOPE(TMOP_Observations_DrawActiveGuideArrows);
+
     for (const FName ObservationId : CachedGuideObservationIds)
     {
         const FTMOPObservationDefinition* Definition =
@@ -214,7 +240,8 @@ void ATMOPObservationDirector::DrawWorldGuideLines(
                 FVector::Distance(ObserverPoint, ObservedPoint) * 0.25f);
             DrawDebugDirectionalArrow(World, ObserverPoint, ObservedPoint,
                 FMath::Max(5.0f, ArrowSize),
-                ObservationLineColor.ToFColor(true), false, 0.0f, 0,
+                ObservationLineColor.ToFColor(true), false,
+                GuideLineLifetime, 0,
                 ObservationLineThickness);
         }
     }

@@ -12,6 +12,7 @@
 #include "Engine/DataTable.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/World.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
 #include "People/TMOPAppearanceResolver.h"
@@ -20,6 +21,76 @@
 
 namespace
 {
+// Only the original shared colour MIs are eligible for automatic replacement.
+// Bespoke police, security guard, uniform and per-person materials are untouched.
+bool IsGenericCivilianClothingMaterial(const TSoftObjectPtr<UMaterialInterface>& Material)
+{
+    return Material.ToSoftObjectPath().GetAssetPathString().StartsWith(
+        TEXT("/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Clothing_"));
+}
+
+bool IsProtectedUniformSelection(const FName CatalogId)
+{
+    const FString Name = CatalogId.ToString().ToLower();
+    return Name.Contains(TEXT("police")) || Name.Contains(TEXT("polis")) ||
+        Name.Contains(TEXT("vakt")) || Name.Contains(TEXT("guard")) ||
+        Name.Contains(TEXT("security")) || Name.Contains(TEXT("uniform")) ||
+        Name.Contains(TEXT("ordnings"));
+}
+
+const TCHAR* GetFabricMaterialPath(const ETMOPClothingSurfaceType Surface)
+{
+    switch (Surface)
+    {
+    case ETMOPClothingSurfaceType::Wool:
+        return TEXT("/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Fabric_Wool.MI_TMOP_Fabric_Wool");
+    case ETMOPClothingSurfaceType::Leather:
+        return TEXT("/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Fabric_Leather.MI_TMOP_Fabric_Leather");
+    case ETMOPClothingSurfaceType::Quilted:
+        return TEXT("/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Fabric_Quilted.MI_TMOP_Fabric_Quilted");
+    case ETMOPClothingSurfaceType::Cotton:
+        return TEXT("/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Fabric_Cotton.MI_TMOP_Fabric_Cotton");
+    case ETMOPClothingSurfaceType::Denim:
+        return TEXT("/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Fabric_Denim.MI_TMOP_Fabric_Denim");
+    case ETMOPClothingSurfaceType::Synthetic:
+        return TEXT("/Game/TMOP/Characters/Appearance/Materials/Clothing1986/MI_TMOP_Fabric_Synthetic.MI_TMOP_Fabric_Synthetic");
+    default: return nullptr;
+    }
+}
+
+UMaterialInterface* LoadFabricMaterial(UWorld* World, const ETMOPClothingSurfaceType Surface)
+{
+    const TCHAR* Path = GetFabricMaterialPath(Surface);
+    if (Path == nullptr || World == nullptr) return nullptr;
+
+    // Cache failures as well as successes to avoid repeated soft loads during
+    // large crowds; reset on changing PIE worlds.
+    struct FMaterialCache
+    {
+        TWeakObjectPtr<UWorld> CachedWorld;
+        TMap<ETMOPClothingSurfaceType, TWeakObjectPtr<UMaterialInterface>> Materials;
+        TSet<ETMOPClothingSurfaceType> Missing;
+    };
+    static FMaterialCache Cache;
+    if (Cache.CachedWorld.Get() != World)
+    {
+        Cache.CachedWorld = World;
+        Cache.Materials.Reset();
+        Cache.Missing.Reset();
+    }
+    if (Cache.Missing.Contains(Surface)) return nullptr;
+    if (const TWeakObjectPtr<UMaterialInterface>* Found = Cache.Materials.Find(Surface))
+        if (UMaterialInterface* Existing = Found->Get()) return Existing;
+
+    const TSoftObjectPtr<UMaterialInterface> Asset{FSoftObjectPath(Path)};
+    UMaterialInterface* Loaded = Asset.LoadSynchronous();
+    if (Loaded != nullptr)
+        Cache.Materials.Add(Surface, Loaded);
+    else
+        Cache.Missing.Add(Surface);
+    return Loaded;
+}
+
 TSoftObjectPtr<UMaterialInterface> GetBuiltInHairMaterial(const FName Key)
 {
     const TCHAR* Path = nullptr;
@@ -666,12 +737,43 @@ bool UTMOPCharacterAppearanceComponent::ApplyPart(
     Component->SetHiddenInGame(false, false);
     // Reset previous material overrides when switching an appearance asset.
     Component->EmptyOverrideMaterials();
-    UMaterialInterface* Material = Part.Material.LoadSynchronous();
+    // The fabric pack is opt-in by asset family: old projects lacking the new
+    // fabric MIs continue to render exactly as before.
+    UMaterialInterface* Material = nullptr;
+    const bool bEligibleForAutoFabric =
+        bEnableAutomaticCivilianFabricMaterials &&
+        !Part.bUsesObscuredFallback && !Part.bMaterialExplicitlyOverridden &&
+        !IsProtectedUniformSelection(Part.CatalogId) &&
+        IsGenericCivilianClothingMaterial(Part.Material) &&
+        GetFabricMaterialPath(Part.SurfaceType) != nullptr;
+    if (bEligibleForAutoFabric)
+        Material = LoadFabricMaterial(GetWorld(), Part.SurfaceType);
+    const bool bUsingAutoFabric = Material != nullptr;
+    if (Material == nullptr)
+        Material = Part.Material.LoadSynchronous();
     if (Part.bUsesObscuredFallback && Material == nullptr)
         Material = ObscuredMaterialOverride.LoadSynchronous();
+    const TArray<FName> SlotNames =
+        bUsingAutoFabric && !Part.SurfaceMaterialSlotNames.IsEmpty()
+        ? Component->GetMaterialSlotNames() : TArray<FName>();
     if (Material != nullptr)
         for (int32 Index = 0; Index < Component->GetNumMaterials(); ++Index)
         {
+            // With a new fabric, slot 0 is the default garment surface. Other
+            // authored slots (buttons, buckles, zippers) must retain their own
+            // materials. A DataTable row may name the exact fabric slots.
+            if (bUsingAutoFabric)
+            {
+                if (Part.SurfaceMaterialSlotNames.IsEmpty())
+                {
+                    if (Index != 0) continue;
+                }
+                else if (!SlotNames.IsValidIndex(Index) ||
+                    !Part.SurfaceMaterialSlotNames.Contains(SlotNames[Index]))
+                {
+                    continue;
+                }
+            }
             UMaterialInstanceDynamic* Dynamic =
                 Component->CreateDynamicMaterialInstance(Index, Material);
             if (Dynamic == nullptr) continue;

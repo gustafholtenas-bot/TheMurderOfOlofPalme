@@ -57,6 +57,22 @@ public:
         Category="TMOP|Observations|World Guides")
     bool bShowActiveObservationLines = true;
 
+    /** Only visual observer arrows are throttled. Source evaluations, linked
+     * tracks, actor movement and the Olof beacon retain their original timing.
+     * Set false to restore the pre-7B per-frame drawing behaviour. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides|Performance")
+    bool bThrottleObservationGuideUpdates = true;
+
+    /** Real seconds between visual arrow refreshes (0.05 = approximately
+     * 20 updates/s). Wall time is deliberate: seeking and pause are independent
+     * of the historical simulation clock. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite,
+        Category="TMOP|Observations|World Guides|Performance",
+        meta=(ClampMin="0.016", ClampMax="0.5", Units="s",
+            EditCondition="bThrottleObservationGuideUpdates"))
+    float ObservationGuideUpdateIntervalSeconds = 0.05f;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite,
         Category="TMOP|Observations|World Guides")
     FName OlofPalmeEntityId = TEXT("OLOF_PALME");
@@ -263,4 +279,8 @@ private:
     // do not need to be rediscovered for every rendered frame.
     mutable TArray<FName> CachedGuideObservationIds;
     mutable int32 CachedGuideWindowSecond = INDEX_NONE;
+
+    // Mutable because drawing is a const, visual-only operation.
+    mutable double LastObservationGuideDrawWallSeconds = -1.0;
+    mutable int32 LastObservationGuideDrawHistoricalSecond = INDEX_NONE;
 };
