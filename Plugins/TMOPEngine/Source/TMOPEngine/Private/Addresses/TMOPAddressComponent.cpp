@@ -2,6 +2,7 @@
 #include "Localization/TMOPLocalization.h"
 #include "Addresses/TMOPAddressRegistryTypes.h"
 #include "Engine/DataTable.h"
+#include "GameFramework/Actor.h"
 
 UTMOPAddressComponent::UTMOPAddressComponent()
 {
@@ -63,6 +64,13 @@ FText UTMOPAddressComponent::GetInspectionAction() const
     return NSLOCTEXT("TMOP", "ReadAddressDirectory", "Läs boendeförteckning");
 }
 
+
+FVector UTMOPAddressComponent::GetWorldIndicatorLocation() const
+{
+    // Display the address marker at the authored entrance anchor.
+    // InteractionOffset deliberately remains 140 cm for convenient targeting.
+    return IsValid(GetOwner()) ? GetOwner()->GetActorLocation() : FVector::ZeroVector;
+}
 
 FText UTMOPAddressComponent::GetWorldIndicatorTextAt(const FVector& ViewLocation) const
 {

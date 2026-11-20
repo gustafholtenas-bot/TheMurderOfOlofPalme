@@ -75,7 +75,7 @@ public:
     virtual FVector GetInteractionLocation() const;
 
     UFUNCTION(BlueprintPure, Category="Inspection|Indicator")
-    FVector GetWorldIndicatorLocation() const;
+    virtual FVector GetWorldIndicatorLocation() const;
 
     UFUNCTION(BlueprintPure, Category="Inspection|Indicator")
     bool ShouldShowWorldIndicatorAt(const FVector& ViewLocation) const;

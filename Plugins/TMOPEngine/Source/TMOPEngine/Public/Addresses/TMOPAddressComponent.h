@@ -38,6 +38,10 @@ public:
     virtual FText GetInspectionCategory() const override;
     virtual FText GetInspectionAction() const override;
 
+    /** Places address indicators exactly on their door anchor, independently
+     * of the 140 cm-high interaction/reading point. */
+    virtual FVector GetWorldIndicatorLocation() const override;
+
 private:
     const FTMOPAddressRegistryRow* FindAddress() const;
 };

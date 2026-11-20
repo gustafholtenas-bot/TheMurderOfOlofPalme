@@ -1681,7 +1681,13 @@ void ATMOPPlayerCharacter::UpdateInteractionPrompt()
             FVector MarkerWorldLocation = InformationTarget->IsA<ATMOPVehicleBase>()
                 ? UTMOPVehicleInspectionComponent::GetVehicleAimPoint(InformationTarget) : BoundsOrigin;
             if (const auto* Inspection = InformationTarget->FindComponentByClass<UTMOPInspectableComponent>())
-                MarkerWorldLocation = Inspection->GetInteractionLocation();
+            {
+                // Address markers use their entrance anchor. The interaction
+                // point stays elevated, and all other inspectables are unchanged.
+                MarkerWorldLocation = Inspection->IsA<UTMOPAddressComponent>()
+                    ? Inspection->GetWorldIndicatorLocation()
+                    : Inspection->GetInteractionLocation();
+            }
             if (const auto* Agent = Cast<ATMOPHistoricalAgent>(InformationTarget))
                 if (IsValid(Agent->BodyMesh) && Agent->BodyMesh->DoesSocketExist(TEXT("head")))
                     MarkerWorldLocation = Agent->BodyMesh->GetSocketLocation(TEXT("head"));
